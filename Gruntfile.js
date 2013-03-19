@@ -152,7 +152,7 @@ module.exports = function (grunt) {
     }
   });
 
-  grunt.registerTask('vendor-setup', 'moving things into place', function() {
+  grunt.registerTask('init', 'moving things into place', function() {
     grunt.config('copy.font-awesome.files', [
       { expand:true, flatten: true, src: ['<%= yeoman.app %>/components/font-awesome/font/*'], dest: '<%= yeoman.dist %>/font/', }
     ]);
