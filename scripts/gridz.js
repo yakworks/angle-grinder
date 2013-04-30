@@ -3,9 +3,15 @@
 ;(function($, window, document, undefined ) {
 
   "use strict"; // jshint ;_;
+  // register namespace
+  $.extend(true, window, {
+    "sparkz": {
+      "Grid": Gridz
+    }
+  });
 
   // Class definition
-  var Gridz = function (element, options) {
+  function Gridz(element, options) {
     this.init(element, options)
   }
 
@@ -14,16 +20,17 @@
     init: function (element, opts ) {
       var $el = $(element)
 
-      /** consitent with bootstrap plugin  */
       this.$element = $el
-
+      this.$el = $el
       this.$grid = $el
+
+      this.gridId = $el.attr('id')
       /** the containing div for the grid , will be built after jqGrid is called*/
       this.gboxId = "gbox_" + $el.attr('id')
 
       this.options = this.getOptions(opts)
 
-      console.log(this.options.actionPopup)
+      //console.log(this.options.actionPopup)
       if (this.options.actionPopup)
         this.addRowActionColumn()
 
@@ -55,7 +62,11 @@
         }
         self.$grid.trigger('gridComplete')
       }
-
+      //if sortable is true then add exclusion for the action column
+      if(options.actionPopup && options.sortable){
+        options.sortable = {exclude :"#" + this.gridId  + "_row_action_col"}
+      }
+      //console.log(options)
       return options
     },
 
@@ -64,6 +75,13 @@
      */
     gridComplete: function (){
       if(this.options.actionPopup) this.actionPopupSetup()
+
+      var gid = "jqgh_" + this.$element.attr('id') + "_row_action_col"
+      // disable the sortable property on the action column
+      //$('tr.ui-jqgrid-labels').sortable({ cancel: 'th:#'+gid});
+      // update the list of sortable item's, and exclude your target element
+      //$('tr.ui-jqgrid-labels').sortable({ items: "th:not(#" + gid + ")" });
+
     },
 
     /**
@@ -122,7 +140,7 @@
         // Get width of parent container which is assumed to be expanded to span
         var parWidth = $(gboxId).parent().width()
           , curWidth = $(gboxId).width()
-          , w = parWidth - 1 // Fudge factor to prevent horizontal scrollbars
+          , w = parWidth - 1 // add -1 Fudge factor to prevent horizontal scrollbars
 
         //console.log("span width " + parWidth + " gridWidth " + gWidth)
         if (Math.abs(w - curWidth) > 2){
@@ -131,7 +149,7 @@
           $grid.setGridWidth(w)
           console.log("new width " + w)
         }
-      }).trigger('resize')
+      })//.trigger('resize')
     },
 
     //*************Action popup methods*************/
@@ -151,6 +169,8 @@
         , sortable:false
         , search:false
         , hidedlg:true
+        , resizable:false //can't resize
+        , fixed:true //don't auto calc size
         , formatter:function(cellValue, colOptions, rowObject){
             var func = opts.actionPopup.cellFormatter || self.actionPopupFormatter
             return func(containerId,cellValue, colOptions, rowObject)
@@ -167,13 +187,19 @@
     },
     //called after grid complete to setup the menu
     actionPopupSetup:function(){
-      var self = this
+      var self = this ,
+        options = this.options ,
+        actionMenu ;
 
-      var actionMenu = '<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu" style="display: block;position: relative;min-width:100px"> \
-          <li><a tabindex="-1" href="#" class="row_action_show" data-dismiss="clickover"><i class="icon-eye-open"></i> show</a></li> \
-          <li><a tabindex="-1" href="#" class="row_action_edit" data-dismiss="clickover"><i class="icon-edit"></i> edit</a></li> \
-          <li><a tabindex="-1" href="#" class="row_action_delete" data-dismiss="clickover"><i class="icon-trash"></i> delete</a></li> \
-        </ul>'
+      if(options.actionPopup.menuList){
+        actionMenu = options.actionPopup.menuList
+      } else{
+        actionMenu = '<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu"> \
+          <li><a href="#" class="row_action_show" data-dismiss="clickover"><i class="icon-eye-open"></i> show</a></li> \
+          <li><a href="#" class="row_action_edit" data-dismiss="clickover"><i class="icon-edit"></i> edit</a></li> \
+          <li><a href="#" class="row_action_delete" data-dismiss="clickover"><i class="icon-trash"></i> delete</a></li> \
+          </ul>'
+      }
 
       $('.jqg-row-action').clickover({
         html: true,
@@ -212,12 +238,7 @@
   } // end Gridz.prototype definition
 
 
-  // register namespace
-  $.extend(true, window, {
-    "sparkle": {
-      "Gridz": Gridz
-    }
-  });
+
 
 
   // Jquery Plugin definition
@@ -231,7 +252,7 @@
         instance[option].apply(this, otherArgs)
       }
       else { //try passing through to jqgrid
-        return $(this).jqgrid(arguments)
+        return $(this).jqGrid(arguments)
       }
     }
     return this.each(function() {
@@ -260,24 +281,31 @@
     shrinkToFit:false,
     autowidth: true,
     height: '100%',
-    sortable: true, //allows column reposition
+    sortable: true,
     multiselect: true, //one or more row selections
     pager: "#gridPager",
     // onSortCol:sortColumn,
     // onPaging:pagingChange,
     beforeSelectRow: null ,
     gridComplete: null ,
-    rowActionFormatter: null,
     actionPopup:{
-      cellFormatter:null,
-      menuList:null,
-      showClick:null,
-      editClick:null,
-      deleteClick:null
+      formatter:null,
+      menuList:null
     }
     // gridComplete:function(){
     //     setupActionClickOver()
     // }
   }
+
+  //Extra formatters for jqGrid
+  $.extend($.fn.fmatter , {
+    okIcon : function(cellVal, options, rowdata) {
+      return cellVal ? "<i class='icon-ok'></i>" : ""
+    },
+    editActionLink: function(cellVal, options, rowdata) {
+      //console.log(rowdata)
+      return '<a class="editActionLink" href="#" > '+cellVal+'</a>';
+    }
+  });
 
 })(jQuery, window, document);

@@ -37,7 +37,7 @@ div.login-inner{
 	padding-top: 20px;
 }
 div.login-inner div.controls {
-	margin-left: 130px;
+	margin-left: 20px;
 }
 .login-inner input, .login-inner .add-on {
 	padding: 8px 8px;
@@ -46,4 +46,14 @@ div.login-inner div.controls {
 .checkbox.remember-me{
 	color:#555;
 	font-size: 13px;
+}
+input.width80{
+  width:80%;
+}
+#lost-password{
+  font-size:12px;
+  padding:24px 0 0 0;
+}
+#loginForm{
+  margin:0;
 }

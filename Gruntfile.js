@@ -9,13 +9,16 @@ module.exports = function (grunt) {
   require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 
   // configurable paths
-  var yeomanConfig = {
+  var yeoCfg = {
       app: '.',
-      dist: 'dist'
+      dist: 'dist',
+      comp: './components',
+      vendor: './third-party'
   };
 
   grunt.initConfig({
-    yeoman: yeomanConfig,
+    yeoman: yeoCfg,
+    cfg:yeoCfg,
 
     watch: {
         coffee: {
@@ -153,46 +156,65 @@ module.exports = function (grunt) {
   });
 
   grunt.registerTask('init', 'moving things into place', function() {
-    grunt.config('copy.font-awesome.files', [
-      { expand:true, flatten: true, src: ['<%= yeoman.app %>/components/font-awesome/font/*'], dest: '<%= yeoman.dist %>/font/', }
-    ]);
+    var compDir = '<%= yeoman.app %>/components',
+      thirdParty = '<%= yeoman.app %>/third-party'
 
-    grunt.config('copy.bootstrapx-clickover.files', [
+    grunt.config('copy.third-party.files', [
       { expand:true, flatten: true,
-        src: ['<%= yeoman.app %>/components/bootstrapx-clickover/js/*'],
-        dest: '<%= yeoman.app %>/third-party/bootstrapx-clickover/js/', }
-    ]);
+        src: ["<%=cfg.comp%>/font-awesome/font/*"], dest: '<%=cfg.dist%>/font/'
+      },
 
-    grunt.config('copy.jq-ui-boot.files', [
-      { expand: true,dot: true,
-          cwd: '<%= yeoman.app %>/components/jquery-ui-bootstrap/css/custom-theme',
-          dest: '<%= yeoman.app %>/third-party/jquery-ui-bootstrap/',
+      { expand:true, flatten: true,
+        src: ['<%=cfg.comp%>/bootstrapx-clickover/js/*'],
+        dest: '<%=cfg.vendor%>/bootstrapx-clickover/js/',
+      },
+
+      { expand: true,
+          cwd: '<%=cfg.comp%>/jquery-ui-bootstrap/css/custom-theme',
+          dest: '<%=cfg.vendor%>/jquery-ui-bootstrap/',
           src: [ 'jquery-ui-1.10.1.custom.css', 'images/*' ]
       },
-      { expand: true,dot: true,
-          cwd: '<%= yeoman.app %>/components/jquery-ui-bootstrap/assets/js',
-          dest: '<%= yeoman.app %>/third-party/jquery-ui-bootstrap/',
+
+      { expand: true,
+          cwd: '<%=cfg.comp%>/jquery-ui-bootstrap/assets/js',
+          dest: '<%=cfg.vendor%>/jquery-ui-bootstrap/',
           src: [ 'jquery-ui-1.10.1.custom.min.js']
-      }
-    ]);
-    grunt.config('copy.bootstrap.files', [
+      },
+
       { expand: true,
-          cwd: '<%= yeoman.app %>/components/bootstrap/docs/assets',
-          dest: '<%= yeoman.app %>/third-party/bootstrap/',
+          cwd: '<%=cfg.comp%>/bootstrap/docs/assets',
+          dest: '<%=cfg.vendor%>/bootstrap/',
           src: [ 'css/*', 'js/bootstrap.*']
-      }
-    ]);
-    grunt.config('copy.jquery-core.files', [
+      },
+
       { expand: true,
-          cwd: '<%= yeoman.app %>/components/jquery/',
-          dest: '<%= yeoman.app %>/third-party/jquery/',
+          cwd: '<%=cfg.comp%>/jquery/',
+          dest: '<%=cfg.vendor%>/jquery/',
           src: [ 'jquery.js', 'jquery.min.js']
+      },
+
+      { expand: true,
+          cwd: '<%=cfg.comp%>/spin.js/dist',
+          dest: '<%=cfg.vendor%>/spin.js/',
+          src: ['*']
+      },
+      { expand: true,
+          cwd: '<%=cfg.comp%>/jqgrid',
+          dest: '<%=cfg.vendor%>/jqgrid',
+          src: ['js/grid.*','js/jquery.fmatter.js','js/i18n/grid.locale-en.js','css/ui.jqgrid.css','plugins/ui.multiselect.*']
+      },
+      //ANGULAR, and UI
+      { expand: true,
+          cwd: '<%=cfg.comp%>',
+          dest: '<%=cfg.vendor%>',
+          src: ['angular/*.js',"angular-resource/*",'angular-ui/build/*',
+                'angular-bootstrap/*',"angular-strap/dist/*","select2/*","select2-bootstrap-css/*"]
       }
     ]);
+
     //TODO replace the "images" urls for jquery moved css
     grunt.task.run(
-      'copy:font-awesome','copy:jq-ui-boot','copy:bootstrap',
-      'copy:jquery-core', 'copy:bootstrapx-clickover' , 'less:dist'
+      'copy:third-party', 'less:dist'
     );
 
   });

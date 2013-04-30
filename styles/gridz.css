@@ -73,7 +73,7 @@ text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
 
 /**** Data rows ***/
 .ui-jqgrid tr.jqgfirstrow td {
-	border-bottom:none; /*firefox fix*/
+	border-color:transparent; /*firefox fix*/
 }
 
 .ui-jqgrid tr.jqgrow,.ui-jqgrid tr.ui-row-ltr {
@@ -305,6 +305,11 @@ text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
   left: -10px;
   z-index: 1010;
   overflow: visible;
+}
+.popover.row-action-popover ul.dropdown-menu{
+  display: block;
+  position: relative;
+  min-width:100px
 }
 /** fix jquery ui arrow **/
 .popover .arrow:after {
