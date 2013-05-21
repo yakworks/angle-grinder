@@ -1,0 +1,17 @@
+{
+	"folders":
+	[
+		{
+			"path": ".",
+         "file_exclude_patterns":[
+            "._*","*.bak","*.sample","*.tar","*.tgz","*.zip","*.sublime-workspace"
+            ,".gitignore"
+            ,".gitattributes",".editorconfig",".jshintrc",
+            "stacktrace.log","*.tmproj",".classpath",".project"
+         ],
+         "folder_exclude_patterns":[
+            "akismet","node_modules","target*",".grails","lib"
+         ]
+		}
+	]
+}
