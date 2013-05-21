@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Bootstrap, from Twitter + jqGrid</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap-responsive.min.css">
+        <link rel="stylesheet" href="../vendor/jquery-ui-bootstrap/jquery-ui-1.10.1.custom.css">
+        <!--[if lt IE 9]>
+        <link rel="stylesheet" href="../vendor/jquery-ui-bootstrap/jquery.ui.1.10.1.ie.css">
+        <![endif]-->
+        <link rel="stylesheet" href="../vendor/jqGrid/css/ui.jqgrid.css" />
+        <link rel="stylesheet" href="../assets/styles/bs-jqGrid.css">
+        <link rel="stylesheet" href="../vendor/jqGrid/plugins/ui.multiselect.css">
+        <link rel="stylesheet" href="../vendor/font-awesome/css/font-awesome.min.css">
+        <!--[if IE 7]>
+        <link rel="stylesheet" href="../vendor/font-awesome/css/font-awesome-ie7.min.css">
+        <![endif]-->
+
+
+        <!-- jQuery + jqGrid -->
+        <script src="../vendor/jquery-1.9.1.min.js"></script>
+        <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+        <script src="../vendor/jquery-ui-1.10.1.custom.min.js"></script>
+
+        <script src="../vendor/jqGrid/plugins/ui.multiselect.js"></script>
+        <script src="../vendor/jqGrid/js/i18n/grid.locale-en.js"></script>
+        <script src="../vendor/jqGrid/js/jquery.jqGrid.min.js"></script>
+        <!-- Extra Boot Strap -->
+        <script src="../vendor/bootstrapx-clickover-1.0.js"></script>
+
+
+        <!-- jqGrid setup -->
+        <script>
+            if (!window.console) console = {log: function() {}};
+            $(document).ready(function() {
+              // function testme(){
+              //     var res = Array.prototype.slice.call( arguments, 1 )
+              //     if(!res.length) {res = 'udef';}
+              //     alert(res)
+              // }
+              //
+              // testme('gogo');
+
+
+                var mydata = [
+                    {id:"1",invdate:"2010-05-24",name:"test",note:"note",tax:"10.00",total:"2111.00"} ,
+                    {id:"2",invdate:"2010-05-25",name:"test2",note:"note2",tax:"20.00",total:"320.00"},
+                    {id:"3",invdate:"2007-09-01",name:"test3",note:"note3",tax:"30.00",total:"430.00"},
+                    {id:"4",invdate:"2007-10-04",name:"test",note:"note",tax:"10.00",total:"210.00"},
+                    {id:"5",invdate:"2007-10-05",name:"test2",note:"note2",tax:"20.00",total:"320.00"},
+                    {id:"6",invdate:"2007-09-06",name:"test3",note:"note3",tax:"30.00",total:"430.00"},
+                    {id:"7",invdate:"2007-10-04",name:"test",note:"note",tax:"10.00",total:"210.00"},
+                    {id:"8",invdate:"2007-10-03",name:"test2",note:"note2",amount:"300.00",tax:"21.00",total:"320.00"},
+                    {id:"9",invdate:"2007-09-01",name:"test3",note:"note3",amount:"400.00",tax:"30.00",total:"430.00"},
+                    {id:"11",invdate:"2007-10-01",name:"test",note:"note",amount:"200.00",tax:"10.00",total:"210.00"},
+                    {id:"12",invdate:"2007-10-02",name:"test2",note:"note2",amount:"300.00",tax:"20.00",total:"320.00"},
+                    {id:"13",invdate:"2007-09-01",name:"test3",note:"note3",amount:"400.00",tax:"30.00",total:"430.00"},
+                    {id:"14",invdate:"2007-10-04",name:"test",note:"note",amount:"200.00",tax:"10.00",total:"210.00"},
+                    {id:"15",invdate:"2007-10-05",name:"test2",note:"note2",amount:"300.00",tax:"20.00",total:"320.00"},
+                    {id:"16",invdate:"2007-09-06",name:"test3",note:"note3",amount:"400.00",tax:"30.00",total:"430.00"},
+                    {id:"17",invdate:"2007-10-04",name:"test",note:"note",amount:"200.00",tax:"10.00",total:"210.00"},
+                    {id:"18",invdate:"2007-10-03",name:"test2",note:"note2",amount:"300.00",tax:"20.00",total:"320.00"},
+                    {id:"19",invdate:"2007-09-01",name:"test3",note:"note3",amount:"400.00",tax:"30.00",total:"430.00"},
+                    {id:"21",invdate:"2007-10-01",name:"test",note:"note",amount:"200.00",tax:"10.00",total:"210.00"},
+                    {id:"22",invdate:"2007-10-02",name:"test2",note:"note2",amount:"300.00",tax:"20.00",total:"320.00"},
+                    {id:"23",invdate:"2007-09-01",name:"test3",note:"note3",amount:"400.00",tax:"30.00",total:"430.00"},
+                    {id:"24",invdate:"2007-10-04",name:"test",note:"note",amount:"200.00",tax:"10.00",total:"210.00"},
+                    {id:"25",invdate:"2007-10-05",name:"test2",note:"note2",amount:"300.00",tax:"20.00",total:"320.00"},
+                    {id:"26",invdate:"2007-09-06",name:"test3",note:"note3",amount:"400.00",tax:"30.00",total:"430.00"},
+                    {id:"27",invdate:"2007-10-04",name:"test",note:"note",amount:"200.00",tax:"10.00",total:"210.00"},
+                    {id:"28",invdate:"2007-10-03",name:"test2",note:"note2",amount:"300.00",tax:"20.00",total:"320.00"},
+                    {id:"29",invdate:"2007-09-01",name:"test3",note:"note3",amount:"400.00",tax:"30.00",total:"430.00"}
+                ];
+
+                var $grid = $("#demoGrid");
+                var gboxId = "gbox_" + $grid.attr('id');
+                console.log("gboxid is " + gboxId);
+                var $gbox = $("#"+gboxId);
+                //console.log("gbox")
+
+                $grid.jqGrid({
+                    data: mydata,
+                    datatype: "local",
+                    height: 250,
+                    rowNum: 10,
+                    rowList: [10,20,30],
+                    //colNames:['Inv No','Inv No','Date', 'Client', 'Amount','Tax','Total','Notes'],
+                    colModel:[
+                        {name:'edit_actions', label:' ', width:20, sortable:false,search:false,hidedlg:true,formatter:editColFormatter},
+                        {name:'id', index:'id', label:'Inv No', key: true, width:60, sorttype:"int",search:true},
+                        {name:'invdate', index:'invdate', editable:true,label:'Date', width:90, sorttype:"date", formatter:"date"},
+                        {name:'name', index:'name', width:200},
+                        {name:'amount', index:'amount', width:80, align:"right",sorttype:"float", formatter:"number"},
+                        {name:'tax', index:'tax', width:80, align:"right",sorttype:"float"},
+                        {name:'total', index:'total', width:80,align:"right",sorttype:"float"},
+                        {name:'note', index:'note', width:250, sortable:false,  hidden:true}
+                    ],
+                    pager: "#gridPager",
+                    viewrecords: true,
+                    hidegrid:false,
+                    altRows: true,
+                    shrinkToFit:false,
+                    autowidth: true,
+                    height: '100%',
+                    sortable: true, //allows column reposition
+                    multiselect: true, //one or more row selections
+                    beforeSelectRow: beforeSelectRow ,
+                    gridComplete:function(){
+                        setupActionClickOver();
+                    }
+                    //end options
+                });
+                $grid.jqGrid('navGrid','#gridPager',{add:false,del:true});
+                $grid.jqGrid('navButtonAdd','#gridPager',{ caption: "Columns", title: "Reorder Columns",
+                    onClickButton : function (){
+                        $grid.jqGrid('columnChooser');
+                    }
+                });
+                //jQuery("#demoGrid").jqGrid('filterToolbar',{defaultSearch:true,stringResult:true});
+
+                //hide the default checkbox column
+                //$grid.jqGrid('hideCol', 'cb');
+
+                //clean up edit_actions column name
+                //$('#jqgh_demoGrid_edit_actions').html('');
+
+                //test responsiveness
+                $(window).on('resize', function(event, ui) {
+                    // Get width of parent container
+                    var parWidth = $("#"+gboxId).parent().width()
+                      , curWidth = $("#"+gboxId).width()
+                      , w = parWidth - 1; // Fudge factor to prevent horizontal scrollbars
+
+                    //console.log("span width " + parWidth + " gridWidth " + gWidth);
+                    if (Math.abs(w - curWidth) > 2)
+                    {
+                        //alert("resize to " + width);
+                        console.log("span width " + parWidth + " gridWidth " + curWidth);
+                        $grid.setGridWidth(w);
+                        console.log("new width " + w);
+                    }
+                }).trigger('resize');
+
+                function editColFormatter(cellvalue, options, rowObject) {
+                    return '<a class="jqg-row-action" title="" data-toggle="popover" href="#" data-container="#'+gboxId+'"><i class="icon-cog"></i></a>'
+                    //  return '<span class="dropdown"> \
+                    //     <a id="dLabel" class="dropdown-toggle jqg-row-action" data-toggle="dropdown" href="#"> \
+                    //         <i class="icon-cog"></i> \
+                    //     </a> \
+                    //     <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel"> \
+                    //         <li>edit</li> \
+                    //         <li>show</li> \
+                    //         <li>delete</li> \
+                    //     </ul> \
+                    // </span>';
+                 };
+
+
+
+                  function setupActionClickOver(){
+                      var actionMenu = '<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu" style="display: block;position: relative;min-width:100px"> \
+                              <li><a tabindex="-1" href="#" class="row_action_show" data-dismiss="clickover"><i class="icon-eye-open"></i> show</a></li> \
+                              <li><a tabindex="-1" href="#" class="row_action_edit" data-dismiss="clickover"><i class="icon-edit"></i> edit</a></li> \
+                              <li><a tabindex="-1" href="#" class="row_action_delete" data-dismiss="clickover"><i class="icon-trash"></i> delete</a></li> \
+                          </ul>';
+                      $('.jqg-row-action').clickover({
+                           html:true,
+                           content: actionMenu,
+                           template: '<div class="popover row-action-popover"><div class="arrow"></div><div class="popover-content dropdown clearfix" style="padding:0;"></div></div>',
+                           onShown:function(){
+                               assignActionRowId(this);
+                               addActionPopupListeners(this);
+                           }
+                        });
+                  }
+
+
+                  function assignActionRowId(obj){
+                      //ptr = $(obj.$element,$grid.rows).parents("tr:first");
+                      var id = $(obj.$element,$grid.rows).parents("tr:first").attr("id")
+                      $grid.data("actionRowId",id);
+                      $grid.jqGrid('resetSelection');
+                      $grid.jqGrid('setSelection', id );
+                      console.log("actionShowEvent set actionRow data to " + id);
+                  }
+
+                  function addActionPopupListeners(obj){
+                      var $menu = $('#' + gboxId + ' .dropdown-menu');
+                      $menu.on('click','li a.row_action_show', function(e) {
+                          console.log('show for id ' + $grid.data("actionRowId") );
+                      });
+                      $menu.on('click','li a.row_action_edit', function(e) {
+                          console.log('edit for id ' + $grid.data("actionRowId") );
+                          row_action_edit($grid.data("actionRowId"));
+                      });
+                      $menu.on('click','li a.row_action_delete', function(e) {
+                          console.log('delete for id ' + $grid.data("actionRowId") );
+                      });
+
+                  }
+
+
+                  function row_action_open(id){
+
+                  }
+                  function row_action_delete(id){
+
+                  }
+                  function row_action_edit(id){
+                      var gr = $grid.jqGrid('getGridParam','selrow');
+                      if( gr == null ) return ;
+
+                      $grid.jqGrid('editGridRow',gr,{reloadAfterSubmit:false});
+
+                  }
+
+                  function beforeSelectRow(rowid, e) {
+                      //alert(e);
+                      /** Handles proper multi selection of rows **/
+                      var $this = $(this), rows = this.rows,
+                          // get id of the previous selected row
+                          startId = $this.jqGrid('getGridParam', 'selrow'),
+                          startRow, endRow, iStart, iEnd, i, rowidIndex;
+
+                      console.log("e target has class class cbox" + $(e.target).hasClass('cbox'));
+                      var isCheckBox = $(e.target).hasClass('cbox');
+                      if (!e.ctrlKey && !e.shiftKey && !e.metaKey && !isCheckBox) {
+                          $this.jqGrid('resetSelection');
+                      } else if (startId && e.shiftKey) {
+                          $this.jqGrid('resetSelection');
+
+                          // get DOM elements of the previous selected and
+                          // the currect selected rows
+                          startRow = rows.namedItem(startId);
+                          endRow = rows.namedItem(rowid);
+                          if (startRow && endRow) {
+                              // get min and max from the indexes of the previous selected
+                              // and the currect selected rows
+                              iStart = Math.min(startRow.rowIndex, endRow.rowIndex);
+                              rowidIndex = endRow.rowIndex;
+                              iEnd = Math.max(startRow.rowIndex, rowidIndex);
+                              for (i = iStart; i <= iEnd; i++) {
+                                  // the row with rowid will be selected by
+                                  // jqGrid. So we don't need select it
+                                  if (i != rowidIndex) {
+                                      $this.jqGrid('setSelection', rows[i].id, false);
+                                  }
+                              }
+                          }
+
+                          // clear text selection (needed in IE)
+                          if(document.selection && document.selection.empty) {
+                              document.selection.empty();
+                          } else if(window.getSelection) {
+                              window.getSelection().removeAllRanges();
+                          }
+                      }
+                      return true;
+                  }
+
+                  //$('.dropdown-menu li a').on('click',  function(e) {
+                      //console.log('on click');
+                      // console.log("actionShowEvent set actionRow data to " + id);
+                      //                       console.log(e);
+                      //                       console.log($(this).class());
+                  //});
+
+                  // $('.jqg-row-action').on('show', function (e) {
+                //       actionShowEvent(e);
+                     //ptr = $(e.target,$grid.rows).parents("tr:first");
+                  //   var id = $(ptr).attr("id")
+                  //   $grid.data("actionRow",id);
+                  //   //alert("shown " + id);
+                   //});
+                 //$('.jqg-row-action').dropdown();
+                 //$('.jqg-row-action').on('click', function (e) {
+                        //actionShowEvent(e);
+                      //ptr = $(e.target,$grid.rows).parents("tr:first");
+                   //   var id = $(ptr).attr("id")
+                   //   $grid.data("actionRow",id);
+                   //   //alert("shown " + id);
+                //});
+            });
+        </script>
+
+        <style>
+          body {
+            padding-top: 60px;
+            padding-bottom: 40px;
+          }
+          .popover.row-action-popover{
+              padding:0;
+              border:none;
+              background:none;
+              box-shadow:none;
+          }
+          .popover.row-action-popover.right .arrow {
+              left: -10px;
+              z-index: 1010;
+              overflow: visible;
+          }
+
+        </style>
+
+
+
+
+
+
+        <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+          <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+
+    </head>
+
+    <body>
+        <div class="container">
+            <div class="row-fluid">
+
+                <div class="span9" id='gridSpan'>
+                    <div class="jqgrid">
+                        <div class="navbar navbar-grid">
+                            <div class="navbar-inner with-selected-pointer with-grid-options">
+                                <ul class="nav">
+                                    <li><span class="icon-selected-pointer" > </span></li>
+                                    <li class="dropdown selected-actions">
+                                        <a data-toggle="dropdown" class="dropdown-toggle" href="#" stlye="padding-left:5px">
+                                            <i class="icon-cog"></i> Actions <b class="caret"></b>
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="#"><i class="icon-eye-open"></i> View</a></li>
+                                            <li><a href="#"><i class="icon-external-link"></i> Export</a></li>
+                                            <li><a href="#"><i class="icon-trash"></i> Delete</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="divider-vertical"></li>
+                                    <li><a href="#"><i class="icon-edit"></i> New</a></a></li>
+                                </ul>
+
+                                <ul class="nav pull-right">
+                                    <li><a href="#" title="search screen"><i class="icon-search"></i></a></li>
+                                    <li class="divider-vertical skinny"></li>
+                                    <li class="dropdown grid-options">
+                                        <a data-toggle="dropdown" class="dropdown-toggle" href="#"><i class="icon-cogs"></i></a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="#">Columns</a></li>
+                                            <li><a href="#">Another action</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="#">Separated link</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                                <form action="" class="navbar-search pull-right">
+                                    <input type="text" value="" placeholder="Search" class="search-query span2" style="width: 150px;"/>
+                                </form>
+                            </div>
+                        </div>
+                        <table id="demoGrid"></table>
+                        <div id="gridPager"></div>
+                    </div>
+
+                </div><!--/span-->
+            </div><!--/row-->
+
+            <hr>
+
+            <footer>
+                <p>&copy; Company 2012</p>
+            </footer>
+
+        </div><!--/.fluid-container-->
+
+
+
+    </body>
+</html>

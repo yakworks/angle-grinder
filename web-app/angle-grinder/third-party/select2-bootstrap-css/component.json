@@ -1,0 +1,9 @@
+{
+  "name": "select2-bootstrap-css",
+  "version": "0.0.0",
+  "commit": "1e24c96d5e541e9b1dfde29b34d61c8fe0be273b",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/t0m/select2-bootstrap-css.git"
+  }
+}
