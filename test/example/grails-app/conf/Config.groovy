@@ -105,6 +105,9 @@ grails {
       editedBy.constraints = "nullable:true,display:false,editable:false,bindable:false"
       editedDate.field = "editedDate"
       editedDate.constraints = "nullable:true,display:false,editable:false,bindable:false"
+      currentUserClosure = {ctx->
+        return 1
+      }
     }
   }
 }

@@ -266,7 +266,7 @@ abstract class BaseDomainController {
 		}catch(DomainException e){
 			response.status = 409
 			def emsg = (e.hasProperty("messageMap")) ? g.message(code:e.messageMap?.code,args:e.messageMap?.args,default:e.messageMap?.defaultMessage):null
-			render(plugin:"rally", template:"userEdit",model:[user:e.meta?.user?:e.entity,errorMsg:emsg])
+			render(template:"userEdit",model:[user:e.meta?.user?:e.entity,errorMsg:emsg])
 		}
 	}
 	

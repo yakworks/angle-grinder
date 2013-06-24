@@ -16,7 +16,6 @@ import grails.plugin.dao.DaoMessage
 import static javax.servlet.http.HttpServletResponse.*
 import grinder.Pager
 
-//XXX ken test me
 class UserAdminController extends BaseDomainController {
 	static final int SC_UNPROCESSABLE_ENTITY = 422
     def domainClass = User
@@ -30,7 +29,7 @@ class UserAdminController extends BaseDomainController {
 		//[colModel:colModel()]
 	}
     
-    def selectFields = ["*","primaryRole","roles"]
+    def selectFields = ["*"]
     //def excludeFields = ["passwd","passwordChangedDate","mustChangePassword"]
     //def marshallFields = ["*","contact","contact.org"]
 	def columnModel = [
@@ -83,17 +82,17 @@ class UserAdminController extends BaseDomainController {
 
 	def editTemplate(){
 		def user = User.get(params.id)
-		render(plugin:"rally", template:"edit",model:[user:user])
+		render(template:"edit",model:[user:user])
 	}
 
 	def editPartial(){
 		def user = new User()
-		render(plugin:"rally", template:"editPartial",model:[user:user])
+		render(template:"editPartial",model:[user:user])
 	}
 
 	def searchPartial(){
 		def user = new User()
-		render(plugin:"rally", template:"searchPartial",model:[user:user])
+		render(template:"searchPartial",model:[user:user])
 	}
 	
 	def createTemplate(){

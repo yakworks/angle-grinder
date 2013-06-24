@@ -50,29 +50,6 @@
   </div>
 
   <div class="control-group">
-    <label class="control-label">${ag.label(code:'user.primaryRole')}</label>
-    <div class="controls">
-      <g:select name="userRole" from="${nine.rally.DcsRoles.values()}"
-          noSelection='[0:"-Select ${ag.label(code:"user.primaryRole")}-"]' optionKey="id" ng-model="item.primaryRole.id" />
-
-    </div>
-  </div>
-
-  <div class="control-group">
-    <label class="control-label" >${ag.label(code:"user.role")}</label>
-    <div class="controls">
-      <div class="input-append" >
-        <g:select id="roleSelect2" name="userRole" from="${nine.rally.DcsRoles.values()}" 
-        multiple ng-model="item.roles" ui-select2="rolesSelectConfig"
-        optionKey="id" style="width:87%"/>
-        <button class="btn" type="button" data-select2-open="roleSelect2" style="width:13%">
-          <i class="icon-search"></i>
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <div class="control-group">
     <div class="controls">
       <label class="checkbox">
         <g:checkBox name="contact.tagForReminders" ng-model="item.contact.tagForReminders" />

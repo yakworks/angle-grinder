@@ -3,7 +3,7 @@
   <meta name='layout' content='agAdmin'/>
   <g:set var="entityName" value="${ag.label(code:"user")}" />
   <title>${entityName} Admin</title>
-  <r:require modules="ag-boot-css"/>
+  <r:require modules="ag-boot-css,ag-grid-css"/>
   <r:require modules="ag-boot-jq-ui"/>
   <r:require modules="ag-gridz"/>
   <r:require modules="ag-util"/>

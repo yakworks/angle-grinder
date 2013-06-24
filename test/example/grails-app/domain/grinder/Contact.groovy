@@ -3,7 +3,7 @@ package grinder
 import org.apache.commons.lang.builder.EqualsBuilder
 import org.apache.commons.lang.builder.HashCodeBuilder
 
-@gorm.AuditStamp 
+//@gorm.AuditStamp 
 class Contact {
     String num
 	String name
@@ -29,8 +29,7 @@ class Contact {
 	Date    birthday
 	String  comments
     
-    //FIXME this should be on the field instead of a has one
-    static hasOne = [user:User]
+    //static hasOne = [user:User]
 	
     def isUserEnabled(){
 		return (user && user.enabled)?true:false
@@ -67,6 +66,9 @@ class Contact {
     	department nullable:true, maxSize:50
     	birthday nullable:true
     	comments nullable:true
+
+    	email nullable:true
+    	phone nullable:true
 
     	tagForReminders nullable:false
     	visibleToOrgType nullable:true

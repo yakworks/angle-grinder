@@ -5,7 +5,7 @@ import org.apache.commons.lang.builder.HashCodeBuilder
 /**
  * User for user account.
 */
-@gorm.AuditStamp
+//@gorm.AuditStamp
 class User implements Serializable {
     
 	static transients = ['pass']
