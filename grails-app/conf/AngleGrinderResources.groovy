@@ -4,8 +4,12 @@ def vendor = "angle-grinder/third-party"
 
 modules = {
 
-    'ag-boot-css' {        
+    'ag-boot-css' {      
         resource url:[plugin: pname, dir: "${pname}/dist/styles", file:'boot.css']
+    }
+
+    'ag-grid-css' { 
+        dependsOn 'ag-boot-css'   
         resource url:[plugin: pname, dir: "${pname}/styles", file:'jq-ui-boot-grid.css']
     }
     
@@ -56,6 +60,12 @@ modules = {
     'angular-bootstrap' {
         dependsOn 'angular'
         resource id: 'js', url: [plugin: pname, dir: "${vendor}/angular-bootstrap", file:"ui-bootstrap-tpls.js"], nominify: true
+    }
+
+    'angular-scaffolding' {
+        dependsOn 'angular-ui'
+        resource url:[plugin: pname, dir: "scripts", file:'grails-default.js']
+        resource url:[plugin: pname, dir: "scripts", file:'scaffolding.js']
     }
 
 

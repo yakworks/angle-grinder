@@ -2,6 +2,7 @@ package grinder
 import org.springframework.context.i18n.LocaleContextHolder as LCH
 import javax.annotation.PostConstruct
 import grails.util.GrailsNameUtils
+
 class GrinderLabelService {
 
 	static transactional = false
