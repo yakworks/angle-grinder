@@ -8,6 +8,10 @@ grails-quartz*.zip
 .project
 .settings/
 
+# Intellij Project Files
+.idea
+*.iml
+
 # OS X generated files
 .DS_Store
 
