@@ -2,16 +2,17 @@ var nine = nine || {};
 //if(!nine.plugins)  nine.plugins = {};
 
 /*global jQuery */
-;(function($, window, document, undefined ) {
+;
+(function ($, window, document, undefined) {
   "use strict";
 
   // Class definition
-  var Foobar = function(element, options) {
+  var Foobar = function (element, options) {
     this.init(element, options);
   }
 
   Foobar.prototype = {
-    init: function( element, options ) {
+    init: function (element, options) {
       this.$element = $(element);
       this.options = options;
 
@@ -20,26 +21,26 @@ var nine = nine || {};
       this.bar();
     },
 
-    foo: function() {
+    foo: function () {
       console.log(this.options.foo);
     },
 
-    bar: function() {
+    bar: function () {
       console.log(this.options.bar);
     }
   } // end Foobar.prototype definition
 
   //do private methods here
-  function privateMethod(){
+  function privateMethod() {
     console.log("doing something in privateMethod");
   }
 
   // Plugin definition
-  $.fn.foobar = function(option) {
+  $.fn.foobar = function (option) {
     //to run methods on single element with args like $(el).foobar('setColor','green') or $(el).foobar('runMethod')
     //TODO pattern
 
-    return this.each(function() {
+    return this.each(function () {
 
       var $this = $(this);
       var data = $this.data('foobar');
@@ -59,4 +60,4 @@ var nine = nine || {};
     bar: "bar"
   }
 
-})(jQuery, window, document );
+})(jQuery, window, document);
