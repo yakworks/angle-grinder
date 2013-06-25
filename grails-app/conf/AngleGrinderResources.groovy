@@ -1,48 +1,47 @@
-
 def pname = "angle-grinder"
 def vendor = "angle-grinder/third-party"
 
 modules = {
 
-    'ag-boot-css' {      
-        resource url:[plugin: pname, dir: "${pname}/dist/styles", file:'boot.css']
+    'ag-boot-css' {
+        resource url: [plugin: pname, dir: "${pname}/dist/styles", file: 'boot.css']
     }
 
-    'ag-grid-css' { 
-        dependsOn 'ag-boot-css'   
-        resource url:[plugin: pname, dir: "${pname}/styles", file:'jq-ui-boot-grid.css']
+    'ag-grid-css' {
+        dependsOn 'ag-boot-css'
+        resource url: [plugin: pname, dir: "${pname}/styles", file: 'jq-ui-boot-grid.css']
     }
-    
+
     'jquery-19' {
         //defaultBundle 'core'
-        resource url:[plugin: pname, dir: "${vendor}/jquery", file:'jquery.min.js']
+        resource url: [plugin: pname, dir: "${vendor}/jquery", file: 'jquery.min.js']
     }
-    
+
     'ag-boot-jq-ui' {
         dependsOn 'jquery-19'
-        resource url:[plugin: pname, dir: "${vendor}/jquery-ui-bootstrap", file:'jquery-ui-1.10.1.custom.min.js']
-        resource url:[plugin: pname, dir: "${vendor}/bootstrap/js", file:'bootstrap.min.js']
+        resource url: [plugin: pname, dir: "${vendor}/jquery-ui-bootstrap", file: 'jquery-ui-1.10.1.custom.min.js']
+        resource url: [plugin: pname, dir: "${vendor}/bootstrap/js", file: 'bootstrap.min.js']
     }
-    
+
     'ag-gridz' {
         dependsOn 'ag-boot-jq-ui'
-        resource url:[plugin: pname, dir: "${vendor}/jqgrid/plugins", file:'ui.multiselect.js']
-        resource url:[plugin: pname, dir: "${vendor}/jqgrid/js/i18n", file:'grid.locale-en.js']
-        resource url:[plugin: pname, dir: "${vendor}/jqgrid/js", file:'grid.base.js']
-        resource url:[plugin: pname, dir: "${vendor}/jqgrid/js", file:'grid.jqueryui.js']
-        resource url:[plugin: pname, dir: "${vendor}/jqgrid/js", file:'jquery.fmatter.js']
-        resource url:[plugin: pname, dir: "${pname}/scripts", file:'gridz.js']
-        resource url:[plugin: pname, dir: "${pname}/scripts", file:'gridFormEdit.js']
-        resource url:[plugin: pname, dir: "${vendor}/bootstrapx-clickover/js", file:'bootstrapx-clickover.js']
+        resource url: [plugin: pname, dir: "${vendor}/jqgrid/plugins", file: 'ui.multiselect.js']
+        resource url: [plugin: pname, dir: "${vendor}/jqgrid/js/i18n", file: 'grid.locale-en.js']
+        resource url: [plugin: pname, dir: "${vendor}/jqgrid/js", file: 'grid.base.js']
+        resource url: [plugin: pname, dir: "${vendor}/jqgrid/js", file: 'grid.jqueryui.js']
+        resource url: [plugin: pname, dir: "${vendor}/jqgrid/js", file: 'jquery.fmatter.js']
+        resource url: [plugin: pname, dir: "${pname}/scripts", file: 'gridz.js']
+        resource url: [plugin: pname, dir: "${pname}/scripts", file: 'gridFormEdit.js']
+        resource url: [plugin: pname, dir: "${vendor}/bootstrapx-clickover/js", file: 'bootstrapx-clickover.js']
     }
 
     'ag-login' {
         dependsOn 'ag-boot-css'
-        resource url:[plugin: pname, dir: "${pname}/styles", file:'login.css']
+        resource url: [plugin: pname, dir: "${pname}/styles", file: 'login.css']
     }
-    
+
     'ag-util' {
-        resource url:[plugin: pname, dir: "${vendor}/spin.js", file:'spin.min.js']
+        resource url: [plugin: pname, dir: "${vendor}/spin.js", file: 'spin.min.js']
     }
 
     angular {
@@ -59,13 +58,13 @@ modules = {
     }
     'angular-bootstrap' {
         dependsOn 'angular'
-        resource id: 'js', url: [plugin: pname, dir: "${vendor}/angular-bootstrap", file:"ui-bootstrap-tpls.js"], nominify: true
+        resource id: 'js', url: [plugin: pname, dir: "${vendor}/angular-bootstrap", file: "ui-bootstrap-tpls.js"], nominify: true
     }
 
     'angular-scaffolding' {
         dependsOn 'angular-ui'
-        resource url:[plugin: pname, dir: "scripts", file:'grails-default.js']
-        resource url:[plugin: pname, dir: "scripts", file:'scaffolding.js']
+        resource url: [plugin: pname, dir: "scripts", file: 'grails-default.js']
+        resource url: [plugin: pname, dir: "scripts", file: 'scaffolding.js']
     }
 
 
