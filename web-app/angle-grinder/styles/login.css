@@ -1,59 +1,70 @@
 #body-login {
-	padding-top: 40px;
-	padding-bottom: 40px;
-	background: url("../img/fiber.jpg") repeat scroll left top #e8e6e2;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background: url("../img/fiber.jpg") repeat scroll left top #e8e6e2;
 }
 
 .login-wrapper {
-	background-color: #FFFFFF;
-	border: 1px solid #CCCCCC;
-	border-radius: 10px;
-	box-shadow: 0 0 6px rgba(0, 0, 0, 0.25), 0 1px 0 rgba(255, 255, 255, 0.1) inset;
-	margin-top: 50px;
-	padding: 20px;
-	position: relative;
+  background-color: #FFFFFF;
+  border: 1px solid #CCCCCC;
+  border-radius: 10px;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.25), 0 1px 0 rgba(255, 255, 255, 0.1) inset;
+  margin-top: 50px;
+  padding: 20px;
+  position: relative;
 }
+
 div.login-radmin h1.brand {
-	color: #999999;
-	font-family: 'Molle',cursive;
-	font-size: 45px;
-	font-weight: normal;
-	text-shadow: -1px 0 rgba(0, 0, 0, 0.5), 0 -1px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.5), -1px 0 rgba(0, 0, 0, 0.3);
+  color: #999999;
+  font-family: 'Molle', cursive;
+  font-size: 45px;
+  font-weight: normal;
+  text-shadow: -1px 0 rgba(0, 0, 0, 0.5), 0 -1px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.5), -1px 0 rgba(0, 0, 0, 0.3);
 }
+
 .align-center {
-	text-align: center;
+  text-align: center;
 }
+
 h2.sign-in {
-	margin-bottom: 0;
+  margin-bottom: 0;
 }
+
 div.login-inner div.form-actions {
-	background: none;
-	margin-bottom: 0;
-	padding: 10px;
+  background: none;
+  margin-bottom: 0;
+  padding: 10px;
 }
-div.login-inner{
-	border-top: 1px solid #E5E5E5;
-	margin-top: 20px;
-	padding-top: 20px;
+
+div.login-inner {
+  border-top: 1px solid #E5E5E5;
+  margin-top: 20px;
+  padding-top: 20px;
 }
+
 div.login-inner div.controls {
-	margin-left: 20px;
+  margin-left: 20px;
 }
+
 .login-inner input, .login-inner .add-on {
-	padding: 8px 8px;
-	font-size: 16px;
+  padding: 8px 8px;
+  font-size: 16px;
 }
-.checkbox.remember-me{
-	color:#555;
-	font-size: 13px;
+
+.checkbox.remember-me {
+  color: #555;
+  font-size: 13px;
 }
-input.width80{
-  width:80%;
+
+input.width80 {
+  width: 80%;
 }
-#lost-password{
-  font-size:12px;
-  padding:24px 0 0 0;
+
+#lost-password {
+  font-size: 12px;
+  padding: 24px 0 0 0;
 }
-#loginForm{
-  margin:0;
+
+#loginForm {
+  margin: 0;
 }

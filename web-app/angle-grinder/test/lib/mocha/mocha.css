@@ -84,9 +84,9 @@ body {
   margin-left: 5px;
   padding: 2px 5px;
   color: white;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.2);
-  -moz-box-shadow: inset 0 1px 1px rgba(0,0,0,.2);
-  box-shadow: inset 0 1px 1px rgba(0,0,0,.2);
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .2);
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .2);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, .2);
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   -ms-border-radius: 5px;
@@ -185,7 +185,7 @@ body {
 
 #mocha-error {
   color: #c00;
-  font-size: 1.5  em;
+  font-size: 1.5em;
   font-weight: 100;
   letter-spacing: 1px;
 }
@@ -224,8 +224,22 @@ body {
   padding-top: 11px;
 }
 
-code .comment { color: #ddd }
-code .init { color: #2F6FAD }
-code .string { color: #5890AD }
-code .keyword { color: #8A6343 }
-code .number { color: #2F6FAD }
+code .comment {
+  color: #ddd
+}
+
+code .init {
+  color: #2F6FAD
+}
+
+code .string {
+  color: #5890AD
+}
+
+code .keyword {
+  color: #8A6343
+}
+
+code .number {
+  color: #2F6FAD
+}
