@@ -1,12 +1,6 @@
 /*global jQuery */
-;
 (function ($, window, document, undefined) {
-
-  $.extend(true, window, {
-    "grinder": {
-      "GridFormEdit": GridFormEdit
-    }
-  });
+  "use strict";
 
   function GridFormEdit(opts) {
     var self = this, o = opts
@@ -14,6 +8,8 @@
         , $formDiv = $(o.formDiv)
         , editFormUrl = o.editFormUrl
         , $spinDiv = o.spinnerDiv ? o.spinnerDiv : $('#spinner')
+
+    var Spinner = window.Spinner || function() {};
 
     var spin = {
       spinner: new Spinner(),
@@ -124,5 +120,11 @@
   GridFormEdit.newInstance = function (o) {
     return new GridFormEdit(o).init()
   }
+
+  $.extend(true, window, {
+    "grinder": {
+      "GridFormEdit": GridFormEdit
+    }
+  });
 
 })(jQuery, window, document);

@@ -1,14 +1,6 @@
 /*global jQuery */
-;
 (function ($, window, document, undefined) {
-
-  "use strict"; // jshint ;_;
-  // register namespace
-  $.extend(true, window, {
-    "grinder": {
-      "Grid": Gridz
-    }
-  });
+  "use strict";
 
   // Class definition
   function Gridz(element, options) {
@@ -233,6 +225,12 @@
 
   } // end Gridz.prototype definition
 
+  // register namespace
+  $.extend(true, window, {
+    "grinder": {
+      "Grid": Gridz
+    }
+  });
 
   // Jquery Plugin definition
   $.fn.gridz = function (option) {

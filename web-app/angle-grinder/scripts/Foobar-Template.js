@@ -2,7 +2,6 @@ var nine = nine || {};
 //if(!nine.plugins)  nine.plugins = {};
 
 /*global jQuery */
-;
 (function ($, window, document, undefined) {
   "use strict";
 
