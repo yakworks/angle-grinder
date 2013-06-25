@@ -32,6 +32,7 @@ module.exports = (grunt) ->
           cwd: "<%= appConfig.app %>"
           dest: "<%= appConfig.dist %>"
           src: [
+            "font/*"
             "styles/**/*.css"
           ]
         ]
