@@ -50,18 +50,18 @@ angular.module('ui.directives').directive('uiAnimate', ['ui.config', '$timeout',
 
 /*
 *  AngularJs Fullcalendar Wrapper for the JQuery FullCalendar
-*  API @ http://arshaw.com/fullcalendar/
-*
-*  Angular Calendar Directive that takes in the [eventSources] nested array object as the ng-model and watches (eventSources.length + eventSources[i].length) for changes.
+*  API @ http://arshaw.com/fullcalendar/ 
+*  
+*  Angular Calendar Directive that takes in the [eventSources] nested array object as the ng-model and watches (eventSources.length + eventSources[i].length) for changes. 
 *       Can also take in multiple event urls as a source object(s) and feed the events per view.
-*       The calendar will watch any eventSource array and update itself when a delta is created
+*       The calendar will watch any eventSource array and update itself when a delta is created  
 *       An equalsTracker attrs has been added for use cases that would render the overall length tracker the same even though the events have changed to force updates.
 *
 */
 
 angular.module('ui.directives').directive('uiCalendar',['ui.config', '$parse', function (uiConfig,$parse) {
-     uiConfig.uiCalendar = uiConfig.uiCalendar || {};
-     //returns calendar
+     uiConfig.uiCalendar = uiConfig.uiCalendar || {};       
+     //returns calendar     
      return {
         require: 'ngModel',
         restrict: 'A',
@@ -89,7 +89,7 @@ angular.module('ui.directives').directive('uiCalendar',['ui.config', '$parse', f
               scope.calendar = elm.html('');
               var view = scope.calendar.fullCalendar('getView');
               if(view){
-                view = view.name; //setting the default view to be whatever the current view is. This can be overwritten.
+                view = view.name; //setting the default view to be whatever the current view is. This can be overwritten. 
               }
               /* If the calendar has options added then render them */
               var expression,
@@ -394,7 +394,7 @@ angular.module('ui.directives').directive('uiIf', [function () {
 
         var childElement;
         var childScope;
-
+ 
         scope.$watch(attr['uiIf'], function (newValue) {
           if (childElement) {
             childElement.remove();
@@ -599,7 +599,7 @@ angular.module('ui.directives').directive('uiKeyup', ['keypressHelper', function
   //then we just use ui-event to catch events from an element
   function bindMapEvents(scope, eventsStr, googleObject, element) {
     angular.forEach(eventsStr.split(' '), function (eventName) {
-      //Prefix all googlemap events with 'map-', so eg 'click'
+      //Prefix all googlemap events with 'map-', so eg 'click' 
       //for the googlemap doesn't interfere with a normal 'click' event
       var $event = { type: 'map-' + eventName };
       google.maps.event.addListener(googleObject, eventName, function (evt) {
@@ -674,7 +674,7 @@ angular.module('ui.directives').directive('uiKeyup', ['keypressHelper', function
       };
     }]);
 
-  /*
+  /* 
    * Map overlay directives all work the same. Take map marker for example
    * <ui-map-marker="myMarker"> will $watch 'myMarker' and each time it changes,
    * it will hook up myMarker's events to the directive dom element.  Then
