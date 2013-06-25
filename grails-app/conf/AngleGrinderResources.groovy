@@ -1,5 +1,5 @@
 def pname = "angle-grinder"
-def vendor = "angle-grinder/third-party"
+def vendor = "${pname}/third-party"
 
 modules = {
 
@@ -9,7 +9,7 @@ modules = {
 
     'ag-grid-css' {
         dependsOn 'ag-boot-css'
-        resource url: [plugin: pname, dir: "${pname}/styles", file: 'jq-ui-boot-grid.css']
+        resource url: [plugin: pname, dir: "${pname}/dist/styles", file: 'jq-ui-boot-grid.css']
     }
 
     'jquery-19' {
@@ -30,8 +30,8 @@ modules = {
         resource url: [plugin: pname, dir: "${vendor}/jqgrid/js", file: 'grid.base.js']
         resource url: [plugin: pname, dir: "${vendor}/jqgrid/js", file: 'grid.jqueryui.js']
         resource url: [plugin: pname, dir: "${vendor}/jqgrid/js", file: 'jquery.fmatter.js']
-        resource url: [plugin: pname, dir: "${pname}/scripts", file: 'gridz.js']
-        resource url: [plugin: pname, dir: "${pname}/scripts", file: 'gridFormEdit.js']
+        resource url: [plugin: pname, dir: "${pname}/dist/scripts", file: 'gridz.js']
+        resource url: [plugin: pname, dir: "${pname}/dist/scripts", file: 'grid_form_edit.js']
         resource url: [plugin: pname, dir: "${vendor}/bootstrapx-clickover/js", file: 'bootstrapx-clickover.js']
     }
 
@@ -49,6 +49,7 @@ modules = {
         resource id: 'js', url: [plugin: pname, dir: "${vendor}/angular", file: "angular.min.js"], nominify: true
         resource id: 'js', url: [plugin: pname, dir: "${vendor}/angular-resource", file: "angular-resource.min.js"], nominify: true
     }
+
     'angular-ui' {
         dependsOn 'angular'
         resource id: 'js', url: [plugin: pname, dir: "${vendor}/angular-ui/build", file: "angular-ui.js"], nominify: true
@@ -56,6 +57,7 @@ modules = {
         resource url: [plugin: pname, dir: "${vendor}/select2", file: "select2.css"]
         resource url: [plugin: pname, dir: "${vendor}/select2-bootstrap-css", file: "select2-bootstrap.css"]
     }
+
     'angular-bootstrap' {
         dependsOn 'angular'
         resource id: 'js', url: [plugin: pname, dir: "${vendor}/angular-bootstrap", file: "ui-bootstrap-tpls.js"], nominify: true
@@ -66,6 +68,5 @@ modules = {
         resource url: [plugin: pname, dir: "scripts", file: 'grails-default.js']
         resource url: [plugin: pname, dir: "scripts", file: 'scaffolding.js']
     }
-
 
 }

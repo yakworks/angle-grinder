@@ -3,7 +3,7 @@ if (typeof jQuery !== 'undefined') {
     $('#spinner').ajaxStart(function () {
       $(this).fadeIn();
     }).ajaxStop(function () {
-          $(this).fadeOut();
-        });
+      $(this).fadeOut();
+    });
   })(jQuery);
 }

@@ -32,6 +32,5 @@ grails.project.dependency.resolution = {
             export = false
         }
         runtime(":fields:1.3") { export = false }
-
     }
 }
