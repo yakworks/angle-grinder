@@ -14,13 +14,13 @@
     "font-awesome": "*",
     "bootstrapx-clickover": "git://github.com/lecar-red/bootstrapx-clickover.git",
     "jquery-ui-bootstrap": "https://github.com/addyosmani/jquery-ui-bootstrap/archive/gh-pages.zip",
-    "angular":"~1.0.6" ,
-    "angular-resource":"~1.0.6",
+    "angular": "~1.0.6",
+    "angular-resource": "~1.0.6",
     "angular-ui": "*",
-    "select2":"*",
-    "angular-bootstrap":"*",
+    "select2": "*",
+    "angular-bootstrap": "*",
     "angular-strap": "~0.7.1",
-    "select2-bootstrap-css":"t0m/select2-bootstrap-css"
+    "select2-bootstrap-css": "t0m/select2-bootstrap-css"
   },
   "exportsOverride": {
     "requirejs": {
