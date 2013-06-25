@@ -20,7 +20,8 @@ module.exports = (grunt) ->
         files: [
           dot: true
           src: [
-            "<%= appConfig.dist %>"
+            "<%= appConfig.dist %>/*"
+            "!<%= appConfig.dist %>/.git*"
           ]
         ]
 
@@ -33,6 +34,7 @@ module.exports = (grunt) ->
           dest: "<%= appConfig.dist %>"
           src: [
             "font/*"
+            "img/*"
             "styles/**/*.css"
           ]
         ]
