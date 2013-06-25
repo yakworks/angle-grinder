@@ -1,5 +1,5 @@
 /** Jquery UI Bootstrap overrides **/
-..ui-widget-content {
+.ui-widget-content {
   *background-image: none; /* ie 7 hack*/
 }
 
