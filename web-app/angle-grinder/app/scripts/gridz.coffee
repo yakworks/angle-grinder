@@ -32,8 +32,8 @@ Gridz:: =
     #Events .. beforeSelectRow
     optBeforeSelectRow = options.beforeSelectRow
     options.beforeSelectRow = (rowid, e) ->
-      self.beforeSelectRow.apply this, arguments_
-      optBeforeSelectRow.apply this, arguments_  if $.isFunction(optBeforeSelectRow)
+      self.beforeSelectRow.apply this, arguments
+      optBeforeSelectRow.apply this, arguments  if $.isFunction(optBeforeSelectRow)
       true
 
 
@@ -41,7 +41,7 @@ Gridz:: =
     _gridComplete = options.gridComplete
     options.gridComplete = ->
       self.gridComplete.apply self
-      _gridComplete.apply this, arguments_  if $.isFunction(_gridComplete)
+      _gridComplete.apply this, arguments  if $.isFunction(_gridComplete)
       self.$grid.trigger "gridComplete"
 
 
@@ -227,12 +227,12 @@ $.extend true, window, grinder: Grid: Gridz
 # Jquery Plugin definition
 $.fn.gridz = (option) ->
   if typeof option is "string"
-    otherArgs = Array::slice.call(arguments_, 1)
+    otherArgs = Array::slice.call(arguments, 1)
     instance = $(this).data("gridz")
     if instance and instance[option]
       instance[option].apply this, otherArgs
     else #try passing through to jqgrid
-    return $(this).jqGrid(arguments_)
+    return $(this).jqGrid(arguments)
   @each ->
     $this = $(this)
     instance = $this.data("gridz")
