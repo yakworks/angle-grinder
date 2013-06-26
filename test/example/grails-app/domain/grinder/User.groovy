@@ -10,8 +10,6 @@ import org.apache.commons.lang.builder.HashCodeBuilder
 class User implements Serializable {
 
     static transients = ['pass']
-    //static hasMany = [roles: SecRole]
-    //static belongsTo = SecRole
 
     /** Username */
     String login
