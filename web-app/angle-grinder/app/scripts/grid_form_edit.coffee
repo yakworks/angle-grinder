@@ -17,7 +17,6 @@ GridFormEdit = (opts) ->
       spin.spinner.stop()
       $spinDiv.slideUp "fast"
 
-
   # loads the formDiv with results of calling url
   @showForm = (url) ->
 
@@ -35,8 +34,6 @@ GridFormEdit = (opts) ->
       #set the focus for IE
       $("[autofocus]:not(:focus)").eq(0).focus()
 
-
-
   #calls showForm with the url of the edit screen
   @showEditForm = (rowId) ->
     urlLink = o.editFormUrl + "?id=" + rowId
@@ -49,7 +46,6 @@ GridFormEdit = (opts) ->
     $grid.on "click", "a.editActionLink", (evt) ->
       id = $(this).parents("tr:first").attr("id")
       self.showEditForm id
-
 
   @attachSubmitEvent = ->
     $formDiv.on "submit", "form[data-async]", (evt) ->
@@ -82,8 +78,6 @@ GridFormEdit = (opts) ->
         error: (request, error) ->
           $target.html request.responseText
 
-
-
   @attachResetEvent = ->
 
     #reset button
@@ -94,14 +88,13 @@ GridFormEdit = (opts) ->
       form.reset()
       $target.slideUp "fast"
 
-
   @init = ->
     self.attachEditActionEvents()
     self.attachSubmitEvent()
     self.attachResetEvent()
     self
 
-#****INITIALIZE******/
+#****INITIALIZE******
 GridFormEdit.newInstance = (o) ->
   new GridFormEdit(o).init()
 

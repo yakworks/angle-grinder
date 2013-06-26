@@ -1,5 +1,14 @@
 # angle-grinder
 
+## Documentation
+
+```
+grunt build
+(cd dist/ ; python -m SimpleHTTPServer 8000)
+```
+
+navigate to http://localhost:8000/docs
+
 ## Tasks
 
 ### `grunt bower` - install bower packages

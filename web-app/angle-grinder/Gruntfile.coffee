@@ -33,6 +33,18 @@ module.exports = (grunt) ->
           cleanTargetDir: true
 
     copy:
+      docs:
+        files: [
+          expand: true
+          dot: true
+          cwd: "<%= appConfig.app %>"
+          dest: "<%= appConfig.dist %>"
+          src: [
+            "*/**"
+            "index.html"
+          ]
+        ]
+
       dist:
         files: [
           expand: true

@@ -139,7 +139,7 @@ Gridz:: =
 
   #.trigger('resize')
 
-  #*************Action popup methods*************/
+  #*************Action popup methods*************
 
   ###
   adds the action column and formatter.
@@ -160,8 +160,6 @@ Gridz:: =
       formatter: (cellValue, colOptions, rowObject) ->
         func = opts.actionPopup.cellFormatter or self.actionPopupFormatter
         func containerId, cellValue, colOptions, rowObject
-
-
 
   ###
   default rowActionFormatter. containerId is the dom el to add the drop down to
