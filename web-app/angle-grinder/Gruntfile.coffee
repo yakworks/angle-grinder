@@ -25,6 +25,13 @@ module.exports = (grunt) ->
           ]
         ]
 
+    bower:
+      install:
+        options:
+          targetDir: "<%= appConfig.dist %>/third-party"
+          layout: "byComponent"
+          cleanTargetDir: true
+
     copy:
       dist:
         files: [
@@ -64,6 +71,7 @@ module.exports = (grunt) ->
   grunt.registerTask "build", [
     "clean"
     "copy"
+    "bower"
     "coffeelint"
     "coffee"
     "less"

@@ -12,7 +12,7 @@
     "bootstrap": "~2.3.1",
     "font-awesome": "*",
     "bootstrapx-clickover": "git://github.com/lecar-red/bootstrapx-clickover.git",
-    "jquery-ui-bootstrap": "https://github.com/addyosmani/jquery-ui-bootstrap/archive/gh-pages.zip",
+    "jquery-ui-bootstrap": "./custom_components/jquery-ui-bootstrap",
     "angular": "~1.0.6",
     "angular-resource": "~1.0.6",
     "angular-ui": "*",
@@ -20,5 +20,30 @@
     "angular-bootstrap": "*",
     "angular-strap": "~0.7.1",
     "select2-bootstrap-css": "t0m/select2-bootstrap-css"
+  },
+  "exportsOverride": {
+    "angular-ui": {
+      "js": "build/angular-ui.js",
+      "css": "build/angular-ui.css"
+    },
+    "bootstrap": {
+      "img": "img/*.png",
+      "js": "js/*.js",
+      "less": "less/*.less"
+    },
+    "bootstrap-select": {
+      "js": "bootstrap-select.js",
+      "css": "bootstrap-select.css"
+    },
+    "bootstrap-clickover": {
+      "js": "js/bootstrap-clickover.js"
+    },
+    "jqgrid": {
+      "js": "js/*.js",
+      "js/i18n": "js/i18n/*.js",
+      "js/plugins": "plugins/*.js",
+      "css": "css/**/*.css",
+      "css/plugins": "plugins/*.css"
+    }
   }
 }
