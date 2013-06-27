@@ -12,12 +12,15 @@ module.controller("ListCtrl", function($scope, $rootScope, $routeParams, $locati
     $scope.errors = null;
     $scope.dataLoaded = false;
 
-    Grails.get({id: id}, function(item) {
+    var onSuccess = function(item) {
       $scope.item = item;
       $scope.dataLoaded = true;
       EditDialog.open($scope.editTemplateUrl, $scope.item, false)
+    };
 
-    }, errorHandler.curry($scope, $location, Flash));
+    var onError = errorHandler.curry($scope, Flash);
+
+    Grails.get({id: id}, onSuccess, onError);
   };
 
   $scope.quickSearch = function(search) {
