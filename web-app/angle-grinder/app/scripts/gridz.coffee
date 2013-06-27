@@ -1,10 +1,12 @@
 # Class definition
+# TODO use pure coffeescript clas
 Gridz = (element, options) ->
   @init element, options
 
 Gridz:: =
   init: (element, opts) ->
     $el = $(element)
+
     @$element = $el
     @$el = $el
     @$grid = $el
@@ -13,52 +15,45 @@ Gridz:: =
     ###
     the containing div for the grid , will be built after jqGrid is called
     ###
-    @gboxId = "gbox_" + $el.attr("id")
+    @gboxId = "gbox_#{@gridId}"
     @options = @getOptions(opts)
 
-    #console.log(this.options.actionPopup)
-    @addRowActionColumn()  if @options.actionPopup
+    @addRowActionColumn() if @options.actionPopup
 
-    #call the jqgrid
+    # call the jqgrid
     $el.jqGrid @options
+
     @responsiveResize()
 
   getOptions: (options) ->
-    self = this
-
-    #console.log($.fn.gridz.defaults)
     options = $.extend({}, $.fn.gridz.defaults, options)
 
     #Events .. beforeSelectRow
     optBeforeSelectRow = options.beforeSelectRow
-    options.beforeSelectRow = (rowid, e) ->
-      self.beforeSelectRow.apply this, arguments
+    options.beforeSelectRow = (rowid, e) =>
+      @beforeSelectRow.apply this, arguments
       optBeforeSelectRow.apply this, arguments  if $.isFunction(optBeforeSelectRow)
       true
 
-
-    #Events .. gridComplete
+    # Events .. gridComplete
     _gridComplete = options.gridComplete
-    options.gridComplete = ->
-      self.gridComplete.apply self
-      _gridComplete.apply this, arguments  if $.isFunction(_gridComplete)
-      self.$grid.trigger "gridComplete"
+    options.gridComplete = =>
+      @gridComplete.apply @
+      _gridComplete.apply this, arguments if $.isFunction(_gridComplete)
+      @$grid.trigger "gridComplete"
 
-
-    #if sortable is true then add exclusion for the action column
+    # if sortable is true then add exclusion for the action column
     if options.actionPopup and options.sortable
-      options.sortable = exclude: "#" + @gridId + "_row_action_col"
+      options.sortable = exclude: "##{@gridId}_row_action_col"
 
-    #console.log(options)
     options
-
 
   ###
   stuff to do after the grid is completed loading and rendering
   ###
   gridComplete: ->
-    @actionPopupSetup()  if @options.actionPopup
-    gid = "jqgh_" + @$element.attr("id") + "_row_action_col"
+    @actionPopupSetup() if @options.actionPopup
+    gid = "jqgh_#{@$element.attr("id")}_row_action_col"
 
   # disable the sortable property on the action column
   #$('tr.ui-jqgrid-labels').sortable({ cancel: 'th:#'+gid});
@@ -69,8 +64,6 @@ Gridz:: =
   Handles proper multi selection of rows
   ###
   beforeSelectRow: (rowid, e) ->
-
-    #alert(e)
     $this = $(this)
     rows = @rows
     # get id of the previous selected row
@@ -82,6 +75,7 @@ Gridz:: =
     i = undefined
     rowidIndex = undefined
     isCheckBox = $(e.target).hasClass("cbox")
+
     if not e.ctrlKey and not e.shiftKey and not e.metaKey and not isCheckBox
       $this.jqGrid "resetSelection"
     else if startId and e.shiftKey
@@ -102,16 +96,16 @@ Gridz:: =
         iEnd = Math.max(startRow.rowIndex, rowidIndex)
         i = iStart
         while i <= iEnd
-
           # the row with rowid will be selected by
           # jqGrid. So we don't need select it
-          $this.jqGrid "setSelection", rows[i].id, false  if i isnt rowidIndex
+          $this.jqGrid "setSelection", rows[i].id, false if i isnt rowidIndex
           i++
 
       # clear text selection
       if document.selection and document.selection.empty
         document.selection.empty()
-      else window.getSelection().removeAllRanges()  if window.getSelection
+      else window.getSelection().removeAllRanges() if window.getSelection
+
     true
 
   ###
@@ -120,7 +114,7 @@ Gridz:: =
   ###
   responsiveResize: ->
     $grid = @$element
-    gboxId = "#gbox_" + $grid.attr("id")
+    gboxId = "#gbox_#{$grid.attr("id")}"
     $(window).on "resize", (event, ui) ->
 
       # Get width of parent container which is assumed to be expanded to span
@@ -128,14 +122,8 @@ Gridz:: =
       curWidth = $(gboxId).width()
       w = parWidth - 1 # add -1 Fudge factor to prevent horizontal scrollbars
 
-      #console.log("span width " + parWidth + " gridWidth " + gWidth)
       if Math.abs(w - curWidth) > 2
-
-        #alert("resize to " + width)
-        console.log "span width " + parWidth + " gridWidth " + curWidth
         $grid.setGridWidth w
-        console.log "new width " + w
-
 
   #.trigger('resize')
 
@@ -147,16 +135,16 @@ Gridz:: =
   addRowActionColumn: ->
     self = this
     opts = @options
-    containerId = "gbox_" + @$element.attr("id")
+    containerId = "gbox_#{@$element.attr("id")}"
     opts.colModel.unshift
-      name: "row_action_col" #can't resize
+      name: "row_action_col" # can't resize
       label: " "
       width: 20
       sortable: false
       search: false
       hidedlg: true
       resizable: false
-      fixed: true #don't auto calc size
+      fixed: true # don't auto calc size
       formatter: (cellValue, colOptions, rowObject) ->
         func = opts.actionPopup.cellFormatter or self.actionPopupFormatter
         func containerId, cellValue, colOptions, rowObject
@@ -173,27 +161,33 @@ Gridz:: =
     self = this
     options = @options
     actionMenu = undefined
+
     if options.actionPopup.menuList
       actionMenu = options.actionPopup.menuList
     else
-      actionMenu = '<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
-                      <li><a href="#" class="row_action_show" data-dismiss="clickover">
-                        <i class="icon-eye-open"></i> show</a>
-                      </li>
-                      <li><a href="#" class="row_action_edit" data-dismiss="clickover">
-                        <i class="icon-edit"></i> edit</a>
-                      </li>
-                      <li><a href="#" class="row_action_delete" data-dismiss="clickover">
-                        <i class="icon-trash"></i> delete</a>
-                      </li>
-                    </ul>'
+      actionMenu = """
+                   <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
+                     <li><a href="#" class="row_action_show" data-dismiss="clickover">
+                       <i class="icon-eye-open"></i>show</a>
+                     </li>
+                     <li><a href="#" class="row_action_edit" data-dismiss="clickover">
+                       <i class="icon-edit"></i>edit</a>
+                     </li>
+                     <li><a href="#" class="row_action_delete" data-dismiss="clickover">
+                       <i class="icon-trash"></i>delete</a>
+                     </li>
+                   </ul>
+                   """
+
     $(".jqg-row-action").clickover
       html: true
       content: actionMenu
-      template: '<div class="popover row-action-popover">
+      template: """
+                <div class="popover row-action-popover">
                   <div class="arrow"></div>
-                  <div class="popover-content dropdown clearfix" style="padding:0;"></div>
-                 </div>'
+                  <div class="popover-content dropdown clearfix" style="padding: 0;"></div>
+                </div>
+                """
       onShown: ->
         self.actionPopupOnShow.call self, this
 
@@ -204,12 +198,16 @@ Gridz:: =
   #fired when the clickover is shown
   actionPopupOnShow: (clickoverEl) ->
     self = this
+
     $grid = @$element
     id = $(clickoverEl.$element, $grid.rows).parents("tr:first").attr("id")
-    $menu = $("#" + self.gboxId + " .dropdown-menu")
+
     $grid.data "actionRowId", id
     $grid.jqGrid "resetSelection"
     $grid.jqGrid "setSelection", id
+
+    $menu = $("##{self.gboxId} .dropdown-menu")
+
     $menu.on "click", "li a.row_action_show", (e) ->
       $grid.trigger "showAction"
 
@@ -229,7 +227,7 @@ $.fn.gridz = (option) ->
     instance = $(this).data("gridz")
     if instance and instance[option]
       instance[option].apply this, otherArgs
-    else #try passing through to jqgrid
+    else # try passing through to jqgrid
     return $(this).jqGrid(arguments)
   @each ->
     $this = $(this)
@@ -238,6 +236,7 @@ $.fn.gridz = (option) ->
     $this.data "gridz", (instance = new Gridz(this, options))  unless instance
 
 $.fn.gridz.Constructor = Gridz
+
 $.fn.gridz.defaults =
   prmNames:
     page: "page"
@@ -249,8 +248,8 @@ $.fn.gridz.defaults =
     repeatitems: false
 
   datatype: "json"
-  mtype: "GET" #for the ajax json read
-  rowNum: 20 #num rows to show by default
+  mtype: "GET" # for the ajax json read
+  rowNum: 20 # num rows to show by default
   rowList: [10, 20, 50, 100]
   altRows: true
   shrinkToFit: false
@@ -260,24 +259,18 @@ $.fn.gridz.defaults =
   multiselect: true #one or more row selections
   pager: "#gridPager"
 
-# onSortCol:sortColumn,
-# onPaging:pagingChange,
+  # onSortCol:sortColumn,
+  # onPaging:pagingChange,
   beforeSelectRow: null
   gridComplete: null
   actionPopup:
     formatter: null
     menuList: null
 
-# gridComplete:function(){
-#     setupActionClickOver()
-# }
-
-#Extra formatters for jqGrid
+# Extra formatters for jqGrid
 $.extend $.fn.fmatter,
   okIcon: (cellVal, options, rowdata) ->
-    (if cellVal then "<i class='icon-ok'></i>" else "")
+    if cellVal then "<i class='icon-ok'></i>" else ""
 
   editActionLink: (cellVal, options, rowdata) ->
-
-    #console.log(rowdata)
-    "<a class=\"editActionLink\" href=\"#\" > " + cellVal + "</a>"
+    "<a class='editActionLink' href='#' >#{cellVal}</a>"
