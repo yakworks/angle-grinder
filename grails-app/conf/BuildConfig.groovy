@@ -31,6 +31,9 @@ grails.project.dependency.resolution = {
         build(":tomcat:$grailsVersion", ":release:2.2.0", ":rest-client-builder:1.0.3") {
             export = false
         }
+
+        compile ":coffeescript-resources:0.3.8"
+
         runtime(":fields:1.3") { export = false }
     }
 }

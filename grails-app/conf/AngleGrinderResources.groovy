@@ -67,10 +67,10 @@ modules = {
     "angular-scaffolding" {
         dependsOn "angular-ui"
 
-        resource url: [plugin: plugin, dir: "scripts", file: "services.js"]
-        resource url: [plugin: plugin, dir: "scripts", file: "directives.js"]
-        resource url: [plugin: plugin, dir: "scripts", file: "controllers.js"]
-        resource url: [plugin: plugin, dir: "scripts", file: "application.js"]
+        resource url: [plugin: plugin, dir: "coffee", file: "services.coffee"]
+        resource url: [plugin: plugin, dir: "coffee", file: "directives.coffee"]
+        resource url: [plugin: plugin, dir: "coffee", file: "controllers.coffee"]
+        resource url: [plugin: plugin, dir: "coffee", file: "application.coffee"]
     }
 
 }
