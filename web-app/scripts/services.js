@@ -59,7 +59,7 @@ module.service("EditDialog", function ($dialog) {
       }
     });
 
-    //override so we can intercept form dirty and prevent escape
+    // override so we can intercept form dirty and prevent escape
     dlg.handledEscapeKey = function (e) {
       if (e.which === 27) {
         e.preventDefault();
@@ -70,22 +70,14 @@ module.service("EditDialog", function ($dialog) {
       }
     };
 
-    //override so we can intercept form dirty and prevent backdrop click
+    // override so we can intercept form dirty and prevent backdrop click
     dlg.handleBackDropClick = function (e) {
-      //console.log("handleBackDropClick")
       e.preventDefault();
       if (!dlg.$scope.editForm.$dirty) {
         dlg.close();
         dlg.$scope.$apply();
       }
     };
-
-    //warn if navigating away
-    // window.onbeforeunload = function () {
-    //     if ($scope.editForm.$dirty) {
-    //         return "You have unsaved pages. Do you want to stay on the page?";
-    //     }
-    // }
 
     dlg.open(editTemplateUrl, "EditItemController")
   };

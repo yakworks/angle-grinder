@@ -18,12 +18,12 @@ Function.prototype.curry = function () {
 
 /**
  * Generic $resource error handler used by all controllers.
+ * TODO Remove it from the global namespace, create ng service?
  */
 function errorHandler($scope, Flash, response) {
   switch (response.status) {
     case 404: // resource not found - return to the list and display message returned by the controller
       Flash.error(response.data.message);
-      //$location.path("/list");
       break;
     case 409: // optimistic locking failure - display error message on the page
       $scope.message = {level: "error", text: response.data.message};

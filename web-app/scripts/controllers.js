@@ -4,19 +4,17 @@ module.controller("ListCtrl", function ($scope, $rootScope, $routeParams, $locat
 
   $scope.createDialog = function () {
     $scope.item = new Grails;
-    //$scope.createForm = true;
     EditDialog.open($scope.editTemplateUrl, $scope.item, true)
   }
 
   $scope.editDialog = function (id) {
-    //clear errors
+    // clear errors
     $scope.errors = null;
     $scope.dataLoaded = false;
 
     Grails.get({id: id}, function (item) {
       $scope.item = item;
       $scope.dataLoaded = true;
-      //openEditDialog($scope.item,false)
       EditDialog.open($scope.editTemplateUrl, $scope.item, false)
 
     }, errorHandler.curry($scope, $location, Flash));
@@ -24,31 +22,12 @@ module.controller("ListCtrl", function ($scope, $rootScope, $routeParams, $locat
   };
 
   $scope.quickSearch = function (search) {
-    //console.log(searchCall)
     $rootScope.$broadcast("searchUpdated", search)
   }
 
-  // $scope.createTest = function() {
-  //     $scope.item = new Grails;
-  //     var i = $scope.item
-  //     angular.extend(i,{
-  //       contact :{
-  //         firstName :"x",
-  //         email:"j@j.com"
-  //       },
-  //       //login:"l" + Math.floor(Math.random() * 9999),
-  //       password:"123",
-  //       repassword:"123"
-  //     });
-
-  //     i.$save(function(response) {
-  //         console.log("response " + response.message)
-  //     }, errorHandler.curry($scope, $location, Flash));
-  // };
-
 });
 
-//dialog is the passed in instance from the angualr-ui dialog
+// dialog is the passed in instance from the angualr-ui dialog
 module.controller("EditItemController", function ($scope, $rootScope, dialog, item, isCreateNew, Flash) {
   console.log($scope)
 
@@ -63,27 +42,9 @@ module.controller("EditItemController", function ($scope, $rootScope, dialog, it
     console.log("saveOrUpdate " + item)
     $scope.saving = true
     item.$save(function (response) {
-      //console.log("saved");console.log(response);
       $scope.closeEditDialog()
       $rootScope.$broadcast("itemUpdated", response)
     }, errorHandler.curry($scope, Flash));
   };
-
-  // function updateGrid(data){
-  //     if(grid.jqGrid("getInd",data.id) === false){
-  //         grid.jqGrid("addRowData", data.id,data,"first")
-  //     }else{
-  //         grid.jqGrid("setRowData", data.id,data)
-  //     }
-
-  //     //$target.html("").hide();
-  //     var ind = grid[0].rows.namedItem(data.id);
-
-  //     //flash the row so use knows its updated
-  //     $(ind).css("background-color", "#DFF0D8")
-  //     $(ind).delay(100).fadeOut("medium",function(){
-  //       $(ind).css("background-color", "")
-  //     }).fadeIn("fast")
-  // }
 
 });
