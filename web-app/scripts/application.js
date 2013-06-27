@@ -5,14 +5,15 @@ function toArray(element) {
   return Array.prototype.slice.call(element);
 }
 
-Function.prototype.curry = function () {
+Function.prototype.curry = function() {
   if (arguments.length < 1) {
     return this; //nothing to curry with - return function
   }
-  var __method = this;
+
+  var self = this;
   var args = toArray(arguments);
-  return function () {
-    return __method.apply(this, args.concat(toArray(arguments)));
+  return function() {
+    return self.apply(this, args.concat(toArray(arguments)));
   }
 }
 

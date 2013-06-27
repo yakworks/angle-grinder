@@ -1,15 +1,15 @@
 var module = angular.module("admin.directives", []);
 
-module.directive("agGrid", function () {
+module.directive("agGrid", function() {
   function link($scope, element, attrs) {
     var gridOpts = $scope.$eval(attrs.agGrid)
 
     var $grid = $("#grid", element)
 
-    $grid.on("click", "a.editActionLink", function (evt) {
+    $grid.on("click", "a.editActionLink", function(evt) {
       evt.preventDefault();
       var id = $(this).parents("tr:first").attr("id");
-      $scope.$apply(function () {
+      $scope.$apply(function() {
         $scope.editDialog(id)
       });
     })
@@ -17,7 +17,7 @@ module.directive("agGrid", function () {
     var grid = $grid[0]
 
     // catch broadcast event after save. This will need to change
-    $scope.$on("itemUpdated", function (evt, data) {
+    $scope.$on("itemUpdated", function(evt, data) {
       if ($grid.jqGrid("getInd", data.id) === false) {
         $grid.jqGrid("addRowData", data.id, data, "first")
       } else {
@@ -28,12 +28,12 @@ module.directive("agGrid", function () {
 
       // flash the row so use knows its updated
       $(ind).css("background-color", "#DFF0D8")
-      $(ind).delay(100).fadeOut("medium",function () {
+      $(ind).delay(100).fadeOut("medium",function() {
         $(ind).css("background-color", "")
       }).fadeIn("fast")
     });
 
-    $scope.$on("searchUpdated", function (evt, filter, cscope) {
+    $scope.$on("searchUpdated", function(evt, filter, cscope) {
       if (cscope) cscope.searching = true
       $grid.setGridParam({
         search: true,
