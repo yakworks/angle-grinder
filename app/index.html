@@ -43,67 +43,7 @@
     <script src="docs/scripts/docs.js"></script>
 
     <!-- jqGrid setup -->
-    <script>
-        if (!window.console) console = {log: function () {
-        }};
-
-        $(function () {
-            //do common
-            $('#topbar').load('docs/navbar-top.html')
-            $('#sidebar').load('docs/gridz-sidebar.html')
-
-            $('#myTabs').bind('show', function (e) {
-                var pattern = /#.+/gi //use regex to get anchor(==selector)
-                var contentID = e.target.toString().match(pattern)[0]; //get anchor
-                //load content for selected tab
-                $(contentID).load(baseURL + contentID.replace('#', ''), function () {
-                    $('#myTabs').tab(); //reinitialize tabs
-                });
-            });
-
-            var $grid = $("#demoGrid")
-
-            var columns = [
-                { name: 'id', label: 'Inv No', key: true, width: 60, align: "right", sorttype: "int", search: true}
-                ,
-                { name: 'customer.name', label: 'Customer', width: 250, formatter: custFormatter}
-                ,
-                { name: 'tranDate', label: 'Date', editable: true, label: 'Date', width: 90, sorttype: "date", formatter: "date"}
-                ,
-                { name: 'description', width: 150}
-                ,
-                { name: 'amount', width: 80, align: "right", sorttype: "float", formatter: "number"}
-                ,
-                { name: 'tax', width: 80, align: "right", sorttype: "float"}
-                ,
-                { name: 'total', width: 80, align: "right", sorttype: "float"}
-                ,
-                { name: 'note', width: 250, sortable: false, hidden: true}
-
-            ]
-
-            function custFormatter(cellValue, colOptions, rowObject) {
-                return '<a class="" title="" data-toggle="popover" href="#" >' + cellValue + ' &nbsp;&nbsp;</a><i class="icon-zoom-in" style="font-size:11px;color:#777"></i>'
-            }
-
-            $grid.gridz({
-                data: sampleData,
-                datatype: "local",
-                colModel: columns
-            })
-
-            var gridz = $grid.data('gridz')
-
-            $grid.on('editAction', function (e, rowId, gridObject) {
-                console.log(e)
-                console.log(this)
-                console.log(gridObject)
-                $grid.jqGrid('editGridRow', rowId, {reloadAfterSubmit: false})
-            })
-        }); //end jq $.ready
-
-    </script>
-
+    <script src="scripts/application.js"></script>
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -113,8 +53,7 @@
 
 <body data-spy="scroll" data-target=".bs-docs-sidebar" data-twttr-rendered="true">
 
-<div id="topbar">
-</div>
+<div id="topbar"></div>
 
 <!-- Subhead ================================================== -->
 <header class="jumbotron subhead" id="overview">
@@ -126,8 +65,6 @@
 </header>
 
 <div class="container">
-
-
     <aside class="sidebar bs-docs-sidebar">
         <ul class="nav nav-list bs-docs-sidenav">
             <li><a href="#simple-jqgrid"><i class="icon-chevron-right"></i> Gridz with toolbar</a></li>
@@ -138,7 +75,6 @@
 
 
     <section class='content'>
-
         <section id="simple-jqgrid" class='anchor'>
             <div class="navbar navbar-grid">
                 <div class="navbar-inner with-selected-pointer with-grid-options">
@@ -181,11 +117,8 @@
 
             <table id="demoGrid"></table>
             <div id="gridPager"></div>
-
         </section>
-
     </section>
-
 </div>
 
 </body>
