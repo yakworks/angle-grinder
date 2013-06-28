@@ -217,7 +217,6 @@ class SimpleJqGridCtrl
     $grid.jqGrid
       data: mydata
       datatype: "local"
-      height: 250
       rowNum: 10
       rowList: [10, 20, 30]
 
@@ -273,6 +272,7 @@ class SimpleJqGridCtrl
         sortable: false
         editable: true
       ]
+
       pager: "#gridPager"
       viewrecords: true
       hidegrid: false
