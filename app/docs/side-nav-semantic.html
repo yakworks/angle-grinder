@@ -1,141 +1,141 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <title>Semantic playground</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
+  <meta charset="utf-8">
+  <title>Semantic playground</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
 
-    <link rel="stylesheet" href="../dist/styles/boot.css">
-    <link rel="stylesheet" href="../styles/jq-ui-boot-grid.css">
-    <link rel="stylesheet" href="styles/demo.css">
+  <link rel="stylesheet" href="../dist/styles/boot.css">
+  <link rel="stylesheet" href="../styles/jq-ui-boot-grid.css">
+  <link rel="stylesheet" href="styles/demo.css">
 
 
-    <style>
-        body {
-            padding-top: 60px;
-            padding-bottom: 40px;
-        }
+  <style>
+    body {
+      padding-top: 60px;
+      padding-bottom: 40px;
+    }
 
-        #toggleSidebar {
-            color: #779DD7;
-            position: relative;
-        }
+    #toggleSidebar {
+      color: #779DD7;
+      position: relative;
+    }
 
-        #toggleSidebarButton {
-            position: absolute;
-            top: 0px;
-            left: 0px;
-        }
+    #toggleSidebarButton {
+      position: absolute;
+      top: 0px;
+      left: 0px;
+    }
 
-        .spanMargin0 {
-            margin-left: 0 !important;
-        }
+    .spanMargin0 {
+      margin-left: 0 !important;
+    }
 
-    </style>
+  </style>
 </head>
 
 <body>
 <div class="container">
-    <h2>Using semantic aside.sidebar and section.content</h2>
-    <aside class="sidebar">
-        <ul class="nav nav-list nav-side">
-            <li>
-                <a data-toggle="collapse" href="#user-submenu" class="accordion-toggle">
-                    Users &amp; Groups <i class="icon-chevron-right"></i>
-                </a>
+  <h2>Using semantic aside.sidebar and section.content</h2>
+  <aside class="sidebar">
+    <ul class="nav nav-list nav-side">
+      <li>
+        <a data-toggle="collapse" href="#user-submenu" class="accordion-toggle">
+          Users &amp; Groups <i class="icon-chevron-right"></i>
+        </a>
 
-                <div id="user-submenu" class="collapse accordion-body">
-                    <ul class="nav nav-list submenu">
-                        <li class=""><a href="#">List Users</a></li>
-                        <li><a href="#">Add New User</a></li>
-                        <li><a href="#">Groups</a></li>
-                    </ul>
-                </div>
-            </li>
-
-            <li class="">
-                <a href="#tab2">
-                    Reports &amp; Charts
-                    <i class="icon-chevron-right"></i>
-                </a>
-            </li>
-
-            <li id="navigation-ar-setup" class="accordion">
-                <a data-toggle="collapse" href="#ar-setup-submenu" class="accordion-toggle">
-                    A/R Setup <i class="icon-chevron-right"></i>
-                </a>
-
-                <div id="ar-setup-submenu" class="collapse accordion-body">
-                    <ul class="nav nav-list submenu">
-                        <li class=""><a href="#">Transaction Types</a></li>
-                        <li><a href="#">Status Codes</a></li>
-                    </ul>
-                </div>
-            </li>
-
-            <li><a href="#tab4"> Orgs &amp; Customers<i class="icon-chevron-right"></i></a></li>
-            <li><a href="#tab5"> Autocash <i class="icon-chevron-right"></i></a></li>
-            <li><a href="#navs">General </a></li>
-        </ul>
-    </aside>
-
-    <section id="page" class='content'>
-        <h2>This area is for the main content</h2>
-
-        <div class="row-fluid show-grid eq-heights">
-            <div class="span6">
-                <h2>nested span6</h2>
-
-                <p>also demonstrates the eq-heights</p>
-            </div>
-            <div class="span6">
-                <h2>nested span6</h2>
-
-                <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor
-                    mauris
-                    condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis
-                    euismod.
-                    Donec sed odio dui. </p>
-            </div>
+        <div id="user-submenu" class="collapse accordion-body">
+          <ul class="nav nav-list submenu">
+            <li class=""><a href="#">List Users</a></li>
+            <li><a href="#">Add New User</a></li>
+            <li><a href="#">Groups</a></li>
+          </ul>
         </div>
-        <!--row-->
+      </li>
 
-    </section>
+      <li class="">
+        <a href="#tab2">
+          Reports &amp; Charts
+          <i class="icon-chevron-right"></i>
+        </a>
+      </li>
 
-    <div class="container"></div>
-    <!--clears floats after section-->
-    <footer>
-        <p>&copy; Company 2013</p>
-    </footer>
+      <li id="navigation-ar-setup" class="accordion">
+        <a data-toggle="collapse" href="#ar-setup-submenu" class="accordion-toggle">
+          A/R Setup <i class="icon-chevron-right"></i>
+        </a>
+
+        <div id="ar-setup-submenu" class="collapse accordion-body">
+          <ul class="nav nav-list submenu">
+            <li class=""><a href="#">Transaction Types</a></li>
+            <li><a href="#">Status Codes</a></li>
+          </ul>
+        </div>
+      </li>
+
+      <li><a href="#tab4"> Orgs &amp; Customers<i class="icon-chevron-right"></i></a></li>
+      <li><a href="#tab5"> Autocash <i class="icon-chevron-right"></i></a></li>
+      <li><a href="#navs">General </a></li>
+    </ul>
+  </aside>
+
+  <section id="page" class='content'>
+    <h2>This area is for the main content</h2>
+
+    <div class="row-fluid show-grid eq-heights">
+      <div class="span6">
+        <h2>nested span6</h2>
+
+        <p>also demonstrates the eq-heights</p>
+      </div>
+      <div class="span6">
+        <h2>nested span6</h2>
+
+        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor
+          mauris
+          condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis
+          euismod.
+          Donec sed odio dui. </p>
+      </div>
+    </div>
+    <!--row-->
+
+  </section>
+
+  <div class="container"></div>
+  <!--clears floats after section-->
+  <footer>
+    <p>&copy; Company 2013</p>
+  </footer>
 
 </div>
 <!-- /container -->
 
 <div class="container">
-    <h2>Using semantic aside.sidebar-right and section.content-left</h2>
-    <section id="main" class='content-left'>
-        <h2>This area is for the main content</h2>
+  <h2>Using semantic aside.sidebar-right and section.content-left</h2>
+  <section id="main" class='content-left'>
+    <h2>This area is for the main content</h2>
 
-        <div class="row-fluid show-grid">
-            <div class="span3">
-                <h2>nested span3</h2>
-            </div>
-            <div class="span9">
-                <h2>nested span9</h2>
-            </div>
-        </div>
-        <!--row-->
-    </section>
+    <div class="row-fluid show-grid">
+      <div class="span3">
+        <h2>nested span3</h2>
+      </div>
+      <div class="span9">
+        <h2>nested span9</h2>
+      </div>
+    </div>
+    <!--row-->
+  </section>
 
-    <aside class="sidebar-right">
-        <ul class="nav nav-list nav-side">
-            <li><a href="#tab4"> Orgs &amp; Customers<i class="icon-chevron-right"></i></a></li>
-            <li><a href="#tab5"> Autocash <i class="icon-chevron-right"></i></a></li>
-            <li><a href="#navs">General </a></li>
-        </ul>
-    </aside>
+  <aside class="sidebar-right">
+    <ul class="nav nav-list nav-side">
+      <li><a href="#tab4"> Orgs &amp; Customers<i class="icon-chevron-right"></i></a></li>
+      <li><a href="#tab5"> Autocash <i class="icon-chevron-right"></i></a></li>
+      <li><a href="#navs">General </a></li>
+    </ul>
+  </aside>
 
 </div>
 <!-- /container -->
@@ -148,60 +148,60 @@
 
 <script type="text/javascript">
 
-    $(function () {
+  $(function () {
 
-        //$('.accordion').on('show hide', function(e){
-        //    $(e.target).siblings('.accordion').find('.accordion-toggle i').toggleClass('icon-chevron-right icon-arrow-up', 200);
-        //});
+    //$('.accordion').on('show hide', function(e){
+    //    $(e.target).siblings('.accordion').find('.accordion-toggle i').toggleClass('icon-chevron-right icon-arrow-up', 200);
+    //});
 
-        //for class .equal-heights find tallest span and set them all that high
-        eqHeights();
+    //for class .equal-heights find tallest span and set them all that high
+    eqHeights();
 
-        toggleSideBar();
+    toggleSideBar();
+  });
+
+  function eqHeights() {
+    $('.eq-heights').each(function () {
+      var spans = $(this).children('[class^="span"],[class*=" span"]');
+      maxHeight = Math.max.apply(
+          Math, spans.map(function () {
+            return $(this).height();
+          }).get());
+
+      spans.height(maxHeight);
+      //alert("equal heights " +maxHeight);
+    });
+  }
+
+  function toggleSideBar() {
+    $('a.toggles').click(function () {
+      $('a.toggles i').toggleClass('icon-chevron-left icon-chevron-right');
+
+      $('#sidebar1').animate({
+        width: 'toggle'
+      }, 0);
+
+      $('#content1').toggleClass('span12 span9');
+      $('#content1').toggleClass('spanMargin0');
+
     });
 
-    function eqHeights() {
-        $('.eq-heights').each(function () {
-            var spans = $(this).children('[class^="span"],[class*=" span"]');
-            maxHeight = Math.max.apply(
-                    Math, spans.map(function () {
-                        return $(this).height();
-                    }).get());
 
-            spans.height(maxHeight);
-            //alert("equal heights " +maxHeight);
-        });
-    }
+  }
 
-    function toggleSideBar() {
-        $('a.toggles').click(function () {
-            $('a.toggles i').toggleClass('icon-chevron-left icon-chevron-right');
+  function enhancedAccordion() {
+    $('.accordion').on('show', function (e) {
+      $(e.target).prev('.accordion-heading').parent().addClass('open');
+    });
 
-            $('#sidebar1').animate({
-                width: 'toggle'
-            }, 0);
+    $('.accordion').on('hide', function (e) {
+      $(this).find('.accordion-toggle').not($(e.target)).parents('.accordion-group').removeClass('open');
+    });
 
-            $('#content1').toggleClass('span12 span9');
-            $('#content1').toggleClass('spanMargin0');
-
-        });
-
-
-    }
-
-    function enhancedAccordion() {
-        $('.accordion').on('show', function (e) {
-            $(e.target).prev('.accordion-heading').parent().addClass('open');
-        });
-
-        $('.accordion').on('hide', function (e) {
-            $(this).find('.accordion-toggle').not($(e.target)).parents('.accordion-group').removeClass('open');
-        });
-
-        $('.accordion').each(function () {
-            $(this).find('.accordion-body.in').parent().addClass('open');
-        });
-    }
+    $('.accordion').each(function () {
+      $(this).find('.accordion-body.in').parent().addClass('open');
+    });
+  }
 
 
 </script>

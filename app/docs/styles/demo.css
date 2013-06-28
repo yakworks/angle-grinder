@@ -2,33 +2,33 @@
 -------------------------------------------------- */
 
 .show-grid {
-  margin-top: 10px;
-  margin-bottom: 20px;
+    margin-top: 10px;
+    margin-bottom: 20px;
 }
 
 .show-grid [class*="span"] {
-  background-color: #eee;
-  border-radius: 3px;
-  min-height: 40px;
+    background-color: #eee;
+    border-radius: 3px;
+    min-height: 40px;
 }
 
 .show-grid [class*="span"]:hover {
-  background-color: #ddd;
+    background-color: #ddd;
 }
 
 .show-grid .show-grid {
-  margin-top: 0;
-  margin-bottom: 0;
+    margin-top: 0;
+    margin-bottom: 0;
 }
 
 .show-grid .show-grid [class*="span"] {
-  margin-top: 5px;
+    margin-top: 5px;
 }
 
 .show-grid [class*="span"] [class*="span"] {
-  background-color: #ccc;
+    background-color: #ccc;
 }
 
 .show-grid [class*="span"] [class*="span"] [class*="span"] {
-  background-color: #999;
+    background-color: #999;
 }

@@ -10,13 +10,13 @@ $ ->
 
   $("#topbar").load "docs/navbar-top.html"
   $("#sidebar").load "docs/gridz-sidebar.html"
+
   $("#myTabs").bind "show", (e) ->
     pattern = /#.+/g
     contentID = e.target.toString().match(pattern)[0]
     $(contentID).load baseURL + contentID.replace("#", ""), ->
       $("#myTabs").tab()
 
-  $grid = $("#demoGrid")
   columns = [
     name: "id"
     label: "Inv No"
@@ -63,12 +63,15 @@ $ ->
     hidden: true
   ]
 
+  $grid = $("#demoGrid")
+
   $grid.gridz
     data: sampleData
     datatype: "local"
     colModel: columns
 
-  gridz = $grid.data("gridz")
+  $grid.data("gridz")
+
   $grid.on "editAction", (e, rowId, gridObject) ->
     $grid.jqGrid "editGridRow", rowId,
       reloadAfterSubmit: false
