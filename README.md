@@ -1,20 +1,122 @@
-# angle-grinder
+# Angle Grinder
 
-## Documentation
+[![Build status](https://secure.travis-ci.org/9ci/angle-grinder.png)](http://travis-ci.org/9ci/angle-grinder)
+
+## Bootstrap
+
+Install nodejs v0.10.7 from the sources:
+
+```
+sudo apt-get install build-essential openssl libssl-dev pkg-config
+
+wget http://nodejs.org/dist/v0.10.7/node-v0.10.7.tar.gz
+tar -xzf node-v0.10.7.tar.gz
+
+cd node-v0.10.7
+./configure
+make
+sudo make install
+```
+
+Newer versions of nodejs cause problems with karma and PhantomJS
+see: https://github.com/karma-runner/karma/issues/558
+
+## Install tools
+
+```
+npm install -g grunt-cli
+npm install -g bower
+```
+
+### Run the app
+
+```
+npm install
+bower install
+grunt server
+```
+
+open http://localhost:9000
+
+## Running test
+
+By default all tests are executes in PhantomJS browser
+
+`grunt test`
+
+Run test against specific browsers
+
+`grunt test --browsers=Chrome,Firefox,Opera,PhantomJS`
+
+Run karma with `autoWatch` option:
+
+```
+# inside the first terminal
+grunt server
+
+# inside the second terminal
+grunt test:watch --browsers=Chrome,Opera
+```
+
+or
+
+```
+# inside the first terminal
+grunt build:dev watch
+
+# inside the second terminal
+grunt test:watch --browsers=Firefox,PhantomJS
+```
+
+Task `grunt watch` has to be executed since it's recompiling all CoffeeScripts.
+
+### How to debug failing specs
+
+Put `debugger` in the failing spec:
+
+```coffee
+describe "Failing spec", ->
+
+  it "should run smoothly", ->
+    debugger # this is like setting a breakpoint
+    failMiserably()
+```
+
+Run karma in Chrome browser:
+
+`grunt test:watch --browsers=Chrome`
+
+* Go to the newly opened Chrome Browser
+* Open Chrome's DevTools and refresh the page
+* Now in the source tab you should see the execution stopped at the debugger
+
+### Running e2e tests
+
+`grunt test:e2e`
+`grunt test:casperjs`
+
+### Running tests headlessly
+
+Start Xvfb and export DISPLAY variable:
+
+```
+./script/xvfb start
+export DISPLAY=:99
+```
+
+Perform single run:
+
+grunt test --browsers=Firefox,Chrome,Opera,PhantomJS
+
+or
+
+`grunt test:watch --browsers=Chrome`
+
+## Build process
 
 ```
 grunt build
 (cd dist/ ; python -m SimpleHTTPServer 8000)
 ```
 
-navigate to http://localhost:8000/docs
-
-## Tasks
-
-### `grunt bower` - install bower packages
-
-If bower install is run on this configuration file, the entire package's repository will be
-pulled down and copied into a components directory.
-This repository could quite large, when probably only a built js and css file are needed.
-
-`grunt bower` - provides an easy way for pulling down the specific files from the packages.
+And then navigate to `http://localhost:8000` to see the production release.
