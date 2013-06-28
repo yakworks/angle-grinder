@@ -1,5 +1,6 @@
+# Ignore thrd party libraries
 node_modules
-.tmp
-.sass-cache
-*.sublime*
-components
+bower_components
+
+# Ignore dist package
+dist
