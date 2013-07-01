@@ -229,7 +229,6 @@ class JqGridBasicCtrl
     $grid.jqGrid
       data: mydata
       datatype: "local"
-      height: 250
       rowNum: 10
       rowList: [10, 20, 30]
 
