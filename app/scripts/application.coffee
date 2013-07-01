@@ -19,5 +19,9 @@ app.config [
         templateUrl: "views/simple_jqgrid.html",
         controller: "SimpleJqGridCtrl"
 
+      .when "/simple_gridz",
+        templateUrl: "views/simple_gridz.html",
+        controller: "SimpleGridzCtrl"
+
       .otherwise redirectTo: "/"
 ]
