@@ -1,6 +1,10 @@
-# Ignore thrd party libraries
+# Ignore project files
+.idea
+
+# Ignore libraries
 node_modules
 bower_components
 
 # Ignore dist package
 dist
+dev
