@@ -1,6 +1,7 @@
 class GridzWithToolbarCtrl
 
-  constructor: ->
+  @$inject = ["sampleData"]
+  constructor: (sampleData) ->
     custFormatter = (cellValue, colOptions, rowObject) ->
       """
       <a class="" title="" data-toggle="popover" href="#" >#{cellValue}&nbsp;&nbsp;</a><i class="icon-zoom-in" style="font-size:11px;color:#777"></i>
@@ -55,7 +56,7 @@ class GridzWithToolbarCtrl
     $grid = $("#demoGrid")
 
     $grid.gridz
-      data: sampleData
+      data: sampleData(100)
       datatype: "local"
       colModel: columns
 

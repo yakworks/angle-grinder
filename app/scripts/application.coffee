@@ -5,7 +5,7 @@ $ ->
   $("#topbar").load "views/navbar-top.html"
   $("#sidebar").load "views/gridz-sidebar.html"
 
-app = angular.module("angleGrinder", ["angleGrinder.controllers"])
+app = angular.module("angleGrinder", ["angleGrinder.controllers", "angleGrinder.services"])
 app.config [
   "$provide", "$routeProvider", ($provide, $routeProvider) ->
     $provide.value("alertTimeout", 3000)

@@ -1,6 +1,7 @@
 class SimpleGridzCtrl
 
-  constructor: ->
+  @$inject = ["sampleData"]
+  constructor: (sampleData) ->
     $grid = $("#demoGrid")
 
     custFormatter = (cellValue, colOptions, rowObject) ->
@@ -55,7 +56,7 @@ class SimpleGridzCtrl
     ]
 
     $grid.gridz
-      data: sampleData
+      data: sampleData(200)
       datatype: "local"
       colModel: columns
 
