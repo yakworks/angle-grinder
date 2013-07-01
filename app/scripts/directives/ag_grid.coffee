@@ -4,17 +4,17 @@ directives.directive "agGrid", ->
   link = ($scope, element, attrs) ->
     $grid = $("#grid", element)
 
-    $grid.on "click", "a.editActionLink", (evt) ->
-      evt.preventDefault()
+    gridOptions = $scope.$eval(attrs.agGrid)
+    $grid.gridz(gridOptions)
+
+    $grid.on "click", "a.editActionLink", (event) ->
+      event.preventDefault()
       id = $(this).parents("tr:first").attr("id")
       $scope.$apply ->
         $scope.editDialog id
 
-    gridOptions = $scope.$eval(attrs.agGrid)
-    $grid.gridz(gridOptions)
-
     # catch broadcast event after save. This will need to change
-    $scope.$on "itemUpdated", (evt, data) ->
+    $scope.$on "itemUpdated", (event, data) ->
       if not $grid.jqGrid("getInd", data.id)
         $grid.jqGrid "addRowData", data.id, data, "first"
       else
@@ -27,7 +27,7 @@ directives.directive "agGrid", ->
         $(ind).css "background-color", ""
       ).fadeIn "fast"
 
-    $scope.$on "searchUpdated", (evt, filter, currentScope = null) ->
+    $scope.$on "searchUpdated", (event, filter, currentScope = null) ->
       currentScope?.searching = true
 
       $grid.setGridParam(

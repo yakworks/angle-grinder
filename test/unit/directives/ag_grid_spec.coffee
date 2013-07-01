@@ -18,7 +18,7 @@ describe "directives", ->
       $scope.gridOptions = sampleGridOptions
 
       # create a spy on the gridz plugin
-      gridz = spyOn($.fn, "gridz")
+      gridz = spyOn($.fn, "gridz").andCallThrough()
 
       element = angular.element """
         <div ag-grid="gridOptions"></div>
@@ -31,5 +31,6 @@ describe "directives", ->
       expect(gridz).toHaveBeenCalledWith sampleGridOptions
 
     it "renders the grid", ->
-      expect(element.find("table#grid").length).toEqual(1)
-      expect(element.find("div#gridPager").length).toEqual(1)
+      expect(element.find("div.ui-jqgrid").length).toEqual 1
+      expect(element.find("table#grid").length).toEqual 1
+      expect(element.find("div#gridPager").length).toEqual 1

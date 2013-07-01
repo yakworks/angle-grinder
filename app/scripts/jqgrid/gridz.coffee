@@ -12,9 +12,7 @@ Gridz:: =
     @$grid = $el
     @gridId = $el.attr("id")
 
-    ###
-    the containing div for the grid , will be built after jqGrid is called
-    ###
+    # the containing div for the grid, will be built after jqGrid is called
     @gboxId = "gbox_#{@gridId}"
     @options = @getOptions(opts)
 
@@ -53,7 +51,6 @@ Gridz:: =
   ###
   gridComplete: ->
     @actionPopupSetup() if @options.actionPopup
-    gid = "jqgh_#{@$element.attr("id")}_row_action_col"
 
   # disable the sortable property on the action column
   #$('tr.ui-jqgrid-labels').sortable({ cancel: 'th:#'+gid});
@@ -232,8 +229,8 @@ $.fn.gridz = (option) ->
   @each ->
     $this = $(this)
     instance = $this.data("gridz")
-    options = (if typeof option is "object" then option else {})
-    $this.data "gridz", (instance = new Gridz(this, options))  unless instance
+    options or= {}
+    $this.data "gridz", (instance = new Gridz(this, options)) unless instance
 
 $.fn.gridz.Constructor = Gridz
 
