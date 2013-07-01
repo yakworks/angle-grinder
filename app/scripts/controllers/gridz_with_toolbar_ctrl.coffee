@@ -3,7 +3,7 @@ class GridzWithToolbarCtrl
   constructor: ->
     custFormatter = (cellValue, colOptions, rowObject) ->
       """
-      <a class="" title="" data-toggle="popover" href="#" >#{cellValue} &nbsp;&nbsp;</a><i class="icon-zoom-in" style="font-size:11px;color:#777"></i>
+      <a class="" title="" data-toggle="popover" href="#" >#{cellValue}&nbsp;&nbsp;</a><i class="icon-zoom-in" style="font-size:11px;color:#777"></i>
       """
 
     columns = [
