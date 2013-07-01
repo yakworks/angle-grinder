@@ -1,77 +1,29 @@
+# The entry point for the application
+
 $ ->
-  #use regex to get anchor(==selector)
-  #get anchor
-  #load content for selected tab
-  #reinitialize tabs
-  custFormatter = (cellValue, colOptions, rowObject) ->
-    """
-    <a class="" title="" data-toggle="popover" href="#" >#{cellValue} &nbsp;&nbsp;</a><i class="icon-zoom-in" style="font-size:11px;color:#777"></i>
-    """
+  $("#topbar").load "views/partials/navbar_top.html"
 
-  $("#topbar").load "docs/navbar-top.html"
-  $("#sidebar").load "docs/gridz-sidebar.html"
+app = angular.module("angleGrinder", ["angleGrinder.controllers", "angleGrinder.services"])
+app.config [
+  "$provide", "$routeProvider", ($provide, $routeProvider) ->
+    $provide.value("alertTimeout", 3000)
 
-  $("#myTabs").bind "show", (e) ->
-    pattern = /#.+/g
-    contentID = e.target.toString().match(pattern)[0]
-    $(contentID).load baseURL + contentID.replace("#", ""), ->
-      $("#myTabs").tab()
+    $routeProvider
+      .when "/",
+        templateUrl: "views/gridz_with_toolbar.html",
+        controller: "GridzWithToolbarCtrl"
 
-  columns = [
-    name: "id"
-    label: "Inv No"
-    key: true
-    width: 60
-    align: "right"
-    sorttype: "int"
-    search: true
-  ,
-    name: "customer.name"
-    label: "Customer"
-    width: 250
-    formatter: custFormatter
-  ,
-    name: "tranDate"
-    label: "Date"
-    editable: true
-    width: 90
-    sorttype: "date"
-    formatter: "date"
-  ,
-    name: "description"
-    width: 150
-  ,
-    name: "amount"
-    width: 80
-    align: "right"
-    sorttype: "float"
-    formatter: "number"
-  ,
-    name: "tax"
-    width: 80
-    align: "right"
-    sorttype: "float"
-  ,
-    name: "total"
-    width: 80
-    align: "right"
-    sorttype: "float"
-  ,
-    name: "note"
-    width: 250
-    sortable: false
-    hidden: true
-  ]
+      .when "/simple_jqgrid",
+        templateUrl: "views/simple_jqgrid.html",
+        controller: "SimpleJqGridCtrl"
 
-  $grid = $("#demoGrid")
+      .when "/simple_gridz",
+        templateUrl: "views/simple_gridz.html",
+        controller: "SimpleGridzCtrl"
 
-  $grid.gridz
-    data: sampleData
-    datatype: "local"
-    colModel: columns
+      .when "/jqgrid_basic",
+        templateUrl: "views/jqgrid_basic.html",
+        controller: "JqGridBasicCtrl"
 
-  $grid.data("gridz")
-
-  $grid.on "editAction", (e, rowId, gridObject) ->
-    $grid.jqGrid "editGridRow", rowId,
-      reloadAfterSubmit: false
+      .otherwise redirectTo: "/"
+]
