@@ -13,7 +13,7 @@ class JqGridBasicCtrl
           addActionPopupListeners this
 
     $grid = $("#demoGrid")
-    gboxId = "gbox_" + $grid.attr("id")
+    gboxId = "gbox_#{$grid.attr("id")}"
 
     $grid.jqGrid
       data: sampleData(100)
@@ -21,61 +21,7 @@ class JqGridBasicCtrl
       rowNum: 10
       rowList: [10, 20, 30]
 
-      #colNames:['Inv No','Inv No','Date', 'Client', 'Amount','Tax','Total','Notes'],
-      colModel: [
-        name: "edit_actions"
-        label: " "
-        width: 20
-        sortable: false
-        search: false
-        hidedlg: true
-        formatter: editColFormatter
-      ,
-        name: "id"
-        index: "id"
-        label: "Inv No"
-        key: true
-        width: 60
-        sorttype: "int"
-        search: true
-      ,
-        name: "invdate"
-        index: "invdate"
-        editable: true
-        label: "Date"
-        width: 90
-        sorttype: "date"
-        formatter: "date"
-      ,
-        name: "name"
-        index: "name"
-        width: 200
-      ,
-        name: "amount"
-        index: "amount"
-        width: 80
-        align: "right"
-        sorttype: "float"
-        formatter: "number"
-      ,
-        name: "tax"
-        index: "tax"
-        width: 80
-        align: "right"
-        sorttype: "float"
-      ,
-        name: "total"
-        index: "total"
-        width: 80
-        align: "right"
-        sorttype: "float"
-      ,
-        name: "note"
-        index: "note"
-        width: 250
-        sortable: false
-        hidden: true
-      ]
+      colModel: @gridColumns()
       pager: "#gridPager"
       viewrecords: true
       hidegrid: false
@@ -85,7 +31,7 @@ class JqGridBasicCtrl
       height: "100%"
       sortable: true #allows column reposition
       multiselect: true #one or more row selections
-      beforeSelectRow: beforeSelectRow
+      beforeSelectRow: @beforeSelectRow
       gridComplete: ->
         setupActionClickOver()
 
@@ -102,49 +48,106 @@ class JqGridBasicCtrl
     editColFormatter = (cellvalue, options, rowObject) ->
       "<a class=\"jqg-row-action\" title=\"\" data-toggle=\"popover\" href=\"#\" data-container=\"#" + gboxId + "\"><i class=\"icon-cog\"></i></a>"
 
-    # Handles proper multi selection of rows *
-    beforeSelectRow = (rowid, e) ->
-      $this = $(this)
-      rows = @rows
+  # Handles proper multi selection of rows *
+  beforeSelectRow: (rowid, e) ->
+    $this = $(this)
+    rows = @rows
 
-      # get id of the previous selected row
-      startId = $this.jqGrid("getGridParam", "selrow")
-      startRow = undefined
-      endRow = undefined
-      iStart = undefined
-      iEnd = undefined
-      i = undefined
-      rowidIndex = undefined
-      isCheckBox = $(e.target).hasClass("cbox")
-      if not e.ctrlKey and not e.shiftKey and not e.metaKey and not isCheckBox
-        $this.jqGrid "resetSelection"
-      else if startId and e.shiftKey
-        $this.jqGrid "resetSelection"
+    # get id of the previous selected row
+    startId = $this.jqGrid("getGridParam", "selrow")
+    startRow = undefined
+    endRow = undefined
+    iStart = undefined
+    iEnd = undefined
+    i = undefined
+    rowidIndex = undefined
+    isCheckBox = $(e.target).hasClass("cbox")
+    if not e.ctrlKey and not e.shiftKey and not e.metaKey and not isCheckBox
+      $this.jqGrid "resetSelection"
+    else if startId and e.shiftKey
+      $this.jqGrid "resetSelection"
 
-        # get DOM elements of the previous selected and
-        # the currect selected rows
-        startRow = rows.namedItem(startId)
-        endRow = rows.namedItem(rowid)
-        if startRow and endRow
+      # get DOM elements of the previous selected and
+      # the currect selected rows
+      startRow = rows.namedItem(startId)
+      endRow = rows.namedItem(rowid)
+      if startRow and endRow
 
-          # get min and max from the indexes of the previous selected
-          # and the currect selected rows
-          iStart = Math.min(startRow.rowIndex, endRow.rowIndex)
-          rowidIndex = endRow.rowIndex
-          iEnd = Math.max(startRow.rowIndex, rowidIndex)
-          i = iStart
-          while i <= iEnd
+        # get min and max from the indexes of the previous selected
+        # and the currect selected rows
+        iStart = Math.min(startRow.rowIndex, endRow.rowIndex)
+        rowidIndex = endRow.rowIndex
+        iEnd = Math.max(startRow.rowIndex, rowidIndex)
+        i = iStart
+        while i <= iEnd
 
-            # the row with rowid will be selected by
-            # jqGrid. So we don't need select it
-            $this.jqGrid "setSelection", rows[i].id, false  unless i is rowidIndex
-            i++
+          # the row with rowid will be selected by
+          # jqGrid. So we don't need select it
+          $this.jqGrid "setSelection", rows[i].id, false  unless i is rowidIndex
+          i++
 
-        # clear text selection (needed in IE)
-        if document.selection and document.selection.empty
-          document.selection.empty()
-        else window.getSelection().removeAllRanges()  if window.getSelection
-      true
+      # clear text selection (needed in IE)
+      if document.selection and document.selection.empty
+        document.selection.empty()
+      else window.getSelection().removeAllRanges()  if window.getSelection
+    true
+
+  #colNames:['Inv No','Inv No','Date', 'Client', 'Amount','Tax','Total','Notes'],
+  gridColumns: ->
+    [
+      name: "edit_actions"
+      label: " "
+      width: 20
+      sortable: false
+      search: false
+      hidedlg: true
+      formatter: @editColFormatter
+    ,
+      name: "id"
+      index: "id"
+      label: "Inv No"
+      key: true
+      width: 60
+      sorttype: "int"
+      search: true
+    ,
+      name: "invdate"
+      index: "invdate"
+      editable: true
+      label: "Date"
+      width: 90
+      sorttype: "date"
+      formatter: "date"
+    ,
+      name: "name"
+      index: "name"
+      width: 200
+    ,
+      name: "amount"
+      index: "amount"
+      width: 80
+      align: "right"
+      sorttype: "float"
+      formatter: "number"
+    ,
+      name: "tax"
+      index: "tax"
+      width: 80
+      align: "right"
+      sorttype: "float"
+    ,
+      name: "total"
+      index: "total"
+      width: 80
+      align: "right"
+      sorttype: "float"
+    ,
+      name: "note"
+      index: "note"
+      width: 250
+      sortable: false
+      hidden: true
+    ]
 
 controllers = angular.module("angleGrinder.controllers")
 controllers.controller("JqGridBasicCtrl", JqGridBasicCtrl)

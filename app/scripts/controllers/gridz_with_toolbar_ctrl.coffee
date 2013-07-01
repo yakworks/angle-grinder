@@ -2,12 +2,26 @@ class GridzWithToolbarCtrl
 
   @$inject = ["sampleData"]
   constructor: (sampleData) ->
-    custFormatter = (cellValue, colOptions, rowObject) ->
-      """
-      <a class="" title="" data-toggle="popover" href="#" >#{cellValue}&nbsp;&nbsp;</a><i class="icon-zoom-in" style="font-size:11px;color:#777"></i>
-      """
+    $grid = $("#demoGrid")
 
-    columns = [
+    $grid.gridz
+      data: sampleData(100)
+      datatype: "local"
+      colModel: @gridColumns()
+
+    $grid.data("gridz")
+
+    $grid.on "editAction", (e, rowId, gridObject) ->
+      $grid.jqGrid "editGridRow", rowId,
+        reloadAfterSubmit: false
+
+  custFormatter: (cellValue, colOptions, rowObject) ->
+    """
+    <a class="" title="" data-toggle="popover" href="#" >#{cellValue}&nbsp;&nbsp;</a><i class="icon-zoom-in" style="font-size:11px;color:#777"></i>
+    """
+
+  gridColumns: ->
+    [
       name: "id"
       label: "Inv No"
       key: true
@@ -19,7 +33,7 @@ class GridzWithToolbarCtrl
       name: "customer.name"
       label: "Customer"
       width: 250
-      formatter: custFormatter
+      formatter: @custFormatter
     ,
       name: "tranDate"
       label: "Date"
@@ -52,19 +66,6 @@ class GridzWithToolbarCtrl
       sortable: false
       hidden: true
     ]
-
-    $grid = $("#demoGrid")
-
-    $grid.gridz
-      data: sampleData(100)
-      datatype: "local"
-      colModel: columns
-
-    $grid.data("gridz")
-
-    $grid.on "editAction", (e, rowId, gridObject) ->
-      $grid.jqGrid "editGridRow", rowId,
-        reloadAfterSubmit: false
 
 controllers = angular.module("angleGrinder.controllers")
 controllers.controller("GridzWithToolbarCtrl", GridzWithToolbarCtrl)
