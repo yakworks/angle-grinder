@@ -3,7 +3,12 @@
 $ ->
   $("#topbar").load "views/partials/navbar_top.html"
 
-app = angular.module("angleGrinder", ["angleGrinder.controllers", "angleGrinder.services"])
+app = angular.module("angleGrinder", [
+  "angleGrinder.directives"
+  "angleGrinder.services"
+  "angleGrinder.controllers"
+])
+
 app.config [
   "$provide", "$routeProvider", ($provide, $routeProvider) ->
     $provide.value("alertTimeout", 3000)
