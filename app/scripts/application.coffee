@@ -1,9 +1,7 @@
 # The entry point for the application
 
 $ ->
-  # TODO Create ng-views for these partials
-  $("#topbar").load "views/navbar-top.html"
-  $("#sidebar").load "views/gridz-sidebar.html"
+  $("#topbar").load "views/partials/navbar_top.html"
 
 app = angular.module("angleGrinder", ["angleGrinder.controllers", "angleGrinder.services"])
 app.config [
