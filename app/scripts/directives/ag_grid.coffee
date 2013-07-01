@@ -11,7 +11,7 @@ directives.directive "agGrid", ->
         $scope.editDialog id
 
     gridOptions = $scope.$eval(attrs.agGrid)
-    $grid.gridz gridOptions
+    $grid.gridz(gridOptions)
 
     # catch broadcast event after save. This will need to change
     $scope.$on "itemUpdated", (evt, data) ->

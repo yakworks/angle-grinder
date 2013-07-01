@@ -6,6 +6,7 @@ describe "directives", ->
     gridz = null
 
     sampleGridOptions =
+      data: []
       colModel: [
         name: "id"
         label: "Inv No"
