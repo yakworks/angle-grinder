@@ -47,7 +47,7 @@ module.exports = (grunt) ->
       html:
         files: [
           "<%= appConfig.app %>/index.html"
-          "<%= appConfig.app %>/views/*.html"
+          "<%= appConfig.app %>/views/**/*.html"
         ]
         tasks: ["copy:dev"]
 

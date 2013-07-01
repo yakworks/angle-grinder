@@ -30,5 +30,9 @@ app.config [
         templateUrl: "views/jqgrid_basic.html",
         controller: "JqGridBasicCtrl"
 
+      .when "/ag_grid_directive",
+        templateUrl: "views/ag_grid_directive.html",
+        controller: "AgGridDirectiveCtrl"
+
       .otherwise redirectTo: "/"
 ]

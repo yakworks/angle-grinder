@@ -2,18 +2,32 @@ describe "directives", ->
   beforeEach module("angleGrinder.directives")
 
   describe "agGrid", ->
-    $scope = null
     element = null
+    gridz = null
+
+    sampleGridOptions =
+      colModel: [
+        name: "id"
+        label: "Inv No"
+        search: true
+      ]
 
     beforeEach inject ($rootScope, $compile) ->
-      $scope = $rootScope
+      $scope = $rootScope.$new()
+      $scope.gridOptions = sampleGridOptions
 
-      $scope.gridOptions =
-        colModel: []
+      # create a spy on the gridz plugin
+      gridz = spyOn($.fn, "gridz")
 
-      element = angular.element "<div ag-grid='gridOptions'></div>"
+      element = angular.element """
+        <div ag-grid="gridOptions"></div>
+      """
+
       $compile(element)($scope)
       $scope.$digest()
+
+    it "passes valid options to the gridz plugin", ->
+      expect(gridz).toHaveBeenCalledWith sampleGridOptions
 
     it "renders the grid", ->
       expect(element.find("table#grid").length).toEqual(1)
