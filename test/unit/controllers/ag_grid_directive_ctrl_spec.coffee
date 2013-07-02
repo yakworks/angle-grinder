@@ -15,10 +15,11 @@ describe "AgGridDirectiveCtrl", ->
     it "assigns gridOptions", ->
       expect($scope.gridOptions).toBeDefined()
 
-      expect($scope.gridOptions.colModel.length).toEqual 4
+      expect($scope.gridOptions.colModel.length).toEqual 5
       expect($scope.gridOptions.colModel[0].name).toEqual "id"
       expect($scope.gridOptions.colModel[1].name).toEqual "customer.name"
       expect($scope.gridOptions.colModel[2].name).toEqual "invdate"
       expect($scope.gridOptions.colModel[3].name).toEqual "note"
+      expect($scope.gridOptions.colModel[4].name).toEqual "complete"
 
       expect($scope.gridOptions.data.length).toEqual 100

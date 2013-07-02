@@ -2,19 +2,32 @@ class AgGridDirectiveCtrl
 
   @$inject = ["$scope", "sampleData", "editDialog"]
   constructor: ($scope, sampleData, editDialog) ->
-    data = sampleData(100)
+    @data = sampleData(100)
+    $scope.data = @data
 
     $scope.gridOptions =
-      data: data
+      data: @data
       datatype: "local"
       colModel: @gridColumns()
 
-    $scope.createDialog = ->
+    $scope.editDialog = (id) =>
+      item = @findItemById(id)
+      editDialog.open("/views/partials/item_form.html", item, false)
+
+    $scope.createDialog = =>
       newItem = {}
       editDialog.open("/views/partials/item_form.html", newItem, true)
-        .then (item) -> data.push(item)
+        .then (item) => @data.push(item)
+
+  findItemById: (id) ->
+    for item in @data
+      return item if item.id is parseInt(id)
 
   gridColumns: ->
+    # TODO can't access $.extend $.fn.fmatter
+    editActionLink = (cellVal, options, rowdata) ->
+      "<a class='editActionLink' href='#' >#{cellVal}</a>"
+
     [
       name: "id"
       label: "Inv No"
@@ -23,12 +36,16 @@ class AgGridDirectiveCtrl
     ,
       name: "customer.name"
       label: "Customer"
+      formatter: editActionLink
     ,
       name: "invdate"
       label: "Date"
     ,
       name: "note"
       label: "Note"
+    ,
+      name: "complete"
+      label: "Complete"
     ]
 
 controllers = angular.module("angleGrinder.controllers")

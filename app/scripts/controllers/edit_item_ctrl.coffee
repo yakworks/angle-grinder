@@ -10,7 +10,7 @@ class EditItemCtrl
 
     $scope.save = ->
       generateId = -> new Date().getTime()
-      $scope.item.id = generateId()
+      $scope.item.id = generateId() unless $scope.item.id?
 
       $rootScope.$broadcast("itemUpdated", $scope.item)
       $scope.closeEditDialog()
