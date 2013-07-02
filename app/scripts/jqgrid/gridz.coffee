@@ -205,4 +205,6 @@ $.extend $.fn.fmatter,
     if cellVal then "<i class='icon-ok'></i>" else ""
 
   editActionLink: (cellVal, options, rowdata) ->
-    "<a class='editActionLink' href='#' >#{cellVal}</a>"
+    """
+    <a class="editActionLink" href="#">#{cellVal}</a>
+    """

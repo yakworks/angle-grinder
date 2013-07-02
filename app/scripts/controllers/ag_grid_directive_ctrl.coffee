@@ -24,10 +24,6 @@ class AgGridDirectiveCtrl
       return item if item.id is parseInt(id)
 
   gridColumns: ->
-    # TODO can't access $.extend $.fn.fmatter
-    editActionLink = (cellVal, options, rowdata) ->
-      "<a class='editActionLink' href='#' >#{cellVal}</a>"
-
     [
       name: "id"
       label: "Inv No"
@@ -36,7 +32,7 @@ class AgGridDirectiveCtrl
     ,
       name: "customer.name"
       label: "Customer"
-      formatter: editActionLink
+      formatter: "editActionLink"
     ,
       name: "invdate"
       label: "Date"
