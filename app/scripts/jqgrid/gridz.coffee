@@ -229,7 +229,7 @@ $.fn.gridz = (option) ->
   @each ->
     $this = $(this)
     instance = $this.data("gridz")
-    options or= {}
+    options = if typeof option is "object" then option else {}
     $this.data "gridz", (instance = new Gridz(this, options)) unless instance
 
 $.fn.gridz.Constructor = Gridz
