@@ -1,9 +1,7 @@
-# Class definition
-# TODO use pure coffeescript clas
-Gridz = (element, options) ->
-  @init element, options
+class Gridz
+  constructor: (element, options) ->
+    @init element, options
 
-Gridz:: =
   init: (element, opts) ->
     $el = $(element)
 
