@@ -9,11 +9,22 @@
   <meta name="author" content="Joshua Burnett">
 
   <link rel="stylesheet" href="styles/boot.css">
+  <link rel="stylesheet" href="styles/docs.css">
   <link rel="stylesheet" href="styles/jq-ui-boot-grid.css">
 
   <!-- build:js(dev) scripts/vendor.min.js -->
-  <script type="text/javascript" src="components/jquery/jquery.js"></script>
-  <script type="text/javascript" src="components/angular/angular.js"></script>
+    <script type="text/javascript" src="components/jquery/jquery.js"></script>
+    <script type="text/javascript" src="components/angular/angular.js"></script>
+    <script type="text/javascript" src="components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+
+    <!-- Twitter Bootstrap -->
+    <script src="components/bootstrap/js/bootstrap.js"></script>
+    <script src="components/jquery-ui-bootstrap/jquery-ui-1.10.1.custom.min.js"></script>
+
+    <!-- JqGrid -->
+    <script src="components/jqgrid/js/plugins/ui.multiselect.js"></script>
+    <script src="components/jqgrid/js/i18n/grid.locale-en.js"></script>
+    <script src="components/jqgrid/js/grid.base.js"></script>
   <!-- endbuild -->
 
   <!--[if IE 7]>
@@ -24,19 +35,10 @@
   <link rel="stylesheet" href="css/custom-theme/jquery.ui.1.10.1.ie.css">
   <![endif]-->
 
-  <link rel="stylesheet" href="styles/docs.css">
-
-  <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+  <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
   <!--[if lt IE 9]>
   <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
   <![endif]-->
-
-  <script src="components/bootstrap/js/bootstrap.js"></script>
-  <script src="components/jquery-ui-bootstrap/jquery-ui-1.10.1.custom.min.js"></script>
-
-  <script src="components/jqgrid/js/plugins/ui.multiselect.js"></script>
-  <script src="components/jqgrid/js/i18n/grid.locale-en.js"></script>
-  <script src="components/jqgrid/js/grid.base.js"></script>
 
   <!-- Extras for tool bar and other -->
   <script src="components/bootstrapx-clickover/js/bootstrapx-clickover.js"></script>
@@ -46,6 +48,7 @@
 
     <!-- AngularJS app -->
     <script type="text/javascript" src="scripts/services.js"></script>
+    <script type="text/javascript" src="scripts/services/edit_dialog.js"></script>
     <script type="text/javascript" src="scripts/services/sample_data.js"></script>
 
     <script type="text/javascript" src="scripts/directives.js"></script>
@@ -60,14 +63,9 @@
 
     <script type="text/javascript" src="scripts/application.js"></script>
   <!-- endbuild -->
-
-  <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-  <!--[if lt IE 9]>
-  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-  <![endif]-->
 </head>
 
-<body ng-app="angleGrinder" data-spy="scroll" data-target=".bs-docs-sidebar" data-twttr-rendered="true">
+<body ng-app="angleGrinder">
 
 <div id="topbar"></div>
 
