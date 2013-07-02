@@ -1,5 +1,6 @@
 # Ignore project files
 .idea
+*.iml
 
 # Ignore libraries
 node_modules
