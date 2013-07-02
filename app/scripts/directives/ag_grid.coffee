@@ -15,13 +15,13 @@ directives.directive "agGrid", ->
 
     # catch broadcast event after save. This will need to change
     $scope.$on "itemUpdated", (event, data) ->
-      if not $grid.jqGrid("getInd", data.id)
-        $grid.jqGrid "addRowData", data.id, data, "first"
-      else
+      if $grid.jqGrid("getInd", data.id)
         $grid.jqGrid "setRowData", data.id, data
-      ind = $grid[0].rows.namedItem(data.id)
+      else
+        $grid.jqGrid "addRowData", data.id, data, "first"
 
-      # flash the row so use knows its updated
+      # flash the row so user knows its updated
+      ind = $grid[0].rows.namedItem(data.id)
       $(ind).css "background-color", "#DFF0D8"
       $(ind).delay(100).fadeOut("medium", ->
         $(ind).css "background-color", ""

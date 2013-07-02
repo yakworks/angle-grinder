@@ -1,7 +1,7 @@
 class EditItemCtrl
 
-  @$inject = ["$scope", "$rootScope", "dialog", "item", "createNew"]
-  constructor: ($scope, $rootScope, dialog, item, createNew) ->
+  @$inject = ["$scope", "$rootScope", "dialog", "item", "createNew", "flatten"]
+  constructor: ($scope, $rootScope, dialog, item, createNew, flatten) ->
     $scope.item = item
     $scope.createNew = createNew
 
@@ -12,7 +12,7 @@ class EditItemCtrl
       generateId = -> new Date().getTime()
       $scope.item.id = generateId() unless $scope.item.id?
 
-      $rootScope.$broadcast("itemUpdated", $scope.item)
+      $rootScope.$broadcast("itemUpdated", flatten($scope.item))
       $scope.closeEditDialog()
 
 controllers = angular.module("angleGrinder.controllers")
