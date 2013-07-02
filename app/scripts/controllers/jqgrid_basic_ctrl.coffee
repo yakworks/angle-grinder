@@ -31,7 +31,6 @@ class JqGridBasicCtrl
       height: "100%"
       sortable: true #allows column reposition
       multiselect: true #one or more row selections
-      beforeSelectRow: @beforeSelectRow
       gridComplete: ->
         setupActionClickOver()
 
@@ -47,50 +46,6 @@ class JqGridBasicCtrl
 
     editColFormatter = (cellvalue, options, rowObject) ->
       "<a class=\"jqg-row-action\" title=\"\" data-toggle=\"popover\" href=\"#\" data-container=\"#" + gboxId + "\"><i class=\"icon-cog\"></i></a>"
-
-  # Handles proper multi selection of rows *
-  beforeSelectRow: (rowid, e) ->
-    $this = $(this)
-    rows = @rows
-
-    # get id of the previous selected row
-    startId = $this.jqGrid("getGridParam", "selrow")
-    startRow = undefined
-    endRow = undefined
-    iStart = undefined
-    iEnd = undefined
-    i = undefined
-    rowidIndex = undefined
-    isCheckBox = $(e.target).hasClass("cbox")
-    if not e.ctrlKey and not e.shiftKey and not e.metaKey and not isCheckBox
-      $this.jqGrid "resetSelection"
-    else if startId and e.shiftKey
-      $this.jqGrid "resetSelection"
-
-      # get DOM elements of the previous selected and
-      # the currect selected rows
-      startRow = rows.namedItem(startId)
-      endRow = rows.namedItem(rowid)
-      if startRow and endRow
-
-        # get min and max from the indexes of the previous selected
-        # and the currect selected rows
-        iStart = Math.min(startRow.rowIndex, endRow.rowIndex)
-        rowidIndex = endRow.rowIndex
-        iEnd = Math.max(startRow.rowIndex, rowidIndex)
-        i = iStart
-        while i <= iEnd
-
-          # the row with rowid will be selected by
-          # jqGrid. So we don't need select it
-          $this.jqGrid "setSelection", rows[i].id, false  unless i is rowidIndex
-          i++
-
-      # clear text selection (needed in IE)
-      if document.selection and document.selection.empty
-        document.selection.empty()
-      else window.getSelection().removeAllRanges()  if window.getSelection
-    true
 
   #colNames:['Inv No','Inv No','Date', 'Client', 'Amount','Tax','Total','Notes'],
   gridColumns: ->
