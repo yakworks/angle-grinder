@@ -10,6 +10,8 @@ files = [
   "components/angular-mocks/angular-mocks.js"
 
   "components/jqgrid/js/grid.base.js"
+  "components/angular-bootstrap/ui-bootstrap-tpls.js"
+
   "scripts/jqgrid/gridz.js"
 
   "scripts/directives.js"

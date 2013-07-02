@@ -1,4 +1,5 @@
 describe "AgGridDirectiveCtrl", ->
+  beforeEach module("ui.bootstrap")
   beforeEach module("angleGrinder.services")
   beforeEach module("angleGrinder.controllers")
 

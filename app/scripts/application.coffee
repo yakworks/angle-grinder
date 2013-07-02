@@ -7,6 +7,7 @@ app = angular.module("angleGrinder", [
   "angleGrinder.directives"
   "angleGrinder.services"
   "angleGrinder.controllers"
+  "ui.bootstrap"
 ])
 
 app.config [

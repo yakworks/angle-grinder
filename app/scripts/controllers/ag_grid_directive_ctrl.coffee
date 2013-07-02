@@ -1,11 +1,18 @@
 class AgGridDirectiveCtrl
 
-  @$inject = ["$scope", "sampleData"]
-  constructor: ($scope, sampleData) ->
+  @$inject = ["$scope", "sampleData", "editDialog"]
+  constructor: ($scope, sampleData, editDialog) ->
+    data = sampleData(100)
+
     $scope.gridOptions =
-      data: sampleData(100)
+      data: data
       datatype: "local"
       colModel: @gridColumns()
+
+    $scope.createDialog = ->
+      newItem = {}
+      editDialog.open("/views/partials/item_form.html", newItem, true)
+        .then (item) -> data.push(item)
 
   gridColumns: ->
     [
