@@ -9,6 +9,7 @@ class AgGridDirectiveCtrl
       data: @data
       datatype: "local"
       colModel: @gridColumns()
+      sortname: "id"
 
     $scope.editDialog = (id) =>
       item = @findItemById(id)
