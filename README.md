@@ -28,6 +28,28 @@ npm install -g grunt-cli
 npm install -g bower
 ```
 
+## Install PhantomJS ad CasperJS for the integration testing
+
+Download and install PhantomJS
+
+```
+wget https://phantomjs.googlecode.com/files/phantomjs-1.9.1-linux-x86_64.tar.bz2
+tar xvjf phantomjs-1.9.1-linux-x86_64.tar.bz2
+cd tar xvjf phantomjs-1.9.1-linux-x86_64
+ln -sf `pwd`/bin/phantomjs /usr/local/bin/phantomjs
+```
+
+Checkout and install CasperJS
+
+```
+git clone git://github.com/n1k0/casperjs.git
+cd casperjs
+git checkout tags/1.0.2
+ln -sf `pwd`/bin/casperjs /usr/local/bin/casperjs
+```
+
+Detailed instructions http://casperjs.org/installation.html
+
 ### Run the app
 
 ```
