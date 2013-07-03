@@ -59,7 +59,28 @@ grunt server
 
 open http://localhost:9000
 
-## Running test
+## Directory structure
+
+* ./app - contains CoffeeScript sources, styles, images, fonts and other assets
+  * ./app/scripts - CoffeeScript sources
+  * ./app/styles - stylesheets
+  * ./app/views - html views used by AngularJS
+* ./test - contains tests for the application
+  * ./tests/casperjs - CasperJS integration specs
+  * ./tests/unit - unit tests for AngularJS components
+
+Third-party libraries
+
+* ./bower_components - components dowloaded by `bower install` command
+* ./custom_components - you could put custom components here
+* ./node_modules - command dowloaded by `npm install` command
+
+Generated stuff
+
+* ./dev - compiled development release
+* ./dist - created by `grunt build` command, contains the production minified release of the app
+
+## Running tests
 
 By default all tests are executes in PhantomJS browser
 
@@ -127,7 +148,7 @@ export DISPLAY=:99
 
 Perform single run:
 
-grunt test --browsers=Firefox,Chrome,Opera,PhantomJS
+`grunt test --browsers=Firefox,Chrome,Opera,PhantomJS`
 
 or
 
