@@ -31,8 +31,7 @@ npm install -g bower
 ### Run the app
 
 ```
-npm install
-bower install
+./script/bootstrap.sh
 grunt server
 ```
 
