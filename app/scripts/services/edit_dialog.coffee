@@ -2,13 +2,13 @@ services = angular.module("angleGrinder.services")
 
 services.service "editDialog", [
   "$dialog", ($dialog) ->
-    @open = (editTemplateUrl, item, createNew) ->
+    open: (templateUrl, item) ->
       dialog = $dialog.dialog
         backdropFade: false
         dialogFade: false
         resolve:
           item: -> item
-          createNew: -> createNew
+          createNew: -> not item.id?
 
       # override so we can intercept form dirty and prevent escape
       dialog.handledEscapeKey = (e) ->
@@ -25,5 +25,5 @@ services.service "editDialog", [
           dialog.close()
           dialog.$scope.$apply()
 
-      dialog.open editTemplateUrl, "EditItemCtrl"
+      dialog.open templateUrl, "EditItemCtrl"
 ]
