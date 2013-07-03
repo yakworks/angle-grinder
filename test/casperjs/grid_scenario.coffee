@@ -105,16 +105,23 @@ scenario "Basic grid scenario", ->
       @test.assertEquals firstRow["note"], "This is the other note"
 
   @feature "Pagination", ->
-    @then ->
-      grid.clickNextPage()
+    shouldDisplayTheFirstPage = =>
+      firstRow = grid.getRow(0)
+      @test.assertEquals firstRow["customer.name"], "New name for the first customer"
+      @test.assertEquals firstRow["note"], "This is the other note"
 
+    shouldDisplayTheSecondPage = =>
       firstRow = grid.getRow(0)
       @test.assertEquals firstRow["customer.name"], "Test Customer 21"
       @test.assertEquals firstRow["note"], "Note number 21"
 
     @then ->
-      grid.clickPrevPage()
+      shouldDisplayTheFirstPage()
 
-      firstRow = grid.getRow(0)
-      @test.assertEquals firstRow["customer.name"], "New name for the first customer"
-      @test.assertEquals firstRow["note"], "This is the other note"
+    @then ->
+      grid.clickNextPage()
+      shouldDisplayTheSecondPage()
+
+    @then ->
+      grid.clickPrevPage()
+      shouldDisplayTheFirstPage()
