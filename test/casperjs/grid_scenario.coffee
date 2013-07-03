@@ -15,7 +15,7 @@ scenario "Basic grid scenario", ->
       @test.assertUrlMatch /ag_grid_directive$/
       @test.assertSelectorHasText "section.content h2", "Angular directive example"
 
-  @feature "Display grid with all data", ->
+  @feature "Display the grid with all data", ->
     @test.assertEquals grid.getRowsCount(), 20, "Loads the data and displays the first 20 rows"
 
     for id in [1...20]
@@ -23,7 +23,7 @@ scenario "Basic grid scenario", ->
       @test.assertEquals customerName, "Test Customer #{id}"
 
   @feature "Add new item", ->
-    @clickLabel "Add Item", "button"
+    @click "a.create-button"
 
     @then ->
       @test.assertTruthy dialog.isVisible(), "'Create new item dialog' appears"
