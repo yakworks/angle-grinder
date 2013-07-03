@@ -2,8 +2,11 @@ baseUrl = "http://localhost:9000"
 scenario = require("./test/casperjs/helpers/scenario").create(baseUrl)
 
 EditDialog = require("./test/casperjs/helpers/page_objects/edit_dialog").EditDialog
+Grid = require("./test/casperjs/helpers/page_objects/grid").Grid
 
 scenario "Basic grid scenario", ->
+  grid = new Grid(this)
+  dialog = new EditDialog(this)
 
   @feature "Navigate to the example", ->
     @clickLabel "agGrid directive basic", "a"
@@ -12,20 +15,17 @@ scenario "Basic grid scenario", ->
   @feature "Display grid with all data", ->
     @test.assertSelectorHasText "section.content h2", "Angular directive example"
 
-    fn = -> document.querySelectorAll("tr.jqgrow").length
-    @test.assertEvalEquals fn, 20, "Loads grid data and displays the first 20 rows"
+    @test.assertEquals grid.getRowsCount(), 20, "Loads grid data and displays the first 20 rows"
 
     for id in [1...20]
-      row = id + 1
-      selector = "tr.jqgrow:nth-child(#{row}) td:nth-child(4)"
-      @test.assertSelectorHasText selector, "Test Customer #{id}"
+      customerName = grid.getCellText(id - 1, "customer.name")
+      @test.assertEquals customerName, "Test Customer #{id}"
 
   @feature "Add new item", ->
     @clickLabel "Add Item", "button"
 
     @then ->
-      dialog = new EditDialog(this)
-
+      # TODO assert dialog.isVisible()
       @test.assertEquals dialog.getTitle(), "Create New Item",
         "'Create new item dialog' appears"
 
@@ -36,17 +36,16 @@ scenario "Basic grid scenario", ->
       dialog.clickSave()
 
     @then ->
-      selectorForColumn = (nth) -> "tr.jqgrow:nth-child(2) td:nth-child(#{nth})"
-      @test.assertSelectorHasText selectorForColumn(4), "New customer"
-      @test.assertSelectorHasText selectorForColumn(5), "2013-07-03"
-      @test.assertSelectorHasText selectorForColumn(6), "This is the test note"
+      newRow = grid.getRow(0)
+      @test.assertEquals newRow["customer.name"], "New customer"
+      @test.assertEquals newRow["invdate"], "2013-07-03"
+      @test.assertEquals newRow["note"], "This is the test note"
 
   @feature "Edit item", ->
-    @click "tr.jqgrow:nth-child(3) td:nth-child(4) a"
+    # click the customer name in the second row
+    grid.clickCell(1, "customer.name")
 
     @then ->
-      dialog = new EditDialog(this)
-
       @test.assertEquals dialog.getTitle(), "Edit Item Test Customer 1",
         "Edit item dialog appears"
 
@@ -57,71 +56,63 @@ scenario "Basic grid scenario", ->
       dialog.clickSave()
 
     @then ->
-      selectorForColumn = (nth) -> "tr.jqgrow:nth-child(3) td:nth-child(#{nth})"
-      @test.assertSelectorHasText selectorForColumn(3), "1"
-      @test.assertSelectorHasText selectorForColumn(4), "New name for the first customer"
-      @test.assertSelectorHasText selectorForColumn(5), "2013-07-04"
-      @test.assertSelectorHasText selectorForColumn(6), "This is the other note"
+      updatedRow = grid.getRow(1)
+      @test.assertEquals updatedRow["id"], "1"
+      @test.assertEquals updatedRow["customer.name"], "New name for the first customer"
+      @test.assertEquals updatedRow["invdate"], "2013-07-04"
+      @test.assertEquals updatedRow["note"], "This is the other note"
 
   @feature "Edit item from the dropdown menu", ->
-    @click "tr.jqgrow:nth-child(4) td:nth-child(2) a[data-toggle=popover]"
+    grid.clickEditRow(2)
 
     @then ->
-      @click "div.popover a.row_action_edit"
+      @test.assertEquals dialog.getTitle(), "Edit Item Test Customer 2",
+        "Edit item dialog appears"
 
-      @test.assertSelectorHasText "h3", "Edit Item Test Customer 2", "Edit item dialog appears"
-
-      @fill "form[name=editForm]",
+      dialog.fillFormWith
         customer_name: "Yet another name"
-      @click "button[type=submit]"
+      dialog.clickSave()
 
     @then ->
-      selectorForColumn = (nth) -> "tr.jqgrow:nth-child(4) td:nth-child(#{nth})"
-      @test.assertSelectorHasText selectorForColumn(3), "2"
-      @test.assertSelectorHasText selectorForColumn(4), "Yet another name"
-      @test.assertSelectorHasText selectorForColumn(6), "Note number 2"
+      updatedRow = grid.getRow(2)
+      @test.assertEquals updatedRow["id"], "2"
+      @test.assertEquals updatedRow["customer.name"], "Yet another name"
+      @test.assertEquals updatedRow["note"], "Note number 2"
 
   @feature "Sorting", ->
-    clickGridHeaderFor = (columnId) =>
-      @click "table.ui-jqgrid-htable th#grid_#{columnId} div.ui-jqgrid-sortable"
-
     @then ->
       # sort by `id` column descending
-      clickGridHeaderFor("id")
+      grid.clickHeader("id")
 
-      # first row
-      selectorForColumn = (nth) -> "tr.jqgrow:nth-child(2) td:nth-child(#{nth})"
-      @test.assertSelectorHasText selectorForColumn(4), "New customer"
-      @test.assertSelectorHasText selectorForColumn(6), "This is the test note"
+      firstRow = grid.getRow(0)
+      @test.assertEquals firstRow["customer.name"], "New customer"
+      @test.assertEquals firstRow["note"], "This is the test note"
 
-      # second row
-      selectorForColumn = (nth) -> "tr.jqgrow:nth-child(3) td:nth-child(#{nth})"
-      @test.assertSelectorHasText selectorForColumn(4), "Test Customer 100"
-      @test.assertSelectorHasText selectorForColumn(6), "Note number 100"
+      secondRow = grid.getRow(1)
+      @test.assertEquals secondRow["id"], "100"
+      @test.assertEquals secondRow["customer.name"], "Test Customer 100"
+      @test.assertEquals secondRow["note"], "Note number 100"
 
     @then ->
       # sort by `id` column ascending
-      clickGridHeaderFor("id")
+      grid.clickHeader("id")
 
-      # first row
-      selectorForColumn = (nth) -> "tr.jqgrow:nth-child(2) td:nth-child(#{nth})"
-      @test.assertSelectorHasText selectorForColumn(4), "New name for the first customer"
-      @test.assertSelectorHasText selectorForColumn(6), "This is the other note"
+      firstRow = grid.getRow(0)
+      @test.assertEquals firstRow["customer.name"], "New name for the first customer"
+      @test.assertEquals firstRow["note"], "This is the other note"
 
   @feature "Pagination", ->
 
     @then ->
-      @click "div#gridPager .ui-icon-seek-next"
+      grid.clickNextPage()
 
-      # first row
-      selectorForColumn = (nth) -> "tr.jqgrow:nth-child(2) td:nth-child(#{nth})"
-      @test.assertSelectorHasText selectorForColumn(4), "Test Customer 21"
-      @test.assertSelectorHasText selectorForColumn(6), "Note number 21"
+      firstRow = grid.getRow(0)
+      @test.assertEquals firstRow["customer.name"], "Test Customer 21"
+      @test.assertEquals firstRow["note"], "Note number 21"
 
     @then ->
-      @click "div#gridPager .ui-icon-seek-prev"
+      grid.clickPrevPage()
 
-      # first row
-      selectorForColumn = (nth) -> "tr.jqgrow:nth-child(2) td:nth-child(#{nth})"
-      @test.assertSelectorHasText selectorForColumn(4), "New name for the first customer"
-      @test.assertSelectorHasText selectorForColumn(6), "This is the other note"
+      firstRow = grid.getRow(0)
+      @test.assertEquals firstRow["customer.name"], "New name for the first customer"
+      @test.assertEquals firstRow["note"], "This is the other note"
