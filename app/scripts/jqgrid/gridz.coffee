@@ -86,10 +86,12 @@ class Gridz
   default rowActionFormatter. containerId is the dom el to add the drop down to
   ###
   actionPopupFormatter: (containerId) ->
-    '<a class="jqg-row-action" title="" data-toggle="popover"
-        href="#" data-container="#' + containerId + '"><i class="icon-cog"></i></a>'
+    """
+    <a class="jqg-row-action" data-toggle="popover" href="#"
+       data-container="##{containerId}"><i class="icon-cog"></i></a>
+    """
 
-  #called after grid complete to setup the menu
+  # called after grid complete to setup the menu
   actionPopupSetup: ->
     self = this
     options = @options
@@ -124,11 +126,7 @@ class Gridz
       onShown: ->
         self.actionPopupOnShow.call self, this
 
-  #this = the clickover <a>
-  #assignActionRowId.call(self,this)
-  #addActionPopupListeners(self,this,$grid)
-
-  #fired when the clickover is shown
+  # fired when the clickover is shown
   actionPopupOnShow: (clickoverEl) ->
     self = this
 
@@ -189,7 +187,7 @@ $.fn.gridz.defaults =
   autowidth: true
   height: "100%"
   sortable: true
-  multiselect: true #one or more row selections
+  multiselect: true # one or more row selections
   pager: "#gridPager"
 
   gridComplete: null
