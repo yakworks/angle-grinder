@@ -1,4 +1,4 @@
-baseUrl = "http://localhost:9000"
+baseUrl = "http://localhost:9001"
 scenario = require("./test/casperjs/helpers/scenario").create(baseUrl)
 
 # Page objects
