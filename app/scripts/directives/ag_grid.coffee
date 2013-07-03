@@ -7,11 +7,19 @@ directives.directive "agGrid", ->
     gridOptions = $scope.$eval(attrs.agGrid)
     $grid.gridz(gridOptions)
 
+    invokeEditItemDialogFor = (id) ->
+      $scope.$apply -> $scope.editDialog id
+
+    # handles click on edit action insite the dropdown menu
+    $grid.on "editAction", (event, id) ->
+      event.preventDefault()
+      invokeEditItemDialogFor(id)
+
+    # handles click on the cell with `editActionLink` formatter
     $grid.on "click", "a.editActionLink", (event) ->
       event.preventDefault()
       id = $(this).parents("tr:first").attr("id")
-      $scope.$apply ->
-        $scope.editDialog id
+      invokeEditItemDialogFor(id)
 
     # catch broadcast event after save. This will need to change
     $scope.$on "itemUpdated", (event, data) ->
