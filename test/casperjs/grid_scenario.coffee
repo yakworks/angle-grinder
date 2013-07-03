@@ -1,6 +1,8 @@
 baseUrl = "http://localhost:9000"
 scenario = require("./test/casperjs/helpers/scenario").create(baseUrl)
 
+EditDialog = require("./test/casperjs/helpers/page_objects/edit_dialog").EditDialog
+
 scenario "Basic grid scenario", ->
 
   @feature "Navigate to the example", ->
@@ -22,13 +24,16 @@ scenario "Basic grid scenario", ->
     @clickLabel "Add Item", "button"
 
     @then ->
-      @test.assertSelectorHasText "h3", "Create New Item", "'Create new item dialog' appears"
+      dialog = new EditDialog(this)
 
-      @fill "form[name=editForm]",
+      @test.assertEquals dialog.getTitle(), "Create New Item",
+        "'Create new item dialog' appears"
+
+      dialog.fillFormWith
         customer_name: "New customer"
         date: "2013-07-03"
         note: "This is the test note"
-      @click "button[type=submit]"
+      dialog.clickSave()
 
     @then ->
       selectorForColumn = (nth) -> "tr.jqgrow:nth-child(2) td:nth-child(#{nth})"
@@ -40,13 +45,16 @@ scenario "Basic grid scenario", ->
     @click "tr.jqgrow:nth-child(3) td:nth-child(4) a"
 
     @then ->
-      @test.assertSelectorHasText "h3", "Edit Item Test Customer 1", "Edit item dialog appears"
+      dialog = new EditDialog(this)
 
-      @fill "form[name=editForm]",
+      @test.assertEquals dialog.getTitle(), "Edit Item Test Customer 1",
+        "Edit item dialog appears"
+
+      dialog.fillFormWith
         customer_name: "New name for the first customer"
         date: "2013-07-04"
         note: "This is the other note"
-      @click "button[type=submit]"
+      dialog.clickSave()
 
     @then ->
       selectorForColumn = (nth) -> "tr.jqgrow:nth-child(3) td:nth-child(#{nth})"
