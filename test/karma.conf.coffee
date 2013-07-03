@@ -9,6 +9,13 @@ files = [
   "components/angular/angular.js"
   "components/angular-mocks/angular-mocks.js"
 
+  "components/jqgrid/js/grid.base.js"
+  "components/angular-bootstrap/ui-bootstrap-tpls.js"
+
+  "scripts/jqgrid/gridz.js"
+
+  "scripts/directives.js"
+  "scripts/directives/**/*.js"
   "scripts/services.js"
   "scripts/services/**/*.js"
   "scripts/controllers.js"

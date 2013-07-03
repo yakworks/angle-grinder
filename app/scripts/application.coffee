@@ -3,7 +3,13 @@
 $ ->
   $("#topbar").load "views/partials/navbar_top.html"
 
-app = angular.module("angleGrinder", ["angleGrinder.controllers", "angleGrinder.services"])
+app = angular.module("angleGrinder", [
+  "angleGrinder.directives"
+  "angleGrinder.services"
+  "angleGrinder.controllers"
+  "ui.bootstrap"
+])
+
 app.config [
   "$provide", "$routeProvider", ($provide, $routeProvider) ->
     $provide.value("alertTimeout", 3000)
@@ -24,6 +30,10 @@ app.config [
       .when "/jqgrid_basic",
         templateUrl: "views/jqgrid_basic.html",
         controller: "JqGridBasicCtrl"
+
+      .when "/ag_grid_directive",
+        templateUrl: "views/ag_grid_directive.html",
+        controller: "AgGridDirectiveCtrl"
 
       .otherwise redirectTo: "/"
 ]

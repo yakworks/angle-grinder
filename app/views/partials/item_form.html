@@ -1,0 +1,44 @@
+<div class="modal-header">
+  <button type="button" class="close" ng-click="closeEditDialog()" aria-hidden="true">&times;</button>
+
+  <h3 ng-show="createNew">Create New Item</h3>
+  <h3 ng-hide="createNew">Edit Item {{item.customer.name}}</h3>
+</div>
+
+<div class="modal-body">
+  <form name="editForm" class="form-horizontal no-margin" ng-submit="save(item)">
+
+    <div class="control-group">
+      <label class="control-label">Customer Name</label>
+
+      <div class="controls">
+        <input type="text" name="customer_name" placeholder="Enter Customer Name"
+               ng-model="item.customer.name" autofocus required />
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label">Date</label>
+
+      <div class="controls">
+        <input type="text" name="date" placeholder="Enter Date"
+               ng-model="item.invdate" />
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label">Note</label>
+
+      <div class="controls">
+        <input type="text" name="note" placeholder="Enter Note"
+               ng-model="item.note" />
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button type="submit" class="btn btn-primary">
+        <i class="icon-ok icon-white"></i>Save
+      </button>
+    </div>
+  </form>
+</div>

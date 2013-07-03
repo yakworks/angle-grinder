@@ -8,6 +8,7 @@ describe "Application routes", ->
       "views/simple_jqgrid.html"
       "views/simple_gridz.html"
       "views/jqgrid_basic.html"
+      "views/ag_grid_directive.html"
     ]
 
     for partial in partials
@@ -37,3 +38,8 @@ describe "Application routes", ->
     @navigateTo "/jqgrid_basic"
     expect($route.current.templateUrl).toEqual("views/jqgrid_basic.html")
     expect($route.current.controller).toEqual("JqGridBasicCtrl")
+
+  it "recognizes '/ag_grid_directive'", inject ($route) ->
+    @navigateTo "/ag_grid_directive"
+    expect($route.current.templateUrl).toEqual("views/ag_grid_directive.html")
+    expect($route.current.controller).toEqual("AgGridDirectiveCtrl")
