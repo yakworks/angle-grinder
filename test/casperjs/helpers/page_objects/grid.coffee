@@ -15,12 +15,15 @@ exports.Grid = class
   invokePopover: (row) ->
     @casper.click "#{@selector} tr.jqgrow:nth-child(#{row + 2}) td:nth-child(2) a[data-toggle=popover]"
 
+  # Click next page.
   clickNextPage: ->
     @casper.click "#{@selector} div#gridPager .ui-icon-seek-next"
 
+  # Click prev page.
   clickPrevPage: ->
     @casper.click "#{@selector} div#gridPager .ui-icon-seek-prev"
 
+  # Click the heder for the given column name.
   clickHeader: (name) ->
     @casper.click "#{@selector} table.ui-jqgrid-htable th#grid_#{name} div.ui-jqgrid-sortable"
 

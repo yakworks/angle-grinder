@@ -1,6 +1,7 @@
 baseUrl = "http://localhost:9000"
 scenario = require("./test/casperjs/helpers/scenario").create(baseUrl)
 
+# Page objects
 EditDialog = require("./test/casperjs/helpers/page_objects/edit_dialog").EditDialog
 Grid = require("./test/casperjs/helpers/page_objects/grid").Grid
 
@@ -10,12 +11,12 @@ scenario "Basic grid scenario", ->
 
   @feature "Navigate to the example", ->
     @clickLabel "agGrid directive basic", "a"
-    @test.assertUrlMatch /ag_grid_directive$/
+    @then ->
+      @test.assertUrlMatch /ag_grid_directive$/
+      @test.assertSelectorHasText "section.content h2", "Angular directive example"
 
   @feature "Display grid with all data", ->
-    @test.assertSelectorHasText "section.content h2", "Angular directive example"
-
-    @test.assertEquals grid.getRowsCount(), 20, "Loads grid data and displays the first 20 rows"
+    @test.assertEquals grid.getRowsCount(), 20, "Loads the data and displays the first 20 rows"
 
     for id in [1...20]
       customerName = grid.getCellText(id - 1, "customer.name")
@@ -25,15 +26,15 @@ scenario "Basic grid scenario", ->
     @clickLabel "Add Item", "button"
 
     @then ->
-      # TODO assert dialog.isVisible()
-      @test.assertEquals dialog.getTitle(), "Create New Item",
-        "'Create new item dialog' appears"
+      @test.assertTruthy dialog.isVisible(), "'Create new item dialog' appears"
+      @test.assertEquals dialog.getTitle(), "Create New Item"
 
       dialog.fillFormWith
         customer_name: "New customer"
         date: "2013-07-03"
         note: "This is the test note"
       dialog.clickSave()
+      @test.assertFalsy dialog.isVisible()
 
     @then ->
       newRow = grid.getRow(0)
@@ -46,14 +47,15 @@ scenario "Basic grid scenario", ->
     grid.clickCell(1, "customer.name")
 
     @then ->
-      @test.assertEquals dialog.getTitle(), "Edit Item Test Customer 1",
-        "Edit item dialog appears"
+      @test.assertTruthy dialog.isVisible(), "Edit item dialog appears"
+      @test.assertEquals dialog.getTitle(), "Edit Item Test Customer 1"
 
       dialog.fillFormWith
         customer_name: "New name for the first customer"
         date: "2013-07-04"
         note: "This is the other note"
       dialog.clickSave()
+      @test.assertFalsy dialog.isVisible()
 
     @then ->
       updatedRow = grid.getRow(1)
@@ -66,12 +68,13 @@ scenario "Basic grid scenario", ->
     grid.clickEditRow(2)
 
     @then ->
-      @test.assertEquals dialog.getTitle(), "Edit Item Test Customer 2",
-        "Edit item dialog appears"
+      @test.assertTruthy dialog.isVisible(), "Edit item dialog appears"
+      @test.assertEquals dialog.getTitle(), "Edit Item Test Customer 2"
 
       dialog.fillFormWith
         customer_name: "Yet another name"
       dialog.clickSave()
+      @test.assertFalsy dialog.isVisible()
 
     @then ->
       updatedRow = grid.getRow(2)
@@ -102,7 +105,6 @@ scenario "Basic grid scenario", ->
       @test.assertEquals firstRow["note"], "This is the other note"
 
   @feature "Pagination", ->
-
     @then ->
       grid.clickNextPage()
 
