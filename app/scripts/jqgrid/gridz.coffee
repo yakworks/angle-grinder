@@ -1,9 +1,7 @@
-# Class definition
-# TODO use pure coffeescript clas
-Gridz = (element, options) ->
-  @init element, options
+class Gridz
+  constructor: (element, options) ->
+    @init element, options
 
-Gridz:: =
   init: (element, opts) ->
     $el = $(element)
 
@@ -12,9 +10,7 @@ Gridz:: =
     @$grid = $el
     @gridId = $el.attr("id")
 
-    ###
-    the containing div for the grid , will be built after jqGrid is called
-    ###
+    # the containing div for the grid, will be built after jqGrid is called
     @gboxId = "gbox_#{@gridId}"
     @options = @getOptions(opts)
 
@@ -27,13 +23,6 @@ Gridz:: =
 
   getOptions: (options) ->
     options = $.extend({}, $.fn.gridz.defaults, options)
-
-    #Events .. beforeSelectRow
-    optBeforeSelectRow = options.beforeSelectRow
-    options.beforeSelectRow = (rowid, e) =>
-      @beforeSelectRow.apply this, arguments
-      optBeforeSelectRow.apply this, arguments  if $.isFunction(optBeforeSelectRow)
-      true
 
     # Events .. gridComplete
     _gridComplete = options.gridComplete
@@ -53,60 +42,6 @@ Gridz:: =
   ###
   gridComplete: ->
     @actionPopupSetup() if @options.actionPopup
-    gid = "jqgh_#{@$element.attr("id")}_row_action_col"
-
-  # disable the sortable property on the action column
-  #$('tr.ui-jqgrid-labels').sortable({ cancel: 'th:#'+gid});
-  # update the list of sortable item's, and exclude your target element
-  #$('tr.ui-jqgrid-labels').sortable({ items: "th:not(#" + gid + ")" });
-
-  ###
-  Handles proper multi selection of rows
-  ###
-  beforeSelectRow: (rowid, e) ->
-    $this = $(this)
-    rows = @rows
-    # get id of the previous selected row
-    startId = $this.jqGrid("getGridParam", "selrow")
-    startRow = undefined
-    endRow = undefined
-    iStart = undefined
-    iEnd = undefined
-    i = undefined
-    rowidIndex = undefined
-    isCheckBox = $(e.target).hasClass("cbox")
-
-    if not e.ctrlKey and not e.shiftKey and not e.metaKey and not isCheckBox
-      $this.jqGrid "resetSelection"
-    else if startId and e.shiftKey
-
-      #console.log("shift select")
-      $this.jqGrid "resetSelection"
-
-      # get DOM elements of the previous selected and
-      # the currect selected rows
-      startRow = rows.namedItem(startId)
-      endRow = rows.namedItem(rowid)
-      if startRow and endRow
-
-        # get min and max from the indexes of the previous selected
-        # and the currect selected rows
-        iStart = Math.min(startRow.rowIndex, endRow.rowIndex)
-        rowidIndex = endRow.rowIndex
-        iEnd = Math.max(startRow.rowIndex, rowidIndex)
-        i = iStart
-        while i <= iEnd
-          # the row with rowid will be selected by
-          # jqGrid. So we don't need select it
-          $this.jqGrid "setSelection", rows[i].id, false if i isnt rowidIndex
-          i++
-
-      # clear text selection
-      if document.selection and document.selection.empty
-        document.selection.empty()
-      else window.getSelection().removeAllRanges() if window.getSelection
-
-    true
 
   ###
   adds listener to resize grid to parent container when window is resized.
@@ -124,8 +59,6 @@ Gridz:: =
 
       if Math.abs(w - curWidth) > 2
         $grid.setGridWidth w
-
-  #.trigger('resize')
 
   #*************Action popup methods*************
 
@@ -153,10 +86,12 @@ Gridz:: =
   default rowActionFormatter. containerId is the dom el to add the drop down to
   ###
   actionPopupFormatter: (containerId) ->
-    '<a class="jqg-row-action" title="" data-toggle="popover"
-        href="#" data-container="#' + containerId + '"><i class="icon-cog"></i></a>'
+    """
+    <a class="jqg-row-action" data-toggle="popover" href="#"
+       data-container="##{containerId}"><i class="icon-cog"></i></a>
+    """
 
-  #called after grid complete to setup the menu
+  # called after grid complete to setup the menu
   actionPopupSetup: ->
     self = this
     options = @options
@@ -191,11 +126,7 @@ Gridz:: =
       onShown: ->
         self.actionPopupOnShow.call self, this
 
-  #this = the clickover <a>
-  #assignActionRowId.call(self,this)
-  #addActionPopupListeners(self,this,$grid)
-
-  #fired when the clickover is shown
+  # fired when the clickover is shown
   actionPopupOnShow: (clickoverEl) ->
     self = this
 
@@ -232,8 +163,8 @@ $.fn.gridz = (option) ->
   @each ->
     $this = $(this)
     instance = $this.data("gridz")
-    options = (if typeof option is "object" then option else {})
-    $this.data "gridz", (instance = new Gridz(this, options))  unless instance
+    options = if typeof option is "object" then option else {}
+    $this.data "gridz", (instance = new Gridz(this, options)) unless instance
 
 $.fn.gridz.Constructor = Gridz
 
@@ -256,12 +187,9 @@ $.fn.gridz.defaults =
   autowidth: true
   height: "100%"
   sortable: true
-  multiselect: true #one or more row selections
+  multiselect: true # one or more row selections
   pager: "#gridPager"
 
-  # onSortCol:sortColumn,
-  # onPaging:pagingChange,
-  beforeSelectRow: null
   gridComplete: null
   actionPopup:
     formatter: null
@@ -273,4 +201,6 @@ $.extend $.fn.fmatter,
     if cellVal then "<i class='icon-ok'></i>" else ""
 
   editActionLink: (cellVal, options, rowdata) ->
-    "<a class='editActionLink' href='#' >#{cellVal}</a>"
+    """
+    <a class="editActionLink" href="#">#{cellVal}</a>
+    """

@@ -47,7 +47,7 @@ module.exports = (grunt) ->
       html:
         files: [
           "<%= appConfig.app %>/index.html"
-          "<%= appConfig.app %>/views/*.html"
+          "<%= appConfig.app %>/views/**/*.html"
         ]
         tasks: ["copy:dev"]
 
@@ -189,7 +189,7 @@ module.exports = (grunt) ->
         autoWatch: true
 
     casperjs:
-      files: ["<%= appConfig.dev %>/test/casperjs/**/*.js"]
+      files: ["<%= appConfig.dev %>/test/casperjs/**/*_scenario.js"]
 
     clean:
       options:

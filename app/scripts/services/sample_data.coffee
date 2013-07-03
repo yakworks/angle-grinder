@@ -30,10 +30,11 @@ services.factory "sampleData", [
           customer: name: "Test Customer #{id}"
           name: "Test Item #{id}"
           description: "Test Description #{id}"
-          note: "Note"
+          note: "Note number #{id}"
           amount: random.range(20, 200) / 10.0
           tax: random.range(10, 100) / 10.0
           total: random.range(100, 1000) / 10.0
+          complete: Math.random() > 0.5
 
       rows
 ]
