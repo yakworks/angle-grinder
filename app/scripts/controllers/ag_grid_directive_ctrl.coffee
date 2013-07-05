@@ -13,11 +13,11 @@ class AgGridDirectiveCtrl
 
     $scope.editDialog = (id) =>
       item = @findItemById(id)
-      editDialog.open("/views/partials/item_form.html", item)
+      editDialog.open("templates/partials/item_form.html", item)
 
     $scope.createDialog = =>
       newItem = {}
-      editDialog.open("/views/partials/item_form.html", newItem)
+      editDialog.open("templates/partials/item_form.html", newItem)
         .then (item) => @data.push(item)
 
   findItemById: (id) ->
