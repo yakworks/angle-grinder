@@ -66,8 +66,8 @@ class JqGridBasicCtrl
       sorttype: "int"
       search: true
     ,
-      name: "invdate"
-      index: "invdate"
+      name: "invoiceDate"
+      index: "invoiceDate"
       editable: true
       label: "Date"
       width: 90

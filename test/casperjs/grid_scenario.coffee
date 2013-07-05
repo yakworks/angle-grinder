@@ -39,7 +39,7 @@ scenario "Basic grid scenario", ->
     @then ->
       newRow = grid.getRow(0)
       @test.assertEquals newRow["customer.name"], "New customer"
-      @test.assertEquals newRow["invdate"], "2013-07-03"
+      @test.assertEquals newRow["invoiceDate"], "2013-07-03"
       @test.assertEquals newRow["note"], "This is the test note"
 
   @feature "Edit item", ->
@@ -61,7 +61,7 @@ scenario "Basic grid scenario", ->
       updatedRow = grid.getRow(1)
       @test.assertEquals updatedRow["id"], "1"
       @test.assertEquals updatedRow["customer.name"], "New name for the first customer"
-      @test.assertEquals updatedRow["invdate"], "2013-07-04"
+      @test.assertEquals updatedRow["invoiceDate"], "2013-07-04"
       @test.assertEquals updatedRow["note"], "This is the other note"
 
   @feature "Edit item from the dropdown menu", ->
