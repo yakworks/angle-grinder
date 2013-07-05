@@ -38,8 +38,8 @@ class SimpleJqGridCtrl
       width: 200
       editable: true
     ,
-      name: "invdate"
-      index: "invdate"
+      name: "invoiceDate"
+      index: "invoiceDate"
       label: "Date"
       editable: true
       width: 90

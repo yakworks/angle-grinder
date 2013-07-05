@@ -39,7 +39,7 @@ describe "services", ->
 
       expect(firstRow.id).toBeDefined()
       expect(firstRow.id).toEqual(1)
-      expect(firstRow.invdate).toBeDefined()
+      expect(firstRow.invoiceDate).toBeDefined()
       expect(firstRow.name).toBeDefined()
       expect(firstRow.note).toBeDefined()
       expect(firstRow.tax).toBeDefined()
