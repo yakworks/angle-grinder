@@ -144,6 +144,19 @@ module.exports = (grunt) ->
           ]
         ]
 
+      dist:
+        files: [
+          expand: true
+          dot: true
+          cwd: "<%= appConfig.app %>"
+          dest: "<%= appConfig.dist %>"
+          src: [
+            "font/**/*"
+            "img/**/*"
+            "styles/gridz.css"
+          ]
+        ]
+
     coffeelint:
       options:
         max_line_length:
@@ -295,6 +308,7 @@ module.exports = (grunt) ->
 
   grunt.registerTask "build:dist", [
     "test:ci"
+    "copy:dist"
     "useminPrepare"
     "htmlmin"
     "concat"
