@@ -1,1 +1,1 @@
-angular.module("angleGrinder.controllers", [])
+angular.module("angleGrinder.controllers", ["angleGrinder.templates"])

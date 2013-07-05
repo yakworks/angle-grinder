@@ -25,7 +25,7 @@ services.factory "sampleData", [
       for id in [1..count]
         rows.push
           id: id
-          invdate: random.date(new Date(2001, 1, 1))
+          invoiceDate: random.date(new Date(2001, 1, 1))
           tranDate: random.date(new Date(2001, 1, 1))
           customer: name: "Test Customer #{id}"
           name: "Test Item #{id}"

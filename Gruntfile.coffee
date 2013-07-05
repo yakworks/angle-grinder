@@ -52,8 +52,8 @@ module.exports = (grunt) ->
         tasks: ["copy:dev"]
 
       templates:
-        files: ["<%= appConfig.app %>/templates/**/*.tpl.html"]
-        tasks: ["html2js"]
+        files: ["<%= appConfig.app %>/templates/**/*.html"]
+        tasks: ["ngtemplates"]
 
       css:
         files: ["<%= appConfig.app %>/styles/**/*.less"]
@@ -98,12 +98,18 @@ module.exports = (grunt) ->
           ]
 
     useminPrepare:
-      html: "<%= appConfig.dev %>/index.html"
+      html: [
+        "<%= appConfig.dev %>/**/*.html"
+        "!<%= appConfig.dev %>/templates/**/*.html"
+      ]
       options:
         dest: "<%= appConfig.dist %>"
 
     usemin:
-      html: ["<%= appConfig.dist %>/index.html"]
+      html: [
+        "<%= appConfig.dist %>/**/*.html"
+        "!<%= appConfig.dist %>/templates/**/*.html"
+      ]
       css: ["<%= appConfig.dist %>/styles/**/*.css"]
       options:
         dirs: ["<%= appConfig.dist %>"]
@@ -113,7 +119,10 @@ module.exports = (grunt) ->
         files: [
           expand: true,
           cwd: "<%= appConfig.app %>",
-          src: ["*.html", "views/*.html", "templates/*.tpl.html"],
+          src: [
+            "**/*.html"
+            "!templates/**/*.html"
+          ],
           dest: "<%= appConfig.dist %>"
         ]
 
@@ -127,6 +136,7 @@ module.exports = (grunt) ->
           src: [
             "*.{ico,txt}"
             "**/*.html"
+            "!templates/**/*.html"
             "components/**/*"
             "img/**/*.{gif,webp}"
             "font/*"
@@ -143,11 +153,18 @@ module.exports = (grunt) ->
       app: ["Gruntfile.coffee", "<%= appConfig.app %>/scripts/**/*.coffee"]
       test: ["<%= appConfig.test %>/**/*.coffee"]
 
-    html2js:
+    ngtemplates:
       options:
-        base: "app"
-      main:
-        src: ["<%= appConfig.app %>/templates/**/*.tpl.html"]
+        base: "<%= appConfig.app %>"
+        module:
+          name: "angleGrinder.templates"
+          define: true
+
+      myApp:
+        src: [
+          "<%= appConfig.app %>/templates/**/*.html"
+          "<%= appConfig.app %>/views/**/*.html"
+        ]
         dest: "<%= appConfig.dev %>/scripts/templates.js"
 
     bower:
@@ -160,18 +177,18 @@ module.exports = (grunt) ->
 
     karma:
       options:
-        configFile: "<%= appConfig.test %>/karma.conf.coffee"
         basePath: "../<%= appConfig.dev %>"
         browsers: parseBrowsers(defaultBrowser: "PhantomJS")
         colors: true
-        # test results reporter to use
-        # possible values: dots || progress || growl
-        reporters: ["dots"]
-        # If browser does not capture in given timeout [ms], kill it
+      # test results reporter to use
+      # possible values: dots || progress || growl
+        reporters: ["spec"]
+      # If browser does not capture in given timeout [ms], kill it
         captureTimeout: 5000
 
       unit:
-        reporters: ["dots", "coverage"]
+        configFile: "<%= appConfig.test %>/karma.conf.coffee"
+        reporters: ["spec", "coverage"]
         preprocessors:
           "scripts/**/*.js": "coverage"
         coverageReporter:
@@ -182,9 +199,11 @@ module.exports = (grunt) ->
 
       e2e:
         configFile: "<%= appConfig.test %>/karma-e2e.conf.coffee"
-        singleRun: true
+        singleRun: true # `false` for debugging
 
       watch:
+        configFile: "<%= appConfig.test %>/karma.conf.coffee"
+        reporters: ["dots"]
         singleRun: false
         autoWatch: true
 
@@ -232,6 +251,7 @@ module.exports = (grunt) ->
     "coffee"
     "less"
     "copy:dev"
+    "ngtemplates"
   ]
 
   grunt.registerTask "server", [
@@ -244,7 +264,7 @@ module.exports = (grunt) ->
 
   grunt.registerTask "test", [
     "build:dev"
-    "html2js"
+    "ngtemplates"
     "karma:unit"
   ]
 
@@ -263,7 +283,7 @@ module.exports = (grunt) ->
   # run all tests on the ci server
   grunt.registerTask "test:ci", [
     "build:dev"
-    "html2js"
+    "ngtemplates"
 
     # run unit tests
     "karma:unit"

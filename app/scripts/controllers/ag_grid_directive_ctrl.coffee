@@ -35,7 +35,7 @@ class AgGridDirectiveCtrl
       label: "Customer"
       formatter: "editActionLink"
     ,
-      name: "invdate"
+      name: "invoiceDate"
       label: "Date"
     ,
       name: "note"
