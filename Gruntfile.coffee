@@ -177,18 +177,18 @@ module.exports = (grunt) ->
 
     karma:
       options:
-        configFile: "<%= appConfig.test %>/karma.conf.coffee"
         basePath: "../<%= appConfig.dev %>"
         browsers: parseBrowsers(defaultBrowser: "PhantomJS")
         colors: true
-        # test results reporter to use
-        # possible values: dots || progress || growl
-        reporters: ["dots"]
-        # If browser does not capture in given timeout [ms], kill it
+      # test results reporter to use
+      # possible values: dots || progress || growl
+        reporters: ["spec"]
+      # If browser does not capture in given timeout [ms], kill it
         captureTimeout: 5000
 
       unit:
-        reporters: ["dots", "coverage"]
+        configFile: "<%= appConfig.test %>/karma.conf.coffee"
+        reporters: ["spec", "coverage"]
         preprocessors:
           "scripts/**/*.js": "coverage"
         coverageReporter:
@@ -199,9 +199,11 @@ module.exports = (grunt) ->
 
       e2e:
         configFile: "<%= appConfig.test %>/karma-e2e.conf.coffee"
-        singleRun: true
+        singleRun: true # `false` for debugging
 
       watch:
+        configFile: "<%= appConfig.test %>/karma.conf.coffee"
+        reporters: ["dots"]
         singleRun: false
         autoWatch: true
 
