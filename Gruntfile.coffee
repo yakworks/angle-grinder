@@ -180,10 +180,10 @@ module.exports = (grunt) ->
         basePath: "../<%= appConfig.dev %>"
         browsers: parseBrowsers(defaultBrowser: "PhantomJS")
         colors: true
-      # test results reporter to use
-      # possible values: dots || progress || growl
+        # test results reporter to use
+        # possible values: dots || progress || growl
         reporters: ["spec"]
-      # If browser does not capture in given timeout [ms], kill it
+        # If browser does not capture in given timeout [ms], kill it
         captureTimeout: 5000
 
       unit:
