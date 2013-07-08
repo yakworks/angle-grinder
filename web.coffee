@@ -1,6 +1,8 @@
 express = require("express")
 path = require("path")
-data = require("./web/data").load()
+
+Data = require("./web/data")
+data = new Data()
 
 app = express()
 
@@ -10,10 +12,11 @@ app.use express.static(path.join(__dirname, "dist"))
 app.get "/api/users.json", (req, res) ->
   page = parseInt(req.query["page"]) || 1
   pageSize = parseInt(req.query["max"]) || 20
+  sort = req.query["sort"] || "id"
+  order = req.query["order"] || "asc"
 
-  pagedData = data.slice((page - 1) * pageSize, page * pageSize)
-  records = data.length
-  res.send page: page, total: Math.ceil(records / pageSize), records: records, rows: pagedData
+  pagedData = data.getPaged(page, pageSize, sort, order)
+  res.send pagedData
 
 port = 8000
 app.listen port, ->
