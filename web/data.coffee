@@ -27,4 +27,10 @@ class Data
     _.find @data, (row) ->
       row.id is id
 
+  update: (id, data) ->
+    row = @findById(id)
+    for key, value of data
+      row[key] = value
+    row
+
 module.exports = Data

@@ -7,6 +7,7 @@ data = new Data()
 app = express()
 
 app.use express.logger()
+app.use express.bodyParser()
 app.use express.static(path.join(__dirname, "dist"))
 
 app.get "/api/users.json", (req, res) ->
@@ -21,6 +22,10 @@ app.get "/api/users.json", (req, res) ->
 app.get "/api/users/:id.json", (req, res) ->
   row = data.findById(req.params.id)
   res.send row
+
+app.put "/api/users/:id.json", (req, res) ->
+  updatedRow = data.update(req.params.id, req.body)
+  res.send updatedRow
 
 port = 8000
 app.listen port, ->

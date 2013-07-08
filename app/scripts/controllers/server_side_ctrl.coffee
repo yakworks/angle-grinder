@@ -9,7 +9,7 @@ class ServerSideCtrl
 
     $scope.editDialog = (id) =>
       user = Users.get(id: id)
-      editDialog.open("templates/partials/user_form.html", user)
+      editDialog.open("templates/partials/user_form.html", user, "EditRemoteItemCtrl")
 
   gridColumns: ->
     [
