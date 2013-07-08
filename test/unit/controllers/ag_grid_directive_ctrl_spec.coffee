@@ -1,6 +1,5 @@
 describe "AgGridDirectiveCtrl", ->
   beforeEach module("angleGrinder.gridz")
-  beforeEach module("angleGrinder.services")
   beforeEach module("angleGrinder.controllers")
 
   controller = null

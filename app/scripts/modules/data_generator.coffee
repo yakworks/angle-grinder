@@ -1,6 +1,6 @@
-services = angular.module("angleGrinder.services")
+dataGenerator = angular.module("angleGrinder.dataGenerator", [])
 
-services.factory "random", ->
+dataGenerator.factory "random", ->
   range: (min, max) ->
     Math.floor (Math.random() * (max - min)) + min
 
@@ -17,7 +17,7 @@ services.factory "random", ->
 
     "#{year}-#{month}-#{day}"
 
-services.factory "sampleData", [
+dataGenerator.factory "sampleData", [
   "random", (random) ->
     (count = 50) ->
       rows = []
