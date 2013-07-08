@@ -6,8 +6,7 @@ class Data
 
   loadData: ->
     data = require("./large_load")
-    id = 0
-    row.id = ++id for row in data
+    row.id = @nextId() for row in data
 
     data
 
@@ -27,10 +26,19 @@ class Data
     _.find @data, (row) ->
       row.id is id
 
+  create: (data) ->
+    data.id = @nextId()
+    @data.push(data)
+    data
+
   update: (id, data) ->
     row = @findById(id)
     for key, value of data
       row[key] = value
     row
+
+  nextId: ->
+    @currentId or= 0
+    ++@currentId
 
 module.exports = Data
