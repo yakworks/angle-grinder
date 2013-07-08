@@ -5,6 +5,7 @@ $ ->
 
 app = angular.module("angleGrinder", [
   "angleGrinder.gridz"
+  "angleGrinder.resources"
   "angleGrinder.services"
   "angleGrinder.controllers"
 ])

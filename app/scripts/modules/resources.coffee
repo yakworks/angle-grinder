@@ -1,6 +1,6 @@
-services = angular.module("angleGrinder.services")
+resources = angular.module("angleGrinder.resources", ["ngResource"])
 
-services.factory "Users", [
+resources.factory "Users", [
   "$resource", ($resource) ->
     Users = $resource "/api/users/:id", { id: "@id" },
       get: { method: "GET" },

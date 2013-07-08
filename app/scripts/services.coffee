@@ -1,1 +1,1 @@
-angular.module("angleGrinder.services", ["ngResource"])
+angular.module("angleGrinder.services", [])
