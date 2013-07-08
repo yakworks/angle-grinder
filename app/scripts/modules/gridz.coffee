@@ -1,6 +1,24 @@
-directives = angular.module("angleGrinder.directives")
+gridz = angular.module("angleGrinder.gridz", ["ui.bootstrap"])
 
-directives.directive "agGrid", ->
+class EditItemCtrl
+
+  @$inject = ["$scope", "$rootScope", "dialog", "item", "createNew", "flatten"]
+  constructor: ($scope, $rootScope, dialog, item, createNew, flatten) ->
+    $scope.item = item
+    $scope.createNew = createNew
+
+    $scope.closeEditDialog = ->
+      dialog.close($scope.item)
+
+    $scope.save = ->
+      item.save (response) ->
+        # Flattening the object before insering it to the grid
+        $rootScope.$broadcast("itemUpdated", flatten(response))
+        $scope.closeEditDialog()
+
+gridz.controller "EditItemCtrl", EditItemCtrl
+
+gridz.directive "agGrid", ->
   link = ($scope, element, attrs) ->
     $grid = $("#grid", element)
 
@@ -58,3 +76,31 @@ directives.directive "agGrid", ->
             <div id="gridPager"></div>
             """
   link: link
+
+gridz.service "editDialog", [
+  "$dialog", ($dialog) ->
+    open: (templateUrl, item) ->
+      dialog = $dialog.dialog
+        backdropFade: false
+        dialogFade: false
+        resolve:
+          item: -> item
+          createNew: -> not item.id?
+
+      # override so we can intercept form dirty and prevent escape
+      dialog.handledEscapeKey = (e) ->
+        if e.which is 27
+          e.preventDefault()
+          unless dialog.$scope.editForm.$dirty
+            dialog.close()
+            dialog.$scope.$apply()
+
+      # override so we can intercept form dirty and prevent backdrop click
+      dialog.handleBackDropClick = (e) ->
+        e.preventDefault()
+        unless dialog.$scope.editForm.$dirty
+          dialog.close()
+          dialog.$scope.$apply()
+
+      dialog.open templateUrl, "EditItemCtrl"
+]

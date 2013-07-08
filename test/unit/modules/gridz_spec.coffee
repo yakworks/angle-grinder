@@ -1,7 +1,7 @@
-describe "directives", ->
-  beforeEach module("angleGrinder.directives")
+describe "angleGrinder.gridz", ->
+  beforeEach module("angleGrinder.gridz")
 
-  describe "agGrid", ->
+  describe "agGrid directive", ->
     element = null
     gridz = null
 
@@ -34,3 +34,15 @@ describe "directives", ->
       expect(element.find("div.ui-jqgrid").length).toEqual 1
       expect(element.find("table#grid").length).toEqual 1
       expect(element.find("div#gridPager").length).toEqual 1
+
+  describe "editDialog service", ->
+    it "is defined", inject (editDialog) ->
+      expect(editDialog).toBeDefined()
+
+    describe "#open", ->
+      beforeEach inject ($httpBackend) ->
+        $httpBackend.whenGET("/views/some_template.html").respond({})
+
+      it "opens the create dialog", inject (editDialog) ->
+        item = name: "Foo"
+        editDialog.open("/views/some_template.html", item)

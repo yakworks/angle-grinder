@@ -4,10 +4,9 @@ $ ->
   $("#topbar").load "/navbar_top.html"
 
 app = angular.module("angleGrinder", [
-  "angleGrinder.directives"
+  "angleGrinder.gridz"
   "angleGrinder.services"
   "angleGrinder.controllers"
-  "ui.bootstrap"
 ])
 
 app.config [
