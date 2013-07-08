@@ -7,13 +7,14 @@ app = express()
 app.use express.logger()
 app.use express.static(path.join(__dirname, "dist"))
 
-app.get "/users.json", (req, res) ->
+app.get "/api/users.json", (req, res) ->
   page = parseInt(req.query["page"]) || 1
-  pageSize = parseInt(req.query["pageSize"]) || 20
+  pageSize = parseInt(req.query["max"]) || 20
 
   pagedData = data.slice((page - 1) * pageSize, page * pageSize)
-  res.send pagedData
+  records = data.length
+  res.send page: page, total: Math.ceil(records / pageSize), records: records, rows: pagedData
 
-port = process.env.PORT or 5000
+port = 8000
 app.listen port, ->
   console.log "listening on port " + port

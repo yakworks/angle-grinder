@@ -35,5 +35,9 @@ app.config [
         templateUrl: "templates/ag_grid_directive.html",
         controller: "AgGridDirectiveCtrl"
 
+      .when "/server_side",
+        templateUrl: "templates/server_side.html",
+        controller: "ServerSideCtrl"
+
       .otherwise redirectTo: "/"
 ]
