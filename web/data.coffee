@@ -11,17 +11,20 @@ class Data
 
     data
 
-  length: ->
-    @data.length
+  length: -> @data.length
+
+  total: (pageSize) -> Math.ceil(@length() / pageSize)
 
   getPaged: (page, pageSize, sort, order) ->
-    sortedData = _(@data).sortBy (row) ->
-      row[sort]
+    sortedData = _(@data).sortBy (row) -> row[sort]
     sortedData = sortedData.reverse() if order is "desc"
     pagedData = sortedData.slice((page - 1) * pageSize, page * pageSize)
 
-    records = @data.length
-    total = Math.ceil(records / pageSize)
-    page: page, total: total, records: records, rows: pagedData
+    page: page, total: @total(pageSize), records: @length(), rows: pagedData
+
+  findById: (id) ->
+    id = parseInt(id)
+    _.find @data, (row) ->
+      row.id is id
 
 module.exports = Data

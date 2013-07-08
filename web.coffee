@@ -18,6 +18,10 @@ app.get "/api/users.json", (req, res) ->
   pagedData = data.getPaged(page, pageSize, sort, order)
   res.send pagedData
 
+app.get "/api/users/:id.json", (req, res) ->
+  row = data.findById(req.params.id)
+  res.send row
+
 port = 8000
 app.listen port, ->
   console.log "listening on port " + port

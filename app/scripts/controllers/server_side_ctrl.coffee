@@ -1,11 +1,15 @@
 class ServerSideCtrl
 
-  @$inject = ["$scope"]
-  constructor: ($scope) ->
+  @$inject = ["$scope", "editDialog", "Users"]
+  constructor: ($scope, editDialog, Users) ->
     $scope.gridOptions =
       url: "/api/users.json"
       colModel: @gridColumns()
       sortname: "id"
+
+    $scope.editDialog = (id) =>
+      user = Users.get(id: id)
+      editDialog.open("templates/partials/user_form.html", user)
 
   gridColumns: ->
     [
@@ -14,6 +18,7 @@ class ServerSideCtrl
     ,
       name: "name"
       label: "Name"
+      formatter: "editActionLink"
     ,
       name: "allowance"
       label: "Allowance"
