@@ -4,22 +4,19 @@
 
 ## Bootstrap
 
-Install nodejs v0.10.7 from the sources:
+Install nodejs v0.10.12 from the sources:
 
 ```
 sudo apt-get install build-essential openssl libssl-dev pkg-config
 
-wget http://nodejs.org/dist/v0.10.7/node-v0.10.7.tar.gz
-tar -xzf node-v0.10.7.tar.gz
+wget http://nodejs.org/dist/v0.10.12/node-v0.10.12.tar.gz
+tar -xzf node-v0.10.12.tar.gz
 
-cd node-v0.10.7
+cd node-v0.10.12
 ./configure
 make
 sudo make install
 ```
-
-Newer versions of nodejs cause problems with karma and PhantomJS
-see: https://github.com/karma-runner/karma/issues/558
 
 ## Install tools
 
@@ -54,7 +51,7 @@ Detailed instructions http://casperjs.org/installation.html
 
 ```
 ./script/bootstrap.sh
-grunt server
+foreman start
 ```
 
 open http://localhost:9000
