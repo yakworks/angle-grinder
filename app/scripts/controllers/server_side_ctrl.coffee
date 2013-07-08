@@ -7,13 +7,17 @@ class ServerSideCtrl
       colModel: @gridColumns()
       sortname: "id"
 
-    $scope.editDialog = (id) =>
+    $scope.editDialog = (id) ->
       user = Users.get(id: id)
       editDialog.open("templates/partials/user_form.html", user, "EditRemoteItemCtrl")
 
-    $scope.createDialog = =>
+    $scope.createDialog = ->
       newItem = new Users()
       editDialog.open("templates/partials/user_form.html", newItem, "EditRemoteItemCtrl")
+
+    $scope.deleteItem = (id) ->
+      user = new Users(id: id)
+      user.$delete -> $scope.$broadcast "itemDeleted"
 
   gridColumns: ->
     [

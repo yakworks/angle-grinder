@@ -21,6 +21,10 @@ directives.directive "agGrid", ->
       id = $(this).parents("tr:first").attr("id")
       invokeEditItemDialogFor(id)
 
+    $grid.on "deleteAction", (event, id) ->
+      event.preventDefault()
+      $scope.$apply -> $scope.deleteItem id
+
     # catch broadcast event after save. This will need to change
     $scope.$on "itemUpdated", (event, data) ->
       if $grid.jqGrid("getInd", data.id)
@@ -34,6 +38,9 @@ directives.directive "agGrid", ->
       $(ind).delay(100).fadeOut("medium", ->
         $(ind).css "background-color", ""
       ).fadeIn "fast"
+
+    $scope.$on "itemDeleted", ->
+      $grid.trigger "reloadGrid"
 
     $scope.$on "searchUpdated", (event, filter, currentScope = null) ->
       currentScope?.searching = true

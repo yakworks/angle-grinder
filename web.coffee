@@ -31,6 +31,10 @@ app.put "/api/users/:id", (req, res) ->
   row = data.update(req.params.id, req.body)
   res.send row
 
+app.delete "/api/users/:id", (req, res) ->
+  row = data.delete(req.params.id)
+  res.send row
+
 port = 8000
 app.listen port, ->
   console.log "listening on port", port

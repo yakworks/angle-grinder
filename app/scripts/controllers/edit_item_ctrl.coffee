@@ -14,7 +14,7 @@ class EditItemCtrl
       $scope.item.id = generateId() unless $scope.item.id?
 
       # Flattening the object before insering it to the grid
-      $rootScope.$broadcast("itemUpdated", flatten($scope.item))
+      $rootScope.$broadcast "itemUpdated", flatten($scope.item)
       $scope.closeEditDialog()
 
 controllers = angular.module("angleGrinder.controllers")

@@ -37,6 +37,12 @@ class Data
       row[key] = value
     row
 
+  delete: (id) ->
+    row = @findById(id)
+    if row?
+      @data = _.reject @data, (item) -> item.id is row.id
+      return row
+
   nextId: ->
     @currentId or= 0
     ++@currentId
