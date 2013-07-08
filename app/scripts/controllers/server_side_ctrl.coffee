@@ -5,15 +5,16 @@ class ServerSideCtrl
     $scope.gridOptions =
       url: "/api/users"
       colModel: @gridColumns()
+      rowNum: 10
       sortname: "id"
 
     $scope.editDialog = (id) ->
       user = Users.get(id: id)
-      editDialog.open("templates/partials/user_form.html", user, "EditRemoteItemCtrl")
+      editDialog.open("templates/partials/user_form.html", user)
 
     $scope.createDialog = ->
-      newItem = new Users()
-      editDialog.open("templates/partials/user_form.html", newItem, "EditRemoteItemCtrl")
+      user = new Users()
+      editDialog.open("templates/partials/user_form.html", user)
 
     $scope.deleteItem = (id) ->
       user = new Users(id: id)
@@ -23,6 +24,7 @@ class ServerSideCtrl
     [
       name: "id"
       width: 50
+      formatter: "editActionLink"
     ,
       name: "name"
       label: "Name"

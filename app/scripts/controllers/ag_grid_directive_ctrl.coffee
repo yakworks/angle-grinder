@@ -13,16 +13,24 @@ class AgGridDirectiveCtrl
 
     $scope.editDialog = (id) =>
       item = @findItemById(id)
+      item.save = (callback) -> callback(this)
+
       editDialog.open("templates/partials/item_form.html", item)
 
     $scope.createDialog = =>
-      newItem = {}
-      editDialog.open("templates/partials/item_form.html", newItem)
+      item = {}
+      item.save = (fn = ->) ->
+        generateId = -> new Date().getTime()
+        item.id = generateId()
+        fn(this)
+
+      editDialog.open("templates/partials/item_form.html", item)
         .then (item) => @data.push(item)
 
   findItemById: (id) ->
     for item in @data
-      return item if item.id is parseInt(id)
+      if item.id is parseInt(id)
+        return item
 
   gridColumns: ->
     [

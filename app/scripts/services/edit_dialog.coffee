@@ -2,7 +2,7 @@ services = angular.module("angleGrinder.services")
 
 services.service "editDialog", [
   "$dialog", ($dialog) ->
-    open: (templateUrl, item, ctrl = "EditItemCtrl") ->
+    open: (templateUrl, item) ->
       dialog = $dialog.dialog
         backdropFade: false
         dialogFade: false
@@ -25,5 +25,5 @@ services.service "editDialog", [
           dialog.close()
           dialog.$scope.$apply()
 
-      dialog.open templateUrl, ctrl
+      dialog.open templateUrl, "EditItemCtrl"
 ]
