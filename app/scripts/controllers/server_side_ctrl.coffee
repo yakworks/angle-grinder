@@ -9,8 +9,8 @@ class ServerSideCtrl
       sortname: "id"
 
     $scope.editDialog = (id) ->
-      user = Users.get(id: id)
-      editDialog.open("templates/partials/user_form.html", user)
+      Users.get { id: id }, (user) ->
+        editDialog.open("templates/partials/user_form.html", user)
 
     $scope.createDialog = ->
       user = new Users()
