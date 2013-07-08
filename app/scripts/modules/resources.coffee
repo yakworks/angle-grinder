@@ -8,11 +8,14 @@ resources.factory "Users", [
       update: { method: "PUT" },
       delete: { method: "DELETE" }
 
-    # Backbone-style save() that inserts or updated the record
-    # based on the presence of an id.
     angular.extend Users.prototype,
+      # Retunrs true if the record is persisted (has an id)
+      persisted: -> @id?
+
+      # Backbone-style save() that inserts or updated the record
+      # based on the presence of an id.
       save: (onComplete = ->) ->
-        if @id?
+        if @persisted()
           @$update(onComplete)
         else
           @$save(onComplete)
