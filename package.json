@@ -1,6 +1,11 @@
 {
   "name": "angle-grinder",
   "version": "0.2.0",
+  "main": "./web.coffee",
+  "dependencies": {
+    "coffee-script": "~1.6.3",
+    "express": "~3.3.3"
+  },
   "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-contrib-connect": "~0.3.0",
