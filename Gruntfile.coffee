@@ -206,7 +206,7 @@ module.exports = (grunt) ->
         preprocessors:
           "scripts/**/*.js": "coverage"
         coverageReporter:
-          type: "text"
+          type: "html"
           dir: "coverage"
 
         singleRun: true
