@@ -10,6 +10,7 @@ module.exports = (config) ->
     files: [
       "components/jquery/jquery.js"
       "components/angular/angular.js"
+      "components/angular-resource/angular-resource.js"
       "components/angular-mocks/angular-mocks.js"
 
       "components/jqgrid/js/grid.base.js"
@@ -17,10 +18,7 @@ module.exports = (config) ->
 
       "scripts/jqgrid/gridz.js"
 
-      "scripts/directives.js"
-      "scripts/directives/**/*.js"
-      "scripts/services.js"
-      "scripts/services/**/*.js"
+      "scripts/modules/**/*.js"
       "scripts/controllers.js"
       "scripts/controllers/**/*.js"
       "scripts/templates.js"
