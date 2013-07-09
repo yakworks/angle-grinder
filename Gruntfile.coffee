@@ -1,4 +1,5 @@
 livereloadSnippet = require("grunt-contrib-livereload/lib/utils").livereloadSnippet
+proxySnippet = require("grunt-connect-proxy/lib/utils").proxyRequest
 
 mountFolder = (connect, dir) ->
   connect.static require("path").resolve(dir)
@@ -205,7 +206,7 @@ module.exports = (grunt) ->
         preprocessors:
           "scripts/**/*.js": "coverage"
         coverageReporter:
-          type: "text"
+          type: "html"
           dir: "coverage"
 
         singleRun: true
@@ -237,11 +238,22 @@ module.exports = (grunt) ->
       options:
         hostname: "localhost"
 
+      proxies: [
+        context: "/api"
+        host: "localhost"
+        port: 8000
+        https: false
+        changeOrigin: false
+      ]
+
       e2e:
         options:
           port: 9001
           middleware: (connect) ->
-            [mountFolder(connect, appConfig.dev)]
+            [
+              mountFolder(connect, appConfig.dev)
+              proxySnippet
+            ]
 
       livereload:
         options:
@@ -250,6 +262,7 @@ module.exports = (grunt) ->
             [
               livereloadSnippet
               mountFolder(connect, appConfig.dev)
+              proxySnippet
             ]
 
   grunt.renameTask "regarde", "watch"
@@ -267,6 +280,7 @@ module.exports = (grunt) ->
   grunt.registerTask "server", [
     "build:dev"
 
+    "configureProxies"
     "livereload-start"
     "connect:livereload"
     "watch"
@@ -280,12 +294,14 @@ module.exports = (grunt) ->
 
   grunt.registerTask "test:e2e", [
     "build:dev"
+    "configureProxies"
     "connect:e2e"
     "karma:e2e"
   ]
 
   grunt.registerTask "test:casperjs", [
     "build:dev"
+    "configureProxies"
     "connect:e2e"
     "casperjs"
   ]

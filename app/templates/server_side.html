@@ -1,0 +1,48 @@
+<section class="anchor">
+  <h2>Gridz with toolbar</h2>
+
+  <div class="navbar navbar-grid">
+    <div class="navbar-inner with-selected-pointer with-grid-options">
+      <ul class="nav">
+        <li><span class="icon-selected-pointer"> </span></li>
+        <li class="dropdown selected-actions">
+          <a data-toggle="dropdown" class="dropdown-toggle" href="#" stlye="padding-left:5px">
+            Actions <b class="caret"></b>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a href="#"><i class="icon-eye-open"></i> View</a></li>
+            <li><a href="#"><i class="icon-external-link"></i> Export</a></li>
+            <li><a href="#"><i class="icon-trash"></i> Delete</a></li>
+          </ul>
+        </li>
+        <li class="divider-vertical"></li>
+        <li>
+          <a href="" class="create-button" ng-click="createDialog()">
+            <i class="icon-edit"></i>New
+          </a>
+        </li>
+      </ul>
+
+      <ul class="nav pull-right">
+        <li><a href="#" title="search screen"><i class="icon-search"></i></a></li>
+        <li class="divider-vertical skinny"></li>
+        <li class="dropdown grid-options">
+          <a data-toggle="dropdown" class="dropdown-toggle" href="#"><i class="icon-cog"></i><b
+              class="caret"></b></i></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Columns</a></li>
+            <li><a href="#">Another action</a></li>
+            <li class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+          </ul>
+        </li>
+      </ul>
+      <form action="" class="navbar-search pull-right">
+        <input type="text" value="" placeholder="Search" class="search-query span2"
+               style="width: 150px;"/>
+      </form>
+    </div>
+  </div>
+
+  <div ag-grid="gridOptions"></div>
+</section>

@@ -1,6 +1,12 @@
 {
   "name": "angle-grinder",
   "version": "0.2.0",
+  "main": "./web.coffee",
+  "dependencies": {
+    "coffee-script": "~1.6.3",
+    "express": "~3.3.3",
+    "underscore": "~1.5.1"
+  },
   "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-contrib-connect": "~0.3.0",
@@ -25,7 +31,8 @@
     "karma-ng-scenario": "~0.0.2",
     "karma-spec-reporter": "~0.0.1",
     "karma-coverage": "~0.0.2",
-    "matchdep": "~0.1.1"
+    "matchdep": "~0.1.1",
+    "nodemon": "~0.7.8"
   },
     "engines": {
       "node": "0.10.x",

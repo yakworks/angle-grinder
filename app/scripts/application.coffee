@@ -1,13 +1,13 @@
 # The entry point for the application
 
 $ ->
+  # Load the navbar template
   $("#topbar").load "/navbar_top.html"
 
 app = angular.module("angleGrinder", [
-  "angleGrinder.directives"
-  "angleGrinder.services"
+  "angleGrinder.gridz"
+  "angleGrinder.resources"
   "angleGrinder.controllers"
-  "ui.bootstrap"
 ])
 
 app.config [
@@ -34,6 +34,10 @@ app.config [
       .when "/ag_grid_directive",
         templateUrl: "templates/ag_grid_directive.html",
         controller: "AgGridDirectiveCtrl"
+
+      .when "/server_side",
+        templateUrl: "templates/server_side.html",
+        controller: "ServerSideCtrl"
 
       .otherwise redirectTo: "/"
 ]

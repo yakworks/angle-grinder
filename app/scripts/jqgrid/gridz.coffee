@@ -146,7 +146,7 @@ class Gridz
       $grid.trigger "editAction", [id, self]
 
     $menu.on "click", "li a.row_action_delete", (e) ->
-      $grid.trigger "deleteAction"
+      $grid.trigger "deleteAction", [id]
 
 # register namespace
 $.extend true, window, grinder: Grid: Gridz

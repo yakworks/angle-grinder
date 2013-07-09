@@ -17,6 +17,7 @@
   <!-- build:js(dev) scripts/vendor.min.js -->
     <script type="text/javascript" src="components/jquery/jquery.js"></script>
     <script type="text/javascript" src="components/angular/angular.js"></script>
+    <script type="text/javascript" src="components/angular-resource/angular-resource.js"></script>
     <script type="text/javascript" src="components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 
     <!-- Twitter Bootstrap -->
@@ -50,19 +51,15 @@
     <script type="text/javascript" src="scripts/jqgrid/gridz.js"></script>
 
     <!-- AngularJS app -->
-    <script type="text/javascript" src="scripts/services.js"></script>
-    <script type="text/javascript" src="scripts/services/edit_dialog.js"></script>
-    <script type="text/javascript" src="scripts/services/flatten.js"></script>
-    <script type="text/javascript" src="scripts/services/sample_data.js"></script>
-
-    <script type="text/javascript" src="scripts/directives.js"></script>
-    <script type="text/javascript" src="scripts/directives/ag_grid.js"></script>
+    <script type="text/javascript" src="scripts/modules/data_generator.js"></script>
+    <script type="text/javascript" src="scripts/modules/gridz.js"></script>
+    <script type="text/javascript" src="scripts/modules/resources.js"></script>
 
     <script type="text/javascript" src="scripts/controllers.js"></script>
     <script type="text/javascript" src="scripts/controllers/ag_grid_directive_ctrl.js"></script>
-    <script type="text/javascript" src="scripts/controllers/edit_item_ctrl.js"></script>
     <script type="text/javascript" src="scripts/controllers/gridz_with_toolbar_ctrl.js"></script>
     <script type="text/javascript" src="scripts/controllers/jqgrid_basic_ctrl.js"></script>
+    <script type="text/javascript" src="scripts/controllers/server_side_ctrl.js"></script>
     <script type="text/javascript" src="scripts/controllers/simple_gridz_ctrl.js"></script>
     <script type="text/javascript" src="scripts/controllers/simple_jqgrid_ctrl.js"></script>
 
@@ -90,6 +87,7 @@
       <li><a href="#/simple_gridz"><i class="icon-chevron-right"></i>Simple gridz</a></li>
       <li><a href="#/jqgrid_basic"><i class="icon-chevron-right"></i>JqGrid basic</a></li>
       <li><a href="#/ag_grid_directive"><i class="icon-chevron-right"></i>agGrid directive basic</a></li>
+      <li><a href="#/server_side"><i class="icon-chevron-right"></i>Server Side</a></li>
     </ul>
   </aside>
 
