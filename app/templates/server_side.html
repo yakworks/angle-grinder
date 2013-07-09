@@ -1,6 +1,9 @@
 <section class="anchor">
   <h2>Gridz with toolbar</h2>
 
+  <div ng-controller="SearchFormCtrl" collapse="!showSearchForm"
+       ng-include src="'/_search.html'"></div>
+
   <div class="navbar navbar-grid">
     <div class="navbar-inner with-selected-pointer with-grid-options">
       <ul class="nav">
@@ -24,17 +27,9 @@
       </ul>
 
       <ul class="nav pull-right">
-        <li><a href="#" title="search screen"><i class="icon-search"></i></a></li>
-        <li class="divider-vertical skinny"></li>
-        <li class="dropdown grid-options">
-          <a data-toggle="dropdown" class="dropdown-toggle" href="#"><i class="icon-cog"></i><b
-              class="caret"></b></i></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Columns</a></li>
-            <li><a href="#">Another action</a></li>
-            <li class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-          </ul>
+        <li>
+          <a href="" title="search screen"
+             ng-click="showSearchForm = !showSearchForm"><i class="icon-search"></i></a>
         </li>
       </ul>
 
