@@ -2,12 +2,11 @@ describe "AgGridDirectiveCtrl", ->
   beforeEach module("angleGrinder.gridz")
   beforeEach module("angleGrinder.controllers")
 
-  controller = null
   $scope = null
 
   beforeEach inject ($rootScope, $controller) ->
     $scope = $rootScope.$new()
-    controller = $controller "AgGridDirectiveCtrl",
+    $controller "AgGridDirectiveCtrl",
       $scope: $scope
 
   describe "$scope", ->

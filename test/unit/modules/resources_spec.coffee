@@ -61,9 +61,9 @@ describe "angleGrinder.resources", ->
           # Then
           expect(onComplete).toHaveBeenCalled()
 
-          data = onComplete.mostRecentCall.args[0]
-          expect(data.id).toEqual 102
-          expect(data.foo).toEqual "bar"
+          args = onComplete.mostRecentCall.args[0]
+          expect(args.id).toEqual 102
+          expect(args.foo).toEqual "bar"
 
       describe "when the record is not persisted", ->
         beforeEach -> user.id = null
@@ -79,6 +79,6 @@ describe "angleGrinder.resources", ->
           # Then
           expect(onComplete).toHaveBeenCalled()
 
-          data = onComplete.mostRecentCall.args[0]
-          expect(data.id).toEqual 103
-          expect(data.foo).toEqual "biz"
+          args = onComplete.mostRecentCall.args[0]
+          expect(args.id).toEqual 103
+          expect(args.foo).toEqual "biz"
