@@ -2,7 +2,7 @@ class AgGridDirectiveCtrl
 
   @$inject = ["$scope", "sampleData", "editDialog"]
   constructor: ($scope, sampleData, editDialog) ->
-    @data = sampleData(100)
+    @data = sampleData.generate(100)
     $scope.data = @data
 
     $scope.gridOptions =

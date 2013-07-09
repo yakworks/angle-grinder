@@ -1,6 +1,7 @@
 # The entry point for the application
 
 $ ->
+  # Load the navbar template
   $("#topbar").load "/navbar_top.html"
 
 app = angular.module("angleGrinder", [

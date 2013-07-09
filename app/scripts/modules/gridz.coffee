@@ -1,23 +1,5 @@
 gridz = angular.module("angleGrinder.gridz", ["ui.bootstrap"])
 
-class EditItemCtrl
-
-  @$inject = ["$scope", "$rootScope", "dialog", "item", "createNew", "flatten"]
-  constructor: ($scope, $rootScope, dialog, item, createNew, flatten) ->
-    $scope.item = item
-    $scope.createNew = createNew
-
-    $scope.closeEditDialog = ->
-      dialog.close($scope.item)
-
-    $scope.save = ->
-      item.save (response) ->
-        # Flattening the object before insering it to the grid
-        $rootScope.$broadcast("itemUpdated", flatten(response))
-        $scope.closeEditDialog()
-
-gridz.controller "EditItemCtrl", EditItemCtrl
-
 gridz.directive "agGrid", ->
   link = ($scope, element, attrs) ->
     $grid = $("#grid", element)
@@ -77,51 +59,73 @@ gridz.directive "agGrid", ->
             """
   link: link
 
-gridz.service "editDialog", [
-  "$dialog", ($dialog) ->
-    open: (templateUrl, item) ->
-      dialog = $dialog.dialog
-        backdropFade: false
-        dialogFade: false
-        resolve:
-          item: -> item
-          createNew: -> not item.id?
+class EditItemCtrl
 
-      # override so we can intercept form dirty and prevent escape
-      dialog.handledEscapeKey = (e) ->
-        if e.which is 27
-          e.preventDefault()
-          unless dialog.$scope.editForm.$dirty
-            dialog.close()
-            dialog.$scope.$apply()
+  @$inject = ["$scope", "$rootScope", "dialog", "item", "createNew", "flatten"]
+  constructor: ($scope, $rootScope, dialog, item, createNew, flatten) ->
+    $scope.item = item
+    $scope.createNew = createNew
 
-      # override so we can intercept form dirty and prevent backdrop click
-      dialog.handleBackDropClick = (e) ->
+    $scope.closeEditDialog = ->
+      dialog.close($scope.item)
+
+    $scope.save = ->
+      item.save (response) ->
+        # Flattening the object before insering it to the grid
+        $rootScope.$broadcast("itemUpdated", flatten(response))
+        $scope.closeEditDialog()
+
+gridz.controller "EditItemCtrl", EditItemCtrl
+
+class EditDialog
+  @$inject = ["$dialog"]
+  constructor: (@$dialog) ->
+
+  open: (templateUrl, item) ->
+    dialog = @$dialog.dialog
+      backdropFade: false
+      dialogFade: false
+      resolve:
+        item: -> item
+        createNew: -> not item.id?
+
+    # override so we can intercept form dirty and prevent escape
+    dialog.handledEscapeKey = (e) ->
+      if e.which is 27
         e.preventDefault()
         unless dialog.$scope.editForm.$dirty
           dialog.close()
           dialog.$scope.$apply()
 
-      dialog.open templateUrl, "EditItemCtrl"
-]
+    # override so we can intercept form dirty and prevent backdrop click
+    dialog.handleBackDropClick = (e) ->
+      e.preventDefault()
+      unless dialog.$scope.editForm.$dirty
+        dialog.close()
+        dialog.$scope.$apply()
+
+    dialog.open templateUrl, "EditItemCtrl"
+
+gridz.service "editDialog", EditDialog
+
+flatten = (target, opts = { delimiter: "." }) ->
+  delimiter = opts.delimiter
+
+  getKey = (key, prev) ->
+    (if prev then prev + delimiter + key else key)
+
+  step = (object, prev) ->
+    Object.keys(object).forEach (key) ->
+      isarray = opts.safe and Array.isArray(object[key])
+      type = Object::toString.call(object[key])
+      isobject = (type is "[object Object]" or type is "[object Array]")
+      return step(object[key], getKey(key, prev)) if not isarray and isobject
+      output[getKey(key, prev)] = object[key]
+
+  output = {}
+  step target
+  output
 
 # Takes a nested Javascript object and flatten it.
 # see: https://github.com/hughsk/flat
-gridz.factory "flatten", ->
-  (target, opts = { delimiter: "." }) ->
-    delimiter = opts.delimiter
-
-    getKey = (key, prev) ->
-      (if prev then prev + delimiter + key else key)
-
-    step = (object, prev) ->
-      Object.keys(object).forEach (key) ->
-        isarray = opts.safe and Array.isArray(object[key])
-        type = Object::toString.call(object[key])
-        isobject = (type is "[object Object]" or type is "[object Array]")
-        return step(object[key], getKey(key, prev)) if not isarray and isobject
-        output[getKey(key, prev)] = object[key]
-
-    output = {}
-    step target
-    output
+gridz.value "flatten", flatten
