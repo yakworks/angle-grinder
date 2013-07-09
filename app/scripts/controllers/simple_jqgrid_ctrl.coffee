@@ -5,7 +5,7 @@ class SimpleJqGridCtrl
     $grid = $("#demoGrid")
 
     $grid.jqGrid
-      data: sampleData(200)
+      data: sampleData.generate(200)
       datatype: "local"
       rowNum: 10
       rowList: [10, 20, 30]

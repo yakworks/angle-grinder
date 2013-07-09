@@ -5,7 +5,7 @@ class SimpleGridzCtrl
     $grid = $("#demoGrid")
 
     $grid.gridz
-      data: sampleData(200)
+      data: sampleData.generate(200)
       datatype: "local"
       colModel: @gridColumns()
 

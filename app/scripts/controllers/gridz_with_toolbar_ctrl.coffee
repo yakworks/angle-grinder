@@ -5,7 +5,7 @@ class GridzWithToolbarCtrl
     $grid = $("#demoGrid")
 
     $grid.gridz
-      data: sampleData(100)
+      data: sampleData.generate(100)
       datatype: "local"
       colModel: @gridColumns()
 
