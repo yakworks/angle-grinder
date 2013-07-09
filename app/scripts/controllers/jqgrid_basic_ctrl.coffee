@@ -16,7 +16,7 @@ class JqGridBasicCtrl
     gboxId = "gbox_#{$grid.attr("id")}"
 
     $grid.jqGrid
-      data: sampleData(100)
+      data: sampleData.generate(100)
       datatype: "local"
       rowNum: 10
       rowList: [10, 20, 30]
