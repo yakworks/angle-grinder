@@ -47,7 +47,7 @@ gridz.directive "agGrid", ->
 
       $grid.setGridParam(
         search: true
-        postData: filters: JSON.stringify(filter)
+        postData: filters: filter
       ).trigger "reloadGrid"
 
       currentScope?.searching = false

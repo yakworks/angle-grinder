@@ -37,9 +37,10 @@
           </ul>
         </li>
       </ul>
-      <form action="" class="navbar-search pull-right">
-        <input type="text" value="" placeholder="Search" class="search-query span2"
-               style="width: 150px;"/>
+
+      <form action="" class="navbar-search pull-right" ng-submit="quickSearch(search)">
+        <input type="text" value="" placeholder="quick search" class="search-query span2" style="width: 150px;"
+               ng-model="search.quickSearch"/>
       </form>
     </div>
   </div>

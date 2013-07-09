@@ -16,8 +16,12 @@ app.get "/api/users", (req, res) ->
   sort = req.query["sort"] || "id"
   order = req.query["order"] || "asc"
 
-  pagedData = data.getPaged(page, pageSize, sort, order)
-  res.send pagedData
+  rows = data.all()
+  quickSearch = req.query["filters"]?.quickSearch
+  if quickSearch?
+    rows = data.quickSearch(quickSearch)
+
+  res.send rows.getPaged(page, pageSize, sort, order)
 
 app.post "/api/users", (req, res) ->
   row = data.create(req.body)
