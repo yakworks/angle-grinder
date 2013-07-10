@@ -104,5 +104,5 @@ class JqGridBasicCtrl
       hidden: true
     ]
 
-controllers = angular.module("angleGrinder.controllers")
-controllers.controller("JqGridBasicCtrl", JqGridBasicCtrl)
+angular.module("angleGrinder")
+  .controller("JqGridBasicCtrl", JqGridBasicCtrl)

@@ -1,6 +1,5 @@
 describe "AgGridDirectiveCtrl", ->
-  beforeEach module("angleGrinder.gridz")
-  beforeEach module("angleGrinder.controllers")
+  beforeEach module("angleGrinder")
 
   $scope = null
   controller = null

@@ -20,6 +20,9 @@ class ServerSideCtrl
       user = new Users(id: id)
       user.$delete -> $scope.$broadcast "itemDeleted"
 
+    $scope.quickSearch = (search) ->
+      $scope.$broadcast "searchUpdated", search
+
   gridColumns: ->
     [
       name: "id"
@@ -40,5 +43,5 @@ class ServerSideCtrl
       label: "Paid"
     ]
 
-controllers = angular.module("angleGrinder.controllers")
-controllers.controller("ServerSideCtrl", ServerSideCtrl)
+angular.module("angleGrinder")
+  .controller("ServerSideCtrl", ServerSideCtrl)

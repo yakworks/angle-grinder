@@ -66,5 +66,5 @@ class SimpleGridzCtrl
       hidden: true
     ]
 
-controllers = angular.module("angleGrinder.controllers")
-controllers.controller("SimpleGridzCtrl", SimpleGridzCtrl)
+angular.module("angleGrinder")
+  .controller("SimpleGridzCtrl", SimpleGridzCtrl)

@@ -9,3 +9,6 @@ bower_components
 # Ignore dist package
 dist
 dev
+
+# Ignore logs
+*.log

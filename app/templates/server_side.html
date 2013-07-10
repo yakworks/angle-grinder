@@ -1,5 +1,8 @@
 <section class="anchor">
-  <h2>Gridz with toolbar</h2>
+  <h2>Server side ag-grid example</h2>
+
+  <div ng-controller="SearchFormCtrl" collapse="!showSearchForm"
+       ng-include src="'/_search.html'"></div>
 
   <div class="navbar navbar-grid">
     <div class="navbar-inner with-selected-pointer with-grid-options">
@@ -24,22 +27,15 @@
       </ul>
 
       <ul class="nav pull-right">
-        <li><a href="#" title="search screen"><i class="icon-search"></i></a></li>
-        <li class="divider-vertical skinny"></li>
-        <li class="dropdown grid-options">
-          <a data-toggle="dropdown" class="dropdown-toggle" href="#"><i class="icon-cog"></i><b
-              class="caret"></b></i></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Columns</a></li>
-            <li><a href="#">Another action</a></li>
-            <li class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-          </ul>
+        <li>
+          <a href="" title="search screen"
+             ng-click="showSearchForm = !showSearchForm"><i class="icon-search"></i></a>
         </li>
       </ul>
-      <form action="" class="navbar-search pull-right">
-        <input type="text" value="" placeholder="Search" class="search-query span2"
-               style="width: 150px;"/>
+
+      <form action="" class="navbar-search pull-right" ng-submit="quickSearch(search)">
+        <input type="text" value="" placeholder="quick search" class="search-query span2" style="width: 150px;"
+               ng-model="search.quickSearch"/>
       </form>
     </div>
   </div>

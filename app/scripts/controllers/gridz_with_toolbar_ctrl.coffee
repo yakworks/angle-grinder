@@ -67,5 +67,5 @@ class GridzWithToolbarCtrl
       hidden: true
     ]
 
-controllers = angular.module("angleGrinder.controllers")
-controllers.controller("GridzWithToolbarCtrl", GridzWithToolbarCtrl)
+angular.module("angleGrinder")
+  .controller("GridzWithToolbarCtrl", GridzWithToolbarCtrl)
