@@ -1,63 +1,62 @@
 gridz = angular.module("angleGrinder.gridz", ["ui.bootstrap"])
 
-gridz.directive "agGrid", ->
-  link = ($scope, element, attrs) ->
-    $grid = $("#grid", element)
+gridz.directive "agGrid", [
+  "hasSearchFilters", (hasSearchFilters) ->
+    link = ($scope, element, attrs) ->
+      $grid = $("#grid", element)
 
-    gridOptions = $scope.$eval(attrs.agGrid)
-    $grid.gridz(gridOptions)
+      gridOptions = $scope.$eval(attrs.agGrid)
+      $grid.gridz(gridOptions)
 
-    invokeEditItemDialogFor = (id) ->
-      $scope.$apply -> $scope.editDialog id
+      invokeEditItemDialogFor = (id) ->
+        $scope.$apply -> $scope.editDialog id
 
-    # handles click on edit action insite the dropdown menu
-    $grid.on "editAction", (event, id) ->
-      event.preventDefault()
-      invokeEditItemDialogFor(id)
+      # handles click on edit action insite the dropdown menu
+      $grid.on "editAction", (event, id) ->
+        event.preventDefault()
+        invokeEditItemDialogFor(id)
 
-    # handles click on the cell with `editActionLink` formatter
-    $grid.on "click", "a.editActionLink", (event) ->
-      event.preventDefault()
-      id = $(this).parents("tr:first").attr("id")
-      invokeEditItemDialogFor(id)
+      # handles click on the cell with `editActionLink` formatter
+      $grid.on "click", "a.editActionLink", (event) ->
+        event.preventDefault()
+        id = $(this).parents("tr:first").attr("id")
+        invokeEditItemDialogFor(id)
 
-    $grid.on "deleteAction", (event, id) ->
-      event.preventDefault()
-      $scope.$apply -> $scope.deleteItem id
+      $grid.on "deleteAction", (event, id) ->
+        event.preventDefault()
+        $scope.$apply -> $scope.deleteItem id
 
-    # catch broadcast event after save. This will need to change
-    $scope.$on "itemUpdated", (event, data) ->
-      if $grid.jqGrid("getInd", data.id)
-        $grid.jqGrid "setRowData", data.id, data
-      else
-        $grid.jqGrid "addRowData", data.id, data, "first"
+      # catch broadcast event after save. This will need to change
+      $scope.$on "itemUpdated", (event, data) ->
+        if $grid.jqGrid("getInd", data.id)
+          $grid.jqGrid "setRowData", data.id, data
+        else
+          $grid.jqGrid "addRowData", data.id, data, "first"
 
-      # flash the row so user knows its updated
-      ind = $grid[0].rows.namedItem(data.id)
-      $(ind).css "background-color", "#DFF0D8"
-      $(ind).delay(100).fadeOut("medium", ->
-        $(ind).css "background-color", ""
-      ).fadeIn "fast"
+        # flash the row so user knows its updated
+        ind = $grid[0].rows.namedItem(data.id)
+        $(ind).css "background-color", "#DFF0D8"
+        $(ind).delay(100).fadeOut("medium", ->
+          $(ind).css "background-color", ""
+        ).fadeIn "fast"
 
-    $scope.$on "itemDeleted", ->
-      $grid.trigger "reloadGrid"
+      $scope.$on "itemDeleted", ->
+        $grid.trigger "reloadGrid"
 
-    $scope.$on "searchUpdated", (event, filter, currentScope = null) ->
-      currentScope?.searching = true
+      $scope.$on "searchUpdated", (event, filters) ->
+        params =
+          search: hasSearchFilters(filters)
+          postData: filters: filters
 
-      $grid.setGridParam(
-        search: true
-        postData: filters: filter
-      ).trigger "reloadGrid"
+        $grid.setGridParam(params).trigger "reloadGrid"
 
-      currentScope?.searching = false
-
-  restrict: "A"
-  template: """
-            <table id="grid"></table>
-            <div id="gridPager"></div>
-            """
-  link: link
+    restrict: "A"
+    template: """
+              <table id="grid"></table>
+              <div id="gridPager"></div>
+              """
+    link: link
+]
 
 class EditItemCtrl
 
@@ -129,3 +128,11 @@ flatten = (target, opts = { delimiter: "." }) ->
 # Takes a nested Javascript object and flatten it.
 # see: https://github.com/hughsk/flat
 gridz.value "flatten", flatten
+
+# Retunrs true if `filters` contain at least one non-empty search field
+hasSearchFilters = (filters) ->
+  for _, value of filters
+    return true if value? and value.trim() isnt ""
+  return false
+
+gridz.value "hasSearchFilters", hasSearchFilters

@@ -69,3 +69,17 @@ describe "angleGrinder.gridz", ->
       expect(flattened["consumer.firstName"]).toEqual target.consumer.firstName
       expect(flattened["consumer.lastName"]).toEqual target.consumer.lastName
       expect(flattened.createdAt).toEqual target.createdAt
+
+  describe "#hasSearchFilters", ->
+
+    describe "if filters contain at least one non-empty field", ->
+      filters = foo: "  ", bar: "test", biz: null
+
+      it "returns true", inject (hasSearchFilters) ->
+        expect(hasSearchFilters(filters)).toBeTruthy()
+
+    describe "if filters contains only empty fileds", ->
+      filters = foo: "  ", bar: "", biz: null, baz: undefined
+
+      it "returns false", inject (hasSearchFilters) ->
+        expect(hasSearchFilters(filters)).toBeFalsy()
