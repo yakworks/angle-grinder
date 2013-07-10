@@ -1,7 +1,5 @@
 describe "ServerSideCtrl", ->
-  beforeEach module("angleGrinder.gridz")
-  beforeEach module("angleGrinder.resources")
-  beforeEach module("angleGrinder.controllers")
+  beforeEach module("angleGrinder")
 
   $scope = null
 

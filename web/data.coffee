@@ -1,8 +1,8 @@
 _ = require("underscore")
 
 class Data
-  constructor: ->
-    @data = @loadData()
+  constructor: (data = null) ->
+    if data? then @data = data else @data = @loadData()
 
   # Loads sample data into memory
   loadData: ->
@@ -16,6 +16,27 @@ class Data
 
   # Returns number of pages
   total: (pageSize) -> Math.ceil(@count() / pageSize)
+
+  all: -> this
+
+  # Perfoms quick search for the collection
+  quickSearch: (filter) ->
+    data = _.filter @data, (row) ->
+      row.name.match ///#{filter}///i
+
+    # Construct a new data object with filtered rows
+    new Data(data)
+
+  search: (filters) ->
+    allowance = if filters.allowance isnt "" then parseInt(filters.allowance) else null
+    data = _.filter @data, (row) ->
+      nameMatch = if filters.name? then row.name.match ///#{filters.name.trim()}///i else true
+      allowanceMath = if allowance? then row.allowance == allowance else true
+
+      nameMatch and allowanceMath
+
+    # Construct a new data object with filtered rows
+    new Data(data)
 
   getPaged: (page, pageSize, sort, order) ->
     # sorting all rows by `sort` file
