@@ -5,7 +5,10 @@ class SearchFormCtrl
     $scope.search = {}
 
     $scope.advancedSearch = (search) ->
-      $rootScope.$broadcast("searchUpdated", search, $scope)
+      $rootScope.$broadcast("searchUpdated", search)
+
+    $scope.reset = ->
+      $scope.search = {}
 
 angular.module("angleGrinder")
   .controller("SearchFormCtrl", SearchFormCtrl)

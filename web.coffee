@@ -17,9 +17,14 @@ app.get "/api/users", (req, res) ->
   order = req.query["order"] || "asc"
 
   rows = data.all()
-  quickSearch = req.query["filters"]?.quickSearch
-  if quickSearch?
-    rows = data.quickSearch(quickSearch)
+
+  if req.query["_search"] isnt "false"
+    filters = req.query["filters"]
+    quickSearch = filters?.quickSearch
+    if quickSearch? and quickSearch isnt ""
+      rows = data.quickSearch(quickSearch)
+    else
+      rows = data.search(filters)
 
   res.send rows.getPaged(page, pageSize, sort, order)
 

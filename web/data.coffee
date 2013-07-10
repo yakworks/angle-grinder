@@ -27,6 +27,17 @@ class Data
     # Construct a new data object with filtered rows
     new Data(data)
 
+  search: (filters) ->
+    allowance = if filters.allowance isnt "" then parseInt(filters.allowance) else null
+    data = _.filter @data, (row) ->
+      nameMatch = if filters.name? then row.name.match ///#{filters.name.trim()}///i else true
+      allowanceMath = if allowance? then row.allowance == allowance else true
+
+      nameMatch and allowanceMath
+
+    # Construct a new data object with filtered rows
+    new Data(data)
+
   getPaged: (page, pageSize, sort, order) ->
     # sorting all rows by `sort` file
     sortedData = _(@data).sortBy (row) -> row[sort]
