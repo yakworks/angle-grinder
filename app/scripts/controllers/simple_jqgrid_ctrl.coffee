@@ -76,5 +76,5 @@ class SimpleJqGridCtrl
       editable: true
     ]
 
-controllers = angular.module("angleGrinder.controllers")
-controllers.controller("SimpleJqGridCtrl", SimpleJqGridCtrl)
+angular.module("angleGrinder")
+  .controller("SimpleJqGridCtrl", SimpleJqGridCtrl)

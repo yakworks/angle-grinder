@@ -43,5 +43,5 @@ class ServerSideCtrl
       label: "Paid"
     ]
 
-controllers = angular.module("angleGrinder.controllers")
-controllers.controller("ServerSideCtrl", ServerSideCtrl)
+angular.module("angleGrinder")
+  .controller("ServerSideCtrl", ServerSideCtrl)

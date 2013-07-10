@@ -1,11 +1,11 @@
 class SearchFormCtrl
 
-  @$inject = ["$scope"]
-  constructor: ($scope) ->
+  @$inject = ["$scope", "$rootScope"]
+  constructor: ($scope, $rootScope) ->
     $scope.search = {}
 
     $scope.advancedSearch = (search) ->
-      console.log search
+      $rootScope.$broadcast("searchUpdated", search, $scope)
 
-controllers = angular.module("angleGrinder.controllers")
-controllers.controller("SearchFormCtrl", SearchFormCtrl)
+angular.module("angleGrinder")
+  .controller("SearchFormCtrl", SearchFormCtrl)

@@ -53,5 +53,5 @@ class AgGridDirectiveCtrl
       label: "Complete"
     ]
 
-controllers = angular.module("angleGrinder.controllers")
-controllers.controller("AgGridDirectiveCtrl", AgGridDirectiveCtrl)
+angular.module("angleGrinder")
+  .controller("AgGridDirectiveCtrl", AgGridDirectiveCtrl)
