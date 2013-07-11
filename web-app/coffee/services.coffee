@@ -40,33 +40,3 @@ module.factory "Flash", ->
       text: text
 
   flash
-
-module.service "EditDialog", ($dialog) ->
-  @open = (editTemplateUrl, item, isCreateNew) ->
-    dlg = $dialog.dialog(
-      backdropFade: false
-      dialogFade: false
-      resolve:
-        item: ->
-          item
-
-        isCreateNew: ->
-          isCreateNew
-    )
-
-    # override so we can intercept form dirty and prevent escape
-    dlg.handledEscapeKey = (e) ->
-      if e.which is 27
-        e.preventDefault()
-        unless dlg.$scope.editForm.$dirty
-          dlg.close()
-          dlg.$scope.$apply()
-
-    # override so we can intercept form dirty and prevent backdrop click
-    dlg.handleBackDropClick = (e) ->
-      e.preventDefault()
-      unless dlg.$scope.editForm.$dirty
-        dlg.close()
-        dlg.$scope.$apply()
-
-    dlg.open editTemplateUrl, "EditItemController"

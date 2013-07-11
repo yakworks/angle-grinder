@@ -2,6 +2,7 @@ def plugin = "angle-grinder"
 def dist = "${plugin}/dist"
 def vendor = "${dist}/third-party"
 
+// TODO cleanup this resources
 modules = {
 
     "ag-boot-css" {

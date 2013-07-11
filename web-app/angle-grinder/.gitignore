@@ -1,6 +1,0 @@
-# Ignore thrd party libraries
-node_modules
-bower_components
-
-# Ignore dist package
-dist
