@@ -8,27 +8,50 @@
   <meta name="description" content="gridz examples">
   <meta name="author" content="Joshua Burnett">
 
-  <!-- build:css(dev) styles/style.min.css -->
-    <link rel="stylesheet" href="styles/boot.css">
-    <link rel="stylesheet" href="styles/docs.css">
-    <link rel="stylesheet" href="styles/jq-ui-boot-grid.css">
-  <!-- endbuild -->
-
   <!-- build:js(dev) scripts/vendor.min.js -->
     <script type="text/javascript" src="components/jquery/jquery.js"></script>
     <script type="text/javascript" src="components/angular/angular.js"></script>
     <script type="text/javascript" src="components/angular-resource/angular-resource.js"></script>
+  <!-- endbuild -->
+
+  <!-- build:js(dev) scripts/bootstrap.min.js -->
+    <!-- Twitter Bootstrap -->
+    <script type="text/javascript" src="components/bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript" src="components/jquery-ui-bootstrap/jquery-ui-1.10.1.custom.min.js"></script>
     <script type="text/javascript" src="components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 
-    <!-- Twitter Bootstrap -->
-    <script src="components/bootstrap/js/bootstrap.js"></script>
-    <script src="components/jquery-ui-bootstrap/jquery-ui-1.10.1.custom.min.js"></script>
+    <!-- Extras for tool bar and other -->
+    <script type="text/javascript" src="components/bootstrapx-clickover/js/bootstrapx-clickover.js"></script>
+  <!-- endbuild -->
 
-    <!-- JqGrid -->
-    <script src="components/jqgrid/js/plugins/ui.multiselect.js"></script>
-    <script src="components/jqgrid/js/i18n/grid.locale-en.js"></script>
-    <script src="components/jqgrid/js/grid.base.js"></script>
-    <script src="components/jqgrid/js/jquery.fmatter.js"></script>
+  <!-- build:css(dev) styles/bootstrap.min.css -->
+    <link rel="stylesheet" href="styles/boot.css">
+  <!-- endbuild -->
+
+  <!-- build:css(dev) styles/style.min.css -->
+    <link rel="stylesheet" href="styles/docs.css">
+  <!-- endbuild -->
+
+  <!-- build:js(dev) scripts/gridz.min.js -->
+    <!-- jqGrid -->
+    <script type="text/javascript" src="components/jqgrid/js/plugins/ui.multiselect.js"></script>
+    <script type="text/javascript" src="components/jqgrid/js/i18n/grid.locale-en.js"></script>
+    <script type="text/javascript" src="components/jqgrid/js/grid.base.js"></script>
+    <script type="text/javascript" src="components/jqgrid/js/jquery.fmatter.js"></script>
+
+    <script type="text/javascript" src="scripts/jqgrid/gridz.js"></script>
+  <!-- endbuild -->
+
+  <!-- build:js(dev) scripts/angle-grinder.gridz.min.js -->
+    <script type="text/javascript" src="scripts/modules/gridz.js"></script>
+  <!-- endbuild -->
+
+  <!-- build:css(dev) styles/gridz.min.css -->
+    <!-- jqGrid -->
+    <link rel="stylesheet" href="components/jqgrid/css/ui.jqgrid.css">
+    <link rel="stylesheet" href="components/jqgrid/css/plugins/ui.multiselect.css">
+
+    <link rel="stylesheet" href="styles/gridz.css">
   <!-- endbuild -->
 
   <!--[if IE 7]>
@@ -45,14 +68,8 @@
   <![endif]-->
 
   <!-- build:js(dev) scripts/scripts.min.js -->
-    <!-- Extras for tool bar and other -->
-    <script src="components/bootstrapx-clickover/js/bootstrapx-clickover.js"></script>
-
-    <script type="text/javascript" src="scripts/jqgrid/gridz.js"></script>
-
     <!-- AngularJS app -->
     <script type="text/javascript" src="scripts/modules/data_generator.js"></script>
-    <script type="text/javascript" src="scripts/modules/gridz.js"></script>
     <script type="text/javascript" src="scripts/modules/resources.js"></script>
     <script type="text/javascript" src="scripts/templates.js"></script>
 
@@ -85,7 +102,7 @@
       <li><a href="#/"><i class="icon-chevron-right"></i>Gridz with toolbar</a></li>
       <li><a href="#/simple_jqgrid"><i class="icon-chevron-right"></i>Simple jqgrid</a></li>
       <li><a href="#/simple_gridz"><i class="icon-chevron-right"></i>Simple gridz</a></li>
-      <li><a href="#/jqgrid_basic"><i class="icon-chevron-right"></i>JqGrid basic</a></li>
+      <li><a href="#/jqgrid_basic"><i class="icon-chevron-right"></i>jqGrid basic</a></li>
       <li><a href="#/ag_grid_directive"><i class="icon-chevron-right"></i>agGrid directive basic</a></li>
       <li><a href="#/server_side"><i class="icon-chevron-right"></i>Server Side</a></li>
     </ul>
