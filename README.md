@@ -158,4 +158,27 @@ grunt build
 (cd dist/ ; python -m SimpleHTTPServer 8000)
 ```
 
+## Released files
+
+```
+dist
+├── scripts
+│   ├── angle-grinder.gridz.min.js
+│   ├── bootstrap.min.js
+│   ├── gridz.min.js
+│   ├── scripts.min.js
+│   └── vendor.min.js
+└── styles
+    ├── bootstrap.min.css
+    ├── gridz.min.css
+    └── style.min.css
+```
+
+* `scripts/vendor.min.js` - jquery + AngularJS stuff
+* `styles/bootstrap.min.css` - twitter bootstrap styles
+* `scripts/bootstrap.min.js` - twitter bootstrap js + angular-bootstrap
+* `styles/gridz.min.css` - styles for gridz plugin
+* `scripts/gridz.min.js` - sources of gridz plugin
+* `scripts/angle-grinder.gridz.min.js` - AgularJS directive for gridz
+
 And then navigate to `http://localhost:8000` to see the production release.
