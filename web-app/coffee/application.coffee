@@ -27,10 +27,7 @@ Function::curry = ->
   ->
     self.apply this, args.concat(toArray(arguments))
 
-# The main scaffolding module.
+# The main scaffolding module
 angular.module "admin", [
-  "admin.controllers"
-  "admin.directives"
-  "ui.bootstrap"
-  "ui"
+  "angleGrinder.gridz"
 ]

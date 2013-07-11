@@ -3,11 +3,14 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title><g:layoutTitle default="Admin"/></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title><g:layoutTitle default="Admin"/></title>
+
     <link rel="shortcut icon" href="${resource(dir: 'images', file: 'favicon.ico')}" type="image/x-icon">
     <link rel="apple-touch-icon" href="${resource(dir: 'images', file: 'apple-touch-icon.png')}">
     <link rel="apple-touch-icon" sizes="114x114" href="${resource(dir: 'images', file: 'apple-touch-icon-retina.png')}">
+
     <g:layoutHead/>
     <r:layoutResources/>
 
@@ -34,12 +37,12 @@
         }
         </r:script>
     </script>
-
 </head>
 
 <body id="${pageProperty(name: 'body.id')}" onload="bload()"
       ng-app="admin"
       data-base-url="${createLink(action: 'index').replaceAll(/index$/, '')}">
+
 <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="navbar-inner">
         <div class="container">
@@ -74,15 +77,14 @@
                                 <a href="#"><i class="icon-off"></i> Logout</a>
                             </li>
                         </ul>
-                    </li><!--dropdown-->
+                    </li>
                 </ul>
-            </div><!--/.nav-collapse -->
-        </div><!--container-->
-    </div><!--navbar-inner-->
-</div><!--navbar-fixed-top-->
+            </div>
+        </div>
+    </div>
+</div>
 
 <div id="page" class="container">
-
     <aside class="sidebar ">
         <ul class="nav nav-list nav-side">
             <li>
@@ -104,11 +106,10 @@
 
     <section class='content'>
         <g:layoutBody/>
-    </section><!--content-->
+    </section>
 
-</div><!--page container-->
+</div>
 
 <r:layoutResources/>
 </body>
 </html>
-
