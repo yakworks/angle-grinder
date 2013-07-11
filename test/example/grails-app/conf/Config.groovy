@@ -62,8 +62,8 @@ grails.hibernate.cache.queries = false
 environments {
     development {
         grails.logging.jul.usebridge = true
-        //XXX Why does this not work with false and letting it bundle ?
-        grails.resources.debug = true
+        // plugin `coffeescript-resources` doesn't apply when you have enabled debug mode for resource plugin
+        grails.resources.debug = false
     }
     production {
         grails.logging.jul.usebridge = false

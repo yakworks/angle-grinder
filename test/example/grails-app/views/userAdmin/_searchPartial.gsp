@@ -17,21 +17,6 @@
                     </div>
                 </div>
             </div>
-
-            <div class="control-group span6">
-                <label class="control-label">${ag.label(code: "user.role")}</label>
-
-                <div class="controls">
-                    <div class="input-append">
-                        <g:select id="roleSelect2" name="userRole" from="${nine.rally.DcsRoles.values()}"
-                                  multiple ng-model="search.role" ui-select2="{closeOnSelect:false}"
-                                  optionKey="id" ng-model="search.roles" style="width:87%"/>
-                        <button class="btn" type="button" data-select2-open="roleSelect2" style="width:13%">
-                            <i class="icon-search"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
         </div>
 
         <div class='row-fluid'>
