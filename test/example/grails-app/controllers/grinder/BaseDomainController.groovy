@@ -271,6 +271,10 @@ abstract class BaseDomainController {
 	}
 	
 	def delete(){
+		if(request.format=='json' || response.format=='json'){
+    		deleteJson()
+    		return
+    	}
 		def commonParams
 		try{
 			def result = null
@@ -296,6 +300,25 @@ abstract class BaseDomainController {
 					render errorModel(e.entity, e.meta) as JSON
 				}
 			}
+		}
+	}
+
+	def deleteJson(){
+		log.debug("in saveOrUpdateJson with ${params}")
+		def responseJson = [:]
+		try{
+			result = dao.remove(params)
+			return	
+		}catch(ValidationException e){
+			log.debug( "saveJson with error")
+			response.status = 400
+			responseJson = [
+				"code":400,
+				"status": "error",
+				"message":buildMsg(e.messageMap),
+				"messageCode":e.messageMap.code
+			]
+			render responseJson as JSON
 		}
 	}
 
