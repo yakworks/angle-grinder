@@ -174,14 +174,11 @@ dist
     └── style.min.css
 ```
 
-`scripts/vendor.min.js` - jquery + AngularJS stuff
-
-`styles/bootstrap.min.css` - twitter bootstrap styles
-`scripts/bootstrap.min.js` - twitter bootstrap js + angular-bootstrap
-
-`styles/gridz.min.css` - styles for gridz plugin
-`scripts/gridz.min.js` - sources of gridz plugin
-
-`scripts/angle-grinder.gridz.min.js` - AgularJS directive for gridz
+* `scripts/vendor.min.js` - jquery + AngularJS stuff
+* `styles/bootstrap.min.css` - twitter bootstrap styles
+* `scripts/bootstrap.min.js` - twitter bootstrap js + angular-bootstrap
+* `styles/gridz.min.css` - styles for gridz plugin
+* `scripts/gridz.min.js` - sources of gridz plugin
+* `scripts/angle-grinder.gridz.min.js` - AgularJS directive for gridz
 
 And then navigate to `http://localhost:8000` to see the production release.
