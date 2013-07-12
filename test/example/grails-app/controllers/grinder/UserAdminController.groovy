@@ -30,7 +30,8 @@ class UserAdminController extends BaseDomainController {
         //crit.getInstance().createAlias("contact", "contact")
         def qslike = (filters?.quickSearch) ? (filters?.quickSearch + "%") : null
         def datalist = crit.list(max: pager.max, offset: pager.offset) {
-            //createAlias("c", "contact")
+            createAlias("contact", "contact")
+
             if (qslike) {
                 or {
                     like 'login', qslike
@@ -53,10 +54,10 @@ class UserAdminController extends BaseDomainController {
             if (filters?.login)
                 like 'login', filters.login
 
-
             if (params.sort)
                 order(params.sort, params.order)
         }
+
         return datalist
     }
 
