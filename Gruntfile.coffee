@@ -144,7 +144,7 @@ module.exports = (grunt) ->
             "**/*.html"
             "!templates/**/*.html"
             "components/**/*"
-            "img/**/*.{gif,webp}"
+            "images/**/*.{gif,webp}"
             "font/*"
             "styles/**/*.css"
           ]
@@ -153,12 +153,21 @@ module.exports = (grunt) ->
       dist:
         files: [
           expand: true
-          dot: true
           cwd: "<%= appConfig.app %>"
           dest: "<%= appConfig.dist %>"
           src: [
             "font/**/*"
-            "img/**/*"
+            "images/**/*"
+          ]
+        ,
+          # workaround for jquery-ui-bootstrap component
+          # include it's images in the production release
+          expand: true
+          flatten: true
+          cwd: "custom_components/jquery-ui-bootstrap"
+          dest: "<%= appConfig.dist %>/styles/images"
+          src: [
+            "**/images/**/*.{png,jpg,jpeg}"
           ]
         ]
 
