@@ -33,7 +33,7 @@
             <label class="control-label">${ag.label(code: "contact.email")}</label>
 
             <div class="controls">
-                <input type="text" name="contact.email" ng-model="item.contact.email">
+                <input type="email" name="contact.email" ng-model="item.contact.email">
                 <span class="help-inline" ng-show="errors.contact.email">{{errors.contact.email}}</span>
             </div>
         </div>
