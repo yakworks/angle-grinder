@@ -20,7 +20,7 @@
 
             <div class="controls">
                 <input type="text" placeholder="${ag.label(code: 'contact.firstName')}"
-                       ng-model="item.contact.firstName" autofocus>
+                       ng-model="item.contact.firstName" required autofocus>
                 <span class="help-inline" ng-show="errors.contact.firstName">{{errors.contact.firstName}}</span>
             </div>
 
@@ -42,7 +42,7 @@
             <label class="control-label">${ag.label(code: "user.login")}</label>
 
             <div class="controls">
-                <input type="text" name="login" ng-model="item.login">
+                <input type="text" name="login" ng-model="item.login" required />
                 <span class="help-inline" ng-show="errors.user.login">{{errors.user.login}}</span>
             </div>
         </div>
@@ -52,13 +52,13 @@
 
             <div class="controls">
                 <input type="password" placeholder="${ag.label(code: 'user.password')}" name="password"
-                       ng-model="item.password">
+                       ng-model="item.password" required />
                 <span class="help-inline" ng-show="errors.user.passwd">{{errors.user.passwd}}</span>
             </div>
 
             <div class="controls" style="margin-top:5px">
                 <input type="password" placeholder="${ag.label(code: 'user.repassword')}" name="repassword"
-                       ng-model="item.repassword">
+                       ng-model="item.repassword" required />
             </div>
         </div>
 
