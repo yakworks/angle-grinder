@@ -46,7 +46,7 @@ gridz.directive "agGrid", [
       $scope.$on "searchUpdated", (event, filters) ->
         params =
           search: hasSearchFilters(filters)
-          postData: filters: filters
+          postData: filters: JSON.stringify(filters)
 
         $grid.setGridParam(params).trigger "reloadGrid"
 

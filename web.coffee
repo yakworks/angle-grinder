@@ -19,7 +19,7 @@ app.get "/api/users", (req, res) ->
   rows = data.all()
 
   if req.query["_search"] isnt "false"
-    filters = req.query["filters"]
+    filters = JSON.parse(req.query["filters"])
     quickSearch = filters?.quickSearch
     if quickSearch? and quickSearch isnt ""
       rows = data.quickSearch(quickSearch)
