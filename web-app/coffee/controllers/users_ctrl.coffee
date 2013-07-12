@@ -11,7 +11,7 @@ class UsersListCtrl
     ]
 
     $scope.gridOptions =
-      url: "/example/userAdmin/list.json"
+      url: "/example/user.json"
       colModel: colModel
       multiselect: false # turn off multiselect
       shrinkToFit: true # makes columns fit to width

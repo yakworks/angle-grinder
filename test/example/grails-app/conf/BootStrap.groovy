@@ -1,13 +1,25 @@
 class BootStrap {
 
    def userDao
+   def fakerService
 
-   def init = { servletContext ->
-     for ( i in 0..100 ) {
+    def init = { servletContext ->
+     def Random generator = new Random()
+
+     for (i in 0..100) {
       def props = [
-        login:"login$i", password:'secretStuff', repassword:'secretStuff',
-        contact:[firstName:"fname$i",lastName:"lname$i", email:"email$i@email.com"]
+        login: "login-$i",
+        password: "secretStuff",
+        repassword: "secretStuff",
+        inactive: generator.nextDouble() > 0.5,
+
+        contact: [
+            firstName: fakerService.firstName(),
+            lastName: fakerService.lastName(),
+            email: fakerService.email()
+        ]
       ]
+
       userDao.insert(props)
     }
   }
