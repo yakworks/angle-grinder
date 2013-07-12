@@ -22,12 +22,13 @@ class UserAdminController extends BaseDomainController {
     //def marshallFields = ["*","contact","contact.org"]
 
     protected def listCriteria() {
-        //println "params:$params"
         def pager = new Pager(params)
         def crit = domainClass.createCriteria()
+
         def filters = params.filters ? JSON.parse(params.filters) : null
+        println "params:$params"
         println "filters:$filters"
-        //crit.getInstance().createAlias("contact", "contact")
+
         def qslike = (filters?.quickSearch) ? (filters?.quickSearch + "%") : null
         def datalist = crit.list(max: pager.max, offset: pager.offset) {
             createAlias("contact", "contact")
@@ -40,6 +41,7 @@ class UserAdminController extends BaseDomainController {
                     like 'contact.email', qslike
                 }
             }
+
             //XXX ken refactor this part so it works with you helpers
             def fcontact = filters?.contact
             if (fcontact?.name) {

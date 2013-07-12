@@ -11,14 +11,16 @@ class UsersListCtrl
     ]
 
     $scope.gridOptions =
-      url: "/example/user.json"
+      url: "/example/userAdmin/list.json"
       colModel: colModel
       multiselect: false # turn off multiselect
       shrinkToFit: true # makes columns fit to width
       sortname: "login"
       sortorder: "asc"
 
-# TODO implement it
+    $scope.quickSearch = (search) ->
+      $scope.$broadcast "searchUpdated", search
+
 class UsersSearchFormCtrl
 
   @$inject = ["$scope"]
