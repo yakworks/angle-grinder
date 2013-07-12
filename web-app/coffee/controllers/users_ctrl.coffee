@@ -18,12 +18,19 @@ class UsersListCtrl
       sortname: "login"
       sortorder: "asc"
 
+    # Handles quickSearch action
     $scope.quickSearch = (search) ->
       $scope.$broadcast "searchUpdated", search
 
+    # Displays a form for creating a new user
     $scope.createDialog = ->
       user = new Grails()
       editDialog.open("formTemplate", user)
+
+    # Displays a form for editing an exiting user
+    $scope.editDialog = (id) ->
+      Grails.get { id: id }, (user) ->
+        editDialog.open("formTemplate", user)
 
 class UsersSearchFormCtrl
 
