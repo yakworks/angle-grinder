@@ -7,7 +7,11 @@
     <h3 ng-hide="createNew">Edit ${entityName}</h3>
 </div>
 
-<p>{{item|json}}</p>
+<pre>
+  item: {{item | json}}
+  valid: {{editForm.$valid}}
+  error: {{editForm.$error}}
+</pre>
 
 <form name="editForm" class="form-horizontal no-margin" ng-submit="save(item)">
     <div class="modal-body">
@@ -20,12 +24,15 @@
 
             <div class="controls">
                 <input type="text" placeholder="${ag.label(code: 'contact.firstName')}"
+                       name="contactFirstName"
                        ng-model="item.contact.firstName" required autofocus>
                 <span class="help-inline" ng-show="errors.contact.firstName">{{errors.contact.firstName}}</span>
             </div>
 
             <div class="controls" style="margin-top:5px">
-                <input type="text" placeholder="${ag.label(code: 'contact.lastName')}" ng-model="item.contact.lastName">
+                <input type="text" placeholder="${ag.label(code: 'contact.lastName')}"
+                       name="contactLastName"
+                       ng-model="item.contact.lastName" />
             </div>
         </div>
 
@@ -33,7 +40,8 @@
             <label class="control-label">${ag.label(code: "contact.email")}</label>
 
             <div class="controls">
-                <input type="email" name="contact.email" ng-model="item.contact.email">
+                <input type="email"
+                       name="contact.email" ng-model="item.contact.email" />
                 <span class="help-inline" ng-show="errors.contact.email">{{errors.contact.email}}</span>
             </div>
         </div>
@@ -42,7 +50,8 @@
             <label class="control-label">${ag.label(code: "user.login")}</label>
 
             <div class="controls">
-                <input type="text" name="login" ng-model="item.login" required />
+                <input type="text"
+                       name="login" ng-model="item.login" required />
                 <span class="help-inline" ng-show="errors.user.login">{{errors.user.login}}</span>
             </div>
         </div>
@@ -51,14 +60,16 @@
             <label class="control-label">${ag.label(code: "user.password")}</label>
 
             <div class="controls">
-                <input type="password" placeholder="${ag.label(code: 'user.password')}" name="password"
+                <input type="password" placeholder="${ag.label(code: 'user.password')}"
+                       name="password"
                        ng-model="item.password" required />
                 <span class="help-inline" ng-show="errors.user.passwd">{{errors.user.passwd}}</span>
             </div>
 
             <div class="controls" style="margin-top:5px">
-                <input type="password" placeholder="${ag.label(code: 'user.repassword')}" name="repassword"
-                       ng-model="item.repassword" required />
+                <input type="password" placeholder="${ag.label(code: 'user.repassword')}"
+                       name="repassword"
+                       ng-model="item.repassword" required match="item.password" />
             </div>
         </div>
 
@@ -76,17 +87,18 @@
                     ${ag.label(code: 'user.inactive')}
                 </label>
             </div>
-
         </div>
     </div>
 
     <div class="modal-footer">
-        <button type="button" class="btn btn-danger pull-left" data-ng-click="delete(item)" ng-show="createForm">
+        <button type="button" class="btn btn-danger pull-left" ng-click="delete(item)" ng-hide="createNew">
             <i class="icon-trash"></i> ${ag.label(code: 'button.delete')}
         </button>
+
         <button type="button" class="btn" ng-click="closeEditDialog()">
             <i class="icon-remove"></i> ${ag.label(code: 'button.cancel')}
         </button>
+
         <button type="submit" ng-class="{disabled: saving}" class="btn btn-primary">
             <i class="icon-ok icon-white"></i>
             {{saving && '${ag.label(code: 'button.save')} ...' || '${ag.label(code: 'button.save')}'}}
