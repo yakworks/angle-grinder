@@ -1,22 +1,12 @@
-module = angular.module("admin.services", ["ngResource"])
+# TODO this file is obsolete
 
-###
-This module defines the resource mappings required by Angular JS to map to a
-standard Grails CRUD URL scheme that uses `"/$controller/$action?/$id?"`.
-###
-module.factory "Grails", ($resource) ->
-  baseUrl = $("body").data("base-url")
-  $resource "#{baseUrl}:action/:id", { id: "@id" },
-    list:   { method: "GET",  params: { action: "list" }, isArray: true }
-    get:    { method: "GET",  params: action: "get" }
-    save:   { method: "POST", params: action: "save" }
-    update: { method: "POST", params: action: "update" }
-    delete: { method: "POST", params: action: "delete" }
+module = angular.module("admin.services", ["ngResource"])
 
 ###
 A service for storing one-time messages to be displayed after redirecting to
 another view.
 ###
+# TODO replace it by better solution
 module.factory "Flash", ->
   flash = {}
   flash.getMessage = ->

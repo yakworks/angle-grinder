@@ -29,5 +29,6 @@ Function::curry = ->
 
 # The main scaffolding module
 angular.module "admin", [
+  "admin.resources"
   "angleGrinder.gridz"
 ]

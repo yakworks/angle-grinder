@@ -1,7 +1,7 @@
 class UsersListCtrl
 
-  @$inject = ["$scope"]
-  constructor: ($scope) ->
+  @$inject = ["$scope", "editDialog", "Grails"]
+  constructor: ($scope, editDialog, Grails) ->
     colModel = [
       { name: "id", width: 30 }
       { name: "contact.name", width: 100, formatter: "editActionLink" }
@@ -20,6 +20,10 @@ class UsersListCtrl
 
     $scope.quickSearch = (search) ->
       $scope.$broadcast "searchUpdated", search
+
+    $scope.createDialog = ->
+      user = new Grails()
+      editDialog.open("formTemplate", user)
 
 class UsersSearchFormCtrl
 

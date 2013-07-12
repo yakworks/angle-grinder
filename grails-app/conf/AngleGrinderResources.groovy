@@ -21,7 +21,7 @@ modules = {
     "admin" {
         dependsOn "vendor,bootstrap,gridz"
 
-        resource url: [plugin: plugin, dir: "coffee", file: "services.coffee"]
+        resource url: [plugin: plugin, dir: "coffee", file: "modules/resources.coffee"]
         resource url: [plugin: plugin, dir: "coffee", file: "application.coffee"]
         resource url: [plugin: plugin, dir: "coffee", file: "controllers/users_ctrl.coffee"]
     }

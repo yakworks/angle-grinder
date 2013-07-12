@@ -63,24 +63,13 @@ class UserAdminController extends BaseDomainController {
         return datalist
     }
 
-    def editTemplate() {
-        def user = User.get(params.id)
-        render(template: "edit", model: [user: user])
-    }
-
-    def editPartial() {
-        def user = new User()
-        render(template: "editPartial", model: [user: user])
+    def formTemplate() {
+        render(template: "form")
     }
 
     def searchPartial() {
         def user = new User()
-        render(template: "searchPartial", model: [user: user])
-    }
-
-    def createTemplate() {
-        def user = new User()
-        render(plugin: "rally", template: "edit", model: [user: user])
+        render(template: "search", model: [user: user])
     }
 
     def saveOrUpdate() {

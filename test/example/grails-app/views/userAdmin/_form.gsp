@@ -3,17 +3,17 @@
 <div class="modal-header">
     <button type="button" class="close" ng-click="closeEditDialog()" aria-hidden="true">&times;</button>
 
-    <h3 ng-show="isCreateNew">Create New ${entityName}</h3>
-
-    <h3 ng-hide="isCreateNew">Edit {{ username }}</h3>
+    <h3 ng-show="createNew">Create New ${entityName}</h3>
+    <h3 ng-hide="createNew">Edit ${entityName}</h3>
 </div>
 
 <p>{{item|json}}</p>
-<!--g:form class="form-horizontal no-margin" ng-showXX="dataLoaded" ng-submit="${(user?.id) ? 'edit(item)' : 'insert(item)'} " -->
+
 <form name="editForm" class="form-horizontal no-margin" ng-submit="save(item)">
     <div class="modal-body">
-        <div class="alert alert-{{message.level}}" ng-show="message.text"><a class="close"
-                                                                             href="#">&times;</a>{{message.text}}</div>
+        <!-- TODO obsolete flash messages -->
+        <div class="alert alert-{{message.level}}" ng-show="message.text">
+        <a class="close" href="#">&times;</a>{{message.text}}</div>
 
         <div class="control-group" ng-class="{error: errors.contact.firstName}">
             <label class="control-label">${ag.label(code: "contact.name")}</label>
@@ -70,7 +70,6 @@
                 </label>
             </div>
 
-
             <div class="controls" ng-hide="isCreateNew">
                 <label class="checkbox">
                     <g:checkBox name="inactive" ng-model="item.inactive"/>
@@ -79,7 +78,7 @@
             </div>
 
         </div>
-    </div><!--modal-body-->
+    </div>
 
     <div class="modal-footer">
         <button type="button" class="btn btn-danger pull-left" data-ng-click="delete(item)" ng-show="createForm">
@@ -92,15 +91,5 @@
             <i class="icon-ok icon-white"></i>
             {{saving && '${ag.label(code: 'button.save')} ...' || '${ag.label(code: 'button.save')}'}}
         </button>
-    </div><!--modal-footer-->
-
-<!--div class="form-actions">
-    <button class="btn btn-primary " type="submit" id="saveEditButton" 
-      data-loading-text="<i class='icon-spinner icon-spin icon-large'></i> ${ag.label(code: 'button.save')} ...">
-      ${ag.label(code: 'button.save')}
-    </button>
-    <button class="btn" type="reset" id="cancelEditButton"> ${ag.label(code: 'button.cancel')}  </button>
-    <div class="clearfix"> </div>
-  </div-->
-
+    </div>
 </form>
