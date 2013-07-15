@@ -1,11 +1,4 @@
 ###
-Utils
-###
-toArray = (element) ->
-  Array::slice.call element
-#nothing to curry with - return function
-
-###
 Generic $resource error handler used by all controllers.
 TODO Remove it from the global namespace, create ng service?
 ###
@@ -26,14 +19,16 @@ window.errorHandler = ($scope, Flash, response) ->
       $scope.errors = response.data.errors
     else # TODO: general error handling
 
+# Utils
 Function::curry = ->
   return this  if arguments.length < 1
   self = this
-  args = toArray(arguments)
+  args = Array::slice.call(arguments)
   ->
     self.apply this, args.concat(toArray(arguments))
 
-###
-The main scaffolding module.
-###
-angular.module "admin", ["admin.controllers", "admin.directives", "ui.bootstrap", "ui"]
+# The main scaffolding module
+app = angular.module "admin", [
+  "admin.resources"
+  "angleGrinder.gridz"
+]

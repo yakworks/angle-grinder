@@ -33,16 +33,17 @@ grails {
             // gorm-labs there is some reason why we didn"t upgrade, probably to do with making the applet work.
             // mail, we need to rewrite our mail to work with the new classes, they are not compatible.
             plugins {
-                //grails standard
+                // grails standard
                 runtime ":hibernate:$grailsVersion"
                 build ":tomcat:$grailsVersion"
                 runtime ":resources:1.2.RC2"
 
-                //plugin dependencies
+                // plugin dependencies
                 compile ":dao:0.4.2"
                 compile ":audit-trail:2.0.3"
                 compile ":fields:1.3"
                 compile ":plugin-config:0.1.8"
+                compile ":faker:0.7"
             }
         }
         work.dir = ".grails"

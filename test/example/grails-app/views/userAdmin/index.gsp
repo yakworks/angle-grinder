@@ -1,13 +1,12 @@
 <html>
 <head>
-    <meta name='layout' content='agAdmin'/>
+    <meta name="layout" content="agAdmin"/>
     <g:set var="entityName" value="${ag.label(code: "user")}"/>
     <title>${entityName} Admin</title>
-    <r:require modules="ag-boot-css,ag-grid-css"/>
-    <r:require modules="ag-boot-jq-ui"/>
-    <r:require modules="ag-gridz"/>
-    <r:require modules="ag-util"/>
-    <r:require modules="angular-ui,angular-bootstrap,angular-scaffolding"/>
+
+    <r:require modules="vendor,bootstrap,gridz"/>
+    <r:require modules="admin"/>
+
     <style type="text/css">
     .select2-container {
         background-color: #fff
@@ -40,11 +39,12 @@
     </style>
 </head>
 
-<body id="User Admin">
+<body>
 
 <h3 class="page-header"><g:message code="default.list.label" args="[entityName]"/></h3>
 
-<div ng-controller="ListCtrl" ng-init="editTemplateUrl = '${createLink(action: 'editPartial')}' ">
+<div ng-controller="UsersListCtrl"
+     ng-init="editTemplateUrl = '${createLink(action: 'editPartial')}' ">
 
     <g:hasErrors bean="${error}">
         <div class="errors"><g:renderErrors bean="${error}" as="list"/></div>
@@ -74,107 +74,10 @@
                        ng-model="search.quickSearch"/>
             </form>
         </div>
-    </div><!--end navbar-grid-->
-<!--table id="contactGrid"></table>
-  <div id="gridPager"></div-->
+    </div>
 
-    <div ng-controller="GridCtrl" ag-grid="gridOptions"></div>
-
+    <div ag-grid="gridOptions"></div>
 </div>
 
-
-
-<script type="text/javascript">
-    <r:script>
-    function GridCtrl($scope) {
-
-        var colModel =
-        ${g.include(action: 'columnModel')}
-
-        var popupHtml = '<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu" > \
-        <li><a href="#" class="row_action_edit" data-dismiss="clickover" ng-click="quickSearch(search)" ><i class="icon-edit"></i> edit</a></li> \
-        <li><a href="#" class="row_action_delete" data-dismiss="clickover"><i class="icon-trash"></i> delete</a></li> \
-      </ul>'
-
-        $scope.gridOptions = {
-            url: "${createLink(action:'list.json')}",
-            colModel: colModel,
-            multiselect: false, //turn off multiselect
-            shrinkToFit: true, //makes columns fit to width
-            sortname: 'login',
-            sortorder: 'asc',
-            actionPopup: {
-                menuList: popupHtml
-            },
-            gridComplete: function () {
-                //var g = $(this)
-                //turn auto-sizing of columns back off
-                $(this).jqGrid("setGridParam", {shrinkToFit: false})
-                // var scope = angular.element(g).scope();
-                // scope.$apply(function() {
-                //   scope.grid = g
-                // });
-            }
-        }
-
-
-    }
-    ;
-
-    function SearchFormCtrl($scope, $rootScope) {
-
-        $('button[data-select2-open]').click(function () {
-            $('#' + $(this).data('select2-open')).select2('open');
-        });
-
-        $scope.orgSelectConfig = {
-            width: 'resolve',
-            dropdownCss: {width: '400px'},
-            minimumInputLength: 1,
-            ajax: {
-                url: "${createLink(controller:'org',action:'pickList')}",
-                quietMillis: 500, //Number of milliseconds to wait for the user to stop typing before issuing the ajax request
-                data: function (term, page) {
-                    return {
-                        q: term, // search term
-                        max: 20,
-                        page: page,
-                        sort: 'name',
-                        order: 'asc'
-                    }; // query params go here
-                },
-                results: function (res, page) { // parse the results into the format expected by Select2.
-                    var more = page < res.total; // whether or not there are more results available
-                    // notice we return the value of more so Select2 knows if more results can be loaded
-                    var list = $.map(res.rows, function (n) {
-                        return {"id": n.id, "num": n.num, "name": n.name}
-                    });
-                    return { results: list, more: more }
-                }
-            },
-            formatResult: function (item) {
-                return "<table class='table table-condensed' style='margin-bottom:0'><tr><td style='width:60px;border-top:none' >" + item.num +
-                        " </td><td style='border-top:none'>" + item.name + "</td></tr><table>"
-                //return '<dl class="dl-horizontal"><dt>' + item.num + "</dt><dd>" + item.name + "</dd></dl>"
-                //return "<span style='width:50px'>" + item.num + " - </span><span style='width:250px'>" + item.name + "</span>";
-            },
-            formatSelection: function (item) {
-                return item.name;
-            },
-            escapeMarkup: function (m) {
-                return m;
-            } // we do not want to escape markup since we are displaying html in results
-        }
-
-        $scope.advancedSearch = function (search) {
-            //console.log(searchCall)
-            $rootScope.$broadcast('searchUpdated', search, $scope)
-        }
-
-    }
-    ;
-
-    </r:script>
-</script>
 </body>
 </html>
