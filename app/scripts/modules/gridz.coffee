@@ -89,8 +89,9 @@ gridz.directive "fieldGroup", ->
       for field in fields
         $field = $scope[formName][field]
 
-        allPristine = allPristine and $field.$pristine
-        allValid = allValid and $field.$valid
+        if $field?
+          allPristine = allPristine and $field.$pristine
+          allValid = allValid and $field.$valid
 
       return if allPristine
       
