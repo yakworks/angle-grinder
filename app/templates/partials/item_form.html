@@ -8,12 +8,13 @@
 <div class="modal-body">
   <form name="editForm" class="form-horizontal no-margin" ng-submit="save(item)">
 
-    <div class="control-group">
+    <div field-group for="customerName">
       <label class="control-label">Customer Name</label>
 
       <div class="controls">
-        <input type="text" name="customer_name" placeholder="Enter Customer Name"
+        <input type="text" name="customerName" placeholder="Enter Customer Name"
                ng-model="item.customer.name" autofocus required />
+        <validation-error for="customerName" />
       </div>
     </div>
 
@@ -36,7 +37,8 @@
     </div>
 
     <div class="modal-footer">
-      <button type="submit" class="btn btn-primary">
+      <button type="submit" class="btn btn-primary"
+              ng-class="{disabled: editForm.$invalid}">
         <i class="icon-ok icon-white"></i>Save
       </button>
     </div>
