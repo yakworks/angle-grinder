@@ -30,7 +30,7 @@ scenario "Basic grid scenario", ->
       @test.assertEquals dialog.getTitle(), "Create New Item"
 
       dialog.fillFormWith
-        customer_name: "New customer"
+        customerName: "New customer"
         date: "2013-07-03"
         note: "This is the test note"
       dialog.clickSave()
@@ -51,7 +51,7 @@ scenario "Basic grid scenario", ->
       @test.assertEquals dialog.getTitle(), "Edit Item Test Customer 1"
 
       dialog.fillFormWith
-        customer_name: "New name for the first customer"
+        customerName: "New name for the first customer"
         date: "2013-07-04"
         note: "This is the other note"
       dialog.clickSave()
@@ -72,7 +72,7 @@ scenario "Basic grid scenario", ->
       @test.assertEquals dialog.getTitle(), "Edit Item Test Customer 2"
 
       dialog.fillFormWith
-        customer_name: "Yet another name"
+        customerName: "Yet another name"
       dialog.clickSave()
       @test.assertFalsy dialog.isVisible()
 
