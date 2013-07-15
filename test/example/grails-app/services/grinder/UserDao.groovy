@@ -53,7 +53,7 @@ class UserDao extends GormDaoSupport{
 		def user = new User()
 		//if(!params.orgId) params.orgId = 1 //this is the main client, 
 		user.contact = new Contact()
-		//user.contact.org = Org.get(params.orgId)
+		user.contact.org = Org.get(params.orgId)
 		params.remove 'orgId'
 		persistWithParams(user,params)
 		return [ ok:true, entity: user,message:DaoMessage.created(user)]

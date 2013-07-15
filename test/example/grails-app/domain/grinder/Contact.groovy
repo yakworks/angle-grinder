@@ -30,6 +30,7 @@ class Contact {
     String comments
 
     //static hasOne = [user:User]
+    Org  org
 
     def isUserEnabled() {
         return (user && user.enabled) ? true : false
@@ -50,6 +51,7 @@ class Contact {
 
     static mapping = {
         cache true
+        org column: 'orgId'
     }
 
     static constraints = {
@@ -74,6 +76,8 @@ class Contact {
 
         tagForReminders nullable: false
         visibleToOrgType nullable: true
+
+        org nullable:false
     }
 
     @Override
