@@ -56,9 +56,8 @@ describe "angleGrinder.gridz", ->
 
       describe "when the fileds are equal", ->
         beforeEach ->
-          $scope.user =
-            password: "password"
-            passwordConfirmation: "password"
+          $scope.form.password.$setViewValue "password"
+          $scope.form.passwordConfirmation.$setViewValue "password"
           $scope.$digest()
 
         it "marks the form as valid", ->
@@ -71,9 +70,8 @@ describe "angleGrinder.gridz", ->
 
       describe "when the fields are not equal", ->
         beforeEach ->
-          $scope.user =
-            password: "password"
-            passwordConfirmation: "other password"
+          $scope.form.password.$setViewValue "password"
+          $scope.form.passwordConfirmation.$setViewValue "other password"
           $scope.$digest()
 
         it "marks the form as invalid", ->
@@ -88,6 +86,51 @@ describe "angleGrinder.gridz", ->
           expect($scope.form.passwordConfirmation.$valid).toBeFalsy()
           expect($scope.form.passwordConfirmation.$invalid).toBeTruthy()
           expect($scope.form.passwordConfirmation.$error.mismatch).toBeTruthy()
+
+        it "sets errors on the field", ->
+          expect(formElement.find("input[name=passwordConfirmation]")).toBeTruthy()
+
+    describe "fieldGroup", ->
+      element = null
+      $scope = null
+
+      beforeEach inject ($rootScope, $compile) ->
+        $scope = $rootScope.$new()
+
+        element = angular.element """
+          <form name="form" novalidate>
+            <div class="control-group"
+                 field-group for="email,password">
+              <input type="text" name="email"
+                     ng-model="user.email" required />
+              <input type="password" name="password"
+                     ng-model="user.password" required />
+            </div>
+          </form>
+        """
+
+        $compile(element)($scope)
+        $scope.$digest()
+
+      describe "when one of the field is invalid", ->
+        beforeEach ->
+          $scope.form.email.$setViewValue "luke@rebel.com"
+          $scope.form.password.$setViewValue ""
+          $scope.$digest()
+
+        it "marks the whole group as invalid", ->
+          expect($scope.form.$valid).toBeFalsy()
+          expect(element.find(".control-group").hasClass("error")).toBeTruthy()
+
+      describe "when all fields are valid", ->
+        beforeEach ->
+          $scope.form.email.$setViewValue "luke@rebel.com"
+          $scope.form.password.$setViewValue "password"
+          $scope.$digest()
+
+        it "does not mark the group as invalid", ->
+          expect($scope.form.$valid).toBeTruthy()
+          expect(element.find(".control-group").hasClass("error")).toBeFalsy()
 
   describe "services", ->
     describe "#editDialog", ->

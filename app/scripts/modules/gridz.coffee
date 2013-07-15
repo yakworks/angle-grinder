@@ -58,6 +58,42 @@ gridz.directive "agGrid", [
     link: link
 ]
 
+gridz.directive "fieldGroup", ->
+  restrict: "A"
+  require: "^form"
+  replace: true
+  transclude: true
+  template: """
+    <div class="control-group" ng-transclude></div>
+  """
+
+  link: ($scope, element, attrs, ctrl) ->
+    formName = ctrl.$name
+    fields = (attrs["for"] or "").split(",")
+
+    watchExpression = (formName, fields) ->
+      conditions = []
+      for field in fields
+        conditions.push "(#{formName}.#{field}.$dirty && #{formName}.#{field}.$invalid)"
+      conditions.join(" || ")
+
+    $scope.$watch watchExpression(formName, fields), ->
+      allPristine = true
+      allValid = true
+
+      for field in fields
+        $field = $scope[formName][field]
+
+        allPristine = allPristine and $field.$pristine
+        allValid = allValid and $field.$valid
+
+      return if allPristine
+      
+      if allValid
+        element.removeClass("error")
+      else
+        element.addClass("error")
+
 class EditItemCtrl
 
   @$inject = ["$scope", "$rootScope", "$log", "dialog", "item", "createNew", "flatten"]

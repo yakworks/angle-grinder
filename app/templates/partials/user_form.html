@@ -7,7 +7,7 @@
 
 <div class="modal-body">
   <form name="editForm" class="form-horizontal no-margin" novalidate ng-submit="save(item)">
-    <div class="control-group" ng-class="{error: editForm.name.$dirty && editForm.name.$invalid}">
+    <div field-group for="name">
       <label class="control-label">Name</label>
 
       <div class="controls">
@@ -17,9 +17,7 @@
       </div>
     </div>
 
-    <div class="control-group"
-         ng-class="{error: (editForm.password.$dirty || editForm.passwordConfirmation.$dirty) &&
-                           (editForm.password.$invalid || editForm.passwordConfirmation.$invalid)}">
+    <div field-group for="password,passwordConfirmation">
       <label class="control-label">Password</label>
 
       <div class="controls">
@@ -33,11 +31,11 @@
                ng-model="item.passwordConfirmation" autofocus
                required match="item.password" />
         <span class="help-inline" ng-show="editForm.passwordConfirmation.$dirty && editForm.passwordConfirmation.$error.required">This field is required</span>
-        <span class="help-inline" ng-show="editForm.passwordConfirmation.$dirty &&editForm.passwordConfirmation.$error.mismatch">The password does not match the confirmation</span>
+        <span class="help-inline" ng-show="editForm.passwordConfirmation.$dirty && editForm.passwordConfirmation.$error.mismatch">The password does not match the confirmation</span>
       </div>
     </div>
 
-    <div class="control-group" ng-class="{error: editForm.allowance.$invalid}">
+    <div field-group for="allowance">
       <label class="control-label">Allowance</label>
 
       <div class="controls">
@@ -46,7 +44,7 @@
       </div>
     </div>
 
-    <div class="control-group" ng-class="{error: editForm.birthday.$invalid}">
+    <div field-group for="birthday">
       <label class="control-label">Birthday</label>
 
       <div class="controls">
