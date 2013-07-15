@@ -39,6 +39,7 @@ describe "angleGrinder.gridz", ->
     describe "match", ->
       formElement = null
       $scope = null
+      form = null
 
       beforeEach inject ($rootScope, $compile) ->
         $scope = $rootScope.$new()
@@ -53,39 +54,40 @@ describe "angleGrinder.gridz", ->
 
         $compile(formElement)($scope)
         $scope.$digest()
+        form = $scope.form
 
       describe "when the fileds are equal", ->
         beforeEach ->
-          $scope.form.password.$setViewValue "password"
-          $scope.form.passwordConfirmation.$setViewValue "password"
+          form.password.$setViewValue "password"
+          form.passwordConfirmation.$setViewValue "password"
           $scope.$digest()
 
         it "marks the form as valid", ->
-          expect($scope.form.$valid).toBeTruthy()
-          expect($scope.form.$invalid).toBeFalsy()
+          expect(form.$valid).toBeTruthy()
+          expect(form.$invalid).toBeFalsy()
 
         it "does not set errors on the input", ->
-          expect($scope.form.passwordConfirmation.$valid).toBeTruthy()
-          expect($scope.form.passwordConfirmation.$invalid).toBeFalsy()
+          expect(form.passwordConfirmation.$valid).toBeTruthy()
+          expect(form.passwordConfirmation.$invalid).toBeFalsy()
 
       describe "when the fields are not equal", ->
         beforeEach ->
-          $scope.form.password.$setViewValue "password"
-          $scope.form.passwordConfirmation.$setViewValue "other password"
+          form.password.$setViewValue "password"
+          form.passwordConfirmation.$setViewValue "other password"
           $scope.$digest()
 
         it "marks the form as invalid", ->
-          expect($scope.form.$valid).toBeFalsy()
-          expect($scope.form.$invalid).toBeTruthy()
+          expect(form.$valid).toBeFalsy()
+          expect(form.$invalid).toBeTruthy()
 
         it "sets the valid form errors", ->
-          expect($scope.form.$error).toBeDefined()
-          expect($scope.form.$error.mismatch[0].$name).toEqual "passwordConfirmation"
+          expect(form.$error).toBeDefined()
+          expect(form.$error.mismatch[0].$name).toEqual "passwordConfirmation"
 
         it "sets the valid input errors", ->
-          expect($scope.form.passwordConfirmation.$valid).toBeFalsy()
-          expect($scope.form.passwordConfirmation.$invalid).toBeTruthy()
-          expect($scope.form.passwordConfirmation.$error.mismatch).toBeTruthy()
+          expect(form.passwordConfirmation.$valid).toBeFalsy()
+          expect(form.passwordConfirmation.$invalid).toBeTruthy()
+          expect(form.passwordConfirmation.$error.mismatch).toBeTruthy()
 
         it "sets errors on the field", ->
           expect(formElement.find("input[name=passwordConfirmation]")).toBeTruthy()
@@ -93,6 +95,7 @@ describe "angleGrinder.gridz", ->
     describe "fieldGroup", ->
       element = null
       $scope = null
+      form = null
 
       beforeEach inject ($rootScope, $compile) ->
         $scope = $rootScope.$new()
@@ -111,25 +114,26 @@ describe "angleGrinder.gridz", ->
 
         $compile(element)($scope)
         $scope.$digest()
+        form = $scope.form
 
       describe "when one of the field is invalid", ->
         beforeEach ->
-          $scope.form.email.$setViewValue "luke@rebel.com"
-          $scope.form.password.$setViewValue ""
+          form.email.$setViewValue "luke@rebel.com"
+          form.password.$setViewValue ""
           $scope.$digest()
 
         it "marks the whole group as invalid", ->
-          expect($scope.form.$valid).toBeFalsy()
+          expect(form.$valid).toBeFalsy()
           expect(element.find(".control-group").hasClass("error")).toBeTruthy()
 
       describe "when all fields are valid", ->
         beforeEach ->
-          $scope.form.email.$setViewValue "luke@rebel.com"
-          $scope.form.password.$setViewValue "password"
+          form.email.$setViewValue "luke@rebel.com"
+          form.password.$setViewValue "password"
           $scope.$digest()
 
         it "does not mark the group as invalid", ->
-          expect($scope.form.$valid).toBeTruthy()
+          expect(form.$valid).toBeTruthy()
           expect(element.find(".control-group").hasClass("error")).toBeFalsy()
 
   describe "services", ->
