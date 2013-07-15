@@ -32,26 +32,3 @@ app = angular.module "admin", [
   "admin.resources"
   "angleGrinder.gridz"
 ]
-
-# Custom validation directive for fields match.
-# Might be used for password confirmation validation.
-# TODO move it to the better place
-app.directive "match", ->
-  require: "ngModel"
-  link: (scope, elem, attrs, ctrl) ->
-    validateEqual = (value, otherValue) ->
-      if value is otherValue
-        ctrl.$setValidity "mismatch", true
-        return value
-      else
-        ctrl.$setValidity "mismatch", false
-
-    scope.$watch attrs.match, (otherValue) ->
-      validateEqual(ctrl.$viewValue, otherValue)
-
-    ctrl.$parsers.unshift (value) ->
-      otherValue = scope.$eval(attrs.match)
-      validateEqual(value, otherValue)
-
-    ctrl.$formatters.unshift (value) ->
-      validateEqual(value, scope.$eval(attrs.match))

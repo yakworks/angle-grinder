@@ -7,69 +7,65 @@
     <h3 ng-hide="createNew">Edit ${entityName}</h3>
 </div>
 
-<pre>
-  item: {{item | json}}
-  valid: {{editForm.$valid}}
-  error: {{editForm.$error}}
-</pre>
-
-<form name="editForm" class="form-horizontal no-margin" ng-submit="save(item)">
+<form name="editForm" class="form-horizontal no-margin" novalidate ng-submit="save(item)">
     <div class="modal-body">
         <!-- TODO obsolete flash messages -->
         <div class="alert alert-{{message.level}}" ng-show="message.text">
         <a class="close" href="#">&times;</a>{{message.text}}</div>
 
-        <div class="control-group" ng-class="{error: errors.contact.firstName}">
+        <div field-group for="contactFirstName,contactLastName">
             <label class="control-label">${ag.label(code: "contact.name")}</label>
 
             <div class="controls">
                 <input type="text" placeholder="${ag.label(code: 'contact.firstName')}"
                        name="contactFirstName"
                        ng-model="item.contact.firstName" required autofocus>
-                <span class="help-inline" ng-show="errors.contact.firstName">{{errors.contact.firstName}}</span>
+                <validation-error for="contactFirstName" />
             </div>
 
             <div class="controls" style="margin-top:5px">
                 <input type="text" placeholder="${ag.label(code: 'contact.lastName')}"
                        name="contactLastName"
                        ng-model="item.contact.lastName" />
+                <validation-error for="contactLastName" />
             </div>
         </div>
 
-        <div class="control-group" ng-class="{error: errors.contact.email}">
+        <div field-group for="contactEmail">
             <label class="control-label">${ag.label(code: "contact.email")}</label>
 
             <div class="controls">
                 <input type="email"
-                       name="contact.email" ng-model="item.contact.email" />
-                <span class="help-inline" ng-show="errors.contact.email">{{errors.contact.email}}</span>
+                       name="contactEmail" ng-model="item.contact.email" />
+                <validation-error for="contactEmail" />
             </div>
         </div>
 
-        <div class="control-group" ng-class="{error: errors.user.login}">
+        <div field-group for="login">
             <label class="control-label">${ag.label(code: "user.login")}</label>
 
             <div class="controls">
                 <input type="text"
                        name="login" ng-model="item.login" required />
-                <span class="help-inline" ng-show="errors.user.login">{{errors.user.login}}</span>
+                <validation-error for="login" />
             </div>
         </div>
 
-        <div class="control-group" ng-class="{error: errors.user.passwd}">
+        <div field-group for="password,repassword">
             <label class="control-label">${ag.label(code: "user.password")}</label>
 
             <div class="controls">
                 <input type="password" placeholder="${ag.label(code: 'user.password')}"
                        name="password"
                        ng-model="item.password" required />
-                <span class="help-inline" ng-show="errors.user.passwd">{{errors.user.passwd}}</span>
+                <validation-error for="password" />
             </div>
 
             <div class="controls" style="margin-top:5px">
                 <input type="password" placeholder="${ag.label(code: 'user.repassword')}"
                        name="repassword"
                        ng-model="item.repassword" required match="item.password" />
+                <validation-error for="repassword" />
             </div>
         </div>
 
