@@ -56,7 +56,8 @@
     </div>
 
     <div class="modal-footer">
-      <button type="submit" class="btn btn-primary">
+      <button type="submit" class="btn btn-primary"
+              ng-class="{disabled: editForm.$invalid}">
         <i class="icon-ok icon-white"></i>Save
       </button>
     </div>
