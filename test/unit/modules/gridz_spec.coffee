@@ -136,6 +136,55 @@ describe "angleGrinder.gridz", ->
           expect(form.$valid).toBeTruthy()
           expect(element.find(".control-group").hasClass("error")).toBeFalsy()
 
+    describe "validationMessage", ->
+      element = null
+      $scope = null
+      form = null
+
+      beforeEach inject ($rootScope, $compile) ->
+        $scope = $rootScope.$new()
+
+        element = angular.element """
+          <form name="form" novalidate>
+            <input type="password" name="password"
+                   ng-model="user.password" required />
+            <validation-error for="password"
+                              required="This field is required" />
+
+            <input type="password" name="passwordConfirmation"
+                   ng-model="user.passwordConfirmation"
+                   required match="user.password" />
+          </form>
+        """
+
+        """
+        <validation-error for="passwordConfirmation"
+        mismatch="The password does not match the confirmation" />
+        """
+
+        $compile(element)($scope)
+        $scope.$digest()
+        form = $scope.form
+
+      describe "when the field is invalid", ->
+        beforeEach ->
+          form.password.$setViewValue ""
+          $scope.$digest()
+
+        it "displays validation errors for the given fields", ->
+          expect(element.find("validation-error[for=password] span").text())
+            .toEqual "This field is required"
+
+      describe "on ther validation error", ->
+        beforeEach ->
+          form.password.$setViewValue "password"
+          form.passwordConfirmation.$setViewValue "other password"
+          $scope.$digest()
+
+        xit "displays validation errors for the given fields", ->
+          expect(element.find("validation-error[for=passwordConfirmation] span").text())
+            .toEqual "The password does not match the confirmation"
+
   describe "services", ->
     describe "#editDialog", ->
       it "is defined", inject (editDialog) ->

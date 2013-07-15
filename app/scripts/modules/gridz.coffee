@@ -94,6 +94,32 @@ gridz.directive "fieldGroup", ->
       else
         element.addClass("error")
 
+gridz.directive "validationError", ->
+  restrict: "E"
+  require: "^form"
+  transclude: false
+
+  link: ($scope, element, attrs, ctrl) ->
+    formName = ctrl.$name
+    fieldName = attrs["for"]
+
+    expression = "#{formName}.#{fieldName}.$dirty && #{formName}.#{fieldName}.$invalid"
+    $scope.$watch expression, ->
+      $field = $scope[formName][fieldName]
+
+      html = ""
+      if $field.$dirty and $field.$invalid
+        for error, invalid of $field.$error
+          if invalid
+            message = attrs[error]
+
+            if message?
+              html += """
+                <span class="help-inline">#{attrs[error]}</span>
+              """
+
+      element.html(html)
+
 class EditItemCtrl
 
   @$inject = ["$scope", "$rootScope", "$log", "dialog", "item", "createNew", "flatten"]

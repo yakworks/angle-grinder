@@ -13,7 +13,7 @@
       <div class="controls">
         <input type="text" name="name" placeholder="Enter Name"
                ng-model="item.name" autofocus required />
-        <span class="help-inline" ng-show="editForm.name.$dirty && editForm.name.$error.required">This field is required</span>
+        <validation-error for="name" required="This field is required" />
       </div>
     </div>
 
@@ -22,16 +22,19 @@
 
       <div class="controls">
         <input type="password" name="password" placeholder="Enter Password"
-               ng-model="item.password" autofocus required />
-        <span class="help-inline" ng-show="editForm.password.$dirty && editForm.password.$error.required">This field is required</span>
+               ng-model="item.password" autofocus required ng-minlength="6" />
+        <validation-error for="password"
+                          required="This field is required"
+                          minlength="Password must be at least 6 characters." />
       </div>
 
       <div class="controls">
         <input type="password" name="passwordConfirmation" placeholder="Enter Password Confirmation"
                ng-model="item.passwordConfirmation" autofocus
                required match="item.password" />
-        <span class="help-inline" ng-show="editForm.passwordConfirmation.$dirty && editForm.passwordConfirmation.$error.required">This field is required</span>
-        <span class="help-inline" ng-show="editForm.passwordConfirmation.$dirty && editForm.passwordConfirmation.$error.mismatch">The password does not match the confirmation</span>
+        <validation-error for="passwordConfirmation"
+                          required="This field is required"
+                          mismatch="The password does not match the confirmation" />
       </div>
     </div>
 
