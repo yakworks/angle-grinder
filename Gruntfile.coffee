@@ -132,6 +132,12 @@ module.exports = (grunt) ->
           dest: "<%= appConfig.dist %>"
         ]
 
+    uglify:
+      options:
+        compress: false
+        beautify: true
+        mangle: false
+
     copy:
       dev:
         files: [
