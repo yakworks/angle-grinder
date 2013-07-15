@@ -141,51 +141,61 @@ describe "angleGrinder.gridz", ->
       $scope = null
       form = null
 
-      beforeEach inject ($rootScope, $compile) ->
-        $scope = $rootScope.$new()
+      comlileTemplate = (template) ->
+        beforeEach inject ($rootScope, $compile) ->
+          $scope = $rootScope.$new()
 
-        element = angular.element """
+          element = angular.element(template)
+
+          $compile(element)($scope)
+          $scope.$digest()
+          form = $scope.form
+
+      describe "when the validation message is provided", ->
+        comlileTemplate """
           <form name="form" novalidate>
             <input type="password" name="password"
                    ng-model="user.password" required />
             <validation-error for="password"
-                              required="This field is required" />
-
-            <input type="password" name="passwordConfirmation"
-                   ng-model="user.passwordConfirmation"
-                   required match="user.password" />
-          </form>
+                              required="Please fill this field" />
         """
 
-        """
-        <validation-error for="passwordConfirmation"
-        mismatch="The password does not match the confirmation" />
+        describe "when the field is invalid", ->
+          beforeEach ->
+            form.password.$setViewValue ""
+            $scope.$digest()
+
+          it "displays validation errors for the given field", ->
+            expect(element.find("validation-error[for=password] span").text())
+              .toEqual "Please fill this field"
+
+        describe "when the field is valid", ->
+          beforeEach ->
+            form.password.$setViewValue "password"
+            $scope.$digest()
+
+          it "hides validation errors", ->
+            expect(element.find("validation-error[for=password] span").text())
+              .toEqual ""
+
+      describe "when the validation messages is not provided", ->
+        comlileTemplate """
+          <form name="form" novalidate>
+            <input type="password" name="password"
+                   ng-model="user.password" required />
+            <validation-error for="password" />
         """
 
-        $compile(element)($scope)
-        $scope.$digest()
-        form = $scope.form
-
-      describe "when the field is invalid", ->
         beforeEach ->
           form.password.$setViewValue ""
           $scope.$digest()
 
-        it "displays validation errors for the given fields", ->
+        it "uses the default validation message", ->
           expect(element.find("validation-error[for=password] span").text())
             .toEqual "This field is required"
 
-      describe "on ther validation error", ->
-        beforeEach ->
-          form.password.$setViewValue "password"
-          form.passwordConfirmation.$setViewValue "other password"
-          $scope.$digest()
-
-        xit "displays validation errors for the given fields", ->
-          expect(element.find("validation-error[for=passwordConfirmation] span").text())
-            .toEqual "The password does not match the confirmation"
-
   describe "services", ->
+
     describe "#editDialog", ->
       it "is defined", inject (editDialog) ->
         expect(editDialog).toBeDefined()
@@ -197,6 +207,23 @@ describe "angleGrinder.gridz", ->
         it "opens the create dialog", inject (editDialog) ->
           item = name: "Foo"
           editDialog.open("/views/some_template.html", item)
+
+    describe "defaultValidationMessages", ->
+      messages = {}
+      beforeEach inject (defaultValidationMessages) ->
+        messages = defaultValidationMessages
+
+      it "is defined", ->
+        expect(messages).toBeDefined()
+
+      it "has the default message for `required` validation", ->
+        expect(messages.required).toEqual "This field is required"
+
+      it "has the default message for `mismatch` validation", ->
+        expect(messages.mismatch).toEqual "Does not match the confirmation"
+
+      it "has the default message for `minlength` validation", ->
+        expect(messages.minlength).toEqual "Too short"
 
     describe "#flatten", ->
       flatten = null

@@ -1,5 +1,10 @@
 gridz = angular.module("angleGrinder.gridz", ["ui.bootstrap"])
 
+gridz.value "defaultValidationMessages",
+  required: "This field is required"
+  mismatch: "Does not match the confirmation"
+  minlength: "Too short"
+
 gridz.directive "agGrid", [
   "hasSearchFilters", (hasSearchFilters) ->
     link = ($scope, element, attrs) ->
@@ -94,31 +99,33 @@ gridz.directive "fieldGroup", ->
       else
         element.addClass("error")
 
-gridz.directive "validationError", ->
-  restrict: "E"
-  require: "^form"
-  transclude: false
+gridz.directive "validationError", [
+  "defaultValidationMessages", (defaultValidationMessages) ->
+    restrict: "E"
+    require: "^form"
+    transclude: false
 
-  link: ($scope, element, attrs, ctrl) ->
-    formName = ctrl.$name
-    fieldName = attrs["for"]
+    link: ($scope, element, attrs, ctrl) ->
+      formName = ctrl.$name
+      fieldName = attrs["for"]
 
-    expression = "#{formName}.#{fieldName}.$dirty && #{formName}.#{fieldName}.$invalid"
-    $scope.$watch expression, ->
-      $field = $scope[formName][fieldName]
+      expression = "#{formName}.#{fieldName}.$dirty && #{formName}.#{fieldName}.$invalid"
+      $scope.$watch expression, ->
+        $field = $scope[formName][fieldName]
 
-      html = ""
-      if $field.$dirty and $field.$invalid
-        for error, invalid of $field.$error
-          if invalid
-            message = attrs[error]
+        html = ""
+        if $field.$dirty and $field.$invalid
+          for error, invalid of $field.$error
+            if invalid
+              message = attrs[error] || defaultValidationMessages[error]
 
-            if message?
-              html += """
-                <span class="help-inline">#{attrs[error]}</span>
-              """
+              if message?
+                html += """
+                  <span class="help-inline">#{message}</span>
+                """
 
-      element.html(html)
+        element.html(html)
+]
 
 class EditItemCtrl
 
