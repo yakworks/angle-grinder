@@ -65,6 +65,10 @@ describe "angleGrinder.gridz", ->
           expect($scope.form.$valid).toBeTruthy()
           expect($scope.form.$invalid).toBeFalsy()
 
+        it "does not set errors on the input", ->
+          expect($scope.form.passwordConfirmation.$valid).toBeTruthy()
+          expect($scope.form.passwordConfirmation.$invalid).toBeFalsy()
+
       describe "when the fields are not equal", ->
         beforeEach ->
           $scope.user =
@@ -81,6 +85,8 @@ describe "angleGrinder.gridz", ->
           expect($scope.form.$error.mismatch[0].$name).toEqual "passwordConfirmation"
 
         it "sets the valid input errors", ->
+          expect($scope.form.passwordConfirmation.$valid).toBeFalsy()
+          expect($scope.form.passwordConfirmation.$invalid).toBeTruthy()
           expect($scope.form.passwordConfirmation.$error.mismatch).toBeTruthy()
 
   describe "services", ->
