@@ -223,7 +223,13 @@ describe "angleGrinder.gridz", ->
         expect(messages.mismatch).toEqual "Does not match the confirmation"
 
       it "has the default message for `minlength` validation", ->
-        expect(messages.minlength).toEqual "Too short"
+        expect(messages.minlength).toEqual "This field is too short"
+
+      it "has the default message for `maxlength` validation", ->
+        expect(messages.maxlength).toEqual "This field is too long"
+
+      it "has the default message for `email` validation", ->
+        expect(messages.email).toEqual "Invalid email address"
 
     describe "#flatten", ->
       flatten = null

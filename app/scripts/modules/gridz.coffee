@@ -3,7 +3,9 @@ gridz = angular.module("angleGrinder.gridz", ["ui.bootstrap"])
 gridz.value "defaultValidationMessages",
   required: "This field is required"
   mismatch: "Does not match the confirmation"
-  minlength: "Too short"
+  minlength: "This field is too short"
+  maxlength: "This field is too long"
+  email: "Invalid email address"
 
 gridz.directive "agGrid", [
   "hasSearchFilters", (hasSearchFilters) ->
