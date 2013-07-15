@@ -60,19 +60,28 @@ gridz.directive "agGrid", [
 
 class EditItemCtrl
 
-  @$inject = ["$scope", "$rootScope", "dialog", "item", "createNew", "flatten"]
-  constructor: ($scope, $rootScope, dialog, item, createNew, flatten) ->
+  @$inject = ["$scope", "$rootScope", "$log", "dialog", "item", "createNew", "flatten"]
+  constructor: ($scope, $rootScope, $log, dialog, item, createNew, flatten) ->
     $scope.item = item
     $scope.createNew = createNew
 
+    # Closes the dialog
     $scope.closeEditDialog = ->
+      $log.info "Closing the dialog"
       dialog.close($scope.item)
 
+    # If form is valid performs server side update
     $scope.save = ->
-      item.save (response) ->
-        # Flattening the object before insering it to the grid
-        $rootScope.$broadcast("itemUpdated", flatten(response))
-        $scope.closeEditDialog()
+      if $scope.editForm.$valid
+        $log.info "The form is valid", $scope.editForm
+        item.save (response) ->
+          $log.info "Updating item", item
+
+          # Flattening the object before insering it to the grid
+          $rootScope.$broadcast("itemUpdated", flatten(response))
+          $scope.closeEditDialog()
+      else
+        $log.warn "The form is invalid", $scope.editForm
 
 gridz.controller "EditItemCtrl", EditItemCtrl
 
@@ -136,3 +145,25 @@ hasSearchFilters = (filters) ->
   return false
 
 gridz.value "hasSearchFilters", hasSearchFilters
+
+# Custom validation directive for fields match.
+# Might be used for password confirmation validation.
+gridz.directive "match", ->
+  require: "ngModel"
+  link: (scope, elem, attrs, ctrl) ->
+    validateEqual = (value, otherValue) ->
+      if value is otherValue
+        ctrl.$setValidity "mismatch", true
+        return value
+      else
+        ctrl.$setValidity "mismatch", false
+
+    scope.$watch attrs.match, (otherValue) ->
+      validateEqual(ctrl.$viewValue, otherValue)
+
+    ctrl.$parsers.unshift (value) ->
+      otherValue = scope.$eval(attrs.match)
+      validateEqual(value, otherValue)
+
+    ctrl.$formatters.unshift (value) ->
+      validateEqual(value, scope.$eval(attrs.match))
