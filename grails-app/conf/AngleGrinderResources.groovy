@@ -1,5 +1,5 @@
 def plugin = "angle-grinder"
-def dist = "${plugin}/dist"
+def dist = "${plugin}"
 
 modules = {
 
