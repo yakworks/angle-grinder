@@ -82,3 +82,24 @@ describe "module: angleGrinder.resources", ->
           args = onComplete.mostRecentCall.args[0]
           expect(args.id).toEqual 103
           expect(args.foo).toEqual "biz"
+
+    describe "#delete", ->
+      user = null
+      onComplete = jasmine.createSpy("#onComplete callback")
+
+      beforeEach ->
+        user = new Users(id: 123)
+
+      it "deletes the record", ->
+        # Given
+        $httpBackend.whenDELETE("/api/users/123").respond(id:123)
+
+        # When
+        user.delete(onComplete)
+        $httpBackend.flush()
+
+        # Then
+        expect(onComplete).toHaveBeenCalled()
+
+        args = onComplete.mostRecentCall.args[0]
+        expect(args.id).toEqual 123

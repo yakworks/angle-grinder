@@ -12,13 +12,16 @@ resources.factory "Users", [
       # Retunrs true if the record is persisted (has an id)
       persisted: -> @id?
 
-      # Backbone-style save() that inserts or updated the record
+      # Backbone style save() that inserts or updated the record
       # based on the presence of an id.
       save: (onComplete = ->) ->
         if @persisted()
           @$update(onComplete)
         else
           @$save(onComplete)
+
+      delete: (onComplete = ->) ->
+        @$delete(onComplete)
 
     Users
 ]
