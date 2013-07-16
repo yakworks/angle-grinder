@@ -17,13 +17,16 @@ resources.factory "Grails", [
       # Returns true if the record is persisted (has an id)
       persisted: -> @id?
 
-      # BackboneJS-style save() that inserts or updated the record
+      # BackboneJS style save() that inserts or updated the record
       # based on the presence of an id.
       save: (onComplete = ->) ->
         if @persisted()
           @$update(onComplete)
         else
           @$save(onComplete)
+
+      delete: (onComplete = ->) ->
+        @$delete(onComplete)
 
     Grails
 ]
