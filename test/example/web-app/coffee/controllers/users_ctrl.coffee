@@ -32,6 +32,10 @@ class UsersListCtrl
       Grails.get { id: id }, (user) ->
         editDialog.open("formTemplate", user)
 
+    $scope.deleteItem = (id) ->
+      item = new Grails(id: id)
+      item.delete -> $scope.$broadcast "itemDeleted", item
+
 class UsersSearchFormCtrl
 
   @$inject = ["$scope"]
