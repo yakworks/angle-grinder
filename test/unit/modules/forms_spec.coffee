@@ -163,24 +163,15 @@ describe "module: angleGrinder.forms", ->
           .toEqual "This field is required"
 
   describe "service: defaultValidationMessages", ->
-    messages = {}
-    beforeEach inject (defaultValidationMessages) ->
-      messages = defaultValidationMessages
+    it "is defined", inject (defaultValidationMessages) ->
+      expect(defaultValidationMessages).toBeDefined()
 
-    it "is defined", ->
-      expect(messages).toBeDefined()
+    hasDefaultMessageFor = (key, message) ->
+      it "has a default message for `#{key}` validation", inject (defaultValidationMessages) ->
+        expect(defaultValidationMessages[key]).toEqual message
 
-    it "has the default message for `required` validation", ->
-      expect(messages.required).toEqual "This field is required"
-
-    it "has the default message for `mismatch` validation", ->
-      expect(messages.mismatch).toEqual "Does not match the confirmation"
-
-    it "has the default message for `minlength` validation", ->
-      expect(messages.minlength).toEqual "This field is too short"
-
-    it "has the default message for `maxlength` validation", ->
-      expect(messages.maxlength).toEqual "This field is too long"
-
-    it "has the default message for `email` validation", ->
-      expect(messages.email).toEqual "Invalid email address"
+    hasDefaultMessageFor "required",  "This field is required"
+    hasDefaultMessageFor "mismatch",  "Does not match the confirmation"
+    hasDefaultMessageFor "minlength", "This field is too short"
+    hasDefaultMessageFor "maxlength", "This field is too long"
+    hasDefaultMessageFor "email",     "Invalid email address"
