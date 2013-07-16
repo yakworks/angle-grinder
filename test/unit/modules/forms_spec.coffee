@@ -162,13 +162,13 @@ describe "module: angleGrinder.forms", ->
         expect(element.find("validation-error[for=password] span").text())
           .toEqual "This field is required"
 
-  describe "service: defaultValidationMessages", ->
-    it "is defined", inject (defaultValidationMessages) ->
-      expect(defaultValidationMessages).toBeDefined()
+  describe "service: validationMessages", ->
+    it "is defined", inject (validationMessages) ->
+      expect(validationMessages).toBeDefined()
 
     hasDefaultMessageFor = (key, message) ->
-      it "has a default message for `#{key}` validation", inject (defaultValidationMessages) ->
-        expect(defaultValidationMessages[key]).toEqual message
+      it "has a default message for `#{key}` validation", inject (validationMessages) ->
+        expect(validationMessages[key]).toEqual message
 
     hasDefaultMessageFor "required",  "This field is required"
     hasDefaultMessageFor "mismatch",  "Does not match the confirmation"

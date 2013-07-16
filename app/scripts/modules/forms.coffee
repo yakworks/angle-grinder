@@ -1,6 +1,6 @@
 forms = angular.module("angleGrinder.forms", [])
 
-forms.value "defaultValidationMessages",
+forms.value "validationMessages",
   required: "This field is required"
   mismatch: "Does not match the confirmation"
   minlength: "This field is too short"
@@ -65,7 +65,7 @@ forms.directive "fieldGroup", ->
         element.addClass("error")
 
 forms.directive "validationError", [
-  "defaultValidationMessages", (defaultValidationMessages) ->
+  "validationMessages", (validationMessages) ->
     restrict: "E"
     require: "^form"
     transclude: false
@@ -82,7 +82,7 @@ forms.directive "validationError", [
         if $field.$dirty and $field.$invalid
           for error, invalid of $field.$error
             if invalid
-              message = attrs[error] || defaultValidationMessages[error]
+              message = attrs[error] || validationMessages[error]
 
               if message?
                 html += """
