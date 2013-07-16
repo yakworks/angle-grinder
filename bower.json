@@ -4,6 +4,7 @@
   "dependencies": {
     "jqgrid": "basejump/jqGrid#v4.4.4-tweaks",
     "jquery": "1.9.1",
+    "underscore": "~1.4.4",
     "spin.js": "~1.2.8"
   },
   "devDependencies": {
