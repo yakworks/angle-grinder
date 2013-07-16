@@ -3,15 +3,10 @@ package grinder
 import org.apache.commons.lang.builder.EqualsBuilder
 import org.apache.commons.lang.builder.HashCodeBuilder
 
-/**
- * User for user account.
- */
-//@gorm.AuditStamp
 class Org implements Serializable {
 
     String num
     String name
-
 
     static mapping = {
         cache true
@@ -21,7 +16,6 @@ class Org implements Serializable {
         num blank:false, nullable:false, maxSize:50
         name blank: false, nullable: false, unique: true, maxSize: 50
     }
-
 
     @Override
     boolean equals(final Object that) {
@@ -36,4 +30,5 @@ class Org implements Serializable {
         if (id == null) return HashCodeBuilder.reflectionHashCode(this, ["id"])
         return this.id.hashCode()
     }
+
 }
