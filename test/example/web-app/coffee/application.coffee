@@ -1,7 +1,5 @@
-###
-Generic $resource error handler used by all controllers.
-TODO Remove it from the global namespace, create ng service?
-###
+# Generic $resource error handler used by all controllers.
+# TODO Remove it from the global namespace, create ng service?
 window.errorHandler = ($scope, Flash, response) ->
   switch response.status
     when 404 # resource not found - return to the list and display message returned by the controller
@@ -31,4 +29,5 @@ Function::curry = ->
 app = angular.module "admin", [
   "admin.resources"
   "angleGrinder.gridz"
+  "angleGrinder.forms"
 ]
