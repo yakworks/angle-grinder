@@ -167,14 +167,15 @@ dist
 │   ├── bootstrap.min.js
 │   ├── gridz.min.js
 │   ├── scripts.min.js
-│   └── vendor.min.js
+│   ├── jquery.min.js
+│   └── angularjs-all.min.js
 └── styles
     ├── bootstrap.min.css
     ├── gridz.min.css
     └── style.min.css
 ```
 
-* `scripts/vendor.min.js` - jquery + AngularJS stuff
+* `scripts/angularjs-all.min.js` - AngularJS stuff
 * `styles/bootstrap.min.css` - twitter bootstrap styles
 * `scripts/bootstrap.min.js` - twitter bootstrap js + angular-bootstrap
 * `styles/gridz.min.css` - styles for gridz plugin
