@@ -1,6 +1,7 @@
 express = require("express")
 path = require("path")
 
+utils = require("./web/utils")
 Data = require("./web/data")
 data = new Data()
 
@@ -41,8 +42,15 @@ app.put "/api/users/:id", (req, res) ->
   res.send row
 
 app.delete "/api/users/:id", (req, res) ->
-  row = data.delete(req.params.id)
-  res.send row
+  # sleep for 1,2,3 seconds
+  utils.sleep utils.randomItemFrom [1, 2, 3]
+
+  if Math.random() > 0.5
+    row = data.delete(req.params.id)
+    res.send row
+  else
+    # respond with random error
+    res.send utils.randomItemFrom [400, 404, 500]
 
 port = 8000
 app.listen port, ->
