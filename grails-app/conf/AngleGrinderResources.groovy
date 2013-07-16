@@ -3,8 +3,12 @@ def dist = "${plugin}"
 
 modules = {
 
-    "vendor" {
-        resource url: [plugin: plugin, dir: "${dist}/scripts", file: "vendor.min.js"]
+    "jquery" {
+        resource url: [plugin: plugin, dir: "${dist}/scripts", file: "jquery.min.js"]
+    }
+
+    "angularjs-all" {
+        resource url: [plugin: plugin, dir: "${dist}/scripts", file: "angularjs-all.min.js"]
     }
 
     "bootstrap" {
@@ -12,14 +16,19 @@ modules = {
         resource url: [plugin: plugin, dir: "${dist}/scripts", file: "bootstrap.min.js"]
     }
 
-    "gridz" {
+    "angleGrinder" {
         resource url: [plugin: plugin, dir: "${dist}/styles", file: "gridz.min.css"]
         resource url: [plugin: plugin, dir: "${dist}/scripts", file: "gridz.min.js"]
         resource url: [plugin: plugin, dir: "${dist}/scripts", file: "angle-grinder.gridz.min.js"]
+        resource url: [plugin: plugin, dir: "${dist}/scripts", file: "angle-grinder.forms.min.js"]
+    }
+
+    "vendor" {
+        dependsOn "jquery,angularjs-all,bootstrap"
     }
 
     "admin" {
-        dependsOn "vendor,bootstrap,gridz"
+        dependsOn "vendor,angleGrinder"
 
         resource url: [plugin: plugin, dir: "coffee", file: "modules/resources.coffee"]
         resource url: [plugin: plugin, dir: "coffee", file: "application.coffee"]
