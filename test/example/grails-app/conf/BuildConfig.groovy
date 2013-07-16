@@ -44,6 +44,7 @@ grails {
                 compile ":fields:1.3"
                 compile ":plugin-config:0.1.8"
                 compile ":faker:0.7"
+                compile ":coffeescript-resources:0.3.8"
             }
         }
         work.dir = ".grails"
