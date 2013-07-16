@@ -95,7 +95,8 @@
             <i class="icon-remove"></i> ${ag.label(code: 'button.cancel')}
         </button>
 
-        <button type="submit" ng-class="{disabled: saving}" class="btn btn-primary">
+        <button type="submit" class="btn btn-primary"
+                ng-class="{disabled: saving || editForm.$invalid}">
             <i class="icon-ok icon-white"></i>
             {{saving && '${ag.label(code: 'button.save')} ...' || '${ag.label(code: 'button.save')}'}}
         </button>
