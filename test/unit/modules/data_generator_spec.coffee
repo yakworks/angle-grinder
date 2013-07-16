@@ -1,7 +1,7 @@
-describe "angleGrinder.dataGenerator", ->
+describe "module: angleGrinder.dataGenerator", ->
   beforeEach module("angleGrinder.dataGenerator")
 
-  describe "random", ->
+  describe "service: random", ->
     describe "#range", ->
       it "is defined", inject (random) ->
         expect(random.range).toBeDefined()
@@ -26,7 +26,7 @@ describe "angleGrinder.dataGenerator", ->
         minDate = new Date(2001, 1, 1)
         expect(random.date(minDate)).toEqual("2013-07-01")
 
-  describe "sampleData", ->
+  describe "service: sampleData", ->
     it "is defined", inject (sampleData) ->
       expect(sampleData).toBeDefined()
       expect(sampleData.generate).toBeDefined()

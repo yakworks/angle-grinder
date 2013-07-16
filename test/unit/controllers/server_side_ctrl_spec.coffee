@@ -1,4 +1,4 @@
-describe "ServerSideCtrl", ->
+describe "controller: ServerSideCtrl", ->
   beforeEach module("angleGrinder")
 
   $scope = null

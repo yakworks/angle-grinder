@@ -7,6 +7,7 @@ $ ->
 app = angular.module("angleGrinder", [
   "angleGrinder.templates"
   "angleGrinder.gridz"
+  "angleGrinder.forms"
   "angleGrinder.dataGenerator"
   "angleGrinder.resources"
 ])

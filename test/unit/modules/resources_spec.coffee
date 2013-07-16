@@ -1,4 +1,4 @@
-describe "angleGrinder.resources", ->
+describe "module: angleGrinder.resources", ->
   beforeEach module("angleGrinder.resources")
 
   $httpBackend = null
@@ -9,7 +9,7 @@ describe "angleGrinder.resources", ->
     $httpBackend.verifyNoOutstandingExpectation()
     $httpBackend.verifyNoOutstandingRequest()
 
-  describe "Users", ->
+  describe "service: Users", ->
     Users = null
     beforeEach inject ($injector) ->
       Users = $injector.get("Users")

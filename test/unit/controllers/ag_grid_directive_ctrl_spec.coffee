@@ -1,4 +1,4 @@
-describe "AgGridDirectiveCtrl", ->
+describe "controller: AgGridDirectiveCtrl", ->
   beforeEach module("angleGrinder")
 
   $scope = null
