@@ -3,11 +3,11 @@ class UsersListCtrl
   @$inject = ["$scope", "editDialog", "Grails"]
   constructor: ($scope, editDialog, Grails) ->
     colModel = [
-      { name: "id", width: 30 }
-      { name: "contact.name", width: 100, formatter: "editActionLink" }
-      { name: "login", width: 70 }
-      { name: "contact.email", width: 70, align: "right", formatter: "email" }
-      { name: "inactive", width: 30, align: "center", formatter: "okIcon" }
+      { name: "id", label: "ID", width: 30 }
+      { name: "contact.name", label: "Contact Name", width: 100, formatter: "editActionLink" }
+      { name: "contact.email", label: "Contact Email", width: 70, align: "right", formatter: "email" }
+      { name: "login", label: "Login", width: 70 }
+      { name: "inactive", label: "Inactive", width: 30, align: "center", formatter: "okIcon" }
     ]
 
     $scope.gridOptions =
