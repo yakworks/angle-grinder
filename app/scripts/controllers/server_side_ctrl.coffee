@@ -18,7 +18,7 @@ class ServerSideCtrl
 
     $scope.deleteItem = (id) ->
       user = new Users(id: id)
-      user.$delete -> $scope.$broadcast "itemDeleted"
+      user.$delete -> $scope.$broadcast "itemDeleted", user
 
     $scope.quickSearch = (search) ->
       $scope.$broadcast "searchUpdated", search

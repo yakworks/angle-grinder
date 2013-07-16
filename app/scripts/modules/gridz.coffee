@@ -40,8 +40,8 @@ gridz.directive "agGrid", [
           $(ind).css "background-color", ""
         ).fadeIn "fast"
 
-      $scope.$on "itemDeleted", ->
-        $grid.trigger "reloadGrid"
+      $scope.$on "itemDeleted", (event, item) ->
+        $grid.jqGrid "delRowData", item.id
 
       $scope.$on "searchUpdated", (event, filters) ->
         params =
@@ -75,13 +75,21 @@ class EditItemCtrl
       if $scope.editForm.$valid
         $log.info "The form is valid", $scope.editForm
         item.save (response) ->
-          $log.info "Updating item", item
+          $log.info "Item has been updated/created", response
 
           # Flattening the object before insering it to the grid
-          $rootScope.$broadcast("itemUpdated", flatten(response))
+          $rootScope.$broadcast "itemUpdated", flatten(response)
           $scope.closeEditDialog()
       else
         $log.warn "The form is invalid", $scope.editForm
+
+    # Performs server side delete
+    $scope.delete = ->
+      item.delete (response) ->
+        $log.info "Item has been deleted", response
+
+        $rootScope.$broadcast "itemDeleted", item
+        $scope.closeEditDialog()
 
 gridz.controller "EditItemCtrl", EditItemCtrl
 
