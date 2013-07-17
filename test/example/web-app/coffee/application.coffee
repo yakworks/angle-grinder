@@ -30,4 +30,5 @@ app = angular.module "admin", [
   "admin.resources"
   "angleGrinder.gridz"
   "angleGrinder.forms"
+  "angleGrinder.alerts"
 ]

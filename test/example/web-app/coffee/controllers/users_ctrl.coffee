@@ -1,7 +1,7 @@
 class UsersListCtrl
 
-  @$inject = ["$scope", "editDialog", "Grails"]
-  constructor: ($scope, editDialog, Grails) ->
+  @$inject = ["$scope", "$log", "confirmationDialog", "editDialog", "Grails"]
+  constructor: ($scope, $log, confirmationDialog, editDialog, Grails) ->
     colModel = [
       { name: "id", label: "ID", width: 30 }
       { name: "contact.name", label: "Contact Name", width: 100, formatter: "editActionLink" }
@@ -25,12 +25,21 @@ class UsersListCtrl
     # Displays a form for creating a new user
     $scope.createDialog = ->
       user = new Grails()
-      editDialog.open("formTemplate", user)
+      editDialog.open("/example/userAdmin/formTemplate", user)
 
     # Displays a form for editing an exiting user
     $scope.editDialog = (id) ->
       Grails.get { id: id }, (user) ->
-        editDialog.open("formTemplate", user)
+        editDialog.open("/example/userAdmin/formTemplate", user)
+
+    $scope.deleteItem = (id) ->
+      confirmationDialog.open().then (confirmed) ->
+        return unless confirmed
+
+        item = new Grails(id: id)
+        item.delete
+          success: (response) -> $scope.$broadcast "itemDeleted", item
+          error: (response) -> $log.error "Something went wront", response
 
 class UsersSearchFormCtrl
 

@@ -15,3 +15,5 @@ grails-quartz*.zip
 # OS X generated files
 .DS_Store
 
+# Ingnore html files from angle-grinder
+web-app/angle-grinder/*.html

@@ -14,16 +14,17 @@ resources.factory "Grails", [
       delete: { method: "POST", params: action: "delete" }
 
     angular.extend Grails.prototype,
-      # Returns true if the record is persisted (has an id)
+      # Retunrs true if the record is persisted (has an id)
       persisted: -> @id?
 
-      # BackboneJS-style save() that inserts or updated the record
+      # Backbone style save() that inserts or updated the record
       # based on the presence of an id.
-      save: (onComplete = ->) ->
-        if @persisted()
-          @$update(onComplete)
-        else
-          @$save(onComplete)
+      save: (options) ->
+        method = if not @persisted() then "save" else "update"
+        Grails[method]({}, this, options.success, options.error)
+
+      delete: (options) ->
+        Grails.delete({}, this, options.success, options.error)
 
     Grails
 ]

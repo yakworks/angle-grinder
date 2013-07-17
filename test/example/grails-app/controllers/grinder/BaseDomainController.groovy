@@ -268,7 +268,9 @@ abstract class BaseDomainController {
             deleteJson()
             return
         }
+
         def commonParams
+
         try {
             def result = null
             commonParams = (request.format == 'json' ? request.JSON : params) // get the appropriate params based on request format
@@ -298,10 +300,11 @@ abstract class BaseDomainController {
 
     def deleteJson() {
         log.debug("in saveOrUpdateJson with ${params}")
+
         def responseJson = [:]
         try {
-            result = dao.remove(params)
-            return
+            def result = dao.remove(params)
+            render result as JSON
         } catch (ValidationException e) {
             log.debug("saveJson with error")
             response.status = 400
