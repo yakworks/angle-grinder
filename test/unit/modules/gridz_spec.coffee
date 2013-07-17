@@ -1,4 +1,5 @@
 describe "module: angleGrinder.gridz", ->
+  beforeEach module("angleGrinder.templates")
   beforeEach module("angleGrinder.gridz")
 
   describe "directive: agGrid", ->
@@ -70,3 +71,9 @@ describe "module: angleGrinder.gridz", ->
 
       it "returns false", inject (hasSearchFilters) ->
         expect(hasSearchFilters(filters)).toBeFalsy()
+
+  describe "confirmationDialog", ->
+    it "displays the confirmation", inject ($dialog, confirmationDialog) ->
+      spyOn($dialog, "dialog").andCallThrough()
+      confirmationDialog.open()
+      expect($dialog.dialog).toHaveBeenCalled()
