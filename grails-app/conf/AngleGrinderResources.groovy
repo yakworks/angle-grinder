@@ -23,8 +23,9 @@ modules = {
     angleGrinder {
         resource url: [plugin: plugin, dir: "${dist}/styles", file: "gridz.min.css"]
         resource url: [plugin: plugin, dir: "${dist}/scripts", file: "gridz.min.js"]
-        resource url: [plugin: plugin, dir: "${dist}/scripts", file: "angle-grinder.gridz.min.js"]
+        resource url: [plugin: plugin, dir: "${dist}/scripts", file: "angle-grinder.alerts.min.js"]
         resource url: [plugin: plugin, dir: "${dist}/scripts", file: "angle-grinder.forms.min.js"]
+        resource url: [plugin: plugin, dir: "${dist}/scripts", file: "angle-grinder.gridz.min.js"]
     }
 
 }

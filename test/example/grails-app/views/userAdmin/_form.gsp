@@ -87,18 +87,11 @@
     </div>
 
     <div class="modal-footer">
-        <button type="button" class="btn btn-danger pull-left" ng-click="delete(item)" ng-hide="createNew">
-            <i class="icon-trash"></i> ${ag.label(code: 'button.delete')}
-        </button>
+        <span ng-hide="createNew">
+            <delete-button when-confirmed="delete(item)"></delete-button>
+        </span>
 
-        <button type="button" class="btn" ng-click="closeEditDialog()">
-            <i class="icon-remove"></i> ${ag.label(code: 'button.cancel')}
-        </button>
-
-        <button type="submit" class="btn btn-primary"
-                ng-class="{disabled: saving || editForm.$invalid}">
-            <i class="icon-ok icon-white"></i>
-            {{saving && '${ag.label(code: 'button.save')} ...' || '${ag.label(code: 'button.save')}'}}
-        </button>
+        <cancel-button ng-click="closeEditDialog()"></cancel-button>
+        <submit-button></submit-button>
     </div>
 </form>
