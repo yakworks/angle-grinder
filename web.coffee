@@ -1,6 +1,7 @@
 express = require("express")
 path = require("path")
 
+utils = require("./web/utils")
 Data = require("./web/data")
 data = new Data()
 
@@ -9,6 +10,14 @@ app = express()
 app.use express.logger()
 app.use express.bodyParser()
 app.use express.static(path.join(__dirname, "dist"))
+
+# sleep for 1,2,3 seconds
+randomSleep = ->
+  utils.sleep utils.randomItemFrom [1, 2, 3]
+
+# respond with random error
+randomErrorFor = (res) ->
+  res.send utils.randomItemFrom [400, 404, 500]
 
 app.get "/api/users", (req, res) ->
   page = parseInt(req.query["page"]) || 1
@@ -28,21 +37,36 @@ app.get "/api/users", (req, res) ->
 
   res.send rows.getPaged(page, pageSize, sort, order)
 
-app.post "/api/users", (req, res) ->
-  row = data.create(req.body)
-  res.send row
-
 app.get "/api/users/:id", (req, res) ->
   row = data.findById(req.params.id)
   res.send row
 
+app.post "/api/users", (req, res) ->
+  randomSleep()
+
+  if Math.random() > 0.5
+    row = data.create(req.body)
+    res.send row
+  else
+    randomErrorFor(res)
+
 app.put "/api/users/:id", (req, res) ->
-  row = data.update(req.params.id, req.body)
-  res.send row
+  randomSleep()
+
+  if Math.random() > 0.5
+    row = data.update(req.params.id, req.body)
+    res.send row
+  else
+    randomErrorFor(res)
 
 app.delete "/api/users/:id", (req, res) ->
-  row = data.delete(req.params.id)
-  res.send row
+  randomSleep()
+
+  if Math.random() > 0.5
+    row = data.delete(req.params.id)
+    res.send row
+  else
+    randomErrorFor(res)
 
 port = 8000
 app.listen port, ->
