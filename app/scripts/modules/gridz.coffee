@@ -40,8 +40,8 @@ gridz.directive "agGrid", [
           $(ind).css "background-color", ""
         ).fadeIn "fast"
 
-      $scope.$on "itemDeleted", ->
-        $grid.trigger "reloadGrid"
+      $scope.$on "itemDeleted", (event, item) ->
+        $grid.jqGrid "delRowData", item.id
 
       $scope.$on "searchUpdated", (event, filters) ->
         params =
@@ -74,14 +74,40 @@ class EditItemCtrl
     $scope.save = ->
       if $scope.editForm.$valid
         $log.info "The form is valid", $scope.editForm
-        item.save (response) ->
-          $log.info "Updating item", item
+        $scope.saving = true
+
+        onSuccess = (response) ->
+          $scope.saving = false
+          $log.info "Item has been updated/created", response
 
           # Flattening the object before insering it to the grid
-          $rootScope.$broadcast("itemUpdated", flatten(response))
+          $rootScope.$broadcast "itemUpdated", flatten(response)
           $scope.closeEditDialog()
+
+        onError = (response) ->
+          $scope.saving = false
+          $log.error "Something went wront", response
+
+        item.save success: onSuccess, error: onError
       else
         $log.warn "The form is invalid", $scope.editForm
+
+    # Performs server side delete
+    $scope.delete = ->
+      $scope.deleting = true
+
+      onSuccess = (response) ->
+        $scope.deleting = false
+        $log.info "Item has been deleted", response
+
+        $rootScope.$broadcast "itemDeleted", item
+        $scope.closeEditDialog()
+
+      onError = (response) ->
+        $scope.deleting = false
+        $log.error "Something went wront", response
+
+      item.delete success: onSuccess, error: onError
 
 gridz.controller "EditItemCtrl", EditItemCtrl
 

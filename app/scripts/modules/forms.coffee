@@ -91,3 +91,36 @@ forms.directive "validationError", [
 
         element.html(html)
 ]
+
+forms.directive "deleteButton", ->
+  restrict: "E"
+  replace: true
+  scope: false
+  template: """
+  <button type="button" class="btn btn-danger pull-left"
+          ng-class="{disabled: deleting}"
+          ng-hide="createNew">
+    <i class="icon-trash"></i> Delete<span ng-show="deleting">...</span>
+  </button>
+  """
+
+forms.directive "cancelButton", ->
+  restrict: "E"
+  replace: true
+  scope: false
+  template: """
+  <button type="button" class="btn">
+    <i class="icon-remove"></i> Cancel
+  </button>
+  """
+
+forms.directive "submitButton", ->
+  restrict: "E"
+  replace: true
+  scope: false
+  template: """
+  <button type="submit" class="btn btn-primary"
+          ng-class="{disabled: saving || editForm.$invalid}">
+    <i class="icon-ok icon-white"></i> Save<span ng-show="saving">...</span>
+  </button>
+  """

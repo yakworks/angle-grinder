@@ -13,7 +13,11 @@ exports.EditDialog = class
     @casper.fetchText "#{@selector} div.modal-header h3:not([style*='display: none'])"
 
   # Fill the form with given values.
-  fillFormWith: (data) ->
+  fillFormWith: (data = {}) ->
+    # fill dummy password fields
+    data.password = "password"
+    data.passwordConfirmation = "password"
+
     @casper.fill "#{@selector} form[name=editForm]", data
 
   # Click 'Save' button.

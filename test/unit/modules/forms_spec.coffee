@@ -91,7 +91,7 @@ describe "module: angleGrinder.forms", ->
       it "marks the whole group as invalid", ->
         expect(form.$valid).toBeFalsy()
         $group = element.find(".control-group")
-        expect($group.hasClass("error")).toBeTruthy()
+        expect($group).toHaveClass "error"
 
     describe "when all fields are valid", ->
       beforeEach ->
@@ -102,7 +102,7 @@ describe "module: angleGrinder.forms", ->
       it "does not mark the group as invalid", ->
         expect(form.$valid).toBeTruthy()
         $group = element.find(".control-group")
-        expect($group.hasClass("error")).toBeFalsy()
+        expect($group).not.toHaveClass "erro"
 
   describe "directive: validationMessage", ->
     element = null
@@ -175,3 +175,112 @@ describe "module: angleGrinder.forms", ->
     hasDefaultMessageFor "minlength", "This field is too short"
     hasDefaultMessageFor "maxlength", "This field is too long"
     hasDefaultMessageFor "email",     "Invalid email address"
+
+  describe "directive: deleteButton", ->
+    element = null
+    $scope = null
+
+    beforeEach inject ($rootScope, $compile) ->
+      $scope = $rootScope.$new()
+
+      element = angular.element """
+        <delete-button></delete-button>
+      """
+
+      $compile(element)($scope)
+      $scope.$digest()
+
+    describe "when the item is persisted", ->
+      beforeEach ->
+        $scope.createNew = false
+        $scope.$digest()
+
+      it "is visible", ->
+        expect(element.css("display")).not.toBe "none"
+
+      it "is not disabled", ->
+        expect(element).not.toHaveClass "disabled"
+
+      it "has a valid label", ->
+        expect(element).toHaveText /Delete/
+
+      describe "when the DELETE request is in progress", ->
+        beforeEach ->
+          $scope.deleting = true
+          $scope.$digest()
+
+        it "disables the button", ->
+          expect(element).toHaveClass "disabled"
+
+        it "changes the button label", ->
+          expect(element).toHaveText "Delete..."
+
+    describe "when the item is not persisted", ->
+      beforeEach ->
+        $scope.createNew = true
+        $scope.$digest()
+
+      it "is hidden", ->
+        expect(element.css("display")).toBe "none"
+
+  describe "directive: cancelButton", ->
+    element = null
+    $scope = null
+
+    beforeEach inject ($rootScope, $compile) ->
+      $scope = $rootScope.$new()
+
+      element = angular.element """
+        <cancel-button></cancel-button>
+      """
+
+      $compile(element)($scope)
+      $scope.$digest()
+
+    it "create a cancel button", ->
+      expect(element).toHaveText "Cancel"
+      expect(element).toHaveClass "btn"
+
+  describe "directive: submitButton", ->
+    element = null
+    $scope = null
+
+    beforeEach inject ($rootScope, $compile) ->
+      $scope = $rootScope.$new()
+
+      element = angular.element """
+        <submit-button></submit-button>
+      """
+
+      $compile(element)($scope)
+      $scope.$digest()
+
+    it "has valid label", ->
+      expect(element).toHaveText /Save/
+
+    describe "when the form is valid", ->
+      beforeEach ->
+        $scope.editForm = $invalid: false
+        $scope.$digest()
+
+      it "is enabled", ->
+        expect(element).not.toHaveClass "disabled"
+
+    describe "when the request is in progress", ->
+      beforeEach ->
+        $scope.saving = true
+        $scope.$digest()
+
+      it "is disabled", ->
+        expect(element).toHaveClass "disabled"
+
+      it "changes the button label", ->
+        expect(element).toHaveText "Save..."
+
+    describe "when the form is invalid", ->
+      beforeEach ->
+        $scope.editForm = $invalid: true
+        $scope.$digest()
+
+      it "is disabled", ->
+        expect(element).toHaveClass "disabled"

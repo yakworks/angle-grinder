@@ -9,9 +9,11 @@ module.exports = (config) ->
     # list of files / patterns to load in the browser
     files: [
       "components/jquery/jquery.js"
+      "components/underscore/underscore.js"
       "components/angular/angular.js"
       "components/angular-resource/angular-resource.js"
       "components/angular-mocks/angular-mocks.js"
+      "components/jasmine-jquery/jasmine-jquery.js"
 
       "components/jqgrid/js/grid.base.js"
       "components/angular-bootstrap/ui-bootstrap-tpls.js"
