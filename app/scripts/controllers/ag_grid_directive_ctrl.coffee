@@ -18,7 +18,7 @@ class AgGridDirectiveCtrl
       self = this
       item.delete = (callback) ->
         self.deleteItemById(id)
-        callback(this)
+        callback.success(this)
 
       editDialog.open("templates/partials/item_form.html", item)
 
@@ -27,7 +27,7 @@ class AgGridDirectiveCtrl
       item.save = (callback = ->) ->
         generateId = -> new Date().getTime()
         item.id = generateId()
-        callback(this)
+        callback.success(this)
 
       editDialog.open("templates/partials/item_form.html", item)
         .then (item) => @data.push(item)
