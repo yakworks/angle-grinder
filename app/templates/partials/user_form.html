@@ -18,27 +18,6 @@
       </div>
     </div>
 
-    <div field-group for="password,passwordConfirmation">
-      <label class="control-label">Password</label>
-
-      <div class="controls">
-        <input type="password" name="password" placeholder="Enter Password"
-               ng-model="item.password" autofocus required ng-minlength="6" />
-        <validation-error for="password"
-                          required="This field is required"
-                          minlength="Password must be at least 6 characters." />
-      </div>
-
-      <div class="controls">
-        <input type="password" name="passwordConfirmation" placeholder="Enter Password Confirmation"
-               ng-model="item.passwordConfirmation" autofocus
-               required match="item.password" />
-        <validation-error for="passwordConfirmation"
-                          required="This field is required"
-                          mismatch="The password does not match the confirmation" />
-      </div>
-    </div>
-
     <div field-group for="allowance">
       <label class="control-label">Allowance</label>
 
@@ -60,11 +39,7 @@
     <div class="modal-footer">
       <delete-button ng-click="delete(item)"></delete-button>
       <cancel-button ng-click="closeEditDialog()"></cancel-button>
-
-      <button type="submit" class="btn btn-primary"
-              ng-class="{disabled: editForm.$invalid}">
-        <i class="icon-ok icon-white"></i> Save
-      </button>
+      <submit-button></submit-button>
     </div>
   </form>
 </div>

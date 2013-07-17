@@ -113,3 +113,14 @@ forms.directive "cancelButton", ->
     <i class="icon-remove"></i> Cancel
   </button>
   """
+
+forms.directive "submitButton", ->
+  restrict: "E"
+  replace: true
+  scope: false
+  template: """
+  <button type="submit" class="btn btn-primary"
+          ng-class="{disabled: editForm.$invalid}">
+    <i class="icon-ok icon-white"></i> Save
+  </button>
+  """

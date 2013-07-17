@@ -13,7 +13,7 @@ class AgGridDirectiveCtrl
 
     $scope.editDialog = (id) =>
       item = @findItemById(id)
-      item.save = (callback) -> callback(this)
+      item.save = (callback) -> callback.success(this)
 
       self = this
       item.delete = (callback) ->
