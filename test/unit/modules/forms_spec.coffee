@@ -1,4 +1,5 @@
 describe "module: angleGrinder.forms", ->
+  beforeEach module("angleGrinder.templates")
   beforeEach module("angleGrinder.forms")
 
   describe "directive: match", ->
@@ -178,50 +179,58 @@ describe "module: angleGrinder.forms", ->
 
   describe "directive: deleteButton", ->
     element = null
+    $rootScope = null
     $scope = null
 
-    beforeEach inject ($rootScope, $compile) ->
+    beforeEach inject (_$rootScope_, $compile) ->
+      $rootScope = _$rootScope_
       $scope = $rootScope.$new()
 
       element = angular.element """
-        <delete-button></delete-button>
+        <delete-button when-confirmed="delete(123)" deleting="deleting"></delete-button>
       """
 
       $compile(element)($scope)
-      $scope.$digest()
+      $rootScope.$digest()
 
-    describe "when the item is persisted", ->
+    it "is visible", ->
+      expect(element.css("display")).not.toBe "none"
+
+    it "is not disabled", ->
+      expect(element).not.toHaveClass "disabled"
+
+    it "has a valid label", ->
+      expect(element).toHaveText /Delete/
+
+    describe "when the button is clicked", ->
+      beforeEach -> element.click()
+
+      it "displays the confirmation", ->
+        expect(element).toHaveText(/Are you sure?/)
+
+      it "changes button class", ->
+        expect(element).toHaveClass "btn-warning"
+
+    describe "when the button is double clicked", ->
       beforeEach ->
-        $scope.createNew = false
-        $scope.$digest()
+        element.click()
+        $scope.delete = ->
+        spyOn($scope, "delete")
 
-      it "is visible", ->
-        expect(element.css("display")).not.toBe "none"
+      it "performs delete action", ->
+        element.click()
+        expect($scope.delete).toHaveBeenCalledWith(123)
 
-      it "is not disabled", ->
-        expect(element).not.toHaveClass "disabled"
-
-      it "has a valid label", ->
-        expect(element).toHaveText /Delete/
-
-      describe "when the DELETE request is in progress", ->
-        beforeEach ->
-          $scope.deleting = true
-          $scope.$digest()
-
-        it "disables the button", ->
-          expect(element).toHaveClass "disabled"
-
-        it "changes the button label", ->
-          expect(element).toHaveText "Delete..."
-
-    describe "when the item is not persisted", ->
+    describe "when the DELETE request is in progress", ->
       beforeEach ->
-        $scope.createNew = true
-        $scope.$digest()
+        $scope.deleting = true
+        $rootScope.$digest()
 
-      it "is hidden", ->
-        expect(element.css("display")).toBe "none"
+      it "disables the button", ->
+        expect(element).toHaveClass "disabled"
+
+      it "changes the button label", ->
+        expect(element).toHaveText "Delete..."
 
   describe "directive: cancelButton", ->
     element = null

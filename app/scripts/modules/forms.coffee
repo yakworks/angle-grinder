@@ -92,17 +92,49 @@ forms.directive "validationError", [
         element.html(html)
 ]
 
+# Double check delete button
+# usage:
+#   <delete-button when-confirmed="delete(item)" deleting="deleting"></delete-button>
+#
+#   `when-confirmed` function to call when the action was confirmed
+#   `deleting` when it's set to `true` the button will be disabled
 forms.directive "deleteButton", ->
   restrict: "E"
   replace: true
-  scope: false
-  template: """
-  <button type="button" class="btn btn-danger pull-left"
-          ng-class="{disabled: deleting}"
-          ng-hide="createNew">
-    <i class="icon-trash"></i> Delete<span ng-show="deleting">...</span>
-  </button>
-  """
+
+  scope:
+    whenConfirmed: "&"
+    deleting: "="
+
+  controller: [
+    "$scope", "$element", ($scope, $element) ->
+      $scope.confirmation = false
+
+      $scope.delete = ->
+        # on the second click perform the given action
+        $scope.whenConfirmed() if $scope.confirmation
+        # switch the state
+        $scope.confirmation = !$scope.confirmation
+
+      # change button label
+      $scope.$watch "confirmation", (confirmation) ->
+        $scope.label = unless confirmation then "Delete" else "Are you sure?"
+
+        if confirmation
+          $element.removeClass "btn-danger"
+          $element.addClass "btn-warning"
+        else
+          $element.addClass "btn-danger"
+          $element.removeClass "btn-warning"
+
+      $scope.$watch "deleting", (deleting) ->
+        if deleting
+          $element.addClass "disabled"
+        else
+          $element.removeClass "disabled"
+  ]
+
+  templateUrl: "templates/gridz/delete_button.html"
 
 forms.directive "cancelButton", ->
   restrict: "E"

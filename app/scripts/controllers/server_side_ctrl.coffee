@@ -1,7 +1,7 @@
 class ServerSideCtrl
 
-  @$inject = ["$scope", "$log", "editDialog", "Users"]
-  constructor: ($scope, $log, editDialog, Users) ->
+  @$inject = ["$scope", "$log", "$dialog", "confirmationDialog", "editDialog", "Users"]
+  constructor: ($scope, $log, $dialog, confirmationDialog, editDialog, Users) ->
     $scope.gridOptions =
       url: "/api/users"
       colModel: @gridColumns()
@@ -17,10 +17,13 @@ class ServerSideCtrl
       editDialog.open("templates/partials/user_form.html", user)
 
     $scope.deleteItem = (id) ->
-      user = new Users(id: id)
-      user.delete
-        success: (response) -> $scope.$broadcast "itemDeleted", response
-        error: (response) -> $log.error "Something went wront", response
+      confirmationDialog.open().then (confirmed) ->
+        return unless confirmed
+
+        user = new Users(id: id)
+        user.delete
+          success: (response) -> $scope.$broadcast "itemDeleted", response
+          error: (response) -> $log.error "Something went wront", response
 
     $scope.quickSearch = (search) ->
       $scope.$broadcast "searchUpdated", search
