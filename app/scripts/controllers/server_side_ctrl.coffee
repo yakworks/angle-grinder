@@ -1,7 +1,7 @@
 class ServerSideCtrl
 
-  @$inject = ["$scope", "editDialog", "Users"]
-  constructor: ($scope, editDialog, Users) ->
+  @$inject = ["$scope", "$log", "editDialog", "Users"]
+  constructor: ($scope, $log, editDialog, Users) ->
     $scope.gridOptions =
       url: "/api/users"
       colModel: @gridColumns()
@@ -18,7 +18,9 @@ class ServerSideCtrl
 
     $scope.deleteItem = (id) ->
       user = new Users(id: id)
-      user.$delete -> $scope.$broadcast "itemDeleted", user
+      user.delete
+        success: (response) -> $scope.$broadcast "itemDeleted", response
+        error: (response) -> $log.error "Something went wront", response
 
     $scope.quickSearch = (search) ->
       $scope.$broadcast "searchUpdated", search

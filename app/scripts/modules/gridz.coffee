@@ -74,22 +74,36 @@ class EditItemCtrl
     $scope.save = ->
       if $scope.editForm.$valid
         $log.info "The form is valid", $scope.editForm
-        item.save (response) ->
+
+        onSuccess = (response) ->
           $log.info "Item has been updated/created", response
 
           # Flattening the object before insering it to the grid
           $rootScope.$broadcast "itemUpdated", flatten(response)
           $scope.closeEditDialog()
+
+        onError = (response) ->
+          $log.error "Something went wront", response
+
+        item.save success: onSuccess, error: onError
       else
         $log.warn "The form is invalid", $scope.editForm
 
     # Performs server side delete
     $scope.delete = ->
-      item.delete (response) ->
+      $scope.deleting = true
+
+      onSuccess = (response) ->
+        $scope.deleting = false
         $log.info "Item has been deleted", response
 
         $rootScope.$broadcast "itemDeleted", item
         $scope.closeEditDialog()
+
+      onError = (response) ->
+        $log.error "Something went wront", response
+
+      item.delete success: onSuccess, error: onError
 
 gridz.controller "EditItemCtrl", EditItemCtrl
 
