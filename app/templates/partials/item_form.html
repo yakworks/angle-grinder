@@ -37,17 +37,15 @@
     </div>
 
     <div class="modal-footer">
-      <button type="button" class="btn btn-danger pull-left" ng-click="delete(item)" ng-hide="createNew">
-        <i class="icon-trash"></i>Delete
-      </button>
+      <delete-button ng-click="delete(item)"></delete-button>
 
       <button type="button" class="btn" ng-click="closeEditDialog()">
-        <i class="icon-remove"></i>Cancel
+        <i class="icon-remove"></i> Cancel
       </button>
 
       <button type="submit" class="btn btn-primary"
               ng-class="{disabled: editForm.$invalid}">
-        <i class="icon-ok icon-white"></i>Save
+        <i class="icon-ok icon-white"></i> Save
       </button>
     </div>
   </form>

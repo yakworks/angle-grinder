@@ -101,6 +101,7 @@ class EditItemCtrl
         $scope.closeEditDialog()
 
       onError = (response) ->
+        $scope.deleting = false
         $log.error "Something went wront", response
 
       item.delete success: onSuccess, error: onError

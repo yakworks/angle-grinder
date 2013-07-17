@@ -175,3 +175,49 @@ describe "module: angleGrinder.forms", ->
     hasDefaultMessageFor "minlength", "This field is too short"
     hasDefaultMessageFor "maxlength", "This field is too long"
     hasDefaultMessageFor "email",     "Invalid email address"
+
+  describe "directive: deleteButton", ->
+    element = null
+    $scope = null
+
+    beforeEach inject ($rootScope, $compile) ->
+      $scope = $rootScope.$new()
+
+      element = angular.element """
+        <delete-button />
+      """
+
+      $compile(element)($scope)
+
+    describe "when the item is persisted", ->
+      beforeEach ->
+        $scope.createNew = false
+        $scope.$digest()
+
+      it "is visible", ->
+        expect(element.css("display")).not.toBe "none"
+
+      it "is not disabled", ->
+        expect(element).not.toHaveClass("disabled")
+
+      it "has a valid label", ->
+        expect(element).toHaveText(/Delete/)
+
+      describe "when the DELETE request is in progress", ->
+        beforeEach ->
+          $scope.deleting = true
+          $scope.$digest()
+
+        it "disables the button", ->
+          expect(element).toHaveClass("disabled")
+
+        it "changes the button label", ->
+          expect(element).toHaveText("Delete...")
+
+    describe "when the item is not persisted", ->
+      beforeEach ->
+        $scope.createNew = true
+        $scope.$digest()
+
+      it "is hidden", ->
+        expect(element.css("display")).toBe "none"
