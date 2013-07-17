@@ -256,7 +256,7 @@ describe "module: angleGrinder.forms", ->
       $scope.$digest()
 
     it "has valid label", ->
-      expect(element).toHaveText "Save"
+      expect(element).toHaveText /Save/
 
     describe "when the form is valid", ->
       beforeEach ->
@@ -265,6 +265,17 @@ describe "module: angleGrinder.forms", ->
 
       it "is enabled", ->
         expect(element).not.toHaveClass "disabled"
+
+    describe "when the request is in progress", ->
+      beforeEach ->
+        $scope.saving = true
+        $scope.$digest()
+
+      it "is disabled", ->
+        expect(element).toHaveClass "disabled"
+
+      it "changes the button label", ->
+        expect(element).toHaveText "Save..."
 
     describe "when the form is invalid", ->
       beforeEach ->

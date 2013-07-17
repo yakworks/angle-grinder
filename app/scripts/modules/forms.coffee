@@ -120,7 +120,7 @@ forms.directive "submitButton", ->
   scope: false
   template: """
   <button type="submit" class="btn btn-primary"
-          ng-class="{disabled: editForm.$invalid}">
-    <i class="icon-ok icon-white"></i> Save
+          ng-class="{disabled: saving || editForm.$invalid}">
+    <i class="icon-ok icon-white"></i> Save<span ng-show="saving">...</span>
   </button>
   """

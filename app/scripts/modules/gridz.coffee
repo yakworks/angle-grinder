@@ -74,8 +74,10 @@ class EditItemCtrl
     $scope.save = ->
       if $scope.editForm.$valid
         $log.info "The form is valid", $scope.editForm
+        $scope.saving = true
 
         onSuccess = (response) ->
+          $scope.saving = false
           $log.info "Item has been updated/created", response
 
           # Flattening the object before insering it to the grid
@@ -83,6 +85,7 @@ class EditItemCtrl
           $scope.closeEditDialog()
 
         onError = (response) ->
+          $scope.saving = false
           $log.error "Something went wront", response
 
         item.save success: onSuccess, error: onError
