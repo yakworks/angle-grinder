@@ -59,7 +59,6 @@ gridz.directive "agGrid", [
 ]
 
 class EditItemCtrl
-
   @$inject = ["$scope", "$rootScope", "$log", "dialog", "item", "createNew", "flatten"]
   constructor: ($scope, $rootScope, $log, dialog, item, createNew, flatten) ->
     $scope.item = item
@@ -141,6 +140,31 @@ class EditDialog
     dialog.open templateUrl, "EditItemCtrl"
 
 gridz.service "editDialog", EditDialog
+
+class ConfirmationDialogCtrl
+  @$inject = ["$scope", "$log", "dialog", "message"]
+  constructor: ($scope, $log, dialog, message) ->
+    $scope.message = message
+    $scope.close = (confirmed) ->
+      $log.info "Confirmation dialog closed", confirmed
+      dialog.close(confirmed)
+
+gridz.controller "ConfirmationDialogCtrl", ConfirmationDialogCtrl
+
+class ConfirmationDialog
+  @$inject = ["$dialog", "$log"]
+  constructor: (@$dialog, @$log) ->
+
+  open: (message = null) ->
+    @$log.info "Opening confirmation dialog, message:", message
+
+    dialog = @$dialog.dialog
+      resolve:
+        message: -> if message? then message else "Are you sure?"
+
+    dialog.open "templates/dialogs/confirmation.html", "ConfirmationDialogCtrl"
+
+gridz.service "confirmationDialog", ConfirmationDialog
 
 flatten = (target, opts = { delimiter: "." }) ->
   delimiter = opts.delimiter

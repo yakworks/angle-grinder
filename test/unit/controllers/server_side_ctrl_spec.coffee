@@ -55,10 +55,18 @@ describe "controller: ServerSideCtrl", ->
     describe "#deleteItem", ->
       user = id: 234
 
-      beforeEach inject ($httpBackend) ->
-        $httpBackend.expectDELETE("/api/users/#{user.id}").respond({})
-
-      it "deleates the user", inject ($httpBackend) ->
-        # When
+      it "opens the confirmation dialog", inject (confirmationDialog) ->
+        spyOn(confirmationDialog, "open").andCallThrough()
         $scope.deleteItem(user.id)
-        $httpBackend.flush()
+        expect(confirmationDialog.open).toHaveBeenCalled()
+
+      describe "when the dialog was confirmed", ->
+        beforeEach inject (confirmationDialog, $httpBackend) ->
+          spyOn(confirmationDialog, "open").andReturn
+            then: (fn) -> fn(true)
+
+          $httpBackend.expectDELETE("/api/users/#{user.id}").respond({})
+
+        it "deleates the user", inject ($httpBackend) ->
+          $scope.deleteItem(user.id)
+          $httpBackend.flush()
