@@ -104,10 +104,10 @@ forms.directive "deleteButton", ->
 
   scope:
     whenConfirmed: "&"
-    deleting: "="
 
   controller: [
     "$scope", "$element", ($scope, $element) ->
+      $scope.deleting = $scope.$parent.deleting
       $scope.confirmation = false
 
       $scope.delete = ->
@@ -127,7 +127,9 @@ forms.directive "deleteButton", ->
           $element.addClass "btn-danger"
           $element.removeClass "btn-warning"
 
-      $scope.$watch "deleting", (deleting) ->
+      $scope.$watch "$parent.deleting", (deleting) ->
+        $scope.deleting = deleting
+
         if deleting
           $element.addClass "disabled"
         else
