@@ -8,13 +8,14 @@ app = angular.module("angleGrinder", [
   "angleGrinder.templates"
   "angleGrinder.gridz"
   "angleGrinder.forms"
+  "angleGrinder.alerts"
   "angleGrinder.dataGenerator"
   "angleGrinder.resources"
 ])
 
 app.config [
-  "$provide", "$routeProvider", ($provide, $routeProvider) ->
-    $provide.value("alertTimeout", 3000)
+  "$provide", "$routeProvider", "$httpProvider", ($provide, $routeProvider, $httpProvider) ->
+    $httpProvider.responseInterceptors.push("httpErrorsInterceptor")
 
     $routeProvider
       .when "/",
@@ -42,4 +43,18 @@ app.config [
         controller: "ServerSideCtrl"
 
       .otherwise redirectTo: "/"
+]
+
+# Intercepts all HTTP errors and dislays a flash message
+app.factory "httpErrorsInterceptor", [
+  "$injector", "$q", "alerts", ($injector, $q, alerts) ->
+    (promise) ->
+      $http = $injector.get("$http")
+
+      onError = (response) ->
+        errorMessage = response.data?.error || "Unexpected HTTP error"
+        alerts.error(errorMessage)
+        $q.reject(response)
+
+      promise.then(null, onError)
 ]

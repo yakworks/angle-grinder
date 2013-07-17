@@ -58,6 +58,10 @@
     <script type="text/javascript" src="scripts/modules/forms.js"></script>
   <!-- endbuild -->
 
+  <!-- build:js(dev) scripts/angle-grinder.alerts.min.js -->
+    <script type="text/javascript" src="scripts/modules/alerts.js"></script>
+  <!-- endbuild -->
+
   <!-- build:css(dev) styles/gridz.min.css -->
     <!-- jqGrid -->
     <link rel="stylesheet" href="components/jqgrid/css/ui.jqgrid.css">
@@ -121,6 +125,8 @@
   </aside>
 
   <section class="content">
+    <alerts></alerts>
+
     <ng-view></ng-view>
   </section>
 </div>
