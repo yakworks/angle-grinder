@@ -58,7 +58,11 @@
     </div>
 
     <div class="modal-footer">
-      <delete-button ng-click="delete(item)"></delete-button>
+      <span ng-hide="createNew">
+        <delete-button when-confirmed="delete(item)"
+                       deleting="deleting"></delete-button>
+      </span>
+
       <cancel-button ng-click="closeEditDialog()"></cancel-button>
       <submit-button></submit-button>
     </div>
