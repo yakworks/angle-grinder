@@ -151,6 +151,18 @@ class ConfirmationDialogCtrl
 
 gridz.controller "ConfirmationDialogCtrl", ConfirmationDialogCtrl
 
+# TODO temporaty cache the templete
+# TODO cache templates for this module
+gridz.run ["$templateCache", ($templateCache) ->
+  $templateCache.put "templates/dialogs/confirmation.html", """
+    <div class="modal-body">{{message}}</div>
+    <div class="modal-footer">
+     <button class="btn" ng-click="close(false)">Cancel</button>
+      <button class="btn btn-primary" ng-click="close(true)">OK</button>
+    </div>
+  """
+]
+
 class ConfirmationDialog
   @$inject = ["$dialog", "$log"]
   constructor: (@$dialog, @$log) ->
