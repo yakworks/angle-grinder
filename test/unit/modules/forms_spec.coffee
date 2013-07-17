@@ -188,6 +188,7 @@ describe "module: angleGrinder.forms", ->
       """
 
       $compile(element)($scope)
+      $scope.$digest()
 
     describe "when the item is persisted", ->
       beforeEach ->
@@ -221,3 +222,21 @@ describe "module: angleGrinder.forms", ->
 
       it "is hidden", ->
         expect(element.css("display")).toBe "none"
+
+  describe "directive: cancelButton", ->
+    element = null
+    $scope = null
+
+    beforeEach inject ($rootScope, $compile) ->
+      $scope = $rootScope.$new()
+
+      element = angular.element """
+        <cancel-button />
+      """
+
+      $compile(element)($scope)
+      $scope.$digest()
+
+    it "create a cancel button", ->
+      expect(element).toHaveText("Cancel")
+      expect(element).toHaveClass("btn")

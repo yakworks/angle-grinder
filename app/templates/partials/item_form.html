@@ -38,10 +38,7 @@
 
     <div class="modal-footer">
       <delete-button ng-click="delete(item)"></delete-button>
-
-      <button type="button" class="btn" ng-click="closeEditDialog()">
-        <i class="icon-remove"></i> Cancel
-      </button>
+      <cancel-button ng-click="closeEditDialog()"></cancel-button>
 
       <button type="submit" class="btn btn-primary"
               ng-class="{disabled: editForm.$invalid}">

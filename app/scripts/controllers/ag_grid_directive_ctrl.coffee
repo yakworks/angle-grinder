@@ -24,7 +24,7 @@ class AgGridDirectiveCtrl
 
     $scope.createDialog = =>
       item = {}
-      item.save = (callback = ->) ->
+      item.save = (callback) ->
         generateId = -> new Date().getTime()
         item.id = generateId()
         callback.success(this)

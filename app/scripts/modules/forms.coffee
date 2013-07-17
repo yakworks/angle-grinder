@@ -103,3 +103,13 @@ forms.directive "deleteButton", ->
     <i class="icon-trash"></i> Delete<span ng-show="deleting">...</span>
   </button>
   """
+
+forms.directive "cancelButton", ->
+  restrict: "E"
+  replace: true
+  scope: false
+  template: """
+  <button type="button" class="btn">
+    <i class="icon-remove"></i> Cancel
+  </button>
+  """
