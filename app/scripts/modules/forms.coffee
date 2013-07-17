@@ -136,7 +136,13 @@ forms.directive "deleteButton", ->
           $element.removeClass "disabled"
   ]
 
-  templateUrl: "templates/gridz/delete_button.html"
+  template: """
+    <button type="button" class="btn btn-danger pull-left"
+            ng-mouseleave="confirmation = false"
+            ng-click="delete()">
+      <i class="icon-trash"></i> {{label}}<span ng-show="deleting">...</span>
+    </button>
+  """
 
 forms.directive "cancelButton", ->
   restrict: "E"
