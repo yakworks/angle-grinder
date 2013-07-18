@@ -50,6 +50,19 @@ class AlertsCtrl
 
 alerts.controller "alerts", AlertsCtrl
 
+# TODO temporaty cache the templete
+# TODO cache templates for this module
+alerts.run ["$templateCache", ($templateCache) ->
+  $templateCache.put "templates/alerts.html", """
+    <aside id="alerts">
+      <div ng-repeat="message in alertMessages" class="alert alert-{{message.type}}">
+        <button ng-click="disposeAlert(message.id)" type="button" class="close">×</button>
+        <strong>{{message.type}}</strong> <span>{{message.text}}</span>
+      </div>
+    </aside>
+  """
+]
+
 alerts.directive "alerts", ->
   restrict: "E"
   transclude: true
