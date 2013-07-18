@@ -293,3 +293,39 @@ describe "module: angleGrinder.forms", ->
 
       it "is disabled", ->
         expect(element).toHaveClass "disabled"
+
+  describe "directive: serverValidationErrors", ->
+    element = null
+    $scope = null
+
+    beforeEach inject ($rootScope, $compile) ->
+      $scope = $rootScope.$new()
+
+      element = angular.element """
+        <server-validation-errors errors="validationErrors"></server-validation-errors>
+      """
+
+      $compile(element)($scope)
+      $scope.$digest()
+
+    it "renders errors", ->
+      $scope.validationErrors =
+        user:
+          login: "should be unique"
+          email: "is taken"
+        contact:
+          email: "is invalid"
+      $scope.$digest()
+
+      expect(element.find(".alert-error").length).toEqual 3
+
+      $userErrors = element.find("[x-errors-for=user]")
+      expect($userErrors.find(".alert-error:nth-child(1)")).toHaveText "is taken"
+      expect($userErrors.find(".alert-error:nth-child(2)")).toHaveText "should be unique"
+
+      $contactErrors = element.find("[x-errors-for=contact]")
+      expect($contactErrors.find(".alert-error:nth-child(1)")).toHaveText "is invalid"
+
+    describe "when no errors", ->
+      it "renders nothing", ->
+        expect(element.find(".alert-error").length).toEqual 0

@@ -41,15 +41,17 @@ app.get "/api/users/:id", (req, res) ->
   row = data.findById(req.params.id)
   res.send row
 
+# CREATE
 app.post "/api/users", (req, res) ->
   randomSleep()
 
-  if Math.random() > 0.5
+  try
     row = data.create(req.body)
     res.send row
-  else
-    randomErrorFor(res)
+  catch error
+    res.send error, 422
 
+# UPDATE
 app.put "/api/users/:id", (req, res) ->
   randomSleep()
 
@@ -59,6 +61,7 @@ app.put "/api/users/:id", (req, res) ->
   else
     randomErrorFor(res)
 
+# DELETE
 app.delete "/api/users/:id", (req, res) ->
   randomSleep()
 
