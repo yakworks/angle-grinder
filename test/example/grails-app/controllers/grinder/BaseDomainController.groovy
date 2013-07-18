@@ -165,10 +165,9 @@ abstract class BaseDomainController {
             return
         } catch (ValidationException e) {
             log.debug("saveJson with error")
-            response.status = 400
+            response.status = 422
             responseJson = [
-                    "code": 400,
-                    "status": "error",
+                    "status": 422,
                     "message": buildMsg(e.messageMap),
                     "messageCode": e.messageMap.code
             ]
@@ -307,10 +306,9 @@ abstract class BaseDomainController {
             render result as JSON
         } catch (ValidationException e) {
             log.debug("saveJson with error")
-            response.status = 400
+            response.status = 422
             responseJson = [
-                    "code": 400,
-                    "status": "error",
+                    "status": 422,
                     "message": buildMsg(e.messageMap),
                     "messageCode": e.messageMap.code
             ]
@@ -349,7 +347,7 @@ abstract class BaseDomainController {
         // ]]
         //FIXME implement new way
         return [
-                "code": 400,
+                "code": 422,
                 "status": "error",
                 "message": message,
                 "messageCode": messageCode,
@@ -385,7 +383,7 @@ abstract class BaseDomainController {
         //FIXME implement new way
         /*
         return	[
-            "code":400
+            "code":422
             "status": "ok",
             "message":message ,
             "messageCode":messageCode,
@@ -406,6 +404,7 @@ Code 	Explanation
 *** 403 FORBIDDEN 		Unsupported standard parameter, or authentication or authorization failed.
 404 NOT FOUND 		Standard - Resource (such as a feed or entry) not found. 
 409 CONFLICT 		Validation error or the version number doesn't match resource's latest version number.
+422 UNPROCESSABLE ENTITY 		Validation error or the version number doesn't match resource's latest version number.
 
 500 INTERNAL SERVER ERROR 	Internal error. This is the default code that is used for all unrecognized server errors.
 */
