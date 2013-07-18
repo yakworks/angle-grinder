@@ -49,6 +49,8 @@
         <div class="errors"><g:renderErrors bean="${error}" as="list"/></div>
     </g:hasErrors>
 
+    <alerts></alerts>
+
     <div id="spinner" style="display:none;width:10px;position: absolute;"></div>
 
     <div ng-controller="SearchFormCtrl" collapse="!showSearchForm"
