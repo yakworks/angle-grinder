@@ -60,10 +60,10 @@ gridz.directive "agGrid", [
 
 # TODO move it to the forms module
 class EditItemCtrl
-  @$inject = ["$scope", "$rootScope", "$log", "dialog", "item", "createNew", "flatten"]
-  constructor: ($scope, $rootScope, $log, dialog, item, createNew, flatten) ->
+  @$inject = ["$scope", "$rootScope", "$log", "dialog", "item", "flatten"]
+  constructor: ($scope, $rootScope, $log, dialog, item, flatten) ->
     $scope.item = item
-    $scope.createNew = createNew
+    $scope.createNew = not item.persisted()
 
     $scope.serverValidationErrors = {}
 
@@ -130,7 +130,6 @@ class EditDialog
       dialogFade: false
       resolve:
         item: -> item
-        createNew: -> not item.id?
 
     # override so we can intercept form dirty and prevent escape
     dialog.handledEscapeKey = (e) ->
