@@ -9,9 +9,7 @@
 
 <form name="editForm" class="form-horizontal no-margin" novalidate ng-submit="save(item)">
     <div class="modal-body">
-        <!-- TODO obsolete flash messages -->
-        <div class="alert alert-{{message.level}}" ng-show="message.text">
-        <a class="close" href="#">&times;</a>{{message.text}}</div>
+        <server-validation-errors></server-validation-errors>
 
         <div field-group for="contactFirstName,contactLastName">
             <label class="control-label">${ag.label(code: "contact.name")}</label>
