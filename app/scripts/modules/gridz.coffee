@@ -58,11 +58,14 @@ gridz.directive "agGrid", [
     link: link
 ]
 
+# TODO move it to the forms module
 class EditItemCtrl
   @$inject = ["$scope", "$rootScope", "$log", "dialog", "item", "createNew", "flatten"]
   constructor: ($scope, $rootScope, $log, dialog, item, createNew, flatten) ->
     $scope.item = item
     $scope.createNew = createNew
+
+    $scope.serverValidationErrors = {}
 
     # Closes the dialog
     $scope.closeEditDialog = ->
@@ -70,10 +73,12 @@ class EditItemCtrl
       dialog.close($scope.item)
 
     # If form is valid performs server side update
-    $scope.save = ->
+    $scope.save = (item) ->
       if $scope.editForm.$valid
         $log.info "The form is valid", $scope.editForm
+
         $scope.saving = true
+        $scope.serverValidationErrors = {}
 
         onSuccess = (response) ->
           $scope.saving = false
@@ -85,7 +90,12 @@ class EditItemCtrl
 
         onError = (response) ->
           $scope.saving = false
+
           $log.error "Something went wront", response
+          if response.status is 422
+            errors = response.data.errors
+            $scope.serverValidationErrors = errors
+            $log.error "Server side validation errors", errors
 
         item.save success: onSuccess, error: onError
       else

@@ -43,6 +43,8 @@ app.get "/api/users/:id", (req, res) ->
 
 # CREATE
 app.post "/api/users", (req, res) ->
+  randomSleep()
+
   try
     row = data.create(req.body)
     res.send row
