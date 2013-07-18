@@ -25,12 +25,12 @@ class UsersListCtrl
     # Displays a form for creating a new user
     $scope.createDialog = ->
       user = new Grails()
-      editDialog.open("/example/userAdmin/formTemplate", user)
+      editDialog.open("userAdmin/formTemplate", user)
 
     # Displays a form for editing an exiting user
     $scope.editDialog = (id) ->
       Grails.get { id: id }, (user) ->
-        editDialog.open("/example/userAdmin/formTemplate", user)
+        editDialog.open("userAdmin/formTemplate", user)
 
     $scope.deleteItem = (id) ->
       confirmationDialog.open().then (confirmed) ->
