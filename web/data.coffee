@@ -59,10 +59,18 @@ class Data
 
   # Create a new row
   create: (data) ->
-    # TODO validate login uniqueness
-    data.id = @nextId()
-    @data.push(data)
-    data
+    loginTaken = _.where(@data, login: data.login).length > 0
+    unless loginTaken
+      data.id = @nextId()
+      @data.push(data)
+      data
+    else
+      error =
+        code: 422
+        status: "error"
+        message: "User save failed"
+        errors: user: login: "Property [login] of class [User] with value [#{data.login}] must be unique"
+      throw error
 
   # Update a row with the given id
   update: (id, data) ->
