@@ -302,14 +302,14 @@ describe "module: angleGrinder.forms", ->
       $scope = $rootScope.$new()
 
       element = angular.element """
-        <server-validation-errors errors="validationErrors"></server-validation-errors>
+        <server-validation-errors></server-validation-errors>
       """
 
       $compile(element)($scope)
       $scope.$digest()
 
     it "renders errors", ->
-      $scope.validationErrors =
+      $scope.serverValidationErrors =
         user:
           login: "should be unique"
           email: "is taken"
@@ -329,3 +329,9 @@ describe "module: angleGrinder.forms", ->
     describe "when no errors", ->
       it "renders nothing", ->
         expect(element.find(".alert-error").length).toEqual 0
+
+  describe "service: confirmationDialog", ->
+    it "displays the confirmation", inject ($dialog, confirmationDialog) ->
+      spyOn($dialog, "dialog").andCallThrough()
+      confirmationDialog.open()
+      expect($dialog.dialog).toHaveBeenCalled()
