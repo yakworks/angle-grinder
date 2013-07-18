@@ -7,7 +7,9 @@ class Data
   # Loads sample data into memory
   loadData: ->
     data = require("./large_load")
-    row.id = @nextId() for row in data
+    for row, index in data
+      row.id = @nextId()
+      row.login = "login-#{index}"
 
     data
 
@@ -57,9 +59,18 @@ class Data
 
   # Create a new row
   create: (data) ->
-    data.id = @nextId()
-    @data.push(data)
-    data
+    loginTaken = _.where(@data, login: data.login).length > 0
+    unless loginTaken
+      data.id = @nextId()
+      @data.push(data)
+      data
+    else
+      error =
+        code: 422
+        status: "error"
+        message: "User save failed"
+        errors: user: login: "Property [login] of class [User] with value [#{data.login}] must be unique"
+      throw error
 
   # Update a row with the given id
   update: (id, data) ->

@@ -8,6 +8,8 @@
 <div class="modal-body">
   <form name="editForm" class="form-horizontal no-margin" novalidate ng-submit="save(item)">
 
+    <server-validation-errors errors="serverValidationErrors"></server-validation-errors>
+
     <div field-group for="name">
       <label class="control-label">Name</label>
 
@@ -15,6 +17,16 @@
         <input type="text" name="name" placeholder="Enter Name"
                ng-model="item.name" autofocus required />
         <validation-error for="name" required="This field is required" />
+      </div>
+    </div>
+
+    <div field-group for="login">
+      <label class="control-label">Login</label>
+
+      <div class="controls">
+        <input type="text" name="login" placeholder="Enter Login"
+               ng-model="item.login" autofocus required />
+        <validation-error for="login" required="This field is required" />
       </div>
     </div>
 

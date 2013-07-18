@@ -13,6 +13,7 @@ class AgGridDirectiveCtrl
 
     $scope.editDialog = (id) =>
       item = @findItemById(id)
+      item.persisted = -> true
       item.save = (callback) -> callback.success(this)
 
       self = this
@@ -24,6 +25,7 @@ class AgGridDirectiveCtrl
 
     $scope.createDialog = =>
       item = {}
+      item.persisted = -> false
       item.save = (callback) ->
         generateId = -> new Date().getTime()
         item.id = generateId()

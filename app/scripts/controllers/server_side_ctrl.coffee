@@ -34,6 +34,10 @@ class ServerSideCtrl
       width: 50
       formatter: "editActionLink"
     ,
+      name: "login"
+      label: "Login"
+      formatter: "editActionLink"
+    ,
       name: "name"
       label: "Name"
       formatter: "editActionLink"

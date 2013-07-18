@@ -147,7 +147,6 @@ forms.directive "deleteButton", ->
 forms.directive "cancelButton", ->
   restrict: "E"
   replace: true
-  scope: false
   template: """
   <button type="button" class="btn">
     <i class="icon-remove"></i> Cancel
@@ -157,10 +156,24 @@ forms.directive "cancelButton", ->
 forms.directive "submitButton", ->
   restrict: "E"
   replace: true
-  scope: false
   template: """
   <button type="submit" class="btn btn-primary"
           ng-class="{disabled: saving || editForm.$invalid}">
     <i class="icon-ok icon-white"></i> Save<span ng-show="saving">...</span>
   </button>
+  """
+
+forms.directive "serverValidationErrors", ->
+  restrict: "E"
+  replace: true
+  scope:
+    errors: "="
+  template: """
+    <span>
+      <span x-errors-for="{{entity}}" ng-repeat="(entity, errors) in errors">
+        <div class="alert alert-error" ng-repeat="(field, message) in errors">
+          {{message}}
+        </div>
+      </span>
+    </span>
   """

@@ -12,12 +12,13 @@ describe "controller: ServerSideCtrl", ->
     it "assigns gridOptions", ->
       expect($scope.gridOptions).toBeDefined()
 
-      expect($scope.gridOptions.colModel.length).toEqual 5
+      expect($scope.gridOptions.colModel.length).toEqual 6
       expect($scope.gridOptions.colModel[0].name).toEqual "id"
-      expect($scope.gridOptions.colModel[1].name).toEqual "name"
-      expect($scope.gridOptions.colModel[2].name).toEqual "allowance"
-      expect($scope.gridOptions.colModel[3].name).toEqual "birthday"
-      expect($scope.gridOptions.colModel[4].name).toEqual "paid"
+      expect($scope.gridOptions.colModel[1].name).toEqual "login"
+      expect($scope.gridOptions.colModel[2].name).toEqual "name"
+      expect($scope.gridOptions.colModel[3].name).toEqual "allowance"
+      expect($scope.gridOptions.colModel[4].name).toEqual "birthday"
+      expect($scope.gridOptions.colModel[5].name).toEqual "paid"
 
     describe "#editDialog", ->
       user = id: 123, name: "Test User"
