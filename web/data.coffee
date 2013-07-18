@@ -7,7 +7,9 @@ class Data
   # Loads sample data into memory
   loadData: ->
     data = require("./large_load")
-    row.id = @nextId() for row in data
+    for row, index in data
+      row.id = @nextId()
+      row.login = "login-#{index}"
 
     data
 
@@ -57,6 +59,7 @@ class Data
 
   # Create a new row
   create: (data) ->
+    # TODO validate login uniqueness
     data.id = @nextId()
     @data.push(data)
     data
