@@ -83,6 +83,14 @@ describe "module: angleGrinder.forms", ->
       $scope.$digest()
       form = $scope.form
 
+    it "marks as invalid when the save button is clicked", ->
+      # When (saving event was emitted)
+      $scope.$broadcast "saving"
+
+      # Then
+      $group = element.find(".control-group")
+      expect($group).toHaveClass "error"
+
     describe "when one of the field is invalid", ->
       beforeEach ->
         form.email.$setViewValue "luke@rebel.com"
@@ -120,14 +128,24 @@ describe "module: angleGrinder.forms", ->
         $scope.$digest()
         form = $scope.form
 
-    describe "when the validation message is provided", ->
+    errorMessage = -> element.find("validation-error[for=password] span").text()
+
+    describe "when the custom validation message is provided", ->
       comlileTemplate """
         <form name="form" novalidate>
           <input type="password" name="password"
                  ng-model="user.password" required />
           <validation-error for="password"
                             required="Please fill this field" />
+        </form>
       """
+
+      it "displays errors when the save button is clicked", ->
+        # When (saving event was emitted)
+        $scope.$broadcast "saving"
+
+        # Then
+        expect(errorMessage()).toEqual "Please fill this field"
 
       describe "when the field is invalid", ->
         beforeEach ->
@@ -135,8 +153,7 @@ describe "module: angleGrinder.forms", ->
           $scope.$digest()
 
         it "displays validation errors for the given field", ->
-          expect(element.find("validation-error[for=password] span").text())
-            .toEqual "Please fill this field"
+          expect(errorMessage()).toEqual "Please fill this field"
 
       describe "when the field is valid", ->
         beforeEach ->
@@ -144,8 +161,7 @@ describe "module: angleGrinder.forms", ->
           $scope.$digest()
 
         it "hides validation errors", ->
-          expect(element.find("validation-error[for=password] span").text())
-            .toEqual ""
+          expect(errorMessage()).toEqual ""
 
     describe "when the validation messages is not provided", ->
       comlileTemplate """
@@ -153,6 +169,7 @@ describe "module: angleGrinder.forms", ->
           <input type="password" name="password"
                  ng-model="user.password" required />
           <validation-error for="password" />
+        </form>
       """
 
       beforeEach ->
@@ -160,8 +177,36 @@ describe "module: angleGrinder.forms", ->
         $scope.$digest()
 
       it "uses the default validation message", ->
-        expect(element.find("validation-error[for=password] span").text())
-          .toEqual "This field is required"
+        expect(errorMessage()).toEqual "This field is required"
+
+    describe "when multiple validations are set on the field", ->
+      comlileTemplate """
+        <form name="form" novalidate>
+          <input type="password" name="password"
+                 ng-model="user.password" required />
+
+          <input type="password" name="passwordConfirmation"
+                 ng-model="user.passwordConfirmation"
+                 match="user.password" ng-minlength="6" />
+            <validation-error for="passwordConfirmation" minlength="Too short" />
+        </form>
+      """
+
+      beforeEach ->
+        form.password.$setViewValue "passwd"
+        form.passwordConfirmation.$setViewValue "pass"
+        $scope.$digest()
+
+      it "displays all errors", ->
+        $errors = element.find("validation-error[for=passwordConfirmation]")
+
+        expect($errors.find("span").length).toEqual 2
+
+        expect($errors.find("span:nth-child(1)").text())
+          .toEqual "Too short"
+
+        expect($errors.find("span:nth-child(2)").text())
+          .toEqual "Does not match the confirmation"
 
   describe "service: validationMessages", ->
     it "is defined", inject (validationMessages) ->
@@ -176,6 +221,7 @@ describe "module: angleGrinder.forms", ->
     hasDefaultMessageFor "minlength", "This field is too short"
     hasDefaultMessageFor "maxlength", "This field is too long"
     hasDefaultMessageFor "email",     "Invalid email address"
+    hasDefaultMessageFor "pattern",   "Ivalid pattern"
 
   describe "directive: deleteButton", ->
     element = null
@@ -285,14 +331,6 @@ describe "module: angleGrinder.forms", ->
 
       it "changes the button label", ->
         expect(element).toHaveText "Save..."
-
-    describe "when the form is invalid", ->
-      beforeEach ->
-        $scope.editForm = $invalid: true
-        $scope.$digest()
-
-      it "is disabled", ->
-        expect(element).toHaveClass "disabled"
 
   describe "directive: serverValidationErrors", ->
     element = null
