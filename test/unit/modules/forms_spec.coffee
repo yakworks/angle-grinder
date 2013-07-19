@@ -83,6 +83,14 @@ describe "module: angleGrinder.forms", ->
       $scope.$digest()
       form = $scope.form
 
+    it "marks as invalid when the save button is clicked", ->
+      # When (saving event was emitted)
+      $scope.$broadcast "saving"
+
+      # Then
+      $group = element.find(".control-group")
+      expect($group).toHaveClass "error"
+
     describe "when one of the field is invalid", ->
       beforeEach ->
         form.email.$setViewValue "luke@rebel.com"
@@ -120,6 +128,8 @@ describe "module: angleGrinder.forms", ->
         $scope.$digest()
         form = $scope.form
 
+    errorMessage = -> element.find("validation-error[for=password] span").text()
+
     describe "when the custom validation message is provided", ->
       comlileTemplate """
         <form name="form" novalidate>
@@ -130,14 +140,20 @@ describe "module: angleGrinder.forms", ->
         </form>
       """
 
+      it "displays errors when the save button is clicked", ->
+        # When (saving event was emitted)
+        $scope.$broadcast "saving"
+
+        # Then
+        expect(errorMessage()).toEqual "Please fill this field"
+
       describe "when the field is invalid", ->
         beforeEach ->
           form.password.$setViewValue ""
           $scope.$digest()
 
         it "displays validation errors for the given field", ->
-          expect(element.find("validation-error[for=password] span").text())
-            .toEqual "Please fill this field"
+          expect(errorMessage()).toEqual "Please fill this field"
 
       describe "when the field is valid", ->
         beforeEach ->
@@ -145,8 +161,7 @@ describe "module: angleGrinder.forms", ->
           $scope.$digest()
 
         it "hides validation errors", ->
-          expect(element.find("validation-error[for=password] span").text())
-            .toEqual ""
+          expect(errorMessage()).toEqual ""
 
     describe "when the validation messages is not provided", ->
       comlileTemplate """
@@ -162,8 +177,7 @@ describe "module: angleGrinder.forms", ->
         $scope.$digest()
 
       it "uses the default validation message", ->
-        expect(element.find("validation-error[for=password] span").text())
-          .toEqual "This field is required"
+        expect(errorMessage()).toEqual "This field is required"
 
     describe "when multiple validations are set on the field", ->
       comlileTemplate """
@@ -185,6 +199,8 @@ describe "module: angleGrinder.forms", ->
 
       it "displays all errors", ->
         $errors = element.find("validation-error[for=passwordConfirmation]")
+
+        expect($errors.find("span").length).toEqual 2
 
         expect($errors.find("span:nth-child(1)").text())
           .toEqual "Too short"
