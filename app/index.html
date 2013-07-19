@@ -62,6 +62,10 @@
     <script type="text/javascript" src="scripts/modules/alerts.js"></script>
   <!-- endbuild -->
 
+  <!-- build:js(dev) scripts/angle-grinder.spinner.min.js -->
+    <script type="text/javascript" src="scripts/modules/spinner.js"></script>
+  <!-- endbuild -->
+
   <!-- build:css(dev) styles/gridz.min.css -->
     <!-- jqGrid -->
     <link rel="stylesheet" href="components/jqgrid/css/ui.jqgrid.css">
@@ -103,7 +107,7 @@
 
 <body ng-app="angleGrinder">
 
-<div id="topbar"></div>
+<div ng-include src="'templates/navbar_top.html'"></div>
 
 <header class="jumbotron subhead" id="overview">
   <div class="container">
@@ -126,7 +130,6 @@
 
   <section class="content">
     <alerts></alerts>
-
     <ng-view></ng-view>
   </section>
 </div>
