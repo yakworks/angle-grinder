@@ -11,6 +11,7 @@ app = angular.module("angleGrinder", [
   "angleGrinder.alerts"
   "angleGrinder.dataGenerator"
   "angleGrinder.resources"
+  "angleGrinder.spinner"
 ])
 
 app.config [
