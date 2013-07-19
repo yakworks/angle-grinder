@@ -6,7 +6,7 @@
 </div>
 
 <div class="modal-body">
-  <form name="editForm" class="form-horizontal no-margin" ng-submit="save(item)">
+  <form name="editForm" novalidate class="form-horizontal no-margin" ng-submit="save(item)">
 
     <div field-group for="customerName">
       <label class="control-label">Customer Name</label>
@@ -50,9 +50,10 @@
       <div class="controls">
         <input type="password" name="passwordConfirmation" placeholder="Enter Password Confirmation"
                ng-model="item.passwordConfirmation" autofocus
-               required match="item.password" />
+               required match="item.password" ng-minlength="6" />
         <validation-error for="passwordConfirmation"
                           required="This field is required"
+                          minlength="Password must be at least 6 characters."
                           mismatch="The password does not match the confirmation" />
       </div>
     </div>
