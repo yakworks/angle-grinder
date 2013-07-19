@@ -1,8 +1,8 @@
 express = require("express")
 path = require("path")
 
-utils = require("./web/utils")
-Data = require("./web/data")
+utils = require("./server/utils")
+Data = require("./server/data")
 data = new Data()
 
 app = express()
