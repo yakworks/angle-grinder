@@ -24,7 +24,9 @@ class UsersListCtrl
 
     # Displays a form for creating a new user
     $scope.createDialog = ->
-      user = new Grails()
+      # TODO workaround for missing Org
+      user = new Grails(orgId: 1)
+
       editDialog.open("userAdmin/formTemplate", user)
 
     # Displays a form for editing an exiting user
