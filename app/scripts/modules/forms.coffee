@@ -15,6 +15,8 @@ class EditItemCtrl
 
     # If form is valid performs server side update
     $scope.save = (item) ->
+      $scope.$broadcast "saving"
+
       if $scope.editForm.$valid
         $log.info "The form is valid", $scope.editForm
 
@@ -134,6 +136,7 @@ forms.value "validationMessages",
   minlength: "This field is too short"
   maxlength: "This field is too long"
   email: "Invalid email address"
+  pattern: "Ivalid pattern"
 
 # Custom validation directive for fields match.
 # Might be used for password confirmation validation.
@@ -164,33 +167,23 @@ forms.directive "fieldGroup", ->
     <div class="control-group" ng-transclude></div>
   """
 
-  link: ($scope, element, attrs, ctrl) ->
-    formName = ctrl.$name
+  link: ($scope, element, attrs, formCtrl) ->
+    formName = formCtrl.$name
     fields = (attrs["for"] or "").split(",")
 
-    watchExpression = (formName, fields) ->
-      conditions = []
-      for field in fields
-        conditions.push "(#{formName}.#{field}.$dirty && #{formName}.#{field}.$invalid)"
-      conditions.join(" || ")
-
-    $scope.$watch watchExpression(formName, fields), ->
-      allPristine = true
-      allValid = true
-
-      for field in fields
-        $field = $scope[formName][field]
-
-        if $field?
-          allPristine = allPristine and $field.$pristine
-          allValid = allValid and $field.$valid
-
-      return if allPristine
-
-      if allValid
+    displayErrors = ->
+      valid = _.map fields, (field) -> formCtrl[field].$valid
+      if _.all(valid)
         element.removeClass("error")
       else
         element.addClass("error")
+
+    angular.forEach fields, (fieldName) ->
+      $scope.$watch "#{formName}.#{fieldName}.$viewValue", ->
+        displayErrors() if formCtrl[fieldName]?.$dirty
+
+    $scope.$on "saving", ->
+      displayErrors()
 
 forms.directive "validationError", [
   "validationMessages", (validationMessages) ->
@@ -198,26 +191,39 @@ forms.directive "validationError", [
     require: "^form"
     transclude: false
 
-    link: ($scope, element, attrs, ctrl) ->
-      formName = ctrl.$name
+    link: ($scope, element, attrs, formCtrl) ->
+      formName = formCtrl.$name
       fieldName = attrs["for"]
+      field = $scope[formName][fieldName]
 
-      expression = "#{formName}.#{fieldName}.$dirty && #{formName}.#{fieldName}.$invalid"
-      $scope.$watch expression, ->
-        $field = $scope[formName][fieldName]
+      # Do cleanup
+      clearErrors = -> element.html("")
 
-        html = ""
-        if $field.$dirty and $field.$invalid
-          for error, invalid of $field.$error
-            if invalid
-              message = attrs[error] || validationMessages[error]
+      # Try to take an errors message from the attrribute
+      # otherwise fallback to the default error message
+      messageFor = (error) ->
+        attrs[error] or validationMessages[error]
 
-              if message?
-                html += """
-                  <span class="help-inline">#{message}</span>
-                """
+      toggleErrors = ->
+        clearErrors()
 
-        element.html(html)
+        for error, invalid of field.$error
+          continue unless invalid
+
+          message = messageFor error
+          continue unless message?
+
+          element.append """
+            <span class="help-inline">#{message}</span>
+          """
+
+      # Dispalay validation errors while typing
+      $scope.$watch "#{formName}.#{fieldName}.$viewValue", ->
+        toggleErrors() if field.$dirty
+
+      # Display validation errors when Save button is clicked
+      $scope.$on "saving", ->
+        toggleErrors()
 ]
 
 # Double check delete button
@@ -286,7 +292,7 @@ forms.directive "submitButton", ->
   replace: true
   template: """
   <button type="submit" class="btn btn-primary"
-          ng-class="{disabled: saving || editForm.$invalid}">
+          ng-class="{disabled: saving}">
     <i class="icon-ok icon-white"></i> Save<span ng-show="saving">...</span>
   </button>
   """
