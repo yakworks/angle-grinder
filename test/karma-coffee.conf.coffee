@@ -28,6 +28,7 @@ module.exports = (config) ->
       "app/scripts/application.coffee"
       "app/scripts/controllers/**/*.coffee"
 
+      "test/unit/helpers/**/*.coffee"
       "test/unit/**/*_spec.coffee"
     ]
 
