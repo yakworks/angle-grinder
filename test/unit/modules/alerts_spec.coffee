@@ -1,4 +1,4 @@
-describe "module: mb.alerts", ->
+describe "module: angleGrinder.alerts", ->
   beforeEach module("angleGrinder.alerts")
 
   describe "controller", ->
