@@ -11,6 +11,16 @@ gridz.directive "agGrid", [
       invokeEditItemDialogFor = (id) ->
         $scope.$apply -> $scope.editDialog id
 
+      # flash the given row
+      flashRowFor = (item, complete = ->) ->
+        $row = $($grid[0].rows.namedItem(item.id))
+
+        $row.css "background-color", "#DFF0D8"
+        $row.delay(100).fadeOut "medium", ->
+          $row.css "background-color", ""
+
+        $row.fadeIn "fast", -> complete()
+
       # handles click on edit action insite the dropdown menu
       $grid.on "editAction", (event, id) ->
         event.preventDefault()
@@ -27,21 +37,17 @@ gridz.directive "agGrid", [
         $scope.$apply -> $scope.deleteItem id
 
       # catch broadcast event after save. This will need to change
-      $scope.$on "itemUpdated", (event, data) ->
-        if $grid.jqGrid("getInd", data.id)
-          $grid.jqGrid "setRowData", data.id, data
+      $scope.$on "itemUpdated", (event, item) ->
+        if $grid.jqGrid("getInd", item.id)
+          $grid.jqGrid "setRowData", item.id, item
         else
-          $grid.jqGrid "addRowData", data.id, data, "first"
+          $grid.jqGrid "addRowData", item.id, item, "first"
 
-        # flash the row so user knows its updated
-        ind = $grid[0].rows.namedItem(data.id)
-        $(ind).css "background-color", "#DFF0D8"
-        $(ind).delay(100).fadeOut("medium", ->
-          $(ind).css "background-color", ""
-        ).fadeIn "fast"
+        flashRowFor item
 
       $scope.$on "itemDeleted", (event, item) ->
-        $grid.jqGrid "delRowData", item.id
+        flashRowFor item, ->
+          $grid.jqGrid "delRowData", item.id
 
       $scope.$on "searchUpdated", (event, filters) ->
         params =

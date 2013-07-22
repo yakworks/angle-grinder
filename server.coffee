@@ -64,12 +64,8 @@ app.put "/api/users/:id", (req, res) ->
 # DELETE
 app.delete "/api/users/:id", (req, res) ->
   randomSleep()
-
-  if Math.random() > 0.5
-    row = data.delete(req.params.id)
-    res.send row
-  else
-    randomErrorFor(res)
+  row = data.delete(req.params.id)
+  res.send row
 
 port = 8000
 app.listen port, ->
