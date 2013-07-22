@@ -40,7 +40,7 @@ module.exports = (grunt) ->
     watch:
       coffee:
         files: ["<%= appConfig.app %>/scripts/**/*.coffee"]
-        tasks: ["coffee:dist"]
+        tasks: ["coffee:dist", "ngtemplates"]
 
       coffeeTest:
         files: ["<%= appConfig.test %>/**/*.coffee"]
