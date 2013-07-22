@@ -2,8 +2,10 @@ spinner = angular.module("angleGrinder.spinner", [])
 
 spinner.factory "httpRequestTracker", [
   "$http", ($http) ->
+    jqueryAjaxRequest: false,
+
     hasPendingRequests: ->
-      $http.pendingRequests.length > 0
+      @jqueryAjaxRequest or $http.pendingRequests.length > 0
 ]
 
 class SpinnerCtrl
@@ -27,3 +29,15 @@ spinner.directive "spinner", ->
     </li>
   """
   controller: "spinner"
+
+# Notify the spinner service on jQuery ajax requests
+spinner.run [
+  "$timeout", "httpRequestTracker", ($timeout, httpRequestTracker) ->
+    return if not jQuery?
+
+    jqeuryAjaxRequest = (pending) ->
+      $timeout -> httpRequestTracker.jqueryAjaxRequest = pending
+
+    jQuery(document).ajaxStart -> jqeuryAjaxRequest(true)
+    jQuery(document).ajaxStop  -> jqeuryAjaxRequest(false)
+]

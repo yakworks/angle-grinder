@@ -1,7 +1,7 @@
-describe "angleGrinder.spinner", ->
+describe "module: angleGrinder.spinner", ->
   beforeEach module("angleGrinder.spinner")
 
-  describe "httpRequestTracker", ->
+  describe "service: httpRequestTracker", ->
     $http = null
     httpRequestTracker = null
 
@@ -13,10 +13,16 @@ describe "angleGrinder.spinner", ->
       it "does not report pending requests", ->
         expect(httpRequestTracker.hasPendingRequests()).toBeFalsy()
 
-    describe "when requests are in progress", ->
+    describe "when some requests are in progress", ->
       beforeEach -> $http.pendingRequests.push({})
 
       it "reports pending requests", ->
+        expect(httpRequestTracker.hasPendingRequests()).toBeTruthy()
+
+    describe "when jquery ajax request is in progress", ->
+      beforeEach -> httpRequestTracker.jqueryAjaxRequest = true
+
+      it "reports pending request", ->
         expect(httpRequestTracker.hasPendingRequests()).toBeTruthy()
 
   describe "controller", ->
@@ -45,7 +51,7 @@ describe "angleGrinder.spinner", ->
         it "returns false", ->
           expect($scope.showSpinner()).toBeFalsy()
 
-  describe "directive", ->
+  describe "directive: spinner", ->
     element = null
 
     beforeEach inject ($compile, $rootScope) ->
