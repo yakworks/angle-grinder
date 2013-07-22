@@ -45,7 +45,7 @@ describe "module: mb.alerts", ->
 
       element = angular.element "<alerts></alerts>"
       $compile(element)($scope)
-      $scope.$digest()
+      $scope.$apply()
 
     it "renders alerts", ->
       $scope.$apply -> $scope.alertMessages = [

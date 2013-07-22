@@ -18,14 +18,14 @@ describe "module: angleGrinder.forms", ->
       """
 
       $compile(element)($scope)
-      $scope.$digest()
+      $scope.$apply()
       form = $scope.form
 
     describe "when the fields are equal", ->
       beforeEach ->
-        form.password.$setViewValue "password"
-        form.passwordConfirmation.$setViewValue "password"
-        $scope.$digest()
+        $scope.$apply ->
+          form.password.$setViewValue "password"
+          form.passwordConfirmation.$setViewValue "password"
 
       it "marks the form as valid", ->
         expect(form.$valid).toBeTruthy()
@@ -37,9 +37,9 @@ describe "module: angleGrinder.forms", ->
 
     describe "when the fields are not equal", ->
       beforeEach ->
-        form.password.$setViewValue "password"
-        form.passwordConfirmation.$setViewValue "other password"
-        $scope.$digest()
+        $scope.$apply ->
+          form.password.$setViewValue "password"
+          form.passwordConfirmation.$setViewValue "other password"
 
       it "marks the form as invalid", ->
         expect(form.$valid).toBeFalsy()
@@ -79,7 +79,7 @@ describe "module: angleGrinder.forms", ->
       """
 
       $compile(element)($scope)
-      $scope.$digest()
+      $scope.$apply()
       form = $scope.form
 
     it "marks as invalid when the save button is clicked", ->
@@ -92,9 +92,9 @@ describe "module: angleGrinder.forms", ->
 
     describe "when one of the field is invalid", ->
       beforeEach ->
-        form.email.$setViewValue "luke@rebel.com"
-        form.password.$setViewValue ""
-        $scope.$digest()
+        $scope.$apply ->
+          form.email.$setViewValue "luke@rebel.com"
+          form.password.$setViewValue ""
 
       it "marks the whole group as invalid", ->
         expect(form.$valid).toBeFalsy()
@@ -103,9 +103,9 @@ describe "module: angleGrinder.forms", ->
 
     describe "when all fields are valid", ->
       beforeEach ->
-        form.email.$setViewValue "luke@rebel.com"
-        form.password.$setViewValue "password"
-        $scope.$digest()
+        $scope.$apply ->
+          form.email.$setViewValue "luke@rebel.com"
+          form.password.$setViewValue "password"
 
       it "does not mark the group as invalid", ->
         expect(form.$valid).toBeTruthy()
@@ -124,7 +124,7 @@ describe "module: angleGrinder.forms", ->
         element = angular.element(template)
 
         $compile(element)($scope)
-        $scope.$digest()
+        $scope.$apply()
         form = $scope.form
 
     errorMessage = -> element.find("validation-error[for=password] span").text()
@@ -148,16 +148,14 @@ describe "module: angleGrinder.forms", ->
 
       describe "when the field is invalid", ->
         beforeEach ->
-          form.password.$setViewValue ""
-          $scope.$digest()
+          $scope.$apply -> form.password.$setViewValue ""
 
         it "displays validation errors for the given field", ->
           expect(errorMessage()).toEqual "Please fill this field"
 
       describe "when the field is valid", ->
         beforeEach ->
-          form.password.$setViewValue "password"
-          $scope.$digest()
+          $scope.$apply -> form.password.$setViewValue "password"
 
         it "hides validation errors", ->
           expect(errorMessage()).toEqual ""
@@ -173,7 +171,7 @@ describe "module: angleGrinder.forms", ->
 
       beforeEach ->
         form.password.$setViewValue ""
-        $scope.$digest()
+        $scope.$apply()
 
       it "uses the default validation message", ->
         expect(errorMessage()).toEqual "This field is required"
@@ -192,9 +190,9 @@ describe "module: angleGrinder.forms", ->
       """
 
       beforeEach ->
-        form.password.$setViewValue "passwd"
-        form.passwordConfirmation.$setViewValue "pass"
-        $scope.$digest()
+        $scope.$apply ->
+          form.password.$setViewValue "passwd"
+          form.passwordConfirmation.$setViewValue "pass"
 
       it "displays all errors", ->
         $errors = element.find("validation-error[for=passwordConfirmation]")
@@ -236,7 +234,7 @@ describe "module: angleGrinder.forms", ->
       """
 
       $compile(element)($scope)
-      $rootScope.$digest()
+      $rootScope.$apply()
 
     it "is visible", ->
       expect(element.css("display")).not.toBe "none"
@@ -268,8 +266,7 @@ describe "module: angleGrinder.forms", ->
 
     describe "when the DELETE request is in progress", ->
       beforeEach ->
-        $scope.deleting = true
-        $rootScope.$digest()
+        $rootScope.$apply -> $scope.deleting = true
 
       it "disables the button", ->
         expect(element).toHaveClass "disabled"
@@ -289,7 +286,7 @@ describe "module: angleGrinder.forms", ->
       """
 
       $compile(element)($scope)
-      $scope.$digest()
+      $scope.$apply()
 
     it "create a cancel button", ->
       expect(element).toHaveText "Cancel"
@@ -307,23 +304,21 @@ describe "module: angleGrinder.forms", ->
       """
 
       $compile(element)($scope)
-      $scope.$digest()
+      $scope.$apply()
 
     it "has valid label", ->
       expect(element).toHaveText /Save/
 
     describe "when the form is valid", ->
       beforeEach ->
-        $scope.editForm = $invalid: false
-        $scope.$digest()
+        $scope.$apply -> $scope.editForm = $invalid: false
 
       it "is enabled", ->
         expect(element).not.toHaveClass "disabled"
 
     describe "when the request is in progress", ->
       beforeEach ->
-        $scope.saving = true
-        $scope.$digest()
+        $scope.$apply -> $scope.saving = true
 
       it "is disabled", ->
         expect(element).toHaveClass "disabled"
@@ -343,16 +338,16 @@ describe "module: angleGrinder.forms", ->
       """
 
       $compile(element)($scope)
-      $scope.$digest()
+      $scope.$apply()
 
     it "renders errors", ->
-      $scope.serverValidationErrors =
-        user:
-          login: "should be unique"
-          email: "is taken"
-        contact:
-          email: "is invalid"
-      $scope.$digest()
+      $scope.$apply ->
+        $scope.serverValidationErrors =
+          user:
+            login: "should be unique"
+            email: "is taken"
+          contact:
+            email: "is invalid"
 
       expect(element.find(".alert-error").length).toEqual 3
 

@@ -81,7 +81,7 @@ describe "module: angleGrinder.spinner", ->
         <spinner></spinner>
       """
       $compile(element)($scope)
-      $scope.$digest()
+      $scope.$apply()
 
     it "renders the spinner", ->
       img = element.find("img")

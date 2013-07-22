@@ -25,7 +25,7 @@ describe "module: angleGrinder.gridz", ->
       """
 
       $compile(element)($scope)
-      $scope.$digest()
+      $scope.$apply()
 
     it "passes valid options to the gridz plugin", ->
       expect(gridz).toHaveBeenCalledWith sampleGridOptions

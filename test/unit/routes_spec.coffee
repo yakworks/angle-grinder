@@ -14,8 +14,7 @@ describe "Application routes", ->
     $route = $injector.get("$route")
 
     @navigateTo = (path) ->
-      $location.path(path)
-      $rootScope.$digest()
+      $rootScope.$apply -> $location.path(path)
 
   it "recognizes '/'", ->
     @navigateTo "/"
