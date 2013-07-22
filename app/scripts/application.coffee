@@ -42,6 +42,13 @@ app.config [
       .otherwise redirectTo: "/"
 ]
 
+# Sample `pathWithContext` configuration block
+app.config [
+  "pathWithContextProvider", (pathWithContextProvider) ->
+    contextPath = $("body").data("context-path")
+    pathWithContextProvider.setContextPath(contextPath) if contextPath?
+]
+
 # Intercepts all HTTP errors and dislays a flash message
 app.factory "httpErrorsInterceptor", [
   "$injector", "$q", "alerts", ($injector, $q, alerts) ->
