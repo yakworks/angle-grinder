@@ -103,8 +103,6 @@ class ConfirmationDialogCtrl
 
 forms.controller "ConfirmationDialogCtrl", ConfirmationDialogCtrl
 
-# TODO temporaty cache the templete
-# TODO cache templates for this module
 forms.run ["$templateCache", ($templateCache) ->
   $templateCache.put "templates/dialogs/confirmation.html", """
     <div class="modal-body">{{message}}</div>
