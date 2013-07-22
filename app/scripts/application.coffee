@@ -50,7 +50,7 @@ app.factory "httpErrorsInterceptor", [
       onError = (response) ->
         errorMessage = response.data?.error || "Unexpected HTTP error"
 
-        # TODO temporary skip validation errors
+        # skip validation errors
         alerts.error(errorMessage) if response.status isnt 422
 
         $q.reject(response)
