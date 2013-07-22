@@ -32,6 +32,7 @@ app = angular.module "admin", [
   "angleGrinder.gridz"
   "angleGrinder.forms"
   "angleGrinder.alerts"
+  "angleGrinder.spinner"
 ]
 
 # Configure the context path

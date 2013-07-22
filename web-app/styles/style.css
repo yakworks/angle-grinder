@@ -1,0 +1,3 @@
+li.spinner i.spin:before {
+    content: url('../angle-grinder/images/ajax-loader.gif');
+}

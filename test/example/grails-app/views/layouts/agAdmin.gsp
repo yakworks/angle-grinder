@@ -79,6 +79,7 @@
                             </li>
                         </ul>
                     </li>
+                    <spinner></spinner>
                 </ul>
             </div>
         </div>
