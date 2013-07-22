@@ -21,8 +21,8 @@ module.exports = (config) ->
       "scripts/jqgrid/gridz.js"
 
       "scripts/modules/**/*.js"
-      "scripts/templates.js"
       "scripts/application.js"
+      "scripts/templates.js"
       "scripts/controllers/**/*.js"
 
       "test/unit/**/*_spec.js"

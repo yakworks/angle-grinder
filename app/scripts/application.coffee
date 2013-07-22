@@ -1,7 +1,6 @@
 # The entry point for the application
 
 app = angular.module("angleGrinder", [
-  "angleGrinder.templates"
   "angleGrinder.gridz"
   "angleGrinder.forms"
   "angleGrinder.alerts"

@@ -1,5 +1,4 @@
 describe "module: angleGrinder.forms", ->
-  beforeEach module("angleGrinder.templates")
   beforeEach module("angleGrinder.forms")
 
   describe "directive: match", ->

@@ -1,5 +1,6 @@
 describe "controller: AgGridDirectiveCtrl", ->
   beforeEach module("angleGrinder")
+  beforeEach module("templates/partials/item_form.html")
 
   $scope = null
   controller = null

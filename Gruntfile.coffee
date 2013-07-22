@@ -189,9 +189,7 @@ module.exports = (grunt) ->
     ngtemplates:
       options:
         base: "<%= appConfig.app %>"
-        module:
-          name: "angleGrinder.templates"
-          define: true
+        module: "angleGrinder"
 
       myApp:
         src: [
@@ -228,6 +226,12 @@ module.exports = (grunt) ->
           type: "html"
           dir: "coverage"
 
+        singleRun: true
+
+      coffee:
+        basePath: "../"
+        configFile: "<%= appConfig.test %>/karma-coffee.conf.coffee"
+        reporters: ["dots"]
         singleRun: true
 
       e2e:

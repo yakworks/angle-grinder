@@ -1,6 +1,13 @@
 describe "Application routes", ->
   beforeEach module("angleGrinder")
 
+  beforeEach module("templates/gridz_with_toolbar.html")
+  beforeEach module("templates/simple_jqgrid.html")
+  beforeEach module("templates/simple_gridz.html")
+  beforeEach module("templates/jqgrid_basic.html")
+  beforeEach module("templates/ag_grid_directive.html")
+  beforeEach module("templates/server_side.html")
+
   $route = null
 
   beforeEach inject ($location, $rootScope, $injector) ->

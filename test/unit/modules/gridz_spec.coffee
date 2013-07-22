@@ -1,5 +1,4 @@
 describe "module: angleGrinder.gridz", ->
-  beforeEach module("angleGrinder.templates")
   beforeEach module("angleGrinder.gridz")
 
   describe "directive: agGrid", ->
