@@ -52,7 +52,6 @@ module.exports = (grunt) ->
       html:
         files: [
           "<%= appConfig.app %>/**/*.html"
-          "!<%= appConfig.app %>/templates/**/*.html"
         ]
         tasks: ["copy:dev"]
 
@@ -148,7 +147,6 @@ module.exports = (grunt) ->
           src: [
             "*.{ico,txt}"
             "**/*.html"
-            "!templates/**/*.html"
             "components/**/*"
             "images/**/*.{gif,webp}"
             "font/*"
@@ -220,8 +218,6 @@ module.exports = (grunt) ->
       unit:
         configFile: "<%= appConfig.test %>/karma.conf.coffee"
         reporters: ["dots", "coverage"]
-        preprocessors:
-          "scripts/**/*.js": "coverage"
         coverageReporter:
           type: "html"
           dir: "coverage"

@@ -18,15 +18,23 @@ module.exports = (config) ->
       "components/jqgrid/js/grid.base.js"
       "components/angular-bootstrap/ui-bootstrap-tpls.js"
 
+      "templates/**/*.html"
+
       "scripts/jqgrid/gridz.js"
 
       "scripts/modules/**/*.js"
       "scripts/application.js"
-      "scripts/templates.js"
       "scripts/controllers/**/*.js"
 
       "test/unit/**/*_spec.js"
     ]
+
+    preprocessors:
+      "templates/**/*.html": ["html2js"]
+      "scripts/**/*.js": "coverage"
+
+    ngHtml2JsPreprocessor:
+      stripPrefix: "../app/"
 
     # list of files to exclude
     exclude: []
@@ -59,6 +67,8 @@ module.exports = (config) ->
     logLevel: config.LOG_WARN
 
     plugins: [
+      "karma-ng-html2js-preprocessor"
+
       "karma-jasmine"
       "karma-phantomjs-launcher"
       "karma-spec-reporter"
