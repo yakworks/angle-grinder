@@ -18,14 +18,20 @@ class SpinnerCtrl
 
 spinner.controller "spinner", SpinnerCtrl
 
+###
+Use css to set the spinner annimation image:
+```
+  li.spinner i.spin:before {
+    content: url('/images/ajax-loader.gif');
+  }
+```
+###
 spinner.directive "spinner", ->
   replace: true
   restrict: "E"
   template: """
     <li class="spinner">
-      <a href="#">
-        <img ng-show="showSpinner()" src="/images/ajax-loader.gif" />
-      </a>
+      <a href="#"><i ng-class="{spin: showSpinner()}"></i></a>
     </li>
   """
   controller: "spinner"

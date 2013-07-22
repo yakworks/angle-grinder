@@ -906,3 +906,7 @@ ul#icons span.ui-icon {
 li.spinner {
   width: 45px;
 }
+
+li.spinner i.spin:before {
+  content: url('/images/ajax-loader.gif');
+}

@@ -5,9 +5,9 @@ describe "module: angleGrinder.spinner", ->
     $http = null
     httpRequestTracker = null
 
-    beforeEach inject ($injector) ->
-      httpRequestTracker = $injector.get("httpRequestTracker")
-      $http = $injector.get("$http")
+    beforeEach inject (_httpRequestTracker_, _$http_) ->
+      $http = _$http_
+      httpRequestTracker = _httpRequestTracker_
 
     describe "when no requests is progress", ->
       it "does not report pending requests", ->
@@ -72,19 +72,36 @@ describe "module: angleGrinder.spinner", ->
 
   describe "directive: spinner", ->
     element = null
+    $scope = null
 
     beforeEach inject ($compile, $rootScope) ->
-      $scope = $rootScope
-      $scope.showSpinner = -> false
+      $scope = $rootScope.$new()
 
       element = angular.element """
-        <spinner></spinner>
+        <ul>
+          <spinner></spinner>
+        </ul>
       """
       $compile(element)($scope)
       $scope.$apply()
 
-    it "renders the spinner", ->
-      img = element.find("img")
+    showSpinner = (show) ->
+      beforeEach -> $scope.$apply -> $scope.showSpinner = -> show
 
-      expect(img.length).toBe(1)
-      expect(img.attr("src")).toEqual("/images/ajax-loader.gif")
+    $spinner = null
+    beforeEach -> $spinner = element.find("li.spinner")
+
+    it "renders the spinner", ->
+      expect($spinner.length).toBe(1)
+
+    describe "when no requests", ->
+      showSpinner false
+
+      it "does not display the animation", ->
+        expect($spinner.find("i")).not.toHaveClass "spin"
+
+    describe "when a request is in progress", ->
+      showSpinner true
+
+      it "displays the animation", ->
+        expect($spinner.find("i")).toHaveClass "spin"
