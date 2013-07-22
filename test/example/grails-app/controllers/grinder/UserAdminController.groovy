@@ -35,10 +35,10 @@ class UserAdminController extends BaseDomainController {
 
             if (qslike) {
                 or {
-                    like 'login', qslike
-                    like 'contact.lastName', qslike
-                    like 'contact.firstName', qslike
-                    like 'contact.email', qslike
+                    ilike 'login', qslike
+                    ilike 'contact.lastName', qslike
+                    ilike 'contact.firstName', qslike
+                    ilike 'contact.email', qslike
                 }
             }
 
