@@ -26,6 +26,7 @@ module.exports = (config) ->
       "scripts/application.js"
       "scripts/controllers/**/*.js"
 
+      "test/unit/helpers/**/*.js"
       "test/unit/**/*_spec.js"
     ]
 

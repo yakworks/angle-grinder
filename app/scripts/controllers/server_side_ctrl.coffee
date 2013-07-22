@@ -1,20 +1,20 @@
 class ServerSideCtrl
 
-  @$inject = ["$scope", "$log", "$dialog", "confirmationDialog", "editDialog", "Users"]
-  constructor: ($scope, $log, $dialog, confirmationDialog, editDialog, Users) ->
+  @$inject = ["$scope", "$log", "$dialog", "confirmationDialog", "editDialog", "Users", "pathWithContext"]
+  constructor: ($scope, $log, $dialog, confirmationDialog, editDialog, Users, pathWithContext) ->
     $scope.gridOptions =
-      url: "/api/users"
+      url: pathWithContext("/api/users")
       colModel: @gridColumns()
       rowNum: 10
       sortname: "id"
 
     $scope.editDialog = (id) ->
       Users.get { id: id }, (user) ->
-        editDialog.open("templates/partials/user_form.html", user)
+        editDialog.open(pathWithContext("templates/partials/user_form.html"), user)
 
     $scope.createDialog = ->
       user = new Users()
-      editDialog.open("templates/partials/user_form.html", user)
+      editDialog.open(pathWithContext("templates/partials/user_form.html"), user)
 
     $scope.deleteItem = (id) ->
       confirmationDialog.open().then (confirmed) ->

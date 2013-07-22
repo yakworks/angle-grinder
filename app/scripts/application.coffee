@@ -1,6 +1,7 @@
 # The entry point for the application
 
 app = angular.module("angleGrinder", [
+  "angleGrinder.common"
   "angleGrinder.gridz"
   "angleGrinder.forms"
   "angleGrinder.alerts"
@@ -39,6 +40,13 @@ app.config [
         controller: "ServerSideCtrl"
 
       .otherwise redirectTo: "/"
+]
+
+# Sample `pathWithContext` configuration block
+app.config [
+  "pathWithContextProvider", (pathWithContextProvider) ->
+    contextPath = $("body").data("context-path")
+    pathWithContextProvider.setContextPath(contextPath) if contextPath?
 ]
 
 # Intercepts all HTTP errors and dislays a flash message
