@@ -28,7 +28,15 @@ Function::curry = ->
 # The main scaffolding module
 app = angular.module "admin", [
   "admin.resources"
+  "angleGrinder.common"
   "angleGrinder.gridz"
   "angleGrinder.forms"
   "angleGrinder.alerts"
+]
+
+# Configure the context path
+app.config [
+  "pathWithContextProvider", (pathWithContextProvider) ->
+    contextPath = $("body").data("context-path")
+    pathWithContextProvider.setContextPath(contextPath) if contextPath?
 ]

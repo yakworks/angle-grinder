@@ -1,7 +1,7 @@
 class UsersListCtrl
 
-  @$inject = ["$scope", "$log", "confirmationDialog", "editDialog", "Grails"]
-  constructor: ($scope, $log, confirmationDialog, editDialog, Grails) ->
+  @$inject = ["$scope", "$log", "confirmationDialog", "editDialog", "Grails", "pathWithContext"]
+  constructor: ($scope, $log, confirmationDialog, editDialog, Grails, pathWithContext) ->
     colModel = [
       { name: "id", label: "ID", width: 30 }
       { name: "contact.name", label: "Contact Name", width: 100, formatter: "editActionLink" }
@@ -11,7 +11,7 @@ class UsersListCtrl
     ]
 
     $scope.gridOptions =
-      url: "/example/userAdmin/list.json"
+      url: pathWithContext("/userAdmin/list.json")
       colModel: colModel
       multiselect: false # turn off multiselect
       shrinkToFit: true # makes columns fit to width
@@ -27,12 +27,12 @@ class UsersListCtrl
       # TODO workaround for missing Org
       user = new Grails(orgId: 1)
 
-      editDialog.open("userAdmin/formTemplate", user)
+      editDialog.open(pathWithContext("userAdmin/formTemplate"), user)
 
     # Displays a form for editing an exiting user
     $scope.editDialog = (id) ->
       Grails.get { id: id }, (user) ->
-        editDialog.open("userAdmin/formTemplate", user)
+        editDialog.open(pathWithContext("/userAdmin/formTemplate"), user)
 
     $scope.deleteItem = (id) ->
       confirmationDialog.open().then (confirmed) ->
