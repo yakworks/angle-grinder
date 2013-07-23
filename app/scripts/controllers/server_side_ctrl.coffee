@@ -98,6 +98,7 @@ class SearchFormCtrl
 
     $scope.reset = ->
       $scope.search = {}
+      $scope.advancedSearch($scope.search)
 
 angular.module("angleGrinder")
   .controller("ServerSideCtrl", ServerSideCtrl)
