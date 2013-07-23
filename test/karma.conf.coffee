@@ -16,6 +16,8 @@ module.exports = (config) ->
       "components/jasmine-jquery/jasmine-jquery.js"
 
       "components/jqgrid/js/grid.base.js"
+      "components/select2/select2.js"
+      "components/angular-ui-select2/select2.js"
       "components/angular-bootstrap/ui-bootstrap-tpls.js"
 
       "templates/**/*.html"
