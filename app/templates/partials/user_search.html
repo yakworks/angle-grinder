@@ -3,6 +3,19 @@
 <div class="well">
   <form name="searchForm" class="form-horizontal form-multi-column no-margin" ng-submit="advancedSearch(search)">
     <div class="row-fluid">
+
+      <div class="control-group span6" >
+        <label class="control-label" >Org</label>
+        <div class="controls">
+          <div class="input-append">
+            <input id="orgSelect2" ui-select2="orgSelectConfig" multiple ng-model="search.org"  type="text" style="width:87%">
+            <button class="btn" type="button" data-select2-open="orgSelect2" style="width:13%">
+              <i class="icon-search"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
       <div class="control-group span6">
         <label class="control-label">Name</label>
         <div class="controls">
