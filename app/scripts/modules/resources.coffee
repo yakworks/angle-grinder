@@ -3,8 +3,8 @@ resources = angular.module("angleGrinder.resources", ["ngResource"])
 resources.factory "Users", [
   "$resource", ($resource) ->
     Users = $resource "/api/users/:id", { id: "@id" },
-      get: { method: "GET" },
-      save: { method: "POST" },
+      get:    { method: "GET" },
+      save:   { method: "POST" },
       update: { method: "PUT" },
       delete: { method: "DELETE" }
 

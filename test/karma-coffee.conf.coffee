@@ -18,6 +18,8 @@ module.exports = (config) ->
       "bower_components/jasmine-jquery/lib/jasmine-jquery.js"
 
       "bower_components/jqgrid/js/grid.base.js"
+      "bower_components/select2/select2.js"
+      "bower_components/angular-ui-select2/src/select2.js"
       "bower_components/angular-bootstrap/ui-bootstrap-tpls.js"
 
       "app/scripts/jqgrid/gridz.coffee"

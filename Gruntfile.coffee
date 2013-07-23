@@ -44,20 +44,17 @@ module.exports = (grunt) ->
 
       coffeeTest:
         files: ["<%= appConfig.test %>/**/*.coffee"]
-        tasks: [
-          "coffee:test"
-          "jasminehtml"
-          ]
+        tasks: ["coffee:test", "jasminehtml"]
 
       html:
         files: [
-          "<%= appConfig.app %>/**/*.html"
+          "<%= appConfig.app %>/index.html"
         ]
         tasks: ["copy:dev"]
 
       templates:
         files: ["<%= appConfig.app %>/templates/**/*.html"]
-        tasks: ["ngtemplates"]
+        tasks: ["ngtemplates:myApp"]
 
       css:
         files: ["<%= appConfig.app %>/styles/**/*.less"]
@@ -190,10 +187,7 @@ module.exports = (grunt) ->
         module: "angleGrinder"
 
       myApp:
-        src: [
-          "<%= appConfig.app %>/templates/**/*.html"
-          "<%= appConfig.app %>/views/**/*.html"
-        ]
+        src: ["<%= appConfig.app %>/templates/**/*.html"]
         dest: "<%= appConfig.dev %>/scripts/templates.js"
 
     bower:
