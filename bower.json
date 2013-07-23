@@ -1,63 +1,71 @@
 {
-  "name": "sparkle",
-  "version": "0.0.0",
-  "dependencies": {
-    "jqgrid": "basejump/jqGrid#v4.4.4-tweaks",
-    "jquery": "1.9.1",
-    "underscore": "~1.4.4",
-    "spin.js": "~1.2.8"
-  },
-  "devDependencies": {
-    "jasmine": "~1.3.1",
-    "jasmine-jquery": "~1.5.3",
-    "angular-mocks": "~1.0.7",
-    "angular-scenario": "~1.0.7",
-    "modernizr": "~2.6.2",
-    "less.js": "~1.3.3",
-    "bootstrap": "~2.3.1",
-    "font-awesome": "*",
-    "bootstrapx-clickover": "git://github.com/lecar-red/bootstrapx-clickover.git",
-    "jquery-ui-bootstrap": "./custom_components/jquery-ui-bootstrap",
-    "angular": "~1.0.6",
-    "angular-resource": "~1.0.6",
-    "angular-ui": "*",
-    "select2": "*",
-    "angular-bootstrap": "*",
-    "angular-strap": "~0.7.1",
-    "select2-bootstrap-css": "t0m/select2-bootstrap-css"
-  },
-  "exportsOverride": {
-    "angular-ui": {
-      "js": "build/angular-ui.js",
-      "css": "build/angular-ui.css"
+    "name": "sparkle",
+    "version": "0.0.0",
+
+    "dependencies": {
+        "jqgrid": "basejump/jqGrid#v4.4.4-tweaks",
+        "jquery": "1.9.1",
+        "underscore": "~1.4.4",
+
+        "bootstrap": "~2.3.1",
+        "bootstrapx-clickover": "git://github.com/lecar-red/bootstrapx-clickover.git",
+        "jquery-ui-bootstrap": "./custom_components/jquery-ui-bootstrap",
+        "select2": "*",
+        "select2-bootstrap-css": "t0m/select2-bootstrap-css",
+
+        "angular": "~1.0.6",
+        "angular-resource": "~1.0.6",
+        "angular-ui-select2": "~0.0.2",
+        "angular-bootstrap": "*"
     },
-    "bootstrap": {
-      "img": "img/*.png",
-      "js": [
-        "docs/assets/js/bootstrap.js"
-      ],
-      "less": "less/*.less"
+
+    "devDependencies": {
+        "jasmine": "~1.3.1",
+        "jasmine-jquery": "~1.5.3",
+        "angular-mocks": "~1.0.7",
+        "angular-scenario": "~1.0.7",
+
+        "modernizr": "~2.6.2",
+        "font-awesome": "*",
+        "angular-ui": "*",
+        "angular-strap": "~0.7.1"
     },
-    "bootstrap-select": {
-      "js": "bootstrap-select.js",
-      "css": "bootstrap-select.css"
-    },
-    "bootstrap-clickover": {
-      "js": "js/bootstrap-clickover.js"
-    },
-    "jqgrid": {
-      "js": "js/*.js",
-      "js/i18n": "js/i18n/*.js",
-      "js/plugins": "plugins/*.js",
-      "css": "css/**/*.css",
-      "css/plugins": "plugins/*.css"
-    },
-    "jasmine": {
-      "js": [
-        "lib/jasmine-core/jasmine.js",
-        "lib/jasmine-core/jasmine-html.js"
-      ],
-      "css": "lib/jasmine-core/jasmine.css"
+
+    "exportsOverride": {
+        "angular-ui": {
+            "js": "build/angular-ui.js",
+            "css": "build/angular-ui.css"
+        },
+        "bootstrap": {
+            "img": "img/*.png",
+            "js": [
+                "docs/assets/js/bootstrap.js"
+            ],
+            "less": "less/*.less"
+        },
+        "bootstrap-select": {
+            "js": "bootstrap-select.js",
+            "css": "bootstrap-select.css"
+        },
+        "bootstrap-clickover": {
+            "js": "js/bootstrap-clickover.js"
+        },
+        "jqgrid": {
+            "js": "js/*.js",
+            "js/i18n": "js/i18n/*.js",
+            "js/plugins": "plugins/*.js",
+            "css": "css/**/*.css",
+            "css/plugins": "plugins/*.css"
+        },
+        "select2-bootstrap-css": {
+          "css": "select2-bootstrap.css"
+        },
+        "jasmine": {
+            "js": [
+                "lib/jasmine-core/jasmine.js",
+                "lib/jasmine-core/jasmine-html.js"
+            ],
+            "css": "lib/jasmine-core/jasmine.css"
+        }
     }
-  }
 }
