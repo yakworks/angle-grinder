@@ -112,3 +112,12 @@ gridz.directive "searchButton", ->
       <i class="icon-search icon-white"></i> Search<span ng-show="searching">...</span>
     </button>
   """
+
+gridz.directive "resetSearchButton", ->
+  restrict: "E"
+  replace: true
+  template: """
+    <button type="button" ng-class="{disabled: searching}" class="btn">
+      <i class="icon-remove"></i> Reset<span ng-show="searching">...</span>
+    </button>
+  """
