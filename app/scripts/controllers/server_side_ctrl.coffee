@@ -52,5 +52,18 @@ class ServerSideCtrl
       label: "Paid"
     ]
 
+class SearchFormCtrl
+
+  @$inject = ["$scope", "$rootScope"]
+  constructor: ($scope, $rootScope) ->
+    $scope.search = {}
+
+    $scope.advancedSearch = (search) ->
+      $rootScope.$broadcast("searchUpdated", search)
+
+    $scope.reset = ->
+      $scope.search = {}
+
 angular.module("angleGrinder")
   .controller("ServerSideCtrl", ServerSideCtrl)
+  .controller("SearchFormCtrl", SearchFormCtrl)
