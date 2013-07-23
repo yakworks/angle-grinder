@@ -2,6 +2,10 @@ express = require("express")
 path = require("path")
 
 utils = require("./server/utils")
+
+Orgs = require("./server/data_orgs")
+orgs = new Orgs()
+
 Data = require("./server/data")
 data = new Data()
 
@@ -66,6 +70,9 @@ app.delete "/api/users/:id", (req, res) ->
   randomSleep()
   row = data.delete(req.params.id)
   res.send row
+
+app.get "/api/orgs.json", (req, res) ->
+  res.send orgs.getAll()
 
 port = 8000
 app.listen port, ->

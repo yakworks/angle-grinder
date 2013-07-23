@@ -59,14 +59,30 @@ describe "module: angleGrinder.gridz", ->
       expect(flattened.createdAt).toEqual target.createdAt
 
   describe "service: hasSearchFilters", ->
+    hasSearchFilters = null
+    beforeEach inject (_hasSearchFilters_) ->
+      hasSearchFilters = _hasSearchFilters_
+
     describe "if filters contain at least one non-empty field", ->
       filters = foo: "  ", bar: "test", biz: null
 
-      it "returns true", inject (hasSearchFilters) ->
+      it "returns true", ->
         expect(hasSearchFilters(filters)).toBeTruthy()
 
-    describe "if filters contains only empty fileds", ->
+    describe "if filters contain an array", ->
+      filters = select2Stuff: [foo: "bar"], bar: null
+
+      it "returns true", ->
+        expect(hasSearchFilters(filters)).toBeTruthy()
+
+    describe "if filters contain other complex object", ->
+      filters = date: new Date()
+
+      it "returns true", ->
+        expect(hasSearchFilters(filters)).toBeTruthy()
+
+    describe "if all filters are empty", ->
       filters = foo: "  ", bar: "", biz: null, baz: undefined
 
-      it "returns false", inject (hasSearchFilters) ->
+      it "returns false", ->
         expect(hasSearchFilters(filters)).toBeFalsy()

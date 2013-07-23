@@ -89,7 +89,13 @@ gridz.value "flatten", flatten
 # Retunrs true if `filters` contain at least one non-empty search field
 hasSearchFilters = (filters) ->
   for _, value of filters
-    return true if value? and value.trim() isnt ""
+    continue unless value?
+
+    if typeof value is "string"
+      return true if value.trim() isnt ""
+    else
+      return true
+
   return false
 
 gridz.value "hasSearchFilters", hasSearchFilters

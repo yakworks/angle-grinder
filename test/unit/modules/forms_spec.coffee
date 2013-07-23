@@ -1,14 +1,28 @@
 describe "module: angleGrinder.forms", ->
   beforeEach module("angleGrinder.forms")
 
+  $scope = null
+  $compile = null
+
+  beforeEach inject (_$rootScope_, _$compile_) ->
+    $scope = _$rootScope_.$new()
+    $compile = _$compile_
+
+  # Compile the template
+  # @param {String} template The string to compile
+  # @return {Object} A reference to the compiled template
+  compileTemplate = (template) ->
+    element = angular.element(template)
+    $compile(element)($scope)
+    $scope.$apply()
+    element
+
   describe "directive: match", ->
     element = null
-    $scope = null
     form = null
 
-    beforeEach inject ($rootScope, $compile) ->
-      $scope = $rootScope.$new()
-      element = angular.element """
+    beforeEach ->
+      element = compileTemplate """
         <form name="form">
           <input name="password" type="password"
                  ng-model="user.password" />
@@ -17,8 +31,6 @@ describe "module: angleGrinder.forms", ->
         </form>
       """
 
-      $compile(element)($scope)
-      $scope.$apply()
       form = $scope.form
 
     describe "when the fields are equal", ->
@@ -60,13 +72,10 @@ describe "module: angleGrinder.forms", ->
 
   describe "directive: fieldGroup", ->
     element = null
-    $scope = null
     form = null
 
-    beforeEach inject ($rootScope, $compile) ->
-      $scope = $rootScope.$new()
-
-      element = angular.element """
+    beforeEach ->
+      element = compileTemplate """
         <form name="form" novalidate>
           <div class="control-group"
                field-group for="email,password">
@@ -78,8 +87,6 @@ describe "module: angleGrinder.forms", ->
         </form>
       """
 
-      $compile(element)($scope)
-      $scope.$apply()
       form = $scope.form
 
     it "marks as invalid when the save button is clicked", ->
