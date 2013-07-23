@@ -101,7 +101,7 @@ describe "module: angleGrinder.gridz", ->
       $scope.$apply()
 
     it "renders the button", ->
-      expect(element).toBe "button[type=submit]"
+      expect(element).toBe "button[type=button]"
       expect(element).toHaveClass "btn"
       expect(element).toHaveText /Search/
 
@@ -117,6 +117,18 @@ describe "module: angleGrinder.gridz", ->
 
       it "changes the button label", ->
         expect(element).toHaveText "Search..."
+
+    describe "on click", ->
+      beforeEach ->
+        $scope.search = name: "find it"
+        $scope.advancedSearch = (params) ->
+        spyOn($scope, "advancedSearch")
+
+      it "calls #advancedSearch with valid params", ->
+        # When
+        element.click()
+        # Then
+        expect($scope.advancedSearch).toHaveBeenCalledWith name: "find it"
 
   describe "directive: resetSearchButton", ->
     $scope = null
@@ -148,3 +160,87 @@ describe "module: angleGrinder.gridz", ->
 
       it "changes the button label", ->
         expect(element).toHaveText "Reset..."
+
+    describe "on click", ->
+      beforeEach ->
+        $scope.resetSearch = ->
+        spyOn($scope, "resetSearch")
+
+      it "calls #resetSearch", ->
+        # When
+        element.click()
+        # Then
+        expect($scope.resetSearch).toHaveBeenCalled()
+
+  describe "directive: searchForm", ->
+    $scope = null
+    element = null
+
+    beforeEach inject ($rootScope, $compile) ->
+      $scope = $rootScope.$new()
+      element = angular.element """
+        <form name="searchForm" search-form>
+          <input type="text" name="name" ng-model="search.name" />
+
+          <search-button id="search"></search-button>
+          <reset-search-button id="reset"></reset-search-button>
+        </form>
+      """
+
+      $compile(element)($scope)
+      $scope.$apply()
+
+    describe "on submit button click", ->
+      $searchButton = null
+      beforeEach ->
+        $searchButton = element.find("button")
+        $scope.$apply -> $scope.searchForm.name.$setViewValue "find me"
+
+      it "calls #advancedSearch", ->
+        # Given
+        spyOn($scope, "advancedSearch")
+        # When
+        $searchButton.click()
+        # Then
+        expect($scope.advancedSearch).toHaveBeenCalledWith name: "find me"
+
+      it "disables the submit button", ->
+        # When
+        $searchButton.click()
+        # Then
+        expect($searchButton).toHaveClass "disabled"
+
+      it "triggers the grid reload with the valid params", inject ($rootScope) ->
+        # Given
+        spyOn($rootScope, "$broadcast")
+        # when
+        $searchButton.click()
+        # Then
+        expect($rootScope.$broadcast).toHaveBeenCalledWith "searchUpdated", name: "find me"
+
+    describe "on reset button click", ->
+      $resetButton = null
+      beforeEach ->
+        $resetButton = element.find("button#reset")
+
+      it "calls #resetSearch", ->
+        # Given
+        spyOn($scope, "resetSearch")
+        # When
+        $resetButton.click()
+        # Then
+        expect($scope.resetSearch).toHaveBeenCalled()
+
+      it "disables the reset button", ->
+        # When
+        $resetButton.click()
+        # Then
+        expect($resetButton).toHaveClass "disabled"
+
+      it "triggers the grid reload with empty params", inject ($rootScope) ->
+        # Given
+        spyOn($rootScope, "$broadcast")
+        # when
+        $resetButton.click()
+        # Then
+        expect($rootScope.$broadcast).toHaveBeenCalledWith "searchUpdated", { }

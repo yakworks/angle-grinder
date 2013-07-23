@@ -1,9 +1,8 @@
 <div class="well">
-  <form name="searchForm" class="form-horizontal form-multi-column no-margin" ng-submit="advancedSearch(search)">
-    <p>{{searchForm}}</p>
+  <form search-form class="form-horizontal form-multi-column no-margin">
 
     <div class="row-fluid">
-      <div class="control-group span6" >
+      <div class="control-group span6">
         <label class="control-label" >Org</label>
         <div class="controls">
           <div class="input-append">
@@ -32,7 +31,7 @@
 
     <div class="pull-right">
       <search-button></search-button>
-      <reset-search-button ng-click="reset()"></reset-search-button>
+      <reset-search-button></reset-search-button>
     </div>
   </form>
 </div>

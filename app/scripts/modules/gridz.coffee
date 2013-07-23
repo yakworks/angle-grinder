@@ -108,7 +108,7 @@ gridz.directive "searchButton", ->
   restrict: "E"
   replace: true
   template: """
-    <button type="submit" ng-class="{disabled: searching}" class="btn btn-info">
+    <button type="button" ng-click="advancedSearch(search)" ng-class="{disabled: searching}" class="btn btn-info">
       <i class="icon-search icon-white"></i> Search<span ng-show="searching">...</span>
     </button>
   """
@@ -117,7 +117,29 @@ gridz.directive "resetSearchButton", ->
   restrict: "E"
   replace: true
   template: """
-    <button type="button" ng-class="{disabled: searching}" class="btn">
+    <button type="button" ng-click="resetSearch()" ng-class="{disabled: searching}" class="btn">
       <i class="icon-remove"></i> Reset<span ng-show="searching">...</span>
     </button>
   """
+
+gridz.directive "searchForm", ["$rootScope", ($rootScope) ->
+  restrict: "A"
+  scope: false
+  link: ($scope, element, attrs) ->
+    $scope.searching = false
+    $scope.search = {}
+
+    # Trigger search action for the grid
+    $scope.advancedSearch = (search) ->
+      $scope.searching = true
+      $rootScope.$broadcast "searchUpdated", search
+
+    # Listen to grid load complete action
+    $scope.$on "gridzLoadComplete", ->
+      $scope.searching = false
+
+    # Reset the search form and trigger grid reload
+    $scope.resetSearch = ->
+      $scope.search = {}
+      $scope.advancedSearch($scope.search)
+]

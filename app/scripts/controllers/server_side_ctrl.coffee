@@ -57,8 +57,8 @@ class ServerSideCtrl
 class SearchFormCtrl
   @$inject = ["$scope", "$rootScope", "$element"]
   constructor: ($scope, $rootScope, $element) ->
-    $scope.openOrgSelect = ->
-      $element.find("#orgSelect2").select2("open")
+    # Open the select2 component
+    $scope.openOrgSelect = -> $element.find("#orgSelect2").select2("open")
 
     $scope.orgSelectConfig =
       width: "resolve"
@@ -83,22 +83,13 @@ class SearchFormCtrl
         """
         <table class="table table-condensed" style="margin-bottom:0">
           <tr>
-            <td style="width:60px;border-top:none">#{item.num}
-            </td><td style="border-top:none">#{item.name}</td>
+            <td style="width:60px;border-top:none">#{item.num}</td>
+            <td style="border-top:none">#{item.name}</td>
           </tr>
         <table>
         """
       formatSelection: (item) -> item.name
       escapeMarkup: (m) -> m
-
-    $scope.search = {}
-
-    $scope.advancedSearch = (search) ->
-      $rootScope.$broadcast("searchUpdated", search)
-
-    $scope.reset = ->
-      $scope.search = {}
-      $scope.advancedSearch($scope.search)
 
 angular.module("angleGrinder")
   .controller("ServerSideCtrl", ServerSideCtrl)
