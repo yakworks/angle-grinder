@@ -1,9 +1,8 @@
-<p>{{search | json}}</p>
-
 <div class="well">
   <form name="searchForm" class="form-horizontal form-multi-column no-margin" ng-submit="advancedSearch(search)">
-    <div class="row-fluid">
+    <p>{{searchForm}}</p>
 
+    <div class="row-fluid">
       <div class="control-group span6" >
         <label class="control-label" >Org</label>
         <div class="controls">
@@ -32,11 +31,9 @@
     </div>
 
     <div class="pull-right">
-      <button type="submit" ng-class="{ disabled: searching }" class="btn btn-info">
-        <i class="icon-search icon-white"></i>Search
-      </button>
-      <button type="button" class="btn" ng-click="reset()">
-        <i class="icon-remove"></i>Reset
+      <search-button></search-button>
+      <button type="button" ng-class="{disabled: searching}" class="btn" ng-click="reset()">
+        <i class="icon-remove"></i> Reset
       </button>
     </div>
   </form>

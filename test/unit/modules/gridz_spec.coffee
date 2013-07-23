@@ -86,3 +86,34 @@ describe "module: angleGrinder.gridz", ->
 
       it "returns false", ->
         expect(hasSearchFilters(filters)).toBeFalsy()
+
+  describe "directive: searchButton", ->
+    $scope = null
+    element = null
+
+    beforeEach inject ($rootScope, $compile) ->
+      $scope = $rootScope.$new()
+      element = angular.element """
+        <search-button></search-button>
+      """
+
+      $compile(element)($scope)
+      $scope.$apply()
+
+    it "renders the button", ->
+      expect(element).toBe "button[type=submit]"
+      expect(element).toHaveClass "btn"
+      expect(element).toHaveText /Search/
+
+    it "is enabled", ->
+      expect(element).not.toHaveClass "disabled"
+
+    describe "when the search request is in progress", ->
+      beforeEach ->
+        $scope.$apply -> $scope.searching = true
+
+      it "is disabled", ->
+        expect(element).toHaveClass "disabled"
+
+      it "changes the button label", ->
+        expect(element).toHaveText "Search..."
