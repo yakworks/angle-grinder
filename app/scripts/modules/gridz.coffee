@@ -36,6 +36,10 @@ gridz.directive "agGrid", [
         event.preventDefault()
         $scope.$apply -> $scope.deleteItem id
 
+      # emit `gridzLoadComplete` event
+      $grid.on "jqGridAfterLoadComplete", ->
+        $scope.$broadcast "gridzLoadComplete"
+
       # catch broadcast event after save. This will need to change
       $scope.$on "itemUpdated", (event, item) ->
         if $grid.jqGrid("getInd", item.id)
@@ -99,3 +103,21 @@ hasSearchFilters = (filters) ->
   return false
 
 gridz.value "hasSearchFilters", hasSearchFilters
+
+gridz.directive "searchButton", ->
+  restrict: "E"
+  replace: true
+  template: """
+    <button type="submit" ng-class="{disabled: searching}" class="btn btn-info">
+      <i class="icon-search icon-white"></i> Search<span ng-show="searching">...</span>
+    </button>
+  """
+
+gridz.directive "resetSearchButton", ->
+  restrict: "E"
+  replace: true
+  template: """
+    <button type="button" ng-class="{disabled: searching}" class="btn">
+      <i class="icon-remove"></i> Reset<span ng-show="searching">...</span>
+    </button>
+  """
