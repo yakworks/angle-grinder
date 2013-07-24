@@ -52,7 +52,7 @@
 
       <div class="controls">
         <input type="password" name="password" placeholder="Enter Password"
-               ng-model="item.password" autofocus required ng-minlength="6" />
+               ng-model="item.password" autofocus ng-required="item.newRecord()" ng-minlength="6" />
         <validation-errors for="password"
                           required="This field is required"
                           minlength="Password must be at least 6 characters." />
@@ -61,7 +61,7 @@
       <div class="controls">
         <input type="password" name="passwordConfirmation" placeholder="Enter Password Confirmation"
                ng-model="item.passwordConfirmation" autofocus
-               required match="item.password" ng-minlength="6" />
+               ng-required="item.newRecord()" match="item.password" ng-minlength="6" />
         <validation-errors for="passwordConfirmation"
                           required="This field is required"
                           minlength="Password must be at least 6 characters."

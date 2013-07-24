@@ -39,6 +39,20 @@ describe "module: angleGrinder.resources", ->
         it "returns false", ->
           expect(user.persisted()).toBeFalsy()
 
+    describe "#newRecord", ->
+      user = null
+      beforeEach -> user = new Users()
+
+      describe "when the record is not persisted", ->
+        it "returns true", ->
+          expect(user.newRecord()).toBeTruthy()
+
+      describe "when the record is persisted", ->
+        beforeEach -> user.id = 234
+
+        it "returns false", ->
+          expect(user.newRecord()).toBeFalsy()
+
     describe "#save", ->
       user = null
       onSuccess = null
