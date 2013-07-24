@@ -66,7 +66,10 @@
                 </li>
             </ul>
             <ul class="nav pull-right">
-                <li><a title="search screen" ng-click="showSearchForm = !showSearchForm"><i class="icon-search"></i></a>
+                <li>
+                    <a title="search screen" ng-click="showSearchForm = !showSearchForm" href="">
+                        <i class="icon-search"></i>
+                    </a>
                 </li>
             </ul>
 
