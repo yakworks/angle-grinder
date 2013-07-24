@@ -33,6 +33,7 @@ app = angular.module "admin", [
   "angleGrinder.forms"
   "angleGrinder.alerts"
   "angleGrinder.spinner"
+  "ui.select2"
 ]
 
 # Configure the context path

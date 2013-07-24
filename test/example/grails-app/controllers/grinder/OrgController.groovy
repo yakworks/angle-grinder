@@ -2,11 +2,6 @@ package grinder
 
 import grails.converters.JSON
 
-import grails.plugin.dao.GormDaoSupport
-import grails.plugin.dao.DomainException
-import grails.plugin.dao.DaoUtil
-import grails.plugin.dao.DaoMessage
-
 class OrgController extends BaseDomainController {
 
     def domainClass = Org
@@ -20,8 +15,8 @@ class OrgController extends BaseDomainController {
         def datalist = crit.list(max: pager.max, offset: pager.offset) {
             if (qslike && qslike != '*%') {
                 or {
-                    like 'name', qslike
-                    like 'num', qslike
+                    ilike 'name', qslike
+                    ilike 'num', qslike
                 }
             }
 

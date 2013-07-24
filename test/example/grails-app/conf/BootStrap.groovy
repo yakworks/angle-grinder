@@ -1,4 +1,4 @@
-import grinder.*
+import grinder.Org
 
 class BootStrap {
 
@@ -17,14 +17,18 @@ class BootStrap {
         def thirdOrg = new Org(id: 3, name: "Third Org", num: "num 3")
         thirdOrg.save(flush: true)
 
+        def orgs = [firstOrg, secondOrg, thirdOrg]
+
         for (i in 0..100) {
+            def n = generator.nextInt(orgs.size())
+            def randomOrg = orgs[n]
 
             def props = [
                     login: "login-$i",
                     password: "secretStuff",
                     repassword: "secretStuff",
                     inactive: generator.nextDouble() > 0.5,
-                    orgId: firstOrg.id,
+                    orgId: randomOrg.id,
                     contact: [
                             firstName: fakerService.firstName(),
                             lastName: fakerService.lastName(),
