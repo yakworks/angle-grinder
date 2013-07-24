@@ -183,7 +183,7 @@ forms.directive "fieldGroup", ->
     $scope.$on "saving", ->
       displayErrors()
 
-forms.directive "validationError", [
+forms.directive "validationErrors", [
   "validationMessages", (validationMessages) ->
     restrict: "E"
     require: "^form"

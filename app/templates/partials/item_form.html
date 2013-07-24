@@ -14,7 +14,7 @@
       <div class="controls">
         <input type="text" name="customerName" placeholder="Enter Customer Name"
                ng-model="item.customer.name" autofocus required />
-        <validation-error for="customerName" />
+        <validation-errors for="customerName" />
       </div>
     </div>
 
@@ -42,7 +42,7 @@
       <div class="controls">
         <input type="password" name="password" placeholder="Enter Password"
                ng-model="item.password" autofocus required ng-minlength="6" />
-        <validation-error for="password"
+        <validation-errors for="password"
                           required="This field is required"
                           minlength="Password must be at least 6 characters." />
       </div>
@@ -51,7 +51,7 @@
         <input type="password" name="passwordConfirmation" placeholder="Enter Password Confirmation"
                ng-model="item.passwordConfirmation" autofocus
                required match="item.password" ng-minlength="6" />
-        <validation-error for="passwordConfirmation"
+        <validation-errors for="passwordConfirmation"
                           required="This field is required"
                           minlength="Password must be at least 6 characters."
                           mismatch="The password does not match the confirmation" />

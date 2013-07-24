@@ -134,14 +134,14 @@ describe "module: angleGrinder.forms", ->
         $scope.$apply()
         form = $scope.form
 
-    errorMessage = -> element.find("validation-error[for=password] span").text()
+    errorMessage = -> element.find("validation-errors[for=password] span").text()
 
     describe "when the custom validation message is provided", ->
       comlileTemplate """
         <form name="form" novalidate>
           <input type="password" name="password"
                  ng-model="user.password" required />
-          <validation-error for="password"
+          <validation-errors for="password"
                             required="Please fill this field" />
         </form>
       """
@@ -172,7 +172,7 @@ describe "module: angleGrinder.forms", ->
         <form name="form" novalidate>
           <input type="password" name="password"
                  ng-model="user.password" required />
-          <validation-error for="password" />
+          <validation-errors for="password" />
         </form>
       """
 
@@ -192,7 +192,7 @@ describe "module: angleGrinder.forms", ->
           <input type="password" name="passwordConfirmation"
                  ng-model="user.passwordConfirmation"
                  match="user.password" ng-minlength="6" />
-            <validation-error for="passwordConfirmation" minlength="Too short" />
+            <validation-errors for="passwordConfirmation" minlength="Too short" />
         </form>
       """
 
@@ -202,7 +202,7 @@ describe "module: angleGrinder.forms", ->
           form.passwordConfirmation.$setViewValue "pass"
 
       it "displays all errors", ->
-        $errors = element.find("validation-error[for=passwordConfirmation]")
+        $errors = element.find("validation-errors[for=passwordConfirmation]")
 
         expect($errors.find("span").length).toEqual 2
 

@@ -15,7 +15,7 @@
       <div class="controls">
         <input type="text" name="name" placeholder="Enter Name"
                ng-model="item.name" autofocus required />
-        <validation-error for="name" required="This field is required" />
+        <validation-errors for="name" required="This field is required" />
       </div>
     </div>
 
@@ -25,7 +25,7 @@
       <div class="controls">
         <input type="text" name="login" placeholder="Enter Login"
                ng-model="item.login" autofocus required />
-        <validation-error for="login" required="This field is required" />
+        <validation-errors for="login" required="This field is required" />
       </div>
     </div>
 
@@ -44,6 +44,28 @@
       <div class="controls">
         <input type="text" name="birthday" placeholder="Birthday"
                ng-model="item.birthday" />
+      </div>
+    </div>
+
+    <div field-group for="password,passwordConfirmation">
+      <label class="control-label">Password</label>
+
+      <div class="controls">
+        <input type="password" name="password" placeholder="Enter Password"
+               ng-model="item.password" autofocus required ng-minlength="6" />
+        <validation-errors for="password"
+                          required="This field is required"
+                          minlength="Password must be at least 6 characters." />
+      </div>
+
+      <div class="controls">
+        <input type="password" name="passwordConfirmation" placeholder="Enter Password Confirmation"
+               ng-model="item.passwordConfirmation" autofocus
+               required match="item.password" ng-minlength="6" />
+        <validation-errors for="passwordConfirmation"
+                          required="This field is required"
+                          minlength="Password must be at least 6 characters."
+                          mismatch="The password does not match the confirmation" />
       </div>
     </div>
 
