@@ -17,6 +17,9 @@ resources.factory "Grails", [
       # Retunrs true if the record is persisted (has an id)
       persisted: -> @id?
 
+      # Return true if the record is not persisted
+      newRecord: -> not @persisted()
+
       # Backbone style save() that inserts or updated the record
       # based on the presence of an id.
       save: (options) ->

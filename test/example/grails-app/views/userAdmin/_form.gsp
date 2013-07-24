@@ -55,14 +55,16 @@
             <div class="controls">
                 <input type="password" placeholder="${ag.label(code: 'user.password')}"
                        name="password"
-                       ng-model="item.password" required />
+                       ng-model="item.password"
+                       ng-required="item.newRecord()" ng-minlength="6" />
                 <validation-error for="password" />
             </div>
 
             <div class="controls" style="margin-top:5px">
                 <input type="password" placeholder="${ag.label(code: 'user.repassword')}"
                        name="repassword"
-                       ng-model="item.repassword" required match="item.password" />
+                       ng-model="item.repassword"
+                       ng-required="item.newRecord()" ng-minlength="6" match="item.password" />
                 <validation-error for="repassword" />
             </div>
         </div>
