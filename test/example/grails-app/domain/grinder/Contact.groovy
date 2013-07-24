@@ -31,6 +31,7 @@ class Contact {
 
     //static hasOne = [user:User]
     Org  org
+    
 
     def isUserEnabled() {
         return (user && user.enabled) ? true : false

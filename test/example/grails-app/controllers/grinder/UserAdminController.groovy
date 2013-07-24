@@ -41,20 +41,23 @@ class UserAdminController extends BaseDomainController {
                     ilike 'contact.email', qslike
                 }
             }
+            if(filters?.org){
+                'in' ('contact.org.id', filters.org.collect {it.id as Long })
+            }
 
             //XXX ken refactor this part so it works with you helpers
             def fcontact = filters?.contact
             if (fcontact?.name) {
                 or {
-                    like 'contact.lastName', fcontact.name
-                    like 'contact.firstName', fcontact.name
+                    ilike 'contact.lastName', fcontact.name
+                    ilike 'contact.firstName', fcontact.name
                 }
             }
             if (fcontact?.email)
-                like 'contact.email', fcontact.email
+                ilike 'contact.email', fcontact.email
 
             if (filters?.login)
-                like 'login', filters.login
+                ilike 'login', filters.login
 
             if (params.sort)
                 order(params.sort, params.order)

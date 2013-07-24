@@ -29,9 +29,6 @@ grails {
                 // specify dependencies here under either "build", "compile", "runtime", "test" or "provided" scopes eg.
                 build "commons-io:commons-io:2.3"
             }
-            //TODO later -- we need to look at upgrades for gorm-labs and mail
-            // gorm-labs there is some reason why we didn"t upgrade, probably to do with making the applet work.
-            // mail, we need to rewrite our mail to work with the new classes, they are not compatible.
             plugins {
                 // grails standard
                 runtime ":hibernate:$grailsVersion"
