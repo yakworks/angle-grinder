@@ -170,6 +170,16 @@ module.exports = (grunt) ->
           src: [
             "**/images/**/*.{png,jpg,jpeg}"
           ]
+        ,
+          # another workaround for missing images
+          # this time for slect2 component
+          expand: true
+          flatten: true
+          cwd: "bower_components/select2"
+          dest: "<%= appConfig.dist %>/styles"
+          src: [
+            "**/*.{png,jpg,jpeg,gif}"
+          ]
         ]
 
     coffeelint:
