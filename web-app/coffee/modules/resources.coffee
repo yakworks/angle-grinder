@@ -1,4 +1,4 @@
-resources = angular.module("admin.resources", ["ngResource"])
+resources = angular.module("angleGrinder.resources", ["ngResource"])
 
 # This module defines the resource mappings required by Angular JS to map to a
 # standard Grails CRUD URL scheme that uses `"/$controller/$action?/$id?"`.

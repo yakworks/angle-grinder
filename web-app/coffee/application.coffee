@@ -1,12 +1,13 @@
 # The main scaffolding module
-app = angular.module "admin", [
-  "admin.resources"
+app = angular.module "angleGrinder", [
   "angleGrinder.common"
   "angleGrinder.gridz"
   "angleGrinder.forms"
   "angleGrinder.alerts"
   "angleGrinder.spinner"
   "ui.select2"
+
+  "angleGrinder.resources"
 ]
 
 # Configure the context path

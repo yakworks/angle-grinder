@@ -81,6 +81,6 @@ class UsersSearchFormCtrl
       formatSelection: (item) -> item.name
       escapeMarkup: (m) -> m
 
-angular.module("admin")
+angular.module("angleGrinder")
   .controller("UsersListCtrl", UsersListCtrl)
   .controller("SearchFormCtrl", UsersSearchFormCtrl)
