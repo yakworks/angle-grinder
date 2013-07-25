@@ -1,7 +1,7 @@
 class UsersListCtrl
 
-  @$inject = ["$scope", "$log", "confirmationDialog", "editDialog", "Grails", "pathWithContext"]
-  constructor: ($scope, $log, confirmationDialog, editDialog, Grails, pathWithContext) ->
+  @$inject = ["$scope", "$log", "confirmationDialog", "editDialog", "Resource", "pathWithContext"]
+  constructor: ($scope, $log, confirmationDialog, editDialog, Resource, pathWithContext) ->
     colModel = [
       { name: "id", label: "ID", width: 30 }
       { name: "contact.name", label: "Contact Name", width: 100, formatter: "editActionLink" }
@@ -25,20 +25,20 @@ class UsersListCtrl
     # Displays a form for creating a new user
     $scope.createDialog = ->
       # TODO workaround for missing Org
-      user = new Grails(orgId: 1)
+      user = new Resource(orgId: 1)
 
       editDialog.open(pathWithContext("userAdmin/formTemplate"), user)
 
     # Displays a form for editing an exiting user
     $scope.editDialog = (id) ->
-      Grails.get { id: id }, (user) ->
+      Resource.get { id: id }, (user) ->
         editDialog.open(pathWithContext("/userAdmin/formTemplate"), user)
 
     $scope.deleteItem = (id) ->
       confirmationDialog.open().then (confirmed) ->
         return unless confirmed
 
-        item = new Grails(id: id)
+        item = new Resource(id: id)
         item.delete
           success: (response) -> $scope.$broadcast "itemDeleted", item
           error: (response) -> $log.error "Something went wront", response
