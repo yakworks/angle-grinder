@@ -42,3 +42,11 @@ app.config [
     contextPath = $("body").data("context-path")
     pathWithContextProvider.setContextPath(contextPath) if contextPath?
 ]
+
+# Catch all jquery xhr errors
+app.run [
+  "$log", "alerts", ($log, alerts) ->
+    $(document).ajaxError (event, jqxhr, settings, exception) ->
+      $log.error("Network error:", event, jqxhr, settings, exception)
+      alerts.error(exception)
+]
