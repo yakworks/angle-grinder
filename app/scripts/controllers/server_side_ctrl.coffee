@@ -57,9 +57,6 @@ class ServerSideCtrl
 class SearchFormCtrl
   @$inject = ["$scope", "$rootScope", "$element"]
   constructor: ($scope, $rootScope, $element) ->
-    # Open the select2 component
-    $scope.openOrgSelect = -> $element.find("#orgSelect2").select2("open")
-
     $scope.orgSelectConfig =
       width: "resolve"
       dropdownCss: width: "400px"
@@ -74,22 +71,25 @@ class SearchFormCtrl
           page: page
           sort: "name"
           order: "asc"
-        results: (res, page) ->
-          more = page < res.total
-          list = $.map res.rows, (n) ->
+        results: (result, page) ->
+          more = page < result.total
+          list = _.map result.rows, (n) ->
             id: n.id, num: n.num, name: n.name
           results: list, more: more
-      formatResult: (item) ->
-        """
-        <table class="table table-condensed" style="margin-bottom:0">
-          <tr>
-            <td style="width:60px;border-top:none">#{item.num}</td>
-            <td style="border-top:none">#{item.name}</td>
-          </tr>
-        <table>
-        """
-      formatSelection: (item) -> item.name
-      escapeMarkup: (m) -> m
+      formatResult: @formatResult
+      formatSelection: @formatSelection
+
+  formatResult: (item) ->
+    """
+    <table class="table table-condensed" style="margin-bottom:0">
+      <tr>
+        <td style="width:60px;border-top:none">#{item.num}</td>
+        <td style="border-top:none">#{item.name}</td>
+      </tr>
+    <table>
+    """
+
+  formatSelection: (item) -> item.name
 
 angular.module("angleGrinder")
   .controller("ServerSideCtrl", ServerSideCtrl)

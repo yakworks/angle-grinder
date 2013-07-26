@@ -27,7 +27,7 @@ class Alerts
 
   # Disposes a message with the given id
   dispose: (id) ->
-    at = @messages.map((message) -> message.id).indexOf(id)
+    at = _(@messages.map((message) -> message.id)).indexOf(id)
     @messages.splice(at, 1)
 
   # Dispose the message after the given time in milliseconds
@@ -52,7 +52,6 @@ alerts.controller "alerts", AlertsCtrl
 
 alerts.directive "alerts", ->
   restrict: "E"
-  transclude: true
   replace: true
 
   template: """

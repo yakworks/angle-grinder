@@ -68,27 +68,26 @@ gridz.directive "agGrid", [
     link: link
 ]
 
-flatten = (target, opts = { delimiter: "." }) ->
+# Takes a nested Javascript object and flatten it.
+# see: https://github.com/hughsk/flat
+gridz.value "flatten", (target, opts = delimiter: ".") ->
   delimiter = opts.delimiter
 
   getKey = (key, prev) ->
-    (if prev then prev + delimiter + key else key)
+    if prev then prev + delimiter + key else key
 
   step = (object, prev) ->
-    Object.keys(object).forEach (key) ->
-      isarray = opts.safe and Array.isArray(object[key])
+    angular.forEach Object.keys(object), (key) ->
+      isArray = opts.safe and object[key] instanceof Array
       type = Object::toString.call(object[key])
-      isobject = (type is "[object Object]" or type is "[object Array]")
-      return step(object[key], getKey(key, prev)) if not isarray and isobject
+      isObject = type is "[object Object]" or type is "[object Array]"
+
+      return step(object[key], getKey(key, prev)) if not isArray and isObject
       output[getKey(key, prev)] = object[key]
 
   output = {}
   step target
   output
-
-# Takes a nested Javascript object and flatten it.
-# see: https://github.com/hughsk/flat
-gridz.value "flatten", flatten
 
 # Retunrs true if `filters` contain at least one non-empty search field
 hasSearchFilters = (filters) ->
@@ -96,7 +95,7 @@ hasSearchFilters = (filters) ->
     continue unless value?
 
     if typeof value is "string"
-      return true if value.trim() isnt ""
+      return true if $.trim(value) isnt ""
     else
       return true
 
@@ -143,3 +142,25 @@ gridz.directive "searchForm", ["$rootScope", ($rootScope) ->
       $scope.search = {}
       $scope.advancedSearch($scope.search)
 ]
+
+# Creates select2 component along with the "show" button
+# Options:
+#   `select-options` takes select2 options from the controller
+#   `ng-model` takes a model
+gridz.directive "agSelect2", ->
+  restrict: "E"
+  replace: true
+  scope:
+    selectOptions: "="
+    ngModel: "="
+  link: (scope, element) ->
+    element.find("button").click ->
+      element.find("input").select2 "open"
+  template: """
+    <div>
+      <input ui-select2="selectOptions" multiple ng-model="ngModel" type="text">
+      <button class="btn" type="button">
+        <i class="icon-search"></i>
+      </button>
+    </div>
+  """

@@ -244,3 +244,54 @@ describe "module: angleGrinder.gridz", ->
         $resetButton.click()
         # Then
         expect($rootScope.$broadcast).toHaveBeenCalledWith "searchUpdated", { }
+
+  describe "directive: agSelect2", ->
+    $scope = null
+    element = null
+
+    compileTemplate = (template) ->
+      beforeEach inject ($rootScope, $compile) ->
+        $scope = $rootScope.$new()
+        element = angular.element(template)
+
+        $compile(element)($scope)
+        $scope.$apply()
+
+    compileTemplate """
+      <ag-select2 select-options="selectOptions" ng-model="search.organization" />
+    """
+
+    it "generates select2 component along with show button", ->
+      expect(element).toContain "input[type=text]"
+      expect(element).toContain "button[type=button]"
+
+    describe "scope", ->
+      $directiveScope = null
+
+      beforeEach ->
+        $scope.$apply ->
+          $scope.foo = "bar"
+          $scope.selectOptions = foo: "bar"
+
+        $directiveScope = element.scope()
+
+      it "isolates the scope", ->
+        expect($directiveScope).not.toBe $scope
+        expect($directiveScope.foo).not.toBeEqualToObject "bar"
+
+      it "takes the select2 options from the parent scope", ->
+        expect($directiveScope.selectOptions).toBeDefined()
+        expect($directiveScope.selectOptions).toBeEqualToObject foo: "bar"
+
+      it "takes a model from the parent scope", ->
+        $scope.$apply -> $scope.search = organization: "the org name"
+
+        expect($directiveScope.ngModel).toBeDefined()
+        expect($directiveScope.ngModel).toEqual "the org name"
+        expect(element.find("input")).toHaveValue "the org name"
+
+    describe "the open select button", ->
+      it "opens the select component", ->
+        spy = spyOn($.fn, "select2")
+        element.find("button").click()
+        expect(spy).toHaveBeenCalledWith("open")

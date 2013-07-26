@@ -1,14 +1,15 @@
 common = angular.module("angleGrinder.common", [])
 
 ###
-  Sample context path configuration
-  ```
-  app.config [
-  "pathWithContextProvider", (pathWithContextProvider) ->
-    contextPath = $("body").data("context-path")
-    pathWithContextProvider.setContextPath(contextPath) if contextPath?
-  ]
-  ```
+Sample context path configuration:
+
+```
+app.config [
+"pathWithContextProvider", (pathWithContextProvider) ->
+  contextPath = $("body").data("context-path")
+  pathWithContextProvider.setContextPath(contextPath) if contextPath?
+]
+```
 ###
 class PathWithContextProvider
   constructor: ->
