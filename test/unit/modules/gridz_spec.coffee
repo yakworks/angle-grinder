@@ -294,4 +294,4 @@ describe "module: angleGrinder.gridz", ->
       it "opens the select component", ->
         spy = spyOn($.fn, "select2")
         element.find("button").click()
-        expect(spy).toHaveBeenCalledWith("open")
+        expect(spy).toHaveBeenCalledWith "open"

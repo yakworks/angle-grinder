@@ -8,6 +8,15 @@
         <div class="controls">
           <div class="input-append">
 
+            <script type="text/ng-template" id="org_select_item_template.html">
+              <table class="table table-condensed" style="margin-bottom:0">
+                <tr>
+                  <td style="width:60px;border-top:none">{{item.num}}</td>
+                  <td style="border-top:none">{{item.name}}</td>
+                </tr>
+              </table>
+            </script>
+
             <ag-select2 select-options="orgSelectConfig"
                         ng-model="search.org" />
 

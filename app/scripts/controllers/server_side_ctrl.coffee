@@ -55,8 +55,8 @@ class ServerSideCtrl
     ]
 
 class SearchFormCtrl
-  @$inject = ["$scope", "$rootScope", "$compile"]
-  constructor: ($scope, @$rootScope, @$compile) ->
+  @$inject = ["$scope", "$rootScope", "$templateCache", "$compile"]
+  constructor: ($scope, @$rootScope, @$templateCache, @$compile) ->
     $scope.orgSelectConfig =
       width: "resolve"
       dropdownCss: width: "400px"
@@ -80,14 +80,8 @@ class SearchFormCtrl
       formatSelection: @formatSelection
 
   formatResult: (item) =>
-    element = angular.element """
-      <table class="table table-condensed" style="margin-bottom:0">
-        <tr>
-          <td style="width:60px;border-top:none">{{item.num}}</td>
-          <td style="border-top:none">{{item.name}}</td>
-        </tr>
-      <table>
-    """
+    template = @$templateCache.get("org_select_item_template.html")
+    element = angular.element(template)
 
     scope = @$rootScope.$new()
     scope.item = item
