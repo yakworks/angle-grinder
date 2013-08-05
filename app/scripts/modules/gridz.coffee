@@ -168,7 +168,7 @@ gridz.directive "agSelect2", ["$rootScope", "$compile", ($rootScope, $compile) -
 
     # pre linking function
     pre: ($scope, $element, attrs) ->
-      options = angular.copy $scope.selectOptions
+      options = angular.copy $scope.selectOptions or {}
       $scope.options = options
 
       # set the default `minimumInputLength`
@@ -176,6 +176,19 @@ gridz.directive "agSelect2", ["$rootScope", "$compile", ($rootScope, $compile) -
 
       # set the default `width
       options.width or= "resolve"
+
+      # create `ajax`
+      if not options.ajax? and attrs.selectAjaxUrl?
+        options.ajax =
+          url: attrs.selectAjaxUrl
+          quietMillis: 500 # Number of milliseconds to wait for the user to stop typing before issuing the ajax request
+          data: (term, page) ->
+            q: term # search term (query params)
+            max: 20, page: page
+            sort: "name", order: "asc"
+          results: (result, page) ->
+            more = page < result.total
+            results: result.rows, more: more
 
       # create `formatResult` function from the given template
       if resultTemplate?

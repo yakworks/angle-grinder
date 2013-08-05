@@ -57,22 +57,6 @@ class ServerSideCtrl
 class SearchFormCtrl
   @$inject = ["$scope"]
   constructor: ($scope) ->
-    $scope.orgSelectConfig =
-      ajax:
-        url: "/api/orgs.json"
-        quietMillis: 500 # Number of milliseconds to wait for the user to stop typing before issuing the ajax request
-        data: (term, page) ->
-          # query params go here
-          q: term # search term
-          max: 20
-          page: page
-          sort: "name"
-          order: "asc"
-        results: (result, page) ->
-          more = page < result.total
-          list = _.map result.rows, (n) ->
-            id: n.id, num: n.num, name: n.name
-          results: list, more: more
 
 angular.module("angleGrinder")
   .controller("ServerSideCtrl", ServerSideCtrl)
