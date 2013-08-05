@@ -252,6 +252,7 @@ describe "module: angleGrinder.gridz", ->
     compileTemplate = (template) ->
       beforeEach inject ($rootScope, $compile) ->
         $scope = $rootScope.$new()
+        $scope.selectOptions = {}
         element = angular.element(template)
 
         $compile(element)($scope)
@@ -293,5 +294,5 @@ describe "module: angleGrinder.gridz", ->
     describe "the open select button", ->
       it "opens the select component", ->
         spy = spyOn($.fn, "select2")
-        element.find("button").click()
+        element.find("button.open").click()
         expect(spy).toHaveBeenCalledWith "open"

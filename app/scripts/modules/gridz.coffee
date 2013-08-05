@@ -147,20 +147,58 @@ gridz.directive "searchForm", ["$rootScope", ($rootScope) ->
 # Options:
 #   `select-options` takes select2 options from the controller
 #   `ng-model` takes a model
-gridz.directive "agSelect2", ->
+gridz.directive "agSelect2", ["$rootScope", "$compile", ($rootScope, $compile) ->
   restrict: "E"
   replace: true
+  transclude: true
+
   scope:
     selectOptions: "="
     ngModel: "="
-  link: (scope, element) ->
-    element.find("button").click ->
-      element.find("input").select2 "open"
+
+  compile: ($element, attrs, transclude) ->
+    # find a template for the result item
+    resultTemplate = null
+    scope = $rootScope.$new()
+    transclude scope, (clone) ->
+      for element in clone
+        if element instanceof HTMLElement and element.getAttribute("ag-select2-result")?
+          resultTemplate = element.outerHTML
+          break
+
+    # pre linking function
+    pre: ($scope, $element, attrs) ->
+      options = angular.copy $scope.selectOptions
+      $scope.options = options
+
+      # set the default `minimumInputLength`
+      options.minimumInputLength or= 1
+
+      # set the default `width
+      options.width or= "resolve"
+
+      # create `formatResult` function from the given template
+      if resultTemplate?
+        options.formatResult or= (item) ->
+          scope = $scope.$new()
+          scope.item = item
+
+          resultElement = angular.element(resultTemplate)
+          $compile(resultElement)(scope)
+
+      # create default `formatSelection` method
+      options.formatSelection or= (item) -> item.name
+
+      # bind `click` event on the open button
+      $element.find("button.open").click ->
+        $element.find("input").select2 "open"
+
   template: """
     <div>
-      <input ui-select2="selectOptions" multiple ng-model="ngModel" type="text">
-      <button class="btn" type="button">
+      <input ui-select2="options" multiple ng-model="ngModel" type="text"/>
+      <button class="btn open" type="button">
         <i class="icon-search"></i>
       </button>
     </div>
   """
+]

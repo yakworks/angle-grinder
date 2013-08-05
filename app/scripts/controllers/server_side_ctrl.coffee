@@ -55,12 +55,9 @@ class ServerSideCtrl
     ]
 
 class SearchFormCtrl
-  @$inject = ["$scope", "$rootScope", "$templateCache", "$compile"]
-  constructor: ($scope, @$rootScope, @$templateCache, @$compile) ->
+  @$inject = ["$scope"]
+  constructor: ($scope) ->
     $scope.orgSelectConfig =
-      width: "resolve"
-      dropdownCss: width: "400px"
-      minimumInputLength: 1
       ajax:
         url: "/api/orgs.json"
         quietMillis: 500 # Number of milliseconds to wait for the user to stop typing before issuing the ajax request
@@ -76,18 +73,6 @@ class SearchFormCtrl
           list = _.map result.rows, (n) ->
             id: n.id, num: n.num, name: n.name
           results: list, more: more
-      formatResult: @formatResult
-      formatSelection: @formatSelection
-
-  formatResult: (item) =>
-    template = @$templateCache.get("org_select_item_template.html")
-    element = angular.element(template)
-
-    scope = @$rootScope.$new()
-    scope.item = item
-    @$compile(element)(scope)
-
-  formatSelection: (item) -> item.name
 
 angular.module("angleGrinder")
   .controller("ServerSideCtrl", ServerSideCtrl)
