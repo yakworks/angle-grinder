@@ -1,4 +1,4 @@
-gridz = angular.module("angleGrinder.gridz", [])
+gridz = angular.module("angleGrinder.gridz", ["ui.select2"])
 
 gridz.directive "agGrid", [
   "hasSearchFilters", (hasSearchFilters) ->

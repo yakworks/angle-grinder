@@ -8,7 +8,6 @@ app = angular.module("angleGrinder", [
   "angleGrinder.dataGenerator"
   "angleGrinder.resources"
   "angleGrinder.spinner"
-  "ui.select2"
 ])
 
 app.config [
