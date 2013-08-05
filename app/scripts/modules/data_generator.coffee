@@ -41,5 +41,5 @@ class SampleData
     rows
 
 dataGenerator.factory "sampleData", [
-  "random", (random) -> new SampleData(random)
+  "$injector", ($injector) -> $injector.instantiate(SampleData)
 ]
