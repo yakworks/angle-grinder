@@ -119,7 +119,7 @@ describe "module: angleGrinder.forms", ->
         $group = element.find(".control-group")
         expect($group).not.toHaveClass "erro"
 
-  describe "directive: validationMessage", ->
+  describe "directive: validationErrors", ->
     element = null
     $scope = null
     form = null

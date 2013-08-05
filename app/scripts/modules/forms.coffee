@@ -187,7 +187,7 @@ forms.directive "validationErrors", [
   "validationMessages", (validationMessages) ->
     restrict: "E"
     require: "^form"
-    transclude: false
+    replace: true
 
     link: ($scope, element, attrs, formCtrl) ->
       formName = formCtrl.$name
