@@ -70,7 +70,7 @@ describe "module: angleGrinder.forms", ->
         expect($input.hasClass("ng-invalid")).toBeTruthy()
         expect($input.hasClass("ng-invalid-mismatch")).toBeTruthy()
 
-  describe "directive: fieldGroup", ->
+  describe "directive: agFieldGroup", ->
     element = null
     form = null
 
@@ -78,7 +78,7 @@ describe "module: angleGrinder.forms", ->
       element = compileTemplate """
         <form name="form" novalidate>
           <div class="control-group"
-               field-group for="email,password">
+               ag-field-group for="email,password">
             <input type="text" name="email"
                    ng-model="user.email" required />
             <input type="password" name="password"
@@ -119,7 +119,7 @@ describe "module: angleGrinder.forms", ->
         $group = element.find(".control-group")
         expect($group).not.toHaveClass "erro"
 
-  describe "directive: validationErrors", ->
+  describe "directive: agValidationErrors", ->
     element = null
     $scope = null
     form = null
@@ -134,14 +134,14 @@ describe "module: angleGrinder.forms", ->
         $scope.$apply()
         form = $scope.form
 
-    errorMessage = -> element.find("validation-errors[for=password] span").text()
+    errorMessage = -> element.find("ag-validation-errors[for=password] span").text()
 
     describe "when the custom validation message is provided", ->
       comlileTemplate """
         <form name="form" novalidate>
           <input type="password" name="password"
                  ng-model="user.password" required />
-          <validation-errors for="password"
+          <ag-validation-errors for="password"
                             required="Please fill this field" />
         </form>
       """
@@ -172,7 +172,7 @@ describe "module: angleGrinder.forms", ->
         <form name="form" novalidate>
           <input type="password" name="password"
                  ng-model="user.password" required />
-          <validation-errors for="password" />
+          <ag-validation-errors for="password" />
         </form>
       """
 
@@ -192,7 +192,7 @@ describe "module: angleGrinder.forms", ->
           <input type="password" name="passwordConfirmation"
                  ng-model="user.passwordConfirmation"
                  match="user.password" ng-minlength="6" />
-            <validation-errors for="passwordConfirmation" minlength="Too short" />
+            <ag-validation-errors for="passwordConfirmation" minlength="Too short" />
         </form>
       """
 
@@ -202,7 +202,7 @@ describe "module: angleGrinder.forms", ->
           form.passwordConfirmation.$setViewValue "pass"
 
       it "displays all errors", ->
-        $errors = element.find("validation-errors[for=passwordConfirmation]")
+        $errors = element.find("ag-validation-errors[for=passwordConfirmation]")
 
         expect($errors.find("span").length).toEqual 2
 
@@ -227,7 +227,7 @@ describe "module: angleGrinder.forms", ->
     hasDefaultMessageFor "email",     "Invalid email address"
     hasDefaultMessageFor "pattern",   "Ivalid pattern"
 
-  describe "directive: deleteButton", ->
+  describe "directive: agDeleteButton", ->
     element = null
     $rootScope = null
     $scope = null
@@ -237,7 +237,7 @@ describe "module: angleGrinder.forms", ->
       $scope = $rootScope.$new()
 
       element = angular.element """
-        <delete-button when-confirmed="delete(123)" deleting="deleting"></delete-button>
+        <ag-delete-button when-confirmed="delete(123)" deleting="deleting"></ag-delete-button>
       """
 
       $compile(element)($scope)
@@ -281,7 +281,7 @@ describe "module: angleGrinder.forms", ->
       it "changes the button label", ->
         expect(element).toHaveText "Delete..."
 
-  describe "directive: cancelButton", ->
+  describe "directive: agCancelButton", ->
     element = null
     $scope = null
 
@@ -289,7 +289,7 @@ describe "module: angleGrinder.forms", ->
       $scope = $rootScope.$new()
 
       element = angular.element """
-        <cancel-button></cancel-button>
+        <ag-cancel-button></ag-cancel-button>
       """
 
       $compile(element)($scope)
@@ -299,7 +299,7 @@ describe "module: angleGrinder.forms", ->
       expect(element).toHaveText "Cancel"
       expect(element).toHaveClass "btn"
 
-  describe "directive: submitButton", ->
+  describe "directive: agSubmitButton", ->
     element = null
     $scope = null
 
@@ -307,7 +307,7 @@ describe "module: angleGrinder.forms", ->
       $scope = $rootScope.$new()
 
       element = angular.element """
-        <submit-button></submit-button>
+        <ag-submit-button></ag-submit-button>
       """
 
       $compile(element)($scope)
@@ -333,7 +333,7 @@ describe "module: angleGrinder.forms", ->
       it "changes the button label", ->
         expect(element).toHaveText "Save..."
 
-  describe "directive: serverValidationErrors", ->
+  describe "directive: agServerValidationErrors", ->
     element = null
     $scope = null
 
@@ -341,7 +341,7 @@ describe "module: angleGrinder.forms", ->
       $scope = $rootScope.$new()
 
       element = angular.element """
-        <server-validation-errors></server-validation-errors>
+        <ag-server-validation-errors></ag-server-validation-errors>
       """
 
       $compile(element)($scope)
