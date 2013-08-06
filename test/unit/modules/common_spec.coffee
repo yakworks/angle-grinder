@@ -1,6 +1,5 @@
 describe "module: angleGrinder.common", ->
-  beforeEach ->
-    module("angleGrinder.common")
+  beforeEach module("angleGrinder.common")
 
   describe "service: pathWithContext", ->
     it "is defined", inject (pathWithContext) ->
@@ -12,8 +11,8 @@ describe "module: angleGrinder.common", ->
 
     describe "when the context path is provided", ->
       useContextPath = (path) ->
-        beforeEach ->
-          module (pathWithContextProvider) -> pathWithContextProvider.setContextPath path
+        beforeEach module (pathWithContextProvider) ->
+          pathWithContextProvider.setContextPath path
 
       describe "first example", ->
         useContextPath "/example"
@@ -24,6 +23,7 @@ describe "module: angleGrinder.common", ->
       describe "when the path contains trailing slashes", ->
         useContextPath "/other-example"
 
-        using "valid paths", ["users/1.json", "/users/1.json", "//users/1.json"], (path) ->
+        paths = ["users/1.json", "/users/1.json", "//users/1.json", "////////users/1.json"]
+        using "valid paths", paths, (path) ->
           it "generates a valid path", inject (pathWithContext) ->
             expect(pathWithContext(path)).toEqual "/other-example/users/1.json"
