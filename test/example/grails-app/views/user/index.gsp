@@ -42,13 +42,7 @@
 
 <h3 class="page-header"><g:message code="default.list.label" args="[entityName]"/></h3>
 
-<div ng-controller="UsersListCtrl"
-     ng-init="editTemplateUrl = '${createLink(action: 'editPartial')}' ">
-
-    <g:hasErrors bean="${error}">
-        <div class="errors"><g:renderErrors bean="${error}" as="list"/></div>
-    </g:hasErrors>
-
+<div ng-controller="UsersListCtrl" ng-init="editTemplateUrl = '${createLink(action: 'editPartial')}' ">
     <ag-alerts></ag-alerts>
 
     <div ng-controller="SearchFormCtrl" collapse="!showSearchForm"

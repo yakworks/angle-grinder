@@ -7,6 +7,11 @@ class OrgController extends BaseDomainController {
     def domainClass = Org
     def ajaxGrid = true
 
+    def selectFields = ["*"]
+
+    def index() {
+    }
+
     def pickList() {
         def pager = new Pager(params)
         def crit = domainClass.createCriteria()
