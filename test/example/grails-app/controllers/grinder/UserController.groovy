@@ -9,17 +9,14 @@ class UserController extends BaseDomainController {
     static final int SC_UNPROCESSABLE_ENTITY = 422
     def domainClass = User
     def ajaxGrid = true
-    //static scaffold = User
+
+    def selectFields = ["*"]
 
     //injected beans
     def grinderLabelService
 
     def index() {
     }
-
-    def selectFields = ["*"]
-    //def excludeFields = ["passwd","passwordChangedDate","mustChangePassword"]
-    //def marshallFields = ["*","contact","contact.org"]
 
     protected def listCriteria() {
         def pager = new Pager(params)
@@ -99,28 +96,6 @@ class UserController extends BaseDomainController {
         }
     }
 
-    // def saveJson(){
-    // 	println "response.format ${response.format}"
-    // 	println "request.format ${request.format}"
-    // 	def responseJson = [:]
-    // 	try{
-    // 		def result = dao.insert(request.JSON)
-    // 		//all was good render a success save message
-    // 		//return ExportUtil.buildMapFromPaths(obj,fieldList)
-    // 		render ExportUtil.buildMapFromPaths(result.entity,selectFields) as JSON
-    // 	}catch(DomainException e){
-    // 		//response.status = 409
-    // 		//def emsg = (e.hasProperty("messageMap")) ? g.message(code:e.messageMap?.code,args:e.messageMap?.args,default:e.messageMap?.defaultMessage):null
-    // 		//render(plugin:"rally", template:"edit",model:[user:e.meta?.user?:e.entity,errorMsg:emsg])
-    // 		response.status = SC_UNPROCESSABLE_ENTITY
-    //            responseJson.errors = e.entity.errors.fieldErrors.collectEntries {
-    //                [(it.field): message(error: it)]
-    //            }
-    //            //cache false
-    //        	render responseJson as JSON
-    // 	}
-    // }
-
     def columnModel() {
         grinderLabelService.columnSetup(columnModel)
         render columnModel as JSON
@@ -149,23 +124,5 @@ class UserController extends BaseDomainController {
         cache false
         render responseJson as JSON
     }
-
-    /**
-     * @override
-     */
-    // def listJson(){
-    // 	log.debug("in the withformat json")
-    // 	def pageData = new PagingData(params)
-    // 	def crit = User.createCriteria()
-    // 	def datalist= crit.list(max:pageData.max,offset:pageData.offset) {
-    // 		if (params.sort)
-    // 			order(params.sort, params.order)
-    // 	}
-    // 	def mFields = ["*"]
-    // 	pageData.setupData(datalist, mFields)
-    // 	//render datalist as GSON
-    // 	render pageData.jsonData as JSON
-    // }
-
 
 }
