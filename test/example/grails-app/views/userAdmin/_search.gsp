@@ -7,11 +7,15 @@
 
                 <div class="controls">
                     <div class="input-append">
-                        <input id="orgSelect2" ui-select2="orgSelectConfig" multiple
-                               ng-model="search.org" type="text" style="width:87%">
-                        <button class="btn" type="button" data-select2-open="orgSelect2" style="width:13%">
-                            <i class="icon-search"></i>
-                        </button>
+                        <!-- TODO use context service -->
+                        <ag-select2 select-ajax-url="/example/org/pickList" ng-model="search.org">
+                            <table ag-select2-result class="table table-condensed org-select-result">
+                                <tr>
+                                    <td>{{item.num}}</td>
+                                    <td>{{item.name}}</td>
+                                </tr>
+                            </table>
+                        </ag-select2>
                     </div>
                 </div>
             </div>
