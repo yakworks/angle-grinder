@@ -44,20 +44,6 @@ class UserDao extends GormDaoSupport {
         return [ok: true, entity: user, message: DaoMessage.created(user)]
     }
 
-    Map insertTest(params) {
-        def user = new User()
-        user.properties = params
-        try {
-            checkPasswordChange(user, params)
-            save(user)
-            DaoUtil.flush()
-        } catch (DomainException e) {
-            e.meta = [user: user]
-            throw e
-        }
-        return [ok: true, entity: user, message: DaoMessage.created(user)]
-    }
-
     void persistWithParams(user, params) {
         user.properties = params
         user.contact.properties['firstName', 'lastName', 'email', 'tagForReminders'] = params['contact']
