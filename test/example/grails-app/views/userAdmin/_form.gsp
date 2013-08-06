@@ -9,47 +9,47 @@
 
 <form name="editForm" class="form-horizontal no-margin" novalidate ng-submit="save(item)">
     <div class="modal-body">
-        <server-validation-errors></server-validation-errors>
+        <ag-server-validation-errors></ag-server-validation-errors>
 
-        <div field-group for="contactFirstName,contactLastName">
+        <div ag-field-group for="contactFirstName,contactLastName">
             <label class="control-label">${ag.label(code: "contact.name")}</label>
 
             <div class="controls">
                 <input type="text" placeholder="${ag.label(code: 'contact.firstName')}"
                        name="contactFirstName"
                        ng-model="item.contact.firstName" required autofocus>
-                <validation-error for="contactFirstName" />
+                <ag-validation-errors for="contactFirstName" />
             </div>
 
             <div class="controls" style="margin-top:5px">
                 <input type="text" placeholder="${ag.label(code: 'contact.lastName')}"
                        name="contactLastName"
                        ng-model="item.contact.lastName" />
-                <validation-error for="contactLastName" />
+                <ag-validation-errors for="contactLastName" />
             </div>
         </div>
 
-        <div field-group for="contactEmail">
+        <div ag-field-group for="contactEmail">
             <label class="control-label">${ag.label(code: "contact.email")}</label>
 
             <div class="controls">
                 <input type="email"
                        name="contactEmail" ng-model="item.contact.email" />
-                <validation-error for="contactEmail" />
+                <ag-validation-errors for="contactEmail" />
             </div>
         </div>
 
-        <div field-group for="login">
+        <div ag-field-group for="login">
             <label class="control-label">${ag.label(code: "user.login")}</label>
 
             <div class="controls">
                 <input type="text"
                        name="login" ng-model="item.login" required />
-                <validation-error for="login" />
+                <ag-validation-errors for="login" />
             </div>
         </div>
 
-        <div field-group for="password,repassword">
+        <div ag-field-group for="password,repassword">
             <label class="control-label">${ag.label(code: "user.password")}</label>
 
             <div class="controls">
@@ -57,7 +57,7 @@
                        name="password"
                        ng-model="item.password"
                        ng-required="item.newRecord()" ng-minlength="6" />
-                <validation-error for="password" />
+                <ag-validation-errors for="password" />
             </div>
 
             <div class="controls" style="margin-top:5px">
@@ -65,7 +65,7 @@
                        name="repassword"
                        ng-model="item.repassword"
                        ng-required="item.newRecord()" ng-minlength="6" match="item.password" />
-                <validation-error for="repassword" />
+                <ag-validation-errors for="repassword" />
             </div>
         </div>
 
@@ -88,10 +88,10 @@
 
     <div class="modal-footer">
         <span ng-hide="createNew">
-            <delete-button when-confirmed="delete(item)"></delete-button>
+            <ag-delete-button when-confirmed="delete(item)"></ag-delete-button>
         </span>
 
-        <cancel-button ng-click="closeEditDialog()"></cancel-button>
-        <submit-button></submit-button>
+        <ag-cancel-button ng-click="closeEditDialog()"></ag-cancel-button>
+        <ag-submit-button></ag-submit-button>
     </div>
 </form>

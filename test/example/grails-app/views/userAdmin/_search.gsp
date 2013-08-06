@@ -1,7 +1,7 @@
 <div class="well well-large">
-    <form search-Form class="form-horizontal form-multi-column no-margin">
+    <form ag-search-Form class="form-horizontal form-multi-column no-margin">
 
-        <div class='row-fluid'>
+        <div class="row-fluid">
             <div class="control-group span6">
                 <label class="control-label">${ag.label(code: "org")}</label>
 
@@ -17,7 +17,7 @@
             </div>
         </div>
 
-        <div class='row-fluid'>
+        <div class="row-fluid">
             <div class="control-group span6">
                 <label class="control-label">${ag.label(code: "name")}</label>
 
@@ -35,7 +35,7 @@
             </div>
         </div>
 
-        <div class='row-fluid'>
+        <div class="row-fluid">
             <div class="control-group span6">
                 <label class="control-label">${ag.label(code: "contact.email")}</label>
 
@@ -46,8 +46,8 @@
         </div>
 
         <div class="form-actions no-margin">
-            <search-button></search-button>
-            <reset-search-button></reset-search-button>
+            <ag-search-button></ag-search-button>
+            <ag-reset-search-button></ag-reset-search-button>
         </div>
     </form>
 </div>

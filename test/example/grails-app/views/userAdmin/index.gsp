@@ -49,9 +49,7 @@
         <div class="errors"><g:renderErrors bean="${error}" as="list"/></div>
     </g:hasErrors>
 
-    <alerts></alerts>
-
-    <div id="spinner" style="display:none;width:10px;position: absolute;"></div>
+    <ag-alerts></ag-alerts>
 
     <div ng-controller="SearchFormCtrl" collapse="!showSearchForm"
          ng-include="'${createLink(action: 'searchPartial')}'"></div>

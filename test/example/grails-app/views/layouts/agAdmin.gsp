@@ -79,7 +79,7 @@
                             </li>
                         </ul>
                     </li>
-                    <spinner></spinner>
+                    <ag-spinner></ag-spinner>
                 </ul>
             </div>
         </div>
