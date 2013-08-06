@@ -7,29 +7,29 @@
 
 <div class="modal-body">
   <form name="editForm" novalidate class="form-horizontal no-margin" ng-submit="save(item)">
-    <server-validation-errors></server-validation-errors>
+    <ag-server-validation-errors></ag-server-validation-errors>
 
-    <div field-group for="name">
+    <div ag-field-group for="name">
       <label class="control-label">Name</label>
 
       <div class="controls">
         <input type="text" name="name" placeholder="Enter Name"
                ng-model="item.name" autofocus required />
-        <validation-errors for="name" required="This field is required" />
+        <ag-validation-errors for="name" required="This field is required" />
       </div>
     </div>
 
-    <div field-group for="login">
+    <div ag-field-group for="login">
       <label class="control-label">Login</label>
 
       <div class="controls">
         <input type="text" name="login" placeholder="Enter Login"
                ng-model="item.login" autofocus required />
-        <validation-errors for="login" required="This field is required" />
+        <ag-validation-errors for="login" required="This field is required" />
       </div>
     </div>
 
-    <div field-group for="allowance">
+    <div ag-field-group for="allowance">
       <label class="control-label">Allowance</label>
 
       <div class="controls">
@@ -38,7 +38,7 @@
       </div>
     </div>
 
-    <div field-group for="birthday">
+    <div ag-field-group for="birthday">
       <label class="control-label">Birthday</label>
 
       <div class="controls">
@@ -47,13 +47,13 @@
       </div>
     </div>
 
-    <div field-group for="password,passwordConfirmation">
+    <div ag-field-group for="password,passwordConfirmation">
       <label class="control-label">Password</label>
 
       <div class="controls">
         <input type="password" name="password" placeholder="Enter Password"
                ng-model="item.password" autofocus ng-required="item.newRecord()" ng-minlength="6" />
-        <validation-errors for="password"
+        <ag-validation-errors for="password"
                           required="This field is required"
                           minlength="Password must be at least 6 characters." />
       </div>
@@ -62,7 +62,7 @@
         <input type="password" name="passwordConfirmation" placeholder="Enter Password Confirmation"
                ng-model="item.passwordConfirmation" autofocus
                ng-required="item.newRecord()" match="item.password" ng-minlength="6" />
-        <validation-errors for="passwordConfirmation"
+        <ag-validation-errors for="passwordConfirmation"
                           required="This field is required"
                           minlength="Password must be at least 6 characters."
                           mismatch="The password does not match the confirmation" />
@@ -75,7 +75,7 @@
       </span>
 
       <cancel-button ng-click="closeEditDialog()"></cancel-button>
-      <submit-button></submit-button>
+      <ag-submit-button></ag-submit-button>
     </div>
   </form>
 </div>

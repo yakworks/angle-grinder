@@ -70,7 +70,7 @@ describe "module: angleGrinder.spinner", ->
         it "returns false", ->
           expect($scope.showSpinner()).toBeFalsy()
 
-  describe "directive: spinner", ->
+  describe "directive: agSpinner", ->
     element = null
     $scope = null
 
@@ -79,7 +79,7 @@ describe "module: angleGrinder.spinner", ->
 
       element = angular.element """
         <ul>
-          <spinner></spinner>
+          <ag-spinner></ag-spinner>
         </ul>
       """
       $compile(element)($scope)

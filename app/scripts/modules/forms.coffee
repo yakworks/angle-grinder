@@ -156,7 +156,7 @@ forms.directive "match", ->
     ctrl.$formatters.unshift (value) ->
       validateEqual(value, scope.$eval(attrs.match))
 
-forms.directive "fieldGroup", ->
+forms.directive "agFieldGroup", ->
   restrict: "A"
   require: "^form"
   replace: true
@@ -183,7 +183,7 @@ forms.directive "fieldGroup", ->
     $scope.$on "saving", ->
       displayErrors()
 
-forms.directive "validationErrors", [
+forms.directive "agValidationErrors", [
   "validationMessages", (validationMessages) ->
     restrict: "E"
     require: "^form"
@@ -220,8 +220,7 @@ forms.directive "validationErrors", [
         toggleErrors() if field.$dirty
 
       # Display validation errors when Save button is clicked
-      $scope.$on "saving", ->
-        toggleErrors()
+      $scope.$on "saving", -> toggleErrors()
 ]
 
 # Double check delete button
@@ -230,7 +229,7 @@ forms.directive "validationErrors", [
 #
 #   `when-confirmed` function to call when the action was confirmed
 #   `deleting` when it's set to `true` the button will be disabled
-forms.directive "deleteButton", ->
+forms.directive "agDeleteButton", ->
   restrict: "E"
   replace: true
 
@@ -276,7 +275,7 @@ forms.directive "deleteButton", ->
     </button>
   """
 
-forms.directive "cancelButton", ->
+forms.directive "agCancelButton", ->
   restrict: "E"
   replace: true
   template: """
@@ -285,7 +284,7 @@ forms.directive "cancelButton", ->
   </button>
   """
 
-forms.directive "submitButton", ->
+forms.directive "agSubmitButton", ->
   restrict: "E"
   replace: true
   template: """
@@ -295,7 +294,7 @@ forms.directive "submitButton", ->
   </button>
   """
 
-forms.directive "serverValidationErrors", ->
+forms.directive "agServerValidationErrors", ->
   restrict: "E"
   replace: true
   template: """

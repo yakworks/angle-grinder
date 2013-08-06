@@ -87,14 +87,14 @@ describe "module: angleGrinder.gridz", ->
       it "returns false", ->
         expect(hasSearchFilters(filters)).toBeFalsy()
 
-  describe "directive: searchButton", ->
+  describe "directive: agSearchButton", ->
     $scope = null
     element = null
 
     beforeEach inject ($rootScope, $compile) ->
       $scope = $rootScope.$new()
       element = angular.element """
-        <search-button></search-button>
+        <ag-search-button></ag-search-button>
       """
 
       $compile(element)($scope)
@@ -130,14 +130,14 @@ describe "module: angleGrinder.gridz", ->
         # Then
         expect($scope.advancedSearch).toHaveBeenCalledWith name: "find it"
 
-  describe "directive: resetSearchButton", ->
+  describe "directive: agResetSearchButton", ->
     $scope = null
     element = null
 
     beforeEach inject ($rootScope, $compile) ->
       $scope = $rootScope.$new()
       element = angular.element """
-        <reset-search-button></reset-search-button>
+        <ag-reset-search-button></ag-reset-search-button>
       """
 
       $compile(element)($scope)
@@ -172,18 +172,18 @@ describe "module: angleGrinder.gridz", ->
         # Then
         expect($scope.resetSearch).toHaveBeenCalled()
 
-  describe "directive: searchForm", ->
+  describe "directive: agSearchForm", ->
     $scope = null
     element = null
 
     beforeEach inject ($rootScope, $compile) ->
       $scope = $rootScope.$new()
       element = angular.element """
-        <form name="searchForm" search-form>
+        <form name="searchForm" ag-search-form>
           <input type="text" name="name" ng-model="search.name" />
 
-          <search-button id="search"></search-button>
-          <reset-search-button id="reset"></reset-search-button>
+          <ag-search-button id="search"></ag-search-button>
+          <ag-reset-search-button id="reset"></ag-reset-search-button>
         </form>
       """
 
