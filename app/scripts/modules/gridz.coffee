@@ -103,7 +103,7 @@ hasSearchFilters = (filters) ->
 
 gridz.value "hasSearchFilters", hasSearchFilters
 
-gridz.directive "searchButton", ->
+gridz.directive "agSearchButton", ->
   restrict: "E"
   replace: true
   template: """
@@ -112,7 +112,7 @@ gridz.directive "searchButton", ->
     </button>
   """
 
-gridz.directive "resetSearchButton", ->
+gridz.directive "agResetSearchButton", ->
   restrict: "E"
   replace: true
   template: """
@@ -121,7 +121,7 @@ gridz.directive "resetSearchButton", ->
     </button>
   """
 
-gridz.directive "searchForm", ["$rootScope", ($rootScope) ->
+gridz.directive "agSearchForm", ["$rootScope", ($rootScope) ->
   restrict: "A"
   scope: false
   link: ($scope, element, attrs) ->

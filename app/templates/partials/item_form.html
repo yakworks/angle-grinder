@@ -8,13 +8,13 @@
 <div class="modal-body">
   <form name="editForm" novalidate class="form-horizontal no-margin" ng-submit="save(item)">
 
-    <div field-group for="customerName">
+    <div ag-field-group for="customerName">
       <label class="control-label">Customer Name</label>
 
       <div class="controls">
         <input type="text" name="customerName" placeholder="Enter Customer Name"
                ng-model="item.customer.name" autofocus required />
-        <validation-errors for="customerName" />
+        <ag-validation-errors for="customerName" />
       </div>
     </div>
 
@@ -36,13 +36,13 @@
       </div>
     </div>
 
-    <div field-group for="password,passwordConfirmation">
+    <div ag-field-group for="password,passwordConfirmation">
       <label class="control-label">Password</label>
 
       <div class="controls">
         <input type="password" name="password" placeholder="Enter Password"
                ng-model="item.password" autofocus required ng-minlength="6" />
-        <validation-errors for="password"
+        <ag-validation-errors for="password"
                           required="This field is required"
                           minlength="Password must be at least 6 characters." />
       </div>
@@ -51,7 +51,7 @@
         <input type="password" name="passwordConfirmation" placeholder="Enter Password Confirmation"
                ng-model="item.passwordConfirmation" autofocus
                required match="item.password" ng-minlength="6" />
-        <validation-errors for="passwordConfirmation"
+        <ag-validation-errors for="passwordConfirmation"
                           required="This field is required"
                           minlength="Password must be at least 6 characters."
                           mismatch="The password does not match the confirmation" />
@@ -64,7 +64,7 @@
       </span>
 
       <cancel-button ng-click="closeEditDialog()"></cancel-button>
-      <submit-button></submit-button>
+      <ag-submit-button></ag-submit-button>
     </div>
   </form>
 </div>

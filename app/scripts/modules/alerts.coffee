@@ -50,7 +50,7 @@ class AlertsCtrl
 
 alerts.controller "alerts", AlertsCtrl
 
-alerts.directive "alerts", ->
+alerts.directive "agAlerts", ->
   restrict: "E"
   replace: true
 

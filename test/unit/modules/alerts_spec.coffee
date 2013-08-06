@@ -43,7 +43,7 @@ describe "module: angleGrinder.alerts", ->
     beforeEach inject ($rootScope, $compile) ->
       $scope = $rootScope
 
-      element = angular.element "<alerts></alerts>"
+      element = angular.element "<ag-alerts></ag-alerts>"
       $compile(element)($scope)
       $scope.$apply()
 

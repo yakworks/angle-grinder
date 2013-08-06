@@ -26,7 +26,7 @@ Use css to set the spinner annimation image:
   }
 ```
 ###
-spinner.directive "spinner", ->
+spinner.directive "agSpinner", ->
   replace: true
   restrict: "E"
   template: """
