@@ -11,7 +11,7 @@ class UsersListCtrl
     ]
 
     $scope.gridOptions =
-      url: pathWithContext("/userAdmin/list.json")
+      url: pathWithContext("/user/list.json")
       colModel: colModel
       multiselect: false # turn off multiselect
       shrinkToFit: true # makes columns fit to width
@@ -27,12 +27,12 @@ class UsersListCtrl
       # TODO workaround for missing Org
       user = new Resource(orgId: 1)
 
-      editDialog.open(pathWithContext("userAdmin/formTemplate"), user)
+      editDialog.open(pathWithContext("/user/formTemplate"), user)
 
     # Displays a form for editing an exiting user
     $scope.editDialog = (id) ->
       Resource.get { id: id }, (user) ->
-        editDialog.open(pathWithContext("/userAdmin/formTemplate"), user)
+        editDialog.open(pathWithContext("/user/formTemplate"), user)
 
     $scope.deleteItem = (id) ->
       confirmationDialog.open().then (confirmed) ->

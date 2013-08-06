@@ -5,7 +5,7 @@ import grails.plugin.dao.DomainException
 
 import static javax.servlet.http.HttpServletResponse.SC_CREATED
 
-class UserAdminController extends BaseDomainController {
+class UserController extends BaseDomainController {
     static final int SC_UNPROCESSABLE_ENTITY = 422
     def domainClass = User
     def ajaxGrid = true
