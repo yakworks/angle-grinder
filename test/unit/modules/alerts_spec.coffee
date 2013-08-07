@@ -5,13 +5,12 @@ describe "module: angleGrinder.alerts", ->
     $scope = null
     alerts = null
 
-    beforeEach inject ($injector, $rootScope, $controller) ->
+    beforeEach inject ($rootScope, $controller, _alerts_) ->
       $scope = $rootScope.$new()
-
-      alerts = $injector.get("alerts")
+      alerts = _alerts_
 
       $controller "alerts",
-        $scope: $scope,
+        $scope: $scope
         alerts: alerts
 
     it "assings flash messages", ->

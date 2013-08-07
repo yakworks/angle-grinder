@@ -11,7 +11,7 @@ describe "module: angleGrinder.dataGenerator", ->
         expect(number >= 1).toBeTruthy()
         expect(number <= 2).toBeTruthy()
 
-        for n in [0...10]
+        for _ in [0...10]
           number = random.range(10, 100)
           expect(number >= 10).toBeTruthy()
           expect(number <= 100).toBeTruthy()
@@ -25,6 +25,7 @@ describe "module: angleGrinder.dataGenerator", ->
 
         minDate = new Date(2001, 1, 1)
         expect(random.date(minDate)).toEqual("2013-07-01")
+        expect(random.range).toHaveBeenCalled()
 
   describe "service: sampleData", ->
     it "is defined", inject (sampleData) ->

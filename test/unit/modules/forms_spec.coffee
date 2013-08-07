@@ -4,8 +4,8 @@ describe "module: angleGrinder.forms", ->
   $scope = null
   $compile = null
 
-  beforeEach inject (_$rootScope_, _$compile_) ->
-    $scope = _$rootScope_.$new()
+  beforeEach inject ($rootScope, _$compile_) ->
+    $scope = $rootScope.$new()
     $compile = _$compile_
 
   # Compile the template
@@ -33,11 +33,16 @@ describe "module: angleGrinder.forms", ->
 
       form = $scope.form
 
+    setPassword = (password) ->
+      $scope.$apply -> form.password.$setViewValue password
+
+    setConfirmation = (confirmation) ->
+      $scope.$apply -> form.passwordConfirmation.$setViewValue confirmation
+
     describe "when the fields are equal", ->
       beforeEach ->
-        $scope.$apply ->
-          form.password.$setViewValue "password"
-          form.passwordConfirmation.$setViewValue "password"
+        setPassword "password"
+        setConfirmation "password"
 
       it "marks the form as valid", ->
         expect(form.$valid).toBeTruthy()
@@ -49,9 +54,8 @@ describe "module: angleGrinder.forms", ->
 
     describe "when the fields are not equal", ->
       beforeEach ->
-        $scope.$apply ->
-          form.password.$setViewValue "password"
-          form.passwordConfirmation.$setViewValue "other password"
+        setPassword "password"
+        setConfirmation "other password"
 
       it "marks the form as invalid", ->
         expect(form.$valid).toBeFalsy()
@@ -72,7 +76,6 @@ describe "module: angleGrinder.forms", ->
 
   describe "directive: agFieldGroup", ->
     element = null
-    form = null
 
     beforeEach ->
       element = compileTemplate """
@@ -87,7 +90,11 @@ describe "module: angleGrinder.forms", ->
         </form>
       """
 
-      form = $scope.form
+    setEmail = (email) ->
+      $scope.$apply -> $scope.form.email.$setViewValue email
+
+    setPassword = (password) ->
+      $scope.$apply -> $scope.form.password.$setViewValue password
 
     it "marks as invalid when the save button is clicked", ->
       # When (saving event was emitted)
@@ -99,23 +106,21 @@ describe "module: angleGrinder.forms", ->
 
     describe "when one of the field is invalid", ->
       beforeEach ->
-        $scope.$apply ->
-          form.email.$setViewValue "luke@rebel.com"
-          form.password.$setViewValue ""
+        setEmail "luke@rebel.com"
+        setPassword ""
 
       it "marks the whole group as invalid", ->
-        expect(form.$valid).toBeFalsy()
+        expect($scope.form.$valid).toBeFalsy()
         $group = element.find(".control-group")
         expect($group).toHaveClass "error"
 
     describe "when all fields are valid", ->
       beforeEach ->
-        $scope.$apply ->
-          form.email.$setViewValue "luke@rebel.com"
-          form.password.$setViewValue "password"
+        setEmail "luke@rebel.com"
+        setPassword "password"
 
       it "does not mark the group as invalid", ->
-        expect(form.$valid).toBeTruthy()
+        expect($scope.form.$valid).toBeTruthy()
         $group = element.find(".control-group")
         expect($group).not.toHaveClass "erro"
 
@@ -229,11 +234,9 @@ describe "module: angleGrinder.forms", ->
 
   describe "directive: agDeleteButton", ->
     element = null
-    $rootScope = null
     $scope = null
 
-    beforeEach inject (_$rootScope_, $compile) ->
-      $rootScope = _$rootScope_
+    beforeEach inject ($rootScope, $compile) ->
       $scope = $rootScope.$new()
 
       element = angular.element """
@@ -241,7 +244,7 @@ describe "module: angleGrinder.forms", ->
       """
 
       $compile(element)($scope)
-      $rootScope.$apply()
+      $scope.$apply()
 
     it "is visible", ->
       expect(element.css("display")).not.toBe "none"
@@ -273,7 +276,7 @@ describe "module: angleGrinder.forms", ->
 
     describe "when the DELETE request is in progress", ->
       beforeEach ->
-        $rootScope.$apply -> $scope.deleting = true
+        $scope.$apply -> $scope.deleting = true
 
       it "disables the button", ->
         expect(element).toHaveClass "disabled"

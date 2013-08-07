@@ -1,13 +1,21 @@
 describe "module: angleGrinder.gridz, directive: agSelect2", ->
+
+  # create spy on `pathWithContext` service
+  beforeEach module "angleGrinder.common", ($provide) ->
+    $provide.value "pathWithContext", jasmine.createSpy("pathWithContext")
+    null # this is important, see: https://groups.google.com/forum/#!msg/angular/gCGF_B4eQkc/XjkvbgE9iMcJ
+
   beforeEach module("angleGrinder.gridz")
 
   $scope = null
+  beforeEach inject ($rootScope) ->
+    $scope = $rootScope.$new()
+    $scope.selectOptions = foo: "bar"
+
   element = null
 
   compileTemplate = (template) ->
-    beforeEach inject ($rootScope, $compile, $timeout) ->
-      $scope = $rootScope.$new()
-      $scope.selectOptions = { foo: "bar" }
+    beforeEach inject ($compile) ->
       element = angular.element(template)
 
       $compile(element)($scope)
@@ -77,7 +85,8 @@ describe "module: angleGrinder.gridz, directive: agSelect2", ->
 
       it "takes the select2 options from the parent scope", ->
         expect($directiveScope.options).toBeDefined()
-        expect($directiveScope.options["foo"]).toEqual "bar"
+        expect($directiveScope.options.foo).toBeDefined()
+        expect($directiveScope.options.foo).toEqual "bar"
 
       it "takes a model from the parent scope", ->
         $scope.$apply -> $scope.search = organization: "the org name"
@@ -92,36 +101,26 @@ describe "module: angleGrinder.gridz, directive: agSelect2", ->
         expect(spy).toHaveBeenCalledWith "open"
 
   describe "when `selectAjaxUrl` is provided", ->
-    describe "without context path", ->
-      compileTemplate """
-        <ag-select2 select-ajax-url="/api/orgs.json" ng-model="search.org" />
-      """
+    beforeEach inject (pathWithContext) ->
+      pathWithContext.andReturn("/context/api/orgs.json")
 
-      $directiveScope = null
-      ajaxOptions = null
+    compileTemplate """
+      <ag-select2 select-ajax-url="/api/orgs.json" ng-model="search.org" />
+    """
 
-      beforeEach ->
-        $directiveScope = element.scope()
-        ajaxOptions = $directiveScope.options.ajax
+    $directiveScope = null
+    ajaxOptions = null
 
-      it "defines ajax options for handling server side lookup", ->
-        expect(ajaxOptions).toBeDefined()
+    beforeEach ->
+      $directiveScope = element.scope()
+      ajaxOptions = $directiveScope.options.ajax
 
-      it "has valid server side lookup path", ->
-        expect(ajaxOptions.url).toBeDefined()
-        expect(ajaxOptions.url).toEqual "/api/orgs.json"
+    it "defines ajax options for handling server side lookup", ->
+      expect(ajaxOptions).toBeDefined()
 
-    describe "with context path", ->
-      beforeEach module (pathWithContextProvider) ->
-        pathWithContextProvider.setContextPath "/foo/bar"
+    it "uses `pathWithContextSpy` to generate a valid path", inject (pathWithContext) ->
+      expect(pathWithContext).toHaveBeenCalledWith("/api/orgs.json")
 
-      compileTemplate """
-        <ag-select2 select-ajax-url="/api/users.json" ng-model="search.org" />
-      """
-
-      $directiveScope = null
-      beforeEach -> $directiveScope = element.scope()
-
-      it "has lookup path with the valid context", ->
-        ajaxOptions = $directiveScope.options.ajax
-        expect(ajaxOptions.url).toEqual "/foo/bar/api/users.json"
+    it "assigns a valid server side lookup path", ->
+      expect(ajaxOptions.url).toBeDefined()
+      expect(ajaxOptions.url).toEqual "/context/api/orgs.json"
