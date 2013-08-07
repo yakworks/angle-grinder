@@ -140,13 +140,13 @@ class Gridz
     $menu = $("##{self.gboxId} .dropdown-menu")
 
     $menu.on "click", "li a.row_action_show", (e) ->
-      $grid.trigger "showAction"
+      $grid.trigger "showAction", [id, self]
 
     $menu.on "click", "li a.row_action_edit", (e) ->
       $grid.trigger "editAction", [id, self]
 
     $menu.on "click", "li a.row_action_delete", (e) ->
-      $grid.trigger "deleteAction", [id]
+      $grid.trigger "deleteAction", [id, self]
 
 # register namespace
 $.extend true, window, grinder: Grid: Gridz

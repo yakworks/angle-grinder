@@ -9,6 +9,18 @@ class ListCtrl
       sortname: "id"
       multiselect: false
 
+    $scope.showItem = (id) ->
+      console.log "showing id:", id
+
+    $scope.createItem = ->
+      console.log "creating"
+
+    $scope.editItem = (id) ->
+      console.log "editing id:", id
+
+    $scope.deleteItem = (id) ->
+      console.log "deleting id:", id
+
   gridColumns: ->
     [
       name: "id"

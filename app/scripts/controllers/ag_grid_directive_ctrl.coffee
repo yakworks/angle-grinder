@@ -11,7 +11,7 @@ class AgGridDirectiveCtrl
       colModel: @gridColumns()
       sortname: "id"
 
-    $scope.editDialog = (id) =>
+    $scope.editItem = (id) =>
       item = @findItemById(id)
       item.persisted = -> true
       item.save = (callback) -> callback.success(this)
@@ -23,7 +23,7 @@ class AgGridDirectiveCtrl
 
       editDialog.open("templates/partials/item_form.html", item)
 
-    $scope.createDialog = =>
+    $scope.createItem = =>
       item = {}
       item.persisted = -> false
       item.save = (callback) ->

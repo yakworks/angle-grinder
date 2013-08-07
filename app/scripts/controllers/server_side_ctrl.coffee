@@ -10,11 +10,11 @@ class ServerSideCtrl
       rowNum: 10
       sortname: "id"
 
-    $scope.editDialog = (id) ->
+    $scope.editItem = (id) ->
       Users.get { id: id }, (user) ->
         editDialog.open(pathWithContext("templates/partials/user_form.html"), user)
 
-    $scope.createDialog = ->
+    $scope.createItem = ->
       user = new Users()
       editDialog.open(pathWithContext("templates/partials/user_form.html"), user)
 
