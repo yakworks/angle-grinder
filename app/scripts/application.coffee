@@ -16,28 +16,32 @@ app.config [
 
     $routeProvider
       .when "/",
-        templateUrl: "templates/gridz_with_toolbar.html",
+        templateUrl: "templates/gridz_with_toolbar.html"
         controller: "GridzWithToolbarCtrl"
 
       .when "/simple_jqgrid",
-        templateUrl: "templates/simple_jqgrid.html",
+        templateUrl: "templates/simple_jqgrid.html"
         controller: "SimpleJqGridCtrl"
 
       .when "/simple_gridz",
-        templateUrl: "templates/simple_gridz.html",
+        templateUrl: "templates/simple_gridz.html"
         controller: "SimpleGridzCtrl"
 
       .when "/jqgrid_basic",
-        templateUrl: "templates/jqgrid_basic.html",
+        templateUrl: "templates/jqgrid_basic.html"
         controller: "JqGridBasicCtrl"
 
       .when "/ag_grid_directive",
-        templateUrl: "templates/ag_grid_directive.html",
+        templateUrl: "templates/ag_grid_directive.html"
         controller: "AgGridDirectiveCtrl"
 
       .when "/server_side",
-        templateUrl: "templates/server_side.html",
+        templateUrl: "templates/server_side.html"
         controller: "ServerSideCtrl"
+
+      .when "/users",
+        templateUrl: "templates/users/list.html"
+        controller: "users.ListCtrl"
 
       .otherwise redirectTo: "/"
 ]

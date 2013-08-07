@@ -7,6 +7,7 @@ describe "Application routes", ->
   beforeEach module("templates/jqgrid_basic.html")
   beforeEach module("templates/ag_grid_directive.html")
   beforeEach module("templates/server_side.html")
+  beforeEach module("templates/users/list.html")
 
   $route = null
 
@@ -45,3 +46,8 @@ describe "Application routes", ->
     @navigateTo "/server_side"
     expect($route.current.templateUrl).toEqual("templates/server_side.html")
     expect($route.current.controller).toEqual("ServerSideCtrl")
+
+  it "recognizes '/users", ->
+    @navigateTo "/users"
+    expect($route.current.templateUrl).toEqual("templates/users/list.html")
+    expect($route.current.controller).toEqual("users.ListCtrl")
