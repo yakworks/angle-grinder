@@ -1,7 +1,7 @@
 class ServerSideCtrl
   @$inject = ["$scope", "$log", "$dialog", "confirmationDialog", "editDialog", "Users", "pathWithContext"]
   constructor: ($scope, $log, $dialog, confirmationDialog, editDialog, Users, pathWithContext) ->
-    # TODO intitially show the form
+    # intitially show the form
     $scope.showSearchForm = true
 
     $scope.gridOptions =
