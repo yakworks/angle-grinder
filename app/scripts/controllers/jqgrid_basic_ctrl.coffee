@@ -3,11 +3,23 @@ class JqGridBasicCtrl
   @$inject = ["sampleData"]
   constructor: (sampleData) ->
     setupActionClickOver = ->
-      actionMenu = "<ul class=\"dropdown-menu\" role=\"menu\" aria-labelledby=\"dropdownMenu\" style=\"display: block;position: relative;min-width:100px\">                               <li><a tabindex=\"-1\" href=\"#\" class=\"row_action_show\" data-dismiss=\"clickover\"><i class=\"icon-eye-open\"></i> show</a></li>                               <li><a tabindex=\"-1\" href=\"#\" class=\"row_action_edit\" data-dismiss=\"clickover\"><i class=\"icon-edit\"></i> edit</a></li>                               <li><a tabindex=\"-1\" href=\"#\" class=\"row_action_delete\" data-dismiss=\"clickover\"><i class=\"icon-trash\"></i> delete</a></li>                           </ul>"
+      actionMenu = """
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu" style="display: block;position: relative;min-width:100px">
+          <li><a tabindex="-1" href="#" class="row_action_show" data-dismiss="clickover"><i class="icon-eye-open"></i> show</a></li>
+          <li><a tabindex="-1" href="#" class="row_action_edit" data-dismiss="clickover"><i class="icon-edit"></i> edit</a></li>
+          <li><a tabindex="-1" href="#" class="row_action_delete" data-dismiss="clickover"><i class="icon-trash"></i> delete</a></li>
+        </ul>
+      """
+
       $(".jqg-row-action").clickover
         html: true
         content: actionMenu
-        template: "<div class=\"popover row-action-popover\"><div class=\"arrow\"></div><div class=\"popover-content dropdown clearfix\" style=\"padding:0;\"></div></div>"
+        template: """
+          <div class="popover row-action-popover">
+            <div class="arrow"></div>
+            <div class="popover-content dropdown clearfix" style="padding:0;"></div>
+          </div>
+        """
         onShown: ->
           assignActionRowId this
           addActionPopupListeners this
