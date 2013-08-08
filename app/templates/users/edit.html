@@ -1,0 +1,72 @@
+<section class="anchor">
+  <h2>Edit user</h2>
+
+  <form name="editForm" novalidate class="form-horizontal no-margin" ng-submit="save(user)">
+    <ag-server-validation-errors></ag-server-validation-errors>
+
+    <div ag-field-group for="name">
+      <label class="control-label">Name</label>
+
+      <div class="controls">
+        <input type="text" name="name" placeholder="Enter Name"
+               ng-model="user.name" autofocus required />
+        <ag-validation-errors for="name" required="This field is required" />
+      </div>
+    </div>
+
+    <div ag-field-group for="login">
+      <label class="control-label">Login</label>
+
+      <div class="controls">
+        <input type="text" name="login" placeholder="Enter Login"
+               ng-model="user.login" autofocus required />
+        <ag-validation-errors for="login" required="This field is required" />
+      </div>
+    </div>
+
+    <div ag-field-group for="allowance">
+      <label class="control-label">Allowance</label>
+
+      <div class="controls">
+        <input type="text" name="allowance" placeholder="Enter Allowance"
+               ng-model="user.allowance" />
+      </div>
+    </div>
+
+    <div ag-field-group for="birthday">
+      <label class="control-label">Birthday</label>
+
+      <div class="controls">
+        <input type="text" name="birthday" placeholder="Birthday"
+               ng-model="user.birthday" />
+      </div>
+    </div>
+
+    <div ag-field-group for="password,passwordConfirmation">
+      <label class="control-label">Password</label>
+
+      <div class="controls">
+        <input type="password" name="password" placeholder="Enter Password"
+               ng-model="user.password" autofocus ng-required="user.newRecord()" ng-minlength="6" />
+        <ag-validation-errors for="password"
+                              required="This field is required"
+                              minlength="Password must be at least 6 characters." />
+      </div>
+
+      <div class="controls">
+        <input type="password" name="passwordConfirmation" placeholder="Enter Password Confirmation"
+               ng-model="user.passwordConfirmation" autofocus
+               ng-required="user.newRecord()" match="user.password" ng-minlength="6" />
+        <ag-validation-errors for="passwordConfirmation"
+                              required="This field is required"
+                              minlength="Password must be at least 6 characters."
+                              mismatch="The password does not match the confirmation" />
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <cancel-button ng-click="cancel()"></cancel-button>
+      <ag-submit-button></ag-submit-button>
+    </div>
+  </form>
+</section>

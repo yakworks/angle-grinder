@@ -46,7 +46,14 @@ app.config [
       .when "/users/:id",
         templateUrl: "templates/users/show.html"
         controller: "users.ShowCtrl"
-        # delay route change until user record is loaded
+        resolve: user: [
+          "$route", "userResolver", ($route, userResolver) ->
+            userResolver($route.current.params.id)
+        ]
+
+      .when "/users/:id/edit",
+        templateUrl: "templates/users/edit.html"
+        controller: "users.EditCtrl"
         resolve: user: [
           "$route", "userResolver", ($route, userResolver) ->
             userResolver($route.current.params.id)

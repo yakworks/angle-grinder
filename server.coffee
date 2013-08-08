@@ -62,11 +62,8 @@ app.post "/api/users", (req, res) ->
 app.put "/api/users/:id", (req, res) ->
   randomSleep()
 
-  if Math.random() > 0.5
-    row = data.update(req.params.id, req.body)
-    res.send row
-  else
-    randomErrorFor(res)
+  row = data.update(req.params.id, req.body)
+  res.send row
 
 # DELETE
 app.delete "/api/users/:id", (req, res) ->

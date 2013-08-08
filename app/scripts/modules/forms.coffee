@@ -180,6 +180,7 @@ forms.directive "agFieldGroup", ->
       $scope.$watch "#{formName}.#{fieldName}.$viewValue", ->
         displayErrors() if formCtrl[fieldName]?.$dirty
 
+    # TODO try $scope.$watch
     $scope.$on "saving", ->
       displayErrors()
 

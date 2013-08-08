@@ -17,3 +17,9 @@ describe "controller: users.ListCtrl", ->
         spyOn($location, "path")
         $scope.showItem(123)
         expect($location.path).toHaveBeenCalledWith("/users/123")
+
+    describe "#editItem", ->
+      it "navigates to the edit user page", inject ($location) ->
+        spyOn($location, "path")
+        $scope.editItem(234)
+        expect($location.path).toHaveBeenCalledWith("/users/234/edit")

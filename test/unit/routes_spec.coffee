@@ -16,6 +16,7 @@ describe "Application routes", ->
     module("templates/server_side.html")
     module("templates/users/list.html")
     module("templates/users/show.html")
+    module("templates/users/edit.html")
 
   $rootScope = null
   $route = null
@@ -72,3 +73,12 @@ describe "Application routes", ->
     # Then
     expect($route.current.templateUrl).toEqual("templates/users/show.html")
     expect($route.current.controller).toEqual("users.ShowCtrl")
+
+  it "recognizes `/users/234/edit`", inject (userResolver) ->
+    # When
+    navigateTo "/users/234/edit"
+    expect(userResolver).toHaveBeenCalledWith("234")
+
+    # Then
+    expect($route.current.templateUrl).toEqual("templates/users/edit.html")
+    expect($route.current.controller).toEqual("users.EditCtrl")

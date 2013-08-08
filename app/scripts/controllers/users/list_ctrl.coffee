@@ -16,7 +16,7 @@ class ListCtrl
       console.log "creating"
 
     $scope.editItem = (id) ->
-      console.log "editing id:", id
+      $location.path("/users/#{id}/edit")
 
     $scope.deleteItem = (id) ->
       console.log "deleting id:", id
