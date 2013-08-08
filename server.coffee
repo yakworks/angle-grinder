@@ -43,7 +43,10 @@ app.get "/api/users", (req, res) ->
 
 app.get "/api/users/:id", (req, res) ->
   row = data.findById(req.params.id)
-  res.send row
+  if row?
+    res.send row
+  else
+    res.send 404
 
 # CREATE
 app.post "/api/users", (req, res) ->
