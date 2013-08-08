@@ -13,3 +13,25 @@ describe "controller: users.ShowCtrl", ->
     expect($scope.user).toBeDefined()
     expect($scope.user.id).toEqual 456
     expect($scope.user.email).toEqual "test@email.com"
+
+  describe "#delete", ->
+    it "is defined", ->
+      expect($scope.delete).toBeDefined()
+
+    describe "on success", ->
+      it "redirects to the users list page", inject ($location) ->
+        spyOn($location, "path")
+
+        # Given
+        userSpy = jasmine.createSpyObj("user", ["delete"])
+        userSpy.delete.andCallFake (options) ->
+          expect($scope.deleting).toBeTruthy()
+          options.success()
+          expect($scope.deleting).toBeFalsy()
+
+        # When
+        $scope.delete(userSpy)
+
+        # Then
+        expect(userSpy.delete).toHaveBeenCalled()
+        expect($location.path).toHaveBeenCalledWith("/users")

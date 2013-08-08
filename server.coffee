@@ -71,8 +71,12 @@ app.put "/api/users/:id", (req, res) ->
 # DELETE
 app.delete "/api/users/:id", (req, res) ->
   randomSleep()
-  row = data.delete(req.params.id)
-  res.send row
+
+  if Math.random() > 0.5
+    row = data.delete(req.params.id)
+    res.send row
+  else
+    randomErrorFor(res)
 
 app.get "/api/orgs.json", (req, res) ->
   res.send orgs.getAll()
