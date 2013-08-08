@@ -1,5 +1,11 @@
 describe "Application routes", ->
-  beforeEach module("angleGrinder")
+
+  # create spy on `userResolver` service
+  beforeEach module "angleGrinder.resources", ($provide) ->
+    $provide.value "userResolver", jasmine.createSpy("userResolver")
+    null
+
+  beforeEach module "angleGrinder"
 
   beforeEach ->
     module("templates/gridz_with_toolbar.html")
@@ -58,7 +64,11 @@ describe "Application routes", ->
     expect($route.current.templateUrl).toEqual("templates/users/list.html")
     expect($route.current.controller).toEqual("users.ListCtrl")
 
-  it "recognizes `/users/123`", ->
-    navigateTo "/users/123"
+  it "recognizes `/users/12345`", inject (userResolver) ->
+    # When
+    navigateTo "/users/12345"
+    expect(userResolver).toHaveBeenCalledWith("12345")
+
+    # Then
     expect($route.current.templateUrl).toEqual("templates/users/show.html")
     expect($route.current.controller).toEqual("users.ShowCtrl")

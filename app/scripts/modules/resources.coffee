@@ -30,3 +30,16 @@ resources.factory "Users", [
 
     Users
 ]
+
+# Tries to load an user record with the given id taken from route params
+resources.factory "userResolver", [
+  "$q", "$route", "Users", ($q, $route, Users) ->
+    (id) ->
+      deferred = $q.defer()
+
+      onSuccess = (user) -> deferred.resolve(user)
+      onError = -> deferred.reject()
+      Users.get id: id, onSuccess, onError
+
+      deferred.promise
+]

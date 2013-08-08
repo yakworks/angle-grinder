@@ -46,6 +46,11 @@ app.config [
       .when "/users/:id",
         templateUrl: "templates/users/show.html"
         controller: "users.ShowCtrl"
+        # delay route change until user record is loaded
+        resolve: user: [
+          "$route", "userResolver", ($route, userResolver) ->
+            userResolver($route.current.params.id)
+        ]
 
       .otherwise redirectTo: "/"
 ]
