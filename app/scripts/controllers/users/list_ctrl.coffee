@@ -1,6 +1,6 @@
 class ListCtrl
-  @$inject = ["$scope", "pathWithContext"]
-  constructor: ($scope, pathWithContext) ->
+  @$inject = ["$scope", "$location", "pathWithContext"]
+  constructor: ($scope, $location, pathWithContext) ->
 
     $scope.gridOptions =
       url: pathWithContext("/api/users")
@@ -10,7 +10,7 @@ class ListCtrl
       multiselect: false
 
     $scope.showItem = (id) ->
-      console.log "showing id:", id
+      $location.path("/users/#{id}")
 
     $scope.createItem = ->
       console.log "creating"

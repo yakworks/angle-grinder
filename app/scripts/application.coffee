@@ -43,6 +43,10 @@ app.config [
         templateUrl: "templates/users/list.html"
         controller: "users.ListCtrl"
 
+      .when "/users/:id",
+        templateUrl: "templates/users/show.html"
+        controller: "users.ShowCtrl"
+
       .otherwise redirectTo: "/"
 ]
 
