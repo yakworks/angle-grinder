@@ -15,34 +15,31 @@ class EditItemCtrl
 
     # If form is valid performs server side update
     $scope.save = (item) ->
-      $scope.$broadcast "saving"
-
-      if $scope.editForm.$valid
-        $log.info "The form is valid", $scope.editForm
-
-        $scope.saving = true
-        $scope.serverValidationErrors = {}
-
-        onSuccess = (response) ->
-          $scope.saving = false
-          $log.info "Item has been updated/created", response
-
-          # Flattening the object before insering it to the grid
-          $rootScope.$broadcast "itemUpdated", flatten(response)
-          $scope.closeEditDialog()
-
-        onError = (response) ->
-          $scope.saving = false
-
-          $log.error "Something went wront", response
-          if response.status is 422
-            errors = response.data.errors
-            $scope.serverValidationErrors = errors
-            $log.error "Server side validation errors", errors
-
-        item.save success: onSuccess, error: onError
-      else
+      if $scope.editForm.$invalid
         $log.warn "The form is invalid", $scope.editForm
+        return
+
+      $scope.saving = true
+      $scope.serverValidationErrors = {}
+
+      onSuccess = (response) ->
+        $scope.saving = false
+        $log.info "Item has been updated/created", response
+
+        # Flattening the object before insering it to the grid
+        $rootScope.$broadcast "itemUpdated", flatten(response)
+        $scope.closeEditDialog()
+
+      onError = (response) ->
+        $scope.saving = false
+
+        $log.error "Something went wront", response
+        if response.status is 422
+          errors = response.data.errors
+          $scope.serverValidationErrors = errors
+          $log.error "Server side validation errors", errors
+
+      item.save success: onSuccess, error: onError
 
     # Performs server side delete
     $scope.delete = ->
@@ -180,8 +177,8 @@ forms.directive "agFieldGroup", ->
       $scope.$watch "#{formName}.#{fieldName}.$viewValue", ->
         displayErrors() if formCtrl[fieldName]?.$dirty
 
-    $scope.$on "saving", ->
-      displayErrors()
+    $scope.$watch "submitted", (submitted) ->
+      displayErrors() if submitted
 
 forms.directive "agValidationErrors", [
   "validationMessages", (validationMessages) ->
@@ -202,7 +199,7 @@ forms.directive "agValidationErrors", [
       messageFor = (error) ->
         attrs[error] or validationMessages[error]
 
-      toggleErrors = ->
+      displayErrorMessages = ->
         clearErrors()
 
         for error, invalid of field.$error
@@ -217,10 +214,11 @@ forms.directive "agValidationErrors", [
 
       # Dispalay validation errors while typing
       $scope.$watch "#{formName}.#{fieldName}.$viewValue", ->
-        toggleErrors() if field.$dirty
+        displayErrorMessages() if field.$dirty
 
-      # Display validation errors when Save button is clicked
-      $scope.$on "saving", -> toggleErrors()
+      # Display validation errors when the form is submitted
+      $scope.$watch "submitted", (submitted) ->
+        displayErrorMessages() if submitted
 ]
 
 # Double check delete button
@@ -289,6 +287,7 @@ forms.directive "agSubmitButton", ->
   replace: true
   template: """
   <button type="submit" class="btn btn-primary"
+          ng-click="submitted = true"
           ng-class="{disabled: saving}">
     <i class="icon-ok icon-white"></i> Save<span ng-show="saving">...</span>
   </button>

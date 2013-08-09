@@ -97,8 +97,8 @@ describe "module: angleGrinder.forms", ->
       $scope.$apply -> $scope.form.password.$setViewValue password
 
     it "marks as invalid when the save button is clicked", ->
-      # When (saving event was emitted)
-      $scope.$broadcast "saving"
+      # When (the form has been submitted)
+      $scope.$apply -> $scope.submitted = true
 
       # Then
       $group = element.find(".control-group")
@@ -152,8 +152,8 @@ describe "module: angleGrinder.forms", ->
       """
 
       it "displays errors when the save button is clicked", ->
-        # When (saving event was emitted)
-        $scope.$broadcast "saving"
+        # When (the form has been submitted)
+        $scope.$apply -> $scope.submitted = true
 
         # Then
         expect(errorMessage()).toEqual "Please fill this field"
