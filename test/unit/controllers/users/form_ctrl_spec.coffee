@@ -1,11 +1,11 @@
-describe "controller: users.EditCtrl", ->
+describe "controller: users.FormCtrl", ->
   beforeEach module("angleGrinder")
 
   $scope = null
 
   beforeEach inject ($rootScope, $controller) ->
     $scope = $rootScope.$new()
-    $controller "users.EditCtrl",
+    $controller "users.FormCtrl",
       $scope: $scope
       user: id: 456, email: "test@email.com"
 
@@ -24,7 +24,7 @@ describe "controller: users.EditCtrl", ->
         recordSpy = jasmine.createSpyObj("user", ["save"])
         recordSpy.id = 123
         recordSpy.save.andCallFake (options) ->
-          options.success()
+          options.success(id: 123)
 
         # When
         $scope.save(recordSpy)

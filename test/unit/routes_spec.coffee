@@ -65,7 +65,13 @@ describe "Application routes", ->
     expect($route.current.templateUrl).toEqual("templates/users/list.html")
     expect($route.current.controller).toEqual("users.ListCtrl")
 
-  it "recognizes `/users/12345`", inject (userResolver) ->
+  it "recognizes `/users/create`", ->
+    navigateTo "/users/create"
+    expect($route.current.templateUrl).toEqual("templates/users/edit.html")
+    expect($route.current.controller).toEqual("users.FormCtrl")
+    expect($route.current.resolve.user).toBeDefined()
+
+  it "recognizes `/users/:id`", inject (userResolver) ->
     # When
     navigateTo "/users/12345"
     expect(userResolver).toHaveBeenCalledWith("12345")
@@ -74,11 +80,12 @@ describe "Application routes", ->
     expect($route.current.templateUrl).toEqual("templates/users/show.html")
     expect($route.current.controller).toEqual("users.ShowCtrl")
 
-  it "recognizes `/users/234/edit`", inject (userResolver) ->
+  it "recognizes `/users/:id/edit`", inject ($q, userResolver) ->
     # When
     navigateTo "/users/234/edit"
     expect(userResolver).toHaveBeenCalledWith("234")
 
     # Then
     expect($route.current.templateUrl).toEqual("templates/users/edit.html")
-    expect($route.current.controller).toEqual("users.EditCtrl")
+    expect($route.current.controller).toEqual("users.FormCtrl")
+    expect($route.current.resolve.user).toBeDefined()

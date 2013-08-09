@@ -43,6 +43,11 @@ app.config [
         templateUrl: "templates/users/list.html"
         controller: "users.ListCtrl"
 
+      .when "/users/create",
+        templateUrl: "templates/users/edit.html"
+        controller: "users.FormCtrl"
+        resolve: user: ["Users", (Users) -> new Users()]
+
       .when "/users/:id",
         templateUrl: "templates/users/show.html"
         controller: "users.ShowCtrl"
@@ -53,7 +58,7 @@ app.config [
 
       .when "/users/:id/edit",
         templateUrl: "templates/users/edit.html"
-        controller: "users.EditCtrl"
+        controller: "users.FormCtrl"
         resolve: user: [
           "$route", "userResolver", ($route, userResolver) ->
             userResolver($route.current.params.id)

@@ -1,4 +1,4 @@
-class EditCtrl
+class FormCtrl
   @$inject = ["$scope", "$location", "user"]
   constructor: ($scope, $location, user) ->
     $scope.user = user
@@ -9,7 +9,7 @@ class EditCtrl
       $scope.saving = true
       $scope.serverValidationErrors = {}
 
-      onSuccess = ->
+      onSuccess = (user) ->
         $scope.saving = false
         $location.path "/users/#{user.id}"
 
@@ -23,4 +23,4 @@ class EditCtrl
       user.save success: onSuccess, error: onError
 
 angular.module("angleGrinder")
-  .controller("users.EditCtrl", EditCtrl)
+  .controller("users.FormCtrl", FormCtrl)
