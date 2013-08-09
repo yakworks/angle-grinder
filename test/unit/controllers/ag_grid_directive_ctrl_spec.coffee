@@ -23,7 +23,7 @@ describe "controller: AgGridDirectiveCtrl", ->
 
       expect($scope.gridOptions.data.length).toEqual 100
 
-    describe "#editDialog", ->
+    describe "#editItem", ->
 
       it "opens opens a dialog for editing the item", inject (editDialog) ->
         # Given
@@ -32,7 +32,7 @@ describe "controller: AgGridDirectiveCtrl", ->
         spyOn(editDialog, "open")
 
         # When
-        $scope.editDialog(item.id)
+        $scope.editItem(item.id)
 
         # Then
         expect(controller.findItemById).toHaveBeenCalledWith(item.id)
@@ -42,14 +42,14 @@ describe "controller: AgGridDirectiveCtrl", ->
         expect(args[0]).toEqual "templates/partials/item_form.html"
         expect(args[1].id).toEqual item.id
 
-    describe "#createDialog", ->
+    describe "#createItem", ->
 
       it "opens a dialog for creating a new item", inject (editDialog) ->
         # Given
         spyOn(editDialog, "open").andCallThrough()
 
         # When
-        $scope.createDialog()
+        $scope.createItem()
 
         # Then
         expect(editDialog.open).toHaveBeenCalled()

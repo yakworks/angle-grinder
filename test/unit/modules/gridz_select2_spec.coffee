@@ -14,24 +14,18 @@ describe "module: angleGrinder.gridz, directive: agSelect2", ->
 
   element = null
 
-  compileTemplate = (template) ->
-    beforeEach inject ($compile) ->
-      element = angular.element(template)
-
-      $compile(element)($scope)
-      $scope.$apply()
-
   describe "basic example", ->
-    compileTemplate """
-      <ag-select2 select-options="selectOptions" ng-model="search.organization">
-        <table ag-select2-result class="table table-condensed">
-          <tr>
-            <td>{{item.num}}</td>
-            <td>{{item.name}}</td>
-          </tr>
-        </table>
-      </ag-select2>
-    """
+    beforeEach inject ($injector) ->
+      {element} = compileTemplate """
+        <ag-select2 select-options="selectOptions" ng-model="search.organization">
+          <table ag-select2-result class="table table-condensed">
+            <tr>
+              <td>{{item.num}}</td>
+              <td>{{item.name}}</td>
+            </tr>
+          </table>
+        </ag-select2>
+      """, $injector, $scope
 
     it "generates select2 component along with the show button", ->
       expect(element).toContain "input[type=text]"
@@ -101,12 +95,12 @@ describe "module: angleGrinder.gridz, directive: agSelect2", ->
         expect(spy).toHaveBeenCalledWith "open"
 
   describe "when `selectAjaxUrl` is provided", ->
-    beforeEach inject (pathWithContext) ->
+    beforeEach inject ($injector, pathWithContext) ->
       pathWithContext.andReturn("/context/api/orgs.json")
 
-    compileTemplate """
-      <ag-select2 select-ajax-url="/api/orgs.json" ng-model="search.org" />
-    """
+      {element} = compileTemplate """
+        <ag-select2 select-ajax-url="/api/orgs.json" ng-model="search.org" />
+      """, $injector, $scope
 
     $directiveScope = null
     ajaxOptions = null

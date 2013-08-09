@@ -43,7 +43,10 @@ app.get "/api/users", (req, res) ->
 
 app.get "/api/users/:id", (req, res) ->
   row = data.findById(req.params.id)
-  res.send row
+  if row?
+    res.send row
+  else
+    res.send 404
 
 # CREATE
 app.post "/api/users", (req, res) ->
@@ -59,17 +62,18 @@ app.post "/api/users", (req, res) ->
 app.put "/api/users/:id", (req, res) ->
   randomSleep()
 
-  if Math.random() > 0.5
-    row = data.update(req.params.id, req.body)
-    res.send row
-  else
-    randomErrorFor(res)
+  row = data.update(req.params.id, req.body)
+  res.send row
 
 # DELETE
 app.delete "/api/users/:id", (req, res) ->
   randomSleep()
-  row = data.delete(req.params.id)
-  res.send row
+
+  if Math.random() > 0.5
+    row = data.delete(req.params.id)
+    res.send row
+  else
+    randomErrorFor(res)
 
 app.get "/api/orgs.json", (req, res) ->
   res.send orgs.getAll()

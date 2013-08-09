@@ -4,15 +4,20 @@ gridz = angular.module("angleGrinder.gridz", [
 ])
 
 gridz.directive "agGrid", [
-  "hasSearchFilters", (hasSearchFilters) ->
+  "hasSearchFilters", "$log", (hasSearchFilters, $log) ->
     link = ($scope, element, attrs) ->
       $grid = $("#grid", element)
 
       gridOptions = $scope.$eval(attrs.agGrid)
       $grid.gridz(gridOptions)
 
-      invokeEditItemDialogFor = (id) ->
-        $scope.$apply -> $scope.editDialog id
+      showItem = (id) ->
+        $scope.$apply ->
+          if $scope.showItem? then $scope.showItem(id) else $log.warn("`$scope.showItem` is not defined")
+
+      editItem = (id) ->
+        $scope.$apply ->
+          if $scope.editItem? then $scope.editItem(id) else $log.warn("`$scope.editItem` is not defined")
 
       # flash the given row
       flashRowFor = (item, complete = ->) ->
@@ -24,16 +29,21 @@ gridz.directive "agGrid", [
 
         $row.fadeIn "fast", -> complete()
 
+      # handles click on show action insite the dropdown menu
+      $grid.on "showAction", (event, id) ->
+        event.preventDefault()
+        showItem(id)
+
       # handles click on edit action insite the dropdown menu
       $grid.on "editAction", (event, id) ->
         event.preventDefault()
-        invokeEditItemDialogFor(id)
+        editItem(id)
 
       # handles click on the cell with `editActionLink` formatter
       $grid.on "click", "a.editActionLink", (event) ->
         event.preventDefault()
         id = $(this).parents("tr:first").attr("id")
-        invokeEditItemDialogFor(id)
+        editItem(id)
 
       $grid.on "deleteAction", (event, id) ->
         event.preventDefault()

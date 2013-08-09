@@ -225,7 +225,7 @@ forms.directive "agValidationErrors", [
 
 # Double check delete button
 # usage:
-#   <delete-button when-confirmed="delete(item)" deleting="deleting"></delete-button>
+#   <ag-delete-button when-confirmed="delete(item)" deleting="deleting"></ag-delete-button>
 #
 #   `when-confirmed` function to call when the action was confirmed
 #   `deleting` when it's set to `true` the button will be disabled
@@ -273,6 +273,22 @@ forms.directive "agDeleteButton", ->
             ng-click="delete()">
       <i class="icon-trash"></i> {{label}}<span ng-show="deleting">...</span>
     </button>
+  """
+
+forms.directive "agCreateButton", ->
+  restrict: "E"
+  replace: true
+  transclude: true
+
+  link: (scope, element) ->
+    # Append the default label
+    element.append "Create" if $.trim(element.text()) is ""
+
+  template: """
+    <a class="btn">
+      <i class="icon-edit"></i>
+      <span ng-transclude></span>
+    </a>
   """
 
 forms.directive "agCancelButton", ->

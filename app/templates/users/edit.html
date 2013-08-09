@@ -1,12 +1,8 @@
-<div class="modal-header">
-  <button type="button" class="close" ng-click="closeEditDialog()" aria-hidden="true">&times;</button>
+<section class="anchor">
+  <h2 ng-show="user.newRecord()">Create user</h2>
+  <h2 ng-show="user.persisted()">Edit user</h2>
 
-  <h3 ng-show="createNew">Create New User</h3>
-  <h3 ng-hide="createNew">Edit User {{item.name}}</h3>
-</div>
-
-<div class="modal-body">
-  <form name="editForm" novalidate class="form-horizontal no-margin" ng-submit="save(item)">
+  <form name="editForm" novalidate class="form-horizontal no-margin" ng-submit="save(user)">
     <ag-server-validation-errors></ag-server-validation-errors>
 
     <div ag-field-group for="name">
@@ -14,7 +10,7 @@
 
       <div class="controls">
         <input type="text" name="name" placeholder="Enter Name"
-               ng-model="item.name" autofocus required />
+               ng-model="user.name" autofocus required />
         <ag-validation-errors for="name" required="This field is required" />
       </div>
     </div>
@@ -24,7 +20,7 @@
 
       <div class="controls">
         <input type="text" name="login" placeholder="Enter Login"
-               ng-model="item.login" autofocus required />
+               ng-model="user.login" autofocus required />
         <ag-validation-errors for="login" required="This field is required" />
       </div>
     </div>
@@ -34,7 +30,7 @@
 
       <div class="controls">
         <input type="text" name="allowance" placeholder="Enter Allowance"
-               ng-model="item.allowance" />
+               ng-model="user.allowance" />
       </div>
     </div>
 
@@ -43,7 +39,7 @@
 
       <div class="controls">
         <input type="text" name="birthday" placeholder="Birthday"
-               ng-model="item.birthday" />
+               ng-model="user.birthday" />
       </div>
     </div>
 
@@ -52,30 +48,26 @@
 
       <div class="controls">
         <input type="password" name="password" placeholder="Enter Password"
-               ng-model="item.password" autofocus ng-required="item.newRecord()" ng-minlength="6" />
+               ng-model="user.password" autofocus ng-required="user.newRecord()" ng-minlength="6" />
         <ag-validation-errors for="password"
-                          required="This field is required"
-                          minlength="Password must be at least 6 characters." />
+                              required="This field is required"
+                              minlength="Password must be at least 6 characters." />
       </div>
 
       <div class="controls">
         <input type="password" name="passwordConfirmation" placeholder="Enter Password Confirmation"
-               ng-model="item.passwordConfirmation" autofocus
-               ng-required="item.newRecord()" match="item.password" ng-minlength="6" />
+               ng-model="user.passwordConfirmation" autofocus
+               ng-required="user.newRecord()" match="user.password" ng-minlength="6" />
         <ag-validation-errors for="passwordConfirmation"
-                          required="This field is required"
-                          minlength="Password must be at least 6 characters."
-                          mismatch="The password does not match the confirmation" />
+                              required="This field is required"
+                              minlength="Password must be at least 6 characters."
+                              mismatch="The password does not match the confirmation" />
       </div>
     </div>
 
-    <div class="modal-footer">
-      <span ng-hide="createNew">
-        <ag-delete-button when-confirmed="delete(item)"></ag-delete-button>
-      </span>
-
-      <cancel-button ng-click="closeEditDialog()"></cancel-button>
+    <div class="form-actions">
       <ag-submit-button></ag-submit-button>
+      <a href="#/users" class="btn">Cancel</a>
     </div>
   </form>
-</div>
+</section>
