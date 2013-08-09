@@ -26,6 +26,7 @@ module.exports = (config) ->
 
       "scripts/modules/**/*.js"
       "scripts/application.js"
+      "scripts/routes.js"
       "scripts/controllers/**/*.js"
 
       "test/unit/helpers/**/*.js"
@@ -52,7 +53,7 @@ module.exports = (config) ->
     autoWatch: false
 
     # Start these browsers, currently available:
-        # - Chrome
+    # - Chrome
     # - ChromeCanary
     # - Firefox
     # - Opera

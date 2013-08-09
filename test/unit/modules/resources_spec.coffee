@@ -1,15 +1,15 @@
 describe "module: angleGrinder.resources", ->
   beforeEach module("angleGrinder.resources")
 
-  $httpBackend = null
-  beforeEach inject ($injector) ->
-    $httpBackend = $injector.get("$httpBackend")
-
-  afterEach ->
-    $httpBackend.verifyNoOutstandingExpectation()
-    $httpBackend.verifyNoOutstandingRequest()
-
   describe "service: Users", ->
+    $httpBackend = null
+    beforeEach inject ($injector) ->
+      $httpBackend = $injector.get("$httpBackend")
+
+    afterEach ->
+      $httpBackend.verifyNoOutstandingExpectation()
+      $httpBackend.verifyNoOutstandingRequest()
+
     Users = null
     beforeEach inject ($injector) ->
       Users = $injector.get("Users")
@@ -153,3 +153,35 @@ describe "module: angleGrinder.resources", ->
 
           # Then
           expect(onError).toHaveBeenCalled()
+
+  describe "service: userResolver", ->
+    $httpBackend = null
+
+    beforeEach inject (_$httpBackend_) ->
+      $httpBackend = _$httpBackend_
+
+    describe "when an user can be found", ->
+      beforeEach ->
+        $httpBackend.whenGET("/api/users/123").respond id: 123, email: "test@user.com"
+
+      it "it resolves the user", inject (userResolver) ->
+        resolvedUser = null
+        promise = userResolver(123)
+        promise.then (user) -> resolvedUser = user
+        $httpBackend.flush()
+
+        expect(resolvedUser).toBeDefined()
+        expect(resolvedUser.id).toEqual 123
+        expect(resolvedUser.email).toEqual "test@user.com"
+
+    describe "when an user cannot be found", ->
+      beforeEach ->
+        $httpBackend.whenGET("/api/users/234").respond 404, "not found"
+
+      it "rejects the user", inject (userResolver) ->
+        called = false
+        promise = userResolver(234)
+        promise.then null, -> called = true
+        $httpBackend.flush()
+
+        expect(called).toBeTruthy()

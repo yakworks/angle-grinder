@@ -20,7 +20,7 @@ describe "controller: ServerSideCtrl", ->
       expect($scope.gridOptions.colModel[4].name).toEqual "birthday"
       expect($scope.gridOptions.colModel[5].name).toEqual "paid"
 
-    describe "#editDialog", ->
+    describe "#editItem", ->
       user = id: 123, name: "Test User"
 
       beforeEach inject ($httpBackend, editDialog) ->
@@ -29,7 +29,7 @@ describe "controller: ServerSideCtrl", ->
 
       it "opens a dialog for editing the item", inject ($httpBackend, editDialog) ->
         # When
-        $scope.editDialog(user.id)
+        $scope.editItem(user.id)
         $httpBackend.flush()
 
         # Then
@@ -39,13 +39,13 @@ describe "controller: ServerSideCtrl", ->
         expect(args[0]).toEqual "templates/partials/user_form.html"
         expect(args[1].id).toEqual user.id
 
-    describe "#createDialog", ->
+    describe "#createItem", ->
       beforeEach inject (editDialog) ->
         spyOn(editDialog, "open")
 
       it "opens a dialog for editing the item", inject (editDialog) ->
         # When
-        $scope.createDialog()
+        $scope.createItem()
 
         # Then
         expect(editDialog.open).toHaveBeenCalled()

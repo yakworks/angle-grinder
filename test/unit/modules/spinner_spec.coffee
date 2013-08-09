@@ -74,16 +74,10 @@ describe "module: angleGrinder.spinner", ->
     element = null
     $scope = null
 
-    beforeEach inject ($compile, $rootScope) ->
-      $scope = $rootScope.$new()
-
-      element = angular.element """
-        <ul>
-          <ag-spinner></ag-spinner>
-        </ul>
-      """
-      $compile(element)($scope)
-      $scope.$apply()
+    beforeEach inject ($injector) ->
+      {element, $scope} = compileTemplate """
+        <ul><ag-spinner></ag-spinner></ul>
+      """, $injector
 
     showSpinner = (show) ->
       beforeEach -> $scope.$apply -> $scope.showSpinner = -> show
