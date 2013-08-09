@@ -139,19 +139,21 @@ forms.directive "match", ->
   require: "ngModel"
   link: (scope, elem, attrs, ctrl) ->
     validateEqual = (value, otherValue) ->
-      valid = value is otherValue
+      allEmpty = _.compact([value, otherValue]).length is 0
+      valid = allEmpty or value is otherValue
+
       ctrl.$setValidity "mismatch", valid
       return value
 
     scope.$watch attrs.match, (otherValue) ->
       validateEqual(ctrl.$viewValue, otherValue)
 
-    ctrl.$parsers.unshift (value) ->
+    validator = (value) ->
       otherValue = scope.$eval(attrs.match)
       validateEqual(value, otherValue)
 
-    ctrl.$formatters.unshift (value) ->
-      validateEqual(value, scope.$eval(attrs.match))
+    ctrl.$parsers.unshift validator
+    ctrl.$formatters.unshift validator
 
 forms.directive "agFieldGroup", ->
   restrict: "A"
