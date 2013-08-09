@@ -22,15 +22,23 @@ class ListCtrl
       console.log "deleting id:", id
 
   gridColumns: ->
+    showActionLink = (cellVal, options, rowdata) ->
+      """
+      <a href="#/users/#{rowdata.id}">#{cellVal}</a>
+      """
+
     [
       name: "id"
       width: 50
+      formatter: showActionLink
     ,
       name: "login"
       label: "Login"
+      formatter: showActionLink
     ,
       name: "name"
       label: "Name"
+      formatter: showActionLink
     ,
       name: "allowance"
       label: "Allowance"
