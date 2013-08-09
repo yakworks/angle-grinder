@@ -13,19 +13,16 @@ describe "module: angleGrinder.gridz", ->
         search: true
       ]
 
-    beforeEach inject ($rootScope, $compile) ->
+    beforeEach inject ($rootScope, $injector) ->
       $scope = $rootScope.$new()
       $scope.gridOptions = sampleGridOptions
 
       # create a spy on the gridz plugin
       gridz = spyOn($.fn, "gridz").andCallThrough()
 
-      element = angular.element """
+      {element} = compileTemplate """
         <div ag-grid="gridOptions"></div>
-      """
-
-      $compile(element)($scope)
-      $scope.$apply()
+      """, $injector, $scope
 
     it "passes valid options to the gridz plugin", ->
       expect(gridz).toHaveBeenCalledWith sampleGridOptions
@@ -91,14 +88,10 @@ describe "module: angleGrinder.gridz", ->
     $scope = null
     element = null
 
-    beforeEach inject ($rootScope, $compile) ->
-      $scope = $rootScope.$new()
-      element = angular.element """
+    beforeEach inject ($injector) ->
+      {element, $scope} = compileTemplate """
         <ag-search-button></ag-search-button>
-      """
-
-      $compile(element)($scope)
-      $scope.$apply()
+      """, $injector
 
     it "renders the button", ->
       expect(element).toBe "button[type=button]"
@@ -134,14 +127,10 @@ describe "module: angleGrinder.gridz", ->
     $scope = null
     element = null
 
-    beforeEach inject ($rootScope, $compile) ->
-      $scope = $rootScope.$new()
-      element = angular.element """
+    beforeEach inject ($injector) ->
+      {element, $scope} = compileTemplate """
         <ag-reset-search-button></ag-reset-search-button>
-      """
-
-      $compile(element)($scope)
-      $scope.$apply()
+      """, $injector
 
     it "renders the button", ->
       expect(element).toBe "button[type=button]"
@@ -176,19 +165,15 @@ describe "module: angleGrinder.gridz", ->
     $scope = null
     element = null
 
-    beforeEach inject ($rootScope, $compile) ->
-      $scope = $rootScope.$new()
-      element = angular.element """
+    beforeEach inject ($injector) ->
+      {element, $scope} = compileTemplate """
         <form name="searchForm" ag-search-form>
           <input type="text" name="name" ng-model="search.name" />
 
           <ag-search-button id="search"></ag-search-button>
           <ag-reset-search-button id="reset"></ag-reset-search-button>
         </form>
-      """
-
-      $compile(element)($scope)
-      $scope.$apply()
+      """, $injector
 
     describe "on submit button click", ->
       $searchButton = null

@@ -1,36 +1,24 @@
-# TODO cleanup this specs
 describe "module: angleGrinder.forms", ->
   beforeEach module("angleGrinder.forms")
 
   $scope = null
-  $compile = null
 
-  beforeEach inject ($rootScope, _$compile_) ->
+  beforeEach inject ($rootScope) ->
     $scope = $rootScope.$new()
-    $compile = _$compile_
-
-  # Compile the template
-  # @param {String} template The string to compile
-  # @return {Object} A reference to the compiled template
-  compileTemplate = (template) ->
-    element = angular.element(template)
-    $compile(element)($scope)
-    $scope.$apply()
-    element
 
   describe "directive: match", ->
     element = null
     form = null
 
-    beforeEach ->
-      element = compileTemplate """
+    beforeEach inject ($injector) ->
+      {element} = compileTemplate """
         <form name="form">
           <input name="password" type="password"
                  ng-model="user.password" />
           <input name="passwordConfirmation" type="password"
                  ng-model="user.passwordConfirmation" match="user.password" />
         </form>
-      """
+      """, $injector, $scope
 
       form = $scope.form
 
@@ -78,8 +66,8 @@ describe "module: angleGrinder.forms", ->
   describe "directive: agFieldGroup", ->
     element = null
 
-    beforeEach ->
-      element = compileTemplate """
+    beforeEach inject ($injector) ->
+      {element} = compileTemplate """
         <form name="form" novalidate>
           <div class="control-group"
                ag-field-group for="email,password">
@@ -89,7 +77,7 @@ describe "module: angleGrinder.forms", ->
                    ng-model="user.password" required />
           </div>
         </form>
-      """
+      """, $injector, $scope
 
     setEmail = (email) ->
       $scope.$apply -> $scope.form.email.$setViewValue email
@@ -130,28 +118,20 @@ describe "module: angleGrinder.forms", ->
     $scope = null
     form = null
 
-    # TODO fix this typo
-    comlileTemplate = (template) ->
-      beforeEach inject ($rootScope, $compile) ->
-        $scope = $rootScope.$new()
-
-        element = angular.element(template)
-
-        $compile(element)($scope)
-        $scope.$apply()
-        form = $scope.form
-
     errorMessage = -> element.find("ag-validation-errors[for=password] span").text()
 
     describe "when the custom validation message is provided", ->
-      comlileTemplate """
-        <form name="form" novalidate>
-          <input type="password" name="password"
-                 ng-model="user.password" required />
-          <ag-validation-errors for="password"
-                            required="Please fill this field" />
-        </form>
-      """
+      beforeEach inject ($injector) ->
+        {element, $scope} = compileTemplate """
+          <form name="form" novalidate>
+            <input type="password" name="password"
+                   ng-model="user.password" required />
+            <ag-validation-errors for="password"
+                              required="Please fill this field" />
+          </form>
+        """, $injector
+
+        {form} = $scope
 
       it "displays errors when the save button is clicked", ->
         # When (the form has been submitted)
@@ -175,13 +155,16 @@ describe "module: angleGrinder.forms", ->
           expect(errorMessage()).toEqual ""
 
     describe "when the validation messages is not provided", ->
-      comlileTemplate """
-        <form name="form" novalidate>
-          <input type="password" name="password"
-                 ng-model="user.password" required />
-          <ag-validation-errors for="password" />
-        </form>
-      """
+      beforeEach inject ($injector) ->
+        {element, $scope} = compileTemplate """
+          <form name="form" novalidate>
+            <input type="password" name="password"
+                   ng-model="user.password" required />
+            <ag-validation-errors for="password" />
+          </form>
+        """, $injector
+
+        {form} = $scope
 
       beforeEach ->
         form.password.$setViewValue ""
@@ -191,17 +174,20 @@ describe "module: angleGrinder.forms", ->
         expect(errorMessage()).toEqual "This field is required"
 
     describe "when multiple validations are set on the field", ->
-      comlileTemplate """
-        <form name="form" novalidate>
-          <input type="password" name="password"
-                 ng-model="user.password" required />
+      beforeEach inject ($injector) ->
+        {element, $scope} = compileTemplate """
+          <form name="form" novalidate>
+            <input type="password" name="password"
+                   ng-model="user.password" required />
 
-          <input type="password" name="passwordConfirmation"
-                 ng-model="user.passwordConfirmation"
-                 match="user.password" ng-minlength="6" />
-            <ag-validation-errors for="passwordConfirmation" minlength="Too short" />
-        </form>
-      """
+            <input type="password" name="passwordConfirmation"
+                   ng-model="user.passwordConfirmation"
+                   match="user.password" ng-minlength="6" />
+              <ag-validation-errors for="passwordConfirmation" minlength="Too short" />
+          </form>
+        """, $injector
+
+        {form} = $scope
 
       beforeEach ->
         $scope.$apply ->
@@ -238,15 +224,10 @@ describe "module: angleGrinder.forms", ->
     element = null
     $scope = null
 
-    beforeEach inject ($rootScope, $compile) ->
-      $scope = $rootScope.$new()
-
-      element = angular.element """
+    beforeEach inject ($injector) ->
+      {element, $scope} = compileTemplate """
         <ag-delete-button when-confirmed="delete(123)" deleting="deleting"></ag-delete-button>
-      """
-
-      $compile(element)($scope)
-      $scope.$apply()
+      """, $injector
 
     it "is visible", ->
       expect(element.css("display")).not.toBe "none"
@@ -290,14 +271,9 @@ describe "module: angleGrinder.forms", ->
     element = null
     $scope = null
 
-    compileTemplate2 = (template) ->
-      beforeEach inject ($rootScope, $compile) ->
-        $scope = $rootScope.$new()
-        $scope.foo = jasmine.createSpy()
-
-        element = angular.element(template)
-        $compile(element)($scope)
-        $scope.$apply()
+    beforeEach inject ($rootScope) ->
+      $scope = $rootScope.$new()
+      $scope.foo = jasmine.createSpy()
 
     itHasTheFollowingHref = (href) ->
       it "generates a link with valid `href`", ->
@@ -320,9 +296,10 @@ describe "module: angleGrinder.forms", ->
           expect($scope.foo).toHaveBeenCalled()
 
     describe "without a custom label", ->
-      compileTemplate2 """
-        <ag-create-button href="#/users/create" ng-click="foo()" />
-      """
+      beforeEach inject ($injector) ->
+        {element} = compileTemplate """
+          <ag-create-button href="#/users/create" ng-click="foo()" />
+        """, $injector, $scope
 
       itHasTheFollowingHref "#/users/create"
       itHasValidCssClass()
@@ -333,9 +310,10 @@ describe "module: angleGrinder.forms", ->
         expect($.trim element.text()).toEqual "Create"
 
     describe "with the custom label", ->
-      compileTemplate2 """
-        <ag-create-button href="#/projects/create" ng-click="foo()">Create user</ag-create-button>
-      """
+      beforeEach inject ($injector) ->
+        {element} = compileTemplate """
+          <ag-create-button href="#/projects/create" ng-click="foo()">Create user</ag-create-button>
+        """, $injector, $scope
 
       itHasTheFollowingHref "#/projects/create"
       itHasValidCssClass()
@@ -349,15 +327,10 @@ describe "module: angleGrinder.forms", ->
     element = null
     $scope = null
 
-    beforeEach inject ($rootScope, $compile) ->
-      $scope = $rootScope.$new()
-
-      element = angular.element """
+    beforeEach inject ($injector) ->
+      {element, $scope} = compileTemplate """
         <ag-cancel-button></ag-cancel-button>
-      """
-
-      $compile(element)($scope)
-      $scope.$apply()
+      """, $injector
 
     it "create a cancel button", ->
       expect(element).toHaveText "Cancel"
@@ -367,15 +340,10 @@ describe "module: angleGrinder.forms", ->
     element = null
     $scope = null
 
-    beforeEach inject ($rootScope, $compile) ->
-      $scope = $rootScope.$new()
-
-      element = angular.element """
+    beforeEach inject ($injector) ->
+      {element, $scope} = compileTemplate """
         <ag-submit-button></ag-submit-button>
-      """
-
-      $compile(element)($scope)
-      $scope.$apply()
+      """, $injector
 
     it "has valid label", ->
       expect(element).toHaveText /Save/
@@ -401,15 +369,10 @@ describe "module: angleGrinder.forms", ->
     element = null
     $scope = null
 
-    beforeEach inject ($rootScope, $compile) ->
-      $scope = $rootScope.$new()
-
-      element = angular.element """
+    beforeEach inject ($injector) ->
+      {element, $scope} = compileTemplate """
         <ag-server-validation-errors></ag-server-validation-errors>
-      """
-
-      $compile(element)($scope)
-      $scope.$apply()
+      """, $injector
 
     it "renders errors", ->
       $scope.$apply ->

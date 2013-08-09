@@ -39,12 +39,8 @@ describe "module: angleGrinder.alerts", ->
     $scope = null
     element = null
 
-    beforeEach inject ($rootScope, $compile) ->
-      $scope = $rootScope
-
-      element = angular.element "<ag-alerts></ag-alerts>"
-      $compile(element)($scope)
-      $scope.$apply()
+    beforeEach inject ($injector) ->
+      {element, $scope} = compileTemplate "<ag-alerts></ag-alerts>", $injector
 
     it "renders alerts", ->
       $scope.$apply -> $scope.alertMessages = [
