@@ -40,7 +40,6 @@
 </head>
 
 <body id="${pageProperty(name: 'body.id')}" onload="bload()"
-      ng-app="angleGrinder"
       data-context-path="${request.contextPath}"
       data-base-url="${createLink(action: 'index').replaceAll(/index$/, '')}">
 

@@ -42,7 +42,7 @@
 
 <h3 class="page-header"><g:message code="default.list.label" args="[entityName]"/></h3>
 
-<div ng-controller="UsersListCtrl" ng-init="editTemplateUrl = '${createLink(action: 'editPartial')}' ">
+<div ng-app="angleGrinder" ng-controller="UsersListCtrl" ng-init="editTemplateUrl = '${createLink(action: 'editPartial')}' ">
     <ag-alerts></ag-alerts>
 
     <div ng-controller="SearchFormCtrl" collapse="!showSearchForm"

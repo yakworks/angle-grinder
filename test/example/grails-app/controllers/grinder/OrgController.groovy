@@ -32,4 +32,13 @@ class OrgController extends BaseDomainController {
         render pagedList.jsonData as JSON
     }
 
+    def get() {
+        def org = Org.get(params.id)
+        if (org) {
+            render ExportUtil.buildMapFromPaths(org, selectFields) as JSON
+        } else {
+            notFound params.id
+        }
+    }
+
 }

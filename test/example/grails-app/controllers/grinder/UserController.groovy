@@ -86,11 +86,9 @@ class UserController extends BaseDomainController {
     }
 
     def get() {
-        def inst = User.get(params.id)
-        if (inst) {
-            //cache false
-            //sleep(1000)
-            render ExportUtil.buildMapFromPaths(inst, selectFields) as JSON
+        def user = User.get(params.id)
+        if (user) {
+            render ExportUtil.buildMapFromPaths(user, selectFields) as JSON
         } else {
             notFound params.id
         }

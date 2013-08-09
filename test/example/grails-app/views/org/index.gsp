@@ -9,12 +9,32 @@
 
 <body>
 
-<h3 class="page-header"><g:message code="default.list.label" args="[entityName]"/></h3>
+<!-- TODO hide the left navigation panel -->
+<div ng-app="admin.org">
+    <!-- TODO serve this templates from the grails app -->
+    <script type="text/ng-template" id="templates/org/list.html">
+        <h3 class="page-header">Org list</h3>
+        <div ag-grid="gridOptions"></div>
+    </script>
 
-<div ng-controller="OrgsListCtrl">
-    <ag-alerts></ag-alerts>
+    <script type="text/ng-template" id="templates/org/show.html">
+        <h3 class="page-header">Org show</h3>
 
-    <div ag-grid="gridOptions"></div>
+        <dl class="dl-horizontal">
+            <dt>ID</dt>
+            <dd>{{org.id}}</dd>
+
+            <dt>Email</dt>
+            <dd>{{org.name}}</dd>
+
+            <dt>Num</dt>
+            <dd>{{org.num}}</dd>
+        </dl>
+    </script>
+
+    <!-- TODO add alerts -->
+    <ng-view></ng-view>
 </div>
+
 </body>
 </html>
