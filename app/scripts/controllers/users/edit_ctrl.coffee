@@ -4,9 +4,7 @@ class EditCtrl
     $scope.user = user
 
     $scope.save = (user) ->
-      $scope.$broadcast "saving"
-
-      return unless $scope.editForm.$valid
+      return if $scope.editForm.$invalid
 
       $scope.saving = true
       $scope.serverValidationErrors = {}
