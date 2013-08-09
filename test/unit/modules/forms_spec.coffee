@@ -1,3 +1,4 @@
+# TODO cleanup this specs
 describe "module: angleGrinder.forms", ->
   beforeEach module("angleGrinder.forms")
 
@@ -129,6 +130,7 @@ describe "module: angleGrinder.forms", ->
     $scope = null
     form = null
 
+    # TODO fix this typo
     comlileTemplate = (template) ->
       beforeEach inject ($rootScope, $compile) ->
         $scope = $rootScope.$new()
@@ -283,6 +285,65 @@ describe "module: angleGrinder.forms", ->
 
       it "changes the button label", ->
         expect(element).toHaveText "Delete..."
+
+  describe "directive: agCreateButton", ->
+    element = null
+    $scope = null
+
+    compileTemplate2 = (template) ->
+      beforeEach inject ($rootScope, $compile) ->
+        $scope = $rootScope.$new()
+        $scope.foo = jasmine.createSpy()
+
+        element = angular.element(template)
+        $compile(element)($scope)
+        $scope.$apply()
+
+    itHasTheFollowingHref = (href) ->
+      it "generates a link with valid `href`", ->
+        expect(element.attr("href")).toEqual href
+
+    itHasValidCssClass = ->
+      it "has valid css class", ->
+        expect(element).toHaveClass "btn"
+
+    itHasANiceIcon = ->
+      it "has a nice icon", ->
+        expect(element.find("i")).toHaveClass "icon-edit"
+
+    itOnClickCallsTheScopeMethod = ->
+      describe "on click", ->
+        it "calls the given scope method", ->
+          # When
+          element.click()
+          # Then
+          expect($scope.foo).toHaveBeenCalled()
+
+    describe "without a custom label", ->
+      compileTemplate2 """
+        <ag-create-button href="#/users/create" ng-click="foo()" />
+      """
+
+      itHasTheFollowingHref "#/users/create"
+      itHasValidCssClass()
+      itHasANiceIcon()
+      itOnClickCallsTheScopeMethod()
+
+      it "has the default label", ->
+        expect($.trim element.text()).toEqual "Create"
+
+    describe "with the custom label", ->
+      compileTemplate2 """
+        <ag-create-button href="#/projects/create" ng-click="foo()">Create user</ag-create-button>
+      """
+
+      itHasTheFollowingHref "#/projects/create"
+      itHasValidCssClass()
+      itHasANiceIcon()
+      itOnClickCallsTheScopeMethod()
+
+      it "has the custom label", ->
+        expect($.trim element.text()).toEqual "Create user"
 
   describe "directive: agCancelButton", ->
     element = null

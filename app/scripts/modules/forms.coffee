@@ -273,6 +273,22 @@ forms.directive "agDeleteButton", ->
     </button>
   """
 
+forms.directive "agCreateButton", ->
+  restrict: "E"
+  replace: true
+  transclude: true
+
+  link: (scope, element) ->
+    # Append the default label
+    element.append "Create" if $.trim(element.text()) is ""
+
+  template: """
+    <a class="btn">
+      <i class="icon-edit"></i>
+      <span ng-transclude></span>
+    </a>
+  """
+
 forms.directive "agCancelButton", ->
   restrict: "E"
   replace: true
