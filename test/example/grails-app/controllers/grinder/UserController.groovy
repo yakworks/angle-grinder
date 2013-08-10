@@ -12,7 +12,7 @@ class UserController extends BaseDomainController {
 
     def selectFields = ["*"]
 
-    //injected beans
+    // injected beans
     def grinderLabelService
 
     def index() {

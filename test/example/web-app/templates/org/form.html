@@ -1,0 +1,33 @@
+<section class="anchor">
+  <h2 ng-show="org.newRecord()">Create org</h2>
+  <h2 ng-show="org.persisted()">Edit org</h2>
+
+  <form name="editForm" novalidate class="form-horizontal no-margin" ng-submit="save(org)">
+    <ag-server-validation-errors></ag-server-validation-errors>
+
+    <div ag-field-group for="name">
+      <label class="control-label">Name</label>
+
+      <div class="controls">
+        <input type="text" name="name" placeholder="Enter Name"
+               ng-model="org.name" autofocus required />
+        <ag-validation-errors for="name" required="This field is required" />
+      </div>
+    </div>
+
+    <div ag-field-group for="num">
+      <label class="control-label">Num</label>
+
+      <div class="controls">
+        <input type="text" name="num" placeholder="Enter num"
+               ng-model="org.num" autofocus required />
+        <ag-validation-errors for="num" required="This field is required" />
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <ag-submit-button></ag-submit-button>
+      <a href="#/" class="btn">Cancel</a>
+    </div>
+  </form>
+</section>
