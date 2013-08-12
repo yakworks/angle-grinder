@@ -1,4 +1,4 @@
-class ShowCtrl
+class FormCtrl
   @$inject = ["$scope", "$location", "user"]
   constructor: ($scope, $location, user) ->
     $scope.user = user
@@ -13,4 +13,4 @@ class ShowCtrl
       user.delete success: callback, error: callback
 
 angular.module("angleGrinder")
-  .controller("users.ShowCtrl", ShowCtrl)
+  .controller("users.FormCtrl", FormCtrl)

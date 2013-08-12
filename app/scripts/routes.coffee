@@ -35,20 +35,20 @@ app.config [
         controller: "users.ListCtrl"
 
       .when "/users/create",
-        templateUrl: "templates/users/edit.html"
+        templateUrl: "templates/users/form.html"
         controller: "users.FormCtrl"
         resolve: user: ["Users", (Users) -> new Users()]
 
       .when "/users/:id",
         templateUrl: "templates/users/show.html"
-        controller: "users.ShowCtrl"
+        controller: "users.FormCtrl"
         resolve: user: [
           "$route", "userResolver", ($route, userResolver) ->
             userResolver($route.current.params.id)
         ]
 
       .when "/users/:id/edit",
-        templateUrl: "templates/users/edit.html"
+        templateUrl: "templates/users/form.html"
         controller: "users.FormCtrl"
         resolve: user: [
           "$route", "userResolver", ($route, userResolver) ->

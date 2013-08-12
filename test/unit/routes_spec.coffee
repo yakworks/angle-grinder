@@ -77,8 +77,8 @@ describe "Application routes", ->
     expect(userResolver).toHaveBeenCalledWith("12345")
 
     # Then
-    expect($route.current.templateUrl).toEqual("templates/users/show.html")
-    expect($route.current.controller).toEqual("users.ShowCtrl")
+    expect($route.current.templateUrl).toEqual("templates/users/form.html")
+    expect($route.current.controller).toEqual("users.FormCtrl")
 
   it "recognizes `/users/:id/edit`", inject ($q, userResolver) ->
     # When
