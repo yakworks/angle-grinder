@@ -268,7 +268,7 @@ forms.directive "agDeleteButton", ->
   ]
 
   template: """
-    <button type="button" class="btn btn-danger pull-left"
+    <button type="button" class="btn btn-danger ag-delete-button"
             ng-mouseleave="confirmation = false"
             ng-click="delete()">
       <i class="icon-trash"></i> {{label}}<span ng-show="deleting">...</span>

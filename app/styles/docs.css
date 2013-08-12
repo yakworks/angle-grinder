@@ -923,3 +923,7 @@ table.org-select-result td:nth-child(1) {
 table.org-select-result td:nth-child(2) {
   border-top: none;
 }
+
+.ag-delete-button {
+  width: 130px;
+}
