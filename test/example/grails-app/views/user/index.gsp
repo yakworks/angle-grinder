@@ -38,7 +38,7 @@
     </style>
 </head>
 
-<body>
+<body data-entity-name="user">
 
 <h3 class="page-header"><g:message code="default.list.label" args="[entityName]"/></h3>
 

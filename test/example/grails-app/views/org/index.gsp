@@ -7,7 +7,7 @@
     <r:require modules="admin"/>
 </head>
 
-<body>
+<body data-entity-name="user">
 
 <!-- TODO hide the left navigation panel -->
 <div ng-app="admin.org">

@@ -21,7 +21,6 @@ abstract class BaseDomainController {
 
     @PostConstruct
     protected void init() {
-        //println "init called and ga is ${grailsApplication?'initialized':'null'}"
     }
 
     protected String getDomainInstanceName() {
@@ -77,9 +76,6 @@ abstract class BaseDomainController {
         pageData.setupData(dlist, fieldList)
         return pageData
     }
-    //Class realController = grailsApplication.getArtefactByLogicalPropertyName("Controller", "\${instanceControllersApi.getControllerName(this)}").clazz
-    //realController.declaredFields.each{ ... }
-    //def mm = metaClass.getStaticMetaMethod('getSelectFields',[].toArray())
 
     protected def listModel() {
         return []
@@ -89,7 +85,6 @@ abstract class BaseDomainController {
     def listhtml(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         def pageData = pagedList(listCriteria())
-        //[${propertyName}List: ${className}.list(params), ${propertyName}Total: ${className}.count()]
         def propName = GrailsClassUtils.getPropertyNameRepresentation(domainClass)
         return [("${propName}List".toString()): pageData.data, ("${propName}ListTotal".toString()): pageData.recordCount]
     }

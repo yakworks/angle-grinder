@@ -1,9 +1,10 @@
 <section class="anchor">
-  <h2 ng-show="org.newRecord()">Create org</h2>
-  <h2 ng-show="org.persisted()">Edit org</h2>
+  <h3 class="page-header" ng-show="org.newRecord()">Create org</h3>
+  <h3 class="page-header" ng-show="org.persisted()">Edit org</h3>
 
-  <form name="editForm" novalidate class="form-horizontal no-margin" ng-submit="save(org)">
-    <ag-server-validation-errors></ag-server-validation-errors>
+  <form name="editForm" novalidate class="form-horizontal no-margin"
+        ag-server-validation-errors
+        ng-submit="save(org)">
 
     <div ag-field-group for="name">
       <label class="control-label">Name</label>

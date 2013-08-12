@@ -7,7 +7,9 @@
     <h3 ng-hide="createNew">Edit ${entityName}</h3>
 </div>
 
-<form name="editForm" class="form-horizontal no-margin" novalidate ng-submit="save(item)">
+<form name="editForm" class="form-horizontal no-margin" novalidate
+      ag-server-validation-errors
+      ng-submit="save(item)">
     <div class="modal-body">
         <ag-server-validation-errors></ag-server-validation-errors>
 

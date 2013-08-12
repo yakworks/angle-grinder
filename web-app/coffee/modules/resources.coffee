@@ -14,6 +14,9 @@ resources.factory "Resource", [
       delete: { method: "POST", params: action: "delete" }
 
     angular.extend Resource.prototype,
+      resourceName: ->
+        $document.find("body").data("entity-name")
+
       # Retunrs true if the record is persisted (has an id)
       persisted: -> @id?
 

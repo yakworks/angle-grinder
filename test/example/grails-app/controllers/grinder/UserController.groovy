@@ -7,13 +7,10 @@ import static javax.servlet.http.HttpServletResponse.SC_CREATED
 
 class UserController extends BaseDomainController {
     static final int SC_UNPROCESSABLE_ENTITY = 422
+
     def domainClass = User
-    def ajaxGrid = true
 
     def selectFields = ["*"]
-
-    // injected beans
-    def grinderLabelService
 
     def index() {
     }
@@ -42,7 +39,6 @@ class UserController extends BaseDomainController {
                 'in' ('contact.org.id', filters.org.collect {it.id as Long })
             }
 
-            //XXX ken refactor this part so it works with you helpers
             def fcontact = filters?.contact
             if (fcontact?.name) {
                 or {
@@ -63,10 +59,12 @@ class UserController extends BaseDomainController {
         return datalist
     }
 
+    // TODO serve it as static asset
     def formTemplate() {
         render(template: "form")
     }
 
+    // TODO serve it as static asset
     def searchPartial() {
         def user = new User()
         render(template: "search", model: [user: user])
@@ -75,8 +73,6 @@ class UserController extends BaseDomainController {
     def saveOrUpdate() {
         try {
             def result = params.id ? dao.update(params) : dao.insert(params)
-            //all was good render a success save message
-            //return ExportUtil.buildMapFromPaths(obj,fieldList)
             render ExportUtil.buildMapFromPaths(result.entity, selectFields) as JSON
         } catch (DomainException e) {
             response.status = 409
@@ -92,35 +88,6 @@ class UserController extends BaseDomainController {
         } else {
             notFound params.id
         }
-    }
-
-    def columnModel() {
-        grinderLabelService.columnSetup(columnModel)
-        render columnModel as JSON
-    }
-
-    def saveTest() {
-        def json = request.JSON
-        println "JSON " + json
-        println "JSON Class " + json.getClass()
-        def gson = request.GSON
-        println "YYYYYYYY " + gson.class
-        //assert gson.contact.firstName == "f"
-        def instance = new User(request.GSON)
-        assert instance.contact.firstName == "f"
-        def responseJson = [:]
-        if (instance.save(flush: true)) {
-            response.status = SC_CREATED
-            responseJson.id = instance.id
-            responseJson.message = message(code: 'default.created.message', args: [message(code: 'album.label', default: 'Album'), instance.id])
-        } else {
-            response.status = SC_UNPROCESSABLE_ENTITY
-            responseJson.errors = instance.errors.fieldErrors.collectEntries {
-                [(it.field): message(error: it)]
-            }
-        }
-        cache false
-        render responseJson as JSON
     }
 
 }

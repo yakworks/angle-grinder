@@ -41,6 +41,7 @@
 
 <body id="${pageProperty(name: 'body.id')}" onload="bload()"
       data-context-path="${request.contextPath}"
+      data-entity-name="${pageProperty(name: 'body.data-entity-name')}"
       data-base-url="${createLink(action: 'index').replaceAll(/index$/, '')}">
 
 <div class="navbar navbar-inverse navbar-fixed-top">
