@@ -3,6 +3,7 @@ class FormCtrl
   constructor: ($scope, $location, user) ->
     $scope.user = user
 
+    # Performs server side create or update
     $scope.save = (user) ->
       return if $scope.editForm.$invalid
 
@@ -21,6 +22,19 @@ class FormCtrl
           $scope.serverValidationErrors = errors
 
       user.save success: onSuccess, error: onError
+
+    # Performs server side delete
+    $scope.delete = (user) ->
+      $scope.deleting = true
+
+      onSuccess = (response) ->
+        $scope.deleting = false
+        $location.path "/users"
+
+      onError = (response) ->
+        $scope.deleting = false
+
+      user.delete success: onSuccess, error: onError
 
 angular.module("angleGrinder")
   .controller("users.FormCtrl", FormCtrl)
