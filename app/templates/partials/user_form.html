@@ -71,8 +71,10 @@
 
     <div class="modal-footer">
       <ag-submit-button></ag-submit-button>
+      <span ng-hide="createNew">
+        <ag-delete-button when-confirmed="delete(item)"></ag-delete-button>
+      </span>
       <ag-cancel-button ng-click="closeEditDialog()"></ag-cancel-button>
-      <ag-delete-button ng-hide="createNew" when-confirmed="delete(item)"></ag-delete-button>
     </div>
   </form>
 </div>

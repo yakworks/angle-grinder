@@ -5,6 +5,7 @@ class FormCtrl
 
     # Performs server side create or update
     $scope.save = (user) ->
+      # Do not perform save/update when the form is invalid
       return if $scope.editForm.$invalid
 
       $scope.saving = true

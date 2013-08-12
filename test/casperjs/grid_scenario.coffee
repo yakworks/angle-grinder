@@ -10,9 +10,9 @@ scenario "Basic grid scenario", ->
   dialog = new EditDialog(this)
 
   @feature "Navigate to the example", ->
-    @clickLabel "agGrid directive basic", "a"
+    @clickLabel "Sample grid", "a"
     @then ->
-      @test.assertUrlMatch /ag_grid_directive$/
+      @test.assertUrlMatch /list/
       @test.assertSelectorHasText "section.content h2", "Angular directive example"
 
   @feature "Display the grid with all data", ->

@@ -15,6 +15,7 @@ describe "controller: users.FormCtrl", ->
     expect($scope.user.email).toEqual "test@email.com"
 
   describe "#save", ->
+    # Mark the form as valid
     beforeEach -> $scope.editForm = $valid: true
 
     describe "on success", ->
@@ -30,6 +31,7 @@ describe "controller: users.FormCtrl", ->
         $scope.save(recordSpy)
 
         # Then
+        expect(recordSpy.save).toHaveBeenCalled()
         expect($location.path).toHaveBeenCalledWith("/users/123")
 
     describe "onError", ->
@@ -43,4 +45,10 @@ describe "controller: users.FormCtrl", ->
         $scope.save(recordSpy)
 
         # Then
+        expect(recordSpy.save).toHaveBeenCalled()
         expect($scope.serverValidationErrors).toEqual "foo bar"
+
+  describe "#delete", ->
+
+    it "is defined", ->
+      expect($scope.delete).toBeDefined()
