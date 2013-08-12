@@ -6,8 +6,9 @@
 </div>
 
 <div class="modal-body">
-  <form name="editForm" novalidate class="form-horizontal no-margin" ng-submit="save(item)">
-    <ag-server-validation-errors></ag-server-validation-errors>
+  <form name="editForm" novalidate class="form-horizontal no-margin"
+        ag-server-validation-errors
+        ng-submit="save(item)">
 
     <div ag-field-group for="name">
       <label class="control-label">Name</label>

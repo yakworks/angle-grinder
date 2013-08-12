@@ -23,6 +23,13 @@ describe "module: angleGrinder.resources", ->
         Users.get(id: 101)
         $httpBackend.flush()
 
+    describe "#resourceName", ->
+      user = null
+      beforeEach -> user = new Users()
+
+      it "returns the resource name", ->
+        expect(user.resourceName()).toEqual "user"
+
     describe "#persisted", ->
       user = null
       beforeEach -> user = new Users()

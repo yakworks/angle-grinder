@@ -10,8 +10,9 @@
   <h2 class="page-header" ng-show="user.newRecord()">Create user</h2>
   <h2 class="page-header" ng-show="user.persisted()">Edit user</h2>
 
-  <form name="editForm" novalidate class="form-horizontal no-margin" ng-submit="save(user)">
-    <ag-server-validation-errors></ag-server-validation-errors>
+  <form name="editForm" novalidate class="form-horizontal no-margin"
+        ag-server-validation-errors
+        ng-submit="save(user)">
 
     <div ag-field-group for="name">
       <label class="control-label">Name</label>

@@ -38,8 +38,9 @@ describe "controller: users.FormCtrl", ->
       it "sets server side validation errors", ->
         recordSpy = jasmine.createSpyObj("user", ["save"])
         recordSpy.id = 123
+        recordSpy.resourceName = -> "user"
         recordSpy.save.andCallFake (options) ->
-          options.error(status: 422, data: errors: "foo bar")
+          options.error(status: 422, data: errors: user: "foo bar")
 
         # When
         $scope.save(recordSpy)

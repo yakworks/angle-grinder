@@ -2,6 +2,7 @@ class FormCtrl
   @$inject = ["$scope", "$location", "user"]
   constructor: ($scope, $location, user) ->
     $scope.user = user
+    $scope.serverValidationErrors = {}
 
     # Performs server side create or update
     $scope.save = (user) ->
@@ -20,7 +21,7 @@ class FormCtrl
 
         if response.status is 422
           errors = response.data.errors
-          $scope.serverValidationErrors = errors
+          $scope.serverValidationErrors = errors[user.resourceName()]
 
       user.save success: onSuccess, error: onError
 

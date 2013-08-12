@@ -368,33 +368,18 @@ describe "module: angleGrinder.forms", ->
   describe "directive: agServerValidationErrors", ->
     element = null
     $scope = null
+    form = null
 
     beforeEach inject ($injector) ->
       {element, $scope} = compileTemplate """
-        <ag-server-validation-errors></ag-server-validation-errors>
+        <form name="theForm" ag-server-validation-errors></form>
       """, $injector
+      form = $scope.theForm
 
-    it "renders errors", ->
-      $scope.$apply ->
-        $scope.serverValidationErrors =
-          user:
-            login: "should be unique"
-            email: "is taken"
-          contact:
-            email: "is invalid"
-
-      expect(element.find(".alert-error").length).toEqual 3
-
-      $userErrors = element.find("[x-errors-for=user]")
-      expect($userErrors.find(".alert-error:nth-child(1)")).toHaveText "is taken"
-      expect($userErrors.find(".alert-error:nth-child(2)")).toHaveText "should be unique"
-
-      $contactErrors = element.find("[x-errors-for=contact]")
-      expect($contactErrors.find(".alert-error:nth-child(1)")).toHaveText "is invalid"
-
-    describe "when no errors", ->
-      it "renders nothing", ->
-        expect(element.find(".alert-error").length).toEqual 0
+    it "assings errors to the form", ->
+      $scope.$apply -> $scope.serverValidationErrors = login: "should be unique"
+      expect(form.$serverError).toBeDefined()
+      expect(form.$serverError.login).toEqual "should be unique"
 
   describe "service: confirmationDialog", ->
     it "displays the confirmation", inject ($dialog, confirmationDialog) ->
