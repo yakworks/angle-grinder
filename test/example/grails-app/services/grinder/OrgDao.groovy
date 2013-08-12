@@ -6,6 +6,7 @@ import grails.plugin.dao.DomainException
 import grails.plugin.dao.GormDaoSupport
 
 class OrgDao extends GormDaoSupport {
+    Class domainClass = Org
 
     Map insert(params) {
         def org = new Org()
@@ -21,4 +22,13 @@ class OrgDao extends GormDaoSupport {
         return [ok: true, entity: org, message: DaoMessage.created(org)]
     }
 
+    Map update(params) {
+        def org = Org.get(params.id.toLong())
+
+        org.properties = params
+        save(org)
+        DaoUtil.flush()
+
+        return [ok: true, entity: org, message: DaoMessage.updated(org)]
+    }
 }
