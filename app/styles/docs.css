@@ -908,7 +908,7 @@ li.spinner {
 }
 
 li.spinner i.spin:before {
-  content: url('/images/ajax-loader.gif');
+  content: url("/images/ajax-loader.gif");
 }
 
 table.org-select-result {
@@ -926,4 +926,8 @@ table.org-select-result td:nth-child(2) {
 
 .ag-delete-button {
   width: 130px;
+}
+
+.form-actions {
+  padding-left: 160px;
 }
