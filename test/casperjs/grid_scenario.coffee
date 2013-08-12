@@ -10,10 +10,10 @@ scenario "Basic grid scenario", ->
   dialog = new EditDialog(this)
 
   @feature "Navigate to the example", ->
-    @clickLabel "Sample grid", "a"
+    @clickLabel "Grid example", "a"
     @then ->
       @test.assertUrlMatch /list/
-      @test.assertSelectorHasText "section.content h2", "Angular directive example"
+      @test.assertSelectorHasText "section.content h2", "Grid example"
 
   @feature "Display the grid with all data", ->
     @test.assertEquals grid.getRowsCount(), 20, "Loads the data and displays the first 20 rows"
