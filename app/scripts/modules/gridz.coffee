@@ -6,72 +6,77 @@ gridz = angular.module("angleGrinder.gridz", [
 gridz.directive "agGrid", [
   "hasSearchFilters", "$log", (hasSearchFilters, $log) ->
     link = ($scope, element, attrs) ->
-      $grid = $("#grid", element)
+      # Initializes a grid with the given options
+      initializeGrid = (gridOptions) ->
+        return unless gridOptions?
+        $log.info "Initializing the grid", gridOptions
 
-      gridOptions = $scope.$eval(attrs.agGrid)
-      $grid.gridz(gridOptions)
+        $grid = $("#grid", element)
+        $grid.gridz(gridOptions)
 
-      showItem = (id) ->
-        $scope.$apply ->
-          if $scope.showItem? then $scope.showItem(id) else $log.warn("`$scope.showItem` is not defined")
+        showItem = (id) ->
+          $scope.$apply ->
+            if $scope.showItem? then $scope.showItem(id) else $log.warn("`$scope.showItem` is not defined")
 
-      editItem = (id) ->
-        $scope.$apply ->
-          if $scope.editItem? then $scope.editItem(id) else $log.warn("`$scope.editItem` is not defined")
+        editItem = (id) ->
+          $scope.$apply ->
+            if $scope.editItem? then $scope.editItem(id) else $log.warn("`$scope.editItem` is not defined")
 
-      # flash the given row
-      flashRowFor = (item, complete = ->) ->
-        $row = $($grid[0].rows.namedItem(item.id))
+        # flash the given row
+        flashRowFor = (item, complete = ->) ->
+          $row = $($grid[0].rows.namedItem(item.id))
 
-        $row.css "background-color", "#DFF0D8"
-        $row.delay(100).fadeOut "medium", ->
-          $row.css "background-color", ""
+          $row.css "background-color", "#DFF0D8"
+          $row.delay(100).fadeOut "medium", ->
+            $row.css "background-color", ""
 
-        $row.fadeIn "fast", -> complete()
+          $row.fadeIn "fast", -> complete()
 
-      # handles click on show action insite the dropdown menu
-      $grid.on "showAction", (event, id) ->
-        event.preventDefault()
-        showItem(id)
+        # handles click on show action insite the dropdown menu
+        $grid.on "showAction", (event, id) ->
+          event.preventDefault()
+          showItem(id)
 
-      # handles click on edit action insite the dropdown menu
-      $grid.on "editAction", (event, id) ->
-        event.preventDefault()
-        editItem(id)
+        # handles click on edit action insite the dropdown menu
+        $grid.on "editAction", (event, id) ->
+          event.preventDefault()
+          editItem(id)
 
-      # handles click on the cell with `editActionLink` formatter
-      $grid.on "click", "a.editActionLink", (event) ->
-        event.preventDefault()
-        id = $(this).parents("tr:first").attr("id")
-        editItem(id)
+        # handles click on the cell with `editActionLink` formatter
+        $grid.on "click", "a.editActionLink", (event) ->
+          event.preventDefault()
+          id = $(this).parents("tr:first").attr("id")
+          editItem(id)
 
-      $grid.on "deleteAction", (event, id) ->
-        event.preventDefault()
-        $scope.$apply -> $scope.deleteItem id
+        $grid.on "deleteAction", (event, id) ->
+          event.preventDefault()
+          $scope.$apply -> $scope.deleteItem id
 
-      # emit `gridzLoadComplete` event
-      $grid.on "jqGridAfterLoadComplete", ->
-        $scope.$broadcast "gridzLoadComplete"
+        # emit `gridzLoadComplete` event
+        $grid.on "jqGridAfterLoadComplete", ->
+          $scope.$broadcast "gridzLoadComplete"
 
-      # catch broadcast event after save. This will need to change
-      $scope.$on "itemUpdated", (event, item) ->
-        if $grid.jqGrid("getInd", item.id)
-          $grid.jqGrid "setRowData", item.id, item
-        else
-          $grid.jqGrid "addRowData", item.id, item, "first"
+        # catch broadcast event after save. This will need to change
+        $scope.$on "itemUpdated", (event, item) ->
+          if $grid.jqGrid("getInd", item.id)
+            $grid.jqGrid "setRowData", item.id, item
+          else
+            $grid.jqGrid "addRowData", item.id, item, "first"
 
-        flashRowFor item
+          flashRowFor item
 
-      $scope.$on "itemDeleted", (event, item) ->
-        flashRowFor item, ->
-          $grid.jqGrid "delRowData", item.id
+        $scope.$on "itemDeleted", (event, item) ->
+          flashRowFor item, ->
+            $grid.jqGrid "delRowData", item.id
 
-      $scope.$on "searchUpdated", (event, filters) ->
-        params =
-          search: hasSearchFilters(filters)
-          postData: filters: JSON.stringify(filters)
+        $scope.$on "searchUpdated", (event, filters) ->
+          params =
+            search: hasSearchFilters(filters)
+            postData: filters: JSON.stringify(filters)
 
-        $grid.setGridParam(params).trigger "reloadGrid"
+          $grid.setGridParam(params).trigger "reloadGrid"
+
+      $scope.$watch attrs.agGrid, initializeGrid
 
     restrict: "A"
     template: """
