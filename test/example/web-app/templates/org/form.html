@@ -1,8 +1,9 @@
 <div class="subnav">
   <ul class="nav nav-pills">
-    <li><a class="list" href="#/"><i class="icon-list"></i> Org List</a></li>
-    <li><a ng-show="org.persisted()" class="list" href="#/{{org.id}}"><i class="icon-th"></i> Show org</a></li>
-    <li><a ng-show="org.persisted()" class="create" href="#/create"><i class="icon-plus"></i> New org</a></li>
+    <li><a href="#/"><i class="icon-list"></i> Org List</a></li>
+    <li><a ng-show="org.persisted()" href="#/{{org.id}}"><i class="icon-th"></i> Show org</a></li>
+    <li><a ng-show="org.persisted()" href="#/{{org.id}}/details"><i class="icon-th"></i> Org details</a></li>
+    <li><a ng-show="org.persisted()" href="#/create"><i class="icon-plus"></i> New org</a></li>
   </ul>
 </div>
 
