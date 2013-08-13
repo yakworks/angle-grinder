@@ -9,9 +9,9 @@
   <h3 class="page-header">Org details</h3>
 
   <tabset>
-    <tab>
+    <tab select="initGrid()">
       <tab-heading><i class="icon-user"></i> Contacts</tab-heading>
-      contacts goes here
+      <div ng-show="gridOptions" ag-grid="gridOptions"></div>
     </tab>
 
     <tab>
