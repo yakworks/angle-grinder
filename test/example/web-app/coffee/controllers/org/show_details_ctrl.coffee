@@ -4,20 +4,14 @@ class ShowDetailsCtrl
   constructor: ($scope, $location, pathWithContext, org) ->
     $scope.org = org
 
-    $scope.initGrid = ->
+    $scope.initGrid = =>
       $scope.gridOptions =
-        url: pathWithContext("/user/list.json")
-        colModel: [
-          { name: "id", label: "ID", width: 30 }
-          { name: "contact.name", label: "Contact Name", width: 100, formatter: "editActionLink" }
-          { name: "contact.email", label: "Contact Email", width: 70, align: "right", formatter: "email" }
-          { name: "login", label: "Login", width: 70 }
-          { name: "inactive", label: "Inactive", width: 30, align: "center", formatter: "okIcon" }
-        ]
+        url: pathWithContext("/org/listContacts/#{org.id}.json")
+        colModel: @colModel()
         multiselect: false # turn off multiselect
         shrinkToFit: true # makes columns fit to width
         autowidth: true
-        sortname: "login"
+        sortname: "email"
         sortorder: "asc"
 
     $scope.delete = (org) ->
@@ -28,6 +22,14 @@ class ShowDetailsCtrl
         $location.path("/")
 
       org.delete success: callback, error: callback
+
+  colModel: ->
+    [
+      { name: "id", label: "ID", width: 30 }
+      { name: "firstName", label: "First name", width: 50 }
+      { name: "lastName", label: "Last name", width: 50 }
+      { name: "email", label: "Email", width: 70, formatter: "email" }
+    ]
 
 angular.module("angleGrinder")
   .controller("org.ShowDetailsCtrl", ShowDetailsCtrl)
