@@ -8,6 +8,18 @@
 <div class="content">
   <h3 class="page-header">Org details</h3>
 
+  <tabset>
+    <tab>
+      <tab-heading><i class="icon-user"></i> Contacts</tab-heading>
+      contacts goes here
+    </tab>
+
+    <tab>
+      <tab-heading><i class="icon-envelope"></i> Address</tab-heading>
+      address edit goes here
+    </tab>
+  </tabset>
+
   <div class="form-actions">
     <a ng-href="#/{{org.id}}/edit" class="btn"><i class="icon-edit"></i> Edit</a>
     <ag-delete-button when-confirmed="delete(org)"></ag-delete-button>
