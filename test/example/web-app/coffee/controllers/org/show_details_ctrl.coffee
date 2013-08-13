@@ -7,7 +7,12 @@ class ShowDetailsCtrl
     $scope.initGrid = =>
       $scope.gridOptions =
         url: pathWithContext("/org/listContacts/#{org.id}.json")
-        colModel: @colModel()
+        colModel: [
+          { name: "id", label: "ID", width: 30 }
+          { name: "firstName", label: "First name", width: 50 }
+          { name: "lastName", label: "Last name", width: 50 }
+          { name: "email", label: "Email", width: 70, formatter: "email" }
+        ]
         multiselect: false # turn off multiselect
         shrinkToFit: true # makes columns fit to width
         autowidth: true
@@ -22,14 +27,6 @@ class ShowDetailsCtrl
         $location.path("/")
 
       org.delete success: callback, error: callback
-
-  colModel: ->
-    [
-      { name: "id", label: "ID", width: 30 }
-      { name: "firstName", label: "First name", width: 50 }
-      { name: "lastName", label: "Last name", width: 50 }
-      { name: "email", label: "Email", width: 70, formatter: "email" }
-    ]
 
 angular.module("angleGrinder")
   .controller("org.ShowDetailsCtrl", ShowDetailsCtrl)

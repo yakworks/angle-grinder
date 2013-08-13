@@ -9,14 +9,14 @@
   <h3 class="page-header">Org details</h3>
 
   <tabset>
-    <tab select="initGrid()">
-      <tab-heading><i class="icon-user"></i> Contacts</tab-heading>
-      <div ng-show="gridOptions" ag-grid="gridOptions"></div>
-    </tab>
-
     <tab>
       <tab-heading><i class="icon-envelope"></i> Address</tab-heading>
       address edit goes here
+    </tab>
+
+    <tab select="initGrid()">
+      <tab-heading><i class="icon-user"></i> Contacts</tab-heading>
+      <div ng-show="gridOptions" ag-grid="gridOptions"></div>
     </tab>
   </tabset>
 
