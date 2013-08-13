@@ -5,13 +5,20 @@ gridz = angular.module("angleGrinder.gridz", [
 
 gridz.directive "agGrid", [
   "hasSearchFilters", "$log", (hasSearchFilters, $log) ->
-    link = ($scope, element, attrs) ->
+    link = ($scope, $element, attrs) ->
       # Initializes a grid with the given options
       initializeGrid = (gridOptions) ->
         return unless gridOptions?
         $log.info "Initializing the grid", gridOptions
 
-        $grid = $("#grid", element)
+        $grid = $("#grid", $element)
+
+        # workaround for problem with initial grid size inside the hidden container
+        # see http://www.trirand.com/blog/?page_id=393/help/problem-with-autowidth/
+        gridOptions.gridComplete = ->
+          width = $element.parent().width() - 1
+          $grid.setGridWidth(width)
+
         $grid.gridz(gridOptions)
 
         showItem = (id) ->
@@ -142,7 +149,7 @@ gridz.directive "agResetSearchButton", ->
 gridz.directive "agSearchForm", ["$rootScope", ($rootScope) ->
   restrict: "A"
   scope: false
-  link: ($scope, element, attrs) ->
+  link: ($scope, $element, attrs) ->
     $scope.searching = false
     $scope.search = {}
 
