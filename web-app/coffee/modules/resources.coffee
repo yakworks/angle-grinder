@@ -14,6 +14,9 @@ resources.factory "Resource", [
       delete: { method: "POST", params: action: "delete" }
 
     angular.extend Resource.prototype,
+      resourceName: ->
+        $document.find("body").data("entity-name")
+
       # Retunrs true if the record is persisted (has an id)
       persisted: -> @id?
 
@@ -30,4 +33,17 @@ resources.factory "Resource", [
         Resource.delete({}, this, options.success, options.error)
 
     Resource
+]
+
+# Tries to load an user record with the given id taken from route params
+resources.factory "resourceResolver", [
+  "$q", "$route", "Resource", ($q, $route, Resource) ->
+    (id) ->
+      deferred = $q.defer()
+
+      onSuccess = (user) -> deferred.resolve(user)
+      onError = -> deferred.reject()
+      Resource.get id: id, onSuccess, onError
+
+      deferred.promise
 ]

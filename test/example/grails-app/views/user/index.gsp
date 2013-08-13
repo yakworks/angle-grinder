@@ -38,17 +38,11 @@
     </style>
 </head>
 
-<body>
+<body data-entity-name="user">
 
 <h3 class="page-header"><g:message code="default.list.label" args="[entityName]"/></h3>
 
-<div ng-controller="UsersListCtrl"
-     ng-init="editTemplateUrl = '${createLink(action: 'editPartial')}' ">
-
-    <g:hasErrors bean="${error}">
-        <div class="errors"><g:renderErrors bean="${error}" as="list"/></div>
-    </g:hasErrors>
-
+<div ng-app="angleGrinder" ng-controller="UsersListCtrl" ng-init="editTemplateUrl = '${createLink(action: 'editPartial')}' ">
     <ag-alerts></ag-alerts>
 
     <div ng-controller="SearchFormCtrl" collapse="!showSearchForm"
@@ -58,7 +52,7 @@
         <div class="navbar-inner with-selected-pointer with-grid-options">
             <ul class="nav">
                 <li>
-                    <a href="#editModal" ng-click="createDialog()">
+                    <a href="#editModal" ng-click="createItem()">
                         <i class="icon-user"></i><g:message code="default.new.label" args="[entityName]"/>
                     </a>
                 </li>

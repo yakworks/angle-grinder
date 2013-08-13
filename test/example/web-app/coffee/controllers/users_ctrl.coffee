@@ -2,17 +2,9 @@ class UsersListCtrl
 
   @$inject = ["$scope", "$log", "confirmationDialog", "editDialog", "Resource", "pathWithContext"]
   constructor: ($scope, $log, confirmationDialog, editDialog, Resource, pathWithContext) ->
-    colModel = [
-      { name: "id", label: "ID", width: 30 }
-      { name: "contact.name", label: "Contact Name", width: 100, formatter: "editActionLink" }
-      { name: "contact.email", label: "Contact Email", width: 70, align: "right", formatter: "email" }
-      { name: "login", label: "Login", width: 70 }
-      { name: "inactive", label: "Inactive", width: 30, align: "center", formatter: "okIcon" }
-    ]
-
     $scope.gridOptions =
-      url: pathWithContext("/userAdmin/list.json")
-      colModel: colModel
+      url: pathWithContext("/user/list.json")
+      colModel: @colModel()
       multiselect: false # turn off multiselect
       shrinkToFit: true # makes columns fit to width
       sortname: "login"
@@ -23,16 +15,16 @@ class UsersListCtrl
       $scope.$broadcast "searchUpdated", search
 
     # Displays a form for creating a new user
-    $scope.createDialog = ->
+    $scope.createItem = ->
       # TODO workaround for missing Org
       user = new Resource(orgId: 1)
 
-      editDialog.open(pathWithContext("userAdmin/formTemplate"), user)
+      editDialog.open(pathWithContext("/user/formTemplate"), user)
 
     # Displays a form for editing an exiting user
-    $scope.editDialog = (id) ->
+    $scope.editItem = (id) ->
       Resource.get { id: id }, (user) ->
-        editDialog.open(pathWithContext("/userAdmin/formTemplate"), user)
+        editDialog.open(pathWithContext("/user/formTemplate"), user)
 
     $scope.deleteItem = (id) ->
       confirmationDialog.open().then (confirmed) ->
@@ -42,6 +34,15 @@ class UsersListCtrl
         item.delete
           success: (response) -> $scope.$broadcast "itemDeleted", item
           error: (response) -> $log.error "Something went wront", response
+
+  colModel: ->
+    [
+      { name: "id", label: "ID", width: 30 }
+      { name: "contact.name", label: "Contact Name", width: 100, formatter: "editActionLink" }
+      { name: "contact.email", label: "Contact Email", width: 70, align: "right", formatter: "email" }
+      { name: "login", label: "Login", width: 70 }
+      { name: "inactive", label: "Inactive", width: 30, align: "center", formatter: "okIcon" }
+    ]
 
 class UsersSearchFormCtrl
 

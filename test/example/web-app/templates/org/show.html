@@ -1,0 +1,26 @@
+<div class="subnav">
+  <ul class="nav nav-pills">
+    <li><a class="list" href="#/"><i class="icon-list"></i> Org List</a></li>
+    <li><a class="create" href="#/create"><i class="icon-plus"></i> New org</a></li>
+  </ul>
+</div>
+
+<div class="content">
+  <h3 class="page-header">Org show</h3>
+
+  <dl class="dl-horizontal">
+    <dt>ID</dt>
+    <dd>{{org.id}}</dd>
+
+    <dt>Email</dt>
+    <dd>{{org.name}}</dd>
+
+    <dt>Num</dt>
+    <dd>{{org.num}}</dd>
+  </dl>
+
+  <div class="form-actions">
+    <a ng-href="#/{{org.id}}/edit" class="btn"><i class="icon-edit"></i> Edit</a>
+    <ag-delete-button when-confirmed="delete(org)"></ag-delete-button>
+  </div>
+</div>

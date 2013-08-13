@@ -21,7 +21,6 @@ abstract class BaseDomainController {
 
     @PostConstruct
     protected void init() {
-        //println "init called and ga is ${grailsApplication?'initialized':'null'}"
     }
 
     protected String getDomainInstanceName() {
@@ -77,9 +76,6 @@ abstract class BaseDomainController {
         pageData.setupData(dlist, fieldList)
         return pageData
     }
-    //Class realController = grailsApplication.getArtefactByLogicalPropertyName("Controller", "\${instanceControllersApi.getControllerName(this)}").clazz
-    //realController.declaredFields.each{ ... }
-    //def mm = metaClass.getStaticMetaMethod('getSelectFields',[].toArray())
 
     protected def listModel() {
         return []
@@ -89,7 +85,6 @@ abstract class BaseDomainController {
     def listhtml(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         def pageData = pagedList(listCriteria())
-        //[${propertyName}List: ${className}.list(params), ${propertyName}Total: ${className}.count()]
         def propName = GrailsClassUtils.getPropertyNameRepresentation(domainClass)
         return [("${propName}List".toString()): pageData.data, ("${propName}ListTotal".toString()): pageData.recordCount]
     }
@@ -154,24 +149,19 @@ abstract class BaseDomainController {
     }
 
     def saveOrUpdateJson() {
-        log.debug("in saveOrUpdateJson with ${params}")
         def responseJson = [:]
         try {
             def p = request.JSON
-            log.debug "saveOrUpdateJson p: ${p}"
-            //println p
             def result = p.id ? dao.update(p) : saveDomain(p)
             render ExportUtil.buildMapFromPaths(result.entity, selectFields) as JSON
             return
         } catch (ValidationException e) {
-            log.debug("saveJson with error")
             response.status = 422
             responseJson = [
                     "status": 422,
                     "message": buildMsg(e.messageMap),
                     "messageCode": e.messageMap.code
             ]
-            //def propName = GrailsClassUtils.getPropertyNameRepresentation(domainClass)
             responseJson.errors = e.entity.errors.fieldErrors.groupBy {
                 GrailsClassUtils.getPropertyNameRepresentation(it.objectName)
             }.each {
@@ -180,9 +170,6 @@ abstract class BaseDomainController {
                 }
             }
 
-            // def emap = e.entity.errors.fieldErrors.collectEntries {
-            //              ['contact':[(it.field): message(error: it),object:it.objectName]]
-            //          }
             render responseJson as JSON
         }
     }
