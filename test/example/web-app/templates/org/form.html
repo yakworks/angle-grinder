@@ -1,3 +1,11 @@
+<div class="subnav">
+  <ul class="nav nav-pills">
+    <li><a class="list" href="#/"><i class="icon-list"></i> Org List</a></li>
+    <li><a ng-show="org.persisted()" class="list" href="#/{{org.id}}"><i class="icon-th"></i> Show org</a></li>
+    <li><a ng-show="org.persisted()" class="create" href="#/create"><i class="icon-plus"></i> New org</a></li>
+  </ul>
+</div>
+
 <section class="anchor">
   <h3 class="page-header" ng-show="org.newRecord()">Create org</h3>
   <h3 class="page-header" ng-show="org.persisted()">Edit org</h3>
