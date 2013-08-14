@@ -15,32 +15,13 @@
     <r:layoutResources/>
 
     <style>
-    #page {
+    body {
         padding-top: 40px;
     }
     </style>
-    <script type="text/javascript">
-        <r:script>
-        var BASE_PATH = "${resource(plugin:' ')}";
-        //some hackiness so that the fixed nav bar on top does not obscure the an in-page anchor or jump
-        //found here https://github.com/twitter/bootstrap/issues/1768
-        var shiftWindow = function () {
-            scrollBy(0, -50)
-        };
-        window.addEventListener("hashchange", shiftWindow);
-        function bload() {
-            if (window.location.hash) shiftWindow();
-        }
-
-        function gurl(controller, action) {
-            return BASE_PATH + "/" + controller + "/" + action;
-        }
-        </r:script>
-    </script>
 </head>
 
-<body id="${pageProperty(name: 'body.id')}" onload="bload()"
-      data-context-path="${request.contextPath}"
+<body data-context-path="${request.contextPath}"
       data-entity-name="${pageProperty(name: 'body.data-entity-name')}"
       data-base-url="${createLink(action: 'index').replaceAll(/index$/, '')}">
 
