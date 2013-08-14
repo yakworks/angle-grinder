@@ -10,11 +10,31 @@ app = angular.module "angleGrinder", [
   "angleGrinder.resources"
 ]
 
-# Configure the context path
 app.config [
-  "pathWithContextProvider", (pathWithContextProvider) ->
+  "$httpProvider", "pathWithContextProvider", ($httpProvider, pathWithContextProvider) ->
+    # Intercept all http errors
+    $httpProvider.responseInterceptors.push("httpErrorsInterceptor")
+
+    # Configure the context path
     contextPath = $("body").data("context-path")
     pathWithContextProvider.setContextPath(contextPath) if contextPath?
+]
+
+# Intercepts all HTTP errors and dislays a flash message
+app.factory "httpErrorsInterceptor", [
+  "$injector", "$q", "alerts", ($injector, $q, alerts) ->
+    (promise) ->
+      $http = $injector.get("$http")
+
+      onError = (response) ->
+        errorMessage = response.data?.error || "Unexpected HTTP error"
+
+        # skip validation errors
+        alerts.error(errorMessage) if response.status isnt 422
+
+        $q.reject(response)
+
+      promise.then(null, onError)
 ]
 
 # Catch all jquery xhr errors
