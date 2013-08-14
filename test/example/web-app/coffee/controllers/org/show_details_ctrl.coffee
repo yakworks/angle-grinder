@@ -1,7 +1,7 @@
 class ShowDetailsCtrl
 
-  @$inject = ["$scope", "$location", "pathWithContext", "org"]
-  constructor: ($scope, $location, pathWithContext, org) ->
+  @$inject = ["$scope", "$location", "pathWithContext", "alerts", "org"]
+  constructor: ($scope, $location, pathWithContext, alerts, org) ->
     $scope.org = org
 
     $scope.initGrid = =>
@@ -23,9 +23,14 @@ class ShowDetailsCtrl
       return if $scope.editForm.$invalid
 
       $scope.saving = true
-      onComplete = -> $scope.saving = false
 
-      org.save success: onComplete, error: onComplete
+      onSuccess = ->
+        $scope.saving = false
+        alerts.info("Org address has been updated.")
+
+      onError = -> $scope.saving = false
+
+      org.save success: onSuccess, error: onError
 
     $scope.delete = (org) ->
       $scope.deleting = true
