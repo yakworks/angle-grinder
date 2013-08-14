@@ -9,15 +9,30 @@ class BootStrap {
     def init = { servletContext ->
         def Random generator = new Random()
 
-        def firstOrg = orgDao.insert(name: "github", num: "111-111-111").entity
-        def secondOrg = orgDao.insert(name: "9ci", num: "222-222-222").entity
-        def thirdOrg = orgDao.insert(name: "Microsoft", num: "333-333-333").entity
-        def sampleOrganizations = [firstOrg, secondOrg, thirdOrg]
+        def createOrg = { attributes = [] ->
+            attributes = [
+                name: fakerService.companyName(),
+                num: fakerService.numerify("##-##-##"),
 
-        for (i in 0..50) {
-            def org = new Org(name: fakerService.companyName(), num: fakerService.numerify("##-##-##"))
-            org.save(flush: true)
+                phone: fakerService.numerify("##-###-###-###"),
+                street: fakerService.streetAddress(),
+                city: fakerService.city(),
+                state: fakerService.usState(),
+                zip: fakerService.zipCode()
+            ] + attributes
+
+            orgDao.insert(attributes).entity
         }
+
+        // create some organizations
+        for (i in 0..20) createOrg()
+
+        // create users along with organizations
+        def firstOrg = createOrg(name: "GitHub", num: "111-111-111")
+        def secondOrg = createOrg(name: "9ci", num: "222-222-222")
+        def thirdOrg = createOrg(name: "Microsoft", num: "333-333-333")
+
+        def sampleOrganizations = [firstOrg, secondOrg, thirdOrg]
 
         for (i in 0..100) {
             def n = generator.nextInt(sampleOrganizations.size())
@@ -40,6 +55,5 @@ class BootStrap {
         }
     }
 
-    def destroy = {
-    }
+    def destroy = {}
 }
