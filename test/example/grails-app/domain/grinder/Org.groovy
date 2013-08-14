@@ -8,6 +8,13 @@ class Org implements Serializable {
     String num
     String name
 
+    //addy
+    String phone //default
+    String street
+    String city
+    String state
+    String zip
+
     static mapping = {
         cache true
     }
@@ -15,6 +22,11 @@ class Org implements Serializable {
     static constraints = {
         num blank:false, nullable:false, maxSize:50
         name blank: false, nullable: false, unique: true, maxSize: 50
+        phone nullable: true
+        street nullable: true
+        city nullable: true
+        state nullable: true
+        zip nullable: true
     }
 
     @Override
