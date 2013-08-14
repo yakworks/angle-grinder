@@ -15,6 +15,7 @@ describe "controller: users.FormCtrl", ->
     expect($scope.user.email).toEqual "test@email.com"
 
   describe "#save", ->
+    # Mark the form as valid
     beforeEach -> $scope.editForm = $valid: true
 
     describe "on success", ->
@@ -30,17 +31,25 @@ describe "controller: users.FormCtrl", ->
         $scope.save(recordSpy)
 
         # Then
+        expect(recordSpy.save).toHaveBeenCalled()
         expect($location.path).toHaveBeenCalledWith("/users/123")
 
     describe "onError", ->
       it "sets server side validation errors", ->
         recordSpy = jasmine.createSpyObj("user", ["save"])
         recordSpy.id = 123
+        recordSpy.resourceName = -> "user"
         recordSpy.save.andCallFake (options) ->
-          options.error(status: 422, data: errors: "foo bar")
+          options.error(status: 422, data: errors: user: "foo bar")
 
         # When
         $scope.save(recordSpy)
 
         # Then
+        expect(recordSpy.save).toHaveBeenCalled()
         expect($scope.serverValidationErrors).toEqual "foo bar"
+
+  describe "#delete", ->
+
+    it "is defined", ->
+      expect($scope.delete).toBeDefined()

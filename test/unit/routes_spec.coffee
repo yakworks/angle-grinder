@@ -8,15 +8,11 @@ describe "Application routes", ->
   beforeEach module "angleGrinder"
 
   beforeEach ->
-    module("templates/gridz_with_toolbar.html")
-    module("templates/simple_jqgrid.html")
-    module("templates/simple_gridz.html")
-    module("templates/jqgrid_basic.html")
-    module("templates/ag_grid_directive.html")
-    module("templates/server_side.html")
+    module("templates/list.html")
+    module("templates/users_list.html")
     module("templates/users/list.html")
     module("templates/users/show.html")
-    module("templates/users/edit.html")
+    module("templates/users/form.html")
 
   $rootScope = null
   $route = null
@@ -32,33 +28,18 @@ describe "Application routes", ->
 
   it "recognizes `/`", ->
     navigateTo "/"
-    expect($route.current.templateUrl).toEqual("templates/gridz_with_toolbar.html")
-    expect($route.current.controller).toEqual("GridzWithToolbarCtrl")
+    expect($route.current.templateUrl).toEqual("templates/users_list.html")
+    expect($route.current.controller).toEqual("UsersListCtrl")
 
-  it "recognizes `/simple_jqgrid`", ->
-    navigateTo "/simple_jqgrid"
-    expect($route.current.templateUrl).toEqual("templates/simple_jqgrid.html")
-    expect($route.current.controller).toEqual("SimpleJqGridCtrl")
+  it "recognizes `/list`", ->
+    navigateTo "/list"
+    expect($route.current.templateUrl).toEqual("templates/list.html")
+    expect($route.current.controller).toEqual("ListCtrl")
 
-  it "recognizes `/simple_gridz`", ->
-    navigateTo "/simple_gridz"
-    expect($route.current.templateUrl).toEqual("templates/simple_gridz.html")
-    expect($route.current.controller).toEqual("SimpleGridzCtrl")
-
-  it "recognizes `/jqgrid_basic`", ->
-    navigateTo "/jqgrid_basic"
-    expect($route.current.templateUrl).toEqual("templates/jqgrid_basic.html")
-    expect($route.current.controller).toEqual("JqGridBasicCtrl")
-
-  it "recognizes `/ag_grid_directive`", ->
-    navigateTo "/ag_grid_directive"
-    expect($route.current.templateUrl).toEqual("templates/ag_grid_directive.html")
-    expect($route.current.controller).toEqual("AgGridDirectiveCtrl")
-
-  it "recognizes `/server_side`", ->
-    navigateTo "/server_side"
-    expect($route.current.templateUrl).toEqual("templates/server_side.html")
-    expect($route.current.controller).toEqual("ServerSideCtrl")
+  it "recognizes `/users_list`", ->
+    navigateTo "/users_list"
+    expect($route.current.templateUrl).toEqual("templates/users_list.html")
+    expect($route.current.controller).toEqual("UsersListCtrl")
 
   it "recognizes `/users`", ->
     navigateTo "/users"
@@ -67,7 +48,7 @@ describe "Application routes", ->
 
   it "recognizes `/users/create`", ->
     navigateTo "/users/create"
-    expect($route.current.templateUrl).toEqual("templates/users/edit.html")
+    expect($route.current.templateUrl).toEqual("templates/users/form.html")
     expect($route.current.controller).toEqual("users.FormCtrl")
     expect($route.current.resolve.user).toBeDefined()
 
@@ -86,6 +67,6 @@ describe "Application routes", ->
     expect(userResolver).toHaveBeenCalledWith("234")
 
     # Then
-    expect($route.current.templateUrl).toEqual("templates/users/edit.html")
+    expect($route.current.templateUrl).toEqual("templates/users/form.html")
     expect($route.current.controller).toEqual("users.FormCtrl")
     expect($route.current.resolve.user).toBeDefined()

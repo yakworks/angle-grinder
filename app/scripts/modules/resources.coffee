@@ -13,6 +13,9 @@ resources.factory "Users", [
     # * non-GET "class" actions: Resource.action([parameters], postData, [success], [error])
     # * non-GET instance actions: instance.$action([parameters], [success], [error])
     angular.extend Users.prototype,
+      # Returns the name of the resource
+      resourceName: -> "user"
+
       # Retunrs true if the record is persisted (has an id)
       persisted: -> @id?
 

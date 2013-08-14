@@ -1,4 +1,4 @@
-describe "controller: AgGridDirectiveCtrl", ->
+describe "controller: ListCtrl", ->
   beforeEach module("angleGrinder")
   beforeEach module("templates/partials/item_form.html")
 
@@ -7,7 +7,7 @@ describe "controller: AgGridDirectiveCtrl", ->
 
   beforeEach inject ($rootScope, $controller) ->
     $scope = $rootScope.$new()
-    controller = $controller "AgGridDirectiveCtrl",
+    controller = $controller "ListCtrl",
       $scope: $scope
 
   describe "$scope", ->

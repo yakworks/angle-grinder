@@ -1,11 +1,11 @@
-describe "controller: ServerSideCtrl", ->
+describe "controller: UsersListCtrl", ->
   beforeEach module("angleGrinder")
 
   $scope = null
 
   beforeEach inject ($rootScope, $controller) ->
     $scope = $rootScope.$new()
-    $controller "ServerSideCtrl",
+    $controller "UsersListCtrl",
       $scope: $scope
 
   describe "$scope", ->

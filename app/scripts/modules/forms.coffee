@@ -1,6 +1,6 @@
 forms = angular.module("angleGrinder.forms", ["ui.bootstrap"])
 
-class EditItemCtrl
+class FormDialogCtrl
   @$inject = ["$scope", "$rootScope", "$log", "dialog", "item", "flatten"]
   constructor: ($scope, $rootScope, $log, dialog, item, flatten) ->
     $scope.item = item
@@ -35,7 +35,7 @@ class EditItemCtrl
 
         $log.error "Something went wront", response
         if response.status is 422
-          errors = response.data.errors
+          errors = response.data?.errors?[item.resourceName()]
           $scope.serverValidationErrors = errors
           $log.error "Server side validation errors", errors
 
@@ -58,7 +58,7 @@ class EditItemCtrl
 
       item.delete success: onSuccess, error: onError
 
-forms.controller "EditItemCtrl", EditItemCtrl
+forms.controller "FormDialogCtrl", FormDialogCtrl
 
 class EditDialog
   @$inject = ["$dialog"]
@@ -86,7 +86,7 @@ class EditDialog
         dialog.close()
         dialog.$scope.$apply()
 
-    dialog.open templateUrl, "EditItemCtrl"
+    dialog.open templateUrl, "FormDialogCtrl"
 
 forms.service "editDialog", EditDialog
 
@@ -165,20 +165,26 @@ forms.directive "agFieldGroup", ->
   """
 
   link: ($scope, element, attrs, formCtrl) ->
-    formName = formCtrl.$name
     fields = (attrs["for"] or "").split(",")
 
     displayErrors = ->
-      valid = _.map fields, (field) -> formCtrl[field].$valid
+      valid = _.map fields, (field) ->
+        formCtrl[field].$valid and not formCtrl.$serverError?[field]
+
       if _.all(valid)
         element.removeClass("error")
       else
         element.addClass("error")
 
+    # Watch for changes and display errors if necessary
     angular.forEach fields, (fieldName) ->
-      $scope.$watch "#{formName}.#{fieldName}.$viewValue", ->
+      $scope.$watch "#{formCtrl.$name}.#{fieldName}.$viewValue", ->
         displayErrors() if formCtrl[fieldName]?.$dirty
 
+      $scope.$watch "#{formCtrl.$name}.$serverError.#{fieldName}", (error) ->
+        displayErrors() if error?
+
+    # Display validation errors when the form is submitted
     $scope.$watch "submitted", (submitted) ->
       displayErrors() if submitted
 
@@ -191,7 +197,7 @@ forms.directive "agValidationErrors", [
     link: ($scope, element, attrs, formCtrl) ->
       formName = formCtrl.$name
       fieldName = attrs["for"]
-      field = $scope[formName][fieldName]
+      field = formCtrl[fieldName]
 
       # Do cleanup
       clearErrors = -> element.html("")
@@ -204,6 +210,7 @@ forms.directive "agValidationErrors", [
       displayErrorMessages = ->
         clearErrors()
 
+        # Display client side errors
         for error, invalid of field.$error
           continue unless invalid
 
@@ -214,6 +221,12 @@ forms.directive "agValidationErrors", [
             <span class="help-inline">#{message}</span>
           """
 
+        # Display server side errors
+        serverError = formCtrl.$serverError?[fieldName]
+        element.append """
+          <span class="help-inline">#{serverError}</span>
+        """ if serverError?
+
       # Dispalay validation errors while typing
       $scope.$watch "#{formName}.#{fieldName}.$viewValue", ->
         displayErrorMessages() if field.$dirty
@@ -221,6 +234,9 @@ forms.directive "agValidationErrors", [
       # Display validation errors when the form is submitted
       $scope.$watch "submitted", (submitted) ->
         displayErrorMessages() if submitted
+
+      $scope.$watch "saving", (newValue, oldValue) ->
+        displayErrorMessages() if not newValue and newValue != oldValue
 ]
 
 # Double check delete button
@@ -268,7 +284,7 @@ forms.directive "agDeleteButton", ->
   ]
 
   template: """
-    <button type="button" class="btn btn-danger pull-left"
+    <button type="button" class="btn btn-danger ag-delete-button"
             ng-mouseleave="confirmation = false"
             ng-click="delete()">
       <i class="icon-trash"></i> {{label}}<span ng-show="deleting">...</span>
@@ -312,14 +328,14 @@ forms.directive "agSubmitButton", ->
   """
 
 forms.directive "agServerValidationErrors", ->
-  restrict: "E"
-  replace: true
-  template: """
-    <span>
-      <span x-errors-for="{{entity}}" ng-repeat="(entity, errors) in serverValidationErrors">
-        <div class="alert alert-error" ng-repeat="(field, message) in errors">
-          {{message}}
-        </div>
-      </span>
-    </span>
-  """
+  restrict: "A"
+  require: "^form"
+  link: (scope, element, attrs, form) ->
+    form.$serverError = {}
+
+    scope.$watch "serverValidationErrors", (serverError) ->
+      form.$serverError = serverError
+
+    for fieldName, _ of form
+      scope.$watch "#{form.$name}.#{fieldName}.$viewValue", ->
+        form.$serverError = {}

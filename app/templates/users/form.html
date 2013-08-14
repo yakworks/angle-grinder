@@ -1,9 +1,18 @@
-<section class="anchor">
-  <h2 ng-show="user.newRecord()">Create user</h2>
-  <h2 ng-show="user.persisted()">Edit user</h2>
+<div class="subnav">
+  <ul class="nav nav-pills">
+    <li><a class="list" href="#/users"><i class="icon-list"></i> Users List</a></li>
+    <li><a ng-show="user.persisted()" class="list" href="#/users/{{user.id}}"><i class="icon-th"></i> Show user</a></li>
+    <li><a class="create" href="#/users/create"><i class="icon-plus"></i> New user</a></li>
+  </ul>
+</div>
 
-  <form name="editForm" novalidate class="form-horizontal no-margin" ng-submit="save(user)">
-    <ag-server-validation-errors></ag-server-validation-errors>
+<div class="content">
+  <h2 class="page-header" ng-show="user.newRecord()">Create user</h2>
+  <h2 class="page-header" ng-show="user.persisted()">Edit user</h2>
+
+  <form name="editForm" novalidate class="form-horizontal no-margin"
+        ag-server-validation-errors
+        ng-submit="save(user)">
 
     <div ag-field-group for="name">
       <label class="control-label">Name</label>
@@ -67,7 +76,10 @@
 
     <div class="form-actions">
       <ag-submit-button></ag-submit-button>
+      <span ng-show="user.persisted()">
+        <ag-delete-button when-confirmed="delete(user)"></ag-delete-button>
+      </span>
       <a href="#/users" class="btn">Cancel</a>
     </div>
   </form>
-</section>
+</div>

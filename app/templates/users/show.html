@@ -1,5 +1,12 @@
-<section class="anchor">
-  <h2>Show user</h2>
+<div class="subnav">
+  <ul class="nav nav-pills">
+    <li><a class="list" href="#/users"><i class="icon-list"></i> Users List</a></li>
+    <li><a class="create" href="#/users/create"><i class="icon-plus"></i> New user</a></li>
+  </ul>
+</div>
+
+<div class="content">
+  <h2 class="page-header">Show user</h2>
 
   <dl class="dl-horizontal">
     <dt>ID</dt>
@@ -19,4 +26,4 @@
     <a href="#/users/{{user.id}}/edit" class="btn"><i class="icon-edit"></i> Edit</a>
     <ag-delete-button when-confirmed="delete(user)"></ag-delete-button>
   </div>
-</section>
+</div>

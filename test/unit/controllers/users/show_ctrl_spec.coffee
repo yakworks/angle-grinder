@@ -1,11 +1,11 @@
-describe "controller: users.ShowCtrl", ->
+describe "controller: users.FormCtrl", ->
   beforeEach module("angleGrinder")
 
   $scope = null
 
   beforeEach inject ($rootScope, $controller) ->
     $scope = $rootScope.$new()
-    $controller "users.ShowCtrl",
+    $controller "users.FormCtrl",
       $scope: $scope
       user: id: 456, email: "test@email.com"
 

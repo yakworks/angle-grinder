@@ -6,36 +6,20 @@ app.config [
     $httpProvider.responseInterceptors.push("httpErrorsInterceptor")
 
     $routeProvider
-      .when "/",
-        templateUrl: "templates/gridz_with_toolbar.html"
-        controller: "GridzWithToolbarCtrl"
+      .when "/list",
+        templateUrl: "templates/list.html"
+        controller: "ListCtrl"
 
-      .when "/simple_jqgrid",
-        templateUrl: "templates/simple_jqgrid.html"
-        controller: "SimpleJqGridCtrl"
-
-      .when "/simple_gridz",
-        templateUrl: "templates/simple_gridz.html"
-        controller: "SimpleGridzCtrl"
-
-      .when "/jqgrid_basic",
-        templateUrl: "templates/jqgrid_basic.html"
-        controller: "JqGridBasicCtrl"
-
-      .when "/ag_grid_directive",
-        templateUrl: "templates/ag_grid_directive.html"
-        controller: "AgGridDirectiveCtrl"
-
-      .when "/server_side",
-        templateUrl: "templates/server_side.html"
-        controller: "ServerSideCtrl"
+      .when "/users_list",
+        templateUrl: "templates/users_list.html"
+        controller: "UsersListCtrl"
 
       .when "/users",
         templateUrl: "templates/users/list.html"
         controller: "users.ListCtrl"
 
       .when "/users/create",
-        templateUrl: "templates/users/edit.html"
+        templateUrl: "templates/users/form.html"
         controller: "users.FormCtrl"
         resolve: user: ["Users", (Users) -> new Users()]
 
@@ -48,12 +32,12 @@ app.config [
         ]
 
       .when "/users/:id/edit",
-        templateUrl: "templates/users/edit.html"
+        templateUrl: "templates/users/form.html"
         controller: "users.FormCtrl"
         resolve: user: [
           "$route", "userResolver", ($route, userResolver) ->
             userResolver($route.current.params.id)
         ]
 
-      .otherwise redirectTo: "/"
+      .otherwise redirectTo: "/users_list"
 ]

@@ -6,8 +6,9 @@
 </div>
 
 <div class="modal-body">
-  <form name="editForm" novalidate class="form-horizontal no-margin" ng-submit="save(item)">
-    <ag-server-validation-errors></ag-server-validation-errors>
+  <form name="editForm" novalidate class="form-horizontal no-margin"
+        ag-server-validation-errors
+        ng-submit="save(item)">
 
     <div ag-field-group for="name">
       <label class="control-label">Name</label>
@@ -70,12 +71,11 @@
     </div>
 
     <div class="modal-footer">
+      <ag-submit-button></ag-submit-button>
       <span ng-hide="createNew">
         <ag-delete-button when-confirmed="delete(item)"></ag-delete-button>
       </span>
-
-      <cancel-button ng-click="closeEditDialog()"></cancel-button>
-      <ag-submit-button></ag-submit-button>
+      <ag-cancel-button ng-click="closeEditDialog()"></ag-cancel-button>
     </div>
   </form>
 </div>

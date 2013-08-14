@@ -12,14 +12,8 @@ class ListCtrl
     $scope.showItem = (id) ->
       $location.path("/users/#{id}")
 
-    $scope.createItem = ->
-      console.log "creating"
-
     $scope.editItem = (id) ->
       $location.path("/users/#{id}/edit")
-
-    $scope.deleteItem = (id) ->
-      console.log "deleting id:", id
 
   gridColumns: ->
     showActionLink = (cellVal, options, rowdata) ->

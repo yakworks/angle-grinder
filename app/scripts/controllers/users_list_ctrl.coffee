@@ -1,4 +1,4 @@
-class ServerSideCtrl
+class UsersListCtrl
   @$inject = ["$scope", "$log", "$dialog", "confirmationDialog", "editDialog", "Users", "pathWithContext"]
   constructor: ($scope, $log, $dialog, confirmationDialog, editDialog, Users, pathWithContext) ->
     # intitially show the form
@@ -54,10 +54,10 @@ class ServerSideCtrl
       label: "Paid"
     ]
 
-class SearchFormCtrl
+class UsersSearchFormCtrl
   @$inject = ["$scope"]
   constructor: ($scope) ->
 
 angular.module("angleGrinder")
-  .controller("ServerSideCtrl", ServerSideCtrl)
-  .controller("SearchFormCtrl", SearchFormCtrl)
+  .controller("UsersListCtrl", UsersListCtrl)
+  .controller("UsersSearchFormCtrl", UsersSearchFormCtrl)
