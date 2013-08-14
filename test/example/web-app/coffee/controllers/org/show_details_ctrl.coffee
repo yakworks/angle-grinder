@@ -23,7 +23,13 @@ class ShowDetailsCtrl
       return if $scope.editForm.$invalid
 
       onSuccess = -> alerts.info("Org address has been updated.")
-      org.save success: onSuccess
+
+      onError = (response) ->
+        if response.status is 422
+          errors = response.data.errors
+          $scope.serverValidationErrors = errors.org
+
+      org.save success: onSuccess, error: onError
 
     $scope.delete = (org) ->
       onSuccess = -> $location.path("/")
