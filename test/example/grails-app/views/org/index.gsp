@@ -11,7 +11,7 @@
 
 <!-- TODO hide the left navigation panel -->
 <div ng-app="admin.org">
-    <!-- TODO add alerts -->
+    <ag-alerts></ag-alerts>
     <ng-view></ng-view>
 </div>
 

@@ -91,18 +91,17 @@
         <ul class="nav nav-list nav-side">
             <li>
                 <a data-toggle="collapse" href="#user-submenu" class="accordion-toggle">
-                    Users &amp; Groups <i class="icon-chevron-right"></i>
+                    Users<i class="icon-chevron-right"></i>
                 </a>
 
                 <div id="user-submenu" class="collapse accordion-body">
                     <ul class="nav nav-list submenu">
-                        <li class=""><a href="#">List Users</a></li>
-                        <li><a href="#">Add New User</a></li>
-                        <li><a href="#">Groups</a></li>
+                        <li class=""><a href="${createLink(controller: 'user', action: 'index')}">List Users</a></li>
+                        <li><a href="${createLink(controller: 'user', action: 'index')}">Add New User</a></li>
                     </ul>
                 </div>
             </li>
-            <li><a href="#simple-jqgrid"><i class="icon-chevron-right"></i> Other</a></li>
+            <li><a href="${createLink(controller: 'org', action: 'index')}"><i class="icon-chevron-right"></i> Organizations</a></li>
         </ul>
     </aside>
 

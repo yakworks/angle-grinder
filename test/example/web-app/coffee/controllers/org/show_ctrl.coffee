@@ -5,13 +5,8 @@ class ShowCtrl
     $scope.org = org
 
     $scope.delete = (org) ->
-      $scope.deleting = true
-
-      callback = ->
-        $scope.deleting = false
-        $location.path("/")
-
-      org.delete success: callback, error: callback
+      onSuccess = -> $location.path("/")
+      org.delete success: onSuccess
 
 angular.module("angleGrinder")
   .controller("org.ShowCtrl", ShowCtrl)
