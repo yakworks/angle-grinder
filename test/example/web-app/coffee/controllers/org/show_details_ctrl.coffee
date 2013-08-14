@@ -22,24 +22,12 @@ class ShowDetailsCtrl
     $scope.save = (org) ->
       return if $scope.editForm.$invalid
 
-      $scope.saving = true
-
-      onSuccess = ->
-        $scope.saving = false
-        alerts.info("Org address has been updated.")
-
-      onError = -> $scope.saving = false
-
-      org.save success: onSuccess, error: onError
+      onSuccess = -> alerts.info("Org address has been updated.")
+      org.save success: onSuccess
 
     $scope.delete = (org) ->
-      $scope.deleting = true
-
-      callback = ->
-        $scope.deleting = false
-        $location.path("/")
-
-      org.delete success: callback, error: callback
+      onSuccess = -> $location.path("/")
+      org.delete success: onSuccess
 
 angular.module("angleGrinder")
   .controller("org.ShowDetailsCtrl", ShowDetailsCtrl)
