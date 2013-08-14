@@ -1,4 +1,4 @@
-describe "controller: users.FormCtrl", ->
+describe "controller: users.ShowCtrl", ->
   beforeEach module("angleGrinder")
 
   $scope = null
