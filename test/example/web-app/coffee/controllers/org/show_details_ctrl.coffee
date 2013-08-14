@@ -19,6 +19,14 @@ class ShowDetailsCtrl
         sortname: "email"
         sortorder: "asc"
 
+    $scope.save = (org) ->
+      return if $scope.editForm.$invalid
+
+      $scope.saving = true
+      onComplete = -> $scope.saving = false
+
+      org.save success: onComplete, error: onComplete
+
     $scope.delete = (org) ->
       $scope.deleting = true
 

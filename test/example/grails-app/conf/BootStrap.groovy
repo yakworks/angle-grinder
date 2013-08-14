@@ -15,10 +15,10 @@ class BootStrap {
                 num: fakerService.numerify("##-##-##"),
 
                 phone: fakerService.numerify("##-###-###-###"),
-                street: fakerService.streetAddress(),
-                city: fakerService.city(),
                 state: fakerService.usState(),
-                zip: fakerService.zipCode()
+                city: fakerService.city(),
+                zip: fakerService.zipCode(),
+                street: fakerService.streetAddress()
             ] + attributes
 
             orgDao.insert(attributes).entity
