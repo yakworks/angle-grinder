@@ -19,11 +19,9 @@ class FormDialogCtrl
         $log.warn "The form is invalid", $scope.editForm
         return
 
-      $scope.saving = true
       $scope.serverValidationErrors = {}
 
       onSuccess = (response) ->
-        $scope.saving = false
         $log.info "Item has been updated/created", response
 
         # Flattening the object before insering it to the grid
@@ -31,7 +29,6 @@ class FormDialogCtrl
         $scope.closeEditDialog()
 
       onError = (response) ->
-        $scope.saving = false
 
         $log.error "Something went wront", response
         if response.status is 422
@@ -43,17 +40,13 @@ class FormDialogCtrl
 
     # Performs server side delete
     $scope.delete = ->
-      $scope.deleting = true
-
       onSuccess = (response) ->
-        $scope.deleting = false
         $log.info "Item has been deleted", response
 
         $rootScope.$broadcast "itemDeleted", item
         $scope.closeEditDialog()
 
       onError = (response) ->
-        $scope.deleting = false
         $log.error "Something went wront", response
 
       item.delete success: onSuccess, error: onError
@@ -253,8 +246,7 @@ forms.directive "agDeleteButton", ->
     whenConfirmed: "&"
 
   controller: [
-    "$scope", "$element", ($scope, $element) ->
-      $scope.deleting = $scope.$parent.deleting
+    "$scope", "$http", "$element", ($scope, $http, $element) ->
       $scope.confirmation = false
 
       $scope.delete = ->
@@ -267,24 +259,19 @@ forms.directive "agDeleteButton", ->
       $scope.$watch "confirmation", (confirmation) ->
         $scope.label = unless confirmation then "Delete" else "Are you sure?"
 
+        $scope.$watch ->
+          $scope.deleting = $http.pendingRequests.length > 0
+
         if confirmation
           $element.removeClass "btn-danger"
           $element.addClass "btn-warning"
         else
           $element.addClass "btn-danger"
           $element.removeClass "btn-warning"
-
-      $scope.$watch "$parent.deleting", (deleting) ->
-        $scope.deleting = deleting
-
-        if deleting
-          $element.addClass "disabled"
-        else
-          $element.removeClass "disabled"
   ]
 
   template: """
-    <button type="button" class="btn btn-danger ag-delete-button"
+    <button type="button" class="btn btn-danger ag-delete-button" ng-class="{disabled: deleting}"
             ng-mouseleave="confirmation = false"
             ng-click="delete()">
       <i class="icon-trash"></i> {{label}}<span ng-show="deleting">...</span>
@@ -311,20 +298,25 @@ forms.directive "agCancelButton", ->
   restrict: "E"
   replace: true
   template: """
-  <button type="button" class="btn">
-    <i class="icon-remove"></i> Cancel
-  </button>
+    <button type="button" class="btn">
+      <i class="icon-remove"></i> Cancel
+    </button>
   """
 
 forms.directive "agSubmitButton", ->
   restrict: "E"
   replace: true
+  controller: ["$scope", "$http", ($scope, $http) ->
+    $scope.saving = false
+    $scope.$watch ->
+      $scope.saving = $http.pendingRequests.length > 0
+  ]
   template: """
-  <button type="submit" class="btn btn-primary"
-          ng-click="submitted = true"
-          ng-class="{disabled: saving}">
-    <i class="icon-ok icon-white"></i> Save<span ng-show="saving">...</span>
-  </button>
+    <button type="submit" class="btn btn-primary"
+            ng-click="submitted = true"
+            ng-class="{disabled: saving}">
+      <i class="icon-ok icon-white"></i> Save<span ng-show="saving">...</span>
+    </button>
   """
 
 forms.directive "agServerValidationErrors", ->

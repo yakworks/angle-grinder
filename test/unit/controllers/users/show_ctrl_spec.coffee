@@ -25,9 +25,7 @@ describe "controller: users.ShowCtrl", ->
         # Given
         userSpy = jasmine.createSpyObj("user", ["delete"])
         userSpy.delete.andCallFake (options) ->
-          expect($scope.deleting).toBeTruthy()
           options.success()
-          expect($scope.deleting).toBeFalsy()
 
         # When
         $scope.delete(userSpy)

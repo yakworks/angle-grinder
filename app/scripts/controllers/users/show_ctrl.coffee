@@ -4,13 +4,8 @@ class ShowCtrl
     $scope.user = user
 
     $scope.delete = (user) ->
-      $scope.deleting = true
-
-      callback = ->
-        $scope.deleting = false
-        $location.path("/users")
-
-      user.delete success: callback, error: callback
+      onSuccess = -> $location.path("/users")
+      user.delete success: onSuccess
 
 angular.module("angleGrinder")
   .controller("users.ShowCtrl", ShowCtrl)

@@ -9,16 +9,12 @@ class FormCtrl
       # Do not perform save/update when the form is invalid
       return if $scope.editForm.$invalid
 
-      $scope.saving = true
       $scope.serverValidationErrors = {}
 
       onSuccess = (user) ->
-        $scope.saving = false
         $location.path "/users/#{user.id}"
 
       onError = (response) ->
-        $scope.saving = false
-
         if response.status is 422
           errors = response.data.errors
           $scope.serverValidationErrors = errors[user.resourceName()]
@@ -27,16 +23,8 @@ class FormCtrl
 
     # Performs server side delete
     $scope.delete = (user) ->
-      $scope.deleting = true
-
-      onSuccess = (response) ->
-        $scope.deleting = false
-        $location.path "/users"
-
-      onError = (response) ->
-        $scope.deleting = false
-
-      user.delete success: onSuccess, error: onError
+      onSuccess = -> $location.path "/users"
+      user.delete success: onSuccess
 
 angular.module("angleGrinder")
   .controller("users.FormCtrl", FormCtrl)

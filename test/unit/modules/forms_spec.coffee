@@ -223,11 +223,14 @@ describe "module: angleGrinder.forms", ->
   describe "directive: agDeleteButton", ->
     element = null
     $scope = null
+    $http = null
 
-    beforeEach inject ($injector) ->
+    beforeEach inject ($injector, _$http_) ->
       {element, $scope} = compileTemplate """
         <ag-delete-button when-confirmed="delete(123)" deleting="deleting"></ag-delete-button>
       """, $injector
+
+      $http = _$http_
 
     it "is visible", ->
       expect(element.css("display")).not.toBe "none"
@@ -257,9 +260,10 @@ describe "module: angleGrinder.forms", ->
         element.click()
         expect($scope.delete).toHaveBeenCalledWith(123)
 
-    describe "when the DELETE request is in progress", ->
+    describe "when the request is in progress", ->
       beforeEach ->
-        $scope.$apply -> $scope.deleting = true
+        $scope.$apply -> $http.pendingRequests = [{}]
+#        $scope.$apply -> $scope.deleting = true
 
       it "disables the button", ->
         expect(element).toHaveClass "disabled"
@@ -339,31 +343,45 @@ describe "module: angleGrinder.forms", ->
   describe "directive: agSubmitButton", ->
     element = null
     $scope = null
+    $http = null
 
-    beforeEach inject ($injector) ->
+    beforeEach inject ($injector, _$http_) ->
+      $http = _$http_
+
       {element, $scope} = compileTemplate """
         <ag-submit-button></ag-submit-button>
       """, $injector
 
+    itIsEnabled = ->
+      it "is enabled", ->
+        expect(element).not.toHaveClass "disabled"
+
     it "has valid label", ->
       expect(element).toHaveText /Save/
+
+    itIsEnabled()
 
     describe "when the form is valid", ->
       beforeEach ->
         $scope.$apply -> $scope.editForm = $invalid: false
 
-      it "is enabled", ->
-        expect(element).not.toHaveClass "disabled"
+      itIsEnabled()
 
     describe "when the request is in progress", ->
       beforeEach ->
-        $scope.$apply -> $scope.saving = true
+        $scope.$apply -> $http.pendingRequests = [{}]
 
       it "is disabled", ->
         expect(element).toHaveClass "disabled"
 
       it "changes the button label", ->
         expect(element).toHaveText "Save..."
+
+    describe "when the request is not in progress", ->
+      beforeEach ->
+        $scope.$apply -> $http.pendingRequests = []
+
+      itIsEnabled()
 
   describe "directive: agServerValidationErrors", ->
     element = null
