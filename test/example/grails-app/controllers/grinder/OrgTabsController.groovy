@@ -1,5 +1,9 @@
 package grinder
 
 class OrgTabsController {
-    def index() {}
+
+    def index() {
+       return [hideSidebar: true]
+    }
+
 }

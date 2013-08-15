@@ -68,32 +68,38 @@
 </div>
 
 <div id="page" class="container">
-    <aside class="sidebar">
-        <ul class="nav nav-list nav-side">
-            <li>
-                <a data-toggle="collapse" href="#user-submenu" class="accordion-toggle">
-                    Users<i class="icon-chevron-right"></i>
-                </a>
+    <g:unless test="${hideSidebar}">
+        <aside class="sidebar">
+            <ul class="nav nav-list nav-side">
+                <li>
+                    <a data-toggle="collapse" href="#user-submenu" class="accordion-toggle">
+                        Users<i class="icon-chevron-right"></i>
+                    </a>
 
-                <div id="user-submenu" class="collapse accordion-body">
-                    <ul class="nav nav-list submenu">
-                        <li class=""><a href="${createLink(controller: 'user')}">List Users</a></li>
-                        <li><a href="${createLink(controller: 'user')}">Add New User</a></li>
-                    </ul>
-                </div>
-            </li>
-            <li><a href="${createLink(controller: 'org')}">
-                <i class="icon-chevron-right"></i> Org</a>
-            </li>
-            <li><a href="${createLink(controller: 'orgTabs')}">
-                <i class="icon-chevron-right"></i> Org with Tabs</a>
-            </li>
-        </ul>
-    </aside>
+                    <div id="user-submenu" class="collapse accordion-body">
+                        <ul class="nav nav-list submenu">
+                            <li class=""><a href="${createLink(controller: 'user')}">List Users</a></li>
+                            <li><a href="${createLink(controller: 'user')}">Add New User</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li><a href="${createLink(controller: 'org')}">
+                    <i class="icon-chevron-right"></i> Org</a>
+                </li>
+                <li><a href="${createLink(controller: 'orgTabs')}">
+                    <i class="icon-chevron-right"></i> Org with Tabs</a>
+                </li>
+            </ul>
+        </aside>
 
-    <section class="content">
+        <section class="content">
+            <g:layoutBody/>
+        </section>
+    </g:unless>
+
+    <g:else>
         <g:layoutBody/>
-    </section>
+    </g:else>
 </div>
 
 <r:layoutResources/>
