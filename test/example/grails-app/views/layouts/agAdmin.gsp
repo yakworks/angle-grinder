@@ -68,7 +68,7 @@
 </div>
 
 <div id="page" class="container">
-    <aside class="sidebar ">
+    <aside class="sidebar">
         <ul class="nav nav-list nav-side">
             <li>
                 <a data-toggle="collapse" href="#user-submenu" class="accordion-toggle">
@@ -77,19 +77,23 @@
 
                 <div id="user-submenu" class="collapse accordion-body">
                     <ul class="nav nav-list submenu">
-                        <li class=""><a href="${createLink(controller: 'user', action: 'index')}">List Users</a></li>
-                        <li><a href="${createLink(controller: 'user', action: 'index')}">Add New User</a></li>
+                        <li class=""><a href="${createLink(controller: 'user')}">List Users</a></li>
+                        <li><a href="${createLink(controller: 'user')}">Add New User</a></li>
                     </ul>
                 </div>
             </li>
-            <li><a href="${createLink(controller: 'org', action: 'index')}"><i class="icon-chevron-right"></i> Organizations</a></li>
+            <li><a href="${createLink(controller: 'org')}">
+                <i class="icon-chevron-right"></i> Org</a>
+            </li>
+            <li><a href="${createLink(controller: 'orgTabs')}">
+                <i class="icon-chevron-right"></i> Org with Tabs</a>
+            </li>
         </ul>
     </aside>
 
-    <section class='content'>
+    <section class="content">
         <g:layoutBody/>
     </section>
-
 </div>
 
 <r:layoutResources/>
