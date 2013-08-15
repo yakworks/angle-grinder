@@ -9,7 +9,7 @@
 
 <body data-entity-name="org">
 
-<div ng-app="admin.org">
+<div ng-app="admin.orgTabs">
     <ag-alerts></ag-alerts>
     <ng-view></ng-view>
 </div>

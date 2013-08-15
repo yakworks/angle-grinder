@@ -41,7 +41,7 @@
                     <li><a href="${createLink(controller: 'org')}">List Orgs</a></li>
                     <li><a href="${createLink(controller: 'orgTabs')}">List Orgs with Tabs</a></li>
                 </ul>
-                
+
                 <ul class="nav pull-right">
                     <li><a href="#"><i class="icon-cogs"></i> Control Panel</a></li>
                     <li class="divider-vertical"></li>

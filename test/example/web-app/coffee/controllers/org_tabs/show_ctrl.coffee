@@ -1,4 +1,4 @@
-class ShowDetailsCtrl
+class ShowCtrl
 
   @$inject = ["$scope", "$location", "pathWithContext", "alerts", "org"]
   constructor: ($scope, $location, pathWithContext, alerts, org) ->
@@ -36,4 +36,4 @@ class ShowDetailsCtrl
       org.delete success: onSuccess
 
 angular.module("angleGrinder")
-  .controller("org.ShowDetailsCtrl", ShowDetailsCtrl)
+  .controller("orgTabs.ShowCtrl", ShowCtrl)

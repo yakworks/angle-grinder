@@ -21,14 +21,6 @@ org.config [
             resourceResolver($route.current.params.id)
         ]
 
-      .when "/:id/details",
-        templateUrl: "../templates/org/show_details.html"
-        controller: "org.ShowDetailsCtrl"
-        resolve: org: [
-          "$route", "resourceResolver", ($route, resourceResolver) ->
-            resourceResolver($route.current.params.id)
-        ]
-
       .when "/:id/edit",
         templateUrl: "../templates/org/form.html"
         controller: "org.FormCtrl"
