@@ -33,12 +33,15 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="brand" href="#">Example Admin</a>
+            <a class="brand" href="${request.contextPath}">Example Admin</a>
 
             <div class="nav-collapse collapse">
                 <ul class="nav">
-                    <li><a href="#about">Placeholder</a></li>
+                    <li><a href="${createLink(controller: 'user')}">List Users</a></li>
+                    <li><a href="${createLink(controller: 'org')}">List Orgs</a></li>
+                    <li><a href="${createLink(controller: 'orgTabs')}">List Orgs with Tabs</a></li>
                 </ul>
+                
                 <ul class="nav pull-right">
                     <li><a href="#"><i class="icon-cogs"></i> Control Panel</a></li>
                     <li class="divider-vertical"></li>
@@ -84,10 +87,10 @@
                     </div>
                 </li>
                 <li><a href="${createLink(controller: 'org')}">
-                    <i class="icon-chevron-right"></i> Org</a>
+                    <i class="icon-chevron-right"></i> List Orgs</a>
                 </li>
                 <li><a href="${createLink(controller: 'orgTabs')}">
-                    <i class="icon-chevron-right"></i> Org with Tabs</a>
+                    <i class="icon-chevron-right"></i> List Orgs with Tabs</a>
                 </li>
             </ul>
         </aside>
