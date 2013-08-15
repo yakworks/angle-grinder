@@ -255,12 +255,13 @@ forms.directive "agDeleteButton", ->
         # switch the state
         $scope.confirmation = !$scope.confirmation
 
+      # enable / disable the button if a request in progress
+      $scope.$watch ->
+        $scope.deleting = $http.pendingRequests.length > 0
+
       # change button label
       $scope.$watch "confirmation", (confirmation) ->
         $scope.label = unless confirmation then "Delete" else "Are you sure?"
-
-        $scope.$watch ->
-          $scope.deleting = $http.pendingRequests.length > 0
 
         if confirmation
           $element.removeClass "btn-danger"
@@ -271,7 +272,7 @@ forms.directive "agDeleteButton", ->
   ]
 
   template: """
-    <button type="button" class="btn btn-danger ag-delete-button" ng-class="{disabled: deleting}"
+    <button type="button" class="btn btn-danger ag-delete-button" ng-disabled="deleting"
             ng-mouseleave="confirmation = false"
             ng-click="delete()">
       <i class="icon-trash"></i> {{label}}<span ng-show="deleting">...</span>
@@ -288,7 +289,7 @@ forms.directive "agCreateButton", ->
     element.append "Create" if $.trim(element.text()) is ""
 
   template: """
-    <a class="btn">
+    <a href="" class="btn">
       <i class="icon-edit"></i>
       <span ng-transclude></span>
     </a>
@@ -314,7 +315,7 @@ forms.directive "agSubmitButton", ->
   template: """
     <button type="submit" class="btn btn-primary"
             ng-click="submitted = true"
-            ng-class="{disabled: saving}">
+            ng-disabled="saving"
       <i class="icon-ok icon-white"></i> Save<span ng-show="saving">...</span>
     </button>
   """

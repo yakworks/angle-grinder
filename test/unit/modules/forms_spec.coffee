@@ -236,7 +236,7 @@ describe "module: angleGrinder.forms", ->
       expect(element.css("display")).not.toBe "none"
 
     it "is not disabled", ->
-      expect(element).not.toHaveClass "disabled"
+      expect(element.prop("disabled")).toBeFalsy()
 
     it "has a valid label", ->
       expect(element).toHaveText /Delete/
@@ -263,10 +263,9 @@ describe "module: angleGrinder.forms", ->
     describe "when the request is in progress", ->
       beforeEach ->
         $scope.$apply -> $http.pendingRequests = [{}]
-#        $scope.$apply -> $scope.deleting = true
 
       it "disables the button", ->
-        expect(element).toHaveClass "disabled"
+        expect(element.prop("disabled")).toBeTruthy()
 
       it "changes the button label", ->
         expect(element).toHaveText "Delete..."
@@ -354,7 +353,7 @@ describe "module: angleGrinder.forms", ->
 
     itIsEnabled = ->
       it "is enabled", ->
-        expect(element).not.toHaveClass "disabled"
+        expect(element.prop("disabled")).toBeFalsy()
 
     it "has valid label", ->
       expect(element).toHaveText /Save/
@@ -372,7 +371,7 @@ describe "module: angleGrinder.forms", ->
         $scope.$apply -> $http.pendingRequests = [{}]
 
       it "is disabled", ->
-        expect(element).toHaveClass "disabled"
+        expect(element.prop("disabled")).toBeTruthy()
 
       it "changes the button label", ->
         expect(element).toHaveText "Save..."

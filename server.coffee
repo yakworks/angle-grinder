@@ -16,8 +16,8 @@ app.use express.bodyParser()
 app.use express.static(path.join(__dirname, "dist"))
 
 # sleep for 1,2,3 seconds
-randomSleep = ->
-  utils.sleep utils.randomItemFrom [1, 2, 3]
+randomSleep = (values = [1, 2, 3]) ->
+  utils.sleep utils.randomItemFrom values
 
 # respond with random error
 randomErrorFor = (res) ->
