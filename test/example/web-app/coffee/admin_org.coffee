@@ -1,7 +1,7 @@
 org = angular.module "admin.org", ["angleGrinder"]
 
 org.config [
-  "$provide", "$routeProvider", "$httpProvider", ($provide, $routeProvider) ->
+  "$routeProvider", ($routeProvider) ->
 
     $routeProvider
       .when "/",
