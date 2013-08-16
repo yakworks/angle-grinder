@@ -33,6 +33,12 @@ class OrgController extends BaseDomainController {
         render pagedList.jsonData as JSON
     }
 
+    // retrieves all orgs
+    def listAll() {
+        def orgs = Org.findAll()
+        render orgs as JSON
+    }
+
     def get() {
         def org = Org.get(params.id)
         if (org) {
