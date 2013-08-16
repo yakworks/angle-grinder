@@ -31,9 +31,5 @@ class ShowCtrl
 
       org.save success: onSuccess, error: onError
 
-    $scope.delete = (org) ->
-      onSuccess = -> $location.path("/")
-      org.delete success: onSuccess
-
 angular.module("angleGrinder")
   .controller("orgTabs.ShowCtrl", ShowCtrl)
