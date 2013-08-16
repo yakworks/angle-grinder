@@ -32,8 +32,8 @@ grails {
             plugins {
                 // grails standard
                 runtime ":hibernate:$grailsVersion"
-                build ":tomcat:$grailsVersion"
                 runtime ":resources:1.2.RC2"
+                build ":tomcat:$grailsVersion"
 
                 // plugin dependencies
                 compile ":dao:0.4.2"
@@ -41,6 +41,7 @@ grails {
                 compile ":fields:1.3"
                 compile ":plugin-config:0.1.8"
                 compile ":faker:0.7"
+                test ":code-coverage:1.2.6"
             }
         }
         work.dir = ".grails"
