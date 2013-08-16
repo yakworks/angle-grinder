@@ -43,11 +43,12 @@ class BootStrap {
                     password: "secretStuff",
                     repassword: "secretStuff",
                     inactive: generator.nextDouble() > 0.5,
-                    orgId: randomOrg.id,
+
                     contact: [
                             firstName: fakerService.firstName(),
                             lastName: fakerService.lastName(),
-                            email: fakerService.email()
+                            email: fakerService.email(),
+                            org: [id: randomOrg.id]
                     ]
             ]
 

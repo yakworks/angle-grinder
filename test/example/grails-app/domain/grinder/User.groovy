@@ -25,30 +25,24 @@ class User implements Serializable {
 
     Contact contact
 
-    //Long clientId = 1
     /** temporary plain password to create a MD5 password */
     String pass = '[secret]'
-
-    //TODO add lastlogin to this sucker
-
 
     static mapping = {
         cache true
         table 'Users'
         id generator: 'foreign', params: [property: 'contact']
         passwd column: 'password'
-        //roles column: 'userId', joinTable: 'SecRoleUser'
         contact column: 'contactId'
     }
 
     static constraints = {
         login blank: false, nullable: false, unique: true, maxSize: 50
-        contact nullable: false
         passwd blank: false, nullable: false, maxSize: 50, bindable: false
+        contact nullable: false
         passwordChangedDate nullable: true, bindable: false
         mustChangePassword bindable: false
     }
-
 
     @Override
     boolean equals(final Object that) {

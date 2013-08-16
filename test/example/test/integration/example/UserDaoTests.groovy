@@ -24,7 +24,8 @@ class UserDaoTests extends GroovyTestCase {
         def contactProps = [
                 firstName: fakerService.firstName(),
                 lastName: fakerService.lastName(),
-                email: fakerService.email()
+                email: fakerService.email(),
+                org: [id: org.id]
         ]
 
         def props = [
@@ -32,7 +33,7 @@ class UserDaoTests extends GroovyTestCase {
                 password: "secretStuff",
                 repassword: "secretStuff",
                 inactive: false,
-                orgId: org.id,
+
                 contact: contactProps
         ]
 
