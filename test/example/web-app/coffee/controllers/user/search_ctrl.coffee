@@ -3,4 +3,4 @@ class SearchFormCtrl
   constructor: ($scope) ->
 
 angular.module("angleGrinder")
-  .controller("users.SearchFormCtrl", SearchFormCtrl)
+  .controller("user.SearchFormCtrl", SearchFormCtrl)

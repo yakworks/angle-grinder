@@ -43,4 +43,4 @@ class ListCtrl
     ]
 
 angular.module("angleGrinder")
-  .controller("users.ListCtrl", ListCtrl)
+  .controller("user.ListCtrl", ListCtrl)
