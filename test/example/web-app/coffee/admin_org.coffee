@@ -1,7 +1,7 @@
 org = angular.module "admin.org", ["angleGrinder"]
 
 org.config [
-  "$provide", "$routeProvider", "$httpProvider", ($provide, $routeProvider) ->
+  "$routeProvider", ($routeProvider) ->
 
     $routeProvider
       .when "/",
@@ -16,14 +16,6 @@ org.config [
       .when "/:id",
         templateUrl: "../templates/org/show.html"
         controller: "org.ShowCtrl"
-        resolve: org: [
-          "$route", "resourceResolver", ($route, resourceResolver) ->
-            resourceResolver($route.current.params.id)
-        ]
-
-      .when "/:id/details",
-        templateUrl: "../templates/org/show_details.html"
-        controller: "org.ShowDetailsCtrl"
         resolve: org: [
           "$route", "resourceResolver", ($route, resourceResolver) ->
             resourceResolver($route.current.params.id)

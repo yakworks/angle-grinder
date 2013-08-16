@@ -6,37 +6,18 @@
 </div>
 
 <div class="content">
-  <h3 class="page-header">Org details</h3>
+  <h3 class="page-header">Org show</h3>
 
-  <form name="editForm" novalidate class="form-horizontal no-margin"
-        ag-server-validation-errors
-        ng-submit="save(org)">
+  <dl class="dl-horizontal">
+    <dt>ID</dt>
+    <dd>{{org.id}}</dd>
 
-    <div ag-field-group for="name">
-      <label class="control-label">Name</label>
+    <dt>Name</dt>
+    <dd>{{org.name}}</dd>
 
-      <div class="controls">
-        <input type="text" name="name" placeholder="Enter Name"
-               ng-model="org.name" autofocus required />
-        <ag-validation-errors for="name" required="This field is required" />
-      </div>
-    </div>
-
-    <div ag-field-group for="num">
-      <label class="control-label">Num</label>
-
-      <div class="controls">
-        <input type="text" name="num" placeholder="Enter num"
-               ng-model="org.num" autofocus required />
-        <ag-validation-errors for="num" required="This field is required" />
-      </div>
-    </div>
-
-    <div class="form-actions">
-      <ag-submit-button></ag-submit-button>
-      <ag-delete-button when-confirmed="delete(org)"></ag-delete-button>
-    </div>
-  </form>
+    <dt>Num</dt>
+    <dd>{{org.num}}</dd>
+  </dl>
 
   <tabset>
     <tab>

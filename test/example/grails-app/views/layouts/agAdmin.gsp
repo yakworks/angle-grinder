@@ -33,12 +33,15 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="brand" href="#">Example Admin</a>
+            <a class="brand" href="${request.contextPath}">Example Admin</a>
 
             <div class="nav-collapse collapse">
                 <ul class="nav">
-                    <li><a href="#about">Placeholder</a></li>
+                    <li><a href="${createLink(controller: 'user')}">List Users</a></li>
+                    <li><a href="${createLink(controller: 'org')}">List Orgs</a></li>
+                    <li><a href="${createLink(controller: 'orgTabs')}">List Orgs with Tabs</a></li>
                 </ul>
+
                 <ul class="nav pull-right">
                     <li><a href="#"><i class="icon-cogs"></i> Control Panel</a></li>
                     <li class="divider-vertical"></li>
@@ -68,28 +71,38 @@
 </div>
 
 <div id="page" class="container">
-    <aside class="sidebar ">
-        <ul class="nav nav-list nav-side">
-            <li>
-                <a data-toggle="collapse" href="#user-submenu" class="accordion-toggle">
-                    Users<i class="icon-chevron-right"></i>
-                </a>
+    <g:unless test="${hideSidebar}">
+        <aside class="sidebar">
+            <ul class="nav nav-list nav-side">
+                <li>
+                    <a data-toggle="collapse" href="#user-submenu" class="accordion-toggle">
+                        Users<i class="icon-chevron-right"></i>
+                    </a>
 
-                <div id="user-submenu" class="collapse accordion-body">
-                    <ul class="nav nav-list submenu">
-                        <li class=""><a href="${createLink(controller: 'user', action: 'index')}">List Users</a></li>
-                        <li><a href="${createLink(controller: 'user', action: 'index')}">Add New User</a></li>
-                    </ul>
-                </div>
-            </li>
-            <li><a href="${createLink(controller: 'org', action: 'index')}"><i class="icon-chevron-right"></i> Organizations</a></li>
-        </ul>
-    </aside>
+                    <div id="user-submenu" class="collapse accordion-body">
+                        <ul class="nav nav-list submenu">
+                            <li class=""><a href="${createLink(controller: 'user')}">List Users</a></li>
+                            <li><a href="${createLink(controller: 'user')}">Add New User</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li><a href="${createLink(controller: 'org')}">
+                    <i class="icon-chevron-right"></i> List Orgs</a>
+                </li>
+                <li><a href="${createLink(controller: 'orgTabs')}">
+                    <i class="icon-chevron-right"></i> List Orgs with Tabs</a>
+                </li>
+            </ul>
+        </aside>
 
-    <section class='content'>
+        <section class="content">
+            <g:layoutBody/>
+        </section>
+    </g:unless>
+
+    <g:else>
         <g:layoutBody/>
-    </section>
-
+    </g:else>
 </div>
 
 <r:layoutResources/>
