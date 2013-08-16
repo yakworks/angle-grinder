@@ -1,4 +1,4 @@
-class UsersListCtrl
+class ListCtrl
 
   @$inject = ["$scope", "$log", "confirmationDialog", "editDialog", "Resource", "pathWithContext"]
   constructor: ($scope, $log, confirmationDialog, editDialog, Resource, pathWithContext) ->
@@ -44,11 +44,5 @@ class UsersListCtrl
       { name: "inactive", label: "Inactive", width: 30, align: "center", formatter: "okIcon" }
     ]
 
-class UsersSearchFormCtrl
-
-  @$inject = ["$scope"]
-  constructor: ($scope) ->
-
 angular.module("angleGrinder")
-  .controller("UsersListCtrl", UsersListCtrl)
-  .controller("SearchFormCtrl", UsersSearchFormCtrl)
+  .controller("users.ListCtrl", ListCtrl)
