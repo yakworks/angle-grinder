@@ -9,14 +9,11 @@ class UserDao extends GormDaoSupport {
     Class domainClass = User
 
     Map update(params) {
-        println("update with $params")
-        def user = User.get(params.id.toLong())
-
-        // force init of the contact so we don't get "no session" when we try to access it
-        def contact = user?.contact
+        def user = User.get(params.id)
 
         DaoUtil.checkFound(user, params, User.name)
         DaoUtil.checkVersion(user, params.version)
+
         persistWithParams(user, params)
 
         return [ok: true, entity: user, message: DaoMessage.updated(user)]
@@ -32,9 +29,6 @@ class UserDao extends GormDaoSupport {
         def user = new User()
 
         user.contact = new Contact()
-        def org = Org.get(params.contact.org.id)
-        user.contact.org = org
-
         persistWithParams(user, params)
 
         return [ok: true, entity: user, message: DaoMessage.created(user)]
@@ -43,6 +37,9 @@ class UserDao extends GormDaoSupport {
     void persistWithParams(user, params) {
         user.properties = params
         user.contact.properties["firstName", "lastName", "email", "tagForReminders"] = params["contact"]
+
+        def org = Org.get(params.contact.org.id)
+        user.contact.org = org
 
         try {
             checkPasswordChange(user, params)
