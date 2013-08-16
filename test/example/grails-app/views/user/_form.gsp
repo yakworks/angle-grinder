@@ -71,15 +71,26 @@
             </div>
         </div>
 
+        <div ag-field-group for="contactOrgId">
+            <label class="control-label">${ag.label(code: "user.org")}</label>
+
+            <div class="controls">
+                <input type="text" name="contactOrgId"
+                       ng-model="item.contact.org.id"
+                       required />
+                <ag-validation-errors for="contactOrgId" />
+            </div>
+        </div>
+
         <div class="control-group">
             <div class="controls">
                 <label class="checkbox">
-                    <g:checkBox name="contact.tagForReminders" ng-model="item.contact.tagForReminders"/>
+                    <g:checkBox name="contactTagForReminders" ng-model="item.contact.tagForReminders"/>
                     ${ag.label(code: 'contact.tagForReminders')}
                 </label>
             </div>
 
-            <div class="controls" ng-hide="isCreateNew">
+            <div class="controls" ng-hide="item.newRecord()">
                 <label class="checkbox">
                     <g:checkBox name="inactive" ng-model="item.inactive"/>
                     ${ag.label(code: 'user.inactive')}
