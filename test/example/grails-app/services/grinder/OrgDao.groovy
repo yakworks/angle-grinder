@@ -11,6 +11,7 @@ class OrgDao extends GormDaoSupport {
     Map insert(params) {
         def org = new Org()
         org.properties = params
+
         try {
             save(org)
             DaoUtil.flush()

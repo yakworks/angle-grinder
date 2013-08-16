@@ -32,4 +32,4 @@ class ShowCtrl
       org.save success: onSuccess, error: onError
 
 angular.module("angleGrinder")
-  .controller("orgTabs.ShowCtrl", ShowCtrl)
+  .controller("tabbedOrg.ShowCtrl", ShowCtrl)

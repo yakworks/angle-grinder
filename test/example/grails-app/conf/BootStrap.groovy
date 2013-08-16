@@ -25,7 +25,7 @@ class BootStrap {
         }
 
         // create some organizations
-        for (i in 0..20) createOrg()
+        for (i in 0..10) createOrg()
 
         // create users along with organizations
         def firstOrg = createOrg(name: "GitHub", num: "111-111-111")
@@ -34,7 +34,20 @@ class BootStrap {
 
         def sampleOrganizations = [firstOrg, secondOrg, thirdOrg]
 
-        for (i in 0..100) {
+        userDao.insert(
+                login: "admin",
+                password: "secretStuff",
+                repassword: "secretStuff",
+
+                contact: [
+                        firstName: fakerService.firstName(),
+                        lastName: fakerService.lastName(),
+                        email: fakerService.email(),
+                        org: [id: firstOrg.id]
+                ]
+        )
+
+        for (i in 0..50) {
             def n = generator.nextInt(sampleOrganizations.size())
             def randomOrg = sampleOrganizations[n]
 
@@ -43,11 +56,12 @@ class BootStrap {
                     password: "secretStuff",
                     repassword: "secretStuff",
                     inactive: generator.nextDouble() > 0.5,
-                    orgId: randomOrg.id,
+
                     contact: [
                             firstName: fakerService.firstName(),
                             lastName: fakerService.lastName(),
-                            email: fakerService.email()
+                            email: fakerService.email(),
+                            org: [id: randomOrg.id]
                     ]
             ]
 

@@ -8,8 +8,7 @@ class Org implements Serializable {
     String num
     String name
 
-    //addy
-    String phone //default
+    String phone
     String street
     String city
     String state
@@ -20,8 +19,8 @@ class Org implements Serializable {
     }
 
     static constraints = {
-        num blank:false, nullable:false, maxSize:50
         name blank: false, nullable: false, unique: true, maxSize: 50
+        num blank: false, nullable: false, maxSize: 50
         phone nullable: true
         street nullable: true
         city nullable: true

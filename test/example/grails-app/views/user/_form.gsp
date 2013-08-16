@@ -10,8 +10,7 @@
 <form name="editForm" class="form-horizontal no-margin" novalidate
       ag-server-validation-errors
       ng-submit="save(item)">
-    <div class="modal-body">
-        <ag-server-validation-errors></ag-server-validation-errors>
+    <div class="modal-body" ng-controller="user.FormCtrl">
 
         <div ag-field-group for="contactFirstName,contactLastName">
             <label class="control-label">${ag.label(code: "contact.name")}</label>
@@ -71,15 +70,28 @@
             </div>
         </div>
 
+        <div ag-field-group for="contactOrgId">
+            <label class="control-label">${ag.label(code: "user.org")}</label>
+
+            <div class="controls">
+                <select name="contactOrgId" ng-model="item.contact.org.id"
+                        ng-options="org.id as org.name for org in orgs"
+                        required>
+                    <option value="">-- chose org --</option>
+                </select>
+                <ag-validation-errors for="contactOrgId" />
+            </div>
+        </div>
+
         <div class="control-group">
             <div class="controls">
                 <label class="checkbox">
-                    <g:checkBox name="contact.tagForReminders" ng-model="item.contact.tagForReminders"/>
+                    <g:checkBox name="contactTagForReminders" ng-model="item.contact.tagForReminders"/>
                     ${ag.label(code: 'contact.tagForReminders')}
                 </label>
             </div>
 
-            <div class="controls" ng-hide="isCreateNew">
+            <div class="controls" ng-hide="item.newRecord()">
                 <label class="checkbox">
                     <g:checkBox name="inactive" ng-model="item.inactive"/>
                     ${ag.label(code: 'user.inactive')}

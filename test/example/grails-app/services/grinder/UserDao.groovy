@@ -8,23 +8,14 @@ import grails.plugin.dao.DaoMessage
 class UserDao extends GormDaoSupport {
     Class domainClass = User
 
-    def saveUserAndRole(User user, String role) {
-        log.debug("Saving user ${user.login} with role ${role}")
-        save(user)
-    }
-
-    def delete(entity) {
-        super.delete(entity)
-    }
-
     Map update(params) {
-        println("update with $params")
-        def user = User.get(params.id.toLong())
-        // force init of the contact so we don't get "no session" when we try to access it
-        def contact = user?.contact
+        def user = User.get(params.id)
+
         DaoUtil.checkFound(user, params, User.name)
         DaoUtil.checkVersion(user, params.version)
+
         persistWithParams(user, params)
+
         return [ok: true, entity: user, message: DaoMessage.updated(user)]
     }
 
@@ -36,9 +27,8 @@ class UserDao extends GormDaoSupport {
      */
     Map insert(params) {
         def user = new User()
+
         user.contact = new Contact()
-        user.contact.org = Org.get(params.orgId)
-        params.remove 'orgId'
         persistWithParams(user, params)
 
         return [ok: true, entity: user, message: DaoMessage.created(user)]
@@ -46,7 +36,11 @@ class UserDao extends GormDaoSupport {
 
     void persistWithParams(user, params) {
         user.properties = params
-        user.contact.properties['firstName', 'lastName', 'email', 'tagForReminders'] = params['contact']
+        user.contact.properties["firstName", "lastName", "email", "tagForReminders"] = params["contact"]
+
+        def org = Org.get(params.contact.org.id)
+        user.contact.org = org
+
         try {
             checkPasswordChange(user, params)
             user.contact.persist()

@@ -16,9 +16,7 @@ class ListCtrl
 
     # Displays a form for creating a new user
     $scope.createItem = ->
-      # TODO workaround for missing Org
-      user = new Resource(orgId: 1)
-
+      user = new Resource()
       editDialog.open(pathWithContext("/user/formTemplate"), user)
 
     # Displays a form for editing an exiting user
@@ -45,4 +43,4 @@ class ListCtrl
     ]
 
 angular.module("angleGrinder")
-  .controller("users.ListCtrl", ListCtrl)
+  .controller("user.ListCtrl", ListCtrl)

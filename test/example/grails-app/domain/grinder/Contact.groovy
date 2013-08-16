@@ -3,18 +3,13 @@ package grinder
 import org.apache.commons.lang.builder.EqualsBuilder
 import org.apache.commons.lang.builder.HashCodeBuilder
 
-//@gorm.AuditStamp 
 class Contact {
     String num
     String name
 
-    // visibleToOrgType
-    Long visibleToOrgType
-
     Boolean tagForReminders = false
     Boolean inactive = false
     Boolean isPrimary = false
-    //ContactType type	// billing, shipping, etc
 
     String email //default
     String phone //default
@@ -29,9 +24,7 @@ class Contact {
     Date birthday
     String comments
 
-    //static hasOne = [user:User]
     Org  org
-    
 
     def isUserEnabled() {
         return (user && user.enabled) ? true : false
@@ -52,12 +45,12 @@ class Contact {
 
     static mapping = {
         cache true
-        org column: 'orgId'
+        org column: "orgId"
     }
 
     static constraints = {
-        num nullable: true, maxSize: 50
         name blank: false, nullable: false, maxSize: 50
+        num nullable: true, maxSize: 50
 
         inactive nullable: false
         isPrimary nullable: false
@@ -76,7 +69,6 @@ class Contact {
         phone nullable: true
 
         tagForReminders nullable: false
-        visibleToOrgType nullable: true
 
         org nullable:false
     }
@@ -92,13 +84,12 @@ class Contact {
                     .append(org, that.org)
                     .isEquals();
         }
-        //EqualsBuilder.reflectionEquals(this, that, ["id"])
         return this.id.equals(that.id)
     }
 
     @Override
     public int hashCode() throws IllegalStateException {
-        if (id == null) //return HashCodeBuilder.reflectionHashCode(this, ["id"])
+        if (id == null)
             return new HashCodeBuilder()
                     .append(name)
                     .append(org)
@@ -109,7 +100,7 @@ class Contact {
 
     static listActive(Long orgId) {
         return Contact.createCriteria().list {
-            eq('inactive', false)
+            eq("inactive", false)
         }
     }
 }
