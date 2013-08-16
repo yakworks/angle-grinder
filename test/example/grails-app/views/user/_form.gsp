@@ -11,7 +11,6 @@
       ag-server-validation-errors
       ng-submit="save(item)">
     <div class="modal-body">
-        <ag-server-validation-errors></ag-server-validation-errors>
 
         <div ag-field-group for="contactFirstName,contactLastName">
             <label class="control-label">${ag.label(code: "contact.name")}</label>
