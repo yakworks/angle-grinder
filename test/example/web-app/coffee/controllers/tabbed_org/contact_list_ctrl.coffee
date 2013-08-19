@@ -22,6 +22,10 @@ class ContactListCtrl
         sortname: "login"
         sortorder: "asc"
 
+    # Handles quickSearch action
+    $scope.quickSearch = (search) ->
+      $scope.$broadcast "searchUpdated", search
+
     # Displays a form for creating a new user
     $scope.createItem = ->
       user = new Users(contact: org: $scope.$org)

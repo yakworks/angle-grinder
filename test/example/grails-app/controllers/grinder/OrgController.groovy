@@ -73,10 +73,20 @@ class OrgController extends BaseDomainController {
         def pager = new Pager(params)
         def crit = User.createCriteria()
 
+        def filters = params.filters ? JSON.parse(params.filters) : null
+        def qslike = (filters?.quickSearch) ? (filters?.quickSearch + "%") : null
+
         def datalist = crit.list(max: pager.max, offset: pager.offset) {
-            contact {
-                org {
-                    idEq params.id.toLong()
+            createAlias("contact", "contact")
+
+            eq "contact.org.id", params.id.toLong()
+
+            if (qslike) {
+                or {
+                    ilike "login", qslike
+                    ilike "contact.lastName", qslike
+                    ilike "contact.firstName", qslike
+                    ilike "contact.email", qslike
                 }
             }
 
