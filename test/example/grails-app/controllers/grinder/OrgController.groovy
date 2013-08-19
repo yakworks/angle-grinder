@@ -90,6 +90,21 @@ class OrgController extends BaseDomainController {
                 }
             }
 
+            def fcontact = filters?.contact
+
+            if (fcontact?.name) {
+                or {
+                    ilike 'contact.lastName', fcontact.name
+                    ilike 'contact.firstName', fcontact.name
+                }
+            }
+
+            if (fcontact?.email)
+                ilike 'contact.email', fcontact.email
+
+            if (filters?.login)
+                ilike 'login', filters.login
+
             if (params.sort)
                 order(params.sort, params.order)
         }

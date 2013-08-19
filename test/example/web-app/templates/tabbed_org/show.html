@@ -85,6 +85,9 @@
       <tab-heading><i class="icon-user"></i> Contacts</tab-heading>
 
       <div ng-controller="tabbedOrg.ContactListCtrl">
+        <div ng-controller="user.SearchFormCtrl" collapse="!showSearchForm"
+             ng-include="'../templates/tabbed_org/contact_search_form.html'"></div>
+
         <div class="navbar navbar-grid">
           <div class="navbar-inner with-selected-pointer with-grid-options">
             <ul class="nav">
@@ -97,7 +100,7 @@
 
             <ul class="nav pull-right">
               <li>
-                <a title="search screen" href="">
+                <a title="search screen" ng-click="showSearchForm = !showSearchForm" href="">
                   <i class="icon-search"></i>
                 </a>
               </li>
