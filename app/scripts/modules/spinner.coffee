@@ -1,11 +1,11 @@
-spinner = angular.module("angleGrinder.spinner", [])
+spinner = angular.module("angleGrinder.spinner", ["angleGrinder.common"])
 
 spinner.factory "httpRequestTracker", [
-  "$http", ($http) ->
+  "pendingRequests", (pendingRequests) ->
     jqueryAjaxRequest: false,
 
     hasPendingRequests: ->
-      @jqueryAjaxRequest or $http.pendingRequests.length > 0
+      @jqueryAjaxRequest or pendingRequests()
 ]
 
 class SpinnerCtrl
