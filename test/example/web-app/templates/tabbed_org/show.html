@@ -85,6 +85,34 @@
       <tab-heading><i class="icon-user"></i> Contacts</tab-heading>
 
       <div ng-controller="tabbedOrg.ContactListCtrl">
+        <div ng-controller="user.SearchFormCtrl" collapse="!showSearchForm"
+             ng-include="'../templates/tabbed_org/contact_search_form.html'"></div>
+
+        <div class="navbar navbar-grid">
+          <div class="navbar-inner with-selected-pointer with-grid-options">
+            <ul class="nav">
+              <li>
+                <a href="" ng-click="createItem()">
+                  <i class="icon-user"></i> Create Contact
+                </a>
+              </li>
+            </ul>
+
+            <ul class="nav pull-right">
+              <li>
+                <a title="search screen" ng-click="showSearchForm = !showSearchForm" href="">
+                  <i class="icon-search"></i>
+                </a>
+              </li>
+            </ul>
+
+            <form action="" class="navbar-search pull-right" ng-submit="quickSearch(search)">
+              <input type="text" value="" placeholder="quick search" class="search-query span2" style="width: 150px;"
+                     ng-model="search.quickSearch"/>
+            </form>
+          </div>
+        </div>
+
         <div ng-show="gridOptions" ag-grid="gridOptions"></div>
       </div>
     </tab>

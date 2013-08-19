@@ -20,8 +20,8 @@ class UserController extends BaseDomainController {
         def crit = domainClass.createCriteria()
 
         def filters = params.filters ? JSON.parse(params.filters) : null
-
         def qslike = (filters?.quickSearch) ? (filters?.quickSearch + "%") : null
+
         def datalist = crit.list(max: pager.max, offset: pager.offset) {
             createAlias("contact", "contact")
 
