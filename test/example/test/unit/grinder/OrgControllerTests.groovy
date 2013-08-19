@@ -6,16 +6,15 @@ import org.junit.*
 
 @TestFor(OrgController)
 @TestMixin(DomainClassUnitTestMixin)
+@Mock([Org])
 class OrgControllerTests {
 
     @Test
-    void testListAll() {
+    void listAll() {
         // Given
-        mockDomain(Org, [
-            [id: 1, name: "GitHub", num: "111", city: "Seattle"],
-            [id: 2, name: "9ci", num: "222", city: "Chicago"],
-            [id: 3, name: "Microsoft", num: "333"]
-        ])
+        def firstOrg = new Org(id: 1, name: "GitHub", num: "111", city: "Seattle").save()
+        def secondOrg = new Org(id: 2, name: "9ci", num: "222", city: "Chicago").save()
+        def thirdOrg = new Org(id: 3, name: "Microsoft", num: "333").save()
 
         // When
         controller.listAll()
@@ -27,19 +26,19 @@ class OrgControllerTests {
         assertEquals 3, json.size()
 
         def first = json.get(0)
-        assertEquals 1, first.id
-        assertEquals "GitHub", first.name
-        assertEquals "111", first.num
+        assertEquals firstOrg.id, first.id
+        assertEquals firstOrg.name, first.name
+        assertEquals firstOrg.num, first.num
 
         def second = json.get(1)
-        assertEquals 2, second.id
-        assertEquals "9ci", second.name
-        assertEquals "222", second.num
+        assertEquals secondOrg.id, second.id
+        assertEquals secondOrg.name, second.name
+        assertEquals secondOrg.num, second.num
 
         def third = json.get(2)
-        assertEquals 3, third.id
-        assertEquals "Microsoft", third.name
-        assertEquals "333", third.num
+        assertEquals thirdOrg.id, third.id
+        assertEquals thirdOrg.name, third.name
+        assertEquals thirdOrg.num, third.num
     }
 
 }
