@@ -5,9 +5,12 @@ class ContactListCtrl
     # Create resource for users (contacts)
     Users = resourceBuilder("/user")
 
+    $scope.$org = null
     gridInitialized = false
     $scope.$on "initContactsGrid", (event, org) =>
       return if gridInitialized
+
+      $scope.$org = org
       gridInitialized = true
       
       $scope.gridOptions =
@@ -18,6 +21,11 @@ class ContactListCtrl
         autowidth: true
         sortname: "login"
         sortorder: "asc"
+
+    # Displays a form for creating a new user
+    $scope.createItem = ->
+      user = new Users(contact: org: $scope.$org)
+      editDialog.open(pathWithContext("/user/formTemplate"), user)
 
     # Displays a form for editing an exiting user
     $scope.editItem = (id) ->

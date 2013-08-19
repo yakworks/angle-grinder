@@ -85,6 +85,17 @@
       <tab-heading><i class="icon-user"></i> Contacts</tab-heading>
 
       <div ng-controller="tabbedOrg.ContactListCtrl">
+        <div class="navbar navbar-grid">
+          <div class="navbar-inner with-selected-pointer with-grid-options">
+            <ul class="nav">
+              <li>
+                <a href="" ng-click="createItem()">
+                  <i class="icon-user"></i> Create Contact
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
         <div ng-show="gridOptions" ag-grid="gridOptions"></div>
       </div>
     </tab>
