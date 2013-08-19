@@ -70,7 +70,7 @@ class Contact {
 
         tagForReminders nullable: false
 
-        org nullable:false
+        org nullable: false
     }
 
     @Override

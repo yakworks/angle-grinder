@@ -69,12 +69,17 @@ class OrgController extends BaseDomainController {
         }
     }
 
-    def listContacts() {
+    def listUsers() {
         def pager = new Pager(params)
-        def datalist = Contact.createCriteria().list(max: pager.max, offset: pager.offset) {
-            org {
-                idEq params.id.toLong()
+        def crit = User.createCriteria()
+
+        def datalist = crit.list(max: pager.max, offset: pager.offset) {
+            contact {
+                org {
+                    idEq params.id.toLong()
+                }
             }
+
             if (params.sort)
                 order(params.sort, params.order)
         }

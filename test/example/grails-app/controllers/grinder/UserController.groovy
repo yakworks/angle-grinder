@@ -20,8 +20,6 @@ class UserController extends BaseDomainController {
         def crit = domainClass.createCriteria()
 
         def filters = params.filters ? JSON.parse(params.filters) : null
-        println "params:$params"
-        println "filters:$filters"
 
         def qslike = (filters?.quickSearch) ? (filters?.quickSearch + "%") : null
         def datalist = crit.list(max: pager.max, offset: pager.offset) {
@@ -35,8 +33,8 @@ class UserController extends BaseDomainController {
                     ilike 'contact.email', qslike
                 }
             }
-            if(filters?.org){
-                'in' ('contact.org.id', filters.org.collect {it.id as Long })
+            if (filters?.org) {
+                'in' ('contact.org.id', filters.org.collect { it.id as Long })
             }
 
             def fcontact = filters?.contact
