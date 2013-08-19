@@ -83,7 +83,10 @@
 
     <tab select="initGrid()">
       <tab-heading><i class="icon-user"></i> Contacts</tab-heading>
-      <div ng-show="gridOptions" ag-grid="gridOptions"></div>
+
+      <div ng-controller="tabbedOrg.ContactListCtrl">
+        <div ng-show="gridOptions" ag-grid="gridOptions"></div>
+      </div>
     </tab>
   </tabset>
 </div>

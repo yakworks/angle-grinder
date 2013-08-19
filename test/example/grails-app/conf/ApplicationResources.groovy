@@ -18,5 +18,6 @@ modules = {
         // tabbed org
         resource url: "/coffee/admin_tabbed_org.coffee"
         resource url: "/coffee/controllers/tabbed_org/show_ctrl.coffee"
+        resource url: "/coffee/controllers/tabbed_org/contact_list_ctrl.coffee"
     }
 }
