@@ -32,3 +32,21 @@ class PathWithContextProvider
       [@getContextPath(), @sanitizePath(path)].join("/")
 
 common.provider "pathWithContext", PathWithContextProvider
+
+# Decorates `$http.pendingRequests` with some useful features
+common.factory "pendingRequests", [
+  "$http", ($http) ->
+    pendingRequests = -> pendingRequests.any()
+
+    # Returns true if any http request is in progress
+    pendingRequests.any = ->
+      pendingRequests.for "GET", "POST", "PUT", "PATCH", "DELETE"
+
+    # Returns true if a http request with the given method is in progress
+    pendingRequests.for = (httpMethods...) ->
+      requests = _.filter $http.pendingRequests, (request) ->
+        _.contains httpMethods, request.method
+      requests.length > 0
+
+    pendingRequests
+]
