@@ -7,7 +7,7 @@
     <r:require modules="admin"/>
 </head>
 
-<body data-entity-name="org">
+<body data-resource-name="org">
 
 <div ng-app="admin.orgTabs">
     <ag-alerts></ag-alerts>
