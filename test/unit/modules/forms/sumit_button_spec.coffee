@@ -28,18 +28,23 @@ describe "module: angleGrinder.forms directive: agSubmitButton", ->
 
     itIsEnabled()
 
-  describe "when the request is in progress", ->
-    beforeEach ->
-      $scope.$apply -> $http.pendingRequests = [{}]
+  describe "disabling / enabling", ->
+    requestInProgress = (val) ->
+      beforeEach inject (pendingRequests) ->
+        spyOn(pendingRequests, "for").andReturn(val)
+        $scope.$digest()
+        expect(pendingRequests.for).toHaveBeenCalledWith("POST", "PUT", "PATCH")
 
-    it "is disabled", ->
-      expect(element.prop("disabled")).toBeTruthy()
+    describe "when the request is in progress", ->
+      requestInProgress true
 
-    it "changes the button label", ->
-      expect(element).toHaveText "Save..."
+      it "is disabled", ->
+        expect(element.prop("disabled")).toBeTruthy()
 
-  describe "when the request is not in progress", ->
-    beforeEach ->
-      $scope.$apply -> $http.pendingRequests = []
+      it "changes the button label", ->
+        expect(element).toHaveText "Save..."
 
-    itIsEnabled()
+    describe "when the request is not in progress", ->
+      requestInProgress false
+
+      itIsEnabled()

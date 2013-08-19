@@ -1,4 +1,4 @@
-forms = angular.module("angleGrinder.forms", ["ui.bootstrap"])
+forms = angular.module("angleGrinder.forms", ["angleGrinder.common", "ui.bootstrap"])
 
 class FormDialogCtrl
   @$inject = ["$scope", "$rootScope", "$log", "dialog", "item", "flatten"]
@@ -307,10 +307,9 @@ forms.directive "agCancelButton", ->
 forms.directive "agSubmitButton", ->
   restrict: "E"
   replace: true
-  controller: ["$scope", "$http", ($scope, $http) ->
-    $scope.saving = false
-    $scope.$watch ->
-      $scope.saving = $http.pendingRequests.length > 0
+  controller: ["$scope", "pendingRequests", ($scope, pendingRequests) ->
+    # disable the button if POST, PUT or PATCH request is in progress
+    $scope.$watch -> $scope.saving = pendingRequests.for("POST", "PUT", "PATCH")
   ]
   template: """
     <button type="submit" class="btn btn-primary"
