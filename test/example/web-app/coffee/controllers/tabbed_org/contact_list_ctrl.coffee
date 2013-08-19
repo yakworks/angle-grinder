@@ -1,7 +1,7 @@
 class ContactListCtrl
 
-  @$inject = ["$scope", "editDialog", "resourceBuilder", "pathWithContext"]
-  constructor: ($scope, editDialog, resourceBuilder, pathWithContext) ->
+  @$inject = ["$scope", "editDialog", "confirmationDialog", "resourceBuilder", "pathWithContext"]
+  constructor: ($scope, editDialog, confirmationDialog, resourceBuilder, pathWithContext) ->
     # Create resource for users (contacts)
     Users = resourceBuilder("/user")
 
@@ -23,6 +23,15 @@ class ContactListCtrl
     $scope.editItem = (id) ->
       Users.get { id: id }, (user) ->
         editDialog.open(pathWithContext("/user/formTemplate"), user)
+
+    $scope.deleteItem = (id) ->
+      confirmationDialog.open().then (confirmed) ->
+        return unless confirmed
+
+        item = new Users(id: id)
+        item.delete
+          success: (response) -> $scope.$broadcast "itemDeleted", item
+          error: (response) -> $log.error "Something went wront", response
 
   colModel: ->
     [
