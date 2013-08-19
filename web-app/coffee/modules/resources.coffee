@@ -2,9 +2,11 @@ resources = angular.module("angleGrinder.resources", ["ngResource"])
 
 # Build a resource for the given restful url
 resources.factory "resourceBuilder", [
-  "$resource", ($resource) ->
-    (baseUrl, resourceName = null) ->
-      Resource = $resource "#{baseUrl}:action/:id", { id: "@id" },
+  "$resource", "pathWithContext", ($resource, pathWithContext) ->
+    (basePath, resourceName = null) ->
+      basePath = pathWithContext(basePath)
+
+      Resource = $resource "#{basePath}/:action/:id", { id: "@id" },
         list:   { method: "GET",  params: { action: "list" }, isArray: true }
         get:    { method: "GET",  params: action: "get" }
         save:   { method: "POST", params: action: "save" }
@@ -38,7 +40,7 @@ resources.factory "Resource", [
   "$document", "resourceBuilder", ($document, resourceBuilder) ->
     $body = $document.find("body")
 
-    url = $body.data("resource-url")
+    url = $body.data("resource-path")
     name = $body.data("resource-name")
 
     resourceBuilder(url, name)

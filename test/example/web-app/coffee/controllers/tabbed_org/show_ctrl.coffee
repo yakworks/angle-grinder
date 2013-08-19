@@ -1,22 +1,27 @@
 class ShowCtrl
 
-  @$inject = ["$scope", "$location", "pathWithContext", "alerts", "org"]
-  constructor: ($scope, $location, pathWithContext, alerts, org) ->
+  # TODO create separate controller for contacts
+  @$inject = ["$scope", "$location", "pathWithContext", "alerts", "org", "editDialog", "resourceBuilder"]
+  constructor: ($scope, $location, pathWithContext, alerts, org, editDialog, resourceBuilder) ->
     $scope.org = org
+
+    # Create resource for users (contacts)
+    Users = resourceBuilder("/user")
 
     $scope.initGrid = =>
       $scope.gridOptions =
-        url: pathWithContext("/org/listContacts/#{org.id}.json")
+        url: pathWithContext("/org/listUsers/#{org.id}.json")
         colModel: [
           { name: "id", label: "ID", width: 30 }
-          { name: "firstName", label: "First name", width: 50 }
-          { name: "lastName", label: "Last name", width: 50 }
-          { name: "email", label: "Email", width: 70, formatter: "email" }
+          { name: "contact.name", label: "Contact Name", width: 100, formatter: "editActionLink" }
+          { name: "contact.email", label: "Contact Email", width: 70, align: "right", formatter: "email" }
+          { name: "login", label: "Login", width: 70 }
+          { name: "inactive", label: "Inactive", width: 30, align: "center", formatter: "okIcon" }
         ]
         multiselect: false # turn off multiselect
         shrinkToFit: true # makes columns fit to width
         autowidth: true
-        sortname: "email"
+        sortname: "login"
         sortorder: "asc"
 
     $scope.save = (org) ->
@@ -30,6 +35,11 @@ class ShowCtrl
           $scope.serverValidationErrors = errors.org
 
       org.save success: onSuccess, error: onError
+
+    # Displays a form for editing an exiting user
+    $scope.editItem = (id) ->
+      Users.get { id: id }, (user) ->
+        editDialog.open(pathWithContext("/user/formTemplate"), user)
 
 angular.module("angleGrinder")
   .controller("tabbedOrg.ShowCtrl", ShowCtrl)

@@ -38,7 +38,8 @@
     </style>
 </head>
 
-<body data-resource-name="user">
+<body data-resource-name="user"
+      data-resource-path="/user">
 
 <h3 class="page-header"><g:message code="default.list.label" args="[entityName]"/></h3>
 

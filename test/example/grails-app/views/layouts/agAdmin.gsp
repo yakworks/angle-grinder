@@ -23,7 +23,7 @@
 
 <body data-context-path="${request.contextPath}"
       data-resource-name="${pageProperty(name: 'body.data-resource-name')}"
-      data-resource-url="${createLink(action: 'index').replaceAll(/index$/, '')}">
+      data-resource-path="${pageProperty(name: 'body.data-resource-path')}">
 
 <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="navbar-inner">
