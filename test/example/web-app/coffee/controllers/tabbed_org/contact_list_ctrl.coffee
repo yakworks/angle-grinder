@@ -27,8 +27,8 @@ class ContactListCtrl
   colModel: ->
     [
       { name: "id", label: "ID", width: 30 }
-      { name: "contact.name", label: "Contact Name", width: 100, formatter: "editActionLink" }
-      { name: "contact.email", label: "Contact Email", width: 70, align: "right", formatter: "email" }
+      { name: "contact.name", sortable: false, label: "Contact Name", width: 100, formatter: "editActionLink" }
+      { name: "contact.email", sortable: false, label: "Contact Email", width: 70, align: "right", formatter: "email" }
       { name: "login", label: "Login", width: 70 }
       { name: "inactive", label: "Inactive", width: 30, align: "center", formatter: "okIcon" }
     ]
