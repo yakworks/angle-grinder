@@ -40,12 +40,24 @@ describe "module: angleGrinder.forms directive: agDeleteButton", ->
       element.click()
       expect($scope.delete).toHaveBeenCalledWith(123)
 
-  describe "when the request is in progress", ->
-    beforeEach ->
-      $scope.$apply -> $http.pendingRequests = [{}]
+  describe "disabling / enabling", ->
+    requestInProgress = (val) ->
+      beforeEach inject (pendingRequests) ->
+        spyOn(pendingRequests, "for").andReturn(val)
+        $scope.$digest()
+        expect(pendingRequests.for).toHaveBeenCalledWith("POST", "DELETE")
 
-    it "disables the button", ->
-      expect(element.prop("disabled")).toBeTruthy()
+    describe "when the request is in progress", ->
+      requestInProgress true
 
-    it "changes the button label", ->
-      expect(element).toHaveText "Delete..."
+      it "disables the button", ->
+        expect(element.prop("disabled")).toBeTruthy()
+
+      it "changes the button label", ->
+        expect(element).toHaveText "Delete..."
+
+    describe "when the request in not in progress", ->
+      requestInProgress false
+
+      it "is enabled", ->
+        expect(element.prop("disabled")).toBeFalsy()

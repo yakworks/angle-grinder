@@ -246,7 +246,7 @@ forms.directive "agDeleteButton", ->
     whenConfirmed: "&"
 
   controller: [
-    "$scope", "$http", "$element", ($scope, $http, $element) ->
+    "$scope", "pendingRequests", "$element", ($scope, pendingRequests, $element) ->
       $scope.confirmation = false
 
       $scope.delete = ->
@@ -256,8 +256,7 @@ forms.directive "agDeleteButton", ->
         $scope.confirmation = !$scope.confirmation
 
       # enable / disable the button if a request in progress
-      $scope.$watch ->
-        $scope.deleting = $http.pendingRequests.length > 0
+      $scope.$watch -> $scope.deleting = pendingRequests.for("POST", "DELETE")
 
       # change button label
       $scope.$watch "confirmation", (confirmation) ->
