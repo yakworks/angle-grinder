@@ -6,28 +6,27 @@ lead: "An overview of Angle Grinder, how to download and use, basic examples, an
 base_url: "../"
 ---
 
+<!-- Getting started
+================================================== -->
+<div class="bs-docs-section">
+  <div class="page-header">
+    <h1 id="develop">Develop Angle Grinder</h1>
+  </div>
+  <p class="lead">There are a few easy ways to quickly get started with Angle Grinder</p>
 
-  <!-- Getting started
-  ================================================== -->
-  <div class="bs-docs-section">
-    <div class="page-header">
-      <h1 id="develop">Develop Angle Grinder</h1>
-    </div>
-    <p class="lead">There are a few easy ways to quickly get started with Angle Grinder</p>
+  <h3 id="develop-checkout">Checkout from GitHub repository</h3>
 
-    <h3 id="develop-checkout">Checkout from GitHub repository</h3>
+  <div class="highlight">
+    <pre>
+      <code class="bash"><span class="nv">$ </span>git checkout https://github.com/9ci/angle-grinder.git</code>
+    </pre>
+  </div>
 
-    <div class="highlight">
-      <pre>
-        <code class="bash"><span class="nv">$ </span>git checkout https://github.com/9ci/angle-grinder.git</code>
-      </pre>
-    </div>
+  <h3 id="develop-install-nodejs">Install the latest nodejs version</h3>
 
-    <h3 id="develop-install-nodejs">Install the latest nodejs version</h3>
-
-    <div class="highlight">
-      <pre>
-        <code class="bash">
+  <div class="highlight">
+    <pre>
+      <code class="bash">
 sudo apt-get install build-essential openssl libssl-dev pkg-config
 
 wget http://nodejs.org/dist/v0.10.12/node-v0.10.12.tar.gz
@@ -37,69 +36,98 @@ cd node-v0.10.12
 ./configure
 make
 sudo make instal
-        </code>
-      </pre>
-    </div>
+      </code>
+    </pre>
+  </div>
 
-    <h3 id="develop-install-libraries">Install required tools and libraries</h3>
+  <h3 id="develop-install-libraries">Install required tools and libraries</h3>
 
-    <div class="highlight">
-      <pre>
-        <code class="bash">
+  <div class="highlight">
+    <pre>
+      <code class="bash">
 npm install -g coffee-script
 npm install -g grunt-cli
 npm install -g bower
 
 npm install
 bower install
-        </code>
-      </pre>
-    </div>
-
-    <h3 id="develop-install-phantomjs">Install PhantomsJS and CasperJS for integration testing</h3>
-
-    <div class="highlight">
-      TODO
-    </div>
-
-    <h3 id="develop-running-tests">Running tests</h3>
-
-    <div class="highlight">
-      TODO
-    </div>
-
-    <h3 id="develop-building">Building the app</h3>
-
-    <div class="highlight">
-      TODO
-    </div>
-
-    <h3 id="develop-grunt-tasts">Grunt tasks</h3>
-
-    <div class="highlight">
-      TODO
-    </div>
-
-    <h3 id="develop-directory-structure">Directory structure</h3>
-
-    <div class="highlight">
-      TODO
-      <br/>
-      <br/>
-
-      <pre>
-dist<br/>
-├── scripts<br/>
-│   ├── angle-grinder.gridz.min.js<br/>
-│   ├── bootstrap.min.js<br/>
-│   ├── gridz.min.js<br/>
-│   ├── scripts.min.js<br/>
-│   ├── jquery.min.js<br/>
-│   └── angularjs-all.min.js<br/>
-└── styles<br/>
-├── bootstrap.min.css<br/>
-├── gridz.min.css<br/>
-└── style.min.css<br/>
-      </pre>
-    </div>
+      </code>
+    </pre>
   </div>
+
+  <h3 id="develop-install-phantomjs">Install PhantomsJS and CasperJS for integration testing</h3>
+
+  <h4>Download and install PhantomJS</h4>
+
+  <div class="highlight">
+    <pre>
+      <code class="bas">
+wget https://phantomjs.googlecode.com/files/phantomjs-1.9.1-linux-x86_64.tar.bz2
+tar xvjf phantomjs-1.9.1-linux-x86_64.tar.bz2
+cd tar xvjf phantomjs-1.9.1-linux-x86_64
+ln -sf `pwd`/bin/phantomjs /usr/local/bin/phantomjs
+      </code>
+    </pre>
+  </div>
+
+  Detailed instructions about PhantomJS installation:
+  <a href="http://phantomjs.org/build.html">http://phantomjs.org/build.html</a>
+
+  <h4>Checkout and install CasperJS</h4>
+
+  <div class="highlight">
+    <pre>
+      <code class="bas">
+git clone git://github.com/n1k0/casperjs.git
+cd casperjs
+git checkout tags/1.0.2
+ln -sf `pwd`/bin/casperjs /usr/local/bin/casperjs
+      </code>
+    </pre>
+  </div>
+
+  Detailed instructions about CasperJS installation:
+  <a href="http://casperjs.org/installation.html">http://casperjs.org/installation.html</a>
+
+  <h3 id="develop-running-tests">Running tests</h3>
+
+  <div class="highlight">
+    TODO
+  </div>
+
+  <h3 id="develop-building">Building the app</h3>
+
+  <div class="highlight">
+    TODO
+  </div>
+
+  <h3 id="develop-grunt-tasts">Grunt tasks</h3>
+
+  <div class="highlight">
+    TODO
+  </div>
+
+  <h3 id="develop-directory-structure">Directory structure</h3>
+
+  <div class="highlight">
+    TODO
+    <br/>
+
+    <pre>
+      <code>
+dist
+├── scripts
+│   ├── angle-grinder.gridz.min.js
+│   ├── bootstrap.min.js
+│   ├── gridz.min.js
+│   ├── scripts.min.js
+│   ├── jquery.min.js
+│   └── angularjs-all.min.js
+└── styles
+├── bootstrap.min.css
+├── gridz.min.css
+└── style.min.css
+      </code>
+    </pre>
+  </div>
+</div>
