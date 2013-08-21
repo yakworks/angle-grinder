@@ -81,4 +81,33 @@ angular.module("myApp")
 </body>
 {% endhighlight %}
 
+  <h3 id="#gridz-ajax">Server side data</h3>
+
+{% highlight coffeescript %}
+class UsersListCtrl
+  @$inject = ["$scope"]
+  constructor: ($scope) ->
+
+  $scope.gridOptions =
+    url: "/api/users"
+    colModel: @gridColumns()
+    rowNum: 10
+    sortname: "id"
+
+  gridColumns: ->
+    # see the previous example
+    []
+
+angular.module("myApp")
+  .controller("UsersListCtrl", UsersListCtrl)
+{% endhighlight %}
+
+{% highlight html %}
+<body ng-app="myApp">
+  <div ng-controller="UsersListCtrl">
+    <div ag-grid="gridOptions"></div>
+  </div>
+</body>
+{% endhighlight %}
+
 </div>
