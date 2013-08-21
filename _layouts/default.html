@@ -21,6 +21,7 @@
 
     <div class="container bs-docs-container">
       <div class="row">
+        {% if page.show_sidebar %}
         <div class="col-md-3">
           <div class="bs-sidebar hidden-print" role="complementary">
             <ul class="nav bs-sidenav">
@@ -33,6 +34,8 @@
             </ul>
           </div>
         </div>
+        {% endif %}
+
         <div class="col-md-9" role="main">
           {{ content }}
         </div>

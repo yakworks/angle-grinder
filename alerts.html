@@ -1,0 +1,70 @@
+---
+layout: default
+title: Alerts
+slug: alerts
+base_url: "../"
+---
+
+<!-- Alerts
+================================================== -->
+<div class="bs-docs-section">
+  <div class="page-header">
+    <h1 id="develop">Alerts</h1>
+  </div>
+  <p class="lead">AngularJS service and directive for displaying alerts</p>
+
+  Include <code>angleGrinder.alerts</code> module in the application
+
+{% highlight coffeescript %}
+app = angular.module("myApp", [
+  "angleGrinder.alerts"
+])
+{% endhighlight %}
+
+  Include container for alerts somewhere on the page
+
+{% highlight html %}
+<div ng-app="myApp">
+  <section ng-controller="MyCtrl" class="content">
+    <ag-alerts></ag-alerts>
+  </section>
+</div>
+{% endhighlight %}
+
+  Inject <code>alert</code> service
+
+{% highlight coffeescript %}
+class MyCtrl
+
+  @$inject = ["alerts"]
+  constructor: (alerts) ->
+    alerts.info "Hello World!"
+    alerts.error "Something went wrong!"
+
+angular.module("myApp")
+  .controller("MyCtrl", MyCtrl)
+{% endhighlight %}
+
+  <code>alert</code> service might be injected as regular AngularJS service.
+  For example:
+
+{% highlight coffeescript %}
+# Intercepts all HTTP errors and displays a flash message
+app.factory "httpErrorsInterceptor", [
+  "$injector", "$q", "alerts", ($injector, $q, alerts) ->
+    (promise) ->
+      $http = $injector.get("$http")
+
+      onError = (response) ->
+        # display error message
+        errorMessage = response.data?.error || "Unexpected HTTP error"
+        alerts.error(errorMessage)
+
+        $q.reject(response)
+        promise.then(null, onError)
+
+      promise.then(null, onError)
+  ]
+{% endhighlight %}
+
+</div>
