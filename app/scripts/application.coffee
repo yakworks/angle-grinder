@@ -17,7 +17,7 @@ app.config [
     pathWithContextProvider.setContextPath(contextPath) if contextPath?
 ]
 
-# Intercepts all HTTP errors and dislays a flash message
+# Intercepts all HTTP errors and displays a flash message
 app.factory "httpErrorsInterceptor", [
   "$injector", "$q", "alerts", ($injector, $q, alerts) ->
     (promise) ->
