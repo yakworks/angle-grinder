@@ -38,13 +38,34 @@ sudo make instal
 
   <h3 id="develop-install-libraries">Install required tools and libraries</h3>
 
+  Install <a href="https://npmjs.org/">npm</a> packages for
+  <span class="label label-info">coffee-script</span>,
+  <span class="label label-info">grunt-cli</span>,
+  <span class="label label-info">bower</span> and
+  <span class="label label-info">karma</span>
+
+  <br/>
+
 {% highlight bash %}
 npm install -g coffee-script
 npm install -g grunt-cli
 npm install -g bower
+npm install -g karma
+{% endhighlight %}
 
+  Install npm and bower components
+  <br/>
+
+{% highlight bash %}
 npm install
 bower install
+{% endhighlight %}
+
+  Install <span class="label label-info">foreman</span> ruby gem
+  <br/>
+
+{% highlight bash %}
+gem install foreman
 {% endhighlight %}
 
   <h3 id="develop-install-phantomjs">Install PhantomsJS and CasperJS for integration testing</h3>
@@ -73,22 +94,52 @@ ln -sf `pwd`/bin/casperjs /usr/local/bin/casperjs
   Detailed instructions about CasperJS installation:
   <a href="http://casperjs.org/installation.html">http://casperjs.org/installation.html</a>
 
-  <h3 id="develop-running-tests">Running tests</h3>
-
-{% highlight bash %}
-TODO
-{% endhighlight %}
-
-  <h3 id="develop-building">Building the app</h3>
-
-{% highlight bash %}
-TODO
-{% endhighlight %}
-
   <h3 id="develop-grunt-tasts">Grunt tasks</h3>
 
+  The list of basic <a href="http://gruntjs.com/">grunt</a> tasks useful during the delopment:
+
+  <dl>
+    <dt><code>grunt server</code></dt>
+    <dd>Compile assets and start the web server on <code>localhost:9000</code></dd>
+
+    <dt><code>grunt build</code></dt>
+    <dd>Build the production minified release of Angle Grinder</dd>
+
+    <dt><code>grunt clean</code></dt>
+    <dd>Clear all temporary files and folders including the production release</dd>
+  </dl>
+
+  <h3 id="develop-running-tests">Running tests</h3>
+
+  <dl>
+    <dt><code>grunt coffeling</code></dt>
+    <dd>Run style checker for <a href="http://coffeescript.org/">CoffeeScript</a> source files</dd>
+
+    <dt><code>grunt test</code></dt>
+    <dd>
+      Run unit tests.<br/>
+      It will also generate <a href="http://gotwarlost.github.io/istanbul/">istanbul</a> test coverage report inside <code>./coverate</code> directory.
+    </dd>
+
+    <dt><code>grunt test:casperjs</code></dt>
+    <dd>Run CasperJS integration tests</dd>
+  </dl>
+
+  Unit test might be also executed directly by <a href="http://karma-runner.github.io">karma</a> with the following command <code>karma start test/karma-coffee.conf.coffee</code>.
+  <br/>
+  Karma watches all the files, specified within the configuration file, and whenever any file changes, it triggers the test run.
+
+  <br/>
+  <br/>
+
+  Example tests execution output:
+
 {% highlight bash %}
-TODO
+> karma start test/karma-coffee.conf.coffee
+................................................................................
+................................................................................
+....
+PhantomJS 1.9.1 (Linux): Executed 164 of 164 SUCCESS (1.386 secs / 0.854 secs)
 {% endhighlight %}
 
   <h3 id="develop-directory-structure">Directory structure</h3>
@@ -108,6 +159,12 @@ dist
 ├── bootstrap.min.css
 ├── gridz.min.css
 └── style.min.css
+{% endhighlight %}
+
+  <h3 id="develop-building">Building the app</h3>
+
+{% highlight bash %}
+TODO
 {% endhighlight %}
 
 </div>
