@@ -118,7 +118,7 @@ ln -sf `pwd`/bin/casperjs /usr/local/bin/casperjs
     <dt><code>grunt test</code></dt>
     <dd>
       Run unit tests.<br/>
-      It will also generate <a href="http://gotwarlost.github.io/istanbul/">istanbul</a> test coverage report inside <code>./coverate</code> directory.
+      It will also generate <a href="http://gotwarlost.github.io/istanbul">istanbul</a> test coverage report inside <code>./coverate</code> directory.
     </dd>
 
     <dt><code>grunt test:casperjs</code></dt>
@@ -142,29 +142,121 @@ ln -sf `pwd`/bin/casperjs /usr/local/bin/casperjs
 PhantomJS 1.9.1 (Linux): Executed 164 of 164 SUCCESS (1.386 secs / 0.854 secs)
 {% endhighlight %}
 
+  <h3 id="develop-running-app">Running the example application</h3>
+
+  Execute <code>foreman start</code> and navigate to <code>http://localhost:9000</code>.<br/>
+  This command will start <code>grunt server</code> along with simple express application.
+
   <h3 id="develop-directory-structure">Directory structure</h3>
 
-{% highlight bash %}
-TODO
+  <h4>Application sources and tests</h4>
 
+  <ul>
+    <li>
+      <span class="label label-info">app</span>
+      - contains CoffeeScript sources, styles, images, fonts and other assets
+      <ul>
+        <li>
+          <span class="label label-info">app/scripts</span>
+          - CoffeeScript sources
+        </li>
+        <li>
+          <span class="label label-info">app/styles</span>
+          - less and css stylesheets
+        </li>
+        <li>
+          <span class="label label-info">app/views</span>
+          - html views used by AngularJS
+        </li>
+      </ul>
+    </li>
+    <li>
+      <span class="label label-info">tests</span>
+      - contains tests for the application
+      <ul>
+        <li>
+          <span class="label label-info">tests/unit</span>
+          - unit tests for AngularJS components
+        </li>
+        <li>
+          <span class="label label-info">tests/casperjs</span>
+          - CasperJS integration specs
+        </li>
+      </ul>
+    </li>
+  </ul>
+
+  <h4>Third-party libraries</h4>
+
+  <ul>
+    <li>
+      <span class="label label-info">bower_components</span>
+      - components installed by bower
+    </li>
+    <li>
+      <span class="label label-info">custom_components</span>
+      - custom components
+    </li>
+    <li>
+      <span class="label label-info">node_modules</span>
+      - locally installed npm packages
+    </li>
+  </ul>
+
+  <h4>Generated stuff</h4>
+
+  <ul>
+    <li>
+      <span class="label label-info">dev</span>
+      - compiled development release
+    </li>
+    <li>
+      <span class="label label-info">dist</span>
+      - created by grunt build command,
+      contains the production concatenated and minified release of the app
+    </li>
+  </ul>
+
+  <h2 id="develop-building">Building the app</h2>
+
+  Build it with <code>grunt build</code> command.<br/>
+  This command will generate the following files.
+
+{% highlight bash %}
 dist
 ├── scripts
-│   ├── angle-grinder.gridz.min.js
-│   ├── bootstrap.min.js
-│   ├── gridz.min.js
-│   ├── scripts.min.js
-│   ├── jquery.min.js
-│   └── angularjs-all.min.js
+│   ├── angle-grinder.alerts.min.js
+│   ├── angle-grinder.common.min.js
+│   ├── angle-grinder.forms.min.js
+│   ├── angle-grinder.gridz.min.js
+│   ├── angle-grinder.spinner.min.js
+│   ├── angularjs-all.min.js
+│   ├── bootstrap.min.js
+│   ├── gridz.min.js
+│   ├── jquery.min.js
+│   ├── scripts.min.js
+│   └── underscore.min.js
 └── styles
-├── bootstrap.min.css
-├── gridz.min.css
-└── style.min.css
+    ├── bootstrap.min.css
+    ├── gridz.min.css
+    └── style.min.css
 {% endhighlight %}
 
-  <h3 id="develop-building">Building the app</h3>
+  <dl>
+    <dt><a href="">angle-grinder.alerts.min.js</a></dt>
+    <dd>AngularJS module for handling <a href="http://getbootstrap.com/2.3.2/javascript.html#alerts">alerts</a></dd>
 
-{% highlight bash %}
-TODO
-{% endhighlight %}
+    <dt><a href="">angle-grinder.common.min.js</a></dt>
+    <dd>AngularJS module with common services used in various places of the app</dd>
+
+    <dt><a href="">angle-grinder.forms.min.js</a></dt>
+    <dd>AngularJS module with some useful forms extensions</dd>
+
+    <dt><a href="/gridz">angle-grinder.gridz.min.js</a></dt>
+    <dd>AngularJS wrapper for <a href="http://www.trirand.com/blog/">jqGrid</a></dd>
+
+    <dt><a href="">angle-grinder.spinner.min.js</a></dt>
+    <dd>AngularJS module for displaying spinners</dd>
+  </dl>
 
 </div>
