@@ -12,6 +12,73 @@ base_url: "../"
   <div class="page-header">
     <h1 id="gridz">Grid component</h1>
   </div>
-  <p class="lead">AngularJS directives for JqGrid</p>
+  <p class="lead">AngularJS directive for jqGrid</p>
+
+  <h3 id="gridz-basic">Basic example</h3>
+
+  <h4>Application module</h4>
+
+  Include <code>angleGrinder.gridz</code> module in the application
+
+{% highlight coffeescript %}
+app = angular.module("myApp", [
+  "angleGrinder.gridz"
+])
+{% endhighlight %}
+
+  <h4>Example AngularJS controller</h4>
+
+{% highlight coffeescript %}
+class ListCtrl
+
+  @$inject = ["$scope", "sampleData"]
+  constructor: ($scope, @sampleData) ->
+    # assign grid options to the scope
+    $scope.gridOptions =
+      data: @generateSampleData()
+      datatype: "local"
+      colModel: @gridColumns()
+      sortname: "id"
+
+  # Generates sample data to feed the grid
+  generateSampleData: ->
+    @sampleData.generate(100)
+
+  # Defines grid column model
+  # see http://www.trirand.com/jqgridwiki/doku.php?id=wiki:colmodel_options
+  gridColumns: ->
+  [
+      name: "id"
+      label: "Inv No"
+      width: 60
+      sorttype: "int"
+    ,
+      name: "customer.name"
+      label: "Customer"
+      formatter: "editActionLink"
+    ,
+      name: "invoiceDate"
+      label: "Date"
+    ,
+      name: "note"
+      label: "Note"
+    ,
+      name: "complete"
+      label: "Complete"
+  ]
+
+angular.module("myApp")
+  .controller("ListCtrl", ListCtrl)
+{% endhighlight %}
+
+  <h4>Directive usage</h4>
+
+{% highlight html %}
+<body ng-app="myApp">
+  <div ng-controller="ListCtrl">
+    <div ag-grid="gridOptions"></div>
+  </div>
+</body>
+{% endhighlight %}
 
 </div>
