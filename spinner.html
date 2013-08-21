@@ -1,0 +1,40 @@
+---
+layout: default
+title: Spinner
+slug: spinner
+base_url: "../"
+---
+
+<!-- Alerts
+================================================== -->
+<div class="bs-docs-section">
+  <div class="page-header">
+    <h1 id="spinner">Spinner component</h1>
+  </div>
+  <p class="lead">AngularJS showing spinners</p>
+
+  Include <code>angleGrinder.alerts</code> module in the application
+
+{% highlight coffeescript %}
+app = angular.module("myApp", [
+  "angleGrinder.spinner"
+])
+{% endhighlight %}
+
+  Include it anywhere you want to see the spinner. For instance:
+
+{% highlight html %}
+<div class="navbar navbar-inverse navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <div>
+        <ul class="nav pull-right">
+          <ag-spinner></ag-spinner>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+{% endhighlight %}
+
+</div>
