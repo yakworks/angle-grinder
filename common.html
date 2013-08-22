@@ -64,6 +64,34 @@ app.config [
 
   <h3 id="common-pendingRequests">pendingRequests</h3>
 
-  TODO pendingRequests
+  Service designed for the internal usage.<br/>
+  For example it is used for enabling / disabling <code>ag-submit-button</code> and <code>ag-delete-button</code>.
+
+  <h4 id="common-pendingRequests-usage">Usage</h4>
+
+{% highlight coffeescript %}
+app = angular.module("myApp", [
+  "angleGrinder.common"
+])
+
+class MyCtrl
+  @$inject = ["$scope", "pendingRequests"]
+  constructor: ($scope, pendingRequests) ->
+
+    # will return `true` if any http request is in progress
+    pendingRequests.any()
+
+    # shortcut for `pendingRequests.any()`
+    pendingRequests()
+
+    # returns `true` if any http DELETE request is in progress
+    pendingRequests.for("DELETE")
+
+    # returns `true` if POST or PUT request is in progress
+    # it can accept multiple arguments with other http methods
+    pendingRequests.for("POST", "PUT")
+
+app.controller("MyCtrl", MyCtrl)
+{% endhighlight %}
 
 </div>
