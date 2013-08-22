@@ -1,0 +1,310 @@
+---
+layout: default
+title: Forms
+slug: forms
+show_sidebar: true
+lead: "Bunch of opinionated form extensions"
+base_url: "../"
+---
+
+<!-- Alerts
+================================================== -->
+<div class="bs-docs-section">
+  <div class="page-header">
+    <h1 id="forms">Forms component</h1>
+  </div>
+  <p class="lead">Bunch of extensions used for building forms</p>
+
+  <h3 id="forms-basic">Basic example</h3>
+
+  The view
+
+{% highlight html %}
+<div ng-controller="org.FormController">
+  <form name="editForm" novalidate class="form-horizontal no-margin"
+        ng-submit="save(org)">
+
+    <div ag-field-group for="name">
+      <label class="control-label">Name</label>
+
+      <div class="controls">
+        <input type="text" name="name" placeholder="Enter Name"
+               ng-model="org.name" autofocus required />
+        <ag-validation-errors for="name" />
+      </div>
+    </div>
+
+    <div ag-field-group for="num">
+      <label class="control-label">Num</label>
+
+      <div class="controls">
+        <input type="text" name="num" placeholder="Enter num"
+               ng-model="org.num" autofocus required />
+        <ag-validation-errors for="num" required="This field is required" />
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <ag-submit-button></ag-submit-button>
+    </div>
+  </form>
+</div>
+{% endhighlight %}
+
+  and the controller
+
+{% highlight coffeescript %}
+class FormCtrl
+
+  @$inject = ["$scope", "resourceBuilder"]
+  $scope.org = resourceBuilder("/api/org")
+
+  $scope.save = (org) ->
+    return if $scope.editForm.$invalid
+    org.save()
+
+angular.module("myApp")
+  .controller("org.FormCtrl", FormCtrl)
+{% endhighlight %}
+
+  <h3 id="forms-validation">Form validations</h3>
+
+  Set of directives and services for displaying various validation errors.
+
+  <h4 id="forms-validation-ag-field-group">agFieldGroup directive</h4>
+
+  Provides integration with <a href="http://getbootstrap.com/2.3.2/base-css.html#forms">bootstrap</a> form's validation styles.<br/>
+  This directive simply wraps labels and controls in <code>div.control-group</code> element.
+  <br/>
+  <br/>
+  For example
+
+{% highlight html %}
+<div ag-field-group for="name">
+  <label class="control-label">Name</label>
+
+  <div class="controls">
+    <input type="text" name="name" placeholder="Enter Name"
+           ng-model="org.name" required />
+  </div>
+</div>
+{% endhighlight %}
+
+  will generate the following markup:
+
+{% highlight html %}
+<div class="control-group">
+  <!-- form inputs -->
+</div>
+{% endhighlight %}
+
+  If one the fields listed in <code>for="*"</code> attribute contains errors the directive will
+  add <code>error</code> css class to the element.<br/>
+  For example:
+
+  {% highlight html %}
+  <div class="control-group error">
+    <!-- input that violates validation -->
+  </div>
+  {% endhighlight %}
+
+  <h4 id="forms-validation-ag-validation-errors">agValidationErrors directive</h4>
+
+  This directive is responsible for displaying validation messages for invalid fields.<br/>
+
+{% highlight html %}
+<div class="controls">
+  <input type="password" name="password"
+         ng-model="user.password"
+         ng-required="user.newRecord()"
+         ng-minlength="6" />
+  <ag-validation-errors for="password" />
+</div>
+{% endhighlight %}
+
+  Default validation messages are defined in <code>validationMessages</code> service.
+
+{% highlight coffeescript %}
+forms.value "validationMessages",
+  required: "This field is required"
+  mismatch: "Does not match the confirmation"
+  minlength: "This field is too short"
+  maxlength: "This field is too long"
+  email: "Invalid email address"
+  pattern: "Invalid pattern"
+{% endhighlight %}
+
+  A message for the given validation could be overridden in the directive.<br/>
+  For example:
+
+{% highlight html %}
+<div class="controls">
+  <!-- password field from the previous example -->
+
+  <ag-validation-errors
+      for="password"
+      required="Password is required"
+      minlength="Password must be at least 6 characters" />
+</div>
+{% endhighlight %}
+
+  <h4 id="forms-validation-ag-server-validation-errors">agServerValidationErrors directive</h4>
+
+  Adds ability to display validation errors from the server side along with standard validation messages.
+
+{% highlight html %}
+<form name="editForm" novalidate class="form-horizontal no-margin"
+      ag-server-validation-errors>
+
+  <!-- form inputs -->
+</form>
+{% endhighlight %}
+
+  This directive expects that validation errors will come from the server side with the following format:
+
+{% highlight javascript %}
+{
+  "code": 422,
+  "status": "error",
+  "message": "User save failed",
+  "errors": {
+    "user": {
+      "login": "Login must be unique"
+    }
+  }
+}
+{% endhighlight %}
+
+  <ul>
+    <li>HTTP response code must be <code>422</code> (unprocessable entity)</li>
+    <li>returned JSON response must include "errors" object</li>
+    <li>entity name and error key must match entity and field name defined on the client side</li>
+  </ul>
+
+  <h3 id="form-ag-submit-button">agSubmitButton directive</h3>
+
+  Renders a default button for creating or updating the resource.
+
+{% highlight html %}
+<div class="form-actions">
+  <ag-submit-button></ag-submit-button>
+</div>
+{% endhighlight %}
+
+  <ul>
+    <li>it will have default label "Save"</li>
+    <li>the button will be automatically disabled if <code>POST</code> or <code>PUT</code> request is in progress</li>
+    <li>if request is in progress the label will be changed to "Save..."</li>
+  </ul>
+
+  <h3 id="form-ag-delete-button">agDeleteButton directive</h3>
+
+  Double check delete button. The basic idea was taken from <a href="http://williamcsete.com/sandbox/double-delete">http://williamcsete.com/sandbox/double-delete</a>.
+  Example usage:
+
+{% highlight html %}
+<div class="form-actions">
+  <ag-delete-button when-confirmed="delete(user)"></ag-delete-button>
+</div>
+{% endhighlight %}
+
+  <code>when-confirmed={expression}</code> - expression to evaluate upon the second click
+  (when the action was confirmed)
+
+  <br/>
+  <br/>
+
+  <ul>
+    <li>it will have default label "Delete"</li>
+    <li>after the first click it will be changed to in-place confirmation</li>
+    <li>the button will be automatically disabled if <code>POST</code> or <code>DELETE</code> request is in progress</li>
+    <li>if request is in progress the label will be changed to "Delete..."</li>
+  </ul>
+
+  <h3 id="forms-confirmationDialog">confirmationDialog service</h3>
+
+  Generic confirmation dialog.<br/>
+  Example usage in the conroller:
+
+{% highlight coffeescript %}
+class MyCtrl
+  @$inject = ["$scope", "confirmationDialog"]
+  constructor: ($scope, confirmationDialog) ->
+
+  $scope.deleteItem = (item) ->
+    confirmationDialog.open().then (confirmed) ->
+      item.delete() if confirmed
+
+angular.module("myApp")
+  .controller("MyCtrl", MyCtrl)
+{% endhighlight %}
+
+  <h3 id="forms-editDialog">editDialog service</h3>
+
+  Displays a dialog with a form for creating or updating a record.
+  Used mostly on dialog based CRUD pages.<br/>
+  Example usage:
+
+{% highlight coffeescript %}
+class MyCtrl
+
+  @$inject = ["$scope", "editDialog", "Users"]
+  constructor: ($scope, editDialog, Users) ->
+    # Displays a form for creating a new user
+    $scope.createItem = ->
+      user = new Users()
+      editDialog.open("/user/formTemplate", user)
+
+    # Displays a form for editing an exiting user
+    $scope.editItem = (id) ->
+      Users.get { id: id }, (user) ->
+        editDialog.open("/user/formTemplate", user)
+
+angular.module("myApp")
+  .controller("tabbedOrg.MyCtrl", MyCtrl)
+{% endhighlight %}
+
+  Example template for the dialog <code>/user/formTemplate</code>:
+
+{% highlight html %}
+<div class="modal-header">
+  <button type="button" class="close" ng-click="closeEditDialog()">&times;</button>
+  <h3 ng-show="createNew">Create New ${entityName}</h3>
+  <h3 ng-hide="createNew">Edit ${entityName}</h3>
+</div>
+
+<form name="editForm" class="form-horizontal no-margin" novalidate
+      ng-submit="save(item)">
+  <div class="modal-body" ng-controller="user.FormCtrl">
+
+    <div ag-field-group for="contactFirstName,contactLastName">
+      <label class="control-label">${ag.label(code: "contact.name")}</label>
+
+      <div class="controls">
+        <input type="text" placeholder="${ag.label(code: 'contact.firstName')}"
+               name="contactFirstName"
+               ng-model="item.contact.firstName" required autofocus>
+        <ag-validation-errors for="contactFirstName" />
+      </div>
+
+      <div class="controls" style="margin-top:5px">
+        <input type="text" placeholder="${ag.label(code: 'contact.lastName')}"
+               name="contactLastName"
+               ng-model="item.contact.lastName" />
+        <ag-validation-errors for="contactLastName" />
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+      <span ng-hide="createNew">
+          <ag-delete-button when-confirmed="delete(item)"></ag-delete-button>
+      </span>
+
+    <ag-cancel-button ng-click="closeEditDialog()"></ag-cancel-button>
+    <ag-submit-button></ag-submit-button>
+  </div>
+</form>
+{% endhighlight %}
+
+</div>
