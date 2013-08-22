@@ -1,0 +1,106 @@
+---
+layout: default
+title: Resources
+slug: resources
+show_sidebar: true
+base_url: "../"
+---
+
+<!-- Resources
+================================================== -->
+
+<div class="bs-docs-section">
+  <div class="page-header">
+    <h1 id="resources">Resources</h1>
+  </div>
+
+  This module defines the resource mappings required by Angular JS to map to a
+  standard Grails CRUD URL scheme that uses <code>"/$controller/$action?/$id?"</code>.
+
+  <h4 id="resources-resourceBuilder">resourceBuilder</h4>
+
+  A factory which creates a resource object that lets you interact with RESTful server-side data sources.<br/>
+  It decorates standard AngularJS <code>$resource</code> service with some useful methods
+  internally used by other services and directives in the application.
+
+  <br/>
+
+  Example usage:
+
+{% highlight coffeescript %}
+app = angular.module("myApp", [
+  "angleGrinder.common"
+])
+
+class MyCtrl
+  @$inject = ["$scope", "resourceBuilder"]
+  constructor: ($scope, resourceBuilder) ->
+
+    # Create resource for users
+    Users = resourceBuilder("/user")
+    # load all users
+    $scope.users = Users.get()
+
+    # create a record
+    user = new Users(login: "foo")
+    user.save() # will perform create action
+    user.login = "new-foo"
+    user.save() # will perform update action
+
+    # retrieve a record from the server side
+    user = Users.get(id: 123)
+
+app.controller("MyCtrl", MyCtrl)
+{% endhighlight %}
+
+  <h4>Methods on the resource object</h4>
+
+  <dl>
+    <dt><code>resourceName()</code></dt>
+    <dd>
+      Returns resource name.<br/>
+      This method is internally used by other services like <code>ag-server-validation-errors</code>
+    </dd>
+
+    <dt><code>persisted()</code></dt>
+    <dd>
+      Returns <code>true</code> is a record is persisted on the server side.<br/>
+      (it has <code>id</code> property)
+    </dd>
+
+    <dt><code>newRecord()</code></dt>
+    <dd>
+      Opposite to <code>persisted()</code> method.<br/>
+      Returns <code>true</code> is the record is not persisted on the server side.
+    </dd>
+
+    <dt><code>save()</code></dt>
+    <dd>
+      Backbone style save() that inserts or updated the record<br/>
+      based on the presence of an <code>id</code>.
+    </dd>
+
+    <dt><code>delete()</code></dt>
+    <dd>
+      Performs http DELETE action.
+    </dd>
+  </dl>
+
+  <span class="label label-info">note</span> context path will be automatically appended to the given path via <code>pathWithContext</code> service
+
+  <h4 id="resources-Resource">Resource</h4>
+
+  Build default resource for the current page.<br/>
+  For example we could have the following html page:
+
+{% highlight html %}
+<body data-context-path="${request.contextPath}"
+      data-resource-name="user"
+      data-resource-path="/api/users">
+</body>
+{% endhighlight %}
+
+  <code>Resource</code> service for this page will create resource objects for handling users api.<br/>
+  Internally it calls <code>resourceBuilder("/api/users", "user")</code> service.
+
+</div>
