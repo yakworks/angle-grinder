@@ -3,6 +3,11 @@
 CURRENT_DIR=`pwd`
 ANGLE_GRINDER_DIR="$CURRENT_DIR/../angle-grinder"
 
+if [ ! -d "$ANGLE_GRINDER_DIR" ]; then
+  echo "Cannot found `$ANGLE_GRINDER_DIR`";
+  exit 1;
+fi
+
 SKIP_DEPENDENCIES=0
 
 # Read and parse commandline options
@@ -20,7 +25,12 @@ do
 done
 
 # Cleanup the output directory
-cd "$CURRENT_DIR/web-app/angle-grinder"
+OUTPUT_DIRECTORY="$CURRENT_DIR/web-app/angleGrinder"
+if [ ! -d "$OUTPUT_DIRECTORY" ]; then
+  exit 1;
+fi
+
+cd "$OUTPUT_DIRECTORY"
 ls | grep -v .gitkeep | xargs rm -rf
 
 # Update sources and install all required components
@@ -34,6 +44,6 @@ else
   echo "\n=== Skipping dependencies installation ===\n"
 fi
 
-# Build the app and copy the outputto the right place
+# Build the app and copy the output to the right place
 grunt build
-cp -R dist/* "$CURRENT_DIR/web-app/angle-grinder"
+cp -R dist/* "$OUTPUT_DIRECTORY"

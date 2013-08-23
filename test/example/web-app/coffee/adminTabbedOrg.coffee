@@ -5,7 +5,7 @@ org.config [
 
     $routeProvider
       .when "/:id",
-        templateUrl: "../templates/tabbed_org/show.html"
+        templateUrl: "../templates/tabbedOrg/show.html"
         controller: "tabbedOrg.ShowCtrl"
         resolve: org: [
           "$route", "resourceResolver", ($route, resourceResolver) ->
