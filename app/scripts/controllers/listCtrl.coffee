@@ -21,7 +21,7 @@ class ListCtrl
         self.deleteItemById(id)
         callback.success(this)
 
-      editDialog.open("templates/partials/item_form.html", item)
+      editDialog.open("templates/partials/itemForm.html", item)
 
     $scope.createItem = =>
       item = {}
@@ -31,7 +31,7 @@ class ListCtrl
         item.id = generateId()
         callback.success(this)
 
-      editDialog.open("templates/partials/item_form.html", item)
+      editDialog.open("templates/partials/itemForm.html", item)
         .then (item) => @data.push(item)
 
     $scope.deleteItem = (id) =>

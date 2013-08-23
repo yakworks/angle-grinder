@@ -12,11 +12,11 @@ class UsersListCtrl
 
     $scope.editItem = (id) ->
       Users.get { id: id }, (user) ->
-        editDialog.open(pathWithContext("templates/partials/user_form.html"), user)
+        editDialog.open(pathWithContext("templates/partials/userForm.html"), user)
 
     $scope.createItem = ->
       user = new Users()
-      editDialog.open(pathWithContext("templates/partials/user_form.html"), user)
+      editDialog.open(pathWithContext("templates/partials/userForm.html"), user)
 
     $scope.deleteItem = (id) ->
       confirmationDialog.open().then (confirmed) ->
