@@ -1,5 +1,5 @@
 def plugin = "angle-grinder"
-def dist = "${plugin}"
+def dist = "angleGrinder"
 
 modules = {
 
@@ -28,11 +28,11 @@ modules = {
         resource url: [plugin: plugin, dir: "styles", file: "style.css"]
         resource url: [plugin: plugin, dir: "${dist}/styles", file: "gridz.min.css"]
         resource url: [plugin: plugin, dir: "${dist}/scripts", file: "gridz.min.js"]
-        resource url: [plugin: plugin, dir: "${dist}/scripts", file: "angle-grinder.common.min.js"]
-        resource url: [plugin: plugin, dir: "${dist}/scripts", file: "angle-grinder.alerts.min.js"]
-        resource url: [plugin: plugin, dir: "${dist}/scripts", file: "angle-grinder.forms.min.js"]
-        resource url: [plugin: plugin, dir: "${dist}/scripts", file: "angle-grinder.gridz.min.js"]
-        resource url: [plugin: plugin, dir: "${dist}/scripts", file: "angle-grinder.spinner.min.js"]
+        resource url: [plugin: plugin, dir: "${dist}/scripts", file: "angleGrinder.common.min.js"]
+        resource url: [plugin: plugin, dir: "${dist}/scripts", file: "angleGrinder.alerts.min.js"]
+        resource url: [plugin: plugin, dir: "${dist}/scripts", file: "angleGrinder.forms.min.js"]
+        resource url: [plugin: plugin, dir: "${dist}/scripts", file: "angleGrinder.gridz.min.js"]
+        resource url: [plugin: plugin, dir: "${dist}/scripts", file: "angleGrinder.spinner.min.js"]
 
         resource url: [plugin: plugin, dir: "coffee", file: "application.coffee"]
         resource url: [plugin: plugin, dir: "coffee", file: "modules/resources.coffee"]
