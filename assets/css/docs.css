@@ -1,5 +1,5 @@
 /*
- * Angle Grinder Documentation
+ * AngleGrinder Documentation
  *
  * Table of contents:
  *
@@ -301,13 +301,6 @@ body {
   }
 }
 
-@media screen and (min-width: 992px) {
-  .bs-header h1,
-  .bs-header p {
-    margin-right: 380px;
-  }
-}
-
 
 /*
  * Carbon ads
@@ -411,17 +404,15 @@ body {
 .bs-sidenav {
   margin-top: 30px;
   margin-bottom: 30px;
-  padding-top:    10px;
-  padding-bottom: 10px;
   text-shadow: 0 1px 0 #fff;
   background-color: #f7f5fa;
   border-radius: 5px;
+  border: 1px solid #e1e1e8;
 }
 
 /* All levels of nav */
 .bs-sidebar .nav > li > a {
   display: block;
-  color: #716b7a;
   padding: 5px 20px;
 }
 .bs-sidebar .nav > li > a:hover,
@@ -433,10 +424,9 @@ body {
 .bs-sidebar .nav > .active > a,
 .bs-sidebar .nav > .active:hover > a,
 .bs-sidebar .nav > .active:focus > a {
-  font-weight: bold;
-  color: #563d7c;
-  background-color: transparent;
-  border-right: 1px solid #563d7c;
+  color: #fff;
+  text-shadow: 0 -1px 0 rgba(0,0,0,0.2);
+  background-color: #08c;
 }
 
 /* Nav: second level (shown on .active) */

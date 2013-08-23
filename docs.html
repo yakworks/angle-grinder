@@ -1,0 +1,777 @@
+---
+layout: default
+slug: docs
+base_url: "../"
+---
+
+<!-- Getting started
+================================================== -->
+<div class="bs-docs-section">
+  <div class="page-header">
+    <h1 id="docs">AngleGrinder Documentation</h1>
+  </div>
+
+  <h2 id="docs-common"><code>angleGrinder.common</code> module</h2>
+
+  Contains common services used in various places of the application.
+
+  <h3 id="docs-common-pathWithContext">pathWithContext</h3>
+
+  This service might be used for appending the context path to the given url.
+  It helps to make the app more context path agnostic.<br/>
+  Usage:
+
+{% highlight coffeescript %}
+class UsersListCtrl
+  @$inject = ["$scope", "pathWithContext"]
+    constructor: ($scope, pathWithContext) ->
+
+  $scope.gridOptions =
+    # now the grid data url will be context aware
+    url: pathWithContext("/api/users")
+    # ...other grid options
+
+angular.module("myApp")
+  .controller("UsersListCtrl", UsersListCtrl)
+{% endhighlight %}
+
+  <h4>Configuration</h4>
+
+  Inside grails application the context path might be taken from <code>request.contextPath</code> property
+  and assigned to the <code>body</code> html element.
+
+{% highlight html %}
+<body data-context-path="${request.contextPath}">
+</body>
+{% endhighlight %}
+
+  During AngularJS application initialization this variable could be used for configuring the
+  <code>pathWithContext</code> service provider.
+
+{% highlight coffeescript %}
+app = angular.module("myApp", [
+  "angleGrinder.common"
+])
+
+# Sample `pathWithContext` configuration block
+app.config [
+  "pathWithContextProvider", (pathWithContextProvider) ->
+    contextPath = $("body").data("context-path")
+    pathWithContextProvider.setContextPath(contextPath) if contextPath?
+]
+{% endhighlight %}
+
+  <h3 id="docs-common-pendingRequests">pendingRequests</h3>
+
+  Service designed for the internal usage.<br/>
+  For example it is used for enabling / disabling <code>ag-submit-button</code> and <code>ag-delete-button</code>.
+
+{% highlight coffeescript %}
+app = angular.module("myApp", [
+  "angleGrinder.common"
+])
+
+class MyCtrl
+  @$inject = ["$scope", "pendingRequests"]
+  constructor: ($scope, pendingRequests) ->
+
+    # will return `true` if any http request is in progress
+    pendingRequests.any()
+
+    # shortcut for `pendingRequests.any()`
+    pendingRequests()
+
+    # returns `true` if any http DELETE request is in progress
+    pendingRequests.for("DELETE")
+
+    # returns `true` if POST or PUT request is in progress
+    # it can accept multiple arguments with other http methods
+    pendingRequests.for("POST", "PUT")
+
+app.controller("MyCtrl", MyCtrl)
+{% endhighlight %}
+
+  <h2 id="docs-resources"><code>angleGrinder.resources</code> module</h2>
+
+  This module defines the resource mappings required by Angular JS to map to a
+  standard Grails CRUD URL scheme that uses <code>"/$controller/$action?/$id?"</code>.
+
+  <h3 id="docs-resources-resourceBuilder">resourceBuilder</h3>
+
+  A factory which creates a resource object that lets you interact with RESTful server-side data sources.<br/>
+  It decorates standard AngularJS <code>$resource</code> service with some useful methods
+  internally used by other services and directives in the application.<br/>
+
+  Example usage:
+
+{% highlight coffeescript %}
+app = angular.module("myApp", [
+  "angleGrinder.common"
+])
+
+class MyCtrl
+  @$inject = ["$scope", "resourceBuilder"]
+  constructor: ($scope, resourceBuilder) ->
+
+    # Create resource for users
+    Users = resourceBuilder("/user")
+    # load all users
+    $scope.users = Users.get()
+
+    # create a record
+    user = new Users(login: "foo")
+    user.save() # will perform create action
+    user.login = "new-foo"
+    user.save() # will perform update action
+
+    # retrieve a record from the server side
+    user = Users.get(id: 123)
+
+app.controller("MyCtrl", MyCtrl)
+{% endhighlight %}
+
+  <h4>Methods on the resource object</h4>
+
+  <dl>
+    <dt><code>resourceName()</code></dt>
+    <dd>
+      Returns resource name.<br/>
+      This method is internally used by other services like <code>ag-server-validation-errors</code>
+    </dd>
+
+    <dt><code>persisted()</code></dt>
+    <dd>
+      Returns <code>true</code> is a record is persisted on the server side.<br/>
+      (it has <code>id</code> property)
+    </dd>
+
+    <dt><code>newRecord()</code></dt>
+    <dd>
+      Opposite to <code>persisted()</code> method.<br/>
+      Returns <code>true</code> is the record is not persisted on the server side.
+    </dd>
+
+    <dt><code>save()</code></dt>
+    <dd>
+      Backbone style save() that inserts or updated the record<br/>
+      based on the presence of an <code>id</code>.
+    </dd>
+
+    <dt><code>delete()</code></dt>
+    <dd>
+      Performs http DELETE action.
+    </dd>
+  </dl>
+
+  <span class="label label-info">note</span> context path will be automatically appended to the given path via <code>pathWithContext</code> service
+
+  <h3 id="docs-resources-Resource">Resource</h3>
+
+  Build default resource for the current page.<br/>
+  For example we could have the following html page:
+
+{% highlight html %}
+<body data-context-path="${request.contextPath}"
+      data-resource-name="user"
+      data-resource-path="/api/users">
+</body>
+{% endhighlight %}
+
+  <code>Resource</code> service for this page will create resource objects for handling users api.<br/>
+  Internally it calls <code>resourceBuilder("/api/users", "user")</code> service.
+
+  <h2 id="docs-spinner"><code>angleGrinder.spinner</code> module</h2>
+
+  Contains a directive for displaying spinner loding animation on the page.<br/>
+  Example usage:
+
+{% highlight coffeescript %}
+app = angular.module("myApp", [
+  "angleGrinder.spinner"
+])
+{% endhighlight %}
+
+  Include it anywhere you want to see the spinner. For instance:
+
+{% highlight html %}
+<div class="navbar navbar-inverse navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <div>
+        <ul class="nav pull-right">
+          <ag-spinner></ag-spinner>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+{% endhighlight %}
+
+  <h2 id="docs-alerts"><code>angleGrinder.alerts</code> module</h2>
+
+  AngularJS service and directive for displaying alerts.<br/>
+  Include <code>angleGrinder.alerts</code> module in the application
+
+{% highlight coffeescript %}
+app = angular.module("myApp", [
+  "angleGrinder.alerts"
+])
+{% endhighlight %}
+
+  Include container for alerts somewhere on the page
+
+{% highlight html %}
+<div ng-app="myApp">
+  <section ng-controller="MyCtrl" class="content">
+    <ag-alerts></ag-alerts>
+  </section>
+</div>
+{% endhighlight %}
+
+  Inject <code>alert</code> service
+
+{% highlight coffeescript %}
+class MyCtrl
+
+  @$inject = ["alerts"]
+  constructor: (alerts) ->
+    alerts.info "Hello World!"
+    alerts.error "Something went wrong!"
+
+angular.module("myApp")
+  .controller("MyCtrl", MyCtrl)
+{% endhighlight %}
+
+  <code>alert</code> service might be injected as regular AngularJS service.
+  For example:
+
+{% highlight coffeescript %}
+# Intercepts all HTTP errors and displays a flash message
+app.factory "httpErrorsInterceptor", [
+  "$injector", "$q", "alerts", ($injector, $q, alerts) ->
+    (promise) ->
+      $http = $injector.get("$http")
+
+      onError = (response) ->
+        # display error message
+        errorMessage = response.data?.error || "Unexpected HTTP error"
+        alerts.error(errorMessage)
+
+        $q.reject(response)
+        promise.then(null, onError)
+
+      promise.then(null, onError)
+  ]
+{% endhighlight %}
+
+  <h2 id="docs-forms"><code>angleGrinder.forms</code> module</h2>
+
+  Bunch of extensions used for building forms.
+
+  <h3 id="docs-forms-basic">Basic example</h3>
+
+  The view
+
+{% highlight html %}
+<div ng-controller="org.FormController">
+  <form name="editForm" novalidate class="form-horizontal no-margin"
+        ng-submit="save(org)">
+
+    <div ag-field-group for="name">
+      <label class="control-label">Name</label>
+
+      <div class="controls">
+        <input type="text" name="name" placeholder="Enter Name"
+               ng-model="org.name" autofocus required />
+        <ag-validation-errors for="name" />
+      </div>
+    </div>
+
+    <div ag-field-group for="num">
+      <label class="control-label">Num</label>
+
+      <div class="controls">
+        <input type="text" name="num" placeholder="Enter num"
+               ng-model="org.num" autofocus required />
+        <ag-validation-errors for="num" required="This field is required" />
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <ag-submit-button></ag-submit-button>
+    </div>
+  </form>
+</div>
+{% endhighlight %}
+
+  and the controller
+
+{% highlight coffeescript %}
+class FormCtrl
+
+  @$inject = ["$scope", "resourceBuilder"]
+  $scope.org = resourceBuilder("/api/org")
+
+  $scope.save = (org) ->
+    return if $scope.editForm.$invalid
+    org.save()
+
+angular.module("myApp")
+  .controller("org.FormCtrl", FormCtrl)
+{% endhighlight %}
+
+  <h3 id="docs-forms-validations">Form validations</h3>
+
+  Set of directives and services for displaying various validation errors.
+
+  <h4>agFieldGroup directive</h4>
+
+  Provides integration with <a href="http://getbootstrap.com/2.3.2/base-css.html#forms">bootstrap</a> form's validation styles.<br/>
+  This directive simply wraps labels and controls in <code>div.control-group</code> element.
+  <br/>
+  <br/>
+  For example
+
+{% highlight html %}
+<div ag-field-group for="name">
+  <label class="control-label">Name</label>
+
+  <div class="controls">
+    <input type="text" name="name" placeholder="Enter Name"
+           ng-model="org.name" required />
+  </div>
+</div>
+{% endhighlight %}
+
+  will generate the following markup:
+
+{% highlight html %}
+<div class="control-group">
+  <!-- form inputs -->
+</div>
+{% endhighlight %}
+
+  If one the fields listed in <code>for="*"</code> attribute contains errors the directive will
+  add <code>error</code> css class to the element.<br/>
+  For example:
+
+  {% highlight html %}
+  <div class="control-group error">
+    <!-- input that violates validation -->
+  </div>
+  {% endhighlight %}
+
+  <h4>agValidationErrors directive</h4>
+
+  This directive is responsible for displaying validation messages for invalid fields.<br/>
+
+{% highlight html %}
+<div class="controls">
+  <input type="password" name="password"
+         ng-model="user.password"
+         ng-required="user.newRecord()"
+         ng-minlength="6" />
+  <ag-validation-errors for="password" />
+</div>
+{% endhighlight %}
+
+  Default validation messages are defined in <code>validationMessages</code> service.
+
+{% highlight coffeescript %}
+forms.value "validationMessages",
+  required: "This field is required"
+  mismatch: "Does not match the confirmation"
+  minlength: "This field is too short"
+  maxlength: "This field is too long"
+  email: "Invalid email address"
+  pattern: "Invalid pattern"
+{% endhighlight %}
+
+  A message for the given validation could be overridden in the directive.<br/>
+  For example:
+
+{% highlight html %}
+<div class="controls">
+  <!-- password field from the previous example -->
+
+  <ag-validation-errors
+      for="password"
+      required="Password is required"
+      minlength="Password must be at least 6 characters" />
+</div>
+{% endhighlight %}
+
+  <h4>agServerValidationErrors directive</h4>
+
+  Adds ability to display validation errors from the server side along with standard validation messages.
+
+{% highlight html %}
+<form name="editForm" novalidate class="form-horizontal no-margin"
+      ag-server-validation-errors>
+
+  <!-- form inputs -->
+</form>
+{% endhighlight %}
+
+  This directive expects that validation errors will come from the server side with the following format:
+
+{% highlight javascript %}
+{
+  "code": 422,
+  "status": "error",
+  "message": "User save failed",
+  "errors": {
+    "user": {
+      "login": "Login must be unique"
+    }
+  }
+}
+{% endhighlight %}
+
+  <ul>
+    <li>HTTP response code must be <code>422</code> (unprocessable entity)</li>
+    <li>returned JSON response must include "errors" object</li>
+    <li>entity name and error key must match entity and field name defined on the client side</li>
+  </ul>
+
+  <h3 id="docs-forms-ag-submit-button">agSubmitButton directive</h3>
+
+  Renders a default button for creating or updating the resource.
+
+{% highlight html %}
+<div class="form-actions">
+  <ag-submit-button></ag-submit-button>
+</div>
+{% endhighlight %}
+
+  <ul>
+    <li>it will have default label "Save"</li>
+    <li>the button will be automatically disabled if <code>POST</code> or <code>PUT</code> request is in progress</li>
+    <li>if request is in progress the label will be changed to "Save..."</li>
+  </ul>
+
+  <h3 id="docs-forms-ag-delete-button">agDeleteButton directive</h3>
+
+  Double check delete button. The basic idea was taken from <a href="http://williamcsete.com/sandbox/double-delete">http://williamcsete.com/sandbox/double-delete</a>.
+  Example usage:
+
+{% highlight html %}
+<div class="form-actions">
+  <ag-delete-button when-confirmed="delete(user)"></ag-delete-button>
+</div>
+{% endhighlight %}
+
+  <code>when-confirmed={expression}</code> - expression to evaluate upon the second click
+  (when the action was confirmed)
+
+  <br/>
+  <br/>
+
+  <ul>
+    <li>it will have default label "Delete"</li>
+    <li>after the first click it will be changed to in-place confirmation</li>
+    <li>the button will be automatically disabled if <code>POST</code> or <code>DELETE</code> request is in progress</li>
+    <li>if request is in progress the label will be changed to "Delete..."</li>
+  </ul>
+
+  <h3 id="docs-forms-confirmationDialog">confirmationDialog service</h3>
+
+  Generic confirmation dialog.<br/>
+  Example usage in the controller:
+
+{% highlight coffeescript %}
+class MyCtrl
+  @$inject = ["$scope", "confirmationDialog"]
+  constructor: ($scope, confirmationDialog) ->
+
+  $scope.deleteItem = (item) ->
+    confirmationDialog.open().then (confirmed) ->
+      item.delete() if confirmed
+
+angular.module("myApp")
+  .controller("MyCtrl", MyCtrl)
+{% endhighlight %}
+
+  <h3 id="docs-forms-editDialog">editDialog service</h3>
+
+  Displays a dialog with a form for creating or updating a record.
+  Used mostly on dialog based CRUD pages.<br/>
+  Example usage:
+
+{% highlight coffeescript %}
+class MyCtrl
+
+  @$inject = ["$scope", "editDialog", "Users"]
+  constructor: ($scope, editDialog, Users) ->
+    # Displays a form for creating a new user
+    $scope.createItem = ->
+      user = new Users()
+      editDialog.open("/user/formTemplate", user)
+
+    # Displays a form for editing an exiting user
+    $scope.editItem = (id) ->
+      Users.get { id: id }, (user) ->
+        editDialog.open("/user/formTemplate", user)
+
+angular.module("myApp")
+  .controller("tabbedOrg.MyCtrl", MyCtrl)
+{% endhighlight %}
+
+  Example template for the dialog <code>/user/formTemplate</code>:
+
+{% highlight html %}
+<div class="modal-header">
+  <button type="button" class="close" ng-click="closeEditDialog()">&times;</button>
+  <h3 ng-show="createNew">Create New ${entityName}</h3>
+  <h3 ng-hide="createNew">Edit ${entityName}</h3>
+</div>
+
+<form name="editForm" class="form-horizontal no-margin" novalidate
+      ng-submit="save(item)">
+  <div class="modal-body" ng-controller="user.FormCtrl">
+
+    <div ag-field-group for="contactFirstName,contactLastName">
+      <label class="control-label">${ag.label(code: "contact.name")}</label>
+
+      <div class="controls">
+        <input type="text" placeholder="${ag.label(code: 'contact.firstName')}"
+               name="contactFirstName"
+               ng-model="item.contact.firstName" required autofocus>
+        <ag-validation-errors for="contactFirstName" />
+      </div>
+
+      <div class="controls" style="margin-top:5px">
+        <input type="text" placeholder="${ag.label(code: 'contact.lastName')}"
+               name="contactLastName"
+               ng-model="item.contact.lastName" />
+        <ag-validation-errors for="contactLastName" />
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+      <span ng-hide="createNew">
+          <ag-delete-button when-confirmed="delete(item)"></ag-delete-button>
+      </span>
+
+    <ag-cancel-button ng-click="closeEditDialog()"></ag-cancel-button>
+    <ag-submit-button></ag-submit-button>
+  </div>
+</form>
+{% endhighlight %}
+
+  <h2 id="docs-gridz"><code>angleGrinder.gridz</code> module</h2>
+
+  AngularJS directive for <a href="http://www.trirand.com/blog">jqGrid</a>
+
+  <h3 id="docs-gridz-basic">Basic example</h3>
+
+  Include <code>angleGrinder.gridz</code> module in the application:
+
+{% highlight coffeescript %}
+app = angular.module("myApp", [
+  "angleGrinder.gridz"
+])
+{% endhighlight %}
+
+  Example AngularJS controller:
+
+{% highlight coffeescript %}
+class ListCtrl
+
+  @$inject = ["$scope", "sampleData"]
+  constructor: ($scope, @sampleData) ->
+    # assign grid options to the scope
+    $scope.gridOptions =
+      data: @generateSampleData()
+      datatype: "local"
+      colModel: @gridColumns()
+      sortname: "id"
+
+  # Generates sample data to feed the grid
+  generateSampleData: ->
+    @sampleData.generate(100)
+
+  # Defines grid column model
+  # see http://www.trirand.com/jqgridwiki/doku.php?id=wiki:colmodel_options
+  gridColumns: ->
+  [
+      name: "id"
+      label: "Inv No"
+      width: 60
+      sorttype: "int"
+    ,
+      name: "customer.name"
+      label: "Customer"
+      formatter: "editActionLink"
+    ,
+      name: "invoiceDate"
+      label: "Date"
+    ,
+      name: "note"
+      label: "Note"
+    ,
+      name: "complete"
+      label: "Complete"
+  ]
+
+angular.module("myApp")
+  .controller("ListCtrl", ListCtrl)
+{% endhighlight %}
+
+  Directive usage:
+
+{% highlight html %}
+<body ng-app="myApp">
+  <div ng-controller="ListCtrl">
+    <div ag-grid="gridOptions"></div>
+  </div>
+</body>
+{% endhighlight %}
+
+  <h3 id="docs-gridz-ajax">Grid with server side data</h3>
+
+{% highlight coffeescript %}
+class UsersListCtrl
+  @$inject = ["$scope"]
+  constructor: ($scope) ->
+
+  $scope.gridOptions =
+    url: "/api/users"
+    colModel: @gridColumns()
+    rowNum: 10
+    sortname: "id"
+
+  # Handle the grid's quick search action
+  $scope.quickSearch = (search) ->
+    $scope.$broadcast "searchUpdated", search
+
+  # see the previous example
+  gridColumns: ->
+    []
+
+angular.module("myApp")
+  .controller("UsersListCtrl", UsersListCtrl)
+{% endhighlight %}
+
+{% highlight html %}
+<body ng-app="myApp">
+  <div ng-controller="UsersListCtrl">
+    <div ag-grid="gridOptions"></div>
+  </div>
+</body>
+{% endhighlight %}
+
+  <h3 id="docs-gridz-toolbar">Grid with toolbar</h3>
+
+{% highlight html %}
+<div class="navbar navbar-grid">
+  <div class="navbar-inner with-selected-pointer with-grid-options">
+    <ul class="nav">
+      <li><span class="icon-selected-pointer"> </span></li>
+      <li class="dropdown selected-actions">
+        <a data-toggle="dropdown" class="dropdown-toggle" href="">
+          Actions <b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu">
+          <li><a href="#"><i class="icon-eye-open"></i> View</a></li>
+          <li><a href="#"><i class="icon-external-link"></i> Export</a></li>
+          <li><a href="#"><i class="icon-trash"></i> Delete</a></li>
+        </ul>
+      </li>
+      <li class="divider-vertical"></li>
+      <li>
+        <a href="" class="create-button" ng-click="createItem()">
+          <i class="icon-edit"></i>New
+        </a>
+      </li>
+    </ul>
+
+    <ul class="nav pull-right">
+      <li><a href="#" title="search screen"><i class="icon-search"></i></a></li>
+      <li class="divider-vertical skinny"></li>
+      <li class="dropdown grid-options">
+        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+          <i class="icon-cog"></i><b class="caret"></b></i>
+        </a>
+        <ul class="dropdown-menu">
+          <li><a href="#">Columns</a></li>
+          <li><a href="#">Another action</a></li>
+          <li class="divider"></li>
+          <li><a href="#">Separated link</a></li>
+        </ul>
+      </li>
+    </ul>
+    <form action="" class="navbar-search pull-right">
+      <input type="text" value="" placeholder="Search"
+             class="search-query span2" />
+    </form>
+  </div>
+</div>
+
+<div ag-grid="gridOptions"></div>
+{% endhighlight %}
+
+  <h3 id="docs-gridz-search">Grid with advanced search form</h3>
+
+{% highlight html %}
+<div collapse="!showSearchForm"
+     ng-include src="'templates/user/search_form.html'"></div>
+
+<div class="navbar navbar-grid">
+  <ul>
+    <li>
+      <a href="" title="search screen"
+         ng-click="showSearchForm = !showSearchForm">
+        <i class="icon-search"></i>
+      </a>
+    </li>
+  </ul>
+
+  <div ag-grid="gridOptions"></div>
+</div>
+{% endhighlight %}
+
+<h4>Sample search form</h4>
+
+{% highlight html %}
+<div class="well">
+  <form ag-search-form class="form-horizontal form-multi-column no-margin">
+    <div class="row-fluid">
+      <div class="control-group span6">
+        <label class="control-label">Name</label>
+        <div class="controls">
+          <input class="input-block-level" type="text"
+                 ng-model="search.name">
+        </div>
+      </div>
+
+      <div class="control-group span6">
+        <label class="control-label">Allowance</label>
+        <div class="controls">
+          <input class="input-block-level" type="text"
+                 ng-model="search.allowance">
+        </div>
+      </div>
+    </div>
+
+    <div class="pull-right">
+      <ag-search-button></ag-search-button>
+      <ag-reset-search-button></ag-reset-search-button>
+    </div>
+  </form>
+</div>
+{% endhighlight %}
+
+  There is no need to implement a separate controller for handling the grid's advanced search.
+  Everything will be transparently handled by the following directives
+  <span class="label label-info">ag-search-form</span>,
+  <span class="label label-info">ag-search-button</span> and
+  <span class="label label-info">ag-search-reset-search-button</span>.
+
+  <br/>
+  <br/>
+
+  <span class="label label-info">note</span> advanced grid's search should be handled on the server side.
+
+</div>

@@ -12,38 +12,39 @@
     {% include nav-main.html %}
 
     <!-- Docs page layout -->
-    <div class="bs-header" id="content">
+    <div class="bs-header jumbotron" id="content">
       <div class="container">
-        <h1>{{ page.title }}</h1>
-        <p>{{ page.lead }}</p>
+        <h1>AngleGrinder</h1>
+        <p class="lead">Sleek, intuitive, and powerful AngularJS services and directives for grails integration.</p>
+      </div>
+      <div class="bs-docs-social">
+        <div class="container">
+          <ul class="bs-docs-social-buttons">
+            <li>
+              <iframe class="github-btn" src="http://ghbtns.com/github-btn.html?user=9ci&amp;repo=angle-grinder&amp;type=watch&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="100px" height="20px"></iframe>
+            </li>
+            <li>
+              <iframe class="github-btn" src="http://ghbtns.com/github-btn.html?user=9ci&amp;repo=angle-grinder&amp;type=fork&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="98px" height="20px"></iframe>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
 
     <div class="container bs-docs-container">
       <div class="row">
-        {% if page.show_sidebar %}
         <div class="col-md-3">
           <div class="bs-sidebar hidden-print" role="complementary">
             <ul class="nav bs-sidenav">
-              {% if page.slug == "getting-started" %}
-                {% include nav-getting-started.html %}
+              {% if page.slug == "index" %}
+                {% include nav-index.html %}
               {% endif %}
-              {% if page.slug == "gridz" %}
-                {% include nav-gridz.html %}
-              {% endif %}
-              {% if page.slug == "common" %}
-                {% include nav-common.html %}
-              {% endif %}
-              {% if page.slug == "resources" %}
-                {% include nav-resources.html %}
-              {% endif %}
-              {% if page.slug == "forms" %}
-                {% include nav-forms.html %}
+              {% if page.slug == "docs" %}
+                {% include nav-docs.html %}
               {% endif %}
             </ul>
           </div>
         </div>
-        {% endif %}
 
         <div class="col-md-9" role="main">
           {{ content }}
