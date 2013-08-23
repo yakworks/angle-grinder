@@ -11,7 +11,7 @@ app.config [
         controller: "ListCtrl"
 
       .when "/users_list",
-        templateUrl: "templates/users_list.html"
+        templateUrl: "templates/usersList.html"
         controller: "UsersListCtrl"
 
       .when "/users",

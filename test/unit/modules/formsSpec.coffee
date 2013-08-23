@@ -218,7 +218,7 @@ describe "module: angleGrinder.forms", ->
     hasDefaultMessageFor "minlength", "This field is too short"
     hasDefaultMessageFor "maxlength", "This field is too long"
     hasDefaultMessageFor "email",     "Invalid email address"
-    hasDefaultMessageFor "pattern",   "Ivalid pattern"
+    hasDefaultMessageFor "pattern",   "Invalid pattern"
 
   describe "directive: agServerValidationErrors", ->
     element = null

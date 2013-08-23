@@ -8,7 +8,7 @@ module.exports = (config) ->
 
     # list of files / patterns to load in the browser
     files: [
-      "test/e2e/**/*_spec.js"
+      "test/e2e/**/*Spec.js"
     ]
 
     # list of files to exclude

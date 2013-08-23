@@ -32,7 +32,7 @@ module.exports = (config) ->
       "app/scripts/controllers/**/*.coffee"
 
       "test/unit/helpers/**/*.coffee"
-      "test/unit/**/*_spec.coffee"
+      "test/unit/**/*Spec.coffee"
     ]
 
     preprocessors:

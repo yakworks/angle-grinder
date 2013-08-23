@@ -124,7 +124,7 @@ forms.value "validationMessages",
   minlength: "This field is too short"
   maxlength: "This field is too long"
   email: "Invalid email address"
-  pattern: "Ivalid pattern"
+  pattern: "Invalid pattern"
 
 # Custom validation directive for fields match.
 # Might be used for password confirmation validation.

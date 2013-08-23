@@ -30,7 +30,7 @@ module.exports = (config) ->
       "scripts/controllers/**/*.js"
 
       "test/unit/helpers/**/*.js"
-      "test/unit/**/*_spec.js"
+      "test/unit/**/*Spec.js"
     ]
 
     preprocessors:
