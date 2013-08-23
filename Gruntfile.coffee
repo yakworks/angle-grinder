@@ -234,10 +234,6 @@ module.exports = (grunt) ->
         reporters: ["dots"]
         singleRun: true
 
-      e2e:
-        configFile: "<%= appConfig.test %>/karma-e2e.conf.coffee"
-        singleRun: true # `false` for debugging
-
       watch:
         configFile: "<%= appConfig.test %>/karma.conf.coffee"
         reporters: ["dots"]
@@ -320,13 +316,6 @@ module.exports = (grunt) ->
     "karma:unit"
   ]
 
-  grunt.registerTask "test:e2e", [
-    "build:dev"
-    "configureProxies"
-    "connect:e2e"
-    "karma:e2e"
-  ]
-
   grunt.registerTask "test:casperjs", [
     "build:dev"
     "configureProxies"
@@ -339,14 +328,10 @@ module.exports = (grunt) ->
     "build:dev"
     "ngtemplates"
 
-    # run unit tests
+    # run unit + integration tests
     "karma:unit"
 
-    # run e2e tests
     "connect:e2e"
-    "karma:e2e"
-
-    # run casperjs integration tests
     "casperjs"
   ]
 
