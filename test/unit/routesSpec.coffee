@@ -9,7 +9,7 @@ describe "Application routes", ->
 
   beforeEach ->
     module("templates/list.html")
-    module("templates/users_list.html")
+    module("templates/usersList.html")
     module("templates/users/list.html")
     module("templates/users/show.html")
     module("templates/users/form.html")
@@ -28,7 +28,7 @@ describe "Application routes", ->
 
   it "recognizes `/`", ->
     navigateTo "/"
-    expect($route.current.templateUrl).toEqual("templates/users_list.html")
+    expect($route.current.templateUrl).toEqual("templates/usersList.html")
     expect($route.current.controller).toEqual("UsersListCtrl")
 
   it "recognizes `/list`", ->
@@ -38,7 +38,7 @@ describe "Application routes", ->
 
   it "recognizes `/users_list`", ->
     navigateTo "/users_list"
-    expect($route.current.templateUrl).toEqual("templates/users_list.html")
+    expect($route.current.templateUrl).toEqual("templates/usersList.html")
     expect($route.current.controller).toEqual("UsersListCtrl")
 
   it "recognizes `/users`", ->

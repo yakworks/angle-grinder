@@ -164,7 +164,7 @@ grunt build
 ```
 dist
 ├── scripts
-│   ├── angle-grinder.gridz.min.js
+│   ├── angleGrinder.gridz.min.js
 │   ├── bootstrap.min.js
 │   ├── gridz.min.js
 │   ├── scripts.min.js
@@ -181,6 +181,6 @@ dist
 * `scripts/bootstrap.min.js` - twitter bootstrap js + angular-bootstrap
 * `styles/gridz.min.css` - styles for gridz plugin
 * `scripts/gridz.min.js` - sources of gridz plugin
-* `scripts/angle-grinder.gridz.min.js` - AgularJS directive for gridz
+* `scripts/angleGrinder.gridz.min.js` - AgularJS directive for gridz
 
 And then navigate to `http://localhost:8000` to see the production release.

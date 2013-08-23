@@ -24,13 +24,16 @@ module.exports = (config) ->
 
       "scripts/jqgrid/gridz.js"
 
-      "scripts/modules/**/*.js"
+      "scripts/modules/*.js"
+      "scripts/modules/forms/*.js"
+      "scripts/modules/gridz/*.js"
+
       "scripts/application.js"
       "scripts/routes.js"
       "scripts/controllers/**/*.js"
 
       "test/unit/helpers/**/*.js"
-      "test/unit/**/*_spec.js"
+      "test/unit/**/*Spec.js"
     ]
 
     preprocessors:

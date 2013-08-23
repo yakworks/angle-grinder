@@ -36,7 +36,7 @@ describe "controller: UsersListCtrl", ->
         expect(editDialog.open).toHaveBeenCalled()
 
         args = editDialog.open.mostRecentCall.args
-        expect(args[0]).toEqual "templates/partials/user_form.html"
+        expect(args[0]).toEqual "templates/partials/userForm.html"
         expect(args[1].id).toEqual user.id
 
     describe "#createItem", ->
@@ -51,7 +51,7 @@ describe "controller: UsersListCtrl", ->
         expect(editDialog.open).toHaveBeenCalled()
 
         args = editDialog.open.mostRecentCall.args
-        expect(args[0]).toEqual "templates/partials/user_form.html"
+        expect(args[0]).toEqual "templates/partials/userForm.html"
 
     describe "#deleteItem", ->
       user = id: 234

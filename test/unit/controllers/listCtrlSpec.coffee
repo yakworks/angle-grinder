@@ -1,6 +1,6 @@
 describe "controller: ListCtrl", ->
   beforeEach module("angleGrinder")
-  beforeEach module("templates/partials/item_form.html")
+  beforeEach module("templates/partials/itemForm.html")
 
   $scope = null
   controller = null
@@ -39,7 +39,7 @@ describe "controller: ListCtrl", ->
 
         expect(editDialog.open).toHaveBeenCalled()
         args = editDialog.open.mostRecentCall.args
-        expect(args[0]).toEqual "templates/partials/item_form.html"
+        expect(args[0]).toEqual "templates/partials/itemForm.html"
         expect(args[1].id).toEqual item.id
 
     describe "#createItem", ->
@@ -54,7 +54,7 @@ describe "controller: ListCtrl", ->
         # Then
         expect(editDialog.open).toHaveBeenCalled()
         args = editDialog.open.mostRecentCall.args
-        expect(args[0]).toEqual "templates/partials/item_form.html"
+        expect(args[0]).toEqual "templates/partials/itemForm.html"
 
   describe "controller", ->
 

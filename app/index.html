@@ -55,23 +55,26 @@
     <script type="text/javascript" src="scripts/jqgrid/gridz.js"></script>
   <!-- endbuild -->
 
-  <!-- build:js(dev) scripts/angle-grinder.common.min.js -->
+  <!-- build:js(dev) scripts/angleGrinder.common.min.js -->
     <script type="text/javascript" src="scripts/modules/common.js"></script>
   <!-- endbuild -->
 
-  <!-- build:js(dev) scripts/angle-grinder.gridz.min.js -->
+  <!-- build:js(dev) scripts/angleGrinder.gridz.min.js -->
     <script type="text/javascript" src="scripts/modules/gridz.js"></script>
+    <script type="text/javascript" src="scripts/modules/gridz/search.js"></script>
   <!-- endbuild -->
 
-  <!-- build:js(dev) scripts/angle-grinder.forms.min.js -->
+  <!-- build:js(dev) scripts/angleGrinder.forms.min.js -->
     <script type="text/javascript" src="scripts/modules/forms.js"></script>
+    <script type="text/javascript" src="scripts/modules/forms/buttons.js"></script>
+    <script type="text/javascript" src="scripts/modules/forms/validations.js"></script>
   <!-- endbuild -->
 
-  <!-- build:js(dev) scripts/angle-grinder.alerts.min.js -->
+  <!-- build:js(dev) scripts/angleGrinder.alerts.min.js -->
     <script type="text/javascript" src="scripts/modules/alerts.js"></script>
   <!-- endbuild -->
 
-  <!-- build:js(dev) scripts/angle-grinder.spinner.min.js -->
+  <!-- build:js(dev) scripts/angleGrinder.spinner.min.js -->
     <script type="text/javascript" src="scripts/modules/spinner.js"></script>
   <!-- endbuild -->
 
@@ -98,25 +101,25 @@
 
   <!-- build:js(dev) scripts/scripts.min.js -->
     <!-- AngularJS app -->
-    <script type="text/javascript" src="scripts/modules/data_generator.js"></script>
+    <script type="text/javascript" src="scripts/modules/dataGenerator.js"></script>
     <script type="text/javascript" src="scripts/modules/resources.js"></script>
 
     <script type="text/javascript" src="scripts/application.js"></script>
     <script type="text/javascript" src="scripts/routes.js"></script>
     <script type="text/javascript" src="scripts/templates.js"></script>
 
-    <script type="text/javascript" src="scripts/controllers/list_ctrl.js"></script>
-    <script type="text/javascript" src="scripts/controllers/users_list_ctrl.js"></script>
+    <script type="text/javascript" src="scripts/controllers/listCtrl.js"></script>
+    <script type="text/javascript" src="scripts/controllers/usersListCtrl.js"></script>
 
-    <script type="text/javascript" src="scripts/controllers/users/list_ctrl.js"></script>
-    <script type="text/javascript" src="scripts/controllers/users/show_ctrl.js"></script>
-    <script type="text/javascript" src="scripts/controllers/users/form_ctrl.js"></script>
+    <script type="text/javascript" src="scripts/controllers/users/listCtrl.js"></script>
+    <script type="text/javascript" src="scripts/controllers/users/showCtrl.js"></script>
+    <script type="text/javascript" src="scripts/controllers/users/formCtrl.js"></script>
   <!-- endbuild -->
 </head>
 
 <body ng-app="angleGrinder">
 
-<div ng-include src="'templates/navbar_top.html'"></div>
+<div ng-include src="'templates/navbarTop.html'"></div>
 
 <header class="jumbotron subhead" id="overview">
   <div class="container">
