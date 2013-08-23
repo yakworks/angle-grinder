@@ -26,7 +26,10 @@ module.exports = (config) ->
 
       "app/templates/**/*.html"
 
-      "app/scripts/modules/**/*.coffee"
+      "app/scripts/modules/*.coffee"
+      "app/scripts/modules/forms/*.coffee"
+      "app/scripts/modules/gridz/*.coffee"
+
       "app/scripts/application.coffee"
       "app/scripts/routes.coffee"
       "app/scripts/controllers/**/*.coffee"
