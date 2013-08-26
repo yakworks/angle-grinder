@@ -1,4 +1,7 @@
-resources = angular.module("angleGrinder.resources", ["ngResource"])
+resources = angular.module("angleGrinder.resources", [
+  "ngResource"
+  "ngRoute"
+])
 
 # Build a resource for the given restful url
 resources.factory "resourceBuilder", [

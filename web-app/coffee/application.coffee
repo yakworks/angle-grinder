@@ -1,5 +1,8 @@
 # The main scaffolding module
 app = angular.module "angleGrinder", [
+  "ngResource"
+  "ngRoute"
+
   "angleGrinder.common"
   "angleGrinder.gridz"
   "angleGrinder.forms"
