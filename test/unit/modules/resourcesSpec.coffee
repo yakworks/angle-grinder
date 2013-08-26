@@ -19,7 +19,7 @@ describe "module: angleGrinder.resources", ->
 
     describe "#get", ->
       it "queries for the record", ->
-        $httpBackend.whenGET("/api/users/101").respond([])
+        $httpBackend.whenGET("/api/users/101").respond({})
         Users.get(id: 101)
         $httpBackend.flush()
 

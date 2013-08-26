@@ -1,6 +1,8 @@
 # The entry point for the application
 
 app = angular.module("angleGrinder", [
+  "ngRoute"
+
   "angleGrinder.common"
   "angleGrinder.gridz"
   "angleGrinder.forms"

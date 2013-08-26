@@ -51,9 +51,11 @@ forms.directive "agCreateButton", ->
   replace: true
   transclude: true
 
-  link: (scope, element) ->
-    # Append the default label
-    element.append "Create" if $.trim(element.text()) is ""
+  compile: (element, attrs, trasclude) ->
+    pre: (scope, element) ->
+      trasclude scope, (clone) ->
+        # Append the default label
+        element.append "Create" if $.trim(clone.text()) is ""
 
   template: """
     <a href="" class="btn">

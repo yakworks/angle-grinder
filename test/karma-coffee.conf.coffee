@@ -13,8 +13,9 @@ module.exports = (config) ->
       "bower_components/jquery/jquery.js"
       "bower_components/underscore/underscore.js"
       "bower_components/angular/angular.js"
-      "bower_components/angular-resource/angular-resource.js"
-      "bower_components/angular-mocks/angular-mocks.js"
+      "bower_components/angular/angular-mocks.js"
+      "bower_components/angular/angular-resource.js"
+      "bower_components/angular/angular-route.js"
       "bower_components/jasmine-jquery/lib/jasmine-jquery.js"
 
       "bower_components/jqgrid/js/grid.base.js"

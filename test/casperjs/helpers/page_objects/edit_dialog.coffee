@@ -10,7 +10,7 @@ exports.EditDialog = class
 
   # Returns a title of the dialog.
   getTitle: ->
-    @casper.fetchText "#{@selector} div.modal-header h3:not([style*='display: none'])"
+    @casper.fetchText "#{@selector} div.modal-header h3:not([class*='ng-hide'])"
 
   # Fill the form with given values.
   fillFormWith: (data = {}) ->

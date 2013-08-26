@@ -1,4 +1,7 @@
-resources = angular.module("angleGrinder.resources", ["ngResource"])
+resources = angular.module("angleGrinder.resources", [
+  "ngResource"
+  "ngRoute"
+])
 
 resources.factory "Users", [
   "$resource", ($resource) ->
