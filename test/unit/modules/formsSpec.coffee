@@ -76,6 +76,8 @@ describe "module: angleGrinder.forms", ->
             <input type="password" name="password"
                    ng-model="user.password" required />
           </div>
+
+          <ag-submit-button></ag-submit-button>
         </form>
       """, $injector, $scope
 
@@ -87,7 +89,7 @@ describe "module: angleGrinder.forms", ->
 
     it "marks as invalid when the save button is clicked", ->
       # When (the form has been submitted)
-      $scope.$apply -> $scope.submitted = true
+      element.find("button[type=submit]").click()
 
       # Then
       $group = element.find(".control-group")
@@ -128,6 +130,8 @@ describe "module: angleGrinder.forms", ->
                    ng-model="user.password" required />
             <ag-validation-errors for="password"
                               required="Please fill this field" />
+
+            <ag-submit-button></ag-submit-button>
           </form>
         """, $injector
 
@@ -135,7 +139,7 @@ describe "module: angleGrinder.forms", ->
 
       it "displays errors when the save button is clicked", ->
         # When (the form has been submitted)
-        $scope.$apply -> $scope.submitted = true
+        element.find("button[type=submit]").click()
 
         # Then
         expect(errorMessage()).toEqual "Please fill this field"

@@ -60,7 +60,7 @@ forms.directive "agFieldGroup", ->
         displayErrors() if error?
 
     # Display validation errors when the form is submitted
-    $scope.$watch "submitted", (submitted) ->
+    $scope.$watch "#{formCtrl.$name}.$submitted", (submitted) ->
       displayErrors() if submitted
 
 forms.directive "agValidationErrors", [
@@ -107,7 +107,7 @@ forms.directive "agValidationErrors", [
         displayErrorMessages() if field.$dirty
 
       # Display validation errors when the form is submitted
-      $scope.$watch "submitted", (submitted) ->
+      $scope.$watch "#{formName}.$submitted", (submitted) ->
         displayErrorMessages() if submitted
 
       $scope.$watch "saving", (newValue, oldValue) ->

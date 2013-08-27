@@ -10,8 +10,12 @@ describe "module: angleGrinder.forms directive: agSubmitButton", ->
 
     $scope = $rootScope.$new()
     {element, $scope} = compileTemplate """
-      <ag-submit-button></ag-submit-button>
+      <form name="form">
+        <ag-submit-button></ag-submit-button>
+      </form>
     """, $injector
+
+    element = element.find("button[type=submit]")
 
   itIsEnabled = ->
     it "is enabled", ->

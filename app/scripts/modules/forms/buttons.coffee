@@ -76,13 +76,20 @@ forms.directive "agCancelButton", ->
 forms.directive "agSubmitButton", ->
   restrict: "E"
   replace: true
+  scope: true
+  require: "^form"
+
+  link: ($scope, element, attrs, form) ->
+    $scope.submit = -> form.$submitted = true
+
   controller: ["$scope", "pendingRequests", ($scope, pendingRequests) ->
     # disable the button if POST, PUT or PATCH request is in progress
     $scope.$watch -> $scope.saving = pendingRequests.for("POST", "PUT", "PATCH")
   ]
+
   template: """
     <button type="submit" class="btn btn-primary"
-            ng-click="submitted = true"
+            ng-click="submit()"
             ng-disabled="saving"
       <i class="icon-ok icon-white"></i> Save<span ng-show="saving">...</span>
     </button>
