@@ -246,7 +246,7 @@ describe "module: angleGrinder.forms", ->
 
     describe "when it has server side errors", ->
       beforeEach ->
-        $scope.$apply -> $scope.serverValidationErrors = login: "should be unique"
+        $scope.$apply -> $scope.theForm.$serverError = login: "should be unique"
 
       loginError = ->
         element.find("ag-validation-errors[for=login] span.help-inline")
@@ -271,7 +271,7 @@ describe "module: angleGrinder.forms", ->
 
       describe "when the error is gone", ->
         beforeEach ->
-          $scope.$apply -> $scope.serverValidationErrors = null
+          $scope.$apply -> $scope.theForm.$serverError = null
 
         itHidesServerSideErrors()
         itMarksFieldsAsValid()

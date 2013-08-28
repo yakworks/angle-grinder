@@ -127,11 +127,6 @@ forms.directive "agServerValidationErrors", ->
   link: ($scope, element, attrs, formCtrl) ->
     formCtrl.$serverError = {}
 
-    # Assing server validation errors from the `$scope.serverValidationErrors`
-    # TODO this should be changed
-    $scope.$watch "serverValidationErrors", (serverError) ->
-      formCtrl.$serverError = serverError
-
     # Hide server side validation errors while typping
     $scope.$watch "#{formCtrl.$name}.$serverError", (serverError) ->
 
