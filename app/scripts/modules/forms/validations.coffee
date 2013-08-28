@@ -82,6 +82,11 @@ forms.directive "agValidationErrors", [
       messageFor = (error) ->
         attrs[error] or validationMessages[error]
 
+      appendError = (message, klass = "") ->
+        element.append """
+          <span class="help-inline #{klass}">#{message}</span>
+        """
+
       displayErrorMessages = ->
         clearErrors()
 
@@ -90,17 +95,7 @@ forms.directive "agValidationErrors", [
           continue unless invalid
 
           message = messageFor error
-          continue unless message?
-
-          element.append """
-            <span class="help-inline">#{message}</span>
-          """
-
-        # Display server side errors
-        serverError = formCtrl.$serverError?[fieldName]
-        element.append """
-          <span class="help-inline">#{serverError}</span>
-        """ if serverError?
+          appendError(message) if message?
 
       # Dispalay validation errors while typing
       $scope.$watch "#{formName}.#{fieldName}.$viewValue", ->
@@ -110,6 +105,14 @@ forms.directive "agValidationErrors", [
       $scope.$watch "#{formName}.$submitted", (submitted) ->
         displayErrorMessages() if submitted
 
+      # Display server side errors
+      $scope.$watch "#{formName}.$serverError.#{fieldName}", (serverError) ->
+        if serverError?
+          appendError serverError, "server-error"
+        else
+          element.find(".server-error").remove()
+
+      # TODO do something with `saving`
       $scope.$watch "saving", (newValue, oldValue) ->
         displayErrorMessages() if not newValue and newValue != oldValue
 ]
@@ -117,13 +120,14 @@ forms.directive "agValidationErrors", [
 forms.directive "agServerValidationErrors", ->
   restrict: "A"
   require: "^form"
-  link: (scope, element, attrs, form) ->
+  link: ($scope, element, attrs, form) ->
     form.$serverError = {}
 
-    scope.$watch "serverValidationErrors", (serverError) ->
+    $scope.$watch "serverValidationErrors", (serverError) ->
       form.$serverError = serverError
 
-    for fieldName, _ of form
-      scope.$watch "#{form.$name}.#{fieldName}.$viewValue", ->
+    # TODO this one is broken
+    # Hide server side validation errors while typping
+    angular.forEach form, (_, fieldName) ->
+      $scope.$watch "#{form.$name}.#{fieldName}.$viewValue", ->
         form.$serverError = {}
-

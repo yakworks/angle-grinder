@@ -231,14 +231,33 @@ describe "module: angleGrinder.forms", ->
 
     beforeEach inject ($injector) ->
       {element, $scope} = compileTemplate """
-        <form name="theForm" ag-server-validation-errors></form>
+        <form name="theForm" ag-server-validation-errors>
+          <input type="text" name="login" ng-model="user.login" />
+          <ag-validation-errors for="login" />
+        </form>
       """, $injector
+
       form = $scope.theForm
 
-    it "assings errors to the form", ->
-      $scope.$apply -> $scope.serverValidationErrors = login: "should be unique"
-      expect(form.$serverError).toBeDefined()
-      expect(form.$serverError.login).toEqual "should be unique"
+    describe "when it has server side errors", ->
+      beforeEach ->
+        $scope.$apply -> $scope.serverValidationErrors = login: "should be unique"
+
+      it "assings errors to the form", ->
+        expect(form.$serverError).toBeDefined()
+        expect(form.$serverError.login).toEqual "should be unique"
+
+      it "displays the server errors", ->
+        message = element.find("ag-validation-errors[for=login] span.help-inline").text()
+        expect(message).toEqual "should be unique"
+
+      describe "when the error is gone", ->
+        beforeEach ->
+          $scope.$apply -> $scope.serverValidationErrors = null
+
+        it "hides the server errors", ->
+          message = element.find("ag-validation-errors[for=login] span.help-inline").text()
+          expect(message).toEqual ""
 
   describe "service: confirmationDialog", ->
     it "displays the confirmation", inject ($dialog, confirmationDialog) ->
