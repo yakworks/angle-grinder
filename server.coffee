@@ -62,6 +62,7 @@ app.post "/api/users", (req, res) ->
 app.put "/api/users/:id", (req, res) ->
   randomSleep()
 
+  # TODO unique validation for update
   row = data.update(req.params.id, req.body)
   res.send row
 

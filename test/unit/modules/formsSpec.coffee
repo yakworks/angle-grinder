@@ -229,13 +229,18 @@ describe "module: angleGrinder.forms", ->
     $scope = null
     form = null
 
-    beforeEach inject ($injector) ->
-      {element, $scope} = compileTemplate """
+    beforeEach inject ($rootScope, $injector) ->
+      $scope = $rootScope.$new()
+      $scope.user = {}
+
+      {element} = compileTemplate """
         <form name="theForm" ag-server-validation-errors>
-          <input type="text" name="login" ng-model="user.login" />
-          <ag-validation-errors for="login" />
+          <div ag-field-group for="login">
+            <input type="text" name="login" ng-model="user.login" />
+            <ag-validation-errors for="login" />
+          </div>
         </form>
-      """, $injector
+      """, $injector, $scope
 
       form = $scope.theForm
 
@@ -243,21 +248,40 @@ describe "module: angleGrinder.forms", ->
       beforeEach ->
         $scope.$apply -> $scope.serverValidationErrors = login: "should be unique"
 
+      loginError = ->
+        element.find("ag-validation-errors[for=login] span.help-inline")
+
       it "assings errors to the form", ->
         expect(form.$serverError).toBeDefined()
         expect(form.$serverError.login).toEqual "should be unique"
 
       it "displays the server errors", ->
-        message = element.find("ag-validation-errors[for=login] span.help-inline").text()
-        expect(message).toEqual "should be unique"
+        expect(loginError().text()).toEqual "should be unique"
+
+      it "marks fields as invalid", ->
+        expect(element.find(".control-group")).toHaveClass "error"
+
+      itHidesServerSideErrors = ->
+        it "hides the server errors", ->
+          expect(loginError().text()).toEqual ""
+
+      itMarksFieldsAsValid = ->
+        it "marks fields as valid", ->
+          expect(element.find(".control-group")).not.toHaveClass "error"
 
       describe "when the error is gone", ->
         beforeEach ->
           $scope.$apply -> $scope.serverValidationErrors = null
 
-        it "hides the server errors", ->
-          message = element.find("ag-validation-errors[for=login] span.help-inline").text()
-          expect(message).toEqual ""
+        itHidesServerSideErrors()
+        itMarksFieldsAsValid()
+
+      describe "while typing", ->
+        beforeEach ->
+          $scope.$apply -> form.login.$setViewValue "login"
+
+        itHidesServerSideErrors()
+        itMarksFieldsAsValid()
 
   describe "service: confirmationDialog", ->
     it "displays the confirmation", inject ($dialog, confirmationDialog) ->

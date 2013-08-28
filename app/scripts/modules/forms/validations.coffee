@@ -51,13 +51,16 @@ forms.directive "agFieldGroup", ->
       else
         element.addClass("error")
 
-    # Watch for changes and display errors if necessary
     angular.forEach fields, (fieldName) ->
+      # Watch for changes and display errors if necessary
       $scope.$watch "#{formCtrl.$name}.#{fieldName}.$viewValue", ->
         displayErrors() if formCtrl[fieldName]?.$dirty
 
-      $scope.$watch "#{formCtrl.$name}.$serverError.#{fieldName}", (error) ->
-        displayErrors() if error?
+      # Display server side validation errors
+      initial = true
+      $scope.$watch "#{formCtrl.$name}.$serverError.#{fieldName}", ->
+        displayErrors() unless initial
+        initial = false
 
     # Display validation errors when the form is submitted
     $scope.$watch "#{formCtrl.$name}.$submitted", (submitted) ->
@@ -120,14 +123,27 @@ forms.directive "agValidationErrors", [
 forms.directive "agServerValidationErrors", ->
   restrict: "A"
   require: "^form"
-  link: ($scope, element, attrs, form) ->
-    form.$serverError = {}
 
+  link: ($scope, element, attrs, formCtrl) ->
+    formCtrl.$serverError = {}
+
+    # Assing server validation errors from the `$scope.serverValidationErrors`
+    # TODO this should be changed
     $scope.$watch "serverValidationErrors", (serverError) ->
-      form.$serverError = serverError
+      formCtrl.$serverError = serverError
 
-    # TODO this one is broken
     # Hide server side validation errors while typping
-    angular.forEach form, (_, fieldName) ->
-      $scope.$watch "#{form.$name}.#{fieldName}.$viewValue", ->
-        form.$serverError = {}
+    $scope.$watch "#{formCtrl.$name}.$serverError", (serverError) ->
+
+      # Iterate through all fields with server validation errors
+      angular.forEach serverError, (_, fieldName) ->
+
+        # Register change listener for those fields
+        initial = true
+        unregister = $scope.$watch "#{formCtrl.$name}.#{fieldName}.$viewValue", ->
+          unless initial
+            # Remove server side error for the field when its value was changed
+            formCtrl.$serverError[fieldName] = null
+            unregister()
+
+          initial = false
