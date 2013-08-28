@@ -62,9 +62,11 @@ app.post "/api/users", (req, res) ->
 app.put "/api/users/:id", (req, res) ->
   randomSleep()
 
-  # TODO unique validation for update
-  row = data.update(req.params.id, req.body)
-  res.send row
+  try
+    row = data.update(req.params.id, req.body)
+    res.send row
+  catch error
+    res.send error, 422
 
 # DELETE
 app.delete "/api/users/:id", (req, res) ->
