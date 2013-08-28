@@ -40,14 +40,14 @@ describe "controller: users.FormCtrl", ->
         recordSpy.id = 123
         recordSpy.resourceName = -> "user"
         recordSpy.save.andCallFake (options) ->
-          options.error(status: 422, data: errors: user: "foo bar")
+          options.error(status: 422, data: errors: user: login: "has to be unique")
 
         # When
         $scope.save(recordSpy)
 
         # Then
         expect(recordSpy.save).toHaveBeenCalled()
-        expect($scope.serverValidationErrors).toEqual "foo bar"
+        expect($scope.editForm.$serverError.login).toEqual "has to be unique"
 
   describe "#delete", ->
 

@@ -6,8 +6,6 @@ class FormDialogCtrl
     $scope.item = item
     $scope.createNew = not item.persisted()
 
-    $scope.serverValidationErrors = {}
-
     # Closes the dialog
     $scope.closeEditDialog = ->
       $log.info "Closing the dialog"
@@ -18,8 +16,6 @@ class FormDialogCtrl
       if $scope.editForm.$invalid
         $log.warn "The form is invalid", $scope.editForm
         return
-
-      $scope.serverValidationErrors = {}
 
       onSuccess = (response) ->
         $log.info "Item has been updated/created", response
@@ -33,7 +29,7 @@ class FormDialogCtrl
         $log.error "Something went wront", response
         if response.status is 422
           errors = response.data?.errors?[item.resourceName()]
-          $scope.serverValidationErrors = errors
+          $scope.editForm.$serverError = errors
           $log.error "Server side validation errors", errors
 
       item.save success: onSuccess, error: onError

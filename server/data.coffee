@@ -59,8 +59,7 @@ class Data
 
   # Create a new row
   create: (data) ->
-    loginTaken = _.where(@data, login: data.login).length > 0
-    unless loginTaken
+    if @_validateLoginUniqueness(data)
       data.id = @nextId()
       @data.push(data)
       data
@@ -74,10 +73,24 @@ class Data
 
   # Update a row with the given id
   update: (id, data) ->
-    row = @findById(id)
-    for key, value of data
-      row[key] = value
-    row
+    if @_validateLoginUniqueness(data)
+      row = @findById(id)
+      for key, value of data
+        row[key] = value
+      row
+    else
+      error =
+        code: 422
+        status: "error"
+        message: "User update failed"
+        errors: user: login: "Property [login] of class [User] with value [#{data.login}] must be unique"
+      throw error
+
+  _validateLoginUniqueness: (data) ->
+    newRecord = data.id?
+
+    not _.find @data, (row) ->
+      (not newRecord or row.id isnt data.id) and row.login is data.login
 
   # Delete a row with the given id
   delete: (id) ->
