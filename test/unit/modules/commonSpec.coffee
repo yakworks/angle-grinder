@@ -60,3 +60,20 @@ describe "module: angleGrinder.common", ->
         it "returns false", ->
           expect(pendingRequests.for("POST")).toBeFalsy()
           expect(pendingRequests.for("POST", "GET")).toBeTruthy()
+
+  describe "service: isEmpty", ->
+
+    it "is defined", inject (isEmpty) ->
+      expect(isEmpty).toBeDefined()
+
+    describe "for empty strings", ->
+
+      for str in [undefined, null, ""]
+        it "returns true for `#{str}`", inject (isEmpty) ->
+          expect(isEmpty(str)).toBeTruthy()
+
+    describe "for non empty strings", ->
+
+      for str in [" ", "    ", "test", " foo bar "]
+        it "returns false for `#{str}`", inject (isEmpty) ->
+          expect(isEmpty(str)).toBeFalsy()

@@ -50,3 +50,7 @@ common.factory "pendingRequests", [
 
     pendingRequests
 ]
+
+# Returns true is the given string is null, undefined or empty ("")
+common.value "isEmpty", (str) ->
+  not str or str.length is 0

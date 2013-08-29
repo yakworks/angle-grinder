@@ -33,14 +33,10 @@ describe "module: angleGrinder.gridz", ->
       expect(element.find("div#gridPager").length).toEqual 1
         
   describe "service: flatten", ->
-    flatten = null
-    beforeEach inject ($injector) ->
-      flatten = $injector.get("flatten")
-
-    it "is defined", ->
+    it "is defined", inject (flatten) ->
       expect(flatten).toBeDefined()
 
-    it "flattens an object", ->
+    it "flattens an object", inject (flatten) ->
       target =
         id: 123
         consumer:
