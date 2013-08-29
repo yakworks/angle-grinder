@@ -10,25 +10,30 @@ forms.value "validationMessages",
 
 # Custom validation directive for fields match.
 # Might be used for password confirmation validation.
-forms.directive "match", ->
+forms.directive "match", ["isEmpty", (isEmpty) ->
   require: "ngModel"
-  link: (scope, elem, attrs, ctrl) ->
+  link: ($scope, elem, attrs, modelCtrl) ->
     validateEqual = (value, otherValue) ->
-      allEmpty = _.compact([value, otherValue]).length is 0
+      allEmpty = _.all [isEmpty(value), isEmpty(otherValue)]
       valid = allEmpty or value is otherValue
 
-      ctrl.$setValidity "mismatch", valid
+      modelCtrl.$setValidity "mismatch", valid
       return value
 
-    scope.$watch attrs.match, (otherValue) ->
-      validateEqual(ctrl.$viewValue, otherValue)
+    # watch the other value and re-validate on change
+    $scope.$watch attrs.match, (otherValue) ->
+      validateEqual(modelCtrl.$viewValue, otherValue)
 
     validator = (value) ->
-      otherValue = scope.$eval(attrs.match)
+      otherValue = $scope.$eval(attrs.match)
       validateEqual(value, otherValue)
 
-    ctrl.$parsers.unshift validator
-    ctrl.$formatters.unshift validator
+    # validate DOM -> model
+    modelCtrl.$parsers.unshift validator
+
+    # validate model -> DOM
+    modelCtrl.$formatters.unshift validator
+]
 
 forms.directive "agFieldGroup", ->
   restrict: "A"
@@ -56,7 +61,7 @@ forms.directive "agFieldGroup", ->
       $scope.$watch "#{formCtrl.$name}.#{fieldName}.$viewValue", ->
         displayErrors() if formCtrl[fieldName]?.$dirty
 
-      # Display server side validation errors
+      # Display server side validation errors (only once)
       initial = true
       $scope.$watch "#{formCtrl.$name}.$serverError.#{fieldName}", ->
         displayErrors() unless initial
