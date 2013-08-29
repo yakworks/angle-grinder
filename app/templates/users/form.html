@@ -16,20 +16,20 @@
 
     <div ag-field-group for="name">
       <label class="control-label">Name</label>
-
       <div class="controls">
         <input type="text" name="name" placeholder="Enter Name"
-               ng-model="user.name" autofocus required />
+               ng-model="user.name" autofocus
+               required />
         <ag-validation-errors for="name" required="This field is required" />
       </div>
     </div>
 
     <div ag-field-group for="login">
       <label class="control-label">Login</label>
-
       <div class="controls">
         <input type="text" name="login" placeholder="Enter Login"
-               ng-model="user.login" autofocus required />
+               ng-model="user.login"
+               required ng-minlength="6" />
         <ag-validation-errors for="login" required="This field is required" />
       </div>
     </div>

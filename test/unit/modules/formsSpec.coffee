@@ -9,24 +9,34 @@ describe "module: angleGrinder.forms", ->
   describe "directive: match", ->
     element = null
     form = null
+    $timeout = null
 
     beforeEach inject ($injector) ->
       {element} = compileTemplate """
         <form name="form">
-          <input name="password" type="password"
-                 ng-model="user.password" />
-          <input name="passwordConfirmation" type="password"
-                 ng-model="user.passwordConfirmation" match="user.password" />
+          <div ag-field-group for="password,passwordConfirmation">
+            <input name="password" type="password"
+                   ng-model="user.password" />
+            <input name="passwordConfirmation" type="password"
+                   ng-model="user.passwordConfirmation" match="user.password" />
+          </div>
         </form>
       """, $injector, $scope
 
       form = $scope.form
+      $timeout = $injector.get("$timeout")
 
     setPassword = (password) ->
       $scope.$apply -> form.password.$setViewValue password
+      $timeout.flush()
 
     setConfirmation = (confirmation) ->
       $scope.$apply -> form.passwordConfirmation.$setViewValue confirmation
+      $timeout.flush()
+
+    controlGroup = -> element.find("div.control-group")
+
+    controlGroup = -> element.find("div.control-group")
 
     describe "when the fields are equal", ->
       beforeEach ->
@@ -40,6 +50,9 @@ describe "module: angleGrinder.forms", ->
       it "does not set errors on the input", ->
         expect(form.passwordConfirmation.$valid).toBeTruthy()
         expect(form.passwordConfirmation.$invalid).toBeFalsy()
+
+      it "does not mark the field group as valid", ->
+        expect(controlGroup()).not.toHaveClass "error"
 
     describe "when the fields are not equal", ->
       beforeEach ->
@@ -63,8 +76,24 @@ describe "module: angleGrinder.forms", ->
         expect($input.hasClass("ng-invalid")).toBeTruthy()
         expect($input.hasClass("ng-invalid-mismatch")).toBeTruthy()
 
+      it "marks the field group as invalid", ->
+        expect(controlGroup()).toHaveClass "error"
+
+    describe "changing other values", ->
+      it "toggles the field group as valid / invalid", ->
+        setPassword "passwor"
+        setConfirmation "password"
+        expect(controlGroup()).toHaveClass "error"
+
+        setPassword "password"
+        expect(controlGroup()).not.toHaveClass "error"
+
+        setConfirmation "passwor"
+        expect(controlGroup()).toHaveClass "error"
+
   describe "directive: agFieldGroup", ->
     element = null
+    $timeout = null
 
     beforeEach inject ($injector) ->
       {element} = compileTemplate """
@@ -81,15 +110,23 @@ describe "module: angleGrinder.forms", ->
         </form>
       """, $injector, $scope
 
+      $timeout = $injector.get("$timeout")
+
     setEmail = (email) ->
       $scope.$apply -> $scope.form.email.$setViewValue email
+      $timeout.flush()
 
     setPassword = (password) ->
       $scope.$apply -> $scope.form.password.$setViewValue password
+      $timeout.flush()
+
+    submitForm = ->
+      element.find("button[type=submit]").click()
+      $timeout.flush()
 
     it "marks as invalid when the save button is clicked", ->
       # When (the form has been submitted)
-      element.find("button[type=submit]").click()
+      submitForm()
 
       # Then
       $group = element.find(".control-group")
@@ -226,8 +263,9 @@ describe "module: angleGrinder.forms", ->
 
   describe "directive: agServerValidationErrors", ->
     element = null
-    $scope = null
     form = null
+    $scope = null
+    $timeout = null
 
     beforeEach inject ($rootScope, $injector) ->
       $scope = $rootScope.$new()
@@ -243,10 +281,12 @@ describe "module: angleGrinder.forms", ->
       """, $injector, $scope
 
       form = $scope.theForm
+      $timeout = $injector.get("$timeout")
 
     describe "when it has server side errors", ->
       beforeEach ->
         $scope.$apply -> $scope.theForm.$serverError = login: "should be unique"
+        $timeout.flush()
 
       loginError = ->
         element.find("ag-validation-errors[for=login] span.help-inline")
@@ -272,6 +312,7 @@ describe "module: angleGrinder.forms", ->
       describe "when the error is gone", ->
         beforeEach ->
           $scope.$apply -> $scope.theForm.$serverError = null
+          $timeout.flush()
 
         itHidesServerSideErrors()
         itMarksFieldsAsValid()
@@ -279,6 +320,7 @@ describe "module: angleGrinder.forms", ->
       describe "while typing", ->
         beforeEach ->
           $scope.$apply -> form.login.$setViewValue "login"
+          $timeout.flush()
 
         itHidesServerSideErrors()
         itMarksFieldsAsValid()

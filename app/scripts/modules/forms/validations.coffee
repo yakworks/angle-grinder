@@ -35,7 +35,7 @@ forms.directive "match", ["isEmpty", (isEmpty) ->
     modelCtrl.$formatters.unshift validator
 ]
 
-forms.directive "agFieldGroup", ->
+forms.directive "agFieldGroup", ["$timeout", ($timeout) ->
   restrict: "A"
   require: "^form"
   replace: true
@@ -47,29 +47,32 @@ forms.directive "agFieldGroup", ->
   link: ($scope, element, attrs, formCtrl) ->
     fields = (attrs["for"] or "").split(",")
 
-    displayErrors = ->
-      valid = _.map fields, (field) ->
-        formCtrl[field].$valid and not formCtrl.$serverError?[field]
+    toggleErrors = ->
+      $timeout ->
+        invalid = _.map fields, (field) ->
+          formCtrl[field]?.$invalid or formCtrl.$serverError?[field]
 
-      if _.all(valid)
-        element.removeClass("error")
-      else
-        element.addClass("error")
+        if _.any(invalid)
+          element.addClass("error")
+        else
+          element.removeClass("error")
 
+    # Watch for validity state change and display errors if necessary
     angular.forEach fields, (fieldName) ->
-      # Watch for changes and display errors if necessary
       $scope.$watch "#{formCtrl.$name}.#{fieldName}.$viewValue", ->
-        displayErrors() if formCtrl[fieldName]?.$dirty
+        toggleErrors() if formCtrl[fieldName]?.$dirty
 
-      # Display server side validation errors (only once)
+    # Display server side validation errors (only once)
+    angular.forEach fields, (fieldName) ->
       initial = true
       $scope.$watch "#{formCtrl.$name}.$serverError.#{fieldName}", ->
-        displayErrors() unless initial
+        toggleErrors() unless initial
         initial = false
 
     # Display validation errors when the form is submitted
     $scope.$watch "#{formCtrl.$name}.$submitted", (submitted) ->
-      displayErrors() if submitted
+      toggleErrors() if submitted
+]
 
 forms.directive "agValidationErrors", [
   "validationMessages", (validationMessages) ->
@@ -105,6 +108,12 @@ forms.directive "agValidationErrors", [
           message = messageFor error
           appendError(message) if message?
 
+      # Clear validation errors when the field is valid
+      initial = true
+      $scope.$watch "#{formName}.#{fieldName}.$valid", ->
+        displayErrorMessages() unless initial
+        initial = false
+
       # Dispalay validation errors while typing
       $scope.$watch "#{formName}.#{fieldName}.$viewValue", ->
         displayErrorMessages() if field.$dirty
@@ -121,8 +130,8 @@ forms.directive "agValidationErrors", [
           element.find(".server-error").remove()
 
       # TODO do something with `saving`
-      $scope.$watch "saving", (newValue, oldValue) ->
-        displayErrorMessages() if not newValue and newValue != oldValue
+      $scope.$watch "saving", (saving) ->
+        displayErrorMessages() if saving
 ]
 
 forms.directive "agServerValidationErrors", ->
