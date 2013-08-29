@@ -43,7 +43,7 @@ resources.factory "Resource", [
   "$document", "resourceBuilder", ($document, resourceBuilder) ->
     $body = $document.find("body")
 
-    url = $body.data("resource-path")
+    url = $body.data("resource-path")ls
     name = $body.data("resource-name")
 
     resourceBuilder(url, name)
