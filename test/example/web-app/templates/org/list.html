@@ -1,11 +1,21 @@
 <h3 class="page-header">Org list</h3>
 
+<div collapse="!showSearchForm"
+     ng-include="'/templates/org/searchForm.html' | withContext"></div>
+
 <div class="navbar navbar-grid">
     <div class="navbar-inner with-selected-pointer with-grid-options">
         <ul class="nav">
             <li>
                 <a href="#/create">
                     <i class="icon-user"></i> Create org
+                </a>
+            </li>
+        </ul>
+        <ul class="nav pull-right">
+            <li>
+                <a title="search screen" ng-click="showSearchForm = !showSearchForm" href="">
+                    <i class="icon-search"></i>
                 </a>
             </li>
         </ul>

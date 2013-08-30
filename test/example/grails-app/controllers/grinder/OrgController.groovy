@@ -21,13 +21,21 @@ class OrgController extends BaseDomainController {
         def qslike = (filters?.quickSearch) ? (filters?.quickSearch + "%") : null
 
         def datalist = crit.list(max: pager.max, offset: pager.offset) {
-
             if (qslike) {
                 or {
                     ilike 'name', qslike
                     ilike 'num', qslike
                 }
             }
+
+            if (filters?.name)
+                ilike 'name', filters.name + "%"
+
+            if (filters?.num)
+                ilike 'num', filters.num + "%"
+
+            if (params.sort)
+                order(params.sort, params.order)
         }
 
         return datalist
