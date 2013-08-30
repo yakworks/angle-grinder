@@ -13,6 +13,26 @@ class OrgController extends BaseDomainController {
     def index() {
     }
 
+    protected def listCriteria() {
+        def pager = new Pager(params)
+        def crit = domainClass.createCriteria()
+
+        def filters = params.filters ? JSON.parse(params.filters) : null
+        def qslike = (filters?.quickSearch) ? (filters?.quickSearch + "%") : null
+
+        def datalist = crit.list(max: pager.max, offset: pager.offset) {
+
+            if (qslike) {
+                or {
+                    ilike 'name', qslike
+                    ilike 'num', qslike
+                }
+            }
+        }
+
+        return datalist
+    }
+
     def pickList() {
         def pager = new Pager(params)
         def crit = domainClass.createCriteria()

@@ -10,6 +10,10 @@ class ListCtrl
       sortname: "num"
       sortorder: "asc"
 
+    # Handles quickSearch action
+    $scope.quickSearch = (search) ->
+      $scope.$broadcast "searchUpdated", search
+
   colModel: ->
     showActionLink = (cellVal, options, rowdata) ->
       """
