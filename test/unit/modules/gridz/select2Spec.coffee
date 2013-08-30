@@ -98,8 +98,6 @@ describe "module: angleGrinder.gridz, directive: agSelect2", ->
         expect(spy).toHaveBeenCalledWith "open"
 
   describe "when `selectAjaxUrl` option is provided", ->
-    ajaxOptions = null
-
     beforeEach inject (pathWithContext) ->
       pathWithContext.andReturn("/context/api/orgs.json")
 
@@ -107,18 +105,34 @@ describe "module: angleGrinder.gridz, directive: agSelect2", ->
       <ag-select2 select-ajax-url="/api/orgs.json" ng-model="search.org" />
     """
 
-    beforeEach ->
-      ajaxOptions = $directiveScope.options.ajax
+    directiveAjaxOptions = null
+    beforeEach -> directiveAjaxOptions = $directiveScope.options.ajax
 
     it "defines ajax options for handling server side lookup", ->
-      expect(ajaxOptions).toBeDefined()
+      expect(directiveAjaxOptions).toBeDefined()
 
     it "uses `pathWithContextSpy` to generate a valid path", inject (pathWithContext) ->
       expect(pathWithContext).toHaveBeenCalledWith("/api/orgs.json")
 
     it "assigns a valid server side lookup path", ->
-      expect(ajaxOptions.url).toBeDefined()
-      expect(ajaxOptions.url).toEqual "/context/api/orgs.json"
+      expect(directiveAjaxOptions.url).toBeDefined()
+      expect(directiveAjaxOptions.url).toEqual "/context/api/orgs.json"
+
+    it "assigns default `ajax.quietMillis` option", ->
+      expect(directiveAjaxOptions.quietMillis).toEqual 500
+
+  describe "when `selectAjaxUrl` options is provided along with `selectAjaxQuietMillis`", ->
+    prepareDirective """
+      <ag-select2 select-ajax-url="/api/orgs.json"
+                  select-ajax-quiet-millis="666"
+                  ng-model="search.org" />
+    """
+
+    it "ignores default value for `ajax.quietMillis` option", ->
+      expect($directiveScope.options.ajax.quietMillis).not.toEqual 500
+
+    it "assigns default `ajax.quietMillis` option", ->
+      expect($directiveScope.options.ajax.quietMillis).toEqual 666
 
   describe "when `minimumInputLength` option is provided", ->
     beforeEach -> $scope.selectOptions = minimumInputLength: 123

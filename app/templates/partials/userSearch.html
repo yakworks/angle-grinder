@@ -8,6 +8,7 @@
 
             <ag-select2 select-ajax-url="/api/orgs.json"
                         select-minimum-input-length="3"
+                        select-ajax-quiet-millis="300"
                         ng-model="search.org">
               <table ag-select2-result class="table table-condensed org-select-result">
                 <tr>

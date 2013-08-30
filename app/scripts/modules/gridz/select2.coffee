@@ -30,12 +30,12 @@ gridz.directive "agSelect2", [
         options = angular.copy $scope.selectOptions or {}
         $scope.options = options
 
-        # read `minimumInputLength` from the attribute
+        # read `minimumInputLength` option from the attribute
+        options.minimumInputLength or= 1
         if attrs.selectMinimumInputLength?
           options.minimumInputLength = parseInt(attrs.selectMinimumInputLength)
 
         # set the default `minimumInputLength`
-        options.minimumInputLength or= 1
 
         # set the default `width
         options.width or= "resolve"
@@ -44,8 +44,6 @@ gridz.directive "agSelect2", [
         if not options.ajax? and attrs.selectAjaxUrl?
           options.ajax =
             url: pathWithContext(attrs.selectAjaxUrl)
-            # Number of milliseconds to wait for the user to stop typing before issuing the ajax request
-            quietMillis: 500
             data: (term, page) ->
               q: term # search term (query params)
               max: 20, page: page
@@ -53,6 +51,13 @@ gridz.directive "agSelect2", [
             results: (result, page) ->
               more = page < result.total
               results: result.rows, more: more
+
+          # read `quietMillis` option from the attribute
+          # Number of milliseconds to wait for the user to
+          # stop typing before issuing the ajax request
+          options.ajax.quietMillis = 500
+          if attrs.selectAjaxQuietMillis?
+            options.ajax.quietMillis = parseInt(attrs.selectAjaxQuietMillis)
 
         # create `formatResult` function from the given template
         if resultTemplate?
