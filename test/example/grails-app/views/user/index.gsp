@@ -46,7 +46,7 @@
 <div ng-app="angleGrinder" ng-controller="user.ListCtrl" ng-init="editTemplateUrl = '${createLink(action: 'editPartial')}' ">
     <ag-alerts></ag-alerts>
 
-    <div ng-controller="user.SearchFormCtrl" collapse="!showSearchForm"
+    <div collapse="!showSearchForm"
          ng-include="'${createLink(action: 'searchPartial')}'"></div>
 
     <div class="navbar navbar-grid">

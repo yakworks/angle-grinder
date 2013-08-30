@@ -85,8 +85,8 @@
       <tab-heading><i class="icon-user"></i> Contacts</tab-heading>
 
       <div ng-controller="tabbedOrg.ContactListCtrl">
-        <div ng-controller="user.SearchFormCtrl" collapse="!showSearchForm"
-             ng-include="'../templates/tabbedOrg/contactSearchForm.html'"></div>
+        <div collapse="!showSearchForm"
+             ng-include="'/templates/tabbedOrg/contactSearchForm.html' | withContext"></div>
 
         <div class="navbar navbar-grid">
           <div class="navbar-inner with-selected-pointer with-grid-options">

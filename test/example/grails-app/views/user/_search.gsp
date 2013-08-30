@@ -1,4 +1,4 @@
-<div class="well well-large">
+<div class="well">
     <form ag-search-Form class="form-horizontal form-multi-column no-margin">
 
         <div class="row-fluid">
@@ -48,7 +48,7 @@
             </div>
         </div>
 
-        <div class="form-actions no-margin">
+        <div class="pull-right">
             <ag-search-button></ag-search-button>
             <ag-reset-search-button></ag-reset-search-button>
         </div>
