@@ -33,6 +33,10 @@ class PathWithContextProvider
 
 common.provider "pathWithContext", PathWithContextProvider
 
+common.filter "withContext", ["pathWithContext", (pathWithContext) ->
+  (path) -> pathWithContext(path)
+]
+
 # Decorates `$http.pendingRequests` with some useful features
 common.factory "pendingRequests", [
   "$http", ($http) ->

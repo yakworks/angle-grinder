@@ -3,7 +3,8 @@ describe "module: angleGrinder.gridz, directive: agSelect2", ->
   # create spy on `pathWithContext` service
   beforeEach module "angleGrinder.common", ($provide) ->
     $provide.value "pathWithContext", jasmine.createSpy("pathWithContext")
-    null # this is important, see: https://groups.google.com/forum/#!msg/angular/gCGF_B4eQkc/XjkvbgE9iMcJ
+    # this is important, see: https://groups.google.com/forum/#!msg/angular/gCGF_B4eQkc/XjkvbgE9iMcJ
+    return
 
   beforeEach module("angleGrinder.gridz")
 

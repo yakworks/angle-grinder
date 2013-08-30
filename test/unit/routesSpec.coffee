@@ -3,7 +3,7 @@ describe "Application routes", ->
   # create spy on `userResolver` service
   beforeEach module "angleGrinder.resources", ($provide) ->
     $provide.value "userResolver", jasmine.createSpy("userResolver")
-    null
+    return
 
   beforeEach module "angleGrinder"
 

@@ -7,7 +7,7 @@ describe "module: angleGrinder.spinner", ->
     # create spy on `pendingRequests` service
     beforeEach module "angleGrinder.common", ($provide) ->
       $provide.value "pendingRequests", jasmine.createSpy("pendingRequests")
-      null
+      return
 
     beforeEach inject (_httpRequestTracker_) ->
       httpRequestTracker = _httpRequestTracker_
