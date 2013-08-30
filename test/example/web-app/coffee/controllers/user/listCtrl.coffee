@@ -35,8 +35,8 @@ class ListCtrl
 
   colModel: ->
     [
-      { name: "id", label: "ID", width: 30 }
-      { name: "contact.name", label: "Contact Name", width: 100, formatter: "editActionLink" }
+      { name: "id", label: "ID", width: 30, fixed: true }
+      { name: "contact.name", label: "Contact Name", width: 100, fixed: true, formatter: "editActionLink" }
       { name: "contact.email", label: "Contact Email", width: 70, align: "right", formatter: "email" }
       { name: "login", label: "Login", width: 70 }
       { name: "inactive", label: "Inactive", width: 30, align: "center", formatter: "okIcon" }

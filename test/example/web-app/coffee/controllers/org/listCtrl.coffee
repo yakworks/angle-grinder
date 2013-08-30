@@ -21,8 +21,8 @@ class ListCtrl
       """
 
     [
-      { name: "id", label: "ID", width: 30, formatter: showActionLink }
-      { name: "name", label: "Name", width: 100, formatter: showActionLink }
+      { name: "id", label: "ID", width: 30, fixed: true, formatter: showActionLink }
+      { name: "name", label: "Name", width: 100, fixed: true, formatter: showActionLink }
       { name: "num", label: "Num", width: 70 }
     ]
 
