@@ -74,7 +74,8 @@
             <label class="control-label">${ag.label(code: "user.org")}</label>
 
             <div class="controls">
-                <select name="contactOrgId" ng-model="item.contact.org.id"
+                <select name="contactOrgId" ui-select2
+                        ng-model="item.contact.org.id"
                         ng-options="org.id as org.name for org in orgs"
                         required>
                     <option value="">-- chose org --</option>

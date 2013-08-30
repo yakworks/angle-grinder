@@ -1,4 +1,5 @@
 /* org lookup results for the select2 component */
+
 table.org-select-result {
     margin-bottom: 0px;
 }
@@ -10,4 +11,10 @@ table.org-select-result td:nth-child(1) {
 
 table.org-select-result td:nth-child(2) {
     border-top: none;
+}
+
+/* select2 component overrides */
+
+.controls .select2-container {
+  width: 216px;
 }
