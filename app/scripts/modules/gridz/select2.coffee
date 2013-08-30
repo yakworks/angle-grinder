@@ -26,9 +26,13 @@ gridz.directive "agSelect2", [
             break
 
       # pre linking function
-      pre: ($scope, $element, attrs) ->
+      pre: ($scope, element, attrs) ->
         options = angular.copy $scope.selectOptions or {}
         $scope.options = options
+
+        # read `minimumInputLength` from the attribute
+        if attrs.selectMinimumInputLength?
+          options.minimumInputLength = parseInt(attrs.selectMinimumInputLength)
 
         # set the default `minimumInputLength`
         options.minimumInputLength or= 1
@@ -63,8 +67,8 @@ gridz.directive "agSelect2", [
         options.formatSelection or= (item) -> item.name
 
         # bind `click` event on the open button
-        $element.find("button.open").click ->
-          $element.find("input").select2 "open"
+        element.find("button.open").click ->
+          element.find("input").select2 "open"
 
     template: """
       <div>

@@ -9,35 +9,37 @@ describe "module: angleGrinder.gridz, directive: agSelect2", ->
   beforeEach module("angleGrinder.gridz")
 
   $scope = null
+  $directiveScope = null
+  element = null
+
   beforeEach inject ($rootScope) ->
     $scope = $rootScope.$new()
     $scope.selectOptions = foo: "bar"
 
-  element = null
+  prepareDirective = (template) ->
+    beforeEach inject ($injector) ->
+      {element, $scope} = compileTemplate(template, $injector, $scope)
+      $directiveScope = element.scope()
 
   describe "basic example", ->
-    beforeEach inject ($injector) ->
-      {element} = compileTemplate """
-        <ag-select2 select-options="selectOptions" ng-model="search.organization">
-          <table ag-select2-result class="table table-condensed">
-            <tr>
-              <td>{{item.num}}</td>
-              <td>{{item.name}}</td>
-            </tr>
-          </table>
-        </ag-select2>
-      """, $injector, $scope
+    prepareDirective """
+      <ag-select2 select-options="selectOptions" ng-model="search.organization">
+        <table ag-select2-result class="table table-condensed">
+          <tr>
+            <td>{{item.num}}</td>
+            <td>{{item.name}}</td>
+          </tr>
+        </table>
+      </ag-select2>
+    """
 
     it "generates select2 component along with the show button", ->
       expect(element).toContain "input[type=text]"
       expect(element).toContain "button[type=button]"
 
     describe "scope", ->
-      $directiveScope = null
-
       beforeEach ->
         $scope.$apply -> $scope.foo = "bar"
-        $directiveScope = element.scope()
 
       it "has default options for select2", ->
         options = $directiveScope.options
@@ -95,19 +97,17 @@ describe "module: angleGrinder.gridz, directive: agSelect2", ->
         element.find("button.open").click()
         expect(spy).toHaveBeenCalledWith "open"
 
-  describe "when `selectAjaxUrl` is provided", ->
-    beforeEach inject ($injector, pathWithContext) ->
-      pathWithContext.andReturn("/context/api/orgs.json")
-
-      {element} = compileTemplate """
-        <ag-select2 select-ajax-url="/api/orgs.json" ng-model="search.org" />
-      """, $injector, $scope
-
-    $directiveScope = null
+  describe "when `selectAjaxUrl` option is provided", ->
     ajaxOptions = null
 
+    beforeEach inject (pathWithContext) ->
+      pathWithContext.andReturn("/context/api/orgs.json")
+
+    prepareDirective """
+      <ag-select2 select-ajax-url="/api/orgs.json" ng-model="search.org" />
+    """
+
     beforeEach ->
-      $directiveScope = element.scope()
       ajaxOptions = $directiveScope.options.ajax
 
     it "defines ajax options for handling server side lookup", ->
@@ -119,3 +119,38 @@ describe "module: angleGrinder.gridz, directive: agSelect2", ->
     it "assigns a valid server side lookup path", ->
       expect(ajaxOptions.url).toBeDefined()
       expect(ajaxOptions.url).toEqual "/context/api/orgs.json"
+
+  describe "when `minimumInputLength` option is provided", ->
+    beforeEach -> $scope.selectOptions = minimumInputLength: 123
+
+    prepareDirective """
+      <ag-select2 select-options="selectOptions" ng-model="search.org" />
+    """
+
+    it "assings a valid option", ->
+      expect($directiveScope.options.minimumInputLength).toEqual 123
+
+  describe "when `minimumInputLength` option is not provided", ->
+    beforeEach -> $scope.selectOptions = {}
+
+    prepareDirective """
+      <ag-select2 select-options="selectOptions" ng-model="search.org" />
+    """
+
+    it "assings the default value", ->
+      expect($directiveScope.options.minimumInputLength).toEqual 1
+
+  describe "when `minimumInputLength` option in provided via the attribute", ->
+    beforeEach -> $scope.selectOptions = minimumInputLength: 123
+
+    prepareDirective """
+      <ag-select2 select-options="selectOptions"
+                  select-minimum-input-length="234"
+                  ng-model="search.org" />
+    """
+
+    it "ignores value from the scope", ->
+      expect($directiveScope.options.minimumInputLength).not.toEqual 123
+
+    it "assings value from the attribute", ->
+      expect($directiveScope.options.minimumInputLength).toEqual 234
