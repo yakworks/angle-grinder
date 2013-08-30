@@ -1,4 +1,4 @@
-<div class="well well-large">
+<div class="well">
     <form ag-search-Form class="form-horizontal form-multi-column no-margin">
 
         <div class="row-fluid">
@@ -7,7 +7,10 @@
 
                 <div class="controls">
                     <div class="input-append">
-                        <ag-select2 select-ajax-url="/org/pickList" ng-model="search.org">
+                        <ag-select2 select-ajax-url="/org/pickList"
+                                    select-ajax-quiet-millis="250"
+                                    select-minimum-input-length="3"
+                                    ng-model="search.org">
                             <table ag-select2-result class="table table-condensed org-select-result">
                                 <tr>
                                     <td>{{item.num}}</td>
@@ -48,7 +51,7 @@
             </div>
         </div>
 
-        <div class="form-actions no-margin">
+        <div class="pull-right">
             <ag-search-button></ag-search-button>
             <ag-reset-search-button></ag-reset-search-button>
         </div>
