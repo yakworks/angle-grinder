@@ -7,7 +7,10 @@
 
                 <div class="controls">
                     <div class="input-append">
-                        <ag-select2 select-ajax-url="/org/pickList" ng-model="search.org">
+                        <ag-select2 select-ajax-url="/org/pickList"
+                                    select-ajax-quiet-millis="250"
+                                    select-minimum-input-length="3"
+                                    ng-model="search.org">
                             <table ag-select2-result class="table table-condensed org-select-result">
                                 <tr>
                                     <td>{{item.num}}</td>
