@@ -1,4 +1,4 @@
-<div class="well">
+<div class="well" ng-controller="user.SearchForm">
     <form ag-search-Form class="form-horizontal form-multi-column no-margin">
 
         <div class="row-fluid">
@@ -47,6 +47,15 @@
 
                 <div class="controls">
                     <input class="input-block-level" type="text" ng-model="search.contact.email">
+                </div>
+            </div>
+
+            <div class="control-group span6">
+                <label class="control-label">${ag.label(code: "contact.type")}</label>
+
+                <div class="controls">
+                    <input type="text" ui-select2="contactTypeSelectOptions"
+                           name="contactType" ng-model="search.contact.type" />
                 </div>
             </div>
         </div>

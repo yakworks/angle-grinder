@@ -1,4 +1,4 @@
-import grinder.Org
+import grinder.ContactType
 
 class BootStrap {
 
@@ -28,8 +28,8 @@ class BootStrap {
         for (i in 0..10) createOrg()
 
         // create users along with organizations
-        def firstOrg = createOrg(name: "GitHub", num: "111-111-111")
-        def secondOrg = createOrg(name: "9ci", num: "222-222-222")
+        def firstOrg = createOrg(name: "9ci", num: "111-111-111")
+        def secondOrg = createOrg(name: "Apple", num: "222-222-222")
         def thirdOrg = createOrg(name: "Microsoft", num: "333-333-333")
 
         def sampleOrganizations = [firstOrg, secondOrg, thirdOrg]
@@ -43,9 +43,15 @@ class BootStrap {
                         firstName: fakerService.firstName(),
                         lastName: fakerService.lastName(),
                         email: fakerService.email(),
-                        org: [id: firstOrg.id]
+                        org: [id: firstOrg.id],
+                        type: ContactType.ADMIN
                 ]
         )
+
+        def randomContactType = { ->
+            def n = generator.nextInt(2)
+            [ContactType.ADMIN, ContactType.CUSTOMER][n]
+        }
 
         for (i in 0..50) {
             def n = generator.nextInt(sampleOrganizations.size())
@@ -61,7 +67,8 @@ class BootStrap {
                             firstName: fakerService.firstName(),
                             lastName: fakerService.lastName(),
                             email: fakerService.email(),
-                            org: [id: randomOrg.id]
+                            org: [id: randomOrg.id],
+                            type: randomContactType()
                     ]
             ]
 

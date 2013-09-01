@@ -1,6 +1,7 @@
 package example
 
 import grinder.Contact
+import grinder.ContactType
 import grinder.Org
 import grinder.User
 import grinder.UserDao
@@ -25,7 +26,8 @@ class UserDaoTests extends GroovyTestCase {
                 firstName: fakerService.firstName(),
                 lastName: fakerService.lastName(),
                 email: fakerService.email(),
-                org: [id: org.id]
+                org: [id: org.id],
+                type: ContactType.CUSTOMER
         ]
 
         def userProps = [
@@ -65,7 +67,7 @@ class UserDaoTests extends GroovyTestCase {
         // Given
         def user = User.findByLogin("admin")
         def org = user.contact.org
-        assertEquals "GitHub", org.name
+        assertEquals "9ci", org.name
 
         def otherOrg = Org.findByName("9ci")
         assert otherOrg

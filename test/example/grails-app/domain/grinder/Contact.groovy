@@ -24,6 +24,8 @@ class Contact {
     Date birthday
     String comments
 
+    ContactType type
+
     Org  org
 
     def isUserEnabled() {
@@ -46,6 +48,7 @@ class Contact {
     static mapping = {
         cache true
         org column: "orgId"
+        type defaultValue: ContactType.CUSTOMER
     }
 
     static constraints = {
@@ -71,6 +74,7 @@ class Contact {
         tagForReminders nullable: false
 
         org nullable: false
+        type blank: false
     }
 
     @Override
@@ -105,5 +109,16 @@ class Contact {
     }
 }
 
+enum ContactType {
+    ADMIN("admin"), CUSTOMER("customer")
 
+    final String name
 
+    ContactType(String name) {
+        this.name = name
+    }
+
+    static ContactType byName(String name) {
+        values().find { it.name == name }
+    }
+}

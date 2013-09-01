@@ -70,15 +70,26 @@
             </div>
         </div>
 
+        <div class="control-group">
+            <label class="control-label">${ag.label(code: "contact.type")}</label>
+            <div class="controls">
+                <select ui-select2 name="contactType" ng-model="item.contact.type">
+                    <option value="ADMIN">admin</option>
+                    <option value="CUSTOMER">customer</option>
+                </select>
+                <ag-validation-errors for="contactType" />
+            </div>
+        </div>
+
         <div ag-field-group for="contactOrgId">
             <label class="control-label">${ag.label(code: "user.org")}</label>
 
             <div class="controls">
                 <select name="contactOrgId" ui-select2
                         ng-model="item.contact.org.id"
-                        ng-options="org.id as org.name for org in orgs"
-                        required>
+                        ng-required="true">
                     <option value="">-- chose org --</option>
+                    <option ng-repeat="org in orgs" value="{{org.id}}">{{org.name}}</option>
                 </select>
                 <ag-validation-errors for="contactOrgId" />
             </div>

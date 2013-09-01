@@ -47,7 +47,7 @@ class OrgControllerTests {
         def firstOrg = new Org(name: "first firstOrg", num: "111").save()
         def secondOrg = new Org(name: "second firstOrg", num: "222").save()
 
-        def firstContact = new Contact(name: "First", firstName: "Luke", org: firstOrg).save()
+        def firstContact = new Contact(type: ContactType.CUSTOMER, name: "First", firstName: "Luke", org: firstOrg).save()
         def firstUser = new User(login: "first",  contact: firstContact).save()
 
         controller.params.page = 1

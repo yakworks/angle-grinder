@@ -21,7 +21,11 @@ class ListCtrl
 
     # Displays a form for editing an exiting user
     $scope.editItem = (id) ->
-      Resource.get { id: id }, (user) ->
+      Resource.get { id: id }, (record) ->
+        # convert `Contact.type` enum field to string
+        user = angular.copy(record)
+        user.contact.type = record.contact.type?.name
+
         editDialog.open(pathWithContext("/user/formTemplate"), user)
 
     $scope.deleteItem = (id) ->
@@ -42,5 +46,17 @@ class ListCtrl
       { name: "inactive", label: "Inactive", width: 30, align: "center", formatter: "okIcon" }
     ]
 
+class SearchForm
+
+  @$inject = ["$scope"]
+  constructor: ($scope) ->
+    $scope.search = contact: type: []
+
+    $scope.contactTypeSelectOptions =
+      multiple: true
+      simple_tags: true
+      tags: ["admin", "customer"]
+
 angular.module("angleGrinder")
   .controller("user.ListCtrl", ListCtrl)
+  .controller("user.SearchForm", SearchForm)

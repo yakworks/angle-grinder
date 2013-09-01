@@ -47,6 +47,14 @@ class UserController extends BaseDomainController {
             if (fcontact?.email)
                 ilike 'contact.email', fcontact.email
 
+            if (fcontact?.type) {
+                def contactTypes = fcontact.type.collect {
+                    ContactType.byName(it.id)
+                }
+
+                'in' 'contact.type', contactTypes
+            }
+
             if (filters?.login)
                 ilike 'login', filters.login
 
