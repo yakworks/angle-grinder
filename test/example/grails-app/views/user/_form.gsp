@@ -30,23 +30,29 @@
             </div>
         </div>
 
-        <div ag-field-group for="contactEmail">
+        <div ag-field-group for="contactEmail,login">
             <label class="control-label">${ag.label(code: "contact.email")}</label>
-
             <div class="controls">
                 <input type="email"
                        name="contactEmail" ng-model="item.contact.email" />
                 <ag-validation-errors for="contactEmail" />
             </div>
-        </div>
 
-        <div ag-field-group for="login">
             <label class="control-label">${ag.label(code: "user.login")}</label>
-
             <div class="controls">
                 <input type="text"
                        name="login" ng-model="item.login" required />
                 <ag-validation-errors for="login" />
+            </div>
+        </div>
+
+        <div ag-field-group for="activeDate">
+            <label class="control-label">${ag.label(code: "activeDate")}</label>
+            <div class="controls">
+                <input type="text"
+                       name="activeDate" ng-model="item.activeDate"
+                       ng-required="true" />
+                <ag-validation-errors for="activeDate" />
             </div>
         </div>
 
