@@ -73,7 +73,10 @@
         <div class="control-group">
             <label class="control-label">${ag.label(code: "contact.type")}</label>
             <div class="controls">
-                <input type="text" name="contactType" ng-model="item.contact.type" />
+                <select ui-select2 name="contactType" ng-model="item.contact.type">
+                    <option value="ADMIN">admin</option>
+                    <option value="CUSTOMER">customer</option>
+                </select>
                 <ag-validation-errors for="contactType" />
             </div>
         </div>
