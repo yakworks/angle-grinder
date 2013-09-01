@@ -70,6 +70,14 @@
             </div>
         </div>
 
+        <div class="control-group">
+            <label class="control-label">${ag.label(code: "contact.type")}</label>
+            <div class="controls">
+                <input type="text" name="contactType" ng-model="item.contact.type" />
+                <ag-validation-errors for="contactType" />
+            </div>
+        </div>
+
         <div ag-field-group for="contactOrgId">
             <label class="control-label">${ag.label(code: "user.org")}</label>
 

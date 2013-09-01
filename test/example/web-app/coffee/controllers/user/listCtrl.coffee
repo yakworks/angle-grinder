@@ -21,7 +21,11 @@ class ListCtrl
 
     # Displays a form for editing an exiting user
     $scope.editItem = (id) ->
-      Resource.get { id: id }, (user) ->
+      Resource.get { id: id }, (record) ->
+        # convert `Contact.type` enum field to string
+        user = angular.copy(record)
+        user.contact.type = record.contact.type?.name
+
         editDialog.open(pathWithContext("/user/formTemplate"), user)
 
     $scope.deleteItem = (id) ->
