@@ -36,7 +36,7 @@ class UserDao extends GormDaoSupport {
 
     void persistWithParams(user, params) {
         user.properties = params
-        user.contact.properties["firstName", "lastName", "email", "tagForReminders"] = params["contact"]
+        user.contact.properties["firstName", "lastName", "email", "tagForReminders", "type"] = params["contact"]
 
         def org = Org.get(params.contact.org.id)
         user.contact.org = org
