@@ -49,6 +49,18 @@
                     <input class="input-block-level" type="text" ng-model="search.contact.email">
                 </div>
             </div>
+
+            <div class="control-group span6">
+                <label class="control-label">${ag.label(code: "contact.type")}</label>
+
+                <div class="controls">
+                    <select ui-select2 ng-model="search.contact.type">
+                        <option value="">-- chose type --</option>
+                        <option value="ADMIN">admin</option>
+                        <option value="CUSTOMER">customer</option>
+                    </select>
+                </div>
+            </div>
         </div>
 
         <div class="pull-right">

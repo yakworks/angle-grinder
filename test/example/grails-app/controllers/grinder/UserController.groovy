@@ -47,6 +47,9 @@ class UserController extends BaseDomainController {
             if (fcontact?.email)
                 ilike 'contact.email', fcontact.email
 
+            if (fcontact?.type)
+                eq 'contact.type', fcontact.type == "ADMIN" ? ContactType.ADMIN : ContactType.CUSTOMER
+
             if (filters?.login)
                 ilike 'login', filters.login
 
