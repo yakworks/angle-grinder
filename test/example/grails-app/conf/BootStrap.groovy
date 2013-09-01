@@ -1,3 +1,5 @@
+import java.util.GregorianCalendar
+
 import grinder.ContactType
 
 class BootStrap {
@@ -34,10 +36,28 @@ class BootStrap {
 
         def sampleOrganizations = [firstOrg, secondOrg, thirdOrg]
 
+        def randomDate = { ->
+            def randBetween = { start, end ->
+                start + (int)Math.round(Math.random() * (end - start))
+            }
+
+            GregorianCalendar gc = new GregorianCalendar()
+
+            int year = randBetween(1983, 2013)
+            gc.set(gc.YEAR, year)
+
+            int dayOfYear = randBetween(1, gc.getActualMaximum(gc.DAY_OF_YEAR))
+            gc.set(gc.DAY_OF_YEAR, dayOfYear)
+
+            gc.getTime()
+        }
+
         userDao.insert(
                 login: "admin",
                 password: "secretStuff",
                 repassword: "secretStuff",
+                inactive: false,
+                activeDate: randomDate(),
 
                 contact: [
                         firstName: fakerService.firstName(),
@@ -62,6 +82,7 @@ class BootStrap {
                     password: "secretStuff",
                     repassword: "secretStuff",
                     inactive: generator.nextDouble() > 0.5,
+                    activeDate: randomDate(),
 
                     contact: [
                             firstName: fakerService.firstName(),
