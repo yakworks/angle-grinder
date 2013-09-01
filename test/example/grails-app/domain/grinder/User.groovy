@@ -23,6 +23,7 @@ class User implements Serializable {
 
     def getEnabled() { return !inactive }
 
+    Date activeDate
     Contact contact
 
     /** temporary plain password to create a MD5 password */
