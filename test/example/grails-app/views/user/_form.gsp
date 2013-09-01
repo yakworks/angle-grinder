@@ -87,7 +87,7 @@
             <div class="controls">
                 <select name="contactOrgId" ui-select2
                         ng-model="item.contact.org.id"
-                        required>
+                        ng-required="true">
                     <option value="">-- chose org --</option>
                     <option ng-repeat="org in orgs" value="{{org.id}}">{{org.name}}</option>
                 </select>

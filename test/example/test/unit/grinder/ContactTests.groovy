@@ -16,10 +16,11 @@ class ContactTests {
         def contact = new Contact()
         assert !contact.validate()
 
-        assertEquals 3, contact.errors.allErrors.size()
+        assertEquals 4, contact.errors.allErrors.size()
         assertEquals "blank", contact.errors["name"]
-        assertEquals "nullable", contact.errors["firstName"]
+        assertEquals "nullable", contact.errors["type"]
         assertEquals "nullable", contact.errors["org"]
+        assertEquals "nullable", contact.errors["firstName"]
     }
 
 }

@@ -112,9 +112,13 @@ class Contact {
 enum ContactType {
     ADMIN("admin"), CUSTOMER("customer")
 
-    final String contactType
+    final String name
 
-    ContactType(String contactType) {
-        this.contactType = contactType;
+    ContactType(String name) {
+        this.name = name
+    }
+
+    static ContactType byName(String name) {
+        values().find { it.name == name }
     }
 }

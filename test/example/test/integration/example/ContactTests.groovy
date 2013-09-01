@@ -1,8 +1,8 @@
 package example
 
 import grinder.Contact
+import grinder.ContactType
 import grinder.Org
-import grinder.User
 
 import org.junit.*
 import com.coderberry.faker.*
@@ -32,6 +32,7 @@ class ContactTests extends GroovyTestCase {
         def props = [
             org: org,
 
+            type:      ContactType.CUSTOMER,
             firstName: fakerService.firstName(),
             lastName:  fakerService.lastName(),
             email:     fakerService.email()
