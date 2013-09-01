@@ -87,9 +87,9 @@
             <div class="controls">
                 <select name="contactOrgId" ui-select2
                         ng-model="item.contact.org.id"
-                        ng-options="org.id as org.name for org in orgs"
                         required>
                     <option value="">-- chose org --</option>
+                    <option ng-repeat="org in orgs" value="{{org.id}}">{{org.name}}</option>
                 </select>
                 <ag-validation-errors for="contactOrgId" />
             </div>
