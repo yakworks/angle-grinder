@@ -43,8 +43,8 @@
       <label class="control-label">Birthday</label>
 
       <div class="controls">
-        <input type="text" name="birthday" placeholder="Birthday"
-               ng-model="item.birthday" />
+        <input type="text" ui-date="{ changeYear: true, changeMonth: true, yearRange: '1900:-0' }"
+               ng-model="item.birthday" required />
       </div>
     </div>
 

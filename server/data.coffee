@@ -12,7 +12,7 @@ class Data
       row.id = @nextId()
       row.login = "login-#{index}"
 
-      # parse time
+      # parse date
       row.birthday = new Date(row.birthday)
 
     data
@@ -62,25 +62,34 @@ class Data
       row.id is id
 
   # Create a new row
-  create: (data) ->
-    if @_validateLoginUniqueness(data)
-      data.id = @nextId()
-      @data.push(data)
-      data
+  create: (row) ->
+    if @_validateLoginUniqueness(row)
+      row.id = @nextId()
+      row.birthday = new Date(row.birthday)
+
+      @data.push(row)
+      row
     else
       error =
         code: 422
         status: "error"
         message: "User save failed"
-        errors: user: login: "Property [login] of class [User] with value [#{data.login}] must be unique"
+        errors: user: login: "Property [login] of class [User] with value [#{row.login}] must be unique"
       throw error
 
   # Update a row with the given id
   update: (id, data) ->
     if @_validateLoginUniqueness(data)
       row = @findById(id)
+
+      # assing all fields
       for key, value of data
         row[key] = value
+
+      # parse birthday
+      if row.birthday?
+        row.birthday = new Date(row.birthday)
+
       row
     else
       error =

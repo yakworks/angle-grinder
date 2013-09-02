@@ -12,7 +12,11 @@ class UsersListCtrl
 
     $scope.editItem = (id) ->
       Users.get { id: id }, (user) ->
-        editDialog.open(pathWithContext("templates/partials/userForm.html"), user)
+        # copy user object and parse the date
+        row = angular.copy(user)
+        row.birthday = new Date(row.birthday)
+
+        editDialog.open(pathWithContext("templates/partials/userForm.html"), row)
 
     $scope.createItem = ->
       user = new Users()
