@@ -1,11 +1,7 @@
 class FormCtrl
   @$inject = ["$scope", "$location", "user"]
   constructor: ($scope, $location, user) ->
-    # copy user object and parse the date
-    row = angular.copy(user)
-    row.birthday = new Date(row.birthday)
-
-    $scope.user = row
+    $scope.user = user
 
     # Performs server side create or update
     $scope.save = (user) ->
