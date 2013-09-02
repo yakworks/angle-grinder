@@ -8,8 +8,12 @@ class Data
   loadData: ->
     data = require("./large_load")
     for row, index in data
+      # generate row id and login
       row.id = @nextId()
       row.login = "login-#{index}"
+
+      # parse time
+      row.birthday = new Date(row.birthday)
 
     data
 
