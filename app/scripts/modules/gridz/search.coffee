@@ -34,6 +34,8 @@ gridz.directive "agSearchForm", ["$rootScope", ($rootScope) ->
   restrict: "A"
   scope: false
   link: ($scope, $element, attrs) ->
+    $element.addClass "ag-search-form"
+
     $scope.searching = false
     $scope.search = {}
 

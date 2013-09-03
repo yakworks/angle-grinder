@@ -1,4 +1,8 @@
-forms = angular.module("angleGrinder.forms", ["angleGrinder.common", "ui.bootstrap"])
+forms = angular.module("angleGrinder.forms", [
+  "angleGrinder.common",
+  "ui.bootstrap"
+  "ui.date"
+])
 
 class FormDialogCtrl
   @$inject = ["$scope", "$rootScope", "$log", "dialog", "item", "flatten"]
