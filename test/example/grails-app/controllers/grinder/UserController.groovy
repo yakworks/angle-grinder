@@ -5,8 +5,6 @@ import grails.plugin.dao.DomainException
 
 import java.text.SimpleDateFormat
 
-import static javax.servlet.http.HttpServletResponse.SC_CREATED
-
 class UserController extends BaseDomainController {
     static final int SC_UNPROCESSABLE_ENTITY = 422
 
@@ -67,7 +65,7 @@ class UserController extends BaseDomainController {
                 gt 'activeDate', from
             }
 
-            if (filters.activeDate?.to) {
+            if (filters?.activeDate?.to) {
                 def to = dateFormat.parse(filters.activeDate.to)
                 lt 'activeDate', to
             }
