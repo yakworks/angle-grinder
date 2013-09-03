@@ -1,6 +1,6 @@
 class UsersListCtrl
-  @$inject = ["$scope", "$log", "$dialog", "confirmationDialog", "editDialog", "Users", "pathWithContext"]
-  constructor: ($scope, $log, $dialog, confirmationDialog, editDialog, Users, pathWithContext) ->
+  @$inject = ["$scope", "$log", "$dialog", "$filter", "confirmationDialog", "editDialog", "Users", "pathWithContext"]
+  constructor: ($scope, $log, $dialog, @$filter, confirmationDialog, editDialog, Users, pathWithContext) ->
     # intitially show the form
     $scope.showSearchForm = true
 
@@ -49,6 +49,7 @@ class UsersListCtrl
     ,
       name: "birthday"
       label: "Birthday"
+      formatter: (cellVal) => @$filter("date")(cellVal)
     ,
       name: "paid"
       label: "Paid"
