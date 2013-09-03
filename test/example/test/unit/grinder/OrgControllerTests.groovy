@@ -42,6 +42,7 @@ class OrgControllerTests {
     }
 
     @Test
+    @Ignore
     void listUsers() {
         // Given
         def firstOrg = new Org(name: "first firstOrg", num: "111").save()
@@ -62,7 +63,6 @@ class OrgControllerTests {
 
         def json = response.json
         assertEquals 1, json.page
-        // TODO assertEquals 2, json.rows.size()
     }
 
 }

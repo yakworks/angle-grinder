@@ -1,7 +1,7 @@
 class ListCtrl
 
-  @$inject = ["$scope", "$log", "confirmationDialog", "editDialog", "Resource", "pathWithContext"]
-  constructor: ($scope, $log, confirmationDialog, editDialog, Resource, pathWithContext) ->
+  @$inject = ["$scope", "$log", "$filter", "confirmationDialog", "editDialog", "Resource", "pathWithContext"]
+  constructor: ($scope, $log, @$filter, confirmationDialog, editDialog, Resource, pathWithContext) ->
     $scope.gridOptions =
       url: pathWithContext("/user/list.json")
       colModel: @colModel()
@@ -43,6 +43,7 @@ class ListCtrl
       { name: "contact.name", label: "Contact Name", width: 100, fixed: true, formatter: "editActionLink" }
       { name: "contact.email", label: "Contact Email", width: 70, align: "right", formatter: "email" }
       { name: "login", label: "Login", width: 70 }
+      { name: "activeDate", label: "Active Date", width: 70, formatter: (cellVal) => @$filter("date")(cellVal) }
       { name: "inactive", label: "Inactive", width: 30, align: "center", formatter: "okIcon" }
     ]
 

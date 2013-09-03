@@ -5,6 +5,9 @@ import grails.plugin.dao.DomainException
 import grails.plugin.dao.DaoUtil
 import grails.plugin.dao.DaoMessage
 
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+
 class UserDao extends GormDaoSupport {
     Class domainClass = User
 
@@ -35,6 +38,12 @@ class UserDao extends GormDaoSupport {
     }
 
     void persistWithParams(user, params) {
+        // parse date from the string
+        if (params.activeDate && params.activeDate instanceof String) {
+            def formatter = new SimpleDateFormat("yyyy-MM-dd")
+            params.activeDate = formatter.parse(params.activeDate)
+        }
+
         user.properties = params
         user.contact.properties["firstName", "lastName", "email", "tagForReminders", "type"] = params["contact"]
 
