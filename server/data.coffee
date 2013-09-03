@@ -34,12 +34,28 @@ class Data
     new Data(data)
 
   search: (filters) ->
-    allowance = if filters.allowance isnt "" then parseInt(filters.allowance) else null
     data = _.filter @data, (row) ->
-      nameMatch = if filters.name? then row.name.match ///#{filters.name.trim()}///i else true
-      allowanceMath = if allowance? then row.allowance == allowance else true
+      nameMatch = true
+      if filters.name?
+        nameMatch = row.name.match ///#{filters.name.trim()}///i
 
-      nameMatch and allowanceMath
+      allowanceMatch = true
+      if filters.allowance? and filters.allowance isnt ""
+        allowanceMatch = row.allowance == parseInt(filters.allowance)
+
+      birthdayMatch = true
+      if filters.birthday?
+        fromMatch = true
+        if filters.birthday.from?
+          fromMatch = row.birthday >= new Date(filters.birthday.from)
+
+        toMatch = true
+        if filters.birthday.to?
+          toMatch = row.birthday <= new Date(filters.birthday.to)
+
+        birthdayMatch = fromMatch and toMatch
+
+      nameMatch and allowanceMatch and birthdayMatch
 
     # Construct a new data object with filtered rows
     new Data(data)
@@ -65,9 +81,12 @@ class Data
   create: (row) ->
     if @_validateLoginUniqueness(row)
       row.id = @nextId()
-      row.birthday = new Date(row.birthday)
+
+      # parse birthday
+      row.birthday = new Date(row.birthday) if row.birthday?
 
       @data.push(row)
+
       row
     else
       error =
@@ -87,8 +106,7 @@ class Data
         row[key] = value
 
       # parse birthday
-      if row.birthday?
-        row.birthday = new Date(row.birthday)
+      row.birthday = new Date(row.birthday) if row.birthday?
 
       row
     else
