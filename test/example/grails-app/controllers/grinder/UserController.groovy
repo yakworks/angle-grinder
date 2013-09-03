@@ -3,6 +3,8 @@ package grinder
 import grails.converters.JSON
 import grails.plugin.dao.DomainException
 
+import java.text.SimpleDateFormat
+
 import static javax.servlet.http.HttpServletResponse.SC_CREATED
 
 class UserController extends BaseDomainController {
@@ -57,6 +59,18 @@ class UserController extends BaseDomainController {
 
             if (filters?.login)
                 ilike 'login', filters.login
+
+            def dateFormat = new SimpleDateFormat("yyyy-MM-dd")
+
+            if (filters?.activeDate?.from) {
+                def from = dateFormat.parse(filters.activeDate.from)
+                gt 'activeDate', from
+            }
+
+            if (filters.activeDate?.to) {
+                def to = dateFormat.parse(filters.activeDate.to)
+                lt 'activeDate', to
+            }
 
             if (params.sort)
                 order(params.sort, params.order)

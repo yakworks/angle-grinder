@@ -35,6 +35,7 @@ class UserDaoTests extends GroovyTestCase {
                 password: "secretStuff",
                 repassword: "secretStuff",
                 inactive: false,
+                activeDate: "2008-02-18T23:00:00.000Z",
 
                 contact: contactProps
         ]
@@ -43,6 +44,13 @@ class UserDaoTests extends GroovyTestCase {
 
         assert user
         assertEquals "test-login", user.login
+
+        Calendar cal = Calendar.getInstance()
+        cal.setTime(user.activeDate)
+
+        assertEquals 2008, cal.get(Calendar.YEAR)
+        assertEquals 1, cal.get(Calendar.MONTH)
+        assertEquals 18, cal.get(Calendar.DAY_OF_MONTH)
 
         assert user.contact
         assertEquals contactProps.firstName, user.contact.firstName
