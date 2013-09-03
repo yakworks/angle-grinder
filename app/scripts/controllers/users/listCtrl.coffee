@@ -1,6 +1,6 @@
 class ListCtrl
-  @$inject = ["$scope", "$location", "pathWithContext"]
-  constructor: ($scope, $location, pathWithContext) ->
+  @$inject = ["$scope", "$location", "$filter", "pathWithContext"]
+  constructor: ($scope, $location, @$filter, pathWithContext) ->
 
     $scope.gridOptions =
       url: pathWithContext("/api/users")
@@ -38,7 +38,8 @@ class ListCtrl
       label: "Allowance"
     ,
       name: "birthday"
-      label: "Birthday"
+      label: "Birthday",
+      formatter: (cellVal) => @$filter("date")(cellVal)
     ,
       name: "paid"
       label: "Paid"

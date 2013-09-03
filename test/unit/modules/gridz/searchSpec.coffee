@@ -121,6 +121,9 @@ describe "module: angleGrinder.gridz", ->
         </form>
       """, $injector
 
+    it "has a valid css class", ->
+      expect(element).toHaveClass "ag-search-form"
+
     describe "on submit button click", ->
       $searchButton = null
       beforeEach ->

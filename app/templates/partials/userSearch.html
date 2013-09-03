@@ -2,6 +2,50 @@
   <form ag-search-form class="form-horizontal form-multi-column no-margin">
     <div class="row-fluid">
       <div class="control-group span6">
+        <label class="control-label">Name</label>
+        <div class="controls">
+          <input type="text" ng-model="search.name">
+        </div>
+      </div>
+
+      <div class="control-group span6">
+        <label class="control-label">Allowance</label>
+        <div class="controls">
+          <input type="text" ng-model="search.allowance">
+        </div>
+      </div>
+    </div>
+
+    <div class="row-fluid">
+      <div class="control-group span6">
+        <label class="control-label">Birthday from</label>
+        <div class="controls">
+          <input type="text"
+                 ui-date="{ changeYear: true, changeMonth: true, yearRange: '1900:-0' }"
+                 ui-date-format
+                 ng-model="search.birthday.from" />
+          <button class="btn" ng-click="search.birthday.from = null">
+            <i class="icon-remove"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="control-group span6">
+        <label class="control-label">Birthday to</label>
+        <div class="controls">
+          <input type="text"
+                 ui-date="{ changeYear: true, changeMonth: true, yearRange: '1900:-0' }"
+                 ui-date-format
+                 ng-model="search.birthday.to" />
+          <button class="btn" ng-click="search.birthday.to = null">
+            <i class="icon-remove"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="row-fluid">
+      <div class="control-group span8">
         <label class="control-label" >Org</label>
         <div class="controls">
           <div class="input-append">
@@ -19,20 +63,6 @@
             </ag-select2>
 
           </div>
-        </div>
-      </div>
-
-      <div class="control-group span6">
-        <label class="control-label">Name</label>
-        <div class="controls">
-          <input class="input-block-level" type="text" ng-model="search.name">
-        </div>
-      </div>
-
-      <div class="control-group span6">
-        <label class="control-label">Allowance</label>
-        <div class="controls">
-          <input class="input-block-level" type="text" ng-model="search.allowance">
         </div>
       </div>
     </div>

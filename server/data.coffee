@@ -8,8 +8,12 @@ class Data
   loadData: ->
     data = require("./large_load")
     for row, index in data
+      # generate row id and login
       row.id = @nextId()
       row.login = "login-#{index}"
+
+      # parse date
+      row.birthday = new Date(row.birthday)
 
     data
 
@@ -30,12 +34,28 @@ class Data
     new Data(data)
 
   search: (filters) ->
-    allowance = if filters.allowance isnt "" then parseInt(filters.allowance) else null
     data = _.filter @data, (row) ->
-      nameMatch = if filters.name? then row.name.match ///#{filters.name.trim()}///i else true
-      allowanceMath = if allowance? then row.allowance == allowance else true
+      nameMatch = true
+      if filters.name?
+        nameMatch = row.name.match ///#{filters.name.trim()}///i
 
-      nameMatch and allowanceMath
+      allowanceMatch = true
+      if filters.allowance? and filters.allowance isnt ""
+        allowanceMatch = row.allowance == parseInt(filters.allowance)
+
+      birthdayMatch = true
+      if filters.birthday?
+        fromMatch = true
+        if filters.birthday.from?
+          fromMatch = row.birthday >= new Date(filters.birthday.from)
+
+        toMatch = true
+        if filters.birthday.to?
+          toMatch = row.birthday <= new Date(filters.birthday.to)
+
+        birthdayMatch = fromMatch and toMatch
+
+      nameMatch and allowanceMatch and birthdayMatch
 
     # Construct a new data object with filtered rows
     new Data(data)
@@ -58,25 +78,36 @@ class Data
       row.id is id
 
   # Create a new row
-  create: (data) ->
-    if @_validateLoginUniqueness(data)
-      data.id = @nextId()
-      @data.push(data)
-      data
+  create: (row) ->
+    if @_validateLoginUniqueness(row)
+      row.id = @nextId()
+
+      # parse birthday
+      row.birthday = new Date(row.birthday) if row.birthday?
+
+      @data.push(row)
+
+      row
     else
       error =
         code: 422
         status: "error"
         message: "User save failed"
-        errors: user: login: "Property [login] of class [User] with value [#{data.login}] must be unique"
+        errors: user: login: "Property [login] of class [User] with value [#{row.login}] must be unique"
       throw error
 
   # Update a row with the given id
   update: (id, data) ->
     if @_validateLoginUniqueness(data)
       row = @findById(id)
+
+      # assing all fields
       for key, value of data
         row[key] = value
+
+      # parse birthday
+      row.birthday = new Date(row.birthday) if row.birthday?
+
       row
     else
       error =
