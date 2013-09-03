@@ -60,6 +60,34 @@
             </div>
         </div>
 
+        <div class="row-fluid">
+            <div class="control-group span6">
+                <label class="control-label">Active Date from</label>
+                <div class="controls">
+                    <input type="text"
+                           ui-date="{ changeYear: true, changeMonth: true, yearRange: '1900:-0' }"
+                           ui-date-format
+                           ng-model="search.activeDate.from" />
+                    <button class="btn" ng-click="search.activeDate.from = null">
+                        <i class="icon-remove"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="control-group span6">
+                <label class="control-label">Active Date to</label>
+                <div class="controls">
+                    <input type="text"
+                           ui-date="{ changeYear: true, changeMonth: true, yearRange: '1900:-0' }"
+                           ui-date-format
+                           ng-model="search.activeDate.to" />
+                    <button class="btn" ng-click="search.activeDate.to = null">
+                        <i class="icon-remove"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
         <div class="pull-right">
             <ag-search-button></ag-search-button>
             <ag-reset-search-button></ag-reset-search-button>
