@@ -3,5 +3,11 @@
 
   <ag-create-button href="#/users/create">Create user</ag-create-button>
 
+  <button class="btn" ng-click="toggleAllowance()">
+    <span ng-show="!showAllowance">Show</span>
+    <span ng-show="showAllowance">Hide</span>
+    Allowance
+  </button>
+
   <div ag-grid="gridOptions"></div>
 </section>

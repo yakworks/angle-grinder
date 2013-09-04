@@ -16,6 +16,19 @@ class ListCtrl
     $scope.editItem = (id) ->
       $location.path("/users/#{id}/edit")
 
+    # TODO work in progress, this is only a prototype
+    $scope.showAllowance = false
+    $scope.toggleAllowance = ->
+      $scope.showAllowance = !$scope.showAllowance
+      $grid = $("#grid")
+
+      if $scope.showAllowance
+        $grid.jqGrid("showCol", "allowance")
+      else
+        $grid.jqGrid("hideCol", "allowance")
+
+      $grid.trigger("resize")
+
   gridColumns: ->
     showActionLink = (cellVal, options, rowdata) ->
       """
@@ -37,6 +50,7 @@ class ListCtrl
     ,
       name: "allowance"
       label: "Allowance"
+      hidden: true
     ,
       name: "birthday"
       label: "Birthday",
