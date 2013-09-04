@@ -16,18 +16,23 @@ class ListCtrl
     $scope.editItem = (id) ->
       $location.path("/users/#{id}/edit")
 
-    # TODO work in progress, this is only a prototype
-    $scope.showAllowance = false
+    # TODO work in progress, this is only a
+    # Toggle `allowance` column
     $scope.toggleAllowance = ->
-      $scope.showAllowance = !$scope.showAllowance
       $grid = $("#grid")
 
-      if $scope.showAllowance
+      if $scope.isHidden "allowance"
         $grid.jqGrid("showCol", "allowance")
       else
         $grid.jqGrid("hideCol", "allowance")
 
       $grid.trigger("resize")
+
+    # Return `true` if a columnt with the given id is hidden
+    $scope.isHidden = (columnId) ->
+      colModel = $("#grid").jqGrid("getGridParam", "colModel")
+      column = _.findWhere(colModel, name: columnId)
+      column?.hidden
 
   gridColumns: ->
     showActionLink = (cellVal, options, rowdata) ->
