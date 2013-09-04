@@ -69,6 +69,7 @@ gridz.directive "agGrid", [
           $scope.$broadcast "gridzLoadComplete"
 
         # catch broadcast event after save. This will need to change
+        # TODO move this method to the controller
         $scope.$on "itemUpdated", (event, item) ->
           if $grid.jqGrid("getInd", item.id)
             $grid.jqGrid "setRowData", item.id, item
@@ -77,10 +78,12 @@ gridz.directive "agGrid", [
 
           flashRowFor item
 
+        # TODO move this method to the controller
         $scope.$on "itemDeleted", (event, item) ->
           flashRowFor item, ->
             $grid.jqGrid "delRowData", item.id
 
+        # TODO move this method to the controller
         $scope.$on "searchUpdated", (event, filters) ->
           params =
             search: hasSearchFilters(filters)
@@ -97,23 +100,8 @@ gridz.directive "agGrid", [
               """
     link: link
 
-    # TODO create separate controller
-    # TODO write specs
     require: "agGrid"
-    controller: ($scope, $element) ->
-      $grid = $element.find("#grid")
-
-      # Toggle visibility of a column with the given id
-      @isColumnHidden = (columnId) ->
-        colModel = $grid.jqGrid("getGridParam", "colModel")
-        column = _.findWhere(colModel, name: columnId)
-        column?.hidden
-
-      # Return `true` if a columnt with the given id is hidden
-      @toggleColumn = (columnId) ->
-        showOrHide = if @isColumnHidden(columnId) then "showCol" else "hideCol"
-        $grid.jqGrid(showOrHide, columnId)
-        $grid.trigger("resize")
+    controller: "AgGridCtrl"
 ]
 
 # Takes a nested Javascript object and flatten it.
