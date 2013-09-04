@@ -5,6 +5,7 @@ class ListCtrl
     $scope.gridOptions =
       url: pathWithContext("/api/users")
       colModel: @gridColumns()
+      shrinkToFit: true
       rowNum: 10
       sortname: "id"
       multiselect: false
