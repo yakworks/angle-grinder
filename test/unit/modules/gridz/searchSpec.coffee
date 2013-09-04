@@ -61,13 +61,18 @@ describe "module: angleGrinder.gridz", ->
       beforeEach ->
         $scope.search = name: "find it"
         $scope.advancedSearch = (params) ->
-        spyOn($scope, "advancedSearch")
 
       it "calls #advancedSearch with valid params", ->
+        # Given
+        expectation = sinon.mock($scope)
+          .expects("advancedSearch")
+          .withArgs(name: "find it")
+
         # When
         element.click()
+
         # Then
-        expect($scope.advancedSearch).toHaveBeenCalledWith name: "find it"
+        expect(expectation.verify()).toBeTruthy()
 
   describe "directive: agResetSearchButton", ->
     $scope = null
