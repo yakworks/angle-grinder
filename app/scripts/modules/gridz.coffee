@@ -5,12 +5,17 @@ gridz = angular.module("angleGrinder.gridz", [
 
 gridz.directive "agGrid", [
   "hasSearchFilters", "$log", (hasSearchFilters, $log) ->
-    link = ($scope, $element, attrs) ->
+    link = ($scope, $element, attrs, gridCtrl) ->
+      # publish agGrid controller to the parent scope
+      alias = attrs.agGridName
+      $scope[alias] = gridCtrl if alias?
+
       # Initializes a grid with the given options
       initializeGrid = (gridOptions) ->
         return unless gridOptions?
         $log.info "Initializing the grid", gridOptions
 
+        # TODO generate unique grid id
         $grid = $("#grid", $element)
 
         # workaround for problem with initial grid size inside the hidden container
@@ -91,6 +96,24 @@ gridz.directive "agGrid", [
               <div id="gridPager"></div>
               """
     link: link
+
+    # TODO create separate controller
+    # TODO write specs
+    require: "agGrid"
+    controller: ($scope, $element) ->
+      $grid = $element.find("#grid")
+
+      # Toggle visibility of a column with the given id
+      @isColumnHidden = (columnId) ->
+        colModel = $grid.jqGrid("getGridParam", "colModel")
+        column = _.findWhere(colModel, name: columnId)
+        column?.hidden
+
+      # Return `true` if a columnt with the given id is hidden
+      @toggleColumn = (columnId) ->
+        showOrHide = if @isColumnHidden(columnId) then "showCol" else "hideCol"
+        $grid.jqGrid(showOrHide, columnId)
+        $grid.trigger("resize")
 ]
 
 # Takes a nested Javascript object and flatten it.
