@@ -3,10 +3,16 @@
 
   <ag-create-button href="#/users/create">Create user</ag-create-button>
 
-  <button class="btn" ng-click="toggleAllowance()">
-    <span ng-show="isHidden('allowance')">Show</span>
-    <span ng-hide="isHidden('allowance')">Hide</span>
+  <button class="btn" ng-click="toggleColumn('allowance')">
+    <span ng-show="isColumnHidden('allowance')">Show</span>
+    <span ng-hide="isColumnHidden('allowance')">Hide</span>
     Allowance
+  </button>
+
+  <button class="btn" ng-click="toggleColumn('birthday')">
+    <span ng-show="isColumnHidden('birthday')">Show</span>
+    <span ng-hide="isColumnHidden('birthday')">Hide</span>
+    Birthday
   </button>
 
   <div ag-grid="gridOptions"></div>
