@@ -12,9 +12,10 @@ forms.directive "agDeleteButton", ->
 
   scope:
     whenConfirmed: "&"
+    promise: "="
 
   controller: [
-    "$scope", "pendingRequests", "$element", ($scope, pendingRequests, $element) ->
+    "$scope", "$element", ($scope, $element) ->
       $scope.confirmation = false
 
       $scope.delete = ->
@@ -22,9 +23,6 @@ forms.directive "agDeleteButton", ->
         $scope.whenConfirmed() if $scope.confirmation
         # switch the state
         $scope.confirmation = !$scope.confirmation
-
-      # enable / disable the button if a request in progress
-      $scope.$watch -> $scope.deleting = pendingRequests.for("POST", "DELETE")
 
       # change button label
       $scope.$watch "confirmation", (confirmation) ->
@@ -39,10 +37,10 @@ forms.directive "agDeleteButton", ->
   ]
 
   template: """
-    <button type="button" class="btn btn-danger ag-delete-button" ng-disabled="deleting"
+    <button type="button" class="btn btn-danger ag-delete-button" ng-disabled="!promise"
             ng-mouseleave="confirmation = false"
             ng-click="delete()">
-      <i class="icon-trash"></i> {{label}}<span ng-show="deleting">...</span>
+      <i class="icon-trash"></i> {{label}}<span ng-hide="promise">...</span>
     </button>
   """
 
@@ -74,23 +72,19 @@ forms.directive "agCancelButton", ->
   """
 
 forms.directive "agSubmitButton", ->
-  restrict: "E"
+  restrict: "E" # TODO change it to the attribute
   replace: true
-  scope: true
   require: "^form"
+  scope: promise: "=" # TODO if promise is not set it's always enabled
+  # TODO aility to set multiple promises
 
   link: ($scope, element, attrs, form) ->
     $scope.submit = -> form.$submitted = true
 
-  controller: ["$scope", "pendingRequests", ($scope, pendingRequests) ->
-    # disable the button if POST, PUT or PATCH request is in progress
-    $scope.$watch -> $scope.saving = pendingRequests.for("POST", "PUT", "PATCH")
-  ]
-
   template: """
     <button type="submit" class="btn btn-primary"
             ng-click="submit()"
-            ng-disabled="saving"
-      <i class="icon-ok icon-white"></i> Save<span ng-show="saving">...</span>
+            ng-disabled="!promise"
+      <i class="icon-ok icon-white"></i> Save<span ng-show="!promise">...</span>
     </button>
   """
