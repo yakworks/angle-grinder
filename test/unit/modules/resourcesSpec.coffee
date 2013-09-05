@@ -66,7 +66,7 @@ describe "module: angleGrinder.resources", ->
 
       beforeEach ->
         user = new Users()
-        onSuccess = jasmine.createSpy("#onSuccess callback")
+        onSuccess = sinon.stub()
 
       describe "when the record is persisted", ->
         beforeEach -> user.id = 102
@@ -82,9 +82,9 @@ describe "module: angleGrinder.resources", ->
           $httpBackend.flush()
 
           # Then
-          expect(onSuccess).toHaveBeenCalled()
+          expect(onSuccess.called).toBeTruthy()
 
-          args = onSuccess.mostRecentCall.args[0]
+          args = onSuccess.lastCall.args[0]
           expect(args.id).toEqual 102
           expect(args.foo).toEqual "bar"
 
@@ -102,9 +102,9 @@ describe "module: angleGrinder.resources", ->
           $httpBackend.flush()
 
           # Then
-          expect(onSuccess).toHaveBeenCalled()
+          expect(onSuccess.called).toBeTruthy()
 
-          args = onSuccess.mostRecentCall.args[0]
+          args = onSuccess.lastCall.args[0]
           expect(args.id).toEqual 103
           expect(args.foo).toEqual "biz"
 
@@ -114,7 +114,7 @@ describe "module: angleGrinder.resources", ->
         beforeEach ->
           user.id = null
           $httpBackend.whenPOST("/api/users").respond 500, "error!"
-          onError = jasmine.createSpy("#onError callback")
+          onError = sinon.stub()
 
         it "handles the error", ->
           # When
@@ -122,11 +122,11 @@ describe "module: angleGrinder.resources", ->
           $httpBackend.flush()
 
           # Then
-          expect(onError).toHaveBeenCalled()
+          expect(onError.called).toBeTruthy()
 
     describe "#delete", ->
       user = null
-      onComplete = jasmine.createSpy("#onComplete callback")
+      onComplete = sinon.stub()
 
       beforeEach ->
         user = new Users(id: 123)
@@ -141,9 +141,9 @@ describe "module: angleGrinder.resources", ->
           $httpBackend.flush()
 
           # Then
-          expect(onComplete).toHaveBeenCalled()
+          expect(onComplete.called).toBeTruthy()
 
-          args = onComplete.mostRecentCall.args[0]
+          args = onComplete.lastCall.args[0]
           expect(args.id).toEqual 123
 
       describe "when the action ends with failure", ->
@@ -151,7 +151,7 @@ describe "module: angleGrinder.resources", ->
 
         beforeEach ->
           $httpBackend.whenDELETE("/api/users/123").respond 404, "error!"
-          onError = jasmine.createSpy("#onError callback")
+          onError = sinon.stub()
 
         it "handles the error", ->
           # When
@@ -159,7 +159,7 @@ describe "module: angleGrinder.resources", ->
           $httpBackend.flush()
 
           # Then
-          expect(onError).toHaveBeenCalled()
+          expect(onError.called).toBeTruthy()
 
   describe "service: userResolver", ->
     $httpBackend = null

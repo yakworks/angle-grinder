@@ -18,6 +18,13 @@ module.exports = (config) ->
       "bower_components/angular/angular-route.js"
       "bower_components/jasmine-jquery/lib/jasmine-jquery.js"
 
+      "bower_components/sinon/lib/sinon.js"
+      "bower_components/sinon/lib/sinon/spy.js"
+      "bower_components/sinon/lib/sinon/call.js"
+      "bower_components/sinon/lib/sinon/stub.js"
+      "bower_components/sinon/lib/sinon/mock.js"
+      "bower_components/sinon/lib/sinon/assert.js"
+
       "bower_components/jqgrid/js/grid.base.js"
       "bower_components/select2/select2.js"
       "bower_components/angular-ui-select2/src/select2.js"

@@ -21,53 +21,54 @@ describe "controller: UsersListCtrl", ->
       expect($scope.gridOptions.colModel[5].name).toEqual "paid"
 
     describe "#editItem", ->
-      user = id: 123, name: "Test User"
+      resourceStub = null
+      dialogSpy = null
 
-      beforeEach inject ($httpBackend, editDialog) ->
-        $httpBackend.whenGET("/api/users/#{user.id}").respond(user)
-        spyOn(editDialog, "open")
+      beforeEach inject (Users, editDialog) ->
+        resourceStub = sinon.stub(Users, "get").returns($promise: {})
+        dialogSpy = sinon.spy(editDialog, "open")
 
-      it "opens a dialog for editing the item", inject ($httpBackend, editDialog) ->
-        # When
-        $scope.editItem(user.id)
-        $httpBackend.flush()
+        $scope.editItem(123)
 
-        # Then
-        expect(editDialog.open).toHaveBeenCalled()
+      it "loads a resource", ->
+        expect(resourceStub.called).toBeTruthy()
+        expect(resourceStub.calledWith(id: 123)).toBeTruthy()
 
-        args = editDialog.open.mostRecentCall.args
-        expect(args[0]).toEqual "templates/partials/userForm.html"
-        expect(args[1].id).toEqual user.id
+      it "opens a dialog for editing loaded resource", ->
+        expect(dialogSpy.called).toBeTruthy()
+        expect(dialogSpy.calledWith("templates/partials/userForm.html", {})).toBeTruthy()
 
     describe "#createItem", ->
-      beforeEach inject (editDialog) ->
-        spyOn(editDialog, "open")
+      dialogSpy = null
 
-      it "opens a dialog for editing the item", inject (editDialog) ->
-        # When
+      beforeEach inject (editDialog) ->
+        dialogSpy = sinon.spy(editDialog, "open")
+
         $scope.createItem()
 
-        # Then
-        expect(editDialog.open).toHaveBeenCalled()
-
-        args = editDialog.open.mostRecentCall.args
-        expect(args[0]).toEqual "templates/partials/userForm.html"
+      it "opens a dialog for editing an item", ->
+        expect(dialogSpy.called).toBeTruthy()
+        expect(dialogSpy.calledWith("templates/partials/userForm.html")).toBeTruthy()
 
     describe "#deleteItem", ->
-      user = id: 234
+      user = null
+      beforeEach -> user = id: 123
 
       it "opens the confirmation dialog", inject (confirmationDialog) ->
-        spyOn(confirmationDialog, "open").andCallThrough()
-        $scope.deleteItem(user.id)
-        expect(confirmationDialog.open).toHaveBeenCalled()
+        # Given
+        spy = sinon.spy(confirmationDialog, "open")
+
+        # When
+        $scope.deleteItem(123)
+
+        # Then
+        expect(spy.called).toBeTruthy()
 
       describe "when the dialog was confirmed", ->
-        beforeEach inject (confirmationDialog, $httpBackend) ->
-          spyOn(confirmationDialog, "open").andReturn
-            then: (fn) -> fn(true)
-
-          $httpBackend.expectDELETE("/api/users/#{user.id}").respond({})
+        beforeEach inject (confirmationDialog) ->
+          sinon.stub(confirmationDialog, "open").returns(then: (fn) -> fn(true))
 
         it "deleates the user", inject ($httpBackend) ->
-          $scope.deleteItem(user.id)
+          $httpBackend.expectDELETE("/api/users/#{user.id}").respond({})
+          $scope.deleteItem(123)
           $httpBackend.flush()
