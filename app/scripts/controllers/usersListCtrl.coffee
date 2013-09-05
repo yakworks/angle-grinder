@@ -11,8 +11,8 @@ class UsersListCtrl
       sortname: "id"
 
     $scope.editItem = (id) ->
-      Users.get { id: id }, (user) ->
-        editDialog.open(pathWithContext("templates/partials/userForm.html"), user)
+      promise = Users.get(id: id).$promise
+      editDialog.open(pathWithContext("templates/partials/userForm.html"), promise)
 
     $scope.createItem = ->
       user = new Users()

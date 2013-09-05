@@ -4,22 +4,22 @@ describe "module: angleGrinder.spinner", ->
   describe "service: httpRequestTracker", ->
     httpRequestTracker = null
 
-    # create spy on `pendingRequests` service
+    # stubs `pendingRequests` service
     beforeEach module "angleGrinder.common", ($provide) ->
-      $provide.value "pendingRequests", jasmine.createSpy("pendingRequests")
+      $provide.value "pendingRequests", sinon.stub()
       return
 
     beforeEach inject (_httpRequestTracker_) ->
       httpRequestTracker = _httpRequestTracker_
 
     describe "when no requests is progress", ->
-      beforeEach inject (pendingRequests) -> pendingRequests.andReturn(false)
+      beforeEach inject (pendingRequests) -> pendingRequests.returns(false)
 
       it "does not report pending requests", ->
         expect(httpRequestTracker.hasPendingRequests()).toBeFalsy()
 
     describe "when some requests are in progress", ->
-      beforeEach inject (pendingRequests) -> pendingRequests.andReturn(true)
+      beforeEach inject (pendingRequests) -> pendingRequests.returns(true)
 
       it "reports pending requests", ->
         expect(httpRequestTracker.hasPendingRequests()).toBeTruthy()

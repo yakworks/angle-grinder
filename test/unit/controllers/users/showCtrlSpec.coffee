@@ -19,17 +19,19 @@ describe "controller: users.ShowCtrl", ->
       expect($scope.delete).toBeDefined()
 
     describe "on success", ->
+      locationStub = null
+      recordSpy = null
+
+      beforeEach inject ($location) ->
+        fakeUser = delete: (options) -> options.success()
+        recordSpy = sinon.spy(fakeUser, "delete")
+        locationStub = sinon.stub($location, "path")
+
+        $scope.delete(fakeUser)
+
+      it "deletes a record", ->
+        expect(recordSpy.called).toBeTruthy()
+
       it "redirects to the users list page", inject ($location) ->
-        spyOn($location, "path")
-
-        # Given
-        userSpy = jasmine.createSpyObj("user", ["delete"])
-        userSpy.delete.andCallFake (options) ->
-          options.success()
-
-        # When
-        $scope.delete(userSpy)
-
-        # Then
-        expect(userSpy.delete).toHaveBeenCalled()
-        expect($location.path).toHaveBeenCalledWith("/users")
+        expect(locationStub.called).toBeTruthy()
+        expect(locationStub.calledWith("/users")).toBeTruthy()

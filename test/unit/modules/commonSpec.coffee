@@ -29,9 +29,10 @@ describe "module: angleGrinder.common", ->
             expect(pathWithContext(path)).toEqual "/other-example/users/1.json"
 
   describe "filter: withContext", ->
-    # create spy on `pathWithContext` service
+
+    # stubs `pathWithContext` service
     beforeEach module "angleGrinder.common", ($provide) ->
-      $provide.value "pathWithContext", jasmine.createSpy("pathWithContext")
+      $provide.value "pathWithContext", sinon.stub()
       return
 
     it "is defined", inject ($filter, withContextFilter) ->
@@ -41,13 +42,14 @@ describe "module: angleGrinder.common", ->
 
     it "uses `pathWithContext` service to append a context", inject (pathWithContext, withContextFilter) ->
       # Given
-      pathWithContext.andReturn("/context/path")
+      pathWithContext.returns("/context/path")
 
       # When
       expect(withContextFilter("path")).toEqual "/context/path"
 
       # Then
-      expect(pathWithContext).toHaveBeenCalledWith "path"
+      expect(pathWithContext.called).toBeTruthy()
+      expect(pathWithContext.calledWith("path")).toBeTruthy()
 
   describe "service: pendingRequests", ->
     $http = null

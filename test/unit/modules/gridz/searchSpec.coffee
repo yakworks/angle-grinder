@@ -60,14 +60,15 @@ describe "module: angleGrinder.gridz", ->
     describe "on click", ->
       beforeEach ->
         $scope.search = name: "find it"
-        $scope.advancedSearch = (params) ->
-        spyOn($scope, "advancedSearch")
+        $scope.advancedSearch = sinon.spy()
 
       it "calls #advancedSearch with valid params", ->
         # When
         element.click()
+
         # Then
-        expect($scope.advancedSearch).toHaveBeenCalledWith name: "find it"
+        expect($scope.advancedSearch.called).toBeTruthy()
+        expect($scope.advancedSearch.calledWith(name: "find it")).toBeTruthy()
 
   describe "directive: agResetSearchButton", ->
     $scope = null
