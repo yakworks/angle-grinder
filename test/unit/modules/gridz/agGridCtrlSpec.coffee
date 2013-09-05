@@ -1,28 +1,22 @@
 describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
-  # dummy elements
-  $element =
-    find: jasmine.createSpy("find")
-
-  gridElement =
-    jqGrid: jasmine.createSpy("jqGrid")
-    trigger: jasmine.createSpy("trigger")
-
-  controller = null
-
   beforeEach module("angleGrinder.gridz")
 
+  controller = null
+  jqGridStub = null
+
   beforeEach inject ($rootScope, $controller) ->
-    $element.find.andReturn(gridElement)
+    jqGridStub = sinon.stub(jqGrid: angular.noop, trigger: angular.noop)
+    elementStub = sinon.stub(find: angular.noop)
+    elementStub.find.withArgs("#grid").returns(jqGridStub)
 
     controller = $controller "AgGridCtrl" ,
       $scope: $rootScope.$new(),
-      $element: $element
+      $element: elementStub
 
-    expect($element.find).toHaveBeenCalledWith("#grid")
+    expect(elementStub.find.calledWith("#grid")).toBeTruthy()
 
     fakeColModel = [{ name: "foo", hidden: true }, { name: "bar", hidden: false }]
-    gridElement.jqGrid.andCallFake (method, arg) ->
-      return fakeColModel if method is "getGridParam" and arg is "colModel"
+    jqGridStub.jqGrid.withArgs("getGridParam", "colModel").returns(fakeColModel)
 
   describe "#isColumnHidden", ->
     it "is defined", ->
@@ -48,16 +42,20 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
       beforeEach -> controller.toggleColumn("foo")
 
       it "shows the column", ->
-        expect(gridElement.jqGrid).toHaveBeenCalledWith("showCol", "foo")
+        expect(jqGridStub.jqGrid.called).toBeTruthy()
+        expect(jqGridStub.jqGrid.calledWith("showCol", "foo")).toBeTruthy()
 
       it "resizes the grid", ->
-        expect(gridElement.trigger).toHaveBeenCalledWith("resize")
+        expect(jqGridStub.trigger.called).toBeTruthy()
+        expect(jqGridStub.trigger.calledWith("resize")).toBeTruthy()
 
     describe "when the column is not hidden", ->
       beforeEach -> controller.toggleColumn("bar")
 
       it "hides the column", ->
-        expect(gridElement.jqGrid).toHaveBeenCalledWith("hideCol", "bar")
+        expect(jqGridStub.jqGrid.called).toBeTruthy()
+        expect(jqGridStub.jqGrid.calledWith("hideCol", "bar")).toBeTruthy()
 
       it "resizes the grid", ->
-        expect(gridElement.trigger).toHaveBeenCalledWith("resize")
+        expect(jqGridStub.trigger.called).toBeTruthy()
+        expect(jqGridStub.trigger.calledWith("resize")).toBeTruthy()
