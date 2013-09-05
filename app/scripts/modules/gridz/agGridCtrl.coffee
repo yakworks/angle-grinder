@@ -1,7 +1,9 @@
 gridz = angular.module("angleGrinder.gridz")
 
 # Wrapper for jqGrid public API
-# TODO write some docs here
+# Controller instance could be published to the parent scope
+# with `ag-grid-name` directive, for example:
+# `<div ag-grid="gridOptions" ag-grid-name="usersGrid"></div>`
 gridz.controller "AgGridCtrl", class
   @$inject = ["$scope", "$element"]
   constructor: ($scope, $element) ->
@@ -32,4 +34,3 @@ gridz.controller "AgGridCtrl", class
       console.log @$grid.jqGrid("getGridParam", "colModel")
 
     @$grid.jqGrid("columnChooser", options)
-
