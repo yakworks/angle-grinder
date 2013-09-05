@@ -49,7 +49,7 @@ class ListCtrl
 
     # TODO wrap into module
     # TODO handle JSON parse errors (fallback to the default colModel)
-    choosedColumns = window.localStorage.getItem("gridz.usersList.choosedColumns")
+    choosedColumns = window.localStorage.getItem("gridz.usersGrid.choosedColumns")
     if choosedColumns?
       # ...column model was persisted, parse it and extend the default column model
       choosedColumns = angular.fromJson(choosedColumns)

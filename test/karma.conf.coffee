@@ -24,6 +24,8 @@ module.exports = (config) ->
       "components/sinon/lib/sinon/assert.js"
 
       "components/jqgrid/js/grid.base.js"
+      "components/jqgrid/js/grid.jqueryui.js"
+
       "components/select2/select2.js"
       "components/angular-ui-select2/select2.js"
       "components/angular-ui-date/date.js"

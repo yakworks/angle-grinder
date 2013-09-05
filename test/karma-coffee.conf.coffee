@@ -26,6 +26,8 @@ module.exports = (config) ->
       "bower_components/sinon/lib/sinon/assert.js"
 
       "bower_components/jqgrid/js/grid.base.js"
+      "bower_components/jqgrid/js/grid.jqueryui.js"
+
       "bower_components/select2/select2.js"
       "bower_components/angular-ui-select2/src/select2.js"
       "bower_components/angular-ui-date/src/date.js"

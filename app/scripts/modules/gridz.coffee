@@ -15,8 +15,11 @@ gridz.directive "agGrid", [
         return unless gridOptions?
         $log.info "Initializing the grid", gridOptions
 
-        # TODO generate unique grid id
-        $grid = $("#grid", $element)
+        # find grid placeholder
+        $grid = $element.find("table.gridz")
+
+        # jqGrid suks at this point it expects `pager` to be an id
+        gridOptions.pager = $element.find(".gridz-pager").attr("id") or "gridz-pager"
 
         # workaround for problem with initial grid size inside the hidden container
         # see http://www.trirand.com/blog/?page_id=393/help/problem-with-autowidth/
@@ -94,11 +97,19 @@ gridz.directive "agGrid", [
       $scope.$watch attrs.agGrid, initializeGrid
 
     restrict: "A"
+
     template: """
-              <table id="grid"></table>
-              <div id="gridPager"></div>
-              """
-    link: link
+      <table class="gridz"></table>
+      <div class="gridz-pager"></div>
+    """
+
+    compile: (element, attrs) ->
+      # generate grid id from the name or assign default value
+      alias = attrs.agGridName or "gridz"
+      element.find("table.gridz").attr("id", alias)
+      element.find("div.gridz-pager").attr("id", "#{alias}-pager")
+
+      post: link
 
     require: "agGrid"
     controller: "AgGridCtrl"

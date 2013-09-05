@@ -7,13 +7,13 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
   beforeEach inject ($rootScope, $controller) ->
     jqGridStub = sinon.stub(jqGrid: angular.noop, trigger: angular.noop)
     elementStub = sinon.stub(find: angular.noop)
-    elementStub.find.withArgs("#grid").returns(jqGridStub)
+    elementStub.find.withArgs("table.gridz").returns(jqGridStub)
 
     controller = $controller "AgGridCtrl" ,
       $scope: $rootScope.$new(),
       $element: elementStub
 
-    expect(elementStub.find.calledWith("#grid")).toBeTruthy()
+    expect(elementStub.find.calledWith("table.gridz")).toBeTruthy()
 
     fakeColModel = [{ name: "foo", hidden: true }, { name: "bar", hidden: false }]
     jqGridStub.jqGrid.withArgs("getGridParam", "colModel").returns(fakeColModel)

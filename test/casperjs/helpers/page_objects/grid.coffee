@@ -4,7 +4,7 @@ exports.Grid = class
 
   # Click the cell with the given row number and name.
   clickCell: (row, name) ->
-    @casper.click "#{@selector} tr.jqgrow:nth-child(#{row + 2}) td[aria-describedby='grid_#{name}'] a"
+    @casper.click "#{@selector} tr.jqgrow:nth-child(#{row + 2}) td[aria-describedby='gridz_#{name}'] a"
 
   # Click edit button inside the popover for the given row.
   clickEditRow: (row) ->
@@ -17,15 +17,15 @@ exports.Grid = class
 
   # Click next page.
   clickNextPage: ->
-    @casper.click "#{@selector} div#gridPager .ui-icon-seek-next"
+    @casper.click "#{@selector} div.gridz-pager .ui-icon-seek-next"
 
   # Click prev page.
   clickPrevPage: ->
-    @casper.click "#{@selector} div#gridPager .ui-icon-seek-prev"
+    @casper.click "#{@selector} div.gridz-pager .ui-icon-seek-prev"
 
   # Click the heder for the given column name.
   clickHeader: (name) ->
-    @casper.click "#{@selector} table.ui-jqgrid-htable th#grid_#{name} div.ui-jqgrid-sortable"
+    @casper.click "#{@selector} table.ui-jqgrid-htable th#gridz_#{name} div.ui-jqgrid-sortable"
 
   # Returns the number of loaded rows.
   getRowsCount: ->
@@ -46,7 +46,7 @@ exports.Grid = class
       row = {}
       $row.find("td[aria-describedby]").each (index, cell) ->
         $cell = $(cell)
-        key = $cell.attr("aria-describedby").replace /^grid_*/, ""
+        key = $cell.attr("aria-describedby").replace /^gridz_*/, ""
         row[key] = $cell.text()
       row
 

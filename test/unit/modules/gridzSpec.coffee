@@ -2,8 +2,9 @@ describe "module: angleGrinder.gridz", ->
   beforeEach module("angleGrinder.gridz")
 
   describe "directive: agGrid", ->
+    $scope = null
     element = null
-    gridz = null
+    gridzSpy = null
 
     sampleGridOptions =
       data: []
@@ -13,25 +14,58 @@ describe "module: angleGrinder.gridz", ->
         search: true
       ]
 
-    beforeEach inject ($rootScope, $injector) ->
+    beforeEach inject ($rootScope) ->
+      # create a spy on the gridz plugin
+      gridzSpy = sinon.spy($.fn, "gridz")
+
       $scope = $rootScope.$new()
       $scope.gridOptions = sampleGridOptions
 
-      # create a spy on the gridz plugin
-      gridz = spyOn($.fn, "gridz").andCallThrough()
+    afterEach ->
+      gridzSpy.restore()
 
-      {element} = compileTemplate """
-        <div ag-grid="gridOptions"></div>
-      """, $injector, $scope
+    itPassesValidOptionsToTheGrid = ->
+      it "passes valid options to the gridz plugin", ->
+        expect(gridzSpy.called).toBeTruthy()
+        expect(gridzSpy.calledWith(sampleGridOptions)).toBeTruthy()
 
-    it "passes valid options to the gridz plugin", ->
-      expect(gridz).toHaveBeenCalledWith sampleGridOptions
+    itRendersTheGrid = ->
+      it "renders the grid", ->
+        expect(element).toContain "div.ui-jqgrid"
+        expect(element).toContain "table.gridz"
+        expect(element).toContain "div.gridz-pager"
 
-    it "renders the grid", ->
-      expect(element.find("div.ui-jqgrid").length).toEqual 1
-      expect(element.find("table#grid").length).toEqual 1
-      expect(element.find("div#gridPager").length).toEqual 1
-        
+    describe "when `ag-grid-name` is not provided", ->
+      beforeEach inject ($injector) ->
+        {element} = compileTemplate """
+          <div ag-grid="gridOptions"></div>
+        """, $injector, $scope
+
+      itPassesValidOptionsToTheGrid()
+      itRendersTheGrid()
+
+      it "assigns default `id` for the grid element", ->
+        expect(element.find("table.gridz").attr("id")).toEqual "gridz"
+
+      it "assigns default `id` for the pager", ->
+        expect(element.find("div.gridz-pager").attr("id")).toEqual "gridz-pager"
+
+    describe "when `ag-grid-name` is provided", ->
+      beforeEach inject ($injector) ->
+        {element} = compileTemplate """
+          <div ag-grid="gridOptions"
+               ag-grid-name="projectsGrid"></div>
+        """, $injector, $scope
+
+      itPassesValidOptionsToTheGrid()
+      itRendersTheGrid()
+
+      it "generates `id` for the grid element", ->
+        expect(element.find("table.gridz").attr("id")).toEqual "projectsGrid"
+
+      it "generates `id` for the pager", ->
+        expect(element.find("div.gridz-pager").attr("id")).toEqual "projectsGrid-pager"
+
   describe "service: flatten", ->
     it "is defined", inject (flatten) ->
       expect(flatten).toBeDefined()

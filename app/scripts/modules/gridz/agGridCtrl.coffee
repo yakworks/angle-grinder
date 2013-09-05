@@ -7,12 +7,22 @@ gridz = angular.module("angleGrinder.gridz")
 gridz.controller "AgGridCtrl", class
   @$inject = ["$scope", "$element"]
   constructor: ($scope, $element) ->
-    @$grid = $element.find("#grid")
+    # TODO assign $grid from the directive
+    @$grid = $element.find("table.gridz")
 
   # Returns column model for the jqGrid
   # @private
   _getColModel: ->
     @$grid.jqGrid("getGridParam", "colModel")
+
+  # Triggers grid's resize event
+  # TODO fix grid resizing issues
+  # TODO resize after column chooser dialog
+  _triggerGridResize: ->
+    @$grid.trigger("resize")
+
+  getGridId: ->
+    @$grid.attr("id")
 
   # Returns `true` if a columnt with the given id is hidden
   isColumnHidden: (columnId) ->
@@ -23,7 +33,7 @@ gridz.controller "AgGridCtrl", class
   toggleColumn: (columnId) ->
     showOrHide = if @isColumnHidden(columnId) then "showCol" else "hideCol"
     @$grid.jqGrid(showOrHide, columnId)
-    @$grid.trigger("resize")
+    @_triggerGridResize()
 
   # Invokes a dialog for choosing and reordering grid's columns
   # see: http://www.trirand.com/jqgridwiki/doku.php?id=wiki%3ajquery_ui_methods#column_chooser
@@ -39,6 +49,6 @@ gridz.controller "AgGridCtrl", class
       choosedColumns = _.map @_getColModel(), (column) ->
         _.pick(column, "name", "hidden")
 
-      window.localStorage.setItem("gridz.usersList.choosedColumns", angular.toJson(choosedColumns))
+      window.localStorage.setItem("gridz.#{@getGridId()}.choosedColumns", angular.toJson(choosedColumns))
 
     @$grid.jqGrid("columnChooser", options)
