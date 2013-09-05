@@ -1,8 +1,8 @@
 describe "module: angleGrinder.gridz, directive: agSelect2", ->
 
-  # create spy on `pathWithContext` service
+  # stubs `pathWithContext` service
   beforeEach module "angleGrinder.common", ($provide) ->
-    $provide.value "pathWithContext", jasmine.createSpy("pathWithContext")
+    $provide.value "pathWithContext", sinon.stub()
     # this is important, see: https://groups.google.com/forum/#!msg/angular/gCGF_B4eQkc/XjkvbgE9iMcJ
     return
 
@@ -99,7 +99,7 @@ describe "module: angleGrinder.gridz, directive: agSelect2", ->
 
   describe "when `selectAjaxUrl` option is provided", ->
     beforeEach inject (pathWithContext) ->
-      pathWithContext.andReturn("/context/api/orgs.json")
+      pathWithContext.returns("/context/api/orgs.json")
 
     prepareDirective """
       <ag-select2 select-ajax-url="/api/orgs.json" ng-model="search.org" />
@@ -111,8 +111,8 @@ describe "module: angleGrinder.gridz, directive: agSelect2", ->
     it "defines ajax options for handling server side lookup", ->
       expect(directiveAjaxOptions).toBeDefined()
 
-    it "uses `pathWithContextSpy` to generate a valid path", inject (pathWithContext) ->
-      expect(pathWithContext).toHaveBeenCalledWith("/api/orgs.json")
+    it "uses `pathWithContext` to generate a valid path", inject (pathWithContext) ->
+      expect(pathWithContext.calledWith("/api/orgs.json")).toBeTruthy()
 
     it "assigns a valid server side lookup path", ->
       expect(directiveAjaxOptions.url).toBeDefined()

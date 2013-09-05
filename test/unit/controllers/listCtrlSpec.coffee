@@ -24,37 +24,37 @@ describe "controller: ListCtrl", ->
       expect($scope.gridOptions.data.length).toEqual 100
 
     describe "#editItem", ->
+      dialogSpy = null
+      resource = null
 
-      it "opens opens a dialog for editing the item", inject (editDialog) ->
-        # Given
-        item = id: 123
-        spyOn(controller, "findItemById").andReturn(item)
-        spyOn(editDialog, "open")
+      beforeEach inject (editDialog) ->
+        resource = id: 123
 
-        # When
-        $scope.editItem(item.id)
+        sinon.stub(controller, "findItemById").withArgs(123).returns(resource)
+        dialogSpy = sinon.spy(editDialog, "open")
 
-        # Then
-        expect(controller.findItemById).toHaveBeenCalledWith(item.id)
+        $scope.editItem(resource.id)
 
-        expect(editDialog.open).toHaveBeenCalled()
-        args = editDialog.open.mostRecentCall.args
-        expect(args[0]).toEqual "templates/partials/itemForm.html"
-        expect(args[1].id).toEqual item.id
+      it "loads a resource", ->
+        expect(controller.findItemById.calledWith(123)).toBeTruthy()
+
+      it "opens opens a dialog for editing the the loaded resource", ->
+        expect(dialogSpy.called).toBeTruthy()
+        expect(dialogSpy.calledWith("templates/partials/itemForm.html", resource)).toBeTruthy()
 
     describe "#createItem", ->
+      spy = null
 
-      it "opens a dialog for creating a new item", inject (editDialog) ->
-        # Given
-        spyOn(editDialog, "open").andCallThrough()
+      beforeEach inject (editDialog) ->
+        spy = sinon.spy(editDialog, "open")
 
+      it "opens a dialog for creating a new item", ->
         # When
         $scope.createItem()
 
         # Then
-        expect(editDialog.open).toHaveBeenCalled()
-        args = editDialog.open.mostRecentCall.args
-        expect(args[0]).toEqual "templates/partials/itemForm.html"
+        expect(spy.called).toBeTruthy()
+        expect(spy.calledWith("templates/partials/itemForm.html")).toBeTruthy()
 
   describe "controller", ->
 

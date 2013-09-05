@@ -6,7 +6,7 @@ describe "module: angleGrinder.forms directive: agCreateButton", ->
 
   beforeEach inject ($rootScope) ->
     $scope = $rootScope.$new()
-    $scope.foo = jasmine.createSpy()
+    $scope.foo = sinon.stub()
 
   itHasTheFollowingHref = (href) ->
     it "generates a link with valid `href`", ->
@@ -26,7 +26,7 @@ describe "module: angleGrinder.forms directive: agCreateButton", ->
         # When
         element.click()
         # Then
-        expect($scope.foo).toHaveBeenCalled()
+        expect($scope.foo.called).toBeTruthy()
 
   describe "without a custom label", ->
     beforeEach inject ($injector) ->

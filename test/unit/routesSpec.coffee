@@ -2,7 +2,7 @@ describe "Application routes", ->
 
   # create spy on `userResolver` service
   beforeEach module "angleGrinder.resources", ($provide) ->
-    $provide.value "userResolver", jasmine.createSpy("userResolver")
+    $provide.value "userResolver", sinon.spy()
     return
 
   beforeEach module "angleGrinder"
@@ -55,7 +55,7 @@ describe "Application routes", ->
   it "recognizes `/users/:id`", inject (userResolver) ->
     # When
     navigateTo "/users/12345"
-    expect(userResolver).toHaveBeenCalledWith("12345")
+    expect(userResolver.calledWith("12345")).toBeTruthy()
 
     # Then
     expect($route.current.templateUrl).toEqual("templates/users/show.html")
@@ -64,7 +64,7 @@ describe "Application routes", ->
   it "recognizes `/users/:id/edit`", inject ($q, userResolver) ->
     # When
     navigateTo "/users/234/edit"
-    expect(userResolver).toHaveBeenCalledWith("234")
+    expect(userResolver.calledWith("234")).toBeTruthy()
 
     # Then
     expect($route.current.templateUrl).toEqual("templates/users/form.html")
