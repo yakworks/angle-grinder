@@ -9,10 +9,14 @@ gridz.controller "AgGridCtrl", class
   constructor: ($scope, $element) ->
     @$grid = $element.find("#grid")
 
+  # Returns column model for the jqGrid
+  # @private
+  _getColModel: ->
+    @$grid.jqGrid("getGridParam", "colModel")
+
   # Returns `true` if a columnt with the given id is hidden
   isColumnHidden: (columnId) ->
-    colModel = @$grid.jqGrid("getGridParam", "colModel")
-    column = _.findWhere(colModel, name: columnId)
+    column = _.findWhere(@_getColModel(), name: columnId)
     column?.hidden
 
   # Toggle visibility of a column with the given id
@@ -24,13 +28,17 @@ gridz.controller "AgGridCtrl", class
   # Invokes a dialog for choosing and reordering grid's columns
   # see: http://www.trirand.com/jqgridwiki/doku.php?id=wiki%3ajquery_ui_methods#column_chooser
   columnChooser: (options = {}) ->
-    # function which will be called when the user press Ok button
-    # inside the column chooser dialog
+    # Function which will be called when the user press Ok button
+    # inside the column chooser dialog.
     options.done = (perm) =>
       # call `remapColumns` method in order to reorder the columns
       @$grid.jqGrid("remapColumns", perm, true) if perm
 
-      # TODO at this point we could store column model in the local storage
-      console.log @$grid.jqGrid("getGridParam", "colModel")
+      # TODO wrap it into service
+      # Store choosed column in the local storage
+      choosedColumns = _.map @_getColModel(), (column) ->
+        _.pick(column, "name", "hidden")
+
+      window.localStorage.setItem("gridz.usersList.choosedColumns", angular.toJson(choosedColumns))
 
     @$grid.jqGrid("columnChooser", options)

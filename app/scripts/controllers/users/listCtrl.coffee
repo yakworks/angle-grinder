@@ -22,7 +22,7 @@ class ListCtrl
       <a href="#/users/#{rowdata.id}">#{cellVal}</a>
       """
 
-    [
+    defaultColModel = [
       name: "id"
       width: 50
       formatter: showActionLink
@@ -46,6 +46,27 @@ class ListCtrl
       name: "paid"
       label: "Paid"
     ]
+
+    # TODO wrap into module
+    # TODO handle JSON parse errors (fallback to the default colModel)
+    choosedColumns = window.localStorage.getItem("gridz.usersList.choosedColumns")
+    if choosedColumns?
+      # ...column model was persisted, parse it and extend the default column model
+      choosedColumns = angular.fromJson(choosedColumns)
+
+      colModel = []
+      for choosedColumn in choosedColumns
+        column = _.findWhere(defaultColModel, name: choosedColumn.name)
+        if column?
+          # show / hide the column
+          column.hidden = choosedColumn.hidden
+          # put it in the valid order
+          colModel.push(column)
+
+      colModel
+    else
+      # ...just return default column model
+      defaultColModel
 
 angular.module("angleGrinder")
   .controller("users.ListCtrl", ListCtrl)
