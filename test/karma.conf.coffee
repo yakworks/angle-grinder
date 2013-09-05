@@ -16,6 +16,13 @@ module.exports = (config) ->
       "components/angular/angular-route.js"
       "components/jasmine-jquery/jasmine-jquery.js"
 
+      "components/sinon/lib/sinon.js"
+      "components/sinon/lib/sinon/spy.js"
+      "components/sinon/lib/sinon/call.js"
+      "components/sinon/lib/sinon/stub.js"
+      "components/sinon/lib/sinon/mock.js"
+      "components/sinon/lib/sinon/assert.js"
+
       "components/jqgrid/js/grid.base.js"
       "components/select2/select2.js"
       "components/angular-ui-select2/select2.js"
