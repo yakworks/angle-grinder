@@ -59,3 +59,15 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
       it "resizes the grid", ->
         expect(jqGridStub.trigger.called).toBeTruthy()
         expect(jqGridStub.trigger.calledWith("resize")).toBeTruthy()
+
+  describe "#columnChooser", ->
+    it "is defined", ->
+      expect(controller.columnChooser).toBeDefined()
+
+    it "calls `columnChooser` method on the jqGrid", ->
+      # When
+      controller.columnChooser()
+
+      # Then
+      expect(jqGridStub.jqGrid.called).toBeTruthy()
+      expect(jqGridStub.jqGrid.calledWith("columnChooser")).toBeTruthy()
