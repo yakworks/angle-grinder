@@ -23,6 +23,12 @@ describe "module: angleGrinder.resources", ->
         Users.get(id: 101)
         $httpBackend.flush()
 
+    describe "#massUpdate", ->
+      it "updates records with the given ids", ->
+        $httpBackend.whenPUT("/api/users/massUpdate").respond({})
+        Users.massUpdate(ids: [123, 234, 456], data: paid: true)
+        $httpBackend.flush()
+
     describe "#resourceName", ->
       user = null
       beforeEach -> user = new Users()

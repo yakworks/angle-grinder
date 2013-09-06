@@ -61,16 +61,11 @@ class EditDialog
     dialog = @$dialog.dialog
       backdropFade: false
       dialogFade: false
-      resolve:
-        item: -> item
+      resolve: item: -> item
 
     # override so we can intercept form dirty and prevent escape
     dialog.handledEscapeKey = (e) ->
-      if e.which is 27
-        e.preventDefault()
-        unless dialog.$scope.editForm.$dirty
-          dialog.close()
-          dialog.$scope.$apply()
+      dialog.handleBackDropClick(e) if e.which is 27
 
     # override so we can intercept form dirty and prevent backdrop click
     dialog.handleBackDropClick = (e) ->
