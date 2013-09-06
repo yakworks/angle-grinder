@@ -1,5 +1,3 @@
-import java.util.GregorianCalendar
-
 import grinder.ContactType
 
 class BootStrap {
@@ -12,6 +10,10 @@ class BootStrap {
         def Random generator = new Random()
 
         def createOrg = { attributes = [] ->
+            // get sample timeZones
+            def sampleTimeZones = ["UTC-6", "UTC-2", "UTC", "UTC+2"]
+            def timeZone = sampleTimeZones[generator.nextInt(sampleTimeZones.size())]
+
             attributes = [
                 name: fakerService.companyName(),
                 num: fakerService.numerify("##-##-##"),
@@ -20,7 +22,8 @@ class BootStrap {
                 state: fakerService.usState(),
                 city: fakerService.city(),
                 zip: fakerService.zipCode(),
-                street: fakerService.streetAddress()
+                street: fakerService.streetAddress(),
+                timeZone: timeZone
             ] + attributes
 
             orgDao.insert(attributes).entity

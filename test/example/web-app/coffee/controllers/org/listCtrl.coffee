@@ -24,6 +24,7 @@ class ListCtrl
       { name: "id", label: "ID", width: 30, fixed: true, formatter: showActionLink }
       { name: "name", label: "Name", width: 100, fixed: true, formatter: showActionLink }
       { name: "num", label: "Num", width: 70 }
+      { name: "timeZone", label: "Time Zone", width: 100 }
     ]
 
 angular.module("angleGrinder")
