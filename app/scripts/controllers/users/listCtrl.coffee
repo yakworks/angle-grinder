@@ -1,6 +1,6 @@
 class ListCtrl
-  @$inject = ["$scope", "$location", "$filter", "pathWithContext"]
-  constructor: ($scope, $location, @$filter, pathWithContext) ->
+  @$inject = ["$scope", "$location", "$filter", "$dialog", "pathWithContext"]
+  constructor: ($scope, $location, @$filter, $dialog, pathWithContext) ->
 
     $scope.gridOptions =
       url: pathWithContext("/api/users")
@@ -14,6 +14,18 @@ class ListCtrl
 
     $scope.editItem = (id) ->
       $location.path("/users/#{id}/edit")
+
+    $scope.massUpdate = ->
+      # TODO retrive list of selected rows (backport the controller for the grid)
+      userIds = $("#grid").getGridParam("selarrrow")
+      return if userIds.length is 0
+
+      dialog = $dialog.dialog
+        backdropFade: false
+        dialogFade: false
+        resolve: userIds: -> userIds
+
+      dialog.open(pathWithContext("/templates/users/massUpdateForm.html"), "users.MassUpdateFormCtrl")
 
   gridColumns: ->
     showActionLink = (cellVal, options, rowdata) ->

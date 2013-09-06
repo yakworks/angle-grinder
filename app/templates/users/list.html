@@ -1,7 +1,27 @@
 <section class="anchor">
   <h2 class="page-header">Users list</h2>
 
-  <ag-create-button href="#/users/create">Create user</ag-create-button>
+  <div class="navbar navbar-grid">
+    <div class="navbar-inner with-selected-pointer with-grid-options">
+      <ul class="nav">
+        <li><span class="icon-selected-pointer"> </span></li>
+        <li class="dropdown selected-actions">
+          <a data-toggle="dropdown" class="dropdown-toggle" href="#" stlye="padding-left:5px">
+            Actions <b class="caret"></b>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a href="" ng-click="massUpdate()"><i class="icon-edit"></i> Mass update</a></li>
+          </ul>
+        </li>
+        <li class="divider-vertical"></li>
+        <li>
+          <a href="#/users/create" class="create-button">
+            <i class="icon-edit"></i>Create user
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
 
   <div ag-grid="gridOptions"></div>
 </section>

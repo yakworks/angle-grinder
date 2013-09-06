@@ -5,11 +5,12 @@ resources = angular.module("angleGrinder.resources", [
 
 resources.factory "Users", [
   "$resource", ($resource) ->
-    Users = $resource "/api/users/:id", { id: "@id" },
-      get:    { method: "GET" },
-      save:   { method: "POST" },
-      update: { method: "PUT" },
-      delete: { method: "DELETE" }
+    Users = $resource "/api/users/:id/:action", { id: "@id" },
+      get:        { method: "GET" },
+      massUpdate: { method: "PUT", params: action: "massUpdate" },
+      save:       { method: "POST" },
+      update:     { method: "PUT" },
+      delete:     { method: "DELETE" }
 
     # The action methods on the class object or instance object can be invoked with the following parameters:
     # * HTTP GET "class" actions: Resource.action([parameters], [success], [error])
