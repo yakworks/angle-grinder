@@ -17,7 +17,7 @@ class ListCtrl
 
     $scope.massUpdate = ->
       # TODO retrive list of selected rows (backport the controller for the grid)
-      userIds = $("#grid").getGridParam("selarrrow")
+      userIds = $("table.gridz").getGridParam("selarrrow")
       return if userIds.length is 0
 
       dialog = $dialog.dialog

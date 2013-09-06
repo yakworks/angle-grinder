@@ -8,7 +8,7 @@ class MassUpdateFormCtrl
       promise = Users.massUpdate(ids: userIds, data: users).$promise
       promise.then ->
         # TODO use grid ctrl (backport changes from other branch)
-        $("#grid").trigger("reloadGrid")
+        $("table.gridz").trigger("reloadGrid")
 
         $scope.closeDialog()
 

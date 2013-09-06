@@ -5,13 +5,21 @@ gridz = angular.module("angleGrinder.gridz", [
 
 gridz.directive "agGrid", [
   "hasSearchFilters", "$log", (hasSearchFilters, $log) ->
-    link = ($scope, $element, attrs) ->
+    link = ($scope, $element, attrs, gridCtrl) ->
+      # publish agGrid controller to the parent scope
+      alias = attrs.agGridName
+      $scope[alias] = gridCtrl if alias?
+
       # Initializes a grid with the given options
       initializeGrid = (gridOptions) ->
         return unless gridOptions?
         $log.info "Initializing the grid", gridOptions
 
-        $grid = $("#grid", $element)
+        # find grid placeholder
+        $grid = $element.find("table.gridz")
+
+        # jqGrid suks at this point it expects `pager` to be an id
+        gridOptions.pager = $element.find(".gridz-pager").attr("id") or "gridz-pager"
 
         # workaround for problem with initial grid size inside the hidden container
         # see http://www.trirand.com/blog/?page_id=393/help/problem-with-autowidth/
@@ -64,6 +72,7 @@ gridz.directive "agGrid", [
           $scope.$broadcast "gridzLoadComplete"
 
         # catch broadcast event after save. This will need to change
+        # TODO move this method to the controller
         $scope.$on "itemUpdated", (event, item) ->
           if $grid.jqGrid("getInd", item.id)
             $grid.jqGrid "setRowData", item.id, item
@@ -72,10 +81,12 @@ gridz.directive "agGrid", [
 
           flashRowFor item
 
+        # TODO move this method to the controller
         $scope.$on "itemDeleted", (event, item) ->
           flashRowFor item, ->
             $grid.jqGrid "delRowData", item.id
 
+        # TODO move this method to the controller
         $scope.$on "searchUpdated", (event, filters) ->
           params =
             search: hasSearchFilters(filters)
@@ -86,11 +97,22 @@ gridz.directive "agGrid", [
       $scope.$watch attrs.agGrid, initializeGrid
 
     restrict: "A"
+
     template: """
-              <table id="grid"></table>
-              <div id="gridPager"></div>
-              """
-    link: link
+      <table class="gridz"></table>
+      <div class="gridz-pager"></div>
+    """
+
+    compile: (element, attrs) ->
+      # generate grid id from the name or assign default value
+      alias = attrs.agGridName or "gridz"
+      element.find("table.gridz").attr("id", alias)
+      element.find("div.gridz-pager").attr("id", "#{alias}-pager")
+
+      post: link
+
+    require: "agGrid"
+    controller: "AgGridCtrl"
 ]
 
 # Takes a nested Javascript object and flatten it.
