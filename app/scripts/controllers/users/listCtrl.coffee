@@ -7,7 +7,7 @@ class ListCtrl
       colModel: @gridColumns()
       rowNum: 10
       sortname: "id"
-      multiselect: false
+      multiselect: true
 
     $scope.showItem = (id) ->
       $location.path("/users/#{id}")
