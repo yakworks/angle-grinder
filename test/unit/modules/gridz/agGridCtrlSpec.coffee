@@ -5,7 +5,7 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
   jqGridStub = null
 
   beforeEach inject ($rootScope, $controller) ->
-    jqGridStub = sinon.stub(jqGrid: angular.noop, trigger: angular.noop)
+    jqGridStub = sinon.stub(jqGrid: angular.noop, getGridParam: angular.noop, trigger: angular.noop)
     elementStub = sinon.stub(find: angular.noop)
     elementStub.find.withArgs("table.gridz").returns(jqGridStub)
 
@@ -22,10 +22,20 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
     it "reloads the grid", ->
       # When
       controller.reloadGrid()
-      
+
       # Then
       expect(jqGridStub.trigger.called).toBeTruthy()
       expect(jqGridStub.trigger.calledWith("reloadGrid")).toBeTruthy()
+
+  describe "#getSelectedRowIds", ->
+    it "returns a list of selected row ids", ->
+      # When
+      controller.getSelectedRowIds()
+
+      # Then
+      expect(jqGridStub.getGridParam.called).toBeTruthy()
+      expect(jqGridStub.getGridParam.calledWith("selarrrow")).toBeTruthy()
+
 
   describe "#isColumnHidden", ->
     it "is defined", ->

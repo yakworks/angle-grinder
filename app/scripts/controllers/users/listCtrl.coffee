@@ -15,9 +15,9 @@ class ListCtrl
     $scope.editItem = (id) ->
       $location.path("/users/#{id}/edit")
 
+    # TODO write specs for this method
     $scope.massUpdate = ->
-      # TODO retrive list of selected rows (backport the controller for the grid)
-      userIds = $("table.gridz").getGridParam("selarrrow")
+      userIds = $scope.usersGrid.getSelectedRowIds()
       return if userIds.length is 0
 
       dialog = $dialog.dialog

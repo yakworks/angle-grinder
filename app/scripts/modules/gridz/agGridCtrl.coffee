@@ -24,6 +24,12 @@ gridz.controller "AgGridCtrl", class
   getGridId: ->
     @$grid.attr("id")
 
+  # Gives the currently selected rows when multiselect is set to true.
+  # This is a one-dimensional array and the values in the array correspond
+  # to the selected id's in the grid.
+  getSelectedRowIds: ->
+    @$grid.getGridParam("selarrrow")
+
   # Reloads the grid with the current settings
   reloadGrid: ->
     @$grid.trigger("reloadGrid")

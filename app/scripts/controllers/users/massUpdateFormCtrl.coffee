@@ -1,7 +1,8 @@
+# TODO write specs for this controller
 class MassUpdateFormCtrl
 
-  @$inject = ["$scope", "Users", "dialog", "userIds", "usersGrid"]
-  constructor: ($scope, Users, dialog, userIds, usersGrid) ->
+  @$inject = ["$scope", "Users", "userIds", "dialog", "usersGrid"]
+  constructor: ($scope, Users, userIds, dialog, usersGrid) ->
     $scope.users = allowance: 0
 
     $scope.save = (users) ->
