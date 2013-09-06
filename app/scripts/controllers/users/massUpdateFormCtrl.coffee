@@ -1,15 +1,13 @@
 class MassUpdateFormCtrl
 
-  @$inject = ["$scope", "Users", "dialog", "userIds"]
-  constructor: ($scope, Users, dialog, userIds) ->
+  @$inject = ["$scope", "Users", "dialog", "userIds", "usersGrid"]
+  constructor: ($scope, Users, dialog, userIds, usersGrid) ->
     $scope.users = allowance: 0
 
     $scope.save = (users) ->
       promise = Users.massUpdate(ids: userIds, data: users).$promise
       promise.then ->
-        # TODO use grid ctrl (backport changes from other branch)
-        $("table.gridz").trigger("reloadGrid")
-
+        usersGrid.reloadGrid()
         $scope.closeDialog()
 
     $scope.closeDialog = ->

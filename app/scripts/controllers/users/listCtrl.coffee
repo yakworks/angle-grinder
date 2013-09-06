@@ -23,7 +23,9 @@ class ListCtrl
       dialog = $dialog.dialog
         backdropFade: false
         dialogFade: false
-        resolve: userIds: -> userIds
+        resolve:
+          userIds: -> userIds
+          usersGrid: -> $scope.usersGrid
 
       dialog.open(pathWithContext("/templates/users/massUpdateForm.html"), "users.MassUpdateFormCtrl")
 
