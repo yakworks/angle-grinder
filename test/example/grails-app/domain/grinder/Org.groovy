@@ -13,6 +13,7 @@ class Org implements Serializable {
     String city
     String state
     String zip
+    String timeZone
 
     static mapping = {
         cache true
@@ -26,6 +27,7 @@ class Org implements Serializable {
         city nullable: true
         state nullable: true
         zip nullable: true
+        timeZone nullable: true
     }
 
     @Override

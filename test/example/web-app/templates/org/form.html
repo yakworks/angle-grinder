@@ -29,8 +29,26 @@
 
       <div class="controls">
         <input type="text" name="num" placeholder="Enter num"
-               ng-model="org.num" autofocus required />
+               ng-model="org.num" required />
         <ag-validation-errors for="num" required="This field is required" />
+      </div>
+    </div>
+
+    <div ag-field-group for="timeZone">
+      <label class="control-label">Time Zone</label>
+
+      <div class="controls">
+        <select ui-select2 ng-model="org.timeZone" name="timeZone"
+                ng-required="true"
+                data-placeholder="Pick a Time Zone">
+          <option value=""></option>
+          <option value="UTC-6">UTC-6</option>
+          <option value="UTC-2">UTC-2</option>
+          <option value="UTC">UTC</option>
+          <option value="UTC+2">UTC+2</option>
+        </select>
+
+        <ag-validation-errors for="timeZone" required="This field is required" />
       </div>
     </div>
 
