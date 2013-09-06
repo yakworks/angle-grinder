@@ -1,6 +1,7 @@
 class ListCtrl
   @$inject = ["$scope", "$location", "$filter", "$dialog", "pathWithContext"]
-  constructor: ($scope, $location, @$filter, $dialog, pathWithContext) ->
+  constructor: ($scope, $location, $filter, $dialog, pathWithContext) ->
+    @$filter = $filter
 
     $scope.gridOptions =
       url: pathWithContext("/api/users")
