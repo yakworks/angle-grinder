@@ -18,6 +18,15 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
     fakeColModel = [{ name: "foo", hidden: true }, { name: "bar", hidden: false }]
     jqGridStub.jqGrid.withArgs("getGridParam", "colModel").returns(fakeColModel)
 
+  describe "#reloadGrid", ->
+    it "reloads the grid", ->
+      # When
+      controller.reloadGrid()
+      
+      # Then
+      expect(jqGridStub.trigger.called).toBeTruthy()
+      expect(jqGridStub.trigger.calledWith("reloadGrid")).toBeTruthy()
+
   describe "#isColumnHidden", ->
     it "is defined", ->
       expect(controller.isColumnHidden).toBeDefined()

@@ -24,6 +24,10 @@ gridz.controller "AgGridCtrl", class
   getGridId: ->
     @$grid.attr("id")
 
+  # Reloads the grid with the current settings
+  reloadGrid: ->
+    @$grid.trigger("reloadGrid")
+
   # Returns `true` if a columnt with the given id is hidden
   isColumnHidden: (columnId) ->
     column = _.findWhere(@_getColModel(), name: columnId)
