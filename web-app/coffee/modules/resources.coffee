@@ -10,11 +10,12 @@ resources.factory "resourceBuilder", [
       basePath = pathWithContext(basePath)
 
       Resource = $resource "#{basePath}/:action/:id", { id: "@id" },
-        list:   { method: "GET",  params: { action: "list" }, isArray: true }
-        get:    { method: "GET",  params: action: "get" }
-        save:   { method: "POST", params: action: "save" }
-        update: { method: "POST", params: action: "update" }
-        delete: { method: "POST", params: action: "delete" }
+        list:       { method: "GET",  params: { action: "list" }, isArray: true }
+        get:        { method: "GET",  params: action: "get" }
+        save:       { method: "POST", params: action: "save" }
+        update:     { method: "POST", params: action: "update" }
+        delete:     { method: "POST", params: action: "delete" }
+        massUpdate: { method: "POST", params: action: "massUpdate" }
 
       angular.extend Resource.prototype,
         resourceName: -> resourceName

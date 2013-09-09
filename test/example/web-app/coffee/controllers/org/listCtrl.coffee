@@ -1,11 +1,11 @@
 class ListCtrl
 
-  @$inject = ["$scope", "pathWithContext"]
-  constructor: ($scope, pathWithContext) ->
+  @$inject = ["$scope", "$dialog", "pathWithContext"]
+  constructor: ($scope, $dialog, pathWithContext) ->
     $scope.gridOptions =
       url: pathWithContext("/org/list.json")
       colModel: @colModel()
-      multiselect: false # turn off multiselect
+      multiselect: true
       shrinkToFit: true # makes columns fit to width
       sortname: "num"
       sortorder: "asc"
@@ -13,6 +13,19 @@ class ListCtrl
     # Handles quickSearch action
     $scope.quickSearch = (search) ->
       $scope.$broadcast "searchUpdated", search
+
+    $scope.massUpdate = ->
+      orgIds = $scope.orgGrid.getSelectedRowIds()
+      return if orgIds.length is 0
+
+      dialog = $dialog.dialog
+        backdropFade: false
+        dialogFade: false
+        resolve:
+          orgIds: -> orgIds
+          orgGrid: -> $scope.orgGrid
+
+      dialog.open(pathWithContext("/templates/org/massUpdateForm.html"), "org.MassUpdateFormCtrl")
 
   colModel: ->
     showActionLink = (cellVal, options, rowdata) ->

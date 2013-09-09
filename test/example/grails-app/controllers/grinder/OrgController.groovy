@@ -140,4 +140,18 @@ class OrgController extends BaseDomainController {
         def pagedList = pagedList(datalist)
         render pagedList.jsonData as JSON
     }
+
+    def massUpdate() {
+        def ids = request.JSON.ids
+        def data = request.JSON.data
+
+        def orgs = domainClass.getAll(ids)
+        orgs.each { org ->
+            org.timeZone = data.timeZone
+            org.save()
+        }
+
+        response.status = 200
+        render null
+    }
 }

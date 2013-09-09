@@ -11,6 +11,7 @@ modules = {
         // org
         resource url: "/coffee/adminOrg.coffee"
         resource url: "/coffee/controllers/org/listCtrl.coffee"
+        resource url: "/coffee/controllers/org/massUpdateFormCtrl.coffee"
         resource url: "/coffee/controllers/org/showCtrl.coffee"
         resource url: "/coffee/controllers/org/formCtrl.coffee"
 
