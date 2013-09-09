@@ -1,0 +1,25 @@
+<div class="modal-header">
+  <button type="button" class="close" ng-click="closeDialog()" aria-hidden="true">&times;</button>
+  <h3>Time Zone mass update</h3>
+</div>
+
+<form name="usersForm" novalidate class="form-horizontal no-margin"
+      ng-submit="save(orgs)">
+
+  <div class="modal-body">
+    <div ag-field-group for="timeZone">
+      <label class="control-label">Time Zone</label>
+
+      <div class="controls">
+        <input type="text" name="timeZone" placeholder="Enter Allowance"
+               ng-model="orgs.timeZone" ng-required="true" />
+        <ag-validation-errors for="timeZone" />
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <ag-submit-button></ag-submit-button>
+    <ag-cancel-button ng-click="closeDialog()"></ag-cancel-button>
+  </div>
+</form>
