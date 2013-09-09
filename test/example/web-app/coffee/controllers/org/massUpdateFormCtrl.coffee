@@ -5,6 +5,8 @@ class MassUpdateFormCtrl
     $scope.orgs = timeZone: "UTC"
 
     $scope.save = (orgs) ->
+      return if $scope.orgsForm.$invalid
+
       promise = Resource.massUpdate(ids: orgIds, data: orgs).$promise
       promise.then ->
         orgGrid.reloadGrid()
