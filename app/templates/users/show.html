@@ -27,6 +27,6 @@
 
   <div class="form-actions">
     <a href="#/users/{{user.id}}/edit" class="btn"><i class="icon-edit"></i> Edit</a>
-    <ag-delete-button when-confirmed="delete(user)"></ag-delete-button>
+    <ag-delete-button promise="deletePromise" when-confirmed="delete(user)"></ag-delete-button>
   </div>
 </div>

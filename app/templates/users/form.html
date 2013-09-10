@@ -77,9 +77,9 @@
     </div>
 
     <div class="form-actions">
-      <ag-submit-button></ag-submit-button>
+      <ag-submit-button promise="promises"></ag-submit-button>
       <span ng-show="user.persisted()">
-        <ag-delete-button when-confirmed="delete(user)"></ag-delete-button>
+        <ag-delete-button promise="promises" when-confirmed="delete(user)"></ag-delete-button>
       </span>
       <a href="#/users" class="btn">Cancel</a>
     </div>

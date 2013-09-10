@@ -1,9 +1,10 @@
 class FormCtrl
-  @$inject = ["$scope", "$location", "user"]
-  constructor: ($scope, $location, user) ->
+  @$inject = ["$scope", "$location", "$q", "user"]
+  constructor: ($scope, $location, $q, user) ->
     $scope.user = user
 
     # Performs server side create or update
+    savePromise = user.$promise
     $scope.save = (user) ->
       # Do not perform save/update when the form is invalid
       return if $scope.editForm.$invalid
@@ -16,12 +17,15 @@ class FormCtrl
           errors = response.data.errors
           $scope.editForm.$serverError = errors[user.resourceName()]
 
-      user.save success: onSuccess, error: onError
+      savePromise = user.$update().then(onSuccess, onError)
 
     # Performs server side delete
+    deletePromise = user.$promise
     $scope.delete = (user) ->
       onSuccess = -> $location.path "/users"
-      user.delete success: onSuccess
+      deletePromise = user.$delete().then(onSuccess)
+
+    $scope.promises = $q.all([savePromise, deletePromise])
 
 angular.module("angleGrinder")
   .controller("users.FormCtrl", FormCtrl)
