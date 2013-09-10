@@ -49,17 +49,17 @@ describe "module: angleGrinder.gridz", ->
 
     describe "when the search request is in progress", ->
       beforeEach ->
-        $scope.$apply -> $scope.searching = true
+        $scope.$apply -> $scope.promise = undefined
 
       it "is disabled", ->
-        expect(element).toHaveClass "disabled"
+        expect(element).toBeDisabled()
 
       it "changes the button label", ->
         expect(element).toHaveText "Search..."
 
     describe "on click", ->
       beforeEach ->
-        $scope.search = name: "find it"
+        $scope.filters = name: "find it"
         $scope.advancedSearch = sinon.spy()
 
       it "calls #advancedSearch with valid params", ->
@@ -89,10 +89,10 @@ describe "module: angleGrinder.gridz", ->
 
     describe "when the search request is in progress", ->
       beforeEach ->
-        $scope.$apply -> $scope.searching = true
+        $scope.$apply -> $scope.promise = undefined
 
       it "is disabled", ->
-        expect(element).toHaveClass "disabled"
+        expect(element).toBeDisabled()
 
       it "changes the button label", ->
         expect(element).toHaveText "Reset..."
@@ -100,27 +100,33 @@ describe "module: angleGrinder.gridz", ->
     describe "on click", ->
       beforeEach ->
         $scope.resetSearch = ->
-        spyOn($scope, "resetSearch")
 
       it "calls #resetSearch", ->
+        # Given
+        spy = sinon.spy($scope, "resetSearch")
+
         # When
         element.click()
+
         # Then
-        expect($scope.resetSearch).toHaveBeenCalled()
+        expect(spy.called).toBeTruthy()
 
   describe "directive: agSearchForm", ->
     $scope = null
     element = null
 
-    beforeEach inject ($injector) ->
-      {element, $scope} = compileTemplate """
-        <form name="searchForm" ag-search-form>
-          <input type="text" name="name" ng-model="search.name" />
+    beforeEach inject ($rootScope, $injector) ->
+      $scope = $rootScope.$new()
+      $scope.grid = sinon.stub(search: angular.noop)
+
+      {element} = compileTemplate """
+        <form name="searchForm" ag-search-form="grid">
+          <input type="text" name="name" ng-model="filters.name" />
 
           <ag-search-button id="search"></ag-search-button>
           <ag-reset-search-button id="reset"></ag-reset-search-button>
         </form>
-      """, $injector
+      """, $injector, $scope
 
     it "has a valid css class", ->
       expect(element).toHaveClass "ag-search-form"
@@ -132,26 +138,19 @@ describe "module: angleGrinder.gridz", ->
         $scope.$apply -> $scope.searchForm.name.$setViewValue "find me"
 
       it "calls #advancedSearch", ->
-        # Given
-        spyOn($scope, "advancedSearch")
         # When
         $searchButton.click()
+
         # Then
-        expect($scope.advancedSearch).toHaveBeenCalledWith name: "find me"
+        expect($scope.grid.search.called).toBeTruthy()
+        expect($scope.grid.search.calledWith(name: "find me")).toBeTruthy()
 
       it "disables the submit button", ->
         # When
         $searchButton.click()
-        # Then
-        expect($searchButton).toHaveClass "disabled"
 
-      it "triggers the grid reload with the valid params", inject ($rootScope) ->
-        # Given
-        spyOn($rootScope, "$broadcast")
-        # when
-        $searchButton.click()
         # Then
-        expect($rootScope.$broadcast).toHaveBeenCalledWith "searchUpdated", name: "find me"
+        expect($searchButton).toBeDisabled()
 
     describe "on reset button click", ->
       $resetButton = null
@@ -159,23 +158,16 @@ describe "module: angleGrinder.gridz", ->
         $resetButton = element.find("button#reset")
 
       it "calls #resetSearch", ->
-        # Given
-        spyOn($scope, "resetSearch")
         # When
         $resetButton.click()
+
         # Then
-        expect($scope.resetSearch).toHaveBeenCalled()
+        expect($scope.grid.search.called).toBeTruthy()
+        expect($scope.grid.search.calledWith({})).toBeTruthy()
 
       it "disables the reset button", ->
         # When
         $resetButton.click()
-        # Then
-        expect($resetButton).toHaveClass "disabled"
 
-      it "triggers the grid reload with empty params", inject ($rootScope) ->
-        # Given
-        spyOn($rootScope, "$broadcast")
-        # when
-        $resetButton.click()
         # Then
-        expect($rootScope.$broadcast).toHaveBeenCalledWith "searchUpdated", { }
+        expect($resetButton).toBeDisabled()
