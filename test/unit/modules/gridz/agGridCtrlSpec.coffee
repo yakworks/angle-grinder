@@ -57,7 +57,7 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
   describe "#addRow", ->
     describe "when the position is not specified", ->
       it "adds a row at the first position", ->
-        # Given
+        # When
         controller.addRow(234, foo: "biz")
 
         # Then
@@ -66,7 +66,7 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
 
     describe "when the position is specified", ->
       it "adds a row at the specified position", ->
-        # Given
+        # When
         controller.addRow(234, foo: "biz", "last")
 
         # Then
@@ -76,21 +76,39 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
   describe "#hasRow", ->
     describe "if a row with the given id exists", ->
       it "returns true", ->
+        # Given
         stub = jqGridStub.getInd.returns(id: 123, foo: "bar")
 
+        # When
         expect(controller.hasRow(123)).toBeTruthy()
 
+        # Then
         expect(stub.called).toBeTruthy()
         expect(stub.calledWith(123)).toBeTruthy()
 
     describe "otherwise", ->
       it "returns false", ->
+        # Given
         stub = jqGridStub.getInd.returns(false)
 
+        # When
         expect(controller.hasRow(234)).toBeFalsy()
 
+        # Then
         expect(stub.called).toBeTruthy()
         expect(stub.calledWith(234)).toBeTruthy()
+
+  describe "#removeRow", ->
+    it "removea a row with the given id", ->
+      # Given
+      stub = jqGridStub.delRowData
+
+      # When
+      controller.removeRow(123)
+
+      # Then
+      expect(stub.called).toBeTruthy()
+      expect(stub.calledWith(123)).toBeTruthy()
 
   describe "#search", ->
     it "sets search filters and triggers grid reload", ->

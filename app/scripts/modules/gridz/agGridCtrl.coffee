@@ -52,6 +52,11 @@ gridz.controller "AgGridCtrl", class
   hasRow: (id) ->
     !!@$grid.getInd(id)
 
+  # Deletes the row with the id = rowid.
+  # This operation does not delete data from the server.
+  removeRow: (id) ->
+    @$grid.delRowData(id)
+
   # Sets the grid search filters and triggers a reload
   search: (filters) ->
     deferred = @$q.defer()

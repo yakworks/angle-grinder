@@ -77,8 +77,7 @@ gridz.directive "agGrid", [
           flashRowFor item
 
         $scope.$on "itemDeleted", (event, item) ->
-          flashRowFor item, ->
-            $grid.jqGrid "delRowData", item.id
+          flashRowFor item, -> gridCtrl.removeRow(item.id)
 
       $scope.$watch attrs.agGrid, initializeGrid
 
