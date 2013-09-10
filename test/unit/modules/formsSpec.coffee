@@ -327,6 +327,11 @@ describe "module: angleGrinder.forms", ->
 
   describe "service: confirmationDialog", ->
     it "displays the confirmation", inject ($dialog, confirmationDialog) ->
-      spyOn($dialog, "dialog").andCallThrough()
+      # Given
+      spy = sinon.spy($dialog, "dialog")
+
+      # When
       confirmationDialog.open()
-      expect($dialog.dialog).toHaveBeenCalled()
+
+      # Then
+      expect(spy.called).toBeTruthy()
