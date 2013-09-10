@@ -34,6 +34,24 @@ gridz.controller "AgGridCtrl", class
   setParam: (params) ->
     @$grid.setGridParam(params)
 
+  # Updates the values (using the data array) in the row with rowid.
+  # The syntax of data array is: {name1:value1,name2: value2...}
+  # where the name is the name of the column as described in the colModel
+  # and the value is the new value.
+  updateRow: (id, data) ->
+    @$grid.setRowData(id, data)
+
+  # Inserts a new row with id = rowid containing the data in data (an object) at
+  # the position specified (first in the table, last in the table or before or after the row specified in srcrowid).
+  # The syntax of the data object is: {name1:value1,name2: value2...}
+  # where name is the name of the column as described in the colModel and the value is the value.
+  addRow: (id, data, position = "first") ->
+    @$grid.addRowData(id, data, position)
+
+  # Returns `true` if the grid contains a row with the given id
+  hasRow: (id) ->
+    !!@$grid.getInd(id)
+
   # Sets the grid search filters and triggers a reload
   search: (filters) ->
     deferred = @$q.defer()

@@ -38,7 +38,7 @@ gridz.directive "agGrid", [
             if $scope.editItem? then $scope.editItem(id) else $log.warn("`$scope.editItem` is not defined")
 
         # flash the given row
-        flashRowFor = (item, complete = ->) ->
+        flashRowFor = (item, complete = angular.noop) ->
           $row = $($grid[0].rows.namedItem(item.id))
 
           $row.css "background-color", "#DFF0D8"
@@ -69,10 +69,10 @@ gridz.directive "agGrid", [
 
         # catch broadcast event after save. This will need to change
         $scope.$on "itemUpdated", (event, item) ->
-          if $grid.jqGrid("getInd", item.id)
-            $grid.jqGrid "setRowData", item.id, item
+          if gridCtrl.hasRow(item.id)
+            gridCtrl.updateRow(item.id, item)
           else
-            $grid.jqGrid "addRowData", item.id, item, "first"
+            gridCtrl.addRow(item.id, item, "first")
 
           flashRowFor item
 

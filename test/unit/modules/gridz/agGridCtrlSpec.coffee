@@ -45,6 +45,53 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
       expect(jqGridStub.setGridParam.called).toBeTruthy()
       expect(jqGridStub.setGridParam.calledWith(foo: "bar")).toBeTruthy()
 
+  describe "#updateRow", ->
+    it "updates a row with the given id", ->
+      # Given
+      controller.updateRow(123, foo: "bar")
+
+      # Then
+      expect(jqGridStub.setRowData.called).toBeTruthy()
+      expect(jqGridStub.setRowData.calledWith(123, foo: "bar")).toBeTruthy()
+
+  describe "#addRow", ->
+    describe "when the position is not specified", ->
+      it "adds a row at the first position", ->
+        # Given
+        controller.addRow(234, foo: "biz")
+
+        # Then
+        expect(jqGridStub.addRowData.called).toBeTruthy()
+        expect(jqGridStub.addRowData.calledWith(234, foo: "biz", "first")).toBeTruthy()
+
+    describe "when the position is specified", ->
+      it "adds a row at the specified position", ->
+        # Given
+        controller.addRow(234, foo: "biz", "last")
+
+        # Then
+        expect(jqGridStub.addRowData.called).toBeTruthy()
+        expect(jqGridStub.addRowData.calledWith(234, foo: "biz", "last")).toBeTruthy()
+
+  describe "#hasRow", ->
+    describe "if a row with the given id exists", ->
+      it "returns true", ->
+        stub = jqGridStub.getInd.returns(id: 123, foo: "bar")
+
+        expect(controller.hasRow(123)).toBeTruthy()
+
+        expect(stub.called).toBeTruthy()
+        expect(stub.calledWith(123)).toBeTruthy()
+
+    describe "otherwise", ->
+      it "returns false", ->
+        stub = jqGridStub.getInd.returns(false)
+
+        expect(controller.hasRow(234)).toBeFalsy()
+
+        expect(stub.called).toBeTruthy()
+        expect(stub.calledWith(234)).toBeTruthy()
+
   describe "#search", ->
     it "sets search filters and triggers grid reload", ->
       # When
