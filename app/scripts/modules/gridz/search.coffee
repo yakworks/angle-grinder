@@ -30,7 +30,7 @@ gridz.directive "agResetSearchButton", ->
     </button>
   """
 
-gridz.directive "agSearchForm", ["$rootScope", ($rootScope) ->
+gridz.directive "agSearchForm", ["$log", ($log) ->
   restrict: "A"
   scope: false
   link: ($scope, $element, attrs) ->
@@ -39,17 +39,22 @@ gridz.directive "agSearchForm", ["$rootScope", ($rootScope) ->
     $scope.searching = false
     $scope.search = {}
 
+    grid = $scope[attrs.agSearchForm]
+    $log.warn "grid is not defined" unless grid?
+
     # Trigger search action for the grid
-    $scope.advancedSearch = (search) ->
+    $scope.advancedSearch = (filters) ->
+      return unless grid?
+
       $scope.searching = true
-      $rootScope.$broadcast "searchUpdated", search
+      grid.search(filters)
 
     # Listen to grid load complete action
     $scope.$on "gridzLoadComplete", ->
       $scope.searching = false
 
     # Reset the search form and trigger grid reload
-    $scope.resetSearch = ->
-      $scope.search = {}
-      $scope.advancedSearch($scope.search)
+    $scope.resetSearch = (filters = {}) ->
+      $scope.search = filters
+      $scope.advancedSearch(filters)
 ]

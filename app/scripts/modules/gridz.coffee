@@ -4,7 +4,7 @@ gridz = angular.module("angleGrinder.gridz", [
 ])
 
 gridz.directive "agGrid", [
-  "hasSearchFilters", "$log", (hasSearchFilters, $log) ->
+  "$log", ($log) ->
     link = ($scope, $element, attrs, gridCtrl) ->
       # publish agGrid controller to the parent scope
       alias = attrs.agGridName
@@ -85,14 +85,6 @@ gridz.directive "agGrid", [
         $scope.$on "itemDeleted", (event, item) ->
           flashRowFor item, ->
             $grid.jqGrid "delRowData", item.id
-
-        # TODO move this method to the controller
-        $scope.$on "searchUpdated", (event, filters) ->
-          params =
-            search: hasSearchFilters(filters)
-            postData: filters: JSON.stringify(filters)
-
-          $grid.setGridParam(params).trigger "reloadGrid"
 
       $scope.$watch attrs.agGrid, initializeGrid
 

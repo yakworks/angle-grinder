@@ -5,7 +5,7 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
   jqGridStub = null
 
   beforeEach inject ($rootScope, $controller) ->
-    jqGridStub = sinon.stub(jqGrid: angular.noop, getGridParam: angular.noop, trigger: angular.noop)
+    jqGridStub = sinon.stub($().jqGrid())
     elementStub = sinon.stub(find: angular.noop)
     elementStub.find.withArgs("table.gridz").returns(jqGridStub)
 
@@ -18,12 +18,42 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
     fakeColModel = [{ name: "foo", hidden: true }, { name: "bar", hidden: false }]
     jqGridStub.jqGrid.withArgs("getGridParam", "colModel").returns(fakeColModel)
 
-  describe "#reloadGrid", ->
+  describe "#reload", ->
     it "reloads the grid", ->
       # When
-      controller.reloadGrid()
+      controller.reload()
 
       # Then
+      expect(jqGridStub.trigger.called).toBeTruthy()
+      expect(jqGridStub.trigger.calledWith("reloadGrid")).toBeTruthy()
+
+  describe "#getParam", ->
+    it "retrieves a particular grid parameter", ->
+      # When
+      controller.getParam("foo")
+
+      # Then
+      expect(jqGridStub.getGridParam.called).toBeTruthy()
+      expect(jqGridStub.getGridParam.calledWith("foo")).toBeTruthy()
+
+  describe "#setParam", ->
+    it "sets a particular grid parameter", ->
+      # When
+      controller.setParam(foo: "bar")
+
+      # Then
+      expect(jqGridStub.setGridParam.called).toBeTruthy()
+      expect(jqGridStub.setGridParam.calledWith(foo: "bar")).toBeTruthy()
+
+  describe "#search", ->
+    it "sets search filters and triggers grid reload", ->
+      # When
+      controller.search(login: "foo")
+
+      # Then
+      expect(jqGridStub.setGridParam.called).toBeTruthy()
+      expect(jqGridStub.setGridParam.calledWith(search: true, postData: filters: '{"login":"foo"}')).toBeTruthy()
+
       expect(jqGridStub.trigger.called).toBeTruthy()
       expect(jqGridStub.trigger.calledWith("reloadGrid")).toBeTruthy()
 
@@ -35,7 +65,6 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
       # Then
       expect(jqGridStub.getGridParam.called).toBeTruthy()
       expect(jqGridStub.getGridParam.calledWith("selarrrow")).toBeTruthy()
-
 
   describe "#isColumnHidden", ->
     it "is defined", ->

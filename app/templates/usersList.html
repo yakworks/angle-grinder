@@ -1,7 +1,7 @@
 <section class="anchor">
   <h2>Users dialog based example</h2>
 
-  <div ng-controller="UsersSearchFormCtrl" collapse="!showSearchForm"
+  <div collapse="!showSearchForm"
        ng-include src="'templates/partials/userSearch.html'"></div>
 
   <div class="navbar navbar-grid">
@@ -40,5 +40,6 @@
     </div>
   </div>
 
-  <div ag-grid="gridOptions"></div>
+  <div ag-grid="gridOptions"
+       ag-grid-name="usersGrid"></div>
 </section>
