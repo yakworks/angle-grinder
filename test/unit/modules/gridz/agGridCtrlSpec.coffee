@@ -3,15 +3,20 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
 
   controller = null
   jqGridStub = null
+  flattenSpy = null
 
-  beforeEach inject ($rootScope, $controller) ->
+  beforeEach inject ($rootScope, $controller, flatten) ->
     jqGridStub = sinon.stub($().jqGrid())
     elementStub = sinon.stub($())
     elementStub.find.withArgs("table.gridz").returns(jqGridStub)
+    flattenSpy = sinon.spy(flatten)
 
     controller = $controller "AgGridCtrl" ,
-      $scope: $rootScope.$new(),
+      $scope: $rootScope.$new()
       $element: elementStub
+      flatten: flattenSpy
+
+    sinon.stub(controller, "_flashRow")
 
     expect(elementStub.find.calledWith("table.gridz")).toBeTruthy()
 
@@ -44,6 +49,148 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
       # Then
       expect(jqGridStub.setGridParam.called).toBeTruthy()
       expect(jqGridStub.setGridParam.calledWith(foo: "bar")).toBeTruthy()
+
+  describe "#updateRow", ->
+    it "updates a row with the given id", ->
+      # When
+      controller.updateRow(123, foo: "bar")
+
+      # Then
+      expect(jqGridStub.setRowData.called).toBeTruthy()
+      expect(jqGridStub.setRowData.calledWith(123, foo: "bar")).toBeTruthy()
+
+    it "flattens data before inserting it to the grid", ->
+      # When
+      controller.updateRow(123, foo: bar: "biz")
+
+      # Then
+      expect(flattenSpy.called).toBeTruthy()
+      expect(flattenSpy.calledWith(foo: bar: "biz")).toBeTruthy()
+
+    it "flashes the updated row", ->
+      # Given
+      controller.updateRow(123, foo: "bar")
+
+      # Then
+      expect(controller._flashRow.called).toBeTruthy()
+      expect(controller._flashRow.calledWith(123)).toBeTruthy()
+
+  describe "#addRow", ->
+    describe "when the position is not specified", ->
+      it "adds a row at the first position", ->
+        # When
+        controller.addRow(234, foo: "biz")
+
+        # Then
+        expect(jqGridStub.addRowData.called).toBeTruthy()
+        expect(jqGridStub.addRowData.calledWith(234, foo: "biz", "first")).toBeTruthy()
+
+    describe "when the position is specified", ->
+      it "adds a row at the specified position", ->
+        # When
+        controller.addRow(234, foo: "biz", "last")
+
+        # Then
+        expect(jqGridStub.addRowData.called).toBeTruthy()
+        expect(jqGridStub.addRowData.calledWith(234, foo: "biz", "last")).toBeTruthy()
+
+    it "flattens data before inserting it to the grid", ->
+      # When
+      controller.addRow(234, foo: bar: "baz")
+
+      # Then
+      expect(flattenSpy.called).toBeTruthy()
+      expect(flattenSpy.calledWith(foo: bar: "baz")).toBeTruthy()
+
+    it "flashes the inserted row", ->
+      # Given
+      controller.addRow(234, foo: "bar")
+
+      # Then
+      expect(controller._flashRow.called).toBeTruthy()
+      expect(controller._flashRow.calledWith(234)).toBeTruthy()
+
+  describe "#saveRow", ->
+    describe "when a row exists in the grid", ->
+      beforeEach -> jqGridStub.getInd.returns(true)
+
+      it "updates a row with the given id", ->
+        # Given
+        stub = jqGridStub.setRowData
+
+        # When
+        controller.saveRow(123, foo: "bar")
+
+        # Then
+        expect(stub.called).toBeTruthy()
+        expect(stub.calledWith(123, foo: "bar")).toBeTruthy()
+
+        expect(jqGridStub.addRowData.called).toBeFalsy()
+
+    describe "otherwise", ->
+      beforeEach -> jqGridStub.getInd.returns(false)
+
+      it "inserts a new row at the beginning", ->
+        # Given
+        stub = jqGridStub.addRowData
+
+        # When
+        controller.saveRow(234, foo: "biz")
+
+        # Then
+        expect(stub.called).toBeTruthy()
+        expect(stub.calledWith(234, foo: "biz", "first")).toBeTruthy()
+
+        expect(jqGridStub.setRowData.called).toBeFalsy()
+
+  describe "#hasRow", ->
+    describe "if a row with the given id exists", ->
+      it "returns true", ->
+        # Given
+        stub = jqGridStub.getInd.returns(id: 123, foo: "bar")
+
+        # When
+        expect(controller.hasRow(123)).toBeTruthy()
+
+        # Then
+        expect(stub.called).toBeTruthy()
+        expect(stub.calledWith(123)).toBeTruthy()
+
+    describe "otherwise", ->
+      it "returns false", ->
+        # Given
+        stub = jqGridStub.getInd.returns(false)
+
+        # When
+        expect(controller.hasRow(234)).toBeFalsy()
+
+        # Then
+        expect(stub.called).toBeTruthy()
+        expect(stub.calledWith(234)).toBeTruthy()
+
+  describe "#removeRow", ->
+    it "removea a row with the given id", ->
+      # Given
+      stub = jqGridStub.delRowData
+
+      # stub with callback
+      controller._flashRow.restore()
+      sinon.stub(controller, "_flashRow", (id, callback) -> callback())
+
+      # When
+      controller.removeRow(123)
+
+      # Then
+      expect(stub.called).toBeTruthy()
+      expect(stub.calledWith(123)).toBeTruthy()
+
+    it "flashes the removed row", ->
+      # Given
+      controller.removeRow(345)
+
+      # Then
+      expect(controller._flashRow.called).toBeTruthy()
+      expect(controller._flashRow.calledWith(345)).toBeTruthy()
 
   describe "#search", ->
     it "sets search filters and triggers grid reload", ->

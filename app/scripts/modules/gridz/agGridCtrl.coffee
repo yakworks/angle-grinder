@@ -5,12 +5,10 @@ gridz = angular.module("angleGrinder.gridz")
 # with `ag-grid-name` directive, for example:
 # `<div ag-grid="gridOptions" ag-grid-name="usersGrid"></div>`
 gridz.controller "AgGridCtrl", class
-  @$inject = ["$scope", "$element", "$q", "hasSearchFilters"]
-  constructor: ($scope, $element, $q, hasSearchFilters) ->
+  @$inject = ["$scope", "$element", "$q", "hasSearchFilters", "flatten"]
+  constructor: ($scope, $element, @$q, @hasSearchFilters, @flatten) ->
     # TODO assign $grid from the directive
     @$grid = $element.find("table.gridz")
-    @hasSearchFilters = hasSearchFilters
-    @$q = $q
 
   getGridId: ->
     @$grid.attr("id")
@@ -33,6 +31,37 @@ gridz.controller "AgGridCtrl", class
   # Sets a particular grid parameter
   setParam: (params) ->
     @$grid.setGridParam(params)
+
+  # Updates the values (using the data array) in the row with rowid.
+  # The syntax of data array is: {name1:value1,name2: value2...}
+  # where the name is the name of the column as described in the colModel
+  # and the value is the new value.
+  updateRow: (id, data) ->
+    @$grid.setRowData(id, @flatten(data))
+    @_flashRow(id)
+
+  # Inserts a new row with id = rowid containing the data in data (an object) at
+  # the position specified (first in the table, last in the table or before or after the row specified in srcrowid).
+  # The syntax of the data object is: {name1:value1,name2: value2...}
+  # where name is the name of the column as described in the colModel and the value is the value.
+  addRow: (id, data, position = "first") ->
+    @$grid.addRowData(id, @flatten(data), position)
+    @_flashRow(id)
+
+  # Returns `true` if the grid contains a row with the given id
+  hasRow: (id) ->
+    !!@$grid.getInd(id)
+
+  saveRow: (id, data) ->
+    if @hasRow(id)
+      @updateRow(id, data)
+    else
+      @addRow(id, data)
+
+  # Deletes the row with the id = rowid.
+  # This operation does not delete data from the server.
+  removeRow: (id) ->
+    @_flashRow id, => @$grid.delRowData(id)
 
   # Sets the grid search filters and triggers a reload
   search: (filters) ->
@@ -87,3 +116,13 @@ gridz.controller "AgGridCtrl", class
   # TODO resize after column chooser dialog
   _triggerResize: ->
     @$grid.trigger("resize")
+
+  # Flashes the given row
+  _flashRow: (id, complete = angular.noop) ->
+    $row = $(@$grid[0].rows.namedItem(id))
+
+    $row.css "background-color", "#DFF0D8"
+    $row.delay(100).fadeOut "medium", ->
+      $row.css "background-color", ""
+
+    $row.fadeIn "fast", -> complete()
