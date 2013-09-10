@@ -3,15 +3,20 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
 
   controller = null
   jqGridStub = null
+  flattenSpy = null
 
-  beforeEach inject ($rootScope, $controller) ->
+  beforeEach inject ($rootScope, $controller, flatten) ->
     jqGridStub = sinon.stub($().jqGrid())
     elementStub = sinon.stub($())
     elementStub.find.withArgs("table.gridz").returns(jqGridStub)
+    flattenSpy = sinon.spy(flatten)
 
     controller = $controller "AgGridCtrl" ,
-      $scope: $rootScope.$new(),
+      $scope: $rootScope.$new()
       $element: elementStub
+      flatten: flattenSpy
+
+    sinon.stub(controller, "_flashRow")
 
     expect(elementStub.find.calledWith("table.gridz")).toBeTruthy()
 
@@ -47,12 +52,28 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
 
   describe "#updateRow", ->
     it "updates a row with the given id", ->
-      # Given
+      # When
       controller.updateRow(123, foo: "bar")
 
       # Then
       expect(jqGridStub.setRowData.called).toBeTruthy()
       expect(jqGridStub.setRowData.calledWith(123, foo: "bar")).toBeTruthy()
+
+    it "flattens data before inserting it to the grid", ->
+      # When
+      controller.updateRow(123, foo: bar: "biz")
+
+      # Then
+      expect(flattenSpy.called).toBeTruthy()
+      expect(flattenSpy.calledWith(foo: bar: "biz")).toBeTruthy()
+
+    it "flashes the updated row", ->
+      # Given
+      controller.updateRow(123, foo: "bar")
+
+      # Then
+      expect(controller._flashRow.called).toBeTruthy()
+      expect(controller._flashRow.calledWith(123)).toBeTruthy()
 
   describe "#addRow", ->
     describe "when the position is not specified", ->
@@ -72,6 +93,22 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
         # Then
         expect(jqGridStub.addRowData.called).toBeTruthy()
         expect(jqGridStub.addRowData.calledWith(234, foo: "biz", "last")).toBeTruthy()
+
+    it "flattens data before inserting it to the grid", ->
+      # When
+      controller.addRow(234, foo: bar: "baz")
+
+      # Then
+      expect(flattenSpy.called).toBeTruthy()
+      expect(flattenSpy.calledWith(foo: bar: "baz")).toBeTruthy()
+
+    it "flashes the inserted row", ->
+      # Given
+      controller.addRow(234, foo: "bar")
+
+      # Then
+      expect(controller._flashRow.called).toBeTruthy()
+      expect(controller._flashRow.calledWith(234)).toBeTruthy()
 
   describe "#saveRow", ->
     describe "when a row exists in the grid", ->
@@ -136,12 +173,24 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
       # Given
       stub = jqGridStub.delRowData
 
+      # stub with callback
+      controller._flashRow.restore()
+      sinon.stub(controller, "_flashRow", (id, callback) -> callback())
+
       # When
       controller.removeRow(123)
 
       # Then
       expect(stub.called).toBeTruthy()
       expect(stub.calledWith(123)).toBeTruthy()
+
+    it "flashes the removed row", ->
+      # Given
+      controller.removeRow(345)
+
+      # Then
+      expect(controller._flashRow.called).toBeTruthy()
+      expect(controller._flashRow.calledWith(345)).toBeTruthy()
 
   describe "#search", ->
     it "sets search filters and triggers grid reload", ->
