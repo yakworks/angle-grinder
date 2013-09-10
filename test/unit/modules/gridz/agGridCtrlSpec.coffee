@@ -6,7 +6,7 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
 
   beforeEach inject ($rootScope, $controller) ->
     jqGridStub = sinon.stub($().jqGrid())
-    elementStub = sinon.stub(find: angular.noop)
+    elementStub = sinon.stub($())
     elementStub.find.withArgs("table.gridz").returns(jqGridStub)
 
     controller = $controller "AgGridCtrl" ,
@@ -56,6 +56,21 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
 
       expect(jqGridStub.trigger.called).toBeTruthy()
       expect(jqGridStub.trigger.calledWith("reloadGrid")).toBeTruthy()
+
+    it "returns a promise", inject ($timeout) ->
+      # Given
+      sinon.stub(controller, "reload", (callback) -> $timeout -> callback())
+      promise = controller.search(login: "foo")
+
+      resolvedValue = null
+      promise.then (data) -> resolvedValue = data
+
+      # When
+      expect(resolvedValue).toBeNull()
+      $timeout.flush()
+
+      # Then
+      expect(resolvedValue).toEqual login: "foo"
 
   describe "#getSelectedRowIds", ->
     it "returns a list of selected row ids", ->

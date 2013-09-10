@@ -49,10 +49,10 @@ describe "module: angleGrinder.gridz", ->
 
     describe "when the search request is in progress", ->
       beforeEach ->
-        $scope.$apply -> $scope.searching = true
+        $scope.$apply -> $scope.promise = undefined
 
       it "is disabled", ->
-        expect(element).toHaveClass "disabled"
+        expect(element).toBeDisabled()
 
       it "changes the button label", ->
         expect(element).toHaveText "Search..."
@@ -89,10 +89,10 @@ describe "module: angleGrinder.gridz", ->
 
     describe "when the search request is in progress", ->
       beforeEach ->
-        $scope.$apply -> $scope.searching = true
+        $scope.$apply -> $scope.promise = undefined
 
       it "is disabled", ->
-        expect(element).toHaveClass "disabled"
+        expect(element).toBeDisabled()
 
       it "changes the button label", ->
         expect(element).toHaveText "Reset..."
@@ -148,8 +148,9 @@ describe "module: angleGrinder.gridz", ->
       it "disables the submit button", ->
         # When
         $searchButton.click()
+
         # Then
-        expect($searchButton).toHaveClass "disabled"
+        expect($searchButton).toBeDisabled()
 
     describe "on reset button click", ->
       $resetButton = null
@@ -169,4 +170,4 @@ describe "module: angleGrinder.gridz", ->
         $resetButton.click()
 
         # Then
-        expect($resetButton).toHaveClass "disabled"
+        expect($resetButton).toBeDisabled()

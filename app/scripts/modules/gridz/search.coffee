@@ -16,8 +16,8 @@ gridz.directive "agSearchButton", ->
   restrict: "E"
   replace: true
   template: """
-    <button type="button" ng-click="advancedSearch(search)" ng-class="{disabled: searching}" class="btn btn-info">
-      <i class="icon-search icon-white"></i> Search<span ng-show="searching">...</span>
+    <button type="button" ng-click="advancedSearch(search)" ng-disabled="!promise" class="btn btn-info">
+      <i class="icon-search icon-white"></i> Search<span ng-show="!promise">...</span>
     </button>
   """
 
@@ -25,8 +25,8 @@ gridz.directive "agResetSearchButton", ->
   restrict: "E"
   replace: true
   template: """
-    <button type="button" ng-click="resetSearch()" ng-class="{disabled: searching}" class="btn">
-      <i class="icon-remove"></i> Reset<span ng-show="searching">...</span>
+    <button type="button" ng-click="resetSearch()" ng-disabled="!promise" class="btn">
+      <i class="icon-remove"></i> Reset<span ng-show="!promise">...</span>
     </button>
   """
 
@@ -36,22 +36,18 @@ gridz.directive "agSearchForm", ["$log", ($log) ->
   link: ($scope, $element, attrs) ->
     $element.addClass "ag-search-form"
 
-    $scope.searching = false
     $scope.search = {}
-
-    grid = $scope[attrs.agSearchForm]
-    $log.warn "grid is not defined" unless grid?
+    $scope.promise = true
 
     # Trigger search action for the grid
     $scope.advancedSearch = (filters) ->
-      return unless grid?
+      gridCtrl = $scope[attrs.agSearchForm]
 
-      $scope.searching = true
-      grid.search(filters)
+      unless gridCtrl
+        $log.warn "grid is not defined"
+        return
 
-    # Listen to grid load complete action
-    $scope.$on "gridzLoadComplete", ->
-      $scope.searching = false
+      $scope.promise = gridCtrl.search(filters)
 
     # Reset the search form and trigger grid reload
     $scope.resetSearch = (filters = {}) ->

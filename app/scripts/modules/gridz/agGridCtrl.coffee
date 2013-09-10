@@ -5,11 +5,12 @@ gridz = angular.module("angleGrinder.gridz")
 # with `ag-grid-name` directive, for example:
 # `<div ag-grid="gridOptions" ag-grid-name="usersGrid"></div>`
 gridz.controller "AgGridCtrl", class
-  @$inject = ["$scope", "$element", "hasSearchFilters"]
-  constructor: ($scope, $element, hasSearchFilters) ->
+  @$inject = ["$scope", "$element", "$q", "hasSearchFilters"]
+  constructor: ($scope, $element, $q, hasSearchFilters) ->
     # TODO assign $grid from the directive
     @$grid = $element.find("table.gridz")
     @hasSearchFilters = hasSearchFilters
+    @$q = $q
 
   getGridId: ->
     @$grid.attr("id")
@@ -21,8 +22,9 @@ gridz.controller "AgGridCtrl", class
     @getParam("selarrrow")
 
   # Reloads the grid with the current settings
-  reload: ->
+  reload: (callback = angular.noop) ->
     @$grid.trigger("reloadGrid")
+    @$grid.one "jqGridAfterLoadComplete", callback
 
   # Gets a particular grid parameter
   getParam: (name) ->
@@ -34,12 +36,16 @@ gridz.controller "AgGridCtrl", class
 
   # Sets the grid search filters and triggers a reload
   search: (filters) ->
+    deferred = @$q.defer()
+
     params =
       search: @hasSearchFilters(filters)
       postData: filters: JSON.stringify(filters)
 
     @setParam(params)
-    @reload()
+    @reload -> deferred.resolve(filters)
+
+    deferred.promise
 
   # Returns `true` if a columnt with the given id is hidden
   isColumnHidden: (columnId) ->
