@@ -8,7 +8,7 @@ class MassUpdateFormCtrl
     $scope.save = (users) ->
       promise = Users.massUpdate(ids: userIds, data: users).$promise
       promise.then ->
-        usersGrid.reloadGrid()
+        usersGrid.reload()
         $scope.closeDialog()
 
     $scope.closeDialog = ->
