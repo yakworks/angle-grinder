@@ -27,9 +27,6 @@ class UsersListCtrl
           success: (response) -> $scope.$broadcast "itemDeleted", response
           error: (response) -> $log.error "Something went wront", response
 
-    $scope.quickSearch = (search) ->
-      $scope.$broadcast "searchUpdated", search
-
   gridColumns: ->
     [
       name: "id"
@@ -55,10 +52,5 @@ class UsersListCtrl
       label: "Paid"
     ]
 
-class UsersSearchFormCtrl
-  @$inject = ["$scope"]
-  constructor: ($scope) ->
-
 angular.module("angleGrinder")
   .controller("UsersListCtrl", UsersListCtrl)
-  .controller("UsersSearchFormCtrl", UsersSearchFormCtrl)

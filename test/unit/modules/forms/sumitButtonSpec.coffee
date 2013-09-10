@@ -35,9 +35,10 @@ describe "module: angleGrinder.forms directive: agSubmitButton", ->
   describe "disabling / enabling", ->
     requestInProgress = (val) ->
       beforeEach inject (pendingRequests) ->
-        spyOn(pendingRequests, "for").andReturn(val)
+        stub = sinon.stub(pendingRequests, "for").returns(val)
         $scope.$digest()
-        expect(pendingRequests.for).toHaveBeenCalledWith("POST", "PUT", "PATCH")
+        expect(stub.called).toBeTruthy()
+        expect(stub.calledWith("POST", "PUT", "PATCH")).toBeTruthy()
 
     describe "when the request is in progress", ->
       requestInProgress true

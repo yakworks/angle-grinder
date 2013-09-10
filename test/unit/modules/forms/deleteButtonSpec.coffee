@@ -34,18 +34,25 @@ describe "module: angleGrinder.forms directive: agDeleteButton", ->
     beforeEach ->
       element.click()
       $scope.delete = ->
-      spyOn($scope, "delete")
 
     it "performs delete action", ->
+      # Given
+      spy = sinon.spy($scope, "delete")
+
+      # When
       element.click()
-      expect($scope.delete).toHaveBeenCalledWith(123)
+
+      # Then
+      expect(spy.called).toBeTruthy()
+      expect(spy.calledWith(123)).toBeTruthy()
 
   describe "disabling / enabling", ->
     requestInProgress = (val) ->
       beforeEach inject (pendingRequests) ->
-        spyOn(pendingRequests, "for").andReturn(val)
-        $scope.$digest()
-        expect(pendingRequests.for).toHaveBeenCalledWith("POST", "DELETE")
+        stub = sinon.stub(pendingRequests, "for").returns(val)
+        $scope.$apply()
+        expect(stub.called).toBeTruthy()
+        expect(stub.calledWith("POST", "DELETE")).toBeTruthy()
 
     describe "when the request is in progress", ->
       requestInProgress true

@@ -93,9 +93,15 @@ describe "module: angleGrinder.gridz, directive: agSelect2", ->
 
     describe "the open select button", ->
       it "opens the select component", ->
-        spy = spyOn($.fn, "select2")
+        # Given
+        spy = sinon.spy($.fn, "select2")
+
+        # When
         element.find("button.open").click()
-        expect(spy).toHaveBeenCalledWith "open"
+
+        # Then
+        expect(spy.called).toBeTruthy()
+        expect(spy.calledWith("open")).toBeTruthy()
 
   describe "when `selectAjaxUrl` option is provided", ->
     beforeEach inject (pathWithContext) ->

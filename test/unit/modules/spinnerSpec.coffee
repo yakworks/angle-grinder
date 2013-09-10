@@ -63,14 +63,14 @@ describe "module: angleGrinder.spinner", ->
     describe "#showSpinner", ->
       describe "when there is a pending request", ->
         beforeEach ->
-          spyOn(httpRequestTracker, "hasPendingRequests").andReturn(true)
+          sinon.stub(httpRequestTracker, "hasPendingRequests").returns(true)
 
         it "returns true", ->
           expect($scope.showSpinner()).toBeTruthy()
 
       describe "otherwise", ->
         beforeEach ->
-          spyOn(httpRequestTracker, "hasPendingRequests").andReturn(false)
+          sinon.stub(httpRequestTracker, "hasPendingRequests").returns(false)
 
         it "returns false", ->
           expect($scope.showSpinner()).toBeFalsy()

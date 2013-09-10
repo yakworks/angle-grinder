@@ -4,7 +4,7 @@ gridz = angular.module("angleGrinder.gridz", [
 ])
 
 gridz.directive "agGrid", [
-  "hasSearchFilters", "$log", (hasSearchFilters, $log) ->
+  "$log", ($log) ->
     link = ($scope, $element, attrs, gridCtrl) ->
       # publish agGrid controller to the parent scope
       alias = attrs.agGridName
@@ -67,12 +67,7 @@ gridz.directive "agGrid", [
           event.preventDefault()
           $scope.$apply -> $scope.deleteItem id
 
-        # emit `gridzLoadComplete` event
-        $grid.on "jqGridAfterLoadComplete", ->
-          $scope.$broadcast "gridzLoadComplete"
-
         # catch broadcast event after save. This will need to change
-        # TODO move this method to the controller
         $scope.$on "itemUpdated", (event, item) ->
           if $grid.jqGrid("getInd", item.id)
             $grid.jqGrid "setRowData", item.id, item
@@ -81,18 +76,9 @@ gridz.directive "agGrid", [
 
           flashRowFor item
 
-        # TODO move this method to the controller
         $scope.$on "itemDeleted", (event, item) ->
           flashRowFor item, ->
             $grid.jqGrid "delRowData", item.id
-
-        # TODO move this method to the controller
-        $scope.$on "searchUpdated", (event, filters) ->
-          params =
-            search: hasSearchFilters(filters)
-            postData: filters: JSON.stringify(filters)
-
-          $grid.setGridParam(params).trigger "reloadGrid"
 
       $scope.$watch attrs.agGrid, initializeGrid
 

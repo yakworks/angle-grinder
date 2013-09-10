@@ -5,21 +5,12 @@ gridz = angular.module("angleGrinder.gridz")
 # with `ag-grid-name` directive, for example:
 # `<div ag-grid="gridOptions" ag-grid-name="usersGrid"></div>`
 gridz.controller "AgGridCtrl", class
-  @$inject = ["$scope", "$element"]
-  constructor: ($scope, $element) ->
+  @$inject = ["$scope", "$element", "$q", "hasSearchFilters"]
+  constructor: ($scope, $element, $q, hasSearchFilters) ->
     # TODO assign $grid from the directive
     @$grid = $element.find("table.gridz")
-
-  # Returns column model for the jqGrid
-  # @private
-  _getColModel: ->
-    @$grid.jqGrid("getGridParam", "colModel")
-
-  # Triggers grid's resize event
-  # TODO fix grid resizing issues
-  # TODO resize after column chooser dialog
-  _triggerGridResize: ->
-    @$grid.trigger("resize")
+    @hasSearchFilters = hasSearchFilters
+    @$q = $q
 
   getGridId: ->
     @$grid.attr("id")
@@ -28,11 +19,33 @@ gridz.controller "AgGridCtrl", class
   # This is a one-dimensional array and the values in the array correspond
   # to the selected id's in the grid.
   getSelectedRowIds: ->
-    @$grid.getGridParam("selarrrow")
+    @getParam("selarrrow")
 
   # Reloads the grid with the current settings
-  reloadGrid: ->
+  reload: (callback = angular.noop) ->
     @$grid.trigger("reloadGrid")
+    @$grid.one "jqGridAfterLoadComplete", callback
+
+  # Gets a particular grid parameter
+  getParam: (name) ->
+    @$grid.getGridParam(name)
+
+  # Sets a particular grid parameter
+  setParam: (params) ->
+    @$grid.setGridParam(params)
+
+  # Sets the grid search filters and triggers a reload
+  search: (filters) ->
+    deferred = @$q.defer()
+
+    params =
+      search: @hasSearchFilters(filters)
+      postData: filters: JSON.stringify(filters)
+
+    @setParam(params)
+    @reload -> deferred.resolve(filters)
+
+    deferred.promise
 
   # Returns `true` if a columnt with the given id is hidden
   isColumnHidden: (columnId) ->
@@ -43,7 +56,7 @@ gridz.controller "AgGridCtrl", class
   toggleColumn: (columnId) ->
     showOrHide = if @isColumnHidden(columnId) then "showCol" else "hideCol"
     @$grid.jqGrid(showOrHide, columnId)
-    @_triggerGridResize()
+    @_triggerResize()
 
   # Invokes a dialog for choosing and reordering grid's columns
   # see: http://www.trirand.com/jqgridwiki/doku.php?id=wiki%3ajquery_ui_methods#column_chooser
@@ -62,3 +75,15 @@ gridz.controller "AgGridCtrl", class
       window.localStorage.setItem("gridz.#{@getGridId()}.choosedColumns", angular.toJson(choosedColumns))
 
     @$grid.jqGrid("columnChooser", options)
+
+  # Returns column model for the jqGrid
+  # @private
+  _getColModel: ->
+    @$grid.jqGrid("getGridParam", "colModel")
+
+  # Triggers grid's resize event
+  # @private
+  # TODO fix grid resizing issues
+  # TODO resize after column chooser dialog
+  _triggerResize: ->
+    @$grid.trigger("resize")
