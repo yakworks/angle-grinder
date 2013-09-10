@@ -67,12 +67,7 @@ gridz.directive "agGrid", [
           event.preventDefault()
           $scope.$apply -> $scope.deleteItem id
 
-        # emit `gridzLoadComplete` event
-        $grid.on "jqGridAfterLoadComplete", ->
-          $scope.$broadcast "gridzLoadComplete"
-
         # catch broadcast event after save. This will need to change
-        # TODO move this method to the controller
         $scope.$on "itemUpdated", (event, item) ->
           if $grid.jqGrid("getInd", item.id)
             $grid.jqGrid "setRowData", item.id, item
@@ -81,7 +76,6 @@ gridz.directive "agGrid", [
 
           flashRowFor item
 
-        # TODO move this method to the controller
         $scope.$on "itemDeleted", (event, item) ->
           flashRowFor item, ->
             $grid.jqGrid "delRowData", item.id
