@@ -16,7 +16,7 @@ gridz.directive "agSearchButton", ->
   restrict: "E"
   replace: true
   template: """
-    <button type="button" ng-click="advancedSearch(search)" ng-disabled="!promise" class="btn btn-info">
+    <button type="button" ng-click="advancedSearch(filters)" ng-disabled="!promise" class="btn btn-info">
       <i class="icon-search icon-white"></i> Search<span ng-show="!promise">...</span>
     </button>
   """
@@ -36,7 +36,7 @@ gridz.directive "agSearchForm", ["$log", ($log) ->
   link: ($scope, $element, attrs) ->
     $element.addClass "ag-search-form"
 
-    $scope.search = {}
+    $scope.filters = {}
     $scope.promise = true
 
     # Trigger search action for the grid
@@ -51,6 +51,6 @@ gridz.directive "agSearchForm", ["$log", ($log) ->
 
     # Reset the search form and trigger grid reload
     $scope.resetSearch = (filters = {}) ->
-      $scope.search = filters
+      $scope.filters = filters
       $scope.advancedSearch(filters)
 ]

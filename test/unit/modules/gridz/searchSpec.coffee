@@ -59,7 +59,7 @@ describe "module: angleGrinder.gridz", ->
 
     describe "on click", ->
       beforeEach ->
-        $scope.search = name: "find it"
+        $scope.filters = name: "find it"
         $scope.advancedSearch = sinon.spy()
 
       it "calls #advancedSearch with valid params", ->
@@ -121,7 +121,7 @@ describe "module: angleGrinder.gridz", ->
 
       {element} = compileTemplate """
         <form name="searchForm" ag-search-form="grid">
-          <input type="text" name="name" ng-model="search.name" />
+          <input type="text" name="name" ng-model="filters.name" />
 
           <ag-search-button id="search"></ag-search-button>
           <ag-reset-search-button id="reset"></ag-reset-search-button>

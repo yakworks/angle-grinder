@@ -27,9 +27,6 @@ class UsersListCtrl
           success: (response) -> $scope.$broadcast "itemDeleted", response
           error: (response) -> $log.error "Something went wront", response
 
-    $scope.quickSearch = (filters) ->
-      $scope.usersGrid.search(filters)
-
   gridColumns: ->
     [
       name: "id"
