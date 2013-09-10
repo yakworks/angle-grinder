@@ -73,6 +73,39 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
         expect(jqGridStub.addRowData.called).toBeTruthy()
         expect(jqGridStub.addRowData.calledWith(234, foo: "biz", "last")).toBeTruthy()
 
+  describe "#saveRow", ->
+    describe "when a row exists in the grid", ->
+      beforeEach -> jqGridStub.getInd.returns(true)
+
+      it "updates a row with the given id", ->
+        # Given
+        stub = jqGridStub.setRowData
+
+        # When
+        controller.saveRow(123, foo: "bar")
+
+        # Then
+        expect(stub.called).toBeTruthy()
+        expect(stub.calledWith(123, foo: "bar")).toBeTruthy()
+
+        expect(jqGridStub.addRowData.called).toBeFalsy()
+
+    describe "otherwise", ->
+      beforeEach -> jqGridStub.getInd.returns(false)
+
+      it "inserts a new row at the beginning", ->
+        # Given
+        stub = jqGridStub.addRowData
+
+        # When
+        controller.saveRow(234, foo: "biz")
+
+        # Then
+        expect(stub.called).toBeTruthy()
+        expect(stub.calledWith(234, foo: "biz", "first")).toBeTruthy()
+
+        expect(jqGridStub.setRowData.called).toBeFalsy()
+
   describe "#hasRow", ->
     describe "if a row with the given id exists", ->
       it "returns true", ->

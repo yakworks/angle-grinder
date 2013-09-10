@@ -67,15 +67,14 @@ gridz.directive "agGrid", [
           event.preventDefault()
           $scope.$apply -> $scope.deleteItem id
 
-        # catch broadcast event after save. This will need to change
+        # Catch broadcast event after save.
+        # This will need to change.
+        # TODO change it
         $scope.$on "itemUpdated", (event, item) ->
-          if gridCtrl.hasRow(item.id)
-            gridCtrl.updateRow(item.id, item)
-          else
-            gridCtrl.addRow(item.id, item, "first")
-
+          gridCtrl.saveRow(item.id, item)
           flashRowFor item
 
+        # TODO change it
         $scope.$on "itemDeleted", (event, item) ->
           flashRowFor item, -> gridCtrl.removeRow(item.id)
 

@@ -52,6 +52,12 @@ gridz.controller "AgGridCtrl", class
   hasRow: (id) ->
     !!@$grid.getInd(id)
 
+  saveRow: (id, data) ->
+    if @hasRow(id)
+      @updateRow(id, data)
+    else
+      @addRow(id, data)
+
   # Deletes the row with the id = rowid.
   # This operation does not delete data from the server.
   removeRow: (id) ->
