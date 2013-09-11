@@ -53,7 +53,7 @@ class ListCtrl
     [
       name: "id"
       label: "Inv No"
-      width: 60
+      width: 80
       sorttype: "int"
     ,
       name: "customer.name"
