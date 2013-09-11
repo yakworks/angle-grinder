@@ -7,6 +7,7 @@ class Data
   # Loads sample data into memory
   loadData: ->
     data = require("./large_load")
+
     for row, index in data
       # generate row id and login
       row.id = @nextId()
