@@ -16,7 +16,6 @@ class ListCtrl
     $scope.editItem = (id) ->
       $location.path("/users/#{id}/edit")
 
-    # TODO write specs for this method
     $scope.massUpdate = ->
       userIds = $scope.usersGrid.getSelectedRowIds()
       return if userIds.length is 0

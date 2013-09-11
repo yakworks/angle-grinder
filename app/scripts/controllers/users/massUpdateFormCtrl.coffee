@@ -1,4 +1,3 @@
-# TODO write specs for this controller
 class MassUpdateFormCtrl
 
   @$inject = ["$scope", "Users", "userIds", "dialog", "usersGrid"]
@@ -9,7 +8,7 @@ class MassUpdateFormCtrl
       promise = Users.massUpdate(ids: userIds, data: users).$promise
       promise.then ->
         usersGrid.reload()
-        $scope.closeDialog()
+        dialog.close()
 
     $scope.closeDialog = ->
       dialog.close()
