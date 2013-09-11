@@ -10,6 +10,7 @@ class ListCtrl
       datatype: "local"
       colModel: @gridColumns()
       sortname: "id"
+      actionPopup: false
 
     $scope.editItem = (id) =>
       item = @findItemById(id)
