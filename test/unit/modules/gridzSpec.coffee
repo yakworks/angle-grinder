@@ -66,6 +66,15 @@ describe "module: angleGrinder.gridz", ->
       it "generates `id` for the pager", ->
         expect(element.find("div.gridz-pager").attr("id")).toEqual "projectsGrid-pager"
 
+      describe "the grid controller", ->
+
+        it "is assigned to the scope", ->
+          expect($scope.projectsGrid).toBeDefined()
+
+        it "is initialized with the grid element", ->
+          expect($scope.projectsGrid.$grid).toBeDefined()
+          expect($scope.projectsGrid.$grid).toEqual element.find("table.gridz")
+
   describe "service: flatten", ->
     it "is defined", inject (flatten) ->
       expect(flatten).toBeDefined()

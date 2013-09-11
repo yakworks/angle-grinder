@@ -5,10 +5,11 @@ gridz = angular.module("angleGrinder.gridz")
 # with `ag-grid-name` directive, for example:
 # `<div ag-grid="gridOptions" ag-grid-name="usersGrid"></div>`
 gridz.controller "AgGridCtrl", class
-  @$inject = ["$scope", "$element", "$q", "hasSearchFilters", "flatten"]
-  constructor: ($scope, $element, @$q, @hasSearchFilters, @flatten) ->
-    # TODO assign $grid from the directive
-    @$grid = $element.find("table.gridz")
+  @$inject = ["$q", "hasSearchFilters", "flatten"]
+  constructor: (@$q, @hasSearchFilters, @flatten) ->
+
+  registerGridElement: ($grid) ->
+    @$grid = $grid
 
   getGridId: ->
     @$grid.attr("id")

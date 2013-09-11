@@ -6,6 +6,9 @@ gridz = angular.module("angleGrinder.gridz", [
 gridz.directive "agGrid", [
   "$log", ($log) ->
     link = ($scope, $element, attrs, gridCtrl) ->
+      # initialize the controller
+      gridCtrl.registerGridElement($element.find("table.gridz"))
+
       # publish agGrid controller to the parent scope
       alias = attrs.agGridName
       $scope[alias] = gridCtrl if alias?

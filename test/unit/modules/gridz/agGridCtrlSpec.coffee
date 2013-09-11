@@ -1,24 +1,21 @@
 describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
-  beforeEach module("angleGrinder.gridz")
+
+  beforeEach module "angleGrinder.gridz", ($provide) ->
+    # substitute `flatten` service with a spy
+    fakeFlatten = (data) -> data
+    $provide.value "flatten", sinon.spy(fakeFlatten)
+
+    return
 
   controller = null
   jqGridStub = null
-  flattenSpy = null
 
-  beforeEach inject ($rootScope, $controller, flatten) ->
+  beforeEach inject ($controller) ->
     jqGridStub = sinon.stub($().jqGrid())
-    elementStub = sinon.stub($())
-    elementStub.find.withArgs("table.gridz").returns(jqGridStub)
-    flattenSpy = sinon.spy(flatten)
 
-    controller = $controller "AgGridCtrl" ,
-      $scope: $rootScope.$new()
-      $element: elementStub
-      flatten: flattenSpy
-
+    controller = $controller "AgGridCtrl"
+    controller.registerGridElement(jqGridStub)
     sinon.stub(controller, "_flashRow")
-
-    expect(elementStub.find.calledWith("table.gridz")).toBeTruthy()
 
     fakeColModel = [{ name: "foo", hidden: true }, { name: "bar", hidden: false }]
     jqGridStub.jqGrid.withArgs("getGridParam", "colModel").returns(fakeColModel)
@@ -59,13 +56,13 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
       expect(jqGridStub.setRowData.called).toBeTruthy()
       expect(jqGridStub.setRowData.calledWith(123, foo: "bar")).toBeTruthy()
 
-    it "flattens data before inserting it to the grid", ->
+    it "flattens data before inserting it to the grid", inject (flatten) ->
       # When
       controller.updateRow(123, foo: bar: "biz")
 
       # Then
-      expect(flattenSpy.called).toBeTruthy()
-      expect(flattenSpy.calledWith(foo: bar: "biz")).toBeTruthy()
+      expect(flatten.called).toBeTruthy()
+      expect(flatten.calledWith(foo: bar: "biz")).toBeTruthy()
 
     it "flashes the updated row", ->
       # Given
@@ -94,13 +91,13 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
         expect(jqGridStub.addRowData.called).toBeTruthy()
         expect(jqGridStub.addRowData.calledWith(234, foo: "biz", "last")).toBeTruthy()
 
-    it "flattens data before inserting it to the grid", ->
+    it "flattens data before inserting it to the grid", inject (flatten) ->
       # When
       controller.addRow(234, foo: bar: "baz")
 
       # Then
-      expect(flattenSpy.called).toBeTruthy()
-      expect(flattenSpy.calledWith(foo: bar: "baz")).toBeTruthy()
+      expect(flatten.called).toBeTruthy()
+      expect(flatten.calledWith(foo: bar: "baz")).toBeTruthy()
 
     it "flashes the inserted row", ->
       # Given
