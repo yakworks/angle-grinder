@@ -232,16 +232,21 @@
     border: 1px solid #D4D4D4;
     border-bottom: none;
   }
-  .icon-selected-pointer {
-    background: url(../images/selectPointer.gif) no-repeat center left;
-    height: 16px;
-    line-height: 14px;
-    margin-top: 14px;
-  }
   .divider-vertical.skinny {
     margin: 0 2px;
   }
 }
+
+.icon-selected-pointer {
+  height: 16px;
+  line-height: 14px;
+  margin-top: 14px;
+
+  &:before {
+    content: url(../images/selectPointer.gif);
+  }
+}
+
 .navbar-inner.with-selected-pointer {
   padding-left: 4px;
 }
