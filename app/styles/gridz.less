@@ -232,29 +232,21 @@
     border: 1px solid #D4D4D4;
     border-bottom: none;
   }
-  .icon-selected-pointer {
-    background: url(../images/selectPointer.gif) no-repeat center left;
-    height: 16px;
-    line-height: 14px;
-    margin-top: 14px;
-  }
   .divider-vertical.skinny {
     margin: 0 2px;
   }
-  .nav {
-    li.selected-actions {
-      a {
-        padding-left: 4px;
-        padding-right: 8px;
-      }
-    }
-    li.grid-options {
-      a {
-        padding: 10px;
-      }
-    }
+}
+
+.icon-selected-pointer {
+  height: 16px;
+  line-height: 14px;
+  margin-top: 14px;
+
+  &:before {
+    content: url(../images/selectPointer.gif);
   }
 }
+
 .navbar-inner.with-selected-pointer {
   padding-left: 4px;
 }
@@ -283,5 +275,20 @@
   .arrow:after {
     top: -10px;
     box-shadow: none;
+  }
+}
+
+// styles for the advanced search form
+form.ag-search-form {
+  label.control-label {
+    width: 120px;
+  }
+
+  .controls {
+    margin-left: 150px;
+
+    input {
+      width: 245px;
+    }
   }
 }

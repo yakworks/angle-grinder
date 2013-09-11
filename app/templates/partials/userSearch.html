@@ -20,20 +20,14 @@
       <div class="control-group span6">
         <label class="control-label">Birthday from</label>
         <div class="controls">
-          <input type="text"
-                 ui-date="{ changeYear: true, changeMonth: true, yearRange: '1900:-0' }"
-                 ui-date-format
-                 ng-model="filters.birthday.from" />
+          <input type="text" bs-datepicker ng-model="filters.birthday.from" />
         </div>
       </div>
 
       <div class="control-group span6">
         <label class="control-label">Birthday to</label>
         <div class="controls">
-          <input type="text"
-                 ui-date="{ changeYear: true, changeMonth: true, yearRange: '1900:-0' }"
-                 ui-date-format
-                 ng-model="filters.birthday.to" />
+          <input type="text" bs-datepicker ng-model="filters.birthday.to" />
         </div>
       </div>
     </div>

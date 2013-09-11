@@ -1,8 +1,16 @@
 forms = angular.module("angleGrinder.forms", [
-  "angleGrinder.common",
+  "angleGrinder.common"
   "ui.bootstrap"
-  "ui.date"
+  "$strap.directives"
 ])
+
+forms.value "$strapConfig",
+  datepicker:
+    language: "en"
+    format: "mm/dd/yyyy"
+    type: "iso"
+    autoClose: true
+    forceParse: false
 
 class FormDialogCtrl
   @$inject = ["$scope", "$rootScope", "$log", "dialog", "item", "gridCtrl"]
