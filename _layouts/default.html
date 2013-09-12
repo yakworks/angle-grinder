@@ -37,9 +37,11 @@
           <div class="bs-sidebar hidden-print" role="complementary">
             <ul class="nav bs-sidenav">
               {% if page.slug == "index" %}
+                <!-- Main page nav -->
                 {% include nav-index.html %}
               {% endif %}
               {% if page.slug == "docs" %}
+                <!-- Documentation page page nav -->
                 {% include nav-docs.html %}
               {% endif %}
             </ul>
