@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Angle Grinder - Bootstrap and Grid</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="gridz examples">
+  <meta name="description" content="gridz examples">
+  <meta name="author" content="Joshua Burnett">
+
+  <script src="scripts/jquery.min.js"></script>
+
+  <script src="scripts/underscore.min.js"></script>
+
+  <script src="scripts/bootstrap.min.js"></script>
+
+  <script src="scripts/bootstrap-extras.min.js"></script>
+
+  <link rel="stylesheet" href="styles/bootstrap.min.css">
+
+  <link rel="stylesheet" href="styles/style.min.css">
+
+  <script src="scripts/angularjs-all.min.js"></script>
+
+  <script src="scripts/gridz.min.js"></script>
+
+  <script src="scripts/angleGrinder.common.min.js"></script>
+
+  <script src="scripts/angleGrinder.dataGenerator.min.js"></script>
+
+  <script src="scripts/angleGrinder.gridz.min.js"></script>
+
+  <script src="scripts/angleGrinder.forms.min.js"></script>
+
+  <script src="scripts/angleGrinder.alerts.min.js"></script>
+
+  <script src="scripts/angleGrinder.spinner.min.js"></script>
+
+  <link rel="stylesheet" href="styles/gridz.min.css">
+
+  <!--[if IE 7]>
+  <link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css">
+  <![endif]-->
+
+  <!--[if lt IE 9]>
+  <link rel="stylesheet" href="css/custom-theme/jquery.ui.1.10.1.ie.css">
+  <![endif]-->
+
+  <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <script src="scripts/scripts.min.js"></script>
+</head>
+
+<body ng-app="angleGrinder">
+
+<div ng-include="" src="'templates/navbarTop.html'"></div>
+
+<header class="jumbotron subhead" id="overview">
+  <div class="container">
+    <h1>Grinder</h1>
+    <p class="lead">Spark up your Bootstrap apps. Examples and components</p>
+  </div>
+</header>
+
+<div class="container">
+  <aside class="sidebar bs-docs-sidebar">
+    <ul class="nav nav-list bs-docs-sidenav">
+      <li><a href="#/list"><i class="icon-chevron-right"></i>Grid example</a></li>
+      <li><a href="#/users_list"><i class="icon-chevron-right"></i>Users (dialog based)</a></li>
+      <li><a href="#/users"><i class="icon-chevron-right"></i>Users</a></li>
+    </ul>
+  </aside>
+
+  <section class="content">
+    <ag-alerts></ag-alerts>
+    <ng-view></ng-view>
+  </section>
+</div>
+
+</body>
+</html>
