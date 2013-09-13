@@ -10,14 +10,11 @@ class ListCtrl
       sortname: "login"
       sortorder: "asc"
 
-    # Handles quickSearch action
-    $scope.quickSearch = (search) ->
-      $scope.$broadcast "searchUpdated", search
-
     # Displays a form for creating a new user
     $scope.createItem = ->
+      console.log $scope.usersGrid
       user = new Resource()
-      editDialog.open(pathWithContext("/user/formTemplate"), user)
+      editDialog.open(pathWithContext("/user/formTemplate"), user, $scope.usersGrid)
 
     # Displays a form for editing an exiting user
     $scope.editItem = (id) ->
@@ -26,16 +23,14 @@ class ListCtrl
         user = angular.copy(record)
         user.contact.type = record.contact.type?.name
 
-        editDialog.open(pathWithContext("/user/formTemplate"), user)
+        editDialog.open(pathWithContext("/user/formTemplate"), user, $scope.usersGrid)
 
     $scope.deleteItem = (id) ->
       confirmationDialog.open().then (confirmed) ->
         return unless confirmed
 
-        item = new Resource(id: id)
-        item.delete
-          success: (response) -> $scope.$broadcast "itemDeleted", item
-          error: (response) -> $log.error "Something went wront", response
+        promise = Resource.delete(id: id).$promise
+        promise.then (response) -> $scope.usersGrid.removeRow(response.id)
 
   colModel: ->
     [

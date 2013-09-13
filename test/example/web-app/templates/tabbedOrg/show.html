@@ -89,14 +89,14 @@
         <div collapse="!showSearchForm">
           <!-- TODO ng-include and angular-ui tabs is broken in AngularJS 1.2.x -->
           <div class="well">
-            <form ag-search-Form class="form-horizontal form-multi-column no-margin">
+            <form ag-search-form="contactsGrid" class="form-horizontal form-multi-column no-margin">
 
               <div class="row-fluid">
                 <div class="control-group span6">
                   <label class="control-label">Name</label>
 
                   <div class="controls">
-                    <input class="input-block-level" type="text" ng-model="search.contact.name">
+                    <input class="input-block-level" type="text" ng-model="filters.contact.name">
                   </div>
                 </div>
 
@@ -104,7 +104,7 @@
                   <label class="control-label">Login</label>
 
                   <div class="controls">
-                    <input class="input-block-level" type="text" ng-model="search.login">
+                    <input class="input-block-level" type="text" ng-model="filters.login">
                   </div>
                 </div>
               </div>
@@ -114,7 +114,7 @@
                   <label class="control-label">Contact email</label>
 
                   <div class="controls">
-                    <input class="input-block-level" type="text" ng-model="search.contact.email">
+                    <input class="input-block-level" type="text" ng-model="filters.contact.email">
                   </div>
                 </div>
               </div>
@@ -145,14 +145,16 @@
               </li>
             </ul>
 
-            <form action="" class="navbar-search pull-right" ng-submit="quickSearch(search)">
+            <form action="" class="navbar-search pull-right" ng-submit="contactsGrid.search(filters)">
               <input type="text" value="" placeholder="quick search" class="search-query span2" style="width: 150px;"
-                     ng-model="search.quickSearch"/>
+                     ng-model="filters.quickSearch"/>
             </form>
           </div>
         </div>
 
-        <div ng-show="gridOptions" ag-grid="gridOptions"></div>
+        <div ng-show="gridOptions"
+             ag-grid="gridOptions"
+             ag-grid-name="contactsGrid"></div>
       </div>
     </tab>
   </tabset>

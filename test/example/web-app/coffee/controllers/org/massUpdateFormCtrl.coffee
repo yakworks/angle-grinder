@@ -9,7 +9,7 @@ class MassUpdateFormCtrl
 
       promise = Resource.massUpdate(ids: orgIds, data: orgs).$promise
       promise.then ->
-        orgGrid.reloadGrid()
+        orgGrid.reload()
         $scope.closeDialog()
 
     $scope.closeDialog = ->

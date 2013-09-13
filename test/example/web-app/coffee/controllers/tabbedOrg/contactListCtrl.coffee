@@ -22,10 +22,6 @@ class ContactListCtrl
         sortname: "login"
         sortorder: "asc"
 
-    # Handles quickSearch action
-    $scope.quickSearch = (search) ->
-      $scope.$broadcast "searchUpdated", search
-
     # Displays a form for creating a new user
     $scope.createItem = ->
       user = new Users(contact: org: $scope.$org)
@@ -40,10 +36,8 @@ class ContactListCtrl
       confirmationDialog.open().then (confirmed) ->
         return unless confirmed
 
-        item = new Users(id: id)
-        item.delete
-          success: (response) -> $scope.$broadcast "itemDeleted", item
-          error: (response) -> $log.error "Something went wront", response
+        promise = Users.delete(id: id).$promise
+        promise.then (response) -> $scope.usersGrid.removeRow(response.id)
 
   colModel: ->
     [

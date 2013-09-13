@@ -1,7 +1,7 @@
 class ListCtrl
 
-  @$inject = ["$scope", "$dialog", "pathWithContext"]
-  constructor: ($scope, $dialog, pathWithContext) ->
+  @$inject = ["$scope", "$dialog", "pathWithContext", "Resource", "confirmationDialog"]
+  constructor: ($scope, $dialog, pathWithContext, Resource, confirmationDialog) ->
     $scope.gridOptions =
       url: pathWithContext("/org/list.json")
       colModel: @colModel()
@@ -10,9 +10,12 @@ class ListCtrl
       sortname: "num"
       sortorder: "asc"
 
-    # Handles quickSearch action
-    $scope.quickSearch = (search) ->
-      $scope.$broadcast "searchUpdated", search
+    $scope.deleteItem = (id) ->
+      confirmationDialog.open().then (confirmed) ->
+        return unless confirmed
+
+        promise = Resource.delete(id: id).$promise
+        promise.then (response) -> $scope.orgGrid.removeRow(response.id)
 
     $scope.massUpdate = ->
       orgIds = $scope.orgGrid.getSelectedRowIds()

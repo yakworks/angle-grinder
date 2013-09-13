@@ -66,14 +66,15 @@
                 </li>
             </ul>
 
-            <form action="" class="navbar-search pull-right" ng-submit="quickSearch(search)">
+            <form action="" class="navbar-search pull-right" ng-submit="usersGrid.search(filters)">
                 <input type="text" value="" placeholder="quick search" class="search-query span2" style="width: 150px;"
-                       ng-model="search.quickSearch"/>
+                       ng-model="filters.quickSearch"/>
             </form>
         </div>
     </div>
 
-    <div ag-grid="gridOptions"></div>
+    <div ag-grid="gridOptions"
+         ag-grid-name="usersGrid"></div>
 </div>
 
 </body>

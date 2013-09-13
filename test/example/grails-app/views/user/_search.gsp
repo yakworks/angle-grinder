@@ -1,5 +1,5 @@
 <div class="well" ng-controller="user.SearchForm">
-    <form ag-search-Form class="form-horizontal form-multi-column no-margin">
+    <form ag-search-form="usersGrid" class="form-horizontal form-multi-column no-margin">
 
         <div class="row-fluid">
             <div class="control-group span6">
@@ -10,7 +10,7 @@
                         <ag-select2 select-ajax-url="/org/pickList"
                                     select-ajax-quiet-millis="250"
                                     select-minimum-input-length="3"
-                                    ng-model="search.org">
+                                    ng-model="filters.org">
                             <table ag-select2-result class="table table-condensed org-select-result">
                                 <tr>
                                     <td>{{item.num}}</td>
@@ -28,7 +28,7 @@
                 <label class="control-label">${ag.label(code: "name")}</label>
 
                 <div class="controls">
-                    <input class="input-block-level" type="text" ng-model="search.contact.name">
+                    <input class="input-block-level" type="text" ng-model="filters.contact.name">
                 </div>
             </div>
 
@@ -36,7 +36,7 @@
                 <label class="control-label">${ag.label(code: "login")}</label>
 
                 <div class="controls">
-                    <input class="input-block-level" type="text" ng-model="search.login">
+                    <input class="input-block-level" type="text" ng-model="filters.login">
                 </div>
             </div>
         </div>
@@ -46,7 +46,7 @@
                 <label class="control-label">${ag.label(code: "contact.email")}</label>
 
                 <div class="controls">
-                    <input class="input-block-level" type="text" ng-model="search.contact.email">
+                    <input class="input-block-level" type="text" ng-model="filters.contact.email">
                 </div>
             </div>
 
@@ -55,7 +55,7 @@
 
                 <div class="controls">
                     <input type="text" ui-select2="contactTypeSelectOptions"
-                           name="contactType" ng-model="search.contact.type" />
+                           name="contactType" ng-model="filters.contact.type" />
                 </div>
             </div>
         </div>
@@ -67,10 +67,7 @@
                     <input type="text"
                            ui-date="{ changeYear: true, changeMonth: true, yearRange: '1900:-0' }"
                            ui-date-format
-                           ng-model="search.activeDate.from" />
-                    <button class="btn" ng-click="search.activeDate.from = null">
-                        <i class="icon-remove"></i>
-                    </button>
+                           ng-model="filters.activeDate.from" />
                 </div>
             </div>
 
@@ -80,10 +77,7 @@
                     <input type="text"
                            ui-date="{ changeYear: true, changeMonth: true, yearRange: '1900:-0' }"
                            ui-date-format
-                           ng-model="search.activeDate.to" />
-                    <button class="btn" ng-click="search.activeDate.to = null">
-                        <i class="icon-remove"></i>
-                    </button>
+                           ng-model="filters.activeDate.to" />
                 </div>
             </div>
         </div>
