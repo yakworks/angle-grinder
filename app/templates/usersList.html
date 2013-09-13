@@ -1,21 +1,21 @@
 <section class="anchor">
   <h2>Users dialog based example</h2>
 
-  <div ng-controller="UsersSearchFormCtrl" collapse="!showSearchForm"
+  <div collapse="!showSearchForm"
        ng-include src="'templates/partials/userSearch.html'"></div>
 
   <div class="navbar navbar-grid">
     <div class="navbar-inner with-selected-pointer with-grid-options">
       <ul class="nav">
-        <li><span class="icon-selected-pointer"> </span></li>
         <li class="dropdown selected-actions">
-          <a data-toggle="dropdown" class="dropdown-toggle" href="#" stlye="padding-left:5px">
-            Actions <b class="caret"></b>
+          <a data-toggle="dropdown" class="dropdown-toggle" href="#" style="padding-left: 2px">
+            <i class="icon-selected-pointer"></i> Actions <b class="caret"></b>
           </a>
           <ul class="dropdown-menu">
-            <li><a href="#"><i class="icon-eye-open"></i> View</a></li>
-            <li><a href="#"><i class="icon-external-link"></i> Export</a></li>
-            <li><a href="#"><i class="icon-trash"></i> Delete</a></li>
+            <li><a href=""><i class="icon-eye-open"></i> View</a></li>
+            <li><a href=""><i class="icon-external-link"></i> Export</a></li>
+            <li class="divider"></li>
+            <li><a href=""><i class="icon-trash"></i> Delete</a></li>
           </ul>
         </li>
         <li class="divider-vertical"></li>
@@ -33,12 +33,13 @@
         </li>
       </ul>
 
-      <form action="" class="navbar-search pull-right" ng-submit="quickSearch(search)">
+      <form class="navbar-search pull-right" ng-submit="usersGrid.search(filters)">
         <input type="text" value="" placeholder="quick search" class="search-query span2" style="width: 150px;"
-               ng-model="search.quickSearch"/>
+               ng-model="filters.quickSearch"/>
       </form>
     </div>
   </div>
 
-  <div ag-grid="gridOptions"></div>
+  <div ag-grid="gridOptions"
+       ag-grid-name="usersGrid"></div>
 </section>

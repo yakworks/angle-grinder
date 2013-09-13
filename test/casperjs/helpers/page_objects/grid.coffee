@@ -1,10 +1,10 @@
 exports.Grid = class
-  constructor: (@casper) ->
+  constructor: (@casper, @gridName = "grid") ->
     @selector = "div.ui-jqgrid"
 
   # Click the cell with the given row number and name.
   clickCell: (row, name) ->
-    @casper.click "#{@selector} tr.jqgrow:nth-child(#{row + 2}) td[aria-describedby='gridz_#{name}'] a"
+    @casper.click "#{@selector} tr.jqgrow:nth-child(#{row + 2}) td[aria-describedby='#{@gridName}_#{name}'] a"
 
   # Click edit button inside the popover for the given row.
   clickEditRow: (row) ->
@@ -17,15 +17,15 @@ exports.Grid = class
 
   # Click next page.
   clickNextPage: ->
-    @casper.click "#{@selector} div.gridz-pager .ui-icon-seek-next"
+    @casper.click "#{@selector} div##{@gridName}-pager .ui-icon-seek-next"
 
   # Click prev page.
   clickPrevPage: ->
-    @casper.click "#{@selector} div.gridz-pager .ui-icon-seek-prev"
+    @casper.click "#{@selector} div##{@gridName}-pager .ui-icon-seek-prev"
 
   # Click the heder for the given column name.
   clickHeader: (name) ->
-    @casper.click "#{@selector} table.ui-jqgrid-htable th#gridz_#{name} div.ui-jqgrid-sortable"
+    @casper.click "#{@selector} table.ui-jqgrid-htable th##{@gridName}_#{name} div.ui-jqgrid-sortable"
 
   # Returns the number of loaded rows.
   getRowsCount: ->
@@ -40,14 +40,17 @@ exports.Grid = class
   # Retrieves data for the given row number.
   # Rows numeration starts from 0.
   getRow: (row) ->
-    @casper.evaluate (selector, row) ->
+    @casper.evaluate (selector, row, gridName) ->
       $row = $("#{selector} tbody tr.jqgrow:nth-child(#{row + 2})")
 
       row = {}
       $row.find("td[aria-describedby]").each (index, cell) ->
         $cell = $(cell)
-        key = $cell.attr("aria-describedby").replace /^gridz_*/, ""
+
+        key = $cell.attr("aria-describedby")
+        key = key.substring(gridName.length + 1, key.length)
+
         row[key] = $cell.text()
       row
 
-    , @selector, row
+    , @selector, row, @gridName

@@ -21,11 +21,11 @@ describe "module: angleGrinder.dataGenerator", ->
         expect(random.date).toBeDefined()
 
       it "generates a ramdom date", inject (random) ->
-        spyOn(random, "range").andReturn(1372677018884)
+        stub = sinon.stub(random, "range").returns(1372677018884)
 
         minDate = new Date(2001, 1, 1)
         expect(random.date(minDate)).toEqual("2013-07-01")
-        expect(random.range).toHaveBeenCalled()
+        expect(stub.called).toBeTruthy()
 
   describe "service: sampleData", ->
     it "is defined", inject (sampleData) ->

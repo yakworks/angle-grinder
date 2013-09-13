@@ -1,12 +1,20 @@
 forms = angular.module("angleGrinder.forms", [
-  "angleGrinder.common",
+  "angleGrinder.common"
   "ui.bootstrap"
-  "ui.date"
+  "$strap.directives"
 ])
 
+forms.value "$strapConfig",
+  datepicker:
+    language: "en"
+    format: "mm/dd/yyyy"
+    type: "iso"
+    autoClose: true
+    forceParse: false
+
 class FormDialogCtrl
-  @$inject = ["$scope", "$rootScope", "$log", "dialog", "item", "flatten"]
-  constructor: ($scope, $rootScope, $log, dialog, item, flatten) ->
+  @$inject = ["$scope", "$rootScope", "$log", "dialog", "item", "gridCtrl"]
+  constructor: ($scope, $rootScope, $log, dialog, item, gridCtrl) ->
     $scope.item = item
     $scope.createNew = not item.persisted()
 
@@ -24,13 +32,12 @@ class FormDialogCtrl
       onSuccess = (response) ->
         $log.info "Item has been updated/created", response
 
-        # Flattening the object before insering it to the grid
-        $rootScope.$broadcast "itemUpdated", flatten(response)
+        gridCtrl.saveRow(item.id, response)
         $scope.closeEditDialog()
 
       onError = (response) ->
-
         $log.error "Something went wront", response
+
         if response.status is 422
           errors = response.data?.errors?[item.resourceName()]
           $scope.editForm.$serverError = errors
@@ -43,7 +50,7 @@ class FormDialogCtrl
       onSuccess = (response) ->
         $log.info "Item has been deleted", response
 
-        $rootScope.$broadcast "itemDeleted", item
+        gridCtrl.removeRow(item.id)
         $scope.closeEditDialog()
 
       onError = (response) ->
@@ -57,20 +64,17 @@ class EditDialog
   @$inject = ["$dialog"]
   constructor: (@$dialog) ->
 
-  open: (templateUrl, item) ->
+  open: (templateUrl, item, gridCtrl = null) ->
     dialog = @$dialog.dialog
       backdropFade: false
       dialogFade: false
       resolve:
         item: -> item
+        gridCtrl: -> gridCtrl
 
     # override so we can intercept form dirty and prevent escape
     dialog.handledEscapeKey = (e) ->
-      if e.which is 27
-        e.preventDefault()
-        unless dialog.$scope.editForm.$dirty
-          dialog.close()
-          dialog.$scope.$apply()
+      dialog.handleBackDropClick(e) if e.which is 27
 
     # override so we can intercept form dirty and prevent backdrop click
     dialog.handleBackDropClick = (e) ->

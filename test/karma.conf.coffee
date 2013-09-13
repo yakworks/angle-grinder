@@ -28,7 +28,8 @@ module.exports = (config) ->
 
       "components/select2/select2.js"
       "components/angular-ui-select2/select2.js"
-      "components/angular-ui-date/date.js"
+      "components/angular-strap/common.js"
+      "components/angular-strap/directives/datepicker.js"
       "components/angular-bootstrap/ui-bootstrap-tpls.js"
 
       "templates/**/*.html"

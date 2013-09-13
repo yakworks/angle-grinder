@@ -21,7 +21,7 @@ class ListCtrl
         self.deleteItemById(id)
         callback.success(this)
 
-      editDialog.open("templates/partials/itemForm.html", item)
+      editDialog.open("templates/partials/itemForm.html", item, $scope.grid)
 
     $scope.createItem = =>
       item = {}
@@ -31,12 +31,12 @@ class ListCtrl
         item.id = generateId()
         callback.success(this)
 
-      editDialog.open("templates/partials/itemForm.html", item)
+      editDialog.open("templates/partials/itemForm.html", item, $scope.grid)
         .then (item) => @data.push(item)
 
     $scope.deleteItem = (id) =>
       item = @deleteItemById(id)
-      $scope.$broadcast "itemDeleted", item
+      $scope.grid.removeRow(item.id)
 
   findItemById: (id) ->
     id = parseInt(id)
@@ -53,7 +53,7 @@ class ListCtrl
     [
       name: "id"
       label: "Inv No"
-      width: 60
+      width: 80
       sorttype: "int"
     ,
       name: "customer.name"

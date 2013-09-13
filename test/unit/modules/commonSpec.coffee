@@ -30,7 +30,7 @@ describe "module: angleGrinder.common", ->
 
   describe "filter: withContext", ->
 
-    # stubs `pathWithContext` service
+    # stub `pathWithContext` service
     beforeEach module "angleGrinder.common", ($provide) ->
       $provide.value "pathWithContext", sinon.stub()
       return

@@ -1,7 +1,7 @@
 class UsersListCtrl
   @$inject = ["$scope", "$log", "$dialog", "$filter", "confirmationDialog", "editDialog", "Users", "pathWithContext"]
   constructor: ($scope, $log, $dialog, @$filter, confirmationDialog, editDialog, Users, pathWithContext) ->
-    # intitially show the form
+    # Intitially show the search form
     $scope.showSearchForm = true
 
     $scope.gridOptions =
@@ -12,23 +12,19 @@ class UsersListCtrl
 
     $scope.editItem = (id) ->
       promise = Users.get(id: id).$promise
-      editDialog.open(pathWithContext("templates/partials/userForm.html"), promise)
+      editDialog.open(pathWithContext("templates/partials/userForm.html"), promise, $scope.usersGrid)
 
     $scope.createItem = ->
       user = new Users()
-      editDialog.open(pathWithContext("templates/partials/userForm.html"), user)
+      editDialog.open(pathWithContext("templates/partials/userForm.html"), user, $scope.usersGrid)
 
     $scope.deleteItem = (id) ->
       confirmationDialog.open().then (confirmed) ->
         return unless confirmed
 
-        user = new Users(id: id)
-        user.delete
-          success: (response) -> $scope.$broadcast "itemDeleted", response
-          error: (response) -> $log.error "Something went wront", response
-
-    $scope.quickSearch = (search) ->
-      $scope.$broadcast "searchUpdated", search
+        promise = Users.delete(id: id).$promise
+        promise.then (response) ->
+          $scope.usersGrid.removeRow(response.id)
 
   gridColumns: ->
     [
@@ -55,10 +51,5 @@ class UsersListCtrl
       label: "Paid"
     ]
 
-class UsersSearchFormCtrl
-  @$inject = ["$scope"]
-  constructor: ($scope) ->
-
 angular.module("angleGrinder")
   .controller("UsersListCtrl", UsersListCtrl)
-  .controller("UsersSearchFormCtrl", UsersSearchFormCtrl)

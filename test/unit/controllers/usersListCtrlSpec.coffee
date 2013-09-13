@@ -2,9 +2,13 @@ describe "controller: UsersListCtrl", ->
   beforeEach module("angleGrinder")
 
   $scope = null
+  usersGridStub = null
 
   beforeEach inject ($rootScope, $controller) ->
+    usersGridStub = sinon.stub(removeRow: angular.noop)
     $scope = $rootScope.$new()
+    $scope.usersGrid = usersGridStub
+
     $controller "UsersListCtrl",
       $scope: $scope
 
@@ -65,10 +69,17 @@ describe "controller: UsersListCtrl", ->
         expect(spy.called).toBeTruthy()
 
       describe "when the dialog was confirmed", ->
-        beforeEach inject (confirmationDialog) ->
+        beforeEach inject (confirmationDialog, $httpBackend) ->
           sinon.stub(confirmationDialog, "open").returns(then: (fn) -> fn(true))
+          $httpBackend.expectDELETE("/api/users/#{user.id}").respond(id: 123)
 
         it "deleates the user", inject ($httpBackend) ->
-          $httpBackend.expectDELETE("/api/users/#{user.id}").respond({})
           $scope.deleteItem(123)
           $httpBackend.flush()
+
+        it "removes a row from the grid", inject ($httpBackend) ->
+          $scope.deleteItem(123)
+          $httpBackend.flush()
+
+          expect(usersGridStub.removeRow.called).toBeTruthy()
+          expect(usersGridStub.removeRow.calledWith(123)).toBeTruthy()

@@ -58,6 +58,16 @@ app.post "/api/users", (req, res) ->
   catch error
     res.send error, 422
 
+# mass UPDATE
+app.put "/api/users/massUpdate", (req, res) ->
+  try
+    for id in req.body.ids
+      data.update(id, req.body.data)
+  catch error
+    console.log error
+
+  res.send 200
+
 # UPDATE
 app.put "/api/users/:id", (req, res) ->
   randomSleep()

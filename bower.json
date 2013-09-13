@@ -16,7 +16,8 @@
         "angular": "PatternConsulting/bower-angular#v1.2.0rc1",
         "angular-ui-select2": "~0.0.2",
         "angular-bootstrap": "0.5.0",
-        "angular-ui-date": "0.0.3"
+        "angular-strap": "0.7.6",
+        "bootstrap-datepicker": "1.1.1"
     },
 
     "devDependencies": {
@@ -44,9 +45,12 @@
             "js": "build/angular-ui.js",
             "css": "build/angular-ui.css"
         },
-        "angular-ui-date": {
+        "angular-strap": {
           "/": [
-            "src/date.js"
+            "src/common.js"
+          ],
+          "directives": [
+            "src/directives/datepicker.js"
           ]
         },
         "bootstrap": {

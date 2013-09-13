@@ -1,6 +1,7 @@
 class ListCtrl
-  @$inject = ["$scope", "$location", "$filter", "pathWithContext"]
-  constructor: ($scope, $location, @$filter, pathWithContext) ->
+  @$inject = ["$scope", "$location", "$filter", "$dialog", "confirmationDialog", "Users", "pathWithContext"]
+  constructor: ($scope, $location, $filter, $dialog, confirmationDialog, Users, pathWithContext) ->
+    @$filter = $filter
 
     $scope.gridOptions =
       url: pathWithContext("/api/users")
@@ -8,13 +9,34 @@ class ListCtrl
       shrinkToFit: true
       rowNum: 10
       sortname: "id"
-      multiselect: false
+      multiselect: true
 
     $scope.showItem = (id) ->
       $location.path("/users/#{id}")
 
     $scope.editItem = (id) ->
       $location.path("/users/#{id}/edit")
+
+    $scope.deleteItem = (id) ->
+      confirmationDialog.open().then (confirmed) ->
+        return unless confirmed
+
+        promise = Users.delete(id: id).$promise
+        promise.then (response) ->
+          $scope.usersGrid.removeRow(response.id)
+
+    $scope.massUpdate = ->
+      userIds = $scope.usersGrid.getSelectedRowIds()
+      return if userIds.length is 0
+
+      dialog = $dialog.dialog
+        backdropFade: false
+        dialogFade: false
+        resolve:
+          userIds: -> userIds
+          usersGrid: -> $scope.usersGrid
+
+      dialog.open(pathWithContext("/templates/users/massUpdateForm.html"), "users.MassUpdateFormCtrl")
 
   gridColumns: ->
     showActionLink = (cellVal, options, rowdata) ->

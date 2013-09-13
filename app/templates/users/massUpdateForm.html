@@ -1,0 +1,25 @@
+<div class="modal-header">
+  <button type="button" class="close" ng-click="closeDialog()" aria-hidden="true">&times;</button>
+  <h3>Mass update</h3>
+</div>
+
+<form name="usersForm" novalidate class="form-horizontal no-margin"
+      ng-submit="save(users)">
+
+  <div class="modal-body">
+    <div ag-field-group for="allowance">
+      <label class="control-label">Allowance</label>
+
+      <div class="controls">
+        <input type="text" name="allowance" placeholder="Enter Allowance"
+               ng-model="users.allowance" ng-required="true" />
+        <ag-validation-errors for="allowance" />
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <ag-submit-button></ag-submit-button>
+    <ag-cancel-button ng-click="closeDialog()"></ag-cancel-button>
+  </div>
+</form>

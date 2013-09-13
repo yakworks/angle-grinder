@@ -65,6 +65,21 @@
       }
     }
   }
+
+  tr.ui-jqgrid-labels {
+    th[id$=_cb], th[id$=_row_action_col] {
+      box-shadow: none;
+
+      &.ui-state-hover {
+        background-position: 0px 0px;
+      }
+
+      div {
+        cursor: default !important;
+      }
+    }
+  }
+
   a.jqg-row-action {
     font-size: 12px;
     padding: 6px;
@@ -232,29 +247,21 @@
     border: 1px solid #D4D4D4;
     border-bottom: none;
   }
-  .icon-selected-pointer {
-    background: url(../images/selectPointer.gif) no-repeat center left;
-    height: 16px;
-    line-height: 14px;
-    margin-top: 14px;
-  }
   .divider-vertical.skinny {
     margin: 0 2px;
   }
-  .nav {
-    li.selected-actions {
-      a {
-        padding-left: 4px;
-        padding-right: 8px;
-      }
-    }
-    li.grid-options {
-      a {
-        padding: 10px;
-      }
-    }
+}
+
+.icon-selected-pointer {
+  height: 16px;
+  line-height: 14px;
+  margin-top: 14px;
+
+  &:before {
+    content: url(../images/selectPointer.gif);
   }
 }
+
 .navbar-inner.with-selected-pointer {
   padding-left: 4px;
 }
@@ -286,8 +293,17 @@
   }
 }
 
+// styles for the advanced search form
 form.ag-search-form {
-  input.hasDatepicker {
-    width: 165px;
+  label.control-label {
+    width: 120px;
+  }
+
+  .controls {
+    margin-left: 150px;
+
+    input {
+      width: 245px;
+    }
   }
 }

@@ -4,8 +4,11 @@ gridz = angular.module("angleGrinder.gridz", [
 ])
 
 gridz.directive "agGrid", [
-  "hasSearchFilters", "$log", (hasSearchFilters, $log) ->
+  "$log", ($log) ->
     link = ($scope, $element, attrs, gridCtrl) ->
+      # initialize the controller
+      gridCtrl.registerGridElement($element.find("table.gridz"))
+
       # publish agGrid controller to the parent scope
       alias = attrs.agGridName
       $scope[alias] = gridCtrl if alias?
@@ -37,16 +40,6 @@ gridz.directive "agGrid", [
           $scope.$apply ->
             if $scope.editItem? then $scope.editItem(id) else $log.warn("`$scope.editItem` is not defined")
 
-        # flash the given row
-        flashRowFor = (item, complete = ->) ->
-          $row = $($grid[0].rows.namedItem(item.id))
-
-          $row.css "background-color", "#DFF0D8"
-          $row.delay(100).fadeOut "medium", ->
-            $row.css "background-color", ""
-
-          $row.fadeIn "fast", -> complete()
-
         # handles click on show action insite the dropdown menu
         $grid.on "showAction", (event, id) ->
           event.preventDefault()
@@ -66,33 +59,6 @@ gridz.directive "agGrid", [
         $grid.on "deleteAction", (event, id) ->
           event.preventDefault()
           $scope.$apply -> $scope.deleteItem id
-
-        # emit `gridzLoadComplete` event
-        $grid.on "jqGridAfterLoadComplete", ->
-          $scope.$broadcast "gridzLoadComplete"
-
-        # catch broadcast event after save. This will need to change
-        # TODO move this method to the controller
-        $scope.$on "itemUpdated", (event, item) ->
-          if $grid.jqGrid("getInd", item.id)
-            $grid.jqGrid "setRowData", item.id, item
-          else
-            $grid.jqGrid "addRowData", item.id, item, "first"
-
-          flashRowFor item
-
-        # TODO move this method to the controller
-        $scope.$on "itemDeleted", (event, item) ->
-          flashRowFor item, ->
-            $grid.jqGrid "delRowData", item.id
-
-        # TODO move this method to the controller
-        $scope.$on "searchUpdated", (event, filters) ->
-          params =
-            search: hasSearchFilters(filters)
-            postData: filters: JSON.stringify(filters)
-
-          $grid.setGridParam(params).trigger "reloadGrid"
 
       $scope.$watch attrs.agGrid, initializeGrid
 

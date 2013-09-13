@@ -191,7 +191,6 @@ $.fn.gridz.defaults =
   height: "100%"
   sortable: true
   multiselect: true # one or more row selections
-  pager: "gridz-pager"
 
   gridComplete: null
   actionPopup:
