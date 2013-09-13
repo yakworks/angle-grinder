@@ -5,50 +5,57 @@
     {% include header.html %}
     <!-- Place anything custom after this. -->
   </head>
-  <body>
-    <a class="sr-only" href="#content">Skip navigation</a>
-
+  <body data-spy="scroll" data-target=".bs-docs-sidebar">
     <!-- Docs master nav -->
     {% include nav-main.html %}
 
-    <!-- Docs page layout -->
-    <div class="bs-header jumbotron" id="content">
+    <!-- Subhead
+      ================================================== -->
+    <header class="jumbotron masthead" id="content">
       <div class="container">
         <h1>AngleGrinder</h1>
-        <p class="lead">Sleek, intuitive, and powerful AngularJS services and directives for grails integration.</p>
+        <p>Sleek, intuitive, and powerful AngularJS services and directives for grails integration.</p>
       </div>
-      <div class="bs-docs-social">
-        <div class="container">
-          <ul class="bs-docs-social-buttons">
-            <li>
-              <iframe class="github-btn" src="http://ghbtns.com/github-btn.html?user=9ci&amp;repo=angle-grinder&amp;type=watch&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="100px" height="20px"></iframe>
-            </li>
-            <li>
-              <iframe class="github-btn" src="http://ghbtns.com/github-btn.html?user=9ci&amp;repo=angle-grinder&amp;type=fork&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="98px" height="20px"></iframe>
-            </li>
-          </ul>
-        </div>
+    </header>
+
+    <div class="bs-docs-social">
+      <div class="container">
+        <ul class="bs-docs-social-buttons">
+          <li>
+            <iframe class="github-btn" src="http://ghbtns.com/github-btn.html?user=9ci&amp;repo=angle-grinder&amp;type=watch&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="100px" height="20px"></iframe>
+          </li>
+          <li>
+            <iframe class="github-btn" src="http://ghbtns.com/github-btn.html?user=9ci&amp;repo=angle-grinder&amp;type=fork&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="98px" height="20px"></iframe>
+          </li>
+        </ul>
       </div>
     </div>
 
-    <div class="container bs-docs-container">
+    <div class="container">
+
+      <!-- Docs nav
+      ================================================== -->
       <div class="row">
-        <div class="col-md-3">
-          <div class="bs-sidebar hidden-print" role="complementary">
-            <ul class="nav bs-sidenav">
-              {% if page.slug == "index" %}
-                <!-- Main page nav -->
-                {% include nav-index.html %}
-              {% endif %}
-              {% if page.slug == "docs" %}
-                <!-- Documentation page page nav -->
-                {% include nav-docs.html %}
-              {% endif %}
-            </ul>
-          </div>
+        <div class="span3 bs-docs-sidebar">
+          <ul class="nav nav-list bs-docs-sidenav">
+            {% if page.slug == "index" %}
+              <!-- Main page nav -->
+              {% include nav-index.html %}
+            {% endif %}
+
+            {% if page.slug == "docs" %}
+              <!-- Documentation page page nav -->
+              {% include nav-docs.html %}
+            {% endif %}
+
+            {% if page.slug == "examples" %}
+              <!-- Examples page page nav -->
+              {% include nav-examples.html %}
+            {% endif %}
+          </ul>
         </div>
 
-        <div class="col-md-9" role="main">
+        <div class="span9" role="main">
           {{ content }}
         </div>
       </div>
