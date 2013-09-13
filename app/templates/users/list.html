@@ -22,6 +22,22 @@
     </div>
   </div>
 
+  <button class="btn" ng-click="usersGrid.toggleColumn('allowance')">
+    <span ng-show="usersGrid.isColumnHidden('allowance')">Show</span>
+    <span ng-hide="usersGrid.isColumnHidden('allowance')">Hide</span>
+    Allowance
+  </button>
+
+  <button class="btn" ng-click="usersGrid.toggleColumn('birthday')">
+    <span ng-show="usersGrid.isColumnHidden('birthday')">Show</span>
+    <span ng-hide="usersGrid.isColumnHidden('birthday')">Hide</span>
+    Birthday
+  </button>
+
+  <button class="btn" ng-click="usersGrid.columnChooser()">
+    Column Chooser
+  </button>
+
   <div ag-grid="gridOptions"
        ag-grid-name="usersGrid"></div>
 </section>
