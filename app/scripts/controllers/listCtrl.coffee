@@ -36,7 +36,7 @@ class ListCtrl
 
     $scope.deleteItem = (id) =>
       item = @deleteItemById(id)
-      $scope.$broadcast "itemDeleted", item
+      $scope.grid.removeRow(item.id)
 
   findItemById: (id) ->
     id = parseInt(id)

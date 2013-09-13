@@ -1,6 +1,6 @@
 class ListCtrl
-  @$inject = ["$scope", "$location", "$filter", "$dialog", "pathWithContext"]
-  constructor: ($scope, $location, $filter, $dialog, pathWithContext) ->
+  @$inject = ["$scope", "$location", "$filter", "$dialog", "confirmationDialog", "Users", "pathWithContext"]
+  constructor: ($scope, $location, $filter, $dialog, confirmationDialog, Users, pathWithContext) ->
     @$filter = $filter
 
     $scope.gridOptions =
@@ -15,6 +15,14 @@ class ListCtrl
 
     $scope.editItem = (id) ->
       $location.path("/users/#{id}/edit")
+
+    $scope.deleteItem = (id) ->
+      confirmationDialog.open().then (confirmed) ->
+        return unless confirmed
+
+        promise = Users.delete(id: id).$promise
+        promise.then (response) ->
+          $scope.usersGrid.removeRow(response.id)
 
     $scope.massUpdate = ->
       userIds = $scope.usersGrid.getSelectedRowIds()

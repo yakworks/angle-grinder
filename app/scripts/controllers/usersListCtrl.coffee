@@ -22,10 +22,9 @@ class UsersListCtrl
       confirmationDialog.open().then (confirmed) ->
         return unless confirmed
 
-        user = new Users(id: id)
-        user.delete
-          success: (response) -> $scope.$broadcast "itemDeleted", response
-          error: (response) -> $log.error "Something went wront", response
+        promise = Users.delete(id: id).$promise
+        promise.then (response) ->
+          $scope.usersGrid.removeRow(response.id)
 
   gridColumns: ->
     [

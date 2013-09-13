@@ -42,6 +42,36 @@ describe "controller: users.ListCtrl", ->
         expect(spy.called).toBeTruthy()
         expect(spy.calledWith("/users/234/edit")).toBeTruthy()
 
+    describe "#deleteItem", ->
+      it "opens the confirmation dialog", inject (confirmationDialog) ->
+        # Given
+        stub = sinon.stub(confirmationDialog, "open").returns then: (fn) -> fn(false)
+
+        # When
+        $scope.deleteItem(123)
+
+        # Then
+        expect(stub.called).toBeTruthy()
+
+      describe "when the dialog was confirmed",->
+        beforeEach inject (confirmationDialog, $httpBackend) ->
+          # Given
+          sinon.stub(confirmationDialog, "open").returns then: (fn) -> fn(true)
+          $httpBackend.expectDELETE("/api/users/123").respond(id: 123)
+          $scope.usersGrid = sinon.stub(removeRow: angular.noop)
+
+          # When
+          $scope.deleteItem(123)
+          $httpBackend.flush()
+
+        it "deletes a row", inject ($httpBackend) ->
+          $httpBackend.verifyNoOutstandingExpectation()
+          $httpBackend.verifyNoOutstandingRequest()
+
+        it "removes a row from the grid", ->
+          expect($scope.usersGrid.removeRow.called).toBeTruthy()
+          expect($scope.usersGrid.removeRow.calledWith(123)).toBeTruthy()
+
     describe "#massUpdate", ->
       gridStub = null
 
