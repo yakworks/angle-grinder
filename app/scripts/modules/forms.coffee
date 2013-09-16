@@ -12,6 +12,7 @@ forms.value "$strapConfig",
     autoClose: true
     forceParse: false
 
+# TODO write specs for this controller
 class EditDialogCtrl
   @$inject = ["$scope", "$log", "$modalInstance", "item", "gridCtrl"]
   constructor: ($scope, $log, $modalInstance, item, gridCtrl) ->
@@ -26,7 +27,8 @@ class EditDialogCtrl
     # If form is valid performs server side update
     $scope.save = (item) ->
       # TODO $scope.editForm is undefined due to https://github.com/angular-ui/bootstrap/issues/969
-      form = $scope.editForm
+      # TODO this is dirty hack: get `editForm` from the form element scope
+      form = $scope.editForm or $("form[name=editForm]").scope().editForm
 
       if form.$invalid
         $log.warn "The form is invalid", form
