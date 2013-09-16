@@ -157,5 +157,32 @@
              ag-grid-name="contactsGrid"></div>
       </div>
     </tab>
+
+    <tab select="initNotesGrid()">
+      <tab-heading><i class="icon-user"></i> Notes</tab-heading>
+
+      <div ng-controller="tabbedOrg.NoteListCtrl">
+        <div class="navbar navbar-grid">
+          <div class="navbar-inner with-selected-pointer with-grid-options">
+            <ul class="nav">
+              <li>
+                <a href="" ng-click="createItem()">
+                  <i class="icon-user"></i> Create note
+                </a>
+              </li>
+            </ul>
+
+            <form action="" class="navbar-search pull-right" ng-submit="notesGrid.search(filters)">
+              <input type="text" value="" placeholder="quick search" class="search-query span2" style="width: 150px;"
+                     ng-model="filters.quickSearch"/>
+            </form>
+          </div>
+        </div>
+
+        <div ng-show="gridOptions"
+             ag-grid="gridOptions"
+             ag-grid-name="notesGrid"></div>
+      </div>
+    </tab>
   </tabset>
 </div>

@@ -4,6 +4,8 @@ class BootStrap {
 
     def userDao
     def orgDao
+    def noteDao
+
     def fakerService
 
     def init = { servletContext ->
@@ -38,6 +40,17 @@ class BootStrap {
         def thirdOrg = createOrg(name: "Microsoft", num: "333-333-333")
 
         def sampleOrganizations = [firstOrg, secondOrg, thirdOrg]
+
+        sampleOrganizations.each { org ->
+            for (i in 0..50) {
+                // create 50 sample notes
+                noteDao.insert(
+                        org: org,
+                        name: fakerService.name(),
+                        content: fakerService.paragraph(3)
+                )
+            }
+        }
 
         def randomDate = { ->
             def randBetween = { start, end ->

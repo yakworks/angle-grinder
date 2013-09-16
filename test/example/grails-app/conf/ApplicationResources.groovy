@@ -19,5 +19,6 @@ modules = {
         resource url: "/coffee/adminTabbedOrg.coffee"
         resource url: "/coffee/controllers/tabbedOrg/showCtrl.coffee"
         resource url: "/coffee/controllers/tabbedOrg/contactListCtrl.coffee"
+        resource url: "/coffee/controllers/tabbedOrg/noteListCtrl.coffee"
     }
 }

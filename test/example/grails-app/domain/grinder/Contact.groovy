@@ -11,8 +11,8 @@ class Contact {
     Boolean inactive = false
     Boolean isPrimary = false
 
-    String email //default
-    String phone //default
+    String email // default
+    String phone // default
 
     String firstName
     String middleName
