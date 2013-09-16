@@ -326,12 +326,16 @@ describe "module: angleGrinder.forms", ->
         itMarksFieldsAsValid()
 
   describe "service: confirmationDialog", ->
-    it "displays the confirmation", inject ($dialog, confirmationDialog) ->
+    it "displays the confirmation", inject ($modal, confirmationDialog) ->
       # Given
-      spy = sinon.spy($dialog, "dialog")
+      spy = sinon.spy($modal, "open")
 
       # When
       confirmationDialog.open()
 
       # Then
       expect(spy.called).toBeTruthy()
+
+      args =  spy.args[0][0]
+      expect(args.templateUrl).toEqual "templates/dialogs/confirmation.html"
+      expect(args.controller).toEqual "ConfirmationDialogCtrl"

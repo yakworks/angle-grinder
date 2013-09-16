@@ -1,9 +1,9 @@
 describe "controller: users.ListCtrl", ->
   beforeEach module("angleGrinder")
 
-  # Stub $dialog service
+  # Stub $modal service
   beforeEach module "ui.bootstrap", ($provide) ->
-    $provide.value "$dialog", sinon.stub(dialog: angular.noop)
+    $provide.value "$modal", sinon.stub(open: angular.noop)
     return
 
   $scope = null
@@ -83,25 +83,25 @@ describe "controller: users.ListCtrl", ->
         beforeEach ->
           gridStub.getSelectedRowIds.returns([])
 
-        it "does nothing", inject ($dialog) ->
+        it "does nothing", inject ($modal) ->
           # when
           $scope.massUpdate()
 
           # Then
-          expect($dialog.dialog.called).toBeFalsy()
+          expect($modal.open.called).toBeFalsy()
 
       describe "otherwise", ->
-        dialogStub = null
 
-        beforeEach inject ($dialog) ->
+        beforeEach ->
           gridStub.getSelectedRowIds.returns([1, 2, 3])
-          dialogStub = sinon.stub(open: angular.noop)
-          $dialog.dialog.returns(dialogStub)
 
-        it "invokes a dialog", inject ($dialog) ->
+        it "invokes a dialog", inject ($modal) ->
           # When
           $scope.massUpdate()
 
           # Then
-          expect($dialog.dialog.called).toBeTruthy()
-          expect(dialogStub.open.called).toBeTruthy()
+          expect($modal.open.called).toBeTruthy()
+
+          args = $modal.open.args[0][0]
+          expect(args.templateUrl).toEqual "/templates/users/massUpdateForm.html"
+          expect(args.controller).toEqual "users.MassUpdateFormCtrl"

@@ -70,7 +70,7 @@ describe "controller: UsersListCtrl", ->
 
       describe "when the dialog was confirmed", ->
         beforeEach inject (confirmationDialog, $httpBackend) ->
-          sinon.stub(confirmationDialog, "open").returns(then: (fn) -> fn(true))
+          sinon.stub(confirmationDialog, "open").returns(result: then: (fn) -> fn(true))
           $httpBackend.expectDELETE("/api/users/#{user.id}").respond(id: 123)
 
         it "deleates the user", inject ($httpBackend) ->

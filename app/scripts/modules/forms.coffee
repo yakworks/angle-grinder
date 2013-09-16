@@ -12,35 +12,38 @@ forms.value "$strapConfig",
     autoClose: true
     forceParse: false
 
-class FormDialogCtrl
-  @$inject = ["$scope", "$rootScope", "$log", "dialog", "item", "gridCtrl"]
-  constructor: ($scope, $rootScope, $log, dialog, item, gridCtrl) ->
+class EditDialogCtrl
+  @$inject = ["$scope", "$rootScope", "$log", "$modalInstance", "item", "gridCtrl"]
+  constructor: ($scope, $rootScope, $log, $modalInstance, item, gridCtrl) ->
     $scope.item = item
     $scope.createNew = not item.persisted()
 
     # Closes the dialog
     $scope.closeEditDialog = ->
       $log.info "Closing the dialog"
-      dialog.close($scope.item)
+      $modalInstance.dismiss("cancel click")
 
     # If form is valid performs server side update
     $scope.save = (item) ->
-      if $scope.editForm.$invalid
-        $log.warn "The form is invalid", $scope.editForm
+      # TODO $scope.editForm is undefined due to https://github.com/angular-ui/bootstrap/issues/969
+      form = $scope.editForm
+
+      if form.$invalid
+        $log.warn "The form is invalid", form
         return
 
       onSuccess = (response) ->
         $log.info "Item has been updated/created", response
 
         gridCtrl.saveRow(item.id, response)
-        $scope.closeEditDialog()
+        $modalInstance.close(item)
 
       onError = (response) ->
         $log.error "Something went wront", response
 
         if response.status is 422
           errors = response.data?.errors?[item.resourceName()]
-          $scope.editForm.$serverError = errors
+          form.$serverError = errors
           $log.error "Server side validation errors", errors
 
       item.save success: onSuccess, error: onError
@@ -51,49 +54,39 @@ class FormDialogCtrl
         $log.info "Item has been deleted", response
 
         gridCtrl.removeRow(item.id)
-        $scope.closeEditDialog()
+        $modalInstance.close(item)
 
       onError = (response) ->
         $log.error "Something went wront", response
 
       item.delete success: onSuccess, error: onError
 
-forms.controller "FormDialogCtrl", FormDialogCtrl
+forms.controller "EditDialogCtrl", EditDialogCtrl
 
 class EditDialog
-  @$inject = ["$dialog"]
-  constructor: (@$dialog) ->
+  @$inject = ["$modal"]
+  constructor: (@$modal) ->
 
   open: (templateUrl, item, gridCtrl = null) ->
-    dialog = @$dialog.dialog
-      backdropFade: false
-      dialogFade: false
+    modalInstance = @$modal.open
+      templateUrl: templateUrl
+      controller: "EditDialogCtrl"
+      backdrop: "static"
       resolve:
         item: -> item
         gridCtrl: -> gridCtrl
 
-    # override so we can intercept form dirty and prevent escape
-    dialog.handledEscapeKey = (e) ->
-      dialog.handleBackDropClick(e) if e.which is 27
-
-    # override so we can intercept form dirty and prevent backdrop click
-    dialog.handleBackDropClick = (e) ->
-      e.preventDefault()
-      unless dialog.$scope.editForm.$dirty
-        dialog.close()
-        dialog.$scope.$apply()
-
-    dialog.open templateUrl, "FormDialogCtrl"
+    modalInstance
 
 forms.service "editDialog", EditDialog
 
 class ConfirmationDialogCtrl
-  @$inject = ["$scope", "$log", "dialog", "message"]
-  constructor: ($scope, $log, dialog, message) ->
+  @$inject = ["$scope", "$log", "$modalInstance", "message"]
+  constructor: ($scope, $log, $modalInstance, message) ->
     $scope.message = message
     $scope.close = (confirmed) ->
       $log.info "Confirmation dialog closed", confirmed
-      dialog.close(confirmed)
+      $modalInstance.close(confirmed)
 
 forms.controller "ConfirmationDialogCtrl", ConfirmationDialogCtrl
 
@@ -108,16 +101,16 @@ forms.run ["$templateCache", ($templateCache) ->
 ]
 
 class ConfirmationDialog
-  @$inject = ["$dialog", "$log"]
-  constructor: (@$dialog, @$log) ->
+  @$inject = ["$modal", "$log"]
+  constructor: (@$modal, @$log) ->
 
   open: (message = null) ->
     @$log.info "Opening confirmation dialog, message:", message
 
-    dialog = @$dialog.dialog
+    @$modal.open
+      templateUrl: "templates/dialogs/confirmation.html"
+      controller: "ConfirmationDialogCtrl"
       resolve:
         message: -> if message? then message else "Are you sure?"
-
-    dialog.open "templates/dialogs/confirmation.html", "ConfirmationDialogCtrl"
 
 forms.service "confirmationDialog", ConfirmationDialog
