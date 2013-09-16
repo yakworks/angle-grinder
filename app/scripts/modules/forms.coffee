@@ -13,8 +13,8 @@ forms.value "$strapConfig",
     forceParse: false
 
 class EditDialogCtrl
-  @$inject = ["$scope", "$rootScope", "$log", "$modalInstance", "item", "gridCtrl"]
-  constructor: ($scope, $rootScope, $log, $modalInstance, item, gridCtrl) ->
+  @$inject = ["$scope", "$log", "$modalInstance", "item", "gridCtrl"]
+  constructor: ($scope, $log, $modalInstance, item, gridCtrl) ->
     $scope.item = item
     $scope.createNew = not item.persisted()
 
