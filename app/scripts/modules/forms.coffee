@@ -86,6 +86,7 @@ class ConfirmationDialogCtrl
   @$inject = ["$scope", "$log", "$modalInstance", "message"]
   constructor: ($scope, $log, $modalInstance, message) ->
     $scope.message = message
+
     $scope.close = (confirmed) ->
       $log.info "Confirmation dialog closed", confirmed
       $modalInstance.close(confirmed)
@@ -106,13 +107,12 @@ class ConfirmationDialog
   @$inject = ["$modal", "$log"]
   constructor: (@$modal, @$log) ->
 
-  open: (message = null) ->
+  open: (message = "Are you sure?") ->
     @$log.info "Opening confirmation dialog, message:", message
 
     @$modal.open
       templateUrl: "templates/dialogs/confirmation.html"
       controller: "ConfirmationDialogCtrl"
-      resolve:
-        message: -> if message? then message else "Are you sure?"
+      resolve: message: -> message
 
 forms.service "confirmationDialog", ConfirmationDialog
