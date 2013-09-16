@@ -25,13 +25,13 @@ class NoteListCtrl
 
     # Displays a form for creating a new user
     $scope.createItem = ->
-      note = new Notes(contact: org: $scope.$org)
-      editDialog.open(pathWithContext("/note/formTemplate"), note)
+      note = new Notes(org: $scope.$org)
+      editDialog.open(pathWithContext("/templates/note/form.html"), note, $scope.notesGrid)
 
     # Displays a form for editing an exiting user
     $scope.editItem = (id) ->
       Notes.get { id: id }, (note) ->
-        editDialog.open(pathWithContext("/note/formTemplate"), note)
+        editDialog.open(pathWithContext("/templates/note/form.html"), note, $scope.notesGrid)
 
     $scope.deleteItem = (id) ->
       confirmationDialog.open().then (confirmed) ->
@@ -43,7 +43,7 @@ class NoteListCtrl
   colModel: ->
     [
       { name: "id", label: "ID", width: 30 }
-      { name: "name", label: "Contact Name", width: 100, formatter: "editActionLink" }
+      { name: "name", label: "Name", width: 100, formatter: "editActionLink" }
       { name: "content", sortable: false, label: "Content", width: 300, formatter: "editActionLink" }
     ]
 
