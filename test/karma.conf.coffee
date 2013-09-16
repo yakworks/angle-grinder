@@ -11,9 +11,9 @@ module.exports = (config) ->
       "components/jquery/jquery.js"
       "components/underscore/underscore.js"
       "components/angular/angular.js"
-      "components/angular/angular-mocks.js"
-      "components/angular/angular-resource.js"
-      "components/angular/angular-route.js"
+      "components/angular-mocks/angular-mocks.js"
+      "components/angular-resource/angular-resource.js"
+      "components/angular-route/angular-route.js"
       "components/jasmine-jquery/jasmine-jquery.js"
 
       "components/sinon/lib/sinon.js"
