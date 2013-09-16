@@ -9,28 +9,31 @@ class NoteDao extends GormDaoSupport  {
     Class domainClass = Note
 
     Map insert(params) {
-        def org = new Note()
-        org.properties = params
+        def note = new Note()
+        note.properties["name", "content"] = params
+
+        def org = Org.get(params.org.id)
+        note.org = org
 
         try {
-            save(org)
+            save(note)
             DaoUtil.flush()
         } catch (DomainException e) {
-            e.meta = [user: org]
+            e.meta = [user: note]
             throw e
         }
 
-        return [ok: true, entity: org, message: DaoMessage.created(org)]
+        return [ok: true, entity: note, message: DaoMessage.created(note)]
     }
 
     Map update(params) {
-        def org = Note.get(params.id.toLong())
+        def note = Note.get(params.id.toLong())
 
-        org.properties = params
-        save(org)
+        note.properties = params
+        save(note)
         DaoUtil.flush()
 
-        return [ok: true, entity: org, message: DaoMessage.updated(org)]
+        return [ok: true, entity: note, message: DaoMessage.updated(note)]
     }
 
 }
