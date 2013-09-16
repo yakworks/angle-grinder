@@ -141,6 +141,31 @@ class OrgController extends BaseDomainController {
         render pagedList.jsonData as JSON
     }
 
+    def listNotes() {
+        def pager = new Pager(params)
+        def crit = Note.createCriteria()
+
+        def filters = params.filters ? JSON.parse(params.filters) : null
+        def qslike = (filters?.quickSearch) ? (filters?.quickSearch + "%") : null
+
+        def datalist = crit.list(max: pager.max, offset: pager.offset) {
+            eq "org.id", params.id.toLong()
+
+            if (qslike) {
+                or {
+                    ilike "name", qslike
+                    ilike "content", qslike
+                }
+            }
+
+            if (params.sort)
+                order(params.sort, params.order)
+        }
+
+        def pagedList = pagedList(datalist)
+        render pagedList.jsonData as JSON
+    }
+
     def massUpdate() {
         def ids = request.JSON.ids
         def data = request.JSON.data
