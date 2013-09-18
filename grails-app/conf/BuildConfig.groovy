@@ -32,7 +32,7 @@ grails.project.dependency.resolution = {
             export = false
         }
 
-        compile ":coffeescript-resources:0.3.8"
+        compile(":coffeescript-resources:0.3.8")
         runtime(":fields:1.3") { export = false }
     }
 }

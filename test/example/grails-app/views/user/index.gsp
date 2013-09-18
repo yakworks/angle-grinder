@@ -43,7 +43,9 @@
 
 <h3 class="page-header"><g:message code="default.list.label" args="[entityName]"/></h3>
 
-<div ng-app="angleGrinder" ng-controller="user.ListCtrl" ng-init="editTemplateUrl = '${createLink(action: 'editPartial')}' ">
+<div ng-app="angleGrinder" ng-controller="user.ListCtrl"
+     ng-init="editTemplateUrl = '${createLink(action: 'editPartial')}' ">
+
     <ag-alerts></ag-alerts>
 
     <div collapse="!showSearchForm"
