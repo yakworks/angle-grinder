@@ -51,8 +51,7 @@
             <div class="controls">
                 <input type="text"
                        name="activeDate" ng-model="item.activeDate"
-                       ui-date="{ changeYear: true, changeMonth: true, yearRange: '1900:-0' }"
-                       ui-date-format
+                       bs-datepicker
                        ng-required="true" />
                 <ag-validation-errors for="activeDate" />
             </div>
