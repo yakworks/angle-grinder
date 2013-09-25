@@ -49,6 +49,11 @@ gridz.directive "agSearchForm", ["$log", ($log) ->
 
       $scope.promise = gridCtrl.search(filters)
 
+      # enable buttons back when something wrong happened
+      $(document).ajaxError (event, jqxhr, settings, exception) ->
+        if settings.type is "GET"
+          $scope.$apply -> $scope.promise = true
+
     # Reset the search form and trigger grid reload
     $scope.resetSearch = (filters = {}) ->
       $scope.filters = filters
