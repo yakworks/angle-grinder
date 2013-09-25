@@ -9,6 +9,8 @@ class UsersListCtrl
       colModel: @gridColumns()
       rowNum: 10
       sortname: "id"
+      # handler for jqGrid errors
+      loadError: -> $log.error "loadError", arguments
 
     $scope.editItem = (id) ->
       promise = Users.get(id: id).$promise
