@@ -1,12 +1,12 @@
 express = require("express")
 path = require("path")
 
-utils = require("./server/utils")
+utils = require("./utils")
 
-Orgs = require("./server/data_orgs")
+Orgs = require("./data_orgs")
 orgs = new Orgs()
 
-Data = require("./server/data")
+Data = require("./data")
 data = new Data()
 
 app = express()

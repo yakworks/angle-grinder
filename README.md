@@ -52,7 +52,7 @@ Detailed instructions http://casperjs.org/installation.html
 
 ```
 ./script/bootstrap.sh
-foreman start
+./script/server.sh
 ```
 
 open http://localhost:9000

@@ -35,3 +35,11 @@ app.factory "httpErrorsInterceptor", [
 
       promise.then(null, onError)
 ]
+
+# Catch all jquery xhr errors
+app.run [
+  "$log", "alerts", ($log, alerts) ->
+    $(document).ajaxError (event, jqxhr, settings, exception) ->
+      $log.error("Network error:", event, jqxhr, settings, exception)
+      alerts.error(exception)
+]
