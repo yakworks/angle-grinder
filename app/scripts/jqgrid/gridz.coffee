@@ -24,6 +24,13 @@ class Gridz
   getOptions: (options) ->
     options = $.extend({}, $.fn.gridz.defaults, options)
 
+    # Events .. beforeSelectRow
+    optBeforeSelectRow = options.beforeSelectRow
+    options.beforeSelectRow = (rowid, e) =>
+      @beforeSelectRow.apply this, arguments
+      optBeforeSelectRow.apply this, arguments  if $.isFunction(optBeforeSelectRow)
+      true
+
     # Events .. gridComplete
     _gridComplete = options.gridComplete
     options.gridComplete = =>
@@ -42,6 +49,53 @@ class Gridz
   ###
   gridComplete: ->
     @actionPopupSetup() if @options.actionPopup
+
+  ###
+  Handles proper multi selection of rows
+  ###
+  beforeSelectRow: (rowid, e) ->
+    rows = @$grid[0].rows
+
+    # get id of the previous selected row
+    startId = @$grid.jqGrid("getGridParam", "selrow")
+    startRow = undefined
+    endRow = undefined
+    iStart = undefined
+    iEnd = undefined
+    i = undefined
+    rowidIndex = undefined
+    isCheckBox = $(e.target).hasClass("cbox")
+
+    if not e.ctrlKey and not e.shiftKey and not e.metaKey and not isCheckBox
+      @$grid.jqGrid "resetSelection"
+    else if startId and e.shiftKey
+
+      @$grid.jqGrid "resetSelection"
+
+      # get DOM elements of the previous selected and
+      # the currect selected rows
+      startRow = rows.namedItem(startId)
+      endRow = rows.namedItem(rowid)
+      if startRow and endRow
+
+        # get min and max from the indexes of the previous selected
+        # and the currect selected rows
+        iStart = Math.min(startRow.rowIndex, endRow.rowIndex)
+        rowidIndex = endRow.rowIndex
+        iEnd = Math.max(startRow.rowIndex, rowidIndex)
+        i = iStart
+        while i <= iEnd
+          # the row with rowid will be selected by
+          # jqGrid. So we don't need select it
+          @$grid.jqGrid "setSelection", rows[i].id, false if i isnt rowidIndex
+          i++
+
+      # clear text selection
+      if document.selection and document.selection.empty
+        document.selection.empty()
+      else window.getSelection().removeAllRanges() if window.getSelection
+
+    true
 
   ###
   adds listener to resize grid to parent container when window is resized.
@@ -192,6 +246,7 @@ $.fn.gridz.defaults =
   sortable: true
   multiselect: true # one or more row selections
 
+  beforeSelectRow: null
   gridComplete: null
   actionPopup:
     formatter: null
