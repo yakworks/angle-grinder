@@ -910,24 +910,3 @@ li.spinner {
 li.spinner i.spin:before {
   content: url("/images/ajax-loader.gif");
 }
-
-table.org-select-result {
-  margin-bottom: 0px;
-}
-
-table.org-select-result td:nth-child(1) {
-  width: 60px;
-  border-top: none;
-}
-
-table.org-select-result td:nth-child(2) {
-  border-top: none;
-}
-
-.ag-delete-button {
-  width: 130px;
-}
-
-.form-actions {
-  padding-left: 160px;
-}
