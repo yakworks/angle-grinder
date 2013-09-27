@@ -57,7 +57,7 @@ gridz.directive "agGrid", [
         $grid.on "click", "a.editActionLink", (event) ->
           event.preventDefault()
           id = $(this).parents("tr:first").attr("id")
-          handleAction("deleteItem" ,id)
+          handleAction("editItem" ,id)
 
       $scope.$watch attrs.agGrid, initializeGrid
 
