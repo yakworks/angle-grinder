@@ -32,33 +32,32 @@ gridz.directive "agGrid", [
 
         $grid.gridz(gridOptions)
 
-        showItem = (id) ->
-          $scope.$apply ->
-            if $scope.showItem? then $scope.showItem(id) else $log.warn("`$scope.showItem` is not defined")
-
-        editItem = (id) ->
-          $scope.$apply ->
-            if $scope.editItem? then $scope.editItem(id) else $log.warn("`$scope.editItem` is not defined")
+        handleAction = (action, id) ->
+          if $scope[action]?
+            $scope.$apply -> $scope[action](id)
+          else
+            $log.warn("`$scope.#{action}` is not defined")
 
         # handles click on show action insite the dropdown menu
         $grid.on "showAction", (event, id) ->
           event.preventDefault()
-          showItem(id)
+          handleAction("showItem" ,id)
 
         # handles click on edit action insite the dropdown menu
         $grid.on "editAction", (event, id) ->
           event.preventDefault()
-          editItem(id)
+          handleAction("editItem" ,id)
+
+        # handles click on delete action inside the dropdown menu
+        $grid.on "deleteAction", (event, id) ->
+          event.preventDefault()
+          handleAction("deleteItem" ,id)
 
         # handles click on the cell with `editActionLink` formatter
         $grid.on "click", "a.editActionLink", (event) ->
           event.preventDefault()
           id = $(this).parents("tr:first").attr("id")
-          editItem(id)
-
-        $grid.on "deleteAction", (event, id) ->
-          event.preventDefault()
-          $scope.$apply -> $scope.deleteItem id
+          handleAction("deleteItem" ,id)
 
       $scope.$watch attrs.agGrid, initializeGrid
 
