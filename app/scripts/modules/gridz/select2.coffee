@@ -71,16 +71,25 @@ gridz.directive "agSelect2", [
         # create default `formatSelection` method
         options.formatSelection or= (item) -> item.name
 
-        # bind `click` event on the open button
-        element.find("button.open").click ->
-          element.find("input").select2 "open"
-
     template: """
       <div>
         <input ui-select2="options" multiple ng-model="ngModel" type="text"/>
-        <button class="btn open" type="button">
-          <i class="icon-search"></i>
-        </button>
+        <ag-select2-open></ag-select2-open>
       </div>
     """
 ]
+
+gridz.directive "agSelect2Open", ->
+  restrict: "E"
+  replace: true
+  scope: true
+  controller: ["$scope", "$element", ($scope, $element) ->
+    $scope.openSelect2 = ->
+      $select = $element.parent().find(".select2-container")
+      $select.select2 "open"
+  ]
+  template: """
+    <button class="btn open-select2" type="button" ng-click="openSelect2()">
+      <i class="icon-search"></i>
+    </button>
+  """
