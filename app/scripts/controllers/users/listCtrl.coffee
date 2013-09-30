@@ -1,6 +1,6 @@
 class ListCtrl
-  @$inject = ["$scope", "$location", "$filter", "$dialog", "confirmationDialog", "Users", "pathWithContext"]
-  constructor: ($scope, $location, $filter, $dialog, confirmationDialog, Users, pathWithContext) ->
+  @$inject = ["$scope", "$location", "$filter", "$modal", "confirmationDialog", "Users", "pathWithContext"]
+  constructor: ($scope, $location, $filter, $modal, confirmationDialog, Users, pathWithContext) ->
     @$filter = $filter
 
     $scope.gridOptions =
@@ -28,14 +28,12 @@ class ListCtrl
       userIds = $scope.usersGrid.getSelectedRowIds()
       return if userIds.length is 0
 
-      dialog = $dialog.dialog
-        backdropFade: false
-        dialogFade: false
+      $modal.open
+        templateUrl: pathWithContext("/templates/users/massUpdateForm.html")
+        controller: "users.MassUpdateFormCtrl"
         resolve:
           userIds: -> userIds
           usersGrid: -> $scope.usersGrid
-
-      dialog.open(pathWithContext("/templates/users/massUpdateForm.html"), "users.MassUpdateFormCtrl")
 
   gridColumns: ->
     showActionLink = (cellVal, options, rowdata) ->

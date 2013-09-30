@@ -1,6 +1,6 @@
 class UsersListCtrl
-  @$inject = ["$scope", "$log", "$dialog", "$filter", "confirmationDialog", "editDialog", "Users", "pathWithContext"]
-  constructor: ($scope, $log, $dialog, @$filter, confirmationDialog, editDialog, Users, pathWithContext) ->
+  @$inject = ["$scope", "$log", "$filter", "confirmationDialog", "editDialog", "Users", "pathWithContext"]
+  constructor: ($scope, $log, @$filter, confirmationDialog, editDialog, Users, pathWithContext) ->
     # Intitially show the search form
     $scope.showSearchForm = true
 
@@ -21,7 +21,8 @@ class UsersListCtrl
       editDialog.open(pathWithContext("templates/partials/userForm.html"), user, $scope.usersGrid)
 
     $scope.deleteItem = (id) ->
-      confirmationDialog.open().then (confirmed) ->
+      dialogPromise = confirmationDialog.open().result
+      dialogPromise.then (confirmed) ->
         return unless confirmed
 
         promise = Users.delete(id: id).$promise

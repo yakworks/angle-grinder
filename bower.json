@@ -15,8 +15,10 @@
 
         "angular": "1.2.0-rc.2",
         "angular-route": "1.2.0-rc.2",
+        "angular-resource": "1.2.0-rc.2",
+
         "angular-ui-select2": "~0.0.2",
-        "angular-bootstrap": "0.5.0",
+        "angular-bootstrap": "0.6.0",
         "angular-strap": "0.7.6",
         "bootstrap-datepicker": "1.1.1"
     },
@@ -26,8 +28,6 @@
         "jasmine-jquery": "~1.5.3",
 
         "angular-mocks": "1.2.0-rc.2",
-        "angular-resource": "1.2.0-rc.2",
-
         "sinon": "~1.7.3",
         "jasmine-sinon": "~0.1.0",
 

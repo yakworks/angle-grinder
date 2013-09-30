@@ -31,8 +31,8 @@ class ListCtrl
         item.id = generateId()
         callback.success(this)
 
-      editDialog.open("templates/partials/itemForm.html", item, $scope.grid)
-        .then (item) => @data.push(item)
+      promise = editDialog.open("templates/partials/itemForm.html", item, $scope.grid).result
+      promise.then (item) => @data.push(item)
 
     $scope.deleteItem = (id) =>
       item = @deleteItemById(id)

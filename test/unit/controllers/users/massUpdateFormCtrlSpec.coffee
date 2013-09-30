@@ -3,20 +3,20 @@ describe "controller: users.MassUpdateFormCtrl", ->
 
   $scope = null
   usersStub  = null
-  dialogStub = null
+  modalInstanceStub = null
   gridStub = null
 
   beforeEach inject ($rootScope, $controller) ->
     $scope = $rootScope.$new()
     usersStub = sinon.stub(massUpdate: angular.noop)
-    dialogStub = sinon.stub(close: angular.noop)
+    modalInstanceStub = sinon.stub(close: angular.noop)
     gridStub = sinon.stub(reload: angular.noop)
 
     $controller "users.MassUpdateFormCtrl",
       $scope: $scope
+      $modalInstance: modalInstanceStub
       Users: usersStub
       userIds: [1, 2, 3]
-      dialog: dialogStub
       usersGrid: gridStub
 
   describe "#save", ->
@@ -36,7 +36,7 @@ describe "controller: users.MassUpdateFormCtrl", ->
       expect(gridStub.reload.called).toBeTruthy()
 
     it "closes a dialog", ->
-      expect(dialogStub.close.called).toBeTruthy()
+      expect(modalInstanceStub.close.called).toBeTruthy()
 
   describe "#closeDialog", ->
 
@@ -45,4 +45,4 @@ describe "controller: users.MassUpdateFormCtrl", ->
       $scope.closeDialog()
 
       # Then
-      expect(dialogStub.close.called).toBeTruthy()
+      expect(modalInstanceStub.close.called).toBeTruthy()
