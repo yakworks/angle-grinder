@@ -285,7 +285,7 @@ abstract class BaseDomainController {
     }
 
     def deleteJson() {
-        log.debug("in saveOrUpdateJson with ${params}")
+        log.debug("in deleteJson with ${params}")
 
         def responseJson = [:]
         try {
