@@ -12,7 +12,6 @@ class ListCtrl
 
     # Displays a form for creating a new user
     $scope.createItem = ->
-      console.log $scope.usersGrid
       user = new Resource()
       editDialog.open(pathWithContext("/user/formTemplate"), user, $scope.usersGrid)
 
