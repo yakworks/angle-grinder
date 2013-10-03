@@ -45,7 +45,8 @@
             "src/common.js"
           ],
           "directives": [
-            "src/directives/datepicker.js"
+            "src/directives/datepicker.js",
+            "src/directives/popover.js"
           ]
         },
         "bootstrap": {
