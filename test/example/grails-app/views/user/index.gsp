@@ -48,8 +48,9 @@
 
     <ag-alerts></ag-alerts>
 
-    <div collapse="!showSearchForm"
-         ng-include="'${createLink(action: 'searchPartial')}'"></div>
+    <div collapse="!showSearchForm">
+         <div ng-include="'${createLink(action: 'searchPartial')}'"></div>
+    </div>
 
     <div class="navbar navbar-grid">
         <div class="navbar-inner with-selected-pointer with-grid-options">
