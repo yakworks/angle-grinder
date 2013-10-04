@@ -15,7 +15,10 @@ resources.factory "resourceBuilder", [
         save:       { method: "POST", params: action: "save" }
         update:     { method: "POST", params: action: "update" }
         delete:     { method: "POST", params: action: "delete" }
+
+        # mass actions (for selected rows)
         massUpdate: { method: "POST", params: action: "massUpdate" }
+        massDelete: { method: "POST", params: action: "massDelete" }
 
       angular.extend Resource.prototype,
         resourceName: -> resourceName
