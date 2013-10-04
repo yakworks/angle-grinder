@@ -69,9 +69,9 @@ open http://localhost:9000
 
 Third-party libraries
 
-* ./bower_components - components dowloaded by `bower install` command
+* ./bower_components - components downloaded by `bower install` command
 * ./custom_components - you could put custom components here
-* ./node_modules - command dowloaded by `npm install` command
+* ./node_modules - command downloaded by `npm install` command
 
 Generated stuff
 
