@@ -184,3 +184,18 @@ dist
 * `scripts/angleGrinder.gridz.min.js` - AgularJS directive for gridz
 
 And then navigate to `http://localhost:8000` to see the production release.
+
+## Build and release the documentation
+
+Clone the `gh-pages` branch:
+
+`git clone -b gh-pages https://github.com/9ci/angle-grinder angle-grinder-gh-pages`
+
+You must have `angle-grinder` and `angle-grinder-gh-pages` in the same directory.
+Go to `angle-grinder-gh-pages`directory,  build the app and push changes to `gh-pages` branch:
+
+```
+cd angle-grinder-gh-pages
+scripts/upgrade-angle-grinder.sh
+git commit -am 'chore: release the documentation'
+```
