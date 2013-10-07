@@ -5,13 +5,13 @@ gridz = angular.module("angleGrinder.gridz", [
 
 gridz.directive "agGrid", [
   "$log", ($log) ->
-    link = ($scope, $element, attrs, gridCtrl) ->
+    link = (scope, element, attrs, gridCtrl) ->
       # initialize the controller
-      gridCtrl.registerGridElement($element.find("table.gridz"))
+      gridCtrl.registerGridElement(element.find("table.gridz"))
 
       # publish agGrid controller to the parent scope
       alias = attrs.agGridName
-      $scope[alias] = gridCtrl if alias?
+      scope[alias] = gridCtrl if alias?
 
       # Initializes a grid with the given options
       initializeGrid = (gridOptions) ->
@@ -19,22 +19,22 @@ gridz.directive "agGrid", [
         $log.info "Initializing the grid", gridOptions
 
         # find grid placeholder
-        $grid = $element.find("table.gridz")
+        $grid = element.find("table.gridz")
 
         # jqGrid suks at this point it expects `pager` to be an id
-        gridOptions.pager = $element.find(".gridz-pager").attr("id") or "gridz-pager"
+        gridOptions.pager = element.find(".gridz-pager").attr("id") or "gridz-pager"
 
         # workaround for problem with initial grid size inside the hidden container
         # see http://www.trirand.com/blog/?page_id=393/help/problem-with-autowidth/
         gridOptions.gridComplete = ->
-          width = $element.parent().width() - 1
+          width = element.parent().width() - 1
           $grid.setGridWidth(width)
 
         $grid.gridz(gridOptions)
 
         handleAction = (action, id) ->
-          if $scope[action]?
-            $scope.$apply -> $scope[action](id)
+          if scope[action]?
+            scope.$apply -> scope[action](id)
           else
             $log.warn("`$scope.#{action}` is not defined")
 
@@ -59,7 +59,7 @@ gridz.directive "agGrid", [
           id = $(this).parents("tr:first").attr("id")
           handleAction("editItem" ,id)
 
-      $scope.$watch attrs.agGrid, initializeGrid
+      scope.$watch attrs.agGrid, initializeGrid
 
     restrict: "A"
 

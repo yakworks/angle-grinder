@@ -79,8 +79,8 @@ forms.directive "agSubmitButton", ->
   scope: true
   require: "^form"
 
-  link: ($scope, element, attrs, form) ->
-    $scope.submit = -> form.$submitted = true
+  link: (scope, element, attrs, form) ->
+    scope.submit = -> form.$submitted = true
 
   controller: ["$scope", "pendingRequests", ($scope, pendingRequests) ->
     # disable the button if POST, PUT or PATCH request is in progress

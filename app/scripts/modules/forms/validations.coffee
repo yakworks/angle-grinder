@@ -12,7 +12,7 @@ forms.value "validationMessages",
 # Might be used for password confirmation validation.
 forms.directive "match", ["isEmpty", (isEmpty) ->
   require: "ngModel"
-  link: ($scope, elem, attrs, modelCtrl) ->
+  link: (scope, elem, attrs, modelCtrl) ->
     validateEqual = (value, otherValue) ->
       allEmpty = _.all [isEmpty(value), isEmpty(otherValue)]
       valid = allEmpty or value is otherValue
@@ -21,11 +21,11 @@ forms.directive "match", ["isEmpty", (isEmpty) ->
       return value
 
     # watch the other value and re-validate on change
-    $scope.$watch attrs.match, (otherValue) ->
+    scope.$watch attrs.match, (otherValue) ->
       validateEqual(modelCtrl.$viewValue, otherValue)
 
     validator = (value) ->
-      otherValue = $scope.$eval(attrs.match)
+      otherValue = scope.$eval(attrs.match)
       validateEqual(value, otherValue)
 
     # validate DOM -> model
@@ -44,7 +44,7 @@ forms.directive "agFieldGroup", ["$timeout", ($timeout) ->
     <div class="control-group" ng-transclude></div>
   """
 
-  link: ($scope, element, attrs, formCtrl) ->
+  link: (scope, element, attrs, formCtrl) ->
     fields = (attrs["for"] or "").split(",")
 
     toggleErrors = ->
@@ -59,18 +59,18 @@ forms.directive "agFieldGroup", ["$timeout", ($timeout) ->
 
     # Watch for validity state change and display errors if necessary
     angular.forEach fields, (fieldName) ->
-      $scope.$watch "#{formCtrl.$name}.#{fieldName}.$viewValue", ->
+      scope.$watch "#{formCtrl.$name}.#{fieldName}.$viewValue", ->
         toggleErrors() if formCtrl[fieldName]?.$dirty
 
     # Display server side validation errors (only once)
     angular.forEach fields, (fieldName) ->
       initial = true
-      $scope.$watch "#{formCtrl.$name}.$serverError.#{fieldName}", ->
+      scope.$watch "#{formCtrl.$name}.$serverError.#{fieldName}", ->
         toggleErrors() unless initial
         initial = false
 
     # Display validation errors when the form is submitted
-    $scope.$watch "#{formCtrl.$name}.$submitted", (submitted) ->
+    scope.$watch "#{formCtrl.$name}.$submitted", (submitted) ->
       toggleErrors() if submitted
 ]
 
@@ -80,7 +80,7 @@ forms.directive "agValidationErrors", [
     require: "^form"
     replace: true
 
-    link: ($scope, element, attrs, formCtrl) ->
+    link: (scope, element, attrs, formCtrl) ->
       formName = formCtrl.$name
       fieldName = attrs["for"]
       field = formCtrl[fieldName]
@@ -110,27 +110,27 @@ forms.directive "agValidationErrors", [
 
       # Clear validation errors when the field is valid
       initial = true
-      $scope.$watch "#{formName}.#{fieldName}.$valid", ->
+      scope.$watch "#{formName}.#{fieldName}.$valid", ->
         displayErrorMessages() unless initial
         initial = false
 
       # Dispalay validation errors while typing
-      $scope.$watch "#{formName}.#{fieldName}.$viewValue", ->
+      scope.$watch "#{formName}.#{fieldName}.$viewValue", ->
         displayErrorMessages() if field.$dirty
 
       # Display validation errors when the form is submitted
-      $scope.$watch "#{formName}.$submitted", (submitted) ->
+      scope.$watch "#{formName}.$submitted", (submitted) ->
         displayErrorMessages() if submitted
 
       # Display server side errors
-      $scope.$watch "#{formName}.$serverError.#{fieldName}", (serverError) ->
+      scope.$watch "#{formName}.$serverError.#{fieldName}", (serverError) ->
         if serverError?
           appendError serverError, "server-error"
         else
           element.find(".server-error").remove()
 
       # TODO do something with `saving`
-      $scope.$watch "saving", (saving) ->
+      scope.$watch "saving", (saving) ->
         displayErrorMessages() if saving
 ]
 
@@ -138,18 +138,18 @@ forms.directive "agServerValidationErrors", ->
   restrict: "A"
   require: "^form"
 
-  link: ($scope, element, attrs, formCtrl) ->
+  link: (scope, element, attrs, formCtrl) ->
     formCtrl.$serverError = {}
 
     # Hide server side validation errors while typping
-    $scope.$watch "#{formCtrl.$name}.$serverError", (serverError) ->
+    scope.$watch "#{formCtrl.$name}.$serverError", (serverError) ->
 
       # Iterate through all fields with server validation errors
       angular.forEach serverError, (_, fieldName) ->
 
         # Register change listener for those fields
         initial = true
-        unregister = $scope.$watch "#{formCtrl.$name}.#{fieldName}.$viewValue", ->
+        unregister = scope.$watch "#{formCtrl.$name}.#{fieldName}.$viewValue", ->
           unless initial
             # Remove server side error for the field when its value was changed
             formCtrl.$serverError[fieldName] = null

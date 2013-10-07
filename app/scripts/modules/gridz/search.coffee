@@ -33,29 +33,29 @@ gridz.directive "agResetSearchButton", ->
 gridz.directive "agSearchForm", ["$log", ($log) ->
   restrict: "A"
   scope: false
-  link: ($scope, $element, attrs) ->
-    $element.addClass "ag-search-form"
+  link: (scope, element, attrs) ->
+    element.addClass "ag-search-form"
 
-    $scope.filters = {}
-    $scope.promise = true
+    scope.filters = {}
+    scope.promise = true
 
     # Trigger search action for the grid
-    $scope.advancedSearch = (filters) ->
-      gridCtrl = $scope[attrs.agSearchForm]
+    scope.advancedSearch = (filters) ->
+      gridCtrl = scope[attrs.agSearchForm]
 
       unless gridCtrl
         $log.warn "grid is not defined"
         return
 
-      $scope.promise = gridCtrl.search(filters)
+      scope.promise = gridCtrl.search(filters)
 
       # enable buttons back when something wrong happened
       $(document).ajaxError (event, jqxhr, settings, exception) ->
         if settings.type is "GET"
-          $scope.$apply -> $scope.promise = true
+          scope.$apply -> scope.promise = true
 
     # Reset the search form and trigger grid reload
-    $scope.resetSearch = (filters = {}) ->
-      $scope.filters = filters
-      $scope.advancedSearch(filters)
+    scope.resetSearch = (filters = {}) ->
+      scope.filters = filters
+      scope.advancedSearch(filters)
 ]

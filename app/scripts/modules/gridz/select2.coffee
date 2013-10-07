@@ -15,7 +15,7 @@ gridz.directive "agSelect2", [
       selectOptions: "="
       ngModel: "="
 
-    compile: ($element, attrs, transclude) ->
+    compile: (element, attrs, transclude) ->
       # find a template for the result item
       resultTemplate = null
       scope = $rootScope.$new()
@@ -26,9 +26,9 @@ gridz.directive "agSelect2", [
             break
 
       # pre linking function
-      pre: ($scope, element, attrs) ->
-        options = angular.copy $scope.selectOptions or {}
-        $scope.options = options
+      pre: (scope, element, attrs) ->
+        options = angular.copy scope.selectOptions or {}
+        scope.options = options
 
         # read `minimumInputLength` option from the attribute
         options.minimumInputLength or= 1
@@ -62,7 +62,7 @@ gridz.directive "agSelect2", [
         # create `formatResult` function from the given template
         if resultTemplate?
           options.formatResult or= (item) ->
-            scope = $scope.$new()
+            scope = scope.$new()
             scope.item = item
 
             resultElement = angular.element(resultTemplate)
