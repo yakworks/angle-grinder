@@ -128,14 +128,14 @@ describe "module: angleGrinder.gridz", ->
         </form>
       """, $injector, $scope
 
-    it "has a valid css class", ->
-      expect(element).toHaveClass "ag-search-form"
-
     describe "on submit button click", ->
       $searchButton = null
+
       beforeEach ->
+        directiveScope = element.scope()
         $searchButton = element.find("button")
-        $scope.$apply -> $scope.searchForm.name.$setViewValue "find me"
+
+        $scope.$apply -> directiveScope.searchForm.name.$setViewValue "find me"
 
       it "calls #advancedSearch", ->
         # When
@@ -154,6 +154,7 @@ describe "module: angleGrinder.gridz", ->
 
     describe "on reset button click", ->
       $resetButton = null
+
       beforeEach ->
         $resetButton = element.find("button#reset")
 
