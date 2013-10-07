@@ -1,0 +1,14 @@
+.grails/
+target/
+stacktrace.log
+plugin.xml
+grails-quartz*.zip
+
+# Eclipse Project files
+.classpath
+.project
+.settings/
+
+# OS X generated files
+.DS_Store
+

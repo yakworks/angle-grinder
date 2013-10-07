@@ -1,0 +1,60 @@
+<div class="subnav">
+  <ul class="nav nav-pills">
+    <li><a href="#/"><i class="icon-list"></i> Org List</a></li>
+    <li><a ng-show="org.persisted()" href="#/{{org.id}}"><i class="icon-th"></i> Show org</a></li>
+    <li><a ng-show="org.persisted()" href="#/create"><i class="icon-plus"></i> New org</a></li>
+  </ul>
+</div>
+
+<section class="anchor">
+  <h3 class="page-header" ng-show="org.newRecord()">Create org</h3>
+  <h3 class="page-header" ng-show="org.persisted()">Edit org</h3>
+
+  <form name="editForm" novalidate class="form-horizontal no-margin"
+        ag-server-validation-errors
+        ng-submit="save(org)">
+
+    <div ag-field-group for="name">
+      <label class="control-label">Name</label>
+
+      <div class="controls">
+        <input type="text" name="name" placeholder="Enter Name"
+               ng-model="org.name" autofocus required />
+        <ag-validation-errors for="name" required="This field is required" />
+      </div>
+    </div>
+
+    <div ag-field-group for="num">
+      <label class="control-label">Num</label>
+
+      <div class="controls">
+        <input type="text" name="num" placeholder="Enter num"
+               ng-model="org.num" required />
+        <ag-validation-errors for="num" required="This field is required" />
+      </div>
+    </div>
+
+    <div ag-field-group for="timeZone">
+      <label class="control-label">Time Zone</label>
+
+      <div class="controls">
+        <select ui-select2 ng-model="org.timeZone" name="timeZone"
+                ng-required="true"
+                data-placeholder="Pick a Time Zone">
+          <option value=""></option>
+          <option value="UTC-6">UTC-6</option>
+          <option value="UTC-2">UTC-2</option>
+          <option value="UTC">UTC</option>
+          <option value="UTC+2">UTC+2</option>
+        </select>
+
+        <ag-validation-errors for="timeZone" required="This field is required" />
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <ag-submit-button></ag-submit-button>
+      <a href="#/" class="btn">Cancel</a>
+    </div>
+  </form>
+</section>

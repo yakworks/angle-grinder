@@ -1,0 +1,19 @@
+target/
+stacktrace.log
+plugin.xml
+grails-quartz*.zip
+
+# Eclipse Project files
+.classpath
+.project
+.settings/
+
+# Intellij Project Files
+.idea
+*.iml
+
+# OS X generated files
+.DS_Store
+
+# Ingnore html files from angle-grinder
+web-app/angle-grinder/*.html
