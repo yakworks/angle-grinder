@@ -16,7 +16,7 @@ gridz.directive "agSearchButton", ->
   restrict: "E"
   replace: true
   template: """
-    <button type="button" ng-click="advancedSearch(filters)" ng-disabled="!promise" class="btn btn-info">
+    <button type="submit" ng-click="advancedSearch(filters)" ng-disabled="!promise" class="btn btn-info">
       <i class="icon-search icon-white"></i> Search<span ng-show="!promise">...</span>
     </button>
   """

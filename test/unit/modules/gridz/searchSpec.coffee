@@ -40,7 +40,7 @@ describe "module: angleGrinder.gridz", ->
       """, $injector
 
     it "renders the button", ->
-      expect(element).toBe "button[type=button]"
+      expect(element).toBe "button[type=submit]"
       expect(element).toHaveClass "btn"
       expect(element).toHaveText /Search/
 
