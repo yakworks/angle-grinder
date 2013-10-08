@@ -1,9 +1,9 @@
 baseUrl = "http://localhost:9001"
-scenario = require("./test/casperjs/helpers/scenario").create(baseUrl)
+scenario = require("./tests/casperjs/helpers/scenario").create(baseUrl)
 
 # Page objects
-EditDialog = require("./test/casperjs/helpers/page_objects/edit_dialog").EditDialog
-Grid = require("./test/casperjs/helpers/page_objects/grid").Grid
+EditDialog = require("./tests/casperjs/helpers/page_objects/edit_dialog").EditDialog
+Grid = require("./tests/casperjs/helpers/page_objects/grid").Grid
 
 scenario "Basic grid scenario", ->
   grid = new Grid(this)

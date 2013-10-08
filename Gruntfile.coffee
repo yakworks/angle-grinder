@@ -7,7 +7,7 @@ mountFolder = (connect, dir) ->
 module.exports = (grunt) ->
   # load all grunt tasks
   require("matchdep").filterDev("grunt-*").forEach(grunt.loadNpmTasks)
-  grunt.loadTasks("tasks")
+  grunt.loadTasks("grunt_tasks")
 
   # Extract browsers list from the command line
   # For example `grunt test --browsers=Chrome,Firefox`
@@ -28,10 +28,10 @@ module.exports = (grunt) ->
 
   # configurable paths
   appConfig =
-    app: "app"
-    test: "test"
+    app: "src"
+    test: "tests"
     dist: "dist"
-    dev: "dev"
+    dev: "build"
 
   grunt.initConfig
     appConfig: appConfig
@@ -165,7 +165,7 @@ module.exports = (grunt) ->
           # include it's images in the production release
           expand: true
           flatten: true
-          cwd: "custom_components/jquery-ui-bootstrap"
+          cwd: "third-party/jquery-ui-bootstrap"
           dest: "<%= appConfig.dist %>/styles/images"
           src: [
             "**/images/**/*.{png,jpg,jpeg}"
@@ -175,7 +175,7 @@ module.exports = (grunt) ->
           # this time for slect2 component
           expand: true
           flatten: true
-          cwd: "bower_components/select2"
+          cwd: "bower/select2"
           dest: "<%= appConfig.dist %>/styles"
           src: [
             "**/*.{png,jpg,jpeg,gif}"
