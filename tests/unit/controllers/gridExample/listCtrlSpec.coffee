@@ -1,6 +1,6 @@
 describe "controller: gridExample.ListCtrl", ->
   beforeEach module("angleGrinder")
-  beforeEach module("templates/partials/itemForm.html")
+  beforeEach module("templates/gridExample/form.html")
 
   $scope = null
   controller = null
@@ -40,7 +40,7 @@ describe "controller: gridExample.ListCtrl", ->
 
       it "opens opens a dialog for editing the the loaded resource", ->
         expect(dialogSpy.called).toBeTruthy()
-        expect(dialogSpy.calledWith("templates/partials/itemForm.html", resource)).toBeTruthy()
+        expect(dialogSpy.calledWith("templates/gridExample/form.html", resource)).toBeTruthy()
 
     describe "#createItem", ->
       spy = null
@@ -54,7 +54,7 @@ describe "controller: gridExample.ListCtrl", ->
 
         # Then
         expect(spy.called).toBeTruthy()
-        expect(spy.calledWith("templates/partials/itemForm.html")).toBeTruthy()
+        expect(spy.calledWith("templates/gridExample/form.html")).toBeTruthy()
 
   describe "controller", ->
 

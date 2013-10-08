@@ -40,7 +40,7 @@ describe "controller: usersDialog.ListCtrl", ->
 
       it "opens a dialog for editing loaded resource", ->
         expect(dialogSpy.called).toBeTruthy()
-        expect(dialogSpy.calledWith("templates/partials/userForm.html", {})).toBeTruthy()
+        expect(dialogSpy.calledWith("templates/usersDialog/form.html", {})).toBeTruthy()
 
     describe "#createItem", ->
       dialogSpy = null
@@ -52,7 +52,7 @@ describe "controller: usersDialog.ListCtrl", ->
 
       it "opens a dialog for editing an item", ->
         expect(dialogSpy.called).toBeTruthy()
-        expect(dialogSpy.calledWith("templates/partials/userForm.html")).toBeTruthy()
+        expect(dialogSpy.calledWith("templates/usersDialog/form.html")).toBeTruthy()
 
     describe "#deleteItem", ->
       user = null

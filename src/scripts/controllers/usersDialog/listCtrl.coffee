@@ -14,11 +14,11 @@ class IndexCtrl
 
     $scope.editItem = (id) ->
       promise = Users.get(id: id).$promise
-      editDialog.open(pathWithContext("templates/partials/userForm.html"), promise, $scope.usersGrid)
+      editDialog.open(pathWithContext("templates/usersDialog/form.html"), promise, $scope.usersGrid)
 
     $scope.createItem = ->
       user = new Users()
-      editDialog.open(pathWithContext("templates/partials/userForm.html"), user, $scope.usersGrid)
+      editDialog.open(pathWithContext("templates/usersDialog/form.html"), user, $scope.usersGrid)
 
     $scope.deleteItem = (id) ->
       confirmationDialog.open().then (confirmed) ->
