@@ -10,9 +10,9 @@ app.config [
         templateUrl: "templates/gridExample/index.html"
         controller: "gridExample.IndexCtrl"
 
-      .when "/users_list",
-        templateUrl: "templates/usersList.html"
-        controller: "UsersListCtrl"
+      .when "/usersDialog",
+        templateUrl: "templates/usersDialog/index.html"
+        controller: "usersDialog.IndexCtrl"
 
       .when "/users",
         templateUrl: "templates/users/list.html"
@@ -39,5 +39,5 @@ app.config [
             userResolver($route.current.params.id)
         ]
 
-      .otherwise redirectTo: "/users_list"
+      .otherwise redirectTo: "/usersDialog"
 ]

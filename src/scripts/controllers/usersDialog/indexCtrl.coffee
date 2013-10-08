@@ -1,4 +1,4 @@
-class UsersListCtrl
+class IndexCtrl
   @$inject = ["$scope", "$log", "$dialog", "$filter", "confirmationDialog", "editDialog", "Users", "pathWithContext"]
   constructor: ($scope, $log, $dialog, @$filter, confirmationDialog, editDialog, Users, pathWithContext) ->
     # Intitially show the search form
@@ -54,4 +54,4 @@ class UsersListCtrl
     ]
 
 angular.module("angleGrinder")
-  .controller("UsersListCtrl", UsersListCtrl)
+  .controller("usersDialog.IndexCtrl", IndexCtrl)
