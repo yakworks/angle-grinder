@@ -1,4 +1,4 @@
-class ListCtrl
+class IndexCtrl
 
   @$inject = ["$scope", "sampleData", "editDialog"]
   constructor: ($scope, sampleData, editDialog) ->
@@ -71,4 +71,4 @@ class ListCtrl
     ]
 
 angular.module("angleGrinder")
-  .controller("ListCtrl", ListCtrl)
+  .controller("gridExample.IndexCtrl", IndexCtrl)

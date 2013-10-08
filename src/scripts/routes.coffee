@@ -6,9 +6,9 @@ app.config [
     $httpProvider.responseInterceptors.push("httpErrorsInterceptor")
 
     $routeProvider
-      .when "/list",
-        templateUrl: "templates/list.html"
-        controller: "ListCtrl"
+      .when "/gridExample",
+        templateUrl: "templates/gridExample/index.html"
+        controller: "gridExample.IndexCtrl"
 
       .when "/users_list",
         templateUrl: "templates/usersList.html"

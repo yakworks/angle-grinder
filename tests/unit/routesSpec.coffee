@@ -8,7 +8,7 @@ describe "Application routes", ->
   beforeEach module "angleGrinder"
 
   beforeEach ->
-    module("templates/list.html")
+    module("templates/gridExample/index.html")
     module("templates/usersList.html")
     module("templates/users/list.html")
     module("templates/users/show.html")
@@ -31,10 +31,10 @@ describe "Application routes", ->
     expect($route.current.templateUrl).toEqual("templates/usersList.html")
     expect($route.current.controller).toEqual("UsersListCtrl")
 
-  it "recognizes `/list`", ->
-    navigateTo "/list"
-    expect($route.current.templateUrl).toEqual("templates/list.html")
-    expect($route.current.controller).toEqual("ListCtrl")
+  it "recognizes `/gridExample`", ->
+    navigateTo "/gridExample"
+    expect($route.current.templateUrl).toEqual("templates/gridExample/index.html")
+    expect($route.current.controller).toEqual("gridExample.IndexCtrl")
 
   it "recognizes `/users_list`", ->
     navigateTo "/users_list"

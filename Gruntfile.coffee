@@ -245,7 +245,7 @@ module.exports = (grunt) ->
         dest: "<%= appConfig.dev %>"
 
     casperjs:
-      files: ["<%= appConfig.dev %>/test/casperjs/**/*Scenario.js"]
+      files: ["<%= appConfig.dev %>/tests/casperjs/**/*Scenario.js"]
 
     clean:
       dev: [
