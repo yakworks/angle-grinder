@@ -7,7 +7,7 @@ mountFolder = (connect, dir) ->
 module.exports = (grunt) ->
   # load all grunt tasks
   require("matchdep").filterDev("grunt-*").forEach(grunt.loadNpmTasks)
-  grunt.loadTasks("tasks")
+  grunt.loadTasks("grunt_tasks")
 
   # Extract browsers list from the command line
   # For example `grunt test --browsers=Chrome,Firefox`
