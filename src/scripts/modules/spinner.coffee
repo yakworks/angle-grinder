@@ -22,7 +22,7 @@ spinner.controller "spinner", SpinnerCtrl
 Use css to set the spinner annimation image:
 ```
   li.spinner i.spin:before {
-    content: url('/images/ajax-loader.gif');
+    content: url('/img/ajax-loader.gif');
   }
 ```
 ###

@@ -908,5 +908,5 @@ li.spinner {
 }
 
 li.spinner i.spin:before {
-  content: url("/images/ajax-loader.gif");
+  content: url("/img/ajax-loader.gif");
 }
