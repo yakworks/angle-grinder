@@ -18,22 +18,44 @@ module.exports = (grunt) ->
     appConfig: appConfig
     pkg: grunt.file.readJSON("package.json")
 
+    # Run tasks whenever watched files change
     watch:          loadMoule "watch"
+
+    # Compile CoffeeScript files to JavaScript
     coffee:         loadMoule "coffee"
+    # Lint your CoffeeScript using grunt.js and coffeelint
+    coffeelint:     loadMoule "coffeelint"
+
+    # Compile LESS files to CSS
     less:           loadMoule "less"
+    # Concatenate files
     concat:         loadMoule "concat"
+
+    # Minify HTML
+    htmlmin:        loadMoule "htmlmin"
+    # Tgruask to concatenate & pre-load your AngularJS templates
+    ngtemplates:    loadMoule "ngtemplates"
+    # Minify files with UglifyJS
+    uglify:         loadMoule "uglify"
+    # Clear files and folders
+    clean:          loadMoule "clean"
+    # Copy files and folders
+    copy:           loadMoule "copy"
+    # Grunt plugin for Bower
+    bower:          loadMoule "bower"
+
+    # Replaces references to non-optimized scripts or stylesheets into a set of HTML files
     useminPrepare:  loadMoule "usemin_prepare"
     usemin:         loadMoule "usemin"
-    htmlmin:        loadMoule "htmlmin"
-    uglify:         loadMoule "uglify"
-    copy:           loadMoule "copy"
-    coffeelint:     loadMoule "coffeelint"
-    ngtemplates:    loadMoule "ngtemplates"
-    bower:          loadMoule "bower"
+
+    # Plugin for Karma
     karma:          loadMoule "karma"
-    jasminehtml:    loadMoule "jasminehtml"
+    # Plugin for CasperJS
     casperjs:       loadMoule "casperjs"
-    clean:          loadMoule "clean"
+    # Custom plugin for generating jasmine html tests runner
+    jasminehtml:    loadMoule "jasminehtml"
+
+    # Start a static web server
     connect:        loadMoule "connect"
 
   grunt.renameTask "regarde", "watch"

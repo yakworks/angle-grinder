@@ -1,3 +1,4 @@
+# https://github.com/gruntjs/grunt-contrib-less
 module.exports = (grunt) ->
 
   dist:

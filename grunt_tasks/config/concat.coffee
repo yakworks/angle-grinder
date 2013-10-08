@@ -1,3 +1,4 @@
+# https://github.com/gruntjs/grunt-contrib-concat
 module.exports = (grunt) ->
 
   dist:

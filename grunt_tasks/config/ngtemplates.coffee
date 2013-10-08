@@ -1,3 +1,4 @@
+# https://github.com/ericclemmons/grunt-angular-templates
 module.exports = (grunt) ->
 
   options:

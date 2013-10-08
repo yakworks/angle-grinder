@@ -1,3 +1,4 @@
+# https://github.com/yeoman/grunt-usemin
 module.exports = (grunt) ->
 
   html: [

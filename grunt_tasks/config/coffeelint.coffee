@@ -1,3 +1,4 @@
+# https://github.com/vojtajina/grunt-coffeelint
 module.exports = (grunt) ->
 
   options:

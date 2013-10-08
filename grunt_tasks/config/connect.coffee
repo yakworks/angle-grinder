@@ -4,6 +4,7 @@ proxySnippet = require("grunt-connect-proxy/lib/utils").proxyRequest
 mountFolder = (connect, dir) ->
   connect.static require("path").resolve(dir)
 
+# https://github.com/gruntjs/grunt-contrib-connect
 module.exports = (grunt, appConfig) ->
 
   options:

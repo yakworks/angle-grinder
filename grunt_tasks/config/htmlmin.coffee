@@ -1,3 +1,4 @@
+# https://github.com/gruntjs/grunt-contrib-htmlmin
 module.exports = (grunt) ->
 
   dist:

@@ -1,3 +1,4 @@
+# https://github.com/gruntjs/grunt-contrib-watch
 module.exports = (grunt) ->
 
   coffee:

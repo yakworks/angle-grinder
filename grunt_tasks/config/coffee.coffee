@@ -1,3 +1,4 @@
+# https://github.com/gruntjs/grunt-contrib-coffee
 module.exports = (grunt) ->
 
   dist:

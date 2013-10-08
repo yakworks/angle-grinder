@@ -1,3 +1,4 @@
+# https://github.com/karma-runner/grunt-karma
 module.exports = (grunt) ->
 
   # Extract browsers list from the command line
