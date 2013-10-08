@@ -9,7 +9,7 @@
 
         "bootstrap": "~2.3.1",
         "bootstrapx-clickover": "git://github.com/lecar-red/bootstrapx-clickover.git",
-        "jquery-ui-bootstrap": "./custom_components/jquery-ui-bootstrap",
+        "jquery-ui-bootstrap": "./third-party/jquery-ui-bootstrap",
         "select2": "~3.4.1",
         "select2-bootstrap-css": "t0m/select2-bootstrap-css",
 

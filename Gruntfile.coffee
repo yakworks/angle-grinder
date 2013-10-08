@@ -165,7 +165,7 @@ module.exports = (grunt) ->
           # include it's images in the production release
           expand: true
           flatten: true
-          cwd: "custom_components/jquery-ui-bootstrap"
+          cwd: "third-party/jquery-ui-bootstrap"
           dest: "<%= appConfig.dist %>/styles/images"
           src: [
             "**/images/**/*.{png,jpg,jpeg}"
