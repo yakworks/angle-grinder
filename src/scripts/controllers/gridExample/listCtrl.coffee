@@ -71,4 +71,4 @@ class IndexCtrl
     ]
 
 angular.module("angleGrinder")
-  .controller("gridExample.IndexCtrl", IndexCtrl)
+  .controller("gridExample.ListCtrl", IndexCtrl)

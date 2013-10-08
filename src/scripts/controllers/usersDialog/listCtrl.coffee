@@ -54,4 +54,4 @@ class IndexCtrl
     ]
 
 angular.module("angleGrinder")
-  .controller("usersDialog.IndexCtrl", IndexCtrl)
+  .controller("usersDialog.ListCtrl", IndexCtrl)

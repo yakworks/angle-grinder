@@ -1,4 +1,4 @@
-describe "controller: usersDialog.IndexCtrl", ->
+describe "controller: usersDialog.ListCtrl", ->
   beforeEach module("angleGrinder")
 
   $scope = null
@@ -9,7 +9,7 @@ describe "controller: usersDialog.IndexCtrl", ->
     $scope = $rootScope.$new()
     $scope.usersGrid = usersGridStub
 
-    $controller "usersDialog.IndexCtrl",
+    $controller "usersDialog.ListCtrl",
       $scope: $scope
 
   describe "$scope", ->

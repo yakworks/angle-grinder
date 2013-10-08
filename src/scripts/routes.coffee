@@ -8,11 +8,11 @@ app.config [
     $routeProvider
       .when "/gridExample",
         templateUrl: "templates/gridExample/index.html"
-        controller: "gridExample.IndexCtrl"
+        controller: "gridExample.ListCtrl"
 
       .when "/usersDialog",
         templateUrl: "templates/usersDialog/index.html"
-        controller: "usersDialog.IndexCtrl"
+        controller: "usersDialog.ListCtrl"
 
       .when "/users",
         templateUrl: "templates/users/list.html"

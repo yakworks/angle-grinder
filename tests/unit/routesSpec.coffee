@@ -29,17 +29,17 @@ describe "Application routes", ->
   it "recognizes `/`", ->
     navigateTo "/"
     expect($route.current.templateUrl).toEqual("templates/usersDialog/index.html")
-    expect($route.current.controller).toEqual("usersDialog.IndexCtrl")
+    expect($route.current.controller).toEqual("usersDialog.ListCtrl")
 
   it "recognizes `/gridExample`", ->
     navigateTo "/gridExample"
     expect($route.current.templateUrl).toEqual("templates/gridExample/index.html")
-    expect($route.current.controller).toEqual("gridExample.IndexCtrl")
+    expect($route.current.controller).toEqual("gridExample.ListCtrl")
 
   it "recognizes `/usersDialog`", ->
     navigateTo "/users_list"
     expect($route.current.templateUrl).toEqual("templates/usersDialog/index.html")
-    expect($route.current.controller).toEqual("usersDialog.IndexCtrl")
+    expect($route.current.controller).toEqual("usersDialog.ListCtrl")
 
   it "recognizes `/users`", ->
     navigateTo "/users"
