@@ -2,59 +2,60 @@
 module.exports = (config) ->
   config.set
 
+    basePath: "../"
+
     frameworks: [
       "jasmine"
     ]
 
     # list of files / patterns to load in the browser
     files: [
-      "components/jquery/jquery.js"
-      "components/underscore/underscore.js"
-      "components/angular/angular.js"
-      "components/angular-mocks/angular-mocks.js"
-      "components/angular-resource/angular-resource.js"
-      "components/angular-route/angular-route.js"
-      "components/jasmine-jquery/jasmine-jquery.js"
+      "bower/jquery/jquery.js"
+      "bower/underscore/underscore.js"
+      "bower/angular/angular.js"
+      "bower/angular-mocks/angular-mocks.js"
+      "bower/angular-resource/angular-resource.js"
+      "bower/angular-route/angular-route.js"
+      "bower/jasmine-jquery/lib/jasmine-jquery.js"
 
-      "components/sinon/lib/sinon.js"
-      "components/sinon/lib/sinon/spy.js"
-      "components/sinon/lib/sinon/call.js"
-      "components/sinon/lib/sinon/stub.js"
-      "components/sinon/lib/sinon/mock.js"
-      "components/sinon/lib/sinon/assert.js"
+      "bower/sinon/lib/sinon.js"
+      "bower/sinon/lib/sinon/spy.js"
+      "bower/sinon/lib/sinon/call.js"
+      "bower/sinon/lib/sinon/stub.js"
+      "bower/sinon/lib/sinon/mock.js"
+      "bower/sinon/lib/sinon/assert.js"
 
-      "components/jqgrid/js/grid.base.js"
-      "components/select2/select2.js"
-      "components/angular-ui-select2/select2.js"
-      "components/angular-strap/common.js"
-      "components/angular-strap/directives/datepicker.js"
-      "components/angular-bootstrap/ui-bootstrap-tpls.js"
+      "bower/jqgrid/js/grid.base.js"
+      "bower/select2/select2.js"
+      "bower/angular-ui-select2/src/select2.js"
+      "bower/angular-strap/src/common.js"
+      "bower/angular-strap/src/directives/datepicker.js"
+      "bower/angular-bootstrap/ui-bootstrap-tpls.js"
 
-      "templates/**/*.html"
+      "src/scripts/jqgrid/gridz.coffee"
 
-      "scripts/jqgrid/gridz.js"
+      "src/templates/**/*.html"
 
-      "scripts/modules/*.js"
-      "scripts/modules/forms/*.js"
-      "scripts/modules/gridz/*.js"
+      "src/scripts/modules/*.coffee"
+      "src/scripts/modules/forms/*.coffee"
+      "src/scripts/modules/gridz/*.coffee"
 
-      "scripts/application.js"
-      "scripts/routes.js"
-      "scripts/controllers/**/*.js"
+      "src/scripts/application.coffee"
+      "src/scripts/routes.coffee"
+      "src/scripts/controllers/**/*.coffee"
 
-      "tests/unit/helpers/**/*.js"
-      "tests/unit/**/*Spec.js"
+      "tests/unit/helpers/**/*.coffee"
+      "tests/unit/**/*Spec.coffee"
     ]
 
     preprocessors:
-      "templates/**/*.html": ["html2js"]
-      "scripts/**/*.js": "coverage"
+      "**/*.coffee": ["coffee"]
+      "**/*.html": ["html2js"]
 
     ngHtml2JsPreprocessor:
-      stripPrefix: "../app/"
+      stripPrefix: "src/"
 
-    # list of files to exclude
-    exclude: []
+    reporters: ["dots", "coverage"]
 
     # web server port
     port: 8080
@@ -63,7 +64,7 @@ module.exports = (config) ->
     runnerPort: 9100
 
     # enable / disable watching file and executing tests whenever any file changes
-    autoWatch: false
+    autoWatch: true
 
     # Start these browsers, currently available:
     # - Chrome
@@ -84,10 +85,14 @@ module.exports = (config) ->
     logLevel: config.LOG_WARN
 
     plugins: [
+      "karma-coffee-preprocessor"
       "karma-ng-html2js-preprocessor"
 
       "karma-jasmine"
-      "karma-phantomjs-launcher"
       "karma-spec-reporter"
       "karma-coverage"
+
+      "karma-phantomjs-launcher"
+      "karma-chrome-launcher"
+      "karma-firefox-launcher"
     ]

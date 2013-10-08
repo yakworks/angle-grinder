@@ -81,35 +81,21 @@ Generated stuff
 
 ## Running tests
 
-By default all tests are executes in PhantomJS browser
+By default all tests are executed in PhantomJS browser
 
-`grunt test`
+* `grunt test:unit` or `grunt test` - run unit tests
+* `grunt test:unit:watch` or
+* `grunt test:watch` - run unit tests in watch mode
+* `grunt test:coverage` or
+* `grunt test:unit:coverage` - run unit tests against compiled development release and generate code coverage report
+* `grunt test:unit:coverage --coverage-reporter=html` - generate html code coverage report
+
+* `grunt test --reporters=spec` - run tests with `spec` reporter
+* `grunt test --browsers=Chrome,Firefox` - run tests inside Chrome and Firefox
 
 Run test against specific browsers
 
-`grunt test --browsers=Chrome,Firefox,Opera,PhantomJS`
-
-Run karma with `autoWatch` option:
-
-```
-# inside the first terminal
-grunt server
-
-# inside the second terminal
-grunt test:watch --browsers=Chrome,Opera
-```
-
-or
-
-```
-# inside the first terminal
-grunt build:dev watch
-
-# inside the second terminal
-grunt test:watch --browsers=Firefox,PhantomJS
-```
-
-Task `grunt watch` has to be executed since it's recompiling all CoffeeScripts.
+`grunt test:unit --browsers=Chrome,Firefox,Opera,PhantomJS`
 
 ### How to debug failing specs
 
@@ -133,8 +119,9 @@ Run karma in Chrome browser:
 
 ### Running e2e tests
 
-`grunt test:e2e`
-`grunt test:casperjs`
+* `grunt test:e2e`
+* `grunt test:casperjs`
+* `grunt test:ci`
 
 ### Running tests headlessly
 

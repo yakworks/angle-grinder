@@ -80,17 +80,38 @@ module.exports = (grunt) ->
     "watch"
   ]
 
-  grunt.registerTask "test", [
-    "build:dev"
-    "ngtemplates"
+  # run unit tests
+  grunt.registerTask "test:unit", [
     "karma:unit"
   ]
 
+  # run unit tests in the watch mode
+  grunt.registerTask "test:unit:watch", [
+    "karma:watch"
+  ]
+
+  # run unit tests in the watch mode
+  grunt.registerTask "test:watch", [
+    "test:unit:watch"
+  ]
+
+  # run unit tests against compiled develepment release
+  # and generate code coverage report
+  grunt.registerTask "test:unit:coverage", [
+    "build:dev"
+    "karma:coverage"
+  ]
+
+  grunt.registerTask "test:coverage", [
+    "test:unit:coverage"
+  ]
+
+  # run casperjs integration tests
   grunt.registerTask "test:casperjs", [
     "build:dev"
     "configureProxies"
-    "connect:e2e"
-    "casperjs"
+    "connect:integration"
+    "casper"
   ]
 
   # run all tests on the ci server
@@ -103,6 +124,10 @@ module.exports = (grunt) ->
 
     "connect:e2e"
     "casperjs"
+  ]
+
+  grunt.registerTask "test", [
+    "karma:unit"
   ]
 
   grunt.registerTask "build:dist", [

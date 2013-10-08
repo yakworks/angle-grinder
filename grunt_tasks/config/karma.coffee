@@ -1,6 +1,11 @@
 # https://github.com/karma-runner/grunt-karma
 module.exports = (grunt) ->
 
+  _extractOptions = (key, opts = {}) ->
+    options = grunt.option(key) or opts.default
+    options = options.replace(/[\s\[\]]/, "")
+    options.split(",")
+
   # Extract browsers list from the command line
   # For example `grunt test --browsers=Chrome,Firefox`
   # Currently available browsers:
@@ -12,39 +17,41 @@ module.exports = (grunt) ->
   # - PhantomJS
   # - IE (only Windows)
   parseBrowsers = (opts = {}) ->
-    opts.defaultBrowser or= "PhantomJS"
+    opts.default or= "PhantomJS"
+    _extractOptions("browsers", opts)
 
-    browsers = grunt.option("browsers") || opts.defaultBrowser
-    browsers = browsers.replace(/[\s\[\]]/, "")
-    browsers.split(",")
+  # Possible values: dots, spec, progress, junit, growl, coverage
+  parseReporters = (opts = {}) ->
+    opts.default or= "dots"
+    _extractOptions("reporters", opts)
 
   options:
-    basePath: "../<%= appConfig.dev %>"
-    browsers: parseBrowsers(defaultBrowser: "PhantomJS")
+    browsers: parseBrowsers(default: "PhantomJS")
     colors: true
     # test results reporter to use
     # possible values: dots || progress || growl
-    reporters: ["dots"]
+    reporters: parseReporters(defaultReporter: "dots")
     # If browser does not capture in given timeout [ms], kill it
     captureTimeout: 5000
 
   unit:
     configFile: "<%= appConfig.test %>/karma.conf.coffee"
+    singleRun: true
+
+  # run karma for unit tests in watch mode
+  watch:
+    configFile: "<%= appConfig.test %>/karma.conf.coffee"
+    reporters: parseReporters(default: "dots")
+    singleRun: false
+    autoWatch: true
+
+  # generate test code coverage for compiled javascripts
+  coverage:
+    basePath: "../<%= appConfig.dev %>"
+    configFile: "<%= appConfig.test %>/karma-coverage.conf.coffee"
     reporters: ["dots", "coverage"]
     coverageReporter:
-      type: "html"
+      type: grunt.option("coverage-reporter") || "text"
       dir: "coverage"
 
     singleRun: true
-
-  coffee:
-    basePath: "../"
-    configFile: "<%= appConfig.test %>/karma-coffee.conf.coffee"
-    reporters: ["dots"]
-    singleRun: true
-
-  watch:
-    configFile: "<%= appConfig.test %>/karma.conf.coffee"
-    reporters: ["dots"]
-    singleRun: false
-    autoWatch: true
