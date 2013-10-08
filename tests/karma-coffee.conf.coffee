@@ -32,20 +32,20 @@ module.exports = (config) ->
       "bower/angular-strap/src/directives/datepicker.js"
       "bower/angular-bootstrap/ui-bootstrap-tpls.js"
 
-      "app/scripts/jqgrid/gridz.coffee"
+      "src/scripts/jqgrid/gridz.coffee"
 
-      "app/templates/**/*.html"
+      "src/templates/**/*.html"
 
-      "app/scripts/modules/*.coffee"
-      "app/scripts/modules/forms/*.coffee"
-      "app/scripts/modules/gridz/*.coffee"
+      "src/scripts/modules/*.coffee"
+      "src/scripts/modules/forms/*.coffee"
+      "src/scripts/modules/gridz/*.coffee"
 
-      "app/scripts/application.coffee"
-      "app/scripts/routes.coffee"
-      "app/scripts/controllers/**/*.coffee"
+      "src/scripts/application.coffee"
+      "src/scripts/routes.coffee"
+      "src/scripts/controllers/**/*.coffee"
 
-      "test/unit/helpers/**/*.coffee"
-      "test/unit/**/*Spec.coffee"
+      "tests/unit/helpers/**/*.coffee"
+      "tests/unit/**/*Spec.coffee"
     ]
 
     preprocessors:
@@ -53,7 +53,7 @@ module.exports = (config) ->
       "**/*.html": ["html2js"]
 
     ngHtml2JsPreprocessor:
-      stripPrefix: "app/"
+      stripPrefix: "src/"
 
     reporters: ["dots", "coverage"]
 
