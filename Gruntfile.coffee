@@ -79,7 +79,7 @@ module.exports = (grunt) ->
           expand: true
           cwd: "<%= appConfig.test %>"
           src: "**/*.coffee"
-          dest: "<%= appConfig.dev %>/test"
+          dest: "<%= appConfig.dev %>/tests"
           ext: ".js"
         ]
 
@@ -245,7 +245,7 @@ module.exports = (grunt) ->
         dest: "<%= appConfig.dev %>"
 
     casperjs:
-      files: ["<%= appConfig.dev %>/test/casperjs/**/*Scenario.js"]
+      files: ["<%= appConfig.dev %>/tests/casperjs/**/*Scenario.js"]
 
     clean:
       dev: [

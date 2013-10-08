@@ -6,13 +6,13 @@ app.config [
     $httpProvider.responseInterceptors.push("httpErrorsInterceptor")
 
     $routeProvider
-      .when "/list",
-        templateUrl: "templates/list.html"
-        controller: "ListCtrl"
+      .when "/gridExample",
+        templateUrl: "templates/gridExample/index.html"
+        controller: "gridExample.ListCtrl"
 
-      .when "/users_list",
-        templateUrl: "templates/usersList.html"
-        controller: "UsersListCtrl"
+      .when "/usersDialog",
+        templateUrl: "templates/usersDialog/index.html"
+        controller: "usersDialog.ListCtrl"
 
       .when "/users",
         templateUrl: "templates/users/list.html"
@@ -39,5 +39,5 @@ app.config [
             userResolver($route.current.params.id)
         ]
 
-      .otherwise redirectTo: "/users_list"
+      .otherwise redirectTo: "/usersDialog"
 ]

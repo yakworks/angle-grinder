@@ -1,4 +1,4 @@
-describe "controller: UsersListCtrl", ->
+describe "controller: usersDialog.ListCtrl", ->
   beforeEach module("angleGrinder")
 
   $scope = null
@@ -9,7 +9,7 @@ describe "controller: UsersListCtrl", ->
     $scope = $rootScope.$new()
     $scope.usersGrid = usersGridStub
 
-    $controller "UsersListCtrl",
+    $controller "usersDialog.ListCtrl",
       $scope: $scope
 
   describe "$scope", ->
@@ -40,7 +40,7 @@ describe "controller: UsersListCtrl", ->
 
       it "opens a dialog for editing loaded resource", ->
         expect(dialogSpy.called).toBeTruthy()
-        expect(dialogSpy.calledWith("templates/partials/userForm.html", {})).toBeTruthy()
+        expect(dialogSpy.calledWith("templates/usersDialog/form.html", {})).toBeTruthy()
 
     describe "#createItem", ->
       dialogSpy = null
@@ -52,7 +52,7 @@ describe "controller: UsersListCtrl", ->
 
       it "opens a dialog for editing an item", ->
         expect(dialogSpy.called).toBeTruthy()
-        expect(dialogSpy.calledWith("templates/partials/userForm.html")).toBeTruthy()
+        expect(dialogSpy.calledWith("templates/usersDialog/form.html")).toBeTruthy()
 
     describe "#deleteItem", ->
       user = null

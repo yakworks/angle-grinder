@@ -8,8 +8,8 @@ describe "Application routes", ->
   beforeEach module "angleGrinder"
 
   beforeEach ->
-    module("templates/list.html")
-    module("templates/usersList.html")
+    module("templates/gridExample/index.html")
+    module("templates/usersDialog/index.html")
     module("templates/users/list.html")
     module("templates/users/show.html")
     module("templates/users/form.html")
@@ -28,18 +28,18 @@ describe "Application routes", ->
 
   it "recognizes `/`", ->
     navigateTo "/"
-    expect($route.current.templateUrl).toEqual("templates/usersList.html")
-    expect($route.current.controller).toEqual("UsersListCtrl")
+    expect($route.current.templateUrl).toEqual("templates/usersDialog/index.html")
+    expect($route.current.controller).toEqual("usersDialog.ListCtrl")
 
-  it "recognizes `/list`", ->
-    navigateTo "/list"
-    expect($route.current.templateUrl).toEqual("templates/list.html")
-    expect($route.current.controller).toEqual("ListCtrl")
+  it "recognizes `/gridExample`", ->
+    navigateTo "/gridExample"
+    expect($route.current.templateUrl).toEqual("templates/gridExample/index.html")
+    expect($route.current.controller).toEqual("gridExample.ListCtrl")
 
-  it "recognizes `/users_list`", ->
+  it "recognizes `/usersDialog`", ->
     navigateTo "/users_list"
-    expect($route.current.templateUrl).toEqual("templates/usersList.html")
-    expect($route.current.controller).toEqual("UsersListCtrl")
+    expect($route.current.templateUrl).toEqual("templates/usersDialog/index.html")
+    expect($route.current.controller).toEqual("usersDialog.ListCtrl")
 
   it "recognizes `/users`", ->
     navigateTo "/users"
