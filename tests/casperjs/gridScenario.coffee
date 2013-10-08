@@ -12,7 +12,7 @@ scenario "Basic grid scenario", ->
   @feature "Navigate to the example", ->
     @clickLabel "Grid example", "a"
     @then ->
-      @test.assertUrlMatch /list/
+      @test.assertUrlMatch /gridExample/
       @test.assertSelectorHasText "section.content h2", "Grid example"
 
   @feature "Display the grid with all data", ->
