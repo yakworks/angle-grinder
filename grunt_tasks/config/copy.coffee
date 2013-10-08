@@ -32,7 +32,7 @@ module.exports = (grunt) ->
       expand: true
       flatten: true
       cwd: "third-party/jquery-ui-bootstrap"
-      dest: "<%= appConfig.dist %>/styles/img"
+      dest: "<%= appConfig.dist %>/styles/images"
       src: [
         "**/images/**/*.{png,jpg,jpeg}"
       ]
