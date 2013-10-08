@@ -175,7 +175,7 @@ module.exports = (grunt) ->
           # this time for slect2 component
           expand: true
           flatten: true
-          cwd: "bower_components/select2"
+          cwd: "bower/select2"
           dest: "<%= appConfig.dist %>/styles"
           src: [
             "**/*.{png,jpg,jpeg,gif}"

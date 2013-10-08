@@ -4,7 +4,7 @@
 
 # Ignore libraries
 node_modules
-bower_components
+bower
 
 # Ignore dist package
 coverage
