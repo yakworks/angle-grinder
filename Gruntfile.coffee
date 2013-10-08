@@ -28,7 +28,7 @@ module.exports = (grunt) ->
 
   # configurable paths
   appConfig =
-    app: "app"
+    app: "src"
     test: "test"
     dist: "dist"
     dev: "dev"
