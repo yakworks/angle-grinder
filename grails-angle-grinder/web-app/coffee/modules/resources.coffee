@@ -7,7 +7,8 @@ resources = angular.module("angleGrinder.resources", [
 resources.factory "resourceBuilder", [
   "$resource", "pathWithContext", ($resource, pathWithContext) ->
     (basePath, resourceName = null) ->
-      basePath = pathWithContext(basePath)
+      resourceName = basePath.replace(/$\/+/, "") unless resourceName?
+      basePath = pathWithContext(basePath, resourceName)
 
       Resource = $resource "#{basePath}/:action/:id", { id: "@id" },
         list:       { method: "GET",  params: { action: "list" }, isArray: true }
