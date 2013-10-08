@@ -12,6 +12,7 @@
         "jquery-ui-bootstrap": "./third-party/jquery-ui-bootstrap",
         "select2": "~3.4.1",
         "select2-bootstrap-css": "t0m/select2-bootstrap-css",
+        "font-awesome": "~3.2.1",
 
         "angular": "1.2.0-rc.2",
         "angular-route": "1.2.0-rc.2",
@@ -31,8 +32,7 @@
         "sinon": "~1.7.3",
         "jasmine-sinon": "~0.1.0",
 
-        "modernizr": "~2.6.2",
-        "font-awesome": "*"
+        "modernizr": "~2.6.2"
     },
 
     "exportsOverride": {
@@ -62,6 +62,10 @@
         },
         "bootstrap-clickover": {
             "js": "js/bootstrap-clickover.js"
+        },
+        "font-awesome": {
+            "css": ["css/font-awesome.css", "css/font-awesome-ie7.css"],
+            "font": ["font/*"]
         },
         "jqgrid": {
             "js": "js/*.js",
