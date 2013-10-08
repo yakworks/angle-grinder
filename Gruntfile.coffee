@@ -79,7 +79,7 @@ module.exports = (grunt) ->
           expand: true
           cwd: "<%= appConfig.test %>"
           src: "**/*.coffee"
-          dest: "<%= appConfig.dev %>/test"
+          dest: "<%= appConfig.dev %>/tests"
           ext: ".js"
         ]
 
