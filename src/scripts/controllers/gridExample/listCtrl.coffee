@@ -1,4 +1,4 @@
-class ListCtrl
+class IndexCtrl
 
   @$inject = ["$scope", "sampleData", "editDialog"]
   constructor: ($scope, sampleData, editDialog) ->
@@ -21,7 +21,7 @@ class ListCtrl
         self.deleteItemById(id)
         callback.success(this)
 
-      editDialog.open("templates/partials/itemForm.html", item, $scope.grid)
+      editDialog.open("templates/gridExample/form.html", item, $scope.grid)
 
     $scope.createItem = =>
       item = {}
@@ -31,7 +31,7 @@ class ListCtrl
         item.id = generateId()
         callback.success(this)
 
-      editDialog.open("templates/partials/itemForm.html", item, $scope.grid)
+      editDialog.open("templates/gridExample/form.html", item, $scope.grid)
         .then (item) => @data.push(item)
 
     $scope.deleteItem = (id) =>
@@ -71,4 +71,4 @@ class ListCtrl
     ]
 
 angular.module("angleGrinder")
-  .controller("ListCtrl", ListCtrl)
+  .controller("gridExample.ListCtrl", IndexCtrl)

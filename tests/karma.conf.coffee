@@ -42,8 +42,8 @@ module.exports = (config) ->
       "scripts/routes.js"
       "scripts/controllers/**/*.js"
 
-      "test/unit/helpers/**/*.js"
-      "test/unit/**/*Spec.js"
+      "tests/unit/helpers/**/*.js"
+      "tests/unit/**/*Spec.js"
     ]
 
     preprocessors:
