@@ -1,7 +1,7 @@
-#/bin/bash
+#!/bin/bash
 
 CURRENT_DIR=`pwd`
-ANGLE_GRINDER_DIR="$CURRENT_DIR/../angle-grinder"
+ANGLE_GRINDER_DIR="$CURRENT_DIR/.."
 
 if [ ! -d "$ANGLE_GRINDER_DIR" ]; then
   echo "Cannot found `$ANGLE_GRINDER_DIR`";
