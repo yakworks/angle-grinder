@@ -8,7 +8,7 @@ bower
 
 # Ignore dist package
 coverage
-dev
+build
 dist
 
 # Ignore logs
