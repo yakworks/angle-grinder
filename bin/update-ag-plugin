@@ -1,11 +1,11 @@
 #!/bin/bash
 
 CURRENT_DIR=`pwd`
-ANGLE_GRINDER_DIR="$CURRENT_DIR/.."
+ANGLE_GRINDER_DIR=$CURRENT_DIR
 
 if [ ! -d "$ANGLE_GRINDER_DIR" ]; then
-  echo "Cannot found `$ANGLE_GRINDER_DIR`";
-  exit 1;
+  echo "Cannot found $ANGLE_GRINDER_DIR"
+  exit 1
 fi
 
 SKIP_DEPENDENCIES=0
@@ -25,9 +25,10 @@ do
 done
 
 # Cleanup the output directory
-OUTPUT_DIRECTORY="$CURRENT_DIR/web-app/angleGrinder"
+OUTPUT_DIRECTORY="$CURRENT_DIR/grails/ag-plugin/web-app/angleGrinder"
 if [ ! -d "$OUTPUT_DIRECTORY" ]; then
-  exit 1;
+  echo "Cannot found $OUTPUT_DIRECTORY"
+  exit 1
 fi
 
 cd "$OUTPUT_DIRECTORY"
@@ -41,9 +42,11 @@ if [ $SKIP_DEPENDENCIES -eq 0 ]; then
   npm install
   bower install
 else
-  echo "\n=== Skipping dependencies installation ===\n"
+  echo -n "\n=== Skipping dependencies installation ===\n"
 fi
 
 # Build the app and copy the output to the right place
 grunt build
 cp -R dist/* "$OUTPUT_DIRECTORY"
+
+exit 1

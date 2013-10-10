@@ -2,10 +2,10 @@ module.exports = (grunt) ->
 
   # load all grunt tasks
   require("matchdep").filterDev("grunt-*").forEach(grunt.loadNpmTasks)
-  grunt.loadTasks("grunt_tasks")
+  grunt.loadTasks("grunt-tasks")
 
   loadMoule = (name) ->
-    require("./grunt_tasks/config/#{name}")(grunt, appConfig)
+    require("./grunt-tasks/config/#{name}")(grunt, appConfig)
 
   # configurable paths
   appConfig =

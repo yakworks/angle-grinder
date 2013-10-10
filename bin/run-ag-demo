@@ -1,0 +1,3 @@
+#!/bin/bash
+
+(cd grails/ag-demo; grails run-app)
