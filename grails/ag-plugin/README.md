@@ -18,7 +18,7 @@ test/example Roadmap
 
 Plugin Roadmap
 ==============
+
 - add CriteriaHelper with tests for search screens
 - create tests for the taglibs
 - create a process to get a required set of i18n messages so we can do translation on client vs relying ag.message
-- 

@@ -1,8 +1,4 @@
-//grails.plugin.location.dao ="../grails-dao-plugin/dao-plugin"
-//grails.plugin.location.freemarker ="../../grails/freemarker"
-//grails.plugin.location.sparkle = "../sparkle"
-grails.plugin.location.angleGrinder = "../.."
-//grails.plugin.location.fields = "../grails-fields"
+grails.plugin.location.angleGrinder = "../ag-plugin"
 
 grails {
     tomcat { // settings for run-app and run-war
