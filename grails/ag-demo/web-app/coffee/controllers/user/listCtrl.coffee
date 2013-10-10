@@ -41,17 +41,5 @@ class ListCtrl
       { name: "inactive", label: "Inactive", width: 30, align: "center", formatter: "okIcon" }
     ]
 
-class SearchForm
-
-  @$inject = ["$scope"]
-  constructor: ($scope) ->
-    $scope.search = contact: type: []
-
-    $scope.contactTypeSelectOptions =
-      multiple: true
-      simple_tags: true
-      tags: ["admin", "customer"]
-
 angular.module("angleGrinder")
   .controller("user.ListCtrl", ListCtrl)
-  .controller("user.SearchForm", SearchForm)

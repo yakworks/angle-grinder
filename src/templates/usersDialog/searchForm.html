@@ -1,4 +1,4 @@
-<div class="well">
+<div class="well" ng-controller="usersDialog.SearchFormCtrl">
   <form name="searchForm" ag-search-form="usersGrid"
         class="form-horizontal form-multi-column no-margin">
 
@@ -56,16 +56,12 @@
         </div>
       </div>
 
-      <div class="control-group span6">
-        <label class="control-label">Dummy</label>
+      <div class="control-group span6 foo">
+        <label class="control-label">Type</label>
+
         <div class="controls">
-          <select ui-select2 ng-model="filters.dummy" data-placeholder="Pick a number">
-            <option value=""></option>
-            <option value="one">First</option>
-            <option value="two">Second</option>
-            <option value="three">Third</option>
-          </select>
-          <ag-select2-open></ag-select2-open>
+          <input type="text" ui-select2="userTypeSelectOptions"
+                 name="contactType" ng-model="filters.contact.type" />
         </div>
       </div>
     </div>

@@ -32,15 +32,15 @@ gridz.directive "agResetSearchButton", ->
 
 gridz.directive "agSearchForm", ["$log", ($log) ->
   restrict: "A"
-  scope: gridCtrl: "=agSearchForm"
+  scope: true
 
-  controller: ["$scope", ($scope) ->
+  controller: ["$scope", "$attrs", ($scope, $attrs) ->
     $scope.filters = {}
     $scope.promise = true
 
     # Trigger search action for the grid
     $scope.advancedSearch = (filters) ->
-      gridCtrl = $scope.gridCtrl
+      gridCtrl = $scope.$parent[$attrs.agSearchForm]
 
       unless gridCtrl
         $log.warn "grid is not defined"

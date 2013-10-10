@@ -6,6 +6,7 @@ modules = {
 
         // users
         resource url: "/coffee/controllers/user/listCtrl.coffee"
+        resource url: "/coffee/controllers/user/searchFormCtrl.coffee"
         resource url: "/coffee/controllers/user/formCtrl.coffee"
 
         // org
