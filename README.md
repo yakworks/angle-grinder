@@ -53,7 +53,8 @@ Detailed instructions http://casperjs.org/installation.html
 
 ```
 ./script/bootstrap
-./script/server
+./script/run-frontend-server
+./script/run-ag-demo
 ```
 
 open http://localhost:9000
