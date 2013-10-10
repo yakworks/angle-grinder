@@ -52,8 +52,8 @@ Detailed instructions http://casperjs.org/installation.html
 ### Run the app
 
 ```
-./script/bootstrap.sh
-./script/server.sh
+./script/bootstrap
+./script/server
 ```
 
 open http://localhost:9000
