@@ -40,7 +40,7 @@ class ListCtrl
   gridColumns: ->
     showActionLink = (cellVal, options, rowdata) ->
       """
-      <a href="#/users/#{rowdata.id}">#{cellVal}</a>
+      <a href="#/examples/users/#{rowdata.id}">#{cellVal}</a>
       """
 
     [

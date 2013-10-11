@@ -43,6 +43,8 @@ module.exports = (grunt) ->
     copy:           loadMoule "copy"
     # Grunt plugin for Bower
     bower:          loadMoule "bower"
+    # Publish to GitHub pages
+    "gh-pages":     loadMoule "gh-pages"
 
     # Replaces references to non-optimized scripts or stylesheets into a set of HTML files
     useminPrepare:  loadMoule "usemin_prepare"
