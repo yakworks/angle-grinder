@@ -3,12 +3,14 @@
 app = angular.module("angleGrinder", [
   "ngRoute"
 
+  "angleGrinder.resources"
+  "angleGrinder.docs"
+
   "angleGrinder.common"
   "angleGrinder.gridz"
   "angleGrinder.forms"
   "angleGrinder.alerts"
   "angleGrinder.dataGenerator"
-  "angleGrinder.resources"
   "angleGrinder.spinner"
 ])
 

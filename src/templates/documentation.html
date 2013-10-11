@@ -1,1 +1,24 @@
 <h2>docs here</h2>
+
+<pre class="prettyprint">
+class UsersListCtrl
+  @$inject = ["$scope"]
+  constructor: ($scope) ->
+
+  $scope.gridOptions =
+    url: "/api/users"
+    colModel: @gridColumns()
+    rowNum: 10
+    sortname: "id"
+
+  # Handle the grid's quick search action
+  $scope.quickSearch = (search) ->
+    $scope.$broadcast "searchUpdated", search
+
+  # see the previous example
+  gridColumns: ->
+    []
+
+angular.module("myApp")
+  .controller("UsersListCtrl", UsersListCtrl)
+</pre>

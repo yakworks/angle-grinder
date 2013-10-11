@@ -6,15 +6,13 @@
 
 <h3 id="develop-checkout">Checkout from GitHub repository</h3>
 
-<div class="highlight">
-    <pre>
-      <code class="bash"><span class="nv">$ </span>git checkout https://github.com/9ci/angle-grinder.git</code>
-    </pre>
-</div>
+<pre class="prettyprint lang-sh">
+git checkout https://github.com/9ci/angle-grinder.git
+</pre>
 
 <h3 id="develop-install-nodejs">Install the latest nodejs version</h3>
 
-<pre>
+<pre class="prettyprint lang-sh">
 sudo apt-get install build-essential openssl libssl-dev pkg-config
 
 wget http://nodejs.org/dist/v0.10.12/node-v0.10.12.tar.gz
@@ -36,7 +34,7 @@ Install <a href="https://npmjs.org/">npm</a> packages for
 
 <br/>
 
-<pre>
+<pre class="prettyprint lang-sh">
 npm install -g coffee-script
 npm install -g grunt-cli
 npm install -g bower
@@ -46,7 +44,7 @@ npm install -g karma
 Install npm and bower components
 <br/>
 
-<pre>
+<pre class="prettyprint lang-sh">
 npm install
 bower install
 </pre>
@@ -54,7 +52,7 @@ bower install
 Install <span class="label label-info">foreman</span> ruby gem
 <br/>
 
-<pre>
+<pre class="prettyprint lang-sh">
 gem install foreman
 </pre>
 
@@ -62,7 +60,7 @@ gem install foreman
 
 <h4>Download and install PhantomJS</h4>
 
-<pre>
+<pre class="prettyprint lang-sh">
 wget https://phantomjs.googlecode.com/files/phantomjs-1.9.1-linux-x86_64.tar.bz2
 tar xvjf phantomjs-1.9.1-linux-x86_64.tar.bz2
 cd tar xvjf phantomjs-1.9.1-linux-x86_64
@@ -74,7 +72,7 @@ Detailed instructions about PhantomJS installation:
 
 <h4>Checkout and install CasperJS</h4>
 
-<pre>
+<pre class="prettyprint lang-sh">
 git clone git://github.com/n1k0/casperjs.git
 cd casperjs
 git checkout tags/1.0.2
@@ -124,7 +122,7 @@ Karma watches all the files, specified within the configuration file, and whenev
 
 Example tests execution output:
 
-<pre>
+<pre class="prettyprint lang-sh">
 > karma start test/karma-coffee.conf.coffee
 ................................................................................
 ................................................................................
@@ -212,7 +210,7 @@ This command will start <code>grunt server</code> along with simple express appl
 Build it with <code>grunt build</code> command.<br/>
 This command will generate the following files.
 
-<pre>
+<pre class="prettyprint lang-sh">
 dist
 ├── scripts
 │   ├── angle-grinder.alerts.min.js
