@@ -7,10 +7,10 @@ app.config [
 
     $routeProvider
       .when "/",
-        templateUrl: "/templates/angleGrinder.html"
+        templateUrl: "templates/angleGrinder.html"
 
       .when "/documentation",
-        templateUrl: "/templates/documentation.html"
+        templateUrl: "templates/documentation.html"
 
       .when "/examples",
         redirectTo: "/examples/gridExample"

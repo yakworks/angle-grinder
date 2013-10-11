@@ -8,6 +8,9 @@ describe "Application routes", ->
   beforeEach module "angleGrinder"
 
   beforeEach ->
+    module("templates/angleGrinder.html")
+    module("templates/documentation.html")
+
     module("templates/gridExample/index.html")
     module("templates/usersDialog/index.html")
     module("templates/users/list.html")
@@ -28,8 +31,7 @@ describe "Application routes", ->
 
   it "recognizes `/`", ->
     navigateTo "/"
-    expect($route.current.templateUrl).toEqual("templates/usersDialog/index.html")
-    expect($route.current.controller).toEqual("usersDialog.ListCtrl")
+    expect($route.current.templateUrl).toEqual("templates/angleGrinder.html")
 
   it "recognizes `/examples/gridExample`", ->
     navigateTo "/examples/gridExample"
@@ -37,7 +39,7 @@ describe "Application routes", ->
     expect($route.current.controller).toEqual("gridExample.ListCtrl")
 
   it "recognizes `/examples/usersDialog`", ->
-    navigateTo "/examples/users_list"
+    navigateTo "/examples/usersDialog"
     expect($route.current.templateUrl).toEqual("templates/usersDialog/index.html")
     expect($route.current.controller).toEqual("usersDialog.ListCtrl")
 
