@@ -49,7 +49,10 @@ app.run [
 $ ->
   # side bar
   setTimeout (->
-    $(".bs-docs-sidenav").affix offset:
+    $sidenav= $(".bs-docs-sidenav")
+    return unless $sidenav.affix?
+
+    $sidenav.affix offset:
       top: ->
         if $(window).width() <= 980 then 140 else 160
 

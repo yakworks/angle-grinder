@@ -10,7 +10,9 @@ scenario "Basic grid scenario", ->
   dialog = new EditDialog(this)
 
   @feature "Navigate to the example", ->
+    @clickLabel "Examples", "a"
     @clickLabel "Grid example", "a"
+
     @then ->
       @test.assertUrlMatch /gridExample/
       @test.assertSelectorHasText "section.content h2", "Grid example"
