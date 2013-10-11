@@ -16,4 +16,7 @@ docs.directive "prettyprint", ->
 
       return lang
 
-    element.html window.prettyPrintOne(element.html(), extractLang(), true)
+    lang = extractLang()
+    code = element.html()
+
+    element.html window.prettyPrintOne(code, lang, true)
