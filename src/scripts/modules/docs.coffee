@@ -20,3 +20,11 @@ docs.directive "prettyprint", ->
     code = element.html()
 
     element.html window.prettyPrintOne(code, lang, true)
+
+docs.factory "scrollTo", ["$routeParams", "$timeout", ($routeParams, $timeout) ->
+  (id) ->
+    scroll = ->
+      element = document.getElementById(id)
+      element.scrollIntoView() if element?
+    $timeout(scroll, 10)
+]

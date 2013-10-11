@@ -1,7 +1,11 @@
 class SidebarCtrl
 
-  @$inject = ["$scope", "$location"]
-  constructor: ($scope, $location) ->
+  @$inject = ["$rootScope", "$scope", "$location", "$routeParams", "scrollTo"]
+  constructor: ($rootScope, $scope, $location, $routeParams, scrollTo) ->
+
+    $rootScope.$on "$routeChangeSuccess", ->
+      id = $routeParams.scrollTo
+      scrollTo(id)
 
     $scope.section = ->
       path = $location.path().replace /^\/+/, ""
