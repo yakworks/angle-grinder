@@ -45,3 +45,18 @@ app.run [
       $log.error("Network error:", event, jqxhr, settings, exception)
       alerts.error(exception)
 ]
+
+$ ->
+  # Disable certain links in docs
+  $("section [href^=#]").click (e) ->
+    e.preventDefault()
+
+  # side bar
+  setTimeout (->
+    $(".bs-docs-sidenav").affix offset:
+      top: ->
+        (if $(window).width() <= 980 then 140 else 160)
+
+      bottom: 270
+
+  ), 100
