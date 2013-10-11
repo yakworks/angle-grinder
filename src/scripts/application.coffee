@@ -3,12 +3,14 @@
 app = angular.module("angleGrinder", [
   "ngRoute"
 
+  "angleGrinder.resources"
+  "angleGrinder.docs"
+
   "angleGrinder.common"
   "angleGrinder.gridz"
   "angleGrinder.forms"
   "angleGrinder.alerts"
   "angleGrinder.dataGenerator"
-  "angleGrinder.resources"
   "angleGrinder.spinner"
 ])
 
@@ -43,3 +45,17 @@ app.run [
       $log.error("Network error:", event, jqxhr, settings, exception)
       alerts.error(exception)
 ]
+
+$ ->
+  # side bar
+  setTimeout (->
+    $sidenav= $(".bs-docs-sidenav")
+    return unless $sidenav.affix?
+
+    $sidenav.affix offset:
+      top: ->
+        if $(window).width() <= 980 then 140 else 160
+
+      bottom: 270
+
+  ), 100
