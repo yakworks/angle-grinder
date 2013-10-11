@@ -6,6 +6,15 @@ app.config [
     $httpProvider.responseInterceptors.push("httpErrorsInterceptor")
 
     $routeProvider
+      .when "/",
+        templateUrl: "/templates/angleGrinder.html"
+
+      .when "/documentation",
+        templateUrl: "/templates/documentation.html"
+
+      .when "/examples",
+        redirectTo: "/examples/gridExample"
+
       .when "/examples/gridExample",
         templateUrl: "templates/gridExample/index.html"
         controller: "gridExample.ListCtrl"
@@ -39,5 +48,5 @@ app.config [
             userResolver($route.current.params.id)
         ]
 
-      .otherwise redirectTo: "/examples/usersDialog"
+      .otherwise redirectTo: "/"
 ]
