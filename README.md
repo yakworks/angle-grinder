@@ -3,6 +3,8 @@
 [![Build status](https://secure.travis-ci.org/9ci/angle-grinder.png)](http://travis-ci.org/9ci/angle-grinder)
 [![Stories in Ready](https://badge.waffle.io/9ci/angle-grinder.png)](http://waffle.io/9ci/angle-grinder)
 
+Documentation: http://9ci.github.io/angle-grinder
+
 ## Bootstrap
 
 Install nodejs v0.10.12 from the sources:
