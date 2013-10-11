@@ -31,39 +31,39 @@ describe "Application routes", ->
     expect($route.current.templateUrl).toEqual("templates/usersDialog/index.html")
     expect($route.current.controller).toEqual("usersDialog.ListCtrl")
 
-  it "recognizes `/gridExample`", ->
-    navigateTo "/gridExample"
+  it "recognizes `/examples/gridExample`", ->
+    navigateTo "/examples/gridExample"
     expect($route.current.templateUrl).toEqual("templates/gridExample/index.html")
     expect($route.current.controller).toEqual("gridExample.ListCtrl")
 
-  it "recognizes `/usersDialog`", ->
-    navigateTo "/users_list"
+  it "recognizes `/examples/usersDialog`", ->
+    navigateTo "/examples/users_list"
     expect($route.current.templateUrl).toEqual("templates/usersDialog/index.html")
     expect($route.current.controller).toEqual("usersDialog.ListCtrl")
 
-  it "recognizes `/users`", ->
-    navigateTo "/users"
+  it "recognizes `/examples/users`", ->
+    navigateTo "/examples/users"
     expect($route.current.templateUrl).toEqual("templates/users/list.html")
     expect($route.current.controller).toEqual("users.ListCtrl")
 
-  it "recognizes `/users/create`", ->
-    navigateTo "/users/create"
+  it "recognizes `/examples/users/create`", ->
+    navigateTo "/examples/users/create"
     expect($route.current.templateUrl).toEqual("templates/users/form.html")
     expect($route.current.controller).toEqual("users.FormCtrl")
     expect($route.current.resolve.user).toBeDefined()
 
-  it "recognizes `/users/:id`", inject (userResolver) ->
+  it "recognizes `/examples/users/:id`", inject (userResolver) ->
     # When
-    navigateTo "/users/12345"
+    navigateTo "/examples/users/12345"
     expect(userResolver.calledWith("12345")).toBeTruthy()
 
     # Then
     expect($route.current.templateUrl).toEqual("templates/users/show.html")
     expect($route.current.controller).toEqual("users.ShowCtrl")
 
-  it "recognizes `/users/:id/edit`", inject ($q, userResolver) ->
+  it "recognizes `/examples/users/:id/edit`", inject ($q, userResolver) ->
     # When
-    navigateTo "/users/234/edit"
+    navigateTo "/examples/users/234/edit"
     expect(userResolver.calledWith("234")).toBeTruthy()
 
     # Then

@@ -6,24 +6,24 @@ app.config [
     $httpProvider.responseInterceptors.push("httpErrorsInterceptor")
 
     $routeProvider
-      .when "/gridExample",
+      .when "/examples/gridExample",
         templateUrl: "templates/gridExample/index.html"
         controller: "gridExample.ListCtrl"
 
-      .when "/usersDialog",
+      .when "/examples/usersDialog",
         templateUrl: "templates/usersDialog/index.html"
         controller: "usersDialog.ListCtrl"
 
-      .when "/users",
+      .when "/examples/users",
         templateUrl: "templates/users/list.html"
         controller: "users.ListCtrl"
 
-      .when "/users/create",
+      .when "/examples/users/create",
         templateUrl: "templates/users/form.html"
         controller: "users.FormCtrl"
         resolve: user: ["Users", (Users) -> new Users()]
 
-      .when "/users/:id",
+      .when "/examples/users/:id",
         templateUrl: "templates/users/show.html"
         controller: "users.ShowCtrl"
         resolve: user: [
@@ -31,7 +31,7 @@ app.config [
             userResolver($route.current.params.id)
         ]
 
-      .when "/users/:id/edit",
+      .when "/examples/users/:id/edit",
         templateUrl: "templates/users/form.html"
         controller: "users.FormCtrl"
         resolve: user: [
@@ -39,5 +39,5 @@ app.config [
             userResolver($route.current.params.id)
         ]
 
-      .otherwise redirectTo: "/usersDialog"
+      .otherwise redirectTo: "/examples/usersDialog"
 ]
