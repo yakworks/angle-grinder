@@ -46,7 +46,18 @@ else
 fi
 
 # Build the app and copy the output to the right place
+echo "Build the app.."
 grunt build
+
+echo "Copy the build to the right place.."
 cp -R dist/* "$OUTPUT_DIRECTORY"
 
-exit 1
+# Cleanup: do not include demo app in the build
+rm "$OUTPUT_DIRECTORY/scripts/scripts.min.js"
+rm "$OUTPUT_DIRECTORY/scripts/prettify.js"
+rm "$OUTPUT_DIRECTORY/index.html"
+rm "$OUTPUT_DIRECTORY/styles/style.min.css"
+rm "$OUTPUT_DIRECTORY/styles/prettify.css"
+
+echo "Done!"
+exit 0
