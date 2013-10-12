@@ -8,8 +8,11 @@ grails.project.dependency.resolution = {
         // uncomment to disable ehcache
         // excludes 'ehcache'
     }
+
     log "warn" // log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
+
     legacyResolve false // whether to do a secondary resolve on plugin installation, not advised and here for backwards compatibility
+
     repositories {
         grailsCentral()
         // uncomment the below to enable remote dependency resolution
@@ -21,6 +24,7 @@ grails.project.dependency.resolution = {
         //mavenRepo "http://download.java.net/maven/2/"
         //mavenRepo "http://repository.jboss.com/maven2/"
     }
+
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
 
