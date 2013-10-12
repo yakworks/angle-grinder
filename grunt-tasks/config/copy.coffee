@@ -31,8 +31,8 @@ module.exports = (grunt) ->
       # include its images in the production release
       expand: true
       flatten: true
-      cwd: "third-party/jquery-ui-bootstrap"
-      dest: "<%= appConfig.dist %>/styles/images"
+      cwd: "components/third-party/jquery-ui-bootstrap"
+      dest: "<%= appConfig.dist %>/img"
       src: [
         "**/images/**/*.{png,jpg,jpeg}"
       ]
@@ -41,10 +41,9 @@ module.exports = (grunt) ->
       # this time for slect2 component
       expand: true
       flatten: true
-      cwd: "bower/select2"
+      cwd: "components/bower/select2"
       dest: "<%= appConfig.dist %>/styles"
       src: [
         "**/*.{png,jpg,jpeg,gif}"
       ]
     ]
-
