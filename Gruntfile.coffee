@@ -41,6 +41,8 @@ module.exports = (grunt) ->
     clean:          loadMoule "clean"
     # Copy files and folders
     copy:           loadMoule "copy"
+    # General purpose text replacement for grunt
+    replace:        loadMoule "replace"
     # Grunt plugin for Bower
     bower:          loadMoule "bower"
     # Publish to GitHub pages
@@ -69,6 +71,7 @@ module.exports = (grunt) ->
     "coffee"
     "less"
     "copy:dev"
+    "replace"
     "ngtemplates"
     "jasminehtml"
   ]
@@ -141,6 +144,7 @@ module.exports = (grunt) ->
     "usemin"
     "uglify"
     "cssmin"
+    "replace"
   ]
 
   grunt.renameTask "build:dist", "build"
