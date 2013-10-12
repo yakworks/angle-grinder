@@ -42,7 +42,7 @@ module.exports = (grunt) ->
       expand: true
       flatten: true
       cwd: "components/bower/select2"
-      dest: "<%= appConfig.dist %>/styles"
+      dest: "<%= appConfig.dist %>/img"
       src: [
         "**/*.{png,jpg,jpeg,gif}"
       ]
