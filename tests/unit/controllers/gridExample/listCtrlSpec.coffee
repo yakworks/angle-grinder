@@ -12,16 +12,16 @@ describe "controller: gridExample.ListCtrl", ->
 
   describe "$scope", ->
     it "assigns gridOptions", ->
-      expect($scope.gridOptions).toBeDefined()
+      expect($scope.gridOptions).to.not.be.undefined
 
-      expect($scope.gridOptions.colModel.length).toEqual 5
-      expect($scope.gridOptions.colModel[0].name).toEqual "id"
-      expect($scope.gridOptions.colModel[1].name).toEqual "customer.name"
-      expect($scope.gridOptions.colModel[2].name).toEqual "invoiceDate"
-      expect($scope.gridOptions.colModel[3].name).toEqual "note"
-      expect($scope.gridOptions.colModel[4].name).toEqual "complete"
+      expect($scope.gridOptions.colModel.length).to.equal 5
+      expect($scope.gridOptions.colModel[0].name).to.equal "id"
+      expect($scope.gridOptions.colModel[1].name).to.equal "customer.name"
+      expect($scope.gridOptions.colModel[2].name).to.equal "invoiceDate"
+      expect($scope.gridOptions.colModel[3].name).to.equal "note"
+      expect($scope.gridOptions.colModel[4].name).to.equal "complete"
 
-      expect($scope.gridOptions.data.length).toEqual 100
+      expect($scope.gridOptions.data.length).to.equal 100
 
     describe "#editItem", ->
       dialogSpy = null
@@ -36,11 +36,11 @@ describe "controller: gridExample.ListCtrl", ->
         $scope.editItem(resource.id)
 
       it "loads a resource", ->
-        expect(controller.findItemById.calledWith(123)).toBeTruthy()
+        expect(controller.findItemById.calledWith(123)).to.be.true
 
       it "opens opens a dialog for editing the the loaded resource", ->
-        expect(dialogSpy.called).toBeTruthy()
-        expect(dialogSpy.calledWith("templates/gridExample/form.html", resource)).toBeTruthy()
+        expect(dialogSpy.called).to.be.true
+        expect(dialogSpy.calledWith("templates/gridExample/form.html", resource)).to.be.true
 
     describe "#createItem", ->
       spy = null
@@ -53,8 +53,8 @@ describe "controller: gridExample.ListCtrl", ->
         $scope.createItem()
 
         # Then
-        expect(spy.called).toBeTruthy()
-        expect(spy.calledWith("templates/gridExample/form.html")).toBeTruthy()
+        expect(spy.called).to.be.true
+        expect(spy.calledWith("templates/gridExample/form.html")).to.be.true
 
   describe "controller", ->
 
@@ -70,12 +70,12 @@ describe "controller: gridExample.ListCtrl", ->
 
         it "returns the item", ->
           item = controller.findItemById(123)
-          expect(item).not.toBeNull()
-          expect(item.id).toEqual 123
-          expect(item.name).toEqual "foo"
+          expect(item).to.not.be.undefined
+          expect(item.id).to.equal 123
+          expect(item.name).to.equal "foo"
 
       describe "when an item cannot be found", ->
 
         it "returns undefined", ->
           item = controller.findItemById(1)
-          expect(item).toBeUndefined()
+          expect(item).to.be.undefined

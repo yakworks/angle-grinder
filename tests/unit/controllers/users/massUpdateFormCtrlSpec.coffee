@@ -29,14 +29,14 @@ describe "controller: users.MassUpdateFormCtrl", ->
       $rootScope.$apply() # promises are resolved/dispatched only on the next $digest cycle
 
     it "updates user records", ->
-      expect(usersStub.massUpdate.called).toBeTruthy()
-      expect(usersStub.massUpdate.calledWith(ids: [1, 2, 3], data: allowance: 123)).toBeTruthy()
+      expect(usersStub.massUpdate.called).to.be.true
+      expect(usersStub.massUpdate.calledWith(ids: [1, 2, 3], data: allowance: 123)).to.be.true
 
     it "reloads a grid", ->
-      expect(gridStub.reload.called).toBeTruthy()
+      expect(gridStub.reload.called).to.be.true
 
     it "closes a dialog", ->
-      expect(dialogStub.close.called).toBeTruthy()
+      expect(dialogStub.close.called).to.be.true
 
   describe "#closeDialog", ->
 
@@ -45,4 +45,4 @@ describe "controller: users.MassUpdateFormCtrl", ->
       $scope.closeDialog()
 
       # Then
-      expect(dialogStub.close.called).toBeTruthy()
+      expect(dialogStub.close.called).to.be.true

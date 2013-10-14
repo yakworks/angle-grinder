@@ -44,15 +44,15 @@ describe "module: angleGrinder.forms", ->
         setConfirmation "password"
 
       it "marks the form as valid", ->
-        expect(form.$valid).toBeTruthy()
-        expect(form.$invalid).toBeFalsy()
+        expect(form.$valid).to.be.true
+        expect(form.$invalid).to.be.false
 
       it "does not set errors on the input", ->
-        expect(form.passwordConfirmation.$valid).toBeTruthy()
-        expect(form.passwordConfirmation.$invalid).toBeFalsy()
+        expect(form.passwordConfirmation.$valid).to.be.true
+        expect(form.passwordConfirmation.$invalid).to.be.false
 
       it "does not mark the field group as valid", ->
-        expect(controlGroup()).not.toHaveClass "error"
+        expect(controlGroup().hasClass("error")).to.not.be.true
 
     describe "when the fields are not equal", ->
       beforeEach ->
@@ -60,36 +60,36 @@ describe "module: angleGrinder.forms", ->
         setConfirmation "other password"
 
       it "marks the form as invalid", ->
-        expect(form.$valid).toBeFalsy()
-        expect(form.$invalid).toBeTruthy()
+        expect(form.$valid).to.be.false
+        expect(form.$invalid).to.be.true
 
       it "sets the valid form errors", ->
-        expect(form.$error).toBeDefined()
-        expect(form.$error.mismatch[0].$name).toEqual "passwordConfirmation"
+        expect(form.$error).to.not.be.undefined
+        expect(form.$error.mismatch[0].$name).to.equal "passwordConfirmation"
 
       it "sets erorrs on the field", ->
-        expect(form.passwordConfirmation.$valid).toBeFalsy()
-        expect(form.passwordConfirmation.$invalid).toBeTruthy()
-        expect(form.passwordConfirmation.$error.mismatch).toBeTruthy()
+        expect(form.passwordConfirmation.$valid).to.be.false
+        expect(form.passwordConfirmation.$invalid).to.be.true
+        expect(form.passwordConfirmation.$error.mismatch).to.be.true
 
         $input = element.find("input[name=passwordConfirmation]")
-        expect($input.hasClass("ng-invalid")).toBeTruthy()
-        expect($input.hasClass("ng-invalid-mismatch")).toBeTruthy()
+        expect($input.hasClass("ng-invalid")).to.be.true
+        expect($input.hasClass("ng-invalid-mismatch")).to.be.true
 
       it "marks the field group as invalid", ->
-        expect(controlGroup()).toHaveClass "error"
+        expect(controlGroup().hasClass("error")).to.be.true
 
     describe "changing other values", ->
       it "toggles the field group as valid / invalid", ->
         setPassword "passwor"
         setConfirmation "password"
-        expect(controlGroup()).toHaveClass "error"
+        expect(controlGroup().hasClass("error")).to.be.true
 
         setPassword "password"
-        expect(controlGroup()).not.toHaveClass "error"
+        expect(controlGroup().hasClass("error")).to.be.false
 
         setConfirmation "passwor"
-        expect(controlGroup()).toHaveClass "error"
+        expect(controlGroup().hasClass("error")).to.be.true
 
   describe "directive: agFieldGroup", ->
     element = null
@@ -130,7 +130,7 @@ describe "module: angleGrinder.forms", ->
 
       # Then
       $group = element.find(".control-group")
-      expect($group).toHaveClass "error"
+      expect($group.hasClass("error")).to.be.true
 
     describe "when one of the field is invalid", ->
       beforeEach ->
@@ -138,9 +138,9 @@ describe "module: angleGrinder.forms", ->
         setPassword ""
 
       it "marks the whole group as invalid", ->
-        expect($scope.form.$valid).toBeFalsy()
+        expect($scope.form.$valid).to.be.false
         $group = element.find(".control-group")
-        expect($group).toHaveClass "error"
+        expect($group.hasClass("error")).to.be.true
 
     describe "when all fields are valid", ->
       beforeEach ->
@@ -148,9 +148,10 @@ describe "module: angleGrinder.forms", ->
         setPassword "password"
 
       it "does not mark the group as invalid", ->
-        expect($scope.form.$valid).toBeTruthy()
+        expect($scope.form.$valid).to.be.true
+
         $group = element.find(".control-group")
-        expect($group).not.toHaveClass "erro"
+        expect($group.hasClass("error")).to.be.false
 
   describe "directive: agValidationErrors", ->
     element = null
@@ -179,21 +180,21 @@ describe "module: angleGrinder.forms", ->
         element.find("button[type=submit]").click()
 
         # Then
-        expect(errorMessage()).toEqual "Please fill this field"
+        expect(errorMessage()).to.equal "Please fill this field"
 
       describe "when the field is invalid", ->
         beforeEach ->
           $scope.$apply -> form.password.$setViewValue ""
 
         it "displays validation errors for the given field", ->
-          expect(errorMessage()).toEqual "Please fill this field"
+          expect(errorMessage()).to.equal "Please fill this field"
 
       describe "when the field is valid", ->
         beforeEach ->
           $scope.$apply -> form.password.$setViewValue "password"
 
         it "hides validation errors", ->
-          expect(errorMessage()).toEqual ""
+          expect(errorMessage()).to.equal ""
 
     describe "when the validation messages is not provided", ->
       beforeEach inject ($injector) ->
@@ -212,7 +213,7 @@ describe "module: angleGrinder.forms", ->
         $scope.$apply()
 
       it "uses the default validation message", ->
-        expect(errorMessage()).toEqual "This field is required"
+        expect(errorMessage()).to.equal "This field is required"
 
     describe "when multiple validations are set on the field", ->
       beforeEach inject ($injector) ->
@@ -238,21 +239,21 @@ describe "module: angleGrinder.forms", ->
       it "displays all errors", ->
         $errors = element.find("ag-validation-errors[for=passwordConfirmation]")
 
-        expect($errors.find("span").length).toEqual 2
+        expect($errors.find("span").length).to.equal 2
 
         expect($errors.find("span:nth-child(1)").text())
-          .toEqual "Too short"
+          .to.equal "Too short"
 
         expect($errors.find("span:nth-child(2)").text())
-          .toEqual "Does not match the confirmation"
+          .to.equal "Does not match the confirmation"
 
   describe "service: validationMessages", ->
     it "is defined", inject (validationMessages) ->
-      expect(validationMessages).toBeDefined()
+      expect(validationMessages).to.not.be.undefined
 
     hasDefaultMessageFor = (key, message) ->
       it "has a default message for `#{key}` validation", inject (validationMessages) ->
-        expect(validationMessages[key]).toEqual message
+        expect(validationMessages[key]).to.equal message
 
     hasDefaultMessageFor "required",  "This field is required"
     hasDefaultMessageFor "mismatch",  "Does not match the confirmation"
@@ -292,22 +293,22 @@ describe "module: angleGrinder.forms", ->
         element.find("ag-validation-errors[for=login] span.help-inline")
 
       it "assings errors to the form", ->
-        expect(form.$serverError).toBeDefined()
-        expect(form.$serverError.login).toEqual "should be unique"
+        expect(form.$serverError).to.not.be.undefined
+        expect(form.$serverError.login).to.equal "should be unique"
 
       it "displays the server errors", ->
-        expect(loginError().text()).toEqual "should be unique"
+        expect(loginError().text()).to.equal "should be unique"
 
       it "marks fields as invalid", ->
-        expect(element.find(".control-group")).toHaveClass "error"
+        expect(element.find(".control-group").hasClass("error")).to.be.true
 
       itHidesServerSideErrors = ->
         it "hides the server errors", ->
-          expect(loginError().text()).toEqual ""
+          expect(loginError().text()).to.equal ""
 
       itMarksFieldsAsValid = ->
         it "marks fields as valid", ->
-          expect(element.find(".control-group")).not.toHaveClass "error"
+          expect(element.find(".control-group").hasClass("error")).to.be.false
 
       describe "when the error is gone", ->
         beforeEach ->
@@ -334,4 +335,4 @@ describe "module: angleGrinder.forms", ->
       confirmationDialog.open()
 
       # Then
-      expect(spy.called).toBeTruthy()
+      expect(spy.called).to.be.true

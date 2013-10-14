@@ -16,19 +16,19 @@ describe "module: angleGrinder.spinner", ->
       beforeEach inject (pendingRequests) -> pendingRequests.returns(false)
 
       it "does not report pending requests", ->
-        expect(httpRequestTracker.hasPendingRequests()).toBeFalsy()
+        expect(httpRequestTracker.hasPendingRequests()).to.be.false
 
     describe "when some requests are in progress", ->
       beforeEach inject (pendingRequests) -> pendingRequests.returns(true)
 
       it "reports pending requests", ->
-        expect(httpRequestTracker.hasPendingRequests()).toBeTruthy()
+        expect(httpRequestTracker.hasPendingRequests()).to.be.true
 
     describe "when jquery ajax request is in progress", ->
       beforeEach -> httpRequestTracker.jqueryAjaxRequest = true
 
       it "reports pending request", ->
-        expect(httpRequestTracker.hasPendingRequests()).toBeTruthy()
+        expect(httpRequestTracker.hasPendingRequests()).to.be.true
 
     describe "jquery AJAX calls", ->
       describe "on ajaxStart", ->
@@ -38,7 +38,7 @@ describe "module: angleGrinder.spinner", ->
           $timeout.flush()
 
         it "it sets #jqueryAjaxRequest flag to true", ->
-          expect(httpRequestTracker.jqueryAjaxRequest).toBeTruthy()
+          expect(httpRequestTracker.jqueryAjaxRequest).to.be.true
 
       describe "on ajaxStop", ->
         beforeEach inject ($timeout) ->
@@ -47,7 +47,7 @@ describe "module: angleGrinder.spinner", ->
           $timeout.flush()
 
         it "it sets #jqueryAjaxRequest flag to false", ->
-          expect(httpRequestTracker.jqueryAjaxRequest).toBeFalsy()
+          expect(httpRequestTracker.jqueryAjaxRequest).to.be.false
 
   describe "controller", ->
     httpRequestTracker = null
@@ -66,14 +66,14 @@ describe "module: angleGrinder.spinner", ->
           sinon.stub(httpRequestTracker, "hasPendingRequests").returns(true)
 
         it "returns true", ->
-          expect($scope.showSpinner()).toBeTruthy()
+          expect($scope.showSpinner()).to.be.true
 
       describe "otherwise", ->
         beforeEach ->
           sinon.stub(httpRequestTracker, "hasPendingRequests").returns(false)
 
         it "returns false", ->
-          expect($scope.showSpinner()).toBeFalsy()
+          expect($scope.showSpinner()).to.be.false
 
   describe "directive: agSpinner", ->
     element = null
@@ -91,16 +91,16 @@ describe "module: angleGrinder.spinner", ->
     beforeEach -> $spinner = element.find("li.spinner")
 
     it "renders the spinner", ->
-      expect($spinner.length).toBe(1)
+      expect($spinner.length).to.equal 1
 
     describe "when no requests", ->
       showSpinner false
 
       it "does not display the animation", ->
-        expect($spinner.find("i")).not.toHaveClass "spin"
+        expect($spinner.find("i").hasClass("spin")).to.be.false
 
     describe "when a request is in progress", ->
       showSpinner true
 
       it "displays the animation", ->
-        expect($spinner.find("i")).toHaveClass "spin"
+        expect($spinner.find("i").hasClass("spin")).to.be.true

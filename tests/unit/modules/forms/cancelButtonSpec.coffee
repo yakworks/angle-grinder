@@ -10,5 +10,5 @@ describe "module: angleGrinder.forms directive: agCancelButton", ->
     """, $injector
 
   it "create a cancel button", ->
-    expect(element).toHaveText "Cancel"
-    expect(element).toHaveClass "btn"
+    expect(element.text()).to.contain "Cancel"
+    expect(element.hasClass("btn")).to.be.true

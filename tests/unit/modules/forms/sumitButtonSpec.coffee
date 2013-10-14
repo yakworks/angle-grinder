@@ -19,10 +19,10 @@ describe "module: angleGrinder.forms directive: agSubmitButton", ->
 
   itIsEnabled = ->
     it "is enabled", ->
-      expect(element.prop("disabled")).toBeFalsy()
+      expect(element.prop("disabled")).to.be.false
 
   it "has valid label", ->
-    expect(element).toHaveText /Save/
+    expect(element.text()).to.contain "Save"
 
   itIsEnabled()
 
@@ -37,17 +37,17 @@ describe "module: angleGrinder.forms directive: agSubmitButton", ->
       beforeEach inject (pendingRequests) ->
         stub = sinon.stub(pendingRequests, "for").returns(val)
         $scope.$digest()
-        expect(stub.called).toBeTruthy()
-        expect(stub.calledWith("POST", "PUT", "PATCH")).toBeTruthy()
+        expect(stub.called).to.be.true
+        expect(stub.calledWith("POST", "PUT", "PATCH")).to.be.true
 
     describe "when the request is in progress", ->
       requestInProgress true
 
       it "is disabled", ->
-        expect(element.prop("disabled")).toBeTruthy()
+        expect(element.prop("disabled")).to.be.true
 
       it "changes the button label", ->
-        expect(element).toHaveText "Save..."
+        expect(element.text()).to.contain "Save..."
 
     describe "when the request is not in progress", ->
       requestInProgress false
