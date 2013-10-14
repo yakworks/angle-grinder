@@ -15,7 +15,7 @@ A plugin that enables ties grails and angular together
     def documentation = ''
     def license = 'MIT'
     def organization = [name: '9ci', url: 'http://9ci.com/']
-    def issueManagement = [system: 'GitHub', url: 'https://github.com/9ci/grails-angle-grinder/issues']
-    def scm = [url: 'https://github.com/9ci/grails-angle-grinder']
+    def issueManagement = [system: 'GitHub', url: 'https://github.com/9ci/angle-grinder/issues']
+    def scm = [url: 'https://github.com/9ci/angle-grinder']
 
 }
