@@ -37,8 +37,8 @@ modules = {
         resource url: [plugin: plugin, dir: "${dist}/scripts", file: "angleGrinder.gridz.min.js"]
         resource url: [plugin: plugin, dir: "${dist}/scripts", file: "angleGrinder.spinner.min.js"]
 
-        resource url: [plugin: plugin, dir: "coffee", file: "application.coffee"]
-        resource url: [plugin: plugin, dir: "coffee", file: "modules/resources.coffee"]
+        resource url: [plugin: plugin, dir: "js", file: "application.js"]
+        resource url: [plugin: plugin, dir: "js", file: "modules/resources.js"]
     }
 
 }
