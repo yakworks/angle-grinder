@@ -14,11 +14,13 @@ describe "module: angleGrinder.alerts", ->
         alerts: alerts
 
     it "assings flash messages", ->
-      expect($scope.alertMessages).toBeDefined()
-      expect($scope.alertMessages).toEqual([])
+      expect($scope.alertMessages).to.not.be.undefined
+      expect($scope.alertMessages.length).to.equal 0
 
       alerts.info("Test message.")
-      expect($scope.alertMessages).toContain(id: 1, type: "info", text: "Test message.")
+
+      message = _.findWhere($scope.alertMessages, id: 1)
+      expect(message).to.deep.equal id: 1, type: "info", text: "Test message."
 
     describe "#disposeAlert", ->
       it "disposes an alert at the given index", ->
@@ -31,11 +33,14 @@ describe "module: angleGrinder.alerts", ->
         $scope.disposeAlert(2)
 
         # Then
-        expect(spy.called).toBeTruthy()
-        expect(spy.calledWith(2)).toBeTruthy()
+        expect(spy.called).to.be.true
+        expect(spy.calledWith(2)).to.be.true
 
-        expect($scope.alertMessages).toContain(id: 1, type: "info", text: "Information..")
-        expect($scope.alertMessages).not.toContain(id: 2, type: "error", text: "Error..")
+        message = _.findWhere($scope.alertMessages, id: 1)
+        expect(message).to.deep.equal id: 1, type: "info", text: "Information.."
+
+        disposedMessage = _.findWhere($scope.alertMessages, id: 2)
+        expect(disposedMessage).to.be.undefined
 
   describe "directive", ->
     $scope = null
@@ -48,17 +53,18 @@ describe "module: angleGrinder.alerts", ->
       $scope.$apply -> $scope.alertMessages = [
         type: "info", text: "Test message"
       ]
-      expect(element.find(".alert-info").length).toEqual(1)
+      expect(element.find(".alert-info").length).to.equal 1
 
   describe "service", ->
     it "is defined", inject (alerts) ->
-      expect(alerts).toBeDefined()
+      expect(alerts).to.not.be.undefined
 
     describe "#nextId", ->
       it "return the next id for the new flash message", inject (alerts) ->
-        expect(alerts.nextId()).toEqual(1)
+        expect(alerts.nextId()).to.equal 1
+
         _(4).times -> alerts.nextId()
-        expect(alerts.nextId()).toEqual(6)
+        expect(alerts.nextId()).to.equal 6
 
     describe "#push", ->
       spy = null
@@ -67,13 +73,13 @@ describe "module: angleGrinder.alerts", ->
 
       it "returns an id for the new flash message", inject (alerts) ->
 
-        expect(alerts.push("info", "Test..")).toEqual(1)
-        expect(spy.called).toBeTruthy()
-        expect(spy.calledWith(1)).toBeTruthy()
+        expect(alerts.push("info", "Test..")).to.equal 1
+        expect(spy.called).to.be.true
+        expect(spy.calledWith(1)).to.be.true
 
-        expect(alerts.push("error", "Test error..")).toEqual(2)
-        expect(spy.called).toBeTruthy()
-        expect(spy.calledWith(2)).toBeTruthy()
+        expect(alerts.push("error", "Test error..")).to.equal 2
+        expect(spy.called).to.be.true
+        expect(spy.calledWith(2)).to.be.true
 
       describe "#info", ->
         it "pushesh the given message", inject (alerts) ->
@@ -83,16 +89,19 @@ describe "module: angleGrinder.alerts", ->
 
           # When
           alerts.info(testMessage)
-          expect(spy.called).toBeTruthy()
-          expect(spy.calledWith(1)).toBeTruthy()
+          expect(spy.called).to.be.true
+          expect(spy.calledWith(1)).to.be.true
 
           alerts.info(otherTestMessage)
-          expect(spy.called).toBeTruthy()
-          expect(spy.calledWith(2)).toBeTruthy()
+          expect(spy.called).to.be.true
+          expect(spy.calledWith(2)).to.be.true
 
           # Then
-          expect(alerts.messages).toContain(id: 1, type: "info", text: testMessage)
-          expect(alerts.messages).toContain(id: 2, type: "info", text: otherTestMessage)
+          firstMessage = _.findWhere(alerts.messages, id: 1)
+          expect(firstMessage).to.deep.equal id: 1, type: "info", text: testMessage
+
+          secondMessage = _.findWhere(alerts.messages, id: 2)
+          expect(secondMessage).to.deep.equal id: 2, type: "info", text: otherTestMessage
 
       describe "#error", ->
         it "pushesh the given message", inject (alerts) ->
@@ -101,11 +110,12 @@ describe "module: angleGrinder.alerts", ->
 
           # When
           alerts.error(testMessage)
-          expect(spy.called).toBeTruthy()
-          expect(spy.calledWith(1)).toBeTruthy()
+          expect(spy.called).to.be.true
+          expect(spy.calledWith(1)).to.be.true
 
           # Then
-          expect(alerts.messages).toContain(id: 1, type: "error", text: testMessage)
+          message = _.findWhere(alerts.messages, id: 1)
+          expect(message).to.deep.equal id: 1, type: "error", text: testMessage
 
     describe "#dispose", ->
       it "removes a message with the given id", inject (alerts) ->
@@ -119,10 +129,10 @@ describe "module: angleGrinder.alerts", ->
         alerts.dispose(2)
 
         # Then
-        expect(alerts.messages).toContain(id: 1, type: "info", text: "First message")
-        expect(alerts.messages).not.toContain(id: 2, type: "info", text: "Second message")
-        expect(alerts.messages).toContain(id: 3, type: "info", text: "Third message")
-        expect(alerts.messages).toContain(id: 4, type: "error", text: "Error message")
+        expect(_.findWhere(alerts.messages, id: 1)).not.to.be.undefined
+        expect(_.findWhere(alerts.messages, id: 2)).to.be.undefined
+        expect(_.findWhere(alerts.messages, id: 3)).to.not.be.undefined
+        expect(_.findWhere(alerts.messages, id: 4)).to.not.be.undefined
 
     describe "#delayedDispose", ->
       it "removes a message after the given time", inject (alerts, $timeout) ->
@@ -131,9 +141,11 @@ describe "module: angleGrinder.alerts", ->
 
         # When
         alerts.delayedDispose(1)
-        expect(alerts.messages).toContain(id: 1, type: "info", text: "First message")
+
+        message = _.findWhere(alerts.messages, id: 1)
+        expect(message).to.deep.equal id: 1, type: "info", text: "First message"
 
         $timeout.flush()
 
         # Then
-        expect(alerts.messages).toEqual([])
+        expect(alerts.messages.length).to.equal 0

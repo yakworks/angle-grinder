@@ -10,15 +10,15 @@ describe "module: angleGrinder.forms directive: agCreateButton", ->
 
   itHasTheFollowingHref = (href) ->
     it "generates a link with valid `href`", ->
-      expect(element.attr("href")).toEqual href
+      expect(element.attr("href")).to.equal href
 
   itHasValidCssClass = ->
     it "has valid css class", ->
-      expect(element).toHaveClass "btn"
+      expect(element.hasClass("btn")).to.be.true
 
   itHasANiceIcon = ->
     it "has a nice icon", ->
-      expect(element.find("i")).toHaveClass "icon-edit"
+      expect(element.find("i").hasClass("icon-edit")).to.be.true
 
   itOnClickCallsTheScopeMethod = ->
     describe "on click", ->
@@ -26,7 +26,7 @@ describe "module: angleGrinder.forms directive: agCreateButton", ->
         # When
         element.click()
         # Then
-        expect($scope.foo.called).toBeTruthy()
+        expect($scope.foo.called).to.be.true
 
   describe "without a custom label", ->
     beforeEach inject ($injector) ->
@@ -40,7 +40,7 @@ describe "module: angleGrinder.forms directive: agCreateButton", ->
     itOnClickCallsTheScopeMethod()
 
     it "has the default label", ->
-      expect($.trim element.text()).toEqual "Create"
+      expect($.trim element.text()).to.equal "Create"
 
   describe "with the custom label", ->
     beforeEach inject ($injector) ->
@@ -54,4 +54,4 @@ describe "module: angleGrinder.forms directive: agCreateButton", ->
     itOnClickCallsTheScopeMethod()
 
     it "has the custom label", ->
-      expect($.trim element.text()).toEqual "Create user"
+      expect($.trim element.text()).to.equal "Create user"

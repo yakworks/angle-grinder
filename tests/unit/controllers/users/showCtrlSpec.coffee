@@ -10,13 +10,13 @@ describe "controller: users.ShowCtrl", ->
       user: id: 456, email: "test@email.com"
 
   it "assings an user record to the scope", ->
-    expect($scope.user).toBeDefined()
-    expect($scope.user.id).toEqual 456
-    expect($scope.user.email).toEqual "test@email.com"
+    expect($scope.user).to.not.be.undefined
+    expect($scope.user.id).to.equal 456
+    expect($scope.user.email).to.equal "test@email.com"
 
   describe "#delete", ->
     it "is defined", ->
-      expect($scope.delete).toBeDefined()
+      expect($scope.delete).to.not.be.undefined
 
     describe "on success", ->
       locationStub = null
@@ -30,8 +30,8 @@ describe "controller: users.ShowCtrl", ->
         $scope.delete(fakeUser)
 
       it "deletes a record", ->
-        expect(recordSpy.called).toBeTruthy()
+        expect(recordSpy.called).to.be.true
 
       it "redirects to the users list page", inject ($location) ->
-        expect(locationStub.called).toBeTruthy()
-        expect(locationStub.calledWith("/users")).toBeTruthy()
+        expect(locationStub.called).to.be.true
+        expect(locationStub.calledWith("/users")).to.be.true

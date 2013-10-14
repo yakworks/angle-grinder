@@ -13,22 +13,22 @@ describe "module: angleGrinder.forms directive: agDeleteButton", ->
     """, $injector
 
   it "is visible", ->
-    expect(element.css("display")).not.toBe "none"
+    expect(element.css("display")).not.to.equal "none"
 
   it "is not disabled", ->
-    expect(element.prop("disabled")).toBeFalsy()
+    expect(element.prop("disabled")).to.be.false
 
   it "has a valid label", ->
-    expect(element).toHaveText /Delete/
+    expect(element.text()).to.contain "Delete"
 
   describe "when the button is clicked", ->
     beforeEach -> element.click()
 
     it "displays the confirmation", ->
-      expect(element).toHaveText(/Are you sure?/)
+      expect(element.text()).to.contain "Are you sure?"
 
     it "changes button class", ->
-      expect(element).toHaveClass "btn-warning"
+      expect(element.hasClass("btn-warning")).to.be.true
 
   describe "when the button is double clicked", ->
     beforeEach ->
@@ -43,28 +43,28 @@ describe "module: angleGrinder.forms directive: agDeleteButton", ->
       element.click()
 
       # Then
-      expect(spy.called).toBeTruthy()
-      expect(spy.calledWith(123)).toBeTruthy()
+      expect(spy.called).to.be.true
+      expect(spy.calledWith(123)).to.be.true
 
   describe "disabling / enabling", ->
     requestInProgress = (val) ->
       beforeEach inject (pendingRequests) ->
         stub = sinon.stub(pendingRequests, "for").returns(val)
         $scope.$apply()
-        expect(stub.called).toBeTruthy()
-        expect(stub.calledWith("POST", "DELETE")).toBeTruthy()
+        expect(stub.called).to.be.true
+        expect(stub.calledWith("POST", "DELETE")).to.be.true
 
     describe "when the request is in progress", ->
       requestInProgress true
 
       it "disables the button", ->
-        expect(element.prop("disabled")).toBeTruthy()
+        expect(element.prop("disabled")).to.be.true
 
       it "changes the button label", ->
-        expect(element).toHaveText "Delete..."
+        expect(element.text()).to.contain "Delete..."
 
     describe "when the request in not in progress", ->
       requestInProgress false
 
       it "is enabled", ->
-        expect(element.prop("disabled")).toBeFalsy()
+        expect(element.prop("disabled")).to.be.false

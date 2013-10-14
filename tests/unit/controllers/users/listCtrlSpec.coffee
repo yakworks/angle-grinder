@@ -16,7 +16,7 @@ describe "controller: users.ListCtrl", ->
 
   describe "$scope", ->
     it "assigns gridOptions", ->
-      expect($scope.gridOptions).toBeDefined()
+      expect($scope.gridOptions).to.not.be.undefined
 
     describe "#showItem", ->
       it "navigates to the show user page", inject ($location) ->
@@ -27,8 +27,8 @@ describe "controller: users.ListCtrl", ->
         $scope.showItem(123)
 
         # Then
-        expect(spy.called).toBeTruthy()
-        expect(spy.calledWith("/users/123")).toBeTruthy()
+        expect(spy.called).to.be.true
+        expect(spy.calledWith("/users/123")).to.be.true
 
     describe "#editItem", ->
       it "navigates to the edit user page", inject ($location) ->
@@ -39,8 +39,8 @@ describe "controller: users.ListCtrl", ->
         $scope.editItem(234)
 
         # Then
-        expect(spy.called).toBeTruthy()
-        expect(spy.calledWith("/users/234/edit")).toBeTruthy()
+        expect(spy.called).to.be.true
+        expect(spy.calledWith("/users/234/edit")).to.be.true
 
     describe "#deleteItem", ->
       it "opens the confirmation dialog", inject (confirmationDialog) ->
@@ -51,7 +51,7 @@ describe "controller: users.ListCtrl", ->
         $scope.deleteItem(123)
 
         # Then
-        expect(stub.called).toBeTruthy()
+        expect(stub.called).to.be.true
 
       describe "when the dialog was confirmed",->
         beforeEach inject (confirmationDialog, $httpBackend) ->
@@ -69,8 +69,8 @@ describe "controller: users.ListCtrl", ->
           $httpBackend.verifyNoOutstandingRequest()
 
         it "removes a row from the grid", ->
-          expect($scope.usersGrid.removeRow.called).toBeTruthy()
-          expect($scope.usersGrid.removeRow.calledWith(123)).toBeTruthy()
+          expect($scope.usersGrid.removeRow.called).to.be.true
+          expect($scope.usersGrid.removeRow.calledWith(123)).to.be.true
 
     describe "#massUpdate", ->
       gridStub = null
@@ -88,7 +88,7 @@ describe "controller: users.ListCtrl", ->
           $scope.massUpdate()
 
           # Then
-          expect($dialog.dialog.called).toBeFalsy()
+          expect($dialog.dialog.called).to.be.false
 
       describe "otherwise", ->
         dialogStub = null
@@ -103,5 +103,5 @@ describe "controller: users.ListCtrl", ->
           $scope.massUpdate()
 
           # Then
-          expect($dialog.dialog.called).toBeTruthy()
-          expect(dialogStub.open.called).toBeTruthy()
+          expect($dialog.dialog.called).to.be.true
+          expect(dialogStub.open.called).to.be.true

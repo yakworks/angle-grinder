@@ -14,15 +14,15 @@ describe "controller: usersDialog.ListCtrl", ->
 
   describe "$scope", ->
     it "assigns gridOptions", ->
-      expect($scope.gridOptions).toBeDefined()
+      expect($scope.gridOptions).to.not.be.undefined
 
-      expect($scope.gridOptions.colModel.length).toEqual 6
-      expect($scope.gridOptions.colModel[0].name).toEqual "id"
-      expect($scope.gridOptions.colModel[1].name).toEqual "login"
-      expect($scope.gridOptions.colModel[2].name).toEqual "name"
-      expect($scope.gridOptions.colModel[3].name).toEqual "allowance"
-      expect($scope.gridOptions.colModel[4].name).toEqual "birthday"
-      expect($scope.gridOptions.colModel[5].name).toEqual "paid"
+      expect($scope.gridOptions.colModel.length).to.equal 6
+      expect($scope.gridOptions.colModel[0].name).to.equal "id"
+      expect($scope.gridOptions.colModel[1].name).to.equal "login"
+      expect($scope.gridOptions.colModel[2].name).to.equal "name"
+      expect($scope.gridOptions.colModel[3].name).to.equal "allowance"
+      expect($scope.gridOptions.colModel[4].name).to.equal "birthday"
+      expect($scope.gridOptions.colModel[5].name).to.equal "paid"
 
     describe "#editItem", ->
       resourceStub = null
@@ -35,12 +35,12 @@ describe "controller: usersDialog.ListCtrl", ->
         $scope.editItem(123)
 
       it "loads a resource", ->
-        expect(resourceStub.called).toBeTruthy()
-        expect(resourceStub.calledWith(id: 123)).toBeTruthy()
+        expect(resourceStub.called).to.be.true
+        expect(resourceStub.calledWith(id: 123)).to.be.true
 
       it "opens a dialog for editing loaded resource", ->
-        expect(dialogSpy.called).toBeTruthy()
-        expect(dialogSpy.calledWith("templates/usersDialog/form.html", {})).toBeTruthy()
+        expect(dialogSpy.called).to.be.true
+        expect(dialogSpy.calledWith("templates/usersDialog/form.html", {})).to.be.true
 
     describe "#createItem", ->
       dialogSpy = null
@@ -51,8 +51,8 @@ describe "controller: usersDialog.ListCtrl", ->
         $scope.createItem()
 
       it "opens a dialog for editing an item", ->
-        expect(dialogSpy.called).toBeTruthy()
-        expect(dialogSpy.calledWith("templates/usersDialog/form.html")).toBeTruthy()
+        expect(dialogSpy.called).to.be.true
+        expect(dialogSpy.calledWith("templates/usersDialog/form.html")).to.be.true
 
     describe "#deleteItem", ->
       user = null
@@ -66,7 +66,7 @@ describe "controller: usersDialog.ListCtrl", ->
         $scope.deleteItem(123)
 
         # Then
-        expect(spy.called).toBeTruthy()
+        expect(spy.called).to.be.true
 
       describe "when the dialog was confirmed", ->
         beforeEach inject (confirmationDialog, $httpBackend) ->
@@ -81,5 +81,5 @@ describe "controller: usersDialog.ListCtrl", ->
           $scope.deleteItem(123)
           $httpBackend.flush()
 
-          expect(usersGridStub.removeRow.called).toBeTruthy()
-          expect(usersGridStub.removeRow.calledWith(123)).toBeTruthy()
+          expect(usersGridStub.removeRow.called).to.be.true
+          expect(usersGridStub.removeRow.calledWith(123)).to.be.true

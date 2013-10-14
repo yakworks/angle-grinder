@@ -15,7 +15,7 @@ describe "module: angleGrinder.resources", ->
       Users = $injector.get("Users")
 
     it "is defined", ->
-      expect(Users).toBeDefined()
+      expect(Users).to.not.be.undefined
 
     describe "#get", ->
       it "queries for the record", ->
@@ -34,7 +34,7 @@ describe "module: angleGrinder.resources", ->
       beforeEach -> user = new Users()
 
       it "returns the resource name", ->
-        expect(user.resourceName()).toEqual "user"
+        expect(user.resourceName()).to.equal "user"
 
     describe "#persisted", ->
       user = null
@@ -44,13 +44,13 @@ describe "module: angleGrinder.resources", ->
         beforeEach -> user.id = 123
 
         it "returns true", ->
-          expect(user.persisted()).toBeTruthy()
+          expect(user.persisted()).to.be.true
 
       describe "when the record does not have an id", ->
         beforeEach -> user.id = null
 
         it "returns false", ->
-          expect(user.persisted()).toBeFalsy()
+          expect(user.persisted()).to.be.false
 
     describe "#newRecord", ->
       user = null
@@ -58,13 +58,13 @@ describe "module: angleGrinder.resources", ->
 
       describe "when the record is not persisted", ->
         it "returns true", ->
-          expect(user.newRecord()).toBeTruthy()
+          expect(user.newRecord()).to.be.true
 
       describe "when the record is persisted", ->
         beforeEach -> user.id = 234
 
         it "returns false", ->
-          expect(user.newRecord()).toBeFalsy()
+          expect(user.newRecord()).to.be.false
 
     describe "#save", ->
       user = null
@@ -88,11 +88,11 @@ describe "module: angleGrinder.resources", ->
           $httpBackend.flush()
 
           # Then
-          expect(onSuccess.called).toBeTruthy()
+          expect(onSuccess.called).to.be.true
 
           args = onSuccess.lastCall.args[0]
-          expect(args.id).toEqual 102
-          expect(args.foo).toEqual "bar"
+          expect(args.id).to.equal 102
+          expect(args.foo).to.equal "bar"
 
       describe "when the record is not persisted", ->
         beforeEach -> user.id = null
@@ -108,11 +108,11 @@ describe "module: angleGrinder.resources", ->
           $httpBackend.flush()
 
           # Then
-          expect(onSuccess.called).toBeTruthy()
+          expect(onSuccess.called).to.be.true
 
           args = onSuccess.lastCall.args[0]
-          expect(args.id).toEqual 103
-          expect(args.foo).toEqual "biz"
+          expect(args.id).to.equal 103
+          expect(args.foo).to.equal "biz"
 
       describe "when the action ends with failure", ->
         onError = null
@@ -128,7 +128,7 @@ describe "module: angleGrinder.resources", ->
           $httpBackend.flush()
 
           # Then
-          expect(onError.called).toBeTruthy()
+          expect(onError.called).to.be.true
 
     describe "#delete", ->
       user = null
@@ -147,10 +147,10 @@ describe "module: angleGrinder.resources", ->
           $httpBackend.flush()
 
           # Then
-          expect(onComplete.called).toBeTruthy()
+          expect(onComplete.called).to.be.true
 
           args = onComplete.lastCall.args[0]
-          expect(args.id).toEqual 123
+          expect(args.id).to.equal 123
 
       describe "when the action ends with failure", ->
         onError = null
@@ -165,7 +165,7 @@ describe "module: angleGrinder.resources", ->
           $httpBackend.flush()
 
           # Then
-          expect(onError.called).toBeTruthy()
+          expect(onError.called).to.be.true
 
   describe "service: userResolver", ->
     $httpBackend = null
@@ -183,9 +183,9 @@ describe "module: angleGrinder.resources", ->
         promise.then (user) -> resolvedUser = user
         $httpBackend.flush()
 
-        expect(resolvedUser).toBeDefined()
-        expect(resolvedUser.id).toEqual 123
-        expect(resolvedUser.email).toEqual "test@user.com"
+        expect(resolvedUser).to.not.be.undefined
+        expect(resolvedUser.id).to.equal 123
+        expect(resolvedUser.email).to.equal "test@user.com"
 
     describe "when an user cannot be found", ->
       beforeEach ->
@@ -197,4 +197,4 @@ describe "module: angleGrinder.resources", ->
         promise.then null, -> called = true
         $httpBackend.flush()
 
-        expect(called).toBeTruthy()
+        expect(called).to.be.true

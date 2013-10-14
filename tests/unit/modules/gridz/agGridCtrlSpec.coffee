@@ -26,8 +26,8 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
       controller.reload()
 
       # Then
-      expect(jqGridStub.trigger.called).toBeTruthy()
-      expect(jqGridStub.trigger.calledWith("reloadGrid")).toBeTruthy()
+      expect(jqGridStub.trigger.called).to.be.true
+      expect(jqGridStub.trigger.calledWith("reloadGrid")).to.be.true
 
   describe "#getParam", ->
     it "retrieves a particular grid parameter", ->
@@ -35,8 +35,8 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
       controller.getParam("foo")
 
       # Then
-      expect(jqGridStub.getGridParam.called).toBeTruthy()
-      expect(jqGridStub.getGridParam.calledWith("foo")).toBeTruthy()
+      expect(jqGridStub.getGridParam.called).to.be.true
+      expect(jqGridStub.getGridParam.calledWith("foo")).to.be.true
 
   describe "#setParam", ->
     it "sets a particular grid parameter", ->
@@ -44,8 +44,8 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
       controller.setParam(foo: "bar")
 
       # Then
-      expect(jqGridStub.setGridParam.called).toBeTruthy()
-      expect(jqGridStub.setGridParam.calledWith(foo: "bar")).toBeTruthy()
+      expect(jqGridStub.setGridParam.called).to.be.true
+      expect(jqGridStub.setGridParam.calledWith(foo: "bar")).to.be.true
 
   describe "#updateRow", ->
     it "updates a row with the given id", ->
@@ -53,24 +53,24 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
       controller.updateRow(123, foo: "bar")
 
       # Then
-      expect(jqGridStub.setRowData.called).toBeTruthy()
-      expect(jqGridStub.setRowData.calledWith(123, foo: "bar")).toBeTruthy()
+      expect(jqGridStub.setRowData.called).to.be.true
+      expect(jqGridStub.setRowData.calledWith(123, foo: "bar")).to.be.true
 
     it "flattens data before inserting it to the grid", inject (flatten) ->
       # When
       controller.updateRow(123, foo: bar: "biz")
 
       # Then
-      expect(flatten.called).toBeTruthy()
-      expect(flatten.calledWith(foo: bar: "biz")).toBeTruthy()
+      expect(flatten.called).to.be.true
+      expect(flatten.calledWith(foo: bar: "biz")).to.be.true
 
     it "flashes the updated row", ->
       # Given
       controller.updateRow(123, foo: "bar")
 
       # Then
-      expect(controller._flashRow.called).toBeTruthy()
-      expect(controller._flashRow.calledWith(123)).toBeTruthy()
+      expect(controller._flashRow.called).to.be.true
+      expect(controller._flashRow.calledWith(123)).to.be.true
 
   describe "#addRow", ->
     describe "when the position is not specified", ->
@@ -79,8 +79,8 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
         controller.addRow(234, foo: "biz")
 
         # Then
-        expect(jqGridStub.addRowData.called).toBeTruthy()
-        expect(jqGridStub.addRowData.calledWith(234, foo: "biz", "first")).toBeTruthy()
+        expect(jqGridStub.addRowData.called).to.be.true
+        expect(jqGridStub.addRowData.calledWith(234, foo: "biz", "first")).to.be.true
 
     describe "when the position is specified", ->
       it "adds a row at the specified position", ->
@@ -88,24 +88,24 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
         controller.addRow(234, foo: "biz", "last")
 
         # Then
-        expect(jqGridStub.addRowData.called).toBeTruthy()
-        expect(jqGridStub.addRowData.calledWith(234, foo: "biz", "last")).toBeTruthy()
+        expect(jqGridStub.addRowData.called).to.be.true
+        expect(jqGridStub.addRowData.calledWith(234, foo: "biz", "last")).to.be.true
 
     it "flattens data before inserting it to the grid", inject (flatten) ->
       # When
       controller.addRow(234, foo: bar: "baz")
 
       # Then
-      expect(flatten.called).toBeTruthy()
-      expect(flatten.calledWith(foo: bar: "baz")).toBeTruthy()
+      expect(flatten.called).to.be.true
+      expect(flatten.calledWith(foo: bar: "baz")).to.be.true
 
     it "flashes the inserted row", ->
       # Given
       controller.addRow(234, foo: "bar")
 
       # Then
-      expect(controller._flashRow.called).toBeTruthy()
-      expect(controller._flashRow.calledWith(234)).toBeTruthy()
+      expect(controller._flashRow.called).to.be.true
+      expect(controller._flashRow.calledWith(234)).to.be.true
 
   describe "#saveRow", ->
     describe "when a row exists in the grid", ->
@@ -119,10 +119,10 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
         controller.saveRow(123, foo: "bar")
 
         # Then
-        expect(stub.called).toBeTruthy()
-        expect(stub.calledWith(123, foo: "bar")).toBeTruthy()
+        expect(stub.called).to.be.true
+        expect(stub.calledWith(123, foo: "bar")).to.be.true
 
-        expect(jqGridStub.addRowData.called).toBeFalsy()
+        expect(jqGridStub.addRowData.called).to.be.false
 
     describe "otherwise", ->
       beforeEach -> jqGridStub.getInd.returns(false)
@@ -135,10 +135,10 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
         controller.saveRow(234, foo: "biz")
 
         # Then
-        expect(stub.called).toBeTruthy()
-        expect(stub.calledWith(234, foo: "biz", "first")).toBeTruthy()
+        expect(stub.called).to.be.true
+        expect(stub.calledWith(234, foo: "biz", "first")).to.be.true
 
-        expect(jqGridStub.setRowData.called).toBeFalsy()
+        expect(jqGridStub.setRowData.called).to.be.false
 
   describe "#hasRow", ->
     describe "if a row with the given id exists", ->
@@ -147,11 +147,11 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
         stub = jqGridStub.getInd.returns(id: 123, foo: "bar")
 
         # When
-        expect(controller.hasRow(123)).toBeTruthy()
+        expect(controller.hasRow(123)).to.be.true
 
         # Then
-        expect(stub.called).toBeTruthy()
-        expect(stub.calledWith(123)).toBeTruthy()
+        expect(stub.called).to.be.true
+        expect(stub.calledWith(123)).to.be.true
 
     describe "otherwise", ->
       it "returns false", ->
@@ -159,11 +159,11 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
         stub = jqGridStub.getInd.returns(false)
 
         # When
-        expect(controller.hasRow(234)).toBeFalsy()
+        expect(controller.hasRow(234)).to.be.false
 
         # Then
-        expect(stub.called).toBeTruthy()
-        expect(stub.calledWith(234)).toBeTruthy()
+        expect(stub.called).to.be.true
+        expect(stub.calledWith(234)).to.be.true
 
   describe "#removeRow", ->
     it "removea a row with the given id", ->
@@ -178,16 +178,16 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
       controller.removeRow(123)
 
       # Then
-      expect(stub.called).toBeTruthy()
-      expect(stub.calledWith(123)).toBeTruthy()
+      expect(stub.called).to.be.true
+      expect(stub.calledWith(123)).to.be.true
 
     it "flashes the removed row", ->
       # Given
       controller.removeRow(345)
 
       # Then
-      expect(controller._flashRow.called).toBeTruthy()
-      expect(controller._flashRow.calledWith(345)).toBeTruthy()
+      expect(controller._flashRow.called).to.be.true
+      expect(controller._flashRow.calledWith(345)).to.be.true
 
   describe "#search", ->
     it "sets search filters and triggers grid reload", ->
@@ -195,11 +195,11 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
       controller.search(login: "foo")
 
       # Then
-      expect(jqGridStub.setGridParam.called).toBeTruthy()
-      expect(jqGridStub.setGridParam.calledWith(search: true, postData: filters: '{"login":"foo"}')).toBeTruthy()
+      expect(jqGridStub.setGridParam.called).to.be.true
+      expect(jqGridStub.setGridParam.calledWith(search: true, postData: filters: '{"login":"foo"}')).to.be.true
 
-      expect(jqGridStub.trigger.called).toBeTruthy()
-      expect(jqGridStub.trigger.calledWith("reloadGrid")).toBeTruthy()
+      expect(jqGridStub.trigger.called).to.be.true
+      expect(jqGridStub.trigger.calledWith("reloadGrid")).to.be.true
 
     it "returns a promise", inject ($timeout) ->
       # Given
@@ -210,11 +210,11 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
       promise.then (data) -> resolvedValue = data
 
       # When
-      expect(resolvedValue).toBeNull()
+      expect(resolvedValue).to.be.null
       $timeout.flush()
 
       # Then
-      expect(resolvedValue).toEqual login: "foo"
+      expect(resolvedValue).to.deep.equal login: "foo"
 
   describe "#getSelectedRowIds", ->
     it "returns a list of selected row ids", ->
@@ -222,59 +222,59 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
       controller.getSelectedRowIds()
 
       # Then
-      expect(jqGridStub.getGridParam.called).toBeTruthy()
-      expect(jqGridStub.getGridParam.calledWith("selarrrow")).toBeTruthy()
+      expect(jqGridStub.getGridParam.called).to.be.true
+      expect(jqGridStub.getGridParam.calledWith("selarrrow")).to.be.true
 
   describe "#isColumnHidden", ->
     it "is defined", ->
-      expect(controller.isColumnHidden).toBeDefined()
+      expect(controller.isColumnHidden).to.not.be.undefined
 
     describe "when a column with the given id is hidden", ->
       it "returns true", ->
-        expect(controller.isColumnHidden("foo")).toBeTruthy()
+        expect(controller.isColumnHidden("foo")).to.be.true
 
     describe "when a column with the given id is not hidden", ->
       it "returns true", ->
-        expect(controller.isColumnHidden("bar")).toBeFalsy()
+        expect(controller.isColumnHidden("bar")).to.be.false
 
     describe "when a column with is missing", ->
       it "returns undefined", ->
-        expect(controller.isColumnHidden("fooBar")).toBeUndefined()
+        expect(controller.isColumnHidden("fooBar")).to.be.undefined
 
   describe "#toggleColumn", ->
     it "is defined", ->
-      expect(controller.toggleColumn).toBeDefined()
+      expect(controller.toggleColumn).to.not.be.undefined
 
     describe "when the column is hidden", ->
       beforeEach -> controller.toggleColumn("foo")
 
       it "shows the column", ->
-        expect(jqGridStub.jqGrid.called).toBeTruthy()
-        expect(jqGridStub.jqGrid.calledWith("showCol", "foo")).toBeTruthy()
+        expect(jqGridStub.jqGrid.called).to.be.true
+        expect(jqGridStub.jqGrid.calledWith("showCol", "foo")).to.be.true
 
       it "resizes the grid", ->
-        expect(jqGridStub.trigger.called).toBeTruthy()
-        expect(jqGridStub.trigger.calledWith("resize")).toBeTruthy()
+        expect(jqGridStub.trigger.called).to.be.true
+        expect(jqGridStub.trigger.calledWith("resize")).to.be.true
 
     describe "when the column is not hidden", ->
       beforeEach -> controller.toggleColumn("bar")
 
       it "hides the column", ->
-        expect(jqGridStub.jqGrid.called).toBeTruthy()
-        expect(jqGridStub.jqGrid.calledWith("hideCol", "bar")).toBeTruthy()
+        expect(jqGridStub.jqGrid.called).to.be.true
+        expect(jqGridStub.jqGrid.calledWith("hideCol", "bar")).to.be.true
 
       it "resizes the grid", ->
-        expect(jqGridStub.trigger.called).toBeTruthy()
-        expect(jqGridStub.trigger.calledWith("resize")).toBeTruthy()
+        expect(jqGridStub.trigger.called).to.be.true
+        expect(jqGridStub.trigger.calledWith("resize")).to.be.true
 
   describe "#columnChooser", ->
     it "is defined", ->
-      expect(controller.columnChooser).toBeDefined()
+      expect(controller.columnChooser).to.not.be.undefined
 
     it "calls `columnChooser` method on the jqGrid", ->
       # When
       controller.columnChooser()
 
       # Then
-      expect(jqGridStub.jqGrid.called).toBeTruthy()
-      expect(jqGridStub.jqGrid.calledWith("columnChooser")).toBeTruthy()
+      expect(jqGridStub.jqGrid.called).to.be.true
+      expect(jqGridStub.jqGrid.calledWith("columnChooser")).to.be.true

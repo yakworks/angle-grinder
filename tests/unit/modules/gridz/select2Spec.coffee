@@ -36,8 +36,8 @@ describe "module: angleGrinder.gridz", ->
       """
 
       it "generates select2 component along with the show button", ->
-        expect(element).toContain "input[type=text]"
-        expect(element).toContain "button[type=button]"
+        expect(element.find("input[type=text]").length).to.equal 1
+        expect(element.find("button[type=button]").length).to.equal 1
 
       describe "scope", ->
         beforeEach ->
@@ -46,52 +46,52 @@ describe "module: angleGrinder.gridz", ->
         it "has default options for select2", ->
           options = $directiveScope.options
 
-          expect(options.minimumInputLength).toBeDefined()
-          expect(options.minimumInputLength).toEqual 1
+          expect(options.minimumInputLength).to.not.be.undefined
+          expect(options.minimumInputLength).to.equal 1
 
-          expect(options.width).toBeDefined()
-          expect(options.width).toEqual "resolve"
+          expect(options.width).to.not.be.undefined
+          expect(options.width).to.equal "resolve"
 
         describe "default `formatResult` method", ->
           formatResult = null
           beforeEach -> formatResult = $directiveScope.options.formatResult
 
           it "is defined", ->
-            expect(formatResult).toBeDefined()
+            expect(formatResult).to.not.be.undefined
 
           it "generates html code fro the result", ->
             result = formatResult(num: 123, name: "Test")
             $directiveScope.$apply()
 
-            expect(result).toHaveClass "table"
-            expect(result).toHaveClass "table-condensed"
-            expect(result.find("td:nth-child(1)")).toHaveText "123"
-            expect(result.find("td:nth-child(2)")).toHaveText "Test"
+            expect(result.hasClass("table")).to.be.true
+            expect(result.hasClass("table-condensed")).to.be.true
+            expect(result.find("td:nth-child(1)").text()).to.contain "123"
+            expect(result.find("td:nth-child(2)").text()).to.contain "Test"
 
         describe "describe `formatSelection` method", ->
           formatSelection = null
           beforeEach -> formatSelection = $directiveScope.options.formatSelection
 
           it "is defined", ->
-            expect(formatSelection).toBeDefined()
+            expect(formatSelection).to.not.be.undefined
 
           it "formats the selection", ->
-            expect(formatSelection(name: "foo")).toEqual "foo"
+            expect(formatSelection(name: "foo")).to.equal "foo"
 
         it "isolates the scope", ->
-          expect($directiveScope).not.toBe $scope
-          expect($directiveScope.foo).not.toBeEqualToObject "bar"
+          expect($directiveScope).not.to.equal $scope
+          expect($directiveScope.foo).not.to.equal "bar"
 
         it "takes the select2 options from the parent scope", ->
-          expect($directiveScope.options).toBeDefined()
-          expect($directiveScope.options.foo).toBeDefined()
-          expect($directiveScope.options.foo).toEqual "bar"
+          expect($directiveScope.options).to.not.be.undefined
+          expect($directiveScope.options.foo).to.not.be.undefined
+          expect($directiveScope.options.foo).to.equal "bar"
 
         it "takes a model from the parent scope", ->
           $scope.$apply -> $scope.search = organization: "the org name"
 
-          expect($directiveScope.ngModel).toBeDefined()
-          expect($directiveScope.ngModel).toEqual "the org name"
+          expect($directiveScope.ngModel).to.not.be.undefined
+          expect($directiveScope.ngModel).to.equal "the org name"
 
     describe "when `selectAjaxUrl` option is provided", ->
       beforeEach inject (pathWithContext) ->
@@ -105,17 +105,17 @@ describe "module: angleGrinder.gridz", ->
       beforeEach -> directiveAjaxOptions = $directiveScope.options.ajax
 
       it "defines ajax options for handling server side lookup", ->
-        expect(directiveAjaxOptions).toBeDefined()
+        expect(directiveAjaxOptions).to.not.be.undefined
 
       it "uses `pathWithContext` to generate a valid path", inject (pathWithContext) ->
-        expect(pathWithContext.calledWith("/api/orgs.json")).toBeTruthy()
+        expect(pathWithContext.calledWith("/api/orgs.json")).to.be.true
 
       it "assigns a valid server side lookup path", ->
-        expect(directiveAjaxOptions.url).toBeDefined()
-        expect(directiveAjaxOptions.url).toEqual "/context/api/orgs.json"
+        expect(directiveAjaxOptions.url).to.not.be.undefined
+        expect(directiveAjaxOptions.url).to.equal "/context/api/orgs.json"
 
       it "assigns default `ajax.quietMillis` option", ->
-        expect(directiveAjaxOptions.quietMillis).toEqual 500
+        expect(directiveAjaxOptions.quietMillis).to.equal 500
 
     describe "when `selectAjaxUrl` options is provided along with `selectAjaxQuietMillis`", ->
       prepareDirective """
@@ -125,10 +125,10 @@ describe "module: angleGrinder.gridz", ->
       """
 
       it "ignores default value for `ajax.quietMillis` option", ->
-        expect($directiveScope.options.ajax.quietMillis).not.toEqual 500
+        expect($directiveScope.options.ajax.quietMillis).not.to.equal 500
 
       it "assigns default `ajax.quietMillis` option", ->
-        expect($directiveScope.options.ajax.quietMillis).toEqual 666
+        expect($directiveScope.options.ajax.quietMillis).to.equal 666
 
     describe "when `minimumInputLength` option is provided", ->
       beforeEach -> $scope.selectOptions = minimumInputLength: 123
@@ -138,7 +138,7 @@ describe "module: angleGrinder.gridz", ->
       """
 
       it "assings a valid option", ->
-        expect($directiveScope.options.minimumInputLength).toEqual 123
+        expect($directiveScope.options.minimumInputLength).to.equal 123
 
     describe "when `minimumInputLength` option is not provided", ->
       beforeEach -> $scope.selectOptions = {}
@@ -148,7 +148,7 @@ describe "module: angleGrinder.gridz", ->
       """
 
       it "assings the default value", ->
-        expect($directiveScope.options.minimumInputLength).toEqual 1
+        expect($directiveScope.options.minimumInputLength).to.equal 1
 
     describe "when `minimumInputLength` option in provided via the attribute", ->
       beforeEach -> $scope.selectOptions = minimumInputLength: 123
@@ -160,10 +160,10 @@ describe "module: angleGrinder.gridz", ->
       """
 
       it "ignores value from the scope", ->
-        expect($directiveScope.options.minimumInputLength).not.toEqual 123
+        expect($directiveScope.options.minimumInputLength).not.to.equal 123
 
       it "assings value from the attribute", ->
-        expect($directiveScope.options.minimumInputLength).toEqual 234
+        expect($directiveScope.options.minimumInputLength).to.equal 234
 
   describe "directive: agSelect2Open", ->
     element = null
@@ -195,5 +195,5 @@ describe "module: angleGrinder.gridz", ->
         button.click()
 
         # Then
-        expect(spy.called).toBeTruthy()
-        expect(spy.calledWith("open")).toBeTruthy()
+        expect(spy.called).to.be.true
+        expect(spy.calledWith("open")).to.be.true
