@@ -5,7 +5,8 @@ module.exports = (config) ->
     basePath: "../"
 
     frameworks: [
-      "jasmine"
+      "mocha"
+      "chai"
     ]
 
     # list of files / patterns to load in the browser
@@ -16,7 +17,6 @@ module.exports = (config) ->
       "components/bower/angular-mocks/angular-mocks.js"
       "components/bower/angular-resource/angular-resource.js"
       "components/bower/angular-route/angular-route.js"
-      "components/bower/jasmine-jquery/lib/jasmine-jquery.js"
 
       "components/bower/sinon/lib/sinon.js"
       "components/bower/sinon/lib/sinon/spy.js"
@@ -88,11 +88,10 @@ module.exports = (config) ->
       "karma-coffee-preprocessor"
       "karma-ng-html2js-preprocessor"
 
-      "karma-jasmine"
+      "karma-mocha"
+      "karma-chai-plugins"
       "karma-spec-reporter"
       "karma-coverage"
 
       "karma-phantomjs-launcher"
-      "karma-chrome-launcher"
-      "karma-firefox-launcher"
     ]
