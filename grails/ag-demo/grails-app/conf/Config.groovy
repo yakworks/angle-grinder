@@ -62,8 +62,6 @@ grails.hibernate.cache.queries = false
 environments {
     development {
         grails.logging.jul.usebridge = true
-        // plugin `coffeescript-resources` doesn't apply when you have enabled debug mode for resource plugin
-        grails.resources.debug = false
     }
     production {
         grails.logging.jul.usebridge = false
@@ -80,16 +78,16 @@ log4j = {
     //}
 
     error 'org.codehaus.groovy.grails.web.servlet',        // controllers
-            'org.codehaus.groovy.grails.web.pages',          // GSP
-            'org.codehaus.groovy.grails.web.sitemesh',       // layouts
-            'org.codehaus.groovy.grails.web.mapping.filter', // URL mapping
-            'org.codehaus.groovy.grails.web.mapping',        // URL mapping
-            'org.codehaus.groovy.grails.commons',            // core / classloading
-            'org.codehaus.groovy.grails.plugins',            // plugins
-            'org.codehaus.groovy.grails.orm.hibernate',      // hibernate integration
-            'org.springframework',
-            'org.hibernate',
-            'net.sf.ehcache.hibernate'
+          'org.codehaus.groovy.grails.web.pages',          // GSP
+          'org.codehaus.groovy.grails.web.sitemesh',       // layouts
+          'org.codehaus.groovy.grails.web.mapping.filter', // URL mapping
+          'org.codehaus.groovy.grails.web.mapping',        // URL mapping
+          'org.codehaus.groovy.grails.commons',            // core / classloading
+          'org.codehaus.groovy.grails.plugins',            // plugins
+          'org.codehaus.groovy.grails.orm.hibernate',      // hibernate integration
+          'org.springframework',
+          'org.hibernate',
+          'net.sf.ehcache.hibernate'
 }
 
 grails {
