@@ -11,6 +11,9 @@ before_install:
   - bower install
   - gem install compass
 
+  # install Selenium
+  - ./node_modules/protractor/bin/install_selenium_standalone
+
   # install CasperJS
   - git clone git://github.com/n1k0/casperjs.git ~/casperjs
   - cd ~/casperjs
