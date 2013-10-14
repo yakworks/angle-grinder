@@ -31,44 +31,44 @@ describe "Application routes", ->
 
   it "recognizes `/`", ->
     navigateTo "/"
-    expect($route.current.templateUrl).toEqual("templates/angleGrinder.html")
+    expect($route.current.templateUrl).to.equal("templates/angleGrinder.html")
 
   it "recognizes `/examples/gridExample`", ->
     navigateTo "/examples/gridExample"
-    expect($route.current.templateUrl).toEqual("templates/gridExample/index.html")
-    expect($route.current.controller).toEqual("gridExample.ListCtrl")
+    expect($route.current.templateUrl).to.equal("templates/gridExample/index.html")
+    expect($route.current.controller).to.equal("gridExample.ListCtrl")
 
   it "recognizes `/examples/usersDialog`", ->
     navigateTo "/examples/usersDialog"
-    expect($route.current.templateUrl).toEqual("templates/usersDialog/index.html")
-    expect($route.current.controller).toEqual("usersDialog.ListCtrl")
+    expect($route.current.templateUrl).to.equal("templates/usersDialog/index.html")
+    expect($route.current.controller).to.equal("usersDialog.ListCtrl")
 
   it "recognizes `/examples/users`", ->
     navigateTo "/examples/users"
-    expect($route.current.templateUrl).toEqual("templates/users/list.html")
-    expect($route.current.controller).toEqual("users.ListCtrl")
+    expect($route.current.templateUrl).to.equal("templates/users/list.html")
+    expect($route.current.controller).to.equal("users.ListCtrl")
 
   it "recognizes `/examples/users/create`", ->
     navigateTo "/examples/users/create"
-    expect($route.current.templateUrl).toEqual("templates/users/form.html")
-    expect($route.current.controller).toEqual("users.FormCtrl")
-    expect($route.current.resolve.user).toBeDefined()
+    expect($route.current.templateUrl).to.equal("templates/users/form.html")
+    expect($route.current.controller).to.equal("users.FormCtrl")
+    expect($route.current.resolve.user).to.not.be.undefined
 
   it "recognizes `/examples/users/:id`", inject (userResolver) ->
     # When
     navigateTo "/examples/users/12345"
-    expect(userResolver.calledWith("12345")).toBeTruthy()
+    expect(userResolver.calledWith("12345")).to.be.true
 
     # Then
-    expect($route.current.templateUrl).toEqual("templates/users/show.html")
-    expect($route.current.controller).toEqual("users.ShowCtrl")
+    expect($route.current.templateUrl).to.equal("templates/users/show.html")
+    expect($route.current.controller).to.equal("users.ShowCtrl")
 
   it "recognizes `/examples/users/:id/edit`", inject ($q, userResolver) ->
     # When
     navigateTo "/examples/users/234/edit"
-    expect(userResolver.calledWith("234")).toBeTruthy()
+    expect(userResolver.calledWith("234")).to.be.true
 
     # Then
-    expect($route.current.templateUrl).toEqual("templates/users/form.html")
-    expect($route.current.controller).toEqual("users.FormCtrl")
-    expect($route.current.resolve.user).toBeDefined()
+    expect($route.current.templateUrl).to.equal("templates/users/form.html")
+    expect($route.current.controller).to.equal("users.FormCtrl")
+    expect($route.current.resolve.user).to.not.be.undefined

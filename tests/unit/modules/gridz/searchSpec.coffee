@@ -10,25 +10,25 @@ describe "module: angleGrinder.gridz", ->
       filters = foo: "  ", bar: "test", biz: null
 
       it "returns true", ->
-        expect(hasSearchFilters(filters)).toBeTruthy()
+        expect(hasSearchFilters(filters)).to.be.true
 
     describe "if filters contain an array", ->
       filters = select2Stuff: [foo: "bar"], bar: null
 
       it "returns true", ->
-        expect(hasSearchFilters(filters)).toBeTruthy()
+        expect(hasSearchFilters(filters)).to.be.true
 
     describe "if filters contain other complex object", ->
       filters = date: new Date()
 
       it "returns true", ->
-        expect(hasSearchFilters(filters)).toBeTruthy()
+        expect(hasSearchFilters(filters)).to.be.true
 
     describe "if all filters are empty", ->
       filters = foo: "  ", bar: "", biz: null, baz: undefined
 
       it "returns false", ->
-        expect(hasSearchFilters(filters)).toBeFalsy()
+        expect(hasSearchFilters(filters)).to.be.false
 
   describe "directive: agSearchButton", ->
     $scope = null
@@ -40,22 +40,22 @@ describe "module: angleGrinder.gridz", ->
       """, $injector
 
     it "renders the button", ->
-      expect(element).toBe "button[type=submit]"
-      expect(element).toHaveClass "btn"
-      expect(element).toHaveText /Search/
+      expect(element.is("button[type=submit]")).to.be.true
+      expect(element.hasClass("btn")).to.be.true
+      expect(element.text()).to.contain "Search"
 
     it "is enabled", ->
-      expect(element).not.toHaveClass "disabled"
+      expect(element.hasClass("disabled")).to.be.false
 
     describe "when the search request is in progress", ->
       beforeEach ->
         $scope.$apply -> $scope.promise = undefined
 
       it "is disabled", ->
-        expect(element).toBeDisabled()
+        expect(element.is(":disabled")).to.be.true
 
       it "changes the button label", ->
-        expect(element).toHaveText "Search..."
+        expect(element.text()).to.contain "Search..."
 
     describe "on click", ->
       beforeEach ->
@@ -67,8 +67,8 @@ describe "module: angleGrinder.gridz", ->
         element.click()
 
         # Then
-        expect($scope.advancedSearch.called).toBeTruthy()
-        expect($scope.advancedSearch.calledWith(name: "find it")).toBeTruthy()
+        expect($scope.advancedSearch.called).to.be.true
+        expect($scope.advancedSearch.calledWith(name: "find it")).to.be.true
 
   describe "directive: agResetSearchButton", ->
     $scope = null
@@ -80,22 +80,22 @@ describe "module: angleGrinder.gridz", ->
       """, $injector
 
     it "renders the button", ->
-      expect(element).toBe "button[type=button]"
-      expect(element).toHaveClass "btn"
-      expect(element).toHaveText /Reset/
+      expect(element.is("button[type=button]")).to.be.true
+      expect(element.hasClass("btn")).to.be.true
+      expect(element.text()).to.contain "Reset"
 
     it "is enabled", ->
-      expect(element).not.toHaveClass "disabled"
+      expect(element.hasClass("disabled")).to.be.false
 
     describe "when the search request is in progress", ->
       beforeEach ->
         $scope.$apply -> $scope.promise = undefined
 
       it "is disabled", ->
-        expect(element).toBeDisabled()
+        expect(element.is(":disabled")).to.be.true
 
       it "changes the button label", ->
-        expect(element).toHaveText "Reset..."
+        expect(element.text()).to.contain "Reset..."
 
     describe "on click", ->
       beforeEach ->
@@ -109,7 +109,7 @@ describe "module: angleGrinder.gridz", ->
         element.click()
 
         # Then
-        expect(spy.called).toBeTruthy()
+        expect(spy.called).to.be.true
 
   describe "directive: agSearchForm", ->
     $scope = null
@@ -142,15 +142,15 @@ describe "module: angleGrinder.gridz", ->
         $searchButton.click()
 
         # Then
-        expect($scope.grid.search.called).toBeTruthy()
-        expect($scope.grid.search.calledWith(name: "find me")).toBeTruthy()
+        expect($scope.grid.search.called).to.be.true
+        expect($scope.grid.search.calledWith(name: "find me")).to.be.true
 
       it "disables the submit button", ->
         # When
         $searchButton.click()
 
         # Then
-        expect($searchButton).toBeDisabled()
+        expect($searchButton.is(":disabled")).to.be.true
 
     describe "on reset button click", ->
       $resetButton = null
@@ -163,12 +163,12 @@ describe "module: angleGrinder.gridz", ->
         $resetButton.click()
 
         # Then
-        expect($scope.grid.search.called).toBeTruthy()
-        expect($scope.grid.search.calledWith({})).toBeTruthy()
+        expect($scope.grid.search.called).to.be.true
+        expect($scope.grid.search.calledWith({})).to.be.true
 
       it "disables the reset button", ->
         # When
         $resetButton.click()
 
         # Then
-        expect($resetButton).toBeDisabled()
+        expect($resetButton.is(":disabled")).to.be.true

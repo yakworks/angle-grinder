@@ -10,9 +10,9 @@ describe "controller: users.FormCtrl", ->
       user: id: 456, email: "test@email.com"
 
   it "assings an user record to the scope", ->
-    expect($scope.user).toBeDefined()
-    expect($scope.user.id).toEqual 456
-    expect($scope.user.email).toEqual "test@email.com"
+    expect($scope.user).to.not.be.undefined
+    expect($scope.user.id).to.equal 456
+    expect($scope.user.email).to.equal "test@email.com"
 
   describe "#save", ->
     # Mark the form as valid
@@ -30,11 +30,11 @@ describe "controller: users.FormCtrl", ->
         $scope.save(fakeUser)
 
       it "saves a record", ->
-        expect(recordSpy.called).toBeTruthy()
+        expect(recordSpy.called).to.be.true
 
       it "redirects to the show page", ->
-        expect(locationStub.called).toBeTruthy()
-        expect(locationStub.calledWith("/users/123")).toBeTruthy()
+        expect(locationStub.called).to.be.true
+        expect(locationStub.calledWith("/users/123")).to.be.true
 
     describe "onError", ->
       recordSpy = null
@@ -51,12 +51,12 @@ describe "controller: users.FormCtrl", ->
         $scope.save(fakeUser)
 
       it "tries to save a record", ->
-        expect(recordSpy.called).toBeTruthy()
+        expect(recordSpy.called).to.be.true
 
       it "sets server side validation errors", ->
-        expect($scope.editForm.$serverError.login).toEqual "has to be unique"
+        expect($scope.editForm.$serverError.login).to.equal "has to be unique"
 
   describe "#delete", ->
 
     it "is defined", ->
-      expect($scope.delete).toBeDefined()
+      expect($scope.delete).to.not.be.undefined

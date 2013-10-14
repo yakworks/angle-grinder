@@ -3,11 +3,11 @@ describe "module: angleGrinder.common", ->
 
   describe "service: pathWithContext", ->
     it "is defined", inject (pathWithContext) ->
-      expect(pathWithContext).toBeDefined()
+      expect(pathWithContext).to.not.be.undefined
 
     it "has default context path", inject (pathWithContext) ->
-      expect(pathWithContext("/foo")).toEqual("/foo")
-      expect(pathWithContext("bar")).toEqual("bar")
+      expect(pathWithContext("/foo")).to.equal("/foo")
+      expect(pathWithContext("bar")).to.equal("bar")
 
     describe "when the context path is provided", ->
       useContextPath = (path) ->
@@ -18,15 +18,15 @@ describe "module: angleGrinder.common", ->
         useContextPath "/example"
 
         it "generates a path with the context", inject (pathWithContext) ->
-          expect(pathWithContext("/foo/bar")).toEqual "/example/foo/bar"
+          expect(pathWithContext("/foo/bar")).to.equal "/example/foo/bar"
 
       describe "when the path contains trailing slashes", ->
         useContextPath "/other-example"
 
         paths = ["users/1.json", "/users/1.json", "//users/1.json", "////////users/1.json"]
-        using "valid paths", paths, (path) ->
+        for path in paths
           it "generates a valid path", inject (pathWithContext) ->
-            expect(pathWithContext(path)).toEqual "/other-example/users/1.json"
+            expect(pathWithContext(path)).to.equal "/other-example/users/1.json"
 
   describe "filter: withContext", ->
 
@@ -36,20 +36,20 @@ describe "module: angleGrinder.common", ->
       return
 
     it "is defined", inject ($filter, withContextFilter) ->
-      expect($filter("withContext")).toBeDefined()
-      expect(withContextFilter).toBeDefined()
-      expect($filter("withContext")).toBe withContextFilter
+      expect($filter("withContext")).to.not.be.undefined
+      expect(withContextFilter).to.not.be.undefined
+      expect($filter("withContext")).to.equal withContextFilter
 
     it "uses `pathWithContext` service to append a context", inject (pathWithContext, withContextFilter) ->
       # Given
       pathWithContext.returns("/context/path")
 
       # When
-      expect(withContextFilter("path")).toEqual "/context/path"
+      expect(withContextFilter("path")).to.equal "/context/path"
 
       # Then
-      expect(pathWithContext.called).toBeTruthy()
-      expect(pathWithContext.calledWith("path")).toBeTruthy()
+      expect(pathWithContext.called).to.be.true
+      expect(pathWithContext.calledWith("path")).to.be.true
 
   describe "service: pendingRequests", ->
     $http = null
@@ -63,40 +63,40 @@ describe "module: angleGrinder.common", ->
       beforeEach -> $http.pendingRequests = [{method: "GET"}]
 
       it "returs true", ->
-        expect(pendingRequests()).toBeTruthy()
+        expect(pendingRequests()).to.be.true
 
     describe "when there are no requests in progress", ->
       beforeEach -> $http.pendingRequests = [{method: "unknown"}]
 
       it "returs true", ->
-        expect(pendingRequests()).toBeFalsy()
+        expect(pendingRequests()).to.be.false
 
     describe "#for", ->
       beforeEach -> $http.pendingRequests = [{method: "DELETE"}, {method: "GET"}]
 
       describe "when a request with the given method is in progres", ->
         it "returns true", ->
-          expect(pendingRequests.for("DELETE", "POST")).toBeTruthy()
-          expect(pendingRequests.for("PUT", "POST")).toBeFalsy()
+          expect(pendingRequests.for("DELETE", "POST")).to.be.true
+          expect(pendingRequests.for("PUT", "POST")).to.be.false
 
       describe "otherwise", ->
         it "returns false", ->
-          expect(pendingRequests.for("POST")).toBeFalsy()
-          expect(pendingRequests.for("POST", "GET")).toBeTruthy()
+          expect(pendingRequests.for("POST")).to.be.false
+          expect(pendingRequests.for("POST", "GET")).to.be.true
 
   describe "service: isEmpty", ->
 
     it "is defined", inject (isEmpty) ->
-      expect(isEmpty).toBeDefined()
+      expect(isEmpty).to.not.be.undefined
 
     describe "for empty strings", ->
 
       for str in [undefined, null, ""]
         it "returns true for `#{str}`", inject (isEmpty) ->
-          expect(isEmpty(str)).toBeTruthy()
+          expect(isEmpty(str)).to.be.true
 
     describe "for non empty strings", ->
 
       for str in [" ", "    ", "test", " foo bar "]
         it "returns false for `#{str}`", inject (isEmpty) ->
-          expect(isEmpty(str)).toBeFalsy()
+          expect(isEmpty(str)).to.be.false

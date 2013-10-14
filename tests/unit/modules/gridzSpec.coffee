@@ -26,14 +26,14 @@ describe "module: angleGrinder.gridz", ->
 
     itPassesValidOptionsToTheGrid = ->
       it "passes valid options to the gridz plugin", ->
-        expect(gridzSpy.called).toBeTruthy()
-        expect(gridzSpy.calledWith(sampleGridOptions)).toBeTruthy()
+        expect(gridzSpy.called).to.be.true
+        expect(gridzSpy.calledWith(sampleGridOptions)).to.be.true
 
     itRendersTheGrid = ->
       it "renders the grid", ->
-        expect(element).toContain "div.ui-jqgrid"
-        expect(element).toContain "table.gridz"
-        expect(element).toContain "div.gridz-pager"
+        expect(element.find("div.ui-jqgrid").length).to.equal 1
+        expect(element.find("table.gridz").length).to.equal 1
+        expect(element.find("div.gridz-pager").length).to.equal 1
 
     describe "when `ag-grid-name` is not provided", ->
       beforeEach inject ($injector) ->
@@ -45,10 +45,10 @@ describe "module: angleGrinder.gridz", ->
       itRendersTheGrid()
 
       it "assigns default `id` for the grid element", ->
-        expect(element.find("table.gridz").attr("id")).toEqual "gridz"
+        expect(element.find("table.gridz").attr("id")).to.equal "gridz"
 
       it "assigns default `id` for the pager", ->
-        expect(element.find("div.gridz-pager").attr("id")).toEqual "gridz-pager"
+        expect(element.find("div.gridz-pager").attr("id")).to.equal "gridz-pager"
 
     describe "when `ag-grid-name` is provided", ->
       beforeEach inject ($injector) ->
@@ -61,23 +61,22 @@ describe "module: angleGrinder.gridz", ->
       itRendersTheGrid()
 
       it "generates `id` for the grid element", ->
-        expect(element.find("table.gridz").attr("id")).toEqual "projectsGrid"
+        expect(element.find("table.gridz").attr("id")).to.equal "projectsGrid"
 
       it "generates `id` for the pager", ->
-        expect(element.find("div.gridz-pager").attr("id")).toEqual "projectsGrid-pager"
+        expect(element.find("div.gridz-pager").attr("id")).to.equal "projectsGrid-pager"
 
       describe "the grid controller", ->
 
         it "is assigned to the scope", ->
-          expect($scope.projectsGrid).toBeDefined()
+          expect($scope.projectsGrid).to.not.be.undefined
 
         it "is initialized with the grid element", ->
-          expect($scope.projectsGrid.$grid).toBeDefined()
-          expect($scope.projectsGrid.$grid).toEqual element.find("table.gridz")
+          expect($scope.projectsGrid.$grid).to.not.be.undefined
 
   describe "service: flatten", ->
     it "is defined", inject (flatten) ->
-      expect(flatten).toBeDefined()
+      expect(flatten).to.not.be.undefined
 
     it "flattens an object", inject (flatten) ->
       target =
@@ -89,7 +88,7 @@ describe "module: angleGrinder.gridz", ->
 
       flattened = flatten(target)
 
-      expect(flattened.id).toEqual target.id
-      expect(flattened["consumer.firstName"]).toEqual target.consumer.firstName
-      expect(flattened["consumer.lastName"]).toEqual target.consumer.lastName
-      expect(flattened.createdAt).toEqual target.createdAt
+      expect(flattened.id).to.equal target.id
+      expect(flattened["consumer.firstName"]).to.equal target.consumer.firstName
+      expect(flattened["consumer.lastName"]).to.equal target.consumer.lastName
+      expect(flattened.createdAt).to.equal target.createdAt
