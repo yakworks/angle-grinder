@@ -37,6 +37,8 @@ grails {
                 compile ":fields:1.3"
                 compile ":plugin-config:0.1.8"
                 compile ":faker:0.7"
+                compile ":coffeescript-compiler:0.9.4"
+
                 test ":code-coverage:1.2.6"
             }
         }

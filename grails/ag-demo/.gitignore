@@ -3,6 +3,7 @@ target/
 stacktrace.log
 plugin.xml
 grails-quartz*.zip
+web-app/js/app
 
 # Eclipse Project files
 .classpath
