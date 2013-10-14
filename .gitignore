@@ -10,6 +10,7 @@ components/bower
 coverage
 build
 dist
+.grunt
 
 # Ignore logs
 *.log
