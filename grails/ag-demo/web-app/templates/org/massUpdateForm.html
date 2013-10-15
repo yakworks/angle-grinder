@@ -3,8 +3,8 @@
   <h3>Time Zone mass update</h3>
 </div>
 
-<form name="orgsForm" novalidate class="form-horizontal no-margin"
-      ng-submit="save(orgs)">
+<form name="massUpdateForm" novalidate class="form-horizontal no-margin"
+      ng-submit="save(records)">
 
   <div class="modal-body">
     <div ag-field-group for="timeZone">
@@ -12,7 +12,7 @@
 
       <div class="controls">
         <input type="text" name="timeZone" placeholder="Enter Allowance"
-               ng-model="orgs.timeZone" ng-required="true" />
+               ng-model="records.timeZone" ng-required="true" />
         <ag-validation-errors for="timeZone" />
       </div>
     </div>

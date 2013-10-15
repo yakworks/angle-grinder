@@ -1,15 +1,15 @@
 class MassUpdateFormCtrl
 
-  @$inject = ["$scope", "Resource", "orgIds", "dialog", "orgGrid"]
-  constructor: ($scope, Resource, orgIds, dialog, orgGrid) ->
-    $scope.orgs = timeZone: "UTC"
+  @$inject = ["$scope", "dialog", "Resource", "selectedIds", "grid"]
+  constructor: ($scope, dialog, Resource, selectedIds, grid) ->
+    $scope.records = timeZone: "UTC"
 
-    $scope.save = (orgs) ->
-      return if $scope.orgsForm.$invalid
+    $scope.save = (records) ->
+      return if $scope.massUpdateForm.$invalid
 
-      promise = Resource.massUpdate(ids: orgIds, data: orgs).$promise
+      promise = Resource.massUpdate(ids: selectedIds, data: records).$promise
       promise.then ->
-        orgGrid.reload()
+        grid.reload()
         $scope.closeDialog()
 
     $scope.closeDialog = ->

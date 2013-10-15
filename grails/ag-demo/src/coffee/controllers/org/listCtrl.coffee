@@ -1,7 +1,7 @@
 class ListCtrl
 
-  @$inject = ["$scope", "$dialog", "pathWithContext", "Resource", "confirmationDialog"]
-  constructor: ($scope, $dialog, pathWithContext, Resource, confirmationDialog) ->
+  @$inject = ["$scope", "pathWithContext", "Resource", "confirmationDialog", "massUpdateDialog"]
+  constructor: ($scope, pathWithContext, Resource, confirmationDialog, massUpdateDialog) ->
     $scope.gridOptions =
       url: pathWithContext("/org/list.json")
       colModel: @colModel()
@@ -17,18 +17,11 @@ class ListCtrl
         promise = Resource.delete(id: id).$promise
         promise.then (response) -> $scope.orgGrid.removeRow(response.id)
 
-    $scope.massUpdate = ->
-      orgIds = $scope.orgGrid.getSelectedRowIds()
-      return if orgIds.length is 0
-
-      dialog = $dialog.dialog
-        backdropFade: false
-        dialogFade: false
-        resolve:
-          orgIds: -> orgIds
-          orgGrid: -> $scope.orgGrid
-
-      dialog.open(pathWithContext("/templates/org/massUpdateForm.html"), "org.MassUpdateFormCtrl")
+    $scope.massUpdate = massUpdateDialog(
+      grid: -> $scope.orgGrid
+      controller: -> "org.MassUpdateFormCtrl"
+      templateUrl: -> "/templates/org/massUpdateForm.html"
+    )
 
   colModel: ->
     showActionLink = (cellVal, options, rowdata) ->
