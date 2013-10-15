@@ -71,7 +71,6 @@ module.exports = (grunt) ->
     "coffee"
     "less"
     "copy:dev"
-    "replace"
     "ngtemplates"
     "jasminehtml"
   ]
@@ -138,13 +137,13 @@ module.exports = (grunt) ->
   grunt.registerTask "build:dist", [
     "test:ci"
     "copy:dist"
+    "replace"
     "useminPrepare"
     "htmlmin"
     "concat"
     "usemin"
     "uglify"
     "cssmin"
-    "replace"
   ]
 
   grunt.renameTask "build:dist", "build"

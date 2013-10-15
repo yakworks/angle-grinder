@@ -9,7 +9,7 @@ forms.factory "massUpdateDialog", ["$dialog", "pathWithContext", ($dialog, pathW
     ->
       # Resolve variables
       grid = options.grid()
-      throw "grid is not defined" unless grid?
+      throw new Error("grid is not defined") unless grid?
 
       templateUrl = pathWithContext(options.templateUrl())
       controller = options.controller()

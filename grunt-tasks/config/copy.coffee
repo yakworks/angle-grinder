@@ -10,21 +10,9 @@ module.exports = (grunt) ->
       src: [
         "*.{ico,txt}"
         "**/*.html"
-        "components/**/*"
-        "img/**/*.{gif,webp}"
+        "img/**/*.{gif,png,jpg}"
         "font/*"
         "styles/**/*.css"
-      ]
-    ]
-
-  dist:
-    files: [
-      expand: true
-      cwd: "<%= appConfig.app %>"
-      dest: "<%= appConfig.dist %>"
-      src: [
-        "font/**/*"
-        "img/**/*"
       ]
     ,
       # workaround for jquery-ui-bootstrap component
@@ -32,9 +20,9 @@ module.exports = (grunt) ->
       expand: true
       flatten: true
       cwd: "components/third-party/jquery-ui-bootstrap"
-      dest: "<%= appConfig.dist %>/img"
+      dest: "<%= appConfig.dev %>/img"
       src: [
-        "**/images/**/*.{png,jpg,jpeg}"
+        "**/img/**/*.{png,jpg,jpeg}"
       ]
     ,
       # another workaround for missing images
@@ -42,8 +30,19 @@ module.exports = (grunt) ->
       expand: true
       flatten: true
       cwd: "components/bower/select2"
-      dest: "<%= appConfig.dist %>/img"
+      dest: "<%= appConfig.dev %>/img"
       src: [
         "**/*.{png,jpg,jpeg,gif}"
+      ]
+    ]
+
+  dist:
+    files: [
+      expand: true
+      cwd: "<%= appConfig.dev %>"
+      dest: "<%= appConfig.dist %>"
+      src: [
+        "font/**/*"
+        "img/**/*"
       ]
     ]
