@@ -12,12 +12,14 @@ describe "controller: users.MassUpdateFormCtrl", ->
     dialogStub = sinon.stub(close: angular.noop)
     gridStub = sinon.stub(reload: angular.noop)
 
+    $scope.massUpdateForm = $invalid: false
+
     $controller "users.MassUpdateFormCtrl",
       $scope: $scope
       Users: usersStub
-      userIds: [1, 2, 3]
       dialog: dialogStub
-      usersGrid: gridStub
+      selectedIds: [1, 2, 3]
+      grid: gridStub
 
   describe "#save", ->
     beforeEach inject ($q, $rootScope) ->

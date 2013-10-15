@@ -3,8 +3,8 @@
   <h3>Mass update</h3>
 </div>
 
-<form name="usersForm" novalidate class="form-horizontal no-margin"
-      ng-submit="save(users)">
+<form name="massUpdateForm" novalidate class="form-horizontal no-margin"
+      ng-submit="save(records)">
 
   <div class="modal-body">
     <div ag-field-group for="allowance">
@@ -12,7 +12,7 @@
 
       <div class="controls">
         <input type="text" name="allowance" placeholder="Enter Allowance"
-               ng-model="users.allowance" ng-required="true" />
+               ng-model="records.allowance" ng-required="true" />
         <ag-validation-errors for="allowance" />
       </div>
     </div>
