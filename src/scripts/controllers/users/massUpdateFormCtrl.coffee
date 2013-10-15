@@ -1,13 +1,15 @@
 class MassUpdateFormCtrl
 
-  @$inject = ["$scope", "Users", "userIds", "dialog", "usersGrid"]
-  constructor: ($scope, Users, userIds, dialog, usersGrid) ->
-    $scope.users = allowance: 0
+  @$inject = ["$scope", "Users", "dialog", "selectedIds", "grid"]
+  constructor: ($scope, Users, dialog, selectedIds, grid) ->
+    $scope.records = allowance: 0
 
-    $scope.save = (users) ->
-      promise = Users.massUpdate(ids: userIds, data: users).$promise
+    $scope.save = (records) ->
+      return if $scope.massUpdateForm.$invalid
+
+      promise = Users.massUpdate(ids: selectedIds, data: records).$promise
       promise.then ->
-        usersGrid.reload()
+        grid.reload()
         dialog.close()
 
     $scope.closeDialog = ->
