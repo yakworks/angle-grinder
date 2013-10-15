@@ -1,7 +1,6 @@
 class ListCtrl
-  @$inject = ["$scope", "$location", "$filter", "$dialog", "confirmationDialog", "Users", "pathWithContext"]
-  constructor: ($scope, $location, $filter, $dialog, confirmationDialog, Users, pathWithContext) ->
-    @$filter = $filter
+  @$inject = ["$scope", "$location", "$filter", "confirmationDialog", "Users", "pathWithContext", "massUpdateDialog"]
+  constructor: ($scope, $location, @$filter, confirmationDialog, Users, pathWithContext, massUpdateDialog) ->
 
     $scope.gridOptions =
       url: pathWithContext("/api/users")
@@ -24,18 +23,11 @@ class ListCtrl
         promise.then (response) ->
           $scope.usersGrid.removeRow(response.id)
 
-    $scope.massUpdate = ->
-      userIds = $scope.usersGrid.getSelectedRowIds()
-      return if userIds.length is 0
-
-      dialog = $dialog.dialog
-        backdropFade: false
-        dialogFade: false
-        resolve:
-          userIds: -> userIds
-          usersGrid: -> $scope.usersGrid
-
-      dialog.open(pathWithContext("/templates/users/massUpdateForm.html"), "users.MassUpdateFormCtrl")
+    $scope.massUpdate = massUpdateDialog(
+      grid: -> $scope.usersGrid
+      templateUrl: -> "/templates/users/massUpdateForm.html"
+      controller: -> "users.MassUpdateFormCtrl"
+    )
 
   gridColumns: ->
     showActionLink = (cellVal, options, rowdata) ->
