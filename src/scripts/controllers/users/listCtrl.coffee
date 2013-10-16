@@ -1,6 +1,6 @@
 class ListCtrl
-  @$inject = ["$scope", "$location", "$filter", "confirmationDialog", "Users", "pathWithContext", "massUpdateDialog"]
-  constructor: ($scope, $location, @$filter, confirmationDialog, Users, pathWithContext, massUpdateDialog) ->
+  @$inject = ["$scope", "$filter", "Users", "pathWithContext", "massUpdateDialog", "singlePageCrudCtrlMixin"]
+  constructor: ($scope, @$filter, Users, pathWithContext, massUpdateDialog, singlePageCrudCtrlMixin) ->
 
     $scope.gridOptions =
       url: pathWithContext("/api/users")
@@ -9,24 +9,12 @@ class ListCtrl
       sortname: "id"
       multiselect: true
 
-    # TODO move to singlePageCrudMixin
-    $scope.showItem = (id) ->
-      $location.path("/users/#{id}")
+    singlePageCrudCtrlMixin $scope,
+      Resource: Users
+      resourcePath: "/users"
+      gridName: "usersGrid"
 
-    # TODO move to singlePageCrudMixin
-    $scope.editItem = (id) ->
-      $location.path("/users/#{id}/edit")
-
-    # TODO move to dialogCrudMixin
-    $scope.deleteItem = (id) ->
-      confirmationDialog.open().then (confirmed) ->
-        return unless confirmed
-
-        promise = Users.delete(id: id).$promise
-        promise.then (response) ->
-          $scope.usersGrid.removeRow(response.id)
-
-    # TODO replace it with mixin concept
+    # TODO replace it with the mixin concept
     $scope.massUpdate = massUpdateDialog(
       grid: -> $scope.usersGrid
       templateUrl: -> "/templates/users/massUpdateForm.html"
