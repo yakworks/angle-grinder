@@ -8,9 +8,10 @@ describe "module: angleGrinder.forms service: massUpdateDialog", ->
   beforeEach module "angleGrinder.forms", ($provide) ->
     # mock `$dialog` service
     dialogMock = sinon.mock(open: ->)
-    $provide.value "$dialog", dialog: -> dialogMock.object
 
-    return
+    $provide.decorator "$dialog", ($delegate) ->
+      sinon.stub($delegate, "dialog").returns(dialogMock.object)
+      $delegate
 
   beforeEach inject (_massUpdateDialog_) ->
     massUpdateDialog = _massUpdateDialog_

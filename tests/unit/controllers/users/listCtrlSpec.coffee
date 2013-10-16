@@ -3,8 +3,10 @@ describe "controller: users.ListCtrl", ->
 
   # Stub $dialog service
   beforeEach module "ui.bootstrap", ($provide) ->
-    $provide.value "$dialog", sinon.stub(dialog: angular.noop)
-    return
+    $provide.decorator "$dialog", ($delegate) ->
+      dialogOpenStub = sinon.stub(open: angular.noop)
+      sinon.stub($delegate, "dialog").returns(dialogOpenStub)
+      $delegate
 
   $scope = null
 
@@ -91,12 +93,9 @@ describe "controller: users.ListCtrl", ->
           expect($dialog.dialog.called).to.be.false
 
       describe "otherwise", ->
-        dialogStub = null
 
-        beforeEach inject ($dialog) ->
+        beforeEach ->
           gridStub.getSelectedRowIds.returns([1, 2, 3])
-          dialogStub = sinon.stub(open: angular.noop)
-          $dialog.dialog.returns(dialogStub)
 
         it "invokes a dialog", inject ($dialog) ->
           # When
@@ -104,4 +103,4 @@ describe "controller: users.ListCtrl", ->
 
           # Then
           expect($dialog.dialog.called).to.be.true
-          expect(dialogStub.open.called).to.be.true
+          expect($dialog.dialog().open.called).to.be.true
