@@ -1,6 +1,6 @@
 class IndexCtrl
-  @$inject = ["$scope", "$log", "$filter", "Users", "pathWithContext", "dialogCrudCtrlMixin"]
-  constructor: ($scope, $log, @$filter, Users, pathWithContext, dialogCrudCtrlMixin) ->
+  @$inject = ["$scope", "$log", "$filter", "Users", "pathWithContext", "dialogCrudCtrlMixin", "massUpdateMixin"]
+  constructor: ($scope, $log, @$filter, Users, pathWithContext, dialogCrudCtrlMixin, massUpdateMixin) ->
     # Intitially show the search form
     $scope.showSearchForm = true
 
@@ -17,6 +17,11 @@ class IndexCtrl
       Resource: Users
       gridName: "usersGrid"
       templateUrl: "templates/usersDialog/form.html"
+
+    massUpdateMixin $scope,
+      templateUrl: "/templates/users/massUpdateForm.html"
+      controller: "users.MassUpdateFormCtrl"
+      gridName: "usersGrid"
 
   gridColumns: ->
     [

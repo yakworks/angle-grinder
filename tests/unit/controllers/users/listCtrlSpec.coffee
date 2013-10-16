@@ -10,6 +10,7 @@ describe "controller: users.ListCtrl", ->
 
   beforeEach module "angleGrinder.forms", ($provide) ->
     $provide.decorator "singlePageCrudCtrlMixin", -> sinon.spy()
+    $provide.decorator "massUpdateMixin", -> sinon.spy()
 
   $scope = null
 
@@ -34,35 +35,17 @@ describe "controller: users.ListCtrl", ->
       args = singlePageCrudCtrlMixin.getCall(0).args[1]
       expect(args).to.have.property "Resource", "Users"
       expect(args).to.have.property "resourcePath", "/users"
+      expect(args).to.have.property "gridName", "usersGrid"
 
-  # TODO replace it with the mixin concept
-  describe "#massUpdate", ->
-    gridStub = null
+  describe "mixin: `massUpdateMixin`", ->
 
-    beforeEach ->
-      gridStub = sinon.stub(getSelectedRowIds: angular.noop)
-      $scope.usersGrid = gridStub
+    it "is mixed", inject (massUpdateMixin) ->
+      expect(massUpdateMixin.called).to.be.true
 
-    describe "when no rows are selected", ->
-      beforeEach ->
-        gridStub.getSelectedRowIds.returns([])
+    it "is mixed with valid arguments", inject (massUpdateMixin) ->
+      expect(massUpdateMixin.calledWith($scope)).to.be.true
 
-      it "does nothing", inject ($dialog) ->
-        # when
-        $scope.massUpdate()
-
-        # Then
-        expect($dialog.dialog.called).to.be.false
-
-    describe "otherwise", ->
-
-      beforeEach ->
-        gridStub.getSelectedRowIds.returns([1, 2, 3])
-
-      it "invokes a dialog", inject ($dialog) ->
-        # When
-        $scope.massUpdate()
-
-        # Then
-        expect($dialog.dialog.called).to.be.true
-        expect($dialog.dialog().open.called).to.be.true
+      args = massUpdateMixin.getCall(0).args[1]
+      expect(args).to.have.property "templateUrl", "/templates/users/massUpdateForm.html"
+      expect(args).to.have.property "controller", "users.MassUpdateFormCtrl"
+      expect(args).to.have.property "gridName", "usersGrid"

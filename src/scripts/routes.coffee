@@ -16,11 +16,11 @@ app.config [
         redirectTo: "/examples/gridExample"
 
       .when "/examples/gridExample",
-        templateUrl: "templates/gridExample/index.html"
+        templateUrl: "templates/gridExample/list.html"
         controller: "gridExample.ListCtrl"
 
       .when "/examples/usersDialog",
-        templateUrl: "templates/usersDialog/index.html"
+        templateUrl: "templates/usersDialog/list.html"
         controller: "usersDialog.ListCtrl"
 
       .when "/examples/users",

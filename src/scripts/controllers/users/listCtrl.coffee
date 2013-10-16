@@ -1,6 +1,6 @@
 class ListCtrl
-  @$inject = ["$scope", "$filter", "Users", "pathWithContext", "massUpdateDialog", "singlePageCrudCtrlMixin"]
-  constructor: ($scope, @$filter, Users, pathWithContext, massUpdateDialog, singlePageCrudCtrlMixin) ->
+  @$inject = ["$scope", "$filter", "Users", "pathWithContext", "massUpdateMixin", "singlePageCrudCtrlMixin"]
+  constructor: ($scope, @$filter, Users, pathWithContext, massUpdateMixin, singlePageCrudCtrlMixin) ->
 
     $scope.gridOptions =
       url: pathWithContext("/api/users")
@@ -14,12 +14,10 @@ class ListCtrl
       resourcePath: "/users"
       gridName: "usersGrid"
 
-    # TODO replace it with the mixin concept
-    $scope.massUpdate = massUpdateDialog(
-      grid: -> $scope.usersGrid
-      templateUrl: -> "/templates/users/massUpdateForm.html"
-      controller: -> "users.MassUpdateFormCtrl"
-    )
+    massUpdateMixin $scope,
+      templateUrl: "/templates/users/massUpdateForm.html"
+      controller: "users.MassUpdateFormCtrl"
+      gridName: "usersGrid"
 
   gridColumns: ->
     showActionLink = (cellVal, options, rowdata) ->

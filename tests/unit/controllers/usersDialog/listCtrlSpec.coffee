@@ -2,6 +2,7 @@ describe "controller: usersDialog.ListCtrl", ->
 
   beforeEach module "angleGrinder.forms", ($provide) ->
     $provide.decorator "dialogCrudCtrlMixin", -> sinon.spy()
+    $provide.decorator "massUpdateMixin", -> sinon.spy()
 
   beforeEach module "angleGrinder"
 
@@ -40,3 +41,16 @@ describe "controller: usersDialog.ListCtrl", ->
       expect(args).to.have.property "Resource", "Users"
       expect(args).to.have.property "gridName", "usersGrid"
       expect(args).to.have.property "templateUrl", "templates/usersDialog/form.html"
+
+  describe "mixin: `massUpdateMixin`", ->
+
+    it "is mixed", inject (massUpdateMixin) ->
+      expect(massUpdateMixin.called).to.be.true
+
+    it "is mixed with valid arguments", inject (massUpdateMixin) ->
+      expect(massUpdateMixin.calledWith($scope)).to.be.true
+
+      args = massUpdateMixin.getCall(0).args[1]
+      expect(args).to.have.property "templateUrl", "/templates/users/massUpdateForm.html"
+      expect(args).to.have.property "controller", "users.MassUpdateFormCtrl"
+      expect(args).to.have.property "gridName", "usersGrid"
