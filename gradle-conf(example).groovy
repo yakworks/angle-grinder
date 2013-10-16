@@ -1,5 +1,5 @@
 user {
-	//replace with your actual username and password
+	//replace with the actual values
 	//then rename to gradle-conf.groovy
  	name="YOUR_USERNAME"
  	password="YOUR_PASSWORD"

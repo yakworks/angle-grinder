@@ -36,6 +36,7 @@ ssh {
 // read the user and password from file
 def config = new ConfigSlurper().parse(new File('gradle-conf.groovy').toURL())
 
+// read the application properties from file
 def appProps = new Properties()
 new File('./grails/ag-demo/application.properties').withInputStream {
     stream -> appProps.load(stream)
@@ -55,18 +56,15 @@ remotes {
   }
 }
 
-// preparation tasks
-
-
 //gradlew tasks
 
 task wrapper( type: Wrapper ) {
     gradleVersion = '1.8'
-    //scriptFile = "${project.projectDir}/push-to-linode"
 }
 
 // exec tasks
 
+// executes thte tests
 task testDemopApp(type: Exec) {
 
     executable 'grails'
@@ -74,6 +72,7 @@ task testDemopApp(type: Exec) {
     workingDir './grails/ag-demo'
 }
 
+//builds the war
 task warDemoApp(type: Exec) {
 
     executable 'grails'
@@ -83,12 +82,14 @@ task warDemoApp(type: Exec) {
 
 //ssh tasks
 
+// pushes the ar to the remote repo
 task pushDemoAppWar(type: SshTask) {
     session(remotes.web01) {
         put( "./grails/ag-demo/target/${warname}", '/tmp')
     }
 }
 
+// moves the war to it's final destination, also renames it eliminating the version number
 task mvWarToTomcatDir(type: SshTask) {
     session(remotes.web01) {
         executeSudo("mv /tmp/${warname} ${config.server.tomcat}/webapps/${warnameWoutVersion}", pty: true)
@@ -96,6 +97,7 @@ task mvWarToTomcatDir(type: SshTask) {
     }
 }
 
+//restarts the remote service
 task restartTomcat(type: SshTask) {
     session(remotes.web01) {
         executeSudo("service ${config.server.service} restart", pty: true)
