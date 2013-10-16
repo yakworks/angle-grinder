@@ -10,9 +10,10 @@ describe "controller: users.MassUpdateFormCtrl", ->
 
     $controller "users.MassUpdateFormCtrl",
       $scope: $scope
-      dialog: null
-      selectedIds: []
-      grid: null
+      dialog: "foo"
+      Users: "Users"
+      selectedIds: "bar"
+      grid: "biz"
 
   it "assigns default value for records", ->
     expect($scope.records).to.not.be.undefined
@@ -20,3 +21,12 @@ describe "controller: users.MassUpdateFormCtrl", ->
 
   it "mixins `massUpdateFormCtrlMixin`", inject (massUpdateFormCtrlMixin) ->
     expect(massUpdateFormCtrlMixin.called).to.be.true
+
+  it "mixins `massUpdateFormCtrlMixin` with valid arguments", inject (massUpdateFormCtrlMixin) ->
+    expect(massUpdateFormCtrlMixin.calledWith($scope)).to.be.true
+
+    args = massUpdateFormCtrlMixin.getCall(0).args[1]
+    expect(args).to.have.property "dialog", "foo"
+    expect(args).to.have.property "Resource", "Users"
+    expect(args).to.have.property "selectedIds", "bar"
+    expect(args).to.have.property "grid", "biz"

@@ -1,7 +1,8 @@
 mixin = angular.module("angleGrinder.forms")
 
 mixin.factory "massUpdateFormCtrlMixin", ["$log", ($log) ->
-  ($scope, dialog, Resource, selectedIds, grid) ->
+  ($scope, args = {}) ->
+    {dialog, Resource, selectedIds, grid} = args
 
     # Generic method for massupdating selected rows
     $scope.massUpdate = (records) ->

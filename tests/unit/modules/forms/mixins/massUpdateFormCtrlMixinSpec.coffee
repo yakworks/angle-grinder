@@ -23,7 +23,12 @@ describe "module: angleGrinder.forms mixin: massUpdateFormCtrlMixin", ->
     dialog = sinon.stub(close: ->)
     selectedIds = [1, 2, 3]
     grid = sinon.stub(reload: ->)
-    massUpdateFormCtrlMixin($scope, dialog, Users, selectedIds, grid)
+
+    massUpdateFormCtrlMixin $scope,
+      dialog: dialog
+      Resource: Users
+      selectedIds: selectedIds
+      grid: grid
 
   describe "#massUpdate", ->
 
