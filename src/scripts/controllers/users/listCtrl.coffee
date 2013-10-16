@@ -9,12 +9,15 @@ class ListCtrl
       sortname: "id"
       multiselect: true
 
+    # TODO move to singlePageCrudMixin
     $scope.showItem = (id) ->
       $location.path("/users/#{id}")
 
+    # TODO move to singlePageCrudMixin
     $scope.editItem = (id) ->
       $location.path("/users/#{id}/edit")
 
+    # TODO move to dialogCrudMixin
     $scope.deleteItem = (id) ->
       confirmationDialog.open().then (confirmed) ->
         return unless confirmed
@@ -23,6 +26,7 @@ class ListCtrl
         promise.then (response) ->
           $scope.usersGrid.removeRow(response.id)
 
+    # TODO replace it with mixin concept
     $scope.massUpdate = massUpdateDialog(
       grid: -> $scope.usersGrid
       templateUrl: -> "/templates/users/massUpdateForm.html"
