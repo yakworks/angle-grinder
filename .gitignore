@@ -15,5 +15,5 @@ dist
 # Ignore logs
 *.log
 
-# Ignore linode-conf
+# Ignore gradle-conf
 gradle-conf.groovy
