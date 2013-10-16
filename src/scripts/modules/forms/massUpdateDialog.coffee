@@ -2,9 +2,9 @@ forms = angular.module("angleGrinder.forms")
 
 forms.factory "massUpdateDialog", ["$dialog", "pathWithContext", ($dialog, pathWithContext) ->
   (options = {}) ->
-    options.grid or= ->
-    options.templateUrl or= ->
-    options.controller or= -> "MassUpdateFormCtrl"
+    options.grid ?= ->
+    options.templateUrl ?= ->
+    options.controller ?= -> "MassUpdateFormCtrl"
 
     ->
       # Resolve variables
