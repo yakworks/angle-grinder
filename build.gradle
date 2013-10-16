@@ -1,0 +1,103 @@
+version = '1.0'
+
+description = """\
+Remember that you need gradle-conf.groovy with correct values to execute this script
+"""
+
+//default tasks to run
+defaultTasks  'testDemoApp', 'warDemoApp', 'pushDemoAppWar', 'mvWarToTomcatDir', 'restartTomcat'
+
+
+buildscript {
+
+  repositories {
+    mavenCentral()
+
+  }
+
+  dependencies {
+    classpath 'org.hidetake:gradle-ssh-plugin:0.1.8'
+    classpath 'com.jcraft:jsch:0.1.48'
+  }
+
+}
+
+
+//plugins
+apply plugin: 'ssh'
+
+// ssh config
+
+ssh {
+    // Disables known hosts checking.
+    config(StrictHostKeyChecking: 'no')
+}
+
+// read the user and password from file
+def config = new ConfigSlurper().parse(new File('gradle-conf.groovy').toURL())
+
+def appProps = new Properties()
+new File('./grails/ag-demo/application.properties').withInputStream {
+    stream -> appProps.load(stream)
+}
+def grailsProps = new ConfigSlurper().parse(appProps)
+
+def warname = "${grailsProps.app.name}-${grailsProps.app.version}.war"
+def warnameWoutVersion = "${grailsProps.app.name}-${grailsProps.app.version}.war"
+
+//remotes
+
+remotes {
+  web01 {
+    host = config.server.host
+    user = config.user.name
+    password = config.user.password
+  }
+}
+
+// preparation tasks
+
+
+//gradlew tasks
+
+task wrapper( type: Wrapper ) {
+    gradleVersion = '1.8'
+    //scriptFile = "${project.projectDir}/push-to-linode"
+}
+
+// exec tasks
+
+task testDemopApp(type: Exec) {
+
+    executable 'grails'
+    args 'test-app'
+    workingDir './grails/ag-demo'
+}
+
+task warDemoApp(type: Exec) {
+
+    executable 'grails'
+    args 'war'
+    workingDir './grails/ag-demo'
+}
+
+//ssh tasks
+
+task pushDemoAppWar(type: SshTask) {
+    session(remotes.web01) {
+        put( "./grails/ag-demo/target/${warname}", '/tmp')
+    }
+}
+
+task mvWarToTomcatDir(type: SshTask) {
+    session(remotes.web01) {
+        executeSudo("mv /tmp/${warname} ${config.server.tomcat}/webapps/${warnameWoutVersion}", pty: true)
+        executeSudo("chown ${config.server.user}:${config.server.group} ${config.server.tomcat}/webapps/${warnameWoutVersion}", pty: true)
+    }
+}
+
+task restartTomcat(type: SshTask) {
+    session(remotes.web01) {
+        executeSudo("service ${config.server.service} restart", pty: true)
+    }
+}
