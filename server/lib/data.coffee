@@ -102,7 +102,7 @@ class Data
     if @_validateLoginUniqueness(data)
       row = @findById(id)
 
-      # assing all fields
+      # assign all fields
       for key, value of data
         row[key] = value
 

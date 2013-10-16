@@ -13,7 +13,7 @@ describe "module: angleGrinder.alerts", ->
         $scope: $scope
         alerts: alerts
 
-    it "assings flash messages", ->
+    it "assigns flash messages", ->
       expect($scope.alertMessages).to.not.be.undefined
       expect($scope.alertMessages.length).to.equal 0
 

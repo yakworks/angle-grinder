@@ -292,7 +292,7 @@ describe "module: angleGrinder.forms validations", ->
       loginError = ->
         element.find("ag-validation-errors[for=login] span.help-inline")
 
-      it "assings errors to the form", ->
+      it "assigns errors to the form", ->
         expect(form.$serverError).to.not.be.undefined
         expect(form.$serverError.login).to.equal "should be unique"
 

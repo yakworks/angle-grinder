@@ -137,7 +137,7 @@ describe "module: angleGrinder.gridz", ->
         <ag-select2 select-options="selectOptions" ng-model="search.org" />
       """
 
-      it "assings a valid option", ->
+      it "assigns a valid option", ->
         expect($directiveScope.options.minimumInputLength).to.equal 123
 
     describe "when `minimumInputLength` option is not provided", ->
@@ -147,7 +147,7 @@ describe "module: angleGrinder.gridz", ->
         <ag-select2 select-options="selectOptions" ng-model="search.org" />
       """
 
-      it "assings the default value", ->
+      it "assigns the default value", ->
         expect($directiveScope.options.minimumInputLength).to.equal 1
 
     describe "when `minimumInputLength` option in provided via the attribute", ->
@@ -162,7 +162,7 @@ describe "module: angleGrinder.gridz", ->
       it "ignores value from the scope", ->
         expect($directiveScope.options.minimumInputLength).not.to.equal 123
 
-      it "assings value from the attribute", ->
+      it "assigns value from the attribute", ->
         expect($directiveScope.options.minimumInputLength).to.equal 234
 
   describe "directive: agSelect2Open", ->
