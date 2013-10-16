@@ -1,12 +1,11 @@
 class IndexCtrl
-  @$inject = ["$scope", "$log", "$filter", "Users", "pathWithContext", "dialogCrudCtrlMixin", "massUpdateMixin"]
-  constructor: ($scope, $log, @$filter, Users, pathWithContext, dialogCrudCtrlMixin, massUpdateMixin) ->
+  @$inject = ["$scope", "$log", "$filter", "Users", "dialogCrudCtrlMixin", "massUpdateMixin"]
+  constructor: ($scope, $log, @$filter, Users, dialogCrudCtrlMixin, massUpdateMixin) ->
     # Intitially show the search form
     $scope.showSearchForm = true
 
-    # TODO get rid of `pathWithContext` from here
     $scope.gridOptions =
-      url: pathWithContext("/api/users")
+      path: "/api/users"
       colModel: @gridColumns()
       rowNum: 10
       sortname: "id"

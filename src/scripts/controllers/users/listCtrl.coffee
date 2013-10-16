@@ -1,9 +1,9 @@
 class ListCtrl
-  @$inject = ["$scope", "$filter", "Users", "pathWithContext", "massUpdateMixin", "singlePageCrudCtrlMixin"]
-  constructor: ($scope, @$filter, Users, pathWithContext, massUpdateMixin, singlePageCrudCtrlMixin) ->
+  @$inject = ["$scope", "$filter", "Users", "massUpdateMixin", "singlePageCrudCtrlMixin"]
+  constructor: ($scope, @$filter, Users, massUpdateMixin, singlePageCrudCtrlMixin) ->
 
     $scope.gridOptions =
-      url: pathWithContext("/api/users")
+      path: "/api/users"
       colModel: @gridColumns()
       rowNum: 10
       sortname: "id"
