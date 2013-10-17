@@ -190,3 +190,13 @@ cd angle-grinder-gh-pages
 scripts/upgrade-angle-grinder.sh
 git commit -am 'chore: release the documentation'
 ```
+
+## Contributing to Source Code
+
+We'd love for you to contribute to our source code and to make Angle Grinder even
+better than it is today!
+
+ Please read the [contribution guidelines][contribute] to learn about how to submit code as well as
+ other useful info like how to build and test Angle Grinder code.
+
+[contribute]: https://docs.google.com/document/d/1QrDFcIiPjSLDn3EL15IJygNPiHORgU1_OOAqWjiDU5Y/edit#
