@@ -1,8 +1,8 @@
 # TODO plurarize this one and contacts
 class NoteListCtrl
 
-  @$inject = ["$scope", "editDialog", "confirmationDialog", "resourceBuilder", "pathWithContext"]
-  constructor: ($scope, editDialog, confirmationDialog, resourceBuilder, pathWithContext) ->
+  @$inject = ["$scope", "resourceBuilder", "editDialog", "pathWithContext", "dialogCrudCtrlMixin"]
+  constructor: ($scope, resourceBuilder, editDialog, pathWithContext, dialogCrudCtrlMixin) ->
     # Create resource for users (contacts)
     Notes = resourceBuilder("/note")
 
@@ -15,7 +15,7 @@ class NoteListCtrl
       gridInitialized = true
 
       $scope.gridOptions =
-        url: pathWithContext("/org/listNotes/#{org.id}.json")
+        path: "/org/listNotes/#{org.id}.json"
         colModel: @colModel()
         multiselect: false # turn off multiselect
         shrinkToFit: true # makes columns fit to width
@@ -23,22 +23,17 @@ class NoteListCtrl
         sortname: "name"
         sortorder: "asc"
 
+    dialogCrudCtrlMixin $scope,
+      Resource: Notes
+      gridName: "notesGrid"
+      templateUrl: "/templates/note/form.html"
+
     # Displays a form for creating a new user
+    # @override
+    # TODO figure out how to assing default values before create
     $scope.createItem = ->
       note = new Notes(org: $scope.$org)
       editDialog.open(pathWithContext("/templates/note/form.html"), note, $scope.notesGrid)
-
-    # Displays a form for editing an exiting user
-    $scope.editItem = (id) ->
-      Notes.get { id: id }, (note) ->
-        editDialog.open(pathWithContext("/templates/note/form.html"), note, $scope.notesGrid)
-
-    $scope.deleteItem = (id) ->
-      confirmationDialog.open().then (confirmed) ->
-        return unless confirmed
-
-        promise = Notes.delete(id: id).$promise
-        promise.then (response) -> $scope.notesGrid.removeRow(response.id)
 
   colModel: ->
     [

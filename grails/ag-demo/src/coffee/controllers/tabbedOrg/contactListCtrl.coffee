@@ -1,8 +1,8 @@
 class ContactListCtrl
 
-  @$inject = ["$scope", "editDialog", "confirmationDialog", "resourceBuilder", "pathWithContext"]
-  constructor: ($scope, editDialog, confirmationDialog, resourceBuilder, pathWithContext) ->
-    # Create resource for users (contacts)
+  @$inject = ["$scope", "resourceBuilder", "dialogCrudCtrlMixin", ]
+  constructor: ($scope, resourceBuilder, dialogCrudCtrlMixin) ->
+    # Create resource for the users (contacts)
     Users = resourceBuilder("/user")
 
     $scope.$org = null
@@ -12,9 +12,9 @@ class ContactListCtrl
 
       $scope.$org = org
       gridInitialized = true
-      
+
       $scope.gridOptions =
-        url: pathWithContext("/org/listUsers/#{org.id}.json")
+        path: "/org/listUsers/#{org.id}.json"
         colModel: @colModel()
         multiselect: false # turn off multiselect
         shrinkToFit: true # makes columns fit to width
@@ -22,22 +22,12 @@ class ContactListCtrl
         sortname: "login"
         sortorder: "asc"
 
-    # Displays a form for creating a new user
-    $scope.createItem = ->
-      user = new Users(contact: org: $scope.$org)
-      editDialog.open(pathWithContext("/user/formTemplate"), user)
-
-    # Displays a form for editing an exiting user
-    $scope.editItem = (id) ->
-      Users.get { id: id }, (user) ->
-        editDialog.open(pathWithContext("/user/formTemplate"), user)
-
-    $scope.deleteItem = (id) ->
-      confirmationDialog.open().then (confirmed) ->
-        return unless confirmed
-
-        promise = Users.delete(id: id).$promise
-        promise.then (response) -> $scope.usersGrid.removeRow(response.id)
+    # TODO org for create action is missing
+    # TODO figure out how to assign default values before create
+    dialogCrudCtrlMixin $scope,
+      Resource: Users
+      gridName: "usersGrid"
+      templateUrl: "/user/formTemplate"
 
   colModel: ->
     [
