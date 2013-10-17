@@ -13,8 +13,9 @@ mixin.factory "dialogCrudCtrlMixin", [
       # Generic method for invoking an edit dialog for a resource
       # with the given id
       $scope.editItem = (id) ->
-        promise = Resource.get(id: id).$promise
-        openEditDialogFor promise
+        Resource.get id: id, (resource) ->
+          resource = args.beforeEdit(resource) if args.beforeEdit?
+          openEditDialogFor resource
 
       # Generic method from invoking a dialog for
       # creating a new record

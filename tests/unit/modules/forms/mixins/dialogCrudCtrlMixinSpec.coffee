@@ -31,6 +31,7 @@ describe "module: angleGrinder.forms mixin: dialogCrudCtrlMixin", ->
       Resource: Users
       gridName: "theGrid"
       templateUrl: "/foo/bar/form.html"
+      beforeEdit: @beforeEdit
 
   describe "#editItem", ->
     beforeEach inject ($httpBackend) ->
@@ -45,12 +46,23 @@ describe "module: angleGrinder.forms mixin: dialogCrudCtrlMixin", ->
       $httpBackend.verifyNoOutstandingExpectation()
       $httpBackend.verifyNoOutstandingRequest()
 
-    it "opens a dialog for editiging leaded resource", inject (editDialog) ->
+    it "opens a dialog for editiging the loaded resource", inject (editDialog) ->
       expect(editDialog.open.called).to.be.true
 
       args = editDialog.open.getCall(0).args
       expect(args[0]).to.be.equal "/foo/bar/form.html"
       expect(args[1]).to.have.property "id", 123
+
+    context "when the `beforeEdit` callback is given", ->
+      before ->
+        @beforeEdit = (record) ->
+          record.someValue = "foo bar"
+          record
+
+      it "uses it to pre-process the loaded record", inject (editDialog) ->
+        args = editDialog.open.getCall(0).args
+        expect(args[1]).to.have.property "id", 123
+        expect(args[1]).to.have.property "someValue", "foo bar"
 
   describe "#createItem", ->
     beforeEach -> $scope.createItem()
