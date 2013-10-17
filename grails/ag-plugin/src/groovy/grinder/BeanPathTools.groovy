@@ -70,20 +70,26 @@ class BeanPathTools {
         propList.each { key ->
             propsToMap(obj, key, rowMap)
         }
+        println rowMap
         return rowMap
 
     }
 
     static Map propsToMap(Object obj, String propertyPath, Map currentMap) {
         if(obj == null) return
-        final int nestedIndex = propertyPath.indexOf('.');
-        //no idex then its just a property
+        final int nestedIndex = propertyPath.indexOf('.')
+        //no idex then its just a property or its the *
         if (nestedIndex == -1) {
             if (propertyPath == '*') {
                 log.debug("obj:$obj propertyPath:$propertyPath currentMap:$currentMap" )
+                //just get the persistentProperties
                 def pprops = obj.domainClass.persistentProperties
-                def id = obj.domainClass.getIdentifier().name //add the id prop
+                //filter out the associations. need to explicitely add those to be included
+                pprops = pprops.findAll{ p -> !p.isAssociation() }
+                //force the the id to be included
+                def id = obj.domainClass.getIdentifier().name
                 currentMap[id] = obj?."$id"
+                //spin through and add them to the map
                 pprops.each {
                     currentMap[it.name] = obj?."$it.name"
                 }
@@ -93,21 +99,25 @@ class BeanPathTools {
 
             return
         }
-        // We have at least one sub-key, so extract the first element
-        // of the nested key as the prfix. In other words, if we have
-        // 'nestedKey' == "a.b.c", the prefix is "a".
-        String nestedPrefix = propertyPath.substring(0, nestedIndex);
-        if (!currentMap.containsKey(nestedPrefix)) {
-            currentMap[nestedPrefix] = [:]
-        }
-        if (!(currentMap[nestedPrefix] instanceof Map)) {
-            currentMap[nestedPrefix] = [:]
+        else{
+            // We have at least one sub-key, so extract the first element
+            // of the nested key as the prfix. In other words, if we have
+            // 'nestedKey' == "a.b.c", the prefix is "a".
+            String nestedPrefix = propertyPath.substring(0, nestedIndex);
+            if (!currentMap.containsKey(nestedPrefix)) {
+              currentMap[nestedPrefix] = [:]
+            }
+            if (!(currentMap[nestedPrefix] instanceof Map)) {
+              currentMap[nestedPrefix] = [:]
+            }
+
+            def nestedObj = obj."$nestedPrefix"
+            String remainderOfKey = propertyPath.substring(nestedIndex + 1, propertyPath.length());
+            //recursive call
+            propsToMap(nestedObj, remainderOfKey, currentMap[nestedPrefix])
+
         }
 
-        def nestedObj = obj."$nestedPrefix"
-        String remainderOfKey = propertyPath.substring(nestedIndex + 1, propertyPath.length());
-        //recursive call
-        propsToMap(nestedObj, remainderOfKey, currentMap[nestedPrefix])
     }
 
 }
