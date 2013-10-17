@@ -1,7 +1,8 @@
 class ListCtrl
 
-  @$inject = ["$scope", "$log", "Resource", "$filter", "editDialog", "pathWithContext", "dialogCrudCtrlMixin"]
-  constructor: ($scope, $log, Resource, @$filter, editDialog, pathWithContext, dialogCrudCtrlMixin) ->
+  @$inject = ["$scope", "$log", "Resource", "$filter", "dialogCrudCtrlMixin"]
+  constructor: ($scope, $log, Resource, @$filter, dialogCrudCtrlMixin) ->
+
     $scope.gridOptions =
       path: "/user/list.json"
       colModel: @colModel()
@@ -14,17 +15,11 @@ class ListCtrl
       Resource: Resource
       gridName: "usersGrid"
       templateUrl: "/user/formTemplate"
-
-    # Displays a form for editing an exiting user
-    # @override
-    # TODO figure out how to assign default values before edit
-    $scope.editItem = (id) ->
-      Resource.get { id: id }, (record) ->
-        # convert `Contact.type` enum field to string
+      beforeEdit: (record) ->
         user = angular.copy(record)
+        # convert `Contact.type` enum field to the string
         user.contact.type = record.contact.type?.name
-
-        editDialog.open(pathWithContext("/user/formTemplate"), user, $scope.usersGrid)
+        user
 
   colModel: ->
     [
