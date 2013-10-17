@@ -20,8 +20,9 @@ mixin.factory "dialogCrudCtrlMixin", [
       # Generic method from invoking a dialog for
       # creating a new record
       $scope.createItem = ->
-        user = new Resource()
-        openEditDialogFor user
+        resource = new Resource()
+        resource = args.beforeCreate(resource) if args.beforeCreate?
+        openEditDialogFor resource
 
       # Generic method for deleting a record
       $scope.deleteItem = (id) ->

@@ -32,6 +32,7 @@ describe "module: angleGrinder.forms mixin: dialogCrudCtrlMixin", ->
       gridName: "theGrid"
       templateUrl: "/foo/bar/form.html"
       beforeEdit: @beforeEdit
+      beforeCreate: @beforeCreate
 
   describe "#editItem", ->
     beforeEach inject ($httpBackend) ->
@@ -73,6 +74,16 @@ describe "module: angleGrinder.forms mixin: dialogCrudCtrlMixin", ->
     it "opens a dialog for creating a resource", inject (editDialog) ->
       expect(editDialog.open.called).to.be.true
       expect(editDialog.open.calledWith("/foo/bar/form.html")).to.be.true
+
+    context "when the `beforeCreate` callback is given", ->
+      before ->
+        @beforeCreate = (record) ->
+          record.orderId = 66
+          record
+
+      it "uses it to pre-process the record before create", inject (editDialog) ->
+        args = editDialog.open.getCall(0).args
+        expect(args[1]).to.have.property "orderId", 66
 
   describe "#deleteItem", ->
 
