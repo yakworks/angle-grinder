@@ -22,12 +22,15 @@ class ContactListCtrl
         sortname: "login"
         sortorder: "asc"
 
-    # TODO org for create action is missing
-    # TODO figure out how to assign default values before create
     dialogCrudCtrlMixin $scope,
       Resource: Users
-      gridName: "usersGrid"
+      gridName: "contactsGrid"
       templateUrl: "/user/formTemplate"
+      beforeCreate: (user) ->
+        user.contact =
+          org: $scope.org
+          type: "CUSTOMER"
+        user
 
   colModel: ->
     [

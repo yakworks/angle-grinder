@@ -1,8 +1,8 @@
 # TODO plurarize this one and contacts
 class NoteListCtrl
 
-  @$inject = ["$scope", "resourceBuilder", "editDialog", "pathWithContext", "dialogCrudCtrlMixin"]
-  constructor: ($scope, resourceBuilder, editDialog, pathWithContext, dialogCrudCtrlMixin) ->
+  @$inject = ["$scope", "resourceBuilder", "dialogCrudCtrlMixin"]
+  constructor: ($scope, resourceBuilder, dialogCrudCtrlMixin) ->
     # Create resource for users (contacts)
     Notes = resourceBuilder("/note")
 
@@ -27,13 +27,10 @@ class NoteListCtrl
       Resource: Notes
       gridName: "notesGrid"
       templateUrl: "/templates/note/form.html"
-
-    # Displays a form for creating a new user
-    # @override
-    # TODO figure out how to assing default values before create
-    $scope.createItem = ->
-      note = new Notes(org: $scope.$org)
-      editDialog.open(pathWithContext("/templates/note/form.html"), note, $scope.notesGrid)
+      beforeCreate: (note) ->
+        # assign parent org to the note
+        note.org = $scope.$org
+        note
 
   colModel: ->
     [
