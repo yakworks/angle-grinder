@@ -1,19 +1,18 @@
+angular.module("angleGrinder")
+
 class MassUpdateFormCtrl
 
-  @$inject = ["$scope", "Users", "dialog", "selectedIds", "grid"]
-  constructor: ($scope, Users, dialog, selectedIds, grid) ->
+  @$inject = ["$scope", "massUpdateFormCtrlMixin", "dialog", "Users", "selectedIds", "grid"]
+  constructor: ($scope, massUpdateFormCtrlMixin, dialog, Users, selectedIds, grid) ->
+
+    massUpdateFormCtrlMixin $scope,
+      dialog: dialog
+      Resource: Users
+      selectedIds: selectedIds
+      grid: grid
+
+    # Assign default value for all records
     $scope.records = allowance: 0
-
-    $scope.save = (records) ->
-      return if $scope.massUpdateForm.$invalid
-
-      promise = Users.massUpdate(ids: selectedIds, data: records).$promise
-      promise.then ->
-        grid.reload()
-        dialog.close()
-
-    $scope.closeDialog = ->
-      dialog.close()
 
 angular.module("angleGrinder")
   .controller("users.MassUpdateFormCtrl", MassUpdateFormCtrl)

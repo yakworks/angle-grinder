@@ -11,8 +11,8 @@ describe "Application routes", ->
     module("templates/angleGrinder.html")
     module("templates/documentation.html")
 
-    module("templates/gridExample/index.html")
-    module("templates/usersDialog/index.html")
+    module("templates/gridExample/list.html")
+    module("templates/usersDialog/list.html")
     module("templates/users/list.html")
     module("templates/users/show.html")
     module("templates/users/form.html")
@@ -35,12 +35,12 @@ describe "Application routes", ->
 
   it "recognizes `/examples/gridExample`", ->
     navigateTo "/examples/gridExample"
-    expect($route.current.templateUrl).to.equal("templates/gridExample/index.html")
+    expect($route.current.templateUrl).to.equal("templates/gridExample/list.html")
     expect($route.current.controller).to.equal("gridExample.ListCtrl")
 
   it "recognizes `/examples/usersDialog`", ->
     navigateTo "/examples/usersDialog"
-    expect($route.current.templateUrl).to.equal("templates/usersDialog/index.html")
+    expect($route.current.templateUrl).to.equal("templates/usersDialog/list.html")
     expect($route.current.controller).to.equal("usersDialog.ListCtrl")
 
   it "recognizes `/examples/users`", ->

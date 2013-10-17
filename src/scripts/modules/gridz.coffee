@@ -4,7 +4,7 @@ gridz = angular.module("angleGrinder.gridz", [
 ])
 
 gridz.directive "agGrid", [
-  "$log", ($log) ->
+  "$log", "pathWithContext", ($log, pathWithContext) ->
     link = (scope, element, attrs, gridCtrl) ->
       # initialize the controller
       gridCtrl.registerGridElement(element.find("table.gridz"))
@@ -20,6 +20,10 @@ gridz.directive "agGrid", [
 
         # find grid placeholder
         $grid = element.find("table.gridz")
+
+        # assign the url
+        if not gridOptions.url? and gridOptions.path?
+          gridOptions.url = pathWithContext(gridOptions.path)
 
         # jqGrid suks at this point it expects `pager` to be an id
         gridOptions.pager = element.find(".gridz-pager").attr("id") or "gridz-pager"

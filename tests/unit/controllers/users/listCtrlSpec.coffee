@@ -8,6 +8,10 @@ describe "controller: users.ListCtrl", ->
       sinon.stub($delegate, "dialog").returns(dialogOpenStub)
       $delegate
 
+  beforeEach module "angleGrinder.forms", ($provide) ->
+    $provide.decorator "singlePageCrudCtrlMixin", -> sinon.spy()
+    $provide.decorator "massUpdateMixin", -> sinon.spy()
+
   $scope = null
 
   beforeEach inject ($rootScope, $controller) ->
@@ -15,92 +19,33 @@ describe "controller: users.ListCtrl", ->
 
     $controller "users.ListCtrl",
       $scope: $scope
+      Users: "Users"
 
-  describe "$scope", ->
-    it "assigns gridOptions", ->
-      expect($scope.gridOptions).to.not.be.undefined
+  it "assigns gridOptions to the $scope", ->
+    expect($scope.gridOptions).to.not.be.undefined
 
-    describe "#showItem", ->
-      it "navigates to the show user page", inject ($location) ->
-        # Given
-        spy = sinon.spy($location, "path")
+  describe "mixin: `singlePageCrudCtrlMixin`", ->
 
-        # When
-        $scope.showItem(123)
+    it "is mixed", inject (singlePageCrudCtrlMixin) ->
+      expect(singlePageCrudCtrlMixin.called).to.be.true
 
-        # Then
-        expect(spy.called).to.be.true
-        expect(spy.calledWith("/users/123")).to.be.true
+    it "is mixed with valid arguments", inject (singlePageCrudCtrlMixin) ->
+      expect(singlePageCrudCtrlMixin.calledWith($scope)).to.be.true
 
-    describe "#editItem", ->
-      it "navigates to the edit user page", inject ($location) ->
-        # Given
-        spy = sinon.spy($location, "path")
+      args = singlePageCrudCtrlMixin.getCall(0).args[1]
+      expect(args).to.have.property "Resource", "Users"
+      expect(args).to.have.property "resourcePath", "/users"
+      expect(args).to.have.property "gridName", "usersGrid"
 
-        # When
-        $scope.editItem(234)
+  describe "mixin: `massUpdateMixin`", ->
 
-        # Then
-        expect(spy.called).to.be.true
-        expect(spy.calledWith("/users/234/edit")).to.be.true
+    it "is mixed", inject (massUpdateMixin) ->
+      expect(massUpdateMixin.called).to.be.true
 
-    describe "#deleteItem", ->
-      it "opens the confirmation dialog", inject (confirmationDialog) ->
-        # Given
-        stub = sinon.stub(confirmationDialog, "open").returns then: (fn) -> fn(false)
+    it "is mixed with valid arguments", inject (massUpdateMixin) ->
+      expect(massUpdateMixin.calledWith($scope)).to.be.true
 
-        # When
-        $scope.deleteItem(123)
-
-        # Then
-        expect(stub.called).to.be.true
-
-      describe "when the dialog was confirmed",->
-        beforeEach inject (confirmationDialog, $httpBackend) ->
-          # Given
-          sinon.stub(confirmationDialog, "open").returns then: (fn) -> fn(true)
-          $httpBackend.expectDELETE("/api/users/123").respond(id: 123)
-          $scope.usersGrid = sinon.stub(removeRow: angular.noop)
-
-          # When
-          $scope.deleteItem(123)
-          $httpBackend.flush()
-
-        it "deletes a row", inject ($httpBackend) ->
-          $httpBackend.verifyNoOutstandingExpectation()
-          $httpBackend.verifyNoOutstandingRequest()
-
-        it "removes a row from the grid", ->
-          expect($scope.usersGrid.removeRow.called).to.be.true
-          expect($scope.usersGrid.removeRow.calledWith(123)).to.be.true
-
-    describe "#massUpdate", ->
-      gridStub = null
-
-      beforeEach ->
-        gridStub = sinon.stub(getSelectedRowIds: angular.noop)
-        $scope.usersGrid = gridStub
-
-      describe "when no rows are selected", ->
-        beforeEach ->
-          gridStub.getSelectedRowIds.returns([])
-
-        it "does nothing", inject ($dialog) ->
-          # when
-          $scope.massUpdate()
-
-          # Then
-          expect($dialog.dialog.called).to.be.false
-
-      describe "otherwise", ->
-
-        beforeEach ->
-          gridStub.getSelectedRowIds.returns([1, 2, 3])
-
-        it "invokes a dialog", inject ($dialog) ->
-          # When
-          $scope.massUpdate()
-
-          # Then
-          expect($dialog.dialog.called).to.be.true
-          expect($dialog.dialog().open.called).to.be.true
+      args = massUpdateMixin.getCall(0).args[1]
+      expect(args).to.have.property "templateUrl", "/templates/users/massUpdateForm.html"
+      expect(args).to.have.property "controller", "users.MassUpdateFormCtrl"
+      expect(args).to.have.property "gridName", "usersGrid"

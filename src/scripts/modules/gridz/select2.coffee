@@ -31,14 +31,14 @@ gridz.directive "agSelect2", [
         scope.options = options
 
         # read `minimumInputLength` option from the attribute
-        options.minimumInputLength or= 1
+        options.minimumInputLength ?= 1
         if attrs.selectMinimumInputLength?
           options.minimumInputLength = parseInt(attrs.selectMinimumInputLength)
 
         # set the default `minimumInputLength`
 
         # set the default `width
-        options.width or= "resolve"
+        options.width ?= "resolve"
 
         # create `ajax`
         if not options.ajax? and attrs.selectAjaxUrl?
@@ -61,7 +61,7 @@ gridz.directive "agSelect2", [
 
         # create `formatResult` function from the given template
         if resultTemplate?
-          options.formatResult or= (item) ->
+          options.formatResult ?= (item) ->
             scope = scope.$new()
             scope.item = item
 
@@ -69,7 +69,7 @@ gridz.directive "agSelect2", [
             $compile(resultElement)(scope)
 
         # create default `formatSelection` method
-        options.formatSelection or= (item) -> item.name
+        options.formatSelection ?= (item) -> item.name
 
     template: """
       <div>

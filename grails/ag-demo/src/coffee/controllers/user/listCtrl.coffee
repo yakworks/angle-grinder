@@ -1,35 +1,25 @@
 class ListCtrl
 
-  @$inject = ["$scope", "$log", "$filter", "confirmationDialog", "editDialog", "Resource", "pathWithContext"]
-  constructor: ($scope, $log, @$filter, confirmationDialog, editDialog, Resource, pathWithContext) ->
+  @$inject = ["$scope", "$log", "Resource", "$filter", "dialogCrudCtrlMixin"]
+  constructor: ($scope, $log, Resource, @$filter, dialogCrudCtrlMixin) ->
+
     $scope.gridOptions =
-      url: pathWithContext("/user/list.json")
+      path: "/user/list.json"
       colModel: @colModel()
       multiselect: false # turn off multiselect
       shrinkToFit: true # makes columns fit to width
       sortname: "login"
       sortorder: "asc"
 
-    # Displays a form for creating a new user
-    $scope.createItem = ->
-      user = new Resource()
-      editDialog.open(pathWithContext("/user/formTemplate"), user, $scope.usersGrid)
-
-    # Displays a form for editing an exiting user
-    $scope.editItem = (id) ->
-      Resource.get { id: id }, (record) ->
-        # convert `Contact.type` enum field to string
+    dialogCrudCtrlMixin $scope,
+      Resource: Resource
+      gridName: "usersGrid"
+      templateUrl: "/user/formTemplate"
+      beforeEdit: (record) ->
         user = angular.copy(record)
+        # convert `Contact.type` enum field to the string
         user.contact.type = record.contact.type?.name
-
-        editDialog.open(pathWithContext("/user/formTemplate"), user, $scope.usersGrid)
-
-    $scope.deleteItem = (id) ->
-      confirmationDialog.open().then (confirmed) ->
-        return unless confirmed
-
-        promise = Resource.delete(id: id).$promise
-        promise.then (response) -> $scope.usersGrid.removeRow(response.id)
+        user
 
   colModel: ->
     [

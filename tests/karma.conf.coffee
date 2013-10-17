@@ -37,8 +37,8 @@ module.exports = (config) ->
       "src/templates/**/*.html"
 
       "src/scripts/modules/*.coffee"
-      "src/scripts/modules/forms/*.coffee"
-      "src/scripts/modules/gridz/*.coffee"
+      "src/scripts/modules/forms/**/*.coffee"
+      "src/scripts/modules/gridz/**/*.coffee"
 
       "src/scripts/application.coffee"
       "src/scripts/routes.coffee"

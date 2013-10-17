@@ -1,32 +1,26 @@
 class IndexCtrl
-  @$inject = ["$scope", "$log", "$dialog", "$filter", "confirmationDialog", "editDialog", "Users", "pathWithContext"]
-  constructor: ($scope, $log, $dialog, @$filter, confirmationDialog, editDialog, Users, pathWithContext) ->
+  @$inject = ["$scope", "$log", "$filter", "Users", "dialogCrudCtrlMixin", "massUpdateMixin"]
+  constructor: ($scope, $log, @$filter, Users, dialogCrudCtrlMixin, massUpdateMixin) ->
     # Intitially show the search form
     $scope.showSearchForm = true
 
     $scope.gridOptions =
-      url: pathWithContext("/api/users")
+      path: "/api/users"
       colModel: @gridColumns()
       rowNum: 10
       sortname: "id"
       # handler for jqGrid errors
       loadError: -> $log.error "loadError", arguments
 
-    $scope.editItem = (id) ->
-      promise = Users.get(id: id).$promise
-      editDialog.open(pathWithContext("templates/usersDialog/form.html"), promise, $scope.usersGrid)
+    dialogCrudCtrlMixin $scope,
+      Resource: Users
+      gridName: "usersGrid"
+      templateUrl: "templates/usersDialog/form.html"
 
-    $scope.createItem = ->
-      user = new Users()
-      editDialog.open(pathWithContext("templates/usersDialog/form.html"), user, $scope.usersGrid)
-
-    $scope.deleteItem = (id) ->
-      confirmationDialog.open().then (confirmed) ->
-        return unless confirmed
-
-        promise = Users.delete(id: id).$promise
-        promise.then (response) ->
-          $scope.usersGrid.removeRow(response.id)
+    massUpdateMixin $scope,
+      templateUrl: "/templates/users/massUpdateForm.html"
+      controller: "users.MassUpdateFormCtrl"
+      gridName: "usersGrid"
 
   gridColumns: ->
     [
