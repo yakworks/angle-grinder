@@ -1,5 +1,7 @@
 describe "module: angleGrinder.forms mixin: dialogCrudCtrlMixin", ->
 
+  beforeEach module "angleGrinder.resources"
+
   beforeEach module "angleGrinder.forms", ($provide) ->
     # stub `editDialog` service
     $provide.decorator "editDialog", ($delegate) ->
@@ -15,19 +17,10 @@ describe "module: angleGrinder.forms mixin: dialogCrudCtrlMixin", ->
       $delegate
 
   $scope = null
-  Resource = null
   grid = null
 
-  beforeEach inject ($rootScope, dialogCrudCtrlMixin) ->
+  beforeEach inject ($rootScope, Users, dialogCrudCtrlMixin) ->
     $scope = $rootScope.$new()
-
-    # stub the resource
-    Resource = -> # stub for the constructor
-    Resource.get = ->
-    sinon.stub(Resource, "get").returns $promise: "the resource"
-    Resource.delete = ->
-    sinon.stub(Resource, "delete").returns $promise:
-      then: (onSuccess) -> onSuccess(id: 456)
 
     grid = removeRow: ->
     sinon.stub(grid, "removeRow")
@@ -35,23 +28,29 @@ describe "module: angleGrinder.forms mixin: dialogCrudCtrlMixin", ->
 
     # initialize the mixin
     dialogCrudCtrlMixin $scope,
-      Resource: Resource
+      Resource: Users
       gridName: "theGrid"
       templateUrl: "/foo/bar/form.html"
 
   describe "#editItem", ->
-    beforeEach -> $scope.editItem(123)
+    beforeEach inject ($httpBackend) ->
+      $httpBackend.expectGET("/api/users/123").respond id: 123, name: "the user"
+      $scope.editItem(123)
+      $httpBackend.flush()
 
     it "is mixed to the $scope", ->
       expect($scope.editItem).to.be.a "function"
 
-    it "loads a resource", ->
-      expect(Resource.get.called).to.be.true
-      expect(Resource.get.calledWith(id: 123)).to.be.true
+    it "loads a resource", inject ($httpBackend) ->
+      $httpBackend.verifyNoOutstandingExpectation()
+      $httpBackend.verifyNoOutstandingRequest()
 
     it "opens a dialog for editiging leaded resource", inject (editDialog) ->
       expect(editDialog.open.called).to.be.true
-      expect(editDialog.open.calledWith("/foo/bar/form.html", "the resource")).to.be.true
+
+      args = editDialog.open.getCall(0).args
+      expect(args[0]).to.be.equal "/foo/bar/form.html"
+      expect(args[1]).to.have.property "id", 123
 
   describe "#createItem", ->
     beforeEach -> $scope.createItem()
@@ -73,13 +72,16 @@ describe "module: angleGrinder.forms mixin: dialogCrudCtrlMixin", ->
       expect(confirmationDialog.open.called).to.be.true
 
     context "when the dialog was confirmed", ->
-      beforeEach inject (confirmationDialog) ->
+      beforeEach inject (confirmationDialog, $httpBackend) ->
         confirmationDialog.confirmed = true
-        $scope.deleteItem(456)
 
-      it "deletes a resource", ->
-        expect(Resource.delete.called).to.be.true
-        expect(Resource.delete.calledWith(id: 456)).to.be.true
+        $httpBackend.expectDELETE("/api/users/456").respond id: 456
+        $scope.deleteItem(456)
+        $httpBackend.flush()
+
+      it "deletes a resource", inject ($httpBackend) ->
+        $httpBackend.verifyNoOutstandingExpectation()
+        $httpBackend.verifyNoOutstandingRequest()
 
       it "removes a row from the grid", ->
         expect(grid.removeRow.called).to.be.true
@@ -89,9 +91,6 @@ describe "module: angleGrinder.forms mixin: dialogCrudCtrlMixin", ->
       beforeEach inject (confirmationDialog) ->
         confirmationDialog.confirmed = false
         $scope.deleteItem(456)
-
-      it "does not delete a resource", ->
-        expect(Resource.delete.called).to.be.false
 
       it "does not remove a row from the grid", ->
         expect(grid.removeRow.called).to.be.false
