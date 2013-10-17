@@ -1,27 +1,25 @@
 class ListCtrl
 
-  @$inject = ["$scope", "pathWithContext", "Resource", "confirmationDialog", "massUpdateDialog"]
-  constructor: ($scope, pathWithContext, Resource, confirmationDialog, massUpdateDialog) ->
+  @$inject = ["$scope", "Resource", "singlePageCrudCtrlMixin", "massUpdateMixin"]
+  constructor: ($scope, Resource, singlePageCrudCtrlMixin, massUpdateMixin) ->
+
     $scope.gridOptions =
-      url: pathWithContext("/org/list.json")
+      path: "/org/list.json"
       colModel: @colModel()
       multiselect: true
       shrinkToFit: true # makes columns fit to width
       sortname: "num"
       sortorder: "asc"
 
-    $scope.deleteItem = (id) ->
-      confirmationDialog.open().then (confirmed) ->
-        return unless confirmed
+    singlePageCrudCtrlMixin $scope,
+      Resource: Resource
+      resourcePath: "/org"
+      gridName: "orgGrid"
 
-        promise = Resource.delete(id: id).$promise
-        promise.then (response) -> $scope.orgGrid.removeRow(response.id)
-
-    $scope.massUpdate = massUpdateDialog(
-      grid: -> $scope.orgGrid
-      controller: -> "org.MassUpdateFormCtrl"
-      templateUrl: -> "/templates/org/massUpdateForm.html"
-    )
+    massUpdateMixin $scope,
+      templateUrl: "/templates/org/massUpdateForm.html"
+      controller: "org.MassUpdateFormCtrl"
+      gridName: "orgGrid"
 
   colModel: ->
     showActionLink = (cellVal, options, rowdata) ->

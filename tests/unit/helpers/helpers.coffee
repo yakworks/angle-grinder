@@ -3,7 +3,7 @@
 # @return {Object} A reference to the compiled template and the scope
 window.compileTemplate = (template, $injector, $scope = null) ->
   # Create a new scope if necassary
-  $scope or= (->
+  $scope ?= (->
     $rootScope = $injector.get("$rootScope")
     $rootScope.$new()
   )()

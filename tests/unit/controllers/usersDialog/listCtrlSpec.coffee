@@ -1,16 +1,21 @@
 describe "controller: usersDialog.ListCtrl", ->
-  beforeEach module("angleGrinder")
+
+  beforeEach module "angleGrinder.forms", ($provide) ->
+    $provide.decorator "dialogCrudCtrlMixin", -> sinon.spy()
+    $provide.decorator "massUpdateMixin", -> sinon.spy()
+
+  beforeEach module "angleGrinder"
 
   $scope = null
-  usersGridStub = null
 
   beforeEach inject ($rootScope, $controller) ->
-    usersGridStub = sinon.stub(removeRow: angular.noop)
     $scope = $rootScope.$new()
-    $scope.usersGrid = usersGridStub
+
+    $scope.usersGrid = {}
 
     $controller "usersDialog.ListCtrl",
       $scope: $scope
+      Users: "Users"
 
   describe "$scope", ->
     it "assigns gridOptions", ->
@@ -24,62 +29,28 @@ describe "controller: usersDialog.ListCtrl", ->
       expect($scope.gridOptions.colModel[4].name).to.equal "birthday"
       expect($scope.gridOptions.colModel[5].name).to.equal "paid"
 
-    describe "#editItem", ->
-      resourceStub = null
-      dialogSpy = null
+  describe "mixin: `dialogCrudCtrlMixin`", ->
 
-      beforeEach inject (Users, editDialog) ->
-        resourceStub = sinon.stub(Users, "get").returns($promise: {})
-        dialogSpy = sinon.spy(editDialog, "open")
+    it "is mixed", inject (dialogCrudCtrlMixin) ->
+      expect(dialogCrudCtrlMixin.called).to.be.true
 
-        $scope.editItem(123)
+    it "is mixed with valid arguments", inject (dialogCrudCtrlMixin) ->
+      expect(dialogCrudCtrlMixin.calledWith($scope)).to.be.true
 
-      it "loads a resource", ->
-        expect(resourceStub.called).to.be.true
-        expect(resourceStub.calledWith(id: 123)).to.be.true
+      args = dialogCrudCtrlMixin.getCall(0).args[1]
+      expect(args).to.have.property "Resource", "Users"
+      expect(args).to.have.property "gridName", "usersGrid"
+      expect(args).to.have.property "templateUrl", "templates/usersDialog/form.html"
 
-      it "opens a dialog for editing loaded resource", ->
-        expect(dialogSpy.called).to.be.true
-        expect(dialogSpy.calledWith("templates/usersDialog/form.html", {})).to.be.true
+  describe "mixin: `massUpdateMixin`", ->
 
-    describe "#createItem", ->
-      dialogSpy = null
+    it "is mixed", inject (massUpdateMixin) ->
+      expect(massUpdateMixin.called).to.be.true
 
-      beforeEach inject (editDialog) ->
-        dialogSpy = sinon.spy(editDialog, "open")
+    it "is mixed with valid arguments", inject (massUpdateMixin) ->
+      expect(massUpdateMixin.calledWith($scope)).to.be.true
 
-        $scope.createItem()
-
-      it "opens a dialog for editing an item", ->
-        expect(dialogSpy.called).to.be.true
-        expect(dialogSpy.calledWith("templates/usersDialog/form.html")).to.be.true
-
-    describe "#deleteItem", ->
-      user = null
-      beforeEach -> user = id: 123
-
-      it "opens the confirmation dialog", inject (confirmationDialog) ->
-        # Given
-        spy = sinon.spy(confirmationDialog, "open")
-
-        # When
-        $scope.deleteItem(123)
-
-        # Then
-        expect(spy.called).to.be.true
-
-      describe "when the dialog was confirmed", ->
-        beforeEach inject (confirmationDialog, $httpBackend) ->
-          sinon.stub(confirmationDialog, "open").returns(then: (fn) -> fn(true))
-          $httpBackend.expectDELETE("/api/users/#{user.id}").respond(id: 123)
-
-        it "deleates the user", inject ($httpBackend) ->
-          $scope.deleteItem(123)
-          $httpBackend.flush()
-
-        it "removes a row from the grid", inject ($httpBackend) ->
-          $scope.deleteItem(123)
-          $httpBackend.flush()
-
-          expect(usersGridStub.removeRow.called).to.be.true
-          expect(usersGridStub.removeRow.calledWith(123)).to.be.true
+      args = massUpdateMixin.getCall(0).args[1]
+      expect(args).to.have.property "templateUrl", "/templates/users/massUpdateForm.html"
+      expect(args).to.have.property "controller", "users.MassUpdateFormCtrl"
+      expect(args).to.have.property "gridName", "usersGrid"

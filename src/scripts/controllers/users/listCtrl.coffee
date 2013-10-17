@@ -1,33 +1,23 @@
 class ListCtrl
-  @$inject = ["$scope", "$location", "$filter", "confirmationDialog", "Users", "pathWithContext", "massUpdateDialog"]
-  constructor: ($scope, $location, @$filter, confirmationDialog, Users, pathWithContext, massUpdateDialog) ->
+  @$inject = ["$scope", "$filter", "Users", "massUpdateMixin", "singlePageCrudCtrlMixin"]
+  constructor: ($scope, @$filter, Users, massUpdateMixin, singlePageCrudCtrlMixin) ->
 
     $scope.gridOptions =
-      url: pathWithContext("/api/users")
+      path: "/api/users"
       colModel: @gridColumns()
       rowNum: 10
       sortname: "id"
       multiselect: true
 
-    $scope.showItem = (id) ->
-      $location.path("/users/#{id}")
+    singlePageCrudCtrlMixin $scope,
+      Resource: Users
+      resourcePath: "/users"
+      gridName: "usersGrid"
 
-    $scope.editItem = (id) ->
-      $location.path("/users/#{id}/edit")
-
-    $scope.deleteItem = (id) ->
-      confirmationDialog.open().then (confirmed) ->
-        return unless confirmed
-
-        promise = Users.delete(id: id).$promise
-        promise.then (response) ->
-          $scope.usersGrid.removeRow(response.id)
-
-    $scope.massUpdate = massUpdateDialog(
-      grid: -> $scope.usersGrid
-      templateUrl: -> "/templates/users/massUpdateForm.html"
-      controller: -> "users.MassUpdateFormCtrl"
-    )
+    massUpdateMixin $scope,
+      templateUrl: "/templates/users/massUpdateForm.html"
+      controller: "users.MassUpdateFormCtrl"
+      gridName: "usersGrid"
 
   gridColumns: ->
     showActionLink = (cellVal, options, rowdata) ->
