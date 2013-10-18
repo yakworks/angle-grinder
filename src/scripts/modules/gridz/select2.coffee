@@ -87,6 +87,7 @@ gridz.directive "agSelect2Open", ->
     $scope.openSelect2 = ->
       $select = $element.parent().find(".select2-container")
       $select.select2 "open"
+      return
   ]
   template: """
     <button class="btn open-select2" type="button" ng-click="openSelect2()">
