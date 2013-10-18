@@ -53,6 +53,8 @@ gridz.directive "agSearchForm", ["$log", ($log) ->
         if settings.type is "GET"
           $scope.$apply -> $scope.promise = true
 
+      return
+
     # Reset the search form and trigger grid reload
     $scope.resetSearch = (filters = {}) ->
       $scope.filters = filters

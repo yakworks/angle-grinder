@@ -35,8 +35,8 @@ module.exports = (config) ->
       "scripts/jqgrid/gridz.js"
 
       "scripts/modules/*.js"
-      "scripts/modules/forms/*.js"
-      "scripts/modules/gridz/*.js"
+      "scripts/modules/forms/**/*.js"
+      "scripts/modules/gridz/**/*.js"
 
       "scripts/application.js"
       "scripts/routes.js"
