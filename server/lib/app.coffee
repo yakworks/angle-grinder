@@ -50,8 +50,6 @@ app.get "/api/users/:id", (req, res) ->
 
 # CREATE
 app.post "/api/users", (req, res) ->
-  randomSleep()
-
   try
     row = data.create(req.body)
     res.send row
@@ -70,8 +68,6 @@ app.put "/api/users/massUpdate", (req, res) ->
 
 # UPDATE
 app.put "/api/users/:id", (req, res) ->
-  randomSleep()
-
   try
     row = data.update(req.params.id, req.body)
     res.send row
@@ -80,8 +76,6 @@ app.put "/api/users/:id", (req, res) ->
 
 # DELETE
 app.delete "/api/users/:id", (req, res) ->
-  randomSleep()
-
   if Math.random() > 0.5
     row = data.delete(req.params.id)
     res.send row
