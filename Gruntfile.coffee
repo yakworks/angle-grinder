@@ -149,7 +149,6 @@ module.exports = (grunt) ->
   grunt.renameTask "build:dist", "build"
 
   grunt.registerTask "test:watch", [
-    "coffee:test"
     "karma:watch"
   ]
 
