@@ -21,13 +21,14 @@ describe "controller: usersDialog.ListCtrl", ->
     it "assigns gridOptions", ->
       expect($scope.gridOptions).to.not.be.undefined
 
-      expect($scope.gridOptions.colModel.length).to.equal 6
+      expect($scope.gridOptions.colModel.length).to.equal 7
       expect($scope.gridOptions.colModel[0].name).to.equal "id"
       expect($scope.gridOptions.colModel[1].name).to.equal "login"
-      expect($scope.gridOptions.colModel[2].name).to.equal "name"
-      expect($scope.gridOptions.colModel[3].name).to.equal "allowance"
-      expect($scope.gridOptions.colModel[4].name).to.equal "birthday"
-      expect($scope.gridOptions.colModel[5].name).to.equal "paid"
+      expect($scope.gridOptions.colModel[2].name).to.equal "info.email"
+      expect($scope.gridOptions.colModel[3].name).to.equal "name"
+      expect($scope.gridOptions.colModel[4].name).to.equal "allowance"
+      expect($scope.gridOptions.colModel[5].name).to.equal "birthday"
+      expect($scope.gridOptions.colModel[6].name).to.equal "paid"
 
   describe "mixin: `dialogCrudCtrlMixin`", ->
 

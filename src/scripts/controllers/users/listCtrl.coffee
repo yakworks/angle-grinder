@@ -34,6 +34,9 @@ class ListCtrl
       label: "Login"
       formatter: showActionLink
     ,
+      name: "info.email"
+      label: "Email"
+    ,
       name: "name"
       label: "Name"
       formatter: showActionLink

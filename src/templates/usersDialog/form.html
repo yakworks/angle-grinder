@@ -15,7 +15,7 @@
 
       <div class="controls">
         <input type="text" name="name" placeholder="Enter Name"
-               ng-model="item.name" autofocus required />
+               ng-model="item.name" autofocus ng-required="true" />
         <ag-validation-errors for="name" required="This field is required" />
       </div>
     </div>
@@ -25,8 +25,18 @@
 
       <div class="controls">
         <input type="text" name="login" placeholder="Enter Login"
-               ng-model="item.login" autofocus required />
+               ng-model="item.login" autofocus ng-required="true" />
         <ag-validation-errors for="login" required="This field is required" />
+      </div>
+    </div>
+
+    <div ag-field-group for="infoEmail">
+      <label class="control-label">Email</label>
+
+      <div class="controls">
+        <input type="text" name="infoEmail" placeholder="Enter Email"
+               ng-model="item.info.email" autofocus ng-required="true" />
+        <ag-validation-errors for="infoEmail" required="This field is required" />
       </div>
     </div>
 

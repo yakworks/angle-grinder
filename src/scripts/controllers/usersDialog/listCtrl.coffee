@@ -32,6 +32,9 @@ class IndexCtrl
       label: "Login"
       formatter: "editActionLink"
     ,
+      name: "info.email"
+      label: "Email"
+    ,
       name: "name"
       label: "Name"
       formatter: "editActionLink"

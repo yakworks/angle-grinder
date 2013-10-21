@@ -9,9 +9,11 @@ class Data
     data = require("./large_load")
 
     for row, index in data
-      # generate row id and login
+      # generate row id, login and email
       row.id = @nextId()
       row.login = "login-#{index}"
+      row.info =
+        email: "#{row.login}@email.com"
 
       # parse date
       row.birthday = new Date(row.birthday)
@@ -80,49 +82,61 @@ class Data
 
   # Create a new row
   create: (row) ->
-    if @_validateLoginUniqueness(row)
-      row.id = @nextId()
+    @_validate(row)
 
-      # parse birthday
-      row.birthday = new Date(row.birthday) if row.birthday?
+    row.id = @nextId()
 
-      @data.push(row)
+    # parse birthday
+    row.birthday = new Date(row.birthday) if row.birthday?
 
-      row
-    else
-      error =
-        code: 422
-        status: "error"
-        message: "User save failed"
-        errors: user: login: "Property [login] of class [User] with value [#{row.login}] must be unique"
-      throw error
+    @data.push(row)
+
+    row
 
   # Update a row with the given id
   update: (id, data) ->
-    if @_validateLoginUniqueness(data)
-      row = @findById(id)
+    @_validate(row)
 
-      # assign all fields
-      for key, value of data
-        row[key] = value
+    row = @findById(id)
 
-      # parse birthday
-      row.birthday = new Date(row.birthday) if row.birthday?
+    # assign all fields
+    for key, value of data
+      row[key] = value
 
-      row
-    else
+    # parse birthday
+    row.birthday = new Date(row.birthday) if row.birthday?
+
+    row
+
+  _validate: (data) ->
+    invalidLogin = @_invalidLogin(data)
+    invalidEmail = @_invalidEmail(data)
+
+    if invalidLogin or invalidEmail
       error =
         code: 422
         status: "error"
         message: "User update failed"
-        errors: user: login: "Property [login] of class [User] with value [#{data.login}] must be unique"
+        errors: user: {}
+
+      error.errors.user.login = "Property [login] of class [User] with value [#{data.login}] must be unique" if invalidLogin
+      error.errors.user.info = email: "Property [email] of class [User] with value [#{data.info.email}] must be unique" if invalidEmail
+
       throw error
 
-  _validateLoginUniqueness: (data) ->
+    return true
+
+  _invalidLogin: (data) ->
     newRecord = data.id?
 
-    not _.find @data, (row) ->
+    _.find @data, (row) ->
       (not newRecord or row.id isnt data.id) and row.login is data.login
+
+  _invalidEmail: (data) ->
+    newRecord = data.id?
+
+    _.find @data, (row) ->
+      (not newRecord or row.id isnt data.id) and row.info.email is data.info.email
 
   # Delete a row with the given id
   delete: (id) ->
