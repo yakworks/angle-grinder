@@ -10,7 +10,7 @@
   <h2 class="page-header" ng-show="user.newRecord()">Create user</h2>
   <h2 class="page-header" ng-show="user.persisted()">Edit user</h2>
 
-  <form name="editForm" novalidate class="form-horizontal no-margin"
+  <form name="userForm" novalidate class="form-horizontal no-margin"
         ag-server-validation-errors
         ng-submit="save(user)">
 
@@ -34,7 +34,7 @@
       </div>
     </div>
 
-    <ng-form name="info">
+    <ng-form name="info" ag-server-validation-errors>
       <div ag-field-group for="email">
         <label class="control-label">Email</label>
         <div class="controls">
