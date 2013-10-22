@@ -16,7 +16,7 @@ describe "controller: users.FormCtrl", ->
 
   describe "#save", ->
     # Mark the form as valid
-    beforeEach -> $scope.editForm = $valid: true
+    beforeEach -> $scope.userForm = $valid: true
 
     describe "on success", ->
       recordSpy = null
@@ -34,7 +34,7 @@ describe "controller: users.FormCtrl", ->
 
       it "redirects to the show page", ->
         expect(locationStub.called).to.be.true
-        expect(locationStub.calledWith("/users/123")).to.be.true
+        expect(locationStub.calledWith("/examples/users/123")).to.be.true
 
     describe "onError", ->
       recordSpy = null
@@ -54,7 +54,7 @@ describe "controller: users.FormCtrl", ->
         expect(recordSpy.called).to.be.true
 
       it "sets server side validation errors", ->
-        expect($scope.editForm.$serverError.login).to.equal "has to be unique"
+        expect($scope.userForm.$serverError.login).to.equal "has to be unique"
 
   describe "#delete", ->
 

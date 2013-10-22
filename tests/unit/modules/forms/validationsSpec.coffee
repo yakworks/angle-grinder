@@ -325,3 +325,86 @@ describe "module: angleGrinder.forms validations", ->
 
         itHidesServerSideErrors()
         itMarksFieldsAsValid()
+
+  describe "service: serverValidationErrorsHandler", ->
+
+    it "is defined", inject (serverValidationErrorsHandler) ->
+      expect(serverValidationErrorsHandler).to.not.be.undefined
+
+    describe "when the server response contain validtion errors", ->
+
+      it "sets validation errors on the form", inject (serverValidationErrorsHandler) ->
+        # Given
+        response =
+          status: 422
+          data:
+            errors: user: login: "is required"
+
+        form = {}
+
+        # When
+        serverValidationErrorsHandler(form, response, "user")
+
+        # Then
+        expect(form.$serverError).to.not.be.undefined
+        expect(form.$serverError).to.have.property "login", "is required"
+
+      it "sets validation errors on multiple fields", inject (serverValidationErrorsHandler) ->
+        # Given
+        response =
+          status: 422
+          data:
+            errors: user:
+              login: "is required"
+              email: "is not an email address"
+
+        form = {}
+
+        # When
+        serverValidationErrorsHandler(form, response, "user")
+
+        # Then
+        expect(form.$serverError).to.not.be.undefined
+        expect(form.$serverError).to.have.property "login", "is required"
+        expect(form.$serverError).to.have.property "email", "is not an email address"
+
+        describe "when the response contains nested validation errors", ->
+
+          it "sets validation errors on nested fields", inject (serverValidationErrorsHandler) ->
+            # Given
+            response =
+              status: 422
+              data: errors:
+                entity:
+                  login: "is required"
+                  contact: email: "is not an email address"
+                  org: info: number: "is not unique"
+                  other: name: "should be skipped"
+
+            form =
+              contact: {}
+              org: info: {}
+
+            # When
+            serverValidationErrorsHandler(form, response, "entity")
+
+            # Then
+            expect(form.$serverError).to.not.be.undefined
+            expect(form.$serverError).to.have.property "login", "is required"
+            expect(form.contact.$serverError).to.have.property "email", "is not an email address"
+            expect(form.org.info.$serverError).to.have.property "number", "is not unique"
+
+            expect(form.other?.$serverError).to.not.be.defined
+
+    describe "when the server response does not contain validation errors", ->
+
+      it "does nothing", inject (serverValidationErrorsHandler) ->
+        # Given
+        response = status: 500
+        form = "do not touch me"
+
+        # When
+        serverValidationErrorsHandler(form, response, "user")
+
+        # Then
+        expect(form).to.equal "do not touch me"
