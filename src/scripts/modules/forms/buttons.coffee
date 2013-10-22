@@ -80,7 +80,17 @@ forms.directive "agSubmitButton", ->
   require: "^form"
 
   link: (scope, element, attrs, form) ->
-    scope.submit = -> form.$submitted = true
+    scope.submit = ->
+      FormCtrl = form.constructor
+
+      markAsSubmitted = (form) ->
+        form.$submitted = true
+
+        # iterate through  all nested forms and mark them as submitted
+        nestedForms = _.filter(_.values(form), (input) -> input instanceof FormCtrl)
+        markAsSubmitted nested for nested in nestedForms
+
+      markAsSubmitted form
 
   controller: ["$scope", "pendingRequests", ($scope, pendingRequests) ->
     # disable the button if POST, PUT or PATCH request is in progress
