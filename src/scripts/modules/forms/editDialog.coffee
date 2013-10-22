@@ -1,8 +1,8 @@
 forms = angular.module("angleGrinder.forms")
 
 class FormDialogCtrl
-  @$inject = ["$scope", "$rootScope", "$log", "dialog", "item", "gridCtrl"]
-  constructor: ($scope, $rootScope, $log, dialog, item, gridCtrl) ->
+  @$inject = ["$scope", "$rootScope", "$log", "dialog", "serverValidationErrorsHandler", "item", "gridCtrl"]
+  constructor: ($scope, $rootScope, $log, dialog, serverValidationErrorsHandler, item, gridCtrl) ->
     $scope.item = item
     $scope.createNew = not item.persisted()
 
@@ -25,11 +25,7 @@ class FormDialogCtrl
 
       onError = (response) ->
         $log.error "Something went wront", response
-
-        if response.status is 422
-          errors = response.data?.errors?[item.resourceName()]
-          $scope.editForm.$serverError = errors
-          $log.error "Server side validation errors", errors
+        serverValidationErrorsHandler($scope.editForm, response, item.resourceName())
 
       item.save success: onSuccess, error: onError
 

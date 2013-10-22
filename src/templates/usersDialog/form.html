@@ -30,15 +30,17 @@
       </div>
     </div>
 
-    <div ag-field-group for="infoEmail">
-      <label class="control-label">Email</label>
-
-      <div class="controls">
-        <input type="text" name="infoEmail" placeholder="Enter Email"
-               ng-model="item.info.email" autofocus ng-required="true" />
-        <ag-validation-errors for="infoEmail" required="This field is required" />
+    <ng-form name="info" ag-server-validation-errors>
+      <div ag-field-group for="email">
+        <label class="control-label">Email</label>
+        <div class="controls">
+          <input type="text" name="email" placeholder="Enter Email"
+                 ng-model="item.info.email"
+                 ng-required="true" />
+          <ag-validation-errors for="email" required="This field is required" />
+        </div>
       </div>
-    </div>
+    </ng-form>
 
     <div ag-field-group for="allowance">
       <label class="control-label">Allowance</label>

@@ -109,22 +109,29 @@ class Data
     row
 
   _validate: (data) ->
+    invalidName = @_invalidName(data)
     invalidLogin = @_invalidLogin(data)
     invalidEmail = @_invalidEmail(data)
 
-    if invalidLogin or invalidEmail
+    if invalidName or invalidLogin or invalidEmail
+      userErrors = {}
+      userErrors.name = "Name should have at least 6 characters" if invalidName
+      userErrors.login = "Property [login] of class [User] with value [#{data.login}] must be unique" if invalidLogin
+      userErrors.info = email: "Property [email] of class [User] with value [#{data.info.email}] must be unique" if invalidEmail
+
       error =
         code: 422
         status: "error"
         message: "User update failed"
-        errors: user: {}
-
-      error.errors.user.login = "Property [login] of class [User] with value [#{data.login}] must be unique" if invalidLogin
-      error.errors.user.info = email: "Property [email] of class [User] with value [#{data.info.email}] must be unique" if invalidEmail
+        errors: user: userErrors
 
       throw error
 
     return true
+
+  _invalidName: (data) ->
+    return false unless data.name?
+    data.name.length < 6
 
   _invalidLogin: (data) ->
     newRecord = data.id?

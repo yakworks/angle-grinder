@@ -148,11 +148,35 @@ forms.directive "agServerValidationErrors", ->
       angular.forEach serverError, (_, fieldName) ->
 
         # Register change listener for those fields
-        initial = true
-        unregister = scope.$watch "#{formCtrl.$name}.#{fieldName}.$viewValue", ->
-          unless initial
+        unregister = scope.$watch "#{formCtrl.$name}.#{fieldName}.$viewValue", (oldVal, newVal) ->
+          if oldVal isnt newVal
             # Remove server side error for the field when its value was changed
             formCtrl.$serverError[fieldName] = null
             unregister()
 
-          initial = false
+forms.factory "serverValidationErrorsHandler", ["$log", ($log) ->
+  setErrors = (form, errors) ->
+    # cleanup previous errors
+    form.$serverError = {}
+
+    # iterate through all server side validation errors
+    for key, error of errors
+
+      # ..set errors on the nested form
+      if typeof error is "object" and form[key]?
+        setErrors form[key], error
+
+      # ..set an error for the current form
+      if typeof error is "string"
+        form.$serverError[key] = error
+
+  (form, response, resourceName) ->
+    # skip when the response does not contain validation errors
+    errors = response.data?.errors?[resourceName]
+    if response.status isnt 422 or not errors?
+      $log.warn "Response does not contain validation errors", response
+      return
+
+    # recursively set errors on the form
+    setErrors form, errors
+]
