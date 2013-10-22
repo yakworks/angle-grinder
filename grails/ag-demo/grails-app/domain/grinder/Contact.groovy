@@ -68,7 +68,7 @@ class Contact {
         birthday nullable: true
         comments nullable: true
 
-        email nullable: true
+        email nullable: true, unique: true
         phone nullable: true
 
         tagForReminders nullable: false

@@ -12,32 +12,67 @@
       ng-submit="save(item)">
     <div class="modal-body" ng-controller="user.FormCtrl">
 
-        <div ag-field-group for="contactFirstName,contactLastName">
-            <label class="control-label">${ag.label(code: "contact.name")}</label>
+        <ng-form name="contact" ag-server-validation-errors>
+            <div ag-field-group for="firstName,lastName,email">
+                <label class="control-label">${ag.label(code: "contact.name")}</label>
+                <div class="controls">
+                    <input type="text" placeholder="${ag.label(code: 'contact.firstName')}"
+                           name="firstName"
+                           ng-model="item.contact.firstName" required autofocus>
+                    <ag-validation-errors for="firstName" />
+                </div>
 
-            <div class="controls">
-                <input type="text" placeholder="${ag.label(code: 'contact.firstName')}"
-                       name="contactFirstName"
-                       ng-model="item.contact.firstName" required autofocus>
-                <ag-validation-errors for="contactFirstName" />
+                <div class="controls" style="margin-top:5px">
+                    <input type="text" placeholder="${ag.label(code: 'contact.lastName')}"
+                           name="lastName"
+                           ng-model="item.contact.lastName" />
+                    <ag-validation-errors for="lastName" />
+                </div>
+
+                <label class="control-label">${ag.label(code: "contact.email")}</label>
+                <div class="controls">
+                    <input type="email"
+                           name="email" ng-model="item.contact.email" />
+                    <ag-validation-errors for="email" />
+                </div>
             </div>
 
-            <div class="controls" style="margin-top:5px">
-                <input type="text" placeholder="${ag.label(code: 'contact.lastName')}"
-                       name="contactLastName"
-                       ng-model="item.contact.lastName" />
-                <ag-validation-errors for="contactLastName" />
-            </div>
-        </div>
-
-        <div ag-field-group for="contactEmail,login">
-            <label class="control-label">${ag.label(code: "contact.email")}</label>
-            <div class="controls">
-                <input type="email"
-                       name="contactEmail" ng-model="item.contact.email" />
-                <ag-validation-errors for="contactEmail" />
+            <div class="control-group">
+                <label class="control-label">${ag.label(code: "contact.type")}</label>
+                <div class="controls">
+                    <select ui-select2 name="type" ng-model="item.contact.type">
+                        <option value="ADMIN">admin</option>
+                        <option value="CUSTOMER">customer</option>
+                    </select>
+                    <ag-validation-errors for="type" />
+                </div>
             </div>
 
+            <div ag-field-group for="orgId">
+                <label class="control-label">${ag.label(code: "user.org")}</label>
+
+                <div class="controls">
+                    <select name="orgId" ui-select2
+                            ng-model="item.contact.org.id"
+                            ng-required="true">
+                        <option value="">-- chose org --</option>
+                        <option ng-repeat="org in orgs" value="{{org.id}}">{{org.name}}</option>
+                    </select>
+                    <ag-validation-errors for="orgId" />
+                </div>
+            </div>
+
+            <div class="control-group">
+                <div class="controls">
+                    <label class="checkbox">
+                        <g:checkBox name="tagForReminders" ng-model="item.contact.tagForReminders"/>
+                        ${ag.label(code: 'contact.tagForReminders')}
+                    </label>
+                </div>
+            </div>
+        </ng-form>
+
+        <div ag-field-group for="login">
             <label class="control-label">${ag.label(code: "user.login")}</label>
             <div class="controls">
                 <input type="text"
@@ -78,38 +113,6 @@
         </div>
 
         <div class="control-group">
-            <label class="control-label">${ag.label(code: "contact.type")}</label>
-            <div class="controls">
-                <select ui-select2 name="contactType" ng-model="item.contact.type">
-                    <option value="ADMIN">admin</option>
-                    <option value="CUSTOMER">customer</option>
-                </select>
-                <ag-validation-errors for="contactType" />
-            </div>
-        </div>
-
-        <div ag-field-group for="contactOrgId">
-            <label class="control-label">${ag.label(code: "user.org")}</label>
-
-            <div class="controls">
-                <select name="contactOrgId" ui-select2
-                        ng-model="item.contact.org.id"
-                        ng-required="true">
-                    <option value="">-- chose org --</option>
-                    <option ng-repeat="org in orgs" value="{{org.id}}">{{org.name}}</option>
-                </select>
-                <ag-validation-errors for="contactOrgId" />
-            </div>
-        </div>
-
-        <div class="control-group">
-            <div class="controls">
-                <label class="checkbox">
-                    <g:checkBox name="contactTagForReminders" ng-model="item.contact.tagForReminders"/>
-                    ${ag.label(code: 'contact.tagForReminders')}
-                </label>
-            </div>
-
             <div class="controls" ng-hide="item.newRecord()">
                 <label class="checkbox">
                     <g:checkBox name="inactive" ng-model="item.inactive"/>
