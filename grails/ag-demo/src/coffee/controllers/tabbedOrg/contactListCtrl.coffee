@@ -5,22 +5,14 @@ class ContactListCtrl
     # Create resource for the users (contacts)
     Users = resourceBuilder("/user")
 
-    $scope.$org = null
-    gridInitialized = false
-    $scope.$on "initContactsGrid", (event, org) =>
-      return if gridInitialized
-
-      $scope.$org = org
-      gridInitialized = true
-
-      $scope.gridOptions =
-        path: "/org/listUsers/#{org.id}.json"
-        colModel: @colModel()
-        multiselect: false # turn off multiselect
-        shrinkToFit: true # makes columns fit to width
-        autowidth: true
-        sortname: "login"
-        sortorder: "asc"
+    $scope.gridOptions =
+      path: "/org/listUsers/#{$scope.org.id}.json"
+      colModel: @colModel()
+      multiselect: false # turn off multiselect
+      shrinkToFit: true # makes columns fit to width
+      autowidth: true
+      sortname: "login"
+      sortorder: "asc"
 
     dialogCrudCtrlMixin $scope,
       Resource: Users

@@ -6,22 +6,14 @@ class NoteListCtrl
     # Create resource for users (contacts)
     Notes = resourceBuilder("/note")
 
-    $scope.$org = null
-    gridInitialized = false
-    $scope.$on "initNotesGrid", (event, org) =>
-      return if gridInitialized
-
-      $scope.$org = org
-      gridInitialized = true
-
-      $scope.gridOptions =
-        path: "/org/listNotes/#{org.id}.json"
-        colModel: @colModel()
-        multiselect: false # turn off multiselect
-        shrinkToFit: true # makes columns fit to width
-        autowidth: true
-        sortname: "name"
-        sortorder: "asc"
+    $scope.gridOptions =
+      path: "/org/listNotes/#{$scope.org.id}.json"
+      colModel: @colModel()
+      multiselect: false # turn off multiselect
+      shrinkToFit: true # makes columns fit to width
+      autowidth: true
+      sortname: "name"
+      sortorder: "asc"
 
     dialogCrudCtrlMixin $scope,
       Resource: Notes

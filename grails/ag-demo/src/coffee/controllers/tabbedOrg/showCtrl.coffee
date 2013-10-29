@@ -4,12 +4,6 @@ class ShowCtrl
   constructor: ($scope, alerts, org) ->
     $scope.org = org
 
-    # Trigger grid initialization for the given org contacts
-    $scope.initGrid = -> $scope.$broadcast "initContactsGrid", org
-
-    # Trigger notes grid initialization
-    $scope.initNotesGrid = -> $scope.$broadcast "initNotesGrid", org
-
     $scope.save = (org) ->
       return if $scope.editForm.$invalid
 

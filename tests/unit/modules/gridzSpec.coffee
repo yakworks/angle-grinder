@@ -13,6 +13,8 @@ describe "module: angleGrinder.gridz", ->
         label: "Inv No"
         search: true
       ]
+      # stub element visibility checker
+      visibilityChecker: (element) -> true
 
     beforeEach inject ($rootScope) ->
       # create a spy on the gridz plugin

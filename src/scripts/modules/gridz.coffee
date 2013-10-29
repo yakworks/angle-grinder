@@ -63,7 +63,17 @@ gridz.directive "agGrid", [
           id = $(this).parents("tr:first").attr("id")
           handleAction("editItem" ,id)
 
-      scope.$watch attrs.agGrid, initializeGrid
+      # Will check if the grid element is visible
+      # (used for creating a stub in the tests)
+      visibilityChecker = scope[attrs.agGrid].visibilityChecker or (element) -> element.is(":visible")
+
+      # Initialize the grid when the element is visible
+      unregister = scope.$watch ->
+        if visibilityChecker(element)
+          # initialize the grid on the visible element
+          initializeGrid(scope[attrs.agGrid])
+          # unregister the watcher to free resources
+          unregister()
 
     restrict: "A"
 
