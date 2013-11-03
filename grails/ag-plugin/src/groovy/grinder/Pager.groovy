@@ -7,9 +7,13 @@ import org.apache.commons.logging.*
  */
 class Pager {
     private Log log = LogFactory.getLog(getClass())
+    //the page we are on
     Integer page = 1
+    //max rows to show
     Integer max = 10
+    //the max rows the user can set it to
     Integer allowedMax = 100
+    //the total record count. This is used to calculate the number of pages
     Integer recordCount = 0
     Integer offset
     List data

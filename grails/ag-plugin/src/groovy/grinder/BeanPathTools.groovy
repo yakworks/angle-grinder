@@ -70,7 +70,7 @@ class BeanPathTools {
         propList.each { key ->
             propsToMap(obj, key, rowMap)
         }
-        println rowMap
+        if(log.debugEnabled) log.debug rowMap
         return rowMap
 
     }
@@ -81,7 +81,7 @@ class BeanPathTools {
         //no idex then its just a property or its the *
         if (nestedIndex == -1) {
             if (propertyPath == '*') {
-                log.debug("obj:$obj propertyPath:$propertyPath currentMap:$currentMap" )
+                if(log.debugEnabled) log.debug("obj:$obj propertyPath:$propertyPath currentMap:$currentMap" )
                 //just get the persistentProperties
                 def pprops = obj.domainClass.persistentProperties
                 //filter out the associations. need to explicitely add those to be included
