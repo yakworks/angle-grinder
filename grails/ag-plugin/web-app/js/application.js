@@ -25,7 +25,7 @@ app.config([
   }
 ]);
 
-// Intercepts all HTTP errors and dislays a flash message
+// Intercepts all HTTP errors and displays a flash message
 app.factory("httpErrorsInterceptor", [
   "$injector", "$q", "alerts", function($injector, $q, alerts) {
     return function(promise) {
