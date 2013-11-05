@@ -94,4 +94,6 @@ module.exports = (config) ->
       "karma-coverage"
 
       "karma-phantomjs-launcher"
+      "karma-chrome-launcher"
+      "karma-firefox-launcher"
     ]
