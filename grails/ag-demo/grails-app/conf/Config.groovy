@@ -111,3 +111,10 @@ grails {
         }
     }
 }
+
+"coffeescript-compiler" {
+    appSource {
+        coffeeSourcePath = "src/coffee"
+        jsOutputPath = "web-app/js/app"
+    }
+}
