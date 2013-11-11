@@ -21,7 +21,7 @@ describe "module: angleGrinder.gridz", ->
     prepareDirective = (template) ->
       beforeEach inject ($injector) ->
         {element, $scope} = compileTemplate(template, $injector, $scope)
-        $directiveScope = element.scope()
+        $directiveScope = element.scope().$$childHead
 
     describe "basic example", ->
       prepareDirective """
@@ -46,11 +46,9 @@ describe "module: angleGrinder.gridz", ->
         it "has default options for select2", ->
           options = $directiveScope.options
 
-          expect(options.minimumInputLength).to.not.be.undefined
-          expect(options.minimumInputLength).to.equal 1
-
-          expect(options.width).to.not.be.undefined
-          expect(options.width).to.equal "resolve"
+          expect(options).to.not.be.undefined
+          expect(options).to.have.property "minimumInputLength", 1
+          expect(options).to.have.property "width", "resolve"
 
         describe "default `formatResult` method", ->
           formatResult = null

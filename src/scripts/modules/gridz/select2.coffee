@@ -5,8 +5,8 @@ gridz = angular.module("angleGrinder.gridz")
 #   `select-options` takes select2 options from the controller
 #   `ng-model` takes a model
 gridz.directive "agSelect2", [
-  "$rootScope", "$compile", "pathWithContext",
-  ($rootScope, $compile, pathWithContext) ->
+  "$rootScope", "$compile", "$log", "pathWithContext",
+  ($rootScope, $compile, $log, pathWithContext) ->
     restrict: "E"
     replace: true
     transclude: true
@@ -34,8 +34,6 @@ gridz.directive "agSelect2", [
         options.minimumInputLength ?= 1
         if attrs.selectMinimumInputLength?
           options.minimumInputLength = parseInt(attrs.selectMinimumInputLength)
-
-        # set the default `minimumInputLength`
 
         # set the default `width
         options.width ?= "resolve"
@@ -70,6 +68,8 @@ gridz.directive "agSelect2", [
 
         # create default `formatSelection` method
         options.formatSelection ?= (item) -> item.name
+
+        $log.info "Initializing the Select2 component", scope.options
 
     template: """
       <div>
