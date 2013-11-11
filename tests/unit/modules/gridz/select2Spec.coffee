@@ -21,6 +21,7 @@ describe "module: angleGrinder.gridz", ->
     prepareDirective = (template) ->
       beforeEach inject ($injector) ->
         {element, $scope} = compileTemplate(template, $injector, $scope)
+        # TODO workaround, see https://github.com/angular/angular.js/issues/4763
         $directiveScope = element.scope().$$childHead
 
     describe "basic example", ->
