@@ -77,13 +77,14 @@ describe "module: angleGrinder.gridz", ->
             expect(formatSelection(name: "foo")).to.equal "foo"
 
         it "isolates the scope", ->
-          expect(isolatedScope).not.to.equal $scope
+          expect(isolatedScope.$id).not.to.equal $scope.$id
           expect(isolatedScope.foo).not.to.equal "bar"
 
         it "takes the select2 options from the parent scope", ->
-          expect(isolatedScope.options).to.not.be.undefined
-          expect(isolatedScope.options.foo).to.not.be.undefined
-          expect(isolatedScope.options.foo).to.equal "bar"
+          options = isolatedScope.options
+
+          expect(options).to.not.be.undefined
+          expect(options).to.have.property "foo", "bar"
 
         it "takes a model from the parent scope", ->
           $scope.$apply -> $scope.search = organization: "the org name"
