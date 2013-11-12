@@ -1,146 +1,98 @@
 require("jasmine-only")
-fs = require("fs")
 
-takeScreenshot = (fileName = "screenshot-#{new Date()}") ->
-  browser.takeScreenshot().then (screenshot) ->
-    fs.writeFileSync("#{fileName}.png", screenshot, "base64")
+utils = require("./helpers/utils")
+GridExamplePage = require("./helpers/page_objects/grid_example_page")
 
 describe "Basic Grid", ->
 
-  grid = null
+  page = null
 
   beforeEach ->
     browser.get "/"
+    page = new GridExamplePage()
 
-    # Click `Examples`
-    navbarTop = browser.findElement(protractor.By.css(".navbar-fixed-top"))
-    navbarTop.findElement(protractor.By.linkText("Examples")).click()
-
-    # Click `Grid example`
-    sidebar = browser.findElement(protractor.By.css(".bs-docs-sidebar"))
-    sidebar.findElement(protractor.By.linkText("Grid example")).click()
-
-    grid = browser.findElement(protractor.By.css("div[ag-grid-name='grid']"))
+    # navigate to the basic grid example
+    page.navbarTop.examples.click()
+    page.sidebar.gridExample.click()
 
   it "navigates to the correct page", ->
-    expect(browser.getCurrentUrl()).toMatch /gridExample/
-    expect(browser.getTitle()).toEqual "Angle Grinder - Bootstrap and Grid"
-    expect(browser.findElement(protractor.By.css("section.content h2")).getText()).toEqual "Grid example"
+    expect(page.getCurrentUrl()).toMatch /\/examples\/gridExample$/
+    expect(page.getTitle()).toEqual "Angle Grinder - Bootstrap and Grid"
+    expect(page.heading.getText()).toEqual "Grid example"
 
   it "displays the grid", ->
-    expect(grid.isDisplayed()).toBeTruthy()
+    expect(page.grid.isDisplayed()).toBeTruthy()
 
-    rows = grid.findElements(protractor.By.css("tbody tr.jqgrow"))
-    rows.then (arr) ->
-      expect(arr.length).toEqual 20
+    # should display 20 rows in the grid
+    gridRows = page.grid.rows
+    gridRows.then (arr) -> expect(arr.length).toEqual 20
 
   describe "click on `Add new record`", ->
-    modal = null
     form = null
 
     beforeEach ->
-      navbarGrid = browser.findElement(protractor.By.css(".navbar-grid"))
-      navbarGrid.findElement(protractor.By.linkText("Add new record")).click()
-
-      modal = browser.findElement(protractor.By.css(".modal"))
-      form = modal.findElement(protractor.By.css("form[name='editForm']"))
+      page.gridNavbar.createButton.click()
+      form = page.modalForm.form
 
     it "displays create item dialog", ->
-      expect(modal.isDisplayed()).toBeTruthy()
-
-      modalHeader = modal.findElement(protractor.By.css(".modal-header h3"))
-      expect(modalHeader.getText()).toEqual "Create New Item"
-
-      expect(form.isDisplayed()).toBeTruthy()
+      expect(page.modalForm.isDisplayed()).toBeTruthy()
+      expect(page.modalForm.header.getText()).toEqual "Create New Item"
 
     describe "do not fill and submit the form", ->
+      beforeEach -> page.modalForm.submit()
 
       it "displays validation errors", ->
-        # sumit the form
-        form.findElement(protractor.By.css("button[type=submit]")).click()
+        # has errors on the name
+        customerName = page.modalForm.findField("item.customer.name")
+        expect(customerName.hasError()).toBeTruthy()
+        expect(customerName.error.getText()).toEqual "This field is required"
 
-        # has errors on name
-        controlGroup = form.findElement(protractor.By.css("div.control-group[for='customerName']"))
-        customerNameField = controlGroup.findElement(protractor.By.model("item.customer.name"))
-        customerNameField.getAttribute("class").then (cls) ->
-          expect(cls.split(" ")).toContain "ng-invalid"
+        # has errors on the passwords
+        password = page.modalForm.findField("item.password")
+        expect(password.hasError()).toBeTruthy()
+        expect(password.error.getText()).toEqual "This field is required"
 
-        errorMsg = controlGroup.findElement(protractor.By.css("ag-validation-errors[for='customerName']"))
-        expect(errorMsg.getText()).toEqual "This field is required"
+        password.setValue "123"
+        expect(password.error.getText()).toEqual "Password must be at least 6 characters"
 
-        # has errors on passwords
-        controlGroup = form.findElement(protractor.By.css("div.control-group[for='password,passwordConfirmation']"))
+        # has errors on the password confirmation
+        passwordConf = page.modalForm.findField("item.passwordConfirmation")
+        expect(passwordConf.hasError()).toBeTruthy()
+        expect(passwordConf.error.getText()).toEqual "This field is required"
 
-        passwordField = controlGroup.findElement(protractor.By.model("item.password"))
-        passwordField.getAttribute("class").then (cls) ->
-          expect(cls.split(" ")).toContain "ng-invalid"
-
-        errorMsg = controlGroup.findElement(protractor.By.css("ag-validation-errors[for='password']"))
-        expect(errorMsg.getText()).toEqual "This field is required"
-
-        passwordField.sendKeys "123"
-        errorMsg = controlGroup.findElement(protractor.By.css("ag-validation-errors[for='password']"))
-        expect(errorMsg.getText()).toEqual "Password must be at least 6 characters"
-
-        passwordConfirmationField = controlGroup.findElement(protractor.By.model("item.passwordConfirmation"))
-        passwordConfirmationField.getAttribute("class").then (cls) ->
-          expect(cls.split(" ")).toContain "ng-invalid"
-
-        errorMsg = controlGroup.findElement(protractor.By.css("ag-validation-errors[for='passwordConfirmation']"))
-        expect(errorMsg.getText()).toEqual "This field is required"
-
-        passwordConfirmationField.sendKeys "123456"
-        errorMsg = controlGroup.findElement(protractor.By.css("ag-validation-errors[for='passwordConfirmation']"))
-        expect(errorMsg.getText()).toEqual "The password does not match the confirmation"
+        passwordConf.setValue "123456"
+        expect(passwordConf.error.getText()).toEqual "The password does not match the confirmation"
 
     describe "fill in and submit the form", ->
+      beforeEach ->
+        page.modalForm.setFieldValue "item.customer.name", "New Customer Name"
+        page.modalForm.setFieldValue "item.password", "password"
+        page.modalForm.setFieldValue "item.passwordConfirmation", "password"
+        page.modalForm.submit()
 
       it "creates a new record", ->
-        customerNameField = form.findElement(protractor.By.model("item.customer.name"))
-        customerNameField.sendKeys "New Customer Name"
-
-        passwordField = form.findElement(protractor.By.model("item.password"))
-        passwordField.sendKeys "password"
-
-        passwordConfirmationField = form.findElement(protractor.By.model("item.passwordConfirmation"))
-        passwordConfirmationField.sendKeys "password"
-
-        # sumit the form
-        form.findElement(protractor.By.css("button[type=submit]")).click()
-
-        # should add a new row on the top
-        firstRow = grid.findElement(protractor.By.css("tbody tr.jqgrow:nth-child(2)"))
-        expect(firstRow.findElement(protractor.By.css("td[aria-describedby='grid_customer.name']")).getText())
-          .toEqual "New Customer Name"
+        # should add a new row on the top of the grid
+        firstRow = page.grid.firstRow()
+        expect(firstRow.cellByName("customer.name").getText()).toEqual "New Customer Name"
 
   describe "grid row popover", ->
     popover = null
 
     beforeEach ->
       # open the popover
-      firstRow = grid.findElement(protractor.By.css("tbody tr.jqgrow:nth-child(2)"))
-      firstRow.findElement(protractor.By.css("td[aria-describedby='grid_row_action_col'] a.jqg-row-action")).click()
-
-      # click edit button
-      popover = browser.findElement(protractor.By.css(".row-action-popover"))
+      firstRow = page.grid.firstRow()
+      popover = firstRow.showPopover()
 
     describe "click on `edit` row", ->
-      modal = null
       form = null
 
       beforeEach ->
-        popover.findElement(protractor.By.linkText("edit")).click()
-
-        modal = browser.findElement(protractor.By.css(".modal"))
-        form = modal.findElement(protractor.By.css("form[name='editForm']"))
+        popover.editButton.click()
+        form = page.modalForm.form
 
       it "displays edit item dialog", ->
-        expect(modal.isDisplayed()).toBeTruthy()
-
-        modalHeader = modal.findElement(protractor.By.css(".modal-header h3"))
-        expect(modalHeader.getText()).toEqual "Edit Item Test Customer 1"
-
-        expect(form.isDisplayed()).toBeTruthy()
+        expect(page.modalForm.isDisplayed()).toBeTruthy()
+        expect(page.modalForm.header.getText()).toEqual "Edit Item Test Customer 1"
 
         customerNameField = form.findElement(protractor.By.model("item.customer.name"))
         expect(customerNameField.getAttribute("value")).toEqual "Test Customer 1"
@@ -151,55 +103,44 @@ describe "Basic Grid", ->
       describe "update customer name and submit the form", ->
 
         it "updates the row", ->
-          customerNameField = form.findElement(protractor.By.model("item.customer.name"))
-          customerNameField.clear()
-          customerNameField.sendKeys "Updated Customer Name"
-
-          # sumit the form
-          form.findElement(protractor.By.css("button[type=submit]")).click()
+          page.modalForm.setFieldValue "item.customer.name", "Updated Customer Name"
+          page.modalForm.submit()
 
           # should add a new row on the top
-          firstRow = grid.findElement(protractor.By.css("tbody tr.jqgrow:nth-child(2)"))
-          expect(firstRow.findElement(protractor.By.css("td[aria-describedby='grid_id']")).getText())
-            .toEqual "1"
-          expect(firstRow.findElement(protractor.By.css("td[aria-describedby='grid_customer.name']")).getText())
-            .toEqual "Updated Customer Name"
+          firstRow = page.grid.firstRow()
+          expect(firstRow.cellByName("id").getText()).toEqual "1"
+          expect(firstRow.cellByName("customer.name").getText()).toEqual "Updated Customer Name"
 
       describe "click `delete` button inside the modal dialog", ->
 
         it "deletes the row", ->
-          button = form.findElement(protractor.By.css("button.ag-delete-button"))
+          deleteButton = page.modalForm.deleteButton
 
-          expect(button.getText()).toEqual "Delete"
-          button.click()
+          expect(deleteButton.getText()).toEqual "Delete"
+          deleteButton.click()
 
-          expect(button.getText()).toEqual "Are you sure?"
-          button.click()
+          expect(deleteButton.getText()).toEqual "Are you sure?"
+          deleteButton.click()
 
           # wait until row for witem with id=1 disappears
           browser.wait ->
-            grid.findElements(protractor.By.id("1")).then (arr) -> arr.length is 0
+            page.grid.findElements(protractor.By.id("1")).then (arr) -> arr.length is 0
 
           # should delete the first row
-          firstRow = grid.findElement(protractor.By.css("tbody tr.jqgrow:nth-child(2)"))
-          expect(firstRow.findElement(protractor.By.css("td[aria-describedby='grid_id']")).getText())
-            .toEqual "2"
-          expect(firstRow.findElement(protractor.By.css("td[aria-describedby='grid_customer.name']")).getText())
-            .toEqual "Test Customer 2"
+          firstRow = page.grid.firstRow()
+          expect(firstRow.cellByName("id").getText()).toEqual "2"
+          expect(firstRow.cellByName("customer.name").getText()).toEqual "Test Customer 2"
 
     describe "click on `delete` row", ->
 
       it "deletes the row", ->
-        # click delete button
-        popover.findElement(protractor.By.linkText("delete")).click()
+        popover.deleteButton.click()
 
         # wait until row for witem with id=1 disappears
         browser.wait ->
-          grid.findElements(protractor.By.id("1")).then (arr) -> arr.length is 0
+          page.grid.findElements(protractor.By.id("1")).then (arr) -> arr.length is 0
 
         # should delete the first row
-        firstRow = grid.findElement(protractor.By.css("tbody tr.jqgrow:nth-child(2)"))
-        expect(firstRow.findElement(protractor.By.css("td[aria-describedby='grid_id']")).getText())
-          .toEqual "2"
-        expect(firstRow.findElement(protractor.By.css("td[aria-describedby='grid_customer.name']")).getText())
-          .toEqual "Test Customer 2"
+        firstRow = page.grid.firstRow()
+        expect(firstRow.cellByName("id").getText()).toEqual "2"
+        expect(firstRow.cellByName("customer.name").getText()).toEqual "Test Customer 2"
