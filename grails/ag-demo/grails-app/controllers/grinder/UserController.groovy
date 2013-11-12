@@ -58,15 +58,13 @@ class UserController extends BaseDomainController {
             if (filters?.login)
                 ilike 'login', filters.login
 
-            def dateFormat = new SimpleDateFormat("yyyy-MM-dd")
-
             if (filters?.activeDate?.from) {
-                def from = dateFormat.parse(filters.activeDate.from)
+                def from = DateUtil.parseJsonDate(filters.activeDate.from)
                 gt 'activeDate', from
             }
 
             if (filters?.activeDate?.to) {
-                def to = dateFormat.parse(filters.activeDate.to)
+                def to = DateUtil.parseJsonDate(filters.activeDate.to)
                 lt 'activeDate', to
             }
 
