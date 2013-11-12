@@ -5,6 +5,7 @@
 # Ignore libraries
 node_modules
 components/bower
+selenium
 
 # Ignore dist package
 coverage
