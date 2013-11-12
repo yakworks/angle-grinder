@@ -18,7 +18,7 @@ module.exports = (grunt, appConfig) ->
     changeOrigin: false
   ]
 
-  e2e:
+  integration:
     options:
       port: 9001
       middleware: (connect) ->

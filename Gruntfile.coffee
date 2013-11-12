@@ -126,7 +126,7 @@ module.exports = (grunt) ->
     # run unit + integration tests
     "karma:unit"
 
-    "connect:e2e"
+    "connect:integration"
     "casperjs"
   ]
 
