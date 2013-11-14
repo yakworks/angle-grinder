@@ -45,7 +45,7 @@
     "grunt-gh-pages": "~0.8.0",
     "grunt-text-replace": "~0.3.8",
 
-    "protractor": "~0.12.0",
+    "protractor": "~0.12.1",
     "selenium-webdriver": "~2.35.2",
     "jasmine-only": "~0.1.0"
   },
