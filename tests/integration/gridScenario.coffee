@@ -84,21 +84,18 @@ describe "Basic Grid", ->
       popover = firstRow.showPopover()
 
     describe "click on `edit` row", ->
-      form = null
 
-      beforeEach ->
-        popover.editButton.click()
-        form = page.modalForm.form
+      beforeEach -> popover.editButton.click()
 
       it "displays edit item dialog", ->
         expect(page.modalForm.isDisplayed()).toBeTruthy()
         expect(page.modalForm.header.getText()).toEqual "Edit Item Test Customer 1"
 
-        customerNameField = form.findElement(protractor.By.model("item.customer.name"))
-        expect(customerNameField.getAttribute("value")).toEqual "Test Customer 1"
+        customeName = page.modalForm.findField("item.customer.name")
+        expect(customeName.getValue()).toEqual "Test Customer 1"
 
-        noteField = form.findElement(protractor.By.model("item.note"))
-        expect(noteField.getAttribute("value")).toEqual "Note number 1"
+        noteField = page.modalForm.findField("item.note")
+        expect(noteField.getValue()).toEqual "Note number 1"
 
       describe "update customer name and submit the form", ->
 
@@ -122,9 +119,9 @@ describe "Basic Grid", ->
           expect(deleteButton.getText()).toEqual "Are you sure?"
           deleteButton.click()
 
-          # wait until row for witem with id=1 disappears
-          browser.wait ->
-            page.grid.findElements(protractor.By.id("1")).then (arr) -> arr.length is 0
+          # wait until the first row disappears
+          deletedRow = page.grid.firstRow()
+          deletedRow.waitUntilFadeOut()
 
           # should delete the first row
           firstRow = page.grid.firstRow()
@@ -136,9 +133,9 @@ describe "Basic Grid", ->
       it "deletes the row", ->
         popover.deleteButton.click()
 
-        # wait until row for witem with id=1 disappears
-        browser.wait ->
-          page.grid.findElements(protractor.By.id("1")).then (arr) -> arr.length is 0
+        # wait until the first row disappears
+        deletedRow = page.grid.firstRow()
+        deletedRow.waitUntilFadeOut()
 
         # should delete the first row
         firstRow = page.grid.firstRow()
