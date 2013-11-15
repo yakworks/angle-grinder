@@ -3,7 +3,7 @@ require("jasmine-only")
 utils = require("./helpers/utils")
 GridExamplePage = require("./helpers/page_objects/grid_example_page")
 
-describe "Basic Grid", ->
+describe "Grid example scenario", ->
 
   page = null
 
@@ -28,11 +28,8 @@ describe "Basic Grid", ->
     gridRows.then (arr) -> expect(arr.length).toEqual 20
 
   describe "click on `Add new record`", ->
-    form = null
 
-    beforeEach ->
-      page.gridNavbar.createButton.click()
-      form = page.modalForm.form
+    beforeEach -> page.gridNavbar.createButton.click()
 
     it "displays create item dialog", ->
       expect(page.modalForm.isDisplayed()).toBeTruthy()
@@ -48,20 +45,20 @@ describe "Basic Grid", ->
         expect(customerName.error.getText()).toEqual "This field is required"
 
         # has errors on the passwords
-        password = page.modalForm.findField("item.password")
-        expect(password.hasError()).toBeTruthy()
-        expect(password.error.getText()).toEqual "This field is required"
+        passwd = page.modalForm.findField("item.password")
+        expect(passwd.hasError()).toBeTruthy()
+        expect(passwd.error.getText()).toEqual "This field is required"
 
-        password.setValue "123"
-        expect(password.error.getText()).toEqual "Password must be at least 6 characters"
+        passwd.setValue "123"
+        expect(passwd.error.getText()).toEqual "Password must be at least 6 characters"
 
         # has errors on the password confirmation
-        passwordConf = page.modalForm.findField("item.passwordConfirmation")
-        expect(passwordConf.hasError()).toBeTruthy()
-        expect(passwordConf.error.getText()).toEqual "This field is required"
+        passwdConfirmation = page.modalForm.findField("item.passwordConfirmation")
+        expect(passwdConfirmation.hasError()).toBeTruthy()
+        expect(passwdConfirmation.error.getText()).toEqual "This field is required"
 
-        passwordConf.setValue "123456"
-        expect(passwordConf.error.getText()).toEqual "The password does not match the confirmation"
+        passwdConfirmation.setValue "123456"
+        expect(passwdConfirmation.error.getText()).toEqual "The password does not match the confirmation"
 
     describe "fill in and submit the form", ->
       beforeEach ->
@@ -79,7 +76,7 @@ describe "Basic Grid", ->
     popover = null
 
     beforeEach ->
-      # open the popover
+      # open the popover for the first row
       firstRow = page.grid.firstRow()
       popover = firstRow.showPopover()
 
