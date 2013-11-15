@@ -8,7 +8,7 @@ class GridRowView extends PageObject
   # Retrieve cell element by col name
   # for example `customer.name`
   cellByName: (name) ->
-    @findElement @By.css("td[aria-describedby='grid_#{name}']")
+    @findElement @By.css("td[aria-describedby$='#{@grid.gridName}_#{name}']")
 
   @has "popoverButton", ->
     @findElement @By.css("td[aria-describedby='grid_row_action_col'] a.jqg-row-action")
@@ -30,6 +30,8 @@ class GridRowView extends PageObject
 
 class GridView extends PageObject
 
+  constructor: (@element, @gridName) ->
+
   @has "rows", ->
     @findElements @By.css("tbody tr.jqgrow")
 
@@ -37,7 +39,7 @@ class GridView extends PageObject
   # Indexing starts with 0.
   nthRow: (index = 0) ->
     element = @findElement @By.css("tbody tr.jqgrow:nth-child(#{index + 2})")
-    new GridRowView(element, @element)
+    new GridRowView(element, this)
 
   # Retrieve the first row from the grid.
   firstRow: -> @nthRow(0)

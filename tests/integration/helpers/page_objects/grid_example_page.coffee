@@ -25,7 +25,7 @@ class GridExamplePage extends PageObject
 
   @has "grid", ->
     element = @findElement @By.css("div[ag-grid-name='grid']")
-    new GridView(element)
+    new GridView(element, "grid")
 
   @has "modalForm", ->
     element = @findElement @By.css(".modal")

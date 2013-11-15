@@ -16,7 +16,6 @@ class PageObject
   # * By.input
   # * By.repeater
   # * By.className
-  # * By.class name
   # * By.css
   # * By.id
   # * By.js

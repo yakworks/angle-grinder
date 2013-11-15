@@ -19,3 +19,6 @@ exports.config =
   jasmineNodeOpts:
     # default time to wait in ms before a test fails
     defaultTimeoutInterval: 10000
+
+    includeStackTrace: true
+    isVerbose: false
