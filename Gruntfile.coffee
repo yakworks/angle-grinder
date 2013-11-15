@@ -110,26 +110,6 @@ module.exports = (grunt) ->
     "test:unit:coverage"
   ]
 
-  # run casperjs integration tests
-  grunt.registerTask "test:casperjs", [
-    "build:dev"
-    "configureProxies"
-    "connect:integration"
-    "casper"
-  ]
-
-  # run all tests on the ci server
-  grunt.registerTask "test:ci", [
-    "build:dev"
-    "ngtemplates"
-
-    # run unit + integration tests
-    "karma:unit"
-
-    "connect:integration"
-    "casperjs"
-  ]
-
   grunt.registerTask "test", [
     "karma:unit"
   ]

@@ -1,7 +1,7 @@
 #!/bin/bash
 
-source ./bin/lib/server
-source ./bin/lib/selenium
+. ./bin/lib/server
+. ./bin/lib/selenium
 
 ./bin/xvfb start
 startServer
@@ -12,7 +12,7 @@ grunt configureProxies connect:integration watch &
 PID=$!
 
 function isRunning() {
-  nc -vz localhost 9001 &> /dev/null
+  nc -vz localhost 9000 &> /dev/null
 }
 
 echo -n "Waiting for the frontend server."
@@ -31,3 +31,6 @@ stopSelenium
 
 echo "Killing the frontend server PID=$PID"
 kill "$PID"
+
+echo "Done!"
+exit 0

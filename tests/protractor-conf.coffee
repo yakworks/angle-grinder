@@ -13,7 +13,7 @@ exports.config =
 
   # A base URL for your application under test. Calls to protractor.get()
   # with relative paths will be prepended with this.
-  baseUrl: "http://localhost:9001"
+  baseUrl: "http://localhost:9000"
 
   # options to be passed to Jasmine-node
   jasmineNodeOpts:
