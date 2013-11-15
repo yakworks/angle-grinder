@@ -54,8 +54,6 @@ module.exports = (grunt) ->
 
     # Plugin for Karma
     karma:          loadMoule "karma"
-    # Plugin for CasperJS
-    casperjs:       loadMoule "casperjs"
     # Custom plugin for generating jasmine html tests runner
     jasminehtml:    loadMoule "jasminehtml"
 

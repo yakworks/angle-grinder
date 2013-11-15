@@ -57,32 +57,6 @@ Install <span class="label label-info">foreman</span> ruby gem
 gem install foreman
 </pre>
 
-<h3 id="develop-install-phantomjs">Install PhantomsJS and CasperJS for integration testing</h3>
-
-<h4>Download and install PhantomJS</h4>
-
-<pre class="prettyprint lang-sh">
-wget https://phantomjs.googlecode.com/files/phantomjs-1.9.1-linux-x86_64.tar.bz2
-tar xvjf phantomjs-1.9.1-linux-x86_64.tar.bz2
-cd tar xvjf phantomjs-1.9.1-linux-x86_64
-ln -sf `pwd`/bin/phantomjs /usr/local/bin/phantomjs
-</pre>
-
-Detailed instructions about PhantomJS installation:
-<a href="http://phantomjs.org/build.html">http://phantomjs.org/build.html</a>
-
-<h4>Checkout and install CasperJS</h4>
-
-<pre class="prettyprint lang-sh">
-git clone git://github.com/n1k0/casperjs.git
-cd casperjs
-git checkout tags/1.0.2
-ln -sf `pwd`/bin/casperjs /usr/local/bin/casperjs
-</pre>
-
-Detailed instructions about CasperJS installation:
-<a href="http://casperjs.org/installation.html">http://casperjs.org/installation.html</a>
-
 <h3 id="develop-grunt-tasts">Grunt tasks</h3>
 
 The list of basic <a href="http://gruntjs.com/">grunt</a> tasks useful during the delopment:
