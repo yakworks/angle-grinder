@@ -4,7 +4,9 @@ describe "module: angleGrinder.gridz", ->
   describe "directive: agGrid", ->
     $scope = null
     element = null
+
     gridzSpy = null
+    isVisibleStub = null
 
     sampleGridOptions =
       data: []
@@ -13,18 +15,22 @@ describe "module: angleGrinder.gridz", ->
         label: "Inv No"
         search: true
       ]
-      # stub element visibility checker
-      visibilityChecker: (element) -> true
 
     beforeEach inject ($rootScope) ->
       # create a spy on the gridz plugin
       gridzSpy = sinon.spy($.fn, "gridz")
 
+      # create a stub for jQuery.is(":visible") method
+      isVisibleStub = sinon.stub(jQuery::, "is")
+      isVisibleStub.withArgs(":visible").returns(true)
+
       $scope = $rootScope.$new()
       $scope.gridOptions = sampleGridOptions
 
     afterEach ->
+      # restore stubs
       gridzSpy.restore()
+      isVisibleStub.restore()
 
     itPassesValidOptionsToTheGrid = ->
       it "passes valid options to the gridz plugin", ->

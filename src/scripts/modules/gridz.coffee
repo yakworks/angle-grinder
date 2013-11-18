@@ -10,8 +10,8 @@ gridz.directive "agGrid", [
       gridCtrl.registerGridElement(element.find("table.gridz"))
 
       # publish agGrid controller to the parent scope
-      alias = attrs.agGridName
-      scope[alias] = gridCtrl if alias?
+      gridName = attrs.agGridName
+      scope[gridName] = gridCtrl if gridName
 
       # Initializes a grid with the given options
       initializeGrid = (gridOptions) ->
@@ -63,17 +63,19 @@ gridz.directive "agGrid", [
           id = $(this).parents("tr:first").attr("id")
           handleAction("editItem" ,id)
 
-      # Will check if the grid element is visible
-      # (used for creating a stub in the tests)
-      visibilityChecker = scope[attrs.agGrid].visibilityChecker or (element) -> element.is(":visible")
+      if element.is(":visible")
+        # Element is visible, initialize the grid now
+        initializeGrid(scope[attrs.agGrid])
+      else
+        $log.info "grid is not visible:", gridName
 
-      # Initialize the grid when the element is visible
-      unregister = scope.$watch ->
-        if visibilityChecker(element)
-          # initialize the grid on the visible element
-          initializeGrid(scope[attrs.agGrid])
-          # unregister the watcher to free resources
-          unregister()
+        # Initialize the grid when the element will be visible
+        unregister = scope.$watch ->
+          if element.is(":visible")
+            # initialize the grid on the visible element
+            initializeGrid(scope[attrs.agGrid])
+            # unregister the watcher to free resources
+            unregister()
 
     restrict: "A"
 

@@ -7,6 +7,8 @@ forms.factory "focus", ["$rootScope", "$timeout", ($rootScope, $timeout) ->
 ]
 
 # Sets the focus on the element
+# TODO change it to `focus-if`
+# TODO see http://ruoyusun.com/2013/08/24/a-glimpse-of-angularjs-scope-via-example.html
 forms.directive "agFocus", ->
   restrict: "A"
 
