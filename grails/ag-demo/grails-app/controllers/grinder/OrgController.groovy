@@ -137,7 +137,7 @@ class OrgController extends BaseDomainController {
                 order(params.sort, params.order)
         }
 
-        def pagedList = pagedList(datalist)
+        def pagedList = pager.setupData(datalist, ["*", "contact.*"])
         render pagedList.jsonData as JSON
     }
 
