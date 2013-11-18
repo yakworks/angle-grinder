@@ -15,6 +15,10 @@ app.use express.logger()
 app.use express.bodyParser()
 app.use express.static(path.join(__dirname, "dist"))
 
+app.use (err, req, res, next) ->
+  console.error err.stack
+  res.send 500, "Something broke!"
+
 # sleep for 1,2,3 seconds
 randomSleep = (values = [1, 2, 3]) ->
   utils.sleep utils.randomItemFrom values
@@ -62,7 +66,7 @@ app.put "/api/users/massUpdate", (req, res) ->
     for id in req.body.ids
       data.update(id, req.body.data)
   catch error
-    console.log error
+    res.send error, 422
 
   res.send 200
 

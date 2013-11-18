@@ -95,7 +95,7 @@ class Data
 
   # Update a row with the given id
   update: (id, data) ->
-    @_validate(row)
+    @_validate(data)
 
     row = @findById(id)
 
@@ -143,7 +143,7 @@ class Data
     newRecord = data.id?
 
     _.find @data, (row) ->
-      (not newRecord or row.id isnt data.id) and row.info.email is data.info.email
+      (not newRecord or row.id isnt data.id) and row.info?.email is data.info?.email
 
   # Delete a row with the given id
   delete: (id) ->
