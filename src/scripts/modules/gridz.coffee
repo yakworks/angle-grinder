@@ -38,7 +38,9 @@ gridz.factory "actionPopupHandler", [
 ]
 
 gridz.directive "agGrid", [
-  "$log", "actionPopupHandler", "pathWithContext", ($log, actionPopupHandler, pathWithContext) ->
+  "$log", "$parse", "actionPopupHandler", "pathWithContext",
+  ($log, $parse, actionPopupHandler, pathWithContext) ->
+
     link = (scope, element, attrs, gridCtrl) ->
       # initialize the controller
       gridCtrl.registerGridElement(element.find("table.gridz"))
@@ -47,10 +49,13 @@ gridz.directive "agGrid", [
       gridName = attrs.agGridName
       scope[gridName] = gridCtrl if gridName
 
+      # read grid options
+      gridOptions = $parse(attrs.agGrid)(scope)
+      throw new Error("undefined grid options") unless gridOptions?
+
       # Initializes a grid with the given options
-      initializeGrid = (gridOptions) ->
-        return unless gridOptions?
-        $log.info "Initializing '#{gridName}'", gridOptions
+      initializeGrid = ->
+        $log.info "Initializing '#{gridName}' with", gridOptions
 
         # find grid placeholder
         $grid = element.find("table.gridz")
@@ -70,7 +75,7 @@ gridz.directive "agGrid", [
 
       if element.is(":visible")
         # Element is visible, initialize the grid now
-        initializeGrid(scope[attrs.agGrid])
+        initializeGrid()
       else
         $log.info "grid is not visible:", gridName
 
@@ -78,11 +83,15 @@ gridz.directive "agGrid", [
         unregister = scope.$watch ->
           if element.is(":visible")
             # initialize the grid on the visible element
-            initializeGrid(scope[attrs.agGrid])
+            initializeGrid()
+
             # unregister the watcher to free resources
             unregister()
 
     restrict: "A"
+
+    require: "agGrid"
+    controller: "AgGridCtrl"
 
     template: """
       <table class="gridz"></table>
@@ -90,15 +99,13 @@ gridz.directive "agGrid", [
     """
 
     compile: (element, attrs) ->
-      # generate grid id from the name or assign default value
+      # modify grid html element, generate grid id from the name or assign default value
       alias = attrs.agGridName or "gridz"
       element.find("table.gridz").attr("id", alias)
       element.find("div.gridz-pager").attr("id", "#{alias}-pager")
 
+      # return linking function which will be called at a later time
       post: link
-
-    require: "agGrid"
-    controller: "AgGridCtrl"
 ]
 
 # Takes a nested Javascript object and flatten it.
