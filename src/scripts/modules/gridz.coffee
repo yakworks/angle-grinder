@@ -3,8 +3,42 @@ gridz = angular.module("angleGrinder.gridz", [
   "ui.select2"
 ])
 
+gridz.factory "actionPopupHandler", [
+  "$log", ($log) ->
+
+    ($grid, scope) ->
+      # handles an action from the `actionPopup` menu
+      handleAction = (action, id) ->
+        if scope[action]?
+          $log.info "Trigger '#{action}' for row '#{id}'"
+          scope.$apply -> scope[action](id)
+        else
+          $log.warn("`$scope.#{action}` is not defined")
+
+      # handles click on show action insite the dropdown menu
+      $grid.on "showAction", (event, id) ->
+        event.preventDefault()
+        handleAction("showItem", id)
+
+      # handles click on edit action insite the dropdown menu
+      $grid.on "editAction", (event, id) ->
+        event.preventDefault()
+        handleAction("editItem", id)
+
+      # handles click on delete action inside the dropdown menu
+      $grid.on "deleteAction", (event, id) ->
+        event.preventDefault()
+        handleAction("deleteItem", id)
+
+      # handles click on the cell with `editActionLink` formatter
+      $grid.on "click", "a.editActionLink", (event) ->
+        event.preventDefault()
+        id = $(this).parents("tr:first").attr("id")
+        handleAction("editItem", id)
+]
+
 gridz.directive "agGrid", [
-  "$log", "pathWithContext", ($log, pathWithContext) ->
+  "$log", "actionPopupHandler", "pathWithContext", ($log, actionPopupHandler, pathWithContext) ->
     link = (scope, element, attrs, gridCtrl) ->
       # initialize the controller
       gridCtrl.registerGridElement(element.find("table.gridz"))
@@ -16,7 +50,7 @@ gridz.directive "agGrid", [
       # Initializes a grid with the given options
       initializeGrid = (gridOptions) ->
         return unless gridOptions?
-        $log.info "Initializing the grid", gridOptions
+        $log.info "Initializing '#{gridName}'", gridOptions
 
         # find grid placeholder
         $grid = element.find("table.gridz")
@@ -28,40 +62,11 @@ gridz.directive "agGrid", [
         # jqGrid suks at this point it expects `pager` to be an id
         gridOptions.pager = element.find(".gridz-pager").attr("id") or "gridz-pager"
 
-        # workaround for problem with initial grid size inside the hidden container
-        # see http://www.trirand.com/blog/?page_id=393/help/problem-with-autowidth/
-        gridOptions.gridComplete = ->
-          width = element.parent().width() - 1
-          $grid.setGridWidth(width)
-
+        # initialize jqGrid on the given element
         $grid.gridz(gridOptions)
 
-        handleAction = (action, id) ->
-          if scope[action]?
-            scope.$apply -> scope[action](id)
-          else
-            $log.warn("`$scope.#{action}` is not defined")
-
-        # handles click on show action insite the dropdown menu
-        $grid.on "showAction", (event, id) ->
-          event.preventDefault()
-          handleAction("showItem" ,id)
-
-        # handles click on edit action insite the dropdown menu
-        $grid.on "editAction", (event, id) ->
-          event.preventDefault()
-          handleAction("editItem" ,id)
-
-        # handles click on delete action inside the dropdown menu
-        $grid.on "deleteAction", (event, id) ->
-          event.preventDefault()
-          handleAction("deleteItem" ,id)
-
-        # handles click on the cell with `editActionLink` formatter
-        $grid.on "click", "a.editActionLink", (event) ->
-          event.preventDefault()
-          id = $(this).parents("tr:first").attr("id")
-          handleAction("editItem" ,id)
+        # initialize actionPopup handler
+        actionPopupHandler($grid, scope)
 
       if element.is(":visible")
         # Element is visible, initialize the grid now

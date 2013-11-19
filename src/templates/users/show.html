@@ -5,28 +5,41 @@
   </ul>
 </div>
 
+<h2 class="page-header">Show user</h2>
+
 <div class="content">
-  <h2 class="page-header">Show user</h2>
+  <tabset>
+    <tab>
+      <tab-heading>User details</tab-heading>
 
-  <dl class="dl-horizontal">
-    <dt>ID</dt>
-    <dd>{{user.id}}</dd>
+      <dl class="dl-horizontal">
+        <dt>ID</dt>
+        <dd>{{user.id}}</dd>
 
-    <dt>Email</dt>
-    <dd>{{user.name}}</dd>
+        <dt>Email</dt>
+        <dd>{{user.name}}</dd>
 
-    <dt>Login</dt>
-    <dd>{{user.login}}</dd>
+        <dt>Login</dt>
+        <dd>{{user.login}}</dd>
 
-    <dt>Birthday</dt>
-    <dd>{{user.birthday | date}}</dd>
+        <dt>Birthday</dt>
+        <dd>{{user.birthday | date}}</dd>
 
-    <dt>Paid</dt>
-    <dd>{{user.paid}}</dd>
-  </dl>
+        <dt>Paid</dt>
+        <dd>{{user.paid}}</dd>
+      </dl>
 
-  <div class="form-actions">
-    <a href="#/examples/users/{{user.id}}/edit" class="btn"><i class="icon-edit"></i> Edit</a>
-    <ag-delete-button when-confirmed="delete(user)"></ag-delete-button>
-  </div>
+      <div class="form-actions">
+        <a href="#/examples/users/{{user.id}}/edit" class="btn"><i class="icon-edit"></i> Edit</a>
+        <ag-delete-button when-confirmed="delete(user)"></ag-delete-button>
+      </div>
+    </tab>
+
+    <tab>
+      <tab-heading>Embedded grid</tab-heading>
+
+      <div ag-grid="gridOptions"
+           ag-grid-name="embeddedGrid"></div>
+    </tab>
+  </tabset>
 </div>

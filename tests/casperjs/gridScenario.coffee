@@ -6,7 +6,7 @@ EditDialog = require("./tests/casperjs/helpers/page_objects/edit_dialog").EditDi
 Grid = require("./tests/casperjs/helpers/page_objects/grid").Grid
 
 scenario "Basic grid scenario", ->
-  grid = new Grid(this)
+  grid = new Grid(this, "exampleGrid")
   dialog = new EditDialog(this)
 
   @feature "Navigate to the example", ->

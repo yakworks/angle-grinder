@@ -1,5 +1,8 @@
 describe "module: angleGrinder.gridz", ->
-  beforeEach module("angleGrinder.gridz")
+
+  beforeEach module "angleGrinder.gridz", ($provide) ->
+    $provide.value "actionPopupHandler", sinon.stub()
+    return
 
   describe "directive: agGrid", ->
     $scope = null
@@ -43,6 +46,10 @@ describe "module: angleGrinder.gridz", ->
         expect(element.find("table.gridz").length).to.equal 1
         expect(element.find("div.gridz-pager").length).to.equal 1
 
+    itInitializesActionPopupHandler = ->
+      it "initializes action popup handler", inject (actionPopupHandler) ->
+        expect(actionPopupHandler.called).to.be.true
+
     describe "when `ag-grid-name` is not provided", ->
       beforeEach inject ($injector) ->
         {element} = compileTemplate """
@@ -51,6 +58,7 @@ describe "module: angleGrinder.gridz", ->
 
       itPassesValidOptionsToTheGrid()
       itRendersTheGrid()
+      itInitializesActionPopupHandler()
 
       it "assigns default `id` for the grid element", ->
         expect(element.find("table.gridz").attr("id")).to.equal "gridz"
@@ -67,6 +75,7 @@ describe "module: angleGrinder.gridz", ->
 
       itPassesValidOptionsToTheGrid()
       itRendersTheGrid()
+      itInitializesActionPopupHandler()
 
       it "generates `id` for the grid element", ->
         expect(element.find("table.gridz").attr("id")).to.equal "projectsGrid"
