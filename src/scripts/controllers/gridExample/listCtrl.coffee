@@ -5,6 +5,7 @@ class IndexCtrl
     @data = sampleData.generate(100)
     $scope.data = @data
 
+    # TODO create a service for grid options
     $scope.gridOptions =
       data: @data
       datatype: "local"

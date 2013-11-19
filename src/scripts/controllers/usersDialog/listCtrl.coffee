@@ -1,9 +1,10 @@
 class IndexCtrl
   @$inject = ["$scope", "$log", "$filter", "Users", "dialogCrudCtrlMixin", "massUpdateMixin"]
   constructor: ($scope, $log, @$filter, Users, dialogCrudCtrlMixin, massUpdateMixin) ->
-    # Intitially show the search form
-    $scope.showSearchForm = true
+    # Intitially hide the search form
+    $scope.showSearchForm = false
 
+    # TODO create a service for grid options
     $scope.gridOptions =
       path: "/api/users"
       colModel: @gridColumns()

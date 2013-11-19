@@ -2,6 +2,7 @@ class ListCtrl
   @$inject = ["$scope", "$filter", "Users", "massUpdateMixin", "singlePageCrudCtrlMixin"]
   constructor: ($scope, @$filter, Users, massUpdateMixin, singlePageCrudCtrlMixin) ->
 
+    # TODO create a service for grid options
     $scope.gridOptions =
       path: "/api/users"
       colModel: @gridColumns()
