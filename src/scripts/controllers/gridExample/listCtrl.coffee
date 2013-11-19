@@ -11,6 +11,7 @@ class IndexCtrl
       datatype: "local"
       colModel: @gridColumns()
       sortname: "id"
+      shrinkToFit: true
 
     $scope.editItem = (id) =>
       item = @findItemById(id)
@@ -54,8 +55,9 @@ class IndexCtrl
     [
       name: "id"
       label: "Inv No"
-      width: 80
+      width: 60
       sorttype: "int"
+      align: "right"
     ,
       name: "customer.name"
       label: "Customer"
@@ -63,12 +65,16 @@ class IndexCtrl
     ,
       name: "invoiceDate"
       label: "Date"
+      width: 80
     ,
       name: "note"
       label: "Note"
     ,
       name: "complete"
       label: "Complete"
+      width: 50
+      align: "center"
+      formatter: "okIcon"
     ]
 
 angular.module("angleGrinder")
