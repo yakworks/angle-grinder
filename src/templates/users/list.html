@@ -1,27 +1,25 @@
-<section class="anchor">
-  <h2 class="page-header">Users list</h2>
+<h2 class="page-header">Users list</h2>
 
-  <div class="navbar navbar-grid">
-    <div class="navbar-inner with-selected-pointer with-grid-options">
-      <ul class="nav">
-        <li class="dropdown selected-actions">
-          <a data-toggle="dropdown" class="dropdown-toggle" href="#" style="padding-left: 2px">
-            <i class="icon-selected-pointer"></i> Actions<b class="caret"></b>
-          </a>
-          <ul class="dropdown-menu">
-            <li><a href="" ng-click="massUpdate()"><i class="icon-edit"></i> Mass update</a></li>
-          </ul>
-        </li>
-        <li class="divider-vertical"></li>
-        <li>
-          <a href="#/examples/users/create" class="create-button">
-            <i class="icon-edit"></i>Create user
-          </a>
-        </li>
-      </ul>
-    </div>
+<div class="navbar navbar-grid">
+  <div class="navbar-inner with-selected-pointer with-grid-options">
+    <ul class="nav">
+      <li class="dropdown selected-actions">
+        <a data-toggle="dropdown" class="dropdown-toggle" href="#" style="padding-left: 2px">
+          <i class="icon-selected-pointer"></i> Actions<b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu">
+          <li><a href="" ng-click="massUpdate()"><i class="icon-edit"></i> Mass update</a></li>
+        </ul>
+      </li>
+      <li class="divider-vertical"></li>
+      <li>
+        <a href="#/examples/users/create" class="create-button">
+          <i class="icon-edit"></i>Create user
+        </a>
+      </li>
+    </ul>
   </div>
+</div>
 
-  <div ag-grid="gridOptions"
-       ag-grid-name="usersGrid"></div>
-</section>
+<div ag-grid="gridOptions"
+     ag-grid-name="usersGrid"></div>
