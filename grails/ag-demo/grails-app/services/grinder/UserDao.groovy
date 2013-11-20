@@ -40,8 +40,8 @@ class UserDao extends GormDaoSupport {
     void persistWithParams(user, params) {
         // parse date from the string
         if (params.activeDate && params.activeDate instanceof String) {
-            def dateFormat = new SimpleDateFormat("yyyy-MM-dd")
-            params.activeDate = dateFormat.parse(params.activeDate)
+            params.activeDate = DateUtil.parseJsonDate(params.activeDate)
+            println "Use date $params.activeDate"
         }
 
         user.properties = params
