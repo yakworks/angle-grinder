@@ -3,7 +3,11 @@ describe "module: angleGrinder.forms mixin: massUpdateFormCtrlMixin", ->
   beforeEach module "angleGrinder.resources", ($provide) ->
     $provide.decorator "Users", ($delegate, $q) ->
       deferred = $q.defer()
-      deferred.resolve() # always resolved
+
+      # always resolved
+      deferred.resolve
+        updated: [{ id: 100, foo: "bar" }],
+        errored: [101]
 
       sinon.stub($delegate, "massUpdate").returns $promise: deferred.promise
       $delegate
@@ -22,7 +26,10 @@ describe "module: angleGrinder.forms mixin: massUpdateFormCtrlMixin", ->
 
     dialog = sinon.stub(close: ->)
     selectedIds = [1, 2, 3]
-    grid = sinon.stub(reload: ->)
+    grid = sinon.stub
+      reload: ->,
+      updateRow: ->,
+      flashOnError: ->
 
     massUpdateFormCtrlMixin $scope,
       dialog: dialog
@@ -44,8 +51,16 @@ describe "module: angleGrinder.forms mixin: massUpdateFormCtrlMixin", ->
         expect(Users.massUpdate.called).to.be.true
         expect(Users.massUpdate.calledWith(ids: [1, 2, 3], data: allowance: 123)).to.be.true
 
-      it "reloads a grid", ->
-        expect(grid.reload.called).to.be.true
+      it "does not reload a grid", ->
+        expect(grid.reload.called).to.not.be.true
+
+      it "updates data in the grid", ->
+        expect(grid.updateRow.called).to.be.true
+        expect(grid.updateRow.calledWith(100, id: 100, foo: "bar")).to.be.true
+
+      it "flashes errored rows", ->
+        expect(grid.flashOnError.called).to.be.true
+        expect(grid.flashOnError.calledWith(101)).to.be.true
 
       it "closes a dialog", ->
         expect(dialog.close.called).to.be.true

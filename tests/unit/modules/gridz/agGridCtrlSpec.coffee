@@ -15,7 +15,7 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
 
     controller = $controller "AgGridCtrl"
     controller.registerGridElement(jqGridStub)
-    sinon.stub(controller, "_flashRow")
+    sinon.stub(controller, "flashOnSuccess")
 
     fakeColModel = [{ name: "foo", hidden: true }, { name: "bar", hidden: false }]
     jqGridStub.jqGrid.withArgs("getGridParam", "colModel").returns(fakeColModel)
@@ -69,8 +69,8 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
       controller.updateRow(123, foo: "bar")
 
       # Then
-      expect(controller._flashRow.called).to.be.true
-      expect(controller._flashRow.calledWith(123)).to.be.true
+      expect(controller.flashOnSuccess.called).to.be.true
+      expect(controller.flashOnSuccess.calledWith(123)).to.be.true
 
   describe "#addRow", ->
     describe "when the position is not specified", ->
@@ -104,8 +104,8 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
       controller.addRow(234, foo: "bar")
 
       # Then
-      expect(controller._flashRow.called).to.be.true
-      expect(controller._flashRow.calledWith(234)).to.be.true
+      expect(controller.flashOnSuccess.called).to.be.true
+      expect(controller.flashOnSuccess.calledWith(234)).to.be.true
 
   describe "#saveRow", ->
     describe "when a row exists in the grid", ->
@@ -171,8 +171,8 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
       stub = jqGridStub.delRowData
 
       # stub with callback
-      controller._flashRow.restore()
-      sinon.stub(controller, "_flashRow", (id, callback) -> callback())
+      controller.flashOnSuccess.restore()
+      sinon.stub(controller, "flashOnSuccess", (id, callback) -> callback())
 
       # When
       controller.removeRow(123)
@@ -186,8 +186,8 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
       controller.removeRow(345)
 
       # Then
-      expect(controller._flashRow.called).to.be.true
-      expect(controller._flashRow.calledWith(345)).to.be.true
+      expect(controller.flashOnSuccess.called).to.be.true
+      expect(controller.flashOnSuccess.calledWith(345)).to.be.true
 
   describe "#search", ->
     it "sets search filters and triggers grid reload", ->
