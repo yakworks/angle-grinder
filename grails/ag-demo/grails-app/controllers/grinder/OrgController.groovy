@@ -170,13 +170,18 @@ class OrgController extends BaseDomainController {
         def ids = request.JSON.ids
         def data = request.JSON.data
 
+        def updated = []
+
         def orgs = domainClass.getAll(ids)
         orgs.each { org ->
             org.timeZone = data.timeZone
             org.save()
+
+            updated.push ExportUtil.buildMapFromPaths(org, selectFields)
         }
 
         response.status = 200
-        render null
+        def results = [updated: updated, errored: []]
+        render results as JSON
     }
 }
