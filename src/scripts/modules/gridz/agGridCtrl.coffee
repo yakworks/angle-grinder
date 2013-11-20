@@ -39,7 +39,7 @@ gridz.controller "AgGridCtrl", class
   # and the value is the new value.
   updateRow: (id, data) ->
     @$grid.setRowData(id, @flatten(data))
-    @_flashRow(id)
+    @flashOnSuccess(id)
 
   # Inserts a new row with id = rowid containing the data in data (an object) at
   # the position specified (first in the table, last in the table or before or after the row specified in srcrowid).
@@ -47,7 +47,7 @@ gridz.controller "AgGridCtrl", class
   # where name is the name of the column as described in the colModel and the value is the value.
   addRow: (id, data, position = "first") ->
     @$grid.addRowData(id, @flatten(data), position)
-    @_flashRow(id)
+    @flashOnSuccess(id)
 
   # Returns `true` if the grid contains a row with the given id
   hasRow: (id) ->
@@ -62,7 +62,7 @@ gridz.controller "AgGridCtrl", class
   # Deletes the row with the id = rowid.
   # This operation does not delete data from the server.
   removeRow: (id) ->
-    @_flashRow id, => @$grid.delRowData(id)
+    @flashOnSuccess id, => @$grid.delRowData(id)
 
   # Sets the grid search filters and triggers a reload
   search: (filters) ->
@@ -118,12 +118,19 @@ gridz.controller "AgGridCtrl", class
   _triggerResize: ->
     @$grid.trigger("resize")
 
-  # Flashes the given row
-  _flashRow: (id, complete = angular.noop) ->
+  # Flash the given row
+  flashOnSuccess: (id, complete = angular.noop) ->
+    @_flashRow(id, "#DFF0D8", complete)
+
+  # Flash the row with red background
+  flashOnError: (id, complete = angular.noop) ->
+    @_flashRow(id, "#FF0000", complete)
+
+  _flashRow: (id, color = "#DFF0D8", complete = angular.noop) ->
     $row = $(@$grid[0].rows.namedItem(id))
 
-    $row.css "background-color", "#DFF0D8"
-    $row.delay(100).fadeOut "medium", ->
+    $row.css "background-color", color
+    $row.delay(250).fadeOut "medium", ->
       $row.css "background-color", ""
 
     $row.fadeIn "fast", -> complete()

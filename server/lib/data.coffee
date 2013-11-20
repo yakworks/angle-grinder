@@ -108,6 +108,19 @@ class Data
 
     row
 
+  massUpdate: (ids, data) ->
+    updated = []
+    errored = [5, 6, 7] # dummy data
+
+    for id in ids
+      try
+        updated.push @update(id, data)
+
+      catch error
+        errored.push id
+
+    updated: updated, errored: errored
+
   _validate: (data) ->
     invalidName = @_invalidName(data)
     invalidLogin = @_invalidLogin(data)

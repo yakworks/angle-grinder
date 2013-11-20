@@ -62,13 +62,8 @@ app.post "/api/users", (req, res) ->
 
 # mass UPDATE
 app.put "/api/users/massUpdate", (req, res) ->
-  try
-    for id in req.body.ids
-      data.update(id, req.body.data)
-  catch error
-    res.send error, 422
-
-  res.send 200
+  result = data.massUpdate(req.body.ids, req.body.data)
+  res.send result
 
 # UPDATE
 app.put "/api/users/:id", (req, res) ->
