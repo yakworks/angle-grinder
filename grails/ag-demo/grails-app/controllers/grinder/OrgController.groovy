@@ -168,20 +168,20 @@ class OrgController extends BaseDomainController {
 
     def massUpdate() {
         def ids = request.JSON.ids
-        def data = request.JSON.data
+        def params = request.JSON.data
 
-        def updated = []
+        def data = []
 
         def orgs = domainClass.getAll(ids)
         orgs.each { org ->
-            org.timeZone = data.timeZone
+            org.timeZone = params.timeZone
             org.save()
 
-            updated.push ExportUtil.buildMapFromPaths(org, selectFields)
+            data.push ExportUtil.buildMapFromPaths(org, selectFields)
         }
 
         response.status = 200
-        def results = [updated: updated, errored: []]
+        def results = [data: data, errors: []]
         render results as JSON
     }
 }

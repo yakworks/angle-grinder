@@ -108,18 +108,18 @@ class Data
 
     row
 
-  massUpdate: (ids, data) ->
-    updated = []
-    errored = [5, 6, 7] # dummy data
+  massUpdate: (ids, params) ->
+    data = []
+    errors = { 5: "foo", 6: "bar", 7: "baz" } # dummy data
 
     for id in ids
       try
-        updated.push @update(id, data)
+        data.push @update(id, params)
 
       catch error
-        errored.push id
+        errors[id] = "Something bad happened"
 
-    updated: updated, errored: errored
+    data: data, errors: errors
 
   _validate: (data) ->
     invalidName = @_invalidName(data)

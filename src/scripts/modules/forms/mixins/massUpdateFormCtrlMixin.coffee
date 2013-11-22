@@ -12,16 +12,22 @@ mixin.factory "massUpdateFormCtrlMixin", ["$log", ($log) ->
       promise = Resource.massUpdate(ids: selectedIds, data: records).$promise
 
       # result should contain two arrays:
-      # result.updated - data for successfully updated rows
-      # result.errored - ids for errored rows
+      # result.data - data for successfully updated rows
+      # result.errors - assoc array for errors (id => errors)
       promise.then (result) ->
         $log.info "Mass update response", result
 
         # handle updated fields
-        grid.updateRow(row.id, row) for row in result.updated
+        if result.data?
+          grid.updateRow(row.id, row) for row in result.data
+        else
+          $log.warn "Invalid JSON response, missing data array"
 
         # handle errored fields
-        grid.flashOnError(id) for id in result.errored
+        if result.errors?
+          grid.flashOnError(id) for id, error of result.errors
+        else
+          $log.warn "Invalid JSON response, missing errors assoc array"
 
         $scope.closeDialog()
 

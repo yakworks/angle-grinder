@@ -6,8 +6,9 @@ describe "module: angleGrinder.forms mixin: massUpdateFormCtrlMixin", ->
 
       # always resolved
       deferred.resolve
-        updated: [{ id: 100, foo: "bar" }],
-        errored: [101]
+        data: [{ id: 100, foo: "bar" }],
+        errors:
+          "101": { foo: "bar"}
 
       sinon.stub($delegate, "massUpdate").returns $promise: deferred.promise
       $delegate
@@ -60,7 +61,7 @@ describe "module: angleGrinder.forms mixin: massUpdateFormCtrlMixin", ->
 
       it "flashes errored rows", ->
         expect(grid.flashOnError.called).to.be.true
-        expect(grid.flashOnError.calledWith(101)).to.be.true
+        expect(grid.flashOnError.calledWith("101")).to.be.true
 
       it "closes a dialog", ->
         expect(dialog.close.called).to.be.true
