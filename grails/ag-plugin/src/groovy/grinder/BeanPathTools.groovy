@@ -1,6 +1,9 @@
 package grinder
 
 import org.codehaus.groovy.grails.commons.GrailsClassUtils
+import org.hibernate.ObjectNotFoundException
+import org.hibernate.UnresolvableObjectException
+
 //import org.apache.commons.logging.*
 
 //XXX add tests for this
@@ -111,7 +114,12 @@ class BeanPathTools {
               currentMap[nestedPrefix] = [:]
             }
 
-            def nestedObj = obj."$nestedPrefix"
+            def nestedObj = null
+            try {
+                nestedObj = obj."$nestedPrefix"
+            } catch (UnresolvableObjectException e) {
+                log.error("Cannot set value for $nestedPrefix ($e.entityName, id $e.identifier). $e.message")
+            }
             String remainderOfKey = propertyPath.substring(nestedIndex + 1, propertyPath.length());
             //recursive call
             propsToMap(nestedObj, remainderOfKey, currentMap[nestedPrefix])
