@@ -70,7 +70,7 @@ describe "Grid example scenario", ->
       it "creates a new record", ->
         # should add a new row on the top of the grid
         firstRow = page.grid.firstRow()
-        expect(firstRow.cellByName("customer.name").getText()).toEqual "New Customer Name"
+        expect(firstRow.value("customer.name")).toEqual "New Customer Name"
 
   describe "grid row popover", ->
     popover = null
@@ -102,8 +102,8 @@ describe "Grid example scenario", ->
 
           # should add a new row on the top
           firstRow = page.grid.firstRow()
-          expect(firstRow.cellByName("id").getText()).toEqual "1"
-          expect(firstRow.cellByName("customer.name").getText()).toEqual "Updated Customer Name"
+          expect(firstRow.value("id")).toEqual "1"
+          expect(firstRow.value("customer.name")).toEqual "Updated Customer Name"
 
       describe "click `delete` button inside the modal dialog", ->
 
@@ -122,8 +122,8 @@ describe "Grid example scenario", ->
 
           # should delete the first row
           firstRow = page.grid.firstRow()
-          expect(firstRow.cellByName("id").getText()).toEqual "2"
-          expect(firstRow.cellByName("customer.name").getText()).toEqual "Test Customer 2"
+          expect(firstRow.value("id")).toEqual "2"
+          expect(firstRow.value("customer.name")).toEqual "Test Customer 2"
 
     describe "click on `delete` row", ->
 
@@ -136,5 +136,5 @@ describe "Grid example scenario", ->
 
         # should delete the first row
         firstRow = page.grid.firstRow()
-        expect(firstRow.cellByName("id").getText()).toEqual "2"
-        expect(firstRow.cellByName("customer.name").getText()).toEqual "Test Customer 2"
+        expect(firstRow.value("id")).toEqual "2"
+        expect(firstRow.value("customer.name")).toEqual "Test Customer 2"

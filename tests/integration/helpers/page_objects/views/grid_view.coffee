@@ -10,6 +10,9 @@ class GridRowView extends PageObject
   cellByName: (name) ->
     @findElement @By.css("td[aria-describedby$='#{@grid.gridName}_#{name}']")
 
+  # Retrieve cell value for the given col name
+  value: (name) -> @cellByName(name).getText()
+
   @has "popoverButton", ->
     @findElement @By.css("td[aria-describedby='#{@grid.gridName}_row_action_col'] a.jqg-row-action")
 

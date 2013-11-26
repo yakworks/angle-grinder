@@ -3,7 +3,7 @@ require("jasmine-only")
 utils = require("./helpers/utils")
 UsersDialogBasedPage = require("./helpers/page_objects/users_dialog_based_page")
 
-describe "Users grid example scenario", ->
+describe "Users dialog based grid scenario", ->
 
   page = null
 
@@ -39,20 +39,20 @@ describe "Users grid example scenario", ->
         searchForm.submit()
 
         firstRow = page.grid.firstRow()
-        expect(firstRow.cellByName("name").getText()).toEqual "Teancum"
+        expect(firstRow.value("name")).toEqual "Teancum"
 
         nameFilter.clear()
         nameFilter.sendKeys "Nephi"
         searchForm.submit()
 
         firstRow = page.grid.firstRow()
-        expect(firstRow.cellByName("name").getText()).toEqual "Nephi"
+        expect(firstRow.value("name")).toEqual "Nephi"
 
         searchForm.reset()
 
         firstRow = page.grid.firstRow()
-        expect(firstRow.cellByName("login").getText()).toEqual "login-0"
-        expect(firstRow.cellByName("name").getText()).toEqual "Moroni"
+        expect(firstRow.value("login")).toEqual "login-0"
+        expect(firstRow.value("name")).toEqual "Moroni"
 
       it "filters by allowance", ->
         allowanceFilter = searchForm.filterFor "allowance"
@@ -61,13 +61,13 @@ describe "Users grid example scenario", ->
         searchForm.submit()
 
         firstRow = page.grid.firstRow()
-        expect(firstRow.cellByName("allowance").getText()).toEqual "50"
+        expect(firstRow.value("allowance")).toEqual "50"
 
         searchForm.reset()
 
         firstRow = page.grid.firstRow()
-        expect(firstRow.cellByName("name").getText()).toEqual "Moroni"
-        expect(firstRow.cellByName("allowance").getText()).toNotEqual "50"
+        expect(firstRow.value("name")).toEqual "Moroni"
+        expect(firstRow.value("allowance")).toNotEqual "50"
 
       it "filters by birthday", ->
         birthdayFromFilter = searchForm.filterFor "birthday.from"
@@ -81,9 +81,9 @@ describe "Users grid example scenario", ->
         searchForm.submit()
 
         firstRow = page.grid.firstRow()
-        expect(firstRow.cellByName("name").getText()).toEqual "Ether"
-        expect(firstRow.cellByName("allowance").getText()).toEqual "42"
-        expect(firstRow.cellByName("birthday").getText()).toEqual "Oct 29, 2010"
+        expect(firstRow.value("name")).toEqual "Ether"
+        expect(firstRow.value("allowance")).toEqual "42"
+        expect(firstRow.value("birthday")).toEqual "Oct 29, 2010"
 
   describe "quick search", ->
 
@@ -92,8 +92,8 @@ describe "Users grid example scenario", ->
 
       quickSearch.searchFor "Ether"
       firstRow = page.grid.firstRow()
-      expect(firstRow.cellByName("name").getText()).toEqual "Ether"
+      expect(firstRow.value("name")).toEqual "Ether"
 
       quickSearch.clear()
       firstRow = page.grid.firstRow()
-      expect(firstRow.cellByName("name").getText()).toEqual "Moroni"
+      expect(firstRow.value("name")).toEqual "Moroni"
