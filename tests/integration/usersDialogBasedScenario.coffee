@@ -31,6 +31,7 @@ describe "Users grid example scenario", ->
     it "displays search filters", ->
       expect(form.isDisplayed()).toBeTruthy()
 
+    # TODO create PO for advSearchForm
     describe "advanced search form", ->
 
       it "filters the grid", ->
@@ -87,21 +88,12 @@ describe "Users grid example scenario", ->
   describe "quick search", ->
 
     it "filters the grid", ->
-      quickSearch = browser.findElement(protractor.By.model("filters.quickSearch"))
+      quickSearch = page.gridNavbar.quickSearch
 
-      # search for "Ether"
-      quickSearch.sendKeys "Ether"
-      quickSearch.sendKeys protractor.Key.ENTER
-      page.grid.waitForData()
-
+      quickSearch.searchFor "Ether"
       firstRow = page.grid.firstRow()
       expect(firstRow.cellByName("name").getText()).toEqual "Ether"
 
-      # clear quick search
       quickSearch.clear()
-      quickSearch.sendKeys " "
-      quickSearch.sendKeys protractor.Key.ENTER
-      page.grid.waitForData()
-
       firstRow = page.grid.firstRow()
       expect(firstRow.cellByName("name").getText()).toEqual "Moroni"

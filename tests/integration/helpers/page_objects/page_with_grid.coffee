@@ -21,7 +21,7 @@ class PageWithGrid extends PageObject
 
   @has "gridNavbar", ->
     element = @findElement @By.css(".navbar-grid")
-    new GridNavbarView(element)
+    new GridNavbarView(element, @grid)
 
   @has "modalForm", ->
     element = @findElement @By.css(".modal")
