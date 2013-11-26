@@ -1,4 +1,4 @@
-PageObject = require("./../page_object")
+PageObject = require("./../../page_object")
 PopoverView = require("./popover_view")
 
 class GridRowView extends PageObject

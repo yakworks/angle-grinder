@@ -1,10 +1,9 @@
-GridExamplePage = require("./grid_example_page")
+PageWithGrid = require("./page_with_grid")
 GridView = require("./views/grid_view")
 
-class UsersDialogBasedPage extends GridExamplePage
+class UsersDialogBasedPage extends PageWithGrid
 
   @has "grid", ->
-    element = @findElement @By.css("div[ag-grid-name='usersGrid']")
-    new GridView(element, "usersGrid")
+    @getGridView "usersGrid"
 
 module.exports = UsersDialogBasedPage

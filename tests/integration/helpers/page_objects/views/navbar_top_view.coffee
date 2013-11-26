@@ -1,4 +1,4 @@
-PageObject = require("./../page_object")
+PageObject = require("./../../page_object")
 
 class NavbarTopView extends PageObject
 
