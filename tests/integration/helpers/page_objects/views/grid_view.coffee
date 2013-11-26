@@ -11,7 +11,7 @@ class GridRowView extends PageObject
     @findElement @By.css("td[aria-describedby$='#{@grid.gridName}_#{name}']")
 
   @has "popoverButton", ->
-    @findElement @By.css("td[aria-describedby='grid_row_action_col'] a.jqg-row-action")
+    @findElement @By.css("td[aria-describedby='#{@grid.gridName}_row_action_col'] a.jqg-row-action")
 
   showPopover: ->
     @popoverButton.click()
