@@ -1,10 +1,10 @@
 exports.config =
   # Run with selenium standalone server
-  # seleniumServerJar: "./selenium/selenium-server-standalone-2.37.0.jar"
-  # seleniumPort: 4444,
+  seleniumServerJar: "./selenium/selenium-server-standalone-2.37.0.jar"
+  seleniumPort: 4444,
 
-  chromeDriver: "./selenium/chromedriver"
-  chromeOnly: true
+#  chromeDriver: "./selenium/chromedriver"
+#  chromeOnly: true
 
   # capabilities to be passed to the webdriver instance
   capabilities:

@@ -22,63 +22,63 @@ describe "Users grid example scenario", ->
     expect(page.heading.getText()).toEqual "Users dialog based example"
 
   describe "search filters", ->
-    form = null
+    searchForm = null
 
     beforeEach ->
       page.gridNavbar.searchButton.click()
-      form = browser.findElement(protractor.By.css("form[name='searchForm']"))
+      searchForm = page.gridSeachForm
 
     it "displays search filters", ->
-      expect(form.isDisplayed()).toBeTruthy()
+      expect(searchForm.isDisplayed()).toBeTruthy()
 
-    # TODO create PO for advSearchForm
     describe "advanced search form", ->
 
-      it "filters the grid", ->
-        submitButton = form.findElement(protractor.By.xpath(".//button[contains(., 'Search')]"))
-        resetButton = form.findElement(protractor.By.xpath(".//button[contains(., 'Reset')]"))
-
-        name = form.findElement(protractor.By.model("filters.name"))
-        name.sendKeys "Teancum"
-
-        submitButton.click()
-        page.grid.waitForData()
+      it "filters by name", ->
+        nameFilter = searchForm.filterFor "name"
+        nameFilter.sendKeys "Teancum"
+        searchForm.submit()
 
         firstRow = page.grid.firstRow()
         expect(firstRow.cellByName("name").getText()).toEqual "Teancum"
 
-        resetButton.click()
-        page.grid.waitForData()
+        nameFilter.clear()
+        nameFilter.sendKeys "Nephi"
+        searchForm.submit()
+
+        firstRow = page.grid.firstRow()
+        expect(firstRow.cellByName("name").getText()).toEqual "Nephi"
+
+        searchForm.reset()
 
         firstRow = page.grid.firstRow()
         expect(firstRow.cellByName("login").getText()).toEqual "login-0"
         expect(firstRow.cellByName("name").getText()).toEqual "Moroni"
 
-        allowance = form.findElement(protractor.By.model("filters.allowance"))
-        allowance.sendKeys "50"
+      it "filters by allowance", ->
+        allowanceFilter = searchForm.filterFor "allowance"
+        allowanceFilter.sendKeys "50"
 
-        submitButton.click()
-        page.grid.waitForData()
+        searchForm.submit()
 
         firstRow = page.grid.firstRow()
         expect(firstRow.cellByName("allowance").getText()).toEqual "50"
 
-        resetButton.click()
-        page.grid.waitForData()
+        searchForm.reset()
 
         firstRow = page.grid.firstRow()
         expect(firstRow.cellByName("name").getText()).toEqual "Moroni"
         expect(firstRow.cellByName("allowance").getText()).toNotEqual "50"
 
-        birthdayFrom = form.findElement(protractor.By.model("filters.birthday.from"))
-        birthdayFrom.sendKeys "10/29/2010"
+      it "filters by birthday", ->
+        birthdayFromFilter = searchForm.filterFor "birthday.from"
+        birthdayFromFilter.sendKeys "10/29/2010"
+        birthdayFromFilter.sendKeys protractor.Key.ESCAPE
 
-        birthdayTo = form.findElement(protractor.By.model("filters.birthday.to"))
-        birthdayTo.sendKeys "10/30/2010"
-        browser.findElement(protractor.By.css("body")).click() # click outside to hide date pickers
+        birthdayToFilter = searchForm.filterFor "birthday.to"
+        birthdayToFilter.sendKeys "10/30/2010"
+        birthdayToFilter.sendKeys protractor.Key.ESCAPE
 
-        submitButton.click()
-        page.grid.waitForData()
+        searchForm.submit()
 
         firstRow = page.grid.firstRow()
         expect(firstRow.cellByName("name").getText()).toEqual "Ether"
