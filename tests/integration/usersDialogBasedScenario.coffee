@@ -34,17 +34,11 @@ describe "Users dialog based grid scenario", ->
     describe "advanced search form", ->
 
       it "filters by name", ->
-        nameFilter = searchForm.filterFor "name"
-        nameFilter.sendKeys "Teancum"
-        searchForm.submit()
-
+        searchForm.fillInAndSubmit name: "Teancum"
         firstRow = page.grid.firstRow()
         expect(firstRow.value("name")).toEqual "Teancum"
 
-        nameFilter.clear()
-        nameFilter.sendKeys "Nephi"
-        searchForm.submit()
-
+        searchForm.fillInAndSubmit name: "Nephi"
         firstRow = page.grid.firstRow()
         expect(firstRow.value("name")).toEqual "Nephi"
 
@@ -55,30 +49,19 @@ describe "Users dialog based grid scenario", ->
         expect(firstRow.value("name")).toEqual "Moroni"
 
       it "filters by allowance", ->
-        allowanceFilter = searchForm.filterFor "allowance"
-        allowanceFilter.sendKeys "50"
-
-        searchForm.submit()
-
+        searchForm.fillInAndSubmit allowance: "50"
         firstRow = page.grid.firstRow()
         expect(firstRow.value("allowance")).toEqual "50"
 
         searchForm.reset()
-
         firstRow = page.grid.firstRow()
         expect(firstRow.value("name")).toEqual "Moroni"
         expect(firstRow.value("allowance")).toNotEqual "50"
 
       it "filters by birthday", ->
-        birthdayFromFilter = searchForm.filterFor "birthday.from"
-        birthdayFromFilter.sendKeys "10/29/2010"
-        birthdayFromFilter.sendKeys protractor.Key.ESCAPE
-
-        birthdayToFilter = searchForm.filterFor "birthday.to"
-        birthdayToFilter.sendKeys "10/30/2010"
-        birthdayToFilter.sendKeys protractor.Key.ESCAPE
-
-        searchForm.submit()
+        searchForm.fillInAndSubmit
+          "birthday.from": "10/29/2010"
+          "birthday.to":   "10/30/2010"
 
         firstRow = page.grid.firstRow()
         expect(firstRow.value("name")).toEqual "Ether"
