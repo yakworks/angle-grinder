@@ -118,7 +118,6 @@ or
 ## Protractor integration tests
 
 Install standalone Selenium `./node_modules/protractor/bin/install_selenium_standalone`
-Start the selenium server `./selenium/start`
 Start the app in the `test` env `grunt build:dev` `configureProxies connect:integration watch`
 Manually run the specs `./node_modules/protractor/bin/protractor ./build/tests/protractor-conf.js`
 

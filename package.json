@@ -44,7 +44,7 @@
     "grunt-gh-pages": "~0.8.0",
     "grunt-text-replace": "~0.3.8",
 
-    "protractor": "~0.12.1",
+    "protractor": "~0.13.0",
     "jasmine-only": "~0.1.0"
   },
     "engines": {

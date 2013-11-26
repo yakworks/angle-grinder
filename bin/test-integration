@@ -1,11 +1,8 @@
 #!/bin/bash
 
 . ./bin/lib/server
-. ./bin/lib/selenium
 
-./bin/xvfb start
 startServer
-startSelenium
 
 grunt build:dev
 grunt configureProxies connect:integration watch &
@@ -26,8 +23,6 @@ echo -e "\nRunning integration specs."
 ./node_modules/protractor/bin/protractor ./build/tests/protractor-conf.js
 
 stopServer
-stopSelenium
-./bin/xvfb stop
 
 echo "Killing the frontend server PID=$PID"
 kill "$PID"
