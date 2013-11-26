@@ -22,11 +22,11 @@ class GridRowView extends PageObject
   waitUntilFadeOut: ->
     @cellByName("id").getText().then (id) =>
 
-      untilRowGone = =>
+      untilTheRowGone = =>
         @grid.findElements(@By.xpath(".//tbody/tr[@id=#{id}]")).then (rows) ->
           rows.length is 0
 
-      browser.wait untilRowGone
+      browser.wait untilTheRowGone
 
 class GridView extends PageObject
 
@@ -43,5 +43,12 @@ class GridView extends PageObject
 
   # Retrieve the first row from the grid.
   firstRow: -> @nthRow(0)
+
+  # Wait until grid loading is complete
+  waitForData: ->
+    forGridData = => @findElement(@By.css(".loading")).isDisplayed().then (displayed) ->
+      not displayed
+
+    browser.wait forGridData
 
 module.exports = GridView

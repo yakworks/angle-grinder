@@ -3,7 +3,7 @@ require("jasmine-only")
 utils = require("./helpers/utils")
 UsersDialogBasedPage = require("./helpers/page_objects/users_dialog_based_page")
 
-describe "Grid example scenario", ->
+describe "Users grid example scenario", ->
 
   page = null
 
@@ -14,13 +14,14 @@ describe "Grid example scenario", ->
     # navigate to the basic grid example
     page.navbarTop.examples.click()
     page.sidebar.userDialogBased.click()
+    page.grid.waitForData()
 
   it "navigates to the correct page", ->
     expect(page.getCurrentUrl()).toMatch /\/examples\/usersDialog/
     expect(page.getTitle()).toEqual "Angle Grinder - Bootstrap and Grid"
     expect(page.heading.getText()).toEqual "Users dialog based example"
 
-  describe "serach filters", ->
+  describe "search filters", ->
     form = null
 
     beforeEach ->
@@ -40,11 +41,13 @@ describe "Grid example scenario", ->
         name.sendKeys "Teancum"
 
         submitButton.click()
+        page.grid.waitForData()
 
         firstRow = page.grid.firstRow()
         expect(firstRow.cellByName("name").getText()).toEqual "Teancum"
 
         resetButton.click()
+        page.grid.waitForData()
 
         firstRow = page.grid.firstRow()
         expect(firstRow.cellByName("login").getText()).toEqual "login-0"
@@ -54,11 +57,13 @@ describe "Grid example scenario", ->
         allowance.sendKeys "50"
 
         submitButton.click()
+        page.grid.waitForData()
 
         firstRow = page.grid.firstRow()
         expect(firstRow.cellByName("allowance").getText()).toEqual "50"
 
         resetButton.click()
+        page.grid.waitForData()
 
         firstRow = page.grid.firstRow()
         expect(firstRow.cellByName("name").getText()).toEqual "Moroni"
@@ -69,8 +74,10 @@ describe "Grid example scenario", ->
 
         birthdayTo = form.findElement(protractor.By.model("filters.birthday.to"))
         birthdayTo.sendKeys "10/30/2010"
+        browser.findElement(protractor.By.css("body")).click() # click outside to hide date pickers
 
         submitButton.click()
+        page.grid.waitForData()
 
         firstRow = page.grid.firstRow()
         expect(firstRow.cellByName("name").getText()).toEqual "Ether"
@@ -85,8 +92,7 @@ describe "Grid example scenario", ->
       # search for "Ether"
       quickSearch.sendKeys "Ether"
       quickSearch.sendKeys protractor.Key.ENTER
-
-      utils.takeScreenshot()
+      page.grid.waitForData()
 
       firstRow = page.grid.firstRow()
       expect(firstRow.cellByName("name").getText()).toEqual "Ether"
@@ -95,6 +101,7 @@ describe "Grid example scenario", ->
       quickSearch.clear()
       quickSearch.sendKeys " "
       quickSearch.sendKeys protractor.Key.ENTER
+      page.grid.waitForData()
 
       firstRow = page.grid.firstRow()
       expect(firstRow.cellByName("name").getText()).toEqual "Moroni"
