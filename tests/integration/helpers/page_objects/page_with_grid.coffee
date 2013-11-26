@@ -8,6 +8,7 @@ GridNavbarView = require("./views/grid_navbar_view")
 GridView = require("./views/grid_view")
 GridSearchFormView = require("./views/grid_search_form_view")
 
+# Common Page Object for all pages with the grid
 class PageWithGrid extends PageObject
 
   @has "navbarTop", ->

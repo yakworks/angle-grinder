@@ -1,5 +1,4 @@
 PageWithGrid = require("./page_with_grid")
-GridView = require("./views/grid_view")
 
 class UsersDialogBasedPage extends PageWithGrid
 
