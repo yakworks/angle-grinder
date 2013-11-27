@@ -75,13 +75,14 @@ app.put "/api/users/:id", (req, res) ->
 
 # DELETE
 app.delete "/api/users/:id", (req, res) ->
-  if Math.random() > 0.5
-    row = data.delete(req.params.id)
-    res.send row
-  else
-    randomErrorFor(res)
+  row = data.delete(req.params.id)
+  res.send row
 
 app.get "/api/orgs.json", (req, res) ->
   res.send orgs.getAll()
+
+app.post "/api/_loadFixtures.json", (req, res) ->
+  data.reload()
+  res.send 200
 
 module.exports = app

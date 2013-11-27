@@ -1,8 +1,8 @@
 <div class="modal-header">
   <button type="button" class="close" ng-click="closeEditDialog()" aria-hidden="true">&times;</button>
 
-  <h3 ng-show="createNew">Create New User</h3>
-  <h3 ng-hide="createNew">Edit User {{item.name}}</h3>
+  <h3 ng-if="createNew">Create New User</h3>
+  <h3 ng-if="!createNew">Edit User {{item.name}}</h3>
 </div>
 
 <div class="modal-body">
@@ -15,7 +15,7 @@
 
       <div class="controls">
         <input type="text" name="name" placeholder="Enter Name"
-               ng-model="item.name" autofocus ng-required="true" />
+               ng-model="item.name" ng-required="true" />
         <ag-validation-errors for="name" required="This field is required" />
       </div>
     </div>
@@ -25,7 +25,7 @@
 
       <div class="controls">
         <input type="text" name="login" placeholder="Enter Login"
-               ng-model="item.login" autofocus ng-required="true" />
+               ng-model="item.login" ng-required="true" />
         <ag-validation-errors for="login" required="This field is required" />
       </div>
     </div>
@@ -66,28 +66,30 @@
 
       <div class="controls">
         <input type="password" name="password" placeholder="Enter Password"
-               ng-model="item.password" autofocus ng-required="item.newRecord()" ng-minlength="6" />
+               ng-model="item.password" ng-required="item.newRecord()" ng-minlength="6" />
         <ag-validation-errors for="password"
                           required="This field is required"
-                          minlength="Password must be at least 6 characters." />
+                          minlength="Password must be at least 6 characters" />
       </div>
 
       <div class="controls">
         <input type="password" name="passwordConfirmation" placeholder="Enter Password Confirmation"
-               ng-model="item.passwordConfirmation" autofocus
+               ng-model="item.passwordConfirmation"
                ng-required="item.newRecord()" match="item.password" ng-minlength="6" />
         <ag-validation-errors for="passwordConfirmation"
                           required="This field is required"
-                          minlength="Password must be at least 6 characters."
+                          minlength="Password must be at least 6 characters"
                           mismatch="The password does not match the confirmation" />
       </div>
     </div>
 
     <div class="modal-footer">
       <ag-submit-button></ag-submit-button>
-      <span ng-hide="createNew">
+
+      <span ng-if="!createNew">
         <ag-delete-button when-confirmed="delete(item)"></ag-delete-button>
       </span>
+
       <ag-cancel-button ng-click="closeEditDialog()"></ag-cancel-button>
     </div>
   </form>

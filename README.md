@@ -29,28 +29,6 @@ npm install -g grunt-cli
 npm install -g bower
 ```
 
-## Install PhantomJS ad CasperJS for the integration testing
-
-Download and install PhantomJS
-
-```
-wget https://phantomjs.googlecode.com/files/phantomjs-1.9.1-linux-x86_64.tar.bz2
-tar xvjf phantomjs-1.9.1-linux-x86_64.tar.bz2
-cd tar xvjf phantomjs-1.9.1-linux-x86_64
-ln -sf `pwd`/bin/phantomjs /usr/local/bin/phantomjs
-```
-
-Checkout and install CasperJS
-
-```
-git clone git://github.com/n1k0/casperjs.git
-cd casperjs
-git checkout tags/1.0.2
-ln -sf `pwd`/bin/casperjs /usr/local/bin/casperjs
-```
-
-Detailed instructions http://casperjs.org/installation.html
-
 ### Run the app
 
 ```
@@ -68,7 +46,7 @@ open http://localhost:9000
   * ./app/styles - stylesheets
   * ./app/views - html views used by AngularJS
 * ./test - contains tests for the application
-  * ./tests/casperjs - CasperJS integration specs
+  * ./tests/integration - protractor integration specs
   * ./tests/unit - unit tests for AngularJS components
 
 Third-party libraries
@@ -120,12 +98,6 @@ Run karma in Chrome browser:
 * Open Chrome's DevTools and refresh the page
 * Now in the source tab you should see the execution stopped at the debugger
 
-### Running e2e tests
-
-* `grunt test:e2e`
-* `grunt test:casperjs`
-* `grunt test:ci`
-
 ### Running tests headlessly
 
 Start Xvfb and export DISPLAY variable:
@@ -142,6 +114,12 @@ Perform single run:
 or
 
 `grunt test:watch --browsers=Chrome`
+
+## Protractor integration tests
+
+Install standalone Selenium `bin/install-selenium`
+Start the app in the `test` env `grunt build:dev` `configureProxies connect:integration watch`
+Manually run the specs `bin/run-protractor`
 
 ## Build process
 

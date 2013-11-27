@@ -8,6 +8,7 @@ mountFolder = (connect, dir) ->
 module.exports = (grunt, appConfig) ->
 
   options:
+    port: 9000
     hostname: "localhost"
 
   proxies: [
@@ -18,9 +19,8 @@ module.exports = (grunt, appConfig) ->
     changeOrigin: false
   ]
 
-  e2e:
+  integration:
     options:
-      port: 9001
       middleware: (connect) ->
         [
           mountFolder(connect, appConfig.dev)
@@ -29,7 +29,6 @@ module.exports = (grunt, appConfig) ->
 
   livereload:
     options:
-      port: 9000
       middleware: (connect) ->
         [
           livereloadSnippet

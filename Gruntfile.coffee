@@ -54,8 +54,6 @@ module.exports = (grunt) ->
 
     # Plugin for Karma
     karma:          loadMoule "karma"
-    # Plugin for CasperJS
-    casperjs:       loadMoule "casperjs"
     # Custom plugin for generating jasmine html tests runner
     jasminehtml:    loadMoule "jasminehtml"
 
@@ -108,26 +106,6 @@ module.exports = (grunt) ->
 
   grunt.registerTask "test:coverage", [
     "test:unit:coverage"
-  ]
-
-  # run casperjs integration tests
-  grunt.registerTask "test:casperjs", [
-    "build:dev"
-    "configureProxies"
-    "connect:integration"
-    "casper"
-  ]
-
-  # run all tests on the ci server
-  grunt.registerTask "test:ci", [
-    "build:dev"
-    "ngtemplates"
-
-    # run unit + integration tests
-    "karma:unit"
-
-    "connect:e2e"
-    "casperjs"
   ]
 
   grunt.registerTask "test", [

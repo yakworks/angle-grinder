@@ -1,17 +1,21 @@
 _ = require("underscore")
 
+path = require("path")
+fs = require("fs")
+
 class Data
   constructor: (data = null) ->
-    if data? then @data = data else @data = @loadData()
+    @data = if data? then data else @load()
 
   # Loads sample data into memory
-  loadData: ->
-    data = require("./large_load")
+  load: ->
+    largeLoad = fs.readFileSync(path.resolve(__dirname, "large_load.js"), encoding: "UTF-8")
+    data = eval(largeLoad)
 
     for row, index in data
       # generate row id, login and email
       row.id = @nextId()
-      row.login = "login-#{index}"
+      row.login = "login-#{index + 1}"
       row.info =
         email: "#{row.login}@email.com"
 
@@ -19,6 +23,10 @@ class Data
       row.birthday = new Date(row.birthday)
 
     data
+
+  # Reload the test data
+  reload: ->
+    @data = @load()
 
   # Returns the total number of loaded rows
   count: -> @data.length

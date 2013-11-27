@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# install components
 bower install
 npm install
-gem install foreman
+
+# install standalone selenium
+./node_modules/protractor/bin/install_selenium_standalone

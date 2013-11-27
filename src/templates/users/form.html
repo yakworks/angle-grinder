@@ -7,8 +7,8 @@
 </div>
 
 <div class="content">
-  <h2 class="page-header" ng-show="user.newRecord()">Create user</h2>
-  <h2 class="page-header" ng-show="user.persisted()">Edit user</h2>
+  <h2 class="page-header" ng-if="user.newRecord()">Create user</h2>
+  <h2 class="page-header" ng-if="user.persisted()">Edit user</h2>
 
   <form name="userForm" novalidate class="form-horizontal no-margin"
         ag-server-validation-errors
@@ -18,8 +18,7 @@
       <label class="control-label">Name</label>
       <div class="controls">
         <input type="text" name="name" placeholder="Enter Name"
-               ng-model="user.name" autofocus
-               ng-required="true" />
+               ng-model="user.name" ng-required="true" />
         <ag-validation-errors for="name" required="This field is required" />
       </div>
     </div>
@@ -70,19 +69,19 @@
 
       <div class="controls">
         <input type="password" name="password" placeholder="Enter Password"
-               ng-model="user.password" autofocus ng-required="user.newRecord()" ng-minlength="6" />
+               ng-model="user.password" ng-required="user.newRecord()" ng-minlength="6" />
         <ag-validation-errors for="password"
                               required="This field is required"
-                              minlength="Password must be at least 6 characters." />
+                              minlength="Password must be at least 6 characters" />
       </div>
 
       <div class="controls">
         <input type="password" name="passwordConfirmation" placeholder="Enter Password Confirmation"
-               ng-model="user.passwordConfirmation" autofocus
+               ng-model="user.passwordConfirmation"
                ng-required="user.newRecord()" match="user.password" ng-minlength="6" />
         <ag-validation-errors for="passwordConfirmation"
                               required="This field is required"
-                              minlength="Password must be at least 6 characters."
+                              minlength="Password must be at least 6 characters"
                               mismatch="The password does not match the confirmation" />
       </div>
     </div>

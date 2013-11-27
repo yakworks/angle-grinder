@@ -1,8 +1,8 @@
 <div class="modal-header">
   <button type="button" class="close" ng-click="closeEditDialog()" aria-hidden="true">&times;</button>
 
-  <h3 ng-show="createNew">Create New Item</h3>
-  <h3 ng-hide="createNew">Edit Item {{item.customer.name}}</h3>
+  <h3 ng-if="createNew">Create New Item</h3>
+  <h3 ng-if="!createNew">Edit Item {{item.customer.name}}</h3>
 </div>
 
 <div class="modal-body">
@@ -13,7 +13,7 @@
 
       <div class="controls">
         <input type="text" name="customerName" placeholder="Enter Customer Name"
-               ng-model="item.customer.name" autofocus required />
+               ng-model="item.customer.name" ng-required="true" />
         <ag-validation-errors for="customerName" />
       </div>
     </div>
@@ -41,25 +41,25 @@
 
       <div class="controls">
         <input type="password" name="password" placeholder="Enter Password"
-               ng-model="item.password" autofocus required ng-minlength="6" />
+               ng-model="item.password" ng-required="createNew" ng-minlength="6" />
         <ag-validation-errors for="password"
                           required="This field is required"
-                          minlength="Password must be at least 6 characters." />
+                          minlength="Password must be at least 6 characters" />
       </div>
 
       <div class="controls">
         <input type="password" name="passwordConfirmation" placeholder="Enter Password Confirmation"
-               ng-model="item.passwordConfirmation" autofocus
-               required match="item.password" ng-minlength="6" />
+               ng-model="item.passwordConfirmation"
+               ng-required="createNew" match="item.password" ng-minlength="6" />
         <ag-validation-errors for="passwordConfirmation"
                           required="This field is required"
-                          minlength="Password must be at least 6 characters."
+                          minlength="Password must be at least 6 characters"
                           mismatch="The password does not match the confirmation" />
       </div>
     </div>
 
     <div class="modal-footer">
-      <span ng-hide="createNew">
+      <span ng-if="!createNew">
         <ag-delete-button when-confirmed="delete(item)"></ag-delete-button>
       </span>
 
