@@ -88,8 +88,8 @@ describe "Grid example scenario", ->
         expect(page.modalForm.isDisplayed()).toBeTruthy()
         expect(page.modalForm.header.getText()).toEqual "Edit Item Test Customer 1"
 
-        customeName = page.modalForm.findField("item.customer.name")
-        expect(customeName.getValue()).toEqual "Test Customer 1"
+        customerName = page.modalForm.findField("item.customer.name")
+        expect(customerName.getValue()).toEqual "Test Customer 1"
 
         noteField = page.modalForm.findField("item.note")
         expect(noteField.getValue()).toEqual "Note number 1"
