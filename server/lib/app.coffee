@@ -84,4 +84,8 @@ app.delete "/api/users/:id", (req, res) ->
 app.get "/api/orgs.json", (req, res) ->
   res.send orgs.getAll()
 
+app.post "/api/_loadFixtures.json", (req, res) ->
+  data.reload()
+  res.send 200
+
 module.exports = app
