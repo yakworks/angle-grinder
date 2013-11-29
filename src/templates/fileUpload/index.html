@@ -1,0 +1,9 @@
+<h2 class="page-header">File Upload</h2>
+
+<input id="fileupload" type="file" name="files[]" data-url="/api/upload" multiple />
+
+<div ng-if="files">
+  <ul>
+    <li ng-repeat="file in files">{{file | json}}</li>
+  </ul>
+</div>
