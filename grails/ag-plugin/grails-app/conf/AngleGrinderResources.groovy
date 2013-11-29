@@ -41,4 +41,9 @@ modules = {
         resource url: [plugin: plugin, dir: "js", file: "modules/resources.js"]
     }
 
+    angleGrinderFileUpload {
+        resource url: [plugin: plugin, dir: "${dist}/styles", file: "angleGrinder.file-upload.min.css"]
+        resource url: [plugin: plugin, dir: "${dist}/scripts", file: "angleGrinder.file-upload.min.js"]
+    }
+
 }
