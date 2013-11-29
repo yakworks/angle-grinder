@@ -3,6 +3,8 @@ describe "controller: users.MassUpdateFormCtrl", ->
   beforeEach module "angleGrinder", ($provide) ->
     $provide.decorator "massUpdateFormCtrlMixin", -> sinon.spy()
 
+  beforeEach module "angleGrinder.examples"
+
   $scope = null
 
   beforeEach inject ($rootScope, $controller) ->

@@ -31,6 +31,7 @@ module.exports = (config) ->
       "components/bower/angular-strap/src/common.js"
       "components/bower/angular-strap/src/directives/datepicker.js"
       "components/bower/angular-bootstrap/ui-bootstrap-tpls.js"
+      "components/bower/jquery-file-upload/js/jquery.fileupload-angular.js"
 
       "src/scripts/jqgrid/gridz.coffee"
 
@@ -39,6 +40,7 @@ module.exports = (config) ->
       "src/scripts/modules/*.coffee"
       "src/scripts/modules/forms/**/*.coffee"
       "src/scripts/modules/gridz/**/*.coffee"
+      "src/scripts/modules/examples.coffee"
 
       "src/scripts/application.coffee"
       "src/scripts/routes.coffee"

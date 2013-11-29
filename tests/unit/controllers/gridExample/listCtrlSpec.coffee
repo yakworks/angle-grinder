@@ -1,5 +1,5 @@
 describe "controller: gridExample.ListCtrl", ->
-  beforeEach module("angleGrinder")
+  beforeEach module("angleGrinder.examples")
   beforeEach module("templates/gridExample/form.html")
 
   $scope = null

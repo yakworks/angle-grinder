@@ -8,5 +8,5 @@ class SearchFormCtrl
       simple_tags: true
       tags: ["admin", "customer"]
 
-angular.module("angleGrinder")
+angular.module("angleGrinder.examples")
   .controller("usersDialog.SearchFormCtrl", SearchFormCtrl)

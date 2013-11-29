@@ -15,5 +15,5 @@ class IndexCtrl
         console.log data
         loadUploadedFiles()
 
-angular.module("angleGrinder")
+angular.module("angleGrinder.examples")
   .controller("fileUpload.IndexCtrl", IndexCtrl)
