@@ -9,7 +9,8 @@
 
     "blueimp-file-upload-node": "~1.0.4",
     "jquery-file-upload-middleware": "~0.0.9",
-    "imagemagick": "~0.1.3"
+    "imagemagick": "~0.1.3",
+    "mime": "~1.2.11"
   },
   "devDependencies": {
     "mocha": "~1.13.0",

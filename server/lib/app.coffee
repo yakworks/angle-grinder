@@ -1,6 +1,8 @@
 express = require("express")
 upload = require("jquery-file-upload-middleware")
 path = require("path")
+fs = require("fs")
+mime = require("mime")
 
 utils = require("./utils")
 
@@ -14,7 +16,7 @@ app = express()
 
 # configure upload middleware
 upload.configure
-  uploadDir: __dirname + "/../../tmp/uploads"
+  uploadDir: path.join(__dirname, "/../../tmp/uploads")
   uploadUrl: "/api/uploads"
   imageVersions:
     thumbnail:
@@ -45,6 +47,17 @@ randomErrorFor = (res) ->
 app.get "/api/upload/list", (req, res) ->
   upload.fileManager().getFiles (files) ->
     res.json(files)
+
+app.get "/api/uploads/:name", (req, res) ->
+  filePath = path.join(__dirname, "/../../tmp/uploads", req.params.name)
+  stat = fs.statSync(filePath)
+
+  res.writeHead 200,
+    "Content-Type": mime.lookup(filePath)
+    "Content-Length": stat.size
+
+  readStream = fs.createReadStream(filePath)
+  readStream.pipe(res)
 
 app.get "/api/users", (req, res) ->
   page = parseInt(req.query["page"]) || 1
