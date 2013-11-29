@@ -51,5 +51,5 @@ class IndexCtrl
       label: "Paid"
     ]
 
-angular.module("angleGrinder")
+angular.module("angleGrinder.examples")
   .controller("usersDialog.ListCtrl", IndexCtrl)

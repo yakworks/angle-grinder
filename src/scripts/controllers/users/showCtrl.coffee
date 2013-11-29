@@ -45,5 +45,5 @@ class ShowCtrl
       formatter: "okIcon"
     ]
 
-angular.module("angleGrinder")
+angular.module("angleGrinder.examples")
   .controller("users.ShowCtrl", ShowCtrl)

@@ -29,6 +29,7 @@ module.exports = (config) ->
       "components/angular-strap/common.js"
       "components/angular-strap/directives/datepicker.js"
       "components/angular-bootstrap/ui-bootstrap-tpls.js"
+      "components/jquery-file-upload/js/jquery.fileupload-angular.js"
 
       "templates/**/*.html"
 
@@ -37,6 +38,7 @@ module.exports = (config) ->
       "scripts/modules/*.js"
       "scripts/modules/forms/**/*.js"
       "scripts/modules/gridz/**/*.js"
+      "scripts/modules/examples*.js"
 
       "scripts/application.js"
       "scripts/routes.js"

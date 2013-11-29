@@ -1,5 +1,5 @@
 describe "controller: users.FormCtrl", ->
-  beforeEach module("angleGrinder")
+  beforeEach module("angleGrinder.examples")
 
   $scope = null
 

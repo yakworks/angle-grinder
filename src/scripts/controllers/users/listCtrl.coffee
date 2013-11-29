@@ -53,5 +53,5 @@ class ListCtrl
       label: "Paid"
     ]
 
-angular.module("angleGrinder")
+angular.module("angleGrinder.examples")
   .controller("users.ListCtrl", ListCtrl)

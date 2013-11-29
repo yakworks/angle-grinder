@@ -77,5 +77,5 @@ class IndexCtrl
       formatter: "okIcon"
     ]
 
-angular.module("angleGrinder")
+angular.module("angleGrinder.examples")
   .controller("gridExample.ListCtrl", IndexCtrl)

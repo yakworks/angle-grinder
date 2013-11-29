@@ -17,5 +17,5 @@ class SidebarCtrl
         when "examples" then "examples"
         else "angleGrinder"
 
-angular.module("angleGrinder")
+angular.module("angleGrinder.examples")
   .controller("SidebarCtrl", SidebarCtrl)

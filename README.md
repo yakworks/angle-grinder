@@ -154,6 +154,10 @@ dist
 
 And then navigate to `http://localhost:8000` to see the production release.
 
+## File upload demo
+
+`./node_modules/blueimp-file-upload-node/server.js`
+
 ## Build and release the documentation
 
 Clone the `gh-pages` branch:
