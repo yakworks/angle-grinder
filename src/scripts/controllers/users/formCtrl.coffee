@@ -21,5 +21,5 @@ class FormCtrl
       onSuccess = -> $location.path "/examples/users"
       user.delete success: onSuccess
 
-angular.module("angleGrinder")
+angular.module("angleGrinder.examples")
   .controller("users.FormCtrl", FormCtrl)

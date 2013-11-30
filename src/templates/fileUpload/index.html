@@ -1,0 +1,67 @@
+<h2 class="page-header">File Upload Example</h2>
+
+<form action="/api/upload" method="POST" enctype="multipart/form-data"
+      file-upload ng-class="{'fileupload-processing': processing() || loadingFiles}" ng-if="!loadingFiles">
+
+  <div>
+    <span class="btn btn-success fileinput-button" ng-class="{ disabled: disabled }">
+      <i class="fa fa-plus"></i>
+      <span>Add files...</span>
+      <input type="file" name="files[]" multiple ng-disabled="disabled"/>
+    </span>
+
+    <button type="button" class="btn btn-primary start" ng-click="submit()">
+      <i class="glyphicon glyphicon-upload"></i>
+      <span>Start upload</span>
+    </button>
+
+    <button type="button" class="btn btn-warning cancel" ng-click="cancel()">
+      <i class="glyphicon glyphicon-ban-circle"></i>
+      <span>Cancel upload</span>
+    </button>
+
+    <!-- The global file processing state -->
+    <span class="fileupload-process"></span>
+  </div>
+
+  <br/>
+
+  <!-- The table listing the files available for upload/download -->
+  <table class="table table-striped">
+    <tr ng-repeat="file in queue" ng-class="{'processing': file.$processing()}">
+      <td>
+        <a href="{{file.url}}" target="_blank">{{file.name}}</a>
+        <strong ng-show="file.error" class="error text-danger">{{file.error}}</strong>
+      </td>
+      <td style="width: 100px;">
+        <p class="size">{{file.size | formatFileSize}}</p>
+
+        <div class="progress progress-striped active fade" ng-class="{pending: 'in'}[file.$state()]"
+             file-upload-progress="file.$progress()">
+          <div class="progress-bar progress-bar-success" ng-style="{width: num + '%'}"></div>
+        </div>
+      </td>
+      <td style="width: 150px;">
+        <button type="button" class="btn btn-primary start" ng-click="file.$submit()"
+                ng-hide="!file.$submit || options.autoUpload"
+                ng-disabled="file.$state() == 'pending' || file.$state() == 'rejected'">
+          <i class="glyphicon glyphicon-upload"></i>
+          <span>Start</span>
+        </button>
+
+        <button type="button" class="btn btn-warning cancel" ng-click="file.$cancel()"
+                ng-hide="!file.$cancel">
+          <i class="glyphicon glyphicon-ban-circle"></i>
+          <span>Cancel</span>
+        </button>
+
+        <button ng-controller="fileUpload.FileDestroyController"
+                type="button" class="btn btn-danger destroy" ng-click="file.$destroy()"
+                ng-hide="!file.$destroy">
+          <i class="glyphicon glyphicon-trash"></i>
+          <span>Delete</span>
+        </button>
+      </td>
+    </tr>
+  </table>
+</form>

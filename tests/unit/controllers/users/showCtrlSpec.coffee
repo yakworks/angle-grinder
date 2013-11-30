@@ -6,7 +6,7 @@ describe "controller: users.ShowCtrl", ->
       sinon.stub($delegate, "path")
       $delegate
 
-  beforeEach module("angleGrinder.forms")
+  beforeEach module "angleGrinder.examples"
 
   $scope = null
 

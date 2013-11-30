@@ -4,7 +4,7 @@ describe "controller: usersDialog.ListCtrl", ->
     $provide.decorator "dialogCrudCtrlMixin", -> sinon.spy()
     $provide.decorator "massUpdateMixin", -> sinon.spy()
 
-  beforeEach module "angleGrinder"
+  beforeEach module "angleGrinder.examples"
 
   $scope = null
 

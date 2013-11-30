@@ -24,6 +24,9 @@
         "bootstrap-datepicker": "1.1.1",
         "modernizr": "~2.6.2",
 
+        "jquery-file-upload": "~9.4.2",
+        "blueimp-load-image": "~1.11.0",
+
         "google-code-prettify": "1.0.0"
     },
 

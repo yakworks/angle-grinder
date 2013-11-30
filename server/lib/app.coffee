@@ -1,5 +1,8 @@
 express = require("express")
+upload = require("jquery-file-upload-middleware")
 path = require("path")
+fs = require("fs")
+mime = require("mime")
 
 utils = require("./utils")
 
@@ -11,9 +14,23 @@ data = new Data()
 
 app = express()
 
-app.use express.logger()
-app.use express.bodyParser()
-app.use express.static(path.join(__dirname, "dist"))
+# configure upload middleware
+upload.configure
+  uploadDir: path.join(__dirname, "/../../tmp/uploads")
+  uploadUrl: "/api/uploads"
+  imageVersions:
+    thumbnail:
+      width: 80
+      height: 80
+
+app.configure ->
+  app.use express.logger()
+  app.use "/api/upload", upload.fileHandler()
+  app.use express.bodyParser()
+  app.use express.static(path.join(__dirname, "dist"))
+
+upload.on "error", (error) ->
+  console.log error
 
 app.use (err, req, res, next) ->
   console.error err.stack
@@ -26,6 +43,21 @@ randomSleep = (values = [1, 2, 3]) ->
 # respond with random error
 randomErrorFor = (res) ->
   res.send utils.randomItemFrom [400, 404, 500]
+
+app.get "/api/upload/list", (req, res) ->
+  upload.fileManager().getFiles (files) ->
+    res.json(files)
+
+app.get "/api/uploads/:name", (req, res) ->
+  filePath = path.join(__dirname, "/../../tmp/uploads", req.params.name)
+  stat = fs.statSync(filePath)
+
+  res.writeHead 200,
+    "Content-Type": mime.lookup(filePath)
+    "Content-Length": stat.size
+
+  readStream = fs.createReadStream(filePath)
+  readStream.pipe(res)
 
 app.get "/api/users", (req, res) ->
   page = parseInt(req.query["page"]) || 1

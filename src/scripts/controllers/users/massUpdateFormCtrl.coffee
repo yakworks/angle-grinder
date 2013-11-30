@@ -14,5 +14,5 @@ class MassUpdateFormCtrl
     # Assign default value for all records
     $scope.records = allowance: 0
 
-angular.module("angleGrinder")
+angular.module("angleGrinder.examples")
   .controller("users.MassUpdateFormCtrl", MassUpdateFormCtrl)

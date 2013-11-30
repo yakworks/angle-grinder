@@ -48,5 +48,9 @@ app.config [
             userResolver($route.current.params.id)
         ]
 
+      .when "/examples/fileUpload",
+        templateUrl: "templates/fileUpload/index.html"
+        controller: "fileUpload.IndexCtrl"
+
       .otherwise redirectTo: "/"
 ]
