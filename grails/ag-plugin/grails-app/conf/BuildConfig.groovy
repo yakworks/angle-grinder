@@ -39,7 +39,7 @@ grails.project.dependency.resolution = {
         }
 
         runtime(":fields:1.3") { export = false }
-
+		runtime(":hibernate:$grailsVersion") { export = false }
         test(":spock:0.7") {
             exclude "spock-grails-support"
         }
