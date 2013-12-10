@@ -17,6 +17,7 @@ module.exports = (config) ->
       "components/bower/angular-mocks/angular-mocks.js"
       "components/bower/angular-resource/angular-resource.js"
       "components/bower/angular-route/angular-route.js"
+      "components/bower/angular-sanitize/angular-sanitize.js"
 
       "components/bower/sinon/lib/sinon.js"
       "components/bower/sinon/lib/sinon/spy.js"

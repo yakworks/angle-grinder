@@ -2,6 +2,7 @@
 
 app = angular.module("angleGrinder", [
   "ngRoute"
+  "ngSanitize"
 
   "angleGrinder.resources"
   "angleGrinder.docs"
