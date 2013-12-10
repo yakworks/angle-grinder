@@ -114,6 +114,8 @@ module.exports = (grunt) ->
 
   grunt.registerTask "build:dist", [
     "test:ci"
+
+    "build:dev"
     "copy:dist"
     "replace"
     "useminPrepare"
