@@ -3,6 +3,7 @@ package grinder
 import org.codehaus.groovy.grails.commons.GrailsClassUtils
 import org.hibernate.ObjectNotFoundException
 import org.hibernate.UnresolvableObjectException
+import org.codehaus.groovy.grails.web.servlet.mvc.GrailsParameterMap
 
 //import org.apache.commons.logging.*
 
@@ -126,6 +127,28 @@ class BeanPathTools {
 
         }
 
+    }
+
+
+    /**
+     * takes a request and an optional map.
+     * call the MapFlattener and returns a GrailsParameterMap to be used for binding
+     * example: [xxx:[yyy:123]] will turn into a GrailsParameterMap with ["xxx.yyy":123]
+     */
+     //XXX Igor, can you add test for this in your spec?
+    protected GrailsParameterMap flattenMap(request, jsonMap = null){
+        def p = new MapFlattener().flatten(jsonMap ?: request.JSON)
+        //XXX a hack to remove the edited/created fields. not sure why they are being binded
+        p.each{ entry ->
+            def key = entry.key
+            if (entry.key.endsWith('createdDate') || entry.key.endsWith('editedDate')){
+                entry.value = null
+            }
+        }
+        //println "flat map $p"
+        def gpm =  new GrailsParameterMap(p,request)
+        gpm.updateNestedKeys(p)
+        return gpm
     }
 
 }
