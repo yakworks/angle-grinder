@@ -1,7 +1,8 @@
 target/
 stacktrace.log
 plugin.xml
-grails-quartz*.zip
+grails-*.zip
+
 
 # Eclipse Project files
 .classpath

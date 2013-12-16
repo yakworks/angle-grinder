@@ -1,6 +1,7 @@
 # Ignore project files
 .idea
 *.iml
+*.sublime-workspace
 
 # Ignore libraries
 node_modules
