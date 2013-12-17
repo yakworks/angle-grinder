@@ -3,8 +3,7 @@ describe "module: angleGrinder.gridz", ->
 
   describe "service: hasSearchFilters", ->
     hasSearchFilters = null
-    beforeEach inject (_hasSearchFilters_) ->
-      hasSearchFilters = _hasSearchFilters_
+    beforeEach inject (_hasSearchFilters_) -> hasSearchFilters = _hasSearchFilters_
 
     describe "if filters contain at least one non-empty field", ->
       filters = foo: "  ", bar: "test", biz: null
@@ -48,8 +47,7 @@ describe "module: angleGrinder.gridz", ->
       expect(element.hasClass("disabled")).to.be.false
 
     describe "when the search request is in progress", ->
-      beforeEach ->
-        $scope.$apply -> $scope.promise = undefined
+      beforeEach -> $scope.$apply -> $scope.searching = true
 
       it "is disabled", ->
         expect(element.is(":disabled")).to.be.true
@@ -88,8 +86,7 @@ describe "module: angleGrinder.gridz", ->
       expect(element.hasClass("disabled")).to.be.false
 
     describe "when the search request is in progress", ->
-      beforeEach ->
-        $scope.$apply -> $scope.promise = undefined
+      beforeEach -> $scope.$apply -> $scope.searching = true
 
       it "is disabled", ->
         expect(element.is(":disabled")).to.be.true
@@ -98,8 +95,7 @@ describe "module: angleGrinder.gridz", ->
         expect(element.text()).to.contain "Reset..."
 
     describe "on click", ->
-      beforeEach ->
-        $scope.resetSearch = ->
+      beforeEach -> $scope.resetSearch = ->
 
       it "calls #resetSearch", ->
         # Given
@@ -117,7 +113,11 @@ describe "module: angleGrinder.gridz", ->
 
     beforeEach inject ($rootScope, $injector) ->
       $scope = $rootScope.$new()
-      $scope.grid = sinon.stub(search: angular.noop)
+
+      # stub grid controller
+      gridCtrl = search: angular.noop
+      sinon.stub(gridCtrl, "search").returns then: ->
+      $scope.grid = gridCtrl
 
       {element} = compileTemplate """
         <form name="searchForm" ag-search-form="grid">

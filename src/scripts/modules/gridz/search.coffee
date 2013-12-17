@@ -16,8 +16,8 @@ gridz.directive "agSearchButton", ->
   restrict: "E"
   replace: true
   template: """
-    <button type="submit" ng-click="advancedSearch(filters)" ng-disabled="!promise" class="btn btn-info">
-      <i class="icon-search icon-white"></i> Search<span ng-show="!promise">...</span>
+    <button type="submit" ng-click="advancedSearch(filters)" ng-disabled="searching" class="btn btn-info">
+      <i class="icon-search icon-white"></i> Search<span ng-show="searching">...</span>
     </button>
   """
 
@@ -25,8 +25,8 @@ gridz.directive "agResetSearchButton", ->
   restrict: "E"
   replace: true
   template: """
-    <button type="button" ng-click="resetSearch()" ng-disabled="!promise" class="btn">
-      <i class="icon-remove"></i> Reset<span ng-show="!promise">...</span>
+    <button type="button" ng-click="resetSearch()" ng-disabled="searching" class="btn">
+      <i class="icon-remove"></i> Reset<span ng-show="searching">...</span>
     </button>
   """
 
@@ -34,24 +34,27 @@ gridz.directive "agSearchForm", ["$log", ($log) ->
   restrict: "A"
   scope: true
 
-  controller: ["$scope", "$attrs", ($scope, $attrs) ->
+  controller: ["$scope", "$attrs", "$document", ($scope, $attrs, $document) ->
     $scope.filters = {}
-    $scope.promise = true
+    $scope.searching = false
 
     # Trigger search action for the grid
     $scope.advancedSearch = (filters) ->
+      $scope.searching = true
       gridCtrl = $scope.$parent[$attrs.agSearchForm]
 
       unless gridCtrl
         $log.warn "grid is not defined"
         return
 
-      $scope.promise = gridCtrl.search(filters)
+      promise = gridCtrl.search(filters)
+      promise.then -> $scope.searching = false
 
       # enable buttons back when something wrong happened
-      $(document).ajaxError (event, jqxhr, settings, exception) ->
+      $document.ajaxError (event, jqxhr, settings, exception) ->
+        console.log settings
         if settings.type is "GET"
-          $scope.$apply -> $scope.promise = true
+          $scope.$apply -> $scope.searching = false
 
       return
 
