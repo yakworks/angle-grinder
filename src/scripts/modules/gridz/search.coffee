@@ -43,9 +43,6 @@ gridz.directive "agSearchForm", ["$log", ($log) ->
     $scope.filters = {}
     $scope.searching = false
 
-    gridCtrl = $scope.$parent[$attrs.agSearchForm]
-    formCtrl = $scope.searchForm
-
     # enable buttons back when something wrong happened
     $document.ajaxError (event, jqxhr, settings, exception) ->
       if settings.type is "GET"
@@ -54,6 +51,7 @@ gridz.directive "agSearchForm", ["$log", ($log) ->
     # Perform server side grid filtering
     gridSearch = (filters = {}) ->
       $scope.searching = true
+      gridCtrl = $scope.$parent[$attrs.agSearchForm]
 
       unless gridCtrl
         $log.warn "grid is not defined"
@@ -65,7 +63,9 @@ gridz.directive "agSearchForm", ["$log", ($log) ->
 
     # Trigger search action for the grid
     $scope.advancedSearch = (filters) ->
-      return $log.info "advanced search form is invalid", formCtrl if formCtrl?.$invalid
+      formCtrl = $scope.searchForm
+      return $log.info "advanced search form is invalid", formCtrl  if formCtrl?.$invalid
+
       gridSearch(filters)
 
     # Reset the search form and trigger grid reload
