@@ -33,34 +33,44 @@ gridz.directive "agResetSearchButton", ->
 gridz.directive "agSearchForm", ["$log", ($log) ->
   restrict: "A"
   scope: true
+  require: "^form"
+
+  link: (scope, element, attrs, form) ->
+    # assign form instance to the scope
+    scope.searchForm = form
 
   controller: ["$scope", "$attrs", "$document", ($scope, $attrs, $document) ->
     $scope.filters = {}
     $scope.searching = false
 
-    # Trigger search action for the grid
-    $scope.advancedSearch = (filters) ->
+    gridCtrl = $scope.$parent[$attrs.agSearchForm]
+    formCtrl = $scope.searchForm
+
+    # enable buttons back when something wrong happened
+    $document.ajaxError (event, jqxhr, settings, exception) ->
+      if settings.type is "GET"
+        $scope.$apply -> $scope.searching = false
+
+    # Perform server side grid filtering
+    gridSearch = (filters = {}) ->
       $scope.searching = true
-      gridCtrl = $scope.$parent[$attrs.agSearchForm]
 
       unless gridCtrl
         $log.warn "grid is not defined"
         return
 
-      promise = gridCtrl.search(filters)
-      promise.then -> $scope.searching = false
+      # enable buttons when the search is complete
+      gridCtrl.search(filters).then ->
+         $scope.searching = false
 
-      # enable buttons back when something wrong happened
-      $document.ajaxError (event, jqxhr, settings, exception) ->
-        console.log settings
-        if settings.type is "GET"
-          $scope.$apply -> $scope.searching = false
-
-      return
+    # Trigger search action for the grid
+    $scope.advancedSearch = (filters) ->
+      return $log.info "advanced search form is invalid", formCtrl if formCtrl?.$invalid
+      gridSearch(filters)
 
     # Reset the search form and trigger grid reload
     $scope.resetSearch = (filters = {}) ->
       $scope.filters = filters
-      $scope.advancedSearch(filters)
+      gridSearch(filters)
   ]
 ]
