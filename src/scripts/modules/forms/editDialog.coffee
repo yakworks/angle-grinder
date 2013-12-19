@@ -63,7 +63,9 @@ class EditDialog
     # override so we can intercept form dirty and prevent backdrop click
     dialog.handleBackDropClick = (e) ->
       e.preventDefault()
-      unless dialog.$scope.editForm.$dirty
+
+      formCtrl = dialog.$scope.editForm
+      if formCtrl? and not formCtrl.$dirty
         dialog.close()
         dialog.$scope.$apply()
 
