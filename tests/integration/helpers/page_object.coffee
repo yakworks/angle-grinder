@@ -6,7 +6,7 @@ class PageObject
 
   # The protractor namespace which wraps the webdriver namespace.
   # This contains static variables and classes, such as `protractor.Key`
-  # which enumerates the codes for special keybord signals.
+  # which enumerates the codes for special keyboard signals.
   protractor: protractor
 
   # A collection of element locator strategies.
