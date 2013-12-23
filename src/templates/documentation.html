@@ -305,7 +305,7 @@ class FormCtrl
   $scope.org = resourceBuilder("/api/org")
 
   $scope.save = (org) ->
-    return if $scope.editForm.$invalid
+    return if $scope.form.edit.$invalid
     org.save()
 
 angular.module("myApp")
@@ -398,7 +398,7 @@ forms.value "validationMessages",
   Adds ability to display validation errors from the server side along with standard validation messages.
 
 <pre class="prettyprint lang-html">
-&lt;form name=&quot;editForm&quot; novalidate class=&quot;form-horizontal no-margin&quot;
+&lt;form name=&quot;form.edit&quot; novalidate class=&quot;form-horizontal no-margin&quot;
       ag-server-validation-errors&gt;
 
   &lt;!-- form inputs --&gt;
@@ -518,7 +518,7 @@ angular.module("myApp")
   &lt;h3 ng-hide=&quot;createNew&quot;&gt;Edit ${entityName}&lt;/h3&gt;
 &lt;/div&gt;
 
-&lt;form name=&quot;editForm&quot; class=&quot;form-horizontal no-margin&quot; novalidate
+&lt;form name=&quot;form.edit&quot; class=&quot;form-horizontal no-margin&quot; novalidate
       ng-submit=&quot;save(item)&quot;&gt;
   &lt;div class=&quot;modal-body&quot; ng-controller=&quot;user.FormCtrl&quot;&gt;
 

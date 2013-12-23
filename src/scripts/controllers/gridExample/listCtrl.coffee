@@ -33,8 +33,8 @@ class IndexCtrl
         item.id = generateId()
         callback.success(this)
 
-      editDialog.open("templates/gridExample/form.html", item, $scope.exampleGrid)
-        .then (item) => @data.push(item)
+      promise = editDialog.open("templates/gridExample/form.html", item, $scope.exampleGrid).result
+      promise.then (item) => @data.push(item)
 
     $scope.deleteItem = (id) =>
       item = @deleteItemById(id)

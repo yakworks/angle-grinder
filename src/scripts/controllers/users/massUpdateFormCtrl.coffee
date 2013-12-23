@@ -2,11 +2,11 @@ angular.module("angleGrinder")
 
 class MassUpdateFormCtrl
 
-  @$inject = ["$scope", "massUpdateFormCtrlMixin", "dialog", "Users", "selectedIds", "grid"]
-  constructor: ($scope, massUpdateFormCtrlMixin, dialog, Users, selectedIds, grid) ->
+  @$inject = ["$scope", "massUpdateFormCtrlMixin", "$modalInstance", "Users", "selectedIds", "grid"]
+  constructor: ($scope, massUpdateFormCtrlMixin, $modalInstance, Users, selectedIds, grid) ->
 
     massUpdateFormCtrlMixin $scope,
-      dialog: dialog
+      modalInstance: $modalInstance
       Resource: Users
       selectedIds: selectedIds
       grid: grid

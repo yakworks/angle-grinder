@@ -1,20 +1,24 @@
 forms = angular.module("angleGrinder.forms")
 
 class FormDialogCtrl
-  @$inject = ["$scope", "$rootScope", "$log", "dialog", "serverValidationErrorsHandler", "item", "gridCtrl"]
-  constructor: ($scope, $rootScope, $log, dialog, serverValidationErrorsHandler, item, gridCtrl) ->
+  @$inject = ["$scope", "$rootScope", "$log", "$modalInstance", "serverValidationErrorsHandler", "item", "gridCtrl"]
+  constructor: ($scope, $rootScope, $log, $modalInstance, serverValidationErrorsHandler, item, gridCtrl) ->
     $scope.item = item
     $scope.createNew = not item.persisted()
+
+    # workaround for problems with modal's scope and forms
+    # for more details see http://stackoverflow.com/questions/19312936/angularjs-modal-dialog-form-object-is-undefined-in-controller
+    $scope.form = {}
 
     # Closes the dialog
     $scope.closeEditDialog = ->
       $log.info "Closing the dialog"
-      dialog.close($scope.item)
+      $modalInstance.close($scope.item)
 
     # If form is valid performs server side update
     $scope.save = (item) ->
-      if $scope.editForm.$invalid
-        $log.warn "The form is invalid", $scope.editForm
+      if $scope.form.edit.$invalid
+        $log.warn "The form is invalid", $scope.form.edit
         return
 
       onSuccess = (response) ->
@@ -25,7 +29,7 @@ class FormDialogCtrl
 
       onError = (response) ->
         $log.error "Something went wront", response
-        serverValidationErrorsHandler($scope.editForm, response, item.resourceName())
+        serverValidationErrorsHandler($scope.form.edit, response, item.resourceName())
 
       item.save success: onSuccess, error: onError
 
@@ -45,30 +49,19 @@ class FormDialogCtrl
 forms.controller "FormDialogCtrl", FormDialogCtrl
 
 class EditDialog
-  @$inject = ["$dialog"]
-  constructor: (@$dialog) ->
+  @$inject = ["$modal"]
+  constructor: (@$modal) ->
 
   open: (templateUrl, item, gridCtrl = null) ->
-    dialog = @$dialog.dialog
-      backdropFade: false
-      dialogFade: false
+    @$modal.open
+      backdrop: "static"
+      keyboard: false
+
+      templateUrl: templateUrl
+      controller: "FormDialogCtrl"
+
       resolve:
         item: -> item
         gridCtrl: -> gridCtrl
-
-    # override so we can intercept form dirty and prevent escape
-    dialog.handledEscapeKey = (e) ->
-      dialog.handleBackDropClick(e) if e.which is 27
-
-    # override so we can intercept form dirty and prevent backdrop click
-    dialog.handleBackDropClick = (e) ->
-      e.preventDefault()
-
-      formCtrl = dialog.$scope.editForm
-      if formCtrl? and not formCtrl.$dirty
-        dialog.close()
-        dialog.$scope.$apply()
-
-    dialog.open templateUrl, "FormDialogCtrl"
 
 forms.service "editDialog", EditDialog

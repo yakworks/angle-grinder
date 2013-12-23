@@ -25,7 +25,7 @@ class ModalFormView extends PageObject
     @findElement @By.css(".modal-header h3")
 
   @has "form", ->
-    @findElement @By.css("form[name='editForm']")
+    @findElement @By.css("form[name='form.edit']")
 
   # form elements
 

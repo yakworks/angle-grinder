@@ -2,11 +2,13 @@ mixin = angular.module("angleGrinder.forms")
 
 mixin.factory "massUpdateFormCtrlMixin", ["$log", ($log) ->
   ($scope, args = {}) ->
-    {dialog, Resource, selectedIds, grid} = args
+    {modalInstance, Resource, selectedIds, grid} = args
+
+    $scope.form = {}
 
     # Generic method for massupdating selected rows
     $scope.massUpdate = (records) ->
-      return if $scope.massUpdateForm.$invalid
+      return if $scope.form.massUpdate.$invalid
       $log.info "Mass updating records", records
 
       promise = Resource.massUpdate(ids: selectedIds, data: records).$promise
@@ -34,6 +36,6 @@ mixin.factory "massUpdateFormCtrlMixin", ["$log", ($log) ->
     # Generic method for closing the mass update dialog
     $scope.closeDialog = ->
       $log.info "Closing the mass update dialog"
-      dialog.close()
+      modalInstance.close()
 
 ]
