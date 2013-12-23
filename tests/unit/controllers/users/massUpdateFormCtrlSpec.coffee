@@ -12,7 +12,8 @@ describe "controller: users.MassUpdateFormCtrl", ->
 
     $controller "users.MassUpdateFormCtrl",
       $scope: $scope
-      dialog: "foo"
+      $modalInstance: "foo"
+
       Users: "Users"
       selectedIds: "bar"
       grid: "biz"
@@ -30,7 +31,7 @@ describe "controller: users.MassUpdateFormCtrl", ->
       expect(massUpdateFormCtrlMixin.calledWith($scope)).to.be.true
 
       args = massUpdateFormCtrlMixin.getCall(0).args[1]
-      expect(args).to.have.property "dialog", "foo"
+      expect(args).to.have.property "modalInstance", "foo"
       expect(args).to.have.property "Resource", "Users"
       expect(args).to.have.property "selectedIds", "bar"
       expect(args).to.have.property "grid", "biz"

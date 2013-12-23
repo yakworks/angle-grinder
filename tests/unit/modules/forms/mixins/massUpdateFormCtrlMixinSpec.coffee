@@ -18,22 +18,24 @@ describe "module: angleGrinder.forms mixin: massUpdateFormCtrlMixin", ->
   $rootScope = null
   $scope = null
 
-  dialog = null
+  modalInstance = null
   grid = null
 
   beforeEach inject (_$rootScope_, massUpdateFormCtrlMixin, Users) ->
     $rootScope = _$rootScope_
     $scope = $rootScope.$new()
+    $scope.form = {}
 
-    dialog = sinon.stub(close: ->)
+    modalInstance = sinon.stub(close: angular.noop)
+
     selectedIds = [1, 2, 3]
     grid = sinon.stub
-      reload: ->,
-      updateRow: ->,
-      flashOnError: ->
+      reload: angular.noop,
+      updateRow: angular.noop,
+      flashOnError: angular.noop
 
     massUpdateFormCtrlMixin $scope,
-      dialog: dialog
+      modalInstance: modalInstance
       Resource: Users
       selectedIds: selectedIds
       grid: grid
@@ -45,7 +47,7 @@ describe "module: angleGrinder.forms mixin: massUpdateFormCtrlMixin", ->
 
     describe "when the massUpdate form is valid", ->
       beforeEach ->
-        $scope.massUpdateForm = $valid: true, $invalid: false
+        $scope.form.massUpdate = $valid: true, $invalid: false
         $rootScope.$apply -> $scope.massUpdate(allowance: 123)
 
       it "updates the records", inject (Users) ->
@@ -64,7 +66,7 @@ describe "module: angleGrinder.forms mixin: massUpdateFormCtrlMixin", ->
         expect(grid.flashOnError.calledWith("101")).to.be.true
 
       it "closes a dialog", ->
-        expect(dialog.close.called).to.be.true
+        expect(modalInstance.close.called).to.be.true
 
   describe "#closeDialog", ->
 
@@ -76,4 +78,4 @@ describe "module: angleGrinder.forms mixin: massUpdateFormCtrlMixin", ->
       $scope.closeDialog()
 
       # Then
-      expect(dialog.close.called).to.be.true
+      expect(modalInstance.close.called).to.be.true

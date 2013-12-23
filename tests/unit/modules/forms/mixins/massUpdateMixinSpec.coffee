@@ -1,11 +1,9 @@
 describe "module: angleGrinder.forms mixin: massUpdateMixin", ->
 
-  massUpdateDialog = null
-
   beforeEach module "angleGrinder.forms", ($provide) ->
-    $provide.decorator "$dialog", ($delegate) ->
-      massUpdateDialog = sinon.stub(open: ->)
-      sinon.stub($delegate, "dialog").returns massUpdateDialog
+    $provide.decorator "$modal", ($delegate) ->
+      modualInstance = sinon.stub()
+      sinon.stub($delegate, "open").returns modualInstance
       $delegate
 
   $scope = null
@@ -14,7 +12,7 @@ describe "module: angleGrinder.forms mixin: massUpdateMixin", ->
   beforeEach inject ($rootScope, massUpdateMixin) ->
     $scope = $rootScope.$new()
 
-    grid = getSelectedRowIds: ->
+    grid = getSelectedRowIds: angular.noop
     $scope.theGrid = grid
 
     massUpdateMixin $scope,
@@ -40,28 +38,32 @@ describe "module: angleGrinder.forms mixin: massUpdateMixin", ->
       it "gets selected rows", ->
         expect(grid.getSelectedRowIds.called).to.be.true
 
-      it "opens the dialog", inject ($dialog) ->
-        expect($dialog.dialog.called).to.be.true
+      it "opens the dialog", inject ($modal) ->
+        expect($modal.open.called).to.be.true
 
-        args = $dialog.dialog.getCall(0).args[0]
-        expect(args).to.have.property "backdropFade", false
-        expect(args).to.have.property "dialogFade", false
+        args = $modal.open.getCall(0).args[0]
         expect(args).to.have.deep.property "resolve.selectedIds"
         expect(args).to.have.deep.property "resolve.grid"
-
-        expect(massUpdateDialog.open.called).to.be.true
 
       context "when the controller is not specified", ->
         before -> @massUpdateFormCtrl = null
 
-        it "uses the default mass update form controller", ->
-          expect(massUpdateDialog.open.calledWith("/path/to/the/form.html", "MassUpdateFormCtrl")).to.be.true
+        it "uses the default mass update form controller", inject ($modal) ->
+          expect($modal.open.called).to.be.true
+
+          args = $modal.open.getCall(0).args[0]
+          expect(args).to.have.property "templateUrl", "/path/to/the/form.html"
+          expect(args).to.have.property "controller", "MassUpdateFormCtrl"
 
       context "when the controller is specified", ->
         before -> @massUpdateFormCtrl = "OtherCtrl"
 
-        it "uses the custom controller", ->
-          expect(massUpdateDialog.open.calledWith("/path/to/the/form.html", "OtherCtrl")).to.be.true
+        it "uses the custom controller", inject ($modal) ->
+          expect($modal.open.called).to.be.true
+
+          args = $modal.open.getCall(0).args[0]
+          expect(args).to.have.property "templateUrl", "/path/to/the/form.html"
+          expect(args).to.have.property "controller", "OtherCtrl"
 
     context "when nothing is selected", ->
       beforeEach ->
@@ -71,5 +73,5 @@ describe "module: angleGrinder.forms mixin: massUpdateMixin", ->
       it "gets selected rows", ->
         expect(grid.getSelectedRowIds.called).to.be.true
 
-      it "does not open the dialog", inject ($dialog) ->
-        expect($dialog.dialog.called).to.be.false
+      it "does not open the dialog", inject ($modal) ->
+        expect($modal.open.called).to.be.false

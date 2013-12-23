@@ -1,8 +1,8 @@
 mixin = angular.module("angleGrinder.forms")
 
 mixin.factory "massUpdateMixin", [
-  "$log", "$dialog", "pathWithContext",
-  ($log, $dialog, pathWithContext) ->
+  "$log", "$modal", "pathWithContext",
+  ($log, $modal, pathWithContext) ->
     ($scope, args = {}) ->
       {gridName, templateUrl, controller} = args
       controller ?= "MassUpdateFormCtrl"
@@ -15,13 +15,15 @@ mixin.factory "massUpdateMixin", [
         selectedIds = grid.getSelectedRowIds()
         return if selectedIds.length is 0
 
-        dialog = $dialog.dialog
-          backdropFade: false
-          dialogFade: false
+        # ..and finally open the dialog
+        $modal.open
+          backdrop: "static"
+          keyboard: false
+
+          templateUrl: pathWithContext(templateUrl)
+          controller: controller
+
           resolve:
             selectedIds: -> selectedIds
             grid: -> grid
-
-        # ..and finally open the dialog
-        dialog.open(pathWithContext(templateUrl), controller)
 ]

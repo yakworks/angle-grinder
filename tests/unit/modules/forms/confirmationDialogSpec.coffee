@@ -1,9 +1,9 @@
 describe "module: angleGrinder.forms service: confirmationDialog", ->
   beforeEach module("angleGrinder.forms")
 
-  it "displays the confirmation", inject ($dialog, confirmationDialog) ->
+  it "displays the confirmation", inject ($modal, confirmationDialog) ->
     # Given
-    spy = sinon.spy($dialog, "dialog")
+    spy = sinon.spy($modal, "open")
 
     # When
     confirmationDialog.open()
