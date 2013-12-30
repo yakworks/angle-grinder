@@ -3,5 +3,8 @@ module.exports = (grunt) ->
 
   options:
     compress: false
-    beautify: true
+    beautify:
+      beautify: true
+      ascii_only: true
+      quote_keys: true
     mangle: false
