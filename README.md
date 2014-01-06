@@ -32,33 +32,33 @@ npm install -g bower
 ### Run the app
 
 ```
-./script/bootstrap
-./script/run-frontend-server
-./script/run-ag-demo
+script/bootstrap
+script/run-frontend-server
+script/run-ag-demo
 ```
 
 open http://localhost:9000
 
 ## Directory structure
 
-* ./app - contains CoffeeScript sources, styles, images, fonts and other assets
-  * ./app/scripts - CoffeeScript sources
-  * ./app/styles - stylesheets
-  * ./app/views - html views used by AngularJS
-* ./test - contains tests for the application
-  * ./tests/integration - protractor integration specs
-  * ./tests/unit - unit tests for AngularJS components
+* app - contains CoffeeScript sources, styles, images, fonts and other assets
+  * app/scripts - CoffeeScript sources
+  * app/styles - stylesheets
+  * app/views - html views used by AngularJS
+* test - contains tests for the application
+  * tests/integration - protractor integration specs
+  * tests/unit - unit tests for AngularJS components
 
 Third-party libraries
 
-* ./bower - components downloaded by `bower install` command
-* ./third-party - you could put custom components here
-* ./node_modules - command downloaded by `npm install` command
+* components/bower - components downloaded by `bower install` command
+* third-party - you could put custom components here
+* node_modules - command downloaded by `npm install` command
 
 Generated stuff
 
-* ./dev - compiled development release
-* ./dist - created by `grunt build` command, contains the production minified release of the app
+* dev - compiled development release
+* dist - created by `grunt build` command, contains the production minified release of the app
 
 ## Running tests
 
@@ -103,7 +103,7 @@ Run karma in Chrome browser:
 Start Xvfb and export DISPLAY variable:
 
 ```
-./script/xvfb start
+script/xvfb start
 export DISPLAY=:99
 ```
 
@@ -117,9 +117,10 @@ or
 
 ## Protractor integration tests
 
-Install standalone Selenium `bin/install-selenium`
+Install standalone Selenium `node_modules/protractor/bin/webdriver-manager update`
 Start the app in the `test` env `grunt build:dev` `configureProxies connect:integration watch`
 Manually run the specs `bin/run-protractor`
+Or it with `bin/test-integration`
 
 ## Build process
 
@@ -156,7 +157,7 @@ And then navigate to `http://localhost:8000` to see the production release.
 
 ## File upload demo
 
-`./node_modules/blueimp-file-upload-node/server.js`
+`node_modules/blueimp-file-upload-node/server.js`
 
 ## Build and release the documentation
 
