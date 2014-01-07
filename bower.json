@@ -80,6 +80,11 @@
         },
         "google-code-prettify": {
             "/": ["./src/prettify.js", "./src/prettify.css"]
+        },
+        "*": {
+          "js": "**/*.js",
+          "css": "**/*.css",
+          "img": "img/**/*"
         }
     }
 }

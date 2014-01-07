@@ -44,7 +44,7 @@
     "grunt-connect-proxy": "~0.1.4",
     "grunt-coffeelint": "~0.0.6",
     "grunt-angular-templates": "~0.5.1",
-    "grunt-bower-task": "~0.2.3",
+    "grunt-bower-task": "~0.3.4",
     "grunt-usemin": "~2.0.2",
     "grunt-regarde": "~0.1.1",
     "grunt-karma": "~0.6.2",
