@@ -28,7 +28,8 @@
         "jquery-file-upload": "~9.4.2",
         "blueimp-load-image": "~1.11.0",
 
-        "google-code-prettify": "1.0.0"
+        "google-code-prettify": "1.0.0",
+        "bower-angular-placeholders": "0.0.2"
     },
 
     "devDependencies": {
@@ -80,6 +81,9 @@
         },
         "google-code-prettify": {
             "/": ["./src/prettify.js", "./src/prettify.css"]
+        },
+        "sinon": {
+            "/": "lib/**/*.js"
         },
         "*": {
           "js": "**/*.js",
