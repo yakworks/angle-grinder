@@ -54,10 +54,10 @@ cp -R dist/* "$OUTPUT_DIRECTORY"
 
 # Cleanup: do not include demo app in the build
 rm "$OUTPUT_DIRECTORY/scripts/scripts.min.js"
-rm "$OUTPUT_DIRECTORY/scripts/prettify.js"
+rm "$OUTPUT_DIRECTORY/scripts/docs.js"
 rm "$OUTPUT_DIRECTORY/index.html"
 rm "$OUTPUT_DIRECTORY/styles/style.min.css"
-rm "$OUTPUT_DIRECTORY/styles/prettify.css"
+rm "$OUTPUT_DIRECTORY/styles/docs.css"
 
 echo "Done!"
 exit 0
