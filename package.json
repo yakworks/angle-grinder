@@ -51,8 +51,7 @@
     "grunt-gh-pages": "~0.9.0",
     "grunt-text-replace": "~0.3.8",
 
-    "protractor": "~0.15.0",
-    "jasmine-only": "~0.1.0"
+    "protractor": "~0.15.0"
   },
     "engines": {
       "node": "0.10.x",

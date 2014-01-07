@@ -1,5 +1,3 @@
-require("jasmine-only")
-
 utils = require("./helpers/utils")
 UsersDialogBasedPage = require("./helpers/page_objects/users_dialog_based_page")
 

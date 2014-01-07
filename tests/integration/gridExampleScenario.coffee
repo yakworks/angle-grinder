@@ -1,5 +1,3 @@
-require("jasmine-only")
-
 utils = require("./helpers/utils")
 GridExamplePage = require("./helpers/page_objects/grid_example_page")
 
