@@ -46,17 +46,3 @@ app.run [
       $log.error("Network error:", event, jqxhr, settings, exception)
       alerts.error(exception)
 ]
-
-$ ->
-  # side bar
-  setTimeout (->
-    $sidenav= $(".bs-docs-sidenav")
-    return unless $sidenav.affix?
-
-    $sidenav.affix offset:
-      top: ->
-        if $(window).width() <= 980 then 140 else 160
-
-      bottom: 270
-
-  ), 100
