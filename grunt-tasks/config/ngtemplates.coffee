@@ -6,5 +6,6 @@ module.exports = (grunt) ->
     module: "angleGrinder"
 
   myApp:
-    src: ["<%= appConfig.app %>/templates/**/*.html"]
+    cwd: "<%= appConfig.app %>"
+    src: "templates/**/*.html"
     dest: "<%= appConfig.dev %>/scripts/templates.js"
