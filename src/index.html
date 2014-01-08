@@ -33,6 +33,7 @@
   <!-- build:css(build) styles/bootstrap.min.css -->
     <!-- Twitter Bootstrap -->
     <link rel="stylesheet" href="styles/boot.css"/>
+    <link rel="stylesheet" href="styles/bootstrap-panels.css"/>
   <!-- endbuild -->
 
   <!-- build:css(build) styles/bootstrap-extras.min.css -->
@@ -112,6 +113,7 @@
     <script type="text/javascript" src="scripts/modules/forms/focus.js"></script>
     <script type="text/javascript" src="scripts/modules/forms/editDialog.js"></script>
     <script type="text/javascript" src="scripts/modules/forms/confirmationDialog.js"></script>
+    <script type="text/javascript" src="scripts/modules/forms/panels.js"></script>
     <script type="text/javascript" src="scripts/modules/forms/mixins/dialogCrudCtrlMixin.js"></script>
     <script type="text/javascript" src="scripts/modules/forms/mixins/singlePageCrudMixin.js"></script>
     <script type="text/javascript" src="scripts/modules/forms/mixins/massUpdateFormCtrlMixin.js"></script>
@@ -143,6 +145,15 @@
   <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
   <![endif]-->
 
+  <!-- build:js(build) scripts/docs.js -->
+    <script type="text/javascript" src="components/bower-angular-placeholders/js/angular-placeholders.js"></script>
+    <script type="text/javascript" src="components/google-code-prettify/prettify.js"></script>
+  <!-- endbuild -->
+
+  <!-- build:css(build) styles/docs.css -->
+    <link rel="stylesheet" href="styles/prettify.css"/>
+  <!-- endbuild -->
+
   <!-- build:js(build) scripts/scripts.min.js -->
     <!-- AngularJS app -->
     <script type="text/javascript" src="scripts/modules/resources.js"></script>
@@ -165,14 +176,7 @@
     <script type="text/javascript" src="scripts/controllers/users/massUpdateFormCtrl.js"></script>
 
     <script type="text/javascript" src="scripts/controllers/fileUpload/indexCtrl.js"></script>
-  <!-- endbuild -->
-
-  <!-- build:js(build) scripts/prettify.js -->
-  <script type="text/javascript" src="components/google-code-prettify/prettify.js"></script>
-  <!-- endbuild -->
-
-  <!-- build:css(build) styles/prettify.css -->
-  <link rel="stylesheet" href="styles/prettify.css"/>
+    <script type="text/javascript" src="scripts/controllers/panels/indexCtrl.js"></script>
   <!-- endbuild -->
 </head>
 
@@ -215,6 +219,7 @@
       <li><a href="#/examples/usersDialog"><i class="icon-chevron-right"></i>Users (dialog based)</a></li>
       <li><a href="#/examples/users"><i class="icon-chevron-right"></i>Users</a></li>
       <li><a href="#/examples/fileUpload"><i class="icon-chevron-right"></i>File Upload</a></li>
+      <li><a href="#/examples/panels"><i class="icon-chevron-right"></i>Panels</a></li>
     </ul>
   </aside>
 

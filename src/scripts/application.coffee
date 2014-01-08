@@ -1,6 +1,6 @@
 # The entry point for the application
 
-app = angular.module("angleGrinder", [
+app = angular.module "angleGrinder", [
   "ngRoute"
   "ngSanitize"
 
@@ -13,7 +13,7 @@ app = angular.module("angleGrinder", [
   "angleGrinder.alerts"
   "angleGrinder.dataGenerator"
   "angleGrinder.spinner"
-])
+]
 
 # Sample `pathWithContext` configuration block
 app.config [

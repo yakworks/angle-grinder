@@ -1,4 +1,6 @@
-docs = angular.module("angleGrinder.docs", [])
+docs = angular.module "angleGrinder.docs", [
+  "placeholders.txt"
+]
 
 docs.directive "prettyprint", ->
   restrict: "C"

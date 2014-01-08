@@ -52,5 +52,9 @@ app.config [
         templateUrl: "templates/fileUpload/index.html"
         controller: "fileUpload.IndexCtrl"
 
+      .when "/examples/panels",
+        templateUrl: "templates/panels/index.html"
+        controller: "panels.IndexCtrl"
+
       .otherwise redirectTo: "/"
 ]
