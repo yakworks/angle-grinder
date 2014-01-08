@@ -2,7 +2,7 @@
 module.exports = (grunt) ->
 
   select2Images:
-    src: ["<%= appConfig.dev %>/components/select2/select2.css"]
+    src: ["<%= appConfig.dev %>/components/select2/css/select2.css"]
     overwrite: true
     replacements: [{
       from: "url('select2",

@@ -68,6 +68,7 @@ module.exports = (grunt) ->
     "less"
     "copy:dev"
     "ngtemplates"
+    "replace"
   ]
 
   grunt.registerTask "server", [
@@ -102,7 +103,6 @@ module.exports = (grunt) ->
     "test"
     "build:dev"
     "copy:dist"
-    "replace"
     "useminPrepare"
     "htmlmin"
     "concat"
