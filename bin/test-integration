@@ -20,7 +20,7 @@ done
 
 echo -e "\nRunning integration specs."
 
-./node_modules/protractor/bin/protractor ./build/tests/protractor-conf.js
+./node_modules/protractor/bin/protractor ./tests/protractor-conf.js
 
 stopServer
 

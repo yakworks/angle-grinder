@@ -20,17 +20,9 @@ module.exports = (grunt) ->
     opts.default or= "PhantomJS"
     _extractOptions("browsers", opts)
 
-  # Possible values: dots, spec, progress, junit, growl, coverage
-  parseReporters = (opts = {}) ->
-    opts.default or= "dots"
-    _extractOptions("reporters", opts)
-
   options:
     browsers: parseBrowsers(default: "PhantomJS")
     colors: true
-    # test results reporter to use
-    # possible values: dots || progress || growl
-    reporters: parseReporters(defaultReporter: "dots")
     # If browser does not capture in given timeout [ms], kill it
     captureTimeout: 5000
 
@@ -41,17 +33,5 @@ module.exports = (grunt) ->
   # run karma for unit tests in watch mode
   watch:
     configFile: "<%= appConfig.test %>/karma.conf.coffee"
-    reporters: parseReporters(default: "dots")
     singleRun: false
     autoWatch: true
-
-  # generate test code coverage for compiled javascripts
-  coverage:
-    basePath: "../<%= appConfig.dev %>"
-    configFile: "<%= appConfig.test %>/karma-coverage.conf.coffee"
-    reporters: ["dots", "coverage"]
-    coverageReporter:
-      type: grunt.option("coverage-reporter") || "text"
-      dir: "coverage"
-
-    singleRun: true

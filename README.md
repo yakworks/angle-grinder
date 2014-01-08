@@ -67,11 +67,6 @@ By default all tests are executed in PhantomJS browser
 * `grunt test:unit` or `grunt test` - run unit tests
 * `grunt test:unit:watch` or
 * `grunt test:watch` - run unit tests in watch mode
-* `grunt test:coverage` or
-* `grunt test:unit:coverage` - run unit tests against compiled development release and generate code coverage report
-* `grunt test:unit:coverage --coverage-reporter=html` - generate html code coverage report
-
-* `grunt test --reporters=spec` - run tests with `spec` reporter
 * `grunt test --browsers=Chrome,Firefox` - run tests inside Chrome and Firefox
 
 Run test against specific browsers
@@ -157,7 +152,8 @@ And then navigate to `http://localhost:8000` to see the production release.
 
 ## File upload demo
 
-`node_modules/blueimp-file-upload-node/server.js`
+Run `node_modules/blueimp-file-upload-node/server.js`
+and navigate to `http://localhost:9000/#/examples/fileUpload`
 
 ## Build and release the documentation
 

@@ -53,11 +53,25 @@ module.exports = (config) ->
     ]
 
     preprocessors:
-      "**/*.coffee": ["coffee"]
       "**/*.html": ["html2js"]
+
+      "src/scripts/**/*.coffee": ["coverage"]
+      "tests/unit/**/*.coffee": ["coffee"]
 
     ngHtml2JsPreprocessor:
       stripPrefix: "src/"
+
+    # html - produces a bunch of HTML files with annotated source code
+    # lcovonly - produces an lcov.info file
+    # lcov - produces html + lcov files. This is the default format
+    # cobertura - produces a cobertura-coverage.xml file for easy Hudson integration
+    # text-summary - produces a compact text summary of coverage, typically to console
+    # text - produces a detailed text table with coverage for all files
+    coverageReporter:
+      reporters: [
+        { type: "html", dir: "coverage" }
+        { type: "text-summary" }
+      ]
 
     reporters: ["dots", "coverage"]
 

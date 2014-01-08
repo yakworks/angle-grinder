@@ -23,7 +23,7 @@
     "karma-spec-reporter": "~0.0.1",
     "karma-coffee-preprocessor": "~0.1.0",
     "karma-ng-html2js-preprocessor": "~0.1.0",
-    "karma-coverage": "~0.1.4",
+    "karma-coverage": "git+https://github.com/kylewelsby/karma-coverage#fix-coffee-script-compiler",
 
     "matchdep": "~0.3.0",
     "nodemon": "~1.0.5",

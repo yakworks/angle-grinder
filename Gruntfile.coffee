@@ -54,8 +54,6 @@ module.exports = (grunt) ->
 
     # Plugin for Karma
     karma:          loadMoule "karma"
-    # Custom plugin for generating jasmine html tests runner
-    jasminehtml:    loadMoule "jasminehtml"
 
     # Start a static web server
     connect:        loadMoule "connect"
@@ -70,7 +68,6 @@ module.exports = (grunt) ->
     "less"
     "copy:dev"
     "ngtemplates"
-    "jasminehtml"
   ]
 
   grunt.registerTask "server", [
@@ -95,17 +92,6 @@ module.exports = (grunt) ->
   # run unit tests in the watch mode
   grunt.registerTask "test:watch", [
     "test:unit:watch"
-  ]
-
-  # run unit tests against compiled develepment release
-  # and generate code coverage report
-  grunt.registerTask "test:unit:coverage", [
-    "build:dev"
-    "karma:coverage"
-  ]
-
-  grunt.registerTask "test:coverage", [
-    "test:unit:coverage"
   ]
 
   grunt.registerTask "test", [
