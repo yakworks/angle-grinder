@@ -53,6 +53,11 @@ gridz.controller "AgGridCtrl", class
   hasRow: (id) ->
     !!@$grid.getInd(id)
 
+  # Returns an array of the id's in the current grid view.
+  # It returns an empty array if no data is available.
+  getIds: ->
+    @$grid.getDataIDs()
+
   saveRow: (id, data) ->
     if @hasRow(id)
       @updateRow(id, data)
