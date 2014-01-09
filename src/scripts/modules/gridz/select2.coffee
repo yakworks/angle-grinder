@@ -46,9 +46,9 @@ gridz.directive "agSelect2", [
               q: term # search term (query params)
               max: 20, page: page
               sort: "name", order: "asc"
-            results: (result, page) ->
-              more = page < result.total
-              results: result.rows, more: more
+            results: (data, page) ->
+              more = page < data.total
+              results: data.rows, more: more
 
           # read `quietMillis` option from the attribute
           # Number of milliseconds to wait for the user to
@@ -69,7 +69,7 @@ gridz.directive "agSelect2", [
         # create default `formatSelection` method
         options.formatSelection ?= (item) -> item.name
 
-        $log.info "Initializing the Select2 component", scope.options
+        $log.debug "Initializing the Select2 component", scope.options
 
     template: """
       <div>
