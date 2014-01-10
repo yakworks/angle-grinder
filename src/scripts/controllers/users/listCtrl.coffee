@@ -23,7 +23,7 @@ class ListCtrl
   gridColumns: ->
     showActionLink = (cellVal, options, rowdata) ->
       """
-      <a href="#/examples/users/#{rowdata.id}">#{cellVal}</a>
+      <a class="with-pager" href="#/examples/users/#{rowdata.id}">#{cellVal}</a>
       """
 
     [

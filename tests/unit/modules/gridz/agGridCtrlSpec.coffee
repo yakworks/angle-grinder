@@ -165,8 +165,19 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
         expect(stub.called).to.be.true
         expect(stub.calledWith(234)).to.be.true
 
+  describe "#getIds", ->
+    it "returns an array of the id's in the current grid view", ->
+      # Given
+      stub = jqGridStub.getDataIDs.returns([1,2,3])
+
+      # When
+      expect(controller.getIds()).to.deep.eq [1,2,3]
+
+      # Then
+      expect(stub.called).to.be.true
+
   describe "#removeRow", ->
-    it "removea a row with the given id", ->
+    it "removes a row with the given id", ->
       # Given
       stub = jqGridStub.delRowData
 
