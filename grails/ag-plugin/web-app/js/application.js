@@ -2,12 +2,14 @@
 var app = angular.module("angleGrinder", [
     "ngResource",
     "ngRoute",
+    "ui.select2",
+    "pasvaz.bindonce",
+
     "angleGrinder.common",
     "angleGrinder.gridz",
     "angleGrinder.forms",
     "angleGrinder.alerts",
     "angleGrinder.spinner",
-    "ui.select2",
     "angleGrinder.resources"
 ]);
 
