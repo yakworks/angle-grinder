@@ -22,6 +22,7 @@
         "angular-ui-select2": "~0.0.5",
         "angular-bootstrap": "0.5.0",
         "angular-strap": "9ci/angular-strap#fix-iso-dates",
+        "angular-bindonce": "0.2.2",
         "bootstrap-datepicker": "1.1.1",
         "modernizr": "~2.6.2",
 

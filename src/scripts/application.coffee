@@ -3,6 +3,7 @@
 app = angular.module "angleGrinder", [
   "ngRoute"
   "ngSanitize"
+  "pasvaz.bindonce"
 
   "angleGrinder.resources"
   "angleGrinder.docs"
