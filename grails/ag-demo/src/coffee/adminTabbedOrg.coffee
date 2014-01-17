@@ -1,4 +1,6 @@
-org = angular.module "admin.orgTabs", ["admin.org"]
+org = angular.module "admin.orgTabs", [
+  "admin.org"
+]
 
 org.config [
   "$routeProvider", ($routeProvider) ->

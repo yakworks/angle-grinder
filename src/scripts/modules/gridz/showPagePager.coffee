@@ -86,6 +86,7 @@ gridz.directive "agGridWithPager", [
         $log.debug("intercept click on", $a)
 
         # grab the row id and the state name
+        # TODO raise an error when `row-id` or `ui-sref` is not defined
         id = $a.data("row-id")
         sref = $a.data("ui-sref")
 

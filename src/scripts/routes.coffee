@@ -64,7 +64,7 @@ app.config [
         templateUrl: "templates/examples/users/form.html"
         controller: "users.FormCtrl"
         resolve: user: [
-          "userResolver", "$stateParams", (userResolver, $stateParams) ->
+          "$stateParams", "userResolver", ($stateParams, userResolver) ->
             userResolver($stateParams.id)
         ]
 
@@ -73,7 +73,7 @@ app.config [
         templateUrl: "templates/examples/users/show.html"
         controller: "users.ShowCtrl"
         resolve: user: [
-          "userResolver", "$stateParams", (userResolver, $stateParams) ->
+          "$stateParams", "userResolver", ($stateParams, userResolver) ->
             userResolver($stateParams.id)
         ]
 

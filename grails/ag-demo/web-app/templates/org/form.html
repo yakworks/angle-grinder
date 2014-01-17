@@ -1,8 +1,8 @@
 <div class="subnav">
   <ul class="nav nav-pills">
-    <li><a href="#/"><i class="icon-list"></i> Org List</a></li>
-    <li><a ng-show="org.persisted()" href="#/{{org.id}}"><i class="icon-th"></i> Show org</a></li>
-    <li><a ng-show="org.persisted()" href="#/create"><i class="icon-plus"></i> New org</a></li>
+    <li><a ui-sref="list"><i class="icon-list"></i> Org List</a></li>
+    <li><a ng-show="org.persisted()" ui-sref="show({ id: org.id })"><i class="icon-th"></i> Show org</a></li>
+    <li><a ng-show="org.persisted()" ui-sref="create"><i class="icon-plus"></i> New org</a></li>
   </ul>
 </div>
 
@@ -54,7 +54,7 @@
 
     <div class="form-actions">
       <ag-submit-button></ag-submit-button>
-      <a href="#/" class="btn">Cancel</a>
+      <a ui-sref="list" class="btn">Cancel</a>
     </div>
   </form>
 </section>

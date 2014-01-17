@@ -1,7 +1,8 @@
+# TODO do we really need it
 # The main scaffolding module
 app = angular.module "angleGrinder", [
   "ngResource"
-  "ngRoute"
+  "ui.router"
 
   "angleGrinder.common"
   "angleGrinder.gridz"

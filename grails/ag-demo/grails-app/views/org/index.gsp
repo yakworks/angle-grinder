@@ -12,7 +12,7 @@
 
 <div ng-app="admin.org">
     <ag-alerts></ag-alerts>
-    <ng-view></ng-view>
+    <div ui-view></div>
 </div>
 
 </body>

@@ -22,9 +22,9 @@ class ListCtrl
       gridName: "orgGrid"
 
   colModel: ->
-    showActionLink = (cellVal, options, rowdata) ->
+    showActionLink = (cellVal, options, rowData) ->
       """
-        <a class="with-pager" href="#/#{rowdata.id}">#{cellVal}</a>
+        <a class="with-pager" href="#" data-row-id="#{rowData.id}" data-ui-sref="show">#{cellVal}</a>
       """
 
     [
