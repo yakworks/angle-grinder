@@ -16,10 +16,10 @@ class IndexCtrl
     dialogCrudCtrlMixin $scope,
       Resource: Users
       gridName: "usersGrid"
-      templateUrl: "templates/usersDialog/form.html"
+      templateUrl: "templates/examples/usersDialog/form.html"
 
     massUpdateMixin $scope,
-      templateUrl: "/templates/users/massUpdateForm.html"
+      templateUrl: "/templates/examples/users/massUpdateForm.html"
       controller: "users.MassUpdateFormCtrl"
       gridName: "usersGrid"
 

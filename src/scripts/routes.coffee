@@ -10,31 +10,37 @@ app.config [
     $urlRouterProvider.otherwise "/"
 
     $stateProvider
+      # Documentation section
       .state "docs",
         abstract: true
-        template: "<ui-view/>"
+        templateUrl: "templates/docs.html"
 
       .state "docs.develop",
         url: "/"
-        templateUrl: "templates/develop.html"
+        views:
+          "": templateUrl: "templates/docs/develop.html"
+          "sidebar": templateUrl: "templates/docs/sidebar/develop.html"
 
       .state "docs.api",
-        url: "/documentation"
-        templateUrl: "templates/api.html"
+        url: "/docs"
+        views:
+          "": templateUrl: "templates/docs/api.html"
+          "sidebar": { templateUrl: "templates/docs/sidebar/api.html" }
 
+      # Examples section
       .state "examples",
         abstract: true
         url: "/examples"
-        template: "<ui-view/>"
+        templateUrl: "templates/examples.html"
 
       .state "examples.gridExample",
         url: "/gridExample"
-        templateUrl: "templates/gridExample/list.html"
+        templateUrl: "templates/examples/gridExample/list.html"
         controller: "gridExample.ListCtrl"
 
       .state "examples.usersDialog",
         url: "/usersDialog"
-        templateUrl: "templates/usersDialog/list.html"
+        templateUrl: "templates/examples/usersDialog/list.html"
         controller: "usersDialog.ListCtrl"
 
       .state "examples.users",
@@ -44,18 +50,18 @@ app.config [
 
       .state "examples.users.list",
         url: ""
-        templateUrl: "templates/users/list.html"
+        templateUrl: "templates/examples/users/list.html"
         controller: "users.ListCtrl"
 
       .state "examples.users.create",
         url: "/create"
-        templateUrl: "templates/users/form.html"
+        templateUrl: "templates/examples/users/form.html"
         controller: "users.FormCtrl"
         resolve: user: ["Users", (Users) -> new Users()]
 
       .state "examples.users.edit",
         url: "/:id/edit",
-        templateUrl: "templates/users/form.html"
+        templateUrl: "templates/examples/users/form.html"
         controller: "users.FormCtrl"
         resolve: user: [
           "userResolver", "$stateParams", (userResolver, $stateParams) ->
@@ -64,7 +70,7 @@ app.config [
 
       .state "examples.users.show",
         url: "/:id?ids",
-        templateUrl: "templates/users/show.html"
+        templateUrl: "templates/examples/users/show.html"
         controller: "users.ShowCtrl"
         resolve: user: [
           "userResolver", "$stateParams", (userResolver, $stateParams) ->
@@ -73,11 +79,11 @@ app.config [
 
       .state "examples.fileUpload",
         url: "/fileUpload"
-        templateUrl: "templates/fileUpload/index.html"
+        templateUrl: "templates/examples/fileUpload/index.html"
         controller: "fileUpload.IndexCtrl"
 
       .state "examples.panels",
         url: "/panels"
-        templateUrl: "templates/panels/index.html"
+        templateUrl: "templates/examples/panels/index.html"
         controller: "panels.IndexCtrl"
 ]

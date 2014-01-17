@@ -23,7 +23,7 @@ class IndexCtrl
         self.deleteItemById(id)
         callback.success(this)
 
-      editDialog.open("templates/gridExample/form.html", item, $scope.exampleGrid)
+      editDialog.open("templates/examples/gridExample/form.html", item, $scope.exampleGrid)
 
     $scope.createItem = =>
       item = {}
@@ -33,7 +33,7 @@ class IndexCtrl
         item.id = generateId()
         callback.success(this)
 
-      editDialog.open("templates/gridExample/form.html", item, $scope.exampleGrid)
+      editDialog.open("templates/examples/gridExample/form.html", item, $scope.exampleGrid)
         .then (item) => @data.push(item)
 
     $scope.deleteItem = (id) =>

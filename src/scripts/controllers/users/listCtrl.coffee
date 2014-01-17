@@ -16,7 +16,7 @@ class ListCtrl
       gridName: "usersGrid"
 
     massUpdateMixin $scope,
-      templateUrl: "/templates/users/massUpdateForm.html"
+      templateUrl: "/templates/examples/users/massUpdateForm.html"
       controller: "users.MassUpdateFormCtrl"
       gridName: "usersGrid"
 
