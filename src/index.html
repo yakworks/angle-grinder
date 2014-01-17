@@ -52,7 +52,7 @@
   <!-- build:js(build) scripts/angularjs-all.min.js -->
     <script type="text/javascript" src="components/angular/js/angular.js"></script>
     <script type="text/javascript" src="components/angular-resource/js/angular-resource.js"></script>
-    <script type="text/javascript" src="components/angular-route/js/angular-route.js"></script>
+    <script type="text/javascript" src="components/angular-ui-router/js/angular-ui-router.js"></script>
     <script type="text/javascript" src="components/angular-sanitize/js/angular-sanitize.js"></script>
 
     <script type="text/javascript" src="components/angular-bootstrap/js/ui-bootstrap-tpls.js"></script>
@@ -195,7 +195,7 @@
 
 <div class="container">
   <aside class="sidebar bs-docs-sidebar" ng-controller="SidebarCtrl">
-    <ul class="nav nav-list bs-docs-sidenav" ng-show="section() === 'angleGrinder'">
+    <ul class="nav nav-list bs-docs-sidenav" ng-show="section() === 'develop'">
       <li><a href="#/?scrollTo=develop"><i class="icon-chevron-right"></i> Develop AngleGrinder</i></a></li>
       <li><a href="#/?scrollTo=develop-checkout"><i class="icon-chevron-right"></i> Checkout from github repo</a></li>
       <li><a href="#/?scrollTo=develop-install-nodejs"><i class="icon-chevron-right"></i> Install nodejs</a></li>
@@ -217,9 +217,9 @@
     </ul>
 
     <ul class="nav nav-list bs-docs-sidenav" ng-show="section() === 'examples'">
-      <li><a href="#/examples/gridExample"><i class="icon-chevron-right"></i>Grid example</a></li>
-      <li><a href="#/examples/usersDialog"><i class="icon-chevron-right"></i>Users (dialog based)</a></li>
-      <li><a href="#/examples/users"><i class="icon-chevron-right"></i>Users</a></li>
+      <li><a ui-sref="examples.gridExample"><i class="icon-chevron-right"></i>Grid example</a></li>
+      <li><a ui-sref="examples.usersDialog"><i class="icon-chevron-right"></i>Users (dialog based)</a></li>
+      <li><a ui-sref="examples.users.list"><i class="icon-chevron-right"></i>Users</a></li>
       <li><a href="#/examples/fileUpload"><i class="icon-chevron-right"></i>File Upload</a></li>
       <li><a href="#/examples/panels"><i class="icon-chevron-right"></i>Panels</a></li>
     </ul>
@@ -227,10 +227,7 @@
 
   <section class="content">
     <ag-alerts></ag-alerts>
-
-    <section>
-      <ng-view></ng-view>
-    </section>
+    <section ui-view></section>
   </section>
 </div>
 

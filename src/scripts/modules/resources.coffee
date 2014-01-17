@@ -1,6 +1,5 @@
 resources = angular.module("angleGrinder.resources", [
   "ngResource"
-  "ngRoute"
 ])
 
 resources.factory "Users", [
@@ -40,7 +39,7 @@ resources.factory "Users", [
 
 # Tries to load an user record with the given id taken from route params
 resources.factory "userResolver", [
-  "$q", "$route", "Users", ($q, $route, Users) ->
+  "$q", "Users", ($q, Users) ->
     (id) ->
       deferred = $q.defer()
 

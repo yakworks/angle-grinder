@@ -1,7 +1,7 @@
 <div class="subnav">
   <ul class="nav nav-pills">
-    <li><a class="list" href="#/examples/users"><i class="icon-list"></i> Users List</a></li>
-    <li><a class="create" href="#/examples/users/create"><i class="icon-plus"></i> New user</a></li>
+    <li><a class="list" ui-sref="examples.users.list"><i class="icon-list"></i> Users List</a></li>
+    <li><a class="create" ui-sref="examples.users.create"><i class="icon-plus"></i> New user</a></li>
   </ul>
 </div>
 
@@ -14,8 +14,8 @@
   </h2>
 
   <div class="pager" ag-show-page-pager="user" bo-show="showPager()">
-    <a href="#/examples/users/{{prevId()}}?ids={{ids}}">&#8592; prev</a> |
-    <a href="#/examples/users/{{nextId()}}?ids={{ids}}">next &#8594;</a>
+    <a ui-sref="examples.users.show({ id: prevId(), ids: ids })">&#8592; prev</a> |
+    <a ui-sref="examples.users.show({ id: nextId(), ids: ids })">next &#8594;</a>
   </div>
 
   <tabset>
@@ -43,7 +43,7 @@
       </dl>
 
       <div class="form-actions">
-        <a bo-href="'#/examples/users/' + user.id + '/edit'" class="btn"><i class="icon-edit"></i> Edit</a>
+        <a ui-sref="examples.users.edit({ id: user.id })" class="btn"><i class="icon-edit"></i> Edit</a>
         <ag-delete-button when-confirmed="delete(user)"></ag-delete-button>
       </div>
     </tab>

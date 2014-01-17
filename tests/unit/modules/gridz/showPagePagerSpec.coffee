@@ -81,8 +81,8 @@ describe "module: angleGrinder.gridz", ->
 
   describe "directive: agShowPagePager", ->
 
-    beforeEach module "ngRoute", ($provide) ->
-      $provide.value "$routeParams", ids: "120,121,12,123,125"
+    beforeEach module "ui.router", ($provide) ->
+      $provide.value "$stateParams", ids: "120,121,12,123,125"
       return
 
     element = null
@@ -122,6 +122,10 @@ describe "module: angleGrinder.gridz", ->
     $scope = null
     gridCtrlMock = null
 
+    beforeEach module ("ui.router"), ($provide) ->
+      $provide.value "$state", go: sinon.stub()
+      return
+
     beforeEach inject ($injector, $rootScope) ->
       $scope = $rootScope.$new()
       $scope.fakeGridOptions = {}
@@ -136,15 +140,15 @@ describe "module: angleGrinder.gridz", ->
 
       # append fake show link to the grid
       element.find("table#gridz").append """
-        <a class="with-pager" href="#/users/4">click me!</a>
+        <a class="with-pager" href="" data-row-id="4" data-ui-sref="items.show">click me!</a>
       """
 
     it "loads `ids` from the current grid view", ->
       element.find("a.with-pager").click()
       gridCtrlMock.verify()
 
-    it "navigates to the valid show path with `ids` param", ->
-      $scope.$on "$locationChangeStart", (event, loc) ->
-        expect(loc).to.eq "http://server/#/users/4?ids=10,2,30,4"
-
+    it "navigates to the valid show path with `ids` param", inject ($state) ->
       element.find("a.with-pager").click()
+
+      expect($state.go.called).to.be.true
+      expect($state.go.calledWith("items.show", id: 4, ids: "10,2,30,4")).to.be.true

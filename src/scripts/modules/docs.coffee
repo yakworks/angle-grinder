@@ -23,7 +23,7 @@ docs.directive "prettyprint", ->
 
     element.html window.prettyPrintOne(code, lang, true)
 
-docs.factory "scrollTo", ["$routeParams", "$timeout", ($routeParams, $timeout) ->
+docs.factory "scrollTo", ["$timeout", ($timeout) ->
   (id) ->
     scroll = ->
       element = document.getElementById(id)

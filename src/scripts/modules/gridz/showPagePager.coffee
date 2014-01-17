@@ -32,12 +32,12 @@ gridz.value "idsArrayPager", (rowId, ids = []) ->
 # Directive that creates a pager on the show page
 # Example:
 #   <div class="pager" ag-show-page-pager="user" ng-show="showPager()">
-#     <a href="#/examples/users/{{prevId()}}?ids={{ids}}">&#8592; prev</a> |
-#     <a href="#/examples/users/{{nextId()}}?ids={{ids}}">next &#8594;</a>
+#     <a ui-sref="examples.users.show({ id: prevId(), ids: ids })">&#8592; prev</a> |
+#     <a ui-sref="examples.users.show({ id: nextId(), ids: ids })">next &#8594;</a>
 #   </div>
 gridz.directive "agShowPagePager", [
-  "$parse", "$routeParams", "$log", "idsArrayPager",
-  ($parse, $routeParams, $log, idsArrayPager) ->
+  "$parse", "$stateParams", "$log", "idsArrayPager",
+  ($parse, $stateParams, $log, idsArrayPager) ->
     restrict: "A"
     scope: true
 
@@ -47,7 +47,8 @@ gridz.directive "agShowPagePager", [
       $log.debug("current row:", row)
 
       # assing raw ids array to the scope
-      scope.ids = $routeParams.ids
+      # TODO make sure it works
+      scope.ids = $stateParams.ids
       $log.debug("row ids:", scope.ids)
 
       # initialize the pager
@@ -68,26 +69,29 @@ gridz.directive "agShowPagePager", [
 #       ag-grid-with-pager="true"
 #       ag-grid-name="orgGrid"></div>
 gridz.directive "agGridWithPager", [
-  "$location", "$log", ($location, $log) ->
+  "$state", "$log", ($state, $log) ->
     restrict: "A"
 
     # require grid controller
     require: "^agGrid"
 
+    # TODO fix specs
     link: (scope, element, attrs, gridCtrl) ->
 
       # listen for click events on all links with the pager
       element.on "click", "a.with-pager", (event) ->
         event.preventDefault()
 
-        $log.debug("intercept click on", $(this))
+        $a = $(this)
+        $log.debug("intercept click on", $a)
 
-        # grab the path and strip `#` from the beginning
-        path = $(this).attr("href").replace(/^#/, "")
+        # grab the row id and the state name
+        id = $a.data("row-id")
+        sref = $a.data("ui-sref")
 
         # grab ids from th current grid view
         ids = gridCtrl.getIds().join(",")
 
         # navigate to the show page with array of ids
-        scope.$apply -> $location.search(ids: ids).path(path)
+        $state.go(sref, id: id, ids: ids)
 ]

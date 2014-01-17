@@ -2,59 +2,82 @@
 
 app = angular.module("angleGrinder")
 app.config [
-  "$provide", "$routeProvider", "$httpProvider", ($provide, $routeProvider, $httpProvider) ->
+  "$stateProvider", "$urlRouterProvider", "$httpProvider",
+  ($stateProvider, $urlRouterProvider, $httpProvider) ->
     $httpProvider.responseInterceptors.push("httpErrorsInterceptor")
 
-    $routeProvider
-      .when "/",
-        templateUrl: "templates/angleGrinder.html"
+    # For any unmatched url, redirect to the root page
+    $urlRouterProvider.otherwise "/"
 
-      .when "/documentation",
-        templateUrl: "templates/documentation.html"
+    $stateProvider
+      .state "docs",
+        abstract: true
+        template: "<ui-view/>"
 
-      .when "/examples",
-        redirectTo: "/examples/gridExample"
+      .state "docs.develop",
+        url: "/"
+        templateUrl: "templates/develop.html"
 
-      .when "/examples/gridExample",
+      .state "docs.api",
+        url: "/documentation"
+        templateUrl: "templates/api.html"
+
+      .state "examples",
+        abstract: true
+        url: "/examples"
+        template: "<ui-view/>"
+
+      .state "examples.gridExample",
+        url: "/gridExample"
         templateUrl: "templates/gridExample/list.html"
         controller: "gridExample.ListCtrl"
 
-      .when "/examples/usersDialog",
+      .state "examples.usersDialog",
+        url: "/usersDialog"
         templateUrl: "templates/usersDialog/list.html"
         controller: "usersDialog.ListCtrl"
 
-      .when "/examples/users",
+      .state "examples.users",
+        url: "/users"
+        abstract: true
+        template: "<ui-view/>"
+
+      .state "examples.users.list",
+        url: ""
         templateUrl: "templates/users/list.html"
         controller: "users.ListCtrl"
 
-      .when "/examples/users/create",
+      .state "examples.users.create",
+        url: "/create"
         templateUrl: "templates/users/form.html"
         controller: "users.FormCtrl"
         resolve: user: ["Users", (Users) -> new Users()]
 
-      .when "/examples/users/:id",
-        templateUrl: "templates/users/show.html"
-        controller: "users.ShowCtrl"
-        resolve: user: [
-          "$route", "userResolver", ($route, userResolver) ->
-            userResolver($route.current.params.id)
-        ]
-
-      .when "/examples/users/:id/edit",
+      .state "examples.users.edit",
+        url: "/:id/edit",
         templateUrl: "templates/users/form.html"
         controller: "users.FormCtrl"
         resolve: user: [
-          "$route", "userResolver", ($route, userResolver) ->
-            userResolver($route.current.params.id)
+          "userResolver", "$stateParams", (userResolver, $stateParams) ->
+            userResolver($stateParams.id)
         ]
 
-      .when "/examples/fileUpload",
+      .state "examples.users.show",
+        url: "/:id?ids",
+        templateUrl: "templates/users/show.html"
+        controller: "users.ShowCtrl"
+        resolve: user: [
+          "userResolver", "$stateParams", (userResolver, $stateParams) ->
+            userResolver($stateParams.id)
+        ]
+
+      .state "examples.fileUpload",
+        url: "/fileUpload"
         templateUrl: "templates/fileUpload/index.html"
         controller: "fileUpload.IndexCtrl"
 
-      .when "/examples/panels",
+      .state "examples.panels",
+        url: "/panels"
         templateUrl: "templates/panels/index.html"
         controller: "panels.IndexCtrl"
-
-      .otherwise redirectTo: "/"
 ]

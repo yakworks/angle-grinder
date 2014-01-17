@@ -21,9 +21,9 @@ class ListCtrl
       gridName: "usersGrid"
 
   gridColumns: ->
-    showActionLink = (cellVal, options, rowdata) ->
+    showActionLink = (cellVal, options, rowData) ->
       """
-      <a class="with-pager" href="#/examples/users/#{rowdata.id}">#{cellVal}</a>
+      <a class="with-pager" href="#" data-row-id="#{rowData.id}" data-ui-sref="examples.users.show">#{cellVal}</a>
       """
 
     [

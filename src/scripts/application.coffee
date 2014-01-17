@@ -1,8 +1,8 @@
 # The entry point for the application
 
 app = angular.module "angleGrinder", [
-  "ngRoute"
   "ngSanitize"
+  "ui.router"
   "pasvaz.bindonce"
 
   "angleGrinder.resources"

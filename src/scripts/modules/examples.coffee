@@ -1,4 +1,4 @@
 app = angular.module("angleGrinder.examples", [
-  "angleGrinder",
+  "angleGrinder"
   "blueimp.fileupload"
 ])
