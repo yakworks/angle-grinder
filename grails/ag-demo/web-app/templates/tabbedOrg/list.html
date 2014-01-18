@@ -1,0 +1,36 @@
+<h3 class="page-header">Org list</h3>
+
+<div>
+  <div collapse="!showSearchForm">
+       <div ng-include="'/templates/org/searchForm.html' | withContext"></div>
+  </div>
+
+  <div class="navbar navbar-grid">
+      <div class="navbar-inner with-selected-pointer with-grid-options">
+          <ul class="nav">
+            <li class="divider-vertical"></li>
+                <li>
+                    <a ui-sref="create">
+                        <i class="icon-user"></i> Create org
+                    </a>
+                </li>
+          </ul>
+          <ul class="nav pull-right">
+              <li>
+                  <a title="search screen" ng-click="showSearchForm = !showSearchForm" href="">
+                      <i class="icon-search"></i>
+                  </a>
+              </li>
+          </ul>
+
+          <form action="" class="navbar-search pull-right" ng-submit="orgGrid.search(filters)">
+              <input type="text" value="" placeholder="quick search" class="search-query span2" style="width: 150px;"
+                     ng-model="filters.quickSearch"/>
+          </form>
+      </div>
+  </div>
+
+  <div ag-grid="gridOptions"
+       ag-grid-with-pager="true"
+       ag-grid-name="orgGrid"></div>
+</div>

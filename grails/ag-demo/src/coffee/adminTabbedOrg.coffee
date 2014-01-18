@@ -1,16 +1,41 @@
 org = angular.module "admin.orgTabs", [
-  "admin.org"
+  "angleGrinder"
 ]
 
 org.config [
-  "$routeProvider", ($routeProvider) ->
+  "$stateProvider", "$urlRouterProvider",
+  ($stateProvider, $urlRouterProvider) ->
 
-    $routeProvider
-      .when "/:id",
+    # For any unmatched url, redirect to the root page
+    $urlRouterProvider.otherwise "/"
+
+    $stateProvider
+      .state "list",
+        url: "/"
+        templateUrl: "../templates/tabbedOrg/list.html"
+        controller: "tabbedOrg.ListCtrl"
+
+      .state "create",
+        url: "/create"
+        templateUrl: "../templates/org/form.html"
+        controller: "tabbedOrg.FormCtrl"
+        resolve: org: ["Resource", (Resource) -> new Resource()]
+
+      .state "edit",
+        url: "/:id/edit"
+        templateUrl: "../templates/org/form.html"
+        controller: "tabbedOrg.FormCtrl"
+        resolve: org: [
+          "$stateParams", "resourceResolver", ($stateParams, resourceResolver) ->
+            resourceResolver($stateParams.id)
+        ]
+
+      .state "show",
+        url: "/:id"
         templateUrl: "../templates/tabbedOrg/show.html"
         controller: "tabbedOrg.ShowCtrl"
         resolve: org: [
-          "$route", "resourceResolver", ($route, resourceResolver) ->
-            resourceResolver($route.current.params.id)
+          "$stateParams", "resourceResolver", ($stateParams, resourceResolver) ->
+            resourceResolver($stateParams.id)
         ]
 ]
