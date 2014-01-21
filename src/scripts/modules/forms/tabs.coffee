@@ -22,11 +22,11 @@ forms.directive "agTabset", ->
         # mark the current tab as selected
         tab.selected = true
 
-      @addTab = (tab) ->
+      @addTab = (tab, select = false) ->
         # add a tab to the stack
         $scope.tabs.push(tab)
         # if the tab is first mark it as selected
-        @selectTab(tab) if $scope.tabs.length is 1
+        @selectTab(tab) if select or $scope.tabs.length is 1
 
       return
   ]
@@ -38,26 +38,30 @@ forms.directive "agTabset", ->
     </div>
   """
 
-forms.directive "agTab", ->
-  restrict: "E"
-  replace: true
-  require: "^agTabset"
+forms.directive "agTab", [
+  "$parse", ($parse) ->
+    restrict: "E"
+    replace: true
+    require: "^agTabset"
 
-  scope:
-    title: "@"
-    templateUrl: "@"
+    scope:
+      title: "@"
+      templateUrl: "@"
 
-  link: (scope, element, attrs, tabsetCtrl) ->
-    # by default all new tabs are unselected
-    scope.selected = false
-    # add the current tab to the stack
-    tabsetCtrl.addTab(scope)
+    link: (scope, element, attrs, tabsetCtrl) ->
+      # by default all new tabs are unselected
+      scope.selected = false
 
-    # handles mouse click on the tab
-    scope.select = -> tabsetCtrl.selectTab(scope)
+      # add the current tab to the stack
+      initiallyActived = $parse(attrs.active)(scope)
+      tabsetCtrl.addTab(scope, initiallyActived)
 
-  template: """
-    <li ng-click="select()" ng-class="{active: selected}">
-      <a href="">{{title}}</a>
-    </li>
-  """
+      # handles mouse click on the tab
+      scope.select = -> tabsetCtrl.selectTab(scope)
+
+    template: """
+      <li ng-click="select()" ng-class="{active: selected}">
+        <a href="">{{title}}</a>
+      </li>
+    """
+]

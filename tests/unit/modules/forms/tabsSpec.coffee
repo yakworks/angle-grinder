@@ -73,49 +73,88 @@ describe "module: angleGrinder.forms tabs", ->
           expect(tabOne.selected).to.be.true
           expect(tabTwo.selected).to.be.false
 
-  describe "directive: agTab", ->
+  describe.only "directive: agTab", ->
     $scope = null
     element = null
 
-    findTabByTitle = null
+    findTabByTitle = (title) ->
+      for tab in element.find(".nav.nav-tabs li")
+        return $(tab) if $(tab).find("a").text() is title
 
-    beforeEach inject ($httpBackend, $injector) ->
-      $httpBackend.whenGET("/tabs/first").respond "First"
-      $httpBackend.whenGET("/tabs/second").respond "Second"
+    describe "basics", ->
 
-      {element, $scope} = compileTemplate """
-        <ag-tabset>
-          <ag-tab title="First" template-url="/tabs/first"></ag-tab>
-          <ag-tab title="Second" template-url="/tabs/second"></ag-tab>
-        </ag-tabset>
-      """, $injector
-
-      findTabByTitle = (title) ->
-        for tab in element.find(".nav.nav-tabs li")
-          return $(tab) if $(tab).find("a").text() is title
-
-    it "renders the tabs", ->
-      $firstTab = findTabByTitle("First")
-      expect($firstTab.find("a").text()).to.eq "First"
-      expect($firstTab.isolateScope().selected).to.be.true
-      expect($firstTab.hasClass("active")).to.be.true
-
-      $secondTab = findTabByTitle("Second")
-      expect($secondTab.find("a").text()).to.eq "Second"
-      expect($secondTab.isolateScope().selected).to.be.false
-      expect($secondTab.hasClass("active")).to.be.false
-
-    describe "on click on the nav tab", ->
-      $tab = null
-
+      # mock templates for the tab panel
       beforeEach inject ($httpBackend) ->
-        $tab = findTabByTitle("Second")
-        $tab.find("a").click()
+        $httpBackend.whenGET("/tabs/first").respond "First"
+
+      beforeEach inject ($httpBackend, $injector) ->
+        {element, $scope} = compileTemplate """
+          <ag-tabset>
+            <ag-tab title="First" template-url="/tabs/first"></ag-tab>
+            <ag-tab title="Second" template-url="/tabs/second"></ag-tab>
+            <ag-tab title="Third" template-url="/tabs/third"></ag-tab>
+          </ag-tabset>
+        """, $injector
+
+        $httpBackend.flush()
+
+      it "renders the tabs", ->
+        firstTab = findTabByTitle("First")
+        expect(firstTab.isolateScope().selected).to.be.true
+        expect(firstTab.hasClass("active")).to.be.true
+
+        secondTab = findTabByTitle("Second")
+        expect(secondTab.isolateScope().selected).to.be.false
+        expect(secondTab.hasClass("active")).to.be.false
+
+      it "creates clickable titles", ->
+        titles = element.find(".nav.nav-tabs li")
+        expect(titles).to.have.length(3)
+
+        expect(titles.find("a").eq(0).text()).to.eq "First"
+        expect(titles.find("a").eq(1).text()).to.eq "Second"
+        expect(titles.find("a").eq(2).text()).to.eq "Third"
+
+      it "by default displays the first tab content", ->
+        expect(element.find(".tab.container").text()).to.eq "First"
+
+      describe "on click on the nav tab", ->
+        tab = null
+
+        beforeEach inject ($httpBackend) ->
+          $httpBackend.whenGET("/tabs/second").respond "Second"
+
+          tab = findTabByTitle("Second")
+          tab.find("a").click()
+
+          $httpBackend.flush()
+
+        it "changes the active tab", ->
+          expect(tab.isolateScope().selected).to.be.true
+          expect(tab.hasClass("active")).to.be.true
+
+        it "loads the content for the activated tab", ->
+          expect(element.find(".tab.container").text()).to.eq "Second"
+
+    describe "with initial active tab", ->
+
+      beforeEach inject ($httpBackend, $injector) ->
+        $httpBackend.whenGET("/tabs/second").respond "Second"
+
+        {element, $scope} = compileTemplate """
+          <ag-tabset>
+            <ag-tab title="First" template-url="/tabs/first"></ag-tab>
+            <ag-tab title="Second" active="true" template-url="/tabs/second"></ag-tab>
+            <ag-tab title="Third" template-url="/tabs/third"></ag-tab>
+          </ag-tabset>
+        """, $injector
+
         $httpBackend.flush()
 
       it "sets the tab as active", ->
-        expect($tab.isolateScope().selected).to.be.true
-        expect($tab.hasClass("active")).to.be.true
+        tab = findTabByTitle("Second")
+        expect(tab.isolateScope().selected).to.be.true
+        expect(tab.hasClass("active")).to.be.true
 
       it "loads the content for the activated tab", ->
         expect(element.find(".tab.container").text()).to.eq "Second"
