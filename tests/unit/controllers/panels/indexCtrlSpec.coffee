@@ -1,5 +1,5 @@
 describe "controller: panels.IndexCtrl", ->
-  beforeEach module("angleGrinder.examples")
+  beforeEach module "angleGrinder.examples"
 
   $scope = null
 

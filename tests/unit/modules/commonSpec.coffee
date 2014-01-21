@@ -1,5 +1,5 @@
 describe "module: angleGrinder.common", ->
-  beforeEach module("angleGrinder.common")
+  beforeEach module "angleGrinder.common"
 
   describe "service: pathWithContext", ->
     it "is defined", inject (pathWithContext) ->

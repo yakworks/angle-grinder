@@ -1,5 +1,5 @@
 describe "module: angleGrinder.forms validations", ->
-  beforeEach module("angleGrinder.forms")
+  beforeEach module "angleGrinder.forms"
 
   $scope = null
 

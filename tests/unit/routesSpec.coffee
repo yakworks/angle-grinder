@@ -8,14 +8,14 @@ describe "Application routes", ->
   beforeEach module "angleGrinder"
 
   beforeEach ->
-    module("templates/angleGrinder.html")
-    module("templates/documentation.html")
+    module "templates/angleGrinder.html"
+    module "templates/documentation.html"
 
-    module("templates/gridExample/list.html")
-    module("templates/usersDialog/list.html")
-    module("templates/users/list.html")
-    module("templates/users/show.html")
-    module("templates/users/form.html")
+    module "templates/gridExample/list.html"
+    module "templates/usersDialog/list.html"
+    module "templates/users/list.html"
+    module "templates/users/show.html"
+    module "templates/users/form.html"
 
   $rootScope = null
   $route = null

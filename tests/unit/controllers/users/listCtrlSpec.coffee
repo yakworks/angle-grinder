@@ -1,5 +1,5 @@
 describe "controller: users.ListCtrl", ->
-  beforeEach module("angleGrinder.examples")
+  beforeEach module "angleGrinder.examples"
 
   # Stub $dialog service
   beforeEach module "ui.bootstrap", ($provide) ->

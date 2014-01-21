@@ -1,5 +1,5 @@
 describe "module: angleGrinder.alerts", ->
-  beforeEach module("angleGrinder.alerts")
+  beforeEach module "angleGrinder.alerts"
 
   describe "controller", ->
     $scope = null
