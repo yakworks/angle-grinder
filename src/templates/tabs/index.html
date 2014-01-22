@@ -1,10 +1,15 @@
 <h2 class="page-header">{{title}}</h2>
 
 <ag-tabset>
-  <ag-tab title="First"
-          template-url="templates/tabs/_first.html"></ag-tab>
-  <ag-tab title="Second" active="1 === 1"
-          template-url="templates/tabs/_second.html"></ag-tab>
-  <ag-tab title="Third"
-          template-url="templates/tabs/_third.html"></ag-tab>
+  <ag-tab template-url="templates/tabs/_first.html">
+    First
+  </ag-tab>
+
+  <ag-tab active="1 === 1" template-url="templates/tabs/_second.html">
+    Second
+  </ag-tab>
+
+  <ag-tab template-url="templates/tabs/_third.html">
+    <i class="icon-user"></i> Third
+  </ag-tab>
 </ag-tabset>

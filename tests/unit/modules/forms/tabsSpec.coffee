@@ -73,7 +73,7 @@ describe "module: angleGrinder.forms tabs", ->
           expect(tabOne.selected).to.be.true
           expect(tabTwo.selected).to.be.false
 
-  describe.only "directive: agTab", ->
+  describe "directive: agTab", ->
     $scope = null
     element = null
 
@@ -90,9 +90,9 @@ describe "module: angleGrinder.forms tabs", ->
       beforeEach inject ($httpBackend, $injector) ->
         {element, $scope} = compileTemplate """
           <ag-tabset>
-            <ag-tab title="First" template-url="/tabs/first"></ag-tab>
-            <ag-tab title="Second" template-url="/tabs/second"></ag-tab>
-            <ag-tab title="Third" template-url="/tabs/third"></ag-tab>
+            <ag-tab template-url="/tabs/first">First</ag-tab>
+            <ag-tab template-url="/tabs/second">Second</ag-tab>
+            <ag-tab template-url="/tabs/third">Third</ag-tab>
           </ag-tabset>
         """, $injector
 
@@ -143,9 +143,9 @@ describe "module: angleGrinder.forms tabs", ->
 
         {element, $scope} = compileTemplate """
           <ag-tabset>
-            <ag-tab title="First" template-url="/tabs/first"></ag-tab>
-            <ag-tab title="Second" active="true" template-url="/tabs/second"></ag-tab>
-            <ag-tab title="Third" template-url="/tabs/third"></ag-tab>
+            <ag-tab template-url="/tabs/first">First</ag-tab>
+            <ag-tab active="true" template-url="/tabs/second">Second</ag-tab>
+            <ag-tab template-url="/tabs/third">Third</ag-tab>
           </ag-tabset>
         """, $injector
 

@@ -15,6 +15,7 @@ forms.directive "agTabset", ->
         selectedTab = _.findWhere($scope.tabs, selected: true)
         selectedTab.templateUrl if selectedTab?
 
+      # activate the given tab
       @selectTab = (tab) ->
         # de-select all tabs
         angular.forEach $scope.tabs, (tab) -> tab.selected = false
@@ -22,6 +23,7 @@ forms.directive "agTabset", ->
         # mark the current tab as selected
         tab.selected = true
 
+      # add new tab to the stack
       @addTab = (tab, select = false) ->
         # add a tab to the stack
         $scope.tabs.push(tab)
@@ -43,10 +45,9 @@ forms.directive "agTab", [
     restrict: "E"
     replace: true
     require: "^agTabset"
+    transclude: true
 
-    scope:
-      title: "@"
-      templateUrl: "@"
+    scope: templateUrl: "@"
 
     link: (scope, element, attrs, tabsetCtrl) ->
       # by default all new tabs are unselected
@@ -61,7 +62,7 @@ forms.directive "agTab", [
 
     template: """
       <li ng-click="select()" ng-class="{active: selected}">
-        <a href="">{{title}}</a>
+        <a href="" ng-transclude>{{heading}}</a>
       </li>
     """
 ]
