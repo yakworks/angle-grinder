@@ -4,17 +4,17 @@ forms.directive "agTabset", ->
   restrict: "E"
   replace: true
   transclude: true
-  scope: { }
+  scope: true
 
   controller: [
-    "$scope", ($scope) ->
+    "$scope", "pathWithContext", ($scope, pathWithContext) ->
       # an array for tabs
       $scope.tabs = []
 
       # return the current template url
       $scope.currentTemplateUrl = ->
         selectedTab = _.findWhere($scope.tabs, selected: true)
-        selectedTab.templateUrl if selectedTab?
+        pathWithContext(selectedTab.templateUrl) if selectedTab?
 
       # activate the given tab
       @selectTab = (tab) ->

@@ -1,11 +1,14 @@
 describe "module: angleGrinder.forms tabs", ->
 
+  beforeEach module "angleGrinder.common", ($provide) ->
+    $provide.value "pathWithContext", (path) -> "/ag-demo#{path}"
+    return
+
   beforeEach module "angleGrinder.forms"
 
   describe "directive: agTabset", ->
 
-    $scope = null
-    isolateScope = null
+    scope = null
     element = null
 
     beforeEach inject ($injector) ->
@@ -13,7 +16,7 @@ describe "module: angleGrinder.forms tabs", ->
         <ag-tabset></ag-tabset>
       """, $injector
 
-      isolateScope = element.isolateScope()
+      scope = element.scope()
 
     it "renders tabs container", ->
       expect(element.hasClass("container")).to.be.true
@@ -23,8 +26,8 @@ describe "module: angleGrinder.forms tabs", ->
     describe "$scope", ->
 
       it "by default it has no tabs", ->
-        expect(isolateScope.tabs).to.be.instanceof Array
-        expect(isolateScope.tabs).to.be.empty
+        expect(scope.tabs).to.be.instanceof Array
+        expect(scope.tabs).to.be.empty
 
     describe "controller", ->
       ctrl = null
@@ -40,8 +43,8 @@ describe "module: angleGrinder.forms tabs", ->
 
         it "add a new tab to the stack", ->
           ctrl.addTab(newTab)
-          expect(isolateScope.tabs.length).to.eq 1
-          expect(_.last(isolateScope.tabs)).to.eq
+          expect(scope.tabs.length).to.eq 1
+          expect(_.last(scope.tabs)).to.eq
 
         context "when the tab stack is empty", ->
 
@@ -49,7 +52,7 @@ describe "module: angleGrinder.forms tabs", ->
             spy = sinon.spy(ctrl, "selectTab")
             ctrl.addTab(newTab)
             expect(spy.calledWith(newTab)).to.be.true
-            expect(isolateScope.tabs[0].selected).to.be.true
+            expect(scope.tabs[0].selected).to.be.true
 
         context "when the tab stack is not empty", ->
           beforeEach inject ($rootScope) ->
@@ -88,7 +91,7 @@ describe "module: angleGrinder.forms tabs", ->
 
       # mock templates for the tab panel
       beforeEach inject ($httpBackend) ->
-        $httpBackend.whenGET("/tabs/first").respond "First"
+        $httpBackend.whenGET("/ag-demo/tabs/first").respond "First"
 
       beforeEach inject ($httpBackend, $injector) ->
         {element, $scope} = compileTemplate """
@@ -125,7 +128,7 @@ describe "module: angleGrinder.forms tabs", ->
         tab = null
 
         beforeEach inject ($httpBackend) ->
-          $httpBackend.whenGET("/tabs/second").respond "Second"
+          $httpBackend.whenGET("/ag-demo/tabs/second").respond "Second"
 
           tab = findTabByTitle("Second")
           tab.find("a").click()
@@ -142,7 +145,7 @@ describe "module: angleGrinder.forms tabs", ->
     describe "with initial active tab", ->
 
       beforeEach inject ($httpBackend, $injector) ->
-        $httpBackend.whenGET("/tabs/second").respond "Second"
+        $httpBackend.whenGET("/ag-demo/tabs/second").respond "Second"
 
         {element, $scope} = compileTemplate """
           <ag-tabset>

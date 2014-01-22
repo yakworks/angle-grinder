@@ -8,7 +8,9 @@
 
 <h3>Tabs</h3>
 
-<ag-tabset>
+item: {{item.name}}
+
+<ag-tabset ng-init="foo = 'bar'">
   <ag-tab active="isTabActive('first')" template-url="templates/tabs/_first.html">
     First
   </ag-tab>
