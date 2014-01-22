@@ -52,6 +52,10 @@ app.config [
         templateUrl: "templates/fileUpload/index.html"
         controller: "fileUpload.IndexCtrl"
 
+      .when "/examples/tabs",
+        templateUrl: "templates/tabs/index.html"
+        controller: "tabs.IndexCtrl"
+
       .when "/examples/panels",
         templateUrl: "templates/panels/index.html"
         controller: "panels.IndexCtrl"

@@ -1,5 +1,5 @@
 describe "module: angleGrinder.forms directive: agCreateButton", ->
-  beforeEach module("angleGrinder.forms")
+  beforeEach module "angleGrinder.forms"
 
   element = null
   $scope = null

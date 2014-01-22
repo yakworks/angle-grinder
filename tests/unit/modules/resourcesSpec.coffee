@@ -1,5 +1,5 @@
 describe "module: angleGrinder.resources", ->
-  beforeEach module("angleGrinder.resources")
+  beforeEach module "angleGrinder.resources"
 
   describe "service: Users", ->
     $httpBackend = null

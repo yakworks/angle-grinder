@@ -1,5 +1,5 @@
 describe "module: angleGrinder.gridz", ->
-  beforeEach module("angleGrinder.gridz")
+  beforeEach module "angleGrinder.gridz"
 
   describe "service: hasSearchFilters", ->
     hasSearchFilters = null

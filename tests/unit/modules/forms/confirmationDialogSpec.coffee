@@ -1,5 +1,5 @@
 describe "module: angleGrinder.forms service: confirmationDialog", ->
-  beforeEach module("angleGrinder.forms")
+  beforeEach module "angleGrinder.forms"
 
   it "displays the confirmation", inject ($dialog, confirmationDialog) ->
     # Given

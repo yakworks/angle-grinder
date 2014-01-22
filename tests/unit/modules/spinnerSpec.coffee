@@ -1,5 +1,5 @@
 describe "module: angleGrinder.spinner", ->
-  beforeEach module("angleGrinder.spinner")
+  beforeEach module "angleGrinder.spinner"
 
   describe "service: httpRequestTracker", ->
     httpRequestTracker = null

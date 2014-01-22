@@ -1,5 +1,5 @@
 describe "module: angleGrinder.dataGenerator", ->
-  beforeEach module("angleGrinder.dataGenerator")
+  beforeEach module "angleGrinder.dataGenerator"
 
   describe "service: random", ->
     describe "#range", ->

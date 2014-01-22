@@ -6,7 +6,7 @@ describe "module: angleGrinder.gridz", ->
     # this is important, see: https://groups.google.com/forum/#!msg/angular/gCGF_B4eQkc/XjkvbgE9iMcJ
     return
 
-  beforeEach module("angleGrinder.gridz")
+  beforeEach module "angleGrinder.gridz"
 
   describe "directive: agSelect2", ->
 
