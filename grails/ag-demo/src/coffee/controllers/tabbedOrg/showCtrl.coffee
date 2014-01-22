@@ -4,15 +4,15 @@ class ShowCtrl
   constructor: ($scope, alerts, org) ->
     $scope.org = org
 
-    $scope.save = (org) ->
-      return if $scope.editForm.$invalid
+    $scope.save = (form, org) ->
+      return if form.$invalid
 
       onSuccess = -> alerts.info("Org address has been updated.")
 
       onError = (response) ->
         if response.status is 422
           errors = response.data.errors
-          $scope.editForm.$serverError = errors.org
+          form.$serverError = errors.org
 
       org.save success: onSuccess, error: onError
 
