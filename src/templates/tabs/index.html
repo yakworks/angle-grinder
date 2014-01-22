@@ -1,15 +1,23 @@
 <h2 class="page-header">{{title}}</h2>
 
+<div>
+  <a href="#/examples/tabs?tab=first">Link to the fist tab</a> |
+  <a href="#/examples/tabs?tab=second">Link to the second tab</a> |
+  <a href="#/examples/tabs?tab=third">Link to the third tab</a>
+</div>
+
+<h3>Tabs</h3>
+
 <ag-tabset>
-  <ag-tab template-url="templates/tabs/_first.html">
+  <ag-tab active="isTabActive('first')" template-url="templates/tabs/_first.html">
     First
   </ag-tab>
 
-  <ag-tab active="1 === 1" template-url="templates/tabs/_second.html">
+  <ag-tab active="isTabActive('second')" template-url="templates/tabs/_second.html">
     Second
   </ag-tab>
 
-  <ag-tab template-url="templates/tabs/_third.html">
+  <ag-tab active="isTabActive('third')" template-url="templates/tabs/_third.html">
     <i class="icon-user"></i> Third
   </ag-tab>
 </ag-tabset>

@@ -5,12 +5,15 @@ describe "module: angleGrinder.forms tabs", ->
   describe "directive: agTabset", ->
 
     $scope = null
+    isolateScope = null
     element = null
 
     beforeEach inject ($injector) ->
       {element, $scope} = compileTemplate """
         <ag-tabset></ag-tabset>
       """, $injector
+
+      isolateScope = element.isolateScope()
 
     it "renders tabs container", ->
       expect(element.hasClass("container")).to.be.true
@@ -20,8 +23,8 @@ describe "module: angleGrinder.forms tabs", ->
     describe "$scope", ->
 
       it "by default it has no tabs", ->
-        expect($scope.tabs).to.be.instanceof Array
-        expect($scope.tabs).to.be.empty
+        expect(isolateScope.tabs).to.be.instanceof Array
+        expect(isolateScope.tabs).to.be.empty
 
     describe "controller", ->
       ctrl = null
@@ -37,8 +40,8 @@ describe "module: angleGrinder.forms tabs", ->
 
         it "add a new tab to the stack", ->
           ctrl.addTab(newTab)
-          expect($scope.tabs.length).to.eq 1
-          expect(_.last($scope.tabs)).to.eq
+          expect(isolateScope.tabs.length).to.eq 1
+          expect(_.last(isolateScope.tabs)).to.eq
 
         context "when the tab stack is empty", ->
 
@@ -46,7 +49,7 @@ describe "module: angleGrinder.forms tabs", ->
             spy = sinon.spy(ctrl, "selectTab")
             ctrl.addTab(newTab)
             expect(spy.calledWith(newTab)).to.be.true
-            expect($scope.tabs[0].selected).to.be.true
+            expect(isolateScope.tabs[0].selected).to.be.true
 
         context "when the tab stack is not empty", ->
           beforeEach inject ($rootScope) ->

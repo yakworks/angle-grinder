@@ -4,6 +4,7 @@ forms.directive "agTabset", ->
   restrict: "E"
   replace: true
   transclude: true
+  scope: { }
 
   controller: [
     "$scope", ($scope) ->
@@ -41,21 +42,22 @@ forms.directive "agTabset", ->
   """
 
 forms.directive "agTab", [
-  "$parse", ($parse) ->
+  ->
     restrict: "E"
     replace: true
     require: "^agTabset"
     transclude: true
 
-    scope: templateUrl: "@"
+    scope:
+      templateUrl: "@" # text binding
+      active: "&"      # one-way binding
 
     link: (scope, element, attrs, tabsetCtrl) ->
       # by default all new tabs are unselected
       scope.selected = false
 
       # add the current tab to the stack
-      initiallyActived = $parse(attrs.active)(scope)
-      tabsetCtrl.addTab(scope, initiallyActived)
+      tabsetCtrl.addTab(scope, scope.active())
 
       # handles mouse click on the tab
       scope.select = -> tabsetCtrl.selectTab(scope)
