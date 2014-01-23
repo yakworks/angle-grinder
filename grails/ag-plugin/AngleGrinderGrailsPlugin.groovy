@@ -1,6 +1,6 @@
 class AngleGrinderGrailsPlugin {
 
-    def version = '0.3.20'
+    def version = '0.3.21'
     def grailsVersion = '2.0 > *'
     def dependsOn = [:]
     def pluginExcludes = []

@@ -5,8 +5,8 @@ gridz = angular.module("angleGrinder.gridz")
 # with `ag-grid-name` directive, for example:
 # `<div ag-grid="gridOptions" ag-grid-name="usersGrid"></div>`
 gridz.controller "AgGridCtrl", class
-  @$inject = ["$q", "hasSearchFilters", "flatten"]
-  constructor: (@$q, @hasSearchFilters, @flatten) ->
+  @$inject = ["$rootScope", "$q", "hasSearchFilters", "flatten"]
+  constructor: (@$rootScope, @$q, @hasSearchFilters, @flatten) ->
 
   registerGridElement: ($grid) ->
     @$grid = $grid
@@ -47,6 +47,7 @@ gridz.controller "AgGridCtrl", class
   # where name is the name of the column as described in the colModel and the value is the value.
   addRow: (id, data, position = "first") ->
     @$grid.addRowData(id, @flatten(data), position)
+    @$rootScope.$broadcast "gridz:rowAdded", id, data
     @flashOnSuccess(id)
 
   # Returns `true` if the grid contains a row with the given id

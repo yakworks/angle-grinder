@@ -100,12 +100,23 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
       expect(flatten.calledWith(foo: bar: "baz")).to.be.true
 
     it "flashes the inserted row", ->
-      # Given
+      # When
       controller.addRow(234, foo: "bar")
 
       # Then
       expect(controller.flashOnSuccess.called).to.be.true
       expect(controller.flashOnSuccess.calledWith(234)).to.be.true
+
+    it "broadcasts `gridz:rowAdded` event", inject ($rootScope) ->
+      # Given
+      spy = sinon.spy($rootScope, "$broadcast")
+
+      # When
+      controller.addRow(234, foo: "bar")
+      expect(spy.called).to.be.true
+      expect(spy.calledWith("gridz:rowAdded", 234, foo: "bar")).to.be.true
+
+      spy.restore()
 
   describe "#saveRow", ->
     describe "when a row exists in the grid", ->

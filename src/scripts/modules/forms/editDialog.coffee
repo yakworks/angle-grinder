@@ -20,7 +20,7 @@ class FormDialogCtrl
       onSuccess = (response) ->
         $log.info "Item has been updated/created", response
 
-        gridCtrl.saveRow(item.id, response)
+        gridCtrl.saveRow(response.id, response)
         $scope.closeEditDialog()
 
       onError = (response) ->
