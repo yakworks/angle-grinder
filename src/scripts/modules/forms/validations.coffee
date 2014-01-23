@@ -35,43 +35,49 @@ forms.directive "match", ["isEmpty", (isEmpty) ->
     modelCtrl.$formatters.unshift validator
 ]
 
-forms.directive "agFieldGroup", ["$timeout", ($timeout) ->
-  restrict: "A"
-  require: "^form"
-  replace: true
-  transclude: true
-  template: """
-    <div class="control-group" ng-transclude></div>
-  """
+forms.directive "agFieldGroup", [
+  "$timeout", "$log",
+  ($timeout, $log) ->
+    restrict: "A"
+    require: "^form"
+    replace: true
+    transclude: true
+    template: """
+      <div class="control-group" ng-transclude></div>
+    """
 
-  link: (scope, element, attrs, formCtrl) ->
-    fields = (attrs["for"] or "").split(",")
+    link: (scope, element, attrs, formCtrl) ->
+      fields = (attrs["for"] or "").split(",")
 
-    toggleErrors = ->
-      $timeout ->
-        invalid = _.map fields, (field) ->
-          formCtrl[field]?.$invalid or formCtrl.$serverError?[field]
+      toggleErrors = ->
+        $timeout ->
+          # true if the field is invalid or it has server side errors
+          invalid = _.map fields, (field) -> formCtrl[field]?.$invalid or formCtrl.$serverError?[field]
 
-        if _.any(invalid)
-          element.addClass("error")
-        else
-          element.removeClass("error")
+          if _.any(invalid)
+            element.addClass("error")
+          else
+            element.removeClass("error")
 
-    # Watch for validity state change and display errors if necessary
-    angular.forEach fields, (fieldName) ->
-      scope.$watch "#{formCtrl.$name}.#{fieldName}.$viewValue", ->
-        toggleErrors() if formCtrl[fieldName]?.$dirty
+      # Watch for validity state change and display errors if necessary
+      angular.forEach fields, (fieldName) ->
+        scope.$watch "#{formCtrl.$name}.#{fieldName}.$viewValue", ->
+          return unless formCtrl[fieldName]?.$dirty
+          $log.debug "[validations] field value was changed", formCtrl, formCtrl[fieldName]
+          toggleErrors()
 
-    # Display server side validation errors (only once)
-    angular.forEach fields, (fieldName) ->
-      initial = true
-      scope.$watch "#{formCtrl.$name}.$serverError.#{fieldName}", ->
-        toggleErrors() unless initial
-        initial = false
+      # Display server side validation errors (only once)
+      angular.forEach fields, (fieldName) ->
+        initial = true
+        scope.$watch "#{formCtrl.$name}.$serverError.#{fieldName}", ->
+          toggleErrors() unless initial
+          initial = false
 
-    # Display validation errors when the form is submitted
-    scope.$watch "#{formCtrl.$name}.$submitted", (submitted) ->
-      toggleErrors() if submitted
+      # Display validation errors when the form is submitted
+      scope.$watch "#{formCtrl.$name}.$submitted", (submitted) ->
+        return unless submitted
+        $log.debug "[validations] form was submitted", formCtrl
+        toggleErrors()
 ]
 
 forms.directive "agValidationErrors", [

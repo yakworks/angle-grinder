@@ -15,8 +15,8 @@ describe "controller: users.FormCtrl", ->
     expect($scope.user.email).to.equal "test@email.com"
 
   describe "#save", ->
-    # Mark the form as valid
-    beforeEach -> $scope.userForm = $valid: true
+    form = null
+    beforeEach -> form = $valid: true
 
     describe "on success", ->
       recordSpy = null
@@ -27,7 +27,7 @@ describe "controller: users.FormCtrl", ->
         recordSpy = sinon.spy(fakeUser, "save")
         locationStub = sinon.stub($location, "path")
 
-        $scope.save(fakeUser)
+        $scope.save(form, fakeUser)
 
       it "saves a record", ->
         expect(recordSpy.called).to.be.true
@@ -48,13 +48,13 @@ describe "controller: users.FormCtrl", ->
 
         recordSpy = sinon.spy(fakeUser, "save")
 
-        $scope.save(fakeUser)
+        $scope.save(form, fakeUser)
 
       it "tries to save a record", ->
         expect(recordSpy.called).to.be.true
 
       it "sets server side validation errors", ->
-        expect($scope.userForm.$serverError.login).to.equal "has to be unique"
+        expect(form.$serverError.login).to.equal "has to be unique"
 
   describe "#delete", ->
 
