@@ -24,7 +24,9 @@ upload.configure
       height: 80
 
 app.configure ->
-  app.use express.logger()
+  logFile = fs.createWriteStream(path.join(__dirname, "/../../tmp/express.log"), flags: "a")
+  app.use express.logger(stream: logFile)
+
   app.use "/api/upload", upload.fileHandler()
   app.use express.bodyParser()
   app.use express.static(path.join(__dirname, "dist"))
