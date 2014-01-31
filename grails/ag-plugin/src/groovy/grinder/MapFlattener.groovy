@@ -134,27 +134,30 @@ class MapFlattener {
         }
 
         def keyValues = new HashMap<String,String>()
+        keyValues.put(currentName, jsonArray)
+
+        int index = 0
 
         jsonArray.each { jsonElement ->
-
+            String arrayName = [currentName, index++].join('.')
             if ( jsonElement == null )
             {
-                keyValues.put(currentName, null)
+                keyValues.put(arrayName, null)
             }
             else if ( jsonElement instanceof Map)
             {
-                def jsonMapKeyValues = transformGroovyJsonMap(jsonElement, currentName)
+                def jsonMapKeyValues = transformGroovyJsonMap(jsonElement, arrayName)
                 _keyVersion.updateMapWithKeyValues(keyValues, jsonMapKeyValues)
             }
             else if ( jsonElement instanceof List )
             {
-                def jsonArrayKeyValues = transformJsonArray(jsonElement, currentName)
+                def jsonArrayKeyValues = transformJsonArray(jsonElement, arrayName)
                 _keyVersion.updateMapWithKeyValues(keyValues, jsonArrayKeyValues)
             }
             else
             {
                 def value = String.valueOf(jsonElement)
-                _keyVersion.updateMapWithKeyValue(keyValues, currentName, value)
+                _keyVersion.updateMapWithKeyValue(keyValues, arrayName, value)
             }
         }
 

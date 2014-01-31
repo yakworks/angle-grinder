@@ -29,4 +29,27 @@ class MapFlattenerTest {
 
     }
 
+    @Test
+    void testParseListOfInts() {
+        def mf = new MapFlattener()
+        def testMap = [
+                tags: [1, 2]
+        ]
+        def res = mf.flatten(testMap)
+        assert res['tags'] == [1, 2]
+        assert res['tags.0'] == '1'
+        assert res['tags.1'] == '2'
+    }
+
+    @Test
+    void testParseListOfMaps() {
+        def mf = new MapFlattener()
+        def testMap = [
+                tags: [[id: 1], [id: 2]]
+        ]
+        def res = mf.flatten(testMap)
+        assert res['tags'] == [[id: 1], [id: 2]]
+        assert res['tags.0.id'] == '1'
+        assert res['tags.1.id'] == '2'
+    }
 }
