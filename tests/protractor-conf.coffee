@@ -1,7 +1,7 @@
 exports.config =
   # Run with selenium standalone server
-  seleniumServerJar: null # use default location
-  seleniumPort: 4444
+  # seleniumServerJar: null # use default location
+  # seleniumPort: 4444
 
   # chromeDriver: "./selenium/chromedriver"
   # chromeOnly: true
