@@ -1,4 +1,5 @@
 class ShowCtrl
+
   @$inject = ["$scope", "$location", "sampleData", "user"]
   constructor: ($scope, $location, sampleData, user) ->
     $scope.user = user

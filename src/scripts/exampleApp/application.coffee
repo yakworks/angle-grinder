@@ -14,7 +14,7 @@ app = angular.module "exampleApp", [
   "angleGrinder.spinner"
 
   "exampleApp.resources"
-  "exampleApp.dataGenerator"
+  "exampleApp.grids"
   "exampleApp.docs"
 ]
 

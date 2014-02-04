@@ -50,6 +50,9 @@ module.exports = (config) ->
       "src/scripts/exampleApp/routes.coffee"
       "src/scripts/exampleApp/controllers/**/*.coffee"
 
+      "src/scripts/exampleApp/grids.coffee"
+      "src/scripts/exampleApp/grids/*.coffee"
+
       "tests/unit/helpers/**/*.coffee"
       "tests/unit/**/*Spec.coffee"
     ]

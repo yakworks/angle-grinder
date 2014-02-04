@@ -1,4 +1,5 @@
 class FormCtrl
+
   @$inject = ["$scope", "$location", "serverValidationErrorsHandler", "user"]
   constructor: ($scope, $location, serverValidationErrorsHandler, user) ->
     $scope.user = user

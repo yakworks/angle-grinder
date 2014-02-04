@@ -1,17 +1,12 @@
 class IndexCtrl
 
-  @$inject = ["$scope", "sampleData", "editDialog"]
-  constructor: ($scope, sampleData, editDialog) ->
+  @$inject = ["$scope", "sampleData", "exampleGrid", "editDialog"]
+  constructor: ($scope, sampleData, exampleGrid, editDialog) ->
+
+    # initialize the grid with generated data
     @data = sampleData.generate(100)
     $scope.data = @data
-
-    # TODO create a service for grid options
-    $scope.gridOptions =
-      data: @data
-      datatype: "local"
-      colModel: @gridColumns()
-      sortname: "id"
-      shrinkToFit: true
+    $scope.gridOptions = exampleGrid(data: @data)
 
     $scope.editItem = (id) =>
       item = @findItemById(id)
@@ -50,32 +45,6 @@ class IndexCtrl
     if row?
       @data = _.reject @data, (item) -> item.id is row.id
       return row
-
-  gridColumns: ->
-    [
-      name: "id"
-      label: "Inv No"
-      width: 60
-      sorttype: "int"
-      align: "right"
-    ,
-      name: "customer.name"
-      label: "Customer"
-      formatter: "editActionLink"
-    ,
-      name: "invoiceDate"
-      label: "Date"
-      width: 80
-    ,
-      name: "note"
-      label: "Note"
-    ,
-      name: "complete"
-      label: "Complete"
-      width: 50
-      align: "center"
-      formatter: "okIcon"
-    ]
 
 angular.module("exampleApp")
   .controller("gridExample.ListCtrl", IndexCtrl)

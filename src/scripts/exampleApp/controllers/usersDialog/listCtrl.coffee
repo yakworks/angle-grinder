@@ -1,17 +1,12 @@
 class IndexCtrl
-  @$inject = ["$scope", "$log", "$filter", "Users", "dialogCrudCtrlMixin", "massUpdateMixin"]
-  constructor: ($scope, $log, @$filter, Users, dialogCrudCtrlMixin, massUpdateMixin) ->
+
+  @$inject = ["$scope", "usersDialogGrid", "Users", "dialogCrudCtrlMixin", "massUpdateMixin"]
+  constructor: ($scope, usersDialogGrid, Users, dialogCrudCtrlMixin, massUpdateMixin) ->
     # Intitially hide the search form
     $scope.showSearchForm = false
 
-    # TODO create a service for grid options
-    $scope.gridOptions =
-      path: "/api/users"
-      colModel: @gridColumns()
-      rowNum: 10
-      sortname: "id"
-      # handler for jqGrid errors
-      loadError: -> $log.error "loadError", arguments
+    # initialize the grid
+    $scope.gridOptions = usersDialogGrid()
 
     dialogCrudCtrlMixin $scope,
       Resource: Users
@@ -22,34 +17,6 @@ class IndexCtrl
       templateUrl: "/templates/users/massUpdateForm.html"
       controller: "users.MassUpdateFormCtrl"
       gridName: "usersGrid"
-
-  gridColumns: ->
-    [
-      name: "id"
-      width: 50
-      formatter: "editActionLink"
-    ,
-      name: "login"
-      label: "Login"
-      formatter: "editActionLink"
-    ,
-      name: "info.email"
-      label: "Email"
-    ,
-      name: "name"
-      label: "Name"
-      formatter: "editActionLink"
-    ,
-      name: "allowance"
-      label: "Allowance"
-    ,
-      name: "birthday"
-      label: "Birthday"
-      formatter: (cellVal) => @$filter("date")(cellVal)
-    ,
-      name: "paid"
-      label: "Paid"
-    ]
 
 angular.module("exampleApp")
   .controller("usersDialog.ListCtrl", IndexCtrl)

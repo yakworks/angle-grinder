@@ -2,6 +2,7 @@ class IndexCtrl
 
   @$inject = ["$scope", "$templateCache", "$routeParams", "$log"]
   constructor: ($scope, $templateCache, $routeParams, $log) ->
+
     # remove tab templates from the cache
     _.each ["_first", "_second", "_third"], (name) ->
       $templateCache.remove "templates/tabs/#{name}.html"
