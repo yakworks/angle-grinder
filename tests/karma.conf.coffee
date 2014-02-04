@@ -20,8 +20,9 @@ module.exports = (config) ->
       "components/bower/angular-sanitize/angular-sanitize.js"
 
       "components/bower/sinon/lib/sinon.js"
-      "components/bower/sinon/lib/sinon/spy.js"
+      "components/bower/sinon/lib/sinon/behavior.js"
       "components/bower/sinon/lib/sinon/call.js"
+      "components/bower/sinon/lib/sinon/spy.js"
       "components/bower/sinon/lib/sinon/stub.js"
       "components/bower/sinon/lib/sinon/mock.js"
       "components/bower/sinon/lib/sinon/assert.js"
