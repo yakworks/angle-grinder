@@ -53,7 +53,7 @@ echo "Copy the build to the right place.."
 cp -R dist/* "$OUTPUT_DIRECTORY"
 
 # Cleanup: do not include demo app in the build
-rm "$OUTPUT_DIRECTORY/scripts/scripts.min.js"
+rm "$OUTPUT_DIRECTORY/scripts/exampleApp.min.js"
 rm "$OUTPUT_DIRECTORY/scripts/docs.js"
 rm "$OUTPUT_DIRECTORY/index.html"
 rm "$OUTPUT_DIRECTORY/styles/style.min.css"

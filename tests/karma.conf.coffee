@@ -37,18 +37,18 @@ module.exports = (config) ->
       "components/bower/bower-angular-placeholders/angular-placeholders.js"
       "components/bower/angular-bindonce/bindonce.js"
 
-      "src/scripts/jqgrid/gridz.coffee"
+      "src/scripts/angleGrinder/gridz.coffee"
 
       "src/templates/**/*.html"
 
-      "src/scripts/modules/*.coffee"
-      "src/scripts/modules/forms/**/*.coffee"
-      "src/scripts/modules/gridz/**/*.coffee"
-      "src/scripts/modules/examples.coffee"
+      "src/scripts/angleGrinder/modules/*.coffee"
+      "src/scripts/angleGrinder/modules/forms/**/*.coffee"
+      "src/scripts/angleGrinder/modules/gridz/**/*.coffee"
 
-      "src/scripts/application.coffee"
-      "src/scripts/routes.coffee"
-      "src/scripts/controllers/**/*.coffee"
+      "src/scripts/exampleApp/modules/**/*.coffee"
+      "src/scripts/exampleApp/application.coffee"
+      "src/scripts/exampleApp/routes.coffee"
+      "src/scripts/exampleApp/controllers/**/*.coffee"
 
       "tests/unit/helpers/**/*.coffee"
       "tests/unit/**/*Spec.coffee"
