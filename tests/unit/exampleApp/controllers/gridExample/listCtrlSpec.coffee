@@ -58,15 +58,15 @@ describe "controller: gridExample.ListCtrl", ->
 
   describe "controller", ->
 
+    beforeEach ->
+      controller.data = [
+        { id: 123, name: "foo" }
+        { id: 456, name: "bar" }
+      ]
+
     describe "#findItemById", ->
 
-      beforeEach ->
-        controller.data = [
-          { id: 123, name: "foo" }
-          { id: 456, name: "bar" }
-        ]
-
-      describe "when an item can be found", ->
+      context "when an item can be found", ->
 
         it "returns the item", ->
           item = controller.findItemById(123)
@@ -74,8 +74,22 @@ describe "controller: gridExample.ListCtrl", ->
           expect(item.id).to.equal 123
           expect(item.name).to.equal "foo"
 
-      describe "when an item cannot be found", ->
+      context "when an item cannot be found", ->
 
         it "returns undefined", ->
           item = controller.findItemById(1)
           expect(item).to.be.undefined
+
+    describe "#deleteItemById", ->
+
+      context "when an item can be found", ->
+
+        it "deletes the item", ->
+          controller.deleteItemById(123)
+          expect(controller.data).to.have.length(1)
+
+      context "when an item cannot be found", ->
+
+        it "does not delete", ->
+          controller.deleteItemById(1231)
+          expect(controller.data).to.have.length(2)
