@@ -67,7 +67,7 @@ module.exports = (grunt) ->
     "coffee"
     "less"
     "copy:dev"
-    "ngtemplates"
+    "ngtemplates:exampleApp"
     "replace"
   ]
 
