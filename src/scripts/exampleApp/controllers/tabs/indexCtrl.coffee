@@ -4,7 +4,7 @@ class IndexCtrl
   constructor: ($scope, $templateCache, $routeParams, $log) ->
 
     # remove tab templates from the cache
-    _.each ["_first", "_second", "_third"], (name) ->
+    _.each ["_first", "_second", "_third", "_slow"], (name) ->
       $templateCache.remove "templates/tabs/#{name}.html"
 
     $scope.title = "Tabs with lazy loaded templates"

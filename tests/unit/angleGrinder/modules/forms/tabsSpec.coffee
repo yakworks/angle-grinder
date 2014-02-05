@@ -70,6 +70,7 @@ describe "module: angleGrinder.forms tabs", ->
         beforeEach inject ($rootScope) ->
           tabOne = $rootScope.$new()
           ctrl.addTab(tabOne)
+
           tabTwo = $rootScope.$new()
           ctrl.addTab(tabTwo)
 
@@ -122,25 +123,35 @@ describe "module: angleGrinder.forms tabs", ->
         expect(titles.find("a").eq(2).text()).to.eq "Third"
 
       it "by default displays the first tab content", ->
-        expect(element.find(".tab.container").text()).to.eq "First"
+        expect(element.find(".tab.container").text()).to.include "First"
 
       describe "on click on the nav tab", ->
         tab = null
 
-        beforeEach inject ($httpBackend) ->
-          $httpBackend.whenGET("/ag-demo/tabs/second").respond "Second"
+        context "when the tab is not selected", ->
 
-          tab = findTabByTitle("Second")
-          tab.find("a").click()
+          beforeEach inject ($httpBackend) ->
+            $httpBackend.whenGET("/ag-demo/tabs/second").respond "Second"
 
-          $httpBackend.flush()
+            tab = findTabByTitle("Second")
+            tab.find("a").click()
 
-        it "changes the active tab", ->
-          expect(tab.isolateScope().selected).to.be.true
-          expect(tab.hasClass("active")).to.be.true
+            $httpBackend.flush()
 
-        it "loads the content for the activated tab", ->
-          expect(element.find(".tab.container").text()).to.eq "Second"
+          it "changes the active tab", ->
+            expect(tab.isolateScope().selected).to.be.true
+            expect(tab.hasClass("active")).to.be.true
+
+          it "loads the content for the activated tab", ->
+            expect(element.find(".tab.container").text()).to.include "Second"
+
+        context "when the tab is already selected", ->
+          beforeEach ->
+            tab = findTabByTitle("First")
+            tab.find("a").click()
+
+          it "does nothing", inject ($httpBackend) ->
+            $httpBackend.verifyNoOutstandingRequest()
 
     describe "with initial active tab", ->
 
@@ -163,4 +174,4 @@ describe "module: angleGrinder.forms tabs", ->
         expect(tab.hasClass("active")).to.be.true
 
       it "loads the content for the activated tab", ->
-        expect(element.find(".tab.container").text()).to.eq "Second"
+        expect(element.find(".tab.container").text()).to.include "Second"
