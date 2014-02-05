@@ -93,16 +93,15 @@ describe "Users dialog based grid scenario", ->
 
     describe "fill in and submit the form", ->
       beforeEach ->
-        # TODO this API is ugly
-        page.modalForm.setFieldValue "item.name", "New User Name"
-        page.modalForm.setFieldValue "item.login", "new-user"
-        page.modalForm.setFieldValue "item.info.email", "new-user@email.com"
-        page.modalForm.setFieldValue "item.allowance", "99.99"
-        page.modalForm.setFieldValue "item.birthday", "03/04/1983"
-        page.modalForm.setFieldValue "item.password", "password"
-        page.modalForm.setFieldValue "item.passwordConfirmation", "password"
 
-        page.modalForm.submit()
+        page.modalForm.fillInAndSubmit
+          "item.name": "New User Name"
+          "item.login": "new-user"
+          "item.info.email": "new-user@email.com"
+          "item.allowance": "99.99"
+          "item.birthday": "03/04/1983"
+          "item.password": "password"
+          "item.passwordConfirmation": "password"
 
       it "creates a new record", ->
         # should add a new row on the top of the grid
