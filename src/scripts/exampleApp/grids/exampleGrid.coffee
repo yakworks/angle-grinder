@@ -24,7 +24,8 @@ grids.factory "exampleGrid", [
       ,
         name: "complete"
         label: "Complete"
-        width: 50
+        width: 80
+        fixed: true
         align: "center"
         formatter: "okIcon"
       ]

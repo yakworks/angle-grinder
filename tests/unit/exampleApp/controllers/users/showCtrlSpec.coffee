@@ -2,9 +2,8 @@ describe "controller: users.ShowCtrl", ->
 
   beforeEach module "exampleApp", ($provide) ->
     # stub `$location` service
-    $provide.decorator "$location", ($delegate) ->
-      sinon.stub($delegate, "path")
-      $delegate
+    $provide.value "$location", path: sinon.stub()
+    return
 
   beforeEach module "exampleApp"
 
@@ -13,7 +12,7 @@ describe "controller: users.ShowCtrl", ->
   beforeEach inject ($rootScope, $controller) ->
     $scope = $rootScope.$new()
 
-    $controller "users.FormCtrl",
+    $controller "users.ShowCtrl",
       $scope: $scope
       user: id: 456, email: "test@email.com"
 
