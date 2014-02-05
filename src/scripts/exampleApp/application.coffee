@@ -25,26 +25,25 @@ app.config [
     pathWithContextProvider.setContextPath(contextPath) if contextPath?
 ]
 
-# Intercepts all HTTP errors and displays a flash message
 app.factory "httpErrorsInterceptor", [
-  "$injector", "$q", "alerts", ($injector, $q, alerts) ->
-    (promise) ->
-      $http = $injector.get("$http")
+  "$q", "$log", "alerts",
+  ($q, $log, alerts) ->
 
-      onError = (response) ->
-        errorMessage = response.data?.error || "Unexpected HTTP error"
+    responseError: (response) ->
+      errorMessage = response.data?.error || "Unexpected HTTP error"
+      $log.debug "intercepting", errorMessage, response
 
-        # skip validation errors
-        alerts.error(errorMessage) if response.status isnt 422
+      # skip validation errors
+      alerts.error(errorMessage) if response.status isnt 422
 
-        $q.reject(response)
+      $q.reject(response)
 
-      promise.then(null, onError)
 ]
 
 app.config [
   "$httpProvider", ($httpProvider) ->
-    $httpProvider.responseInterceptors.push("httpErrorsInterceptor")
+    # register http errors interceptor
+    $httpProvider.interceptors.push("httpErrorsInterceptor")
 ]
 
 app.run [
