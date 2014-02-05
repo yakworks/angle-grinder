@@ -3,8 +3,9 @@
 app = angular.module("exampleApp")
 
 app.config [
-  "$provide", "$routeProvider", "$httpProvider", ($provide, $routeProvider, $httpProvider) ->
-    $httpProvider.responseInterceptors.push("httpErrorsInterceptor")
+  "$provide", "$routeProvider",
+  ($provide, $routeProvider) ->
+
 
     $routeProvider
       .when "/",
