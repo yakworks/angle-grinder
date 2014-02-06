@@ -1,16 +1,5 @@
 forms = angular.module("angleGrinder.forms")
 
-# This directive will be fired up after the template content is rendered
-forms.directive "agTabPostRender", ->
-  restrict : "A"
-  terminal : true # the last directive to execute
-
-  link: (scope) ->
-    parentScope = scope.$parent
-
-    parentScope.contentLoading = false
-    parentScope.currentTab().loading = false
-
 forms.directive "agTabset", ->
   restrict: "E"
   replace: true
@@ -20,10 +9,10 @@ forms.directive "agTabset", ->
   controller: [
     "$scope", ($scope) ->
 
-      # an array for tabs
+      # stack of the tabs
       $scope.tabs = []
 
-      # show or hide tab content loading indicator
+      # show or hide the tab content loading indicator
       $scope.contentLoading = false
 
       # return the current tab
@@ -34,6 +23,15 @@ forms.directive "agTabset", ->
       $scope.currentTemplateUrl = ->
         currentTab = $scope.currentTab()
         currentTab.tplSrc if currentTab
+
+      # evaluates when a new tab content is loaded
+      $scope.contentLoaded = ->
+        # hide contant loading indication
+        $scope.contentLoading = false
+
+        # hide tab loading spinner
+        tab = $scope.currentTab()
+        tab.loading = false
 
       # activate the given tab
       @selectTab = (tab) ->
@@ -64,7 +62,7 @@ forms.directive "agTabset", ->
       <div class="tab container">
         <span ng-if="contentLoading">loading the content</span>
         <ng-include src="currentTemplateUrl()"
-                    ag-tab-post-render
+                    onload="contentLoaded()"
                     ng-hide="contentLoading"></ng-include>
       </div>
     </div>
@@ -95,7 +93,7 @@ forms.directive "agTab", [
 
       # handles mouse click on the tab
       scope.select = ->
-        return if scope.selected # TODO spec this case
+        return if scope.selected
         tabsetCtrl.selectTab(scope)
 
     template: """

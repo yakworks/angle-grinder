@@ -136,13 +136,25 @@ describe "module: angleGrinder.forms tabs", ->
             tab = findTabByTitle("Second")
             tab.find("a").click()
 
+          it "displays loading spinners", inject ($httpBackend) ->
+            # ...should show the spinner when the template loading is in progress
+            expect(tab.isolateScope().loading).to.be.true
+            expect(element.scope().contentLoading).to.be.true
+
+            # ...loading is finished
             $httpBackend.flush()
 
-          it "changes the active tab", ->
+            # ...should hide the spinners
+            expect(tab.isolateScope().loading).to.be.false
+            expect(element.scope().contentLoading).to.be.false
+
+          it "changes the active tab", inject ($httpBackend) ->
+            $httpBackend.flush()
             expect(tab.isolateScope().selected).to.be.true
             expect(tab.hasClass("active")).to.be.true
 
-          it "loads the content for the activated tab", ->
+          it "loads the content for the activated tab", inject ($httpBackend) ->
+            $httpBackend.flush()
             expect(element.find(".tab.container").text()).to.include "Second"
 
         context "when the tab is already selected", ->
