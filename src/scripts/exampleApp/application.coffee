@@ -25,27 +25,55 @@ app.config [
     pathWithContextProvider.setContextPath(contextPath) if contextPath?
 ]
 
-# Intercepts all HTTP errors and displays a flash message
 app.factory "httpErrorsInterceptor", [
-  "$injector", "$q", "alerts", ($injector, $q, alerts) ->
-    (promise) ->
-      $http = $injector.get("$http")
+  "$q", "$log", "alerts",
+  ($q, $log, alerts) ->
 
-      onError = (response) ->
-        errorMessage = response.data?.error || "Unexpected HTTP error"
+    responseError: (response) ->
+      errorMessage = response.data?.error || "Unexpected HTTP error"
+      $log.debug "intercepting", errorMessage, response
 
-        # skip validation errors
-        alerts.error(errorMessage) if response.status isnt 422
+      # skip validation errors
+      alerts.error(errorMessage) if response.status isnt 422
 
-        $q.reject(response)
+      $q.reject(response)
 
-      promise.then(null, onError)
 ]
 
-# Catch all jquery xhr errors
+app.config [
+  "$httpProvider", ($httpProvider) ->
+    # register http errors interceptor
+    $httpProvider.interceptors.push("httpErrorsInterceptor")
+]
+
+# emulate slow loading tab template for `templates/tabs/_slow.html`
+app.config [
+  "$httpProvider", ($httpProvider) ->
+
+    $httpProvider.interceptors.push [
+      "$q", "$timeout",
+      ($q, $timeout) ->
+
+        request: (request) ->
+          if request.url is "templates/tabs/_slow.html"
+            deferred = $q.defer()
+
+            $timeout ->
+              deferred.resolve(request)
+            , 1000
+
+            $q.when(deferred.promise)
+          else
+            $q.when(request)
+    ]
+]
+
 app.run [
   "$log", "alerts", ($log, alerts) ->
+
+    # Catch all jquery xhr errors
     $(document).ajaxError (event, jqxhr, settings, exception) ->
       $log.error("Network error:", event, jqxhr, settings, exception)
       alerts.error(exception)
+
 ]

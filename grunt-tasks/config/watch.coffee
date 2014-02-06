@@ -3,7 +3,7 @@ module.exports = (grunt) ->
 
   coffee:
     files: ["<%= appConfig.app %>/scripts/**/*.coffee"]
-    tasks: ["coffee:dist", "ngtemplates"]
+    tasks: ["coffee:dist", "ngtemplates:exampleApp"]
 
   html:
     files: [
@@ -13,7 +13,7 @@ module.exports = (grunt) ->
 
   templates:
     files: ["<%= appConfig.app %>/templates/**/*.html"]
-    tasks: ["ngtemplates:myApp"]
+    tasks: ["ngtemplates:exampleApp"]
 
   css:
     files: ["<%= appConfig.app %>/styles/**/*.less"]
