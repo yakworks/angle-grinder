@@ -1,5 +1,9 @@
 <h2 class="page-header">Users list</h2>
 
+<div collapse="!showSearchForm">
+  <div ng-include src="'templates/users/searchForm.html'"></div>
+</div>
+
 <div class="navbar navbar-grid">
   <div class="navbar-inner with-selected-pointer with-grid-options">
     <ul class="nav">
@@ -16,6 +20,13 @@
         <a href="#/examples/users/create" class="create-button">
           <i class="icon-edit"></i>Create user
         </a>
+      </li>
+    </ul>
+
+    <ul class="nav pull-right">
+      <li>
+        <a href="" title="search screen"
+           ng-click="showSearchForm = !showSearchForm"><i class="icon-search"></i></a>
       </li>
     </ul>
   </div>
