@@ -1,6 +1,6 @@
 describe "controller: gridExample.ListCtrl", ->
   beforeEach module "exampleApp"
-  beforeEach module "templates/gridExample/form.html"
+  beforeEach module "templates/examples/gridExample/form.html"
 
   $scope = null
   controller = null

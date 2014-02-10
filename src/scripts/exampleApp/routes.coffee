@@ -5,7 +5,6 @@ app = angular.module("exampleApp")
 app.config [
   "$stateProvider", "$urlRouterProvider", "$httpProvider",
   ($stateProvider, $urlRouterProvider, $httpProvider) ->
-    $httpProvider.responseInterceptors.push("httpErrorsInterceptor")
 
     # For any unmatched url, redirect to the root page
     $urlRouterProvider.otherwise "/"
@@ -87,4 +86,9 @@ app.config [
         url: "/panels"
         templateUrl: "templates/examples/panels/index.html"
         controller: "panels.IndexCtrl"
+
+      .state "examples.tabs",
+        url: "/tabs"
+        templateUrl: "templates/examples/tabs/index.html"
+        controller: "tabs.IndexCtrl"
 ]

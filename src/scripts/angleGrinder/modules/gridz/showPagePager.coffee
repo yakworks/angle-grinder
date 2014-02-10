@@ -46,7 +46,7 @@ gridz.directive "agShowPagePager", [
       row = $parse(attrs.agShowPagePager)(scope)
       $log.debug("current row:", row)
 
-      # assing raw ids array to the scope
+      # assign raw ids array to the scope
       # TODO make sure it works
       scope.ids = $stateParams.ids
       $log.debug("row ids:", scope.ids)

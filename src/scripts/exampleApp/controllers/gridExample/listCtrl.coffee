@@ -1,4 +1,4 @@
-class IndexCtrl
+class ListCtrl
 
   @$inject = ["$scope", "sampleData", "exampleGrid", "editDialog"]
   constructor: ($scope, sampleData, exampleGrid, editDialog) ->
@@ -47,4 +47,4 @@ class IndexCtrl
       return row
 
 angular.module("exampleApp")
-  .controller("gridExample.ListCtrl", IndexCtrl)
+  .controller("gridExample.ListCtrl", ListCtrl)
