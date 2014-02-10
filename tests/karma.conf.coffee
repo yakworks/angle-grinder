@@ -20,8 +20,9 @@ module.exports = (config) ->
       "components/bower/angular-sanitize/angular-sanitize.js"
 
       "components/bower/sinon/lib/sinon.js"
-      "components/bower/sinon/lib/sinon/spy.js"
+      "components/bower/sinon/lib/sinon/behavior.js"
       "components/bower/sinon/lib/sinon/call.js"
+      "components/bower/sinon/lib/sinon/spy.js"
       "components/bower/sinon/lib/sinon/stub.js"
       "components/bower/sinon/lib/sinon/mock.js"
       "components/bower/sinon/lib/sinon/assert.js"
@@ -36,18 +37,21 @@ module.exports = (config) ->
       "components/bower/bower-angular-placeholders/angular-placeholders.js"
       "components/bower/angular-bindonce/bindonce.js"
 
-      "src/scripts/jqgrid/gridz.coffee"
+      "src/scripts/angleGrinder/gridz.coffee"
 
       "src/templates/**/*.html"
 
-      "src/scripts/modules/*.coffee"
-      "src/scripts/modules/forms/**/*.coffee"
-      "src/scripts/modules/gridz/**/*.coffee"
-      "src/scripts/modules/examples.coffee"
+      "src/scripts/angleGrinder/modules/*.coffee"
+      "src/scripts/angleGrinder/modules/forms/**/*.coffee"
+      "src/scripts/angleGrinder/modules/gridz/**/*.coffee"
 
-      "src/scripts/application.coffee"
-      "src/scripts/routes.coffee"
-      "src/scripts/controllers/**/*.coffee"
+      "src/scripts/exampleApp/modules/**/*.coffee"
+      "src/scripts/exampleApp/application.coffee"
+      "src/scripts/exampleApp/routes.coffee"
+      "src/scripts/exampleApp/controllers/**/*.coffee"
+
+      "src/scripts/exampleApp/grids.coffee"
+      "src/scripts/exampleApp/grids/*.coffee"
 
       "tests/unit/helpers/**/*.coffee"
       "tests/unit/**/*Spec.coffee"

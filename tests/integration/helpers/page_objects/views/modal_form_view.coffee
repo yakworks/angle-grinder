@@ -50,7 +50,13 @@ class ModalFormView extends PageObject
     field = @findField(model)
     field.getValue()
 
+  # Submit the form
   submit: ->
     @submitButton.click()
+
+  # Fill in the form with given values and submit the form
+  fillInAndSubmit: (fields = {}) ->
+    @setFieldValue(name, value) for name, value of fields
+    @submit()
 
 module.exports = ModalFormView

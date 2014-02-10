@@ -1,0 +1,26 @@
+<div class="well">
+  <form name="searchForm" ag-search-form="usersGrid"
+        class="form-horizontal form-multi-column no-margin">
+
+    <div class="row-fluid">
+      <div class="control-group span6">
+        <label class="control-label">Name</label>
+        <div class="controls">
+          <input type="text" name="filterName" ng-model="filters.name" />
+        </div>
+      </div>
+
+      <div class="control-group span6">
+        <label class="control-label">Allowance</label>
+        <div class="controls">
+          <input type="text" ng-model="filters.allowance">
+        </div>
+      </div>
+    </div>
+
+    <div class="pull-right">
+      <ag-search-button></ag-search-button>
+      <ag-reset-search-button></ag-reset-search-button>
+    </div>
+  </form>
+</div>

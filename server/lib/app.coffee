@@ -24,7 +24,9 @@ upload.configure
       height: 80
 
 app.configure ->
-  app.use express.logger()
+  logFile = fs.createWriteStream(path.join(__dirname, "/../../tmp/express.log"), flags: "a")
+  app.use express.logger(stream: logFile)
+
   app.use "/api/upload", upload.fileHandler()
   app.use express.bodyParser()
   app.use express.static(path.join(__dirname, "dist"))
@@ -67,13 +69,17 @@ app.get "/api/users", (req, res) ->
 
   rows = data.all()
 
-  if req.query["_search"] isnt "false"
+  if req.query["_search"] and req.query["_search"] isnt "false"
     filters = JSON.parse(req.query["filters"])
     quickSearch = filters?.quickSearch
     if quickSearch? and quickSearch isnt ""
       rows = data.quickSearch(quickSearch)
     else
       rows = data.search(filters)
+
+  # perform search for select2 component
+  if req.query["q"] and req.query["q"] isnt ""
+    rows = data.quickSearch(req.query["q"])
 
   res.send rows.getPaged(page, pageSize, sort, order)
 

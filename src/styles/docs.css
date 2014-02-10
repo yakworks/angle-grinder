@@ -910,3 +910,7 @@ li.spinner {
 li.spinner i.spin:before {
   content: url("/img/ajax-loader.gif");
 }
+
+.nav-tabs li.loading a:after {
+  content: url("/img/ajax-loader.gif");
+}

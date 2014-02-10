@@ -3,9 +3,9 @@ module.exports = (grunt) ->
 
   options:
     base: "<%= appConfig.app %>"
-    module: "angleGrinder"
+    module: "exampleApp"
 
-  myApp:
+  exampleApp:
     cwd: "<%= appConfig.app %>"
     src: "templates/**/*.html"
-    dest: "<%= appConfig.dev %>/scripts/templates.js"
+    dest: "<%= appConfig.dev %>/scripts/exampleApp/templates.js"

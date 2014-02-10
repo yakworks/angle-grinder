@@ -89,45 +89,42 @@
     <script type="text/javascript" src="components/jqgrid/js/grid.grouping.js"></script>
     <script type="text/javascript" src="components/jqgrid/js/jquery.fmatter.js"></script>
 
-    <script type="text/javascript" src="scripts/jqgrid/gridz.js"></script>
+    <script type="text/javascript" src="scripts/angleGrinder/gridz.js"></script>
   <!-- endbuild -->
 
   <!-- build:js(build) scripts/angleGrinder.common.min.js -->
-    <script type="text/javascript" src="scripts/modules/common.js"></script>
-  <!-- endbuild -->
-
-  <!-- build:js(build) scripts/angleGrinder.dataGenerator.min.js -->
-    <script type="text/javascript" src="scripts/modules/dataGenerator.js"></script>
+    <script type="text/javascript" src="scripts/angleGrinder/modules/common.js"></script>
   <!-- endbuild -->
 
   <!-- build:js(build) scripts/angleGrinder.gridz.min.js -->
-    <script type="text/javascript" src="scripts/modules/gridz.js"></script>
-    <script type="text/javascript" src="scripts/modules/gridz/agGridCtrl.js"></script>
-    <script type="text/javascript" src="scripts/modules/gridz/search.js"></script>
-    <script type="text/javascript" src="scripts/modules/gridz/select2.js"></script>
-    <script type="text/javascript" src="scripts/modules/gridz/showPagePager.js"></script>
+    <script type="text/javascript" src="scripts/angleGrinder/modules/gridz.js"></script>
+    <script type="text/javascript" src="scripts/angleGrinder/modules/gridz/agGridCtrl.js"></script>
+    <script type="text/javascript" src="scripts/angleGrinder/modules/gridz/search.js"></script>
+    <script type="text/javascript" src="scripts/angleGrinder/modules/gridz/select2.js"></script>
+    <script type="text/javascript" src="scripts/angleGrinder/modules/gridz/showPagePager.js"></script>
   <!-- endbuild -->
 
   <!-- build:js(build) scripts/angleGrinder.forms.min.js -->
-    <script type="text/javascript" src="scripts/modules/forms.js"></script>
-    <script type="text/javascript" src="scripts/modules/forms/buttons.js"></script>
-    <script type="text/javascript" src="scripts/modules/forms/validations.js"></script>
-    <script type="text/javascript" src="scripts/modules/forms/focus.js"></script>
-    <script type="text/javascript" src="scripts/modules/forms/editDialog.js"></script>
-    <script type="text/javascript" src="scripts/modules/forms/confirmationDialog.js"></script>
-    <script type="text/javascript" src="scripts/modules/forms/panels.js"></script>
-    <script type="text/javascript" src="scripts/modules/forms/mixins/dialogCrudCtrlMixin.js"></script>
-    <script type="text/javascript" src="scripts/modules/forms/mixins/singlePageCrudMixin.js"></script>
-    <script type="text/javascript" src="scripts/modules/forms/mixins/massUpdateFormCtrlMixin.js"></script>
-    <script type="text/javascript" src="scripts/modules/forms/mixins/massUpdateMixin.js"></script>
+    <script type="text/javascript" src="scripts/angleGrinder/modules/forms.js"></script>
+    <script type="text/javascript" src="scripts/angleGrinder/modules/forms/buttons.js"></script>
+    <script type="text/javascript" src="scripts/angleGrinder/modules/forms/validations.js"></script>
+    <script type="text/javascript" src="scripts/angleGrinder/modules/forms/focus.js"></script>
+    <script type="text/javascript" src="scripts/angleGrinder/modules/forms/editDialog.js"></script>
+    <script type="text/javascript" src="scripts/angleGrinder/modules/forms/confirmationDialog.js"></script>
+    <script type="text/javascript" src="scripts/angleGrinder/modules/forms/tabs.js"></script>
+    <script type="text/javascript" src="scripts/angleGrinder/modules/forms/panels.js"></script>
+    <script type="text/javascript" src="scripts/angleGrinder/modules/forms/mixins/dialogCrudCtrlMixin.js"></script>
+    <script type="text/javascript" src="scripts/angleGrinder/modules/forms/mixins/singlePageCrudMixin.js"></script>
+    <script type="text/javascript" src="scripts/angleGrinder/modules/forms/mixins/massUpdateFormCtrlMixin.js"></script>
+    <script type="text/javascript" src="scripts/angleGrinder/modules/forms/mixins/massUpdateMixin.js"></script>
   <!-- endbuild -->
 
   <!-- build:js(build) scripts/angleGrinder.alerts.min.js -->
-    <script type="text/javascript" src="scripts/modules/alerts.js"></script>
+    <script type="text/javascript" src="scripts/angleGrinder/modules/alerts.js"></script>
   <!-- endbuild -->
 
   <!-- build:js(build) scripts/angleGrinder.spinner.min.js -->
-    <script type="text/javascript" src="scripts/modules/spinner.js"></script>
+    <script type="text/javascript" src="scripts/angleGrinder/modules/spinner.js"></script>
   <!-- endbuild -->
 
   <!-- build:css(build) styles/gridz.min.css -->
@@ -156,32 +153,39 @@
     <link rel="stylesheet" href="styles/prettify.css"/>
   <!-- endbuild -->
 
-  <!-- build:js(build) scripts/scripts.min.js -->
+  <!-- build:js(build) scripts/exampleApp.min.js -->
     <!-- AngularJS app -->
-    <script type="text/javascript" src="scripts/modules/resources.js"></script>
-    <script type="text/javascript" src="scripts/modules/docs.js"></script>
-    <script type="text/javascript" src="scripts/modules/examples.js"></script>
+    <script type="text/javascript" src="scripts/exampleApp/modules/resources.js"></script>
+    <script type="text/javascript" src="scripts/exampleApp/modules/docs.js"></script>
+    <script type="text/javascript" src="scripts/exampleApp/modules/dataGenerator.js"></script>
 
-    <script type="text/javascript" src="scripts/application.js"></script>
-    <script type="text/javascript" src="scripts/routes.js"></script>
-    <script type="text/javascript" src="scripts/templates.js"></script>
+    <script type="text/javascript" src="scripts/exampleApp/application.js"></script>
+    <script type="text/javascript" src="scripts/exampleApp/routes.js"></script>
+    <script type="text/javascript" src="scripts/exampleApp/templates.js"></script>
 
-    <script type="text/javascript" src="scripts/controllers/gridExample/listCtrl.js"></script>
+    <script type="text/javascript" src="scripts/exampleApp/grids.js"></script>
+    <script type="text/javascript" src="scripts/exampleApp/grids/exampleGrid.js"></script>
+    <script type="text/javascript" src="scripts/exampleApp/grids/usersGrid.js"></script>
+    <script type="text/javascript" src="scripts/exampleApp/grids/usersDialogGrid.js"></script>
 
-    <script type="text/javascript" src="scripts/controllers/usersDialog/listCtrl.js"></script>
-    <script type="text/javascript" src="scripts/controllers/usersDialog/searchFormCtrl.js"></script>
+    <script type="text/javascript" src="scripts/exampleApp/controllers/sidebarCtrl.js"></script>
+    <script type="text/javascript" src="scripts/exampleApp/controllers/gridExample/listCtrl.js"></script>
 
-    <script type="text/javascript" src="scripts/controllers/users/listCtrl.js"></script>
-    <script type="text/javascript" src="scripts/controllers/users/showCtrl.js"></script>
-    <script type="text/javascript" src="scripts/controllers/users/formCtrl.js"></script>
-    <script type="text/javascript" src="scripts/controllers/users/massUpdateFormCtrl.js"></script>
+    <script type="text/javascript" src="scripts/exampleApp/controllers/usersDialog/listCtrl.js"></script>
+    <script type="text/javascript" src="scripts/exampleApp/controllers/usersDialog/searchFormCtrl.js"></script>
 
-    <script type="text/javascript" src="scripts/controllers/fileUpload/indexCtrl.js"></script>
-    <script type="text/javascript" src="scripts/controllers/panels/indexCtrl.js"></script>
+    <script type="text/javascript" src="scripts/exampleApp/controllers/users/listCtrl.js"></script>
+    <script type="text/javascript" src="scripts/exampleApp/controllers/users/showCtrl.js"></script>
+    <script type="text/javascript" src="scripts/exampleApp/controllers/users/formCtrl.js"></script>
+    <script type="text/javascript" src="scripts/exampleApp/controllers/users/massUpdateFormCtrl.js"></script>
+
+    <script type="text/javascript" src="scripts/exampleApp/controllers/fileUpload/indexCtrl.js"></script>
+    <script type="text/javascript" src="scripts/exampleApp/controllers/tabs/indexCtrl.js"></script>
+    <script type="text/javascript" src="scripts/exampleApp/controllers/panels/indexCtrl.js"></script>
   <!-- endbuild -->
 </head>
 
-<body ng-app="angleGrinder.examples">
+<body ng-app="exampleApp">
 
 <div ng-include src="'templates/navbarTop.html'"></div>
 

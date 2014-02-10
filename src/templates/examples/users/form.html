@@ -12,7 +12,7 @@
 
   <form name="userForm" novalidate class="form-horizontal no-margin"
         ag-server-validation-errors
-        ng-submit="save(user)">
+        ng-submit="save(userForm, user)">
 
     <div ag-field-group for="name">
       <label class="control-label">Name</label>
@@ -36,6 +36,7 @@
     <ng-form name="info" ag-server-validation-errors>
       <div ag-field-group for="email">
         <label class="control-label">Email</label>
+
         <div class="controls">
           <input type="text" name="email" placeholder="Enter Email"
                  ng-model="user.info.email"
@@ -51,6 +52,19 @@
       <div class="controls">
         <input type="text" name="allowance" placeholder="Enter Allowance"
                ng-model="user.allowance" />
+      </div>
+    </div>
+
+    <div ag-field-group for="parent">
+      <label class="control-label" for="parent">Type</label>
+
+      <div class="controls">
+        <input type="text" ui-select2="userSelectOptions"
+               id="parent" name="parent"
+               ng-model="user.parent"
+               data-placeholder="Pick a parent" ng-required="true" />
+
+        <ag-validation-errors for="parent" required="This field is required" />
       </div>
     </div>
 

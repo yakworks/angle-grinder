@@ -9,12 +9,3 @@ module.exports = (grunt) ->
       dest: "<%= appConfig.dev %>/scripts"
       ext: ".js"
     ]
-
-  testIntegration:
-    files: [
-      expand: true
-      cwd: "<%= appConfig.test %>/integration"
-      src: "**/*.coffee"
-      dest: "<%= appConfig.dev %>/tests/integration"
-      ext: ".js"
-    ]
