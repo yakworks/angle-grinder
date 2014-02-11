@@ -23,8 +23,6 @@ module.exports = (grunt) ->
   options:
     browsers: parseBrowsers(default: "PhantomJS")
     colors: true
-    # If browser does not capture in given timeout [ms], kill it
-    captureTimeout: 5000
 
   unit:
     configFile: "<%= appConfig.test %>/karma.conf.coffee"
