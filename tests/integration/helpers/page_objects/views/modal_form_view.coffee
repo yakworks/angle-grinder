@@ -11,6 +11,9 @@ class FormFieldView extends PageObject
     @clear()
     @sendKeys(value)
 
+    # hide all unnecessary elements like popups, pickers, dropdowns etc.
+    @sendKeys(protractor.Key.ESCAPE)
+
   getValue: ->
     @getAttribute("value")
 
@@ -54,9 +57,13 @@ class ModalFormView extends PageObject
   submit: ->
     @submitButton.click()
 
+  # Fill in the form fields
+  fillIn: (fields = {}) ->
+    @setFieldValue(name, value) for name, value of fields
+
   # Fill in the form with given values and submit the form
   fillInAndSubmit: (fields = {}) ->
-    @setFieldValue(name, value) for name, value of fields
+    @fillIn(fields)
     @submit()
 
 module.exports = ModalFormView
