@@ -8,5 +8,16 @@ nvm use 0.10.25
 npm install
 bower install
 
-# ..and finally run the specs
-grunt test
+# start virtual frame buffer
+./bin/xvfb start
+
+# run the specs
+grunt test --browsers=PhantomJS,Chrome
+# capture the results
+RESULT=$?
+
+# stop virtual frame buffer
+./bin/xvfb stop
+
+# output the test results
+exit $RESULT
