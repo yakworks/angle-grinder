@@ -21,6 +21,7 @@ done
 echo -e "\nRunning integration specs."
 
 ./node_modules/protractor/bin/protractor ./tests/protractor-conf.coffee
+RESULT=$?
 
 stopServer
 
@@ -28,4 +29,4 @@ echo "Killing the frontend server PID=$PID"
 kill "$PID"
 
 echo "Done!"
-exit 0
+exit $RESULT
