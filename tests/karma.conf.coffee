@@ -76,6 +76,7 @@ module.exports = (config) ->
       reporters: [
         { type: "html", dir: "coverage" }
         { type: "text-summary" }
+        { type: "cobertura" }
       ]
 
     reporters: ["dots", "coverage"]
