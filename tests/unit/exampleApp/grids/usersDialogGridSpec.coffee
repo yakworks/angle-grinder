@@ -1,6 +1,9 @@
 describe "module: exampleApp.grids", ->
 
-  beforeEach module "exampleApp.grids"
+  beforeEach module "exampleApp.grids", ($provide) ->
+    # mock date filter
+    $provide.service "dateFilter", -> (val) -> "the date"
+    return
 
   describe "service: usersDialogGrid", ->
 
@@ -38,4 +41,4 @@ describe "module: exampleApp.grids", ->
         birthdayCol = _.findWhere(colModel, name: "birthday")
 
         expect(birthdayCol).to.not.be.undefined
-        expect(birthdayCol.formatter(1000000000000)).to.eq "Sep 9, 2001"
+        expect(birthdayCol.formatter(1392127095158)).to.eq "the date"
