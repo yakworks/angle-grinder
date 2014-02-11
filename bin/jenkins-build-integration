@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# enable nodejs and switch to the latest version
+source ~/.nvm/nvm.sh
+nvm use 0.10.25
+
+# install all required components
+npm install
+bower install
+
+# install selenium and its drivers
+node_modules/protractor/bin/webdriver-manager update
+
+# start virtual frame buffer
+./bin/xvfb start
+export DISPLAY=:99
+
+# run integration specs
+./bin/test-integration
+# capture the results
+RESULT=$?
+
+# stop virtual frame buffer
+./bin/xvfb stop
+
+# output the test results
+exit $RESULT
