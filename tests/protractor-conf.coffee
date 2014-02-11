@@ -3,12 +3,12 @@ exports.config =
   # seleniumServerJar: null # use default location
   # seleniumPort: 4444
 
-  # chromeDriver: "./selenium/chromedriver"
-  # chromeOnly: true
-
   # capabilities to be passed to the webdriver instance
-  capabilities:
-    browserName: "firefox"
+  # capabilities:
+  #  browserName: "firefox"
+
+  chromeDriver: "../node_modules/protractor/selenium/chromedriver"
+  chromeOnly: true
 
   specs: ["integration/*Scenario.coffee"]
 
