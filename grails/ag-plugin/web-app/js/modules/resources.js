@@ -1,6 +1,5 @@
 var resources = angular.module("angleGrinder.resources", [
-    "ngResource",
-    "ngRoute"
+    "ngResource"
 ]);
 
 // Build a resource for the given restful url
@@ -29,7 +28,7 @@ resources.factory("resourceBuilder", [
           return resourceName;
         },
 
-        // Retunrs true if the record is persisted (has an id)
+        // Returns true if the record is persisted (has an id)
         persisted: function() {
           return this.id != null;
         },
@@ -71,7 +70,7 @@ resources.factory("Resource", [
 
 // Tries to load an user record with the given id taken from route params
 resources.factory("resourceResolver", [
-  "$q", "$route", "Resource", function($q, $route, Resource) {
+  "$q", "Resource", function($q, Resource) {
     return function(id) {
       var deferred = $q.defer();
 

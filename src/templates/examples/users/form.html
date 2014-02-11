@@ -1,8 +1,8 @@
 <div class="subnav">
   <ul class="nav nav-pills">
-    <li><a class="list" href="#/examples/users"><i class="icon-list"></i> Users List</a></li>
-    <li><a ng-show="user.persisted()" class="list" href="#/examples/users/{{user.id}}"><i class="icon-th"></i> Show user</a></li>
-    <li><a class="create" href="#/examples/users/create"><i class="icon-plus"></i> New user</a></li>
+    <li><a class="list" ui-sref="examples.users.list"><i class="icon-list"></i> Users List</a></li>
+    <li><a ng-show="user.persisted()" class="list" ui-sref="examples.users.show({id: user.id})"><i class="icon-th"></i> Show user</a></li>
+    <li><a class="create" ui-sref="examples.users.create"><i class="icon-plus"></i> New user</a></li>
   </ul>
 </div>
 
@@ -105,7 +105,7 @@
       <span ng-show="user.persisted()">
         <ag-delete-button when-confirmed="delete(user)"></ag-delete-button>
       </span>
-      <a href="#/examples/users" class="btn">Cancel</a>
+      <a ui-sref="examples.users.list" class="btn">Cancel</a>
     </div>
   </form>
 </div>

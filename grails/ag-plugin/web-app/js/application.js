@@ -1,7 +1,7 @@
 // # The main scaffolding module
 var app = angular.module("angleGrinder", [
     "ngResource",
-    "ngRoute",
+    "ui.router",
     "ui.select2",
     "pasvaz.bindonce",
 

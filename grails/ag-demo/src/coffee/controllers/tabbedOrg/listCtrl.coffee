@@ -1,24 +1,19 @@
 class ListCtrl
 
-  @$inject = ["$scope", "Resource", "singlePageCrudCtrlMixin", "massUpdateMixin"]
-  constructor: ($scope, Resource, singlePageCrudCtrlMixin, massUpdateMixin) ->
+  @$inject = ["$scope", "Resource", "singlePageCrudCtrlMixin"]
+  constructor: ($scope, Resource, singlePageCrudCtrlMixin) ->
 
     $scope.gridOptions =
       path: "/org/list.json"
       colModel: @colModel()
-      multiselect: true
       shrinkToFit: true # makes columns fit to width
       sortname: "num"
       sortorder: "asc"
+      multiselect: false
 
     singlePageCrudCtrlMixin $scope,
       Resource: Resource
       resourcePath: "/org"
-      gridName: "orgGrid"
-
-    massUpdateMixin $scope,
-      templateUrl: "/templates/org/massUpdateForm.html"
-      controller: "org.MassUpdateFormCtrl"
       gridName: "orgGrid"
 
   colModel: ->
@@ -35,4 +30,4 @@ class ListCtrl
     ]
 
 angular.module("angleGrinder")
-  .controller("org.ListCtrl", ListCtrl)
+  .controller("tabbedOrg.ListCtrl", ListCtrl)

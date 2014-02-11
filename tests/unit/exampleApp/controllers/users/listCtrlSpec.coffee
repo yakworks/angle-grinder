@@ -46,6 +46,6 @@ describe "controller: users.ListCtrl", ->
       expect(massUpdateMixin.calledWith($scope)).to.be.true
 
       args = massUpdateMixin.getCall(0).args[1]
-      expect(args).to.have.property "templateUrl", "/templates/users/massUpdateForm.html"
+      expect(args).to.have.property "templateUrl", "/templates/examples/users/massUpdateForm.html"
       expect(args).to.have.property "controller", "users.MassUpdateFormCtrl"
       expect(args).to.have.property "gridName", "usersGrid"

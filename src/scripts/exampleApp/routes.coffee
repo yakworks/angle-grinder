@@ -3,64 +3,92 @@
 app = angular.module("exampleApp")
 
 app.config [
-  "$provide", "$routeProvider",
-  ($provide, $routeProvider) ->
+  "$stateProvider", "$urlRouterProvider", "$httpProvider",
+  ($stateProvider, $urlRouterProvider, $httpProvider) ->
 
+    # For any unmatched url, redirect to the root page
+    $urlRouterProvider.otherwise "/"
 
-    $routeProvider
-      .when "/",
-        templateUrl: "templates/angleGrinder.html"
+    $stateProvider
+      # Documentation section
+      .state "docs",
+        abstract: true
+        templateUrl: "templates/docs.html"
 
-      .when "/documentation",
-        templateUrl: "templates/documentation.html"
+      .state "docs.develop",
+        url: "/"
+        views:
+          "": templateUrl: "templates/docs/develop.html"
+          "sidebar": templateUrl: "templates/docs/sidebar/develop.html"
 
-      .when "/examples",
-        redirectTo: "/examples/gridExample"
+      .state "docs.api",
+        url: "/docs"
+        views:
+          "": templateUrl: "templates/docs/api.html"
+          "sidebar": { templateUrl: "templates/docs/sidebar/api.html" }
 
-      .when "/examples/gridExample",
-        templateUrl: "templates/gridExample/list.html"
+      # Examples section
+      .state "examples",
+        abstract: true
+        url: "/examples"
+        templateUrl: "templates/examples.html"
+
+      .state "examples.gridExample",
+        url: "/gridExample"
+        templateUrl: "templates/examples/gridExample/list.html"
         controller: "gridExample.ListCtrl"
 
-      .when "/examples/usersDialog",
-        templateUrl: "templates/usersDialog/list.html"
+      .state "examples.usersDialog",
+        url: "/usersDialog"
+        templateUrl: "templates/examples/usersDialog/list.html"
         controller: "usersDialog.ListCtrl"
 
-      .when "/examples/users",
-        templateUrl: "templates/users/list.html"
+      .state "examples.users",
+        url: "/users"
+        abstract: true
+        template: "<ui-view/>"
+
+      .state "examples.users.list",
+        url: ""
+        templateUrl: "templates/examples/users/list.html"
         controller: "users.ListCtrl"
 
-      .when "/examples/users/create",
-        templateUrl: "templates/users/form.html"
+      .state "examples.users.create",
+        url: "/create"
+        templateUrl: "templates/examples/users/form.html"
         controller: "users.FormCtrl"
         resolve: user: ["Users", (Users) -> new Users()]
 
-      .when "/examples/users/:id",
-        templateUrl: "templates/users/show.html"
-        controller: "users.ShowCtrl"
-        resolve: user: [
-          "$route", "userResolver", ($route, userResolver) ->
-            userResolver($route.current.params.id)
-        ]
-
-      .when "/examples/users/:id/edit",
-        templateUrl: "templates/users/form.html"
+      .state "examples.users.edit",
+        url: "/:id/edit",
+        templateUrl: "templates/examples/users/form.html"
         controller: "users.FormCtrl"
         resolve: user: [
-          "$route", "userResolver", ($route, userResolver) ->
-            userResolver($route.current.params.id)
+          "$stateParams", "userResolver", ($stateParams, userResolver) ->
+            userResolver($stateParams.id)
         ]
 
-      .when "/examples/fileUpload",
-        templateUrl: "templates/fileUpload/index.html"
+      .state "examples.users.show",
+        url: "/:id?ids",
+        templateUrl: "templates/examples/users/show.html"
+        controller: "users.ShowCtrl"
+        resolve: user: [
+          "$stateParams", "userResolver", ($stateParams, userResolver) ->
+            userResolver($stateParams.id)
+        ]
+
+      .state "examples.fileUpload",
+        url: "/fileUpload"
+        templateUrl: "templates/examples/fileUpload/index.html"
         controller: "fileUpload.IndexCtrl"
 
-      .when "/examples/tabs",
-        templateUrl: "templates/tabs/index.html"
-        controller: "tabs.IndexCtrl"
-
-      .when "/examples/panels",
-        templateUrl: "templates/panels/index.html"
+      .state "examples.panels",
+        url: "/panels"
+        templateUrl: "templates/examples/panels/index.html"
         controller: "panels.IndexCtrl"
 
-      .otherwise redirectTo: "/"
+      .state "examples.tabs",
+        url: "/tabs"
+        templateUrl: "templates/examples/tabs/index.html"
+        controller: "tabs.IndexCtrl"
 ]

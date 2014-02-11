@@ -41,7 +41,7 @@ describe "controller: usersDialog.ListCtrl", ->
       args = dialogCrudCtrlMixin.getCall(0).args[1]
       expect(args).to.have.property "Resource", "Users"
       expect(args).to.have.property "gridName", "usersGrid"
-      expect(args).to.have.property "templateUrl", "templates/usersDialog/form.html"
+      expect(args).to.have.property "templateUrl", "templates/examples/usersDialog/form.html"
 
   describe "mixin: `massUpdateMixin`", ->
 
@@ -52,6 +52,6 @@ describe "controller: usersDialog.ListCtrl", ->
       expect(massUpdateMixin.calledWith($scope)).to.be.true
 
       args = massUpdateMixin.getCall(0).args[1]
-      expect(args).to.have.property "templateUrl", "/templates/users/massUpdateForm.html"
+      expect(args).to.have.property "templateUrl", "/templates/examples/users/massUpdateForm.html"
       expect(args).to.have.property "controller", "users.MassUpdateFormCtrl"
       expect(args).to.have.property "gridName", "usersGrid"

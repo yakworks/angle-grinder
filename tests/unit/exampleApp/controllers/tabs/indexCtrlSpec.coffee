@@ -15,8 +15,8 @@ describe "controller: tabs.IndexCtrl", ->
   describe "#isTabActive", ->
 
     context "when the tab is active", ->
-      beforeEach inject ($routeParams) ->
-        $routeParams.tab = "foo"
+      beforeEach inject ($stateParams) ->
+        $stateParams.tab = "foo"
 
       it "returns true", ->
         expect($scope.isTabActive("foo")).to.be.true

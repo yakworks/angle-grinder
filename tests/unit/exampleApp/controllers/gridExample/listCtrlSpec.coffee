@@ -1,6 +1,6 @@
 describe "controller: gridExample.ListCtrl", ->
   beforeEach module "exampleApp"
-  beforeEach module "templates/gridExample/form.html"
+  beforeEach module "templates/examples/gridExample/form.html"
 
   $scope = null
   controller = null
@@ -40,7 +40,7 @@ describe "controller: gridExample.ListCtrl", ->
 
       it "opens opens a dialog for editing the the loaded resource", ->
         expect(dialogSpy.called).to.be.true
-        expect(dialogSpy.calledWith("templates/gridExample/form.html", resource)).to.be.true
+        expect(dialogSpy.calledWith("templates/examples/gridExample/form.html", resource)).to.be.true
 
     describe "#createItem", ->
       spy = null
@@ -54,7 +54,7 @@ describe "controller: gridExample.ListCtrl", ->
 
         # Then
         expect(spy.called).to.be.true
-        expect(spy.calledWith("templates/gridExample/form.html")).to.be.true
+        expect(spy.calledWith("templates/examples/gridExample/form.html")).to.be.true
 
   describe "controller", ->
 

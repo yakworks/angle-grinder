@@ -18,8 +18,10 @@ modules = {
 
         // tabbed org
         resource url: "/js/app/adminTabbedOrg.js"
+        resource url: "/js/app/controllers/tabbedOrg/listCtrl.js"
         resource url: "/js/app/controllers/tabbedOrg/showCtrl.js"
         resource url: "/js/app/controllers/tabbedOrg/contactListCtrl.js"
         resource url: "/js/app/controllers/tabbedOrg/noteListCtrl.js"
+        resource url: "/js/app/controllers/org/formCtrl.js"
     }
 }

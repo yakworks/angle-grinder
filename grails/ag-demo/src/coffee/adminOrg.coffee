@@ -1,33 +1,42 @@
-org = angular.module "admin.org", ["angleGrinder"]
+org = angular.module "admin.org", [
+  "angleGrinder"
+]
 
 org.config [
-  "$routeProvider", ($routeProvider) ->
+  "$stateProvider", "$urlRouterProvider",
+  ($stateProvider, $urlRouterProvider) ->
 
-    $routeProvider
-      .when "/",
+    # For any unmatched url, redirect to the root page
+    $urlRouterProvider.otherwise "/"
+
+    $stateProvider
+      .state "list",
+        url: "/"
         templateUrl: "../templates/org/list.html"
         controller: "org.ListCtrl"
 
-      .when "/create",
+      .state "create",
+        url: "/create"
         templateUrl: "../templates/org/form.html"
         controller: "org.FormCtrl"
         resolve: org: ["Resource", (Resource) -> new Resource()]
 
-      .when "/:id",
-        templateUrl: "../templates/org/show.html"
-        controller: "org.ShowCtrl"
-        resolve: org: [
-          "$route", "resourceResolver", ($route, resourceResolver) ->
-            resourceResolver($route.current.params.id)
-        ]
-
-      .when "/:id/edit",
+      .state "edit",
+        url: "/:id/edit"
         templateUrl: "../templates/org/form.html"
         controller: "org.FormCtrl"
         resolve: org: [
-          "$route", "resourceResolver", ($route, resourceResolver) ->
-            resourceResolver($route.current.params.id)
+          "$stateParams", "resourceResolver", ($stateParams, resourceResolver) ->
+            resourceResolver($stateParams.id)
         ]
 
-      .otherwise redirectTo: "/"
+      .state "show",
+        url: "/:id?ids",
+        templateUrl: "../templates/org/show.html"
+        controller: "org.ShowCtrl"
+        resolve: org: [
+          "$stateParams", "resourceResolver", ($stateParams, resourceResolver) ->
+            resourceResolver($stateParams.id)
+        ]
+
 ]

@@ -15,9 +15,9 @@
         "font-awesome": "~3.2.1",
 
         "angular": "1.2.2",
-        "angular-route": "1.2.2",
         "angular-resource": "1.2.2",
         "angular-sanitize": "1.2.2",
+        "angular-ui-router": "git@github.com:angular-ui/ui-router.git#cf3427162b5b4209a9feefb71ef4c54d2901514b",
 
         "angular-ui-select2": "~0.0.5",
         "angular-bootstrap": "0.5.0",

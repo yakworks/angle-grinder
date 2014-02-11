@@ -1,7 +1,7 @@
 # The entry point for the application
 
 app = angular.module "exampleApp", [
-  "ngRoute"
+  "ui.router"
   "ngSanitize"
   "pasvaz.bindonce"
   "blueimp.fileupload"
@@ -46,7 +46,7 @@ app.config [
     $httpProvider.interceptors.push("httpErrorsInterceptor")
 ]
 
-# emulate slow loading tab template for `templates/tabs/_slow.html`
+# emulate slow loading tab template for `templates/examples/tabs/_slow.html`
 app.config [
   "$httpProvider", ($httpProvider) ->
 
@@ -55,7 +55,7 @@ app.config [
       ($q, $timeout) ->
 
         request: (request) ->
-          if request.url is "templates/tabs/_slow.html"
+          if request.url is "templates/examples/tabs/_slow.html"
             deferred = $q.defer()
 
             $timeout ->

@@ -1,4 +1,5 @@
 gridz = angular.module("angleGrinder.gridz", [
+  "ui.router"
   "angleGrinder.common"
   "ui.select2"
 ])
