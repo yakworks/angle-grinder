@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# enable nodejs and switch to the latest version
+source ~/.nvm/nvm.sh
+nvm use 0.10.25
+
+# install all required components
+npm install
+bower install
+
+# ..and finally run the specs
+grunt test
