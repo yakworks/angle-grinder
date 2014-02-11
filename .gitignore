@@ -11,6 +11,7 @@ selenium
 
 # Ignore dist package
 coverage
+test-results.xml
 build
 dist
 .grunt

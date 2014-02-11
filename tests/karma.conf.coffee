@@ -66,6 +66,10 @@ module.exports = (config) ->
     ngHtml2JsPreprocessor:
       stripPrefix: "src/"
 
+    junitReporter:
+      outputFile: "test-results.xml"
+      suite: ""
+
     # html - produces a bunch of HTML files with annotated source code
     # lcovonly - produces an lcov.info file
     # lcov - produces html + lcov files. This is the default format
@@ -79,7 +83,7 @@ module.exports = (config) ->
         { type: "cobertura" }
       ]
 
-    reporters: ["dots", "coverage"]
+    reporters: ["dots", "junit", "coverage"]
 
     # web server port
     port: 8080
@@ -115,6 +119,7 @@ module.exports = (config) ->
       "karma-mocha"
       "karma-chai-plugins"
       "karma-spec-reporter"
+      "karma-junit-reporter"
       "karma-coverage"
 
       "karma-phantomjs-launcher"
