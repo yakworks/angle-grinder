@@ -29,7 +29,7 @@ resources.factory("resourceBuilder", [
           return resourceName;
         },
 
-        // Retunrs true if the record is persisted (has an id)
+        // Returns true if the record is persisted (has an id)
         persisted: function() {
           return this.id != null;
         },
