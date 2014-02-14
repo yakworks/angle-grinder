@@ -24,6 +24,7 @@ gridz.controller "AgGridCtrl", class
   reload: (callback = angular.noop) ->
     @$grid.trigger("reloadGrid")
     @$grid.one "jqGridAfterLoadComplete", callback
+    return
 
   # Gets a particular grid parameter
   getParam: (name) ->
@@ -59,6 +60,45 @@ gridz.controller "AgGridCtrl", class
   getIds: ->
     @$grid.getDataIDs()
 
+  # Returns the current page
+  getCurrentPage: ->
+    @getParam "page"
+
+  # Returns the total number of records
+  getTotalRecords: ->
+    @getParam "records"
+
+  # Returns the number of rows per page
+  getPageSize: ->
+    @getParam "rowNum"
+
+  # Returns the total number of pages
+  getTotalPages: ->
+    Math.ceil @getTotalRecords() / @getPageSize()
+
+  # Loads the previous page
+  prevPage: ->
+    page = @getCurrentPage()
+    return @lastPage() if page is 1
+    @loadPage(page - 1)
+
+  # Loads the next page
+  nextPage: ->
+    page = @getCurrentPage()
+    return @firstPage() if page is @getTotalPages()
+    @loadPage(page + 1)
+
+  # Loads the first page
+  firstPage: -> @loadPage(1)
+
+  # Loads the last page
+  lastPage: -> @loadPage(@getTotalPages())
+
+  # Load the specific page
+  loadPage: (page) ->
+    @setParam page: page
+    @reload()
+
   saveRow: (id, data) ->
     if @hasRow(id)
       @updateRow(id, data)
@@ -85,7 +125,7 @@ gridz.controller "AgGridCtrl", class
 
   # Returns `true` if a columnt with the given id is hidden
   isColumnHidden: (columnId) ->
-    column = _.findWhere(@_getColModel(), name: columnId)
+    column = _.findWhere(@getParam("colModel"), name: columnId)
     column?.hidden
 
   # Toggle visibility of a column with the given id
@@ -111,11 +151,6 @@ gridz.controller "AgGridCtrl", class
       window.localStorage.setItem("gridz.#{@getGridId()}.choosedColumns", angular.toJson(choosedColumns))
 
     @$grid.jqGrid("columnChooser", options)
-
-  # Returns column model for the jqGrid
-  # @private
-  _getColModel: ->
-    @$grid.jqGrid("getGridParam", "colModel")
 
   # Triggers grid's resize event
   # @private

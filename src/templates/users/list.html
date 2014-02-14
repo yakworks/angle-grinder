@@ -1,37 +1,60 @@
 <h2 class="page-header">Users list</h2>
 
-<div collapse="!showSearchForm">
-  <div ng-include src="'templates/users/searchForm.html'"></div>
-</div>
-
-<div class="navbar navbar-grid">
-  <div class="navbar-inner with-selected-pointer with-grid-options">
-    <ul class="nav">
-      <li class="dropdown selected-actions">
-        <a data-toggle="dropdown" class="dropdown-toggle" href="#" style="padding-left: 2px">
-          <i class="icon-selected-pointer"></i> Actions<b class="caret"></b>
-        </a>
-        <ul class="dropdown-menu">
-          <li><a href="" ng-click="massUpdate()"><i class="icon-edit"></i> Mass update</a></li>
-        </ul>
-      </li>
-      <li class="divider-vertical"></li>
-      <li>
-        <a href="#/examples/users/create" class="create-button">
-          <i class="icon-edit"></i>Create user
-        </a>
-      </li>
-    </ul>
-
-    <ul class="nav pull-right">
-      <li>
-        <a href="" title="search screen"
-           ng-click="showSearchForm = !showSearchForm"><i class="icon-search"></i></a>
-      </li>
-    </ul>
+<div ng-show="showGrid">
+  <div collapse="!showSearchForm">
+    <div ng-include src="'templates/users/searchForm.html'"></div>
   </div>
+
+  <div class="navbar navbar-grid">
+    <div class="navbar-inner with-selected-pointer with-grid-options">
+      <ul class="nav">
+        <li class="dropdown selected-actions">
+          <a data-toggle="dropdown" class="dropdown-toggle" href="#" style="padding-left: 2px">
+            <i class="icon-selected-pointer"></i> Actions<b class="caret"></b>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a href="" ng-click="massUpdate()"><i class="icon-edit"></i> Mass update</a></li>
+          </ul>
+        </li>
+        <li class="divider-vertical"></li>
+        <li>
+          <a href="#/examples/users/create" class="create-button">
+            <i class="icon-edit"></i>Create user
+          </a>
+        </li>
+      </ul>
+
+      <ul class="nav pull-right">
+        <li>
+          <a href="" title="search screen"
+             ng-click="showSearchForm = !showSearchForm"><i class="icon-search"></i></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div ag-grid="gridOptions"
+       ag-grid-with-pager="true"
+       ag-grid-name="usersGrid"></div>
 </div>
 
-<div ag-grid="gridOptions"
-     ag-grid-with-pager="true"
-     ag-grid-name="usersGrid"></div>
+<h3>External pagination</h3>
+
+<div>
+  <button class="btn" ng-click="showGrid = !showGrid">show / hide grid</button> |
+
+  <button class="btn"
+          ng-click="usersGrid.firstPage()"
+          ng-disabled="usersGrid.getCurrentPage() === 1">fist</button> |
+  <button class="btn"
+          ng-click="usersGrid.prevPage()">prev</button> |
+  <button class="btn"
+          ng-click="usersGrid.nextPage()">next</button> |
+  <button class="btn"
+          ng-click="usersGrid.lastPage()"
+          ng-disabled="usersGrid.getCurrentPage() === usersGrid.getTotalPages()">last</button>
+</div>
+
+<pre>
+  ids: {{usersGrid.getIds()}}
+</pre>
