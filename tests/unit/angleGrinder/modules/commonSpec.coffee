@@ -100,3 +100,17 @@ describe "module: angleGrinder.common", ->
       for str in [" ", "    ", "test", " foo bar "]
         it "returns false for `#{str}`", inject (isEmpty) ->
           expect(isEmpty(str)).to.be.false
+
+  describe "service: camelize", ->
+
+    context "when the input is dasherized", ->
+
+      it "camalizes the input", inject (camelize) ->
+        expect(camelize("foo_bar")).to.eq "fooBar"
+        expect(camelize("foo.bar.baz")).to.eq "fooBarBaz"
+        expect(camelize("-foo-bar")).to.eq "FooBar"
+
+    context "when the input is not dasherized", ->
+
+      it "does nothing", inject (camelize) ->
+        expect(camelize("foobar")).to.eq "foobar"

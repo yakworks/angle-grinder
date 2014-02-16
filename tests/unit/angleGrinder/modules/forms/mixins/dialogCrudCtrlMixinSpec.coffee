@@ -22,14 +22,13 @@ describe "module: angleGrinder.forms mixin: dialogCrudCtrlMixin", ->
   beforeEach inject ($rootScope, Users, dialogCrudCtrlMixin) ->
     $scope = $rootScope.$new()
 
-    grid = removeRow: ->
-    sinon.stub(grid, "removeRow")
-    $scope.theGrid = grid
+    grid = removeRow: sinon.stub()
+    $scope.grid = transactions: grid
 
     # initialize the mixin
     dialogCrudCtrlMixin $scope,
       Resource: Users
-      gridName: "theGrid"
+      gridName: "grid.transactions"
       templateUrl: "/foo/bar/form.html"
       beforeEdit: @beforeEdit
       beforeCreate: @beforeCreate
@@ -107,8 +106,8 @@ describe "module: angleGrinder.forms mixin: dialogCrudCtrlMixin", ->
         $httpBackend.verifyNoOutstandingRequest()
 
       it "removes a row from the grid", ->
-        expect(grid.removeRow.called).to.be.true
-        expect(grid.removeRow.calledWith(456)).to.be.true
+        expect($scope.grid.transactions.removeRow.called).to.be.true
+        expect($scope.grid.transactions.removeRow.calledWith(456)).to.be.true
 
     context "when the dialog wasn't confirmed", ->
       beforeEach inject (confirmationDialog) ->
@@ -116,4 +115,4 @@ describe "module: angleGrinder.forms mixin: dialogCrudCtrlMixin", ->
         $scope.deleteItem(456)
 
       it "does not remove a row from the grid", ->
-        expect(grid.removeRow.called).to.be.false
+        expect($scope.grid.transactions.removeRow.called).to.be.false

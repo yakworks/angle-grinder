@@ -14,7 +14,7 @@ describe "module: angleGrinder.forms mixin: massUpdateMixin", ->
   beforeEach inject ($rootScope, massUpdateMixin) ->
     $scope = $rootScope.$new()
 
-    grid = getSelectedRowIds: ->
+    grid = getSelectedRowIds: sinon.stub()
     $scope.theGrid = grid
 
     massUpdateMixin $scope,
@@ -34,11 +34,11 @@ describe "module: angleGrinder.forms mixin: massUpdateMixin", ->
 
     context "when some rows are selected", ->
       beforeEach ->
-        sinon.stub(grid, "getSelectedRowIds").returns [1, 2, 3]
+        grid.getSelectedRowIds.returns [1, 2, 3]
         $scope.massUpdate()
 
       it "gets selected rows", ->
-        expect(grid.getSelectedRowIds.called).to.be.true
+        expect($scope.theGrid.getSelectedRowIds.called).to.be.true
 
       it "opens the dialog", inject ($dialog) ->
         expect($dialog.dialog.called).to.be.true
@@ -65,11 +65,30 @@ describe "module: angleGrinder.forms mixin: massUpdateMixin", ->
 
     context "when nothing is selected", ->
       beforeEach ->
-        sinon.stub(grid, "getSelectedRowIds").returns []
+        grid.getSelectedRowIds.returns []
         $scope.massUpdate()
 
       it "gets selected rows", ->
-        expect(grid.getSelectedRowIds.called).to.be.true
+        expect($scope.theGrid.getSelectedRowIds.called).to.be.true
 
       it "does not open the dialog", inject ($dialog) ->
         expect($dialog.dialog.called).to.be.false
+
+    context "when the grid name is an expression", ->
+
+      $scope = null
+      grid = null
+
+      beforeEach inject ($rootScope, massUpdateMixin) ->
+        $scope = $rootScope.$new()
+
+        grid = getSelectedRowIds: sinon.stub()
+        $scope.grid = customers: grid
+
+        massUpdateMixin $scope,
+          gridName: "grid.customers"
+
+      it "does the same trick", ->
+        grid.getSelectedRowIds.returns []
+        $scope.massUpdate()
+        expect(grid.getSelectedRowIds.called).to.be.true

@@ -90,3 +90,21 @@ describe "module: angleGrinder.gridz", ->
 
         it "is initialized with the grid element", ->
           expect($scope.projectsGrid.$grid).to.not.be.undefined
+
+      context "when the name is an expression", ->
+        beforeEach inject ($injector) ->
+          {element} = compileTemplate """
+            <div ag-grid="gridOptions"
+                 ag-grid-name="grid.projects"></div>
+          """, $injector, $scope
+
+        it "generates `id` for the grid element", ->
+          expect(element.find("table.gridz").attr("id")).to.equal "gridProjects"
+
+        it "generates `id` for the pager", ->
+          expect(element.find("div.gridz-pager").attr("id")).to.equal "gridProjects-pager"
+
+        describe "the grid controller", ->
+
+          it "is assigned to the scope", ->
+            expect($scope.grid.projects).to.not.be.undefined
