@@ -58,3 +58,8 @@ common.factory "pendingRequests", [
 # Returns true is the given string is null, undefined or empty ("")
 common.value "isEmpty", (str) ->
   not str or str.length is 0
+
+# Camelizes the given string
+common.value "camelize", (str) ->
+  str.replace /(\-|\.|_|\s)+(.)?/g, (match, p1, p2) ->
+    if p2 then p2.toUpperCase() else ""

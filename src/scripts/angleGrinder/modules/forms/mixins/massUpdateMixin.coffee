@@ -1,14 +1,14 @@
 mixin = angular.module("angleGrinder.forms")
 
 mixin.factory "massUpdateMixin", [
-  "$log", "$dialog", "pathWithContext",
-  ($log, $dialog, pathWithContext) ->
+  "$log", "$parse", "$dialog", "pathWithContext",
+  ($log, $parse, $dialog, pathWithContext) ->
     ($scope, args = {}) ->
       {gridName, templateUrl, controller} = args
       controller ?= "MassUpdateFormCtrl"
 
       $scope.massUpdate = ->
-        grid = $scope[gridName]
+        grid = $parse(gridName)($scope)
         throw new Error("the grid is not defined") unless grid?
 
         # ..grab selected row ids

@@ -1,14 +1,16 @@
 mixin = angular.module("angleGrinder.forms")
 
 mixin.factory "dialogCrudCtrlMixin", [
-  "$log", "editDialog", "confirmationDialog", "pathWithContext"
-  ($log, editDialog, confirmationDialog, pathWithContext) ->
+  "$log", "$parse", "editDialog", "confirmationDialog", "pathWithContext"
+  ($log, $parse, editDialog, confirmationDialog, pathWithContext) ->
     ($scope, args = {}) ->
       {Resource, gridName, templateUrl} = args
 
+      # Retrieve a grid controller from the scope
+      getGrid = -> $parse(gridName)($scope)
+
       openEditDialogFor = (resource) ->
-        grid = $scope[gridName]
-        editDialog.open(pathWithContext(templateUrl), resource, grid)
+        editDialog.open(pathWithContext(templateUrl), resource, getGrid())
 
       # Generic method for invoking an edit dialog for a resource
       # with the given id
@@ -30,8 +32,7 @@ mixin.factory "dialogCrudCtrlMixin", [
           return unless confirmed
 
           onSuccess = (response) ->
-            grid = $scope[gridName]
-            grid.removeRow(response.id)
+            getGrid().removeRow(response.id)
 
           onError = (response) ->
             $log.error "Cannot delete a resource", response

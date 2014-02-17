@@ -11,6 +11,9 @@ gridz.controller "AgGridCtrl", class
   registerGridElement: ($grid) ->
     @$grid = $grid
 
+    @$grid.on "jqGridAfterLoadComplete", (event, data) =>
+      @$rootScope.$broadcast "gridz:loadComplete", event, data
+
   getGridId: ->
     @$grid.attr("id")
 
@@ -22,14 +25,19 @@ gridz.controller "AgGridCtrl", class
 
   # Reloads the grid with the current settings
   reload: (callback = angular.noop) ->
+    unregister = @$rootScope.$on "gridz:loadComplete", (_, event, data) ->
+      callback(event, data)
+      unregister()
+
     @$grid.trigger("reloadGrid")
-    @$grid.one "jqGridAfterLoadComplete", callback
+
+    return
 
   # Gets a particular grid parameter
   getParam: (name) ->
     @$grid.getGridParam(name)
 
-  # Sets a particular grid parameter
+  # Sets the given grid parameter
   setParam: (params) ->
     @$grid.setGridParam(params)
 
@@ -59,6 +67,45 @@ gridz.controller "AgGridCtrl", class
   getIds: ->
     @$grid.getDataIDs()
 
+  # Returns the current page
+  getCurrentPage: ->
+    @getParam "page"
+
+  # Returns the total number of records
+  getTotalRecords: ->
+    @getParam "records"
+
+  # Returns the number of rows per page
+  getPageSize: ->
+    @getParam "rowNum"
+
+  # Returns the total number of pages
+  getTotalPages: ->
+    Math.ceil @getTotalRecords() / @getPageSize()
+
+  # Loads the previous page
+  prevPage: (callback = ->) ->
+    page = @getCurrentPage()
+    return @lastPage(callback) if page is 1
+    @loadPage(page - 1, callback)
+
+  # Loads the next page
+  nextPage: (callback = ->) ->
+    page = @getCurrentPage()
+    return @firstPage(callback) if page is @getTotalPages()
+    @loadPage(page + 1, callback)
+
+  # Loads the first page
+  firstPage: (callback = angular.noop) -> @loadPage(1, callback)
+
+  # Loads the last page
+  lastPage: (callback = angular.noop) -> @loadPage(@getTotalPages(), callback)
+
+  # Load the specific page
+  loadPage: (page, callback = ->) ->
+    @setParam page: page
+    @reload(callback)
+
   saveRow: (id, data) ->
     if @hasRow(id)
       @updateRow(id, data)
@@ -85,7 +132,7 @@ gridz.controller "AgGridCtrl", class
 
   # Returns `true` if a columnt with the given id is hidden
   isColumnHidden: (columnId) ->
-    column = _.findWhere(@_getColModel(), name: columnId)
+    column = _.findWhere(@getParam("colModel"), name: columnId)
     column?.hidden
 
   # Toggle visibility of a column with the given id
@@ -111,11 +158,6 @@ gridz.controller "AgGridCtrl", class
       window.localStorage.setItem("gridz.#{@getGridId()}.choosedColumns", angular.toJson(choosedColumns))
 
     @$grid.jqGrid("columnChooser", options)
-
-  # Returns column model for the jqGrid
-  # @private
-  _getColModel: ->
-    @$grid.jqGrid("getGridParam", "colModel")
 
   # Triggers grid's resize event
   # @private

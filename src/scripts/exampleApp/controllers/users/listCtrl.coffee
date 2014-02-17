@@ -2,6 +2,8 @@ class ListCtrl
 
   @$inject = ["$scope", "usersGrid", "Users", "massUpdateMixin", "singlePageCrudCtrlMixin"]
   constructor: ($scope, usersGrid, Users, massUpdateMixin, singlePageCrudCtrlMixin) ->
+    $scope.showGrid = true
+
     # initialize the grid
     $scope.gridOptions = usersGrid()
 

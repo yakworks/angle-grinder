@@ -4,6 +4,9 @@ org.config [
   "$routeProvider", ($routeProvider) ->
 
     $routeProvider
+      .when "/",
+        template: ""
+
       .when "/:id",
         templateUrl: "../templates/tabbedOrg/show.html"
         controller: "tabbedOrg.ShowCtrl"

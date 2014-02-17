@@ -1,8 +1,16 @@
 class ShowCtrl
 
-  @$inject = ["$scope", "alerts", "org"]
-  constructor: ($scope, alerts, org) ->
+  @$inject = ["$scope", "$controller", "$location", "alerts", "org"]
+  constructor: ($scope, $controller, $location, alerts, org) ->
     $scope.org = org
+
+    # setup the grid pager
+    $scope.currentId = org.id
+    $scope.gridPager = $controller "gridPagerCtrlMixin",
+      $scope: $scope
+      gridName: "grid.org"
+      currentId: "currentId"
+      path: "/:id"
 
     $scope.save = (form, org) ->
       return if form.$invalid

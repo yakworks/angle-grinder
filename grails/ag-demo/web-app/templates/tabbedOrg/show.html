@@ -8,9 +8,9 @@
 <div class="content">
   <h3 class="page-header">Org show</h3>
 
-  <div class="pager" ag-show-page-pager="org" ng-show="showPager()">
-    <a href="#/{{prevId()}}?ids={{ids}}">&#8592; prev</a> |
-    <a href="#/{{nextId()}}?ids={{ids}}">next &#8594;</a>
+  <div class="pager">
+    <a href="" ng-click="gridPager.prevRow()">&#8592; prev</a> |
+    <a href="" ng-click="gridPager.nextRow()">next &#8594;</a>
   </div>
 
   <dl class="dl-horizontal">

@@ -39,38 +39,39 @@ gridz.directive "agSearchForm", ["$log", ($log) ->
     # assign form instance to the scope
     scope.searchForm = form
 
-  controller: ["$scope", "$attrs", "$document", ($scope, $attrs, $document) ->
-    $scope.filters = {}
-    $scope.searching = false
+  controller: [
+    "$scope", "$parse", "$attrs", "$document",
+    ($scope, $parse, $attrs, $document) ->
+      $scope.filters = {}
+      $scope.searching = false
 
-    # enable buttons back when something wrong happened
-    $document.ajaxError (event, jqxhr, settings, exception) ->
-      if settings.type is "GET"
-        $scope.$apply -> $scope.searching = false
+      # enable buttons back when something wrong happened
+      $document.ajaxError (event, jqxhr, settings, exception) ->
+        if settings.type is "GET"
+          $scope.$apply -> $scope.searching = false
 
-    # Perform server side grid filtering
-    gridSearch = (filters = {}) ->
-      $scope.searching = true
-      gridCtrl = $scope.$parent[$attrs.agSearchForm]
+      # Perform server side grid filtering
+      gridSearch = (filters = {}) ->
+        $scope.searching = true
+        grid = $parse($attrs.agSearchForm)($scope)
 
-      unless gridCtrl
-        $log.warn "grid is not defined"
-        return
+        unless grid?
+          $log.warn "grid is not defined"
+          return
 
-      # enable buttons when the search is complete
-      gridCtrl.search(filters).then ->
-         $scope.searching = false
+        # enable buttons when the search is complete
+        grid.search(filters).then -> $scope.searching = false
 
-    # Trigger search action for the grid
-    $scope.advancedSearch = (filters) ->
-      formCtrl = $scope.searchForm
-      return $log.info "advanced search form is invalid", formCtrl  if formCtrl?.$invalid
+      # Trigger search action for the grid
+      $scope.advancedSearch = (filters) ->
+        formCtrl = $scope.searchForm
+        return $log.info "advanced search form is invalid", formCtrl  if formCtrl?.$invalid
 
-      gridSearch(filters)
+        gridSearch(filters)
 
-    # Reset the search form and trigger grid reload
-    $scope.resetSearch = (filters = {}) ->
-      $scope.filters = filters
-      gridSearch(filters)
+      # Reset the search form and trigger grid reload
+      $scope.resetSearch = (filters = {}) ->
+        $scope.filters = filters
+        gridSearch(filters)
   ]
 ]

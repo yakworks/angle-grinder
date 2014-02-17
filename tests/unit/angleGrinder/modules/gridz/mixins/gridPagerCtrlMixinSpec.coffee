@@ -1,0 +1,131 @@
+describe "module: angleGrinder.gridz", ->
+
+  beforeEach module "angleGrinder.gridz", ($provide) ->
+    $provide.value "$location", path: sinon.stub()
+    return
+
+  describe "controller: gridPagerCtrlMixin", ->
+
+    $scope = null
+    gridCtrl = null
+
+    beforeEach inject ($rootScope, $controller) ->
+      $scope = $rootScope.$new()
+
+      $scope.current = id: 123
+
+      # stub the grid ctrl
+      gridCtrl =
+        getIds: sinon.stub()
+        prevPage: (callback) -> callback()
+        nextPage: (callback) -> callback()
+
+      $scope.grid = products: gridCtrl
+
+      $scope.pager = $controller "gridPagerCtrlMixin",
+        $scope: $scope
+        gridName: "grid.products"
+        currentId: "current.id"
+        path: "/products/:id"
+
+      $scope.$digest()
+
+    it "has `prevRow` method", ->
+      expect($scope.pager.prevRow).to.be.a "function"
+
+    it "has `nextRow` method", ->
+      expect($scope.pager.nextRow).to.be.a "function"
+
+    describe "#prevRow()", ->
+
+      beforeEach ->
+        gridCtrl.getIds.onCall(0).returns ["1", "3", "2"]
+        sinon.spy(gridCtrl, "prevPage")
+
+      context "when the current row is in the middle", ->
+
+        beforeEach ->
+          $scope.current.id = 3
+
+          $scope.pager.prevRow()
+          $scope.$digest()
+
+        it "does not load the previous page", ->
+          expect(gridCtrl.prevPage.called).to.be.false
+
+        it "sets the current row id", ->
+          expect($scope.current.id).to.eq "1"
+
+        it "navigates to the previous row", inject ($location) ->
+          expect($location.path.called).to.be.true
+
+          newPath = $location.path.firstCall.args[0]
+          expect(newPath).to.eq "/products/1"
+
+      context "when the current row is on the beginning", ->
+
+        beforeEach ->
+          $scope.current.id = 1
+          gridCtrl.getIds.onCall(1).returns ["123", "456", "789"]
+
+          $scope.pager.prevRow()
+          $scope.$digest()
+
+        it "loads the previous page", ->
+          expect(gridCtrl.prevPage.called).to.be.true
+
+        it "sets the current row id", ->
+          expect($scope.current.id).to.eq "789"
+
+        it "navigates to the previous row", inject ($location) ->
+          expect($location.path.called).to.be.true
+
+          newPath = $location.path.firstCall.args[0]
+          expect(newPath).to.eq "/products/789"
+
+    describe "#nextRow()" ,->
+
+      beforeEach ->
+        gridCtrl.getIds.onCall(0).returns ["1", "3", "22", "4"]
+        sinon.spy(gridCtrl, "nextPage")
+
+      context "when the current row is in the middle", ->
+
+        beforeEach ->
+          $scope.current.id = 22
+
+          $scope.pager.nextRow()
+          $scope.$digest()
+
+        it "does not load the next page", ->
+          expect(gridCtrl.nextPage.called).to.be.false
+
+        it "sets the current row id", ->
+          expect($scope.current.id).to.eq "4"
+
+        it "navigates to the next row", inject ($location) ->
+          expect($location.path.called).to.be.true
+
+          newPath = $location.path.firstCall.args[0]
+          expect(newPath).to.eq "/products/4"
+
+      context "when the current row is at the end", ->
+
+        beforeEach ->
+          $scope.current.id = 4
+          gridCtrl.getIds.onCall(1).returns ["123", "456", "789"]
+
+          $scope.pager.nextRow()
+          $scope.$digest()
+
+        it "loads the next page", ->
+          expect(gridCtrl.nextPage.called).to.be.true
+
+        it "sets the current row id", ->
+          expect($scope.current.id).to.eq "123"
+
+        it "navigates to the next row", inject ($location) ->
+          expect($location.path.called).to.be.true
+
+          newPath = $location.path.firstCall.args[0]
+          expect(newPath).to.eq "/products/123"
