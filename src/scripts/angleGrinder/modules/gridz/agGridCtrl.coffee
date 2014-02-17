@@ -11,6 +11,9 @@ gridz.controller "AgGridCtrl", class
   registerGridElement: ($grid) ->
     @$grid = $grid
 
+    @$grid.on "jqGridAfterLoadComplete", (event, data) =>
+      @$rootScope.$broadcast "gridz:loadComplete", event, data
+
   getGridId: ->
     @$grid.attr("id")
 
@@ -22,15 +25,19 @@ gridz.controller "AgGridCtrl", class
 
   # Reloads the grid with the current settings
   reload: (callback = angular.noop) ->
+    unregister = @$rootScope.$on "gridz:loadComplete", (_, event, data) ->
+      callback(event, data)
+      unregister()
+
     @$grid.trigger("reloadGrid")
-    @$grid.one "jqGridAfterLoadComplete", callback
+
     return
 
   # Gets a particular grid parameter
   getParam: (name) ->
     @$grid.getGridParam(name)
 
-  # Sets a particular grid parameter
+  # Sets the given grid parameter
   setParam: (params) ->
     @$grid.setGridParam(params)
 
@@ -77,27 +84,27 @@ gridz.controller "AgGridCtrl", class
     Math.ceil @getTotalRecords() / @getPageSize()
 
   # Loads the previous page
-  prevPage: ->
+  prevPage: (callback = ->) ->
     page = @getCurrentPage()
-    return @lastPage() if page is 1
-    @loadPage(page - 1)
+    return @lastPage(callback) if page is 1
+    @loadPage(page - 1, callback)
 
   # Loads the next page
-  nextPage: ->
+  nextPage: (callback = ->) ->
     page = @getCurrentPage()
-    return @firstPage() if page is @getTotalPages()
-    @loadPage(page + 1)
+    return @firstPage(callback) if page is @getTotalPages()
+    @loadPage(page + 1, callback)
 
   # Loads the first page
-  firstPage: -> @loadPage(1)
+  firstPage: (callback = angular.noop) -> @loadPage(1, callback)
 
   # Loads the last page
-  lastPage: -> @loadPage(@getTotalPages())
+  lastPage: (callback = angular.noop) -> @loadPage(@getTotalPages(), callback)
 
   # Load the specific page
-  loadPage: (page) ->
+  loadPage: (page, callback = ->) ->
     @setParam page: page
-    @reload()
+    @reload(callback)
 
   saveRow: (id, data) ->
     if @hasRow(id)
