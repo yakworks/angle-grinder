@@ -10,8 +10,10 @@
 <body data-resource-name="org"
       data-resource-path="/org">
 
-<div ng-app="admin.orgTabs">
+<div ng-app="admin.orgTabs" ng-init="grid = {}">
     <ag-alerts></ag-alerts>
+
+    <ag-grid-placeholder src="/templates/tabbedOrg/list.html"></ag-grid-placeholder>
     <ng-view></ng-view>
 </div>
 

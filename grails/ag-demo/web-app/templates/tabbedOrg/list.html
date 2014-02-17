@@ -1,0 +1,45 @@
+<div ng-controller="org.ListCtrl">
+  <h3 class="page-header">Org list</h3>
+
+  <div>
+    <div collapse="!showSearchForm">
+         <div ng-include="'/templates/org/searchForm.html' | withContext"></div>
+    </div>
+
+    <div class="navbar navbar-grid">
+        <div class="navbar-inner with-selected-pointer with-grid-options">
+            <ul class="nav">
+              <li class="dropdown selected-actions">
+                  <a data-toggle="dropdown" class="dropdown-toggle" href="#" style="padding-left:2px">
+                      <i class="icon-selected-pointer"></i> Actions <b class="caret"></b>
+                  </a>
+                  <ul class="dropdown-menu">
+                      <li><a href="" ng-click="massUpdate()"><i class="icon-edit"></i> Mass update</a></li>
+                  </ul>
+              </li>
+              <li class="divider-vertical"></li>
+                  <li>
+                      <a href="#/create">
+                          <i class="icon-user"></i> Create org
+                      </a>
+                  </li>
+            </ul>
+            <ul class="nav pull-right">
+                <li>
+                    <a title="search screen" ng-click="showSearchForm = !showSearchForm" href="">
+                        <i class="icon-search"></i>
+                    </a>
+                </li>
+            </ul>
+
+            <form action="" class="navbar-search pull-right" ng-submit="grid.org.search(filters)">
+                <input type="text" value="" placeholder="quick search" class="search-query span2" style="width: 150px;"
+                       ng-model="filters.quickSearch"/>
+            </form>
+        </div>
+    </div>
+
+    <div ag-grid="gridOptions"
+         ag-grid-name="grid.org"></div>
+  </div>
+</div>
