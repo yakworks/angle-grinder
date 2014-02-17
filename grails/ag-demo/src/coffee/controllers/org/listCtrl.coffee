@@ -11,6 +11,9 @@ class ListCtrl
       sortname: "num"
       sortorder: "asc"
 
+      rowNum: 5
+      rowList: [5, 10, 20]
+
     singlePageCrudCtrlMixin $scope,
       Resource: Resource
       resourcePath: "/org"
