@@ -114,13 +114,14 @@ describe "module: angleGrinder.gridz", ->
     beforeEach inject ($rootScope, $injector) ->
       $scope = $rootScope.$new()
 
-      # stub grid controller
-      gridCtrl = search: angular.noop
-      sinon.stub(gridCtrl, "search").returns then: ->
-      $scope.grid = gridCtrl
+      # stub the grid controller
+      gridCtrl = search: sinon.stub()
+      gridCtrl.search.returns then: ->
+
+      $scope.grid = users: gridCtrl
 
       {element} = compileTemplate """
-        <form name="searchForm" ag-search-form="grid">
+        <form name="searchForm" ag-search-form="grid.users">
           <input type="text" name="name" ng-model="filters.name" />
 
           <ag-search-button id="search"></ag-search-button>
@@ -142,8 +143,8 @@ describe "module: angleGrinder.gridz", ->
         $searchButton.click()
 
         # Then
-        expect($scope.grid.search.called).to.be.true
-        expect($scope.grid.search.calledWith(name: "find me")).to.be.true
+        expect($scope.grid.users.search.called).to.be.true
+        expect($scope.grid.users.search.calledWith(name: "find me")).to.be.true
 
       it "disables the submit button", ->
         # When
@@ -163,8 +164,8 @@ describe "module: angleGrinder.gridz", ->
         $resetButton.click()
 
         # Then
-        expect($scope.grid.search.called).to.be.true
-        expect($scope.grid.search.calledWith({})).to.be.true
+        expect($scope.grid.users.search.called).to.be.true
+        expect($scope.grid.users.search.calledWith({})).to.be.true
 
       it "disables the reset button", ->
         # When
