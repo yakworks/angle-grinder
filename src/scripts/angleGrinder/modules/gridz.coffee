@@ -3,40 +3,6 @@ gridz = angular.module("angleGrinder.gridz", [
   "ui.select2"
 ])
 
-gridz.factory "actionPopupHandler", [
-  "$log", ($log) ->
-
-    ($grid, scope) ->
-      # handles an action from the `actionPopup` menu
-      handleAction = (action, id) ->
-        if scope[action]?
-          $log.info "Trigger '#{action}' for row '#{id}'"
-          scope.$apply -> scope[action](id)
-        else
-          $log.warn("`$scope.#{action}` is not defined")
-
-      # handles click on show action insite the dropdown menu
-      $grid.on "showAction", (event, id) ->
-        event.preventDefault()
-        handleAction("showItem", id)
-
-      # handles click on edit action insite the dropdown menu
-      $grid.on "editAction", (event, id) ->
-        event.preventDefault()
-        handleAction("editItem", id)
-
-      # handles click on delete action inside the dropdown menu
-      $grid.on "deleteAction", (event, id) ->
-        event.preventDefault()
-        handleAction("deleteItem", id)
-
-      # handles click on the cell with `editActionLink` formatter
-      $grid.on "click", "a.editActionLink", (event) ->
-        event.preventDefault()
-        id = $(this).parents("tr:first").attr("id")
-        handleAction("editItem", id)
-]
-
 gridz.directive "agGrid", [
   "$log", "$parse", "actionPopupHandler", "pathWithContext", "camelize",
   ($log, $parse, actionPopupHandler, pathWithContext, camelize) ->
@@ -108,24 +74,3 @@ gridz.directive "agGrid", [
       # return linking function which will be called at a later time
       post: link
 ]
-
-# Takes a nested Javascript object and flatten it.
-# see: https://github.com/hughsk/flat
-gridz.value "flatten", (target, opts = delimiter: ".") ->
-  delimiter = opts.delimiter
-
-  getKey = (key, prev) ->
-    if prev then prev + delimiter + key else key
-
-  step = (object, prev) ->
-    angular.forEach Object.keys(object), (key) ->
-      isArray = opts.safe and object[key] instanceof Array
-      type = Object::toString.call(object[key])
-      isObject = type is "[object Object]" or type is "[object Array]"
-
-      return step(object[key], getKey(key, prev)) if not isArray and isObject
-      output[getKey(key, prev)] = object[key]
-
-  output = {}
-  step target
-  output
