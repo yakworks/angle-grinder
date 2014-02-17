@@ -35,6 +35,7 @@ gridz.value "idsArrayPager", (rowId, ids = []) ->
 #     <a href="#/examples/users/{{prevId()}}?ids={{ids}}">&#8592; prev</a> |
 #     <a href="#/examples/users/{{nextId()}}?ids={{ids}}">next &#8594;</a>
 #   </div>
+# TODO this directive is deprecated, remove it in the next release
 gridz.directive "agShowPagePager", [
   "$parse", "$routeParams", "$log", "idsArrayPager",
   ($parse, $routeParams, $log, idsArrayPager) ->
