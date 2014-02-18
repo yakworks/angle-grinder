@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# update selenium
+./node_modules/protractor/bin/webdriver-manager update
+
 . ./bin/lib/server
 
 startServer
