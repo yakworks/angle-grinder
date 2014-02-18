@@ -108,3 +108,25 @@ describe "module: angleGrinder.gridz", ->
 
           it "is assigned to the scope", ->
             expect($scope.grid.projects).to.not.be.undefined
+
+    describe "when `ag-grid-col-model` is provided", ->
+
+      beforeEach inject ($injector) ->
+        colModel = [{name: "dynamicFoo", label: "Foo"}, {name: "dynamicBar", label: "Bar", search: true}]
+
+        {element} = compileTemplate """
+          <div ag-grid="gridOptions"
+               ag-grid-col-model='#{angular.toJson(colModel)}'></div>
+        """, $injector, $scope
+
+      it "overrides grid `colModel`", ->
+        colModel = gridzSpy.getCall(0).args[0].colModel
+
+        fooCol = _.findWhere(colModel, name: "dynamicFoo")
+        expect(fooCol).to.not.be.undefined
+        expect(fooCol).to.have.property "label", "Foo"
+
+        barCol = _.findWhere(colModel, name: "dynamicBar")
+        expect(barCol).to.not.be.undefined
+        expect(barCol).to.have.property "label", "Bar"
+        expect(barCol).to.have.property "search", true

@@ -19,6 +19,9 @@ gridz.directive "agGrid", [
       options = $parse(attrs.agGrid)(scope)
       throw new Error("undefined grid options") unless options
 
+      # read colModel from the `ag-grid-col-model` attribute
+      options.colModel = angular.fromJson(attrs.agGridColModel) if attrs.agGridColModel
+
       # Initializes a grid with the given options
       initializeGrid = ->
         $log.info "Initializing '#{alias}' with", options
