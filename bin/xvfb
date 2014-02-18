@@ -2,8 +2,9 @@
 
 XVFB=/usr/bin/Xvfb
 DISPLAY_NUMBER=99
-XVFBARGS=":$DISPLAY_NUMBER -ac -screen 0 1024x768x16"
+XVFBARGS=":$DISPLAY_NUMBER -ac -screen 0 1440x900x16"
 PIDFILE=/tmp/xvfb_${DISPLAY_NUMBER}.pid
+
 case "$1" in
   start)
     echo -n "Starting virtual X frame buffer: Xvfb"
@@ -23,4 +24,5 @@ case "$1" in
   echo "Usage: /etc/init.d/xvfb {start|stop|restart}"
   exit 1
 esac
+
 exit 0

@@ -8,7 +8,9 @@ describe "Grid example scenario", ->
   page = null
 
   beforeEach ->
+    browser.driver.manage().window().setSize(1440, 900)
     browser.get "/"
+
     page = new GridExamplePage()
 
     # navigate to the basic grid example

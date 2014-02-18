@@ -6,6 +6,8 @@ UsersDialogBasedPage = require("./helpers/page_objects/users_dialog_based_page")
 describe "Users dialog based grid scenario", ->
   beforeEach ->
     utils.loadFixtures()
+
+    browser.driver.manage().window().setSize(1440, 900)
     browser.get "/"
 
   page = null
