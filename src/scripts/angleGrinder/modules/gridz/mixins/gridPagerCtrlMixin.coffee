@@ -1,8 +1,8 @@
 mixin = angular.module("angleGrinder.gridz")
 
 mixin.controller "gridPagerCtrlMixin", [
-  "$log", "$scope", "$parse", "$location", "gridName", "currentId", "path"
-  ($log, $scope, $parse, $location, gridName, currentId, path) ->
+  "$log", "$scope", "$parse", "$location", "$q", "gridName", "currentId", "path"
+  ($log, $scope, $parse, $location, $q, gridName, currentId, path) ->
 
     currIdGetter = $parse(currentId)
     currIdSetter = currIdGetter.assign
@@ -20,22 +20,30 @@ mixin.controller "gridPagerCtrlMixin", [
       grid.getIds()
 
     # load the previous page and yields row ids
-    prevGridPage = (callback) ->
+    prevGridPage = ->
       grid = $parse(gridName)($scope)
+      deferred = $q.defer()
 
-      grid.prevPage ->
+      promise = grid.prevPage()
+      promise.then (data) ->
         ids = getGridIds()
         $log.debug "[agGrid] previous page was loaded", ids
-        callback(ids)
+        deferred.resolve(ids)
+
+      deferred.promise
 
     # load the next page and yields new ids
-    nextGridPage = (callback) ->
+    nextGridPage = ->
       grid = $parse(gridName)($scope)
+      deferred = $q.defer()
 
-      grid.nextPage ->
+      promise = grid.nextPage()
+      promise.then (data) ->
         ids = getGridIds()
         $log.debug "[agGrid] next page was loaded", ids
-        callback(ids)
+        deferred.resolve(ids)
+
+      deferred.promise
 
     # get the current state
     getCurrent = ->
@@ -50,7 +58,7 @@ mixin.controller "gridPagerCtrlMixin", [
         currIdSetter $scope, ids[indx - 1]
       else
         # load the previos page and get the last id
-        prevGridPage (ids) -> currIdSetter $scope, ids[ids.length - 1]
+        prevGridPage().then (ids) -> currIdSetter $scope, ids[ids.length - 1]
 
     @nextRow = ->
       [ids, indx] = getCurrent()
@@ -60,7 +68,7 @@ mixin.controller "gridPagerCtrlMixin", [
         currIdSetter $scope, ids[indx + 1]
       else
         # load the next page and get the first id
-        nextGridPage (ids) -> currIdSetter $scope, ids[0]
+        nextGridPage().then (ids) -> currIdSetter $scope, ids[0]
 
     return this
 ]

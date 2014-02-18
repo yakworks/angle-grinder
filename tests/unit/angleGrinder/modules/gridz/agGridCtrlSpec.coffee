@@ -23,6 +23,7 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
     sinon.stub(ctrl, "flashOnSuccess")
 
   describe "#reload", ->
+
     it "reloads the grid", ->
       # When
       ctrl.reload()
@@ -30,6 +31,19 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
       # Then
       expect(gridStub.trigger.called).to.be.true
       expect(gridStub.trigger.calledWith("reloadGrid")).to.be.true
+
+    it "returns a promise", inject ($rootScope) ->
+      # When
+      promise = ctrl.reload()
+      $rootScope.$broadcast "gridz:loadComplete", {}, foo: "bar"
+
+      # Then
+      resolvedValue = null
+      promise.then (data) -> resolvedValue = data
+
+      expect(resolvedValue).to.be.null
+      $rootScope.$digest()
+      expect(resolvedValue).to.have.property "foo", "bar"
 
   describe "#getParam", ->
     before -> @gridParams.foo = "bar"
@@ -225,19 +239,20 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
       expect(gridStub.trigger.called).to.be.true
       expect(gridStub.trigger.calledWith("reloadGrid")).to.be.true
 
-    it "returns a promise", inject ($timeout) ->
+    it "returns a promise", inject ($rootScope) ->
       # Given
-      sinon.stub(ctrl, "reload", (callback) -> $timeout -> callback())
       promise = ctrl.search(login: "foo")
+      $rootScope.$broadcast "gridz:loadComplete", {}, foo: "bar"
 
       resolvedValue = null
       promise.then (data) -> resolvedValue = data
+      expect(resolvedValue).to.be.null
 
       # When
-      expect(resolvedValue).to.be.null
-      $timeout.flush()
+      $rootScope.$apply()
 
       # Then
+      expect(resolvedValue).to.not.be.null
       expect(resolvedValue).to.deep.equal login: "foo"
 
   describe "#getSelectedRowIds", ->
@@ -342,6 +357,10 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
         expect(gridStub.setGridParam.calledWith(page: 1)).to.be.true
         expect(gridStub.trigger.calledWith("reloadGrid")).to.be.true
 
+      it "returns a promise", ->
+        promise = ctrl.firstPage()
+        expect(promise.then).to.be.a "function"
+
     describe "#prevPage", ->
       before ->
         @gridParams.records = 999
@@ -358,6 +377,10 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
           expect(gridStub.setGridParam.calledWith(page: 2)).to.be.true
           expect(gridStub.trigger.calledWith("reloadGrid")).to.be.true
 
+        it "returns a promise", ->
+          promise = ctrl.prevPage()
+          expect(promise.then).to.be.a "function"
+
       context "on the first page", ->
         before -> @gridParams.page = 1
 
@@ -368,6 +391,10 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
           # Then
           expect(gridStub.setGridParam.calledWith(page: 100)).to.be.true
           expect(gridStub.trigger.calledWith("reloadGrid")).to.be.true
+
+        it "returns a promise", ->
+          promise = ctrl.prevPage()
+          expect(promise.then).to.be.a "function"
 
     describe "#nextPage", ->
       before ->
@@ -385,6 +412,10 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
           expect(gridStub.setGridParam.calledWith(page: 3)).to.be.true
           expect(gridStub.trigger.calledWith("reloadGrid")).to.be.true
 
+        it "returns a promise", ->
+          promise = ctrl.nextPage()
+          expect(promise.then).to.be.a "function"
+
       context "on the last page", ->
         before -> @gridParams.page = 3
 
@@ -395,6 +426,10 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
           # Then
           expect(gridStub.setGridParam.calledWith(page: 1)).to.be.true
           expect(gridStub.trigger.calledWith("reloadGrid")).to.be.true
+
+        it "returns a promise", ->
+          promise = ctrl.nextPage()
+          expect(promise.then).to.be.a "function"
 
     describe "#lastPage", ->
       before ->
@@ -409,6 +444,10 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
         expect(gridStub.setGridParam.calledWith(page: 200)).to.be.true
         expect(gridStub.trigger.calledWith("reloadGrid")).to.be.true
 
+      it "returns a promise", ->
+        promise = ctrl.lastPage()
+        expect(promise.then).to.be.a "function"
+
     describe "#loadPage", ->
 
       it "loads the specific page", ->
@@ -418,3 +457,15 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
         # Then
         expect(gridStub.setGridParam.calledWith(page: 123)).to.be.true
         expect(gridStub.trigger.calledWith("reloadGrid")).to.be.true
+
+      it "returns a promise", inject ($rootScope) ->
+        # When
+        promise = ctrl.loadPage(123)
+        $rootScope.$broadcast "gridz:loadComplete", {}, foo: "bar"
+
+        resolvedValue = null
+        promise.then (data) -> resolvedValue = data
+
+        expect(resolvedValue).to.be.null
+        $rootScope.$apply()
+        expect(resolvedValue).to.have.property "foo", "bar"

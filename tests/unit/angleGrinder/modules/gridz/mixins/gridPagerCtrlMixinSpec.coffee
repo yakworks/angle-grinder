@@ -9,16 +9,22 @@ describe "module: angleGrinder.gridz", ->
     $scope = null
     gridCtrl = null
 
-    beforeEach inject ($rootScope, $controller) ->
+    beforeEach inject ($rootScope, $q, $controller) ->
       $scope = $rootScope.$new()
 
       $scope.current = id: 123
 
       # stub the grid ctrl
+      promiseStub = ->
+        deferred = $q.defer()
+        deferred.resolve()
+        deferred.promise
+
       gridCtrl =
         getIds: sinon.stub()
-        prevPage: (callback) -> callback()
-        nextPage: (callback) -> callback()
+
+        prevPage: promiseStub
+        nextPage: promiseStub
 
       $scope.grid = products: gridCtrl
 
@@ -69,7 +75,7 @@ describe "module: angleGrinder.gridz", ->
           gridCtrl.getIds.onCall(1).returns ["123", "456", "789"]
 
           $scope.pager.prevRow()
-          $scope.$digest()
+          $scope.$apply()
 
         it "loads the previous page", ->
           expect(gridCtrl.prevPage.called).to.be.true

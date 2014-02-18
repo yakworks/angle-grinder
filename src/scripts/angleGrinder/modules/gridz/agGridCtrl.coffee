@@ -24,14 +24,16 @@ gridz.controller "AgGridCtrl", class
     @getParam("selarrrow")
 
   # Reloads the grid with the current settings
-  reload: (callback = angular.noop) ->
+  reload: ->
+    deferred = @$q.defer()
+
     unregister = @$rootScope.$on "gridz:loadComplete", (_, event, data) ->
-      callback(event, data)
+      deferred.resolve(data)
       unregister()
 
     @$grid.trigger("reloadGrid")
 
-    return
+    deferred.promise
 
   # Gets a particular grid parameter
   getParam: (name) ->
@@ -84,27 +86,27 @@ gridz.controller "AgGridCtrl", class
     Math.ceil @getTotalRecords() / @getPageSize()
 
   # Loads the previous page
-  prevPage: (callback = ->) ->
+  prevPage: ->
     page = @getCurrentPage()
-    return @lastPage(callback) if page is 1
-    @loadPage(page - 1, callback)
+    return @lastPage() if page is 1
+    @loadPage(page - 1)
 
   # Loads the next page
-  nextPage: (callback = ->) ->
+  nextPage: ->
     page = @getCurrentPage()
-    return @firstPage(callback) if page is @getTotalPages()
-    @loadPage(page + 1, callback)
+    return @firstPage() if page is @getTotalPages()
+    @loadPage(page + 1)
 
   # Loads the first page
-  firstPage: (callback = angular.noop) -> @loadPage(1, callback)
+  firstPage: -> @loadPage(1)
 
   # Loads the last page
-  lastPage: (callback = angular.noop) -> @loadPage(@getTotalPages(), callback)
+  lastPage: -> @loadPage(@getTotalPages())
 
   # Load the specific page
-  loadPage: (page, callback = ->) ->
+  loadPage: (page) ->
     @setParam page: page
-    @reload(callback)
+    @reload()
 
   saveRow: (id, data) ->
     if @hasRow(id)
@@ -126,7 +128,9 @@ gridz.controller "AgGridCtrl", class
       postData: filters: JSON.stringify(filters)
 
     @setParam(params)
-    @reload -> deferred.resolve(filters)
+
+    promise = @reload()
+    promise.then -> deferred.resolve(filters)
 
     deferred.promise
 
