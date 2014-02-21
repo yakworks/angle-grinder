@@ -7,7 +7,7 @@ forms.directive "agTabset", ->
   scope: true
 
   controller: [
-    "$scope", ($scope) ->
+    "$log", "$scope", ($log, $scope) ->
 
       # stack of the tabs
       $scope.tabs = []
@@ -33,10 +33,13 @@ forms.directive "agTabset", ->
         tab = $scope.currentTab()
         tab.loading = false
 
+        $log.debug "[tabs] content loaded", tab
+
       # activate the given tab
       @selectTab = (tab) ->
         # de-select all tabs
-        angular.forEach $scope.tabs, (tab) -> tab.selected = false
+        angular.forEach $scope.tabs, (tab) ->
+          tab.selected = tab.loading = false
 
         # mark the current tab as selected
         tab.selected = true

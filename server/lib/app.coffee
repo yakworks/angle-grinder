@@ -123,4 +123,8 @@ app.post "/api/_loadFixtures.json", (req, res) ->
   data.reload()
   res.send 200
 
+app.get "/api/templates/tabs/_slow.html", (req, res) ->
+  randomSleep([4,5,6])
+  res.send "<h3>Loaded!</h3>"
+
 module.exports = app

@@ -72,16 +72,27 @@ describe "module: angleGrinder.forms tabs", ->
           ctrl.addTab(tabOne)
 
           tabTwo = $rootScope.$new()
+          tabTwo.loading = true
           ctrl.addTab(tabTwo)
 
         it "marks the tab as selected", ->
+          expect(tabOne.selected).to.be.true
+          expect(tabTwo.selected).to.be.undefined
+
+          ctrl.selectTab(tabTwo)
+
+          expect(tabOne.selected).to.be.false
+          expect(tabTwo.selected).to.be.true
+
+        it "disables loading spinners for the other tabs", ->
+          expect(tabTwo.loading).to.be.true
+
           ctrl.selectTab(tabOne)
 
-          expect(tabOne.selected).to.be.true
-          expect(tabTwo.selected).to.be.false
+          expect(tabOne.loading).to.be.true
+          expect(tabTwo.loading).to.be.false
 
   describe "directive: agTab", ->
-    $scope = null
     element = null
 
     findTabByTitle = (title) ->
