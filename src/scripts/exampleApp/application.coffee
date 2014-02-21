@@ -46,28 +46,6 @@ app.config [
     $httpProvider.interceptors.push("httpErrorsInterceptor")
 ]
 
-# emulate slow loading tab template for `templates/tabs/_slow.html`
-app.config [
-  "$httpProvider", ($httpProvider) ->
-
-    $httpProvider.interceptors.push [
-      "$q", "$timeout",
-      ($q, $timeout) ->
-
-        request: (request) ->
-          if request.url is "templates/tabs/_slow.html"
-            deferred = $q.defer()
-
-            $timeout ->
-              deferred.resolve(request)
-            , 1000
-
-            $q.when(deferred.promise)
-          else
-            $q.when(request)
-    ]
-]
-
 app.run [
   "$log", "alerts", ($log, alerts) ->
 
