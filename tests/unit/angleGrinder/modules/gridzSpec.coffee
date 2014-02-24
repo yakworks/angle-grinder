@@ -130,3 +130,23 @@ describe "module: angleGrinder.gridz", ->
         expect(barCol).to.not.be.undefined
         expect(barCol).to.have.property "label", "Bar"
         expect(barCol).to.have.property "search", true
+
+    describe "grid without the pager", ->
+
+      beforeEach inject ($injector) ->
+        $scope.gridOptions.pager = false
+
+        {element} = compileTemplate """
+          <div ag-grid="gridOptions"
+               ag-grid-name="projectsGrid"></div>
+        """, $injector, $scope
+
+      itRendersTheGrid()
+      itInitializesActionPopupHandler()
+
+      it "generates `id` for the grid element", ->
+        expect(element.find("table.gridz").attr("id")).to.equal "projectsGrid"
+
+      it "passes valid options to the gridz plugin", ->
+        expect(gridzSpy.called).to.be.true
+        expect(gridzSpy.getCall(0).args[0].pager).to.be.false

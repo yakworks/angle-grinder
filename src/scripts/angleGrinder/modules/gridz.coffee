@@ -34,7 +34,8 @@ gridz.directive "agGrid", [
           options.url = pathWithContext(options.path)
 
         # jqGrid suks at this point it expects `pager` to be an id
-        options.pager = element.find(".gridz-pager").attr("id") or "gridz-pager"
+        unless options.pager is false
+          options.pager = element.find(".gridz-pager").attr("id") or "gridz-pager"
 
         # initialize jqGrid on the given element
         $grid.gridz(options)
@@ -50,12 +51,13 @@ gridz.directive "agGrid", [
 
         # Initialize the grid when the element will be visible
         unregister = scope.$watch ->
-          if element.is(":visible")
-            # initialize the grid on the visible element
-            initializeGrid()
+          return unless element.is(":visible")
 
-            # unregister the watcher to free resources
-            unregister()
+          # initialize the grid on the visible element
+          initializeGrid()
+
+          # unregister the watcher to free resources
+          unregister()
 
     restrict: "A"
 

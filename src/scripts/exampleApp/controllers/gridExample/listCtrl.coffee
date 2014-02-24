@@ -6,7 +6,9 @@ class IndexCtrl
     # initialize the grid with generated data
     @data = sampleData.generate(100)
     $scope.data = @data
+
     $scope.gridOptions = exampleGrid(data: @data)
+    $scope.otherGridOptions = exampleGrid(data: @data, pager: false)
 
     $scope.editItem = (id) =>
       item = @findItemById(id)
