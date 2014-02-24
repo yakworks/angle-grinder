@@ -23,6 +23,13 @@ gridz.controller "AgGridCtrl", class
   getSelectedRowIds: ->
     @getParam("selarrrow")
 
+  # Returns an array with data of the requested id = rowid.
+  # The returned array is of type name:value, where the name is
+  # a name from colModel and the value from the associated column in that row.
+  # It returns an empty array if the rowid can not be found.
+  getRowData: (rowId = null) ->
+    @$grid.getRowData(rowId)
+
   # Reloads the grid with the current settings
   reload: ->
     deferred = @$q.defer()

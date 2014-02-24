@@ -46,6 +46,9 @@
 <div ag-grid="gridOptions"
      ag-grid-name="exampleGrid"></div>
 
+<button class="btn" ng-click="getSelectedRowsData()">Get selected rows data</button>
+<code>{{selectedRowsData | json}}</code>
+
 <h3>Custom col model</h3>
 
 <div ag-grid="otherGridOptions"

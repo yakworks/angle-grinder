@@ -10,6 +10,12 @@ class IndexCtrl
     $scope.gridOptions = exampleGrid(data: @data)
     $scope.otherGridOptions = exampleGrid(data: @data, pager: false)
 
+    $scope.selectedRowsData = []
+    $scope.getSelectedRowsData = ->
+      ids = $scope.exampleGrid.getSelectedRowIds()
+      $scope.selectedRowsData = _.map ids, (id) ->
+        $scope.exampleGrid.getRowData(id)
+
     $scope.editItem = (id) =>
       item = @findItemById(id)
       item.persisted = -> true

@@ -261,6 +261,16 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
     it "returns a list of selected row ids", ->
       expect(ctrl.getSelectedRowIds()).to.deep.eq [1, 2, 3]
 
+  describe "#getRowData", ->
+
+    it "returns a row data for the given id", ->
+      # When
+      ctrl.getRowData(567)
+
+      # Then
+      expect(gridStub.getRowData.called).to.be.true
+      expect(gridStub.getRowData.calledWith(567)).to.be.true
+
   describe "#isColumnHidden", ->
 
     it "is defined", ->
