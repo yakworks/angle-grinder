@@ -6,6 +6,7 @@ describe "module: angleGrinder.forms", ->
 
     it "is defined", inject (focus) ->
       expect(focus).to.not.be.undefined
+      expect(focus).to.be.a "Function"
 
     it "broadcasts `focusOn` event with the field name", inject ($rootScope, $timeout, focus) ->
       # Given
@@ -20,7 +21,6 @@ describe "module: angleGrinder.forms", ->
 
   describe "directive: agFocus", ->
 
-    $scope = null
     element = null
 
     beforeEach inject ($injector) ->
