@@ -101,7 +101,7 @@ class BeanPathTools {
                 currentMap[propertyPath] = obj?."$propertyPath"
             }
 
-            return
+            return null
         }
         else{
             // We have at least one sub-key, so extract the first element
@@ -123,8 +123,18 @@ class BeanPathTools {
             }
             String remainderOfKey = propertyPath.substring(nestedIndex + 1, propertyPath.length());
             //recursive call
-            propsToMap(nestedObj, remainderOfKey, currentMap[nestedPrefix])
-
+            if (nestedObj instanceof Collection) {
+                List l = []
+                nestedObj.each { nestedObjItem ->
+                    Map justForItem = [:]
+                    propsToMap(nestedObjItem, remainderOfKey, justForItem)
+                    l << justForItem
+                }
+                currentMap[nestedPrefix] = l
+            } else {
+                propsToMap(nestedObj, remainderOfKey, currentMap[nestedPrefix])
+            }
+            return null
         }
 
     }

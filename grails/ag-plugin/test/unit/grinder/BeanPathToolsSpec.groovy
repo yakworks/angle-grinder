@@ -82,6 +82,22 @@ class BeanPathToolsSpec extends Specification {
         'right.*'               | [right: [id: 6, value: 0]]
     }
 
+    def "Property returns list of domains"() {
+        setup:
+        def obj = new TestClazzC(
+                id: 9,
+                value: 10
+        )
+        expect:
+        Map act = [:]
+        null == BeanPathTools.propsToMap(obj, path, act)
+        exp == act
+        where:
+        path                    | exp
+        'value'                 | [value: 10]
+        'fooValues.*'           | [fooValues: [[id: 1, bar: null, foo: 'val 1'], [id: 2, bar: null, foo: 'val 2']]]
+    }
+
 
     class TestClazzA {
         Long id
@@ -108,4 +124,23 @@ class BeanPathToolsSpec extends Specification {
             new DefaultGrailsDomainClass(TestClazzB)
         }
     }
+
+    class TestClazzC {
+        Long id
+        Long version
+
+        int value
+
+        List getFooValues() {
+            [
+                    new TestClazzA(id: 1, version: 0, foo: 'val 1'),
+                    new TestClazzA(id: 2, version: 0, foo: 'val 2')
+            ]
+        }
+
+        def getDomainClass() {
+            new DefaultGrailsDomainClass(TestClazzB)
+        }
+    }
+
 }
