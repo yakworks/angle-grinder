@@ -40,7 +40,7 @@ class Gridz
 
     # if sortable is true then add exclusion for the action column
     if options.actionPopup and options.sortable
-      options.sortable = exclude: "##{@gridId}_row_action_col"
+      options.sortable = exclude: "##{@gridId}_-row_action_col"
 
     options
 
@@ -124,7 +124,7 @@ class Gridz
     opts = @options
     containerId = "gbox_#{@$element.attr("id")}"
     opts.colModel.unshift
-      name: "row_action_col" # can't resize
+      name: "-row_action_col" # can't resize
       label: " "
       width: 20
       sortable: false
@@ -155,7 +155,7 @@ class Gridz
       actionMenu = options.actionPopup.menuList
     else
       actionMenu = """
-                   <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
+                   <ul class="dropdown-menu" role="menu">
                      <li><a href="#" class="row_action_show" data-dismiss="clickover">
                        <i class="icon-eye-open"></i>show</a>
                      </li>

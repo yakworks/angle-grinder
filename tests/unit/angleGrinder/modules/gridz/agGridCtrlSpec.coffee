@@ -61,29 +61,50 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
       expect(gridStub.setGridParam.calledWith(foo: "bar")).to.be.true
 
   describe "#updateRow", ->
-    it "updates a row with the given id", ->
-      # When
-      ctrl.updateRow(123, foo: "bar")
 
-      # Then
-      expect(gridStub.setRowData.called).to.be.true
-      expect(gridStub.setRowData.calledWith(123, foo: "bar")).to.be.true
+    context "simple update", ->
 
-    it "flattens data before inserting it to the grid", inject (flatten) ->
-      # When
-      ctrl.updateRow(123, foo: bar: "biz")
+      it "updates a row with the given id", ->
+        # When
+        ctrl.updateRow(123, foo: "bar")
 
-      # Then
-      expect(flatten.called).to.be.true
-      expect(flatten.calledWith(foo: bar: "biz")).to.be.true
+        # Then
+        expect(gridStub.setRowData.called).to.be.true
+        expect(gridStub.setRowData.calledWith(123, foo: "bar")).to.be.true
 
-    it "flashes the updated row", ->
-      # Given
-      ctrl.updateRow(123, foo: "bar")
+      it "flattens data before inserting it to the grid", inject (flatten) ->
+        # When
+        ctrl.updateRow(123, foo: bar: "biz")
 
-      # Then
-      expect(ctrl.flashOnSuccess.called).to.be.true
-      expect(ctrl.flashOnSuccess.calledWith(123)).to.be.true
+        # Then
+        expect(flatten.called).to.be.true
+        expect(flatten.calledWith(foo: bar: "biz")).to.be.true
+
+      it "flashes the updated row", ->
+        # Given
+        ctrl.updateRow(123, foo: "bar")
+
+        # Then
+        expect(ctrl.flashOnSuccess.called).to.be.true
+        expect(ctrl.flashOnSuccess.calledWith(123)).to.be.true
+
+    context "when the new data contain empty values", ->
+      beforeEach ->
+        # stub previous row data
+        gridStub.getRowData.withArgs(123).returns
+          "-row_action_col": "html code for the popup"
+          foo: "foo", "bar.baz": "baz", "bar.biz": "biz"
+
+      it "clears the empty values", ->
+        # When
+        ctrl.updateRow(123, foo: "bar", baz: "baz", bar: {})
+
+        # Then
+        expect(gridStub.setRowData.called).to.be.true
+
+        args = gridStub.setRowData.getCall(0).args
+        expect(args[0]).to.eq 123
+        expect(args[1]).to.deep.eq foo: "bar", baz: "baz", bar: {}, "bar.baz": null, "bar.biz": null
 
   describe "#addRow", ->
 
@@ -195,10 +216,10 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
   describe "#getIds", ->
     it "returns an array of the id's in the current grid view", ->
       # Given
-      stub = gridStub.getDataIDs.returns([1,2,3])
+      stub = gridStub.getDataIDs.returns([1, 2, 3])
 
       # When
-      expect(ctrl.getIds()).to.deep.eq [1,2,3]
+      expect(ctrl.getIds()).to.deep.eq [1, 2, 3]
 
       # Then
       expect(stub.called).to.be.true

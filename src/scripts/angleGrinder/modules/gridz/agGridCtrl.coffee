@@ -55,7 +55,21 @@ gridz.controller "AgGridCtrl", class
   # where the name is the name of the column as described in the colModel
   # and the value is the new value.
   updateRow: (id, data) ->
-    @$grid.setRowData(id, @flatten(data))
+    flatData = @flatten(data)
+
+    prevData = @getRowData(id)
+    if prevData?
+      # retrieve a list of removed keys
+      diff = _.difference(_.keys(prevData), _.keys(flatData))
+
+      # filter out rescticted (private) columns like `-row_action_col`
+      restictedColumns = (key) -> not key.match /^-/
+      diff = diff.filter(restictedColumns)
+
+      # set empty values
+      flatData[key] = null for key in diff
+
+    @$grid.setRowData(id, flatData)
     @flashOnSuccess(id)
 
   # Inserts a new row with id = rowid containing the data in data (an object) at
