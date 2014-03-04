@@ -1,5 +1,5 @@
 <div class="modal-header">
-  <button type="button" class="close" ng-click="closeDialog()" aria-hidden="true">&times;</button>
+  <button type="button" class="close" ng-click="closeDialog()">&times;</button>
   <h3>Mass update</h3>
 </div>
 
@@ -11,9 +11,9 @@
       <label class="control-label">Allowance</label>
 
       <div class="controls">
-        <input type="text" name="allowance" placeholder="Enter Allowance"
-               ng-model="records.allowance" ng-required="true" />
-        <ag-validation-errors for="allowance" />
+        <input type="text" name="creditInfoAllowance" placeholder="Enter Allowance"
+               ng-model="records.creditInfo.allowance" ng-required="false" />
+        <ag-validation-errors for="creditInfoAllowance" />
       </div>
     </div>
   </div>

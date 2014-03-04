@@ -55,12 +55,12 @@ describe "Users dialog based grid scenario", ->
       it "filters by allowance", ->
         searchForm.fillInAndSubmit allowance: "50"
         firstRow = page.grid.firstRow()
-        expect(firstRow.value("allowance")).to.eventually.eq "50"
+        expect(firstRow.value("creditInfo.allowance")).to.eventually.eq "50"
 
         searchForm.reset()
         firstRow = page.grid.firstRow()
         expect(firstRow.value("name")).to.eventually.eq "Moroni"
-        expect(firstRow.value("allowance")).to.not.eventually.eq "50"
+        expect(firstRow.value("creditInfo.allowance")).to.not.eventually.eq "50"
 
       it "filters by birthday", ->
         searchForm.fillInAndSubmit
@@ -69,7 +69,7 @@ describe "Users dialog based grid scenario", ->
 
         firstRow = page.grid.firstRow()
         expect(firstRow.value("name")).to.eventually.eq "Ether"
-        expect(firstRow.value("allowance")).to.eventually.eq "42"
+        expect(firstRow.value("creditInfo.allowance")).to.eventually.eq "42"
 
   describe "quick search", ->
 
@@ -99,7 +99,7 @@ describe "Users dialog based grid scenario", ->
           "item.name": "New User Name"
           "item.login": "new-user"
           "item.info.email": "new-user@email.com"
-          "item.allowance": "99.99"
+          "item.creditInfo.allowance": "99.99"
           "item.birthday": "03/04/1983"
           "item.password": "password"
           "item.passwordConfirmation": "password"
@@ -111,7 +111,7 @@ describe "Users dialog based grid scenario", ->
         expect(firstRow.value("login")).to.eventually.eq "new-user"
         expect(firstRow.value("info.email")).to.eventually.eq "new-user@email.com"
         expect(firstRow.value("name")).to.eventually.eq "New User Name"
-        expect(firstRow.value("allowance")).to.eventually.eq "99.99"
+        expect(firstRow.value("creditInfo.allowance")).to.eventually.eq "99.99"
         expect(firstRow.value("birthday")).to.eventually.eq "Mar 4, 1983"
 
   describe "grid row popover", ->

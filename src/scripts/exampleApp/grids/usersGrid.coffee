@@ -25,14 +25,14 @@ grids.factory "usersGrid", [
         label: "Name"
         formatter: showActionLink
       ,
-        name: "allowance"
-        label: "Allowance"
-      ,
         name: "birthday"
         label: "Birthday",
         formatter: (cellVal) -> $filter("date")(cellVal)
       ,
-        name: "paid"
+        name: "creditInfo.allowance"
+        label: "Allowance"
+      ,
+        name: "creditInfo.paid"
         label: "Paid"
       ]
 

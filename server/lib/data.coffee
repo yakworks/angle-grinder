@@ -1,7 +1,7 @@
 _ = require("underscore")
 
 path = require("path")
-fs = require("fs")
+casual = require("casual")
 
 class Data
   constructor: (data = null) ->
@@ -9,18 +9,29 @@ class Data
 
   # Loads sample data into memory
   load: ->
-    largeLoad = fs.readFileSync(path.resolve(__dirname, "large_load.js"), encoding: "UTF-8")
-    data = eval(largeLoad)
+    data = []
 
-    for row, index in data
-      # generate row id, login and email
-      row.id = @nextId()
-      row.login = "login-#{index + 1}"
-      row.info =
-        email: "#{row.login}@email.com"
+    randomUser = (overrides = {}) =>
+      id = @nextId()
+      login = "login-#{id}"
 
-      # parse date
-      row.birthday = new Date(row.birthday)
+      user =
+        id: id, login: login
+        name: casual.username
+        info: email: "#{login}@#{casual.domain}"
+        birthday: casual.date("YYYY-MM-DD")
+        creditInfo:
+          allowance: casual.integer(0, 10000)
+          paid: casual.random >= 0.5
+
+      _.extend(user, overrides)
+
+    data.push randomUser(login: "login-1", name: "Moroni")
+    data.push randomUser(login: "login-2", name: "Teancum", creditInfo: { allowance: 50, paid: true })
+    data.push randomUser(login: "login-3", name: "Nephi", creditInfo: { allowance: 100, paid: false })
+    data.push randomUser(login: "login-4", name: "Ether", creditInfo: { allowance: 42, paid: true }, birthday: new Date("10/30/2010"))
+
+    _(50).times -> data.push randomUser()
 
     data
 
@@ -52,7 +63,7 @@ class Data
 
       allowanceMatch = true
       if filters.allowance? and filters.allowance isnt ""
-        allowanceMatch = row.allowance == parseInt(filters.allowance)
+        allowanceMatch = row.creditInfo.allowance == parseInt(filters.allowance)
 
       birthdayMatch = true
       if filters.birthday?
@@ -73,12 +84,17 @@ class Data
 
   getPaged: (page, pageSize, sort, order) ->
     # sorting all rows by `sort` file
-    sortedData = _(@data).sortBy (row) -> row[sort]
+    sortedData = _(@data).sortBy (row) ->
+      callback = (obj, key) -> obj[key]
+      sort.split(".").reduce(callback, row)
+
     # ..reverting if sort order is descending
     sortedData = sortedData.reverse() if order is "desc"
+
     # paginate the data
     pagedData = sortedData.slice((page - 1) * pageSize, page * pageSize)
 
+    # build the response
     page: page, total: @total(pageSize), records: @count(),
     rows: pagedData
 
@@ -111,6 +127,9 @@ class Data
     for key, value of data
       row[key] = value
 
+    # clear the credit info
+    row.creditInfo = {} if row.creditInfo.allowance is ""
+
     # parse birthday
     row.birthday = new Date(row.birthday) if row.birthday?
 
@@ -118,7 +137,9 @@ class Data
 
   massUpdate: (ids, params) ->
     data = []
-    errors = { 5: "foo", 6: "bar", 7: "baz" } # dummy data
+
+    # generate dummy errors
+    errors = 5: "foo", 6: "bar", 7: "baz"
 
     for id in ids
       try

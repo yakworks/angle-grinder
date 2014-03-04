@@ -20,14 +20,14 @@ grids.factory "usersDialogGrid", [
         label: "Name"
         formatter: "editActionLink"
       ,
-        name: "allowance"
-        label: "Allowance"
-      ,
         name: "birthday"
-        label: "Birthday"
+        label: "Birthday",
         formatter: (cellVal) -> $filter("date")(cellVal)
       ,
-        name: "paid"
+        name: "creditInfo.allowance"
+        label: "Allowance"
+      ,
+        name: "creditInfo.paid"
         label: "Paid"
       ]
 

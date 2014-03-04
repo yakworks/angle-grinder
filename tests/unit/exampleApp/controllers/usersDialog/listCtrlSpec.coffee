@@ -26,9 +26,9 @@ describe "controller: usersDialog.ListCtrl", ->
       expect($scope.gridOptions.colModel[1].name).to.equal "login"
       expect($scope.gridOptions.colModel[2].name).to.equal "info.email"
       expect($scope.gridOptions.colModel[3].name).to.equal "name"
-      expect($scope.gridOptions.colModel[4].name).to.equal "allowance"
-      expect($scope.gridOptions.colModel[5].name).to.equal "birthday"
-      expect($scope.gridOptions.colModel[6].name).to.equal "paid"
+      expect($scope.gridOptions.colModel[4].name).to.equal "birthday"
+      expect($scope.gridOptions.colModel[5].name).to.equal "creditInfo.allowance"
+      expect($scope.gridOptions.colModel[6].name).to.equal "creditInfo.paid"
 
   describe "mixin: `dialogCrudCtrlMixin`", ->
 

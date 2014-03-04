@@ -10,7 +10,7 @@ class MassUpdateFormCtrl
       grid: grid
 
     # Assign default value for all records
-    $scope.records = allowance: 0
+    $scope.records = creditInfo: allowance: 0
 
 angular.module("exampleApp")
   .controller("users.MassUpdateFormCtrl", MassUpdateFormCtrl)

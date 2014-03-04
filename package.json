@@ -5,6 +5,7 @@
   "dependencies": {
     "coffee-script": "~1.7.1",
     "express": "~3.4.8",
+    "casual": "~1.4.5",
     "underscore": "~1.6.0",
 
     "blueimp-file-upload-node": "~2.1.0",

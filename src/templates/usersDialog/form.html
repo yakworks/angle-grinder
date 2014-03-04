@@ -1,5 +1,5 @@
 <div class="modal-header">
-  <button type="button" class="close" ng-click="closeEditDialog()" aria-hidden="true">&times;</button>
+  <button type="button" class="close" ng-click="closeEditDialog()">&times;</button>
 
   <h3 ng-if="createNew">Create New User</h3>
   <h3 ng-if="!createNew">Edit User {{item.name}}</h3>
@@ -42,12 +42,12 @@
       </div>
     </ng-form>
 
-    <div ag-field-group for="allowance">
+    <div ag-field-group for="creditInfoAllowance">
       <label class="control-label">Allowance</label>
 
       <div class="controls">
-        <input type="text" name="allowance" placeholder="Enter Allowance"
-               ng-model="item.allowance" />
+        <input type="text" name="creditInfoAllowance" placeholder="Enter Allowance"
+               ng-model="item.creditInfo.allowance" />
       </div>
     </div>
 

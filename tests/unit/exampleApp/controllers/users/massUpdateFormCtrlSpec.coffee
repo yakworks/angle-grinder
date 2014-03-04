@@ -19,7 +19,7 @@ describe "controller: users.MassUpdateFormCtrl", ->
 
   it "assigns default value for records", ->
     expect($scope.records).to.not.be.undefined
-    expect($scope.records).to.have.property "allowance", 0
+    expect($scope.records).to.have.deep.property "creditInfo.allowance", 0
 
   describe "mixin: `massUpdateFormCtrlMixin`", ->
 
