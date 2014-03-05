@@ -1,6 +1,12 @@
 describe "controller: gridExample.ListCtrl", ->
-  beforeEach module "exampleApp"
   beforeEach module "templates/gridExample/form.html"
+
+  beforeEach module "angleGrinder.forms", ($provide) ->
+    $provide.decorator "editDialog", ($delegate) ->
+      sinon.spy($delegate, "open")
+      $delegate
+
+  beforeEach module "exampleApp"
 
   $scope = null
   controller = null
@@ -24,37 +30,30 @@ describe "controller: gridExample.ListCtrl", ->
       expect($scope.gridOptions.data.length).to.equal 100
 
     describe "#editItem", ->
-      dialogSpy = null
       resource = null
 
-      beforeEach inject (editDialog) ->
+      beforeEach ->
         resource = id: 123
-
         sinon.stub(controller, "findItemById").withArgs(123).returns(resource)
-        dialogSpy = sinon.spy(editDialog, "open")
 
         $scope.editItem(resource.id)
 
       it "loads a resource", ->
         expect(controller.findItemById.calledWith(123)).to.be.true
 
-      it "opens opens a dialog for editing the the loaded resource", ->
-        expect(dialogSpy.called).to.be.true
-        expect(dialogSpy.calledWith("templates/gridExample/form.html", resource)).to.be.true
+      it "opens opens a dialog for editing the the loaded resource", inject (editDialog) ->
+        expect(editDialog.open.called).to.be.true
+        expect(editDialog.open.calledWith("templates/gridExample/form.html", resource)).to.be.true
 
     describe "#createItem", ->
-      spy = null
 
-      beforeEach inject (editDialog) ->
-        spy = sinon.spy(editDialog, "open")
-
-      it "opens a dialog for creating a new item", ->
+      it "opens a dialog for creating a new item", inject (editDialog) ->
         # When
         $scope.createItem()
 
         # Then
-        expect(spy.called).to.be.true
-        expect(spy.calledWith("templates/gridExample/form.html")).to.be.true
+        expect(editDialog.open.called).to.be.true
+        expect(editDialog.open.calledWith("templates/gridExample/form.html")).to.be.true
 
   describe "controller", ->
 

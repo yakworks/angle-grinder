@@ -27,14 +27,14 @@ describe "module: angleGrinder.alerts", ->
         # Given
         alerts.info("Information..")
         alerts.error("Error..")
-        spy = sinon.spy(alerts, "dispose")
+        sinon.spy(alerts, "dispose")
 
         # When
         $scope.disposeAlert(2)
 
         # Then
-        expect(spy.called).to.be.true
-        expect(spy.calledWith(2)).to.be.true
+        expect(alerts.dispose.called).to.be.true
+        expect(alerts.dispose.calledWith(2)).to.be.true
 
         message = _.findWhere($scope.alertMessages, id: 1)
         expect(message).to.deep.equal id: 1, type: "info", text: "Information.."
@@ -67,19 +67,18 @@ describe "module: angleGrinder.alerts", ->
         expect(alerts.nextId()).to.equal 6
 
     describe "#push", ->
-      spy = null
       beforeEach inject (alerts) ->
-        spy = sinon.spy(alerts, "delayedDispose")
+        sinon.spy(alerts, "delayedDispose")
 
       it "returns an id for the new flash message", inject (alerts) ->
 
         expect(alerts.push("info", "Test..")).to.equal 1
-        expect(spy.called).to.be.true
-        expect(spy.calledWith(1)).to.be.true
+        expect(alerts.delayedDispose.called).to.be.true
+        expect(alerts.delayedDispose.calledWith(1)).to.be.true
 
         expect(alerts.push("error", "Test error..")).to.equal 2
-        expect(spy.called).to.be.true
-        expect(spy.calledWith(2)).to.be.true
+        expect(alerts.delayedDispose.called).to.be.true
+        expect(alerts.delayedDispose.calledWith(2)).to.be.true
 
       describe "#info", ->
         it "pushesh the given message", inject (alerts) ->
@@ -89,12 +88,12 @@ describe "module: angleGrinder.alerts", ->
 
           # When
           alerts.info(testMessage)
-          expect(spy.called).to.be.true
-          expect(spy.calledWith(1)).to.be.true
+          expect(alerts.delayedDispose.called).to.be.true
+          expect(alerts.delayedDispose.calledWith(1)).to.be.true
 
           alerts.info(otherTestMessage)
-          expect(spy.called).to.be.true
-          expect(spy.calledWith(2)).to.be.true
+          expect(alerts.delayedDispose.called).to.be.true
+          expect(alerts.delayedDispose.calledWith(2)).to.be.true
 
           # Then
           firstMessage = _.findWhere(alerts.messages, id: 1)
@@ -110,8 +109,8 @@ describe "module: angleGrinder.alerts", ->
 
           # When
           alerts.error(testMessage)
-          expect(spy.called).to.be.true
-          expect(spy.calledWith(1)).to.be.true
+          expect(alerts.delayedDispose.called).to.be.true
+          expect(alerts.delayedDispose.calledWith(1)).to.be.true
 
           # Then
           message = _.findWhere(alerts.messages, id: 1)

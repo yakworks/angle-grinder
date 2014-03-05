@@ -4,8 +4,8 @@ describe "controller: users.ListCtrl", ->
   # Stub $dialog service
   beforeEach module "ui.bootstrap", ($provide) ->
     $provide.decorator "$dialog", ($delegate) ->
-      dialogOpenStub = sinon.stub(open: angular.noop)
-      sinon.stub($delegate, "dialog").returns(dialogOpenStub)
+      dialog = open: sinon.stub()
+      sinon.stub($delegate, "dialog").returns(dialog)
       $delegate
 
   beforeEach module "angleGrinder.forms", ($provide) ->

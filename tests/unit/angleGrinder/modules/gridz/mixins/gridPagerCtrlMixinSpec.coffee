@@ -17,7 +17,7 @@ describe "module: angleGrinder.gridz", ->
       # stub the grid ctrl
       promiseStub = ->
         deferred = $q.defer()
-        deferred.resolve()
+        deferred.resolve({})
         deferred.promise
 
       gridCtrl =

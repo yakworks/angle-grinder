@@ -99,13 +99,13 @@ describe "module: angleGrinder.gridz", ->
 
       it "calls #resetSearch", ->
         # Given
-        spy = sinon.spy($scope, "resetSearch")
+        sinon.spy($scope, "resetSearch")
 
         # When
         element.click()
 
         # Then
-        expect(spy.called).to.be.true
+        expect($scope.resetSearch.called).to.be.true
 
   describe "directive: agSearchForm", ->
     $scope = null
@@ -116,7 +116,7 @@ describe "module: angleGrinder.gridz", ->
 
       # stub the grid controller
       gridCtrl = search: sinon.stub()
-      gridCtrl.search.returns then: ->
+      gridCtrl.search.returns finally: ->
 
       $scope.grid = users: gridCtrl
 

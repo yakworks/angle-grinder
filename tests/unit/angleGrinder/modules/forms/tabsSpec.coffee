@@ -49,9 +49,10 @@ describe "module: angleGrinder.forms tabs", ->
         context "when the tab stack is empty", ->
 
           it "selects the first tab", ->
-            spy = sinon.spy(ctrl, "selectTab")
+            sinon.spy(ctrl, "selectTab")
             ctrl.addTab(newTab)
-            expect(spy.calledWith(newTab)).to.be.true
+
+            expect(ctrl.selectTab.calledWith(newTab)).to.be.true
             expect(scope.tabs[0].selected).to.be.true
 
         context "when the tab stack is not empty", ->
@@ -59,9 +60,10 @@ describe "module: angleGrinder.forms tabs", ->
             ctrl.addTab($rootScope.$new())
 
           it "does not select the new tab", ->
-            spy = sinon.spy(ctrl, "selectTab")
+            sinon.spy(ctrl, "selectTab")
             ctrl.addTab(newTab)
-            expect(spy.called).to.be.false
+
+            expect(ctrl.selectTab.called).to.be.false
 
       describe "#selectTab", ->
         tabOne = null

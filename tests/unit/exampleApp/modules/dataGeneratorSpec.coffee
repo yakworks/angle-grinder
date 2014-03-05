@@ -21,11 +21,11 @@ describe "module: exampleApp", ->
         expect(random.date).to.not.be.undefined
 
       it "generates a ramdom date", inject (random) ->
-        stub = sinon.stub(random, "range").returns(1372677018884)
+        sinon.stub(random, "range").returns(1372677018884)
 
         minDate = new Date(2001, 1, 1)
         expect(random.date(minDate)).to.equal("2013-07-01")
-        expect(stub.called).to.be.true
+        expect(random.range.called).to.be.true
 
   describe "service: sampleData", ->
     it "is defined", inject (sampleData) ->

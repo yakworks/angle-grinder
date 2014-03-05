@@ -26,9 +26,9 @@ describe "module: exampleApp.grids", ->
       loadError = usersDialogGrid().loadError
       expect(loadError).to.not.be.undefined
 
-      spy = sinon.spy($log, "error")
+      sinon.spy($log, "error")
       loadError("foo")
-      expect(spy.called).to.be.true
+      expect($log.error.called).to.be.true
 
     describe "colModel", ->
 

@@ -26,13 +26,13 @@ describe "controller: tabs.IndexCtrl", ->
     context "when the form is valid", ->
 
       it "saves the dummy form", inject ($log) ->
-        spy = sinon.spy($log, "debug")
+        sinon.spy($log, "debug")
         $scope.save($invalid: false)
-        expect(spy.called).to.be.true
+        expect($log.debug.called).to.be.true
 
     context "when the form is not valid", ->
 
       it "does nothing", inject ($log) ->
-        spy = sinon.spy($log, "debug")
+        sinon.spy($log, "debug")
         $scope.save($invalid: true)
-        expect(spy.called).to.be.false
+        expect($log.debug.called).to.be.false

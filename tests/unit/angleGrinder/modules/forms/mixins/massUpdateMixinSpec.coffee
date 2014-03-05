@@ -4,7 +4,7 @@ describe "module: angleGrinder.forms mixin: massUpdateMixin", ->
 
   beforeEach module "angleGrinder.forms", ($provide) ->
     $provide.decorator "$dialog", ($delegate) ->
-      massUpdateDialog = sinon.stub(open: ->)
+      massUpdateDialog = sinon.stub(open: angular.noop)
       sinon.stub($delegate, "dialog").returns massUpdateDialog
       $delegate
 

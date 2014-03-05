@@ -24,31 +24,6 @@ describe "module: angleGrinder.spinner", ->
       it "reports pending requests", ->
         expect(httpRequestTracker.hasPendingRequests()).to.be.true
 
-    describe "when jquery ajax request is in progress", ->
-      beforeEach -> httpRequestTracker.jqueryAjaxRequest = true
-
-      it "reports pending request", ->
-        expect(httpRequestTracker.hasPendingRequests()).to.be.true
-
-    describe "jquery AJAX calls", ->
-      describe "on ajaxStart", ->
-        beforeEach inject ($timeout) ->
-          httpRequestTracker.jqueryAjaxRequest = false
-          jQuery.event.trigger("ajaxStart")
-          $timeout.flush()
-
-        it "it sets #jqueryAjaxRequest flag to true", ->
-          expect(httpRequestTracker.jqueryAjaxRequest).to.be.true
-
-      describe "on ajaxStop", ->
-        beforeEach inject ($timeout) ->
-          httpRequestTracker.jqueryAjaxRequest = true
-          jQuery.event.trigger("ajaxStop")
-          $timeout.flush()
-
-        it "it sets #jqueryAjaxRequest flag to false", ->
-          expect(httpRequestTracker.jqueryAjaxRequest).to.be.false
-
   describe "controller", ->
     httpRequestTracker = null
     controller = null

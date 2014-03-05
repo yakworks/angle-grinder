@@ -25,7 +25,7 @@ describe "module: angleGrinder.forms mixin: massUpdateFormCtrlMixin", ->
     $rootScope = _$rootScope_
     $scope = $rootScope.$new()
 
-    dialog = sinon.stub(close: ->)
+    dialog = sinon.stub(close: angular.noop)
     selectedIds = [1, 2, 3]
     grid = sinon.stub
       reload: angular.noop,

@@ -1,5 +1,8 @@
 describe "controller: users.FormCtrl", ->
-  beforeEach module "exampleApp"
+
+  beforeEach module "exampleApp", ($provide) ->
+    $provide.value "$location", path: sinon.stub()
+    return
 
   $scope = null
 
@@ -19,25 +22,23 @@ describe "controller: users.FormCtrl", ->
     beforeEach -> form = $valid: true
 
     describe "on success", ->
-      recordSpy = null
-      locationStub = null
+      fakeUser = null
 
-      beforeEach inject ($location) ->
+      beforeEach ->
         fakeUser = id: 123, save: (options) -> options.success(id: 123)
-        recordSpy = sinon.spy(fakeUser, "save")
-        locationStub = sinon.stub($location, "path")
+        sinon.spy(fakeUser, "save")
 
         $scope.save(form, fakeUser)
 
       it "saves a record", ->
-        expect(recordSpy.called).to.be.true
+        expect(fakeUser.save.called).to.be.true
 
-      it "redirects to the show page", ->
-        expect(locationStub.called).to.be.true
-        expect(locationStub.calledWith("/examples/users/123")).to.be.true
+      it "redirects to the show page", inject ($location) ->
+        expect($location.path.called).to.be.true
+        expect($location.path.calledWith("/examples/users/123")).to.be.true
 
     describe "onError", ->
-      recordSpy = null
+      fakeUser = null
 
       beforeEach ->
         fakeUser =
@@ -46,12 +47,12 @@ describe "controller: users.FormCtrl", ->
           save: (options) ->
             options.error(status: 422, data: errors: user: login: "has to be unique")
 
-        recordSpy = sinon.spy(fakeUser, "save")
+        sinon.spy(fakeUser, "save")
 
         $scope.save(form, fakeUser)
 
       it "tries to save a record", ->
-        expect(recordSpy.called).to.be.true
+        expect(fakeUser.save.called).to.be.true
 
       it "sets server side validation errors", ->
         expect(form.$serverError.login).to.equal "has to be unique"

@@ -13,6 +13,7 @@ describe "module: angleGrinder.gridz", ->
 
     sampleGridOptions =
       data: []
+      datatype: "json"
       colModel: [
         name: "id"
         label: "Inv No"
