@@ -36,8 +36,6 @@ describe "module: angleGrinder.forms validations", ->
 
     controlGroup = -> element.find("div.control-group")
 
-    controlGroup = -> element.find("div.control-group")
-
     describe "when the fields are equal", ->
       beforeEach ->
         setPassword "password"
@@ -72,9 +70,9 @@ describe "module: angleGrinder.forms validations", ->
         expect(form.passwordConfirmation.$invalid).to.be.true
         expect(form.passwordConfirmation.$error.mismatch).to.be.true
 
-        $input = element.find("input[name=passwordConfirmation]")
-        expect($input.hasClass("ng-invalid")).to.be.true
-        expect($input.hasClass("ng-invalid-mismatch")).to.be.true
+        inputEl = element.find("input[name=passwordConfirmation]")
+        expect(inputEl.hasClass("ng-invalid")).to.be.true
+        expect(inputEl.hasClass("ng-invalid-mismatch")).to.be.true
 
       it "marks the field group as invalid", ->
         expect(controlGroup().hasClass("error")).to.be.true
@@ -129,8 +127,8 @@ describe "module: angleGrinder.forms validations", ->
       submitForm()
 
       # Then
-      $group = element.find(".control-group")
-      expect($group.hasClass("error")).to.be.true
+      groupEl = element.find(".control-group")
+      expect(groupEl.hasClass("error")).to.be.true
 
     describe "when one of the field is invalid", ->
       beforeEach ->
@@ -139,8 +137,8 @@ describe "module: angleGrinder.forms validations", ->
 
       it "marks the whole group as invalid", ->
         expect($scope.form.$valid).to.be.false
-        $group = element.find(".control-group")
-        expect($group.hasClass("error")).to.be.true
+        groupEl = element.find(".control-group")
+        expect(groupEl.hasClass("error")).to.be.true
 
     describe "when all fields are valid", ->
       beforeEach ->
@@ -150,8 +148,8 @@ describe "module: angleGrinder.forms validations", ->
       it "does not mark the group as invalid", ->
         expect($scope.form.$valid).to.be.true
 
-        $group = element.find(".control-group")
-        expect($group.hasClass("error")).to.be.false
+        groupEl = element.find(".control-group")
+        expect(groupEl.hasClass("error")).to.be.false
 
   describe "directive: agValidationErrors", ->
     element = null
@@ -237,14 +235,14 @@ describe "module: angleGrinder.forms validations", ->
           form.passwordConfirmation.$setViewValue "pass"
 
       it "displays all errors", ->
-        $errors = element.find("ag-validation-errors[for=passwordConfirmation]")
+        errorsEl = element.find("ag-validation-errors[for=passwordConfirmation]")
 
-        expect($errors.find("span").length).to.equal 2
+        expect(errorsEl.find("span").length).to.equal 2
 
-        expect($errors.find("span:nth-child(1)").text())
+        expect(errorsEl.find("span:nth-child(1)").text())
           .to.equal "Too short"
 
-        expect($errors.find("span:nth-child(2)").text())
+        expect(errorsEl.find("span:nth-child(2)").text())
           .to.equal "Does not match the confirmation"
 
   describe "service: validationMessages", ->

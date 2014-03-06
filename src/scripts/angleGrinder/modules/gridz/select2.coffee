@@ -85,8 +85,8 @@ gridz.directive "agSelect2Open", ->
   scope: true
   controller: ["$scope", "$element", ($scope, $element) ->
     $scope.openSelect2 = ->
-      $select = $element.parent().find(".select2-container")
-      $select.select2 "open"
+      selectEl = $element.parent().find(".select2-container")
+      selectEl.select2 "open"
       return
   ]
   template: """

@@ -3,12 +3,8 @@ class Gridz
     @init element, options
 
   init: (element, opts) ->
-    $el = $(element)
-
-    @$element = $el
-    @$el = $el
-    @$grid = $el
-    @gridId = $el.attr("id")
+    @gridEl = $(element)
+    @gridId = @gridEl.attr("id")
 
     # the containing div for the grid, will be built after jqGrid is called
     @gboxId = "gbox_#{@gridId}"
@@ -17,7 +13,7 @@ class Gridz
     @addRowActionColumn() if @options.actionPopup
 
     # call the jqgrid
-    $el.jqGrid @options
+    @gridEl.jqGrid @options
 
     @responsiveResize()
 
@@ -36,7 +32,7 @@ class Gridz
     options.gridComplete = =>
       @gridComplete.apply @
       _gridComplete.apply this, arguments if $.isFunction(_gridComplete)
-      @$grid.trigger "gridComplete"
+      @gridEl.trigger "gridComplete"
 
     # if sortable is true then add exclusion for the action column
     if options.actionPopup and options.sortable
@@ -54,23 +50,17 @@ class Gridz
   Handles proper multi selection of rows
   ###
   beforeSelectRow: (rowid, e) ->
-    rows = @$grid[0].rows
+    rows = @gridEl[0].rows
 
     # get id of the previous selected row
-    startId = @$grid.jqGrid("getGridParam", "selrow")
-    startRow = undefined
-    endRow = undefined
-    iStart = undefined
-    iEnd = undefined
-    i = undefined
-    rowidIndex = undefined
+    startId = @gridEl.jqGrid("getGridParam", "selrow")
     isCheckBox = $(e.target).hasClass("cbox")
 
     if not e.ctrlKey and not e.shiftKey and not e.metaKey and not isCheckBox
-      @$grid.jqGrid "resetSelection"
+      @gridEl.jqGrid "resetSelection"
     else if startId and e.shiftKey
 
-      @$grid.jqGrid "resetSelection"
+      @gridEl.jqGrid "resetSelection"
 
       # get DOM elements of the previous selected and
       # the currect selected rows
@@ -87,7 +77,7 @@ class Gridz
         while i <= iEnd
           # the row with rowid will be selected by
           # jqGrid. So we don't need select it
-          @$grid.jqGrid "setSelection", rows[i].id, false if i isnt rowidIndex
+          @gridEl.jqGrid "setSelection", rows[i].id, false if i isnt rowidIndex
           i++
 
       # clear text selection
@@ -102,9 +92,8 @@ class Gridz
   This will work for reponsive and fluid layouts
   ###
   responsiveResize: ->
-    $grid = @$element
-    gboxId = "#gbox_#{$grid.attr("id")}"
-    $(window).on "resize", (event, ui) ->
+    gboxId = "#gbox_#{@gridEl.attr("id")}"
+    $(window).on "resize", (event, ui) =>
 
       # Get width of parent container which is assumed to be expanded to span
       parWidth = $(gboxId).parent().width()
@@ -112,7 +101,7 @@ class Gridz
       w = parWidth - 1 # add -1 Fudge factor to prevent horizontal scrollbars
 
       if Math.abs(w - curWidth) > 2
-        $grid.setGridWidth w
+        @gridEl.setGridWidth w
 
   #*************Action popup methods*************
 
@@ -122,7 +111,7 @@ class Gridz
   addRowActionColumn: ->
     self = this
     opts = @options
-    containerId = "gbox_#{@$element.attr("id")}"
+    containerId = "gbox_#{@gridEl.attr("id")}"
     opts.colModel.unshift
       name: "-row_action_col" # can't resize
       label: " "
@@ -149,8 +138,8 @@ class Gridz
   actionPopupSetup: ->
     self = this
     options = @options
-    actionMenu = undefined
 
+    actionMenu = ""
     if options.actionPopup.menuList
       actionMenu = options.actionPopup.menuList
     else
@@ -183,27 +172,25 @@ class Gridz
   # fired when the clickover is shown
   actionPopupOnShow: (clickoverEl) ->
     self = this
+    id = $(clickoverEl.$element, @gridEl.rows).parents("tr:first").attr("id")
 
-    $grid = @$element
-    id = $(clickoverEl.$element, $grid.rows).parents("tr:first").attr("id")
+    @gridEl.data "actionRowId", id
+    @gridEl.jqGrid "resetSelection"
+    @gridEl.jqGrid "setSelection", id
 
-    $grid.data "actionRowId", id
-    $grid.jqGrid "resetSelection"
-    $grid.jqGrid "setSelection", id
+    menuEl = $("##{self.gboxId} .dropdown-menu")
 
-    $menu = $("##{self.gboxId} .dropdown-menu")
-
-    $menu.on "click", "li a.row_action_show", (e) ->
+    menuEl.on "click", "li a.row_action_show", (e) =>
       e.preventDefault()
-      $grid.trigger "showAction", [id, self]
+      @gridEl.trigger "showAction", [id, self]
 
-    $menu.on "click", "li a.row_action_edit", (e) ->
+    menuEl.on "click", "li a.row_action_edit", (e) =>
       e.preventDefault()
-      $grid.trigger "editAction", [id, self]
+      @gridEl.trigger "editAction", [id, self]
 
-    $menu.on "click", "li a.row_action_delete", (e) ->
+    menuEl.on "click", "li a.row_action_delete", (e) =>
       e.preventDefault()
-      $grid.trigger "deleteAction", [id, self]
+      @gridEl.trigger "deleteAction", [id, self]
 
 # register namespace
 $.extend true, window, grinder: Grid: Gridz
@@ -217,11 +204,13 @@ $.fn.gridz = (option) ->
       instance[option].apply this, otherArgs
     else # try passing through to jqgrid
     return $(this).jqGrid(arguments)
+
   @each ->
-    $this = $(this)
-    instance = $this.data("gridz")
+    el = $(this)
+
+    instance = el.data("gridz")
     options = if typeof option is "object" then option else {}
-    $this.data "gridz", (instance = new Gridz(this, options)) unless instance
+    el.data "gridz", (instance = new Gridz(this, options)) unless instance
 
 $.fn.gridz.Constructor = Gridz
 

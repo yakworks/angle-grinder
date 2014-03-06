@@ -14,15 +14,15 @@ forms.directive "agPanelsRow", ->
       $log.debug "[agPanelsRow] equalizing heights for", $element, "max height is #{maxHeight}px"
 
       # iterate thought all panels and re-calculate the height
-      for $panel in @panels
+      for panelEl in @panels
         # default padding
         paddings = 30
 
         # add heading and footer
-        paddings += $panel.find(".panel-heading").outerHeight()
-        paddings += $panel.find(".panel-footer").outerHeight()
+        paddings += panelEl.find(".panel-heading").outerHeight()
+        paddings += panelEl.find(".panel-footer").outerHeight()
 
-        $panel.find(".panel-body").css("min-height", maxHeight - paddings)
+        panelEl.find(".panel-body").css("min-height", maxHeight - paddings)
 
     unregister = $scope.$watch ->
       # do nothing when the element is not visible

@@ -119,52 +119,52 @@ describe "module: angleGrinder.forms tabs", ->
         $httpBackend.flush()
 
       it "renders the tabs", ->
-        firstTab = findTabByTitle("First")
-        expect(firstTab.isolateScope().selected).to.be.true
-        expect(firstTab.hasClass("active")).to.be.true
+        firstTabEl = findTabByTitle("First")
+        expect(firstTabEl.isolateScope().selected).to.be.true
+        expect(firstTabEl.hasClass("active")).to.be.true
 
-        secondTab = findTabByTitle("Second")
-        expect(secondTab.isolateScope().selected).to.be.false
-        expect(secondTab.hasClass("active")).to.be.false
+        secondTabEl = findTabByTitle("Second")
+        expect(secondTabEl.isolateScope().selected).to.be.false
+        expect(secondTabEl.hasClass("active")).to.be.false
 
       it "creates clickable titles", ->
-        titles = element.find(".nav.nav-tabs li")
-        expect(titles).to.have.length(3)
+        titlesEl = element.find(".nav.nav-tabs li")
+        expect(titlesEl).to.have.length(3)
 
-        expect(titles.find("a").eq(0).text()).to.eq "First"
-        expect(titles.find("a").eq(1).text()).to.eq "Second"
-        expect(titles.find("a").eq(2).text()).to.eq "Third"
+        expect(titlesEl.find("a").eq(0).text()).to.eq "First"
+        expect(titlesEl.find("a").eq(1).text()).to.eq "Second"
+        expect(titlesEl.find("a").eq(2).text()).to.eq "Third"
 
       it "by default displays the first tab content", ->
         expect(element.find(".tab.container").text()).to.include "First"
 
       describe "on click on the nav tab", ->
-        tab = null
+        tabEl = null
 
         context "when the tab is not selected", ->
 
           beforeEach inject ($httpBackend) ->
             $httpBackend.whenGET("/ag-demo/tabs/second").respond "Second"
 
-            tab = findTabByTitle("Second")
-            tab.find("a").click()
+            tabEl = findTabByTitle("Second")
+            tabEl.find("a").click()
 
           it "displays loading spinners", inject ($httpBackend) ->
             # ...should show the spinner when the template loading is in progress
-            expect(tab.isolateScope().loading).to.be.true
+            expect(tabEl.isolateScope().loading).to.be.true
             expect(element.scope().contentLoading).to.be.true
 
             # ...loading is finished
             $httpBackend.flush()
 
             # ...should hide the spinners
-            expect(tab.isolateScope().loading).to.be.false
+            expect(tabEl.isolateScope().loading).to.be.false
             expect(element.scope().contentLoading).to.be.false
 
           it "changes the active tab", inject ($httpBackend) ->
             $httpBackend.flush()
-            expect(tab.isolateScope().selected).to.be.true
-            expect(tab.hasClass("active")).to.be.true
+            expect(tabEl.isolateScope().selected).to.be.true
+            expect(tabEl.hasClass("active")).to.be.true
 
           it "loads the content for the activated tab", inject ($httpBackend) ->
             $httpBackend.flush()
@@ -172,8 +172,8 @@ describe "module: angleGrinder.forms tabs", ->
 
         context "when the tab is already selected", ->
           beforeEach ->
-            tab = findTabByTitle("First")
-            tab.find("a").click()
+            tabEl = findTabByTitle("First")
+            tabEl.find("a").click()
 
           it "does nothing", inject ($httpBackend) ->
             $httpBackend.verifyNoOutstandingRequest()
@@ -194,9 +194,9 @@ describe "module: angleGrinder.forms tabs", ->
         $httpBackend.flush()
 
       it "sets the tab as active", ->
-        tab = findTabByTitle("Second")
-        expect(tab.isolateScope().selected).to.be.true
-        expect(tab.hasClass("active")).to.be.true
+        tabEl = findTabByTitle("Second")
+        expect(tabEl.isolateScope().selected).to.be.true
+        expect(tabEl.hasClass("active")).to.be.true
 
       it "loads the content for the activated tab", ->
         expect(element.find(".tab.container").text()).to.include "Second"

@@ -130,17 +130,17 @@ describe "module: angleGrinder.gridz", ->
       """, $injector, $scope
 
     describe "on submit button click", ->
-      $searchButton = null
+      searchButtonEl = null
 
       beforeEach ->
         directiveScope = element.scope()
-        $searchButton = element.find("button")
+        searchButtonEl = element.find("button")
 
         $scope.$apply -> directiveScope.searchForm.name.$setViewValue "find me"
 
       it "calls #advancedSearch", ->
         # When
-        $searchButton.click()
+        searchButtonEl.click()
 
         # Then
         expect($scope.grid.users.search.called).to.be.true
@@ -148,20 +148,20 @@ describe "module: angleGrinder.gridz", ->
 
       it "disables the submit button", ->
         # When
-        $searchButton.click()
+        searchButtonEl.click()
 
         # Then
-        expect($searchButton.is(":disabled")).to.be.true
+        expect(searchButtonEl.is(":disabled")).to.be.true
 
     describe "on reset button click", ->
-      $resetButton = null
+      resetButtonEl = null
 
       beforeEach ->
-        $resetButton = element.find("button#reset")
+        resetButtonEl = element.find("button#reset")
 
       it "calls #resetSearch", ->
         # When
-        $resetButton.click()
+        resetButtonEl.click()
 
         # Then
         expect($scope.grid.users.search.called).to.be.true
@@ -169,7 +169,7 @@ describe "module: angleGrinder.gridz", ->
 
       it "disables the reset button", ->
         # When
-        $resetButton.click()
+        resetButtonEl.click()
 
         # Then
-        expect($resetButton.is(":disabled")).to.be.true
+        expect(resetButtonEl.is(":disabled")).to.be.true
