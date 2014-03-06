@@ -45,13 +45,3 @@ app.config [
     # register http errors interceptor
     $httpProvider.interceptors.push("httpErrorsInterceptor")
 ]
-
-app.run [
-  "$log", "alerts", ($log, alerts) ->
-
-    # Catch all jquery xhr errors
-    $(document).ajaxError (event, jqxhr, settings, exception) ->
-      $log.error("Network error:", event, jqxhr, settings, exception)
-      alerts.error(exception)
-
-]

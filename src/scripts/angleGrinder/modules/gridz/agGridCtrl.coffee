@@ -11,9 +11,6 @@ gridz.controller "AgGridCtrl", class
   registerGridElement: ($grid) ->
     @$grid = $grid
 
-    @$grid.on "jqGridAfterLoadComplete", (event, data) =>
-      @$rootScope.$broadcast "gridz:loadComplete", event, data
-
   getGridId: ->
     @$grid.attr("id")
 
@@ -30,11 +27,20 @@ gridz.controller "AgGridCtrl", class
   getRowData: (rowId = null) ->
     @$grid.getRowData(rowId)
 
+  # Populates the grid with the given data.
+  addJSONData: (data) ->
+    # The addJSONData is very old method which uses still expandos
+    # to the DOM element of the grid (<table> element).
+    @$grid.get(0).addJSONData(data)
+
+    # broadcasts the AngularJS event
+    @$rootScope.$broadcast "gridz:loadComplete", data
+
   # Reloads the grid with the current settings
   reload: ->
     deferred = @$q.defer()
 
-    unregister = @$rootScope.$on "gridz:loadComplete", (_, event, data) ->
+    unregister = @$rootScope.$on "gridz:loadComplete", (_, data) ->
       deferred.resolve(data)
       unregister()
 

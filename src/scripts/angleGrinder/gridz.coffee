@@ -235,7 +235,11 @@ $.fn.gridz.defaults =
   jsonReader:
     repeatitems: false
 
+  # Defines in what format to expect the data that fills the grid.
+  #   json  - use internal jqgrid function to load the data via ajax
+  #   local - use local data
   datatype: "json"
+
   mtype: "GET" # for the ajax json read
   rowNum: 20 # num rows to show by default
   rowList: [10, 20, 50, 100]

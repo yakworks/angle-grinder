@@ -4,16 +4,16 @@ gridz = angular.module("angleGrinder.gridz", [
 ])
 
 gridz.directive "agGrid", [
-  "$log", "$parse", "actionPopupHandler", "pathWithContext", "camelize",
-  ($log, $parse, actionPopupHandler, pathWithContext, camelize) ->
+  "$log", "$parse", "agGridDataLoader", "actionPopupHandler", "pathWithContext", "camelize",
+  ($log, $parse, agGridDataLoader, actionPopupHandler, pathWithContext, camelize) ->
 
-    link = (scope, element, attrs, controller) ->
+    link = (scope, element, attrs, gridCtrl) ->
       # initialize the controller
-      controller.registerGridElement(element.find("table.gridz"))
+      gridCtrl.registerGridElement(element.find("table.gridz"))
 
       # publish agGrid controller to the parent scope
       alias = attrs.agGridName
-      $parse(alias).assign(scope, controller) if alias
+      $parse(alias).assign(scope, gridCtrl) if alias
 
       # read grid options
       options = $parse(attrs.agGrid)(scope)
@@ -27,21 +27,25 @@ gridz.directive "agGrid", [
         $log.info "Initializing '#{alias}' with", options
 
         # find grid placeholder
-        $grid = element.find("table.gridz")
+        gridEl = element.find("table.gridz")
 
         # assign the url
         if not options.url? and options.path?
           options.url = pathWithContext(options.path)
+
+        # use `$http` service to load the grid data
+        if options.datatype is undefined or options.datatype is null
+          options.datatype = agGridDataLoader(options.url, gridCtrl)
 
         # jqGrid suks at this point it expects `pager` to be an id
         unless options.pager is false
           options.pager = element.find(".gridz-pager").attr("id") or "gridz-pager"
 
         # initialize jqGrid on the given element
-        $grid.gridz(options)
+        gridEl.gridz(options)
 
         # initialize actionPopup handler
-        actionPopupHandler($grid, scope)
+        actionPopupHandler(gridEl, scope)
 
       if element.is(":visible")
         # Element is visible, initialize the grid now
