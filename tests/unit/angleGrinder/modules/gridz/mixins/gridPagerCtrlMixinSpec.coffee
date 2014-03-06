@@ -57,13 +57,13 @@ describe "module: angleGrinder.gridz", ->
           $scope.$digest()
 
         it "does not load the previous page", ->
-          expect(gridCtrl.prevPage.called).to.be.false
+          expect(gridCtrl.prevPage).to.not.have.been.called
 
         it "sets the current row id", ->
           expect($scope.current.id).to.eq "1"
 
         it "navigates to the previous row", inject ($location) ->
-          expect($location.path.called).to.be.true
+          expect($location.path).to.have.been.called
 
           newPath = $location.path.firstCall.args[0]
           expect(newPath).to.eq "/products/1"
@@ -78,13 +78,13 @@ describe "module: angleGrinder.gridz", ->
           $scope.$apply()
 
         it "loads the previous page", ->
-          expect(gridCtrl.prevPage.called).to.be.true
+          expect(gridCtrl.prevPage).to.have.been.called
 
         it "sets the current row id", ->
           expect($scope.current.id).to.eq "789"
 
         it "navigates to the previous row", inject ($location) ->
-          expect($location.path.called).to.be.true
+          expect($location.path).to.have.been.called
 
           newPath = $location.path.firstCall.args[0]
           expect(newPath).to.eq "/products/789"
@@ -104,13 +104,13 @@ describe "module: angleGrinder.gridz", ->
           $scope.$digest()
 
         it "does not load the next page", ->
-          expect(gridCtrl.nextPage.called).to.be.false
+          expect(gridCtrl.nextPage).to.not.have.been.called
 
         it "sets the current row id", ->
           expect($scope.current.id).to.eq "4"
 
         it "navigates to the next row", inject ($location) ->
-          expect($location.path.called).to.be.true
+          expect($location.path).to.have.been.called
 
           newPath = $location.path.firstCall.args[0]
           expect(newPath).to.eq "/products/4"
@@ -125,13 +125,13 @@ describe "module: angleGrinder.gridz", ->
           $scope.$digest()
 
         it "loads the next page", ->
-          expect(gridCtrl.nextPage.called).to.be.true
+          expect(gridCtrl.nextPage).to.have.been.called
 
         it "sets the current row id", ->
           expect($scope.current.id).to.eq "123"
 
         it "navigates to the next row", inject ($location) ->
-          expect($location.path.called).to.be.true
+          expect($location.path).to.have.been.called
 
           newPath = $location.path.firstCall.args[0]
           expect(newPath).to.eq "/products/123"

@@ -39,11 +39,11 @@ describe "controller: gridExample.ListCtrl", ->
         $scope.editItem(resource.id)
 
       it "loads a resource", ->
-        expect(controller.findItemById.calledWith(123)).to.be.true
+        expect(controller.findItemById).to.have.been.calledWith(123)
 
       it "opens opens a dialog for editing the the loaded resource", inject (editDialog) ->
-        expect(editDialog.open.called).to.be.true
-        expect(editDialog.open.calledWith("templates/gridExample/form.html", resource)).to.be.true
+        expect(editDialog.open).to.have.been.called
+        expect(editDialog.open).to.have.been.calledWith("templates/gridExample/form.html", resource)
 
     describe "#createItem", ->
 
@@ -52,8 +52,8 @@ describe "controller: gridExample.ListCtrl", ->
         $scope.createItem()
 
         # Then
-        expect(editDialog.open.called).to.be.true
-        expect(editDialog.open.calledWith("templates/gridExample/form.html")).to.be.true
+        expect(editDialog.open).to.have.been.called
+        expect(editDialog.open).to.have.been.calledWith("templates/gridExample/form.html")
 
   describe "controller", ->
 

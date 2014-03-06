@@ -21,10 +21,10 @@ describe "module: angleGrinder.forms mixin: singlePageCrudCtrlMixin", ->
   describe "mixin: `dialogCrudCtrlMixin`", ->
 
     it "is mixed", inject (dialogCrudCtrlMixin) ->
-      expect(dialogCrudCtrlMixin.called).to.be.true
+      expect(dialogCrudCtrlMixin).to.have.been.called
 
     it "is mixed with valid arguments", inject (dialogCrudCtrlMixin) ->
-      expect(dialogCrudCtrlMixin.calledWith($scope)).to.be.true
+      expect(dialogCrudCtrlMixin).to.have.been.calledWith($scope)
 
       args = dialogCrudCtrlMixin.getCall(0).args[1]
       expect(args).to.have.property "Resource", "Users"
@@ -38,8 +38,8 @@ describe "module: angleGrinder.forms mixin: singlePageCrudCtrlMixin", ->
     it "navigates to the show record page", inject ($location) ->
       $scope.showItem(123)
 
-      expect($location.path.called).to.be.true
-      expect($location.path.calledWith("/path_to_the_resource/123")).to.be.true
+      expect($location.path).to.have.been.called
+      expect($location.path).to.have.been.calledWith("/path_to_the_resource/123")
 
   describe "#editItem", ->
 
@@ -49,5 +49,5 @@ describe "module: angleGrinder.forms mixin: singlePageCrudCtrlMixin", ->
     it "navigates to the edit record page", inject ($location) ->
       $scope.editItem(456)
 
-      expect($location.path.called).to.be.true
-      expect($location.path.calledWith("/path_to_the_resource/456/edit")).to.be.true
+      expect($location.path).to.have.been.called
+      expect($location.path).to.have.been.calledWith("/path_to_the_resource/456/edit")

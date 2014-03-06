@@ -36,8 +36,8 @@ describe "controller: users.ShowCtrl", ->
         $scope.delete(user)
 
       it "deletes a record", ->
-        expect(user.delete.called).to.be.true
+        expect(user.delete).to.have.been.called
 
       it "redirects to the users list page", inject ($location) ->
-        expect($location.path.called).to.be.true
-        expect($location.path.calledWith("/examples/users")).to.be.true
+        expect($location.path).to.have.been.called
+        expect($location.path).to.have.been.calledWith("/examples/users")

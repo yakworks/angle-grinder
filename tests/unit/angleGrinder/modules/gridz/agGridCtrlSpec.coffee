@@ -29,8 +29,8 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
       ctrl.reload()
 
       # Then
-      expect(jqGridEl.trigger.called).to.be.true
-      expect(jqGridEl.trigger.calledWith("reloadGrid")).to.be.true
+      expect(jqGridEl.trigger).to.have.been.called
+      expect(jqGridEl.trigger).to.have.been.calledWith("reloadGrid")
 
     it "returns a promise", inject ($rootScope) ->
       # When
@@ -57,8 +57,8 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
       ctrl.setParam(foo: "bar")
 
       # Then
-      expect(jqGridEl.setGridParam.called).to.be.true
-      expect(jqGridEl.setGridParam.calledWith(foo: "bar")).to.be.true
+      expect(jqGridEl.setGridParam).to.have.been.called
+      expect(jqGridEl.setGridParam).to.have.been.calledWith(foo: "bar")
 
   describe "#updateRow", ->
 
@@ -69,24 +69,24 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
         ctrl.updateRow(123, foo: "bar")
 
         # Then
-        expect(jqGridEl.setRowData.called).to.be.true
-        expect(jqGridEl.setRowData.calledWith(123, foo: "bar")).to.be.true
+        expect(jqGridEl.setRowData).to.have.been.called
+        expect(jqGridEl.setRowData).to.have.been.calledWith(123, foo: "bar")
 
       it "flattens data before inserting it to the grid", inject (flatten) ->
         # When
         ctrl.updateRow(123, foo: bar: "biz")
 
         # Then
-        expect(flatten.called).to.be.true
-        expect(flatten.calledWith(foo: bar: "biz")).to.be.true
+        expect(flatten).to.have.been.called
+        expect(flatten).to.have.been.calledWith(foo: bar: "biz")
 
       it "flashes the updated row", ->
         # Given
         ctrl.updateRow(123, foo: "bar")
 
         # Then
-        expect(ctrl.flashOnSuccess.called).to.be.true
-        expect(ctrl.flashOnSuccess.calledWith(123)).to.be.true
+        expect(ctrl.flashOnSuccess).to.have.been.called
+        expect(ctrl.flashOnSuccess).to.have.been.calledWith(123)
 
     context "when the new data contain empty values", ->
       beforeEach ->
@@ -100,7 +100,7 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
         ctrl.updateRow(123, foo: "bar", baz: "baz", bar: {})
 
         # Then
-        expect(jqGridEl.setRowData.called).to.be.true
+        expect(jqGridEl.setRowData).to.have.been.called
 
         args = jqGridEl.setRowData.getCall(0).args
         expect(args[0]).to.eq 123
@@ -114,8 +114,8 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
         ctrl.addRow(234, foo: "biz")
 
         # Then
-        expect(jqGridEl.addRowData.called).to.be.true
-        expect(jqGridEl.addRowData.calledWith(234, foo: "biz", "first")).to.be.true
+        expect(jqGridEl.addRowData).to.have.been.called
+        expect(jqGridEl.addRowData).to.have.been.calledWith(234, foo: "biz", "first")
 
     describe "when the position is specified", ->
       it "adds a row at the specified position", ->
@@ -123,24 +123,24 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
         ctrl.addRow(234, foo: "biz", "last")
 
         # Then
-        expect(jqGridEl.addRowData.called).to.be.true
-        expect(jqGridEl.addRowData.calledWith(234, foo: "biz", "last")).to.be.true
+        expect(jqGridEl.addRowData).to.have.been.called
+        expect(jqGridEl.addRowData).to.have.been.calledWith(234, foo: "biz", "last")
 
     it "flattens data before inserting it to the grid", inject (flatten) ->
       # When
       ctrl.addRow(234, foo: bar: "baz")
 
       # Then
-      expect(flatten.called).to.be.true
-      expect(flatten.calledWith(foo: bar: "baz")).to.be.true
+      expect(flatten).to.have.been.called
+      expect(flatten).to.have.been.calledWith(foo: bar: "baz")
 
     it "flashes the inserted row", ->
       # When
       ctrl.addRow(234, foo: "bar")
 
       # Then
-      expect(ctrl.flashOnSuccess.called).to.be.true
-      expect(ctrl.flashOnSuccess.calledWith(234)).to.be.true
+      expect(ctrl.flashOnSuccess).to.have.been.called
+      expect(ctrl.flashOnSuccess).to.have.been.calledWith(234)
 
     it "broadcasts `gridz:rowAdded` event", inject ($rootScope) ->
       # Given
@@ -148,8 +148,8 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
 
       # When
       ctrl.addRow(234, foo: "bar")
-      expect($rootScope.$broadcast.called).to.be.true
-      expect($rootScope.$broadcast.calledWith("gridz:rowAdded", 234, foo: "bar")).to.be.true
+      expect($rootScope.$broadcast).to.have.been.called
+      expect($rootScope.$broadcast).to.have.been.calledWith("gridz:rowAdded", 234, foo: "bar")
 
       # stop spying
       $rootScope.$broadcast.restore()
@@ -164,10 +164,10 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
         ctrl.saveRow(123, foo: "bar")
 
         # Then
-        expect(jqGridEl.setRowData.called).to.be.true
-        expect(jqGridEl.setRowData.calledWith(123, foo: "bar")).to.be.true
+        expect(jqGridEl.setRowData).to.have.been.called
+        expect(jqGridEl.setRowData).to.have.been.calledWith(123, foo: "bar")
 
-        expect(jqGridEl.addRowData.called).to.be.false
+        expect(jqGridEl.addRowData).to.not.have.been.called
 
     describe "otherwise", ->
       beforeEach -> jqGridEl.getInd.returns(false)
@@ -177,10 +177,10 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
         ctrl.saveRow(234, foo: "biz")
 
         # Then
-        expect(jqGridEl.addRowData.called).to.be.true
-        expect(jqGridEl.addRowData.calledWith(234, foo: "biz", "first")).to.be.true
+        expect(jqGridEl.addRowData).to.have.been.called
+        expect(jqGridEl.addRowData).to.have.been.calledWith(234, foo: "biz", "first")
 
-        expect(jqGridEl.setRowData.called).to.be.false
+        expect(jqGridEl.setRowData).to.not.have.been.called
 
   describe "#hasRow", ->
 
@@ -193,8 +193,8 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
         expect(ctrl.hasRow(123)).to.be.true
 
         # Then
-        expect(jqGridEl.getInd.called).to.be.true
-        expect(jqGridEl.getInd.calledWith(123)).to.be.true
+        expect(jqGridEl.getInd).to.have.been.called
+        expect(jqGridEl.getInd).to.have.been.calledWith(123)
 
     describe "otherwise", ->
       it "returns false", ->
@@ -205,8 +205,8 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
         expect(ctrl.hasRow(234)).to.be.false
 
         # Then
-        expect(jqGridEl.getInd.called).to.be.true
-        expect(jqGridEl.getInd.calledWith(234)).to.be.true
+        expect(jqGridEl.getInd).to.have.been.called
+        expect(jqGridEl.getInd).to.have.been.calledWith(234)
 
   describe "#getIds", ->
     it "returns an array of the id's in the current grid view", ->
@@ -217,7 +217,7 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
       expect(ctrl.getIds()).to.deep.eq [1, 2, 3]
 
       # Then
-      expect(jqGridEl.getDataIDs.called).to.be.true
+      expect(jqGridEl.getDataIDs).to.have.been.called
 
   describe "#removeRow", ->
     it "removes a row with the given id", ->
@@ -229,16 +229,16 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
       ctrl.removeRow(123)
 
       # Then
-      expect(jqGridEl.delRowData.called).to.be.true
-      expect(jqGridEl.delRowData.calledWith(123)).to.be.true
+      expect(jqGridEl.delRowData).to.have.been.called
+      expect(jqGridEl.delRowData).to.have.been.calledWith(123)
 
     it "flashes the removed row", ->
       # Given
       ctrl.removeRow(345)
 
       # Then
-      expect(ctrl.flashOnSuccess.called).to.be.true
-      expect(ctrl.flashOnSuccess.calledWith(345)).to.be.true
+      expect(ctrl.flashOnSuccess).to.have.been.called
+      expect(ctrl.flashOnSuccess).to.have.been.calledWith(345)
 
   describe "#search", ->
     it "sets search filters and triggers grid reload", ->
@@ -246,11 +246,11 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
       ctrl.search(login: "foo")
 
       # Then
-      expect(jqGridEl.setGridParam.called).to.be.true
-      expect(jqGridEl.setGridParam.calledWith(search: true, postData: filters: '{"login":"foo"}')).to.be.true
+      expect(jqGridEl.setGridParam).to.have.been.called
+      expect(jqGridEl.setGridParam).to.have.been.calledWith(search: true, postData: filters: '{"login":"foo"}')
 
-      expect(jqGridEl.trigger.called).to.be.true
-      expect(jqGridEl.trigger.calledWith("reloadGrid")).to.be.true
+      expect(jqGridEl.trigger).to.have.been.called
+      expect(jqGridEl.trigger).to.have.been.calledWith("reloadGrid")
 
     it "returns a promise", inject ($rootScope) ->
       # Given
@@ -281,8 +281,8 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
       ctrl.getRowData(567)
 
       # Then
-      expect(jqGridEl.getRowData.called).to.be.true
-      expect(jqGridEl.getRowData.calledWith(567)).to.be.true
+      expect(jqGridEl.getRowData).to.have.been.called
+      expect(jqGridEl.getRowData).to.have.been.calledWith(567)
 
   describe "#addJSONData", ->
     stub = null
@@ -298,10 +298,10 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
       $rootScope.$broadcast.restore()
 
     it "poulates the grid with the given data", ->
-      expect(stub.called).to.be.true
+      expect(stub).to.have.been.called
 
     it "broadcasts `gridz:loadComplete` event", inject ($rootScope) ->
-      expect($rootScope.$broadcast.called).to.be.true
+      expect($rootScope.$broadcast).to.have.been.called
 
   describe "#isColumnHidden", ->
 
@@ -331,23 +331,23 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
       beforeEach -> ctrl.toggleColumn("foo")
 
       it "shows the column", ->
-        expect(jqGridEl.jqGrid.called).to.be.true
-        expect(jqGridEl.jqGrid.calledWith("showCol", "foo")).to.be.true
+        expect(jqGridEl.jqGrid).to.have.been.called
+        expect(jqGridEl.jqGrid).to.have.been.calledWith("showCol", "foo")
 
       it "resizes the grid", ->
-        expect(jqGridEl.trigger.called).to.be.true
-        expect(jqGridEl.trigger.calledWith("resize")).to.be.true
+        expect(jqGridEl.trigger).to.have.been.called
+        expect(jqGridEl.trigger).to.have.been.calledWith("resize")
 
     describe "when the column is not hidden", ->
       beforeEach -> ctrl.toggleColumn("bar")
 
       it "hides the column", ->
-        expect(jqGridEl.jqGrid.called).to.be.true
-        expect(jqGridEl.jqGrid.calledWith("hideCol", "bar")).to.be.true
+        expect(jqGridEl.jqGrid).to.have.been.called
+        expect(jqGridEl.jqGrid).to.have.been.calledWith("hideCol", "bar")
 
       it "resizes the grid", ->
-        expect(jqGridEl.trigger.called).to.be.true
-        expect(jqGridEl.trigger.calledWith("resize")).to.be.true
+        expect(jqGridEl.trigger).to.have.been.called
+        expect(jqGridEl.trigger).to.have.been.calledWith("resize")
 
   describe "#columnChooser", ->
     it "is defined", ->
@@ -358,8 +358,8 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
       ctrl.columnChooser()
 
       # Then
-      expect(jqGridEl.jqGrid.called).to.be.true
-      expect(jqGridEl.jqGrid.calledWith("columnChooser")).to.be.true
+      expect(jqGridEl.jqGrid).to.have.been.called
+      expect(jqGridEl.jqGrid).to.have.been.calledWith("columnChooser")
 
   describe "pagination", ->
 
@@ -396,8 +396,8 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
         ctrl.firstPage()
 
         # Then
-        expect(jqGridEl.setGridParam.calledWith(page: 1)).to.be.true
-        expect(jqGridEl.trigger.calledWith("reloadGrid")).to.be.true
+        expect(jqGridEl.setGridParam).to.have.been.calledWith(page: 1)
+        expect(jqGridEl.trigger).to.have.been.calledWith("reloadGrid")
 
       it "returns a promise", ->
         promise = ctrl.firstPage()
@@ -416,8 +416,8 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
           ctrl.prevPage()
 
           # Then
-          expect(jqGridEl.setGridParam.calledWith(page: 2)).to.be.true
-          expect(jqGridEl.trigger.calledWith("reloadGrid")).to.be.true
+          expect(jqGridEl.setGridParam).to.have.been.calledWith(page: 2)
+          expect(jqGridEl.trigger).to.have.been.calledWith("reloadGrid")
 
         it "returns a promise", ->
           promise = ctrl.prevPage()
@@ -431,8 +431,8 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
           ctrl.prevPage()
 
           # Then
-          expect(jqGridEl.setGridParam.calledWith(page: 100)).to.be.true
-          expect(jqGridEl.trigger.calledWith("reloadGrid")).to.be.true
+          expect(jqGridEl.setGridParam).to.have.been.calledWith(page: 100)
+          expect(jqGridEl.trigger).to.have.been.calledWith("reloadGrid")
 
         it "returns a promise", ->
           promise = ctrl.prevPage()
@@ -451,8 +451,8 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
           ctrl.nextPage()
 
           # Then
-          expect(jqGridEl.setGridParam.calledWith(page: 3)).to.be.true
-          expect(jqGridEl.trigger.calledWith("reloadGrid")).to.be.true
+          expect(jqGridEl.setGridParam).to.have.been.calledWith(page: 3)
+          expect(jqGridEl.trigger).to.have.been.calledWith("reloadGrid")
 
         it "returns a promise", ->
           promise = ctrl.nextPage()
@@ -466,8 +466,8 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
           ctrl.nextPage()
 
           # Then
-          expect(jqGridEl.setGridParam.calledWith(page: 1)).to.be.true
-          expect(jqGridEl.trigger.calledWith("reloadGrid")).to.be.true
+          expect(jqGridEl.setGridParam).to.have.been.calledWith(page: 1)
+          expect(jqGridEl.trigger).to.have.been.calledWith("reloadGrid")
 
         it "returns a promise", ->
           promise = ctrl.nextPage()
@@ -483,8 +483,8 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
         ctrl.lastPage()
 
         # Then
-        expect(jqGridEl.setGridParam.calledWith(page: 200)).to.be.true
-        expect(jqGridEl.trigger.calledWith("reloadGrid")).to.be.true
+        expect(jqGridEl.setGridParam).to.have.been.calledWith(page: 200)
+        expect(jqGridEl.trigger).to.have.been.calledWith("reloadGrid")
 
       it "returns a promise", ->
         promise = ctrl.lastPage()
@@ -497,8 +497,8 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
         ctrl.loadPage(123)
 
         # Then
-        expect(jqGridEl.setGridParam.calledWith(page: 123)).to.be.true
-        expect(jqGridEl.trigger.calledWith("reloadGrid")).to.be.true
+        expect(jqGridEl.setGridParam).to.have.been.calledWith(page: 123)
+        expect(jqGridEl.trigger).to.have.been.calledWith("reloadGrid")
 
       it "returns a promise", inject ($rootScope) ->
         # When

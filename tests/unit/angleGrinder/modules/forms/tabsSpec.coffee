@@ -52,7 +52,7 @@ describe "module: angleGrinder.forms tabs", ->
             sinon.spy(ctrl, "selectTab")
             ctrl.addTab(newTab)
 
-            expect(ctrl.selectTab.calledWith(newTab)).to.be.true
+            expect(ctrl.selectTab).to.have.been.calledWith(newTab)
             expect(scope.tabs[0].selected).to.be.true
 
         context "when the tab stack is not empty", ->
@@ -63,7 +63,7 @@ describe "module: angleGrinder.forms tabs", ->
             sinon.spy(ctrl, "selectTab")
             ctrl.addTab(newTab)
 
-            expect(ctrl.selectTab.called).to.be.false
+            expect(ctrl.selectTab).to.not.have.been.called
 
       describe "#selectTab", ->
         tabOne = null

@@ -107,7 +107,7 @@ describe "module: angleGrinder.gridz", ->
         expect(directiveAjaxOptions).to.not.be.undefined
 
       it "uses `pathWithContext` to generate a valid path", inject (pathWithContext) ->
-        expect(pathWithContext.calledWith("/api/orgs.json")).to.be.true
+        expect(pathWithContext).to.have.been.calledWith("/api/orgs.json")
 
       it "assigns a valid server side lookup path", ->
         expect(directiveAjaxOptions.url).to.not.be.undefined
@@ -194,5 +194,5 @@ describe "module: angleGrinder.gridz", ->
         button.click()
 
         # Then
-        expect(spy.called).to.be.true
-        expect(spy.calledWith("open")).to.be.true
+        expect(spy).to.have.been.called
+        expect(spy).to.have.been.calledWith("open")

@@ -33,10 +33,10 @@ describe "controller: usersDialog.ListCtrl", ->
   describe "mixin: `dialogCrudCtrlMixin`", ->
 
     it "is mixed", inject (dialogCrudCtrlMixin) ->
-      expect(dialogCrudCtrlMixin.called).to.be.true
+      expect(dialogCrudCtrlMixin).to.have.been.called
 
     it "is mixed with valid arguments", inject (dialogCrudCtrlMixin) ->
-      expect(dialogCrudCtrlMixin.calledWith($scope)).to.be.true
+      expect(dialogCrudCtrlMixin).to.have.been.calledWith($scope)
 
       args = dialogCrudCtrlMixin.getCall(0).args[1]
       expect(args).to.have.property "Resource", "Users"
@@ -46,10 +46,10 @@ describe "controller: usersDialog.ListCtrl", ->
   describe "mixin: `massUpdateMixin`", ->
 
     it "is mixed", inject (massUpdateMixin) ->
-      expect(massUpdateMixin.called).to.be.true
+      expect(massUpdateMixin).to.have.been.called
 
     it "is mixed with valid arguments", inject (massUpdateMixin) ->
-      expect(massUpdateMixin.calledWith($scope)).to.be.true
+      expect(massUpdateMixin).to.have.been.calledWith($scope)
 
       args = massUpdateMixin.getCall(0).args[1]
       expect(args).to.have.property "templateUrl", "/templates/users/massUpdateForm.html"

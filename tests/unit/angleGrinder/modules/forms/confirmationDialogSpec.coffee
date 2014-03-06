@@ -9,4 +9,4 @@ describe "module: angleGrinder.forms service: confirmationDialog", ->
     confirmationDialog.open()
 
     # Then
-    expect($dialog.dialog.called).to.be.true
+    expect($dialog.dialog).to.have.been.called

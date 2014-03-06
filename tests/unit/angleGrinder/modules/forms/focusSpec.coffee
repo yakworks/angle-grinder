@@ -17,7 +17,7 @@ describe "module: angleGrinder.forms", ->
       $timeout.flush()
 
       # Then
-      expect($rootScope.$broadcast.calledWith("focusOn", "theField")).to.be.true
+      expect($rootScope.$broadcast).to.have.been.calledWith("focusOn", "theField")
 
   describe "directive: agFocus", ->
 

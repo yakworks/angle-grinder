@@ -57,7 +57,7 @@ describe "Example Application routes", ->
   it "recognizes `/examples/users/:id`", inject (userResolver) ->
     # When
     navigateTo "/examples/users/12345"
-    expect(userResolver.calledWith("12345")).to.be.true
+    expect(userResolver).to.have.been.calledWith("12345")
 
     # Then
     expect($route.current.templateUrl).to.equal("templates/users/show.html")
@@ -66,7 +66,7 @@ describe "Example Application routes", ->
   it "recognizes `/examples/users/:id/edit`", inject ($q, userResolver) ->
     # When
     navigateTo "/examples/users/234/edit"
-    expect(userResolver.calledWith("234")).to.be.true
+    expect(userResolver).to.have.been.calledWith("234")
 
     # Then
     expect($route.current.templateUrl).to.equal("templates/users/form.html")

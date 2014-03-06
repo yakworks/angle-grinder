@@ -31,11 +31,11 @@ describe "controller: users.FormCtrl", ->
         $scope.save(form, fakeUser)
 
       it "saves a record", ->
-        expect(fakeUser.save.called).to.be.true
+        expect(fakeUser.save).to.have.been.called
 
       it "redirects to the show page", inject ($location) ->
-        expect($location.path.called).to.be.true
-        expect($location.path.calledWith("/examples/users/123")).to.be.true
+        expect($location.path).to.have.been.called
+        expect($location.path).to.have.been.calledWith("/examples/users/123")
 
     describe "onError", ->
       fakeUser = null
@@ -52,7 +52,7 @@ describe "controller: users.FormCtrl", ->
         $scope.save(form, fakeUser)
 
       it "tries to save a record", ->
-        expect(fakeUser.save.called).to.be.true
+        expect(fakeUser.save).to.have.been.called
 
       it "sets server side validation errors", ->
         expect(form.$serverError.login).to.equal "has to be unique"

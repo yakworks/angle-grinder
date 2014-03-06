@@ -7,6 +7,7 @@ module.exports = (config) ->
     frameworks: [
       "mocha"
       "chai"
+      "sinon-chai"
     ]
 
     # list of files / patterns to load in the browser
@@ -26,6 +27,7 @@ module.exports = (config) ->
       "components/bower/sinon/lib/sinon/stub.js"
       "components/bower/sinon/lib/sinon/mock.js"
       "components/bower/sinon/lib/sinon/assert.js"
+      "components/bower/sinon-chai/lib/sinon-chai.js"
 
       "components/bower/jqgrid/js/grid.base.js"
       "components/bower/select2/select2.js"
@@ -121,6 +123,7 @@ module.exports = (config) ->
 
       "karma-mocha"
       "karma-chai-plugins"
+      "karma-sinon-chai"
       "karma-spec-reporter"
       "karma-junit-reporter"
       "karma-coverage"

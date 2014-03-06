@@ -88,7 +88,7 @@ describe "module: exampleApp.resources", ->
           $httpBackend.flush()
 
           # Then
-          expect(onSuccess.called).to.be.true
+          expect(onSuccess).to.have.been.called
 
           args = onSuccess.lastCall.args[0]
           expect(args.id).to.equal 102
@@ -108,7 +108,7 @@ describe "module: exampleApp.resources", ->
           $httpBackend.flush()
 
           # Then
-          expect(onSuccess.called).to.be.true
+          expect(onSuccess).to.have.been.called
 
           args = onSuccess.lastCall.args[0]
           expect(args.id).to.equal 103
@@ -128,7 +128,7 @@ describe "module: exampleApp.resources", ->
           $httpBackend.flush()
 
           # Then
-          expect(onError.called).to.be.true
+          expect(onError).to.have.been.called
 
     describe "#delete", ->
       user = null
@@ -147,7 +147,7 @@ describe "module: exampleApp.resources", ->
           $httpBackend.flush()
 
           # Then
-          expect(onComplete.called).to.be.true
+          expect(onComplete).to.have.been.called
 
           args = onComplete.lastCall.args[0]
           expect(args.id).to.equal 123
@@ -165,7 +165,7 @@ describe "module: exampleApp.resources", ->
           $httpBackend.flush()
 
           # Then
-          expect(onError.called).to.be.true
+          expect(onError).to.have.been.called
 
   describe "service: userResolver", ->
     $httpBackend = null

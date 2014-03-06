@@ -38,10 +38,10 @@ describe "module: angleGrinder.forms mixin: massUpdateMixin", ->
         $scope.massUpdate()
 
       it "gets selected rows", ->
-        expect($scope.theGrid.getSelectedRowIds.called).to.be.true
+        expect($scope.theGrid.getSelectedRowIds).to.have.been.called
 
       it "opens the dialog", inject ($dialog) ->
-        expect($dialog.dialog.called).to.be.true
+        expect($dialog.dialog).to.have.been.called
 
         args = $dialog.dialog.getCall(0).args[0]
         expect(args).to.have.property "backdropFade", false
@@ -49,19 +49,19 @@ describe "module: angleGrinder.forms mixin: massUpdateMixin", ->
         expect(args).to.have.deep.property "resolve.selectedIds"
         expect(args).to.have.deep.property "resolve.grid"
 
-        expect(massUpdateDialog.open.called).to.be.true
+        expect(massUpdateDialog.open).to.have.been.called
 
       context "when the controller is not specified", ->
         before -> @massUpdateFormCtrl = null
 
         it "uses the default mass update form controller", ->
-          expect(massUpdateDialog.open.calledWith("/path/to/the/form.html", "MassUpdateFormCtrl")).to.be.true
+          expect(massUpdateDialog.open).to.have.been.calledWith("/path/to/the/form.html", "MassUpdateFormCtrl")
 
       context "when the controller is specified", ->
         before -> @massUpdateFormCtrl = "OtherCtrl"
 
         it "uses the custom controller", ->
-          expect(massUpdateDialog.open.calledWith("/path/to/the/form.html", "OtherCtrl")).to.be.true
+          expect(massUpdateDialog.open).to.have.been.calledWith("/path/to/the/form.html", "OtherCtrl")
 
     context "when nothing is selected", ->
       beforeEach ->
@@ -69,10 +69,10 @@ describe "module: angleGrinder.forms mixin: massUpdateMixin", ->
         $scope.massUpdate()
 
       it "gets selected rows", ->
-        expect($scope.theGrid.getSelectedRowIds.called).to.be.true
+        expect($scope.theGrid.getSelectedRowIds).to.have.been.called
 
       it "does not open the dialog", inject ($dialog) ->
-        expect($dialog.dialog.called).to.be.false
+        expect($dialog.dialog).to.not.have.been.called
 
     context "when the grid name is an expression", ->
 
@@ -91,4 +91,4 @@ describe "module: angleGrinder.forms mixin: massUpdateMixin", ->
       it "does the same trick", ->
         grid.getSelectedRowIds.returns []
         $scope.massUpdate()
-        expect(grid.getSelectedRowIds.called).to.be.true
+        expect(grid.getSelectedRowIds).to.have.been.called

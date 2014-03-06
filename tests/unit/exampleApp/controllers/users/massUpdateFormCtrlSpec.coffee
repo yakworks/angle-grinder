@@ -24,10 +24,10 @@ describe "controller: users.MassUpdateFormCtrl", ->
   describe "mixin: `massUpdateFormCtrlMixin`", ->
 
     it "is mixed", inject (massUpdateFormCtrlMixin) ->
-      expect(massUpdateFormCtrlMixin.called).to.be.true
+      expect(massUpdateFormCtrlMixin).to.have.been.called
 
     it "is mixed with valid arguments", inject (massUpdateFormCtrlMixin) ->
-      expect(massUpdateFormCtrlMixin.calledWith($scope)).to.be.true
+      expect(massUpdateFormCtrlMixin).to.have.been.calledWith($scope)
 
       args = massUpdateFormCtrlMixin.getCall(0).args[1]
       expect(args).to.have.property "dialog", "foo"

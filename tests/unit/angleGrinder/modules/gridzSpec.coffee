@@ -38,8 +38,8 @@ describe "module: angleGrinder.gridz", ->
 
     itPassesValidOptionsToTheGrid = ->
       it "passes valid options to the gridz plugin", ->
-        expect(gridzSpy.called).to.be.true
-        expect(gridzSpy.calledWith(sampleGridOptions)).to.be.true
+        expect(gridzSpy).to.have.been.called
+        expect(gridzSpy).to.have.been.calledWith(sampleGridOptions)
 
     itRendersTheGrid = ->
       it "renders the grid", ->
@@ -49,7 +49,7 @@ describe "module: angleGrinder.gridz", ->
 
     itInitializesActionPopupHandler = ->
       it "initializes action popup handler", inject (actionPopupHandler) ->
-        expect(actionPopupHandler.called).to.be.true
+        expect(actionPopupHandler).to.have.been.called
 
     describe "when `ag-grid-name` is not provided", ->
       beforeEach inject ($injector) ->
@@ -149,5 +149,5 @@ describe "module: angleGrinder.gridz", ->
         expect(element.find("table.gridz").attr("id")).to.equal "projectsGrid"
 
       it "passes valid options to the gridz plugin", ->
-        expect(gridzSpy.called).to.be.true
+        expect(gridzSpy).to.have.been.called
         expect(gridzSpy.getCall(0).args[0].pager).to.be.false

@@ -31,18 +31,18 @@ describe "module: angleGrinder.gridz, service: agGridDataLoader", ->
     $httpBackend.flush()
 
     # Then
-    expect(gridCtrl.addJSONData.called).to.be.true
+    expect(gridCtrl.addJSONData).to.have.been.called
 
   it "show and hide the loading animation", inject ($httpBackend) ->
     # When
     loader(page: 1, "usersGrid")
 
     # Then
-    expect(loadingEl.show.called).to.be.true
-    expect(loadingEl.hide.called).to.be.false
+    expect(loadingEl.show).to.have.been.called
+    expect(loadingEl.hide).to.not.have.been.called
 
     # When
     $httpBackend.flush()
 
     # Then
-    expect(loadingEl.hide.called).to.be.true
+    expect(loadingEl.hide).to.have.been.called

@@ -49,22 +49,22 @@ describe "module: angleGrinder.forms mixin: massUpdateFormCtrlMixin", ->
         $rootScope.$apply -> $scope.massUpdate(allowance: 123)
 
       it "updates the records", inject (Users) ->
-        expect(Users.massUpdate.called).to.be.true
-        expect(Users.massUpdate.calledWith(ids: [1, 2, 3], data: allowance: 123)).to.be.true
+        expect(Users.massUpdate).to.have.been.called
+        expect(Users.massUpdate).to.have.been.calledWith(ids: [1, 2, 3], data: allowance: 123)
 
       it "does not reload a grid", ->
-        expect(grid.reload.called).to.not.be.true
+        expect(grid.reload).to.not.have.been.called
 
       it "updates data in the grid", ->
-        expect(grid.updateRow.called).to.be.true
-        expect(grid.updateRow.calledWith(100, id: 100, foo: "bar")).to.be.true
+        expect(grid.updateRow).to.have.been.called
+        expect(grid.updateRow).to.have.been.calledWith(100, id: 100, foo: "bar")
 
       it "flashes errored rows", ->
-        expect(grid.flashOnError.called).to.be.true
-        expect(grid.flashOnError.calledWith("101")).to.be.true
+        expect(grid.flashOnError).to.have.been.called
+        expect(grid.flashOnError).to.have.been.calledWith("101")
 
       it "closes a dialog", ->
-        expect(dialog.close.called).to.be.true
+        expect(dialog.close).to.have.been.called
 
   describe "#closeDialog", ->
 
@@ -76,4 +76,4 @@ describe "module: angleGrinder.forms mixin: massUpdateFormCtrlMixin", ->
       $scope.closeDialog()
 
       # Then
-      expect(dialog.close.called).to.be.true
+      expect(dialog.close).to.have.been.called

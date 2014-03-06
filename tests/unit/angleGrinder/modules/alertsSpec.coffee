@@ -33,8 +33,8 @@ describe "module: angleGrinder.alerts", ->
         $scope.disposeAlert(2)
 
         # Then
-        expect(alerts.dispose.called).to.be.true
-        expect(alerts.dispose.calledWith(2)).to.be.true
+        expect(alerts.dispose).to.have.been.called
+        expect(alerts.dispose).to.have.been.calledWith(2)
 
         message = _.findWhere($scope.alertMessages, id: 1)
         expect(message).to.deep.equal id: 1, type: "info", text: "Information.."
@@ -73,12 +73,12 @@ describe "module: angleGrinder.alerts", ->
       it "returns an id for the new flash message", inject (alerts) ->
 
         expect(alerts.push("info", "Test..")).to.equal 1
-        expect(alerts.delayedDispose.called).to.be.true
-        expect(alerts.delayedDispose.calledWith(1)).to.be.true
+        expect(alerts.delayedDispose).to.have.been.called
+        expect(alerts.delayedDispose).to.have.been.calledWith(1)
 
         expect(alerts.push("error", "Test error..")).to.equal 2
-        expect(alerts.delayedDispose.called).to.be.true
-        expect(alerts.delayedDispose.calledWith(2)).to.be.true
+        expect(alerts.delayedDispose).to.have.been.called
+        expect(alerts.delayedDispose).to.have.been.calledWith(2)
 
       describe "#info", ->
         it "pushesh the given message", inject (alerts) ->
@@ -88,12 +88,12 @@ describe "module: angleGrinder.alerts", ->
 
           # When
           alerts.info(testMessage)
-          expect(alerts.delayedDispose.called).to.be.true
-          expect(alerts.delayedDispose.calledWith(1)).to.be.true
+          expect(alerts.delayedDispose).to.have.been.called
+          expect(alerts.delayedDispose).to.have.been.calledWith(1)
 
           alerts.info(otherTestMessage)
-          expect(alerts.delayedDispose.called).to.be.true
-          expect(alerts.delayedDispose.calledWith(2)).to.be.true
+          expect(alerts.delayedDispose).to.have.been.called
+          expect(alerts.delayedDispose).to.have.been.calledWith(2)
 
           # Then
           firstMessage = _.findWhere(alerts.messages, id: 1)
@@ -109,8 +109,8 @@ describe "module: angleGrinder.alerts", ->
 
           # When
           alerts.error(testMessage)
-          expect(alerts.delayedDispose.called).to.be.true
-          expect(alerts.delayedDispose.calledWith(1)).to.be.true
+          expect(alerts.delayedDispose).to.have.been.called
+          expect(alerts.delayedDispose).to.have.been.calledWith(1)
 
           # Then
           message = _.findWhere(alerts.messages, id: 1)

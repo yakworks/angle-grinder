@@ -43,5 +43,5 @@ describe "controller: SidebarCtrl", ->
       $rootScope.$apply()
 
       # Then
-      expect(scrollTo.called).to.be.true
+      expect(scrollTo).to.have.been.called
       expect(scrollTo.getCall(0).args[0]).to.eq "fooBar"

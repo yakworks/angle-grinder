@@ -26,7 +26,7 @@ describe "module: angleGrinder.forms directive: agCreateButton", ->
         # When
         element.click()
         # Then
-        expect($scope.foo.called).to.be.true
+        expect($scope.foo).to.have.been.called
 
   describe "without a custom label", ->
     beforeEach inject ($injector) ->

@@ -48,8 +48,8 @@ describe "module: angleGrinder.common", ->
       expect(withContextFilter("path")).to.equal "/context/path"
 
       # Then
-      expect(pathWithContext.called).to.be.true
-      expect(pathWithContext.calledWith("path")).to.be.true
+      expect(pathWithContext).to.have.been.called
+      expect(pathWithContext).to.have.been.calledWith("path")
 
   describe "service: pendingRequests", ->
     $http = null

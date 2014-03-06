@@ -25,7 +25,7 @@ describe "module: exampleApp", ->
 
         minDate = new Date(2001, 1, 1)
         expect(random.date(minDate)).to.equal("2013-07-01")
-        expect(random.range.called).to.be.true
+        expect(random.range).to.have.been.called
 
   describe "service: sampleData", ->
     it "is defined", inject (sampleData) ->

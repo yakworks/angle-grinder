@@ -28,7 +28,7 @@ describe "module: exampleApp.grids", ->
 
       sinon.spy($log, "error")
       loadError("foo")
-      expect($log.error.called).to.be.true
+      expect($log.error).to.have.been.called
 
     describe "colModel", ->
 

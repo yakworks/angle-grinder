@@ -47,7 +47,7 @@ describe "module: angleGrinder.forms mixin: dialogCrudCtrlMixin", ->
       $httpBackend.verifyNoOutstandingRequest()
 
     it "opens a dialog for editiging the loaded resource", inject (editDialog) ->
-      expect(editDialog.open.called).to.be.true
+      expect(editDialog.open).to.have.been.called
 
       args = editDialog.open.getCall(0).args
       expect(args[0]).to.be.equal "/foo/bar/form.html"
@@ -71,8 +71,8 @@ describe "module: angleGrinder.forms mixin: dialogCrudCtrlMixin", ->
       expect($scope.createItem).to.be.a "function"
 
     it "opens a dialog for creating a resource", inject (editDialog) ->
-      expect(editDialog.open.called).to.be.true
-      expect(editDialog.open.calledWith("/foo/bar/form.html")).to.be.true
+      expect(editDialog.open).to.have.been.called
+      expect(editDialog.open).to.have.been.calledWith("/foo/bar/form.html")
 
     context "when the `beforeCreate` callback is given", ->
       before ->
@@ -91,7 +91,7 @@ describe "module: angleGrinder.forms mixin: dialogCrudCtrlMixin", ->
 
     it "opens the confirmation dialog", inject (confirmationDialog) ->
       $scope.deleteItem(456)
-      expect(confirmationDialog.open.called).to.be.true
+      expect(confirmationDialog.open).to.have.been.called
 
     context "when the dialog was confirmed", ->
       beforeEach inject (confirmationDialog, $httpBackend) ->
@@ -106,8 +106,8 @@ describe "module: angleGrinder.forms mixin: dialogCrudCtrlMixin", ->
         $httpBackend.verifyNoOutstandingRequest()
 
       it "removes a row from the grid", ->
-        expect($scope.grid.transactions.removeRow.called).to.be.true
-        expect($scope.grid.transactions.removeRow.calledWith(456)).to.be.true
+        expect($scope.grid.transactions.removeRow).to.have.been.called
+        expect($scope.grid.transactions.removeRow).to.have.been.calledWith(456)
 
     context "when the dialog wasn't confirmed", ->
       beforeEach inject (confirmationDialog) ->
@@ -115,4 +115,4 @@ describe "module: angleGrinder.forms mixin: dialogCrudCtrlMixin", ->
         $scope.deleteItem(456)
 
       it "does not remove a row from the grid", ->
-        expect($scope.grid.transactions.removeRow.called).to.be.false
+        expect($scope.grid.transactions.removeRow).to.not.have.been.called

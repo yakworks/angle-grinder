@@ -65,8 +65,8 @@ describe "module: angleGrinder.gridz", ->
         element.click()
 
         # Then
-        expect($scope.advancedSearch.called).to.be.true
-        expect($scope.advancedSearch.calledWith(name: "find it")).to.be.true
+        expect($scope.advancedSearch).to.have.been.called
+        expect($scope.advancedSearch).to.have.been.calledWith(name: "find it")
 
   describe "directive: agResetSearchButton", ->
     $scope = null
@@ -105,7 +105,7 @@ describe "module: angleGrinder.gridz", ->
         element.click()
 
         # Then
-        expect($scope.resetSearch.called).to.be.true
+        expect($scope.resetSearch).to.have.been.called
 
   describe "directive: agSearchForm", ->
     $scope = null
@@ -143,8 +143,8 @@ describe "module: angleGrinder.gridz", ->
         searchButtonEl.click()
 
         # Then
-        expect($scope.grid.users.search.called).to.be.true
-        expect($scope.grid.users.search.calledWith(name: "find me")).to.be.true
+        expect($scope.grid.users.search).to.have.been.called
+        expect($scope.grid.users.search).to.have.been.calledWith(name: "find me")
 
       it "disables the submit button", ->
         # When
@@ -164,8 +164,8 @@ describe "module: angleGrinder.gridz", ->
         resetButtonEl.click()
 
         # Then
-        expect($scope.grid.users.search.called).to.be.true
-        expect($scope.grid.users.search.calledWith({})).to.be.true
+        expect($scope.grid.users.search).to.have.been.called
+        expect($scope.grid.users.search).to.have.been.calledWith({})
 
       it "disables the reset button", ->
         # When
