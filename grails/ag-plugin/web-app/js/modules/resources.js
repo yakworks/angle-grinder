@@ -42,12 +42,16 @@ resources.factory("resourceBuilder", [
         // Backbone style save() that inserts or updated the record
         // based on the presence of an id.
         save: function(options) {
+          if (options == null) { options = {}; }
+
           var method;
           method = this.persisted() ? "update" : "save";
           return Resource[method]({}, this, options.success, options.error);
         },
 
         "delete": function(options) {
+          if (options == null) { options = {}; }
+
           return Resource["delete"]({}, this, options.success, options.error);
         }
       });

@@ -27,7 +27,7 @@ class FormDialogCtrl
         $log.error "Something went wront", response
         serverValidationErrorsHandler($scope.editForm, response, item.resourceName())
 
-      item.save success: onSuccess, error: onError
+      item.save(success: onSuccess, error: onError).$promise
 
     # Performs server side delete
     $scope.delete = ->
@@ -40,7 +40,7 @@ class FormDialogCtrl
       onError = (response) ->
         $log.error "Something went wront", response
 
-      item.delete success: onSuccess, error: onError
+      item.delete(success: onSuccess, error: onError).$promise
 
 forms.controller "FormDialogCtrl", FormDialogCtrl
 

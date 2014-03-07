@@ -28,11 +28,11 @@ resources.factory "Users", [
 
       # Backbone style save() that inserts or updated the record
       # based on the presence of an id.
-      save: (options) ->
+      save: (options = {}) ->
         method = if not @persisted() then "save" else "update"
         Users[method]({}, this, options.success, options.error)
 
-      delete: (options) ->
+      delete: (options = {}) ->
         Users.delete({}, this, options.success, options.error)
 
     Users

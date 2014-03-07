@@ -1,7 +1,7 @@
 describe "controller: users.ShowCtrl", ->
 
-  beforeEach module "exampleApp", ($provide) ->
-    # stub `$location` service
+  # stub `$location` service
+  beforeEach module "ng", ($provide) ->
     $provide.value "$location", path: sinon.stub()
     return
 
@@ -22,21 +22,20 @@ describe "controller: users.ShowCtrl", ->
     expect($scope.user).to.have.property "email", "test@email.com"
 
   describe "#delete", ->
+    deferred = null
+    user = null
 
-    it "is defined", ->
-      expect($scope.delete).to.not.be.undefined
+    beforeEach inject ($q) ->
+      deferred = $q.defer()
+      user = delete: sinon.stub().returns($promise: deferred.promise)
+
+      $scope.delete(user)
+
+    it "deletes a record", ->
+      expect(user.delete).to.have.been.called
 
     describe "on success", ->
-      user = null
-
-      beforeEach ->
-        user = delete: (options) -> options.success()
-        sinon.spy(user, "delete")
-
-        $scope.delete(user)
-
-      it "deletes a record", ->
-        expect(user.delete).to.have.been.called
+      beforeEach -> $scope.$apply -> deferred.resolve(true)
 
       it "redirects to the users list page", inject ($location) ->
         expect($location.path).to.have.been.called

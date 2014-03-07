@@ -2,10 +2,9 @@ forms = angular.module("angleGrinder.forms")
 
 # Double check delete button
 # usage:
-#   <ag-delete-button when-confirmed="delete(item)" deleting="deleting"></ag-delete-button>
+#   <ag-delete-button when-confirmed="delete(item)"></ag-delete-button>
 #
 #   `when-confirmed` function to call when the action was confirmed
-#   `deleting` when it's set to `true` the button will be disabled
 forms.directive "agDeleteButton", ->
   restrict: "E"
   replace: true
@@ -14,36 +13,38 @@ forms.directive "agDeleteButton", ->
     whenConfirmed: "&"
 
   controller: [
-    "$scope", "pendingRequests", "$element", ($scope, pendingRequests, $element) ->
+    "$scope", ($scope) ->
       $scope.confirmation = false
 
-      $scope.delete = ->
+      $scope.showConfirmation = ->
+        $scope.confirmation = true
+
+      $scope.doDelete = ->
+        $scope.confirmation = false
+
         # on the second click perform the given action
-        $scope.whenConfirmed() if $scope.confirmation
-        # switch the state
-        $scope.confirmation = !$scope.confirmation
+        promise = $scope.whenConfirmed()
 
-      # enable / disable the button if a request in progress
-      $scope.$watch -> $scope.deleting = pendingRequests.for("POST", "DELETE")
-
-      # change button label
-      $scope.$watch "confirmation", (confirmation) ->
-        $scope.label = unless confirmation then "Delete" else "Are you sure?"
-
-        # TODO use ng-class directive
-        if confirmation
-          $element.removeClass "btn-danger"
-          $element.addClass "btn-warning"
-        else
-          $element.addClass "btn-danger"
-          $element.removeClass "btn-warning"
+        # disable / enable the button
+        $scope.deleting = true
+        promise?.finally? -> $scope.deleting = false
   ]
 
   template: """
-    <button type="button" class="btn btn-danger ag-delete-button" ng-disabled="deleting"
+    <button type="button"
+            class="btn ag-delete-button"
+            ng-class="{ true: 'btn-warning', false: 'btn-danger' }[confirmation]"
+            ng-disabled="deleting"
             ng-mouseleave="confirmation = false"
-            ng-click="delete()">
-      <i class="icon-trash"></i> {{label}}<span ng-show="deleting">...</span>
+            ng-click="confirmation ? doDelete() : showConfirmation()">
+      <i class="icon-trash"></i>
+
+      <ng-switch on="confirmation">
+        <span ng-switch-default>Delete</span>
+        <span ng-switch-when="true">Are you sure?</span>
+      </ng-switch>
+
+      <span ng-if="deleting">...</span>
     </button>
   """
 

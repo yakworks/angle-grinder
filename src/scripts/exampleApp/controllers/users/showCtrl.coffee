@@ -13,8 +13,8 @@ class ShowCtrl
       actionPopup: false
 
     $scope.delete = (user) ->
-      onSuccess = -> $location.path("/examples/users")
-      user.delete success: onSuccess
+      promise = user.delete().$promise
+      promise.then -> $location.path("/examples/users")
 
 angular.module("exampleApp")
   .controller("users.ShowCtrl", ShowCtrl)
