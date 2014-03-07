@@ -30,6 +30,7 @@ forms.directive "agDeleteButton", ->
       $scope.$watch "confirmation", (confirmation) ->
         $scope.label = unless confirmation then "Delete" else "Are you sure?"
 
+        # TODO use ng-class directive
         if confirmation
           $element.removeClass "btn-danger"
           $element.addClass "btn-warning"

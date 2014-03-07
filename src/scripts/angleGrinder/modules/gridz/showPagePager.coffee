@@ -68,6 +68,7 @@ gridz.directive "agShowPagePager", [
 #  <div ag-grid="gridOptions"
 #       ag-grid-with-pager="true"
 #       ag-grid-name="orgGrid"></div>
+# TODO this directive is deprecated, remove it in the next release
 gridz.directive "agGridWithPager", [
   "$location", "$log", ($location, $log) ->
     restrict: "A"

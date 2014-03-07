@@ -7,7 +7,8 @@ forms.directive "agTabset", ->
   scope: true
 
   controller: [
-    "$log", "$scope", ($log, $scope) ->
+    "$log", "$scope",
+    ($log, $scope) ->
 
       # stack of the tabs
       $scope.tabs = []
