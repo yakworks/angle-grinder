@@ -12,7 +12,7 @@ describe "module: angleGrinder.forms", ->
 
     it "is defined", inject (massUpdateHandler) ->
       expect(massUpdateHandler).to.not.be.undefined
-      expect(massUpdateHandler).to.be.a "Function"
+      expect(massUpdateHandler).to.be.a "function"
 
     context "when the result contains rows data", ->
 
