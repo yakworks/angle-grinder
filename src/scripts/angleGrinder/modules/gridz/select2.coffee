@@ -19,6 +19,7 @@ gridz.directive "agSelect2", [
       # find a template for the result item
       resultTemplate = null
       scope = $rootScope.$new()
+
       transclude scope, (clone) ->
         for element in clone
           if element instanceof HTMLElement and element.getAttribute("ag-select2-result")?
@@ -63,13 +64,16 @@ gridz.directive "agSelect2", [
             scope = scope.$new()
             scope.item = item
 
-            resultElement = angular.element(resultTemplate)
-            $compile(resultElement)(scope)
+            resultEl = angular.element(resultTemplate)
+            $compile(resultEl)(scope)
+            scope.$digest()
+
+            return resultEl
 
         # create default `formatSelection` method
         options.formatSelection ?= (item) -> item.name
 
-        $log.debug "Initializing the Select2 component", scope.options
+        $log.debug "[forms] initializing AgSelect2 component", scope.options
 
     template: """
       <div>
