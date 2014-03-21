@@ -1,6 +1,6 @@
 describe "module: angleGrinder.gridz", ->
 
-  describe.only "xls export", ->
+  describe "xls export", ->
 
     beforeEach module "ngSanitize"
 
