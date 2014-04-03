@@ -40,6 +40,9 @@
     },
 
     "exportsOverride": {
+        "jquery": {
+          "js": "dist/jquery.js"
+        },
         "angular-ui": {
             "js": "build/angular-ui.js",
             "css": "build/angular-ui.css"

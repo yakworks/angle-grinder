@@ -24,7 +24,7 @@ gridz.directive "agGrid", [
 
       # Initializes a grid with the given options
       initializeGrid = ->
-        $log.info "Initializing '#{alias}' with", options
+        $log.debug "[agGrid] initializing '#{alias}' with", options
 
         # find grid placeholder
         gridEl = element.find("table.gridz")
