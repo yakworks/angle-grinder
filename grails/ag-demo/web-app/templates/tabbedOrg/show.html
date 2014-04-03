@@ -8,7 +8,7 @@
 <div class="content">
   <h3 class="page-header">Org show</h3>
 
-  <div class="pager">
+  <div class="pager" ng-if="gridPager.show()">
     <a href="" ng-click="gridPager.prevRow()">&#8592; prev</a> |
     <a href="" ng-click="gridPager.nextRow()">next &#8594;</a>
   </div>

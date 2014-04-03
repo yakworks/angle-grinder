@@ -12,18 +12,28 @@ gridz.directive "agGridPlaceholder", [
     link: (scope, element, attrs) ->
       scope.templateSrc = pathWithContext(attrs.src)
 
-      # initially show the grid
-      scope.showGrid = true
+      # initially do not render the grid
+      scope.renderGrid = false
+
+      # initially hide the grid
+      scope.showGrid = false
 
       # show / hide the grid on route change
       scope.$on "$routeChangeSuccess", (event, currentRoute) ->
         show = currentRoute.originalPath is rootPath
+
+        # render the grid only once
+        scope.renderGrid = show if show
+
+        # show/hide the grid
         scope.showGrid = show
 
         msg = if show then "show grid" else "hide grid"
         $log.debug "[agGrid]", msg, currentRoute
 
     template: """
-      <ng-include src="templateSrc" ng-show="showGrid"></ng-include>
+      <div ng-if="renderGrid">
+        <ng-include src="templateSrc" ng-show="showGrid"></ng-include>
+      </div>
     """
 ]

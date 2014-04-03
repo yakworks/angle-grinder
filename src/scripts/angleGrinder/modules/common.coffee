@@ -1,5 +1,6 @@
 common = angular.module("angleGrinder.common", [])
 
+# TODO simplify and create a constant
 ###
 Sample context path configuration:
 

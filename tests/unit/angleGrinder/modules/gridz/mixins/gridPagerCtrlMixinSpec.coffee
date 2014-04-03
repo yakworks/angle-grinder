@@ -20,13 +20,15 @@ describe "module: angleGrinder.gridz", ->
         deferred.resolve({})
         deferred.promise
 
+      # stub the grid
       gridCtrl =
         getIds: sinon.stub()
 
         prevPage: promiseStub
         nextPage: promiseStub
 
-      $scope.grid = products: gridCtrl
+      $scope.grid =
+        products: gridCtrl
 
       $scope.pager = $controller "gridPagerCtrlMixin",
         $scope: $scope
@@ -36,11 +38,27 @@ describe "module: angleGrinder.gridz", ->
 
       $scope.$digest()
 
+    it "has `show` method", ->
+      expect($scope.pager.show).to.be.a "function"
+
     it "has `prevRow` method", ->
       expect($scope.pager.prevRow).to.be.a "function"
 
     it "has `nextRow` method", ->
       expect($scope.pager.nextRow).to.be.a "function"
+
+    describe "#show()", ->
+
+      context "when the grid is defined", ->
+
+        it "returns true", ->
+          expect($scope.pager.show()).to.be.true
+
+      context "when the grid is not defined", ->
+        beforeEach -> $scope.grid = undefined
+
+        it "returns true", ->
+          expect($scope.pager.show()).to.be.false
 
     describe "#prevRow()", ->
 
