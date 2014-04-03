@@ -37,6 +37,7 @@ describe "controller: gridExample.ListCtrl", ->
         sinon.stub(controller, "findItemById").withArgs(123).returns(resource)
 
         $scope.editItem(resource.id)
+        $scope.$digest()
 
       it "loads a resource", ->
         expect(controller.findItemById).to.have.been.calledWith(123)

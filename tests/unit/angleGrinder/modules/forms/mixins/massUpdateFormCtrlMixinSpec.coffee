@@ -46,7 +46,9 @@ describe "module: angleGrinder.forms mixin: massUpdateFormCtrlMixin", ->
     describe "when the massUpdate form is valid", ->
       beforeEach ->
         $scope.massUpdateForm = $valid: true, $invalid: false
-        $rootScope.$apply -> $scope.massUpdate(allowance: 123)
+
+        $scope.massUpdate(allowance: 123)
+        $rootScope.$digest()
 
       it "updates the records", inject (Users) ->
         expect(Users.massUpdate).to.have.been.called
