@@ -4,7 +4,7 @@
   "main": "./server/index.coffee",
   "dependencies": {
     "coffee-script": "~1.7.1",
-    "express": "~3.4.8",
+    "express": "~3.5.1",
     "casual": "~1.4.5",
     "underscore": "~1.6.0",
 
@@ -14,12 +14,12 @@
     "mime": "~1.2.11"
   },
   "devDependencies": {
-    "mocha": "~1.17.1",
+    "mocha": "~1.18.2",
     "chai": "~1.9.0",
-    "chai-as-promised": "~4.1.0",
+    "chai-as-promised": "~4.1.1",
 
     "karma": "~0.10.9",
-    "karma-mocha": "~0.1.1",
+    "karma-mocha": "~0.1.3",
     "karma-chai-plugins": "~0.2.0",
     "karma-sinon-chai": "~0.1.4",
     "karma-ng-scenario": "~0.1.0",
@@ -30,10 +30,10 @@
     "karma-coverage": "git+https://github.com/kylewelsby/karma-coverage#fix-coffee-script-compiler",
 
     "matchdep": "~0.3.0",
-    "nodemon": "~1.0.13",
-    "request": "~2.33.0",
+    "nodemon": "~1.0.17",
+    "request": "~2.34.0",
 
-    "grunt": "~0.4.2",
+    "grunt": "~0.4.4",
     "grunt-contrib-connect": "~0.6.0",
     "grunt-contrib-copy": "~0.5.0",
     "grunt-contrib-coffee": "~0.10.0",
