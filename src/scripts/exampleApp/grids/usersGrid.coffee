@@ -41,6 +41,7 @@ grids.factory "usersGrid", [
         path: "/api/users"
         colModel: colModel()
         rowNum: 10
+        rowList: [10, 20, 50, 100, 1000]
         sortname: "id"
         multiselect: true
 

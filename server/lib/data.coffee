@@ -31,7 +31,7 @@ class Data
     data.push randomUser(login: "login-3", name: "Nephi", creditInfo: { allowance: 100, paid: false })
     data.push randomUser(login: "login-4", name: "Ether", creditInfo: { allowance: 42, paid: true }, birthday: new Date("10/30/2010"))
 
-    _(50).times -> data.push randomUser()
+    _(2000).times -> data.push randomUser()
 
     data
 

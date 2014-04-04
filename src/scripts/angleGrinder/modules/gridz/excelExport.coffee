@@ -38,46 +38,68 @@ gridz.service "xlsData", [
   "$document", "$sanitize", "xlsTemplate",
   ($document, $sanitize, xlsTemplate) ->
 
-    (grid) ->
-      # get the grid id
+    findGridEl = (grid) ->
       gridId = grid.getGridId()
+      [gridId, $document.find("div#gbox_#{gridId}")]
 
-      gboxEl = $document.find("div#gbox_#{gridId}")
+    prepareHeading = (grid) ->
+      [gridId, gridEl] = findGridEl(grid)
 
-      headingEl = gboxEl.find(".ui-jqgrid-hbox table").clone()
-      headingEl.find("th##{gridId}_cb").remove()
-      headingEl.find("th##{gridId}_-row_action_col").remove()
+      # get the grid's heading
+      el = gridEl.find(".ui-jqgrid-hbox table").clone()
 
-      # Strip unnecessary white spaces
-      headingEl.find("th").each (index, el) ->
-        thEl = $(el)
-        thEl.html $(thEl).text().trim()
+      # remove unnecessary
+      el.find("th##{gridId}_cb").remove()
+      el.find("th##{gridId}_-row_action_col").remove()
+
+      # Strip unnecessary white spaces from the headers
+      el.find("th").each (index, th) ->
+        thEl = $(th)
+        thEl.html thEl.text().trim()
+
+      el.html()
+
+    prepareRows = (grid) ->
+      [gridId, gridEl] = findGridEl(grid)
 
       # get the grid's table html content
-      tableEl = gboxEl.find("##{gridId}").clone()
+      el = gridEl.find("##{gridId}").clone()
 
       # remove the first row
-      tableEl.find("tr.jqgfirstrow").remove()
+      el.find("tr.jqgfirstrow").remove()
       # remove action column and checkboxes
-      tableEl.find("td[aria-describedby='#{gridId}_cb']").remove()
-      tableEl.find("td[aria-describedby='#{gridId}_-row_action_col']").remove()
+      el.find("td[aria-describedby='#{gridId}_cb']").remove()
+      el.find("td[aria-describedby='#{gridId}_-row_action_col']").remove()
       # unwrap all links
-      tableEl.find("td a").contents().unwrap()
+      el.find("td a").contents().unwrap()
 
-      # build the result
+      # include only selected rows
+      rowIds = grid.getSelectedRowIds()
+      el.find("tr").each (index, tr) ->
+        rowEl = $(tr)
+
+        id = rowEl.attr("id")
+        el.find("tr##{id}").remove() unless _.include rowIds, id
+
+      el.html()
+
+    # build the result
+    buildTable = (grid) ->
       resultEl = angular.element("<div></div>")
-      resultEl.append(headingEl.html())
-      resultEl.append(tableEl.html())
+      resultEl.append(prepareHeading(grid))
+      resultEl.append(prepareRows(grid))
 
-      # remove unsafe and unnecessary html attributes
+      # remove unnecessary html attributes
       attrsToRemove = ["id", "class", "style", "title",
                        "aria-describedby", "aria-labelledby", "aria-multiselectable",
                        "role", "tabindex", "sort"]
       resultEl.find("*").removeAttr(attr) for attr in attrsToRemove
 
-      html = $sanitize(resultEl.html())
+      # remove unsafe element
+      $sanitize(resultEl.html())
 
+    (grid) ->
       # generate the xls file content
-      data = xlsTemplate(table: html, worksheet: "Grid export")
+      data = xlsTemplate(table: buildTable(grid), worksheet: "Grid export")
       return "data:application/vnd.ms-excel;base64,#{data}"
 ]

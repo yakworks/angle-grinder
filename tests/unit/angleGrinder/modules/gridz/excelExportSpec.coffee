@@ -21,7 +21,10 @@ describe "module: angleGrinder.gridz", ->
     describe "service: xlsData", ->
 
       grid = null
-      beforeEach -> grid = getGridId: -> "usersGrid"
+      beforeEach ->
+        grid =
+          getGridId: -> "usersGrid"
+          getSelectedRowIds: -> ["4", "5", "6"]
 
       beforeEach module "tests/unit/fixtures/usersGrid.html"
 
@@ -35,30 +38,40 @@ describe "module: angleGrinder.gridz", ->
 
           $delegate
 
-      it "gerarates valid xls file content", inject ($window, xlsData) ->
-        data = xlsData(grid)
+      decodeXls = (data) ->
+        el = null
+        inject ($window) ->
+          decoded = $window.atob(data.match(/^data:application\/vnd\.ms-excel;base64,(.*)/)[1])
+          el = angular.element($(decoded)[3])
+        el
 
-        expect(data).to.match /^\bdata:application\/vnd\.ms-excel;base64\b/
-        decoded = $window.atob(data.match(/^data:application\/vnd\.ms-excel;base64,(.*)/)[1])
-        tableEl = angular.element($(decoded)[3])
+      it "generats valid xls file heading", inject (xlsData) ->
+        el = decodeXls(xlsData(grid))
 
-        expect(tableEl.find("thead th:nth-child(1)").text()).to.contain "id"
-        expect(tableEl.find("thead th:nth-child(2)").text()).to.contain "Login"
-        expect(tableEl.find("thead th:nth-child(3)").text()).to.contain "Email"
-        expect(tableEl.find("thead th:nth-child(4)").text()).to.contain "Name"
-        expect(tableEl.find("thead th:nth-child(5)").text()).to.contain "Birthday"
-        expect(tableEl.find("thead th:nth-child(6)").text()).to.contain "Allowance"
-        expect(tableEl.find("thead th:nth-child(7)").text()).to.contain "Paid"
+        expect(el.find("thead th:nth-child(1)").text()).to.contain "id"
+        expect(el.find("thead th:nth-child(2)").text()).to.contain "Login"
+        expect(el.find("thead th:nth-child(3)").text()).to.contain "Email"
+        expect(el.find("thead th:nth-child(4)").text()).to.contain "Name"
+        expect(el.find("thead th:nth-child(5)").text()).to.contain "Birthday"
+        expect(el.find("thead th:nth-child(6)").text()).to.contain "Allowance"
+        expect(el.find("thead th:nth-child(7)").text()).to.contain "Paid"
 
-        firstRow = tableEl.find("tbody tr:first")
-        expect(firstRow.find("td:nth-child(1)").text()).to.contain "1"
-        expect(firstRow.find("td:nth-child(2)").text()).to.contain "login-1"
-        expect(firstRow.find("td:nth-child(3)").text()).to.contain "login-1@Bradtke.biz"
-        expect(firstRow.find("td:nth-child(4)").text()).to.contain "Moroni"
-        expect(firstRow.find("td:nth-child(5)").text()).to.contain "Jul 17"
-        expect(firstRow.find("td:nth-child(5)").text()).to.contain "1973"
-        expect(firstRow.find("td:nth-child(6)").text()).to.contain "7747"
-        expect(firstRow.find("td:nth-child(7)").text()).to.contain "true"
+      it "generats valid xls file contend", inject (xlsData) ->
+        el = decodeXls(xlsData(grid))
+
+        rowEl = el.find("tbody tr:first")
+        expect(rowEl.find("td:nth-child(1)").text()).to.contain "4"
+        expect(rowEl.find("td:nth-child(2)").text()).to.contain "login-4"
+        expect(rowEl.find("td:nth-child(3)").text()).to.contain "login-4@Mayer.name"
+        expect(rowEl.find("td:nth-child(4)").text()).to.contain "Ether"
+        expect(rowEl.find("td:nth-child(5)").text()).to.contain "Oct 30"
+        expect(rowEl.find("td:nth-child(5)").text()).to.contain "2010"
+        expect(rowEl.find("td:nth-child(6)").text()).to.contain "42"
+        expect(rowEl.find("td:nth-child(7)").text()).to.contain "true"
+
+      it "exports only selected rows", inject (xlsData) ->
+        el = decodeXls(xlsData(grid))
+        expect(el.find("tbody tr")).to.have.length(3)
 
       it "generates valid data uri", inject (xlsData) ->
         data = xlsData(grid)
