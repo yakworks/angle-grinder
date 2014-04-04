@@ -45,6 +45,7 @@ module.exports =
     "src/scripts/exampleApp/grids.coffee"
     "src/scripts/exampleApp/grids/*.coffee"
 
+    "tests/unit/fixtures/**/*.html"
     "tests/unit/helpers/**/*.coffee"
     "tests/unit/**/*Spec.coffee"
   ]

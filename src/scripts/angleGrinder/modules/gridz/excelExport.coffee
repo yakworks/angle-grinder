@@ -40,21 +40,42 @@ gridz.service "xlsData", [
 
     (grid) ->
       # get the grid id
-      gridElId = grid.getGridId()
+      gridId = grid.getGridId()
 
-      # get grid's table html content
-      tableEl = $document.find("##{gridElId}").clone()
+      gboxEl = $document.find("div#gbox_#{gridId}")
+
+      headingEl = gboxEl.find(".ui-jqgrid-hbox table").clone()
+      headingEl.find("th##{gridId}_cb").remove()
+      headingEl.find("th##{gridId}_-row_action_col").remove()
+
+      # Strip unnecessary white spaces
+      headingEl.find("th").each (index, el) ->
+        thEl = $(el)
+        thEl.html $(thEl).text().trim()
+
+      # get the grid's table html content
+      tableEl = gboxEl.find("##{gridId}").clone()
 
       # remove the first row
       tableEl.find("tr.jqgfirstrow").remove()
       # remove action column and checkboxes
-      tableEl.find("td[aria-describedby='#{gridElId}_cb']").remove()
-      tableEl.find("td[aria-describedby='#{gridElId}_-row_action_col']").remove()
+      tableEl.find("td[aria-describedby='#{gridId}_cb']").remove()
+      tableEl.find("td[aria-describedby='#{gridId}_-row_action_col']").remove()
       # unwrap all links
       tableEl.find("td a").contents().unwrap()
 
-      # get the html and remove unsafe elements
-      html = $sanitize(tableEl.html())
+      # build the result
+      resultEl = angular.element("<div></div>")
+      resultEl.append(headingEl.html())
+      resultEl.append(tableEl.html())
+
+      # remove unsafe and unnecessary html attributes
+      attrsToRemove = ["id", "class", "style", "title",
+                       "aria-describedby", "aria-labelledby", "aria-multiselectable",
+                       "role", "tabindex", "sort"]
+      resultEl.find("*").removeAttr(attr) for attr in attrsToRemove
+
+      html = $sanitize(resultEl.html())
 
       # generate the xls file content
       data = xlsTemplate(table: html, worksheet: "Grid export")
