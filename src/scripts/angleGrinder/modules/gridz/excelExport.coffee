@@ -48,7 +48,7 @@ gridz.service "xlsData", [
       # get the grid's heading
       el = gridEl.find(".ui-jqgrid-hbox table").clone()
 
-      # remove unnecessary
+      # remove unnecessary columns
       el.find("th##{gridId}_cb").remove()
       el.find("th##{gridId}_-row_action_col").remove()
 
@@ -73,13 +73,14 @@ gridz.service "xlsData", [
       # unwrap all links
       el.find("td a").contents().unwrap()
 
-      # include only selected rows
+      # include only selected rows otherwise export everything
       rowIds = grid.getSelectedRowIds()
-      el.find("tr").each (index, tr) ->
-        rowEl = $(tr)
+      if rowIds.length > 0
+        el.find("tr").each (index, tr) ->
+          rowEl = $(tr)
 
-        id = rowEl.attr("id")
-        el.find("tr##{id}").remove() unless _.include rowIds, id
+          id = rowEl.attr("id")
+          el.find("tr##{id}").remove() unless _.include rowIds, id
 
       el.html()
 

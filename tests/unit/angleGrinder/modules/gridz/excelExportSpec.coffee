@@ -20,11 +20,13 @@ describe "module: angleGrinder.gridz", ->
 
     describe "service: xlsData", ->
 
+      before -> @selectedRows = ["4", "5", "6"]
+
       grid = null
       beforeEach ->
         grid =
-          getGridId: -> "usersGrid"
-          getSelectedRowIds: -> ["4", "5", "6"]
+          getGridId: => "usersGrid"
+          getSelectedRowIds: => @selectedRows
 
       beforeEach module "tests/unit/fixtures/usersGrid.html"
 
@@ -69,10 +71,26 @@ describe "module: angleGrinder.gridz", ->
         expect(rowEl.find("td:nth-child(6)").text()).to.contain "42"
         expect(rowEl.find("td:nth-child(7)").text()).to.contain "true"
 
-      it "exports only selected rows", inject (xlsData) ->
-        el = decodeXls(xlsData(grid))
-        expect(el.find("tbody tr")).to.have.length(3)
-
       it "generates valid data uri", inject (xlsData) ->
         data = xlsData(grid)
         expect(data).to.match /^\bdata:application\/vnd\.ms-excel;base64\b/
+
+      context "when some rows are selected", ->
+        before -> @selectedRows = ["5", "2", "4"]
+
+        it "exports only selected rows", inject (xlsData) ->
+          el = decodeXls(xlsData(grid))
+          expect(el.find("tbody tr")).to.have.length(3)
+
+          rowEl = el.find("tbody tr:first")
+          expect(rowEl.find("td:nth-child(1)").text()).to.contain "2"
+
+      context "when none is selected", ->
+        before -> @selectedRows = []
+
+        it "exports all rows", inject (xlsData) ->
+          el = decodeXls(xlsData(grid))
+          expect(el.find("tbody tr")).to.have.length(10)
+
+          rowEl = el.find("tbody tr:first")
+          expect(rowEl.find("td:nth-child(1)").text()).to.contain "1"
