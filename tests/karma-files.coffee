@@ -34,6 +34,7 @@ module.exports =
     "src/templates/**/*.html"
 
     "src/scripts/angleGrinder/modules/*.coffee"
+    "src/scripts/angleGrinder/modules/common/**/*.coffee"
     "src/scripts/angleGrinder/modules/forms/**/*.coffee"
     "src/scripts/angleGrinder/modules/gridz/**/*.coffee"
 
