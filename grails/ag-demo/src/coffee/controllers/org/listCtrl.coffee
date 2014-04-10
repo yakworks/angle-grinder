@@ -27,7 +27,7 @@ class ListCtrl
   colModel: ->
     showActionLink = (cellVal, options, rowdata) ->
       """
-        <a class="with-pager" href="#/#{rowdata.id}">#{cellVal}</a>
+        <a href="#/#{rowdata.id}">#{cellVal}</a>
       """
 
     [

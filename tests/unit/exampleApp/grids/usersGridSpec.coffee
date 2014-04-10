@@ -33,7 +33,6 @@ describe "module: exampleApp.grids", ->
 
         $link = $(idCol.formatter("Foo", {}, id: 123))
         expect($link.text()).to.eq "Foo"
-        expect($link.hasClass("with-pager")).to.be.true
         expect($link.attr("href")).to.eq "#/examples/users/123"
 
       it "has valid `birthday` date formatter", inject (usersGrid) ->
