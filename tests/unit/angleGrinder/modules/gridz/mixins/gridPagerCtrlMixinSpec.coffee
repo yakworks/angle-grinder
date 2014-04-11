@@ -24,6 +24,9 @@ describe "module: angleGrinder.gridz", ->
       gridCtrl =
         getIds: sinon.stub()
 
+        isFirstPage: sinon.stub()
+        isLastPage: sinon.stub()
+
         prevPage: promiseStub
         nextPage: promiseStub
 
@@ -40,6 +43,12 @@ describe "module: angleGrinder.gridz", ->
 
     it "has `show` method", ->
       expect($scope.pager.show).to.be.a "function"
+
+    it "has `hasPrevRow` method", ->
+      expect($scope.pager.hasPrevRow).to.be.a "function"
+
+    it "has `hasNextRow` method", ->
+      expect($scope.pager.hasNextRow).to.be.a "function"
 
     it "has `prevRow` method", ->
       expect($scope.pager.prevRow).to.be.a "function"
@@ -59,6 +68,60 @@ describe "module: angleGrinder.gridz", ->
 
         it "returns true", ->
           expect($scope.pager.show()).to.be.false
+
+    describe "#hasPrevRow()", ->
+
+      beforeEach ->
+        $scope.current.id = 1
+        gridCtrl.getIds.returns ["123", "456", "789"]
+
+      context "on the non-first page", ->
+        beforeEach -> gridCtrl.isFirstPage.returns false
+
+        it "returns true", ->
+          expect($scope.pager.hasPrevRow()).to.be.true
+
+      context "on the first page", ->
+        beforeEach -> gridCtrl.isFirstPage.returns true
+
+        context "when the row is not the first one", ->
+          beforeEach -> $scope.current.id = "456"
+
+          it "returns true", ->
+            expect($scope.pager.hasPrevRow()).to.be.true
+
+        context "when the row is the first one", ->
+          beforeEach -> $scope.current.id = "123"
+
+          it "returns true", ->
+            expect($scope.pager.hasPrevRow()).to.be.false
+
+    describe "#hasNextRow()", ->
+
+      beforeEach ->
+        $scope.current.id = 1
+        gridCtrl.getIds.returns ["123", "456", "789"]
+
+      context "on the non-last page", ->
+        beforeEach -> gridCtrl.isLastPage.returns false
+
+        it "returns true", ->
+          expect($scope.pager.hasNextRow()).to.be.true
+
+      context "on the last page", ->
+        beforeEach -> gridCtrl.isLastPage.returns true
+
+        context "when the row is not the last one", ->
+          beforeEach -> $scope.current.id = "456"
+
+          it "returns true", ->
+            expect($scope.pager.hasNextRow()).to.be.true
+
+        context "when the row is the last one", ->
+          beforeEach -> $scope.current.id = "789"
+
+          it "returns true", ->
+            expect($scope.pager.hasNextRow()).to.be.false
 
     describe "#prevRow()", ->
 

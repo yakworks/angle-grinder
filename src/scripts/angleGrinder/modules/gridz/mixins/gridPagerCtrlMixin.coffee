@@ -54,6 +54,20 @@ gridz.controller "gridPagerCtrlMixin", [
     # and the pager can be displayed
     @show = -> getGrid()?
 
+    # return true when the current row is not the first one
+    @hasPrevRow = ->
+      [ids, indx] = getCurrent()
+
+      return true unless getGrid().isFirstPage()
+      return indx isnt 0
+
+    # return true when the current row is not the last one
+    @hasNextRow = ->
+      [ids, indx] = getCurrent()
+
+      return true unless getGrid().isLastPage()
+      return indx isnt ids.length - 1
+
     # navigates to the previous row
     @prevRow = ->
       [ids, indx] = getCurrent()

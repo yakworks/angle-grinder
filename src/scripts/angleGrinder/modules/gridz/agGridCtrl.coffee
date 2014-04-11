@@ -111,16 +111,28 @@ gridz.controller "AgGridCtrl", class
   getTotalPages: ->
     Math.ceil @getTotalRecords() / @getPageSize()
 
+  # return true if the current grid view displays the first page
+  isFirstPage: ->
+    page = @getCurrentPage()
+    return page is 1
+
+  # return true if the current grid view displays the last page
+  isLastPage: ->
+    page = @getCurrentPage()
+    return page is @getTotalPages()
+
   # Loads the previous page
   prevPage: ->
+    return @lastPage() if @isFirstPage()
+
     page = @getCurrentPage()
-    return @lastPage() if page is 1
     @loadPage(page - 1)
 
   # Loads the next page
   nextPage: ->
+    return @firstPage() if @isLastPage()
+
     page = @getCurrentPage()
-    return @firstPage() if page is @getTotalPages()
     @loadPage(page + 1)
 
   # Loads the first page

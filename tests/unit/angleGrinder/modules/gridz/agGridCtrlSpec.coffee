@@ -389,6 +389,37 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
       it "return the total number of pages", ->
         expect(ctrl.getTotalPages()).to.eq 100
 
+    describe "#isFirstPage", ->
+
+      context "if the current grid view displays the first page", ->
+        before -> @gridParams.page = 1
+
+        it "returns true", ->
+          expect(ctrl.isFirstPage()).to.be.true
+
+      context "otherwise", ->
+        before -> @gridParams.page = 2
+
+        it "returns true", ->
+          expect(ctrl.isFirstPage()).to.be.false
+
+    describe "#isLastPage", ->
+      before ->
+        @gridParams.records = 30
+        @gridParams.rowNum = 10
+
+      context "if the current grid view displays the last page", ->
+        before -> @gridParams.page = 3
+
+        it "returns true", ->
+          expect(ctrl.isLastPage()).to.be.true
+
+      context "otherwise", ->
+        before -> @gridParams.page = 1
+
+        it "returns true", ->
+          expect(ctrl.isLastPage()).to.be.false
+
     describe "#firstPage", ->
 
       it "loads the first page", ->
