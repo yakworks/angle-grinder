@@ -46,9 +46,6 @@ module.exports = (config) ->
     # cli runner port
     runnerPort: 9100
 
-    # enable / disable watching file and executing tests whenever any file changes
-    autoWatch: true
-
     # Start these browsers, currently available:
     # - Chrome
     # - ChromeCanary
@@ -61,6 +58,9 @@ module.exports = (config) ->
 
     # If browser does not capture in given timeout [ms], kill it
     captureTimeout: 30000
+
+    # enable / disable watching file and executing tests whenever any file changes
+    autoWatch: true
 
     # Continuous Integration mode
     # if true, it capture browsers, run tests and exit

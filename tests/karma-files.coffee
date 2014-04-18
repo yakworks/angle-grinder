@@ -48,5 +48,6 @@ module.exports =
 
     "tests/unit/fixtures/**/*.html"
     "tests/unit/helpers/**/*.coffee"
-    "tests/unit/**/*Spec.coffee"
+    "tests/unit/angleGrinder/**/*Spec.coffee"
+    "tests/unit/exampleApp/**/*Spec.coffee"
   ]

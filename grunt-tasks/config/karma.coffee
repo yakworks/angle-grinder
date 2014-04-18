@@ -1,11 +1,6 @@
 # https://github.com/karma-runner/grunt-karma
 module.exports = (grunt) ->
 
-  _extractOptions = (key, opts = {}) ->
-    options = grunt.option(key) or opts.default
-    options = options.replace(/[\s\[\]]/, "")
-    options.split(",")
-
   # Extract browsers list from the command line
   # For example `grunt test --browsers=Chrome,Firefox`
   # Currently available browsers:
@@ -16,20 +11,20 @@ module.exports = (grunt) ->
   # - Safari (only Mac)
   # - PhantomJS
   # - IE (only Windows)
-  parseBrowsers = (opts = {}) ->
-    opts.default or= "PhantomJS"
-    _extractOptions("browsers", opts)
+  parseBrowsers = ({ defaultBrowser } = { default: "PhantomJS" }) ->
+    browsers = grunt.option("browsers") or defaultBrowser
+    browsers.replace(/[\s\[\]]/, "").split(",")
 
   options:
-    browsers: parseBrowsers(default: "PhantomJS")
+    configFile: "<%= appConfig.test %>/karma.conf.coffee"
+    browsers: parseBrowsers(defaultBrowser: "PhantomJS")
     colors: true
 
+  # single run karm
   unit:
-    configFile: "<%= appConfig.test %>/karma.conf.coffee"
     singleRun: true
 
   # run karma for unit tests in watch mode
   watch:
-    configFile: "<%= appConfig.test %>/karma.conf.coffee"
     singleRun: false
     autoWatch: true
