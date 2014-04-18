@@ -38,12 +38,10 @@ gridz.service "xlsData", [
   "$document", "$sanitize", "xlsTemplate",
   ($document, $sanitize, xlsTemplate) ->
 
-    findGridEl = (grid) ->
-      gridId = grid.getGridId()
-      [gridId, $document.find("div#gbox_#{gridId}")]
+    findGridEl = (gridId) -> $document.find("div#gbox_#{gridId}")
 
-    prepareHeading = (grid) ->
-      [gridId, gridEl] = findGridEl(grid)
+    prepareHeading = (gridId) ->
+      gridEl = findGridEl(gridId)
 
       # get the grid's heading
       el = gridEl.find(".ui-jqgrid-hbox table").clone()
@@ -59,8 +57,8 @@ gridz.service "xlsData", [
 
       el.html()
 
-    prepareRows = (grid) ->
-      [gridId, gridEl] = findGridEl(grid)
+    prepareRows = (gridId, selectedIds) ->
+      gridEl = findGridEl(gridId)
 
       # get the grid's table html content
       el = gridEl.find("##{gridId}").clone()
@@ -74,21 +72,20 @@ gridz.service "xlsData", [
       el.find("td a").contents().unwrap()
 
       # include only selected rows otherwise export everything
-      rowIds = grid.getSelectedRowIds()
-      if rowIds.length > 0
+      if selectedIds.length > 0
         el.find("tr").each (index, tr) ->
           rowEl = $(tr)
 
           id = rowEl.attr("id")
-          el.find("tr##{id}").remove() unless _.include rowIds, id
+          el.find("tr##{id}").remove() unless _.include selectedIds, id
 
       el.html()
 
     # build the result
-    buildTable = (grid) ->
+    buildTable = (gridId, selectedRows) ->
       resultEl = angular.element("<div></div>")
-      resultEl.append(prepareHeading(grid))
-      resultEl.append(prepareRows(grid))
+      resultEl.append(prepareHeading(gridId))
+      resultEl.append(prepareRows(gridId, selectedRows))
 
       # remove unnecessary html attributes
       attrsToRemove = ["id", "class", "style", "title",
@@ -99,8 +96,8 @@ gridz.service "xlsData", [
       # remove unsafe element
       $sanitize(resultEl.html())
 
-    (grid) ->
+    (gridId, selectedRows = []) ->
       # generate the xls file content
-      data = xlsTemplate(table: buildTable(grid), worksheet: "Grid export")
+      data = xlsTemplate(table: buildTable(gridId, selectedRows), worksheet: "Grid export")
       return "data:application/vnd.ms-excel;base64,#{data}"
 ]

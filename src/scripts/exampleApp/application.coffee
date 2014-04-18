@@ -2,7 +2,6 @@
 
 app = angular.module "exampleApp", [
   "ngRoute"
-  "ngSanitize"
   "pasvaz.bindonce"
   "blueimp.fileupload"
   "placeholders.txt"

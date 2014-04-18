@@ -1,4 +1,5 @@
 gridz = angular.module("angleGrinder.gridz", [
+  "ngSanitize"
   "angleGrinder.common"
   "ui.select2"
 ])

@@ -5,8 +5,8 @@ gridz = angular.module("angleGrinder.gridz")
 # with `ag-grid-name` directive, for example:
 # `<div ag-grid="gridOptions" ag-grid-name="usersGrid"></div>`
 gridz.controller "AgGridCtrl", class
-  @$inject = ["$rootScope", "$q", "hasSearchFilters", "flatten"]
-  constructor: (@$rootScope, @$q, @hasSearchFilters, @flatten) ->
+  @$inject = ["$rootScope", "$q", "hasSearchFilters", "flatten", "xlsData"]
+  constructor: (@$rootScope, @$q, @hasSearchFilters, @flatten, @xlsData) ->
 
   registerGridElement: (@gridEl) ->
 
@@ -200,6 +200,10 @@ gridz.controller "AgGridCtrl", class
       window.localStorage.setItem("gridz.#{@getGridId()}.choosedColumns", angular.toJson(choosedColumns))
 
     @gridEl.jqGrid("columnChooser", options)
+
+  # Returns data uri with xls file content for rows from the current grid view.
+  getXlsDataUri: ->
+    @xlsData(@getGridId(), @getSelectedRowIds())
 
   # Triggers grid's resize event
   # @private

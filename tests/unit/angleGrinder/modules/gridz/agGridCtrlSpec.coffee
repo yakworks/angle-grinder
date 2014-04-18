@@ -1,9 +1,12 @@
 describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
 
   beforeEach module "angleGrinder.gridz", ($provide) ->
-    # substitute `flatten` service with a spy
-    fakeFlatten = (data) -> data
-    $provide.value "flatten", sinon.spy(fakeFlatten)
+    # spy for `flatten` service
+    $provide.decorator "flatten", ($delegate) ->
+      sinon.spy($delegate)
+
+    # mock `xlsData` service
+    $provide.value "xlsData", sinon.mock()
 
     return
 
@@ -16,11 +19,19 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
 
   beforeEach inject ($controller) ->
     jqGridEl = sinon.stub($().jqGrid())
+
+    # stub some grid element methods
+    jqGridEl.attr = (name) -> "gridId"
     jqGridEl.getGridParam = (name) => @gridParams[name]
 
     ctrl = $controller "AgGridCtrl"
     ctrl.registerGridElement(jqGridEl)
     sinon.stub(ctrl, "flashOnSuccess")
+
+  describe "#getGridId", ->
+
+    it "returns grid element id", ->
+      expect(ctrl.getGridId()).to.eq "gridId"
 
   describe "#reload", ->
 
@@ -104,7 +115,11 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
 
         args = jqGridEl.setRowData.getCall(0).args
         expect(args[0]).to.eq 123
-        expect(args[1]).to.deep.eq foo: "bar", baz: "baz", bar: {}, "bar.baz": null, "bar.biz": null
+
+        expect(args[1]).to.have.property "foo", "bar"
+        expect(args[1]).to.have.property "baz", "baz"
+        expect(args[1]).to.have.property "bar.baz", null
+        expect(args[1]).to.have.property "bar.biz", null
 
   describe "#addRow", ->
 
@@ -542,3 +557,14 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
         expect(resolvedValue).to.be.null
         $rootScope.$apply()
         expect(resolvedValue).to.have.property "foo", "bar"
+
+  describe "#getXlsDataUri", ->
+
+    it "returns data url for xls export", inject (xlsData) ->
+      ctrl.getXlsDataUri()
+
+      expect(xlsData.called).to.be.true
+
+      args = xlsData.getCall(0).args
+      expect(args[0]).to.eq "gridId"
+      expect(args[1]).to.deep.eq [1, 2, 3]

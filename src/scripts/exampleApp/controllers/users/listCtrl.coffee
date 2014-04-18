@@ -1,15 +1,15 @@
 class ListCtrl
 
-  @$inject = ["$scope", "$window", "usersGrid", "xlsData", "Users", "massUpdateMixin", "singlePageCrudCtrlMixin"]
-  constructor: ($scope, $window, usersGrid, xlsData, Users, massUpdateMixin, singlePageCrudCtrlMixin) ->
+  @$inject = ["$scope", "$window", "usersGrid", "Users", "massUpdateMixin", "singlePageCrudCtrlMixin"]
+  constructor: ($scope, $window, usersGrid, Users, massUpdateMixin, singlePageCrudCtrlMixin) ->
     $scope.showGrid = true
 
     # initialize the grid
     $scope.gridOptions = usersGrid()
 
     $scope.excelExport = ->
-      data = xlsData($scope.usersGrid)
-      $window.location.href = data
+      dataUri = $scope.usersGrid.getXlsDataUri()
+      $window.location.href = dataUri
 
     singlePageCrudCtrlMixin $scope,
       Resource: Users

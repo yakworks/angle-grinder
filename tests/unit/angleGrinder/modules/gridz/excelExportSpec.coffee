@@ -2,8 +2,6 @@ describe "module: angleGrinder.gridz", ->
 
   describe "xls export", ->
 
-    beforeEach module "ngSanitize"
-
     beforeEach module "angleGrinder.gridz", ($provide) ->
       $provide.decorator "xlsData", ($delegate) ->
         sinon.spy($delegate)
@@ -20,13 +18,9 @@ describe "module: angleGrinder.gridz", ->
 
     describe "service: xlsData", ->
 
-      before -> @selectedRows = ["4", "5", "6"]
-
-      grid = null
-      beforeEach ->
-        grid =
-          getGridId: => "usersGrid"
-          getSelectedRowIds: => @selectedRows
+      before ->
+        @gridId = "usersGrid"
+        @selectedRows = ["4", "5", "6"]
 
       beforeEach module "tests/unit/fixtures/usersGrid.html"
 
@@ -48,7 +42,7 @@ describe "module: angleGrinder.gridz", ->
         el
 
       it "generats valid xls file heading", inject (xlsData) ->
-        el = decodeXls(xlsData(grid))
+        el = decodeXls(xlsData(@gridId, @selectedRows))
 
         expect(el.find("thead th:nth-child(1)").text()).to.contain "id"
         expect(el.find("thead th:nth-child(2)").text()).to.contain "Login"
@@ -59,7 +53,7 @@ describe "module: angleGrinder.gridz", ->
         expect(el.find("thead th:nth-child(7)").text()).to.contain "Paid"
 
       it "generats valid xls file contend", inject (xlsData) ->
-        el = decodeXls(xlsData(grid))
+        el = decodeXls(xlsData(@gridId, @selectedRows))
 
         rowEl = el.find("tbody tr:first")
         expect(rowEl.find("td:nth-child(1)").text()).to.contain "4"
@@ -72,14 +66,14 @@ describe "module: angleGrinder.gridz", ->
         expect(rowEl.find("td:nth-child(7)").text()).to.contain "true"
 
       it "generates valid data uri", inject (xlsData) ->
-        data = xlsData(grid)
+        data = xlsData(@gridId, @selectedRows)
         expect(data).to.match /^\bdata:application\/vnd\.ms-excel;base64\b/
 
       context "when some rows are selected", ->
         before -> @selectedRows = ["5", "2", "4"]
 
         it "exports only selected rows", inject (xlsData) ->
-          el = decodeXls(xlsData(grid))
+          el = decodeXls(xlsData(@gridId, @selectedRows))
           expect(el.find("tbody tr")).to.have.length(3)
 
           rowEl = el.find("tbody tr:first")
@@ -89,7 +83,7 @@ describe "module: angleGrinder.gridz", ->
         before -> @selectedRows = []
 
         it "exports all rows", inject (xlsData) ->
-          el = decodeXls(xlsData(grid))
+          el = decodeXls(xlsData(@gridId, @selectedRows))
           expect(el.find("tbody tr")).to.have.length(10)
 
           rowEl = el.find("tbody tr:first")
