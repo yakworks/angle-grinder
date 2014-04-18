@@ -88,3 +88,36 @@ describe "module: angleGrinder.gridz", ->
 
           rowEl = el.find("tbody tr:first")
           expect(rowEl.find("td:nth-child(1)").text()).to.contain "1"
+
+  describe "directive: agGridXlsExport", ->
+
+    # mock `$window.location.href` in order to avoid
+    # "Some of your tests did a full page reload!"
+    beforeEach module "ng", ($provide) ->
+      $provide.value "$window", location: {}
+      return
+
+    beforeEach module "angleGrinder.gridz"
+
+    element = null
+
+    beforeEach inject ($injector, $rootScope) ->
+      $scope = $rootScope.$new()
+
+      # stub the grid instance
+      $scope.grid = users: getXlsDataUri: -> "foo"
+
+      {element, $scope} = compileTemplate """
+        <a href="" ag-grid-xls-export="grid.users">
+        <i class="icon-download-alt"></i> Export to XLS
+      </a>
+      """, $injector, $scope
+
+    describe "on click", ->
+
+      it "does the magic", inject ($window) ->
+        # When
+        element.click()
+
+        # Then
+        expect($window.location.href).to.eq "foo"

@@ -101,3 +101,21 @@ gridz.service "xlsData", [
       data = xlsTemplate(table: buildTable(gridId, selectedRows), worksheet: "Grid export")
       return "data:application/vnd.ms-excel;base64,#{data}"
 ]
+
+# Generates xls export button for the given grid.
+# Usage:
+#   <a href="" ag-grid-xls-export="usersGrid">
+#     <i class="icon-download-alt"></i> Export to XLS
+#   </a>
+gridz.directive "agGridXlsExport", [
+  "$window", ($window) ->
+    restrict: "A"
+    scope: grid: "=agGridXlsExport"
+
+    link: (scope, element) ->
+      element.on "click", (event) ->
+        event.preventDefault()
+
+        dataUri = scope.grid.getXlsDataUri()
+        $window.location.href = dataUri
+]

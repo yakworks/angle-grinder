@@ -13,8 +13,14 @@
             <i class="icon-selected-pointer"></i> Actions<b class="caret"></b>
           </a>
           <ul class="dropdown-menu">
-            <li><a href="" ng-click="massUpdate()"><i class="icon-edit"></i> Mass update</a></li>
-            <li><a href="" ng-click="excelExport()"><i class="icon-download-alt"></i> Export to XLS</a></li>
+            <li>
+              <a href="" ng-click="massUpdate()"><i class="icon-edit"></i> Mass update</a>
+            </li>
+            <li>
+              <a href="" ag-grid-xls-export="usersGrid">
+                <i class="icon-download-alt"></i> Export to XLS
+              </a>
+            </li>
           </ul>
         </li>
         <li class="divider-vertical"></li>
