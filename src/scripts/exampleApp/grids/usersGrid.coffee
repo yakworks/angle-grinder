@@ -5,7 +5,7 @@ grids.factory "usersGrid", [
 
     showActionLink = (cellVal, options, rowdata) ->
       """
-      <a class="with-pager" href="#/examples/users/#{rowdata.id}">#{cellVal}</a>
+      <a href="#/examples/users/#{rowdata.id}">#{cellVal}</a>
       """
 
     colModel = ->
