@@ -1,6 +1,7 @@
 package grinder
 
-import org.apache.commons.logging.*
+import org.apache.commons.logging.Log
+import org.apache.commons.logging.LogFactory
 
 /**
  * a holder object for paged data
@@ -12,7 +13,7 @@ class Pager {
     //max rows to show
     Integer max = 10
     //the max rows the user can set it to
-    Integer allowedMax = 100
+    Integer allowedMax = 1000
     //the total record count. This is used to calculate the number of pages
     Integer recordCount = 0
     Integer offset
