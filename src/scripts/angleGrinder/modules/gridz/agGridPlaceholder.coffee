@@ -5,7 +5,9 @@ gridz.constant "rootPath", "/"
 # Show the grid (or other content) when the current route
 # points to the root page of the given section.
 gridz.directive "agGridPlaceholder", [
-  "$log", "pathWithContext", "rootPath", ($log, pathWithContext, rootPath) ->
+  "$log", "$parse", "pathWithContext", "rootPath",
+  ($log, $parse, pathWithContext, rootPath) ->
+
     restrict: "E"
     scope: true
 
@@ -14,6 +16,10 @@ gridz.directive "agGridPlaceholder", [
 
       # initially do not render the grid
       scope.renderGrid = false
+
+      # ability to force the grid rendering
+      if attrs.forceRenderGrid
+        scope.renderGrid = $parse(attrs.forceRenderGrid)(scope)
 
       # initially hide the grid
       scope.showGrid = false

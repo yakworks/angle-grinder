@@ -12,20 +12,27 @@ describe "module: angleGrinder.gridz", ->
   describe "directive: agGridPlaceholder", ->
 
     $scope = null
+
+    elementTemplate = null
     element = null
     elementScope = null
 
+    before ->
+      elementTemplate = """
+        <ag-grid-placeholder src="bar/biz.html"></ag-grid-placeholder>
+      """
+
+    # compile the directive
     beforeEach inject ($compile, $rootScope) ->
       $scope = $rootScope.$new()
 
-      link = $compile """
-        <ag-grid-placeholder src="bar/biz.html"></ag-grid-placeholder>
-      """, $scope
-
-      element = link($scope)
+      element = $compile(elementTemplate, $scope)($scope)
       elementScope = element.scope()
 
       $rootScope.$digest()
+
+    it "initially does not render the grid", ->
+      expect(elementScope.renderGrid).to.be.false
 
     it "initially hides the grid", ->
       expect(elementScope.showGrid).to.be.false
@@ -66,3 +73,23 @@ describe "module: angleGrinder.gridz", ->
           expect(elementScope.showGrid).to.be.true
 
           expect(element.find("#the-grid").text()).to.eq "grid"
+
+    context "when `forceRenderGrid` attribute is given", ->
+
+      context "and it is set to `true`", ->
+        before ->
+          elementTemplate = """
+            <ag-grid-placeholder src="bar/biz.html" force-render-grid="true"></ag-grid-placeholder>
+          """
+
+        it "initially forces to render the grid", ->
+          expect(elementScope.renderGrid).to.be.true
+
+      context "adn is is set to `false`", ->
+        before ->
+          elementTemplate = """
+            <ag-grid-placeholder src="bar/biz.html" force-render-grid="false"></ag-grid-placeholder>
+          """
+
+        it "initially does not render the grid", ->
+          expect(elementScope.renderGrid).to.be.false
