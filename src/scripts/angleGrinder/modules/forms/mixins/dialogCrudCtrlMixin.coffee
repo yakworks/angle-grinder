@@ -1,8 +1,8 @@
 mixin = angular.module("angleGrinder.forms")
 
 mixin.factory "dialogCrudCtrlMixin", [
-  "$log", "$parse", "editDialog", "confirmationDialog", "pathWithContext"
-  ($log, $parse, editDialog, confirmationDialog, pathWithContext) ->
+  "$log", "$parse", "formDialog", "confirmationDialog"
+  ($log, $parse, formDialog, confirmationDialog) ->
     ($scope, args = {}) ->
       {Resource, gridName, templateUrl} = args
 
@@ -10,7 +10,7 @@ mixin.factory "dialogCrudCtrlMixin", [
       getGrid = -> $parse(gridName)($scope)
 
       openEditDialogFor = (resource) ->
-        editDialog.open(pathWithContext(templateUrl), resource, getGrid())
+        formDialog.open(templateUrl, resource, getGrid())
 
       # Generic method for invoking an edit dialog for a resource
       # with the given id

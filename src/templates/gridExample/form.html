@@ -1,12 +1,14 @@
 <div class="modal-header">
-  <button type="button" class="close" ng-click="closeEditDialog()">&times;</button>
+  <button type="button" class="close" ng-click="closeDialog()">&times;</button>
 
   <h3 ng-if="createNew">Create New Item</h3>
   <h3 ng-if="!createNew">Edit Item {{item.customer.name}}</h3>
 </div>
 
 <div class="modal-body">
-  <form name="editForm" novalidate class="form-horizontal no-margin" ng-submit="save(item)">
+  <form name="editForm" class="form-horizontal no-margin"
+        novalidate="true"
+        ng-submit="save(editForm, item)">
 
     <div ag-field-group for="customerName">
       <label class="control-label">Customer Name</label>
@@ -63,7 +65,7 @@
         <ag-delete-button when-confirmed="delete(item)"></ag-delete-button>
       </span>
 
-      <cancel-button ng-click="closeEditDialog()"></cancel-button>
+      <cancel-button ng-click="closeDialog()"></cancel-button>
       <ag-submit-button></ag-submit-button>
     </div>
   </form>

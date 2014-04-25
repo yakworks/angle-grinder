@@ -484,7 +484,7 @@ angular.module("myApp")
   .controller("MyCtrl", MyCtrl)
 </pre>
 
-  <h3 id="docs-forms-editDialog">editDialog service</h3>
+  <h3 id="docs-forms-formDialog">formDialog service</h3>
 
   Displays a dialog with a form for creating or updating a record.
   Used mostly on dialog based CRUD pages.<br/>
@@ -493,17 +493,17 @@ angular.module("myApp")
 <pre class="prettyprint">
 class MyCtrl
 
-  @$inject = ["$scope", "editDialog", "Users"]
-  constructor: ($scope, editDialog, Users) ->
+  @$inject = ["$scope", "formDialog", "Users"]
+  constructor: ($scope, formDialog, Users) ->
     # Displays a form for creating a new user
     $scope.createItem = ->
       user = new Users()
-      editDialog.open("/user/formTemplate", user)
+      formDialog.open("/user/formTemplate", user)
 
     # Displays a form for editing an exiting user
     $scope.editItem = (id) ->
       Users.get { id: id }, (user) ->
-        editDialog.open("/user/formTemplate", user)
+        formDialog.open("/user/formTemplate", user)
 
 angular.module("myApp")
   .controller("tabbedOrg.MyCtrl", MyCtrl)
@@ -513,7 +513,7 @@ angular.module("myApp")
 
 <pre class="prettyprint lang-html">
 &lt;div class=&quot;modal-header&quot;&gt;
-  &lt;button type=&quot;button&quot; class=&quot;close&quot; ng-click=&quot;closeEditDialog()&quot;&gt;&amp;times;&lt;/button&gt;
+  &lt;button type=&quot;button&quot; class=&quot;close&quot; ng-click=&quot;closeDialog()&quot;&gt;&amp;times;&lt;/button&gt;
   &lt;h3 ng-show=&quot;createNew&quot;&gt;Create New ${entityName}&lt;/h3&gt;
   &lt;h3 ng-hide=&quot;createNew&quot;&gt;Edit ${entityName}&lt;/h3&gt;
 &lt;/div&gt;
@@ -546,7 +546,7 @@ angular.module("myApp")
           &lt;ag-delete-button when-confirmed=&quot;delete(item)&quot;&gt;&lt;/ag-delete-button&gt;
       &lt;/span&gt;
 
-    &lt;ag-cancel-button ng-click=&quot;closeEditDialog()&quot;&gt;&lt;/ag-cancel-button&gt;
+    &lt;ag-cancel-button ng-click=&quot;closeDialog()&quot;&gt;&lt;/ag-cancel-button&gt;
     &lt;ag-submit-button&gt;&lt;/ag-submit-button&gt;
   &lt;/div&gt;
 &lt;/form&gt;
