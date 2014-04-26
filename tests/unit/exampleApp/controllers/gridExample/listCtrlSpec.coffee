@@ -2,7 +2,7 @@ describe "controller: gridExample.ListCtrl", ->
   beforeEach module "templates/gridExample/form.html"
 
   beforeEach module "angleGrinder.forms", ($provide) ->
-    $provide.decorator "editDialog", ($delegate) ->
+    $provide.decorator "formDialog", ($delegate) ->
       sinon.spy($delegate, "open")
       $delegate
 
@@ -42,19 +42,19 @@ describe "controller: gridExample.ListCtrl", ->
       it "loads a resource", ->
         expect(controller.findItemById).to.have.been.calledWith(123)
 
-      it "opens opens a dialog for editing the the loaded resource", inject (editDialog) ->
-        expect(editDialog.open).to.have.been.called
-        expect(editDialog.open).to.have.been.calledWith("templates/gridExample/form.html", resource)
+      it "opens opens a dialog for editing the the loaded resource", inject (formDialog) ->
+        expect(formDialog.open).to.have.been.called
+        expect(formDialog.open).to.have.been.calledWith("templates/gridExample/form.html", resource)
 
     describe "#createItem", ->
 
-      it "opens a dialog for creating a new item", inject (editDialog) ->
+      it "opens a dialog for creating a new item", inject (formDialog) ->
         # When
         $scope.createItem()
 
         # Then
-        expect(editDialog.open).to.have.been.called
-        expect(editDialog.open).to.have.been.calledWith("templates/gridExample/form.html")
+        expect(formDialog.open).to.have.been.called
+        expect(formDialog.open).to.have.been.calledWith("templates/gridExample/form.html")
 
   describe "controller", ->
 

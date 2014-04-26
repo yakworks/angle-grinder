@@ -1,7 +1,7 @@
 <g:set var="entityName" value="${ag.label(code: "user")}"/>
 
 <div class="modal-header">
-    <button type="button" class="close" ng-click="closeEditDialog()" aria-hidden="true">&times;</button>
+    <button type="button" class="close" ng-click="closeDialog()" aria-hidden="true">&times;</button>
 
     <h3 ng-show="createNew">Create New ${entityName}</h3>
     <h3 ng-hide="createNew">Edit ${entityName}</h3>
@@ -127,7 +127,7 @@
             <ag-delete-button when-confirmed="delete(item)"></ag-delete-button>
         </span>
 
-        <ag-cancel-button ng-click="closeEditDialog()"></ag-cancel-button>
+        <ag-cancel-button ng-click="closeDialog()"></ag-cancel-button>
         <ag-submit-button></ag-submit-button>
     </div>
 </form>

@@ -10,9 +10,10 @@
   <h3 class="page-header" ng-show="org.newRecord()">Create org</h3>
   <h3 class="page-header" ng-show="org.persisted()">Edit org</h3>
 
-  <form name="editForm" novalidate class="form-horizontal no-margin"
+  <form name="editForm" class="form-horizontal no-margin"
+        novalidate="true"
         ag-server-validation-errors
-        ng-submit="save(org)">
+        ng-submit="save(editForm, org)">
 
     <div ag-field-group for="name">
       <label class="control-label">Name</label>

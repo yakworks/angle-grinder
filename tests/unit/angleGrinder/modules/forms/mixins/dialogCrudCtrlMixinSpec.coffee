@@ -3,8 +3,8 @@ describe "module: angleGrinder.forms mixin: dialogCrudCtrlMixin", ->
   beforeEach module "exampleApp.resources"
 
   beforeEach module "angleGrinder.forms", ($provide) ->
-    # stub `editDialog` service
-    $provide.decorator "editDialog", ($delegate) ->
+    # stub `formDialog` service
+    $provide.decorator "formDialog", ($delegate) ->
       sinon.stub($delegate, "open")
       $delegate
 
@@ -46,10 +46,10 @@ describe "module: angleGrinder.forms mixin: dialogCrudCtrlMixin", ->
       $httpBackend.verifyNoOutstandingExpectation()
       $httpBackend.verifyNoOutstandingRequest()
 
-    it "opens a dialog for editiging the loaded resource", inject (editDialog) ->
-      expect(editDialog.open).to.have.been.called
+    it "opens a dialog for editiging the loaded resource", inject (formDialog) ->
+      expect(formDialog.open).to.have.been.called
 
-      args = editDialog.open.getCall(0).args
+      args = formDialog.open.getCall(0).args
       expect(args[0]).to.be.equal "/foo/bar/form.html"
       expect(args[1]).to.have.property "id", 123
 
@@ -59,8 +59,8 @@ describe "module: angleGrinder.forms mixin: dialogCrudCtrlMixin", ->
           record.someValue = "foo bar"
           record
 
-      it "uses it to pre-process the loaded record", inject (editDialog) ->
-        args = editDialog.open.getCall(0).args
+      it "uses it to pre-process the loaded record", inject (formDialog) ->
+        args = formDialog.open.getCall(0).args
         expect(args[1]).to.have.property "id", 123
         expect(args[1]).to.have.property "someValue", "foo bar"
 
@@ -70,9 +70,9 @@ describe "module: angleGrinder.forms mixin: dialogCrudCtrlMixin", ->
     it "is mixed to the $scope", ->
       expect($scope.createItem).to.be.a "function"
 
-    it "opens a dialog for creating a resource", inject (editDialog) ->
-      expect(editDialog.open).to.have.been.called
-      expect(editDialog.open).to.have.been.calledWith("/foo/bar/form.html")
+    it "opens a dialog for creating a resource", inject (formDialog) ->
+      expect(formDialog.open).to.have.been.called
+      expect(formDialog.open).to.have.been.calledWith("/foo/bar/form.html")
 
     context "when the `beforeCreate` callback is given", ->
       before ->
@@ -80,8 +80,8 @@ describe "module: angleGrinder.forms mixin: dialogCrudCtrlMixin", ->
           record.orderId = 66
           record
 
-      it "uses it to pre-process the record before create", inject (editDialog) ->
-        args = editDialog.open.getCall(0).args
+      it "uses it to pre-process the record before create", inject (formDialog) ->
+        args = formDialog.open.getCall(0).args
         expect(args[1]).to.have.property "orderId", 66
 
   describe "#deleteItem", ->
