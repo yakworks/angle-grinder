@@ -2,8 +2,12 @@ forms = angular.module("angleGrinder.forms")
 
 # Generic controller for forms inside modal dialogs
 class FormDialogCtrl
-  @$inject = ["$scope", "$rootScope", "$log", "dialog", "serverValidationErrorsHandler", "item", "grid"]
-  constructor: ($scope, $rootScope, $log, dialog, serverValidationErrorsHandler, item, grid) ->
+  @$inject = ["$scope", "$rootScope", "$log", "dialog", "serverValidationErrorsHandler", "dialogOptions"]
+  constructor: ($scope, $rootScope, $log, dialog, serverValidationErrorsHandler, dialogOptions) ->
+    # Assing dialog options to the scope
+    $scope.dialogOptions = dialogOptions
+    { item, grid } = $scope.dialogOptions
+
     $scope.item = item
     $scope.createNew = not item.persisted()
 

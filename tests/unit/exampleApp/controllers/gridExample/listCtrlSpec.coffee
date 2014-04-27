@@ -44,7 +44,10 @@ describe "controller: gridExample.ListCtrl", ->
 
       it "opens opens a dialog for editing the the loaded resource", inject (formDialog) ->
         expect(formDialog.open).to.have.been.called
-        expect(formDialog.open).to.have.been.calledWith("templates/gridExample/form.html", resource)
+
+        args = formDialog.open.getCall(0).args
+        expect(args[0]).to.eq "templates/gridExample/form.html"
+        expect(args[1]).to.have.property "item", resource
 
     describe "#createItem", ->
 

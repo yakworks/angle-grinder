@@ -32,8 +32,9 @@ describe "module: angleGrinder.forms", ->
         $scope: $scope
 
         dialog: dialog
-        item: item
-        grid: grid
+        dialogOptions:
+          item: item
+          grid: grid
 
     it "assigns an item to the scope", ->
       expect($scope.item).to.not.be.undefied

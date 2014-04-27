@@ -6,13 +6,11 @@ forms.factory "formDialog", [
   "$dialog", "pathWithContext",
   ($dialog, pathWithContext) ->
 
-    open: (templateUrl, item, grid) ->
+    open: (templateUrl, dialogOptions = {}) ->
       dialog = $dialog.dialog
         backdropFade: false
         dialogFade: false
-        resolve:
-          item: -> item
-          grid: -> grid
+        resolve: dialogOptions: -> dialogOptions
 
       # override so we can intercept form dirty and prevent escape
       dialog.handledEscapeKey = (e) ->

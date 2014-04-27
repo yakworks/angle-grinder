@@ -3,28 +3,29 @@ mixin = angular.module("angleGrinder.forms")
 mixin.factory "dialogCrudCtrlMixin", [
   "$log", "$parse", "formDialog", "confirmationDialog"
   ($log, $parse, formDialog, confirmationDialog) ->
-    ($scope, args = {}) ->
-      {Resource, gridName, templateUrl} = args
+    ($scope, options = {}) ->
+      { Resource, gridName, templateUrl, extraDialogOptions } = options
 
       # Retrieve a grid controller from the scope
       getGrid = -> $parse(gridName)($scope)
 
-      openEditDialogFor = (resource) ->
-        formDialog.open(templateUrl, resource, getGrid())
+      openEditDialogFor = (item) ->
+        dialogOptions = item: item, grid: getGrid()
+        formDialog.open(templateUrl, _.extend(dialogOptions, extraDialogOptions))
 
       # Generic method for invoking an edit dialog for a resource
       # with the given id
       $scope.editItem = (id) ->
-        Resource.get id: id, (resource) ->
-          resource = args.beforeEdit(resource) if args.beforeEdit?
-          openEditDialogFor resource
+        Resource.get id: id, (item) ->
+          item = options.beforeEdit(item) if options.beforeEdit?
+          openEditDialogFor item
 
       # Generic method from invoking a dialog for
       # creating a new record
       $scope.createItem = ->
-        resource = new Resource()
-        resource = args.beforeCreate(resource) if args.beforeCreate?
-        openEditDialogFor resource
+        item = new Resource()
+        item = options.beforeCreate(item) if options.beforeCreate?
+        openEditDialogFor item
 
       # Generic method for deleting a record
       $scope.deleteItem = (id) ->
@@ -38,5 +39,5 @@ mixin.factory "dialogCrudCtrlMixin", [
             $log.error "Cannot delete a resource", response
 
           promise = Resource.delete(id: id).$promise
-          promise.then onSuccess, onError
+          promise.then(onSuccess, onError)
 ]

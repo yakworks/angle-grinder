@@ -12,9 +12,6 @@ describe "module: angleGrinder.forms", ->
 
     beforeEach module "angleGrinder.forms"
 
-    formDialog = null
-    beforeEach inject (_formDialog_) -> formDialog = _formDialog_
-
     describe "#open", ->
       dialog = null
 
@@ -22,7 +19,7 @@ describe "module: angleGrinder.forms", ->
         dialog = open: sinon.mock()
         $dialog.dialog.returns(dialog)
 
-      it "opens a dialog for the given templateUrl", ->
+      it "opens a dialog for the given templateUrl", inject (formDialog) ->
         formDialog.open("/foo/bar/form.html")
 
         expect(dialog.open).to.have.been.called

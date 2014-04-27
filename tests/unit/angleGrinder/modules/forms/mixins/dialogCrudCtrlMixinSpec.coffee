@@ -51,7 +51,11 @@ describe "module: angleGrinder.forms mixin: dialogCrudCtrlMixin", ->
 
       args = formDialog.open.getCall(0).args
       expect(args[0]).to.be.equal "/foo/bar/form.html"
-      expect(args[1]).to.have.property "id", 123
+
+      options = args[1]
+      expect(options).to.have.property "item"
+      expect(options).to.have.property "grid"
+      expect(options.item).to.have.property "id", 123
 
     context "when the `beforeEdit` callback is given", ->
       before ->
@@ -61,8 +65,10 @@ describe "module: angleGrinder.forms mixin: dialogCrudCtrlMixin", ->
 
       it "uses it to pre-process the loaded record", inject (formDialog) ->
         args = formDialog.open.getCall(0).args
-        expect(args[1]).to.have.property "id", 123
-        expect(args[1]).to.have.property "someValue", "foo bar"
+
+        options = args[1]
+        expect(options.item).to.have.property "id", 123
+        expect(options.item).to.have.property "someValue", "foo bar"
 
   describe "#createItem", ->
     beforeEach -> $scope.createItem()
@@ -81,8 +87,8 @@ describe "module: angleGrinder.forms mixin: dialogCrudCtrlMixin", ->
           record
 
       it "uses it to pre-process the record before create", inject (formDialog) ->
-        args = formDialog.open.getCall(0).args
-        expect(args[1]).to.have.property "orderId", 66
+        item = formDialog.open.getCall(0).args[1].item
+        expect(item).to.have.property "orderId", 66
 
   describe "#deleteItem", ->
 

@@ -21,12 +21,12 @@ class IndexCtrl
       item.persisted = -> true
       item.save = (callback) -> callback.success(this)
 
-      self = this
-      item.delete = (callback) ->
-        self.deleteItemById(id)
+      item.delete = (callback) =>
+        this.deleteItemById(id)
         callback.success(this)
 
-      formDialog.open("templates/gridExample/form.html", item, $scope.exampleGrid)
+      dialogOptions = item: item, grid: $scope.exampleGrid
+      formDialog.open("templates/gridExample/form.html", dialogOptions)
 
     $scope.createItem = =>
       item = {}
@@ -36,7 +36,8 @@ class IndexCtrl
         item.id = generateId()
         callback.success(this)
 
-      formDialog.open("templates/gridExample/form.html", item, $scope.exampleGrid)
+      dialogOptions = item: item, grid: $scope.exampleGrid
+      formDialog.open("templates/gridExample/form.html", dialogOptions)
         .then (item) => @data.push(item)
 
     $scope.deleteItem = (id) =>
