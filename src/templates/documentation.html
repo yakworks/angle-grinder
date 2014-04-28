@@ -477,7 +477,7 @@ class MyCtrl
   constructor: ($scope, confirmationDialog) ->
 
   $scope.deleteItem = (item) ->
-    confirmationDialog.open().then (confirmed) ->
+    confirmationDialog.open().result.then (confirmed) ->
       item.delete() if confirmed
 
 angular.module("myApp")

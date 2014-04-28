@@ -29,7 +29,7 @@ mixin.factory "dialogCrudCtrlMixin", [
 
       # Generic method for deleting a record
       $scope.deleteItem = (id) ->
-        confirmationDialog.open().then (confirmed) ->
+        confirmationDialog.open().result.then (confirmed) ->
           return unless confirmed
 
           onSuccess = (response) ->

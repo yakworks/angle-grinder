@@ -1,12 +1,11 @@
 describe "controller: users.ListCtrl", ->
+
   beforeEach module "exampleApp"
 
-  # Stub $dialog service
+  # Stub $modal service
   beforeEach module "ui.bootstrap", ($provide) ->
-    $provide.decorator "$dialog", ($delegate) ->
-      dialog = open: sinon.stub()
-      sinon.stub($delegate, "dialog").returns(dialog)
-      $delegate
+    $provide.value "$modal", open: sinon.mock()
+    return
 
   beforeEach module "angleGrinder.forms", ($provide) ->
     $provide.decorator "singlePageCrudCtrlMixin", -> sinon.spy()

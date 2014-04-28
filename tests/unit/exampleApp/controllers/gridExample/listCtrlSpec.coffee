@@ -1,10 +1,10 @@
 describe "controller: gridExample.ListCtrl", ->
+
   beforeEach module "templates/gridExample/form.html"
 
   beforeEach module "angleGrinder.forms", ($provide) ->
-    $provide.decorator "formDialog", ($delegate) ->
-      sinon.spy($delegate, "open")
-      $delegate
+    $provide.value "$modal", open: sinon.stub().returns result: then: angular.noop
+    return
 
   beforeEach module "exampleApp"
 
@@ -30,34 +30,37 @@ describe "controller: gridExample.ListCtrl", ->
       expect($scope.gridOptions.data.length).to.equal 100
 
     describe "#editItem", ->
-      resource = null
+      item = null
 
       beforeEach ->
-        resource = id: 123
-        sinon.stub(controller, "findItemById").withArgs(123).returns(resource)
+        item = id: 123
+        sinon.stub(controller, "findItemById").withArgs(123).returns(item)
 
-        $scope.editItem(resource.id)
+        $scope.editItem(item.id)
         $scope.$digest()
 
-      it "loads a resource", ->
+      it "loads an item", ->
         expect(controller.findItemById).to.have.been.calledWith(123)
 
-      it "opens opens a dialog for editing the the loaded resource", inject (formDialog) ->
-        expect(formDialog.open).to.have.been.called
+      it "opens opens a dialog for editing the the loaded item", inject ($modal) ->
+        expect($modal.open).to.have.been.called
 
-        args = formDialog.open.getCall(0).args
-        expect(args[0]).to.eq "templates/gridExample/form.html"
-        expect(args[1]).to.have.property "item", resource
+        options = $modal.open.getCall(0).args[0]
+        expect(options).to.have.property "templateUrl", "templates/gridExample/form.html"
+        expect(options.resolve.dialogOptions().item).to.eq item
 
     describe "#createItem", ->
 
-      it "opens a dialog for creating a new item", inject (formDialog) ->
+      it "opens a dialog for creating a new item", inject ($modal) ->
         # When
         $scope.createItem()
 
         # Then
-        expect(formDialog.open).to.have.been.called
-        expect(formDialog.open).to.have.been.calledWith("templates/gridExample/form.html")
+        expect($modal.open).to.have.been.called
+
+        options = $modal.open.getCall(0).args[0]
+        expect(options).to.have.property "templateUrl", "templates/gridExample/form.html"
+        expect(options.resolve.dialogOptions().item).to.not.be.undefined
 
   describe "controller", ->
 

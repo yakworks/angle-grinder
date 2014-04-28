@@ -37,7 +37,7 @@ class IndexCtrl
         callback.success(this)
 
       dialogOptions = item: item, grid: $scope.exampleGrid
-      formDialog.open("templates/gridExample/form.html", dialogOptions)
+      formDialog.open("templates/gridExample/form.html", dialogOptions).result
         .then (item) => @data.push(item)
 
     $scope.deleteItem = (id) =>

@@ -1,19 +1,21 @@
 forms = angular.module("angleGrinder.forms")
 
 class ConfirmationDialogCtrl
-  @$inject = ["$scope", "$log", "dialog", "message"]
-  constructor: ($scope, $log, dialog, message) ->
+  @$inject = ["$scope", "$modalInstance", "$log", "message"]
+  constructor: ($scope, $modalInstance, $log, message) ->
     $scope.message = message
+
     $scope.close = (confirmed) ->
       $log.info "Confirmation dialog closed", confirmed
-      dialog.close(confirmed)
+      $modalInstance.close(confirmed)
 
 forms.controller "ConfirmationDialogCtrl", ConfirmationDialogCtrl
 
 forms.run ["$templateCache", ($templateCache) ->
   $templateCache.put "templates/dialogs/confirmation.html", """
     <div class="modal-body">{{message}}</div>
-      <div class="modal-footer">
+
+    <div class="modal-footer">
       <button class="btn" ng-click="close(false)">Cancel</button>
       <button class="btn btn-primary" ng-click="close(true)">OK</button>
     </div>
@@ -21,16 +23,20 @@ forms.run ["$templateCache", ($templateCache) ->
 ]
 
 class ConfirmationDialog
-  @$inject = ["$dialog", "$log"]
-  constructor: (@$dialog, @$log) ->
+  @$inject = ["$modal", "$log"]
+  constructor: (@$modal, @$log) ->
 
   open: (message = null) ->
     @$log.info "Opening confirmation dialog, message:", message
 
-    dialog = @$dialog.dialog
+    @$modal.open
+      templateUrl: "templates/dialogs/confirmation.html"
+      controller: "ConfirmationDialogCtrl"
+
+      keyboard: false # do not close the dialog with ESC key
+      backdrop: "static" # do not close on click outside of the dialog
+
       resolve:
         message: -> if message? then message else "Are you sure?"
-
-    dialog.open "templates/dialogs/confirmation.html", "ConfirmationDialogCtrl"
 
 forms.service "confirmationDialog", ConfirmationDialog

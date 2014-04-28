@@ -1,12 +1,19 @@
-describe "module: angleGrinder.forms service: confirmationDialog", ->
+describe "module: angleGrinder.forms", ->
+
   beforeEach module "angleGrinder.forms"
 
-  it "displays the confirmation", inject ($dialog, confirmationDialog) ->
-    # Given
-    sinon.spy($dialog, "dialog")
+  describe "service: confirmationDialog", ->
 
-    # When
-    confirmationDialog.open()
+    it "displays the confirmation", inject ($modal, confirmationDialog) ->
+      # Given
+      sinon.spy($modal, "open")
 
-    # Then
-    expect($dialog.dialog).to.have.been.called
+      # When
+      confirmationDialog.open()
+
+      # Then
+      expect($modal.open).to.have.been.called
+
+      options = $modal.open.getCall(0).args[0]
+      expect(options).to.have.property "templateUrl", "templates/dialogs/confirmation.html"
+      expect(options).to.have.property "controller", "ConfirmationDialogCtrl"

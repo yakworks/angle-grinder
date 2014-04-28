@@ -2,8 +2,8 @@ forms = angular.module("angleGrinder.forms")
 
 # Generic controller for forms inside modal dialogs
 class FormDialogCtrl
-  @$inject = ["$scope", "$rootScope", "$log", "dialog", "serverValidationErrorsHandler", "dialogOptions"]
-  constructor: ($scope, $rootScope, $log, dialog, serverValidationErrorsHandler, dialogOptions) ->
+  @$inject = ["$scope", "$rootScope", "$log", "$modalInstance", "serverValidationErrorsHandler", "dialogOptions"]
+  constructor: ($scope, $rootScope, $log, $modalInstance, serverValidationErrorsHandler, dialogOptions) ->
     # Assing dialog options to the scope
     $scope.dialogOptions = dialogOptions
     { item, grid } = $scope.dialogOptions
@@ -14,7 +14,7 @@ class FormDialogCtrl
     # Closes the dialog
     $scope.closeDialog = ->
       $log.info "[ag] closing the dialog"
-      dialog.close($scope.item)
+      $modalInstance.close($scope.item)
 
     # If form is valid performs server side update
     $scope.save = (form, item) ->

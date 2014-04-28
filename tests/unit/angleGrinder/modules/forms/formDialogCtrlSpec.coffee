@@ -8,7 +8,7 @@ describe "module: angleGrinder.forms", ->
 
     $scope = null
 
-    dialog = null
+    $modalInstance = null
     item = null
     grid = null
 
@@ -17,7 +17,7 @@ describe "module: angleGrinder.forms", ->
 
       # mock services
 
-      dialog = close: sinon.mock()
+      $modalInstance = close: sinon.mock()
 
       item =
         id: 567
@@ -31,7 +31,7 @@ describe "module: angleGrinder.forms", ->
       $controller "FormDialogCtrl",
         $scope: $scope
 
-        dialog: dialog
+        $modalInstance: $modalInstance
         dialogOptions:
           item: item
           grid: grid
@@ -48,8 +48,8 @@ describe "module: angleGrinder.forms", ->
       it "closes a dialog", ->
         $scope.closeDialog()
 
-        expect(dialog.close).to.have.been.called
-        expect(dialog.close).to.have.been.calledWith(item)
+        expect($modalInstance.close).to.have.been.called
+        expect($modalInstance.close).to.have.been.calledWith(item)
 
     describe "#save", ->
       form = null
@@ -76,7 +76,7 @@ describe "module: angleGrinder.forms", ->
             expect(grid.saveRow).to.have.been.calledWith(567, response)
 
           it "closes the dialog", ->
-            expect(dialog.close).to.have.been.called
+            expect($modalInstance.close).to.have.been.called
 
         describe "on error", ->
           response = null
@@ -99,7 +99,7 @@ describe "module: angleGrinder.forms", ->
           $scope.save(form, item)
 
           expect(item.save).to.have.not.been.called
-          expect(dialog.close).to.have.not.been.called
+          expect($modalInstance.close).to.have.not.been.called
 
     describe "#delete", ->
 
@@ -118,7 +118,7 @@ describe "module: angleGrinder.forms", ->
           expect(grid.removeRow).to.have.been.calledWith(567)
 
         it "closes the dialog", ->
-          expect(dialog.close.called).to.be.true
+          expect($modalInstance.close.called).to.be.true
 
       describe "on error", ->
         beforeEach ->
@@ -130,4 +130,4 @@ describe "module: angleGrinder.forms", ->
           expect(grid.removeRow.calledWith(567)).to.be.false
 
         it "does not close the dialog", ->
-          expect(dialog.close.called).to.be.false
+          expect($modalInstance.close.called).to.be.false
