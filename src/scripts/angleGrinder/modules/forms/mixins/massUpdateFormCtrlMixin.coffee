@@ -7,8 +7,8 @@ mixin.factory "massUpdateFormCtrlMixin", [
       {dialog, Resource, selectedIds, grid} = args
 
       # Generic method for massupdating selected rows
-      $scope.massUpdate = (records) ->
-        return if $scope.massUpdateForm.$invalid
+      $scope.massUpdate = (form, records) ->
+        return if form.$invalid
         $log.info "Mass updating records", records
 
         promise = Resource.massUpdate(ids: selectedIds, data: records).$promise
