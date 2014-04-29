@@ -13,8 +13,13 @@ describe "module: angleGrinder.common", ->
         obj = foo: "foo", bar: "bar"
         expect(deepPick(obj, "bar")).to.deep.eq bar: "bar"
 
-        obj = foo: "foo", bar: { one: "one", two: "two" }
-        expect(deepPick(obj, "bar")).to.deep.eq bar: { one: "one", two: "two" }
+        # allow to pick null or falsy values
+        obj = foo: null, bar: false
+        expect(deepPick(obj, "foo")).to.deep.eq foo: null
+        expect(deepPick(obj, "bar")).to.deep.eq bar: false
+
+        obj = foo: "foo", bar: { one: "one", two: "two", three: null }
+        expect(deepPick(obj, "bar")).to.deep.eq bar: { one: "one", two: "two", three: null }
 
     context "for nested keys", ->
 

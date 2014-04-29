@@ -31,6 +31,6 @@ app.service "deepPick", ->
 
     for path in keys
       value = getDeep(obj, path)
-      setDeep(result, path, value) if value?
+      setDeep(result, path, value) if value isnt undefined
 
     return result
