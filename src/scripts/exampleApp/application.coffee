@@ -1,7 +1,9 @@
 # The entry point for the application
 
 app = angular.module "exampleApp", [
+  "ngAnimate"
   "ngRoute"
+
   "pasvaz.bindonce"
   "blueimp.fileupload"
   "placeholders.txt"

@@ -5,10 +5,11 @@ module.exports =
     "components/bower/jquery/dist/jquery.js"
     "components/bower/underscore/underscore.js"
     "components/bower/angular/angular.js"
-    "components/bower/angular-mocks/angular-mocks.js"
-    "components/bower/angular-resource/angular-resource.js"
+    "components/bower/angular-animate/angular-animate.js"
     "components/bower/angular-route/angular-route.js"
+    "components/bower/angular-resource/angular-resource.js"
     "components/bower/angular-sanitize/angular-sanitize.js"
+    "components/bower/angular-mocks/angular-mocks.js"
 
     "components/bower/sinon/lib/sinon.js"
     "components/bower/sinon/lib/sinon/behavior.js"

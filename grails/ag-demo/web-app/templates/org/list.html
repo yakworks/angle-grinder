@@ -1,7 +1,7 @@
 <h3 class="page-header">Org list</h3>
 
 <div>
-  <div collapse="!showSearchForm">
+  <div ng-show="!showSearchForm" class="search-form">
        <div ng-include="'/templates/org/searchForm.html' | withContext"></div>
   </div>
 

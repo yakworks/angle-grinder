@@ -2,7 +2,7 @@
   <h3 class="page-header">Org list</h3>
 
   <div>
-    <div collapse="!showSearchForm">
+    <div ng-show="showSearchForm" class="search-form-panel">
          <div ng-include="'/templates/tabbedOrg/searchForm.html' | withContext"></div>
     </div>
 

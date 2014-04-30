@@ -48,7 +48,7 @@
 
     <ag-alerts></ag-alerts>
 
-    <div collapse="!showSearchForm">
+    <div ng-show="showSearchForm" class="search-form-panel">
          <div ng-include="'${createLink(action: 'searchPartial')}'"></div>
     </div>
 

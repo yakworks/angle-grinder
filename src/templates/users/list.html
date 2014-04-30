@@ -1,7 +1,8 @@
 <h2 class="page-header">Users list</h2>
 
 <div ng-show="showGrid">
-  <div collapse="!showSearchForm">
+
+  <div ng-show="showSearchForm" class="search-form-panel">
     <div ng-include src="'templates/users/searchForm.html'"></div>
   </div>
 

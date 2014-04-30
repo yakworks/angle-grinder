@@ -1,6 +1,6 @@
 <div ng-controller="tabbedOrg.ContactListCtrl">
 
-  <div collapse="!showSearchForm">
+  <div ng-show="showSearchForm" class="search-form-panel">
     <div class="well">
       <form ag-search-form="contactsGrid" class="form-horizontal form-multi-column no-margin">
 
