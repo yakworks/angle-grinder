@@ -3,25 +3,25 @@
 [![Build status](https://secure.travis-ci.org/9ci/angle-grinder.png)](http://travis-ci.org/9ci/angle-grinder)
 [![Stories in Ready](https://badge.waffle.io/9ci/angle-grinder.png)](http://waffle.io/9ci/angle-grinder)
 
-Documentation: http://9ci.github.io/angle-grinder
+## About
+__angle-grinder__ is can be opinionated at times. It is a collection of librarires with mods and wrappers around them to facilite building an application faster anglularJS and Bootstrap 2.
+Here are the key things we try to do here.
 
-## Bootstrap
+- a simple generic framework to do CRUD from a grid using a dialog
+- utilities for integrating with a Grails app
+- wrapper around JQGrid for angularJs as well as mods to look an feel for bootstrap
+- various improvements and tweaks on form components for drop downs & selects
+- less modifications for look and feel on Bootstrap
 
-Install nodejs v0.10.12 from the sources:
+More Documentation: http://9ci.github.io/angle-grinder
 
-```
-sudo apt-get install build-essential openssl libssl-dev pkg-config
+## Node.js
 
-wget http://nodejs.org/dist/v0.10.12/node-v0.10.12.tar.gz
-tar -xzf node-v0.10.12.tar.gz
+Install nodejs from either http://nodejs.org/ or using your favorite package manager https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager
 
-cd node-v0.10.12
-./configure
-make
-sudo make install
-```
+## Required Node Tools
 
-## Install tools
+In order to get started, you'll want to install some tools globally. You may need to prefix these with sudo (for OSX, *nix, BSD etc) or run your command shell as Administrator (for Windows) to do this. the "-g" will put the commands in your system path, allowing them to be run from any directory.
 
 ```
 npm install -g coffee-script
