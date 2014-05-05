@@ -72,9 +72,10 @@
       <label class="control-label">Birthday</label>
 
       <div class="controls">
-        <input type="text" bs-datepicker
-               name="birthday" ng-model="user.birthday"
-               ng-required="true" />
+        <div ag-datepicker>
+          <input type="text" name="birthday"
+                 ng-model="user.birthday" />
+        </div>
       </div>
     </div>
 

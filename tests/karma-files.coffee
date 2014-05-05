@@ -23,8 +23,6 @@ module.exports =
     "components/bower/jqgrid/js/grid.base.js"
     "components/bower/select2/select2.js"
     "components/bower/angular-ui-select2/src/select2.js"
-    "components/bower/angular-strap/src/common.js"
-    "components/bower/angular-strap/src/directives/datepicker.js"
     "components/bower/angular-bootstrap/ui-bootstrap-tpls.js"
     "components/bower/jquery-file-upload/js/jquery.fileupload-angular.js"
     "components/bower/bower-angular-placeholders/angular-placeholders.js"

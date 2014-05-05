@@ -22,14 +22,20 @@
       <div class="control-group span6">
         <label class="control-label">Birthday from</label>
         <div class="controls">
-          <input type="text" bs-datepicker ng-model="filters.birthday.from" />
+          <div class="input-append" ag-datepicker>
+            <input type="text"
+                   ng-model="filters.birthday.from" />
+          </div>
         </div>
       </div>
 
       <div class="control-group span6">
         <label class="control-label">Birthday to</label>
         <div class="controls">
-          <input type="text" bs-datepicker ng-model="filters.birthday.to" />
+          <div class="input-append" ag-datepicker>
+            <input type="text"
+                   ng-model="filters.birthday.to" />
+          </div>
         </div>
       </div>
     </div>

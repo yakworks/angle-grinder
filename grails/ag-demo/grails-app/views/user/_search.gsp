@@ -64,16 +64,20 @@
             <div class="control-group span6">
                 <label class="control-label">Active Date from</label>
                 <div class="controls">
-                    <input type="text" bs-datepicker
+                  <div ag-datepicker>
+                    <input type="text"
                            ng-model="filters.activeDate.from" />
+                  </div>
                 </div>
             </div>
 
             <div class="control-group span6">
                 <label class="control-label">Active Date to</label>
                 <div class="controls">
-                    <input type="text" bs-datepicker
+                  <div ag-datepicker>
+                    <input type="text"
                            ng-model="filters.activeDate.to" />
+                  </div>
                 </div>
             </div>
         </div>
