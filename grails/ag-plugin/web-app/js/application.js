@@ -1,4 +1,4 @@
-// # The main scaffolding module
+// The main scaffolding module
 var app = angular.module("angleGrinder", [
     "ngResource",
     "ngRoute",
