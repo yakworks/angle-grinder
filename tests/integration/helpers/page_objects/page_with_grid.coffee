@@ -23,7 +23,7 @@ class PageWithGrid extends PageObject
     @findElement @By.css("section.content h2")
 
   @has "modalForm", ->
-    element = @findElement @By.css(".modal")
+    element = @findElement @By.css(".modal-dialog")
     new ModalFormView(element)
 
   @has "gridNavbar", ->
