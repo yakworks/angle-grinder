@@ -49,9 +49,7 @@
     },
     "bootstrap": {
       "img": "img/*.png",
-      "js": [
-        "docs/assets/js/bootstrap.js"
-      ],
+      "js": "js/*.js",
       "less": "less/*.less"
     },
     "bootstrap-select": {

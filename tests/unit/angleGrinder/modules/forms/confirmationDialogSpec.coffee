@@ -1,13 +1,17 @@
 describe "module: angleGrinder.forms", ->
 
-  beforeEach module "angleGrinder.forms"
-
   describe "service: confirmationDialog", ->
 
-    it "displays the confirmation", inject ($modal, confirmationDialog) ->
-      # Given
-      sinon.spy($modal, "open")
+    beforeEach module "ui.bootstrap", ($provide) ->
+      $provide.decorator "$modal", ($delegate) ->
+        sinon.spy($delegate, "open")
+        $delegate
 
+      return
+
+    beforeEach module "angleGrinder.forms"
+
+    it "displays the confirmation", inject ($modal, confirmationDialog) ->
       # When
       confirmationDialog.open()
 
