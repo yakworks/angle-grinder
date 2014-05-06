@@ -1,18 +1,7 @@
 forms = angular.module("angleGrinder.forms", [
   "ui.bootstrap"
-  "$strap.directives"
-
   "angleGrinder.common"
 ])
-
-# Configure AngularStrap date picker
-forms.value "$strapConfig",
-  datepicker:
-    language: "en"
-    format: "mm/dd/yyyy"
-    type: "iso"
-    autoClose: true
-    forceParse: false
 
 # Override html template for the angular-ui/bootstrap pagination
 # to make it backward compatible with bootstrap 2.x

@@ -8,6 +8,7 @@ module.exports = (config) ->
       "mocha"
       "chai"
       "sinon-chai"
+      "ng-scenario"
     ]
 
     files: require("./karma-files").files
@@ -80,6 +81,7 @@ module.exports = (config) ->
       "karma-spec-reporter"
       "karma-junit-reporter"
       "karma-coverage"
+      "karma-ng-scenario"
 
       "karma-phantomjs-launcher"
       "karma-chrome-launcher"

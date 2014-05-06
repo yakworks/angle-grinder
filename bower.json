@@ -1,104 +1,105 @@
 {
-    "name": "angle-grinder",
-    "version": "0.0.0",
-
-    "dependencies": {
-        "jqgrid": "basejump/jqGrid#v4.4.4-tweaks",
-        "jquery": "2.1.0",
-        "underscore": "1.5.2",
-
-        "bootstrap": "2.3.2",
-        "bootstrapx-clickover": "git://github.com/lecar-red/bootstrapx-clickover.git",
-        "jquery-ui-bootstrap": "./components/third-party/jquery-ui-bootstrap",
-        "select2": "~3.4.1",
-        "select2-bootstrap-css": "~1.2.0",
-        "font-awesome": "~3.2.1",
-
-        "angular": "1.2.2",
-        "angular-animate": "1.2.2",
-        "angular-route": "1.2.2",
-        "angular-resource": "1.2.2",
-        "angular-sanitize": "1.2.2",
-
-        "angular-ui-select2": "~0.0.5",
-        "angular-bootstrap": "0.11.0",
-        "angular-strap": "9ci/angular-strap#fix-iso-dates",
-        "angular-bindonce": "0.2.2",
-        "bootstrap-datepicker": "1.3.0",
-        "modernizr": "~2.6.2",
-
-        "jquery-file-upload": "9.5.4",
-        "blueimp-load-image": "~1.11.0",
-
-        "google-code-prettify": "1.0.1",
-        "bower-angular-placeholders": "0.0.2"
+  "name": "angle-grinder",
+  "version": "0.0.0",
+  "dependencies": {
+    "jqgrid": "basejump/jqGrid#v4.4.4-tweaks",
+    "jquery": "2.1.0",
+    "underscore": "1.5.2",
+    "bootstrap": "2.3.2",
+    "bootstrapx-clickover": "git://github.com/lecar-red/bootstrapx-clickover.git",
+    "jquery-ui-bootstrap": "./components/third-party/jquery-ui-bootstrap",
+    "select2": "~3.4.1",
+    "select2-bootstrap-css": "~1.2.0",
+    "font-awesome": "~3.2.1",
+    "angular": "1.2.2",
+    "angular-animate": "1.2.2",
+    "angular-route": "1.2.2",
+    "angular-resource": "1.2.2",
+    "angular-sanitize": "1.2.2",
+    "angular-ui-select2": "~0.0.5",
+    "angular-bootstrap": "0.11.0",
+    "angular-strap": "0.7.8",
+    "angular-bindonce": "0.2.2",
+    "modernizr": "~2.6.2",
+    "jquery-file-upload": "9.5.4",
+    "blueimp-load-image": "~1.11.0",
+    "google-code-prettify": "1.0.1",
+    "bower-angular-placeholders": "0.0.2"
+  },
+  "devDependencies": {
+    "angular-mocks": "1.2.2",
+    "sinon": "~1.8.2",
+    "sinon-chai": "~2.5.0"
+  },
+  "exportsOverride": {
+    "jquery": {
+      "js": "dist/jquery.js"
     },
-
-    "devDependencies": {
-        "angular-mocks": "1.2.2",
-        "sinon": "~1.8.2",
-        "sinon-chai": "~2.5.0"
+    "angular-ui": {
+      "js": "build/angular-ui.js",
+      "css": "build/angular-ui.css"
     },
-
-    "exportsOverride": {
-        "jquery": {
-          "js": "dist/jquery.js"
-        },
-        "angular-ui": {
-            "js": "build/angular-ui.js",
-            "css": "build/angular-ui.css"
-        },
-        "angular-strap": {
-          "/": [
-            "src/common.js"
-          ],
-          "directives": [
-            "src/directives/datepicker.js",
-            "src/directives/popover.js"
-          ]
-        },
-        "bootstrap": {
-            "img": "img/*.png",
-            "js": [
-                "docs/assets/js/bootstrap.js"
-            ],
-            "less": "less/*.less"
-        },
-        "bootstrap-select": {
-            "js": "bootstrap-select.js",
-            "css": "bootstrap-select.css"
-        },
-        "bootstrap-clickover": {
-            "js": "js/bootstrap-clickover.js"
-        },
-        "font-awesome": {
-            "css": ["css/font-awesome.css", "css/font-awesome-ie7.css"],
-            "font": ["font/*"]
-        },
-        "jqgrid": {
-            "js": "js/*.js",
-            "js/i18n": "js/i18n/*.js",
-            "js/plugins": "plugins/*.js",
-            "css": "css/**/*.css",
-            "css/plugins": "plugins/*.css"
-        },
-        "select2-bootstrap-css": {
-          "css": "select2-bootstrap.css"
-        },
-        "google-code-prettify": {
-            "/": ["./src/prettify.js", "./src/prettify.css"]
-        },
-        "sinon": {
-            "/": "lib/**/*.js"
-        },
-        "*": {
-          "js": "**/*.js",
-          "css": "**/*.css",
-          "img": ["**/*.jpg", "**/*.png", "**/*.gif"]
-        }
+    "angular-strap": {
+      "/": [
+        "src/common.js"
+      ],
+      "directives": [
+        "src/directives/popover.js"
+      ]
     },
-    "resolutions": {
-        "jquery": "2.1.0",
-        "bootstrap": "2.3.2"
+    "bootstrap": {
+      "img": "img/*.png",
+      "js": [
+        "docs/assets/js/bootstrap.js"
+      ],
+      "less": "less/*.less"
+    },
+    "bootstrap-select": {
+      "js": "bootstrap-select.js",
+      "css": "bootstrap-select.css"
+    },
+    "bootstrap-clickover": {
+      "js": "js/bootstrap-clickover.js"
+    },
+    "font-awesome": {
+      "css": [
+        "css/font-awesome.css",
+        "css/font-awesome-ie7.css"
+      ],
+      "font": [
+        "font/*"
+      ]
+    },
+    "jqgrid": {
+      "js": "js/*.js",
+      "js/i18n": "js/i18n/*.js",
+      "js/plugins": "plugins/*.js",
+      "css": "css/**/*.css",
+      "css/plugins": "plugins/*.css"
+    },
+    "select2-bootstrap-css": {
+      "css": "select2-bootstrap.css"
+    },
+    "google-code-prettify": {
+      "/": [
+        "./src/prettify.js",
+        "./src/prettify.css"
+      ]
+    },
+    "sinon": {
+      "/": "lib/**/*.js"
+    },
+    "*": {
+      "js": "**/*.js",
+      "css": "**/*.css",
+      "img": [
+        "**/*.jpg",
+        "**/*.png",
+        "**/*.gif"
+      ]
     }
+  },
+  "resolutions": {
+    "jquery": "2.1.0"
+  }
 }

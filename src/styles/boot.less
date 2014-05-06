@@ -15,3 +15,57 @@ body {
 
 @import "bs-nav-side";
 @import "bs-ux";
+
+// tweaks for select2
+
+ul.select2-results table {
+  margin-bottom: 0px;
+}
+
+ul.select2-results table td {
+  border: none;
+  padding: 2px;
+}
+
+// tweaks for tab panels
+
+div.tab-pane {
+  overflow-x: hidden;
+}
+
+// tweaks for datepicker
+
+div.ag-datepicker {
+  input {
+    width: 170px;
+  }
+}
+
+// Icon aliases for angular-ui/bootstrap
+// to make it backward compatible with bootstrap 2.x
+.glyphicon {
+  font-family: "FontAwesome";
+
+  &.glyphicon-chevron-left {
+    &:extend(.icon-chevron-left);
+  }
+
+  &.glyphicon-chevron-left:before {
+    &:extend(.icon-chevron-left:before);
+  }
+
+  &.glyphicon-chevron-right {
+    &:extend(.icon-chevron-right);
+  }
+
+  &.glyphicon-chevron-right:before {
+    &:extend(.icon-chevron-right:before);
+  }
+}
+
+// fix button group align in the datepicker
+.ag-datepicker {
+  span.btn-group {
+    float: left;
+  }
+}
