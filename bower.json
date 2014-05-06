@@ -38,15 +38,6 @@
       "js": "build/angular-ui.js",
       "css": "build/angular-ui.css"
     },
-    "angular-strap": {
-      "/": [
-        "src/common.js"
-      ],
-      "directives": [
-        "src/directives/datepicker.js",
-        "src/directives/popover.js"
-      ]
-    },
     "bootstrap": {
       "img": "img/*.png",
       "js": [
