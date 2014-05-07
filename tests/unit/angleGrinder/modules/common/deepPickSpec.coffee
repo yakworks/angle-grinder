@@ -6,7 +6,7 @@ describe "module: angleGrinder.common", ->
 
     context "for flat keys", ->
 
-      it "returs an object copy", inject (deepPick) ->
+      it "returns an object copy", inject (deepPick) ->
         obj = foo: "foo", bar: "bar"
         expect(deepPick(obj, "foo")).to.deep.eq foo: "foo"
 
@@ -23,7 +23,7 @@ describe "module: angleGrinder.common", ->
 
     context "for nested keys", ->
 
-      it "returs an object copy", inject (deepPick) ->
+      it "returns an object copy", inject (deepPick) ->
         obj = foo: "foo", one: "one", bar: biz: "biz"
         expect(deepPick(obj, "bar.biz")).to.deep.eq bar: biz: "biz"
 
