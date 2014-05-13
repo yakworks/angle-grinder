@@ -26,7 +26,6 @@ module.exports =
     "components/bower/angular-bootstrap/ui-bootstrap-tpls.js"
     "components/bower/jquery-file-upload/js/jquery.fileupload-angular.js"
     "components/bower/bower-angular-placeholders/angular-placeholders.js"
-    "components/bower/angular-bindonce/bindonce.js"
 
     "src/scripts/angleGrinder/gridz.coffee"
 

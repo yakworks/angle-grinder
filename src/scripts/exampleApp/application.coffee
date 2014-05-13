@@ -4,7 +4,6 @@ app = angular.module "exampleApp", [
   "ngAnimate"
   "ngRoute"
 
-  "pasvaz.bindonce"
   "blueimp.fileupload"
   "placeholders.txt"
 

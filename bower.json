@@ -19,7 +19,6 @@
     "angular-ui-select2": "~0.0.5",
     "angular-bootstrap": "0.11.0",
     "angular-strap": "0.7.8",
-    "angular-bindonce": "0.2.2",
     "modernizr": "~2.6.2",
     "jquery-file-upload": "9.5.4",
     "blueimp-load-image": "~1.11.0",

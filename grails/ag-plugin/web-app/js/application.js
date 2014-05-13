@@ -3,7 +3,6 @@ var app = angular.module("angleGrinder", [
     "ngResource",
     "ngRoute",
     "ui.select2",
-    "pasvaz.bindonce",
 
     "angleGrinder.common",
     "angleGrinder.gridz",

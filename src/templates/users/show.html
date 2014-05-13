@@ -7,11 +7,10 @@
 </div>
 
 
-<div bindonce class="content">
+<div class="content">
 
   <h2 class="page-header">
-    <span bo-text="user.name"></span>
-    &lt;<span bo-text="user.info.email"></span>&gt;
+    {{user.name}}&lt;{{user.info.email}}&gt;
   </h2>
 
   <tabset>
@@ -20,26 +19,26 @@
 
       <dl class="dl-horizontal">
         <dt>ID</dt>
-        <dd bo-text="user.id">&nbsp;</dd>
+        <dd>{{user.id}}</dd>
 
         <dt>Name</dt>
-        <dd bo-text="user.name">&nbsp;</dd>
+        <dd>{{user.name}}</dd>
 
         <dt>Login</dt>
-        <dd bo-text="user.login">&nbsp;</dd>
+        <dd>{{user.login}}</dd>
 
         <dt>Email</dt>
-        <dd bo-text="user.info.email">&nbsp;</dd>
+        <dd>{{user.info.email}}</dd>
 
         <dt>Birthday</dt>
-        <dd bo-text="user.birthday | date">&nbsp;</dd>
+        <dd>{{user.birthday | date}}</dd>
 
         <dt>Paid</dt>
-        <dd bo-text="user.paid">&nbsp;</dd>
+        <dd>{{user.paid}}</dd>
       </dl>
 
       <div class="form-actions">
-        <a bo-href="'#/examples/users/' + user.id + '/edit'" class="btn"><i class="icon-edit"></i> Edit</a>
+        <a ng-href="#/examples/users/{{user.id}}/edit" class="btn"><i class="icon-edit"></i> Edit</a>
         <ag-delete-button when-confirmed="delete(user)"></ag-delete-button>
       </div>
     </tab>
