@@ -46,7 +46,7 @@ describe "controller: gridExample.ListCtrl", ->
         expect($modal.open).to.have.been.called
 
         options = $modal.open.getCall(0).args[0]
-        expect(options).to.have.property "templateUrl", "templates/gridExample/form.html"
+        expect(options).to.have.property "templateUrl", "/templates/gridExample/form.html"
         expect(options.resolve.dialogOptions().item).to.eq item
 
     describe "#createItem", ->
@@ -59,7 +59,7 @@ describe "controller: gridExample.ListCtrl", ->
         expect($modal.open).to.have.been.called
 
         options = $modal.open.getCall(0).args[0]
-        expect(options).to.have.property "templateUrl", "templates/gridExample/form.html"
+        expect(options).to.have.property "templateUrl", "/templates/gridExample/form.html"
         expect(options.resolve.dialogOptions().item).to.not.be.undefined
 
   describe "controller", ->

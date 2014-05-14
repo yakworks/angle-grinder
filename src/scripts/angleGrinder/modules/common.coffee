@@ -1,43 +1,5 @@
 common = angular.module("angleGrinder.common", [])
 
-# TODO simplify and create a constant
-###
-Sample context path configuration:
-
-```
-app.config [
-"pathWithContextProvider", (pathWithContextProvider) ->
-  contextPath = $("body").data("context-path")
-  pathWithContextProvider.setContextPath(contextPath) if contextPath?
-]
-```
-###
-class PathWithContextProvider
-  constructor: ->
-    @contextPath = ""
-
-  # Returns sanitized context path
-  getContextPath: ->
-    @contextPath.replace /\/*$/, ""
-
-  setContextPath: (path) ->
-    @contextPath = path
-    return # it cannot return a value
-
-  sanitizePath: (path) ->
-    path.replace /^\/*/, ""
-
-  $get: ->
-    (path) =>
-      return path if @getContextPath() is ""
-      [@getContextPath(), @sanitizePath(path)].join("/")
-
-common.provider "pathWithContext", PathWithContextProvider
-
-common.filter "withContext", ["pathWithContext", (pathWithContext) ->
-  (path) -> pathWithContext(path)
-]
-
 # Decorates `$http.pendingRequests` with some useful features
 common.factory "pendingRequests", [
   "$http", ($http) ->
