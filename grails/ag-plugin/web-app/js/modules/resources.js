@@ -4,13 +4,15 @@ var resources = angular.module("angleGrinder.resources", [
 ]);
 
 // Build a resource for the given restful url
+// TODO cleanup and spec this service
+// TODO consider move it to angle-grinder
 resources.factory("resourceBuilder", [
   "$resource", "pathWithContext", function($resource, pathWithContext) {
     return function(basePath, resourceName) {
       if (resourceName == null) {
         resourceName = basePath.replace(/$\/+/, "");
       }
-      basePath = pathWithContext(basePath, resourceName);
+      basePath = pathWithContext(basePath);
 
       var Resource = $resource("" + basePath + "/:action/:id", { id: "@id" }, {
         list:       { method: "GET", params: { action: "list" }, isArray: true },
