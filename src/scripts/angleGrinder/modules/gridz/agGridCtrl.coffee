@@ -67,9 +67,9 @@ gridz.controller "AgGridCtrl", class
       # retrieve a list of removed keys
       diff = _.difference(_.keys(prevData), _.keys(flatData))
 
-      # filter out rescticted (private) columns like `-row_action_col`
-      restictedColumns = (key) -> not key.match /^-/
-      diff = diff.filter(restictedColumns)
+      # filter out restricted (private) columns like `-row_action_col`
+      restrictedColumns = (key) -> not key.match /^-/
+      diff = diff.filter(restrictedColumns)
 
       # set empty values
       flatData[key] = null for key in diff
@@ -193,11 +193,11 @@ gridz.controller "AgGridCtrl", class
       @gridEl.jqGrid("remapColumns", perm, true) if perm
 
       # TODO wrap it into service
-      # Store choosed column in the local storage
-      choosedColumns = _.map @_getColModel(), (column) ->
+      # Store chosen column in the local storage
+      chosenColumns = _.map @_getColModel(), (column) ->
         _.pick(column, "name", "hidden")
 
-      window.localStorage.setItem("gridz.#{@getGridId()}.choosedColumns", angular.toJson(choosedColumns))
+      window.localStorage.setItem("gridz.#{@getGridId()}.chosenColumns", angular.toJson(chosenColumns))
 
     @gridEl.jqGrid("columnChooser", options)
 
