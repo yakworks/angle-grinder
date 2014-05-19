@@ -11,13 +11,15 @@ Use css to set the spinner annimation image:
 spinner.directive "agSpinner", ->
   replace: true
   restrict: "E"
-  template: """
-    <li class="spinner">
-      <a href="#"><i ng-class="{spin: showSpinner()}"></i></a>
-    </li>
-  """
+
   controller: [
     "$scope", "pendingRequests",
     ($scope, pendingRequests) ->
       $scope.showSpinner = -> pendingRequests.any()
   ]
+
+  template: """
+    <li class="spinner">
+      <a href="#"><i ng-class="{spin: showSpinner()}"></i></a>
+    </li>
+  """

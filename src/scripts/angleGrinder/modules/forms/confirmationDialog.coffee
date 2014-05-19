@@ -1,15 +1,15 @@
 forms = angular.module("angleGrinder.forms")
 
-class ConfirmationDialogCtrl
-  @$inject = ["$scope", "$modalInstance", "$log", "message"]
-  constructor: ($scope, $modalInstance, $log, message) ->
-    $scope.message = message
+class ConfirmationDialogCtrl extends BaseCtrl
+  @register forms
+  @inject "$scope", "$modalInstance", "$log", "message"
 
-    $scope.close = (confirmed) ->
-      $log.info "Confirmation dialog closed", confirmed
-      $modalInstance.close(confirmed)
+  initialize: ->
+    @expose @$scope, "message", "close"
 
-forms.controller "ConfirmationDialogCtrl", ConfirmationDialogCtrl
+  close: (confirmed) ->
+    @$log.info "Closing confirmation dialog", confirmed
+    @$modalInstance.close(confirmed)
 
 forms.run ["$templateCache", ($templateCache) ->
   $templateCache.put "templates/dialogs/confirmation.html", """

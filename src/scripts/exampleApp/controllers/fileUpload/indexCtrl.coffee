@@ -1,40 +1,40 @@
-class IndexCtrl
+class IndexCtrl extends BaseCtrl
 
-  @$inject = ["$scope", "$http"]
-  constructor: ($scope, $http) ->
+  @register "exampleApp", "fileUpload.IndexCtrl"
+  @inject "$scope", "$http"
 
-    $scope.queue = []
+  initialize: ->
 
-    $scope.loadingFiles = true
-    $http.get("/api/upload/list").then (response) ->
-      $scope.queue = response.data.files || []
-      $scope.loadingFiles = false
+    @$scope.queue = []
 
-class FileDestroyController
+    @$scope.loadingFiles = true
+    @$http.get("/api/upload/list").then (response) =>
+      @$scope.queue = response.data.files || []
+      @$scope.loadingFiles = false
 
-  @$inject = ["$scope", "$http"]
-  constructor: ($scope, $http) ->
-    file = $scope.file
+class FileDestroyController extends BaseCtrl
+
+  @register "exampleApp", "fileUpload.FileDestroyController"
+  @inject "$scope", "$http"
+
+  initialize: ->
+    file = @$scope.file
     state = null
 
     if file.url
       file.$state = -> state
 
-      file.$destroy = ->
+      file.$destroy = =>
         state = "pending"
 
-        onSuccess = ->
+        onSuccess = =>
           state = "resolved"
-          $scope.clear file
+          @$scope.clear file
 
         onError = ->
           state = "rejected"
 
-        $http(url: file.deleteUrl, method: file.deleteType).then(onSuccess, onError)
+        @$http(url: file.deleteUrl, method: file.deleteType).then(onSuccess, onError)
 
     else if not file.$cancel and not file._index
-      file.$cancel = -> $scope.clear file
-
-angular.module("exampleApp")
-  .controller("fileUpload.IndexCtrl", IndexCtrl)
-  .controller("fileUpload.FileDestroyController", FileDestroyController)
+      file.$cancel = -> @$scope.clear file

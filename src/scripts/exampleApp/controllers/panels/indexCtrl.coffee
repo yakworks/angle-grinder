@@ -1,8 +1,7 @@
-class IndexCtrl
+class IndexCtrl extends BaseCtrl
 
-  @$inject = ["$scope"]
-  constructor: ($scope) ->
-    $scope.title = "Panels"
+  @register "exampleApp", "panels.IndexCtrl"
+  @inject "$scope"
 
-angular.module("exampleApp")
-  .controller("panels.IndexCtrl", IndexCtrl)
+  initialize: ->
+    @$scope.title = "Panels"

@@ -1,48 +1,52 @@
-class IndexCtrl
+class IndexCtrl extends BaseCtrl
 
-  @$inject = ["$scope", "sampleData", "exampleGrid", "formDialog"]
-  constructor: ($scope, sampleData, exampleGrid, formDialog) ->
+  @register "exampleApp", "gridExample.ListCtrl"
+  @inject "$scope", "sampleData", "exampleGrid", "formDialog"
+
+  initialize: ->
+    @expose @$scope, "getSelectedRowsData", "editItem", "createItem", "deleteItem"
 
     # initialize the grid with generated data
-    @data = sampleData.generate(100)
-    $scope.data = @data
+    @data = @sampleData.generate(100)
+    @$scope.data = @data
 
-    $scope.gridOptions = exampleGrid(data: @data)
-    $scope.otherGridOptions = exampleGrid(data: @data, pager: false)
+    @$scope.gridOptions = @exampleGrid(data: @data)
+    @$scope.otherGridOptions = @exampleGrid(data: @data, pager: false)
 
-    $scope.selectedRowsData = []
-    $scope.getSelectedRowsData = ->
-      ids = $scope.exampleGrid.getSelectedRowIds()
-      $scope.selectedRowsData = _.map ids, (id) ->
-        $scope.exampleGrid.getRowData(id)
+    @$scope.selectedRowsData = []
 
-    $scope.editItem = (id) =>
-      item = @findItemById(id)
-      item.persisted = -> true
-      item.save = (callback) -> callback.success(this)
+  getSelectedRowsData: ->
+    ids = @$scope.exampleGrid.getSelectedRowIds()
+    @$scope.selectedRowsData = _.map ids, (id) ->
+      @$scope.exampleGrid.getRowData(id)
 
-      item.delete = (callback) =>
-        this.deleteItemById(id)
-        callback.success(this)
+  editItem: (id) ->
+    item = @findItemById(id)
+    item.persisted = -> true
+    item.save = (callback) -> callback.success(this)
 
-      dialogOptions = item: item, grid: $scope.exampleGrid
-      formDialog.open("/templates/gridExample/form.html", dialogOptions)
+    item.delete = (callback) =>
+      this.deleteItemById(id)
+      callback.success(this)
 
-    $scope.createItem = =>
-      item = {}
-      item.persisted = -> false
-      item.save = (callback) ->
-        generateId = -> new Date().getTime()
-        item.id = generateId()
-        callback.success(this)
+    dialogOptions = item: item, grid: @$scope.exampleGrid
+    @formDialog.open("/templates/gridExample/form.html", dialogOptions)
 
-      dialogOptions = item: item, grid: $scope.exampleGrid
-      formDialog.open("/templates/gridExample/form.html", dialogOptions).result
-        .then (item) => @data.push(item)
+  createItem: ->
+    item = {}
+    item.persisted = -> false
+    item.save = (callback) ->
+      generateId = -> new Date().getTime()
+      item.id = generateId()
+      callback.success(this)
 
-    $scope.deleteItem = (id) =>
-      item = @deleteItemById(id)
-      $scope.exampleGrid.removeRow(item.id)
+    dialogOptions = item: item, grid: @$scope.exampleGrid
+    @formDialog.open("/templates/gridExample/form.html", dialogOptions).result
+      .then (item) => @data.push(item)
+
+  deleteItem: (id) ->
+    item = @deleteItemById(id)
+    @$scope.exampleGrid.removeRow(item.id)
 
   findItemById: (id) ->
     id = parseInt(id)
@@ -54,6 +58,3 @@ class IndexCtrl
     if row?
       @data = _.reject @data, (item) -> item.id is row.id
       return row
-
-angular.module("exampleApp")
-  .controller("gridExample.ListCtrl", IndexCtrl)

@@ -40,15 +40,14 @@ class Alerts
 
 alerts.service "alerts", Alerts
 
-class AlertsCtrl
-  @$inject = ["$scope", "alerts"]
-  constructor: (@$scope, @alerts) ->
-    @$scope.alertMessages = @alerts.messages
+alerts.controller "alerts", [
+  "$scope", "alerts",
+  ($scope, alerts) ->
+    $scope.alertMessages = alerts.messages
 
-    @$scope.disposeAlert = (id) =>
-      @alerts.dispose(id)
-
-alerts.controller "alerts", AlertsCtrl
+    $scope.disposeAlert = (id) ->
+      alerts.dispose(id)
+]
 
 alerts.directive "agAlerts", ->
   restrict: "E"

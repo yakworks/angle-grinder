@@ -4,9 +4,10 @@ gridz = angular.module("angleGrinder.gridz")
 # Controller instance could be published to the parent scope
 # with `ag-grid-name` directive, for example:
 # `<div ag-grid="gridOptions" ag-grid-name="usersGrid"></div>`
-gridz.controller "AgGridCtrl", class
-  @$inject = ["$rootScope", "$q", "hasSearchFilters", "flatten", "xlsData"]
-  constructor: (@$rootScope, @$q, @hasSearchFilters, @flatten, @xlsData) ->
+class AgGridCtrl extends BaseCtrl
+
+  @register gridz
+  @inject "$rootScope", "$q", "hasSearchFilters", "flatten", "xlsData"
 
   registerGridElement: (@gridEl) ->
 

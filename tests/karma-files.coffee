@@ -28,6 +28,7 @@ module.exports =
     "components/bower/bower-angular-placeholders/angular-placeholders.js"
 
     "src/scripts/angleGrinder/gridz.coffee"
+    "src/scripts/angleGrinder/baseCtrl.coffee"
 
     "src/templates/**/*.html"
 

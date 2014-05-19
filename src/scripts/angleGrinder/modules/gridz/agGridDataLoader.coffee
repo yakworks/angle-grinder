@@ -5,7 +5,7 @@ gridz.service "agGridDataLoader", [
   ($log, $http, $document) ->
 
     # Creates custom defined function for retrieving jgGrid data.
-    # url - datasource url
+    # url - data source url
     # gridCtrl - grid controller instance
     (url, gridCtrl) ->
 
