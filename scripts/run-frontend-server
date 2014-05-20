@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. ./bin/lib/server
+. ./scripts/lib/server
 
 startServer
 grunt server --force

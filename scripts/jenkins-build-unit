@@ -9,7 +9,7 @@ npm install
 bower install
 
 # start virtual frame buffer
-./bin/xvfb start
+./scripts/xvfb start
 
 # run the specs
 grunt test --browsers=PhantomJS,Chrome
@@ -17,7 +17,7 @@ grunt test --browsers=PhantomJS,Chrome
 RESULT=$?
 
 # stop virtual frame buffer
-./bin/xvfb stop
+./scripts/xvfb stop
 
 # output the test results
 exit $RESULT

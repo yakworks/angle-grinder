@@ -12,16 +12,16 @@ bower install
 ./node_modules/protractor/bin/webdriver-manager update
 
 # start virtual frame buffer
-./bin/xvfb start
+./scripts/xvfb start
 export DISPLAY=:99
 
 # run integration specs
-./bin/test-integration
+./scripts/test-integration
 # capture the results
 RESULT=$?
 
 # stop virtual frame buffer
-./bin/xvfb stop
+./scripts/xvfb stop
 
 # output the test results
 exit $RESULT

@@ -114,8 +114,8 @@ or
 
 Install standalone Selenium `node_modules/protractor/bin/webdriver-manager update`
 Start the app in the `test` env `grunt build:dev` `configureProxies connect:integration watch`
-Manually run the specs `bin/run-protractor`
-Or it with `bin/test-integration`
+Manually run the specs `scripts/run-protractor`
+Or it with `scripts/test-integration`
 
 ## Build process
 
