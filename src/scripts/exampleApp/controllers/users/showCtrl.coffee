@@ -1,20 +1,21 @@
-class ShowCtrl
+class ShowCtrl extends BaseCtrl
 
-  @$inject = ["$scope", "$location", "exampleGrid", "sampleData", "user"]
-  constructor: ($scope, $location, exampleGrid, sampleData, user) ->
-    $scope.user = user
+  @register "exampleApp", "users.ShowCtrl"
+  @inject "$scope", "$location", "exampleGrid", "sampleData", "user"
+
+  initialize: ->
+    @expose @$scope, "user", "delete"
+
+    # generate the sample data
+    sampleData = @sampleData.generate(100)
 
     # initialize the grid with generated data
-    data = sampleData.generate(100)
-    $scope.gridOptions = exampleGrid
-      data: data
+    @$scope.gridOptions = @exampleGrid
+      data: sampleData
       shrinkToFit: true
       multiselect: false
       actionPopup: false
 
-    $scope.delete = (user) ->
-      promise = user.delete().$promise
-      promise.then -> $location.path("/examples/users")
-
-angular.module("exampleApp")
-  .controller("users.ShowCtrl", ShowCtrl)
+  delete: (user) ->
+    promise = user.delete().$promise
+    promise.then => @$location.path("/examples/users")

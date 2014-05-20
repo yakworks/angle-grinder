@@ -1,21 +1,20 @@
-class ListCtrl
+class ListCtrl extends BaseCtrl
 
-  @$inject = ["$scope", "usersGrid", "Users", "massUpdateMixin", "singlePageCrudCtrlMixin"]
-  constructor: ($scope, usersGrid, Users, massUpdateMixin, singlePageCrudCtrlMixin) ->
-    $scope.showGrid = true
+  @register "exampleApp", "users.ListCtrl"
+  @inject "$scope", "usersGrid", "Users", "massUpdateMixin", "singlePageCrudCtrlMixin"
+
+  initialize: ->
+    @$scope.showGrid = true
 
     # initialize the grid
-    $scope.gridOptions = usersGrid()
+    @$scope.gridOptions = @usersGrid()
 
-    singlePageCrudCtrlMixin $scope,
-      Resource: Users
+    @singlePageCrudCtrlMixin @$scope,
+      Resource: @Users
       resourcePath: "/users"
       gridName: "usersGrid"
 
-    massUpdateMixin $scope,
+    @massUpdateMixin @$scope,
       templateUrl: "/templates/users/massUpdateForm.html"
       controller: "users.MassUpdateFormCtrl"
       gridName: "usersGrid"
-
-angular.module("exampleApp")
-  .controller("users.ListCtrl", ListCtrl)

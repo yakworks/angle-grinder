@@ -1,12 +1,12 @@
-class SearchFormCtrl
+class SearchFormCtrl extends BaseCtrl
 
-  @$inject = ["$scope"]
-  constructor: ($scope) ->
+  @register "exampleApp", "usersDialog.SearchFormCtrl"
+  @inject "$scope"
 
-    $scope.userTypeSelectOptions =
+  initialize: ->
+
+    @$scope.userTypeSelectOptions =
       multiple: true
       simple_tags: true
       tags: ["admin", "customer"]
 
-angular.module("exampleApp")
-  .controller("usersDialog.SearchFormCtrl", SearchFormCtrl)

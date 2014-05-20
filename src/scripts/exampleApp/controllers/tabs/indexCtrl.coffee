@@ -1,23 +1,24 @@
-class IndexCtrl
+class IndexCtrl extends BaseCtrl
 
-  @$inject = ["$scope", "$templateCache", "$routeParams", "$log"]
-  constructor: ($scope, $templateCache, $routeParams, $log) ->
+  @register "exampleApp", "tabs.IndexCtrl"
+  @inject "$scope", "$templateCache", "$routeParams", "$log"
+
+  initialize: ->
+    @expose @$scope, "isTabActive", "save"
 
     # remove tab templates from the cache
-    _.each ["_first", "_second", "_third"], (name) ->
-      $templateCache.remove "templates/tabs/#{name}.html"
+    _.each ["_first", "_second", "_third"], (name) =>
+      @$templateCache.remove "templates/tabs/#{name}.html"
 
-    $scope.title = "Tabs with lazy loaded templates"
+    @$scope.title = "Tabs with lazy loaded templates"
 
-    # return true when a tab with the given name should be activated by default
-    $scope.isTabActive = (name) -> $routeParams.tab is name
+    @$scope.second = title: "The Second Tab"
+    @$scope.third = title: "The Third Tab"
+    @$scope.item = name: "Foo"
 
-    $scope.second = title: "The Second Tab"
-    $scope.third = title: "The Third Tab"
-    $scope.item = name: "Foo"
-    $scope.save = (form, item) ->
-      return if form.$invalid
-      $log.debug "[tabs] saving", item
+  # return true when a tab with the given name should be activated by default
+  isTabActive: (name) -> @$routeParams.tab is name
 
-angular.module("exampleApp")
-  .controller("tabs.IndexCtrl", IndexCtrl)
+  save: (form, item) ->
+    return if form.$invalid
+    @$log.debug "[tabs] saving", item

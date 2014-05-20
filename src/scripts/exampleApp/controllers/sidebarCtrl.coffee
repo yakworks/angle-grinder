@@ -1,21 +1,21 @@
-class SidebarCtrl
+class SidebarCtrl extends BaseCtrl
 
-  @$inject = ["$rootScope", "$scope", "$location", "$routeParams", "scrollTo"]
-  constructor: ($rootScope, $scope, $location, $routeParams, scrollTo) ->
+  @register "exampleApp"
+  @inject "$rootScope", "$scope", "$location", "$routeParams", "scrollTo"
 
-    $rootScope.$on "$routeChangeSuccess", ->
-      id = $routeParams.scrollTo
-      scrollTo(id)
+  initialize: ->
+    @expose @$scope, "section"
 
-    $scope.section = ->
-      path = $location.path().replace /^\/+/, ""
-      section = path.split("/")[0]
+    @$rootScope.$on "$routeChangeSuccess", =>
+      id = @$routeParams.scrollTo
+      @scrollTo(id)
 
-      switch section
-        when "" then "angleGrinder"
-        when "documentation" then "documentation"
-        when "examples" then "examples"
-        else "angleGrinder"
+  section: ->
+    path = @$location.path().replace /^\/+/, ""
+    section = path.split("/")[0]
 
-angular.module("exampleApp")
-  .controller("SidebarCtrl", SidebarCtrl)
+    switch section
+      when "" then "angleGrinder"
+      when "documentation" then "documentation"
+      when "examples" then "examples"
+      else "angleGrinder"
