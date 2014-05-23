@@ -1,31 +1,19 @@
 class FormCtrl extends BaseCtrl
 
   @register "exampleApp", "users.FormCtrl"
-  @inject "$scope", "$location", "serverValidationErrorsHandler", "user"
+  @inject "$scope", "$location", "select2Options", "serverValidationErrorsHandler", "user"
 
   initialize: ->
     @expose @$scope, "user", "save", "delete"
 
     # options for the parent user select
-    @$scope.userSelectOptions =
-      width: "element"
-      initSelection: true # workaround for initial $dirty state
-      ajax:
-        dataType: "json"
-        url: "/api/users"
-
-        data: (term, page) ->
-          q: term # search term (query params)
-          max: 20, page: page
-          sort: "name", order: "asc"
-
-        results: (result, page) ->
-          more = page < result.total
-          results: result.rows, more: more
+    @$scope.userSelectOptions = @select2Options({
+      ajax: url: "/api/users"
 
       # formatters for result and selection
       formatResult: (user) -> "#{user.name} - #{user.info.email}"
       formatSelection: (user) -> "#{user.name} - #{user.info.email}"
+    })
 
   # Performs server side create or update
   save: (form, user) ->
