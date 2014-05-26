@@ -42,7 +42,7 @@ gridz.directive "agSearchForm", ["$log", ($log) ->
   controller: [
     "$scope", "$parse", "$attrs",
     ($scope, $parse, $attrs) ->
-      $scope.filters = {}
+      $scope.filters or= {} # TODO spec this case
       $scope.searching = false
 
       # Perform server side grid filtering
