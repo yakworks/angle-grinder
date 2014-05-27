@@ -38,7 +38,7 @@ gridz.directive "agGrid", [
         if options.datatype is undefined or options.datatype is null
           options.datatype = agGridDataLoader(options.url, gridCtrl)
 
-        # jqGrid suks at this point it expects `pager` to be an id
+        # jqGrid sucks at this point it expects `pager` to be an id
         unless options.pager is false
           options.pager = element.find(".gridz-pager").attr("id") or "gridz-pager"
 

@@ -42,7 +42,6 @@ gridz.directive "agSearchForm", ["$log", ($log) ->
   controller: [
     "$scope", "$parse", "$attrs",
     ($scope, $parse, $attrs) ->
-      $scope.filters or= {} # TODO spec this case
       $scope.searching = false
 
       # Perform server side grid filtering
@@ -60,7 +59,9 @@ gridz.directive "agSearchForm", ["$log", ($log) ->
       # Trigger search action for the grid
       $scope.advancedSearch = (filters = {}) ->
         form = $scope.searchForm
-        return $log.info "[gridz] advanced search form is invalid", form  unless form?.$valid
+
+        if form and form.$invalid
+          return $log.info "[gridz] advanced search form is invalid", form
 
         gridSearch(filters)
 
