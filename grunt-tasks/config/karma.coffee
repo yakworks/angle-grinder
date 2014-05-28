@@ -20,7 +20,7 @@ module.exports = (grunt) ->
     browsers: parseBrowsers(defaultBrowser: "PhantomJS")
     colors: true
 
-  # single run karm
+  # single run karma
   unit:
     singleRun: true
 

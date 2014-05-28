@@ -4,6 +4,7 @@ module.exports =
   files: [
     "components/bower/jquery/dist/jquery.js"
     "components/bower/underscore/underscore.js"
+
     "components/bower/angular/angular.js"
     "components/bower/angular-animate/angular-animate.js"
     "components/bower/angular-route/angular-route.js"
@@ -11,6 +12,7 @@ module.exports =
     "components/bower/angular-sanitize/angular-sanitize.js"
     "components/bower/angular-mocks/angular-mocks.js"
 
+    # TODO use karma plugins instead of bower dependencies
     "components/bower/sinon/lib/sinon.js"
     "components/bower/sinon/lib/sinon/behavior.js"
     "components/bower/sinon/lib/sinon/call.js"

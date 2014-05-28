@@ -8,7 +8,6 @@ module.exports = (config) ->
       "mocha"
       "chai"
       "sinon-chai"
-      "ng-scenario"
     ]
 
     files: require("./karma-files").files
