@@ -7,7 +7,7 @@ app.service "select2Options", ->
     # build default options
     defaults =
       width: "element"
-      initSelection: true
+      initSelection: angular.noop
 
       ajax:
         dataType: "json"
