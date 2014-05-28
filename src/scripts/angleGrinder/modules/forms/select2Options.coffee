@@ -13,7 +13,7 @@ app.service "select2Options", ->
         dataType: "json"
         url: angular.noop # dummy url, must be overridden
 
-        data: (term, page) ->
+        data: (term, page = 1) ->
           dataDefaults =
             # search term (query params)
             q: term
@@ -23,7 +23,7 @@ app.service "select2Options", ->
             order: "asc"
             max: 20, page: page
 
-          _.defaults(dataOptions, dataDefaults)
+          angular.extend(dataDefaults, dataOptions)
 
         results: (result, page) ->
           results: result.rows
@@ -33,7 +33,7 @@ app.service "select2Options", ->
       formatResult: (record) -> record.name
       formatSelection: (record) -> record.name
 
-    ajax = _.defaults(options.ajax, defaults.ajax)
-    options = _.defaults(options, defaults)
+    ajax = angular.extend(defaults.ajax, options.ajax)
+    options = angular.extend(defaults, options)
     options.ajax = ajax
     options
