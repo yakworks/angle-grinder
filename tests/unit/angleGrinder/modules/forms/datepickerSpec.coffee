@@ -28,7 +28,7 @@ describe "module: angleGrinder.forms", ->
 
       it "clears the date", ->
         openButton = element.find("button")
-        browserTrigger(openButton, "click")
+        openButton.click()
 
         clearButton = element.find("ul").find("button:contains('Clear')")
         clearButton.click()

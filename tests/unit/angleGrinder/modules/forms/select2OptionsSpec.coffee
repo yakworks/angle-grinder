@@ -10,7 +10,7 @@ describe "module: angleGrinder.forms, service: select2Options", ->
 
   it "builds default options", ->
     expect(options).to.have.deep.property "width", "element"
-    expect(options).to.have.deep.property "initSelection", true
+    expect(options).to.have.deep.property "initSelection", angular.noop
     expect(options).to.have.deep.property "ajax.dataType", "json"
 
   it "can override default options", inject (select2Options) ->
@@ -18,7 +18,7 @@ describe "module: angleGrinder.forms, service: select2Options", ->
     expect(select2Options()).to.have.property "width", "element"
 
     expect(select2Options(initSelection: false)).to.have.property "initSelection", false
-    expect(select2Options()).to.have.property "initSelection", true
+    expect(select2Options()).to.have.property "initSelection", angular.noop
 
   describe "#formatResult", ->
 
