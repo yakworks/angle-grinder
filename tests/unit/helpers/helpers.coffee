@@ -2,7 +2,7 @@
 # @param {String} template The string to compile
 # @return {Object} A reference to the compiled template and the scope
 window.compileTemplate = (template, $injector, $scope = null) ->
-  # Create a new scope if necassary
+  # Create a new scope if necessary
   $scope ?= (->
     $rootScope = $injector.get("$rootScope")
     $rootScope.$new()

@@ -7,8 +7,8 @@ forms.directive "agTabset", ->
   scope: true
 
   controller: [
-    "$log", "$scope",
-    ($log, $scope) ->
+    "$log", "$scope", "$location",
+    ($log, $scope, $location) ->
 
       # stack of the tabs
       $scope.tabs = []
@@ -27,12 +27,15 @@ forms.directive "agTabset", ->
 
       # evaluates when a new tab content is loaded
       $scope.contentLoaded = ->
-        # hide contant loading indication
+        # hide content loading indication
         $scope.contentLoading = false
 
         # hide tab loading spinner
         tab = $scope.currentTab()
         tab.loading = false
+
+        # update the url
+        $location.search("tab", tab.name) if tab.name?
 
         $log.debug "[tabs] content loaded", tab
 
@@ -73,16 +76,17 @@ forms.directive "agTabset", ->
   """
 
 forms.directive "agTab", [
-  "$log", "pathWithContext",
-  ($log, pathWithContext) ->
+  "$log", "$location", "pathWithContext",
+  ($log, $location, pathWithContext) ->
     restrict: "E"
     replace: true
     require: "^agTabset"
     transclude: true
 
     scope:
-      templateUrl: "@" # text binding
-      active: "&"      # one-way binding
+      # text binding
+      templateUrl: "@"
+      name: "@"
 
     link: (scope, element, attrs, tabsetCtrl) ->
       # append the application context to the template url
@@ -93,7 +97,8 @@ forms.directive "agTab", [
       scope.loading = false
 
       # add the current tab to the stack
-      tabsetCtrl.addTab(scope, scope.active())
+      active = -> scope.name? and $location.search().tab is scope.name
+      tabsetCtrl.addTab(scope, active())
 
       # handles mouse click on the tab
       scope.select = ->

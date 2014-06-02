@@ -31,10 +31,10 @@ forms.directive "agPanelsRow", ->
         # for instance the tab isn't active
         return unless $element.is(":visible")
 
-        # equzlize heights
+        # equalize heights
         $timeout -> equalizeHeights()
 
-        # unredister the watch because it should run only once
+        # unregister the watch because it should run only once
         unregister()
 
       return

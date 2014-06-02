@@ -1,5 +1,11 @@
 describe "module: angleGrinder.forms tabs", ->
 
+  beforeEach module "ng", ($provide) ->
+    $provide.decorator "$location", ($delegate) ->
+      $delegate.search = sinon.stub()
+      $delegate
+    return
+
   beforeEach module "angleGrinder.common", ($provide) ->
     $provide.value "pathWithContext", (path) -> "/ag-demo#{path}"
     return
@@ -97,6 +103,9 @@ describe "module: angleGrinder.forms tabs", ->
   describe "directive: agTab", ->
     element = null
 
+    beforeEach inject ($location) ->
+      $location.search.returns(tab: undefined)
+
     findTabByTitle = (title) ->
       for tab in element.find(".nav.nav-tabs li")
         return $(tab) if $(tab).find("a").text() is title
@@ -111,7 +120,7 @@ describe "module: angleGrinder.forms tabs", ->
         {element, $scope} = compileTemplate """
           <ag-tabset>
             <ag-tab template-url="/tabs/first">First</ag-tab>
-            <ag-tab template-url="/tabs/second">Second</ag-tab>
+            <ag-tab name="second" template-url="/tabs/second">Second</ag-tab>
             <ag-tab template-url="/tabs/third">Third</ag-tab>
           </ag-tabset>
         """, $injector
@@ -170,6 +179,12 @@ describe "module: angleGrinder.forms tabs", ->
             $httpBackend.flush()
             expect(element.find(".tab.container").text()).to.include "Second"
 
+          it "changes the url", inject ($httpBackend, $location) ->
+            $httpBackend.flush()
+
+            expect($location.search.called).to.be.true
+            expect($location.search.calledWith("tab", "second")).to.be.true
+
         context "when the tab is already selected", ->
           beforeEach ->
             tabEl = findTabByTitle("First")
@@ -180,14 +195,17 @@ describe "module: angleGrinder.forms tabs", ->
 
     describe "with initial active tab", ->
 
+      beforeEach inject ($location) ->
+        $location.search.returns(tab: "second")
+
       beforeEach inject ($httpBackend, $injector) ->
         $httpBackend.whenGET("/ag-demo/tabs/second").respond "Second"
 
         {element, $scope} = compileTemplate """
           <ag-tabset>
-            <ag-tab template-url="/tabs/first">First</ag-tab>
-            <ag-tab active="true" template-url="/tabs/second">Second</ag-tab>
-            <ag-tab template-url="/tabs/third">Third</ag-tab>
+            <ag-tab name="first" template-url="/tabs/first">First</ag-tab>
+            <ag-tab name="second" active="true" template-url="/tabs/second">Second</ag-tab>
+            <ag-tab name="third" template-url="/tabs/third">Third</ag-tab>
           </ag-tabset>
         """, $injector
 
