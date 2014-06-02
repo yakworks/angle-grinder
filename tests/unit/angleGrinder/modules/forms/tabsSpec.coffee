@@ -204,7 +204,7 @@ describe "module: angleGrinder.forms tabs", ->
         {element, $scope} = compileTemplate """
           <ag-tabset>
             <ag-tab name="first" template-url="/tabs/first">First</ag-tab>
-            <ag-tab name="second" active="true" template-url="/tabs/second">Second</ag-tab>
+            <ag-tab name="second" template-url="/tabs/second">Second</ag-tab>
             <ag-tab name="third" template-url="/tabs/third">Third</ag-tab>
           </ag-tabset>
         """, $injector
