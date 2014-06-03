@@ -1,88 +1,126 @@
 forms = angular.module("angleGrinder.forms")
 
-forms.directive "agTabset", ->
-  restrict: "E"
-  replace: true
-  transclude: true
-  scope: true
+forms.directive "agTabset", [
+  "$parse", "$q",
+  ($parse, $q) ->
 
-  controller: [
-    "$log", "$scope",
-    ($log, $scope) ->
+    restrict: "E"
+    replace: true
+    transclude: true
+    scope: true
+    require: "agTabset"
 
-      # stack of the tabs
-      $scope.tabs = []
+    controller: [
+      "$log", "$scope", "$location",
+      ($log, $scope, $location) ->
 
-      # show or hide the tab content loading indicator
-      $scope.contentLoading = false
+        # stack of the tabs
+        $scope.tabs = []
 
-      # return the current tab
-      $scope.currentTab = ->
-        _.findWhere($scope.tabs, selected: true)
-
-      # return the current template url
-      $scope.currentTemplateUrl = ->
-        currentTab = $scope.currentTab()
-        currentTab.tplSrc if currentTab
-
-      # evaluates when a new tab content is loaded
-      $scope.contentLoaded = ->
-        # hide contant loading indication
+        # show or hide the tab content loading indicator
         $scope.contentLoading = false
 
-        # hide tab loading spinner
-        tab = $scope.currentTab()
-        tab.loading = false
+        # return the current tab
+        $scope.currentTab = ->
+          _.findWhere($scope.tabs, selected: true)
 
-        $log.debug "[tabs] content loaded", tab
+        # return the current template url
+        $scope.currentTemplateUrl = ->
+          currentTab = $scope.currentTab()
+          currentTab.tplSrc if currentTab
 
-      # activate the given tab
-      @selectTab = (tab) ->
-        # de-select all tabs
-        angular.forEach $scope.tabs, (tab) ->
-          tab.selected = tab.loading = false
+        # evaluates when a new tab content is loaded
+        $scope.contentLoaded = ->
+          # hide content loading indication
+          $scope.contentLoading = false
 
-        # mark the current tab as selected
-        tab.selected = true
+          # hide tab loading spinner
+          tab = $scope.currentTab()
+          tab.loading = false
 
-        # show the loading spinners
-        tab.loading = true
-        $scope.contentLoading = true
+          # update the url
+          $location.search("tab", tab.name) if tab.name?
 
-      # add new tab to the stack
-      @addTab = (tab, select = false) ->
-        # add a tab to the stack
-        $scope.tabs.push(tab)
+          $log.debug "[tabs] content loaded", tab
 
-        # if the tab is the first one mark it as selected
-        @selectTab(tab) if select or $scope.tabs.length is 1
+        # Open a tab with the given name
+        @openTab = (name) ->
+          deferred = $q.defer()
+          # find the tab by name
+          tab = _.findWhere($scope.tabs, { name: name })
 
-      return
-  ]
+          # do nothing when the tab cannot be found
+          return deferred.promise unless tab?
 
-  template: """
-    <div class="container">
-      <div class="nav nav-tabs" ng-transclude></div>
-      <div class="tab container">
-        <span ng-if="contentLoading">loading the content</span>
-        <ng-include src="currentTemplateUrl()"
-                    onload="contentLoaded()"
-                    ng-hide="contentLoading"></ng-include>
+          # select the tab unless is not already selected
+          @_selectTab(tab) unless tab.selected
+
+          unregister = tab.$watch "loading", (loading) ->
+            return if loading # tab is still loading, do nothing
+
+            # requested tab was loaded, handle the promise
+            deferred.resolve(tab)
+            # ..and unregister the watcher
+            unregister()
+
+          deferred.promise
+
+        # activate the given tab
+        # @private
+        @_selectTab = (tab) ->
+          # de-select all tabs
+          angular.forEach $scope.tabs, (tab) ->
+            tab.selected = tab.loading = false
+
+          # mark the current tab as selected
+          tab.selected = true
+
+          # show the loading spinners
+          tab.loading = true
+          $scope.contentLoading = true
+
+        # add new tab to the stack
+        # @private
+        @_addTab = (tab, select = false) ->
+          # add a tab to the stack
+          $scope.tabs.push(tab)
+
+          # if the tab is the first one mark it as selected
+          @_selectTab(tab) if select or $scope.tabs.length is 1
+
+        return
+    ]
+
+    link: (scope, element, attrs, ctrl) ->
+      # publish agTabset controller to the parent scope
+      alias = attrs.name
+      $parse(alias).assign(scope.$parent, ctrl) if alias
+
+    template: """
+      <div class="container">
+        <div class="nav nav-tabs" ng-transclude></div>
+        <div class="tab container">
+          <span ng-if="contentLoading">loading the content</span>
+          <ng-include src="currentTemplateUrl()"
+                      onload="contentLoaded()"
+                      ng-hide="contentLoading"></ng-include>
+        </div>
       </div>
-    </div>
-  """
+    """
+]
 
 forms.directive "agTab", [
-  "$log", "pathWithContext",
-  ($log, pathWithContext) ->
+  "$log", "$location", "pathWithContext",
+  ($log, $location, pathWithContext) ->
     restrict: "E"
     replace: true
     require: "^agTabset"
     transclude: true
 
     scope:
-      templateUrl: "@" # text binding
-      active: "&"      # one-way binding
+      # text binding
+      templateUrl: "@"
+      name: "@"
 
     link: (scope, element, attrs, tabsetCtrl) ->
       # append the application context to the template url
@@ -93,12 +131,13 @@ forms.directive "agTab", [
       scope.loading = false
 
       # add the current tab to the stack
-      tabsetCtrl.addTab(scope, scope.active())
+      active = -> scope.name? and $location.search().tab is scope.name
+      tabsetCtrl._addTab(scope, active())
 
       # handles mouse click on the tab
       scope.select = ->
         return if scope.selected
-        tabsetCtrl.selectTab(scope)
+        tabsetCtrl._selectTab(scope)
 
     template: """
       <li ng-click="select()" ng-class="{active: selected, loading: loading}">

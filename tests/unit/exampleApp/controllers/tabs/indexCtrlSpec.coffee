@@ -9,18 +9,6 @@ describe "controller: tabs.IndexCtrl", ->
     $controller "tabs.IndexCtrl",
       $scope: $scope
 
-  it "is defined", ->
-    expect($scope.title).to.eq "Tabs with lazy loaded templates"
-
-  describe "#isTabActive", ->
-
-    context "when the tab is active", ->
-      beforeEach inject ($routeParams) ->
-        $routeParams.tab = "foo"
-
-      it "returns true", ->
-        expect($scope.isTabActive("foo")).to.be.true
-
   describe "#save", ->
 
     context "when the form is valid", ->

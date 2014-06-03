@@ -23,7 +23,9 @@ class IndexCtrl extends BaseCtrl
   editItem: (id) ->
     item = @findItemById(id)
     item.persisted = -> true
-    item.save = (callback) -> callback.success(this)
+    item.save = (callback) ->
+      callback.success(this)
+      { $promise: angular.noop }
 
     item.delete = (callback) =>
       this.deleteItemById(id)
@@ -39,6 +41,7 @@ class IndexCtrl extends BaseCtrl
       generateId = -> new Date().getTime()
       item.id = generateId()
       callback.success(this)
+      { $promise: angular.noop }
 
     dialogOptions = item: item, grid: @$scope.exampleGrid
     @formDialog.open("/templates/gridExample/form.html", dialogOptions).result

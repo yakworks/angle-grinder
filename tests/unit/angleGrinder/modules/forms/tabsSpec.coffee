@@ -1,5 +1,11 @@
 describe "module: angleGrinder.forms tabs", ->
 
+  beforeEach module "ng", ($provide) ->
+    $provide.decorator "$location", ($delegate) ->
+      $delegate.search = sinon.stub()
+      $delegate
+    return
+
   beforeEach module "angleGrinder.common", ($provide) ->
     $provide.value "pathWithContext", (path) -> "/ag-demo#{path}"
     return
@@ -36,60 +42,114 @@ describe "module: angleGrinder.forms tabs", ->
       it "is defined", ->
         expect(ctrl).to.not.be.undefined
 
-      describe "#addTab", ->
+      describe "#openTab", ->
+        firstTab = null
+        secondTab = null
+
+        beforeEach inject ($rootScope) ->
+          firstTab = $rootScope.$new()
+          firstTab.name = "first"
+          ctrl._addTab(firstTab)
+
+          secondTab = $rootScope.$new()
+          secondTab.name = "second"
+          ctrl._addTab(secondTab)
+
+        describe "when the tab is not selected", ->
+
+          it "opens a tab with the given name", (done) ->
+            expect(firstTab.selected).to.be.true
+
+            inject ($rootScope) ->
+              promise = ctrl.openTab("second")
+
+              promise.then (tab) ->
+                expect(tab).to.eq secondTab
+                done()
+
+              secondTab.loading = false
+              $rootScope.$apply()
+
+            expect(firstTab.selected).to.be.false
+            expect(secondTab.selected).to.be.true
+
+        describe "when the tab is already selected", ->
+
+          it "returns resolved promise", (done) ->
+            inject ($rootScope) ->
+              promise = ctrl.openTab("first")
+
+              promise.then (tab) ->
+                expect(tab).to.eq firstTab
+                done()
+
+              firstTab.loading = false
+              $rootScope.$apply()
+
+        describe "when the tab cannot be found", ->
+
+          it "does nothing", (done) ->
+            promise = ctrl.openTab("none")
+
+            inject ($rootScope) ->
+              promise.finally -> throw new Error("should be called")
+              $rootScope.$apply()
+              done()
+
+      describe "#_addTab", ->
         newTab = null
         beforeEach inject ($rootScope) ->
           newTab = $rootScope.$new()
 
         it "add a new tab to the stack", ->
-          ctrl.addTab(newTab)
+          ctrl._addTab(newTab)
           expect(scope.tabs.length).to.eq 1
           expect(_.last(scope.tabs)).to.eq
 
         context "when the tab stack is empty", ->
 
           it "selects the first tab", ->
-            sinon.spy(ctrl, "selectTab")
-            ctrl.addTab(newTab)
+            sinon.spy(ctrl, "_selectTab")
+            ctrl._addTab(newTab)
 
-            expect(ctrl.selectTab).to.have.been.calledWith(newTab)
+            expect(ctrl._selectTab).to.have.been.calledWith(newTab)
             expect(scope.tabs[0].selected).to.be.true
 
         context "when the tab stack is not empty", ->
           beforeEach inject ($rootScope) ->
-            ctrl.addTab($rootScope.$new())
+            ctrl._addTab($rootScope.$new())
 
           it "does not select the new tab", ->
-            sinon.spy(ctrl, "selectTab")
-            ctrl.addTab(newTab)
+            sinon.spy(ctrl, "_selectTab")
+            ctrl._addTab(newTab)
 
-            expect(ctrl.selectTab).to.not.have.been.called
+            expect(ctrl._selectTab).to.not.have.been.called
 
-      describe "#selectTab", ->
+      describe "#_selectTab", ->
         tabOne = null
         tabTwo = null
 
         beforeEach inject ($rootScope) ->
           tabOne = $rootScope.$new()
-          ctrl.addTab(tabOne)
+          ctrl._addTab(tabOne)
 
           tabTwo = $rootScope.$new()
           tabTwo.loading = true
-          ctrl.addTab(tabTwo)
+          ctrl._addTab(tabTwo, true)
 
         it "marks the tab as selected", ->
-          expect(tabOne.selected).to.be.true
-          expect(tabTwo.selected).to.be.undefined
-
-          ctrl.selectTab(tabTwo)
-
           expect(tabOne.selected).to.be.false
           expect(tabTwo.selected).to.be.true
+
+          ctrl._selectTab(tabOne)
+
+          expect(tabOne.selected).to.be.true
+          expect(tabTwo.selected).to.be.false
 
         it "disables loading spinners for the other tabs", ->
           expect(tabTwo.loading).to.be.true
 
-          ctrl.selectTab(tabOne)
+          ctrl._selectTab(tabOne)
 
           expect(tabOne.loading).to.be.true
           expect(tabTwo.loading).to.be.false
@@ -97,11 +157,16 @@ describe "module: angleGrinder.forms tabs", ->
   describe "directive: agTab", ->
     element = null
 
+    beforeEach inject ($location) ->
+      $location.search.returns(tab: undefined)
+
     findTabByTitle = (title) ->
       for tab in element.find(".nav.nav-tabs li")
         return $(tab) if $(tab).find("a").text() is title
 
     describe "basics", ->
+
+      $scope = null
 
       # mock templates for the tab panel
       beforeEach inject ($httpBackend) ->
@@ -109,9 +174,9 @@ describe "module: angleGrinder.forms tabs", ->
 
       beforeEach inject ($httpBackend, $injector) ->
         {element, $scope} = compileTemplate """
-          <ag-tabset>
+          <ag-tabset name="testTabset">
             <ag-tab template-url="/tabs/first">First</ag-tab>
-            <ag-tab template-url="/tabs/second">Second</ag-tab>
+            <ag-tab name="second" template-url="/tabs/second">Second</ag-tab>
             <ag-tab template-url="/tabs/third">Third</ag-tab>
           </ag-tabset>
         """, $injector
@@ -137,6 +202,9 @@ describe "module: angleGrinder.forms tabs", ->
 
       it "by default displays the first tab content", ->
         expect(element.find(".tab.container").text()).to.include "First"
+
+      it "exposes API to the scope", ->
+        expect($scope.testTabset).to.not.be.undefined
 
       describe "on click on the nav tab", ->
         tabEl = null
@@ -170,6 +238,12 @@ describe "module: angleGrinder.forms tabs", ->
             $httpBackend.flush()
             expect(element.find(".tab.container").text()).to.include "Second"
 
+          it "changes the url", inject ($httpBackend, $location) ->
+            $httpBackend.flush()
+
+            expect($location.search.called).to.be.true
+            expect($location.search.calledWith("tab", "second")).to.be.true
+
         context "when the tab is already selected", ->
           beforeEach ->
             tabEl = findTabByTitle("First")
@@ -180,14 +254,17 @@ describe "module: angleGrinder.forms tabs", ->
 
     describe "with initial active tab", ->
 
+      beforeEach inject ($location) ->
+        $location.search.returns(tab: "second")
+
       beforeEach inject ($httpBackend, $injector) ->
         $httpBackend.whenGET("/ag-demo/tabs/second").respond "Second"
 
         {element, $scope} = compileTemplate """
           <ag-tabset>
-            <ag-tab template-url="/tabs/first">First</ag-tab>
-            <ag-tab active="true" template-url="/tabs/second">Second</ag-tab>
-            <ag-tab template-url="/tabs/third">Third</ag-tab>
+            <ag-tab name="first" template-url="/tabs/first">First</ag-tab>
+            <ag-tab name="second" template-url="/tabs/second">Second</ag-tab>
+            <ag-tab name="third" template-url="/tabs/third">Third</ag-tab>
           </ag-tabset>
         """, $injector
 
