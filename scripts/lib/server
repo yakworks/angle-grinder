@@ -14,7 +14,7 @@ function startServer() {
   fi
 
   # start the backend server
-  PORT="$SERVER_PORT" nodemon --watch server ./server/index.coffee &
+  PORT="$SERVER_PORT" ./node_modules/coffee-script/bin/coffee ./server/index.coffee &
 
   # ..grab its PID
   SERVER_PID=$!

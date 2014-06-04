@@ -58,6 +58,9 @@ module.exports = (grunt) ->
     # Start a static web server
     connect:        config "connect"
 
+    # Update your devDependencies and dependencies automatically with a grunt task
+    devUpdate:      config "devUpdate"
+
   grunt.renameTask "regarde", "watch"
 
   grunt.registerTask "build:dev", [
