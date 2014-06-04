@@ -1,10 +1,10 @@
 module.exports = (grunt) ->
 
   # load all grunt tasks
-  require("matchdep").filterDev("grunt-*").forEach(grunt.loadNpmTasks)
+  require("load-grunt-tasks")(grunt)
   grunt.loadTasks("grunt-tasks")
 
-  loadMoule = (name) ->
+  config = (name) ->
     require("./grunt-tasks/config/#{name}")(grunt, appConfig)
 
   # configurable paths
@@ -19,44 +19,44 @@ module.exports = (grunt) ->
     pkg: grunt.file.readJSON("package.json")
 
     # Run tasks whenever watched files change
-    watch:          loadMoule "watch"
+    watch:          config "watch"
 
     # Compile CoffeeScript files to JavaScript
-    coffee:         loadMoule "coffee"
+    coffee:         config "coffee"
     # Lint your CoffeeScript using grunt.js and coffeelint
-    coffeelint:     loadMoule "coffeelint"
+    coffeelint:     config "coffeelint"
 
     # Compile LESS files to CSS
-    less:           loadMoule "less"
+    less:           config "less"
     # Concatenate files
-    concat:         loadMoule "concat"
+    concat:         config "concat"
 
     # Minify HTML
-    htmlmin:        loadMoule "htmlmin"
+    htmlmin:        config "htmlmin"
     # Tgruask to concatenate & pre-load your AngularJS templates
-    ngtemplates:    loadMoule "ngtemplates"
+    ngtemplates:    config "ngtemplates"
     # Minify files with UglifyJS
-    uglify:         loadMoule "uglify"
+    uglify:         config "uglify"
     # Clear files and folders
-    clean:          loadMoule "clean"
+    clean:          config "clean"
     # Copy files and folders
-    copy:           loadMoule "copy"
+    copy:           config "copy"
     # General purpose text replacement for grunt
-    replace:        loadMoule "replace"
+    replace:        config "replace"
     # Grunt plugin for Bower
-    bower:          loadMoule "bower"
+    bower:          config "bower"
     # Publish to GitHub pages
-    "gh-pages":     loadMoule "gh-pages"
+    "gh-pages":     config "gh-pages"
 
     # Replaces references to non-optimized scripts or stylesheets into a set of HTML files
-    useminPrepare:  loadMoule "usemin_prepare"
-    usemin:         loadMoule "usemin"
+    useminPrepare:  config "usemin_prepare"
+    usemin:         config "usemin"
 
     # Plugin for Karma
-    karma:          loadMoule "karma"
+    karma:          config "karma"
 
     # Start a static web server
-    connect:        loadMoule "connect"
+    connect:        config "connect"
 
   grunt.renameTask "regarde", "watch"
 
