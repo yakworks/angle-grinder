@@ -3,7 +3,7 @@
 # update selenium
 ./node_modules/protractor/bin/webdriver-manager update
 
-. ./scripts/lib/server
+. ./script/lib/server
 
 startServer
 

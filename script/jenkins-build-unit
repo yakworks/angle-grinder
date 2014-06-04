@@ -8,20 +8,16 @@ nvm use 0.10.25
 npm install
 bower install
 
-# install selenium and its drivers
-./node_modules/protractor/bin/webdriver-manager update
-
 # start virtual frame buffer
-./scripts/xvfb start
-export DISPLAY=:99
+./script/xvfb start
 
-# run integration specs
-./scripts/test-integration
+# run the specs
+grunt test --browsers=PhantomJS,Chrome
 # capture the results
 RESULT=$?
 
 # stop virtual frame buffer
-./scripts/xvfb stop
+./script/xvfb stop
 
 # output the test results
 exit $RESULT

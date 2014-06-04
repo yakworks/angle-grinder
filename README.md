@@ -166,7 +166,7 @@ Go to `angle-grinder-gh-pages`directory,  build the app and push changes to `gh-
 
 ```
 cd angle-grinder-gh-pages
-scripts/upgrade-angle-grinder.sh
+script/update-ag-plugin
 git commit -am 'chore: release the documentation'
 ```
 

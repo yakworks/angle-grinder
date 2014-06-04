@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. ./scripts/lib/server
+. ./script/lib/server
 
 startServer
 grunt build:dev configureProxies livereload-start connect:integration watch
