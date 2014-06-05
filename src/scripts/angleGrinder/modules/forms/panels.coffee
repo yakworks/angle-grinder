@@ -32,7 +32,7 @@ forms.directive "agPanelsRow", ->
         return unless $element.is(":visible")
 
         # equalize heights
-        $timeout -> equalizeHeights()
+        $timeout equalizeHeights, 250
 
         # unregister the watch because it should run only once
         unregister()
