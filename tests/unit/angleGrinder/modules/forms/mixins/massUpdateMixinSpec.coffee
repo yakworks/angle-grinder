@@ -6,6 +6,7 @@ describe "module: angleGrinder.forms mixin: massUpdateMixin", ->
 
   $scope = null
   grid = null
+  massUpdateFormCtrl = null
 
   beforeEach inject ($rootScope, massUpdateMixin) ->
     $scope = $rootScope.$new()
@@ -15,7 +16,7 @@ describe "module: angleGrinder.forms mixin: massUpdateMixin", ->
 
     massUpdateMixin $scope,
       gridName: "theGrid"
-      controller: @massUpdateFormCtrl
+      controller: massUpdateFormCtrl
       templateUrl: "/path/to/the/form.html"
 
   context "when the grid is not defined", ->
@@ -44,7 +45,7 @@ describe "module: angleGrinder.forms mixin: massUpdateMixin", ->
         expect(args).to.have.deep.property "resolve.grid"
 
       context "when the controller is not specified", ->
-        before -> @massUpdateFormCtrl = null
+        before -> massUpdateFormCtrl = null
 
         it "uses the default mass update form controller", inject ($modal) ->
           options = $modal.open.getCall(0).args[0]
@@ -53,7 +54,7 @@ describe "module: angleGrinder.forms mixin: massUpdateMixin", ->
           expect(options).to.have.property "controller", "MassUpdateFormCtrl"
 
       context "when the controller is specified", ->
-        before -> @massUpdateFormCtrl = "OtherCtrl"
+        before -> massUpdateFormCtrl = "OtherCtrl"
 
         it "uses the custom controller", inject ($modal) ->
           options = $modal.open.getCall(0).args[0]

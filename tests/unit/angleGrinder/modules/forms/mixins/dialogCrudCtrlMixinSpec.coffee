@@ -19,6 +19,9 @@ describe "module: angleGrinder.forms mixin: dialogCrudCtrlMixin", ->
   $scope = null
   grid = null
 
+  beforeEdit = null
+  beforeCreate = null
+
   beforeEach inject ($rootScope, Users, dialogCrudCtrlMixin) ->
     $scope = $rootScope.$new()
 
@@ -30,8 +33,8 @@ describe "module: angleGrinder.forms mixin: dialogCrudCtrlMixin", ->
       Resource: Users
       gridName: "grid.transactions"
       templateUrl: "/foo/bar/form.html"
-      beforeEdit: @beforeEdit
-      beforeCreate: @beforeCreate
+      beforeEdit: beforeEdit
+      beforeCreate: beforeCreate
 
   describe "#editItem", ->
     beforeEach inject ($httpBackend) ->
@@ -46,7 +49,7 @@ describe "module: angleGrinder.forms mixin: dialogCrudCtrlMixin", ->
       $httpBackend.verifyNoOutstandingExpectation()
       $httpBackend.verifyNoOutstandingRequest()
 
-    it "opens a dialog for editiging the loaded resource", inject (formDialog) ->
+    it "opens a dialog for editing the loaded resource", inject (formDialog) ->
       expect(formDialog.open).to.have.been.called
 
       args = formDialog.open.getCall(0).args
@@ -59,7 +62,7 @@ describe "module: angleGrinder.forms mixin: dialogCrudCtrlMixin", ->
 
     context "when the `beforeEdit` callback is given", ->
       before ->
-        @beforeEdit = (record) ->
+        beforeEdit = (record) ->
           record.someValue = "foo bar"
           record
 
@@ -82,7 +85,7 @@ describe "module: angleGrinder.forms mixin: dialogCrudCtrlMixin", ->
 
     context "when the `beforeCreate` callback is given", ->
       before ->
-        @beforeCreate = (record) ->
+        beforeCreate = (record) ->
           record.orderId = 66
           record
 
