@@ -18,6 +18,7 @@ grids.factory "exampleGrid", [
         name: "invoiceDate"
         label: "Date"
         width: 80
+        formatter: "date"
       ,
         name: "note"
         label: "Note"

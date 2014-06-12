@@ -9,13 +9,7 @@ dataGenerator.value "random",
     max = maxDate.getTime()
 
     randomMilis = @range(min, max)
-    date = new Date(randomMilis)
-
-    year = date.getFullYear()
-    month = "0#{date.getUTCMonth() + 1}".slice(-2)
-    day = "0#{date.getUTCDate()}".slice(-2)
-
-    "#{year}-#{month}-#{day}"
+    new Date(randomMilis)
 
 class SampleData
   @$inject = ["random"]
