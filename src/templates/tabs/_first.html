@@ -2,6 +2,8 @@
 
 <div>foo: {{foo}}</div>
 
+<h5>Dates</h5>
+
 <div>{{birthDate}}</div>
 
 <ul>
@@ -9,4 +11,15 @@
   <li>{{birthDate | agDate:'short'}}</li>
   <li>{{birthDate | agDate:'fullDate'}}</li>
   <li>{{birthDate | agDate:'mediumDate'}}</li>
+</ul>
+
+<h5>Currencies</h5>
+
+<div>{{price}}</div>
+
+<ul>
+  <li>{{price | agCurrency}}</li>
+  <li>{{price | agCurrency:'zł'}}</li>
+  <li>{{price | agCurrency:'euro'}}</li>
+  <li>{{price | agCurrency:'GBP'}}</li>
 </ul>
