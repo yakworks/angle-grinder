@@ -22,11 +22,11 @@ describe "module: angleGrinder.common", ->
       expect(filter(amount)).to.eq "$9.99"
 
     it "can use other currency symbols", ->
-      amount = 99.89
+      amount = 99.8
 
-      expect(filter(amount, "$")).to.eq "$99.89"
-      expect(filter(amount, "euro")).to.eq "euro99.89"
-      expect(filter(amount, "zł")).to.eq "zł99.89"
+      expect(filter(amount, "$")).to.eq "$99.80"
+      expect(filter(amount, "euro")).to.eq "euro99.80"
+      expect(filter(amount, "zł")).to.eq "zł99.80"
 
     describe "filter config provider", ->
 

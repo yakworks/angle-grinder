@@ -17,7 +17,7 @@ app.provider "agCurrencyFilter", ->
 
     (amount, symbol = defaultSymbol) ->
 
-      formattedAmount = $filter("number")(amount)
+      formattedAmount = $filter("currency")(amount, "")
       _.template(defaultFormat)(amount: formattedAmount, symbol: symbol)
 
   ]
