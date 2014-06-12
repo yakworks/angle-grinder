@@ -36,7 +36,7 @@ describe "module: angleGrinder.gridz", ->
       """
 
       it "generates select2 component along with the show button", ->
-        expect(element.find("input[type=text]").length).to.equal 1
+        expect(element.find("input").length).to.equal 1
         expect(element.find("button[type=button]").length).to.equal 1
 
       describe "isolated scope", ->

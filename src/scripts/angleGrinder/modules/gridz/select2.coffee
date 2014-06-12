@@ -36,7 +36,7 @@ gridz.directive "agSelect2", [
         if attrs.selectMinimumInputLength?
           options.minimumInputLength = parseInt(attrs.selectMinimumInputLength)
 
-        # set the default `width
+        # set the default `width`
         options.width ?= "resolve"
 
         # create `ajax`
@@ -77,7 +77,7 @@ gridz.directive "agSelect2", [
 
     template: """
       <div>
-        <input ui-select2="options" multiple ng-model="ngModel" type="text"/>
+        <input ui-select2="options" multiple ng-model="ngModel" type="hidden"/>
         <ag-select2-open></ag-select2-open>
       </div>
     """
