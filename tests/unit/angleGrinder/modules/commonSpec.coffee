@@ -51,6 +51,34 @@ describe "module: angleGrinder.common", ->
         it "returns false for `#{str}`", inject (isEmpty) ->
           expect(isEmpty(str)).to.be.false
 
+  describe "service: isFalsy", ->
+
+    isFalsy = null
+
+    beforeEach inject (_isFalsy_) -> isFalsy = _isFalsy_
+
+    it "returns true for `NaN`", ->
+      expect(isFalsy(NaN)).to.be.true
+
+    it "returns true empty strings", ->
+      expect(isFalsy("")).to.be.true
+      expect(isFalsy("foo")).to.be.false
+
+    it "returns true for `null`", ->
+      expect(isFalsy(null)).to.be.true
+
+    it "returns true for `undefined`", ->
+      expect(isFalsy(undefined)).to.be.true
+
+    it "returns true for `false`", ->
+      expect(isFalsy(false)).to.be.true
+
+    it "returns false for other value", ->
+      expect(isFalsy(true)).to.be.false
+      expect(isFalsy(0)).to.be.false
+      expect(isFalsy(0.0)).to.be.false
+      expect(isFalsy(123)).to.be.false
+
   describe "service: camelize", ->
 
     context "when the input is dasherized", ->

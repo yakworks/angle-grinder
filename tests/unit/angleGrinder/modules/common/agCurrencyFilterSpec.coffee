@@ -28,6 +28,17 @@ describe "module: angleGrinder.common", ->
       expect(filter(amount, "euro")).to.eq "euro99.80"
       expect(filter(amount, "zł")).to.eq "zł99.80"
 
+    it "can format strings", ->
+      expect(filter("9.95")).to.eq "$9.95"
+
+    it "does nothing for empty values", ->
+      expect(filter(0)).to.eq "$0.00"
+      expect(filter(0/0)).to.deep.eq ""
+      expect(filter("")).to.eq ""
+      expect(filter(null)).to.eq ""
+      expect(filter(undefined)).to.eq ""
+      expect(filter(false)).to.eq ""
+
     describe "filter config provider", ->
 
       it "can set the default symbol", ->

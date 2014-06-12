@@ -33,6 +33,16 @@ describe "module: angleGrinder.common", ->
       expect(filter(date, "mediumTime")).to.eq "12:00:00 AM"
       expect(filter(date, "shortTime")).to.eq "12:00 AM"
 
+    it "can format dates form strings", ->
+      expect(filter("2010-06-26T22:00:00Z")).to.eq "Jun 27, 2010"
+      expect(filter("2010-07-26T22:00:00Z")).to.eq "Jul 27, 2010"
+
+    it "does nothing for empty values", ->
+      expect(filter("")).to.eq ""
+      expect(filter(null)).to.eq ""
+      expect(filter(undefined)).to.eq ""
+      expect(filter(false)).to.eq ""
+
     describe "filter config provider", ->
 
       it "can set the default date format", ->

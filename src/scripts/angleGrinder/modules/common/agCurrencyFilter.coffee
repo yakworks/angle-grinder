@@ -13,11 +13,14 @@ app.provider "agCurrencyFilter", ->
   setDefaultFormat: (format) ->
     defaultFormat = format
 
-  $get: ["$filter", ($filter) ->
+  $get: [
+    "$filter", "isFalsy",
+    ($filter, isFalsy) ->
 
-    (amount, symbol = defaultSymbol) ->
+      (amount, symbol = defaultSymbol) ->
+        return "" if isFalsy(amount)
 
-      formattedAmount = $filter("currency")(amount, "")
-      _.template(defaultFormat)(amount: formattedAmount, symbol: symbol)
+        formattedAmount = $filter("currency")(amount, "")
+        _.template(defaultFormat)(amount: formattedAmount, symbol: symbol)
 
   ]

@@ -9,9 +9,13 @@ app.provider "agDateFilter", ->
   setDefaultFormat: (format) ->
     defaultFormat = format
 
-  $get: ["$filter", ($filter) ->
+  $get: [
+    "$filter", "isFalsy",
+    ($filter, isFalsy) ->
 
-    (date, format = defaultFormat) ->
-      $filter("date")(date, format)
+      (date, format = defaultFormat) ->
+        return "" if isFalsy(date)
+
+        $filter("date")(date, format)
 
   ]

@@ -20,7 +20,20 @@ common.factory "pendingRequests", [
 
 # Returns true is the given string is null, undefined or empty ("")
 common.value "isEmpty", (str) ->
-  not str or str.length is 0
+  _.isString(str) and _.isEmpty(str)
+
+# Returns true if the given values if falsy
+common.service "isFalsy", [
+  "isEmpty", (isEmpty) ->
+    (value) ->
+      return true if _.isNaN(value)
+      return true if isEmpty(value)
+      return true if _.isNull(value)
+      return true if _.isUndefined(value)
+      return true if value is false
+
+      return false
+]
 
 # Camelizes the given string
 common.value "camelize", (str) ->
