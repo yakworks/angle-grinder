@@ -30,7 +30,7 @@ app.factory "httpErrorsInterceptor", [
   ($q, $log, alerts) ->
 
     responseError: (response) ->
-      errorMessage = response.data?.error || "Unexpected HTTP error"
+      errorMessage = response.data?.error or "Unexpected HTTP error"
       $log.debug "intercepting", errorMessage, response
 
       # skip validation errors
@@ -46,8 +46,17 @@ app.config [
     $httpProvider.interceptors.push("httpErrorsInterceptor")
 ]
 
-app.config [
+gridz = angular.module("angleGrinder.gridz")
+
+gridz.config [
   "agDateFilterProvider", (provider) ->
     # set default date format
-    provider.setDefaultFormat("longDate")
+    provider.setDefaultFormat("short")
+]
+
+gridz.config [
+  "agCurrencyFilterProvider", (provider) ->
+    # set default currency format
+    provider.setDefaultFormat("<%= amount %> <%= symbol %>")
+    provider.setDefaultSymbol("GBP")
 ]

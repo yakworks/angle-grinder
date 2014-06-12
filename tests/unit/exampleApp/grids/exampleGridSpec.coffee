@@ -22,4 +22,4 @@ describe "module: exampleApp.grids", ->
 
       it "has valid number of columns", inject (exampleGrid) ->
         colModel = exampleGrid().colModel
-        expect(colModel).to.have.length 5
+        expect(colModel).to.have.length 6

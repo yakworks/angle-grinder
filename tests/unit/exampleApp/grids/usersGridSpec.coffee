@@ -31,13 +31,13 @@ describe "module: exampleApp.grids", ->
 
         expect(idCol).to.not.be.undefined
 
-        $link = $(idCol.formatter("Foo", {}, id: 123))
-        expect($link.text()).to.eq "Foo"
-        expect($link.attr("href")).to.eq "#/examples/users/123"
+        linkEl = $(idCol.formatter("Foo", {}, id: 123))
+        expect(linkEl.text()).to.eq "Foo"
+        expect(linkEl.attr("href")).to.eq "#/examples/users/123"
 
       it "has valid `birthday` date formatter", inject (usersGrid) ->
         colModel = usersGrid().colModel
         birthdayCol = _.findWhere(colModel, name: "birthday")
 
         expect(birthdayCol).to.not.be.undefined
-        expect(birthdayCol.formatter(1392127095158)).to.eq "the date"
+        expect(birthdayCol.formatter).to.eq "date"

@@ -1,7 +1,7 @@
 grids = angular.module "exampleApp.grids"
 
 grids.factory "usersDialogGrid", [
-  "$log", "$filter", ($log, $filter) ->
+  "$log", ($log) ->
 
     colModel = ->
       [
@@ -22,7 +22,7 @@ grids.factory "usersDialogGrid", [
       ,
         name: "birthday"
         label: "Birthday",
-        formatter: (cellVal) -> $filter("date")(cellVal)
+        formatter: "date"
       ,
         name: "creditInfo.allowance"
         label: "Allowance"

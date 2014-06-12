@@ -4,6 +4,17 @@ gridz = angular.module("angleGrinder.gridz", [
   "ui.select2"
 ])
 
+# Globally expose custom formatters for dates and currencies.
+# Used by jgGrid for formatting cell values.
+gridz.run [
+  "$window", "agDateFilter", "agCurrencyFilter",
+  ($window, agDateFilter, agCurrencyFilter) ->
+
+    $window.agDateFilter     = agDateFilter
+    $window.agCurrencyFilter = agCurrencyFilter
+
+]
+
 gridz.directive "agGrid", [
   "$log", "$parse", "agGridDataLoader", "actionPopupHandler", "pathWithContext", "camelize",
   ($log, $parse, agGridDataLoader, actionPopupHandler, pathWithContext, camelize) ->

@@ -247,6 +247,13 @@ $.fn.gridz.defaults =
 
 # Extra formatters for jqGrid
 $.extend $.fn.fmatter,
+
+  # use `agDateFilter` for format dates
+  date:     (cellVal) -> window.agDateFilter(cellVal)
+
+  # use `agCurrencyFilter` for format currencies
+  currency: (cellVal) -> window.agCurrencyFilter(cellVal)
+
   okIcon: (cellVal, options, rowdata) ->
     if cellVal then "<i class='icon-ok'></i>" else ""
 

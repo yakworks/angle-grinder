@@ -26,8 +26,8 @@ grids.factory "usersGrid", [
         formatter: showActionLink
       ,
         name: "birthday"
-        label: "Birthday",
-        formatter: (cellVal) -> $filter("date")(cellVal)
+        label: "Birthday"
+        formatter: "date"
       ,
         name: "creditInfo.allowance"
         label: "Allowance"

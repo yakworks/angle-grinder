@@ -20,12 +20,13 @@ describe "controller: gridExample.ListCtrl", ->
     it "assigns gridOptions", ->
       expect($scope.gridOptions).to.not.be.undefined
 
-      expect($scope.gridOptions.colModel.length).to.equal 5
+      expect($scope.gridOptions.colModel.length).to.equal 6
       expect($scope.gridOptions.colModel[0].name).to.equal "id"
       expect($scope.gridOptions.colModel[1].name).to.equal "customer.name"
       expect($scope.gridOptions.colModel[2].name).to.equal "invoiceDate"
-      expect($scope.gridOptions.colModel[3].name).to.equal "note"
-      expect($scope.gridOptions.colModel[4].name).to.equal "complete"
+      expect($scope.gridOptions.colModel[3].name).to.equal "amount"
+      expect($scope.gridOptions.colModel[4].name).to.equal "note"
+      expect($scope.gridOptions.colModel[5].name).to.equal "complete"
 
       expect($scope.gridOptions.data.length).to.equal 100
 

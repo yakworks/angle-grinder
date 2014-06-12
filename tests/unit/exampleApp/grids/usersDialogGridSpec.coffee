@@ -1,9 +1,6 @@
 describe "module: exampleApp.grids", ->
 
-  beforeEach module "exampleApp.grids", ($provide) ->
-    # mock date filter
-    $provide.service "dateFilter", -> (val) -> "the date"
-    return
+  beforeEach module "exampleApp.grids"
 
   describe "service: usersDialogGrid", ->
 
@@ -32,13 +29,13 @@ describe "module: exampleApp.grids", ->
 
     describe "colModel", ->
 
-      it "has valid number of columns", inject (exampleGrid) ->
-        colModel = exampleGrid().colModel
-        expect(colModel).to.have.length 5
+      it "has valid number of columns", inject (usersDialogGrid) ->
+        colModel = usersDialogGrid().colModel
+        expect(colModel).to.have.length 7
 
       it "has valid `birthday` date formatter", inject (usersDialogGrid) ->
         colModel = usersDialogGrid().colModel
         birthdayCol = _.findWhere(colModel, name: "birthday")
 
         expect(birthdayCol).to.not.be.undefined
-        expect(birthdayCol.formatter(1392127095158)).to.eq "the date"
+        expect(birthdayCol.formatter).to.eq "date"

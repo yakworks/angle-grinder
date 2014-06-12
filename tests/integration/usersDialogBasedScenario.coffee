@@ -112,7 +112,7 @@ describe "Users dialog based grid scenario", ->
         expect(firstRow.value("info.email")).to.eventually.eq "new-user@email.com"
         expect(firstRow.value("name")).to.eventually.eq "New User Name"
         expect(firstRow.value("creditInfo.allowance")).to.eventually.eq "99.99"
-        expect(firstRow.value("birthday")).to.eventually.eq "Mar 4, 1983"
+        expect(firstRow.value("birthday")).to.eventually.eq "3/4/83 12:00 AM"
 
   describe "grid row popover", ->
     popover = null
