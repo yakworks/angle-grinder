@@ -14,6 +14,8 @@ class IndexCtrl extends BaseCtrl
     @$scope.third = title: "The Third Tab"
     @$scope.item = name: "Foo"
 
+    @$scope.birthDate = new Date()
+
   save: (form, item) ->
     return if form.$invalid
     @$log.debug "[tabs] saving", item

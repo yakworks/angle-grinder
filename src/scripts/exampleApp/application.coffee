@@ -45,3 +45,9 @@ app.config [
     # register http errors interceptor
     $httpProvider.interceptors.push("httpErrorsInterceptor")
 ]
+
+app.config [
+  "agDateFilterProvider", (provider) ->
+    # set default date format
+    provider.setDefaultFormat("longDate")
+]

@@ -1,3 +1,12 @@
 <h4>{{first.title}}</h4>
 
-foo: {{foo}}
+<div>foo: {{foo}}</div>
+
+<div>{{birthDate}}</div>
+
+<ul>
+  <li>{{birthDate | agDate}}</li>
+  <li>{{birthDate | agDate:'short'}}</li>
+  <li>{{birthDate | agDate:'fullDate'}}</li>
+  <li>{{birthDate | agDate:'mediumDate'}}</li>
+</ul>
