@@ -7,7 +7,7 @@ module.exports = (grunt) ->
 
   html:
     files: [
-      "<%= appConfig.app %>/index.html"
+      "<%= appConfig.app %>/**/*.html"
     ]
     tasks: ["copy:dev"]
 

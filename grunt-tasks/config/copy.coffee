@@ -26,7 +26,7 @@ module.exports = (grunt) ->
       ]
     ,
       # another workaround for missing images
-      # this time for slect2 component
+      # this time for select2 component
       expand: true
       flatten: true
       cwd: "components/bower/select2"
