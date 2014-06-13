@@ -61,14 +61,9 @@ gridz.directive "agSelect2", [
         # create `formatResult` function from the given template
         if resultTemplate?
           options.formatResult ?= (item) ->
-            scope = scope.$new()
-            scope.item = item
 
-            resultEl = angular.element(resultTemplate)
-            $compile(resultEl)(scope)
-            scope.$digest()
-
-            return resultEl
+            options = interpolate: /\{\{(.+?)\}\}/g
+            angular.element(_.template(resultTemplate, { item: item }, options))
 
         # create default `formatSelection` method
         options.formatSelection ?= (item) -> item.name

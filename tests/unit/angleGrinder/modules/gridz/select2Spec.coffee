@@ -57,7 +57,7 @@ describe "module: angleGrinder.gridz", ->
           it "is defined", ->
             expect(formatResult).to.not.be.undefined
 
-          it "generates html code fro the result", ->
+          it "generates html code for the result", ->
             result = formatResult(num: 123, name: "Test")
             isolatedScope.$apply()
 
