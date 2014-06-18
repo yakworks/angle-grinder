@@ -4,7 +4,7 @@ mixin.factory "massUpdateMixin", [
   "$log", "$parse", "$modal", "pathWithContext",
   ($log, $parse, $modal, pathWithContext) ->
     ($scope, args = {}) ->
-      {gridName, templateUrl, controller} = args
+      {gridName, templateUrl, controller, extraParams} = args
       controller ?= "MassUpdateFormCtrl"
 
       $scope.massUpdate = ->
@@ -26,5 +26,6 @@ mixin.factory "massUpdateMixin", [
           resolve:
             selectedIds: -> selectedIds
             grid: -> grid
+            extraParams: -> extraParams
 
 ]

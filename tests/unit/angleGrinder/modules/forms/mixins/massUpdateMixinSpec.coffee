@@ -18,6 +18,7 @@ describe "module: angleGrinder.forms mixin: massUpdateMixin", ->
       gridName: "theGrid"
       controller: massUpdateFormCtrl
       templateUrl: "/path/to/the/form.html"
+      extraParams: foo: "bar"
 
   context "when the grid is not defined", ->
 
@@ -43,6 +44,9 @@ describe "module: angleGrinder.forms mixin: massUpdateMixin", ->
         args = $modal.open.getCall(0).args[0]
         expect(args).to.have.deep.property "resolve.selectedIds"
         expect(args).to.have.deep.property "resolve.grid"
+        expect(args).to.have.deep.property "resolve.extraParams"
+
+        expect(args.resolve.extraParams()).to.have.property "foo", "bar"
 
       context "when the controller is not specified", ->
         before -> massUpdateFormCtrl = null
