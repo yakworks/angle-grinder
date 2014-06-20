@@ -4,8 +4,8 @@
 [![Stories in Ready](https://badge.waffle.io/9ci/angle-grinder.png)](http://waffle.io/9ci/angle-grinder)
 
 ## About
-__angle-grinder__ is can be opinionated at times. It is a collection of librarires with mods and wrappers around them to facilite building an application faster anglularJS and Bootstrap 2.
-Here are the key things we try to do here.
+__angle-grinder__ can be opinionated at times. It is a collection of libraries with mods and wrappers around them to facilite building an application faster with anglularJS and Bootstrap 2.
+Here are the key things we try to do here:
 
 - a simple generic framework to do CRUD from a grid using a dialog
 - utilities for integrating with a Grails app
