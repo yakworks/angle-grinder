@@ -109,10 +109,9 @@ class Gridz
   adds the action column and formatter.
   ###
   addRowActionColumn: ->
-    self = this
-    opts = @options
     containerId = "gbox_#{@gridEl.attr("id")}"
-    opts.colModel.unshift
+
+    actionCol =
       name: "-row_action_col" # can't resize
       label: " "
       width: 20
@@ -121,9 +120,13 @@ class Gridz
       hidedlg: true
       resizable: false
       fixed: true # don't auto calc size
-      formatter: (cellValue, colOptions, rowObject) ->
-        func = opts.actionPopup.cellFormatter or self.actionPopupFormatter
-        func containerId, cellValue, colOptions, rowObject
+
+      formatter: (cellValue, colOptions, rowObject) =>
+        formatter = @options.actionPopup.cellFormatter or this.actionPopupFormatter
+        formatter(containerId, cellValue, colOptions, rowObject)
+
+    @options.colModel = _.reject(@options.colModel, (col) -> col.name is "-row_action_col")
+    @options.colModel.unshift(actionCol)
 
   ###
   default rowActionFormatter. containerId is the dom el to add the drop down to
