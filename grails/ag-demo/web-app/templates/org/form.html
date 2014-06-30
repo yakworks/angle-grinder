@@ -7,8 +7,10 @@
 </div>
 
 <section class="anchor">
-  <h3 class="page-header" ng-show="org.persisted()">Edit org</h3>
-  <h3 class="page-header" ng-hide="org.persisted()">Create org</h3>
+  <h3 class="page-header" ng-switch="org.persisted()">
+    <span ng-switch-when="true">Edit org</span>
+    <span ng-switch-when="false">Create org</span>
+  </h3>
 
   <form name="editForm" class="form-horizontal no-margin"
         novalidate="true"

@@ -3,8 +3,10 @@
 <div class="modal-header">
   <button type="button" class="close" ng-click="closeDialog()" aria-hidden="true">&times;</button>
 
-  <h3 ng-hide="user.persisted()">Create New ${entityName}</h3>
-  <h3 ng-show="user.persisted()">Edit ${entityName}</h3>
+  <h3 ng-switch="user.persisted()">
+    <span ng-switch-when="true">Edit ${entityName}</span>
+    <span ng-switch-when="false">Create New ${entityName}</span>
+  </h3>
 </div>
 
 <form name="editForm" class="form-horizontal no-margin" novalidate
@@ -131,7 +133,7 @@
   </div>
 
   <div class="modal-footer">
-    <span ng-hide="user.persisted()">
+    <span ng-if="user.persisted()">
       <ag-delete-button when-confirmed="delete(item)"></ag-delete-button>
     </span>
 

@@ -1,8 +1,10 @@
 <div class="modal-header">
   <button type="button" class="close" ng-click="closeDialog()">&times;</button>
 
-  <h3 ng-if="!user.persisted()">Create user</h3>
-  <h3 ng-if="user.persisted()">Edit user {{user.name}}</h3>
+  <h3 ng-switch="user.persisted()">
+    <span ng-switch-when="true">Create user</span>
+    <span ng-switch-when="false">Edit user {{user.name}}</span>
+  </h3>
 </div>
 
 <div class="modal-body">
