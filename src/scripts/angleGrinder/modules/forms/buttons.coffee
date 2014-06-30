@@ -2,7 +2,7 @@ forms = angular.module("angleGrinder.forms")
 
 # Double check delete button
 # usage:
-#   <ag-delete-button when-confirmed="delete(item)"></ag-delete-button>
+#   <ag-delete-button when-confirmed="delete(record)"></ag-delete-button>
 #
 #   `when-confirmed` function to call when the action was confirmed
 forms.directive "agDeleteButton", ->

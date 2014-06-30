@@ -33,21 +33,21 @@ describe "Grid example scenario", ->
 
     beforeEach -> page.gridNavbar.createButton.click()
 
-    it "displays create item dialog", ->
+    it "displays create record dialog", ->
       expect(page.modalForm.isDisplayed()).to.eventually.be.true
-      expect(page.modalForm.header.getText()).to.eventually.eq "Create New Item"
+      expect(page.modalForm.header.getText()).to.eventually.eq "Create new record"
 
     describe "do not fill and submit the form", ->
       beforeEach -> page.modalForm.submit()
 
       it "displays validation errors", ->
         # has errors on the name
-        customerName = page.modalForm.findField("item.customer.name")
+        customerName = page.modalForm.findField("record.customer.name")
         expect(customerName.hasError()).to.eventually.be.true
         expect(customerName.error.getText()).to.eventually.eq "This field is required"
 
         # has errors on the passwords
-        passwd = page.modalForm.findField("item.password")
+        passwd = page.modalForm.findField("record.password")
         expect(passwd.hasError()).to.eventually.be.true
         expect(passwd.error.getText()).to.eventually.eq "This field is required"
 
@@ -55,7 +55,7 @@ describe "Grid example scenario", ->
         expect(passwd.error.getText()).to.eventually.eq "Password must be at least 6 characters"
 
         # has errors on the password confirmation
-        passwdConfirmation = page.modalForm.findField("item.passwordConfirmation")
+        passwdConfirmation = page.modalForm.findField("record.passwordConfirmation")
         expect(passwdConfirmation.hasError()).to.eventually.be.true
         expect(passwdConfirmation.error.getText()).to.eventually.eq "This field is required"
 
@@ -64,9 +64,9 @@ describe "Grid example scenario", ->
 
     describe "fill in and submit the form", ->
       beforeEach ->
-        page.modalForm.setFieldValue "item.customer.name", "New Customer Name"
-        page.modalForm.setFieldValue "item.password", "password"
-        page.modalForm.setFieldValue "item.passwordConfirmation", "password"
+        page.modalForm.setFieldValue "record.customer.name", "New Customer Name"
+        page.modalForm.setFieldValue "record.password", "password"
+        page.modalForm.setFieldValue "record.passwordConfirmation", "password"
         page.modalForm.submit()
 
       it "creates a new record", ->
@@ -88,18 +88,18 @@ describe "Grid example scenario", ->
 
       it "displays edit item dialog", ->
         expect(page.modalForm.isDisplayed()).to.eventually.be.true
-        expect(page.modalForm.header.getText()).to.eventually.eq "Edit Item Test Customer 1"
+        expect(page.modalForm.header.getText()).to.eventually.eq "Edit record Test Customer 1"
 
-        customerName = page.modalForm.findField("item.customer.name")
+        customerName = page.modalForm.findField("record.customer.name")
         expect(customerName.getValue()).to.eventually.eq "Test Customer 1"
 
-        noteField = page.modalForm.findField("item.note")
+        noteField = page.modalForm.findField("record.note")
         expect(noteField.getValue()).to.eventually.eq "Note number 1"
 
       describe "update customer name and submit the form", ->
 
         it "updates the row", ->
-          page.modalForm.setFieldValue "item.customer.name", "Updated Customer Name"
+          page.modalForm.setFieldValue "record.customer.name", "Updated Customer Name"
           page.modalForm.submit()
 
           # should add a new row on the top

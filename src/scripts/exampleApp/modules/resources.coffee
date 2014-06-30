@@ -20,7 +20,7 @@ resources.factory "Users", [
       # Returns the name of the resource
       resourceName: -> "user"
 
-      # Retunrs true if the record is persisted (has an id)
+      # Returns true if the record is persisted (has an id)
       persisted: -> @id?
 
       # Returns true if the record is not persisted

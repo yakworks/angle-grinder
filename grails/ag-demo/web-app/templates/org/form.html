@@ -2,13 +2,13 @@
   <ul class="nav nav-pills">
     <li><a href="#/"><i class="icon-list"></i> Org List</a></li>
     <li><a ng-show="org.persisted()" href="#/{{org.id}}"><i class="icon-th"></i> Show org</a></li>
-    <li><a ng-show="org.persisted()" href="#/create"><i class="icon-plus"></i> New org</a></li>
+    <li><a ng-hide="org.persisted()" href="#/create"><i class="icon-plus"></i> New org</a></li>
   </ul>
 </div>
 
 <section class="anchor">
-  <h3 class="page-header" ng-show="org.newRecord()">Create org</h3>
   <h3 class="page-header" ng-show="org.persisted()">Edit org</h3>
+  <h3 class="page-header" ng-hide="org.persisted()">Create org</h3>
 
   <form name="editForm" class="form-horizontal no-margin"
         novalidate="true"

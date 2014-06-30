@@ -476,7 +476,7 @@ class MyCtrl
   @$inject = ["$scope", "confirmationDialog"]
   constructor: ($scope, confirmationDialog) ->
 
-  $scope.deleteItem = (item) ->
+  $scope.deleteRecord = (item) ->
     confirmationDialog.open().result.then (confirmed) ->
       item.delete() if confirmed
 
@@ -496,12 +496,12 @@ class MyCtrl
   @$inject = ["$scope", "formDialog", "Users"]
   constructor: ($scope, formDialog, Users) ->
     # Displays a form for creating a new user
-    $scope.createItem = ->
+    $scope.createRecord = ->
       user = new Users()
       formDialog.open("/user/formTemplate", user)
 
     # Displays a form for editing an exiting user
-    $scope.editItem = (id) ->
+    $scope.editRecord = (id) ->
       Users.get { id: id }, (user) ->
         formDialog.open("/user/formTemplate", user)
 
@@ -514,8 +514,8 @@ angular.module("myApp")
 <pre class="prettyprint lang-html">
 &lt;div class=&quot;modal-header&quot;&gt;
   &lt;button type=&quot;button&quot; class=&quot;close&quot; ng-click=&quot;closeDialog()&quot;&gt;&amp;times;&lt;/button&gt;
-  &lt;h3 ng-show=&quot;createNew&quot;&gt;Create New ${entityName}&lt;/h3&gt;
-  &lt;h3 ng-hide=&quot;createNew&quot;&gt;Edit ${entityName}&lt;/h3&gt;
+  &lt;h3 ng-hide=&quot;item.persisted()&quot;&gt;Create New ${entityName}&lt;/h3&gt;
+  &lt;h3 ng-show=&quot;item.persisted()&quot;&gt;Edit ${entityName}&lt;/h3&gt;
 &lt;/div&gt;
 
 &lt;form name=&quot;editForm&quot; class=&quot;form-horizontal no-margin&quot; novalidate
@@ -542,7 +542,7 @@ angular.module("myApp")
   &lt;/div&gt;
 
   &lt;div class=&quot;modal-footer&quot;&gt;
-      &lt;span ng-hide=&quot;createNew&quot;&gt;
+      &lt;span ng-hide=&quot;!item.persisted()&quot;&gt;
           &lt;ag-delete-button when-confirmed=&quot;delete(item)&quot;&gt;&lt;/ag-delete-button&gt;
       &lt;/span&gt;
 
@@ -673,7 +673,7 @@ angular.module("myApp")
       &lt;/li&gt;
       &lt;li class=&quot;divider-vertical&quot;&gt;&lt;/li&gt;
       &lt;li&gt;
-        &lt;a href=&quot;&quot; class=&quot;create-button&quot; ng-click=&quot;createItem()&quot;&gt;
+        &lt;a href=&quot;&quot; class=&quot;create-button&quot; ng-click=&quot;createRecord()&quot;&gt;
           &lt;i class=&quot;icon-edit&quot;&gt;&lt;/i&gt;New
         &lt;/a&gt;
       &lt;/li&gt;

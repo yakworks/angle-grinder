@@ -63,7 +63,6 @@ forms.directive "agFieldGroup", [
       angular.forEach fields, (fieldName) ->
         scope.$watch "#{formCtrl.$name}.#{fieldName}.$viewValue", ->
           return unless formCtrl[fieldName]?.$dirty
-          $log.debug "[validations] field value was changed", formCtrl, formCtrl[fieldName]
           toggleErrors()
 
       # Display server side validation errors (only once)

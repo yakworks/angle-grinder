@@ -10,11 +10,11 @@ resources.factory("resourceBuilder", [
   "$resource", "pathWithContext", function($resource, pathWithContext) {
     return function(basePath, resourceName) {
       if (resourceName == null) {
-        resourceName = basePath.replace(/$\/+/, "");
+        resourceName = basePath.replace(/^(\/+)/, "");
       }
       basePath = pathWithContext(basePath);
 
-      var Resource = $resource("" + basePath + "/:action/:id", { id: "@id" }, {
+      var Resource = $resource(basePath + "/:action/:id", { id: "@id" }, {
         list:       { method: "GET", params: { action: "list" }, isArray: true },
         get:        { method: "GET", params: { action: "get" } },
         save:       { method: "POST", params: { action: "save" } },

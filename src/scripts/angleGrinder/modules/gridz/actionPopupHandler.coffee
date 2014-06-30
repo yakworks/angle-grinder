@@ -15,22 +15,22 @@ gridz.factory "actionPopupHandler", [
       # handles click on show action inside the dropdown menu
       gridEl.on "showAction", (event, id) ->
         event.preventDefault()
-        handleAction("showItem", id)
+        handleAction("showRecord", id)
 
       # handles click on edit action inside the dropdown menu
       gridEl.on "editAction", (event, id) ->
         event.preventDefault()
-        handleAction("editItem", id)
+        handleAction("editRecord", id)
 
       # handles click on delete action inside the dropdown menu
       gridEl.on "deleteAction", (event, id) ->
         event.preventDefault()
-        handleAction("deleteItem", id)
+        handleAction("deleteRecord", id)
 
       # handles click on the cell with `editActionLink` formatter
       gridEl.on "click", "a.editActionLink", (event) ->
         event.preventDefault()
 
         id = $(this).parents("tr:first").attr("id")
-        handleAction("editItem", id)
+        handleAction("editRecord", id)
 ]

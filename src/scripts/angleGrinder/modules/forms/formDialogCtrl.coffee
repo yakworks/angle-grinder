@@ -10,41 +10,48 @@ class FormDialogCtrl extends BaseCtrl
   initialize: ->
     # Assign dialog options to the scope
     @$scope.dialogOptions = @dialogOptions
-    { item, grid } = @$scope.dialogOptions
+    { @record, @grid } = @$scope.dialogOptions
 
-    @$scope.item = item
-    @$scope.createNew = not item.persisted()
+    # assign the given resource to the scope under its name
+    resourceName = if angular.isFunction(@record.resourceName) then @record.resourceName() else "record"
+    @$scope[resourceName] = @record
 
-    # Closes the dialog
-    @$scope.closeDialog = =>
-      @$log.info "[ag] closing the dialog"
-      @$modalInstance.close(@$scope.item)
+    @expose @$scope, "closeDialog", "save", "delete"
 
-    # If form is valid performs server side update
-    @$scope.save = (form, item) =>
-      return unless form.$valid
+  # Closes the dialog
+  closeDialog: =>
+    @$log.info "[ag] closing the dialog"
+    @$modalInstance.close(@record)
 
-      onSuccess = (response) =>
-        @$log.info "[ag] item has been updated/created", response
+  # If form is valid performs server side update
+  save: (form, record) =>
+    return unless form.$valid
 
-        grid.saveRow(response.id, response)
-        @$scope.closeDialog()
+    promise = record.save().$promise
 
-      onError = (response) =>
-        @$log.error "[ag] something went wrong", response
-        @validator(form, response, item.resourceName())
+    promise.then (record) =>
+      @$log.info "[ag] record has been updated/created", record
 
-      item.save(success: onSuccess, error: onError).$promise
+      @grid.saveRow(record.id, record)
+      @$scope.closeDialog()
 
-    # Performs server side delete
-    @$scope.delete = =>
-      onSuccess = (response) =>
-        @$log.info "[ag] item has been deleted", response
+    promise.catch (response) =>
+      @$log.error "[ag] something went wrong", response
+      @validator(form, response, record.resourceName())
 
-        grid.removeRow(item.id)
-        @$scope.closeDialog()
+    return promise
 
-      onError = (response) =>
-        @$log.error "[ag] something went wrong", response
+  # Performs server side delete
+  delete: =>
+    promise = @record.delete().$promise
 
-      item.delete(success: onSuccess, error: onError).$promise
+    promise.then (response) =>
+      @$log.info "[ag] record has been deleted", response
+
+      @grid.removeRow(response.id)
+      @$scope.closeDialog()
+
+    promise.catch (response) =>
+      @$log.error "[ag] something went wrong", response
+
+    return promise

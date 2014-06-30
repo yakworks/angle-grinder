@@ -30,24 +30,24 @@ describe "module: angleGrinder.forms mixin: singlePageCrudCtrlMixin", ->
       expect(args).to.have.property "Resource", "Users"
       expect(args).to.have.property "gridName", "usersGrid"
 
-  describe "#showItem", ->
+  describe "#showRecord", ->
 
     it "is mixed to the $scope", ->
-      expect($scope.showItem).to.be.a "function"
+      expect($scope.showRecord).to.be.a "function"
 
     it "navigates to the show record page", inject ($location) ->
-      $scope.showItem(123)
+      $scope.showRecord(123)
 
       expect($location.path).to.have.been.called
       expect($location.path).to.have.been.calledWith("/path_to_the_resource/123")
 
-  describe "#editItem", ->
+  describe "#editRecord", ->
 
     it "is mixed to the $scope", ->
-      expect($scope.editItem).to.be.a "function"
+      expect($scope.editRecord).to.be.a "function"
 
     it "navigates to the edit record page", inject ($location) ->
-      $scope.editItem(456)
+      $scope.editRecord(456)
 
       expect($location.path).to.have.been.called
       expect($location.path).to.have.been.calledWith("/path_to_the_resource/456/edit")

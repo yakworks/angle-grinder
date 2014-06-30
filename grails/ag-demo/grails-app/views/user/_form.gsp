@@ -3,14 +3,13 @@
 <div class="modal-header">
   <button type="button" class="close" ng-click="closeDialog()" aria-hidden="true">&times;</button>
 
-  <h3 ng-show="createNew">Create New ${entityName}</h3>
-
-  <h3 ng-hide="createNew">Edit ${entityName}</h3>
+  <h3 ng-hide="user.persisted()">Create New ${entityName}</h3>
+  <h3 ng-show="user.persisted()">Edit ${entityName}</h3>
 </div>
 
 <form name="editForm" class="form-horizontal no-margin" novalidate
       ag-server-validation-errors
-      ng-submit="save(item)">
+      ng-submit="save(user)">
   <div class="modal-body" ng-controller="user.FormCtrl">
 
     <ng-form name="contact" ag-server-validation-errors>
@@ -20,14 +19,14 @@
         <div class="controls">
           <input type="text" placeholder="${ag.label(code: 'contact.firstName')}"
                  name="firstName"
-                 ng-model="item.contact.firstName" required autofocus>
+                 ng-model="user.contact.firstName" required autofocus>
           <ag-validation-errors for="firstName"/>
         </div>
 
         <div class="controls" style="margin-top:5px">
           <input type="text" placeholder="${ag.label(code: 'contact.lastName')}"
                  name="lastName"
-                 ng-model="item.contact.lastName"/>
+                 ng-model="user.contact.lastName"/>
           <ag-validation-errors for="lastName"/>
         </div>
 
@@ -35,7 +34,7 @@
 
         <div class="controls">
           <input type="email"
-                 name="email" ng-model="item.contact.email"/>
+                 name="email" ng-model="user.contact.email"/>
           <ag-validation-errors for="email"/>
         </div>
       </div>
@@ -44,7 +43,7 @@
         <label class="control-label">${ag.label(code: "contact.type")}</label>
 
         <div class="controls">
-          <select ui-select2 name="type" ng-model="item.contact.type">
+          <select ui-select2 name="type" ng-model="user.contact.type">
             <option value="ADMIN">admin</option>
             <option value="CUSTOMER">customer</option>
           </select>
@@ -57,7 +56,7 @@
 
         <div class="controls">
           <select name="orgId" ui-select2
-                  ng-model="item.contact.org.id"
+                  ng-model="user.contact.org.id"
                   ng-required="true">
             <option value="">-- chose org --</option>
             <option ng-repeat="org in orgs" value="{{org.id}}">{{org.name}}</option>
@@ -69,7 +68,7 @@
       <div class="control-group">
         <div class="controls">
           <label class="checkbox">
-            <g:checkBox name="tagForReminders" ng-model="item.contact.tagForReminders"/>
+            <g:checkBox name="tagForReminders" ng-model="user.contact.tagForReminders"/>
             ${ag.label(code: 'contact.tagForReminders')}
           </label>
         </div>
@@ -81,7 +80,7 @@
 
       <div class="controls">
         <input type="text"
-               name="login" ng-model="item.login" required/>
+               name="login" ng-model="user.login" required/>
         <ag-validation-errors for="login"/>
       </div>
     </div>
@@ -92,7 +91,7 @@
       <div class="controls">
         <div ag-datepicker>
           <input type="text"
-                 ng-model="item.activeDate"
+                 ng-model="user.activeDate"
                  ng-required="true"
                  name="activeDate"/>
         </div>
@@ -107,24 +106,24 @@
       <div class="controls">
         <input type="password" placeholder="${ag.label(code: 'user.password')}"
                name="password"
-               ng-model="item.password"
-               ng-required="item.newRecord()" ng-minlength="6"/>
+               ng-model="user.password"
+               ng-required="user.newRecord()" ng-minlength="6"/>
         <ag-validation-errors for="password"/>
       </div>
 
       <div class="controls" style="margin-top:5px">
         <input type="password" placeholder="${ag.label(code: 'user.repassword')}"
                name="repassword"
-               ng-model="item.repassword"
-               ng-required="item.newRecord()" ng-minlength="6" match="item.password"/>
+               ng-model="user.repassword"
+               ng-required="user.newRecord()" ng-minlength="6" match="user.password"/>
         <ag-validation-errors for="repassword"/>
       </div>
     </div>
 
     <div class="control-group">
-      <div class="controls" ng-hide="item.newRecord()">
+      <div class="controls" ng-hide="user.newRecord()">
         <label class="checkbox">
-          <g:checkBox name="inactive" ng-model="item.inactive"/>
+          <g:checkBox name="inactive" ng-model="user.inactive"/>
           ${ag.label(code: 'user.inactive')}
         </label>
       </div>
@@ -132,7 +131,7 @@
   </div>
 
   <div class="modal-footer">
-    <span ng-hide="createNew">
+    <span ng-hide="user.persisted()">
       <ag-delete-button when-confirmed="delete(item)"></ag-delete-button>
     </span>
 
