@@ -5,7 +5,7 @@
 
 <form name="editForm" class="form-horizontal no-margin"
       novalidate="true"
-      ng-submit="save(editForm, item)">
+      ng-submit="save(editForm, note)">
 
   <div class="modal-body">
     <div ag-field-group for="name">
@@ -13,7 +13,7 @@
 
       <div class="controls">
         <input type="text" name="name" placeholder="Enter name"
-               ng-model="item.name" ng-required="true" />
+               ng-model="note.name" ng-required="true" />
         <ag-validation-errors for="name" />
       </div>
     </div>
@@ -23,7 +23,7 @@
 
       <div class="controls">
         <textarea name="content" rows="5"
-                  ng-model="item.content" ng-required="true"></textarea>
+                  ng-model="note.content" ng-required="true"></textarea>
         <ag-validation-errors for="content" />
       </div>
     </div>

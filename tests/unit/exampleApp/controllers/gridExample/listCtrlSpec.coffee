@@ -30,38 +30,38 @@ describe "controller: gridExample.ListCtrl", ->
 
       expect($scope.gridOptions.data.length).to.equal 100
 
-    describe "#editItem", ->
-      item = null
+    describe "#editRecord", ->
+      record = null
 
       beforeEach ->
-        item = id: 123
-        sinon.stub(controller, "findItemById").withArgs(123).returns(item)
+        record = id: 123
+        sinon.stub(controller, "findRecordById").withArgs(123).returns(record)
 
-        $scope.editItem(item.id)
+        $scope.editRecord(record.id)
         $scope.$digest()
 
-      it "loads an item", ->
-        expect(controller.findItemById).to.have.been.calledWith(123)
+      it "loads an record", ->
+        expect(controller.findRecordById).to.have.been.calledWith(123)
 
-      it "opens opens a dialog for editing the the loaded item", inject ($modal) ->
+      it "opens opens a dialog for editing the the loaded record", inject ($modal) ->
         expect($modal.open).to.have.been.called
 
         options = $modal.open.getCall(0).args[0]
         expect(options).to.have.property "templateUrl", "/templates/gridExample/form.html"
-        expect(options.resolve.dialogOptions().item).to.eq item
+        expect(options.resolve.dialogOptions().record).to.eq record
 
-    describe "#createItem", ->
+    describe "#createRecord", ->
 
       it "opens a dialog for creating a new item", inject ($modal) ->
         # When
-        $scope.createItem()
+        $scope.createRecord()
 
         # Then
         expect($modal.open).to.have.been.called
 
         options = $modal.open.getCall(0).args[0]
         expect(options).to.have.property "templateUrl", "/templates/gridExample/form.html"
-        expect(options.resolve.dialogOptions().item).to.not.be.undefined
+        expect(options.resolve.dialogOptions().record).to.not.be.undefined
 
   describe "controller", ->
 
@@ -71,12 +71,12 @@ describe "controller: gridExample.ListCtrl", ->
         { id: 456, name: "bar" }
       ]
 
-    describe "#findItemById", ->
+    describe "#findRecordById", ->
 
       context "when an item can be found", ->
 
         it "returns the item", ->
-          item = controller.findItemById(123)
+          item = controller.findRecordById(123)
           expect(item).to.not.be.undefined
           expect(item.id).to.equal 123
           expect(item.name).to.equal "foo"
@@ -84,19 +84,19 @@ describe "controller: gridExample.ListCtrl", ->
       context "when an item cannot be found", ->
 
         it "returns undefined", ->
-          item = controller.findItemById(1)
+          item = controller.findRecordById(1)
           expect(item).to.be.undefined
 
-    describe "#deleteItemById", ->
+    describe "#deleteRecordById", ->
 
       context "when an item can be found", ->
 
         it "deletes the item", ->
-          controller.deleteItemById(123)
+          controller.deleteRecordById(123)
           expect(controller.data).to.have.length(1)
 
       context "when an item cannot be found", ->
 
         it "does not delete", ->
-          controller.deleteItemById(1231)
+          controller.deleteRecordById(1231)
           expect(controller.data).to.have.length(2)

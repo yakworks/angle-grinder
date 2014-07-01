@@ -1,21 +1,23 @@
 <div class="modal-header">
   <button type="button" class="close" ng-click="closeDialog()">&times;</button>
 
-  <h3 ng-if="createNew">Create New Item</h3>
-  <h3 ng-if="!createNew">Edit Item {{item.customer.name}}</h3>
+  <h3 ng-switch="record.persisted()">
+    <span ng-switch-when="true">Edit record {{record.customer.name}}</span>
+    <span ng-switch-when="false">Create new record</span>
+  </h3>
 </div>
 
 <div class="modal-body">
   <form name="editForm" class="form-horizontal no-margin"
         novalidate="true"
-        ng-submit="save(editForm, item)">
+        ng-submit="save(editForm, record)">
 
     <div ag-field-group for="customerName">
       <label class="control-label">Customer Name</label>
 
       <div class="controls">
         <input type="text" name="customerName" placeholder="Enter Customer Name"
-               ng-model="item.customer.name" ng-required="true" />
+               ng-model="record.customer.name" ng-required="true" />
         <ag-validation-errors for="customerName" />
       </div>
     </div>
@@ -25,7 +27,7 @@
 
       <div class="controls">
         <input type="text" name="date" placeholder="Enter Date"
-               ng-model="item.invoiceDate" />
+               ng-model="record.invoiceDate" />
       </div>
     </div>
 
@@ -34,7 +36,7 @@
 
       <div class="controls">
         <input type="text" name="note" placeholder="Enter Note"
-               ng-model="item.note" />
+               ng-model="record.note" />
       </div>
     </div>
 
@@ -43,7 +45,7 @@
 
       <div class="controls">
         <input type="password" name="password" placeholder="Enter Password"
-               ng-model="item.password" ng-required="createNew" ng-minlength="6" />
+               ng-model="record.password" ng-required="!record.persisted()" ng-minlength="6" />
         <ag-validation-errors for="password"
                           required="This field is required"
                           minlength="Password must be at least 6 characters" />
@@ -51,8 +53,8 @@
 
       <div class="controls">
         <input type="password" name="passwordConfirmation" placeholder="Enter Password Confirmation"
-               ng-model="item.passwordConfirmation"
-               ng-required="createNew" match="item.password" ng-minlength="6" />
+               ng-model="record.passwordConfirmation"
+               ng-required="!record.persisted()" match="record.password" ng-minlength="6" />
         <ag-validation-errors for="passwordConfirmation"
                           required="This field is required"
                           minlength="Password must be at least 6 characters"
@@ -61,8 +63,8 @@
     </div>
 
     <div class="modal-footer">
-      <span ng-if="!createNew">
-        <ag-delete-button when-confirmed="delete(item)"></ag-delete-button>
+      <span ng-if="record.persisted()">
+        <ag-delete-button when-confirmed="delete(record)"></ag-delete-button>
       </span>
 
       <cancel-button ng-click="closeDialog()"></cancel-button>

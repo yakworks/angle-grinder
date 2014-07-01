@@ -7,8 +7,10 @@
 </div>
 
 <div class="content">
-  <h2 class="page-header" ng-if="user.newRecord()">Create user</h2>
-  <h2 class="page-header" ng-if="user.persisted()">Edit user</h2>
+  <h2 class="page-header" ng-switch="user.newRecord()">
+    <span ng-switch-when="true">Edit user</span>
+    <span ng-switch-when="false">Create user</span>
+  </h2>
 
   <form name="userForm" novalidate class="form-horizontal no-margin"
         ag-server-validation-errors
@@ -103,9 +105,11 @@
 
     <div class="form-actions">
       <ag-submit-button></ag-submit-button>
-      <span ng-show="user.persisted()">
+
+      <span ng-if="user.persisted()">
         <ag-delete-button when-confirmed="delete(user)"></ag-delete-button>
       </span>
+
       <a href="#/examples/users" class="btn">Cancel</a>
     </div>
   </form>

@@ -1,22 +1,24 @@
 <div class="modal-header">
   <button type="button" class="close" ng-click="closeDialog()">&times;</button>
 
-  <h3 ng-if="createNew">Create New User</h3>
-  <h3 ng-if="!createNew">Edit User {{item.name}}</h3>
+  <h3 ng-switch="user.persisted()">
+    <span ng-switch-when="true">Create user</span>
+    <span ng-switch-when="false">Edit user {{user.name}}</span>
+  </h3>
 </div>
 
 <div class="modal-body">
   <form name="editForm" class="form-horizontal no-margin"
         novalidate="true"
         ag-server-validation-errors
-        ng-submit="save(editForm, item)">
+        ng-submit="save(editForm, user)">
 
     <div ag-field-group for="name">
       <label class="control-label">Name</label>
 
       <div class="controls">
         <input type="text" name="name" placeholder="Enter Name"
-               ng-model="item.name" ng-required="true" />
+               ng-model="user.name" ng-required="true" />
         <ag-validation-errors for="name" required="This field is required" />
       </div>
     </div>
@@ -26,7 +28,7 @@
 
       <div class="controls">
         <input type="text" name="login" placeholder="Enter Login"
-               ng-model="item.login" ng-required="true" />
+               ng-model="user.login" ng-required="true" />
         <ag-validation-errors for="login" required="This field is required" />
       </div>
     </div>
@@ -36,7 +38,7 @@
         <label class="control-label">Email</label>
         <div class="controls">
           <input type="text" name="email" placeholder="Enter Email"
-                 ng-model="item.info.email"
+                 ng-model="user.info.email"
                  ng-required="true" />
           <ag-validation-errors for="email" required="This field is required" />
         </div>
@@ -48,7 +50,7 @@
 
       <div class="controls">
         <input type="text" name="creditInfoAllowance" placeholder="Enter Allowance"
-               ng-model="item.creditInfo.allowance" />
+               ng-model="user.creditInfo.allowance" />
       </div>
     </div>
 
@@ -58,7 +60,7 @@
       <div class="controls">
         <div ag-datepicker>
           <input type="text"
-                 ng-model="item.birthday"
+                 ng-model="user.birthday"
                  ng-required="true"
                  name="birthday"/>
         </div>
@@ -70,7 +72,7 @@
 
       <div class="controls">
         <input type="password" name="password" placeholder="Enter Password"
-               ng-model="item.password" ng-required="item.newRecord()" ng-minlength="6" />
+               ng-model="user.password" ng-required="user.newRecord()" ng-minlength="6" />
         <ag-validation-errors for="password"
                           required="This field is required"
                           minlength="Password must be at least 6 characters" />
@@ -78,8 +80,8 @@
 
       <div class="controls">
         <input type="password" name="passwordConfirmation" placeholder="Enter Password Confirmation"
-               ng-model="item.passwordConfirmation"
-               ng-required="item.newRecord()" match="item.password" ng-minlength="6" />
+               ng-model="user.passwordConfirmation"
+               ng-required="user.newRecord()" match="user.password" ng-minlength="6" />
         <ag-validation-errors for="passwordConfirmation"
                           required="This field is required"
                           minlength="Password must be at least 6 characters"
@@ -90,8 +92,8 @@
     <div class="modal-footer">
       <ag-submit-button></ag-submit-button>
 
-      <span ng-if="!createNew">
-        <ag-delete-button when-confirmed="delete(item)"></ag-delete-button>
+      <span ng-if="user.persisted()">
+        <ag-delete-button when-confirmed="delete(user)"></ag-delete-button>
       </span>
 
       <ag-cancel-button ng-click="closeDialog()"></ag-cancel-button>

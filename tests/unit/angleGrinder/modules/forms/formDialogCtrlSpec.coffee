@@ -9,7 +9,7 @@ describe "module: angleGrinder.forms", ->
     $scope = null
 
     $modalInstance = null
-    item = null
+    record = null
     grid = null
 
     beforeEach inject ($rootScope, $controller) ->
@@ -17,14 +17,14 @@ describe "module: angleGrinder.forms", ->
 
       # mock services
 
-      $modalInstance = close: sinon.mock()
+      $modalInstance = close: sinon.stub()
 
-      item =
+      record =
         id: 567
-        persisted: sinon.mock(), resourceName: sinon.mock()
-        save: sinon.mock(), delete: sinon.mock()
+        resourceName: -> "account"
+        save: sinon.stub(), delete: sinon.stub()
 
-      grid = saveRow: sinon.mock(), removeRow: sinon.mock()
+      grid = saveRow: sinon.stub(), removeRow: sinon.stub()
 
       # instantiate the controller
 
@@ -33,15 +33,11 @@ describe "module: angleGrinder.forms", ->
 
         $modalInstance: $modalInstance
         dialogOptions:
-          item: item
+          record: record
           grid: grid
 
-    it "assigns an item to the scope", ->
-      expect($scope.item).to.not.be.undefied
-
-    it "assigns `createNew` variable to the scope", ->
-      expect($scope.createNew).to.not.be.undefined
-      expect($scope.createNew).to.be.tre
+    it "assigns an instance to the scope", ->
+      expect($scope.account).to.not.be.undefied
 
     describe "#closeDialog", ->
 
@@ -49,69 +45,81 @@ describe "module: angleGrinder.forms", ->
         $scope.closeDialog()
 
         expect($modalInstance.close).to.have.been.called
-        expect($modalInstance.close).to.have.been.calledWith(item)
+        expect($modalInstance.close).to.have.been.calledWith(record)
 
     describe "#save", ->
       form = null
 
       describe "when the form is valid", ->
+
         beforeEach ->
-          item.save.returns($promise: true)
           form = $valid: true, $invalid: false
 
-        it "returns a promise", ->
-          expect($scope.save(form, item)).to.be.true
+        it "returns a promise", inject ($q) ->
+          deferred = $q.defer()
+          record.save.returns($promise: deferred.promise)
+
+          promise = $scope.save(form, record)
+          expect(promise.then).to.be.a "function"
+          expect(promise.catch).to.be.a "function"
+          expect(promise.finally).to.be.a "function"
 
         describe "on success", ->
-          response = null
 
-          beforeEach ->
-            response = id: 567
-            item.save.yieldsTo("success", response).returns($promise: true)
+          beforeEach inject ($q) ->
+            deferred = $q.defer()
+            deferred.resolve(record)
+            record.save.returns($promise: deferred.promise)
 
-            $scope.save(form, item)
+            $scope.save(form, record)
+            $scope.$digest()
 
           it "updates a row inside the grid", ->
             expect(grid.saveRow).to.have.been.called
-            expect(grid.saveRow).to.have.been.calledWith(567, response)
+            expect(grid.saveRow).to.have.been.calledWith(567, record)
 
           it "closes the dialog", ->
             expect($modalInstance.close).to.have.been.called
 
         describe "on error", ->
-          response = null
 
-          beforeEach ->
-            item.resourceName.returns "fooBar"
-            response = id: 567
-            item.save.yieldsTo("error", response).returns($promise: true)
+          beforeEach inject ($q) ->
+            deferred = $q.defer()
+            deferred.reject(record)
+            record.save.returns($promise: deferred.promise)
 
-            $scope.save(form, item)
+            $scope.save(form, record)
+            $scope.$digest()
 
           it "displays server side errors", inject (serverValidationErrorsHandler) ->
             expect(serverValidationErrorsHandler).to.have.been.called
-            expect(serverValidationErrorsHandler).to.have.been.calledWith(form, response, "fooBar")
+            expect(serverValidationErrorsHandler).to.have.been.calledWith(form, record, "account")
 
       describe "when the form is not valid", ->
         beforeEach -> form = $valid: false, $invalid: true
 
         it "does nothing", ->
-          $scope.save(form, item)
+          $scope.save(form, record)
 
-          expect(item.save).to.have.not.been.called
+          expect(record.save).to.have.not.been.called
           expect($modalInstance.close).to.have.not.been.called
 
     describe "#delete", ->
 
       it "returns a promise", ->
-        item.delete.returns($promise: true)
-        expect($scope.delete()).to.be.true
+        promise = then: angular.noop, catch: angular.noop
+        record.delete.returns($promise: promise)
+        expect($scope.delete()).to.deep.eq promise
 
       describe "on success", ->
         beforeEach ->
-          response = new Object()
-          item.delete.yieldsTo("success", response).returns($promise: true)
+          promise =
+            then: sinon.stub().yields({ id: 567 })
+            catch: angular.noop
+          record.delete.returns($promise: promise)
+
           $scope.delete()
+          $scope.$digest()
 
         it "removes a row from the grid", ->
           expect(grid.removeRow).to.have.been.called
@@ -122,12 +130,16 @@ describe "module: angleGrinder.forms", ->
 
       describe "on error", ->
         beforeEach ->
-          response = id: 567
-          item.delete.yieldsTo("error", response).returns($promise: true)
+          promise =
+            then: angular.noop
+            catch: sinon.stub().yields({})
+          record.delete.returns($promise: promise)
+
+          $scope.delete()
+          $scope.$digest()
 
         it "does not remove a row from the grid", ->
           expect(grid.removeRow.called).to.be.false
-          expect(grid.removeRow.calledWith(567)).to.be.false
 
         it "does not close the dialog", ->
           expect($modalInstance.close.called).to.be.false

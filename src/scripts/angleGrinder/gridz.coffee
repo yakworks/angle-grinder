@@ -63,21 +63,21 @@ class Gridz
       @gridEl.jqGrid "resetSelection"
 
       # get DOM elements of the previous selected and
-      # the currect selected rows
+      # the selected rows
       startRow = rows.namedItem(startId)
       endRow = rows.namedItem(rowid)
       if startRow and endRow
 
         # get min and max from the indexes of the previous selected
-        # and the currect selected rows
+        # and the selected rows
         iStart = Math.min(startRow.rowIndex, endRow.rowIndex)
-        rowidIndex = endRow.rowIndex
-        iEnd = Math.max(startRow.rowIndex, rowidIndex)
+        rowIdIndex = endRow.rowIndex
+        iEnd = Math.max(startRow.rowIndex, rowIdIndex)
         i = iStart
         while i <= iEnd
           # the row with rowid will be selected by
           # jqGrid. So we don't need select it
-          @gridEl.jqGrid "setSelection", rows[i].id, false if i isnt rowidIndex
+          @gridEl.jqGrid "setSelection", rows[i].id, false if i isnt rowIdIndex
           i++
 
       # clear text selection

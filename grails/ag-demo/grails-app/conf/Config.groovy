@@ -117,4 +117,10 @@ grails {
         coffeeSourcePath = "src/coffee"
         jsOutputPath = "web-app/js/app"
     }
+
+    pluginConfig {
+      overrideJS = false
+      forceNode = false
+      forceRhino = true
+    }
 }

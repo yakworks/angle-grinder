@@ -1,10 +1,10 @@
 class IndexCtrl extends BaseCtrl
 
   @register "exampleApp", "gridExample.ListCtrl"
-  @inject "$scope", "sampleData", "exampleGrid", "formDialog"
+  @inject "$scope", "$q", "sampleData", "exampleGrid", "formDialog"
 
   initialize: ->
-    @expose @$scope, "getSelectedRowsData", "editItem", "createItem", "deleteItem"
+    @expose @$scope, "getSelectedRowsData", "editRecord", "createRecord", "deleteRecord"
 
     # initialize the grid with generated data
     @data = @sampleData.generate(100)
@@ -20,44 +20,54 @@ class IndexCtrl extends BaseCtrl
     @$scope.selectedRowsData = _.map ids, (id) ->
       @$scope.exampleGrid.getRowData(id)
 
-  editItem: (id) ->
-    item = @findItemById(id)
-    item.persisted = -> true
-    item.save = (callback) ->
-      callback.success(this)
-      { $promise: angular.noop }
+  editRecord: (id) ->
+    record = @findRecordById(id)
 
-    item.delete = (callback) =>
-      this.deleteItemById(id)
-      callback.success(this)
+    deferred = @$q.defer()
+    deferred.resolve(record)
 
-    dialogOptions = item: item, grid: @$scope.exampleGrid
+    angular.extend(record, {
+      persisted: -> true
+
+      save: -> { $promise: deferred.promise }
+
+      delete: =>
+        this.deleteRecordById(id)
+        return { $promise: deferred.promise }
+    })
+
+    dialogOptions = record: record, grid: @$scope.exampleGrid
     @formDialog.open("/templates/gridExample/form.html", dialogOptions)
 
-  createItem: ->
-    item = {}
-    item.persisted = -> false
-    item.save = (callback) ->
-      generateId = -> new Date().getTime()
-      item.id = generateId()
-      callback.success(this)
-      { $promise: angular.noop }
+  createRecord: ->
+    record = {}
 
-    dialogOptions = item: item, grid: @$scope.exampleGrid
+    deferred = @$q.defer()
+    deferred.resolve(record)
+
+    angular.extend(record, {
+      persisted: -> false
+
+      save: ->
+        record.id = new Date().getTime()
+        { $promise: deferred.promise }
+    })
+
+    dialogOptions = record: record, grid: @$scope.exampleGrid
     @formDialog.open("/templates/gridExample/form.html", dialogOptions).result
-      .then (item) => @data.push(item)
+      .then (record) => @data.push(record)
 
-  deleteItem: (id) ->
-    item = @deleteItemById(id)
-    @$scope.exampleGrid.removeRow(item.id)
+  deleteRecord: (id) ->
+    record = @deleteRecordById(id)
+    @$scope.exampleGrid.removeRow(record.id)
 
-  findItemById: (id) ->
+  findRecordById: (id) ->
     id = parseInt(id)
     _.find @data, (row) ->
       row.id is id
 
-  deleteItemById: (id) ->
-    row = @findItemById(id)
+  deleteRecordById: (id) ->
+    row = @findRecordById(id)
     if row?
-      @data = _.reject @data, (item) -> item.id is row.id
+      @data = _.reject @data, (record) -> record.id is row.id
       return row

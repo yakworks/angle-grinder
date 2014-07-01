@@ -56,7 +56,7 @@
         <div class="navbar-inner with-selected-pointer with-grid-options">
             <ul class="nav">
                 <li>
-                    <a href="" ng-click="createItem()">
+                    <a href="" ng-click="createRecord()">
                         <i class="icon-user"></i><g:message code="default.new.label" args="[entityName]"/>
                     </a>
                 </li>

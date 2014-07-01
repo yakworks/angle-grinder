@@ -90,19 +90,19 @@ describe "Users dialog based grid scenario", ->
 
     it "displays create item dialog", ->
       expect(page.modalForm.isDisplayed()).to.eventually.be.true
-      expect(page.modalForm.header.getText()).to.eventually.eq "Create New User"
+      expect(page.modalForm.header.getText()).to.eventually.eq "Create user"
 
     describe "fill in and submit the form", ->
       beforeEach ->
 
         page.modalForm.fillInAndSubmit
-          "item.name": "New User Name"
-          "item.login": "new-user"
-          "item.info.email": "new-user@email.com"
-          "item.creditInfo.allowance": "99.99"
-          "item.birthday": "03/04/1983"
-          "item.password": "password"
-          "item.passwordConfirmation": "password"
+          "user.name": "New User Name"
+          "user.login": "new-user"
+          "user.info.email": "new-user@email.com"
+          "user.creditInfo.allowance": "99.99"
+          "user.birthday": "03/04/1983"
+          "user.password": "password"
+          "user.passwordConfirmation": "password"
 
       it "creates a new record", ->
         # should add a new row on the top of the grid
@@ -128,18 +128,18 @@ describe "Users dialog based grid scenario", ->
 
       it "displays edit item dialog", ->
         expect(page.modalForm.isDisplayed()).to.eventually.be.true
-        expect(page.modalForm.header.getText()).to.eventually.eq "Edit User Moroni"
+        expect(page.modalForm.header.getText()).to.eventually.eq "Edit user Moroni"
 
-        customeName = page.modalForm.findField("item.name")
-        expect(customeName.getValue()).to.eventually.eq "Moroni"
+        customerName = page.modalForm.findField("user.name")
+        expect(customerName.getValue()).to.eventually.eq "Moroni"
 
-        noteField = page.modalForm.findField("item.login")
+        noteField = page.modalForm.findField("user.login")
         expect(noteField.getValue()).to.eventually.eq "login-1"
 
       describe "update customer name and submit the form", ->
 
         it "updates the row", ->
-          page.modalForm.setFieldValue "item.name", "Lukasz"
+          page.modalForm.setFieldValue "user.name", "Lukasz"
           page.modalForm.submit()
 
           # should add a new row on the top
