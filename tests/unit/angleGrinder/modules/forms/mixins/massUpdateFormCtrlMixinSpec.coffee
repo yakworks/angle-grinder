@@ -43,10 +43,17 @@ describe "module: angleGrinder.forms mixin: massUpdateFormCtrlMixin", ->
     it "is mixed to the $scope", ->
       expect($scope.massUpdate).to.be.a "function"
 
+    it "returns a promise", ->
+      promise = $scope.massUpdate(allowance: 123)
+
+      expect(promise.then).to.be.a "function"
+      expect(promise.catch).to.be.a "function"
+      expect(promise.finally).to.be.a "function"
+
     describe "when the massUpdate form is valid", ->
+
       beforeEach ->
-        form = $valid: true, $invalid: false
-        $scope.massUpdate(form, allowance: 123)
+        $scope.massUpdate(allowance: 123)
         $rootScope.$digest()
 
       it "updates the records", inject (Users) ->

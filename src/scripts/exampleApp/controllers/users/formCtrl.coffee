@@ -1,7 +1,7 @@
 class FormCtrl extends BaseCtrl
 
   @register "exampleApp", "users.FormCtrl"
-  @inject "$scope", "$location", "select2Options", "serverValidationErrorsHandler", "user"
+  @inject "$scope", "$location", "select2Options", "user"
 
   initialize: ->
     @expose @$scope, "user", "save", "delete"
@@ -16,17 +16,15 @@ class FormCtrl extends BaseCtrl
     })
 
   # Performs server side create or update
-  save: (form, user) ->
-    # Do not perform save/update when the form is invalid
-    return if form.$invalid
+  save: (user) ->
+    promise = user.save().$promise
 
-    onSuccess = (user) =>
+    promise.then (user) =>
       @$location.path "/examples/users/#{user.id}"
 
-    onError = (response) =>
-      @serverValidationErrorsHandler(form, response, user.resourceName())
-
-    user.save success: onSuccess, error: onError
+    # return both promise and record in order to handle server side error
+    # in `agSubmit` directive
+    return [promise, user]
 
   # Performs server side delete
   delete: (user) ->

@@ -1,4 +1,5 @@
 describe "module: angleGrinder.forms validations", ->
+
   beforeEach module "angleGrinder.forms"
 
   $scope = null
@@ -95,7 +96,7 @@ describe "module: angleGrinder.forms validations", ->
 
     beforeEach inject ($injector) ->
       {element} = compileTemplate """
-        <form name="form" novalidate>
+        <form name="form" novalidate="true" ag-submit="save(user)">
           <div class="control-group"
                ag-field-group for="email,password">
             <input type="text" name="email"
@@ -104,7 +105,7 @@ describe "module: angleGrinder.forms validations", ->
                    ng-model="user.password" required />
           </div>
 
-          <ag-submit-button></ag-submit-button>
+          <button type="submit">Submit</button>
         </form>
       """, $injector, $scope
 
@@ -161,17 +162,17 @@ describe "module: angleGrinder.forms validations", ->
     describe "when the custom validation message is provided", ->
       beforeEach inject ($injector) ->
         {element, $scope} = compileTemplate """
-          <form name="form" novalidate>
+          <form name="form" novalidate ag-submit="submit(user)">
             <input type="password" name="password"
-                   ng-model="user.password" required />
+                   ng-model="user.password" ng-required="true" />
             <ag-validation-errors for="password"
                               required="Please fill this field" />
 
-            <ag-submit-button></ag-submit-button>
+            <button type="submit">Submit</button>
           </form>
         """, $injector
 
-        {form} = $scope
+        form = $scope.form
 
       it "displays errors when the save button is clicked", ->
         # When (the form has been submitted)
@@ -246,6 +247,7 @@ describe "module: angleGrinder.forms validations", ->
           .to.equal "Does not match the confirmation"
 
   describe "service: validationMessages", ->
+
     it "is defined", inject (validationMessages) ->
       expect(validationMessages).to.not.be.undefined
 
@@ -283,16 +285,17 @@ describe "module: angleGrinder.forms validations", ->
       $timeout = $injector.get("$timeout")
 
     describe "when it has server side errors", ->
+
       beforeEach ->
-        $scope.$apply -> $scope.theForm.$serverError = login: "should be unique"
+        $scope.$apply -> $scope.theForm.$serverErrors = login: "should be unique"
         $timeout.flush()
 
       loginError = ->
         element.find("ag-validation-errors[for=login] span.help-inline")
 
       it "assigns errors to the form", ->
-        expect(form.$serverError).to.not.be.undefined
-        expect(form.$serverError.login).to.equal "should be unique"
+        expect(form.$serverErrors).to.not.be.undefined
+        expect(form.$serverErrors.login).to.equal "should be unique"
 
       it "displays the server errors", ->
         expect(loginError().text()).to.equal "should be unique"
@@ -310,7 +313,7 @@ describe "module: angleGrinder.forms validations", ->
 
       describe "when the error is gone", ->
         beforeEach ->
-          $scope.$apply -> $scope.theForm.$serverError = null
+          $scope.$apply -> $scope.theForm.$serverErrors = null
           $timeout.flush()
 
         itHidesServerSideErrors()
@@ -329,7 +332,7 @@ describe "module: angleGrinder.forms validations", ->
     it "is defined", inject (serverValidationErrorsHandler) ->
       expect(serverValidationErrorsHandler).to.not.be.undefined
 
-    describe "when the server response contain validtion errors", ->
+    describe "when the server response contain validation errors", ->
 
       it "sets validation errors on the form", inject (serverValidationErrorsHandler) ->
         # Given
@@ -344,8 +347,8 @@ describe "module: angleGrinder.forms validations", ->
         serverValidationErrorsHandler(form, response, "user")
 
         # Then
-        expect(form.$serverError).to.not.be.undefined
-        expect(form.$serverError).to.have.property "login", "is required"
+        expect(form.$serverErrors).to.not.be.undefined
+        expect(form.$serverErrors).to.have.property "login", "is required"
 
       it "sets validation errors on multiple fields", inject (serverValidationErrorsHandler) ->
         # Given
@@ -362,37 +365,9 @@ describe "module: angleGrinder.forms validations", ->
         serverValidationErrorsHandler(form, response, "user")
 
         # Then
-        expect(form.$serverError).to.not.be.undefined
-        expect(form.$serverError).to.have.property "login", "is required"
-        expect(form.$serverError).to.have.property "email", "is not an email address"
-
-        describe "when the response contains nested validation errors", ->
-
-          it "sets validation errors on nested fields", inject (serverValidationErrorsHandler) ->
-            # Given
-            response =
-              status: 422
-              data: errors:
-                entity:
-                  login: "is required"
-                  contact: email: "is not an email address"
-                  org: info: number: "is not unique"
-                  other: name: "should be skipped"
-
-            form =
-              contact: {}
-              org: info: {}
-
-            # When
-            serverValidationErrorsHandler(form, response, "entity")
-
-            # Then
-            expect(form.$serverError).to.not.be.undefined
-            expect(form.$serverError).to.have.property "login", "is required"
-            expect(form.contact.$serverError).to.have.property "email", "is not an email address"
-            expect(form.org.info.$serverError).to.have.property "number", "is not unique"
-
-            expect(form.other?.$serverError).to.not.be.defined
+        expect(form.$serverErrors).to.not.be.undefined
+        expect(form.$serverErrors).to.have.property "login", "is required"
+        expect(form.$serverErrors).to.have.property "email", "is not an email address"
 
     describe "when the server response does not contain validation errors", ->
 
