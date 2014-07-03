@@ -52,7 +52,7 @@ forms.directive "agFieldGroup", [
       toggleErrors = ->
         $timeout ->
           # true if the field is invalid or it has server side errors
-          invalid = _.map fields, (field) -> formCtrl[field]?.$invalid or formCtrl.$serverError?[field]
+          invalid = _.map fields, (field) -> formCtrl[field]?.$invalid or formCtrl.$serverErrors?[field]
 
           if _.any(invalid)
             element.addClass("error")
@@ -60,20 +60,23 @@ forms.directive "agFieldGroup", [
             element.removeClass("error")
 
       # Watch for validity state change and display errors if necessary
-      angular.forEach fields, (fieldName) ->
-        scope.$watch "#{formCtrl.$name}.#{fieldName}.$viewValue", ->
-          return unless formCtrl[fieldName]?.$dirty
+      angular.forEach fields, (field) ->
+        getViewValue = -> formCtrl[field]?.$viewValue
+        scope.$watch getViewValue, ->
+          return unless formCtrl[field]?.$dirty
           toggleErrors()
 
       # Display server side validation errors (only once)
-      angular.forEach fields, (fieldName) ->
+      angular.forEach fields, (field) ->
         initial = true
-        scope.$watch "#{formCtrl.$name}.$serverError.#{fieldName}", ->
+        getServerErrors = -> formCtrl.$serverErrors?[field]
+        scope.$watch getServerErrors, ->
           toggleErrors() unless initial
           initial = false
 
       # Display validation errors when the form is submitted
-      scope.$watch "#{formCtrl.$name}.$submitted", (submitted) ->
+      isSubmitted = -> formCtrl.$submitted
+      scope.$watch isSubmitted, (submitted) ->
         return unless submitted
         $log.debug "[validations] form was submitted", formCtrl
         toggleErrors()
@@ -86,14 +89,13 @@ forms.directive "agValidationErrors", [
     replace: true
 
     link: (scope, element, attrs, formCtrl) ->
-      formName = formCtrl.$name
       fieldName = attrs["for"]
       field = formCtrl[fieldName]
 
       # Do cleanup
       clearErrors = -> element.html("")
 
-      # Try to take an errors message from the attrribute
+      # Try to take an errors message from the attribute
       # otherwise fallback to the default error message
       messageFor = (error) ->
         attrs[error] or validationMessages[error]
@@ -115,28 +117,28 @@ forms.directive "agValidationErrors", [
 
       # Clear validation errors when the field is valid
       initial = true
-      scope.$watch "#{formName}.#{fieldName}.$valid", ->
+      isValid = -> formCtrl[fieldName]?.$valid
+      scope.$watch isValid, ->
         displayErrorMessages() unless initial
         initial = false
 
-      # Dispalay validation errors while typing
-      scope.$watch "#{formName}.#{fieldName}.$viewValue", ->
+      # Display validation errors while typing
+      getViewValue = -> formCtrl[fieldName]?.$viewValue
+      scope.$watch getViewValue, ->
         displayErrorMessages() if field.$dirty
 
       # Display validation errors when the form is submitted
-      scope.$watch "#{formName}.$submitted", (submitted) ->
+      isSubmitted = -> formCtrl.$submitted
+      scope.$watch isSubmitted, (submitted) ->
         displayErrorMessages() if submitted
 
       # Display server side errors
-      scope.$watch "#{formName}.$serverError.#{fieldName}", (serverError) ->
+      getServerErrors = -> formCtrl.$serverErrors?[fieldName]
+      scope.$watch getServerErrors, (serverError) ->
         if serverError?
           appendError serverError, "server-error"
         else
           element.find(".server-error").remove()
-
-      # TODO do something with `saving`
-      scope.$watch "saving", (saving) ->
-        displayErrorMessages() if saving
 ]
 
 forms.directive "agServerValidationErrors", ->
@@ -144,44 +146,52 @@ forms.directive "agServerValidationErrors", ->
   require: "^form"
 
   link: (scope, element, attrs, formCtrl) ->
-    formCtrl.$serverError = {}
+    formCtrl.$serverErrors = {}
 
-    # Hide server side validation errors while typping
-    scope.$watch "#{formCtrl.$name}.$serverError", (serverError) ->
+    # Hide server side validation errors while typing
+    getServerErrors = -> formCtrl.$serverErrors
+    scope.$watch getServerErrors, (serverErrors) ->
 
       # Iterate through all fields with server validation errors
-      angular.forEach serverError, (_, fieldName) ->
+      angular.forEach serverErrors, (_, field) ->
 
         # Register change listener for those fields
-        unregister = scope.$watch "#{formCtrl.$name}.#{fieldName}.$viewValue", (oldVal, newVal) ->
-          if oldVal isnt newVal
-            # Remove server side error for the field when its value was changed
-            formCtrl.$serverError[fieldName] = null
-            unregister()
+        getViewValue = -> formCtrl[field]?.$viewValue
+        unregister = scope.$watch getViewValue, (oldVal, newVal) ->
+          return if oldVal is newVal
 
-forms.factory "serverValidationErrorsHandler", ["$log", ($log) ->
-  setErrors = (form, errors) ->
-    # cleanup previous errors
-    form.$serverError = {}
+          # Remove server side error for the field when its value was changed
+          formCtrl[field]?.$setValidity("server", true)
+          formCtrl.$serverErrors[field] = null
+          unregister()
 
-    # iterate through all server side validation errors
-    for key, error of errors
+# Handles server side errors
+forms.factory "serverValidationErrorsHandler", [
+  "$log", ($log) ->
 
-      # ..set errors on the nested form
-      if typeof error is "object" and form[key]?
-        setErrors form[key], error
+    setErrors = (form, errors) ->
+      # cleanup previous errors
+      form.$serverErrors = {}
 
-      # ..set an error for the current form
-      if typeof error is "string"
-        form.$serverError[key] = error
+      # iterate through all server side validation errors
+      for field, message of errors
 
-  (form, response, resourceName) ->
-    # skip when the response does not contain validation errors
-    errors = response.data?.errors?[resourceName]
-    if response.status isnt 422 or not errors?
-      $log.warn "Response does not contain validation errors", response
-      return
+        # ..set errors on the nested form
+        if typeof message is "object" and form[field]?
+          setErrors form[field], message
 
-    # recursively set errors on the form
-    setErrors form, errors
+        # ..set an error for the current form
+        if typeof message is "string"
+          form[field]?.$setValidity("server", false)
+          form.$serverErrors[field] = message
+
+    (form, response, resourceName) ->
+      # skip when the response does not contain validation errors
+      errors = response.data?.errors?[resourceName]
+      if response.status isnt 422 or not errors?
+        $log.warn "Response does not contain validation errors", response
+        return
+
+      # recursively set errors on the form
+      setErrors form, errors
 ]

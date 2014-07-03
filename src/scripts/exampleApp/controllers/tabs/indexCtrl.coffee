@@ -17,6 +17,5 @@ class IndexCtrl extends BaseCtrl
     @$scope.birthDate = new Date()
     @$scope.price = 99990001.98001
 
-  save: (form, item) ->
-    return if form.$invalid
+  save: (item, form) ->
     @$log.debug "[tabs] saving", item

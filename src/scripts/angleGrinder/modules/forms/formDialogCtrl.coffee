@@ -4,8 +4,7 @@ forms = angular.module("angleGrinder.forms")
 class FormDialogCtrl extends BaseCtrl
 
   @register forms, "FormDialogCtrl"
-  @inject "$scope", "$rootScope", "$log", "$modalInstance",
-    "serverValidationErrorsHandler as validator", "dialogOptions"
+  @inject "$scope", "$rootScope", "$log", "$modalInstance", "dialogOptions"
 
   initialize: ->
     # Assign dialog options to the scope
@@ -24,9 +23,7 @@ class FormDialogCtrl extends BaseCtrl
     @$modalInstance.close(@record)
 
   # If form is valid performs server side update
-  save: (form, record) =>
-    return unless form.$valid
-
+  save: (record) =>
     promise = record.save().$promise
 
     promise.then (record) =>
@@ -35,11 +32,7 @@ class FormDialogCtrl extends BaseCtrl
       @grid.saveRow(record.id, record)
       @$scope.closeDialog()
 
-    promise.catch (response) =>
-      @$log.error "[ag] something went wrong", response
-      @validator(form, response, record.resourceName())
-
-    return promise
+    return [promise, record]
 
   # Performs server side delete
   delete: =>

@@ -20,7 +20,7 @@ class ShowCtrl
       onError = (response) ->
         if response.status is 422
           errors = response.data.errors
-          form.$serverError = errors.org
+          form.$serverErrors = errors.org
 
       org.save success: onSuccess, error: onError
 

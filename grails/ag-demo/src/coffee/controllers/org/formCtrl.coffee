@@ -13,7 +13,7 @@ class FormCtrl
       onError = (response) ->
         if response.status is 422
           errors = response.data.errors
-          $scope.editForm.$serverError = errors.org
+          $scope.editForm.$serverErrors = errors.org
 
       org.save(success: onSuccess, error: onError)
 

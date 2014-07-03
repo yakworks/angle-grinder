@@ -18,44 +18,25 @@ describe "controller: users.FormCtrl", ->
     expect($scope.user.email).to.equal "test@email.com"
 
   describe "#save", ->
-    form = null
-    beforeEach -> form = $valid: true
 
     describe "on success", ->
-      fakeUser = null
+      user = null
 
-      beforeEach ->
-        fakeUser = id: 123, save: (options) -> options.success(id: 123)
-        sinon.spy(fakeUser, "save")
+      beforeEach inject ($q) ->
+        deferred = $q.defer()
+        deferred.resolve({ id: 123 })
 
-        $scope.save(form, fakeUser)
+        user = save: sinon.stub().returns({ $promise: deferred.promise })
+
+        $scope.save(user)
+        $scope.$digest()
 
       it "saves a record", ->
-        expect(fakeUser.save).to.have.been.called
+        expect(user.save).to.have.been.called
 
       it "redirects to the show page", inject ($location) ->
         expect($location.path).to.have.been.called
         expect($location.path).to.have.been.calledWith("/examples/users/123")
-
-    describe "onError", ->
-      fakeUser = null
-
-      beforeEach ->
-        fakeUser =
-          id: 234
-          resourceName: -> "user"
-          save: (options) ->
-            options.error(status: 422, data: errors: user: login: "has to be unique")
-
-        sinon.spy(fakeUser, "save")
-
-        $scope.save(form, fakeUser)
-
-      it "tries to save a record", ->
-        expect(fakeUser.save).to.have.been.called
-
-      it "sets server side validation errors", ->
-        expect(form.$serverError.login).to.equal "has to be unique"
 
   describe "#delete", ->
 

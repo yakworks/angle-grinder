@@ -1,4 +1,5 @@
 describe "module: angleGrinder.forms directive: agSubmitButton", ->
+
   beforeEach module "angleGrinder.forms"
 
   $scope = null
@@ -11,10 +12,6 @@ describe "module: angleGrinder.forms directive: agSubmitButton", ->
     $scope = $rootScope.$new()
     {element, $scope} = compileTemplate """
       <form name="theForm">
-        <ng-form name="nestedForm">
-          <ng-form name="evenDeeperNested"></ng-form>
-        </ng-form>
-
         <ag-submit-button></ag-submit-button>
       </form>
     """, $injector
@@ -30,39 +27,10 @@ describe "module: angleGrinder.forms directive: agSubmitButton", ->
 
   itIsEnabled()
 
-  describe "when the form is valid", ->
-    beforeEach -> $scope.theForm.$invalid = false
-
-    itIsEnabled()
-
-    describe "on click", ->
-
-      it "marks the form as submitted", ->
-        expect($scope.theForm.$submitted?).to.be.false
-
-        element.click()
-
-        expect($scope.theForm.$submitted).to.be.true
-
-      it "marks nested forms as submitted", ->
-        expect($scope.theForm.nestedForm.$submitted?).to.be.false
-        expect($scope.theForm.nestedForm.evenDeeperNested.$submitted?).to.be.false
-
-        element.click()
-
-        expect($scope.theForm.nestedForm.$submitted).to.be.true
-        expect($scope.theForm.nestedForm.evenDeeperNested.$submitted).to.be.true
-
   describe "disabling / enabling", ->
-    requestInProgress = (val) ->
-      beforeEach inject (pendingRequests) ->
-        sinon.stub(pendingRequests, "for").returns(val)
-        $scope.$digest()
-        expect(pendingRequests.for).to.have.been.called
-        expect(pendingRequests.for).to.have.been.calledWith("POST", "PUT", "PATCH")
 
     describe "when the request is in progress", ->
-      requestInProgress true
+      beforeEach -> $scope.$apply -> $scope.theForm.$saving = true
 
       it "is disabled", ->
         expect(element.prop("disabled")).to.be.true
@@ -71,5 +39,6 @@ describe "module: angleGrinder.forms directive: agSubmitButton", ->
         expect(element.text()).to.contain "Save..."
 
     describe "when the request is not in progress", ->
-      requestInProgress false
+      beforeEach -> $scope.$apply -> $scope.theForm.$saving = false
+
       itIsEnabled()

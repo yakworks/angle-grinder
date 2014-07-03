@@ -1,11 +1,8 @@
 describe "module: angleGrinder.forms", ->
 
+  beforeEach module "angleGrinder.forms"
+
   describe "controller: FormDialogCtrl", ->
-
-    beforeEach module "angleGrinder.forms", ($provide) ->
-      $provide.value "serverValidationErrorsHandler", sinon.mock()
-      return
-
     $scope = null
 
     $modalInstance = null
@@ -48,21 +45,20 @@ describe "module: angleGrinder.forms", ->
         expect($modalInstance.close).to.have.been.calledWith(record)
 
     describe "#save", ->
-      form = null
 
       describe "when the form is valid", ->
 
-        beforeEach ->
-          form = $valid: true, $invalid: false
-
-        it "returns a promise", inject ($q) ->
+        it "returns a promise along with the record", inject ($q) ->
           deferred = $q.defer()
           record.save.returns($promise: deferred.promise)
 
-          promise = $scope.save(form, record)
+          [promise, record] = $scope.save(record)
+
           expect(promise.then).to.be.a "function"
           expect(promise.catch).to.be.a "function"
           expect(promise.finally).to.be.a "function"
+
+          expect(record).to.deep.eq(record)
 
         describe "on success", ->
 
@@ -71,7 +67,7 @@ describe "module: angleGrinder.forms", ->
             deferred.resolve(record)
             record.save.returns($promise: deferred.promise)
 
-            $scope.save(form, record)
+            $scope.save(record)
             $scope.$digest()
 
           it "updates a row inside the grid", ->
@@ -80,29 +76,6 @@ describe "module: angleGrinder.forms", ->
 
           it "closes the dialog", ->
             expect($modalInstance.close).to.have.been.called
-
-        describe "on error", ->
-
-          beforeEach inject ($q) ->
-            deferred = $q.defer()
-            deferred.reject(record)
-            record.save.returns($promise: deferred.promise)
-
-            $scope.save(form, record)
-            $scope.$digest()
-
-          it "displays server side errors", inject (serverValidationErrorsHandler) ->
-            expect(serverValidationErrorsHandler).to.have.been.called
-            expect(serverValidationErrorsHandler).to.have.been.calledWith(form, record, "account")
-
-      describe "when the form is not valid", ->
-        beforeEach -> form = $valid: false, $invalid: true
-
-        it "does nothing", ->
-          $scope.save(form, record)
-
-          expect(record.save).to.have.not.been.called
-          expect($modalInstance.close).to.have.not.been.called
 
     describe "#delete", ->
 

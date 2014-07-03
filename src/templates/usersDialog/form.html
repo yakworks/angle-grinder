@@ -2,8 +2,8 @@
   <button type="button" class="close" ng-click="closeDialog()">&times;</button>
 
   <h3 ng-switch="user.persisted()">
-    <span ng-switch-when="true">Create user</span>
-    <span ng-switch-when="false">Edit user {{user.name}}</span>
+    <span ng-switch-when="true">Edit user {{user.name}}</span>
+    <span ng-switch-when="false">Create user</span>
   </h3>
 </div>
 
@@ -11,7 +11,7 @@
   <form name="editForm" class="form-horizontal no-margin"
         novalidate="true"
         ag-server-validation-errors
-        ng-submit="save(editForm, user)">
+        ag-submit="save(user, editForm)">
 
     <div ag-field-group for="name">
       <label class="control-label">Name</label>

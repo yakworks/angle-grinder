@@ -7,20 +7,21 @@
 </div>
 
 <div class="content">
-  <h2 class="page-header" ng-switch="user.newRecord()">
+  <h2 class="page-header" ng-switch="user.persisted()">
     <span ng-switch-when="true">Edit user</span>
     <span ng-switch-when="false">Create user</span>
   </h2>
 
   <form name="userForm" novalidate class="form-horizontal no-margin"
         ag-server-validation-errors
-        ng-submit="save(userForm, user)">
+        ag-submit="save(user, userForm)">
 
     <div ag-field-group for="name">
       <label class="control-label">Name</label>
       <div class="controls">
         <input type="text" name="name" placeholder="Enter Name"
                ng-model="user.name" ng-required="true" />
+
         <ag-validation-errors for="name" required="This field is required" />
       </div>
     </div>
@@ -31,6 +32,7 @@
         <input type="text" name="login" placeholder="Enter Login"
                ng-model="user.login"
                ng-required="true" ng-minlength="6" />
+
         <ag-validation-errors for="login" required="This field is required" />
       </div>
     </div>
@@ -40,9 +42,10 @@
         <label class="control-label">Email</label>
 
         <div class="controls">
-          <input type="text" name="email" placeholder="Enter Email"
+          <input type="email" name="email" placeholder="Enter Email"
                  ng-model="user.info.email"
                  ng-required="true" />
+
           <ag-validation-errors for="email" required="This field is required" />
         </div>
       </div>
@@ -87,6 +90,7 @@
       <div class="controls">
         <input type="password" name="password" placeholder="Enter Password"
                ng-model="user.password" ng-required="user.newRecord()" ng-minlength="6" />
+
         <ag-validation-errors for="password"
                               required="This field is required"
                               minlength="Password must be at least 6 characters" />
@@ -96,6 +100,7 @@
         <input type="password" name="passwordConfirmation" placeholder="Enter Password Confirmation"
                ng-model="user.passwordConfirmation"
                ng-required="user.newRecord()" match="user.password" ng-minlength="6" />
+
         <ag-validation-errors for="passwordConfirmation"
                               required="This field is required"
                               minlength="Password must be at least 6 characters"
