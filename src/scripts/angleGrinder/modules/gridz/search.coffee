@@ -25,7 +25,7 @@ gridz.directive "agResetSearchButton", ->
   restrict: "E"
   replace: true
   template: """
-    <button type="button" ng-click="resetSearch()" ng-disabled="searching" class="btn">
+    <button type="button" ng-click="resetSearch(filters)" ng-disabled="searching" class="btn">
       <i class="icon-remove"></i> Reset<span ng-show="searching">...</span>
     </button>
   """
@@ -52,9 +52,13 @@ gridz.directive "agSearchForm", ["$log", ($log) ->
           $log.warn "[gridz] grid is not defined"
           return
 
+        promise = grid.search(filters)
+
         # enable buttons when the search is complete
         $scope.searching = true
-        grid.search(filters).finally -> $scope.searching = false
+        promise.finally -> $scope.searching = false
+
+        return promise
 
       # Trigger search action for the grid
       $scope.advancedSearch = (filters = {}) ->
@@ -67,7 +71,9 @@ gridz.directive "agSearchForm", ["$log", ($log) ->
 
       # Reset the search form and trigger grid reload
       $scope.resetSearch = (filters = {}) ->
-        $scope.filters = filters
+        defaultFilters = $scope.defaultFilters or {}
+        angular.copy(defaultFilters, filters)
+
         gridSearch(filters)
   ]
 ]

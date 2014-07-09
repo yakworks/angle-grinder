@@ -134,7 +134,7 @@ describe "module: angleGrinder.gridz", ->
 
       beforeEach ->
         directiveScope = element.scope()
-        searchButtonEl = element.find("button")
+        searchButtonEl = element.find("button[type=submit]")
 
         $scope.$apply -> directiveScope.searchForm.name.$setViewValue "find me"
 
@@ -173,3 +173,17 @@ describe "module: angleGrinder.gridz", ->
 
         # Then
         expect(resetButtonEl.is(":disabled")).to.be.true
+
+      describe "when default filters are given", ->
+
+        beforeEach ->
+          scope = element.scope()
+          scope.defaultFilters = { foo: "bar" }
+
+        it "calls #resetSearch with default filters", ->
+          # When
+          resetButtonEl.click()
+
+          # Then
+          expect($scope.grid.users.search).to.have.been.called
+          expect($scope.grid.users.search).to.have.been.calledWith(foo: "bar")

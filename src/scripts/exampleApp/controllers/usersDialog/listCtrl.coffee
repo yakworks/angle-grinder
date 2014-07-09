@@ -7,6 +7,10 @@ class IndexCtrl extends BaseCtrl
     # Initially hide the search form
     @$scope.showSearchForm = false
 
+    # by default filter by `customers`
+    @$scope.defaultFilters = contact: type: "customer"
+    @$scope.filters = angular.copy(@$scope.defaultFilters)
+
     # initialize the grid
     @$scope.gridOptions = @usersDialogGrid()
 
