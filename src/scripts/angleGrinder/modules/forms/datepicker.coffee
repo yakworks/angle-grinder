@@ -33,7 +33,7 @@ forms.directive "agDatepicker", [
     compile: (element, attrs, transclude) ->
       (scope, element) ->
 
-        # manually transclude the ele,ent
+        # manually transclude the element
         # grab the input element and decorate it with useful stuff
         transclude scope, (clone) ->
           # dynamically add `datepicker-popup` to the input

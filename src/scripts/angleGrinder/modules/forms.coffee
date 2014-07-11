@@ -1,3 +1,25 @@
+# Here be dragons. Decorate `daypickerDirective`.
+angular.module('ui.bootstrap.datepicker').config [
+  "$provide", ($provide) ->
+    $provide.decorator "daypickerDirective", ($delegate) ->
+      directive = $delegate[0]
+
+      oldCompile = directive.compile
+      directive.compile = ->
+        link = oldCompile.apply(this, arguments)
+
+        (scope) ->
+          link.apply(this, arguments)
+
+          scope.$watch "rows", ->
+
+            angular.forEach scope.rows, (row) ->
+              if _.every(row, (dt) -> dt.secondary)
+                _.map(row, (dt) -> dt.hide = true)
+
+      return $delegate
+]
+
 forms = angular.module("angleGrinder.forms", [
   "ui.bootstrap"
   "angleGrinder.common"
@@ -7,6 +29,8 @@ forms.run [
   "datepickerConfig", "datepickerPopupConfig",
   (datepickerConfig, datepickerPopupConfig) ->
     datepickerConfig.showWeeks = false
+    datepickerConfig.formatDay = "d"
+
     datepickerPopupConfig.showButtonBar = false
 ]
 
@@ -57,7 +81,7 @@ forms.run [
             <tr ng-repeat="row in rows track by $index">
               <td ng-show="showWeeks" class="text-center h6"><em>{{ weekNumbers[$index] }}</em></td>
 
-              <td style="width: 30px; cursor: pointer;" ng-click="select(dt.date)" ng-repeat="dt in row track by dt.date" class="text-center" role="gridcell" id="{{dt.uid}}" aria-disabled="{{!!dt.disabled}}">
+              <td ng-hide="dt.hide" style="width: 30px; cursor: pointer;" ng-click="select(dt.date)" ng-repeat="dt in row track by dt.date" class="text-center" role="gridcell" id="{{dt.uid}}" aria-disabled="{{!!dt.disabled}}">
                 <span ng-class="{'label label-info': dt.selected, 'label label-default': isActive(dt), 'muted': dt.secondary, 'text-info': dt.current}"
                       ng-disabled="dt.disabled" tabindex="-1">
                   {{dt.label}}
