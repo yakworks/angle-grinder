@@ -1,50 +1,63 @@
 forms = angular.module("angleGrinder.forms")
 
-forms.directive "agPanelsRow", ->
-  restrict: "C"
-  controller: [
-    "$log", "$scope", "$element", "$timeout",
-    ($log, $scope, $element, $timeout) ->
-      # an array with all panels in the current row
+forms.value "getRealPanelHeight", (el) ->
+  bodyEl = el.find(".panel-body:visible")
+  oldHeight = bodyEl.height()
+
+  bodyEl.css("min-height", "auto")
+  height = el.height()
+  bodyEl.css("min-height", oldHeight)
+
+  return height
+
+forms.directive "agPanelsRow", [
+  "getRealPanelHeight", (getHeight) ->
+    restrict: "C"
+    controller: ->
       @panels = []
 
-      equalizeHeights = =>
-        # get the max height
-        heights = @panels.map (panel) -> panel.height()
-        maxHeight = Math.max.apply(null, heights)
+      @registerPanel = (el) ->
+        @panels.push($(el))
 
-        $log.debug "[agPanelsRow] equalizing heights for", $element, "max height is #{maxHeight}px"
+      @maxHeight = ->
+        highest = _.max(@panels, (el) -> getHeight(el))
+        getHeight(highest)
 
-        # iterate thought all panels and re-calculate the height
-        for panelEl in @panels
+      # returns true when all panels are equalized
+      @allEqual = ->
+        heights = _.chain(@panels).map((el) -> getHeight(el)).value()
+        _.all(heights, (height) -> height is heights[0])
+
+      @equalize = ->
+        return if @allEqual()
+
+        maxHeight = @maxHeight()
+
+        angular.forEach @panels, (el) ->
+          bodyEl = el.find(".panel-body")
+
           # default padding
-          paddings = 30
+          paddings = parseInt(bodyEl.css("padding-top")) + parseInt(bodyEl.css("padding-bottom"))
 
           # add heading and footer
-          paddings += panelEl.find(".panel-heading").outerHeight()
-          paddings += panelEl.find(".panel-footer").outerHeight()
+          paddings += el.find(".panel-heading").outerHeight()
+          paddings += el.find(".panel-footer").outerHeight()
 
-          panelEl.find(".panel-body").css("min-height", maxHeight - paddings)
+          bodyEl.css("min-height", maxHeight - paddings)
 
-      unregister = $scope.$watch ->
-        # do nothing when the element is not visible
-        # for instance the tab isn't active
-        return unless $element.is(":visible")
+      return this
+]
 
-        # equalize heights
-        $timeout equalizeHeights, 250
+forms.directive "agPanel", [
+  "getRealPanelHeight", (getHeight) ->
+    restrict: "C"
+    require: "^agPanelsRow"
 
-        # unregister the watch because it should run only once
-        unregister()
+    link: (scope, element, attrs, ctrl) ->
 
-      return
-  ]
+      # add the current panel to the stack
+      ctrl.registerPanel(element)
 
-forms.directive "agPanel", ->
-  restrict: "C"
-  require: "^agPanelsRow"
-
-  link: (scope, element, attrs, ctrl) ->
-
-    # add the current panel to the stack
-    ctrl.panels.push(element)
+      elementHeight = -> getHeight(element)
+      scope.$watch elementHeight, -> ctrl.equalize()
+]

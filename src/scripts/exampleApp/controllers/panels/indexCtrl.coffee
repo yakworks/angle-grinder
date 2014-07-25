@@ -5,3 +5,12 @@ class IndexCtrl extends BaseCtrl
 
   initialize: ->
     @$scope.title = "Panels"
+
+    @$scope.contents = []
+
+    @$scope.addContent = =>
+      content = { body: "new row [#{new Date()}]" }
+      @$scope.contents.push(content)
+
+    @$scope.removeContent = =>
+      @$scope.contents.pop()

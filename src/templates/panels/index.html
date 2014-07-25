@@ -11,7 +11,15 @@
             <h4 class="panel-title">Panel One</h4>
           </div>
 
-          <div class="panel-body" ph-txt="1p2s"></div>
+          <div class="panel-body">
+            <button ng-click="addContent()">add row</button>
+            <button ng-click="removeContent()">remove row</button>
+
+            <ul>
+              <li ng-repeat="content in contents">{{content.body}}</li>
+            </ul>
+          </div>
+
           <div class="panel-footer" ph-txt="1s"></div>
         </div>
       </div>
@@ -39,7 +47,13 @@
             <h4 class="panel-title">Panel One</h4>
           </div>
 
-          <div class="panel-body" ph-txt="2p1s"></div>
+          <div class="panel-body" ng-init="loadMore = false">
+            <span ph-txt="2p1s"></span>
+
+            <button ng-click="loadMore = !loadMore">show more</button>
+
+            <span ng-show="loadMore" ph-txt="10p"></span>
+          </div>
           <div class="panel-footer" ph-txt="1s"></div>
         </div>
       </div>
@@ -117,9 +131,12 @@
     <div class="panel ag-panel panel-default">
       <div class="panel-heading">
         <h4 class="panel-title">Panel One</h4>
+        <button ng-click="toggled = !toggled">toggle</button>
       </div>
 
-      <div class="panel-body" ph-txt="2p3s"></div>
+      <div ng-show="!toggled" class="panel-body" ph-txt="2p3s"></div>
+      <div ng-show="toggled" class="panel-body" ph-txt="1p2s"></div>
+
       <div class="panel-footer" ph-txt="1s"></div>
     </div>
   </div>

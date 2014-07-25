@@ -2,12 +2,11 @@ describe "module: angleGrinder.forms", ->
 
   beforeEach module "angleGrinder.forms"
 
-  $scope = null
   element = null
   ctrl = null
 
   beforeEach inject ($injector) ->
-    {element, $scope} = compileTemplate """
+    { element } = compileTemplate """
       <div class="ag-panels-row">
         <div class="panel ag-panel">
           <div class="panel-heading">heading</div>
@@ -23,7 +22,6 @@ describe "module: angleGrinder.forms", ->
 
     ctrl = element.controller("agPanelsRow")
 
-  # TODO extend this spec
   describe "directive: agPanel", ->
 
     it "adds the current element to the panels stack", ->
