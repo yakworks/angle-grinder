@@ -98,7 +98,13 @@ class BeanPathTools {
                     currentMap[it.name] = obj?."$it.name"
                 }
             } else {
-                currentMap[propertyPath] = obj?."$propertyPath"
+                try {
+                    currentMap[propertyPath] = obj?."$propertyPath"
+                } catch (UnresolvableObjectException e) {
+                    log.error("Cannot set value for $propertyPath ($e.entityName, id $e.identifier). $e.message")
+                } catch (Exception e) {
+                    log.error("Cannot set value for $propertyPath from $obj", e)
+                }
             }
 
             return null
@@ -120,6 +126,8 @@ class BeanPathTools {
                 nestedObj = obj."$nestedPrefix"
             } catch (UnresolvableObjectException e) {
                 log.error("Cannot set value for $nestedPrefix ($e.entityName, id $e.identifier). $e.message")
+            } catch (Exception e) {
+                log.error("Cannot set value for $nestedPrefix from $obj", e)
             }
             String remainderOfKey = propertyPath.substring(nestedIndex + 1, propertyPath.length());
             //recursive call
