@@ -15,13 +15,13 @@ modules = {
         resource url: [plugin: plugin, dir: "${dist}/scripts", file: "angularjs-all.min.js"]
     }
 
-    "bootstrap-css" {
+    bootstrapCss {
       resource url: [plugin: plugin, dir: "${dist}/styles", file: "bootstrap.min.css"]
       resource url: [plugin: plugin, dir: "${dist}/styles", file: "bootstrap-extras.min.css"]
     }
 
     bootstrap {
-        dependsOn "bootstrap-css"
+        dependsOn "bootstrapCss"
         resource url: [plugin: plugin, dir: "${dist}/scripts", file: "bootstrap.min.js"]
         resource url: [plugin: plugin, dir: "${dist}/scripts", file: "bootstrap-extras.min.js"]
     }
