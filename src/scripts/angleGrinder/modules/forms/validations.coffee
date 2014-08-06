@@ -78,7 +78,6 @@ forms.directive "agFieldGroup", [
       isSubmitted = -> formCtrl.$submitted
       scope.$watch isSubmitted, (submitted) ->
         return unless submitted
-        $log.debug "[validations] form was submitted", formCtrl
         toggleErrors()
 ]
 
