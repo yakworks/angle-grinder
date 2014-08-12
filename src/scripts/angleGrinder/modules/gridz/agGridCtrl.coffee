@@ -9,6 +9,7 @@ class AgGridCtrl extends BaseCtrl
   @register gridz
   @inject "$rootScope", "$q", "hasSearchFilters", "flatten", "xlsData"
 
+  # TODO this method is obsolete, use $element
   registerGridElement: (@gridEl) ->
 
   getGridId: ->

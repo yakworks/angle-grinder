@@ -125,7 +125,6 @@ class Gridz
         formatter = @options.actionPopup.cellFormatter or this.actionPopupFormatter
         formatter(containerId, cellValue, colOptions, rowObject)
 
-    @options.colModel = _.reject(@options.colModel, (col) -> col.name is "-row_action_col")
     @options.colModel.unshift(actionCol)
 
   ###

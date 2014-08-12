@@ -20,8 +20,11 @@ gridz.directive "agGrid", [
   ($log, $parse, agGridDataLoader, actionPopupHandler, pathWithContext, camelize) ->
 
     link = (scope, element, attrs, gridCtrl) ->
+      # find grid placeholder
+      gridEl = element.find("table.gridz")
+
       # initialize the controller
-      gridCtrl.registerGridElement(element.find("table.gridz"))
+      gridCtrl.registerGridElement(gridEl)
 
       # publish agGrid controller to the parent scope
       alias = attrs.agGridName
@@ -34,12 +37,14 @@ gridz.directive "agGrid", [
       # read colModel from the `ag-grid-col-model` attribute
       options.colModel = angular.fromJson(attrs.agGridColModel) if attrs.agGridColModel
 
+      # kill the grid when the related scope is destroyed
+      scope.$on "$destroy", ->
+        $log.debug "[agGrid] destroying the grid", gridEl
+        gridEl.jqGrid("GridDestroy")
+
       # Initializes a grid with the given options
       initializeGrid = ->
         $log.debug "[agGrid] initializing '#{alias}' with", options
-
-        # find grid placeholder
-        gridEl = element.find("table.gridz")
 
         # assign the url
         if not options.url? and options.path?
