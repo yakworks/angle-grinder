@@ -23,9 +23,6 @@ gridz.directive "agGrid", [
       # find grid placeholder
       gridEl = element.find("table.gridz")
 
-      # initialize the controller
-      gridCtrl.registerGridElement(gridEl)
-
       # publish agGrid controller to the parent scope
       alias = attrs.agGridName
       $parse(alias).assign(scope, gridCtrl) if alias

@@ -7,13 +7,13 @@ gridz = angular.module("angleGrinder.gridz")
 class AgGridCtrl extends BaseCtrl
 
   @register gridz
-  @inject "$rootScope", "$q", "hasSearchFilters", "flatten", "xlsData"
+  @inject "$rootScope", "$element", "$q", "hasSearchFilters", "flatten", "xlsData"
 
-  # TODO this method is obsolete, use $element
-  registerGridElement: (@gridEl) ->
+  getGridEl: ->
+    @gridEl or= @$element.find("table.gridz")
 
   getGridId: ->
-    @gridEl.attr("id")
+    @getGridEl().attr("id")
 
   # Gives the currently selected rows when multiselect is set to true.
   # This is a one-dimensional array and the values in the array correspond
@@ -26,13 +26,13 @@ class AgGridCtrl extends BaseCtrl
   # a name from colModel and the value from the associated column in that row.
   # It returns an empty array if the rowid can not be found.
   getRowData: (rowId = null) ->
-    @gridEl.getRowData(rowId)
+    @getGridEl().getRowData(rowId)
 
   # Populates the grid with the given data.
   addJSONData: (data) ->
     # The addJSONData is very old method which uses still expandos
     # to the DOM element of the grid (<table> element).
-    @gridEl.get(0).addJSONData(data)
+    @getGridEl().get(0).addJSONData(data)
 
     # broadcasts the AngularJS event
     @$rootScope.$broadcast "gridz:loadComplete", data
@@ -45,17 +45,17 @@ class AgGridCtrl extends BaseCtrl
       deferred.resolve(data)
       unregister()
 
-    @gridEl.trigger("reloadGrid")
+    @getGridEl().trigger("reloadGrid")
 
     deferred.promise
 
   # Gets a particular grid parameter
   getParam: (name) ->
-    @gridEl.getGridParam(name)
+    @getGridEl().getGridParam(name)
 
   # Sets the given grid parameter
   setParam: (params) ->
-    @gridEl.setGridParam(params)
+    @getGridEl().setGridParam(params)
 
   # Updates the values (using the data array) in the row with rowid.
   # The syntax of data array is: {name1:value1,name2: value2...}
@@ -76,7 +76,7 @@ class AgGridCtrl extends BaseCtrl
       # set empty values
       flatData[key] = null for key in diff
 
-    @gridEl.setRowData(id, flatData)
+    @getGridEl().setRowData(id, flatData)
     @flashOnSuccess(id)
 
   # Inserts a new row with id = rowid containing the data in data (an object) at
@@ -84,18 +84,18 @@ class AgGridCtrl extends BaseCtrl
   # The syntax of the data object is: {name1:value1,name2: value2...}
   # where name is the name of the column as described in the colModel and the value is the value.
   addRow: (id, data, position = "first") ->
-    @gridEl.addRowData(id, @flatten(data), position)
+    @getGridEl().addRowData(id, @flatten(data), position)
     @$rootScope.$broadcast "gridz:rowAdded", id, data
     @flashOnSuccess(id)
 
   # Returns `true` if the grid contains a row with the given id
   hasRow: (id) ->
-    !!@gridEl.getInd(id)
+    !!@getGridEl().getInd(id)
 
   # Returns an array of the id's in the current grid view.
   # It returns an empty array if no data is available.
   getIds: ->
-    @gridEl.getDataIDs()
+    @getGridEl().getDataIDs()
 
   # Returns the current page
   getCurrentPage: ->
@@ -157,7 +157,7 @@ class AgGridCtrl extends BaseCtrl
   # Deletes the row with the id = rowid.
   # This operation does not delete data from the server.
   removeRow: (id) ->
-    @flashOnSuccess id, => @gridEl.delRowData(id)
+    @flashOnSuccess id, => @getGridEl().delRowData(id)
 
   # Sets the grid search filters and triggers a reload
   search: (filters) ->
@@ -182,7 +182,7 @@ class AgGridCtrl extends BaseCtrl
   # Toggle visibility of a column with the given id
   toggleColumn: (columnId) ->
     showOrHide = if @isColumnHidden(columnId) then "showCol" else "hideCol"
-    @gridEl.jqGrid(showOrHide, columnId)
+    @getGridEl().jqGrid(showOrHide, columnId)
     @_triggerResize()
 
   # Invokes a dialog for choosing and reordering grid's columns
@@ -192,7 +192,7 @@ class AgGridCtrl extends BaseCtrl
     # inside the column chooser dialog.
     options.done = (perm) =>
       # call `remapColumns` method in order to reorder the columns
-      @gridEl.jqGrid("remapColumns", perm, true) if perm
+      @getGridEl().jqGrid("remapColumns", perm, true) if perm
 
       # TODO wrap it into service
       # Store chosen column in the local storage
@@ -201,7 +201,7 @@ class AgGridCtrl extends BaseCtrl
 
       window.localStorage.setItem("gridz.#{@getGridId()}.chosenColumns", angular.toJson(chosenColumns))
 
-    @gridEl.jqGrid("columnChooser", options)
+    @getGridEl().jqGrid("columnChooser", options)
 
   # Returns data uri with xls file content for rows from the current grid view.
   getXlsDataUri: ->
@@ -212,7 +212,7 @@ class AgGridCtrl extends BaseCtrl
   # TODO fix grid resizing issues
   # TODO resize after column chooser dialog
   _triggerResize: ->
-    @gridEl.trigger("resize")
+    @getGridEl().trigger("resize")
 
   # Flash the given row
   flashOnSuccess: (id, complete = angular.noop) ->
@@ -223,7 +223,7 @@ class AgGridCtrl extends BaseCtrl
     @_flashRow(id, "#FF0000", complete)
 
   _flashRow: (id, color = "#DFF0D8", complete = angular.noop) ->
-    rowEl = $(@gridEl[0].rows.namedItem(id))
+    rowEl = $(@getGridEl()[0].rows.namedItem(id))
 
     rowEl.css "background-color", color
     rowEl.delay(250).fadeOut "medium", ->

@@ -24,8 +24,18 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
     jqGridEl.attr = (name) -> "gridId"
     jqGridEl.getGridParam = (name) => @gridParams[name]
 
-    ctrl = $controller "AgGridCtrl"
-    ctrl.registerGridElement(jqGridEl)
+    # stub jQuery element
+    $element =
+      find: (->
+        stub = sinon.stub()
+        stub.withArgs("table.gridz").returns(jqGridEl)
+        return stub
+      )()
+
+    # initialzie the controller
+    ctrl = $controller "AgGridCtrl",
+      $element: $element
+
     sinon.stub(ctrl, "flashOnSuccess")
 
   describe "#getGridId", ->
