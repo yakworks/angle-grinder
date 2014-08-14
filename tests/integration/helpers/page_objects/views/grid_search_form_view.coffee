@@ -2,16 +2,16 @@ PageObject = require("./../../page_object")
 
 class GridSearchForm extends PageObject
 
-  constructor: (@element, @grid) ->
+  constructor: (@el, @grid) ->
 
   @has "submitButton", ->
-    @findElement @By.xpath(".//button[contains(., 'Search')]")
+    @element @By.xpath(".//button[contains(., 'Search')]")
 
   @has "resetButton", ->
-    @findElement @By.xpath(".//button[contains(., 'Reset')]")
+    @element @By.xpath(".//button[contains(., 'Reset')]")
 
   findFilterBy: (name) ->
-    @findElement @By.model("filters.#{name}")
+    @element @By.model("filters.#{name}")
 
   setFilterValue: (name, value) ->
     filter = @findFilterBy(name)

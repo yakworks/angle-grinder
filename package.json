@@ -51,7 +51,7 @@
     "load-grunt-tasks": "^0.6.0",
     "mocha": "^1.20.4",
     "nodemon": "^1.2.0",
-    "protractor": "^0.23.1",
+    "protractor": "^1.0.0",
     "request": "^2.36.0"
   },
   "engines": {

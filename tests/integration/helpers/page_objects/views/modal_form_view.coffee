@@ -2,8 +2,8 @@ PageObject = require("./../../page_object")
 
 class FormFieldView extends PageObject
 
-  clear: -> @element.clear()
-  sendKeys: (keys) -> @element.sendKeys(keys)
+  clear: -> @el.clear()
+  sendKeys: (keys) -> @el.sendKeys(keys)
 
   hasError: -> @hasClass "ng-invalid"
 
@@ -18,31 +18,31 @@ class FormFieldView extends PageObject
     @getAttribute("value")
 
   @has "error", ->
-    @findElement @By.xpath(".//..//span[contains(@class, 'help-inline')]")
+    @element @By.xpath(".//..//span[contains(@class, 'help-inline')]")
 
 class ModalFormView extends PageObject
 
   # dialog elements
 
   @has "header", ->
-    @findElement @By.css(".modal-header h3")
+    @element @By.css(".modal-header h3")
 
   @has "form", ->
-    @findElement @By.css("form[name='editForm']")
+    @element @By.css("form[name='editForm']")
 
   # form elements
 
   @has "submitButton", ->
-    @form.findElement @By.css("button[type=submit]")
+    @form.element @By.css("button[type=submit]")
 
   @has "deleteButton", ->
-    @form.findElement @By.css("button.ag-delete-button")
+    @form.element @By.css("button.ag-delete-button")
 
   # custom methods
 
   # Find field by model name
   findField: (model) ->
-    field = @form.findElement @By.model(model)
+    field = @form.element @By.model(model)
     new FormFieldView(field)
 
   setFieldValue: (model, value) ->

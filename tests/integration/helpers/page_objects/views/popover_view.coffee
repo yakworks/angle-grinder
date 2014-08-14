@@ -3,9 +3,9 @@ PageObject = require("./../../page_object")
 class PopoverView extends PageObject
 
   @has "editButton", ->
-    @findElement @By.linkText("edit")
+    @element @By.linkText("edit")
 
   @has "deleteButton", ->
-    @findElement @By.linkText("delete")
+    @element @By.linkText("delete")
 
 module.exports = PopoverView

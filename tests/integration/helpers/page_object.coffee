@@ -45,7 +45,7 @@ class PageObject
   getCurrentUrl: browser.getCurrentUrl
   getTitle: browser.getTitle
 
-  constructor: (@element = @browser) ->
+  constructor: (@el = element(By.css("[ng-app]"))) ->
 
   # Locates the first element containing `label` text
   byLabel: (label, tag = "a") ->
@@ -56,15 +56,15 @@ class PageObject
     Object.defineProperty @::, name, get: getter
 
   # Delegate these methods to the `element`
-  findElement: (locator)  -> @element.findElement(locator)
-  findElements: (locator) -> @element.findElements(locator)
-  isDisplayed:            -> @element.isDisplayed()
-  getAttribute: (name)    -> @element.getAttribute(name)
+  element: (locator)   -> @el.element(locator)
+  all: (locator)       -> @el.all(locator)
+  isDisplayed:         -> @el.isDisplayed()
+  getAttribute: (name) -> @el.getAttribute(name)
 
   hasClass: (expected) ->
     d = protractor.promise.defer()
 
-    @element.getAttribute("class").then (cls) ->
+    @el.getAttribute("class").then (cls) ->
       d.fulfill _.contains(cls.split(" "), expected)
 
     d.promise

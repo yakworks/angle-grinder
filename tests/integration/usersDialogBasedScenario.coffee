@@ -1,5 +1,3 @@
-expect = require("./helpers/expect")
-
 utils = require("./helpers/utils")
 UsersDialogBasedPage = require("./helpers/page_objects/users_dialog_based_page")
 
@@ -21,46 +19,46 @@ describe "Users dialog based grid scenario", ->
     page.grid.waitForData()
 
   it "navigates to the correct page", ->
-    expect(page.getCurrentUrl()).to.eventually.match /\/examples\/usersDialog/
-    expect(page.getTitle()).to.eventually.eq "Angle Grinder - Bootstrap and Grid"
-    expect(page.heading.getText()).to.eventually.eq "Users dialog based example"
+    expect(page.getCurrentUrl()).toMatch /\/examples\/usersDialog/
+    expect(page.getTitle()).toEqual "Angle Grinder - Bootstrap and Grid"
+    expect(page.heading.getText()).toEqual "Users dialog based example"
 
   describe "search filters", ->
     searchForm = null
 
     beforeEach ->
       page.gridNavbar.searchButton.click()
-      searchForm = page.gridSeachForm
+      searchForm = page.gridSearchForm
 
     it "displays search filters", ->
-      expect(searchForm.isDisplayed()).to.eventually.be.true
+      expect(searchForm.isDisplayed()).toBe(true)
 
     describe "advanced search form", ->
 
       it "filters by name", ->
         searchForm.fillInAndSubmit name: "Teancum"
         firstRow = page.grid.firstRow()
-        expect(firstRow.value("name")).to.eventually.eq "Teancum"
+        expect(firstRow.value("name")).toEqual "Teancum"
 
         searchForm.fillInAndSubmit name: "Nephi"
         firstRow = page.grid.firstRow()
-        expect(firstRow.value("name")).to.eventually.eq "Nephi"
+        expect(firstRow.value("name")).toEqual "Nephi"
 
         searchForm.reset()
 
         firstRow = page.grid.firstRow()
-        expect(firstRow.value("login")).to.eventually.eq "login-1"
-        expect(firstRow.value("name")).to.eventually.eq "Moroni"
+        expect(firstRow.value("login")).toEqual "login-1"
+        expect(firstRow.value("name")).toEqual "Moroni"
 
       it "filters by allowance", ->
         searchForm.fillInAndSubmit allowance: "50"
         firstRow = page.grid.firstRow()
-        expect(firstRow.value("creditInfo.allowance")).to.eventually.eq "50"
+        expect(firstRow.value("creditInfo.allowance")).toEqual "50"
 
         searchForm.reset()
         firstRow = page.grid.firstRow()
-        expect(firstRow.value("name")).to.eventually.eq "Moroni"
-        expect(firstRow.value("creditInfo.allowance")).to.not.eventually.eq "50"
+        expect(firstRow.value("name")).toEqual "Moroni"
+        expect(firstRow.value("creditInfo.allowance")).not.toEqual "50"
 
       it "filters by birthday", ->
         searchForm.fillInAndSubmit
@@ -68,8 +66,8 @@ describe "Users dialog based grid scenario", ->
           "birthday.to":   "10/31/2010"
 
         firstRow = page.grid.firstRow()
-        expect(firstRow.value("name")).to.eventually.eq "Ether"
-        expect(firstRow.value("creditInfo.allowance")).to.eventually.eq "42"
+        expect(firstRow.value("name")).toEqual "Ether"
+        expect(firstRow.value("creditInfo.allowance")).toEqual "42"
 
   describe "quick search", ->
 
@@ -78,19 +76,19 @@ describe "Users dialog based grid scenario", ->
 
       quickSearch.searchFor "Ether"
       firstRow = page.grid.firstRow()
-      expect(firstRow.value("name")).to.eventually.eq "Ether"
+      expect(firstRow.value("name")).toEqual "Ether"
 
       quickSearch.clear()
       firstRow = page.grid.firstRow()
-      expect(firstRow.value("name")).to.eventually.eq "Moroni"
+      expect(firstRow.value("name")).toEqual "Moroni"
 
   describe "click on `New user`", ->
 
     beforeEach -> page.gridNavbar.createButton.click()
 
     it "displays create item dialog", ->
-      expect(page.modalForm.isDisplayed()).to.eventually.be.true
-      expect(page.modalForm.header.getText()).to.eventually.eq "Create user"
+      expect(page.modalForm.isDisplayed()).toBe(true)
+      expect(page.modalForm.header.getText()).toEqual "Create user"
 
     describe "fill in and submit the form", ->
       beforeEach ->
@@ -108,11 +106,11 @@ describe "Users dialog based grid scenario", ->
         # should add a new row on the top of the grid
         firstRow = page.grid.firstRow()
 
-        expect(firstRow.value("login")).to.eventually.eq "new-user"
-        expect(firstRow.value("info.email")).to.eventually.eq "new-user@email.com"
-        expect(firstRow.value("name")).to.eventually.eq "New User Name"
-        expect(firstRow.value("creditInfo.allowance")).to.eventually.eq "99.99"
-        expect(firstRow.value("birthday")).to.eventually.eq "3/4/83 12:00 AM"
+        expect(firstRow.value("login")).toEqual "new-user"
+        expect(firstRow.value("info.email")).toEqual "new-user@email.com"
+        expect(firstRow.value("name")).toEqual "New User Name"
+        expect(firstRow.value("creditInfo.allowance")).toEqual "99.99"
+        expect(firstRow.value("birthday")).toEqual "3/4/83 12:00 AM"
 
   describe "grid row popover", ->
     popover = null
@@ -127,14 +125,14 @@ describe "Users dialog based grid scenario", ->
       beforeEach -> popover.editButton.click()
 
       it "displays edit item dialog", ->
-        expect(page.modalForm.isDisplayed()).to.eventually.be.true
-        expect(page.modalForm.header.getText()).to.eventually.eq "Edit user Moroni"
+        expect(page.modalForm.isDisplayed()).toBe(true)
+        expect(page.modalForm.header.getText()).toEqual "Edit user Moroni"
 
         customerName = page.modalForm.findField("user.name")
-        expect(customerName.getValue()).to.eventually.eq "Moroni"
+        expect(customerName.getValue()).toEqual "Moroni"
 
         noteField = page.modalForm.findField("user.login")
-        expect(noteField.getValue()).to.eventually.eq "login-1"
+        expect(noteField.getValue()).toEqual "login-1"
 
       describe "update customer name and submit the form", ->
 
@@ -144,17 +142,17 @@ describe "Users dialog based grid scenario", ->
 
           # should add a new row on the top
           firstRow = page.grid.firstRow()
-          expect(firstRow.value("name")).to.eventually.eq "Lukasz"
+          expect(firstRow.value("name")).toEqual "Lukasz"
 
       describe "click `delete` button inside the modal dialog", ->
 
         it "deletes the row", ->
           deleteButton = page.modalForm.deleteButton
 
-          expect(deleteButton.getText()).to.eventually.eq "Delete"
+          expect(deleteButton.getText()).toEqual "Delete"
           deleteButton.click()
 
-          expect(deleteButton.getText()).to.eventually.eq "Are you sure?"
+          expect(deleteButton.getText()).toEqual "Are you sure?"
           deleteButton.click()
 
           # wait until the first row disappears
@@ -163,7 +161,7 @@ describe "Users dialog based grid scenario", ->
 
           # should delete the first row
           firstRow = page.grid.firstRow()
-          expect(firstRow.value("login")).to.eventually.eq "login-2"
+          expect(firstRow.value("login")).toEqual "login-2"
 
     describe "click on `delete` row", ->
 
@@ -171,10 +169,10 @@ describe "Users dialog based grid scenario", ->
         popover.deleteButton.click()
 
         # should display confirmation dialog
-        modal = browser.findElement(protractor.By.css(".modal"))
-        expect(modal.findElement(protractor.By.css(".modal-body")).getText()).to.eventually.eq "Are you sure?"
+        modal = element(protractor.By.css(".modal"))
+        expect(modal.element(protractor.By.css(".modal-body")).getText()).toEqual "Are you sure?"
         # click OK button
-        modal.findElement(protractor.By.css(".modal-footer .btn-primary")).click()
+        modal.element(protractor.By.css(".modal-footer .btn-primary")).click()
 
         # wait until the first row disappears
         deletedRow = page.grid.firstRow()
@@ -182,4 +180,4 @@ describe "Users dialog based grid scenario", ->
 
         # should delete the first row
         firstRow = page.grid.firstRow()
-        expect(firstRow.value("login")).to.eventually.eq "login-2"
+        expect(firstRow.value("login")).toEqual "login-2"

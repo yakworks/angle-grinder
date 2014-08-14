@@ -12,30 +12,30 @@ GridSearchFormView = require("./views/grid_search_form_view")
 class PageWithGrid extends PageObject
 
   @has "navbarTop", ->
-    element = @findElement @By.css(".navbar-fixed-top")
-    new NavbarTopView(element)
+    el = @element @By.css(".navbar-fixed-top")
+    new NavbarTopView(el)
 
   @has "sidebar", ->
-    element = @findElement @By.css(".bs-docs-sidebar")
-    new SidebarView(element)
+    el = @element @By.css(".bs-docs-sidebar")
+    new SidebarView(el)
 
   @has "heading", ->
-    @findElement @By.css("section.content h2")
+    @element @By.css("section.content h2")
 
   @has "modalForm", ->
-    element = @findElement @By.css(".modal-dialog")
-    new ModalFormView(element)
+    el = @element @By.css(".modal-dialog")
+    new ModalFormView(el)
 
   @has "gridNavbar", ->
-    element = @findElement @By.css(".navbar-grid")
-    new GridNavbarView(element, @grid)
+    el = @element @By.css(".navbar-grid")
+    new GridNavbarView(el, @grid)
 
-  @has "gridSeachForm", ->
-    element = @findElement @By.css("form[name='searchForm']")
-    new GridSearchFormView(element, @grid)
+  @has "gridSearchForm", ->
+    el = @element @By.css("form[name='searchForm']")
+    new GridSearchFormView(el, @grid)
 
   getGridView: (name) ->
-    element = @findElement @By.css("div[ag-grid-name='#{name}']")
-    new GridView(element, name)
+    el = @element @By.css("div[ag-grid-name='#{name}']")
+    new GridView(el, name)
 
 module.exports = PageWithGrid

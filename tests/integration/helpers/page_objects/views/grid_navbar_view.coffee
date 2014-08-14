@@ -1,11 +1,11 @@
 PageObject = require("./../../page_object")
 
-class QuickSeachView extends PageObject
+class QuickSearchView extends PageObject
 
-  constructor: (@element, @grid) ->
+  constructor: (@el, @grid) ->
 
   @has "input", ->
-    @findElement @By.model("filters.quickSearch")
+    @element @By.model("filters.quickSearch")
 
   searchFor: (filter) ->
     @input.sendKeys filter
@@ -20,16 +20,16 @@ class QuickSeachView extends PageObject
 
 class GridNavbarView extends PageObject
 
-  constructor: (@element, @grid) ->
+  constructor: (@el, @grid) ->
 
   @has "createButton", ->
-    @findElement @By.css(".create-button")
+    @element @By.css(".create-button")
 
   @has "searchButton", ->
-    @findElement @By.css(".icon-search")
+    @element @By.css(".icon-search")
 
   @has "quickSearch", ->
-    element = @findElement @By.css("form.navbar-search")
-    new QuickSeachView(element, @grid)
+    el = @element @By.css("form.navbar-search")
+    new QuickSearchView(el, @grid)
 
 module.exports = GridNavbarView
