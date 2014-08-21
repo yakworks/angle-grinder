@@ -11,11 +11,11 @@
     "select2": "~3.4.8",
     "select2-bootstrap-css": "~1.2.0",
     "font-awesome": "~3.2.1",
-    "angular": "1.2.17",
-    "angular-animate": "1.2.17",
-    "angular-route": "1.2.17",
-    "angular-resource": "1.2.17",
-    "angular-sanitize": "1.2.17",
+    "angular": "1.2.22",
+    "angular-animate": "1.2.22",
+    "angular-route": "1.2.22",
+    "angular-resource": "1.2.22",
+    "angular-sanitize": "1.2.22",
     "angular-ui-select2": "~0.0.5",
     "angular-bootstrap": "0.11.0",
     "angular-strap": "0.7.8",
@@ -28,7 +28,7 @@
     "moment": "2.7.0"
   },
   "devDependencies": {
-    "angular-mocks": "1.2.17",
+    "angular-mocks": "1.2.22",
     "sinon": "~1.10.1",
     "sinon-chai": "~2.5.0"
   },
@@ -102,6 +102,7 @@
     }
   },
   "resolutions": {
-    "jquery": "2.1.1"
+    "jquery": "2.1.1",
+    "angular": "1.2.22"
   }
 }
