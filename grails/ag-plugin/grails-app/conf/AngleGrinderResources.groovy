@@ -7,8 +7,8 @@ modules = {
         resource url: [plugin: plugin, dir: "${dist}/scripts", file: "jquery.min.js"]
     }
 
-    underscore {
-        resource url: [plugin: plugin, dir: "${dist}/scripts", file: "underscore.min.js"]
+    lodash {
+        resource url: [plugin: plugin, dir: "${dist}/scripts", file: "lodash.min.js"]
     }
 
     angularjsAll {
@@ -27,7 +27,7 @@ modules = {
     }
 
     vendor {
-        dependsOn "jquery,underscore,angularjsAll,bootstrap"
+        dependsOn "jquery,lodash,angularjsAll,bootstrap"
     }
 
     angleGrinder {

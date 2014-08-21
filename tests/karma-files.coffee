@@ -3,7 +3,7 @@ module.exports =
   # list of files / patterns to load in the browser
   files: [
     "components/bower/jquery/dist/jquery.js"
-    "components/bower/underscore/underscore.js"
+    "components/bower/lodash/dist/lodash.js"
 
     "components/bower/angular/angular.js"
     "components/bower/angular-animate/angular-animate.js"
