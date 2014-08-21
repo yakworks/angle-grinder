@@ -25,7 +25,8 @@
     "google-code-prettify": "1.0.1",
     "bower-angular-placeholders": "0.0.2",
     "later": "*",
-    "moment": "2.7.0"
+    "moment": "2.7.0",
+    "angular-xeditable": "~0.1.8"
   },
   "devDependencies": {
     "angular-mocks": "1.2.22",
