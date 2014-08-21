@@ -2,6 +2,7 @@
 
 [![Build status](https://secure.travis-ci.org/9ci/angle-grinder.png)](http://travis-ci.org/9ci/angle-grinder)
 [![Stories in Ready](https://badge.waffle.io/9ci/angle-grinder.png)](http://waffle.io/9ci/angle-grinder)
+[![Gitter chat](https://badges.gitter.im/9ci/angle-grinder.png)](https://gitter.im/9ci/angle-grinder)
 
 ## About
 __angle-grinder__ can be opinionated at times. It is a collection of libraries with mods and wrappers around them to facilite building an application faster with anglularJS and Bootstrap 2.
