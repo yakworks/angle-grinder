@@ -1,7 +1,7 @@
 spinner = angular.module("angleGrinder.spinner", ["angleGrinder.common"])
 
 ###
-Use css to set the spinner annimation image:
+Use css to set the spinner animation image:
 ```
   li.spinner i.spin:before {
     content: url('/img/ajax-loader.gif');

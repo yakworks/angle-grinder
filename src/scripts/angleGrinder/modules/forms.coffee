@@ -1,5 +1,5 @@
 # Here be dragons. Decorate `daypickerDirective`.
-angular.module('ui.bootstrap.datepicker').config [
+angular.module("ui.bootstrap.datepicker").config [
   "$provide", ($provide) ->
     $provide.decorator "daypickerDirective", ($delegate) ->
       directive = $delegate[0]
