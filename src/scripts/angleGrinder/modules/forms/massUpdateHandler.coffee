@@ -15,7 +15,7 @@ forms.factory "massUpdateHandler", [
       else
         $log.warn "[forms] Invalid JSON response, missing data array"
 
-      # handle errored fields
+      # handle fields with errors
       if result.errors?
         grid.flashOnError(id) for id, error of result.errors
       else
