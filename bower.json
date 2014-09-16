@@ -29,9 +29,7 @@
     "lodash": "~2.4.1"
   },
   "devDependencies": {
-    "angular-mocks": "1.2.22",
-    "sinon": "~1.10.1",
-    "sinon-chai": "~2.5.0"
+    "angular-mocks": "1.2.22"
   },
   "exportsOverride": {
     "jquery": {
@@ -104,6 +102,7 @@
   },
   "resolutions": {
     "jquery": "2.1.1",
-    "angular": "1.2.22"
+    "angular": "1.2.22",
+    "bootstrap": "2.3.2"
   }
 }

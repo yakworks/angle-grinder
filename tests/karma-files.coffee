@@ -12,16 +12,6 @@ module.exports =
     "components/bower/angular-sanitize/angular-sanitize.js"
     "components/bower/angular-mocks/angular-mocks.js"
 
-    # TODO use karma plugins instead of bower dependencies
-    "components/bower/sinon/lib/sinon.js"
-    "components/bower/sinon/lib/sinon/behavior.js"
-    "components/bower/sinon/lib/sinon/call.js"
-    "components/bower/sinon/lib/sinon/spy.js"
-    "components/bower/sinon/lib/sinon/stub.js"
-    "components/bower/sinon/lib/sinon/mock.js"
-    "components/bower/sinon/lib/sinon/assert.js"
-    "components/bower/sinon-chai/lib/sinon-chai.js"
-
     "components/bower/jqgrid/js/grid.base.js"
     "components/bower/select2/select2.js"
     "components/bower/angular-ui-select2/src/select2.js"
