@@ -15,7 +15,7 @@ resources.factory("resourceBuilder", [
       basePath = pathWithContext(basePath);
 
       var Resource = $resource(basePath + "/:action/:id", { id: "@id" }, {
-        list:       { method: "GET", params: { action: "list" }, isArray: true },
+        list:       { method: "GET", params: { action: "list" }, isArray: false },
         get:        { method: "GET", params: { action: "get" } },
         save:       { method: "POST", params: { action: "save" } },
         update:     { method: "POST", params: { action: "update" } },
