@@ -30,6 +30,7 @@ forms.directive "agSubmit", [
           result = _.flatten([onSubmit(scope, { $event: event })])
           [promise, resource] = result
 
+          # TODO use `$q.when`
           if promise and angular.isObject(promise)
 
             # disable/enable form controls
