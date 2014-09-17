@@ -21,6 +21,12 @@ describe "module: angleGrinder.common", ->
 
       expect(filter(amount)).to.eq "$9.99"
 
+    it "can format negative currencies", ->
+      amount = -29.99
+
+      provider.setDefaultFormat("<%= amount %>")
+      expect(filter(amount)).to.eq "-29.99"
+
     it "can use other currency symbols", ->
       amount = 99.8
 

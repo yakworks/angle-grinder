@@ -1,5 +1,16 @@
 common = angular.module("angleGrinder.common", [])
 
+# change default locale to use `-` symbol for negative currencies
+common.config ["$localeProvider", "$provide", ($localeProvider, $provide) ->
+  defaultLocale = $localeProvider.$get()
+
+  angular.extend defaultLocale.NUMBER_FORMATS.PATTERNS[1],
+    negPre: "-"
+    negSuf: ""
+
+  $provide.value "$locale", defaultLocale
+]
+
 # Decorates `$http.pendingRequests` with some useful features
 common.factory "pendingRequests", [
   "$http", ($http) ->

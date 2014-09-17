@@ -1,6 +1,5 @@
 gridz = angular.module "angleGrinder.gridz"
 
-# TODO clear input with esc key
 gridz.directive "agGridQuickSearch", [
   ->
     restrict: "E"
