@@ -13,10 +13,10 @@ describe "module: angleGrinder.forms", ->
       $scope = $rootScope.$new()
       ctrl = $controller "ConfirmationDialogCtrl",
         $scope: $scope
-        message: "This is a test!"
+        options: message: "This is a test!"
 
     it "has the message", ->
-      expect($scope.message).to.eq "This is a test!"
+      expect(ctrl.options).to.have.property "message", "This is a test!"
 
     describe "#close", ->
 
@@ -37,19 +37,58 @@ describe "module: angleGrinder.forms", ->
     beforeEach module "ui.bootstrap", ($provide) ->
       $provide.decorator "$modal", ($delegate) ->
         sinon.spy($delegate, "open")
-        $delegate
+        return $delegate
 
       return
 
     beforeEach module "angleGrinder.forms"
 
-    it "displays the confirmation", inject ($modal, confirmationDialog) ->
-      # When
-      confirmationDialog.open()
+    itOpensModalWindow = ->
+      it "opens a modal window", inject ($modal) ->
+        expect($modal.open).to.have.been.called
 
-      # Then
-      expect($modal.open).to.have.been.called
+      it "opens a modal window with valid options", inject ($modal) ->
+        options = $modal.open.lastCall.args[0]
 
-      options = $modal.open.getCall(0).args[0]
-      expect(options).to.have.property "templateUrl", "templates/dialogs/confirmation.html"
-      expect(options).to.have.property "controller", "ConfirmationDialogCtrl"
+        expect(options).to.have.property "template"
+        expect(options).to.have.property "controller", "ConfirmationDialogCtrl as ctrl"
+
+        expect(options.keyboard).to.be.false
+        expect(options.backdrop).to.eq "static"
+
+    itHasValidConfirmationMessage = (message) ->
+      it "has valid confirmation message", inject ($modal) ->
+        options = $modal.open.lastCall.args[0]
+        expect(options.resolve.options()).to.have.property "message", message
+
+    describe "when arguments are not given", ->
+
+      beforeEach inject (confirmationDialog) ->
+        confirmationDialog.open()
+
+      itOpensModalWindow()
+      itHasValidConfirmationMessage("Are you sure?")
+
+    describe "when the confirmation message is specified", ->
+
+      beforeEach inject (confirmationDialog) ->
+        confirmationDialog.open("Are you really sure?")
+
+      itOpensModalWindow()
+      itHasValidConfirmationMessage("Are you really sure?")
+
+    describe "when the confirmation message is specified as an opton", ->
+
+      beforeEach inject (confirmationDialog) ->
+        confirmationDialog.open(message: "Are you absolutelly really sure?")
+
+      itOpensModalWindow()
+      itHasValidConfirmationMessage("Are you absolutelly really sure?")
+
+    describe "when the options does not contain a massage", ->
+
+      beforeEach inject (confirmationDialog) ->
+        confirmationDialog.open(foo: "bar")
+
+      itOpensModalWindow()
+      itHasValidConfirmationMessage("Are you sure?")

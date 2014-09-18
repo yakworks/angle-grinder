@@ -2,41 +2,39 @@ forms = angular.module("angleGrinder.forms")
 
 class ConfirmationDialogCtrl extends BaseCtrl
   @register forms
-  @inject "$scope", "$modalInstance", "$log", "message"
-
-  initialize: ->
-    @expose @$scope, "message", "close"
+  @inject "$scope", "$modalInstance", "$log", "options"
 
   close: (confirmed) ->
-    @$log.info "Closing confirmation dialog", confirmed
+    @$log.info "[ag] closing confirmation dialog", confirmed
     @$modalInstance.close(confirmed)
 
-forms.run ["$templateCache", ($templateCache) ->
-  $templateCache.put "templates/dialogs/confirmation.html", """
-    <div class="modal-body">{{message}}</div>
+forms.service "confirmationDialog", [
+  "$modal", "$log", ($modal, $log) ->
 
-    <div class="modal-footer">
-      <button class="btn" ng-click="close(false)">Cancel</button>
-      <button class="btn btn-primary" ng-click="close(true)">OK</button>
-    </div>
-  """
+    # Open the confirmation dialog
+    # options - it can be a string or object with the messages
+    #   if th emessage is not specified defalt "Are you sure?" message will be used
+    open: (options = {}) ->
+      options = { message: options } if angular.isString(options)
+
+      # assing default confirmation message
+      options.message ?= "Are you sure?" #unless options?.message
+
+      $log.info "[ag] opening confirmation dialog", options
+
+      return $modal.open
+        keyboard: false # do not close the dialog with ESC key
+        backdrop: "static" # do not close on click outside of the dialog
+
+        controller: "ConfirmationDialogCtrl as ctrl"
+        template: """
+          <div class="modal-body">{{ctrl.options.message}}</div>
+
+          <div class="modal-footer">
+            <button class="btn" ng-click="ctrl.close(false)">Cancel</button>
+            <button class="btn btn-primary" ng-click="ctrl.close(true)">Ok</button>
+          </div>
+        """
+
+        resolve: options: -> options
 ]
-
-class ConfirmationDialog
-  @$inject = ["$modal", "$log"]
-  constructor: (@$modal, @$log) ->
-
-  open: (message = null) ->
-    @$log.info "Opening confirmation dialog, message:", message
-
-    @$modal.open
-      templateUrl: "templates/dialogs/confirmation.html"
-      controller: "ConfirmationDialogCtrl"
-
-      keyboard: false # do not close the dialog with ESC key
-      backdrop: "static" # do not close on click outside of the dialog
-
-      resolve:
-        message: -> if message? then message else "Are you sure?"
-
-forms.service "confirmationDialog", ConfirmationDialog
