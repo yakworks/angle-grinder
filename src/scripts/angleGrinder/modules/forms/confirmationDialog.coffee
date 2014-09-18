@@ -18,7 +18,7 @@ forms.service "confirmationDialog", [
       options = { message: options } if angular.isString(options)
 
       # assing default confirmation message
-      options.message ?= "Are you sure?" #unless options?.message
+      options.message ?= "Are you sure?"
 
       # assign button labels
       options.cancelLabel ?= "Cancel"
