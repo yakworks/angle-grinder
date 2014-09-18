@@ -20,10 +20,14 @@ forms.service "confirmationDialog", [
       # assing default confirmation message
       options.message ?= "Are you sure?" #unless options?.message
 
+      # assign button labels
+      options.cancelLabel ?= "Cancel"
+      options.okLabel ?= "Ok"
+
       $log.info "[ag] opening confirmation dialog", options
 
       return $modal.open
-        keyboard: false # do not close the dialog with ESC key
+        keyboard: false    # do not close the dialog with ESC key
         backdrop: "static" # do not close on click outside of the dialog
 
         controller: "ConfirmationDialogCtrl as ctrl"
@@ -31,8 +35,8 @@ forms.service "confirmationDialog", [
           <div class="modal-body">{{ctrl.options.message}}</div>
 
           <div class="modal-footer">
-            <button class="btn" ng-click="ctrl.close(false)">Cancel</button>
-            <button class="btn btn-primary" ng-click="ctrl.close(true)">Ok</button>
+            <button class="btn" ng-click="ctrl.close(false)">{{ctrl.options.cancelLabel}}</button>
+            <button class="btn btn-primary" ng-click="ctrl.close(true)">{{ctrl.options.okLabel}}</button>
           </div>
         """
 

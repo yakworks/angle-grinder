@@ -48,18 +48,29 @@ describe "module: angleGrinder.forms", ->
         expect($modal.open).to.have.been.called
 
       it "opens a modal window with valid options", inject ($modal) ->
-        options = $modal.open.lastCall.args[0]
+        modalOptions = $modal.open.lastCall.args[0]
 
-        expect(options).to.have.property "template"
-        expect(options).to.have.property "controller", "ConfirmationDialogCtrl as ctrl"
+        expect(modalOptions).to.have.property "template"
+        expect(modalOptions).to.have.property "controller", "ConfirmationDialogCtrl as ctrl"
 
-        expect(options.keyboard).to.be.false
-        expect(options.backdrop).to.eq "static"
+        expect(modalOptions.keyboard).to.be.false
+        expect(modalOptions.backdrop).to.eq "static"
 
     itHasValidConfirmationMessage = (message) ->
       it "has valid confirmation message", inject ($modal) ->
-        options = $modal.open.lastCall.args[0]
-        expect(options.resolve.options()).to.have.property "message", message
+        modalOptions = $modal.open.lastCall.args[0]
+        expect(modalOptions.resolve.options()).to.have.property "message", message
+
+    itHasValidButtonLabels = (labels = {}) ->
+      labels.cancelLabel ?= "Cancel"
+      labels.okLabel ?= "Ok"
+
+      it "has default button labels", inject ($modal) ->
+        modalOptions = $modal.open.lastCall.args[0]
+        options = modalOptions.resolve.options()
+
+        expect(options).to.have.property "cancelLabel", labels.cancelLabel
+        expect(options).to.have.property "okLabel", labels.okLabel
 
     describe "when arguments are not given", ->
 
@@ -68,6 +79,7 @@ describe "module: angleGrinder.forms", ->
 
       itOpensModalWindow()
       itHasValidConfirmationMessage("Are you sure?")
+      itHasValidButtonLabels()
 
     describe "when the confirmation message is specified", ->
 
@@ -76,6 +88,7 @@ describe "module: angleGrinder.forms", ->
 
       itOpensModalWindow()
       itHasValidConfirmationMessage("Are you really sure?")
+      itHasValidButtonLabels()
 
     describe "when the confirmation message is specified as an opton", ->
 
@@ -84,6 +97,7 @@ describe "module: angleGrinder.forms", ->
 
       itOpensModalWindow()
       itHasValidConfirmationMessage("Are you absolutelly really sure?")
+      itHasValidButtonLabels()
 
     describe "when the options does not contain a massage", ->
 
@@ -92,3 +106,31 @@ describe "module: angleGrinder.forms", ->
 
       itOpensModalWindow()
       itHasValidConfirmationMessage("Are you sure?")
+      itHasValidButtonLabels()
+
+    describe "when `cancel` button label is overriden", ->
+
+      beforeEach inject (confirmationDialog) ->
+        confirmationDialog.open(cancelLabel: "No, don't do it!")
+
+      itOpensModalWindow()
+      itHasValidConfirmationMessage("Are you sure?")
+      itHasValidButtonLabels(cancelLabel: "No, don't do it!", okLabel: "Ok")
+
+    describe "when `ok` button label is overriden", ->
+
+      beforeEach inject (confirmationDialog) ->
+        confirmationDialog.open(okLabel: "Yes, I'm sure!")
+
+      itOpensModalWindow()
+      itHasValidConfirmationMessage("Are you sure?")
+      itHasValidButtonLabels(cancelLabel: "Cancel", okLabel: "Yes, I'm sure!")
+
+    describe "when both labels are overriden", ->
+
+      beforeEach inject (confirmationDialog) ->
+        confirmationDialog.open(cancelLabel: "Nooooo", okLabel: "Oh yesss")
+
+      itOpensModalWindow()
+      itHasValidConfirmationMessage("Are you sure?")
+      itHasValidButtonLabels(cancelLabel: "Nooooo", okLabel: "Oh yesss")
