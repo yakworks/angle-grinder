@@ -13,10 +13,10 @@ describe "module: angleGrinder.forms", ->
       $scope = $rootScope.$new()
       ctrl = $controller "ConfirmationDialogCtrl",
         $scope: $scope
-        message: "This is a test!"
+        options: message: "This is a test!"
 
     it "has the message", ->
-      expect($scope.message).to.eq "This is a test!"
+      expect(ctrl.options).to.have.property "message", "This is a test!"
 
     describe "#close", ->
 
@@ -37,19 +37,100 @@ describe "module: angleGrinder.forms", ->
     beforeEach module "ui.bootstrap", ($provide) ->
       $provide.decorator "$modal", ($delegate) ->
         sinon.spy($delegate, "open")
-        $delegate
+        return $delegate
 
       return
 
     beforeEach module "angleGrinder.forms"
 
-    it "displays the confirmation", inject ($modal, confirmationDialog) ->
-      # When
-      confirmationDialog.open()
+    itOpensModalWindow = ->
+      it "opens a modal window", inject ($modal) ->
+        expect($modal.open).to.have.been.called
 
-      # Then
-      expect($modal.open).to.have.been.called
+      it "opens a modal window with valid options", inject ($modal) ->
+        modalOptions = $modal.open.lastCall.args[0]
 
-      options = $modal.open.getCall(0).args[0]
-      expect(options).to.have.property "templateUrl", "templates/dialogs/confirmation.html"
-      expect(options).to.have.property "controller", "ConfirmationDialogCtrl"
+        expect(modalOptions).to.have.property "template"
+        expect(modalOptions).to.have.property "controller", "ConfirmationDialogCtrl as ctrl"
+
+        expect(modalOptions.keyboard).to.be.false
+        expect(modalOptions.backdrop).to.eq "static"
+
+    itHasValidConfirmationMessage = (message) ->
+      it "has valid confirmation message", inject ($modal) ->
+        modalOptions = $modal.open.lastCall.args[0]
+        expect(modalOptions.resolve.options()).to.have.property "message", message
+
+    itHasValidButtonLabels = (labels = {}) ->
+      labels.cancelLabel ?= "Cancel"
+      labels.okLabel ?= "Ok"
+
+      it "has default button labels", inject ($modal) ->
+        modalOptions = $modal.open.lastCall.args[0]
+        options = modalOptions.resolve.options()
+
+        expect(options).to.have.property "cancelLabel", labels.cancelLabel
+        expect(options).to.have.property "okLabel", labels.okLabel
+
+    describe "when arguments are not given", ->
+
+      beforeEach inject (confirmationDialog) ->
+        confirmationDialog.open()
+
+      itOpensModalWindow()
+      itHasValidConfirmationMessage("Are you sure?")
+      itHasValidButtonLabels()
+
+    describe "when the confirmation message is specified", ->
+
+      beforeEach inject (confirmationDialog) ->
+        confirmationDialog.open("Are you really sure?")
+
+      itOpensModalWindow()
+      itHasValidConfirmationMessage("Are you really sure?")
+      itHasValidButtonLabels()
+
+    describe "when the confirmation message is specified as an opton", ->
+
+      beforeEach inject (confirmationDialog) ->
+        confirmationDialog.open(message: "Are you absolutelly really sure?")
+
+      itOpensModalWindow()
+      itHasValidConfirmationMessage("Are you absolutelly really sure?")
+      itHasValidButtonLabels()
+
+    describe "when the options does not contain a massage", ->
+
+      beforeEach inject (confirmationDialog) ->
+        confirmationDialog.open(foo: "bar")
+
+      itOpensModalWindow()
+      itHasValidConfirmationMessage("Are you sure?")
+      itHasValidButtonLabels()
+
+    describe "when `cancel` button label is overriden", ->
+
+      beforeEach inject (confirmationDialog) ->
+        confirmationDialog.open(cancelLabel: "No, don't do it!")
+
+      itOpensModalWindow()
+      itHasValidConfirmationMessage("Are you sure?")
+      itHasValidButtonLabels(cancelLabel: "No, don't do it!", okLabel: "Ok")
+
+    describe "when `ok` button label is overriden", ->
+
+      beforeEach inject (confirmationDialog) ->
+        confirmationDialog.open(okLabel: "Yes, I'm sure!")
+
+      itOpensModalWindow()
+      itHasValidConfirmationMessage("Are you sure?")
+      itHasValidButtonLabels(cancelLabel: "Cancel", okLabel: "Yes, I'm sure!")
+
+    describe "when both labels are overriden", ->
+
+      beforeEach inject (confirmationDialog) ->
+        confirmationDialog.open(cancelLabel: "Nooooo", okLabel: "Oh yesss")
+
+      itOpensModalWindow()
+      itHasValidConfirmationMessage("Are you sure?")
+      itHasValidButtonLabels(cancelLabel: "Nooooo", okLabel: "Oh yesss")
