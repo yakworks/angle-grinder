@@ -1,7 +1,7 @@
-forms = angular.module("angleGrinder.forms")
+app = angular.module("angleGrinder.common")
 
 class NotificationDialogCtrl extends BaseCtrl
-  @register forms
+  @register app
   @inject "$scope", "$modalInstance", "$log", "message"
 
   initialize: ->
@@ -11,7 +11,7 @@ class NotificationDialogCtrl extends BaseCtrl
     @$log.info "Closing notification dialog"
     @$modalInstance.close()
 
-forms.run ["$templateCache", ($templateCache) ->
+app.run ["$templateCache", ($templateCache) ->
   $templateCache.put "templates/dialogs/notification.html", """
     <div class="modal-body">{{message}}</div>
 
@@ -21,7 +21,7 @@ forms.run ["$templateCache", ($templateCache) ->
   """
 ]
 
-class ConfirmationDialog
+class NotificationDialog
   @$inject = ["$modal", "$log"]
   constructor: (@$modal, @$log) ->
 
@@ -37,4 +37,4 @@ class ConfirmationDialog
 
       resolve: message: -> message
 
-forms.service "notificationDialog", ConfirmationDialog
+app.service "notificationDialog", NotificationDialog

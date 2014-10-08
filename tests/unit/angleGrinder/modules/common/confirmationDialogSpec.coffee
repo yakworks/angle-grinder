@@ -1,9 +1,9 @@
-describe "module: angleGrinder.forms", ->
+describe "module: angleGrinder.common", ->
 
   describe "controller: ConfirmationDialogCtrl", ->
 
     beforeEach ->
-      module "angleGrinder.forms",
+      module "angleGrinder.common",
         $modalInstance: close: sinon.stub()
 
     $scope = null

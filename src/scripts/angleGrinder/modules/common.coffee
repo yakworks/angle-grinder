@@ -1,4 +1,6 @@
-common = angular.module("angleGrinder.common", [])
+common = angular.module("angleGrinder.common", [
+  "ui.bootstrap.modal"
+])
 
 # change default locale to use `-` symbol for negative currencies
 common.config ["$localeProvider", "$provide", ($localeProvider, $provide) ->

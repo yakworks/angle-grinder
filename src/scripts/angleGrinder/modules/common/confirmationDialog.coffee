@@ -1,14 +1,14 @@
-forms = angular.module("angleGrinder.forms")
+app = angular.module("angleGrinder.common")
 
 class ConfirmationDialogCtrl extends BaseCtrl
-  @register forms
+  @register app
   @inject "$scope", "$modalInstance", "$log", "options"
 
   close: (confirmed) ->
     @$log.info "[ag] closing confirmation dialog", confirmed
     @$modalInstance.close(confirmed)
 
-forms.service "confirmationDialog", [
+app.service "confirmationDialog", [
   "$modal", "$log", ($modal, $log) ->
 
     # Open the confirmation dialog
