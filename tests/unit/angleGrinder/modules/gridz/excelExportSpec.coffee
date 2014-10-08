@@ -5,7 +5,7 @@ describe "module: angleGrinder.gridz", ->
     beforeEach module "angleGrinder.gridz", ($provide) ->
       $provide.decorator "xlsData", ($delegate) ->
         sinon.spy($delegate)
-        $delegate
+        return $delegate
 
     describe "service: xlsTemplate", ->
 
@@ -39,9 +39,9 @@ describe "module: angleGrinder.gridz", ->
         inject ($window) ->
           decoded = $window.atob(data.match(/^data:application\/vnd\.ms-excel;base64,(.*)/)[1])
           el = angular.element($(decoded)[3])
-        el
+        return el
 
-      it "generats valid xls file heading", inject (xlsData) ->
+      it "generates valid xls file heading", inject (xlsData) ->
         el = decodeXls(xlsData(@gridId, @selectedRows))
 
         expect(el.find("thead th:nth-child(1)").text()).to.contain "id"
@@ -52,7 +52,7 @@ describe "module: angleGrinder.gridz", ->
         expect(el.find("thead th:nth-child(6)").text()).to.contain "Allowance"
         expect(el.find("thead th:nth-child(7)").text()).to.contain "Paid"
 
-      it "generats valid xls file contend", inject (xlsData) ->
+      it "generates valid xls file contend", inject (xlsData) ->
         el = decodeXls(xlsData(@gridId, @selectedRows))
 
         rowEl = el.find("tbody tr:first")
@@ -93,19 +93,28 @@ describe "module: angleGrinder.gridz", ->
 
     # mock `$window.location.href` in order to avoid
     # "Some of your tests did a full page reload!"
-    beforeEach module "ng", ($provide) ->
+    beforeEach module "angleGrinder.gridz", ($provide) ->
       $provide.value "$window", location: {}
+
+      $provide.decorator "notificationDialog", ($delegate) ->
+        sinon.spy($delegate, "open")
+        return $delegate
+
       return
 
     beforeEach module "angleGrinder.gridz"
 
+    selectedRowIds = null
     element = null
 
     beforeEach inject ($injector, $rootScope) ->
       $scope = $rootScope.$new()
 
       # stub the grid instance
-      $scope.grid = users: getXlsDataUri: -> "foo"
+      $scope.grid =
+        users:
+          getXlsDataUri: -> "foo"
+          getSelectedRowIds: -> selectedRowIds
 
       {element, $scope} = compileTemplate """
         <a href="" ag-grid-xls-export="grid.users">
@@ -115,9 +124,30 @@ describe "module: angleGrinder.gridz", ->
 
     describe "on click", ->
 
-      it "does the magic", inject ($window) ->
-        # When
-        element.click()
+      describe "when at least one row is selected", ->
+        before -> selectedRowIds = [1]
 
-        # Then
-        expect($window.location.href).to.eq "foo"
+        it "does the magic", inject ($window) ->
+          # When
+          element.click()
+
+          # Then
+          expect($window.location.href).to.eq "foo"
+
+        it "does not display notification", inject (notificationDialog) ->
+          # When
+          element.click()
+
+          # Then
+          expect(notificationDialog.open).to.not.be.called
+
+      describe "when no rows are selected", ->
+        before -> selectedRowIds = []
+
+        it "displays the notification", inject (notificationDialog) ->
+          # When
+          element.click()
+
+          # Then
+          expect(notificationDialog.open).to.be.called
+          expect(notificationDialog.open).to.be.calledWith("Please select at least one row.")

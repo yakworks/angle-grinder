@@ -108,7 +108,7 @@ gridz.service "xlsData", [
 #     <i class="icon-download-alt"></i> Export to XLS
 #   </a>
 gridz.directive "agGridXlsExport", [
-  "$window", ($window) ->
+  "$window", "notificationDialog", ($window, notificationDialog) ->
     restrict: "A"
     scope: grid: "=agGridXlsExport"
 
@@ -116,6 +116,11 @@ gridz.directive "agGridXlsExport", [
       element.on "click", (event) ->
         event.preventDefault()
 
-        dataUri = scope.grid.getXlsDataUri()
-        $window.location.href = dataUri
+        grid = scope.grid
+
+        if grid.getSelectedRowIds().length isnt 0
+          dataUri = grid.getXlsDataUri()
+          $window.location.href = dataUri
+        else
+          notificationDialog.open("Please select at least one row.")
 ]
