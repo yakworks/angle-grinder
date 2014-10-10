@@ -16,7 +16,7 @@
     "angular-resource": "1.2.22",
     "angular-sanitize": "1.2.22",
     "angular-ui-select2": "~0.0.5",
-    "angular-bootstrap": "0.11.0",
+    "angular-bootstrap": "0.11.2",
     "angular-strap": "0.7.8",
     "modernizr": "~2.8.2",
     "jquery-file-upload": "9.5.4",

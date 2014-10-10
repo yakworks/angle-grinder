@@ -1,0 +1,22 @@
+form[editable-form] div {
+  height: auto;
+  padding: 5px 0;
+}
+
+form[editable-form] .title {
+  display: inline-block;
+  font-weight: bold;
+  padding-top: 5px;
+  vertical-align: top;
+  min-width: 140px;
+}
+
+form[editable-form] .editable {
+  display: inline-block;
+  padding-top: 5px;
+  vertical-align: top;
+}
+
+form[editable-form] select {
+  width: 120px;
+}

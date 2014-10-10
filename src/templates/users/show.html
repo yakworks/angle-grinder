@@ -6,7 +6,6 @@
   </ul>
 </div>
 
-
 <div class="content">
 
   <h2 class="page-header">
@@ -14,6 +13,87 @@
   </h2>
 
   <tabset>
+    <tab>
+      <tab-heading>Editable form</tab-heading>
+
+      <div>
+        <input type="text" ng-model="user.birthday" ag-calendar />
+
+        <form editable-form name="editableForm" onaftersave="update(user)" novalidate="true">
+
+          <div>
+            <span class="title">Login</span>
+            <span editable-text="user.login"
+                  e-name="login"
+                  e-required="true">{{user.login}}</span>
+          </div>
+
+          <div>
+            <span class="title">Name</span>
+            <span editable-text="user.name"
+                  e-name="name"
+                  e-required="true">{{user.name}}</span>
+          </div>
+
+          <div>
+            <span class="title">Birthday</span>
+            <span editable-ag-calendar="user.birthday"
+                  e-ng-required="true"
+                  e-name="birthday">{{user.birthday | date}}</span>
+          </div>
+
+          <fieldset>
+            <legend>Notification</legend>
+
+            <div>
+              <span class="title">Type</span>
+              <span editable-select="user.notificationType"
+                    e-ng-options="t.id as t.text for t in notificationTypes"
+                    e-name="notificationType">{{user.notificationType || 'None'}}</span>
+            </div>
+
+            <div ng-if="(!editableForm.$visible && user.notificationType === 'email') ||
+                        (editableForm.$visible && editableForm.notificationType.$modelValue === 'email')">
+              <span class="title">Notification email</span>
+              <span editable-email="user.notification.email"
+                    e-name="notificationEmail"
+                    e-ng-required="true">{{user.notification.email}}</span>
+            </div>
+
+            <div ng-if="(!editableForm.$visible && user.notificationType === 'fax') ||
+                        (editableForm.$visible && editableForm.notificationType.$modelValue === 'fax')">
+              <span class="title">Notification fax</span>
+              <span editable-text="user.notification.fax"
+                    e-name="notificationFax"
+                    e-ng-required="true"
+                    e-ng-minlength="3" e-ng-maxlength="11">{{user.notification.fax}}</span>
+            </div>
+          </fieldset>
+
+          <div class="buttons">
+            <button type="button" class="btn btn-default"
+                    ng-click="editableForm.$show()"
+                    ng-show="!editableForm.$visible">
+              Edit
+            </button>
+
+            <span ng-show="editableForm.$visible">
+              <button type="submit" class="btn btn-primary"
+                      ng-disabled="editableForm.$invalid || editableForm.$waiting">
+                Save
+              </button>
+
+              <button type="button" class="btn btn-default"
+                      ng-disabled="editableForm.$waiting"
+                      ng-click="editableForm.$cancel()">
+                Cancel
+              </button>
+            </span>
+          </div>
+        </form>
+      </div>
+    </tab>
+
     <tab>
       <tab-heading>User details</tab-heading>
 
