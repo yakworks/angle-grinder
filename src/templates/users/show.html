@@ -34,6 +34,13 @@
           </div>
 
           <div>
+            <span class="title">Tags</span>
+            <span editable-select2="user.tags"
+                  e-ui-select2="roleSelect2Options"
+                  e-name="tags">{{user.tags}}</span>
+          </div>
+
+          <div>
             <span class="title">Birthday</span>
             <span editable-datepicker="user.birthday"
                   e-ng-required="true"
@@ -57,6 +64,7 @@
                     e-name="notificationType">{{user.notificationType || 'None'}}</span>
             </div>
 
+            <!-- TODO figure out how to dry it -->
             <div ng-if="(!editableForm.$visible && user.notificationType === 'email') ||
                         (editableForm.$visible && editableForm.notificationType.$modelValue === 'email')">
               <span class="title">Notification email</span>

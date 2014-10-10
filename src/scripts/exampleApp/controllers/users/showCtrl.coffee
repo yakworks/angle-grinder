@@ -27,6 +27,16 @@ app.directive "editableDatepicker", [
           @scope.opened = true
 ]
 
+app.directive "editableSelect2", [
+  "editableDirectiveFactory", (editableDirectiveFactory) ->
+    editableDirectiveFactory
+      directiveName: "editableSelect2"
+
+      inputTpl: """
+        <input type="hidden" ng-model="$data" />
+      """
+]
+
 class ShowCtrl extends BaseCtrl
 
   @register app, "users.ShowCtrl"
@@ -34,7 +44,6 @@ class ShowCtrl extends BaseCtrl
 
   initialize: ->
     @expose @$scope, "user", "update", "delete"
-
 
     # generate the sample data
     sampleData = @sampleData.generate(100)
@@ -46,12 +55,19 @@ class ShowCtrl extends BaseCtrl
       multiselect: false
       actionPopup: false
 
+    @user.tags ?= ["user", "moderator"]
+
+    @$scope.roleSelect2Options =
+      "multiple": true
+      "simple_tags": true
+      "tags": ["admin", "user", "guest", "moderator"]
+
     @user.notificationType ?= ""
 
     @$scope.notificationTypes = [
-      { id: '', text: 'None' }
-      { id: 'email', text: 'Email' }
-      { id: 'fax', text: 'Fax' }
+      { id: "", text: "None" }
+      { id: "email", text: "Email" }
+      { id: "fax", text: "Fax" }
     ]
 
   update: (user) ->
