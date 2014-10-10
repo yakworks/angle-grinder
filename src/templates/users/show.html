@@ -17,6 +17,8 @@
       <tab-heading>Editable form</tab-heading>
 
       <div>
+        <!-- TODO better validations -->
+        <!-- TODO server side validations -->
         <form editable-form name="editableForm" onaftersave="update(user)" novalidate="true">
 
           <div>
@@ -38,6 +40,13 @@
             <span editable-select2="user.tags"
                   e-ui-select2="roleSelect2Options"
                   e-name="tags">{{user.tags}}</span>
+          </div>
+
+          <div>
+            <span class="title">Parent</span>
+            <span editable-select2="user.parent"
+                  e-ui-select2="parentSelect2Options"
+                  e-name="tags">{{user.parent.name}}</span>
           </div>
 
           <div>

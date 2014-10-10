@@ -40,7 +40,7 @@ app.directive "editableSelect2", [
 class ShowCtrl extends BaseCtrl
 
   @register app, "users.ShowCtrl"
-  @inject "$scope", "$location", "exampleGrid", "sampleData", "user"
+  @inject "$scope", "$location", "select2Options", "exampleGrid", "sampleData", "user"
 
   initialize: ->
     @expose @$scope, "user", "update", "delete"
@@ -56,6 +56,15 @@ class ShowCtrl extends BaseCtrl
       actionPopup: false
 
     @user.tags ?= ["user", "moderator"]
+
+    # options for the parent user select
+    @$scope.parentSelect2Options = @select2Options({
+      ajax: url: "/api/users"
+
+      # formatters for result and selection
+      formatResult: (user) -> "#{user.name} - #{user.info.email}"
+      formatSelection: (user) -> "#{user.name} - #{user.info.email}"
+    })
 
     @$scope.roleSelect2Options =
       "multiple": true
