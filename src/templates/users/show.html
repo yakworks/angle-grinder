@@ -17,8 +17,6 @@
       <tab-heading>Editable form</tab-heading>
 
       <div>
-        <input type="text" ng-model="user.birthday" ag-calendar />
-
         <form editable-form name="editableForm" onaftersave="update(user)" novalidate="true">
 
           <div>
@@ -37,9 +35,16 @@
 
           <div>
             <span class="title">Birthday</span>
-            <span editable-ag-calendar="user.birthday"
+            <span editable-datepicker="user.birthday"
                   e-ng-required="true"
                   e-name="birthday">{{user.birthday | date}}</span>
+          </div>
+
+          <div>
+            <span class="title">Death</span>
+            <span editable-datepicker="user.death"
+                  e-ng-required="false"
+                  e-name="death">{{user.death | date}}</span>
           </div>
 
           <fieldset>

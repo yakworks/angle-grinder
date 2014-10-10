@@ -1,52 +1,30 @@
 app = angular.module "exampleApp"
 
-app.directive "agCalendar", ["$compile", ($compile) ->
-  restrict: "A"
-
-  scope: true
-  transclude: "element"
-  replace: true
-
-  link: (scope, element, attrs, controller, transclude) ->
-
-    transclude scope, (clone) ->
-      clone.attr("datepicker-popup", "MM/dd/yyyy")
-      clone.attr("is-open", "opened")
-      clone.removeAttr("ag-calendar")
-
-      $compile(clone) scope, (clone) ->
-        element.prepend(clone)
-
-    scope.opened = false
-
-    scope.open = ($event) ->
-      $event.preventDefault()
-      $event.stopPropagation()
-      scope.opened = true
-
-  template: """
-    <div class="input-prepend">
-      <button type="button" class="btn btn-default" ng-click="open($event)">
-        <i class="icon-calendar"></i>
-      </button>
-    </div>
-  """
-]
-
-# x-editable wrapper for calendar
-app.directive "editableAgCalendar", [
+# x-editable wrapper for date picker
+app.directive "editableDatepicker", [
   "editableDirectiveFactory", (editableDirectiveFactory) ->
     editableDirectiveFactory
-      directiveName: "editableAgCalendar"
+      directiveName: "editableDatepicker"
+
       inputTpl: """
-        <input type="text" ng-change="change($data)" ag-calendar>
+        <div class="input-prepend">
+          <input type="text" ng-model="$data" datepicker-popup="MM/dd/yyyy" is-open="opened">
+          <button type="button" class="btn btn-default" ng-click="open($event)">
+            <i class="icon-calendar"></i>
+          </button>
+        </div>
       """
 
       init: ->
         @parent.init()
 
-        # workaround for ag-calendar new scope
-        @scope.change = ($data) => @scope.$data = $data
+        @scope.opened = false
+
+        @scope.open = ($event) =>
+          $event.preventDefault()
+          $event.stopPropagation()
+
+          @scope.opened = true
 ]
 
 class ShowCtrl extends BaseCtrl
