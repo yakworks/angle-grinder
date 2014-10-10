@@ -14,6 +14,10 @@ module.exports = ->
     tasks: ["ngtemplates:exampleApp"]
 
   css:
+    files: ["<%= appConfig.app %>/styles/**/*.css"]
+    tasks: ["copy:dev"]
+
+  less:
     files: ["<%= appConfig.app %>/styles/**/*.less"]
     tasks: ["less"]
 
