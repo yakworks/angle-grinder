@@ -8,7 +8,7 @@ form[editable-form] .title {
   font-weight: bold;
   padding-top: 5px;
   vertical-align: top;
-  min-width: 140px;
+  min-width: 120px;
 }
 
 form[editable-form] .editable {
@@ -20,3 +20,12 @@ form[editable-form] .editable {
 form[editable-form] select {
   width: 120px;
 }
+
+form[editable-form] .editable-error {
+  color: #b94a48;
+}
+
+form[editable-form] input.ng-invalid {
+  border-color: #b94a48;
+}
+

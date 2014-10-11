@@ -17,14 +17,16 @@
       <tab-heading>Editable form</tab-heading>
 
       <div>
-        <!-- TODO better validations -->
         <!-- TODO server side validations -->
-        <form editable-form name="editableForm" onaftersave="update(user)" novalidate="true">
+        <form editable-form name="editableForm" onaftersave="update(user, editableForm)" novalidate="true">
 
           <div>
             <span class="title">Login</span>
             <span editable-text="user.login"
                   e-name="login"
+                  e-editable-validation-errors
+                  e-ng-minlength="3"
+                  e-ng-maxlength="8"
                   e-required="true">{{user.login}}</span>
           </div>
 
@@ -32,6 +34,7 @@
             <span class="title">Name</span>
             <span editable-text="user.name"
                   e-name="name"
+                  e-editable-validation-errors
                   e-required="true">{{user.name}}</span>
           </div>
 
@@ -52,6 +55,7 @@
           <div>
             <span class="title">Birthday</span>
             <span editable-datepicker="user.birthday"
+                  e-editable-validation-errors
                   e-ng-required="true"
                   e-name="birthday">{{user.birthday | date}}</span>
           </div>
@@ -59,7 +63,6 @@
           <div>
             <span class="title">Death</span>
             <span editable-datepicker="user.death"
-                  e-ng-required="false"
                   e-name="death">{{user.death | date}}</span>
           </div>
 
@@ -73,20 +76,19 @@
                     e-name="notificationType">{{user.notificationType || 'None'}}</span>
             </div>
 
-            <!-- TODO figure out how to dry it -->
-            <div ng-if="(!editableForm.$visible && user.notificationType === 'email') ||
-                        (editableForm.$visible && editableForm.notificationType.$modelValue === 'email')">
-              <span class="title">Notification email</span>
+            <div ng-if="hasNotification(editableForm, user, 'email')">
+              <span class="title">Email</span>
               <span editable-email="user.notification.email"
                     e-name="notificationEmail"
+                    e-editable-validation-errors
                     e-ng-required="true">{{user.notification.email}}</span>
             </div>
 
-            <div ng-if="(!editableForm.$visible && user.notificationType === 'fax') ||
-                        (editableForm.$visible && editableForm.notificationType.$modelValue === 'fax')">
-              <span class="title">Notification fax</span>
+            <div ng-if="hasNotification(editableForm, user, 'fax')">
+              <span class="title">Fax</span>
               <span editable-text="user.notification.fax"
                     e-name="notificationFax"
+                    e-editable-validation-errors
                     e-ng-required="true"
                     e-ng-minlength="3" e-ng-maxlength="11">{{user.notification.fax}}</span>
             </div>
@@ -95,11 +97,11 @@
           <div class="buttons">
             <button type="button" class="btn btn-default"
                     ng-click="editableForm.$show()"
-                    ng-show="!editableForm.$visible">
+                    ng-if="!editableForm.$visible">
               Edit
             </button>
 
-            <span ng-show="editableForm.$visible">
+            <span ng-if="editableForm.$visible">
               <button type="submit" class="btn btn-primary"
                       ng-disabled="editableForm.$invalid || editableForm.$waiting">
                 Save

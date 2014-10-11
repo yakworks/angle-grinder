@@ -1,49 +1,10 @@
-app = angular.module "exampleApp"
-
-# x-editable wrapper for date picker
-app.directive "editableDatepicker", [
-  "editableDirectiveFactory", (editableDirectiveFactory) ->
-    editableDirectiveFactory
-      directiveName: "editableDatepicker"
-
-      inputTpl: """
-        <div class="input-prepend">
-          <input type="text" ng-model="$data" datepicker-popup="MM/dd/yyyy" is-open="opened">
-          <button type="button" class="btn btn-default" ng-click="open($event)">
-            <i class="icon-calendar"></i>
-          </button>
-        </div>
-      """
-
-      init: ->
-        @parent.init()
-
-        @scope.opened = false
-
-        @scope.open = ($event) =>
-          $event.preventDefault()
-          $event.stopPropagation()
-
-          @scope.opened = true
-]
-
-app.directive "editableSelect2", [
-  "editableDirectiveFactory", (editableDirectiveFactory) ->
-    editableDirectiveFactory
-      directiveName: "editableSelect2"
-
-      inputTpl: """
-        <input type="hidden" ng-model="$data" />
-      """
-]
-
 class ShowCtrl extends BaseCtrl
 
-  @register app, "users.ShowCtrl"
+  @register "exampleApp", "users.ShowCtrl"
   @inject "$scope", "$location", "select2Options", "exampleGrid", "sampleData", "user"
 
   initialize: ->
-    @expose @$scope, "user", "update", "delete"
+    @expose @$scope, "user", "hasNotification", "update", "delete"
 
     # generate the sample data
     sampleData = @sampleData.generate(100)
@@ -79,8 +40,21 @@ class ShowCtrl extends BaseCtrl
       { id: "fax", text: "Fax" }
     ]
 
-  update: (user) ->
-    user.$update()
+  hasNotification: (form, user, type) ->
+    if form.$visible
+      return form.notificationType.$modelValue is type
+    else
+      return user.notificationType is type
+
+  update: (user, form) ->
+    promise = user.$update()
+    promise.catch (response) ->
+      # handle server side errors
+      if response.status is 422 and angular.isObject(response.data.errors?.user)
+        for field, message of response.data.errors.user
+          form.$setError(field, message)
+
+    return promise
 
   delete: (user) ->
     promise = user.delete().$promise
