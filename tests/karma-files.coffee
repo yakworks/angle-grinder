@@ -16,6 +16,7 @@ module.exports =
     "components/bower/select2/select2.js"
     "components/bower/angular-ui-select2/src/select2.js"
     "components/bower/angular-bootstrap/ui-bootstrap-tpls.js"
+    "components/bower/angular-xeditable/dist/js/xeditable.js"
     "components/bower/jquery-file-upload/js/jquery.fileupload-angular.js"
     "components/bower/bower-angular-placeholders/angular-placeholders.js"
 

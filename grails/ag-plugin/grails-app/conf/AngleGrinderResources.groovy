@@ -26,8 +26,13 @@ modules = {
         resource url: [plugin: plugin, dir: "${dist}/scripts", file: "bootstrap-extras.min.js"]
     }
 
+    xeditable {
+      resource url: [plugin: plugin, dir: "${dist}/styles", file: "angular.xeditable.min.css"]
+      resource url: [plugin: plugin, dir: "${dist}/scripts", file: "angular.xeditable.min.js"]
+    }
+
     vendor {
-        dependsOn "jquery,lodash,angularjsAll,bootstrap"
+        dependsOn "jquery,lodash,angularjsAll,bootstrap,xeditable"
     }
 
     angleGrinder {

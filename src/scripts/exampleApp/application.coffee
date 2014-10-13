@@ -4,7 +4,6 @@ app = angular.module "exampleApp", [
   "ngAnimate"
   "ngRoute"
 
-  "xeditable"
   "blueimp.fileupload"
   "placeholders.txt"
 

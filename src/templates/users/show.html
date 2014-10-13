@@ -13,18 +13,16 @@
   </h2>
 
   <tabset>
-    <tab>
+    <tab ng-controller="users.editableFormCtrl">
       <tab-heading>Editable form</tab-heading>
 
       <div>
-        <!-- TODO server side validations -->
-        <form editable-form name="editableForm" onaftersave="update(user, editableForm)" novalidate="true">
+        <form editable-form name="userForm" onaftersave="update(user, userForm)" novalidate="true">
 
           <div>
             <span class="title">Login</span>
             <span editable-text="user.login"
                   e-name="login"
-                  e-editable-validation-errors
                   e-ng-minlength="3"
                   e-ng-maxlength="8"
                   e-required="true">{{user.login}}</span>
@@ -34,28 +32,26 @@
             <span class="title">Name</span>
             <span editable-text="user.name"
                   e-name="name"
-                  e-editable-validation-errors
                   e-required="true">{{user.name}}</span>
           </div>
 
           <div>
             <span class="title">Tags</span>
             <span editable-select2="user.tags"
-                  e-ui-select2="roleSelect2Options"
+                  e-ui-select2="roleSelectOptions"
                   e-name="tags">{{user.tags}}</span>
           </div>
 
           <div>
             <span class="title">Parent</span>
             <span editable-select2="user.parent"
-                  e-ui-select2="parentSelect2Options"
+                  e-ui-select2="parentSelectOptions"
                   e-name="tags">{{user.parent.name}}</span>
           </div>
 
           <div>
             <span class="title">Birthday</span>
             <span editable-datepicker="user.birthday"
-                  e-editable-validation-errors
                   e-ng-required="true"
                   e-name="birthday">{{user.birthday | date}}</span>
           </div>
@@ -76,40 +72,61 @@
                     e-name="notificationType">{{user.notificationType || 'None'}}</span>
             </div>
 
-            <div ng-if="hasNotification(editableForm, user, 'email')">
+            <div ng-if="hasNotification(userForm, user, 'email')">
               <span class="title">Email</span>
               <span editable-email="user.notification.email"
                     e-name="notificationEmail"
-                    e-editable-validation-errors
                     e-ng-required="true">{{user.notification.email}}</span>
             </div>
 
-            <div ng-if="hasNotification(editableForm, user, 'fax')">
+            <div ng-if="hasNotification(userForm, user, 'fax')">
               <span class="title">Fax</span>
               <span editable-text="user.notification.fax"
                     e-name="notificationFax"
-                    e-editable-validation-errors
                     e-ng-required="true"
                     e-ng-minlength="3" e-ng-maxlength="11">{{user.notification.fax}}</span>
             </div>
+
+            <div ng-if="hasNotification(userForm, user, 'paper')">
+              <div>
+                <span class="title">Address 1</span>
+                <span editable-text="user.notification.addressLine1"
+                      e-name="notificationAddressLine1"
+                      e-ng-required="true">{{user.notification.addressLine1}}</span>
+              </div>
+
+              <div>
+                <span class="title">Address 2</span>
+                <span editable-text="user.notification.addressLine2"
+                      e-name="notificationAddressLine2">{{user.notification.addressLine2}}</span>
+              </div>
+
+              <div>
+                <span class="title">City</span>
+                <span editable-text="user.notification.city"
+                      e-name="notificationCity">{{user.notification.city}}</span>
+              </div>
+            </div>
           </fieldset>
+
+          <!--TODO create a directive for common buttons-->
 
           <div class="buttons">
             <button type="button" class="btn btn-default"
-                    ng-click="editableForm.$show()"
-                    ng-if="!editableForm.$visible">
+                    ng-click="userForm.$show()"
+                    ng-if="!userForm.$visible">
               Edit
             </button>
 
-            <span ng-if="editableForm.$visible">
+            <span ng-if="userForm.$visible">
               <button type="submit" class="btn btn-primary"
-                      ng-disabled="editableForm.$invalid || editableForm.$waiting">
+                      ng-disabled="userForm.$invalid || userForm.$waiting">
                 Save
               </button>
 
               <button type="button" class="btn btn-default"
-                      ng-disabled="editableForm.$waiting"
-                      ng-click="editableForm.$cancel()">
+                      ng-disabled="userForm.$waiting"
+                      ng-click="userForm.$cancel()">
                 Cancel
               </button>
             </span>

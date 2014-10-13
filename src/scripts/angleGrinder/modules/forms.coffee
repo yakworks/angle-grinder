@@ -22,6 +22,7 @@ angular.module("ui.bootstrap.datepicker").config [
 
 forms = angular.module("angleGrinder.forms", [
   "ui.bootstrap"
+  "xeditable"
   "angleGrinder.common"
 ])
 
@@ -59,7 +60,7 @@ forms.run [
         </div>
       """
 
-    # Override hrml templates for the angular-ui/bootstrap datepicker
+    # Override html templates for the angular-ui/bootstrap datepicker
 
     $templateCache.put "template/datepicker/day.html",
       """

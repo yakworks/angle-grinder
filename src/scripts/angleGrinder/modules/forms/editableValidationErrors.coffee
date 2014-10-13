@@ -1,30 +1,44 @@
 forms = angular.module("angleGrinder.forms")
 
 # TODO spec it
-# displays validation messages for editable inputs
-forms.directive "editableValidationErrors", [
-  "validationMessages", (validationMessages) ->
-    restrict: "A"
-    require: ["^form", "ngModel"]
+# Decorates all editable inputs with mechanism for displaying validation errors
+forms.config ["$provide", ($provide) ->
+  $provide.decorator "editableDirectiveFactory", [
+    "$delegate", "validationMessages", ($delegate, validationMessages) ->
 
-    link: (scope, element, attrs, ctrl) ->
-      form = ctrl[0]
-      model = ctrl[1]
+      # collect error messages for the given model
+      errorsFor = (model) ->
+        callback = (result, invalid, error) ->
+          result.push validationMessages[error] if invalid
+          return result
 
-      value = -> model.$viewValue
-      scope.$watch value, ->
-        # set errors
-        if model.$invalid
+        return _.reduce(model.$error, callback, []).join(", ")
 
-          # collect error messages
-          callback = (result, invalid, error) ->
-            result.push validationMessages[error] if invalid
-            return result
+      return ->
+        directive = $delegate.apply(this, arguments)
+        link = directive.link
 
-          messages = _.reduce(model.$error, callback, [])
-          form.$setError(attrs.name, messages.join(", "))
+        directive.compile = (element, attrs) ->
+          return (scope, element, attrs, ctrl) ->
+            link.apply(this, arguments)
 
-          # clear errors
-        else
-          form.$setError(attrs.name, "")
+            form = ctrl[1]
+            name = attrs.eName
+
+            # watch for model validity
+            # and display validation errors if necessary
+            if form? and name?
+              viewValue = -> form[name]?.$viewValue
+              scope.$watch viewValue, ->
+                model = form[name]
+                return unless model?
+
+                if model.$invalid
+                  form.$setError(name, errorsFor(model))
+
+                if model.$valid
+                  form.$setError(name, "")
+
+        return directive
+  ]
 ]
