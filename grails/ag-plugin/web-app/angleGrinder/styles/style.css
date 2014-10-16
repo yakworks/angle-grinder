@@ -3,10 +3,10 @@ li.spinner {
 }
 
 li.spinner i.spin:before {
-    content: url('../angleGrinder/img/ajax-loader.gif');
+    content: url('../img/ajax-loader.gif');
 }
 
 /* Loading spinner for lazy tabs */
 .nav-tabs li.loading a:after {
-  content: url('../angleGrinder/img/ajax-loader.gif');
+  content: url('../img/ajax-loader.gif');
 }
