@@ -8,7 +8,7 @@ form[editable-form] .title {
   font-weight: bold;
   padding-top: 5px;
   vertical-align: top;
-  min-width: 120px;
+  min-width: 130px;
 }
 
 form[editable-form] .editable {
@@ -18,7 +18,11 @@ form[editable-form] .editable {
 }
 
 form[editable-form] select {
-  width: 120px;
+  width: 160px;
+}
+
+form[editable-form] input {
+  width: 160px;
 }
 
 form[editable-form] .editable-error {

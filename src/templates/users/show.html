@@ -9,7 +9,7 @@
 <div class="content">
 
   <h2 class="page-header">
-    {{user.name}}&lt;{{user.info.email}}&gt;
+    {{user.login}}&lt;{{user.info.email}}&gt;
   </h2>
 
   <tabset>
@@ -17,7 +17,8 @@
       <tab-heading>Editable form</tab-heading>
 
       <div>
-        <form editable-form name="userForm" onaftersave="update(user, userForm)" novalidate="true">
+        <form editable-form name="userForm" onaftersave="update(user, userForm)"
+              novalidate="true">
 
           <div>
             <span class="title">Login</span>
@@ -36,17 +37,23 @@
           </div>
 
           <div>
-            <span class="title">Tags</span>
-            <span editable-select2="user.tags"
-                  e-ui-select2="roleSelectOptions"
-                  e-name="tags">{{user.tags}}</span>
+            <span class="title">Roles</span>
+            <span editable-custom="user.roles">{{user.roles}}</span>
+            <div editable-custom-template>
+              <select name="role"
+                      ng-model="$data"
+                      ui-select2="{closeOnSelect: false, width: 'element'}"
+                      multiple="true">
+                <option ng-repeat="role in roles" value="{{role.id}}">{{role.name}}</option>
+              </select>
+            </div>
           </div>
 
           <div>
             <span class="title">Parent</span>
             <span editable-select2="user.parent"
                   e-ui-select2="parentSelectOptions"
-                  e-name="tags">{{user.parent.name}}</span>
+                  e-name="parent">{{user.parent.name}}</span>
           </div>
 
           <div>
@@ -109,28 +116,7 @@
             </div>
           </fieldset>
 
-          <!--TODO create a directive for common buttons-->
-
-          <div class="buttons">
-            <button type="button" class="btn btn-default"
-                    ng-click="userForm.$show()"
-                    ng-if="!userForm.$visible">
-              Edit
-            </button>
-
-            <span ng-if="userForm.$visible">
-              <button type="submit" class="btn btn-primary"
-                      ng-disabled="userForm.$invalid || userForm.$waiting">
-                Save
-              </button>
-
-              <button type="button" class="btn btn-default"
-                      ng-disabled="userForm.$waiting"
-                      ng-click="userForm.$cancel()">
-                Cancel
-              </button>
-            </span>
-          </div>
+          <div editable-form-buttons="userForm"></div>
         </form>
       </div>
     </tab>
