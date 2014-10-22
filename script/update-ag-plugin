@@ -1,13 +1,6 @@
 #!/bin/bash
 
-echo "Number of arguments is $#"
-
 CURRENT_DIR=`pwd`
-if [ "$#" -eq 1 ]; then
-  CURRENT_DIR = $1
-  echo "Running 'update-ag-plugin' from grails with ANGLE_GRINDER_DIR=${CURRENT_DIR}"
-fi
-
 ANGLE_GRINDER_DIR=$CURRENT_DIR
 
 if [ ! -d "$ANGLE_GRINDER_DIR" ]; then
