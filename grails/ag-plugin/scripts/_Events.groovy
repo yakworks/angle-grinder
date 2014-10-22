@@ -11,6 +11,7 @@ eventCompileStart = {
 	File scripts = new File(angleGrinderDir,'script')
 	File updateAgPluginScript = new File(scripts, 'update-ag-plugin')
 	println "Executing script ${updateAgPluginScript.absolutePath}"
+	// FIXME get this script's output without using --verbose
 	ant.exec(executable: updateAgPluginScript.absolutePath, dir: angleGrinderDir.absolutePath)
 	println "...done."
 }
