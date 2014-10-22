@@ -10,5 +10,7 @@ eventCompileStart = {
 	println "ANGLE_GRINDER_DIR=${angleGrinderDir.absolutePath}"
 	File scripts = new File(angleGrinderDir,'script')
 	File updateAgPluginScript = new File(scripts, 'update-ag-plugin')
+	println "Executing script ${updateAgPluginScript.absolutePath}"
 	ant.exec(executable: updateAgPluginScript.absolutePath, dir: angleGrinderDir.absolutePath)
+	println "...done."
 }
