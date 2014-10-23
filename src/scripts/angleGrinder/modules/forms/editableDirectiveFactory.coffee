@@ -1,12 +1,12 @@
 forms = angular.module("angleGrinder.forms")
 
-# TODO spec it
-# Decorates all editable inputs with mechanism for displaying validation errors
+# Decorates all editable inputs with mechanism
+# for displaying validation errors.
 forms.config ["$provide", ($provide) ->
   $provide.decorator "editableDirectiveFactory", [
     "$delegate", "validationMessages", ($delegate, validationMessages) ->
 
-      # collect error messages for the given model
+      # collect all error messages for the given model
       errorsFor = (model) ->
         callback = (result, invalid, error) ->
           result.push validationMessages[error] if invalid
@@ -26,17 +26,16 @@ forms.config ["$provide", ($provide) ->
             name = attrs.eName
 
             # watch for model validity
-            # and display validation errors if necessary
+            # and display errors if necessary
             if form? and name?
               viewValue = -> form[name]?.$viewValue
               scope.$watch viewValue, ->
                 model = form[name]
-                return unless model?
 
-                if model.$invalid
+                if model?.$invalid
                   form.$setError(name, errorsFor(model))
 
-                if model.$valid
+                if model?.$valid
                   form.$setError(name, "")
 
         return directive
