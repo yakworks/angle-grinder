@@ -22,3 +22,6 @@ dist
 # Ignore tmp directory
 tmp
 .tmp
+
+# Ignore grails plugin build
+grails/ag-plugin/web-app/angleGrinder
