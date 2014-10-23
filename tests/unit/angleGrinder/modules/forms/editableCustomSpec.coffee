@@ -11,9 +11,9 @@ describe "module: angleGrinder.forms", ->
       $scope = $rootScope.$new()
 
       $scope.roles = [
-        { id: "guest", name: "Guest" }
+        { id: "guest",     name: "Guest" }
         { id: "moderator", name: "Moderator" }
-        { id: "admin", name: "Admin" }
+        { id: "admin",     name: "Admin" }
       ]
       $scope.user = role: "guest"
 

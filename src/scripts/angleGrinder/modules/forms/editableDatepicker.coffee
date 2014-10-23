@@ -1,6 +1,5 @@
 forms = angular.module("angleGrinder.forms")
 
-# TODO spec it
 # x-editable wrapper for date picker with calendar button
 forms.directive "editableDatepicker", [
   "editableDirectiveFactory", (editableDirectiveFactory) ->
