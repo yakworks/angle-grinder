@@ -1,0 +1,34 @@
+form[editable-form] div {
+  height: auto;
+  padding: 5px 0;
+}
+
+form[editable-form] .title {
+  display: inline-block;
+  font-weight: bold;
+  padding-top: 5px;
+  vertical-align: top;
+  min-width: 130px;
+}
+
+form[editable-form] .editable {
+  display: inline-block;
+  padding-top: 5px;
+  vertical-align: top;
+}
+
+form[editable-form] select {
+  width: 160px;
+}
+
+form[editable-form] input {
+  width: 160px;
+}
+
+form[editable-form] .editable-error {
+  color: #b94a48;
+}
+
+form[editable-form] input.ng-invalid {
+  border-color: #b94a48;
+}

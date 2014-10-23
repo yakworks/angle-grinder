@@ -6,14 +6,121 @@
   </ul>
 </div>
 
-
 <div class="content">
 
   <h2 class="page-header">
-    {{user.name}}&lt;{{user.info.email}}&gt;
+    {{user.login}}&lt;{{user.info.email}}&gt;
   </h2>
 
   <tabset>
+    <tab ng-controller="users.editableFormCtrl">
+      <tab-heading>Editable form</tab-heading>
+
+      <div>
+        <form editable-form name="userForm" onaftersave="update(user, userForm)"
+              novalidate="true">
+
+          <div>
+            <span class="title">Login</span>
+            <span editable-text="user.login"
+                  e-name="login"
+                  e-ng-minlength="3"
+                  e-ng-maxlength="8"
+                  e-required="true">{{user.login}}</span>
+          </div>
+
+          <div>
+            <span class="title">Name</span>
+            <span editable-text="user.name"
+                  e-name="name"
+                  e-required="true">{{user.name}}</span>
+          </div>
+
+          <div>
+            <span class="title">Roles</span>
+            <span editable-custom="user.roles">{{user.roles}}</span>
+            <div editable-custom-template>
+              <select name="role"
+                      ng-model="$data"
+                      ui-select2="{closeOnSelect: false, width: 'element'}"
+                      multiple="true">
+                <option ng-repeat="role in roles" value="{{role.id}}">{{role.name}}</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <span class="title">Parent</span>
+            <span editable-select2="user.parent"
+                  e-ui-select2="parentSelectOptions"
+                  e-name="parent">{{user.parent.name}}</span>
+          </div>
+
+          <div>
+            <span class="title">Birthday</span>
+            <span editable-datepicker="user.birthday"
+                  e-ng-required="true"
+                  e-name="birthday">{{user.birthday | date}}</span>
+          </div>
+
+          <div>
+            <span class="title">Death</span>
+            <span editable-datepicker="user.death"
+                  e-name="death">{{user.death | date}}</span>
+          </div>
+
+          <fieldset>
+            <legend>Notification</legend>
+
+            <div>
+              <span class="title">Type</span>
+              <span editable-select="user.notificationType"
+                    e-ng-options="t.id as t.text for t in notificationTypes"
+                    e-name="notificationType">{{user.notificationType || 'None'}}</span>
+            </div>
+
+            <div ng-if="hasNotification(userForm, user, 'email')">
+              <span class="title">Email</span>
+              <span editable-email="user.notification.email"
+                    e-name="notificationEmail"
+                    e-ng-required="true">{{user.notification.email}}</span>
+            </div>
+
+            <div ng-if="hasNotification(userForm, user, 'fax')">
+              <span class="title">Fax</span>
+              <span editable-text="user.notification.fax"
+                    e-name="notificationFax"
+                    e-ng-required="true"
+                    e-ng-minlength="3" e-ng-maxlength="11">{{user.notification.fax}}</span>
+            </div>
+
+            <div ng-if="hasNotification(userForm, user, 'paper')">
+              <div>
+                <span class="title">Address 1</span>
+                <span editable-text="user.notification.addressLine1"
+                      e-name="notificationAddressLine1"
+                      e-ng-required="true">{{user.notification.addressLine1}}</span>
+              </div>
+
+              <div>
+                <span class="title">Address 2</span>
+                <span editable-text="user.notification.addressLine2"
+                      e-name="notificationAddressLine2">{{user.notification.addressLine2}}</span>
+              </div>
+
+              <div>
+                <span class="title">City</span>
+                <span editable-text="user.notification.city"
+                      e-name="notificationCity">{{user.notification.city}}</span>
+              </div>
+            </div>
+          </fieldset>
+
+          <div editable-form-buttons="userForm"></div>
+        </form>
+      </div>
+    </tab>
+
     <tab>
       <tab-heading>User details</tab-heading>
 
