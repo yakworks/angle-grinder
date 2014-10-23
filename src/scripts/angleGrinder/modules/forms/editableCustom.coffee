@@ -1,6 +1,5 @@
 app = angular.module("angleGrinder.forms")
 
-# TODO spec this directive
 # Ability to provide custom template directly in the DOM
 app.directive "editableCustom", [
   "editableDirectiveFactory", (editableDirectiveFactory) ->
