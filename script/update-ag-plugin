@@ -32,7 +32,7 @@ if [ ! -d "$OUTPUT_DIRECTORY" ]; then
 fi
 
 cd "$OUTPUT_DIRECTORY"
-ls | grep -v .gitkeep | xargs rm -rf
+git ls-files --others | xargs rm -rf
 
 # Update sources and install all required components
 cd $ANGLE_GRINDER_DIR
