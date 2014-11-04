@@ -1,18 +1,18 @@
 <div class="well">
   <form name="searchForm" ag-search-form="usersGrid"
-        class="form-horizontal form-multi-column no-margin">
+        class="form-horizontal form-multi-column">
 
-    <div class="row-fluid">
-      <div class="control-group span6">
+    <div class="row">
+      <div class="form-group col-md-6">
         <label class="control-label">Name</label>
-        <div class="controls">
+        <div class="col-sm-8">
           <input type="text" name="filterName" ng-model="filters.name" />
         </div>
       </div>
 
-      <div class="control-group span6">
+      <div class="form-group col-md-6">
         <label class="control-label">Allowance</label>
-        <div class="controls">
+        <div class="col-sm-8">
           <input type="text" ng-model="filters.allowance">
         </div>
       </div>

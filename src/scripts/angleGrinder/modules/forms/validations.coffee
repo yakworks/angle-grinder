@@ -1,3 +1,4 @@
+# TODO split this file
 forms = angular.module("angleGrinder.forms")
 
 forms.value "validationMessages",
@@ -36,14 +37,13 @@ forms.directive "match", ["isEmpty", (isEmpty) ->
 ]
 
 forms.directive "agFieldGroup", [
-  "$timeout", "$log",
-  ($timeout, $log) ->
+  "$timeout", ($timeout) ->
     restrict: "A"
     require: "^form"
     replace: true
     transclude: true
     template: """
-      <div class="control-group" ng-transclude></div>
+      <div class="form-group" ng-transclude></div>
     """
 
     link: (scope, element, attrs, formCtrl) ->
@@ -55,9 +55,9 @@ forms.directive "agFieldGroup", [
           invalid = _.map fields, (field) -> formCtrl[field]?.$invalid or formCtrl.$serverErrors?[field]
 
           if _.any(invalid)
-            element.addClass("error")
+            element.addClass("has-error")
           else
-            element.removeClass("error")
+            element.removeClass("has-error")
 
       # Watch for validity state change and display errors if necessary
       angular.forEach fields, (field) ->
@@ -101,7 +101,7 @@ forms.directive "agValidationErrors", [
 
       appendError = (message, klass = "") ->
         element.append """
-          <span class="help-inline #{klass}">#{message}</span>
+          <span class="text-danger #{klass}">#{message}</span>
         """
 
       displayErrorMessages = ->

@@ -19,7 +19,7 @@ gridz.directive "agGridQuickSearch", [
 
     template: """
       <form class="navbar-search pull-right" name="quickSearch" ng-submit="search(filters)">
-        <input type="text" placeholder="quick search" class="search-query span2"
+        <input type="text" placeholder="quick search" class="search-query col-md-2"
                ng-model="filters.quickSearch"/>
         <button ng-show="false" type="submit">Search</button>
       </form>

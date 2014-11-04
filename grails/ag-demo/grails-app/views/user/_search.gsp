@@ -1,5 +1,5 @@
 <div class="well" ng-controller="user.SearchForm">
-    <form ag-search-form="usersGrid" class="form-horizontal form-multi-column no-margin">
+    <form ag-search-form="usersGrid" class="form-horizontal form-multi-column">
 
         <div class="row-fluid">
             <div class="control-group span6">

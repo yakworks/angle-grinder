@@ -12,13 +12,13 @@
     <span ng-switch-when="false">Create user</span>
   </h2>
 
-  <form name="userForm" novalidate class="form-horizontal no-margin"
+  <form name="userForm" novalidate class="form-horizontal"
         ag-server-validation-errors
         ag-submit="save(user, userForm)">
 
     <div ag-field-group for="name">
       <label class="control-label">Name</label>
-      <div class="controls">
+      <div class="col-sm-8">
         <input type="text" name="name" placeholder="Enter Name"
                ng-model="user.name" ng-required="true" />
 
@@ -28,7 +28,7 @@
 
     <div ag-field-group for="login">
       <label class="control-label">Login</label>
-      <div class="controls">
+      <div class="col-sm-8">
         <input type="text" name="login" placeholder="Enter Login"
                ng-model="user.login"
                ng-required="true" ng-minlength="6" />
@@ -41,7 +41,7 @@
       <div ag-field-group for="email">
         <label class="control-label">Email</label>
 
-        <div class="controls">
+        <div class="col-sm-8">
           <input type="email" name="email" placeholder="Enter Email"
                  ng-model="user.info.email"
                  ng-required="true" />
@@ -54,7 +54,7 @@
     <div ag-field-group for="creditInfoAllowance">
       <label class="control-label">Allowance</label>
 
-      <div class="controls">
+      <div class="col-sm-8">
         <input type="text" name="creditInfoAllowance" placeholder="Enter Allowance"
                ng-model="user.creditInfo.allowance" />
       </div>
@@ -63,7 +63,7 @@
     <div ag-field-group for="parent">
       <label class="control-label" for="parent">Type</label>
 
-      <div class="controls">
+      <div class="col-sm-8">
         <input type="text" ui-select2="userSelectOptions"
                id="parent" name="parent"
                ng-model="user.parent"
@@ -76,7 +76,7 @@
     <div ag-field-group for="birthday">
       <label class="control-label">Birthday</label>
 
-      <div class="controls">
+      <div class="col-sm-8">
         <div ag-datepicker>
           <input type="text" name="birthday"
                  ng-model="user.birthday" />
@@ -87,7 +87,7 @@
     <div ag-field-group for="password,passwordConfirmation">
       <label class="control-label">Password</label>
 
-      <div class="controls">
+      <div class="col-sm-8">
         <input type="password" name="password" placeholder="Enter Password"
                ng-model="user.password" ng-required="user.newRecord()" ng-minlength="6" />
 
@@ -96,7 +96,7 @@
                               minlength="Password must be at least 6 characters" />
       </div>
 
-      <div class="controls">
+      <div class="col-sm-8">
         <input type="password" name="passwordConfirmation" placeholder="Enter Password Confirmation"
                ng-model="user.passwordConfirmation"
                ng-required="user.newRecord()" match="user.password" ng-minlength="6" />

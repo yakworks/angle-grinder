@@ -9,7 +9,7 @@
   </h3>
 </div>
 
-<form name="editForm" class="form-horizontal no-margin" novalidate
+<form name="editForm" class="form-horizontal" novalidate
       ag-server-validation-errors
       ng-submit="save(user)">
   <div class="modal-body" ng-controller="user.FormCtrl">

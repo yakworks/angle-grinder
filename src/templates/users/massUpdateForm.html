@@ -3,14 +3,14 @@
   <h3>Mass update</h3>
 </div>
 
-<form name="massUpdateForm" novalidate class="form-horizontal no-margin"
+<form name="massUpdateForm" novalidate class="form-horizontal"
       ag-submit="massUpdate(records, massUpdateForm)">
 
   <div class="modal-body">
     <div ag-field-group for="allowance">
       <label class="control-label">Allowance</label>
 
-      <div class="controls">
+      <div class="col-sm-8">
         <input type="text" name="creditInfoAllowance" placeholder="Enter Allowance"
                ng-model="records.creditInfo.allowance" ng-required="false" />
         <ag-validation-errors for="creditInfoAllowance" />

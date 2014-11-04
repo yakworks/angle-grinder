@@ -1,52 +1,56 @@
 <h2 class="page-header">Grid example</h2>
 
-<div class="navbar navbar-grid">
-  <div class="navbar-inner with-selected-pointer with-grid-options">
-    <ul class="nav">
-      <li class="dropdown selected-actions">
-        <a data-toggle="dropdown" class="dropdown-toggle" href="#" style="padding-left: 2px">
-          <i class="icon-selected-pointer"> </i> Actions <b class="caret"></b>
-        </a>
+<nav class="navbar navbar-default navbar-grid" role="navigation">
+  <div class="container-fluid">
+    <ul class="nav navbar-nav">
+      <li class="dropdown grid-actions">
+        <button class="btn btn-default navbar-btn dropdown-toggle" data-toggle="dropdown">
+          <i class="icon-selected-pointer"></i>
+          Actions
+          <i class="caret"></i>
+        </button>
         <ul class="dropdown-menu">
-          <li><a href=""><i class="icon-eye-open"></i> View</a></li>
-          <li><a href=""><i class="icon-external-link"></i> Export</a></li>
+          <li><a href=""><i class="fa fa-eye"></i> View</a></li>
+          <li><a href=""><i class="fa fa-external-link"></i> Export</a></li>
           <li class="divider"></li>
-          <li><a href=""><i class="icon-trash"></i> Delete</a></li>
+          <li><a href=""><i class="fa fa-trash"></i> Delete</a></li>
         </ul>
       </li>
-      <li class="divider-vertical"></li>
       <li>
-        <a href="" class="create-button" ng-click="createRecord()">
-          <i class="icon-plus-sign"></i> Add new record
-        </a>
+        <button class="btn btn-default navbar-btn create-button" ng-click="createRecord()">
+          <i class="fa fa-plus-circle"></i> Add new record
+        </button>
       </li>
     </ul>
 
-    <ul class="nav pull-right">
-      <li><a href="" title="search screen"><i class="icon-search"></i></a></li>
-      <li class="divider-vertical skinny"></li>
+    <ul class="nav navbar-nav navbar-right">
+      <li><button class="btn btn-default navbar-btn"><i class="fa fa-search"></i></button></li>
       <li class="dropdown grid-options">
-        <a data-toggle="dropdown" class="dropdown-toggle" href=""><i class="icon-cog"></i><b
-            class="caret"></b></i></a>
+        <button class="btn btn-default navbar-btn dropdown-toggle" data-toggle="dropdown">
+          <i class="fa fa-cog"></i>
+          <i class="caret"></i>
+        </button>
         <ul class="dropdown-menu">
-          <li><a href=""><i class="icon-th-list"></i> Columns</a></li>
-          <li><a href=""><i class="icon-edit"></i> Another action</a></li>
+          <li><a href=""><i class="fa fa-th-list"></i> Columns</a></li>
+          <li><a href=""><i class="fa fa-edit"></i> Another action</a></li>
           <li class="divider"></li>
-          <li><a href=""><i class="icon-external-link"></i> Separated link</a></li>
+          <li><a href=""><i class="fa fa-external-link"></i> Separated link</a></li>
         </ul>
       </li>
     </ul>
-    <form action="" class="navbar-search pull-right">
-      <input type="text" value="" placeholder="Search" class="search-query span2"
-             style="width: 150px;"/>
+
+    <form class="navbar-form navbar-right" role="search">
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Search">
+      </div>
     </form>
   </div>
-</div>
+</nav>
 
 <div ag-grid="gridOptions"
      ag-grid-name="exampleGrid"></div>
 
-<button class="btn" ng-click="getSelectedRowsData()">Get selected rows data</button>
+<button class="btn btn-default" ng-click="getSelectedRowsData()">Get selected rows data</button>
 <code>{{selectedRowsData | json}}</code>
 
 <h3>Custom col model</h3>

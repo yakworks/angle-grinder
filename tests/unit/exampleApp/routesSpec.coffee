@@ -8,14 +8,14 @@ describe "Example Application routes", ->
   beforeEach module "exampleApp"
 
   beforeEach ->
-    module "templates/angleGrinder.html"
-    module "templates/documentation.html"
+    module "/templates/angleGrinder.html"
+    module "/templates/documentation.html"
 
-    module "templates/gridExample/list.html"
-    module "templates/usersDialog/list.html"
-    module "templates/users/list.html"
-    module "templates/users/show.html"
-    module "templates/users/form.html"
+    module "/templates/gridExample/list.html"
+    module "/templates/usersDialog/list.html"
+    module "/templates/users/list.html"
+    module "/templates/users/show.html"
+    module "/templates/users/form.html"
 
   $rootScope = null
   $route = null
@@ -31,26 +31,26 @@ describe "Example Application routes", ->
 
   it "recognizes `/`", ->
     navigateTo "/"
-    expect($route.current.templateUrl).to.equal("templates/angleGrinder.html")
+    expect($route.current.templateUrl).to.equal("/templates/angleGrinder.html")
 
   it "recognizes `/examples/gridExample`", ->
     navigateTo "/examples/gridExample"
-    expect($route.current.templateUrl).to.equal("templates/gridExample/list.html")
+    expect($route.current.templateUrl).to.equal("/templates/gridExample/list.html")
     expect($route.current.controller).to.equal("gridExample.ListCtrl")
 
   it "recognizes `/examples/usersDialog`", ->
     navigateTo "/examples/usersDialog"
-    expect($route.current.templateUrl).to.equal("templates/usersDialog/list.html")
+    expect($route.current.templateUrl).to.equal("/templates/usersDialog/list.html")
     expect($route.current.controller).to.equal("usersDialog.ListCtrl")
 
   it "recognizes `/examples/users`", ->
     navigateTo "/examples/users"
-    expect($route.current.templateUrl).to.equal("templates/users/list.html")
+    expect($route.current.templateUrl).to.equal("/templates/users/list.html")
     expect($route.current.controller).to.equal("users.ListCtrl")
 
   it "recognizes `/examples/users/create`", ->
     navigateTo "/examples/users/create"
-    expect($route.current.templateUrl).to.equal("templates/users/form.html")
+    expect($route.current.templateUrl).to.equal("/templates/users/form.html")
     expect($route.current.controller).to.equal("users.FormCtrl")
     expect($route.current.resolve.user).to.not.be.undefined
 
@@ -60,7 +60,7 @@ describe "Example Application routes", ->
     expect(userResolver).to.have.been.calledWith("12345")
 
     # Then
-    expect($route.current.templateUrl).to.equal("templates/users/show.html")
+    expect($route.current.templateUrl).to.equal("/templates/users/show.html")
     expect($route.current.controller).to.equal("users.ShowCtrl")
 
   it "recognizes `/examples/users/:id/edit`", inject ($q, userResolver) ->
@@ -69,6 +69,6 @@ describe "Example Application routes", ->
     expect(userResolver).to.have.been.calledWith("234")
 
     # Then
-    expect($route.current.templateUrl).to.equal("templates/users/form.html")
+    expect($route.current.templateUrl).to.equal("/templates/users/form.html")
     expect($route.current.controller).to.equal("users.FormCtrl")
     expect($route.current.resolve.user).to.not.be.undefined

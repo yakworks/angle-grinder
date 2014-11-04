@@ -1,6 +1,6 @@
 describe "controller: gridExample.ListCtrl", ->
 
-  beforeEach module "templates/gridExample/form.html"
+  beforeEach module "/templates/gridExample/form.html"
 
   beforeEach module "angleGrinder.forms", ($provide) ->
     $provide.value "$modal", open: sinon.stub().returns result: then: angular.noop

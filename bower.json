@@ -4,12 +4,12 @@
   "dependencies": {
     "jqgrid": "basejump/jqGrid#v4.4.4-tweaks",
     "jquery": "2.1.1",
-    "bootstrap": "2.3.2",
+    "bootstrap": "3.3.0",
     "bootstrapx-clickover": "git://github.com/lecar-red/bootstrapx-clickover.git",
     "jquery-ui-bootstrap": "./components/third-party/jquery-ui-bootstrap",
     "select2": "~3.4.8",
     "select2-bootstrap-css": "~1.2.0",
-    "font-awesome": "~3.2.1",
+    "font-awesome": "4.2.0",
     "angular": "1.2.22",
     "angular-animate": "1.2.22",
     "angular-route": "1.2.22",
@@ -59,15 +59,6 @@
     "bootstrap-clickover": {
       "js": "js/bootstrap-clickover.js"
     },
-    "font-awesome": {
-      "css": [
-        "css/font-awesome.css",
-        "css/font-awesome-ie7.css"
-      ],
-      "font": [
-        "font/*"
-      ]
-    },
     "jqgrid": {
       "js": "js/*.js",
       "js/i18n": "js/i18n/*.js",
@@ -103,6 +94,6 @@
   "resolutions": {
     "jquery": "2.1.1",
     "angular": "1.2.22",
-    "bootstrap": "2.3.2"
+    "bootstrap": "3.3.0"
   }
 }

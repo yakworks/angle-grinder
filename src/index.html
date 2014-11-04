@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="gridz examples">
   <meta name="description" content="gridz examples">
-  <meta name="author" content="Joshua Burnett">
+  <meta name="author" content="Joshua Burnett, Lukasz Bandzarewicz">
 
   <!-- build:js(build) scripts/jquery.min.js -->
     <script type="text/javascript" src="components/jquery/js/jquery.js"></script>
@@ -19,8 +19,8 @@
 
   <!-- build:js(build) scripts/bootstrap.min.js -->
     <!-- Twitter Bootstrap -->
-    <script type="text/javascript" src="components/bootstrap/js/bootstrap-tooltip.js"></script>
-    <script type="text/javascript" src="components/bootstrap/js/bootstrap-popover.js"></script>
+    <script type="text/javascript" src="components/bootstrap/js/tooltip.js"></script>
+    <script type="text/javascript" src="components/bootstrap/js/popover.js"></script>
   <!-- endbuild -->
 
   <!-- build:js(build) scripts/bootstrap-extras.min.js -->
@@ -45,10 +45,6 @@
     <link rel="stylesheet" href="components/select2-bootstrap-css/css/select2-bootstrap.css"/>
 
     <link rel="stylesheet" href="styles/animations.css"/>
-  <!-- endbuild -->
-
-  <!-- build:css(build) styles/style.min.css -->
-    <link rel="stylesheet" href="styles/docs.css"/>
   <!-- endbuild -->
 
   <!-- build:js(build) scripts/angularjs-all.min.js -->
@@ -236,7 +232,7 @@
 
 <body ng-app="exampleApp">
 
-<div ng-include src="'templates/partials/navbarTop.html'"></div>
+<div ng-include src="'/templates/partials/navbarTop.html'"></div>
 
 <header class="jumbotron subhead" id="overview">
   <div class="container">
@@ -246,45 +242,47 @@
 </header>
 
 <div class="container">
-  <aside class="sidebar bs-docs-sidebar" ng-controller="SidebarCtrl">
-    <ul class="nav nav-list bs-docs-sidenav" ng-show="section() === 'angleGrinder'">
-      <li><a href="#/?scrollTo=develop"><i class="icon-chevron-right"></i> Develop AngleGrinder</i></a></li>
-      <li><a href="#/?scrollTo=develop-checkout"><i class="icon-chevron-right"></i> Checkout from github repo</a></li>
-      <li><a href="#/?scrollTo=develop-install-nodejs"><i class="icon-chevron-right"></i> Install nodejs</a></li>
-      <li><a href="#/?scrollTo=develop-install-libraries"><i class="icon-chevron-right"></i> Install required tools and libraries</a></li>
-      <li><a href="#/?scrollTo=develop-grunt-tasts"><i class="icon-chevron-right"></i> Grunt tasks</a></li>
-      <li><a href="#/?scrollTo=develop-running-tests"><i class="icon-chevron-right"></i> Running tests</a></li>
-      <li><a href="#/?scrollTo=develop-running-app"><i class="icon-chevron-right"></i> Running the example application</a></li>
-      <li><a href="#/?scrollTo=develop-directory-structure"><i class="icon-chevron-right"></i> Directory structure</a></li>
-      <li><a href="#/?scrollTo=develop-building"><i class="icon-chevron-right"></i> Building the app</a></li>
-    </ul>
+  <div class="row">
+    <aside class="col-sm-3" ng-controller="SidebarCtrl">
+      <ul class="list-group" ng-show="section() === 'angleGrinder'">
+        <li class="list-group-item"><a href="#/?scrollTo=develop">Develop AngleGrinder</i></a></li>
+        <li class="list-group-item"><a href="#/?scrollTo=develop-checkout">Checkout from github repo</a></li>
+        <li class="list-group-item"><a href="#/?scrollTo=develop-install-nodejs">Install nodejs</a></li>
+        <li class="list-group-item"><a href="#/?scrollTo=develop-install-libraries">Install required tools and libraries</a></li>
+        <li class="list-group-item"><a href="#/?scrollTo=develop-grunt-tasts">Grunt tasks</a></li>
+        <li class="list-group-item"><a href="#/?scrollTo=develop-running-tests">Running tests</a></li>
+        <li class="list-group-item"><a href="#/?scrollTo=develop-running-app">Running the example application</a></li>
+        <li class="list-group-item"><a href="#/?scrollTo=develop-directory-structure">Directory structure</a></li>
+        <li class="list-group-item"><a href="#/?scrollTo=develop-building">Building the app</a></li>
+      </ul>
 
-    <ul class="nav nav-list bs-docs-sidenav" ng-show="section() === 'documentation'">
-      <li><a href="#/documentation?scrollTo=docs-common"><i class="icon-chevron-right"></i> angleGrinder.common</a></li>
-      <li><a href="#/documentation?scrollTo=docs-resources"><i class="icon-chevron-right"></i> angleGrinder.resources</a></li>
-      <li><a href="#/documentation?scrollTo=docs-spinner"><i class="icon-chevron-right"></i> angleGrinder.spinner</a></li>
-      <li><a href="#/documentation?scrollTo=docs-alerts"><i class="icon-chevron-right"></i> angleGrinder.alerts</a></li>
-      <li><a href="#/documentation?scrollTo=docs-forms"><i class="icon-chevron-right"></i> angleGrinder.forms</a></li>
-      <li><a href="#/documentation?scrollTo=docs-gridz"><i class="icon-chevron-right"></i> angleGrinder.gridz</a></li>
-    </ul>
+      <ul class="list-group" ng-show="section() === 'documentation'">
+        <li class="list-group-item"><a href="#/documentation?scrollTo=docs-common">angleGrinder.common</a></li>
+        <li class="list-group-item"><a href="#/documentation?scrollTo=docs-resources">angleGrinder.resources</a></li>
+        <li class="list-group-item"><a href="#/documentation?scrollTo=docs-spinner">angleGrinder.spinner</a></li>
+        <li class="list-group-item"><a href="#/documentation?scrollTo=docs-alerts">angleGrinder.alerts</a></li>
+        <li class="list-group-item"><a href="#/documentation?scrollTo=docs-forms">angleGrinder.forms</a></li>
+        <li class="list-group-item"><a href="#/documentation?scrollTo=docs-gridz">angleGrinder.gridz</a></li>
+      </ul>
 
-    <ul class="nav nav-list bs-docs-sidenav" ng-show="section() === 'examples'">
-      <li><a href="#/examples/gridExample"><i class="icon-chevron-right"></i>Grid example</a></li>
-      <li><a href="#/examples/usersDialog"><i class="icon-chevron-right"></i>Users (dialog based)</a></li>
-      <li><a href="#/examples/users"><i class="icon-chevron-right"></i>Users</a></li>
-      <li><a href="#/examples/fileUpload"><i class="icon-chevron-right"></i>File Upload</a></li>
-      <li><a href="#/examples/tabs"><i class="icon-chevron-right"></i>Tabs</a></li>
-      <li><a href="#/examples/panels"><i class="icon-chevron-right"></i>Panels</a></li>
-    </ul>
-  </aside>
+      <ul class="list-group" ng-show="section() === 'examples'">
+        <li class="list-group-item"><a href="#/examples/gridExample">Grid example</a></li>
+        <li class="list-group-item"><a href="#/examples/usersDialog">Users (dialog based)</a></li>
+        <li class="list-group-item"><a href="#/examples/users">Users</a></li>
+        <li class="list-group-item"><a href="#/examples/fileUpload">File Upload</a></li>
+        <li class="list-group-item"><a href="#/examples/tabs">Tabs</a></li>
+        <li class="list-group-item"><a href="#/examples/panels">Panels</a></li>
+      </ul>
+    </aside>
 
-  <section class="content">
-    <ag-alerts></ag-alerts>
+    <section class="col-sm-9">
+      <ag-alerts></ag-alerts>
 
-    <section>
-      <ng-view></ng-view>
+      <section>
+        <ng-view></ng-view>
+      </section>
     </section>
-  </section>
+  </div>
 </div>
 
 </body>

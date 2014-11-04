@@ -17,7 +17,7 @@ class IndexCtrl extends BaseCtrl
 
   getSelectedRowsData: ->
     ids = @$scope.exampleGrid.getSelectedRowIds()
-    @$scope.selectedRowsData = _.map ids, (id) ->
+    @$scope.selectedRowsData = _.map ids, (id) =>
       @$scope.exampleGrid.getRowData(id)
 
   editRecord: (id) ->

@@ -19,7 +19,7 @@ module.exports = (config) ->
       "tests/unit/**/*.coffee": ["coffee"]
 
     ngHtml2JsPreprocessor:
-      stripPrefix: "src/"
+      stripPrefix: "src"
 
     junitReporter:
       outputFile: "test-results.xml"

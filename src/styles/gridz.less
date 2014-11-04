@@ -261,10 +261,6 @@
 }
 
 .icon-selected-pointer {
-  height: 16px;
-  line-height: 14px;
-  margin-top: 14px;
-
   &:before {
     content: url(../img/selectPointer.gif);
   }
@@ -307,12 +303,34 @@ form[ag-search-form] {
   label.control-label {
     width: 120px;
   }
+}
 
-  .controls {
-    margin-left: 150px;
 
-    input {
-      width: 245px;
+.navbar.navbar-grid {
+  .container-fluid {
+    padding-left: 0px;
+
+    .grid-actions button {
+      padding-left: 5px;
     }
   }
+}
+
+.ui-jqgrid-htable th[id$=_cb] {
+  & {
+    padding-bottom: 10px;
+  }
+
+  input[type="checkbox"] {
+    margin: 0px;
+  }
+}
+
+.ui-jqgrid tr.ui-row-ltr td .cbox {
+  margin-left: -2px;
+}
+
+.ui-jqgrid .ui-pg-input {
+  width: 35px;
+  height: 25px;
 }
