@@ -1,7 +1,11 @@
 package grinder
 
+import grails.gorm.PagedResultList
 import org.apache.commons.logging.Log
 import org.apache.commons.logging.LogFactory
+import org.grails.datastore.mapping.query.Query
+import org.hibernate.criterion.Projections
+import org.hibernate.impl.CriteriaImpl
 
 /**
  * a holder object for paged data
@@ -53,7 +57,7 @@ class Pager {
     }
 
     def getPageCount() {
-        return (Math.round(Math.ceil(recordCount / max)))
+        return Math.ceil(recordCount / max).intValue()
     }
 
     def getJsonData() {
@@ -70,11 +74,16 @@ class Pager {
 
     def setupData(dlist, fieldList = null) {
         setData(dlist)
-        try {
-            if (dlist?.size() > 0)
+        if (dlist?.size() > 0) {
+            if (dlist.hasProperty('totalCount')) {
                 setRecordCount(dlist.totalCount)
-        }// if the prop doesn't exist then just move on
-        catch (MissingPropertyException e) {}
+            } else if (dlist instanceof PagedResultList) {
+                setRecordCount(loadTotalFromDb(dlist))
+            } else {
+                log.warn("Cannot get totalCount for ${dlist.class}")
+                setRecordCount(0)
+            }
+        }
 
         if (fieldList) {
             this.data = dlist.collect { obj ->
@@ -82,6 +91,30 @@ class Pager {
             }
         }
         return this
+    }
+
+    int loadTotalFromDb(PagedResultList src) {
+        int pageSize = src.size() //we _NEED_ this call, to make sure that data is already fetched,
+        //before we changed original query
+
+        if (pageSize == 0) { //actually this is just to double check that src.size() was actually called, result is not so important
+            log.warn("Page size is zero, but we will try to load count(*) anyway")
+        }
+
+        //get original query and modify it to get count of records. sadly, we cannot clone it
+        Query q = src.query
+        def criteriaField = q.class.declaredFields.find { it.name == 'criteria' }
+        criteriaField.setAccessible(true)
+        CriteriaImpl realCriteria = criteriaField.get(q)
+        realCriteria.setProjection(Projections.rowCount()) // count(*)
+
+        //now we need to remove ORDER BY, because MS SQL cannot execute count(*) query with ORDER BY
+        def currentOrder = realCriteria.class.declaredFields.find { it.name == 'orderEntries' }
+        currentOrder.setAccessible(true)
+        currentOrder.get(realCriteria).clear()
+
+        //actual count
+        return realCriteria.uniqueResult() as Integer ?: 0
     }
 
 }
