@@ -31,8 +31,6 @@ module.exports = (grunt) ->
     # Concatenate files
     concat:         config "concat"
 
-    # Minify HTML
-    htmlmin:        config "htmlmin"
     # Tgruask to concatenate & pre-load your AngularJS templates
     ngtemplates:    config "ngtemplates"
     # Minify files with UglifyJS
@@ -107,7 +105,6 @@ module.exports = (grunt) ->
     "build:dev"
     "copy:dist"
     "useminPrepare"
-    "htmlmin"
     "concat"
     "usemin"
     "uglify"

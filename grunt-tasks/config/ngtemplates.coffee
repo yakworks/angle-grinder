@@ -3,6 +3,7 @@ module.exports = (grunt) ->
 
   options:
     base: "<%= appConfig.app %>"
+    prefix: "/"
     module: "exampleApp"
 
   exampleApp:

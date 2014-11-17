@@ -37,7 +37,7 @@ forms.directive "agDeleteButton", ->
             ng-disabled="deleting"
             ng-mouseleave="confirmation = false"
             ng-click="confirmation ? doDelete() : showConfirmation()">
-      <i class="icon-trash"></i>
+      <i class="fa fa-trash"></i>
 
       <ng-switch on="confirmation">
         <span ng-switch-default>Delete</span>

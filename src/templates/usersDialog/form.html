@@ -8,7 +8,7 @@
 </div>
 
 <div class="modal-body">
-  <form name="editForm" class="form-horizontal no-margin"
+  <form name="editForm" class="form-horizontal"
         novalidate="true"
         ag-server-validation-errors
         ag-submit="save(user, editForm)">
@@ -16,7 +16,7 @@
     <div ag-field-group for="name">
       <label class="control-label">Name</label>
 
-      <div class="controls">
+      <div class="col-sm-8">
         <input type="text" name="name" placeholder="Enter Name"
                ng-model="user.name" ng-required="true" />
         <ag-validation-errors for="name" required="This field is required" />
@@ -26,7 +26,7 @@
     <div ag-field-group for="login">
       <label class="control-label">Login</label>
 
-      <div class="controls">
+      <div class="col-sm-8">
         <input type="text" name="login" placeholder="Enter Login"
                ng-model="user.login" ng-required="true" />
         <ag-validation-errors for="login" required="This field is required" />
@@ -36,7 +36,7 @@
     <ng-form name="info" ag-server-validation-errors>
       <div ag-field-group for="email">
         <label class="control-label">Email</label>
-        <div class="controls">
+        <div class="col-sm-8">
           <input type="text" name="email" placeholder="Enter Email"
                  ng-model="user.info.email"
                  ng-required="true" />
@@ -48,7 +48,7 @@
     <div ag-field-group for="creditInfoAllowance">
       <label class="control-label">Allowance</label>
 
-      <div class="controls">
+      <div class="col-sm-8">
         <input type="text" name="creditInfoAllowance" placeholder="Enter Allowance"
                ng-model="user.creditInfo.allowance" />
       </div>
@@ -57,7 +57,7 @@
     <div ag-field-group for="birthday">
       <label class="control-label">Birthday</label>
 
-      <div class="controls">
+      <div class="col-sm-8">
         <div ag-datepicker>
           <input type="text"
                  ng-model="user.birthday"
@@ -70,7 +70,7 @@
     <div ag-field-group for="password,passwordConfirmation">
       <label class="control-label">Password</label>
 
-      <div class="controls">
+      <div class="col-sm-8">
         <input type="password" name="password" placeholder="Enter Password"
                ng-model="user.password" ng-required="user.newRecord()" ng-minlength="6" />
         <ag-validation-errors for="password"
@@ -78,7 +78,7 @@
                           minlength="Password must be at least 6 characters" />
       </div>
 
-      <div class="controls">
+      <div class="col-sm-8">
         <input type="password" name="passwordConfirmation" placeholder="Enter Password Confirmation"
                ng-model="user.passwordConfirmation"
                ng-required="user.newRecord()" match="user.password" ng-minlength="6" />

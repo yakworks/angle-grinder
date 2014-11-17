@@ -8,51 +8,58 @@
 </div>
 
 <div class="modal-body">
-  <form name="editForm" class="form-horizontal no-margin"
+  <form name="editForm" class="form-horizontal"
         novalidate="true"
-        ag-submit="save(record, editForm)">
+        ag-submit="save(record)">
 
     <div ag-field-group for="customerName">
-      <label class="control-label">Customer Name</label>
+      <label class="col-sm-4 control-label">Customer Name</label>
 
-      <div class="controls">
-        <input type="text" name="customerName" placeholder="Enter Customer Name"
+      <div class="col-sm-8">
+        <input type="text" class="form-control"
+               name="customerName" placeholder="Enter Customer Name"
                ng-model="record.customer.name" ng-required="true" />
         <ag-validation-errors for="customerName" />
       </div>
     </div>
 
-    <div class="control-group">
-      <label class="control-label">Date</label>
+    <div class="form-group">
+      <label class="col-sm-4 control-label">Date</label>
 
-      <div class="controls">
-        <input type="text" name="date" placeholder="Enter Date"
+      <div class="col-sm-8">
+        <input type="text" class="form-control"
+               name="date" placeholder="Enter Date"
                ng-model="record.invoiceDate" />
       </div>
     </div>
 
-    <div class="control-group">
-      <label class="control-label">Note</label>
+    <div class="form-group">
+      <label class="col-sm-4 control-label">Note</label>
 
-      <div class="controls">
-        <input type="text" name="note" placeholder="Enter Note"
+      <div class="col-sm-8">
+        <input type="text" class="form-control"
+               name="note" placeholder="Enter Note"
                ng-model="record.note" />
       </div>
     </div>
 
     <div ag-field-group for="password,passwordConfirmation">
-      <label class="control-label">Password</label>
+      <label class="col-sm-4 control-label">Password</label>
 
-      <div class="controls">
-        <input type="password" name="password" placeholder="Enter Password"
+      <div class="col-sm-8">
+        <input type="password" class="form-control"
+               name="password" placeholder="Enter Password"
                ng-model="record.password" ng-required="!record.persisted()" ng-minlength="6" />
         <ag-validation-errors for="password"
                           required="This field is required"
                           minlength="Password must be at least 6 characters" />
       </div>
 
-      <div class="controls">
-        <input type="password" name="passwordConfirmation" placeholder="Enter Password Confirmation"
+      <label class="col-sm-4 control-label">Confirmation</label>
+
+      <div class="col-sm-8">
+        <input type="password" class="form-control"
+               name="passwordConfirmation" placeholder="Enter Password Confirmation"
                ng-model="record.passwordConfirmation"
                ng-required="!record.persisted()" match="record.password" ng-minlength="6" />
         <ag-validation-errors for="passwordConfirmation"

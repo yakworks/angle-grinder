@@ -133,7 +133,7 @@ class Gridz
   actionPopupFormatter: (containerId) ->
     """
     <a class="jqg-row-action" data-toggle="popover" href="#"
-       data-container="##{containerId}"><i class="icon-cog"></i></a>
+       data-container="##{containerId}"><i class="fa fa-cog"></i></a>
     """
 
   # called after grid complete to setup the menu
@@ -148,13 +148,13 @@ class Gridz
       actionMenu = """
                    <ul class="dropdown-menu" role="menu">
                      <li><a href="#" class="row_action_show" data-dismiss="clickover">
-                       <i class="icon-eye-open"></i>show</a>
+                       <i class="fa fa-eye"></i> show</a>
                      </li>
                      <li><a href="#" class="row_action_edit" data-dismiss="clickover">
-                       <i class="icon-edit"></i>edit</a>
+                       <i class="fa fa-edit"></i> edit</a>
                      </li>
                      <li><a href="#" class="row_action_delete" data-dismiss="clickover">
-                       <i class="icon-trash"></i>delete</a>
+                       <i class="fa fa-trash"></i> delete</a>
                      </li>
                    </ul>
                    """

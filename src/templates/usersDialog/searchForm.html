@@ -1,27 +1,27 @@
 <div class="well" ng-controller="usersDialog.SearchFormCtrl">
   <form name="searchForm" ag-search-form="usersGrid"
-        class="form-horizontal form-multi-column no-margin">
+        class="form-horizontal form-multi-column">
 
-    <div class="row-fluid">
-      <div class="control-group span6">
+    <div class="row">
+      <div class="form-group col-md-6">
         <label class="control-label">Name</label>
-        <div class="controls">
+        <div class="col-sm-8">
           <input type="text" name="filterName" ng-model="filters.name" />
         </div>
       </div>
 
-      <div class="control-group span6">
+      <div class="form-group col-md-6">
         <label class="control-label">Allowance</label>
-        <div class="controls">
+        <div class="col-sm-8">
           <input type="text" ng-model="filters.allowance">
         </div>
       </div>
     </div>
 
-    <div class="row-fluid">
-      <div class="control-group span6">
+    <div class="row">
+      <div class="form-group col-md-6">
         <label class="control-label">Birthday from</label>
-        <div class="controls">
+        <div class="col-sm-8">
           <div class="input-append" ag-datepicker>
             <input type="text"
                    ng-model="filters.birthday.from" />
@@ -29,9 +29,9 @@
         </div>
       </div>
 
-      <div class="control-group span6">
+      <div class="form-group col-md-6">
         <label class="control-label">Birthday to</label>
-        <div class="controls">
+        <div class="col-sm-8">
           <div class="input-append" ag-datepicker>
             <input type="text"
                    ng-model="filters.birthday.to" />
@@ -40,10 +40,10 @@
       </div>
     </div>
 
-    <div class="row-fluid">
-      <div class="control-group span6">
+    <div class="row">
+      <div class="form-group col-md-6">
         <label class="control-label">Org</label>
-        <div class="controls">
+        <div class="col-sm-8">
           <div class="input-append">
 
             <ag-select2 select-ajax-url="/api/orgs.json"
@@ -62,10 +62,10 @@
         </div>
       </div>
 
-      <div class="control-group span6">
+      <div class="form-group col-md-6">
         <label class="control-label">Type</label>
 
-        <div class="controls">
+        <div class="col-sm-8">
           <input type="text" ui-select2="userTypeSelectOptions"
                  name="contactType" ng-model="filters.contact.type"
                  style="width: 100%" />
