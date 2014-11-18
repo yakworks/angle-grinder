@@ -1,7 +1,7 @@
 class IndexCtrl extends BaseCtrl
 
   @register "exampleApp", "gridExample.ListCtrl"
-  @inject "$scope", "$q", "sampleData", "exampleGrid", "formDialog"
+  @inject "$scope", "$q", "$log", "sampleData", "exampleGrid", "formDialog"
 
   initialize: ->
     @expose @$scope, "getSelectedRowsData", "editRecord", "createRecord", "deleteRecord"
@@ -10,7 +10,8 @@ class IndexCtrl extends BaseCtrl
     @data = @sampleData.generate(100)
     @$scope.data = @data
 
-    @$scope.gridOptions = @exampleGrid(data: @data)
+    selectedRow = => @$log.debug "exampleGrid selected row:", arguments
+    @$scope.gridOptions = @exampleGrid(data: @data, onSelectRow: selectedRow)
     @$scope.otherGridOptions = @exampleGrid(data: @data, pager: false)
 
     @$scope.selectedRowsData = []
