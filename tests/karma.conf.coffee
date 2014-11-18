@@ -6,7 +6,6 @@ module.exports = (config) ->
 
     frameworks: [
       "mocha"
-      "chai"
       "sinon-chai"
     ]
 
