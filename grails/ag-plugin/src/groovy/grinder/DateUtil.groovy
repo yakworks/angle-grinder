@@ -37,4 +37,9 @@ class DateUtil {
         }
         return dateFormat.parse(date)
     }
+
+    static String dateToJsonString(Date date) {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ")
+        return dateFormat.format(date)
+    }
 }
