@@ -35,6 +35,26 @@ forms.directive "match", ["isEmpty", (isEmpty) ->
     modelCtrl.$formatters.unshift validator
 ]
 
+forms.directive "agLength", ["isFalsy", "$parse", (isFalsy, $parse) ->
+  require: "ngModel"
+  restrict: "A"
+
+  link: (scope, elem, attrs, ngModelCtrl) ->
+    lengthValidator = (value) ->
+      length = $parse(attrs.agLength)(scope)
+      valid = isFalsy(length) || (!ngModelCtrl.$isEmpty(value) && (value.length is length))
+      ngModelCtrl.$setValidity("length", valid)
+      return if valid then value else undefined
+
+    ngModelCtrl.$parsers.unshift(lengthValidator)
+    ngModelCtrl.$formatters.push(lengthValidator)
+
+    scope.$watch(attrs.agLength, () ->
+      lengthValidator(ngModelCtrl.$viewValue)
+    )
+
+]
+
 forms.directive "agFieldGroup", [
   "$timeout", "$log",
   ($timeout, $log) ->
