@@ -50,7 +50,7 @@ describe "module: angleGrinder.forms validations", ->
         expect(form.passwordConfirmation.$valid).to.be.true
         expect(form.passwordConfirmation.$invalid).to.be.false
 
-      it "does not mark the field group as valid", ->
+      it "does not mark the field group as invalid", ->
         expect(controlGroup().hasClass("error")).to.not.be.true
 
     describe "when the fields are not equal", ->
@@ -89,6 +89,77 @@ describe "module: angleGrinder.forms validations", ->
 
         setConfirmation "passwor"
         expect(controlGroup().hasClass("error")).to.be.true
+
+
+  describe "directive: agLength", ->
+    element = null
+    form = null
+    ngModelCtrl = null
+    $timeout = null
+    modelValue = null
+
+    beforeEach inject ($injector) ->
+      {element} = compileTemplate """
+        <form name="form">
+          <div ag-field-group for="name">
+            <input name="name" type="text" ng-model="user.name" ag-length="3"/>
+          </div>
+        </form>
+      """, $injector, $scope
+
+      form = $scope.form
+      ngModelCtrl = form.name
+      modelValue = $scope.user = {}
+      $timeout = $injector.get("$timeout")
+
+    setName = (name) ->
+      $scope.$apply -> ngModelCtrl.$setViewValue name
+      $timeout.flush()
+
+    describe "when length exceed", ->
+      beforeEach ->
+        setName "abcd"
+
+      it "marks the field and form as invalid", ->
+        expect(form.$invalid).to.be.true
+        expect(ngModelCtrl.$invalid).to.be.true
+        expect(ngModelCtrl.$modelValue).to.be.undefined
+
+      it "sets error on form", ->
+        expect(form.$error.length[0].$name).to.equal "name"
+
+      it "sets error on field", ->
+        expect(ngModelCtrl.$error.length).to.be.true
+
+      it "does not set value on model", ->
+        expect(modelValue.name).to.be.undefined
+
+    describe "when length is less then or equal", ->
+      beforeEach ->
+        setName "abc"
+        $scope.$digest()
+
+      it "marks the form as valid", ->
+        expect(form.$valid).to.be.true
+        expect(form.$invalid).to.be.false
+
+      it "marks field as valid", ->
+        expect(ngModelCtrl.$valid).to.be.true
+        expect(ngModelCtrl.$invalid).to.be.false
+
+      it "sets value on model", ->
+        expect(modelValue.name).to.be.equal "abc"
+
+
+    describe "when model value changes", ->
+
+      it "marks the field as invalid if length exceed", ->
+        modelValue.name = "abcd"
+        $scope.$digest()
+        expect(ngModelCtrl.$invalid).to.be.true
+
+
+
 
   describe "directive: agFieldGroup", ->
     element = null
