@@ -110,13 +110,12 @@ gridz.service "xlsData", [
 gridz.directive "agGridXlsExport", [
   "$window", "notificationDialog", ($window, notificationDialog) ->
     restrict: "A"
-    scope: grid: "=agGridXlsExport"
 
-    link: (scope, element) ->
+    link: (scope, element, attrs) ->
       element.on "click", (event) ->
         event.preventDefault()
 
-        grid = scope.grid
+        grid = scope.$eval(attrs.agGridXlsExport)
 
         if grid.getSelectedRowIds().length isnt 0
           dataUri = grid.getXlsDataUri()
