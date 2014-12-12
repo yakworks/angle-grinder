@@ -6,7 +6,7 @@ gridz = angular.module("angleGrinder.gridz")
 # `<div ag-grid="gridOptions" ag-grid-name="usersGrid"></div>`
 class AgGridCtrl extends BaseCtrl
 
-  @register gridz
+  @register gridz, "AgGridCtrl"
   @inject "$rootScope", "$element", "$q", "hasSearchFilters", "flatten", "xlsData"
 
   getGridEl: ->
