@@ -1,7 +1,7 @@
 # Here be dragons. Decorate `daypickerDirective`.
 angular.module("ui.bootstrap.datepicker").config [
   "$provide", ($provide) ->
-    $provide.decorator "daypickerDirective", ($delegate) ->
+    $provide.decorator "daypickerDirective", ["$delegate", ($delegate) ->
       directive = $delegate[0]
 
       oldCompile = directive.compile
@@ -18,6 +18,7 @@ angular.module("ui.bootstrap.datepicker").config [
                 _.map(row, (dt) -> dt.hide = true)
 
       return $delegate
+    ]
 ]
 
 forms = angular.module("angleGrinder.forms", [
