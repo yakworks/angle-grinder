@@ -59,7 +59,7 @@ gridz.directive "agGrid", [
         gridEl.gridz(options)
 
         # initialize actionPopup handler
-        actionPopupHandler(gridEl, scope)
+        actionPopupHandler(gridEl, scope, attrs)
 
       if element.is(":visible")
         # Element is visible, initialize the grid now
