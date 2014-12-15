@@ -55,6 +55,17 @@ gridz.directive "agGrid", [
         unless options.pager is false
           options.pager = element.find(".gridz-pager").attr("id") or "gridz-pager"
 
+        if options.selectFirstRow is true
+          _gridComplete = options.gridComplete
+
+          onGridComplete = ->
+            dataIds = gridEl.getDataIDs()
+            if dataIds.length > 0
+              gridEl.setSelection dataIds[0], true
+            _gridComplete() if _.isFunction(_gridComplete)
+
+          options.gridComplete = onGridComplete;
+
         # initialize jqGrid on the given element
         gridEl.gridz(options)
 
