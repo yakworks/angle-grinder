@@ -2,6 +2,7 @@ grails.project.class.dir = "target/classes"
 grails.project.test.class.dir = "target/test-classes"
 grails.project.test.reports.dir = "target/test-reports"
 
+grails.project.dependency.resolver = 'maven'
 grails.project.dependency.resolution = {
     // inherit Grails' default dependencies
     inherits("global") {
@@ -15,7 +16,7 @@ grails.project.dependency.resolution = {
 
     repositories {
         grailsCentral()
-        mavenRepo 'http://repo.9ci.com/artifactory/repo'
+        mavenRepo name: '9ci', root: 'http://repo.9ci.com/artifactory/repo'
         // uncomment the below to enable remote dependency resolution
         // from public Maven repositories
         //mavenLocal()
@@ -27,21 +28,16 @@ grails.project.dependency.resolution = {
     }
 
     dependencies {
-        // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
-
-        // runtime 'mysql:mysql-connector-java:5.1.21'
-        test "org.spockframework:spock-grails-support:0.7-groovy-2.0"
     }
 
     plugins {
-        build(":tomcat:$grailsVersion", ":hibernate:$grailsVersion", ":release:2.2.0", ":rest-client-builder:1.0.3") {
-            export = false
-        }
+      build ':tomcat:7.0.42'
+      runtime ':hibernate:3.6.10.14'
 
-        runtime(":fields:1.3") { export = false }
-		runtime(":hibernate:$grailsVersion") { export = false }
-        test(":spock:0.7") {
-            exclude "spock-grails-support"
-        }
+      build(":release:2.2.1", ":rest-client-builder:1.0.3") {
+            export = false
+      }
+
+      runtime(":fields:1.3") { export = false }
     }
 }
