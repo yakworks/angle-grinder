@@ -164,6 +164,7 @@ class AgGridCtrl extends BaseCtrl
     deferred = @$q.defer()
 
     params =
+      page: 1
       search: @hasSearchFilters(filters)
       postData: filters: JSON.stringify(filters)
 

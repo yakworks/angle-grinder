@@ -272,7 +272,7 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
 
       # Then
       expect(jqGridEl.setGridParam).to.have.been.called
-      expect(jqGridEl.setGridParam).to.have.been.calledWith(search: true, postData: filters: '{"login":"foo"}')
+      expect(jqGridEl.setGridParam).to.have.been.calledWith(page: 1, search: true, postData: filters: '{"login":"foo"}')
 
       expect(jqGridEl.trigger).to.have.been.called
       expect(jqGridEl.trigger).to.have.been.calledWith("reloadGrid")
