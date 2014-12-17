@@ -299,6 +299,27 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
     it "returns a list of selected row ids", ->
       expect(ctrl.getSelectedRowIds()).to.deep.eq [1, 2, 3]
 
+  describe "#getSelectedRows", ->
+    beforeEach ->
+      jqGridEl.getRowData.withArgs(1).returns id:1
+      jqGridEl.getRowData.withArgs(2).returns id:2
+      jqGridEl.getRowData.withArgs(3).returns id:3
+
+    it "returns empty array when no rows are selected", ->
+      @gridParams.selarrrow = []
+      data = ctrl.getSelectedRows()
+      expect(data.length).to.eq 0
+
+
+    it "returns selected row objects", ->
+      @gridParams.selarrrow = [1, 2, 3]
+      data = ctrl.getSelectedRows()
+      expect(data.length).to.eq 3
+      expect(jqGridEl.getRowData.getCall(0).calledWith(1)).to.be.true
+      expect(jqGridEl.getRowData.getCall(1).calledWith(2)).to.be.true
+      expect(jqGridEl.getRowData.getCall(2).calledWith(3)).to.be.true
+
+
   describe "#getRowData", ->
 
     it "returns a row data for the given id", ->

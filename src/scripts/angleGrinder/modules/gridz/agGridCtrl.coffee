@@ -21,6 +21,12 @@ class AgGridCtrl extends BaseCtrl
   getSelectedRowIds: ->
     @getParam("selarrrow")
 
+  #Gives selected row objects, [{id:1..}, {id:2..}]
+  getSelectedRows: ->
+    getRowData = _.bind(@getRowData, @)
+    ids = @getSelectedRowIds()
+    _.map ids, (id) -> getRowData(id)
+
   # Returns an array with data of the requested id = rowid.
   # The returned array is of type name:value, where the name is
   # a name from colModel and the value from the associated column in that row.
