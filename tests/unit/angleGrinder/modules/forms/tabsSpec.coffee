@@ -175,9 +175,9 @@ describe "module: angleGrinder.forms tabs", ->
       beforeEach inject ($httpBackend, $injector) ->
         {element, $scope} = compileTemplate """
           <ag-tabset name="testTabset">
-            <ag-tab template-url="/tabs/first">First</ag-tab>
+            <ag-tab name="first" template-url="/tabs/first">First</ag-tab>
             <ag-tab name="second" template-url="/tabs/second">Second</ag-tab>
-            <ag-tab template-url="/tabs/third">Third</ag-tab>
+            <ag-tab name="third" template-url="/tabs/third">Third</ag-tab>
           </ag-tabset>
         """, $injector
 
@@ -251,6 +251,29 @@ describe "module: angleGrinder.forms tabs", ->
 
           it "does nothing", inject ($httpBackend) ->
             $httpBackend.verifyNoOutstandingRequest()
+
+        describe "On $location tab change", ->
+
+          it "sets tab as active", inject ($rootScope, $location, $httpBackend) ->
+            $location.search.returns(tab: "third")
+            $httpBackend.whenGET("/ag-demo/tabs/third").respond "Second"
+            $rootScope.$apply()
+            $httpBackend.flush()
+
+            thirdTabEl = findTabByTitle("Third")
+            expect(thirdTabEl.isolateScope().name).to.be.eq "third"
+            expect(thirdTabEl.isolateScope().selected).to.be.true
+            expect(thirdTabEl.hasClass("active")).to.be.true
+
+          it "does nothing if wrong tab name", inject ($rootScope, $location) ->
+            $location.search.returns(tab: "xxx")
+            $rootScope.$apply()
+
+            thirdTabEl = findTabByTitle("First")
+            expect(thirdTabEl.isolateScope().name).to.be.eq "first"
+            expect(thirdTabEl.isolateScope().selected).to.be.true
+            expect(thirdTabEl.hasClass("active")).to.be.true
+
 
     describe "with initial active tab", ->
 

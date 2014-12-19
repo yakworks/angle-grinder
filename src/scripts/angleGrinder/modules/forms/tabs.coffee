@@ -130,14 +130,20 @@ forms.directive "agTab", [
       scope.selected = false
       scope.loading = false
 
+      getTab = -> $location.search().tab
+
       # add the current tab to the stack
-      active = -> scope.name? and $location.search().tab is scope.name
+      active = -> scope.name? and getTab() is scope.name
       tabsetCtrl._addTab(scope, active())
 
       # handles mouse click on the tab
       scope.select = ->
         return if scope.selected
         tabsetCtrl._selectTab(scope)
+
+      scope.$watch getTab, ()->
+        scope.select() if angular.isDefined(scope.name) and getTab() is scope.name and not scope.selected
+      , true
 
     template: """
       <li ng-click="select()" ng-class="{active: selected, loading: loading}">
