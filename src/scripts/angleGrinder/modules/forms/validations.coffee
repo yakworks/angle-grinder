@@ -2,6 +2,7 @@ forms = angular.module("angleGrinder.forms")
 
 forms.value "validationMessages",
   required: "This field is required"
+  number: "This field must be a number"
   mismatch: "Does not match the confirmation"
   minlength: "This field is too short"
   maxlength: "This field is too long"
