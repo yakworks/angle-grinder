@@ -81,7 +81,7 @@ class Pager {
                 setRecordCount(loadTotalFromDb(dlist))
             } else {
                 log.warn("Cannot get totalCount for ${dlist.class}")
-                setRecordCount(0)
+                setRecordCount(dlist.size())
             }
         }
 
