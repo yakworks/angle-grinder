@@ -256,6 +256,12 @@ $.extend $.fn.fmatter,
   # use `agCurrencyFilter` for format currencies
   currency: (cellVal) -> window.agCurrencyFilter(cellVal)
 
+  # use `agCurrencyFilter` for format currencies, use 0 for empty/null/undefined value
+  currencyOrZero: (cellVal) ->
+    if typeof(cellVal) == 'undefined' or cellVal == null or cellVal == 'null' or cellVal == ''
+      cellVal = 0
+    window.agCurrencyFilter(cellVal)
+
   okIcon: (cellVal, options, rowdata) ->
     if cellVal then "<i class='icon-ok'></i>" else ""
 
