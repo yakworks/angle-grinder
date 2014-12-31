@@ -10,7 +10,7 @@ mixin.factory "dialogCrudCtrlMixin", [
       getGrid = -> $parse(gridName)($scope)
 
       openEditDialogFor = (record) ->
-        dialogOptions = record: record, grid: getGrid()
+        dialogOptions = record: record, grid: getGrid(), scope: $scope
         formDialog.open(templateUrl, _.extend(dialogOptions, extraDialogOptions))
 
       # Generic method for invoking an edit dialog for a resource
