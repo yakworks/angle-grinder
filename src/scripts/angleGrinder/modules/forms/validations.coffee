@@ -57,8 +57,8 @@ forms.directive "agLength", ["isFalsy", "$parse", (isFalsy, $parse) ->
 ]
 
 forms.directive "agFieldGroup", [
-  "$timeout", "$log",
-  ($timeout, $log) ->
+  "$timeout", "$log", "$interpolate",
+  ($timeout, $log, $interpolate) ->
     restrict: "A"
     require: "^form"
     replace: true
@@ -68,7 +68,8 @@ forms.directive "agFieldGroup", [
     """
 
     link: (scope, element, attrs, formCtrl) ->
-      fields = (attrs["for"] or "").split(",")
+      fields = _.map (attrs["for"] or "").split(","), (fieldExpr) ->
+        $interpolate(fieldExpr)(scope)
 
       toggleErrors = ->
         $timeout ->
@@ -102,14 +103,13 @@ forms.directive "agFieldGroup", [
         toggleErrors()
 ]
 
-forms.directive "agValidationErrors", [
-  "validationMessages", (validationMessages) ->
+forms.directive "agValidationErrors", ["validationMessages", "$interpolate", (validationMessages, $interpolate) ->
     restrict: "E"
     require: "^form"
     replace: true
 
     link: (scope, element, attrs, formCtrl) ->
-      fieldName = attrs["for"]
+      fieldName = $interpolate(attrs["for"])(scope)
       field = formCtrl[fieldName]
 
       # Do cleanup
