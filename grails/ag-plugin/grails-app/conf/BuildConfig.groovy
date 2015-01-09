@@ -1,6 +1,7 @@
 grails.project.class.dir = "target/classes"
 grails.project.test.class.dir = "target/test-classes"
 grails.project.test.reports.dir = "target/test-reports"
+grails.project.work.dir = '.grails'
 
 grails.project.dependency.resolver = 'maven'
 grails.project.dependency.resolution = {
@@ -36,13 +37,10 @@ grails.project.dependency.resolution = {
   dependencies { }
 
   plugins {
-    runtime(':hibernate:3.6.10.18') {
-      export = false
-    }
+    runtime(':hibernate:3.6.10.18') { export = false }
 
-    build(":release:2.2.1", ":rest-client-builder:1.0.3") {
-      export = false
-    }
+    build(":release:3.0.1") { export = false }
+    build(":rest-client-builder:1.0.3")
 
     //runtime(":fields:1.4") { export = false }
   }
