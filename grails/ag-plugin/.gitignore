@@ -1,3 +1,4 @@
+.grails/
 target/
 stacktrace.log
 plugin.xml
