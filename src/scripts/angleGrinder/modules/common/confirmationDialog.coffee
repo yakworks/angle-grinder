@@ -1,7 +1,7 @@
 app = angular.module("angleGrinder.common")
 
 class ConfirmationDialogCtrl extends BaseCtrl
-  @register app
+  @register app, 'ConfirmationDialogCtrl'
   @inject "$scope", "$modalInstance", "$log", "options"
 
   close: (confirmed) ->
