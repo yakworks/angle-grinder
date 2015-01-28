@@ -83,8 +83,8 @@ forms.run [
             <tr ng-repeat="row in rows track by $index">
               <td ng-show="showWeeks" class="text-center h6"><em>{{ weekNumbers[$index] }}</em></td>
 
-              <td ng-hide="dt.hide" style="width: 30px; cursor: pointer;" ng-click="select(dt.date)" ng-repeat="dt in row track by dt.date" class="text-center" role="gridcell" id="{{dt.uid}}" aria-disabled="{{!!dt.disabled}}">
-                <span ng-class="{'label label-info': dt.selected, 'label label-default': isActive(dt), 'muted': dt.secondary, 'text-info': dt.current}"
+              <td ng-hide="dt.hide" style="width: 30px; cursor: pointer;" ng-click="dt.disabled || select(dt.date)" ng-repeat="dt in row track by dt.date" class="text-center" role="gridcell" id="{{dt.uid}}" aria-disabled="{{!!dt.disabled}}">
+                <span ng-class="{'label label-info': dt.selected, 'label label-default': isActive(dt), 'muted': dt.secondary, 'muted': dt.disabled, 'text-info': dt.current}"
                       ng-disabled="dt.disabled" tabindex="-1">
                   {{dt.label}}
                 </span>
