@@ -36,7 +36,7 @@ class AgGridCtrl extends BaseCtrl
 
   #Return all rows
   getAllRows: () ->
-    @getGridEl.getRowData()
+    @getGridEl().getRowData()
 
   # Populates the grid with the given data.
   addJSONData: (data) ->
