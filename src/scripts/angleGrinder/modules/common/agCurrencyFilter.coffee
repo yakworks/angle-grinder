@@ -24,3 +24,14 @@ app.provider "agCurrencyFilter", ->
         _.template(defaultFormat)(amount: formattedAmount, symbol: symbol)
 
   ]
+
+
+
+app.filter "agCurrencyOrZero", ["agCurrencyFilter", (agCurrencyFilter) ->
+
+  (val) ->
+    if typeof(val) == 'undefined' or val == null or val == 'null' or val == ''
+      val = 0
+    agCurrencyFilter(val)
+
+]
