@@ -27,6 +27,7 @@ describe "module: angleGrinder.forms", ->
         $scope.testForm.$visible = false
         $scope.$digest()
 
+      ###
       it "shows `edit` button", ->
         expect(element.find("button").text()).to.contain "Edit"
 
@@ -35,6 +36,8 @@ describe "module: angleGrinder.forms", ->
 
         it "shows the form", ->
           expect($scope.testForm.$visible).to.be.true
+
+      ###
 
     describe "when the form is visible", ->
       beforeEach ->

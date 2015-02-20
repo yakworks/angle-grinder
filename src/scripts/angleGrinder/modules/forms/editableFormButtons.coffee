@@ -10,11 +10,13 @@ app.directive "editableFormButtons", [
 
     template: """
       <div class="buttons">
+        <!--
         <button type="button" class="btn btn-default"
                 ng-click="form.$show()"
                 ng-if="!form.$visible">
           Edit
         </button>
+        -->
 
         <span ng-if="form.$visible">
           <button type="submit" class="btn btn-primary"
