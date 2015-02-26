@@ -14,7 +14,7 @@ Here are the key things we try to do here:
 - various improvements and tweaks on form components for drop downs & selects
 - less modifications for look and feel on Bootstrap
 
-More Documentation: http://9ci.github.io/angle-grinder
+Website Documentation and Examples: http://9ci.github.io/angle-grinder
 
 ## Node.js
 
