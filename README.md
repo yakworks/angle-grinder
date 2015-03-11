@@ -18,22 +18,49 @@ Website Documentation and Examples: http://9ci.github.io/angle-grinder
 
 ## Node.js
 
-Install nodejs from either http://nodejs.org/ or using your favorite package manager https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager
+### Install 
+
+nodejs from either http://nodejs.org/ or using your favorite package manager https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager
+
+### Update node
+
+```
+sudo npm install n -g
+sudo n latest
+node -v
+```
+should be at v0.11 or higher
 
 ## Required Node Tools
 
-In order to get started, you'll want to install some tools globally. You may need to prefix these with sudo (for OSX, *nix, BSD etc) or run your command shell as Administrator (for Windows) to do this. the "-g" will put the commands in your system path, allowing them to be run from any directory.
+In order to get started, you'll want to install some tools globally. You may need to prefix these with **sudo** (for OSX, *nix, BSD etc) or run your command shell as Administrator (for Windows) to do this. the "-g" will put the commands in your system path, allowing them to be run from any directory.
 
 ```
-npm install -g coffee-script
-npm install -g grunt-cli
-npm install -g bower
+sudo npm install -g coffee-script
+sudo npm install -g grunt-cli
+sudo npm install -g bower
 ```
 
-### Run the app
+### Run the installs
+
+This will do the standard bower and npm installs to make sure you have the internet cloned on your computer.
 
 ```
-script/bootstrap
+bower install
+npm install
+```
+
+### Build
+
+```
+grunt
+```
+
+If a test is failing add --force
+
+### Sample app
+
+```
 script/run-frontend-server
 script/run-ag-demo
 ```
