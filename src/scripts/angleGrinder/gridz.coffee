@@ -240,6 +240,12 @@ $.fn.gridz.defaults =
   height: "100%"
   sortable: true
   multiselect: true # one or more row selections
+  viewrecords: true # shows beginning and ending record number in the grid, out of the total number of records in the query.
+  # Specify records info format
+  # {0} - the start position of the records depending on page number and number of requested records
+  # {1} - the end position
+  # {2} - total records returned from the server.
+  recordtext: "Records {0} - {1} of {2}"
 
   beforeSelectRow: null
   gridComplete: null
