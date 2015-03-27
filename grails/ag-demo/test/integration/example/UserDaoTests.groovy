@@ -1,13 +1,11 @@
 package example
-
-import grinder.Contact
+import com.coderberry.faker.FakerService
 import grinder.ContactType
 import grinder.Org
 import grinder.User
 import grinder.UserDao
-
-import org.junit.*
-import com.coderberry.faker.*
+import org.junit.Before
+import org.junit.Test
 
 class UserDaoTests extends GroovyTestCase {
     def FakerService fakerService
@@ -47,6 +45,8 @@ class UserDaoTests extends GroovyTestCase {
 
         Calendar cal = Calendar.getInstance()
         cal.setTime(user.activeDate)
+        TimeZone timezone= TimeZone.getTimeZone('UTC')
+        cal.setTimeZone(timezone)
 
         assertEquals 2008, cal.get(Calendar.YEAR)
         assertEquals 1, cal.get(Calendar.MONTH)
