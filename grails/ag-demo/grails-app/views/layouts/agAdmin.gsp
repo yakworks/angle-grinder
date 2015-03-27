@@ -11,8 +11,9 @@
     <link rel="apple-touch-icon" href="${resource(dir: 'images', file: 'apple-touch-icon.png')}">
     <link rel="apple-touch-icon" sizes="114x114" href="${resource(dir: 'images', file: 'apple-touch-icon-retina.png')}">
 
+    <asset:javascript src="app.js"/>
+    <asset:stylesheet href="style.css"/>
     <g:layoutHead/>
-    <r:layoutResources/>
 
     <style>
     body {

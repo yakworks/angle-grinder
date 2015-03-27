@@ -115,7 +115,7 @@ grails {
 "coffeescript-compiler" {
     appSource {
         coffeeSourcePath = "src/coffee"
-        jsOutputPath = "web-app/js/app"
+        jsOutputPath = "grails-app/assets/javascripts/app"
     }
 
     pluginConfig {
