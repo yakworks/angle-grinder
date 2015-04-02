@@ -3,7 +3,8 @@ body {
 }
 
 @import "../../components/bower/bootstrap/less/bootstrap.less";
-@import "../../components/bower/bootstrap/less/responsive.less";
+@import "../../components/bower/bootstrap/less/responsive-embed.less";
+@import "../../components/bower/bootstrap/less/responsive-utilities.less";
 @import "../../components/bower/font-awesome/less/font-awesome.less";
 
 // do not collapse until it reaches a smaller value
@@ -47,25 +48,28 @@ div.ag-datepicker {
   font-family: "FontAwesome";
 
   &.glyphicon-chevron-left {
-    &:extend(.icon-chevron-left);
+    &:extend(.fa-chevron-left);
   }
 
   &.glyphicon-chevron-left:before {
-    &:extend(.icon-chevron-left:before);
+    &:extend(.fa-chevron-left:before);
   }
 
   &.glyphicon-chevron-right {
-    &:extend(.icon-chevron-right);
+    &:extend(.fa-chevron-right);
   }
 
   &.glyphicon-chevron-right:before {
-    &:extend(.icon-chevron-right:before);
+    &:extend(.fa-chevron-right:before);
   }
 }
 
 // fix button group align in the datepicker
 .ag-datepicker {
-  span.btn-group {
-    float: left;
+  span {
+    width: 0;
+    &.btn-group {
+      float: left;
+    }
   }
 }

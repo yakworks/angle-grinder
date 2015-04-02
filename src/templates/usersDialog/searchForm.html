@@ -1,38 +1,38 @@
 <div class="well" ng-controller="usersDialog.SearchFormCtrl">
   <form name="searchForm" ag-search-form="usersGrid"
-        class="form-horizontal form-multi-column no-margin">
+        class="form-horizontal form-multi-column">
 
-    <div class="row-fluid">
-      <div class="control-group span6">
-        <label class="control-label">Name</label>
-        <div class="controls">
+    <div class="row">
+      <div class="form-group col-md-6">
+        <label class="control-label col-sm-4">Name</label>
+        <div class="col-sm-8">
           <input type="text" name="filterName" ng-model="filters.name" />
         </div>
       </div>
 
-      <div class="control-group span6">
-        <label class="control-label">Allowance</label>
-        <div class="controls">
+      <div class="form-group col-md-6">
+        <label class="control-label col-sm-4">Allowance</label>
+        <div class="col-sm-8">
           <input type="text" ng-model="filters.allowance">
         </div>
       </div>
     </div>
 
-    <div class="row-fluid">
-      <div class="control-group span6">
-        <label class="control-label">Birthday from</label>
-        <div class="controls">
-          <div class="input-append" ag-datepicker>
+    <div class="row">
+      <div class="form-group col-md-6">
+        <label class="control-label col-sm-4">Birthday from</label>
+        <div class="col-sm-8">
+          <div class="input-group" ag-datepicker>
             <input type="text"
                    ng-model="filters.birthday.from" />
           </div>
         </div>
       </div>
 
-      <div class="control-group span6">
-        <label class="control-label">Birthday to</label>
-        <div class="controls">
-          <div class="input-append" ag-datepicker>
+      <div class="form-group col-md-6">
+        <label class="control-label col-sm-4">Birthday to</label>
+        <div class="col-sm-8">
+          <div class="input-group" ag-datepicker>
             <input type="text"
                    ng-model="filters.birthday.to" />
           </div>
@@ -40,12 +40,11 @@
       </div>
     </div>
 
-    <div class="row-fluid">
-      <div class="control-group span6">
-        <label class="control-label">Org</label>
-        <div class="controls">
-          <div class="input-append">
-
+    <div class="row">
+      <div class="form-group col-md-6">
+        <label class="control-label col-sm-4">Org</label>
+        <div class="controls col-sm-8">
+          <div class="input-group">
             <ag-select2 select-ajax-url="/api/orgs.json"
                         select-minimum-input-length="3"
                         select-ajax-quiet-millis="300"
@@ -62,20 +61,21 @@
         </div>
       </div>
 
-      <div class="control-group span6">
-        <label class="control-label">Type</label>
+      <div class="form-group col-md-6">
+        <label class="control-label col-sm-4">Type</label>
 
-        <div class="controls">
+        <div class="col-sm-8">
           <input type="text" ui-select2="userTypeSelectOptions"
                  name="contactType" ng-model="filters.contact.type"
                  style="width: 100%" />
         </div>
       </div>
     </div>
-
-    <div class="pull-right">
-      <ag-search-button></ag-search-button>
-      <ag-reset-search-button></ag-reset-search-button>
+    <div class="form-group">
+        <div class="pull-right">
+            <ag-search-button></ag-search-button>
+            <ag-reset-search-button></ag-reset-search-button>
+        </div>
     </div>
   </form>
 </div>

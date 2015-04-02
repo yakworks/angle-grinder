@@ -1,102 +1,116 @@
-<div class="modal-header">
-  <button type="button" class="close" ng-click="closeDialog()">&times;</button>
+<div class="modal-dialog">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="closeDialog()">&times;</button>
 
-  <h3 ng-switch="user.persisted()">
-    <span ng-switch-when="true">Edit user {{user.name}}</span>
-    <span ng-switch-when="false">Create user</span>
-  </h3>
-</div>
-
-<div class="modal-body">
-  <form name="editForm" class="form-horizontal no-margin"
-        novalidate="true"
-        ag-server-validation-errors
-        ag-submit="save(user, editForm)">
-
-    <div ag-field-group for="name">
-      <label class="control-label">Name</label>
-
-      <div class="controls">
-        <input type="text" name="name" placeholder="Enter Name"
-               ng-model="user.name" ng-required="true" />
-        <ag-validation-errors for="name" required="This field is required" />
-      </div>
+        <h3 ng-switch="user.persisted()">
+            <span ng-switch-when="true">Edit user {{user.name}}</span>
+            <span ng-switch-when="false">Create user</span>
+        </h3>
     </div>
 
-    <div ag-field-group for="login">
-      <label class="control-label">Login</label>
+    <div class="modal-body">
+        <form name="editForm" class="form-horizontal no-margin"
+              novalidate="true"
+              ag-server-validation-errors
+              ag-submit="save(user, editForm)">
 
-      <div class="controls">
-        <input type="text" name="login" placeholder="Enter Login"
-               ng-model="user.login" ng-required="true" />
-        <ag-validation-errors for="login" required="This field is required" />
-      </div>
+            <div ag-field-group for="name">
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Name</label>
+                    <div class="col-sm-8">
+                        <input type="text" name="name" placeholder="Enter Name"
+                               ng-model="user.name" ng-required="true"/>
+                        <ag-validation-errors for="name" required="This field is required"/>
+                    </div>
+                </div>
+            </div>
+
+            <div ag-field-group for="login">
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Login</label>
+
+                    <div class="col-sm-8">
+                        <input type="text" name="login" placeholder="Enter Login"
+                               ng-model="user.login" ng-required="true"/>
+                        <ag-validation-errors for="login" required="This field is required"/>
+                    </div>
+                </div>
+            </div>
+
+            <ng-form name="info" ag-server-validation-errors>
+                <div ag-field-group for="email">
+                    <div class="form-group">
+                        <label class="control-label col-sm-4">Email</label>
+
+                        <div class="col-sm-8">
+                            <input type="text" name="email" placeholder="Enter Email"
+                                   ng-model="user.info.email"
+                                   ng-required="true"/>
+                            <ag-validation-errors for="email" required="This field is required"/>
+                        </div>
+                    </div>
+                </div>
+            </ng-form>
+
+            <div ag-field-group for="creditInfoAllowance">
+                <div class="form-group">
+                <label class="control-label col-sm-4">Allowance</label>
+
+                <div class="col-sm-8">
+                    <input type="text" name="creditInfoAllowance" placeholder="Enter Allowance"
+                           ng-model="user.creditInfo.allowance"/>
+                </div>
+                    </div>
+            </div>
+
+            <div ag-field-group for="birthday">
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Birthday</label>
+
+                    <div class="col-sm-8">
+                        <div ag-datepicker>
+                            <input type="text"
+                                   ng-model="user.birthday"
+                                   ng-required="true"
+                                   name="birthday"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div ag-field-group for="password,passwordConfirmation">
+                <label class="control-label col-sm-4">Password</label>
+
+                <div class="col-sm-8">
+                    <input type="password" name="password" placeholder="Enter Password"
+                           ng-model="user.password" ng-required="user.newRecord()" ng-minlength="6"/>
+                    <ag-validation-errors for="password"
+                                          required="This field is required"
+                                          minlength="Password must be at least 6 characters"/>
+                </div>
+            </div>
+            <label class="control-label col-sm-4">Confirmation</label>
+
+            <div class="col-sm-8">
+                <div class="controls">
+                    <input type="password" name="passwordConfirmation" placeholder="Enter Password Confirmation"
+                           ng-model="user.passwordConfirmation"
+                           ng-required="user.newRecord()" match="user.password" ng-minlength="6"/>
+                    <ag-validation-errors for="passwordConfirmation"
+                                          required="This field is required"
+                                          minlength="Password must be at least 6 characters"
+                                          mismatch="The password does not match the confirmation"/>
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+                <ag-submit-button></ag-submit-button>
+                <span ng-if="user.persisted()">
+                    <ag-delete-button when-confirmed="delete(user)"></ag-delete-button>
+                </span>
+                <ag-cancel-button ng-click="closeDialog()"></ag-cancel-button>
+            </div>
+        </form>
     </div>
-
-    <ng-form name="info" ag-server-validation-errors>
-      <div ag-field-group for="email">
-        <label class="control-label">Email</label>
-        <div class="controls">
-          <input type="text" name="email" placeholder="Enter Email"
-                 ng-model="user.info.email"
-                 ng-required="true" />
-          <ag-validation-errors for="email" required="This field is required" />
-        </div>
-      </div>
-    </ng-form>
-
-    <div ag-field-group for="creditInfoAllowance">
-      <label class="control-label">Allowance</label>
-
-      <div class="controls">
-        <input type="text" name="creditInfoAllowance" placeholder="Enter Allowance"
-               ng-model="user.creditInfo.allowance" />
-      </div>
-    </div>
-
-    <div ag-field-group for="birthday">
-      <label class="control-label">Birthday</label>
-
-      <div class="controls">
-        <div ag-datepicker>
-          <input type="text"
-                 ng-model="user.birthday"
-                 ng-required="true"
-                 name="birthday"/>
-        </div>
-      </div>
-    </div>
-
-    <div ag-field-group for="password,passwordConfirmation">
-      <label class="control-label">Password</label>
-
-      <div class="controls">
-        <input type="password" name="password" placeholder="Enter Password"
-               ng-model="user.password" ng-required="user.newRecord()" ng-minlength="6" />
-        <ag-validation-errors for="password"
-                          required="This field is required"
-                          minlength="Password must be at least 6 characters" />
-      </div>
-
-      <div class="controls">
-        <input type="password" name="passwordConfirmation" placeholder="Enter Password Confirmation"
-               ng-model="user.passwordConfirmation"
-               ng-required="user.newRecord()" match="user.password" ng-minlength="6" />
-        <ag-validation-errors for="passwordConfirmation"
-                          required="This field is required"
-                          minlength="Password must be at least 6 characters"
-                          mismatch="The password does not match the confirmation" />
-      </div>
-    </div>
-
-    <div class="modal-footer">
-      <ag-submit-button></ag-submit-button>
-
-      <span ng-if="user.persisted()">
-        <ag-delete-button when-confirmed="delete(user)"></ag-delete-button>
-      </span>
-
-      <ag-cancel-button ng-click="closeDialog()"></ag-cancel-button>
-    </div>
-  </form>
 </div>

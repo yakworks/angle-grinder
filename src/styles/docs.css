@@ -521,7 +521,7 @@ form.bs-docs-example {
 }
 
 /* Chevrons */
-.bs-docs-sidenav .icon-chevron-right {
+.bs-docs-sidenav .fa-chevron-right {
     float: right;
     margin-top: 2px;
     margin-right: -6px;
@@ -532,12 +532,12 @@ form.bs-docs-example {
     background-color: #f5f5f5;
 }
 
-.bs-docs-sidenav a:hover .icon-chevron-right {
+.bs-docs-sidenav a:hover .fa-chevron-right {
     opacity: .5;
 }
 
-.bs-docs-sidenav .active .icon-chevron-right,
-.bs-docs-sidenav .active a:hover .icon-chevron-right {
+.bs-docs-sidenav .active .fa-chevron-right,
+.bs-docs-sidenav .active a:hover .fa-chevron-right {
     opacity: 1;
 }
 
@@ -645,7 +645,7 @@ form.bs-docs-example {
         font-size: 24px;
     }
 
-    .marketing .span4 {
+    .marketing .col-md-4 {
         margin-bottom: 40px;
     }
 

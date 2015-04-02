@@ -118,7 +118,7 @@ describe "module: angleGrinder.gridz", ->
 
       {element, $scope} = compileTemplate """
         <a href="" ag-grid-xls-export="grid.users">
-        <i class="icon-download-alt"></i> Export to XLS
+        <i class="fa-download"></i> Export to XLS
       </a>
       """, $injector, $scope
 

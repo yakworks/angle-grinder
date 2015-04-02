@@ -7,10 +7,10 @@
   max-width: 228px;
   margin: 30px 0 0;
   padding: 0;
-  background-color: @dropdownBackground;
-  border-radius: @borderRadiusLarge;
+  background-color: @dropdown-bg;
+  border-radius: @border-radius-large;
   .box-shadow(0 1px 4px rgba(0,0,0,.1));
-  background-color: @dropdownBackground;
+  background-color: @dropdown-bg;
   *border-right-width: 2px;
   *border-bottom-width: 2px;
 }
@@ -24,13 +24,13 @@
   margin: 0 0 -1px;
   padding: 8px 14px;
   border: 1px solid #ccc; // Fallback for IE7-8
-  border: 1px solid @dropdownDividerTop;
+  border: 1px solid @dropdown-divider-bg;
 }
 
 .submenu > li > a {
   padding: 9px 14px;
   display: block;
-  border-top: 1px solid @dropdownDividerTop;
+  border-top: 1px solid @dropdown-divider-bg;
   margin: 0 0 -1px;
 }
 
@@ -39,8 +39,8 @@
 }
 
 .nav-side .submenu {
-  background-color: @wellBackground;
-  border: 1px solid darken(@wellBackground, 7%);
+  background-color: @well-bg;
+  border: 1px solid darken(@well-bg, 7%);
   .box-shadow(inset 0 1px 1px rgba(0,0,0,.05));
 }
 
@@ -49,11 +49,11 @@
 }
 
 .nav-side > li:first-child > a {
-  border-radius: @borderRadiusLarge  @borderRadiusLarge 0 0;
+  border-radius: @border-radius-large  @border-radius-large 0 0;
 }
 
 .nav-side > li:last-child > a {
-  border-radius: 0 0  @borderRadiusLarge  @borderRadiusLarge;
+  border-radius: 0 0  @border-radius-large  @border-radius-large;
 }
 
 .nav-side > .active > a {
@@ -80,8 +80,8 @@
   text-decoration: none;
   text-shadow: none;
   outline: 0;
-  color: @dropdownLinkColorHover;
-  #gradient > .vertical(@dropdownLinkBackgroundHover, darken(@dropdownLinkBackgroundHover, 5%));
+  color: @dropdown-link-hover-color;
+  #gradient > .vertical(@dropdown-link-hover-bg, darken(@dropdown-link-hover-bg, 5%));
 }
 
 // Active state
@@ -89,10 +89,10 @@
 .nav-side  > .active > a,
 .nav-side  > .active > a:hover,
 .nav-side  > .active > a:focus {
-  color: @dropdownLinkColorActive;
+  color: @dropdown-link-active-color;
   text-decoration: none;
   outline: 0;
-  #gradient > .vertical(@dropdownLinkBackgroundActive, darken(@dropdownLinkBackgroundActive, 5%));
+  #gradient > .vertical(@dropdown-link-active-bg, darken(@dropdown-link-active-bg, 5%));
 }
 
 .nav-side.affix {

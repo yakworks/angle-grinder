@@ -26,7 +26,7 @@ class GridNavbarView extends PageObject
     @element @By.css(".create-button")
 
   @has "searchButton", ->
-    @element @By.css(".icon-search")
+    @element @By.css(".fa-search")
 
   @has "quickSearch", ->
     el = @element @By.css("form.navbar-search")

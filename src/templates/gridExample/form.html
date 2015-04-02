@@ -1,74 +1,83 @@
-<div class="modal-header">
-  <button type="button" class="close" ng-click="closeDialog()">&times;</button>
+<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="closeDialog()">&times;</button>
 
-  <h3 ng-switch="record.persisted()">
-    <span ng-switch-when="true">Edit record {{record.customer.name}}</span>
-    <span ng-switch-when="false">Create new record</span>
-  </h3>
-</div>
-
-<div class="modal-body">
-  <form name="editForm" class="form-horizontal no-margin"
-        novalidate="true"
-        ag-submit="save(record, editForm)">
-
-    <div ag-field-group for="customerName">
-      <label class="control-label">Customer Name</label>
-
-      <div class="controls">
-        <input type="text" name="customerName" placeholder="Enter Customer Name"
-               ng-model="record.customer.name" ng-required="true" />
-        <ag-validation-errors for="customerName" />
-      </div>
+        <h3 ng-switch="record.persisted()">
+            <span ng-switch-when="true">Edit record {{record.customer.name}}</span>
+            <span ng-switch-when="false">Create new record</span>
+        </h3>
     </div>
 
-    <div class="control-group">
-      <label class="control-label">Date</label>
+    <div class="modal-body">
+        <form name="editForm" class="form-horizontal"
+              novalidate="true"
+              ag-submit="save(record, editForm)">
 
-      <div class="controls">
-        <input type="text" name="date" placeholder="Enter Date"
-               ng-model="record.invoiceDate" />
-      </div>
-    </div>
+            <div ag-field-group for="customerName">
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Customer Name</label>
 
-    <div class="control-group">
-      <label class="control-label">Note</label>
+                    <div class="col-sm-8">
+                        <input type="text" name="customerName" placeholder="Enter Customer Name"
+                               ng-model="record.customer.name" ng-required="true"/>
+                        <ag-validation-errors for="customerName"/>
+                    </div>
+                </div>
+            </div>
 
-      <div class="controls">
-        <input type="text" name="note" placeholder="Enter Note"
-               ng-model="record.note" />
-      </div>
-    </div>
+            <div class="form-group">
+                <label class="control-label col-sm-4">Date</label>
 
-    <div ag-field-group for="password,passwordConfirmation">
-      <label class="control-label">Password</label>
+                <div class="col-sm-8">
+                    <input type="text" name="date" placeholder="Enter Date"
+                           ng-model="record.invoiceDate"/>
+                </div>
+            </div>
 
-      <div class="controls">
-        <input type="password" name="password" placeholder="Enter Password"
-               ng-model="record.password" ng-required="!record.persisted()" ng-minlength="6" />
-        <ag-validation-errors for="password"
-                          required="This field is required"
-                          minlength="Password must be at least 6 characters" />
-      </div>
+            <div class="form-group">
+                <label class="control-label col-sm-4">Note</label>
 
-      <div class="controls">
-        <input type="password" name="passwordConfirmation" placeholder="Enter Password Confirmation"
-               ng-model="record.passwordConfirmation"
-               ng-required="!record.persisted()" match="record.password" ng-minlength="6" />
-        <ag-validation-errors for="passwordConfirmation"
-                          required="This field is required"
-                          minlength="Password must be at least 6 characters"
-                          mismatch="The password does not match the confirmation" />
-      </div>
-    </div>
+                <div class="col-sm-8">
+                    <input type="text" name="note" placeholder="Enter Note"
+                           ng-model="record.note"/>
+                </div>
+            </div>
 
-    <div class="modal-footer">
+            <div ag-field-group class="form-group" for="password,passwordConfirmation">
+                <label class="control-label col-sm-4">Password</label>
+
+                <div class="col-sm-8">
+
+                        <input type="password" name="password" placeholder="Enter Password"
+                               ng-model="record.password" ng-required="!record.persisted()" ng-minlength="6"/>
+                        <ag-validation-errors for="password"
+                                              required="This field is required"
+                                              minlength="Password must be at least 6 characters"/>
+                    </div>
+                <label class="control-label col-sm-4">Confirmation</label>
+
+                <div class="col-sm-8">
+
+                        <input type="password"  name="passwordConfirmation"
+                               placeholder="Enter Password Confirmation"
+                               ng-model="record.passwordConfirmation"
+                               ng-required="!record.persisted()" match="record.password" ng-minlength="6"/>
+                        <ag-validation-errors for="passwordConfirmation"
+                                              required="This field is required"
+                                              minlength="Password must be at least 6 characters"
+                                              mismatch="The password does not match the confirmation"/>
+                </div>
+            </div>
+
+            <div class="modal-footer">
       <span ng-if="record.persisted()">
         <ag-delete-button when-confirmed="delete(record)"></ag-delete-button>
       </span>
 
-      <cancel-button ng-click="closeDialog()"></cancel-button>
-      <ag-submit-button></ag-submit-button>
+                <cancel-button ng-click="closeDialog()"></cancel-button>
+                <ag-submit-button></ag-submit-button>
+            </div>
+        </form>
     </div>
-  </form>
 </div>
+

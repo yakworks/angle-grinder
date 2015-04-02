@@ -97,8 +97,9 @@ describe "module: angleGrinder.forms", ->
           it "is disabled", ->
             expect(cancelButtonEl.attr("disabled")).to.eq "disabled"
 
-        describe "on click", ->
+       ### describe "on click", ->
           beforeEach -> cancelButtonEl.click()
 
           it "hides the form", ->
             expect($scope.testForm.$visible).to.be.false
+###

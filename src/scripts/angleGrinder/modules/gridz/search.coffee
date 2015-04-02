@@ -17,7 +17,7 @@ gridz.directive "agSearchButton", ->
   replace: true
   template: """
     <button type="submit" ng-click="advancedSearch(filters)" ng-disabled="searching" class="btn btn-info">
-      <i class="icon-search icon-white"></i> Search<span ng-show="searching">...</span>
+      <i class="fa fa-search fa-inverse"></i> Search<span ng-show="searching">...</span>
     </button>
   """
 
@@ -26,7 +26,7 @@ gridz.directive "agResetSearchButton", ->
   replace: true
   template: """
     <button type="button" ng-click="resetSearch(filters)" ng-disabled="searching" class="btn">
-      <i class="icon-remove"></i> Reset<span ng-show="searching">...</span>
+      <i class="fa fa-times"></i> Reset<span ng-show="searching">...</span>
     </button>
   """
 
