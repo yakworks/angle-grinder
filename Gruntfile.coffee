@@ -61,6 +61,9 @@ module.exports = (grunt) ->
     # Update your devDependencies and dependencies automatically with a grunt task
     devUpdate:      config "devUpdate"
 
+    # Set env variables
+    "env":         config "set_env"
+
   grunt.renameTask "regarde", "watch"
 
   grunt.registerTask "build:dev", [
@@ -85,20 +88,24 @@ module.exports = (grunt) ->
 
   # run unit tests
   grunt.registerTask "test:unit", [
+   "env"
     "karma:unit"
   ]
 
   # run unit tests in the watch mode
   grunt.registerTask "test:unit:watch", [
+    "env"
     "karma:watch"
   ]
 
   # run unit tests in the watch mode
   grunt.registerTask "test:watch", [
+    "env"
     "test:unit:watch"
   ]
 
   grunt.registerTask "test", [
+    "env"
     "karma:unit"
   ]
 
