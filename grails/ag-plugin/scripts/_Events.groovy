@@ -2,7 +2,7 @@ includeTargets << grailsScript("_GrailsEvents")
 includeTargets << grailsScript("_GrailsSettings")
 
 eventCleanStart = {
-	Ant.delete('dir':'target')
+	ant.delete('dir':'target')
 }
 
 //eventCompileStart = {

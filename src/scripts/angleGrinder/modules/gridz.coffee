@@ -62,7 +62,7 @@ gridz.directive "agGrid", [
             dataIds = gridEl.getDataIDs()
             if dataIds.length > 0
               gridEl.setSelection dataIds[0], true
-            _gridComplete() if _.isFunction(_gridComplete)
+            _gridComplete.apply this, arguments if _.isFunction(_gridComplete)
 
           options.gridComplete = onGridComplete;
 
