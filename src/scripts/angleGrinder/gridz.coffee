@@ -15,6 +15,9 @@ class Gridz
     # call the jqgrid
     @gridEl.jqGrid @options
 
+    @gridEl.on('jqGridAfterGridComplete', @options.jqGridAfterGridComplete) if $.isFunction(@options.jqGridAfterGridComplete)
+    @gridEl.on('jqGridAfterInsertRow', @options.jqGridAfterInsertRow) if $.isFunction(@options.jqGridAfterInsertRow)
+
     @responsiveResize()
 
   getOptions: (options) ->

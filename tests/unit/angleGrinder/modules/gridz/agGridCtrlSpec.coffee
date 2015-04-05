@@ -34,7 +34,7 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
 
     # initialzie the controller
     ctrl = $controller "AgGridCtrl",
-      $element: $element
+      $element: $element, $attrs: {agGrid: 'gridId'}
 
     sinon.stub(ctrl, "flashOnSuccess")
 
@@ -174,7 +174,7 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
       # When
       ctrl.addRow(234, foo: "bar")
       expect($rootScope.$broadcast).to.have.been.called
-      expect($rootScope.$broadcast).to.have.been.calledWith("gridz:rowAdded", 234, foo: "bar")
+      expect($rootScope.$broadcast).to.have.been.calledWith("gridz:rowAdded", "gridId", 234, foo: "bar")
 
       # stop spying
       $rootScope.$broadcast.restore()

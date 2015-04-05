@@ -7,7 +7,7 @@ gridz = angular.module("angleGrinder.gridz")
 class AgGridCtrl extends BaseCtrl
 
   @register gridz, "AgGridCtrl"
-  @inject "$rootScope", "$element", "$q", "hasSearchFilters", "flatten", "xlsData"
+  @inject "$rootScope", "$element", "$attrs", "$q", "hasSearchFilters", "flatten", "xlsData"
 
   getGridEl: ->
     @gridEl or= @$element.find("table.gridz")
@@ -88,6 +88,7 @@ class AgGridCtrl extends BaseCtrl
 
     @getGridEl().setRowData(id, flatData)
     @flashOnSuccess(id)
+    @$rootScope.$broadcast "gridz:rowUpdated", @$attrs.agGrid, id, data
 
   # Inserts a new row with id = rowid containing the data in data (an object) at
   # the position specified (first in the table, last in the table or before or after the row specified in srcrowid).
@@ -95,7 +96,7 @@ class AgGridCtrl extends BaseCtrl
   # where name is the name of the column as described in the colModel and the value is the value.
   addRow: (id, data, position = "first") ->
     @getGridEl().addRowData(id, @flatten(data), position)
-    @$rootScope.$broadcast "gridz:rowAdded", id, data
+    @$rootScope.$broadcast "gridz:rowAdded", @$attrs.agGrid, id, data
     @flashOnSuccess(id)
 
   # Returns `true` if the grid contains a row with the given id
