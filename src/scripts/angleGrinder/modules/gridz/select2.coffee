@@ -28,7 +28,7 @@ gridz.directive "agSelect2", [
 
       # pre linking function
       pre: (scope, element, attrs) ->
-        options = angular.copy scope.selectOptions or {}
+        options = angular.copy scope.selectOptions or {multiple: true}
         scope.options = options
 
         # read `minimumInputLength` option from the attribute
@@ -72,7 +72,7 @@ gridz.directive "agSelect2", [
 
     template: """
       <div>
-        <input ui-select2="options" multiple ng-model="ngModel" type="hidden"/>
+        <input ui-select2="options" ng-model="ngModel" type="hidden"/>
         <ag-select2-open></ag-select2-open>
       </div>
     """
