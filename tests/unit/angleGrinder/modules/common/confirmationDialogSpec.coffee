@@ -9,11 +9,12 @@ describe "module: angleGrinder.common", ->
     $scope = null
     ctrl = null
 
-    beforeEach inject ($rootScope, $controller) ->
+    beforeEach inject ($rootScope, $controller, _$q_) ->
       $scope = $rootScope.$new()
       ctrl = $controller "ConfirmationDialogCtrl",
         $scope: $scope
         options: message: "This is a test!"
+        defer: _$q_.defer()
 
     it "has the message", ->
       expect(ctrl.options).to.have.property "message", "This is a test!"
@@ -80,6 +81,11 @@ describe "module: angleGrinder.common", ->
       itOpensModalWindow()
       itHasValidConfirmationMessage("Are you sure?")
       itHasValidButtonLabels()
+
+    it "return promise", inject (confirmationDialog) ->
+      r = confirmationDialog.open()
+      expect(r).to.be.an('object')
+      expect(r).to.respondTo('then');
 
     describe "when the confirmation message is specified", ->
 

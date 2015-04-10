@@ -2,14 +2,16 @@ app = angular.module("angleGrinder.common")
 
 class ConfirmationDialogCtrl extends BaseCtrl
   @register app, 'ConfirmationDialogCtrl'
-  @inject "$scope", "$modalInstance", "$log", "options"
+  @inject "$scope", "$modalInstance", "$log", "options", "defer"
 
   close: (confirmed) ->
     @$log.info "[ag] closing confirmation dialog", confirmed
     @$modalInstance.close(confirmed)
+    @defer.resolve(confirmed)
+
 
 app.service "confirmationDialog", [
-  "$modal", "$log", ($modal, $log) ->
+  "$modal", "$log", "$q", ($modal, $log, $q) ->
 
     # Open the confirmation dialog
     # options - it can be a string or object with the messages
@@ -26,7 +28,9 @@ app.service "confirmationDialog", [
 
       $log.info "[ag] opening confirmation dialog", options
 
-      return $modal.open
+      defer = $q.defer()
+
+      $modal.open
         keyboard: false    # do not close the dialog with ESC key
         backdrop: "static" # do not close on click outside of the dialog
 
@@ -40,5 +44,9 @@ app.service "confirmationDialog", [
           </div>
         """
 
-        resolve: options: -> options
+        resolve:
+          options: -> options
+          defer: -> defer
+
+      return defer.promise
 ]
