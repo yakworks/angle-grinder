@@ -1,7 +1,7 @@
 app = angular.module("angleGrinder.common")
 
 class NotificationDialogCtrl extends BaseCtrl
-  @register app
+  @register app, "NotificationDialogCtrl"
   @inject "$scope", "$modalInstance", "$log", "message"
 
   initialize: ->
