@@ -278,3 +278,17 @@ $.extend $.fn.fmatter,
     """
     <a class="editActionLink" href="#">#{cellVal}</a>
     """
+
+
+currencyUnformatter = (cellVal) ->
+  if typeof(cellVal) == 'undefined' or cellVal == null or cellVal == 'null' or cellVal == ''
+    return 0
+  else
+    return parseFloat(cellVal.replace(/[^0-9\.]+/g,""));
+
+
+$.extend $.fn.fmatter?.currency,
+  unformat: currencyUnformatter
+
+$.extend $.fn.fmatter?.currencyOrZero,
+  unformat: currencyUnformatter
