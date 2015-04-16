@@ -85,7 +85,7 @@ describe "module: angleGrinder.common", ->
     it "return promise", inject (confirmationDialog) ->
       r = confirmationDialog.open()
       expect(r).to.be.an('object')
-      expect(r).to.respondTo('then');
+      expect(r).to.respondTo('then')
 
     describe "when the confirmation message is specified", ->
 

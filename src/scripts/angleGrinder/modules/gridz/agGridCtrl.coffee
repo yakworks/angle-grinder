@@ -7,7 +7,7 @@ gridz = angular.module("angleGrinder.gridz")
 class AgGridCtrl extends BaseCtrl
 
   @register gridz, "AgGridCtrl"
-  @inject "$rootScope", "$element", "$attrs", "$q", "hasSearchFilters", "flatten", "xlsData"
+  @inject "$rootScope", "$element", "$attrs", "$q", "hasSearchFilters", "flatten", "xlsData", "csvData"
 
   getGridEl: ->
     @gridEl or= @$element.find("table.gridz")
@@ -218,6 +218,9 @@ class AgGridCtrl extends BaseCtrl
   # Returns data uri with xls file content for rows from the current grid view.
   getXlsDataUri: ->
     @xlsData(@getGridId(), @getSelectedRowIds())
+
+  getCsvData: ->
+    @csvData(@getGridId(), @getSelectedRowIds())
 
   # Triggers grid's resize event
   # @private
