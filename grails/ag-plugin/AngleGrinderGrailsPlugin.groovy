@@ -18,5 +18,4 @@ A plugin that enables ties grails and angular together
     def groupId = 'nine'
     def issueManagement = [system: 'GitHub', url: 'https://github.com/9ci/angle-grinder/issues']
     def scm = [url: 'https://github.com/9ci/angle-grinder']
-
 }
