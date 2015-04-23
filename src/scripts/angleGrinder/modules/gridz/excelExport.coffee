@@ -118,7 +118,7 @@ gridz.service "csvData", [
       resultEl.find("th").each (index, th) ->
         thEl = $(th)
         headers.push(thEl.text().trim())
-      headers.join(",")
+      headers.join("|")
 
     prepareCsvRows = (data) ->
       rows=""
@@ -131,7 +131,7 @@ gridz.service "csvData", [
           tdEl = $(td)
           row.push tdEl.text().trim()
 
-        rows +=row.join(",") + "\r\n"
+        rows +=row.join("|") + "\r\n"
       rows
 
     (gridId, selectedRows = []) ->
@@ -162,7 +162,7 @@ gridz.directive "agGridXlsExport", [
             document.body.appendChild(iframe)
             iframe = iframe.contentWindow || iframe.contentDocument
             csvData = 'sep=|\r\n' + grid.getCsvData()
-            iframe.document.open("text/plain", "replace")
+            iframe.document.open("text/html", "replace")
             iframe.document.write(csvData)
             iframe.document.close()
             iframe.focus()
