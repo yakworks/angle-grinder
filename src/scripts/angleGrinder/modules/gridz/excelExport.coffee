@@ -157,11 +157,16 @@ gridz.directive "agGridXlsExport", [
         if grid.getSelectedRowIds().length isnt 0
           # if browser is IE then open new window and show SaveAs dialog, else use dataUri approach
           if $window.navigator.userAgent.indexOf("MSIE ") > 0 || !!$window.navigator.userAgent.match(/Trident.*rv\:11\./)
-            IEwindow = $window.open()
-            IEwindow.document.write(grid.getCsvData())
-            IEwindow.document.close()
-            IEwindow.document.execCommand('SaveAs', true, "download" + ".csv")
-            IEwindow.close()
+            iframe = document.createElement("IFRAME")
+            iframe.style.display = "none"
+            document.body.appendChild(iframe)
+            iframe = iframe.contentWindow || iframe.contentDocument
+            csvData = 'sep=|\r\n' + grid.getCsvData()
+            iframe.document.open("text/plain", "replace")
+            iframe.document.write(csvData)
+            iframe.document.close()
+            iframe.focus()
+            iframe.document.execCommand('SaveAs', true, 'download.csv')
           else
             dataUri = grid.getXlsDataUri()
             $window.location.href = dataUri
