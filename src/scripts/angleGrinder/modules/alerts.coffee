@@ -47,15 +47,23 @@ alerts.controller "alerts", [
 
     $scope.disposeAlert = (id) ->
       alerts.dispose(id)
+
+    $scope.setTimeout = (timeout) ->
+      alerts.alertTimeout = timeout if timeout
 ]
 
 alerts.directive "agAlerts", ->
+  link: (scope, element, attrs) ->
+    scope.setTimeout(attrs.timeout)
+    if !!attrs.fixed
+      scope.fixed = attrs.fixed
+
   restrict: "E"
   replace: true
 
   template: """
     <aside id="alerts">
-      <div ng-repeat="message in alertMessages" class="alert alert-{{message.type}}">
+      <div ng-repeat="message in alertMessages" ng-class="{'fixed-alert': !!fixed}" class="alert alert-{{message.type}}" style="margin-top: {{fixed || 0}}px ;top: {{50 * $index}}px">
         <button ng-click="disposeAlert(message.id)" type="button" class="close">×</button>
         <strong>{{message.type}}</strong> <span>{{message.text}}</span>
       </div>

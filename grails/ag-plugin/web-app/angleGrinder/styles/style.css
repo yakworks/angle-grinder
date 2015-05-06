@@ -10,3 +10,10 @@ li.spinner i.spin:before {
 .nav-tabs li.loading a:after {
   content: url('../img/ajax-loader.gif');
 }
+
+.fixed-alert {
+    position: fixed;
+    max-width: 980px;
+    width: 100%;
+    z-index: 999999;
+}
