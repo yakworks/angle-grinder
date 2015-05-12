@@ -7,6 +7,7 @@ class Alerts
   constructor: (@$log, @$timeout, @alertTimeout) ->
     @lastId = 0
     @messages = []
+    @typedAlertTimeouts = {}
 
   # Returns a next id for the new message
   nextId: ->
@@ -25,18 +26,30 @@ class Alerts
   info: (text) -> @push("info", text)
   error: (text) -> @push("error", text)
 
+  setTimeout: (type, delay) ->
+    @typedAlertTimeouts[type] = delay
+
   # Disposes a message with the given id
   dispose: (id) ->
     at = _(@messages.map((message) -> message.id)).indexOf(id)
     @messages.splice(at, 1)
 
+  #Returns type of the message with specified id
+  getType: (id) ->
+    (message.type for message in @messages when message.id is id)[0]
+
+  #Returns timeout for dispose in milliseconds
+  getTimeout: (id) ->
+    @typedAlertTimeouts[@getType(id)] || @alertTimeout
+
   # Dispose the message after the given time in milliseconds
   delayedDispose: (id) ->
-    if @alertTimeout? and @alertTimeout > 0
+    timeout = @getTimeout(id)
+    if timeout? and timeout > 0
       disposeTheAlert = =>
         @$log.info("Disposing alert", id, "after", @alertTimeout, "milliseconds")
         @dispose(id)
-      @$timeout(disposeTheAlert, @alertTimeout)
+      @$timeout(disposeTheAlert, timeout)
 
 alerts.service "alerts", Alerts
 
@@ -49,12 +62,14 @@ alerts.controller "alerts", [
       alerts.dispose(id)
 
     $scope.setTimeout = (timeout) ->
-      alerts.alertTimeout = timeout if timeout
+      alerts.alertTimeout = timeout.default if timeout.default
+      alerts.setTimeout("info", timeout.info) if timeout.info
+      alerts.setTimeout("error", timeout.error) if timeout.error
 ]
 
 alerts.directive "agAlerts", ->
   link: (scope, element, attrs) ->
-    scope.setTimeout(attrs.timeout)
+    scope.setTimeout({default: attrs.timeout, info: attrs.infoTimeout, error: attrs.errorTimeout})
     if !!attrs.fixed
       scope.fixed = attrs.fixed
 
