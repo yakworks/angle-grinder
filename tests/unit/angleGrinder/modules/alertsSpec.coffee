@@ -148,3 +148,38 @@ describe "module: angleGrinder.alerts", ->
 
         # Then
         expect(alerts.messages.length).to.equal 0
+
+    describe "#getType", ->
+      it "gets type of the message by id", inject (alerts) ->
+        # Given
+        testMessage = "This is a test message!"
+
+        # When
+        alerts.error(testMessage)
+        alerts.info(testMessage)
+
+        # Then
+        expect(alerts.getType(1)).to.equal "error"
+        expect(alerts.getType(2)).to.equal "info"
+
+      describe "#getTimeout", ->
+      it "gets timeout for certain message type", inject (alerts) ->
+        # Given
+        testMessage = "This is a test message!"
+
+        # When
+        alerts.alertTimeout = 1000
+        alerts.error(testMessage)
+        alerts.info(testMessage)
+
+        # Then
+        expect(alerts.getTimeout(1)).to.equal 1000
+        expect(alerts.getTimeout(2)).to.equal 1000
+
+        # When
+        alerts.setTimeout("info", 2000)
+        alerts.setTimeout("error", 4000)
+
+        # Then
+        expect(alerts.getTimeout(1)).to.equal 4000
+        expect(alerts.getTimeout(2)).to.equal 2000
