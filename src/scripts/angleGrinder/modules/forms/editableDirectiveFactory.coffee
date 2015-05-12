@@ -24,6 +24,7 @@ forms.config ["$provide", ($provide) ->
 
             form = ctrl[1]
             name = attrs.eName
+            readonly = attrs.eReadonly
 
             # watch for model validity
             # and display errors if necessary
@@ -37,6 +38,10 @@ forms.config ["$provide", ($provide) ->
 
                 if model?.$valid
                   form.$setError(name, "")
+
+            # watch if input has readonly attribute
+            if form? and readonly?
+              scope.readonly = readonly
 
         return directive
   ]
