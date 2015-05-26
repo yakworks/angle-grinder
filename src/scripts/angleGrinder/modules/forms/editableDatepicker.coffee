@@ -2,7 +2,7 @@ forms = angular.module("angleGrinder.forms")
 
 # x-editable wrapper for date picker with calendar button
 forms.directive "editableDatepicker", [
-  "editableDirectiveFactory", (editableDirectiveFactory) ->
+  "editableDirectiveFactory", "$filter", (editableDirectiveFactory, $filter) ->
     editableDirectiveFactory
       directiveName: "editableDatepicker"
 
@@ -37,4 +37,11 @@ forms.directive "editableDatepicker", [
           $event.stopPropagation()
 
           @scope.opened = true
+
+      save: ->
+        #Check if trimTime directive is present, then set model to date string without time
+        if @attrs.eAgTrimTime
+          @scope.$data = $filter("date")(@scope.$data, "yyyy-MM-dd")
+        @parent.save.call(this)
+
 ]
