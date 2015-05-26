@@ -51,7 +51,7 @@ gridz = angular.module("angleGrinder.gridz")
 gridz.config [
   "agDateFilterProvider", (provider) ->
     # set default date format
-    provider.setDefaultFormat("short")
+    provider.setDefaultFormat("MM/DD/YY H:mm a")
 ]
 
 gridz.config [
