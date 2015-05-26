@@ -13,8 +13,10 @@ class IndexCtrl extends BaseCtrl
     @$scope.second = title: "The Second Tab"
     @$scope.third = title: "The Third Tab"
     @$scope.item = name: "Foo"
-
     @$scope.birthDate = new Date()
+
+    @$scope.user = {}
+    @$scope.user.birthDate = "2015-05-22T23:00:00+0200"
     @$scope.price = 99990001.98001
 
   save: (item, form) ->
