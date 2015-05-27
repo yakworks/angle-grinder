@@ -5,7 +5,7 @@ forms = angular.module("angleGrinder.forms")
 #   result.data - data for successfully updated rows
 #   result.errors - assoc array for errors (id => errors)
 forms.factory "massUpdateHandler", [
-  "$log", ($log) ->
+  "$log", "alerts", ($log, alerts) ->
     (grid, result) ->
       $log.info "[forms] Mass update response", result
 
@@ -20,4 +20,7 @@ forms.factory "massUpdateHandler", [
         grid.flashOnError(id) for id, error of result.errors
       else
         $log.warn "[forms] Invalid JSON response, missing errors assoc array"
+
+      if result.message
+        alerts.error(result.message)
 ]

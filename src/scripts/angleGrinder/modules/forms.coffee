@@ -25,6 +25,7 @@ forms = angular.module("angleGrinder.forms", [
   "ui.bootstrap"
   "xeditable"
   "angleGrinder.common"
+  "angleGrinder.alerts"
 ])
 
 forms.run [
