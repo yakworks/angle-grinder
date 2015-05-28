@@ -19,8 +19,8 @@ describe "module: angleGrinder.common", ->
       filter = $filter("agDateTime")
 
     it "uses date time format", ->
-      date = new Date(2014, 5, 12)
-      expect(filter(date)).to.eq "12 Jun 2014 12:00 AM"
+      date = new Date(2014, 5, 12, 12, 0)
+      expect(filter(date)).to.eq "12 Jun 2014 12:00 PM"
 
       date = new Date(2014, 5, 12, 5, 29)
       expect(filter(date)).to.eq "12 Jun 2014 05:29 AM"
@@ -30,8 +30,8 @@ describe "module: angleGrinder.common", ->
       it "can set the default date format", ->
         date = new Date(2014, 5, 12, 5, 29)
 
-        provider.setDefaultFormat("dd MMM yyyy hh:mm")
+        provider.setDefaultFormat("DD MMM YYYY HH:mm")
         expect(filter(date)).to.eq "12 Jun 2014 05:29"
 
-        provider.setDefaultFormat("hh:mm a")
+        provider.setDefaultFormat("HH:mm A")
         expect(filter(date)).to.eq "05:29 AM"

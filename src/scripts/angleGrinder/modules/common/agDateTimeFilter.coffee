@@ -2,7 +2,7 @@ app = angular.module "angleGrinder.common"
 
 app.provider "agDateTimeFilter", ->
   # see https://docs.angularjs.org/api/ng/filter/date
-  defaultFormat = "dd MMM yyyy hh:mm a"
+  defaultFormat = "DD MMM YYYY HH:mm A"
 
   # Set the default date format
   # which will be used across the whole application.
@@ -13,6 +13,6 @@ app.provider "agDateTimeFilter", ->
     "$filter", ($filter) ->
 
       (date, format = defaultFormat) ->
-        $filter("agDate")(date, format)
+        $filter("agDate")(date, true,format)
 
   ]

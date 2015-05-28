@@ -19,6 +19,7 @@ module.exports =
     "components/bower/angular-xeditable/dist/js/xeditable.js"
     "components/bower/jquery-file-upload/js/jquery.fileupload-angular.js"
     "components/bower/bower-angular-placeholders/angular-placeholders.js"
+    "components/bower/moment/moment.js"
 
     "src/scripts/angleGrinder/gridz.coffee"
     "src/scripts/angleGrinder/baseCtrl.coffee"
