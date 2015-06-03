@@ -122,6 +122,99 @@
     </div>
   </tab>
 
+  <tab>
+    <tab-heading>Fourth tab</tab-heading>
+
+    <h1 class="page-header">Panel States</h1>
+
+    <h2 class="page-header">Simple panels example</h2>
+
+    <div class="row-fluid ag-panels-row">
+      <div class="span6">
+        <div class="panel ag-panel panel-default">
+          <div class="panel-heading ag-panel-states">
+            <h4 class="panel-title">Panel One</h4>
+          </div>
+
+          <div class="panel-body">
+            <p>Row is hiding</p>
+            <p>Row is hiding</p>
+            <p stay-on-collapse><i><b>Row is staying when panel collapsed</b></i></p>
+            <p>Row is hiding</p>
+          </div>
+
+          <div class="panel-footer" ph-txt="1s"></div>
+        </div>
+      </div>
+
+      <div class="span6">
+        <div class="panel ag-panel panel-default">
+          <div class="panel-heading ag-panel-states">
+            <h4 class="panel-title">Panel Two</h4>
+          </div>
+
+          <div class="panel-body">
+            <p>In this case all the content of panel will hide<p>
+          </div>
+          <div class="panel-footer" ph-txt="1s"></div>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="page-header">Grid example</h2>
+
+    <div class="ag-panels-row">
+      <div class="ag-panel">
+        <div class="navbar navbar-grid ag-panel-states">
+          <div class="navbar-inner with-selected-pointer with-grid-options">
+            <ul class="nav">
+              <li class="dropdown selected-actions">
+                <a data-toggle="dropdown" class="dropdown-toggle" href="#" style="padding-left: 2px">
+                  <i class="icon-selected-pointer"> </i> Actions <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a href=""><i class="icon-eye-open"></i> View</a></li>
+                  <li><a href=""><i class="icon-external-link"></i> Export</a></li>
+                  <li class="divider"></li>
+                  <li><a href=""><i class="icon-trash"></i> Delete</a></li>
+                </ul>
+              </li>
+              <li class="divider-vertical"></li>
+              <li>
+                <a href="" class="create-button" ng-click="createRecord()">
+                  <i class="icon-plus-sign"></i> Add new record
+                </a>
+              </li>
+            </ul>
+
+            <ul class="nav pull-right">
+              <li><a href="" title="search screen"><i class="icon-search"></i></a></li>
+              <li class="divider-vertical skinny"></li>
+              <li class="dropdown grid-options">
+                <a data-toggle="dropdown" class="dropdown-toggle" href=""><i class="icon-cog"></i><b
+                  class="caret"></b></i></a>
+                <ul class="dropdown-menu">
+                  <li><a href=""><i class="icon-th-list"></i> Columns</a></li>
+                  <li><a href=""><i class="icon-edit"></i> Another action</a></li>
+                  <li class="divider"></li>
+                  <li><a href=""><i class="icon-external-link"></i> Separated link</a></li>
+                </ul>
+              </li>
+            </ul>
+            <form action="" class="navbar-search pull-right">
+              <input type="text" value="" placeholder="Search" class="search-query span2"
+                     style="width: 150px;"/>
+            </form>
+          </div>
+        </div>
+
+        <div ag-grid="gridOptions" ag-grid-name="exampleGrid"></div>
+
+      </div>
+    </div>
+
+  </tab>
+
 </tabset>
 
 <h3>More panels</h3>
