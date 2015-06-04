@@ -41,7 +41,7 @@ forms.config ["$provide", ($provide) ->
 
             # watch if input has disabled attribute
             if form? and disabled?
-              scope.readonly = disabled
+              scope.disabled = disabled
 
         return directive
   ]
