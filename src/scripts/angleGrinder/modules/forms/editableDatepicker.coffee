@@ -22,7 +22,7 @@ forms.directive "editableDatepicker", [
 
         # add a button for opening the calendar
         @inputEl.after """
-          <button type="button" class="btn btn-default" ng-click="open($event)" ng-disabled="readonly">
+          <button type="button" class="btn btn-default" ng-click="open($event)" ng-disabled="disabled">
             <i class="icon-calendar"></i>
           </button>
         """

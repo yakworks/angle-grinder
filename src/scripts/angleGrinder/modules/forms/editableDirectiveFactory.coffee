@@ -24,7 +24,7 @@ forms.config ["$provide", ($provide) ->
 
             form = ctrl[1]
             name = attrs.eName
-            readonly = attrs.eReadonly
+            disabled = attrs.ngDisabled
 
             # watch for model validity
             # and display errors if necessary
@@ -39,9 +39,9 @@ forms.config ["$provide", ($provide) ->
                 if model?.$valid
                   form.$setError(name, "")
 
-            # watch if input has readonly attribute
-            if form? and readonly?
-              scope.readonly = readonly
+            # watch if input has disabled attribute
+            if form? and disabled?
+              scope.readonly = disabled
 
         return directive
   ]

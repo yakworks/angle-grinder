@@ -36,6 +36,14 @@ forms.directive "agDatepicker", [
         # manually transclude the element
         # grab the input element and decorate it with useful stuff
         transclude scope, (clone) ->
+
+          angular.forEach(clone, (child) ->
+            if child.localName == "input"
+              angular.forEach(child.attributes, (attribute) ->
+                if attribute.name == "ng-disabled"
+                  scope.disabled = attribute.value
+              )
+          )
           # dynamically add `datepicker-popup` to the input
           clone.attr("datepicker-popup", "MM/dd/yyyy")
           # ..and wire it with `opened` scope variable
@@ -47,7 +55,7 @@ forms.directive "agDatepicker", [
     template: """
       <div class="input-append ag-datepicker">
 
-        <button type="button" class="btn btn-default" ng-click="open($event)" ng-disabled="readonly">
+        <button type="button" class="btn btn-default" ng-click="open($event)" ng-disabled="disabled">
           <i class="icon-calendar"></i>
         </button>
       </div>
