@@ -24,7 +24,7 @@ forms.config ["$provide", ($provide) ->
 
             form = ctrl[1]
             name = attrs.eName
-            disabled = attrs.ngDisabled
+            disabled = attrs.disabled
 
             # watch for model validity
             # and display errors if necessary

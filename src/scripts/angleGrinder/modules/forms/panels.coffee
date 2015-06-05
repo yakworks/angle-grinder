@@ -206,6 +206,15 @@ forms.directive "panelModal", [
           gridEl = angular.element(element).find("table.gridz")
           if angular.element(gridEl).length > 0 then gridEl.jqGrid().trigger("resize")
 
+        $scope.setGridMaxHeight = (element) ->
+          uiJqgridBdiv = angular.element(element).find(".ui-jqgrid-bdiv")
+          if not $scope.maxHeight
+            $scope.maxHeight = angular.element(uiJqgridBdiv).css("max-height")
+            angular.element(uiJqgridBdiv).css("max-height", "80vh")
+          else
+            angular.element(uiJqgridBdiv).css("max-height", $scope.maxHeight)
+            $scope.maxHeight = undefined
+
     ]
 
     link: (scope, element) ->
@@ -222,10 +231,12 @@ forms.directive "panelModal", [
             modalBody = element.find(".modal-body").append(angular.element(modalEl).children())
             angular.element(modalEl).remove()
             scope.shrinkGridIfExists modalBody
+            scope.setGridMaxHeight modalBody
           else if not newVal and element.scope()
             element.find('[name="agPanelStates"]').removeClass("ng-hide")
             modalBody = element.find(".modal-body").children().insertBefore(element)
             scope.shrinkGridIfExists modalBody
+            scope.setGridMaxHeight modalBody
             element.remove()
       )
 

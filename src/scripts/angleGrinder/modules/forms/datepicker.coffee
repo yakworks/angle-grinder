@@ -40,7 +40,7 @@ forms.directive "agDatepicker", [
           angular.forEach(clone, (child) ->
             if child.localName == "input"
               angular.forEach(child.attributes, (attribute) ->
-                if attribute.name == "ng-disabled"
+                if attribute.name == "disabled"
                   scope.disabled = attribute.value
               )
           )
@@ -55,7 +55,7 @@ forms.directive "agDatepicker", [
     template: """
       <div class="input-append ag-datepicker">
 
-        <button type="button" class="btn btn-default" ng-click="open($event)" ng-disabled="disabled">
+        <button type="button" class="btn btn-default" ng-click="open($event)" disabled="disabled">
           <i class="icon-calendar"></i>
         </button>
       </div>

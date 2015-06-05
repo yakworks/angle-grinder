@@ -7,7 +7,7 @@ forms.directive "editableDatepicker", [
       directiveName: "editableDatepicker"
 
       inputTpl: """
-        <input type="text" ng-model="$data" datepicker-popup="MM/dd/yyyy" is-open="opened">
+        <input type="text" ng-model="$data" datepicker-popup="MM/dd/yyyy" is-open="opened" readonly="disabled">
       """
 
       render: ->
