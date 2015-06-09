@@ -27,6 +27,9 @@ class AgGridCtrl extends BaseCtrl
     ids = @getSelectedRowIds()
     _.map ids, (id) -> getRowData(id)
 
+  clearSelection: ->
+    @getGridEl().jqGrid 'resetSelection'
+
   # Returns an array with data of the requested id = rowid.
   # The returned array is of type name:value, where the name is
   # a name from colModel and the value from the associated column in that row.

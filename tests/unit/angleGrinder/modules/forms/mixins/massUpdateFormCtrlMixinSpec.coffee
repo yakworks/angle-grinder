@@ -32,6 +32,7 @@ describe "module: angleGrinder.forms mixin: massUpdateFormCtrlMixin", ->
     grid = sinon.stub
       reload: angular.noop,
       updateRow: angular.noop,
+      clearSelection: angular.noop,
       flashOnError: ->
 
     massUpdateFormCtrlMixin $scope,
@@ -55,6 +56,9 @@ describe "module: angleGrinder.forms mixin: massUpdateFormCtrlMixin", ->
       expect(promise.then).to.be.a "function"
       expect(promise.catch).to.be.a "function"
       expect(promise.finally).to.be.a "function"
+
+      $rootScope.$digest()
+      expect(grid.clearSelection.called).to.be.true
 
     describe "when the massUpdate form is valid", ->
 

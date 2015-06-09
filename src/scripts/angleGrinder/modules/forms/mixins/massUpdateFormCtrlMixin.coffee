@@ -23,6 +23,7 @@ mixin.factory "massUpdateFormCtrlMixin", [
 
         return promise.then (result) ->
           massUpdateHandler(grid, result)
+          grid.clearSelection()
           $scope.closeDialog()
 
           return result
