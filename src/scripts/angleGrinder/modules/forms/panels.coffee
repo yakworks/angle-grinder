@@ -118,15 +118,26 @@ forms.directive "agPanelStates",  [
         # Method for collapsing a grid
         collapseGrid = (element) ->
           gridEl = angular.element(element).find("table.gridz")
+
           if $scope.state is "collapsed"
-            for row in angular.element(gridEl).find("tbody").children()
-              if not angular.element(row).hasClass("ui-state-highlight") and not angular.element(row).hasClass("jqgfirstrow")
-                angular.element(row).addClass("ng-hide")
+            tBody = angular.element(gridEl).find("tbody")
+            if angular.element(tBody).find(".ui-state-highlight").length > 0
+              for row in angular.element(gridEl).find("tbody").children()
+                if not angular.element(row).hasClass("ui-state-highlight") and not angular.element(row).hasClass("jqgfirstrow")
+                  angular.element(row).addClass("ng-hide")
+            else
+              $scope.gridRowNum = gridEl.jqGrid("getGridParam", "rowNum")
+              gridEl.jqGrid("setGridParam", rowNum: 1).trigger("reloadGrid", [{page: 1}])
             angular.element(element).find(".gridz-pager").addClass("ng-hide")
+
           if $scope.state is "normal"
-            for row in angular.element(gridEl).find("tbody").children()
-              if angular.element(row).hasClass("ng-hide")
-                angular.element(row).removeClass("ng-hide")
+            if $scope.gridRowNum then gridEl.jqGrid("setGridParam", rowNum: $scope.gridRowNum).trigger("reloadGrid", [{page: 1}])
+            else
+              for row in angular.element(gridEl).find("tbody").children()
+                if angular.element(row).hasClass("ng-hide")
+                  angular.element(row).removeClass("ng-hide")
+                if angular.element(row).hasClass("ui-state-highlight")
+                  angular.element(row).addClass("ui-state-highlight")
             angular.element(element).find(".gridz-pager").removeClass("ng-hide")
           return
 
@@ -203,8 +214,9 @@ forms.directive "panelModal", [
 
         # Trigger for grid resizing
         $scope.shrinkGridIfExists = (element) ->
+          gridWidth = element.width()
           gridEl = angular.element(element).find("table.gridz")
-          if angular.element(gridEl).length > 0 then gridEl.jqGrid().trigger("resize")
+          if angular.element(gridEl).length > 0 then gridEl.jqGrid("setGridWidth", gridWidth, true)
 
         $scope.setGridMaxHeight = (element) ->
           uiJqgridBdiv = angular.element(element).find(".ui-jqgrid-bdiv")
@@ -228,16 +240,19 @@ forms.directive "panelModal", [
             modalEl = angular.element($document).find('panel-modal')
             angular.element(modalEl).find('[name="agPanelStates"]').addClass("ng-hide")
             element.insertBefore(modalEl)
-            modalBody = element.find(".modal-body").append(angular.element(modalEl).children())
+            element.find(".modal-body").append(angular.element(modalEl).children())
+            modalBody = element.find(".modal-body").children()
             angular.element(modalEl).remove()
             scope.shrinkGridIfExists modalBody
             scope.setGridMaxHeight modalBody
           else if not newVal and element.scope()
-            element.find('[name="agPanelStates"]').removeClass("ng-hide")
-            modalBody = element.find(".modal-body").children().insertBefore(element)
+            modalEl = angular.element($document).find('panel-modal')
+            angular.element(modalEl).find('[name="agPanelStates"]').removeClass("ng-hide")
+            modalBody = angular.element(modalEl).find(".modal-body").children()
+            angular.element(modalBody).insertBefore(modalEl)
+            angular.element(modalEl).remove()
             scope.shrinkGridIfExists modalBody
             scope.setGridMaxHeight modalBody
-            element.remove()
       )
 
 ]
