@@ -11,7 +11,7 @@ describe "module: angleGrinder.forms mixin: dialogCrudCtrlMixin", ->
     # stub `confirmationDialog` service
     $provide.decorator "confirmationDialog", ($delegate) ->
       $delegate.confirmed = true
-      sinon.stub($delegate, "open").returns result: then:
+      sinon.stub($delegate, "open").returns then:
         (callback) -> callback($delegate.confirmed)
 
       $delegate
