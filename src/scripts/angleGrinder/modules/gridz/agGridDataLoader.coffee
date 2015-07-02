@@ -20,5 +20,10 @@ gridz.service "agGridDataLoader", [
         # show/hide the loading animation
         loadingEl = $document.find("##{$.jgrid.jqID(loadingDivSelector)}")
         loadingEl.show()
-        promise.finally -> loadingEl.hide()
+        promise.finally ->
+          # list of urls for pending requests
+          pendingUrls = _.map($http.pendingRequests, (it)->
+            it.url)
+          # hide "Loading" for grid only if thereis no pending requests for this grid
+          loadingEl.hide() if url not in pendingUrls
 ]
