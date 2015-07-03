@@ -32,8 +32,10 @@ describe "module: angleGrinder.gridz", ->
         quickSearch = (value) ->
           $scope.filters.quickSearch = value
 
-          buttonEl = element.find("form[name=quickSearch]").find("button[type=submit]")
-          buttonEl.click()
+          inputEl = element.find("form[name=quickSearch]").find("input")
+          inputEl.triggerHandler
+            type: 'keydown',
+            which: 13
 
         # When
         quickSearch("name")
@@ -59,14 +61,16 @@ describe "module: angleGrinder.gridz", ->
         expect(element.isolateScope().filters.quickSearch).to.eq ""
         expect($scope.filters.foo).to.eq "bar"
 
-      it "tigers search", ->
+      it "trigers search", ->
         # Given
         quickSearch = (value) ->
           scope = element.isolateScope()
           scope.filters.quickSearch = value
 
-          buttonEl = element.find("form[name=quickSearch]").find("button[type=submit]")
-          buttonEl.click()
+          inputEl = element.find("form[name=quickSearch]").find("input")
+          inputEl.triggerHandler
+            type: 'keydown',
+            which: 13
 
         # When
         quickSearch("name")
