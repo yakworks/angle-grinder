@@ -9,6 +9,9 @@ form[editable-form] .title {
   padding-top: 5px;
   vertical-align: top;
   min-width: 130px;
+  text-align: right;
+  margin-right: 8px;
+	
 }
 
 form[editable-form] .editable {
