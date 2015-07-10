@@ -51,14 +51,14 @@ class AgGridCtrl extends BaseCtrl
     @$rootScope.$broadcast "gridz:loadComplete", data
 
   # Reloads the grid with the current settings
-  reload: ->
+  reload: (options=[])->
     deferred = @$q.defer()
 
     unregister = @$rootScope.$on "gridz:loadComplete", (_, data) ->
       deferred.resolve(data)
       unregister()
 
-    @getGridEl().trigger("reloadGrid")
+    @getGridEl().trigger("reloadGrid", options)
 
     deferred.promise
 
