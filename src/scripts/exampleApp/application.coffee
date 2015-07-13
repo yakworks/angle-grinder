@@ -33,8 +33,8 @@ app.factory "httpErrorsInterceptor", [
       errorMessage = response.data?.error or "Unexpected HTTP error"
       $log.debug "intercepting", errorMessage, response
 
-      # skip validation errors
-      alerts.error(errorMessage) if response.status isnt 422
+      # skip validation and auth errors
+      alerts.error(errorMessage) if response.status isnt 422 and response.status isnt 401
 
       $q.reject(response)
 
