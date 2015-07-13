@@ -51,6 +51,12 @@ gridz.directive "agGrid", [
         if options.datatype is undefined or options.datatype is null
           options.datatype = agGridDataLoader(options.url, gridCtrl)
 
+        gridEl.on "jqGridAfterGridComplete", () ->
+          # Add `min` class to remove pading to minimize row height
+          if options.minRowHeight
+            _.each gridEl[0].rows, (it) ->
+              angular.element(it).addClass('min')
+
         # jqGrid sucks at this point it expects `pager` to be an id
         unless options.pager is false
           options.pager = element.find(".gridz-pager").attr("id") or "gridz-pager"
@@ -63,10 +69,6 @@ gridz.directive "agGrid", [
             if dataIds.length > 0
               gridEl.setSelection dataIds[0], true
             _gridComplete.apply this, arguments if _.isFunction(_gridComplete)
-            # Remove pading to minimize row height
-            if options.minRowHeight
-              _.each gridEl.find(".ui-jqgrid tr.ui-row-ltr"), (it) ->
-                angular.element(it).addClass('min')
 
           options.gridComplete = onGridComplete;
 
