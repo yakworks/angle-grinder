@@ -63,6 +63,10 @@ gridz.directive "agGrid", [
             if dataIds.length > 0
               gridEl.setSelection dataIds[0], true
             _gridComplete.apply this, arguments if _.isFunction(_gridComplete)
+            # Remove pading to minimize row height
+            if options.minRowHeight
+              _.each gridEl.find(".ui-jqgrid tr.ui-row-ltr"), (it) ->
+                angular.element(it).addClass('min')
 
           options.gridComplete = onGridComplete;
 
