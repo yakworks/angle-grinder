@@ -60,7 +60,8 @@ class Gridz
     isCheckBox = $(e.target).hasClass("cbox")
 
     if not e.ctrlKey and not e.shiftKey and not e.metaKey and not isCheckBox
-      @gridEl.jqGrid "resetSelection"
+      # Reset selection if multiboxonly is set to true read http://www.trirand.com/jqgridwiki/doku.php?id=wiki:options
+      @gridEl.jqGrid "resetSelection" if @gridEl.jqGrid("getGridParam", "multiboxonly")
     else if startId and e.shiftKey
 
       @gridEl.jqGrid "resetSelection"
