@@ -15,11 +15,11 @@ app.service "confirmationDialog", [
 
     # Open the confirmation dialog
     # options - it can be a string or object with the messages
-    #   if th emessage is not specified defalt "Are you sure?" message will be used
+    #   if th message is not specified default "Are you sure?" message will be used
     open: (options = {}) ->
       options = { message: options } if angular.isString(options)
 
-      # assing default confirmation message
+      # assign default confirmation message
       options.message ?= "Are you sure?"
 
       # assign button labels
