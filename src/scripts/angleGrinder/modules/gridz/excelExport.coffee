@@ -169,7 +169,15 @@ gridz.directive "agGridXlsExport", [
             iframe.document.execCommand('SaveAs', true, 'download.csv')
           else
             dataUri = grid.getXlsDataUri()
-            $window.location.href = dataUri
+            link = document.createElement('a')
+            link.href = dataUri
+            link.setAttribute('download', 'download.xls')
+            document.body.appendChild(link)
+            click_ev = document.createEvent("MouseEvents")
+            # initialize the event
+            click_ev.initEvent("click", true, true)
+            # trigger the event
+            link.dispatchEvent(click_ev)
         else
           notificationDialog.open("Please select at least one row.")
 ]
