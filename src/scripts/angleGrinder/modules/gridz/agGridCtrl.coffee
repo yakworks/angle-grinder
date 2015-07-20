@@ -248,3 +248,21 @@ class AgGridCtrl extends BaseCtrl
       rowEl.css "background-color", ""
 
     rowEl.fadeIn "fast", -> complete()
+
+  addClass: (id, clazz) ->
+    rowEl = $(@getGridEl()[0].rows.namedItem(id))
+
+    rowEl.delay(250).fadeOut "medium", ->
+      if not rowEl.hasClass(clazz)
+        rowEl.addClass(clazz)
+
+    rowEl.fadeIn "fast", -> angular.noop()
+
+  removeClass: (id, clazz) ->
+    rowEl = $(@getGridEl()[0].rows.namedItem(id))
+
+    rowEl.delay(250).fadeOut "medium", ->
+      if rowEl.hasClass(clazz)
+        rowEl.removeClass(clazz)
+
+    rowEl.fadeIn "fast", -> angular.noop()
