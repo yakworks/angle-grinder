@@ -10,7 +10,7 @@ forms.value "getRealPanelHeight", (el) ->
   if angular.element(bodyEl).attr("collapsed")
     bodyEl.css("min-height", 0)
   else
-    bodyEl.css("min-height", oldHeight)
+    bodyEl.css("min-height", oldHeight) if not bodyEl?[0]?.attributes?['min-height']
 
   # Remove padding between grid header and body
   if el.find("[ag-grid]").length > 0
