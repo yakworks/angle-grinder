@@ -2,15 +2,15 @@
 module.exports = ->
 
   coffee:
-    files: ["<%= appConfig.app %>/scripts/**/*.coffee"]
+    files: ["<%= appConfig.app %>/scripts/**/*.coffee", "<%= appConfig.docs %>/exampleApp/**/*.coffee"]
     tasks: ["coffee:dist", "ngtemplates:exampleApp"]
 
   html:
-    files: ["<%= appConfig.app %>/index.html"]
+    files: ["<%= appConfig.app %>/index.html", "<%= appConfig.docs %>/index.html"]
     tasks: ["copy:dev"]
 
   templates:
-    files: ["<%= appConfig.app %>/templates/**/*.html"]
+    files: ["<%= appConfig.docs %>/exampleApp/templates/**/*.html"]
     tasks: ["ngtemplates:exampleApp"]
 
   css:
@@ -22,5 +22,5 @@ module.exports = ->
     tasks: ["less"]
 
   livereload:
-    files: ["<%= appConfig.dev %>/**/*"]
+    files: ["<%= appConfig.dev %>/**/*", "<%= appConfig.docs %>/**/*"]
     tasks: ["livereload"]

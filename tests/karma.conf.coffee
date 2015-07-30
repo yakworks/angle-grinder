@@ -15,10 +15,11 @@ module.exports = (config) ->
       "**/*.html": ["html2js"]
 
       "src/scripts/**/*.coffee": ["coverage"]
+      "docs/exampleApp/**/*.coffee": ["coverage"]
       "tests/unit/**/*.coffee": ["coffee"]
 
     ngHtml2JsPreprocessor:
-      stripPrefix: "src/"
+      stripPrefix: "docs/"
 
     junitReporter:
       outputFile: "test-results.xml"

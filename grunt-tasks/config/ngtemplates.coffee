@@ -2,10 +2,10 @@
 module.exports = (grunt) ->
 
   options:
-    base: "<%= appConfig.app %>"
+    base: "<%= appConfig.docs %>"
     module: "exampleApp"
 
   exampleApp:
-    cwd: "<%= appConfig.app %>"
+    cwd: "<%= appConfig.docs %>"
     src: "templates/**/*.html"
     dest: "<%= appConfig.dev %>/scripts/exampleApp/templates.js"

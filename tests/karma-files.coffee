@@ -21,23 +21,28 @@ module.exports =
     "components/bower/bower-angular-placeholders/angular-placeholders.js"
     "components/bower/moment/moment.js"
 
-    "src/scripts/angleGrinder/gridz.coffee"
-    "src/scripts/angleGrinder/baseCtrl.coffee"
+    "src/scripts/gridz/gridz.coffee"
+    "src/scripts/utils/baseCtrl.coffee"
+    "src/scripts/utils/alerts.coffee"
+    "src/scripts/utils/spinner.coffee"
 
-    "src/templates/**/*.html"
+    "docs/templates/**/*.html"
 
-    "src/scripts/angleGrinder/modules/*.coffee"
-    "src/scripts/angleGrinder/modules/common/**/*.coffee"
-    "src/scripts/angleGrinder/modules/forms/**/*.coffee"
-    "src/scripts/angleGrinder/modules/gridz/**/*.coffee"
+    "src/scripts/common/common.coffee"
+    "src/scripts/forms/forms.coffee"
+    "src/scripts/gridz/agGridz.coffee"
 
-    "src/scripts/exampleApp/modules/**/*.coffee"
-    "src/scripts/exampleApp/application.coffee"
-    "src/scripts/exampleApp/routes.coffee"
-    "src/scripts/exampleApp/controllers/**/*.coffee"
+    "src/scripts/common/**/*.coffee"
+    "src/scripts/forms/**/*.coffee"
+    "src/scripts/gridz/**/*.coffee"
 
-    "src/scripts/exampleApp/grids.coffee"
-    "src/scripts/exampleApp/grids/*.coffee"
+    "docs/exampleApp/modules/**/*.coffee"
+    "docs/exampleApp/application.coffee"
+    "docs/exampleApp/routes.coffee"
+    "docs/exampleApp/controllers/**/*.coffee"
+
+    "docs/exampleApp/grids.coffee"
+    "docs/exampleApp/grids/*.coffee"
 
     "tests/unit/fixtures/**/*.html"
     "tests/unit/helpers/**/*.coffee"

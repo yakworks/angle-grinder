@@ -19,14 +19,14 @@ gridz.directive "agGridQuickSearch", [
 
     template: """
       <form class="navbar-search pull-right" name="quickSearch"">
-        <input type="text" placeholder="quick search" search-on-enter class="search-query span2"
+        <input type="text" placeholder="quick search" quick-search-button class="search-query span2"
                ng-model="filters.quickSearch"/>
       </form>
     """
 ]
 
 # Trigers search on enter in quick serch input
-gridz.directive "searchOnEnter", ->
+gridz.directive "quickSearchButton", ->
   (scope, element, attrs) ->
     element.bind "keydown", (event)->
       # 13 - Enter key code
@@ -35,3 +35,7 @@ gridz.directive "searchOnEnter", ->
         # Run search only if there are any filters specified
         if not angular.equals(scope.filters, {quickSearch: ""})
           scope.search(scope.filters)
+
+      if event.which is 27
+        scope.filters.quickSearch = "" if scope.filters
+        scope.$apply()

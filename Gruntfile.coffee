@@ -13,6 +13,7 @@ module.exports = (grunt) ->
     test: "tests"
     dist: "dist"
     dev: "build"
+    docs: "docs"
 
   grunt.initConfig
     appConfig: appConfig
@@ -43,6 +44,8 @@ module.exports = (grunt) ->
     copy:           config "copy"
     # General purpose text replacement for grunt
     replace:        config "replace"
+    #Include example in index.html
+    includes:        config "includes"
     # Grunt plugin for Bower
     bower:          config "bower"
     # Publish to GitHub pages
@@ -68,6 +71,7 @@ module.exports = (grunt) ->
     "bower"
     "coffeelint"
     "coffee"
+    "includes:example"
     "less"
     "copy:dev"
     "ngtemplates:exampleApp"
@@ -106,6 +110,7 @@ module.exports = (grunt) ->
     "test"
     "build:dev"
     "copy:dist"
+    "includes:example"
     "useminPrepare"
     "htmlmin"
     "concat"

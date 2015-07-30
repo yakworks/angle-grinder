@@ -8,4 +8,10 @@ module.exports = (grunt) ->
       src: "**/*.coffee"
       dest: "<%= appConfig.dev %>/scripts"
       ext: ".js"
+    ,
+      expand: true
+      cwd: "<%= appConfig.docs %>/exampleApp"
+      src: "**/*.coffee"
+      dest: "<%= appConfig.dev %>/scripts/exampleApp"
+      ext: ".js"
     ]

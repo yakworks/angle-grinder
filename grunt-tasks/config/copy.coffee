@@ -5,11 +5,21 @@ module.exports = (grunt) ->
     files: [
       expand: true
       dot: true
+      cwd: "<%= appConfig.docs %>"
+      dest: "<%= appConfig.dev %>"
+      src: [
+        "*.{ico,txt}"
+        "img/**/*.{gif,png,jpg}"
+        "font/*"
+        "styles/**/*.css"
+      ]
+    ,
+      expand: true
+      dot: true
       cwd: "<%= appConfig.app %>"
       dest: "<%= appConfig.dev %>"
       src: [
         "*.{ico,txt}"
-        "**/*.html"
         "img/**/*.{gif,png,jpg}"
         "font/*"
         "styles/**/*.css"
