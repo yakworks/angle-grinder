@@ -10,8 +10,9 @@
 }
 
 .panel-body {
-    padding: 15px;
+    padding-top: 1px;
 }
+
 
 .panel-body:before,
 .panel-body:after {
