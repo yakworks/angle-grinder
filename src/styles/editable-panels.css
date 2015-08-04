@@ -1,6 +1,8 @@
 form[editable-form] div {
   height: auto;
-  padding: 5px 0;
+  padding: 1px 0;
+  margin-bottom: 0px;
+  min-height: 5px;
 }
 
 form[editable-form] .title {
@@ -11,7 +13,7 @@ form[editable-form] .title {
   min-width: 130px;
   text-align: right;
   margin-right: 8px;
-	
+  margin-left: 5px;
 }
 
 form[editable-form] .editable {
