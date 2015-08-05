@@ -18,6 +18,8 @@ forms.factory "massUpdateHandler", [
       # handle fields with errors
       if result.errors?
         grid.flashOnError(id) for id, error of result.errors
+        for error in result.errors
+          alerts.error error.message
       else
         $log.warn "[forms] Invalid JSON response, missing errors assoc array"
 
