@@ -35,3 +35,11 @@ form[editable-form] .editable-error {
 form[editable-form] input.ng-invalid {
   border-color: #b94a48;
 }
+
+form[editable-form] input,select {
+    -ms-box-sizing:content-box;
+    -moz-box-sizing:content-box;
+    box-sizing:content-box;
+    -webkit-box-sizing:content-box;
+    height: 20px;
+}
