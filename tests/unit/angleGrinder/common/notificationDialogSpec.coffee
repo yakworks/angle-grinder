@@ -13,10 +13,10 @@ describe "module: angleGrinder.common", ->
       $scope = $rootScope.$new()
       ctrl = $controller "NotificationDialogCtrl",
         $scope: $scope
-        message: "This is a notification!"
+        options: message: "This is a notification!", okLabel: "OK"
 
     it "has the message", ->
-      expect($scope.message).to.eq "This is a notification!"
+      expect($scope.options.message).to.eq "This is a notification!"
 
     describe "#close", ->
 
@@ -37,7 +37,7 @@ describe "module: angleGrinder.common", ->
 
     it "displays the notification", inject ($modal, notificationDialog) ->
       # When
-      notificationDialog.open()
+      notificationDialog.open("test")
 
       # Then
       expect($modal.open).to.have.been.called
