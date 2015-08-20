@@ -30,8 +30,8 @@ describe "module: angleGrinder.common", ->
       expect(filter(date, false, "MMMM DD, YYYY")).to.eq "June 13, 2014"
 
     it "can format dates form strings", ->
-      expect(filter("2010-06-26T22:00:00Z")).to.eq "Jun 27, 2010"
-      expect(filter("2010-07-26T22:00:00Z")).to.eq "Jul 27, 2010"
+      expect(filter("2010-06-26T22:00:00Z")).to.eq "Jun 26, 2010"
+      expect(filter("2010-07-26T22:00:00Z")).to.eq "Jul 26, 2010"
 
     it "does nothing for empty values", ->
       expect(filter("")).to.eq ""
