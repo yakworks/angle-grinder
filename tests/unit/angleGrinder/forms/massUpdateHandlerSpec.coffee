@@ -1,6 +1,10 @@
 describe "module: angleGrinder.forms", ->
 
-  beforeEach module "angleGrinder.forms"
+  beforeEach module "angleGrinder.forms", ($provide) ->
+    $provide.decorator "alerts", ($delegate) ->
+      $delegate.error = sinon.stub()
+      $delegate
+    return
 
   grid = null
   beforeEach ->
@@ -29,11 +33,31 @@ describe "module: angleGrinder.forms", ->
 
     context "when the result contains errors", ->
 
-      it "flashes errored rows", inject (massUpdateHandler) ->
-        massUpdateHandler(grid, errors: { "3": {}, "4": {} })
+      it "flashes errored rows", inject (massUpdateHandler, alerts) ->
+        column1Msg = "error in column1"
+        column2Msg = "error in column2"
+        errorObj =
+          code: 422
+          message: "error message"
+          messageCode: "default.not.saved.message"
+          errors:
+            className:
+              column1: column1Msg
+              column2: column2Msg
+        errors = []
+        errors.push errorObj
+        massUpdateHandler(grid, errors: errors)
 
-        args = grid.flashOnError.getCall(0).args
-        expect(args[0]).to.eq "3"
+        expect(alerts.error.called).to.be.true
+        args = alerts.error.getCall(0).args
+        expect(args[0]).to.eq ": #{column1Msg}\n#{column2Msg}"
 
-        args = grid.flashOnError.getCall(1).args
-        expect(args[0]).to.eq "4"
+    context "when errors variable contains something different from array", ->
+
+      it "flashes errored rows", inject (massUpdateHandler, alerts) ->
+        # errors variable is a string
+        errors = "string with error message"
+        massUpdateHandler(grid, errors: errors)
+
+        expect(alerts.error.called).to.be.false
+

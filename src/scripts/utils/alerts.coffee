@@ -80,7 +80,7 @@ alerts.directive "agAlerts", ->
     <aside id="alerts">
       <div ng-repeat="message in alertMessages" ng-class="{'fixed-alert': !!fixed}" class="alert alert-{{message.type}}" style="margin-top: {{fixed || 0}}px ;top: {{50 * $index}}px">
         <button ng-click="disposeAlert(message.id)" type="button" class="close">×</button>
-        <strong>{{message.type}}</strong> <span>{{message.text}}</span>
+        <strong>{{message.type}}</strong> <span style="white-space:pre-line;">{{message.text}}</span>
       </div>
     </aside>
   """
