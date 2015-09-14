@@ -660,31 +660,31 @@ angular.module("myApp")
 &lt;div class=&quot;navbar navbar-grid&quot;&gt;
   &lt;div class=&quot;navbar-inner with-selected-pointer with-grid-options&quot;&gt;
     &lt;ul class=&quot;nav&quot;&gt;
-      &lt;li&gt;&lt;span class=&quot;icon-selected-pointer&quot;&gt; &lt;/span&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;span class=&quot;fa fa-selected-pointer&quot;&gt; &lt;/span&gt;&lt;/li&gt;
       &lt;li class=&quot;dropdown selected-actions&quot;&gt;
         &lt;a data-toggle=&quot;dropdown&quot; class=&quot;dropdown-toggle&quot; href=&quot;&quot;&gt;
           Actions &lt;b class=&quot;caret&quot;&gt;&lt;/b&gt;
         &lt;/a&gt;
         &lt;ul class=&quot;dropdown-menu&quot;&gt;
-          &lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;i class=&quot;icon-eye-open&quot;&gt;&lt;/i&gt; View&lt;/a&gt;&lt;/li&gt;
-          &lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;i class=&quot;icon-external-link&quot;&gt;&lt;/i&gt; Export&lt;/a&gt;&lt;/li&gt;
-          &lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;i class=&quot;icon-trash&quot;&gt;&lt;/i&gt; Delete&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;i class=&quot;fa fa-eye&quot;&gt;&lt;/i&gt; View&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;i class=&quot;fa fa-external-link&quot;&gt;&lt;/i&gt; Export&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;i class=&quot;fa fa-trash-o&quot;&gt;&lt;/i&gt; Delete&lt;/a&gt;&lt;/li&gt;
         &lt;/ul&gt;
       &lt;/li&gt;
       &lt;li class=&quot;divider-vertical&quot;&gt;&lt;/li&gt;
       &lt;li&gt;
         &lt;a href=&quot;&quot; class=&quot;create-button&quot; ng-click=&quot;createRecord()&quot;&gt;
-          &lt;i class=&quot;icon-edit&quot;&gt;&lt;/i&gt;New
+          &lt;i class=&quot;fa fa-pencil-square-o&quot;&gt;&lt;/i&gt;New
         &lt;/a&gt;
       &lt;/li&gt;
     &lt;/ul&gt;
 
     &lt;ul class=&quot;nav pull-right&quot;&gt;
-      &lt;li&gt;&lt;a href=&quot;#&quot; title=&quot;search screen&quot;&gt;&lt;i class=&quot;icon-search&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#&quot; title=&quot;search screen&quot;&gt;&lt;i class=&quot;fa fa-search&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;/li&gt;
       &lt;li class=&quot;divider-vertical skinny&quot;&gt;&lt;/li&gt;
       &lt;li class=&quot;dropdown grid-options&quot;&gt;
         &lt;a data-toggle=&quot;dropdown&quot; class=&quot;dropdown-toggle&quot; href=&quot;#&quot;&gt;
-          &lt;i class=&quot;icon-cog&quot;&gt;&lt;/i&gt;&lt;b class=&quot;caret&quot;&gt;&lt;/b&gt;&lt;/i&gt;
+          &lt;i class=&quot;fa fa-cog&quot;&gt;&lt;/i&gt;&lt;b class=&quot;caret&quot;&gt;&lt;/b&gt;&lt;/i&gt;
         &lt;/a&gt;
         &lt;ul class=&quot;dropdown-menu&quot;&gt;
           &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Columns&lt;/a&gt;&lt;/li&gt;
@@ -696,7 +696,7 @@ angular.module("myApp")
     &lt;/ul&gt;
     &lt;form action=&quot;&quot; class=&quot;navbar-search pull-right&quot;&gt;
       &lt;input type=&quot;text&quot; value=&quot;&quot; placeholder=&quot;Search&quot;
-             class=&quot;search-query span2&quot; /&gt;
+             class=&quot;search-query col-md-2&quot; /&gt;
     &lt;/form&gt;
   &lt;/div&gt;
 &lt;/div&gt;
@@ -715,7 +715,7 @@ angular.module("myApp")
     &lt;li&gt;
       &lt;a href=&quot;&quot; title=&quot;search screen&quot;
          ng-click=&quot;showSearchForm = !showSearchForm&quot;&gt;
-        &lt;i class=&quot;icon-search&quot;&gt;&lt;/i&gt;
+        &lt;i class=&quot;fa fa-search&quot;&gt;&lt;/i&gt;
       &lt;/a&gt;
     &lt;/li&gt;
   &lt;/ul&gt;
@@ -729,8 +729,8 @@ angular.module("myApp")
 <pre class="prettyprint lang-html">
 &lt;div class=&quot;well&quot;&gt;
   &lt;form ag-search-form class=&quot;form-horizontal form-multi-column no-margin&quot;&gt;
-    &lt;div class=&quot;row-fluid&quot;&gt;
-      &lt;div class=&quot;control-group span6&quot;&gt;
+    &lt;div class=&quot;row&quot;&gt;
+      &lt;div class=&quot;control-group col-md-6&quot;&gt;
         &lt;label class=&quot;control-label&quot;&gt;Name&lt;/label&gt;
         &lt;div class=&quot;controls&quot;&gt;
           &lt;input class=&quot;input-block-level&quot; type=&quot;text&quot;
@@ -738,7 +738,7 @@ angular.module("myApp")
         &lt;/div&gt;
       &lt;/div&gt;
 
-      &lt;div class=&quot;control-group span6&quot;&gt;
+      &lt;div class=&quot;control-group col-md-6&quot;&gt;
         &lt;label class=&quot;control-label&quot;&gt;Allowance&lt;/label&gt;
         &lt;div class=&quot;controls&quot;&gt;
           &lt;input class=&quot;input-block-level&quot; type=&quot;text&quot;

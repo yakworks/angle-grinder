@@ -21,8 +21,16 @@ module.exports = (grunt) ->
       src: [
         "*.{ico,txt}"
         "img/**/*.{gif,png,jpg}"
-        "font/*"
         "styles/**/*.css"
+      ]
+    ,
+      #copy bootstrap and font awsome fonts
+      expand: true
+      flatten: true
+      cwd: "components/bower"
+      dest: "<%= appConfig.dev %>/fonts"
+      src: [
+        "*/fonts/*.{otf,eot,svg,ttf,woff,woff2}"
       ]
     ,
       # workaround for jquery-ui-bootstrap component
@@ -52,7 +60,7 @@ module.exports = (grunt) ->
       cwd: "<%= appConfig.dev %>"
       dest: "<%= appConfig.dist %>"
       src: [
-        "font/**/*"
+        "fonts/**/*"
         "img/**/*"
       ]
     ]

@@ -56,7 +56,7 @@ forms.directive "agDatepicker", [
       <div class="input-append ag-datepicker">
 
         <button type="button" class="btn btn-default" ng-click="open($event)" ng-disabled="disabled">
-          <i class="icon-calendar"></i>
+          <i class="fa fa-calendar"></i>
         </button>
       </div>
     """

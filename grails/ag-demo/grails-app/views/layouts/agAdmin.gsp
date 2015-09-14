@@ -27,40 +27,34 @@
       data-resource-path="${pageProperty(name: 'body.data-resource-path')}">
 
 <div class="navbar navbar-inverse navbar-fixed-top">
-    <div class="navbar-inner">
         <div class="container">
-            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="brand" href="${request.contextPath}">Example Admin</a>
+            <a class="navbar-brand" href="${request.contextPath}">Example Admin</a>
 
-            <div class="nav-collapse collapse">
-                <ul class="nav">
+            <div class="navbar-collapse collapse">
+                <ul class="navbar-nav nav">
                     <li><a href="${createLink(controller: 'user')}">List Users</a></li>
                     <li><a href="${createLink(controller: 'org')}">List Orgs</a></li>
                     <li><a href="${createLink(controller: 'orgTabs')}">List Orgs with Tabs</a></li>
                 </ul>
 
-                <ul class="nav pull-right">
-                    <li><a href="#"><i class="icon-cogs"></i> Control Panel</a></li>
+                <ul class="navbar-nav nav pull-right">
+                    <li><a href="#"><i class="fa fa-cogs"></i> Control Panel</a></li>
                     <li class="divider-vertical"></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle " data-toggle="dropdown">
-                            <i class="icon-user"></i> Joshua Burnett <b class="caret"></b>
+                            <i class="fa fa-user"></i> Joshua Burnett <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="#"><i class="icon-user"></i> Account Settings</a>
+                                <a href="#"><i class="fa fa-user"></i> Account Settings</a>
                             </li>
 
                             <li>
-                                <a href="#"><i class="icon-lock"></i> Change Password</a>
+                                <a href="#"><i class="fa fa-lock"></i> Change Password</a>
                             </li>
                             <li class="divider"></li>
                             <li>
-                                <a href="#"><i class="icon-off"></i> Logout</a>
+                                <a href="#"><i class="fa fa-power-off"></i> Logout</a>
                             </li>
                         </ul>
                     </li>
@@ -68,16 +62,15 @@
                 </ul>
             </div>
         </div>
-    </div>
 </div>
 
 <div id="page" class="container">
     <g:unless test="${hideSidebar}">
-        <aside class="sidebar">
-            <ul class="nav nav-list nav-side">
+        <aside class="sidebar col-sm-3">
+            <ul class="nav list-group nav-side">
                 <li>
                     <a data-toggle="collapse" href="#user-submenu" class="accordion-toggle">
-                        Users<i class="icon-chevron-right"></i>
+                        Users<i class="fa fa-chevron-right"></i>
                     </a>
 
                     <div id="user-submenu" class="collapse accordion-body">
@@ -88,15 +81,15 @@
                     </div>
                 </li>
                 <li><a href="${createLink(controller: 'org')}">
-                    <i class="icon-chevron-right"></i> List Orgs</a>
+                    <i class="fa fa-chevron-right"></i> List Orgs</a>
                 </li>
                 <li><a href="${createLink(controller: 'orgTabs')}">
-                    <i class="icon-chevron-right"></i> List Orgs with Tabs</a>
+                    <i class="fa fa-chevron-right"></i> List Orgs with Tabs</a>
                 </li>
             </ul>
         </aside>
 
-        <section class="content">
+        <section class="content col-sm-9">
             <g:layoutBody/>
         </section>
     </g:unless>

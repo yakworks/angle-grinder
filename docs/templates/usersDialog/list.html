@@ -4,38 +4,37 @@
   <div ng-include src="'templates/usersDialog/searchForm.html'"></div>
 </div>
 
-<div class="navbar navbar-grid">
+<div class="navbar navbar-grid navbar-default">
   <div class="navbar-inner with-selected-pointer with-grid-options">
-    <ul class="nav">
+    <ul class="nav navbar-nav">
       <li class="dropdown selected-actions">
         <a data-toggle="dropdown" class="dropdown-toggle" href="#" style="padding-left: 2px">
-          <i class="icon-selected-pointer"></i> Actions <b class="caret"></b>
+          <i class="fa fa-selected-pointer"></i> Actions <b class="caret"></b>
         </a>
         <ul class="dropdown-menu">
-          <li><a href=""><i class="icon-eye-open"></i> View</a></li>
-          <li><a href=""><i class="icon-external-link"></i> Export</a></li>
+          <li><a href=""><i class="fa fa-eye"></i> View</a></li>
+          <li><a href=""><i class="fa fa-external-link"></i> Export</a></li>
           <li class="divider"></li>
-          <li><a href="" ng-click="massUpdate()"><i class="icon-edit"></i> Mass update</a></li>
+          <li><a href="" ng-click="massUpdate()"><i class="fa fa-pencil-square-o"></i> Mass update</a></li>
           <li class="divider"></li>
-          <li><a href=""><i class="icon-trash"></i> Delete</a></li>
+          <li><a href=""><i class="fa fa-trash-o"></i> Delete</a></li>
         </ul>
       </li>
       <li class="divider-vertical"></li>
       <li>
         <a href="" class="create-button" ng-click="createRecord()">
-          <i class="icon-edit"></i>New
+          <i class="fa fa-pencil-square-o"></i>New
         </a>
       </li>
     </ul>
 
-    <ul class="nav pull-right">
-      <li>
+    <ul class="nav navbar-nav pull-right">
+      <li><ag-grid-quick-search for="usersGrid" filters="filters"></ag-grid-quick-search></li>
+        <li>
         <a href="" title="search screen"
-           ng-click="showSearchForm = !showSearchForm"><i class="icon-search"></i></a>
+           ng-click="showSearchForm = !showSearchForm"><i class="fa fa-search"></i></a>
       </li>
     </ul>
-
-    <ag-grid-quick-search for="usersGrid" filters="filters"></ag-grid-quick-search>
   </div>
 </div>
 

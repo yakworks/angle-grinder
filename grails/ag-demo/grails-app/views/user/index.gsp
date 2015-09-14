@@ -52,19 +52,19 @@
          <div ng-include="'${createLink(action: 'searchPartial')}'"></div>
     </div>
 
-    <div class="navbar navbar-grid">
+    <div class="navbar navbar-grid navbar-default">
         <div class="navbar-inner with-selected-pointer with-grid-options">
-            <ul class="nav">
+            <ul class="nav navbar-nav col-sm-4">
                 <li>
                     <a href="" ng-click="createRecord()">
-                        <i class="icon-user"></i><g:message code="default.new.label" args="[entityName]"/>
+                        <i class="fa fa-user"></i><g:message code="default.new.label" args="[entityName]"/>
                     </a>
                 </li>
             </ul>
-            <ul class="nav pull-right">
+            <ul class="nav navbar-nav pull-right">
                 <li>
                     <a title="search screen" ng-click="showSearchForm = !showSearchForm" href="">
-                        <i class="icon-search"></i>
+                        <i class="fa fa-search"></i>
                     </a>
                 </li>
             </ul>

@@ -18,7 +18,7 @@ describe "module: angleGrinder.forms directive: agCreateButton", ->
 
   itHasANiceIcon = ->
     it "has a nice icon", ->
-      expect(element.find("i").hasClass("icon-edit")).to.be.true
+      expect(element.find("i").hasClass("fa-pencil-square-o")).to.be.true
 
   itOnClickCallsTheScopeMethod = ->
     describe "on click", ->

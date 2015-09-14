@@ -14,6 +14,6 @@ forms.directive "agSubmitButton", ->
   template: """
     <button type="submit" class="btn btn-primary"
             ng-disabled="saving">
-      <i class="icon-ok icon-white"></i> Save<span ng-show="saving">...</span>
+      <i class="fa fa-check fa-inverse"></i> Save<span ng-show="saving">...</span>
     </button>
   """

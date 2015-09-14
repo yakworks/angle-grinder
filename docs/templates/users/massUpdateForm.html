@@ -1,25 +1,27 @@
-<div class="modal-header">
-  <button type="button" class="close" ng-click="closeDialog()">&times;</button>
-  <h3>Mass update</h3>
-</div>
-
-<form name="massUpdateForm" novalidate class="form-horizontal no-margin"
-      ag-submit="massUpdate(records, massUpdateForm)">
-
-  <div class="modal-body">
-    <div ag-field-group for="allowance">
-      <label class="control-label">Allowance</label>
-
-      <div class="controls">
-        <input type="text" name="creditInfoAllowance" placeholder="Enter Allowance"
-               ng-model="records.creditInfo.allowance" ng-required="false" />
-        <ag-validation-errors for="creditInfoAllowance" />
-      </div>
+<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="closeDialog()">&times;</button>
+        <h3>Mass update</h3>
     </div>
-  </div>
 
-  <div class="modal-footer">
-    <ag-submit-button></ag-submit-button>
-    <ag-cancel-button ng-click="closeDialog()"></ag-cancel-button>
-  </div>
-</form>
+    <form name="massUpdateForm" novalidate class="form-horizontal"
+          ag-submit="massUpdate(records, massUpdateForm)">
+
+        <div class="modal-body">
+            <div ag-field-group for="allowance">
+                <label class="control-label">Allowance</label>
+
+                <div class="controls">
+                    <input type="text" name="creditInfoAllowance" placeholder="Enter Allowance"
+                           ng-model="records.creditInfo.allowance" ng-required="false"/>
+                    <ag-validation-errors for="creditInfoAllowance"/>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <ag-submit-button></ag-submit-button>
+            <ag-cancel-button ng-click="closeDialog()"></ag-cancel-button>
+        </div>
+    </form>
+</div>

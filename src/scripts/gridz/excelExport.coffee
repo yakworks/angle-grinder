@@ -142,7 +142,7 @@ gridz.service "csvData", [
 # Generates xls export button for the given grid.
 # Usage:
 #   <a href="" ag-grid-xls-export="usersGrid">
-#     <i class="icon-download-alt"></i> Export to XLS
+#     <i class="fa fa-download"></i> Export to XLS
 #   </a>
 gridz.directive "agGridXlsExport", [
   "$window", "notificationDialog", ($window, notificationDialog) ->
