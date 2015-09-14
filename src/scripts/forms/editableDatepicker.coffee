@@ -38,10 +38,4 @@ forms.directive "editableDatepicker", [
 
           @scope.opened = true
 
-      save: ->
-        #Check if trimTime directive is present, then set model to date string without time
-        if @attrs.eAgTrimTime
-          @scope.$data = $filter("date")(@scope.$data, "yyyy-MM-dd")
-        @parent.save.call(this)
-
 ]
