@@ -130,7 +130,46 @@
         </label>
       </div>
     </div>
+
+      <div ag-field-group for="birthDate">
+          <label class="control-label">Birth Date</label>
+
+          <div class="controls">
+              <div ag-datepicker ag-trim-time="user.birthDate">
+                  <input type="text"
+                         ng-model="user.birthDate"
+                         name="birthDate"/>
+              </div>
+
+              <ag-validation-errors for="birthDate"/>
+          </div>
+      </div>
+
+      <div ag-field-group for="postDate">
+          <label class="control-label">Post Date</label>
+
+          <div class="controls">
+              <div ag-datepicker>
+                  <input type="text"
+                         ng-model="user.postDate"
+                         name="postDate"/>
+              </div>
+
+              <ag-validation-errors for="postDate"/>
+          </div>
+      </div>
+
+      <div>
+          <label class="control-label">Reminder Date</label>
+
+          <div class="controls">
+                  {{user.reminderDate | agDate:true:"YYYY-MM-DD HH:mm"}}
+          </div>
+      </div>
+
   </div>
+
+
 
   <div class="modal-footer">
     <span ng-if="user.persisted()">

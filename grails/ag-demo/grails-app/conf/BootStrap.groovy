@@ -1,4 +1,6 @@
 import grinder.ContactType
+import org.joda.time.LocalDate
+import org.joda.time.LocalDateTime
 
 class BootStrap {
 
@@ -74,6 +76,9 @@ class BootStrap {
                 repassword: "secretStuff",
                 inactive: false,
                 activeDate: randomDate(),
+				birthDate: randomDate(),
+				postDate: randomDate(),
+				reminderDate: randomDate(),
 
                 contact: [
                         firstName: fakerService.firstName(),
@@ -99,6 +104,9 @@ class BootStrap {
                     repassword: "secretStuff",
                     inactive: generator.nextDouble() > 0.5,
                     activeDate: randomDate(),
+					birthDate: randomDate(),
+					postDate: randomDate(),
+					reminderDate: randomDate(),
 
                     contact: [
                             firstName: fakerService.firstName(),
