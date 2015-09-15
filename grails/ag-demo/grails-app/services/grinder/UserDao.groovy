@@ -38,11 +38,12 @@ class UserDao extends GormDaoSupport {
     }
 
     void persistWithParams(user, params) {
+		if (params["activeDate"] && params["activeDate"] instanceof String) {
+			println "Use date ${params?.activeDate}"
+		}
         // parse date from the string
-        if (params.activeDate && params.activeDate instanceof String) {
-            params.activeDate = DateUtil.parseJsonDate(params.activeDate)
-            println "Use date $params.activeDate"
-        }
+        parseDate("activeDate", params)
+        parseDate("reminderDate", params)
 
         user.properties = params
         user.contact.properties["firstName", "lastName", "email", "tagForReminders", "type"] = params["contact"]
@@ -75,4 +76,10 @@ class UserDao extends GormDaoSupport {
             }
         }
     }
+
+	def parseDate(String dateName, def params){
+		if (params[dateName] && params[dateName] instanceof String) {
+			params[dateName] = DateUtil.parseJsonDate(params[dateName])
+		}
+	}
 }

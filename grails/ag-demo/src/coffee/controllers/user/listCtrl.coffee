@@ -11,11 +11,15 @@ class ListCtrl
       sortname: "login"
       sortorder: "asc"
 
+    $scope.tzShowCase = angular.copy(Resource)
+
     dialogCrudCtrlMixin $scope,
       Resource: Resource
       gridName: "usersGrid"
       templateUrl: "/user/formTemplate"
       beforeEdit: (record) ->
+        # saves data from server to compare retrieved data and data that will be send to the server
+        $scope.tzShowCase = angular.copy(record)
         user = angular.copy(record)
         # convert `Contact.type` enum field to the string
         user.contact.type = record.contact.type?.name
