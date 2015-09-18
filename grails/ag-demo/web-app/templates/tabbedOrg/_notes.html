@@ -1,18 +1,17 @@
 <div ng-controller="tabbedOrg.NoteListCtrl">
-  <div class="navbar navbar-grid">
+  <div class="nav navbar-grid">
     <div class="navbar-inner with-selected-pointer with-grid-options">
       <ul class="nav">
-        <li>
+        <li class="col-md-3">
           <a href="" ng-click="createRecord()">
             <i class="fa fa-user"></i> Create note
           </a>
         </li>
+          <li>
+              <ag-grid-quick-search  for="contactsGrid" filters="filters.quickSearch"></ag-grid-quick-search>
+          </li>
       </ul>
 
-      <form action="" class="navbar-search pull-right" ng-submit="notesGrid.search(filters)">
-        <input type="text" value="" placeholder="quick search" class="search-query span2" style="width: 150px;"
-               ng-model="filters.quickSearch"/>
-      </form>
     </div>
   </div>
 

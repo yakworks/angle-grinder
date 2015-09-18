@@ -30,11 +30,8 @@
                   </a>
               </li>
           </ul>
-
-          <form action="" class="navbar-search pull-right" ng-submit="orgGrid.search(filters)">
-              <input type="text" value="" placeholder="quick search" class="search-query span2" style="width: 150px;"
-                     ng-model="filters.quickSearch"/>
-          </form>
+      </div>
+      <ag-grid-quick-search for="orgGrid" filters="filters" style="margin-top: 7px"></ag-grid-quick-search>
       </div>
   </div>
 

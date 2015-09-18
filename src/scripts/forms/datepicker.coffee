@@ -53,11 +53,11 @@ forms.directive "agDatepicker", [
             element.prepend(clone)
 
     template: """
-      <div class="input-append ag-datepicker">
+      <div class="input-group ag-datepicker">
 
-        <button type="button" class="btn btn-default" ng-click="open($event)" ng-disabled="disabled">
+        <span type="button" class="btn btn-default input-group-addon" ng-click="open($event)" ng-disabled="disabled">
           <i class="fa fa-calendar"></i>
-        </button>
+        </span>
       </div>
     """
 ]

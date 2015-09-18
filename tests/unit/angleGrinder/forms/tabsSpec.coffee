@@ -27,7 +27,6 @@ describe "module: angleGrinder.forms tabs", ->
     it "renders tabs container", ->
       expect(element.hasClass("container")).to.be.true
       expect(element.find(".nav.nav-tabs")).to.have.length 1
-      expect(element.find(".container")).to.have.length 1
 
     describe "$scope", ->
 
@@ -201,7 +200,7 @@ describe "module: angleGrinder.forms tabs", ->
         expect(titlesEl.find("a").eq(2).text()).to.eq "Third"
 
       it "by default displays the first tab content", ->
-        expect(element.find(".tab.container").text()).to.include "First"
+        expect(element.find(".tab").text()).to.include "First"
 
       it "exposes API to the scope", ->
         expect($scope.testTabset).to.not.be.undefined
@@ -236,7 +235,7 @@ describe "module: angleGrinder.forms tabs", ->
 
           it "loads the content for the activated tab", inject ($httpBackend) ->
             $httpBackend.flush()
-            expect(element.find(".tab.container").text()).to.include "Second"
+            expect(element.find(".tab").text()).to.include "Second"
 
           it "changes the url", inject ($httpBackend, $location) ->
             $httpBackend.flush()
@@ -299,4 +298,4 @@ describe "module: angleGrinder.forms tabs", ->
         expect(tabEl.hasClass("active")).to.be.true
 
       it "loads the content for the activated tab", ->
-        expect(element.find(".tab.container").text()).to.include "Second"
+        expect(element.find(".tab").text()).to.include "Second"
