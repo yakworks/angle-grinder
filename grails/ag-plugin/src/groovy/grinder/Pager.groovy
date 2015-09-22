@@ -66,8 +66,8 @@ class Pager {
 
         log.debug "Total pages : $totalPages"
 
-        (0..(totalPages-1)).each {Long page ->
-            Long offset = (page * max)
+        (0..(totalPages-1)).each {Long p ->
+            Long offset = (p * max)
             try {
                 log.debug "Executing batch [max:$max, offset:$offset]"
                 c.call(max, offset)
