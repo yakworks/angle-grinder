@@ -60,6 +60,24 @@ class Pager {
         return Math.ceil(recordCount / max).intValue()
     }
 
+    def eachPage(Closure c) {
+        Long totalPages = pageCount
+        if(totalPages < 1) return
+
+        log.debug "Total pages : $totalPages"
+
+        (0..(totalPages-1)).each {Long page ->
+            Long offset = (page * max)
+            try {
+                log.debug "Executing batch [max:$max, offset:$offset]"
+                c.call(max, offset)
+            }catch (Exception e) {
+                log.error "Error encountered while executing batch [max:$max, offset:$offset]}]", e
+            }
+        }
+
+    }
+
     def getJsonData() {
         //page is the page we are on, total is the total number f pages based on max per page setting
         //records is the total # of records we have
