@@ -31,9 +31,9 @@ class User implements Serializable {
 
     Date activeDate
     Contact contact
-	LocalDate birthDate
-	DateTime postDate
-	Date reminderDate
+    LocalDate birthDate
+    DateTime postDate
+    Date reminderDate
 
     /** temporary plain password to create a MD5 password */
     String pass = '[secret]'
@@ -45,8 +45,8 @@ class User implements Serializable {
         id generator: 'foreign', params: [property: 'contact']
         passwd column: 'password'
         contact column: 'contactId'
-		birthDate type: PersistentLocalDate
-		postDate type: PersistentDateTime
+        birthDate type: PersistentLocalDate
+        postDate type: PersistentDateTime
     }
 
     static constraints = {

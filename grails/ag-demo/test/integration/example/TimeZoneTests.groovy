@@ -1,5 +1,6 @@
 package example
 import com.coderberry.faker.FakerService
+import grails.converters.JSON
 import grinder.ContactType
 import grinder.Org
 import grinder.User
@@ -56,8 +57,7 @@ class TimeZoneTests extends GroovyTestCase {
 
         Calendar cal = Calendar.getInstance()
         cal.setTime(user.activeDate)
-        TimeZone timezone= TimeZone.getTimeZone('UTC')
-        cal.setTimeZone(timezone)
+
 
         assertEquals 2008, cal.get(Calendar.YEAR)
         assertEquals 1, cal.get(Calendar.MONTH)

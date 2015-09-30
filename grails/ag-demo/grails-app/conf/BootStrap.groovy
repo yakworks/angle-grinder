@@ -1,3 +1,4 @@
+import grails.converters.JSON
 import grinder.ContactType
 import org.joda.time.LocalDate
 import org.joda.time.LocalDateTime
@@ -12,6 +13,11 @@ class BootStrap {
 
     def init = { servletContext ->
         def Random generator = new Random()
+
+        JSON.registerObjectMarshaller(Date) {
+            //Added JSON marshaller for dates to avoid time zone applying
+            return it.format("yyyy-MM-dd'T'HH:mm:ss'Z'")
+        }
 
         def createOrg = { attributes = [] ->
             // get sample timeZones

@@ -41,9 +41,6 @@ class UserDao extends GormDaoSupport {
 		if (params["activeDate"] && params["activeDate"] instanceof String) {
 			println "Use date ${params?.activeDate}"
 		}
-        // parse date from the string
-        parseDate("activeDate", params)
-        parseDate("reminderDate", params)
 
         user.properties = params
         user.contact.properties["firstName", "lastName", "email", "tagForReminders", "type"] = params["contact"]
