@@ -14,11 +14,6 @@ class BootStrap {
     def init = { servletContext ->
         def Random generator = new Random()
 
-        JSON.registerObjectMarshaller(Date) {
-            //Added JSON marshaller for dates to avoid time zone applying
-            return it.format("yyyy-MM-dd'T'HH:mm:ss'Z'")
-        }
-
         def createOrg = { attributes = [] ->
             // get sample timeZones
             def sampleTimeZones = ["UTC-6", "UTC-2", "UTC", "UTC+2"]

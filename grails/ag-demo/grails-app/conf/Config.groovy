@@ -132,4 +132,3 @@ jodatime {
 grails.databinding.dateFormats = [
 		"yyyy-MM-dd'T'hh:mm:ss'Z'","yyyy-MM-dd'T'hh:mm:ss.SSS'Z'", 'yyyy-MM-dd HH:mm:ss.S'
 ]
-jodatime.format.html5 = true

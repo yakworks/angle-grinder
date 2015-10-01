@@ -109,8 +109,8 @@ class MapFlattener {
                 def value = String.valueOf(entry.value)
                 if (DateUtil.GMT_SECONDS.matcher(value).matches()) {
                     //FIXME dirty hack!!!
-                    value = DateUtil.parseJsonDate(value).format('yyyy-MM-dd')  //Default Grails date format
-                    //FIXME dirty hack!!!
+                    //XXX why did we use default format with trimmed time?
+                    value = DateUtil.parseJsonDate(value).format("yyyy-MM-dd'T'hh:mm:ss'Z'")
                 }
                 _keyVersion.updateMapWithKeyValue(keyValues, key, value)
             }
