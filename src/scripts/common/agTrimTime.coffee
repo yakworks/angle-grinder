@@ -30,7 +30,7 @@ app.directive "agTrimTime", [
           scope.$watch attrs.agTrimTime, (newVal) ->
             # Set $viewValue manually to invoke $parsers' functions.
             # The cause is not executing without input toggle.
-            if newVal then ngModelCtrl.$setViewValue newVal
+            #if newVal then ngModelCtrl.$setViewValue newVal
 
       # If directive set on parent element $timeout uses
       # children elements to be loaded
