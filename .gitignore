@@ -22,3 +22,72 @@ dist
 # Ignore tmp directory
 tmp
 .tmp
+
+# grails
+
+# web application files
+# /web-app/WEB-INF
+
+# IDE support files
+/.classpath
+/.launch
+/.project
+/.settings
+/*.launch
+/*.tmproj
+/ivy*
+/eclipse
+/.grails
+*.sublime-workspace
+/bower_components
+/node_modules
+# Intellij project files
+.idea
+*.iml
+
+# default HSQL database files for production mode
+/prodDb.*
+
+# general HSQL database files
+*Db.properties
+*Db.script
+
+# logs
+/stacktrace.log
+/npm-debug.log
+/test/reports
+/logs
+/out
+
+# project release file
+/*.war
+
+# plugin release file
+/*.zip
+
+# "temporary" build files
+/target
+/tomcat.8080
+/web-app/WEB-INF/atmosphere-meteor-decorators.xml
+
+# other
+*.iws
+
+# Configuration
+grails-app/conf/9ci-config.properties
+
+# Compiled CoffeeScripts
+/web-app/js/app
+**/grails-app/assets/javascripts/app/**/*.js
+
+# Tests temporary files
+test-results.xml
+/coverage
+/test/coffee/node_modules
+/test/protractor/node_modules
+/test/protractor/selenium
+grails-app/conf/9ci-config.groovy
+grails-app/conf/RcmAppSetupConfigDeveloper.groovy
+web-app/WEB-INF/atmosphere-meteor-decorators.xml
+
+
