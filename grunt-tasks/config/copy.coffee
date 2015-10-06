@@ -52,6 +52,12 @@ module.exports = (grunt) ->
       src: [
         "**/*.{png,jpg,jpeg,gif}"
       ]
+    ,
+      expand: true
+      flatten: true
+      cwd: "grails/ag-plugin/web-app/angleGrinder/js/modules"
+      dest: "<%= appConfig.dev %>/scripts/utils"
+      src: "resources.js"
     ]
 
   dist:
