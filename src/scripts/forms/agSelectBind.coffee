@@ -1,5 +1,6 @@
 app = angular.module "angleGrinder.common"
 # Enhanced bind directive with default value
+# For editable select fields
 app.directive "agSelectBind", ["$filter", "$parse", ($filter, $parse) ->
   restrict: "A"
 
