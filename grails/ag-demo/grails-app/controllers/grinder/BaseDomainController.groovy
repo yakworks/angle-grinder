@@ -151,7 +151,7 @@ abstract class BaseDomainController {
     def saveOrUpdateJson() {
         def responseJson = [:]
         try {
-            def p = request.JSON
+            def p = BeanPathTools.flattenMap(request, request.JSON)
             def result = p.id ? dao.update(p) : saveDomain(p)
             render ExportUtil.buildMapFromPaths(result.entity, selectFields) as JSON
             return

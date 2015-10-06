@@ -82,12 +82,55 @@
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div class="pull-right">
-                <ag-search-button></ag-search-button>
-                <ag-reset-search-button></ag-reset-search-button>
+        <div class="row-fluid">
+            <div class="control-group span6">
+                <label class="control-label">Birth Date from</label>
+                <div class="controls">
+                    <div ag-datepicker ag-datepicker ag-trim-time="filters.birthDate.from">
+                        <input type="text"
+                               ng-model="filters.birthDate.from" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="control-group span6">
+                <label class="control-label">Birth Date to</label>
+                <div class="controls">
+                    <div ag-datepicker ag-trim-time="filters.birthDate.to">
+                        <input type="text"
+                               ng-model="filters.birthDate.to" />
+                    </div>
+                </div>
             </div>
         </div>
 
+        <div class="row-fluid">
+            <div class="control-group span6">
+                <label class="control-label">Post Date from</label>
+                <div class="controls">
+                    <div ag-datepicker ag-datepicker>
+                        <input type="text"
+                               ng-model="filters.postDate.from" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="control-group span6">
+                <label class="control-label">Post Date to</label>
+                <div class="controls">
+                    <div ag-datepicker>
+                        <input type="text"
+                               ng-model="filters.postDate.to" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="pull-right">
+            <ag-search-button></ag-search-button>
+            <ag-reset-search-button></ag-reset-search-button>
+        </div>
     </form>
 </div>

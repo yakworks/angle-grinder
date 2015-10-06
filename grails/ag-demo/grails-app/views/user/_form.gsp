@@ -144,6 +144,89 @@
             </div>
 
         </div>
+
+    <h3>Time Zone show Case</h3>
+    <legend>Birth Date</legend>
+
+    <div ag-field-group for="birthDate">
+        <label class="control-label">Birth Date</label>
+
+        <div class="controls">
+            <div ag-datepicker ag-trim-time="user.birthDate">
+                <input type="text"
+                       ng-model="user.birthDate"
+                       name="birthDate"/>
+            </div>
+
+            <ag-validation-errors for="birthDate"/>
+        </div>
+    </div>
+
+    <div ag-field-group>
+        <label class="control-label">Got from server:</label>
+
+        <div class="controls">{{tzShowCase.birthDate}}</div>
+    </div>
+
+    <div ag-field-group>
+        <label class="control-label">Will be send to server:</label>
+        <div class="controls">{{user.birthDate}}</div>
+    </div>
+
+    <legend>Post Date</legend>
+
+    <div ag-field-group for="postDate">
+        <label class="control-label">Post Date</label>
+
+        <div class="controls">
+            <div ag-datepicker>
+                <input type="text"
+                       ng-model="user.postDate"
+                       name="postDate"/>
+            </div>
+
+            <ag-validation-errors for="postDate"/>
+        </div>
+    </div>
+
+    <div ag-field-group>
+        <label class="control-label">Got from server:</label>
+
+        <div class="controls">{{tzShowCase.postDate}}</div>
+    </div>
+
+    <div ag-field-group>
+        <label class="control-label">Will be send to server:</label>
+
+        <div class="controls">{{user.postDate}}</div>
+    </div>
+
+    <legend>Reminder Date</legend>
+    <div ag-field-group for="reminderDate">
+        <label class="control-label">Reminder Date</label>
+
+        <div class="controls">
+            <div ag-datepicker>
+                <input type="text"
+                       ng-model="user.reminderDate"
+                       name="reminderDate"/>
+            </div>
+
+            <ag-validation-errors for="reminderDate"/>
+        </div>
+    </div>
+
+    <div ag-field-group>
+        <label class="control-label">Got from server:</label>
+
+        <div class="controls">{{tzShowCase.reminderDate}}</div>
+    </div>
+
+    <div ag-field-group>
+        <label class="control-label">Will be send to server:</label>
+
+        <div class="controls">{{user.reminderDate}}</div>
+    </div>
     </div>
 
 

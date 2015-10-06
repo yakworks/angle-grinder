@@ -1,5 +1,6 @@
 package example
 import com.coderberry.faker.FakerService
+import grails.converters.JSON
 import grinder.ContactType
 import grinder.Org
 import grinder.User
@@ -34,6 +35,9 @@ class UserDaoTests extends GroovyTestCase {
                 repassword: "secretStuff",
                 inactive: false,
                 activeDate: "2008-02-18T23:00:00.000Z",
+				birthDate: "2008-02-18",
+				postDate: "2008-02-18T23:00:00.000+0100",
+				reminderDate: "2008-02-18T23:00:00.000Z",
 
                 contact: contactProps
         ]
@@ -46,7 +50,6 @@ class UserDaoTests extends GroovyTestCase {
         Calendar cal = Calendar.getInstance()
         cal.setTime(user.activeDate)
         TimeZone timezone= TimeZone.getTimeZone('UTC')
-        cal.setTimeZone(timezone)
 
         assertEquals 2008, cal.get(Calendar.YEAR)
         assertEquals 1, cal.get(Calendar.MONTH)
