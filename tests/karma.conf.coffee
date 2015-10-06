@@ -17,6 +17,7 @@ module.exports = (config) ->
       "src/scripts/**/*.coffee": ["coverage"]
       "docs/exampleApp/**/*.coffee": ["coverage"]
       "tests/unit/**/*.coffee": ["coffee"]
+      "tests/mocks.coffee": ["coffee"]
 
     ngHtml2JsPreprocessor:
       stripPrefix: "docs/"
