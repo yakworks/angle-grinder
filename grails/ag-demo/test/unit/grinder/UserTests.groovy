@@ -19,22 +19,16 @@ class UserTests {
         def invalidUser = new User()
         assert !invalidUser.validate()
 
-        assertEquals 7, invalidUser.errors.allErrors.size()
+        assertEquals 4, invalidUser.errors.allErrors.size()
         assertEquals "nullable", invalidUser.errors["login"]
         assertEquals "nullable", invalidUser.errors["passwd"]
         assertEquals "nullable", invalidUser.errors["contact"]
         assertEquals "nullable", invalidUser.errors["activeDate"]
-		assertEquals "nullable", invalidUser.errors["birthDate"]
-		assertEquals "nullable", invalidUser.errors["reminderDate"]
-		assertEquals "nullable", invalidUser.errors["postDate"]
 
         def contact = new Contact()
         def validUser = new User(login: "login", contact: contact)
         validUser.passwd = "password"
         validUser.activeDate = new Date()
-		validUser.birthDate = new LocalDate()
-		validUser.reminderDate = new Date()
-		validUser.postDate = new DateTime()
 
         assert validUser.validate()
     }

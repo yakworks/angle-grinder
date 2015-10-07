@@ -60,36 +60,6 @@ class UserController extends BaseDomainController {
             if (filters?.login)
                 ilike 'login', filters.login
 
-            if (filters?.activeDate?.from) {
-                def from = DateUtil.parseJsonDate(filters.activeDate.from)
-                gt 'activeDate', from
-            }
-
-            if (filters?.activeDate?.to) {
-                def to = DateUtil.parseJsonDate(filters.activeDate.to)
-                lt 'activeDate', to
-            }
-
-			if (filters?.birthDate?.from) {
-				def from = new LocalDate(filters.birthDate.from)
-				gt 'birthDate', from
-			}
-
-			if (filters?.birthDate?.to) {
-				def to = new LocalDate(filters.birthDate.to)
-				lt 'birthDate', to
-			}
-
-			if (filters?.postDate?.from) {
-				def from = new DateTime(filters.postDate.from)
-				gt 'postDate', from
-			}
-
-			if (filters?.postDate?.to) {
-				def to = new DateTime(filters.postDate.to)
-				lt 'postDate', to
-			}
-
             if (params.sort)
                 order(params.sort, params.order)
         }

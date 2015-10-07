@@ -43,8 +43,6 @@ class User implements Serializable {
         id generator: 'foreign', params: [property: 'contact']
         passwd column: 'password'
         contact column: 'contactId'
-        birthDate type: PersistentLocalDate
-        postDate type: PersistentDateTime
     }
 
     static constraints = {

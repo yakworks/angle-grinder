@@ -4,6 +4,7 @@
 //= require_tree app/controllers/org
 //= require_tree app/controllers/user
 //= require_tree app/controllers/tabbedOrg
+//= require_tree app/controllers/orgShowCase
 //= require app/adminOrg.js
 //= require app/adminTabbedOrg.js
 

@@ -26,6 +26,7 @@ class OrgDaoTests extends GroovyTestCase {
                 zip: fakerService.zipCode(),
                 street: fakerService.streetAddress(),
                 timeZone: "UTC-6",
+                orgShowCaseId: 1,
                 addressDate: "2008-02-18T23:00:00.000Z"
         ]
         def org = orgDao.insert(json).entity

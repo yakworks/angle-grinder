@@ -18,7 +18,7 @@ class ContactTests extends GroovyTestCase {
     @Test
     void testCreateContactAlongWithOrg() {
         // Given
-        def org = new Org(name: "Test Orgnization", num: "123-456")
+        def org = new Org(name: "Test Orgnization", num: "123-456", orgShowCaseId: 1)
 
         // When
         assert org.validate()

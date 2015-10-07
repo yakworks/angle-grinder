@@ -33,6 +33,7 @@ class BootStrap {
 
         def createOrgShowCase = { attributes = [] ->
             attributes = [
+                    name: fakerService.companyName(),
                     exampleDate: randomDate(),
                     exampleDateTime: randomDate(),
                     exampleLocalDate: randomDate()

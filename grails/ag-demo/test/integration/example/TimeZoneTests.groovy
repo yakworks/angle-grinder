@@ -3,6 +3,7 @@ import com.coderberry.faker.FakerService
 import grails.converters.JSON
 import grinder.ContactType
 import grinder.Org
+import grinder.OrgShowCase
 import grinder.User
 import grinder.UserDao
 import org.joda.time.DateTime
@@ -14,66 +15,51 @@ import org.junit.Test
 
 class TimeZoneTests extends GroovyTestCase {
     def FakerService fakerService
-    def userDao
+    def orgShowCase
 	def tzf = DateTimeFormat.forPattern("ZZ")
 	def tz = DateTimeZone.getDefault()
 
     @Before
     void setUp() {
         fakerService = new FakerService()
-        userDao = new UserDao()
+        orgShowCase = new OrgShowCase()
     }
 
-	def createUser(def birthDate="2008-02-18", def postDate=new DateTime(2008, 02, 18, 0,0,0,0),def reminderDate="2008-02-18T23:00:00.000Z") {
-		def org = Org.findByName("9ci")
-		def contactProps = [
-				firstName: fakerService.firstName(),
-				lastName: fakerService.lastName(),
-				email: fakerService.email(),
-				org: [id: org.id],
-				type: ContactType.CUSTOMER
+	def orgShowCase(def exampleLocalDate="2008-02-18", def exampleDateTime=new DateTime(2008, 02, 18, 0,0,0,0),def exampleDate="2008-02-18T23:00:00.000Z") {
+		def props = [
+				name: "test",
+                exampleLocalDate: exampleLocalDate,
+                exampleDateTime: exampleDateTime,
+                exampleDate: exampleDate
 		]
 
-		def userProps = [
-				login: "test-login",
-				password: "secretStuff",
-				repassword: "secretStuff",
-				inactive: false,
-				activeDate: "2008-02-18T23:00:00.000Z",
-				birthDate: birthDate,
-				postDate: postDate,
-				reminderDate: reminderDate,
-
-				contact: contactProps
-		]
-
-		userDao.insert(userProps).entity
+        orgShowCase.insert(props).entity
 	}
 
     @Test
     void testReturnedDateFormats() {
-		def user = createUser()
-        assert user
+		def org = orgShowCase()
+        assert org
 
         Calendar cal = Calendar.getInstance()
-        cal.setTime(user.activeDate)
+        cal.setTime(org.exampleDate)
 
 
         assertEquals 2008, cal.get(Calendar.YEAR)
         assertEquals 1, cal.get(Calendar.MONTH)
         assertEquals 18, cal.get(Calendar.DAY_OF_MONTH)
 
-		assertEquals "2008-02-18", user.birthDate.toString()
-		assertEquals "2008-02-18T00:00:00.000${tzf.withZone(tz).print(0)}", user.postDate.toString()
+		assertEquals "2008-02-18", org.exampleLocalDate.toString()
+		assertEquals "2008-02-18T00:00:00.000${tzf.withZone(tz).print(0)}", org.exampleDateTime.toString()
     }
 
 
 	@Test
 	void testPostDateSpecifiedAsString() {
-		def user = createUser(postDate: "2008-02-18T23:00:00.000Z")
-		assert user
+		def org = orgShowCase(exampleDateTime: "2008-02-18T23:00:00.000Z")
+		assert org
 
-		assertEquals "2008-02-18T00:00:00.000${tzf.withZone(tz).print(0)}", user.postDate.toString()
+		assertEquals "2008-02-18T00:00:00.000${tzf.withZone(tz).print(0)}", org.exampleDateTime.toString()
 	}
 
 }

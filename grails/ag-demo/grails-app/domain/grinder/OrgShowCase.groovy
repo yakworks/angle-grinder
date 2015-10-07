@@ -8,6 +8,7 @@ import org.joda.time.LocalDate
 
 class OrgShowCase implements Serializable {
 
+    String name
     LocalDate exampleLocalDate
     DateTime exampleDateTime
     Date exampleDate
