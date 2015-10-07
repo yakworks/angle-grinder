@@ -33,7 +33,7 @@ app.factory("httpErrorsInterceptor", [
       var $http = $injector.get("$http");
       var onError = function(response) {
         var errorMessage, _ref;
-        errorMessage = ((_ref = response.data) != null ? _ref.error : void 0) || "Unexpected HTTP error";
+        errorMessage = ((_ref = response.data) != null ? _ref.error : void 0) || "Unexpected HTTP error " + response.status + " : " + response.config.url;
 
         // ..skip validation and auth errors
         if (response.status !== 422 && response.status !== 401) {
