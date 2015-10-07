@@ -22,7 +22,7 @@ describe "module: angleGrinder.common", ->
       element.val("2015-05-22T23:00:00+0200")
       element.trigger('input')
       $scope.$digest()
-      expect($scope.user.birthday).to.equal('2015-05-23')
+      expect($scope.user.birthday).to.equal('2015-05-22')
 
     it "assigns to scope date without time if input value is Date", ->
       element.val(new Date(2015, 5, 23, 0, 0))
