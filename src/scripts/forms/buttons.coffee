@@ -13,7 +13,7 @@ forms.directive "agCreateButton", ->
 
   template: """
     <a href="" class="btn">
-      <i class="icon-edit"></i>
+      <i class="fa fa-pencil-square-o"></i>
       <span ng-transclude></span>
     </a>
   """
@@ -23,6 +23,6 @@ forms.directive "agCancelButton", ->
   replace: true
   template: """
     <button type="button" class="btn">
-      <i class="icon-remove"></i> Cancel
+      <i class="fa fa-times"></i> Cancel
     </button>
   """

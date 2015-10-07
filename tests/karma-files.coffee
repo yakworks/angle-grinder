@@ -21,6 +21,9 @@ module.exports =
     "components/bower/bower-angular-placeholders/angular-placeholders.js"
     "components/bower/moment/moment.js"
 
+    "grails/ag-plugin/web-app/angleGrinder/js/application.js"
+    "grails/ag-plugin/web-app/angleGrinder/js/modules/resources.js"
+
     "src/scripts/gridz/gridz.coffee"
     "src/scripts/utils/baseCtrl.coffee"
     "src/scripts/utils/alerts.coffee"
@@ -44,6 +47,7 @@ module.exports =
     "docs/exampleApp/grids.coffee"
     "docs/exampleApp/grids/*.coffee"
 
+    "tests/mocks.coffee"
     "tests/unit/fixtures/**/*.html"
     "tests/unit/helpers/**/*.coffee"
     "tests/unit/angleGrinder/**/*Spec.coffee"

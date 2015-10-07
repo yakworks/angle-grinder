@@ -1,55 +1,60 @@
-<form editable-form name="editForm"
-      class="form-horizontal no-margin"
+<form name="editForm"
+      class="form-horizontal container"
       novalidate="true"
-      onaftersave="save(editForm, org)">
+      ng-submit="save(editForm, org)">
 
-    <div>
-        <span class="title">Phone</span>
-        <span editable-text="org.phone"
-              e-name="orgPhone"
-              e-placeholder="org phone">{{org.phone}}</span>
+  <div ag-field-group for="phone" class="row form-group">
+    <label class="control-label col-md-2">Phone</label>
+
+    <div class="col-md-9">
+      <input type="text" name="phone" placeholder="Phone number"
+             ng-model="org.phone" autofocus required/>
+      <ag-validation-errors for="phone" required="This field is required"/>
     </div>
+  </div>
 
-    <div>
-        <span class="title">State</span>
-        <span editable-text="org.state"
-              e-name="orgState"
-              e-placeholder="org state">{{org.state}}</span>
+  <div ag-field-group for="state" class="row form-group">
+    <label class="control-label col-md-2">State</label>
+
+    <div class="col-md-9">
+      <input type="text" name="state" placeholder="Enter state"
+             ng-model="org.state" autofocus required/>
+      <ag-validation-errors for="state" required="This field is required"/>
     </div>
+  </div>
 
-    <div>
-        <span class="title">City</span>
-        <span editable-text="org.city"
-              e-name="orgCity"
-              e-placeholder="org city">{{org.city}}</span>
+  <div ag-field-group for="city" class="row form-group">
+    <label class="control-label col-md-2">City</label>
+
+    <div class="col-md-9">
+      <input type="text" name="city" placeholder="Enter city name"
+             ng-model="org.city" autofocus required/>
+      <ag-validation-errors for="city" required="This field is required"/>
     </div>
+  </div>
 
-    <div>
-        <span class="title">Zip</span>
-        <span editable-text="org.zip"
-              e-name="orgZip"
-              e-placeholder="org zip">{{org.zip}}</span>
+  <div ag-field-group for="zip" class="row form-group">
+    <label class="control-label col-md-2">Zip Code</label>
+
+    <div class="col-md-9">
+      <input type="text" name="zip" placeholder="Enter zip code"
+             ng-model="org.zip" autofocus required/>
+      <ag-validation-errors for="zip" required="This field is required"/>
     </div>
+  </div>
 
-    <div>
-        <span class="title">Street</span>
-        <span editable-text="org.street"
-              e-name="orgStreet"
-              e-placeholder="org street">{{org.street}}</span>
+  <div ag-field-group for="street" class="row form-group">
+    <label class="control-label col-md-2">Street</label>
+
+    <div class="col-md-9">
+      <input type="text" name="street" placeholder="Enter street name"
+             ng-model="org.street" autofocus required/>
+      <ag-validation-errors for="street" required="This field is required"/>
     </div>
+  </div>
 
-    <div>
-        <span class="title">Address date</span>
-        <span editable-datepicker="org.addressDate"
-              e-name="addressDate"
-              e-placeholder="address date">{{org.addressDate | agDate}}</span>
-    </div>
-
-    <div editable-form-buttons="editForm"></div>
+  <div class="form-actions">
+    <ag-submit-button></ag-submit-button>
+  </div>
 
 </form>
-
-<button class="btn btn-default"
-        ng-click="editForm.$show()"
-        ng-if="!editForm.$visible">Edit
-</button>

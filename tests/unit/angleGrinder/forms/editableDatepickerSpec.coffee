@@ -29,7 +29,7 @@ describe "module: angleGrinder.forms", ->
       beforeEach -> editableScope = element.find("[editable-datepicker]").scope()
 
       calendarButtonEl = null
-      beforeEach -> calendarButtonEl = element.find("button i.icon-calendar")
+      beforeEach -> calendarButtonEl = element.find("button i.fa-calendar")
 
       it "has a button for open the picker", ->
         expect(calendarButtonEl.length).to.eq 1

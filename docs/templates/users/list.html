@@ -6,20 +6,20 @@
     <div ng-include src="'templates/users/searchForm.html'"></div>
   </div>
 
-  <div class="navbar navbar-grid">
+  <div class="navbar navbar-grid navbar-default">
     <div class="navbar-inner with-selected-pointer with-grid-options">
-      <ul class="nav">
+      <ul class="nav navbar-nav col-sm-4">
         <li class="dropdown selected-actions">
           <a data-toggle="dropdown" class="dropdown-toggle" href="#" style="padding-left: 2px">
-            <i class="icon-selected-pointer"></i> Actions<b class="caret"></b>
+            <i class="fa fa-selected-pointer"></i> Actions<b class="caret"></b>
           </a>
           <ul class="dropdown-menu">
             <li>
-              <a href="" ng-click="massUpdate()"><i class="icon-edit"></i> Mass update</a>
+              <a href="" ng-click="massUpdate()"><i class="fa fa-pencil-square-o"></i> Mass update</a>
             </li>
             <li>
               <a href="" ag-grid-xls-export="usersGrid">
-                <i class="icon-download-alt"></i> Export to XLS
+                <i class="fa fa-download"></i> Export to XLS
               </a>
             </li>
           </ul>
@@ -27,15 +27,15 @@
         <li class="divider-vertical"></li>
         <li>
           <a href="#/examples/users/create" class="create-button">
-            <i class="icon-edit"></i>Create user
+            <i class="fa fa-pencil-square-o"></i>Create user
           </a>
         </li>
       </ul>
 
-      <ul class="nav pull-right">
+      <ul class="nav navbar-nav pull-right">
         <li>
           <a href="" title="search screen"
-             ng-click="showSearchForm = !showSearchForm"><i class="icon-search"></i></a>
+             ng-click="showSearchForm = !showSearchForm"><i class="fa fa-search"></i></a>
         </li>
       </ul>
     </div>

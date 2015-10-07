@@ -25,6 +25,7 @@ grails {
             dependencies {
                 // specify dependencies here under either "build", "compile", "runtime", "test" or "provided" scopes eg.
                 build "commons-io:commons-io:2.3"
+                compile "org.jadira.usertype:usertype.jodatime:1.9"
             }
             plugins {
                 // grails standard
@@ -40,6 +41,8 @@ grails {
                 compile ":plugin-config:0.1.8"
                 compile ":faker:0.7"
                 compile ":coffeescript-compiler:0.9.4"
+                compile ":joda-time:1.5"
+
 
                 test ":code-coverage:1.2.6"
             }

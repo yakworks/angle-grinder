@@ -98,8 +98,8 @@ forms.directive "agTabset", [
 
     template: """
       <div class="container">
-        <div class="nav nav-tabs" ng-transclude></div>
-        <div class="tab container">
+        <div class="nav nav-tabs" ng-transclude style="margin-bottom: 15px"></div>
+        <div class="tab">
           <span ng-if="contentLoading">loading the content</span>
           <ng-include src="currentTemplateUrl()"
                       onload="contentLoaded()"

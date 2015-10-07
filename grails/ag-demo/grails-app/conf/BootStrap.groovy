@@ -1,15 +1,46 @@
+import grails.converters.JSON
 import grinder.ContactType
+import org.joda.time.LocalDate
+import org.joda.time.LocalDateTime
 
 class BootStrap {
 
     def userDao
     def orgDao
     def noteDao
+    def orgShowCaseDao
 
     def fakerService
 
     def init = { servletContext ->
         def Random generator = new Random()
+
+        def randomDate = { ->
+            def randBetween = { start, end ->
+                start + (int)Math.round(Math.random() * (end - start))
+            }
+
+            GregorianCalendar gc = new GregorianCalendar()
+
+            int year = randBetween(1983, 2013)
+            gc.set(gc.YEAR, year)
+
+            int dayOfYear = randBetween(1, gc.getActualMaximum(gc.DAY_OF_YEAR))
+            gc.set(gc.DAY_OF_YEAR, dayOfYear)
+
+            gc.getTime()
+        }
+
+        def createOrgShowCase = { attributes = [] ->
+            attributes = [
+                    name: fakerService.companyName(),
+                    exampleDate: randomDate(),
+                    exampleDateTime: randomDate(),
+                    exampleLocalDate: randomDate()
+            ] + attributes
+
+            orgShowCaseDao.insert(attributes).entity
+        }
 
         def createOrg = { attributes = [] ->
             // get sample timeZones
@@ -25,7 +56,9 @@ class BootStrap {
                 city: fakerService.city(),
                 zip: fakerService.zipCode(),
                 street: fakerService.streetAddress(),
-                timeZone: timeZone
+                timeZone: timeZone,
+                orgShowCaseId: createOrgShowCase().id
+
             ] + attributes
 
             orgDao.insert(attributes).entity
@@ -33,6 +66,7 @@ class BootStrap {
 
         // create some organizations
         for (i in 0..10) createOrg()
+
 
         // create users along with organizations
         def firstOrg = createOrg(name: "9ci", num: "111-111-111")
@@ -52,21 +86,6 @@ class BootStrap {
             }
         }
 
-        def randomDate = { ->
-            def randBetween = { start, end ->
-                start + (int)Math.round(Math.random() * (end - start))
-            }
-
-            GregorianCalendar gc = new GregorianCalendar()
-
-            int year = randBetween(1983, 2013)
-            gc.set(gc.YEAR, year)
-
-            int dayOfYear = randBetween(1, gc.getActualMaximum(gc.DAY_OF_YEAR))
-            gc.set(gc.DAY_OF_YEAR, dayOfYear)
-
-            gc.getTime()
-        }
 
         userDao.insert(
                 login: "admin",
@@ -74,6 +93,9 @@ class BootStrap {
                 repassword: "secretStuff",
                 inactive: false,
                 activeDate: randomDate(),
+				birthDate: randomDate(),
+				postDate: randomDate(),
+				reminderDate: randomDate(),
 
                 contact: [
                         firstName: fakerService.firstName(),
@@ -99,6 +121,9 @@ class BootStrap {
                     repassword: "secretStuff",
                     inactive: generator.nextDouble() > 0.5,
                     activeDate: randomDate(),
+					birthDate: randomDate(),
+					postDate: randomDate(),
+					reminderDate: randomDate(),
 
                     contact: [
                             firstName: fakerService.firstName(),

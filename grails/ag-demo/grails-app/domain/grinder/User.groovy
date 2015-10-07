@@ -2,6 +2,12 @@ package grinder
 
 import org.apache.commons.lang.builder.EqualsBuilder
 import org.apache.commons.lang.builder.HashCodeBuilder
+import org.jadira.usertype.dateandtime.joda.PersistentDateTime
+import org.jadira.usertype.dateandtime.joda.PersistentLocalDate
+import org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime
+import org.joda.time.DateTime
+import org.joda.time.LocalDate
+import org.joda.time.LocalDateTime
 
 /**
  * User for user account.
@@ -26,8 +32,10 @@ class User implements Serializable {
     Date activeDate
     Contact contact
 
+
     /** temporary plain password to create a MD5 password */
     String pass = '[secret]'
+
 
     static mapping = {
         cache true

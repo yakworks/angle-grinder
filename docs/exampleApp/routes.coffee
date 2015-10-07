@@ -62,5 +62,9 @@ app.config [
         templateUrl: "templates/panels/index.html"
         controller: "panels.IndexCtrl"
 
+      .when "/examples/xeditable",
+        templateUrl: "templates/xeditable/index.html"
+        controller: "xeditable.IndexCtrl"
+
       .otherwise redirectTo: "/"
 ]

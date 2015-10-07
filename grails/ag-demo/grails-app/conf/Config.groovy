@@ -124,3 +124,11 @@ grails {
       forceRhino = true
     }
 }
+
+jodatime {
+	format.org.joda.time.LocalDate = "yyyy-MM-dd"
+	format.org.joda.time.DateTime = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+}
+grails.databinding.dateFormats = [
+		"yyyy-MM-dd'T'hh:mm:ss'Z'","yyyy-MM-dd'T'hh:mm:ss.SSS'Z'", 'yyyy-MM-dd HH:mm:ss.S'
+]

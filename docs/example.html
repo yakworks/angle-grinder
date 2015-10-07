@@ -10,7 +10,7 @@
 </header>
 
 <div class="container">
-  <aside class="sidebar bs-docs-sidebar" ng-controller="SidebarCtrl">
+  <aside class="sidebar bs-docs-sidebar col-md-3" ng-controller="SidebarCtrl">
     <ul class="nav nav-list bs-docs-sidenav" ng-show="section() === 'angleGrinder'">
       <li><a href="#/?scrollTo=develop"><i class="icon-chevron-right"></i> Develop AngleGrinder</i></a></li>
       <li><a href="#/?scrollTo=develop-checkout"><i class="icon-chevron-right"></i> Checkout from github repo</a></li>
@@ -30,6 +30,7 @@
       <li><a href="#/documentation?scrollTo=docs-alerts"><i class="icon-chevron-right"></i> angleGrinder.alerts</a></li>
       <li><a href="#/documentation?scrollTo=docs-forms"><i class="icon-chevron-right"></i> angleGrinder.forms</a></li>
       <li><a href="#/documentation?scrollTo=docs-gridz"><i class="icon-chevron-right"></i> angleGrinder.gridz</a></li>
+      <li><a href="#/documentation?scrollTo=docs-dates"><i class="icon-chevron-right"></i> Dates processing</a></li>
     </ul>
 
     <ul class="nav nav-list bs-docs-sidenav" ng-show="section() === 'examples'">
@@ -39,10 +40,11 @@
       <li><a href="#/examples/fileUpload"><i class="icon-chevron-right"></i>File Upload</a></li>
       <li><a href="#/examples/tabs"><i class="icon-chevron-right"></i>Tabs</a></li>
       <li><a href="#/examples/panels"><i class="icon-chevron-right"></i>Panels</a></li>
+      <li><a href="#/examples/xeditable"><i class="icon-chevron-right"></i>X-Editable</a></li>
     </ul>
   </aside>
 
-  <section class="content">
+  <section class="content col-md-9">
     <ag-alerts></ag-alerts>
 
     <section>

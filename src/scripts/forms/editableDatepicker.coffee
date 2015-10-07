@@ -23,7 +23,7 @@ forms.directive "editableDatepicker", [
         # add a button for opening the calendar
         @inputEl.after """
           <button type="button" class="btn btn-default" ng-click="open($event)" ng-disabled="disabled">
-            <i class="icon-calendar"></i>
+            <i class="fa fa-calendar"></i>
           </button>
         """
 
@@ -37,11 +37,5 @@ forms.directive "editableDatepicker", [
           $event.stopPropagation()
 
           @scope.opened = true
-
-      save: ->
-        #Check if trimTime directive is present, then set model to date string without time
-        if @attrs.eAgTrimTime
-          @scope.$data = $filter("date")(@scope.$data, "yyyy-MM-dd")
-        @parent.save.call(this)
 
 ]

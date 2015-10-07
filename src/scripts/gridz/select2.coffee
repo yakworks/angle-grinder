@@ -71,7 +71,7 @@ gridz.directive "agSelect2", [
         $log.debug "[forms] initializing AgSelect2 component", scope.options
 
     template: """
-      <div>
+      <div class="input-group">
         <input ui-select2="options" ng-model="ngModel" type="hidden"/>
         <ag-select2-open></ag-select2-open>
       </div>
@@ -89,7 +89,7 @@ gridz.directive "agSelect2Open", ->
       return
   ]
   template: """
-    <button class="btn open-select2" type="button" ng-click="openSelect2()">
-      <i class="icon-search"></i>
-    </button>
+      <span class="input-group-btn">
+        <button class="btn open-select2 btn-default" type="button" ng-click="openSelect2()"><i class="fa fa-search"></i></button>
+      </span>
   """

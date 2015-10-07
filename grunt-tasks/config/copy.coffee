@@ -21,8 +21,16 @@ module.exports = (grunt) ->
       src: [
         "*.{ico,txt}"
         "img/**/*.{gif,png,jpg}"
-        "font/*"
         "styles/**/*.css"
+      ]
+    ,
+      #copy bootstrap and font awsome fonts
+      expand: true
+      flatten: true
+      cwd: "components/bower"
+      dest: "<%= appConfig.dev %>/fonts"
+      src: [
+        "*/fonts/*.{otf,eot,svg,ttf,woff,woff2}"
       ]
     ,
       # workaround for jquery-ui-bootstrap component
@@ -44,6 +52,12 @@ module.exports = (grunt) ->
       src: [
         "**/*.{png,jpg,jpeg,gif}"
       ]
+    ,
+      expand: true
+      flatten: true
+      cwd: "grails/ag-plugin/web-app/angleGrinder/js/modules"
+      dest: "<%= appConfig.dev %>/scripts/utils"
+      src: "resources.js"
     ]
 
   dist:
@@ -52,7 +66,7 @@ module.exports = (grunt) ->
       cwd: "<%= appConfig.dev %>"
       dest: "<%= appConfig.dist %>"
       src: [
-        "font/**/*"
+        "fonts/**/*"
         "img/**/*"
       ]
     ]

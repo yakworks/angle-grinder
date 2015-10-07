@@ -12,9 +12,9 @@ class OrgControllerTests {
     @Test
     void listAll() {
         // Given
-        def firstOrg = new Org(id: 1, name: "GitHub", num: "111", city: "Seattle").save()
-        def secondOrg = new Org(id: 2, name: "9ci", num: "222", city: "Chicago").save()
-        def thirdOrg = new Org(id: 3, name: "Microsoft", num: "333").save()
+        def firstOrg = new Org(id: 1, name: "GitHub", num: "111", city: "Seattle", orgShowCaseId: 1).save()
+        def secondOrg = new Org(id: 2, name: "9ci", num: "222", city: "Chicago", orgShowCaseId: 1).save()
+        def thirdOrg = new Org(id: 3, name: "Microsoft", num: "333", orgShowCaseId: 1).save()
 
         // When
         controller.listAll()

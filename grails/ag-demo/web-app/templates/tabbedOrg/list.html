@@ -6,34 +6,34 @@
          <div ng-include="'/templates/tabbedOrg/searchForm.html' | withContext"></div>
     </div>
 
-    <div class="navbar navbar-grid">
+    <div class="navbar navbar-grid navbar-default">
         <div class="navbar-inner with-selected-pointer with-grid-options">
-            <ul class="nav">
+            <ul class="nav navbar-nav col-sm-4">
               <li class="dropdown selected-actions">
                   <a data-toggle="dropdown" class="dropdown-toggle" href="#" style="padding-left:2px">
-                      <i class="icon-selected-pointer"></i> Actions <b class="caret"></b>
+                      <i class="fa fa-selected-pointer"></i> Actions <b class="caret"></b>
                   </a>
                   <ul class="dropdown-menu">
-                      <li><a href="" ng-click="massUpdate()"><i class="icon-edit"></i> Mass update</a></li>
+                      <li><a href="" ng-click="massUpdate()"><i class="fa fa-pencil-square-o"></i> Mass update</a></li>
                   </ul>
               </li>
               <li class="divider-vertical"></li>
                   <li>
                       <a href="#/create">
-                          <i class="icon-user"></i> Create org
+                          <i class="fa fa-user"></i> Create org
                       </a>
                   </li>
             </ul>
-            <ul class="nav pull-right">
+            <ul class="nav navbar-nav pull-right">
                 <li>
                     <a title="search screen" ng-click="showSearchForm = !showSearchForm" href="">
-                        <i class="icon-search"></i>
+                        <i class="fa fa-search"></i>
                     </a>
                 </li>
             </ul>
 
             <form action="" class="navbar-search pull-right" ng-submit="grid.org.search(filters)">
-                <input type="text" value="" placeholder="quick search" class="search-query span2" style="width: 150px;"
+                <input type="text" value="" placeholder="quick search" class="search-query col-md-2" style="width: 150px;"
                        ng-model="filters.quickSearch"/>
             </form>
         </div>

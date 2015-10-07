@@ -1,12 +1,12 @@
 <div class="well" ng-controller="user.SearchForm">
     <form ag-search-form="usersGrid" class="form-horizontal form-multi-column no-margin">
 
-        <div class="row-fluid">
-            <div class="control-group span6">
-                <label class="control-label">${ag.label(code: "org")}</label>
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label class="control-label col-sm-4">${ag.label(code: "org")}</label>
 
-                <div class="controls">
-                    <div class="input-append">
+                <div class="col-sm-8 test">
+                    <div class="input-group">
                         <ag-select2 select-ajax-url="/org/pickList"
                                     select-ajax-quiet-millis="250"
                                     select-minimum-input-length="3"
@@ -23,61 +23,107 @@
             </div>
         </div>
 
-        <div class="row-fluid">
-            <div class="control-group span6">
-                <label class="control-label">${ag.label(code: "name")}</label>
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label class="control-label col-sm-4">${ag.label(code: "name")}</label>
 
-                <div class="controls">
+                <div class="col-sm-8">
                     <input class="input-block-level" type="text" ng-model="filters.contact.name">
                 </div>
             </div>
 
-            <div class="control-group span6">
-                <label class="control-label">${ag.label(code: "login")}</label>
+            <div class="form-group col-md-6">
+                <label class="control-label col-sm-4">${ag.label(code: "login")}</label>
 
-                <div class="controls">
+                <div class="col-sm-8">
                     <input class="input-block-level" type="text" ng-model="filters.login">
                 </div>
             </div>
         </div>
 
-        <div class="row-fluid">
-            <div class="control-group span6">
-                <label class="control-label">${ag.label(code: "contact.email")}</label>
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label class="control-label col-sm-4">${ag.label(code: "contact.email")}</label>
 
-                <div class="controls">
+                <div class="col-sm-8">
                     <input class="input-block-level" type="text" ng-model="filters.contact.email">
                 </div>
             </div>
 
-            <div class="control-group span6">
-                <label class="control-label">${ag.label(code: "contact.type")}</label>
+            <div class="form-group col-md-6">
+                <label class="control-label col-sm-4">${ag.label(code: "contact.type")}</label>
 
-                <div class="controls">
+                <div class="col-sm-8">
                     <input type="text" ui-select2="contactTypeSelectOptions"
-                           name="contactType" ng-model="filters.contact.type" />
+                           name="contactType" ng-model="filters.contact.type"/>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label class="control-label col-sm-4">Active Date from</label>
+
+                <div class="col-sm-8">
+                    <div ag-datepicker>
+                        <input type="text"
+                               ng-model="filters.activeDate.from"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label class="control-label col-sm-4">Active Date to</label>
+
+                <div class="col-sm-8">
+                    <div ag-datepicker>
+                        <input type="text"
+                               ng-model="filters.activeDate.to"/>
+                    </div>
                 </div>
             </div>
         </div>
 
         <div class="row-fluid">
             <div class="control-group span6">
-                <label class="control-label">Active Date from</label>
+                <label class="control-label">Birth Date from</label>
                 <div class="controls">
-                  <div ag-datepicker>
-                    <input type="text"
-                           ng-model="filters.activeDate.from" />
-                  </div>
+                    <div ag-datepicker ag-datepicker ag-trim-time="filters.birthDate.from">
+                        <input type="text"
+                               ng-model="filters.birthDate.from" />
+                    </div>
                 </div>
             </div>
 
             <div class="control-group span6">
-                <label class="control-label">Active Date to</label>
+                <label class="control-label">Birth Date to</label>
                 <div class="controls">
-                  <div ag-datepicker>
-                    <input type="text"
-                           ng-model="filters.activeDate.to" />
-                  </div>
+                    <div ag-datepicker ag-trim-time="filters.birthDate.to">
+                        <input type="text"
+                               ng-model="filters.birthDate.to" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row-fluid">
+            <div class="control-group span6">
+                <label class="control-label">Post Date from</label>
+                <div class="controls">
+                    <div ag-datepicker ag-datepicker>
+                        <input type="text"
+                               ng-model="filters.postDate.from" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="control-group span6">
+                <label class="control-label">Post Date to</label>
+                <div class="controls">
+                    <div ag-datepicker>
+                        <input type="text"
+                               ng-model="filters.postDate.to" />
+                    </div>
                 </div>
             </div>
         </div>

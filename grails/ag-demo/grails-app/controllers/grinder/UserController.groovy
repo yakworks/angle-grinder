@@ -2,6 +2,8 @@ package grinder
 
 import grails.converters.JSON
 import grails.plugin.dao.DomainException
+import org.joda.time.DateTime
+import org.joda.time.LocalDate
 
 import java.text.SimpleDateFormat
 
@@ -57,16 +59,6 @@ class UserController extends BaseDomainController {
 
             if (filters?.login)
                 ilike 'login', filters.login
-
-            if (filters?.activeDate?.from) {
-                def from = DateUtil.parseJsonDate(filters.activeDate.from)
-                gt 'activeDate', from
-            }
-
-            if (filters?.activeDate?.to) {
-                def to = DateUtil.parseJsonDate(filters.activeDate.to)
-                lt 'activeDate', to
-            }
 
             if (params.sort)
                 order(params.sort, params.order)

@@ -1,0 +1,56 @@
+<div class="panel rcm-panel panel-default financial">
+    <div editable-panel-heading="editForm">Xeditable Form</div>
+
+    <div class="panel-body">
+        <form editable-form name="editForm"
+              class="form-horizontal no-margin"
+              novalidate="true"
+              onaftersave="save(editForm, org)">
+
+            <div>
+                <span class="title">Phone</span>
+        <span editable-text="org.phone"
+              e-name="orgPhone"
+              e-placeholder="org phone">{{org.phone}}</span>
+            </div>
+
+            <div>
+                <span class="title">State</span>
+        <span editable-text="org.state"
+              e-name="orgState"
+              e-placeholder="org state">{{org.state}}</span>
+            </div>
+
+            <div>
+                <span class="title">City</span>
+        <span editable-text="org.city"
+              e-name="orgCity"
+              e-placeholder="org city">{{org.city}}</span>
+            </div>
+
+            <div>
+                <span class="title">Zip</span>
+        <span editable-text="org.zip"
+              e-name="orgZip"
+              e-placeholder="org zip">{{org.zip}}</span>
+            </div>
+
+            <div>
+                <span class="title">Street</span>
+        <span editable-text="org.street"
+              e-name="orgStreet"
+              e-placeholder="org street">{{org.street}}</span>
+            </div>
+
+            <div>
+                <span class="title">Address date</span>
+        <span editable-datepicker="org.addressDate"
+              e-name="addressDate"
+              e-placeholder="address date">{{org.addressDate | agDate}}</span>
+            </div>
+
+            <div editable-form-buttons="editForm"></div>
+
+        </form>
+    </div>
+</div>
