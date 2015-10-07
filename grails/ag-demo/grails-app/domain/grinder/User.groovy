@@ -31,9 +31,7 @@ class User implements Serializable {
 
     Date activeDate
     Contact contact
-    LocalDate birthDate
-    DateTime postDate
-    Date reminderDate
+
 
     /** temporary plain password to create a MD5 password */
     String pass = '[secret]'

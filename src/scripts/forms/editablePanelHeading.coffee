@@ -15,7 +15,7 @@ app.directive "editablePanelHeading", [
           <a href="" class="pull-right"
               ng-click="form.$show()"
               ng-if="!form.$visible">
-            <i class="icon-edit"></i>
+            <i class="fa fa-pencil-square-o"></i>
           </a>
         </h4>
       </div>

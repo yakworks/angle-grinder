@@ -22,8 +22,10 @@
 <span editable-select="user.contractId2"
       e-ng-options="c.id as c.name for c in contracts"
       e-add-empty-option
-      ag-bind="user.contractId2"
-      e-name="contract">{{user.contractId2}}</span>
+      ag-select-bind="user.contractId2"
+      ag-select-bind-for="contracts"
+      ag-select-bind-field="name"
+      e-name="contract"></span>
             </div>
 
             <div editable-form-buttons="xeditableForm"></div>

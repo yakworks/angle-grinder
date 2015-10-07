@@ -14,6 +14,7 @@ class Org implements Serializable {
   String zip
   String timeZone
   Date addressDate
+  Long orgShowCaseId
 
   static mapping = {
     cache true

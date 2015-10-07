@@ -54,13 +54,6 @@ describe "module: angleGrinder.common", ->
         element = $compile(template)($scope)
         $scope.$apply()
 
-      it "assigns to scope date without time if input value is string", ->
-        element.find("input").val("2015-05-22")
-        element.find("input").trigger('input')
-        $scope.$digest()
-        timeout.flush()
-        expect($scope.user.birthday).to.equal('2015-05-22')
-
       ###it "assigns to scope date without time if input value is Date", ->
         element.find("input").val(new Date(2015, 5, 23, 0, 0))
         element.find("input").trigger('input')
@@ -79,12 +72,6 @@ describe "module: angleGrinder.common", ->
         """
         element = $compile(template)($scope)
         $scope.$apply()
-
-      it "assigns to scope date without time if input value is string", ->
-        element.val("2015-05-22T23:00:00+0200")
-        element.trigger('input')
-        $scope.$digest()
-        expect($scope.user.birthday).to.equal('May 22, 2015')
 
     describe "override default date format", ->
 
