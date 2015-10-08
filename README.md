@@ -58,14 +58,17 @@ grunt
 
 If a test is failing add --force
 
-### Sample app
+### Sample apps
 
-```
-script/run-frontend-server
-script/run-ag-demo
-```
+**for the sample grails demo app**
+```cd grails/ag-demo/
+grails run-app```
 
-open http://localhost:9000
+for the sample node app and docs
+``` script/run-frontend-server ```
+then open http://localhost:9000
+
+
 
 ## Directory structure
 
