@@ -48,6 +48,7 @@ forms.directive "agDatepicker", [
           clone.attr("datepicker-popup", "MM/dd/yyyy")
           # ..and wire it with `opened` scope variable
           clone.attr("is-open", "opened")
+          clone.addClass("form-control")
 
           $compile(clone) scope, (clone) ->
             element.prepend(clone)

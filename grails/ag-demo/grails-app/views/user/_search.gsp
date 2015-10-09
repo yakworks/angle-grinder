@@ -28,7 +28,7 @@
                 <label class="control-label col-sm-4">${ag.label(code: "name")}</label>
 
                 <div class="col-sm-8">
-                    <input class="input-block-level" type="text" ng-model="filters.contact.name">
+                    <input class="form-control" type="text" ng-model="filters.contact.name">
                 </div>
             </div>
 
@@ -36,7 +36,7 @@
                 <label class="control-label col-sm-4">${ag.label(code: "login")}</label>
 
                 <div class="col-sm-8">
-                    <input class="input-block-level" type="text" ng-model="filters.login">
+                    <input class="form-control" type="text" ng-model="filters.login">
                 </div>
             </div>
         </div>
@@ -46,7 +46,7 @@
                 <label class="control-label col-sm-4">${ag.label(code: "contact.email")}</label>
 
                 <div class="col-sm-8">
-                    <input class="input-block-level" type="text" ng-model="filters.contact.email">
+                    <input class="form-control" type="text" ng-model="filters.contact.email">
                 </div>
             </div>
 

@@ -31,11 +31,7 @@
                     </a>
                 </li>
             </ul>
-
-            <form action="" class="navbar-search pull-right" ng-submit="grid.org.search(filters)">
-                <input type="text" value="" placeholder="quick search" class="search-query col-md-2" style="width: 150px;"
-                       ng-model="filters.quickSearch"/>
-            </form>
+            <ag-grid-quick-search for="grid.org" filters="filters"></ag-grid-quick-search>
         </div>
     </div>
 

@@ -126,9 +126,9 @@ describe "module:angleGrinder.gridz controller: gridCrudCtrl", ->
 
   describe "#setFocus", ->
     inputs = """
-        <input type="text" id="name_1" name="name_1" ng-model="model.model" class="form-control input-block-level ng-pristine ng-valid">
-        <input type="text" id="name_2" name="name_2" ng-model="model.model" class="form-control input-block-level ng-pristine ng-valid">
-        <input type="text" id="name_3" name="name_3" ng-model="model.model" class="form-control input-block-level ng-pristine ng-valid">
+        <input type="text" id="name_1" name="name_1" ng-model="model.model" class="form-control form-control ng-pristine ng-valid">
+        <input type="text" id="name_2" name="name_2" ng-model="model.model" class="form-control form-control ng-pristine ng-valid">
+        <input type="text" id="name_3" name="name_3" ng-model="model.model" class="form-control form-control ng-pristine ng-valid">
       """
     element = angular.element(inputs)
 

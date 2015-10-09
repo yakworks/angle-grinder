@@ -1,6 +1,13 @@
 grails.plugin.location.angleGrinder = "../ag-plugin"
 
 grails {
+    forkConfig = [maxMemory: 512, minMemory: 256, debug: false, perm: 256, maxPerm: 512]
+    project.fork = [
+            test: forkConfig, // configure settings for the test-app JVM
+            run : forkConfig, // configure settings for the run-app JVM
+            war : forkConfig, // configure settings for the run-war JVM
+            console: forkConfig // configure settings for the Swing console JVM
+    ]
     tomcat { // settings for run-app and run-war
         classpath = "../9ci-app-conf"    // Put 9ci-config.groovy and such here
         jvmArgs = ["-Xms256m", "-Xmx1024m", "-XX:PermSize=256m", "-XX:MaxPermSize=512m"]

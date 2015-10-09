@@ -51,7 +51,7 @@
                 <label class="control-label col-md-3">${ag.label(code: "contact.type")}</label>
 
                 <div class="col-md-4">
-                    <select ui-select2 name="type" ng-model="user.contact.type">
+                    <select class="full-width" ui-select2 name="type" ng-model="user.contact.type">
                         <option value="ADMIN">admin</option>
                         <option value="CUSTOMER">customer</option>
                     </select>
@@ -63,7 +63,7 @@
                 <label class="control-label col-md-3">${ag.label(code: "user.org")}</label>
 
                 <div class="col-md-4">
-                    <select name="orgId" ui-select2
+                    <select class="full-width" name="orgId" ui-select2
                             ng-model="user.contact.org.id"
                             ng-required="true">
                         <option value="">-- chose org --</option>
@@ -78,7 +78,7 @@
                     ${ag.label(code: 'contact.tagForReminders')}
                 </label>
 
-                <div class="col-md-4">
+                <div class="col-md-4" style="margin-top: 17px;">
                     <g:checkBox name="tagForReminders" ng-model="user.contact.tagForReminders"/>
                 </div>
 
@@ -139,7 +139,7 @@
                 ${ag.label(code: 'user.inactive')}
             </label>
 
-            <div class="col-md-4">
+            <div class="col-md-4" style="margin-top: 7px;">
                 <g:checkBox name="tagForReminders" ng-model="user.inactive"/>
             </div>
 
