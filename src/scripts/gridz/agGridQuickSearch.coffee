@@ -18,8 +18,8 @@ gridz.directive "agGridQuickSearch", [
         $scope.grid.search(filters)
 
     template: """
-      <form class="navbar-search pull-right" name="quickSearch"">
-        <input type="text" placeholder="quick search"  style="margin-top: 7px" quick-search-button class="search-query span2"
+      <form class="search-form pull-right" name="quickSearch"">
+        <input type="text" placeholder="quick search" quick-search-button class="search-query"
                ng-model="filters.quickSearch"/>
       </form>
     """

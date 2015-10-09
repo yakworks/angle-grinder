@@ -34,7 +34,7 @@
                 <ul class="navbar-nav nav">
                     <li><a href="${createLink(controller: 'user')}">List Users</a></li>
                     <li><a href="${createLink(controller: 'org')}">List Orgs</a></li>
-                    <li><a href="${createLink(controller: 'orgTabs')}">List Orgs with Tabs</a></li>
+                    <li><a href="${request.contextPath}">List Orgs with Tabs</a></li>
                 </ul>
 
                 <ul class="navbar-nav nav pull-right">
@@ -83,7 +83,7 @@
                 <li><a href="${createLink(controller: 'org')}">
                     <i class="fa fa-chevron-right"></i> List Orgs</a>
                 </li>
-                <li><a href="${createLink(controller: 'orgTabs')}">
+                <li><a href="${request.contextPath}">
                     <i class="fa fa-chevron-right"></i> List Orgs with Tabs</a>
                 </li>
             </ul>
