@@ -17,7 +17,7 @@ class Pager {
     //max rows to show
     Integer max = 10
     //the max rows the user can set it to
-    Integer allowedMax = 1000
+    Integer allowedMax = 10000
     //the total record count. This is used to calculate the number of pages
     Integer recordCount = 0
     Integer offset
@@ -61,18 +61,18 @@ class Pager {
     }
 
     def eachPage(Closure c) {
-        Long totalPages = pageCount
-        if(totalPages < 1) return
-
-        log.debug "Total pages : $totalPages"
-
-        (0..(totalPages-1)).each {Long page ->
-            Long offset = (page * max)
+        if(pageCount < 1) return
+        log.debug "eachPage total pages : pageCount"
+        
+        (1..totalPages).each {Long pageNum ->
+            page = pageNum
+            offset = (max * (page - 1))
             try {
-                log.debug "Executing batch [max:$max, offset:$offset]"
+                log.debug "Executing eachPage closer with [max:$max, offset:$offset]"
                 c.call(max, offset)
             }catch (Exception e) {
-                log.error "Error encountered while executing batch [max:$max, offset:$offset]}]", e
+                log.error "Error encountered while calling closure in eachPage [max:$max, offset:$offset]}]", e
+                throw e
             }
         }
 
