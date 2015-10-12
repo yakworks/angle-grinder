@@ -40,5 +40,5 @@ describe "module: angleGrinder.forms directive: autofillPrevent", ->
       expect(ngModel.$viewValue).to.equal "password"
       ngModel.$setViewValue "newAutofillValue"
       # ngModel.$viewValue should roll back to previous value
-      expect(ngModel.$viewValue).to.equal ""
+      expect(ngModel.$viewValue).to.equal undefined
 

@@ -37,13 +37,6 @@ describe "module: angleGrinder.forms", ->
       it "initially has closed calendar", ->
         expect(editableScope.opened).to.be.false
 
-      describe "when `open calendar` button is clicked", ->
-
-        beforeEach -> calendarButtonEl.click()
-
-        it "opens the calendar", ->
-          expect(editableScope.opened).to.be.true
-
 
     beforeEach inject ($rootScope, $compile) ->
       $scope = $rootScope.$new()
@@ -76,9 +69,4 @@ describe "module: angleGrinder.forms", ->
       it "initially has closed calendar", ->
         expect(editableScope.opened).to.be.false
 
-      describe "when `open calendar` button is clicked but field is read only", ->
 
-        beforeEach -> calendarButtonEl.click()
-
-      it "opens the calendar", ->
-        expect(editableScope.opened).to.be.false

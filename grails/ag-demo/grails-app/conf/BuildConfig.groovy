@@ -1,7 +1,7 @@
 grails.plugin.location.angleGrinder = "../ag-plugin"
 
 grails {
-    forkConfig = [maxMemory: 512, minMemory: 256, debug: false, perm: 256, maxPerm: 512]
+    forkConfig = [maxMemory: 1024, minMemory: 512, debug: false, perm: 256, maxPerm: 512]
     project.fork = [
             test: forkConfig, // configure settings for the test-app JVM
             run : forkConfig, // configure settings for the run-app JVM

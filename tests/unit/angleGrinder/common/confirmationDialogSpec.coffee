@@ -36,7 +36,7 @@ describe "module: angleGrinder.common", ->
   describe "service: confirmationDialog", ->
 
     beforeEach module "ui.bootstrap", ($provide) ->
-      $provide.decorator "$modal", ($delegate) ->
+      $provide.decorator "$uibModal", ($delegate) ->
         sinon.spy($delegate, "open")
         return $delegate
 
@@ -45,11 +45,11 @@ describe "module: angleGrinder.common", ->
     beforeEach module "angleGrinder.forms"
 
     itOpensModalWindow = ->
-      it "opens a modal window", inject ($modal) ->
-        expect($modal.open).to.have.been.called
+      it "opens a modal window", inject ($uibModal) ->
+        expect($uibModal.open).to.have.been.called
 
-      it "opens a modal window with valid options", inject ($modal) ->
-        modalOptions = $modal.open.lastCall.args[0]
+      it "opens a modal window with valid options", inject ($uibModal) ->
+        modalOptions = $uibModal.open.lastCall.args[0]
 
         expect(modalOptions).to.have.property "template"
         expect(modalOptions).to.have.property "controller", "ConfirmationDialogCtrl as ctrl"
@@ -58,16 +58,16 @@ describe "module: angleGrinder.common", ->
         expect(modalOptions.backdrop).to.eq "static"
 
     itHasValidConfirmationMessage = (message) ->
-      it "has valid confirmation message", inject ($modal) ->
-        modalOptions = $modal.open.lastCall.args[0]
+      it "has valid confirmation message", inject ($uibModal) ->
+        modalOptions = $uibModal.open.lastCall.args[0]
         expect(modalOptions.resolve.options()).to.have.property "message", message
 
     itHasValidButtonLabels = (labels = {}) ->
       labels.cancelLabel ?= "Cancel"
       labels.okLabel ?= "Ok"
 
-      it "has default button labels", inject ($modal) ->
-        modalOptions = $modal.open.lastCall.args[0]
+      it "has default button labels", inject ($uibModal) ->
+        modalOptions = $uibModal.open.lastCall.args[0]
         options = modalOptions.resolve.options()
 
         expect(options).to.have.property "cancelLabel", labels.cancelLabel

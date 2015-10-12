@@ -45,7 +45,7 @@ forms.directive "agDatepicker", [
               )
           )
           # dynamically add `datepicker-popup` to the input
-          clone.attr("datepicker-popup", "MM/dd/yyyy")
+          clone.attr("uib-datepicker-popup", "MM/dd/yyyy")
           # ..and wire it with `opened` scope variable
           clone.attr("is-open", "opened")
           clone.addClass("form-control")

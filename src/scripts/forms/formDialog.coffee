@@ -3,7 +3,7 @@ forms = angular.module("angleGrinder.forms")
 # Opens a modal dialog with embedded generic form for
 # create or update record
 forms.factory "formDialog", [
-  "$modal", "pathWithContext",
+  "$uibModal", "pathWithContext",
   ($modal, pathWithContext) ->
 
     open: (templateUrl, dialogOptions = {}) ->

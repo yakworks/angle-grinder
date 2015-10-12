@@ -11,7 +11,7 @@ class ConfirmationDialogCtrl extends BaseCtrl
 
 
 app.service "confirmationDialog", [
-  "$modal", "$log", "$q", ($modal, $log, $q) ->
+  "$uibModal", "$log", "$q", ($modal, $log, $q) ->
 
     # Open the confirmation dialog
     # options - it can be a string or object with the messages

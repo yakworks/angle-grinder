@@ -3,7 +3,7 @@ describe "controller: gridExample.ListCtrl", ->
   beforeEach module "templates/gridExample/form.html"
 
   beforeEach module "angleGrinder.forms", ($provide) ->
-    $provide.value "$modal", open: sinon.stub().returns result: then: angular.noop
+    $provide.value "$uibModal", open: sinon.stub().returns result: then: angular.noop
     return
 
   beforeEach module "exampleApp"
@@ -43,23 +43,23 @@ describe "controller: gridExample.ListCtrl", ->
       it "loads an record", ->
         expect(controller.findRecordById).to.have.been.calledWith(123)
 
-      it "opens opens a dialog for editing the the loaded record", inject ($modal) ->
-        expect($modal.open).to.have.been.called
+      it "opens opens a dialog for editing the the loaded record", inject ($uibModal) ->
+        expect($uibModal.open).to.have.been.called
 
-        options = $modal.open.getCall(0).args[0]
+        options = $uibModal.open.getCall(0).args[0]
         expect(options).to.have.property "templateUrl", "/templates/gridExample/form.html"
         expect(options.resolve.dialogOptions().record).to.eq record
 
     describe "#createRecord", ->
 
-      it "opens a dialog for creating a new item", inject ($modal) ->
+      it "opens a dialog for creating a new item", inject ($uibModal) ->
         # When
         $scope.createRecord()
 
         # Then
-        expect($modal.open).to.have.been.called
+        expect($uibModal.open).to.have.been.called
 
-        options = $modal.open.getCall(0).args[0]
+        options = $uibModal.open.getCall(0).args[0]
         expect(options).to.have.property "templateUrl", "/templates/gridExample/form.html"
         expect(options.resolve.dialogOptions().record).to.not.be.undefined
 

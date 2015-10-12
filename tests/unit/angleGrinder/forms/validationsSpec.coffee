@@ -319,10 +319,10 @@ describe "module: angleGrinder.forms validations", ->
 
         expect(errorsEl.find("span").length).to.equal 2
 
-        expect(errorsEl.find("span:nth-child(1)").text())
+        expect(errorsEl.find("span:nth-child(2)").text())
           .to.equal "Too short"
 
-        expect(errorsEl.find("span:nth-child(2)").text())
+        expect(errorsEl.find("span:nth-child(1)").text())
           .to.equal "Does not match the confirmation"
 
   describe "service: validationMessages", ->

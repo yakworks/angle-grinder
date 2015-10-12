@@ -2,9 +2,9 @@ describe "controller: users.ListCtrl", ->
 
   beforeEach module "exampleApp"
 
-  # Stub $modal service
+  # Stub $uibModal service
   beforeEach module "ui.bootstrap", ($provide) ->
-    $provide.value "$modal", open: sinon.mock()
+    $provide.value "$uibModal", open: sinon.mock()
     return
 
   beforeEach module "angleGrinder.forms", ($provide) ->

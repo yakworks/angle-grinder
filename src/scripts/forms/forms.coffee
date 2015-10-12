@@ -29,12 +29,12 @@ forms = angular.module("angleGrinder.forms", [
 ])
 
 forms.run [
-  "datepickerConfig", "datepickerPopupConfig",
-  (datepickerConfig, datepickerPopupConfig) ->
-    datepickerConfig.showWeeks = false
-    datepickerConfig.formatDay = "d"
+  "uibDatepickerConfig", "uibDatepickerPopupConfig",
+  (uibDatepickerConfig, uibDatepickerPopupConfig) ->
+    uibDatepickerConfig.showWeeks = false
+    uibDatepickerConfig.formatDay = "d"
 
-    datepickerPopupConfig.showButtonBar = false
+    uibDatepickerPopupConfig.showButtonBar = false
 ]
 
 forms.run [

@@ -9,6 +9,8 @@ gridz.value "flatten", (target, opts = delimiter: ".") ->
     if prev then prev + delimiter + key else key
 
   step = (object, prev) ->
+    console.log object
+    console.log Object.keys(object)
     angular.forEach Object.keys(object), (key) ->
       isArray = opts.safe and object[key] instanceof Array
       type = Object::toString.call(object[key])
