@@ -69,7 +69,8 @@
         <aside class="sidebar col-sm-3">
             <ul class="nav list-group nav-side">
                 <li>
-                    <a data-toggle="collapse" href="#user-submenu" class="accordion-toggle">
+                    %{--TODO figure out why does it breaks the link--}%
+                    <a data-toggle="collapse" href="${createLink(controller: 'user')}" class="accordion-toggle">
                         Users<i class="fa fa-chevron-right"></i>
                     </a>
 
