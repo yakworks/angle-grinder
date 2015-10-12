@@ -19,7 +19,7 @@ app.directive "editableFormButtons", [
         -->
 
         <span ng-if="form.$visible">
-          <button type="submit" class="btn btn-primary"
+          <button type="submit" class="btn btn-default btn-primary"
                   ng-disabled="form.$invalid || form.$waiting">
             Save
           </button>

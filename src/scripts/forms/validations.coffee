@@ -64,7 +64,7 @@ forms.directive "agFieldGroup", [
     replace: true
     transclude: true
     template: """
-      <div class="control-group" ng-transclude></div>
+      <div class="form-group" ng-transclude></div>
     """
 
     link: (scope, element, attrs, formCtrl) ->

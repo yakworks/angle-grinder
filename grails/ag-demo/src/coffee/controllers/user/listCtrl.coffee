@@ -32,8 +32,6 @@ class ListCtrl
       { name: "contact.email", label: "Contact Email", width: 70, align: "right", formatter: "email" }
       { name: "login", label: "Login", width: 70 }
       { name: "activeDate", label: "Active Date", width: 70, formatter: (cellVal) => @$filter("date")(cellVal) }
-      { name: "birthDate", label: "Birth Date", width: 70, formatter: (cellVal) => @$filter("date")(cellVal) }
-      { name: "postDate", label: "Post Date", width: 70, formatter: (cellVal) => @$filter("date")(cellVal) }
       { name: "inactive", label: "Inactive", width: 30, align: "center", formatter: "okIcon" }
     ]
 
