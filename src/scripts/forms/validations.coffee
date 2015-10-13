@@ -77,9 +77,9 @@ forms.directive "agFieldGroup", [
           invalid = _.map fields, (field) -> formCtrl[field]?.$invalid or formCtrl.$serverErrors?[field]
 
           if _.any(invalid)
-            element.addClass("error")
+            element.addClass("has-error")
           else
-            element.removeClass("error")
+            element.removeClass("has-error")
 
       # Watch for validity state change and display errors if necessary
       angular.forEach fields, (field) ->
