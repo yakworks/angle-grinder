@@ -45,7 +45,8 @@ forms.directive "agDatepicker", [
               )
           )
           # dynamically add `datepicker-popup` to the input
-          clone.attr("uib-datepicker-popup", "MM/dd/yyyy")
+          # datepicker-popup is deprecated, but new uib-datepicker-popup doesn't work with ng-required
+          clone.attr("datepicker-popup", "MM/dd/yyyy")
           # ..and wire it with `opened` scope variable
           clone.attr("is-open", "opened")
           clone.addClass("form-control")
