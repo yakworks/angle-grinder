@@ -187,7 +187,7 @@ forms.directive "agPanelStates",  [
 
 # Directive for opening modal window
 forms.directive "panelModal", [
-  "$compile", "$modal", "$document", ($compile, $modal, $document) ->
+  "$compile", "$uibModal", "$document", ($compile, $modal, $document) ->
     restrict: "E"
     template: """
       <div id="modal-fullscreen" class="modal">

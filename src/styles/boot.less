@@ -3,8 +3,6 @@ body {
 }
 
 @import "../../components/bower/bootstrap/less/bootstrap.less";
-@import "../../components/bower/bootstrap/less/responsive-embed.less";
-@import "../../components/bower/bootstrap/less/responsive-utilities.less";
 @import "../../components/bower/font-awesome/less/font-awesome.less";
 
 // do not collapse until it reaches a smaller value
@@ -28,6 +26,15 @@ ul.select2-results table td {
   padding: 2px;
 }
 
+.input-group .select2-container ul.select2-choices {
+  border-bottom-right-radius: 0px;
+  border-top-right-radius: 0px;
+}
+
+.select2-container.full-width {
+  width: 100%;
+}
+
 // tweaks for tab panels
 
 div.tab-pane {
@@ -39,28 +46,6 @@ div.tab-pane {
 div.ag-datepicker {
   input {
     width: 170px;
-  }
-}
-
-// Icon aliases for angular-ui/bootstrap
-// to make it backward compatible with bootstrap 2.x
-.glyphicon {
-  font-family: "FontAwesome";
-
-  &.glyphicon-chevron-left {
-    &:extend(.fa-chevron-left);
-  }
-
-  &.glyphicon-chevron-left:before {
-    &:extend(.fa-chevron-left:before);
-  }
-
-  &.glyphicon-chevron-right {
-    &:extend(.fa-chevron-right);
-  }
-
-  &.glyphicon-chevron-right:before {
-    &:extend(.fa-chevron-right:before);
   }
 }
 
@@ -77,4 +62,17 @@ div.ag-datepicker {
 // fix alert error styling
 .alert-error{
   &:extend(.alert-danger);
+}
+
+.search-form {
+  padding-bottom: 10px;
+  padding-top: 10px;
+}
+
+.search-form input {
+  width: 150px;
+}
+
+ag-validation-errors .help-inline {
+  color: #a94442;
 }

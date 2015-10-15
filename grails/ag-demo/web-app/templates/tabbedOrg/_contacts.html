@@ -39,22 +39,23 @@
         </div>
     </div>
 
-    <div class="nav navbar-grid">
+    <div class="navbar navbar-grid navbar-default">
         <div class="navbar-inner with-selected-pointer with-grid-options">
-            <ul class="nav">
-                <li class="col-md-3">
+            <ul class="nav navbar-nav">
+                <li>
                     <a href="" ng-click="createRecord()">
-                        <i class="fa fa-user"></i> Create Contact
-                    </a>
+                        <i class="fa fa-user"></i> Create Contact</a>
                 </li>
-                <li class="pull-right">
+
+            </ul>
+            <ul class="nav navbar-nav pull-right">
+                <li>
                     <a title="search screen" ng-click="showSearchForm = !showSearchForm" href="">
                         <i class="fa fa-search"></i>
                     </a>
                 </li>
-                    <ag-grid-quick-search for="contactsGrid" filters="filters.quickSearch"></ag-grid-quick-search>
             </ul>
-
+            <ag-grid-quick-search for="contactsGrid" filters="filters.quickSearch"></ag-grid-quick-search>
         </div>
     </div>
 

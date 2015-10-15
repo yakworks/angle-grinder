@@ -16,7 +16,7 @@ app.config([
   "$httpProvider", "pathWithContextProvider", function($httpProvider, pathWithContextProvider) {
 
     // Intercept all http errors
-    $httpProvider.responseInterceptors.push("httpErrorsInterceptor");
+    $httpProvider.interceptors.push("httpErrorsInterceptor");
 
     // Configure the context path
     var contextPath = $("body").data("context-path");
@@ -29,21 +29,22 @@ app.config([
 // Intercepts all HTTP errors and displays a flash message
 app.factory("httpErrorsInterceptor", [
   "$injector", "$q", "alerts", function($injector, $q, alerts) {
-    return function(promise) {
-      var $http = $injector.get("$http");
-      var onError = function(response) {
-        var errorMessage, _ref;
-        var genericErrorMessage = (response.statusText ? response.statusText : "Unexpected HTTP error") + " " + response.status + " : " + response.config.url
-        errorMessage = ((_ref = response.data) != null ? _ref.error : void 0) ||  genericErrorMessage;
+    return {
+      response: function(response) {
+        return response;
+      },
+      responseError: function(response) {
+          var errorMessage, _ref;
+          errorMessage = ((_ref = response.data) != null ? _ref.error : void 0) || "Unexpected HTTP error";
 
-        // ..skip validation and auth errors
-        if (response.status !== 422 && response.status !== 401) {
-          alerts.error(errorMessage);
+          // ..skip validation and auth errors
+          if (response.status !== 422 && response.status !== 401) {
+            alerts.error(errorMessage);
+
+          return response;
         }
-
         return $q.reject(response);
-      };
-      return promise.then(null, onError);
+      }
     };
   }
 ]);

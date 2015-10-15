@@ -27,7 +27,7 @@ describe "module: angleGrinder.common", ->
   describe "service: confirmationDialog", ->
 
     beforeEach module "ui.bootstrap", ($provide) ->
-      $provide.decorator "$modal", ($delegate) ->
+      $provide.decorator "$uibModal", ($delegate) ->
         sinon.spy($delegate, "open")
         $delegate
 
@@ -35,13 +35,13 @@ describe "module: angleGrinder.common", ->
 
     beforeEach module "angleGrinder.forms"
 
-    it "displays the notification", inject ($modal, notificationDialog) ->
+    it "displays the notification", inject ($uibModal, notificationDialog) ->
       # When
       notificationDialog.open("test")
 
       # Then
-      expect($modal.open).to.have.been.called
+      expect($uibModal.open).to.have.been.called
 
-      options = $modal.open.getCall(0).args[0]
+      options = $uibModal.open.getCall(0).args[0]
       expect(options).to.have.property "templateUrl", "templates/dialogs/notification.html"
       expect(options).to.have.property "controller", "NotificationDialogCtrl"

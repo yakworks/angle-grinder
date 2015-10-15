@@ -22,7 +22,7 @@ app.run ["$templateCache", ($templateCache) ->
 ]
 
 class NotificationDialog
-  @$inject = ["$modal", "$log"]
+  @$inject = ["$uibModal", "$log"]
   constructor: (@$modal, @$log) ->
 
   open: (options) ->

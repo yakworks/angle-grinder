@@ -3,15 +3,15 @@
   <h3>Note</h3>
 </div>
 
-<form name="editForm" class="form-horizontal no-margin"
+<form name="editForm" class="form-horizontal"
       novalidate="true"
       ng-submit="save(editForm, note)">
 
   <div class="modal-body">
     <div ag-field-group for="name">
-      <label class="control-label">Name</label>
+      <label class="control-label col-md-3">Name</label>
 
-      <div class="controls">
+      <div class="col-md-4">
         <input type="text" name="name" placeholder="Enter name"
                ng-model="note.name" ng-required="true" />
         <ag-validation-errors for="name" />
@@ -19,9 +19,9 @@
     </div>
 
     <div ag-field-group for="content">
-      <label class="control-label">Content</label>
+      <label class="control-label col-md-3">Content</label>
 
-      <div class="controls">
+      <div class="col-md-4">
         <textarea name="content" rows="5"
                   ng-model="note.content" ng-required="true"></textarea>
         <ag-validation-errors for="content" />

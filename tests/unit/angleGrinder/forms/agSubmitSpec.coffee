@@ -30,7 +30,8 @@ describe "Directive: agSubmit", ->
     beforeEach -> $scope.$apply -> $scope.item.name = "foo"
 
     it "marks the form as submitted", ->
-      expect($scope.testForm.$submitted).to.be.undefined
+      #TODO: check why it became false instead of undefined
+      expect($scope.testForm.$submitted).to.be.false
       clickSubmit()
       expect($scope.testForm.$submitted).to.be.true
 

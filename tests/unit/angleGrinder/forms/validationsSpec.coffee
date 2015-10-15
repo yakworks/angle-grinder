@@ -35,7 +35,7 @@ describe "module: angleGrinder.forms validations", ->
       $scope.$apply -> form.passwordConfirmation.$setViewValue confirmation
       $timeout.flush()
 
-    controlGroup = -> element.find("div.control-group")
+    controlGroup = -> element.find("div.form-group")
 
     describe "when the fields are equal", ->
       beforeEach ->
@@ -51,7 +51,7 @@ describe "module: angleGrinder.forms validations", ->
         expect(form.passwordConfirmation.$invalid).to.be.false
 
       it "does not mark the field group as invalid", ->
-        expect(controlGroup().hasClass("error")).to.not.be.true
+        expect(controlGroup().hasClass("has-error")).to.not.be.true
 
     describe "when the fields are not equal", ->
       beforeEach ->
@@ -76,19 +76,19 @@ describe "module: angleGrinder.forms validations", ->
         expect(inputEl.hasClass("ng-invalid-mismatch")).to.be.true
 
       it "marks the field group as invalid", ->
-        expect(controlGroup().hasClass("error")).to.be.true
+        expect(controlGroup().hasClass("has-error")).to.be.true
 
     describe "changing other values", ->
       it "toggles the field group as valid / invalid", ->
         setPassword "passwor"
         setConfirmation "password"
-        expect(controlGroup().hasClass("error")).to.be.true
+        expect(controlGroup().hasClass("has-error")).to.be.true
 
         setPassword "password"
-        expect(controlGroup().hasClass("error")).to.be.false
+        expect(controlGroup().hasClass("has-error")).to.be.false
 
         setConfirmation "passwor"
-        expect(controlGroup().hasClass("error")).to.be.true
+        expect(controlGroup().hasClass("has-error")).to.be.true
 
 
   describe "directive: agLength", ->
@@ -176,7 +176,7 @@ describe "module: angleGrinder.forms validations", ->
     beforeEach inject ($injector) ->
       {element} = compileTemplate """
         <form name="form" novalidate="true" ag-submit="save(user)">
-          <div class="control-group"
+          <div class="form-group"
                ag-field-group for="email,password">
             <input type="text" name="email"
                    ng-model="user.email" required />
@@ -207,8 +207,8 @@ describe "module: angleGrinder.forms validations", ->
       submitForm()
 
       # Then
-      groupEl = element.find(".control-group")
-      expect(groupEl.hasClass("error")).to.be.true
+      groupEl = element.find(".form-group")
+      expect(groupEl.hasClass("has-error")).to.be.true
 
     describe "when one of the field is invalid", ->
       beforeEach ->
@@ -217,8 +217,8 @@ describe "module: angleGrinder.forms validations", ->
 
       it "marks the whole group as invalid", ->
         expect($scope.form.$valid).to.be.false
-        groupEl = element.find(".control-group")
-        expect(groupEl.hasClass("error")).to.be.true
+        groupEl = element.find(".form-group")
+        expect(groupEl.hasClass("has-error")).to.be.true
 
     describe "when all fields are valid", ->
       beforeEach ->
@@ -228,8 +228,8 @@ describe "module: angleGrinder.forms validations", ->
       it "does not mark the group as invalid", ->
         expect($scope.form.$valid).to.be.true
 
-        groupEl = element.find(".control-group")
-        expect(groupEl.hasClass("error")).to.be.false
+        groupEl = element.find(".form-group")
+        expect(groupEl.hasClass("has-error")).to.be.false
 
   describe "directive: agValidationErrors", ->
     element = null
@@ -319,10 +319,10 @@ describe "module: angleGrinder.forms validations", ->
 
         expect(errorsEl.find("span").length).to.equal 2
 
-        expect(errorsEl.find("span:nth-child(1)").text())
+        expect(errorsEl.find("span:nth-child(2)").text())
           .to.equal "Too short"
 
-        expect(errorsEl.find("span:nth-child(2)").text())
+        expect(errorsEl.find("span:nth-child(1)").text())
           .to.equal "Does not match the confirmation"
 
   describe "service: validationMessages", ->
@@ -380,7 +380,7 @@ describe "module: angleGrinder.forms validations", ->
         expect(loginError().text()).to.equal "should be unique"
 
       it "marks fields as invalid", ->
-        expect(element.find(".control-group").hasClass("error")).to.be.true
+        expect(element.find(".form-group").hasClass("has-error")).to.be.true
 
       itHidesServerSideErrors = ->
         it "hides the server errors", ->
@@ -388,7 +388,7 @@ describe "module: angleGrinder.forms validations", ->
 
       itMarksFieldsAsValid = ->
         it "marks fields as valid", ->
-          expect(element.find(".control-group").hasClass("error")).to.be.false
+          expect(element.find(".form-group").hasClass("has-error")).to.be.false
 
       describe "when the error is gone", ->
         beforeEach ->

@@ -12,7 +12,7 @@ forms.directive "agSubmitButton", ->
       scope.saving = saving
 
   template: """
-    <button type="submit" class="btn btn-primary"
+    <button type="submit" class="btn btn-default btn-primary"
             ng-disabled="saving">
       <i class="fa fa-check fa-inverse"></i> Save<span ng-show="saving">...</span>
     </button>

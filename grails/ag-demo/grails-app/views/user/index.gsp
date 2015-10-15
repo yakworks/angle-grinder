@@ -31,7 +31,7 @@
         width: 10%;
     }
 
-    .input-prepend .input-block-level {
+    .input-prepend .form-control {
         width: 90%;
     }
 
@@ -69,10 +69,7 @@
                 </li>
             </ul>
 
-            <form action="" class="navbar-search pull-right" ng-submit="usersGrid.search(filters)">
-                <input type="text" value="" placeholder="quick search" class="search-query span2" style="width: 150px;"
-                       ng-model="filters.quickSearch"/>
-            </form>
+            <ag-grid-quick-search for="usersGrid" filters="filters"></ag-grid-quick-search>
         </div>
     </div>
 

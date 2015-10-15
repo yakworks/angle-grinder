@@ -13,8 +13,9 @@ gridz.value "flatten", (target, opts = delimiter: ".") ->
       isArray = opts.safe and object[key] instanceof Array
       type = Object::toString.call(object[key])
       isObject = type is "[object Object]" or type is "[object Array]"
+      isAngular = key.indexOf("$") >= 0
 
-      return step(object[key], getKey(key, prev)) if not isArray and isObject
+      return step(object[key], getKey(key, prev)) if not isArray and isObject and !isAngular
       output[getKey(key, prev)] = object[key]
 
   output = {}

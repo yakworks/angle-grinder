@@ -70,7 +70,8 @@
         <aside class="sidebar col-sm-3">
             <ul class="nav list-group nav-side">
                 <li>
-                    <a data-toggle="collapse" href="#user-submenu" class="accordion-toggle">
+                    %{--TODO figure out why does it breaks the link--}%
+                    <a data-toggle="collapse" href="${createLink(controller: 'user')}" class="accordion-toggle">
                         Users<i class="fa fa-chevron-right"></i>
                     </a>
 
@@ -84,7 +85,7 @@
                 <li><a href="${createLink(controller: 'org')}">
                     <i class="fa fa-chevron-right"></i> List Orgs</a>
                 </li>
-                <li><a href="${createLink(controller: 'orgTabs')}">
+                <li><a href="${request.contextPath}">
                     <i class="fa fa-chevron-right"></i> List Orgs with Tabs</a>
                 </li>
                 <li><a href="${createLink(controller: 'orgShowCase')}">

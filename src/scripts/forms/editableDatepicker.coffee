@@ -7,14 +7,14 @@ forms.directive "editableDatepicker", [
       directiveName: "editableDatepicker"
 
       inputTpl: """
-        <input type="text" ng-model="$data" datepicker-popup="MM/dd/yyyy" is-open="opened" ng-readonly="disabled">
+        <input type="text" style='width: 135px' class="form-control" ng-model="$data" datepicker-popup="MM/dd/yyyy" is-open="opened" ng-readonly="disabled">
       """
 
       render: ->
         @parent.render.call(this)
 
         div = angular.element """
-          <div class="input-prepend"></div>
+          <div class="input-group"></div>
         """
 
         # wrap it into div
@@ -22,8 +22,8 @@ forms.directive "editableDatepicker", [
 
         # add a button for opening the calendar
         @inputEl.after """
-          <button type="button" class="btn btn-default" ng-click="open($event)" ng-disabled="disabled">
-            <i class="fa fa-calendar"></i>
+          <button type="button" class="btn btn-default input-group-addon" ng-click="open($event)" ng-disabled="disabled">
+            <i style="padding: 1px; margin-left: -7px" class="fa fa-calendar"></i>
           </button>
         """
 

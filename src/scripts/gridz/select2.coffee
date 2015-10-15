@@ -72,7 +72,7 @@ gridz.directive "agSelect2", [
 
     template: """
       <div class="input-group">
-        <input ui-select2="options" ng-model="ngModel" type="hidden"/>
+        <input ui-select2="options" ng-model="ngModel" class="form-control" style='border-bottom-right-radius: 0px;' type="hidden"/>
         <ag-select2-open></ag-select2-open>
       </div>
     """
@@ -90,6 +90,6 @@ gridz.directive "agSelect2Open", ->
   ]
   template: """
       <span class="input-group-btn">
-        <button class="btn open-select2 btn-default" type="button" ng-click="openSelect2()"><i class="fa fa-search"></i></button>
+        <button class="btn open-select2 btn-default " type="button" ng-click="openSelect2()"><i class="fa fa-search"></i></button>
       </span>
   """

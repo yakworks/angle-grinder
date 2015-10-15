@@ -1,7 +1,7 @@
 mixin = angular.module("angleGrinder.forms")
 
 mixin.factory "massUpdateMixin", [
-  "$log", "$parse", "$modal", "pathWithContext",
+  "$log", "$parse", "$uibModal", "pathWithContext",
   ($log, $parse, $modal, pathWithContext) ->
     ($scope, args = {}) ->
       {gridName, templateUrl, controller, extraParams} = args
