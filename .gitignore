@@ -2,7 +2,6 @@
 .idea
 *.iml
 *.sublime-workspace
-*.sublime-project
 
 # Ignore libraries
 node_modules
