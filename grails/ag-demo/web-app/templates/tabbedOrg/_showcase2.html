@@ -5,20 +5,12 @@
         <div ag-field-group for="exampleLocalDate" class="form-group row">
             <label class="control-label col-md-2">Local Date</label>
 
-
-
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-md-8">
-                            <div ag-datepicker ng-model="orgShowCase.exampleLocalDate" datepicker-options="{inline: true, sideBySide: true}"></div>
-                        </div>
-                    </div>
-                </div>
-
-
+            <div class="col-md-10">
+                <input type='text' ng-model="orgShowCase.exampleLocalDate" name="exampleLocalDate" ag-date
+                       class="form-control"/>
+                <ag-validation-errors for="exampleLocalDate"/>
+            </div>
         </div>
-
-
         <div ag-field-group class="form-group row">
             <label class="control-label col-md-2">Got from server:</label>
 
@@ -37,11 +29,11 @@
             <label class="control-label col-md-2">Date Time</label>
 
             <div class="col-md-10">
-                <ag-datepicker
-                           ng-model="orgShowCase.exampleDateTime"
-                           date-type="date"
-                           name="exampleDateTime">
-                </ag-datepicker>
+
+                <input type="text"
+                       ag-date date-type="localDateTime"
+                       ng-model="orgShowCase.exampleDateTime"
+                       name="exampleDateTime"/>
 
                 <ag-validation-errors for="exampleDateTime"/>
             </div>
@@ -64,11 +56,11 @@
             <label class="control-label col-md-2">Date</label>
 
             <div class=" col-md-10">
-                <ag-datepicker type="text"
-                           ng-model="orgShowCase.exampleDate"
-                           date-type="localDateTime"
-                           name="exampleDate">
-                </ag-datepicker>
+
+                <input type="text"
+                       ag-date date-type="date"
+                       ng-model="orgShowCase.exampleDate"
+                       name="exampleDate"/>
 
                 <ag-validation-errors for="exampleDate"/>
             </div>

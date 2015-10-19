@@ -9,7 +9,7 @@ describe "module: angleGrinder.forms", ->
 
     beforeEach inject ($rootScope, $compile) ->
       $scope = $rootScope.$new()
-      $scope.user = birth: new Date()
+      $scope.user = birth: "1990-01-01"
 
       element = angular.element """
         <form editable-form name="testForm">
@@ -29,18 +29,15 @@ describe "module: angleGrinder.forms", ->
       beforeEach -> editableScope = element.find("[editable-datepicker]").scope()
 
       calendarButtonEl = null
-      beforeEach -> calendarButtonEl = element.find("button i.fa-calendar")
+      beforeEach -> calendarButtonEl = element.find("i.fa-calendar")
 
       it "has a button for open the picker", ->
         expect(calendarButtonEl.length).to.eq 1
 
-      it "initially has closed calendar", ->
-        expect(editableScope.opened).to.be.false
-
 
     beforeEach inject ($rootScope, $compile) ->
       $scope = $rootScope.$new()
-      $scope.user = birth: new Date()
+      $scope.user = birth: "1990-01-01"
 
       element = angular.element """
         <form editable-form name="testForm">
@@ -61,12 +58,10 @@ describe "module: angleGrinder.forms", ->
         editableScope = element.find("[editable-datepicker]").scope()
 
       calendarButtonEl = null
-      beforeEach -> calendarButtonEl = element.find("button")
+      beforeEach -> calendarButtonEl = element.find("i.fa-calendar")
 
       it "has a button for open the picker", ->
         expect(calendarButtonEl.length).to.eq 1
 
-      it "initially has closed calendar", ->
-        expect(editableScope.opened).to.be.false
 
 

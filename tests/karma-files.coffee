@@ -20,6 +20,7 @@ module.exports =
     "components/bower/jquery-file-upload/js/jquery.fileupload-angular.js"
     "components/bower/bower-angular-placeholders/angular-placeholders.js"
     "components/bower/moment/moment.js"
+    "components/bower/eonasdan-bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js"
 
     "grails/ag-plugin/web-app/angleGrinder/js/application.js"
     "grails/ag-plugin/web-app/angleGrinder/js/modules/resources.js"
