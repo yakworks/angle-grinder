@@ -18,11 +18,8 @@
             <label class="control-label col-md-2">Local Date</label>
 
             <div class="col-md-10">
-                <div ag-datepicker ag-trim-time="orgShowCase.exampleLocalDate">
-                    <input type="text"
-                           ng-model="orgShowCase.exampleLocalDate"
-                           name="exampleLocalDate"/>
-                </div>
+                <ag-datepicker ng-model="orgShowCase.exampleLocalDate"
+                               name="exampleLocalDate">
 
                 <ag-validation-errors for="exampleLocalDate"/>
             </div>
@@ -32,11 +29,9 @@
             <label class="control-label col-md-2">Date Time</label>
 
             <div class="col-md-10">
-                <div ag-datepicker>
-                    <input type="text"
-                           ng-model="orgShowCase.exampleDateTime"
-                           name="exampleDateTime"/>
-                </div>
+                <ag-datepicker ng-model="orgShowCase.exampleDateTime"
+                               date-type="date"
+                               name="exampleDateTime"/>
 
                 <ag-validation-errors for="exampleDateTime"/>
             </div>
@@ -46,23 +41,22 @@
             <label class="control-label col-md-2">Date</label>
 
             <div class=" col-md-10">
-                <div ag-datepicker>
-                    <input type="text"
-                           ng-model="orgShowCase.exampleDate"
-                           name="exampleDate"/>
-                </div>
+                <ag-datepicker type="text"
+                               ng-model="orgShowCase.exampleDate"
+                               date-type="date"
+                               name="exampleDate"/>
 
                 <ag-validation-errors for="exampleDate"/>
             </div>
         </div>
 
 
-    <div class="modal-footer">
-        <span ng-if="orgShowCase.persisted()">
-            <ag-delete-button when-confirmed="delete(item)"></ag-delete-button>
-        </span>
+        <div class="modal-footer">
+            <span ng-if="orgShowCase.persisted()">
+                <ag-delete-button when-confirmed="delete(item)"></ag-delete-button>
+            </span>
 
-        <ag-cancel-button ng-click="closeDialog()"></ag-cancel-button>
-        <ag-submit-button></ag-submit-button>
-    </div>
+            <ag-cancel-button ng-click="closeDialog()"></ag-cancel-button>
+            <ag-submit-button></ag-submit-button>
+        </div>
 </form>
