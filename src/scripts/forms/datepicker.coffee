@@ -7,16 +7,16 @@ forms.provider "agDate", ->
   localDateTime = "YYYY-MM-DDTHH:mm"
   localDate = "YYYY-MM-DD"
 
-  setViewFormat = (format)->
+  setViewFormat: (format)->
     viewFormat = format
 
-  setLocalDateFormat = (format)->
+  setLocalDateFormat: (format)->
     localDate = format
 
-  setLocalDateTimeFormat = (format)->
+  setLocalDateTimeFormat: (format)->
     localDateTime = format
 
-  setDateFormat = (format)->
+  setDateFormat: (format)->
     date = format
 
   $get:[
@@ -34,6 +34,7 @@ forms.provider "agDate", ->
         moment(value, format, true).isValid()
   ]
 
+# uses http://eonasdan.github.io/bootstrap-datetimepicker/
 forms.directive "agDatepicker", [
   '$timeout', "agDate", ($timeout, agDate)->
     require : 'ngModel'
