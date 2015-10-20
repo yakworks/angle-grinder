@@ -2,22 +2,30 @@
     <legend>Example Local Date</legend>
     <form name="showCaseForm" class="form-horizontal" novalidate
           ng-submit="save(orgShowCase)">
-        <div ag-field-group for="exampleLocalDate" class="form-group row">
-            <label class="control-label col-md-2">Local Date</label>
-
-            <div class="col-md-10">
-                <ag-datepicker ng-model="orgShowCase.exampleLocalDate"></ag-datepicker>
-            </div>
-        </div>
 
         <div ag-field-group for="exampleLocalDate" class="form-group row">
             <label class="control-label col-md-2">Local Date</label>
 
             <div class="col-md-10">
-                <input type='text'  name="exampleLocalDate" ag-datepicker
-                       ng-model="orgShowCase.exampleLocalDate"/>
+
+                <input type="text"
+                       ag-date
+                       ng-model="orgShowCase.exampleLocalDate"
+                       name="exampleLocalDate"/>
+                <ag-validation-errors for="exampleLocalDate"/>
             </div>
         </div>
+        <div class="form-group row">
+            <label class="control-label col-md-2">Local Date</label>
+
+            <div class="col-sm-5">
+                <div class="input-group">
+                    <div ag-datepicker ng-model="orgShowCase.exampleLocalDate" datepicker-options="{inline: true}">
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
         <div ag-field-group class="form-group row">
             <label class="control-label col-md-2">Got from server:</label>
@@ -37,26 +45,11 @@
             <label class="control-label col-md-2">Date Time</label>
 
             <div class="col-md-10">
-                <ag-datepicker
-                        ng-model="orgShowCase.exampleDateTime"
-                        date-type="date"
-                        name="exampleDateTime">
-                </ag-datepicker>
 
-                <ag-validation-errors for="exampleDateTime"/>
-            </div>
-        </div>
-
-        <div ag-field-group for="exampleDateTime" class="form-group row">
-            <label class="control-label col-md-2">Date Time</label>
-
-            <div class="col-md-10">
-                <input ag-datepicker
-                       type="text"
+                <input type="text"
+                       ag-date date-type="localDateTime"
                        ng-model="orgShowCase.exampleDateTime"
-                       date-type="date"
                        name="exampleDateTime"/>
-
                 <ag-validation-errors for="exampleDateTime"/>
             </div>
         </div>
@@ -78,24 +71,12 @@
             <label class="control-label col-md-2">Date</label>
 
             <div class=" col-md-10">
-                <ag-datepicker type="text"
-                               ng-model="orgShowCase.exampleDate"
-                               date-type="localDateTime"
-                               name="exampleDate">
-                </ag-datepicker>
 
-                <ag-validation-errors for="exampleDate"/>
-            </div>
-        </div>
-
-        <div ag-field-group for="exampleDate" class="form-group row">
-            <label class="control-label col-md-2">Date</label>
-
-            <div class=" col-md-10">
-                <input type="text" ag-datepicker
+                <input type="text"
+                       ag-date date-type="date"
                        ng-model="orgShowCase.exampleDate"
-                       date-type="localDateTime"
                        name="exampleDate"/>
+
                 <ag-validation-errors for="exampleDate"/>
             </div>
         </div>

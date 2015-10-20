@@ -7,6 +7,7 @@
 //= require_tree app/controllers/orgShowCase
 //= require app/adminOrg.js
 //= require app/adminTabbedOrg.js
+//= require app/config.js
 
 
 

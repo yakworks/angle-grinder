@@ -1,65 +1,107 @@
 forms = angular.module("angleGrinder.forms")
 
-# Wrapper for angular-ui/bootstrap datepicker popup.
-# It decorates an input with calendar button.
+forms.provider "agDate", ->
+  viewFormat = "MM/DD/YYYY"
+
+  date = "YYYY-MM-DDTHH:mmZ"
+  localDateTime = "YYYY-MM-DDTHH:mm"
+  localDate = "YYYY-MM-DD"
+
+  setViewFormat: (format)->
+    viewFormat = format
+
+  setLocalDateFormat: (format)->
+    localDate = format
+
+  setLocalDateTimeFormat: (format)->
+    localDateTime = format
+
+  setDateFormat: (format)->
+    date = format
+
+  $get:[
+    ()->
+      getViewFormat: ->
+        viewFormat
+
+      getIsoFormat: (name)->
+        switch name
+          when "date" then date
+          when "localDateTime" then localDateTime
+          else localDate
+
+      isValid: (value, format) ->
+        moment(value, format, true).isValid()
+  ]
+
+# uses http://eonasdan.github.io/bootstrap-datetimepicker/
 forms.directive "agDatepicker", [
-  "$compile", ($compile) ->
-    restrict: "A"
-    replace: true
-    scope: true
-    transclude: true
+  '$timeout', "agDate", ($timeout, agDate)->
+    require : 'ngModel'
+    restrict: "AE"
+    scope:
+      datepickerOptions: '@'
 
-    controller: [
-      "$scope", "$rootScope", ($scope, $rootScope) ->
+    link: ($scope, $element, $attrs, ngModelCtrl) ->
+      defaultOptions =
+        format: agDate.getViewFormat()
+        isoFormat: agDate.getIsoFormat($attrs.dateType)
 
-        # initially the datepicker is closed
-        $scope.opened = false
+      options = angular.extend(defaultOptions, $scope.$eval($attrs.datepickerOptions))
+      isoFormat = options.isoFormat
+      delete options.isoFormat
 
-        # open the popup with the datepicker
-        $scope.open = ($event) ->
-          $event.preventDefault()
-          $event.stopPropagation()
+      # Decorate datepicker with button and some usefull stuff if directive is element, not attribute
+      if !$attrs.agDatepicker?
+        $element.addClass("input-group").addClass("date").addClass("ag-datepicker")
+        input = """<input class='form-control' placeholder='#{$attrs.placeholder || ""}'>
+                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>"""
+        $element.append(input)
 
-          $scope.opened = true
+      $element.on('dp.change',(event) ->
+        if ngModelCtrl
+          $timeout ->
+            if options.inline
+              ngModelCtrl.$setViewValue moment(event.date._d).format(isoFormat)
+            else
+              ngModelCtrl.$setViewValue moment(event.date).format(isoFormat)
+            ngModelCtrl.$setValidity('dateFormat', agDate.isValid(ngModelCtrl.$modelValue, isoFormat))
+      ).datetimepicker(options)
 
-          # force to close other opened datepickers
-          $rootScope.$broadcast "ag:closeOtherPickers", $scope.$id
+      setPickerValue = ->
+        date = null
+        if ngModelCtrl and ngModelCtrl.$viewValue
+          date = moment(ngModelCtrl.$viewValue, isoFormat)
+        datepicker = $element.data('DateTimePicker')
+        datepicker.date(date) if datepicker
 
-        # dirty way of closing other datepickers
-        $rootScope.$on "ag:closeOtherPickers", (event, otherId) ->
-          $scope.opened = false if $scope.$id isnt otherId
-    ]
-
-    compile: (element, attrs, transclude) ->
-      (scope, element) ->
-
-        # manually transclude the element
-        # grab the input element and decorate it with useful stuff
-        transclude scope, (clone) ->
-
-          angular.forEach(clone, (child) ->
-            if child.localName == "input"
-              angular.forEach(child.attributes, (attribute) ->
-                if attribute.name == "disabled"
-                  scope.disabled = attribute.value
-              )
-          )
-          # dynamically add `datepicker-popup` to the input
-          # datepicker-popup is deprecated, but new uib-datepicker-popup doesn't work with ng-required
-          clone.attr("datepicker-popup", "MM/dd/yyyy")
-          # ..and wire it with `opened` scope variable
-          clone.attr("is-open", "opened")
-          clone.addClass("form-control")
-
-          $compile(clone) scope, (clone) ->
-            element.prepend(clone)
-
-    template: """
-      <div class="input-group ag-datepicker">
-
-        <span type="button" class="btn btn-default input-group-addon" ng-click="open($event)" ng-disabled="disabled">
-          <i class="fa fa-calendar"></i>
-        </span>
-      </div>
-    """
+      if ngModelCtrl
+        ngModelCtrl.$render = ->
+          setPickerValue()
+      setPickerValue()
 ]
+
+forms.directive "agDate", [
+  "agDate", (agDate) ->
+    restrict: 'AE'
+    require: '?ngModel'
+
+    link: (scope, element, attrs, ngModelCtrl) ->
+      modelFormat = agDate.getIsoFormat(attrs.dateType)
+      dateFormat = attrs.dateFormat || agDate.getViewFormat()
+
+      ngModelCtrl.$parsers.shift()
+      ngModelCtrl.$parsers.push (viewValue) ->
+        isValid = agDate.isValid(viewValue, dateFormat)
+        ngModelCtrl.$setValidity('dateFormat', isValid)
+        if isValid
+          moment(viewValue).format(modelFormat)
+        else
+          ""
+
+      ngModelCtrl.$formatters.push (modelValue) ->
+        isValid = agDate.isValid(modelValue, modelFormat)
+        ngModelCtrl.$setValidity('dateFormat', isValid)
+        moment(modelValue).format(dateFormat)
+  ]
+

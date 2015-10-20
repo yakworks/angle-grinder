@@ -18,10 +18,8 @@
                 <label class="control-label col-sm-4">Example Date from</label>
 
                 <div class="col-sm-8">
-                    <div ag-datepicker>
-                        <input type="text"
-                               ng-model="filters.exampleDate.from"/>
-                    </div>
+                    <ag-datepicker ng-model="filters.exampleDate.from"/>
+                    </ag-datepicker>
                 </div>
             </div>
 
@@ -29,10 +27,9 @@
                 <label class="control-label col-sm-4">Example Date to</label>
 
                 <div class="col-sm-8">
-                    <div ag-datepicker>
-                        <input type="text"
+                    <ag-datepicker
                                ng-model="filters.exampleDate.to"/>
-                    </div>
+                    </ag-datepicker>
                 </div>
             </div>
         </div>
@@ -41,20 +38,17 @@
             <div class="form-group col-md-6">
                 <label class="control-label col-sm-4">Local Date from</label>
                 <div class="col-sm-8">
-                    <div ag-datepicker ag-trim-time="filters.exampleLocalDate.from">
-                        <input type="text"
+                    <ag-datepicker
                                ng-model="filters.exampleLocalDate.from" />
-                    </div>
+                    </ag-datepicker>
                 </div>
             </div>
 
             <div class="form-group col-md-6">
                 <label class="control-label col-sm-4">Local Date to</label>
                 <div class="col-sm-8">
-                    <div ag-datepicker ag-trim-time="filters.exampleLocalDate.to">
-                        <input type="text"
-                               ng-model="filters.exampleLocalDate.to" />
-                    </div>
+                    <ag-datepicker ng-model="filters.exampleLocalDate.to" />
+                    </ag-datepicker>
                 </div>
             </div>
         </div>
@@ -63,20 +57,18 @@
             <div class="form-group col-md-6">
                 <label class="control-label col-sm-4">Date Time from</label>
                 <div class="col-sm-8">
-                    <div ag-datepicker>
-                        <input type="text"
+                    <ag-datepicker
                                ng-model="filters.exampleDateTime.from" />
-                    </div>
+                    </ag-datepicker>
                 </div>
             </div>
 
             <div class="form-group col-md-6">
                 <label class="control-label col-sm-4">Date Time to</label>
                 <div class="col-sm-8">
-                    <div ag-datepicker>
-                        <input type="text"
+                    <ag-datepicker
                                ng-model="filters.exampleDateTime.to" />
-                    </div>
+                    </ag-datepicker>
                 </div>
             </div>
         </div>

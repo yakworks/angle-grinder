@@ -57,3 +57,18 @@ app.provider "agDateFilter", ->
             formattedDate = m._a
           moment.utc(formattedDate).format format
   ]
+
+#removes timezone and just uses year,month, day
+app.filter 'localDate', ["isFalsy", "agDate", (isFalsy, agDate) ->
+  (input) ->
+    return "" if isFalsy(input)
+    #ignores the time part
+    moment(input).format(agDate.getViewFormat())
+]
+
+#date with time and no timezone formated to the minutes
+app.filter 'localDateTime', ["isFalsy", (isFalsy) ->
+  (input) ->
+    return "" if isFalsy(input)
+    moment(input).format('MM/DD/YYYY h:mma')
+]

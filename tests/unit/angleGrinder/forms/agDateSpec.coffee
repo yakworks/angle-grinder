@@ -1,6 +1,6 @@
 describe "module: angleGrinder.forms", ->
 
-  describe "directive: agDatepicker", ->
+  describe "directive: agDate", ->
 
     beforeEach module "angleGrinder.forms"
 
@@ -13,18 +13,16 @@ describe "module: angleGrinder.forms", ->
         $scope.user = birthday: "1990-03-01"
 
         template = """
-          <ag-datepicker ng-model="user.birthday"
-                   name="birthday" >
-          </ag-datepicker>
+          <input ag-date ng-model="user.birthday"
+                   name="birthday" />
         """
         element = $compile(template)($scope)
         $rootScope.$apply()
 
       it "displays the current value", ->
-        expect(element.find("input").val()).to.eq("03/01/1990")
+        expect(element.val()).to.eq("03/01/1990")
 
       it "saves date to model", inject ($timeout)->
-        $timeout.flush()
         expect($scope.user.birthday).to.eq("1990-03-01")
 
     describe "use `date` date type", ->
@@ -33,20 +31,15 @@ describe "module: angleGrinder.forms", ->
         $scope.user = birthday: "1990-03-01"
 
         template = """
-          <ag-datepicker ng-model="user.birthday"
-                   date-type="date"
-                   name="birthday" >
-          </ag-datepicker>
+                   <input ag-date ng-model="user.birthday"
+                   name="birthday"
+                   date-type="date"/>
         """
         element = $compile(template)($scope)
         $rootScope.$apply()
 
       it "displays the current value", ->
-        expect(element.find("input").val()).to.eq("03/01/1990")
-
-      it "saves local date time to model", inject ($timeout)->
-        $timeout.flush()
-        expect($scope.user.birthday).to.eq("1990-03-01T00:00+00:00")
+        expect(element.val()).to.eq("03/01/1990")
 
     describe "use `localDateTime` type", ->
       beforeEach inject ($rootScope, $compile, $timeout) ->
@@ -54,17 +47,13 @@ describe "module: angleGrinder.forms", ->
         $scope.user = birthday: "1990-03-01"
 
         template = """
-          <ag-datepicker ng-model="user.birthday"
-                   date-type="localDateTime"
-                   name="birthday" >
-          </ag-datepicker>
+                <input ag-date ng-model="user.birthday"
+                   name="birthday" />
+                   date-type="localDateTime"/>
         """
         element = $compile(template)($scope)
         $rootScope.$apply()
 
       it "displays the current value", ->
-        expect(element.find("input").val()).to.eq("03/01/1990")
+        expect(element.val()).to.eq("03/01/1990")
 
-      it "saves local date time to model", inject ($timeout)->
-        $timeout.flush()
-        expect($scope.user.birthday).to.eq("1990-03-01T00:00")

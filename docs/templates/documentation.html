@@ -1090,25 +1090,51 @@ angular.module("myApp").controller("MyCtrl", MyCtrl)
 
 Some directives and aproaches that are used to handle dates and time zones
 
-<h3 id="docs-dates-trim-time">ag-trim-time</h3>
+<h3 id="docs-dates-datepicker">ag-datepicker</h3>
 
-This directive is used to trim time from date. The value of the model will be in format "yyyy-mm-dd". If date from server
-was recieved in format with time it will be trimmed. <br/>
-Usage:
-
+Datepicker. View(what will be shown in input field) and model(what will be saved to scope) format can be configured.
+Formats can be configured with <code>datepicker-options="{format: 'MM/DD/YY', isoFormat: 'YYYY-DD-MM'}"</code>, where
+<code>format</code> - view format and <code>isoFormat</code> - model format. Default view format is <code>MM/DD/YYYY</code>
+can be configured with <code>agDate</code> provider.
+The second way to change model format is to use "date-type" property, available formats are:
+        <ul>
+            <li>date</li>
+            <li>localDate</li>
+            <li>localDateTime</li>
+        </ul>
+Which can be configured in <code>agDate</code> provider.<br/>
+<code>ag-date</code> provider example:
 <pre class="prettyprint">
-&lt;div ag-datepicker ag-trim-time="user.birthDate">
-    &lt;input type="text"
-        ng-model="user.birthDate"
-        name="birthDate"/>
+app.config [
+  "agDateProvider", (provider) ->
+    provider.setViewFormat("MM/DD/YY")
+    provider.setLocalDateFormat("YYYY-MM-DD")
+]
+</pre>
+
+<span class="label label-info">note</span> You should use <a href="http://momentjs.com/docs/#/parsing/string-format/">
+momentjs formats</a> for filter.<br/>
+
+Datepicker can be used in 3 ways:
+<pre class="prettyprint">
+&lt;ag-datepicker ng-model="birthday"></ag-datepicker>
+&lt;input type="text" ag-datepicker ng-model="birthday"/>
+
+&lt;div class="col-sm-5">
+    &lt;div class="input-group">
+        &lt;div ag-datepicker ng-model="orgShowCase.exampleLocalDate" datepicker-options="{inline: true}"></div>
+    &lt;/div>
 &lt;/div>
 </pre>
+The first example - it is for datepicker with button.</br>
+The second - for input field with datepicker popup on click inside input.
+The last one - for inline datepicker.
 
 <h3 id="docs-dates-date-filter">Date filter</h3>
 <code>ag-date</code> filter is using momentjs to procced timezones. Date filter has 3 parameters: date, flag to use time
 zone or not, date format. By default it doesn't apply timezone and default format is "MMM DD, YYYY".
 <span class="label label-info">note</span> You should use <a href="http://momentjs.com/docs/#/parsing/string-format/">
-momentjs formats</a> for filter.
+momentjs formats</a>.
 
 <h3 id="docs-dates-backend">Back-end</h3>
 

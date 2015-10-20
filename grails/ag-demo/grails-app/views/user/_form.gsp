@@ -99,12 +99,11 @@
             <label class="control-label col-md-3">${ag.label(code: "activeDate")}</label>
 
             <div class="col-md-4">
-                <div ag-datepicker>
-                    <input type="text"
+                <ag-datepicker date-type="date"
                            ng-model="user.activeDate"
                            ng-required="true"
                            name="activeDate"/>
-                </div>
+                </ag-datepicker>
 
                 <ag-validation-errors for="activeDate"/>
             </div>
