@@ -1115,11 +1115,20 @@ app.config [
 <span class="label label-info">note</span> You should use <a href="http://momentjs.com/docs/#/parsing/string-format/">
 momentjs formats</a> for filter.<br/>
 
-Datepicker can be used in 2 ways:
+Datepicker can be used in 3 ways:
 <pre class="prettyprint">
 &lt;ag-datepicker ng-model="birthday"></ag-datepicker>
 &lt;input type="text" ag-datepicker ng-model="birthday"/>
+
+&lt;div class="col-sm-5">
+    &lt;div class="input-group">
+        &lt;div ag-datepicker ng-model="orgShowCase.exampleLocalDate" datepicker-options="{inline: true}"></div>
+    &lt;/div>
+&lt;/div>
 </pre>
+The first example - it is for datepicker with button.</br>
+The second - for input field with datepicker popup on click inside input.
+The last one - for inline datepicker.
 
 <h3 id="docs-dates-date-filter">Date filter</h3>
 <code>ag-date</code> filter is using momentjs to procced timezones. Date filter has 3 parameters: date, flag to use time

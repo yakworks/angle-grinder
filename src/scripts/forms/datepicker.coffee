@@ -61,7 +61,10 @@ forms.directive "agDatepicker", [
       $element.on('dp.change',(event) ->
         if ngModelCtrl
           $timeout ->
-            ngModelCtrl.$setViewValue(moment(event.date).format(isoFormat))
+            if options.inline
+              ngModelCtrl.$setViewValue moment(event.date._d).format(isoFormat)
+            else
+              ngModelCtrl.$setViewValue moment(event.date).format(isoFormat)
             ngModelCtrl.$setValidity('dateFormat', agDate.isValid(ngModelCtrl.$modelValue, isoFormat))
       ).datetimepicker(options)
 
