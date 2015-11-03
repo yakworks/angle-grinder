@@ -22,31 +22,36 @@ angular.module("ui.bootstrap.datepicker").config [
 ]
 
 forms = angular.module("angleGrinder.forms", [
-  "ui.bootstrap"
+  "ui.bootstrap.collapse"
+  "ui.bootstrap.accordion"
+  "ui.bootstrap.alert"
+  "ui.bootstrap.buttons"
+  "ui.bootstrap.carousel"
+  "ui.bootstrap.dateparser"
+  "ui.bootstrap.position"
+  "ui.bootstrap.dropdown"
+  "ui.bootstrap.stackedMap"
+  "ui.bootstrap.modal"
+  "ui.bootstrap.pagination"
+  "ui.bootstrap.progressbar"
+  "ui.bootstrap.rating"
+  "ui.bootstrap.tabs"
+
+
   "xeditable"
   "angleGrinder.common"
   "angleGrinder.alerts"
 ])
 
 forms.run [
-  "uibDatepickerConfig", "uibDatepickerPopupConfig",
-  (uibDatepickerConfig, uibDatepickerPopupConfig) ->
-    uibDatepickerConfig.showWeeks = false
-    uibDatepickerConfig.formatDay = "d"
-
-    uibDatepickerPopupConfig.showButtonBar = false
-]
-
-forms.run [
   "$templateCache", ($templateCache) ->
 
     # Override html template for the angular-ui/bootstrap pagination
-    # to make it backward compatible with bootstrap 2.x
+    # to make it backward compatible with bootstrap 3.x
 
     $templateCache.put "template/pagination/pagination.html",
       """
-        <div class="pagination">
-          <ul>
+          <ul class="pagination">
             <li ng-class="{disabled: noPrevious(), previous: align}">
               <a href ng-click="selectPage(page - 1)">{{getText('previous')}}</a>
             </li>
@@ -59,85 +64,17 @@ forms.run [
               <a href ng-click="selectPage(page + 1)">{{getText('next')}}</a>
             </li>
           </ul>
+      """
+
+    $templateCache.put 'tooltip/tooltip.tpl.html',
+                       """
+        <div class="tooltip in" ng-show="title">
+          <div class="tooltip-arrow"></div>
+          <div class="tooltip-inner" ng-bind="title"></div>
         </div>
       """
-
-    # Override html templates for the angular-ui/bootstrap datepicker
-
-    $templateCache.put "template/datepicker/day.html",
-      """
-        <table role="grid" aria-labelledby="{{uniqueId}}-title" aria-activedescendant="{{activeDateId}}">
-          <thead>
-            <tr>
-              <th style="cursor: pointer;" ng-click="move(-1)"><span tabindex="-1"><i class="glyphicon glyphicon-chevron-left"></i></span></th>
-              <th style="cursor: pointer;" ng-click="toggleMode()" colspan="{{5 + showWeeks}}">
-                <span id="{{uniqueId}}-title" role="heading" aria-live="assertive" aria-atomic="true" tabindex="-1" style="width:100%;"><strong>{{title}}</strong></span>
-              </th>
-              <th style="cursor: pointer;" ng-click="move(1)"><span tabindex="-1"><i class="glyphicon glyphicon-chevron-right"></i></span></th>
-            </tr>
-            <tr>
-              <th ng-show="showWeeks" class="text-center"></th>
-              <th ng-repeat="label in labels track by $index" class="text-center"><small aria-label="{{label.full}}">{{label.abbr}}</small></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr ng-repeat="row in rows track by $index">
-              <td ng-show="showWeeks" class="text-center h6"><em>{{ weekNumbers[$index] }}</em></td>
-
-              <td ng-hide="dt.hide" style="width: 30px; cursor: pointer;" ng-click="dt.disabled || select(dt.date)" ng-repeat="dt in row track by dt.date" class="text-center" role="gridcell" id="{{dt.uid}}" aria-disabled="{{!!dt.disabled}}">
-                <span ng-class="{'label label-info': dt.selected, 'label label-default': isActive(dt), 'muted': dt.secondary, 'muted': dt.disabled, 'text-info': dt.current}"
-                      ng-disabled="dt.disabled" tabindex="-1">
-                  {{dt.label}}
-                </span>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      """
-
-    $templateCache.put "template/datepicker/month.html",
-      """
-        <table role="grid" aria-labelledby="{{uniqueId}}-title" aria-activedescendant="{{activeDateId}}">
-          <thead>
-            <tr>
-              <th style="cursor: pointer;" ng-click="move(-1)"><span tabindex="-1"><i class="glyphicon glyphicon-chevron-left"></i></span></th>
-              <th style="cursor: pointer;" ng-click="toggleMode()"><span id="{{uniqueId}}-title" role="heading" aria-live="assertive" aria-atomic="true" type="button" tabindex="-1" style="width:100%;"><strong>{{title}}</strong></span></th>
-              <th style="cursor: pointer;" ng-click="move(1)"><span tabindex="-1"><i class="glyphicon glyphicon-chevron-right"></i></span></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr ng-repeat="row in rows track by $index">
-              <td style="width: 100px; cursor: pointer;" ng-click="select(dt.date)" ng-repeat="dt in row track by dt.date" class="text-center" role="gridcell" id="{{dt.uid}}" aria-disabled="{{!!dt.disabled}}">
-                <span ng-class="{'label label-info': dt.selected, 'label label-default': isActive(dt), 'text-info': dt.current}"
-                      ng-disabled="dt.disabled" tabindex="-1">
-                  {{dt.label}}
-                </span>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      """
-
-    $templateCache.put "template/datepicker/year.html",
-      """
-        <table role="grid" aria-labelledby="{{uniqueId}}-title" aria-activedescendant="{{activeDateId}}">
-          <thead>
-            <tr>
-              <th style="cursor: pointer;" ng-click="move(-1)"><span tabindex="-1"><i class="glyphicon glyphicon-chevron-left"></i></span></th>
-              <th style="cursor: pointer;" ng-click="toggleMode()" colspan="3"><span id="{{uniqueId}}-title" role="heading" aria-live="assertive" aria-atomic="true" tabindex="-1" style="width:100%;"><strong>{{title}}</strong></span></th>
-              <th style="cursor: pointer;" ng-click="move(1)"><span tabindex="-1"><i class="glyphicon glyphicon-chevron-right"></i></span></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr ng-repeat="row in rows track by $index">
-              <td style="width: 50px; cursor: pointer;" ng-click="select(dt.date)" ng-repeat="dt in row track by dt.date" class="text-center" role="gridcell" id="{{dt.uid}}" aria-disabled="{{!!dt.disabled}}">
-                <span ng-class="{'label label-info': dt.selected, 'label label-default': isActive(dt), 'text-info': dt.current}"
-                      ng-disabled="dt.disabled" tabindex="-1">
-                  {{dt.label}}
-                </span>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      """
+    $templateCache.put("template/tabs/tab.html", '<li ng-class="{active: active, disabled: disabled}">\n' + '  <a href ng-click="select()" uib-tab-heading-transclude>{{heading}}</a>\n' + "</li>\n" + "")
+    $templateCache.put("template/tabs/tabset.html", "<div>\n" + "  <ul class=\"nav nav-{{type || 'tabs'}}\" ng-class=\"{'nav-stacked': vertical, 'nav-justified': justified}\" ng-transclude></ul>\n" + '  <div class="tab-content">\n' + '    <div class="tab-pane" \n' + '         ng-repeat="tab in tabs" \n' + '         ng-class="{active: tab.active}"\n' + '         uib-tab-content-transclude="tab">\n' + "    </div>\n" + "  </div>\n" + "</div>\n" + "")
+    $templateCache.put("template/modal/backdrop.html", '<div uib-modal-animation-class="fade"\n' + '     modal-in-class="in"\n' + "     ng-style=\"{'z-index': 1040 + (index && 1 || 0) + index*10}\"\n" + "></div>\n" + "")
+    $templateCache.put("template/modal/window.html", '<div modal-render="{{$isRendered}}" tabindex="-1" role="dialog" class="modal"\n' + '    uib-modal-animation-class="fade"\n' + '    modal-in-class="in"\n' + "    ng-style=\"{'z-index': 1050 + index*10, display: 'block'}\">\n" + '    <div class="modal-dialog" ng-class="size ? \'modal-\' + size : \'\'"><div class="modal-content" uib-modal-transclude></div></div>\n' + "</div>\n" + "")
 ]
