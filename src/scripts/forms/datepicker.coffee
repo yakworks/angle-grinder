@@ -54,7 +54,7 @@ forms.directive "agDatepicker", [
       # Decorate datepicker with button and some usefull stuff if directive is element, not attribute
       if !$attrs.agDatepicker?
         $element.addClass("input-group").addClass("date").addClass("ag-datepicker")
-        input = """<input class='form-control' placeholder='#{$attrs.placeholder || ""}'>
+        input = """<input class='form-control' placeholder='#{$attrs.placeholder || ""}' #{"disabled" if $attrs.disabled?}>
                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>"""
         $element.append(input)
 

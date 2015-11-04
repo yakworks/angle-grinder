@@ -45,3 +45,14 @@ form[editable-form] input,select {
     -webkit-box-sizing:content-box;
     height: 20px;
 }
+
+input[type=number].editable-input {
+    padding: 4px;
+    font-size: 13px;
+    line-height: 18px;
+    color: #555;
+    border: 1px solid #ccc;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
