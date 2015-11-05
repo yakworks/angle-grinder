@@ -616,6 +616,72 @@ angular.module("myApp")
   .controller("MyCtrl", MyCtrl)
 </pre>
 
+<h3 id="ag-panel-states">agPanelStates</h3>
+
+Adds 3 buttons for panel to collapse, expand panel. Requires content to be wrapped with panel. For grids on collapse shows
+only one row and hides footer, for panels with several elements hides all elements that don't have `stay-on-collapse` directive.
+On expand opens full screen modal with panel content<br/>
+Example usage for grid:
+
+<pre class="prettyprint">
+&lt;div  class="ag-panels-row">
+    &lt;div class="ag-panel">
+        &lt;div class="ag-panel-states navbar navbar-grid navbar-default">
+            &lt;div class="navbar-inner with-selected-pointer with-grid-options">
+                &lt;ul class="nav navbar-nav col-sm-4">
+                    &lt;li>
+                        &lt;a href="" ng-click="createRecord()">
+                            &lt;i class="fa fa-user">&lt;/i>
+                        &lt;/a>
+                    &lt;/li>
+                &lt;/ul>
+                &lt;ul class="nav navbar-nav pull-right">
+                    &lt;li>
+                        &lt;a title="search screen" ng-click="showSearchForm = !showSearchForm" href="">
+                            &lt;i class="fa fa-search">&lt;/i>
+                        &lt;/a>
+                    &lt;/li>
+                &lt;/ul>
+
+                &lt;ag-grid-quick-search for="usersGrid" filters="filters">&lt;/ag-grid-quick-search>
+            &lt;/div>
+        &lt;/div>
+
+        &lt;div ag-grid="gridOptions"
+             ag-grid-name="usersGrid">&lt;/div>
+    &lt;/div>
+&lt;/div>
+</pre>
+</br>
+Example usage for form:
+<pre class="prettyprint">
+&lt;div class="panel rcm-panel panel-default financial ag-panels-row ag-panel">
+    &lt;div editable-panel-heading="editForm" class="ag-panel-states">Xeditable Form&lt;/div>
+
+    &lt;div class="panel-body ">
+        &lt;form editable-form name="editForm"
+              class="form-horizontal no-margin"
+              novalidate="true"
+              onaftersave="save(editForm, org)">
+
+            &lt;div stay-on-collapse>
+                &lt;span class="title">Phone&lt;/span>
+        &lt;span editable-text="org.phone"
+              e-name="orgPhone"
+              e-placeholder="org phone">{{org.phone}}&lt;/span>
+            &lt;/div>
+
+            &lt;div>
+                &lt;span class="title">State&lt;/span>
+        &lt;span editable-text="org.state"
+              e-name="orgState"
+              e-placeholder="org state">{{org.state}}&lt;/span>
+            &lt;/div>
+        &lt;/form>
+    &lt;/div>
+&lt;/div>
+</pre>
+
   <h3 id="docs-forms-ag-submit-button">agSubmitButton directive</h3>
 
   Renders a default button for creating or updating the resource.

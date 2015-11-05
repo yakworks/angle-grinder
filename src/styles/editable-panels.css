@@ -1,3 +1,24 @@
+form[editable-form] .editable-datepicker input {
+    width: 125px;
+}
+
+form[editable-form] .editable-checkbox input {
+    width: auto;
+}
+
+form[editable-form] .customer-tags .select2-search-field {
+    height: 20px;
+}
+
+form[editable-form] .customer-tags li.select2-search-choice {
+    float: none;
+    margin: 3px 5px 3px 5px;
+}
+
+form[editable-form] .customer-tags li.select2-search-choice div {
+    padding: 1px;
+}
+
 form[editable-form] div {
     height: auto;
     padding: 5px 0;
@@ -17,25 +38,25 @@ form[editable-form] .title {
 }
 
 form[editable-form] .editable {
-  display: inline-block;
-  padding-top: 5px;
-  vertical-align: top;
+    display: inline-block;
+    padding-top: 5px;
+    vertical-align: top;
 }
 
 form[editable-form] select {
-  width: 160px;
+    width: 160px;
 }
 
 form[editable-form] input {
-  width: 160px;
+    width: 160px;
 }
 
 form[editable-form] .editable-error {
-  color: #b94a48;
+    color: #b94a48;
 }
 
 form[editable-form] input.ng-invalid {
-  border-color: #b94a48;
+    border-color: #b94a48;
 }
 
 form[editable-form] input,select {
