@@ -36,6 +36,7 @@ forms = angular.module("angleGrinder.forms", [
   "ui.bootstrap.progressbar"
   "ui.bootstrap.rating"
   "ui.bootstrap.tabs"
+  "ui.bootstrap.tpls"
 
 
   "xeditable"
@@ -73,8 +74,4 @@ forms.run [
           <div class="tooltip-inner" ng-bind="title"></div>
         </div>
       """
-    $templateCache.put("template/tabs/tab.html", '<li ng-class="{active: active, disabled: disabled}">\n' + '  <a href ng-click="select()" uib-tab-heading-transclude>{{heading}}</a>\n' + "</li>\n" + "")
-    $templateCache.put("template/tabs/tabset.html", "<div>\n" + "  <ul class=\"nav nav-{{type || 'tabs'}}\" ng-class=\"{'nav-stacked': vertical, 'nav-justified': justified}\" ng-transclude></ul>\n" + '  <div class="tab-content">\n' + '    <div class="tab-pane" \n' + '         ng-repeat="tab in tabs" \n' + '         ng-class="{active: tab.active}"\n' + '         uib-tab-content-transclude="tab">\n' + "    </div>\n" + "  </div>\n" + "</div>\n" + "")
-    $templateCache.put("template/modal/backdrop.html", '<div uib-modal-animation-class="fade"\n' + '     modal-in-class="in"\n' + "     ng-style=\"{'z-index': 1040 + (index && 1 || 0) + index*10}\"\n" + "></div>\n" + "")
-    $templateCache.put("template/modal/window.html", '<div modal-render="{{$isRendered}}" tabindex="-1" role="dialog" class="modal"\n' + '    uib-modal-animation-class="fade"\n' + '    modal-in-class="in"\n' + "    ng-style=\"{'z-index': 1050 + index*10, display: 'block'}\">\n" + '    <div class="modal-dialog" ng-class="size ? \'modal-\' + size : \'\'"><div class="modal-content" uib-modal-transclude></div></div>\n' + "</div>\n" + "")
 ]
