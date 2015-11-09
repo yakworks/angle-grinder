@@ -4,6 +4,8 @@ class ShowCtrl
   constructor: ($scope, $controller, $location, alerts, org) ->
     $scope.org = org
 
+    $scope.orgTypes = ["company", "organisation"]
+
     # setup the grid pager
     $scope.currentId = org.id
     $scope.gridPager = $controller "gridPagerCtrlMixin",

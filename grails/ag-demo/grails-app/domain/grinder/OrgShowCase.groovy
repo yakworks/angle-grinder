@@ -23,6 +23,7 @@ class OrgShowCase implements Serializable {
 
     static constraints = {
         org nullable: true
+        name nullable: true
     }
 
 }

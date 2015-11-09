@@ -15,6 +15,8 @@ class Org implements Serializable {
   String timeZone
   Date addressDate
   Long orgShowCaseId
+  String description
+  String type
 
   static mapping = {
     cache true
@@ -30,6 +32,8 @@ class Org implements Serializable {
     zip nullable: true
     timeZone nullable: true
     addressDate nullable: true
+    description nullable: true
+    type nullable: true
   }
 
   @Override
