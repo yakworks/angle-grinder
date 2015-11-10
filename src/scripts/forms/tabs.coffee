@@ -97,7 +97,7 @@ forms.directive "agTabset", [
       $parse(alias).assign(scope.$parent, ctrl) if alias
 
     template: """
-      <div class="container">
+      <div class="container no-padding">
         <div class="nav nav-tabs" ng-transclude style="margin-bottom: 15px"></div>
         <div class="tab">
           <span ng-if="contentLoading">loading the content</span>

@@ -176,9 +176,9 @@ forms.directive "agPanelStates",  [
     link: (scope, element, attrs, ctrl, $transcludeFn) ->
       stateButtons = angular.element($compile("""
         <span name="agPanelStates" class="pull-left" style="margin-right: 5px">
-          <span name="normal" ng-click="normalState($event)" tooltip="Collapse"><i class="icon-chevron-down"></i></span>
-          <span name="collapsed" ng-click="collapsedState($event)" tooltip="Collapse-top"><i class="icon-chevron-up"></i></span>
-          <span name="fullscreen" ng-click="fullscreenState($event)" tooltip="Expand"><i class="icon-resize-full"></i></span>
+          <span name="normal" ng-click="normalState($event)" tooltip="Collapse"><i class="fa fa-chevron-down"></i></span>
+          <span name="collapsed" ng-click="collapsedState($event)" tooltip="Collapse-top"><i class="fa fa-chevron-up"></i></span>
+          <span name="fullscreen" ng-click="fullscreenState($event)" tooltip="Expand"><i class="fa fa-expand"></i></span>
         </span>
       """)(scope))
       element.prepend(stateButtons)
@@ -190,7 +190,7 @@ forms.directive "panelModal", [
   "$compile", "$uibModal", "$document", ($compile, $modal, $document) ->
     restrict: "E"
     template: """
-      <div id="modal-fullscreen" class="modal">
+      <div class="modal modal-fullscreen">
           <div class="modal-header">
               <button type="button" class="close" ng-click="close()">×</button>
           </div>

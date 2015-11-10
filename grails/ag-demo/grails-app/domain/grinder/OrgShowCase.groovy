@@ -9,6 +9,7 @@ import org.joda.time.LocalDate
 class OrgShowCase implements Serializable {
 
     String name
+    Org org
     LocalDate exampleLocalDate
     DateTime exampleDateTime
     Date exampleDate
@@ -18,6 +19,11 @@ class OrgShowCase implements Serializable {
         table 'OrgShowCase'
         exampleLocalDate type: PersistentLocalDate
         exampleDateTime type: PersistentDateTime
+    }
+
+    static constraints = {
+        org nullable: true
+        name nullable: true
     }
 
 }
