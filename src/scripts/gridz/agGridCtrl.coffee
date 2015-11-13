@@ -9,6 +9,8 @@ class AgGridCtrl extends BaseCtrl
   @register gridz, "AgGridCtrl"
   @inject "$rootScope", "$element", "$attrs", "$q", "hasSearchFilters", "flatten", "xlsData", "csvData"
 
+  highlightClass = 'ui-state-highlight'
+
   getGridEl: ->
     @gridEl or= @$element.find("table.gridz")
 
@@ -266,3 +268,13 @@ class AgGridCtrl extends BaseCtrl
         rowEl.removeClass(clazz)
 
     rowEl.fadeIn "fast", -> angular.noop()
+
+  highlightRow: (id) ->
+    rowEl = $(@getGridEl()[0].rows.namedItem(id))
+    if not rowEl.hasClass(highlightClass)
+      rowEl.addClass(highlightClass)
+
+  unHighlightRow: (id) ->
+    rowEl = $(@getGridEl()[0].rows.namedItem(id))
+    if rowEl.hasClass(highlightClass)
+      rowEl.removeClass(highlightClass)
