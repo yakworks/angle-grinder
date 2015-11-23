@@ -14,61 +14,43 @@
         </div>
 
         <div class="row">
-            <div class="form-group col-md-6">
-                <label class="control-label col-sm-4">Example Date from</label>
+            <div class="form-group col-md-8">
+                <label class="control-label col-sm-3">Example Date</label>
 
-                <div class="col-sm-8">
-                    <ag-datepicker ng-model="filters.exampleDate.from"/>
-                    </ag-datepicker>
-                </div>
-            </div>
+                <div class="controls range-date-pickers">
+                    <ag-datepicker placeholder="from" type="text"
+                                   ng-model="filters.exampleDate.from"></ag-datepicker>
 
-            <div class="form-group col-md-6">
-                <label class="control-label col-sm-4">Example Date to</label>
-
-                <div class="col-sm-8">
-                    <ag-datepicker
-                               ng-model="filters.exampleDate.to"/>
-                    </ag-datepicker>
+                    <ag-datepicker placeholder="to" type="text"
+                                   ng-model="filters.exampleDate.to"></ag-datepicker>
                 </div>
             </div>
         </div>
 
         <div class="row">
-            <div class="form-group col-md-6">
-                <label class="control-label col-sm-4">Local Date from</label>
-                <div class="col-sm-8">
-                    <ag-datepicker
-                               ng-model="filters.exampleLocalDate.from" />
-                    </ag-datepicker>
-                </div>
-            </div>
+            <div class="form-group col-md-8">
+                <label class="control-label col-sm-3">Local Date</label>
 
-            <div class="form-group col-md-6">
-                <label class="control-label col-sm-4">Local Date to</label>
-                <div class="col-sm-8">
-                    <ag-datepicker ng-model="filters.exampleLocalDate.to" />
-                    </ag-datepicker>
+                <div class="controls range-date-pickers">
+                    <ag-datepicker placeholder="from" type="text"
+                                   ng-model="filters.exampleLocalDate.from"></ag-datepicker>
+
+                    <ag-datepicker placeholder="to" type="text"
+                                   ng-model="filters.exampleLocalDate.to"></ag-datepicker>
                 </div>
             </div>
         </div>
 
         <div class="row">
-            <div class="form-group col-md-6">
-                <label class="control-label col-sm-4">Date Time from</label>
-                <div class="col-sm-8">
-                    <ag-datepicker
-                               ng-model="filters.exampleDateTime.from" />
-                    </ag-datepicker>
-                </div>
-            </div>
+            <div class="form-group col-md-8">
+                <label class="control-label col-sm-3">Date Time</label>
 
-            <div class="form-group col-md-6">
-                <label class="control-label col-sm-4">Date Time to</label>
-                <div class="col-sm-8">
-                    <ag-datepicker
-                               ng-model="filters.exampleDateTime.to" />
-                    </ag-datepicker>
+                <div class="controls range-date-pickers">
+                    <ag-datepicker placeholder="from" type="text"
+                                   ng-model="filters.exampleDateTime.from"></ag-datepicker>
+
+                    <ag-datepicker placeholder="to" type="text"
+                                   ng-model="filters.exampleDateTime.to"></ag-datepicker>
                 </div>
             </div>
         </div>

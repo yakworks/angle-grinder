@@ -1,3 +1,4 @@
+<%@ page import="grinder.Org" %>
 <g:set var="entityName" value="${ag.label(code: "orgShowCase")}"/>
 
 <div class="modal-header">
@@ -47,6 +48,14 @@
                                name="exampleDate"/>
 
                 <ag-validation-errors for="exampleDate"/>
+            </div>
+        </div>
+
+        <div ag-field-group for="org" class="form-group row">
+            <label class="control-label col-md-2">Org</label>
+
+            <div class="col-md-10">
+                <div placeholder="Select Orgs" ui-select2="orgSelectOptions" ng-model="filters.org" />
             </div>
         </div>
 

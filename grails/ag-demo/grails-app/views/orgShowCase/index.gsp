@@ -43,38 +43,40 @@
 
 <h3 class="page-header"><g:message code="default.list.label" args="[entityName]"/></h3>
 
-<div ng-app="angleGrinder" ng-controller="orgShowCase.ListCtrl"
+<div ng-app="angleGrinder" ng-controller="orgShowCase.ListCtrl" class="ag-panels-row"
      ng-init="editTemplateUrl = '${createLink(action: 'editPartial')}' ">
 
     <ag-alerts></ag-alerts>
 
-    <div ng-show="showSearchForm" class="search-form-panel">
-         <div ng-include="'${createLink(action: 'searchPartial')}'"></div>
-    </div>
-
-    <div class="navbar navbar-grid navbar-default">
-        <div class="navbar-inner with-selected-pointer with-grid-options">
-            <ul class="nav navbar-nav col-sm-4">
-                <li>
-                    <a href="" ng-click="createRecord()">
-                        <i class="fa fa-user"></i><g:message code="default.new.label" args="[entityName]"/>
-                    </a>
-                </li>
-            </ul>
-            <ul class="nav navbar-nav pull-right">
-                <li>
-                    <a title="search screen" ng-click="showSearchForm = !showSearchForm" href="">
-                        <i class="fa fa-search"></i>
-                    </a>
-                </li>
-            </ul>
-
-            <ag-grid-quick-search for="usersGrid" filters="filters"></ag-grid-quick-search>
+    <div class="ag-panel">
+        <div ng-show="showSearchForm" class="search-form-panel">
+            <div ng-include="'${createLink(action: 'searchPartial')}'"></div>
         </div>
-    </div>
 
-    <div ag-grid="gridOptions"
-         ag-grid-name="orgShowCaseGrid"></div>
+        <div class="ag-panel-states navbar navbar-grid navbar-default">
+            <div class="navbar-inner with-selected-pointer with-grid-options">
+                <ul class="nav navbar-nav col-sm-4">
+                    <li>
+                        <a href="" ng-click="createRecord()">
+                            <i class="fa fa-user"></i><g:message code="default.new.label" args="[entityName]"/>
+                        </a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav pull-right">
+                    <li>
+                        <a title="search screen" ng-click="showSearchForm = !showSearchForm" href="">
+                            <i class="fa fa-search"></i>
+                        </a>
+                    </li>
+                </ul>
+
+                <ag-grid-quick-search for="usersGrid" filters="filters"></ag-grid-quick-search>
+            </div>
+        </div>
+
+        <div ag-grid="gridOptions"
+             ag-grid-name="orgShowCaseGrid"></div>
+    </div>
 </div>
 
 </body>

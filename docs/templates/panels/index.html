@@ -165,46 +165,15 @@
 
     <div class="ag-panels-row">
       <div class="ag-panel">
-        <div class="navbar navbar-grid ag-panel-states">
+        <div class="navbar navbar-grid navbar-default ag-panel-states">
           <div class="navbar-inner with-selected-pointer with-grid-options">
-            <ul class="nav">
-              <li class="dropdown selected-actions">
-                <a data-toggle="dropdown" class="dropdown-toggle" href="#" style="padding-left: 2px">
-                  <i class="icon-selected-pointer"> </i> Actions <b class="caret"></b>
-                </a>
-                <ul class="dropdown-menu">
-                  <li><a href=""><i class="icon-eye-open"></i> View</a></li>
-                  <li><a href=""><i class="icon-external-link"></i> Export</a></li>
-                  <li class="divider"></li>
-                  <li><a href=""><i class="icon-trash"></i> Delete</a></li>
-                </ul>
-              </li>
-              <li class="divider-vertical"></li>
+            <ul class="nav navbar-nav col-sm-4">
               <li>
-                <a href="" class="create-button" ng-click="createRecord()">
-                  <i class="icon-plus-sign"></i> Add new record
+                <a ng-click="createRecord()">
+                  <i class="fa fa-plus"></i> Add new record
                 </a>
               </li>
             </ul>
-
-            <ul class="nav pull-right">
-              <li><a href="" title="search screen"><i class="icon-search"></i></a></li>
-              <li class="divider-vertical skinny"></li>
-              <li class="dropdown grid-options">
-                <a data-toggle="dropdown" class="dropdown-toggle" href=""><i class="icon-cog"></i><b
-                  class="caret"></b></i></a>
-                <ul class="dropdown-menu">
-                  <li><a href=""><i class="icon-th-list"></i> Columns</a></li>
-                  <li><a href=""><i class="icon-edit"></i> Another action</a></li>
-                  <li class="divider"></li>
-                  <li><a href=""><i class="icon-external-link"></i> Separated link</a></li>
-                </ul>
-              </li>
-            </ul>
-            <form action="" class="navbar-search pull-right">
-              <input type="text" value="" placeholder="Search" class="search-query span2"
-                     style="width: 150px;"/>
-            </form>
           </div>
         </div>
 
