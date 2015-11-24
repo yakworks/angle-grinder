@@ -30,6 +30,6 @@ gridz.directive "agReloadGrid", [
 
 
     template: """
-        <a class="list" ng-click="reload()"><i class="icon-refresh"></i></a>
+        <a class="list" ng-click="reload()"><i class="fa fa-refresh"></i></a>
     """
 ]
