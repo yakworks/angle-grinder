@@ -1,5 +1,6 @@
 common = angular.module("angleGrinder.common", [
   "ui.bootstrap.modal"
+  'duScroll' #Scroll
 ])
 
 # change default locale to use `-` symbol for negative currencies
