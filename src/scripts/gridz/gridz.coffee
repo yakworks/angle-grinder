@@ -11,6 +11,7 @@ class Gridz
     @options = @getOptions(opts)
 
     @addRowActionColumn() if @options.actionPopup
+    @editOndblClick() if @options.editOndblClick
 
     # call the jqgrid
     @gridEl.jqGrid @options
@@ -61,8 +62,9 @@ class Gridz
 
     if not e.ctrlKey and not e.shiftKey and not e.metaKey and not isCheckBox
       # Reset selection if multiboxonly is set to true read http://www.trirand.com/jqgridwiki/doku.php?id=wiki:options
-      @gridEl.jqGrid "resetSelection" if @gridEl.jqGrid("getGridParam", "multiboxonly")
-    else if startId and e.shiftKey
+      # default multiboxonly doesn't work with ctrl/shift keys.
+      @gridEl.jqGrid "resetSelection" if @gridEl.jqGrid("getGridParam", "agMultiboxonly")
+    if startId and e.shiftKey
 
       @gridEl.jqGrid "resetSelection"
 
@@ -197,6 +199,12 @@ class Gridz
     menuEl.on "click", "li a.row_action_delete", (e) =>
       e.preventDefault()
       @gridEl.trigger "deleteAction", [id, self]
+
+  editOndblClick: ->
+    self = this
+    grid = @gridEl
+    @options.ondblClickRow = (id)->
+      grid.trigger "editAction", [id, self]
 
 # register namespace
 $.extend true, window, grinder: Grid: Gridz
