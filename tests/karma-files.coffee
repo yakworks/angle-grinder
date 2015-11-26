@@ -11,6 +11,7 @@ module.exports =
     "components/bower/angular-resource/angular-resource.js"
     "components/bower/angular-sanitize/angular-sanitize.js"
     "components/bower/angular-mocks/angular-mocks.js"
+    "components/bower/angular-scroll/angular-scroll.js"
 
     "components/bower/jqgrid/js/grid.base.js"
     "components/bower/select2/select2.js"
