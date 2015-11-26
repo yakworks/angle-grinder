@@ -26,7 +26,8 @@ gridz.directive "agGridPlaceholder", [
 
       # show / hide the grid on route change
       scope.$on "$routeChangeSuccess", (event, currentRoute) ->
-        show = currentRoute.originalPath is rootPath
+        currentPath = currentRoute.originalPath
+        show = (currentPath is rootPath) or (currentPath is "")
 
         # render the grid only once
         scope.renderGrid = show if show
