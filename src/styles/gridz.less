@@ -1,5 +1,8 @@
 .ui-jqgrid {
   border: 1px solid #D4D4D4;
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
   .ui-jqgrid-titlebar {
     height: 40px;
     line-height: 24px;
@@ -40,6 +43,7 @@
         padding-top: 12px;
         padding-bottom: 12px;
         overflow: visible;
+        height: auto;
       }
     }
     th[id$=_cb] {
@@ -253,7 +257,6 @@
     border-radius: 4px 4px 0 0;
     background-color: #F9F9F9;
     background-repeat: repeat-x;
-    border: 1px solid #D4D4D4;
     border-bottom: none;
   }
   .divider-vertical.skinny {
