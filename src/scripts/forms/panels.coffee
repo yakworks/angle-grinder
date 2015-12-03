@@ -82,7 +82,8 @@ forms.directive "agPanel", [
 #
 forms.directive "agPanelStates",  [
   "$compile", ($compile) ->
-    restrict: "C"
+    restrict: "E"
+    transclude: true
 
     controller: [
       "$scope", ($scope) ->
@@ -173,15 +174,35 @@ forms.directive "agPanelStates",  [
 
     ]
 
-    link: (scope, element, attrs, ctrl, $transcludeFn) ->
-      stateButtons = angular.element($compile("""
-        <span name="agPanelStates" class="pull-left" style="margin-right: 5px">
-          <span name="normal" ng-click="normalState($event)" tooltip="Collapse"><i class="fa fa-chevron-down"></i></span>
-          <span name="collapsed" ng-click="collapsedState($event)" tooltip="Collapse-top"><i class="fa fa-chevron-up"></i></span>
-          <span name="fullscreen" ng-click="fullscreenState($event)" tooltip="Expand"><i class="fa fa-expand"></i></span>
-        </span>
+    link: (scope, element, attrs, ctrl, transcludeFn) ->
+      console.log "[agPanelStates] #{element}"
+      buttons = angular.element($compile("""
+        <ul name="agPanelStates" class="nav navbar-nav panel-states pull-right">
+          <li>
+            <a name="normal" class="list" ng-click="normalState($event)" bs-tooltip data-title="Collapse">
+               <i class="fa fa-chevron-down"></i>
+            </a>
+          </li>
+          <li>
+            <a name="collapsed" class="list" ng-click="collapsedState($event)" bs-tooltip data-title="Collapse-top">
+              <i class="fa fa-chevron-up"></i>
+            </a>
+          </li>
+          <li>
+            <a name="fullscreen" class="list" ng-click="fullscreenState($event)" bs-tooltip data-title="Expand">
+              <i class="fa fa-expand"></i>
+            </a>
+          </li>
+        </ul>
       """)(scope))
-      element.prepend(stateButtons)
+
+      transcludeFn scope, (cloneContent) ->
+        angular.forEach cloneContent, (element) ->
+          if element instanceof HTMLElement
+            li = angular.element('<li></li>')
+            buttons.prepend(li.append angular.element($compile(element)(scope)))
+
+      element.prepend(buttons)
 
 ]
 

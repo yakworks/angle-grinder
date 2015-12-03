@@ -10,7 +10,7 @@ describe "module: angleGrinder.forms", ->
     { element } = compileTemplate """
         <div class="ag-panels-row">
           <div class="panel ag-panel">
-            <div class="panel-heading ag-panel-states">heading</div>
+            <div class="panel-heading">heading</div>
             <div class="panel-body">
               <p>Row is hiding</p>
               <p>Row is hiding</p>
@@ -18,6 +18,9 @@ describe "module: angleGrinder.forms", ->
               <p>Row is hiding</p>
             </div>
             <div class="panel-footer">footer</div>
+            <ag-panel-states>
+              <div id="userAction" ng-click="collapsedState($event)" ng-init="count = 0"></div>
+            </ag-panel-states>
           </div>
 
           <div class="panel ag-panel">
@@ -40,7 +43,7 @@ describe "module: angleGrinder.forms", ->
 
     it "adds states elements to panel header", ->
       expect(angular.element(agPanelStates).length).to.eq 1
-      expect(angular.element(agPanelStates).children().length).to.eq 3
+      expect(angular.element(agPanelStates).children().length).to.eq 4
 
     it "collapses the panel", ->
       # Collapse state click
@@ -66,3 +69,8 @@ describe "module: angleGrinder.forms", ->
       angular.element(agPanelStates).find('[name="fullscreen"]').click()
       # Wrap element by panel-modal
       expect(element.find("panel-modal").length).to.eq 1
+
+    it "check if the user's action is triggered", ->
+      angular.element(agPanelStates).find('[id="userAction"]').click()
+      panelBody = angular.element(element).find(".panel-body")
+      expect(angular.element(angular.element(panelBody)[0]).hasClass("ng-hide")).to.be.true

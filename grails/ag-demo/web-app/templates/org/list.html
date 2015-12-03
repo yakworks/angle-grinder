@@ -1,10 +1,10 @@
 <h3 class="page-header">Org list</h3>
 
-<div>
+<div class="ag-panels-row">
   <div ng-show="!showSearchForm" class="search-form">
        <div ng-include="'/templates/org/searchForm.html' | withContext"></div>
   </div>
-
+<div class="ag-panel">
   <div class="navbar navbar-toolbar navbar-grid navbar-default">
       <div class="navbar-inner with-selected-pointer with-grid-options">
           <ul class="nav navbar-nav">
@@ -23,6 +23,9 @@
                     </a>
                 </li>
           </ul>
+          <ag-panel-states>
+              <ag-reload-grid for="orgGrid"></ag-reload-grid>
+          </ag-panel-states>
           <ul class="nav navbar-nav pull-right">
               <li>
                   <a title="search screen" ng-click="showSearchForm = !showSearchForm" href="">
@@ -30,11 +33,10 @@
                   </a>
               </li>
           </ul>
-      </div>
-      <ag-grid-quick-search for="orgGrid" filters="filters"></ag-grid-quick-search>
+          <ag-grid-quick-search for="orgGrid" filters="filters"></ag-grid-quick-search>
       </div>
   </div>
+  <div ag-grid="gridOptions" ag-grid-name="orgGrid"></div>
+</div>
 
-  <div ag-grid="gridOptions"
-       ag-grid-name="orgGrid"></div>
 </div>
