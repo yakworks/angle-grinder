@@ -53,7 +53,7 @@
             <div ng-include="'${createLink(action: 'searchPartial')}'"></div>
         </div>
 
-        <div class="ag-panel-states navbar navbar-grid navbar-default">
+        <div class="ag-panel-states navbar navbar-grid navbar-toolbar navbar-default">
             <div class="navbar-inner with-selected-pointer with-grid-options">
                 <ul class="nav navbar-nav col-sm-4">
                     <li>
