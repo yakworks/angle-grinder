@@ -179,17 +179,17 @@ forms.directive "agPanelStates",  [
       buttons = angular.element($compile("""
         <ul name="agPanelStates" class="nav navbar-nav panel-states pull-right">
           <li>
-            <a name="normal" class="list" ng-click="normalState($event)" bs-tooltip data-title="Collapse">
+            <a name="normal" class="list" ng-click="normalState($event)" uib-tooltip="Collapse">
                <i class="fa fa-chevron-down"></i>
             </a>
           </li>
           <li>
-            <a name="collapsed" class="list" ng-click="collapsedState($event)" bs-tooltip data-title="Collapse-top">
+            <a name="collapsed" class="list" ng-click="collapsedState($event)" uib-tooltip="Collapse-top">
               <i class="fa fa-chevron-up"></i>
             </a>
           </li>
           <li>
-            <a name="fullscreen" class="list" ng-click="fullscreenState($event)" bs-tooltip data-title="Expand">
+            <a name="fullscreen" class="list" ng-click="fullscreenState($event)" uib-tooltip="Expand">
               <i class="fa fa-expand"></i>
             </a>
           </li>
