@@ -62,9 +62,9 @@ forms.directive "agDatepicker", [
         if ngModelCtrl
           $timeout ->
             if options.inline
-              ngModelCtrl.$setViewValue moment(event.date._d).format(isoFormat)
+              ngModelCtrl.$setViewValue moment( new Date event.date._d).format(isoFormat)
             else
-              ngModelCtrl.$setViewValue moment(event.date).format(isoFormat)
+              ngModelCtrl.$setViewValue moment(new Date event.date).format(isoFormat)
             ngModelCtrl.$setValidity('dateFormat', agDate.isValid(ngModelCtrl.$modelValue, isoFormat))
       ).datetimepicker(options)
 
@@ -95,13 +95,13 @@ forms.directive "agDate", [
         isValid = agDate.isValid(viewValue, dateFormat)
         ngModelCtrl.$setValidity('dateFormat', isValid)
         if isValid
-          moment(viewValue).format(modelFormat)
+          moment(new Date viewValue).format(modelFormat)
         else
           ""
 
       ngModelCtrl.$formatters.push (modelValue) ->
         isValid = agDate.isValid(modelValue, modelFormat)
         ngModelCtrl.$setValidity('dateFormat', isValid)
-        moment(modelValue).format(dateFormat)
+        moment(new Date modelValue).format(dateFormat)
   ]
 

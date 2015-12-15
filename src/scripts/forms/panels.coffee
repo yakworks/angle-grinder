@@ -175,7 +175,6 @@ forms.directive "agPanelStates",  [
     ]
 
     link: (scope, element, attrs, ctrl, transcludeFn) ->
-      console.log "[agPanelStates] #{element}"
       buttons = angular.element($compile("""
         <ul name="agPanelStates" class="nav navbar-nav panel-states pull-right">
           <li>
