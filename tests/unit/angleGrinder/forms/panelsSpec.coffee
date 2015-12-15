@@ -5,6 +5,7 @@ describe "module: angleGrinder.forms", ->
 
   element = null
   ctrl = null
+  scope = null
 
   beforeEach inject ($injector) ->
     { element } = compileTemplate """
@@ -19,7 +20,7 @@ describe "module: angleGrinder.forms", ->
             </div>
             <div class="panel-footer">footer</div>
             <ag-panel-states>
-              <div id="userAction" ng-click="collapsedState($event)" ng-init="count = 0"></div>
+              <div id="userAction" ng-click="userAction()"></div>
             </ag-panel-states>
           </div>
 
@@ -30,6 +31,19 @@ describe "module: angleGrinder.forms", ->
       """, $injector
 
     ctrl = element.controller("agPanelsRow")
+    scope = element.scope()
+
+    scope.userButtonClicked = false
+    scope.userAction = ->
+      scope.userButtonClicked = true
+
+    element.$scope = scope
+
+    scope.userButtonClicked = false
+    scope.userAction = ->
+      scope.userButtonClicked = true
+
+    element.$scope = scope
 
   describe "directive: agPanel", ->
 
@@ -46,8 +60,9 @@ describe "module: angleGrinder.forms", ->
       expect(angular.element(agPanelStates).children().length).to.eq 4
 
     it "collapses the panel", ->
+      stateButton = angular.element(agPanelStates).find('[name="stateButton"]')
       # Collapse state click
-      angular.element(agPanelStates).find('[name="collapsed"]').click()
+      stateButton.click()
       # Find element(s) with .panel-body class
       panelBody = angular.element(element).find(".panel-body")
       # Amount of these elements should be equal 2
@@ -57,7 +72,7 @@ describe "module: angleGrinder.forms", ->
       expect(angular.element(angular.element(panelBody)[1]).children().length).to.eq 1
 
       # Normal state click
-      angular.element(agPanelStates).find('[name="normal"]').click()
+      stateButton.click()
       panelBody = angular.element(element).find(".panel-body")
       # Element should return to default value
       expect(angular.element(panelBody).length).to.eq 1
@@ -66,11 +81,10 @@ describe "module: angleGrinder.forms", ->
     it "shows panel in fullscreen", ->
       # Fullscreen state click
       expect(element.closest("panel-modal").length).to.eq 0
-      angular.element(agPanelStates).find('[name="fullscreen"]').click()
+      angular.element(agPanelStates).find('[name="expandButton"]').click()
       # Wrap element by panel-modal
       expect(element.find("panel-modal").length).to.eq 1
 
     it "check if the user's action is triggered", ->
       angular.element(agPanelStates).find('[id="userAction"]').click()
-      panelBody = angular.element(element).find(".panel-body")
-      expect(angular.element(angular.element(panelBody)[0]).hasClass("ng-hide")).to.be.true
+      expect(scope.userButtonClicked).to.be.true
