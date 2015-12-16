@@ -144,11 +144,17 @@ gridz.service "csvData", [
 #   <a href="" ag-grid-xls-export="usersGrid">
 #     <i class="icon-download-alt"></i> Export to XLS
 #   </a>
+#   If nothing is specified table icon will be added
+#   <a href="" ag-grid-xls-export="usersGrid"></a>
 gridz.directive "agGridXlsExport", [
-  "$window", "notificationDialog", ($window, notificationDialog) ->
+  "$window", "notificationDialog", "$compile",  ($window, notificationDialog, $compile) ->
     restrict: "A"
 
     link: (scope, element, attrs) ->
+      # Add table symbol if no child is specified
+      if not element[0].firstChild
+        exp = angular.element($compile("""<i class="icon-table" utooltip="Export to Excel"></i>""")(scope))
+        element.append(exp)
       element.on "click", (event) ->
         event.preventDefault()
 

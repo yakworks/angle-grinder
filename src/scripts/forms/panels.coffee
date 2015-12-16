@@ -82,23 +82,22 @@ forms.directive "agPanel", [
 #
 forms.directive "agPanelStates",  [
   "$compile", ($compile) ->
-    restrict: "C"
+    restrict: "E"
+    transclude: true
 
     controller: [
       "$scope", ($scope) ->
 
-        $scope.normalState = (event) ->
+        $scope.changeState = (event) ->
+          stateButton = getAgPanel(event).find('[name="agPanelStates"]').find('[name="stateButton"]')
           if $scope.state is "collapsed"
             $scope.state = "normal"
-            element = getAgPanel event
-            if isGrid element then collapseGrid element else collapseForm element
-          true
-
-        $scope.collapsedState = (event) ->
-          if not $scope.state? or $scope.state is "normal"
+            stateButton.find("i").prop "class", "icon-minus"
+          else
             $scope.state = "collapsed"
-            element = getAgPanel event
-            if isGrid element then collapseGrid element else collapseForm element
+            stateButton.find("i").prop "class", "icon-plus"
+          element = getAgPanel event
+          if isGrid element then collapseGrid element else collapseForm element
           true
 
         $scope.fullscreenState = (event) ->
@@ -173,15 +172,36 @@ forms.directive "agPanelStates",  [
 
     ]
 
-    link: (scope, element, attrs, ctrl, $transcludeFn) ->
-      stateButtons = angular.element($compile("""
-        <span name="agPanelStates" class="pull-left" style="margin-right: 5px">
-          <span name="normal" ng-click="normalState($event)" tooltip="Collapse"><i class="icon-chevron-down"></i></span>
-          <span name="collapsed" ng-click="collapsedState($event)" tooltip="Collapse-top"><i class="icon-chevron-up"></i></span>
-          <span name="fullscreen" ng-click="fullscreenState($event)" tooltip="Expand"><i class="icon-resize-full"></i></span>
-        </span>
+    link: (scope, element, attrs, ctrl, transcludeFn) ->
+      buttonList = angular.element($compile("""
+        <ul name="agPanelStates" class="nav navbar-nav panel-states pull-right"></ul>
       """)(scope))
-      element.prepend(stateButtons)
+
+      #add user buttons
+      transcludeFn scope, (cloneContent) ->
+        angular.forEach cloneContent, (element) ->
+          li = angular.element('<li></li>')
+          if element instanceof HTMLElement
+            buttonList.append(li.append angular.element($compile(element)(scope)))
+
+      defaultButtons = angular.element($compile("""
+        <li>
+          <a name="stateButton" class="list" ng-click="changeState($event)" tooltip="Hide/Show">
+             <i class="icon-minus"></i>
+          </a>
+        </li>
+        <li>
+          <a name="expandButton" class="list" ng-click="fullscreenState($event)" tooltip="Expand">
+            <i class="icon-resize-full"></i>
+          </a>
+        </li>
+        <li>
+          <a name="compressButton" class="list ng-hide" ng-click="close()" tooltip="Compress">
+            <i class="icon-resize-small"></i>
+          </a>
+        </li>
+      """)(scope))
+      element.prepend(buttonList.append defaultButtons)
 
 ]
 
@@ -190,10 +210,7 @@ forms.directive "panelModal", [
   "$compile", "$modal", "$document", ($compile, $modal, $document) ->
     restrict: "E"
     template: """
-      <div id="modal-fullscreen" class="modal">
-          <div class="modal-header">
-              <button type="button" class="close" ng-click="close()">×</button>
-          </div>
+      <div class="modal modal-fullscreen" id="modal-fullscreen">
           <div class="modal-body"></div>
       </div>
     """
@@ -236,23 +253,33 @@ forms.directive "panelModal", [
         ->
           scope.showModal
         (newVal) ->
-          if newVal and element.scope()
-            modalEl = angular.element($document).find('panel-modal')
-            angular.element(modalEl).find('[name="agPanelStates"]').addClass("ng-hide")
-            element.insertBefore(modalEl)
-            element.find(".modal-body").append(angular.element(modalEl).children())
-            modalBody = element.find(".modal-body").children()
-            angular.element(modalEl).remove()
-            scope.shrinkGridIfExists modalBody
-            scope.setGridMaxHeight modalBody
-          else if not newVal and element.scope()
-            modalEl = angular.element($document).find('panel-modal')
-            angular.element(modalEl).find('[name="agPanelStates"]').removeClass("ng-hide")
-            modalBody = angular.element(modalEl).find(".modal-body").children()
-            angular.element(modalBody).insertBefore(modalEl)
-            angular.element(modalEl).remove()
-            scope.shrinkGridIfExists modalBody
-            scope.setGridMaxHeight modalBody
+          modalEl = angular.element($document).find('panel-modal')
+          agPanelStates = angular.element(modalEl).find('[name="agPanelStates"]')
+          elementScope = element.scope()
+          state = agPanelStates.find('[name="stateButton"]')
+          expand = agPanelStates.find('[name="expandButton"]')
+          compress = agPanelStates.find('[name="compressButton"]')
+
+          if elementScope
+            if newVal
+              state.addClass("ng-hide")
+              expand.addClass("ng-hide")
+              compress.removeClass("ng-hide")
+              element.insertBefore(modalEl)
+              element.find(".modal-body").append(angular.element(modalEl).children())
+              modalBody = element.find(".modal-body").children()
+              angular.element(modalEl).remove()
+              scope.shrinkGridIfExists modalBody
+              scope.setGridMaxHeight modalBody
+            else
+              state.removeClass("ng-hide")
+              expand.removeClass("ng-hide")
+              compress.addClass("ng-hide")
+              modalBody = angular.element(modalEl).find(".modal-body").children()
+              angular.element(modalBody).insertBefore(modalEl)
+              angular.element(modalEl).remove()
+              scope.shrinkGridIfExists modalBody
+              scope.setGridMaxHeight modalBody
       )
 
 ]
