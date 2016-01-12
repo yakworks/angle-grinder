@@ -7,9 +7,12 @@ forms.directive "agSubmitButton", ->
   require: "^form"
 
   link: (scope, element, attrs, formCtrl) ->
+    # Check if submit button is in the modal window
+    # used to disable submit button while modal closing
+    isModalWindow = element[0].offsetParent.hasAttribute("modal-window") if element[0].offsetParent?
     isSaving = -> formCtrl.$saving
     scope.$watch isSaving, (saving) ->
-      scope.saving = saving
+      scope.saving = saving if not (isModalWindow and scope.saving)
 
   template: """
     <button type="submit" class="btn btn-default btn-primary"

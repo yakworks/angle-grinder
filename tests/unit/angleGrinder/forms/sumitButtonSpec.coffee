@@ -42,3 +42,23 @@ describe "module: angleGrinder.forms directive: agSubmitButton", ->
       beforeEach -> $scope.$apply -> $scope.theForm.$saving = false
 
       itIsEnabled()
+
+  describe " submit button in modal", ->
+    beforeEach inject ($rootScope, $injector, _$http_) ->
+
+      $scope = $rootScope.$new()
+      {element, $scope} = compileTemplate """
+           <div modal-window style="position: absolute">
+                  <form name="testForm">
+                    <ag-submit-button></ag-submit-button>
+                  </form>
+            </div>
+          """, $injector
+      element = element.find("button[type=submit]")
+
+    describe "when the request is in progress", ->
+      beforeEach -> $scope.$apply -> $scope.testForm.$saving = true
+
+      it "is disabled after saving is finished", ->
+        beforeEach -> $scope.$apply -> $scope.testForm.$saving = false
+        expect(element.prop("disabled")).to.be.true

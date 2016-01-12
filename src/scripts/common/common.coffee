@@ -1,5 +1,6 @@
 common = angular.module("angleGrinder.common", [
   "ui.bootstrap.modal"
+  "angleGrinder.resources"
   'duScroll' #Scroll
 ])
 
