@@ -281,10 +281,6 @@ form {
   border-left: 1px solid rgba(0, 0, 0, 0.06);
 }
 
-.panel-states {
-  background: rgba(0, 0, 0, 0.027) none repeat scroll 0 0;
-  border-left: 1px solid rgba(0, 0, 0, 0.06);
-}
 
 .panel-states {
   background: rgba(0, 0, 0, 0.027) none repeat scroll 0 0;
@@ -302,5 +298,22 @@ form {
 .th-text-right {
   th {
     text-align: right;
+  }
+}
+
+.panel {
+  dt {
+    text-align: left;
+  }
+  dd {
+    text-align: right;
+  }
+
+  form[editable-form] .title {
+    text-align: left;
+  }
+
+  form[editable-form] .title + span {
+    float: right;
   }
 }
