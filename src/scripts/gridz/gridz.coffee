@@ -269,19 +269,19 @@ $.fn.gridz.defaults =
 $.extend $.fn.fmatter,
 
   # use `agDateFilter` for format dates
-  date:     (cellVal) ->
-    window.columnAligner("date", window.agDateFilter(cellVal))
+  date:     (cellVal, options) ->
+    window.columnAligner("date", window.agDateFilter(cellVal), options)
 
   # use `agCurrencyFilter` for format currencies
-  currency: (cellVal) ->
-    window.columnAligner("currency", window.agCurrencyFilter(cellVal))
+  currency: (cellVal, options) ->
+    window.columnAligner("currency", window.agCurrencyFilter(cellVal), options)
 
   # use `agCurrencyFilter` for format currencies, use 0 for empty/null/undefined value
-  currencyOrZero: (cellVal) ->
+  currencyOrZero: (cellVal, options) ->
     if typeof(cellVal) == 'undefined' or cellVal == null or cellVal == 'null' or cellVal == ''
       cellVal = 0
 
-    return window.columnAligner("currency", window.agCurrencyFilter(cellVal))
+    return window.columnAligner("currency", window.agCurrencyFilter(cellVal), options)
 
 
   okIcon: (cellVal, options, rowdata) ->
@@ -309,7 +309,10 @@ $.extend $.fn.fmatter?.currencyOrZero,
 # Returns the template for data column alignment.
 # type    - type of a columns (e.g. currency, date, link)
 # content - content of a grid cell
-window.columnAligner = (type, content) ->
-  """
-  <div class="#{type}-content">#{content}</div>
-  """
+window.columnAligner = (type, content, options) ->
+  if options?.colModel?.align
+    content
+  else
+    """
+    <div class="#{type}-content">#{content}</div>
+    """
