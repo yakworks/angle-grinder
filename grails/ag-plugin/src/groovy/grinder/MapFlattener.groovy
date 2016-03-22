@@ -90,6 +90,10 @@ class MapFlattener {
             }
             else if ( entry.value == null || entry.value?.toString() == 'null' )
             {
+                ///FIXME @JOSH - isnt this a problem ? when the property value is 'null' we convert it to empty string, because of this we can not set an association to null.
+                //Because inorder to set an association to null, we need to pass 'null' as param value - eg /book/save?author.id=null
+                //By default grails converter converts empty strings to null (grails.databinding.convertEmptyStringsToNull is true by default). But we seem to be doing the opposite here which is wrong.
+
                 //we add a blank string for grails binding to simulate what would come through from params
                 _keyVersion.updateMapWithKeyValue(keyValues, key, '')
                 //println("created blank string")
