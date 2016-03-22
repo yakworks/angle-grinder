@@ -11,7 +11,8 @@ app.factory "restrictResource", [
           this.$cachedData = this.resourceData()
         $save: ->
           Record = resourceBuilder(this.resourcePath())
-          record = new Record(deepDiff(this.$cachedData, resource.resourceData(), allowedFields, requiredResourceFields))
+          cached = _.cloneDeep this.$cachedData
+          record = new Record(deepDiff(cached, resource.resourceData(), allowedFields, requiredResourceFields))
           record.$save()
           this.$cachedData = _.merge(this.$cachedData, record.resourceData())
           this

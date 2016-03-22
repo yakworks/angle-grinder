@@ -17,7 +17,7 @@ app.service "deepDiff", ["deepPick", (deepPick)->
       newVal = deepPick.apply(this, args)
 
     _.forEach(newVal, (v, k)->
-      if oldVal? and _.isEqual(v, oldVal[k])
+      if (oldVal? and _.isEqual(v, oldVal[k])) or k is "$cachedData"
         return
       diff[k] = if _.isObject(v) then map(oldVal[k], v) else newVal[k]
     )

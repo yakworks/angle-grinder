@@ -1,7 +1,7 @@
 class @GridCrudCtrl
 #Controller for gridCrud directive
-  @$inject = ["$scope", "$element", "$attrs",  "$parse", "$log", "resourceBuilder", "$window"]
-  constructor: ($scope, $element, $attrs,  $parse, $log, resourceBuilder, $window) ->
+  @$inject = ["$scope", "$element", "$attrs",  "$parse", "$log", "resourceBuilder", "$window", "restrictResource"]
+  constructor: ($scope, $element, $attrs,  $parse, $log, resourceBuilder, $window, restrictResource) ->
 
     Resource = null
     beforeSave = null
@@ -18,6 +18,8 @@ class @GridCrudCtrl
 
     grid =  -> $parse($attrs.gridName)($scope)
 
+    allowedFields = $parse($attrs.allowedFields)($scope)
+
     hideForm = () -> $scope.showForm = false
 
     showForm = -> $scope.showForm = true
@@ -25,7 +27,7 @@ class @GridCrudCtrl
     editAction = (id) ->
       $log.info "[gridCrud] Edit #{resourceName} : #{id}"
       record = Resource.get {id: id}, (r) ->
-        $scope[resourceName] = r
+        $scope[resourceName] = restrictResource(r, allowedFields)
         showForm()
 
     createAction =() ->
