@@ -89,6 +89,11 @@ class MapFlattener {
                 //println("Null Entry Or Entry Value")
             }
 
+            //if it is an association id, then set value to 'null' to set the association to null
+            else if((key && key.toString().endsWith(".id")) && (entry.value == null || entry.value.toString() == 'null' || entry.value.toString().trim() == "")) {
+                _keyVersion.updateMapWithKeyValue(keyValues, key, "null")
+            }
+
             else if (entry.value == null || entry.value?.toString() == 'null') {
                 _keyVersion.updateMapWithKeyValue(keyValues, key, null)
             }
