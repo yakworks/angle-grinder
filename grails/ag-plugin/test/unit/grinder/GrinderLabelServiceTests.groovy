@@ -1,14 +1,15 @@
 package grinder
 
-import grails.test.mixin.*
-import org.junit.*
+import grails.test.mixin.TestFor
+import spock.lang.Specification
 
 /**
  * See the API for {@link grails.test.mixin.services.ServiceUnitTestMixin} for usage instructions
  */
 @TestFor(GrinderLabelService)
-class GrinderLabelServiceTests {
+class GrinderLabelServiceTests extends Specification{
 
+    @spock.lang.Ignore
     void test_getLabelKeys() {
         def res = service.getLabelKeys("xxx")
         assert res.size == 2
