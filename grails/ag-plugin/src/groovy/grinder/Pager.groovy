@@ -64,7 +64,7 @@ class Pager {
         if(pageCount < 1) return
         log.debug "eachPage total pages : pageCount"
         
-        (1..totalPages).each {Long pageNum ->
+        (1..pageCount).each {Long pageNum ->
             page = pageNum
             offset = (max * (page - 1))
             try {

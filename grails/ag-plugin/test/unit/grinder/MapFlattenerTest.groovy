@@ -60,12 +60,13 @@ class MapFlattenerTest {
     void testNullParamValues() {
         def mf = new MapFlattener()
         def testMap = [
-                book: [author:[id:'null', name: ' foo ']]
+                book: [author:[id:'null', name: ' foo ', age:'null']]
         ]
 
         def res = mf.flatten(testMap)
-        assert res['book.author.id'] == null
+        assert res['book.author.id'] == "null"
         assert res['book.author.name'] == 'foo'
+        assert res['book.author.age'] == null
 
     }
 }
