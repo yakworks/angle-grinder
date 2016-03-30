@@ -32,10 +32,9 @@ gridz.directive "quickSearchButton", ->
       # 13 - Enter key code
       if event.which is 13
         event.preventDefault()
-        # Run search only if there are any filters specified
-        if not angular.equals(scope.filters, {quickSearch: ""})
-          scope.search(scope.filters)
+        scope.search(scope.filters)
 
       if event.which is 27
         scope.filters.quickSearch = "" if scope.filters
         scope.$apply()
+        scope.search(scope.filters)
