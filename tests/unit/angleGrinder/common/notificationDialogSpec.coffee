@@ -1,11 +1,6 @@
 describe "module: angleGrinder.common", ->
 
   describe "controller: NotificationDialogCtrl", ->
-
-    beforeEach ->
-      module "angleGrinder.common",
-        $modalInstance: close: sinon.stub()
-
     $scope = null
     ctrl = null
 
@@ -18,30 +13,30 @@ describe "module: angleGrinder.common", ->
     it "has the message", ->
       expect($scope.options.message).to.eq "This is a notification!"
 
-    describe "#close", ->
-
-      it "closes the dialog", inject ($modalInstance) ->
-        ctrl.close()
-        expect($modalInstance.close).to.have.been.called
-
-  describe "service: confirmationDialog", ->
-
-    beforeEach module "ui.bootstrap", ($provide) ->
-      $provide.decorator "$uibModal", ($delegate) ->
-        sinon.spy($delegate, "open")
-        $delegate
-
-      return
+  describe "service: notificationDialog", ->
 
     beforeEach module "angleGrinder.forms"
 
-    it "displays the notification", inject ($uibModal, notificationDialog) ->
+    it "displays the notification", inject ( notificationDialog) ->
       # When
-      notificationDialog.open("test")
+      notificationDialog.open("Test message for notification!")
 
       # Then
-      expect($uibModal.open).to.have.been.called
+      text = document.querySelector('.sweet-alert h2')
+      expect(text.textContent).to.eq("Test message for notification!")
+      canselButton = document.querySelector('.sweet-alert button.cancel')
+      expect(canselButton.style.display).to.eq("none")
+      okButton = document.querySelector('.sweet-alert button.confirm')
+      expect(okButton.textContent).to.eq("Ok")
 
-      options = $uibModal.open.getCall(0).args[0]
-      expect(options).to.have.property "templateUrl", "templates/dialogs/notification.html"
-      expect(options).to.have.property "controller", "NotificationDialogCtrl"
+    it "displays the notification with custom ok button", inject ( notificationDialog) ->
+      # When
+      notificationDialog.open({message: "Test message for notification!", okLabel: "testOK"})
+
+      # Then
+      text = document.querySelector('.sweet-alert h2')
+      expect(text.textContent).to.eq("Test message for notification!")
+      canselButton = document.querySelector('.sweet-alert button.cancel')
+      expect(canselButton.style.display).to.eq("none")
+      okButton = document.querySelector('.sweet-alert button.confirm')
+      expect(okButton.textContent).to.eq("testOK")
