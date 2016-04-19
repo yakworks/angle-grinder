@@ -6,3 +6,4 @@
 //= require scripts/bootstrap.min.js
 //= require scripts/bootstrap-extras.min.js
 //= require scripts/angular.xeditable.min.js
+//= require scripts/uigrid.min.js
