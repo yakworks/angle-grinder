@@ -2,7 +2,7 @@ gridz = angular.module "angleGrinder.gridz"
 
 # Takes a nested Javascript object and flatten it.
 # see: https://github.com/hughsk/flat
-gridz.value "flatten", (target, opts = delimiter: ".") ->
+gridz.value "FlattenServ", (target, opts = delimiter: ".") ->
   delimiter = opts.delimiter
 
   getKey = (key, prev) ->

@@ -34,4 +34,4 @@ class NotificationDialog
 
     return defer.promise
 
-app.service "notificationDialog", NotificationDialog
+app.service "NotificationDialogServ", NotificationDialog

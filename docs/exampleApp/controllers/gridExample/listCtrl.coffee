@@ -1,7 +1,7 @@
 class IndexCtrl extends BaseCtrl
 
   @register "exampleApp", "gridExample.ListCtrl"
-  @inject "$scope", "$q", "$log", "sampleData", "exampleGrid", "formDialog"
+  @inject "$scope", "$q", "$log", "sampleData", "exampleGrid", "FormDialogServ"
 
   initialize: ->
     @expose @$scope, "getSelectedRowsData", "editRecord", "createRecord", "deleteRecord"
@@ -38,7 +38,7 @@ class IndexCtrl extends BaseCtrl
     })
 
     dialogOptions = record: record, grid: @$scope.exampleGrid
-    @formDialog.open("/templates/gridExample/form.html", dialogOptions)
+    @FormDialogServ.open("/templates/gridExample/form.html", dialogOptions)
 
   createRecord: ->
     record = {}
@@ -55,7 +55,7 @@ class IndexCtrl extends BaseCtrl
     })
 
     dialogOptions = record: record, grid: @$scope.exampleGrid
-    @formDialog.open("/templates/gridExample/form.html", dialogOptions).result
+    @FormDialogServ.open("/templates/gridExample/form.html", dialogOptions).result
       .then (record) => @data.push(record)
 
   deleteRecord: (id) ->

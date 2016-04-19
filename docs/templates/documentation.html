@@ -740,7 +740,7 @@ angular.module("myApp")
   .controller("MyCtrl", MyCtrl)
 </pre>
 
-  <h3 id="docs-forms-formDialog">formDialog service</h3>
+  <h3 id="docs-forms-FormDialogServ">FormDialogServ service</h3>
 
   Displays a dialog with a form for creating or updating a record.
   Used mostly on dialog based CRUD pages.<br/>
@@ -749,17 +749,17 @@ angular.module("myApp")
 <pre class="prettyprint">
 class MyCtrl
 
-  @$inject = ["$scope", "formDialog", "Users"]
-  constructor: ($scope, formDialog, Users) ->
+  @$inject = ["$scope", "FormDialogServ", "Users"]
+  constructor: ($scope, FormDialogServ, Users) ->
     # Displays a form for creating a new user
     $scope.createRecord = ->
       user = new Users()
-      formDialog.open("/user/formTemplate", user)
+      FormDialogServ.open("/user/formTemplate", user)
 
     # Displays a form for editing an exiting user
     $scope.editRecord = (id) ->
       Users.get { id: id }, (user) ->
-        formDialog.open("/user/formTemplate", user)
+        FormDialogServ.open("/user/formTemplate", user)
 
 angular.module("myApp")
   .controller("tabbedOrg.MyCtrl", MyCtrl)
@@ -1070,8 +1070,8 @@ Example usage:
 <pre class="prettyprint">
 class ListCtrl
 
-  @$inject = ["$scope", "$log", "Resource", "$filter", "dialogCrudCtrlMixin", "applyFormatters"]
-  constructor: ($scope, $log, Resource, @$filter, dialogCrudCtrlMixin, applyFormatters) ->
+  @$inject = ["$scope", "$log", "Resource", "$filter", "DialogCrudCtrlMixin", "applyFormatters"]
+  constructor: ($scope, $log, Resource, @$filter, DialogCrudCtrlMixin, applyFormatters) ->
 
     $scope.gridOptions =
       path: "/user/list?format=json"
@@ -1081,7 +1081,7 @@ class ListCtrl
       sortname: "login"
       sortorder: "asc"
 
-    dialogCrudCtrlMixin $scope,
+    DialogCrudCtrlMixin $scope,
       Resource: Resource
       gridName: "usersGrid"
       templateUrl: "/user/formTemplate"

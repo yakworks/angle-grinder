@@ -1,4 +1,4 @@
-describe "module: angleGrinder.forms mixin: massUpdateMixin", ->
+describe "module: angleGrinder.forms mixin: MassUpdateMixin", ->
 
   beforeEach module "angleGrinder.forms", ($provide) ->
     $provide.value "$uibModal", open: sinon.mock()
@@ -8,13 +8,13 @@ describe "module: angleGrinder.forms mixin: massUpdateMixin", ->
   grid = null
   massUpdateFormCtrl = null
 
-  beforeEach inject ($rootScope, massUpdateMixin) ->
+  beforeEach inject ($rootScope, MassUpdateMixin) ->
     $scope = $rootScope.$new()
 
     grid = getSelectedRowIds: sinon.stub()
     $scope.theGrid = grid
 
-    massUpdateMixin $scope,
+    MassUpdateMixin $scope,
       gridName: "theGrid"
       controller: massUpdateFormCtrl
       templateUrl: "/path/to/the/form.html"
@@ -22,8 +22,8 @@ describe "module: angleGrinder.forms mixin: massUpdateMixin", ->
 
   context "when the grid is not defined", ->
 
-    it "throws an error", inject (massUpdateMixin) ->
-      expect(massUpdateMixin(gridName: "other")).to.throw "the grid is not defined"
+    it "throws an error", inject (MassUpdateMixin) ->
+      expect(MassUpdateMixin(gridName: "other")).to.throw "the grid is not defined"
 
   describe "#massUpdate", ->
 
@@ -82,13 +82,13 @@ describe "module: angleGrinder.forms mixin: massUpdateMixin", ->
       $scope = null
       grid = null
 
-      beforeEach inject ($rootScope, massUpdateMixin) ->
+      beforeEach inject ($rootScope, MassUpdateMixin) ->
         $scope = $rootScope.$new()
 
         grid = getSelectedRowIds: sinon.stub()
         $scope.grid = customers: grid
 
-        massUpdateMixin $scope,
+        MassUpdateMixin $scope,
           gridName: "grid.customers"
 
       it "does the same trick", ->

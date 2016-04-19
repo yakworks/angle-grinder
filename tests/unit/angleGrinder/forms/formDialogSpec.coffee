@@ -1,6 +1,6 @@
 describe "module: angleGrinder.forms", ->
 
-  describe "service: formDialog", ->
+  describe "service: FormDialogServ", ->
 
     beforeEach module "ui.bootstrap", ($provide) ->
       $provide.value "$uibModal", open: sinon.mock()
@@ -14,8 +14,8 @@ describe "module: angleGrinder.forms", ->
 
     describe "#open", ->
 
-      it "opens a dialog for the given templateUrl", inject ($uibModal, formDialog) ->
-        formDialog.open("/foo/bar/form.html")
+      it "opens a dialog for the given templateUrl", inject ($uibModal, FormDialogServ) ->
+        FormDialogServ.open("/foo/bar/form.html")
 
         expect($uibModal.open).to.have.been.called
 

@@ -34,13 +34,11 @@ module.exports =
     "src/scripts/gridz/gridz.coffee"
     "src/scripts/utils/baseCtrl.coffee"
     "src/scripts/utils/alerts.coffee"
-    "src/scripts/utils/spinner.coffee"
 
     "docs/templates/**/*.html"
 
     "src/scripts/common/common.coffee"
     "src/scripts/forms/forms.coffee"
-    "src/scripts/gridz/agGridz.coffee"
 
     "src/scripts/common/**/*.coffee"
     "src/scripts/forms/**/*.coffee"

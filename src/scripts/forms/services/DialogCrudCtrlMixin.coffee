@@ -1,8 +1,8 @@
 mixin = angular.module("angleGrinder.forms")
 
-mixin.factory "dialogCrudCtrlMixin", [
-  "$log", "$parse", "formDialog", "confirmationDialog"
-  ($log, $parse, formDialog, confirmationDialog) ->
+mixin.factory "DialogCrudCtrlMixin", [
+  "$log", "$parse", "FormDialogServ", "ConfirmationDialogServ"
+  ($log, $parse, FormDialogServ, ConfirmationDialogServ) ->
     ($scope, options = {}) ->
       { Resource, gridName, templateUrl, extraDialogOptions } = options
 
@@ -11,7 +11,7 @@ mixin.factory "dialogCrudCtrlMixin", [
 
       openEditDialogFor = (record) ->
         dialogOptions = record: record, grid: getGrid(), scope: $scope
-        formDialog.open(templateUrl, _.extend(dialogOptions, extraDialogOptions))
+        FormDialogServ.open(templateUrl, _.extend(dialogOptions, extraDialogOptions))
 
       # Generic method for invoking an edit dialog for a resource
       # with the given id
@@ -29,7 +29,7 @@ mixin.factory "dialogCrudCtrlMixin", [
 
       # Generic method for deleting a record
       $scope.deleteRecord = (id) ->
-        confirmationDialog.open().then (confirmed) ->
+        ConfirmationDialogServ.open().then (confirmed) ->
           return unless confirmed
 
           promise = Resource.delete(id: id).$promise

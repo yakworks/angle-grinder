@@ -4,7 +4,7 @@ forms = angular.module("angleGrinder.forms")
 # result should contain two arrays:
 #   result.data - data for successfully updated rows
 #   result.errors - assoc array for errors (id => errors)
-forms.factory "massUpdateHandler", [
+forms.factory "MassUpdateHandler", [
   "$log", "alerts", ($log, alerts) ->
     (grid, result) ->
       $log.info "[forms] Mass update response", result
