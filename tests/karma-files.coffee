@@ -12,6 +12,7 @@ module.exports =
     "components/bower/angular-sanitize/angular-sanitize.js"
     "components/bower/angular-mocks/angular-mocks.js"
     "components/bower/angular-scroll/angular-scroll.js"
+    "components/bower/angular-ui-grid/ui-grid.js"
 
     "grails/ag-plugin/web-app/angleGrinder/js/application.js"
     "grails/ag-plugin/web-app/angleGrinder/js/modules/resources.js"

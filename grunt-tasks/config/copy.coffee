@@ -33,6 +33,14 @@ module.exports = (grunt) ->
         "*/fonts/*.{otf,eot,svg,ttf,woff,woff2}"
       ]
     ,
+      expand: true
+      flatten: true
+      cwd: "components/bower/angular-ui-grid"
+      dest: "<%= appConfig.dev %>/fonts"
+      src: [
+        "*.{otf,eot,svg,ttf,woff,woff2}"
+      ]
+    ,
       # workaround for jquery-ui-bootstrap component
       # include its images in the production release
       expand: true
