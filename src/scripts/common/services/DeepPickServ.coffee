@@ -2,7 +2,7 @@ app = angular.module "angleGrinder.common"
 
 # Get/set the value of a nested property
 # @see https://gist.github.com/furf/3208381
-app.service "deepPick", ->
+app.service "DeepPickServ", ->
   # get the value of a nested property
   getDeep = (obj, path) ->
     keys = path.split(".")

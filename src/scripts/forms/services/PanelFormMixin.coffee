@@ -1,7 +1,7 @@
 app = angular.module "angleGrinder.forms"
 
 # mixin for forms inside info panels
-app.factory "panelFormMixin", [
+app.factory "PanelFormMixin", [
   "$log", ($log) ->
     ($scope, args = {}) ->
       {formName} = args

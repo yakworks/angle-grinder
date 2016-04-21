@@ -7,7 +7,7 @@ gridz = angular.module("angleGrinder.gridz")
 class AgGridCtrl extends BaseCtrl
 
   @register gridz, "AgGridCtrl"
-  @inject "$rootScope", "$element", "$attrs", "$q", "hasSearchFilters", "flatten", "xlsData", "csvData"
+  @inject "$rootScope", "$element", "$attrs", "$q", "hasSearchFilters", "FlattenServ", "xlsData", "csvData"
 
   highlightClass = 'ui-state-highlight'
 
@@ -77,7 +77,7 @@ class AgGridCtrl extends BaseCtrl
   # where the name is the name of the column as described in the colModel
   # and the value is the new value.
   updateRow: (id, data) ->
-    flatData = @flatten(data)
+    flatData = @FlattenServ(data)
 
     prevData = @getRowData(id)
     if prevData?
@@ -100,7 +100,7 @@ class AgGridCtrl extends BaseCtrl
   # The syntax of the data object is: {name1:value1,name2: value2...}
   # where name is the name of the column as described in the colModel and the value is the value.
   addRow: (id, data, position = "first") ->
-    @getGridEl().addRowData(id, @flatten(data), position)
+    @getGridEl().addRowData(id, @FlattenServ(data), position)
     @$rootScope.$broadcast "gridz:rowAdded", @$attrs.agGrid, id, data
     @flashOnSuccess(id)
 

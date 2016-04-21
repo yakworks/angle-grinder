@@ -1,24 +1,8 @@
-gridz = angular.module("angleGrinder.gridz", [
-  "ngSanitize"
-  "angleGrinder.common"
-  "ui.select2"
-  "angleGrinder.resources"
-])
-
-# Globally expose custom formatters for dates and currencies.
-# Used by jgGrid for formatting cell values.
-gridz.run [
-  "$window", "agDateFilter", "agCurrencyFilter",
-  ($window, agDateFilter, agCurrencyFilter) ->
-
-    $window.agDateFilter     = agDateFilter
-    $window.agCurrencyFilter = agCurrencyFilter
-
-]
+gridz = angular.module("angleGrinder.gridz")
 
 gridz.directive "agGrid", [
-  "$log", "$parse", "agGridDataLoader", "actionPopupHandler", "pathWithContext", "camelize",
-  ($log, $parse, agGridDataLoader, actionPopupHandler, pathWithContext, camelize) ->
+  "$log", "$parse", "agGridDataLoader", "ActionPopupHandler", "pathWithContext", "camelize",
+  ($log, $parse, agGridDataLoader, ActionPopupHandler, pathWithContext, camelize) ->
 
     link = (scope, element, attrs, gridCtrl) ->
       # find grid placeholder
@@ -77,7 +61,7 @@ gridz.directive "agGrid", [
         gridEl.gridz(options)
 
         # initialize actionPopup handler
-        actionPopupHandler(gridEl, scope, attrs)
+        ActionPopupHandler(gridEl, scope, attrs)
 
       if element.is(":visible")
         # Element is visible, initialize the grid now

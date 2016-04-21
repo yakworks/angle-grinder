@@ -1,6 +1,6 @@
 app = angular.module "angleGrinder.forms"
 # Validates text area to have not more then specified number of lines
-app.directive "agMaxLines", ["isFalsy", "$parse", (isFalsy, $parse) ->
+app.directive "agMaxLines", ["IsFalsyServ", "$parse", (IsFalsyServ, $parse) ->
   require: "ngModel"
   restrict: "A"
 
@@ -9,7 +9,7 @@ app.directive "agMaxLines", ["isFalsy", "$parse", (isFalsy, $parse) ->
       value = if value then value.trim() else value
       maxLines = $parse(attrs.agMaxLines)(scope)
       numLines = (value || '').split("\n").length
-      valid = isFalsy(maxLines) ||  numLines <= maxLines
+      valid = IsFalsyServ(maxLines) ||  numLines <= maxLines
       ngModelCtrl.$setValidity("maxlines", valid)
       return if valid then value else undefined
 

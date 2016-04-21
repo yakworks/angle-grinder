@@ -1,6 +1,6 @@
 app = angular.module("angleGrinder.forms")
 
-app.service "select2Options", ->
+app.service "Select2Options", ->
   (options = {}, dataOptions = {}) ->
     options.ajax or= {}
 

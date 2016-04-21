@@ -36,14 +36,14 @@ forms.directive "match", ["isEmpty", (isEmpty) ->
     modelCtrl.$formatters.unshift validator
 ]
 
-forms.directive "agLength", ["isFalsy", "$parse", (isFalsy, $parse) ->
+forms.directive "agLength", ["IsFalsyServ", "$parse", (IsFalsyServ, $parse) ->
   require: "ngModel"
   restrict: "A"
 
   link: (scope, elem, attrs, ngModelCtrl) ->
     lengthValidator = (value) ->
       length = $parse(attrs.agLength)(scope)
-      valid = isFalsy(length) || (!ngModelCtrl.$isEmpty(value) && (value.length is length))
+      valid = IsFalsyServ(length) || (!ngModelCtrl.$isEmpty(value) && (value.length is length))
       ngModelCtrl.$setValidity("length", valid)
       return if valid then value else undefined
 

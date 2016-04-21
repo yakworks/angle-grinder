@@ -3,8 +3,8 @@ app = angular.module "angleGrinder.common"
 app.value "requiredResourceFields", ["id"]
 
 app.factory "restrictResource", [
-  "$log", "deepDiff", "resourceBuilder", "requiredResourceFields"
-  ($log, deepDiff, resourceBuilder, requiredResourceFields) ->
+  "$log", "DeepDiffServ", "resourceBuilder", "requiredResourceFields"
+  ($log, DeepDiffServ, resourceBuilder, requiredResourceFields) ->
     (resource, allowedFields = [])->
       angular.extend(resource,
         $cacheData: () ->
@@ -12,14 +12,14 @@ app.factory "restrictResource", [
         $save: ->
           Record = resourceBuilder(this.resourcePath())
           cached = _.cloneDeep this.$cachedData
-          record = new Record(deepDiff(cached, resource.resourceData(), allowedFields, requiredResourceFields))
+          record = new Record(DeepDiffServ(cached, resource.resourceData(), allowedFields, requiredResourceFields))
           record.$save()
           this.$cachedData = _.merge(this.$cachedData, record.resourceData())
           this
 
         save: ->
           Record = resourceBuilder(this.resourcePath())
-          record = new Record(deepDiff(this.$cachedData, resource.resourceData(), allowedFields, requiredResourceFields))
+          record = new Record(DeepDiffServ(this.$cachedData, resource.resourceData(), allowedFields, requiredResourceFields))
           record.save()
           this.$cachedData = _.merge(this.$cachedData, record.resourceData())
           this

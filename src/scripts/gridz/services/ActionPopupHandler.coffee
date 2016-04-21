@@ -1,6 +1,6 @@
 gridz = angular.module "angleGrinder.gridz"
 
-gridz.factory "actionPopupHandler", [
+gridz.factory "ActionPopupHandler", [
   "$log", ($log) ->
 
     (gridEl, scope, attrs) ->

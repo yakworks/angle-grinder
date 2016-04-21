@@ -14,9 +14,9 @@ describe "module: angleGrinder.common", ->
     it "has the message", ->
       expect(ctrl.options).to.have.property "message", "This is a test!"
 
-    it "displays the confirmation with custom text", inject ( notificationDialog) ->
+    it "displays the confirmation with custom text", inject ( NotificationDialogServ) ->
       # When
-      notificationDialog.open("Test message for notification!")
+      NotificationDialogServ.open("Test message for notification!")
 
       # Then
       text = document.querySelector('.sweet-alert h2')
@@ -26,9 +26,9 @@ describe "module: angleGrinder.common", ->
       okButton = document.querySelector('.sweet-alert button.confirm')
       expect(okButton.textContent).to.eq("Ok")
 
-    it "displays the confirmation with custom ok button", inject ( notificationDialog) ->
+    it "displays the confirmation with custom ok button", inject ( NotificationDialogServ) ->
       # When
-      notificationDialog.open({message: "Test message for notification!", okLabel: "testOK"})
+      NotificationDialogServ.open({message: "Test message for notification!", okLabel: "testOK"})
 
       # Then
       text = document.querySelector('.sweet-alert h2')

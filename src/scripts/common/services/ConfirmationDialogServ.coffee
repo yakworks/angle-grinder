@@ -9,7 +9,7 @@ class ConfirmationDialogCtrl extends BaseCtrl
     @defer.resolve(confirmed)
 
 
-app.service "confirmationDialog", [
+app.service "ConfirmationDialogServ", [
   "$log", "$q", ($log, $q) ->
 
     # Open the confirmation dialog

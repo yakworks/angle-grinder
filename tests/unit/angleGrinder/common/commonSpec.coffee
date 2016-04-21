@@ -51,33 +51,33 @@ describe "module: angleGrinder.common", ->
         it "returns false for `#{str}`", inject (isEmpty) ->
           expect(isEmpty(str)).to.be.false
 
-  describe "service: isFalsy", ->
+  describe "service: IsFalsyServ", ->
 
-    isFalsy = null
+    IsFalsyServ = null
 
-    beforeEach inject (_isFalsy_) -> isFalsy = _isFalsy_
+    beforeEach inject (_IsFalsyServ_) -> IsFalsyServ = _IsFalsyServ_
 
     it "returns true for `NaN`", ->
-      expect(isFalsy(NaN)).to.be.true
+      expect(IsFalsyServ(NaN)).to.be.true
 
     it "returns true empty strings", ->
-      expect(isFalsy("")).to.be.true
-      expect(isFalsy("foo")).to.be.false
+      expect(IsFalsyServ("")).to.be.true
+      expect(IsFalsyServ("foo")).to.be.false
 
     it "returns true for `null`", ->
-      expect(isFalsy(null)).to.be.true
+      expect(IsFalsyServ(null)).to.be.true
 
     it "returns true for `undefined`", ->
-      expect(isFalsy(undefined)).to.be.true
+      expect(IsFalsyServ(undefined)).to.be.true
 
     it "returns true for `false`", ->
-      expect(isFalsy(false)).to.be.true
+      expect(IsFalsyServ(false)).to.be.true
 
     it "returns false for other value", ->
-      expect(isFalsy(true)).to.be.false
-      expect(isFalsy(0)).to.be.false
-      expect(isFalsy(0.0)).to.be.false
-      expect(isFalsy(123)).to.be.false
+      expect(IsFalsyServ(true)).to.be.false
+      expect(IsFalsyServ(0)).to.be.false
+      expect(IsFalsyServ(0.0)).to.be.false
+      expect(IsFalsyServ(123)).to.be.false
 
   describe "service: camelize", ->
 

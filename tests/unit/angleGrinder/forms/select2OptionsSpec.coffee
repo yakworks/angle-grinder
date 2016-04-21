@@ -1,24 +1,24 @@
-describe "module: angleGrinder.forms, service: select2Options", ->
+describe "module: angleGrinder.forms, service: Select2Options", ->
 
   beforeEach module "angleGrinder.forms"
 
-  it "is defined", inject (select2Options) ->
-    expect(select2Options).to.not.be.undefined
+  it "is defined", inject (Select2Options) ->
+    expect(Select2Options).to.not.be.undefined
 
   options = null
-  beforeEach inject (select2Options) -> options = select2Options()
+  beforeEach inject (Select2Options) -> options = Select2Options()
 
   it "builds default options", ->
     expect(options).to.have.deep.property "width", "element"
     expect(options).to.have.deep.property "initSelection", angular.noop
     expect(options).to.have.deep.property "ajax.dataType", "json"
 
-  it "can override default options", inject (select2Options) ->
-    expect(select2Options(width: "100px")).to.have.property "width", "100px"
-    expect(select2Options()).to.have.property "width", "element"
+  it "can override default options", inject (Select2Options) ->
+    expect(Select2Options(width: "100px")).to.have.property "width", "100px"
+    expect(Select2Options()).to.have.property "width", "element"
 
-    expect(select2Options(initSelection: false)).to.have.property "initSelection", false
-    expect(select2Options()).to.have.property "initSelection", angular.noop
+    expect(Select2Options(initSelection: false)).to.have.property "initSelection", false
+    expect(Select2Options()).to.have.property "initSelection", angular.noop
 
   describe "#formatResult", ->
 
@@ -59,9 +59,9 @@ describe "module: angleGrinder.forms, service: select2Options", ->
 
       describe "when `dataOptions` is given", ->
 
-        it "overrides default options for `ajax.data`", inject (select2Options) ->
+        it "overrides default options for `ajax.data`", inject (Select2Options) ->
           dataOptions = { sort: "name", order: "desc", foo: "bar" }
-          data = select2Options({}, dataOptions).ajax.data("foo", 2)
+          data = Select2Options({}, dataOptions).ajax.data("foo", 2)
 
           expect(data).to.have.property "sort", "name"
           expect(data).to.have.property "order", "desc"

@@ -1,6 +1,6 @@
 app = angular.module "angleGrinder.common"
 
-app.service "deepDiff", ["deepPick", (deepPick)->
+app.service "DeepDiffServ", ["DeepPickServ", (DeepPickServ)->
   map = (oldVal, newVal, allowed, reqFields) ->
     diff = {}
 
@@ -8,13 +8,13 @@ app.service "deepDiff", ["deepPick", (deepPick)->
       args = []
       args.push(newVal)
       args = args.concat reqFields
-      diff = deepPick.apply(this, args)
+      diff = DeepPickServ.apply(this, args)
 
     if allowed? and allowed.length > 0
       args = []
       args.push(newVal)
       args = args.concat allowed
-      newVal = deepPick.apply(this, args)
+      newVal = DeepPickServ.apply(this, args)
 
     _.forEach(newVal, (v, k)->
       if (oldVal? and _.isEqual(v, oldVal[k])) or k is "$cachedData"

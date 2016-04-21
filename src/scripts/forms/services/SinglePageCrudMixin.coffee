@@ -1,13 +1,13 @@
 mixin = angular.module("angleGrinder.forms")
 
-mixin.factory "singlePageCrudCtrlMixin", [
-  "$log", "$location", "dialogCrudCtrlMixin",
-  ($log, $location, dialogCrudCtrlMixin) ->
+mixin.factory "SinglePageCrudCtrlMixin", [
+  "$log", "$location", "DialogCrudCtrlMixin",
+  ($log, $location, DialogCrudCtrlMixin) ->
     ($scope, args = {}) ->
       {resourcePath, gridName, Resource} = args
 
       # include `deleteRecord` method
-      dialogCrudCtrlMixin $scope,
+      DialogCrudCtrlMixin $scope,
         gridName: gridName
         Resource: Resource
 

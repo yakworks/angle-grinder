@@ -1,7 +1,7 @@
 class ListCtrl extends BaseCtrl
 
   @register "exampleApp", "users.ListCtrl"
-  @inject "$scope", "usersGrid", "Users", "massUpdateMixin", "singlePageCrudCtrlMixin"
+  @inject "$scope", "usersGrid", "Users", "MassUpdateMixin", "SinglePageCrudCtrlMixin"
 
   initialize: ->
     @$scope.showGrid = true
@@ -9,12 +9,12 @@ class ListCtrl extends BaseCtrl
     # initialize the grid
     @$scope.gridOptions = @usersGrid()
 
-    @singlePageCrudCtrlMixin @$scope,
+    @SinglePageCrudCtrlMixin @$scope,
       Resource: @Users
       resourcePath: "/users"
       gridName: "usersGrid"
 
-    @massUpdateMixin @$scope,
+    @MassUpdateMixin @$scope,
       templateUrl: "/templates/users/massUpdateForm.html"
       controller: "users.MassUpdateFormCtrl"
       gridName: "usersGrid"
