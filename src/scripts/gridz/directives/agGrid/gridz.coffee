@@ -148,6 +148,9 @@ class Gridz
     options = @options
 
     actionMenu = ""
+    if options.actionPopup.resetSelection? and options.actionPopup.resetSelection isnt false
+      options.actionPopup.resetSelection = true
+
     if options.actionPopup.menuList
       actionMenu = options.actionPopup.menuList
     else
@@ -183,8 +186,9 @@ class Gridz
     id = $(clickoverEl.$element, @gridEl.rows).parents("tr:first").attr("id")
 
     @gridEl.data "actionRowId", id
-    @gridEl.jqGrid "resetSelection"
-    @gridEl.jqGrid "setSelection", id
+    if @options.actionPopup.resetSelection
+      @gridEl.jqGrid "resetSelection"
+      @gridEl.jqGrid "setSelection", id
 
     menuEl = $("##{self.gboxId} .dropdown-menu")
 
