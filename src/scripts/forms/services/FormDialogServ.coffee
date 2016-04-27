@@ -35,6 +35,7 @@ class FormDialogCtrl extends BaseCtrl
     # assign the given resource to the scope under its name
     resourceName = if angular.isFunction(@record.resourceName) then @record.resourceName() else "record"
     @$scope[resourceName] = @record
+    if @$scope.dialogOptions.exposeRecordToScope then @$scope.$parent[resourceName] = @record
 
     @expose @$scope, "closeDialog", "save", "delete"
 
