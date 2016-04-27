@@ -8,12 +8,14 @@ forms.directive "agSubmit", [
 
     compile: (element, attrs) ->
       onSubmit = $parse(attrs.agSubmit)
-
+      forms = []
       markAsSubmitted = (form) ->
         form.$submitted = true
+        # to avoid situation with too much recursion, check if the form is already processed, see below
+        forms.push(form)
 
         # iterate through  all nested forms and mark them as submitted
-        nestedForms = _.filter(_.values(form), (input) -> input instanceof form.constructor)
+        nestedForms = _.filter(_.values(form), (input) -> (input instanceof form.constructor) and form not in forms)
         markAsSubmitted(nestedForm) for nestedForm in nestedForms
 
       (scope, element, attrs, formCtrl) ->
