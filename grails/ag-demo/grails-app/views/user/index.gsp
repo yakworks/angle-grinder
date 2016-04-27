@@ -75,9 +75,11 @@
             </div>
         </div>
 
-        <div ag-grid="gridOptions"
-             ag-grid-name="usersGrid"></div>
-    </div>
+    <div ag-grid="gridOptions"
+         ag-grid-name="usersGrid"></div>
+
+    <legend>UI-grid</legend>
+    <div> <div id="grid1" ui-grid="gridOptionsUI" ui-grid-resize-columns ui-grid-pagination ui-grid-edit class="grid"></div></div>
 </div>
 
 </body>

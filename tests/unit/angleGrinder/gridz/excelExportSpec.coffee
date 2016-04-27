@@ -100,7 +100,7 @@ describe "module: angleGrinder.gridz", ->
         location: {}
         navigator: {userAgent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1847.116 Safari/537.36'}
 
-      $provide.decorator "notificationDialog", ($delegate) ->
+      $provide.decorator "NotificationDialogServ", ($delegate) ->
         sinon.spy($delegate, "open")
         return $delegate
 
@@ -131,13 +131,13 @@ describe "module: angleGrinder.gridz", ->
       describe "when no rows are selected", ->
         before -> selectedRowIds = []
 
-        it "displays the notification", inject (notificationDialog) ->
+        it "displays the notification", inject (NotificationDialogServ) ->
           # When
           element.click()
 
           # Then
-          expect(notificationDialog.open).to.be.called
-          expect(notificationDialog.open).to.be.calledWith("Please select at least one row.")
+          expect(NotificationDialogServ.open).to.be.called
+          expect(NotificationDialogServ.open).to.be.calledWith("Please select at least one row.")
 
      ### describe "when at least one row is selected", ->
         before -> selectedRowIds = [1]
@@ -149,10 +149,10 @@ describe "module: angleGrinder.gridz", ->
           # Then
           expect(document.getElementsByTagName("a")[0].href).to.eq "foo"
 
-        it "does not display notification", inject (notificationDialog) ->
+        it "does not display notification", inject (NotificationDialogServ) ->
           # When
           element.click()
 
           # Then
-          expect(notificationDialog.open).to.not.be.called
+          expect(NotificationDialogServ.open).to.not.be.called
 ###

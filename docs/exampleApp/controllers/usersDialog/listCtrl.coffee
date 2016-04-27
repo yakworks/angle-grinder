@@ -1,7 +1,7 @@
 class IndexCtrl extends BaseCtrl
 
   @register "exampleApp", "usersDialog.ListCtrl"
-  @inject "$scope", "usersDialogGrid", "Users", "dialogCrudCtrlMixin", "massUpdateMixin"
+  @inject "$scope", "usersDialogGrid", "Users", "DialogCrudCtrlMixin", "MassUpdateMixin"
 
   initialize: ->
     # Initially hide the search form
@@ -14,12 +14,12 @@ class IndexCtrl extends BaseCtrl
     # initialize the grid
     @$scope.gridOptions = @usersDialogGrid()
 
-    @dialogCrudCtrlMixin @$scope,
+    @DialogCrudCtrlMixin @$scope,
       Resource: @Users
       gridName: "usersGrid"
       templateUrl: "templates/usersDialog/form.html"
 
-    @massUpdateMixin @$scope,
+    @MassUpdateMixin @$scope,
       templateUrl: "/templates/users/massUpdateForm.html"
       controller: "users.MassUpdateFormCtrl"
       gridName: "usersGrid"

@@ -12,6 +12,7 @@ module.exports =
     "components/bower/angular-sanitize/angular-sanitize.js"
     "components/bower/angular-mocks/angular-mocks.js"
     "components/bower/angular-scroll/angular-scroll.js"
+    "components/bower/angular-ui-grid/ui-grid.js"
 
     "grails/ag-plugin/web-app/angleGrinder/js/application.js"
     "grails/ag-plugin/web-app/angleGrinder/js/modules/resources.js"
@@ -25,6 +26,8 @@ module.exports =
     "components/bower/bower-angular-placeholders/angular-placeholders.js"
     "components/bower/moment/moment.js"
     "components/bower/eonasdan-bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js"
+    "components/bower/toastr/toastr.js"
+    "components/bower/sweetalert/dist/sweetalert-dev.js"
 
     "grails/ag-plugin/web-app/angleGrinder/js/application.js"
     "grails/ag-plugin/web-app/angleGrinder/js/modules/resources.js"
@@ -32,13 +35,11 @@ module.exports =
     "src/scripts/gridz/gridz.coffee"
     "src/scripts/utils/baseCtrl.coffee"
     "src/scripts/utils/alerts.coffee"
-    "src/scripts/utils/spinner.coffee"
 
     "docs/templates/**/*.html"
 
     "src/scripts/common/common.coffee"
     "src/scripts/forms/forms.coffee"
-    "src/scripts/gridz/agGridz.coffee"
 
     "src/scripts/common/**/*.coffee"
     "src/scripts/forms/**/*.coffee"

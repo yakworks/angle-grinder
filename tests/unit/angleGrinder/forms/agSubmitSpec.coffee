@@ -150,3 +150,33 @@ describe "Directive: agSubmit", ->
     it "does not call the given method", ->
       clickSubmit()
       expect($scope.save).to.not.have.been.called
+
+  describe "check nested form", ->
+    beforeEach inject ($compile) ->
+
+      $scope.item = name: "", resourceName: -> "user"
+      $scope.save = sinon.spy()
+
+      element2 = angular.element """
+          <form name="testForm" ag-submit="save(item)">
+            <fieldset ng-form="test2Form">
+              <input type="text" name="name" ng-model="item.name" ng-required="true"/>
+            </fieldset>
+            <button type="submit">Save</button>
+      </form>
+        """
+      element2 = $compile(element2)($scope)
+
+      clickSubmit2 = ->
+        element2.find("button[type=submit]").click()
+
+      describe "when the forms ar valid", ->
+
+        beforeEach -> $scope.$apply -> $scope.item.name = "foo"
+
+        it "marks the forms as submitted", ->
+          expect($scope.testForm.$submitted).to.be.false
+          expect($scope.test2Form.$submitted).to.be.false
+          clickSubmit2()
+          expect($scope.testForm.$submitted).to.be.true
+          expect($scope.test2Form.$submitted).to.be.true

@@ -10,26 +10,26 @@ app.provider "agDateFilter", ->
     defaultFormat = format
 
   $get: [
-    "$filter", "isFalsy",
-    ($filter, isFalsy) ->
+    "$filter", "IsFalsyServ",
+    ($filter, IsFalsyServ) ->
 
       (date, useTimeZone = false, format = defaultFormat) ->
-        return "" if isFalsy(date)
+        return "" if IsFalsyServ(date)
 
         moment(date).format(format)
   ]
 
 #removes timezone and just uses year,month, day
-app.filter 'localDate', ["isFalsy", "agDate", (isFalsy, agDate) ->
+app.filter 'localDate', ["IsFalsyServ", "agDate", (IsFalsyServ, agDate) ->
   (input) ->
-    return "" if isFalsy(input)
+    return "" if IsFalsyServ(input)
     #ignores the time part
     moment(input).format(agDate.getViewFormat())
 ]
 
 #date with time and no timezone formated to the minutes
-app.filter 'localDateTime', ["isFalsy", (isFalsy) ->
+app.filter 'localDateTime', ["IsFalsyServ", (IsFalsyServ) ->
   (input) ->
-    return "" if isFalsy(input)
+    return "" if IsFalsyServ(input)
     moment(input).format('MM/DD/YYYY h:mma')
 ]

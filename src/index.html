@@ -34,6 +34,8 @@
     <script type="text/javascript" src="components/bootstrapx-clickover/js/bootstrapx-clickover.js"></script>
     <script type="text/javascript" src="components/select2/js/select2.js"></script>
     <script type="text/javascript" src="components/eonasdan-bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+    <script type="text/javascript" src="components/toastr/js/toastr.js"></script>
+    <script type="text/javascript" src="components/sweetalert/js/sweetalert-dev.js"></script>
   <!-- endbuild -->
 
   <!-- build:css(build) styles/bootstrap.min.css -->
@@ -46,6 +48,8 @@
     <!-- Extras for tool bar and other -->
     <link rel="stylesheet" href="components/jquery-ui-bootstrap/css/jquery-ui-1.10.1.custom.css"/>
     <link rel="stylesheet" href="components/eonasdan-bootstrap-datetimepicker/css/bootstrap-datetimepicker.css"/>
+    <link rel="stylesheet" href="components/toastr/css/toastr.css"/>
+    <link rel="stylesheet" href="components/sweetalert/css/sweetalert.css"/>
 
     <link rel="stylesheet" href="components/select2/css/select2.css"/>
     <link rel="stylesheet" href="components/select2-bootstrap-css/css/select2-bootstrap.css"/>
@@ -115,96 +119,96 @@
     <script type="text/javascript" src="components/jqgrid/js/grid.grouping.js"></script>
     <script type="text/javascript" src="components/jqgrid/js/jquery.fmatter.js"></script>
     <script type="text/javascript" src="scripts/gridz/gridz.js"></script>
+    <script type="text/javascript" src="components/angular-ui-grid/js/ui-grid.js"></script>
   <!-- endbuild -->
 
   <!-- build:js(build) scripts/angleGrinder.common.min.js -->
     <script type="text/javascript" src="scripts/common/common.js"></script>
-    <script type="text/javascript" src="scripts/common/agBackButton.js"></script>
+    <script type="text/javascript" src="scripts/common/directives/agBackButton.js"></script>
     <script type="text/javascript" src="scripts/common/agCurrencyFilter.js"></script>
     <script type="text/javascript" src="scripts/common/agDateFilter.js"></script>
     <script type="text/javascript" src="scripts/common/agDateTimeFilter.js"></script>
     <script type="text/javascript" src="scripts/common/checkMarkFilter.js"></script>
-    <script type="text/javascript" src="scripts/common/deepPick.js"></script>
+    <script type="text/javascript" src="scripts/common/services/DeepPickServ.js"></script>
     <script type="text/javascript" src="scripts/common/newLinesFilter.js"></script>
     <script type="text/javascript" src="scripts/common/newLinesFilter.js"></script>
     <script type="text/javascript" src="scripts/common/pathWithContext.js"></script>
-    <script type="text/javascript" src="scripts/common/confirmationDialog.js"></script>
-    <script type="text/javascript" src="scripts/common/notificationDialog.js"></script>
-    <script type="text/javascript" src="scripts/common/addEmptyOption.js"></script>
-    <script type="text/javascript" src="scripts/common/ieSelectFix.js"></script>
-    <script type="text/javascript" src="scripts/common/agFileUpload.js"></script>
-    <script type="text/javascript" src="scripts/common/embeddedJsonServ.js"></script>
-    <script type="text/javascript" src="scripts/common/resourceTemplateServ.js"></script>
-    <script type="text/javascript" src="scripts/common/sideMenu.js"></script>
-    <script type="text/javascript" src="scripts/common/restrictResource.js"></script>
-    <script type="text/javascript" src="scripts/common/deepDiff.js"></script>
+    <script type="text/javascript" src="scripts/common/services/ConfirmationDialogServ.js"></script>
+    <script type="text/javascript" src="scripts/common/services/NotificationDialogServ.js"></script>
+    <script type="text/javascript" src="scripts/common/directives/addEmptyOption.js"></script>
+    <script type="text/javascript" src="scripts/common/directives/ieSelectFix.js"></script>
+    <script type="text/javascript" src="scripts/common/directives/agFileUpload.js"></script>
+    <script type="text/javascript" src="scripts/common/services/EmbeddedJsonServ.js"></script>
+    <script type="text/javascript" src="scripts/common/services/ResourceTemplateServ.js"></script>
+    <script type="text/javascript" src="scripts/common/directives/sideMenu.js"></script>
+    <script type="text/javascript" src="scripts/common/services/RestrictResourceServ.js"></script>
+    <script type="text/javascript" src="scripts/common/services/DeepDiffServ.js"></script>
+    <script type="text/javascript" src="scripts/common/services/IsFalsyServ.js"></script>
+    <script type="text/javascript" src="scripts/common/directives/agSpinner.js"></script>
+    <script type="text/javascript" src="scripts/common/directives/menuItem.js"></script>
   <!-- endbuild -->
 
   <!-- build:js(build) scripts/angleGrinder.gridz.min.js -->
-    <script type="text/javascript" src="scripts/gridz/agGridz.js"></script>
-    <script type="text/javascript" src="scripts/gridz/agGridCtrl.js"></script>
-    <script type="text/javascript" src="scripts/gridz/agGridDataLoader.js"></script>
-    <script type="text/javascript" src="scripts/gridz/agGridPlaceholder.js"></script>
-    <script type="text/javascript" src="scripts/gridz/agGridQuickSearch.js"></script>
-    <script type="text/javascript" src="scripts/gridz/agReloadGrid.js"></script>
-    <script type="text/javascript" src="scripts/gridz/excelExport.js"></script>
-    <script type="text/javascript" src="scripts/gridz/actionPopupHandler.js"></script>
-    <script type="text/javascript" src="scripts/gridz/flatten.js"></script>
-    <script type="text/javascript" src="scripts/gridz/search.js"></script>
-    <script type="text/javascript" src="scripts/gridz/select2.js"></script>
+    <script type="text/javascript" src="scripts/gridz/directives/agGrid/agGridz.js"></script>
+    <script type="text/javascript" src="scripts/gridz/directives/agGrid/agGridCtrl.js"></script>
+    <script type="text/javascript" src="scripts/gridz/directives/agGrid/gridz.js"></script>
+    <script type="text/javascript" src="scripts/gridz/directives/agGridDataLoader.js"></script>
+    <script type="text/javascript" src="scripts/gridz/directives/agGridPlaceholder.js"></script>
+    <script type="text/javascript" src="scripts/gridz/directives/agGridQuickSearch.js"></script>
+    <script type="text/javascript" src="scripts/gridz/directives/agReloadGrid.js"></script>
+    <script type="text/javascript" src="scripts/gridz/directives/agGridXlsExport.js"></script>
+    <script type="text/javascript" src="scripts/gridz/services/ExcelExportServ.js"></script>
+    <script type="text/javascript" src="scripts/gridz/services/ActionPopupHandler.js"></script>
+    <script type="text/javascript" src="scripts/gridz/services/FlattenServ.js"></script>
+    <script type="text/javascript" src="scripts/gridz/directives/search.js"></script>
     <script type="text/javascript" src="scripts/gridz/gridPagerCtrlMixin.js"></script>
-    <script type="text/javascript" src="scripts/gridz/applyFormatters.js"></script>
-    <script type="text/javascript" src="scripts/gridz/gridLinkServ.js"></script>
-    <script type="text/javascript" src="scripts/gridz/gridCrud.js"></script>
-    <script type="text/javascript" src="scripts/gridz/gridCrudCtrl.js"></script>
-    <script type="text/javascript" src="scripts/gridz/agNewButton.js"></script>
+    <script type="text/javascript" src="scripts/gridz/services/ApplyFormattersServ.js"></script>
+    <script type="text/javascript" src="scripts/gridz/services/GridLinkServ.js"></script>
+    <script type="text/javascript" src="scripts/gridz/directives/gridCrud.js"></script>
+    <script type="text/javascript" src="scripts/gridz/directives/agNewButton.js"></script>
   <!-- endbuild -->
 
   <!-- build:js(build) scripts/angleGrinder.forms.min.js -->
     <script type="text/javascript" src="scripts/forms/forms.js"></script>
-    <script type="text/javascript" src="scripts/forms/editableCustom.js"></script>
-    <script type="text/javascript" src="scripts/forms/editableDatepicker.js"></script>
-    <script type="text/javascript" src="scripts/forms/editableFormButtons.js"></script>
-    <script type="text/javascript" src="scripts/forms/editableSelect2.js"></script>
-    <script type="text/javascript" src="scripts/forms/editableDirectiveFactory.js"></script>
-    <script type="text/javascript" src="scripts/forms/agDeleteButton.js"></script>
-    <script type="text/javascript" src="scripts/forms/agSubmit.js"></script>
-    <script type="text/javascript" src="scripts/forms/agSubmitButton.js"></script>
-    <script type="text/javascript" src="scripts/forms/autofillPrevent.js"></script>
-    <script type="text/javascript" src="scripts/forms/datepicker.js"></script>
-    <script type="text/javascript" src="scripts/forms/buttons.js"></script>
-    <script type="text/javascript" src="scripts/forms/validations.js"></script>
-    <script type="text/javascript" src="scripts/forms/focus.js"></script>
-    <script type="text/javascript" src="scripts/forms/massUpdateHandler.js"></script>
-    <script type="text/javascript" src="scripts/forms/formDialog.js"></script>
-    <script type="text/javascript" src="scripts/forms/formDialogCtrl.js"></script>
-    <script type="text/javascript" src="scripts/forms/tabs.js"></script>
-    <script type="text/javascript" src="scripts/forms/panels.js"></script>
-    <script type="text/javascript" src="scripts/forms/select2Options.js"></script>
-    <script type="text/javascript" src="scripts/forms/dialogCrudCtrlMixin.js"></script>
-    <script type="text/javascript" src="scripts/forms/singlePageCrudMixin.js"></script>
-    <script type="text/javascript" src="scripts/forms/massUpdateFormCtrlMixin.js"></script>
-    <script type="text/javascript" src="scripts/forms/massUpdateMixin.js"></script>
-    <script type="text/javascript" src="scripts/forms/maxLines.js"></script>
-    <script type="text/javascript" src="scripts/forms/number.js"></script>
-    <script type="text/javascript" src="scripts/forms/editablePanelHeading.js"></script>
-    <script type="text/javascript" src="scripts/forms/panelFormMixin.js"></script>
-    <script type="text/javascript" src="scripts/forms/agSelectBind.js"></script>
-    <script type="text/javascript" src="scripts/forms/agBind.js"></script>
+    <script type="text/javascript" src="scripts/forms/directives/editableCustom.js"></script>
+    <script type="text/javascript" src="scripts/forms/directives/editableDatepicker.js"></script>
+    <script type="text/javascript" src="scripts/forms/directives/editableFormButtons.js"></script>
+    <script type="text/javascript" src="scripts/forms/directives/editableSelect2.js"></script>
+    <script type="text/javascript" src="scripts/forms/directives/editableDirectiveFactory.js"></script>
+    <script type="text/javascript" src="scripts/forms/directives/agDeleteButton.js"></script>
+    <script type="text/javascript" src="scripts/forms/directives/agSubmit.js"></script>
+    <script type="text/javascript" src="scripts/forms/directives/agSubmitButton.js"></script>
+    <script type="text/javascript" src="scripts/forms/directives/autofillPrevent.js"></script>
+    <script type="text/javascript" src="scripts/forms/directives/datepicker.js"></script>
+    <script type="text/javascript" src="scripts/forms/directives/buttons.js"></script>
+    <script type="text/javascript" src="scripts/forms/directives/validations.js"></script>
+    <script type="text/javascript" src="scripts/forms/directives/focus.js"></script>
+    <script type="text/javascript" src="scripts/forms/services/MassUpdateHandler.js"></script>
+    <script type="text/javascript" src="scripts/forms/services/FormDialogServ.js"></script>
+    <script type="text/javascript" src="scripts/forms/directives/agTabs.js"></script>
+    <script type="text/javascript" src="scripts/forms/directives/agPanels.js"></script>
+    <script type="text/javascript" src="scripts/forms/services/Select2Options.js"></script>
+    <script type="text/javascript" src="scripts/forms/services/DialogCrudCtrlMixin.js"></script>
+    <script type="text/javascript" src="scripts/forms/services/SinglePageCrudMixin.js"></script>
+    <script type="text/javascript" src="scripts/forms/services/MassUpdateMixin.js"></script>
+    <script type="text/javascript" src="scripts/forms/directives/agMaxLines.js"></script>
+    <script type="text/javascript" src="scripts/forms/directives/agNumber.js"></script>
+    <script type="text/javascript" src="scripts/forms/directives/editablePanelHeading.js"></script>
+    <script type="text/javascript" src="scripts/forms/services/PanelFormMixin.js"></script>
+    <script type="text/javascript" src="scripts/forms/directives/agSelectBind.js"></script>
+    <script type="text/javascript" src="scripts/forms/directives/agBind.js"></script>
+    <script type="text/javascript" src="scripts/forms/directives/agSelect.js"></script>
   <!-- endbuild -->
 
   <!-- build:js(build) scripts/angleGrinder.alerts.min.js -->
     <script type="text/javascript" src="scripts/utils/alerts.js"></script>
   <!-- endbuild -->
 
-  <!-- build:js(build) scripts/angleGrinder.spinner.min.js -->
-    <script type="text/javascript" src="scripts/utils/spinner.js"></script>
-  <!-- endbuild -->
-
   <!-- build:css(build) styles/gridz.min.css -->
     <!-- jqGrid -->
     <link rel="stylesheet" href="components/jqgrid/css/ui.jqgrid.css"/>
     <link rel="stylesheet" href="components/jqgrid/css/plugins/ui.multiselect.css"/>
+    <link rel="stylesheet" href="components/angular-ui-grid/css/ui-grid.css"/>
 
     <link rel="stylesheet" href="styles/gridz.css"/>
   <!-- endbuild -->

@@ -78,7 +78,7 @@ class BeanPathToolsSpec extends Specification {
         'left.foo'              | [left: [foo: '1']]
         'right.left.value'      | [right: [left: [value: 2]]]
         'right.right.bar'       | [right: [right: [bar: 4]]]
-        'right.right.*'         | [right: [right: [bar: 4, foo: '3', id: 5]]]
+        'right.right.*'         | [right: [right: [bar: 4, foo: '3', id: 5, baz:null]]]
         'right.*'               | [right: [id: 6, value: 0]]
     }
 
@@ -95,7 +95,7 @@ class BeanPathToolsSpec extends Specification {
         where:
         path                    | exp
         'value'                 | [value: 10]
-        'fooValues.*'           | [fooValues: [[id: 1, bar: null, foo: 'val 1'], [id: 2, bar: null, foo: 'val 2']]]
+        'fooValues.*'           | [fooValues: [[id: 1, bar: null, foo: 'val 1', baz:null], [id: 2, bar: null, foo: 'val 2', baz: null]]]
     }
 
 
