@@ -251,23 +251,27 @@ class AgGridCtrl extends BaseCtrl
 
     rowEl.fadeIn "fast", -> complete()
 
-  addClass: (id, clazz) ->
+  addClass: (id, clazz, animation = true) ->
     rowEl = $(@getGridEl()[0].rows.namedItem(id))
 
-    rowEl.delay(250).fadeOut "medium", ->
-      if not rowEl.hasClass(clazz)
+    if not rowEl.hasClass(clazz)
+      if animation
+        rowEl.delay(250).fadeOut "medium", ->
+          rowEl.addClass(clazz)
+        rowEl.fadeIn "fast", -> angular.noop()
+      else
         rowEl.addClass(clazz)
 
-    rowEl.fadeIn "fast", -> angular.noop()
-
-  removeClass: (id, clazz) ->
+  removeClass: (id, clazz, animation = true) ->
     rowEl = $(@getGridEl()[0].rows.namedItem(id))
 
-    rowEl.delay(250).fadeOut "medium", ->
-      if rowEl.hasClass(clazz)
+    if rowEl.hasClass(clazz)
+      if animation
+        rowEl.delay(250).fadeOut "medium", ->
+          rowEl.removeClass(clazz)
+        rowEl.fadeIn "fast", -> angular.noop()
+      else
         rowEl.removeClass(clazz)
-
-    rowEl.fadeIn "fast", -> angular.noop()
 
   highlightRow: (id) ->
     rowEl = $(@getGridEl()[0].rows.namedItem(id))
