@@ -1,8 +1,8 @@
 gridz = angular.module("angleGrinder.gridz")
 
 gridz.directive "agGrid", [
-  "$log", "$parse", "agGridDataLoader", "ActionPopupHandler", "pathWithContext", "camelize",
-  ($log, $parse, agGridDataLoader, ActionPopupHandler, pathWithContext, camelize) ->
+  "$timeout", "$log", "$parse", "agGridDataLoader", "ActionPopupHandler", "pathWithContext", "camelize"
+  ($timeout, $log, $parse, agGridDataLoader, ActionPopupHandler, pathWithContext, camelize) ->
 
     link = (scope, element, attrs, gridCtrl) ->
       # find grid placeholder
@@ -70,14 +70,25 @@ gridz.directive "agGrid", [
         $log.info "grid is not visible:", alias
 
         # Initialize the grid when the element will be visible
+        timeoutPromise = null
         unregister = scope.$watch ->
-          return unless element.is(":visible")
+          $timeout.cancel(timeoutPromise) #Cancel previous timeout
 
-          # initialize the grid on the visible element
-          initializeGrid()
+          #We have to do timeout because of this issue with uib-tab https://github.com/angular-ui/bootstrap/issues/3796
+          #Otherwise when tab is clicked and digest cycle ($watch) runs, the element.is(":visible") is still false, and hence grid is never initialized.
+          timeoutPromise = $timeout(()->
+            return unless element.is(":visible")
+            # initialize the grid on the visible element
+            initializeGrid()
 
-          # unregister the watcher to free resources
-          unregister()
+            # unregister the watcher to free resources
+            unregister()
+
+          , 100, false) #Here false means don't fire new digest cycle, otherwise $watch will be called infinitely.
+
+          return false
+
+
 
     restrict: "A"
 
