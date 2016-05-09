@@ -24,6 +24,7 @@ app.service "ConfirmationDialogServ", [
       # assign button labels
       options.cancelLabel ?= "Cancel"
       options.okLabel ?= "Ok"
+      options.closeOnConfirm ?= true
 
       $log.info "[ag] opening confirmation dialog", options
 
@@ -35,6 +36,7 @@ app.service "ConfirmationDialogServ", [
           showCancelButton: true,
           confirmButtonText: options.okLabel,
           cancelButtonText: options.cancelLabel
+          closeOnConfirm: options.closeOnConfirm
         }, (isConfirmed) ->
           if isConfirmed
             defer.resolve(
