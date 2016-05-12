@@ -50,6 +50,8 @@ bower install
 npm install
 ```
 
+if you get an error on OSX like ```Agreeing to the Xcode/iOS license requires admin privileges, please re-run as root via sudo.``` then run ```sudo xcodebuild -license```
+
 ### Build
 
 ```
