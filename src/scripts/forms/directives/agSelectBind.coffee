@@ -10,6 +10,7 @@ app.directive "agSelectBind", ["$filter", "$parse", ($filter, $parse) ->
 
     @getField = (objects, id, field, scope) ->
       objects = $parse(objects)(scope)
+      id = angular.fromJson(id) if (id % 1 is 0)
       element = $filter('filter')(objects, {id: id}, true)
       if (element? and (element.length > 0)) then element[0][field] else ""
 
