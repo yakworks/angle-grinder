@@ -169,6 +169,7 @@ class Gridz
                    """
 
     $(".jqg-row-action").clickover
+      global_close: true
       html: true
       content: actionMenu
       template: """
