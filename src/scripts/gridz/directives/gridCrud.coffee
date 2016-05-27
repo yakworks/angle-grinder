@@ -1,6 +1,6 @@
 app = angular.module "angleGrinder.gridz"
 # Uses to show edit panel for grid row. Supports dbl click on grid cell.
-app.directive "gridCrud", ["$controller", ($controller) ->
+app.directive "gridCrud", ["$controller", "$timeout", ($controller, $timeout) ->
   {
     restrict: "A"
     replace: true
@@ -24,7 +24,9 @@ app.directive "gridCrud", ["$controller", ($controller) ->
         () ->
           scope.showForm or false
         (newVal) ->
-          if newVal then scope.setFocus(element)
+          if newVal
+            $timeout ->
+              scope.setFocus(element)
       )
   }
 ]
@@ -88,14 +90,16 @@ class @GridCrudCtrl
       hideForm()
 
     $scope.dblClick = (rowid, iRow, iCol, e) ->
-      $scope.columnNameForFocus = $window["#{e.currentTarget.id}Options"].colModel[iCol-1]["name"]
+      $scope.columnNameForFocus = $scope["#{e.currentTarget.id}"].getGridEl().getGridParam().colModel[iCol]["name"]
       editAction(rowid)
 
     $scope.setFocus = (element) ->
       if $scope.columnNameForFocus # check if variable exists
         inputs = element.find("input")
         for input in inputs
-          if input.name.toUpperCase() is $scope.columnNameForFocus.toUpperCase() then input.focus()
+          input.focus() if input.name.toUpperCase() is $scope.columnNameForFocus.toUpperCase()
+
+
 
     $parse("edit#{actionSuffix}").assign($scope.$parent, editAction)
     $parse("create#{actionSuffix}").assign($scope.$parent, createAction)
