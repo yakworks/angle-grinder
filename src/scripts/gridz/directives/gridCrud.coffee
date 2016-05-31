@@ -5,12 +5,13 @@ app.directive "gridCrud", ["$controller", "$timeout", ($controller, $timeout) ->
     restrict: "A"
     replace: true
     scope: true
-    template: '<div ng-show="showForm"><ng-include src="template | withContext"></ng-include></div>'
+    template: '<div  ng-show="showForm"><ng-include ng-if="!isModal" src="template | withContext"></ng-include></div>'
     link: (scope, element, attrs) ->
       clicks = () ->
         gridEl = angular.element(document.querySelectorAll("[ag-grid-name=#{attrs.gridName}]")).find("table.gridz")
         gridEl.jqGrid('setGridParam', ondblClickRow: scope.dblClick)
       attrs.$observe("gridCrud", clicks)
+      scope.isModal = attrs.isModal is true or attrs.isModal is 'true'
 
       ctrlLocals =
         $scope: scope
@@ -33,8 +34,8 @@ app.directive "gridCrud", ["$controller", "$timeout", ($controller, $timeout) ->
 
 class @GridCrudCtrl
   #Controller for gridCrud directive
-  @$inject = ["$scope", "$element", "$attrs",  "$parse", "$log", "resourceBuilder", "$window", "restrictResource"]
-  constructor: ($scope, $element, $attrs,  $parse, $log, resourceBuilder, $window, restrictResource) ->
+  @$inject = ["$scope", "$element", "$attrs",  "$parse", "$log", "resourceBuilder", "$window", "restrictResource", "$uibModal", "pathWithContext", "$timeout"]
+  constructor: ($scope, $element, $attrs,  $parse, $log, resourceBuilder, $window, restrictResource, $uibModal, pathWithContext, $timeout) ->
 
     Resource = null
     beforeSave = null
@@ -53,9 +54,28 @@ class @GridCrudCtrl
 
     allowedFields = $parse($attrs.allowedFields)($scope)
 
-    hideForm = () -> $scope.showForm = false
+    hideForm = () ->
+      if $scope.isModal
+        $scope.modal.close()
+      else
+        $scope.showForm = false
 
-    showForm = -> $scope.showForm = true
+    showForm = ->
+      if $scope.isModal
+        $scope.modal = $uibModal.open(
+          templateUrl: pathWithContext($scope.template)
+          keyboard: false # do not close the dialog with ESC key
+          backdrop: "static" # do not close on click outside of the dialog
+          scope: $scope
+          windowClass: "grid-crud-modal"
+        )
+        $scope.modal.rendered.then ->
+          $timeout ->
+            $scope.setFocus(angular.element angular.element(".grid-crud-modal")[0])
+          ,
+            500
+      else
+        $scope.showForm = true
 
     editAction = (id) ->
       $log.info "[gridCrud] Edit #{resourceName} : #{id}"
