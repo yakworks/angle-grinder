@@ -117,7 +117,9 @@ class @GridCrudCtrl
       if $scope.columnNameForFocus # check if variable exists
         inputs = element.find("input")
         for input in inputs
-          input.focus() if input.name.toUpperCase() is $scope.columnNameForFocus.toUpperCase()
+          if input.name.toUpperCase() is $scope.columnNameForFocus.toUpperCase()
+            input.focus()
+            input.select()
 
 
 
