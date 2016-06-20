@@ -1,8 +1,8 @@
 mixin = angular.module("angleGrinder.forms")
 
 mixin.factory "MassUpdateMixin", [
-  "$log", "$parse", "$uibModal", "pathWithContext",
-  ($log, $parse, $modal, pathWithContext) ->
+  "$log", "$parse", "$uibModal", "pathWithContext", "NotificationDialogServ",
+  ($log, $parse, $modal, pathWithContext, NotificationDialogServ) ->
     ($scope, args = {}) ->
       {gridName, templateUrl, controller, extraParams} = args
       controller ?= "MassUpdateFormCtrl"
@@ -13,7 +13,9 @@ mixin.factory "MassUpdateMixin", [
 
         # ..grab selected row ids
         selectedIds = grid.getSelectedRowIds()
-        return if selectedIds.length is 0
+        if selectedIds.length is 0
+          NotificationDialogServ.open("Please select at least one row.")
+          return
 
         $modal.open
 
