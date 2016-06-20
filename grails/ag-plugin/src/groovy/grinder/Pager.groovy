@@ -78,7 +78,7 @@ class Pager {
 
     }
 
-    def getJsonData() {
+    Map getJsonData() {
         //page is the page we are on, total is the total number f pages based on max per page setting
         //records is the total # of records we have
         //rows are the data
