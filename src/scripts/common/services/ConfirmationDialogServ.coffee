@@ -37,12 +37,7 @@ app.service "ConfirmationDialogServ", [
           confirmButtonText: options.okLabel,
           cancelButtonText: options.cancelLabel
           closeOnConfirm: options.closeOnConfirm
-        }, (isConfirmed) ->
-          if isConfirmed
-            defer.resolve(
-              options: -> options
-              defer: -> defer
-            )
+        }, (isConfirmed) -> defer.resolve isConfirmed
       )
 
       return defer.promise
