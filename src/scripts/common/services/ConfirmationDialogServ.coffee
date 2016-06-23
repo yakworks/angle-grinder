@@ -1,14 +1,5 @@
 app = angular.module("angleGrinder.common")
 
-class ConfirmationDialogCtrl extends BaseCtrl
-  @register app, 'ConfirmationDialogCtrl'
-  @inject "$scope", "$log", "options", "defer"
-
-  close: (confirmed) ->
-    @$log.info "[ag] closing confirmation dialog", confirmed
-    @defer.resolve(confirmed)
-
-
 app.service "ConfirmationDialogServ", [
   "$log", "$q", ($log, $q) ->
 
