@@ -47,6 +47,7 @@ gridz.service "gridData", [
       # remove unnecessary columns
       el.find("th##{gridId}_cb").remove()
       el.find("th##{gridId}_-row_action_col").remove()
+      el.find("tr[style*='display:none']").remove()
 
       # Strip unnecessary white spaces from the headers
       el.find("th").each (index, th) ->

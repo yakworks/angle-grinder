@@ -2,7 +2,7 @@
   "name": "angle-grinder",
   "version": "0.0.0",
   "dependencies": {
-    "jqgrid": "basejump/jqGrid#v4.4.4-tweaks",
+    "free-jqgrid": "^4.13.3",
     "jquery": "2.1.1",
     "bootstrap": "3.3.4",
     "bootstrapx-clickover": "git://github.com/lecar-red/bootstrapx-clickover.git",
@@ -72,7 +72,7 @@
         "font/*"
       ]
     },
-    "jqgrid": {
+    "free-jqgrid": {
       "js": "js/*.js",
       "js/i18n": "js/i18n/*.js",
       "js/plugins": "plugins/*.js",
