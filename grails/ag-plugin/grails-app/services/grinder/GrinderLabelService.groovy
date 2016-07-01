@@ -13,11 +13,9 @@ class GrinderLabelService {
 
 	//setup in init
 	def gTagLib
-	def fTagLib
 
 	@PostConstruct
 	def init(){
-		fTagLib = grailsApplication.mainContext.getBean("grails.plugin.formfields.FormFieldsTagLib")
     	gTagLib = grailsApplication.mainContext.getBean('org.codehaus.groovy.grails.plugins.web.taglib.ApplicationTagLib');
 	}
 
