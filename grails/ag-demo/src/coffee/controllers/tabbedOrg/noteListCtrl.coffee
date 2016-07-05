@@ -1,7 +1,7 @@
 # TODO plurarize this one and contacts
 class NoteListCtrl
 
-  @$inject = ["$scope", "resourceBuilder", "dialogCrudCtrlMixin"]
+  @$inject = ["$scope", "resourceBuilder", "DialogCrudCtrlMixin"]
   constructor: ($scope, resourceBuilder, dialogCrudCtrlMixin) ->
     # Create resource for users (contacts)
     Notes = resourceBuilder("/note")

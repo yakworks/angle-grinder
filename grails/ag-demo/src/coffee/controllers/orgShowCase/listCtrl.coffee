@@ -1,6 +1,6 @@
 class ListCtrl
 
-  @$inject = ["$scope", "$log", "Resource", "$filter", "dialogCrudCtrlMixin"]
+  @$inject = ["$scope", "$log", "Resource", "$filter", "DialogCrudCtrlMixin"]
   constructor: ($scope, $log, Resource, @$filter, dialogCrudCtrlMixin) ->
 
     $scope.gridOptions =

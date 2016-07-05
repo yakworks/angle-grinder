@@ -7,25 +7,39 @@ var resources = angular.module("angleGrinder.resources", [
 // TODO cleanup and spec this service
 // TODO consider move it to angle-grinder
 resources.factory("resourceBuilder", [
-  "$resource", "pathWithContext", function($resource, pathWithContext) {
+  "$resource", "pathWithContext", "$modelFactory", "$cacheFactory", function($resource, pathWithContext, $modelFactory, $cacheFactory) {
     return function(basePath, resourceName) {
       if (resourceName == null) {
         resourceName = basePath.replace(/^(\/+)/, "");
       }
       var pathWithoutContext = basePath;
       basePath = pathWithContext(basePath);
+      // TODO check if we can get model object
+      if ($cacheFactory.info().hasOwnProperty(basePath)) {
+        $cacheFactory.get(basePath).destroy();
+      }
 
-      var Resource = $resource(basePath + "/:action/:id", { id: "@id" }, {
-        list:       { method: "GET", params: { action: "list" }, isArray: false },
-        get:        { method: "GET", params: { action: "get" } },
-        save:       { method: "POST", params: { action: "save" } },
-        update:     { method: "POST", params: { action: "update" } },
-        "delete":   { method: "POST", params: { action: "delete" } },
-
-        // mass actions (for selected rows)
-        massUpdate: { method: "POST", params: { action: "massUpdate" } },
-        massDelete: { method: "POST", params: { action: "massDelete" } }
-      });
+      var Resource = $modelFactory(basePath,
+        {actions: {
+          list: { method: "GET", url: "list", isArray: false, invalidateCache: true},
+          get: {method: "GET", url: "get", invalidateCache: true},
+          save: { method: "POST", url: "save" , invalidateCache: true},
+          update: { method: "POST", url: "update", invalidateCache: true},
+          "delete": { method: "POST",url: "delete", headers: {"Content-Type": "application/json;charset=utf-8"}, data: {id: "id"}, beforeRequest: function(model){model.data.id = model.url.split("/").pop()}},
+          massUpdate: { method: "POST", url: "massUpdate", wrap: false , invalidateCache: true},
+          massDelete: { method: "POST", url: "massDelete", wrap: false, invalidateCache: true},
+          post: { method: "POST", url: "save" }
+        },
+          base: {
+            invalidateCache: true
+          },
+          instance: {
+            $persisted: function () {
+              return this.id !== null
+            }
+          }
+        }
+      );
 
       angular.extend(Resource.prototype, {
         resourceName: function() {
@@ -48,22 +62,6 @@ resources.factory("resourceBuilder", [
         // Return true if the record is not persisted
         newRecord: function() {
           return !this.persisted();
-        },
-
-        // Backbone style save() that inserts or updated the record
-        // based on the presence of an id.
-        save: function(options) {
-          if (options == null) { options = {}; }
-
-          var method;
-          method = this.persisted() ? "update" : "save";
-          return Resource[method]({}, this, options.success, options.error);
-        },
-
-        "delete": function(options) {
-          if (options == null) { options = {}; }
-
-          return Resource["delete"]({}, this, options.success, options.error);
         }
       });
 
@@ -88,18 +86,7 @@ resources.factory("Resource", [
 resources.factory("resourceResolver", [
   "$q", "$route", "Resource", function($q, $route, Resource) {
     return function(id) {
-      var deferred = $q.defer();
-
-      var onSuccess = function(user) {
-        return deferred.resolve(user);
-      };
-
-      var onError = function() {
-        return deferred.reject();
-      };
-
-      Resource.get({ id: id }, onSuccess, onError);
-      return deferred.promise;
+      return Resource.get(id);
     };
   }
 ]);

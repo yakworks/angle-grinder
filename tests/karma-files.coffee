@@ -9,6 +9,7 @@ module.exports =
     "components/bower/angular-animate/angular-animate.js"
     "components/bower/angular-route/angular-route.js"
     "components/bower/angular-resource/angular-resource.js"
+    "components/bower/angular-model-factory/dist/angular-model-factory-bundle.js"
     "components/bower/angular-sanitize/angular-sanitize.js"
     "components/bower/angular-mocks/angular-mocks.js"
     "components/bower/angular-scroll/angular-scroll.js"

@@ -1,6 +1,6 @@
 class ContactListCtrl
 
-  @$inject = ["$scope", "resourceBuilder", "dialogCrudCtrlMixin", ]
+  @$inject = ["$scope", "resourceBuilder", "DialogCrudCtrlMixin", ]
   constructor: ($scope, resourceBuilder, dialogCrudCtrlMixin) ->
     # Create resource for the users (contacts)
     Users = resourceBuilder("/user")

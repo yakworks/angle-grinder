@@ -79,8 +79,8 @@ class @GridCrudCtrl
 
     editAction = (id) ->
       $log.info "[gridCrud] Edit #{resourceName} : #{id}"
-      record = Resource.get {id: id}, (r) ->
-        $scope[resourceName] = restrictResource(r, allowedFields)
+      record = Resource.get(id).then (r) ->
+        $scope[resourceName] = r
         showForm()
 
     createAction =() ->
@@ -95,7 +95,7 @@ class @GridCrudCtrl
         $log.info "[gridCrud] Calling beforeSave: #{resourceName}"
         beforeSave(record)
 
-      promise = record.save().$promise
+      promise = record.$save()
       promise.then (record) ->
         $log.info "[gridCrud] record has been updated/created", record
         grid().saveRow(record.id, record)
