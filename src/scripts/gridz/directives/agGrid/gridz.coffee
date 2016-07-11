@@ -38,6 +38,28 @@ class Gridz
       _gridComplete.apply this, arguments if $.isFunction(_gridComplete)
       @gridEl.trigger "gridComplete"
 
+    options.onSortCol = (sortname, x, order)=>
+      if options.multiSort
+        id = options.sortLast || "id"
+        if sortname.indexOf(id) > -1
+          sortname = sortname + " #{order}"
+          sortArray = sortname.split ','
+          res = []
+          sort = null
+          idRegex = new RegExp("(#{id}[ ]+(asc|desc))")
+          _.each sortArray, (it)->
+            it = it.trim()
+            if not idRegex.exec(it)?
+              res.push it
+            else
+              sort = it.split " "
+          res.push sort[0] if sort
+          sortname = res.join(",")
+          @gridEl.jqGrid("setGridParam", sortname: sortname)
+          @gridEl.jqGrid("setGridParam", order: sort[1]) if sort
+
+
+
     # if sortable is true then add exclusion for the action column
     if options.actionPopup and options.sortable
       options.sortable = exclude: "##{@gridId}_-row_action_col"
