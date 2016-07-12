@@ -16,7 +16,7 @@ mixin.factory "DialogCrudCtrlMixin", [
       # Generic method for invoking an edit dialog for a resource
       # with the given id
       $scope.editRecord = (id) ->
-        Resource.get { id: id }, (record) ->
+        Resource.get(id).then (record) ->
           record = options.beforeEdit(record) if options.beforeEdit?
           openEditDialogFor record
 
@@ -32,7 +32,7 @@ mixin.factory "DialogCrudCtrlMixin", [
         ConfirmationDialogServ.open().then (confirmed) ->
           return unless confirmed
 
-          promise = Resource.delete(id: id).$promise
+          promise = new Resource(id:id).$destroy()
 
           promise.then (record) ->
             getGrid().removeRow(record.id)

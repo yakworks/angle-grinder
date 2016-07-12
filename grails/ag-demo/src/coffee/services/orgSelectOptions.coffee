@@ -1,8 +1,8 @@
 app = angular.module "angleGrinder"
-app.service "orgSelectOptions", [ "select2Options", "pathWithContext", (select2Options, pathWithContext) ->
+app.service "orgSelectOptions", [ "Select2Options", "pathWithContext", (Select2Options, pathWithContext) ->
 
   ->
-    select2Options
+    Select2Options
       width: 190
       ajax:
         url: pathWithContext("/org/pickList")

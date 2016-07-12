@@ -1,6 +1,6 @@
 class ListCtrl
 
-  @$inject = ["$scope", "$log", "Resource", "$filter", "dialogCrudCtrlMixin", "pathWithContext", "$http", 'uiGridConstants']
+  @$inject = ["$scope", "$log", "Resource", "$filter", "DialogCrudCtrlMixin", "pathWithContext", "$http", 'uiGridConstants']
   constructor: ($scope, $log, Resource, @$filter, dialogCrudCtrlMixin, pathWithContext, $http, uiGridConstants) ->
 
     $scope.gridOptions =

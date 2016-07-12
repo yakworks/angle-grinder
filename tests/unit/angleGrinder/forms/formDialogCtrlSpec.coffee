@@ -19,7 +19,7 @@ describe "module: angleGrinder.forms", ->
       record =
         id: 567
         resourceName: -> "account"
-        save: sinon.stub(), delete: sinon.stub()
+        $save: sinon.stub(), delete: sinon.stub()
 
       grid = saveRow: sinon.stub(), removeRow: sinon.stub()
 
@@ -50,7 +50,7 @@ describe "module: angleGrinder.forms", ->
 
         it "returns a promise along with the record", inject ($q) ->
           deferred = $q.defer()
-          record.save.returns($promise: deferred.promise)
+          record.$save.returns(deferred.promise)
 
           [promise, record] = $scope.save(record)
 
@@ -65,7 +65,7 @@ describe "module: angleGrinder.forms", ->
           beforeEach inject ($q) ->
             deferred = $q.defer()
             deferred.resolve(record)
-            record.save.returns($promise: deferred.promise)
+            record.$save.returns(deferred.promise)
 
             $scope.save(record)
             $scope.$digest()
@@ -81,7 +81,7 @@ describe "module: angleGrinder.forms", ->
 
       it "returns a promise", ->
         promise = then: angular.noop, catch: angular.noop
-        record.delete.returns($promise: promise)
+        record.delete.returns(promise)
         expect($scope.delete()).to.deep.eq promise
 
       describe "on success", ->
@@ -89,7 +89,7 @@ describe "module: angleGrinder.forms", ->
           promise =
             then: sinon.stub().yields({ id: 567 })
             catch: angular.noop
-          record.delete.returns($promise: promise)
+          record.delete.returns(promise)
 
           $scope.delete()
           $scope.$digest()
@@ -106,7 +106,7 @@ describe "module: angleGrinder.forms", ->
           promise =
             then: angular.noop
             catch: sinon.stub().yields({})
-          record.delete.returns($promise: promise)
+          record.delete.returns(promise)
 
           $scope.delete()
           $scope.$digest()

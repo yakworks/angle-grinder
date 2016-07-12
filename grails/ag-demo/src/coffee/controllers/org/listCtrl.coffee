@@ -1,8 +1,7 @@
 class ListCtrl
 
-  @$inject = ["$scope", "Resource", "singlePageCrudCtrlMixin", "massUpdateMixin"]
-  constructor: ($scope, Resource, singlePageCrudCtrlMixin, massUpdateMixin) ->
-
+  @$inject = ["$scope", "Resource", "SinglePageCrudCtrlMixin", "MassUpdateMixin"]
+  constructor: ($scope, Resource, SinglePageCrudCtrlMixin, MassUpdateMixin ) ->
     $scope.gridOptions =
       path: "/org/list?format=json"
       colModel: @colModel()
@@ -14,12 +13,12 @@ class ListCtrl
       rowNum: 5
       rowList: [5, 10, 20]
 
-    singlePageCrudCtrlMixin $scope,
+    SinglePageCrudCtrlMixin $scope,
       Resource: Resource
       resourcePath: "/org"
       gridName: "orgGrid"
 
-    massUpdateMixin $scope,
+    MassUpdateMixin $scope,
       templateUrl: "/templates/org/massUpdateForm.html"
       controller: "org.MassUpdateFormCtrl"
       gridName: "orgGrid"

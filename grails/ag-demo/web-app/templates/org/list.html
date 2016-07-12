@@ -2,8 +2,11 @@
 
 <div class="ag-panels-row">
   <div ng-show="!showSearchForm" class="search-form">
-       <div ng-include="'/templates/org/searchForm.html' | withContext"></div>
+       <div ng-include="'/templates/org/searchForm.html' | withContext">
+       </div>
   </div>
+	<button ng-click="testOrg()">test ORg</button>
+	<button ng-click="updateOrg()">update ORg</button>
 <div class="ag-panel">
   <div class="navbar navbar-toolbar navbar-grid navbar-default">
       <div class="navbar-inner with-selected-pointer with-grid-options">

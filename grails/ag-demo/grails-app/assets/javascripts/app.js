@@ -1,6 +1,7 @@
 //This is a javascript file with its top level require directives
 //= require angleGrinder/vendor.js
 //= require angleGrinder/angleGrinder.js
+//= require_tree app/model
 //= require_tree app/controllers/org
 //= require_tree app/controllers/user
 //= require_tree app/controllers/tabbedOrg

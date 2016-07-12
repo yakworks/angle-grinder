@@ -46,7 +46,7 @@ class FormDialogCtrl extends BaseCtrl
 
   # If form is valid performs server side update
   save: (record) =>
-    promise = record.save().$promise
+    promise = record.$save()
 
     promise.then (record) =>
       @$log.info "[ag] record has been updated/created", record
@@ -58,7 +58,7 @@ class FormDialogCtrl extends BaseCtrl
 
   # Performs server side delete
   delete: =>
-    promise = @record.delete().$promise
+    promise = @record.delete()
 
     promise.then (response) =>
       @$log.info "[ag] record has been deleted", response

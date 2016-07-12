@@ -22,15 +22,21 @@ describe "module: angleGrinder.forms mixin: DialogCrudCtrlMixin", ->
   beforeEdit = null
   beforeCreate = null
 
-  beforeEach inject ($rootScope, Users, DialogCrudCtrlMixin) ->
+  beforeEach inject ($rootScope, resourceBuilder, DialogCrudCtrlMixin, $document) ->
+    body = sinon.stub()
+    body.withArgs("resource-path").returns("/users")
+    body.withArgs("resource-name").returns "users"
+    sinon.stub($document, "find").withArgs("body").returns
+      data: body
     $scope = $rootScope.$new()
+    UsersTest = resourceBuilder("/api/users")
 
     grid = removeRow: sinon.stub()
     $scope.grid = transactions: grid
 
     # initialize the mixin
     DialogCrudCtrlMixin $scope,
-      Resource: Users
+      Resource: UsersTest
       gridName: "grid.transactions"
       templateUrl: "/foo/bar/form.html"
       beforeEdit: beforeEdit
@@ -39,7 +45,7 @@ describe "module: angleGrinder.forms mixin: DialogCrudCtrlMixin", ->
   describe "#editRecord", ->
 
     beforeEach inject ($httpBackend) ->
-      $httpBackend.expectGET("/api/users/123").respond id: 123, name: "the user"
+      $httpBackend.expectGET("/api/users/get/123").respond id: 123, name: "the user"
       $scope.editRecord(123)
       $httpBackend.flush()
 
@@ -107,7 +113,7 @@ describe "module: angleGrinder.forms mixin: DialogCrudCtrlMixin", ->
       beforeEach inject (ConfirmationDialogServ, $httpBackend) ->
         ConfirmationDialogServ.confirmed = true
 
-        $httpBackend.expectDELETE("/api/users/456").respond id: 456
+        $httpBackend.expectPOST("/api/users/delete/456").respond id: 456
         $scope.deleteRecord(456)
         $httpBackend.flush()
 

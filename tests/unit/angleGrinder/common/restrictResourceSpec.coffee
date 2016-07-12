@@ -31,7 +31,7 @@ describe "module: angleGrinder.common, service: restrictResource", ->
       restrictResource(batchResource)
       batchResource.amount = 33
       batchResource.bla = 321
-      $httpBackend.expectPOST("/arBatch/save/111", {id:111, amount: 33, bla: 321} ).respond(200)
+      $httpBackend.expectPOST("/arBatch/update/111", {id:111, amount: 33, bla: 321} ).respond(200)
       batchResource.$save()
       $httpBackend.flush()
       expect(batchResource.id).eq 111
@@ -44,7 +44,7 @@ describe "module: angleGrinder.common, service: restrictResource", ->
       batchResource.amount = 33
       batchResource.bla = 321
       batchResource.foo = "new test"
-      $httpBackend.expectPOST("/arBatch/save/111", {id:111, amount: 33, bla: 321} ).respond(200)
+      $httpBackend.expectPOST("/arBatch/update/111", {id:111, amount: 33, bla: 321} ).respond(200)
       batchResource.$save()
       $httpBackend.flush()
       expect(batchResource.id).eq 111
