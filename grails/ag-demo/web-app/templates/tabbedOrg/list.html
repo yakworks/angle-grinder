@@ -1,12 +1,12 @@
-<div ng-controller="org.ListCtrl">
+<div class="ag-panels-row" ng-controller="org.ListCtrl">
   <h3 class="page-header">Org list</h3>
 
-  <div>
+  <div class="ag-panel">
     <div ng-show="showSearchForm" class="search-form-panel">
          <div ng-include="'/templates/tabbedOrg/searchForm.html' | withContext"></div>
     </div>
 
-    <div class="navbar navbar-grid navbar-default">
+    <div class="navbar navbar-toolbar navbar-grid navbar-default">
         <div class="navbar-inner with-selected-pointer with-grid-options">
             <ul class="nav navbar-nav col-sm-4">
               <li class="dropdown selected-actions">
@@ -24,6 +24,9 @@
                       </a>
                   </li>
             </ul>
+            <ag-panel-states>
+                <ag-reload-grid for="grid.org"></ag-reload-grid>
+            </ag-panel-states>
             <ul class="nav navbar-nav pull-right">
                 <li>
                     <a title="search screen" ng-click="showSearchForm = !showSearchForm" href="">

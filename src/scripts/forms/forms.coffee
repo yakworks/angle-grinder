@@ -37,8 +37,7 @@ forms = angular.module("angleGrinder.forms", [
   "ui.bootstrap.rating"
   "ui.bootstrap.tabs"
   "ui.bootstrap.tpls"
-
-
+  "ui.bootstrap.tooltip"
   "xeditable"
   "angleGrinder.common"
   "angleGrinder.alerts"

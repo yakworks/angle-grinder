@@ -15,7 +15,8 @@ class MapFlattenerTest {
             customer:[
                 id:1,
                 name:'bill',
-                blah:null
+                blah:null,
+                date: "2000-03-30T22:00:00Z"
             ],
             keyContact:[
                 id:1
@@ -24,8 +25,10 @@ class MapFlattenerTest {
         def res = mf.flatten(testMap)
         assert res.'customer.id' == "1"
         assert res.'customer.name' == 'bill'
-        assert res.'customer.blah' == ''
+        assert res.containsKey("customer.blah")
+        assert res['customer.blah'] == null
         assert res.'keyContact.id' == '1'
+        assert res["customer.date"] == DateUtil.parseJsonDate(testMap.customer.date).format("yyyy-MM-dd'T'hh:mm:ss'Z'")
 
     }
 
@@ -51,5 +54,19 @@ class MapFlattenerTest {
         assert res['tags'] == [[id: 1], [id: 2]]
         assert res['tags.0.id'] == '1'
         assert res['tags.1.id'] == '2'
+    }
+
+    @Test
+    void testNullParamValues() {
+        def mf = new MapFlattener()
+        def testMap = [
+                book: [author:[id:'null', name: ' foo ', age:'null']]
+        ]
+
+        def res = mf.flatten(testMap)
+        assert res['book.author.id'] == "null"
+        assert res['book.author.name'] == 'foo'
+        assert res['book.author.age'] == null
+
     }
 }

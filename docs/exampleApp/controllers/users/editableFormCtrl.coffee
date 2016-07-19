@@ -1,7 +1,7 @@
 class EditableFormCtrl extends BaseCtrl
 
   @register "exampleApp", "users.editableFormCtrl"
-  @inject "$scope", "select2Options"
+  @inject "$scope", "Select2Options"
 
   initialize: ->
     @expose @$scope, "hasNotification", "update"
@@ -13,7 +13,7 @@ class EditableFormCtrl extends BaseCtrl
     @$scope.user.roles ?= ["user", "moderator"]
 
     # options for the parent user select
-    @$scope.parentSelectOptions = @select2Options({
+    @$scope.parentSelectOptions = @Select2Options({
       ajax: url: "/api/users"
 
       # formatters for result and selection

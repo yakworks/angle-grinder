@@ -1,7 +1,7 @@
-describe "module: angleGrinder.forms mixin: singlePageCrudCtrlMixin", ->
+describe "module: angleGrinder.forms mixin: SinglePageCrudCtrlMixin", ->
 
   beforeEach module "angleGrinder.forms", ($provide) ->
-    $provide.decorator "dialogCrudCtrlMixin", -> sinon.stub()
+    $provide.decorator "DialogCrudCtrlMixin", -> sinon.stub()
 
     $provide.decorator "$location", ($delegate) ->
       sinon.stub($delegate, "path")
@@ -9,24 +9,24 @@ describe "module: angleGrinder.forms mixin: singlePageCrudCtrlMixin", ->
 
   $scope = null
 
-  beforeEach inject ($rootScope, singlePageCrudCtrlMixin) ->
+  beforeEach inject ($rootScope, SinglePageCrudCtrlMixin) ->
     $scope = $rootScope.$new()
 
     # initialize the mixin
-    singlePageCrudCtrlMixin $scope,
+    SinglePageCrudCtrlMixin $scope,
       Resource: "Users"
       resourcePath: "/path_to_the_resource"
       gridName: "usersGrid"
 
-  describe "mixin: `dialogCrudCtrlMixin`", ->
+  describe "mixin: `DialogCrudCtrlMixin`", ->
 
-    it "is mixed", inject (dialogCrudCtrlMixin) ->
-      expect(dialogCrudCtrlMixin).to.have.been.called
+    it "is mixed", inject (DialogCrudCtrlMixin) ->
+      expect(DialogCrudCtrlMixin).to.have.been.called
 
-    it "is mixed with valid arguments", inject (dialogCrudCtrlMixin) ->
-      expect(dialogCrudCtrlMixin).to.have.been.calledWith($scope)
+    it "is mixed with valid arguments", inject (DialogCrudCtrlMixin) ->
+      expect(DialogCrudCtrlMixin).to.have.been.calledWith($scope)
 
-      args = dialogCrudCtrlMixin.getCall(0).args[1]
+      args = DialogCrudCtrlMixin.getCall(0).args[1]
       expect(args).to.have.property "Resource", "Users"
       expect(args).to.have.property "gridName", "usersGrid"
 

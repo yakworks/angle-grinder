@@ -1,15 +1,15 @@
-describe "module: angleGrinder.forms mixin: dialogCrudCtrlMixin", ->
+describe "module: angleGrinder.forms mixin: DialogCrudCtrlMixin", ->
 
   beforeEach module "exampleApp.resources"
 
   beforeEach module "angleGrinder.forms", ($provide) ->
-    # stub `formDialog` service
-    $provide.decorator "formDialog", ($delegate) ->
+    # stub `FormDialogServ` service
+    $provide.decorator "FormDialogServ", ($delegate) ->
       sinon.stub($delegate, "open")
       $delegate
 
-    # stub `confirmationDialog` service
-    $provide.decorator "confirmationDialog", ($delegate) ->
+    # stub `ConfirmationDialogServ` service
+    $provide.decorator "ConfirmationDialogServ", ($delegate) ->
       $delegate.confirmed = true
       sinon.stub($delegate, "open").returns then:
         (callback) -> callback($delegate.confirmed)
@@ -22,14 +22,14 @@ describe "module: angleGrinder.forms mixin: dialogCrudCtrlMixin", ->
   beforeEdit = null
   beforeCreate = null
 
-  beforeEach inject ($rootScope, Users, dialogCrudCtrlMixin) ->
+  beforeEach inject ($rootScope, Users, DialogCrudCtrlMixin) ->
     $scope = $rootScope.$new()
 
     grid = removeRow: sinon.stub()
     $scope.grid = transactions: grid
 
     # initialize the mixin
-    dialogCrudCtrlMixin $scope,
+    DialogCrudCtrlMixin $scope,
       Resource: Users
       gridName: "grid.transactions"
       templateUrl: "/foo/bar/form.html"
@@ -50,10 +50,10 @@ describe "module: angleGrinder.forms mixin: dialogCrudCtrlMixin", ->
       $httpBackend.verifyNoOutstandingExpectation()
       $httpBackend.verifyNoOutstandingRequest()
 
-    it "opens a dialog for editing the loaded resource", inject (formDialog) ->
-      expect(formDialog.open).to.have.been.called
+    it "opens a dialog for editing the loaded resource", inject (FormDialogServ) ->
+      expect(FormDialogServ.open).to.have.been.called
 
-      args = formDialog.open.getCall(0).args
+      args = FormDialogServ.open.getCall(0).args
       expect(args[0]).to.be.equal "/foo/bar/form.html"
 
       options = args[1]
@@ -67,8 +67,8 @@ describe "module: angleGrinder.forms mixin: dialogCrudCtrlMixin", ->
           record.someValue = "foo bar"
           return record
 
-      it "uses it to pre-process the loaded record", inject (formDialog) ->
-        args = formDialog.open.getCall(0).args
+      it "uses it to pre-process the loaded record", inject (FormDialogServ) ->
+        args = FormDialogServ.open.getCall(0).args
 
         options = args[1]
         expect(options.record).to.have.property "id", 123
@@ -80,9 +80,9 @@ describe "module: angleGrinder.forms mixin: dialogCrudCtrlMixin", ->
     it "is mixed to the $scope", ->
       expect($scope.createRecord).to.be.a "function"
 
-    it "opens a dialog for creating a resource", inject (formDialog) ->
-      expect(formDialog.open).to.have.been.called
-      expect(formDialog.open).to.have.been.calledWith("/foo/bar/form.html")
+    it "opens a dialog for creating a resource", inject (FormDialogServ) ->
+      expect(FormDialogServ.open).to.have.been.called
+      expect(FormDialogServ.open).to.have.been.calledWith("/foo/bar/form.html")
 
     context "when the `beforeCreate` callback is given", ->
       before ->
@@ -90,8 +90,8 @@ describe "module: angleGrinder.forms mixin: dialogCrudCtrlMixin", ->
           record.orderId = 66
           return record
 
-      it "uses it to pre-process the record before create", inject (formDialog) ->
-        record = formDialog.open.getCall(0).args[1].record
+      it "uses it to pre-process the record before create", inject (FormDialogServ) ->
+        record = FormDialogServ.open.getCall(0).args[1].record
         expect(record).to.have.property "orderId", 66
 
   describe "#deleteRecord", ->
@@ -99,13 +99,13 @@ describe "module: angleGrinder.forms mixin: dialogCrudCtrlMixin", ->
     it "is mixed to the $scope", ->
       expect($scope.deleteRecord).to.be.a "function"
 
-    it "opens the confirmation dialog", inject (confirmationDialog) ->
+    it "opens the confirmation dialog", inject (ConfirmationDialogServ) ->
       $scope.deleteRecord(456)
-      expect(confirmationDialog.open).to.have.been.called
+      expect(ConfirmationDialogServ.open).to.have.been.called
 
     context "when the dialog was confirmed", ->
-      beforeEach inject (confirmationDialog, $httpBackend) ->
-        confirmationDialog.confirmed = true
+      beforeEach inject (ConfirmationDialogServ, $httpBackend) ->
+        ConfirmationDialogServ.confirmed = true
 
         $httpBackend.expectDELETE("/api/users/456").respond id: 456
         $scope.deleteRecord(456)
@@ -120,8 +120,8 @@ describe "module: angleGrinder.forms mixin: dialogCrudCtrlMixin", ->
         expect($scope.grid.transactions.removeRow).to.have.been.calledWith(456)
 
     context "when the dialog wasn't confirmed", ->
-      beforeEach inject (confirmationDialog) ->
-        confirmationDialog.confirmed = false
+      beforeEach inject (ConfirmationDialogServ) ->
+        ConfirmationDialogServ.confirmed = false
         $scope.deleteRecord(456)
 
       it "does not remove a row from the grid", ->

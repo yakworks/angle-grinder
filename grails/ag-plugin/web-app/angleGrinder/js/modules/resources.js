@@ -12,6 +12,7 @@ resources.factory("resourceBuilder", [
       if (resourceName == null) {
         resourceName = basePath.replace(/^(\/+)/, "");
       }
+      var pathWithoutContext = basePath;
       basePath = pathWithContext(basePath);
 
       var Resource = $resource(basePath + "/:action/:id", { id: "@id" }, {
@@ -29,6 +30,14 @@ resources.factory("resourceBuilder", [
       angular.extend(Resource.prototype, {
         resourceName: function() {
           return resourceName;
+        },
+
+        resourcePath: function() {
+          return pathWithoutContext;
+        },
+
+        resourceData: function() {
+          return angular.fromJson(angular.toJson(this));
         },
 
         // Returns true if the record is persisted (has an id)

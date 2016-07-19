@@ -3,6 +3,7 @@ import org.springframework.context.i18n.LocaleContextHolder as LCH
 import javax.annotation.PostConstruct
 import grails.util.GrailsNameUtils
 
+//XXX - It doesnt seem to be used any more
 class GrinderLabelService {
 
 	static transactional = false
@@ -12,11 +13,9 @@ class GrinderLabelService {
 
 	//setup in init
 	def gTagLib
-	def fTagLib
 
 	@PostConstruct
 	def init(){
-		fTagLib = grailsApplication.mainContext.getBean("grails.plugin.formfields.FormFieldsTagLib")
     	gTagLib = grailsApplication.mainContext.getBean('org.codehaus.groovy.grails.plugins.web.taglib.ApplicationTagLib');
 	}
 

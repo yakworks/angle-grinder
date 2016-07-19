@@ -5,7 +5,7 @@ import org.apache.commons.logging.Log
 import org.apache.commons.logging.LogFactory
 import org.grails.datastore.mapping.query.Query
 import org.hibernate.criterion.Projections
-import org.hibernate.impl.CriteriaImpl
+import org.hibernate.internal.CriteriaImpl
 
 /**
  * a holder object for paged data
@@ -64,7 +64,7 @@ class Pager {
         if(pageCount < 1) return
         log.debug "eachPage total pages : pageCount"
         
-        (1..totalPages).each {Long pageNum ->
+        (1..pageCount).each {Long pageNum ->
             page = pageNum
             offset = (max * (page - 1))
             try {
@@ -78,7 +78,7 @@ class Pager {
 
     }
 
-    def getJsonData() {
+    Map getJsonData() {
         //page is the page we are on, total is the total number f pages based on max per page setting
         //records is the total # of records we have
         //rows are the data

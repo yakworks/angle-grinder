@@ -12,16 +12,16 @@ describe "module: angleGrinder.forms", ->
       updateRow: sinon.stub()
       flashOnError: sinon.stub()
 
-  describe "service: massUpdateHandler", ->
+  describe "service: MassUpdateHandler", ->
 
-    it "is defined", inject (massUpdateHandler) ->
-      expect(massUpdateHandler).to.not.be.undefined
-      expect(massUpdateHandler).to.be.a "function"
+    it "is defined", inject (MassUpdateHandler) ->
+      expect(MassUpdateHandler).to.not.be.undefined
+      expect(MassUpdateHandler).to.be.a "function"
 
     context "when the result contains rows data", ->
 
-      it "updates the given rows", inject (massUpdateHandler) ->
-        massUpdateHandler(grid, data: [{id: 1, foo: "bar"}, {id: 2, foo: "baz"}])
+      it "updates the given rows", inject (MassUpdateHandler) ->
+        MassUpdateHandler(grid, data: [{id: 1, foo: "bar"}, {id: 2, foo: "baz"}])
 
         args = grid.updateRow.getCall(0).args
         expect(args[0]).to.eq 1
@@ -33,7 +33,7 @@ describe "module: angleGrinder.forms", ->
 
     context "when the result contains errors", ->
 
-      it "flashes errored rows", inject (massUpdateHandler, alerts) ->
+      it "flashes errored rows", inject (MassUpdateHandler, alerts) ->
         column1Msg = "error in column1"
         column2Msg = "error in column2"
         errorObj =
@@ -46,7 +46,7 @@ describe "module: angleGrinder.forms", ->
               column2: column2Msg
         errors = []
         errors.push errorObj
-        massUpdateHandler(grid, errors: errors)
+        MassUpdateHandler(grid, errors: errors)
 
         expect(alerts.error.called).to.be.true
         args = alerts.error.getCall(0).args
@@ -54,10 +54,10 @@ describe "module: angleGrinder.forms", ->
 
     context "when errors variable contains something different from array", ->
 
-      it "flashes errored rows", inject (massUpdateHandler, alerts) ->
+      it "flashes errored rows", inject (MassUpdateHandler, alerts) ->
         # errors variable is a string
         errors = "string with error message"
-        massUpdateHandler(grid, errors: errors)
+        MassUpdateHandler(grid, errors: errors)
 
         expect(alerts.error.called).to.be.false
 

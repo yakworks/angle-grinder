@@ -83,17 +83,21 @@ class MapFlattener {
                 key = currentName + "." + key
             }
             //println("entry : ${entry.value.toString()}")
-            if ( entry == null )
+            if ( entry == null)
             {
                 //entry.value = ""
                 //println("Null Entry Or Entry Value")
             }
-            else if ( entry.value == null || entry.value?.toString() == 'null' )
-            {
-                //we add a blank string for grails binding to simulate what would come through from params
-                _keyVersion.updateMapWithKeyValue(keyValues, key, '')
-                //println("created blank string")
+
+            //if it is an association id, then set value to 'null' to set the association to null
+            else if((key && key.toString().endsWith(".id")) && (entry.value == null || entry.value.toString() == 'null' || entry.value.toString().trim() == "")) {
+                _keyVersion.updateMapWithKeyValue(keyValues, key, "null")
             }
+
+            else if (entry.value == null || entry.value?.toString() == 'null') {
+                _keyVersion.updateMapWithKeyValue(keyValues, key, null)
+            }
+
             else if ( entry.value instanceof List )
             {
                 def jsonListKeyValues = transformJsonArray(entry.value, key)
@@ -107,7 +111,16 @@ class MapFlattener {
             else
             {
                 def value = String.valueOf(entry.value)
-                if (DateUtil.GMT_SECONDS.matcher(value).matches()) {
+
+                if(value != null) {
+                    value = value.trim() //trim strings - same as grails.databinding.trimStrings
+                }
+                //convert empty strings to null - same behavior as grails.databinding.convertEmptyStringsToNull
+                if("".equals(value)) {
+                    value = null
+                }
+
+                if (value != null && DateUtil.GMT_SECONDS.matcher(value).matches()) {
                     //FIXME dirty hack!!!
                     //XXX why did we use default format with trimmed time?
                     value = DateUtil.parseJsonDate(value).format("yyyy-MM-dd'T'hh:mm:ss'Z'")

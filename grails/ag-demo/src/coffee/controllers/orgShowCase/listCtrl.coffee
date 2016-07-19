@@ -30,9 +30,9 @@ class ListCtrl
     [
       { name: "id", label: "ID", width: 30, fixed: true }
       { name: "name", label: "Name", width: 100, fixed: true, formatter: "editActionLink" }
-      { name: "exampleDate", label: "Example Date", width: 70, formatter: (cellVal) => @$filter("date")(cellVal) }
-      { name: "exampleDateTime", label: "Example Date Time", width: 70, formatter: (cellVal) => @$filter("date")(cellVal) }
-      { name: "exampleLocalDate", label: "Example Local Date", width: 70, formatter: (cellVal) => @$filter("date")(cellVal) }
+      { name: "exampleDate", label: "Example Date", width: 70, formatter: "date" }
+      { name: "exampleDateTime", label: "Example Date Time", width: 70, formatter: "date" }
+      { name: "exampleLocalDate", label: "Example Local Date", width: 70, formatter: "date" }
     ]
 
 angular.module("angleGrinder").controller("orgShowCase.ListCtrl", ListCtrl)
