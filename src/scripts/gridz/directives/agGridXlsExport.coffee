@@ -18,7 +18,7 @@ gridz.directive "agGridXlsExport", [
       element.on "click", (event) ->
         event.preventDefault()
 
-        grid = scope.$eval(attrs.agGridXlsExport)
+        grid = scope.$grid
 
         if grid.getSelectedRowIds().length isnt 0
           # if browser is IE then open new window and show SaveAs dialog, else use dataUri approach

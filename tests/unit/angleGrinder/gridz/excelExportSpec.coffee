@@ -115,16 +115,17 @@ describe "module: angleGrinder.gridz", ->
       $scope = $rootScope.$new()
 
       # stub the grid instance
-      $scope.grid =
-        users:
-          getXlsDataUri: -> "foo"
-          getSelectedRowIds: -> selectedRowIds
+      $scope.$grid =
+            getXlsDataUri: -> "foo"
+            getSelectedRowIds: -> selectedRowIds
 
       {element, $scope} = compileTemplate """
-        <a href="" ag-grid-xls-export="grid.users">
+        <a href="" ag-grid-xls-export>
         <i class="fa-download"></i> Export to XLS
       </a>
       """, $injector, $scope
+
+    it "has $grid on scope"
 
     describe "on click", ->
 

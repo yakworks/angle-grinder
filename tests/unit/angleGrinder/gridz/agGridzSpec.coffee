@@ -88,9 +88,11 @@ describe "module: angleGrinder.gridz", ->
 
         it "is assigned to the scope", ->
           expect($scope.projectsGrid).to.not.be.undefined
+          expect($scope.$grid).to.not.be.undefined
 
         it "is initialized with the grid element", ->
           expect($scope.projectsGrid.getGridEl()).to.not.be.undefined
+          expect($scope.$grid.getGridEl()).to.not.be.undefined
 
       context "when the name is an expression", ->
         beforeEach inject ($injector) ->

@@ -11,6 +11,7 @@ gridz.directive "agGrid", [
       # publish agGrid controller to the parent scope
       alias = attrs.agGridName
       $parse(alias).assign(scope, gridCtrl) if alias
+      $parse("$grid").assign(scope, gridCtrl) #Make the grid available to controllers as $scope.$grid
 
       # read grid options
       options = $parse(attrs.agGrid)(scope)
