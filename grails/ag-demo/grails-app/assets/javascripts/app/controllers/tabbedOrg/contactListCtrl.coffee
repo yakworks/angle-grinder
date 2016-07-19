@@ -1,7 +1,7 @@
 class ContactListCtrl
 
-  @$inject = ["$scope", "resourceBuilder", "dialogCrudCtrlMixin", ]
-  constructor: ($scope, resourceBuilder, dialogCrudCtrlMixin) ->
+  @$inject = ["$scope", "resourceBuilder", "DialogCrudCtrlMixin", ]
+  constructor: ($scope, resourceBuilder, DialogCrudCtrlMixin) ->
     # Create resource for the users (contacts)
     Users = resourceBuilder("/user")
 
@@ -14,7 +14,7 @@ class ContactListCtrl
       sortname: "login"
       sortorder: "asc"
 
-    dialogCrudCtrlMixin $scope,
+    DialogCrudCtrlMixin $scope,
       Resource: Users
       gridName: "contactsGrid"
       templateUrl: "/user/formTemplate"

@@ -112,19 +112,6 @@ grails {
     }
 }
 
-"coffeescript-compiler" {
-    appSource {
-        coffeeSourcePath = "src/coffee"
-        jsOutputPath = "grails-app/assets/javascripts/app"
-    }
-
-    pluginConfig {
-      overrideJS = false
-      forceNode = false
-      forceRhino = true
-    }
-}
-
 jodatime {
 	format.org.joda.time.LocalDate = "yyyy-MM-dd"
 	format.org.joda.time.DateTime = "yyyy-MM-dd'T'HH:mmZ"
