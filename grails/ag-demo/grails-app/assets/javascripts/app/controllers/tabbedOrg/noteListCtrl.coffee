@@ -1,8 +1,8 @@
 # TODO plurarize this one and contacts
 class NoteListCtrl
 
-  @$inject = ["$scope", "resourceBuilder", "dialogCrudCtrlMixin"]
-  constructor: ($scope, resourceBuilder, dialogCrudCtrlMixin) ->
+  @$inject = ["$scope", "resourceBuilder", "DialogCrudCtrlMixin"]
+  constructor: ($scope, resourceBuilder, DialogCrudCtrlMixin) ->
     # Create resource for users (contacts)
     Notes = resourceBuilder("/note")
 
@@ -15,7 +15,7 @@ class NoteListCtrl
       sortname: "name"
       sortorder: "asc"
 
-    dialogCrudCtrlMixin $scope,
+    DialogCrudCtrlMixin $scope,
       Resource: Notes
       gridName: "notesGrid"
       templateUrl: "/templates/note/form.html"

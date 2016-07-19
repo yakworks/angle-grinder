@@ -1,7 +1,7 @@
 class ListCtrl
 
-  @$inject = ["$scope", "$log", "Resource", "$filter", "dialogCrudCtrlMixin"]
-  constructor: ($scope, $log, Resource, @$filter, dialogCrudCtrlMixin) ->
+  @$inject = ["$scope", "$log", "Resource", "$filter", "DialogCrudCtrlMixin"]
+  constructor: ($scope, $log, Resource, @$filter, DialogCrudCtrlMixin) ->
 
     $scope.gridOptions =
       path: "/orgShowCase/list?format=json"
@@ -15,7 +15,7 @@ class ListCtrl
 
     $scope.filters = {}
 
-    dialogCrudCtrlMixin $scope,
+    DialogCrudCtrlMixin $scope,
       Resource: Resource
       gridName: "orgShowCaseGrid"
       templateUrl: "/orgShowCase/formTemplate"

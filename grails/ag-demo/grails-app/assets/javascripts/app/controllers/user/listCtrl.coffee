@@ -1,7 +1,7 @@
 class ListCtrl
 
-  @$inject = ["$scope", "$log", "Resource", "$filter", "dialogCrudCtrlMixin", "pathWithContext", "$http", 'uiGridConstants']
-  constructor: ($scope, $log, Resource, @$filter, dialogCrudCtrlMixin, pathWithContext, $http, uiGridConstants) ->
+  @$inject = ["$scope", "$log", "Resource", "$filter", "DialogCrudCtrlMixin", "pathWithContext", "$http", 'uiGridConstants']
+  constructor: ($scope, $log, Resource, @$filter, DialogCrudCtrlMixin, pathWithContext, $http, uiGridConstants) ->
 
     $scope.gridOptions =
       path: "/user/list?format=json"
@@ -11,7 +11,7 @@ class ListCtrl
       sortname: "login"
       sortorder: "asc"
 
-    dialogCrudCtrlMixin $scope,
+    DialogCrudCtrlMixin $scope,
       Resource: Resource
       gridName: "usersGrid"
       templateUrl: "/user/formTemplate"

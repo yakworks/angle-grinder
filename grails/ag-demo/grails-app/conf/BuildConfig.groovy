@@ -40,12 +40,12 @@ grails {
 
                 // plugin dependencies
                 compile ":asset-pipeline:2.7.4"
+                compile ":coffee-asset-pipeline:2.7.2"
                 compile ":scaffolding:2.1.2"
                 compile ':dao:1.0.3'
                 compile(':audit-trail:2.1.2')
                 compile ":plugin-config:0.1.8"
                 compile ":faker:0.7"
-                compile ":coffeescript-compiler:0.9.4"
                 compile ":joda-time:1.5"
 
                 test ":code-coverage:1.2.6"

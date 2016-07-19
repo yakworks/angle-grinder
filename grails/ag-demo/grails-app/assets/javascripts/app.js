@@ -6,9 +6,9 @@
 //= require_tree app/controllers/tabbedOrg
 //= require_tree app/controllers/orgShowCase
 //= require_tree app/services
-//= require app/adminOrg.js
-//= require app/adminTabbedOrg.js
-//= require app/config.js
+//= require app/adminOrg
+//= require app/adminTabbedOrg
+//= require app/config
 
 
 
