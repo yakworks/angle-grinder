@@ -38,6 +38,12 @@ class Gridz
       _gridComplete.apply this, arguments if $.isFunction(_gridComplete)
       @gridEl.trigger "gridComplete"
 
+    # By default free-jqrid prepared sorting properties with next pattern
+    # sortName = columnName(id, name, etc) order(asc|desc), next column order of the last column name is in `order` parametr
+    # Example: if user first sorted by name and then by id sort params will be look like {sortName: 'name asc, id', order: 'asc'}
+    # Due to the fact that if id(or other unique) field is on the first place, the other sorting wont have any sense
+    # `sortLast` option is added to move unique column to the last place
+    #   Example: if user first sorted by id and then by name sort params will be look like {sortName: 'name asc, id', order: 'asc'}
     options.onSortCol = (sortname, x, order)=>
       if options.multiSort
         id = options.sortLast || "id"
