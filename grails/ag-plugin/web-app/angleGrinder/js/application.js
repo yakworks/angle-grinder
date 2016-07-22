@@ -45,8 +45,7 @@ app.factory("httpErrorsInterceptor", [
           // ..skip validation and auth errors
           if (response.status !== 422 && response.status !== 401) {
             alerts.error(errorMessage);
-
-          return response;
+            return $q.reject(response);
         }
         return $q.reject(response);
       }

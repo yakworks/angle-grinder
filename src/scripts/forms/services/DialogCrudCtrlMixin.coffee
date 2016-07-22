@@ -1,8 +1,8 @@
 mixin = angular.module("angleGrinder.forms")
 
 mixin.factory "DialogCrudCtrlMixin", [
-  "$log", "$parse", "FormDialogServ", "ConfirmationDialogServ"
-  ($log, $parse, FormDialogServ, ConfirmationDialogServ) ->
+  "$log", "$parse", "FormDialogServ", "ConfirmationDialogServ", "alerts"
+  ($log, $parse, FormDialogServ, ConfirmationDialogServ, alerts) ->
     ($scope, options = {}) ->
       { Resource, gridName, templateUrl, extraDialogOptions } = options
 
@@ -35,9 +35,11 @@ mixin.factory "DialogCrudCtrlMixin", [
           promise = Resource.delete(id: id).$promise
 
           promise.then (record) ->
+            $log.debug "Record deleted #{record.id}"
             getGrid().removeRow(record.id)
 
           promise.catch (response) ->
+            alerts.error(response.data.message)
             $log.error "Cannot delete a resource", response
 
           return promise
