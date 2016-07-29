@@ -4,5 +4,5 @@
 source ~/.nvm/nvm.sh
 nvm use 0.10.25
 
-source ./update-ag-plugin
+source ./script/update-ag-plugin
 
