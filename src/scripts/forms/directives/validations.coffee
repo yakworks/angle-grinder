@@ -161,17 +161,28 @@ forms.directive "agValidationErrors", ["validationMessages", "$interpolate", (va
           element.find(".server-error").remove()
 ]
 
-forms.directive "agServerValidationErrors", ->
+forms.directive "agServerValidationErrors", ["alerts", (alerts) ->
   restrict: "A"
   require: "^form"
 
   link: (scope, element, attrs, formCtrl) ->
     formCtrl.$serverErrors = {}
 
+    #Display errors as alerts for those fields which are not in form
+    displayGlobalErrors = ->
+
+      for field, message of formCtrl.$serverErrors
+        continue if formCtrl[field] #If field is present in form, continue
+
+        formCtrl.$serverErrors[field] = null #Display error and remove it.
+        alerts.error message
+
+
     # Hide server side validation errors while typing
     getServerErrors = -> formCtrl.$serverErrors
-    scope.$watch getServerErrors, (serverErrors) ->
 
+    scope.$watch getServerErrors, (serverErrors) ->
+      displayGlobalErrors()
       # Iterate through all fields with server validation errors
       angular.forEach serverErrors, (_, field) ->
 
@@ -184,6 +195,7 @@ forms.directive "agServerValidationErrors", ->
           formCtrl[field]?.$setValidity("server", true)
           formCtrl.$serverErrors[field] = null
           unregister()
+]
 
 # Handles server side errors
 forms.factory "serverValidationErrorsHandler", [

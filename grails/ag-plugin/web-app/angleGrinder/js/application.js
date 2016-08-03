@@ -40,7 +40,12 @@ app.factory("httpErrorsInterceptor", [
       responseError: function(response) {
           var errorMessage, _ref;
           var genericErrorMessage = (response.statusText ? response.statusText : "Unexpected HTTP error") + " " + response.status + " : " + response.config.url
-          errorMessage = ((_ref = response.data) != null ? _ref.error : void 0) ||  genericErrorMessage;
+          var responseData = response.data;
+
+          if(responseData == null) errorMessage = genericErrorMessage;
+          else if(responseData.error != null) errorMessage = responseData.error;
+          else if (responseData.message != null) errorMessage = responseData.message;
+          else errorMessage = genericErrorMessage;
 
           // ..skip validation and auth errors
           if (response.status !== 422 && response.status !== 401) {
