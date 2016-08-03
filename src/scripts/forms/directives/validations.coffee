@@ -36,15 +36,23 @@ forms.directive "match", ["isEmpty", (isEmpty) ->
     modelCtrl.$formatters.unshift validator
 ]
 
-forms.directive "agLength", ["IsFalsyServ", "$parse", (IsFalsyServ, $parse) ->
+forms.directive "agLength", ["IsFalsyServ", "$parse", (isFalsy, $parse) ->
   require: "ngModel"
   restrict: "A"
 
   link: (scope, elem, attrs, ngModelCtrl) ->
+
     lengthValidator = (value) ->
       length = $parse(attrs.agLength)(scope)
-      valid = IsFalsyServ(length) || (!ngModelCtrl.$isEmpty(value) && (value.length is length))
+
+      #If length is not provided, or value is not entered, its valid
+      #This validator does not check for required values, so if value must be entered, add ng-required
+
+      if isFalsy(length) || ngModelCtrl.$isEmpty(value) then valid = true
+      else valid = (value.length is length)
+
       ngModelCtrl.$setValidity("length", valid)
+
       return if valid then value else undefined
 
     ngModelCtrl.$parsers.unshift(lengthValidator)
