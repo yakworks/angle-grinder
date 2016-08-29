@@ -20,6 +20,9 @@ forms.factory "MassUpdateHandler", [
         grid.flashOnError(id) for id, error of result.errors
         # make sure errors is an array instance
         if result.errors instanceof Array
+          if result.errors.length is 0
+            alerts.info "Mass update completed successfully"
+            return
           for error in result.errors
             message = ": "
             for errorKey, errorValue of error.errors
@@ -34,6 +37,7 @@ forms.factory "MassUpdateHandler", [
             alerts.error message
       else
         $log.warn "[forms] Invalid JSON response, missing errors assoc array"
+        alerts.info "Mass update completed successfully"
 
       if result.message
         alerts.error(result.message)
