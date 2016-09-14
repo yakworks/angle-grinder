@@ -3,10 +3,16 @@ app = angular.module("angleGrinder.forms")
 app.directive "editableFormButtons", [
   "$parse", ($parse) ->
     restrict: "A"
-    scope: true
+    scope: {
+      form: '=editableFormButtons'
+      cancelCallBack: '&oncancel'
+    }
 
     link: (scope, element, attrs) ->
-      scope.form = $parse(attrs.editableFormButtons)(scope)
+      scope.cancel = () ->
+        scope.form.$cancel()
+        if scope.cancelCallBack?
+          scope.cancelCallBack()
 
     template: """
       <div class="buttons">
@@ -17,18 +23,9 @@ app.directive "editableFormButtons", [
           Edit
         </button>
         -->
-
         <span ng-if="form.$visible">
-          <button type="submit" class="btn btn-default btn-primary"
-                  ng-disabled="form.$invalid || form.$waiting">
-            Save
-          </button>
-
-          <button type="button" class="btn btn-default"
-                  ng-disabled="form.$waiting"
-                  ng-click="form.$cancel()">
-            Cancel
-          </button>
+          <button type="submit" class="btn btn-default btn-primary" ng-disabled="form.$invalid || form.$waiting"> Save </button>
+          <button type="button" class="btn btn-default" ng-disabled="form.$waiting" ng-click="cancel()"> Cancel </button>
         </span>
       </div>
     """
