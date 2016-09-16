@@ -15,7 +15,7 @@ forms.directive "agSubmit", [
         forms.push(form)
 
         # iterate through  all nested forms and mark them as submitted
-        nestedForms = _.filter(_.values(form), (input) -> (input instanceof form.constructor) and form not in forms)
+        nestedForms = _.filter(_.values(form), (input) -> (input instanceof form.constructor) and (input not in forms))
         markAsSubmitted(nestedForm) for nestedForm in nestedForms
 
       (scope, element, attrs, formCtrl) ->
