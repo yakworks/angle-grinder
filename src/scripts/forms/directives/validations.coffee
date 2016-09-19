@@ -235,3 +235,17 @@ forms.factory "serverValidationErrorsHandler", [
       # recursively set errors on the form
       setErrors form, errors
 ]
+
+#Automatically add asterisk to required fields.
+requiredDirective = [()->
+  return {
+    restrict: "A",
+    scope: false,
+    link: (scope, element) ->
+      #console.log element.closest("label")
+      element.closest(".form-group").find(".control-label").addClass("required")
+  }
+]
+
+forms.directive "required", requiredDirective
+forms.directive "ngRequired", requiredDirective
