@@ -63,6 +63,7 @@ gridz.directive "agGrid", [
 
         # initialize actionPopup handler
         ActionPopupHandler(gridEl, scope, attrs)
+        angular.element(element.find("select").wrap('<span class="select-wrapper"></span>'))
 
       if element.is(":visible")
         # Element is visible, initialize the grid now
@@ -107,6 +108,7 @@ gridz.directive "agGrid", [
 
       element.find("table.gridz").attr("id", id)
       element.find("div.gridz-pager").attr("id", "#{id}-pager")
+      console.log element.find("div")
 
       # return linking function which will be called at a later time
       post: link

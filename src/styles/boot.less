@@ -105,6 +105,12 @@ select:extend(.select2-chosen) {
   -moz-appearance: none;
 }
 
+select {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
 legend {
   color: #555;
   font-size: 18px;
@@ -373,13 +379,6 @@ label.required:after {
     width: 10%;
     height: 100%;
 
-}
-/*Pager select dropdown*/
-.ui-jqgrid > .ui-jqgrid-pager *, .ui-jqgrid > .ui-jqgrid-pager select:after{
-  left: -13px;
-  z-index: 1;
-  content:"▼";
-  color: rgb(136, 136, 136);
 }
 .select2-container-multi .select2-choices, a.select2-choice {
     min-height: 32px;
