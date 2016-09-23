@@ -374,7 +374,13 @@ label.required:after {
     height: 100%;
 
 }
-
+/*Pager select dropdown*/
+.ui-jqgrid > .ui-jqgrid-pager *, .ui-jqgrid > .ui-jqgrid-pager select:after{
+  left: -13px;
+  z-index: 1;
+  content:"▼";
+  color: rgb(136, 136, 136);
+}
 .select2-container-multi .select2-choices, a.select2-choice {
     min-height: 32px;
 }
@@ -393,4 +399,19 @@ label.required:after {
     pointer-events: none;
     font-size: 8px;
     box-sizing: border-box;
+}
+
+.select2-container-multi .select2-choices:after, .select2-container-multi .select2-choice:after {
+  content:"\f142";
+  font-family: FontAwesome;
+  padding: 8px 12px;
+  position: absolute; right: 0px; top: 4px;
+  z-index: 1;
+  text-align: center;
+  color: rgb(136, 136, 136);
+  width: 10%;
+  height: 100%;
+  pointer-events: none;
+  font-size: 10px;
+  box-sizing: border-box;
 }
