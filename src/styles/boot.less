@@ -381,9 +381,14 @@ label.required:after {
 
 }
 .select2-container-multi .select2-choices, a.select2-choice {
+    box-sizing: border-box !important;
     min-height: 32px;
 }
 
+.select2-container-multi .select2-choices .select2-search-field input {
+    box-sizing: border-box !important;
+    height: 32px;
+}
 
 /* show dropdown arrow for every type of select2 dropdown, single or multi */
 .select2-choices:after, .select2-choice:after {
