@@ -3,7 +3,7 @@ form[editable-form] .editable-datepicker input {
 }
 
 form[editable-form] .editable-checkbox input {
-    width: auto !important;
+    width: auto;
 }
 
 form[editable-form] div {
@@ -24,22 +24,22 @@ form[editable-form] .title {
     margin-left: 5px;
 }
 
-
 form[editable-form] .editable {
     display: inline-block;
     padding-top: 5px;
     vertical-align: top;
 }
 
-form[editable-form] select {
-    width: 142px;
-    height: 20px;
+.editable-controls .select2-container {
+  width: 167px !important;
 }
 
-form[editable-form] input.editable-input {
-    width: 144px;
-    padding: 6px 12px;
+form[editable-form] select {
+  width: 155px;
+  padding: 6px 2px 6px 10px;
+  border-radius: 5px;
 }
+
 
 form[editable-form] .editable-error {
     color: #b94a48;
@@ -49,15 +49,20 @@ form[editable-form] input.ng-invalid {
     border-color: #b94a48;
 }
 
-form[editable-form] input, form[editable-form] select {
+form[editable-form] input {
+    width: 167px;
     -ms-box-sizing:content-box;
     -moz-box-sizing:content-box;
     box-sizing:content-box;
     -webkit-box-sizing:content-box;
     height: 20px;
 }
+form[editable-form] select.editable-input{
+  width: 167px;
+}
 
 input[type=number].editable-input {
+    width: 158px;
     padding: 4px;
     font-size: 13px;
     line-height: 18px;

@@ -41,6 +41,40 @@ ul.select2-results table td {
 
 // tweaks for tab panels
 
+.fields-panel dl {
+  margin: 0;
+}
+
+.fields-panel dd {
+  padding: 2px 0;
+}
+
+.fields-panel dt {
+  color: #777;
+  font-size: 92%;
+  padding: 2px 0;
+  width: 50%;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.fields-panel .dl-horizontal dd {
+  margin-left: 54%;
+  padding: 2px 0;
+}
+
+.fields-panel .dl-horizontal dt {
+  color: #777;
+  font-size: 92%;
+  padding: 2px 0;
+  width: 50%;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+hr.panel-divider {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
 div.tab-pane {
   overflow-x: hidden;
 }
@@ -133,6 +167,65 @@ legend {
   }
 }
 
+/* Never show horizontal pager inside dialogs */
+.modal-body {
+  overflow-x: hidden;
+}
+
+
+.modal {
+  overflow: auto;
+}
+
+.modal-lg {
+  height: auto;
+  width: auto;
+  max-height: none;
+  overflow: auto;
+}
+
+.modal-body-lg {
+  position: relative;
+  overflow-y: auto;
+  max-height: 85%;
+  padding: 15px;
+}
+
+.modal-fullscreen {
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.modal-fullscreen > div {
+  padding: 1%;
+}
+
+.modal-fullscreen .modal-body {
+  max-height: inherit;
+  margin: 0;
+  margin-right: auto;
+  margin-left: auto;
+  width: 100%;
+}
+
+.modal-md {
+  left: 0;
+  height: 100%;
+  width: 80%;
+}
+
+.modal-md > div {
+  padding: 1%;
+}
+
+.modal-md .modal-body {
+  max-height: inherit;
+  margin: 0;
+  margin-right: auto;
+  margin-left: auto;
+  width: 100%;
+}
 .no-wrap {
   white-space: nowrap;
 }
@@ -161,7 +254,7 @@ legend {
 }
 
 .half-width {
-  width: 48% !important;
+  width: calc(~'(100% - 5px)/2') !important;
 }
 
 .row .extended-col {
@@ -275,7 +368,7 @@ form {
   }
   ul {
     li.divider-vertical {
-      height: 40px;
+      height: 42px;
     }
   }
 }
@@ -299,8 +392,7 @@ form {
   li {
     a {
       cursor: pointer;
-      padding-left: 5px;
-      padding-right: 5px;
+      padding: 11px 5px
     }
   }
 }
@@ -365,6 +457,9 @@ label.required:after {
 
 .select-wrapper {
     display: inline;
+  select {
+   min-width: 120px;
+  }
 }
 
 
@@ -394,7 +489,7 @@ label.required:after {
 .select2-choices:after, .select2-choice:after {
     content:"▼";
     padding: 8px 12px;
-    position: absolute; right: 0px; top: 4px;
+    position: absolute; right: 0px; top: 2px;
     z-index: 1;
     text-align: center;
     color: rgb(136, 136, 136);
@@ -409,7 +504,7 @@ label.required:after {
   content:"\f142";
   font-family: FontAwesome;
   padding: 8px 12px;
-  position: absolute; right: 0px; top: 4px;
+  position: absolute; right: 0px; top: 2px;
   z-index: 1;
   text-align: center;
   color: rgb(136, 136, 136);
@@ -418,4 +513,151 @@ label.required:after {
   pointer-events: none;
   font-size: 10px;
   box-sizing: border-box;
+}
+
+ul.select2-results table {
+  margin-bottom: 0px;
+}
+
+ul.select2-results table td {
+  border: none;
+  padding: 2px;
+}
+
+table.customer-select-result td:nth-child(1) {
+  width: 60px;
+}
+
+.well.white {
+  background-color: #fff;
+  margin: 0;
+  padding: 10px;
+}
+
+.well .dl-horizontal {
+  margin: 0;
+}
+
+.view-header {
+  /*border-bottom: 1px solid #EEEEEE;*/
+  margin: 10px 0 0;
+  padding-bottom: 5px;
+  font-size: 20px;
+}
+
+.position-relative {
+  position: relative;
+}
+
+.vertical-center {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/*Tag Input directive*/
+.tagged-input {
+  border: 1px solid #ccc;
+  padding: 4px;
+  display: inline-block;
+  width: 100%;
+  border-bottom-left-radius: 3px;
+  border-top-left-radius: 3px;
+  background-color: white;
+  -webkit-appearance: textfield;
+  -moz-appearance: textfield;
+}
+.tagged-input input {
+  display: inline-block;
+  float: left;
+  height: 24px;
+  padding: 4px!important;
+  border: 0!important;
+  -moz-box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+  font-size: 13px;
+  width: 100%;
+}
+.tagged-input input:focus {
+  -moz-box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+}
+.tagged-input .tag {
+  padding: 2px 4px;
+  line-height: 13px;
+  color: #555;
+  font-size: 13px;
+  background: #fff;
+  border: solid 1px;
+  border-color: #ccc;
+  border-radius: 2px ;
+  display: inline-block;
+  float: left;
+  border-radius: 2px;
+  margin: 2px 5px 2px 0px;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;
+}
+.tagged-input .tag .delete-tag i {
+  font-size: 9px;
+  margin-right: 4px;
+  color: rgba(128, 128, 128, 0.78)
+}
+.tagged-input .tag .delete-tag i:hover {
+  color: rgba(128, 128, 128, 1)
+}
+/*Tag Input directive styles end*/
+
+.check-mark-false {
+  color: red;
+  font-size: 16px;
+}
+
+.check-mark-true {
+  color: green;
+  font-size: 19px;
+}
+
+.menu-arrow {
+  padding: 15px 0px 4px 3px;;
+}
+
+/***** bootstrap tables *****/
+td.align-right, td.number,
+th.align-right, th.number {
+  text-align: right;
+}
+
+.table.nolines th, .table.nolines td {
+  border: none;
+}
+
+/***** bootstrap forms ****/
+.form-horizontal .control-label {
+  color: #666666;
+  font-weight: bold;
+  text-align: right;
+  width: 160px;
+  float: left;
+}
+
+.form-group .controls .input-group {
+  width: 100%;
+}
+
+.form-horizontal .controls {
+  margin-left: 180px;
+}
+
+.form-horizontal .form-actions {
+  padding: 19px 20px 20px 180px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #e5e5e5;
+}
+
+.custom-form .form-group {
+  margin: 0 0 20px 5px;
 }
