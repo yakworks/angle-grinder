@@ -6,19 +6,6 @@ form[editable-form] .editable-checkbox input {
     width: auto;
 }
 
-form[editable-form] .customer-tags .select2-search-field {
-    height: 20px;
-}
-
-form[editable-form] .customer-tags li.select2-search-choice {
-    float: none;
-    margin: 3px 5px 3px 5px;
-}
-
-form[editable-form] .customer-tags li.select2-search-choice div {
-    padding: 1px;
-}
-
 form[editable-form] div {
     height: auto;
     padding: 5px 0;
@@ -43,13 +30,16 @@ form[editable-form] .editable {
     vertical-align: top;
 }
 
-form[editable-form] select {
-    width: 160px;
+.editable-controls .select2-container {
+  width: 167px !important;
 }
 
-form[editable-form] input {
-    width: 160px;
+form[editable-form] select {
+  width: 155px;
+  padding: 6px 2px 6px 10px;
+  border-radius: 5px;
 }
+
 
 form[editable-form] .editable-error {
     color: #b94a48;
@@ -59,15 +49,20 @@ form[editable-form] input.ng-invalid {
     border-color: #b94a48;
 }
 
-form[editable-form] input,select {
+form[editable-form] input {
+    width: 167px;
     -ms-box-sizing:content-box;
     -moz-box-sizing:content-box;
     box-sizing:content-box;
     -webkit-box-sizing:content-box;
     height: 20px;
 }
+form[editable-form] select.editable-input{
+  width: 167px;
+}
 
 input[type=number].editable-input {
+    width: 158px;
     padding: 4px;
     font-size: 13px;
     line-height: 18px;
