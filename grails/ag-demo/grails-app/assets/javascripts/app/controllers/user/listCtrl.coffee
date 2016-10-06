@@ -4,7 +4,7 @@ class ListCtrl
   constructor: ($scope, $log, Resource, @$filter, DialogCrudCtrlMixin, pathWithContext, $http, uiGridConstants) ->
 
     $scope.gridOptions =
-      path: "/user/list?format=json"
+      path: "/user/list"
       colModel: @colModel()
       multiselect: false # turn off multiselect
       shrinkToFit: true # makes columns fit to width
@@ -24,7 +24,7 @@ class ListCtrl
         user
 
     # UI-grid test example
-    listPath = pathWithContext("/user/list?format=json")
+    listPath = pathWithContext("/user/list")
 
     paginationOptions =
       pageNumber: 1

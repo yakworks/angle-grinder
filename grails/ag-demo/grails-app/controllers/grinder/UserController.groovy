@@ -7,15 +7,13 @@ import org.joda.time.LocalDate
 
 import java.text.SimpleDateFormat
 
-class UserController extends BaseDomainController {
+class UserController extends RestDaoController {
+  UserController() {
+    super(User)
+  }
     static final int SC_UNPROCESSABLE_ENTITY = 422
 
-    def domainClass = User
-
     def selectFields = ["*", "contact.*"]
-
-    def index() {
-    }
 
     protected def listCriteria() {
         def pager = new Pager(params)
@@ -76,26 +74,6 @@ class UserController extends BaseDomainController {
     def searchPartial() {
         def user = new User()
         render(template: "search", model: [user: user])
-    }
-
-    def saveOrUpdate() {
-        try {
-            def result = params.id ? dao.update(params) : dao.insert(params)
-            render ExportUtil.buildMapFromPaths(result.entity, selectFields) as JSON
-        } catch (DomainException e) {
-            response.status = 409
-            def emsg = (e.hasProperty("messageMap")) ? g.message(code: e.messageMap?.code, args: e.messageMap?.args, default: e.messageMap?.defaultMessage) : null
-            render(plugin: "rally", template: "edit", model: [user: e.meta?.user ?: e.entity, errorMsg: emsg])
-        }
-    }
-
-    def get() {
-        def user = User.get(params.id)
-        if (user) {
-            render ExportUtil.buildMapFromPaths(user, selectFields) as JSON
-        } else {
-            notFound params.id
-        }
     }
 
 }

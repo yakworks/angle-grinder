@@ -13,14 +13,14 @@ resources.factory("resourceBuilder", [
         resourceName = basePath.replace(/^(\/+)/, "");
       }
       var pathWithoutContext = basePath;
-      basePath = pathWithContext(basePath);
+      basePath = pathWithContext(basePath)+"s";
 
       var Resource = $resource(basePath + "/:action/:id", { id: "@id" }, {
         list:       { method: "GET", params: { action: "list" }, isArray: false },
-        get:        { method: "GET", params: { action: "get" } },
-        save:       { method: "POST", params: { action: "save" } },
-        update:     { method: "POST", params: { action: "update" } },
-        "delete":   { method: "POST", params: { action: "delete" } },
+        get:        { method: "GET" },
+        save:       { method: "POST" },
+        update:     { method: "PUT"},
+        "delete":   { method: "POST" },
 
         // mass actions (for selected rows)
         massUpdate: { method: "POST", params: { action: "massUpdate" } },
