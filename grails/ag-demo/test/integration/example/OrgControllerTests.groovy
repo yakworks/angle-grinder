@@ -2,7 +2,7 @@ package example
 
 import com.coderberry.faker.FakerService
 import grinder.Org
-import grinder.OrgController
+import grinder.api.OrgController
 
 class OrgControllerTests extends GroovyTestCase {
 

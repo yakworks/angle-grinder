@@ -17,10 +17,9 @@ class OrgTests {
         def org = new Org()
         assert !org.validate()
 
-        assertEquals 3, org.errors.allErrors.size()
+        assertEquals 2, org.errors.allErrors.size()
         assertEquals "nullable", org.errors["name"]
         assertEquals "nullable", org.errors["num"]
-        assertEquals "nullable", org.errors["orgShowCaseId"]
     }
 
     @Test

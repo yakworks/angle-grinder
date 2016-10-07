@@ -38,3 +38,5 @@ common.factory "pendingRequests", [
 common.value "camelize", (str) ->
   str.replace /(\-|\.|_|\s)+(.)?/g, (match, p1, p2) ->
     if p2 then p2.toUpperCase() else ""
+
+common.constant('RestContext', '')

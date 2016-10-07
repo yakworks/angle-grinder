@@ -1,9 +1,10 @@
 package grinder
 
 import grails.rest.Resource
+import grinder.api.RestDaoController
 import org.apache.commons.lang.builder.EqualsBuilder
 import org.apache.commons.lang.builder.HashCodeBuilder
-@Resource(uri='/notes', superClass=RestDaoController)
+@Resource(superClass=RestDaoController)
 class Note implements Serializable {
 
     String name

@@ -1,3 +1,5 @@
+import grinder.OrgController
+
 class UrlMappings {
 
 	static mappings = {
@@ -7,21 +9,20 @@ class UrlMappings {
 			}
 		}
 
-		"/"(controller: "OrgTabs" )
+		"/"(controller: "OrgTabs", action: "index")
 		"500"(view: "/error")
+    "/$namespace/$controller/$action?"()
 
-    "/orgs"(resources: "org"){
-      action = ["GET": "list"]
-      "/notes"(resourses: "note"){
-        action = ["GET": "list"]
-      }
+    "/api/orgs"(resources: "org", namespace:"api"){
+      "/notes"(resources: "note", namespace:"api")
+      "/users"(resources: "user", namespace:"api")
     }
-    "/users"(resources: "user"){
-      action = ["GET": "list"]
-    }
-    "/notes"(resources: "note"){
-      action = ["GET": "list"]
-    }
+
+    "/api/users"(resources: "user", namespace:"api")
+    "/api/notes"(resources: "note", namespace:"api")
+    "/api/contacts"(resources: "contact", namespace:"api")
+    "/api/orgShowCases"(resources: "orgShowCase", namespace:"api")
+
 	}
 
 }

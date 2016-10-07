@@ -4,7 +4,7 @@ class ListCtrl
   constructor: ($scope, Resource, SinglePageCrudCtrlMixin, MassUpdateMixin) ->
 
     $scope.gridOptions =
-      path: "/org/list"
+      path: "/api/orgs"
       colModel: @colModel()
       multiselect: true
       shrinkToFit: true # makes columns fit to width
@@ -16,7 +16,7 @@ class ListCtrl
 
     SinglePageCrudCtrlMixin $scope,
       Resource: Resource
-      resourcePath: "/orgs"
+      resourcePath: "/api/orgs"
       gridName: "orgGrid"
 
     MassUpdateMixin $scope,

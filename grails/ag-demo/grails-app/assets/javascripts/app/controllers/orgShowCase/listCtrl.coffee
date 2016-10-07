@@ -4,7 +4,7 @@ class ListCtrl
   constructor: ($scope, $log, Resource, @$filter, DialogCrudCtrlMixin) ->
 
     $scope.gridOptions =
-      path: "/orgShowCase/list?format=json"
+      path: "/api/orgShowCases"
       colModel: @colModel()
       multiselect: false # turn off multiselect
       shrinkToFit: true # makes columns fit to width

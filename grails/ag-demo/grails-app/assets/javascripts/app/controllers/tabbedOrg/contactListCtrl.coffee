@@ -6,7 +6,7 @@ class ContactListCtrl
     Users = resourceBuilder("/user")
 
     $scope.gridOptions =
-      path: "/org/listUsers/#{$scope.org.id}?format=json"
+      path: "/api/orgs/#{$scope.org.id}/users"
       colModel: @colModel()
       multiselect: false # turn off multiselect
       shrinkToFit: true # makes columns fit to width

@@ -1,10 +1,10 @@
 class ListCtrl
 
-  @$inject = ["$scope", "$log", "Resource", "$filter", "DialogCrudCtrlMixin", "pathWithContext", "$http", 'uiGridConstants']
+  @$inject = ["$scope", "$log", "Resource", "$filter", "DialogCrudCtrlMixin", "pathWithRestContext", "$http", 'uiGridConstants']
   constructor: ($scope, $log, Resource, @$filter, DialogCrudCtrlMixin, pathWithContext, $http, uiGridConstants) ->
 
     $scope.gridOptions =
-      path: "/user/list"
+      path: "/api/users"
       colModel: @colModel()
       multiselect: false # turn off multiselect
       shrinkToFit: true # makes columns fit to width
@@ -24,7 +24,7 @@ class ListCtrl
         user
 
     # UI-grid test example
-    listPath = pathWithContext("/user/list")
+    listPath = pathWithContext("/api/users")
 
     paginationOptions =
       pageNumber: 1

@@ -3,7 +3,7 @@ class FormCtrl
   @$inject = ["$scope", "$http", "pathWithContext"]
   constructor: ($scope, $http, pathWithContext) ->
      # Do
-    $http.get(pathWithContext("/org/listAll")).success (orgs) ->
+    $http.get(pathWithContext("/api/orgs")).success (orgs) ->
       $scope.orgs = orgs
 
 angular.module("angleGrinder")

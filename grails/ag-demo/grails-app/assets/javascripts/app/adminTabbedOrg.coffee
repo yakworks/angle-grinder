@@ -1,5 +1,6 @@
 org = angular.module "admin.orgTabs", ["admin.org"]
 
+
 org.config [
   "$routeProvider", ($routeProvider) ->
 
@@ -9,10 +10,11 @@ org.config [
 
       .when "/:id",
         # TODO use context path
-        templateUrl: "templates/tabbedOrg/show.html"
+        templateUrl: "../templates/tabbedOrg/show.html"
         controller: "tabbedOrg.ShowCtrl"
         resolve: org: [
           "$route", "resourceResolver", ($route, resourceResolver) ->
             resourceResolver($route.current.params.id)
         ]
 ]
+app.constant('RestContext', 'api')

@@ -33,49 +33,10 @@ abstract class BaseDomainController {
     }
 
     def index() {
-        redirect(action: "list", params: params)
+
     }
 
-    /**
-     * returns the list of domain obects for the scaffolded contro
-     */
-    protected def listCriteria() {
-        def crit = domainClass.createCriteria()
-        def pager = new Pager(params)
-        def datalist = crit.list(max: pager.max, offset: pager.offset) {
-            if (params.sort)
-                order(params.sort, params.order)
-        }
-        return datalist
-    }
 
-    def list() {
-        if (response.format == 'json') {
-            listJson()
-        } else {
-            if (ajaxGrid) {
-                return listModel()
-            } else {
-                forward(action: "listhtml")
-                return //stop the flow
-            }
-        }
-    }
-
-    protected def listJson() {
-        def pageData = pagedList(listCriteria())
-        render pageData.jsonData as JSON
-    }
-
-    protected def pagedList(dlist) {
-        def pageData = new Pager(params)
-        def fieldList
-        if (hasProperty('selectFields')) {
-            fieldList = selectFields
-        }
-        pageData.setupData(dlist, fieldList)
-        return pageData
-    }
 
     protected def listModel() {
         return []
@@ -96,17 +57,7 @@ abstract class BaseDomainController {
     }
 
 
-    def edit(Long id) {
-        def domainInstance = domainClass.get(id)
-        if (!domainInstance) {
-            flash.message = DaoMessage.notFound(GrailsClassUtils.getShortName(domainClass), params)
-            redirect(action: "list")
-            return
-        } else {
-            return [(domainInstanceName): domainInstance]
-        }
 
-    }
 
     protected renderSuccess(String actionMeth, result) {
         log.debug("renderSuccess ${request.format}")
@@ -130,182 +81,8 @@ abstract class BaseDomainController {
         }
     }
 
-    def save() {
-        if (request.format == 'json' || response.format == 'json') {
-            saveOrUpdateJson()
-            return
-        }
-        try {
-            def result = saveDomain(params)
-            flash.message = result.message
-            renderSuccess('show', result)
-            return
-        } catch (ValidationException e) {
-            log.debug("save with error ${request.format}")
-            flash.message = e.messageMap
-            renderError('create', e)
-            return
-        }
-    }
 
-    def saveOrUpdateJson() {
-        def responseJson = [:]
-        try {
-            def p = BeanPathTools.flattenMap(request, request.JSON)
-            def result = p.id ? dao.update(p) : saveDomain(p)
-            render ExportUtil.buildMapFromPaths(result.entity, selectFields) as JSON
-            return
-        } catch (ValidationException e) {
-            response.status = 422
-            responseJson = [
-                    "status": 422,
-                    "message": buildMsg(e.messageMap),
-                    "messageCode": e.messageMap.code
-            ]
-            responseJson.errors = e.entity.errors.fieldErrors.groupBy {
-                GrailsClassUtils.getPropertyNameRepresentation(it.objectName)
-            }.each {
-                it.value = it.value.collectEntries {
-                    [(it.field): message(error: it)]
-                }
-            }
 
-            render responseJson as JSON
-        }
-    }
-
-    protected def saveDomain(p) {
-        log.debug("saveDomain(${p})")
-        return dao.insert(p)
-    }
-
-    def show(Long id) {
-        try {
-            def domainInstance = showDomain(id)
-            withFormat {
-                html {
-                    return [(domainInstanceName): domainInstance]
-                }
-                json {
-                    render domainInstance as JSON
-                }
-            }
-        } catch (ValidationException e) {
-            flash.message = e.messageMap
-            withFormat {
-                html {
-                    redirect(action: "list")
-                }
-                json {
-                    response.status = 409 //Bad Request Error
-                    render errorModel(e.entity, e.meta) as JSON
-                }
-            }
-        }
-    }
-
-    protected def showDomain(Long id) {
-        def domainInstance = domainClass.get(id)
-        if (!domainInstance) {
-            throw new DomainException(DaoMessage.notFound(GrailsClassUtils.getShortName(domainClass), params), null)
-        }
-        return domainInstance
-    }
-
-    def update() {
-        if (request.format == 'json' || response.format == 'json') {
-            saveOrUpdateJson()
-            return
-        }
-        try {
-            def result = updateDomain()
-            flash.message = result.message
-            renderSuccess('show', result)
-            return
-        } catch (ValidationException e) {
-            flash.message = e.messageMap
-            renderError('edit', e)
-            return
-        }
-    }
-
-    protected def updateDomain(opts = null) {
-        params.remove('companyId')
-        log.debug "updateDomain with ${params}"
-        def res = dao.update(params)
-        if (opts?.flush) DaoUtil.flush()
-        return res
-    }
-
-    def saveOrUpdate() {
-        try {
-            def result = params.id ? dao.update(params) : dao.insert(params)
-            //all was good render a success save message
-            render message(code: 'user.saved')
-        } catch (DomainException e) {
-            response.status = 409
-            def emsg = (e.hasProperty("messageMap")) ? g.message(code: e.messageMap?.code, args: e.messageMap?.args, default: e.messageMap?.defaultMessage) : null
-            render(template: "userEdit", model: [user: e.meta?.user ?: e.entity, errorMsg: emsg])
-        }
-    }
-
-    def delete() {
-        if (request.format == 'json' || response.format == 'json') {
-            deleteJson()
-            return
-        }
-
-        def commonParams
-
-        try {
-            def result = null
-            commonParams = (request.format == 'json' ? request.JSON : params) // get the appropriate params based on request format
-            result = dao.remove(commonParams)
-            flash.message = result.message
-            withFormat {
-                html {
-                    redirect(action: "list")
-                }
-                json {
-                    render successModel(commonParams.id) as JSON
-                }
-            }
-        } catch (ValidationException e) {
-            flash.message = e.messageMap
-            withFormat {
-                html {
-                    redirect(action: "show", id: commonParams.id)
-                }
-                json {
-                    response.status = 409 //Bad Request Error
-                    render errorModel(e.entity, e.meta) as JSON
-                }
-            }
-        }
-    }
-
-    def deleteJson() {
-        log.debug("in deleteJson with ${params}")
-
-        def responseJson = [:]
-        try {
-            def result = dao.remove(params)
-            render result as JSON
-        } catch (ValidationException e) {
-            log.debug("saveJson with error")
-            response.status = 422
-            responseJson = [
-                    "status": 422,
-                    "message": buildMsg(e.messageMap),
-                    "messageCode": e.messageMap.code
-            ]
-            render responseJson as JSON
-        }
-    }
-
-    protected def deleteDomain() {
-        return dao.remove(params)
-    }
 
     protected buildMsg(msgMap) {
         return g.message('code': msgMap.code, 'args': msgMap.args, 'default': msgMap.defaultMessage)
@@ -389,7 +166,7 @@ Code 	Explanation
 400 BAD REQUEST 	Invalid request URI or header, or unsupported nonstandard parameter.
 401 UNAUTHORIZED 	Authorization required.
 *** 403 FORBIDDEN 		Unsupported standard parameter, or authentication or authorization failed.
-404 NOT FOUND 		Standard - Resource (such as a feed or entry) not found. 
+404 NOT FOUND 		Standard - Resource (such as a feed or entry) not found.
 409 CONFLICT 		Validation error or the version number doesn't match resource's latest version number.
 422 UNPROCESSABLE ENTITY 		Validation error or the version number doesn't match resource's latest version number.
 

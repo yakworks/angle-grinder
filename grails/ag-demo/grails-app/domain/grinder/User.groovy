@@ -1,5 +1,7 @@
 package grinder
 
+import grails.rest.Resource
+import grinder.api.RestDaoController
 import org.apache.commons.lang.builder.EqualsBuilder
 import org.apache.commons.lang.builder.HashCodeBuilder
 import org.jadira.usertype.dateandtime.joda.PersistentDateTime
@@ -12,6 +14,7 @@ import org.joda.time.LocalDateTime
 /**
  * User for user account.
  */
+@Resource(superClass = RestDaoController)
 class User implements Serializable {
 
     static transients = ['pass']

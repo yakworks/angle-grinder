@@ -1,8 +1,10 @@
 package grinder
 
+import grails.rest.Resource
+import grinder.api.RestDaoController
 import org.apache.commons.lang.builder.EqualsBuilder
 import org.apache.commons.lang.builder.HashCodeBuilder
-
+@Resource(superClass = RestDaoController)
 class Contact {
     String num
     String name

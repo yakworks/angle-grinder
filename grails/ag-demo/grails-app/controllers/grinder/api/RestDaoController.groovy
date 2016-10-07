@@ -1,16 +1,17 @@
-package grinder
+package grinder.api
 
-import grails.converters.JSON
 import grails.plugin.dao.DaoUtil
 import grails.rest.RestfulController
-import grails.transaction.Transactional
+import grinder.BeanPathTools
+import grinder.Pager
+import grinder.User
 import org.codehaus.groovy.grails.web.servlet.HttpHeaders
 
 import static org.springframework.http.HttpStatus.CREATED
 import static org.springframework.http.HttpStatus.NO_CONTENT
 
 abstract class RestDaoController<T> extends RestfulController<T> {
-  //static defaultAction = "indexTemplate"
+  static namespace = "api"
   //Responce formats, json - by default
   static responseFormats = ['json', 'xml']
 
@@ -30,17 +31,10 @@ abstract class RestDaoController<T> extends RestfulController<T> {
     resource.dao
   }
 
-  def indexTemplate(){
-    render(view: "index")
-  }
 
-  @Override
-  def index(){
-
-  }
-  def list(Integer max) {
+  def index(Integer max) {
     params.max = Math.min(max ?: 10, 100)
-    respond pagedList(listCriteria(params)).jsonData, model: [("${resourceName}Count".toString()): countResources()]
+    respond pagedList(listAllResources(params)).jsonData, model: [("${resourceName}Count".toString()): countResources()]
   }
 
   @Override

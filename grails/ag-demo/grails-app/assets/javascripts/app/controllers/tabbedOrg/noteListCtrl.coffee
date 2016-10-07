@@ -7,7 +7,7 @@ class NoteListCtrl
     Notes = resourceBuilder("/note")
 
     $scope.gridOptions =
-      path: "/org/listNotes/#{$scope.org.id}?format=json"
+      path: "/api/orgs/#{$scope.org.id}/notes"
       colModel: @colModel()
       multiselect: false # turn off multiselect
       shrinkToFit: true # makes columns fit to width

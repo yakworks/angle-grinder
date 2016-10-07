@@ -4,7 +4,7 @@ import com.coderberry.faker.FakerService
 import grails.converters.JSON
 import grails.plugin.dao.DaoUtil
 import grinder.OrgShowCase
-import grinder.OrgShowCaseController
+import grinder.api.OrgShowCaseController
 import grinder.User
 import grinder.UserController
 import org.joda.time.LocalDate
@@ -28,7 +28,7 @@ class OrgShowcaseControllerTests extends GroovyTestCase {
 		]).toString()
 
 
-		def list = controller.listCriteria()
+		def list = controller.listCriteria(controller.params)
 
 		assertEquals 1, list.size()
 		assertEquals org.name, list[0].name
@@ -48,7 +48,7 @@ class OrgShowcaseControllerTests extends GroovyTestCase {
 		]).toString()
 
 
-		def list = controller.listCriteria()
+		def list = controller.listCriteria(controller.params)
 
 		assertEquals 1, list.size()
 		assertEquals org.name, list[0].name

@@ -1,12 +1,13 @@
 package grinder
 
 import grails.rest.Resource
+import grinder.api.RestDaoController
 import org.apache.commons.lang.builder.EqualsBuilder
 import org.apache.commons.lang.builder.HashCodeBuilder
 
 
-@Resource(uri='/orgs', superClass=RestDaoController)
-class Org {
+@Resource(superClass=RestDaoController)
+class Org implements Serializable {
   String num
   String name
 
