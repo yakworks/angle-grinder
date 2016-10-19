@@ -1,3 +1,4 @@
+grails.useGrails3FolderLayout = true
 grails.plugin.location.angleGrinder = "../ag-plugin"
 
 grails {
@@ -47,6 +48,7 @@ grails {
                 compile ":plugin-config:0.1.8"
                 compile ":faker:0.7"
                 compile ":joda-time:1.5"
+                compile ":view-tools:0.3-grails2"
 
                 test ":code-coverage:1.2.6"
             }

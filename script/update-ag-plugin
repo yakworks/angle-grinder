@@ -25,7 +25,7 @@ do
 done
 
 # Cleanup the output directory
-OUTPUT_DIRECTORY="$CURRENT_DIR/grails/ag-plugin/web-app/angleGrinder"
+OUTPUT_DIRECTORY="$CURRENT_DIR/grails/ag-plugin/grails-app/assets/angleGrinder"
 if [ ! -d "$OUTPUT_DIRECTORY" ]; then
   echo "Cannot found $OUTPUT_DIRECTORY"
   exit 1

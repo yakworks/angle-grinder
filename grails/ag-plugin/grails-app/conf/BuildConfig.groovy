@@ -1,3 +1,5 @@
+grails.useGrails3FolderLayout = true
+
 grails.project.class.dir = "target/classes"
 grails.project.test.class.dir = "target/test-classes"
 grails.project.test.reports.dir = "target/test-reports"
@@ -37,7 +39,8 @@ grails.project.dependency.resolution = {
   dependencies { }
 
   plugins {
-    compile ":hibernate4:4.3.10"
+    compile (":hibernate4:4.3.10") { export = false }
+    compile (":view-tools:0.3-grails2") { export = false }
     build(":release:3.1.2", ":rest-client-builder:2.1.1") { export = false }
   }
 }

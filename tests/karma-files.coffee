@@ -14,8 +14,8 @@ module.exports =
     "components/bower/angular-scroll/angular-scroll.js"
     "components/bower/angular-ui-grid/ui-grid.js"
 
-    "grails/ag-plugin/web-app/angleGrinder/js/application.js"
-    "grails/ag-plugin/web-app/angleGrinder/js/modules/resources.js"
+    "grails/ag-plugin/grails-app/assets/angleGrinder/js/application.js"
+    "grails/ag-plugin/grails-app/assets/angleGrinder/js/modules/resources.js"
 
     "components/bower/free-jqgrid/js/grid.base.js"
     "components/bower/select2/select2.js"
@@ -28,9 +28,6 @@ module.exports =
     "components/bower/eonasdan-bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js"
     "components/bower/toastr/toastr.js"
     "components/bower/sweetalert/dist/sweetalert-dev.js"
-
-    "grails/ag-plugin/web-app/angleGrinder/js/application.js"
-    "grails/ag-plugin/web-app/angleGrinder/js/modules/resources.js"
 
     "src/scripts/gridz/gridz.coffee"
     "src/scripts/utils/baseCtrl.coffee"

@@ -63,7 +63,7 @@ module.exports = (grunt) ->
     ,
       expand: true
       flatten: true
-      cwd: "grails/ag-plugin/web-app/angleGrinder/js/modules"
+      cwd: "grails/ag-plugin/grails-app/assets/angleGrinder/js/modules"
       dest: "<%= appConfig.dev %>/scripts/utils"
       src: "resources.js"
     ]

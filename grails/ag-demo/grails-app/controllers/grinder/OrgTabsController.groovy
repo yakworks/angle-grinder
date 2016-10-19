@@ -6,4 +6,10 @@ class OrgTabsController extends OrgController {
        return [hideSidebar: true]
     }
 
+/*
+    def listTemplate(){
+      render(view: "/tabbedOrg/list.html")
+    }
+*/
+
 }

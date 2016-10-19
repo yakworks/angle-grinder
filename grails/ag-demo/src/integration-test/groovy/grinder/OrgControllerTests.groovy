@@ -1,4 +1,4 @@
-package example
+package grinder
 
 import com.coderberry.faker.FakerService
 import grinder.Org

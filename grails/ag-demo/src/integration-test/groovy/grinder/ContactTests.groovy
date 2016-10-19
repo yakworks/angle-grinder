@@ -1,4 +1,4 @@
-package example
+package grinder
 
 import grinder.Contact
 import grinder.ContactType

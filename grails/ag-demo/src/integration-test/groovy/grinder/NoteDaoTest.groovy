@@ -1,4 +1,4 @@
-package example
+package grinder
 
 import grinder.Org
 import grinder.NoteDao
