@@ -1,3 +1,5 @@
+package grinder
+
 class UrlMappings {
 
     static mappings = {

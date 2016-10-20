@@ -1,4 +1,4 @@
-package grinder
+package agdemo
 
 import grails.converters.JSON
 import grails.plugin.dao.DomainException

@@ -14,13 +14,6 @@
  * limitations under the License.
  */
 package grinder
-import org.codehaus.groovy.grails.commons.GrailsClassUtils
-import grails.util.GrailsNameUtils
-import java.text.SimpleDateFormat
-import java.text.DecimalFormat
-import java.text.DateFormat
-import org.codehaus.groovy.grails.web.util.StreamCharBuffer
-
 
 /**
 *	Provides convienence tags for	 form controls
@@ -28,11 +21,10 @@ import org.codehaus.groovy.grails.web.util.StreamCharBuffer
 * @author Joshua Burnett
 */
 
-class AgTagLib { 
-	
+class AgTagLib {
+
 	static namespace = "ag"
 
-	def grailsApplication
 	def grinderLabelService
 
 	def label = { attrs ->
@@ -47,7 +39,7 @@ class AgTagLib {
 	// String resolveLabelText(propertyAccessor, attrs) {
 	// 	def labelText
 	// 	def label = attrs.remove('label')
-	// 	//println "propertyAccessor : $propertyAccessor.labelKeys" 
+	// 	//println "propertyAccessor : $propertyAccessor.labelKeys"
 	// 	if (label) {
 	// 		labelText = message(code: label, default: label)
 	// 	}
@@ -56,7 +48,7 @@ class AgTagLib {
 	// 		labelText = ftag.resolveMessage(propertyAccessor.labelKeys, propertyAccessor.defaultLabel)
 	// 	}
 	// 	if (!labelText) {
-	// 		//println "propertyAccessor.defaultLabel : $propertyAccessor.defaultLabel" 
+	// 		//println "propertyAccessor.defaultLabel : $propertyAccessor.defaultLabel"
 	// 		labelText = propertyAccessor.defaultLabel
 	// 	}
 	// 	labelText

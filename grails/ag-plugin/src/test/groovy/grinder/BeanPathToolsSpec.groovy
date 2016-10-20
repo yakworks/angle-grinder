@@ -1,6 +1,6 @@
 package grinder
 
-import org.codehaus.groovy.grails.commons.DefaultGrailsDomainClass
+import org.grails.core.DefaultGrailsDomainClass
 import spock.lang.Specification
 
 class BeanPathToolsSpec extends Specification {

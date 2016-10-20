@@ -1,15 +1,17 @@
 package grinder
 
-import org.codehaus.groovy.grails.commons.GrailsClassUtils
-import org.hibernate.ObjectNotFoundException
+import grails.util.GrailsClassUtils
+import grails.web.servlet.mvc.GrailsParameterMap
+import org.apache.juli.logging.Log
+import org.apache.juli.logging.LogFactory
 import org.hibernate.UnresolvableObjectException
-import org.codehaus.groovy.grails.web.servlet.mvc.GrailsParameterMap
+
 
 //import org.apache.commons.logging.*
 
 //XXX add tests for this
 class BeanPathTools {
-    static org.apache.commons.logging.Log log = org.apache.commons.logging.LogFactory.getLog(getClass())
+    static Log log = LogFactory.getLog(getClass())
 
     private static Map excludes = [hasMany: true, belongsTo: true, searchable: true, __timeStamp: true,
             constraints: true, version: true, metaClass: true]

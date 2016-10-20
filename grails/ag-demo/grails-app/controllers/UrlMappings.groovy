@@ -1,3 +1,5 @@
+package agdemo
+
 class UrlMappings {
 
 	static mappings = {

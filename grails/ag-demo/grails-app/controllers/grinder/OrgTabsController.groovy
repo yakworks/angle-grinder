@@ -1,4 +1,4 @@
-package grinder
+package agdemo
 
 class OrgTabsController extends OrgController {
 

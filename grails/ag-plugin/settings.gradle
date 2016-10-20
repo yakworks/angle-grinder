@@ -1,0 +1,8 @@
+rootProject.name = 'angle-grinder'
+
+//sorted this out from here https://discuss.gradle.org/t/multi-module-project-with-relative-paths-to-sub-projects/4581
+//include ':foobar-plugin',':test-projects:app'
+//project(':foobar-plugin').projectDir = new File('test-projects/foobar-plugin')
+
+//project(':integration-test-app').projectDir = new File('test-projects/integration-test-app')
+//project(':xx').projectDir = new File('.')

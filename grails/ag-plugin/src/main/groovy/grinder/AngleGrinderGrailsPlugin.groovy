@@ -1,3 +1,5 @@
+package grinder
+
 class AngleGrinderGrailsPlugin {
 
     def version = '1.0.1-SNAPSHOT'

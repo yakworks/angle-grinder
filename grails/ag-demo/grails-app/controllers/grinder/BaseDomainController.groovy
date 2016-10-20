@@ -1,4 +1,4 @@
-package grinder
+package agdemo
 
 import grails.converters.JSON
 import grails.plugin.dao.DaoMessage
@@ -389,7 +389,7 @@ Code 	Explanation
 400 BAD REQUEST 	Invalid request URI or header, or unsupported nonstandard parameter.
 401 UNAUTHORIZED 	Authorization required.
 *** 403 FORBIDDEN 		Unsupported standard parameter, or authentication or authorization failed.
-404 NOT FOUND 		Standard - Resource (such as a feed or entry) not found. 
+404 NOT FOUND 		Standard - Resource (such as a feed or entry) not found.
 409 CONFLICT 		Validation error or the version number doesn't match resource's latest version number.
 422 UNPROCESSABLE ENTITY 		Validation error or the version number doesn't match resource's latest version number.
 
