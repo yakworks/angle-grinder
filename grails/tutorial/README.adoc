@@ -1,0 +1,33 @@
+= demo app for tutorial "Grails with REST"
+
+
+= example application for tutorail "Grails with REST"
+
+REST (REpresentational State Transfer) is an architectural style that uses HTTP requests to GET, PUT, POST and DELETE data.
+
+Grails provides several nice features to implement REST.
+
+First is resource anotaion `@Resource`, that creates controller with basic CRUD operations for you. So when you have next
+domain class
+```
+@Resource(uri='/orgs', formats=['xml', 'json'])
+class Org {
+	String name
+}
+```
+and no implemented controllers, `http://localhost:8080/orgs` will return you a list of all your orgs:
+```
+<list>
+	<org id="1">
+		<name>Org_18</name>
+	</org>
+	<org id="2">
+		<name>Org_14</name>
+	</org>
+</list>
+```
+__Note __ It returns xml because it is on the first place for `formats=['xml', 'json']` property, if one changes
+to `formats=['json', 'xml']` then JSON will be returned by default. But it accept both format
+
+
+
