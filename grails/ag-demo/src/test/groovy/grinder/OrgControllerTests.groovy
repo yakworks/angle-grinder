@@ -1,4 +1,4 @@
-package grinder
+package agdemo
 
 import grails.test.mixin.Mock
 import grails.test.mixin.TestFor

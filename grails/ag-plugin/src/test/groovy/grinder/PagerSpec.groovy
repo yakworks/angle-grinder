@@ -5,7 +5,7 @@ import spock.lang.Specification
 /**
  *@author Sudhir
  */
-class PagerSpec extends Specification {
+class PagerSpec {
 
     def "test eachPage"() {
         setup:

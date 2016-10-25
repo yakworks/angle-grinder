@@ -1,10 +1,15 @@
 package grinder
 
+import grails.core.GrailsApplication
+import grails.core.GrailsDomainClass
 import grails.util.GrailsClassUtils
+import grails.util.Holders
 import grails.web.servlet.mvc.GrailsParameterMap
 import org.apache.juli.logging.Log
 import org.apache.juli.logging.LogFactory
+import org.grails.core.artefact.DomainClassArtefactHandler
 import org.hibernate.UnresolvableObjectException
+
 
 
 //import org.apache.commons.logging.*
@@ -12,7 +17,7 @@ import org.hibernate.UnresolvableObjectException
 //XXX add tests for this
 class BeanPathTools {
     static Log log = LogFactory.getLog(getClass())
-
+    static def grailsApplication = Holders.grailsApplication
     private static Map excludes = [hasMany: true, belongsTo: true, searchable: true, __timeStamp: true,
             constraints: true, version: true, metaClass: true]
 
@@ -89,11 +94,12 @@ class BeanPathTools {
             if (propertyPath == '*') {
                 if(log.debugEnabled) log.debug("obj:$obj propertyPath:$propertyPath currentMap:$currentMap" )
                 //just get the persistentProperties
-                def pprops = obj.domainClass.persistentProperties
+                GrailsDomainClass domainClass = (GrailsDomainClass) grailsApplication.getArtefact(DomainClassArtefactHandler.TYPE, obj.getClass().getName())
+                def pprops = domainClass.persistentProperties
                 //filter out the associations. need to explicitely add those to be included
                 pprops = pprops.findAll{ p -> !p.isAssociation() }
                 //force the the id to be included
-                def id = obj.domainClass.getIdentifier().name
+                def id = domainClass.getIdentifier().name
                 currentMap[id] = obj?."$id"
                 //spin through and add them to the map
                 pprops.each {

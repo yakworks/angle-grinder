@@ -1,4 +1,4 @@
-package grinder
+package agdemo
 
 import grails.test.*
 import org.junit.*

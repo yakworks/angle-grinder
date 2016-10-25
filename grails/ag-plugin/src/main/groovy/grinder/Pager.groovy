@@ -63,7 +63,7 @@ class Pager {
     def eachPage(Closure c) {
         if(pageCount < 1) return
         log.debug "eachPage total pages : pageCount"
-        
+
         (1..pageCount).each {Long pageNum ->
             page = pageNum
             offset = (max * (page - 1))

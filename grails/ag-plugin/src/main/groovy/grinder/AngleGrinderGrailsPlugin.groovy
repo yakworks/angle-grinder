@@ -1,6 +1,9 @@
 package grinder
 
-class AngleGrinderGrailsPlugin {
+import grails.core.GrailsApplication
+import grails.plugins.Plugin
+
+class AngleGrinderGrailsPlugin extends Plugin{
 
     def version = '1.0.1-SNAPSHOT'
     def grailsVersion = '2.4.4 > *'
@@ -20,4 +23,11 @@ A plugin that enables ties grails and angular together
     def groupId = 'nine'
     def issueManagement = [system: 'GitHub', url: 'https://github.com/9ci/angle-grinder/issues']
     def scm = [url: 'https://github.com/9ci/angle-grinder']
+
+
+    Closure doWithSpring(){{->
+        grinderLabelService(GrinderLabelService){}
+
+    }}
 }
+

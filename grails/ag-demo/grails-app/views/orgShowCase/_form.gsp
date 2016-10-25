@@ -1,4 +1,4 @@
-<%@ page import="grinder.Org" %>
+<%@ page import="agdemo.Org" %>
 <g:set var="entityName" value="${ag.label(code: "orgShowCase")}"/>
 
 <div class="modal-header">

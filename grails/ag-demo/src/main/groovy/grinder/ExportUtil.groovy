@@ -1,8 +1,14 @@
-package grinder
+package agdemo
 
-import org.codehaus.groovy.grails.commons.GrailsClassUtils
+import grails.core.GrailsDomainClass
+import grails.util.GrailsClassUtils
+import grails.util.Holders
+import org.grails.core.artefact.DomainClassArtefactHandler
+
 
 class ExportUtil {
+
+    static def grailsApplication = Holders.grailsApplication
 
     private static Map excludes = [hasMany: true, belongsTo: true, searchable: true, __timeStamp: true,
             constraints: true, version: true, metaClass: true]
@@ -83,11 +89,12 @@ class ExportUtil {
 
     static Map propsToMap(Object obj, String propertyPath, Map currentMap) {
         final int nestedIndex = propertyPath.indexOf('.');
+        GrailsDomainClass domainClass = (GrailsDomainClass) grailsApplication.getArtefact(DomainClassArtefactHandler.TYPE, obj.getClass().getName())
         //no idex then its just a property
         if (nestedIndex == -1) {
             if (propertyPath == '*') {
-                def pprops = obj.domainClass.persistentProperties
-                def id = obj.domainClass.getIdentifier().name //add the id prop
+                def pprops = domainClass.persistentProperties
+                def id = domainClass.getIdentifier().name //add the id prop
                 currentMap[id] = obj?."$id"
                 pprops.each {
                     currentMap[it.name] = obj?."$it.name"

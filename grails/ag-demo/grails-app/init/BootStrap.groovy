@@ -1,14 +1,14 @@
+import agdemo.Org
 import grails.converters.JSON
-import grinder.ContactType
-import org.joda.time.LocalDate
-import org.joda.time.LocalDateTime
+import agdemo.ContactType
+
 
 class BootStrap {
 
     def userDao
     def orgDao
     def noteDao
-    def orgShowCaseDao
+    //def orgShowCaseDao
 
     def fakerService
 
@@ -39,7 +39,7 @@ class BootStrap {
                     exampleLocalDate: randomDate()
             ] + attributes
 
-            orgShowCaseDao.insert(attributes).entity
+            //orgShowCaseDao.insert(attributes).entity
         }
 
         def createOrg = { attributes = [] ->
@@ -56,8 +56,8 @@ class BootStrap {
                 city: fakerService.city(),
                 zip: fakerService.zipCode(),
                 street: fakerService.streetAddress(),
-                timeZone: timeZone,
-                orgShowCaseId: createOrgShowCase().id
+                timeZone: timeZone/*,
+                orgShowCaseId: createOrgShowCase().id*/
 
             ] + attributes
 
@@ -98,8 +98,8 @@ class BootStrap {
 				reminderDate: randomDate(),
 
                 contact: [
-                        firstName: fakerService.firstName(),
-                        lastName: fakerService.lastName(),
+                        firstName: fakerService.name(),
+                        lastName: fakerService.name(),
                         email: fakerService.email(),
                         org: [id: firstOrg.id],
                         type: ContactType.ADMIN
@@ -126,8 +126,8 @@ class BootStrap {
 					reminderDate: randomDate(),
 
                     contact: [
-                            firstName: fakerService.firstName(),
-                            lastName: fakerService.lastName(),
+                            firstName: fakerService.name(),
+                            lastName: fakerService.name(),
                             email: fakerService.email(),
                             org: [id: randomOrg.id],
                             type: randomContactType()

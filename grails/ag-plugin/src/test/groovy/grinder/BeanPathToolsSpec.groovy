@@ -3,7 +3,7 @@ package grinder
 import org.grails.core.DefaultGrailsDomainClass
 import spock.lang.Specification
 
-class BeanPathToolsSpec extends Specification {
+class BeanPathToolsSpec {
 
     def "Can get property value for a basic class"() {
         setup:
