@@ -33,12 +33,16 @@ should be at v0.11 or higher
 
 ## Required Node Tools
 
-In order to get started, you'll want to install some tools globally. You may need to prefix these with **sudo** (for OSX, *nix, BSD etc) or run your command shell as Administrator (for Windows) to do this. the "-g" will put the commands in your system path, allowing them to be run from any directory.
+In order to get started, you'll want to install some tools globally. You may need to prefix these with **sudo** (for OSX, unix, BSD etc) or run your command shell as Administrator (for Windows) to do this. the "-g" will put the commands in your system path, allowing them to be run from any directory.
+
+**note**: see this links for running bpm without sudo on osx
+- [gist](https://github.com/sindresorhus/guides/blob/master/npm-global-without-sudo.md)
+- [fixing-npm-permissions](https://docs.npmjs.com/getting-started/fixing-npm-permissions)
 
 ```
-sudo npm install -g coffee-script
-sudo npm install -g grunt-cli
-sudo npm install -g bower
+npm install -g coffee-script
+npm install -g grunt-cli
+npm install -g bower
 ```
 
 ### Run the installs
