@@ -21,7 +21,7 @@ class BootStrap {
 
         5.times{
             Org org = new Org(createOrgParams()).save()
-            Location loc = new Location(createLocationParams()).save(flush: true)
+            Location loc = new Location(createLocationParams([org: org])).save(flush: true)
 
         }
 

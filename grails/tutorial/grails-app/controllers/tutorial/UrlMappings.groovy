@@ -12,5 +12,10 @@ class UrlMappings {
         "/"(view:"/index")
         "500"(view:'/error')
         "404"(view:'/notFound')
+
+        "/orgs"(resources: "org") {
+            "/locations"(resources: "location")
+        }
+        "/locations"(resources: "location")
     }
 }

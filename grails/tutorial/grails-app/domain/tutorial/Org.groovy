@@ -2,7 +2,6 @@ package tutorial
 
 import grails.rest.*
 
-@Resource(uri='/orgs', formats=['xml', 'json'])
 class Org {
 
 	String name
