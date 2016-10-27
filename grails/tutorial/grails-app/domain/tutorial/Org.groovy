@@ -1,6 +1,8 @@
 package tutorial
 
 import grails.rest.*
+import tutorial.api.RestDaoController
+
 @Resource(superClass = RestDaoController)
 class Org {
 

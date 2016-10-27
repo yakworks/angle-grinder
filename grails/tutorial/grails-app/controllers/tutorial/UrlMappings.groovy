@@ -9,14 +9,13 @@ class UrlMappings {
             }
         }
 
-        "/"(view:"/index")
+        "/"(controller: "org", view:"/index")
         "500"(view:'/error')
         "404"(view:'/notFound')
 
-        "/orgs"(resources: "org") {
-            "/locations"(resources: "location")
+        "/api/orgs"(resources: "org", namespace:"api") {
+            "/api/locations"(resources: "location", namespace:"api")
         }
-        "/orgs/random"(controller: "org", action:"random", method: "GET")
-        "/locations"(resources: "location")
+        "/api/locations"(resources: "location", namespace:"api")
     }
 }

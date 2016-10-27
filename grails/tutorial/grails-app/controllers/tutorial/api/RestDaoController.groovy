@@ -1,8 +1,8 @@
-package tutorial
+package tutorial.api
 
 import grails.plugin.dao.DaoUtil
+import grails.plugin.grinder.Pager
 import grails.rest.RestfulController
-import grails.web.http.HttpHeaders
 
 
 import static org.springframework.http.HttpStatus.CREATED
@@ -32,7 +32,7 @@ abstract class RestDaoController<T> extends RestfulController<T> {
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond listAllResources(params), model: [("${resourceName}Count".toString()): countResources()]
+        respond pagedList(listAllResources(params)).jsonData, model: [("${resourceName}Count".toString()): countResources()]
     }
 
     @Override
@@ -45,7 +45,8 @@ abstract class RestDaoController<T> extends RestfulController<T> {
         if (handleReadOnly()) {
             return
         }
-        def result = insertDomain(request.JSON)
+        def p = BeanPathTools.flattenMap(request, request.JSON)
+        def result = insertDomain(p)
         formatResponse(result.entity)
     }
 
@@ -54,7 +55,8 @@ abstract class RestDaoController<T> extends RestfulController<T> {
         if (handleReadOnly()) {
             return
         }
-        def result = updateDomain(request.JSON)
+        def p = BeanPathTools.flattenMap(request, request.JSON)
+        def result = updateDomain(p)
         formatResponse(result.entity)
     }
 
@@ -126,12 +128,28 @@ abstract class RestDaoController<T> extends RestfulController<T> {
      */
     protected def listCriteria(params) {
         def crit = domainClass.createCriteria()
-        def datalist = crit.list(max: params.max, offset: params.offset) {
+        def pager = new Pager(params)
+        def datalist = crit.list(max: pager.max, offset: pager.offset) {
             if (params.sort)
                 order(params.sort, params.order)
         }
         return datalist
     }
 
+    protected def pagedList(dlist) {
+        def pageData = new Pager(params)
+        def fieldList
+        if(hasProperty('listFields')){
+            fieldList = listFields
+        }
+        else if(hasProperty('showFields')){
+            fieldList = showFields
+        }
+        else if(hasProperty('selectFields')){
+            fieldList = selectFields
+        }
+        pageData.setupData(dlist, fieldList)
+        return pageData
+    }
 
 }

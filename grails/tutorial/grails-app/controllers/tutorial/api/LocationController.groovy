@@ -1,8 +1,9 @@
-package tutorial
+package tutorial.api
 
 import grails.rest.RestfulController
+import tutorial.Location
 
-class LocationController extends RestfulController {
+class LocationController extends RestDaoController {
     static responseFormats = ['json', 'xml']
     LocationController(){
         super(Location)

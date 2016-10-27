@@ -313,5 +313,17 @@ Date: Thu, 27 Oct 2016 11:38:57 GMT
 {"id":6,"name":"default Org from Dao","registrationDate":null}
 ```
 
+The next step will be to add UI interface. For this we will use Angle-Grinder plugin.
+`compile "nine:angle-grinder:2.0.0"` should be added to `build.gradle`
+
+Due to the fact that Ag-grinder plugin uses not pure angular, but Grails gsp pages to, the right way will be to split
+controllers that renders pages and REST Api controllers. And it is really easy to do with help off `RestDaoController` we
+just need to add `static namespace = "api"`, and update `UrlMappings.groovy`:
+```
+"/api/orgs"(resources: "org", namespace:"api") {
+    "/locations"(resources: "location", namespace:"api")
+}
+"/api/locations"(resources: "location", namespace:"api")
+```
 
 
