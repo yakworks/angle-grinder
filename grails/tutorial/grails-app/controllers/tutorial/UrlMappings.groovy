@@ -16,6 +16,7 @@ class UrlMappings {
         "/orgs"(resources: "org") {
             "/locations"(resources: "location")
         }
+        "/orgs/random"(controller: "org", action:"random", method: "GET")
         "/locations"(resources: "location")
     }
 }

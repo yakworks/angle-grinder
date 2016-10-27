@@ -1,7 +1,7 @@
 package tutorial
 
 import grails.rest.*
-
+@Resource(superClass = RestDaoController)
 class Org {
 
 	String name

@@ -73,7 +73,7 @@ class LocationController extends RestfulController {
 ```
 So, now we can even remove `@Resource` for Location domain and it will work in the same way.
 
-__Note __ we moved format property to controller `static responseFormats = ['json', 'xml']`
+__Note__ we moved `format` property to controller `static responseFormats = ['json', 'xml']`
 
 The first thing one should understand is that when `http://localhost:8080/orgs/1/locations` is called we call `index`
 action with `params = [orgId: 1]` of the LocationController, and not `location` action for `OrgController`, and now
@@ -97,154 +97,221 @@ class LocationController extends RestfulController {
     }
 }
 ```
-To uderstand the better I addvise to review `RestfulController` https://github.com/grails/grails-core/blob/master/grails-plugin-rest/src/main/groovy/grails/rest/RestfulController.groovy[source]
+To understand it better I advise to review `RestfulController` https://github.com/grails/grails-core/blob/master/grails-plugin-rest/src/main/groovy/grails/rest/RestfulController.groovy[source]
 
-To make the code DRY let's use https://github.com/9ci/grails-dao[grails-dao] plugin and implement RestDaoController that uses it:
+Sure we can add totally custom action for controller, for example `random`:
+First we need to add it to `UrlMappings.groovy`:
+```
+ "/orgs"(resources: "org") {
+            "/locations"(resources: "location")
+        }
+        "/orgs/random"(controller: "org", action:"random", method: "GET")
+        "/locations"(resources: "location")
+```
+And then add to `OrgController`
+```
+def random() {
+        respond Org.get(new Random().nextInt(Org.count()))
+    }
+```
+Then on `http://localhost:8080/orgs/random` a random `Org` will be returned.
+
+__Note__ to view a list of url mapping use `url-mappings-report` command for grails console, for org it would look like:
+```
+Controller: org
+ |   GET    | /orgs/random               | Action: random
+ |   GET    | /orgs/create               | Action: create
+ |   GET    | /orgs/${id}/edit           | Action: edit
+ |   POST   | /orgs                      | Action: save
+ |   GET    | /orgs                      | Action: index
+ |  DELETE  | /orgs/${id}                | Action: delete
+ |  PATCH   | /orgs/${id}                | Action: patch
+ |   PUT    | /orgs/${id}                | Action: update
+ |   GET    | /orgs/${id}                | Action: show
+```
+
+and
+
+To make the code more DRY let's use https://github.com/9ci/grails-dao[grails-dao] plugin.
+
+Add
+```
+compile "org.grails.plugin:dao:2.0"
+```
+to dependencies section of `build.gradle` file.
+
+To apply dao features for all controllers at once we can create new `RestDaoController` which will extend `RestfulController`
 ```
 abstract class RestDaoController<T> extends RestfulController<T> {
-  static namespace = "api"
-  //Responce formats, json - by default
-  static responseFormats = ['json', 'xml']
+    //Responce formats, json - by default
+    static responseFormats = ['json', 'xml']
 
-  RestDaoController(Class<T> domainClass) {
-    this(domainClass, false)
-  }
-
-  RestDaoController(Class<T> domainClass, boolean readOnly) {
-    super(domainClass, readOnly)
-  }
-
-  Class getDomainClass() {
-    resource
-  }
-
-  protected def getDao() {
-    resource.dao
-  }
-
-
-  def index(Integer max) {
-    params.max = Math.min(max ?: 10, 100)
-    respond pagedList(listAllResources(params)).jsonData, model: [("${resourceName}Count".toString()): countResources()]
-  }
-
-  @Override
-  protected List<T> listAllResources(Map params) {
-    listCriteria(params)
-  }
-
-  @Override
-  def save() {
-    if (handleReadOnly()) {
-      return
-    }
-    def p = BeanPathTools.flattenMap(request, request.JSON)
-    def result = insertDomain(p)
-    formatResponse(result.entity)
-  }
-
-  @Override
-  def update() {
-    if (handleReadOnly()) {
-      return
-    }
-    def p = BeanPathTools.flattenMap(request, request.JSON)
-    def result = updateDomain(p)
-    formatResponse(result.entity)
-  }
-
-  /**
-   * Deletes a resource for the given id
-   * @param id The id
-   */
-  def delete() {
-    if(handleReadOnly()) {
-      return
+    RestDaoController(Class<T> domainClass) {
+        this(domainClass, false)
     }
 
-    def instance = queryForResource(params.id)
-    if (instance == null) {
-      transactionStatus.setRollbackOnly()
-      notFound()
-      return
+    RestDaoController(Class<T> domainClass, boolean readOnly) {
+        super(domainClass, readOnly)
     }
 
-    deleteDomain(params)
-
-    request.withFormat {
-      form multipartForm {
-        flash.message = message(code: 'default.deleted.message', args: [message(code: "${resourceClassName}.label".toString(), default: resourceClassName), instance.id])
-        redirect action:"index", method:"GET"
-      }
-      '*'{ render status: NO_CONTENT } // NO CONTENT STATUS CODE
+    Class getDomainClass() {
+        resource
     }
-  }
 
-  protected def updateDomain(p, opts = null) {
-    log.debug "updateDomain with ${p}"
-    def res = dao.update(p)
-    if (opts?.flush) DaoUtil.flush()
-    return res
-  }
-
-  protected def formatResponse(def instance) {
-    request.withFormat {
-      form multipartForm {
-        flash.message = message(code: 'default.created.message', args: [message(code: "${resourceName}.label".toString(), default: resourceClassName), instance.id])
-        redirect instance
-      }
-      '*' {
-        response.addHeader(HttpHeaders.LOCATION,
-          g.createLink(
-            resource: this.controllerName, action: 'show', id: instance.id, absolute: true,
-            namespace: hasProperty('namespace') ? this.namespace : null))
-        respond instance, [status: CREATED]
-      }
+    protected def getDao() {
+        resource.dao
     }
-  }
 
-  /**
-   * Called from the saves and saveOrUpdateJson,
-   * providing a place to override functionality
-   */
-  protected def insertDomain(p) {
-    log.info("insertDomain(${p})")
-    return dao.insert(p)
-  }
 
-  protected def deleteDomain(p){
-    return dao.remove(p)
-  }
+    def index(Integer max) {
+        params.max = Math.min(max ?: 10, 100)
+        respond listAllResources(params), model: [("${resourceName}Count".toString()): countResources()]
+    }
 
-  /**
-   * returns the list of domain obects for the scaffolded contro
-   */
-  protected def listCriteria(params) {
-    def crit = domainClass.createCriteria()
-    def pager = new Pager(params)
-    def datalist = crit.list(max: pager.max, offset: pager.offset) {
-      if (params.sort)
-        order(params.sort, params.order)
+    @Override
+    protected List<T> listAllResources(Map params) {
+        listCriteria(params)
     }
-    return datalist
-  }
 
-  protected def pagedList(dlist) {
-    def pageData = new Pager(params)
-    def fieldList
-    if(hasProperty('listFields')){
-      fieldList = listFields
+    @Override
+    def save() {
+        if (handleReadOnly()) {
+            return
+        }
+        def result = insertDomain(request.JSON)
+        formatResponse(result.entity)
     }
-    else if(hasProperty('showFields')){
-      fieldList = showFields
+
+    @Override
+    def update() {
+        if (handleReadOnly()) {
+            return
+        }
+        def result = updateDomain(request.JSON)
+        formatResponse(result.entity)
     }
-    else if(hasProperty('selectFields')){
-      fieldList = selectFields
+
+    /**
+     * Deletes a resource for the given id
+     * @param id The id
+     */
+    def delete() {
+        if(handleReadOnly()) {
+            return
+        }
+
+        def instance = queryForResource(params.id)
+        if (instance == null) {
+            transactionStatus.setRollbackOnly()
+            notFound()
+            return
+        }
+
+        deleteDomain(params)
+
+        request.withFormat {
+            form multipartForm {
+                flash.message = message(code: 'default.deleted.message', args: [message(code: "${resourceClassName}.label".toString(), default: resourceClassName), instance.id])
+                redirect action:"index", method:"GET"
+            }
+            '*'{ render status: NO_CONTENT } // NO CONTENT STATUS CODE
+        }
     }
-    pageData.setupData(dlist, fieldList)
-    return pageData
-  }
+
+    protected def updateDomain(p, opts = null) {
+        log.debug "updateDomain with ${p}"
+        def res = dao.update(p)
+        if (opts?.flush) DaoUtil.flush()
+        return res
+    }
+
+    protected def formatResponse(def instance) {
+        request.withFormat {
+            form multipartForm {
+                flash.message = message(code: 'default.created.message', args: [message(code: "${resourceName}.label".toString(), default: resourceClassName), instance.id])
+                redirect instance
+            }
+            '*' {
+                response.addHeader(HttpHeaders.LOCATION,
+                        g.createLink(
+                                resource: this.controllerName, action: 'show', id: instance.id, absolute: true,
+                                namespace: hasProperty('namespace') ? this.namespace : null))
+                respond instance, [status: CREATED]
+            }
+        }
+    }
+
+    /**
+     * Called from the saves and saveOrUpdateJson,
+     * providing a place to override functionality
+     */
+    protected def insertDomain(p) {
+        log.info("insertDomain(${p})")
+        return dao.insert(p)
+    }
+
+    protected def deleteDomain(p){
+        return dao.remove(p)
+    }
+
+    /**
+     * returns the list of domain obects for the scaffolded contro
+     */
+    protected def listCriteria(params) {
+        def crit = domainClass.createCriteria()
+        def datalist = crit.list(max: params.max, offset: params.offset) {
+            if (params.sort)
+                order(params.sort, params.order)
+        }
+        return datalist
+    }
+
 
 }
 ```
+and for Org domain we should add `@Resource(superClass = RestDaoController)`
+
+As a result on `curl -i -X POST -H "Content-Type: application/json" -d '{"name": "test"}' localhost:8080/orgs`
+we will get
+```
+HTTP/1.1 201
+X-Application-Context: application:development
+Location: http://localhost:8080/org/show/6
+Content-Type: application/json;charset=UTF-8
+Transfer-Encoding: chunked
+Date: Thu, 27 Oct 2016 11:32:52 GMT
+
+{"id":6,"name":"test","registrationDate":null}
+```
+You can say that it is the same we've had for default `RestfullController`, and on current state it is so. To improve
+we need to add `OrgDao.groovy` to dao folder(in grails-app) or to service folder.
+```
+class OrgDao extends GormDaoSupport{
+	Class domainClass = Org
+
+	Map insert(params){
+		def madeNameDefault = "default Org"
+		if(!params.name){
+			params.name = madeNameDefault
+		}
+		if (params.name){
+			params.name += " from Dao"
+		}
+		super.insert(params)
+	}
+}
+```
+After that for `curl -i -X POST -H "Content-Type: application/json" -d '{}' localhost:8080/orgs`, next response will be returned
+```
+HTTP/1.1 201
+X-Application-Context: application:development
+Location: http://localhost:8080/org/show/6
+Content-Type: application/json;charset=UTF-8
+Transfer-Encoding: chunked
+Date: Thu, 27 Oct 2016 11:38:57 GMT
+
+{"id":6,"name":"default Org from Dao","registrationDate":null}
+```
+
+
 
