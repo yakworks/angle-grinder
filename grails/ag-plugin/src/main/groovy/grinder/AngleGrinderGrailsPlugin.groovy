@@ -26,7 +26,9 @@ A plugin that enables ties grails and angular together
 
 
     Closure doWithSpring(){{->
-        grinderLabelService(GrinderLabelService){}
+        grinderLabelService(GrinderLabelService){ bean ->
+            bean.autowire = 'byName'
+        }
 
     }}
 }
