@@ -55,7 +55,7 @@ dependencies {
     testCompile "org.grails:grails-plugin-testing"
     compile "org.grails.plugins:audit-trail:3.0.0.1"
     compile "org.grails.plugin:dao:2.0"
-    compile project(':../ag-plugin')
+    compile "nine:angle-grinder:2.0.0"
 
     // No longer needed. now part of selenium-support in 2.53, see https://github.com/SeleniumHQ/htmlunit-driver
     //testRuntime "org.seleniumhq.selenium:selenium-htmlunit-driver:2.47.1"
@@ -86,11 +86,6 @@ dependencies {
 
 }
 
-grails{
-    plugins{
-        compile project(':../ag-plugin')
-    }
-}
 /****** GEB *******
 Pass system properties through to the integrationTest task so we can pass in the 'geb.env' property to run tests
 in different browsers. Adapted from http://mrhaki.blogspot.com/2015/09/grails-goodness-passing-system.html
