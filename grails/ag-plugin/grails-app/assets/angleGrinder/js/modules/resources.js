@@ -1,31 +1,48 @@
 var resources = angular.module("angleGrinder.resources", [
-    "ngResource",
-    "ngRoute"
+  "ngResource",
+  "ngRoute"
 ]);
 
 // Build a resource for the given restful url
 // TODO cleanup and spec this service
 // TODO consider move it to angle-grinder
 resources.factory("resourceBuilder", [
-  "$resource", "pathWithContext", function($resource, pathWithContext) {
+  "$resource", "pathWithContext", "RestContext", function($resource, pathWithContext, RestContext) {
     return function(basePath, resourceName) {
+      if (RestContext.length > 0) {
+        basePath = "/api" + basePath+"s"
+      }
       if (resourceName == null) {
         resourceName = basePath.replace(/^(\/+)/, "");
       }
       var pathWithoutContext = basePath;
       basePath = pathWithContext(basePath);
+      var Resource = null;
+      if (RestContext.length > 0) {
+        Resource = $resource(basePath + "/:action/:id", {id: "@id"}, {
+          list: {method: "GET", params: {action: "list"}, isArray: false},
+          get: {method: "GET"},
+          save: {method: "POST"},
+          update: {method: "PUT"},
+          "delete": {method: "DELETE"},
 
-      var Resource = $resource(basePath + "/:action/:id", { id: "@id" }, {
-        list:       { method: "GET", params: { action: "list" }, isArray: false },
-        get:        { method: "GET", params: { action: "get" } },
-        save:       { method: "POST", params: { action: "save" } },
-        update:     { method: "POST", params: { action: "update" } },
-        "delete":   { method: "POST", params: { action: "delete" } },
+          // mass actions (for selected rows)
+          massUpdate: {method: "POST", params: {action: "massUpdate"}},
+          massDelete: {method: "POST", params: {action: "massDelete"}}
+        });
+      } else {
+        Resource = $resource(basePath + "/:action/:id", { id: "@id" }, {
+          list:       { method: "GET", params: { action: "list" }, isArray: false },
+          get:        { method: "GET", params: { action: "get" } },
+          save:       { method: "POST", params: { action: "save" } },
+          update:     { method: "POST", params: { action: "update" } },
+          "delete":   { method: "POST", params: { action: "delete" } },
 
-        // mass actions (for selected rows)
-        massUpdate: { method: "POST", params: { action: "massUpdate" } },
-        massDelete: { method: "POST", params: { action: "massDelete" } }
-      });
+          // mass actions (for selected rows)
+          massUpdate: { method: "POST", params: { action: "massUpdate" } },
+          massDelete: { method: "POST", params: { action: "massDelete" } }
+        });
+      }
 
       angular.extend(Resource.prototype, {
         resourceName: function() {

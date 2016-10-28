@@ -7,6 +7,7 @@ buildscript {
         classpath "org.grails:grails-gradle-plugin:$grailsVersion"
         classpath "com.bertramlabs.plugins:asset-pipeline-gradle:2.11.1"
         classpath "org.grails.plugins:hibernate5:6.0.0"
+        classpath 'com.bertramlabs.plugins:coffee-asset-pipeline:2.6.2'
     }
 }
 
@@ -50,8 +51,10 @@ dependencies {
     provided "org.codehaus.groovy:groovy-ant"
     runtime "com.bertramlabs.plugins:asset-pipeline-grails:2.11.1"
     runtime "com.h2database:h2"
+    runtime 'com.bertramlabs.plugins:coffee-asset-pipeline:2.6.2'
+    compile "org.grails.plugins:spring-security-rest:2.0.0.M2"
     compile "org.grails.plugin:dao:2.0"
-    compile "org.grails.plugin:angle-grinder:2.0.0"
+    compile "nine:angle-grinder:2.0.0"
     testCompile "org.grails:grails-plugin-testing"
     testCompile "org.grails.plugins:geb"
     testRuntime "org.seleniumhq.selenium:selenium-htmlunit-driver:2.47.1"
@@ -61,6 +64,6 @@ dependencies {
 
 
 assets {
-    minifyJs = true
-    minifyCss = true
+    minifyJs = false
+    minifyCss = false
 }

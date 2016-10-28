@@ -319,6 +319,7 @@ The next step will be to add UI interface. For this we will use Angle-Grinder pl
 Due to the fact that Ag-grinder plugin uses not pure angular, but Grails gsp pages to, the right way will be to split
 controllers that renders pages and REST Api controllers. And it is really easy to do with help off `RestDaoController` we
 just need to add `static namespace = "api"`, and update `UrlMappings.groovy`:
+//TODO: design the ways how to make it more DRY
 ```
 "/api/orgs"(resources: "org", namespace:"api") {
     "/locations"(resources: "location", namespace:"api")
@@ -326,4 +327,243 @@ just need to add `static namespace = "api"`, and update `UrlMappings.groovy`:
 "/api/locations"(resources: "location", namespace:"api")
 ```
 
+Also, Ag-Grinder plugin provides nice tools such as pager, so let's update our RestDaoController with pagination for lists:
+```
+protected def listCriteria(params) {
+        def crit = domainClass.createCriteria()
+        def pager = new Pager(params)
+        def datalist = crit.list(max: pager.max, offset: pager.offset) {
+            if (params.sort)
+                order(params.sort, params.order)
+        }
+        return datalist
+    }
 
+    protected def pagedList(dlist) {
+        def pageData = new Pager(params)
+        def fieldList
+        if(hasProperty('listFields')){
+            fieldList = listFields
+        }
+        else if(hasProperty('showFields')){
+            fieldList = showFields
+        }
+        else if(hasProperty('selectFields')){
+            fieldList = selectFields
+        }
+        pageData.setupData(dlist, fieldList)
+        return pageData
+    }
+```
+So now we can add UI for our app. AG-Grinder designed in the way to have not "One Page" app, but to separate it on a smaller
+chunks.
+We will have common `app` folder in `assets/javascript` and our small Angular apps there.
+
+We still need a way to render grails templates, so we create "OrgController" that will be responsible for rendering templates
+for Org:
+
+```
+package tutorial
+
+class OrgController {
+
+    def index() { }
+
+    def template() {
+        render template: params.name
+    }
+}
+```
+
+And for JS part we can implement out Resources in the next way:
+```
+org = angular.module "orgApp", ["angleGrinder"]
+
+org.config [
+  "$routeProvider", "ResourceTemplateServ", ($routeProvider, ResourceTemplateServ) ->
+    orgTemplate = (path) -> ResourceTemplateServ("/org", path)
+    templateUrl = (name) -> "#{orgTemplate("template")}?name=#{name}"
+
+    $routeProvider
+      .when "/",
+        templateUrl: templateUrl "list"
+        controller: "org.ListCtrl"
+
+      .when "/create",
+        templateUrl: templateUrl "form"
+        controller: "org.FormCtrl"
+        resolve: org: ["Resource", (Resource) -> new Resource()]
+
+      .when "/:id",
+        templateUrl: templateUrl "show"
+        controller: "org.ShowCtrl"
+        resolve: org: [
+          "$route", "resourceResolver", ($route, resourceResolver) ->
+            resourceResolver($route.current.params.id)
+        ]
+
+      .when "/:id/edit",
+        templateUrl: templateUrl "form"
+        controller: "org.FormCtrl"
+        resolve: org: [
+          "$route", "resourceResolver", ($route, resourceResolver) ->
+            resourceResolver($route.current.params.id)
+        ]
+
+      .otherwise redirectTo: "/"
+]
+```
+
+Ag-Grinder has really handy implementation of `Resource` and `ResourceResolver` wich really helps to
+keep the code DRY, but by default it is implemented not for REST approach. So I've updated it to make it work with REST too.
+To "Turn REST on" one needs to add  `app.constant('RestContext', 'api')` where `'api'` - REST controller namespace. // TODO we can move namespace from grails ctrl and Angular to config
+
+//TODO: not sure do we need step by step instructions for creting angular app
+
+As a Last step let's add Spring security to our app.
+Please read http://alvarosanchez.github.io/grails-spring-security-rest/latest/docs/index.html[docs] to understand better
+what we need to implement.
+
+First we need to setup Security REST API, just add `compile "org.grails.plugins:spring-security-rest:2.0.0.M2"` in your
+`build.graddle`
+
+After that we need to create domain classes (User, Role and UserRole) we can make it by command:
+`grails s2-quickstart tutorial User Role`
+Where tutorial - package name where classes should be placed
+
+On the output you will get
+```
+| Creating User class 'User' and Role class 'Role' in package 'tutorial'
+| Rendered template Person.groovy.template to destination grails-app/domain/tutorial/User.groovy
+| Rendered template Authority.groovy.template to destination grails-app/domain/tutorial/Role.groovy
+| Rendered template PersonAuthority.groovy.template to destination grails-app/domain/tutorial/UserRole.groovy
+|
+************************************************************
+* Created security-related domain classes. Your            *
+* grails-app/conf/application.groovy has been updated with *
+* the class names of the configured domain classes;        *
+* please verify that the values are correct.               *
+************************************************************
+```
+
+The executed command will also update `grails-app/conf/application.groovy` or create it if you didn't have it.
+
+We need to replace the chain with pattern /** with the next one:
+
+```
+[pattern: '/api/**',  filters: 'JOINED_FILTERS,-anonymousAuthenticationFilter,-exceptionTranslationFilter,-authenticationProcessingFilter,-securityContextPersistenceFilter,-rememberMeAuthenticationFilter']
+```
+
+For testing add to `Bootstrap.groovy`
+```
+Role admin = new Role("ROLE_ADMIN").save()
+User user = new User("user", "pass").save()
+UserRole.create(user, admin, true)
+```
+To restrict the API to be accessed only for ROLE_ADMIN users:
+```
+@Secured(['ROLE_ADMIN'])
+class OrgController extends RestDaoController {
+
+    OrgController(){
+        super(Org)
+    }
+}
+```
+
+Now when you try to get data from Api you'll get
+```
+curl -i -X GET -H "Content-Type: application/json"  localhost:8080/api/orgs
+HTTP/1.1 401
+WWW-Authenticate: Bearer
+Content-Type: application/json;charset=UTF-8
+Transfer-Encoding: chunked
+Date: Fri, 28 Oct 2016 15:01:30 GMT
+
+{"timestamp":1477666890707,"status":401,"error":"Unauthorized","message":"No message available","path":"/api/orgs"}
+```
+To get a token we need:
+```
+curl -i -H "Content-Type: e":"user","password":"pass"}' localhost:8080/api/login
+HTTP/1.1 200
+Cache-Control: no-store
+Pragma: no-cache
+Content-Type: application/json;charset=UTF-8
+Content-Length: 2144
+Date: Fri, 28 Oct 2016 15:03:08 GMT
+
+{"username":"user","roles":["ROLE_ADMIN"],"token_type":"Bearer","access_token":"eyJhbGciOiJIUzI1NiJ9..
+```
+And to get accsess to our Api we need to pass token as header with our request.
+
+So now we should implement frontend part.
+The approach is to create `LoginCtrl` which will be parent for all of the others controllers.
+```
+class LoginCtrl
+  @$inject = ["$scope", "pathWithContext", "$window", "$http", "$rootScope"]
+  constructor: ($scope, pathWithContext, $window, $http, $rootScope) ->
+    $rootScope.authenticated = $window.sessionStorage.token?
+    $scope.user ={}
+    $scope.login = ->
+      $http.post((pathWithContext '/api/login'), {username: $scope.user.username,password: $scope.user.password}).then (response)->
+        $rootScope.authenticated = true
+        $window.sessionStorage.token = response.data.access_token
+        $window.location = pathWithContext "/org"
+
+    $scope.logout = ->
+      $window.sessionStorage.token = undefined
+
+
+auth.controller("LoginCtrl", LoginCtrl)
+```
+
+To add a header for each request we will add an Interseptor:
+```
+auth.factory('authInterceptor', ($rootScope, $window) ->
+  { request: (config) ->
+    config.headers = config.headers or {}
+    if $window.sessionStorage.token?
+      config.headers.Authorization = 'Bearer ' + $window.sessionStorage.token
+    config
+  }
+).config ($httpProvider) ->
+  $httpProvider.interceptors.push 'authInterceptor'
+  return
+```
+
+And in layout:
+```
+<div ng-if="authenticated == true">
+        <div id="page" class="container">
+            <g:layoutBody/>
+        </div>
+    </div>
+    <div ng-if="authenticated == false">
+        <table>
+            <tbody>
+            <tr>
+                <td>
+                    Username:
+                </td>
+                <td>
+                    <input type="text" name="username" ng-model="user.username" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Password:
+                </td>
+                <td>
+                    <input type="password" name="password" ng-model="user.password" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <button type="button" ng-click="login()">Login</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+```

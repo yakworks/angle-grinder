@@ -1,5 +1,6 @@
 package tutorial
 
+import grails.databinding.BindingFormat
 import grails.rest.*
 import tutorial.api.RestDaoController
 
@@ -7,12 +8,15 @@ import tutorial.api.RestDaoController
 class Org {
 
 	String name
-
+	@BindingFormat('yyyy-MM-dd')
 	Date registrationDate
+	String orgType
+
 
 	static constraints = {
 		name nullable: false
 		registrationDate nullable: true
+		orgType nullable: true
 	}
 
 	enum OrgType {

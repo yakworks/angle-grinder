@@ -1,9 +1,9 @@
 package tutorial.api
 
-import grails.plugin.dao.DaoUtil
-import grails.plugin.grinder.Pager
 import grails.rest.RestfulController
-
+import grails.web.http.HttpHeaders
+import grinder.BeanPathTools
+import grinder.Pager
 
 import static org.springframework.http.HttpStatus.CREATED
 import static org.springframework.http.HttpStatus.NO_CONTENT

@@ -1,4 +1,5 @@
 import grails.plugin.dao.GormDaoSupport
+import tutorial.Location
 import tutorial.Org
 
 
@@ -14,5 +15,13 @@ class OrgDao extends GormDaoSupport{
 			params.name += " from Dao"
 		}
 		super.insert(params)
+	}
+
+	Map remove(params){
+		Location location = Location.findByOrg(Org.get(params.id as Long))
+		if (location){
+			location.delete()
+		}
+		super.remove(params)
 	}
 }
