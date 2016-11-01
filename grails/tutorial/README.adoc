@@ -27,10 +27,20 @@ if no num is provdided in a create put
 link to http://docs.grails.org/latest/guide/webServices.html#restfulControllers
 remove the @Resource and implement a controller that has something for picklist like we do
 
-==== Using postman for testing
-==== Using Intellij for testing
-==== Example of using url in browser url with .json extention to get a list or read of single item
+== Creating the Angular UI
+... show how to create a basic CRUD and List screen
+=== customize the searching
+=== paging
+=== Add Contacts
+now add in your examples with Contacts instead of Location
+create tests
+create UI
 
+== Security
+
+== Other Tools
+=== Using postman for testing
+=== Using Intellij for testing
 
 
 == example application for tutorail "Grails with REST"
@@ -189,6 +199,8 @@ compile "org.grails.plugin:dao:2.0"
 to dependencies section of `build.gradle` file.
 
 To apply dao features for all controllers at once we can create new `RestDaoController` which will extend `RestfulController`
+TODO you only need to show a link to this, not the entire source
+
 ```
 abstract class RestDaoController<T> extends RestfulController<T> {
     //Responce formats, json - by default
