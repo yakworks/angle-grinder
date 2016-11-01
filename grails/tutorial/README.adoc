@@ -9,6 +9,7 @@ add some data for testing using a json file created with https://www.mockaroo.co
 
 === @Resource annotation on Org Domain
 link to http://docs.grails.org/latest/guide/webServices.html#domainResources
+
 ==== url-mappings-report 
 show example of valid urls
 ==== Using CURL to test CRUD and List
