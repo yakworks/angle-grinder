@@ -44,17 +44,17 @@ domain class
 
 [source,groovy]
 .Org.groovy
-```
+----
 @Resource(uri='/orgs', formats=['xml', 'json'])
 class Org {
 	String name
 }
-```
+----
 
 using just the @Resource annotation and no controllers, `http://localhost:8080/orgs` will return you a list of all your orgs:
 
 [source,json]
-```
+----
 /*TODO change this to JSON and lets just stick with JSON thoughout the tutorial*/
 <list>
 	<org id="1">
@@ -64,7 +64,8 @@ using just the @Resource annotation and no controllers, `http://localhost:8080/o
 		<name>Org_14</name>
 	</org>
 </list>
-```
+----
+
 and `http://localhost:8080/orgs/3` will return data for Org with id = 3.
 //TODO: probably add examples for all CRUD operations
 __Note __ It returns xml because it is on the first place for `formats=['xml', 'json']` property, if one changes
