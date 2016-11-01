@@ -1,7 +1,39 @@
-= demo app for tutorial "Grails with REST"
+= Creating Grails applications using Angle-Grinder and a restful DAO services
+
+== Getting started
+setting up the grails application
+
+== Creating a Grails REST API
+setup a Org domain with num, name, street, city, state, zipCode 
+add some data for testing using a json file created with https://www.mockaroo.com/  
+
+=== @Resource annotation on Org Domain
+link to http://docs.grails.org/latest/guide/webServices.html#domainResources
+==== url-mappings-report 
+show example of valid urls
+==== Using CURL to test CRUD and List
+show example for how to test Create,Read,Update,Delete and List for this new domain
+==== Adding tests for our rest CRUD
+show how to write unit tests for the Create,Read,Update,Delete and List
+==== RestfulDaoController superClass
+see http://mrhaki.blogspot.com/2014/07/grails-goodness-custom-controller-class.html
+superClass = RestfulDaoController
+==== Customize the DAO
+Show how to customize the dao to automatically create a num with first 5 letters of name without spaces 
+if no num is provdided in a create put
+==== Integration and Functional Tests for dao and our restful service
+
+=== Implementing a RestfulDaoController 
+link to http://docs.grails.org/latest/guide/webServices.html#restfulControllers
+remove the @Resource and implement a controller that has something for picklist like we do
+
+==== Using postman for testing
+==== Using Intellij for testing
+==== Example of using url in browser url with .json extention to get a list or read of single item
 
 
-= example application for tutorail "Grails with REST"
+
+== example application for tutorail "Grails with REST"
 
 REST (REpresentational State Transfer) is an architectural style that uses HTTP requests to GET, PUT, POST and DELETE data.
 
@@ -9,14 +41,21 @@ Grails provides several nice features to implement REST.
 
 First is resource anotation `@Resource`, that creates controller with basic CRUD operations for you. So when you have next
 domain class
+
+[source,groovy]
+.Org.groovy
 ```
 @Resource(uri='/orgs', formats=['xml', 'json'])
 class Org {
 	String name
 }
 ```
-and no implemented controllers, `http://localhost:8080/orgs` will return you a list of all your orgs:
+
+using just the @Resource annotation and no controllers, `http://localhost:8080/orgs` will return you a list of all your orgs:
+
+[source,json]
 ```
+/*TODO change this to JSON and lets just stick with JSON thoughout the tutorial*/
 <list>
 	<org id="1">
 		<name>Org_18</name>
@@ -30,16 +69,24 @@ and `http://localhost:8080/orgs/3` will return data for Org with id = 3.
 //TODO: probably add examples for all CRUD operations
 __Note __ It returns xml because it is on the first place for `formats=['xml', 'json']` property, if one changes
 to `formats=['json', 'xml']` then JSON will be returned by default. But it accept both format on POST/PUT for example
+
 ```
 curl -i -X POST -H "Content-Type: application/json" -d '{"name":"New Org Name"}' localhost:8080/orgs
 ```
+
 will give the same result as
+
 ```
 curl -i -X POST -H "Content-Type: text/xml" -d '<org><name>New Org Name</name></org>' localhost:8080/orgs
 ```
 
 The next feature is to handle relations between domains. Let's take a look how we can `Locations` for specific 'Org'.
 The first thing that we shall do is to change `UrlMappings.groovy`:
+
+TODO first just use Org as an example go all the way through it.
+
+[source,groovy]
+.UrlMappings.groovy
 ```
 class UrlMappings {
 
