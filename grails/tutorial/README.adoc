@@ -1,41 +1,59 @@
 = Creating Grails applications using Angle-Grinder and a restful DAO services
+:toc:
+:numbered:
 
 == Getting started
 setting up the grails application
 
 == Creating a Grails REST API
-setup a Org domain with num, name, street, city, state, zipCode 
-add some data for testing using a json file created with https://www.mockaroo.com/  
+* setup a Org domain with num, name, street, city, state, zipCode
+* add some data for testing using a json file created with https://www.mockaroo.com/[mokaroo]
 
-=== @Resource annotation on Org Domain
-link to http://docs.grails.org/latest/guide/webServices.html#domainResources
+=== Resource annotation on Org Domain
+* link to http://docs.grails.org/latest/guide/webServices.html#domainResources
 
-==== url-mappings-report 
-show example of valid urls
+==== url-mappings-report
+. show example of valid urls for default
+
 ==== Using CURL to test CRUD and List
-show example for how to test Create,Read,Update,Delete and List for this new domain
-==== Adding tests for our rest CRUD
-show how to write unit tests for the Create,Read,Update,Delete and List
-==== RestfulDaoController superClass
-see http://mrhaki.blogspot.com/2014/07/grails-goodness-custom-controller-class.html
-superClass = RestfulDaoController
-==== Customize the DAO
-Show how to customize the dao to automatically create a num with first 5 letters of name without spaces 
-if no num is provdided in a create put
-==== Integration and Functional Tests for dao and our restful service
+. run-app should work
+. show examples for Org:
+.. Create
+.. Read
+.. Update
+.. Delete
+.. List
 
-=== Implementing a RestfulDaoController 
+==== Adding tests for our rest CRUD
+* write unit tests for the Create,Read,Update,Delete and List
+* test-app should work
+
+==== RestfulDaoController superClass
+* see http://mrhaki.blogspot.com/2014/07/grails-goodness-custom-controller-class.html
+* superClass = RestfulDaoController
+* test should all still pass
+
+==== Customize the DAO
+Show how to customize the dao to automatically create a num with first 5 letters of name without spaces
+if no num is provdided in a create put
+
+==== Integration and Functional Tests for dao and the restful json calls
+
+=== Implementing a RestfulDaoController
 link to http://docs.grails.org/latest/guide/webServices.html#restfulControllers
 remove the @Resource and implement a controller that has something for picklist like we do
 
 == Creating the Angular UI
-... show how to create a basic CRUD and List screen
+. show how to create a basic CRUD and List screen
+
 === customize the searching
+
 === paging
+
 === Add Contacts
-now add in your examples with Contacts instead of Location
-create tests
-create UI
+. now add in your examples with Contacts instead of Location
+. create tests
+. create UI
 
 == Security
 
