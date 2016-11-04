@@ -3,18 +3,124 @@
 :numbered:
 
 == Getting started
-setting up the grails application
+For this tutorial you will need:
+
+* JDK (I advise 8, but you can take 7 as well).
+
+* Git.
+
+* Grails 3.2.0 (you can install it with http://sdkman.io/[sdkman] on most Unix based systems.)
+
+After all is installed clone the repo:
+----
+git clone https://github.com/9ci/angle-grinder
+----
+
+and switch to branch `rest_tutorail` branch, and go to `angle-grinder/grails/restTutorial/step1`, the final result is in
+the `result` folder for each step
+
+So first let's create new grails app:
+[source,bash]
+----
+grails create-app -profile rest-api -features hibernate4 resttutorail
+Application created at angle-grinder/grails/restTutorial/step1/resttutorail
+----
+
+Grails3 provides several different profiles you can read about them in http://docs.grails.org/3.2.0/guide/profiles.html[docs]
 
 == Creating a Grails REST API
-* setup a Org domain with num, name, street, city, state, zipCode
-* add some data for testing using a json file created with https://www.mockaroo.com/[mokaroo]
+After application is created we need to add a domain class:
+[source,bash]
+----
+grails create-domain-class org
+----
 
-=== Resource annotation on Org Domain
-* link to http://docs.grails.org/latest/guide/webServices.html#domainResources
+The new domain class will be created:
+[source,groovy]
+----
+class Org {
 
+    static constraints = {
+    }
+}
+----
+
+And now we need just to add fields for it.
+[source,groovy]
+----
+class Org {
+    String num
+    String name
+    String street
+    String city
+    String state
+    String zipCode
+
+    static constraints = {
+      street nullable: true
+      city nullable: true
+      state nullable: true
+      zipCode nullable: true
+    }
+}
+----
+And then let's feed our database with demo data. In the `angle-grinder/restTutorial/resources` there is `data.json` file
+you need to copy it to yours `step1/resttutorial/src/main/resources` and update `Bootstrap.groovy` file:
+[source,groovy]
+----
+class BootStrap {
+    def grailsApplication
+    def init = { servletContext ->
+        def data = new JsonSlurper().parse(grailsApplication.getParentContext().getResource("classpath:data.json").getInputStream())
+        data.each{
+            new Org(it).save(flush: true)
+        }
+    }
+    def destroy = {
+    }
+}
+----
+So, on app launch we will have 30 Org rows.
+
+=== @Resource annotation on Org Domain
+So now we can start working on creating REST Api for our app. The most easiest way is to use http://docs.grails.org/latest/guide/webServices.html#domainResources[domain resources]
+
+So as we see from docs we just need to update our domain a bit (just add `@Resource` anotation) in such a way:
+[source,groovy]
+----
+@Resource(uri = '/orgs', formats = ["json", "xml"])
+class Org {
+  String num
+
+  ...
+----
 ==== url-mappings-report
-. show example of valid urls for default
+To see all available endpoints that Grails create for us run:
+----
+grails url-mappings-report
 
+ |    *     | ERROR: 500                            | View:   /error
+ |    *     | ERROR: 404                            | View:   /notFound
+ |   GET    | /${controller}(.${format)?            | Action: index
+ |   POST   | /${controller}(.${format)?            | Action: save
+ |  DELETE  | /${controller}/${id}(.${format)?      | Action: delete
+ |   GET    | /${controller}/${id}(.${format)?      | Action: show
+ |   PUT    | /${controller}/${id}(.${format)?      | Action: update
+ |  PATCH   | /${controller}/${id}(.${format)?      | Action: patch
+
+Controller: application
+ |    *     | /                                     | Action: index
+
+Controller: org
+ |   GET    | /orgs/create                          | Action: create
+ |   GET    | /orgs/${id}/edit                      | Action: edit
+ |   POST   | /orgs                                 | Action: save
+ |   GET    | /orgs                                 | Action: index
+ |  DELETE  | /orgs/${id}                           | Action: delete
+ |  PATCH   | /orgs/${id}                           | Action: patch
+ |   PUT    | /orgs/${id}                           | Action: update
+ |   GET    | /orgs/${id}                           | Action: show
+----
 ==== Using CURL to test CRUD and List
 . run-app should work
 . show examples for Org:
@@ -23,6 +129,60 @@ setting up the grails application
 .. Update
 .. Delete
 .. List
+Lets test them:
+
+===== GET (list):
+----
+curl -i -X GET -H "Content-Type: application/json"  localhost:8080/orgs
+HTTP/1.1 200
+X-Application-Context: application:development
+Content-Type: application/json;charset=UTF-8
+Transfer-Encoding: chunked
+Date: Fri, 04 Nov 2016 14:48:14 GMT
+
+[{"id":1,"name":"Zava","num":"74faba0c-263b-4b2b-abc3-8569fc521dc1","street":"5297 Bluestem Alley"},
+{"id":2,"name":"Ailane","num":"fed98e6e-70d7-46b5-a75e-2bd0cc1bb8ea","street":"60620 Westend Junction"},
+{"id":3,"name":"Zazio","num":"41a4dfc2-ed80-4e2d-9131-719e5dfbd303"},
+{"id":4,"name":"Eadel","num":"1ea8f419-ce74-4459-9e40-aafc98a161bc","street":"35 Meadow Valley Pass"},
+...
+----
+
+===== POST:
+----
+curl -i -X POST -H "Content-Type: application/json" -d '{"name":"New Org Name", "num": "Test num"}' localhost:8080/orgs
+HTTP/1.1 201
+X-Application-Context: application:development
+Location: http://localhost:8080/orgs/31
+Content-Type: application/json;charset=UTF-8
+Transfer-Encoding: chunked
+Date: Fri, 04 Nov 2016 15:00:49 GMT
+
+{"id":31,"name":"New Org Name","num":"Test num"}
+----
+===== GET (by id):
+----
+curl -i -X GET -H "Content-Type: application/json"  localhost:8080/orgs/31
+HTTP/1.1 200
+X-Application-Context: application:development
+Content-Type: application/json;charset=UTF-8
+Transfer-Encoding: chunked
+Date: Fri, 04 Nov 2016 15:02:09 GMT
+
+{"id":31,"name":"New Org Name","num":"Test num"}
+----
+
+===== PUT:
+----
+curl -i -X PUT -H "Content-Type: application/js":"New Org Name", "num": "Test num", "zipCode": 123}' localhost:8080/orgs/31
+HTTP/1.1 200
+X-Application-Context: application:development
+Location: http://localhost:8080/orgs/31
+Content-Type: application/json;charset=UTF-8
+Transfer-Encoding: chunked
+Date: Fri, 04 Nov 2016 15:03:48 GMT
+
+{"id":31,"name":"New Org Name","num":"Test num","zipCode":"123"}
+----
 
 ==== Adding tests for our rest CRUD
 * write unit tests for the Create,Read,Update,Delete and List
