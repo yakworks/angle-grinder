@@ -21,5 +21,5 @@ app.directive "agNumber", () ->
         return undefined
 
     ctrl.$formatters.push (value) ->
-      if ctrl.$isEmpty(value) then return "" else return "" + value
+      if ctrl.$isEmpty(value) then return "" else return parseFloat(value).toFixed(attrs.fractionSize || 2)
 
