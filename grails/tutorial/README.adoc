@@ -1,4 +1,4 @@
-= Creating Grails applications using Angle-Grinder and a restful DAO services
+= Creating Grails applications using Angle-Grinder's Angular and restful DAO services
 :toc:
 :numbered:
 
@@ -18,14 +18,13 @@ After all is installed clone the repo:
 git clone https://github.com/9ci/angle-grinder
 ----
 
-and switch to branch `rest_tutorail` branch, and go to `angle-grinder/grails/restTutorial/step1`, the final result is in
+and switch to branch `rest_tutorial` branch, and go to `angle-grinder/grails/restTutorial/step1`, the final result is in
 the `result` folder for each step
 
 So first let's create new grails app:
 
-[source,bash]
 ----
-grails create-app -profile rest-api -features hibernate4 resttutorail
+$ grails create-app -profile rest-api -features hibernate4 resttutorail
 Application created at angle-grinder/grails/restTutorial/step1/resttutorail
 ----
 
@@ -35,54 +34,61 @@ Grails3 provides several different profiles you can read about them in http://do
 
 After application is created we need to add a domain class:
 
-[source,bash]
 ----
-grails create-domain-class org
+grails create-domain-class Person
 ----
 
-And we'll add some fields:
+And we'll set it up like so:
 
-[source,groovy]
-----
-class Org {
+```groovy
+import java.time.*
 
-    static constraints = {
-    }
+class Person {
+  Salutations salutation
+  String firstName
+  String lastName
+  String email
+
+  String street
+  String city
+  String state
+  String postalCode
+  String country
+
+  LocalDate dateOfBirth
+  TimeZone timeZone
+  LocalDateTime activateOnDate
+
+  Date dateCreated
+  Date lastUpdated
+
+  static constraints = {
+    firstName nullable: false
+    activateOnDate nullable: false
+  }
+
+  enum Salutations {
+    Ninja,
+    Mr,
+    Mrs,
+    Ms,
+    Dr,
+    Rev
+  }
 }
-----
+```
 
-And now we need just to add fields for it.
-
-[source,groovy]
-----
-class Org {
-    String num
-    String name
-    String street
-    String city
-    String state
-    String zipCode
-
-    static constraints = {
-      street nullable: true
-      city nullable: true
-      state nullable: true
-      zipCode nullable: true
-    }
-}
-----
-
-And then let's feed our database with demo data. In the `angle-grinder/restTutorial/resources` there is `data.json` file
-you need to copy it to yours `step1/resttutorial/src/main/resources` and update `Bootstrap.groovy` file:
+And we will load some sample data from `contacts.json` in src/resources
 
 [source,groovy]
 ----
 class BootStrap {
     def grailsApplication
     def init = { servletContext ->
-        def data = new JsonSlurper().parse(grailsApplication.getParentContext().getResource("classpath:data.json").getInputStream())
+        def res = grailsApplication.mainContext.getResource("classpath:contacts.json")
+        def data = new JsonSlurper().parse(res.getInputStream())
         data.each{
-            new Org(it).save(flush: true)
+            new Person(it).save(flush: true)
         }
     }
     def destroy = {
@@ -90,9 +96,9 @@ class BootStrap {
 }
 ----
 
-So, on app launch we will have 30 Org rows.
+So, on app launch we will have 100 Person rows.
 
-=== Resource annotation on Org Domain
+=== Resource annotation on Person Domain
 
 So now we can start working on creating REST Api for our app. The most easiest way is to use http://docs.grails.org/latest/guide/webServices.html#domainResources[domain resources]
 
@@ -100,11 +106,10 @@ So as we see from docs we just need to update our domain a bit (just add `@Resou
 
 [source,groovy]
 ----
-@Resource(uri = '/orgs', formats = ["json", "xml"])
-class Org {
-  String num
-
+@Resource(uri = '/person', formats = ["json"])
+class Person {
   ...
+}
 ----
 
 ==== url-mappings-report
@@ -136,6 +141,7 @@ Controller: org
  |   PUT    | /orgs/${id}                           | Action: update
  |   GET    | /orgs/${id}                           | Action: show
 ----
+
 ==== Using CURL to test CRUD and List
 . run-app should work
 . show examples for Org:
@@ -219,6 +225,7 @@ link to http://docs.grails.org/latest/guide/webServices.html#restfulControllers
 remove the @Resource and implement a controller that has something for picklist like we do
 
 == Creating the Angular UI
+. setup the domain with widgets. http://hartsock.blogspot.com/2007/08/grails-widget-list.html
 . show how to create a basic CRUD and List screen
 
 === customize the searching
