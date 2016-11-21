@@ -24,7 +24,7 @@ class ContactGebSpec extends GebSpec {
         given:
         RestBuilder rest = new RestBuilder()
         when: "list endpoint without params"
-        RestResponse response = rest.get("http://localhost:8080/contacts")
+        RestResponse response = rest.get("http://localhost:${serverPort}/contacts")
 
         then:
         response.status == 200
@@ -36,7 +36,7 @@ class ContactGebSpec extends GebSpec {
         response.json[0].email == "mscott0@ameblo.jp"
 
         when: "list endpoint with max param"
-        response = rest.get("http://localhost:8080/contacts?max=20")
+        response = rest.get("http://localhost:${serverPort}/contacts?max=20")
 
         then:
         response.status == 200
@@ -47,7 +47,7 @@ class ContactGebSpec extends GebSpec {
         response.json[0].email == "mscott0@ameblo.jp"
 
         when: "get endpoint with id"
-        response = rest.get("http://localhost:8080/contacts/1")
+        response = rest.get("http://localhost:${serverPort}/contacts/1")
 
         then:
         response.status == 200
@@ -62,7 +62,7 @@ class ContactGebSpec extends GebSpec {
         given:
         RestBuilder rest = new RestBuilder()
         when:
-        RestResponse response = rest.post("http://localhost:8080/contacts"){
+        RestResponse response = rest.post("http://localhost:${serverPort}/contacts"){
             json([
                     firstName: "Test contact",
                     "email":"foo@bar.com"
@@ -82,7 +82,7 @@ class ContactGebSpec extends GebSpec {
         given:
         RestBuilder rest = new RestBuilder()
         when:
-        RestResponse response = rest.put("http://localhost:8080/contacts/101"){
+        RestResponse response = rest.put("http://localhost:${serverPort}/contacts/101"){
             json([
                     firstName: "new Test contact",
                     "email":"newfoo@bar.com",
@@ -103,7 +103,7 @@ class ContactGebSpec extends GebSpec {
         given:
         RestBuilder rest = new RestBuilder()
         when:
-        RestResponse response = rest.delete("http://localhost:8080/contacts/1")
+        RestResponse response = rest.delete("http://localhost:${serverPort}/contacts/1")
 
         then:
         response.status == 204
