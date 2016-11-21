@@ -32,12 +32,16 @@ Grails3 provides several different profiles you can read about them in http://do
 
 == Creating a Basic Grails REST API
 
-First set the defaults to allow nulls for domains
+To avoid writting `nullable: true` billion times let's set the defaults to allow nulls for domains fields by default,
+just add next code to `grails-app/config/application.groovy`
+[source,groovy]
 ----
-show the setting to allow nulls by default
+grails.gorm.default.constraints = {
+  '*' (nullable: true, blank: true)
+}
 ----
 
-After application is created we need to add a domain class:
+So now we need to add a domain class:
 
 ----
 grails create-domain-class Contact
@@ -45,7 +49,8 @@ grails create-domain-class Contact
 
 And we'll set it up like so:
 
-```groovy
+[source,groovy]
+----
 class Contact {
   String firstName
   String lastName
@@ -57,9 +62,9 @@ class Contact {
     inactive bindable:false
   }
 }
-```
+----
 
-We will load 100 rows of mock test data from a file `contacts.json` in src/resources.
+We will load 100 rows of mock test data from a file `Contacts.json` in src/resources.
 The mock data was generated from a great tool https://www.mockaroo.com[Mockaroo]. Check it out
 
 [source,groovy]
@@ -67,11 +72,11 @@ The mock data was generated from a great tool https://www.mockaroo.com[Mockaroo]
 class BootStrap {
     def grailsApplication
     def init = { servletContext ->
-        def res = grailsApplication.mainContext.getResource("classpath:contacts.json")
+        def res = grailsApplication.mainContext.getResource("classpath:Contacts.json")
         def data = new JsonSlurper().parse(res.getInputStream())
         data.each{
-          def p = new Contact(it)
-          p.save(failOnError:true,flush: true)
+          Contact contact = new Contact(it)
+          contact.save(failOnError:true,flush: true)
         }
     }
     def destroy = {
@@ -79,7 +84,7 @@ class BootStrap {
 }
 ----
 
-=== Resource annotation on Person Domain
+=== Resource annotation on Contact Domain
 
 So now we can start working on creating REST Api for our app. The most easiest way is to use http://docs.grails.org/latest/guide/webServices.html#domainResources[domain resources]
 So as we see from docs we just need to update our domain a bit (just add `@Resource` anotation) in such a way:
@@ -135,22 +140,22 @@ Content-Type: application/json;charset=UTF-8
 Transfer-Encoding: chunked
 Date: Fri, 04 Nov 2016 14:48:14 GMT
 
-...
+[{"id":1,"email":"mscott0@ameblo.jp","firstName":"Marie","lastName":"Scott"},{"id":2,"email":"jrodriguez1@scribd.com" ...
 ----
 
-==== POST:
+===== POST:
 ----
-curl -i -X POST -H "Content-Type: application/json" -d '{"firstName":"Joe", "lastName": "Cool}' localhost:8080/contacts
+curl -i -X POST -H "Content-Type: application/json" -d '{"firstName":"Joe", "lastName": "Cool"}' localhost:8080/contacts
 HTTP/1.1 201
 X-Application-Context: application:development
-Location: http://localhost:8080/orgs/31
+Location: http://localhost:8080/contacts/101
 Content-Type: application/json;charset=UTF-8
 Transfer-Encoding: chunked
 Date: Fri, 04 Nov 2016 15:00:49 GMT
 
 {"id":101,"firstName":"Joe","lastName":"Cool"}
 ----
-==== GET (by id):
+===== GET (by id):
 ----
 curl -i -X GET -H "Content-Type: application/json"  localhost:8080/contacts/101
 HTTP/1.1 200
@@ -162,27 +167,137 @@ Date: Fri, 04 Nov 2016 15:02:09 GMT
 {"id":101,"firstName":"Joe","lastName":"Cool"}
 ----
 
-==== PUT:
+===== PUT:
 ----
-curl -i -X PUT -H "Content-Type: application/js":"New Org Name", "num": "Test num", "zipCode": 123}' localhost:8080/orgs/31
+curl -i -X PUT -H "Content-Type: application/json" -d '{"firstName": "New Name", "lastName": "New Last name"}' localhost:8080/contacts/101
 HTTP/1.1 200
 X-Application-Context: application:development
-Location: http://localhost:8080/orgs/31
+Location: http://localhost:8080/contacts/101
 Content-Type: application/json;charset=UTF-8
 Transfer-Encoding: chunked
 Date: Fri, 04 Nov 2016 15:03:48 GMT
 
-{"id":31,"name":"New Org Name","num":"Test num","zipCode":"123"}
+{"id":101,"firstName":"New Name","lastName":"New Last name"}
 ----
 
-=== Functional GEB?? tests for our REST CRUD
-* write tests for the Create,Read,Update,Delete and List more or less based on the above curl examples
-* this says its built into 3 somehow https://grails.org/plugin/rest-client-builder
-* this has some possible examples http://aruizca.com/integrated-vs-functional-testing-how-to-test-rest-apis-in-grails-using-spock/
-* I put together step by step for Geb in grails 3 here https://github.com/basejump/grails3-geb-example
-* show test
+===== DELETE:
+----
+curl -i -X GET -H "Content-Type: application/json"  localhost:8080/contacts/50
+HTTP/1.1 200
+X-Application-Context: application:development
+Content-Type: application/json;charset=UTF-8
+Transfer-Encoding: chunked
+Date: Mon, 21 Nov 2016 12:43:48 GMT
 
-=== Snapshot 1 sample app saved
+{"id":50,"email":"aramirez1d@amazon.de","firstName":"Arthur","lastName":"Ramirez"}
+----
+
+=== Functional GEB
+The next step is to add tests for our app, to make it a bit more interesting we will geb tests:
+
+First we need to add geb dependencies to `build.gradle`:
+[source]
+----
+/****** GEB *******/
+    def webdriverVersion = "2.53.1"
+
+    testCompile("org.grails.plugins:geb",
+            "org.seleniumhq.selenium:selenium-support:${webdriverVersion}",
+            "org.seleniumhq.selenium:selenium-chrome-driver:${webdriverVersion}",
+            "org.seleniumhq.selenium:selenium-firefox-driver:${webdriverVersion}",
+            "org.seleniumhq.selenium:selenium-ie-driver:${webdriverVersion}")
+
+    // see https://github.com/codeborne/ghostdriver
+    testCompile("com.codeborne:phantomjsdriver:1.3.0") {
+        // phantomjs driver pulls in a different selenium version amongs other stuff it seemed
+        transitive = false
+    }
+    // see https://github.com/bonigarcia/webdrivermanager
+    testCompile "io.github.bonigarcia:webdrivermanager:1.4.9"
+    /** GEB end */
+----
+
+and to be able to pass `geb.env` property to run tests in different browsers add next code to the bottom of the file:
+
+[source]
+----
+integrationTest {
+    systemProperties System.properties
+}
+----
+
+Also we need to add external configuration for geb tests, `src/integration-test/groovy/GebConfig.groovy`:
+[source,groovy]
+----
+baseNavigatorWaiting = true
+atCheckWaiting = true
+quitCachedDriverOnShutdown = true //keeps the browser open after test if FALSE
+driver = { new HtmlUnitDriver(true) }
+environments {
+  htmlunit { driver = { new HtmlUnitDriver(true) } }
+  chrome {
+    ChromeDriverManager.getInstance().setup()
+    driver = { new ChromeDriver() }
+  }
+  ie {
+    InternetExplorerDriverManager.getInstance().setup()
+    driver = { new InternetExplorerDriver() }
+  }
+
+  phantom {
+    PhantomJsDriverManager.getInstance().setup()
+    waiting {
+      timeout = 2
+    }
+    driver = { new PhantomJSDriver() }
+  }
+}
+----
+
+To test the REST endpoints `RestBuilder` will be used.
+
+[source,groovy]
+----
+void "check POST request"() {
+        given:
+        RestBuilder rest = new RestBuilder() // create RestBuilder
+        when:
+        // send POST request to create new Contact
+        RestResponse response = rest.post("http://localhost:8080/contacts"){
+            json([
+                    firstName: "Test contact",
+                    "email":"foo@bar.com"
+            ])
+        }
+
+        then:
+        response.status == 201
+        response.json != null
+        response.json.id == 101
+        response.json.firstName == "Test contact"
+        response.json.lastName == null
+        response.json.email == "foo@bar.com"
+    }
+----
+
+More tests are in `src/integration-test/groovy/geb/ContactGebSpec.groovy`
+
+To run the test one can use:
+----
+grails -Dgeb.env=chrome test-app
+----
+or
+----
+grails -Dgeb.env=chrome test-app -integration
+----
+or with gradlew
+----
+gradlew -Dgeb.env=chrome integrationTest
+----
+
+You can run with other browser, just replace `chrome` on `ie`/ `phantom`/`firefox`.
+
+The final result of the first stage you can check at `angle-grinder/grails/restTutorial/snapshot1/result`
 
 == Adding the DAO plugin for REST
 
@@ -193,7 +308,7 @@ At it core its just a specialized transactional service to deal with CRUD, searc
 The mains goals are to reduce boiler plate in the controller, centralizing transactional domain logic out of the controller,
 make it easier to reuse the crud across the application without the controller and simplify testing.
 
-Add in the dependencie for the plugin
+Add in the dependence for the plugin
 ----
 show the dep line
 ----
