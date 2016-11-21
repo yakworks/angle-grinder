@@ -30,20 +30,333 @@ Application created at angle-grinder/grails/restTutorial/step1/resttutorail
 
 Grails3 provides several different profiles you can read about them in http://docs.grails.org/3.2.0/guide/profiles.html[docs]
 
-== Creating a Grails REST API
+== Creating a Basic Grails REST API
+
+First set the defaults to allow nulls for domains
+----
+show the setting to allow nulls by default
+----
 
 After application is created we need to add a domain class:
 
 ----
-grails create-domain-class Person
+grails create-domain-class Contact
 ----
 
 And we'll set it up like so:
 
 ```groovy
+class Contact {
+  String firstName
+  String lastName
+  String email
+  Boolean inactive
+
+  static constraints = {
+    firstName nullable: false
+    inactive bindable:false
+  }
+}
+```
+
+We will load 100 rows of mock test data from a file `contacts.json` in src/resources.
+The mock data was generated from a great tool https://www.mockaroo.com[Mockaroo]. Check it out
+
+[source,groovy]
+----
+class BootStrap {
+    def grailsApplication
+    def init = { servletContext ->
+        def res = grailsApplication.mainContext.getResource("classpath:contacts.json")
+        def data = new JsonSlurper().parse(res.getInputStream())
+        data.each{
+          def p = new Contact(it)
+          p.save(failOnError:true,flush: true)
+        }
+    }
+    def destroy = {
+    }
+}
+----
+
+=== Resource annotation on Person Domain
+
+So now we can start working on creating REST Api for our app. The most easiest way is to use http://docs.grails.org/latest/guide/webServices.html#domainResources[domain resources]
+So as we see from docs we just need to update our domain a bit (just add `@Resource` anotation) in such a way:
+
+[source,groovy]
+----
+@Resource(uri = '/contacts', formats = ["json"])
+class Contact {
+  ...
+}
+----
+
+=== url-mappings-report
+
+To see all available endpoints that Grails create for us run:
+
+----
+$ grails url-mappings-report
+
+ |    *     | ERROR: 500                            | View:   /error
+ |    *     | ERROR: 404                            | View:   /notFound
+ |   GET    | /${controller}(.${format)?            | Action: index
+ |   POST   | /${controller}(.${format)?            | Action: save
+ |  DELETE  | /${controller}/${id}(.${format)?      | Action: delete
+ |   GET    | /${controller}/${id}(.${format)?      | Action: show
+ |   PUT    | /${controller}/${id}(.${format)?      | Action: update
+ |  PATCH   | /${controller}/${id}(.${format)?      | Action: patch
+
+Controller: application
+ |    *     | /                                     | Action: index
+
+Controller: org
+ |   GET    | /contacts/create                          | Action: create
+ |   GET    | /contacts/${id}/edit                      | Action: edit
+ |   POST   | /contacts                                 | Action: save
+ |   GET    | /contacts                                 | Action: index
+ |  DELETE  | /contacts/${id}                           | Action: delete
+ |  PATCH   | /contacts/${id}                           | Action: patch
+ |   PUT    | /contacts/${id}                           | Action: update
+ |   GET    | /contacts/${id}                           | Action: show
+----
+
+=== Using CURL to test CRUD and List
+
+Fire up the app with `run-app`
+
+==== GET (list):
+----
+curl -i -X GET -H "Content-Type: application/json"  localhost:8080/contacts
+HTTP/1.1 200
+X-Application-Context: application:development
+Content-Type: application/json;charset=UTF-8
+Transfer-Encoding: chunked
+Date: Fri, 04 Nov 2016 14:48:14 GMT
+
+...
+----
+
+==== POST:
+----
+curl -i -X POST -H "Content-Type: application/json" -d '{"firstName":"Joe", "lastName": "Cool}' localhost:8080/contacts
+HTTP/1.1 201
+X-Application-Context: application:development
+Location: http://localhost:8080/orgs/31
+Content-Type: application/json;charset=UTF-8
+Transfer-Encoding: chunked
+Date: Fri, 04 Nov 2016 15:00:49 GMT
+
+{"id":101,"firstName":"Joe","lastName":"Cool"}
+----
+==== GET (by id):
+----
+curl -i -X GET -H "Content-Type: application/json"  localhost:8080/contacts/101
+HTTP/1.1 200
+X-Application-Context: application:development
+Content-Type: application/json;charset=UTF-8
+Transfer-Encoding: chunked
+Date: Fri, 04 Nov 2016 15:02:09 GMT
+
+{"id":101,"firstName":"Joe","lastName":"Cool"}
+----
+
+==== PUT:
+----
+curl -i -X PUT -H "Content-Type: application/js":"New Org Name", "num": "Test num", "zipCode": 123}' localhost:8080/orgs/31
+HTTP/1.1 200
+X-Application-Context: application:development
+Location: http://localhost:8080/orgs/31
+Content-Type: application/json;charset=UTF-8
+Transfer-Encoding: chunked
+Date: Fri, 04 Nov 2016 15:03:48 GMT
+
+{"id":31,"name":"New Org Name","num":"Test num","zipCode":"123"}
+----
+
+=== Functional GEB?? tests for our REST CRUD
+* write tests for the Create,Read,Update,Delete and List more or less based on the above curl examples
+* this says its built into 3 somehow https://grails.org/plugin/rest-client-builder
+* this has some possible examples http://aruizca.com/integrated-vs-functional-testing-how-to-test-rest-apis-in-grails-using-spock/
+* I put together step by step for Geb in grails 3 here https://github.com/basejump/grails3-geb-example
+* show test
+
+=== Snapshot 1 sample app saved
+
+== Adding the DAO plugin for REST
+
+=== Introduction
+
+The DAO plugin adds a new Service artifact to sit in between the controller interface and the restful logic.
+At it core its just a specialized transactional service to deal with CRUD, searching and other functionality relating to a domain.
+The mains goals are to reduce boiler plate in the controller, centralizing transactional domain logic out of the controller,
+make it easier to reuse the crud across the application without the controller and simplify testing.
+
+Add in the dependencie for the plugin
+----
+show the dep line
+----
+
+=== RestDaoController
+Alexey, see http://mrhaki.blogspot.com/2014/07/grails-goodness-custom-controller-class.html
+
+Add the superClass property to the Resource annotation. The dao plugin will setup a default DAO for every domain.
+
+```groovy
+@Resource(uri = '/contacts', formats = ["json"], superClass = RestDaoController)
+class Contact {
+  ...
+}
+```
+
+Check that our functional tests still pass with the defaults.
+
+=== Implementing the ContactDao
+
+Use Case: Lets say we want to customize the insert to allow a user to pass in a name and have it be split into first and last names.
+
+so our sanity test could look like
+
+```groovy
+def "test name splits into first and last"(){
+  when:
+  def resp = restInsert('{"name":"Joe Cool}')
+  expect:
+  resp.firstName = 'Joe'
+  resp.lastName = 'Cool'
+}
+```
+
+And we will setup a concrete implementation of a dao for the contact.
+The plugin will recognize that we want to use this base on the naming convention SomeDomainNameDao
+In either the the grails-app/services or grails-app/dao directory add the ContactDao.groovy
+
+[source,groovy]
+.ContactDao.groovy
+----
+package restapp
+
+import grails.plugin.dao.DaoMessage
+import grails.plugin.dao.DomainException
+import grails.plugin.dao.GormDaoSupport
+
+class ContactDao extends GormDaoSupport {
+	Class domainClass = Contact
+
+  @Override
+  Map insert(Map params) {
+    String name = params.remove("name")
+    if(name){
+      def (fname, lname) = name.split()
+      params.firstName = fname
+      params.lastName = lname
+    }
+    super.insert(params)
+  }
+}
+----
+
+now run the test and see if it works
+
+=== Snapshot 2 sample app
+
+=== Implementing a RestDaoController
+
+Just as you might do with the RestfulController as outlined in the docs here
+http://docs.grails.org/3.2.x/guide/webServices.html#extendingRestfulController[extendingRestfulController]
+, we can implement a RestDaoController when the defaults
+using the Resource annotation and the DAO won't work for us, such as adding a new REST end point.
+
+Use Case: A user can not update the inactive field since its bindable false:
+Add a new end point so a user can inactivate the contact instead of a delete
+
+Remove the `@Resource` annotation from the contacts domain and add the ContactController.groovy
+
+
+[source,groovy]
+.ContactController.groovy
+----
+package restapp
+
+class ContactController extends RestDaoController {
+    static responseFormats = ['json']
+
+    ContactController() {
+        super(Contact)
+    }
+
+    def inactivate(Long id) {
+      try{
+        make this clean and with the pattern we use for others in the RestDaoController
+        Map result or entity = dao.inactivate(Long id)
+        respond result.entity
+      }catch(e){
+        set apporpriate status for error
+        repond with the errors
+      }
+    }
+
+}
+----
+
+Add logic to the dao
+
+[source,groovy]
+----
+class ContactDao extends RestDaoController {
+    ...
+
+    Contact inactivate(Long id) {
+      Contact.get(id) etc....
+      return the contact when success
+    }
+    ....
+}
+----
+
+Update our rest sanity tests
+
+[source,groovy]
+----
+```groovy
+def "inactivate a contact"(){
+  when:
+  some rest call inactivate 1
+  then:
+
+}
+```
+----
+
+Update our dao tests
+
+[source,groovy]
+----
+```groovy
+def "inactivate a contact"(){
+  when:
+  def resp = dao.inactivate(1)
+  then:
+
+}
+```
+----
+
+=== Snapshot 3 sample app saved
+
+
+== Creating the Angular UI
+
+. setup the domain with widgets. http://hartsock.blogspot.com/2007/08/grails-widget-list.html
+. show how to create a basic CRUD and List screen
+
+Add fields to domain so we can show more of the widgets in angle-grinder
+
+```groovy
 import java.time.*
 
-class Person {
+class Contact {
   Salutations salutation
   String firstName
   String lastName
@@ -78,156 +391,6 @@ class Person {
 }
 ```
 
-And we will load some sample data from `contacts.json` in src/resources
-
-[source,groovy]
-----
-class BootStrap {
-    def grailsApplication
-    def init = { servletContext ->
-        def res = grailsApplication.mainContext.getResource("classpath:contacts.json")
-        def data = new JsonSlurper().parse(res.getInputStream())
-        data.each{
-            new Person(it).save(flush: true)
-        }
-    }
-    def destroy = {
-    }
-}
-----
-
-So, on app launch we will have 100 Person rows.
-
-=== Resource annotation on Person Domain
-
-So now we can start working on creating REST Api for our app. The most easiest way is to use http://docs.grails.org/latest/guide/webServices.html#domainResources[domain resources]
-
-So as we see from docs we just need to update our domain a bit (just add `@Resource` anotation) in such a way:
-
-[source,groovy]
-----
-@Resource(uri = '/person', formats = ["json"])
-class Person {
-  ...
-}
-----
-
-==== url-mappings-report
-
-To see all available endpoints that Grails create for us run:
-
-----
-grails url-mappings-report
-
- |    *     | ERROR: 500                            | View:   /error
- |    *     | ERROR: 404                            | View:   /notFound
- |   GET    | /${controller}(.${format)?            | Action: index
- |   POST   | /${controller}(.${format)?            | Action: save
- |  DELETE  | /${controller}/${id}(.${format)?      | Action: delete
- |   GET    | /${controller}/${id}(.${format)?      | Action: show
- |   PUT    | /${controller}/${id}(.${format)?      | Action: update
- |  PATCH   | /${controller}/${id}(.${format)?      | Action: patch
-
-Controller: application
- |    *     | /                                     | Action: index
-
-Controller: org
- |   GET    | /orgs/create                          | Action: create
- |   GET    | /orgs/${id}/edit                      | Action: edit
- |   POST   | /orgs                                 | Action: save
- |   GET    | /orgs                                 | Action: index
- |  DELETE  | /orgs/${id}                           | Action: delete
- |  PATCH   | /orgs/${id}                           | Action: patch
- |   PUT    | /orgs/${id}                           | Action: update
- |   GET    | /orgs/${id}                           | Action: show
-----
-
-==== Using CURL to test CRUD and List
-. run-app should work
-. show examples for Org:
-.. Create
-.. Read
-.. Update
-.. Delete
-.. List
-Lets test them:
-
-===== GET (list):
-----
-curl -i -X GET -H "Content-Type: application/json"  localhost:8080/orgs
-HTTP/1.1 200
-X-Application-Context: application:development
-Content-Type: application/json;charset=UTF-8
-Transfer-Encoding: chunked
-Date: Fri, 04 Nov 2016 14:48:14 GMT
-
-[{"id":1,"name":"Zava","num":"74faba0c-263b-4b2b-abc3-8569fc521dc1","street":"5297 Bluestem Alley"},
-{"id":2,"name":"Ailane","num":"fed98e6e-70d7-46b5-a75e-2bd0cc1bb8ea","street":"60620 Westend Junction"},
-{"id":3,"name":"Zazio","num":"41a4dfc2-ed80-4e2d-9131-719e5dfbd303"},
-{"id":4,"name":"Eadel","num":"1ea8f419-ce74-4459-9e40-aafc98a161bc","street":"35 Meadow Valley Pass"},
-...
-----
-
-===== POST:
-----
-curl -i -X POST -H "Content-Type: application/json" -d '{"name":"New Org Name", "num": "Test num"}' localhost:8080/orgs
-HTTP/1.1 201
-X-Application-Context: application:development
-Location: http://localhost:8080/orgs/31
-Content-Type: application/json;charset=UTF-8
-Transfer-Encoding: chunked
-Date: Fri, 04 Nov 2016 15:00:49 GMT
-
-{"id":31,"name":"New Org Name","num":"Test num"}
-----
-===== GET (by id):
-----
-curl -i -X GET -H "Content-Type: application/json"  localhost:8080/orgs/31
-HTTP/1.1 200
-X-Application-Context: application:development
-Content-Type: application/json;charset=UTF-8
-Transfer-Encoding: chunked
-Date: Fri, 04 Nov 2016 15:02:09 GMT
-
-{"id":31,"name":"New Org Name","num":"Test num"}
-----
-
-===== PUT:
-----
-curl -i -X PUT -H "Content-Type: application/js":"New Org Name", "num": "Test num", "zipCode": 123}' localhost:8080/orgs/31
-HTTP/1.1 200
-X-Application-Context: application:development
-Location: http://localhost:8080/orgs/31
-Content-Type: application/json;charset=UTF-8
-Transfer-Encoding: chunked
-Date: Fri, 04 Nov 2016 15:03:48 GMT
-
-{"id":31,"name":"New Org Name","num":"Test num","zipCode":"123"}
-----
-
-==== Adding tests for our rest CRUD
-* write unit tests for the Create,Read,Update,Delete and List
-* test-app should work
-
-==== RestfulDaoController superClass
-* see http://mrhaki.blogspot.com/2014/07/grails-goodness-custom-controller-class.html
-* using superClass = RestfulDaoController with @Resource annotation
-* test should all still pass
-
-==== Customize the DAO
-Show how to customize the dao to automatically create a num with first 5 letters of name without spaces
-if no num is provdided in a create put
-
-==== Integration and Functional Tests for dao and the restful json calls
-
-=== Implementing a RestfulDaoController
-link to http://docs.grails.org/latest/guide/webServices.html#restfulControllers
-remove the @Resource and implement a controller that has something for picklist like we do
-
-== Creating the Angular UI
-. setup the domain with widgets. http://hartsock.blogspot.com/2007/08/grails-widget-list.html
-. show how to create a basic CRUD and List screen
-
 === customize the searching
 
 === paging
@@ -237,11 +400,45 @@ remove the @Resource and implement a controller that has something for picklist 
 . create tests
 . create UI
 
-== Security
+== Spring Security
 
 == Other Tools
 === Using postman for testing
 === Using Intellij for testing
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 == example application for tutorail "Grails with REST"
