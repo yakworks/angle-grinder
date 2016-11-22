@@ -287,23 +287,36 @@ class Contact {
 
 Now you can check that our functional tests still pass with the defaults.
 
-For the next stage please move to next snapshot.
+For the next stage please move to next snapshot folder.
 
 === Implementing the ContactDao
 
-Use Case: Lets say we want to customize the insert to allow a user to pass in a name and have it be split into first and last names.
+Let's implement our first custom dao, for example we have next use case:
+Lets say we want to customize the insert to allow a user to pass in a name and have it be split into first and last names.
 
-so our sanity test could look like
+The test for this case should look loke:
+[source,groovy]
+----
+  given:
+  RestBuilder rest = new RestBuilder()
 
-```groovy
-def "test name splits into first and last"(){
-  when:
-  def resp = restInsert('{"name":"Joe Cool}')
-  expect:
-  resp.firstName = 'Joe'
-  resp.lastName = 'Cool'
+  when: "name is passed"
+  def response = rest.post("http://localhost:${serverPort}/contacts"){
+       json([
+          name: "Joe Cool",
+          "email":"foo@bar.com"
+       ])
+  }
+
+  then:
+  response.status == 201
+  response.json != null
+  response.json.id == 102
+  response.json.firstName == "Joe"
+  response.json.lastName == "Cool"
+  response.json.email == "foo@bar.com"
 }
-```
+----
 
 And we will setup a concrete implementation of a dao for the contact.
 The plugin will recognize that we want to use this base on the naming convention SomeDomainNameDao
@@ -312,10 +325,8 @@ In either the the grails-app/services or grails-app/dao directory add the Contac
 [source,groovy]
 .ContactDao.groovy
 ----
-package restapp
+package resttutorial
 
-import grails.plugin.dao.DaoMessage
-import grails.plugin.dao.DomainException
 import grails.plugin.dao.GormDaoSupport
 
 class ContactDao extends GormDaoSupport {
@@ -334,9 +345,11 @@ class ContactDao extends GormDaoSupport {
 }
 ----
 
-now run the test and see if it works
+Now you can run tests to be sure that new functionality works, and didn't break old.
 
 === Snapshot 2 sample app
+
+Move to snapshot4 folder to continue.
 
 === Implementing a RestDaoController
 
