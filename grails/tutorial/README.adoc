@@ -131,7 +131,7 @@ Controller: org
 
 Fire up the app with `run-app`
 
-==== GET (list):
+===== GET (list):
 ----
 curl -i -X GET -H "Content-Type: application/json"  localhost:8080/contacts
 HTTP/1.1 200
@@ -195,75 +195,28 @@ Date: Mon, 21 Nov 2016 12:43:48 GMT
 === Functional GEB
 The next step is to add tests for our app, to make it a bit more interesting we will geb tests:
 
-First we need to add geb dependencies to `build.gradle`:
-[source]
-----
-/****** GEB *******/
-    def webdriverVersion = "2.53.1"
+Check https://github.com/basejump/grails3-geb-example to see how to configure geb tests for Grails3
 
-    testCompile("org.grails.plugins:geb",
-            "org.seleniumhq.selenium:selenium-support:${webdriverVersion}",
-            "org.seleniumhq.selenium:selenium-chrome-driver:${webdriverVersion}",
-            "org.seleniumhq.selenium:selenium-firefox-driver:${webdriverVersion}",
-            "org.seleniumhq.selenium:selenium-ie-driver:${webdriverVersion}")
+Functional we will put into separate folder `geb` in the integration tests.
 
-    // see https://github.com/codeborne/ghostdriver
-    testCompile("com.codeborne:phantomjsdriver:1.3.0") {
-        // phantomjs driver pulls in a different selenium version amongs other stuff it seemed
-        transitive = false
-    }
-    // see https://github.com/bonigarcia/webdrivermanager
-    testCompile "io.github.bonigarcia:webdrivermanager:1.4.9"
-    /** GEB end */
-----
+For testing we need http://grails.org/plugin/rest-client-builder[Rest Client Builder plugin], it is already integrated to
+Grails3 so we do not need any dependencies changes.
 
-and to be able to pass `geb.env` property to run tests in different browsers add next code to the bottom of the file:
-
-[source]
-----
-integrationTest {
-    systemProperties System.properties
-}
-----
-
-Also we need to add external configuration for geb tests, `src/integration-test/groovy/GebConfig.groovy`:
-[source,groovy]
-----
-baseNavigatorWaiting = true
-atCheckWaiting = true
-quitCachedDriverOnShutdown = true //keeps the browser open after test if FALSE
-driver = { new HtmlUnitDriver(true) }
-environments {
-  htmlunit { driver = { new HtmlUnitDriver(true) } }
-  chrome {
-    ChromeDriverManager.getInstance().setup()
-    driver = { new ChromeDriver() }
-  }
-  ie {
-    InternetExplorerDriverManager.getInstance().setup()
-    driver = { new InternetExplorerDriver() }
-  }
-
-  phantom {
-    PhantomJsDriverManager.getInstance().setup()
-    waiting {
-      timeout = 2
-    }
-    driver = { new PhantomJSDriver() }
-  }
-}
-----
-
-To test the REST endpoints `RestBuilder` will be used.
+Here is an example of `POST` request (creating of a new contact).
+RestBuilder we use to emulate request from external source. Note, in Grails3 integration tests run on the random port,
+so you cant call `http://localhost:8080/contacts` , but we can use `serverPort` variable instead. See example:
 
 [source,groovy]
 ----
-void "check POST request"() {
+@Integration
+@Rollback
+class ContactGebSpec extends GebSpec {
+
+    void "check POST request"() {
         given:
-        RestBuilder rest = new RestBuilder() // create RestBuilder
+        RestBuilder rest = new RestBuilder()
         when:
-        // send POST request to create new Contact
-        RestResponse response = rest.post("http://localhost:8080/contacts"){
+        RestResponse response = rest.post("http://localhost:${serverPort}/contacts"){
             json([
                     firstName: "Test contact",
                     "email":"foo@bar.com"
@@ -278,6 +231,7 @@ void "check POST request"() {
         response.json.lastName == null
         response.json.email == "foo@bar.com"
     }
+}
 ----
 
 More tests are in `src/integration-test/groovy/geb/ContactGebSpec.groovy`
@@ -301,6 +255,9 @@ The final result of the first stage you can check at `angle-grinder/grails/restT
 
 == Adding the DAO plugin for REST
 
+In the `snapshot2` directory is final result that we got after "Creating a Basic Grails REST API" chapter, it will be a
+starting point for us
+
 === Introduction
 
 The DAO plugin adds a new Service artifact to sit in between the controller interface and the restful logic.
@@ -310,22 +267,27 @@ make it easier to reuse the crud across the application without the controller a
 
 Add in the dependence for the plugin
 ----
-show the dep line
+compile "org.grails.plugin:dao:2.0.1"
 ----
 
 === RestDaoController
-Alexey, see http://mrhaki.blogspot.com/2014/07/grails-goodness-custom-controller-class.html
 
-Add the superClass property to the Resource annotation. The dao plugin will setup a default DAO for every domain.
+Dao plugin will setup a default DAO for every domain and it has RestDaoController that overrides some methods of the
+default Grails `RestfullController` to make it use DAOs.
+
+The `@Resource` has a property `superClass` that allows us to use another controller as basic for building rest endpoints,
+so lets set `RestDaoController` as super class for our Contact:
 
 ```groovy
-@Resource(uri = '/contacts', formats = ["json"], superClass = RestDaoController)
+@Resource(uri = '/contacts', superClass = RestDaoController)
 class Contact {
   ...
 }
 ```
 
-Check that our functional tests still pass with the defaults.
+Now you can check that our functional tests still pass with the defaults.
+
+For the next stage please move to next snapshot.
 
 === Implementing the ContactDao
 

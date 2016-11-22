@@ -6,6 +6,7 @@ import grails.plugins.rest.client.RestBuilder
 import grails.plugins.rest.client.RestResponse
 import grails.test.mixin.integration.Integration
 import grails.transaction.Rollback
+import resttutorial.Contact
 
 /**
  * See http://www.gebish.org/manual/current/ for more instructions
@@ -97,15 +98,30 @@ class ContactGebSpec extends GebSpec {
         response.json.firstName == "new Test contact"
         response.json.lastName == "Doe"
         response.json.email == "newfoo@bar.com"
+
+        when: "first name is empty"
+        response = rest.put("http://localhost:${serverPort}/contacts/101"){
+            json([
+                    firstName: "",
+                    "email":"newfoo@bar.com",
+                    lastName: "Doe"
+            ])
+        }
+
+        then:
+        response.status == 422
     }
 
     void "check DELETE request"() {
         given:
         RestBuilder rest = new RestBuilder()
         when:
+        Contact contact = Contact.get(1)
+        assert contact != null
         RestResponse response = rest.delete("http://localhost:${serverPort}/contacts/1")
 
         then:
         response.status == 204
+        Contact.get(1) == null
     }
 }
