@@ -32,8 +32,8 @@ Grails3 provides several different profiles you can read about them in http://do
 
 == Creating a Basic Grails REST API
 
-To avoid writting `nullable: true` billion times let's set the defaults to allow nulls for domains fields by default,
-just add next code to `grails-app/config/application.groovy`
+To avoid writting `nullable: true` a billion times we will set the default to allow nulls for fields
+Add the following to `grails-app/config/application.groovy`
 [source,groovy]
 ----
 grails.gorm.default.constraints = {
@@ -41,7 +41,7 @@ grails.gorm.default.constraints = {
 }
 ----
 
-So now we need to add a domain class:
+And then lets create a domain class for our proof of concept:
 
 ----
 grails create-domain-class Contact
@@ -208,8 +208,9 @@ so you cant call `http://localhost:8080/contacts` , but we can use `serverPort` 
 
 [source,groovy]
 ----
+//TODO show the package and the imports
 @Integration
-@Rollback
+@Rollback //TODO why is this needed? does it really work?
 class ContactGebSpec extends GebSpec {
 
     void "check POST request"() {
@@ -217,24 +218,29 @@ class ContactGebSpec extends GebSpec {
         RestBuilder rest = new RestBuilder()
         when:
         RestResponse response = rest.post("http://localhost:${serverPort}/contacts"){
-            json([
-                    firstName: "Test contact",
-                    "email":"foo@bar.com"
-            ])
+          json([
+            firstName: "Test contact",
+            email:"foo@bar.com",
+            inactive:true //should fail
+          ])
         }
 
         then:
         response.status == 201
-        response.json != null
-        response.json.id == 101
-        response.json.firstName == "Test contact"
-        response.json.lastName == null
-        response.json.email == "foo@bar.com"
+        //TODO
+        JSON(??or what ever it is now) json = response.json
+        json.with{
+          id == 101
+          firstName == "Test contact"
+          lastName == null
+          email == "foo@bar.com"
+          inactive == null
+        }
     }
 }
 ----
 
-More tests are in `src/integration-test/groovy/geb/ContactGebSpec.groovy`
+More tests examples are in the are in the snapshot's `ContactGebSpec.groovy`
 
 To run the test one can use:
 ----
@@ -265,7 +271,7 @@ At it core its just a specialized transactional service to deal with CRUD, searc
 The mains goals are to reduce boiler plate in the controller, centralizing transactional domain logic out of the controller,
 make it easier to reuse the crud across the application without the controller and simplify testing.
 
-Add in the dependence for the plugin
+Add in the dependency for the plugin
 ----
 compile "org.grails.plugin:dao:2.0.1"
 ----
@@ -294,7 +300,7 @@ For the next stage please move to next snapshot folder.
 Let's implement our first custom dao, for example we have next use case:
 Lets say we want to customize the insert to allow a user to pass in a name and have it be split into first and last names.
 
-The test for this case should look loke:
+The test for this case will look like:
 [source,groovy]
 ----
   given:
@@ -302,19 +308,18 @@ The test for this case should look loke:
 
   when: "name is passed"
   def response = rest.post("http://localhost:${serverPort}/contacts"){
-       json([
-          name: "Joe Cool",
-          "email":"foo@bar.com"
-       ])
+    json([
+      name: "Joe Cool",
+      email:"foo@bar.com"
+    ])
   }
 
   then:
   response.status == 201
-  response.json != null
-  response.json.id == 102
-  response.json.firstName == "Joe"
-  response.json.lastName == "Cool"
-  response.json.email == "foo@bar.com"
+  response.json.with{
+    firstName == "Joe"
+    lastName == "Cool"
+  }
 }
 ----
 
@@ -433,12 +438,14 @@ def "inactivate a contact"(){
 ```
 ----
 
-=== Snapshot 3 sample app saved
+=== Snapshot 3 of tutorial app is at this point
+
+== Spring Security
+
 
 
 == Creating the Angular UI
 
-. setup the domain with widgets. http://hartsock.blogspot.com/2007/08/grails-widget-list.html
 . show how to create a basic CRUD and List screen
 
 Add fields to domain so we can show more of the widgets in angle-grinder
@@ -491,6 +498,9 @@ class Contact {
 . create UI
 
 == Spring Security
+
+Based on this excellent tutorial http://alvarosanchez.github.io/grails-angularjs-springsecurity-workshop/
+we can do it like x
 
 == Other Tools
 === Using postman for testing
