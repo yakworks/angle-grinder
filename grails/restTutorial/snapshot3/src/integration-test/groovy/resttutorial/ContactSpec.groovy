@@ -76,7 +76,6 @@ class ContactSpec extends Specification {
         response.status == 201
         response.json != null
         JSONElement json = response.json
-        json.id == 101
         json.firstName == "Test contact"
         json.lastName == null
         json.email == "foo@bar.com"
@@ -96,7 +95,6 @@ class ContactSpec extends Specification {
         response.status == 201
         response.json != null
         JSONElement json = response.json
-        json.id == 102
         json.firstName == "Joe"
         json.lastName == "Cool"
     }
