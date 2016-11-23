@@ -77,6 +77,22 @@ class ContactGebSpec extends GebSpec {
         response.json.firstName == "Test contact"
         response.json.lastName == null
         response.json.email == "foo@bar.com"
+
+      when: "name is passed"
+         response = rest.post("http://localhost:${serverPort}/contacts"){
+            json([
+                    name: "Joe Cool",
+                    "email":"foo@bar.com"
+            ])
+        }
+
+        then:
+        response.status == 201
+        response.json != null
+        response.json.id == 102
+        response.json.firstName == "Joe"
+        response.json.lastName == "Cool"
+        response.json.email == "foo@bar.com"
     }
 
     void "check PUT request"() {

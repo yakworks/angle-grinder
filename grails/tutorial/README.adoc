@@ -192,15 +192,11 @@ Date: Mon, 21 Nov 2016 12:43:48 GMT
 {"id":50,"email":"aramirez1d@amazon.de","firstName":"Arthur","lastName":"Ramirez"}
 ----
 
-=== Functional GEB
-The next step is to add tests for our app, to make it a bit more interesting we will geb tests:
+=== Functional
+The next step is to add functional tests for our app
 
-Check https://github.com/basejump/grails3-geb-example to see how to configure geb tests for Grails3
-
-Functional we will put into separate folder `geb` in the integration tests.
-
-For testing we need http://grails.org/plugin/rest-client-builder[Rest Client Builder plugin], it is already integrated to
-Grails3 so we do not need any dependencies changes.
+For testing we also need http://grails.org/plugin/rest-client-builder[Rest Client Builder plugin], it is already in the
+dependencies list so we do not need any changes.
 
 Here is an example of `POST` request (creating of a new contact).
 RestBuilder we use to emulate request from external source. Note, in Grails3 integration tests run on the random port,
@@ -208,39 +204,45 @@ so you cant call `http://localhost:8080/contacts` , but we can use `serverPort` 
 
 [source,groovy]
 ----
-//TODO show the package and the imports
+package resttutorial
+
+import grails.plugins.rest.client.RestBuilder
+import grails.plugins.rest.client.RestResponse
+import grails.test.mixin.integration.Integration
+import org.grails.web.json.JSONElement
+import spock.lang.Shared
+import spock.lang.Specification
+
 @Integration
-@Rollback //TODO why is this needed? does it really work?
-class ContactGebSpec extends GebSpec {
+class ContactSpec extends Specification {
+
+    @Shared
+    RestBuilder rest = new RestBuilder()
 
     void "check POST request"() {
-        given:
-        RestBuilder rest = new RestBuilder()
         when:
         RestResponse response = rest.post("http://localhost:${serverPort}/contacts"){
           json([
             firstName: "Test contact",
             email:"foo@bar.com",
-            inactive:true //should fail
+            inactive:true //is bindable: false - see domain, so it wont be set to contact
           ])
         }
 
         then:
         response.status == 201
-        //TODO
-        JSON(??or what ever it is now) json = response.json
-        json.with{
-          id == 101
-          firstName == "Test contact"
-          lastName == null
-          email == "foo@bar.com"
-          inactive == null
-        }
+        response.json != null
+        JSONElement json = response.json
+        json.id == 101
+        json.firstName == "Test contact"
+        json.lastName == null
+        json.email == "foo@bar.com"
+        json.inactive == null
     }
 }
 ----
 
-More tests examples are in the are in the snapshot's `ContactGebSpec.groovy`
+More tests examples are in the are in the snapshot's `ContactSpec.groovy`
 
 === Snapshot 1 of tutorial app is at this point
 
@@ -266,12 +268,13 @@ default Grails `RestfullController` to make it use DAOs.
 The `@Resource` has a property `superClass` that allows us to use another controller as basic for building rest endpoints,
 so lets set `RestDaoController` as super class for our Contact:
 
-```groovy
+[source,groovy]
+----
 @Resource(uri = '/contacts', superClass = RestDaoController)
 class Contact {
   ...
 }
-```
+----
 
 Now you can check that our functional tests still pass with the defaults.
 
@@ -282,6 +285,7 @@ For the next stage please move to next snapshot folder.
 Lets say we want to customize the insert to allow a user to pass in a name and have it be split into first and last names.
 
 The test for this case will look like:
+
 [source,groovy]
 ----
   given:
@@ -291,15 +295,15 @@ The test for this case will look like:
   def response = rest.post("http://localhost:${serverPort}/contacts"){
     json([
       name: "Joe Cool",
-      email:"foo@bar.com"
+      email: "foo@bar.com"
     ])
   }
 
   then:
   response.status == 201
-  response.json.with{
-    firstName == "Joe"
-    lastName == "Cool"
+  JSONElement json = response.json
+  json.firstName == "Joe"
+  json.lastName == "Cool"
   }
 }
 ----
@@ -337,10 +341,7 @@ Now you can run tests to be sure that new functionality works, and didn't break 
 
 === Implementing a RestDaoController
 
-Just as you might do with the RestfulController as outlined in the docs here
-http://docs.grails.org/3.2.x/guide/webServices.html#extendingRestfulController[extendingRestfulController]
-, we can implement a RestDaoController when the defaults
-using the Resource annotation and the DAO won't work for us, such as adding a new REST end point.
+RestDaoController gives us ability to customise actions using DAOs, but what if we need to specify custom endpoint.
 
 Use Case: A user can not update the inactive field since its bindable false:
 Add a new end point so a user can inactivate the contact instead of a delete

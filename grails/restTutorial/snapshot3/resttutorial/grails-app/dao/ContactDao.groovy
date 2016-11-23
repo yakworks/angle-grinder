@@ -8,18 +8,11 @@ class ContactDao extends GormDaoSupport {
   Map insert(Map params) {
     println "fsdfsdfdsfsdf"
     String name = params.remove("name")
-    if (name) {
+    if(name){
       def (fname, lname) = name.split()
       params.firstName = fname
       params.lastName = lname
     }
     super.insert(params)
-  }
-
-  Contact inactivate(Long id) {
-    Contact contact = Contact.get(id)
-    contact.inactive = true
-    contact.persist()
-    return contact
   }
 }
