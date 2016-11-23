@@ -242,27 +242,9 @@ class ContactGebSpec extends GebSpec {
 
 More tests examples are in the are in the snapshot's `ContactGebSpec.groovy`
 
-To run the test one can use:
-----
-grails -Dgeb.env=chrome test-app
-----
-or
-----
-grails -Dgeb.env=chrome test-app -integration
-----
-or with gradlew
-----
-gradlew -Dgeb.env=chrome integrationTest
-----
+=== Snapshot 1 of tutorial app is at this point
 
-You can run with other browser, just replace `chrome` on `ie`/ `phantom`/`firefox`.
-
-The final result of the first stage you can check at `angle-grinder/grails/restTutorial/snapshot1/result`
-
-== Adding the DAO plugin for REST
-
-In the `snapshot2` directory is final result that we got after "Creating a Basic Grails REST API" chapter, it will be a
-starting point for us
+== The DAO plugin with REST support
 
 === Introduction
 
@@ -295,9 +277,8 @@ Now you can check that our functional tests still pass with the defaults.
 
 For the next stage please move to next snapshot folder.
 
-=== Implementing the ContactDao
+=== Implement the ContactDao
 
-Let's implement our first custom dao, for example we have next use case:
 Lets say we want to customize the insert to allow a user to pass in a name and have it be split into first and last names.
 
 The test for this case will look like:
@@ -352,9 +333,7 @@ class ContactDao extends GormDaoSupport {
 
 Now you can run tests to be sure that new functionality works, and didn't break old.
 
-=== Snapshot 2 sample app
-
-Move to snapshot4 folder to continue.
+=== Snapshot 2 of tutorial app is at this point
 
 === Implementing a RestDaoController
 
@@ -440,10 +419,6 @@ def "inactivate a contact"(){
 
 === Snapshot 3 of tutorial app is at this point
 
-== Spring Security
-
-
-
 == Creating the Angular UI
 
 . show how to create a basic CRUD and List screen
@@ -501,6 +476,10 @@ class Contact {
 
 Based on this excellent tutorial http://alvarosanchez.github.io/grails-angularjs-springsecurity-workshop/
 we can do it like x
+
+=== Adding simple login screen
+
+==== our CRUD screens should still work and be scured now
 
 == Other Tools
 === Using postman for testing
