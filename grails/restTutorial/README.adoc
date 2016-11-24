@@ -455,6 +455,228 @@ Update our dao tests
 
 == Creating the Angular UI
 
+=== Introduction
+
+For adding UI we will use awesome https://github.com/9ci/angle-grinder[Angle-Grinder] plugin that helps to integrate Angular
+with Grails.
+
+Angle-Grinder uses assets-pipeline plugin, so we should include both to our `build.gradle`. Also we should add `compile "org.grails:grails-dependencies"`,
+that Angle-Grinder requires. So finally we should add:
+
+----
+compile "org.grails:grails-dependencies"
+compile "com.bertramlabs.plugins:asset-pipeline-grails:2.11.1"
+compile "nine:angle-grinder:2.0.0"
+----
+
+To make it easier to understand the next steps lets dive into how Angle-Grinder plugin works. It renders Grails gsp pages
+with all assets(so you do not need to worry about it), and with Angular code, after it is rendered browser executes  JS
+code from the page. As a result we need to have actions for gsp rendering, and good decision is to isolate our REST Api
+controllers from controllers that will render pages.
+
+=== Namespace
+
+Lets create `api` folder in controllers and move our controller there. Also we need to add namespace for REST endpoints:
+
+.controllers/resttutorial/api/ContactController.groovy
+----
+package resttutorial.api
+
+ ...
+
+class ContactController extends RestDaoController {
+  static namespace = "api"
+  ...
+----
+
+and update `UrlMapping.groovy`:
+----
+      "/api/contacts"(resources: "contact", namespace: "api"){
+        "/inactivate"(controller: "contact", action: "inactivate")
+      }
+----
+
+and the last step we need to update tests by adding `/api` to test urls:
+[source,groovy]
+----
+void "check DELETE request"() {
+        when:
+        RestResponse response = rest.delete("http://localhost:${serverPort}/api/contacts/1")
+
+        then:
+        response.status == 204
+    }
+----
+
+Now run tests to be sure that all works fine.
+
+=== Gsp rendering
+Now when we moved REST controller to separate folder lets create one for page rendering.
+.ContactController.groovy
+----
+package resttutorial
+
+class ContactController {
+
+    def index() {}
+}
+----
+and then create folder `/views/contact` and `index.gsp` in it:
+[source,html]
+----
+<!doctype html>
+<html>
+<head>
+	<meta name="layout" content="main"/>
+	<title>Welcome to Tutorial</title>
+</head>
+<body >
+</body>
+</html>
+----
+
+and setup default url mapping for it:
+
+`"/" (controller: "contact", action: "index")`
+
+To apply styling and javascript we need to include Angle-Grinder assets to our app. It is really easy with
+assets-pipeline plugin. First we need to create `assents` folder in `grails-app` and add `javascript` and
+`stylesheets` directories.
+
+Then we create `application.css` file in `stylesheets` folder and `application.js` in `javascript` where we put
+"links" on Angular sources:
+
+.application.js
+----
+//= require angleGrinder/vendor.js
+//= require angleGrinder/angleGrinder.js
+----
+
+
+.application.css
+----
+/*
+*= require angleGrinder/bootstrapAll.css
+*= require angleGrinder/angleGrinder.css
+*= require_self
+*/
+----
+
+And now we need to include them in our gsp:
+[source,html]
+----
+<head>
+	<meta name="layout" content="main"/>
+	<title>Welcome to Tutorial</title>
+	<asset:stylesheet href="application.css"/>
+	<asset:javascript src="application.js"/>
+</head>
+----
+
+To see how it works lets add a header for our page and add some content:
+----
+<!doctype html>
+<html>
+<head>
+	<meta name="layout" content="main"/>
+	<title>Welcome to Tutorial</title>
+	<asset:stylesheet href="application.css"/>
+	<asset:javascript src="application.js"/>
+
+</head>
+<body >
+<nav class="navbar navbar-default navbar-static-top">
+	<div class="container">
+		Rest Tutorial
+	</div>
+</nav>
+<div class="container">
+Content goes here
+</div>
+</body>
+</html>
+
+----
+
+I've added a styling for header for our page see `views/contact/index.gsp`
+
+=== UI ???
+==== List
+Now when we have a html template lets create an angular app, and we will start from displaying a list.
+
+First we need to create module and add routes for it:
+----
+angular.module("contactApp", ["angleGrinder"]);
+angular.module("contactApp").config([
+  "$routeProvider", "ResourceTemplateServ", function($routeProvider, ResourceTemplateServ) {
+    return $routeProvider.when("/", {
+      templateUrl: ResourceTemplateServ("/contact", "list"),
+      controller: "ListCtrl"
+    }).otherwise({
+      redirectTo: "/"
+    });
+  }
+]);
+----
+
+`ResourceTemplateServ` - service provided by Ag-Grinder that creates path for template.
+
+We need to update our `contact/index.gsp` to make it "see" our angular app:
+----
+...
+<body ng-app="contactApp"> %{--The ngApp directive designates the root element of the application--}%
+...
+  <div class="container">
+    <ng-view></ng-view> %{-- ngView is a directive that complements the $route service by including the rendered template of the current route into the layout--}
+  </div>
+</body
+----
+
+The next step is to create an angular controller for list:
+.assets/javascript/contact/ListCtrl.js
+----
+var ListCtrl = (function() {
+  ListCtrl.$inject = ["$scope", "Resource", "SinglePageCrudCtrlMixin", "MassUpdateMixin", "$filter"];
+
+  function ListCtrl($scope, Resource, SinglePageCrudCtrlMixin, MassUpdateMixin, $filter) {
+    $scope.gridOptions = {
+      path: "/api/contacts",
+      colModel: colModel(),
+      multiselect: true,
+      shrinkToFit: true,
+      sortname: "id",
+      sortorder: "asc",
+      rowNum: 5,
+      rowList: [5, 10, 20]
+    };
+  }
+
+  var colModel = function() {
+    return [
+      {
+        name: "id",
+        label: "ID"
+      }, {
+        name: "firstName",
+        label: "Name"
+      }
+    ];
+  };
+
+  return ListCtrl;
+
+})();
+
+angular.module("contactApp").controller("ListCtrl", ListCtrl);
+----
+
+Then lets create a list template:
+----
+<h3 class="page-header">Contact list</h3>
+
+<div ag-grid="gridOptions" ag-grid-name="contactGrid"></div>
+----
+
 . show how to create a basic CRUD and List screen
 
 Add fields to domain so we can show more of the widgets in angle-grinder

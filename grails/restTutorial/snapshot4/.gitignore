@@ -1,0 +1,144 @@
+# .gitignore for Grails 1.2 and 1.3
+# Although this should work for most versions of grails, it is
+# suggested that you use the "grails integrate-with --git" command
+# to generate your .gitignore file.
+
+# Grails 2 using Grails 3 project stucture
+**/test/unit/
+**/test/integration/
+**/test/functional/
+!src/test
+
+#Grails 3
+.gradle
+.asscache
+build
+
+# web application files
+/web-app/WEB-INF/classes
+
+# default HSQL database files for production mode
+/prodDb.*
+
+# general HSQL database files
+*Db.properties
+*Db.script
+
+# logs
+stacktrace.log
+logs
+/test/reports
+
+# project release file
+/*.war
+/*.zip
+/*.zip.sha1
+/plugin.xml
+*.jar
+*.war
+*.ear
+
+# older Grails plugin install locations
+/plugins
+/web-app/plugins
+
+# "temporary" build files
+**/target
+/out
+
+### Java template
+*.class
+*.asscache
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+### JetBrains template
+# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio
+*.iml
+## Directory-based project format:
+.idea/
+# if you remove the above rule, at least ignore the following:
+
+# JetBrains User-specific stuff:
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/dictionaries
+.idea/dataSources.ids
+.idea/dataSources.xml
+.idea/dynamic.xml
+.idea/uiDesigner.xml
+.idea/gradle.xml
+.idea/libraries
+
+# Crashlytics plugin (for Android Studio and IntelliJ)
+com_crashlytics_export_strings.xml
+crashlytics.properties
+crashlytics-build.properties
+
+### Eclipse template
+*.pydevproject
+.metadata
+.gradle
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.settings/
+.loadpath
+
+# Eclipse Core
+.project
+
+# External tool builders
+.externalToolBuilders/
+
+# Locally stored "Eclipse launch configurations"
+*.launch
+
+
+ # JDT-specific (Eclipse Java Development Tools)
+.classpath
+
+ # Java annotation processor (APT)
+ .factorypath
+
+ # Ignore Gradle GUI config
+ gradle-app.setting
+
+ # Avoid ignoring Gradle wrapper jar file (.jar files are usually  ignored)
+!gradle-wrapper.jar
+### SublimeText template
+# cache files for sublime text
+*.tmlanguage.cache
+*.tmPreferences.cache
+*.stTheme.cache
+
+# workspace files are user-specific
+*.sublime-workspace
+
+# project files should be checked into the repository, unless a  significant
+# proportion of contributors will probably not be using SublimeText
+# *.sublime-project
+
+# sftp configuration file
+sftp-config.json
+### Linux template
+*~
+
+# KDE directory preferences
+.directory
+
+# Linux trash folder which might appear on any partition or disk
+.Trash-*
+### Vim template
+[._]*.s[a-w][a-z]
+[._]s[a-w][a-z]
+*.un~
+Session.vim
+.netrwhist
+
+
+/web-app/
