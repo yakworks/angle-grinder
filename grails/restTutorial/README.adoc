@@ -72,8 +72,7 @@ The mock data was generated from a great tool https://www.mockaroo.com[Mockaroo]
 class BootStrap {
     def grailsApplication
     def init = { servletContext ->
-        def res = grailsApplication.mainContext.getResource("classpath:Contacts.json")
-        def data = new JsonSlurper().parse(res.getInputStream())
+        def data = new JsonSlurper().parse(new File("../resources/Contacts.json"))
         data.each{
           Contact contact = new Contact(it)
           contact.save(failOnError:true,flush: true)
