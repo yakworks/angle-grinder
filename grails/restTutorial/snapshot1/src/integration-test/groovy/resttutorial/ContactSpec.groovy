@@ -108,6 +108,6 @@ class ContactSpec extends Specification {
         RestResponse response = rest.delete("http://localhost:${serverPort}/contacts/1")
 
         then:
-        response.status == 204
+        response.status == 200
     }
 }

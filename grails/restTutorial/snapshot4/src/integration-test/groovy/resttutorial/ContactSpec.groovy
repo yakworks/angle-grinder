@@ -26,7 +26,7 @@ class ContactSpec extends Specification {
         then:
         response.status == 200
         response.json != null
-        JSONElement json = response.json
+        JSONElement json = response.json.rows
         //by default max value is 10 rows
         json.size() == 10
         json[0].firstName == "Marie"
@@ -41,7 +41,7 @@ class ContactSpec extends Specification {
         then:
         response.status == 200
         response.json != null
-        JSONElement json = response.json
+        JSONElement json = response.json.rows
         json.size() == 20
         json[0].firstName == "Marie"
         json[0].lastName == "Scott"
@@ -125,7 +125,7 @@ class ContactSpec extends Specification {
         RestResponse response = rest.delete("http://localhost:${serverPort}/api/contacts/1")
 
         then:
-        response.status == 204
+        response.status == 200
     }
 
     void "check inactivate endpoint"() {

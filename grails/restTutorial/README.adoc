@@ -707,6 +707,8 @@ On current state it works, but without pagination, so we need to modify our REST
 
 `setupData` adds count of entities to list and  `.jsonData` formats output for JS grid.
 
+Check how the tests were changed.
+
 ==== DELETE
 
 As I mentioned above Ag-Grinder has a lot of handy tools, one of the is `DialogCrudCtrlMixin` which adds CRUD actions for
