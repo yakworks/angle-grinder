@@ -6,7 +6,7 @@ buildscript {
     dependencies {
         classpath "org.grails:grails-gradle-plugin:$grailsVersion"
         classpath "org.grails.plugins:hibernate4:6.0.4"
-        classpath "com.bertramlabs.plugins:asset-pipeline-gradle:2.11.1"
+        classpath "com.bertramlabs.plugins:asset-pipeline-gradle:2.11.2"
         classpath "org.grails.plugins:views-gradle:1.1.2"
     }
 }
@@ -55,7 +55,7 @@ dependencies {
     compile "org.hibernate:hibernate-ehcache:4.3.11.Final"
     compile "org.grails.plugins:views-json"
     compile "org.grails.plugins:views-json-templates"
-    compile "com.bertramlabs.plugins:asset-pipeline-grails:2.11.1"
+    compile "com.bertramlabs.plugins:asset-pipeline-grails:2.11.2"
     compile "nine:angle-grinder:2.0.0"
     console "org.grails:grails-console"
     profile "org.grails.profiles:rest-api"

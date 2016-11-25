@@ -8,7 +8,8 @@
 
 </head>
 
-<body ng-app="contactApp">
+<body ng-app="contactApp" data-resource-name="contact"
+	  data-resource-path="/contact">
 <nav class="navbar navbar-default navbar-static-top">
 	<div class="container-fluid">
 		<div class="navbar-header">

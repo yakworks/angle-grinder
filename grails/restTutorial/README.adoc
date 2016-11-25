@@ -607,6 +607,7 @@ Now when we have a html template lets create an angular app, and we will start f
 First we need to create module and add routes for it:
 ----
 angular.module("contactApp", ["angleGrinder"]);
+app.constant('RestContext', 'api');
 angular.module("contactApp").config([
   "$routeProvider", "ResourceTemplateServ", function($routeProvider, ResourceTemplateServ) {
     return $routeProvider.when("/", {
@@ -620,6 +621,9 @@ angular.module("contactApp").config([
 ----
 
 `ResourceTemplateServ` - service provided by Ag-Grinder that creates path for template.
+
+`app.constant('RestContext', 'api');` - currently AG-Grinder supports 2 ways of building requests for resources (REST and
+with actions) and to make it use REST approach we need to specify the namespace for it.
 
 We need to update our `contact/index.gsp` to make it "see" our angular app:
 ----
@@ -636,26 +640,24 @@ The next step is to create an angular controller for list:
 .assets/javascript/contact/ListCtrl.js
 ----
 var ListCtrl = (function() {
-  ListCtrl.$inject = ["$scope", "Resource", "SinglePageCrudCtrlMixin", "MassUpdateMixin", "$filter"];
+  ListCtrl.$inject = ["$scope", "Resource"];
 
-  function ListCtrl($scope, Resource, SinglePageCrudCtrlMixin, MassUpdateMixin, $filter) {
+  function ListCtrl($scope, Resource) {
     $scope.gridOptions = {
-      path: "/api/contacts",
-      colModel: colModel(),
-      multiselect: true,
-      shrinkToFit: true,
-      sortname: "id",
-      sortorder: "asc",
-      rowNum: 5,
-      rowList: [5, 10, 20]
+      path: "/api/contacts", //path to REST endpoint
+      colModel: colModel(), // Configuration for grid rows
+      sortname: "id",       // default sort field
+      sortorder: "asc",     // default sort order
+      rowNum: 5,            // default number of rows to show
+      rowList: [5, 10, 20, 100]  // list of values for select number of rows to show
     };
   }
-
+  // returns list of objects for grid columns
   var colModel = function() {
     return [
       {
-        name: "id",
-        label: "ID"
+        name: "id", // name of the property from incoming JSON, to show value from
+        label: "ID" // column name that will be displayed to user
       }, {
         name: "firstName",
         label: "Name"
@@ -677,7 +679,163 @@ Then lets create a list template:
 <div ag-grid="gridOptions" ag-grid-name="contactGrid"></div>
 ----
 
-. show how to create a basic CRUD and List screen
+Where `ag-grid` - directive that takes parameters from scope and renders grid, and  `ag-grid-name` - set the name to grid
+to make available from scope.
+
+That's all what we need to display a grid to user.
+
+On current state it works, but without pagination, so we need to modify our REST ContactController to add pagination.
+
+.api/ContactController.groovy
+----
+  @Override
+  def index(){
+    def pageData = new Pager(params)
+    respond pageData.setupData(listAllResources(params)).jsonData
+  }
+
+  @Override
+  protected List listAllResources(Map params) {
+    def crit = resource.createCriteria()
+    def pager = new Pager(params)
+    def datalist = crit.list(max: pager.max, offset: pager.offset) {
+      if (params.sort)
+        order(params.sort, params.order)
+    }
+    return datalist
+  }
+----
+
+`setupData` adds count of entities to list and  `.jsonData` formats output for JS grid.
+
+==== DELETE
+
+As I mentioned above Ag-Grinder has a lot of handy tools, one of the is `DialogCrudCtrlMixin` which adds CRUD actions for
+the grid:
+
+.assets/javascript/contact/ListCtrl.js
+----
+var ListCtrl = (function() {
+  ListCtrl.$inject = ["$scope", "Resource", "DialogCrudCtrlMixin"];
+
+  function ListCtrl($scope, Resource, DialogCrudCtrlMixin, pathWithContext) {
+  ...
+    DialogCrudCtrlMixin($scope, {
+      Resource: Resource,
+      gridName: "contactGrid"
+    });
+
+  }
+
+...
+
+angular.module("contactApp").controller("ListCtrl", ListCtrl);
+----
+
+For each grid row we have action column with gear, when you click on it a menu with delete button will appear.
+
+We do not even need to specify what resource should it use, just to add resource name in `index.gsp`:
+----
+<body ng-app="contactApp" data-resource-name="contact"
+	  data-resource-path="/contact">
+----
+
+And it will create the path by its self.
+
+So run the application to try.
+
+==== CREATE
+
+To add create functionality we need to prepare create form:
+
+._form.gsp
+----
+<div class="modal-header">
+	<button type="button" class="close" ng-click="closeDialog()">&times;</button>
+
+		<span>Create</span>
+</div>
+
+<form name="editForm" class="form-horizontal no-margin" ag-submit="save(contact)">
+	<div class="modal-body">
+		<div>
+			<label class="control-label">First Name</label>
+			<div class="row">
+				<div class="col-md-4">
+					<input type="text" name="firstName" ng-model="contact.firstName" ng-required="true" class="form-control"/>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<ag-cancel-button ng-click="closeDialog()"></ag-cancel-button>
+		<ag-submit-button></ag-submit-button>
+	</div>
+</form>
+----
+
+You probably noticed several new directives, I'll provide a brief description for them:
+
+. `ag-submit` - runs the method when form is submited and handles validation for nested forms if they are
+
+. `ag-cancel-button` - just provide styling for cancel button
+
+. `ag-submit-button` - styling and shows "..." during form submit
+
+Now we just need to specify template so `DialogCrudCtrlMixin` now where is form template:
+
+.ListCtrl.js
+----
+...
+ DialogCrudCtrlMixin($scope, {
+      Resource: Resource,
+      gridName: "contactGrid",
+      templateUrl: pathWithContext("contact/form")
+    });
+...
+----
+
+And the last step we need to add button that will trigger contact creting:
+
+._list.gsp
+----
+<div class="ag-panels-row">
+	<div class="ag-panel">
+		<div class="navbar navbar-toolbar navbar-grid navbar-default">
+			<div class="navbar-inner with-selected-pointer with-grid-options">
+				<ul class="nav navbar-nav">
+					<li>
+						<a ng-click="createRecord()">
+							<i class="fa fa-plus"></i> Create Contact
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div ag-grid="gridOptions" ag-grid-name="contactGrid"></div>
+	</div>
+</div>
+----
+
+`createRecord()` methos is already in `$scope`, thanks again to `DialogCrudCtrlMixin`.
+
+So you can try to create a new contact.
+
+==== EDIT
+
+You will be suprised, but edit is already works, try Edit button in grid dropdown. The only thing
+that we need to change is to change labels for form modal window:
+
+._form.gsp
+----
+<div class="modal-header">
+	<button type="button" class="close" ng-click="closeDialog()">&times;</button>
+	<span ng-show="contact.persisted()" > Update</span>
+	<span ng-hide="contact.persisted()" > Create</span>
+</div>
+...
+----
+
 
 Add fields to domain so we can show more of the widgets in angle-grinder
 

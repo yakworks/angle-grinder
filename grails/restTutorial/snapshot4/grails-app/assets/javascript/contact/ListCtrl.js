@@ -1,7 +1,7 @@
 var ListCtrl = (function() {
-  ListCtrl.$inject = ["$scope", "Resource", "SinglePageCrudCtrlMixin", "MassUpdateMixin", "$filter"];
+  ListCtrl.$inject = ["$scope", "Resource", "DialogCrudCtrlMixin", "pathWithContext"];
 
-  function ListCtrl($scope, Resource, SinglePageCrudCtrlMixin, MassUpdateMixin, $filter) {
+  function ListCtrl($scope, Resource, DialogCrudCtrlMixin, pathWithContext) {
     $scope.gridOptions = {
       path: "/api/contacts",
       colModel: colModel(),
@@ -10,8 +10,21 @@ var ListCtrl = (function() {
       sortname: "id",
       sortorder: "asc",
       rowNum: 5,
-      rowList: [5, 10, 20]
+      rowList: [5, 10, 20, 100]
     };
+
+    DialogCrudCtrlMixin($scope, {
+      Resource: Resource,
+      gridName: "contactGrid",
+      templateUrl: pathWithContext("contact/form")
+    });
+
+    $scope.save = function(contact){
+      contact.save().then(function(resp){
+        console.log(resp);
+      })
+    }
+
   }
 
   var colModel = function() {
@@ -22,6 +35,15 @@ var ListCtrl = (function() {
       }, {
         name: "firstName",
         label: "Name"
+      }, {
+        name: "lastName",
+        label: "Last Name"
+      }, {
+        name: "email",
+        label: "Email"
+      }, {
+        name: "inactive",
+        label: "Inactive"
       }
     ];
   };

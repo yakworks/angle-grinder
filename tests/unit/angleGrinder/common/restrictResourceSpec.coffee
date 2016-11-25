@@ -3,6 +3,7 @@ describe "module: angleGrinder.common, service: restrictResource", ->
   beforeEach module "angleGrinder.common", ($provide) ->
     $provide.value "arBatch", sinon.stub()
     $provide.value "requiredResourceFields", ['id']
+    $provide.value "RestContext", ""
     return
 
   scope = null
