@@ -583,6 +583,10 @@ and the last step we need to update tests by adding `/api` to test urls:
 ----
 void "check DELETE request"() {
         when:
+        //TODO in the tests lets move the url to a class level var for the baseUrl so we only need to change it one place
+        //String baseUrl = "http://localhost:${serverPort}/api"
+        //and
+        //RestResponse response = rest.delete("$baseUrl/contacts/1")
         RestResponse response = rest.delete("http://localhost:${serverPort}/api/contacts/1")
 
         then:
@@ -618,12 +622,12 @@ and then create folder `/views/contact` and `index.gsp` in it:
 ----
 
 and setup default url mapping for it:
-
+//TODO lets leace ths out for now as to not add confusion
 `"/" (controller: "contact", action: "index")`
 
 To apply styling and javascript we need to include Angle-Grinder assets to our app. It is really easy with
-assets-pipeline plugin. First we need to create `assents` folder in `grails-app` and add `javascript` and
-`stylesheets` directories.
+assets-pipeline plugin. First we need to create the `assets` folder in `grails-app` and add `javascript` and
+`stylesheets` directories. These would be added automatically if we did a create-app without limiting it to a rest-profile above
 
 Then we create `application.css` file in `stylesheets` folder and `application.js` in `javascript` where we put
 "links" on Angular sources:
@@ -788,10 +792,11 @@ On current state it works, but without pagination, so we need to modify our REST
   }
 ----
 
-`setupData` adds count of entities to list and  `.jsonData` formats output for JS grid.
+`setupData` adds count of entities to list and  `.jsonData` formats output for the JqGrid.
 
 Check how the tests were changed.
 
+//TODO app should run at this point? Can do a list? Show a screen shot and let the use know
 ==== DELETE
 
 As I mentioned above Ag-Grinder has a lot of handy tools, one of the is `DialogCrudCtrlMixin` which adds CRUD actions for
