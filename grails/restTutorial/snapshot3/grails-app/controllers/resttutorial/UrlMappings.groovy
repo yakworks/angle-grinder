@@ -14,7 +14,7 @@ class UrlMappings {
         "404"(view: '/notFound')
 
       "/contacts"(resources: "contact"){
-        "/inactivate"(controller: "contact", action: "inactivate")
+        delete "/active"(controller: "contact", action: "inactivate")
       }
     }
 }

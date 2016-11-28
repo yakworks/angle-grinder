@@ -1,6 +1,5 @@
 package resttutorial
 
-import grails.plugin.dao.DomainException
 import grails.plugin.dao.RestDaoController
 
 class ContactController extends RestDaoController {

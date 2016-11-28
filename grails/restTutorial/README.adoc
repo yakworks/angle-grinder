@@ -219,53 +219,67 @@ Date: Fri, 04 Nov 2016 15:03:48 GMT
 ----
 
 ===== DELETE:
-//TODO This is not a delete
 ----
-curl -i -X GET -H "Content-Type: application/json"  localhost:8080/contacts/50
-HTTP/1.1 200
+curl -i -X DELETE -H "Content-Type: application/json"  localhost:8080/contacts/50
+HTTP/1.1 204
+X-Application-Context: application:development
+Content-Type: application/json;charset=UTF-8
+Date: Mon, 28 Nov 2016 07:43:11 GMT
+----
+
+===== 422 - Post Validation Error:
+----
+curl -i -X POST -H "Content-Type: application/json" -d '{"lastName": "Cool"}' localhost:8080/contacts
+HTTP/1.1 422
 X-Application-Context: application:development
 Content-Type: application/json;charset=UTF-8
 Transfer-Encoding: chunked
-Date: Mon, 21 Nov 2016 12:43:48 GMT
+Date: Mon, 28 Nov 2016 08:21:11 GMT
 
-{"id":50,"email":"aramirez1d@amazon.de","firstName":"Arthur","lastName":"Ramirez"}
-----
-
-//TODO show some error examples
-===== 422 - Post Validation Error:
-----
-TODO
+{"message":"Property [firstName] of class [class resttutorial.Contact] cannot be null","path":"","_links":{"self":{"href":"http://localhost:8080"}}}
 ----
 
 ===== 404 - Get Error:
 ----
-TODO
+curl -i -X GET -H "Content-Type: application/json"  localhost:8080/contacts/105
+HTTP/1.1 404
+X-Application-Context: application:development
+Content-Type: application/json;charset=UTF-8
+Content-Language: en-US
+Transfer-Encoding: chunked
+Date: Mon, 28 Nov 2016 08:22:01 GMT
+
+{"message":"Not Found","error":404}
 ----
 
 ===== 406 - NOT_ACCEPTABLE:
 
 We did not setup XML support so we will get a 406. You may try adding XML to formats to see if this.
 ----
-TODO
+curl -i -X GET -H "Accept: application/xml"  http://localhost:8080/contacts/8
+HTTP/1.1 406
+X-Application-Context: application:development
+Content-Length: 0
+Date: Mon, 28 Nov 2016 09:35:20 GMT
 ----
 
 === Functional Tests for the API
 
 The next step is to add functional tests for our app. One option is to use Grails functional tests and RestBuilder.
 We will cover another javscript option later the angle-grinder section
-//TODO We talked about his on slack, its not included and is not relevant in grails 3.
-// Show the dependendcie line that allows this
-//provide a link to the file
 The line in the buidl.gradle that allows us to use RestBuilder is
-```
-show it here
-```
+----
+testCompile "org.grails:grails-datastore-rest-client"
+----
+
+it is added by default when you create a grails app with `-profile rest-api`
 
 ==== POST testing example
 
 Here is an example of `POST` request (creating of a new contact).
 RestBuilder we use to emulate request from external source. Note, in Grails3 integration tests run on the random port,
-so you cant call `http://localhost:8080/contacts` , but we can use `serverPort` variable instead. See example:
+so you cant call `http://localhost:8080/contacts` , but we can use `serverPort` variable instead. And to make it more
+intelligent lets use baseUrl. See example:
 
 [source,groovy]
 ----
@@ -284,9 +298,11 @@ class ContactSpec extends Specification {
     @Shared
     RestBuilder rest = new RestBuilder()
 
+    def getBaseUrl(){"http://localhost:${serverPort}"}
+
     void "check POST request"() {
         when:
-        RestResponse response = rest.post("http://localhost:${serverPort}/contacts"){
+        RestResponse response = rest.post("${baseUrl}/contacts"){
           json([
             firstName: "Test contact",
             email:"foo@bar.com",
@@ -306,27 +322,29 @@ class ContactSpec extends Specification {
 }
 ----
 
-More tests examples are in the are in the snapshot's `ContactSpec.groovy`
-//TODO provide a link that opens new tab/window to the spec in snapshot1
+More tests examples are in the are in the snapshot's https://github.com/9ci/angle-grinder/blob/rest_tutorial/grails/restTutorial/snapshot1/src/integration-test/groovy/resttutorial/ContactSpec.groovy[ContactSpec.groovy]
 
-//TODO Explain the default GSON files below
 === GSON and Grails Views Defaults
 
 As you can see by inspecting the views directory, by default Grails creates a number of gson files
 
 ===== error.gson
-//TODO provide a link
-This is for XXX. As you can see this is where the 422 status code gets set, etc...
+https://github.com/9ci/angle-grinder/blob/rest_tutorial/grails/restTutorial/snapshot1/grails-app/views/error.gson[See source]
+
+This is for internal server errors. As you can see this is where the 500 status code gets set, and error message is specified.
 
 ===== notFound.gson
-//TODO provide a link
-This is for XXX. As you can see this is where the 422 status code gets set, etc...
+https://github.com/9ci/angle-grinder/blob/rest_tutorial/grails/restTutorial/snapshot1/grails-app/views/notFound.gson[See source]
+This is for case when resource isn't found. As you can see this is where the 404 status code gets set, and error message is specified.
 
 ===== errors/_errors.gson
-This is for XXX. As you can see this is where the 422 status code gets set, etc...
+https://github.com/9ci/angle-grinder/blob/rest_tutorial/grails/restTutorial/snapshot1/grails-app/views/errors/_errors.gson
+This is for validation errors. As you can see this is where the `UNPROCESSABLE_ENTITY`(422) status code gets set, and
+error messages for entity specified.
 
 ===== object/_object.gson
-This is for XXX. As you can see this is where the 422 status code gets set, etc...
+https://github.com/9ci/angle-grinder/blob/rest_tutorial/grails/restTutorial/snapshot1/grails-app/views/object/_object.gson[See source]
+This is for transforming entity to JSON object.
 
 === Snapshot 1 of this tutorial  is at this point
 
@@ -394,13 +412,17 @@ We will setup a concrete implementation of a dao for the contact.
 The plugin will recognize that we want to use this base on the naming convention SomeDomainNameDao
 In either the grails-app/services or grails-app/dao directory add the ContactDao.groovy
 
+We need to add `@Transactional` because services are not transactional by default starting from Grails 3.
+
 [source,groovy]
 .ContactDao.groovy
 ----
 package resttutorial
 
 import grails.plugin.dao.GormDaoSupport
-//TODO do we not need transactional annotation? Explain that they are transactional by default if so
+import grails.transaction.Transactional
+
+@Transactional
 class ContactDao extends GormDaoSupport {
 	Class domainClass = Contact
 
@@ -426,13 +448,29 @@ Now we can run tests again to be sure that new functionality works along with ou
 RestDaoController gives us ability to customize actions using DAOs, but what if we need to specify custom endpoint.
 
 Use Case: A user can not update the inactive field since its bindable false.
-So we need to add a new end point so a user can inactivate the contact instead of a delete
+
+Sure we can just override `delete` method in our controller, but lets leave it. My opinion that we should left default
+functionality for CRUD operations or fully disable it, but not change the way how it works. One more idea is if we override
+delete action to make set inactive flag, then how we will anable it. So we will add a new end point so a user can
+inactivate the contact.
 
 For that we will remove the `@Resource` annotation from the contacts domain and add the ContactController.groovy, but
 `@Resource` made a one more feature for us - updating urlMappings, so now we need to add our url by hands.
 It would like somethings like this: `"/contacts"(resources: "contact")` it will add url mappings for our controller.
 
-To add custom end point we need to add nested url for resource and result will be look like:
+Then lets add a custom endpoint. One thing that we should always keep in mind is that REST approach is that we should have
+nouns (not verbs!) in our URLs. If it is confusing, please read a nice http://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api#restful[article]
+about how we should design REST endpoints.
+
+As for actions that aren't CRUDI like more the implementation with 2 different methods:
+
+----
+delete "/active" // to make Contact inactive
+post "/active" // to make Contact active
+----
+
+Lets implement just making contact inactive, to add custom end point we need to add nested url for resource and result
+will be look like:
 
 .UrlMappings.groovy
 ----
@@ -452,13 +490,13 @@ class UrlMappings {
         "404"(view:'/notFound')
 
        "/contacts"(resources: "contact"){
-            "/inactivate"(controller: "contact", action: "inactivate")
+            delete "/active"(controller: "contact", action: "inactivate")
         }
     }
 }
 ----
 
-The `ContactController` we will extend from `RestDaoController` and add our `inactivate` action:
+The `ContactController` we will be extended from `RestDaoController`, also we should add  and add our `inactivate` action:
 
 [source,groovy]
 .ContactController.groovy
@@ -510,7 +548,7 @@ Update our rest sanity tests
 ----
 void "check inactivate endpoint"() {
         when:
-        RestResponse response = rest.post("http://localhost:${serverPort}/contacts/2/inactivate")
+        RestResponse response = rest.delete("${baseUrl}/contacts/2/activate")
 
         then:
         response.status == 200
@@ -583,10 +621,6 @@ and the last step we need to update tests by adding `/api` to test urls:
 ----
 void "check DELETE request"() {
         when:
-        //TODO in the tests lets move the url to a class level var for the baseUrl so we only need to change it one place
-        //String baseUrl = "http://localhost:${serverPort}/api"
-        //and
-        //RestResponse response = rest.delete("$baseUrl/contacts/1")
         RestResponse response = rest.delete("http://localhost:${serverPort}/api/contacts/1")
 
         then:
@@ -620,10 +654,6 @@ and then create folder `/views/contact` and `index.gsp` in it:
 </body>
 </html>
 ----
-
-and setup default url mapping for it:
-//TODO lets leace ths out for now as to not add confusion
-`"/" (controller: "contact", action: "index")`
 
 To apply styling and javascript we need to include Angle-Grinder assets to our app. It is really easy with
 assets-pipeline plugin. First we need to create the `assets` folder in `grails-app` and add `javascript` and
@@ -686,7 +716,7 @@ Content goes here
 
 I've added a styling for header for our page see `views/contact/index.gsp`
 
-=== UI ???
+=== UI
 ==== List
 Now when we have a html template lets create an angular app, and we will start from displaying a list.
 
@@ -770,6 +800,8 @@ to make available from scope.
 
 That's all what we need to display a grid to user.
 
+==== Paging
+
 On current state it works, but without pagination, so we need to modify our REST ContactController to add pagination.
 
 .api/ContactController.groovy
@@ -796,7 +828,10 @@ On current state it works, but without pagination, so we need to modify our REST
 
 Check how the tests were changed.
 
-//TODO app should run at this point? Can do a list? Show a screen shot and let the use know
+And run the app and go to `http://localhost:8080/contact#/`, you should see something like:
+
+image::images/list.png[]
+
 ==== DELETE
 
 As I mentioned above Ag-Grinder has a lot of handy tools, one of the is `DialogCrudCtrlMixin` which adds CRUD actions for
@@ -967,8 +1002,6 @@ class Contact {
 ```
 
 === customize the searching
-
-=== paging
 
 === Add Contacts
 . now add in your examples with Contacts instead of Location

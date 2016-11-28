@@ -19,9 +19,11 @@ class ContactSpec extends Specification {
     @Shared
     RestBuilder rest = new RestBuilder()
 
+    def getBaseUrl(){"http://localhost:${serverPort}"}
+
     void "check GET list request without params "() {
         when:
-        RestResponse response = rest.get("http://localhost:${serverPort}/contacts")
+        RestResponse response = rest.get("${baseUrl}/contacts")
 
         then:
         response.status == 200
@@ -36,7 +38,7 @@ class ContactSpec extends Specification {
 
     void "check GET list request with max parameter"() {
         when: "list endpoint with max param"
-        RestResponse response = rest.get("http://localhost:${serverPort}/contacts?max=20")
+        RestResponse response = rest.get("${baseUrl}/contacts?max=20")
 
         then:
         response.status == 200
@@ -50,7 +52,7 @@ class ContactSpec extends Specification {
 
     void "check GET by id"() {
         when:
-        RestResponse response = rest.get("http://localhost:${serverPort}/contacts/1")
+        RestResponse response = rest.get("${baseUrl}/contacts/1")
 
         then:
         response.status == 200
@@ -64,7 +66,7 @@ class ContactSpec extends Specification {
 
     void "check POST request"() {
         when:
-        RestResponse response = rest.post("http://localhost:${serverPort}/contacts"){
+        RestResponse response = rest.post("${baseUrl}/contacts"){
             json([
                     firstName: "Test contact",
                     "email":"foo@bar.com",
@@ -85,7 +87,7 @@ class ContactSpec extends Specification {
 
     void "check POST request with name field"() {
         when:
-        RestResponse response = rest.post("http://localhost:${serverPort}/contacts"){
+        RestResponse response = rest.post("${baseUrl}/contacts"){
             json([
                     name: "Joe Cool",
                     "email":"foo@bar.com"
@@ -104,7 +106,7 @@ class ContactSpec extends Specification {
 
     void "check PUT request"() {
         when:
-        RestResponse response = rest.put("http://localhost:${serverPort}/contacts/101"){
+        RestResponse response = rest.put("${baseUrl}/contacts/101"){
             json([
                     firstName: "new Test contact",
                     "email":"newfoo@bar.com",
@@ -124,7 +126,7 @@ class ContactSpec extends Specification {
 
     void "check DELETE request"() {
         when:
-        RestResponse response = rest.delete("http://localhost:${serverPort}/contacts/1")
+        RestResponse response = rest.delete("${baseUrl}/contacts/1")
 
         then:
         response.status == 200

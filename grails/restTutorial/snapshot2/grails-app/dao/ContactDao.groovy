@@ -1,7 +1,9 @@
 package resttutorial
 
 import grails.plugin.dao.GormDaoSupport
+import grails.transaction.Transactional
 
+@Transactional
 class ContactDao extends GormDaoSupport {
   Class domainClass = Contact
 
