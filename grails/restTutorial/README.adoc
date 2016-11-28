@@ -1,16 +1,18 @@
 = Creating Grails applications using Angle-Grinder's Angular and restful DAO services
+:hide-uri-scheme:
 :toc:
 :numbered:
+:icons: font
 
 == Getting started
 
-For this tutorial you will need:
+For this tutorial you will need icon:twitter[]
 
 * JDK (I advise 8, but you can take 7 as well).
 
 * Git.
 
-* Grails 3.2.0 (you can install it with http://sdkman.io/[sdkman] on most Unix based systems.)
+* Grails 3.2.0 (you can install it with http://sdkman.io on most Unix based systems.)
 
 After all is installed clone the repo:
 
@@ -28,26 +30,20 @@ $ grails create-app -profile rest-api -features hibernate4 resttutorail
 Application created at angle-grinder/grails/restTutorial/step1/resttutorail
 ----
 
-Grails3 provides several different profiles you can read about them in http://docs.grails.org/3.2.0/guide/profiles.html[docs]
+Grails 3 provides several different profiles you can read about them in the http://docs.grails.org/3.2.0/guide/profiles.html[docs]
 
-== Creating a Basic Grails REST API
+== Creating an API with Grails Web Services
 
-To avoid writting `nullable: true` a billion times we will set the default to allow nulls for fields
-Add the following to `grails-app/config/application.groovy`
-[source,groovy]
-----
-grails.gorm.default.constraints = {
-  '*' (nullable: true, blank: true)
-}
-----
+As described in the http://docs.grails.org/latest/guide/webServices.html[Grails docs]
+we will use the default out of the box functionality as a starting point.
 
-And then lets create a domain class for our proof of concept:
+=== Creating a GORM domain
 
 ----
 grails create-domain-class Contact
 ----
 
-And we'll set it up like so:
+Then set it up like so:
 
 [source,groovy]
 ----
@@ -64,7 +60,17 @@ class Contact {
 }
 ----
 
-We will load 100 rows of mock test data from a file `Contacts.json` in src/resources.
+To avoid writing `nullable: true` we will set the default to allow nulls for fields
+Add the following to `grails-app/config/application.groovy`
+
+[source,groovy]
+----
+grails.gorm.default.constraints = {
+  '*' (nullable: true, blank: true)
+}
+----
+
+We will load 100 rows of mock test data from a file `Contacts.json` in resources.
 The mock data was generated from a great tool https://www.mockaroo.com[Mockaroo]. Check it out
 
 [source,groovy]
@@ -83,7 +89,7 @@ class BootStrap {
 }
 ----
 
-=== Resource annotation on Contact Domain
+==== Adding the `@Resource` annotation to our domain
 
 So now we can start working on creating REST Api for our app. The most easiest way is to use http://docs.grails.org/latest/guide/webServices.html#domainResources[domain resources]
 So as we see from docs we just need to update our domain a bit (just add `@Resource` anotation) in such a way:
@@ -96,24 +102,38 @@ class Contact {
 }
 ----
 
-=== url-mappings-report
+===== The `RestfullController`
 
-To see all available endpoints that Grails create for us run:
+.@Resource creates a RestfullController for the domain
+NOTE: The `@Resource` annotation is used in an ASTTransformation that creates a controller that extends RestfullController.
+See https://github.com/grails/grails-core/blob/3.2.x/grails-plugin-rest/src/main/groovy/org/grails/plugins/web/rest/transform/ResourceTransform.groovy[ResourceTransform]
+for details on how it does this. Later we will show how to specify the controller to user with superClass property.
+
+=== Default Endpoints and Status Codes
+
+==== Url Mappings
+
+http://docs.grails.org/latest/guide/webServices.html#extendingRestfulController outlines the names of the action names and the URIs they map to:
+
+.URI, Controller Action and Response Defaults
+[cols="2,1,1,3", format="csv", options="header", width="80",grid=rows]
+|===
+URI, Method, Action, Response Data
+/contacts , GET , index , Paged List
+/contacts/create, GET , create , Contact.newInstance() unsaved
+/contacts, POST , save , The successfully saved contact (same as show's get)
+/contacts/${id}, GET , show , The contact for the id
+/contacts/${id}/edit, GET , edit , The contact for the id. same as show
+/contacts/${id}, PUT , update , The successfully updated contact
+/contacts/${id}, DELETE , delete , Empty response with HTTP status code 204
+|===
+
+
+You can see all available endpoints that Grails create for us with url-mappings-report:
 
 ----
 $ grails url-mappings-report
-
- |    *     | ERROR: 500                            | View:   /error
- |    *     | ERROR: 404                            | View:   /notFound
- |   GET    | /${controller}(.${format)?            | Action: index
- |   POST   | /${controller}(.${format)?            | Action: save
- |  DELETE  | /${controller}/${id}(.${format)?      | Action: delete
- |   GET    | /${controller}/${id}(.${format)?      | Action: show
- |   PUT    | /${controller}/${id}(.${format)?      | Action: update
- |  PATCH   | /${controller}/${id}(.${format)?      | Action: patch
-
-Controller: application
- |    *     | /                                     | Action: index
+...
 
 Controller: org
  |   GET    | /contacts/create                          | Action: create
@@ -125,6 +145,25 @@ Controller: org
  |   PUT    | /contacts/${id}                           | Action: update
  |   GET    | /contacts/${id}                           | Action: show
 ----
+
+==== Status Code Defaults
+
+Piecing together the http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/http/HttpStatus.html[HttpStatus]
+and results from RestfullController, RestResponder and _errors.gson,
+these are what looks like the out of the box status codes as of Grails 3.2.2
+
+.Status Codes Out Of Box
+[options="header", cols="1,2", grid=rows]
+|===
+| Status Code               | Description
+| 200 - OK                  | Everything worked as expected. default
+| 201 - CREATED             | Resource/instance was created. returned from `save` action
+| 204 - NO_CONTENT          | response code on successful DELETE request
+| 404 - NOT_FOUND           | The requested resource doesn't exist.
+| 405 - METHOD_NOT_ALLOWED  | If method (GET,POST,etc..) is not setup in `static allowedMethods` for action or resource is read only
+| 406 - NOT_ACCEPTABLE      | Accept header requests a response in an unsupported format. not configed in mime-types. RestResponder uses this
+| 422 - UNPROCESSABLE_ENTITY | Validation errors.
+|===
 
 === Using CURL to test CRUD and List
 
@@ -180,6 +219,7 @@ Date: Fri, 04 Nov 2016 15:03:48 GMT
 ----
 
 ===== DELETE:
+//TODO This is not a delete
 ----
 curl -i -X GET -H "Content-Type: application/json"  localhost:8080/contacts/50
 HTTP/1.1 200
@@ -191,11 +231,37 @@ Date: Mon, 21 Nov 2016 12:43:48 GMT
 {"id":50,"email":"aramirez1d@amazon.de","firstName":"Arthur","lastName":"Ramirez"}
 ----
 
-=== Functional
-The next step is to add functional tests for our app
+//TODO show some error examples
+===== 422 - Post Validation Error:
+----
+TODO
+----
 
-For testing we also need http://grails.org/plugin/rest-client-builder[Rest Client Builder plugin], it is already in the
-dependencies list so we do not need any changes.
+===== 404 - Get Error:
+----
+TODO
+----
+
+===== 406 - NOT_ACCEPTABLE:
+
+We did not setup XML support so we will get a 406. You may try adding XML to formats to see if this.
+----
+TODO
+----
+
+=== Functional Tests for the API
+
+The next step is to add functional tests for our app. One option is to use Grails functional tests and RestBuilder.
+We will cover another javscript option later the angle-grinder section
+//TODO We talked about his on slack, its not included and is not relevant in grails 3.
+// Show the dependendcie line that allows this
+//provide a link to the file
+The line in the buidl.gradle that allows us to use RestBuilder is
+```
+show it here
+```
+
+==== POST testing example
 
 Here is an example of `POST` request (creating of a new contact).
 RestBuilder we use to emulate request from external source. Note, in Grails3 integration tests run on the random port,
@@ -230,7 +296,6 @@ class ContactSpec extends Specification {
 
         then:
         response.status == 201
-        response.json != null
         JSONElement json = response.json
         json.id == 101
         json.firstName == "Test contact"
@@ -242,8 +307,28 @@ class ContactSpec extends Specification {
 ----
 
 More tests examples are in the are in the snapshot's `ContactSpec.groovy`
+//TODO provide a link that opens new tab/window to the spec in snapshot1
 
-=== Snapshot 1 of tutorial app is at this point
+//TODO Explain the default GSON files below
+=== GSON and Grails Views Defaults
+
+As you can see by inspecting the views directory, by default Grails creates a number of gson files
+
+===== error.gson
+//TODO provide a link
+This is for XXX. As you can see this is where the 422 status code gets set, etc...
+
+===== notFound.gson
+//TODO provide a link
+This is for XXX. As you can see this is where the 422 status code gets set, etc...
+
+===== errors/_errors.gson
+This is for XXX. As you can see this is where the 422 status code gets set, etc...
+
+===== object/_object.gson
+This is for XXX. As you can see this is where the 422 status code gets set, etc...
+
+=== Snapshot 1 of this tutorial  is at this point
 
 == The DAO plugin with REST support
 
@@ -261,11 +346,11 @@ compile "org.grails.plugin:dao:2.0.1"
 
 === RestDaoController
 
-Dao plugin will setup a default DAO for every domain and it has RestDaoController that overrides some methods of the
-default Grails `RestfullController` to make it use DAOs.
+Dao plugin will setup a default DAO for every domain and it has RestDaoController that overrides the methods of the
+default Grails `RestfullController` and simplifies the logic by pushing most of it down to the DAOs.
 
 The `@Resource` has a property `superClass` that allows us to use another controller as basic for building rest endpoints,
-so lets set `RestDaoController` as super class for our Contact:
+and we will set `RestDaoController` as super class for our Contact:
 
 [source,groovy]
 ----
@@ -275,11 +360,9 @@ class Contact {
 }
 ----
 
-Now you can check that our functional tests still pass with the defaults.
+Now run the tests to make sure our functional tests still pass with the defaults.
 
-For the next stage please move to next snapshot folder.
-
-=== Implement the ContactDao
+=== Implementin a DAO service
 
 Lets say we want to customize the insert to allow a user to pass in a name and have it be split into first and last names.
 
@@ -307,9 +390,9 @@ The test for this case will look like:
 }
 ----
 
-And we will setup a concrete implementation of a dao for the contact.
+We will setup a concrete implementation of a dao for the contact.
 The plugin will recognize that we want to use this base on the naming convention SomeDomainNameDao
-In either the the grails-app/services or grails-app/dao directory add the ContactDao.groovy
+In either the grails-app/services or grails-app/dao directory add the ContactDao.groovy
 
 [source,groovy]
 .ContactDao.groovy
@@ -317,7 +400,7 @@ In either the the grails-app/services or grails-app/dao directory add the Contac
 package resttutorial
 
 import grails.plugin.dao.GormDaoSupport
-
+//TODO do we not need transactional annotation? Explain that they are transactional by default if so
 class ContactDao extends GormDaoSupport {
 	Class domainClass = Contact
 
@@ -334,13 +417,13 @@ class ContactDao extends GormDaoSupport {
 }
 ----
 
-Now you can run tests to be sure that new functionality works, and didn't break old.
+Now we can run tests again to be sure that new functionality works along with out new test.
 
-=== Snapshot 2 of tutorial app is at this point
+=== Snapshot 2 of the tutorial is at this point
 
 === Implementing a RestDaoController
 
-RestDaoController gives us ability to customise actions using DAOs, but what if we need to specify custom endpoint.
+RestDaoController gives us ability to customize actions using DAOs, but what if we need to specify custom endpoint.
 
 Use Case: A user can not update the inactive field since its bindable false.
 So we need to add a new end point so a user can inactivate the contact instead of a delete
