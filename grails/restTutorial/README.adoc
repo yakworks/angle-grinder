@@ -169,13 +169,36 @@ these are what looks like the out of the box status codes as of Grails 3.2.2
 As a our prefered namespace design we will use the "api" namespace prefix for the rest of the tutorial.
 go ahead and change the uri on the contact @Resource uri
 
-```groovy
-@Resource(uri = '/contact',namespace = '/api' //TODO this right???? , formats = ["json"])
-class Contact {
+
+```
+@Resource(uri = '/contact',namespace = '/api', formats = ["json"])
+class Contact
 ```
 
 //TODO make changes to the urlMappings for the api name space part then lets do that here
 //http://stackoverflow.com/questions/34711819/parameterize-urlmappings-in-grails-3
+
+.UrlMappings.groovy
+[source,groovy]
+----
+package resttutorial
+
+class UrlMappings {
+
+    static mappings = {
+
+      group("/api") {
+        delete "/$controller/$id(.$format)?"(namespace:"api", action:"delete")
+        get "/$controller(.$format)?"(action:"index")
+        get "/$controller/$id(.$format)?"(action:"show")
+        post "/$controller(.$format)?"(action:"save")
+        put "/$controller/$id(.$format)?"(action:"update")
+        patch "/$controller/$id(.$format)?"(action:"patch")
+      }
+        ...
+    }
+}
+----
 
 You can see all available endpoints that Grails create for us with url-mappings-report:
 
