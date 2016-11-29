@@ -543,27 +543,15 @@ Lets implement just making contact inactive, to add custom end point we need to 
 will be look like:
 
 .UrlMappings.groovy
+[source,groovy]
 ----
-package resttutorial
+  static mappings = {
+    .....
 
-class UrlMappings {
-
-    static mappings = {
-        delete "/$controller/$id(.$format)?"(action:"delete")
-        get "/$controller(.$format)?"(action:"index")
-        get "/$controller/$id(.$format)?"(action:"show")
-        post "/$controller(.$format)?"(action:"save")
-        put "/$controller/$id(.$format)?"(action:"update")
-        patch "/$controller/$id(.$format)?"(action:"patch")
-
-        "500"(view:'/error')
-        "404"(view:'/notFound')
-
-       "/contact"(resources: "contact"){
-            delete "/active"(controller: "contact", action: "inactivate")
-        }
-    }
-}
+     "/contact"(resources: "contact"){
+          delete "/active"(controller: "contact", action: "inactivate")
+      }
+  }
 ----
 
 //TODO, give an example of what the endpoint url will look like?
@@ -613,7 +601,6 @@ class ContactDao extends GormDaoSupport {
    Contact inactivate(Long id) {
      //TODO why are we not doing this like we do in the GormDaoSupport.update?
      //DaoUtil.checkFound(entity,params,domainClass.name) explain that this will throw error that can be trapped in controller for a 404
-		 //DaoUtil.checkVersion(entity,params.version) ?? maybe leave this out
      //save(entity)
        Contact contact = Contact.get(id)
        contact.inactive = true
@@ -653,6 +640,31 @@ Update our dao tests
     }
 ----
 
+=== Paging data
+When returning a list, it will be necessary to support paging.
+There is no single rest standard for paging so we will settle on the following.
+
+Paging will leverage query parameters as shown in the following example:
+
+```
+https://localhost:8080/contact/?max=10&offset=1
+```
+
+and will result in a wrapped response
+```
+page: 1,
+total: 100,
+records: 10,
+rows:[
+  {"id":1,"email":"mscott0@ameblo.jp","firstName":"Marie","lastName":"Scott"},
+  {"id":2,"email":"jrodriguez1@scribd.com" ...
+]
+```
+
+///////
+TODO finish explanation and test update as the RestDaoController
+should be doing this by deafult for us right and blowing up tests
+///////
 
 === Snapshot 3 of tutorial app is at this point
 
