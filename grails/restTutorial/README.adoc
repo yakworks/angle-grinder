@@ -94,13 +94,29 @@ class BootStrap {
 So now we can start working on creating REST Api for our app. The most easiest way is to use http://docs.grails.org/latest/guide/webServices.html#domainResources[domain resources]
 So as we see from docs we just need to update our domain a bit (just add `@Resource` anotation) in such a way:
 
+//TODO out of the gate, after the simple Snapshot 1 above, lets move to the api namesapce and explain it here.
+//baiscally my understanding is that we will need to add
+//TODO Lets stick with the singular contact for the resource endpoint uri our of the gate here. lets also prepend the
 [source,groovy]
 ----
-@Resource(uri = '/contacts', formats = ["json"])
+@Resource(uri = '/contact', formats = ["json"])
 class Contact {
   ...
 }
 ----
+
+[NOTE]
+.On plural resource names
+====
+As you will notice we did not pluralize it to contacts above as many will do.
+We are aware of the debate on this in the rest world. We feel this will cause confusion down the line to do it.
+
+1. English plural rules like "cherry/cherries" or "goose/geese/moose/meese" are not the nicest thing to think of while developing API, particularly when english is not your mother tongue.
+2. Many times, as in Grails, we want to generate endpoint from the model, which is usually singular. It does not play nicely with the above pluralization exceptions and creates more work maintaining UrlMappings.
+3. When the model is singular, which is normally is for us, keeping the rest endpoint singular will have the rest developers and the grails developers speaking the same language
+3. The argument "usually you start querying by a Get to display a list" does not refer to any real use case. And we will end up querying single items as much as and even more than a list of items.
+====
+
 
 ===== The `RestfullController`
 
@@ -119,32 +135,14 @@ http://docs.grails.org/latest/guide/webServices.html#extendingRestfulController 
 [cols="2,1,1,3", format="csv", options="header", width="80",grid=rows]
 |===
 URI, Method, Action, Response Data
-/contacts , GET , index , Paged List
-/contacts/create, GET , create , Contact.newInstance() unsaved
-/contacts, POST , save , The successfully saved contact (same as show's get)
-/contacts/${id}, GET , show , The contact for the id
-/contacts/${id}/edit, GET , edit , The contact for the id. same as show
-/contacts/${id}, PUT , update , The successfully updated contact
-/contacts/${id}, DELETE , delete , Empty response with HTTP status code 204
+/contact , GET , index , Paged List
+/contact/create, GET , create , Contact.newInstance() unsaved
+/contact, POST , save , The successfully saved contact (same as show's get)
+/contact/${id}, GET , show , The contact for the id
+/contact/${id}/edit, GET , edit , The contact for the id. same as show
+/contact/${id}, PUT , update , The successfully updated contact
+/contact/${id}, DELETE , delete , Empty response with HTTP status code 204
 |===
-
-
-You can see all available endpoints that Grails create for us with url-mappings-report:
-
-----
-$ grails url-mappings-report
-...
-
-Controller: org
- |   GET    | /contacts/create                          | Action: create
- |   GET    | /contacts/${id}/edit                      | Action: edit
- |   POST   | /contacts                                 | Action: save
- |   GET    | /contacts                                 | Action: index
- |  DELETE  | /contacts/${id}                           | Action: delete
- |  PATCH   | /contacts/${id}                           | Action: patch
- |   PUT    | /contacts/${id}                           | Action: update
- |   GET    | /contacts/${id}                           | Action: show
-----
 
 ==== Status Code Defaults
 
@@ -165,13 +163,35 @@ these are what looks like the out of the box status codes as of Grails 3.2.2
 | 422 - UNPROCESSABLE_ENTITY | Validation errors.
 |===
 
+
+=== API Namespace
+
+As a our prefered namespace design we will use the "api" namespace prefix for the rest of the tutorial.
+go ahead and change the uri on the contact @Resource uri
+
+```groovy
+@Resource(uri = '/contact',namespace = '/api' //TODO this right???? , formats = ["json"])
+class Contact {
+```
+
+//TODO make changes to the urlMappings for the api name space part then lets do that here
+//http://stackoverflow.com/questions/34711819/parameterize-urlmappings-in-grails-3
+
+You can see all available endpoints that Grails create for us with url-mappings-report:
+
+----
+$ grails url-mappings-report
+//TODO REGEN this
+----
+
+
 === Using CURL to test CRUD and List
 
 Fire up the app with `run-app`
 
 ===== GET (list):
 ----
-curl -i -X GET -H "Content-Type: application/json"  localhost:8080/contacts
+curl -i -X GET -H "Content-Type: application/json"  localhost:8080/contact
 HTTP/1.1 200
 X-Application-Context: application:development
 Content-Type: application/json;charset=UTF-8
@@ -183,10 +203,10 @@ Date: Fri, 04 Nov 2016 14:48:14 GMT
 
 ===== POST:
 ----
-curl -i -X POST -H "Content-Type: application/json" -d '{"firstName":"Joe", "lastName": "Cool"}' localhost:8080/contacts
+curl -i -X POST -H "Content-Type: application/json" -d '{"firstName":"Joe", "lastName": "Cool"}' localhost:8080/contact
 HTTP/1.1 201
 X-Application-Context: application:development
-Location: http://localhost:8080/contacts/101
+Location: http://localhost:8080/contact/101
 Content-Type: application/json;charset=UTF-8
 Transfer-Encoding: chunked
 Date: Fri, 04 Nov 2016 15:00:49 GMT
@@ -195,7 +215,7 @@ Date: Fri, 04 Nov 2016 15:00:49 GMT
 ----
 ===== GET (by id):
 ----
-curl -i -X GET -H "Content-Type: application/json"  localhost:8080/contacts/101
+curl -i -X GET -H "Content-Type: application/json"  localhost:8080/contact/101
 HTTP/1.1 200
 X-Application-Context: application:development
 Content-Type: application/json;charset=UTF-8
@@ -207,10 +227,10 @@ Date: Fri, 04 Nov 2016 15:02:09 GMT
 
 ===== PUT:
 ----
-curl -i -X PUT -H "Content-Type: application/json" -d '{"firstName": "New Name", "lastName": "New Last name"}' localhost:8080/contacts/101
+curl -i -X PUT -H "Content-Type: application/json" -d '{"firstName": "New Name", "lastName": "New Last name"}' localhost:8080/contact/101
 HTTP/1.1 200
 X-Application-Context: application:development
-Location: http://localhost:8080/contacts/101
+Location: http://localhost:8080/contact/101
 Content-Type: application/json;charset=UTF-8
 Transfer-Encoding: chunked
 Date: Fri, 04 Nov 2016 15:03:48 GMT
@@ -220,7 +240,7 @@ Date: Fri, 04 Nov 2016 15:03:48 GMT
 
 ===== DELETE:
 ----
-curl -i -X DELETE -H "Content-Type: application/json"  localhost:8080/contacts/50
+curl -i -X DELETE -H "Content-Type: application/json"  localhost:8080/contact/50
 HTTP/1.1 204
 X-Application-Context: application:development
 Content-Type: application/json;charset=UTF-8
@@ -229,7 +249,7 @@ Date: Mon, 28 Nov 2016 07:43:11 GMT
 
 ===== 422 - Post Validation Error:
 ----
-curl -i -X POST -H "Content-Type: application/json" -d '{"lastName": "Cool"}' localhost:8080/contacts
+curl -i -X POST -H "Content-Type: application/json" -d '{"lastName": "Cool"}' localhost:8080/contact
 HTTP/1.1 422
 X-Application-Context: application:development
 Content-Type: application/json;charset=UTF-8
@@ -241,7 +261,7 @@ Date: Mon, 28 Nov 2016 08:21:11 GMT
 
 ===== 404 - Get Error:
 ----
-curl -i -X GET -H "Content-Type: application/json"  localhost:8080/contacts/105
+curl -i -X GET -H "Content-Type: application/json"  localhost:8080/contact/105
 HTTP/1.1 404
 X-Application-Context: application:development
 Content-Type: application/json;charset=UTF-8
@@ -256,7 +276,7 @@ Date: Mon, 28 Nov 2016 08:22:01 GMT
 
 We did not setup XML support so we will get a 406. You may try adding XML to formats to see if this.
 ----
-curl -i -X GET -H "Accept: application/xml"  http://localhost:8080/contacts/8
+curl -i -X GET -H "Accept: application/xml"  http://localhost:8080/contact/8
 HTTP/1.1 406
 X-Application-Context: application:development
 Content-Length: 0
@@ -278,7 +298,7 @@ it is added by default when you create a grails app with `-profile rest-api`
 
 Here is an example of `POST` request (creating of a new contact).
 RestBuilder we use to emulate request from external source. Note, in Grails3 integration tests run on the random port,
-so you cant call `http://localhost:8080/contacts` , but we can use `serverPort` variable instead. And to make it more
+so you cant call `http://localhost:8080/contact` , but we can use `serverPort` variable instead. And to make it more
 intelligent lets use baseUrl. See example:
 
 [source,groovy]
@@ -302,7 +322,7 @@ class ContactSpec extends Specification {
 
     void "check POST request"() {
         when:
-        RestResponse response = rest.post("${baseUrl}/contacts"){
+        RestResponse response = rest.post("${baseUrl}/contact"){
           json([
             firstName: "Test contact",
             email:"foo@bar.com",
@@ -352,7 +372,7 @@ This is for transforming entity to JSON object.
 
 //TODO are these files above required? what happens if we delete them?
 
-=== Snapshot 1 of this tutorial  is at this point
+=== Snapshot 1 of this tutorial is at this point
 
 == The DAO plugin with REST support
 
@@ -378,7 +398,7 @@ and we will set `RestDaoController` as super class for our Contact:
 
 [source,groovy]
 ----
-@Resource(uri = '/contacts', superClass = RestDaoController)
+@Resource(uri = '/contact', superClass = RestDaoController)
 class Contact {
   ...
 }
@@ -386,7 +406,7 @@ class Contact {
 
 Now run the tests to make sure our functional tests still pass with the defaults.
 
-=== Implementin a DAO service
+=== Implementing a DAO service
 
 Lets say we want to customize the insert to allow a user to pass in a name and have it be split into first and last names.
 
@@ -398,7 +418,7 @@ The test for this case will look like:
   RestBuilder rest = new RestBuilder()
 
   when: "name is passed"
-  def response = rest.post("http://localhost:${serverPort}/contacts"){
+  def response = rest.post("http://localhost:${serverPort}/contact"){
     json([
       name: "Joe Cool",
       email: "foo@bar.com"
@@ -414,11 +434,11 @@ The test for this case will look like:
 }
 ----
 
-We will setup a concrete implementation of a dao for the contact.
+We will setup a concrete implementation of a dao for the contact as ooposed to clogging up the business logic in the controller.
 The plugin will recognize that we want to use this base on the naming convention SomeDomainNameDao
 In either the grails-app/services or grails-app/dao directory add the ContactDao.groovy
 
-We need to add `@Transactional` because services are not transactional by default starting from Grails 3.
+We need to add `@Transactional` because services, and thus our DAO, are not transactional by default starting from Grails 3.
 
 [source,groovy]
 .ContactDao.groovy
@@ -449,6 +469,7 @@ Now we can run tests again to be sure that new functionality works along with ou
 
 === Snapshot 2 of the tutorial is at this point
 
+//////////////////////////////////////////
 //TODO from slack yesterday
 
 joshua	[2:40 AM]
@@ -463,8 +484,8 @@ that whole part needs clarification
 also, for that section, are we skipping error checking? what happens if it fails?
 
 [2:49]
-also, is /contacts/2/inactivate the right url, or should it be /contacts/inactivate/2? whats a standard here?
-
+also, is /contact/2/inactivate the right url, or should it be /contact/inactivate/2? whats a standard here?
+//////////////////////////////////////////
 
 
 
@@ -479,9 +500,9 @@ functionality for CRUD operations or fully disable it, but not change the way ho
 delete action to make set inactive flag, then how we will enable it. So we will add a new end point so a user can
 inactivate the contact.
 
-For that we will remove the `@Resource` annotation from the contacts domain and add the ContactController.groovy, but
+For that we will remove the `@Resource` annotation from the contact domain and add the ContactController.groovy, but
 `@Resource` made a one more feature for us - updating urlMappings, so now we need to add our url by hands.
-It would like somethings like this: `"/contacts"(resources: "contact")` it will add url mappings for our controller.
+It would like somethings like this: `"/contact"(resources: "contact")` it will add url mappings for our controller.
 //TODO see slack comments, explain why this is needed but not needed using @Resource. asked "can we just get to by default with /contact/inactivate"?
 
 Then lets add a custom endpoint. One thing that we should always keep in mind is that REST approach is that we should have
@@ -515,7 +536,7 @@ class UrlMappings {
         "500"(view:'/error')
         "404"(view:'/notFound')
 
-       "/contacts"(resources: "contact"){
+       "/contact"(resources: "contact"){
             delete "/active"(controller: "contact", action: "inactivate")
         }
     }
@@ -526,6 +547,7 @@ class UrlMappings {
 //if its contacts/1/active then it looks like "active" is an association resource right? or a field. don't we want this part to be a verb? Explain all this here
 //see the links. what if we end up with contacts/1/location that returns the location object or somethign like contacts/1/locations/1
 //which are more standard patterns and one that we want to show in our tutorial as well. what differentiates them?
+//also, you call it activate below but active above?
 
 The `ContactController` we will be extended from `RestDaoController`, also we should add  and add our `inactivate` action:
 
@@ -545,11 +567,13 @@ class ContactController extends RestDaoController {
   }
 
   def inactivate() {
+    //TODO we normally take care of all of this in the DAO. Why doing it here?
     Contact instance = queryForResource(params.contactId as Long)
     if (instance == null) {
       notFound()
       return
     }
+    //TODO why are we not try catching like we normally would? What happens on exception?
     Contact contact = dao.inactivate(params.contactId as Long)
     respond contact
   }
@@ -562,8 +586,12 @@ Add logic to the dao:
 ----
 class ContactDao extends GormDaoSupport {
     ...
-
+//TODO fix indenting here
    Contact inactivate(Long id) {
+     //TODO why are we not doing this like we do in the GormDaoSupport.update?
+     //DaoUtil.checkFound(entity,params,domainClass.name) explain that this will throw error that can be trapped in controller for a 404
+		 //DaoUtil.checkVersion(entity,params.version) ?? maybe leave this out
+     //save(entity)
        Contact contact = Contact.get(id)
        contact.inactive = true
        contact.persist()
@@ -579,7 +607,7 @@ Update our rest sanity tests
 ----
 void "check inactivate endpoint"() {
         when:
-        RestResponse response = rest.delete("${baseUrl}/contacts/2/activate")
+        RestResponse response = rest.delete("${baseUrl}/contact/2/activate")
 
         then:
         response.status == 200
@@ -601,6 +629,7 @@ Update our dao tests
         result.inactive == true
     }
 ----
+
 
 === Snapshot 3 of tutorial app is at this point
 
