@@ -31,7 +31,7 @@ So first let's create new grails app:
 
 ----
 $ grails create-app -profile rest-api -features hibernate4 resttutorail
-Application created at angle-grinder/grails/restTutorial/step1/resttutorail
+Application created at angle-grinder/grails/restTutorial/snapshot1
 ----
 
 Grails 3 provides several different profiles you can read about them in the {docs-grails}/profiles.html[docs]
@@ -100,9 +100,6 @@ So now we can start working on creating REST Api for our app.
 The easiest way is to use {url-dr}[domain resources].
 So as we see from {url-dr}[docs] we just need to update our domain a bit (just add `@Resource` anotation) in such a way:
 
-//TODO out of the gate, after the simple Snapshot 1 above, lets move to the api namesapce and explain it here.
-//baiscally my understanding is that we will need to add
-//TODO Lets stick with the singular contact for the resource endpoint uri our of the gate here. lets also prepend the
 [source,groovy]
 ----
 @Resource(uri = '/contact', formats = ["json"])
@@ -172,17 +169,25 @@ these are what looks like the out of the box status codes as of Grails 3.2.2
 
 === API Namespace
 
-As a our prefered namespace design we will use the "api" namespace prefix for the rest of the tutorial.
-go ahead and change the uri on the contact @Resource uri
+A Namespace is a mechanism to partition resources into a logically named group.
 
+So the controllers that response for the REST endpoints we will move to separate namespace to avoid cases when we need to
+have Controllers for GSP rendering or some other not related to REST stuff.
 
-```
-@Resource(uri = '/contact',namespace = '/api', formats = ["json"])
+As a our preferred namespace design we will use the "api" namespace prefix for the rest of the tutorial.
+So we will add ` namespace = '/api'` to change the uri on the contact @Resource
+
+----
+@Resource(uri = '/contact', namespace = '/api', formats = ["json"])
 class Contact
-```
+----
 
-//TODO make changes to the urlMappings for the api name space part then lets do that here
-//http://stackoverflow.com/questions/34711819/parameterize-urlmappings-in-grails-3
+Also we need to update UrlMappings.groovy, there are two ways:
+
+1. Add `/api` prefix to each mapping for example  `get "/api/$controller(.$format)?"(action:"index")`
+2. Use `group` property
+
+We will use the second case:
 
 .UrlMappings.groovy
 [source,groovy]
@@ -210,7 +215,28 @@ You can see all available endpoints that Grails create for us with url-mappings-
 
 ----
 $ grails url-mappings-report
-//TODO REGEN this
+[options="header", cols="1,2", grid=rows]
+|    *     | ERROR: 500                                | View:   /error           |
+|    *     | ERROR: 404                                | View:   /notFound        |
+|   GET    | /api/${controller}(.${format)?            | Action: index            |
+|   POST   | /api/${controller}(.${format)?            | Action: save             |
+|  DELETE  | /api/${controller}/${id}(.${format)?      | Action: delete           |
+|   GET    | /api/${controller}/${id}(.${format)?      | Action: show             |
+|   PUT    | /api/${controller}/${id}(.${format)?      | Action: update           |
+|  PATCH   | /api/${controller}/${id}(.${format)?      | Action: patch            |
+
+Controller: application
+|    *     | /                                         | Action: index            |
+
+Controller: contact
+|   GET    | /contact/create                           | Action: create           |
+|   GET    | /contact/${id}/edit                       | Action: edit             |
+|   POST   | /contact                                  | Action: save             |
+|   GET    | /contact                                  | Action: index            |
+|  DELETE  | /contact/${id}                            | Action: delete           |
+|  PATCH   | /contact/${id}                            | Action: patch            |
+|   PUT    | /contact/${id}                            | Action: update           |
+|   GET    | /contact/${id}                            | Action: show             |
 ----
 
 
@@ -327,7 +353,7 @@ it is added by default when you create a grails app with `-profile rest-api`
 
 Here is an example of `POST` request (creating of a new contact).
 RestBuilder we use to emulate request from external source. Note, in Grails3 integration tests run on the random port,
-so you cant call `http://localhost:8080/contact` , but we can use `serverPort` variable instead. And to make it more
+so you cant call `http://localhost:8080/api/contact` , but we can use `serverPort` variable instead. And to make it more
 intelligent lets use baseUrl. See example:
 
 [source,groovy]
@@ -347,7 +373,7 @@ class ContactSpec extends Specification {
     @Shared
     RestBuilder rest = new RestBuilder()
 
-    def getBaseUrl(){"http://localhost:${serverPort}"}
+    def getBaseUrl(){"http://localhost:${serverPort}/api"}
 
     void "check POST request"() {
         when:
@@ -377,18 +403,40 @@ More tests examples are in the are in the snapshot1 project's
 
 === GSON and Grails Views Defaults
 
-As you can see by inspecting the views directory, by default Grails creates a number of gson files
+As you can see by inspecting the views directory, by default Grails creates a number of gson files. Support for them is
+provided with http://views.grails.org/latest/#_introduction[Grails Views Plugin]
+
+The the obvious question how does it work. If you look at sources of the RestfullController it doesn't "call" this templates
+explicitly. So under the hood plugin just looks on request, if url ends on `.json`(localhost:8080/contact/1.json) or if
+`Accept` header containing `application/json` the .gson view will be rendered.
+
+If you delete default generated templates, then it will show default Grails page. Go ahead and try to delete `notFound.gson`
+and try
+
+----
+curl -i -X GET -H "Content-Type: application/json"  localhost:8080/contact/105
+HTTP/1.1 404
+X-Application-Context: application:development
+Content-Type: text/html;charset=utf-8
+Content-Language: en
+Content-Length: 990
+Date: Wed, 30 Nov 2016 16:06:42 GMT
+
+<!DOCTYPE html><html><head><title>Apache Tomcat/8.5.5 - Error report</title><style type="text/css">H1 ...
+----
 
 ===== error.gson
 {url-snapshot1}/grails-app/views/error.gson[See source]
 
 This is for internal server errors. As you can see this is where the 500 status code gets set, and error message is specified.
-//TODO how does it it get called? From where? RestController? convention by name? what ac
+
+It is called when we get `500` error, the same as for `gsp` look at UrlMapping: `"500"(view: '/error')`
 
 ===== notFound.gson
 https://github.com/9ci/angle-grinder/blob/rest_tutorial/grails/restTutorial/snapshot1/grails-app/views/notFound.gson[See source]
 This is for case when resource isn't found. As you can see this is where the 404 status code gets set, and error message is specified.
-//TODO how does it it get called? From where? RestController? convention by name? what ac
+
+It is called when we get `404` error, the same as for `gsp` look at UrlMapping: `"404"(view: '/notFound')`
 
 ===== errors/_errors.gson
 https://github.com/9ci/angle-grinder/blob/rest_tutorial/grails/restTutorial/snapshot1/grails-app/views/errors/_errors.gson
@@ -509,7 +557,8 @@ that whole part needs clarification
 [2:44]
 1. wouldn’t we want to add `get "/$controller/$id(.$format)?"(action:"show")`? exaplin this in that section
 2. can we just get to by default with /contact/inactivate? lets say that.
-3. if we are adding it becuase of pluralization,  renaming contact to contacts, then lets explain that thats the reason. we can also mention thats the problem with plrualizing as we wouldn’t need to do anything if we had not right?
+3. if we are adding it becuase of pluralization,  renaming contact to contacts,
+then lets explain that thats the reason. we can also mention thats the problem with plrualizing as we wouldn’t need to do anything if we had not right?
 
 [2:47]
 also, for that section, are we skipping error checking? what happens if it fails?

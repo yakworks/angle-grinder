@@ -2,7 +2,7 @@ package resttutorial
 
 import grails.rest.Resource
 
-@Resource(uri = '/contacts', formats = ["json"])
+@Resource(uri = '/contact', namespace = "/api", formats = ["json"])
 class Contact {
   String firstName
   String lastName
