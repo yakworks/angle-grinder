@@ -670,6 +670,11 @@ class ContactController extends RestDaoController {
 }
 ----
 
+[NOTE]
+If you want to be able to call the action by "contact/inactivate/3" the only reason why you can't do this is UrlMapping,
+but it is easy to change by adding `"/$controller/$action?/$contactId?"{}` , I've used `$contactId` because `params.contactId`
+is used in the controller.
+
 Add logic to the dao:
 
 [source,groovy]
