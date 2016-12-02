@@ -7,6 +7,7 @@
 :docs-HttpStatus: http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/http/HttpStatus.html
 :docs-grails: http://docs.grails.org/latest/guide
 :docs-grails-ws: http://docs.grails.org/latest/guide/webServices.html
+:src-grails-rest: https://github.com/grails/grails-core/blob/master/grails-plugin-rest
 
 == Getting started
 
@@ -125,7 +126,7 @@ We are aware of the debate on this in the rest world. We feel this will cause co
 
 .@Resource creates a RestfullController for the domain
 NOTE: The `@Resource` annotation is used in an ASTTransformation that creates a controller that extends RestfullController.
-See https://github.com/grails/grails-core/blob/3.2.x/grails-plugin-rest/src/main/groovy/org/grails/plugins/web/rest/transform/ResourceTransform.groovy[ResourceTransform]
+See {src-grails-rest}/src/main/groovy/org/grails/plugins/web/rest/transform/ResourceTransform.groovy[ResourceTransform]
 for details on how it does this. Later we will show how to specify the controller to user with superClass property.
 
 === Default Endpoints and Status Codes
@@ -433,23 +434,31 @@ This is for internal server errors. As you can see this is where the 500 status 
 It is called when we get `500` error, the same as for `gsp` look at UrlMapping: `"500"(view: '/error')`
 
 ===== notFound.gson
-https://github.com/9ci/angle-grinder/blob/rest_tutorial/grails/restTutorial/snapshot1/grails-app/views/notFound.gson[See source]
+{url-snapshot1}/grails-app/views/notFound.gson[See source]
 This is for case when resource isn't found. As you can see this is where the 404 status code gets set, and error message is specified.
 
 It is called when we get `404` error, the same as for `gsp` look at UrlMapping: `"404"(view: '/notFound')`
 
 ===== errors/_errors.gson
-https://github.com/9ci/angle-grinder/blob/rest_tutorial/grails/restTutorial/snapshot1/grails-app/views/errors/_errors.gson
+{url-snapshot1}/grails-app/views/errors/_errors.gson
 This is for validation errors. As you can see this is where the `UNPROCESSABLE_ENTITY`(422) status code gets set, and
 error messages for entity specified.
-//TODO how does it it get called? From where? RestController? convention by name? what action?
+
+It is rendered on {src-grails-rest}/src/main/groovy/grails/rest/RestfulController.groovy#L99[see src]
+so if entity has errors it will look for `views/contact/_errors.gson` and if it doesn't exist then `views/errors/_errors.gson`
 
 ===== object/_object.gson
-https://github.com/9ci/angle-grinder/blob/rest_tutorial/grails/restTutorial/snapshot1/grails-app/views/object/_object.gson[See source]
+{url-snapshot1}/grails-app/views/object/_object.gson[See source]
 This is for transforming entity to JSON object.
-//TODO how does it it get called? FRom where? Is this used in our app above?
 
-//TODO are these files above required? what happens if we delete them?
+The rendering of this template is called for example here: {src-grails-rest}/src/main/groovy/grails/rest/RestfulController.groovy#L114[Save method]
+So by convention if you have  `views/contact/_contact.gson` it will render it, in other case `views/object/_object.gson`,
+which just render object as Json, so if we delete it it will still work in the same way because `respond instance` make
+the same.
+
+
+So all this files are default tempaltes for rendering in JSON all types of the responses and before delete them we need
+to implement our own gson templates.
 
 === Snapshot 1 of this tutorial is at this point
 
@@ -571,18 +580,27 @@ also, is /contact/2/inactivate the right url, or should it be /contact/inactivat
 
 === Implementing a RestDaoController
 
-RestDaoController gives us ability to customize actions using DAOs, but what if we need to specify custom endpoint.
-
 Use Case: A user can not update the inactive field since its bindable false.
+
+To implement this use case we have two ways to go:
+
+1. Override `delete` method for the controller
+2. Add separate endpoint for this action
+
+For both cases we cann't use `@Resource` because it doesn't allow us to change the controller that is used for our resource.
+So we need to create our own controller and extend it from RestDaoController wich gives us ability to customize actions
+using DAOs.
+
+We will remove the `@Resource` annotation from the contact domain and add the ContactController.groovy, but
+`@Resource` made a one more feature for us - updating urlMappings, so now we need to add our url by hands.
+It will look somethings like this: `"/contact"(resources: "contact")` it will add url mappings for our controller.
 
 Sure we can just override `delete` method in our controller, but lets leave it. My opinion that we should left default
 functionality for CRUD operations or fully disable it, but not change the way how it works. One more idea is if we override
 delete action to make set inactive flag, then how we will enable it. So we will add a new end point so a user can
 inactivate the contact.
 
-For that we will remove the `@Resource` annotation from the contact domain and add the ContactController.groovy, but
-`@Resource` made a one more feature for us - updating urlMappings, so now we need to add our url by hands.
-It would like somethings like this: `"/contact"(resources: "contact")` it will add url mappings for our controller.
+
 //TODO see slack comments, explain why this is needed but not needed using @Resource. asked "can we just get to by default with /contact/inactivate"?
 
 Then lets add a custom endpoint. One thing that we should always keep in mind is that REST approach is that we should have
@@ -674,7 +692,7 @@ Update our rest sanity tests
 ----
 void "check inactivate endpoint"() {
         when:
-        RestResponse response = rest.delete("${baseUrl}/contact/2/activate")
+        RestResponse response = rest.delete("${baseUrl}/contact/2/active")
 
         then:
         response.status == 200
