@@ -557,65 +557,77 @@ Now we can run tests again to be sure that new functionality works along with ou
 
 === Snapshot 2 of the tutorial is at this point
 
-//////////////////////////////////////////
-//TODO from slack yesterday
-
-joshua	[2:40 AM]
-that whole part needs clarification
-
-[2:44]
-1. wouldn’t we want to add `get "/$controller/$id(.$format)?"(action:"show")`? exaplin this in that section
-2. can we just get to by default with /contact/inactivate? lets say that.
-3. if we are adding it becuase of pluralization,  renaming contact to contacts,
-then lets explain that thats the reason. we can also mention thats the problem with plrualizing as we wouldn’t need to do anything if we had not right?
-
-[2:47]
-also, for that section, are we skipping error checking? what happens if it fails?
-
-[2:49]
-also, is /contact/2/inactivate the right url, or should it be /contact/inactivate/2? whats a standard here?
-//////////////////////////////////////////
-
-
-
 === Implementing a RestDaoController
 
 Use Case: A user can not update the inactive field since its bindable false.
 
 To implement this use case we have two ways to go:
 
-1. Override `delete` method for the controller
-2. Add separate endpoint for this action
+1. Override `delete` method for the controller, so it will set `inactive` field to true, instead of deleting from DB
+2. Add separate endpoint for this action, so we keep ability to delete Contact
 
-For both cases we cann't use `@Resource` because it doesn't allow us to change the controller that is used for our resource.
-So we need to create our own controller and extend it from RestDaoController wich gives us ability to customize actions
+For both cases we can't use `@Resource` on our domain because it doesn't allow us to change the controller actions that are used for our resource.
+So we need to create our own controller and extend it from RestDaoController which gives us ability to customize actions
 using DAOs.
 
 We will remove the `@Resource` annotation from the contact domain and add the ContactController.groovy, but
-`@Resource` made a one more feature for us - updating urlMappings, so now we need to add our url by hands.
-It will look somethings like this: `"/contact"(resources: "contact")` it will add url mappings for our controller.
+`@Resource`, not only creates controller based on resource, but also updates urlMappings, so now we need to add our url by hands.
+It will look somethings like this: `"/contact"(resources: "contact")` it will add url mappings for our newly created controller.
 
-Sure we can just override `delete` method in our controller, but lets leave it. My opinion that we should left default
-functionality for CRUD operations or fully disable it, but not change the way how it works. One more idea is if we override
-delete action to make set inactive flag, then how we will enable it. So we will add a new end point so a user can
-inactivate the contact.
-
-
-//TODO see slack comments, explain why this is needed but not needed using @Resource. asked "can we just get to by default with /contact/inactivate"?
-
-Then lets add a custom endpoint. One thing that we should always keep in mind is that REST approach is that we should have
-nouns (not verbs!) in our URLs. If it is confusing, please read a nice http://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api#restful[article]
-about how we should design REST endpoints.
-
-As for actions that aren't CRUDI like more the implementation with 2 different methods:
-
+.UrlMappings.groovy
+[source,groovy]
 ----
-delete "/active" // to make Contact inactive
-post "/active" // to make Contact active
+  static mappings = {
+    .....
+     "/contact"(resources: "contact")
+  }
 ----
 
-Lets implement just making contact inactive, to add custom end point we need to add nested url for resource and result
-will be look like:
+And controller:
+
+[source,groovy]
+.ContactController.groovy
+----
+package resttutorial
+
+class ContactController extends RestDaoController {
+  static responseFormats = ['json']
+
+  ContactController() {
+    super(Contact)
+  }
+}
+----
+
+You can run tests - it will work in the same way as it does with annotation.
+
+So lets return to our use case. And take a look closer for both ways that we have.
+
+The first way to override the delete method. I do not realy like this approach because `DELETE` should really delete entity.
+And the second reason is that how should we activate our contact, the only way is to use `PUT` action and pass `inactive = false`,
+but due to the fact that it is unbindable, we need to add handling exactly for this situation which make the code messy.
+
+The other way is to add separate endpoint.
+
+[NOTE]
+.REST Standarts
+====
+We should keep in mind some principals when we build REST API
+
+1. REST is resource-oriented, not service-oriented. Resources are nouns, not verbs we should delegate verbs using HTTP verbs.
+2. The next standard is based on the Keep it Simple, Stupid (KISS) principle. We really need two base URLs per resource:
+one for multiple values and one for the specific value.
+3. Associations. An APIs should be very intuitive when you're developing them for associations. The following URL
+is self-explained: we request user with id 3 and contact with id 8: `GET /user/3/contact/8`
+We have traversed two levels in this URL. One level is the user, and the second level is the contact that the user is has.
+====
+
+According to the first standard we shouldn't use something like 'contact/inactivate', instead we can use a nested "resource"
+`active`, and due to 3rd point of the note it should look like something like `contact/2/active`, when we need to inactivate
+the contact it will send `DELETE` request, for activation - `POST`.
+
+For now lets implement just making contact inactive.
+To add custom end point we need to add nested url for resource and result will be look like:
 
 .UrlMappings.groovy
 [source,groovy]
@@ -628,14 +640,6 @@ will be look like:
       }
   }
 ----
-
-//TODO, give an example of what the endpoint url will look like?
-//if its contacts/1/active then it looks like "active" is an association resource right? or a field. don't we want this part to be a verb? Explain all this here
-//see the links. what if we end up with contacts/1/location that returns the location object or somethign like contacts/1/locations/1
-//which are more standard patterns and one that we want to show in our tutorial as well. what differentiates them?
-//also, you call it activate below but active above?
-
-The `ContactController` we will be extended from `RestDaoController`, also we should add  and add our `inactivate` action:
 
 [source,groovy]
 .ContactController.groovy
