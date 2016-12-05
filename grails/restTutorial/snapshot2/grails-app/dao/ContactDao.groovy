@@ -8,7 +8,6 @@ class ContactDao extends GormDaoSupport {
   Class domainClass = Contact
 
   Map insert(Map params) {
-    println "fsdfsdfdsfsdf"
     String name = params.remove("name")
     if(name){
       def (fname, lname) = name.split()
