@@ -1,5 +1,6 @@
 package resttutorial
 
+import grails.plugin.dao.DomainException
 import grails.plugin.dao.RestDaoController
 
 class ContactController extends RestDaoController {
@@ -10,13 +11,14 @@ class ContactController extends RestDaoController {
   }
 
   def inactivate() {
-    Contact instance = queryForResource(params.contactId as Long)
-    if (instance == null) {
-      notFound()
+    Contact contact
+    try {
+      contact = dao.inactivate(params.contactId as Long)
+    } catch (DomainException e){
+      respond e.cause
       return
     }
 
-    Contact contact = dao.inactivate(params.contactId as Long)
     respond contact
   }
 

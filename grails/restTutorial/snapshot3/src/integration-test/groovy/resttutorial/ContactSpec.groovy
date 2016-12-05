@@ -30,10 +30,14 @@ class ContactSpec extends Specification {
         response.json != null
         JSONElement json = response.json
         //by default max value is 10 rows
-        json.size() == 10
-        json[0].firstName == "Marie"
-        json[0].lastName == "Scott"
-        json[0].email == "mscott0@ameblo.jp"
+        json.total == 10
+        json.page == 1
+        json.records == 100
+        def rows = json.rows
+        rows.size() == 10
+        rows[0].firstName == "Marie"
+        rows[0].lastName == "Scott"
+        rows[0].email == "mscott0@ameblo.jp"
     }
 
     void "check GET list request with max parameter"() {
@@ -44,10 +48,32 @@ class ContactSpec extends Specification {
         response.status == 200
         response.json != null
         JSONElement json = response.json
-        json.size() == 20
-        json[0].firstName == "Marie"
-        json[0].lastName == "Scott"
-        json[0].email == "mscott0@ameblo.jp"
+        json.total == 5
+        json.page == 1
+        json.records == 100
+        def rows = json.rows
+        rows.size() == 20
+        rows[0].firstName == "Marie"
+        rows[0].lastName == "Scott"
+        rows[0].email == "mscott0@ameblo.jp"
+    }
+
+    void "check GET list request with page"() {
+        when: "list endpoint with max param"
+        RestResponse response = rest.get("${baseUrl}/contacts?page=2")
+
+        then:
+        response.status == 200
+        response.json != null
+        JSONElement json = response.json
+        json.total == 10
+        json.page == 2
+        json.records == 100
+        def rows = json.rows
+        rows.size() == 10
+        rows[0].firstName == "Mildred"
+        rows[0].lastName == "Ward"
+        rows[0].email == "mwarda@addtoany.com"
     }
 
     void "check GET by id"() {

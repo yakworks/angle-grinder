@@ -1,5 +1,6 @@
 package resttutorial
 
+import grails.plugin.dao.DaoUtil
 import grails.plugin.dao.GormDaoSupport
 import grails.transaction.Transactional
 
@@ -19,6 +20,10 @@ class ContactDao extends GormDaoSupport {
 
   Contact inactivate(Long id) {
     Contact contact = Contact.get(id)
+
+    DaoUtil.checkFound(contact, [id: id] ,domainClass.name)
+    DaoUtil.checkVersion(contact , [id: id].version)
+
     contact.inactive = true
     contact.persist()
     contact

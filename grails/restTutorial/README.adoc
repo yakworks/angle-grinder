@@ -658,6 +658,8 @@ class ContactController extends RestDaoController {
 
   def inactivate() {
     //TODO we normally take care of all of this in the DAO. Why doing it here?
+    // Josh, if we hadle it in the dao, we will get DomainException, so it would be 500 status, not 404, so not sure
+    // what is the best way to hadle it
     Contact instance = queryForResource(params.contactId as Long)
     if (instance == null) {
       notFound()
@@ -731,24 +733,77 @@ There is no single rest standard for paging so we will settle on the following.
 Paging will leverage query parameters as shown in the following example:
 
 ```
-https://localhost:8080/contact/?max=10&offset=1
+https://localhost:8080/contact/?max=10&page=1
 ```
 
 and will result in a wrapped response
 ```
 page: 1,
-total: 100,
-records: 10,
+total: 10,
+records: 100,
 rows:[
   {"id":1,"email":"mscott0@ameblo.jp","firstName":"Marie","lastName":"Scott"},
   {"id":2,"email":"jrodriguez1@scribd.com" ...
 ]
 ```
 
-///////
-TODO finish explanation and test update as the RestDaoController
-should be doing this by deafult for us right and blowing up tests
-///////
+Few words about what this parameters means:
+
+- `page` is the page we are on
+- `total` is the total number of pages based on max per page setting
+- `records` is the total number of records we have
+- `rows` is the list of data
+
+[NOTE]
+====
+Currently you will get next response on index endpoint:
+----
+{
+    "page": 1,
+    "total": 10,
+    "records": 100,
+    "rows":
+    [
+        {
+            "id": 1,
+            "email": "mscott0@ameblo.jp",
+            "firstName": "Marie",
+            "lastName": "Scott"
+        },
+        {
+...
+----
+but if you create a file
+
+.views/contact/_contact.gson
+----
+import groovy.transform.*
+
+@Field Contact contact
+
+json {name contact.firstName}
+----
+The response will be changed to
+----
+"page": 1,
+    "total": 10,
+    "records": 100,
+    "rows":
+    [
+        {
+            "firstName": "Marie"
+        },
+        {
+            "firstName": "Joseph"
+        },
+        {
+            "firstName": "Julie"
+        },{
+....
+----
+====
+
+This happens because index endpoint looks for template for rendering entity.
 
 === Snapshot 3 of tutorial app is at this point
 
