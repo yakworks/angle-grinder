@@ -443,7 +443,7 @@ It is called when we get `404` error, the same as for `gsp` look at UrlMapping: 
 {url-snapshot1}/grails-app/views/errors/_errors.gson
 This is for validation errors. As you can see this is where the `UNPROCESSABLE_ENTITY`(422) status code gets set, and
 error messages for entity specified.
-
+//TODO ad link to the docs
 It is rendered on {src-grails-rest}/src/main/groovy/grails/rest/RestfulController.groovy#L99[see src]
 so if entity has errors it will look for `views/contact/_errors.gson` and if it doesn't exist then `views/errors/_errors.gson`
 
@@ -637,6 +637,8 @@ To add custom end point we need to add nested url for resource and result will b
 
      "/contact"(resources: "contact"){
           delete "/active"(controller: "contact", action: "inactivate")
+          // For future execise add `activate` action that will activate a contact
+          // post "/active"(controller: "contact", action: "activate")
       }
   }
 ----
@@ -810,7 +812,7 @@ import groovy.transform.*
 
 @Field Contact contact
 
-json {name contact.firstName}
+json {firstName contact.firstName}
 ----
 The response will be changed to
 ----
