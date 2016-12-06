@@ -1,6 +1,7 @@
 package resttutorial
 
-import grails.plugin.dao.DomainException
+import static org.springframework.http.HttpStatus.*
+import grails.plugin.dao.DomainNotFoundException
 import grails.plugin.dao.RestDaoController
 
 class ContactController extends RestDaoController {
@@ -14,8 +15,8 @@ class ContactController extends RestDaoController {
     Contact contact
     try {
       contact = dao.inactivate(params.contactId as Long)
-    } catch (DomainException e){
-      respond e.cause
+    } catch (DomainNotFoundException e){
+      render view: "../notFound", model: [message: e.message]
       return
     }
 

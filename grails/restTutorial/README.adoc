@@ -657,20 +657,49 @@ class ContactController extends RestDaoController {
   }
 
   def inactivate() {
-    //TODO we normally take care of all of this in the DAO. Why doing it here?
-    // Josh, if we hadle it in the dao, we will get DomainException, so it would be 500 status, not 404, so not sure
-    // what is the best way to hadle it
-    Contact instance = queryForResource(params.contactId as Long)
-    if (instance == null) {
-      notFound()
-      return
-    }
-    //TODO why are we not try catching like we normally would? What happens on exception?
-    Contact contact = dao.inactivate(params.contactId as Long)
-    respond contact
-  }
+    def inactivate() {
+       Contact contact
+       try {
+         contact = dao.inactivate(params.contactId as Long)
+       } catch (DomainNotFoundException e){
+         request.withFormat {
+           '*'{ render status: NOT_FOUND } // will render `notFound.gson`
+         }
+         return
+       }
+       respond contact
+     }
 }
 ----
+
+So it will show default `404` error, we can customize `notFound.gson` file to make it show not only default `'Not found'`,
+but our message from exception:
+.notFound.gson
+----
+import groovy.transform.Field
+
+response.status 404
+@Field String text
+
+json {
+	message text ?: "Not found"
+	error 404
+}
+----
+
+and in controller
+.ContactController
+----
+...
+try {
+      contact = dao.inactivate(params.contactId as Long)
+    } catch (DomainNotFoundException e){
+      render view: "../notFound", model: [message: e.message]
+      return
+    }
+...
+----
+
 
 [NOTE]
 If you want to be able to call the action by "contact/inactivate/3" the only reason why you can't do this is UrlMapping,
@@ -683,16 +712,16 @@ Add logic to the dao:
 ----
 class ContactDao extends GormDaoSupport {
     ...
-//TODO fix indenting here
-   Contact inactivate(Long id) {
-     //TODO why are we not doing this like we do in the GormDaoSupport.update?
-     //DaoUtil.checkFound(entity,params,domainClass.name) explain that this will throw error that can be trapped in controller for a 404
-     //save(entity)
-       Contact contact = Contact.get(id)
-       contact.inactive = true
-       contact.persist()
-       contact
-     }
+Contact inactivate(Long id) {
+    Contact contact = Contact.get(id)
+
+    DaoUtil.checkFound(contact, [id: id] ,domainClass.name) // Throws DomainNotFoundException
+    DaoUtil.checkVersion(contact , [id: id].version)
+
+    contact.inactive = true
+    contact.persist()
+    contact
+  }
     ....
 }
 ----
@@ -1033,36 +1062,6 @@ Where `ag-grid` - directive that takes parameters from scope and renders grid, a
 to make available from scope.
 
 That's all what we need to display a grid to user.
-
-==== Paging
-
-On current state it works, but without pagination, so we need to modify our REST ContactController to add pagination.
-
-.api/ContactController.groovy
-----
-  @Override
-  def index(){
-    def pageData = new Pager(params)
-    respond pageData.setupData(listAllResources(params)).jsonData
-  }
-
-  @Override
-  protected List listAllResources(Map params) {
-    def crit = resource.createCriteria()
-    def pager = new Pager(params)
-    def datalist = crit.list(max: pager.max, offset: pager.offset) {
-      if (params.sort)
-        order(params.sort, params.order)
-    }
-    return datalist
-  }
-----
-
-`setupData` adds count of entities to list and  `.jsonData` formats output for the JqGrid.
-
-Check how the tests were changed.
-
-And run the app and go to `http://localhost:8080/contact#/`, you should see something like:
 
 image::images/list.png[]
 

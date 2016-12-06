@@ -29,11 +29,12 @@ class ContactSpec extends Specification {
         response.status == 200
         response.json != null
         JSONElement json = response.json
+        def rows = json.rows
         //by default max value is 10 rows
-        json.size() == 10
-        json[0].firstName == "Marie"
-        json[0].lastName == "Scott"
-        json[0].email == "mscott0@ameblo.jp"
+        rows.size() == 10
+        rows[0].firstName == "Marie"
+        rows[0].lastName == "Scott"
+        rows[0].email == "mscott0@ameblo.jp"
     }
 
     void "check GET list request with max parameter"() {
