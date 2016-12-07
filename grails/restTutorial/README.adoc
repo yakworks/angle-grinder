@@ -443,9 +443,11 @@ It is called when we get `404` error, the same as for `gsp` look at UrlMapping: 
 {url-snapshot1}/grails-app/views/errors/_errors.gson
 This is for validation errors. As you can see this is where the `UNPROCESSABLE_ENTITY`(422) status code gets set, and
 error messages for entity specified.
-//TODO ad link to the docs
+
 It is rendered on {src-grails-rest}/src/main/groovy/grails/rest/RestfulController.groovy#L99[see src]
 so if entity has errors it will look for `views/contact/_errors.gson` and if it doesn't exist then `views/errors/_errors.gson`
+
+You can read more about defaults http://views.grails.org/latest/#_content_negotiation[here]
 
 ===== object/_object.gson
 {url-snapshot1}/grails-app/views/object/_object.gson[See source]
@@ -695,7 +697,7 @@ and in controller
 ...
 try {
       contact = dao.inactivate(params.contactId as Long)
-    } catch (DomainNotFoundException e){
+    } catch (Exception e){
       render view: "../notFound", model: [message: e.message]
       return
     }
@@ -859,44 +861,8 @@ with all assets(so you do not need to worry about it), and with Angular code, af
 code from the page. As a result we need to have actions for gsp rendering, and good decision is to isolate our REST Api
 controllers from controllers that will render pages.
 
-=== Namespace
-
-Lets create `api` folder in controllers and move our controller there. Also we need to add namespace for REST endpoints:
-
-.controllers/resttutorial/api/ContactController.groovy
-----
-package resttutorial.api
-
- ...
-
-class ContactController extends RestDaoController {
-  static namespace = "api"
-  ...
-----
-
-and update `UrlMapping.groovy`:
-----
-      "/api/contacts"(resources: "contact", namespace: "api"){
-        "/inactivate"(controller: "contact", action: "inactivate")
-      }
-----
-
-and the last step we need to update tests by adding `/api` to test urls:
-[source,groovy]
-----
-void "check DELETE request"() {
-        when:
-        RestResponse response = rest.delete("http://localhost:${serverPort}/api/contacts/1")
-
-        then:
-        response.status == 204
-    }
-----
-
-Now run tests to be sure that all works fine.
-
 === Gsp rendering
-Now when we moved REST controller to separate folder lets create one for page rendering.
+We have REST controller in the separate folder lets create one for page rendering.
 .ContactController.groovy
 ----
 package resttutorial

@@ -10,7 +10,7 @@ resources.factory("resourceBuilder", [
   "$resource", "pathWithContext", "RestContext", function($resource, pathWithContext, RestContext) {
     return function(basePath, resourceName) {
       if (RestContext.length > 0) {
-        basePath = "/api" + basePath+"s"
+        basePath = "/api" + basePath
       }
       if (resourceName == null) {
         resourceName = basePath.replace(/^(\/+)/, "");

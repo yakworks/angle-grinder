@@ -1,5 +1,9 @@
 package resttutorial
 
+import grails.views.GrailsViewTemplate
+import groovy.text.TemplateEngine
+import org.grails.web.gsp.io.GrailsConventionGroovyPageLocator
+
 import static org.springframework.http.HttpStatus.*
 import grails.plugin.dao.DomainNotFoundException
 import grails.plugin.dao.RestDaoController
@@ -16,12 +20,16 @@ class ContactController extends RestDaoController {
     try {
       contact = dao.inactivate(params.contactId as Long)
     } catch (DomainNotFoundException e){
-      render view: "../notFound", model: [message: e.message]
-      return
+      def errResponse = errorMessageService.buildErrorResponse(e)
+      response.status = errResponse.code
+      request.withFormat {
+        '*' {
+          respond model: [text: e.message], status: errResponse.code
+        }
+      }
     }
 
     respond contact
   }
-
 
 }
