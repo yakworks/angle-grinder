@@ -19,7 +19,7 @@ class ContactSpec extends Specification {
     @Shared
     RestBuilder rest = new RestBuilder()
 
-    def getBaseUrl(){"http://localhost:${serverPort}"}
+    def getBaseUrl(){"http://localhost:${serverPort}/api"}
 
     void "check GET list request without params "() {
         when:
