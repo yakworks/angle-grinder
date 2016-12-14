@@ -22,6 +22,7 @@ apply plugin:"org.grails.plugins.views-json"
 repositories {
     mavenLocal()
     maven { url "https://repo.grails.org/grails/core" }
+    maven { url "http://dl.bintray.com/9ci/plugins" }
 }
 
 dependencyManagement {
@@ -56,7 +57,7 @@ dependencies {
     console "org.grails:grails-console"
     profile "org.grails.profiles:rest-api"
     runtime "com.h2database:h2"
-    compile "org.grails.plugin:dao:2.0.1"
+    compile "org.grails.plugin:dao:2.0.1.SNAPSHOT"
     testCompile "org.grails:grails-plugin-testing"
     testCompile "org.grails.plugins:geb"
     testCompile "org.grails:grails-datastore-rest-client"

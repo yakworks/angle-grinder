@@ -473,9 +473,18 @@ At it core its just a specialized transactional service to deal with CRUD, searc
 The mains goals are to reduce boiler plate in the controller, centralizing transactional domain logic out of the controller,
 make it easier to reuse the crud across the application without the controller and simplify testing.
 
-Add in the dependency for the plugin
+Add in the dependency for the plugin. Currently the Snapshot of the new version is published, so you need to add repository and dependency:
+
 ----
-compile "org.grails.plugin:dao:2.0.1"
+...
+repositories {
+...
+    maven { url "http://dl.bintray.com/9ci/plugins" }
+}
+...
+dependencies {
+...
+compile "org.grails.plugin:dao:2.0.1.SNAPSHOT"
 ----
 
 === RestDaoController
