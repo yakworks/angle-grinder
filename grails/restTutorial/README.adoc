@@ -863,6 +863,7 @@ that Angle-Grinder requires. So finally we should add:
 compile "org.grails:grails-dependencies"
 compile "com.bertramlabs.plugins:asset-pipeline-grails:2.11.1"
 compile "nine:angle-grinder:2.0.0"
+compile 'net.errbuddy.plugins:babel-asset-pipeline:2.1.0'
 ----
 
 To make it easier to understand the next steps lets dive into how Angle-Grinder plugin works. It renders Grails gsp pages
@@ -958,28 +959,28 @@ I've added a styling for header for our page see `views/contact/index.gsp`
 
 === UI
 ==== List
-Now when we have a html template lets create an angular app, and we will start from displaying a list.
+Now when we have a html template lets create an angular app, and we will start from displaying a list. Following new trands
+lets use `es6` we've already included dependency for `babel-asset-pipeline` above.
 
 First we need to create module and add routes for it:
+.grails-app/assets/contact/contactApp.es6
 ----
-angular.module("contactApp", ["angleGrinder"]);
-app.constant('RestContext', 'api');
-angular.module("contactApp").config([
-  "$routeProvider", "ResourceTemplateServ", function($routeProvider, ResourceTemplateServ) {
-    return $routeProvider.when("/", {
-      templateUrl: ResourceTemplateServ("/contact", "list"),
-      controller: "ListCtrl"
-    }).otherwise({
-      redirectTo: "/"
-    });
-  }
-]);
+angular.module("contactApp", ["angleGrinder"])
+  .constant('RestContext', 'api')
+  .controller('ListCtrl', ListCtrl)
+  .config([
+    "RoutesServProvider", function (RoutesServ) {
+      RoutesServ.setRoutes({contact: {"/": {page: "list"}}});
+    }
+  ]);
 ----
 
 `ResourceTemplateServ` - service provided by Ag-Grinder that creates path for template.
 
 `app.constant('RestContext', 'api');` - currently AG-Grinder supports 2 ways of building requests for resources (REST and
 with actions) and to make it use REST approach we need to specify the namespace for it.
+
+`RoutesServ.setRoutes({contact: {"/": {page: "list"}}})` is service that will create routes for us
 
 We need to update our `contact/index.gsp` to make it "see" our angular app:
 ----
@@ -995,37 +996,41 @@ We need to update our `contact/index.gsp` to make it "see" our angular app:
 The next step is to create an angular controller for list:
 .assets/javascript/contact/ListCtrl.js
 ----
-var ListCtrl = (function() {
-  ListCtrl.$inject = ["$scope", "Resource"];
+class ListCtrl {
+  constructor($scope, Resource, DialogCrudCtrlMixin, pathWithContext,RoutesServ) {
+    var colModel = [
+      {
+        name: "id",
+        label: "ID"
+      }, ...
+    ];
 
-  function ListCtrl($scope, Resource) {
     $scope.gridOptions = {
-      path: "/api/contacts", //path to REST endpoint
-      colModel: colModel(), // Configuration for grid rows
-      sortname: "id",       // default sort field
-      sortorder: "asc",     // default sort order
-      rowNum: 5,            // default number of rows to show
-      rowList: [5, 10, 20, 100]  // list of values for select number of rows to show
+      path: "/api/contact",
+      colModel: colModel,
+      multiselect: true,
+      shrinkToFit: true,
+      sortname: "id",
+      sortorder: "asc",
+      rowNum: 5,
+      rowList: [5, 10, 20, 100]
+    };
+
+    DialogCrudCtrlMixin($scope, {
+      Resource: Resource,
+      gridName: "contactGrid",
+      templateUrl: pathWithContext("contact/form")
+    });
+
+    $scope.save = (contact) => {
+      contact.save().then(function (resp) {
+        console.log(resp);
+      })
     };
   }
-  // returns list of objects for grid columns
-  var colModel = function() {
-    return [
-      {
-        name: "id", // name of the property from incoming JSON, to show value from
-        label: "ID" // column name that will be displayed to user
-      }, {
-        name: "firstName",
-        label: "Name"
-      }
-    ];
-  };
+}
+ListCtrl.$inject = ['$scope', 'Resource', 'DialogCrudCtrlMixin', 'pathWithContext',  "RoutesServ"];
 
-  return ListCtrl;
-
-})();
-
-angular.module("contactApp").controller("ListCtrl", ListCtrl);
 ----
 
 Then lets create a list template:
