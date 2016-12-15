@@ -58,6 +58,7 @@ dependencies {
     compile "org.grails.plugins:views-json-templates"
     compile "com.bertramlabs.plugins:asset-pipeline-grails:2.11.2"
     compile "nine:angle-grinder:2.0.0"
+    compile 'net.errbuddy.plugins:babel-asset-pipeline:2.1.0'
     console "org.grails:grails-console"
     profile "org.grails.profiles:rest-api"
     runtime "com.h2database:h2"

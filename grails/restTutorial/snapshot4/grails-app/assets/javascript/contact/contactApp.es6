@@ -1,6 +1,7 @@
-angular.module("contactApp", ["angleGrinder"]);
-app.constant('RestContext', 'api');
-angular.module("contactApp").config([
+angular.module("contactApp", ["angleGrinder"])
+.constant('RestContext', 'api')
+.controller('ListCtrl', ListCtrl)
+.config([
   "$routeProvider", "ResourceTemplateServ", function($routeProvider, ResourceTemplateServ) {
     return $routeProvider.when("/", {
       templateUrl: ResourceTemplateServ("/contact", "list"),

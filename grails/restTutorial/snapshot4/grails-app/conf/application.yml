@@ -38,20 +38,20 @@ grails:
         types:
             json:
               - application/json
-              - text/json   
+              - text/json
             hal:
               - application/hal+json
-              - application/hal+xml  
+              - application/hal+xml
             xml:
               - text/xml
-              - application/xml                                 
+              - application/xml
             atom: application/atom+xml
             css: text/css
             csv: text/csv
             js: text/javascript
             rss: application/rss+xml
             text: text/plain
-            all: '*/*'            
+            all: '*/*'
     urlmapping:
         cache:
             maxsize: 1000
@@ -106,3 +106,10 @@ environments:
                 testOnReturn: false
                 jdbcInterceptors: ConnectionState
                 defaultTransactionIsolation: 2 # TRANSACTION_READ_COMMITTED
+---
+grails:
+    assets:
+        babel:
+            enabled: true,
+            processor: 'direct'
+            processJsFiles: false
