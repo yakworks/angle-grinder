@@ -8,6 +8,7 @@
 :docs-grails: http://docs.grails.org/latest/guide
 :docs-grails-ws: http://docs.grails.org/latest/guide/webServices.html
 :src-grails-rest: https://github.com/grails/grails-core/blob/master/grails-plugin-rest
+:url-snapshot5: https://github.com/9ci/angle-grinder/blob/rest_tutorial/grails/restTutorial/snapshot5
 
 == Getting started
 
@@ -994,7 +995,7 @@ We need to update our `contact/index.gsp` to make it "see" our angular app:
 ----
 
 The next step is to create an angular controller for list:
-.assets/javascript/contact/ListCtrl.js
+.assets/javascript/contact/ListCtrl.es6
 ----
 class ListCtrl {
   constructor($scope, Resource, DialogCrudCtrlMixin, pathWithContext,RoutesServ) {
@@ -1052,7 +1053,7 @@ image::images/list.png[]
 As I mentioned above Ag-Grinder has a lot of handy tools, one of the is `DialogCrudCtrlMixin` which adds CRUD actions for
 the grid:
 
-.assets/javascript/contact/ListCtrl.js
+.assets/javascript/contact/ListCtrl.es6
 ----
 var ListCtrl = (function() {
   ListCtrl.$inject = ["$scope", "Resource", "DialogCrudCtrlMixin"];
@@ -1175,8 +1176,10 @@ that we need to change is to change labels for form modal window:
 ...
 ----
 
+=== Snapshot 3 of tutorial app is at this point
+=== Add more field types
 
-Add fields to domain so we can show more of the widgets in angle-grinder
+So now lets add some more fields for our domain to take a look on some other widgets of Angle-Grinder
 
 ```groovy
 import java.time.*
@@ -1186,12 +1189,6 @@ class Contact {
   String firstName
   String lastName
   String email
-
-  String street
-  String city
-  String state
-  String postalCode
-  String country
 
   LocalDate dateOfBirth
   TimeZone timeZone
@@ -1216,12 +1213,45 @@ class Contact {
 }
 ```
 
-=== customize the searching
+As you can see we have java 8 date types here. Due to the fact that Hibernate5 supports the new date types lets update
+our dependencies, also see section about java8 in http://docs.grails.org/latest/guide/single.html#otherNovelties[docs]:
 
-=== Add Contacts
-. now add in your examples with Contacts instead of Location
-. create tests
-. create UI
+.build.gradle
+----
+...
+   classpath "org.grails.plugins:hibernate5:6.0.0"
+   classpath "com.bertramlabs.plugins:asset-pipeline-gradle:2.11.2"
+   classpath "org.grails.plugins:views-gradle:1.2.0.M1"
+   classpath "org.grails.plugins:grails-java8:1.1.0"
+
+...
+
+   compile "org.grails.plugins:hibernate5"
+   compile "org.hibernate:hibernate-core:5.1.1.Final"
+   compile "org.hibernate:hibernate-ehcache:5.1.1.Final"
+   compile "org.grails.plugins:grails-java8:1.1.0.BUILD-SNAPSHOT"
+   compile "org.hibernate:hibernate-java8:5.1.1.Final"
+   compile "org.grails.plugins:views-json:1.2.0.M1"
+   compile "org.grails.plugins:views-json-templates:1.2.0.M1"
+----
+
+To make it parse string date we need to add list of the available date formats:
+.application.groovy
+----
+grails.databinding.dateFormats = ["yyyy-MM-dd'T'HH:mm:ss'Z'", "yyyy-MM-dd'T'HH:mm:ss.S'Z'","yyyy-MM-dd'T'HH:mm:ss","yyyy-MM-dd"]
+----
+
+Dao plugin contains several converters for java 8 dates for GSON templates, https://github.com/9ci/grails-dao/tree/grails3/dao-plugin/src/main/groovy/grails/plugin/dao/converters[see sources]
+
+And now we need to update some fields to our form: {url-snapshot5}/grails-app/views/contact/_form.gsp
+
+image::images/form.png[]
+
+=== Add Location
+
+=== Add filters for grid
+
+=== Add tests(GEB)
 
 == Spring Security
 
