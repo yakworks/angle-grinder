@@ -10,7 +10,7 @@ buildscript {
     }
 }
 
-version "2.0.0"
+version "2.0.0.SNAPSHOT"
 group "nine"
 
 apply plugin:"eclipse"
@@ -78,6 +78,10 @@ grailsPublish {
     title = 'Angle Grinder'
     userOrg = '9ci' //the Org to publish this under in
     repo = 'grails-plugins' //the repository you setup in bintray
+    bintray {
+      //override plugin only if it is snapshot
+      override = rootProject.version.endsWith("SNAPSHOT")
+    }
     //user = 'user' <- pulled from either BINTRAY_USER sys prop or project.bintrayUser which can be in ~/.gradle/gradle.properties
     //key = 'key' <- pulled from either BINTRAY_KEY sys prop or project.bintrayKey which can be in ~/.gradle/gradle.properties
 }

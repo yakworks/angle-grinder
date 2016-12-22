@@ -1,9 +1,0 @@
-import groovy.transform.Field
-
-response.status 404
-@Field String text
-
-json {
-	message text?: "Not found"
-	error 404
-}

@@ -2,6 +2,7 @@ describe "module:angleGrinder.gridz controller: gridCrudCtrl", ->
 
   beforeEach module "angleGrinder.gridz", ($provide) ->
     $provide.decorator "resourceBuilder", ($delegate) -> sinon.spy($delegate)
+    $provide.value "RestContext", ""
     return
 
   directiveScope = null
