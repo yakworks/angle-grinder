@@ -23,7 +23,7 @@ apply plugin:"org.grails.plugins.views-json"
 repositories {
     mavenLocal()
     maven { url "https://repo.grails.org/grails/core" }
-    maven { url "http://dl.bintray.com/9ci/plugins" }
+    maven { url "http://dl.bintray.com/9ci/grails-plugins" }
 }
 
 dependencyManagement {
