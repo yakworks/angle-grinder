@@ -8,6 +8,7 @@ import java.time.LocalDateTime
 
 
 class Contact {
+  static hasOne = [address: Address]
   Salutations salutation
   String firstName
   String lastName
@@ -19,10 +20,12 @@ class Contact {
 
   Date dateCreated
   Date lastUpdated
+  Boolean inactive
 
   static constraints = {
     firstName nullable: false
     dateOfBirth nullable: true
+    inactive bindable:false
   }
 
   enum Salutations {

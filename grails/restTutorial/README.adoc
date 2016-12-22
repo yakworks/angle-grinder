@@ -1249,6 +1249,138 @@ image::images/form.png[]
 
 === Add Location
 
+Lets add one more domain to our project.
+.Address.groovy
+----
+package resttutorial
+
+import grails.rest.Resource
+
+@Resource(uri = '/address', namespace = "/api", formats = ["json"])
+class Address {
+  static belongsTo = [contact: Contact]
+      String street
+      String city
+      String state
+      String postalCode
+      String country
+
+      static constraints = {
+          street nullable: false
+      }
+}
+----
+
+To Contact we will add:
+.Contact.groovy
+----
+...
+ static hasOne = [address: Address]
+...
+----
+
+Also, we need to modify UrlMapping to be able to get address as nested resource:
+.UrlMapping.groovy
+----
+"/api/contact"(resources: "contact", namespace: "api"){
+  "/address"(resources: "address")
+  delete "/active"(controller: "contact", action: "inactivate")
+ }
+"/api/address"(resources: "address", namespace: "api")
+----
+
+lets take a look on `url-mappings-report `:
+
+----
+|    *     | ERROR: 404                                        | View:   /notFound            |
+ |    *     | ERROR: 500                                        | View:   /error               |
+ |    *     | ERROR: 500                                        | View:   /error               |
+ |    *     | /                                                 | View:   /index               |
+ |   POST   | /api/${controller}(.${format)?                    | Action: save                 |
+ |   GET    | /api/${controller}(.${format)?                    | Action: index                |
+ |  PATCH   | /api/${controller}/${id}(.${format)?              | Action: patch                |
+ |   PUT    | /api/${controller}/${id}(.${format)?              | Action: update               |
+ |   GET    | /api/${controller}/${id}(.${format)?              | Action: show                 |
+ |  DELETE  | /api/${controller}/${id}(.${format)?              | Action: delete               |
+ |    *     | /${controller}/${action}?/${id}?                  | Action: (default action)     |
+
+Controller: address
+ |   GET    | /api/address/create                               | Action: create               |
+ |   GET    | /api/contact/${contactId}/address/create          | Action: create               |
+ |   GET    | /api/contact/${contactId}/address/${id}/edit      | Action: edit                 |
+ |   POST   | /api/contact/${contactId}/address                 | Action: save                 |
+ |   GET    | /api/contact/${contactId}/address                 | Action: index                |
+ |   GET    | /api/address/${id}/edit                           | Action: edit                 |
+ |  DELETE  | /api/contact/${contactId}/address/${id}           | Action: delete               |
+ |  PATCH   | /api/contact/${contactId}/address/${id}           | Action: patch                |
+ |   PUT    | /api/contact/${contactId}/address/${id}           | Action: update               |
+ |   GET    | /api/contact/${contactId}/address/${id}           | Action: show                 |
+ |   POST   | /api/address                                      | Action: save                 |
+ |   GET    | /api/address                                      | Action: index                |
+ |  DELETE  | /api/address/${id}                                | Action: delete               |
+ |  PATCH   | /api/address/${id}                                | Action: patch                |
+ |   PUT    | /api/address/${id}                                | Action: update               |
+ |   GET    | /api/address/${id}                                | Action: show                 |
+
+Controller: contact
+ |   GET    | /api/contact/create                               | Action: create               |
+ |   GET    | /api/contact/${id}/edit                           | Action: edit                 |
+ |  DELETE  | /api/contact/${contactId}/active                  | Action: inactivate           |
+ |   POST   | /api/contact                                      | Action: save                 |
+ |   GET    | /api/contact                                      | Action: index                |
+ |  DELETE  | /api/contact/${id}                                | Action: delete               |
+ |  PATCH   | /api/contact/${id}                                | Action: patch                |
+ |   PUT    | /api/contact/${id}                                | Action: update               |
+ |   GET    | /api/contact/${id}                                | Action: show                 |
+----
+
+As you can see we can get address by 2 ways:
+
+ - `/api/adress`
+ - `/api/contact/${contactId}/address`
+
+But on `/api/contact/1/address` we wont get the adress that is related to contact with id = 1, but a list of all addresses,
+to make more smart we need to implement AddressController:
+
+.AddressController.groovy
+----
+package resttutorial.api
+
+import grails.plugin.dao.Pager
+import grails.plugin.dao.RestDaoController
+import resttutorial.Address
+
+class AddressController extends RestDaoController {
+  static responseFormats = ['json']
+  static namespace = "api"
+
+	AddressController() {
+    super(Address)
+  }
+
+  @Override
+  protected List<Address> listAllResources(Map params) {
+    def crit = Address.createCriteria()
+    def pager = new Pager(params)
+    def datalist = crit.list(max: pager.max, offset: pager.offset) {
+      if(params.contactId){
+          eq "contact.id", (params.contactId as Long)
+      }
+      if (params.sort)
+        order(params.sort, params.order)
+    }
+    return datalist
+  }
+}
+----
+
+the `listAllResources` method is called by `index` action (see https://github.com/9ci/grails-dao/blob/grails3/dao-plugin/grails-app/controllers/grails.plugin.dao/RestDaoController.groovy[RestDaoController])
+and if `contactId` is in params it will limit list by addresses just for this contact.
+
+Lets add some test. You can see them in `snapshot5` folder.
+
+
+
 === Add filters for grid
 
 === Add tests(GEB)

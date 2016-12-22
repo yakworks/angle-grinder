@@ -8,7 +8,7 @@ import spock.lang.Shared
 import spock.lang.Specification
 
 @Integration
-class ContactSpec extends Specification {
+class ContactControllerSpec extends Specification {
 
     def setup() {
     }
@@ -139,5 +139,21 @@ class ContactSpec extends Specification {
         response.json != null
         JSONElement json = response.json
         json.inactive == true
+    }
+
+    void "check GET Address by contact"() {
+        when: "list endpoint with max param"
+        RestResponse response = rest.get("${baseUrl}/contact/3/address")
+
+        then:
+        response.status == 200
+        response.json != null
+        println(response.json)
+        JSONElement json = response.json.rows
+        json.size() == 1
+        json[0].city == "Houston"
+        json[0].country == "US"
+        json[0].postalCode == "77255"
+        json[0].street == "5105 Valley Edge Place"
     }
 }

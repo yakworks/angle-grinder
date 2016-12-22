@@ -16,7 +16,9 @@ class UrlMappings {
         "404"(view: '/notFound')
 
       "/api/contact"(resources: "contact", namespace: "api"){
+        "/address"(resources: "address")
         delete "/active"(controller: "contact", action: "inactivate")
       }
+      "/api/address"(resources: "address", namespace: "api")
     }
 }

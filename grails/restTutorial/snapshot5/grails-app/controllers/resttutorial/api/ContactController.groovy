@@ -16,4 +16,15 @@ class ContactController extends RestDaoController {
     Contact contact = dao.inactivate(params.contactId as Long)
     respond contact
   }
+
+  @Override
+  protected List<Contact> listAllResources(Map params) {
+    def crit = Contact.createCriteria()
+    def pager = new Pager(params)
+    def datalist = crit.list(max: pager.max, offset: pager.offset) {
+      if (params.sort)
+        order(params.sort, params.order)
+    }
+    return datalist
+  }
 }
