@@ -1379,11 +1379,88 @@ and if `contactId` is in params it will limit list by addresses just for this co
 
 Lets add some test. You can see them in `snapshot5` folder.
 
+=== Add tests(GEB)
 
+After we've added integration test, lets add some function tests to be sure that our app works.
+For testing we'll use Geb. Please, take a look at https://github.com/basejump/grails3-geb-example[example] to understand
+how you can configure and use ged tests.
+
+Our tests we will place in `geb` folder.
+
+The test should have a `@Rollback` anotation, from Grails docs:
+
+[NOTE]
+In Grails 3.0 tests rely on grails.transaction.Rollback annotation to bind the session in integration tests.
+
+.ContactGebSpec.groovy
+----
+package geb
+
+import geb.spock.GebSpec
+import grails.test.mixin.integration.Integration
+import grails.transaction.Rollback
+import resttutorial.Contact
+
+@Integration
+@Rollback
+class ContactGebSpec extends GebSpec {
+
+	void "Check contact page"() {
+		when: "The contact page is visited"
+		go '/contact'
+
+		then: "The title is correct"
+		title == "Welcome to Tutorial"
+		then: "Contact list label"
+		$("h3").text() == 'Contact list'
+	}
+}
+----
+
+In this test we open contact page with our grid - `go '/contact'` and check page title and grid label.
+Access to the elements is provided in jQuery-like language, that makes accessing the elements very easy. You can see it
+in `$("h3").text() == 'Contact list'`
+
+As a next step lets add tests for contact editing:
+
+.ContactGebSpec.groovy
+----
+void "Check edit contact"() {
+		when: "The home page is visited"
+		go '/contact'
+		def lastRow = $(".jqgrow.ui-row-ltr")[-1]
+		lastRow.find(".jqg-row-action").click()
+		sleep(1000)
+		$(".row_action_edit").click()
+
+		then: "Dialog is opened"
+    sleep(5000)
+		$("form") != null
+		$("form").firstName == "Susan"
+		$("form").lastName == "Duncan"
+		$("form").email == "sduncan4@diigo.com"
+		$("form").salutation == "Rev"
+		when: "Changed values and save"
+		$("form").firstName = "Dr. Who"
+		$("[type='submit']").click()
+		sleep(5000)
+		then: "Contact list label"
+		Contact contact = Contact.get(5)
+		contact.firstName == "Dr. Who"
+	}
+----
+
+Some explanation for the test:
+`.jqgrow.ui-row-ltr` - css class that each grid row has, so when we execute $(".jqgrow.ui-row-ltr") we get list of all
+grid rows, so $(".jqgrow.ui-row-ltr")[-1] will take the last of displayed rows.
+`.jqg-row-action` is css class for action button(gear), after we click on it we need to wait for a while(`sleep(1000)`),
+to give some time for JS to show menu, and then "click" on edit button $(".row_action_edit").click()
+For form we can get values just by name property: `$("form").firstName == "Susan"`
+And the last step is to check form saving.
+
+You can find some more tests in snapshot5.
 
 === Add filters for grid
-
-=== Add tests(GEB)
 
 == Spring Security
 
