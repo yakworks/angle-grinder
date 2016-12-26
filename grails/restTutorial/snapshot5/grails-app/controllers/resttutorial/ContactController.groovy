@@ -10,4 +10,8 @@ class ContactController {
     def form() {
         render template: "form"
     }
+
+    def searchForm(){
+        render template: "searchForm"
+    }
 }

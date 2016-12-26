@@ -16,6 +16,7 @@ class ContactGebSpec extends GebSpec {
 		then: "The title is correct"
 		title == "Welcome to Tutorial"
 		then: "Contact list label"
+		sleep(1000)
 		$("h3").text() == 'Contact list'
 	}
 
@@ -40,6 +41,23 @@ class ContactGebSpec extends GebSpec {
 
   }
 
+  void "Check grid filtering"() {
+    when: "The home page is visited"
+    go '/contact'
+    def searchForm = $("form.ag-search-form")
+    searchForm.filtersFirstName = "Jos"
+    searchForm.find("[type='submit']").click()
+
+    then: "Should be 1 row after filtering"
+    $(".jqgrow.ui-row-ltr").size() == 1 // just one row in grid
+
+    when: "Reset filtering"
+    $("[ng-click='resetSearch(filters)']").click()
+    then: "Should be 5 rows"
+    $(".jqgrow.ui-row-ltr").size() == 5
+
+  }
+
 	void "Check edit contact"() {
 		when: "The home page is visited"
 		go '/contact'
@@ -50,14 +68,14 @@ class ContactGebSpec extends GebSpec {
 
 		then: "Dialog is opened"
         sleep(5000)
-		$("form") != null
-		$("form").firstName == "Susan"
-		$("form").lastName == "Duncan"
-		$("form").email == "sduncan4@diigo.com"
-		$("form").salutation == "Rev"
+		$(".modal-dialog form") != null
+		$(".modal-dialog form").firstName == "Susan"
+		$(".modal-dialog form").lastName == "Duncan"
+		$(".modal-dialog form").email == "sduncan4@diigo.com"
+		$(".modal-dialog form").salutation == "Rev"
 		when: "Changed values and save"
-		$("form").firstName = "Dr. Who"
-		$("[type='submit']").click()
+		$(".modal-dialog form").firstName = "Dr. Who"
+		$(".modal-dialog [type='submit']").click()
 		sleep(5000)
 		then: "Contact list label"
 		Contact contact = Contact.get(5)
@@ -71,11 +89,11 @@ class ContactGebSpec extends GebSpec {
 		sleep(5000)
 
 		then: "Dialog is opened"
-		$("form") != null
+		$(".modal-dialog form") != null
 		when: "fill the form"
-		$("form").firstName = "Joe"
-		$("form").lastName = "Doe"
-		$("[type='submit']").click()
+		$(".modal-dialog form").firstName = "Joe"
+		$(".modal-dialog form").lastName = "Doe"
+		$(".modal-dialog [type='submit']").click()
 		sleep(5000)
 		then: "Contact list label"
 		Contact contact = Contact.last()

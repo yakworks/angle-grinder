@@ -1434,15 +1434,15 @@ void "Check edit contact"() {
 		$(".row_action_edit").click()
 
 		then: "Dialog is opened"
-    sleep(5000)
-		$("form") != null
-		$("form").firstName == "Susan"
-		$("form").lastName == "Duncan"
-		$("form").email == "sduncan4@diigo.com"
-		$("form").salutation == "Rev"
+        sleep(5000)
+		$(".modal-dialog form") != null
+		$(".modal-dialog form").firstName == "Susan"
+		$(".modal-dialog form").lastName == "Duncan"
+		$(".modal-dialog form").email == "sduncan4@diigo.com"
+		$(".modal-dialog form").salutation == "Rev"
 		when: "Changed values and save"
-		$("form").firstName = "Dr. Who"
-		$("[type='submit']").click()
+		$(".modal-dialog form").firstName = "Dr. Who"
+		$(".modal-dialog [type='submit']").click()
 		sleep(5000)
 		then: "Contact list label"
 		Contact contact = Contact.get(5)
@@ -1461,6 +1461,128 @@ And the last step is to check form saving.
 You can find some more tests in snapshot5.
 
 === Add filters for grid
+
+For now all looks good, but what if we have big amount of data in grid then we need to add ability to filter it.
+Lets add filter for our grid:
+
+First we need to create a template for our search form:
+
+.views/contact/_searchForm.gsp
+----
+<form ag-search-form="contactGrid" class="form-horizontal form-multi-column no-margin ag-search-form">
+
+	<div class="col-md-4">
+		<div class="control-group">
+			<label class="control-label">Name</label>
+
+			<div class="controls">
+				<input class="input-block-level" type="text" ng-model="filters.firstName">
+			</div>
+		</div>
+	</div>
+
+	<div class="col-md-4">
+		<div class="control-group">
+			<label class="control-label">Email</label>
+
+			<div class="controls">
+				<input class="input-block-level" type="text" ng-model="filters.email">
+			</div>
+		</div>
+	</div>
+
+	<div class="pull-right">
+		<ag-search-button></ag-search-button>
+		<ag-reset-search-button></ag-reset-search-button>
+	</div>
+</form>
+----
+
+The Ag-Grinder has handy directives for search forms:
+
+ - `ag-search-form` you need to specify name of the grid that search form is related to and it will add action for search
+ - `ag-search-button` triggers grid filtering
+ - `ag-reset-search-button` clears search fields and reload grid to show it without filtering
+
+Now we need to add action for form rendering:
+.controllers/ContaсtController.groovy
+----
+...
+    def searchForm(){
+        render template: "searchForm"
+    }
+...
+----
+
+To make it show we need to modify the list template:
+
+.views/_list.gsp
+----
+<h3 class="page-header">Contact list</h3>
+
+<div class="well">
+  <g:include action="searchForm"/>
+</div>
+
+...
+----
+
+as a result we will get something like this:
+
+image::images/searchForm.png[]
+
+We don't need to make any changes to our JS code, Ag-Grinder directives will send filter data, we just need to update
+`api/ContactController`:
+
+.controllers/api/ContactController.groovy
+----
+ @Override
+  protected List<Contact> listAllResources(Map params) {
+    def crit = Contact.createCriteria()
+    def pager = new Pager(params)
+    def filters = params.filters ? JSON.parse(params.filters) : null
+    def datalist = crit.list(max: pager.max, offset: pager.offset) {
+      if (filters) {
+        if (filters.firstName){
+          ilike "firstName", filters.firstName + "%"
+        }
+        if (filters.email){
+          ilike "email", filters.email + "%"
+        }
+      }
+      if (params.sort)
+        order(params.sort, params.order)
+    }
+    return datalist
+  }
+----
+
+And now lets add a Geb test for it:
+
+.ContactGebSpec.groovy
+----
+...
+
+void "Check grid filtering"() {
+    when: "The home page is visited"
+    go '/contact'
+    def searchForm = $("form.ag-search-form")
+    searchForm.filtersFirstName = "Jos"
+    searchForm.find("[type='submit']").click()
+
+    then: "Should be 1 row after filtering"
+    $(".jqgrow.ui-row-ltr").size() == 1 // just one row in grid
+
+    when: "Reset filtering"
+    $("[ng-click='resetSearch(filters)']").click()
+    then: "Should be 5 rows"
+    $(".jqgrow.ui-row-ltr").size() == 5
+  }
+
+  ...
+----
+
+=== Snapshot 5 of tutorial app is at this point
 
 == Spring Security
 
