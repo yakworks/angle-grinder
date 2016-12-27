@@ -47,12 +47,14 @@ class ContactGebSpec extends GebSpec {
     def searchForm = $("form.ag-search-form")
     searchForm.filtersFirstName = "Jos"
     searchForm.find("[type='submit']").click()
+    sleep(1000)
 
     then: "Should be 1 row after filtering"
     $(".jqgrow.ui-row-ltr").size() == 1 // just one row in grid
 
     when: "Reset filtering"
     $("[ng-click='resetSearch(filters)']").click()
+	sleep(1000)
     then: "Should be 5 rows"
     $(".jqgrow.ui-row-ltr").size() == 5
 

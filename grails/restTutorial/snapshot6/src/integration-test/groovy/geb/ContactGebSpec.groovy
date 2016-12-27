@@ -41,22 +41,24 @@ class ContactGebSpec extends GebSpec {
 
   }
 
-  void "Check grid filtering"() {
-    when: "The home page is visited"
-    go '/contact'
-    def searchForm = $("form.ag-search-form")
-    searchForm.filtersFirstName = "Jos"
-    searchForm.find("[type='submit']").click()
+	void "Check grid filtering"() {
+		when: "The home page is visited"
+		go '/contact'
+		def searchForm = $("form.ag-search-form")
+		searchForm.filtersFirstName = "Jos"
+		searchForm.find("[type='submit']").click()
+		sleep(1000)
 
-    then: "Should be 1 row after filtering"
-    $(".jqgrow.ui-row-ltr").size() == 1 // just one row in grid
+		then: "Should be 1 row after filtering"
+		$(".jqgrow.ui-row-ltr").size() == 1 // just one row in grid
 
-    when: "Reset filtering"
-    $("[ng-click='resetSearch(filters)']").click()
-    then: "Should be 5 rows"
-    $(".jqgrow.ui-row-ltr").size() == 5
+		when: "Reset filtering"
+		$("[ng-click='resetSearch(filters)']").click()
+		sleep(1000)
+		then: "Should be 5 rows"
+		$(".jqgrow.ui-row-ltr").size() == 5
 
-  }
+	}
 
 	void "Check edit contact"() {
 		when: "The home page is visited"

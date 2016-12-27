@@ -11,6 +11,9 @@ class BootStrap {
       Contact contact = new resttutorial.Contact(it)
       contact.save(failOnError:true, flush: true)
     }
+    Role admin = new Role("ROLE_ADMIN").save()
+    User user = new User("user", "pass").save()
+    UserRole.create(user, admin, true)
   }
   def destroy = {
   }

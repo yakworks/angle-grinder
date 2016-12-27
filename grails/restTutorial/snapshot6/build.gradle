@@ -63,6 +63,7 @@ dependencies {
     compile "nine:angle-grinder:2.0.0.SNAPSHOT"
     compile 'net.errbuddy.plugins:babel-asset-pipeline:2.1.0'
     console "org.grails:grails-console"
+    compile "org.grails.plugins:spring-security-rest:2.0.0.M2"
     profile "org.grails.profiles:rest-api"
     runtime "com.h2database:h2"
     compile "org.grails.plugin:dao:2.0.1.SNAPSHOT"

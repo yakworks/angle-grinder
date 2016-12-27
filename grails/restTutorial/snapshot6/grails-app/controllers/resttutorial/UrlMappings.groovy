@@ -14,6 +14,7 @@ class UrlMappings {
 
         "500"(view: '/error')
         "404"(view: '/notFound')
+      "/" (controller: "contact")
 
       "/api/contact"(resources: "contact", namespace: "api"){
         "/address"(resources: "address")

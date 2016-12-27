@@ -1,4 +1,4 @@
-angular.module("contactApp", ["angleGrinder"])
+angular.module("tutorial")
   .constant('RestContext', 'api')
   .controller('ListCtrl', ListCtrl)
   .config([

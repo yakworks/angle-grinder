@@ -10,20 +10,30 @@ import spock.lang.Specification
 @Integration
 class AddressControllerSpec extends Specification {
 
+    @Shared
+    RestBuilder rest = new RestBuilder()
+
+    def getBaseUrl() { "http://localhost:${serverPort}/api" }
+
+    String token
     def setup() {
+        RestResponse response = rest.post(baseUrl + "/login") {
+            json([
+                    "username": "user",
+                    "password": "pass"
+            ])
+        }
+        token = "Bearer " +response.json.access_token
     }
 
     def cleanup() {
     }
 
-    @Shared
-    RestBuilder rest = new RestBuilder()
-
-    def getBaseUrl(){"http://localhost:${serverPort}/api"}
-
     void "check GET list request without params "() {
         when:
-        RestResponse response = rest.get("${baseUrl}/address")
+        RestResponse response = rest.get("${baseUrl}/address"){
+            headers["Authorization"] = token
+        }
 
         then:
         response.status == 200
@@ -39,7 +49,9 @@ class AddressControllerSpec extends Specification {
 
     void "check GET list request with max parameter"() {
         when: "list endpoint with max param"
-        RestResponse response = rest.get("${baseUrl}/address?max=20")
+        RestResponse response = rest.get("${baseUrl}/address?max=20"){
+            headers["Authorization"] = token
+        }
 
         then:
         response.status == 200
@@ -54,7 +66,9 @@ class AddressControllerSpec extends Specification {
 
     void "check GET by id"() {
         when:
-        RestResponse response = rest.get("${baseUrl}/address/1")
+        RestResponse response = rest.get("${baseUrl}/address/1"){
+            headers["Authorization"] = token
+        }
 
         then:
         response.status == 200
@@ -70,6 +84,7 @@ class AddressControllerSpec extends Specification {
     void "check POST request"() {
         when:
         RestResponse response = rest.post("${baseUrl}/address") {
+            headers["Authorization"] = token
             json([
                     street: "Test street",
                     "city": "Chicago",
@@ -89,6 +104,7 @@ class AddressControllerSpec extends Specification {
     void "check PUT request"() {
         when:
         RestResponse response = rest.put("${baseUrl}/address/101"){
+            headers["Authorization"] = token
             json([
                     street: "Test street2"
             ])

@@ -2,8 +2,10 @@ package resttutorial.api
 
 import grails.plugin.dao.Pager
 import grails.plugin.dao.RestDaoController
+import grails.plugin.springsecurity.annotation.Secured
 import resttutorial.Address
 
+@Secured(['ROLE_ADMIN'])
 class AddressController extends RestDaoController {
   static responseFormats = ['json']
   static namespace = "api"

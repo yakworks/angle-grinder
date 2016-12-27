@@ -1421,6 +1421,8 @@ In this test we open contact page with our grid - `go '/contact'` and check page
 Access to the elements is provided in jQuery-like language, that makes accessing the elements very easy. You can see it
 in `$("h3").text() == 'Contact list'`
 
+Try to run tests with `grails test-app -Dgeb.env=chrome`
+
 As a next step lets add tests for contact editing:
 
 .ContactGebSpec.groovy
@@ -1434,7 +1436,7 @@ void "Check edit contact"() {
 		$(".row_action_edit").click()
 
 		then: "Dialog is opened"
-        sleep(5000)
+    sleep(5000)
 		$(".modal-dialog form") != null
 		$(".modal-dialog form").firstName == "Susan"
 		$(".modal-dialog form").lastName == "Duncan"
@@ -1586,12 +1588,260 @@ void "Check grid filtering"() {
 
 == Spring Security
 
-Based on this excellent tutorial http://alvarosanchez.github.io/grails-angularjs-springsecurity-workshop/
-we can do it like x
+There is an excellent tutorial that we will take as a starting point for adding Spring Security to our app, see theoretical
+http://alvarosanchez.github.io/grails-angularjs-springsecurity-workshop/#_adding_security_with_spring_security_rest_50_minutes[part]
+and how we can add spring security to our Grails backend http://alvarosanchez.github.io/grails-angularjs-springsecurity-workshop/#_securing_the_rest_api_20_minutes.
+
+A user name and a password we will take from the tutorial not to make it confusing.
 
 === Adding simple login screen
 
-==== our CRUD screens should still work and be scured now
+After we've passed through the first two steps from the previous tutorial the Grails part is already configured for spring
+security. And now we need to add login screen. Deu to the fact that we are using Ag-Grinder we will take a bit another
+approach for login implementation.
+
+To be able to login on one page and stay logged in for all others we should have one main angular module that will handle it.
+For this we need to move common parts of pages to layout:
+
+.views/layouts/main.gsp
+----
+<!doctype html>
+<html>
+<head>
+	<meta name="layout" content="main"/>
+	<title>Welcome to Tutorial</title>
+	<asset:stylesheet href="application.css"/>
+	<asset:javascript src="application.js"/>
+</head>
+
+<body context-path="${request.contextPath}"
+      data-resource-name="${pageProperty(name: 'body.data-resource-name')}"
+      data-resource-path="${pageProperty(name: 'body.data-resource-path')}"
+      ng-app="contactApp">
+<nav class="navbar navbar-default navbar-static-top">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="collapsed navbar-toggle"
+					data-toggle="collapse"
+					data-target="#drop"
+					aria-expanded="false">
+			</button> <a href="#" class="navbar-brand">Rest Tutorial</a></div>
+
+		<div class="collapse navbar-collapse" id="drop"><ul class="nav navbar-nav">
+			<li class="active"><a href="#">Contacts</a></li>
+			<li><a href="#">Link 1</a></li>
+			<li><a href="#">Link 2</a>
+			</li>
+		</ul></div></div>
+</nav>
+	<div>
+		<g:layoutBody/>
+	</div>
+</body>
+</html>
+----
+
+and
+
+.views/contact/index.gsp
+----
+<html>
+<head>
+  <meta name="layout" content="main"/>
+  <title>Welcome to Tutorial</title>
+</head>
+<body data-resource-name="contact" data-resource-path="/contact">
+<div class="container">
+  <ng-view></ng-view>
+</div>
+</body>
+</html>
+----
+
+Now we need to implement controller for logining, as you remember from the http://alvarosanchez.github.io/grails-angularjs-springsecurity-workshop/#_securing_the_rest_api_20_minutes[tutorial],
+we need to pass our username and password to `/api/login` action and get `access_token` that should be added for each request.
+
+.assets/javascript/auth/LoginCtrl.es6
+----
+angular.module("tutorial", ["angleGrinder"]);
+
+LoginCtrl = (function() {
+  LoginCtrl.$inject = ["$scope", "pathWithContext", "$window", "$http", "$rootScope"];
+  function LoginCtrl($scope, pathWithContext, $window, $http, $rootScope) {
+    $rootScope.authenticated = $window.sessionStorage.token != null;
+    $scope.user = {};
+    $scope.login = function() {
+      return $http.post(pathWithContext('/api/login'), {
+        "username": $scope.user.username,
+        "password": $scope.user.password
+      }).then(function(response) {
+        $rootScope.authenticated = !!response.data.access_token;
+        $window.sessionStorage.token = response.data.access_token;
+      });
+    };
+  }
+
+  return LoginCtrl;
+})();
+
+auth.controller("LoginCtrl", LoginCtrl);
+----
+
+`$rootScope.authenticated` - is a flag that shows should we show login page or not
+After user is logged in we will save `access_token` to `$window.sessionStorage.token`.
+
+So lets add the controller to our layout:
+
+.views/layouts/main.gsp
+----
+<body context-path="${request.contextPath}"
+      data-resource-name="${pageProperty(name: 'body.data-resource-name')}"
+      data-resource-path="${pageProperty(name: 'body.data-resource-path')}">
+<div ng-app="tutorial" ng-controller="LoginCtrl">
+...
+
+<div id="page" class="container">
+		<div ng-if="!authenticated">
+			<table>
+				<tbody>
+				<tr>
+					<td>
+						Username:
+					</td>
+					<td>
+						<input type="text" name="username" ng-model="user.username"/>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Password:
+					</td>
+					<td>
+						<input type="password" name="password" ng-model="user.password"/>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<button type="button" ng-click="login()">Login</button>
+					</td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<div ng-if="authenticated">
+			<div>
+				<g:layoutBody/>
+			</div>
+		</div>
+----
+
+The next step is to add received token to each request, for this purpose we need to implement AuthIntersepter:
+
+.assets/javascript/auth/LoginCtrl.es6
+----
+angular.module("tutorial", ["angleGrinder"]);
+
+auth.factory('authInterceptor', ["$rootScope", "$window", "pathWithContext", "$q", function($rootScope, $window, pathWithContext, $q) {
+  return {
+    request: function(config) {
+      config.headers = config.headers || {};
+      if ($window.sessionStorage.token != null) {
+        config.headers.Authorization = 'Bearer ' + $window.sessionStorage.token;
+      }
+      return config;
+    },
+    responseError: function(response) {
+      var unauthorized = 401;
+      if (response.status === unauthorized) {
+        return $window.location = pathWithContext("/");
+        }
+    }
+  };
+}]).config(function($httpProvider) {
+  $httpProvider.interceptors.push('authInterceptor');
+});
+
+....
+----
+
+As you see on each error response we update a location so the page is reloaded and we then show the login page, but you
+can show the modal window which will block the page or handle it in the way you want.
+
+Now we have login functionality, so we need logout. Rest spring security doesn't have such endpoint, so we will just clear
+session storage:
+
+.assets/javascript/auth/LoginCtrl.es6
+----
+....
+
+ $scope.logout = function() {
+      $rootScope.authenticated = false;
+      $window.sessionStorage.token = undefined;
+    };
+....
+----
+
+and in layout:
+
+.views/layouts/main.gsp
+----
+....
+	<ul class="pull-right nav navbar-nav">
+		<li ng-click="logout()">
+				a href="#">Logout</a>
+		</li>
+	/ul>
+----
+
+==== Our CRUD screens should still work and be secured now
+
+If you run the test now they will fail because we need to login first:
+
+.ContactControllerSpeck.groovy
+----
+ @Shared
+    RestBuilder rest = new RestBuilder()
+
+    def getBaseUrl() { "http://localhost:${serverPort}/api" }
+
+    String token
+
+    def setup() {
+        RestResponse response = rest.post(baseUrl + "/login") {
+            json([
+                    "username": "user",
+                    "password": "pass"
+            ])
+        }
+        token = "Bearer " +response.json.access_token
+    }
+
+    ....
+
+when:
+		RestResponse response = rest.get("${baseUrl}/contact"){
+			headers["Authorization"] = token
+		}
+....
+
+void "check POST request"() {
+		when:
+		RestResponse response = rest.post("${baseUrl}/contact") {
+			headers["Authorization"] = token
+			json([
+					firstName: "Test contact",
+					"email"  : "foo@bar.com",
+					inactive : true
+			])
+		}
+....
+----
+
+The same we should make `for AddressControllerSpec`
+
+Also, we need to add tests to geb:
+
 
 == Other Tools
 === Using postman for testing
