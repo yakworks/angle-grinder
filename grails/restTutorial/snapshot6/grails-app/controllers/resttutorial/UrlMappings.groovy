@@ -17,7 +17,7 @@ class UrlMappings {
       "/" (controller: "contact")
 
       "/api/contact"(resources: "contact", namespace: "api"){
-        "/address"(resources: "address")
+        "/address"(resources: "address", namespace: "api")
         delete "/active"(controller: "contact", action: "inactivate")
       }
       "/api/address"(resources: "address", namespace: "api")

@@ -1840,629 +1840,74 @@ void "check POST request"() {
 
 The same we should make `for AddressControllerSpec`
 
-Also, we need to add tests to geb:
+After you refactor test we have only one integration test failing to fix it we need to modify our UrlMapping:
 
+----
+"/api/contact"(resources: "contact", namespace: "api"){
+        "/address"(resources: "address", namespace: "api")
+----
+
+To make the nested resource match security url pattern.
+
+Also, we need to fix geb tests:
+//TODO: fix geb tests
 
 == Other Tools
+
+Sometimes it is not enough only integration tests but developer need to play with endpoints by hands, so lets take a look
+on two handy tools for testing rest endpoints.
+
 === Using postman for testing
+
+First we need to install Postman type in Chrome https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop/related?hl=en
+And press `Launch App`
+
+image::images/postman.png[]
+
+For testing we need to get auth token, in `Request URL` we put `http://localhost:8080/api/login`, then select `POST`
+as requst type on the left from `Request URL`. Then click on `body` tab that is under URL and enter type `raw`.
+Here we should specify our credentials:
+
+----
+{"username": "user", "password": "pass"}
+----
+
+The last step is to press `SEND` button to send the request. At the bottom you will get something like:
+
+----
+{
+  "username": "user",
+  "roles": [
+    "ROLE_ADMIN"
+  ],
+  "token_type": "Bearer",
+  "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJwcmluY2lwYWwiOiJINHNJQUFBQ...",
+    "expires_in": 3600,
+  "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJwcmluY2lwYWwiOiJINHNJQUFBQ..."}
+----
+
+And to be able to archive endpoints we need to add "Authorization" header to each request.
+So open `Headers` tab and paste `Authorization` as a key and `Bearer <access_token from our login request>` as value
+
+Now you can change url and test different endpoints.
+
 === Using Intellij for testing
 
+If you are using Intellij idea you can use build in rest client for testing. To open it got to "Tools" section on top and
+select `Test RESTful Web Service`. You will see:
 
+image::images/restClient.png[]
 
+In the `Host/port` section type `http://localhost:8080` and to the `Path` input `/api/login`
+On the right side of the `Request` tab, select `text` as body type and type in
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-== example application for tutorail "Grails with REST"
-
-REST (REpresentational State Transfer) is an architectural style that uses HTTP requests to GET, PUT, POST and DELETE data.
-
-Grails provides several nice features to implement REST.
-
-First is resource anotation `@Resource`, that creates controller with basic CRUD operations for you. So when you have next
-domain class
-
-[source,groovy]
-.Org.groovy
 ----
-@Resource(uri='/orgs', formats=['xml', 'json'])
-class Org {
-	String name
-}
+{"username": "user", "password": "pass"}
 ----
 
-using just the @Resource annotation and no controllers, `http://localhost:8080/orgs` will return you a list of all your orgs:
+To send a request press green triangle. So now we have our `access_token` in a response.
+So now we just need to set header for future requests.
 
-[source,json]
-----
-/*TODO change this to JSON and lets just stick with JSON thoughout the tutorial*/
-<list>
-	<org id="1">
-		<name>Org_18</name>
-	</org>
-	<org id="2">
-		<name>Org_14</name>
-	</org>
-</list>
-----
+To add header press green plus. And set `Name` to `Authorization` and value to `Bearer <access_token from our login request>`
 
-and `http://localhost:8080/orgs/3` will return data for Org with id = 3.
-//TODO: probably add examples for all CRUD operations
-__Note __ It returns xml because it is on the first place for `formats=['xml', 'json']` property, if one changes
-to `formats=['json', 'xml']` then JSON will be returned by default. But it accept both format on POST/PUT for example
-
-```
-curl -i -X POST -H "Content-Type: application/json" -d '{"name":"New Org Name"}' localhost:8080/orgs
-```
-
-will give the same result as
-
-```
-curl -i -X POST -H "Content-Type: text/xml" -d '<org><name>New Org Name</name></org>' localhost:8080/orgs
-```
-
-The next feature is to handle relations between domains. Let's take a look how we can `Locations` for specific 'Org'.
-The first thing that we shall do is to change `UrlMappings.groovy`:
-
-TODO first just use Org as an example go all the way through it.
-
-[source,groovy]
-.UrlMappings.groovy
-```
-class UrlMappings {
-
-    static mappings = {
-        "/$controller/$action?/$id?(.$format)?"{
-            constraints {
-                // apply constraints here
-            }
-        }
-
-        "/"(view:"/index")
-        "500"(view:'/error')
-        "404"(view:'/notFound')
-        "/orgs"(resources: "org") {
-            "/locations"(resources: "location")
-        }
-    }
-}
-```
-In such a way we show that for url `http://localhost:8080/orgs/1/locations` we want to get locations, but it will show
-locations not for Org with id = 1, but all of them, to make it work how we expect we should implement our own RestController.
-
-Here is very basic example for it:
-```
-class LocationController extends RestfulController {
-    static responseFormats = ['json', 'xml']
-    LocationController(){
-        super(Location)
-    }
-}
-```
-So, now we can even remove `@Resource` for Location domain and it will work in the same way.
-
-__Note__ we moved `format` property to controller `static responseFormats = ['json', 'xml']`
-
-The first thing one should understand is that when `http://localhost:8080/orgs/1/locations` is called we call `index`
-action with `params = [orgId: 1]` of the LocationController, and not `location` action for `OrgController`, and now
-it's clear how controller should be look like:
-```
-class LocationController extends RestfulController {
-    static responseFormats = ['json', 'xml']
-    LocationController(){
-        super(Location)
-    }
-
-    @Override
-    protected List listAllResources(Map params) {
-        def crit = resource.createCriteria()
-        def datalist = crit.list(params) {
-            if (params.orgId){
-                eq "org.id", params.orgId as Long
-            }
-        }
-        return datalist
-    }
-}
-```
-To understand it better I advise to review `RestfulController` https://github.com/grails/grails-core/blob/master/grails-plugin-rest/src/main/groovy/grails/rest/RestfulController.groovy[source]
-
-Sure we can add totally custom action for controller, for example `random`:
-First we need to add it to `UrlMappings.groovy`:
-```
- "/orgs"(resources: "org") {
-            "/locations"(resources: "location")
-        }
-        "/orgs/random"(controller: "org", action:"random", method: "GET")
-        "/locations"(resources: "location")
-```
-And then add to `OrgController`
-```
-def random() {
-        respond Org.get(new Random().nextInt(Org.count()))
-    }
-```
-Then on `http://localhost:8080/orgs/random` a random `Org` will be returned.
-
-__Note__ to view a list of url mapping use `url-mappings-report` command for grails console, for org it would look like:
-```
-Controller: org
- |   GET    | /orgs/random               | Action: random
- |   GET    | /orgs/create               | Action: create
- |   GET    | /orgs/${id}/edit           | Action: edit
- |   POST   | /orgs                      | Action: save
- |   GET    | /orgs                      | Action: index
- |  DELETE  | /orgs/${id}                | Action: delete
- |  PATCH   | /orgs/${id}                | Action: patch
- |   PUT    | /orgs/${id}                | Action: update
- |   GET    | /orgs/${id}                | Action: show
-```
-
-and
-
-To make the code more DRY let's use https://github.com/9ci/grails-dao[grails-dao] plugin.
-
-Add
-```
-compile "org.grails.plugin:dao:2.0"
-```
-to dependencies section of `build.gradle` file.
-
-To apply dao features for all controllers at once we can create new `RestDaoController` which will extend `RestfulController`
-TODO you only need to show a link to this, not the entire source
-
-```
-abstract class RestDaoController<T> extends RestfulController<T> {
-    //Responce formats, json - by default
-    static responseFormats = ['json', 'xml']
-
-    RestDaoController(Class<T> domainClass) {
-        this(domainClass, false)
-    }
-
-    RestDaoController(Class<T> domainClass, boolean readOnly) {
-        super(domainClass, readOnly)
-    }
-
-    Class getDomainClass() {
-        resource
-    }
-
-    protected def getDao() {
-        resource.dao
-    }
-
-
-    def index(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
-        respond listAllResources(params), model: [("${resourceName}Count".toString()): countResources()]
-    }
-
-    @Override
-    protected List<T> listAllResources(Map params) {
-        listCriteria(params)
-    }
-
-    @Override
-    def save() {
-        if (handleReadOnly()) {
-            return
-        }
-        def result = insertDomain(request.JSON)
-        formatResponse(result.entity)
-    }
-
-    @Override
-    def update() {
-        if (handleReadOnly()) {
-            return
-        }
-        def result = updateDomain(request.JSON)
-        formatResponse(result.entity)
-    }
-
-    /**
-     * Deletes a resource for the given id
-     * @param id The id
-     */
-    def delete() {
-        if(handleReadOnly()) {
-            return
-        }
-
-        def instance = queryForResource(params.id)
-        if (instance == null) {
-            transactionStatus.setRollbackOnly()
-            notFound()
-            return
-        }
-
-        deleteDomain(params)
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: "${resourceClassName}.label".toString(), default: resourceClassName), instance.id])
-                redirect action:"index", method:"GET"
-            }
-            '*'{ render status: NO_CONTENT } // NO CONTENT STATUS CODE
-        }
-    }
-
-    protected def updateDomain(p, opts = null) {
-        log.debug "updateDomain with ${p}"
-        def res = dao.update(p)
-        if (opts?.flush) DaoUtil.flush()
-        return res
-    }
-
-    protected def formatResponse(def instance) {
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: "${resourceName}.label".toString(), default: resourceClassName), instance.id])
-                redirect instance
-            }
-            '*' {
-                response.addHeader(HttpHeaders.LOCATION,
-                        g.createLink(
-                                resource: this.controllerName, action: 'show', id: instance.id, absolute: true,
-                                namespace: hasProperty('namespace') ? this.namespace : null))
-                respond instance, [status: CREATED]
-            }
-        }
-    }
-
-    /**
-     * Called from the saves and saveOrUpdateJson,
-     * providing a place to override functionality
-     */
-    protected def insertDomain(p) {
-        log.info("insertDomain(${p})")
-        return dao.insert(p)
-    }
-
-    protected def deleteDomain(p){
-        return dao.remove(p)
-    }
-
-    /**
-     * returns the list of domain obects for the scaffolded contro
-     */
-    protected def listCriteria(params) {
-        def crit = domainClass.createCriteria()
-        def datalist = crit.list(max: params.max, offset: params.offset) {
-            if (params.sort)
-                order(params.sort, params.order)
-        }
-        return datalist
-    }
-
-
-}
-```
-and for Org domain we should add `@Resource(superClass = RestDaoController)`
-
-As a result on `curl -i -X POST -H "Content-Type: application/json" -d '{"name": "test"}' localhost:8080/orgs`
-we will get
-```
-HTTP/1.1 201
-X-Application-Context: application:development
-Location: http://localhost:8080/org/show/6
-Content-Type: application/json;charset=UTF-8
-Transfer-Encoding: chunked
-Date: Thu, 27 Oct 2016 11:32:52 GMT
-
-{"id":6,"name":"test","registrationDate":null}
-```
-You can say that it is the same we've had for default `RestfullController`, and on current state it is so. To improve
-we need to add `OrgDao.groovy` to dao folder(in grails-app) or to service folder.
-```
-class OrgDao extends GormDaoSupport{
-	Class domainClass = Org
-
-	Map insert(params){
-		def madeNameDefault = "default Org"
-		if(!params.name){
-			params.name = madeNameDefault
-		}
-		if (params.name){
-			params.name += " from Dao"
-		}
-		super.insert(params)
-	}
-}
-```
-After that for `curl -i -X POST -H "Content-Type: application/json" -d '{}' localhost:8080/orgs`, next response will be returned
-```
-HTTP/1.1 201
-X-Application-Context: application:development
-Location: http://localhost:8080/org/show/6
-Content-Type: application/json;charset=UTF-8
-Transfer-Encoding: chunked
-Date: Thu, 27 Oct 2016 11:38:57 GMT
-
-{"id":6,"name":"default Org from Dao","registrationDate":null}
-```
-
-The next step will be to add UI interface. For this we will use Angle-Grinder plugin.
-`compile "nine:angle-grinder:2.0.0"` should be added to `build.gradle`
-
-Due to the fact that Ag-grinder plugin uses not pure angular, but Grails gsp pages to, the right way will be to split
-controllers that renders pages and REST Api controllers. And it is really easy to do with help off `RestDaoController` we
-just need to add `static namespace = "api"`, and update `UrlMappings.groovy`:
-//TODO: design the ways how to make it more DRY
-```
-"/api/orgs"(resources: "org", namespace:"api") {
-    "/locations"(resources: "location", namespace:"api")
-}
-"/api/locations"(resources: "location", namespace:"api")
-```
-
-Also, Ag-Grinder plugin provides nice tools such as pager, so let's update our RestDaoController with pagination for lists:
-```
-protected def listCriteria(params) {
-        def crit = domainClass.createCriteria()
-        def pager = new Pager(params)
-        def datalist = crit.list(max: pager.max, offset: pager.offset) {
-            if (params.sort)
-                order(params.sort, params.order)
-        }
-        return datalist
-    }
-
-    protected def pagedList(dlist) {
-        def pageData = new Pager(params)
-        def fieldList
-        if(hasProperty('listFields')){
-            fieldList = listFields
-        }
-        else if(hasProperty('showFields')){
-            fieldList = showFields
-        }
-        else if(hasProperty('selectFields')){
-            fieldList = selectFields
-        }
-        pageData.setupData(dlist, fieldList)
-        return pageData
-    }
-```
-So now we can add UI for our app. AG-Grinder designed in the way to have not "One Page" app, but to separate it on a smaller
-chunks.
-We will have common `app` folder in `assets/javascript` and our small Angular apps there.
-
-We still need a way to render grails templates, so we create "OrgController" that will be responsible for rendering templates
-for Org:
-
-```
-package tutorial
-
-class OrgController {
-
-    def index() { }
-
-    def template() {
-        render template: params.name
-    }
-}
-```
-
-And for JS part we can implement out Resources in the next way:
-```
-org = angular.module "orgApp", ["angleGrinder"]
-
-org.config [
-  "$routeProvider", "ResourceTemplateServ", ($routeProvider, ResourceTemplateServ) ->
-    orgTemplate = (path) -> ResourceTemplateServ("/org", path)
-    templateUrl = (name) -> "#{orgTemplate("template")}?name=#{name}"
-
-    $routeProvider
-      .when "/",
-        templateUrl: templateUrl "list"
-        controller: "org.ListCtrl"
-
-      .when "/create",
-        templateUrl: templateUrl "form"
-        controller: "org.FormCtrl"
-        resolve: org: ["Resource", (Resource) -> new Resource()]
-
-      .when "/:id",
-        templateUrl: templateUrl "show"
-        controller: "org.ShowCtrl"
-        resolve: org: [
-          "$route", "resourceResolver", ($route, resourceResolver) ->
-            resourceResolver($route.current.params.id)
-        ]
-
-      .when "/:id/edit",
-        templateUrl: templateUrl "form"
-        controller: "org.FormCtrl"
-        resolve: org: [
-          "$route", "resourceResolver", ($route, resourceResolver) ->
-            resourceResolver($route.current.params.id)
-        ]
-
-      .otherwise redirectTo: "/"
-]
-```
-
-Ag-Grinder has really handy implementation of `Resource` and `ResourceResolver` wich really helps to
-keep the code DRY, but by default it is implemented not for REST approach. So I've updated it to make it work with REST too.
-To "Turn REST on" one needs to add  `app.constant('RestContext', 'api')` where `'api'` - REST controller namespace. // TODO we can move namespace from grails ctrl and Angular to config
-
-//TODO: not sure do we need step by step instructions for creting angular app
-
-As a Last step let's add Spring security to our app.
-Please read http://alvarosanchez.github.io/grails-spring-security-rest/latest/docs/index.html[docs] to understand better
-what we need to implement.
-
-First we need to setup Security REST API, just add `compile "org.grails.plugins:spring-security-rest:2.0.0.M2"` in your
-`build.graddle`
-
-After that we need to create domain classes (User, Role and UserRole) we can make it by command:
-`grails s2-quickstart tutorial User Role`
-Where tutorial - package name where classes should be placed
-
-On the output you will get
-```
-| Creating User class 'User' and Role class 'Role' in package 'tutorial'
-| Rendered template Person.groovy.template to destination grails-app/domain/tutorial/User.groovy
-| Rendered template Authority.groovy.template to destination grails-app/domain/tutorial/Role.groovy
-| Rendered template PersonAuthority.groovy.template to destination grails-app/domain/tutorial/UserRole.groovy
-|
-************************************************************
-* Created security-related domain classes. Your            *
-* grails-app/conf/application.groovy has been updated with *
-* the class names of the configured domain classes;        *
-* please verify that the values are correct.               *
-************************************************************
-```
-
-The executed command will also update `grails-app/conf/application.groovy` or create it if you didn't have it.
-
-We need to replace the chain with pattern /** with the next one:
-
-```
-[pattern: '/api/**',  filters: 'JOINED_FILTERS,-anonymousAuthenticationFilter,-exceptionTranslationFilter,-authenticationProcessingFilter,-securityContextPersistenceFilter,-rememberMeAuthenticationFilter']
-```
-
-For testing add to `Bootstrap.groovy`
-```
-Role admin = new Role("ROLE_ADMIN").save()
-User user = new User("user", "pass").save()
-UserRole.create(user, admin, true)
-```
-To restrict the API to be accessed only for ROLE_ADMIN users:
-```
-@Secured(['ROLE_ADMIN'])
-class OrgController extends RestDaoController {
-
-    OrgController(){
-        super(Org)
-    }
-}
-```
-
-Now when you try to get data from Api you'll get
-```
-curl -i -X GET -H "Content-Type: application/json"  localhost:8080/api/orgs
-HTTP/1.1 401
-WWW-Authenticate: Bearer
-Content-Type: application/json;charset=UTF-8
-Transfer-Encoding: chunked
-Date: Fri, 28 Oct 2016 15:01:30 GMT
-
-{"timestamp":1477666890707,"status":401,"error":"Unauthorized","message":"No message available","path":"/api/orgs"}
-```
-To get a token we need:
-```
-curl -i -H "Content-Type: e":"user","password":"pass"}' localhost:8080/api/login
-HTTP/1.1 200
-Cache-Control: no-store
-Pragma: no-cache
-Content-Type: application/json;charset=UTF-8
-Content-Length: 2144
-Date: Fri, 28 Oct 2016 15:03:08 GMT
-
-{"username":"user","roles":["ROLE_ADMIN"],"token_type":"Bearer","access_token":"eyJhbGciOiJIUzI1NiJ9..
-```
-And to get accsess to our Api we need to pass token as header with our request.
-
-So now we should implement frontend part.
-The approach is to create `LoginCtrl` which will be parent for all of the others controllers.
-```
-class LoginCtrl
-  @$inject = ["$scope", "pathWithContext", "$window", "$http", "$rootScope"]
-  constructor: ($scope, pathWithContext, $window, $http, $rootScope) ->
-    $rootScope.authenticated = $window.sessionStorage.token?
-    $scope.user ={}
-    $scope.login = ->
-      $http.post((pathWithContext '/api/login'), {username: $scope.user.username,password: $scope.user.password}).then (response)->
-        $rootScope.authenticated = true
-        $window.sessionStorage.token = response.data.access_token
-        $window.location = pathWithContext "/org"
-
-    $scope.logout = ->
-      $window.sessionStorage.token = undefined
-
-
-auth.controller("LoginCtrl", LoginCtrl)
-```
-
-To add a header for each request we will add an Interseptor:
-```
-auth.factory('authInterceptor', ($rootScope, $window) ->
-  { request: (config) ->
-    config.headers = config.headers or {}
-    if $window.sessionStorage.token?
-      config.headers.Authorization = 'Bearer ' + $window.sessionStorage.token
-    config
-  }
-).config ($httpProvider) ->
-  $httpProvider.interceptors.push 'authInterceptor'
-  return
-```
-
-And in layout:
-```
-<div ng-if="authenticated == true">
-        <div id="page" class="container">
-            <g:layoutBody/>
-        </div>
-    </div>
-    <div ng-if="authenticated == false">
-        <table>
-            <tbody>
-            <tr>
-                <td>
-                    Username:
-                </td>
-                <td>
-                    <input type="text" name="username" ng-model="user.username" />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Password:
-                </td>
-                <td>
-                    <input type="password" name="password" ng-model="user.password" />
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2">
-                    <button type="button" ng-click="login()">Login</button>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
-```
+Now you can change url and test different endpoints.

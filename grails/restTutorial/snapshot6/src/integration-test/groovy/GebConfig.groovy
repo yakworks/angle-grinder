@@ -36,7 +36,7 @@ quitCachedDriverOnShutdown = true
 //reportOnTestFailureOnly = true
 
 //****HtmlUnitDriver as the default driver *****//
-driver = { new HtmlUnitDriver(true) }
+driver = {  new ChromeDriver() }
 
 environments {
 
