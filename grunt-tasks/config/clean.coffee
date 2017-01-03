@@ -10,3 +10,5 @@ module.exports = (grunt) ->
     "<%= appConfig.dist %>/**/*"
     "!<%= appConfig.dist %>/.git*"
   ]
+
+
