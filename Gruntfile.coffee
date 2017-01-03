@@ -14,6 +14,8 @@ module.exports = (grunt) ->
     dist: "dist"
     dev: "build"
     docs: "docs"
+    tmp: ".tmp"
+    components: "components"
 
   grunt.initConfig
     appConfig: appConfig
@@ -70,7 +72,7 @@ module.exports = (grunt) ->
   grunt.renameTask "regarde", "watch"
 
   grunt.registerTask "build:dev", [
-    "clean"
+    "clean:dev"
     "bower"
     "coffeelint"
     "coffee"
@@ -114,6 +116,7 @@ module.exports = (grunt) ->
   ]
 
   grunt.registerTask "build:dist", [
+    "clean:dist"
     "test"
     "build:dev"
     "copy:dist"
