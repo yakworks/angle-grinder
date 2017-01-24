@@ -62,6 +62,13 @@ grunt
 
 If a test is failing add --force
 
+### Clean
+
+If you need to delete build files grunt has task for it:
+`grunt clean` will delete all files that were created while build (except bower components and node modules)
+`grunt clean:dev` will delete files from `build` folder 
+`grunt clean:dist` will delete files from `dist` folder 
+
 ### Sample apps
 
 **for the sample grails demo app**

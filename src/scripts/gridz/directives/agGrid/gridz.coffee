@@ -28,7 +28,14 @@ class Gridz
     optBeforeSelectRow = options.beforeSelectRow
     options.beforeSelectRow = (rowid, e) =>
       @beforeSelectRow.apply this, arguments
-      optBeforeSelectRow.apply this, arguments  if $.isFunction(optBeforeSelectRow)
+      resp = optBeforeSelectRow.apply this, arguments  if $.isFunction(optBeforeSelectRow)
+      if (resp is true) or (not resp?)  then true else false
+
+    # Events .. onSelectRow
+    optOnSelectRow = options.onSelectRow
+    options.onSelectRow = (rowid, isChecked, event) =>
+      @onSelectRow.apply this, arguments
+      optOnSelectRow.apply this, arguments  if $.isFunction(optOnSelectRow)
       true
 
     # Events .. gridComplete
@@ -119,6 +126,25 @@ class Gridz
         document.selection.empty()
       else window.getSelection().removeAllRanges() if window.getSelection
 
+    true
+
+  onSelectRow: (rowid, isChecked,e) ->
+    if @gridEl.jqGrid("getGridParam", "agRowNumber")
+    #Add number of selected row in grid(nmber for all pages)
+      ids = @gridEl.getDataIDs()
+      text = ""
+      #check if only one row is selected
+      if @gridEl.jqGrid("getGridParam", "selarrrow").length is 1
+        #add to the grid footer number of the row in total for all pages
+        rowNum = ( @gridEl.jqGrid("getGridParam", "page") - 1 ) * @gridEl.jqGrid("getGridParam", "rowNum") + ids.indexOf(rowid) + 1
+        text = "Current row # #{rowNum} | "
+
+      pager = @gridEl.parent().parent().parent().parent().find("#paymentGrid-pager_right")
+      span = pager.find('#rowNum')
+      if span.length is 0
+        pager.prepend("<span id='rowNum'>#{text} </span>")
+      else
+        span.text(text)
     true
 
   ###
