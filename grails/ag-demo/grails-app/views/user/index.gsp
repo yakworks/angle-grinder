@@ -4,8 +4,6 @@
     <g:set var="entityName" value="${ag.label(code: "user")}"/>
     <title>${entityName} Admin</title>
 
-    <r:require modules="admin"/>
-
     <style type="text/css">
     .select2-container {
         background-color: #fff

@@ -8,13 +8,13 @@ if [[ "$RESULT" == 0 ]]; then
 else
   exit "$RESULT"
 fi
-cd grails/ag-plugin && ./gradlew test
+cd grails/ag-plugin && ./gradlew check
 
 echo "### Running publishing"
 
 if [[ $TRAVIS_BRANCH == 'grails3' && $TRAVIS_PULL_REQUEST == 'false' ]]; then
 	echo "### publishing plugin to bintray"
-	./gradlew bintrayUpload
+	./gradlew assemble check bintrayUpload
 
 else
   echo "TRAVIS_BRANCH: $TRAVIS_BRANCH"

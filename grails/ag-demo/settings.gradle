@@ -1,2 +1,4 @@
 rootProject.name = 'agdemo'
 
+include ':angle-grinder'
+project(':angle-grinder').projectDir = new File(settingsDir, '../ag-plugin')

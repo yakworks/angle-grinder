@@ -12,7 +12,7 @@ class Org implements Serializable {
   String zip
   String timeZone
   Date addressDate
-  //Long orgShowCaseId
+  Long orgShowCaseId
   String description
   String type
 

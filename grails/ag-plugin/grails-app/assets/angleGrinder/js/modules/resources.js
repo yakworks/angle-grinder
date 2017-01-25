@@ -3,6 +3,7 @@ var resources = angular.module("angleGrinder.resources", [
   "ngRoute"
 ]);
 
+resources.constant('RestContext', '')
 // Build a resource for the given restful url
 // TODO cleanup and spec this service
 // TODO consider move it to angle-grinder

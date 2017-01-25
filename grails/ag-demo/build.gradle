@@ -23,6 +23,7 @@ apply plugin:"asset-pipeline"
 repositories {
     mavenLocal()
     maven { url "https://repo.grails.org/grails/core" }
+    maven { url "http://dl.bintray.com/9ci/grails-plugins" }
 }
 
 dependencyManagement {
@@ -33,6 +34,7 @@ dependencyManagement {
 }
 
 dependencies {
+    compile project(':angle-grinder')
     compile "org.springframework.boot:spring-boot-starter-logging"
     compile "org.springframework.boot:spring-boot-autoconfigure"
     compile "org.grails:grails-core"
@@ -54,8 +56,7 @@ dependencies {
     runtime "com.h2database:h2"
     testCompile "org.grails:grails-plugin-testing"
     compile "org.grails.plugins:audit-trail:3.0.0.1"
-    compile "org.grails.plugin:dao:2.0"
-    compile "nine:angle-grinder:2.0.0"
+    compile 'org.grails.plugin:dao:2.0.1.SNAPSHOT'
 
     // No longer needed. now part of selenium-support in 2.53, see https://github.com/SeleniumHQ/htmlunit-driver
     //testRuntime "org.seleniumhq.selenium:selenium-htmlunit-driver:2.47.1"

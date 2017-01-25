@@ -11,7 +11,9 @@ class OrgDao extends GormDaoSupport {
 
     Map insert(params) {
         def org = new Org()
+        org.orgShowCaseId = new OrgShowCase().persist().id
         persistWithParams(org, params)
+
 
         [ok: true, entity: org, message: DaoMessage.created(org)]
     }

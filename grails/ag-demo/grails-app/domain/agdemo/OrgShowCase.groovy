@@ -7,9 +7,9 @@ class OrgShowCase implements Serializable {
 
     String name
     Org org
-    Date exampleLocalDate
-    Date exampleDateTime
-    Date exampleDate
+    Date exampleLocalDate = new Date()
+    Date exampleDateTime = new Date()
+    Date exampleDate = new Date()
 
     static mapping = {
         cache true

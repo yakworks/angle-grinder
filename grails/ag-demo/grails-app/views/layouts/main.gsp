@@ -15,7 +15,6 @@
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'main.css')}" type="text/css">
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'mobile.css')}" type="text/css">
     <g:layoutHead/>
-    <r:layoutResources/>
 </head>
 
 <body>
@@ -24,6 +23,5 @@
 <g:layoutBody/>
 <div class="footer" role="contentinfo"></div>
 
-<r:layoutResources/>
 </body>
 </html>

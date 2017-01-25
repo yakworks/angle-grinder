@@ -3,9 +3,6 @@
     <meta name="layout" content="agAdmin"/>
     <g:set var="entityName" value="${ag.label(code: "ShowCase")}"/>
     <title>${entityName} Admin</title>
-
-    <r:require modules="admin"/>
-
     <style type="text/css">
     .select2-container {
         background-color: #fff
@@ -43,7 +40,7 @@
 
 <h3 class="page-header"><g:message code="default.list.label" args="[entityName]"/></h3>
 
-<div ng-app="angleGrinder" ng-controller="orgShowCase.ListCtrl" class="ag-panels-row"
+<div ng-app="admin.org" ng-controller="orgShowCase.ListCtrl" class="ag-panels-row"
      ng-init="editTemplateUrl = '${createLink(action: 'editPartial')}' ">
 
     <ag-alerts></ag-alerts>

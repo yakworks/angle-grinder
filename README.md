@@ -1,8 +1,6 @@
 # Angle Grinder
 
-[![Build status](https://secure.travis-ci.org/9ci/angle-grinder.png)](http://travis-ci.org/9ci/angle-grinder)
-[![Stories in Ready](https://badge.waffle.io/9ci/angle-grinder.png)](http://waffle.io/9ci/angle-grinder)
-[![Gitter chat](https://badges.gitter.im/9ci/angle-grinder.png)](https://gitter.im/9ci/angle-grinder)
+[![Build Status](https://travis-ci.org/9ci/angle-grinder.svg?branch=grails3)](https://travis-ci.org/9ci/angle-grinder)
 
 ## About
 __angle-grinder__ can be opinionated at times. It is a collection of libraries with mods and wrappers around them to facilite building an application faster with anglularJS and Bootstrap 2.
@@ -94,7 +92,6 @@ then open http://localhost:9000
 Third-party libraries
 
 * components/bower - components downloaded by `bower install` command
-* third-party - you could put custom components here
 * node_modules - command downloaded by `npm install` command
 
 Generated stuff

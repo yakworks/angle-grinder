@@ -1,11 +1,10 @@
 package agdemo
 
 import grails.converters.JSON
+import grails.plugin.dao.DaoMessage
 import grinder.DateUtil
 import grinder.Pager
 
-
-//TODO apply joda time or java8 time data types
 class OrgShowCaseController extends BaseDomainController {
     def domainClass = OrgShowCase
     def ajaxGrid = true
@@ -17,9 +16,9 @@ class OrgShowCaseController extends BaseDomainController {
     def get() {
         def org = domainClass.get(params.id)
         if (org) {
-            render ExportUtil.buildMapFromPaths(org, selectFields) as JSON
+            render agdemo.ExportUtil.buildMapFromPaths(org, selectFields) as JSON
         } else {
-            notFound params.id
+            render DaoMessage.notFound(domainClass.name, [id: params.id])
         }
     }
 

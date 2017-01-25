@@ -7,5 +7,5 @@ class FormCtrl
 
     $scope.orgSelectOptions = orgSelectOptions()
 
-angular.module("angleGrinder")
+angular.module("admin.org")
   .controller("orgShowCase.FormCtrl", FormCtrl)

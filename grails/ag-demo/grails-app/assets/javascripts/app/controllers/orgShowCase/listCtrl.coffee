@@ -35,4 +35,4 @@ class ListCtrl
       { name: "exampleLocalDate", label: "Example Local Date", width: 70, formatter: "date" }
     ]
 
-angular.module("angleGrinder").controller("orgShowCase.ListCtrl", ListCtrl)
+angular.module("admin.org").controller("orgShowCase.ListCtrl", ListCtrl)

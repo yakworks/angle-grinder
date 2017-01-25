@@ -104,6 +104,5 @@
     </g:else>
 </div>
 
-<r:layoutResources/>
 </body>
 </html>

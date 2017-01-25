@@ -1,5 +1,5 @@
-app = angular.module "angleGrinder"
-app.service "orgSelectOptions", [ "select2Options", "pathWithContext", (select2Options, pathWithContext) ->
+app = angular.module "admin.org"
+app.service "orgSelectOptions", [ "Select2Options", "pathWithContext", (select2Options, pathWithContext) ->
 
   ->
     select2Options
