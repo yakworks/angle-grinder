@@ -86,15 +86,22 @@ forms.config [ "$provide", ($provide) ->
       directive.compile = (element, attrs) ->
 
         return {
+          pre: (scope, element, attrs, ctrl) ->
+            link.pre(scope, element, attrs, ctrl) if _.isFunction(link.pre)
           post: (scope, element, attrs, ctrl) ->
             #Add wrapper, if its not already wrapped and its not a select2-wrapper.
             if( not (element.parent().attr('class') == 'select-wrapper') and element.attr('ui-select2') == undefined )
               template = angular.element("<div class='select-wrapper'></div>")
               element.wrap(template)
 
-            link(scope, element, attrs, ctrl)
+            link.post(scope, element, attrs, ctrl) if _.isFunction(link.post)
         }
 
       return $delegate
     ]
 ]
+
+#TODO: refactor, can cause errors swallowing
+forms.config(['$qProvider', ($qProvider) ->
+  $qProvider.errorOnUnhandledRejections(false)
+])
