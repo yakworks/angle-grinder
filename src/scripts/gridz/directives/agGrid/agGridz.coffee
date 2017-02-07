@@ -23,7 +23,10 @@ gridz.directive "agGrid", [
       # kill the grid when the related scope is destroyed
       scope.$on "$destroy", ->
         $log.debug "[agGrid] destroying the grid", gridEl
-        gridEl.jqGrid("GridDestroy")
+        try
+          gridEl.jqGrid("GridDestroy")
+        catch err
+          $log.error err
 
       # Initializes a grid with the given options
       initializeGrid = ->
@@ -108,7 +111,6 @@ gridz.directive "agGrid", [
 
       element.find("table.gridz").attr("id", id)
       element.find("div.gridz-pager").attr("id", "#{id}-pager")
-      console.log element.find("div")
 
       # return linking function which will be called at a later time
       post: link

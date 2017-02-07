@@ -3,7 +3,7 @@ app = angular.module "angleGrinder.common"
 
 app.directive "ieSelectFix", ["$window",  ($window) ->
   restrict: "A"
-  link: (scope, elem, attrs, ctrl) ->
+  link: (scope, elem, attrs) ->
     elem.bind "change", (event) ->
       if $window.navigator.userAgent.indexOf("MSIE 9") > 0
         option.parentNode.insertBefore(option, option) for option in elem
