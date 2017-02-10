@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "### Running tests"
+echo "### Running js tests"
 bower cache clean && bower install && grunt test --browsers=PhantomJS; export RESULT=$?
 
 if [[ "$RESULT" == 0 ]]; then
@@ -8,6 +8,7 @@ if [[ "$RESULT" == 0 ]]; then
 else
   exit "$RESULT"
 fi
+echo "### Running grails tests"
 cd grails/ag-plugin && ./gradlew check
 
 echo "### Running publishing"
