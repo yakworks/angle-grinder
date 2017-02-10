@@ -46,7 +46,7 @@ fi
 
 # Build the app and copy the output to the right place
 echo "Build the app.."
-grunt build --force
+grunt build
 
 echo "Copy the build to the right place.."
 cp -R dist/* "$OUTPUT_DIRECTORY"
