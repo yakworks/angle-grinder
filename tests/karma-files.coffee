@@ -4,6 +4,7 @@ module.exports =
   files: [
     "components/bower/jquery/dist/jquery.js"
     "components/bower/lodash/dist/lodash.js"
+    "node_modules/phantomjs-polyfill/bind-polyfill.js"
 
     "components/bower/angular/angular.js"
     "components/bower/angular-animate/angular-animate.js"
