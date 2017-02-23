@@ -7,7 +7,7 @@ app.directive "addEmptyOption", ->
     element.append("<option value></option>")
     scope.$watch attrs.ngModel, (newVal, oldVal)->
       #Hide default empty option that appears only when old value was null
-      if !newVal
+      if (not newVal?)
         angular.element(element.find("[value='']")[0]).css("display", "none")
       else
         #Show default empty option to avoid hiding of the element
