@@ -3,12 +3,10 @@ app = angular.module "angleGrinder.common"
 
 app.directive "addEmptyOption", ->
   restrict: "A"
+  scope:
+    addEmptyOption: "="
   link: (scope, element, attrs) ->
-    element.append("<option value></option>")
-    scope.$watch attrs.ngModel, (newVal, oldVal)->
-      #Hide default empty option that appears only when old value was null
-      if (not newVal?)
-        angular.element(element.find("[value='']")[0]).css("display", "none")
-      else
-        #Show default empty option to avoid hiding of the element
-        angular.element(element.find("[value='']")[0]).css("display", "")
+    emptyOption = if (attrs.emptyOption?) then JSON.parse(attrs.emptyOption.replace(/[']/g, "\"")) else {id: "", name:""}
+    element.prepend(angular.element("<option value=''>#{emptyOption.name}</option>"))
+    if (scope.addEmptyOption? and scope.addEmptyOption.length > 0)
+      scope.addEmptyOption.unshift(emptyOption) unless (_.find(scope.addEmptyOption, id: emptyOption.id))
