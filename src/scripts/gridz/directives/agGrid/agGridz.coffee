@@ -108,7 +108,6 @@ gridz.directive "agGrid", [
 
       element.find("table.gridz").attr("id", id)
       element.find("div.gridz-pager").attr("id", "#{id}-pager")
-      console.log element.find("div")
 
       # return linking function which will be called at a later time
       post: link

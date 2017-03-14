@@ -282,3 +282,20 @@ class AgGridCtrl extends BaseCtrl
     rowEl = $(@getGridEl()[0].rows.namedItem(id))
     if rowEl.hasClass(highlightClass)
       rowEl.removeClass(highlightClass)
+
+  addAdditionalFooter: (data) ->
+    footerRow = @$element.find('tr.footrow')
+    newFooterRow = undefined
+    newFooterRow = @$element.find('tr.myfootrow')
+    if newFooterRow.length == 0
+      # add second row of the footer if it's not exist
+      newFooterRow = footerRow.clone()
+      newFooterRow.addClass 'myfootrow ui-widget-content'
+      newFooterRow.insertBefore footerRow
+    # calculate the value for the second footer row
+    for k,v of data
+      td = newFooterRow.find('[aria-describedby=' + '"arTranGrid_' + k + '"' + ']')
+      if not isNaN(v)
+        td[0].innerHTML = """<div class='pull-right currency-content'>#{v}</div>"""
+      else
+        td[0].innerHTML = """<div class=''>#{v}</div>"""
