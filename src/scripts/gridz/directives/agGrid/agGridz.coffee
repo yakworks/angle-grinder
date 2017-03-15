@@ -64,8 +64,10 @@ gridz.directive "agGrid", [
           gridEl.jqGrid('filterToolbar', {
               beforeSearch: ->
                 postData = gridEl.jqGrid('getGridParam', 'postData')
-                filters = (_.extend(JSON.parse(postData.filters), (_.pick postData, (value, key) -> key not in ["page", "filters", "max", "sort", "order", "nd", "_search"])))
+                defaultFilters = postData.defaultFilters || postData.filters
+                filters = (_.extend(JSON.parse(defaultFilters), (_.pick postData, (value, key) -> key not in ["page", "filters", "max", "sort", "order", "nd", "_search"])))
                 filters.firstLoad = false
+                postData.defaultFilters = defaultFilters
                 postData.filters = JSON.stringify(filters)
                 console.log "Toolbar Search"
             }
