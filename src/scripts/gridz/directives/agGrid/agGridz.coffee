@@ -60,6 +60,16 @@ gridz.directive "agGrid", [
 
         # initialize jqGrid on the given element
         gridEl.gridz(options)
+        if options.filterToolbar
+          gridEl.jqGrid('filterToolbar', {
+              beforeSearch: ->
+                postData = gridEl.jqGrid('getGridParam', 'postData')
+                filters = (_.extend(JSON.parse(postData.filters), (_.pick postData, (value, key) -> key not in ["page", "filters", "max", "sort", "order", "nd", "_search"])))
+                filters.firstLoad = false
+                postData.filters = JSON.stringify(filters)
+                console.log "Toolbar Search"
+            }
+          )
 
         # initialize actionPopup handler
         ActionPopupHandler(gridEl, scope, attrs)
