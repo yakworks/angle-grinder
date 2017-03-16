@@ -69,10 +69,10 @@ class BeanPathTools {
     }
 
     //XXX add test for this
-    static Map buildMapFromPaths(obj, List propList, boolean useDelegatingBean = false) {
+    static Map buildMapFromPaths(def obj, List propList, boolean useDelegatingBean = false) {
         if(useDelegatingBean) {
-            Class delegatingBean = GrailsClassUtils.getStaticFieldValue(obj.class, "delegatingBean")
-            if(delegatingBean == null && Holders.grailsApplication.isArtefactOfType(DomainClassArtefactHandler.TYPE, obj.class)) {
+            Class delegatingBean = GrailsClassUtils.getStaticFieldValue(obj.getClass(), "delegatingBean")
+            if(delegatingBean == null && Holders.grailsApplication.isArtefactOfType(DomainClassArtefactHandler.TYPE, obj.getClass())) {
                 delegatingBean = DaoDelegatingBean
             }
             if(delegatingBean != null) obj = delegatingBean.newInstance(obj)
