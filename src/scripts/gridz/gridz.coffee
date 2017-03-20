@@ -3,6 +3,7 @@ gridz = angular.module("angleGrinder.gridz", [
   "angleGrinder.common"
   "ui.select2"
   "angleGrinder.resources"
+  "dndLists"
 ])
 
 # Globally expose custom formatters for dates and currencies.
