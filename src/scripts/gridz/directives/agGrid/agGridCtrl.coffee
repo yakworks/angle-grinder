@@ -76,7 +76,7 @@ class AgGridCtrl extends BaseCtrl
   # The syntax of data array is: {name1:value1,name2: value2...}
   # where the name is the name of the column as described in the colModel
   # and the value is the new value.
-  updateRow: (id, data, emptyMissingCells = false) ->
+  updateRow: (id, data, emptyMissingCells = true) ->
     flatData = @FlattenServ(data)
 
     prevData = @getRowData(id)
