@@ -296,7 +296,8 @@ class AgGridCtrl extends BaseCtrl
     # calculate the value for the second footer row
     for k,v of data
       td = newFooterRow.find('[aria-describedby=' + '"arTranGrid_' + k + '"' + ']')
-      if not isNaN(v)
-        td[0].innerHTML = """<div class='pull-right currency-content'>#{v}</div>"""
-      else
-        td[0].innerHTML = """<div class=''>#{v}</div>"""
+      if (td.length > 0)
+        if not isNaN(v)
+          td[0].innerHTML = """<div class='pull-right currency-content'>#{v}</div>"""
+        else
+          td[0].innerHTML = """<div class=''>#{v}</div>"""
