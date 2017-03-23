@@ -76,7 +76,7 @@ class AgGridCtrl extends BaseCtrl
   # The syntax of data array is: {name1:value1,name2: value2...}
   # where the name is the name of the column as described in the colModel
   # and the value is the new value.
-  updateRow: (id, data) ->
+  updateRow: (id, data, emptyMissingCells = false) ->
     flatData = @FlattenServ(data)
 
     prevData = @getRowData(id)
@@ -89,7 +89,8 @@ class AgGridCtrl extends BaseCtrl
       diff = diff.filter(restrictedColumns)
 
       # set empty values
-      flatData[key] = null for key in diff
+      if emptyMissingCells
+        flatData[key] = null for key in diff
 
     @getGridEl().setRowData(id, flatData)
     @flashOnSuccess(id)

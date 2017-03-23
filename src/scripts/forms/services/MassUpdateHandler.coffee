@@ -11,7 +11,7 @@ forms.factory "MassUpdateHandler", [
 
       # handle updated fields
       if result.data?
-        grid.updateRow(row.id, row) for row in result.data
+        grid.updateRow(row.id, row, false) for row in result.data
       else
         $log.warn "[forms] Invalid JSON response, missing data array"
 
