@@ -25,6 +25,7 @@ class MapFlattener {
 
     private static final def Logger LOG = Logger.getLogger(MapFlattener.class)
     private final def KeyVersion _keyVersion = new KeyVersion()
+    public boolean convertEmptyStringsToNull = true
 
 
     /**
@@ -116,7 +117,7 @@ class MapFlattener {
                     value = value.trim() //trim strings - same as grails.databinding.trimStrings
                 }
                 //convert empty strings to null - same behavior as grails.databinding.convertEmptyStringsToNull
-                if("".equals(value)) {
+                if("".equals(value) && convertEmptyStringsToNull) {
                     value = null
                 }
 
@@ -147,12 +148,12 @@ class MapFlattener {
         }
 
         def keyValues = new HashMap<String,String>()
-        keyValues.put(currentName, jsonArray)
+        //keyValues.put(currentName, jsonArray)
 
         int index = 0
 
         jsonArray.each { jsonElement ->
-            String arrayName = [currentName, index++].join('.')
+            String arrayName = currentName + "[" + index++ +"]"
             if ( jsonElement == null )
             {
                 keyValues.put(arrayName, null)
