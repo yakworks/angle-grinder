@@ -148,12 +148,12 @@ class MapFlattener {
         }
 
         def keyValues = new HashMap<String,String>()
-        //keyValues.put(currentName, jsonArray)
+        keyValues.put(currentName, jsonArray)
 
         int index = 0
 
         jsonArray.each { jsonElement ->
-            String arrayName = currentName + "[" + index++ +"]"
+            String arrayName = [currentName, index++].join('.')
             if ( jsonElement == null )
             {
                 keyValues.put(arrayName, null)
