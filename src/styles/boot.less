@@ -432,7 +432,18 @@ form {
     float: right;
   }
 
+  form[editable-form] div {
+    height: auto;
+    padding: 2px 0;
+    margin-bottom: 2px;
+    min-height: 0px;
+    vertical-align: bottom;
+    line-height: 0.9 !important;
+  }
 
+  form[editable-form] div.title {
+    vertical-align: middle !important;
+  }
 
   .divider-horizontal {
     border-bottom: 1px solid #eee;
