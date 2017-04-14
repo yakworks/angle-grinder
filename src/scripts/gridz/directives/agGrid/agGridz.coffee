@@ -38,6 +38,51 @@ gridz.directive "agGrid", [
           options.datatype = agGridDataLoader(options.url, gridCtrl)
 
         gridEl.on "jqGridAfterGridComplete", () ->
+          if options.dropGrouping
+            gridId = alias
+            $('tr.ui-jqgrid-labels th div') .draggable({
+              appendTo: 'body',
+              helper: 'clone'
+            });
+
+            $("##{alias}GroupDropDown div.tagged-input").droppable(
+              activeClass: 'ui-state-default'
+              hoverClass: 'ui-state-hover'
+              accept: ':not(.ui-sortable-helper)'
+              drop: (event, ui) ->
+                $this = $(this)
+                $this.find('.placeholder').remove()
+                groupingColumn = $("<div class='tag'></div>").attr('data-column', ui.draggable.attr('id').replace('jqgh_' + gridId + '_', ''))
+                $('<i class="fa fa-times" aria-hidden="true"> </i>').click(->
+                  $(this).parent().remove()
+                  $('#' + gridId).jqGrid 'groupingRemove'
+                  $('#' + gridId).jqGrid 'groupingGroupBy', $("##{alias}GroupDropDown div.tag:not(.placeholder)").map(->
+                    $(this).attr 'data-column'
+                  ).get()
+                  if $("##{alias}GroupDropDown div.tag:not(.placeholder)").length == 0
+                    $('<div class="placeholder"></div>').appendTo $this
+                  return
+                ).appendTo groupingColumn
+                groupingColumn.append ui.draggable.text()
+                groupingColumn.appendTo $this
+                $('#' + gridId).jqGrid 'groupingRemove'
+                $('#' + gridId).jqGrid 'groupingGroupBy', $("##{alias}GroupDropDown div.tag:not(.placeholder)").map(->
+                  $(this).attr 'data-column'
+                ).get()
+                return
+            ).sortable({
+              items: 'div.tag:not(.placeholder)'
+              sort: ->
+                $(this).removeClass 'ui-state-default'
+                return
+              stop: ->
+                $('#' + gridId).jqGrid 'groupingRemove'
+                $('#' + gridId).jqGrid 'groupingGroupBy', $("##{alias}GroupDropDown div.tag:not(.placeholder)").map(->
+                  $(this).attr 'data-column'
+                ).get()
+                return
+            })
+
           # Add `min` class to remove pading to minimize row height
           if options.minRowHeight
             _.each gridEl[0].rows, (it) ->
@@ -76,6 +121,13 @@ gridz.directive "agGrid", [
         # initialize actionPopup handler
         ActionPopupHandler(gridEl, scope, attrs)
         angular.element(element.find("select").wrap('<span class="select-wrapper"></span>'))
+
+      if options.dropGrouping
+        dropDownsection = angular.element """<div >
+				 <div class='tagged-input' style="min-height: 35px; margin-bottom: -4px">Drop headers here</div>
+			    </div>"""
+        dropDownsection.attr("id", "#{alias}GroupDropDown")
+        element.prepend(dropDownsection)
 
       if element.is(":visible")
         # Element is visible, initialize the grid now
