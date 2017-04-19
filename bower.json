@@ -2,11 +2,11 @@
   "name": "angle-grinder",
   "version": "0.0.0",
   "dependencies": {
-    "free-jqgrid": "^4.13.3",
+    "free-jqgrid": "4.13.3",
     "jquery": "2.1.1",
+    "jquery-ui": "1.12.1",
     "bootstrap": "3.3.4",
     "bootstrapx-clickover": "git://github.com/lecar-red/bootstrapx-clickover.git",
-    "jquery-ui-bootstrap": "./components/third-party/jquery-ui-bootstrap",
     "select2": "~3.4.8",
     "select2-bootstrap-css": "~1.4.6",
     "font-awesome": "~4.3.0",
