@@ -40,7 +40,7 @@ grails.project.dependency.resolution = {
 
   plugins {
     compile (":hibernate4:4.3.10") { export = false }
-    compile (":view-tools:0.3-grails2") { export = false }
+    compile (":view-tools:0.5-grails2") { export = false }
     build(":release:3.1.2", ":rest-client-builder:2.1.1") { export = false }
   }
 }
