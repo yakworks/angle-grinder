@@ -162,6 +162,7 @@ class BeanPathTools {
      * example: [xxx:[yyy:123]] will turn into a GrailsParameterMap with ["xxx.yyy":123]
      */
      //XXX Igor, can you add test for this in your spec?
+    //XXX Why do we need this ? Grails3 should be able to handle deep maps just fine.
     static GrailsParameterMap flattenMap(request, jsonMap = null){
         def p = new MapFlattener().flatten(jsonMap ?: request.JSON)
         //XXX a hack to remove the edited/created fields. not sure why they are being binded
