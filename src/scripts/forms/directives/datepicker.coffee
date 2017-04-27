@@ -54,15 +54,18 @@ forms.directive "agDatepicker", [
       # Decorate datepicker with button and some usefull stuff if directive is element, not attribute
       if !$attrs.agDatepicker?
         $element.addClass("input-group").addClass("date").addClass("ag-datepicker")
-        input = """<input class='form-control' placeholder='#{$attrs.placeholder || ""}' #{"disabled" if $attrs.disabled?}>
+        input = """<input name='#{$attrs.id || ""}' class='form-control' placeholder='#{$attrs.placeholder || ""}' #{"disabled" if $attrs.disabled?}>
                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>"""
         $element.append(input)
 
       $element.on('dp.change',(event) ->
         if ngModelCtrl
           $timeout ->
-            ngModelCtrl.$setViewValue moment(event.date._d).format(isoFormat)
-            ngModelCtrl.$setValidity('dateFormat', agDate.isValid(ngModelCtrl.$modelValue, isoFormat))
+            if (event.date? and event.date._d isnt undefined)
+              ngModelCtrl.$setViewValue moment(event.date._d).format(isoFormat)
+              ngModelCtrl.$setValidity('dateFormat', agDate.isValid(ngModelCtrl.$modelValue, isoFormat))
+            else
+              ngModelCtrl.$setViewValue("")
       ).datetimepicker(options)
 
       setPickerValue = ->
