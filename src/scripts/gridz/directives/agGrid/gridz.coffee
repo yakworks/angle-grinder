@@ -84,6 +84,9 @@ class Gridz
   ###
   gridComplete: ->
     @actionPopupSetup() if @options.actionPopup
+    if @options.popups
+      _.each @options.popups, (popupOptions) ->
+        @popupSetup(popupOptions.columnName, popupOptions.innerHTML)
 
   ###
   Handles proper multi selection of rows
@@ -187,6 +190,12 @@ class Gridz
 
     @options.colModel.unshift(actionCol)
 
+  popupFormatter: (containerId, rowClass, icon) ->
+    """
+    <a class="#{rowClass}" data-toggle="popover" href="#"
+       data-container="##{containerId}"><i class="#{icon}"></i></a>
+    """
+
   ###
   default rowActionFormatter. containerId is the dom el to add the drop down to
   ###
@@ -195,6 +204,27 @@ class Gridz
     <a class="jqg-row-action" data-toggle="popover" href="#"
        data-container="##{containerId}"><i class="fa fa-cog"></i></a>
     """
+
+
+
+  popupSetup: (columnName, innerHTML)->
+    $(".#{columnName}").clickover
+      global_close: true
+      html: true
+      content: "<div></div>"
+      template: """
+                  <div class="popover row-action-popover">
+                    <div class="arrow"></div>
+                    <div class="popover-content dropdown clearfix" style="padding: 0;"></div>
+                  </div>
+                  """
+      onShown: ->
+        content = innerHTML
+        if typeof innerHTML is 'function'
+          self = this
+          params= JSON.parse this.$element[0].attributes.popUpParams.value
+          content = innerHTML(this, params)
+        self.$tip[0].innerHTML = content
 
   # called after grid complete to setup the menu
   actionPopupSetup: ->
