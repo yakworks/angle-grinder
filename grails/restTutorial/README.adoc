@@ -186,6 +186,9 @@ So we will add ` namespace = '/api'` to change the uri on the contact @Resource
 class Contact
 ----
 
+!!!!!!!!!!!!! FIXME - do we need namespace = '/api' above as well as in UrlMappings? Why?
+
+
 Also we need to update UrlMappings.groovy, there are two ways:
 
 1. Add `/api` prefix to each mapping for example  `get "/api/$controller(.$format)?"(action:"index")`
@@ -203,6 +206,7 @@ class UrlMappings {
     static mappings = {
 
       group("/api") {
+      !!!!!!!!!!!!! FIXME - do we need namespace:"api" below? why?
         delete "/$controller/$id(.$format)?"(namespace:"api", action:"delete")
         get "/$controller(.$format)?"(action:"index")
         get "/$controller/$id(.$format)?"(action:"show")
