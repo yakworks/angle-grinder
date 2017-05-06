@@ -104,6 +104,8 @@ So as we see from {url-dr}[docs] we just need to update our domain a bit (just a
 
 [source,groovy]
 ----
+import grails.rest.Resource
+
 @Resource(uri = '/contact', formats = ["json"])
 class Contact {
   ...
