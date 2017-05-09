@@ -25,13 +25,6 @@ repositories {
     maven { url "https://repo.grails.org/grails/core" }
 }
 
-dependencyManagement {
-    imports {
-        mavenBom "org.grails:grails-bom:$grailsVersion"
-    }
-    applyMavenExclusions false
-}
-
 dependencies {
     provided "org.springframework.boot:spring-boot-starter-logging"
     provided "org.springframework.boot:spring-boot-autoconfigure"
@@ -54,15 +47,20 @@ dependencies {
     //provided "org.codehaus.groovy:groovy-ant"
     runtime "com.bertramlabs.plugins:asset-pipeline-grails:2.11.2"
 
-    testCompile "org.grails:grails-plugin-testing"
     compile 'com.lowagie:itext:2.1.7'
     compile 'org.olap4j:olap4j:1.2.0'
     compile 'net.sf.jasperreports:jasperreports:6.3.1'
 
     testCompile "org.grails.plugins:geb"
+    testCompile "org.grails:grails-plugin-testing"
+
     testRuntime "org.seleniumhq.selenium:selenium-htmlunit-driver:2.47.1"
     testRuntime "net.sourceforge.htmlunit:htmlunit:2.18"
+}
 
+bootRun {
+    jvmArgs('-Dspring.output.ansi.enabled=always')
+    addResources = true
 }
 
 grailsPublish {
