@@ -10,7 +10,7 @@ buildscript {
     }
 }
 
-version "3.0.3.SNAPSHOT"
+version "3.0.2-SNAPSHOT"
 group "nine"
 
 apply plugin:"eclipse"
@@ -82,6 +82,19 @@ grailsPublish {
     //user = 'user' <- pulled from either BINTRAY_USER sys prop or project.bintrayUser which can be in ~/.gradle/gradle.properties
     //key = 'key' <- pulled from either BINTRAY_KEY sys prop or project.bintrayKey which can be in ~/.gradle/gradle.properties
 }
+
+publishing {
+    repositories {
+        maven {
+            url "http://repo.9ci.com/artifactory/grails-plugins"
+            credentials {
+                username "$artifactoryUsername"
+                password  "$artifactoryPassword"
+            }
+        }
+    }
+}
+
 
 assets {
     packagePlugin = true
