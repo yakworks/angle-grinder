@@ -10,7 +10,7 @@ buildscript {
     }
 }
 
-version "3.0.1.SNAPSHOT"
+version "3.0.3.SNAPSHOT"
 group "nine"
 
 apply plugin:"eclipse"
