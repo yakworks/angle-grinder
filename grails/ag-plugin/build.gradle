@@ -10,7 +10,7 @@ buildscript {
     }
 }
 
-version "3.0.2-SNAPSHOT"
+version "3.0.3.SNAPSHOT"
 group "nine"
 
 apply plugin:"eclipse"
@@ -25,6 +25,12 @@ repositories {
     maven { url "https://repo.grails.org/grails/core" }
 }
 
+bootRun {
+  jvmArgs('-Dspring.output.ansi.enabled=always')
+  addResources = true
+}
+
+bootRepackage.enabled = false
 dependencies {
     provided "org.springframework.boot:spring-boot-starter-logging"
     provided "org.springframework.boot:spring-boot-autoconfigure"
