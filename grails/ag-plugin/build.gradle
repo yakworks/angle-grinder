@@ -89,7 +89,7 @@ grailsPublish {
     //key = 'key' <- pulled from either BINTRAY_KEY sys prop or project.bintrayKey which can be in ~/.gradle/gradle.properties
 }
 
-/*publishing {
+publishing {
     repositories {
         maven {
             url "http://repo.9ci.com/artifactory/grails-plugins"
@@ -99,7 +99,7 @@ grailsPublish {
             }
         }
     }
-}*/
+}
 
 
 assets {
