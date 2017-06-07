@@ -8,6 +8,7 @@ import grails.web.servlet.mvc.GrailsParameterMap
 import org.apache.juli.logging.Log
 import org.apache.juli.logging.LogFactory
 import org.grails.core.artefact.DomainClassArtefactHandler
+import org.hibernate.Hibernate
 import org.hibernate.UnresolvableObjectException
 
 
@@ -94,7 +95,10 @@ class BeanPathTools {
             if (propertyPath == '*') {
                 if(log.debugEnabled) log.debug("obj:$obj propertyPath:$propertyPath currentMap:$currentMap" )
                 //just get the persistentProperties
-                GrailsDomainClass domainClass = (GrailsDomainClass) grailsApplication.getArtefact(DomainClassArtefactHandler.TYPE, obj.getClass().getName())
+                GrailsDomainClass domainClass = (GrailsDomainClass) grailsApplication.getArtefact(DomainClassArtefactHandler.TYPE, Hibernate.getClass(obj).name)
+                if(domainClass == null) {
+                    throw new RuntimeException("${obj.getClass().name} is not a domain class")
+                }
                 def pprops = domainClass.persistentProperties
                 //filter out the associations. need to explicitely add those to be included
                 pprops = pprops.findAll{ p -> !p.isAssociation() }
