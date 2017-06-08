@@ -76,7 +76,7 @@ class AgGridCtrl extends BaseCtrl
   # The syntax of data array is: {name1:value1,name2: value2...}
   # where the name is the name of the column as described in the colModel
   # and the value is the new value.
-  updateRow: (id, data) ->
+  updateRow: (id, data, emptyMissingCells = true) ->
     flatData = @FlattenServ(data)
 
     prevData = @getRowData(id)
@@ -89,7 +89,8 @@ class AgGridCtrl extends BaseCtrl
       diff = diff.filter(restrictedColumns)
 
       # set empty values
-      flatData[key] = null for key in diff
+      if emptyMissingCells
+        flatData[key] = null for key in diff
 
     @getGridEl().setRowData(id, flatData)
     @flashOnSuccess(id)
@@ -282,3 +283,21 @@ class AgGridCtrl extends BaseCtrl
     rowEl = $(@getGridEl()[0].rows.namedItem(id))
     if rowEl.hasClass(highlightClass)
       rowEl.removeClass(highlightClass)
+
+  addAdditionalFooter: (data) ->
+    footerRow = @$element.find('tr.footrow')
+    newFooterRow = undefined
+    newFooterRow = @$element.find('tr.myfootrow')
+    if newFooterRow.length == 0
+      # add second row of the footer if it's not exist
+      newFooterRow = footerRow.clone()
+      newFooterRow.addClass 'myfootrow ui-widget-content'
+      newFooterRow.insertBefore footerRow
+    # calculate the value for the second footer row
+    for k,v of data
+      td = newFooterRow.find('[aria-describedby=' + '"arTranGrid_' + k + '"' + ']')
+      if (td.length > 0)
+        if not isNaN(v)
+          td[0].innerHTML = """<div class='pull-right currency-content'>#{v}</div>"""
+        else
+          td[0].innerHTML = """<div class=''>#{v}</div>"""
