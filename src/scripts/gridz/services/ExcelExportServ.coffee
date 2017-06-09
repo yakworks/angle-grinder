@@ -93,8 +93,7 @@ gridz.service "gridData", [
       resultEl.find("*").removeAttr(attr) for attr in attrsToRemove
 
       # remove unsafe element
-      #$sanitize(resultEl.html()) TODO:check how we can configure to not delete all dom tags
-      resultEl.html()
+      $sanitize(resultEl.html())
 ]
 
 # Generates XLS data uri

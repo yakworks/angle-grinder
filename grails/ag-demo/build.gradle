@@ -5,8 +5,9 @@ buildscript {
     }
     dependencies {
         classpath "org.grails:grails-gradle-plugin:$grailsVersion"
-        classpath "com.bertramlabs.plugins:asset-pipeline-gradle:2.11.1"
-        classpath 'com.bertramlabs.plugins:coffee-asset-pipeline:2.6.2'
+
+      classpath "com.bertramlabs.plugins:asset-pipeline-gradle:2.14.2"
+      classpath 'com.bertramlabs.plugins:coffee-asset-pipeline:2.14.2'
     }
 }
 
@@ -47,7 +48,8 @@ dependencies {
     compile "org.grails.plugins:hibernate4"
     compile "org.hibernate:hibernate-core:4.3.10.Final"
     compile "org.hibernate:hibernate-ehcache:4.3.10.Final"
-
+    compile "org.grails.plugin:dao:3.0.3.SNAPSHOT"
+    compile "org.grails.plugins:audit-trail:3.0.1.SNAPSHOT"
     console "org.grails:grails-console"
     profile "org.grails.profiles:web"
     provided "org.codehaus.groovy:groovy-ant"
@@ -55,8 +57,8 @@ dependencies {
     runtime 'com.bertramlabs.plugins:coffee-asset-pipeline:2.6.2'
     runtime "com.h2database:h2"
     testCompile "org.grails:grails-plugin-testing"
-    compile "org.grails.plugins:audit-trail:3.0.0.1"
-    compile 'org.grails.plugin:dao:2.0.1.SNAPSHOT'
+
+
 
     // No longer needed. now part of selenium-support in 2.53, see https://github.com/SeleniumHQ/htmlunit-driver
     //testRuntime "org.seleniumhq.selenium:selenium-htmlunit-driver:2.47.1"

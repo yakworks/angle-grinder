@@ -2,7 +2,7 @@ forms = angular.module("angleGrinder.forms")
 
 forms.directive "agSubmit", [
   "$parse", "$log", "serverValidationErrorsHandler",
- ($parse, $log, serverValidationErrorsHandler) ->
+  ($parse, $log, serverValidationErrorsHandler) ->
     restrict: "A"
     require: "form"
 
@@ -15,7 +15,7 @@ forms.directive "agSubmit", [
         forms.push(form)
 
         # iterate through  all nested forms and mark them as submitted
-        nestedForms = _.filter(_.values(form), (input) -> (input?.$$element?[0]?.tagName is "FORM") and (input not in forms))
+        nestedForms = _.filter(_.values(form), (input) -> (input instanceof form.constructor) and (input not in forms))
         markAsSubmitted(nestedForm) for nestedForm in nestedForms
 
       (scope, element, attrs, formCtrl) ->
@@ -37,20 +37,13 @@ forms.directive "agSubmit", [
 
             # disable/enable form controls
             formCtrl.$saving = true
-            finallyProm = promise.finally ->
+            promise.finally ->
               formCtrl.$saving = false
 
-            finallyProm.then(angular.noop, angular.noop)
-
             # on success: reset the form
-            promise.then(
-              ->
-                formCtrl.$setPristine()
-                formCtrl.$submitted = false
-            ,
-              ->
-                false
-            )
+            promise.then ->
+              formCtrl.$setPristine()
+              formCtrl.$submitted = false
 
             # on error: handle server side errors
             promise.catch (response) ->

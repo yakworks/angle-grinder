@@ -23,10 +23,7 @@ gridz.directive "agGrid", [
       # kill the grid when the related scope is destroyed
       scope.$on "$destroy", ->
         $log.debug "[agGrid] destroying the grid", gridEl
-        try
-          gridEl.jqGrid("GridDestroy")
-        catch err
-          $log.error err
+        gridEl.jqGrid("GridDestroy")
 
       # Initializes a grid with the given options
       initializeGrid = ->
