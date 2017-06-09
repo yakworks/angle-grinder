@@ -98,8 +98,3 @@ forms.config [ "$provide", ($provide) ->
       return $delegate
     ]
 ]
-
-#TODO: refactor, can cause errors swallowing
-forms.config(['$qProvider', ($qProvider) ->
-  $qProvider.errorOnUnhandledRejections(false)
-])
