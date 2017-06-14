@@ -43,7 +43,7 @@ gridz.directive "agGrid", [
             $('tr.ui-jqgrid-labels th div') .draggable({
               appendTo: 'body',
               helper: 'clone'
-            });
+            })
 
             $("##{alias}GroupDropDown div.tagged-input").droppable(
               activeClass: 'ui-state-default'
@@ -124,8 +124,8 @@ gridz.directive "agGrid", [
 
       if options.dropGrouping
         dropDownsection = angular.element """<div >
-				 <div class='tagged-input' style="min-height: 35px; margin-bottom: -4px">Drop headers here</div>
-			    </div>"""
+         <div class='tagged-input' style="min-height: 35px; margin-bottom: -4px">Drop headers here</div>
+          </div>"""
         dropDownsection.attr("id", "#{alias}GroupDropDown")
         element.prepend(dropDownsection)
 
