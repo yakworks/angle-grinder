@@ -7,7 +7,7 @@ app.factory "EmbeddedJsonServ", ['$document', ($document) ->
     node = $(selector)
     val = undefined
     if(node.length > 0)
-      val = angular.fromJson(node[0].innerHTML)
+      val = angular.fromJson(node[0].innerHTML.replace(/&quot;/g, "\""))
 
     val
 
