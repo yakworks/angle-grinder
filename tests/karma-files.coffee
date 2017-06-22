@@ -29,6 +29,7 @@ module.exports =
     "components/bower/eonasdan-bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js"
     "components/bower/toastr/toastr.js"
     "components/bower/sweetalert/dist/sweetalert-dev.js"
+    "components/bower/angular-drag-and-drop-lists/angular-drag-and-drop-lists.js"
 
     "src/scripts/gridz/gridz.coffee"
     "src/scripts/utils/baseCtrl.coffee"

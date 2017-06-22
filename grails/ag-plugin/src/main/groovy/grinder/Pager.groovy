@@ -105,7 +105,7 @@ class Pager {
 
         if (fieldList) {
             this.data = dlist.collect { obj ->
-                return BeanPathTools.buildMapFromPaths(obj, fieldList)
+                return BeanPathTools.buildMapFromPaths(obj, fieldList, true)
             }
         }
         return this

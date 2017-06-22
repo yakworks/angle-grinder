@@ -10,6 +10,7 @@ import org.apache.juli.logging.LogFactory
 import org.grails.core.artefact.DomainClassArtefactHandler
 import org.hibernate.Hibernate
 import org.hibernate.UnresolvableObjectException
+import org.hibernate.ObjectNotFoundException
 
 
 
@@ -75,7 +76,14 @@ class BeanPathTools {
     }
 
     //XXX add test for this
-    static Map buildMapFromPaths(obj, List propList) {
+    static Map buildMapFromPaths(def obj, List propList, boolean useDelegatingBean = false) {
+        if(useDelegatingBean) {
+            Class delegatingBean = GrailsClassUtils.getStaticFieldValue(obj.getClass(), "delegatingBean")
+            if(delegatingBean == null && Holders.grailsApplication.isArtefactOfType(DomainClassArtefactHandler.TYPE, obj.getClass())) {
+                delegatingBean = DaoDelegatingBean
+            }
+            if(delegatingBean != null) obj = delegatingBean.newInstance(obj)
+        }
         //FIXME we should look into do something like LazyMetaPropertyMap in grails-core that wraps the object and delegates
         //the map key lookups to the objects
         def rowMap = [:]
