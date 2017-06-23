@@ -103,7 +103,8 @@ class BeanPathTools {
             if (propertyPath == '*') {
                 if(log.debugEnabled) log.debug("obj:$obj propertyPath:$propertyPath currentMap:$currentMap" )
                 //just get the persistentProperties
-                GrailsDomainClass domainClass = (GrailsDomainClass) grailsApplication.getArtefact(DomainClassArtefactHandler.TYPE, Hibernate.getClass(obj).name)
+                def domain = (obj instanceof DelegatingBean) ? obj.target : obj
+                GrailsDomainClass domainClass = (GrailsDomainClass) grailsApplication.getArtefact(DomainClassArtefactHandler.TYPE, Hibernate.getClass(domain).name)
                 if(domainClass == null) {
                     throw new RuntimeException("${obj.getClass().name} is not a domain class")
                 }

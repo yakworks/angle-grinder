@@ -2,6 +2,7 @@ package grinder
 
 import groovy.transform.CompileStatic
 import groovy.transform.TypeCheckingMode
+import org.grails.datastore.gorm.GormEntity
 
 //Delegates missing properties as method calls to the dao for the domain class
 @CompileStatic
@@ -9,9 +10,9 @@ class DaoDelegatingBean extends DelegatingBean {
 	def dao
 
 	@CompileStatic(TypeCheckingMode.SKIP)
-	DaoDelegatingBean(target) {
+	DaoDelegatingBean(GormEntity target) {
 		super(target)
-		dao = target.class.getDao()
+		dao = target.getDao()
 	}
 
 	//first try if target bean has property, if not, check if dao has the method
