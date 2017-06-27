@@ -33,9 +33,11 @@ gridz.directive "agSelect2", [
 
         # read `minimumInputLength` option from the attribute
         options.minimumInputLength ?= 1
+        scope.showFill = attrs.fillAll and attrs.fillAll is "true"
         if attrs.selectMinimumInputLength?
           options.minimumInputLength = parseInt(attrs.selectMinimumInputLength)
-
+        if attrs.selectAll?
+          options.minimumInputLength = 0
         # set the default `width`
         options.width ?= "resolve"
 
@@ -73,7 +75,9 @@ gridz.directive "agSelect2", [
     template: """
       <div class="input-group">
         <input ui-select2="options" ng-model="ngModel" class="form-control" type="hidden"/>
+        <select-fill ng-if="showFill"></select-fill>
       </div>
+
     """
 ]
 
@@ -92,3 +96,22 @@ gridz.directive "agSelect2Open", ->
         <button class="btn open-select2 btn-default " type="button" ng-click="openSelect2()"><i class="fa fa-search"></i></button>
       </span>
   """
+
+gridz.directive "selectFill", [
+  "$http", "pathWithContext", "$parse",
+  ($http,pathWithContext, $parse) ->
+    restrict: "E"
+    replace: true
+    priority: 2000
+    link: (scope, $element, attrs) ->
+      scope.fill = ->
+        selectEl= $element.parent().parent().find("div[select-ajax-url]")[0]
+        $http.get(pathWithContext(selectEl.attributes['select-ajax-url'].value)).then (resp)->
+          model = $parse(selectEl.attributes['ng-model'].value)
+          model.assign scope.$parent.$parent, resp.data.rows
+    template: """
+       <span class="input-group-btn">
+         <button class="btn open-select2 btn-default " type="button" ng-click="fill()"><i class="fa fa-truck"></i></button>
+       </span>
+  """
+]
