@@ -115,3 +115,26 @@ gridz.directive "selectFill", [
        </span>
   """
 ]
+
+gridz.directive "agSelect2Fill", [
+  "$http", "pathWithContext", "$parse",
+  ($http,pathWithContext, $parse) ->
+    restrict: "E"
+    replace: true
+    scope: true
+    controller: ["$scope", "$element", ($scope, $element) ->
+      $scope.fill = ->
+        selectEl = $element.parent().find(".select2-container")
+        select = document.getElementById(selectEl[0].attributes.id.value.replace("s2id_", ""))
+        model = $parse(angular.element(select)[0].attributes["ng-model"].value)
+        model.assign $scope.$parent, _.pluck(select.options, "value")
+        return
+    ]
+    link: (scope, $element, attrs) ->
+      $element.parent().css("display", "table")
+    template: """
+       <span class="input-group-btn">
+         <button class="btn open-select2 btn-default " type="button" ng-click="fill()"><i class="fa fa-truck"></i></button>
+       </span>
+    """
+]
