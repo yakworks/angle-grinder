@@ -28,7 +28,7 @@ gridz.directive "agSelect2", [
 
       # pre linking function
       pre: (scope, element, attrs) ->
-        options = angular.copy scope.selectOptions or {multiple: false}
+        options = angular.copy scope.selectOptions or {multiple: true}
         if attrs.selectMultiple?
           options.multiple = attrs.selectMultiple == "true"
         scope.options = options
