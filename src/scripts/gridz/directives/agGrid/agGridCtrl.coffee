@@ -292,7 +292,7 @@ class AgGridCtrl extends BaseCtrl
       # add second row of the footer if it's not exist
       newFooterRow = footerRow.clone()
       newFooterRow.addClass 'myfootrow ui-widget-content'
-      newFooterRow.insertBefore footerRow
+      newFooterRow.insertAfter footerRow
     # calculate the value for the second footer row
     for k,v of data
       td = newFooterRow.find('[aria-describedby=' + '"arTranGrid_' + k + '"' + ']')
