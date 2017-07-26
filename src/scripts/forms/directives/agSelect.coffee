@@ -108,9 +108,12 @@ gridz.directive "selectFill", [
     link: (scope, $element, attrs) ->
       scope.fill = ->
         selectEl= $element.parent().parent().find("div[select-ajax-url]")[0]
+        model = $parse(selectEl.attributes['ng-model'].value)
         $http.get(pathWithContext(selectEl.attributes['select-ajax-url'].value)).then (resp)->
-          model = $parse(selectEl.attributes['ng-model'].value)
-          model.assign scope.$parent.$parent, resp.data.rows
+          result = []
+          if model(scope.$parent.$parent).length < resp.data.rows.length
+            result = resp.data.rows
+          model.assign scope.$parent.$parent, result
     template: """
        <span class="input-group-btn">
          <button class="btn open-select2 btn-default " type="button" ng-click="fill()"><i class="fa fa-truck"></i></button>
@@ -129,7 +132,10 @@ gridz.directive "agSelect2Fill", [
         selectEl = $element.parent().find(".select2-container")
         select = document.getElementById(selectEl[0].attributes.id.value.replace("s2id_", ""))
         model = $parse(angular.element(select)[0].attributes["ng-model"].value)
-        model.assign $scope.$parent, _.pluck(select.options, "value")
+        result = _.pluck(select.options, "value")
+        if  model($scope.$parent)? and model($scope.$parent).length is result.length
+          result =  []
+        model.assign $scope.$parent, result
         return
     ]
     link: (scope, $element, attrs) ->
