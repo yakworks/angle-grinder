@@ -289,6 +289,10 @@ class Gridz
       e.preventDefault()
       @gridEl.trigger "deleteAction", [id, self]
 
+    menuEl.on "click", "li a.row_action_mass_update", (e) =>
+      e.preventDefault()
+      @gridEl.trigger "massUpdateAction", []
+
   editOndblClick: ->
     self = this
     grid = @gridEl
