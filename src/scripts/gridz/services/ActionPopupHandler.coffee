@@ -30,6 +30,12 @@ gridz.factory "ActionPopupHandler", [
         action = if attrs.deleteAction then attrs.deleteAction else "deleteRecord"
         handleAction(action, id)
 
+      # handles click on massUpdate action inside the dropdown menu
+      gridEl.on "massUpdateAction", (event) ->
+        event.preventDefault()
+        action = if attrs.massUpdateAction then attrs.massUpdateAction else "massUpdate"
+        handleAction(action)
+
       # handles click on the cell with `editActionLink` formatter
       gridEl.on "click", "a.editActionLink", (event) ->
         event.preventDefault()
