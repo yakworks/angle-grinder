@@ -124,7 +124,7 @@ class ContactControllerSpec extends Specification {
 
     void "check DELETE request"() {
         when:
-        RestResponse response = rest.delete("${baseUrl}/contact/1")
+        RestResponse response = rest.delete("${baseUrl}/contact/4")
 
         then:
         response.status == 200

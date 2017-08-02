@@ -5,10 +5,17 @@
 :icons: font
 //common link variables
 :docs-HttpStatus: http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/http/HttpStatus.html
-:docs-grails: http://docs.grails.org/latest/guide
-:docs-grails-ws: http://docs.grails.org/latest/guide/webServices.html
+:docs-grails: http://docs.grails.org/3.2.11/guide
+:docs-grails-api: http://docs.grails.org/3.2.11/api
+:docs-grails-ws: http://docs.grails.org/3.2.11/guide/webServices.html
 :src-grails-rest: https://github.com/grails/grails-core/blob/master/grails-plugin-rest
-:url-snapshot5: https://github.com/9ci/angle-grinder/blob/rest_tutorial/grails/restTutorial/snapshot5
+:dao-plugin: https://github.com/9ci/grails-dao/blob/grails3/dao-plugin
+:url-restTutorial: https://github.com/9ci/angle-grinder/blob/rest_tutorial/grails/restTutorial
+:url-snapshot1: {url-restTutorial}/snapshot1
+:url-snapshot2: {url-restTutorial}/snapshot2
+:url-snapshot3: {url-restTutorial}/snapshot3
+:url-snapshot5: {url-restTutorial}/snapshot5
+
 
 == Getting started
 
@@ -18,7 +25,7 @@ For this tutorial you will need icon:twitter[]
 
 * Git.
 
-* Grails 3.2.0 (you can install it with http://sdkman.io on most Unix based systems.)
+* Grails 3.2.11 (you can install it with http://sdkman.io on most Unix based systems.)
 
 After all is installed clone the repo:
 
@@ -26,14 +33,14 @@ After all is installed clone the repo:
 git clone https://github.com/9ci/angle-grinder
 ----
 
-and switch to branch `rest_tutorial` branch, and go to `angle-grinder/grails/restTutorial/step1`, the final result is in
-the `result` folder for each step
+and switch to branch `rest_tutorial` branch, and go to `angle-grinder/grails/restTutorial`, the final result is in
+the `snapshot` folder for each step
 
 So first let's create new grails app:
 
 ----
 $ grails create-app -profile rest-api -features hibernate4 resttutorail
-Application created at angle-grinder/grails/restTutorial/snapshot1
+Application created at angle-grinder/grails/restTutorial
 ----
 
 Grails 3 provides several different profiles you can read about them in the {docs-grails}/profiles.html[docs]
@@ -51,8 +58,10 @@ grails create-domain-class Contact
 
 Then set it up like so:
 
-[source,groovy]
-----
+.Contact.groovy
+```groovy
+package resttutorial
+
 class Contact {
   String firstName
   String lastName
@@ -61,26 +70,32 @@ class Contact {
 
   static constraints = {
     firstName nullable: false
-    inactive bindable:false
+    inactive bindable: false
   }
 }
-----
+```
 
 To avoid writing `nullable: true` we will set the default to allow nulls for fields
-Add the following to `grails-app/config/application.groovy`
+Add the following to `grails-app/conf/application.groovy`
 
-[source,groovy]
-----
+.application.groovy
+```groovy
 grails.gorm.default.constraints = {
   '*' (nullable: true, blank: true)
 }
-----
+```
 
 We will load 100 rows of mock test data from a file `Contacts.json` in resources.
-The mock data was generated from a great tool https://www.mockaroo.com[Mockaroo]. Check it out
+The mock data was generated from a great tool https://www.mockaroo.com[Mockaroo].
 
-[source,groovy]
-----
+Add the following code to `grails-app/init/BootStrap.groovy`
+
+.BootStrap.groovy
+```groovy
+package resttutorial
+
+import groovy.json.JsonSlurper
+
 class BootStrap {
     def grailsApplication
     def init = { servletContext ->
@@ -93,24 +108,24 @@ class BootStrap {
     def destroy = {
     }
 }
-----
+```
 
 ==== Adding the `@Resource` annotation to our domain
 :url-dr: {docs-grails}#domainResources
 
 So now we can start working on creating REST Api for our app.
 The easiest way is to use {url-dr}[domain resources].
-So as we see from {url-dr}[docs] we just need to update our domain a bit (just add `@Resource` anotation) in such a way:
+So as we see from {url-dr}[docs] we just need to update our domain a bit (just add {docs-grails-api}/grails/rest/Resource.html[@Resource] anotation) in such a way:
 
-[source,groovy]
-----
+.Contact.groovy
+```groovy
 import grails.rest.Resource
 
 @Resource(uri = '/contact', formats = ["json"])
 class Contact {
   ...
 }
-----
+```
 
 [NOTE]
 .On plural resource names
@@ -121,7 +136,7 @@ We are aware of the debate on this in the rest world. We feel this will cause co
 1. English plural rules like "cherry/cherries" or "goose/geese/moose/meese" are not the nicest thing to think of while developing API, particularly when english is not your mother tongue.
 2. Many times, as in Grails, we want to generate endpoint from the model, which is usually singular. It does not play nicely with the above pluralization exceptions and creates more work maintaining UrlMappings.
 3. When the model is singular, which is normally is for us, keeping the rest endpoint singular will have the rest developers and the grails developers speaking the same language
-3. The argument "usually you start querying by a Get to display a list" does not refer to any real use case. And we will end up querying single items as much as and even more than a list of items.
+4. The argument "usually you start querying by a Get to display a list" does not refer to any real use case. And we will end up querying single items as much as and even more than a list of items.
 ====
 
 
@@ -154,7 +169,7 @@ URI, Method, Action, Response Data
 
 ==== Status Code Defaults
 
-Piecing together the {javadoc-HttpStatus}[HttpStatus codes] and results from RestfullController, RestResponder and _errors.gson,
+Piecing together the {docs-HttpStatus}[HttpStatus codes] and results from RestfullController, RestResponder and _errors.gson,
 these are what looks like the out of the box status codes as of Grails 3.2.2
 
 .Status Codes Out Of Box
@@ -179,15 +194,14 @@ So the controllers that response for the REST endpoints we will move to separate
 have Controllers for GSP rendering or some other not related to REST stuff.
 
 As a our preferred namespace design we will use the "api" namespace prefix for the rest of the tutorial.
-So we will add ` namespace = '/api'` to change the uri on the contact @Resource
+So we will add `namespace = 'api'` on the contact @Resource. @Resource has also property `uri` but it will override namespace property,
+for example if @Resource(namespace = 'api', uri='contacts', formats = ["json"]) url for resource will be `localhost:8080/contacts`, not
 
-----
-@Resource(uri = '/contact', namespace = '/api', formats = ["json"])
+.Contact.groovy
+```groovy
+@Resource(namespace = 'api', formats = ["json"])
 class Contact
-----
-
-!!!!!!!!!!!!! FIXME - do we need namespace = '/api' above as well as in UrlMappings? Why?
-
+```
 
 Also we need to update UrlMappings.groovy, there are two ways:
 
@@ -197,17 +211,14 @@ Also we need to update UrlMappings.groovy, there are two ways:
 We will use the second case:
 
 .UrlMappings.groovy
-[source,groovy]
-----
+```groovy
 package resttutorial
 
 class UrlMappings {
 
     static mappings = {
-
       group("/api") {
-      !!!!!!!!!!!!! FIXME - do we need namespace:"api" below? why?
-        delete "/$controller/$id(.$format)?"(namespace:"api", action:"delete")
+        delete "/$controller/$id(.$format)?"(action:"delete")
         get "/$controller(.$format)?"(action:"index")
         get "/$controller/$id(.$format)?"(action:"show")
         post "/$controller(.$format)?"(action:"save")
@@ -217,34 +228,35 @@ class UrlMappings {
         ...
     }
 }
-----
+```
 
 You can see all available endpoints that Grails create for us with url-mappings-report:
 
 ----
 $ grails url-mappings-report
 [options="header", cols="1,2", grid=rows]
-|    *     | ERROR: 500                                | View:   /error           |
-|    *     | ERROR: 404                                | View:   /notFound        |
-|   GET    | /api/${controller}(.${format)?            | Action: index            |
-|   POST   | /api/${controller}(.${format)?            | Action: save             |
-|  DELETE  | /api/${controller}/${id}(.${format)?      | Action: delete           |
-|   GET    | /api/${controller}/${id}(.${format)?      | Action: show             |
-|   PUT    | /api/${controller}/${id}(.${format)?      | Action: update           |
-|  PATCH   | /api/${controller}/${id}(.${format)?      | Action: patch            |
+Dynamic Mappings
+ |    *     | ERROR: 500                                | View:   /error           |
+ |    *     | ERROR: 404                                | View:   /notFound        |
+ |   GET    | /api/${controller}(.${format)?            | Action: index            |
+ |   POST   | /api/${controller}(.${format)?            | Action: save             |
+ |  DELETE  | /api/${controller}/${id}(.${format)?      | Action: delete           |
+ |   GET    | /api/${controller}/${id}(.${format)?      | Action: show             |
+ |   PUT    | /api/${controller}/${id}(.${format)?      | Action: update           |
+ |  PATCH   | /api/${controller}/${id}(.${format)?      | Action: patch            |
 
 Controller: application
-|    *     | /                                         | Action: index            |
+ |    *     | /                                                  | Action: index            |
 
 Controller: contact
-|   GET    | /contact/create                           | Action: create           |
-|   GET    | /contact/${id}/edit                       | Action: edit             |
-|   POST   | /contact                                  | Action: save             |
-|   GET    | /contact                                  | Action: index            |
-|  DELETE  | /contact/${id}                            | Action: delete           |
-|  PATCH   | /contact/${id}                            | Action: patch            |
-|   PUT    | /contact/${id}                            | Action: update           |
-|   GET    | /contact/${id}                            | Action: show             |
+ |   GET    | /api/contact/create                                | Action: create           |
+ |   GET    | /api/contact/${id}/edit                            | Action: edit             |
+ |   POST   | /api/contact                                       | Action: save             |
+ |   GET    | /api/contact                                       | Action: index            |
+ |  DELETE  | /api/contact/${id}                                 | Action: delete           |
+ |  PATCH   | /api/contact/${id}                                 | Action: patch            |
+ |   PUT    | /api/contact/${id}                                 | Action: update           |
+ |   GET    | /api/contact/${id}                                 | Action: show             |
 ----
 
 
@@ -254,83 +266,82 @@ Fire up the app with `run-app`
 
 ===== GET (list):
 ----
-curl -i -X GET -H "Content-Type: application/json"  localhost:8080/contact
+curl -i -X GET -H "Content-Type: application/json"  localhost:8080/api/contact
 HTTP/1.1 200
 X-Application-Context: application:development
 Content-Type: application/json;charset=UTF-8
 Transfer-Encoding: chunked
-Date: Fri, 04 Nov 2016 14:48:14 GMT
+Date: Mon, 31 Jul 2017 12:30:31 GMT
 
-[{"id":1,"email":"mscott0@ameblo.jp","firstName":"Marie","lastName":"Scott"},{"id":2,"email":"jrodriguez1@scribd.com" ...
+[{"id":1,"email":"mscott0@ameblo.jp","firstName":"Marie","lastName":"Scott"},{"id":2,"email":"jrodriguez1@scribd.com","firstName":"Joseph","lastName":"Rodriguez"}, ...
 ----
 
 ===== POST:
 ----
-curl -i -X POST -H "Content-Type: application/json" -d '{"firstName":"Joe", "lastName": "Cool"}' localhost:8080/contact
+curl -i -X POST -H "Content-Type: application/json" -d '{"firstName":"Joe", "lastName": "Cool"}' localhost:8080/api/contact
 HTTP/1.1 201
 X-Application-Context: application:development
-Location: http://localhost:8080/contact/101
+Location: http://localhost:8080/api/contact/101
 Content-Type: application/json;charset=UTF-8
 Transfer-Encoding: chunked
-Date: Fri, 04 Nov 2016 15:00:49 GMT
+Date: Mon, 31 Jul 2017 12:30:44 GMT
 
 {"id":101,"firstName":"Joe","lastName":"Cool"}
 ----
 ===== GET (by id):
 ----
-curl -i -X GET -H "Content-Type: application/json"  localhost:8080/contact/101
+curl -i -X GET -H "Content-Type: application/json"  localhost:8080/api/contact/101
 HTTP/1.1 200
 X-Application-Context: application:development
 Content-Type: application/json;charset=UTF-8
 Transfer-Encoding: chunked
-Date: Fri, 04 Nov 2016 15:02:09 GMT
+Date: Mon, 31 Jul 2017 12:31:00 GMT
 
 {"id":101,"firstName":"Joe","lastName":"Cool"}
 ----
 
 ===== PUT:
 ----
-curl -i -X PUT -H "Content-Type: application/json" -d '{"firstName": "New Name", "lastName": "New Last name"}' localhost:8080/contact/101
+curl -i -X PUT -H "Content-Type: application/json" -d '{"firstName": "New Name", "lastName": "New Last name"}' localhost:8080/api/contact/101
 HTTP/1.1 200
 X-Application-Context: application:development
-Location: http://localhost:8080/contact/101
+Location: http://localhost:8080/api/contact/101
 Content-Type: application/json;charset=UTF-8
 Transfer-Encoding: chunked
-Date: Fri, 04 Nov 2016 15:03:48 GMT
+Date: Mon, 31 Jul 2017 12:32:01 GMT
 
 {"id":101,"firstName":"New Name","lastName":"New Last name"}
 ----
 
 ===== DELETE:
 ----
-curl -i -X DELETE -H "Content-Type: application/json"  localhost:8080/contact/50
+curl -i -X DELETE -H "Content-Type: application/json"  localhost:8080/api/contact/50
 HTTP/1.1 204
 X-Application-Context: application:development
-Content-Type: application/json;charset=UTF-8
-Date: Mon, 28 Nov 2016 07:43:11 GMT
+Date: Mon, 31 Jul 2017 12:32:24 GMT
 ----
 
 ===== 422 - Post Validation Error:
 ----
-curl -i -X POST -H "Content-Type: application/json" -d '{"lastName": "Cool"}' localhost:8080/contact
+curl -i -X POST -H "Content-Type: application/json" -d '{"lastName": "Cool"}' localhost:8080/api/contact
 HTTP/1.1 422
 X-Application-Context: application:development
 Content-Type: application/json;charset=UTF-8
 Transfer-Encoding: chunked
-Date: Mon, 28 Nov 2016 08:21:11 GMT
+Date: Mon, 31 Jul 2017 12:32:41 GMT
 
-{"message":"Property [firstName] of class [class resttutorial.Contact] cannot be null","path":"","_links":{"self":{"href":"http://localhost:8080"}}}
+{"message":"Property [firstName] of class [class resttutorial.Contact] cannot be null","path":"/contact/index","_links":{"self":{"href":"http://localhost:8080/contact/index"}}}
 ----
 
 ===== 404 - Get Error:
 ----
-curl -i -X GET -H "Content-Type: application/json"  localhost:8080/contact/105
+curl -i -X GET -H "Content-Type: application/json"  localhost:8080/api/contact/105
 HTTP/1.1 404
 X-Application-Context: application:development
 Content-Type: application/json;charset=UTF-8
 Content-Language: en-US
 Transfer-Encoding: chunked
-Date: Mon, 28 Nov 2016 08:22:01 GMT
+Date: Mon, 31 Jul 2017 12:32:55 GMT
 
 {"message":"Not Found","error":404}
 ----
@@ -339,11 +350,11 @@ Date: Mon, 28 Nov 2016 08:22:01 GMT
 
 We did not setup XML support so we will get a 406. You may try adding XML to formats to see if this.
 ----
-curl -i -X GET -H "Accept: application/xml"  http://localhost:8080/contact/8
+curl -i -X GET -H "Accept: application/xml"  http://localhost:8080/api/contact/8
 HTTP/1.1 406
 X-Application-Context: application:development
 Content-Length: 0
-Date: Mon, 28 Nov 2016 09:35:20 GMT
+Date: Mon, 31 Jul 2017 12:33:13 GMT
 ----
 
 === Functional Tests for the API
@@ -364,8 +375,8 @@ RestBuilder we use to emulate request from external source. Note, in Grails3 int
 so you cant call `http://localhost:8080/api/contact` , but we can use `serverPort` variable instead. And to make it more
 intelligent lets use baseUrl. See example:
 
-[source,groovy]
-----
+.ContactSpec.groovy
+```groovy
 package resttutorial
 
 import grails.plugins.rest.client.RestBuilder
@@ -403,32 +414,31 @@ class ContactSpec extends Specification {
         json.inactive == null
     }
 }
-----
-:url-snapshot1: https://github.com/9ci/angle-grinder/blob/rest_tutorial/grails/restTutorial/snapshot1
+```
 
-More tests examples are in the are in the snapshot1 project's
-{url-snapshot1}/src/integration-test/groovy/resttutorial/ContactSpec.groovy [ContactSpec.groovy]
+More tests examples are in the snapshot1 project's
+{url-snapshot1}/src/integration-test/groovy/resttutorial/ContactSpec.groovy[ContactSpec.groovy]
 
 === GSON and Grails Views Defaults
 
 As you can see by inspecting the views directory, by default Grails creates a number of gson files. Support for them is
 provided with http://views.grails.org/latest/#_introduction[Grails Views Plugin]
 
-The the obvious question how does it work. If you look at sources of the RestfullController it doesn't "call" this templates
-explicitly. So under the hood plugin just looks on request, if url ends on `.json`(localhost:8080/contact/1.json) or if
+The obvious question how does it work. If you look at sources of the RestfullController it doesn't "call" this templates
+explicitly. So under the hood plugin just looks on request, if url ends on `.json`(localhost:8080/api/contact/1.json) or if
 `Accept` header containing `application/json` the .gson view will be rendered.
 
 If you delete default generated templates, then it will show default Grails page. Go ahead and try to delete `notFound.gson`
 and try
 
 ----
-curl -i -X GET -H "Content-Type: application/json"  localhost:8080/contact/105
+curl -i -X GET -H "Content-Type: application/json"  localhost:8080/api/contact/105
 HTTP/1.1 404
 X-Application-Context: application:development
 Content-Type: text/html;charset=utf-8
-Content-Language: en
+Content-Language: en-US
 Content-Length: 990
-Date: Wed, 30 Nov 2016 16:06:42 GMT
+Date: Mon, 31 Jul 2017 12:34:06 GMT
 
 <!DOCTYPE html><html><head><title>Apache Tomcat/8.5.5 - Error report</title><style type="text/css">H1 ...
 ----
@@ -447,7 +457,7 @@ This is for case when resource isn't found. As you can see this is where the 404
 It is called when we get `404` error, the same as for `gsp` look at UrlMapping: `"404"(view: '/notFound')`
 
 ===== errors/_errors.gson
-{url-snapshot1}/grails-app/views/errors/_errors.gson
+{url-snapshot1}/grails-app/views/errors/_errors.gson[See source]
 This is for validation errors. As you can see this is where the `UNPROCESSABLE_ENTITY`(422) status code gets set, and
 error messages for entity specified.
 
@@ -491,7 +501,7 @@ repositories {
 ...
 dependencies {
 ...
-compile "org.grails.plugin:dao:2.0.1.SNAPSHOT"
+    compile "org.grails.plugin:dao:3.0.3.SNAPSHOT"
 ----
 
 === RestDaoController
@@ -502,13 +512,16 @@ default Grails `RestfullController` and simplifies the logic by pushing most of 
 The `@Resource` has a property `superClass` that allows us to use another controller as basic for building rest endpoints,
 and we will set `RestDaoController` as super class for our Contact:
 
-[source,groovy]
-----
-@Resource(uri = '/contact', superClass = RestDaoController)
+.Contact.groovy
+```groovy
+import grails.rest.Resource
+import grails.plugin.dao.RestDaoController
+
+@Resource(namespace = 'api', superClass = RestDaoController)
 class Contact {
   ...
 }
-----
+```
 
 Now run the tests to make sure our functional tests still pass with the defaults.
 
@@ -518,13 +531,13 @@ Lets say we want to customize the insert to allow a user to pass in a name and h
 
 The test for this case will look like:
 
-[source,groovy]
-----
+.ContactSpec.groovy
+```groovy
   given:
   RestBuilder rest = new RestBuilder()
 
   when: "name is passed"
-  def response = rest.post("http://localhost:${serverPort}/contact"){
+  def response = rest.post("${baseUrl}/contact"){
     json([
       name: "Joe Cool",
       email: "foo@bar.com"
@@ -538,17 +551,18 @@ The test for this case will look like:
   json.lastName == "Cool"
   }
 }
-----
+```
 
-We will setup a concrete implementation of a dao for the contact as ooposed to clogging up the business logic in the controller.
+More tests examples are in the snapshot2 project's {url-snapshot2}/src/integration-test/groovy/resttutorial/ContactSpec.groovy[ContactSpec.groovy]
+
+We will setup a concrete implementation of a dao for the contact as opposed to clogging up the business logic in the controller.
 The plugin will recognize that we want to use this base on the naming convention SomeDomainNameDao
-In either the grails-app/services or grails-app/dao directory add the ContactDao.groovy
+In either the grails-app/services/resttutorial or grails-app/dao/resttutorial directory add the ContactDao.groovy
 
 We need to add `@Transactional` because services, and thus our DAO, are not transactional by default starting from Grails 3.
 
-[source,groovy]
 .ContactDao.groovy
-----
+```groovy
 package resttutorial
 
 import grails.plugin.dao.GormDaoSupport
@@ -558,18 +572,18 @@ import grails.transaction.Transactional
 class ContactDao extends GormDaoSupport {
 	Class domainClass = Contact
 
-  @Override
-  Map insert(Map params) {
-    String name = params.remove("name")
-    if(name){
-      def (fname, lname) = name.split()
-      params.firstName = fname
-      params.lastName = lname
+    @Override
+    Map insert(Map params) {
+      String name = params.remove("name")
+      if(name){
+        def (fname, lname) = name.split()
+        params.firstName = fname
+        params.lastName = lname
+      }
+      super.insert(params)
     }
-    super.insert(params)
-  }
 }
-----
+```
 
 Now we can run tests again to be sure that new functionality works along with out new test.
 
@@ -590,32 +604,34 @@ using DAOs.
 
 We will remove the `@Resource` annotation from the contact domain and add the ContactController.groovy, but
 `@Resource`, not only creates controller based on resource, but also updates urlMappings, so now we need to add our url by hands.
-It will look somethings like this: `"/contact"(resources: "contact")` it will add url mappings for our newly created controller.
+It will look somethings like this: `"/api/contact"(resources: "contact")` it will add url mappings for our newly created controller.
 
 .UrlMappings.groovy
-[source,groovy]
-----
+```groovy
   static mappings = {
     .....
-     "/contact"(resources: "contact")
+     "/api/contact"(resources: "contact")
   }
-----
+```
 
 And controller:
 
-[source,groovy]
 .ContactController.groovy
-----
-package resttutorial
+```groovy
+package resttutorial.api
+
+import resttutorial.Contact
+import grails.plugin.dao.RestDaoController
 
 class ContactController extends RestDaoController {
-  static responseFormats = ['json']
+    static responseFormats = ['json']
+    static namespace = "api"
 
-  ContactController() {
-    super(Contact)
-  }
+    ContactController() {
+      super(Contact)
+    }
 }
-----
+```
 
 You can run tests - it will work in the same way as it does with annotation.
 
@@ -648,54 +664,45 @@ For now lets implement just making contact inactive.
 To add custom end point we need to add nested url for resource and result will be look like:
 
 .UrlMappings.groovy
-[source,groovy]
-----
-  static mappings = {
-    .....
+```groovy
+    static mappings = {
+      .....
 
-     "/contact"(resources: "contact"){
-          delete "/active"(controller: "contact", action: "inactivate")
-          // For future execise add `activate` action that will activate a contact
-          // post "/active"(controller: "contact", action: "activate")
-      }
-  }
-----
+       "/api/contact"(resources: "contact"){
+            delete "/active"(action: "inactivate")
+            // For future execise add `activate` action that will activate a contact
+            // post "/active"(action: "activate")
+        }
+    }
+```
 
-[source,groovy]
 .ContactController.groovy
-----
-package resttutorial
+```groovy
+package resttutorial.api
 
-import grails.plugin.dao.DomainException
+import resttutorial.Contact
 import grails.plugin.dao.RestDaoController
 
 class ContactController extends RestDaoController {
-  static responseFormats = ['json']
+    static responseFormats = ['json']
+    static namespace = "api"
 
-  ContactController() {
-    super(Contact)
-  }
+    ContactController() {
+      super(Contact)
+    }
 
-  def inactivate() {
     def inactivate() {
-       Contact contact
-       try {
-         contact = dao.inactivate(params.contactId as Long)
-       } catch (DomainNotFoundException e){
-         request.withFormat {
-           '*'{ render status: NOT_FOUND } // will render `notFound.gson`
-         }
-         return
-       }
+       Contact contact = dao.inactivate(params.contactId as Long)
        respond contact
      }
 }
-----
+```
 
 So it will show default `404` error, we can customize `notFound.gson` file to make it show not only default `'Not found'`,
 but our message from exception:
+
 .notFound.gson
-----
+```json
 import groovy.transform.Field
 
 response.status 404
@@ -705,20 +712,19 @@ json {
 	message text ?: "Not found"
 	error 404
 }
-----
+```
 
 and in controller
-.ContactController
-----
+
+.ContactController.groovy
+```groovy
 ...
-try {
-      contact = dao.inactivate(params.contactId as Long)
-    } catch (Exception e){
-      render view: "../notFound", model: [message: e.message]
-      return
-    }
+  contact = dao.inactivate(params.contactId as Long)
+
 ...
-----
+```
+
+RestDaoController has `handleDomainNotFoundException` which handles the exception, one can override it if needed.
 
 
 [NOTE]
@@ -728,29 +734,36 @@ is used in the controller.
 
 Add logic to the dao:
 
-[source,groovy]
-----
+.ContactDao.groovy
+```groovy
+package resttutorial
+
+import grails.plugin.dao.DaoUtil
+import grails.plugin.dao.GormDaoSupport
+import grails.transaction.Transactional
+
+@Transactional
 class ContactDao extends GormDaoSupport {
     ...
-Contact inactivate(Long id) {
-    Contact contact = Contact.get(id)
+  Contact inactivate(Long id) {
+      Contact contact = Contact.get(id)
 
-    DaoUtil.checkFound(contact, [id: id] ,domainClass.name) // Throws DomainNotFoundException
-    DaoUtil.checkVersion(contact , [id: id].version)
+      DaoUtil.checkFound(contact, [id: id] ,domainClass.name) // Throws DomainNotFoundException
+      DaoUtil.checkVersion(contact , [id: id].version)
 
-    contact.inactive = true
-    contact.persist()
-    contact
-  }
+      contact.inactive = true
+      contact.persist()
+      contact
+    }
     ....
 }
-----
+```
 
 Update our rest sanity tests
 
-[source,groovy]
-----
-void "check inactivate endpoint"() {
+.ContactSpec.groovy
+```groovy
+    void "check inactivate endpoint"() {
         when:
         RestResponse response = rest.delete("${baseUrl}/contact/2/active")
 
@@ -760,20 +773,23 @@ void "check inactivate endpoint"() {
         JSONElement json = response.json
         json.inactive == true
     }
-----
+```
 
 Update our dao tests
 
-[source,groovy]
-----
- void "check inactivate"() {
+.ContactDaoSpec.groovy
+```groovy
+    void "check inactivate"() {
         when:
         def result = contactDao.inactivate(5)
 
         then:
         result.inactive == true
     }
-----
+```
+
+More tests examples are in the snapshot3 project's
+{url-snapshot3}/src/integration-test/groovy/resttutorial/ContactSpec.groovy[ContactSpec.groovy] and {url-snapshot3}/src/integration-test/groovy/resttutorial/ContactDaoSpec.groovy[ContactDaoSpec.groovy]
 
 === Paging data
 When returning a list, it will be necessary to support paging.
@@ -782,10 +798,11 @@ There is no single rest standard for paging so we will settle on the following.
 Paging will leverage query parameters as shown in the following example:
 
 ```
-https://localhost:8080/contact/?max=10&page=1
+https://localhost:8080/api/contact/?max=10&page=1
 ```
 
 and will result in a wrapped response
+
 ```
 page: 1,
 total: 10,
@@ -806,7 +823,8 @@ Few words about what this parameters means:
 [NOTE]
 ====
 Currently you will get next response on index endpoint:
-----
+
+```json
 {
     "page": 1,
     "total": 10,
@@ -821,20 +839,23 @@ Currently you will get next response on index endpoint:
         },
         {
 ...
-----
+```
+
 but if you create a file
 
 .views/contact/_contact.gson
-----
+```
 import groovy.transform.*
 
 @Field Contact contact
 
 json {firstName contact.firstName}
-----
+```
+
 The response will be changed to
-----
-"page": 1,
+
+```json
+    "page": 1,
     "total": 10,
     "records": 100,
     "rows":
@@ -849,7 +870,7 @@ The response will be changed to
             "firstName": "Julie"
         },{
 ....
-----
+```
 ====
 
 This happens because index endpoint looks for template for rendering entity.
@@ -868,8 +889,8 @@ that Angle-Grinder requires. So finally we should add:
 
 ----
 compile "org.grails:grails-dependencies"
-compile "com.bertramlabs.plugins:asset-pipeline-grails:2.11.1"
-compile "nine:angle-grinder:2.0.0"
+compile "com.bertramlabs.plugins:asset-pipeline-grails:2.11.2"
+compile "nine:angle-grinder:3.0.3.SNAPSHOT"
 compile 'net.errbuddy.plugins:babel-asset-pipeline:2.1.0'
 ----
 
@@ -880,28 +901,31 @@ controllers from controllers that will render pages.
 
 === Gsp rendering
 We have REST controller in the separate folder lets create one for page rendering.
+
 .ContactController.groovy
-----
+```groovy
 package resttutorial
 
 class ContactController {
 
     def index() {}
 }
-----
+```
+
 and then create folder `/views/contact` and `index.gsp` in it:
-[source,html]
-----
+
+.index.gsp
+```html
 <!doctype html>
 <html>
-<head>
-	<meta name="layout" content="main"/>
-	<title>Welcome to Tutorial</title>
-</head>
-<body >
-</body>
+  <head>
+    <meta name="layout" content="main"/>
+    <title>Welcome to Tutorial</title>
+  </head>
+  <body >
+  </body>
 </html>
-----
+```
 
 To apply styling and javascript we need to include Angle-Grinder assets to our app. It is really easy with
 assets-pipeline plugin. First we need to create the `assets` folder in `grails-app` and add `javascript` and
@@ -927,40 +951,41 @@ Then we create `application.css` file in `stylesheets` folder and `application.j
 ----
 
 And now we need to include them in our gsp:
-[source,html]
-----
+
+.index.gsp
+```html
 <head>
 	<meta name="layout" content="main"/>
 	<title>Welcome to Tutorial</title>
 	<asset:stylesheet href="application.css"/>
 	<asset:javascript src="application.js"/>
 </head>
-----
+```
 
 To see how it works lets add a header for our page and add some content:
-----
+
+.index.gsp
+```html
 <!doctype html>
 <html>
-<head>
-	<meta name="layout" content="main"/>
-	<title>Welcome to Tutorial</title>
-	<asset:stylesheet href="application.css"/>
-	<asset:javascript src="application.js"/>
-
-</head>
-<body >
-<nav class="navbar navbar-default navbar-static-top">
-	<div class="container">
-		Rest Tutorial
-	</div>
-</nav>
-<div class="container">
-Content goes here
-</div>
-</body>
+  <head>
+    <meta name="layout" content="main"/>
+    <title>Welcome to Tutorial</title>
+    <asset:stylesheet href="application.css"/>
+    <asset:javascript src="application.js"/>
+  </head>
+  <body >
+    <nav class="navbar navbar-default navbar-static-top">
+      <div class="container">
+        Rest Tutorial
+      </div>
+    </nav>
+    <div class="container">
+      Content goes here
+    </div>
+  </body>
 </html>
-
-----
+```
 
 I've added a styling for header for our page see `views/contact/index.gsp`
 
@@ -970,8 +995,9 @@ Now when we have a html template lets create an angular app, and we will start f
 lets use `es6` we've already included dependency for `babel-asset-pipeline` above.
 
 First we need to create module and add routes for it:
-.grails-app/assets/contact/contactApp.es6
-----
+
+.grails-app/assets/javascript/contact/contactApp.es6
+```js
 angular.module("contactApp", ["angleGrinder"])
   .constant('RestContext', 'api')
   .controller('ListCtrl', ListCtrl)
@@ -980,7 +1006,7 @@ angular.module("contactApp", ["angleGrinder"])
       RoutesServ.setRoutes({contact: {"/": {page: "list"}}});
     }
   ]);
-----
+```
 
 `ResourceTemplateServ` - service provided by Ag-Grinder that creates path for template.
 
@@ -990,21 +1016,24 @@ with actions) and to make it use REST approach we need to specify the namespace 
 `RoutesServ.setRoutes({contact: {"/": {page: "list"}}})` is service that will create routes for us
 
 We need to update our `contact/index.gsp` to make it "see" our angular app:
-----
+
+.index.gsp
+```html
 ...
 <body ng-app="contactApp"> %{--The ngApp directive designates the root element of the application--}%
 ...
   <div class="container">
-    <ng-view></ng-view> %{-- ngView is a directive that complements the $route service by including the rendered template of the current route into the layout--}
+    <ng-view></ng-view> %{-- ngView is a directive that complements the $route service by including the rendered template of the current route into the layout--}%
   </div>
 </body
-----
+```
 
 The next step is to create an angular controller for list:
+
 .assets/javascript/contact/ListCtrl.es6
-----
+```js
 class ListCtrl {
-  constructor($scope, Resource, DialogCrudCtrlMixin, pathWithContext,RoutesServ) {
+  constructor($scope, Resource, DialogCrudCtrlMixin, pathWithContext, RoutesServ) {
     var colModel = [
       {
         name: "id",
@@ -1036,16 +1065,43 @@ class ListCtrl {
     };
   }
 }
-ListCtrl.$inject = ['$scope', 'Resource', 'DialogCrudCtrlMixin', 'pathWithContext',  "RoutesServ"];
+ListCtrl.$inject = ['$scope', 'Resource', 'DialogCrudCtrlMixin', 'pathWithContext', 'RoutesServ'];
+```
 
+Then add "links" on angular controller in `application.js`:
+
+.application.js
 ----
+//= require angleGrinder/vendor.js
+//= require angleGrinder/angleGrinder.js
+//= require contact/ListCtrl.es6
+//= require contact/contactApp.es6
+----
+
+And add action in controller:
+
+.ContactController.groovy
+```groovy
+package resttutorial
+
+class ContactController {
+
+    def index() {}
+
+    def list() {
+      render template: "list"
+    }
+}
+```
 
 Then lets create a list template:
-----
+
+.views/contact/_list.gsp
+```html
 <h3 class="page-header">Contact list</h3>
 
 <div ag-grid="gridOptions" ag-grid-name="contactGrid"></div>
-----
+```
 
 Where `ag-grid` - directive that takes parameters from scope and renders grid, and  `ag-grid-name` - set the name to grid
 to make available from scope.
@@ -1060,7 +1116,7 @@ As I mentioned above Ag-Grinder has a lot of handy tools, one of the is `DialogC
 the grid:
 
 .assets/javascript/contact/ListCtrl.es6
-----
+```js
 var ListCtrl = (function() {
   ListCtrl.$inject = ["$scope", "Resource", "DialogCrudCtrlMixin"];
 
@@ -1076,15 +1132,17 @@ var ListCtrl = (function() {
 ...
 
 angular.module("contactApp").controller("ListCtrl", ListCtrl);
-----
+```
 
 For each grid row we have action column with gear, when you click on it a menu with delete button will appear.
 
 We do not even need to specify what resource should it use, just to add resource name in `index.gsp`:
-----
+
+.index.gsp
+```html
 <body ng-app="contactApp" data-resource-name="contact"
 	  data-resource-path="/contact">
-----
+```
 
 And it will create the path by its self.
 
@@ -1095,30 +1153,30 @@ So run the application to try.
 To add create functionality we need to prepare create form:
 
 ._form.gsp
-----
+```html
 <div class="modal-header">
-	<button type="button" class="close" ng-click="closeDialog()">&times;</button>
+  <button type="button" class="close" ng-click="closeDialog()">&times;</button>
 
-		<span>Create</span>
+    <span>Create</span>
 </div>
 
 <form name="editForm" class="form-horizontal no-margin" ag-submit="save(contact)">
-	<div class="modal-body">
-		<div>
-			<label class="control-label">First Name</label>
-			<div class="row">
-				<div class="col-md-4">
-					<input type="text" name="firstName" ng-model="contact.firstName" ng-required="true" class="form-control"/>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="modal-footer">
-		<ag-cancel-button ng-click="closeDialog()"></ag-cancel-button>
-		<ag-submit-button></ag-submit-button>
-	</div>
+  <div class="modal-body">
+    <div>
+      <label class="control-label">First Name</label>
+      <div class="row">
+        <div class="col-md-4">
+          <input type="text" name="firstName" ng-model="contact.firstName" ng-required="true" class="form-control"/>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <ag-cancel-button ng-click="closeDialog()"></ag-cancel-button>
+    <ag-submit-button></ag-submit-button>
+  </div>
 </form>
-----
+```
 
 You probably noticed several new directives, I'll provide a brief description for them:
 
@@ -1131,7 +1189,7 @@ You probably noticed several new directives, I'll provide a brief description fo
 Now we just need to specify template so `DialogCrudCtrlMixin` now where is form template:
 
 .ListCtrl.js
-----
+```js
 ...
  DialogCrudCtrlMixin($scope, {
       Resource: Resource,
@@ -1139,31 +1197,47 @@ Now we just need to specify template so `DialogCrudCtrlMixin` now where is form 
       templateUrl: pathWithContext("contact/form")
     });
 ...
-----
+```
 
-And the last step we need to add button that will trigger contact creting:
+And the last step we need to add button that will trigger contact creating:
 
 ._list.gsp
-----
+```html
 <div class="ag-panels-row">
-	<div class="ag-panel">
-		<div class="navbar navbar-toolbar navbar-grid navbar-default">
-			<div class="navbar-inner with-selected-pointer with-grid-options">
-				<ul class="nav navbar-nav">
-					<li>
-						<a ng-click="createRecord()">
-							<i class="fa fa-plus"></i> Create Contact
-						</a>
-					</li>
-				</ul>
-			</div>
-		</div>
-		<div ag-grid="gridOptions" ag-grid-name="contactGrid"></div>
-	</div>
+  <div class="ag-panel">
+    <div class="navbar navbar-toolbar navbar-grid navbar-default">
+      <div class="navbar-inner with-selected-pointer with-grid-options">
+        <ul class="nav navbar-nav">
+          <li>
+            <a ng-click="createRecord()">
+              <i class="fa fa-plus"></i> Create Contact
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div ag-grid="gridOptions" ag-grid-name="contactGrid"></div>
+  </div>
 </div>
-----
+```
 
 `createRecord()` methos is already in `$scope`, thanks again to `DialogCrudCtrlMixin`.
+
+Then add action in controller:
+
+.ContactController.groovy
+```groovy
+package resttutorial
+
+class ContactController {
+
+...
+
+    def form() {
+        render template: "form"
+    }
+}
+```
 
 So you can try to create a new contact.
 
@@ -1173,20 +1247,21 @@ You will be suprised, but edit is already works, try Edit button in grid dropdow
 that we need to change is to change labels for form modal window:
 
 ._form.gsp
-----
+```html
 <div class="modal-header">
 	<button type="button" class="close" ng-click="closeDialog()">&times;</button>
 	<span ng-show="contact.persisted()" > Update</span>
 	<span ng-hide="contact.persisted()" > Create</span>
 </div>
 ...
-----
+```
 
-=== Snapshot 3 of tutorial app is at this point
+=== Snapshot 4 of tutorial app is at this point
 === Add more field types
 
 So now lets add some more fields for our domain to take a look on some other widgets of Angle-Grinder
 
+.Contact.groovy
 ```groovy
 import java.time.*
 
@@ -1202,10 +1277,12 @@ class Contact {
 
   Date dateCreated
   Date lastUpdated
+  Boolean inactive
 
   static constraints = {
     firstName nullable: false
-    activateOnDate nullable: false
+    dateOfBirth nullable: true
+    inactive bindable:false
   }
 
   enum Salutations {
@@ -1225,75 +1302,79 @@ our dependencies, also see section about java8 in http://docs.grails.org/latest/
 .build.gradle
 ----
 ...
-   classpath "org.grails.plugins:hibernate5:6.0.0"
-   classpath "com.bertramlabs.plugins:asset-pipeline-gradle:2.11.2"
-   classpath "org.grails.plugins:views-gradle:1.2.0.M1"
-   classpath "org.grails.plugins:grails-java8:1.1.0"
+    classpath "com.bertramlabs.plugins:asset-pipeline-gradle:2.11.2"
+    classpath "org.grails.plugins:grails-java8:1.1.0"
+    classpath "org.grails:grails-gradle-plugin:3.2.11"
+    classpath "org.grails.plugins:hibernate4:6.0.12"
+    classpath "org.grails.plugins:views-gradle:1.2.0.M2"
 
 ...
-
-   compile "org.grails.plugins:hibernate5"
-   compile "org.hibernate:hibernate-core:5.1.1.Final"
-   compile "org.hibernate:hibernate-ehcache:5.1.1.Final"
-   compile "org.grails.plugins:grails-java8:1.1.0.BUILD-SNAPSHOT"
-   compile "org.hibernate:hibernate-java8:5.1.1.Final"
-   compile "org.grails.plugins:views-json:1.2.0.M1"
-   compile "org.grails.plugins:views-json-templates:1.2.0.M1"
+    compile "org.grails.plugins:hibernate4"
+    compile "org.hibernate:hibernate-core:4.3.11.Final"
+    compile "org.hibernate:hibernate-ehcache:4.3.11.Final"
+    compile "org.grails.plugins:grails-java8:1.1.0.BUILD-SNAPSHOT"
+    compile "org.hibernate:hibernate-java8:5.1.1.Final"
+    compile "org.grails.plugins:views-json:1.2.0.M2"
+    compile "org.grails.plugins:views-json-templates:1.2.0.M2"
 ----
 
 To make it parse string date we need to add list of the available date formats:
+
 .application.groovy
-----
-grails.databinding.dateFormats = ["yyyy-MM-dd'T'HH:mm:ss'Z'", "yyyy-MM-dd'T'HH:mm:ss.S'Z'","yyyy-MM-dd'T'HH:mm:ss","yyyy-MM-dd"]
-----
+```groovy
+  grails.databinding.dateFormats = ["yyyy-MM-dd'T'HH:mm:ss'Z'", "yyyy-MM-dd'T'HH:mm:ss.S'Z'","yyyy-MM-dd'T'HH:mm:ss","yyyy-MM-dd"]
+```
 
 Dao plugin contains several converters for java 8 dates for GSON templates, https://github.com/9ci/grails-dao/tree/grails3/dao-plugin/src/main/groovy/grails/plugin/dao/converters[see sources]
 
-And now we need to update some fields to our form: {url-snapshot5}/grails-app/views/contact/_form.gsp
+And now we need to update some fields to our form: {url-snapshot5}/grails-app/views/contact/_form.gsp[_form.gsp]
 
 image::images/form.png[]
 
 === Add Location
 
 Lets add one more domain to our project.
+
 .Address.groovy
-----
+```groovy
 package resttutorial
 
 import grails.rest.Resource
 
-@Resource(uri = '/address', namespace = "/api", formats = ["json"])
+@Resource(namespace = "api", formats = ["json"])
 class Address {
-  static belongsTo = [contact: Contact]
-      String street
-      String city
-      String state
-      String postalCode
-      String country
+    static belongsTo = [contact: Contact]
+    String street
+    String city
+    String state
+    String postalCode
+    String country
 
-      static constraints = {
-          street nullable: false
-      }
+    static constraints = {
+        street nullable: false
+    }
 }
-----
+```
 
 To Contact we will add:
+
 .Contact.groovy
-----
+```groovy
 ...
  static hasOne = [address: Address]
 ...
-----
+```
 
 Also, we need to modify UrlMapping to be able to get address as nested resource:
+
 .UrlMapping.groovy
-----
+```groovy
 "/api/contact"(resources: "contact", namespace: "api"){
   "/address"(resources: "address")
   delete "/active"(controller: "contact", action: "inactivate")
  }
-"/api/address"(resources: "address", namespace: "api")
-----
+"/api/address"(resources: "address")
+```
 
 lets take a look on `url-mappings-report `:
 
@@ -1345,11 +1426,11 @@ As you can see we can get address by 2 ways:
  - `/api/adress`
  - `/api/contact/${contactId}/address`
 
-But on `/api/contact/1/address` we wont get the adress that is related to contact with id = 1, but a list of all addresses,
+But on `/api/contact/1/address` we won't get the address that is related to contact with id = 1, but a list of all addresses,
 to make more smart we need to implement AddressController:
 
 .AddressController.groovy
-----
+```groovy
 package resttutorial.api
 
 import grails.plugin.dao.Pager
@@ -1378,12 +1459,12 @@ class AddressController extends RestDaoController {
     return datalist
   }
 }
-----
+```
 
-the `listAllResources` method is called by `index` action (see https://github.com/9ci/grails-dao/blob/grails3/dao-plugin/grails-app/controllers/grails.plugin.dao/RestDaoController.groovy[RestDaoController])
+the `listAllResources` method is called by `index` action (see {dao-plugin}/grails-app/controllers/grails.plugin.dao/RestDaoController.groovy[RestDaoController])
 and if `contactId` is in params it will limit list by addresses just for this contact.
 
-Lets add some test. You can see them in `snapshot5` folder.
+Lets add some test. You can see them in {url-snapshot5}[snapshot5] folder.
 
 === Add tests(GEB)
 
@@ -1399,31 +1480,34 @@ The test should have a `@Rollback` anotation, from Grails docs:
 In Grails 3.0 tests rely on grails.transaction.Rollback annotation to bind the session in integration tests.
 
 .ContactGebSpec.groovy
-----
+```groovy
 package geb
 
 import geb.spock.GebSpec
 import grails.test.mixin.integration.Integration
 import grails.transaction.Rollback
 import resttutorial.Contact
+import spock.lang.*
 
 @Integration
 @Rollback
 class ContactGebSpec extends GebSpec {
 
-	void "Check contact page"() {
-		when: "The contact page is visited"
-		go '/contact'
+  def getBaseUrl(){"http://localhost:${serverPort}"}
 
-		then: "The title is correct"
-		title == "Welcome to Tutorial"
-		then: "Contact list label"
-		$("h3").text() == 'Contact list'
-	}
+  void "Check contact page"() {
+    when: "The contact page is visited"
+    go "${baseUrl}/contact"
+    sleep(1000)
+
+    then: "The title and label are correct"
+    title == "Welcome to Tutorial"
+    $("h3").text() == 'Contact list'
+  }
 }
-----
+```
 
-In this test we open contact page with our grid - `go '/contact'` and check page title and grid label.
+In this test we open contact page with our grid - `go "http://localhost:${serverPort}/contact"` and check page title and grid label.
 Access to the elements is provided in jQuery-like language, that makes accessing the elements very easy. You can see it
 in `$("h3").text() == 'Contact list'`
 
@@ -1432,41 +1516,43 @@ Try to run tests with `grails test-app -Dgeb.env=chrome`
 As a next step lets add tests for contact editing:
 
 .ContactGebSpec.groovy
-----
-void "Check edit contact"() {
-		when: "The home page is visited"
-		go '/contact'
-		def lastRow = $(".jqgrow.ui-row-ltr")[-1]
-		lastRow.find(".jqg-row-action").click()
-		sleep(1000)
-		$(".row_action_edit").click()
+```groovy
+  void "Check edit contact"() {
+      when: "The home page is visited"
+      go "${baseUrl}/contact"
+      def lastRow = $(".jqgrow.ui-row-ltr")[-1]
+      lastRow.find(".jqg-row-action").click()
+      sleep(1000)
+      $(".row_action_edit").click()
 
-		then: "Dialog is opened"
-    sleep(5000)
-		$(".modal-dialog form") != null
-		$(".modal-dialog form").firstName == "Susan"
-		$(".modal-dialog form").lastName == "Duncan"
-		$(".modal-dialog form").email == "sduncan4@diigo.com"
-		$(".modal-dialog form").salutation == "Rev"
-		when: "Changed values and save"
-		$(".modal-dialog form").firstName = "Dr. Who"
-		$(".modal-dialog [type='submit']").click()
-		sleep(5000)
-		then: "Contact list label"
-		Contact contact = Contact.get(5)
-		contact.firstName == "Dr. Who"
+      then: "Dialog is opened"
+      sleep(5000)
+      $(".modal-dialog form") != null
+      $(".modal-dialog form").firstName == "Susan"
+      $(".modal-dialog form").lastName == "Duncan"
+      $(".modal-dialog form").email == "sduncan4@diigo.com"
+      $(".modal-dialog form").salutation == "Rev"
+
+      when: "Changed values and save"
+      $(".modal-dialog form").firstName = "Dr. Who"
+      $(".modal-dialog [type='submit']").click()
+      sleep(5000)
+
+      then: "Contact list label"
+      Contact contact = Contact.get(5)
+      contact.firstName == "Dr. Who"
 	}
-----
+```
 
 Some explanation for the test:
-`.jqgrow.ui-row-ltr` - css class that each grid row has, so when we execute $(".jqgrow.ui-row-ltr") we get list of all
+`.jqgrow.ui-row-ltr` - CSS class that each grid row has, so when we execute $(".jqgrow.ui-row-ltr") we get list of all
 grid rows, so $(".jqgrow.ui-row-ltr")[-1] will take the last of displayed rows.
-`.jqg-row-action` is css class for action button(gear), after we click on it we need to wait for a while(`sleep(1000)`),
+`.jqg-row-action` is CSS class for action button(gear), after we click on it we need to wait for a while(`sleep(1000)`),
 to give some time for JS to show menu, and then "click" on edit button $(".row_action_edit").click()
 For form we can get values just by name property: `$("form").firstName == "Susan"`
 And the last step is to check form saving.
 
-You can find some more tests in snapshot5.
+You can find some more tests in snapshot5 project's {url-snapshot5}/src/integration-test/groovy/geb/ContactGebSpec.groovy[ContactGebSpec.groovy].
 
 === Add filters for grid
 
@@ -1476,35 +1562,35 @@ Lets add filter for our grid:
 First we need to create a template for our search form:
 
 .views/contact/_searchForm.gsp
-----
+```html
 <form ag-search-form="contactGrid" class="form-horizontal form-multi-column no-margin ag-search-form">
 
-	<div class="col-md-4">
-		<div class="control-group">
-			<label class="control-label">Name</label>
+  <div class="col-md-4">
+    <div class="control-group">
+      <label class="control-label">Name</label>
 
-			<div class="controls">
-				<input class="input-block-level" type="text" ng-model="filters.firstName">
-			</div>
-		</div>
-	</div>
+      <div class="controls">
+        <input class="input-block-level" type="text" ng-model="filters.firstName">
+      </div>
+    </div>
+  </div>
 
-	<div class="col-md-4">
-		<div class="control-group">
-			<label class="control-label">Email</label>
+  <div class="col-md-4">
+    <div class="control-group">
+      <label class="control-label">Email</label>
 
-			<div class="controls">
-				<input class="input-block-level" type="text" ng-model="filters.email">
-			</div>
-		</div>
-	</div>
+      <div class="controls">
+        <input class="input-block-level" type="text" ng-model="filters.email">
+      </div>
+    </div>
+  </div>
 
-	<div class="pull-right">
-		<ag-search-button></ag-search-button>
-		<ag-reset-search-button></ag-reset-search-button>
-	</div>
+  <div class="pull-right">
+    <ag-search-button></ag-search-button>
+    <ag-reset-search-button></ag-reset-search-button>
+  </div>
 </form>
-----
+```
 
 The Ag-Grinder has handy directives for search forms:
 
@@ -1513,19 +1599,20 @@ The Ag-Grinder has handy directives for search forms:
  - `ag-reset-search-button` clears search fields and reload grid to show it without filtering
 
 Now we need to add action for form rendering:
+
 .controllers/ContaсtController.groovy
-----
+```groovy
 ...
     def searchForm(){
         render template: "searchForm"
     }
 ...
-----
+```
 
 To make it show we need to modify the list template:
 
-.views/_list.gsp
-----
+.views/contact/_list.gsp
+```html
 <h3 class="page-header">Contact list</h3>
 
 <div class="well">
@@ -1533,7 +1620,7 @@ To make it show we need to modify the list template:
 </div>
 
 ...
-----
+```
 
 as a result we will get something like this:
 
@@ -1543,8 +1630,14 @@ We don't need to make any changes to our JS code, Ag-Grinder directives will sen
 `api/ContactController`:
 
 .controllers/api/ContactController.groovy
-----
- @Override
+```groovy
+  def updateDomain(){
+    Map result = dao.update(fullParams(params, request))
+    DaoUtil.flush()
+    result
+  }
+
+  @Override
   protected List<Contact> listAllResources(Map params) {
     def crit = Contact.createCriteria()
     def pager = new Pager(params)
@@ -1563,32 +1656,35 @@ We don't need to make any changes to our JS code, Ag-Grinder directives will sen
     }
     return datalist
   }
-----
+```
 
 And now lets add a Geb test for it:
 
 .ContactGebSpec.groovy
-----
+```groovy
 ...
 
-void "Check grid filtering"() {
+  void "Check grid filtering"() {
     when: "The home page is visited"
-    go '/contact'
+    go "${baseUrl}/contact"
     def searchForm = $("form.ag-search-form")
     searchForm.filtersFirstName = "Jos"
     searchForm.find("[type='submit']").click()
+    sleep(1000)
 
     then: "Should be 1 row after filtering"
     $(".jqgrow.ui-row-ltr").size() == 1 // just one row in grid
 
     when: "Reset filtering"
     $("[ng-click='resetSearch(filters)']").click()
+	  sleep(1000)
+
     then: "Should be 5 rows"
     $(".jqgrow.ui-row-ltr").size() == 5
   }
 
   ...
-----
+```
 
 === Snapshot 5 of tutorial app is at this point
 
@@ -1596,7 +1692,7 @@ void "Check grid filtering"() {
 
 There is an excellent tutorial that we will take as a starting point for adding Spring Security to our app, see theoretical
 http://alvarosanchez.github.io/grails-angularjs-springsecurity-workshop/#_adding_security_with_spring_security_rest_50_minutes[part]
-and how we can add spring security to our Grails backend http://alvarosanchez.github.io/grails-angularjs-springsecurity-workshop/#_securing_the_rest_api_20_minutes.
+and how we can add spring security to our Grails backend on http://alvarosanchez.github.io/grails-angularjs-springsecurity-workshop/#_securing_the_rest_api_20_minutes[@alvarosanchez].
 
 A user name and a password we will take from the tutorial not to make it confusing.
 
@@ -1610,66 +1706,72 @@ To be able to login on one page and stay logged in for all others we should have
 For this we need to move common parts of pages to layout:
 
 .views/layouts/main.gsp
-----
+```html
 <!doctype html>
 <html>
-<head>
-	<meta name="layout" content="main"/>
-	<title>Welcome to Tutorial</title>
-	<asset:stylesheet href="application.css"/>
-	<asset:javascript src="application.js"/>
-</head>
+  <head>
+    <meta name="layout" content="main"/>
+    <title><g:layoutTitle default="Welcome to Tutorial"/></title>
+    <g:layoutHead/>
+    <asset:stylesheet href="application.css"/>
+    <asset:javascript src="application.js"/>
+  </head>
+  <body context-path="${request.contextPath}"
+        data-resource-name="${pageProperty(name: 'body.data-resource-name')}"
+        data-resource-path="${pageProperty(name: 'body.data-resource-path')}"
+        ng-app="contactApp">
+    <nav class="navbar navbar-default navbar-static-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="collapsed navbar-toggle"
+            data-toggle="collapse"
+            data-target="#drop"
+            aria-expanded="false">
+          </button>
+          <a href="#" class="navbar-brand">Rest Tutorial</a>
+        </div>
 
-<body context-path="${request.contextPath}"
-      data-resource-name="${pageProperty(name: 'body.data-resource-name')}"
-      data-resource-path="${pageProperty(name: 'body.data-resource-path')}"
-      ng-app="contactApp">
-<nav class="navbar navbar-default navbar-static-top">
-	<div class="container-fluid">
-		<div class="navbar-header">
-			<button type="button" class="collapsed navbar-toggle"
-					data-toggle="collapse"
-					data-target="#drop"
-					aria-expanded="false">
-			</button> <a href="#" class="navbar-brand">Rest Tutorial</a></div>
-
-		<div class="collapse navbar-collapse" id="drop"><ul class="nav navbar-nav">
-			<li class="active"><a href="#">Contacts</a></li>
-			<li><a href="#">Link 1</a></li>
-			<li><a href="#">Link 2</a>
-			</li>
-		</ul></div></div>
-</nav>
-	<div>
-		<g:layoutBody/>
-	</div>
-</body>
+        <div class="collapse navbar-collapse" id="drop">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Contacts</a></li>
+            <li><a href="#">Link 1</a></li>
+            <li><a href="#">Link 2</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div>
+        <g:layoutBody/>
+    </div>
+  </body>
 </html>
-----
+```
 
 and
 
 .views/contact/index.gsp
-----
+```html
 <html>
-<head>
-  <meta name="layout" content="main"/>
-  <title>Welcome to Tutorial</title>
-</head>
-<body data-resource-name="contact" data-resource-path="/contact">
-<div class="container">
-  <ng-view></ng-view>
-</div>
-</body>
+  <head>
+    <meta name="layout" content="main"/>
+    <title>Welcome to Tutorial</title>
+  </head>
+  <body data-resource-name="contact" data-resource-path="/contact">
+    <div class="container">
+      <ng-view></ng-view>
+    </div>
+  </body>
 </html>
-----
+```
 
 Now we need to implement controller for logining, as you remember from the http://alvarosanchez.github.io/grails-angularjs-springsecurity-workshop/#_securing_the_rest_api_20_minutes[tutorial],
 we need to pass our username and password to `/api/login` action and get `access_token` that should be added for each request.
 
 .assets/javascript/auth/LoginCtrl.es6
-----
+```js
 angular.module("tutorial", ["angleGrinder"]);
+var LoginCtrl;
+var auth = angular.module("tutorial");
 
 LoginCtrl = (function() {
   LoginCtrl.$inject = ["$scope", "pathWithContext", "$window", "$http", "$rootScope"];
@@ -1691,7 +1793,7 @@ LoginCtrl = (function() {
 })();
 
 auth.controller("LoginCtrl", LoginCtrl);
-----
+```
 
 `$rootScope.authenticated` - is a flag that shows should we show login page or not
 After user is logged in we will save `access_token` to `$window.sessionStorage.token`.
@@ -1699,7 +1801,7 @@ After user is logged in we will save `access_token` to `$window.sessionStorage.t
 So lets add the controller to our layout:
 
 .views/layouts/main.gsp
-----
+```html
 <body context-path="${request.contextPath}"
       data-resource-name="${pageProperty(name: 'body.data-resource-name')}"
       data-resource-path="${pageProperty(name: 'body.data-resource-path')}">
@@ -1707,45 +1809,54 @@ So lets add the controller to our layout:
 ...
 
 <div id="page" class="container">
-		<div ng-if="!authenticated">
-			<table>
-				<tbody>
-				<tr>
-					<td>
-						Username:
-					</td>
-					<td>
-						<input type="text" name="username" ng-model="user.username"/>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						Password:
-					</td>
-					<td>
-						<input type="password" name="password" ng-model="user.password"/>
-					</td>
-				</tr>
-				<tr>
-					<td colspan="2">
-						<button type="button" ng-click="login()">Login</button>
-					</td>
-				</tr>
-				</tbody>
-			</table>
-		</div>
+  <div ng-if="!authenticated">
+    <table>
+      <tbody>
+      <tr>
+        <td>
+          Username:
+        </td>
+        <td>
+          <input type="text" name="username" ng-model="user.username"/>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Password:
+        </td>
+        <td>
+          <input type="password" name="password" ng-model="user.password"/>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <button type="button" ng-click="login()">Login</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
 
-		<div ng-if="authenticated">
-			<div>
-				<g:layoutBody/>
-			</div>
-		</div>
+  <div ng-if="!!authenticated">
+    <div>
+      <g:layoutBody/>
+    </div>
+  </div>
+```
+
+Add controller in `application.js`:
+
+.application.js
+----
+...
+//= require auth/LoginCtrl.es6
+...
 ----
 
 The next step is to add received token to each request, for this purpose we need to implement AuthIntersepter:
 
 .assets/javascript/auth/LoginCtrl.es6
-----
+```js
 angular.module("tutorial", ["angleGrinder"]);
 
 auth.factory('authInterceptor', ["$rootScope", "$window", "pathWithContext", "$q", function($rootScope, $window, pathWithContext, $q) {
@@ -1769,7 +1880,7 @@ auth.factory('authInterceptor', ["$rootScope", "$window", "pathWithContext", "$q
 });
 
 ....
-----
+```
 
 As you see on each error response we update a location so the page is reloaded and we then show the login page, but you
 can show the modal window which will block the page or handle it in the way you want.
@@ -1778,7 +1889,7 @@ Now we have login functionality, so we need logout. Rest spring security doesn't
 session storage:
 
 .assets/javascript/auth/LoginCtrl.es6
-----
+```js
 ....
 
  $scope.logout = function() {
@@ -1786,26 +1897,26 @@ session storage:
       $window.sessionStorage.token = undefined;
     };
 ....
-----
+```
 
 and in layout:
 
 .views/layouts/main.gsp
-----
+```html
 ....
-	<ul class="pull-right nav navbar-nav">
-		<li ng-click="logout()">
-				a href="#">Logout</a>
-		</li>
-	/ul>
-----
+  <ul class="pull-right nav navbar-nav">
+    <li ng-click="logout()">
+      <a href="#">Logout</a>
+    </li>
+  /ul>
+```
 
 ==== Our CRUD screens should still work and be secured now
 
 If you run the test now they will fail because we need to login first:
 
 .ContactControllerSpeck.groovy
-----
+```groovy
  @Shared
     RestBuilder rest = new RestBuilder()
 
@@ -1823,40 +1934,71 @@ If you run the test now they will fail because we need to login first:
         token = "Bearer " +response.json.access_token
     }
 
-    ....
-
-when:
-		RestResponse response = rest.get("${baseUrl}/contact"){
-			headers["Authorization"] = token
-		}
 ....
 
-void "check POST request"() {
-		when:
-		RestResponse response = rest.post("${baseUrl}/contact") {
-			headers["Authorization"] = token
-			json([
-					firstName: "Test contact",
-					"email"  : "foo@bar.com",
-					inactive : true
-			])
-		}
+    void "check POST request"() {
+          when:
+          RestResponse response = rest.post("${baseUrl}/contact") {
+              headers["Authorization"] = token
+              json([
+                      firstName: "Test contact",
+                      "email"  : "foo@bar.com",
+                      inactive : true
+              ])
+          }
 ....
-----
+```
 
 The same we should make `for AddressControllerSpec`
 
-After you refactor test we have only one integration test failing to fix it we need to modify our UrlMapping:
+After you refactor test we have only one integration test failing to fix it we need to modify our UrlMappings:
 
-----
+
+.UrlMappings.groovy
+```groovy
 "/api/contact"(resources: "contact", namespace: "api"){
         "/address"(resources: "address", namespace: "api")
-----
+```
 
 To make the nested resource match security url pattern.
 
-Also, we need to fix geb tests:
-//TODO: fix geb tests
+Also, we need to fix geb tests. For this we need to add one more step(should be the first) to login:
+
+.ContactGebSpec.groovy
+```groovy
+
+void "Login"() {
+    when: "The contact page is visited"
+    go "${baseUrl}/contact"
+    def inputs = $("input")
+
+    then:
+    inputs.size() == 2
+
+    when:
+    inputs[0].value("user")
+    inputs[1].value("pass")
+    sleep(1000)
+    $("button")[1].click()
+
+    then:
+    sleep(1000)
+    title == "Welcome to Tutorial"
+  }
+
+```
+
+Geb tests will fail because of known issue https://github.com/alvarosanchez/grails-spring-security-rest/issues/166
+to avoid it we need to update dependencies:
+
+.build.gradle
+----
+...
+    compile("org.grails.plugins:spring-security-rest:2.0.0.M2"){exclude group: 'com.google.guava'}
+...
+----
+
+Guava has to be excluded because of dependency conflict with Guava used by selenium's ChromeDriver.
 
 == Other Tools
 
@@ -1865,7 +2007,7 @@ on two handy tools for testing rest endpoints.
 
 === Using postman for testing
 
-First we need to install Postman type in Chrome https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop/related?hl=en
+First we need to install https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop/related?hl=en[Postman type in Chrome].
 And press `Launch App`
 
 image::images/postman.png[]
@@ -1874,13 +2016,13 @@ For testing we need to get auth token, in `Request URL` we put `http://localhost
 as requst type on the left from `Request URL`. Then click on `body` tab that is under URL and enter type `raw`.
 Here we should specify our credentials:
 
-----
+```json
 {"username": "user", "password": "pass"}
-----
+```
 
 The last step is to press `SEND` button to send the request. At the bottom you will get something like:
 
-----
+```json
 {
   "username": "user",
   "roles": [
@@ -1890,7 +2032,7 @@ The last step is to press `SEND` button to send the request. At the bottom you w
   "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJwcmluY2lwYWwiOiJINHNJQUFBQ...",
     "expires_in": 3600,
   "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJwcmluY2lwYWwiOiJINHNJQUFBQ..."}
-----
+```
 
 And to be able to archive endpoints we need to add "Authorization" header to each request.
 So open `Headers` tab and paste `Authorization` as a key and `Bearer <access_token from our login request>` as value
@@ -1907,9 +2049,9 @@ image::images/restClient.png[]
 In the `Host/port` section type `http://localhost:8080` and to the `Path` input `/api/login`
 On the right side of the `Request` tab, select `text` as body type and type in
 
-----
+```json
 {"username": "user", "password": "pass"}
-----
+```
 
 To send a request press green triangle. So now we have our `access_token` in a response.
 So now we just need to set header for future requests.

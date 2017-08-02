@@ -1,5 +1,5 @@
 class ListCtrl {
-  constructor($scope, Resource, DialogCrudCtrlMixin, pathWithContext,RoutesServ) {
+  constructor($scope, Resource, DialogCrudCtrlMixin, pathWithContext, RoutesServ) {
     var colModel = [
       {
         name: "id",
@@ -43,4 +43,4 @@ class ListCtrl {
     };
   }
 }
-ListCtrl.$inject = ['$scope', 'Resource', 'DialogCrudCtrlMixin', 'pathWithContext',  "RoutesServ"];
+ListCtrl.$inject = ['$scope', 'Resource', 'DialogCrudCtrlMixin', 'pathWithContext', 'RoutesServ'];

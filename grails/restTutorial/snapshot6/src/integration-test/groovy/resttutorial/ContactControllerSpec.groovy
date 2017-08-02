@@ -121,7 +121,7 @@ class ContactControllerSpec extends Specification {
 
 	void "check PUT request"() {
 		when:
-		RestResponse response = rest.put("${baseUrl}/contact/101") {
+		RestResponse response = rest.put("${baseUrl}/contact/100") {
 			headers["Authorization"] = token
 			json([
 					firstName: "new Test contact",
@@ -134,7 +134,7 @@ class ContactControllerSpec extends Specification {
 		response.status == 200
 		response.json != null
 		JSONElement json = response.json
-		json.id == 101
+		json.id == 100
 		json.firstName == "new Test contact"
 		json.lastName == "Doe"
 		json.email == "newfoo@bar.com"
@@ -142,7 +142,7 @@ class ContactControllerSpec extends Specification {
 
 	void "check DELETE request"() {
 		when:
-		RestResponse response = rest.delete("${baseUrl}/contact/1"){
+		RestResponse response = rest.delete("${baseUrl}/contact/4"){
 			headers["Authorization"] = token
 		}
 

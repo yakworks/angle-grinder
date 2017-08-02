@@ -9,7 +9,7 @@
 if "%OS%"=="Windows_NT" setlocal
 
 @rem Add default JVM options here. You can also use JAVA_OPTS and GRAILS_OPTS to pass JVM options to this script.
-set DEFAULT_JVM_OPTS=
+set DEFAULT_JVM_OPTS="-XX:+TieredCompilation" "-XX:TieredStopAtLevel=1" "-XX:CICompilerCount=3"
 
 set DIRNAME=%~dp0
 if "%DIRNAME%" == "" set DIRNAME=.
@@ -71,7 +71,7 @@ set CMD_LINE_ARGS=%$
 set JAR_PATH=%APP_HOME%/grails-wrapper.jar
 
 @rem Execute Grails
-"%JAVA_EXE%" -jar %JAR_PATH% %DEFAULT_JVM_OPTS% %JAVA_OPTS% %GRAILS_OPTS% %CMD_LINE_ARGS%
+"%JAVA_EXE%" -jar %DEFAULT_JVM_OPTS% %JAVA_OPTS% %GRAILS_OPTS% %JAR_PATH% %CMD_LINE_ARGS%
 
 :end
 @rem End local scope for the variables with windows NT shell

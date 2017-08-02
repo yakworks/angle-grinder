@@ -2,6 +2,7 @@ package resttutorial.api
 
 import grails.converters.JSON
 import grails.plugin.dao.RestDaoController
+import grails.plugin.dao.DaoUtil
 import grails.plugin.springsecurity.annotation.Secured
 import grinder.Pager
 import resttutorial.Contact
@@ -18,6 +19,13 @@ class ContactController extends RestDaoController {
   def inactivate() {
     Contact contact = dao.inactivate(params.contactId as Long)
     respond contact
+  }
+
+  def updateDomain(){
+    Map result = dao.update(fullParams(params, request))
+    println result
+    DaoUtil.flush()
+    result
   }
 
   @Override

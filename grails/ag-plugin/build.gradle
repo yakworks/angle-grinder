@@ -2,15 +2,15 @@ buildscript {
     repositories {
         mavenLocal()
         maven { url "https://repo.grails.org/grails/core" }
-        //jcenter()
     }
     dependencies {
         classpath "org.grails:grails-gradle-plugin:$grailsVersion"
         classpath "com.bertramlabs.plugins:asset-pipeline-gradle:2.11.2"
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
     }
 }
 
-version "2.0.0"
+version "3.0.3.SNAPSHOT"
 group "nine"
 
 apply plugin:"eclipse"
@@ -23,16 +23,14 @@ apply plugin:"asset-pipeline"
 repositories {
     mavenLocal()
     maven { url "https://repo.grails.org/grails/core" }
-    //jcenter()
 }
 
-dependencyManagement {
-    imports {
-        mavenBom "org.grails:grails-bom:$grailsVersion"
-    }
-    applyMavenExclusions false
+bootRun {
+  jvmArgs('-Dspring.output.ansi.enabled=always')
+  addResources = true
 }
 
+bootRepackage.enabled = false
 dependencies {
     provided "org.springframework.boot:spring-boot-starter-logging"
     provided "org.springframework.boot:spring-boot-autoconfigure"
@@ -55,15 +53,20 @@ dependencies {
     //provided "org.codehaus.groovy:groovy-ant"
     runtime "com.bertramlabs.plugins:asset-pipeline-grails:2.11.2"
 
-    testCompile "org.grails:grails-plugin-testing"
     compile 'com.lowagie:itext:2.1.7'
     compile 'org.olap4j:olap4j:1.2.0'
     compile 'net.sf.jasperreports:jasperreports:6.3.1'
 
     testCompile "org.grails.plugins:geb"
+    testCompile "org.grails:grails-plugin-testing"
+
     testRuntime "org.seleniumhq.selenium:selenium-htmlunit-driver:2.47.1"
     testRuntime "net.sourceforge.htmlunit:htmlunit:2.18"
+}
 
+bootRun {
+    jvmArgs('-Dspring.output.ansi.enabled=always')
+    addResources = true
 }
 
 grailsPublish {
@@ -78,9 +81,26 @@ grailsPublish {
     title = 'Angle Grinder'
     userOrg = '9ci' //the Org to publish this under in
     repo = 'grails-plugins' //the repository you setup in bintray
+    bintray {
+      //override plugin only if it is snapshot
+      override = rootProject.version.endsWith("SNAPSHOT")
+    }
     //user = 'user' <- pulled from either BINTRAY_USER sys prop or project.bintrayUser which can be in ~/.gradle/gradle.properties
     //key = 'key' <- pulled from either BINTRAY_KEY sys prop or project.bintrayKey which can be in ~/.gradle/gradle.properties
 }
+
+publishing {
+    repositories {
+        maven {
+            url "http://repo.9ci.com/artifactory/grails-plugins"
+            credentials {
+                username "$artifactoryUsername"
+                password  "$artifactoryPassword"
+            }
+        }
+    }
+}
+
 
 assets {
     packagePlugin = true

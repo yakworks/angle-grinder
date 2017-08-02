@@ -7,7 +7,7 @@
 ##############################################################################
 
 # Add default JVM options here. You can also use JAVA_OPTS and GRAILS_OPTS to pass JVM options to this script.
-DEFAULT_JVM_OPTS=""
+DEFAULT_JVM_OPTS='"-XX:+TieredCompilation" "-XX:TieredStopAtLevel=1" "-XX:CICompilerCount=3"'
 
 
 # Use the maximum available, or set MAX_FD != -1 to use that value.
@@ -148,4 +148,4 @@ function splitJvmOpts() {
 }
 eval splitJvmOpts $DEFAULT_JVM_OPTS $JAVA_OPTS $GRAILS_OPTS
 
-exec "$JAVACMD" -jar "$JAR_PATH" "${JVM_OPTS[@]}" "$@"
+exec "$JAVACMD" -jar "${JVM_OPTS[@]}" "$JAR_PATH" "$@"

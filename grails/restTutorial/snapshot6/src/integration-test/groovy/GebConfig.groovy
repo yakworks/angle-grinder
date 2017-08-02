@@ -6,7 +6,7 @@ import org.openqa.selenium.chrome.ChromeDriver
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
-import org.openqa.selenium.firefox.FirefoxDriver
+
 import org.openqa.selenium.ie.InternetExplorerDriver
 import org.openqa.selenium.phantomjs.PhantomJSDriver
 import org.openqa.selenium.htmlunit.HtmlUnitDriver
@@ -36,7 +36,7 @@ quitCachedDriverOnShutdown = true
 //reportOnTestFailureOnly = true
 
 //****HtmlUnitDriver as the default driver *****//
-driver = {  new ChromeDriver() }
+driver = { new HtmlUnitDriver(true) }
 
 environments {
 

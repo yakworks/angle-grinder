@@ -21,7 +21,7 @@ class ContactDao extends GormDaoSupport {
   Contact inactivate(Long id) {
     Contact contact = Contact.get(id)
 
-    DaoUtil.checkFound(contact, [id: id] ,domainClass.name)
+    DaoUtil.checkFound(contact, [id: id], domainClass.name)
     DaoUtil.checkVersion(contact , [id: id].version)
 
     contact.inactive = true

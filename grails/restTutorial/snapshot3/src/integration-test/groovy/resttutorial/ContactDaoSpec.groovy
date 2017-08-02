@@ -2,8 +2,10 @@ package resttutorial
 
 import grails.test.mixin.integration.Integration
 import spock.lang.Specification
+import grails.transaction.Rollback
 
 @Integration
+@Rollback
 class ContactDaoSpec extends Specification {
     def contactDao
     def setup() {
@@ -11,7 +13,6 @@ class ContactDaoSpec extends Specification {
 
     def cleanup() {
     }
-
 
     void "check insert with name"() {
         when:

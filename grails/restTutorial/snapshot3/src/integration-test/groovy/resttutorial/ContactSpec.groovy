@@ -23,7 +23,7 @@ class ContactSpec extends Specification {
 
     void "check GET list request without params "() {
         when:
-        RestResponse response = rest.get("${baseUrl}/contacts")
+        RestResponse response = rest.get("${baseUrl}/contact")
 
         then:
         response.status == 200
@@ -42,7 +42,7 @@ class ContactSpec extends Specification {
 
     void "check GET list request with max parameter"() {
         when: "list endpoint with max param"
-        RestResponse response = rest.get("${baseUrl}/contacts?max=20")
+        RestResponse response = rest.get("${baseUrl}/contact?max=20")
 
         then:
         response.status == 200
@@ -60,7 +60,7 @@ class ContactSpec extends Specification {
 
     void "check GET list request with page"() {
         when: "list endpoint with max param"
-        RestResponse response = rest.get("${baseUrl}/contacts?page=2")
+        RestResponse response = rest.get("${baseUrl}/contact?page=2")
 
         then:
         response.status == 200
@@ -78,7 +78,7 @@ class ContactSpec extends Specification {
 
     void "check GET by id"() {
         when:
-        RestResponse response = rest.get("${baseUrl}/contacts/1")
+        RestResponse response = rest.get("${baseUrl}/contact/1")
 
         then:
         response.status == 200
@@ -87,12 +87,11 @@ class ContactSpec extends Specification {
         json.firstName == "Marie"
         json.lastName == "Scott"
         json.email == "mscott0@ameblo.jp"
-
     }
 
     void "check POST request"() {
         when:
-        RestResponse response = rest.post("${baseUrl}/contacts"){
+        RestResponse response = rest.post("${baseUrl}/contact"){
             json([
                     firstName: "Test contact",
                     "email":"foo@bar.com",
@@ -112,7 +111,7 @@ class ContactSpec extends Specification {
 
     void "check POST request with name field"() {
         when:
-        RestResponse response = rest.post("${baseUrl}/contacts"){
+        RestResponse response = rest.post("${baseUrl}/contact"){
             json([
                     name: "Joe Cool",
                     "email":"foo@bar.com"
@@ -127,10 +126,9 @@ class ContactSpec extends Specification {
         json.lastName == "Cool"
     }
 
-
     void "check PUT request"() {
         when:
-        RestResponse response = rest.put("${baseUrl}/contacts/101"){
+        RestResponse response = rest.put("${baseUrl}/contact/100"){
             json([
                     firstName: "new Test contact",
                     "email":"newfoo@bar.com",
@@ -142,7 +140,7 @@ class ContactSpec extends Specification {
         response.status == 200
         response.json != null
         JSONElement json = response.json
-        json.id == 101
+        json.id == 100
         json.firstName == "new Test contact"
         json.lastName == "Doe"
         json.email == "newfoo@bar.com"
@@ -150,7 +148,7 @@ class ContactSpec extends Specification {
 
     void "check DELETE request"() {
         when:
-        RestResponse response = rest.delete("${baseUrl}/contacts/1")
+        RestResponse response = rest.delete("${baseUrl}/contact/1")
 
         then:
         response.status == 200
@@ -158,7 +156,7 @@ class ContactSpec extends Specification {
 
     void "check inactivate endpoint"() {
         when:
-        RestResponse response = rest.delete("${baseUrl}/contacts/2/active")
+        RestResponse response = rest.delete("${baseUrl}/contact/2/active")
 
         then:
         response.status == 200
