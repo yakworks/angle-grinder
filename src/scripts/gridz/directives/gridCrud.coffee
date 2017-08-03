@@ -127,7 +127,7 @@ class @GridCrudCtrl
             input.focus()
             input.select()
 
-        element.find("#s2id_#{$scope.columnNameForFocus}").select2("open")
+        element.find("[id='s2id_#{$scope.columnNameForFocus}']").select2("open")
         $scope.columnNameForFocus = null
 
     $parse("edit#{actionSuffix}").assign($scope.$parent, editAction)
