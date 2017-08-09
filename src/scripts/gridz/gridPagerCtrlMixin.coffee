@@ -50,6 +50,19 @@ gridz.controller "gridPagerCtrlMixin", [
       ids = getGridIds()
       [ids, ids.indexOf(currIdGetter($scope).toString())]
 
+    @goTo = (index)->
+      console.log index
+      [ids, indx] = getCurrent()
+      currIdSetter $scope, ids[index]
+
+    @getIndex = ->
+      ids = getGridIds()
+      ids.indexOf(currIdGetter($scope).toString())
+
+    @getIds = ->
+      getGridIds()
+
+
     # return true when a grid in the background is loaded
     # and the pager can be displayed
     @show = -> getGrid()?
