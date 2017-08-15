@@ -121,6 +121,7 @@ forms.directive "agTab", [
       # text binding
       templateUrl: "@"
       name: "@"
+      isAllActive: "="
 
     link: (scope, element, attrs, tabsetCtrl) ->
       # append the application context to the template url
@@ -146,7 +147,7 @@ forms.directive "agTab", [
       , true
 
     template: """
-      <li ng-click="select()" ng-class="{active: selected, loading: loading}">
+      <li ng-click="select()" ng-class="{active: (selected || isAllActive), loading: loading}">
         <a href="" ng-transclude>{{heading}}</a>
       </li>
     """
