@@ -43,6 +43,10 @@ forms.config ["$provide", ($provide) ->
             if form? and disabled?
               scope.disabled = disabled
 
+            options = attrs.options
+            if options?
+              scope.options = options
+
         return directive
   ]
 ]
