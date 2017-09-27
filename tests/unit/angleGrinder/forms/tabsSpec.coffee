@@ -25,7 +25,6 @@ describe "module: angleGrinder.forms tabs", ->
       scope = element.scope()
 
     it "renders tabs container", ->
-      expect(element.hasClass("container")).to.be.true
       expect(element.find(".nav.nav-tabs")).to.have.length 1
 
     describe "$scope", ->
