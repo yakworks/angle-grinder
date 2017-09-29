@@ -191,7 +191,10 @@ class Gridz
     $(window).on "resize", (event, ui) =>
 
       # Get width of parent container which is assumed to be expanded to span
-      parWidth = $(gboxId).parent().width()
+      if $(gboxId).parent().width() > 0
+        parWidth = $(gboxId).parent().width()
+      else
+        parWidth = $("#page").width()
       curWidth = $(gboxId).width()
       w = parWidth - 1 # add -1 Fudge factor to prevent horizontal scrollbars
 
