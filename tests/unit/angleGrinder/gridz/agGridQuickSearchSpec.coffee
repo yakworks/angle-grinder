@@ -11,26 +11,26 @@ describe "module: angleGrinder.gridz", ->
       $scope = $rootScope.$new()
 
       $scope.grid = customers: search: sinon.stub()
-      $scope.filters = foo: "bar"
+      $scope.criteria = foo: "bar"
 
-    describe "when external `filters` are given", ->
+    describe "when external `criteria` are given", ->
 
       beforeEach inject ($compile) ->
         element = angular.element """
-          <ag-grid-quick-search for="grid.customers" filters="filters"></ag-grid-quick-search>
+          <ag-grid-quick-search for="grid.customers" criteria="criteria"></ag-grid-quick-search>
         """
 
         $compile(element)($scope)
         $scope.$digest()
 
       it "initially has empty `quickSearch` filter", ->
-        expect($scope.filters.quickSearch).to.eq ""
-        expect($scope.filters.foo).to.eq "bar"
+        expect($scope.criteria.quickSearch).to.eq ""
+        expect($scope.criteria.foo).to.eq "bar"
 
       it "tigers search", ->
         # Given
         quickSearch = (value) ->
-          $scope.filters.quickSearch = value
+          $scope.criteria.quickSearch = value
 
           inputEl = element.find("form[name=quickSearch]").find("input")
           inputEl.triggerHandler
@@ -47,7 +47,7 @@ describe "module: angleGrinder.gridz", ->
         quickSearch("")
         expect($scope.grid.customers.search.calledWith(foo: "bar", quickSearch: "")).to.be.true
 
-    describe "when external `filters` are not given", ->
+    describe "when external `criteria` are not given", ->
 
       beforeEach inject ($compile) ->
         element = angular.element """
@@ -58,14 +58,14 @@ describe "module: angleGrinder.gridz", ->
         $scope.$digest()
 
       it "initially has empty `quickSearch` filter", ->
-        expect(element.isolateScope().filters.quickSearch).to.eq ""
-        expect($scope.filters.foo).to.eq "bar"
+        expect(element.isolateScope().criteria.quickSearch).to.eq ""
+        expect($scope.criteria.foo).to.eq "bar"
 
       it "trigers search", ->
         # Given
         quickSearch = (value) ->
           scope = element.isolateScope()
-          scope.filters.quickSearch = value
+          scope.criteria.quickSearch = value
 
           inputEl = element.find("form[name=quickSearch]").find("input")
           inputEl.triggerHandler

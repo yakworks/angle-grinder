@@ -5,29 +5,29 @@ describe "module: angleGrinder.gridz", ->
     hasSearchFilters = null
     beforeEach inject (_hasSearchFilters_) -> hasSearchFilters = _hasSearchFilters_
 
-    describe "if filters contain at least one non-empty field", ->
-      filters = foo: "  ", bar: "test", biz: null
+    describe "if criteria contain at least one non-empty field", ->
+      criteria = foo: "  ", bar: "test", biz: null
 
       it "returns true", ->
-        expect(hasSearchFilters(filters)).to.be.true
+        expect(hasSearchFilters(criteria)).to.be.true
 
-    describe "if filters contain an array", ->
-      filters = select2Stuff: [foo: "bar"], bar: null
-
-      it "returns true", ->
-        expect(hasSearchFilters(filters)).to.be.true
-
-    describe "if filters contain other complex object", ->
-      filters = date: new Date()
+    describe "if criteria contain an array", ->
+      criteria = select2Stuff: [foo: "bar"], bar: null
 
       it "returns true", ->
-        expect(hasSearchFilters(filters)).to.be.true
+        expect(hasSearchFilters(criteria)).to.be.true
 
-    describe "if all filters are empty", ->
-      filters = foo: "  ", bar: "", biz: null, baz: undefined
+    describe "if criteria contain other complex object", ->
+      criteria = date: new Date()
+
+      it "returns true", ->
+        expect(hasSearchFilters(criteria)).to.be.true
+
+    describe "if all criteria are empty", ->
+      criteria = foo: "  ", bar: "", biz: null, baz: undefined
 
       it "returns false", ->
-        expect(hasSearchFilters(filters)).to.be.false
+        expect(hasSearchFilters(criteria)).to.be.false
 
   describe "directive: agSearchButton", ->
     $scope = null
@@ -57,7 +57,7 @@ describe "module: angleGrinder.gridz", ->
 
     describe "on click", ->
       beforeEach ->
-        $scope.filters = name: "find it"
+        $scope.criteria = name: "find it"
         $scope.advancedSearch = sinon.spy()
 
       it "calls #advancedSearch with valid params", ->
@@ -122,7 +122,7 @@ describe "module: angleGrinder.gridz", ->
 
       {element} = compileTemplate """
         <form name="searchForm" ag-search-form="grid.users">
-          <input type="text" name="name" ng-model="filters.name" />
+          <input type="text" name="name" ng-model="criteria.name" />
 
           <ag-search-button id="search"></ag-search-button>
           <ag-reset-search-button id="reset"></ag-reset-search-button>
@@ -174,13 +174,13 @@ describe "module: angleGrinder.gridz", ->
         # Then
         expect(resetButtonEl.is(":disabled")).to.be.true
 
-      describe "when default filters are given", ->
+      describe "when default criteria are given", ->
 
         beforeEach ->
           scope = element.scope()
           scope.defaultFilters = { foo: "bar" }
 
-        it "calls #resetSearch with default filters", ->
+        it "calls #resetSearch with default criteria", ->
           # When
           resetButtonEl.click()
 

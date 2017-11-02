@@ -6,21 +6,21 @@ gridz.directive "agGridQuickSearch", [
 
     scope:
       grid: "=for"  # assign grid instance
-      filters: "=?" # filters are optional
+      criteria: "=?" # criteria are optional
 
     link: ($scope) ->
       # apply empty quick search filter
-      $scope.filters = {} unless $scope.filters?
-      angular.extend($scope.filters, quickSearch: "")
+      $scope.criteria = {} unless $scope.criteria?
+      angular.extend($scope.criteria, quickSearch: "")
 
       # perform grid search
-      $scope.search = (filters) ->
-        $scope.grid.search(filters)
+      $scope.search = (criteria) ->
+        $scope.grid.search(criteria)
 
     template: """
       <form class="search-form pull-right right-margin-5" name="quickSearch"">
         <input type="text" placeholder="quick search" quick-search-button class="search-query"
-               ng-model="filters.quickSearch"/>
+               ng-model="criteria.quickSearch"/>
       </form>
     """
 ]
@@ -32,9 +32,9 @@ gridz.directive "quickSearchButton", ->
       # 13 - Enter key code
       if event.which is 13
         event.preventDefault()
-        scope.search(scope.filters)
+        scope.search(scope.criteria)
 
       if event.which is 27
-        scope.filters.quickSearch = "" if scope.filters
+        scope.criteria.quickSearch = "" if scope.criteria
         scope.$apply()
-        scope.search(scope.filters)
+        scope.search(scope.criteria)

@@ -176,19 +176,19 @@ class AgGridCtrl extends BaseCtrl
   removeRow: (id) ->
     @flashOnSuccess id, => @getGridEl().delRowData(id)
 
-  # Sets the grid search filters and triggers a reload
-  search: (filters) ->
+  # Sets the grid search criteria and triggers a reload
+  search: (criteria) ->
     deferred = @$q.defer()
 
     params =
       page: 1
-      search: @hasSearchFilters(filters)
-      postData: filters: JSON.stringify(filters)
+      search: @hasSearchFilters(criteria)
+      postData: criteria: JSON.stringify(criteria)
 
     @setParam(params)
 
     promise = @reload()
-    promise.then -> deferred.resolve(filters)
+    promise.then -> deferred.resolve(criteria)
 
     deferred.promise
 

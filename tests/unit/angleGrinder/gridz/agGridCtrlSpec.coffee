@@ -266,13 +266,13 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
       expect(ctrl.flashOnSuccess).to.have.been.calledWith(345)
 
   describe "#search", ->
-    it "sets search filters and triggers grid reload", ->
+    it "sets search criteria and triggers grid reload", ->
       # When
       ctrl.search(login: "foo")
 
       # Then
       expect(jqGridEl.setGridParam).to.have.been.called
-      expect(jqGridEl.setGridParam).to.have.been.calledWith(page: 1, search: true, postData: filters: '{"login":"foo"}')
+      expect(jqGridEl.setGridParam).to.have.been.calledWith(page: 1, search: true, postData: criteria: '{"login":"foo"}')
 
       expect(jqGridEl.trigger).to.have.been.called
       expect(jqGridEl.trigger).to.have.been.calledWith("reloadGrid")

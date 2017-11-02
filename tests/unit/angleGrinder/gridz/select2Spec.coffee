@@ -173,7 +173,7 @@ describe "module: angleGrinder.gridz", ->
 
       {element} = compileTemplate """
         <div>
-          <select ui-select2 ng-model="filters.dummy">
+          <select ui-select2 ng-model="criteria.dummy">
             <option value=""></option>
             <option value="one">First</option>
             <option value="two">Second</option>

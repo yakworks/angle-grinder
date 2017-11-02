@@ -1,8 +1,8 @@
 gridz = angular.module("angleGrinder.gridz")
 
-# Retunrs true if `filters` contain at least one non-empty search field
-gridz.value "hasSearchFilters", (filters) ->
-  for _, value of filters
+# Retunrs true if `criteria` contain at least one non-empty search field
+gridz.value "hasSearchFilters", (criteria) ->
+  for _, value of criteria
     continue unless value?
 
     if typeof value is "string"
@@ -16,7 +16,7 @@ gridz.directive "agSearchButton", ->
   restrict: "E"
   replace: true
   template: """
-    <button type="submit" ng-click="advancedSearch(filters)" ng-disabled="searching" class="btn btn-info">
+    <button type="submit" ng-click="advancedSearch(criteria)" ng-disabled="searching" class="btn btn-info">
       <i class="fa fa-search fa-inverse"></i> Search<span ng-show="searching">...</span>
     </button>
   """
@@ -25,7 +25,7 @@ gridz.directive "agResetSearchButton", ->
   restrict: "E"
   replace: true
   template: """
-    <button type="button" ng-click="resetSearch(filters)" ng-disabled="searching" class="btn">
+    <button type="button" ng-click="resetSearch(criteria)" ng-disabled="searching" class="btn">
       <i class="fa fa-times"></i> Reset<span ng-show="searching">...</span>
     </button>
   """
@@ -45,14 +45,14 @@ gridz.directive "agSearchForm", ["$log", ($log) ->
       $scope.searching = false
 
       # Perform server side grid filtering
-      gridSearch = (filters = {}) ->
+      gridSearch = (criteria = {}) ->
         grid = $parse($attrs.agSearchForm)($scope)
 
         unless grid?
           $log.warn "[gridz] grid is not defined"
           return
 
-        promise = grid.search(filters)
+        promise = grid.search(criteria)
 
         # enable buttons when the search is complete
         $scope.searching = true
@@ -61,19 +61,19 @@ gridz.directive "agSearchForm", ["$log", ($log) ->
         return promise
 
       # Trigger search action for the grid
-      $scope.advancedSearch = (filters = {}) ->
+      $scope.advancedSearch = (criteria = {}) ->
         form = $scope.searchForm
 
         if form and form.$invalid
           return $log.info "[gridz] advanced search form is invalid", form
 
-        gridSearch(filters)
+        gridSearch(criteria)
 
       # Reset the search form and trigger grid reload
-      $scope.resetSearch = (filters = {}) ->
+      $scope.resetSearch = (criteria = {}) ->
         defaultFilters = $scope.defaultFilters or {}
-        angular.copy(defaultFilters, filters)
+        angular.copy(defaultFilters, criteria)
 
-        gridSearch(filters)
+        gridSearch(criteria)
   ]
 ]
