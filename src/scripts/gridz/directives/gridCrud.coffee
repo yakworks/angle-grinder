@@ -35,7 +35,7 @@ app.directive "gridCrud", ["$controller", "$timeout", ($controller, $timeout) ->
 class @GridCrudCtrl
   #Controller for gridCrud directive
   @$inject = ["$scope", "$element", "$attrs",  "$parse", "$log", "resourceBuilder", "$window", "restrictResource", "$uibModal", "pathWithContext", "$timeout"]
-  constructor: ($scope, $element, $attrs,  $parse, $log, resourceBuilder, $window, restrictResource, $uibModal, pathWithContext, $timeout) ->
+  constructor: ($scope, $element, $attrs, $parse, $log, resourceBuilder, $window, restrictResource, $uibModal, pathWithContext, $timeout) ->
 
     Resource = null
     beforeSave = null
@@ -62,12 +62,18 @@ class @GridCrudCtrl
 
     showForm = ->
       if $scope.isModal
-        $scope.modal = $uibModal.open(
+        defaultModalOptions =
           templateUrl: pathWithContext($scope.template)
           keyboard: false # do not close the dialog with ESC key
           backdrop: "static" # do not close on click outside of the dialog
           scope: $scope
-          windowClass: "grid-crud-modal"
+          windowClass: ""
+        modalOptions = angular.fromJson($attrs.modalOptions)
+        modalOptions = angular.extend(defaultModalOptions, modalOptions)
+        modalOptions.windowClass = modalOptions.windowClass + " grid-crud-modal "
+
+        $scope.modal = $uibModal.open(
+          modalOptions
         )
         $scope.modal.rendered.then ->
           $timeout ->
@@ -121,7 +127,7 @@ class @GridCrudCtrl
             input.focus()
             input.select()
 
-        element.find("#s2id_#{$scope.columnNameForFocus}").select2("open")
+        element.find("[id='s2id_#{$scope.columnNameForFocus}']").select2("open")
         $scope.columnNameForFocus = null
 
     $parse("edit#{actionSuffix}").assign($scope.$parent, editAction)

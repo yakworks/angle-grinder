@@ -29,13 +29,17 @@ gridz.directive "agSelect2", [
       # pre linking function
       pre: (scope, element, attrs) ->
         options = angular.copy scope.selectOptions or {multiple: true}
+        if attrs.selectMultiple?
+          options.multiple = attrs.selectMultiple == "true"
         scope.options = options
 
         # read `minimumInputLength` option from the attribute
         options.minimumInputLength ?= 1
+        scope.showFill = attrs.fillAll and attrs.fillAll is "true"
         if attrs.selectMinimumInputLength?
           options.minimumInputLength = parseInt(attrs.selectMinimumInputLength)
-
+        if attrs.selectAll?
+          options.minimumInputLength = 0
         # set the default `width`
         options.width ?= "resolve"
 
@@ -73,7 +77,9 @@ gridz.directive "agSelect2", [
     template: """
       <div class="input-group">
         <input ui-select2="options" ng-model="ngModel" class="form-control" type="hidden"/>
+        <select-fill ng-if="showFill"></select-fill>
       </div>
+
     """
 ]
 
@@ -92,3 +98,51 @@ gridz.directive "agSelect2Open", ->
         <button class="btn open-select2 btn-default " type="button" ng-click="openSelect2()"><i class="fa fa-search"></i></button>
       </span>
   """
+
+gridz.directive "selectFill", [
+  "$http", "pathWithContext", "$parse",
+  ($http,pathWithContext, $parse) ->
+    restrict: "E"
+    replace: true
+    priority: 2000
+    link: (scope, $element, attrs) ->
+      scope.fill = ->
+        selectEl= $element.parent().parent().find("div[select-ajax-url]")[0]
+        model = $parse(selectEl.attributes['ng-model'].value)
+        $http.get(pathWithContext(selectEl.attributes['select-ajax-url'].value)).then (resp)->
+          result = []
+          if model(scope.$parent.$parent).length < resp.data.rows.length
+            result = resp.data.rows
+          model.assign scope.$parent.$parent, result
+    template: """
+       <span class="input-group-btn">
+         <button class="btn open-select2 btn-default " type="button" ng-click="fill()"><i class="fa fa-truck"></i></button>
+       </span>
+  """
+]
+
+gridz.directive "agSelect2Fill", [
+  "$http", "pathWithContext", "$parse",
+  ($http,pathWithContext, $parse) ->
+    restrict: "E"
+    replace: true
+    scope: true
+    controller: ["$scope", "$element", ($scope, $element) ->
+      $scope.fill = ->
+        selectEl = $element.parent().find(".select2-container")
+        select = document.getElementById(selectEl[0].attributes.id.value.replace("s2id_", ""))
+        model = $parse(angular.element(select)[0].attributes["ng-model"].value)
+        result = _.pluck(select.options, "value")
+        if  model($scope.$parent)? and model($scope.$parent).length is result.length
+          result =  []
+        model.assign $scope.$parent, result
+        return
+    ]
+    link: (scope, $element, attrs) ->
+      $element.parent().css("display", "table")
+    template: """
+       <span class="input-group-btn">
+         <button class="btn open-select2 btn-default " type="button" ng-click="fill()"><i class="fa fa-truck"></i></button>
+       </span>
+    """
+]

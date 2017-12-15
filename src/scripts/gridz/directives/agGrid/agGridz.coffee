@@ -37,6 +37,12 @@ gridz.directive "agGrid", [
         if options.datatype is undefined or options.datatype is null
           options.datatype = agGridDataLoader(options.url, gridCtrl)
 
+        if options.dropGrouping
+          groupingView = options.groupingView
+          groupingView.groupText = groupingView.groupText.map (value) ->
+            '<input type="checkbox" class="cbox"/>' + value
+          gridEl.jqGrid "setGridParam", "groupingView", groupingView
+
         gridEl.on "jqGridAfterGridComplete", () ->
           if options.dropGrouping
             gridId = alias
@@ -88,6 +94,24 @@ gridz.directive "agGrid", [
             _.each gridEl[0].rows, (it) ->
               angular.element(it).addClass('min')
 
+        groupCheckBox = ".jqgroup > td > .cbox"
+
+        gridEl.on "jqGridSelectAll", () ->
+          if options.dropGrouping
+            isChecked = $('#cb_' + alias).is(":checked")
+            selectedIds = gridEl.jqGrid "getGridParam", "selarrrow"
+            $(groupCheckBox).each () ->
+              row = $(this).closest('tr')
+              if isChecked
+                selectedIds.push row.attr('id')
+                row.addClass("ui-state-highlight")
+                $(this).prop("checked", true)
+              else
+                row.removeClass("ui-state-highlight")
+                $(this).prop("checked", false)
+
+        initGroupCheckboxes(alias, groupCheckBox)
+
         # jqGrid sucks at this point it expects `pager` to be an id
         unless options.pager is false
           options.pager = element.find(".gridz-pager").attr("id") or "gridz-pager"
@@ -121,6 +145,21 @@ gridz.directive "agGrid", [
         # initialize actionPopup handler
         ActionPopupHandler(gridEl, scope, attrs)
         angular.element(element.find("select").wrap('<span class="select-wrapper"></span>'))
+
+      # Initiates group checkbox action.
+      # When a group checkbox is checked
+      # walks through records and selects them
+      # until next group checkbox is found.
+      initGroupCheckboxes = (gridId, checkboxSelector) ->
+        headerSelector = ".#{alias}ghead_0"
+        $('#' + gridId).on("change", checkboxSelector, (e) ->
+          currentCB = $(this)
+          gridEl.setSelection $(this).closest('tr').attr('id')
+          headers = currentCB.closest('tr').nextUntil(headerSelector)
+          checkboxes = headers.find('.cbox[type="checkbox"]')
+          checkboxes.each () ->
+            gridEl.setSelection $(this).closest('tr').attr('id')
+        )
 
       if options.dropGrouping
         dropDownsection = angular.element """<div >

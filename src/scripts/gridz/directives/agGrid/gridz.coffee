@@ -18,6 +18,7 @@ class Gridz
 
     @gridEl.on('jqGridAfterGridComplete', @options.jqGridAfterGridComplete) if $.isFunction(@options.jqGridAfterGridComplete)
     @gridEl.on('jqGridAfterInsertRow', @options.jqGridAfterInsertRow) if $.isFunction(@options.jqGridAfterInsertRow)
+    @selectedRowIds = [] if @options.multiSetSelection
 
     @responsiveResize()
 
@@ -38,12 +39,19 @@ class Gridz
       optOnSelectRow.apply this, arguments  if $.isFunction(optOnSelectRow)
       true
 
+    optOnSelectAll = options.onSelectAll
+    options.onSelectAll = (rowIds, status) =>
+      @onSelectAll.apply this, arguments
+      optOnSelectAll.apply this, arguments  if $.isFunction(optOnSelectAll)
+      true
+
     # Events .. gridComplete
     _gridComplete = options.gridComplete
     options.gridComplete = =>
       @gridComplete.apply @
       _gridComplete.apply this, arguments if $.isFunction(_gridComplete)
       @gridEl.trigger "gridComplete"
+      @memoizeSelectedRows() if @options.multiSetSelection
 
     # By default free-jqrid prepared sorting properties with next pattern
     # sortName = columnName(id, name, etc) order(asc|desc), next column order of the last column name is in `order` parametr
@@ -71,7 +79,9 @@ class Gridz
           @gridEl.jqGrid("setGridParam", sortname: sortname)
           @gridEl.jqGrid("setGridParam", order: sort[1]) if sort
 
-
+    # If true - provides a possibility to select multiple sets of records with "shift" key.
+    # Previously selected group(s) will not be unselected.
+    options.multiSetSelection = options.multiselect and options.multiSetSelection
 
     # if sortable is true then add exclusion for the action column
     if options.actionPopup and options.sortable
@@ -84,6 +94,9 @@ class Gridz
   ###
   gridComplete: ->
     @actionPopupSetup() if @options.actionPopup
+    if @options.popups
+      _.each @options.popups, (popupOptions) ->
+        @popupSetup(popupOptions.columnName, popupOptions.innerHTML)
 
   ###
   Handles proper multi selection of rows
@@ -126,7 +139,17 @@ class Gridz
         document.selection.empty()
       else window.getSelection().removeAllRanges() if window.getSelection
 
+    @memoizeSelectedRows() if @options.multiSetSelection
+
     true
+
+  memoizeSelectedRows: () ->
+    selectedRows = @selectedRowIds
+    _.each @gridEl.jqGrid("getGridParam", "selarrrow"), (id) ->
+      selectedRows.push(id) if not (id in selectedRows)
+
+  onSelectAll: () ->
+    @selectedRowIds = [] if @options.multiSetSelection
 
   onSelectRow: (rowid, isChecked,e) ->
     if @gridEl.jqGrid("getGridParam", "agRowNumber")
@@ -145,6 +168,18 @@ class Gridz
         pager.prepend("<span id='rowNum'>#{text} </span>")
       else
         span.text(text)
+
+    if @options.multiSetSelection
+      @selectedRowIds.splice(@selectedRowIds.indexOf(rowid), 1) if not isChecked
+      if e?.shiftKey
+        grid = @gridEl
+        grid.jqGrid "resetSelection"
+        grid.jqGrid "setSelection", rowid
+        selectedRows = @selectedRowIds
+        selected = grid.jqGrid("getGridParam", "selarrrow")
+        _.each selectedRows, (id) ->
+          grid.jqGrid("setSelection", id) if not (id in selected)
+
     true
 
   ###
@@ -156,7 +191,10 @@ class Gridz
     $(window).on "resize", (event, ui) =>
 
       # Get width of parent container which is assumed to be expanded to span
-      parWidth = $(gboxId).parent().width()
+      if $(gboxId).parent().width() > 0
+        parWidth = $(gboxId).parent().width()
+      else
+        parWidth = $("#page").width()
       curWidth = $(gboxId).width()
       w = parWidth - 1 # add -1 Fudge factor to prevent horizontal scrollbars
 
@@ -187,6 +225,12 @@ class Gridz
 
     @options.colModel.unshift(actionCol)
 
+  popupFormatter: (containerId, rowClass, icon) ->
+    """
+    <a class="#{rowClass}" data-toggle="popover" href="#"
+       data-container="##{containerId}"><i class="#{icon}"></i></a>
+    """
+
   ###
   default rowActionFormatter. containerId is the dom el to add the drop down to
   ###
@@ -195,6 +239,27 @@ class Gridz
     <a class="jqg-row-action" data-toggle="popover" href="#"
        data-container="##{containerId}"><i class="fa fa-cog"></i></a>
     """
+
+
+
+  popupSetup: (columnName, innerHTML)->
+    $(".#{columnName}").clickover
+      global_close: true
+      html: true
+      content: "<div></div>"
+      template: """
+                  <div class="popover row-action-popover">
+                    <div class="arrow"></div>
+                    <div class="popover-content dropdown clearfix" style="padding: 0;"></div>
+                  </div>
+                  """
+      onShown: ->
+        content = innerHTML
+        if typeof innerHTML is 'function'
+          self = this
+          params= JSON.parse this.$element[0].attributes.popUpParams.value
+          content = innerHTML(this, params)
+        self.$tip[0].innerHTML = content
 
   # called after grid complete to setup the menu
   actionPopupSetup: ->
@@ -258,6 +323,10 @@ class Gridz
     menuEl.on "click", "li a.row_action_delete", (e) =>
       e.preventDefault()
       @gridEl.trigger "deleteAction", [id, self]
+
+    menuEl.on "click", "li a.row_action_mass_update", (e) =>
+      e.preventDefault()
+      @gridEl.trigger "massUpdateAction", []
 
   editOndblClick: ->
     self = this
