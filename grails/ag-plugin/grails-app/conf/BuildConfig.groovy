@@ -23,7 +23,7 @@ grails.project.dependency.resolution = {
     grailsCentral()
     mavenCentral()
 
-    //mavenRepo(id: '9ci-artifactory', url: 'http://repo.9ci.com/artifactory/repo')
+    //mavenRepo(id: '9ci-artifactory', url: 'http://repo.9ci.com/repo')
 
     // uncomment the below to enable remote dependency resolution
     // from public Maven repositories
