@@ -7,9 +7,33 @@ app.directive "gridCrud", ["$controller", "$timeout", ($controller, $timeout) ->
     scope: true
     template: '<div  ng-show="showForm"><ng-include ng-if="!isModal" src="template | withContext"></ng-include></div>'
     link: (scope, element, attrs) ->
+      gridEl = angular.element(document.querySelectorAll("[ag-grid-name=#{attrs.gridName}]")).find("table.gridz")
       clicks = () ->
-        gridEl = angular.element(document.querySelectorAll("[ag-grid-name=#{attrs.gridName}]")).find("table.gridz")
         gridEl.jqGrid('setGridParam', ondblClickRow: scope.dblClick)
+        if attrs.keyboardnav is true or attrs.keyboardnav is 'true'
+          colNames = gridEl.jqGrid('getGridParam','colNames')
+          gridEl.bind("keydown", (event)->
+            if scope.lastSelectedRow
+              if event.which isnt 13
+                scope.unHighlightCell(scope.lastSelectedRow, scope.lastSelectedCell)
+              ids = gridEl.jqGrid('getDataIDs')
+              firstId = ids[0]
+              lastId = ids[ids.length-1]
+              switch event.which
+                when 13 #enter
+                  scope.dblClick(scope.lastSelectedRow, null, scope.lastSelectedCell, event)
+                when 40 #down
+                  if scope.lastSelectedRow isnt lastId
+                    scope.lastSelectedRow = ids[ids.indexOf(scope.lastSelectedRow) + 1]
+                when 38 #up
+                  if scope.lastSelectedRow isnt firstId
+                    scope.lastSelectedRow = ids[ids.indexOf(scope.lastSelectedRow) - 1]
+                when 39 #right
+                  scope.lastSelectedCell++ unless (scope.lastSelectedCell is colNames.length)
+                when 37 #left
+                  scope.lastSelectedCell-- unless (scope.lastSelectedCell is 0)
+            scope.highlightCell(scope.lastSelectedRow, scope.lastSelectedCell)
+          )
       attrs.$observe("gridCrud", clicks)
       scope.isModal = attrs.isModal is true or attrs.isModal is 'true'
 
@@ -40,6 +64,8 @@ class @GridCrudCtrl
     Resource = null
     beforeSave = null
     afterSave = null
+    $scope.lastSelectedRow = null
+    $scope.lastSelectedCell = null
 
     if $attrs.beforeSave then beforeSave = $scope[$attrs.beforeSave]
     if $attrs.afterSave then afterSave = $scope[$attrs.afterSave]
@@ -59,6 +85,7 @@ class @GridCrudCtrl
         $scope.modal.close()
       else
         $scope.showForm = false
+      $scope.highlightCell($scope.lastSelectedRow, $scope.lastSelectedCell)
 
     showForm = ->
       if $scope.isModal
@@ -84,7 +111,9 @@ class @GridCrudCtrl
         $scope.showForm = true
 
     editAction = (id) ->
+      $scope.unHighlightCell($scope.lastSelectedRow, $scope.lastSelectedCell)
       $log.info "[gridCrud] Edit #{resourceName} : #{id}"
+      $scope.lastSelectedRow = id
       record = Resource.get {id: id}, (r) ->
         $scope[resourceName] = restrictResource(r, allowedFields)
         showForm()
@@ -109,15 +138,26 @@ class @GridCrudCtrl
         if(afterSave)
           $log.info "[gridCrud] Calling afterSave: #{resourceName}"
           afterSave(record)
+        $scope.highlightCell($scope.lastSelectedRow, $scope.lastSelectedCell)
 
       return [promise, record]
+
+    $scope.highlightCell = (rowid, colname) ->
+      grid().getGridEl().jqGrid('setCell', rowid, colname, "",  {"border-color": "green", "border-width": "thin", "border-style": "double"})
+      null
+
+    $scope.unHighlightCell = (rowid, colname) ->
+      grid().getGridEl().jqGrid('setCell', rowid, colname, "",  {"border-width": "0px"})
+      null
 
     $scope.cancel = () ->
       hideForm()
 
     $scope.dblClick = (rowid, iRow, iCol, e) ->
-      $scope.columnNameForFocus = $scope["#{e.currentTarget.id}"].getGridEl().getGridParam().colModel[iCol]["name"]
+      colModel = $scope["#{e?.currentTarget?.id}"].getGridEl().getGridParam().colModel
+      $scope.columnNameForFocus = colModel[iCol]?["name"]
       editAction(rowid)
+      $scope.lastSelectedCell = iCol
 
     $scope.setFocus = (element) ->
       if $scope.columnNameForFocus # check if variable exists
