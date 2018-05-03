@@ -1,0 +1,95 @@
+buildscript {
+  repositories {
+    mavenLocal()
+    maven { url "https://repo.grails.org/grails/core" }
+  }
+  dependencies {
+    classpath "org.grails:grails-gradle-plugin:$grailsVersion"
+    classpath "com.bertramlabs.plugins:asset-pipeline-gradle:2.11.2"
+    classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
+  }
+}
+
+plugins {
+  id "com.energizedwork.idea-project-components" version "1.4"
+  // for CI 'resolveConfigurations' task see https://github.com/palantir/gradle-configuration-resolver-plugin
+  id "com.palantir.configuration-resolver" version "0.2.0"
+  id "org.ajoberstar.git-publish" version "0.3.2"
+  id 'org.ajoberstar.grgit' version '2.1.1'
+  id 'com.diffplug.gradle.spotless' version '3.10.0'
+  //id "pl.softmate.gradle-properties-yaml-plugin" version "0.0.2"
+}
+apply plugin:"idea"
+apply plugin:'groovy'
+apply from: 'gradle/prop-defaults.gradle'
+//apply from: "$gradleDir/spotless.gradle"
+
+allprojects {
+
+  apply plugin:'groovy'
+  apply plugin: 'com.palantir.configuration-resolver' //see above for CI usage on this
+
+  repositories {
+    mavenLocal()
+    maven { url "https://repo.grails.org/grails/core" }
+    maven { url "https://dl.bintray.com/9ci/grails-plugins"}
+    //maven { url "http://repo.9ci.com/oss-snapshots" }
+    mavenCentral()
+    jcenter()
+  }
+
+  sourceCompatibility = '1.8'
+  targetCompatibility = '1.8'
+
+  //for snapshot marked with {changing=true) this checks more often
+  configurations.all {
+    resolutionStrategy.cacheChangingModulesFor 1, 'seconds'
+  }
+}
+
+subprojects {
+  dependencies {
+    compile "org.springframework.boot:spring-boot-starter-logging"
+    compile "org.springframework.boot:spring-boot-autoconfigure"
+    compile "org.grails:grails-core"
+    compile "org.springframework.boot:spring-boot-starter-actuator"
+    compile "org.springframework.boot:spring-boot-starter-tomcat"
+    compile "org.grails:grails-web-boot"
+
+    compile "org.grails:grails-logging"
+    compile "org.grails:grails-plugin-databinding"
+    compile "org.grails:grails-plugin-services"
+    compile 'org.grails.plugins:grails-java8:1.2.2'
+
+    //compile "org.grails.plugins:events"
+    compile "org.codehaus.gpars:gpars:1.2.0"
+
+    //compileOnly "org.grails.plugins:views-json:$viewsVersion"
+    //compileOnly "org.grails.plugins:views-json-templates:$viewsVersion"
+    //compileOnly "org.grails:views-json-testing-support:$viewsVersion"
+
+    //compile "org.grails.plugins:hibernate5"
+    //compile "org.hibernate:hibernate-core:$hibernateVersion"
+    //compile "org.hibernate:hibernate-ehcache:$hibernateVersion"
+
+    testRuntime "com.h2database:h2"
+    testRuntime "org.apache.tomcat:tomcat-jdbc"
+
+    testCompile "org.grails:grails-gorm-testing-support"
+    testCompile "org.grails:grails-web-testing-support"
+    //testCompile "org.grails.plugins:build-test-data:$buildTestDataVersion"
+    //testCompile "org.grails:views-json-testing-support:$viewsVersion"
+
+  }
+
+  test {
+    //testLogging.showStandardStreams = true
+    testLogging.exceptionFormat = 'full'
+  }
+
+}
+
+
+//** doc publishing
+//apply from: "gradle/mkdocs.gradle"
+//apply from: "gradle/githubPublish.gradle"
