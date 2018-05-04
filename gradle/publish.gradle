@@ -1,0 +1,75 @@
+apply plugin: "org.grails.grails-plugin-publish"
+
+grailsPublish {
+  //user = binTrayUser
+  //key = binTrayKey
+  title = title
+  desc = description
+  userOrg = bintrayOrg
+  repo = bintrayRepo
+  developers = [basejump: 'Joshua Burnett']
+  githubSlug = "$githubSlug"
+  issueTrackerUrl = "$githubIssues"
+  websiteUrl = websiteUrl
+  vcsUrl = "$githubUrl"
+}
+
+if(isSnapshot){
+  publishing {
+    println "SNAPSHOT - " + name + ":" + version.toString()
+    repositories {
+      maven {
+        url "http://repo.9ci.com/oss-snapshots"
+        credentials {
+          username artifactoryUsername
+          password artifactoryPassword
+        }
+      }
+    }
+  }
+}
+
+task tagRelease {
+  description = 'Tags the current head with the project\'s version.'
+  doLast {
+    println grgit.status().unstaged
+//        grgit.tag.add {
+//            name = version + "test grgit"
+//            message = "Release of ${version}"
+//        }
+  }
+}
+
+/*
+grailsPublish {
+  desc = 'A plugin that enables ties grails and angular together'
+  developers = [joshuaB: 'Joshua B']
+  githubSlug = '9ci/angle-grinder'
+  issueTrackerUrl = 'https://github.com/9ci/angle-grinder/issues'
+  vcsUrl = 'https://github.com/9ci/angle-grinder'
+  license {
+    name = 'Apache-2.0'
+  }
+  title = 'Angle Grinder'
+  userOrg = '9ci' //the Org to publish this under in
+  repo = 'grails-plugins' //the repository you setup in bintray
+  bintray {
+    //override plugin only if it is snapshot
+    override = rootProject.version.endsWith("SNAPSHOT")
+  }
+  //user = 'user' <- pulled from either BINTRAY_USER sys prop or project.bintrayUser which can be in ~/.gradle/gradle.properties
+  //key = 'key' <- pulled from either BINTRAY_KEY sys prop or project.bintrayKey which can be in ~/.gradle/gradle.properties
+}
+
+publishing {
+  repositories {
+    maven {
+      url "http://repo.9ci.com/grails-plugins"
+      credentials {
+        username artifactoryUsername
+        password artifactoryPassword
+      }
+    }
+  }
+}
+*/

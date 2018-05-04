@@ -1,9 +1,10 @@
 package grinder
 
+import gorm.tools.beans.BeanPathTools
 import org.grails.core.DefaultGrailsDomainClass
 import spock.lang.Specification
 
-class BeanPathToolsSpec {
+class BeanPathToolsSpec extends Specification{
 
     def "Can get property value for a basic class"() {
         setup:

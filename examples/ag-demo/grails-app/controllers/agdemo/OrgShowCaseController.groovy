@@ -2,8 +2,8 @@ package agdemo
 
 import grails.converters.JSON
 import grails.plugin.dao.DaoMessage
-import grinder.DateUtil
-import grinder.Pager
+import gorm.tools.beans.DateUtil
+import gorm.tools.Pager
 
 class OrgShowCaseController extends BaseDomainController {
     def domainClass = OrgShowCase

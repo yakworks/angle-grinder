@@ -1,10 +1,8 @@
 package grinder
 
+import gorm.tools.beans.DateUtil
+import gorm.tools.beans.MapFlattener
 import org.junit.Test
-
-import java.text.SimpleDateFormat
-
-import static org.junit.Assert.assertEquals
 
 class MapFlattenerTest {
 

@@ -1,11 +1,12 @@
 package grinder
 
+import gorm.tools.Pager
 import spock.lang.Specification
 
 /**
  *@author Sudhir
  */
-class PagerSpec {
+class PagerSpec extends Specification{
 
     def "test eachPage"() {
         setup:

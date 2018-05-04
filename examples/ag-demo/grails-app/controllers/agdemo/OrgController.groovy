@@ -2,7 +2,7 @@ package agdemo
 
 import grails.converters.JSON
 import grails.plugin.dao.DomainException
-import grinder.Pager
+import gorm.tools.Pager
 import org.hibernate.criterion.CriteriaSpecification
 
 class OrgController extends BaseDomainController {

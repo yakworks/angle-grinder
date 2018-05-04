@@ -6,8 +6,8 @@ import grails.plugin.dao.DomainException
 import grails.util.GrailsClassUtils
 import grails.util.GrailsNameUtils
 import grails.validation.ValidationException
-import grinder.BeanPathTools
-import grinder.Pager
+import gorm.tools.beans.BeanPathTools
+import gorm.tools.Pager
 
 import javax.annotation.PostConstruct
 

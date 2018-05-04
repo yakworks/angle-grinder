@@ -1,10 +1,8 @@
 package agdemo
 
-import agdemo.Org
 import agdemo.OrgDao
 import grails.test.mixin.integration.Integration
 import grails.transaction.Rollback
-import org.apache.tools.ant.taskdefs.condition.Or
 import spock.lang.Specification
 
 @Integration
@@ -14,7 +12,7 @@ class OrgDaoTests extends Specification {
   OrgDao orgDao
 
   Map buildMap(Map extend) {
-    agdemo.Org.buildMap(extend).properties
+    agdemo.Org.build(extend).properties
   }
 
   void testInsert() {

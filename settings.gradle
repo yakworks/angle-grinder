@@ -5,4 +5,3 @@ findProject(':plugin').name = 'angle-grinder'
 
 include 'examples/ag-demo'
 findProject(':examples/ag-demo').name = 'ag-demo'
-
