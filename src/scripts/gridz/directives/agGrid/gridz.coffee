@@ -442,5 +442,5 @@ window.columnAligner = (type, content, options) ->
     content
   else
     """
-    <div class="#{type}-content">#{content}</div>
+    <span class="#{type}-content">#{content}</span>
     """
