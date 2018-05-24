@@ -8,14 +8,12 @@ buildscript {
         classpath "gradle.plugin.com.energizedwork.webdriver-binaries:webdriver-binaries-gradle-plugin:1.1"
         classpath "com.bertramlabs.plugins:asset-pipeline-gradle:2.11.2"
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
+        classpath "com.bertramlabs.plugins:asset-pipeline-gradle:2.14.2"
+        classpath 'com.bertramlabs.plugins:coffee-asset-pipeline:2.14.2'
     }
 }
-
-version "3.0.3-SNAPSHOT"
 group "nine"
 
-apply plugin:"eclipse"
-apply plugin:"idea"
 apply plugin:"org.grails.grails-plugin"
 apply plugin:"org.grails.grails-plugin-publish"
 apply plugin:"org.grails.grails-gsp"
@@ -38,7 +36,8 @@ dependencies {
     compileOnly "org.springframework:spring-test"
 
     provided "org.grails:grails-plugin-domain-class"
-    compileOnly "com.bertramlabs.plugins:asset-pipeline-grails:2.11.2"
+    runtime "com.bertramlabs.plugins:asset-pipeline-grails:2.11.1"
+    runtime 'com.bertramlabs.plugins:coffee-asset-pipeline:2.6.2'
 
     testCompile "org.grails.plugins:geb"
     testCompile "org.grails:grails-plugin-testing"
@@ -50,9 +49,4 @@ dependencies {
 bootRun {
     jvmArgs('-Dspring.output.ansi.enabled=always')
     addResources = true
-}
-
-
-assets {
-    packagePlugin = true
 }
