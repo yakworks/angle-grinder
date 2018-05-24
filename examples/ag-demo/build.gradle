@@ -34,6 +34,7 @@ dependencies {
     provided "org.springframework.boot:spring-boot-starter-tomcat"
     compile "org.grails:grails-web-boot"
     console "org.grails:grails-console"
+    compile "org.grails.plugin:dao:3.0.6"
     runtime "com.bertramlabs.plugins:asset-pipeline-grails:2.11.1"
     runtime 'com.bertramlabs.plugins:coffee-asset-pipeline:2.6.2'
     compile "org.grails.plugins:audit-trail:3.0.1.SNAPSHOT"

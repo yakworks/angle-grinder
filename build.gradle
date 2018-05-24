@@ -66,8 +66,6 @@ subprojects {
     compile "org.hibernate:hibernate-core:4.3.10.Final"
     compile "org.hibernate:hibernate-ehcache:4.3.10.Final"
 
-    compile "org.grails.plugin:dao:3.0.6"
-
     compile "org.codehaus.gpars:gpars:1.2.0"
 
     testRuntime "com.h2database:h2"

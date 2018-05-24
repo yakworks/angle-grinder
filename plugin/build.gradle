@@ -34,6 +34,7 @@ bootRepackage.enabled = false
 dependencies {
     provided "org.grails:grails-dependencies"
     compileOnly "org.springframework:spring-test"
+    compile "org.grails.plugins:gorm-tools:6.1.4"
 
     provided "org.grails:grails-plugin-domain-class"
     runtime "com.bertramlabs.plugins:asset-pipeline-grails:2.11.1"
