@@ -70,11 +70,15 @@ jobs:
       # - run: gradle test-app:check --no-daemon --max-workers 2
 
       - store_artifacts:
-          path: examples/test-app/build/reports/tests
-          destination: test-reports/integration
+          path: examples/ag-demo/build/reports/tests/test
+          destination: test-reports/ag-demo/unit
+
+      - store_artifacts:
+          path: examples/ag-demo/build/reports/tests
+          destination: test-reports/ag-demo/integration
 
       - store_test_results:
-          path: examples/test-app/build/test-results
+          path: examples/ag-demo/build/test-results
 
 
       # - run: ./.circleci/publish.sh
