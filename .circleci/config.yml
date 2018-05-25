@@ -1,0 +1,84 @@
+# Java Gradle CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-java/ for more details
+#
+version: 2
+jobs:
+  build:
+    docker:
+      # specify the version you desire here
+      - image: dock9/oraclejdk8:gradle-3.5.1
+
+      # Specify service dependencies here if necessary
+      # CircleCI maintains a library of pre-built images
+      # documented at https://circleci.com/docs/2.0/circleci-images/
+      # - image: circleci/postgres:9.4
+
+#    branches:
+#      only:
+#        - master
+
+    working_directory: ~/repo
+
+    environment:
+      # Customize the JVM maximum heap limit
+      # JVM_OPTS: -Xmx3200m
+      MALLOC_ARENA_MAX: 2
+      GRADLE_OPTS: "-Xmx2048m -Dorg.gradle.daemon=false"
+      TERM: dumb
+
+    parallelism: 1
+    # resource_class: large
+
+    steps:
+      - checkout
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "build.gradle" }}
+
+      # see https://github.com/palantir/gradle-configuration-resolver-plugin
+      - run: gradle resolveConfigurations
+      #- run: ./gradlew test-app:dependencies
+
+      - save_cache:
+          paths:
+            - ~/.m2
+            - ~/.gradle
+          key: v1-dependencies-{{ checksum "build.gradle" }}
+
+      - add_ssh_keys:
+          fingerprints:
+            - "32:15:5c:47:98:e9:3f:09:f9:32:c9:22:00:cc:15:9a"
+
+      # run tests!
+      # - run: gradle clean; gradle gorm-tools:check --no-daemon --max-workers 2
+      - run: ./.circleci/build.sh
+
+      - store_artifacts:
+          path: plugin/build/reports/tests/test/
+          destination: test-reports/unit/
+
+      - store_artifacts:
+          path: plugin/build/reports/codenarc/
+          destination: codenarc/
+
+      - store_test_results:
+          path: plugin/build/test-results
+
+      # - run: gradle test-app:check --no-daemon --max-workers 2
+
+      - store_artifacts:
+          path: examples/ag-demo/build/reports/tests/test
+          destination: test-reports/ag-demo/unit
+
+      - store_artifacts:
+          path: examples/ag-demo/build/reports/tests
+          destination: test-reports/ag-demo/integration
+
+      - store_test_results:
+          path: examples/ag-demo/build/test-results
+
+
+      # - run: ./.circleci/publish.sh
