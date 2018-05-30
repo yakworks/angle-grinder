@@ -12,11 +12,11 @@ if [[ $(git diff --name-only $commitRange | grep --invert-match -E "(README\.md|
   gradle angle-grinder:check --no-daemon --max-workers 2
   gradle ag-demo:check --no-daemon --max-workers 2
 
-  if [[ $CIRCLE_BRANCH == 'master' ]]; then
-    if [[ "$CIRCLE_TAG" =~ ^v[0-9].* ]]; then
-      echo "### publishing release to BinTray"
-      gradle angle-grinder:bintrayUpload --no-daemon
-    else
+  if [[ "$CIRCLE_TAG" =~ ^v[0-9].* ]]; then
+     echo "### publishing release to BinTray"
+     gradle angle-grinder:bintrayUpload --no-daemon
+  else
+    if [[ $CIRCLE_BRANCH == 'master' ]]; then
       echo "### publishing SNAPSHOT"
       gradle angle-grinder:publish --no-daemon
     fi
