@@ -6,6 +6,7 @@ buildscript {
   dependencies {
     classpath "org.grails:grails-gradle-plugin:$grailsVersion"
     classpath "com.bertramlabs.plugins:asset-pipeline-gradle:2.14.2"
+    classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
     classpath 'com.bertramlabs.plugins:coffee-asset-pipeline:2.14.2'
   }
 }
@@ -19,20 +20,22 @@ plugins {
   id 'com.diffplug.gradle.spotless' version '3.10.0'
   //id "pl.softmate.gradle-properties-yaml-plugin" version "0.0.2"
 }
-apply plugin:"idea"
-apply plugin:'groovy'
+
+apply plugin: "idea"
+apply plugin: 'groovy'
+
 apply from: 'gradle/prop-defaults.gradle'
 apply from: "$gradleDir/spotless.gradle"
 
 allprojects {
 
-  apply plugin:'groovy'
+  apply plugin: 'groovy'
   apply plugin: 'com.palantir.configuration-resolver' //see above for CI usage on this
 
   repositories {
     mavenLocal()
     maven { url "https://repo.grails.org/grails/core" }
-    maven { url "https://dl.bintray.com/9ci/grails-plugins"}
+    maven { url "https://dl.bintray.com/9ci/grails-plugins" }
     //maven { url "http://repo.9ci.com/oss-snapshots" }
     mavenCentral()
     jcenter()
@@ -41,10 +44,11 @@ allprojects {
   sourceCompatibility = '1.8'
   targetCompatibility = '1.8'
 
-  //for snapshot marked with {changing=true) this checks more often
+//for snapshot marked with {changing=true) this checks more often
   configurations.all {
     resolutionStrategy.cacheChangingModulesFor 1, 'seconds'
   }
+
 }
 
 subprojects {

@@ -19,7 +19,9 @@ apply plugin:"org.grails.grails-plugin-publish"
 apply plugin:"org.grails.grails-gsp"
 apply plugin:"asset-pipeline"
 apply plugin:'groovy'
+
 apply from: "$gradleDir/publish.gradle"
+
 repositories {
     mavenLocal()
     maven { url "https://repo.grails.org/grails/core" }
@@ -36,7 +38,9 @@ dependencies {
     compileOnly "org.springframework:spring-test"
     compile "org.grails.plugins:gorm-tools:6.1.4"
 
+    profile "org.grails.profiles:web-plugin"
     provided "org.grails:grails-plugin-domain-class"
+
     runtime "com.bertramlabs.plugins:asset-pipeline-grails:2.11.1"
     runtime 'com.bertramlabs.plugins:coffee-asset-pipeline:2.6.2'
 
