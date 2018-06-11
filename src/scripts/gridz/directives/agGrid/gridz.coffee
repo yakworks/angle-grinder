@@ -10,8 +10,8 @@ class Gridz
     @gboxId = "gbox_#{@gridId}"
     @options = @getOptions(opts)
 
-    @addRowActionColumn() if @options.actionPopup
-    @editOndblClick() if @options.editOndblClick
+    @addRowActionColumn() if (@options.actionPopup and @options.editable isnt false)
+    @editOndblClick() if (@options.editOndblClick and @options.editable isnt false)
 
     # call the jqgrid
     @gridEl.jqGrid @options
@@ -329,6 +329,8 @@ class Gridz
       @gridEl.trigger "massUpdateAction", []
 
   editOndblClick: ->
+    if (@options.editable is false)
+      return
     self = this
     grid = @gridEl
     @options.ondblClickRow = (id)->
