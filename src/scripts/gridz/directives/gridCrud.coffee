@@ -154,7 +154,10 @@ class @GridCrudCtrl
       hideForm()
 
     $scope.dblClick = (rowid, iRow, iCol, e) ->
-      colModel = $scope["#{e?.currentTarget?.id}"].getGridEl().getGridParam().colModel
+      options = $scope["#{e?.currentTarget?.id}"].getGridEl().getGridParam()
+      if options.editable is false
+        return
+      colModel = options.colModel
       $scope.columnNameForFocus = colModel[iCol]?["name"]
       editAction(rowid)
       $scope.lastSelectedCell = iCol
