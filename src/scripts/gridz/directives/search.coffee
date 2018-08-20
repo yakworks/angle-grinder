@@ -62,12 +62,20 @@ gridz.directive "agSearchForm", ["$log", ($log) ->
 
       # Trigger search action for the grid
       $scope.advancedSearch = (filters = {}) ->
+        beforeSearch = null
+
+        if $attrs.beforeSearch then beforeSearch = $scope[$attrs.beforeSearch] || $scope.$parent[$attrs.beforeSearch]
         form = $scope.searchForm
 
         if form and form.$invalid
           return $log.info "[gridz] advanced search form is invalid", form
-
-        gridSearch(filters)
+        beforeSearchResult = true
+        if beforeSearch
+          res = beforeSearch(filters, form)
+          if res?
+            beforeSearchResult = res
+        if beforeSearchResult
+          gridSearch(filters)
 
       # Reset the search form and trigger grid reload
       $scope.resetSearch = (filters = {}) ->
