@@ -15,7 +15,9 @@ gridz.directive "agGridQuickSearch", [
 
       # perform grid search
       $scope.search = (filters) ->
-        $scope.grid.search(filters)
+        f = _.cloneDeep filters
+        f.quickSearch = f.quickSearch.replace(",","")
+        $scope.grid.search(f)
 
     template: """
       <form class="navbar-search pull-right" name="quickSearch"">
