@@ -21,8 +21,14 @@ app.directive 'tagInput', ->
       return if $scope.tagVal.length is 0
       tagArray = $scope.tagArray()
       if $scope.tagVal not in tagArray
-        tagArray.push $scope.tagVal
-        $scope.tags = tagArray.join(',')
+        if ($scope.tagVal.indexOf(",") > -1)
+          tagArray = tagArray.concat(_.map($scope.tagVal.split(","), (e)-> e.trim()))
+        else
+          tagArray.push $scope.tagVal.trim()
+      tagArray = _.map(tagArray, (e) ->
+        return e.trim()
+      )
+      $scope.tags = tagArray.join(',')
       $scope.tagVal = ""
 
     $scope.deleteTag = (key) ->
