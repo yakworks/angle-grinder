@@ -79,9 +79,10 @@ gridz.directive "agSearchForm", ["$log", ($log) ->
 
       # Reset the search form and trigger grid reload
       $scope.resetSearch = (filters = {}) ->
-        defaultFilters = $scope.defaultFilters or {}
+        defaultFilters = ($scope.defaultFilters || $scope.$parent.defaultFilters) or {}
         angular.copy(defaultFilters, filters)
-
+        if $attrs.doNotResetSearch is true or $attrs.doNotResetSearch is 'true'
+          return
         gridSearch(filters)
   ]
 ]
