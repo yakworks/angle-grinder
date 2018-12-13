@@ -19,6 +19,14 @@ app.provider "agDateFilter", ->
         moment(date).format(format)
   ]
 
+app.provider "agLocalDateTimeFilter", ->
+  $get: [
+    "$filter", "IsFalsyServ",
+    () ->
+      (date) ->
+        moment(date).format("MM/DD/YYYY hh:mm A")
+  ]
+
 #removes timezone and just uses year,month, day
 app.filter 'localDate', ["IsFalsyServ", "agDate", (IsFalsyServ, agDate) ->
   (input) ->

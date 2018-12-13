@@ -402,6 +402,9 @@ $.extend $.fn.fmatter,
   date:     (cellVal, options) ->
     window.columnAligner("date", window.agDateFilter(cellVal), options)
 
+  dateTime: (cellVal, options) ->
+    window.columnAligner("date", window.agLocalDateTimeFilter(cellVal), options)
+
   # use `agCurrencyFilter` for format currencies
   currency: (cellVal, options) ->
     window.columnAligner("currency", window.agCurrencyFilter(cellVal), options)
