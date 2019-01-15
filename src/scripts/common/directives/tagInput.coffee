@@ -14,7 +14,7 @@ app.directive 'tagInput', ->
 
     $scope.tagArray = ->
       return [] if $scope.tags is undefined
-      $scope.tags.split(',').filter (tag) ->
+      $scope.tags.replace(".", "").split(',').filter (tag) ->
         return tag != ""
 
     $scope.addTag = ->
@@ -55,8 +55,12 @@ app.directive 'tagInput', ->
     element.bind "keyup", (e) ->
       key = e.which
 
-      # Tab, Enter or , pressed
-      if key is 9 or key is 13 or key is 188
+      # Tab, Enter pressed
+      if key is 9 or key is 13
+        e.preventDefault()
+        $scope.$apply 'addTag()'
+      isDot = $scope.tags?[0] is "." or $scope.tagVal?[0] is "."
+      if key is 188 and not isDot
         e.preventDefault()
         $scope.$apply 'addTag()'
 
