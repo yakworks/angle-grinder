@@ -14,7 +14,7 @@ app.directive 'tagInput', ->
 
     $scope.tagArray = ->
       return [] if $scope.tags is undefined
-      $scope.tags.replace(".", "").split(',').filter (tag) ->
+      $scope.tags.replace(".", "").split(/[\s,+]+/).filter (tag) ->
         return tag != ""
 
     $scope.addTag = ->
@@ -22,7 +22,7 @@ app.directive 'tagInput', ->
       tagArray = $scope.tagArray()
       if $scope.tagVal not in tagArray
         if ($scope.tagVal.indexOf(",") > -1)
-          tagArray = tagArray.concat(_.map($scope.tagVal.split(","), (e)-> e.trim()))
+          tagArray = tagArray.concat(_.map($scope.tagVal.split(/[\s,+]+/), (e)-> e.trim()))
         else
           tagArray.push $scope.tagVal.trim()
       tagArray = _.map(tagArray, (e) ->
@@ -60,6 +60,7 @@ app.directive 'tagInput', ->
         e.preventDefault()
         $scope.$apply 'addTag()'
       isDot = $scope.tags?[0] is "." or $scope.tagVal?[0] is "."
+      #188 - comma
       if key is 188 and not isDot
         e.preventDefault()
         $scope.$apply 'addTag()'
