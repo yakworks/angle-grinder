@@ -34,16 +34,24 @@ gridz.directive "agGridXlsExport", [
             iframe.focus()
             iframe.document.execCommand('SaveAs', true, 'download.csv')
           else
-            dataUri = grid.getXlsDataUri()
-            link = document.createElement('a')
-            link.href = dataUri
-            link.setAttribute('download', 'download.xls')
-            document.body.appendChild(link)
-            click_ev = document.createEvent("MouseEvents")
-            # initialize the event
-            click_ev.initEvent("click", true, true)
-            # trigger the event
-            link.dispatchEvent(click_ev)
+            labels = {}
+            _.each grid.gridEl.jqGrid('getGridParam', 'colModel'), (row) ->
+              labels[row.name] = row.label || row.name
+            data = _.map grid.getSelectedRows(), (row)->
+              _.reduce row, ((result, value, key) ->
+                key = labels[key] or key
+                if value.toString().indexOf("<") is 0
+                  result[key] = angular.element(value).innerText
+                else
+                  result[key] = value
+                result
+              ), {}
+            console.log data
+            ws = XLSX.utils.json_to_sheet(data);
+            wb = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(wb, ws, "Presidents");
+            XLSX.writeFile(wb, "download.xlsx");
+
         else
           NotificationDialogServ.open("Please select at least one row.")
 ]
