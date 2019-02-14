@@ -41,7 +41,7 @@ gridz.directive "agGridXlsExport", [
               _.reduce row, ((result, value, key) ->
                 key = labels[key] or key
                 if value.toString().indexOf("<") is 0
-                  result[key] = angular.element(value).innerText
+                  result[key] = angular.element(value)[0].innerText
                 else
                   result[key] = value
                 result
