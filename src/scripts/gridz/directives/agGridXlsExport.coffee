@@ -51,14 +51,15 @@ gridz.directive "agGridXlsExport", [
             data = _.map grid.getSelectedRows(), (row)->
               _.reduce row, ((result, value, key) ->
                 key = labels[key] or key
+                val
                 if value.toString().indexOf("<") is 0
                   val = angular.element(value)[0].innerText
-                  if isNaN(val)
-                    result[key] = val
-                  else
-                    result[key] = Number(val)
                 else
-                  result[key] = value
+                  val = value
+                if isNaN(val) or val is "" or not val?
+                  result[key] = val
+                else
+                  result[key] = Number(val)
                 result
               ), {}
             ws = XLSX.utils.json_to_sheet(data)
