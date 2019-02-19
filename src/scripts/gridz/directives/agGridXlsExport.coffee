@@ -11,6 +11,17 @@ gridz.directive "agGridXlsExport", [
     restrict: "A"
 
     link: (scope, element, attrs) ->
+      gridIterator = (ws, range, format="0.00")->
+        R = range.s.r
+        while R <= range.e.r
+          C = range.s.c
+          while C <= range.e.c
+            cell = ws[XLSX.utils.encode_cell({r: R,c: C})]
+            # only format numeric cells
+            cell.z = format
+            cell.v = 1
+            ++C
+          ++R
       # Add table symbol if no child is specified
       if not element[0].firstChild
         exp = angular.element($compile("""<i class="fa fa-table" uib-tooltip="Export to Excel"></i>""")(scope))
@@ -41,16 +52,19 @@ gridz.directive "agGridXlsExport", [
               _.reduce row, ((result, value, key) ->
                 key = labels[key] or key
                 if value.toString().indexOf("<") is 0
-                  result[key] = angular.element(value)[0].innerText
+                  val = angular.element(value)[0].innerText
+                  if isNaN(val)
+                    result[key] = val
+                  else
+                    result[key] = Number(val)
                 else
                   result[key] = value
                 result
               ), {}
-            console.log data
-            ws = XLSX.utils.json_to_sheet(data);
-            wb = XLSX.utils.book_new();
-            XLSX.utils.book_append_sheet(wb, ws, "Presidents");
-            XLSX.writeFile(wb, "download.xlsx");
+            ws = XLSX.utils.json_to_sheet(data)
+            wb = XLSX.utils.book_new()
+            XLSX.utils.book_append_sheet(wb, ws, "Sheet 1")
+            XLSX.writeFile(wb, "download.xlsx")
 
         else
           NotificationDialogServ.open("Please select at least one row.")
