@@ -46,23 +46,35 @@ gridz.directive "agGridXlsExport", [
             iframe.document.execCommand('SaveAs', true, 'download.csv')
           else
             labels = {}
-            _.each grid.gridEl.jqGrid('getGridParam', 'colModel'), (row) ->
-              labels[row.name] = row.label || row.name
+            exclude = ['cb', '-row_action_col', ' ']
+            colMod = grid.gridEl.jqGrid('getGridParam', 'colModel')
+            headers =[]
+            _.each colMod, (row) ->
+              if row.name not in exclude
+                labels[row.name] = row.label || row.name
+                headers.push(labels[row.name])
+
             data = _.map grid.getSelectedRows(), (row)->
-              _.reduce row, ((result, value, key) ->
-                key = labels[key] or key
+              result = {}
+              _.each colMod, ((v, k) ->
+                key = v['label'] or v['name']
+                key = key.toString()
+                value = row[v['name']]
+                if not value?
+                  return
                 val
                 if value.toString().indexOf("<") is 0
                   val = angular.element(value)[0].innerText
                 else
                   val = value
-                if isNaN(val) or val is "" or not val?
-                  result[key] = val
-                else
-                  result[key] = Number(val)
-                result
-              ), {}
-            ws = XLSX.utils.json_to_sheet(data)
+                if key not in exclude
+                  if isNaN(val) or val is "" or not val?
+                    result[key] = val
+                  else
+                    result[key] = Number(val)
+              )
+              result
+            ws = XLSX.utils.json_to_sheet(data, {header:headers})
             wb = XLSX.utils.book_new()
             XLSX.utils.book_append_sheet(wb, ws, "Sheet 1")
             XLSX.writeFile(wb, "download.xlsx")
