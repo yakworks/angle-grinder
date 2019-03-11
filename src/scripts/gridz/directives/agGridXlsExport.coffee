@@ -7,7 +7,7 @@ gridz = angular.module("angleGrinder.gridz")
 #   If nothing is specified table icon will be added
 #   <a href="" ag-grid-xls-export="usersGrid"></a>
 gridz.directive "agGridXlsExport", [
-  "$window", "NotificationDialogServ", "$compile",  ($window, NotificationDialogServ, $compile) ->
+  "$window", "NotificationDialogServ", "$compile", "$filter",  ($window, NotificationDialogServ, $compile, $filter) ->
     restrict: "A"
 
     link: (scope, element, attrs) ->
@@ -46,6 +46,9 @@ gridz.directive "agGridXlsExport", [
             iframe.document.execCommand('SaveAs', true, 'download.csv')
           else
             labels = {}
+            #{wch: 6}, // "characters"
+            #{wpx: 50}, // "pixels"
+            wscols = []
             exclude = ['cb', '-row_action_col', ' ']
             colMod = grid.gridEl.jqGrid('getGridParam', 'colModel')
             headers =[]
@@ -53,8 +56,8 @@ gridz.directive "agGridXlsExport", [
               if row.name not in exclude
                 labels[row.name] = row.label || row.name
                 headers.push(labels[row.name])
-
-            data = _.map grid.getSelectedRows(), (row)->
+                wscols.push(if row.width then {wpx: row.width} else {wch: labels[row.name].length + 3})
+            data = _.map grid.getSelectedRows(true), (row)->
               result = {}
               _.each colMod, ((v, k) ->
                 key = v['label'] or v['name']
@@ -72,9 +75,12 @@ gridz.directive "agGridXlsExport", [
                     result[key] = val
                   else
                     result[key] = Number(val)
+                if v.formatter and (v.formatter.toString().indexOf("currency") > -1)
+                  result[key] = $filter("currency")(result[key], "")
               )
               result
             ws = XLSX.utils.json_to_sheet(data, {header:headers})
+            ws['!cols'] = wscols
             wb = XLSX.utils.book_new()
             XLSX.utils.book_append_sheet(wb, ws, "Sheet 1")
             XLSX.writeFile(wb, "download.xlsx")
