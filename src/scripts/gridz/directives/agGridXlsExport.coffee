@@ -11,18 +11,23 @@ gridz.directive "agGridXlsExport", [
     restrict: "A"
 
     link: (scope, element, attrs) ->
-      gridIterator = (ws, range, format="0.00")->
+      cellFormatter = (ws, range, format="#,##0.00")->
         R = range.s.r
         while R <= range.e.r
           C = range.s.c
           while C <= range.e.c
-            cell = ws[XLSX.utils.encode_cell({r: R,c: C})]
+            cell = ws[XLSX.utils.encode_cell(
+              r: R
+              c: C)]
+            if !cell or cell.t != 'n'
+              ++C
+              continue
             # only format numeric cells
             cell.z = format
-            cell.v = 1
             ++C
           ++R
-      # Add table symbol if no child is specified
+
+    # Add table symbol if no child is specified
       if not element[0].firstChild
         exp = angular.element($compile("""<i class="fa fa-table" uib-tooltip="Export to Excel"></i>""")(scope))
         element.append(exp)
@@ -46,18 +51,33 @@ gridz.directive "agGridXlsExport", [
             iframe.document.execCommand('SaveAs', true, 'download.csv')
           else
             labels = {}
+            selectedRows = grid.getSelectedRows(true)
             #{wch: 6}, // "characters"
             #{wpx: 50}, // "pixels"
             wscols = []
+            currencyColumns = []
             exclude = ['cb', '-row_action_col', ' ']
             colMod = grid.gridEl.jqGrid('getGridParam', 'colModel')
             headers =[]
+            i = 0
             _.each colMod, (row) ->
+              range =
+                s:
+                  r: 1
+                  c: 0
+                e:
+                  r: selectedRows.length + 5
+                  c: 0
               if row.name not in exclude
                 labels[row.name] = row.label || row.name
                 headers.push(labels[row.name])
                 wscols.push(if row.width then {wpx: row.width} else {wch: labels[row.name].length + 3})
-            data = _.map grid.getSelectedRows(true), (row)->
+                if row.formatter and (row.formatter.toString().indexOf("currency") > -1)
+                  range.s.c = i
+                  range.e.c = i
+                  currencyColumns.push(range)
+                i++
+            data = _.map selectedRows, (row)->
               result = {}
               _.each colMod, ((v, k) ->
                 key = v['label'] or v['name']
@@ -75,11 +95,11 @@ gridz.directive "agGridXlsExport", [
                     result[key] = val
                   else
                     result[key] = Number(val)
-                if v.formatter and (v.formatter.toString().indexOf("currency") > -1)
-                  result[key] = $filter("currency")(result[key], "")
               )
               result
             ws = XLSX.utils.json_to_sheet(data, {header:headers})
+            _.each currencyColumns, (range)->
+              cellFormatter(ws, range)
             ws['!cols'] = wscols
             wb = XLSX.utils.book_new()
             XLSX.utils.book_append_sheet(wb, ws, "Sheet 1")
