@@ -20,13 +20,20 @@ class AgGridCtrl extends BaseCtrl
   # Gives the currently selected rows when multiselect is set to true.
   # This is a one-dimensional array and the values in the array correspond
   # to the selected id's in the grid.
-  getSelectedRowIds: ->
-    @getParam("selarrrow")
+  # if gridOrder is false then ids will be in order how user selects them
+  getSelectedRowIds: (gridOrder = false)->
+    ids = @getParam("selarrrow")
+    if gridOrder
+      grid = @getGridEl()
+      ids.sort (rowid1, rowid2) ->
+        grid.jqGrid('getInd', rowid1) - grid.jqGrid('getInd', rowid2)
+    else
+      ids
 
   #Gives selected row objects, [{id:1..}, {id:2..}]
-  getSelectedRows: ->
+  getSelectedRows: (gridOrder = false)->
     getRowData = _.bind(@getRowData, @)
-    ids = @getSelectedRowIds()
+    ids = @getSelectedRowIds(gridOrder)
     _.map ids, (id) -> getRowData(id)
 
   clearSelection: ->
