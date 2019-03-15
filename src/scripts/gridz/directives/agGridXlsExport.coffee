@@ -26,6 +26,21 @@ gridz.directive "agGridXlsExport", [
             cell.z = format
             ++C
           ++R
+      setCellType = (ws, range, type="n")->
+        R = range.s.r
+        while R <= range.e.r
+          C = range.s.c
+          while C <= range.e.c
+            cell = ws[XLSX.utils.encode_cell(
+              r: R
+              c: C)]
+            if !cell or cell.t is type
+              ++C
+              continue
+            # only format numeric cells
+            cell.t = type
+            ++C
+          ++R
 
       # Add table symbol if no child is specified
       if not element[0].firstChild
@@ -79,7 +94,6 @@ gridz.directive "agGridXlsExport", [
                 range.e.c = i
                 currencyColumns.push(range)
               i++
-            console.log selectedRows
             data = _.map selectedRows, (row)->
               result = {}
               _.each colMod, ((v, k) ->
