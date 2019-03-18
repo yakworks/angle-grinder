@@ -7,7 +7,7 @@ gridz = angular.module("angleGrinder.gridz")
 #   If nothing is specified table icon will be added
 #   <a href="" ag-grid-xls-export="usersGrid"></a>
 gridz.directive "agGridXlsExport", [
-  "$window", "NotificationDialogServ", "$compile", "$filter",  ($window, NotificationDialogServ, $compile, $filter) ->
+  "$window", "NotificationDialogServ", "$compile",  ($window, NotificationDialogServ, $compile) ->
     restrict: "A"
 
     link: (scope, element, attrs) ->
@@ -26,8 +26,23 @@ gridz.directive "agGridXlsExport", [
             cell.z = format
             ++C
           ++R
+      setCellType = (ws, range, type="n")->
+        R = range.s.r
+        while R <= range.e.r
+          C = range.s.c
+          while C <= range.e.c
+            cell = ws[XLSX.utils.encode_cell(
+              r: R
+              c: C)]
+            if !cell or cell.t is type
+              ++C
+              continue
+            # only format numeric cells
+            cell.t = type
+            ++C
+          ++R
 
-    # Add table symbol if no child is specified
+      # Add table symbol if no child is specified
       if not element[0].firstChild
         exp = angular.element($compile("""<i class="fa fa-table" uib-tooltip="Export to Excel"></i>""")(scope))
         element.append(exp)
@@ -57,9 +72,12 @@ gridz.directive "agGridXlsExport", [
             wscols = []
             currencyColumns = []
             exclude = ['cb', '-row_action_col', ' ']
-            colMod = grid.gridEl.jqGrid('getGridParam', 'colModel')
+            colMod = angular.copy(grid.gridEl.jqGrid('getGridParam', 'colModel'))
             headers =[]
             i = 0
+            _.remove(colMod, (row)->
+              row.hidden or row.name in exclude
+            )
             _.each colMod, (row) ->
               range =
                 s:
@@ -68,15 +86,14 @@ gridz.directive "agGridXlsExport", [
                 e:
                   r: selectedRows.length + 5
                   c: 0
-              if row.name not in exclude
-                labels[row.name] = row.label || row.name
-                headers.push(labels[row.name])
-                wscols.push(if row.width then {wpx: row.width} else {wch: labels[row.name].length + 3})
-                if row.formatter and (row.formatter.toString().indexOf("currency") > -1)
-                  range.s.c = i
-                  range.e.c = i
-                  currencyColumns.push(range)
-                i++
+              labels[row.name] = row.label || row.name
+              headers.push(labels[row.name])
+              wscols.push(if row.width then {wpx: row.width} else {wch: labels[row.name].length + 3})
+              if row.formatter and (row.formatter.toString().indexOf("currency") > -1)
+                range.s.c = i
+                range.e.c = i
+                currencyColumns.push(range)
+              i++
             data = _.map selectedRows, (row)->
               result = {}
               _.each colMod, ((v, k) ->

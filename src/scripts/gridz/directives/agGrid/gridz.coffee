@@ -418,7 +418,7 @@ $.extend $.fn.fmatter,
 
 
   okIcon: (cellVal, options, rowdata) ->
-    if cellVal then "<i class='fa fa-check'></i>" else ""
+    if cellVal then "<i class='fa fa-check'></i><span style='display: none'>true</span>" else "<span style='display: none'>false</span>"
 
   editActionLink: (cellVal, options, rowdata) ->
     """
@@ -435,6 +435,10 @@ currencyUnformatter = (cellVal) ->
 
 $.extend $.fn.fmatter?.currency,
   unformat: currencyUnformatter
+
+$.extend $.fn.fmatter?.okIcon,
+  unformat: (cellVal) ->
+    if cellVal is "true" then true else false
 
 $.extend $.fn.fmatter?.currencyOrZero,
   unformat: currencyUnformatter
