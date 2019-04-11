@@ -1,8 +1,8 @@
 describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
 
   beforeEach module "angleGrinder.gridz", ($provide) ->
-    # spy for `flatten` service
-    $provide.decorator "flatten", ($delegate) ->
+    # spy for `FlattenServ` service
+    $provide.decorator "FlattenServ", ($delegate) ->
       sinon.spy($delegate)
 
     # mock `xlsData` service
@@ -93,13 +93,13 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
         expect(jqGridEl.setRowData).to.have.been.called
         expect(jqGridEl.setRowData).to.have.been.calledWith(123, foo: "bar")
 
-      it "flattens data before inserting it to the grid", inject (flatten) ->
+      it "flattens data before inserting it to the grid", inject (FlattenServ) ->
         # When
         ctrl.updateRow(123, foo: bar: "biz")
 
         # Then
-        expect(flatten).to.have.been.called
-        expect(flatten).to.have.been.calledWith(foo: bar: "biz")
+        expect(FlattenServ).to.have.been.called
+        expect(FlattenServ).to.have.been.calledWith(foo: bar: "biz")
 
       it "flashes the updated row", ->
         # Given
@@ -151,13 +151,13 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
         expect(jqGridEl.addRowData).to.have.been.called
         expect(jqGridEl.addRowData).to.have.been.calledWith(234, foo: "biz", "last")
 
-    it "flattens data before inserting it to the grid", inject (flatten) ->
+    it "flattens data before inserting it to the grid", inject (FlattenServ) ->
       # When
       ctrl.addRow(234, foo: bar: "baz")
 
       # Then
-      expect(flatten).to.have.been.called
-      expect(flatten).to.have.been.calledWith(foo: bar: "baz")
+      expect(FlattenServ).to.have.been.called
+      expect(FlattenServ).to.have.been.calledWith(foo: bar: "baz")
 
     it "flashes the inserted row", ->
       # When

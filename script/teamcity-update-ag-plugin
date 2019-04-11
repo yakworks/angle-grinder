@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# enable nodejs and switch to the latest version
+source ~/.nvm/nvm.sh
+nvm use 0.10.25
+
+source ./script/update-ag-plugin
+

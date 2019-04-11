@@ -1,7 +1,7 @@
 describe "module: angleGrinder.gridz", ->
 
   beforeEach module "angleGrinder.gridz", ($provide) ->
-    $provide.value "actionPopupHandler", sinon.stub()
+    $provide.value "ActionPopupHandler", sinon.stub()
     return
 
   describe "directive: agGrid", ->
@@ -48,8 +48,8 @@ describe "module: angleGrinder.gridz", ->
         expect(element.find("div.gridz-pager").length).to.equal 1
 
     itInitializesActionPopupHandler = ->
-      it "initializes action popup handler", inject (actionPopupHandler) ->
-        expect(actionPopupHandler).to.have.been.called
+      it "initializes action popup handler", inject (ActionPopupHandler) ->
+        expect(ActionPopupHandler).to.have.been.called
 
     describe "when `ag-grid-name` is not provided", ->
       beforeEach inject ($injector) ->
@@ -88,9 +88,11 @@ describe "module: angleGrinder.gridz", ->
 
         it "is assigned to the scope", ->
           expect($scope.projectsGrid).to.not.be.undefined
+          expect($scope.$grid).to.not.be.undefined
 
         it "is initialized with the grid element", ->
           expect($scope.projectsGrid.getGridEl()).to.not.be.undefined
+          expect($scope.$grid.getGridEl()).to.not.be.undefined
 
       context "when the name is an expression", ->
         beforeEach inject ($injector) ->

@@ -46,7 +46,7 @@ describe "module: angleGrinder.forms", ->
 
       describe "`save` button", ->
         saveButtonEl = null
-        beforeEach -> saveButtonEl = element.find("button:nth-child(1)")
+        beforeEach -> saveButtonEl = element.find("button:nth-child(2)")
 
         it "is visible", ->
           expect(saveButtonEl.text()).to.contain "Save"
@@ -81,7 +81,7 @@ describe "module: angleGrinder.forms", ->
 
       describe "`cancel` button", ->
         cancelButtonEl = null
-        beforeEach -> cancelButtonEl = element.find("button:nth-child(2)")
+        beforeEach -> cancelButtonEl = element.find("button:nth-child(1)")
 
         it "is visible", ->
           expect(cancelButtonEl.text()).to.contain "Cancel"

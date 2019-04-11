@@ -1,8 +1,6 @@
 # Angle Grinder
 
-[![Build status](https://secure.travis-ci.org/9ci/angle-grinder.png)](http://travis-ci.org/9ci/angle-grinder)
-[![Stories in Ready](https://badge.waffle.io/9ci/angle-grinder.png)](http://waffle.io/9ci/angle-grinder)
-[![Gitter chat](https://badges.gitter.im/9ci/angle-grinder.png)](https://gitter.im/9ci/angle-grinder)
+[![Build Status](https://travis-ci.org/9ci/angle-grinder.svg?branch=grails3)](https://travis-ci.org/9ci/angle-grinder)
 
 ## About
 __angle-grinder__ can be opinionated at times. It is a collection of libraries with mods and wrappers around them to facilite building an application faster with anglularJS and Bootstrap 2.
@@ -33,12 +31,16 @@ should be at v0.11 or higher
 
 ## Required Node Tools
 
-In order to get started, you'll want to install some tools globally. You may need to prefix these with **sudo** (for OSX, *nix, BSD etc) or run your command shell as Administrator (for Windows) to do this. the "-g" will put the commands in your system path, allowing them to be run from any directory.
+In order to get started, you'll want to install some tools globally. You may need to prefix these with **sudo** (for OSX, unix, BSD etc) or run your command shell as Administrator (for Windows) to do this. the "-g" will put the commands in your system path, allowing them to be run from any directory.
+
+**note**: see this links for running bpm without sudo on osx
+- [gist](https://github.com/sindresorhus/guides/blob/master/npm-global-without-sudo.md)
+- [fixing-npm-permissions](https://docs.npmjs.com/getting-started/fixing-npm-permissions)
 
 ```
-sudo npm install -g coffee-script
-sudo npm install -g grunt-cli
-sudo npm install -g bower
+npm install -g coffee-script
+npm install -g grunt-cli
+npm install -g bower
 ```
 
 ### Run the installs
@@ -59,6 +61,13 @@ grunt
 ```
 
 If a test is failing add --force
+
+### Clean
+
+If you need to delete build files grunt has task for it:
+`grunt clean` will delete all files that were created while build (except bower components and node modules)
+`grunt clean:dev` will delete files from `build` folder 
+`grunt clean:dist` will delete files from `dist` folder 
 
 ### Sample apps
 
@@ -85,7 +94,6 @@ then open http://localhost:9000
 Third-party libraries
 
 * components/bower - components downloaded by `bower install` command
-* third-party - you could put custom components here
 * node_modules - command downloaded by `npm install` command
 
 Generated stuff

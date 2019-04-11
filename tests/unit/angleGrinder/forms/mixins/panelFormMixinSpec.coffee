@@ -1,19 +1,19 @@
-describe "module: angleGrinder.forms mixin: panelFormMixin", ->
+describe "module: angleGrinder.forms mixin: PanelFormMixin", ->
 
   beforeEach module "angleGrinder.forms"
 
-  describe "service: panelFormMixin", ->
+  describe "service: PanelFormMixin", ->
 
-    it "is defined", inject (panelFormMixin) ->
-      expect(panelFormMixin).not.to.be.undefined
-      expect(panelFormMixin).to.be.a("function")
+    it "is defined", inject (PanelFormMixin) ->
+      expect(PanelFormMixin).not.to.be.undefined
+      expect(PanelFormMixin).to.be.a("function")
 
     $scope = null
 
-    beforeEach inject ($rootScope, panelFormMixin) ->
+    beforeEach inject ($rootScope, PanelFormMixin) ->
       $scope = $rootScope.$new()
 
-      panelFormMixin $scope,
+      PanelFormMixin $scope,
         formName: "theForm"
 
     itIsMixedToTheScope = (name) ->

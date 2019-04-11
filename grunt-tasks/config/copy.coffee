@@ -33,14 +33,12 @@ module.exports = (grunt) ->
         "*/fonts/*.{otf,eot,svg,ttf,woff,woff2}"
       ]
     ,
-      # workaround for jquery-ui-bootstrap component
-      # include its images in the production release
       expand: true
       flatten: true
-      cwd: "components/third-party/jquery-ui-bootstrap"
-      dest: "<%= appConfig.dev %>/img"
+      cwd: "components/bower/angular-ui-grid"
+      dest: "<%= appConfig.dev %>/fonts"
       src: [
-        "**/img/**/*.{png,jpg,jpeg}"
+        "*.{otf,eot,svg,ttf,woff,woff2}"
       ]
     ,
       # another workaround for missing images
@@ -55,7 +53,7 @@ module.exports = (grunt) ->
     ,
       expand: true
       flatten: true
-      cwd: "grails/ag-plugin/web-app/angleGrinder/js/modules"
+      cwd: "grails/ag-plugin/grails-app/assets/angleGrinder/js/modules"
       dest: "<%= appConfig.dev %>/scripts/utils"
       src: "resources.js"
     ]

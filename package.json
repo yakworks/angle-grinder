@@ -1,6 +1,6 @@
 {
   "name": "angle-grinder",
-  "version": "0.2.0",
+  "version": "3.0.0",
   "main": "./server/index.coffee",
   "dependencies": {
     "coffee-script": "^1.7.1",
@@ -55,6 +55,7 @@
     "load-grunt-tasks": "^0.6.0",
     "mocha": "^1.20.4",
     "nodemon": "^1.2.0",
+    "phantomjs-polyfill": "0.0.2",
     "protractor": "^1.0.0",
     "request": "^2.36.0"
   },

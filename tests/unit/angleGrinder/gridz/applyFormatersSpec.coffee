@@ -4,7 +4,7 @@ describe "module: angleGrinder.gridz", ->
 
   describe "value: applyFormaters", ->
 
-    it "flattens an object", inject (applyFormatters) ->
+    it "flattens an object", inject (ApplyFormattersServ) ->
       colModel=[
         id: 1
         name: "test"
@@ -20,7 +20,7 @@ describe "module: angleGrinder.gridz", ->
         test2Formater: (cellVal, options, rowData) ->
           "Second formated value"
 
-      applyFormatters(colModel, formatters)
+      ApplyFormattersServ(colModel, formatters)
 
       expect(colModel[0].formatter).to.be.a "function"
       expect(colModel[0].formatter()).to.eq "First formated value"

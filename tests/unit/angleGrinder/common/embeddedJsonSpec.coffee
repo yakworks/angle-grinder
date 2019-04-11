@@ -12,8 +12,8 @@ describe "module:angleGrinder.common dervice: embeddedJsonServ", ->
     $compile(element)(scope)
     scope.$digest()
 
-  it "check JSON validity", inject (embeddedJsonServe)->
-    json = embeddedJsonServe("testJson")
+  it "check JSON validity", inject (EmbeddedJsonServ)->
+    json = EmbeddedJsonServ("testJson")
     expect(json.name).to.eq "test"
     expect(json.id).to.eq 2
 

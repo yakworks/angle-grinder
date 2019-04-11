@@ -37,8 +37,7 @@ forms = angular.module("angleGrinder.forms", [
   "ui.bootstrap.rating"
   "ui.bootstrap.tabs"
   "ui.bootstrap.tpls"
-
-
+  "ui.bootstrap.tooltip"
   "xeditable"
   "angleGrinder.common"
   "angleGrinder.alerts"
@@ -74,4 +73,28 @@ forms.run [
           <div class="tooltip-inner" ng-bind="title"></div>
         </div>
       """
+]
+
+
+forms.config [ "$provide", ($provide) ->
+
+    #Decorate select tags, wrap inside 'select-wrapper' so we can add dropdown arrow to standard html selects
+    $provide.decorator "selectDirective", ["$delegate", ($delegate) ->
+      directive = $delegate[0]
+      link = directive.link
+
+      directive.compile = (element, attrs) ->
+
+        return {
+          post: (scope, element, attrs, ctrl) ->
+            #Add wrapper, if its not already wrapped and its not a select2-wrapper.
+            if( not (element.parent().attr('class') == 'select-wrapper') and element.attr('ui-select2') == undefined )
+              template = angular.element("<div class='select-wrapper'></div>")
+              element.wrap(template)
+
+            link(scope, element, attrs, ctrl)
+        }
+
+      return $delegate
+    ]
 ]

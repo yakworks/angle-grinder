@@ -4,6 +4,7 @@ module.exports =
   files: [
     "components/bower/jquery/dist/jquery.js"
     "components/bower/lodash/dist/lodash.js"
+    "node_modules/phantomjs-polyfill/bind-polyfill.js"
 
     "components/bower/angular/angular.js"
     "components/bower/angular-animate/angular-animate.js"
@@ -11,8 +12,13 @@ module.exports =
     "components/bower/angular-resource/angular-resource.js"
     "components/bower/angular-sanitize/angular-sanitize.js"
     "components/bower/angular-mocks/angular-mocks.js"
+    "components/bower/angular-scroll/angular-scroll.js"
+    "components/bower/angular-ui-grid/ui-grid.js"
 
-    "components/bower/jqgrid/js/grid.base.js"
+    "grails/ag-plugin/grails-app/assets/angleGrinder/js/application.js"
+    "grails/ag-plugin/grails-app/assets/angleGrinder/js/modules/resources.js"
+
+    "components/bower/free-jqgrid/js/grid.base.js"
     "components/bower/select2/select2.js"
     "components/bower/angular-ui-select2/src/select2.js"
     "components/bower/angular-bootstrap/ui-bootstrap-tpls.js"
@@ -21,20 +27,18 @@ module.exports =
     "components/bower/bower-angular-placeholders/angular-placeholders.js"
     "components/bower/moment/moment.js"
     "components/bower/eonasdan-bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js"
-
-    "grails/ag-plugin/web-app/angleGrinder/js/application.js"
-    "grails/ag-plugin/web-app/angleGrinder/js/modules/resources.js"
+    "components/bower/toastr/toastr.js"
+    "components/bower/sweetalert/dist/sweetalert-dev.js"
+    "components/bower/angular-drag-and-drop-lists/angular-drag-and-drop-lists.js"
 
     "src/scripts/gridz/gridz.coffee"
     "src/scripts/utils/baseCtrl.coffee"
     "src/scripts/utils/alerts.coffee"
-    "src/scripts/utils/spinner.coffee"
 
     "docs/templates/**/*.html"
 
     "src/scripts/common/common.coffee"
     "src/scripts/forms/forms.coffee"
-    "src/scripts/gridz/agGridz.coffee"
 
     "src/scripts/common/**/*.coffee"
     "src/scripts/forms/**/*.coffee"

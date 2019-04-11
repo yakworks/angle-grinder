@@ -91,16 +91,16 @@ describe "module: angleGrinder.gridz", ->
 
   describe "directive: agGridXlsExport", ->
 
-    # mock `$window.location.href` in order to avoid
-    # "Some of your tests did a full page reload!"
-    # mock `$window.navigator.userAgent` to avoid error
-    # "'undefined' is not an object (evaluating '$window.navigator.userAgent')"
+# mock `$window.location.href` in order to avoid
+# "Some of your tests did a full page reload!"
+# mock `$window.navigator.userAgent` to avoid error
+# "'undefined' is not an object (evaluating '$window.navigator.userAgent')"
     beforeEach module "angleGrinder.gridz", ($provide) ->
       $provide.value "$window",
         location: {}
         navigator: {userAgent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1847.116 Safari/537.36'}
 
-      $provide.decorator "notificationDialog", ($delegate) ->
+      $provide.decorator "NotificationDialogServ", ($delegate) ->
         sinon.spy($delegate, "open")
         return $delegate
 
@@ -115,44 +115,45 @@ describe "module: angleGrinder.gridz", ->
       $scope = $rootScope.$new()
 
       # stub the grid instance
-      $scope.grid =
-        users:
-          getXlsDataUri: -> "foo"
-          getSelectedRowIds: -> selectedRowIds
+      $scope.$grid =
+        getXlsDataUri: -> "foo"
+        getSelectedRowIds: -> selectedRowIds
 
       {element, $scope} = compileTemplate """
-        <a href="" ag-grid-xls-export="grid.users">
+        <a href="" ag-grid-xls-export>
         <i class="fa-download"></i> Export to XLS
       </a>
       """, $injector, $scope
+
+    it "has $grid on scope"
 
     describe "on click", ->
 
       describe "when no rows are selected", ->
         before -> selectedRowIds = []
 
-        it "displays the notification", inject (notificationDialog) ->
-          # When
+        it "displays the notification", inject (NotificationDialogServ) ->
+# When
           element.click()
 
           # Then
-          expect(notificationDialog.open).to.be.called
-          expect(notificationDialog.open).to.be.calledWith("Please select at least one row.")
+          expect(NotificationDialogServ.open).to.be.called
+          expect(NotificationDialogServ.open).to.be.calledWith("Please select at least one row.")
 
-     ### describe "when at least one row is selected", ->
-        before -> selectedRowIds = [1]
+### describe "when at least one row is selected", ->
+   before -> selectedRowIds = [1]
 
-        it "does the magic", inject ($window) ->
-          # When
-          element.click()
+   it "does the magic", inject ($window) ->
+     # When
+     element.click()
 
-          # Then
-          expect(document.getElementsByTagName("a")[0].href).to.eq "foo"
+     # Then
+     expect(document.getElementsByTagName("a")[0].href).to.eq "foo"
 
-        it "does not display notification", inject (notificationDialog) ->
-          # When
-          element.click()
+   it "does not display notification", inject (NotificationDialogServ) ->
+     # When
+     element.click()
 
-          # Then
-          expect(notificationDialog.open).to.not.be.called
+     # Then
+     expect(NotificationDialogServ.open).to.not.be.called
 ###

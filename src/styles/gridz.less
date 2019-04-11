@@ -1,5 +1,40 @@
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+  background-color: #e6e6e6;
+  background-repeat: no-repeat;
+  background-image: -webkit-linear-gradient(#fff, #fff 25%, #e6e6e6);
+  background-image: -moz-linear-gradient(top, #fff, #fff 25%, #e6e6e6);
+  background-image: -o-linear-gradient(#fff, #fff 25%, #e6e6e6);
+  background-image: linear-gradient(#fff, #fff 25%, #e6e6e6);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#e6e6e6', GradientType=0);
+  text-shadow: 0 1px 1px rgba(255, 255, 255, .75);
+  color: #333;
+  font-size: 13px;
+  line-height: normal;
+  border: 1px solid #ccc;
+  border-bottom-color: #bbb;
+  -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, .2), 0 1px 2px rgba(0, 0, 0, .05);
+  -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, .2), 0 1px 2px rgba(0, 0, 0, .05);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .2), 0 1px 2px rgba(0, 0, 0, .05);
+  -webkit-transition: .1s linear background-image;
+  -moz-transition: .1s linear background-image;
+  -o-transition: .1s linear background-image;
+  transition: .1s linear background-image;
+  overflow: visible
+}
+
+.ui-jqgrid .ui-jqgrid-bdiv tr.ui-row-ltr>td {
+  border: 0;
+}
+
+.ui-jqgrid .s-ico>.ui-icon-asc.ui-icon.ui-sort-ltr {
+  margin-left: -4px;
+}
+
 .ui-jqgrid {
   border: 1px solid #D4D4D4;
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
   .ui-jqgrid-titlebar {
     height: 40px;
     line-height: 24px;
@@ -40,6 +75,7 @@
         padding-top: 12px;
         padding-bottom: 12px;
         overflow: visible;
+        height: auto;
       }
     }
     th[id$=_cb] {
@@ -64,8 +100,44 @@
         margin-left: -4px;
       }
     }
-  }
+    /*
+    Generic styling for grid columns.
+    */
+    .currency-content {
+      text-align: right;
+    }
 
+    .date-content {
+      text-align: center;
+    }
+
+    .link-content {
+      text-align: right;
+    }
+  }
+  tr.jqgroup {
+    td {
+      padding-left: 25px!important;
+    }
+    .cbox {
+      margin:0 20px 0 -38px!important;
+      width:14px!important;
+      height:14px!important;
+    }
+  }
+  tr.row-with-warning {
+    color: red!important;
+  }
+  tr.footrow-ltr {
+    .currency-content {
+      text-align: right;
+    }
+    border: 0;
+    td {
+      padding: 2px 8px;
+      border: 0;
+    }
+  }
   tr.ui-jqgrid-labels {
     th[id$=_cb], th[id$=_-row_action_col] {
       box-shadow: none;
@@ -111,13 +183,14 @@
     height: inherit;
   }
   .ui-pg-selbox {
-    display: block;
     height: auto;
     width: 70px;
     margin: 0px;
-    padding: 1px 4px;
+    padding: 1px 8px !important;
     line-height: normal;
+    display: inline-block !important;
   }
+
   .ui-pager-control {
     height: 50px;
     position: relative;
@@ -140,6 +213,15 @@
     border-width: 2px !important;
     font-size: 11px;
   }
+}
+.ui-jqgrid .ui-pg-button:hover,
+.ui-jqgrid .ui-pg-button.ui-state-hover,
+.ui-jqgrid .ui-pg-button:focus,
+.jqgrow .ui-jqgrid-actions .ui-pg-div:hover,
+.jqgrow .ui-jqgrid-actions .ui-pg-div.ui-state-hover,
+.jqgrow .ui-jqgrid-actions .ui-pg-div:focus {
+  border: 0px;
+  padding: 2px
 }
 .ui-jqgrid .ui-jqgrid-view, .ui-jqgrid .ui-paging-info, .ui-jqgrid .ui-pg-table,.ui-jqgrid .ui-pg-selbox {
   font-size: 14px;
@@ -253,7 +335,6 @@
     border-radius: 4px 4px 0 0;
     background-color: #F9F9F9;
     background-repeat: repeat-x;
-    border: 1px solid #D4D4D4;
     border-bottom: none;
   }
   .divider-vertical.skinny {
@@ -305,6 +386,19 @@
 // styles for the advanced search form
 
 form[ag-search-form] {
+
+  .ui-autocomplete-input, .uneditable-input, input[type=email], input[type=password], input[type=search], input[type=tel], input[type=text], input[type=url], textarea {
+    display: inline-block;
+    padding: 4px;
+    font-size: 13px;
+    line-height: 18px;
+    color: #555;
+    border: 1px solid #ccc;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px
+  }
+
   padding: 0 0 25px;
 
   label.control-label {
@@ -341,7 +435,7 @@ form[ag-search-form] {
     .input-group {
       display: inline-table;
       margin: 0 !important;
-      width: 48% !important;
+      width: calc(~'(100% - 5px)/2') !important;
     }
 
     .input-group:nth-child(2) {
@@ -358,4 +452,117 @@ form[ag-search-form] {
 // styles to minimize grid rows
 .ui-jqgrid tr.ui-row-ltr.min td {
   padding: 0px 8px;
+}
+
+
+
+/* override jqgrid footer styles */
+.ui-jqgrid .ui-jqgrid-sdiv {
+  background: none repeat scroll 0 0 #f9f9f9;
+}
+
+.ui-jqgrid-sdiv .ui-widget-content {
+  background: inherit;
+}
+
+.ui-jqgrid-btable .ui-widget-content.correction-highlight {
+  background-color: #ffff00 !important;
+  background-image: none !important;
+}
+
+.ui-jqgrid a {
+  color: #0088CC;
+}
+
+.select-wrapper select.ui-pg-selbox  {
+  min-width: 40px;
+}
+
+.ui-icon {
+  width: 16px;
+  height: 16px;
+  background-image: url(../img/ui-icons_222222_256x240.png)
+}
+
+.ui-state-default .ui-icon {
+  background-image: url(../img/ui-icons_888888_256x240.png);
+}
+.ui-widget-content .ui-icon, .ui-widget-header .ui-icon {
+  background-image: url(../img/ui-icons_222222_256x240.png);
+}
+
+.ui-icon-triangle-1-n {
+  background-position: 0 -16px
+}
+
+.ui-icon-triangle-1-s {
+  background-position: -64px -16px
+}
+
+.ui-state-disabled {
+  cursor: default !important
+}
+
+
+.ui-state-disabled, .ui-widget-content .ui-state-disabled, .ui-widget-header .ui-state-disabled {
+  opacity: .35;
+}
+
+.ui-state-disabled .ui-icon {
+  filter: Alpha(Opacity=35)
+}
+
+.ui-icon-seek-next {
+  background-position: -32px -160px
+}
+
+.ui-icon-seek-end {
+  background-position: -64px -160px
+}
+
+.ui-icon-seek-prev {
+  background-position: -48px -160px
+}
+
+.ui-icon-seek-first, .ui-icon-seek-start {
+  background-position: -80px -160px
+}
+
+.ui-search-toolbar .ui-th-column .ui-search-table .ui-search-input input{
+  height: 20px;
+  padding-left: 3px;
+}
+
+.ui-jqgrid .ui-jqgrid-htable th div {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.manage-columns-modal ul[dnd-list] {
+  min-height: 32px;
+  padding-left: 0;
+}
+
+.manage-columns-modal ul[dnd-list] .dndDraggingSource {
+  display: none;
+}
+
+.manage-columns-modal ul[dnd-list] .dndPlaceholder {
+  background-color: #ddd;
+  display: block;
+  min-height: 32px;
+}
+
+.manage-columns-modal ul[dnd-list] li {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+  display: block;
+  padding: 5px 15px;
+  margin-bottom: -1px;
+}
+
+.manage-columns-modal .panel-title::first-letter {
+  text-transform: uppercase;
 }

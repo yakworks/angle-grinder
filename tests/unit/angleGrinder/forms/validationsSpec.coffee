@@ -150,6 +150,22 @@ describe "module: angleGrinder.forms validations", ->
       it "sets value on model", ->
         expect(modelValue.name).to.be.equal "abc"
 
+    describe "when value is not entered", ->
+      beforeEach ->
+        setName ""
+        $scope.$digest()
+
+      it "marks the form as valid", ->
+        expect(form.$valid).to.be.true
+        expect(form.$invalid).to.be.false
+
+      it "marks field as valid", ->
+        expect(ngModelCtrl.$valid).to.be.true
+        expect(ngModelCtrl.$invalid).to.be.false
+
+      it "sets value on model", ->
+        expect(modelValue.name).to.be.equal ""
+
     describe "when length is less", ->
       it "marks the field as invalid", ->
         setName "ab"

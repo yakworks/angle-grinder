@@ -13,6 +13,6 @@ describe "module:angleGrinder.common directive: addEmptyOption", ->
 
   it "check that empty option is added", ->
     options = element.find("option")
-    expect(options[1].value).eq ""
+    expect(options[0].value).eq ""
 
 

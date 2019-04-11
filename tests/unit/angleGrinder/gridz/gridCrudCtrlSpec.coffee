@@ -2,6 +2,7 @@ describe "module:angleGrinder.gridz controller: gridCrudCtrl", ->
 
   beforeEach module "angleGrinder.gridz", ($provide) ->
     $provide.decorator "resourceBuilder", ($delegate) -> sinon.spy($delegate)
+    $provide.value "RestContext", ""
     return
 
   directiveScope = null
@@ -11,7 +12,11 @@ describe "module:angleGrinder.gridz controller: gridCrudCtrl", ->
 
   beforeEach inject ($rootScope, $controller) ->
     parentScope = $rootScope.$new()
-    grid = saveRow: sinon.stub()
+    grid =
+      saveRow: sinon.stub()
+      getGridEl: ()->
+        getGridParam: ()->
+          {colModel: [{name: "name_1"}, {name: "name_2"}, {name: "name_3"}]}
     parentScope.grid = grid
     parentScope.beforeSave = sinon.stub()
 
@@ -20,9 +25,8 @@ describe "module:angleGrinder.gridz controller: gridCrudCtrl", ->
       $scope: directiveScope
       $element: sinon.stub()
       $attrs: template: "/showForm", gridName: "grid", beforeSave: "beforeSave", resource: "arTran"
-      $window:
-        gridOptions:
-          colModel: [{name: "name_1"}, {name: "name_2"}, {name: "name_3"},]
+
+
 
   it "sets template on directive scope", ->
     expect(directiveScope.template).to.eq "/showForm"
@@ -121,7 +125,7 @@ describe "module:angleGrinder.gridz controller: gridCrudCtrl", ->
             id: "grid"
       expect(directiveScope.columnNameForFocus).to.not.exist
       directiveScope.dblClick(dbClickArgs.rowid, dbClickArgs.iRow, dbClickArgs.iCol, dbClickArgs.e)
-      expect(directiveScope.columnNameForFocus).to.eq "name_2"
+      expect(directiveScope.columnNameForFocus).to.eq "name_3"
 
 
   describe "#setFocus", ->
