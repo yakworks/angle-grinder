@@ -4,7 +4,7 @@ mixin.factory "MassUpdateMixin", [
   "$log", "$parse", "$uibModal", "pathWithContext", "NotificationDialogServ",
   ($log, $parse, $modal, pathWithContext, NotificationDialogServ) ->
     ($scope, args = {}) ->
-      {gridName, templateUrl, controller, extraParams} = args
+      {gridName, templateUrl, controller, extraParams, windowClass, backdropClass} = args
       controller ?= "MassUpdateFormCtrl"
 
       $scope.massUpdate = ->
@@ -17,8 +17,7 @@ mixin.factory "MassUpdateMixin", [
           NotificationDialogServ.open("Please select at least one row.")
           return
 
-        $modal.open
-
+        params =
           templateUrl: pathWithContext(templateUrl)
           controller: controller
 
@@ -30,6 +29,12 @@ mixin.factory "MassUpdateMixin", [
             grid: -> grid
             extraParams: -> extraParams
 
+        if windowClass?
+          params.windowClass = windowClass
+
+        if backdropClass?
+          params.backdropClass = backdropClass
+        $modal.open params
 ]
 
 # Decorates the $scope with mass update magic
