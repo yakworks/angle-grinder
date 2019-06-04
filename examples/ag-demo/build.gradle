@@ -37,7 +37,7 @@ dependencies {
     compile "org.grails.plugin:dao:3.0.6"
     runtime "com.bertramlabs.plugins:asset-pipeline-grails:2.11.1"
     runtime 'com.bertramlabs.plugins:coffee-asset-pipeline:2.6.2'
-    compile "org.grails.plugins:audit-trail:3.0.1.SNAPSHOT"
+    compile "org.grails.plugins:audit-trail:3.0.9"
     compile 'org.grails.plugins:joda-time:2.0.0'
     console "org.grails:grails-console"
     testCompile "org.grails.plugins:build-test-data:3.0.1"
