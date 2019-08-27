@@ -2,12 +2,12 @@
 #
 # Check https://circleci.com/docs/2.0/language-java/ for more details
 #
-version: 2
+version: 2.1
 jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: dock9/oraclejdk8:gradle-3.5.1
+      - image: yakworks/alpine-java:gradle-4.10.3
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -18,13 +18,10 @@ jobs:
 #      only:
 #        - master
 
-    working_directory: ~/repo
+    #working_directory: ~/repo
 
     environment:
-      # Customize the JVM maximum heap limit
-      # JVM_OPTS: -Xmx3200m
-      MALLOC_ARENA_MAX: 2
-      GRADLE_OPTS: "-Xmx2048m -Dorg.gradle.daemon=false"
+      GRADLE_OPTS: "-Xmx1536m -Dorg.gradle.daemon=false" #daemon false doesn't seem to get picked up by fork
       TERM: dumb
 
     parallelism: 1
