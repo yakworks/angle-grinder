@@ -1,6 +1,6 @@
 describe "angleGrinder.common", ->
 
-  beforeEach module "rcm", ($provide) ->
+  beforeEach module "angleGrinder.common", ($provide) ->
     # dummy filter witch always returns falsy values
     $provide.service "dummyFilter", -> -> null
     return

@@ -46,6 +46,7 @@ jobs:
           paths:
             - ~/.m2
             - ~/.gradle
+            - node_modules
           key: v1-dependencies-{{ checksum "build.gradle" }}
 
       - add_ssh_keys:

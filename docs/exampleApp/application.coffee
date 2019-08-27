@@ -4,9 +4,6 @@ app = angular.module "exampleApp", [
   "ngAnimate"
   "ngRoute"
 
-  "blueimp.fileupload"
-  "placeholders.txt"
-
   "angleGrinder.common"
   "angleGrinder.gridz"
   "angleGrinder.forms"

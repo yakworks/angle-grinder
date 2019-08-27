@@ -11,6 +11,9 @@ if [[ $(git diff --name-only $commitRange | grep --invert-match -E "(README\.md|
   gradle clean
   gradle angle-grinder:check --no-daemon --max-workers 2
   gradle ag-demo:check --no-daemon --max-workers 2
+  gradle npm_install
+  gradle installGrunt
+  gradle grunt_build
 
   if [[ "$CIRCLE_TAG" =~ ^v[0-9].* ]]; then
      echo "### publishing release to BinTray"
