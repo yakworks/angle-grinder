@@ -33,12 +33,8 @@ jobs:
           command: gradle resolveConfigurations
 
       - run:
-          name: ✔︎ Stop
-          command: gradle --stop
-
-      - run:
           name: ✔︎ Downloads npm Dependencies [gradle npm_install installGrunt]
-          command: gradle npm_install
+          command: gradle npmInstall
 
       # compiling as a seperate step before running check helps with the "finished with non-zero exit value 137" error
       - run:
