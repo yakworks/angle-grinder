@@ -82,6 +82,6 @@ workflows:
   build-flow:
     jobs:
       - build:
-          context: bot-context #context with shared ENV vars
+          context: 9cibot-context #context with shared ENV vars
 
 
