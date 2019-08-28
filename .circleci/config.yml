@@ -33,6 +33,10 @@ jobs:
           command: gradle resolveConfigurations
 
       - run:
+          name: ✔︎ Stop
+          command: gradle --stop
+
+      - run:
           name: ✔︎ Downloads npm Dependencies [gradle npm_install installGrunt]
           command: gradle npm_install
 
