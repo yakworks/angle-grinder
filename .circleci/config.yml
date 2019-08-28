@@ -32,6 +32,10 @@ jobs:
           name: ✔︎ Downloads Dependencies [gradle resolveConfigurations]
           command: gradle resolveConfigurations
 
+      - run:
+          name: ✔︎ Downloads npm Dependencies [gradle npm_install installGrunt]
+          command: gradle npmInstall
+
       # compiling as a seperate step before running check helps with the "finished with non-zero exit value 137" error
       - run:
           name: ✔︎ ------ Compile [gradle classes] ------
@@ -44,11 +48,6 @@ jobs:
       - run:
           name: ✔︎ -- Checks Full Run Tests [gradle check]
           command: gradle check --max-workers=2
-
-      - run:
-          name: ✔︎ Downloads npm Dependencies [gradle npm_install installGrunt]
-          command: ls -lF; gradle --stop; gradle npmInstall --stacktrace --scan
-
       - run:
           name: ✔︎ -- Checks js Tests [gradle check]
           command: gradle grunt_build --max-workers=2
