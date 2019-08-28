@@ -47,7 +47,7 @@ jobs:
 
       - run:
           name: ✔︎ Downloads npm Dependencies [gradle npm_install installGrunt]
-          command: gradle npmInstall --stacktrace
+          command: gradle --stop; gradle npmInstall --stacktrace
 
       - run:
           name: ✔︎ -- Checks js Tests [gradle check]
