@@ -40,8 +40,7 @@
     "toastr": "~2.1.2",
     "angular-sweetalert": "~1.1.0",
     "angular-ui-grid": "~3.1.1",
-    "angular-drag-and-drop-lists": "2.1.0",
-    "phantom": "^6.3.0"
+    "angular-drag-and-drop-lists": "2.1.0"
   },
   "devDependencies": {
     "chai": "^1.9.0",
@@ -86,6 +85,7 @@
     "load-grunt-tasks": "^0.6.0",
     "mocha": "^1.20.4",
     "nodemon": "^1.2.0",
+    "phantomjs-prebuilt": "2.1.16",
     "phantomjs-polyfill": "0.0.2",
     "protractor": "^1.0.0",
     "request": "^2.36.0",
