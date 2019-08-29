@@ -17,7 +17,7 @@ spotless {
   groovy {
     target fileTree('.') {
       include 'src/main/groovy/**/*.groovy', 'grails-app/**/*.groovy'
-      exclude '**/*.java','**/conf/*.groovy'
+      exclude '**/*.java','**/conf/*.groovy', 'node_modules'
     }
     licenseHeader '/* Copyright $YEAR. 9ci Inc. Licensed under the Apache License, Version 2.0 */'
     //excludeJava() // can't be used if target is used
