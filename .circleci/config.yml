@@ -28,6 +28,10 @@ jobs:
 
       - run:
           name: ✔︎ -- Checks js Tests [gradle check]
+          command: phantomjs --version
+
+      - run:
+          name: ✔︎ -- Checks js Tests [gradle check]
           command: phantomjs --version && grunt build --force
 
       - run:
