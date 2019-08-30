@@ -21,34 +21,14 @@ jobs:
     steps:
       - checkout
       # Download and cache dependencies
-      - run:
-          name: cat build.gradle files for cache key
-          command: cat gradle.properties build.gradle plugin/build.gradle examples/ag-demo/build.gradle package.json > cache-checksum.tmp
-
-      - restore_cache:
-          keys:
-            - gradle-{{ checksum "cache-checksum.tmp" }}
 
       - run:
-          name: ✔︎ Downloads npm Dependencies [gradle npm_install installGrunt]
-          command: gradle npmInstall
-
-      - run:
-          name: ✔︎ Downloads Dependencies [gradle resolveConfigurations]
-          command: gradle resolveConfigurations
-
-      # compiling as a seperate step before running check helps with the "finished with non-zero exit value 137" error
-      - run:
-          name: ✔︎ ------ Compile [gradle classes] ------
-          command: gradle classes
-
-      - save_cache:
-          paths: ["~/.m2", "~/.gradle", "node_modules"]
-          key: v2-gradle-{{ checksum "cache-checksum.tmp" }}
+          name: ✔︎ npm install
+          command: npm install
 
       - run:
           name: ✔︎ -- Checks js Tests [gradle check]
-          command: gradle installGrunt; gradle grunt_build --max-workers=2
+          command: grunt
 
       - run:
           name: ✔︎ -- Checks Full Run Tests [gradle check]
