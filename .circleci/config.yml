@@ -23,8 +23,15 @@ jobs:
       # Download and cache dependencies
 
       - run:
-          name: ✔︎ Downloads npm Dependencies [gradle npm_install installGrunt]
-          command: npm cache clean && npm install &&  npm install -g coffee-script && npm install -g grunt-cli
+          name: ✔︎ npm install
+          command: npm install
+      - run:
+          name: ✔︎ npm install -g coffee-script
+          command: npm install -g coffee-script
+
+      - run:
+          name: ✔︎ npm install -g grunt-cli
+          command: npm install -g grunt-cli
 
       - run:
           name: ✔︎ -- Checks js Tests [gradle check]
