@@ -4,7 +4,7 @@ jobs:
   build:
     docker:
       # docker image with python and mkdocs on it already as well, based on gradle:4.6-alpine
-      - image:  mhart/alpine-node:10
+      - image:  mhart/alpine-node:6
     #    branches:
     #      only:
     #        - master
