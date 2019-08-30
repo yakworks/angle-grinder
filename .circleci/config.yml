@@ -4,7 +4,7 @@ jobs:
   build:
     docker:
       # docker image with python and mkdocs on it already as well, based on gradle:4.6-alpine
-      - image:  mhart/alpine-node:6
+      - image:  tarampampam/node:10.10-alpine
     #    branches:
     #      only:
     #        - master
@@ -21,7 +21,6 @@ jobs:
     steps:
       - checkout
       # Download and cache dependencies
-
       - run:
           name: ✔︎ Downloads npm Dependencies [gradle npm_install installGrunt]
           command: npm install
