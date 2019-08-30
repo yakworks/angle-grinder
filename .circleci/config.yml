@@ -28,7 +28,7 @@ jobs:
 
       - run:
           name: ✔︎ -- Checks js Tests [gradle check]
-          command: grunt --force
+          command: grunt build --force
 
       - run:
           name: ✔︎ -- Checks Full Run Tests [gradle check]
