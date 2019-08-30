@@ -86,6 +86,7 @@
     "mocha": "^1.20.4",
     "nodemon": "^1.2.0",
     "ibrik": "1.0.1",
+    "phantomjs-prebuilt": "*",
     "phantomjs-polyfill": "0.0.2",
     "protractor": "^1.0.0",
     "request": "^2.36.0",
