@@ -23,6 +23,10 @@ jobs:
       # Download and cache dependencies
       - run:
           name: ✔︎ Downloads npm Dependencies [gradle npm_install installGrunt]
+          command: rm -r node_modules/
+
+      - run:
+          name: ✔︎ Downloads npm Dependencies [gradle npm_install installGrunt]
           command: npm install &&  npm install -g coffee-script && npm install -g grunt-cli
 
       - run:
