@@ -30,8 +30,8 @@ jobs:
           command: npm install coffeescript
 
       - run:
-          name: ✔︎ npm install -g grunt-cli
-          command: npm install -g grunt-cli
+          name: ✔︎ npm install grunt-cli
+          command: npm install grunt-cli
 
       - run:
           name: ✔︎ -- Checks js Tests [gradle check]
