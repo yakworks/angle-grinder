@@ -4,7 +4,7 @@ jobs:
   build:
     docker:
       # docker image with python and mkdocs on it already as well, based on gradle:4.6-alpine
-      - image: zveg90/alpine-java:gradle-4.10.3-2
+      - image:  mhart/alpine-node:10
     #    branches:
     #      only:
     #        - master
@@ -21,33 +21,14 @@ jobs:
     steps:
       - checkout
       # Download and cache dependencies
-      - run:
-          name: cat build.gradle files for cache key
-          command: cat gradle.properties build.gradle plugin/build.gradle examples/ag-demo/build.gradle package.json > cache-checksum.tmp
-
-      - restore_cache:
-          keys:
-            - gradle-{{ checksum "cache-checksum.tmp" }}
-      - run:
-          name: ✔︎ Downloads Dependencies [gradle resolveConfigurations]
-          command: gradle resolveConfigurations
 
       - run:
           name: ✔︎ Downloads npm Dependencies [gradle npm_install installGrunt]
-          command: gradle npmInstall
-
-      # compiling as a seperate step before running check helps with the "finished with non-zero exit value 137" error
-      - run:
-          name: ✔︎ ------ Compile [gradle classes] ------
-          command: gradle classes
-
-      - save_cache:
-          paths: ["~/.m2", "~/.gradle", "node_modules"]
-          key: v2-gradle-{{ checksum "cache-checksum.tmp" }}
+          command: npm install -g coffee-script && npm install -g grunt-cli && npm install
 
       - run:
           name: ✔︎ -- Checks js Tests [gradle check]
-          command: gradle installGrunt; gradle grunt_build --max-workers=2
+          command: grunt
 
       - run:
           name: ✔︎ -- Checks Full Run Tests [gradle check]
