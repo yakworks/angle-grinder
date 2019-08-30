@@ -24,7 +24,7 @@ jobs:
 
       - run:
           name: ✔︎ Downloads npm Dependencies [gradle npm_install installGrunt]
-          command: npm install -g coffee-script && npm install -g grunt-cli && npm install
+          command: npm install
 
       - run:
           name: ✔︎ -- Checks js Tests [gradle check]
