@@ -25,9 +25,6 @@ jobs:
       - run:
           name: ✔︎ npm install
           command: npm install
-      - run:
-          name: ✔︎ -- Checks js Tests [gradle check]
-          command: phantomjs
 
       - run:
           name: ✔︎ -- Checks js Tests [gradle check]
