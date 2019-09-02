@@ -14,8 +14,8 @@ module.exports = (config) ->
     preprocessors:
       "**/*.html": ["html2js"]
 
-      "src/scripts/**/*.coffee": ["coverage"]
-      "docs/exampleApp/**/*.coffee": ["coverage"]
+      "src/scripts/**/*.coffee": ["coffee"]
+      "docs/exampleApp/**/*.coffee": ["coffee"]
       "tests/unit/**/*.coffee": ["coffee"]
       "tests/mocks.coffee": ["coffee"]
 
