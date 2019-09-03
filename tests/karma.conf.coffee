@@ -55,11 +55,10 @@ module.exports = (config) ->
     # - Safari (only Mac)
     # - PhantomJS
     # - IE (only Windows)
-    browsers: ["Chrome_no_sandbox"]
     customLaunchers:
       Chrome_no_sandbox:
-        base: 'chromium-browser'
-        flags: ['--no-sandbox', '--headless']
+        base: 'ChromeHeadless'
+        flags: [ '--headless']
 
     # If browser does not capture in given timeout [ms], kill it
     captureTimeout: 30000
