@@ -4,7 +4,7 @@ jobs:
   build:
     docker:
       # docker image with python and mkdocs on it already as well, based on gradle:4.6-alpine
-      - image: yakworks/alpine-java:gradle-4.10.3
+      - image: weboaks/node-karma-protractor-chrome
     #    branches:
     #      only:
     #        - master
@@ -23,7 +23,7 @@ jobs:
       # Download and cache dependencies
       - run:
           name: cat build.gradle files for cache key
-          command: cat gradle.properties build.gradle plugin/build.gradle examples/ag-demo/build.gradle package.json > cache-checksum.tmp
+          command: npm install && npm audit fix && npm install -g grunt-cli && grunt test
 
       - restore_cache:
           keys:
