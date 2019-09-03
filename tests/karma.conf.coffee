@@ -56,12 +56,10 @@ module.exports = (config) ->
     # - PhantomJS
     # - IE (only Windows)
     browsers: ['ChromeHeadlessNoSandbox'],
-    customLaunchers: {
-      ChromeHeadlessNoSandbox: {
-        base: 'ChromeHeadless',
-        flags: ['--no-sandbox']
-      }
-    }
+    customLaunchers:
+      ChromeHeadlessNoSandbox:
+        base: 'Chrome'
+        flags: ['--headless']
 
     # If browser does not capture in given timeout [ms], kill it
     captureTimeout: 30000
