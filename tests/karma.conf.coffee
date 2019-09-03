@@ -57,8 +57,16 @@ module.exports = (config) ->
     # - IE (only Windows)
     customLaunchers:
       Chrome_no_sandbox:
-        base: 'Chrome'
-        flags: [ '--headless', '--no-sandbox', '--disable-setuid-sandbox']
+        base: 'ChromeHeadless',
+        flags: [
+          '--disable-web-security',
+          '--no-sandbox',
+          '--disable-setuid-sandbox',
+          '--disable-dev-shm-usage',
+          '--remote-debugging-port=9223',
+          '--headless',
+          '--disable-gpu'
+        ]
 
     # If browser does not capture in given timeout [ms], kill it
     captureTimeout: 30000
