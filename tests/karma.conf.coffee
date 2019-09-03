@@ -14,8 +14,8 @@ module.exports = (config) ->
     preprocessors:
       "**/*.html": ["html2js"]
 
-      "src/scripts/**/*.coffee": ["coverage"]
-      "docs/exampleApp/**/*.coffee": ["coverage"]
+      "src/scripts/**/*.coffee": ["coffee"]
+      "docs/exampleApp/**/*.coffee": ["coffee"]
       "tests/unit/**/*.coffee": ["coffee"]
       "tests/mocks.coffee": ["coffee"]
 
@@ -55,7 +55,7 @@ module.exports = (config) ->
     # - Safari (only Mac)
     # - PhantomJS
     # - IE (only Windows)
-    browsers: ["PhantomJS"]
+    browsers: ["ChromeHeadless"]
 
     # If browser does not capture in given timeout [ms], kill it
     captureTimeout: 30000
