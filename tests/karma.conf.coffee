@@ -58,7 +58,21 @@ module.exports = (config) ->
     customLaunchers:
       Chrome_no_sandbox:
         base: 'Chrome'
-        flags: [ '--headless', '--no-sandbox', '--disable-gpu']
+        flags: [ '--headless', '--no-sandbox', '--disable-translate',
+          '--disable-extensions',
+          '--disable-background-networking',
+          '--safebrowsing-disable-auto-update',
+          '--disable-sync',
+          '--metrics-recording-only',
+          '--disable-default-apps',
+          '--mute-audio',
+          '--no-first-run ',
+          '--disable-gpu',
+          '--headless '
+          '--hide-scrollbars',
+          '--enable-logging',
+          '--v=1',
+          '--disable-setuid-sandbox ']
 
     # If browser does not capture in given timeout [ms], kill it
     captureTimeout: 30000
