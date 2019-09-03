@@ -11,13 +11,13 @@ module.exports = (grunt) ->
   # - Safari (only Mac)
   # - PhantomJS
   # - IE (only Windows)
-  parseBrowsers = ({ defaultBrowser } = { default: "ChromeHeadlessNoSandbox" }) ->
+  parseBrowsers = ({ defaultBrowser } = { default: "Chrome_no_sandbox" }) ->
     browsers = grunt.option("browsers") or defaultBrowser
     browsers.replace(/[\s\[\]]/, "").split(",")
 
   options:
     configFile: "<%= appConfig.test %>/karma.conf.coffee"
-    browsers: parseBrowsers(defaultBrowser: "ChromeHeadlessNoSandbox")
+    browsers: parseBrowsers(defaultBrowser: "Chrome_no_sandbox")
     colors: true
 
   # single run karma

@@ -67,7 +67,9 @@ grunt {
   // Use different gruntFile
   gruntFile = 'Gruntfile.coffee'
 }
-
+node {
+  download = true
+}
 subprojects {
   dependencies {
     compile "org.springframework.boot:spring-boot-starter-logging"
