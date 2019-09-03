@@ -57,7 +57,7 @@ module.exports = (config) ->
     # - IE (only Windows)
     customLaunchers:
       Chrome_no_sandbox:
-        base: 'ChromeHeadless'
+        base: 'Chrome'
         flags: [ '--headless', '--no-sandbox']
 
     # If browser does not capture in given timeout [ms], kill it
