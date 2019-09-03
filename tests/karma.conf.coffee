@@ -2,7 +2,7 @@
 module.exports = (config) ->
   config.set
 
-    basePath: "../"
+    basePath: "."
 
     frameworks: [
       "mocha"
@@ -14,8 +14,8 @@ module.exports = (config) ->
     preprocessors:
       "**/*.html": ["html2js"]
 
-      "src/scripts/**/*.coffee": ["coffee"]
-      "docs/exampleApp/**/*.coffee": ["coffee"]
+      "src/scripts/**/*.coffee": ["coverage"]
+      "docs/exampleApp/**/*.coffee": ["coverage"]
       "tests/unit/**/*.coffee": ["coffee"]
       "tests/mocks.coffee": ["coffee"]
 
