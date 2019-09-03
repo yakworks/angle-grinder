@@ -2,7 +2,7 @@
 module.exports = (config) ->
   config.set
 
-    basePath: "."
+    basePath: "../"
 
     frameworks: [
       "mocha"
