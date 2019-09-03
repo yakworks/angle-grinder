@@ -58,7 +58,7 @@ module.exports = (config) ->
     browsers: ["Chrom_no_sandbox"]
     customLaunchers: {
       Chromium_no_sandbox: {
-        base: 'ChromHeadless',
+        base: 'ChromiumHeadless',
         flags: [
           '--no-sandbox'
         ]
