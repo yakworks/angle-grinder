@@ -54,7 +54,7 @@ jobs:
           name: ✔︎ -- Publish plugin if needed [gradle ciPublish]
           command: |
             CIRCLE_COMPARE_URL=$(cat CIRCLE_COMPARE_URL.txt)
-            gradle ciPublish --no-daemon
+            ./gradlew ciPublish --no-daemon
 
 orbs:
   compare-url: iynere/compare-url@1.1.0
