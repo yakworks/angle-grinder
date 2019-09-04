@@ -1,3 +1,4 @@
+/* Copyright 2019. 9ci Inc. Licensed under the Apache License, Version 2.0 */
 package grinder
 
 import groovy.transform.CompileStatic
@@ -19,17 +20,17 @@ import groovy.transform.TypeCheckingMode
 
 @CompileStatic
 class DelegatingBean {
-	def target
+    def target
 
-	DelegatingBean(target) {
-		this.target = target
-	}
-	
-	def propertyMissing(String name) {
-		return target[name]
-	}
+    DelegatingBean(target) {
+        this.target = target
+    }
 
-	def methodMissing(String name, args) {
-		return target.invokeMethod(name, args)
-	}
+    def propertyMissing(String name) {
+        return target[name]
+    }
+
+    def methodMissing(String name, args) {
+        return target.invokeMethod(name, args)
+    }
 }

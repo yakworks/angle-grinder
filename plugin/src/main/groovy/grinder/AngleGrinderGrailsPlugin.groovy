@@ -1,3 +1,4 @@
+/* Copyright 2019. 9ci Inc. Licensed under the Apache License, Version 2.0 */
 package grinder
 
 import grails.core.GrailsApplication
@@ -32,4 +33,3 @@ A plugin that enables ties grails and angular together
 
     }}
 }
-

@@ -15,7 +15,7 @@ spotless {
     //googleJavaFormat() // use a specific formatter for Java files
   }
   groovy {
-    target fileTree('.') {
+    target fileTree('plugin/') {
       include 'src/main/groovy/**/*.groovy', 'grails-app/**/*.groovy'
       exclude '**/*.java','**/conf/*.groovy', 'node_modules/**/*.groovy'
     }
