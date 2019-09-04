@@ -1,38 +1,5 @@
 apply plugin: 'com.diffplug.gradle.spotless'
 
 spotless {
-  groovyGradle {
-    target '**/*.gradle', 'build.gradle'
-    trimTrailingWhitespace()
-    indentWithSpaces(2)
-    endWithNewline()
-  }
-  java {
-    licenseHeader '/* Copyright $YEAR. 9ci Inc. Licensed under the Apache License, Version 2.0 */'
-    target fileTree('.') {
-      include 'src/main/groovy/gorm/**/*.java'
-    }
-    //googleJavaFormat() // use a specific formatter for Java files
-  }
-  groovy {
-    target fileTree('plugin/') {
-      include 'src/main/groovy/**/*.groovy', 'grails-app/**/*.groovy'
-      exclude '**/*.java','**/conf/*.groovy', 'node_modules/**/*.groovy'
-    }
-    licenseHeader '/* Copyright $YEAR. 9ci Inc. Licensed under the Apache License, Version 2.0 */'
-    //excludeJava() // can't be used if target is used
-    //paddedCell() // some error require this
-    trimTrailingWhitespace()
-    indentWithSpaces(4) // this only checks for tabs and can replace with 4 spaces it it finds them
-    endWithNewline()
-    //this could be cool but they have some work to do still, messes with groovy lists
-    //greclipse().configFile("$gradleDir/spotless/spotless.eclipseformat.xml", "$gradleDir/spotless/spotless.groovyformat.prefs")
-  }
-  //  format 'markdown', {
-  //      target '**/*.md'
-  //      indentWithSpaces(4)
-  //      //trimTrailingWhitespace()
-  //      endWithNewline()
-  //  }
-  //    freshmark {}
+  
 }
