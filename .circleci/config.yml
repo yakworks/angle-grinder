@@ -4,7 +4,7 @@ jobs:
   build:
     docker:
       # docker image with python and mkdocs on it already as well, based on gradle:4.6-alpine
-      - image: zveg90/alpine-node:7
+      - image: zveg90/alpine-node-gradle:1
     #    branches:
     #      only:
     #        - master
@@ -32,7 +32,7 @@ jobs:
 
       - run:
           name: ✔︎ -- Checks Full Run Tests [gradle check]
-          command: gradle check --max-workers=2
+          command: ./gradlew check --max-workers=2
 
       - store_artifacts:
           path: plugin/build/reports/codenarc
