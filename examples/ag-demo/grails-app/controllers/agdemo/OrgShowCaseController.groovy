@@ -1,9 +1,9 @@
 package agdemo
 
-import grails.converters.JSON
-import grails.plugin.dao.DaoMessage
-import gorm.tools.beans.DateUtil
 import gorm.tools.Pager
+import gorm.tools.beans.DateUtil
+import gorm.tools.repository.RepoMessage
+import grails.converters.JSON
 
 class OrgShowCaseController extends BaseDomainController {
     def domainClass = OrgShowCase
@@ -18,7 +18,7 @@ class OrgShowCaseController extends BaseDomainController {
         if (org) {
             render agdemo.ExportUtil.buildMapFromPaths(org, selectFields) as JSON
         } else {
-            render DaoMessage.notFound(domainClass.name, [id: params.id])
+            render RepoMessage.notFound(domainClass.name, [id: params.id])
         }
     }
 

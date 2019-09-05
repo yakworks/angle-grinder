@@ -1,9 +1,9 @@
 package agdemo
 
+import grails.testing.gorm.DomainUnitTest
 import spock.lang.Specification
-import org.junit.*
 
-class ContactTypeTest extends Specification{
+class ContactTypeTest extends Specification implements DomainUnitTest<Org>{
 
     void testByName() {
       expect:

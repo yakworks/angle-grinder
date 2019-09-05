@@ -1,10 +1,9 @@
 package agdemo
 
-import grails.converters.JSON
-import grails.plugin.dao.DomainException
 import gorm.tools.Pager
-
-import java.text.SimpleDateFormat
+import gorm.tools.beans.BeanPathTools
+import gorm.tools.repository.errors.EntityValidationException
+import grails.converters.JSON
 
 class UserController extends BaseDomainController {
     static final int SC_UNPROCESSABLE_ENTITY = 422
@@ -79,9 +78,9 @@ class UserController extends BaseDomainController {
 
     def saveOrUpdate() {
         try {
-            def result = params.id ? dao.update(params) : dao.insert(params)
-            render ExportUtil.buildMapFromPaths(result.entity, selectFields) as JSON
-        } catch (DomainException e) {
+            def result = params.id ? repo.update(params) : repo.insert(params)
+            render BeanPathTools.buildMapFromPaths(result.entity, selectFields) as JSON
+        } catch (EntityValidationException e) {
             response.status = 409
             def emsg = (e.hasProperty("messageMap")) ? g.message(code: e.messageMap?.code, args: e.messageMap?.args, default: e.messageMap?.defaultMessage) : null
             render(plugin: "rally", template: "edit", model: [user: e.meta?.user ?: e.entity, errorMsg: emsg])

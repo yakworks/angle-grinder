@@ -1,15 +1,14 @@
 package agdemo
 
-import grails.test.mixin.Mock
-import grails.test.mixin.TestFor
-import grails.test.mixin.TestMixin
-import grails.test.mixin.domain.DomainClassUnitTestMixin
+import grails.testing.gorm.DataTest
+import grails.testing.web.controllers.ControllerUnitTest
 import spock.lang.Specification
 
-@TestFor(OrgController)
-@TestMixin(DomainClassUnitTestMixin)
-@Mock([Org, User, Contact])
-class OrgControllerTests extends Specification{
+class OrgControllerTests extends Specification implements DataTest, ControllerUnitTest<OrgController> {
+
+    void setupSpec() {
+        mockDomains Org, User, Contact
+    }
 
     void testListAll() {
         given:

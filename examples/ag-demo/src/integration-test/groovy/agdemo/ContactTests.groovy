@@ -3,9 +3,8 @@ package agdemo
 import agdemo.Contact
 import agdemo.ContactType
 import agdemo.Org
-import grails.test.mixin.integration.Integration
-import grails.transaction.Rollback
-import org.junit.*
+import grails.gorm.transactions.Rollback
+import grails.testing.mixin.integration.Integration
 import spock.lang.Specification
 
 @Integration

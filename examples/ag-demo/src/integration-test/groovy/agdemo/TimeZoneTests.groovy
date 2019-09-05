@@ -1,23 +1,16 @@
 package agdemo
 
-import grails.converters.JSON
-import agdemo.ContactType
-import agdemo.Org
-import agdemo.OrgShowCase
-import agdemo.User
-import agdemo.UserDao
-import grails.test.mixin.integration.Integration
-import grails.transaction.Rollback
+import grails.gorm.transactions.Rollback
+import grails.testing.mixin.integration.Integration
 import org.joda.time.DateTime
 import org.joda.time.DateTimeZone
-import org.joda.time.LocalDate
 import org.joda.time.format.DateTimeFormat
 import spock.lang.Specification
 
 @Integration
 @Rollback
 class TimeZoneTests extends Specification {
-    def orgShowCaseDao
+    OrgShowCaseRepo orgShowCaseRepo
 	def tzf = DateTimeFormat.forPattern("ZZ")
 	def tz = DateTimeZone.getDefault()
 
@@ -29,7 +22,7 @@ class TimeZoneTests extends Specification {
                 exampleDate: exampleDate
 		]
 
-        orgShowCaseDao.insert(props).entity
+        orgShowCaseRepo.create(props)
 	}
 
     void testReturnedDateFormats() {

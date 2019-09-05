@@ -1,14 +1,14 @@
 package agdemo
 
-import grails.converters.JSON
-import grails.plugin.dao.DaoUtil
 import agdemo.OrgShowCase
 import agdemo.OrgShowCaseController
-import spock.lang.Specification
-import grails.test.mixin.integration.Integration
-import grails.transaction.Rollback
-import spock.lang.Shared
+import gorm.tools.repository.RepoUtil
+import grails.converters.JSON
+import grails.gorm.transactions.Rollback
+import grails.testing.mixin.integration.Integration
 import org.joda.time.LocalDate
+import spock.lang.Shared
+import spock.lang.Specification
 
 @Integration
 @Rollback
@@ -43,7 +43,7 @@ class OrgShowcaseControllerTests extends Specification {
         lastOrg.exampleLocalDate = new LocalDate("2119-01-01")
         lastOrg.persist()
 
-		DaoUtil.flushAndClear()
+		RepoUtil.flushAndClear()
 		controller.params.filters = new JSON([
                 exampleLocalDate: [from: "2115-01-01", to: "2116-02-01"]
 		]).toString()

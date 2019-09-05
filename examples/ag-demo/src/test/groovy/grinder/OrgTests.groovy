@@ -1,10 +1,9 @@
 package agdemo
 
-import grails.test.mixin.TestFor
+import grails.testing.gorm.DomainUnitTest
 import spock.lang.Specification
 
-@TestFor(Org)
-class OrgTests extends Specification {
+class OrgTests extends Specification implements DomainUnitTest<Org> {
 
     void setup() {
         def existingOrg = new Org(name: "github", num: "123-456")
