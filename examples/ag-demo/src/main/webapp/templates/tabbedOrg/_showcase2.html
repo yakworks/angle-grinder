@@ -1,0 +1,97 @@
+<div ng-controller="tabbedOrg.orgShowCaseCtrl">
+    <legend>Example Local Date</legend>
+    <form name="showCaseForm" class="form-horizontal" novalidate
+          ng-submit="save(orgShowCase)">
+
+        <div ag-field-group for="exampleLocalDate" class="form-group row">
+            <label class="control-label col-md-2">Local Date</label>
+
+            <div class="col-md-10">
+
+                <input type="text"
+                       ag-date
+                       ng-model="orgShowCase.exampleLocalDate"
+                       name="exampleLocalDate"/>
+                <ag-validation-errors for="exampleLocalDate"/>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="control-label col-md-2">Local Date</label>
+
+            <div class="col-sm-5">
+                <div class="input-group">
+                    <div ag-datepicker ng-model="orgShowCase.exampleLocalDate" datepicker-options="{inline: true}">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div ag-field-group class="form-group row">
+            <label class="control-label col-md-2">Got from server:</label>
+
+            <div class="col-md-10">{{tzShowCase.exampleLocalDate}}</div>
+        </div>
+
+        <div ag-field-group class="form-group row">
+            <label class="control-label col-md-2">Will be send to server:</label>
+
+            <div class="controls col-md-10">{{orgShowCase.exampleLocalDate}}</div>
+        </div>
+
+        <legend>Example Date Time</legend>
+
+        <div ag-field-group for="exampleDateTime" class="form-group row">
+            <label class="control-label col-md-2">Date Time</label>
+
+            <div class="col-md-10">
+
+                <input type="text"
+                       ag-date date-type="localDateTime"
+                       ng-model="orgShowCase.exampleDateTime"
+                       name="exampleDateTime"/>
+                <ag-validation-errors for="exampleDateTime"/>
+            </div>
+        </div>
+
+        <div ag-field-group class="form-group row">
+            <label class="control-label col-md-2">Got from server:</label>
+
+            <div class="controls col-md-10">{{tzShowCase.exampleDateTime}}</div>
+        </div>
+
+        <div ag-field-group class="form-group row">
+            <label class="control-label col-md-2">Will be send to server:</label>
+
+            <div class="col-md-10">{{orgShowCase.exampleDateTime}}</div>
+        </div>
+
+        <legend>Example Date</legend>
+        <div ag-field-group for="exampleDate" class="form-group row">
+            <label class="control-label col-md-2">Date</label>
+
+            <div class=" col-md-10">
+
+                <input type="text"
+                       ag-date date-type="date"
+                       ng-model="orgShowCase.exampleDate"
+                       name="exampleDate"/>
+
+                <ag-validation-errors for="exampleDate"/>
+            </div>
+        </div>
+
+        <div ag-field-group class="form-group row">
+            <label class="control-label col-md-2">Got from server:</label>
+
+            <div class="col-md-10">{{tzShowCase.exampleDate}}</div>
+        </div>
+
+        <div ag-field-group class="form-group row">
+            <label class="control-label col-md-2">Will be send to server:</label>
+
+            <div class="col-md-10">{{orgShowCase.exampleDate}}</div>
+        </div>
+        <ag-submit-button></ag-submit-button>
+    </form>
+</div>

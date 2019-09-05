@@ -1,0 +1,20 @@
+/* org lookup results for the select2 component */
+
+table.org-select-result {
+    margin-bottom: 0px;
+}
+
+table.org-select-result td:nth-child(1) {
+    width: 60px;
+    border-top: none;
+}
+
+table.org-select-result td:nth-child(2) {
+    border-top: none;
+}
+
+/* select2 component overrides */
+
+.col-sm-8 .select2-container,.select2-search-field {
+  width: 216px;
+}
