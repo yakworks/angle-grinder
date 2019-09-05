@@ -1,10 +1,9 @@
 /*
-* Copyright 2019 9ci Inc - Licensed under the Apache License, Version 2.0 (the "License")
+* Copyright 2019 9ci - Licensed under the Apache License, Version 2.0 (the "License")
 * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
 */
 package grinder
 
-import grails.core.GrailsApplication
 import grails.plugins.Plugin
 
 class AngleGrinderGrailsPlugin extends Plugin{
@@ -29,10 +28,11 @@ A plugin that enables ties grails and angular together
     def scm = [url: 'https://github.com/9ci/angle-grinder']
 
 
-    Closure doWithSpring(){{->
-        grinderLabelService(GrinderLabelService){ bean ->
-            bean.autowire = 'byName'
+    Closure doWithSpring() {
+        { ->
+            grinderLabelService(GrinderLabelService) { bean ->
+                bean.autowire = 'byName'
+            }
         }
-
-    }}
+    }
 }

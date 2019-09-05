@@ -1,0 +1,21 @@
+# see defaults options https://github.com/yakworks/gradle-plugins/tree/master/src/main/resources/configs/defaults.yml
+title: Angle grinder
+description:
+author: 9ci
+group: grinder
+
+github:
+  fullName: 9ci/angle-grinder
+
+team:
+  developers: ['alexeyzvegintcev: Alexey Zvegintcev']
+
+bintray:
+  enabled: true
+  pkg:
+    repo: grails-plugins
+    userOrg: 9ci
+
+maven:
+  # repoUrl: http://repo.9ci.com/grails-plugins
+  snapshotUrl: http://repo.9ci.com/oss-snapshots

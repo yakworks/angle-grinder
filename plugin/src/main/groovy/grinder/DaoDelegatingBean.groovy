@@ -1,5 +1,5 @@
 /*
-* Copyright 2019 9ci Inc - Licensed under the Apache License, Version 2.0 (the "License")
+* Copyright 2019 9ci - Licensed under the Apache License, Version 2.0 (the "License")
 * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
 */
 package grinder
@@ -26,7 +26,9 @@ class DaoDelegatingBean extends DelegatingBean {
             return super.propertyMissing(name)
         }catch (MissingPropertyException e) {
             String method
-            if(name.startsWith("has") || name.startsWith("is")) method = name
+            if(name.startsWith("has") || name.startsWith("is")) {
+              method = name
+            }
             else method = "get" + name.capitalize()
 
             try {
@@ -38,7 +40,7 @@ class DaoDelegatingBean extends DelegatingBean {
         }
     }
 
-    def methodMissing(String name, args) {
+    def methodMissing(String name, Map args) {
         try {
             return target.invokeMethod(name, args)
         }catch (MissingMethodException e) {

@@ -1,15 +1,17 @@
 /*
-* Copyright 2019 9ci Inc - Licensed under the Apache License, Version 2.0 (the "License")
+* Copyright 2019 9ci - Licensed under the Apache License, Version 2.0 (the "License")
 * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
 */
 package grinder
 
-
 import javax.annotation.PostConstruct
+
+import groovy.transform.CompileDynamic
 
 import grails.util.GrailsNameUtils
 
 //XXX - It doesnt seem to be used any more
+@CompileDynamic
 class GrinderLabelService {
 
     static transactional = false
@@ -23,14 +25,14 @@ class GrinderLabelService {
     @PostConstruct
     def init(){
 
-        gTagLib = grailsApplication.mainContext.getBean('org.grails.plugins.web.taglib.ApplicationTagLib');
+        gTagLib = grailsApplication.mainContext.getBean('org.grails.plugins.web.taglib.ApplicationTagLib')
     }
 
     def columnSetup(List colModel, Class baseClass = null) {
         colModel.each{col->
             //handle id
             if(col.name == 'id'){
-                extendMap(col,[key:true,hidden:true])
+                extendMap(col, [key:true, hidden:true])
             }
             //do label
             if(!col.containsKey('label')){
@@ -42,7 +44,7 @@ class GrinderLabelService {
     }
 
     protected Map extendMap(Map orig, Map other){
-        other.each{ k,v->
+        other.each{ k, v->
             if(!orig.containsKey(k)){
                 orig[k] = v
             }

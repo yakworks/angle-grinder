@@ -1,15 +1,17 @@
 /*
-* Copyright 2019 9ci Inc - Licensed under the Apache License, Version 2.0 (the "License")
+* Copyright 2019 9ci - Licensed under the Apache License, Version 2.0 (the "License")
 * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
 */
 package grinder
 
+import groovy.transform.CompileDynamic
+
 /**
-*	Provides convienence tags for	 form controls
+* Provides convienence tags for	 form controls
 *
 * @author Joshua Burnett
 */
-
+@CompileDynamic
 class AgTagLib {
 
     static namespace = "ag"
