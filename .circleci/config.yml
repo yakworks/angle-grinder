@@ -31,12 +31,12 @@ jobs:
             - gradle-{{ checksum "cache-checksum.tmp" }}
       - run:
           name: ✔︎ Downloads Dependencies [gradle resolveConfigurations]
-          command: gradle resolveConfigurations
+          command: ./gradlew resolveConfigurations
 
       # compiling as a seperate step before running check helps with the "finished with non-zero exit value 137" error
       - run:
           name: ✔︎ ------ Compile [gradle classes] ------
-          command: gradle classes
+          command: ./gradlew classes
 
       - save_cache:
           paths: ["~/.m2", "~/.gradle"]
@@ -52,7 +52,7 @@ jobs:
 
       - run:
           name: ✔︎ -- Checks Full Run Tests [gradle check]
-          command: gradle check --max-workers=2
+          command: ./gradlew check --max-workers=2
 
       - store_artifacts:
           path: plugin/build/reports/codenarc
@@ -74,7 +74,7 @@ jobs:
           name: ✔︎ -- Publish plugin if needed [gradle ciPublish]
           command: |
             CIRCLE_COMPARE_URL=$(cat CIRCLE_COMPARE_URL.txt)
-            gradle ciPublish --no-daemon
+            ./gradlew ciPublish --no-daemon
 
 orbs:
   compare-url: iynere/compare-url@1.1.0
