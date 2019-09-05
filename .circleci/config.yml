@@ -24,7 +24,7 @@ jobs:
 
       - run:
           name: cat build.gradle files for cache key
-          command: cat gradle.properties build.gradle plugin/build.gradle examples/ag-demo/build.gradle > cache-checksum.tmp
+          command: cat gradle.properties build.gradle plugin/build.gradle > cache-checksum.tmp
 
       - restore_cache:
           keys:
