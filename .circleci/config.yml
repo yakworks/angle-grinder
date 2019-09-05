@@ -21,6 +21,26 @@ jobs:
     steps:
       - checkout
       # Download and cache dependencies
+      -
+      - run:
+          name: cat build.gradle files for cache key
+          command: cat gradle.properties build.gradle plugin/build.gradle examples/ag-demo/build.gradle > cache-checksum.tmp
+
+      - restore_cache:
+          keys:
+            - gradle-{{ checksum "cache-checksum.tmp" }}
+      - run:
+          name: ✔︎ Downloads Dependencies [gradle resolveConfigurations]
+          command: gradle resolveConfigurations
+
+      # compiling as a seperate step before running check helps with the "finished with non-zero exit value 137" error
+      - run:
+          name: ✔︎ ------ Compile [gradle classes] ------
+          command: gradle classes
+
+      - save_cache:
+          paths: ["~/.m2", "~/.gradle"]
+          key: v2-gradle-{{ checksum "cache-checksum.tmp" }}
 
       - run:
           name: ✔︎ npm install
@@ -32,7 +52,7 @@ jobs:
 
       - run:
           name: ✔︎ -- Checks Full Run Tests [gradle check]
-          command: ./gradlew check --max-workers=2
+          command: gradle check --max-workers=2
 
       - store_artifacts:
           path: plugin/build/reports/codenarc
@@ -54,13 +74,13 @@ jobs:
           name: ✔︎ -- Publish plugin if needed [gradle ciPublish]
           command: |
             CIRCLE_COMPARE_URL=$(cat CIRCLE_COMPARE_URL.txt)
-            ./gradlew ciPublish --no-daemon
+            gradle ciPublish --no-daemon
 
 orbs:
   compare-url: iynere/compare-url@1.1.0
 
 workflows:
-  version: 2
+  version: 2.1
   build-flow:
     jobs:
       - build:
