@@ -1,62 +1,55 @@
-buildscript {
-    repositories {
-        mavenLocal()
-        maven { url "https://repo.grails.org/grails/core" }
-    }
-    dependencies {
-        classpath "org.grails:grails-gradle-plugin:$grailsVersion"
-        classpath "gradle.plugin.com.energizedwork.webdriver-binaries:webdriver-binaries-gradle-plugin:1.1"
-        classpath "com.bertramlabs.plugins:asset-pipeline-gradle:2.11.2"
-        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
-        classpath "com.bertramlabs.plugins:asset-pipeline-gradle:2.14.2"
-        classpath 'com.bertramlabs.plugins:coffee-asset-pipeline:2.14.2'
-    }
-}
-group "nine"
+apply plugin: "yakworks.grails-plugin"
 
-apply plugin:"org.grails.grails-plugin"
-apply plugin:"org.grails.grails-plugin-publish"
-apply plugin:"org.grails.grails-gsp"
 apply plugin:"asset-pipeline"
-apply plugin:'groovy'
 
-apply from: "$gradleDir/publish.gradle"
-
-repositories {
-    mavenLocal()
-    maven { url "https://repo.grails.org/grails/core" }
-}
-
-bootRun {
-  jvmArgs('-Dspring.output.ansi.enabled=always')
-  addResources = true
-}
-
-bootRepackage.enabled = false
 dependencies {
-    provided "org.grails:grails-dependencies"
-    compileOnly "org.springframework:spring-test"
-    compile "org.grails.plugins:gorm-tools:6.1.4"
+  console "org.grails:grails-console"
 
-    profile "org.grails.profiles:web-plugin"
-    provided "org.grails:grails-plugin-domain-class"
+  compile "org.springframework.boot:spring-boot-starter-logging"
+  compile "org.springframework.boot:spring-boot-autoconfigure"
+  compile "org.grails:grails-core"
+  compile "org.springframework.boot:spring-boot-starter-tomcat"
 
-    runtime "com.bertramlabs.plugins:asset-pipeline-grails:2.11.1"
-    runtime 'com.bertramlabs.plugins:coffee-asset-pipeline:2.6.2'
+  compile "org.grails:grails-web-boot"
 
-    testCompile "org.grails.plugins:geb"
-    testCompile "org.grails:grails-plugin-testing"
+  compile "org.grails:grails-logging"
+  compile "org.grails:grails-plugin-databinding"
+  compile "org.grails:grails-plugin-services"
 
-    testRuntime "org.seleniumhq.selenium:selenium-htmlunit-driver:2.47.1"
-    testRuntime "net.sourceforge.htmlunit:htmlunit:2.18"
+  //FIXME comment why is this needed? without we get only here gorm.tools.testing.TestDataJsonBuildAllSpec > test includes * FAILED
+  compile 'org.grails.plugins:grails-java8:1.2.3'
+
+  compile "org.grails.plugins:events"
+  compile "org.codehaus.gpars:gpars:1.2.1"
+
+  compile "org.grails.plugins:hibernate5"
+  compile "org.hibernate:hibernate-core:$versionHibernate"
+  compile "org.hibernate:hibernate-ehcache:$versionHibernate"
+
+  runtime "com.bertramlabs.plugins:asset-pipeline-grails:2.11.1"
+  runtime 'com.bertramlabs.plugins:coffee-asset-pipeline:2.6.2'
+
+  //used for json parsing but require it to be added to project that uses this
+  compileOnly "org.grails.plugins:views-json:$versionViews"
+  compileOnly "org.grails.plugins:views-json-templates:$versionViews"
+  compileOnly "org.grails:views-json-testing-support:$versionViews"
+
+  //this is for GrailsParameterMapRowMapper that uses the MockHttpServletRequest
+  compileOnly "org.springframework:spring-test"
+
+  //used for bundled Test traits
+  compileOnly "org.grails:grails-gorm-testing-support"
+  compileOnly "org.grails:grails-web-testing-support"
+  compileOnly "org.grails.plugins:build-test-data:$versionBuildTestData"
+
+  testCompile "org.grails.plugins:geb"
+  testCompile "org.grails:grails-plugin-testing"
+
+  testRuntime "org.seleniumhq.selenium:selenium-htmlunit-driver:2.47.1"
+  testRuntime "net.sourceforge.htmlunit:htmlunit:2.18"
 }
 
 bootRun {
     jvmArgs('-Dspring.output.ansi.enabled=always')
     addResources = true
-}
-
-
-assets {
-  packagePlugin = true
 }

@@ -1,12 +1,12 @@
 package agdemo
 
+import gorm.tools.repository.GormRepo
 import grails.plugin.dao.GormDaoSupport
 import grails.plugin.dao.DomainException
 import grails.plugin.dao.DaoUtil
 import grails.plugin.dao.DaoMessage
 
-class UserDao extends GormDaoSupport {
-    Class domainClass = User
+class UserRepo implements GormRepo<User> {
 
     Map update(params) {
         def user = User.get(params.id)

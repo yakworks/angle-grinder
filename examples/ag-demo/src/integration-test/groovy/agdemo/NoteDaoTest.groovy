@@ -1,7 +1,5 @@
 package agdemo
 
-import agdemo.Org
-import agdemo.NoteDao
 import grails.test.mixin.integration.Integration
 import grails.transaction.Rollback
 import spock.lang.Specification

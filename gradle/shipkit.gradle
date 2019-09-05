@@ -1,0 +1,2 @@
+//Here as a placeholder as shipkit blows up without it. All config is done in shipyak.yml
+shipkit { }

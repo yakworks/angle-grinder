@@ -1,6 +1,7 @@
 buildscript {
   repositories {
     mavenLocal()
+    maven { url "https://plugins.gradle.org/m2/" }
     maven { url "https://repo.grails.org/grails/core" }
   }
   dependencies {
@@ -8,98 +9,41 @@ buildscript {
     classpath "com.bertramlabs.plugins:asset-pipeline-gradle:2.14.2"
     classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
     classpath 'com.bertramlabs.plugins:coffee-asset-pipeline:2.14.2'
+    classpath "org.yakworks:gradle-plugins:1.1.13"
   }
 }
 
 plugins {
-  id "com.energizedwork.idea-project-components" version "1.4"
-  // for CI 'resolveConfigurations' task see https://github.com/palantir/gradle-configuration-resolver-plugin
   id "com.palantir.configuration-resolver" version "0.2.0"
   id "org.ajoberstar.git-publish" version "0.3.2"
   id 'org.ajoberstar.grgit' version '2.1.1'
-  id 'com.diffplug.gradle.spotless' version '3.10.0'
-  id "com.moowork.node" version "1.3.1"
-  id "com.moowork.grunt" version "1.2.0"
-  id 'com.github.ksoichiro.web.resource' version '1.7.3'
   //id "pl.softmate.gradle-properties-yaml-plugin" version "0.0.2"
 }
 
-apply plugin: "idea"
-apply plugin: 'groovy'
+apply plugin: 'yakworks.shipyak' //our opinionated defaults for gradle groovy & grails projects
+//apply from: "$gradleDir/spotless.gradle"
 
-apply from: 'gradle/prop-defaults.gradle'
-apply from: "$gradleDir/spotless.gradle"
-
-allprojects {
-
-  apply plugin: 'groovy'
-  apply plugin: 'com.palantir.configuration-resolver' //see above for CI usage on this
-
-  repositories {
-    mavenLocal()
-    maven { url "https://repo.grails.org/grails/core" }
-    maven { url "https://dl.bintray.com/9ci/grails-plugins" }
-    //maven { url "http://repo.9ci.com/oss-snapshots" }
-    mavenCentral()
-    jcenter()
-  }
-
-  sourceCompatibility = '1.8'
-  targetCompatibility = '1.8'
-
-//for snapshot marked with {changing=true) this checks more often
-  configurations.all {
-    resolutionStrategy.cacheChangingModulesFor 1, 'seconds'
-  }
-
-}
-
-grunt {
-  // Set the directory where Gruntfile.js should be found
-  workDir = file("${project.projectDir}")
-
-  // Whether colors should output on the terminal
-  colors = true
-
-  // Whether output from Grunt should be buffered - useful when running tasks in parallel
-  bufferOutput = false
-
-  // Use different gruntFile
-  gruntFile = 'Gruntfile.coffee'
-}
-node {
-  download = true
-}
 subprojects {
-  dependencies {
-    compile "org.springframework.boot:spring-boot-starter-logging"
-    compile "org.springframework.boot:spring-boot-autoconfigure"
-    compile "org.grails:grails-core"
-    compile "org.grails:grails-dependencies"
-    compile "org.springframework.boot:spring-boot-starter-actuator"
-    compile "org.springframework.boot:spring-boot-starter-tomcat"
-    compile "org.grails:grails-web-boot"
+  plugins.withId('java') {
+    sourceCompatibility = '1.8'
+    targetCompatibility = '1.8'
 
-    compile "org.grails:grails-logging"
-    compile "org.grails:grails-plugin-databinding"
-    compile "org.grails:grails-plugin-services"
-    compile 'org.grails.plugins:grails-java8:1.2.2'
+    dependencies {
+      testRuntime "com.h2database:h2"
+      testRuntime "org.apache.tomcat:tomcat-jdbc"
 
-    compile "org.grails.plugins:hibernate4"
-    compile "org.hibernate:hibernate-core:4.3.10.Final"
-    compile "org.hibernate:hibernate-ehcache:4.3.10.Final"
+      testCompile "org.grails:grails-gorm-testing-support"
+      testCompile "org.grails:grails-web-testing-support"
+      testCompile "org.grails.plugins:build-test-data:$versionBuildTestData"
+      testCompile "org.grails:views-json-testing-support:$versionViews"
+    }
 
-    compile "org.codehaus.gpars:gpars:1.2.0"
-
-    testRuntime "com.h2database:h2"
-    testRuntime "org.apache.tomcat:tomcat-jdbc"
-
-    testCompile "org.grails:grails-plugin-testing"
   }
-
-  test {
-    //testLogging.showStandardStreams = true
-    testLogging.exceptionFormat = 'full'
+  configurations {
+    testCompile.extendsFrom compileOnly //includes the compileOnly in tests too so we don't have to list twice
+    all {
+      resolutionStrategy.cacheChangingModulesFor 1, 'seconds' //when changing = true this sets the cache time
+    }
   }
 
 }

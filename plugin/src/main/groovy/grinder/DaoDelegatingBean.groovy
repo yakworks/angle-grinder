@@ -1,8 +1,12 @@
-/* Copyright 2019. 9ci Inc. Licensed under the Apache License, Version 2.0 */
+/*
+* Copyright 2019 9ci Inc - Licensed under the Apache License, Version 2.0 (the "License")
+* You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
+*/
 package grinder
 
 import groovy.transform.CompileStatic
 import groovy.transform.TypeCheckingMode
+
 import org.grails.datastore.gorm.GormEntity
 
 //Delegates missing properties as method calls to the dao for the domain class

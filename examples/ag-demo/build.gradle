@@ -1,19 +1,12 @@
-version "3.0.0"
+plugins {
+  id "com.energizedwork.webdriver-binaries" version "1.4"
+}
+version "3.3.0"
 group "agdemo"
 
-buildscript {
-    repositories {
-        mavenLocal()
-        maven { url "https://repo.grails.org/grails/core" }
-    }
-    dependencies {
-        classpath "org.grails:grails-gradle-plugin:$grailsVersion"
 
-      classpath "com.bertramlabs.plugins:asset-pipeline-gradle:2.14.2"
-      classpath 'com.bertramlabs.plugins:coffee-asset-pipeline:2.14.2'
-    }
-}
 
+apply plugin:"groovy"
 apply plugin:"war"
 apply plugin:"org.grails.grails-web"
 apply plugin:"org.grails.grails-gsp"
@@ -24,17 +17,15 @@ repositories {
     maven { url "https://repo.grails.org/grails/core" }
     maven { url "http://dl.bintray.com/9ci/grails-plugins" }
 }
-bootRun {
-    jvmArgs('-Dspring.output.ansi.enabled=always')
-    addResources = true
-}
+
 dependencies {
     profile "org.grails.profiles:web"
     compile "org.springframework.boot:spring-boot-starter-actuator"
     provided "org.springframework.boot:spring-boot-starter-tomcat"
     compile "org.grails:grails-web-boot"
     console "org.grails:grails-console"
-    compile "org.grails.plugin:dao:3.0.6"
+    compileOnly "org.grails.plugins:gorm-tools:$vPluginGormTools"
+    testCompile "org.grails.plugins:gorm-tools:$vPluginGormTools"
     runtime "com.bertramlabs.plugins:asset-pipeline-grails:2.11.1"
     runtime 'com.bertramlabs.plugins:coffee-asset-pipeline:2.6.2'
     compile "org.grails.plugins:audit-trail:3.0.9"

@@ -1,5 +1,5 @@
 apply plugin: 'com.diffplug.gradle.spotless'
 
 spotless {
-  
+
 }
