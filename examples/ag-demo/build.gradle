@@ -4,8 +4,6 @@ plugins {
 version "3.3.0"
 group "agdemo"
 
-
-
 apply plugin:"groovy"
 apply plugin:"war"
 apply plugin:"org.grails.grails-web"
@@ -24,13 +22,17 @@ dependencies {
     provided "org.springframework.boot:spring-boot-starter-tomcat"
     compile "org.grails:grails-web-boot"
     console "org.grails:grails-console"
-    compileOnly "org.grails.plugins:gorm-tools:$vPluginGormTools"
-    testCompile "org.grails.plugins:gorm-tools:$vPluginGormTools"
+    compile "org.grails:grails-plugin-controllers"
+    compile "org.grails.plugins:gorm-tools:$vPluginGormTools"
+    compile "org.grails.plugins:hibernate5"
+    compile "org.hibernate:hibernate-core:$versionHibernate"
+    compile "org.hibernate:hibernate-ehcache:$versionHibernate"
+    compile project(':angle-grinder')
     runtime "com.bertramlabs.plugins:asset-pipeline-grails:2.11.1"
     runtime 'com.bertramlabs.plugins:coffee-asset-pipeline:2.6.2'
     compile "org.grails.plugins:audit-trail:3.0.9"
     compile 'org.grails.plugins:joda-time:2.0.0'
-    console "org.grails:grails-console"
     testCompile "org.grails.plugins:build-test-data:3.0.1"
+    compile 'org.grails.plugins:spring-security-core:3.2.0.M1'
 
 }

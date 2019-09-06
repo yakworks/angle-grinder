@@ -22,10 +22,6 @@ dependencies {
   compile "org.grails.plugins:events"
   compile "org.codehaus.gpars:gpars:1.2.1"
 
-  compile "org.grails.plugins:hibernate5"
-  compile "org.hibernate:hibernate-core:$versionHibernate"
-  compile "org.hibernate:hibernate-ehcache:$versionHibernate"
-
   runtime "com.bertramlabs.plugins:asset-pipeline-grails:2.11.1"
   runtime 'com.bertramlabs.plugins:coffee-asset-pipeline:2.6.2'
 

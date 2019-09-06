@@ -100,7 +100,7 @@ class OrgController extends BaseDomainController {
     }
 
     def listUsers() {
-        def pager = new Pager(params)
+        def pager = new Pager(params as Map)
         def crit = User.createCriteria()
 
         def filters = params.filters ? JSON.parse(params.filters) : null

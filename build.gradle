@@ -7,21 +7,12 @@ buildscript {
   dependencies {
     classpath "org.grails:grails-gradle-plugin:$grailsVersion"
     classpath "com.bertramlabs.plugins:asset-pipeline-gradle:2.14.2"
-    classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
     classpath 'com.bertramlabs.plugins:coffee-asset-pipeline:2.14.2'
     classpath "org.yakworks:gradle-plugins:1.1.13"
   }
 }
 
-plugins {
-  id "com.palantir.configuration-resolver" version "0.2.0"
-  id "org.ajoberstar.git-publish" version "0.3.2"
-  id 'org.ajoberstar.grgit' version '2.1.1'
-  //id "pl.softmate.gradle-properties-yaml-plugin" version "0.0.2"
-}
-
 apply plugin: 'yakworks.shipyak' //our opinionated defaults for gradle groovy & grails projects
-//apply from: "$gradleDir/spotless.gradle"
 
 subprojects {
   plugins.withId('java') {
@@ -29,6 +20,8 @@ subprojects {
     targetCompatibility = '1.8'
 
     dependencies {
+      compile "org.grails.plugins:converters:3.3.1" //JSON converter
+      compile "org.grails:grails-plugin-controllers"
       testRuntime "com.h2database:h2"
       testRuntime "org.apache.tomcat:tomcat-jdbc"
 
@@ -37,7 +30,6 @@ subprojects {
       testCompile "org.grails.plugins:build-test-data:$versionBuildTestData"
       testCompile "org.grails:views-json-testing-support:$versionViews"
     }
-
   }
   configurations {
     testCompile.extendsFrom compileOnly //includes the compileOnly in tests too so we don't have to list twice
@@ -45,5 +37,8 @@ subprojects {
       resolutionStrategy.cacheChangingModulesFor 1, 'seconds' //when changing = true this sets the cache time
     }
   }
-
 }
+
+ext.codenarcRuleset= '''
+  //getRule('Println').enabled = false
+'''

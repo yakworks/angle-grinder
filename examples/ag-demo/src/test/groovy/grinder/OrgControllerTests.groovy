@@ -2,6 +2,7 @@ package agdemo
 
 import grails.testing.gorm.DataTest
 import grails.testing.web.controllers.ControllerUnitTest
+import spock.lang.Ignore
 import spock.lang.Specification
 
 class OrgControllerTests extends Specification implements DataTest, ControllerUnitTest<OrgController> {
@@ -38,6 +39,7 @@ class OrgControllerTests extends Specification implements DataTest, ControllerUn
          thirdOrg.num == third.num
     }
 
+    @Ignore
     void testListUsers() {
         given:
         Org firstOrg = new Org(id: 1, name: "GitHub", num: "111", city: "Seattle", orgShowCaseId: 1).save()
