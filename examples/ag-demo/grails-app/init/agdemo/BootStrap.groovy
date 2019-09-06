@@ -1,9 +1,10 @@
+import groovy.json.JsonSlurper
+
 import agdemo.Contact
 import agdemo.Org
 import agdemo.OrgRepo
 import agdemo.User
 import grails.core.GrailsApplication
-import groovy.json.JsonSlurper
 
 
 class BootStrap {

@@ -33,9 +33,9 @@ class UserRepo implements GormRepo<User> {
         }
     }
 
-	def parseDate(String dateName, def params){
-		if (params[dateName] && params[dateName] instanceof String) {
-			params[dateName] = IsoDateUtil.parse(params[dateName])
-		}
-	}
+    def parseDate(String dateName, def params){
+        if (params[dateName] && params[dateName] instanceof String) {
+            params[dateName] = IsoDateUtil.parse(params[dateName])
+        }
+    }
 }

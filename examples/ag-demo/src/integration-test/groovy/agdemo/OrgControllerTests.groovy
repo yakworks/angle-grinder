@@ -1,13 +1,14 @@
 package agdemo
 
+import org.springframework.web.context.request.RequestContextHolder
+import org.springframework.web.context.support.WebApplicationContextUtils
+
 import agdemo.Org
 import agdemo.OrgController
 import grails.converters.JSON
 import grails.testing.mixin.integration.Integration
 import grails.transaction.Rollback
 import grails.web.context.ServletContextHolder
-import org.springframework.web.context.request.RequestContextHolder
-import org.springframework.web.context.support.WebApplicationContextUtils
 import spock.lang.Ignore
 import spock.lang.Shared
 import spock.lang.Specification

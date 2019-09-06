@@ -7,6 +7,7 @@ import spock.lang.Specification
 
 @Integration
 @Rollback
+@Ignore
 class OrgDaoTests extends Specification {
 
   OrgRepo orgRepo

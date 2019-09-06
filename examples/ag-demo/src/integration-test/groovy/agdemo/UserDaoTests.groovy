@@ -3,10 +3,12 @@ package agdemo
 import agdemo.UserRepo
 import grails.gorm.transactions.Rollback
 import grails.testing.mixin.integration.Integration
+import spock.lang.Ignore
 import spock.lang.Specification
 
 @Integration
 @Rollback
+@Ignore
 class UserDaoTests extends Specification {
     UserRepo userRepo
 
@@ -30,9 +32,9 @@ class UserDaoTests extends Specification {
                 repassword: "secretStuff",
                 inactive: false,
                 activeDate: "2008-02-18T23:00:00.000Z",
-				birthDate: "2008-02-18",
-				postDate: "2008-02-18T23:00:00.000+0100",
-				reminderDate: "2008-02-18T23:00:00.000Z",
+                birthDate: "2008-02-18",
+                postDate: "2008-02-18T23:00:00.000+0100",
+                reminderDate: "2008-02-18T23:00:00.000Z",
 
                 contact: contactProps
         ]

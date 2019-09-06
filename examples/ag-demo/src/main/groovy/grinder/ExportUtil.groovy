@@ -1,9 +1,10 @@
 package agdemo
 
+import org.grails.core.artefact.DomainClassArtefactHandler
+
 import grails.core.GrailsDomainClass
 import grails.util.GrailsClassUtils
 import grails.util.Holders
-import org.grails.core.artefact.DomainClassArtefactHandler
 
 
 class ExportUtil {

@@ -1,5 +1,7 @@
 package agdemo
 
+import javax.annotation.PostConstruct
+
 import gorm.tools.Pager
 import gorm.tools.beans.BeanPathTools
 import gorm.tools.repository.GormRepo
@@ -9,8 +11,6 @@ import gorm.tools.repository.errors.EntityValidationException
 import grails.converters.JSON
 import grails.util.GrailsNameUtils
 import grails.validation.ValidationException
-
-import javax.annotation.PostConstruct
 
 abstract class BaseDomainController {
     def ajaxGrid = true

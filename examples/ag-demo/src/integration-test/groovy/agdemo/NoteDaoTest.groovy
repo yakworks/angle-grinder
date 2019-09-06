@@ -1,12 +1,13 @@
 package agdemo
 
-import agdemo.NoteRepo
 import grails.gorm.transactions.Rollback
 import grails.testing.mixin.integration.Integration
+import spock.lang.Ignore
 import spock.lang.Specification
 
 @Integration
 @Rollback
+@Ignore
 class NoteDaoTest extends Specification {
     NoteRepo noteRepo
 
