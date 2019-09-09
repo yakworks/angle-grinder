@@ -23,7 +23,7 @@ class TimeZoneTests extends Specification {
         name: "test",
        exampleLocalDate:IsoDateUtil.parseLocalDate("2008-02-18"),
        exampleDateTime:IsoDateUtil.parseLocalDateTime("2008-02-18T00:00:00.000"),
-       exampleDate:"2008-02-18T23:00:00.000Z"
+       exampleDate:"2008-02-18T00:00:00.000Z"
       ]
         def props = defaults << params
 
@@ -41,7 +41,7 @@ class TimeZoneTests extends Specification {
       then:
         2008 == cal.get(Calendar.YEAR)
         1 == cal.get(Calendar.MONTH)
-        19 == cal.get(Calendar.DAY_OF_MONTH)
+        18 == cal.get(Calendar.DAY_OF_MONTH)
 
         "2008-02-18" == org.exampleLocalDate.toString()
     }
