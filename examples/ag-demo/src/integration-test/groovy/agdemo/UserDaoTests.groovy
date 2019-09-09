@@ -1,19 +1,15 @@
 package agdemo
 
-import agdemo.UserRepo
 import grails.gorm.transactions.Rollback
 import grails.testing.mixin.integration.Integration
-import spock.lang.Ignore
 import spock.lang.Specification
 
 @Integration
 @Rollback
-@Ignore
 class UserDaoTests extends Specification {
     UserRepo userRepo
 
     void setup() {
-        userRepo = new UserRepo()
     }
 
     void testInsert() {
@@ -39,7 +35,7 @@ class UserDaoTests extends Specification {
                 contact: contactProps
         ]
 
-        def user = userRepo.insert(userProps).entity
+        def user = userRepo.create(userProps).entity
 
         assert user
         assertEquals "test-login", user.login

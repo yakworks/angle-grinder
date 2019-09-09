@@ -7,7 +7,7 @@ import spock.lang.Specification
 
 @Integration
 @Rollback
-@Ignore
+
 class NoteDaoTest extends Specification {
     NoteRepo noteRepo
 
@@ -20,7 +20,7 @@ class NoteDaoTest extends Specification {
                 org: org
         ]
 
-        def note = noteRepo.insert(props).entity
+        def note = noteRepo.create(props).entity
         assert note
     }
 }

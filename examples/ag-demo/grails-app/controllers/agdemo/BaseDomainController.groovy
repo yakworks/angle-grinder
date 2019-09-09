@@ -178,7 +178,7 @@ abstract class BaseDomainController {
 
     protected def saveDomain(p) {
         log.debug("saveDomain(${p})")
-        return repo.insert(p)
+        return repo.create(p)
     }
 
     def show(Long id) {
@@ -241,7 +241,7 @@ abstract class BaseDomainController {
 
     def saveOrUpdate() {
         try {
-            def result = params.id ? repo.update(params) : repo.insert(params)
+            def result = params.id ? repo.update(params) : repo.create(params)
             //all was good render a success save message
             render message(code: 'user.saved')
         } catch (EntityValidationException e) {

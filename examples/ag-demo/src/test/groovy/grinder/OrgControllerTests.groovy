@@ -39,7 +39,6 @@ class OrgControllerTests extends Specification implements DataTest, ControllerUn
          thirdOrg.num == third.num
     }
 
-    @Ignore
     void testListUsers() {
         given:
         Org firstOrg = new Org(id: 1, name: "GitHub", num: "111", city: "Seattle", orgShowCaseId: 1).save()

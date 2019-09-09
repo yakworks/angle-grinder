@@ -1,5 +1,6 @@
 package agdemo
 
+import agdemo.OrgRepo
 import grails.gorm.transactions.Rollback
 import grails.testing.mixin.integration.Integration
 import spock.lang.Ignore
@@ -7,7 +8,7 @@ import spock.lang.Specification
 
 @Integration
 @Rollback
-@Ignore
+
 class OrgDaoTests extends Specification {
 
   OrgRepo orgRepo
@@ -32,7 +33,7 @@ class OrgDaoTests extends Specification {
       orgShowCaseId: 1,
       addressDate  : "2008-02-18T23:00:00.000Z"
     ]
-    def org = orgRepo.insert(json).entity
+    def org = orgRepo.create(json)
     org.refresh()
 
     assert org
@@ -48,7 +49,6 @@ class OrgDaoTests extends Specification {
   }
 
   //XXX Fix when updated to use gorm-tools instead of Dao
-  @Ignore
   void testUpdate() {
     when:
     def json1 = [
@@ -64,7 +64,7 @@ class OrgDaoTests extends Specification {
       orgShowCaseId: 1
     ]
 
-    def org1 = orgRepo.insert(json1).entity
+    def org1 = orgRepo.create(json1 as Map)
 
     def json = [
       id           : org1.id,
@@ -80,7 +80,7 @@ class OrgDaoTests extends Specification {
       orgShowCaseId: 1,
       addressDate  : "2015-02-07"
     ]
-    def org = orgRepo.update(json).entity
+    def org = orgRepo.update(json)
 
 
     assert org
@@ -92,6 +92,6 @@ class OrgDaoTests extends Specification {
     then:
     2015 == cal.get(Calendar.YEAR)
     1 == cal.get(Calendar.MONTH)
-    6 == cal.get(Calendar.DAY_OF_MONTH)
+    7 == cal.get(Calendar.DAY_OF_MONTH)
   }
 }

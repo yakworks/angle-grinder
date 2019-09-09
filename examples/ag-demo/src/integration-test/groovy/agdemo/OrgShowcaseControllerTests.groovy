@@ -14,7 +14,6 @@ import spock.lang.Specification
 
 @Integration
 @Rollback
-@Ignore
 class OrgShowcaseControllerTests extends Specification {
 
   @Shared def controller

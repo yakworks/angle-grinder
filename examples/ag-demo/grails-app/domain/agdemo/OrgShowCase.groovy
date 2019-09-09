@@ -1,14 +1,14 @@
 package agdemo
 
 import java.time.LocalDate
-
+import java.time.LocalDateTime
 
 class OrgShowCase implements Serializable {
 
     String name
     Org org
-    Date exampleLocalDate = new Date()
-    Date exampleDateTime = new Date()
+    LocalDate exampleLocalDate = LocalDate.now()
+    LocalDateTime exampleDateTime = LocalDateTime.now()
     Date exampleDate = new Date()
 
     static mapping = {

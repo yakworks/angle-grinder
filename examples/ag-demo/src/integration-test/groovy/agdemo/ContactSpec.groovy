@@ -1,16 +1,11 @@
 package agdemo
 
-import agdemo.Contact
-import agdemo.ContactType
-import agdemo.Org
 import grails.gorm.transactions.Rollback
 import grails.testing.mixin.integration.Integration
-import spock.lang.Ignore
 import spock.lang.Specification
 
 @Integration
 @Rollback
-@Ignore
 class ContactSpec extends Specification {
 
   Map buildMap(Map extend){

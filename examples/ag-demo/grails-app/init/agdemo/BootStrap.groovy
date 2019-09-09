@@ -19,7 +19,7 @@ class BootStrap {
         def orgs = new JsonSlurper().parse(orgFile.getInputStream())
         orgs.each {
             it.description = (it.description.size() >= 255) ? it.description[0..254] : it.description
-            orgRepo.insert(it)
+            orgRepo.create(it)
         }
 
         def contacts = new JsonSlurper().parse(contactFile.getInputStream())
