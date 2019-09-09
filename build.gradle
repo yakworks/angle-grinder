@@ -6,7 +6,8 @@ buildscript {
   }
   dependencies {
     classpath "org.grails:grails-gradle-plugin:$grailsVersion"
-    classpath "com.bertramlabs.plugins:asset-pipeline-gradle:3.0.10"
+    classpath "com.bertramlabs.plugins:asset-pipeline-gradle:2.14.2"
+    classpath 'com.bertramlabs.plugins:coffee-asset-pipeline:2.14.2'
     classpath "org.yakworks:gradle-plugins:1.1.13"
   }
 }
