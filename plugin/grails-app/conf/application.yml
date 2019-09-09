@@ -6,6 +6,8 @@ grails:
     spring:
         transactionManagement:
             proxies: false
+    assets:
+        bundle: true #dont individually require files in development
     gorm:
           # Whether to autowire entities.
           # Disabled by default for performance reasons.

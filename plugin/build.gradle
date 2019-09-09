@@ -1,6 +1,6 @@
 apply plugin: "yakworks.grails-plugin"
 
-
+bootRepackage.enabled = false
 dependencies {
   console "org.grails:grails-console"
 
@@ -21,6 +21,7 @@ dependencies {
   compile "org.grails.plugins:events"
   compile "org.codehaus.gpars:gpars:1.2.1"
   compile 'com.bertramlabs.plugins:asset-pipeline-grails:3.0.11'
+  compile 'com.bertramlabs.plugins:coffee-asset-pipeline:3.0.11'
   //used for json parsing but require it to be added to project that uses this
   compileOnly "org.grails.plugins:views-json:$versionViews"
   compileOnly "org.grails.plugins:views-json-templates:$versionViews"
@@ -44,4 +45,9 @@ dependencies {
 bootRun {
     jvmArgs('-Dspring.output.ansi.enabled=always')
     addResources = true
+}
+
+
+assets {
+  packagePlugin = true
 }
