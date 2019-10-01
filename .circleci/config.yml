@@ -51,10 +51,6 @@ jobs:
           command: grunt test
 
       - run:
-          name: ✔︎ -- Spotless for now
-          command: ./gradlew spotlessApply --max-workers=2
-
-      - run:
           name: ✔︎ -- Checks Full Run Tests [gradle check]
           command: ./gradlew check --max-workers=2
 
