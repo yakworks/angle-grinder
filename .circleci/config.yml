@@ -54,6 +54,10 @@ jobs:
           name: ✔︎ -- Checks Full Run Tests [gradle check]
           command: ./gradlew check --max-workers=2
 
+      - run:
+          name: Update js code
+          command: ./script/update-ag-plugin
+
       - store_artifacts:
           path: plugin/build/reports/codenarc
           destination: codenarc/
