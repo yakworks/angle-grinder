@@ -42,10 +42,10 @@ jobs:
           paths: ["~/.m2", "~/.gradle"]
           key: v2-gradle-{{ checksum "cache-checksum.tmp" }}
 
-#      - run:
-#          name: ✔︎ npm install
-#          command: npm install
-#
+      - run:
+          name: ✔︎ npm install
+          command: npm install
+
 #      - run:
 #          name: ✔︎ -- Checks js Tests [gradle check]
 #          command: grunt test
