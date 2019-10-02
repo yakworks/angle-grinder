@@ -22,4 +22,32 @@ maven:
 
 
 spotless:
-  enabled: false
+  enabled: true
+  # default license header file to use
+  licenseHeader: ${'/* Copyright \$YEAR. ' + config.author + '. Licensed under the Apache License, Version 2.0 */'}
+  # licenseHeaderFile: # or you specify the file name of header file to use
+  groovy:
+    licenseHeader: $config.spotless.licenseHeader
+    indentWithSpaces: 4
+    trimTrailingWhitespace: true
+    endWithNewline: true
+    includes:
+      - 'src/main/groovy/**/*.groovy'
+      - 'grails-app/**/*.groovy'
+      - 'src/test/groovy/**/*.groovy'
+      - 'src/integration-test/groovy/**/*.groovy'
+    excludes:
+      - '**/*.java'
+      - '**/conf/**/*.groovy'
+      - 'node_modules/**/*.gradle'
+      # - 'grails-app/init/**/*.groovy'
+  groovyGradle:
+    indentWithSpaces: 2
+    trimTrailingWhitespace: true
+    endWithNewline: true
+    includes:
+      - '**/*.gradle'
+      - 'build.gradle'
+      - 'gradle/*.gradle'
+    excludes:
+      - 'node_modules/**/*.gradle'
