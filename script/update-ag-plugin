@@ -39,7 +39,6 @@ cd $ANGLE_GRINDER_DIR
 
 if [ $SKIP_DEPENDENCIES -eq 0 ]; then
   npm install
-  bower install
 else
   echo -n "\n=== Skipping dependencies installation ===\n"
 fi
