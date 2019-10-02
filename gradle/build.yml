@@ -22,7 +22,7 @@ maven:
 
 
 spotless:
-  enabled: true
+  enabled: false
   # default license header file to use
   licenseHeader: |
     ${'/*\n' +
