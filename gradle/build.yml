@@ -37,6 +37,8 @@ spotless:
     includes:
       - 'src/test/groovy/**/*.groovy'
       - 'src/integration-test/groovy/**/*.groovy'
+    excludes:
+      - 'node_modules/**/*.groovy'
   groovy:
     # licenseHeaderFile: # or you specify the file name of header file to use
     licenseHeader: $config.spotless.licenseHeader
