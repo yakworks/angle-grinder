@@ -114,7 +114,7 @@ module.exports = (grunt) ->
   ]
 
   grunt.registerTask "build:dist", [
-    "clean:dist"
+    #"clean:dist"
     #"test"
     "build:dev"
     "copy:dist"
