@@ -24,7 +24,7 @@ jobs:
 
       - run:
           name: cat build.gradle files for cache key
-          command: cat gradle.properties build.gradle plugin/build.gradle > cache-checksum.tmp
+          command: cat gradle.properties build.gradle plugin/build.gradle package.json> cache-checksum.tmp
 
       - restore_cache:
           keys:
@@ -39,7 +39,7 @@ jobs:
           command: ./gradlew classes
 
       - save_cache:
-          paths: ["~/.m2", "~/.gradle"]
+          paths: ["~/.m2", "~/.gradle", "node_modules"]
           key: v2-gradle-{{ checksum "cache-checksum.tmp" }}
 
       - run:
