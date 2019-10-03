@@ -71,8 +71,7 @@ module.exports = (grunt) ->
 
   grunt.registerTask "build:dev", [
     "clean:dev"
-    #"bower"
-    #"coffeelint"
+    "coffeelint"
     "coffee"
     "includes:example"
     "less"
@@ -114,7 +113,7 @@ module.exports = (grunt) ->
   ]
 
   grunt.registerTask "build:dist", [
-    #"clean:dist"
+    "clean:dist"
     #"test"
     "build:dev"
     "copy:dist"
