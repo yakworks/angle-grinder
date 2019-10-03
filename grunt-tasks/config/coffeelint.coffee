@@ -6,5 +6,7 @@ module.exports = (grunt) ->
       value: 120
       level: "warn"
 
-  app: ["Gruntfile.coffee", "<%= appConfig.app %>/scripts/**/*.coffee"]
-  test: ["<%= appConfig.test %>/**/*.coffee"]
+  app: ["Gruntfile.coffee", "<%= appConfig.app %>/scripts/**/*.coffee", "<%= appConfig.app %>/scripts/**/**/*.coffee"]
+  test:
+    files:
+      src:["<%= appConfig.test %>/**/*.coffee"]

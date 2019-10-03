@@ -26,7 +26,8 @@ module.exports = (grunt) ->
 
     # Compile CoffeeScript files to JavaScript
     coffee:         config "coffee"
-
+    # Lint your CoffeeScript using grunt.js and coffeelint
+    coffeelint:     config "coffeelint"
     # Compile LESS files to CSS
     less:           config "less"
     # Concatenate files
