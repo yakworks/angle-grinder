@@ -33,7 +33,7 @@
     "later": "*",
     "moment": ">=2.7.0",
     "angular-xeditable": "~0.1.9",
-    "lodash": "~2.4.1",
+    "lodash": "~3.0.0",
     "eonasdan-bootstrap-datetimepicker": "4.7.14",
     "angular-scroll": "~0.7.3",
     "angular-toastr": "~1.7.0",
