@@ -47,7 +47,7 @@ module.exports = (grunt) ->
     #Include example in index.html
     includes:        config "includes"
     # Grunt plugin for Bower
-    bower:          config "bower"
+    #bower:          config "bower"
     # Publish to GitHub pages
     "gh-pages":     config "gh-pages"
 
@@ -71,7 +71,7 @@ module.exports = (grunt) ->
 
   grunt.registerTask "build:dev", [
     "clean:dev"
-    "bower"
+    #"bower"
     "coffeelint"
     "coffee"
     "includes:example"
