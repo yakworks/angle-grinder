@@ -35,7 +35,7 @@ jobs:
 
       - save_cache:
           paths: ["~/.m2", "~/.gradle", "~/.grails"]
-          key: v1-dependencies-{{ checksum "plugin/grails-app/conf/BuildConfig.groovy" }}
+          key: v1-dependencies-{{ checksum "grails/ag-plugin/grails-app/conf/BuildConfig.groovy" }}
 
       - run:
           name: ✔︎ npm install
