@@ -25,7 +25,7 @@ jobs:
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "grails-app/conf/BuildConfig.groovy" }}
-            -
+
       # run compile twice, it fails the first time
       - run:
           name: grails compile
