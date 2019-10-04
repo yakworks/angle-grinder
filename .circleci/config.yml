@@ -24,7 +24,7 @@ jobs:
 
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "grails-app/conf/BuildConfig.groovy" }}
+            - v1-dependencies-{{ checksum "plugin/grails-app/conf/BuildConfig.groovy" }}
 
       # run compile twice, it fails the first time
       - run:
@@ -33,14 +33,9 @@ jobs:
             grails compile || true
             grails compile
 
-      # compiling as a seperate step before running check helps with the "finished with non-zero exit value 137" error
-      - run:
-          name: ✔︎ ------ Compile [gradle classes] ------
-          command: ./gradlew classes
-
       - save_cache:
           paths: ["~/.m2", "~/.gradle", "~/.grails"]
-          key: v1-dependencies-{{ checksum "grails-app/conf/BuildConfig.groovy" }}
+          key: v1-dependencies-{{ checksum "plugin/grails-app/conf/BuildConfig.groovy" }}
 
       - run:
           name: ✔︎ npm install
