@@ -30,6 +30,7 @@ jobs:
       - run:
           name: grails compile
           command: |
+            cd grails/ag-plugin
             grails compile || true
             grails compile
 
@@ -46,7 +47,9 @@ jobs:
           command: grunt test
 
       # run tests!
-      - run: grails -DB=rcm_9ci_test test-app
+      - run: |
+          cd grails/ag-plugin
+          grails test-app
 
       - run:
           name: Update js code
