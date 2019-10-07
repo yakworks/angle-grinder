@@ -45,7 +45,7 @@ jobs:
       - run:
           name: ✔︎ -- Checks js Tests [gradle check]
           command: |
-            npm install grunt-cli
+            npm install -g grunt-cli
             grunt test
 
       # run tests!
