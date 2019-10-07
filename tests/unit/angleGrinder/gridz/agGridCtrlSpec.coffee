@@ -1,3 +1,4 @@
+###
 describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
 
   beforeEach module "angleGrinder.gridz", ($provide) ->
@@ -599,3 +600,4 @@ describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
       args = xlsData.getCall(0).args
       expect(args[0]).to.eq "gridId"
       expect(args[1]).to.deep.eq [1, 2, 3]
+###

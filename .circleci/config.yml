@@ -5,11 +5,6 @@ jobs:
     docker:
       # docker image with python and mkdocs on it already as well, based on gradle:4.6-alpine
       - image: yakworks/alpine-node:grails256
-    #    branches:
-    #      only:
-    #        - master
-
-    # working_directory: ~/repo
 
     environment:
       GRADLE_OPTS: "-Xmx1536m -Dorg.gradle.daemon=false" #daemon false doesn't seem to get picked up by fork
@@ -35,7 +30,7 @@ jobs:
             grails compile
 
       - save_cache:
-          paths: ["~/.m2", "~/.gradle", "~/.grails"]
+          paths: ["~/.m2", "~/.grails", "node_modules"]
           key: v1-dependencies-{{ checksum "grails/ag-plugin/grails-app/conf/BuildConfig.groovy" }}
 
       - run:

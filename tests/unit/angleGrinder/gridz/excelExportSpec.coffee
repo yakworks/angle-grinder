@@ -91,10 +91,10 @@ describe "module: angleGrinder.gridz", ->
 
   describe "directive: agGridXlsExport", ->
 
-    # mock `$window.location.href` in order to avoid
-    # "Some of your tests did a full page reload!"
-    # mock `$window.navigator.userAgent` to avoid error
-    # "'undefined' is not an object (evaluating '$window.navigator.userAgent')"
+# mock `$window.location.href` in order to avoid
+# "Some of your tests did a full page reload!"
+# mock `$window.navigator.userAgent` to avoid error
+# "'undefined' is not an object (evaluating '$window.navigator.userAgent')"
     beforeEach module "angleGrinder.gridz", ($provide) ->
       $provide.value "$window",
         location: {}
@@ -116,8 +116,8 @@ describe "module: angleGrinder.gridz", ->
 
       # stub the grid instance
       $scope.$grid =
-            getXlsDataUri: -> "foo"
-            getSelectedRowIds: -> selectedRowIds
+        getXlsDataUri: -> "foo"
+        getSelectedRowIds: -> selectedRowIds
 
       {element, $scope} = compileTemplate """
         <a href="" ag-grid-xls-export>
@@ -133,27 +133,27 @@ describe "module: angleGrinder.gridz", ->
         before -> selectedRowIds = []
 
         it "displays the notification", inject (NotificationDialogServ) ->
-          # When
+# When
           element.click()
 
           # Then
           expect(NotificationDialogServ.open).to.be.called
           expect(NotificationDialogServ.open).to.be.calledWith("Please select at least one row.")
 
-     ### describe "when at least one row is selected", ->
-        before -> selectedRowIds = [1]
+### describe "when at least one row is selected", ->
+   before -> selectedRowIds = [1]
 
-        it "does the magic", inject ($window) ->
-          # When
-          element.click()
+   it "does the magic", inject ($window) ->
+     # When
+     element.click()
 
-          # Then
-          expect(document.getElementsByTagName("a")[0].href).to.eq "foo"
+     # Then
+     expect(document.getElementsByTagName("a")[0].href).to.eq "foo"
 
-        it "does not display notification", inject (NotificationDialogServ) ->
-          # When
-          element.click()
+   it "does not display notification", inject (NotificationDialogServ) ->
+     # When
+     element.click()
 
-          # Then
-          expect(NotificationDialogServ.open).to.not.be.called
+     # Then
+     expect(NotificationDialogServ.open).to.not.be.called
 ###
