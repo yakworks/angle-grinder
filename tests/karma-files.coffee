@@ -15,8 +15,8 @@ module.exports =
     { pattern: "node_modules/angular-scroll/angular-scroll.js"}
     { pattern: "node_modules/angular-ui-grid/ui-grid.js"}
 
-    { pattern: "plugin/grails-app/assets/angleGrinder/js/application.js"}
-    { pattern: "plugin/grails-app/assets/angleGrinder/js/modules/resources.js"}
+    { pattern: "grails/ag-plugin/grails-app/assets/angleGrinder/js/application.js"}
+    { pattern: "grails/ag-plugin/grails-app/assets/angleGrinder/js/modules/resources.js"}
 
     { pattern: "node_modules/free-jqgrid/js/grid.base.js"}
     { pattern: "node_modules/Select2/select2.js"}
