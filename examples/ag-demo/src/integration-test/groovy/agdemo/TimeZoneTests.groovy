@@ -1,40 +1,38 @@
 package agdemo
 
-import grails.converters.JSON
-import agdemo.ContactType
-import agdemo.Org
-import agdemo.OrgShowCase
-import agdemo.User
-import agdemo.UserDao
-import grails.test.mixin.integration.Integration
-import grails.transaction.Rollback
 import org.joda.time.DateTime
 import org.joda.time.DateTimeZone
-import org.joda.time.LocalDate
 import org.joda.time.format.DateTimeFormat
+
+import gorm.tools.beans.DateUtil
+import gorm.tools.beans.IsoDateUtil
+import grails.gorm.transactions.Rollback
+import grails.testing.mixin.integration.Integration
+import spock.lang.Ignore
 import spock.lang.Specification
 
 @Integration
 @Rollback
 class TimeZoneTests extends Specification {
-    def orgShowCaseDao
-	def tzf = DateTimeFormat.forPattern("ZZ")
-	def tz = DateTimeZone.getDefault()
+    OrgShowCaseRepo orgShowCaseRepo
+    def tzf = DateTimeFormat.forPattern("ZZ")
+    def tz = DateTimeZone.getDefault()
 
-	def orgShowCase(def exampleLocalDate="2008-02-18", def exampleDateTime=new DateTime(2008, 02, 18, 0,0,0,0),def exampleDate="2008-02-18T23:00:00.000Z") {
-		def props = [
-				name: "test",
-                exampleLocalDate: exampleLocalDate,
-                exampleDateTime: exampleDateTime,
-                exampleDate: exampleDate
-		]
+    def orgShowCase(Map params=[:]) {
+      Map defaults = [
+        name: "test",
+       exampleLocalDate:IsoDateUtil.parseLocalDate("2008-02-18"),
+       exampleDateTime:IsoDateUtil.parseLocalDateTime("2008-02-18T00:00:00.000"),
+       exampleDate:"2008-02-18T00:00:00.000Z"
+      ]
+        def props = defaults << params
 
-        orgShowCaseDao.insert(props).entity
-	}
+        orgShowCaseRepo.create(props)
+    }
 
     void testReturnedDateFormats() {
       when:
-		def org = orgShowCase()
+        OrgShowCase org = orgShowCase()
         assert org
 
         Calendar cal = Calendar.getInstance()
@@ -45,14 +43,14 @@ class TimeZoneTests extends Specification {
         1 == cal.get(Calendar.MONTH)
         18 == cal.get(Calendar.DAY_OF_MONTH)
 
-		    "2008-02-18" == org.exampleLocalDate.format("yyyy-MM-dd")
+        "2008-02-18" == org.exampleLocalDate.toString()
     }
 
   void testPostDateSpecifiedAsString() {
     when:
-		  def org = orgShowCase(exampleDateTime: "2008-02-18T23:00:00.000Z")
-		then:
+          def org = orgShowCase([exampleDateTime: IsoDateUtil.parseLocalDateTime("2008-02-18T23:00:00.000Z")])
+        then:
       org
-	}
+    }
 
 }

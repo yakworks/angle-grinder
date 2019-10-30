@@ -1,13 +1,10 @@
 package agdemo
 
-import grails.plugin.dao.DaoMessage
-import grails.plugin.dao.DaoUtil
-import grails.plugin.dao.DomainException
-import grails.plugin.dao.GormDaoSupport
+import gorm.tools.repository.GormRepo
 
-class OrgShowCaseDao extends GormDaoSupport {
-    Class domainClass = OrgShowCase
+class OrgShowCaseRepo implements GormRepo<OrgShowCase> {
 
+    /*
     Map insert(params) {
         def org = new OrgShowCase()
         persistWithParams(org, params)
@@ -31,6 +28,6 @@ class OrgShowCaseDao extends GormDaoSupport {
             e.meta = [org: org]
             throw e
         }
-    }
+    }*/
 
 }

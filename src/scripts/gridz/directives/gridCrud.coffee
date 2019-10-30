@@ -143,11 +143,15 @@ class @GridCrudCtrl
       return [promise, record]
 
     $scope.highlightCell = (rowid, colname) ->
-      grid().getGridEl().jqGrid('setCell', rowid, colname, "",  {"border-color": "green", "border-width": "thin", "border-style": "double"})
+      q = grid().getGridEl()
+      console.log q
+      q.jqGrid("setCell", rowid, colname, "",  {"border-color": "green", "border-width": "thin", "border-style": "double"})
       null
 
     $scope.unHighlightCell = (rowid, colname) ->
-      grid().getGridEl().jqGrid('setCell', rowid, colname, "",  {"border-width": "0px"})
+      q = grid().getGridEl()
+      console.log q
+      q.jqGrid("setCell", rowid, colname, "",  {"border-width": "0px"})
       null
 
     $scope.cancel = () ->

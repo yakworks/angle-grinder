@@ -15,7 +15,7 @@ describe "Directive: agSubmit", ->
     $scope.save = sinon.spy()
 
     element = angular.element """
-      <form name="testForm" ag-submit="save(item)">
+      <form id="testForm" name="testForm" ag-submit="save(item)">
         <input type="text" name="name" ng-model="item.name" ng-required="true"/>
         <button type="submit">Save</button>
       </form>
@@ -23,7 +23,7 @@ describe "Directive: agSubmit", ->
     element = $compile(element)($scope)
 
     clickSubmit = ->
-      element.find("button[type=submit]").click()
+      element.submit()
 
   describe "when the form is valid", ->
 

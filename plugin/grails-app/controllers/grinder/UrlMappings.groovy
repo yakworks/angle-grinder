@@ -1,3 +1,4 @@
+/* Copyright 2019. 9ci. Licensed under the Apache License, Version 2.0 */
 package grinder
 
 class UrlMappings {

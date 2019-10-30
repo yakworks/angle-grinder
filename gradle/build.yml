@@ -1,0 +1,53 @@
+# see defaults options https://github.com/yakworks/gradle-plugins/tree/master/src/main/resources/configs/defaults.yml
+title: Angle grinder
+description:
+author: 9ci
+group: nine
+
+github:
+  fullName: 9ci/angle-grinder
+
+team:
+  developers: ['basejump: Joshua Burnett', 'alexeyzvegintcev: Alexey Zvegintcev']
+
+bintray:
+  enabled: true
+  pkg:
+    repo: grails-plugins
+    userOrg: 9ci
+
+maven:
+  # repoUrl: http://repo.9ci.com/grails-plugins
+  snapshotUrl: http://repo.9ci.com/oss-snapshots
+
+
+spotless:
+  enabled: true
+  # default license header file to use
+  licenseHeader: ${'/* Copyright \$YEAR. ' + config.author + '. Licensed under the Apache License, Version 2.0 */'}
+  # licenseHeaderFile: # or you specify the file name of header file to use
+  groovy:
+    licenseHeader: $config.spotless.licenseHeader
+    indentWithSpaces: 4
+    trimTrailingWhitespace: true
+    endWithNewline: true
+    includes:
+      - 'src/main/groovy/**/*.groovy'
+      - 'grails-app/**/*.groovy'
+      - 'src/test/groovy/**/*.groovy'
+      - 'src/integration-test/groovy/**/*.groovy'
+    excludes:
+      - '**/*.java'
+      - '**/conf/**/*.groovy'
+      - 'node_modules/**/*.gradle'
+      # - 'grails-app/init/**/*.groovy'
+  groovyGradle:
+    indentWithSpaces: 2
+    trimTrailingWhitespace: true
+    endWithNewline: true
+    includes:
+      - '**/*.gradle'
+      - 'build.gradle'
+      - 'gradle/*.gradle'
+    excludes:
+      - 'node_modules/**/*.gradle'

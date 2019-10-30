@@ -1,10 +1,9 @@
 package agdemo
 
-import grails.test.mixin.TestFor
+import grails.testing.gorm.DomainUnitTest
 import spock.lang.Specification
 
-@TestFor(User)
-class UserTests extends Specification{
+class UserTests extends Specification implements DomainUnitTest<User> {
 
     void setup() {
       def existingUser = new User(login: "test")

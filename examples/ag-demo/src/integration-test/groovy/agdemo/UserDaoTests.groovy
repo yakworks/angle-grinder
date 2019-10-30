@@ -1,20 +1,15 @@
 package agdemo
-import grails.converters.JSON
-import agdemo.ContactType
-import agdemo.Org
-import agdemo.User
-import agdemo.UserDao
-import grails.test.mixin.integration.Integration
-import grails.transaction.Rollback
+
+import grails.gorm.transactions.Rollback
+import grails.testing.mixin.integration.Integration
 import spock.lang.Specification
 
 @Integration
 @Rollback
 class UserDaoTests extends Specification {
-    def userDao
+    UserRepo userRepo
 
     void setup() {
-        userDao = new UserDao()
     }
 
     void testInsert() {
@@ -33,14 +28,14 @@ class UserDaoTests extends Specification {
                 repassword: "secretStuff",
                 inactive: false,
                 activeDate: "2008-02-18T23:00:00.000Z",
-				birthDate: "2008-02-18",
-				postDate: "2008-02-18T23:00:00.000+0100",
-				reminderDate: "2008-02-18T23:00:00.000Z",
+                birthDate: "2008-02-18",
+                postDate: "2008-02-18T23:00:00.000+0100",
+                reminderDate: "2008-02-18T23:00:00.000Z",
 
                 contact: contactProps
         ]
 
-        def user = userDao.insert(userProps).entity
+        def user = userRepo.create(userProps).entity
 
         assert user
         assertEquals "test-login", user.login
@@ -90,7 +85,7 @@ class UserDaoTests extends Specification {
         ]
 
         // When
-        userDao.update(params)
+        userRepo.update(params)
         user.refresh()
 
         // Then the contact should be changed

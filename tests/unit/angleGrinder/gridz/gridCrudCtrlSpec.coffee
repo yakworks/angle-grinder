@@ -15,6 +15,8 @@ describe "module:angleGrinder.gridz controller: gridCrudCtrl", ->
     grid =
       saveRow: sinon.stub()
       getGridEl: ()->
+        jqGrid: ()->
+          {}
         getGridParam: ()->
           {colModel: [{name: "name_1"}, {name: "name_2"}, {name: "name_3"}]}
     parentScope.grid = grid

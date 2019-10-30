@@ -1,30 +1,18 @@
-# Java Gradle CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/language-java/ for more details
-#
-version: 2
+# circleCI build file
+version: 2.1
 jobs:
   build:
     docker:
-      # specify the version you desire here
-      - image: dock9/oraclejdk8:gradle-3.5.1
+      # docker image with python and mkdocs on it already as well, based on gradle:4.6-alpine
+      - image: yakworks/alpine-node-gradle:1
+    #    branches:
+    #      only:
+    #        - master
 
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/postgres:9.4
-
-#    branches:
-#      only:
-#        - master
-
-    working_directory: ~/repo
+    # working_directory: ~/repo
 
     environment:
-      # Customize the JVM maximum heap limit
-      # JVM_OPTS: -Xmx3200m
-      MALLOC_ARENA_MAX: 2
-      GRADLE_OPTS: "-Xmx2048m -Dorg.gradle.daemon=false"
+      GRADLE_OPTS: "-Xmx1536m -Dorg.gradle.daemon=false" #daemon false doesn't seem to get picked up by fork
       TERM: dumb
 
     parallelism: 1
@@ -32,53 +20,74 @@ jobs:
 
     steps:
       - checkout
-
       # Download and cache dependencies
+
+      - run:
+          name: cat build.gradle files for cache key
+          command: cat gradle.properties build.gradle plugin/build.gradle package.json> cache-checksum.tmp
+
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "build.gradle" }}
+            - gradle-{{ checksum "cache-checksum.tmp" }}
+      - run:
+          name: ✔︎ Downloads Dependencies [gradle resolveConfigurations]
+          command: ./gradlew resolveConfigurations
 
-      # see https://github.com/palantir/gradle-configuration-resolver-plugin
-      - run: gradle resolveConfigurations
-      #- run: ./gradlew test-app:dependencies
+      # compiling as a seperate step before running check helps with the "finished with non-zero exit value 137" error
+      - run:
+          name: ✔︎ ------ Compile [gradle classes] ------
+          command: ./gradlew classes
 
       - save_cache:
-          paths:
-            - ~/.m2
-            - ~/.gradle
-          key: v1-dependencies-{{ checksum "build.gradle" }}
+          paths: ["~/.m2", "~/.gradle", "node_modules"]
+          key: v2-gradle-{{ checksum "cache-checksum.tmp" }}
 
-      - add_ssh_keys:
-          fingerprints:
-            - "32:15:5c:47:98:e9:3f:09:f9:32:c9:22:00:cc:15:9a"
+      - run:
+          name: ✔︎ npm install
+          command: npm install
 
-      # run tests!
-      # - run: gradle clean; gradle gorm-tools:check --no-daemon --max-workers 2
-      - run: ./.circleci/build.sh
+      - run:
+          name: ✔︎ -- Checks js Tests [gradle check]
+          command: grunt test
 
+      - run:
+          name: ✔︎ -- Checks Full Run Tests [gradle check]
+          command: ./gradlew check --max-workers=2
+
+      - run:
+          name: Update js code
+          command: ./script/update-ag-plugin
+
+      - store_artifacts:
+          path: plugin/build/reports/codenarc
+          destination: codenarc/
       - store_artifacts:
           path: plugin/build/reports/tests/test/
-          destination: test-reports/unit/
-
+          destination: unit/
       - store_artifacts:
-          path: plugin/build/reports/codenarc/
-          destination: codenarc/
-
+          path: examples/test-app/build/reports/tests
+          destination: test-app/
       - store_test_results:
           path: plugin/build/test-results
-
-      # - run: gradle test-app:check --no-daemon --max-workers 2
-
-      - store_artifacts:
-          path: examples/ag-demo/build/reports/tests/test
-          destination: test-reports/ag-demo/unit
-
-      - store_artifacts:
-          path: examples/ag-demo/build/reports/tests
-          destination: test-reports/ag-demo/integration
-
       - store_test_results:
-          path: examples/ag-demo/build/test-results
+          path: examples/test-app/build/test-results
+
+      ### Finally do the build and publish. ciPublish will check if this is a PR or on a branch that should not be published
+      - compare-url/reconstruct # orb to make the CIRCLE_COMPARE_URL when using workflows
+      - run:
+          name: ✔︎ -- Publish plugin if needed [gradle ciPublish]
+          command: |
+            CIRCLE_COMPARE_URL=$(cat CIRCLE_COMPARE_URL.txt)
+            ./gradlew ciPublish --no-daemon
+
+orbs:
+  compare-url: iynere/compare-url@1.1.0
+
+workflows:
+  version: 2.1
+  build-flow:
+    jobs:
+      - build:
+          context: 9cibot-context #context with shared ENV vars
 
 
-      # - run: ./.circleci/publish.sh

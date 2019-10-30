@@ -1,19 +1,17 @@
 package agdemo
 
-import agdemo.Org
-import agdemo.NoteDao
-import grails.test.mixin.integration.Integration
-import grails.transaction.Rollback
+import grails.gorm.transactions.Rollback
+import grails.testing.mixin.integration.Integration
+import spock.lang.Ignore
 import spock.lang.Specification
 
 @Integration
 @Rollback
+
 class NoteDaoTest extends Specification {
-    def noteDao
+    NoteRepo noteRepo
 
-
-
-    void test_insert() {
+  void test_insert() {
         def org = Org.findByName("9ci")
         Map demo = Note.build().properties
         def props = [
@@ -22,7 +20,7 @@ class NoteDaoTest extends Specification {
                 org: org
         ]
 
-        def note = noteDao.insert(props).entity
+        def note = noteRepo.create(props).entity
         assert note
     }
 }

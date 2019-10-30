@@ -1,10 +1,9 @@
 package agdemo
 
-import grails.test.mixin.TestFor
+import grails.testing.gorm.DomainUnitTest
 import spock.lang.Specification
 
-@TestFor(Contact)
-class ContactTests extends Specification{
+class ContactTests extends Specification implements DomainUnitTest<Contact>{
 
     void testValidate() {
       when:

@@ -1,23 +1,24 @@
 package agdemo
 
+import javax.annotation.PostConstruct
+
+import gorm.tools.Pager
+import gorm.tools.beans.BeanPathTools
+import gorm.tools.repository.GormRepo
+import gorm.tools.repository.RepoMessage
+import gorm.tools.repository.RepoUtil
+import gorm.tools.repository.errors.EntityValidationException
 import grails.converters.JSON
-import grails.plugin.dao.DaoMessage
-import grails.plugin.dao.DomainException
-import grails.util.GrailsClassUtils
 import grails.util.GrailsNameUtils
 import grails.validation.ValidationException
-import gorm.tools.beans.BeanPathTools
-import gorm.tools.Pager
-
-import javax.annotation.PostConstruct
 
 abstract class BaseDomainController {
     def ajaxGrid = true
-
+    abstract domainClass
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
-    protected getDao() {
-        domainClass.dao
+    protected GormRepo getRepo() {
+        domainClass.repo
     }
 
     @PostConstruct
@@ -29,7 +30,7 @@ abstract class BaseDomainController {
         if (!suffix) {
             suffix = ''
         }
-        def propName = GrailsClassUtils.getPropertyNameRepresentation(domainClass)
+        def propName = GrailsNameUtils.getPropertyNameRepresentation(domainClass)
         "${propName}${suffix}"
     }
 
@@ -86,7 +87,7 @@ abstract class BaseDomainController {
     def listhtml(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         def pageData = pagedList(listCriteria())
-        def propName = GrailsClassUtils.getPropertyNameRepresentation(domainClass)
+        def propName = GrailsNameUtils.getPropertyNameRepresentation(domainClass)
         return [("${propName}List".toString()): pageData.data, ("${propName}ListTotal".toString()): pageData.recordCount]
     }
 
@@ -100,7 +101,7 @@ abstract class BaseDomainController {
     def edit(Long id) {
         def domainInstance = domainClass.get(id)
         if (!domainInstance) {
-            flash.message = DaoMessage.notFound(GrailsClassUtils.getShortName(domainClass), params)
+            flash.message = RepoMessage.notFound(GrailsNameUtils.getShortName(domainClass), params)
             redirect(action: "list")
             return
         } else {
@@ -153,7 +154,7 @@ abstract class BaseDomainController {
         def responseJson = [:]
         try {
             def p = BeanPathTools.flattenMap(request, request.JSON)
-            def result = p.id ? dao.update(p) : saveDomain(p)
+            def result = p.id ? repo.update(p) : saveDomain(p)
             render ExportUtil.buildMapFromPaths(result.entity, selectFields) as JSON
             return
         } catch (ValidationException e) {
@@ -177,7 +178,7 @@ abstract class BaseDomainController {
 
     protected def saveDomain(p) {
         log.debug("saveDomain(${p})")
-        return dao.insert(p)
+        return repo.create(p)
     }
 
     def show(Long id) {
@@ -208,7 +209,7 @@ abstract class BaseDomainController {
     protected def showDomain(Long id) {
         def domainInstance = domainClass.get(id)
         if (!domainInstance) {
-            throw new DomainException(DaoMessage.notFound(GrailsClassUtils.getShortName(domainClass), params), null)
+            throw new EntityValidationException(RepoMessage.notFound(GrailsNameUtils.getShortName(domainClass), params), null)
         }
         return domainInstance
     }
@@ -233,17 +234,17 @@ abstract class BaseDomainController {
     protected def updateDomain(opts = null) {
         params.remove('companyId')
         log.debug "updateDomain with ${params}"
-        def res = dao.update(params)
-        if (opts?.flush) DaoUtil.flush()
+        def res = repo.update(params)
+        if (opts?.flush) RepoUtil.flush()
         return res
     }
 
     def saveOrUpdate() {
         try {
-            def result = params.id ? dao.update(params) : dao.insert(params)
+            def result = params.id ? repo.update(params) : repo.create(params)
             //all was good render a success save message
             render message(code: 'user.saved')
-        } catch (DomainException e) {
+        } catch (EntityValidationException e) {
             response.status = 409
             def emsg = (e.hasProperty("messageMap")) ? g.message(code: e.messageMap?.code, args: e.messageMap?.args, default: e.messageMap?.defaultMessage) : null
             render(template: "userEdit", model: [user: e.meta?.user ?: e.entity, errorMsg: emsg])
@@ -261,7 +262,7 @@ abstract class BaseDomainController {
         try {
             def result = null
             commonParams = (request.format == 'json' ? request.JSON : params) // get the appropriate params based on request format
-            result = dao.remove(commonParams)
+            result = repo.removeById(commonParams.id)
             flash.message = result.message
             withFormat {
                 html {
@@ -290,7 +291,7 @@ abstract class BaseDomainController {
 
         def responseJson = [:]
         try {
-            def result = dao.remove(params)
+            def result = repo.removeById(params.id)
             render result as JSON
         } catch (ValidationException e) {
             log.debug("saveJson with error")
@@ -305,7 +306,7 @@ abstract class BaseDomainController {
     }
 
     protected def deleteDomain() {
-        return dao.remove(params)
+        return repo.removeById(params.id)
     }
 
     protected buildMsg(msgMap) {

@@ -28,7 +28,6 @@ module.exports = (grunt) ->
     coffee:         config "coffee"
     # Lint your CoffeeScript using grunt.js and coffeelint
     coffeelint:     config "coffeelint"
-
     # Compile LESS files to CSS
     less:           config "less"
     # Concatenate files
@@ -49,7 +48,7 @@ module.exports = (grunt) ->
     #Include example in index.html
     includes:        config "includes"
     # Grunt plugin for Bower
-    bower:          config "bower"
+    #bower:          config "bower"
     # Publish to GitHub pages
     "gh-pages":     config "gh-pages"
 
@@ -73,7 +72,6 @@ module.exports = (grunt) ->
 
   grunt.registerTask "build:dev", [
     "clean:dev"
-    "bower"
     "coffeelint"
     "coffee"
     "includes:example"
@@ -117,7 +115,7 @@ module.exports = (grunt) ->
 
   grunt.registerTask "build:dist", [
     "clean:dist"
-    "test"
+    #"test"
     "build:dev"
     "copy:dist"
     "includes:example"

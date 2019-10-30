@@ -42,7 +42,7 @@ class User implements Serializable {
     static constraints = {
         login blank: false, nullable: false, unique: true, maxSize: 50
         passwd blank: false, nullable: false, maxSize: 50, bindable: false
-        contact nullable: false
+        contact nullable: false, bindable:true
         passwordChangedDate nullable: true, bindable: false
         mustChangePassword bindable: false
     }

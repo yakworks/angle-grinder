@@ -3,7 +3,7 @@ module.exports = (grunt) ->
 
   install:
     options:
-      targetDir: "<%= appConfig.dev %>/components"
+      targetDir: "<%= appConfig.dev %>"
       layout: "byComponent"
       cleanTargetDir: true
       install: false
