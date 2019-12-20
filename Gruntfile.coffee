@@ -15,6 +15,7 @@ module.exports = (grunt) ->
     dev: "build"
     docs: "docs"
     tmp: ".tmp"
+    node: "node_modules"
     components: "components"
 
   grunt.initConfig
@@ -72,7 +73,7 @@ module.exports = (grunt) ->
 
   grunt.registerTask "build:dev", [
     "clean:dev"
-    "coffeelint"
+    #"coffeelint"
     "coffee"
     "includes:example"
     "less"
@@ -116,6 +117,7 @@ module.exports = (grunt) ->
   grunt.registerTask "build:dist", [
     "clean:dist"
     #"test"
+    "copy:node"
     "build:dev"
     "copy:dist"
     "includes:example"

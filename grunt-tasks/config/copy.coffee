@@ -58,6 +58,19 @@ module.exports = (grunt) ->
       src: "resources.js"
     ]
 
+
+  node:
+    files: [
+      expand: true
+      cwd: "<%= appConfig.node %>"
+      dest: "<%= appConfig.components %>"
+      src: [
+        "**/*.js"
+        "**/*.css"
+        "**/*.less"
+      ]
+    ]
+
   dist:
     files: [
       expand: true
