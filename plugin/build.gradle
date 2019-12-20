@@ -1,4 +1,5 @@
 apply plugin: "yakworks.grails-plugin"
+apply plugin: 'asset-pipeline'
 
 bootRepackage.enabled = false
 dependencies {
