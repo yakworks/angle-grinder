@@ -324,7 +324,7 @@ class Gridz {
     } = this;
 
     let actionMenu = "";
-    if (options.actionPopup.resetSelection? && (options.actionPopup.resetSelection !== false)) {
+    if (_.isNil(options.actionPopup.resetSelection) && (options.actionPopup.resetSelection !== false)) {
       options.actionPopup.resetSelection = true;
     }
 

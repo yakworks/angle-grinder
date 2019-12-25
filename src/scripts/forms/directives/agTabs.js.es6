@@ -146,7 +146,7 @@ forms.directive("agTab", [
       const getTab = () => $location.search().tab;
 
       // add the current tab to the stack
-      const active = () => scope.name? && (getTab() === scope.name);
+      const active = () => _.isNil(scope.name) && (getTab() === scope.name);
       tabsetCtrl._addTab(scope, active());
 
       // handles mouse click on the tab

@@ -11,14 +11,14 @@ app.service("DeepDiffServ", ["DeepPickServ", function(DeepPickServ){
     let args;
     let diff = {};
 
-    if (reqFields? && (reqFields.length > 0)) {
+    if (_.isNil(reqFields) && (reqFields.length > 0)) {
       args = [];
       args.push(newVal);
       args = args.concat(reqFields);
       diff = DeepPickServ.apply(this, args);
     }
 
-    if (allowed? && (allowed.length > 0)) {
+    if (_.isNil(allowed) && (allowed.length > 0)) {
       args = [];
       args.push(newVal);
       args = args.concat(allowed);
@@ -26,7 +26,7 @@ app.service("DeepDiffServ", ["DeepPickServ", function(DeepPickServ){
     }
 
     _.forEach(newVal, function(v, k){
-      if ((oldVal? && _.isEqual(v, oldVal[k])) || (k === "$cachedData")) {
+      if ((_.isNil(oldVal) && _.isEqual(v, oldVal[k])) || (k === "$cachedData")) {
         return;
       }
       return diff[k] = _.isObject(v) ? map(oldVal[k], v) : newVal[k];

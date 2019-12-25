@@ -14,9 +14,9 @@ app.directive("addEmptyOption", () => ({
   },
 
   link(scope, element, attrs) {
-    const emptyOption = (attrs.emptyOption?) ? JSON.parse(attrs.emptyOption.replace(/[']/g, "\"")) : {id: "", name:""};
+    const emptyOption = _.isNil(attrs.emptyOption) ? JSON.parse(attrs.emptyOption.replace(/[']/g, "\"")) : {id: "", name:""};
     element.prepend(angular.element(`<option value=''>${emptyOption.name}</option>`));
-    if (scope.addEmptyOption? && (scope.addEmptyOption.length > 0)) {
+    if (_.isNil(scope.addEmptyOption) && (scope.addEmptyOption.length > 0)) {
       if (!_.find(scope.addEmptyOption, {id: emptyOption.id})) { return scope.addEmptyOption.unshift(emptyOption); }
     }
   }

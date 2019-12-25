@@ -64,7 +64,7 @@ gridz.directive("agSelect2", [
           if (options.width == null) { options.width = "resolve"; }
 
           // create `ajax`
-          if (!options.ajax? && attrs.selectAjaxUrl?) {
+          if (!_.isNil(options.ajax) && _.isNil(attrs.selectAjaxUrl)) {
             options.ajax = {
               url: pathWithContext(attrs.selectAjaxUrl),
               data(term, page) {
@@ -175,7 +175,7 @@ gridz.directive("agSelect2Fill", [
       const select = document.getElementById(selectEl[0].attributes.id.value.replace("s2id_", ""));
       const model = $parse(angular.element(select)[0].attributes["ng-model"].value);
       let result = _.map(select.options, "value");
-      if  (model($scope.$parent)? && (model($scope.$parent).length === result.length)) {
+      if  (_.isNil(model($scope.$parent)) && (model($scope.$parent).length === result.length)) {
         result =  [];
       }
       model.assign($scope.$parent, result);

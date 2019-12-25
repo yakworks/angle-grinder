@@ -44,7 +44,7 @@ app.provider("pathWithContext", function() {
       "urlBuilder", urlBuilder => (function(path, params) {
       // build a path with the context
       if (params == null) { params = {}; }
-      path = _.filter([contextPath, sanitizePath(path)], part => part? && (part !== "/")).join("");
+      path = _.filter([contextPath, sanitizePath(path)], part => _.isNil(part) && (part !== "/")).join("");
       // append query string from the given params
       return urlBuilder(path, params);
     })
