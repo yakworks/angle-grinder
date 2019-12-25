@@ -26,7 +26,7 @@ forms.directive("agTabset", [
         $scope.contentLoading = false;
 
         // return the current tab
-        $scope.currentTab = () => _.findWhere($scope.tabs, {selected: true});
+        $scope.currentTab = () => _.find($scope.tabs, {selected: true});
 
         // return the current template url
         $scope.currentTemplateUrl = function() {
@@ -53,7 +53,7 @@ forms.directive("agTabset", [
         this.openTab = function(name) {
           const deferred = $q.defer();
           // find the tab by name
-          const tab = _.findWhere($scope.tabs, { name });
+          const tab = _.find($scope.tabs, { name });
 
           // do nothing when the tab cannot be found
           if (!tab?) { return deferred.promise; }

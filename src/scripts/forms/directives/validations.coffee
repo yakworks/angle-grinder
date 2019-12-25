@@ -15,7 +15,7 @@ forms.directive "match", ["isEmpty", (isEmpty) ->
   require: "ngModel"
   link: (scope, elem, attrs, modelCtrl) ->
     validateEqual = (value, otherValue) ->
-      allEmpty = _.all [isEmpty(value), isEmpty(otherValue)]
+      allEmpty = _.every [isEmpty(value), isEmpty(otherValue)]
       valid = allEmpty or value is otherValue
 
       modelCtrl.$setValidity "mismatch", valid
@@ -84,7 +84,7 @@ forms.directive "agFieldGroup", [
           # true if the field is invalid or it has server side errors
           invalid = _.map fields, (field) -> formCtrl[field]?.$invalid or formCtrl.$serverErrors?[field]
 
-          if _.any(invalid)
+          if _.some(invalid)
             element.addClass("has-error")
           else
             element.removeClass("has-error")

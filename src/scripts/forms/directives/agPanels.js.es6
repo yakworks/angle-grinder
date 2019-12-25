@@ -47,7 +47,7 @@ forms.directive("agPanelsRow", [
         // returns true when all panels are equalized
         this.allEqual = function() {
           const heights = _.chain(this.panels).map(el => getHeight(el)).value();
-          return _.all(heights, height => height === heights[0]);
+          return _.every(heights, height => height === heights[0]);
         };
 
         this.equalize = function() {

@@ -32,7 +32,7 @@ this.BaseCtrl = class BaseCtrl {
     return _.chain(members).map(field => [field, this[field]]).each((...args) => {
       const [field, entity] = Array.from(args[0]);
       return $scope[field] = typeof entity === "function" ? _.bind(entity, this) : entity;
-    });
+    }).value();
   }
 
   constructor(...dependencies) {

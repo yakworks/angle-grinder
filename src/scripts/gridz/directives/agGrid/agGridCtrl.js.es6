@@ -243,7 +243,7 @@ var AgGridCtrl = (function() {
 
     // Returns `true` if a columnt with the given id is hidden
     isColumnHidden(columnId) {
-      const column = _.findWhere(this.getParam("colModel"), {name: columnId});
+      const column = _.find(this.getParam("colModel"), {name: columnId});
       return column?.hidden;
     }
 

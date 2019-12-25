@@ -194,7 +194,7 @@ class AgGridCtrl extends BaseCtrl
 
   # Returns `true` if a columnt with the given id is hidden
   isColumnHidden: (columnId) ->
-    column = _.findWhere(@getParam("colModel"), name: columnId)
+    column = _.find(@getParam("colModel"), name: columnId)
     column?.hidden
 
   # Toggle visibility of a column with the given id

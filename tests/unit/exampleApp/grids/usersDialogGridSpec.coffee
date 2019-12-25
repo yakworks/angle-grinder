@@ -35,7 +35,7 @@ describe "module: exampleApp.grids", ->
 
       it "has valid `birthday` date formatter", inject (usersDialogGrid) ->
         colModel = usersDialogGrid().colModel
-        birthdayCol = _.findWhere(colModel, name: "birthday")
+        birthdayCol = _.find(colModel, name: "birthday")
 
         expect(birthdayCol).to.not.be.undefined
         expect(birthdayCol.formatter).to.eq "date"

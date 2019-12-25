@@ -34,7 +34,7 @@ common.factory("pendingRequests", [
 
     // Returns true if a http request with the given method is in progress
     pendingRequests.for = function(...httpMethods) {
-      const requests = _.filter($http.pendingRequests, request => _.contains(httpMethods, request.method));
+      const requests = _.filter($http.pendingRequests, request => _.includes(httpMethods, request.method));
       return requests.length > 0;
     };
 

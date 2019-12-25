@@ -67,7 +67,7 @@ gridz.directive "agSelect2", [
           options.formatResult ?= (item) ->
 
             options = interpolate: /\{\{(.+?)\}\}/g
-            angular.element(_.template(resultTemplate, { item: item }, options))
+            angular.element(_.template(resultTemplate, options)({ item: item }))
 
         # create default `formatSelection` method
         options.formatSelection ?= (item) -> item.name
@@ -132,7 +132,7 @@ gridz.directive "agSelect2Fill", [
         selectEl = $element.parent().find(".select2-container")
         select = document.getElementById(selectEl[0].attributes.id.value.replace("s2id_", ""))
         model = $parse(angular.element(select)[0].attributes["ng-model"].value)
-        result = _.pluck(select.options, "value")
+        result = _.map(select.options, "value")
         if  model($scope.$parent)? and model($scope.$parent).length is result.length
           result =  []
         model.assign $scope.$parent, result

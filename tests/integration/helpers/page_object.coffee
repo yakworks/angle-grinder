@@ -65,7 +65,7 @@ class PageObject
     d = protractor.promise.defer()
 
     @el.getAttribute("class").then (cls) ->
-      d.fulfill _.contains(cls.split(" "), expected)
+      d.fulfill _.includes(cls.split(" "), expected)
 
     d.promise
 

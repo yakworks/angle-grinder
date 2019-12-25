@@ -76,7 +76,7 @@ gridz.service "gridData", [
           rowEl = $(tr)
 
           id = rowEl.attr("id")
-          el.find("tr##{id}").remove() unless _.include selectedIds, id
+          el.find("tr##{id}").remove() unless _.includes selectedIds, id
 
       el.html()
 

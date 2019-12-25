@@ -35,7 +35,7 @@ forms.directive "agPanelsRow", [
       # returns true when all panels are equalized
       @allEqual = ->
         heights = _.chain(@panels).map((el) -> getHeight(el)).value()
-        _.all(heights, (height) -> height is heights[0])
+        _.every(heights, (height) -> height is heights[0])
 
       @equalize = ->
         return if @allEqual()

@@ -28,7 +28,7 @@ common.factory "pendingRequests", [
     # Returns true if a http request with the given method is in progress
     pendingRequests.for = (httpMethods...) ->
       requests = _.filter $http.pendingRequests, (request) ->
-        _.contains httpMethods, request.method
+        _.includes httpMethods, request.method
       requests.length > 0
 
     pendingRequests

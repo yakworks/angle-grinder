@@ -3,7 +3,7 @@ module.exports =
   # list of files / patterns to load in the browser
   files: [
     { pattern: "node_modules/jquery/dist/jquery.js"}
-    { pattern: "node_modules/lodash/dist/lodash.js"}
+    { pattern: "node_modules/lodash/lodash.js"}
     { pattern: "node_modules/phantomjs-polyfill/bind-polyfill.js"}
 
     { pattern: "node_modules/angular/angular.js"}

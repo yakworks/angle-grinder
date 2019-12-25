@@ -86,7 +86,7 @@ gridz.service("gridData", [
           const rowEl = $(tr);
 
           const id = rowEl.attr("id");
-          if (!_.include(selectedIds, id)) { return el.find(`tr#${id}`).remove(); }
+          if (!_.includes(selectedIds, id)) { return el.find(`tr#${id}`).remove(); }
         });
       }
 

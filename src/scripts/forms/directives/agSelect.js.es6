@@ -94,7 +94,7 @@ gridz.directive("agSelect2", [
             if (options.formatResult == null) { options.formatResult = function(item) {
 
               options = {interpolate: /\{\{(.+?)\}\}/g};
-              return angular.element(_.template(resultTemplate, { item }, options));
+              return angular.element(_.template(resultTemplate, options)({ item }));
             }; }
           }
 
@@ -174,7 +174,7 @@ gridz.directive("agSelect2Fill", [
       const selectEl = $element.parent().find(".select2-container");
       const select = document.getElementById(selectEl[0].attributes.id.value.replace("s2id_", ""));
       const model = $parse(angular.element(select)[0].attributes["ng-model"].value);
-      let result = _.pluck(select.options, "value");
+      let result = _.map(select.options, "value");
       if  (model($scope.$parent)? && (model($scope.$parent).length === result.length)) {
         result =  [];
       }

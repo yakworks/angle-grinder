@@ -25,7 +25,7 @@ forms.directive("match", ["isEmpty", isEmpty => ({
 
   link(scope, elem, attrs, modelCtrl) {
     const validateEqual = function(value, otherValue) {
-      const allEmpty = _.all([isEmpty(value), isEmpty(otherValue)]);
+      const allEmpty = _.every([isEmpty(value), isEmpty(otherValue)]);
       const valid = allEmpty || (value === otherValue);
 
       modelCtrl.$setValidity("mismatch", valid);
@@ -98,7 +98,7 @@ forms.directive("agFieldGroup", [
         // true if the field is invalid or it has server side errors
         const invalid = _.map(fields, field => formCtrl[field]?.$invalid || formCtrl.$serverErrors?[field]);
 
-        if (_.any(invalid)) {
+        if (_.some(invalid)) {
           return element.addClass("has-error");
         } else {
           return element.removeClass("has-error");

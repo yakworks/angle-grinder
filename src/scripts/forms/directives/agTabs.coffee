@@ -22,7 +22,7 @@ forms.directive "agTabset", [
 
         # return the current tab
         $scope.currentTab = ->
-          _.findWhere($scope.tabs, selected: true)
+          _.find($scope.tabs, selected: true)
 
         # return the current template url
         $scope.currentTemplateUrl = ->
@@ -47,7 +47,7 @@ forms.directive "agTabset", [
         @openTab = (name) ->
           deferred = $q.defer()
           # find the tab by name
-          tab = _.findWhere($scope.tabs, { name: name })
+          tab = _.find($scope.tabs, { name: name })
 
           # do nothing when the tab cannot be found
           return deferred.promise unless tab?

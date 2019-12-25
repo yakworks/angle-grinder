@@ -27,7 +27,7 @@ describe "module: exampleApp.grids", ->
 
       it "has valid `showActionLink` formatter", inject (usersGrid) ->
         colModel = usersGrid().colModel
-        idCol = _.findWhere(colModel, name: "id")
+        idCol = _.find(colModel, name: "id")
 
         expect(idCol).to.not.be.undefined
 
@@ -37,7 +37,7 @@ describe "module: exampleApp.grids", ->
 
       it "has valid `birthday` date formatter", inject (usersGrid) ->
         colModel = usersGrid().colModel
-        birthdayCol = _.findWhere(colModel, name: "birthday")
+        birthdayCol = _.find(colModel, name: "birthday")
 
         expect(birthdayCol).to.not.be.undefined
         expect(birthdayCol.formatter).to.eq "date"
