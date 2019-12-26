@@ -5,7 +5,7 @@
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
 //Fixes bug with select(when user clicks on element in dropdown list but it selects above element) on old versions of IE.
-const app = angular.module("angleGrinder.common");
+var app = angular.module("angleGrinder.common");
 
 app.directive("ieSelectFix", ["$window",  $window => ({
   restrict: "A",

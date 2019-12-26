@@ -3,7 +3,7 @@
  * DS102: Remove unnecessary code created because of implicit returns
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-const gridz = angular.module("angleGrinder.gridz");
+var gridz = angular.module("angleGrinder.gridz");
 
 // Directive to reload grid - keep scrolling position and selection
 gridz.directive("agReloadGrid", [

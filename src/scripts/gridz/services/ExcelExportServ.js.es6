@@ -5,7 +5,7 @@
  * DS207: Consider shorter variations of null checks
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-const gridz = angular.module("angleGrinder.gridz");
+var gridz = angular.module("angleGrinder.gridz");
 
 // XLS template fot excel export
 gridz.service("xlsTemplate", [

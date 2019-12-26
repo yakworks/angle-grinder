@@ -4,7 +4,7 @@
  * DS207: Consider shorter variations of null checks
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-const mixin = angular.module("angleGrinder.forms");
+var mixin = angular.module("angleGrinder.forms");
 
 mixin.factory("MassUpdateMixin", [
   "$log", "$parse", "$uibModal", "pathWithContext", "NotificationDialogServ",
@@ -15,7 +15,7 @@ mixin.factory("MassUpdateMixin", [
 
     return $scope.massUpdate = function() {
       const grid = $parse(gridName)($scope);
-      if (!grid?) { throw new Error("the grid is not defined"); }
+      if (_.isNil(grid)) { throw new Error("the grid is not defined"); }
 
       // ..grab selected row ids
       const selectedIds = grid.getSelectedRowIds();

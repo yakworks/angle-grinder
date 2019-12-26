@@ -3,7 +3,7 @@
  * DS102: Remove unnecessary code created because of implicit returns
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-const forms = angular.module("angleGrinder.forms");
+var forms = angular.module("angleGrinder.forms");
 
 // x-editable wrapper for date picker with calendar button
 forms.directive("editableDatepicker", [

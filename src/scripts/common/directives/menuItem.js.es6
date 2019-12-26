@@ -4,7 +4,7 @@
  * DS206: Consider reworking classes to avoid initClass
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-const app = angular.module("angleGrinder.common");
+var app = angular.module("angleGrinder.common");
 
 app.directive("menuItem", [
   "$route", $route => ({
@@ -17,7 +17,7 @@ app.directive("menuItem", [
     let listIcon;
     scope.href = "#/" + attrs.for;
     const parent = element.parent();
-    if (parent[0].attributes["list-icon"]?) { listIcon = parent[0].attributes["list-icon"].value; }
+    if (!_.isNil(parent[0].attributes["list-icon"])) { listIcon = parent[0].attributes["list-icon"].value; }
     scope.icon = attrs.icon || listIcon || "fa fa-circle";
     return scope.isActive = () => $route.current?.page === attrs.for;
   },

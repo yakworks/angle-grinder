@@ -30,30 +30,25 @@ module.exports =
     { pattern: "node_modules/sweetalert/lib/sweet-alert.js"}
     { pattern: "node_modules/angular-drag-and-drop-lists/angular-drag-and-drop-lists.js"}
 
-    { pattern: "src/scripts/gridz/gridz.coffee"}
-    { pattern: "src/scripts/utils/baseCtrl.coffee"}
-    { pattern: "src/scripts/utils/alerts.coffee"}
+    { pattern: "src/scripts/gridz/gridz.js.es6"}
+    { pattern: "src/scripts/utils/baseCtrl.js.es6"}
+    { pattern: "src/scripts/utils/alerts.js.es6"}
 
     { pattern: "docs/templates/**/*.html"}
 
-    { pattern: "src/scripts/common/common.coffee"}
-    { pattern: "src/scripts/forms/forms.coffee"}
+    { pattern: "src/scripts/common/common.js.es6"}
+    { pattern: "src/scripts/forms/forms.js.es6"}
 
-    { pattern: "src/scripts/common/**/*.coffee"}
-    { pattern: "src/scripts/forms/**/*.coffee"}
-    { pattern: "src/scripts/gridz/**/*.coffee"}
+    { pattern: "src/scripts/common/**/*.js.es6"}
+    { pattern: "src/scripts/forms/**/*.js.es6"}
+    { pattern: "src/scripts/gridz/**/*.js.es6"}
 
-    { pattern: "docs/exampleApp/modules/**/*.coffee"}
-    { pattern: "docs/exampleApp/application.coffee"}
-    { pattern: "docs/exampleApp/routes.coffee"}
-    { pattern: "docs/exampleApp/controllers/**/*.coffee"}
 
-    { pattern: "docs/exampleApp/grids.coffee"}
-    { pattern: "docs/exampleApp/grids/*.coffee"}
+
+
 
     { pattern: "tests/mocks.coffee"}
     { pattern: "tests/unit/fixtures/**/*.html"}
     { pattern: "tests/unit/helpers/**/*.coffee"}
     { pattern: "tests/unit/angleGrinder/**/*Spec.coffee"}
-    { pattern: "tests/unit/exampleApp/**/*Spec.coffee"}
   ]

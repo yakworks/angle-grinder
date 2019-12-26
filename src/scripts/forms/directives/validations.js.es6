@@ -5,7 +5,7 @@
  * DS207: Consider shorter variations of null checks
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-const forms = angular.module("angleGrinder.forms");
+var forms = angular.module("angleGrinder.forms");
 
 forms.value("validationMessages", {
   required: "This field is required",
@@ -96,7 +96,7 @@ forms.directive("agFieldGroup", [
 
       const toggleErrors = () => $timeout(function() {
         // true if the field is invalid or it has server side errors
-        const invalid = _.map(fields, field => formCtrl[field]?.$invalid || formCtrl.$serverErrors?[field]);
+        const invalid = _.map(fields, field => formCtrl[field]?.$invalid || formCtrl.$serverErrors?.[field]);
 
         if (_.some(invalid)) {
           return element.addClass("has-error");
@@ -117,7 +117,7 @@ forms.directive("agFieldGroup", [
       // Display server side validation errors (only once)
       angular.forEach(fields, function(field) {
         let initial = true;
-        const getServerErrors = () => formCtrl.$serverErrors?[field];
+        const getServerErrors = () => formCtrl.$serverErrors?.[field];
         return scope.$watch(getServerErrors, function() {
           if (!initial) { toggleErrors(); }
           return initial = false;
@@ -169,7 +169,7 @@ forms.directive("agValidationErrors", ["validationMessages", "$interpolate", (va
           if (!invalid) { continue; }
 
           const message = messageFor(error);
-          if (message?) { result.push(appendError(message)); } else {
+          if (!_.isNil(message)) { result.push(appendError(message)); } else {
             result.push(undefined);
           }
         }
@@ -198,9 +198,9 @@ forms.directive("agValidationErrors", ["validationMessages", "$interpolate", (va
     });
 
     // Display server side errors
-    const getServerErrors = () => formCtrl.$serverErrors?[fieldName];
+    const getServerErrors = () => formCtrl.$serverErrors?.[fieldName];
     return scope.$watch(getServerErrors, function(serverError) {
-      if (serverError?) {
+      if (!_.isNil(serverError)) {
         return appendError(serverError, "server-error");
       } else {
         return element.find(".server-error").remove();
@@ -271,7 +271,7 @@ forms.factory("serverValidationErrorsHandler", [
 
         // ..set errors on the nested form
           const message = errors[field];
-          if ((typeof message === "object") && form[field]?) {
+          if ((typeof message === "object") && !_.isNil(form[field])) {
             setErrors(form[field], message);
           }
 
@@ -289,8 +289,8 @@ forms.factory("serverValidationErrorsHandler", [
 
     return function(form, response, resourceName) {
       // skip when the response does not contain validation errors
-      const errors = response.data?.errors?[resourceName];
-      if ((response.status !== 422) || !errors?) {
+      const errors = response.data?.errors?.[resourceName];
+      if ((response.status !== 422) || _.isNil(errors)) {
         $log.warn("Response does not contain validation errors", response);
         return;
       }

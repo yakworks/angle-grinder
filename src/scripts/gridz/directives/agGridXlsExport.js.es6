@@ -3,7 +3,7 @@
  * DS102: Remove unnecessary code created because of implicit returns
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-const gridz = angular.module("angleGrinder.gridz");
+var gridz = angular.module("angleGrinder.gridz");
 // Generates xls export button for the given grid.
 // Usage:
 //   <a href="" ag-grid-xls-export="usersGrid">

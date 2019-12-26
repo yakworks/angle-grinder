@@ -3,7 +3,7 @@
  * DS102: Remove unnecessary code created because of implicit returns
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-const app = angular.module("angleGrinder.common");
+var app = angular.module("angleGrinder.common");
 
 app.directive("agSideMenu", [
   "$window", "$timeout", ($window, $timeout) => ({
@@ -15,7 +15,7 @@ app.directive("agSideMenu", [
     $timeout(function() {
       const header = angular.element(document.getElementById(attr.header));
       elScrollTopOriginal = element.offset().top;
-      if (angular.element(header)[0]?) { return headerHeight = angular.element(header)[0].offsetHeight; }
+      if (!_.isNil(angular.element(header)[0])) { return headerHeight = angular.element(header)[0].offsetHeight; }
     });
 
     const window = angular.element($window);

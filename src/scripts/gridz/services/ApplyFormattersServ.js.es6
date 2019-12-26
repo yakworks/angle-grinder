@@ -4,7 +4,7 @@
  * DS207: Consider shorter variations of null checks
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-const gridz = angular.module("angleGrinder.gridz");
+var gridz = angular.module("angleGrinder.gridz");
 
 // Iterates through all columns and replaces formatters placeholders
 // with the corresponding methods.
@@ -14,6 +14,6 @@ gridz.value("ApplyFormattersServ", function(colModel, formatters) {
     if (!angular.isString(column.formatter)) { return; }
 
     const formatter = formatters[column.formatter];
-    if (formatter?) { return column.formatter = formatter; }
+    if (_.isNil(formatter)) { return column.formatter = formatter; }
   });
 });

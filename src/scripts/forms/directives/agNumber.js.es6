@@ -3,7 +3,7 @@
  * DS102: Remove unnecessary code created because of implicit returns
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-const app = angular.module("angleGrinder.forms");
+var app = angular.module("angleGrinder.forms");
 
 // treat text inputs as numbers without having input type as number
 //It will parse the input values using parseFloat so angular controllers can treat the model value as numhers without having to convert it to number each time.

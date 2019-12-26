@@ -6,7 +6,7 @@
  * DS207: Consider shorter variations of null checks
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-const forms = angular.module("angleGrinder.forms");
+var forms = angular.module("angleGrinder.forms");
 
 // Opens a modal dialog with embedded generic form for
 // create or update record

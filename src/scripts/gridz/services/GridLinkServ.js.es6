@@ -4,7 +4,7 @@
  * DS207: Consider shorter variations of null checks
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-const gridz = angular.module("angleGrinder.gridz");
+var gridz = angular.module("angleGrinder.gridz");
 
 // Generic method for generating links inside jqGrid
 gridz.service("GridLinkServ", [
@@ -15,9 +15,9 @@ gridz.service("GridLinkServ", [
   let href = pathWithContext(path);
 
   // append id to the path (if given)
-  if (idField?) {
+  if (!_.isNil(idField)) {
     const id = FlattenServ(rowData)[idField];
-    if (!id?) { return ""; }
+    if (_.isNil(id)) { return ""; }
 
     href += `#/${id}`;
   }

@@ -4,7 +4,7 @@
  * DS102: Remove unnecessary code created because of implicit returns
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-const gridz = angular.module("angleGrinder.gridz");
+var gridz = angular.module("angleGrinder.gridz");
 
 gridz.controller("gridPagerCtrlMixin", [
   "$log", "$scope", "$parse", "$location", "$q", "gridName", "currentId", "path",
@@ -15,7 +15,7 @@ gridz.controller("gridPagerCtrlMixin", [
 
     // watch for the current id changes
     $scope.$watch(currentId, function(id, oldId) {
-      if (!id?) { return; }
+      if (_.isNil(id)) { return; }
       if (id === oldId) { return; }
 
       return $location.path(path.replace(":id", id));
@@ -77,7 +77,7 @@ gridz.controller("gridPagerCtrlMixin", [
 
     // return true when a grid in the background is loaded
     // and the pager can be displayed
-    this.show = () => getGrid()?;
+    this.show = () => !_.isNil(getGrid());
 
     // return true when the current row is not the first one
     this.hasPrevRow = function() {

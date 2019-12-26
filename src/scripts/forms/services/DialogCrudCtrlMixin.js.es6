@@ -4,7 +4,7 @@
  * DS207: Consider shorter variations of null checks
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-const mixin = angular.module("angleGrinder.forms");
+var mixin = angular.module("angleGrinder.forms");
 
 mixin.factory("DialogCrudCtrlMixin", [
   "$log", "$parse", "FormDialogServ", "ConfirmationDialogServ", "alerts",
@@ -23,7 +23,7 @@ mixin.factory("DialogCrudCtrlMixin", [
     // Generic method for invoking an edit dialog for a resource
     // with the given id
     $scope.editRecord = id => Resource.get({ id }, function(record) {
-      if (options.beforeEdit?) { record = options.beforeEdit(record); }
+      if (!_.isNil(options.beforeEdit)) { record = options.beforeEdit(record); }
       return openEditDialogFor(record);
     });
 
@@ -31,7 +31,7 @@ mixin.factory("DialogCrudCtrlMixin", [
     // creating a new record
     $scope.createRecord = function() {
       let record = new Resource();
-      if (options.beforeCreate?) { record = options.beforeCreate(record); }
+      if (!_.isNil(options.beforeCreate)) { record = options.beforeCreate(record); }
       return openEditDialogFor(record);
     };
 

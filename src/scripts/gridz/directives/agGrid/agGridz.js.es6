@@ -3,7 +3,7 @@
  * DS102: Remove unnecessary code created because of implicit returns
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-const gridz = angular.module("angleGrinder.gridz");
+var gridz = angular.module("angleGrinder.gridz");
 
 gridz.directive("agGrid", [
   "$timeout", "$log", "$parse", "agGridDataLoader", "ActionPopupHandler", "pathWithContext", "camelize",
@@ -36,7 +36,7 @@ gridz.directive("agGrid", [
         $log.debug(`[agGrid] initializing '${alias}' with`, options);
 
         // assign the url
-        if (!(_.isNil(options.url)) && (_.isNil(options.path))) {
+        if (!(!_.isNil(options.url)) && (!_.isNil(options.path))) {
           options.url = pathWithContext(options.path);
         }
 
@@ -242,7 +242,7 @@ gridz.directive("agGrid", [
 
       compile(element, attrs) {
         // modify grid html element, generate grid id from the name or assign default value
-        const id = _.isNil(attrs.agGridName) ? camelize(attrs.agGridName) : "gridz";
+        const id = !_.isNil(attrs.agGridName) ? camelize(attrs.agGridName) : "gridz";
 
         element.find("table.gridz").attr("id", id);
         element.find("div.gridz-pager").attr("id", `${id}-pager`);

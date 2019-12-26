@@ -4,7 +4,7 @@
  * DS207: Consider shorter variations of null checks
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-const forms = angular.module("angleGrinder.forms");
+var forms = angular.module("angleGrinder.forms");
 
 forms.directive("agTabset", [
   "$parse", "$q",
@@ -44,7 +44,7 @@ forms.directive("agTabset", [
           tab.loading = false;
 
           // update the url
-          if (tab.name?) { $location.search("tab", tab.name); }
+          if (!_.isNil(tab.name)) { $location.search("tab", tab.name); }
 
           return $log.debug("[tabs] content loaded", tab);
         };
@@ -56,7 +56,7 @@ forms.directive("agTabset", [
           const tab = _.find($scope.tabs, { name });
 
           // do nothing when the tab cannot be found
-          if (!tab?) { return deferred.promise; }
+          if (!!_.isNil(tab)) { return deferred.promise; }
 
           // select the tab unless is not already selected
           if (!tab.selected) { this._selectTab(tab); }
@@ -146,7 +146,7 @@ forms.directive("agTab", [
       const getTab = () => $location.search().tab;
 
       // add the current tab to the stack
-      const active = () => _.isNil(scope.name) && (getTab() === scope.name);
+      const active = () => !_.isNil(scope.name) && (getTab() === scope.name);
       tabsetCtrl._addTab(scope, active());
 
       // handles mouse click on the tab

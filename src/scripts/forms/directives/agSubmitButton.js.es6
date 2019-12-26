@@ -3,7 +3,7 @@
  * DS102: Remove unnecessary code created because of implicit returns
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-const forms = angular.module("angleGrinder.forms");
+var forms = angular.module("angleGrinder.forms");
 
 forms.directive("agSubmitButton", () => ({
   restrict: "E",
@@ -15,7 +15,7 @@ forms.directive("agSubmitButton", () => ({
     // Check if submit button is in the modal window
     // used to disable submit button while modal closing
     let isModalWindow;
-    if (element[0].offsetParent?) { isModalWindow = element[0].offsetParent.hasAttribute("modal-window"); }
+    if (!_.isNil(element[0].offsetParent)) { isModalWindow = element[0].offsetParent.hasAttribute("modal-window"); }
     const isSaving = () => formCtrl.$saving;
     scope.$watch(isSaving, function(saving) {
       if (!(isModalWindow && scope.saving)) { return scope.saving = saving; }

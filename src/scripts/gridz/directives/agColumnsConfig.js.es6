@@ -4,7 +4,7 @@
  * DS206: Consider reworking classes to avoid initClass
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-const app = angular.module("angleGrinder.gridz");
+var app = angular.module("angleGrinder.gridz");
 
 class ManageGridColumnsCtrl {
   static initClass() {

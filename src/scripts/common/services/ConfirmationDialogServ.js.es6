@@ -4,7 +4,7 @@
  * DS207: Consider shorter variations of null checks
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-const app = angular.module("angleGrinder.common");
+var app = angular.module("angleGrinder.common");
 
 app.service("ConfirmationDialogServ", [
   "$log", "$q", ($log, $q) => // Open the confirmation dialog

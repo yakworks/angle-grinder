@@ -6,7 +6,7 @@
  * DS207: Consider shorter variations of null checks
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-const gridz = angular.module("angleGrinder.gridz");
+var gridz = angular.module("angleGrinder.gridz");
 
 // Creates select2 component along with the "show" button
 // Options:
@@ -32,7 +32,7 @@ gridz.directive("agSelect2", [
       transclude(scope, clone => (() => {
         const result = [];
         for (element of Array.from(clone)) {
-          if (element instanceof HTMLElement && element.getAttribute("ag-select2-result")?) {
+          if (element instanceof HTMLElement && !_.isNil(element.getAttribute("ag-select2-result"))) {
             resultTemplate = element.outerHTML;
             break;
           } else {
@@ -46,7 +46,7 @@ gridz.directive("agSelect2", [
       return {
         pre(scope, element, attrs) {
           let options = angular.copy(scope.selectOptions || {multiple: true});
-          if (attrs.selectMultiple?) {
+          if (!_.isNil(attrs.selectMultiple)) {
             options.multiple = attrs.selectMultiple === "true";
           }
           scope.options = options;
@@ -54,17 +54,17 @@ gridz.directive("agSelect2", [
           // read `minimumInputLength` option from the attribute
           if (options.minimumInputLength == null) { options.minimumInputLength = 1; }
           scope.showFill = attrs.fillAll && (attrs.fillAll === "true");
-          if (attrs.selectMinimumInputLength?) {
+          if (!_.isNil(attrs.selectMinimumInputLength)) {
             options.minimumInputLength = parseInt(attrs.selectMinimumInputLength);
           }
-          if (attrs.selectAll?) {
+          if (!_.isNil(attrs.selectAll)) {
             options.minimumInputLength = 0;
           }
           // set the default `width`
           if (options.width == null) { options.width = "resolve"; }
 
           // create `ajax`
-          if (!_.isNil(options.ajax) && _.isNil(attrs.selectAjaxUrl)) {
+          if (!!_.isNil(options.ajax) && !_.isNil(attrs.selectAjaxUrl)) {
             options.ajax = {
               url: pathWithContext(attrs.selectAjaxUrl),
               data(term, page) {
@@ -84,13 +84,13 @@ gridz.directive("agSelect2", [
             // Number of milliseconds to wait for the user to
             // stop typing before issuing the ajax request
             options.ajax.quietMillis = 500;
-            if (attrs.selectAjaxQuietMillis?) {
+            if (!_.isNil(attrs.selectAjaxQuietMillis)) {
               options.ajax.quietMillis = parseInt(attrs.selectAjaxQuietMillis);
             }
           }
 
           // create `formatResult` function from the given template
-          if (resultTemplate?) {
+          if (!_.isNil(resultTemplate)) {
             if (options.formatResult == null) { options.formatResult = function(item) {
 
               options = {interpolate: /\{\{(.+?)\}\}/g};
@@ -175,7 +175,7 @@ gridz.directive("agSelect2Fill", [
       const select = document.getElementById(selectEl[0].attributes.id.value.replace("s2id_", ""));
       const model = $parse(angular.element(select)[0].attributes["ng-model"].value);
       let result = _.map(select.options, "value");
-      if  (_.isNil(model($scope.$parent)) && (model($scope.$parent).length === result.length)) {
+      if  (!_.isNil(model($scope.$parent)) && (model($scope.$parent).length === result.length)) {
         result =  [];
       }
       model.assign($scope.$parent, result);

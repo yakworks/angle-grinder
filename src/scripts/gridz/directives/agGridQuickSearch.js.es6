@@ -3,7 +3,7 @@
  * DS102: Remove unnecessary code created because of implicit returns
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-const gridz = angular.module("angleGrinder.gridz");
+var gridz = angular.module("angleGrinder.gridz");
 
 gridz.directive("agGridQuickSearch", [
   () => ({
@@ -17,7 +17,7 @@ gridz.directive("agGridQuickSearch", [
 
     link($scope) {
       // apply empty quick search filter
-      if (!$scope.filters?) { $scope.filters = {}; }
+      if (_.isNil($scope.filters)) { $scope.filters = {}; }
       angular.extend($scope.filters, {quickSearch: ""});
 
       // perform grid search

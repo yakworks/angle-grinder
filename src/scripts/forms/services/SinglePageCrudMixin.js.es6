@@ -4,7 +4,7 @@
  * DS207: Consider shorter variations of null checks
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-const mixin = angular.module("angleGrinder.forms");
+var mixin = angular.module("angleGrinder.forms");
 
 mixin.factory("SinglePageCrudCtrlMixin", [
   "$log", "$location", "DialogCrudCtrlMixin",

@@ -5,7 +5,7 @@
  * DS206: Consider reworking classes to avoid initClass
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-const app = angular.module("angleGrinder.gridz");
+var app = angular.module("angleGrinder.gridz");
 // Uses to show edit panel for grid row. Supports dbl click on grid cell.
 app.directive("gridCrud", ["$controller", "$timeout", ($controller, $timeout) => ({
   restrict: "A",
@@ -195,7 +195,7 @@ const Cls = (this.GridCrudCtrl = class GridCrudCtrl {
       const {
         colModel
       } = $scope[`${e?.currentTarget?.id}`].getGridEl().getGridParam();
-      $scope.columnNameForFocus = colModel[iCol]?["name"];
+      $scope.columnNameForFocus = colModel[iCol]?.["name"];
       editAction(rowid);
       return $scope.lastSelectedCell = iCol;
     };

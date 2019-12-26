@@ -4,7 +4,7 @@
  * DS102: Remove unnecessary code created because of implicit returns
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-const app = angular.module("angleGrinder.common");
+var app = angular.module("angleGrinder.common");
 
 // Get/set the value of a nested property
 // @see https://gist.github.com/furf/3208381

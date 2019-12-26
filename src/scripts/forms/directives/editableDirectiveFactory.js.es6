@@ -3,7 +3,7 @@
  * DS102: Remove unnecessary code created because of implicit returns
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-const forms = angular.module("angleGrinder.forms");
+var forms = angular.module("angleGrinder.forms");
 
 // Decorates all editable inputs with mechanism
 // for displaying validation errors.
@@ -37,7 +37,7 @@ forms.config(["$provide", $provide => $provide.decorator("editableDirectiveFacto
 
         // watch for model validity
         // and display errors if necessary
-        if (_.isNil(form) && _.isNil(name)) {
+        if (!_.isNil(form) && !_.isNil(name)) {
           const viewValue = () => form[name]?.$viewValue;
           scope.$watch(viewValue, function() {
             const model = form[name];
@@ -53,14 +53,14 @@ forms.config(["$provide", $provide => $provide.decorator("editableDirectiveFacto
         }
 
         // watch if input has disabled attribute
-        if (_.isNil(form) && _.isNil(disabled)) {
+        if (!_.isNil(form) && !_.isNil(disabled)) {
           scope.disabled = disabled;
         }
 
         const {
           options
         } = attrs;
-        if (_.isNil(options)) {
+        if (!_.isNil(options)) {
           return scope.options = options;
         }
       });

@@ -4,21 +4,21 @@
  * DS207: Consider shorter variations of null checks
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-const app = angular.module("angleGrinder.common");
+var app = angular.module("angleGrinder.common");
 
 app.service("DeepDiffServ", ["DeepPickServ", function(DeepPickServ){
   var map = function(oldVal, newVal, allowed, reqFields) {
     let args;
     let diff = {};
 
-    if (_.isNil(reqFields) && (reqFields.length > 0)) {
+    if (!_.isNil(reqFields) && (reqFields.length > 0)) {
       args = [];
       args.push(newVal);
       args = args.concat(reqFields);
       diff = DeepPickServ.apply(this, args);
     }
 
-    if (_.isNil(allowed) && (allowed.length > 0)) {
+    if (!_.isNil(allowed) && (allowed.length > 0)) {
       args = [];
       args.push(newVal);
       args = args.concat(allowed);
@@ -26,7 +26,7 @@ app.service("DeepDiffServ", ["DeepPickServ", function(DeepPickServ){
     }
 
     _.forEach(newVal, function(v, k){
-      if ((_.isNil(oldVal) && _.isEqual(v, oldVal[k])) || (k === "$cachedData")) {
+      if ((!_.isNil(oldVal) && _.isEqual(v, oldVal[k])) || (k === "$cachedData")) {
         return;
       }
       return diff[k] = _.isObject(v) ? map(oldVal[k], v) : newVal[k];

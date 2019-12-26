@@ -3,7 +3,7 @@
  * DS102: Remove unnecessary code created because of implicit returns
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-const app = angular.module("angleGrinder.forms");
+var app = angular.module("angleGrinder.forms");
 // Validates text area to have not more then specified number of lines
 app.directive("agMaxLines", ["IsFalsyServ", "$parse", (IsFalsyServ, $parse) => ({
   require: "ngModel",

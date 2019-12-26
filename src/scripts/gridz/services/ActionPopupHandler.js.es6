@@ -3,13 +3,13 @@
  * DS102: Remove unnecessary code created because of implicit returns
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-const gridz = angular.module("angleGrinder.gridz");
+var gridz = angular.module("angleGrinder.gridz");
 
 gridz.factory("ActionPopupHandler", [
   "$log", $log => (function(gridEl, scope, attrs) {
   // handles an action from the `actionPopup` menu
   const handleAction = function(action, id) {
-    if (scope[action]?) {
+    if (!_.isNil(scope[action])) {
       $log.info(`Trigger '${action}' for row '${id}'`);
       return scope.$apply(() => scope[action](id));
     } else {

@@ -3,7 +3,7 @@
  * DS102: Remove unnecessary code created because of implicit returns
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-const forms = angular.module("angleGrinder.forms");
+var forms = angular.module("angleGrinder.forms");
 
 forms.provider("agDate", function() {
   let viewFormat = "MM/DD/YYYY";
@@ -74,9 +74,9 @@ forms.directive("agDatepicker", [
     delete options.isoFormat;
 
     // Decorate datepicker with button and some usefull stuff if directive is element, not attribute
-    if (!$attrs.agDatepicker?) {
+    if (_.isNil($attrs.agDatepicker)) {
       $element.addClass("input-group").addClass("date").addClass("ag-datepicker");
-      const input = `<input name='${$attrs.id || ""}' class='form-control' placeholder='${$attrs.placeholder || ""}' ${_.isNil($attrs.disabled) ? "disabled" : undefined}>
+      const input = `<input name='${$attrs.id || ""}' class='form-control' placeholder='${$attrs.placeholder || ""}' ${!_.isNil($attrs.disabled) ? "disabled" : undefined}>
 <span class="input-group-addon"><i class="fa fa-calendar"></i></span>`;
       $element.append(input);
     }
@@ -84,7 +84,7 @@ forms.directive("agDatepicker", [
     $element.on('dp.change',function(event) {
       if (ngModelCtrl) {
         return $timeout(function() {
-          if (_.isNil(event.date) && (event.date._d !== undefined)) {
+          if (!_.isNil(event.date) && (event.date._d !== undefined)) {
             ngModelCtrl.$setViewValue(moment(event.date._d).format(isoFormat));
             return ngModelCtrl.$setValidity('dateFormat', agDate.isValid(ngModelCtrl.$modelValue, isoFormat));
           } else {

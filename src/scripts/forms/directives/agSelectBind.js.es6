@@ -3,7 +3,7 @@
  * DS102: Remove unnecessary code created because of implicit returns
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-const app = angular.module("angleGrinder.common");
+var app = angular.module("angleGrinder.common");
 // Enhanced bind directive with default value
 // For editable select fields
 app.directive("agSelectBind", ["$filter", "$parse", function($filter, $parse) {
@@ -17,7 +17,7 @@ app.directive("agSelectBind", ["$filter", "$parse", function($filter, $parse) {
         objects = $parse(objects)(scope);
         if ((id % 1) === 0) { id = angular.fromJson(id); }
         const element = $filter('filter')(objects, {id}, true);
-        if (_.isNil(element) && (element.length > 0)) { return element[0][field]; } else { return ""; }
+        if (!_.isNil(element) && (element.length > 0)) { return element[0][field]; } else { return ""; }
       };
 
       return this;

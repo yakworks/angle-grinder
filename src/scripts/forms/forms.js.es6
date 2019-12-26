@@ -28,7 +28,7 @@ angular.module("ui.bootstrap.datepicker").config([
 ])
 ]);
 
-const forms = angular.module("angleGrinder.forms", [
+var forms = angular.module("angleGrinder.forms", [
   "ui.bootstrap.collapse",
   "ui.bootstrap.accordion",
   "ui.bootstrap.alert",

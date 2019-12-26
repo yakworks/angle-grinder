@@ -7,7 +7,7 @@
  * DS207: Consider shorter variations of null checks
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-const gridz = angular.module("angleGrinder.gridz");
+var gridz = angular.module("angleGrinder.gridz");
 
 // Wrapper for jqGrid public API
 // Controller instance could be published to the parent scope
@@ -107,7 +107,7 @@ var AgGridCtrl = (function() {
       const flatData = this.FlattenServ(data);
 
       const prevData = this.getRowData(id);
-      if (prevData?) {
+      if (!_.isNil(prevData)) {
         // retrieve a list of removed keys
         let diff = _.difference(_.keys(prevData), _.keys(flatData));
 

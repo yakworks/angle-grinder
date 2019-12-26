@@ -4,13 +4,13 @@
  * DS207: Consider shorter variations of null checks
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-const gridz = angular.module("angleGrinder.gridz");
+var gridz = angular.module("angleGrinder.gridz");
 
 // Retunrs true if `filters` contain at least one non-empty search field
 gridz.value("hasSearchFilters", function(filters) {
   for (let _ in filters) {
     const value = filters[_];
-    if (!value?) { continue; }
+    if (_.isNil(value)) { continue; }
 
     if (typeof value === "string") {
       if ($.trim(value) !== "") { return true; }
@@ -64,7 +64,7 @@ gridz.directive("agSearchForm", ["$log", $log => ({
         if (filters == null) { filters = {}; }
         const grid = $parse($attrs.agSearchForm)($scope);
 
-        if (!grid?) {
+        if (_.isNil(grid)) {
           $log.warn("[gridz] grid is not defined");
           return;
         }

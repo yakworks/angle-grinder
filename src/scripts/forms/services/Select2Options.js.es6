@@ -4,7 +4,7 @@
  * DS207: Consider shorter variations of null checks
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-const app = angular.module("angleGrinder.forms");
+var app = angular.module("angleGrinder.forms");
 
 app.service("Select2Options", () => (function(options, dataOptions) {
   if (options == null) { options = {}; }

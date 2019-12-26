@@ -4,7 +4,7 @@
  * DS102: Remove unnecessary code created because of implicit returns
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-const forms = angular.module("angleGrinder.forms");
+var forms = angular.module("angleGrinder.forms");
 
 // Service for updating grid rows
 // result should contain two arrays:
@@ -16,14 +16,14 @@ forms.factory("MassUpdateHandler", [
   $log.info("[forms] Mass update response", result);
 
   // handle updated fields
-  if (result.data?) {
+  if (!_.isNil(result.data)) {
     for (let row of Array.from(result.data)) { grid.updateRow(row.id, row, false); }
   } else {
     $log.warn("[forms] Invalid JSON response, missing data array");
   }
 
   // handle fields with errors
-  if (result.errors?) {
+  if (!_.isNil(result.errors)) {
     for (let id in result.errors) { error = result.errors[id]; grid.flashOnError(id); }
     // make sure errors is an array instance
     if (result.errors instanceof Array) {

@@ -39,7 +39,7 @@ class Gridz {
       let resp;
       this.beforeSelectRow.apply(this, arguments);
       if ($.isFunction(optBeforeSelectRow)) { resp = optBeforeSelectRow.apply(this, arguments); }
-      if ((resp === true) || (!resp?)) {  return true; } else { return false; }
+      if ((resp === true) || (_.isNil(resp))) {  return true; } else { return false; }
     }.bind(this);
 
     // Events .. onSelectRow
@@ -83,7 +83,7 @@ class Gridz {
           const idRegex = new RegExp(`(${id}[ ]+(asc|desc))`);
           _.each(sortArray, function(it){
             it = it.trim();
-            if (!idRegex.exec(it)?) {
+            if (_.isNil(idRegex.exec(it))) {
               return res.push(it);
             } else {
               return sort = it.split(" ");
@@ -324,7 +324,7 @@ class Gridz {
     } = this;
 
     let actionMenu = "";
-    if (_.isNil(options.actionPopup.resetSelection) && (options.actionPopup.resetSelection !== false)) {
+    if (!_.isNil(options.actionPopup.resetSelection) && (options.actionPopup.resetSelection !== false)) {
       options.actionPopup.resetSelection = true;
     }
 

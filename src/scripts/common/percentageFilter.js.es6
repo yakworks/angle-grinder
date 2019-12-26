@@ -3,7 +3,7 @@
  * DS102: Remove unnecessary code created because of implicit returns
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-const app = angular.module("angleGrinder.common");
+var app = angular.module("angleGrinder.common");
 
 // Percentage filter, based on https://github.com/vpegado/angular-percentage-filter
 app.filter("percentage", () => (function(input, decimals, suffix) {

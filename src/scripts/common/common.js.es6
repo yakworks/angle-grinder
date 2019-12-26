@@ -3,7 +3,7 @@
  * DS102: Remove unnecessary code created because of implicit returns
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-const common = angular.module("angleGrinder.common", [
+var common = angular.module("angleGrinder.common", [
   "ui.bootstrap.modal",
   "ui.bootstrap.popover",
   "angleGrinder.resources",

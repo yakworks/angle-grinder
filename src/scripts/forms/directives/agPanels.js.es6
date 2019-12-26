@@ -4,7 +4,7 @@
  * DS102: Remove unnecessary code created because of implicit returns
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-const forms = angular.module("angleGrinder.forms");
+var forms = angular.module("angleGrinder.forms");
 
 forms.value("getRealPanelHeight", function(el) {
   const bodyEl = el.find(".panel-body:visible");
@@ -16,7 +16,7 @@ forms.value("getRealPanelHeight", function(el) {
   if (angular.element(bodyEl).attr("collapsed")) {
     bodyEl.css("min-height", 0);
   } else {
-    if (!bodyEl?[0]?.attributes?['min-height']) { bodyEl.css("min-height", oldHeight); }
+    if (!bodyEl?.[0]?.attributes?.['min-height']) { bodyEl.css("min-height", oldHeight); }
   }
 
   // Remove padding between grid header and body

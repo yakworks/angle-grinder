@@ -4,7 +4,7 @@
  * DS207: Consider shorter variations of null checks
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-const app = angular.module("angleGrinder.common");
+var app = angular.module("angleGrinder.common");
 
 // Build an url with the query string from the given params
 app.value("urlBuilder", function(path, params) {
@@ -44,7 +44,7 @@ app.provider("pathWithContext", function() {
       "urlBuilder", urlBuilder => (function(path, params) {
       // build a path with the context
       if (params == null) { params = {}; }
-      path = _.filter([contextPath, sanitizePath(path)], part => _.isNil(part) && (part !== "/")).join("");
+      path = _.filter([contextPath, sanitizePath(path)], part => !_.isNil(part) && (part !== "/")).join("");
       // append query string from the given params
       return urlBuilder(path, params);
     })

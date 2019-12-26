@@ -3,7 +3,7 @@
  * DS102: Remove unnecessary code created because of implicit returns
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-const app = angular.module("angleGrinder.forms");
+var app = angular.module("angleGrinder.forms");
 
 // Ability to provide custom template directly in the DOM
 app.directive("editableCustom", [
