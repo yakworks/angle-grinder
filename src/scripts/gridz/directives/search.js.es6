@@ -8,9 +8,9 @@ var gridz = angular.module("angleGrinder.gridz");
 
 // Retunrs true if `filters` contain at least one non-empty search field
 gridz.value("hasSearchFilters", function(filters) {
-  for (let _ in filters) {
-    const value = filters[_];
-    if (_.isNil(value)) { continue; }
+  for (let k in filters) {
+    const value = filters[k];
+    if (typeof value !== "undefined" && value !== null) { continue; }
 
     if (typeof value === "string") {
       if ($.trim(value) !== "") { return true; }
