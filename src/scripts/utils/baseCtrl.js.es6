@@ -28,8 +28,7 @@ this.BaseCtrl = class BaseCtrl {
 
   // Expose the given fields to the `$scope`
   expose($scope, ...members) {
-
-    return _.chain(members).map(field => [field, this[field]]).each((...args) => {
+    return _.chain(members).map((field) => [field, this[field]]).each((...args) => {
       const [field, entity] = Array.from(args[0]);
       return $scope[field] = typeof entity === "function" ? _.bind(entity, this) : entity;
     }).value();
@@ -47,6 +46,3 @@ this.BaseCtrl = class BaseCtrl {
   }
 };
 
-function __guard__(value, transform) {
-  return (typeof value !== 'undefined' && value !== null) ? transform(value) : undefined;
-}

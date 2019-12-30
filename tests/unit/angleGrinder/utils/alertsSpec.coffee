@@ -3,6 +3,7 @@ describe "module: angleGrinder.alerts", ->
 
   describe "service", ->
     it "is defined", inject (alerts) ->
+      console.log alerts
       expect(alerts).to.not.be.undefined
 
       describe "#info", ->

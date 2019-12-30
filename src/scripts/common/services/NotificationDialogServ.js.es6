@@ -10,7 +10,15 @@ var app = angular.module("angleGrinder.common");
 class NotificationDialogCtrl extends BaseCtrl {
   static initClass() {
     this.register(app, "NotificationDialogCtrl");
-    this.inject("$scope", "$log", "options");
+    this.inject();
+  }
+
+  static register(app, name){
+    super.register(app, name)
+  }
+
+  static inject(){
+    super.inject("$scope", "$log", "options")
   }
 
   initialize() {

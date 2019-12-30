@@ -13,7 +13,7 @@ module.exports = (config) ->
 
     preprocessors:
       "**/*.html": ["html2js"]
-
+      "docs/exampleApp/**/*.coffee": ["coffee"]
       "src/scripts/**/*.js.es6": ["babel"]
       "tests/unit/**/*.coffee": ["coffee"]
       "tests/mocks.coffee": ["coffee"]

@@ -16,7 +16,6 @@ class @BaseCtrl
 
   # Expose the given fields to the `$scope`
   expose: ($scope, members...) ->
-
     _.chain(members).map((field) => [field, this[field]]).each ([field, entity]) =>
       ($scope[field] = if typeof entity is "function" then _.bind(entity, this) else entity)
     .value()

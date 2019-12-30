@@ -88,7 +88,6 @@ describe "BaseCtrl", ->
 
     beforeEach ->
       class MyCtrl extends BaseCtrl
-
         @register app
         @inject "$scope", "foo"
 

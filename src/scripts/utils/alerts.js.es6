@@ -9,11 +9,7 @@ const alerts = angular.module("angleGrinder.alerts", []);
 alerts.value("alertTimeout", 3000);
 
 class Alerts {
-  static initClass() {
-    this.$inject = ["$log", "$timeout", "alertTimeout"];
-  }
   constructor($log, $timeout, alertTimeout) {
-
     this.$log = $log;
     this.$timeout = $timeout;
     this.alertTimeout = alertTimeout;
@@ -65,6 +61,6 @@ class Alerts {
     return this.setTimeout(delay, "error");
   }
 }
-Alerts.initClass();
 
-alerts.service("alerts", Alerts);
+Alerts.$inject = ["$log", "$timeout", "alertTimeout"];
+alerts.service("alerts", Alerts.constructor);
