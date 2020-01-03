@@ -6,12 +6,11 @@
 // Adds an empty option to select dropdaown.
 var app = angular.module("angleGrinder.common");
 
-app.directive("addEmptyOption", () => ({
-  restrict: "A",
-
-  scope: {
-    addEmptyOption: "="
-  },
+class MyDirective {
+  constructor() {
+    this.restrict = 'A';
+    this.scope = {addEmptyOption: "="};
+  }
 
   link(scope, element, attrs) {
     const emptyOption = !_.isNil(attrs.emptyOption) ? JSON.parse(attrs.emptyOption.replace(/[']/g, "\"")) : {id: "", name:""};
@@ -20,4 +19,6 @@ app.directive("addEmptyOption", () => ({
       if (!_.find(scope.addEmptyOption, {id: emptyOption.id})) { return scope.addEmptyOption.unshift(emptyOption); }
     }
   }
-}));
+}
+
+app.directive('addEmptyOption', MyDirective);

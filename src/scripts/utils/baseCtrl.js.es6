@@ -21,7 +21,7 @@ this.BaseCtrl = class BaseCtrl {
     this.annotations = _.map(annotations, function(annotation) {
       const match = annotation.match(ANNOTATION_REG);
       return {name: match[1], identifier: match[3] || match[1]};
-  });
+    });
 
     return this.$inject = _.map(this.annotations, annotation => annotation.name);
   }

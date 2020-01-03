@@ -6,17 +6,21 @@
 var common = angular.module("angleGrinder.common");
 
 // Returns true is the given string is null, undefined or empty ("")
-common.value("isEmpty", str => _.isString(str) && _.isEmpty(str));
+common.value("isEmpty", str => _.isNil(str) || _.isString(str) && _.isEmpty(str));
 
+class IsFalsyServClass{
+  constructor(isEmpty){
+    return function(value) {
+      if (_.isNaN(value)) { return true; }
+      if (isEmpty(value)) { return true; }
+      if (_.isNil(value)) { return true; }
+      if (value === false) { return true; }
+
+      return false;
+    }
+
+  }
+}
+IsFalsyServClass.$inject = ["isEmpty"];
 // Returns true if the given values if falsy
-common.service("IsFalsyServ", [
-  "isEmpty", isEmpty => (function(value) {
-  if (_.isNaN(value)) { return true; }
-  if (isEmpty(value)) { return true; }
-  if (_.isNull(value)) { return true; }
-  if (_.isUndefined(value)) { return true; }
-  if (value === false) { return true; }
-
-  return false;
-})
-]);
+common.service("IsFalsyServ", IsFalsyServClass);

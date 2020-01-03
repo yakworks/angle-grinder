@@ -10,7 +10,7 @@ var gridz = angular.module("angleGrinder.gridz");
 gridz.value("hasSearchFilters", function(filters) {
   for (let k in filters) {
     const value = filters[k];
-    if (typeof value !== "undefined" && value !== null) { continue; }
+    if (_.isNil(value)) { continue; }
 
     if (typeof value === "string") {
       if ($.trim(value) !== "") { return true; }

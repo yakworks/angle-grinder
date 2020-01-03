@@ -18,7 +18,7 @@ module.exports =
     { pattern: "plugin/grails-app/assets/angleGrinder/js/application.js"}
     { pattern: "plugin/grails-app/assets/angleGrinder/js/modules/resources.js"}
 
-    { pattern: "node_modules/free-jqgrid/js/grid.base.js"}
+    { pattern: "node_modules/free-jqgrid/js/jquery.jqgrid.src.js"}
     { pattern: "node_modules/Select2/select2.js"}
     { pattern: "node_modules/angular-ui-select2/src/select2.js"}
     { pattern: "node_modules/angular-ui-bootstrap/ui-bootstrap-tpls.js"}
@@ -53,5 +53,6 @@ module.exports =
     { pattern: "tests/mocks.coffee"}
     { pattern: "tests/unit/fixtures/**/*.html"}
     { pattern: "tests/unit/helpers/**/*.coffee"}
-    { pattern: "tests/unit/angleGrinder/**/*Spec.coffee"}
+
+    { pattern: "tests/unit/angleGrinder/**/*Spec.js.es6"}
   ]

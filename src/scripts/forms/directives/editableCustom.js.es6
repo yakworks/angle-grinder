@@ -12,9 +12,7 @@ app.directive("editableCustom", [
       directiveName: "editableCustom"});
 
     // Here be dragons...
-    const {
-      compile
-    } = result;
+    const { compile } = result;
     result.compile = function(element) {
       // find template element, grab its html and remove it from the DOM
       const templateEl = element.next("[editable-custom-template]");
@@ -24,9 +22,7 @@ app.directive("editableCustom", [
       compile.apply(this, arguments);
 
       // override linking function
-      const {
-        link
-      } = result;
+      const { link } = result;
       return function(scope, element, attrs, ctrl) {
         // assign a template to the editable controller
         const eCtrl = ctrl[0];

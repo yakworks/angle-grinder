@@ -14,6 +14,6 @@ gridz.value("ApplyFormattersServ", function(colModel, formatters) {
     if (!angular.isString(column.formatter)) { return; }
 
     const formatter = formatters[column.formatter];
-    if (_.isNil(formatter)) { return column.formatter = formatter; }
+    if (!_.isNil(formatter)) { return column.formatter = formatter; }
   });
 });

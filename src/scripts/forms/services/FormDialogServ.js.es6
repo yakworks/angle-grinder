@@ -17,9 +17,7 @@ forms.factory("FormDialogServ", [
 
       let scope;
       if (dialogOptions == null) { dialogOptions = {}; }
-      if (angular.isDefined(dialogOptions.scope)) { ({
-        scope
-      } = dialogOptions); }
+      if (angular.isDefined(dialogOptions.scope)) { ({ scope } = dialogOptions); }
 
       return $modal.open({
         templateUrl: pathWithContext(templateUrl),
@@ -39,17 +37,17 @@ forms.factory("FormDialogServ", [
 // Generic controller for forms inside modal dialogs
 class FormDialogCtrl extends BaseCtrl {
   constructor(...args) {
-    {
+    super(...args);
+    /*{
       // Hack: trick Babel/TypeScript into allowing this before super.
       if (false) { super(); }
       let thisFn = (() => { return this; }).toString();
       let thisName = thisFn.match(/return (?:_assertThisInitialized\()*(\w+)\)*;/)[1];
       eval(`${thisName} = this;`);
-    }
+    }*/
     this.closeDialog = this.closeDialog.bind(this);
     this.save = this.save.bind(this);
     this.delete = this.delete.bind(this);
-    super(...args);
   }
 
   static initClass() {

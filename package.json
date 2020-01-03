@@ -7,6 +7,16 @@
       "@babel/plugin-proposal-optional-chaining"
     ]
   },
+  "scripts": {
+    "build": "webpack --env=dev --progress",
+    "build:prod": "webpack --env=prod --progress",
+    "lint": "eslint src/**/*.js -c ./config/.eslintrc --ignore-path ./config/.eslintignore",
+    "start": "webpack-dev-server --env=dev --open --progress --no-info",
+    "start:prod": "webpack-dev-server --env=prod --open --progress --no-info",
+    "test": "karma start tests/karma.conf.coffee --browsers=Chrome_no_sandbox --single-run=true",
+    "test:e2e": "protractor ./config/protractor.conf.js",
+    "webdriver-manager": "webdriver-manager"
+  },
   "dependencies": {
     "coffee-script": "^1.7.1",
     "express": "^3.5.1",
@@ -23,11 +33,11 @@
     "Select2": "~3.5.1",
     "select2-bootstrap-css": "~1.4.6",
     "font-awesome": "~4.3.0",
-    "angular": "1.4.7",
-    "angular-animate": "1.4.7",
-    "angular-route": "1.4.7",
-    "angular-resource": "1.4.7",
-    "angular-sanitize": "1.4.7",
+    "angular": "1.5.11",
+    "angular-animate": "1.5.11",
+    "angular-route": "1.5.11",
+    "angular-resource": "1.5.11",
+    "angular-sanitize": "1.5.11",
     "angular-ui-select2": "~0.0.5",
     "angular-ui-bootstrap": "0.14.0",
     "angular-strap": "2.3.2",
@@ -51,7 +61,7 @@
     "@babel/core": "^7.7.7",
     "@babel/plugin-proposal-optional-chaining": "^7.7.5",
     "@babel/preset-env": "^7.7.7",
-    "angular-mocks": "1.4.7",
+    "angular-mocks": "1.5.11",
     "chai": "^1.9.0",
     "chai-as-promised": "^4.1.1",
     "coffee": "^5.2.2",

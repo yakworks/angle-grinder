@@ -7,12 +7,12 @@
  */
 var gridz = angular.module("angleGrinder.gridz");
 
-// XLS template fot excel export
-gridz.service("xlsTemplate", [
-  "$window", $window => (function(param) {
-  if (param == null) { param = { worksheet: "Worksheet" }; }
-  const {worksheet, table} = param;
-  return $window.btoa(unescape(encodeURIComponent(`\
+class XlsTemplateClass{
+  constructor($window){
+    let fn = function(param) {
+      if (param == null) { param = { worksheet: "Worksheet" }; }
+      const {worksheet, table} = param;
+      return $window.btoa(unescape(encodeURIComponent(`\
 <html xmlns:o="urn:schemas-microsoft-com:office:office"
   xmlns:x="urn:schemas-microsoft-com:office:excel"
   xmlns="http://www.w3.org/TR/REC-html40">
@@ -37,13 +37,17 @@ gridz.service("xlsTemplate", [
 </body>
 </html>\
 `)));
-})
+    };
+    return fn
+  }
+}
+XlsTemplateClass.$inject = ["$window"];
+// XLS template fot excel export
+gridz.service("xlsTemplate", XlsTemplateClass);
 
-]);
 
-gridz.service("gridData", [
-  "$document", "$sanitize",
-  function($document, $sanitize) {
+class GridDataClass{
+  constructor($document, $sanitize){
     const findGridEl = gridId => $document.find(`div#gbox_${gridId}`);
 
     const prepareHeading = function(gridId) {
@@ -101,31 +105,38 @@ gridz.service("gridData", [
 
       // remove unnecessary html attributes
       const attrsToRemove = ["id", "class", "style", "title",
-                       "aria-describedby", "aria-labelledby", "aria-multiselectable",
-                       "role", "tabindex", "sort"];
+        "aria-describedby", "aria-labelledby", "aria-multiselectable",
+        "role", "tabindex", "sort"];
       for (let attr of Array.from(attrsToRemove)) { resultEl.find("*").removeAttr(attr); }
 
       // remove unsafe element
-      return $sanitize(resultEl.html());
+      return resultEl.html();
     };
   }
-]);
+}
+
+GridDataClass.$inject = ["$document", "$sanitize"];
+gridz.service("gridData", GridDataClass);
+
+
+class XlsDataClass{
+  constructor(xlsTemplate, gridData){
+    return function(gridId, selectedRows) {
+      // generate the xls file content
+      if (selectedRows == null) { selectedRows = []; }
+      const data = xlsTemplate({table: gridData(gridId, selectedRows), worksheet: "Grid export"});
+      return `data:application/vnd.ms-excel;base64,${data}`;
+    }
+  }
+}
+
+XlsDataClass.$inject = ["xlsTemplate", "gridData"];
 
 // Generates XLS data uri
-gridz.service("xlsData", [
-  "xlsTemplate", "gridData",
-  (xlsTemplate, gridData) => (function(gridId, selectedRows) {
-    // generate the xls file content
-    if (selectedRows == null) { selectedRows = []; }
-    const data = xlsTemplate({table: gridData(gridId, selectedRows), worksheet: "Grid export"});
-    return `data:application/vnd.ms-excel;base64,${data}`;
-  })
-]);
+gridz.service("xlsData", XlsDataClass);
 
-// Generates CSV data
-gridz.service("csvData", [
-  "gridData",
-  function(gridData) {
+class CsvDataClass{
+  constructor(gridData){
     const prepareCsvHeaders = function(data){
       const headers=[];
       const resultEl = angular.element("<div></div>");
@@ -160,5 +171,10 @@ gridz.service("csvData", [
       return prepareCsvHeaders(gridData(gridId, selectedRows)) + prepareCsvRows(gridData(gridId, selectedRows));
     };
   }
-]);
+}
+
+CsvDataClass.$inject = ["gridData"];
+
+// Generates CSV data
+gridz.service("csvData", CsvDataClass);
 

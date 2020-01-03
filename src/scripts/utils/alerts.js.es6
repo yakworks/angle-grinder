@@ -63,4 +63,4 @@ class Alerts {
 }
 
 Alerts.$inject = ["$log", "$timeout", "alertTimeout"];
-alerts.service("alerts", Alerts.constructor);
+alerts.service("alerts", Alerts);
