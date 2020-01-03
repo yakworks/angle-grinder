@@ -50,9 +50,9 @@ module.exports =
     { pattern: "docs/exampleApp/grids/*.coffee"}
 
 
-    { pattern: "tests/mocks.coffee"}
+    { pattern: "tests/mocks.js.es6"}
     { pattern: "tests/unit/fixtures/**/*.html"}
-    { pattern: "tests/unit/helpers/**/*.coffee"}
+    { pattern: "tests/unit/helpers/**/*.js.es6"}
 
     { pattern: "tests/unit/angleGrinder/**/*Spec.js.es6"}
   ]
