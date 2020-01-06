@@ -114,8 +114,8 @@ forms.config([ "$provide", $provide => //Decorate select tags, wrap inside 'sele
   ])
 ])
 
-/*
+
 //TODO: refactor, can cause errors swallowing
 forms.config(['$qProvider', $qProvider => $qProvider.errorOnUnhandledRejections(false)
 ])
-*/
+

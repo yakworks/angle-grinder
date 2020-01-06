@@ -110,6 +110,7 @@ class GridDataClass{
       for (let attr of Array.from(attrsToRemove)) { resultEl.find("*").removeAttr(attr) }
 
       // remove unsafe element
+      //$sanitize(resultEl.html()) TODO:check how we can configure to not delete all dom tags
       return resultEl.html()
     }
   }

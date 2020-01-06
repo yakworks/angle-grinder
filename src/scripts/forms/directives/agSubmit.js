@@ -2,6 +2,8 @@
  * decaffeinate suggestions:
  * DS101: Remove unnecessary use of Array.from
  * DS102: Remove unnecessary code created because of implicit returns
+ * DS103: Rewrite code to no longer use __guard__
+ * DS207: Consider shorter variations of null checks
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
 var forms = angular.module("angleGrinder.forms")
@@ -21,7 +23,7 @@ forms.directive("agSubmit", [
         forms.push(form)
 
         // iterate through  all nested forms and mark them as submitted
-        const nestedForms = _.filter(_.values(form), input => (input instanceof form.constructor) && (!Array.from(forms).includes(input)))
+        const nestedForms = _.filter(_.values(form), input => (__guard__(__guard__(input != null ? input.$$element : undefined, x1 => x1[0]), x => x.tagName) === "FORM") && (!Array.from(forms).includes(input)))
         return Array.from(nestedForms).map((nestedForm) => markAsSubmitted(nestedForm))
       }
 
@@ -32,7 +34,7 @@ forms.directive("agSubmit", [
         scope.$apply(() => markAsSubmitted(formCtrl))
 
         // do nothing when the form is invalid
-        if (formCtrl.$invalid) { return }
+        if (formCtrl.$invalid) { return; }
 
         // submit the form and handle a promise along with resource
         const result = _.flatten([onSubmit(scope, { $event: event })])
@@ -43,17 +45,22 @@ forms.directive("agSubmit", [
 
           // disable/enable form controls
           formCtrl.$saving = true
-          promise.finally(() => formCtrl.$saving = false)
+          const finallyProm = promise.finally(() => formCtrl.$saving = false)
+
+          finallyProm.then(angular.noop, angular.noop)
 
           // on success: reset the form
-          promise.then(function() {
-            formCtrl.$setPristine()
-            return formCtrl.$submitted = false
-          })
+          promise.then(
+            function() {
+              formCtrl.$setPristine()
+              return formCtrl.$submitted = false
+            }
+            ,
+            () => false)
 
           // on error: handle server side errors
           return promise.catch(function(response) {
-            if (!angular.isFunction(resource?.resourceName)) { return }
+            if (!angular.isFunction(resource != null ? resource.resourceName : undefined)) { return; }
             return serverValidationErrorsHandler(formCtrl, response, resource.resourceName())
           })
         }
@@ -61,3 +68,7 @@ forms.directive("agSubmit", [
     }
   })
 ])
+
+function __guard__(value, transform) {
+  return (typeof value !== 'undefined' && value !== null) ? transform(value) : undefined
+}

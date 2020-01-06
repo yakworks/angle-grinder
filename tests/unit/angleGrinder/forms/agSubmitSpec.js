@@ -6,6 +6,7 @@
 describe("Directive: agSubmit", function() {
 
   beforeEach(module("angleGrinder.forms", function($provide) {
+    console.log("12333333333333333333333333333333333333333")
     $provide.value("serverValidationErrorsHandler", sinon.stub());
   })
   );
