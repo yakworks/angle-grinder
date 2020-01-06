@@ -27,7 +27,7 @@ common.config(["$localeProvider", "$provide", function($localeProvider, $provide
 // Decorates `$http.pendingRequests` with some useful features
 common.factory("pendingRequests", [
   "$http", function($http) {
-    var pendingRequests = () => pendingRequests.any();
+    let pendingRequests = () => pendingRequests.any()
 
     // Returns true if any http request is in progress
     pendingRequests.any = () => pendingRequests.for("GET", "POST", "PUT", "PATCH", "DELETE");

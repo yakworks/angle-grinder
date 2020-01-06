@@ -13,13 +13,13 @@ module.exports = config => config.set({
     "sinon-chai"
   ],
 
-  files: require("./karma-files.js.es6").files,
+  files: require("./karma-files.js").files,
 
   preprocessors: {
     "**/*.html": ["html2js"],
     "docs/exampleApp/**/*.coffee": ["coffee"],
-    "src/scripts/**/*.js.es6": ["babel"],
-    "tests/unit/**/*.js.es6": ["babel"],
+    "src/scripts/**/*.js": ["babel"],
+    "tests/unit/**/*.js": ["babel"],
     "tests/unit/**/*.coffee": ["coffee"],
     "tests/mocks.coffee": ["coffee"]
   },
