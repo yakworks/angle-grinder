@@ -32,7 +32,7 @@
     "Select2": "~3.5.1",
     "select2-bootstrap-css": "~1.4.6",
     "font-awesome": "~4.3.0",
-    "angular": "1.7.9",
+    "angular": "1.6.10",
     "angular-animate": "1.6.10",
     "angular-route": "1.6.10",
     "angular-resource": "1.6.10",
