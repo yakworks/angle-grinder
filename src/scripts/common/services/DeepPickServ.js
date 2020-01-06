@@ -4,46 +4,46 @@
  * DS102: Remove unnecessary code created because of implicit returns
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-var app = angular.module("angleGrinder.common");
+var app = angular.module("angleGrinder.common")
 
 // Get/set the value of a nested property
 // @see https://gist.github.com/furf/3208381
 app.service("DeepPickServ", function() {
   // get the value of a nested property
   const getDeep = function(obj, path) {
-    const keys = path.split(".");
+    const keys = path.split(".")
 
     for (let key of Array.from(keys)) {
-      obj = obj[key];
-      if (obj === undefined) { return; }
+      obj = obj[key]
+      if (obj === undefined) { return }
     }
 
-    return obj;
-  };
+    return obj
+  }
 
   // set the value of a nested property
   const setDeep = function(obj, path, value) {
-    const keys = path.split(".");
-    let i = 0;
-    let n = keys.length;
+    const keys = path.split(".")
+    let i = 0
+    let n = keys.length
 
-    n--;
+    n--
     while (i < n) {
-      const key = keys[i++];
-      obj = (obj[key] = (_.isObject(obj[key]) ? obj[key] : {}));
+      const key = keys[i++]
+      obj = (obj[key] = (_.isObject(obj[key]) ? obj[key] : {}))
     }
 
-    return obj[keys[i]] = value;
-  };
+    return obj[keys[i]] = value
+  }
 
   return function(obj, ...keys) {
-    const result = new Object();
+    const result = new Object()
 
     for (let path of Array.from(keys)) {
-      const value = getDeep(obj, path);
-      if (value !== undefined) { setDeep(result, path, value); }
+      const value = getDeep(obj, path)
+      if (value !== undefined) { setDeep(result, path, value) }
     }
 
-    return result;
-  };
-});
+    return result
+  }
+})

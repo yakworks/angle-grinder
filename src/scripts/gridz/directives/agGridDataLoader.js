@@ -4,7 +4,7 @@
  * DS102: Remove unnecessary code created because of implicit returns
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-var gridz = angular.module("angleGrinder.gridz");
+var gridz = angular.module("angleGrinder.gridz")
 
 class AgGridDataLoaderClass {
   constructor($log, $http, $document) {
@@ -13,27 +13,27 @@ class AgGridDataLoaderClass {
     return function(url, gridCtrl) {// see http://www.trirand.com/jqgridwiki/doku.php?id=wiki:retrieving_data
       return function (params, loadingDivSelector) {
         // load grid data
-        let promise = $http.get(url, {params});
+        let promise = $http.get(url, {params})
         promise.then(function (response) {
-          $log.debug("[gridz] grid data loaded", gridCtrl, response);
-          return gridCtrl.addJSONData(response.data);
-        });
+          $log.debug("[gridz] grid data loaded", gridCtrl, response)
+          return gridCtrl.addJSONData(response.data)
+        })
 
         // show/hide the loading animation
-        const loadingEl = $document.find("#" + $.jgrid.jqID(loadingDivSelector));
-        loadingEl.show();
+        const loadingEl = $document.find("#" + $.jgrid.jqID(loadingDivSelector))
+        loadingEl.show()
         return promise.finally(function () {
           // list of urls for pending requests
-          const pendingUrls = _.map($http.pendingRequests, it => it.url);
+          const pendingUrls = _.map($http.pendingRequests, it => it.url)
           // hide "Loading" for grid only if thereis no pending requests for this grid
           if (!Array.from(pendingUrls).includes(url)) {
-            return loadingEl.hide();
+            return loadingEl.hide()
           }
-        });
+        })
       }
     }
   }
 }
 
-AgGridDataLoaderClass.$inject = ["$log", "$http", "$document"];
-gridz.service("agGridDataLoader", AgGridDataLoaderClass);
+AgGridDataLoaderClass.$inject = ["$log", "$http", "$document"]
+gridz.service("agGridDataLoader", AgGridDataLoaderClass)

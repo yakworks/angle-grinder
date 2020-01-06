@@ -6,27 +6,27 @@
 // Here be dragons. Decorate `daypickerDirective`.
 angular.module("ui.bootstrap.datepicker").config([
   "$provide", $provide => $provide.decorator("daypickerDirective", ["$delegate", function($delegate) {
-    const directive = $delegate[0];
+    const directive = $delegate[0]
 
-    const oldCompile = directive.compile;
+    const oldCompile = directive.compile
     directive.compile = function() {
-      const link = oldCompile.apply(this, arguments);
+      const link = oldCompile.apply(this, arguments)
 
       return function(scope) {
-        link.apply(this, arguments);
+        link.apply(this, arguments)
 
         return scope.$watch("rows", () => angular.forEach(scope.rows, function(row) {
           if (_.every(row, dt => dt.secondary)) {
-            return _.map(row, dt => dt.hide = true);
+            return _.map(row, dt => dt.hide = true)
           }
-        }));
-      };
-    };
+        }))
+      }
+    }
 
-    return $delegate;
+    return $delegate
   }
   ])
-]);
+])
 
 var forms = angular.module("angleGrinder.forms", [
   "ui.bootstrap.collapse",
@@ -48,7 +48,7 @@ var forms = angular.module("angleGrinder.forms", [
   "xeditable",
   "angleGrinder.common",
   "angleGrinder.alerts"
-]);
+])
 
 forms.run([
   "$templateCache", function($templateCache) {
@@ -72,7 +72,7 @@ forms.run([
   </li>
 </ul>\
 `
-    );
+    )
 
     return $templateCache.put('tooltip/tooltip.tpl.html',
       `\
@@ -81,41 +81,41 @@ forms.run([
   <div class="tooltip-inner" ng-bind="title"></div>
 </div>\
 `
-    );
+    )
   }
-]);
+])
 
 
 forms.config([ "$provide", $provide => //Decorate select tags, wrap inside 'select-wrapper' so we can add dropdown arrow to standard html selects
   $provide.decorator("selectDirective", ["$delegate", function($delegate) {
-    const directive = $delegate[0];
+    const directive = $delegate[0]
     const {
       link
-    } = directive;
+    } = directive
 
     directive.compile = (element, attrs) => ({
       pre(scope, element, attrs, ctrl) {
-        if (_.isFunction(link.pre)) { return link.pre(scope, element, attrs, ctrl); }
+        if (_.isFunction(link.pre)) { return link.pre(scope, element, attrs, ctrl) }
       },
 
       post(scope, element, attrs, ctrl) {
         //Add wrapper, if its not already wrapped and its not a select2-wrapper.
         if( !(element.parent().attr('class') === 'select-wrapper') && (element.attr('ui-select2') === undefined) ) {
-          const template = angular.element("<div class='select-wrapper'></div>");
-          element.wrap(template);
+          const template = angular.element("<div class='select-wrapper'></div>")
+          element.wrap(template)
         }
 
-        if (_.isFunction(link.post)) { return link.post(scope, element, attrs, ctrl); }
+        if (_.isFunction(link.post)) { return link.post(scope, element, attrs, ctrl) }
       }
-    });
+    })
 
-    return $delegate;
+    return $delegate
   }
   ])
-]);
+])
 
 /*
 //TODO: refactor, can cause errors swallowing
 forms.config(['$qProvider', $qProvider => $qProvider.errorOnUnhandledRejections(false)
-]);
+])
 */

@@ -3,7 +3,7 @@
  * DS102: Remove unnecessary code created because of implicit returns
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-var forms = angular.module("angleGrinder.forms");
+var forms = angular.module("angleGrinder.forms")
 
 // TODO spec it
 forms.directive("editableSelect2", [
@@ -14,4 +14,4 @@ forms.directive("editableSelect2", [
 <input type="hidden" ng-model="$data" />\
 `
 })
-]);
+])

@@ -3,7 +3,7 @@
  * DS102: Remove unnecessary code created because of implicit returns
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-var forms = angular.module("angleGrinder.forms");
+var forms = angular.module("angleGrinder.forms")
 
 // Decorates all editable inputs with mechanism
 // for displaying validation errors.
@@ -13,60 +13,60 @@ forms.config(["$provide", $provide => $provide.decorator("editableDirectiveFacto
     // collect all error messages for the given model
     const errorsFor = function(model) {
       const callback = function(result, invalid, error) {
-        if (invalid) { result.push(validationMessages[error]); }
-        return result;
-      };
+        if (invalid) { result.push(validationMessages[error]) }
+        return result
+      }
 
-      return _.reduce(model.$error, callback, []).join(", ");
-    };
+      return _.reduce(model.$error, callback, []).join(", ")
+    }
 
     return function() {
-      const directive = $delegate.apply(this, arguments);
+      const directive = $delegate.apply(this, arguments)
       const {
         link
-      } = directive;
+      } = directive
 
       directive.compile = (element, attrs) => (function(scope, element, attrs, ctrl) {
-        link.apply(this, arguments);
+        link.apply(this, arguments)
 
-        const form = ctrl[1];
-        const name = attrs.eName;
+        const form = ctrl[1]
+        const name = attrs.eName
         const {
           disabled
-        } = attrs;
+        } = attrs
 
         // watch for model validity
         // and display errors if necessary
         if (!_.isNil(form) && !_.isNil(name)) {
-          const viewValue = () => form[name]?.$viewValue;
+          const viewValue = () => form[name]?.$viewValue
           scope.$watch(viewValue, function() {
-            const model = form[name];
+            const model = form[name]
 
             if (model?.$invalid) {
-              form.$setError(name, errorsFor(model));
+              form.$setError(name, errorsFor(model))
             }
 
             if (model?.$valid) {
-              return form.$setError(name, "");
+              return form.$setError(name, "")
             }
-          });
+          })
         }
 
         // watch if input has disabled attribute
         if (!_.isNil(form) && !_.isNil(disabled)) {
-          scope.disabled = disabled;
+          scope.disabled = disabled
         }
 
         const {
           options
-        } = attrs;
+        } = attrs
         if (!_.isNil(options)) {
-          return scope.options = options;
+          return scope.options = options
         }
-      });
+      })
 
-      return directive;
-    };
+      return directive
+    }
   }
 ])
-]);
+])

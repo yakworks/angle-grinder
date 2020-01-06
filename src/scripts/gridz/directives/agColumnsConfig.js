@@ -4,12 +4,12 @@
  * DS206: Consider reworking classes to avoid initClass
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-var app = angular.module("angleGrinder.gridz");
+var app = angular.module("angleGrinder.gridz")
 
 class ManageGridColumnsCtrl {
   static initClass() {
   
-    this.$inject = ["$scope"];
+    this.$inject = ["$scope"]
   }
   constructor($scope) {
 
@@ -18,64 +18,64 @@ class ManageGridColumnsCtrl {
     const systemColumns = [
       "cb",
       "-row_action_col"
-    ];
+    ]
 
-    let gridEl = $scope.grid.getGridEl();
+    let gridEl = $scope.grid.getGridEl()
     const {
       colModel
-    } = gridEl.jqGrid("getGridParam");
+    } = gridEl.jqGrid("getGridParam")
     $scope.gridColumns = {
       "available": [],
       "displayed": []
-    };
+    }
 
-    let element = null;
+    let element = null
     colModel.forEach(function(gridColumn, index) {
       if (!systemColumns.includes(gridColumn.name)) {
-        element = {originalId: index, label: gridColumn.label, name: gridColumn.name};
+        element = {originalId: index, label: gridColumn.label, name: gridColumn.name}
         if (gridColumn.hidden) {
-          return $scope.gridColumns.available.push(element);
+          return $scope.gridColumns.available.push(element)
         } else {
-          return $scope.gridColumns.displayed.push(element);
+          return $scope.gridColumns.displayed.push(element)
         }
       }
-    });
+    })
 
     $scope.save = function() {
-      gridEl = $scope.grid.getGridEl();
+      gridEl = $scope.grid.getGridEl()
 
-      const newColumnsOrder = [];
-      const displayedColumns = [];
-      const hiddenColumns = [];
+      const newColumnsOrder = []
+      const displayedColumns = []
+      const hiddenColumns = []
 
       colModel.forEach(function(column, index) {
         if (systemColumns.includes(column.name)) {
-          return newColumnsOrder.push(index);
+          return newColumnsOrder.push(index)
         }
-      });
+      })
 
       $scope.gridColumns.displayed.forEach(function(column, index) {
-        displayedColumns.push(column.name);
-        return newColumnsOrder.push(column.originalId);
-      });
+        displayedColumns.push(column.name)
+        return newColumnsOrder.push(column.originalId)
+      })
 
       $scope.gridColumns.available.forEach(function(column, index) {
-        hiddenColumns.push(column.name);
-        return newColumnsOrder.push(column.originalId);
-      });
+        hiddenColumns.push(column.name)
+        return newColumnsOrder.push(column.originalId)
+      })
 
-      gridEl.remapColumns(newColumnsOrder, true);
-      gridEl.jqGrid("showCol", displayedColumns);
-      gridEl.jqGrid("hideCol", hiddenColumns);
-      return $scope.manageColumnsModal.close();
-    };
+      gridEl.remapColumns(newColumnsOrder, true)
+      gridEl.jqGrid("showCol", displayedColumns)
+      gridEl.jqGrid("hideCol", hiddenColumns)
+      return $scope.manageColumnsModal.close()
+    }
 
-    $scope.cancel = () => $scope.manageColumnsModal.close();
+    $scope.cancel = () => $scope.manageColumnsModal.close()
   }
 }
-ManageGridColumnsCtrl.initClass();
+ManageGridColumnsCtrl.initClass()
 
-app.controller("ManageGridColumnsCtrl", ManageGridColumnsCtrl);
+app.controller("ManageGridColumnsCtrl", ManageGridColumnsCtrl)
 
 app.directive("agManageGridColumns", [
   "$uibModal", "pathWithContext",
@@ -128,7 +128,7 @@ app.directive("agManageGridColumns", [
   </div>
 </div>\
 `
-      });
+      })
     },
 
     template: `\
@@ -137,4 +137,4 @@ app.directive("agManageGridColumns", [
 </a>\
 `
   })
-]);
+])

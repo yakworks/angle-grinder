@@ -3,7 +3,7 @@
  * DS102: Remove unnecessary code created because of implicit returns
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-var forms = angular.module("angleGrinder.forms");
+var forms = angular.module("angleGrinder.forms")
 
 // Double check delete button
 // usage:
@@ -20,20 +20,20 @@ forms.directive("agDeleteButton", () => ({
 
   controller: [
     "$scope", function($scope) {
-      $scope.confirmation = false;
+      $scope.confirmation = false
 
-      $scope.showConfirmation = () => $scope.confirmation = true;
+      $scope.showConfirmation = () => $scope.confirmation = true
 
       return $scope.doDelete = function() {
-        $scope.confirmation = false;
+        $scope.confirmation = false
 
         // on the second click perform the given action
-        const promise = $scope.whenConfirmed();
+        const promise = $scope.whenConfirmed()
 
         // disable / enable the button
-        $scope.deleting = true;
-        return typeof promise?.finally === 'function' ? promise?.finally(() => $scope.deleting = false) : undefined;
-      };
+        $scope.deleting = true
+        return typeof promise?.finally === 'function' ? promise?.finally(() => $scope.deleting = false) : undefined
+      }
     }
   ],
 
@@ -54,4 +54,4 @@ forms.directive("agDeleteButton", () => ({
   <span ng-if="deleting">...</span>
 </button>\
 `
-}));
+}))
