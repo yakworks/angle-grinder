@@ -15,7 +15,7 @@ config.set({
 
   preprocessors: {
     "**/*.html": ["html2js"],
-    "docs/exampleApp/**/*.coffee": ["coffee"],
+    "docs/exampleApp/**/*.js": ["babel"],
     "src/scripts/**/*.js": ["babel"],
     "tests/unit/**/*.js": ["babel"],
     //"tests/unit/**/*.coffee": ["coffee"],

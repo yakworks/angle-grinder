@@ -43,11 +43,11 @@ module.exports = {
     { pattern: "src/scripts/forms/**/*.js"},
     { pattern: "src/scripts/gridz/**/*.js"},
 
-    { pattern: "docs/exampleApp/modules/**/*.coffee"},
-    { pattern: "docs/exampleApp/application.coffee"},
+    { pattern: "docs/exampleApp/modules/**/*.js"},
+    { pattern: "docs/exampleApp/application.js"},
 
-    { pattern: "docs/exampleApp/grids.coffee"},
-    { pattern: "docs/exampleApp/grids/*.coffee"},
+    { pattern: "docs/exampleApp/grids.js"},
+    { pattern: "docs/exampleApp/grids/*.js"},
 
 
     { pattern: "tests/mocks.js"},
