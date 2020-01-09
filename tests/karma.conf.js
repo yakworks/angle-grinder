@@ -52,33 +52,27 @@ config.set({
   // cli runner port
   //runnerPort: 9100,
 
-  browsers: [
-    // Run tests using Chrome
-    'ChromeHeadless'
-  ],
+  // browsers: [
+  //   // Run tests using Chrome
+  //   'ChromeHeadless'
+  // ],
 
-  // Start these browsers, currently available:
-  // - Chrome
-  // - ChromeCanary
-  // - Firefox
-  // - Opera
-  // - Safari (only Mac)
-  // - PhantomJS
-  // - IE (only Windows)
-  // customLaunchers: {
-  //   Chrome_no_sandbox: {
-  //     base: 'Chrome',
-  //     flags: [
-  //       '--disable-web-security',
-  //       '--no-sandbox',
-  //       '--disable-setuid-sandbox',
-  //       '--disable-dev-shm-usage',
-  //       '--remote-debugging-port=9223',
-  //       '--headless',
-  //       '--disable-gpu'
-  //     ]
-  //   }
-  // },
+  // doing it like this so it works in docker CI and we dont get
+  //"Cannot start ChromeHeadless .. Running as root without --no-sandbox is not supported. .." error
+  customLaunchers: {
+    Chrome_no_sandbox: {
+      base: 'ChromeHeadless',
+      flags: [
+        '--disable-web-security',
+        '--no-sandbox',
+        '--disable-setuid-sandbox',
+        '--disable-dev-shm-usage',
+        '--remote-debugging-port=9223',
+        '--headless',
+        '--disable-gpu'
+      ]
+    }
+  },
 
   // If browser does not capture in given timeout [ms], kill it
   captureTimeout: 30000,

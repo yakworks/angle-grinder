@@ -13,7 +13,7 @@
     "lint": "eslint src/**/*.js -c ./config/.eslintrc --ignore-path ./config/.eslintignore",
     "start": "webpack-dev-server --env=dev --open --progress --no-info",
     "start:prod": "webpack-dev-server --env=prod --open --progress --no-info",
-    "test": "karma start tests/karma.conf.js --single-run --no-auto-watch --no-sandbox",
+    "test": "karma start tests/karma.conf.js --browsers=Chrome_no_sandbox --single-run --no-auto-watch --no-sandbox",
     "test:e2e": "protractor ./config/protractor.conf.js",
     "webdriver-manager": "webdriver-manager"
   },
