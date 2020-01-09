@@ -25,13 +25,14 @@ describe('uiSelect2', function () {
   'use strict';
 
   var scope, $compile, options, $timeout;
-  // var sandbox = sinon.createSandbox()
-  // beforeEach(function () {
-  //   sandbox.spy($.fn, 'select2')
-  // })
-  // afterEach(function() {
-  //   sandbox.restore()
-  // })
+  var sandbox = sinon.createSandbox()
+  beforeEach(function () {
+    sandbox.spy($.fn, 'select2')
+    sandbox.spy($.fn, 'val');
+  })
+  afterEach(function() {
+    sandbox.restore()
+  })
   beforeEach(module('ui.select2'));
 
   beforeEach(inject(function (_$rootScope_, _$compile_, _$window_, _$timeout_) {
@@ -77,7 +78,9 @@ describe('uiSelect2', function () {
 
         if (angular.isArray(elementValue)) {
           return elementValue.map(function (val) {
-            val.text += val.text.slice(0, val.text.indexOf(" - I've been formatted"));
+            if(val.text){
+              val.text += val.text.slice(0, val.text.indexOf(" - I've been formatted"));
+            }
             return val;
           });
         }
@@ -217,9 +220,9 @@ describe('uiSelect2', function () {
         //TODO
       });
     });
-    xdescribe('when model is changed programmatically', function(){
+    describe('when model is changed programmatically', function(){
 
-      describe('for single-select', function(){
+      xdescribe('for single-select', function(){
         it('should call select2(data, ...) for objects', function(){
           var element = compile('<input ng-model="foo" ui-select2="options">');
           //sinon.spy($.fn, 'select2');
@@ -233,17 +236,17 @@ describe('uiSelect2', function () {
         });
       });
       describe('for multi-select', function(){
-        it('should call select2(data, ...) for arrays', function(){
+        xit('should call select2(data, ...) for arrays', function(){
           var element = compile('<input ng-model="foo" multiple ui-select2="options">');
           //sinon.spy($.fn, 'select2');
           scope.$apply('foo=[{ id: 1, text: "first" },{ id: 2, text: "second" }]');
-          expect(element.select2).toHaveBeenCalledWith('data', [{ id: 1, text: "first" },{ id: 2, text: "second" }]);
+          expect(element.select2).to.have.been.calledWith('data', [{ id: 1, text: "first" },{ id: 2, text: "second" }]);
         });
         it('should call select2(data, []) for falsey values', function(){
           var element = compile('<input ng-model="foo" multiple ui-select2="options">');
           //sinon.spy($.fn, 'select2');
           scope.$apply('foo=[]');
-          expect(element.select2).toHaveBeenCalledWith('data', []);
+          expect(element.select2).to.have.been.calledWith('data', []);
         });
         xit('should call select2(val, ...) for strings', function(){
           var element = compile('<input ng-model="foo" multiple ui-select2="options">');
@@ -253,7 +256,7 @@ describe('uiSelect2', function () {
         });
       });
     });
-    xdescribe('consumers of ngModel should correctly use $viewValue', function() {
+    describe('consumers of ngModel should correctly use $viewValue', function() {
 
       it('should use any formatters if present (select - single select)', function(){
         scope.foo = 'First';
@@ -264,7 +267,7 @@ describe('uiSelect2', function () {
       });
 
       // isMultiple && falsey
-      it('should use any formatters if present (input multi select - falsey value)', function() {
+      xit('should use any formatters if present (input multi select - falsey value)', function() {
         // need special function to hit this case
         // old code checked modelValue... can't just pass undefined to model value because view value will be the same
         scope.transformers.fromModel = function(modelValue) {
@@ -294,20 +297,20 @@ describe('uiSelect2', function () {
       });
 
       // !isMultiple
-      it('should use any formatters if present (input - single select - object)', function() {
+      xit('should use any formatters if present (input - single select - object)', function() {
         var element = compile('<input ng-model="foo" ui-select2="options" inject-transformers="transformers">');
 
         scope.$apply('foo={ id: 1, text: "first" }');
         expect(element.select2).should.always.have.been.calledWith('data', { id: 1, text: "first - I've been formatted" });
       });
-      it('should use any formatters if present (input - single select - non object)', function() {
+      xit('should use any formatters if present (input - single select - non object)', function() {
         var element = compile('<input ng-model="foo" ui-select2="options" inject-transformers="transformers">');
 
         scope.$apply('foo="first"');
         expect(element.select2).should.always.have.been.calledWith('val', "first - I've been formatted");
       });
 
-      it('should not set the default value using scope.$eval', function() {
+      xit('should not set the default value using scope.$eval', function() {
         // testing directive instantiation - change order of test
 
         //sinon.spy($.fn, 'val');
@@ -354,7 +357,7 @@ describe('uiSelect2', function () {
       scope.foo.push({'id': '1', 'text': '1'});
       scope.$digest();
 
-      console.log("element.select2('data')",element.select2('data'))
+      console.log(element.select2('data'))
       expect(element.select2('data')).to.deep.equal(
         [{'id': '0', 'text': '0'}, {'id': '1', 'text': '1'}]);
     });
