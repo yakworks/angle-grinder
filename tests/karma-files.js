@@ -19,7 +19,7 @@ module.exports = {
 
     { pattern: "node_modules/free-jqgrid/js/jquery.jqgrid.src.js"},
     { pattern: "node_modules/Select2/select2.js"},
-    { pattern: "components/angular-ui-select2/src/select2.js"},
+    //{ pattern: "components/angular-ui-select2/src/select2.js"},
     { pattern: "node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"},
     { pattern: "node_modules/angular-xeditable/dist/js/xeditable.js"},
     { pattern: "node_modules/moment/moment.js"},
@@ -28,6 +28,7 @@ module.exports = {
     { pattern: "node_modules/sweetalert/lib/sweet-alert.js"},
     { pattern: "node_modules/angular-drag-and-drop-lists/angular-drag-and-drop-lists.js"},
 
+    { pattern: "src/select2/uiSelect2.js"},
     { pattern: "src/scripts/gridz/gridz.js"},
     { pattern: "src/scripts/utils/baseCtrl.js"},
     { pattern: "src/scripts/utils/alerts.js"},

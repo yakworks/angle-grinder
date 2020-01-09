@@ -220,7 +220,8 @@ describe("module: angleGrinder.gridz", function() {
 
         // Then
         expect(spy).to.have.been.called;
-        return expect(spy).to.have.been.calledWith("open");
+        expect(spy).to.have.been.calledWith("open");
+        spy.restore()
       });
     });
   });

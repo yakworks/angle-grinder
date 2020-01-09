@@ -44,8 +44,19 @@ config.set({
       { type: "cobertura" }
     ]
   },
-  reporters: ["dots", "junit", "coverage"],
+  reporters: ['progress', "junit", "coverage"],
+  //add 'html', above for reeporter
+  // htmlReporter: {
+  //   outputFile: 'tests/units.html',
 
+  //   // Optional
+  //   pageTitle: 'Unit Tests',
+  //   subPageTitle: 'A sample project description',
+  //   groupSuites: true,
+  //   useCompactStyle: true,
+  //   useLegacyStyle: true,
+  //   showOnlyFailed: false
+  // },
   // web server port
   //port: 8080,
 

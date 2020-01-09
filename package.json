@@ -18,7 +18,7 @@
     "webdriver-manager": "webdriver-manager"
   },
   "dependencies": {
-    "Select2": "~3.5.1",
+    "Select2": "^3.5.7",
     "angular": "1.7.9",
     "angular-animate": "1.7.9",
     "angular-drag-and-drop-lists": "2.1.0",
