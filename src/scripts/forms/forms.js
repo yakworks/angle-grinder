@@ -3,9 +3,10 @@
  * DS102: Remove unnecessary code created because of implicit returns
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-// Here be dragons. Decorate `daypickerDirective`.
+// Here be dragons. Decorate `uibDaypickerDirective`.
+//FIXME explain why we are playing with dragons here? II thought we didn;t use the date picker in this lib
 angular.module("ui.bootstrap.datepicker").config([
-  "$provide", $provide => $provide.decorator("daypickerDirective", ["$delegate", function($delegate) {
+  "$provide", $provide => $provide.decorator("uibDaypickerDirective", ["$delegate", function($delegate) {
     const directive = $delegate[0]
 
     const oldCompile = directive.compile
