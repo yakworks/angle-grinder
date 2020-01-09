@@ -20,8 +20,8 @@ module.exports = config => config.set({
     "docs/exampleApp/**/*.coffee": ["coffee"],
     "src/scripts/**/*.js": ["babel"],
     "tests/unit/**/*.js": ["babel"],
-    "tests/unit/**/*.coffee": ["coffee"],
-    "tests/mocks.coffee": ["coffee"]
+    //"tests/unit/**/*.coffee": ["coffee"],
+    "tests/mocks.js": ["babel"]
   },
 
   ngHtml2JsPreprocessor: {
@@ -55,6 +55,11 @@ module.exports = config => config.set({
   // cli runner port
   runnerPort: 9100,
 
+  browsers: [
+    // Run tests using Chrome
+    'ChromeHeadless'
+  ],
+
   // Start these browsers, currently available:
   // - Chrome
   // - ChromeCanary
@@ -63,20 +68,20 @@ module.exports = config => config.set({
   // - Safari (only Mac)
   // - PhantomJS
   // - IE (only Windows)
-  customLaunchers: {
-    Chrome_no_sandbox: {
-      base: 'Chrome',
-      flags: [
-        '--disable-web-security',
-        '--no-sandbox',
-        '--disable-setuid-sandbox',
-        '--disable-dev-shm-usage',
-        '--remote-debugging-port=9223',
-        '--headless',
-        '--disable-gpu'
-      ]
-    }
-  },
+  // customLaunchers: {
+  //   Chrome_no_sandbox: {
+  //     base: 'Chrome',
+  //     flags: [
+  //       '--disable-web-security',
+  //       '--no-sandbox',
+  //       '--disable-setuid-sandbox',
+  //       '--disable-dev-shm-usage',
+  //       '--remote-debugging-port=9223',
+  //       '--headless',
+  //       '--disable-gpu'
+  //     ]
+  //   }
+  // },
 
   // If browser does not capture in given timeout [ms], kill it
   captureTimeout: 30000,

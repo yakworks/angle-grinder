@@ -12,7 +12,12 @@ app.directive("agMaxLines", ["IsFalsyServ", "$parse", (IsFalsyServ, $parse) => (
   link(scope, elem, attrs, ngModelCtrl) {
     const validator = function(value) {
       value = value ? value.trim() : value
+      //XXX explain how this is working, attrs.agMaxLines
       const maxLines = $parse(attrs.agMaxLines)(scope)
+      //console.log('$parse(attrs.agMaxLines) **********************************************************' + $parse(attrs.agMaxLines))
+      //console.log('scope **********************************************************' + scope)
+      //console.log('maxLines **********************************************************' + maxLines)
+      //console.log('attrs.agMaxLines **********************************************************' + attrs.agMaxLines)
       const numLines = (value || '').split("\n").length
       const valid = IsFalsyServ(maxLines) ||  (numLines <= maxLines)
       ngModelCtrl.$setValidity("maxlines", valid)

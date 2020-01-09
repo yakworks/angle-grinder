@@ -27,7 +27,7 @@ common.config(["$localeProvider", "$provide", function($localeProvider, $provide
 // Decorates `$http.pendingRequests` with some useful features
 common.factory("pendingRequests", [
   "$http", function($http) {
-    var pendingRequests = () => pendingRequests.any()
+    let pendingRequests = () => pendingRequests.any()
 
     // Returns true if any http request is in progress
     pendingRequests.any = () => pendingRequests.for("GET", "POST", "PUT", "PATCH", "DELETE")
@@ -50,7 +50,3 @@ common.value("camelize", str => str.replace(/(\-|\.|_|\s)+(.)?/g, function(match
 
 //Due to changes in angular 1.6 see https://docs.angularjs.org/guide/migration#commit-aa077e8
 common.config(['$locationProvider', $locationProvider => $locationProvider.hashPrefix('')])
-
-common.config(["$compileProvider", $compileProvider => $compileProvider.preAssignBindingsEnabled(true)])
-
-
