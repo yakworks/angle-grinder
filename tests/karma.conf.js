@@ -4,14 +4,12 @@
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
 // Karma configuration
-module.exports = config => config.set({
+module.exports = function karmaConfig (config) {
+config.set({
 
   basePath: "../",
 
-  frameworks: [
-    "mocha",
-    "sinon-chai"
-  ],
+  frameworks: [ "mocha", 'chai', "sinon-chai" ],
 
   files: require("./karma-files.js").files,
 
@@ -46,14 +44,13 @@ module.exports = config => config.set({
       { type: "cobertura" }
     ]
   },
-
   reporters: ["dots", "junit", "coverage"],
 
   // web server port
-  port: 8080,
+  //port: 8080,
 
   // cli runner port
-  runnerPort: 9100,
+  //runnerPort: 9100,
 
   browsers: [
     // Run tests using Chrome
@@ -87,13 +84,15 @@ module.exports = config => config.set({
   captureTimeout: 30000,
 
   // enable / disable watching file and executing tests whenever any file changes
-  autoWatch: true,
+  //autoWatch: true,
 
   // Continuous Integration mode
   // if true, it capture browsers, run tests and exit
-  singleRun: false,
+  singleRun: true,
 
   // level of logging
   // possible values: LOG_DISABLE || LOG_ERROR || LOG_WARN || LOG_INFO || LOG_DEBUG
   logLevel: config.LOG_WARN
-});
+})
+
+}
