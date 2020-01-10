@@ -1,0 +1,2 @@
+#!/bin/bash
+docker run -it --rm --name node13 -v "$PWD":/project -w /project yakworks/alpine-node-gradle:1 /bin/bash

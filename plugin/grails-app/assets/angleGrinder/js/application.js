@@ -3,10 +3,6 @@ var app = angular.module("angleGrinder", [
     "ngResource",
     "ngRoute",
     "ui.select2",
-    "ui.grid",
-    "ui.grid.resizeColumns",
-    "ui.grid.pagination",
-    "ui.grid.edit",
 
     "angleGrinder.common",
     "angleGrinder.gridz",

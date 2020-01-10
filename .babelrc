@@ -1,0 +1,20 @@
+{
+  "presets": [
+    ["@babel/preset-env",{
+      "useBuiltIns": "entry" ,
+      "corejs": 3
+    }]
+  ],
+  "plugins": [
+    "angularjs-annotate",
+    "lodash",
+    "@babel/plugin-proposal-optional-chaining",
+    [
+      "babel-plugin-root-import",
+      {
+        "rootPathSuffix": "src",
+        "rootPathPrefix": "~/"
+      }
+    ]
+  ]
+}

@@ -1,6 +1,6 @@
-# Angle Grinder
+# Angle Grinder 3.x
 
-[![Build Status](https://travis-ci.org/9ci/angle-grinder.svg?branch=grails3)](https://travis-ci.org/9ci/angle-grinder)
+[![Build Status](https://travis-ci.org/9ci/angle-grinder.svg?branch=3.x)](https://travis-ci.org/9ci/angle-grinder)
 
 ## About
 __angle-grinder__ can be opinionated at times. It is a collection of libraries with mods and wrappers around them to facilite building an application faster with anglularJS and Bootstrap 2.
