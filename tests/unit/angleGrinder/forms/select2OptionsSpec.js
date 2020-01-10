@@ -13,10 +13,12 @@ describe("module: angleGrinder.forms, service: Select2Options", function() {
   let options = null;
   beforeEach(inject(Select2Options => options = Select2Options()));
 
+
   it("builds default options", function() {
     expect(options).to.have.deep.property("width", "element");
     expect(options).to.have.deep.property("initSelection", angular.noop);
-    return expect(options).to.have.deep.property("ajax.dataType", "json");
+    //console.log("************** options", options)
+    return expect(options.ajax.dataType).to.eq("json");
   });
 
   it("can override default options", inject(function(Select2Options) {

@@ -4,24 +4,28 @@
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
 // Karma configuration
-module.exports = function karmaConfig (config) {
-config.set({
+module.exports = function karmaConfig (config) { config.set({
 
   basePath: "../",
 
-  frameworks: [ "mocha", 'chai', "sinon-chai" ],
+  frameworks: [ "mocha", "sinon-chai" ],
 
-  files: require("./karma-files.js").files,
+  //files: require("./karma-files.js").files,
 
   preprocessors: {
     "**/*.html": ["html2js"],
     "docs/exampleApp/**/*.js": ["babel"],
     "src/scripts/**/*.js": ["babel"],
-    "tests/unit/**/*.js": ["babel"],
+    "tests/unit/**/*.js": ["babel",],
     //"tests/unit/**/*.coffee": ["coffee"],
     "tests/mocks.js": ["babel"]
   },
-
+  babelPreprocessor: {
+    options: {
+      sourceMap: 'inline',
+      retainLines: true // so errors are reported on correct line
+    },
+  },
   ngHtml2JsPreprocessor: {
     stripPrefix: "docs/"
   },
@@ -44,19 +48,13 @@ config.set({
       { type: "cobertura" }
     ]
   },
-  reporters: ['progress', "junit", "coverage"],
-  //add 'html', above for reeporter
-  // htmlReporter: {
-  //   outputFile: 'tests/units.html',
+  reporters: ['dots', 'mocha', "coverage"],
 
-  //   // Optional
-  //   pageTitle: 'Unit Tests',
-  //   subPageTitle: 'A sample project description',
-  //   groupSuites: true,
-  //   useCompactStyle: true,
-  //   useLegacyStyle: true,
-  //   showOnlyFailed: false
-  // },
+  // "junit",
+  // add 'html', above for reeporter
+  mochaReporter: {
+    output: 'minimal'
+  },
   // web server port
   //port: 8080,
 
@@ -98,6 +96,5 @@ config.set({
   // level of logging
   // possible values: LOG_DISABLE || LOG_ERROR || LOG_WARN || LOG_INFO || LOG_DEBUG
   logLevel: config.LOG_WARN
-})
 
-}
+})}

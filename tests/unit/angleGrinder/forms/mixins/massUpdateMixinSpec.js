@@ -50,9 +50,10 @@ describe("module: angleGrinder.forms mixin: MassUpdateMixin", function() {
         expect($uibModal.open).to.have.been.called;
 
         const args = $uibModal.open.getCall(0).args[0];
-        expect(args).to.have.deep.property("resolve.selectedIds");
-        expect(args).to.have.deep.property("resolve.grid");
-        expect(args).to.have.deep.property("resolve.extraParams");
+        //console.log("*************args",args)
+        expect(args.resolve.selectedIds).to.exist
+        expect(args.resolve.grid).to.exist
+        expect(args.resolve.extraParams).to.exist
 
         return expect(args.resolve.extraParams()).to.have.property("foo", "bar");
       })

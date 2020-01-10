@@ -45,7 +45,7 @@ describe("module: angleGrinder.forms", function() {
     })
     );
 
-    it("assigns an instance to the scope", () => expect($scope.account).to.not.be.undefied);
+    it("assigns an instance to the scope", () => expect($scope.account).to.not.be.undefined);
 
     describe("#closeDialog", () => it("closes a dialog", function() {
       $scope.closeDialog();
