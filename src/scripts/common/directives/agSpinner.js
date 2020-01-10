@@ -3,7 +3,7 @@
  * DS102: Remove unnecessary code created because of implicit returns
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-const spinner = angular.module("angleGrinder.spinner", ["angleGrinder.common"])
+const spinner = angular.module('angleGrinder.spinner', ['angleGrinder.common'])
 
 /*
 Use css to set the spinner animation image:
@@ -13,12 +13,12 @@ Use css to set the spinner animation image:
   }
 ```
 */
-spinner.directive("agSpinner", () => ({
+spinner.directive('agSpinner', () => ({
   replace: true,
-  restrict: "E",
+  restrict: 'E',
 
   controller: [
-    "$scope", "pendingRequests",
+    '$scope', 'pendingRequests',
     ($scope, pendingRequests) => $scope.showSpinner = () => pendingRequests.any()
   ],
 

@@ -4,9 +4,9 @@
  * DS206: Consider reworking classes to avoid initClass
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-const alerts = angular.module("angleGrinder.alerts", [])
+const alerts = angular.module('angleGrinder.alerts', [])
 
-alerts.value("alertTimeout", 3000)
+alerts.value('alertTimeout', 3000)
 
 class Alerts {
   constructor($log, $timeout, alertTimeout) {
@@ -14,26 +14,26 @@ class Alerts {
     this.$timeout = $timeout
     this.alertTimeout = alertTimeout
     this.alertsOptions = {
-      error:{},
+      error: {},
       info: {},
       success: {},
       defaultOptions: {
-        "closeButton": true,
-        "debug": false,
-        "newestOnTop": true,
-        "progressBar": true,
-        "positionClass": "toast-top-right",
-        "preventDuplicates": true,
-        "onclick": null,
-        "showDuration": "100",
-        "hideDuration": "1000",
-        "timeOut": this.alertTimeout,
-        "extendedTimeOut": 0,
-        "showEasing": "swing",
-        "hideEasing": "linear",
-        "showMethod": "fadeIn",
-        "hideMethod": "fadeOut",
-        "tapToDismiss": false
+        closeButton: true,
+        debug: false,
+        newestOnTop: true,
+        progressBar: true,
+        positionClass: 'toast-top-right',
+        preventDuplicates: true,
+        onclick: null,
+        showDuration: '100',
+        hideDuration: '1000',
+        timeOut: this.alertTimeout,
+        extendedTimeOut: 0,
+        showEasing: 'swing',
+        hideEasing: 'linear',
+        showMethod: 'fadeIn',
+        hideMethod: 'fadeOut',
+        tapToDismiss: false
       }
     }
   }
@@ -45,9 +45,9 @@ class Alerts {
   }
 
   // Helper methods for various alerts types
-  success(text) { return this.wrapMessage(text, "success") }
-  info(text) { return this.wrapMessage(text, "info") }
-  error(text) { return this.wrapMessage(text, "error") }
+  success(text) { return this.wrapMessage(text, 'success') }
+  info(text) { return this.wrapMessage(text, 'info') }
+  error(text) { return this.wrapMessage(text, 'error') }
 
   setTimeout(delay, type) {
     if (!_.isNil(type)) {
@@ -58,9 +58,9 @@ class Alerts {
   }
 
   setErrorTimeout(delay) {
-    return this.setTimeout(delay, "error")
+    return this.setTimeout(delay, 'error')
   }
 }
 
-Alerts.$inject = ["$log", "$timeout", "alertTimeout"]
-alerts.service("alerts", Alerts)
+Alerts.$inject = ['$log', '$timeout', 'alertTimeout']
+alerts.service('alerts', Alerts)

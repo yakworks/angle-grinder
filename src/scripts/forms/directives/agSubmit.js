@@ -6,13 +6,13 @@
  * DS207: Consider shorter variations of null checks
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-var forms = angular.module("angleGrinder.forms")
+var forms = angular.module('angleGrinder.forms')
 
-forms.directive("agSubmit", [
-  "$parse", "$log", "serverValidationErrorsHandler",
+forms.directive('agSubmit', [
+  '$parse', '$log', 'serverValidationErrorsHandler',
   ($parse, $log, serverValidationErrorsHandler) => ({
-    restrict: "A",
-    require: "form",
+    restrict: 'A',
+    require: 'form',
 
     compile(element, attrs) {
       const onSubmit = $parse(attrs.agSubmit)
@@ -23,18 +23,18 @@ forms.directive("agSubmit", [
         forms.push(form)
 
         // iterate through  all nested forms and mark them as submitted
-        const nestedForms = _.filter(_.values(form), input => (__guard__(__guard__(input != null ? input.$$element : undefined, x1 => x1[0]), x => x.tagName) === "FORM") && (!Array.from(forms).includes(input)))
+        const nestedForms = _.filter(_.values(form), input => (__guard__(__guard__(input != null ? input.$$element : undefined, x1 => x1[0]), x => x.tagName) === 'FORM') && (!Array.from(forms).includes(input)))
         return Array.from(nestedForms).map((nestedForm) => markAsSubmitted(nestedForm))
       }
 
-      return (scope, element, attrs, formCtrl) => element.on("submit", function(event) {
-        $log.debug("[forms] submitting form", formCtrl.$name, element, formCtrl)
+      return (scope, element, attrs, formCtrl) => element.on('submit', function(event) {
+        $log.debug('[forms] submitting form', formCtrl.$name, element, formCtrl)
 
         // mark the form as submitted
         scope.$apply(() => markAsSubmitted(formCtrl))
 
         // do nothing when the form is invalid
-        if (formCtrl.$invalid) { return; }
+        if (formCtrl.$invalid) { return }
 
         // submit the form and handle a promise along with resource
         const result = _.flatten([onSubmit(scope, { $event: event })])
@@ -42,7 +42,6 @@ forms.directive("agSubmit", [
 
         // TODO use `$q.when`
         if (promise && angular.isObject(promise)) {
-
           // disable/enable form controls
           formCtrl.$saving = true
           const finallyProm = promise.finally(() => formCtrl.$saving = false)
@@ -60,7 +59,7 @@ forms.directive("agSubmit", [
 
           // on error: handle server side errors
           return promise.catch(function(response) {
-            if (!angular.isFunction(resource != null ? resource.resourceName : undefined)) { return; }
+            if (!angular.isFunction(resource != null ? resource.resourceName : undefined)) { return }
             return serverValidationErrorsHandler(formCtrl, response, resource.resourceName())
           })
         }

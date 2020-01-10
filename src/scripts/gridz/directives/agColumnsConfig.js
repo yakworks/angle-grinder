@@ -4,35 +4,34 @@
  * DS206: Consider reworking classes to avoid initClass
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-var app = angular.module("angleGrinder.gridz")
+var app = angular.module('angleGrinder.gridz')
 
 class ManageGridColumnsCtrl {
   static initClass() {
-  
-    this.$inject = ["$scope"]
+    this.$inject = ['$scope']
   }
-  constructor($scope) {
 
+  constructor($scope) {
     // Names of columns which are not displayed at the "Manage Columns" modal.
     // These columns are placed at first positions of a grid.
     const systemColumns = [
-      "cb",
-      "-row_action_col"
+      'cb',
+      '-row_action_col'
     ]
 
     let gridEl = $scope.grid.getGridEl()
     const {
       colModel
-    } = gridEl.jqGrid("getGridParam")
+    } = gridEl.jqGrid('getGridParam')
     $scope.gridColumns = {
-      "available": [],
-      "displayed": []
+      available: [],
+      displayed: []
     }
 
     let element = null
     colModel.forEach(function(gridColumn, index) {
       if (!systemColumns.includes(gridColumn.name)) {
-        element = {originalId: index, label: gridColumn.label, name: gridColumn.name}
+        element = { originalId: index, label: gridColumn.label, name: gridColumn.name }
         if (gridColumn.hidden) {
           return $scope.gridColumns.available.push(element)
         } else {
@@ -65,8 +64,8 @@ class ManageGridColumnsCtrl {
       })
 
       gridEl.remapColumns(newColumnsOrder, true)
-      gridEl.jqGrid("showCol", displayedColumns)
-      gridEl.jqGrid("hideCol", hiddenColumns)
+      gridEl.jqGrid('showCol', displayedColumns)
+      gridEl.jqGrid('hideCol', hiddenColumns)
       return $scope.manageColumnsModal.close()
     }
 
@@ -75,24 +74,24 @@ class ManageGridColumnsCtrl {
 }
 ManageGridColumnsCtrl.initClass()
 
-app.controller("ManageGridColumnsCtrl", ManageGridColumnsCtrl)
+app.controller('ManageGridColumnsCtrl', ManageGridColumnsCtrl)
 
-app.directive("agManageGridColumns", [
-  "$uibModal", "pathWithContext",
+app.directive('agManageGridColumns', [
+  '$uibModal', 'pathWithContext',
   ($uibModal, pathWithContext) => ({
-    restrict: "E",
+    restrict: 'E',
     transclude: true,
     replace: true,
 
     scope: {
-      grid: "="
+      grid: '='
     },
 
     link(scope) {
       return scope.renderManageColumnsModal = () => scope.manageColumnsModal = $uibModal.open({
-        controller: "ManageGridColumnsCtrl",
+        controller: 'ManageGridColumnsCtrl',
         keyboard: true,
-        backdrop: "static",
+        backdrop: 'static',
         scope,
         template: `\
 <div class="manage-columns-modal">

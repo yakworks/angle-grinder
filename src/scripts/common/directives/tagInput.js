@@ -4,7 +4,7 @@
  * DS102: Remove unnecessary code created because of implicit returns
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-var app = angular.module("angleGrinder.common")
+var app = angular.module('angleGrinder.common')
 
 app.directive('tagInput', () => ({
   restrict: 'E',
@@ -14,15 +14,14 @@ app.directive('tagInput', () => ({
   },
 
   link($scope, element, attrs) {
-
     $scope.tagVal = ''
-    $scope.style = attrs.style || ""
+    $scope.style = attrs.style || ''
     $scope.placeholder = attrs.placeholder
     $scope.defaultWidth = '10px'
 
     $scope.tagArray = function() {
       if ($scope.tags === undefined) { return [] }
-      return $scope.tags.split(',').filter(tag => tag !== "")
+      return $scope.tags.split(',').filter(tag => tag !== '')
     }
 
     $scope.addTag = function() {
@@ -32,7 +31,7 @@ app.directive('tagInput', () => ({
         tagArray.push($scope.tagVal)
         $scope.tags = tagArray.join(',')
       }
-      return $scope.tagVal = ""
+      return $scope.tagVal = ''
     }
 
     $scope.deleteTag = function(key) {
@@ -45,22 +44,21 @@ app.directive('tagInput', () => ({
 
     $scope.$watch('tagVal', function(newVal, oldVal) {
       if ((newVal !== oldVal) || (newVal !== undefined)) {
-
-        const tempEl = $("<span>" + newVal + "</span>").appendTo("body")
+        const tempEl = $('<span>' + newVal + '</span>').appendTo('body')
         $scope.inputWidth = tempEl.width() + 5
         if ($scope.inputWidth < $scope.defaultWidth) { $scope.inputWidth = $scope.defaultWidth }
         return tempEl.remove()
       }
     })
 
-    element.bind("keydown", function(e) {
+    element.bind('keydown', function(e) {
       const key = e.which
 
       if ((key === 9) || (key === 13)) { e.preventDefault() }
       if (key === 8) { return $scope.$apply('deleteTag()') }
     })
 
-    element.bind("keyup", function(e) {
+    element.bind('keyup', function(e) {
       const key = e.which
 
       // Tab, Enter or , pressed
@@ -70,7 +68,7 @@ app.directive('tagInput', () => ({
       }
     })
 
-    return element.bind("focusout", function(e) {
+    return element.bind('focusout', function(e) {
       e.preventDefault()
       return $scope.$apply('addTag()')
     })

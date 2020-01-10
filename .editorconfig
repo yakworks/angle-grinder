@@ -1,21 +1,57 @@
-# EditorConfig helps developers define and maintain consistent
-# coding styles between different editors and IDEs
-# editorconfig.org
+#################
+# Common Settings
+#################
 
+# This file is the top-most EditorConfig file
 root = true
 
-
+# All Files
 [*]
-
-# Change these settings to your own preference
+charset = utf-8
+end_of_line = lf
 indent_style = space
 indent_size = 2
-
-# We recommend you to keep these unchanged
-end_of_line = lf
-charset = utf-8
-trim_trailing_whitespace = true
+max_line_length = 120
 insert_final_newline = true
+trim_trailing_whitespace = true
 
+#########################
+# File Extension Settings
+#########################
+
+# Various XML/json Configuration Files
+[*.{xml,json,json5,yml,yaml,ruleset}]
+max_line_length = off
+
+# Markdown Files
 [*.md]
 trim_trailing_whitespace = false
+
+[*.properties]
+trim_trailing_whitespace = false
+max_line_length = off
+
+# Web Files
+[*.{htm,html,js,ts,tsx,css,sass,scss,less,svg,vue,coffee,stylintrc}]
+indent_size = 2
+
+# java groovy
+[*.{groovy,java,gsp,jsp,kt,kts}]
+indent_style = space
+indent_size = 4
+continuation_indent_size = 4
+
+[*.gradle]
+
+# python
+[*.py]
+indent_style = space
+indent_size = 4
+
+[Makefile]
+indent_style = tab
+indent_size = 4
+[Makefile.*]
+indent_style = tab
+indent_size = 4
+

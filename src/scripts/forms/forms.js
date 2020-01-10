@@ -4,9 +4,9 @@
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
 // Here be dragons. Decorate `uibDaypickerDirective`.
-//FIXME explain why we are playing with dragons here? II thought we didn;t use the date picker in this lib
-angular.module("ui.bootstrap.datepicker").config([
-  "$provide", $provide => $provide.decorator("uibDaypickerDirective", ["$delegate", function($delegate) {
+// FIXME explain why we are playing with dragons here? II thought we didn;t use the date picker in this lib
+angular.module('ui.bootstrap.datepicker').config([
+  '$provide', $provide => $provide.decorator('uibDaypickerDirective', ['$delegate', function($delegate) {
     const directive = $delegate[0]
 
     const oldCompile = directive.compile
@@ -16,7 +16,7 @@ angular.module("ui.bootstrap.datepicker").config([
       return function(scope) {
         link.apply(this, arguments)
 
-        return scope.$watch("rows", () => angular.forEach(scope.rows, function(row) {
+        return scope.$watch('rows', () => angular.forEach(scope.rows, function(row) {
           if (_.every(row, dt => dt.secondary)) {
             return _.map(row, dt => dt.hide = true)
           }
@@ -29,35 +29,34 @@ angular.module("ui.bootstrap.datepicker").config([
   ])
 ])
 
-var forms = angular.module("angleGrinder.forms", [
-  "ui.bootstrap.collapse",
-  "ui.bootstrap.accordion",
-  "ui.bootstrap.alert",
-  "ui.bootstrap.buttons",
-  "ui.bootstrap.carousel",
-  "ui.bootstrap.dateparser",
-  "ui.bootstrap.position",
-  "ui.bootstrap.dropdown",
-  "ui.bootstrap.stackedMap",
-  "ui.bootstrap.modal",
-  "ui.bootstrap.pagination",
-  "ui.bootstrap.progressbar",
-  "ui.bootstrap.rating",
-  "ui.bootstrap.tabs",
-  "ui.bootstrap.tpls",
-  "ui.bootstrap.tooltip",
-  "xeditable",
-  "angleGrinder.common",
-  "angleGrinder.alerts"
+var forms = angular.module('angleGrinder.forms', [
+  'ui.bootstrap.collapse',
+  'ui.bootstrap.accordion',
+  'ui.bootstrap.alert',
+  'ui.bootstrap.buttons',
+  'ui.bootstrap.carousel',
+  'ui.bootstrap.dateparser',
+  'ui.bootstrap.position',
+  'ui.bootstrap.dropdown',
+  'ui.bootstrap.stackedMap',
+  'ui.bootstrap.modal',
+  'ui.bootstrap.pagination',
+  'ui.bootstrap.progressbar',
+  'ui.bootstrap.rating',
+  'ui.bootstrap.tabs',
+  'ui.bootstrap.tpls',
+  'ui.bootstrap.tooltip',
+  'xeditable',
+  'angleGrinder.common',
+  'angleGrinder.alerts'
 ])
 
 forms.run([
-  "$templateCache", function($templateCache) {
-
+  '$templateCache', function($templateCache) {
     // Override html template for the angular-ui/bootstrap pagination
     // to make it backward compatible with bootstrap 3.x
 
-    $templateCache.put("template/pagination/pagination.html",
+    $templateCache.put('template/pagination/pagination.html',
       `\
 <ul class="pagination">
   <li ng-class="{disabled: noPrevious(), previous: align}">
@@ -86,9 +85,8 @@ forms.run([
   }
 ])
 
-
-forms.config([ "$provide", $provide => //Decorate select tags, wrap inside 'select-wrapper' so we can add dropdown arrow to standard html selects
-  $provide.decorator("selectDirective", ["$delegate", function($delegate) {
+forms.config(['$provide', $provide => // Decorate select tags, wrap inside 'select-wrapper' so we can add dropdown arrow to standard html selects
+  $provide.decorator('selectDirective', ['$delegate', function($delegate) {
     const directive = $delegate[0]
     const {
       link
@@ -100,8 +98,8 @@ forms.config([ "$provide", $provide => //Decorate select tags, wrap inside 'sele
       },
 
       post(scope, element, attrs, ctrl) {
-        //Add wrapper, if its not already wrapped and its not a select2-wrapper.
-        if( !(element.parent().attr('class') === 'select-wrapper') && (element.attr('ui-select2') === undefined) ) {
+        // Add wrapper, if its not already wrapped and its not a select2-wrapper.
+        if (!(element.parent().attr('class') === 'select-wrapper') && (element.attr('ui-select2') === undefined)) {
           const template = angular.element("<div class='select-wrapper'></div>")
           element.wrap(template)
         }
@@ -115,8 +113,6 @@ forms.config([ "$provide", $provide => //Decorate select tags, wrap inside 'sele
   ])
 ])
 
-
-//TODO: refactor, can cause errors swallowing
+// TODO: refactor, can cause errors swallowing
 forms.config(['$qProvider', $qProvider => $qProvider.errorOnUnhandledRejections(false)
 ])
-

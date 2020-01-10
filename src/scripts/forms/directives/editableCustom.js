@@ -3,19 +3,18 @@
  * DS102: Remove unnecessary code created because of implicit returns
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-var app = angular.module("angleGrinder.forms")
+var app = angular.module('angleGrinder.forms')
 
 // Ability to provide custom template directly in the DOM
-app.directive("editableCustom", [
-  "editableDirectiveFactory", function(editableDirectiveFactory) {
-    const result = editableDirectiveFactory({
-      directiveName: "editableCustom"})
+app.directive('editableCustom', [
+  'editableDirectiveFactory', function(editableDirectiveFactory) {
+    const result = editableDirectiveFactory({ directiveName: 'editableCustom' })
 
     // Here be dragons...
     const { compile } = result
     result.compile = function(element) {
       // find template element, grab its html and remove it from the DOM
-      const templateEl = element.next("[editable-custom-template]")
+      const templateEl = element.next('[editable-custom-template]')
       const tpl = templateEl.html()
       templateEl.remove()
 

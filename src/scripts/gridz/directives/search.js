@@ -4,16 +4,16 @@
  * DS207: Consider shorter variations of null checks
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-var gridz = angular.module("angleGrinder.gridz")
+var gridz = angular.module('angleGrinder.gridz')
 
 // Retunrs true if `filters` contain at least one non-empty search field
-gridz.value("hasSearchFilters", function(filters) {
-  for (let k in filters) {
+gridz.value('hasSearchFilters', function(filters) {
+  for (const k in filters) {
     const value = filters[k]
     if (_.isNil(value)) { continue }
 
-    if (typeof value === "string") {
-      if ($.trim(value) !== "") { return true }
+    if (typeof value === 'string') {
+      if ($.trim(value) !== '') { return true }
     } else {
       return true
     }
@@ -22,8 +22,8 @@ gridz.value("hasSearchFilters", function(filters) {
   return false
 })
 
-gridz.directive("agSearchButton", () => ({
-  restrict: "E",
+gridz.directive('agSearchButton', () => ({
+  restrict: 'E',
   replace: true,
 
   template: `\
@@ -33,8 +33,8 @@ gridz.directive("agSearchButton", () => ({
 `
 }))
 
-gridz.directive("agResetSearchButton", () => ({
-  restrict: "E",
+gridz.directive('agResetSearchButton', () => ({
+  restrict: 'E',
   replace: true,
 
   template: `\
@@ -44,10 +44,10 @@ gridz.directive("agResetSearchButton", () => ({
 `
 }))
 
-gridz.directive("agSearchForm", ["$log", $log => ({
-  restrict: "A",
+gridz.directive('agSearchForm', ['$log', $log => ({
+  restrict: 'A',
   scope: true,
-  require: "^form",
+  require: '^form',
 
   link(scope, element, attrs, form) {
     // assign form instance to the scope
@@ -55,7 +55,7 @@ gridz.directive("agSearchForm", ["$log", $log => ({
   },
 
   controller: [
-    "$scope", "$parse", "$attrs",
+    '$scope', '$parse', '$attrs',
     function($scope, $parse, $attrs) {
       $scope.searching = false
 
@@ -65,7 +65,7 @@ gridz.directive("agSearchForm", ["$log", $log => ({
         const grid = $parse($attrs.agSearchForm)($scope)
 
         if (_.isNil(grid)) {
-          $log.warn("[gridz] grid is not defined")
+          $log.warn('[gridz] grid is not defined')
           return
         }
 
@@ -84,7 +84,7 @@ gridz.directive("agSearchForm", ["$log", $log => ({
         const form = $scope.searchForm
 
         if (form && form.$invalid) {
-          return $log.info("[gridz] advanced search form is invalid", form)
+          return $log.info('[gridz] advanced search form is invalid', form)
         }
 
         return gridSearch(filters)

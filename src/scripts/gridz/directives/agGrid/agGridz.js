@@ -3,32 +3,31 @@
  * DS102: Remove unnecessary code created because of implicit returns
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-var gridz = angular.module("angleGrinder.gridz")
+var gridz = angular.module('angleGrinder.gridz')
 
-gridz.directive("agGrid", [
-  "$timeout", "$log", "$parse", "agGridDataLoader", "ActionPopupHandler", "pathWithContext", "camelize",
+gridz.directive('agGrid', [
+  '$timeout', '$log', '$parse', 'agGridDataLoader', 'ActionPopupHandler', 'pathWithContext', 'camelize',
   function($timeout, $log, $parse, agGridDataLoader, ActionPopupHandler, pathWithContext, camelize) {
-
     const link = function(scope, element, attrs, gridCtrl) {
       // find grid placeholder
-      const gridEl = element.find("table.gridz")
+      const gridEl = element.find('table.gridz')
 
       // publish agGrid controller to the parent scope
       const alias = attrs.agGridName
       if (alias) { $parse(alias).assign(scope, gridCtrl) }
-      $parse("$grid").assign(scope, gridCtrl) //Make the grid available to controllers as $scope.$grid
+      $parse('$grid').assign(scope, gridCtrl) // Make the grid available to controllers as $scope.$grid
 
       // read grid options
       const options = $parse(attrs.agGrid)(scope)
-      if (!options) { throw new Error("undefined grid options") }
+      if (!options) { throw new Error('undefined grid options') }
 
       // read colModel from the `ag-grid-col-model` attribute
       if (attrs.agGridColModel) { options.colModel = angular.fromJson(attrs.agGridColModel) }
 
       // kill the grid when the related scope is destroyed
-      scope.$on("$destroy", function() {
-        $log.debug("[agGrid] destroying the grid", gridEl)
-        return gridEl.jqGrid("GridDestroy")
+      scope.$on('$destroy', function() {
+        $log.debug('[agGrid] destroying the grid', gridEl)
+        return gridEl.jqGrid('GridDestroy')
       })
 
       // Initializes a grid with the given options
@@ -50,13 +49,13 @@ gridz.directive("agGrid", [
             groupingView
           } = options
           groupingView.groupText = groupingView.groupText.map(value => '<input type="checkbox" class="cbox"/>' + value)
-          gridEl.jqGrid("setGridParam", "groupingView", groupingView)
+          gridEl.jqGrid('setGridParam', 'groupingView', groupingView)
         }
 
-        gridEl.on("jqGridAfterGridComplete", function() {
+        gridEl.on('jqGridAfterGridComplete', function() {
           if (options.dropGrouping) {
             const gridId = alias
-            $('tr.ui-jqgrid-labels th div') .draggable({
+            $('tr.ui-jqgrid-labels th div').draggable({
               appendTo: 'body',
               helper: 'clone'
             })
@@ -109,21 +108,21 @@ gridz.directive("agGrid", [
           }
         })
 
-        const groupCheckBox = ".jqgroup > td > .cbox"
+        const groupCheckBox = '.jqgroup > td > .cbox'
 
-        gridEl.on("jqGridSelectAll", function() {
+        gridEl.on('jqGridSelectAll', function() {
           if (options.dropGrouping) {
-            const isChecked = $('#cb_' + alias).is(":checked")
-            const selectedIds = gridEl.jqGrid("getGridParam", "selarrrow")
+            const isChecked = $('#cb_' + alias).is(':checked')
+            const selectedIds = gridEl.jqGrid('getGridParam', 'selarrrow')
             return $(groupCheckBox).each(function() {
               const row = $(this).closest('tr')
               if (isChecked) {
                 selectedIds.push(row.attr('id'))
-                row.addClass("ui-state-highlight")
-                return $(this).prop("checked", true)
+                row.addClass('ui-state-highlight')
+                return $(this).prop('checked', true)
               } else {
-                row.removeClass("ui-state-highlight")
-                return $(this).prop("checked", false)
+                row.removeClass('ui-state-highlight')
+                return $(this).prop('checked', false)
               }
             })
           }
@@ -133,7 +132,7 @@ gridz.directive("agGrid", [
 
         // jqGrid sucks at this point it expects `pager` to be an id
         if (options.pager !== false) {
-          options.pager = element.find(".gridz-pager").attr("id") || "gridz-pager"
+          options.pager = element.find('.gridz-pager').attr('id') || 'gridz-pager'
         }
 
         if (options.selectFirstRow === true) {
@@ -154,22 +153,22 @@ gridz.directive("agGrid", [
         gridEl.gridz(options)
         if (options.filterToolbar) {
           gridEl.jqGrid('filterToolbar', {
-              beforeSearch() {
-                const postData = gridEl.jqGrid('getGridParam', 'postData')
-                const defaultFilters = postData.defaultFilters || postData.filters
-                const filters = (_.extend(JSON.parse(defaultFilters), (_.pick(postData, (value, key) => !["page", "filters", "max", "sort", "order", "nd", "_search"].includes(key)))))
-                filters.firstLoad = false
-                postData.defaultFilters = defaultFilters
-                postData.filters = JSON.stringify(filters)
-                return console.log("Toolbar Search")
-              }
+            beforeSearch() {
+              const postData = gridEl.jqGrid('getGridParam', 'postData')
+              const defaultFilters = postData.defaultFilters || postData.filters
+              const filters = (_.extend(JSON.parse(defaultFilters), (_.pick(postData, (value, key) => !['page', 'filters', 'max', 'sort', 'order', 'nd', '_search'].includes(key)))))
+              filters.firstLoad = false
+              postData.defaultFilters = defaultFilters
+              postData.filters = JSON.stringify(filters)
+              return console.log('Toolbar Search')
             }
+          }
           )
         }
 
         // initialize actionPopup handler
         ActionPopupHandler(gridEl, scope, attrs)
-        return angular.element(element.find("select").wrap('<span class="select-wrapper"></span>'))
+        return angular.element(element.find('select').wrap('<span class="select-wrapper"></span>'))
       }
 
       // Initiates group checkbox action.
@@ -178,13 +177,14 @@ gridz.directive("agGrid", [
       // until next group checkbox is found.
       var initGroupCheckboxes = function(gridId, checkboxSelector) {
         const headerSelector = `.${alias}ghead_0`
-        return $('#' + gridId).on("change", checkboxSelector, function(e) {
+        return $('#' + gridId).on('change', checkboxSelector, function(e) {
           const currentCB = $(this)
           gridEl.setSelection($(this).closest('tr').attr('id'))
           const headers = currentCB.closest('tr').nextUntil(headerSelector)
           const checkboxes = headers.find('.cbox[type="checkbox"]')
           return checkboxes.each(function() {
-            return gridEl.setSelection($(this).closest('tr').attr('id'))})
+            return gridEl.setSelection($(this).closest('tr').attr('id'))
+          })
         })
       }
 
@@ -193,26 +193,26 @@ gridz.directive("agGrid", [
 <div class='tagged-input' style="min-height: 35px; margin-bottom: -4px">Drop headers here</div>
  </div>`
         )
-        dropDownsection.attr("id", `${alias}GroupDropDown`)
+        dropDownsection.attr('id', `${alias}GroupDropDown`)
         element.prepend(dropDownsection)
       }
 
-      if (element.is(":visible")) {
+      if (element.is(':visible')) {
         // Element is visible, initialize the grid now
         return initializeGrid()
       } else {
         let unregister
-        $log.info("grid is not visible:", alias)
+        $log.info('grid is not visible:', alias)
 
         // Initialize the grid when the element will be visible
         let timeoutPromise = null
         return unregister = scope.$watch(function() {
-          $timeout.cancel(timeoutPromise) //Cancel previous timeout
+          $timeout.cancel(timeoutPromise) // Cancel previous timeout
 
-          //We have to do timeout because of this issue with uib-tab https://github.com/angular-ui/bootstrap/issues/3796
-          //Otherwise when tab is clicked and digest cycle ($watch) runs, the element.is(":visible") is still false, and hence grid is never initialized.
-          timeoutPromise = $timeout(function(){
-            if (!element.is(":visible")) { return }
+          // We have to do timeout because of this issue with uib-tab https://github.com/angular-ui/bootstrap/issues/3796
+          // Otherwise when tab is clicked and digest cycle ($watch) runs, the element.is(":visible") is still false, and hence grid is never initialized.
+          timeoutPromise = $timeout(function() {
+            if (!element.is(':visible')) { return }
             // initialize the grid on the visible element
             initializeGrid()
 
@@ -220,20 +220,18 @@ gridz.directive("agGrid", [
             return unregister()
           }
 
-          , 100, false) //Here false means don't fire new digest cycle, otherwise $watch will be called infinitely.
+          , 100, false) // Here false means don't fire new digest cycle, otherwise $watch will be called infinitely.
 
           return false
         })
       }
     }
 
-
-
     return {
-      restrict: "A",
+      restrict: 'A',
 
-      require: "agGrid",
-      controller: "AgGridCtrl",
+      require: 'agGrid',
+      controller: 'AgGridCtrl',
 
       template: `\
 <table class="gridz"></table>
@@ -242,13 +240,13 @@ gridz.directive("agGrid", [
 
       compile(element, attrs) {
         // modify grid html element, generate grid id from the name or assign default value
-        const id = !_.isNil(attrs.agGridName) ? camelize(attrs.agGridName) : "gridz"
+        const id = !_.isNil(attrs.agGridName) ? camelize(attrs.agGridName) : 'gridz'
 
-        element.find("table.gridz").attr("id", id)
-        element.find("div.gridz-pager").attr("id", `${id}-pager`)
+        element.find('table.gridz').attr('id', id)
+        element.find('div.gridz-pager').attr('id', `${id}-pager`)
 
         // return linking function which will be called at a later time
-        return {post: link}
+        return { post: link }
       }
     }
   }

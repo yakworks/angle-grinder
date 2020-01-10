@@ -4,42 +4,42 @@
  * DS207: Consider shorter variations of null checks
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-var app = angular.module("angleGrinder.common")
+var app = angular.module('angleGrinder.common')
 // Open the confirmation dialog
 // options - it can be a string or object with the messages
 //   if th message is not specified default "Are you sure?" message will be used
 
 class ConfirmationDialogServClass {
-  constructor($log, $q){
+  constructor($log, $q) {
     this.$log = $log
     this.$q = $q
   }
 
-  open(options){
+  open(options) {
     if (options == null) {
       options = {}
     }
     if (angular.isString(options)) {
-      options = {message: options}
+      options = { message: options }
     }
 
     // assign default confirmation message
     if (options.message == null) {
-      options.message = "Are you sure?"
+      options.message = 'Are you sure?'
     }
 
     // assign button labels
     if (options.cancelLabel == null) {
-      options.cancelLabel = "Cancel"
+      options.cancelLabel = 'Cancel'
     }
     if (options.okLabel == null) {
-      options.okLabel = "Ok"
+      options.okLabel = 'Ok'
     }
     if (options.closeOnConfirm == null) {
       options.closeOnConfirm = true
     }
 
-    this.$log.info("[ag] opening confirmation dialog", options)
+    this.$log.info('[ag] opening confirmation dialog', options)
 
     const defer = this.$q.defer()
 
@@ -55,5 +55,5 @@ class ConfirmationDialogServClass {
     return defer.promise
   }
 }
-ConfirmationDialogServClass.$inject = ["$log", "$q"]
-app.service("ConfirmationDialogServ", ConfirmationDialogServClass)
+ConfirmationDialogServClass.$inject = ['$log', '$q']
+app.service('ConfirmationDialogServ', ConfirmationDialogServClass)

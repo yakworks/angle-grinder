@@ -8,10 +8,9 @@
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
 this.BaseCtrl = class BaseCtrl {
-
   static register(app, name) {
     if (name == null) { name = this.name || __guard__(this.toString().match(/function\s*(.*?)\(/), x => x[1]) }
-    if (typeof app === "string") { app = angular.module(app) }
+    if (typeof app === 'string') { app = angular.module(app) }
     return app.controller(name, this)
   }
 
@@ -20,7 +19,7 @@ this.BaseCtrl = class BaseCtrl {
 
     this.annotations = _.map(annotations, function(annotation) {
       const match = annotation.match(ANNOTATION_REG)
-      return {name: match[1], identifier: match[3] || match[1]}
+      return { name: match[1], identifier: match[3] || match[1] }
     })
 
     return this.$inject = _.map(this.annotations, annotation => annotation.name)
@@ -30,7 +29,7 @@ this.BaseCtrl = class BaseCtrl {
   expose($scope, ...members) {
     return _.chain(members).map((field) => [field, this[field]]).each((...args) => {
       const [field, entity] = Array.from(args[0])
-      return $scope[field] = typeof entity === "function" ? _.bind(entity, this) : entity
+      return $scope[field] = typeof entity === 'function' ? _.bind(entity, this) : entity
     }).value()
   }
 
@@ -45,4 +44,3 @@ this.BaseCtrl = class BaseCtrl {
     }
   }
 }
-

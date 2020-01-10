@@ -4,12 +4,11 @@
  * DS102: Remove unnecessary code created because of implicit returns
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-var gridz = angular.module("angleGrinder.gridz")
+var gridz = angular.module('angleGrinder.gridz')
 
-gridz.controller("gridPagerCtrlMixin", [
-  "$log", "$scope", "$parse", "$location", "$q", "gridName", "currentId", "path",
+gridz.controller('gridPagerCtrlMixin', [
+  '$log', '$scope', '$parse', '$location', '$q', 'gridName', 'currentId', 'path',
   function($log, $scope, $parse, $location, $q, gridName, currentId, path) {
-
     const currIdGetter = $parse(currentId)
     const currIdSetter = currIdGetter.assign
 
@@ -18,7 +17,7 @@ gridz.controller("gridPagerCtrlMixin", [
       if (_.isNil(id)) { return }
       if (id === oldId) { return }
 
-      return $location.path(path.replace(":id", id))
+      return $location.path(path.replace(':id', id))
     })
 
     // retrieve the grid
@@ -34,7 +33,7 @@ gridz.controller("gridPagerCtrlMixin", [
       const promise = getGrid().prevPage()
       promise.then(function() {
         const ids = getGridIds()
-        $log.debug("[agGrid] previous page was loaded", ids)
+        $log.debug('[agGrid] previous page was loaded', ids)
         return deferred.resolve(ids)
       })
 
@@ -48,7 +47,7 @@ gridz.controller("gridPagerCtrlMixin", [
       const promise = getGrid().nextPage()
       promise.then(function() {
         const ids = getGridIds()
-        $log.debug("[agGrid] next page was loaded", ids)
+        $log.debug('[agGrid] next page was loaded', ids)
         return deferred.resolve(ids)
       })
 
@@ -61,8 +60,8 @@ gridz.controller("gridPagerCtrlMixin", [
       return [ids, ids.indexOf(currIdGetter($scope).toString())]
     }
 
-    this.goTo = function(index){
-      //console.log(index)
+    this.goTo = function(index) {
+      // console.log(index)
       const [ids, indx] = Array.from(getCurrent())
       return currIdSetter($scope, ids[index])
     }
@@ -73,7 +72,6 @@ gridz.controller("gridPagerCtrlMixin", [
     }
 
     this.getIds = () => getGridIds()
-
 
     // return true when a grid in the background is loaded
     // and the pager can be displayed

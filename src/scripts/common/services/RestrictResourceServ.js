@@ -4,13 +4,13 @@
  * DS207: Consider shorter variations of null checks
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-var app = angular.module("angleGrinder.common")
+var app = angular.module('angleGrinder.common')
 
-app.value("requiredResourceFields", ["id"])
+app.value('requiredResourceFields', ['id'])
 
-app.factory("restrictResource", [
-  "$log", "DeepDiffServ", "resourceBuilder", "requiredResourceFields",
-  ($log, DeepDiffServ, resourceBuilder, requiredResourceFields) => (function(resource, allowedFields) {
+app.factory('restrictResource', [
+  '$log', 'DeepDiffServ', 'resourceBuilder', 'requiredResourceFields',
+  ($log, DeepDiffServ, resourceBuilder, requiredResourceFields) => function(resource, allowedFields) {
     if (allowedFields == null) { allowedFields = [] }
     angular.extend(resource, {
       $cacheData() {
@@ -37,5 +37,5 @@ app.factory("restrictResource", [
 
     resource.$cacheData()
     return resource
-  })
+  }
 ])

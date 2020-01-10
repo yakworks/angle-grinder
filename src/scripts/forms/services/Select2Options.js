@@ -4,10 +4,10 @@
  * DS207: Consider shorter variations of null checks
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-var app = angular.module("angleGrinder.forms")
+var app = angular.module('angleGrinder.forms')
 
-class Select2OptionsClass{
-  constructor(){
+class Select2OptionsClass {
+  constructor() {
     return function(options, dataOptions) {
       if (options == null) { options = {} }
       if (dataOptions == null) { dataOptions = {} }
@@ -15,11 +15,11 @@ class Select2OptionsClass{
 
       // build default options
       const defaults = {
-        width: "element",
+        width: 'element',
         initSelection: angular.noop,
 
         ajax: {
-          dataType: "json",
+          dataType: 'json',
           url: angular.noop, // dummy url, must be overridden
 
           data(term, page) {
@@ -29,9 +29,10 @@ class Select2OptionsClass{
               q: term,
 
               // sorting and pagination
-              sort: "id",
-              order: "asc",
-              max: 20, page
+              sort: 'id',
+              order: 'asc',
+              max: 20,
+              page
             }
 
             return angular.extend(dataDefaults, dataOptions)
@@ -40,7 +41,7 @@ class Select2OptionsClass{
           results(result, page) {
             return {
               results: result.rows,
-              more:    page < result.total
+              more: page < result.total
             }
           }
         },
@@ -58,4 +59,4 @@ class Select2OptionsClass{
   }
 }
 
-app.service("Select2Options", Select2OptionsClass)
+app.service('Select2Options', Select2OptionsClass)

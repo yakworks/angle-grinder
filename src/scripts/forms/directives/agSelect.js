@@ -6,22 +6,22 @@
  * DS207: Consider shorter variations of null checks
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-var gridz = angular.module("angleGrinder.gridz")
+var gridz = angular.module('angleGrinder.gridz')
 
 // Creates select2 component along with the "show" button
 // Options:
 //   `select-options` takes select2 options from the controller
 //   `ng-model` takes a model
-gridz.directive("agSelect2", [
-  "$rootScope", "$compile", "$log", "pathWithContext",
+gridz.directive('agSelect2', [
+  '$rootScope', '$compile', '$log', 'pathWithContext',
   ($rootScope, $compile, $log, pathWithContext) => ({
-    restrict: "E",
+    restrict: 'E',
     replace: true,
     transclude: true,
 
     scope: {
-      selectOptions: "=",
-      ngModel: "="
+      selectOptions: '=',
+      ngModel: '='
     },
 
     compile(element, attrs, transclude) {
@@ -32,7 +32,7 @@ gridz.directive("agSelect2", [
       transclude(scope, clone => (() => {
         const result = []
         for (element of Array.from(clone)) {
-          if (element instanceof HTMLElement && !_.isNil(element.getAttribute("ag-select2-result"))) {
+          if (element instanceof HTMLElement && !_.isNil(element.getAttribute('ag-select2-result'))) {
             resultTemplate = element.outerHTML
             break
           } else {
@@ -45,15 +45,15 @@ gridz.directive("agSelect2", [
       // pre linking function
       return {
         pre(scope, element, attrs) {
-          let options = angular.copy(scope.selectOptions || {multiple: true})
+          let options = angular.copy(scope.selectOptions || { multiple: true })
           if (!_.isNil(attrs.selectMultiple)) {
-            options.multiple = attrs.selectMultiple === "true"
+            options.multiple = attrs.selectMultiple === 'true'
           }
           scope.options = options
 
           // read `minimumInputLength` option from the attribute
           if (options.minimumInputLength == null) { options.minimumInputLength = 1 }
-          scope.showFill = attrs.fillAll && (attrs.fillAll === "true")
+          scope.showFill = attrs.fillAll && (attrs.fillAll === 'true')
           if (!_.isNil(attrs.selectMinimumInputLength)) {
             options.minimumInputLength = parseInt(attrs.selectMinimumInputLength)
           }
@@ -61,7 +61,7 @@ gridz.directive("agSelect2", [
             options.minimumInputLength = 0
           }
           // set the default `width`
-          if (options.width == null) { options.width = "resolve" }
+          if (options.width == null) { options.width = 'resolve' }
 
           // create `ajax`
           if (!!_.isNil(options.ajax) && !_.isNil(attrs.selectAjaxUrl)) {
@@ -70,13 +70,15 @@ gridz.directive("agSelect2", [
               data(term, page) {
                 return {
                   q: term, // search term (query params)
-                  max: 20, page,
-                  sort: "name", order: "asc"
+                  max: 20,
+                  page,
+                  sort: 'name',
+                  order: 'asc'
                 }
               },
               results(data, page) {
                 const more = page < data.total
-                return {results: data.rows, more}
+                return { results: data.rows, more }
               }
             }
 
@@ -91,17 +93,18 @@ gridz.directive("agSelect2", [
 
           // create `formatResult` function from the given template
           if (!_.isNil(resultTemplate)) {
-            if (options.formatResult == null) { options.formatResult = function(item) {
-
-              options = {interpolate: /\{\{(.+?)\}\}/g}
-              return angular.element(_.template(resultTemplate, options)({ item }))
-            } }
+            if (options.formatResult == null) {
+              options.formatResult = function(item) {
+                options = { interpolate: /\{\{(.+?)\}\}/g }
+                return angular.element(_.template(resultTemplate, options)({ item }))
+              }
+            }
           }
 
           // create default `formatSelection` method
           if (options.formatSelection == null) { options.formatSelection = item => item.name }
 
-          return $log.debug("[forms] initializing AgSelect2 component", scope.options)
+          return $log.debug('[forms] initializing AgSelect2 component', scope.options)
         }
       }
     },
@@ -116,14 +119,14 @@ gridz.directive("agSelect2", [
   })
 ])
 
-gridz.directive("agSelect2Open", () => ({
-  restrict: "E",
+gridz.directive('agSelect2Open', () => ({
+  restrict: 'E',
   replace: true,
   scope: true,
 
-  controller: ["$scope", "$element", ($scope, $element) => $scope.openSelect2 = function() {
-    const selectEl = $element.parent().find(".select2-container")
-    selectEl.select2("open")
+  controller: ['$scope', '$element', ($scope, $element) => $scope.openSelect2 = function() {
+    const selectEl = $element.parent().find('.select2-container')
+    selectEl.select2('open')
   }
   ],
 
@@ -134,18 +137,18 @@ gridz.directive("agSelect2Open", () => ({
 `
 }))
 
-gridz.directive("selectFill", [
-  "$http", "pathWithContext", "$parse",
+gridz.directive('selectFill', [
+  '$http', 'pathWithContext', '$parse',
   ($http, pathWithContext, $parse) => ({
-    restrict: "E",
+    restrict: 'E',
     replace: true,
     priority: 2000,
 
     link(scope, $element, attrs) {
       return scope.fill = function() {
-        const selectEl= $element.parent().parent().find("div[select-ajax-url]")[0]
+        const selectEl = $element.parent().parent().find('div[select-ajax-url]')[0]
         const model = $parse(selectEl.attributes['ng-model'].value)
-        return $http.get(pathWithContext(selectEl.attributes['select-ajax-url'].value)).then(function(resp){
+        return $http.get(pathWithContext(selectEl.attributes['select-ajax-url'].value)).then(function(resp) {
           let result = []
           if (model(scope.$parent.$parent).length < resp.data.rows.length) {
             result = resp.data.rows
@@ -163,27 +166,27 @@ gridz.directive("selectFill", [
   })
 ])
 
-gridz.directive("agSelect2Fill", [
-  "$http", "pathWithContext", "$parse",
+gridz.directive('agSelect2Fill', [
+  '$http', 'pathWithContext', '$parse',
   ($http, pathWithContext, $parse) => ({
-    restrict: "E",
+    restrict: 'E',
     replace: true,
     scope: true,
 
-    controller: ["$scope", "$element", ($scope, $element) => $scope.fill = function() {
-      const selectEl = $element.parent().find(".select2-container")
-      const select = document.getElementById(selectEl[0].attributes.id.value.replace("s2id_", ""))
-      const model = $parse(angular.element(select)[0].attributes["ng-model"].value)
-      let result = _.map(select.options, "value")
-      if  (!_.isNil(model($scope.$parent)) && (model($scope.$parent).length === result.length)) {
-        result =  []
+    controller: ['$scope', '$element', ($scope, $element) => $scope.fill = function() {
+      const selectEl = $element.parent().find('.select2-container')
+      const select = document.getElementById(selectEl[0].attributes.id.value.replace('s2id_', ''))
+      const model = $parse(angular.element(select)[0].attributes['ng-model'].value)
+      let result = _.map(select.options, 'value')
+      if (!_.isNil(model($scope.$parent)) && (model($scope.$parent).length === result.length)) {
+        result = []
       }
       model.assign($scope.$parent, result)
     }
     ],
 
     link(scope, $element, attrs) {
-      return $element.parent().css("display", "table")
+      return $element.parent().css('display', 'table')
     },
 
     template: `\

@@ -3,10 +3,10 @@
  * DS102: Remove unnecessary code created because of implicit returns
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-var forms = angular.module("angleGrinder.forms")
+var forms = angular.module('angleGrinder.forms')
 
-forms.directive("agCreateButton", () => ({
-  restrict: "E",
+forms.directive('agCreateButton', () => ({
+  restrict: 'E',
   replace: true,
   transclude: true,
 
@@ -15,7 +15,7 @@ forms.directive("agCreateButton", () => ({
       pre(scope, element) {
         return trasclude(scope, function(clone) {
           // Append the default label
-          if ($.trim(clone.text()) === "") { return element.append("Create") }
+          if ($.trim(clone.text()) === '') { return element.append('Create') }
         })
       }
     }
@@ -29,8 +29,8 @@ forms.directive("agCreateButton", () => ({
 `
 }))
 
-forms.directive("agCancelButton", () => ({
-  restrict: "E",
+forms.directive('agCancelButton', () => ({
+  restrict: 'E',
   replace: true,
 
   template: `\

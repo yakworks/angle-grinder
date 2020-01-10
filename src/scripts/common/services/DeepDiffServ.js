@@ -4,9 +4,9 @@
  * DS207: Consider shorter variations of null checks
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-var app = angular.module("angleGrinder.common")
+var app = angular.module('angleGrinder.common')
 
-app.service("DeepDiffServ", ["DeepPickServ", function(DeepPickServ){
+app.service('DeepDiffServ', ['DeepPickServ', function(DeepPickServ) {
   var map = function(oldVal, newVal, allowed, reqFields) {
     let args
     let diff = {}
@@ -25,8 +25,8 @@ app.service("DeepDiffServ", ["DeepPickServ", function(DeepPickServ){
       newVal = DeepPickServ.apply(this, args)
     }
 
-    _.forEach(newVal, function(v, k){
-      if ((!_.isNil(oldVal) && _.isEqual(v, oldVal[k])) || (k === "$cachedData")) {
+    _.forEach(newVal, function(v, k) {
+      if ((!_.isNil(oldVal) && _.isEqual(v, oldVal[k])) || (k === '$cachedData')) {
         return
       }
       return diff[k] = _.isObject(v) ? map(oldVal[k], v) : newVal[k]

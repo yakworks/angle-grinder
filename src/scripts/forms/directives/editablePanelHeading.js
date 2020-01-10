@@ -3,17 +3,16 @@
  * DS102: Remove unnecessary code created because of implicit returns
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-//Adds button for editable form to make the form visable
-var app = angular.module("angleGrinder.forms")
+// Adds button for editable form to make the form visable
+var app = angular.module('angleGrinder.forms')
 
-app.directive("editablePanelHeading", [
+app.directive('editablePanelHeading', [
   () => ({
-    restrict: "A",
+    restrict: 'A',
     transclude: true,
     replace: true,
 
-    scope: { form: "=editablePanelHeading"
-  },
+    scope: { form: '=editablePanelHeading' },
 
     template: `\
 <div class="panel-heading">

@@ -4,21 +4,20 @@
  * DS207: Consider shorter variations of null checks
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-var forms = angular.module("angleGrinder.forms")
+var forms = angular.module('angleGrinder.forms')
 
-forms.directive("agTabset", [
-  "$parse", "$q",
+forms.directive('agTabset', [
+  '$parse', '$q',
   ($parse, $q) => ({
-    restrict: "E",
+    restrict: 'E',
     replace: true,
     transclude: true,
     scope: true,
-    require: "agTabset",
+    require: 'agTabset',
 
     controller: [
-      "$log", "$scope", "$location",
+      '$log', '$scope', '$location',
       function($log, $scope, $location) {
-
         // stack of the tabs
         $scope.tabs = []
 
@@ -26,7 +25,7 @@ forms.directive("agTabset", [
         $scope.contentLoading = false
 
         // return the current tab
-        $scope.currentTab = () => _.find($scope.tabs, {selected: true})
+        $scope.currentTab = () => _.find($scope.tabs, { selected: true })
 
         // return the current template url
         $scope.currentTemplateUrl = function() {
@@ -44,9 +43,9 @@ forms.directive("agTabset", [
           tab.loading = false
 
           // update the url
-          if (!_.isNil(tab.name)) { $location.search("tab", tab.name) }
+          if (!_.isNil(tab.name)) { $location.search('tab', tab.name) }
 
-          return $log.debug("[tabs] content loaded", tab)
+          return $log.debug('[tabs] content loaded', tab)
         }
 
         // Open a tab with the given name
@@ -56,12 +55,12 @@ forms.directive("agTabset", [
           const tab = _.find($scope.tabs, { name })
 
           // do nothing when the tab cannot be found
-          if (!!_.isNil(tab)) { return deferred.promise }
+          if (_.isNil(tab)) { return deferred.promise }
 
           // select the tab unless is not already selected
           if (!tab.selected) { this._selectTab(tab) }
 
-          var unregister = tab.$watch("loading", function(loading) {
+          var unregister = tab.$watch('loading', function(loading) {
             if (loading) { return } // tab is still loading, do nothing
 
             // requested tab was loaded, handle the promise
@@ -97,7 +96,6 @@ forms.directive("agTabset", [
           // if the tab is the first one mark it as selected
           if (select || ($scope.tabs.length === 1)) { return this._selectTab(tab) }
         }
-
       }
     ],
 
@@ -121,18 +119,18 @@ forms.directive("agTabset", [
   })
 ])
 
-forms.directive("agTab", [
-  "$log", "$location", "pathWithContext",
+forms.directive('agTab', [
+  '$log', '$location', 'pathWithContext',
   ($log, $location, pathWithContext) => ({
-    restrict: "E",
+    restrict: 'E',
     replace: true,
-    require: "^agTabset",
+    require: '^agTabset',
     transclude: true,
 
     scope: {
       // text binding
-      templateUrl: "@",
-      name: "@"
+      templateUrl: '@',
+      name: '@'
     },
 
     link(scope, element, attrs, tabsetCtrl) {
@@ -155,7 +153,7 @@ forms.directive("agTab", [
         return tabsetCtrl._selectTab(scope)
       }
 
-      return scope.$watch(getTab, function(){
+      return scope.$watch(getTab, function() {
         if (angular.isDefined(scope.name) && (getTab() === scope.name) && !scope.selected) { return scope.select() }
       }
       , true)

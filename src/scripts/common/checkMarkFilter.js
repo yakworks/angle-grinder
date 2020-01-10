@@ -4,16 +4,16 @@
  * DS207: Consider shorter variations of null checks
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-var app = angular.module("angleGrinder.common")
+var app = angular.module('angleGrinder.common')
 
 // Filter for boolean values, presents '✓' or '✘'
-app.filter("checkMark", () => (function(input, options) {
+app.filter('checkMark', () => function(input, options) {
   if (options == null) { options = {} }
   if (input) {
-    if (options.hideTruth) { return "" }
-    return "\u2713"
+    if (options.hideTruth) { return '' }
+    return '\u2713'
   } else {
-    if (options.hideFalse) { return "" }
-    return "\u2718"
+    if (options.hideFalse) { return '' }
+    return '\u2718'
   }
-}))
+})

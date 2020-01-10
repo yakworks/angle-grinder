@@ -5,13 +5,13 @@
  * DS207: Consider shorter variations of null checks
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-var gridz = angular.module("angleGrinder.gridz")
+var gridz = angular.module('angleGrinder.gridz')
 
-class XlsTemplateClass{
-  constructor($window){
-    let fn = function(param) {
-      if (param == null) { param = { worksheet: "Worksheet" } }
-      const {worksheet, table} = param
+class XlsTemplateClass {
+  constructor($window) {
+    const fn = function(param) {
+      if (param == null) { param = { worksheet: 'Worksheet' } }
+      const { worksheet, table } = param
       return $window.btoa(unescape(encodeURIComponent(`\
 <html xmlns:o="urn:schemas-microsoft-com:office:office"
   xmlns:x="urn:schemas-microsoft-com:office:excel"
@@ -41,20 +41,19 @@ class XlsTemplateClass{
     return fn
   }
 }
-XlsTemplateClass.$inject = ["$window"]
+XlsTemplateClass.$inject = ['$window']
 // XLS template fot excel export
-gridz.service("xlsTemplate", XlsTemplateClass)
+gridz.service('xlsTemplate', XlsTemplateClass)
 
-
-class GridDataClass{
-  constructor($document, $sanitize){
+class GridDataClass {
+  constructor($document, $sanitize) {
     const findGridEl = gridId => $document.find(`div#gbox_${gridId}`)
 
     const prepareHeading = function(gridId) {
       const gridEl = findGridEl(gridId)
 
       // get the grid's heading
-      const el = gridEl.find(".ui-jqgrid-hbox table").clone()
+      const el = gridEl.find('.ui-jqgrid-hbox table').clone()
 
       // remove unnecessary columns
       el.find(`th#${gridId}_cb`).remove()
@@ -62,7 +61,7 @@ class GridDataClass{
       el.find("tr[style*='display:none']").remove()
 
       // Strip unnecessary white spaces from the headers
-      el.find("th").each(function(index, th) {
+      el.find('th').each(function(index, th) {
         const thEl = $(th)
         return thEl.html(thEl.text().trim())
       })
@@ -77,19 +76,19 @@ class GridDataClass{
       const el = gridEl.find(`#${gridId}`).clone()
 
       // remove the first row
-      el.find("tr.jqgfirstrow").remove()
+      el.find('tr.jqgfirstrow').remove()
       // remove action column and checkboxes
       el.find(`td[aria-describedby='${gridId}_cb']`).remove()
       el.find(`td[aria-describedby='${gridId}_-row_action_col']`).remove()
       // unwrap all links
-      el.find("td a").contents().unwrap()
+      el.find('td a').contents().unwrap()
 
       // include only selected rows otherwise export everything
       if (selectedIds.length > 0) {
-        el.find("tr").each(function(index, tr) {
+        el.find('tr').each(function(index, tr) {
           const rowEl = $(tr)
 
-          const id = rowEl.attr("id")
+          const id = rowEl.attr('id')
           if (!_.includes(selectedIds, id)) { return el.find(`tr#${id}`).remove() }
         })
       }
@@ -99,69 +98,68 @@ class GridDataClass{
 
     // build the result
     return function(gridId, selectedRows) {
-      const resultEl = angular.element("<div></div>")
+      const resultEl = angular.element('<div></div>')
       resultEl.append(prepareHeading(gridId))
       resultEl.append(prepareRows(gridId, selectedRows))
 
       // remove unnecessary html attributes
-      const attrsToRemove = ["id", "class", "style", "title",
-        "aria-describedby", "aria-labelledby", "aria-multiselectable",
-        "role", "tabindex", "sort"]
-      for (let attr of Array.from(attrsToRemove)) { resultEl.find("*").removeAttr(attr) }
+      const attrsToRemove = ['id', 'class', 'style', 'title',
+        'aria-describedby', 'aria-labelledby', 'aria-multiselectable',
+        'role', 'tabindex', 'sort']
+      for (const attr of Array.from(attrsToRemove)) { resultEl.find('*').removeAttr(attr) }
 
       // remove unsafe element
-      //$sanitize(resultEl.html()) TODO:check how we can configure to not delete all dom tags
+      // $sanitize(resultEl.html()) TODO:check how we can configure to not delete all dom tags
       return resultEl.html()
     }
   }
 }
 
-GridDataClass.$inject = ["$document", "$sanitize"]
-gridz.service("gridData", GridDataClass)
+GridDataClass.$inject = ['$document', '$sanitize']
+gridz.service('gridData', GridDataClass)
 
-
-class XlsDataClass{
-  constructor(xlsTemplate, gridData){
+class XlsDataClass {
+  constructor(xlsTemplate, gridData) {
     return function(gridId, selectedRows) {
       // generate the xls file content
       if (selectedRows == null) { selectedRows = [] }
-      const data = xlsTemplate({table: gridData(gridId, selectedRows), worksheet: "Grid export"})
+      const data = xlsTemplate({ table: gridData(gridId, selectedRows), worksheet: 'Grid export' })
       return `data:application/vnd.ms-excel;base64,${data}`
     }
   }
 }
 
-XlsDataClass.$inject = ["xlsTemplate", "gridData"]
+XlsDataClass.$inject = ['xlsTemplate', 'gridData']
 
 // Generates XLS data uri
-gridz.service("xlsData", XlsDataClass)
+gridz.service('xlsData', XlsDataClass)
 
-class CsvDataClass{
-  constructor(gridData){
-    const prepareCsvHeaders = function(data){
-      const headers=[]
-      const resultEl = angular.element("<div></div>")
+class CsvDataClass {
+  constructor(gridData) {
+    const prepareCsvHeaders = function(data) {
+      const headers = []
+      const resultEl = angular.element('<div></div>')
       resultEl.append(data)
-      resultEl.find("th").each(function(index, th) {
+      resultEl.find('th').each(function(index, th) {
         const thEl = $(th)
         return headers.push(thEl.text().trim())
       })
-      return headers.join("|")
+      return headers.join('|')
     }
 
     const prepareCsvRows = function(data) {
-      let rows=""
-      const resultEl = angular.element("<div></div>")
+      let rows = ''
+      const resultEl = angular.element('<div></div>')
       resultEl.append(data)
-      resultEl.find("tr").each(function(index, tr) {
+      resultEl.find('tr').each(function(index, tr) {
         const trEl = $(tr)
-        const row=[]
-        trEl.find("td").each(function(index, td) {
+        const row = []
+        trEl.find('td').each(function(index, td) {
           const tdEl = $(td)
           return row.push(tdEl.text().trim())
         })
 
-        return rows +=row.join("|") + "\r\n"
+        return rows += row.join('|') + '\r\n'
       })
       return rows
     }
@@ -174,8 +172,7 @@ class CsvDataClass{
   }
 }
 
-CsvDataClass.$inject = ["gridData"]
+CsvDataClass.$inject = ['gridData']
 
 // Generates CSV data
-gridz.service("csvData", CsvDataClass)
-
+gridz.service('csvData', CsvDataClass)

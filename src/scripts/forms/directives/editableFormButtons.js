@@ -3,27 +3,27 @@
  * DS102: Remove unnecessary code created because of implicit returns
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-var app = angular.module("angleGrinder.forms")
+var app = angular.module('angleGrinder.forms')
 
-app.directive("editableFormButtons", [
-  "$parse", $parse => ({
-  restrict: "A",
+app.directive('editableFormButtons', [
+  '$parse', $parse => ({
+    restrict: 'A',
 
-  scope: {
-    form: '=editableFormButtons',
-    cancelCallBack: '&oncancel'
-  },
+    scope: {
+      form: '=editableFormButtons',
+      cancelCallBack: '&oncancel'
+    },
 
-  link(scope, element, attrs) {
-    return scope.cancel = function() {
-      scope.form.$cancel()
-      if (!_.isNil(scope.cancelCallBack)) {
-        return scope.cancelCallBack()
+    link(scope, element, attrs) {
+      return scope.cancel = function() {
+        scope.form.$cancel()
+        if (!_.isNil(scope.cancelCallBack)) {
+          return scope.cancelCallBack()
+        }
       }
-    }
-  },
+    },
 
-  template: `\
+    template: `\
 <div class="buttons">
 <!--
 <button type="button" class="btn btn-default"
@@ -38,5 +38,5 @@ app.directive("editableFormButtons", [
 </span>
 </div>\
 `
-})
+  })
 ])
