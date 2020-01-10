@@ -7,7 +7,7 @@ describe("module: angleGrinder.gridz", function() {
 
   describe("xls export", function() {
 
-    beforeEach(module("angleGrinder.gridz", ($provide) => $provide.decorator("xlsData", function($delegate) {
+    beforeEach(angular.mock.module("angleGrinder.gridz", ($provide) => $provide.decorator("xlsData", function($delegate) {
       sinon.spy($delegate);
       return $delegate;
     }))
@@ -27,9 +27,9 @@ describe("module: angleGrinder.gridz", function() {
         this.gridId = "usersGrid";
         return this.selectedRows = ["4", "5", "6"];});
 
-      beforeEach(module("tests/unit/fixtures/usersGrid.html"));
+      beforeEach(angular.mock.module("tests/unit/fixtures/usersGrid.html"));
 
-      beforeEach(module("ng", ($provide) => $provide.decorator("$document", function($delegate, $templateCache) {
+      beforeEach(angular.mock.module("ng", ($provide) => $provide.decorator("$document", function($delegate, $templateCache) {
         const stub = sinon.stub($delegate, "find");
 
           // stub the grid html
@@ -550,7 +550,7 @@ describe("module: angleGrinder.gridz", function() {
 // "Some of your tests did a full page reload!"
 // mock `$window.navigator.userAgent` to avoid error
 // "'undefined' is not an object (evaluating '$window.navigator.userAgent')"
-    beforeEach(module("angleGrinder.gridz", function($provide) {
+    beforeEach(angular.mock.module("angleGrinder.gridz", function($provide) {
       $provide.value("$window", {
         location: {},
         navigator: {userAgent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1847.116 Safari/537.36'}
@@ -564,7 +564,7 @@ describe("module: angleGrinder.gridz", function() {
     })
     );
 
-    beforeEach(module("angleGrinder.gridz"));
+    beforeEach(angular.mock.module("angleGrinder.gridz"));
 
     let selectedRowIds = null;
     let element = null;

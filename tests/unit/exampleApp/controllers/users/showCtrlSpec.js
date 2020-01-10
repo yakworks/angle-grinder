@@ -6,12 +6,12 @@
 describe("controller: users.ShowCtrl", function() {
 
   // stub `$location` service
-  beforeEach(module("ng", function($provide) {
+  beforeEach(angular.mock.module("ng", function($provide) {
     $provide.value("$location", {path: sinon.stub()});
   })
   );
 
-  beforeEach(module("exampleApp"));
+  beforeEach(angular.mock.module("exampleApp"));
 
   let $scope = null;
 

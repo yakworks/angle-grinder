@@ -1,3 +1,8 @@
+import angular from 'angular'
+import 'angular-ui-bootstrap'
+import ngScroll from 'angular-scroll'
+import agRestResources from './agRestResources'
+
 /*
  * decaffeinate suggestions:
  * DS102: Remove unnecessary code created because of implicit returns
@@ -6,27 +11,26 @@
 var common = angular.module("angleGrinder.common", [
   "ui.bootstrap.modal",
   "ui.bootstrap.popover",
-  "angleGrinder.resources",
-  'duScroll' //Scroll
+  agRestResources,
+  ngScroll //Scroll
 ])
 
+export default 'angleGrinder.common'
+
 // change default locale to use `-` symbol for negative currencies
-common.config(["$localeProvider", "$provide", function($localeProvider, $provide) {
+common.config(function($localeProvider, $provide) {
   const defaultLocale = $localeProvider.$get()
 
   angular.extend(defaultLocale.NUMBER_FORMATS.PATTERNS[1], {
     negPre: "-",
     negSuf: ""
-  }
-  )
+  })
 
   return $provide.value("$locale", defaultLocale)
-}
-])
+})
 
 // Decorates `$http.pendingRequests` with some useful features
-common.factory("pendingRequests", [
-  "$http", function($http) {
+common.factory("pendingRequests", function($http) {
     let pendingRequests = () => pendingRequests.any()
 
     // Returns true if any http request is in progress
@@ -39,8 +43,7 @@ common.factory("pendingRequests", [
     }
 
     return pendingRequests
-  }
-])
+})
 
 
 // Camelizes the given string

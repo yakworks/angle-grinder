@@ -5,7 +5,7 @@
  */
 describe("module: angleGrinder.forms, service: Select2Options", function() {
 
-  beforeEach(module("angleGrinder.forms"));
+  beforeEach(angular.mock.module("angleGrinder.forms"));
 
   it("is defined", inject(Select2Options => expect(Select2Options).to.not.be.undefined)
   );

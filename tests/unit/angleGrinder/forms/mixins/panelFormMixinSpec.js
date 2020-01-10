@@ -5,7 +5,7 @@
  */
 describe("module: angleGrinder.forms mixin: PanelFormMixin", function() {
 
-  beforeEach(module("angleGrinder.forms"));
+  beforeEach(angular.mock.module("angleGrinder.forms"));
 
   return describe("service: PanelFormMixin", function() {
 

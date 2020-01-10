@@ -1,8 +1,12 @@
+import angular from 'angular'
+import 'angular-mocks/angular-mocks'
+import uiselect2 from '~/select2/uiSelect2.js'
+
 /**
  * Copied from https://github.com/angular-ui/ui-select2
  */
 // a helper directive for injecting formatters and parsers
-angular.module('ui.select2').directive('injectTransformers', [ function () {
+angular.module(uiselect2).directive('injectTransformers', [ function () {
   return {
     restrict: 'A',
     require: 'ngModel',
@@ -33,7 +37,7 @@ describe('uiSelect2', function () {
   afterEach(function() {
     sandbox.restore()
   })
-  beforeEach(module('ui.select2'));
+  beforeEach(angular.mock.module('ui.select2'));
 
   beforeEach(inject(function (_$rootScope_, _$compile_, _$window_, _$timeout_) {
 

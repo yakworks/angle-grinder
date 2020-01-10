@@ -5,7 +5,7 @@
  */
 describe("controller: SidebarCtrl", function() {
 
-  beforeEach(module("exampleApp", function($provide) {
+  beforeEach(angular.mock.module("exampleApp", function($provide) {
     $provide.value("scrollTo", sinon.stub());
 
     $provide.service("$location", function() {

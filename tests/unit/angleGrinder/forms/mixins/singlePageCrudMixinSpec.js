@@ -5,7 +5,7 @@
  */
 describe("module: angleGrinder.forms mixin: SinglePageCrudCtrlMixin", function() {
 
-  beforeEach(module("angleGrinder.forms", function($provide) {
+  beforeEach(angular.mock.module("angleGrinder.forms", function($provide) {
     $provide.decorator("DialogCrudCtrlMixin", () => sinon.stub());
 
     return $provide.decorator("$location", function($delegate) {

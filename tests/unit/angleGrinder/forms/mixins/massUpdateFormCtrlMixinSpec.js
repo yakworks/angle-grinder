@@ -5,7 +5,7 @@
  */
 describe("module: angleGrinder.forms mixin: massUpdateFormCtrlMixin", function() {
 
-  beforeEach(module("exampleApp.resources", ($provide) => $provide.decorator("Users", function($delegate, $q) {
+  beforeEach(angular.mock.module("exampleApp.resources", ($provide) => $provide.decorator("Users", function($delegate, $q) {
     const deferred = $q.defer();
 
     // always resolved
@@ -20,7 +20,7 @@ describe("module: angleGrinder.forms mixin: massUpdateFormCtrlMixin", function()
   }))
   );
 
-  beforeEach(module("angleGrinder.forms"));
+  beforeEach(angular.mock.module("angleGrinder.forms"));
 
   let $rootScope = null;
   let $scope = null;

@@ -4,7 +4,7 @@
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
 describe("module: angleGrinder.forms directive: agCreateButton", function() {
-  beforeEach(module("angleGrinder.forms"));
+  beforeEach(angular.mock.module("angleGrinder.forms"));
 
   let element = null;
   let $scope = null;

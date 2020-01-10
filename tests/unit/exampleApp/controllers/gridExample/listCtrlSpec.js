@@ -5,14 +5,14 @@
  */
 describe("controller: gridExample.ListCtrl", function() {
 
-  beforeEach(module("templates/gridExample/form.html"));
+  beforeEach(angular.mock.module("templates/gridExample/form.html"));
 
-  beforeEach(module("angleGrinder.forms", function($provide) {
+  beforeEach(angular.mock.module("angleGrinder.forms", function($provide) {
     $provide.value("$uibModal", {open: sinon.stub().returns({result: {then: angular.noop}})});
   })
   );
 
-  beforeEach(module("exampleApp"));
+  beforeEach(angular.mock.module("exampleApp"));
 
   let $scope = null;
   let controller = null;

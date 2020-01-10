@@ -5,7 +5,7 @@
  */
 describe("module: exampleApp.grids", function() {
 
-  beforeEach(module("exampleApp.grids"));
+  beforeEach(angular.mock.module("exampleApp.grids"));
 
   return describe("service: usersDialogGrid", function() {
 

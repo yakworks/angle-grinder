@@ -5,17 +5,17 @@
  */
 describe("module: angleGrinder.forms", () => describe("service: FormDialogServ", function() {
 
-  beforeEach(module("ui.bootstrap", function($provide) {
+  beforeEach(angular.mock.module("ui.bootstrap", function($provide) {
     $provide.value("$uibModal", {open: sinon.mock()});
   })
   );
 
-  beforeEach(module("angleGrinder.common", function($provide) {
+  beforeEach(angular.mock.module("angleGrinder.common", function($provide) {
     $provide.value("pathWithContext", path => `/ctx${path}`);
   })
   );
 
-  beforeEach(module("angleGrinder.forms"));
+  beforeEach(angular.mock.module("angleGrinder.forms"));
 
   return describe("#open", () => it("opens a dialog for the given templateUrl", inject(function($uibModal, FormDialogServ) {
     FormDialogServ.open("/foo/bar/form.html");

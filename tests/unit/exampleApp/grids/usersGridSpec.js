@@ -5,7 +5,7 @@
  */
 describe("module: exampleApp.grids", function() {
 
-  beforeEach(module("exampleApp.grids", function($provide) {
+  beforeEach(angular.mock.module("exampleApp.grids", function($provide) {
     // mock date filter
     $provide.service("dateFilter", () => val => "the date");
   })

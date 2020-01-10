@@ -5,7 +5,7 @@
  */
 describe("module: angleGrinder.forms", function() {
 
-  beforeEach(module("angleGrinder.forms"));
+  beforeEach(angular.mock.module("angleGrinder.forms"));
 
   describe("service: focus", function() {
 

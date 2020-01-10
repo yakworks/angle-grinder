@@ -7,7 +7,7 @@ describe("module: angleGrinder.gridz, service: agGridDataLoader", function() {
 
   let loadingEl = null;
 
-  beforeEach(module("ng", function($provide) {
+  beforeEach(angular.mock.module("ng", function($provide) {
     loadingEl = {
       show: sinon.stub(),
       hide: sinon.stub()
@@ -23,7 +23,7 @@ describe("module: angleGrinder.gridz, service: agGridDataLoader", function() {
   })
   );
 
-  beforeEach(module("angleGrinder.gridz"));
+  beforeEach(angular.mock.module("angleGrinder.gridz"));
 
   let gridCtrl = null;
   let loader = null;

@@ -5,7 +5,7 @@
  */
 describe("controller: users.FormCtrl", function() {
 
-  beforeEach(module("exampleApp", function($provide) {
+  beforeEach(angular.mock.module("exampleApp", function($provide) {
     $provide.value("$location", {path: sinon.stub()});
   })
   );

@@ -5,7 +5,7 @@
  */
 describe("module: angleGrinder.common, service: restrictResource", function() {
 
-  beforeEach(module("angleGrinder.common", function($provide) {
+  beforeEach(angular.mock.module("angleGrinder.common", function($provide) {
     $provide.value("arBatch", sinon.stub());
     $provide.value("requiredResourceFields", ['id']);
     $provide.value("RestContext", "");

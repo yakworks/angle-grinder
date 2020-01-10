@@ -4,7 +4,7 @@
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
 describe("module: angleGrinder.gridz", function() {
-  beforeEach(module("angleGrinder.gridz"));
+  beforeEach(angular.mock.module("angleGrinder.gridz"));
 
   describe("service: hasSearchFilters", function() {
     let hasSearchFilters = null;

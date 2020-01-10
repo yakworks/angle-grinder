@@ -5,7 +5,7 @@
  */
 describe("module: angleGrinder.common", function() {
 
-  beforeEach(module("angleGrinder.common"));
+  beforeEach(angular.mock.module("angleGrinder.common"));
 
   return describe("directive: menuItem", function() {
 

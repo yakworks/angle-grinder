@@ -4,7 +4,7 @@
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
 describe("controller: tabs.IndexCtrl", function() {
-  beforeEach(module("exampleApp"));
+  beforeEach(angular.mock.module("exampleApp"));
 
   let $scope = null;
 

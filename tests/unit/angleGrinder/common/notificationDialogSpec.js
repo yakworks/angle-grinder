@@ -25,7 +25,7 @@ describe("module: angleGrinder.common", function() {
 
   return describe("service: NotificationDialogServ", function() {
 
-    beforeEach(module("angleGrinder.forms"));
+    beforeEach(angular.mock.module("angleGrinder.forms"));
 
     it("displays the notification", inject(function( NotificationDialogServ) {
       // When

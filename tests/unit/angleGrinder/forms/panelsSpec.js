@@ -5,8 +5,8 @@
  */
 describe("module: angleGrinder.forms", function() {
 
-  beforeEach(module("angleGrinder.forms"));
-  beforeEach(module("exampleApp"));
+  beforeEach(angular.mock.module("angleGrinder.forms"));
+  beforeEach(angular.mock.module("exampleApp"));
 
   let element = null;
   let ctrl = null;

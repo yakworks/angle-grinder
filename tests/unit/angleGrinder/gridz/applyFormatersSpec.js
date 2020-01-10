@@ -5,7 +5,7 @@
  */
 describe("module: angleGrinder.gridz", function() {
 
-  beforeEach(module("angleGrinder.gridz"));
+  beforeEach(angular.mock.module("angleGrinder.gridz"));
 
   return describe("value: applyFormaters", () =>
     it("flattens an object", inject(function(ApplyFormattersServ) {

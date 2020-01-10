@@ -6,7 +6,7 @@
 describe("module: angleGrinder.common", function() {
 
   // mock `$window.history.back` method
-  beforeEach(module("ng", function($provide) {
+  beforeEach(angular.mock.module("ng", function($provide) {
     $provide.decorator("$window", function($delegate) {
       $delegate.history.back = sinon.mock();
       return $delegate;
@@ -15,7 +15,7 @@ describe("module: angleGrinder.common", function() {
   })
   );
 
-  beforeEach(module("angleGrinder.common"));
+  beforeEach(angular.mock.module("angleGrinder.common"));
 
   return describe("directive: agBackButton", function() {
 

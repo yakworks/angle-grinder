@@ -1,5 +1,5 @@
 describe("module: angleGrinder.alerts", function() {
-  beforeEach(module("angleGrinder.alerts"));
+  beforeEach(angular.mock.module("angleGrinder.alerts"));
 
   return describe("service", () =>
     it("is defined", inject(function(alerts) {

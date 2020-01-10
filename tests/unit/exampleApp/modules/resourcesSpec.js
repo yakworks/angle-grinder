@@ -4,7 +4,7 @@
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
 describe("module: exampleApp.resources", function() {
-  beforeEach(module("exampleApp.resources"));
+  beforeEach(angular.mock.module("exampleApp.resources"));
 
   describe("service: Users", function() {
     let $httpBackend = null;

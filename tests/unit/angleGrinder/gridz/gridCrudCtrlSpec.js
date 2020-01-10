@@ -5,7 +5,7 @@
  */
 describe("module:angleGrinder.gridz controller: gridCrudCtrl", function() {
 
-  beforeEach(module("angleGrinder.gridz", function($provide) {
+  beforeEach(angular.mock.module("angleGrinder.gridz", function($provide) {
     $provide.decorator("resourceBuilder", $delegate => sinon.spy($delegate));
     $provide.value("RestContext", "");
   })

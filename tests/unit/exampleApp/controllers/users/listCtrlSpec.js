@@ -5,15 +5,15 @@
  */
 describe("controller: users.ListCtrl", function() {
 
-  beforeEach(module("exampleApp"));
+  beforeEach(angular.mock.module("exampleApp"));
 
   // Stub $uibModal service
-  beforeEach(module("ui.bootstrap", function($provide) {
+  beforeEach(angular.mock.module("ui.bootstrap", function($provide) {
     $provide.value("$uibModal", {open: sinon.mock()});
   })
   );
 
-  beforeEach(module("angleGrinder.forms", function($provide) {
+  beforeEach(angular.mock.module("angleGrinder.forms", function($provide) {
     $provide.decorator("SinglePageCrudCtrlMixin", () => sinon.spy());
     return $provide.decorator("MassUpdateMixin", () => sinon.spy());
   })

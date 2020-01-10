@@ -5,13 +5,13 @@
  */
 describe("controller: usersDialog.ListCtrl", function() {
 
-  beforeEach(module("angleGrinder.forms", function($provide) {
+  beforeEach(angular.mock.module("angleGrinder.forms", function($provide) {
     $provide.decorator("DialogCrudCtrlMixin", () => sinon.spy());
     return $provide.decorator("MassUpdateMixin", () => sinon.spy());
   })
   );
 
-  beforeEach(module("exampleApp"));
+  beforeEach(angular.mock.module("exampleApp"));
 
   let $scope = null;
 

@@ -6,7 +6,7 @@
  */
 describe("module: angleGrinder.common", function() {
 
-  beforeEach(module("angleGrinder.common"));
+  beforeEach(angular.mock.module("angleGrinder.common"));
 
   describe("service: urlBuilder", () => it("builds an url with the query string", inject(function(urlBuilder) {
     const params = {one: 1, two: 2, foo: "bar"};
@@ -36,7 +36,7 @@ describe("module: angleGrinder.common", function() {
     );
 
     return describe("when the context path is provided", function() {
-      let useContextPath = (path) => beforeEach(module(pathWithContextProvider => pathWithContextProvider.setContextPath(path))
+      let useContextPath = (path) => beforeEach(angular.mock.module(pathWithContextProvider => pathWithContextProvider.setContextPath(path))
       );
 
       describe("first example", function() {
@@ -59,7 +59,7 @@ describe("module: angleGrinder.common", function() {
 
   return describe("filter: withContext", function() {
 
-    beforeEach(module("angleGrinder.common",
+    beforeEach(angular.mock.module("angleGrinder.common",
       {pathWithContext: sinon.stub()})
     );
 

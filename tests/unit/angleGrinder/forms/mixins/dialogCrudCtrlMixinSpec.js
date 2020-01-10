@@ -5,9 +5,9 @@
  */
 describe("module: angleGrinder.forms mixin: DialogCrudCtrlMixin", function() {
 
-  beforeEach(module("exampleApp.resources"));
+  beforeEach(angular.mock.module("exampleApp.resources"));
 
-  beforeEach(module("angleGrinder.forms", function($provide) {
+  beforeEach(angular.mock.module("angleGrinder.forms", function($provide) {
     // stub `FormDialogServ` service
     $provide.decorator("FormDialogServ", function($delegate) {
       sinon.stub($delegate, "open");

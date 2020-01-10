@@ -6,7 +6,7 @@
  */
 describe("module: angleGrinder.forms", function() {
 
-  beforeEach(module("angleGrinder.forms"));
+  beforeEach(angular.mock.module("angleGrinder.forms"));
 
   return describe("controller: FormDialogCtrl", function() {
     let $scope = null;

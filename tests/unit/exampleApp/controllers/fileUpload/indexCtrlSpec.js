@@ -4,7 +4,7 @@
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
 describe("controller: fileUpload.IndexCtrl", function() {
-  beforeEach(module("exampleApp"));
+  beforeEach(angular.mock.module("exampleApp"));
 
   let $scope = null;
   const ctrl = null;
@@ -34,7 +34,7 @@ describe("controller: fileUpload.IndexCtrl", function() {
 });
 
 describe("controller: fileUpload.FileDestroyController", function() {
-  beforeEach(module("exampleApp"));
+  beforeEach(angular.mock.module("exampleApp"));
 
   let $scope = null;
   const ctrl = null;

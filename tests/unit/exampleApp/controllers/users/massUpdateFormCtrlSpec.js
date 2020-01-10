@@ -5,10 +5,10 @@
  */
 describe("controller: users.MassUpdateFormCtrl", function() {
 
-  beforeEach(module("exampleApp", $provide => $provide.decorator("massUpdateFormCtrlMixin", () => sinon.spy()))
+  beforeEach(angular.mock.module("exampleApp", $provide => $provide.decorator("massUpdateFormCtrlMixin", () => sinon.spy()))
   );
 
-  beforeEach(module("exampleApp"));
+  beforeEach(angular.mock.module("exampleApp"));
 
   let $scope = null;
 

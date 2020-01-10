@@ -5,7 +5,7 @@
  */
 describe("module: angleGrinder.gridz", function() {
 
-  beforeEach(module("angleGrinder.gridz", function($provide) {
+  beforeEach(angular.mock.module("angleGrinder.gridz", function($provide) {
     $provide.value("$location", {path: sinon.stub()});
   })
   );

@@ -5,7 +5,7 @@
  */
 describe("module: angleGrinder.forms mixin: MassUpdateMixin", function() {
 
-  beforeEach(module("angleGrinder.forms", function($provide) {
+  beforeEach(angular.mock.module("angleGrinder.forms", function($provide) {
     $provide.value("$uibModal", {open: sinon.mock()});
   })
   );

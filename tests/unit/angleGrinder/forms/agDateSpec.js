@@ -5,7 +5,7 @@
  */
 describe("module: angleGrinder.forms", () => describe("directive: agDate", function() {
 
-  beforeEach(module("angleGrinder.forms"));
+  beforeEach(angular.mock.module("angleGrinder.forms"));
 
   let $scope = null;
   let element = null;

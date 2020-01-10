@@ -5,7 +5,7 @@
  */
 describe("agGridzSpec", function() {
 
-  beforeEach(module("angleGrinder.gridz", function($provide) {
+  beforeEach(angular.mock.module("angleGrinder.gridz", function($provide) {
     $provide.value("ActionPopupHandler", sinon.stub());
   })
   );

@@ -6,12 +6,12 @@
 describe("Example Application routes", function() {
 
   // create spy on `userResolver` service
-  beforeEach(module("exampleApp.resources", function($provide) {
+  beforeEach(angular.mock.module("exampleApp.resources", function($provide) {
     $provide.value("userResolver", sinon.spy());
   })
   );
 
-  beforeEach(module("exampleApp"));
+  beforeEach(angular.mock.module("exampleApp"));
 
   beforeEach(function() {
     module("templates/angleGrinder.html");

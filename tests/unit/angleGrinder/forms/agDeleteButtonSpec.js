@@ -5,7 +5,7 @@
  */
 describe("module: angleGrinder.forms directive: agDeleteButton", function() {
 
-  beforeEach(module("angleGrinder.forms"));
+  beforeEach(angular.mock.module("angleGrinder.forms"));
 
   let element = null;
   let $scope = null;

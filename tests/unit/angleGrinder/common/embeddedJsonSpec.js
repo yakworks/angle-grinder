@@ -8,7 +8,7 @@ describe("module:angleGrinder.common dervice: embeddedJsonServ", function() {
   let element = null;
   let scope = null;
 
-  beforeEach(module("angleGrinder.common", function() {}));
+  beforeEach(angular.mock.module("angleGrinder.common", function() {}));
 
   beforeEach(inject(function($rootScope, $compile) {
     element = angular.element('<script  type="application/embedded-json" name="testJson">{"name": "test", "id":2}</script>');

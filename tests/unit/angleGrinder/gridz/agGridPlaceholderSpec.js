@@ -5,12 +5,12 @@
  */
 describe("module: angleGrinder.gridz", function() {
 
-  beforeEach(module("angleGrinder.common", function($provide) {
+  beforeEach(angular.mock.module("angleGrinder.common", function($provide) {
     $provide.value("pathWithContext", path => `/foo/${path}`);
   })
   );
 
-  beforeEach(module("angleGrinder.gridz"));
+  beforeEach(angular.mock.module("angleGrinder.gridz"));
 
   beforeEach(inject($templateCache => $templateCache.put("/foo/bar/biz.html", "<div id='the-grid'>grid</div>"))
   );

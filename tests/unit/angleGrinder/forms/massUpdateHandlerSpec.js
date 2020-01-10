@@ -5,7 +5,7 @@
  */
 describe("module: angleGrinder.forms", function() {
 
-  beforeEach(module("angleGrinder.forms", function($provide) {
+  beforeEach(angular.mock.module("angleGrinder.forms", function($provide) {
     $provide.decorator("alerts", function($delegate) {
       $delegate.error = sinon.stub();
       return $delegate;

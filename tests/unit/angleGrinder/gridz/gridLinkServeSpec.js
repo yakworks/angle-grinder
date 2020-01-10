@@ -6,7 +6,7 @@
  */
 describe("module: angleGrinder.gridz", () => describe("service: GridLinkServ", function() {
 
-  beforeEach(module("angleGrinder.gridz", function($provide) {
+  beforeEach(angular.mock.module("angleGrinder.gridz", function($provide) {
     $provide.value("pathWithContext", path => `/ctx${path}`);
   })
   );

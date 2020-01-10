@@ -6,13 +6,13 @@
 describe("module: angleGrinder.gridz", function() {
 
   // stubs `pathWithContext` service
-  beforeEach(module("angleGrinder.common", function($provide) {
-    $provide.value("pathWithContext", sinon.stub());
-    // this is important, see: https://groups.google.com/forum/#!msg/angular/gCGF_B4eQkc/XjkvbgE9iMcJ
-  })
+  beforeEach(angular.mock.module("angleGrinder.common", function($provide) {
+      $provide.value("pathWithContext", sinon.stub());
+      // this is important, see: https://groups.google.com/forum/#!msg/angular/gCGF_B4eQkc/XjkvbgE9iMcJ
+    })
   );
 
-  beforeEach(module("angleGrinder.gridz"));
+  beforeEach(angular.mock.module("angleGrinder.gridz"));
 
   describe("directive: agSelect2", function() {
 
@@ -21,9 +21,9 @@ describe("module: angleGrinder.gridz", function() {
     let element = null;
 
     beforeEach(inject(function($rootScope) {
-      $scope = $rootScope.$new();
-      return $scope.selectOptions = {foo: "bar"};
-    })
+        $scope = $rootScope.$new();
+        return $scope.selectOptions = {foo: "bar"};
+      })
     );
 
     const prepareDirective = template => beforeEach(inject(function($injector) {

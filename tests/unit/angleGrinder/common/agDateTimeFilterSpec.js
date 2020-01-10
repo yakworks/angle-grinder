@@ -12,7 +12,7 @@ describe("module: angleGrinder.common", function() {
     provider = agDateTimeFilterProvider;
   }));
 
-  beforeEach(module("angleGrinder.common"));
+  beforeEach(angular.mock.module("angleGrinder.common"));
 
   return describe("filter: agDateTimeFilter", function() {
 

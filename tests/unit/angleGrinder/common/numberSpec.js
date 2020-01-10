@@ -8,7 +8,7 @@ describe("module:angleGrinder.common directive: addEmptyOption", function() {
   let element = null;
   let scope = null;
 
-  beforeEach(module("angleGrinder.common", function() {}));
+  beforeEach(angular.mock.module("angleGrinder.common", function() {}));
 
   beforeEach(inject(function($rootScope, $compile) {
     element = angular.element('<input ag-number ng-model="test.number">');

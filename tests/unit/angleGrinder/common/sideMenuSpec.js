@@ -4,13 +4,13 @@
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
 describe("module: angleGrinder.common directive: agSideMenu", function() {
-  beforeEach(module("angleGrinder.common"));
+  beforeEach(angular.mock.module("angleGrinder.common"));
 
   let element = null;
   let $scope = null;
   const ngModel = null;
 
-  beforeEach(module("angleGrinder", function($provide) {
+  beforeEach(angular.mock.module("angleGrinder", function($provide) {
     $provide.decorator("$window", $delegate => $delegate);
 
   })

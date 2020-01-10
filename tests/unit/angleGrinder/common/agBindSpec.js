@@ -5,7 +5,7 @@
  */
 describe("angleGrinder.common", function() {
 
-  beforeEach(module("angleGrinder.common", function ($provide) {
+  beforeEach(angular.mock.module("angleGrinder.common", function ($provide) {
       // dummy filter witch always returns falsy values
       $provide.value("dummyFilter", () => {
         return null

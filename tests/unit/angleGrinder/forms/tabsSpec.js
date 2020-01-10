@@ -6,7 +6,7 @@
  */
 describe("module: angleGrinder.forms tabs", function() {
 
-  beforeEach(module("ng", function($provide) {
+  beforeEach(angular.mock.module("ng", function($provide) {
     $provide.decorator("$location", function($delegate) {
       $delegate.search = sinon.stub();
       return $delegate;
@@ -14,12 +14,12 @@ describe("module: angleGrinder.forms tabs", function() {
   })
   );
 
-  beforeEach(module("angleGrinder.common", function($provide) {
+  beforeEach(angular.mock.module("angleGrinder.common", function($provide) {
     $provide.value("pathWithContext", path => `/ag-demo${path}`);
   })
   );
 
-  beforeEach(module("angleGrinder.forms"));
+  beforeEach(angular.mock.module("angleGrinder.forms"));
 
   describe("directive: agTabset", function() {
 

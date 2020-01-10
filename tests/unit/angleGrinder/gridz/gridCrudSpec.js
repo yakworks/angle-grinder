@@ -5,7 +5,7 @@
  */
 describe("module:angleGrinder.gridz", () => describe("directive: gridCrud", function() {
 
-  beforeEach(module("angleGrinder.gridz", function($provide) {
+  beforeEach(angular.mock.module("angleGrinder.gridz", function($provide) {
     let element;
     $provide.value("$uibModal", {open: sinon.stub().returns({rendered: {then: sinon.stub()}})});
     return;

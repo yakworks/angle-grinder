@@ -10,13 +10,13 @@ module.exports = function karmaConfig (config) { config.set({
 
   frameworks: [ "mocha", "sinon-chai" ],
 
-  //files: require("./karma-files.js").files,
+  files: require("./karma-files.js").files,
 
   preprocessors: {
     "**/*.html": ["html2js"],
     "docs/exampleApp/**/*.js": ["babel"],
-    "src/scripts/**/*.js": ["babel"],
-    "tests/unit/**/*.js": ["babel",],
+    "src/**/*.js": ["babel"],
+    "tests/unit/**/*.js": ["babel"],
     //"tests/unit/**/*.coffee": ["coffee"],
     "tests/mocks.js": ["babel"]
   },
@@ -61,27 +61,27 @@ module.exports = function karmaConfig (config) { config.set({
   // cli runner port
   //runnerPort: 9100,
 
-  // browsers: [
-  //   // Run tests using Chrome
-  //   'ChromeHeadless'
-  // ],
+  browsers: [
+    // Run tests using Chrome
+    'jsdom'
+  ],
 
   // doing it like this so it works in docker CI and we dont get
   //"Cannot start ChromeHeadless .. Running as root without --no-sandbox is not supported. .." error
-  customLaunchers: {
-    Chrome_no_sandbox: {
-      base: 'ChromeHeadless',
-      flags: [
-        '--disable-web-security',
-        '--no-sandbox',
-        '--disable-setuid-sandbox',
-        '--disable-dev-shm-usage',
-        '--remote-debugging-port=9223',
-        '--headless',
-        '--disable-gpu'
-      ]
-    }
-  },
+  // customLaunchers: {
+  //   Chrome_no_sandbox: {
+  //     base: 'ChromeHeadless',
+  //     flags: [
+  //       '--disable-web-security',
+  //       '--no-sandbox',
+  //       '--disable-setuid-sandbox',
+  //       '--disable-dev-shm-usage',
+  //       '--remote-debugging-port=9223',
+  //       '--headless',
+  //       '--disable-gpu'
+  //     ]
+  //   }
+  // },
 
   // If browser does not capture in given timeout [ms], kill it
   captureTimeout: 30000,
