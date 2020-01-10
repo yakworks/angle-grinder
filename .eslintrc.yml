@@ -1,0 +1,42 @@
+env:
+  browser: true
+  es6: true
+  jasmine: true
+  mocha: true
+  amd: true
+plugins:
+  - angular
+extends:
+  - standard
+parserOptions:
+  ecmaVersion: 2018
+  sourceType: module
+ignorePatterns:
+  - "coverage/"
+  - "node_modules/"
+  - "webpack*.*"
+rules:
+  space-before-function-paren:
+    - error
+    - anonymous: never
+      named: never
+      asyncArrow: always
+
+#   angular/di:
+#     - 2
+#     - "$inject"
+globals:
+  Atomics: readonly
+  SharedArrayBuffer: readonly
+  "angular": false
+  "chai": false
+  "describe": false
+  "it": false
+  "before": false
+  "beforeEach": false
+  "after": false
+  "afterEach": false
+  "inject": false
+  "_": false
+  "$": false
+  "jQuery": false
