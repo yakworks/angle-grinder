@@ -1,33 +1,3 @@
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-// Here be dragons. Decorate `uibDaypickerDirective`.
-// FIXME explain why we are playing with dragons here? II thought we didn;t use the date picker in this lib
-angular.module('ui.bootstrap.datepicker').config([
-  '$provide', $provide => $provide.decorator('uibDaypickerDirective', ['$delegate', function($delegate) {
-    const directive = $delegate[0]
-
-    const oldCompile = directive.compile
-    directive.compile = function() {
-      const link = oldCompile.apply(this, arguments)
-
-      return function(scope) {
-        link.apply(this, arguments)
-
-        return scope.$watch('rows', () => angular.forEach(scope.rows, function(row) {
-          if (_.every(row, dt => dt.secondary)) {
-            return _.map(row, dt => dt.hide = true)
-          }
-        }))
-      }
-    }
-
-    return $delegate
-  }
-  ])
-])
 
 var forms = angular.module('angleGrinder.forms', [
   'ui.bootstrap.collapse',

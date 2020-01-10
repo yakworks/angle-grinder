@@ -4,8 +4,6 @@ module.exports = {
   files: [
     { pattern: "node_modules/jquery/dist/jquery.js"},
     { pattern: "node_modules/lodash/lodash.js"},
-    { pattern: "node_modules/phantomjs-polyfill/bind-polyfill.js"},
-
     { pattern: "node_modules/angular/angular.js"},
     { pattern: "node_modules/angular-animate/angular-animate.js"},
     { pattern: "node_modules/angular-route/angular-route.js"},
@@ -19,7 +17,6 @@ module.exports = {
 
     { pattern: "node_modules/free-jqgrid/js/jquery.jqgrid.src.js"},
     { pattern: "node_modules/Select2/select2.js"},
-    //{ pattern: "components/angular-ui-select2/src/select2.js"},
     { pattern: "node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"},
     { pattern: "node_modules/angular-xeditable/dist/js/xeditable.js"},
     { pattern: "node_modules/moment/moment.js"},
