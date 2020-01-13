@@ -1,10 +1,7 @@
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * DS206: Consider reworking classes to avoid initClass
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-var app = angular.module('angleGrinder.gridz')
+import angular from 'angular'
+import gridzModule from '../gridzModule'
+
+const gridz = angular.module(gridzModule)
 
 class ManageGridColumnsCtrl {
   static initClass() {
@@ -74,9 +71,9 @@ class ManageGridColumnsCtrl {
 }
 ManageGridColumnsCtrl.initClass()
 
-app.controller('ManageGridColumnsCtrl', ManageGridColumnsCtrl)
+gridz.controller('ManageGridColumnsCtrl', ManageGridColumnsCtrl)
 
-app.directive('agManageGridColumns', [
+gridz.directive('agManageGridColumns', [
   '$uibModal', 'pathWithContext',
   ($uibModal, pathWithContext) => ({
     restrict: 'E',

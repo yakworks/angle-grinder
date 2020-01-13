@@ -1,11 +1,8 @@
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-describe("module: angleGrinder.forms mixin: SinglePageCrudCtrlMixin", function() {
+import formsModule from '~/scripts/forms'
 
-  beforeEach(angular.mock.module("angleGrinder.forms", function($provide) {
+describe("singlePageCrudCtrlMixinSpec", function() {
+
+  beforeEach(angular.mock.module(formsModule, function($provide) {
     $provide.decorator("DialogCrudCtrlMixin", () => sinon.stub());
 
     return $provide.decorator("$location", function($delegate) {

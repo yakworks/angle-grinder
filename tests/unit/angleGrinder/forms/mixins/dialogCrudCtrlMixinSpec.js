@@ -1,13 +1,11 @@
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-describe("module: angleGrinder.forms mixin: DialogCrudCtrlMixin", function() {
+import formsModule from '~/scripts/forms'
+import exampleAppResources from '../../../../../docs/exampleApp/modules/resources'
 
-  beforeEach(angular.mock.module("exampleApp.resources"));
+describe("dialogCrudCtrlMixinSpec", function() {
 
-  beforeEach(angular.mock.module("angleGrinder.forms", function($provide) {
+  beforeEach(angular.mock.module(exampleAppResources));
+
+  beforeEach(angular.mock.module(formsModule, function($provide) {
     // stub `FormDialogServ` service
     $provide.decorator("FormDialogServ", function($delegate) {
       sinon.stub($delegate, "open");
@@ -15,13 +13,13 @@ describe("module: angleGrinder.forms mixin: DialogCrudCtrlMixin", function() {
     });
 
     // stub `ConfirmationDialogServ` service
-    return $provide.decorator("ConfirmationDialogServ", function($delegate) {
+    $provide.decorator("ConfirmationDialogServ", function($delegate) {
       $delegate.confirmed = true;
       sinon.stub($delegate, "open").returns({then(callback) { return callback($delegate.confirmed); }
       });
 
       return $delegate;
-    });
+    })
   })
   );
 

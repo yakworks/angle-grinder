@@ -1,10 +1,7 @@
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * DS207: Consider shorter variations of null checks
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-var gridz = angular.module('angleGrinder.gridz')
+import angular from 'angular'
+import gridzModule from '../gridzModule'
+
+var gridz = angular.module(gridzModule)
 
 // Takes a nested Javascript object and flatten it.
 // see: https://github.com/hughsk/flat

@@ -1,13 +1,9 @@
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-var app = angular.module('angleGrinder.common')
+import angular from 'angular'
+import formsModule from '../formsModule'
 
 // Enhanced bind directive with default value
 // Should be used with xeditable fields to show data in the view mode
-app.directive('agBind', function() {
+angular.module(formsModule).directive('agBind', function() {
   return {
     restrict: 'A',
 

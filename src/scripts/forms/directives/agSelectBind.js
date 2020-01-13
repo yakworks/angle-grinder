@@ -1,12 +1,10 @@
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-var app = angular.module('angleGrinder.common')
+import angular from 'angular'
+import formsModule from '../formsModule'
+import _ from 'lodash'
+
 // Enhanced bind directive with default value
 // For editable select fields
-app.directive('agSelectBind', ['$filter', '$parse', function($filter, $parse) {
+angular.module(formsModule).directive('agSelectBind', ['$filter', '$parse', function($filter, $parse) {
   return {
     restrict: 'A',
 

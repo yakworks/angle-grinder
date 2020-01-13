@@ -1,10 +1,9 @@
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * DS206: Consider reworking classes to avoid initClass
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-var app = angular.module("angleGrinder.common")
+import BaseCtrl from '../../utils/BaseCtrl'
+import angular from 'angular'
+import commonModule from '../commonModule'
+import _ from 'lodash'
+
+const app = angular.module(commonModule)
 
 app.directive("menuItem", [
   "$route", $route => ({
@@ -35,7 +34,7 @@ app.directive("menuItem", [
 
 class MenuCtrl extends BaseCtrl {
   static initClass() {
-  
+
     this.register(app, "agMenuCtrl")
     this.inject("$scope")
   }

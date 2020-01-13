@@ -1,14 +1,11 @@
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-describe("module:angleGrinder.common directive: ieSelectFix", function() {
+import agCommon from '~/scripts/common'
+
+describe("ieSelectFixSpec", function() {
 
   let element = null;
   let scope = null;
 
-  beforeEach(angular.mock.module("angleGrinder.common", function($provide) {
+  beforeEach(angular.mock.module(agCommon, function($provide) {
     $provide.value("$window", {
       location: {},
       navigator: {userAgent: "test MSIE 10.0 test"}

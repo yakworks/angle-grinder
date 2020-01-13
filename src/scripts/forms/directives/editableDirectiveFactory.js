@@ -1,9 +1,8 @@
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-var forms = angular.module("angleGrinder.forms")
+import angular from 'angular'
+import formsModule from '../formsModule'
+import _ from 'lodash'
+
+var forms = angular.module(formsModule)
 
 // Decorates all editable inputs with mechanism
 // for displaying validation errors.

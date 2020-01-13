@@ -9,6 +9,7 @@
     "angularjs-annotate",
     "lodash",
     "@babel/plugin-proposal-optional-chaining",
+    "wildcard",
     [
       "babel-plugin-root-import",
       {

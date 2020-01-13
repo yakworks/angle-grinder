@@ -1,11 +1,11 @@
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-describe("module: angleGrinder.forms mixin: massUpdateFormCtrlMixin", function() {
+import formsModule from '~/scripts/forms'
+import exampleAppResources from '../../../../../docs/exampleApp/modules/resources'
 
-  beforeEach(angular.mock.module("exampleApp.resources", ($provide) => $provide.decorator("Users", function($delegate, $q) {
+describe("massUpdateFormCtrlMixinSpec", function() {
+
+  beforeEach(angular.mock.module(formsModule));
+
+  beforeEach(angular.mock.module(exampleAppResources, ($provide) => $provide.decorator("Users", function($delegate, $q) {
     const deferred = $q.defer();
 
     // always resolved
@@ -19,8 +19,6 @@ describe("module: angleGrinder.forms mixin: massUpdateFormCtrlMixin", function()
     return $delegate;
   }))
   );
-
-  beforeEach(angular.mock.module("angleGrinder.forms"));
 
   let $rootScope = null;
   let $scope = null;

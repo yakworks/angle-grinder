@@ -1,11 +1,8 @@
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * DS206: Consider reworking classes to avoid initClass
- * DS207: Consider shorter variations of null checks
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-var app = angular.module('angleGrinder.common')
+import BaseCtrl from '../../utils/BaseCtrl'
+import angular from 'angular'
+import commonModule from '../commonModule'
+
+const app = angular.module(commonModule)
 
 class NotificationDialogCtrl extends BaseCtrl {
   static initClass() {
@@ -31,11 +28,7 @@ class NotificationDialogCtrl extends BaseCtrl {
 }
 NotificationDialogCtrl.initClass()
 
-class NotificationDialog {
-  static initClass() {
-    this.$inject = ['$log', '$q']
-  }
-
+class NotificationDialogServ {
   constructor($log, $q) {
     this.$log = $log
     this.$q = $q
@@ -59,6 +52,6 @@ class NotificationDialog {
     return defer.promise
   }
 }
-NotificationDialog.initClass()
+NotificationDialogServ.$inject = ['$log', '$q']
 
-app.service('NotificationDialogServ', NotificationDialog)
+app.service('NotificationDialogServ', NotificationDialogServ)

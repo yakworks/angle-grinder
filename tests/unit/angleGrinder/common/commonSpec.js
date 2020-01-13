@@ -1,13 +1,6 @@
-import angular from 'angular'
-import 'angular-mocks/angular-mocks'
 import agCommon from '~/scripts/common'
 
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-describe("module: angleGrinder.common", function() {
+describe("commonSpec", function() {
   beforeEach(angular.mock.module(agCommon));
 
   describe("service: pendingRequests", function() {
@@ -44,47 +37,6 @@ describe("module: angleGrinder.common", function() {
         expect(pendingRequests.for("POST")).to.be.false;
         return expect(pendingRequests.for("POST", "GET")).to.be.true;
       }));
-    });
-  });
-
-  xdescribe("service: isEmpty", function() {
-
-    it("is defined", inject(isEmpty => expect(isEmpty).to.not.be.undefined)
-    );
-
-    describe("for empty strings", () => [undefined, null, ""].map((str) =>
-      it(`returns true for \`${str}\``, inject(isEmpty => expect(isEmpty(str)).to.be.true)
-      )));
-
-    return describe("for non empty strings", () => [" ", "    ", "test", " foo bar "].map((str) =>
-      it(`returns false for \`${str}\``, inject(isEmpty => expect(isEmpty(str)).to.be.false)
-      )));
-  });
-
-  xdescribe("service: IsFalsyServ", function() {
-
-    let IsFalsyServ = null;
-
-    beforeEach(inject(_IsFalsyServ_ => IsFalsyServ = _IsFalsyServ_));
-
-    it("returns true for `NaN`", () => expect(IsFalsyServ(NaN)).to.be.true);
-
-    it("returns true empty strings", function() {
-      expect(IsFalsyServ("")).to.be.true;
-      return expect(IsFalsyServ("foo")).to.be.false;
-    });
-
-    it("returns true for `null`", () => expect(IsFalsyServ(null)).to.be.true);
-
-    it("returns true for `undefined`", () => expect(IsFalsyServ(undefined)).to.be.true);
-
-    it("returns true for `false`", () => expect(IsFalsyServ(false)).to.be.true);
-
-    return it("returns false for other value", function() {
-      expect(IsFalsyServ(true)).to.be.false;
-      expect(IsFalsyServ(0)).to.be.false;
-      expect(IsFalsyServ(0.0)).to.be.false;
-      return expect(IsFalsyServ(123)).to.be.false;
     });
   });
 

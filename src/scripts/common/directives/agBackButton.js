@@ -1,12 +1,8 @@
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-var app = angular.module('angleGrinder.common')
+import angular from 'angular'
+import commonModule from '../commonModule'
 
 // Button which acts as browser's history back button
-app.directive('agBackButton', [
+angular.module(commonModule).directive('agBackButton', [
   '$window', $window => ({
     restrict: 'A',
 

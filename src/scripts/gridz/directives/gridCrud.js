@@ -1,11 +1,8 @@
-/*
- * decaffeinate suggestions:
- * DS101: Remove unnecessary use of Array.from
- * DS102: Remove unnecessary code created because of implicit returns
- * DS206: Consider reworking classes to avoid initClass
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-var app = angular.module("angleGrinder.gridz")
+import angular from 'angular'
+import gridzModule from '../gridzModule'
+
+var app = angular.module(gridzModule)
+
 // Uses to show edit panel for grid row. Supports dbl click on grid cell.
 app.directive("gridCrud", ["$controller", "$timeout", ($controller, $timeout) => ({
   restrict: "A",
@@ -76,11 +73,7 @@ app.directive("gridCrud", ["$controller", "$timeout", ($controller, $timeout) =>
 })
 ])
 
-const Cls = (this.GridCrudCtrl = class GridCrudCtrl {
-  static initClass() {
-    //Controller for gridCrud directive
-    this.$inject = ["$scope", "$element", "$attrs",  "$parse", "$log", "resourceBuilder", "$window", "restrictResource", "$uibModal", "pathWithContext", "$timeout"]
-  }
+class GridCrudCtrl {
   constructor($scope, $element, $attrs, $parse, $log, resourceBuilder, $window, restrictResource, $uibModal, pathWithContext, $timeout) {
 
     let Resource = null
@@ -218,7 +211,9 @@ const Cls = (this.GridCrudCtrl = class GridCrudCtrl {
     $parse(`edit${actionSuffix}`).assign($scope.$parent, editAction)
     $parse(`create${actionSuffix}`).assign($scope.$parent, createAction)
   }
-})
-Cls.initClass()
+}
+GridCrudCtrl.$inject = ["$scope", "$element", "$attrs",  "$parse", "$log", "resourceBuilder", "$window",
+  "restrictResource", "$uibModal", "pathWithContext", "$timeout"]
+
 
 angular.module("angleGrinder.gridz").controller("GridCrudCtrl", GridCrudCtrl)

@@ -1,9 +1,7 @@
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-describe("module: angleGrinder.common", function() {
+import agCommon from '~/scripts/common'
+
+describe("notificationDialogSpec", function() {
+  beforeEach(angular.mock.module(agCommon))
 
   describe("controller: NotificationDialogCtrl", function() {
     let $scope = null;
@@ -25,7 +23,7 @@ describe("module: angleGrinder.common", function() {
 
   return describe("service: NotificationDialogServ", function() {
 
-    beforeEach(angular.mock.module("angleGrinder.forms"));
+    //beforeEach(angular.mock.module("angleGrinder.forms"));
 
     it("displays the notification", inject(function( NotificationDialogServ) {
       // When

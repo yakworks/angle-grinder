@@ -1,11 +1,9 @@
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * DS205: Consider reworking code to avoid use of IIFEs
- * DS207: Consider shorter variations of null checks
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-var forms = angular.module("angleGrinder.forms")
+import angular from 'angular'
+import formsModule from '../formsModule'
+import _ from 'lodash'
+import { isFalsy, isEmpty } from '../../utils/isFalsy'
+
+var forms = angular.module(formsModule)
 
 forms.value("validationMessages", {
   required: "This field is required",
@@ -20,7 +18,7 @@ forms.value("validationMessages", {
 
 // Custom validation directive for fields match.
 // Might be used for password confirmation validation.
-forms.directive("match", ["isEmpty", isEmpty => ({
+forms.directive("match", () => ({
   require: "ngModel",
 
   link(scope, elem, attrs, modelCtrl) {
@@ -46,38 +44,37 @@ forms.directive("match", ["isEmpty", isEmpty => ({
     // validate model -> DOM
     return modelCtrl.$formatters.unshift(validator)
   }
-})
-])
+}))
 
-forms.directive("agLength", ["IsFalsyServ", "$parse", (isFalsy, $parse) => ({
-  require: "ngModel",
-  restrict: "A",
+forms.directive("agLength",
+  ["$parse", ($parse) => ({
+    require: "ngModel",
+    restrict: "A",
 
-  link(scope, elem, attrs, ngModelCtrl) {
+    link(scope, elem, attrs, ngModelCtrl) {
 
-    const lengthValidator = function(value) {
-      let valid
-      const length = $parse(attrs.agLength)(scope)
+      const lengthValidator = function(value) {
+        let valid
+        const length = $parse(attrs.agLength)(scope)
 
-      //If length is not provided, or value is not entered, its valid
-      //This validator does not check for required values, so if value must be entered, add ng-required
+        //If length is not provided, or value is not entered, its valid
+        //This validator does not check for required values, so if value must be entered, add ng-required
 
-      if (isFalsy(length) || ngModelCtrl.$isEmpty(value)) { valid = true
-      } else { valid = (value.length === length) }
+        if (isFalsy(length) || ngModelCtrl.$isEmpty(value)) { valid = true
+        } else { valid = (value.length === length) }
 
-      ngModelCtrl.$setValidity("length", valid)
+        ngModelCtrl.$setValidity("length", valid)
 
-      if (valid) { return value } else { return undefined }
+        if (valid) { return value } else { return undefined }
+      }
+
+      ngModelCtrl.$parsers.unshift(lengthValidator)
+      ngModelCtrl.$formatters.push(lengthValidator)
+
+      return scope.$watch(attrs.agLength, () => lengthValidator(ngModelCtrl.$viewValue))
     }
-
-    ngModelCtrl.$parsers.unshift(lengthValidator)
-    ngModelCtrl.$formatters.push(lengthValidator)
-
-    return scope.$watch(attrs.agLength, () => lengthValidator(ngModelCtrl.$viewValue))
-  }
-})
-
-])
+  })]
+)
 
 forms.directive("agFieldGroup", [
   "$timeout", "$log", "$interpolate",
@@ -134,81 +131,82 @@ forms.directive("agFieldGroup", [
   })
 ])
 
-forms.directive("agValidationErrors", ["validationMessages", "$interpolate", (validationMessages, $interpolate) => ({
-  restrict: "E",
-  require: "^form",
-  replace: true,
+forms.directive("agValidationErrors",
+  ["validationMessages", "$interpolate", (validationMessages, $interpolate) => ({
+    restrict: "E",
+    require: "^form",
+    replace: true,
 
-  link(scope, element, attrs, formCtrl) {
-    const fieldName = $interpolate(attrs["for"])(scope)
-    const field = formCtrl[fieldName]
+    link(scope, element, attrs, formCtrl) {
+      const fieldName = $interpolate(attrs["for"])(scope)
+      const field = formCtrl[fieldName]
 
-    // Do cleanup
-    const clearErrors = () => element.html("")
+      // Do cleanup
+      const clearErrors = () => element.html("")
 
-    // Try to take an errors message from the attribute
-    // otherwise fallback to the default error message
-    const messageFor = error => attrs[error] || validationMessages[error]
+      // Try to take an errors message from the attribute
+      // otherwise fallback to the default error message
+      const messageFor = error => attrs[error] || validationMessages[error]
 
-    const appendError = function(message, klass) {
-      if (klass == null) { klass = "" }
-      return element.append(`\
-<span class="help-inline ${klass}">${message}</span>\
-`
-      )
-    }
-
-    const displayErrorMessages = function() {
-      clearErrors()
-
-      // Display client side errors
-      return (() => {
-        const result = []
-        for (let error in field.$error) {
-          const invalid = field.$error[error]
-          if (!invalid) { continue }
-
-          const message = messageFor(error)
-          if (!_.isNil(message)) { result.push(appendError(message)) } else {
-            result.push(undefined)
-          }
-        }
-        return result
-      })()
-    }
-
-    // Clear validation errors when the field is valid
-    let initial = true
-    const isValid = () => formCtrl[fieldName]?.$valid
-    scope.$watch(isValid, function() {
-      if (!initial) { displayErrorMessages() }
-      return initial = false
-    })
-
-    // Display validation errors while typing
-    const getViewValue = () => formCtrl[fieldName]?.$viewValue
-    scope.$watch(getViewValue, function() {
-      if (field.$dirty) { return displayErrorMessages() }
-    })
-
-    // Display validation errors when the form is submitted
-    const isSubmitted = () => formCtrl.$submitted
-    scope.$watch(isSubmitted, function(submitted) {
-      if (submitted) { return displayErrorMessages() }
-    })
-
-    // Display server side errors
-    const getServerErrors = () => formCtrl.$serverErrors?.[fieldName]
-    return scope.$watch(getServerErrors, function(serverError) {
-      if (!_.isNil(serverError)) {
-        return appendError(serverError, "server-error")
-      } else {
-        return element.find(".server-error").remove()
+      const appendError = function(message, klass) {
+        if (klass == null) { klass = "" }
+        return element.append(`\
+  <span class="help-inline ${klass}">${message}</span>\
+  `
+        )
       }
-    })
-  }
-})
-])
+
+      const displayErrorMessages = function() {
+        clearErrors()
+
+        // Display client side errors
+        return (() => {
+          const result = []
+          for (let error in field.$error) {
+            const invalid = field.$error[error]
+            if (!invalid) { continue }
+
+            const message = messageFor(error)
+            if (!_.isNil(message)) { result.push(appendError(message)) } else {
+              result.push(undefined)
+            }
+          }
+          return result
+        })()
+      }
+
+      // Clear validation errors when the field is valid
+      let initial = true
+      const isValid = () => formCtrl[fieldName]?.$valid
+      scope.$watch(isValid, function() {
+        if (!initial) { displayErrorMessages() }
+        return initial = false
+      })
+
+      // Display validation errors while typing
+      const getViewValue = () => formCtrl[fieldName]?.$viewValue
+      scope.$watch(getViewValue, function() {
+        if (field.$dirty) { return displayErrorMessages() }
+      })
+
+      // Display validation errors when the form is submitted
+      const isSubmitted = () => formCtrl.$submitted
+      scope.$watch(isSubmitted, function(submitted) {
+        if (submitted) { return displayErrorMessages() }
+      })
+
+      // Display server side errors
+      const getServerErrors = () => formCtrl.$serverErrors?.[fieldName]
+      return scope.$watch(getServerErrors, function(serverError) {
+        if (!_.isNil(serverError)) {
+          return appendError(serverError, "server-error")
+        } else {
+          return element.find(".server-error").remove()
+        }
+      })
+    }
+  })]
+)
 
 forms.directive("agServerValidationErrors", ["alerts", alerts => ({
   restrict: "A",
@@ -253,8 +251,7 @@ forms.directive("agServerValidationErrors", ["alerts", alerts => ({
       })
     })
   }
-})
-])
+})])
 
 // Handles server side errors
 forms.factory("serverValidationErrorsHandler", [

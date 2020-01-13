@@ -4,10 +4,12 @@
  * DS207: Consider shorter variations of null checks
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
+
 const res = angular.module("exampleApp.resources", [
   "ngResource",
   "ngRoute"
 ]);
+export default "exampleApp.resources"
 
 res.factory("Users", [
   "$resource", function($resource) {

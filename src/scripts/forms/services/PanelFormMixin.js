@@ -1,10 +1,6 @@
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * DS207: Consider shorter variations of null checks
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-var app = angular.module('angleGrinder.forms')
+import formsModule from '../formsModule'
+
+var app = angular.module(formsModule)
 
 // mixin for forms inside info panels
 app.factory('PanelFormMixin', [

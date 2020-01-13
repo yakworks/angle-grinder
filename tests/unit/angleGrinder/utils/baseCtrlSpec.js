@@ -1,3 +1,5 @@
+import BaseCtrl from '~/scripts/utils/BaseCtrl'
+
 describe("BaseCtrl", function() {
 
   let app = null;
@@ -12,7 +14,7 @@ describe("BaseCtrl", function() {
     beforeEach(function() {
       class MyCtrl extends BaseCtrl {
         static initClass() {
-  
+
           this.register(app);
           this.inject("$scope", "foo");
         }
@@ -24,7 +26,7 @@ describe("BaseCtrl", function() {
       }
       MyCtrl.initClass();
 
-      return module("testApp");
+      angular.mock.module("testApp");
     });
 
     return it("registers the controller with all dependencies", inject(function($rootScope, $controller) {
@@ -42,7 +44,7 @@ describe("BaseCtrl", function() {
     beforeEach(function() {
       class MyCtrl extends BaseCtrl {
         static initClass() {
-  
+
           this.register(app, "my.controller");
           this.inject("$scope");
         }
@@ -53,7 +55,7 @@ describe("BaseCtrl", function() {
       }
       MyCtrl.initClass();
 
-      return module("testApp");
+      return angular.mock.module("testApp");
     });
 
     return it("register controller at the different name", inject(function($rootScope, $controller) {
@@ -70,7 +72,7 @@ describe("BaseCtrl", function() {
     beforeEach(function() {
       class OtherCtrl extends BaseCtrl {
         static initClass() {
-  
+
           this.register(app);
           this.inject("$scope", "my.foo as foobar");
         }
@@ -81,7 +83,7 @@ describe("BaseCtrl", function() {
       }
       OtherCtrl.initClass();
 
-      return module("testApp");
+      return angular.mock.module("testApp");
     });
 
     return it("registers the dependency under different name", inject(function($rootScope, $controller) {
@@ -98,7 +100,7 @@ describe("BaseCtrl", function() {
     beforeEach(function() {
       class OtherCtrl extends BaseCtrl {
         static initClass() {
-  
+
           this.register("testApp");
           this.inject("$scope", "my.foo as foobar");
         }
@@ -109,7 +111,7 @@ describe("BaseCtrl", function() {
       }
       OtherCtrl.initClass();
 
-      return module("testApp");
+      return angular.mock.module("testApp");
     });
 
     return it("registers under the given module", inject(function($rootScope, $controller) {
@@ -140,7 +142,7 @@ describe("BaseCtrl", function() {
       }
       MyCtrl.initClass();
 
-      return module("testApp");
+      return angular.mock.module("testApp");
     });
 
     return it("exposes given entities to the scope", inject(function($rootScope, $controller) {

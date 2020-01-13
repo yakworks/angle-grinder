@@ -1,16 +1,10 @@
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-// Adds an empty option to select dropdaown.
-var app = angular.module('angleGrinder.common')
+import angular from 'angular'
+import commonModule from '../commonModule'
+import _ from 'lodash'
 
-class MyDirective {
-  constructor() {
-    this.restrict = 'A'
-    this.scope = { addEmptyOption: '=' }
-  }
+angular.module(commonModule).directive('addEmptyOption', () => ({
+  restrict: 'A',
+  scope: { addEmptyOption: '=' },
 
   link(scope, element, attrs) {
     const emptyOption = !_.isNil(attrs.emptyOption) ? JSON.parse(attrs.emptyOption.replace(/[']/g, '"')) : { id: '', name: '' }
@@ -19,6 +13,4 @@ class MyDirective {
       if (!_.find(scope.addEmptyOption, { id: emptyOption.id })) { return scope.addEmptyOption.unshift(emptyOption) }
     }
   }
-}
-
-app.directive('addEmptyOption', MyDirective)
+}))

@@ -1,9 +1,11 @@
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-var forms = angular.module('angleGrinder.forms')
+import angular from 'angular'
+import formsModule from '../formsModule'
+import moment from 'moment'
+import 'eonasdan-bootstrap-datetimepicker/src/js/bootstrap-datetimepicker'
+// import moment from 'moment'
+import _ from 'lodash'
+
+var forms = angular.module(formsModule)
 
 forms.provider('agDate', function() {
   let viewFormat = 'MM/DD/YYYY'

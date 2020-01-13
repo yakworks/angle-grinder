@@ -1,8 +1,5 @@
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
+import agGridz from '~/scripts/gridz'
+
 describe("module: angleGrinder.gridz, service: agGridDataLoader", function() {
 
   let loadingEl = null;
@@ -23,7 +20,7 @@ describe("module: angleGrinder.gridz, service: agGridDataLoader", function() {
   })
   );
 
-  beforeEach(angular.mock.module("angleGrinder.gridz"));
+  beforeEach(angular.mock.module(agGridz));
 
   let gridCtrl = null;
   let loader = null;

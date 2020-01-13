@@ -1,12 +1,8 @@
-/*
- * decaffeinate suggestions:
- * DS001: Remove Babel/TypeScript constructor workaround
- * DS102: Remove unnecessary code created because of implicit returns
- * DS206: Consider reworking classes to avoid initClass
- * DS207: Consider shorter variations of null checks
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-var forms = angular.module('angleGrinder.forms')
+import BaseCtrl from '../../utils/BaseCtrl'
+import angular from 'angular'
+import formsModule from '../formsModule'
+
+var forms = angular.module(formsModule)
 
 // Opens a modal dialog with embedded generic form for
 // create or update record

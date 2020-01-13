@@ -1,11 +1,8 @@
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-describe("module: angleGrinder.forms mixin: PanelFormMixin", function() {
+import formsModule from '~/scripts/forms'
 
-  beforeEach(angular.mock.module("angleGrinder.forms"));
+describe("panelFormMixinSpec", function() {
+
+  beforeEach(angular.mock.module(formsModule));
 
   return describe("service: PanelFormMixin", function() {
 
@@ -50,21 +47,20 @@ describe("module: angleGrinder.forms mixin: PanelFormMixin", function() {
       beforeEach(() => $scope.showForm = true);
 
       describe("when the form is valid", function() {
-        beforeEach(inject(function(formMock) {
-          $scope.theForm = formMock().$setValidity(true);
+        beforeEach(function() {
+          //$scope.theForm = formMock().$setValidity(true);
+          $scope.theForm = { $valid:true, $invalid: false }
           return $scope.update();
         })
-        );
 
         return it("closes the form", () => expect($scope.showForm).to.be.false);
       });
 
       return describe("when the form is not valid", function() {
-        beforeEach(inject(function(formMock) {
-          $scope.theForm = formMock().$setValidity(false);
+        beforeEach(function() {
+          $scope.theForm = { $valid:false, $invalid: true }
           return $scope.update();
         })
-        );
 
         return it("does not close the form", () => expect($scope.showForm).to.be.true);
       });

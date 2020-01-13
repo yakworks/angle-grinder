@@ -1,9 +1,7 @@
-/*
- * decaffeinate suggestions:
- * DS101: Remove unnecessary use of Array.from
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
+import formsModule from '~/scripts/forms'
+import compileTemplate from '../../helpers/compileTemplate'
+import _ from 'lodash'
+
 describe("module: angleGrinder.forms tabs", function() {
 
   beforeEach(angular.mock.module("ng", function($provide) {
@@ -13,13 +11,11 @@ describe("module: angleGrinder.forms tabs", function() {
     });
   })
   );
+  beforeEach(angular.mock.module(formsModule))
 
-  beforeEach(angular.mock.module("angleGrinder.common", function($provide) {
+  beforeEach(angular.mock.module(formsModule, function($provide) {
     $provide.value("pathWithContext", path => `/ag-demo${path}`);
-  })
-  );
-
-  beforeEach(angular.mock.module("angleGrinder.forms"));
+  }));
 
   describe("directive: agTabset", function() {
 

@@ -1,11 +1,8 @@
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-describe("module: angleGrinder.forms mixin: MassUpdateMixin", function() {
+import formsModule from '~/scripts/forms'
 
-  beforeEach(angular.mock.module("angleGrinder.forms", function($provide) {
+describe("massUpdateMixinSpec", function() {
+
+  beforeEach(angular.mock.module(formsModule, function($provide) {
     $provide.value("$uibModal", {open: sinon.mock()});
   })
   );

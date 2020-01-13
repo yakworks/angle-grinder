@@ -1,16 +1,13 @@
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-describe("module: angleGrinder.common directive: agSideMenu", function() {
-  beforeEach(angular.mock.module("angleGrinder.common"));
+import agCommon from '~/scripts/common'
+
+describe("agSideMenuSpec", function() {
+  beforeEach(angular.mock.module(agCommon));
 
   let element = null;
   let $scope = null;
   const ngModel = null;
 
-  beforeEach(angular.mock.module("angleGrinder", function($provide) {
+  beforeEach(angular.mock.module(agCommon, function($provide) {
     $provide.decorator("$window", $delegate => $delegate);
 
   })

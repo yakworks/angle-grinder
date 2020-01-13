@@ -1,11 +1,8 @@
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
+import formsModule from '~/scripts/forms'
+
 describe("Directive: agSubmit", function() {
 
-  beforeEach(angular.mock.module("angleGrinder.forms", function($provide) {
+  beforeEach(angular.mock.module(formsModule, function($provide) {
     //console.log("12333333333333333333333333333333333333333")
     $provide.value("serverValidationErrorsHandler", sinon.stub());
   })

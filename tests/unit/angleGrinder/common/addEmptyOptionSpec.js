@@ -1,14 +1,11 @@
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-describe("module:angleGrinder.common directive: addEmptyOption", function() {
+import agCommon from '~/scripts/common'
+
+describe("module:ag.common directive: addEmptyOption", function() {
 
   let element = null;
   let scope = null;
 
-  beforeEach(angular.mock.module("angleGrinder.common", function() {}));
+  beforeEach(angular.mock.module(agCommon))
 
   beforeEach(inject(function($rootScope, $compile) {
     element = angular.element('<select add-empty-option><option value="test">Test</option></select>');

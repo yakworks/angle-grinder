@@ -1,10 +1,9 @@
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * DS207: Consider shorter variations of null checks
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-var app = angular.module('angleGrinder.common')
+import angular from 'angular'
+import commonModule from './commonModule'
+import { isFalsy } from '~/scripts/utils/isFalsy'
+import _ from 'lodash'
+
+var app = angular.module(commonModule)
 
 app.provider('agCurrencyFilter', function() {
   let defaultSymbol = '$'
@@ -23,10 +22,9 @@ app.provider('agCurrencyFilter', function() {
     },
 
     $get: [
-      '$filter', 'IsFalsyServ',
-      ($filter, IsFalsyServ) => function(amount, symbol) {
+      '$filter', ($filter) => function(amount, symbol) {
         if (symbol == null) { symbol = defaultSymbol }
-        if (IsFalsyServ(amount)) { return '' }
+        if (isFalsy(amount)) { return '' }
 
         const formattedAmount = $filter('currency')(amount, '')
         return _.template(defaultFormat)({ amount: formattedAmount, symbol })

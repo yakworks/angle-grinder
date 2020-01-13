@@ -1,11 +1,9 @@
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
+import formsModule from '~/scripts/forms'
+import compileTemplate from '../../helpers/compileTemplate'
+
 describe("module: angleGrinder.forms", function() {
 
-  beforeEach(angular.mock.module("angleGrinder.forms"));
+  beforeEach(angular.mock.module(formsModule));
 
   describe("service: focus", function() {
 
