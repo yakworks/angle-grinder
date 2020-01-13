@@ -4,7 +4,6 @@
   "version": "3.0.0",
   "scripts": {
     "test": "karma start tests/karma.conf.js --single-run --no-auto-watch --no-sandbox",
-    "karma": "karma start --single-run --no-auto-watch --no-sandbox",
     "lint": "eslint src/",
     "lint:fix": "eslint src/ --fix"
   },

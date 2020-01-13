@@ -11,10 +11,10 @@ import 'angular-mocks/angular-mocks'
 // import * as gridz from './unit/angleGrinder/gridz/*Spec'
 // import * as pwc from './unit/angleGrinder/pathWithContext/*Spec'
 // import * as rs from './unit/angleGrinder/resourceSupport/*Spec'
-import * as sel2 from './unit/angleGrinder/select2/*Spec'
+// import * as sel2 from './unit/angleGrinder/select2/*Spec'
 
 // shorter alternate method to try is this when using webpack
-// function importAll (r) {
-//   r.keys().forEach(r);
-// }
-// importAll(require.context('./unit/angleGrinder/', true, /\.js$/))
+function importAll (r) {
+  r.keys().forEach(r);
+}
+importAll(require.context('./unit/angleGrinder/', true, /\.js$/))

@@ -247,5 +247,3 @@ angular.module('ui.select2', [])
       }
     }
   })
-
-

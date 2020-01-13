@@ -1,6 +1,6 @@
 import angular from 'angular'
 import resourceModule from './resourceModule'
-import {deepDiff} from '../utils/deepDiff'
+import { deepDiff } from '../utils/deepDiff'
 import _ from 'lodash'
 
 var app = angular.module(resourceModule)

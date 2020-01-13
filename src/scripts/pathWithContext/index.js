@@ -1,26 +1,18 @@
 import angular from 'angular'
 import _ from 'lodash'
-import join from "lodash/fp/join"
-import map from "lodash/fp/map";
-import flow from "lodash/fp/flow";
 
 const MOD_NAME = 'ag.pathWithContext'
 export default MOD_NAME
 
-let app = angular.module(MOD_NAME, [])
+const app = angular.module(MOD_NAME, [])
 
 // Build an url with the query string from the given params
 app.value('urlBuilder', function(path, params) {
   if (params == null) { params = {} }
-  //see https://medium.com/making-internets/why-using-chain-is-a-mistake-9bc1f80d51ba
+  // see https://medium.com/making-internets/why-using-chain-is-a-mistake-9bc1f80d51ba
 
-  const queryString = _.join(_.map(params,(value, key) => `${key}=${value}`), '&')
-
-  // flow(
-  //   map((value, key) => `${key}=${value}`),
-  //   join('&')
-  // )(params);
-  //const queryString = _.chain(params).map((value, key) => `${key}=${value}`).join('&').value()
+  const queryString = _.join(_.map(params, (value, key) => `${key}=${value}`), '&')
+  // const queryString = _.chain(params).map((value, key) => `${key}=${value}`).join('&').value()
   return _.filter([path, queryString], part => part.length > 0).join('?')
 })
 

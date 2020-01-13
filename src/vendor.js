@@ -1,12 +1,10 @@
-//import $ from 'jquery'
+// import $ from 'jquery'
 window.jQuery = require('jquery')
 window.$ = window.jQuery
 
-import 'angular'
-
-//require('sweetalert')
-//window.toastr = require('toastr')
-//require('lodash')
+// require('sweetalert')
+// window.toastr = require('toastr')
+// require('lodash')
 require('angular')
 require('angular-animate')
 require('angular-route')
@@ -21,5 +19,5 @@ require('Select2/select2.js')
 require('angular-ui-bootstrap')
 require('moment')
 require('eonasdan-bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js')
-//require('toastr/toastr.js')
-//require('sweetalert/lib/sweet-alert.js')
+// require('toastr/toastr.js')
+// require('sweetalert/lib/sweet-alert.js')

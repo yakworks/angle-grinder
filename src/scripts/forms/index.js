@@ -15,7 +15,7 @@ import './directives/editableCustom'
 import './directives/editableDatepicker'
 import './directives/editableDirectiveFactory'
 import './directives/editableFormButtons'
-import './directives/editableFormButtons'
+
 import './directives/editablePanelHeading'
 import './directives/editableSelect2'
 import './directives/focus'

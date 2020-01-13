@@ -1,7 +1,4 @@
 import _ from 'lodash'
-import each from "lodash/fp/each"
-import map from "lodash/fp/map";
-import flow from "lodash/fp/flow";
 
 export default class BaseCtrl {
   static register(app, name) {
@@ -23,18 +20,11 @@ export default class BaseCtrl {
 
   // Expose the given fields to the `$scope`
   expose($scope, ...members) {
-    //see https://medium.com/making-internets/why-using-chain-is-a-mistake-9bc1f80d51ba
-    // return flow(
-    //   map( field => [field, this[field]] ),
-    //   each((...args) => {
-    //     const [field, entity] = Array.from(args[0])
-    //     return $scope[field] = typeof entity === 'function' ? _.bind(entity, this) : entity
-    //   }),
-    // )(members);
+    // see https://medium.com/making-internets/why-using-chain-is-a-mistake-9bc1f80d51ba
     var fmap = _.map(members, (field) => [field, this[field]])
     return _.each(fmap, (...args) => {
-        const [field, entity] = Array.from(args[0])
-        return $scope[field] = typeof entity === 'function' ? _.bind(entity, this) : entity
+      const [field, entity] = Array.from(args[0])
+      return $scope[field] = typeof entity === 'function' ? _.bind(entity, this) : entity
     })
     // return _.chain(members)
     //   .map((field) => [field, this[field]])

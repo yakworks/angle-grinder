@@ -8,11 +8,11 @@ import _ from 'lodash'
 const MOD_NAME = 'ag.common'
 export default MOD_NAME
 var common = angular.module(MOD_NAME, [
-    'ui.bootstrap.modal',
-    'ui.bootstrap.popover',
-    ngRoute,
-    ngScroll // Scroll
-  ])
+  'ui.bootstrap.modal',
+  'ui.bootstrap.popover',
+  ngRoute,
+  ngScroll // Scroll
+])
   .service('ConfirmationDialogServ', ConfirmationDialogServ)
 
 // change default locale to use `-` symbol for negative currencies

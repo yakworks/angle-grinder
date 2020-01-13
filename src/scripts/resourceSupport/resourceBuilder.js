@@ -1,7 +1,7 @@
 import angular from 'angular'
 import resourceModule from './resourceModule'
 
-let resources = angular.module(resourceModule)
+const resources = angular.module(resourceModule)
 
 resources.constant('RestContext', '')
 // Build a resource for the given restful url

@@ -3,7 +3,7 @@ window.toastr = require('toastr')
 
 export default class Alerts {
   constructor(alertTimeout) {
-    //this.$timeout = $timeout
+    // this.$timeout = $timeout
     this.alertTimeout = alertTimeout
     this.alertsOptions = {
       error: {},
@@ -31,7 +31,7 @@ export default class Alerts {
   }
 
   wrapMessage(text, type) {
-    //toastr.options = _.merge(angular.copy(this.alertsOptions.defaultOptions), this.alertsOptions[type])
+    // toastr.options = _.merge(angular.copy(this.alertsOptions.defaultOptions), this.alertsOptions[type])
     toastr.options = _.merge({}, this.alertsOptions.defaultOptions, this.alertsOptions[type])
     const title = type.charAt(0).toUpperCase() + type.substring(1).toLowerCase()
     return toastr[type](text, title)

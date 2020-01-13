@@ -31,7 +31,6 @@ export function deepDiff(oldVal, newVal, allowed, reqFields) {
   if (allowed == null) { allowed = [] }
   if (reqFields == null) { reqFields = [] }
   return diffRecursive(oldVal, newVal, allowed, reqFields)
-
 }
 
 export function deepPick(obj, ...keys) {
@@ -45,7 +44,7 @@ export function deepPick(obj, ...keys) {
   return result
 }
 
- // get the value of a nested property
+// get the value of a nested property
 export function getDeep(obj, path) {
   const keys = path.split('.')
 
