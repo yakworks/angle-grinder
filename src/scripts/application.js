@@ -1,15 +1,20 @@
-// The main scaffolding module
-var app = angular.module("angleGrinder", [
-    "ngResource",
-    "ngRoute",
-    "ui.select2",
+import angular from 'angular'
+import agPathWithContext from './pathWithContext'
+import resourceSupport from './resourceSupport'
+import agCommon from './common'
+import uiselect2 from '~/scripts/select2'
+import forms from './forms'
+import gridz from './gridz'
 
-    "angleGrinder.common",
-    "angleGrinder.gridz",
-    "angleGrinder.forms",
-    "angleGrinder.alerts",
-    "angleGrinder.spinner",
-    "angleGrinder.resources"
+var app = angular.module("angleGrinder", [
+  resourceSupport,
+  uiselect2,
+  agCommon,
+  agPathWithContext,
+  gridz,
+  forms,
+  "angleGrinder.alerts",
+  "angleGrinder.spinner"
 ]);
 
 app.config([

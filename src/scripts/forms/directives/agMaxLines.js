@@ -1,11 +1,10 @@
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-var app = angular.module('angleGrinder.forms')
+import angular from 'angular'
+import formsModule from '../formsModule'
+import { isFalsy } from '../../utils/isFalsy'
+
+var app = angular.module(formsModule)
 // Validates text area to have not more then specified number of lines
-app.directive('agMaxLines', ['IsFalsyServ', '$parse', (IsFalsyServ, $parse) => ({
+app.directive('agMaxLines', ['$parse', ($parse) => ({
   require: 'ngModel',
   restrict: 'A',
 
@@ -19,7 +18,7 @@ app.directive('agMaxLines', ['IsFalsyServ', '$parse', (IsFalsyServ, $parse) => (
       // console.log('maxLines **********************************************************' + maxLines)
       // console.log('attrs.agMaxLines **********************************************************' + attrs.agMaxLines)
       const numLines = (value || '').split('\n').length
-      const valid = IsFalsyServ(maxLines) || (numLines <= maxLines)
+      const valid = isFalsy(maxLines) || (numLines <= maxLines)
       ngModelCtrl.$setValidity('maxlines', valid)
       if (valid) { return value } else { return undefined }
     }

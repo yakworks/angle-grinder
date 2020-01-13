@@ -1,13 +1,9 @@
-/*
- * decaffeinate suggestions:
- * DS101: Remove unnecessary use of Array.from
- * DS102: Remove unnecessary code created because of implicit returns
- * DS205: Consider reworking code to avoid use of IIFEs
- * DS206: Consider reworking classes to avoid initClass
- * DS207: Consider shorter variations of null checks
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-var gridz = angular.module("angleGrinder.gridz")
+import angular from 'angular'
+import gridzModule from '../../gridzModule'
+import BaseCtrl from '../../../utils/BaseCtrl'
+
+const gridz = angular.module(gridzModule)
+
 
 // Wrapper for jqGrid public API
 // Controller instance could be published to the parent scope
@@ -17,10 +13,10 @@ var AgGridCtrl = (function() {
   let highlightClass = undefined
   AgGridCtrl = class AgGridCtrl extends BaseCtrl {
     static initClass() {
-  
+
       this.register(gridz, "AgGridCtrl")
       this.inject("$rootScope", "$element", "$attrs", "$q", "hasSearchFilters", "FlattenServ", "xlsData", "csvData")
-  
+
       highlightClass = 'ui-state-highlight'
     }
 

@@ -1,11 +1,8 @@
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
+import compileTemplate from '../../helpers/compileTemplate'
+import agGridz from '~/scripts/gridz'
 describe("agGridzSpec", function() {
 
-  beforeEach(angular.mock.module("angleGrinder.gridz", function($provide) {
+  beforeEach(angular.mock.module(agGridz, function($provide) {
     $provide.value("ActionPopupHandler", sinon.stub());
   })
   );

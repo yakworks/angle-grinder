@@ -1,12 +1,7 @@
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * DS207: Consider shorter variations of null checks
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-var app = angular.module('angleGrinder.common')
+import angular from 'angular'
+import commonModule from './commonModule'
 
-app.provider('agDateTimeFilter', function() {
+angular.module(commonModule).provider('agDateTimeFilter', function() {
   // see https://docs.angularjs.org/api/ng/filter/date
   let defaultFormat = 'DD MMM YYYY HH:mm A'
 

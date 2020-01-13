@@ -1,13 +1,7 @@
-/*
- * decaffeinate suggestions:
- * DS101: Remove unnecessary use of Array.from
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-// Fixes bug with select(when user clicks on element in dropdown list but it selects above element) on old versions of IE.
-var app = angular.module('angleGrinder.common')
+import angular from 'angular'
+import commonModule from '../commonModule'
 
-app.directive('ieSelectFix', ['$window', $window => ({
+angular.module(commonModule).directive('ieSelectFix', ['$window', $window => ({
   restrict: 'A',
 
   link(scope, elem, attrs) {

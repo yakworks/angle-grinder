@@ -1,18 +1,14 @@
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-describe("module: angleGrinder.common", function() {
+import agCommon from '~/scripts/common'
+
+describe("agDateTimeFilter ", function() {
 
   let provider = null;
 
   beforeEach(() => // load module and obtain reference to the filter provider
-  module("angleGrinder.common", function(agDateTimeFilterProvider) {
-    provider = agDateTimeFilterProvider;
-  }));
-
-  beforeEach(angular.mock.module("angleGrinder.common"));
+    angular.mock.module(agCommon, function(agDateTimeFilterProvider) {
+      provider = agDateTimeFilterProvider;
+    }
+  ));
 
   return describe("filter: agDateTimeFilter", function() {
 

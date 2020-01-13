@@ -1,10 +1,8 @@
-/*
- * decaffeinate suggestions:
- * DS101: Remove unnecessary use of Array.from
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-var gridz = angular.module('angleGrinder.gridz')
+import angular from 'angular'
+import gridzModule from '../gridzModule'
+import _ from 'lodash'
+
+const gridz = angular.module(gridzModule)
 
 class AgGridDataLoaderClass {
   constructor($log, $http, $document) {

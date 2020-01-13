@@ -50,3 +50,9 @@ deps upgrades, many needed for umd modules
 - [ ] "later": "*" -> it appears this is used only in rcm to parse the cron stuff. we should move dependency there
 
 - [x] "select2-bootstrap-css": "~1.4.6" -> should move this into our src.
+
+
+Notes for migration:
+- lets get RCM master converted to js first.
+- IsFalsy and DeepPick, DeepDiff got moved to just imports
+- 

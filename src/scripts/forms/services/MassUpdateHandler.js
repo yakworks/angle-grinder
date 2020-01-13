@@ -1,10 +1,8 @@
-/*
- * decaffeinate suggestions:
- * DS101: Remove unnecessary use of Array.from
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-var forms = angular.module('angleGrinder.forms')
+import angular from 'angular'
+import formsModule from '../formsModule'
+import _ from 'lodash'
+
+var forms = angular.module(formsModule)
 
 // Service for updating grid rows
 // result should contain two arrays:

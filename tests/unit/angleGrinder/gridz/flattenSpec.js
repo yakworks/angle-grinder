@@ -1,11 +1,8 @@
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
+import agGridz from '~/scripts/gridz'
+
 describe("module: angleGrinder.gridz", function() {
 
-  beforeEach(angular.mock.module("angleGrinder.gridz"));
+  beforeEach(angular.mock.module(agGridz));
 
   return describe("service: FlattenServ", function() {
 

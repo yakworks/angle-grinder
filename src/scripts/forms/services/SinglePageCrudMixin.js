@@ -1,10 +1,6 @@
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * DS207: Consider shorter variations of null checks
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-var mixin = angular.module('angleGrinder.forms')
+import formsModule from '../formsModule'
+
+var mixin = angular.module(formsModule)
 
 mixin.factory('SinglePageCrudCtrlMixin', [
   '$log', '$location', 'DialogCrudCtrlMixin',

@@ -1,9 +1,8 @@
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-var gridz = angular.module('angleGrinder.gridz')
+import angular from 'angular'
+import gridzModule from '../gridzModule'
+
+const gridz = angular.module(gridzModule)
+
 // Generates xls export button for the given grid.
 // Usage:
 //   <a href="" ag-grid-xls-export="usersGrid">

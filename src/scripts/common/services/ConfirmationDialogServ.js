@@ -1,15 +1,7 @@
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * DS207: Consider shorter variations of null checks
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-var app = angular.module('angleGrinder.common')
-// Open the confirmation dialog
-// options - it can be a string or object with the messages
-//   if th message is not specified default "Are you sure?" message will be used
+import sweetAlert from 'sweetalert'
+window.sweetAlert = window.swal = sweetAlert
 
-class ConfirmationDialogServClass {
+export default class ConfirmationDialogServ {
   constructor($log, $q) {
     this.$log = $log
     this.$q = $q
@@ -55,5 +47,3 @@ class ConfirmationDialogServClass {
     return defer.promise
   }
 }
-ConfirmationDialogServClass.$inject = ['$log', '$q']
-app.service('ConfirmationDialogServ', ConfirmationDialogServClass)

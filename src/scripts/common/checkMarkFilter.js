@@ -1,13 +1,8 @@
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * DS207: Consider shorter variations of null checks
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-var app = angular.module('angleGrinder.common')
+import angular from 'angular'
+import commonModule from './commonModule'
 
 // Filter for boolean values, presents '✓' or '✘'
-app.filter('checkMark', () => function(input, options) {
+angular.module(commonModule).filter('checkMark', () => function(input, options) {
   if (options == null) { options = {} }
   if (input) {
     if (options.hideTruth) { return '' }

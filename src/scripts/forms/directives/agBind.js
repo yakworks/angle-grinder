@@ -1,8 +1,9 @@
 import angular from 'angular'
+import formsModule from '../formsModule'
 
 // Enhanced bind directive with default value
 // Should be used with xeditable fields to show data in the view mode
-angular.module('angleGrinder.common').directive('agBind', function() {
+angular.module(formsModule).directive('agBind', function() {
   return {
     restrict: 'A',
 

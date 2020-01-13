@@ -1,9 +1,7 @@
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-const spinner = angular.module('angleGrinder.spinner', ['angleGrinder.common'])
+import angular from 'angular'
+import commonModule from '../commonModule'
+
+const spinner = angular.module(commonModule)
 
 /*
 Use css to set the spinner animation image:

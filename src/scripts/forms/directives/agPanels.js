@@ -1,10 +1,8 @@
-/*
- * decaffeinate suggestions:
- * DS101: Remove unnecessary use of Array.from
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-var forms = angular.module("angleGrinder.forms")
+import angular from 'angular'
+import formsModule from '../formsModule'
+import _ from 'lodash'
+
+var forms = angular.module(formsModule)
 
 forms.value("getRealPanelHeight", function(el) {
   const bodyEl = el.find(".panel-body:visible")
@@ -46,7 +44,8 @@ forms.directive("agPanelsRow", [
 
         // returns true when all panels are equalized
         this.allEqual = function() {
-          const heights = _.chain(this.panels).map(el => getHeight(el)).value()
+          const heights = _.map(this.panels, el => getHeight(el))
+          //_.chain(this.panels).map(el => getHeight(el)).value()
           return _.every(heights, height => height === heights[0])
         }
 

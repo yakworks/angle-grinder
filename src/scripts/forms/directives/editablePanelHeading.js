@@ -1,10 +1,8 @@
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
+import angular from 'angular'
+import formsModule from '../formsModule'
+
 // Adds button for editable form to make the form visable
-var app = angular.module('angleGrinder.forms')
+var app = angular.module(formsModule)
 
 app.directive('editablePanelHeading', [
   () => ({

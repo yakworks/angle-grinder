@@ -1,13 +1,9 @@
-/*
- * decaffeinate suggestions:
- * DS101: Remove unnecessary use of Array.from
- * DS102: Remove unnecessary code created because of implicit returns
- * DS103: Rewrite code to no longer use __guard__
- * DS201: Simplify complex destructure assignments
- * DS207: Consider shorter variations of null checks
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-this.BaseCtrl = class BaseCtrl {
+import _ from 'lodash'
+import each from "lodash/fp/each"
+import map from "lodash/fp/map";
+import flow from "lodash/fp/flow";
+
+export default class BaseCtrl {
   static register(app, name) {
     if (name == null) { name = this.name || __guard__(this.toString().match(/function\s*(.*?)\(/), x => x[1]) }
     if (typeof app === 'string') { app = angular.module(app) }
@@ -27,10 +23,26 @@ this.BaseCtrl = class BaseCtrl {
 
   // Expose the given fields to the `$scope`
   expose($scope, ...members) {
-    return _.chain(members).map((field) => [field, this[field]]).each((...args) => {
-      const [field, entity] = Array.from(args[0])
-      return $scope[field] = typeof entity === 'function' ? _.bind(entity, this) : entity
-    }).value()
+    //see https://medium.com/making-internets/why-using-chain-is-a-mistake-9bc1f80d51ba
+    // return flow(
+    //   map( field => [field, this[field]] ),
+    //   each((...args) => {
+    //     const [field, entity] = Array.from(args[0])
+    //     return $scope[field] = typeof entity === 'function' ? _.bind(entity, this) : entity
+    //   }),
+    // )(members);
+    var fmap = _.map(members, (field) => [field, this[field]])
+    return _.each(fmap, (...args) => {
+        const [field, entity] = Array.from(args[0])
+        return $scope[field] = typeof entity === 'function' ? _.bind(entity, this) : entity
+    })
+    // return _.chain(members)
+    //   .map((field) => [field, this[field]])
+    //   .each((...args) => {
+    //     const [field, entity] = Array.from(args[0])
+    //     return $scope[field] = typeof entity === 'function' ? _.bind(entity, this) : entity
+    //   })
+    //   .value()
   }
 
   constructor(...dependencies) {

@@ -1,12 +1,8 @@
-/*
- * decaffeinate suggestions:
- * DS101: Remove unnecessary use of Array.from
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
+import formsModule from '~/scripts/forms'
+
 describe("module: angleGrinder.forms", function() {
 
-  beforeEach(angular.mock.module("angleGrinder.forms"));
+  beforeEach(angular.mock.module(formsModule));
 
   return describe("controller: FormDialogCtrl", function() {
     let $scope = null;

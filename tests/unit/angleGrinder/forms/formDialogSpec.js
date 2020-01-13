@@ -1,8 +1,5 @@
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
+import formsModule from '~/scripts/forms'
+
 describe("module: angleGrinder.forms", () => describe("service: FormDialogServ", function() {
 
   beforeEach(angular.mock.module("ui.bootstrap", function($provide) {
@@ -10,12 +7,12 @@ describe("module: angleGrinder.forms", () => describe("service: FormDialogServ",
   })
   );
 
-  beforeEach(angular.mock.module("angleGrinder.common", function($provide) {
+  beforeEach(angular.mock.module(formsModule, function($provide) {
     $provide.value("pathWithContext", path => `/ctx${path}`);
   })
   );
 
-  beforeEach(angular.mock.module("angleGrinder.forms"));
+  beforeEach(angular.mock.module(formsModule));
 
   return describe("#open", () => it("opens a dialog for the given templateUrl", inject(function($uibModal, FormDialogServ) {
     FormDialogServ.open("/foo/bar/form.html");

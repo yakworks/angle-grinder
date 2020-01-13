@@ -1,10 +1,8 @@
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-describe("module: angleGrinder.common", () => describe("service: ConfirmationDialogServClass", function() {
+import agCommon from '~/scripts/common'
+
+describe("ConfirmationDialogServSpec", () => describe("service: ConfirmationDialogServClass", function() {
   let $scope = null;
+  beforeEach(angular.mock.module(agCommon))
 
   beforeEach(inject($rootScope => $scope = $rootScope.$new())
   );
@@ -39,9 +37,7 @@ describe("module: angleGrinder.common", () => describe("service: ConfirmationDia
 
 
   return it("returns a promise which is resolved  when user click ok or cancel button", inject(function(ConfirmationDialogServ, $rootScope) {
-    const {
-      swal
-    } = window;
+    const { swal } = window;
 
     let callback = null;
     window.swal = (opts, cbl) => callback = cbl; //Override global swal function so we can get handle of callback and simulate ok/cancel button clicks

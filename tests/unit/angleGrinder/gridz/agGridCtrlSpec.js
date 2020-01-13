@@ -1,7 +1,7 @@
 /*
 describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
 
-  beforeEach module "angleGrinder.gridz", ($provide) ->
+  beforeEach module agGridz, ($provide) ->
     * spy for `FlattenServ` service
     $provide.decorator "FlattenServ", ($delegate) ->
       sinon.spy($delegate)

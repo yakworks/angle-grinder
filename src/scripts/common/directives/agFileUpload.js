@@ -1,11 +1,7 @@
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-var app = angular.module('angleGrinder.common')
+import angular from 'angular'
+import commonModule from '../commonModule'
 
-app.directive('agFileUpload', () => ({
+angular.module(commonModule).directive('agFileUpload', () => ({
   restrict: 'A',
   require: 'ngModel',
 

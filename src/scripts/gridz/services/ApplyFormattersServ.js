@@ -1,10 +1,8 @@
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * DS207: Consider shorter variations of null checks
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-var gridz = angular.module('angleGrinder.gridz')
+import angular from 'angular'
+import gridzModule from '../gridzModule'
+import _ from 'lodash'
+
+var gridz = angular.module(gridzModule)
 
 // Iterates through all columns and replaces formatters placeholders
 // with the corresponding methods.

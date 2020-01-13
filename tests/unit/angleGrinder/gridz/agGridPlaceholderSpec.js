@@ -1,16 +1,11 @@
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
+import agGridz from '~/scripts/gridz'
+
 describe("module: angleGrinder.gridz", function() {
 
-  beforeEach(angular.mock.module("angleGrinder.common", function($provide) {
+  beforeEach(angular.mock.module(agGridz, function($provide) {
     $provide.value("pathWithContext", path => `/foo/${path}`);
   })
   );
-
-  beforeEach(angular.mock.module("angleGrinder.gridz"));
 
   beforeEach(inject($templateCache => $templateCache.put("/foo/bar/biz.html", "<div id='the-grid'>grid</div>"))
   );
