@@ -14,13 +14,13 @@ jobs:
       - run: yarn
       - run: yarn test
 
-      - run:
-          name: ✔︎ -- Checks Full Run Tests [gradle check]
-          command: ./gradlew check --max-workers=2
+      # - run:
+      #     name: ✔︎ -- Checks Full Run Tests [gradle check]
+      #     command: ./gradlew check --max-workers=2
 
-      - run:
-          name: Update js code
-          command: ./script/update-ag-plugin
+      # - run:
+      #     name: Update js code
+      #     command: ./script/update-ag-plugin
 
 orbs:
   compare-url: iynere/compare-url@1.1.0
