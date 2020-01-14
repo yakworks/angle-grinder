@@ -2,19 +2,19 @@ import angular from 'angular'
 import agPathWithContext from './pathWithContext'
 import resourceSupport from './resourceSupport'
 import agCommon from './common'
-import uiselect2 from '~/scripts/select2'
+import agSelect2 from './select2'
 import forms from './forms'
 import gridz from './gridz'
+import alertsMod from './alerts'
 
 var app = angular.module('angleGrinder', [
   resourceSupport,
-  uiselect2,
+  agSelect2,
   agCommon,
   agPathWithContext,
   gridz,
   forms,
-  'angleGrinder.alerts',
-  'angleGrinder.spinner'
+  alertsMod
 ])
 
 app.config([

@@ -2,20 +2,38 @@ var webpackConfig = require('./karma.webpack.js');
 
 // Reference: http://karma-runner.github.io/0.12/config/configuration-file.html
 module.exports = function karmaConfig (config) {
+  // default test file
+  let testFile = 'tests/tests.all.js'
+  // the following allow us to do `yarn test --tests singleTestFile*` or `yarn test --tests /common/*`
+  let testRequiresFiles = [] //additional file
+  let pargv = process.argv
+  //if second to last argument is test then use it, so
+  if(pargv[pargv.length-2] === '--tests'){
+    //testFilesPattern from command line
+    let argTestFile = pargv[pargv.length-1]
+    testFile = `tests/**/${argTestFile}.js`
+    testRequiresFiles = [{ pattern: 'tests/tests.requires.js', watched: false }]
+  }
+  //console.log("using testFile", testFile)
+
   config.set({
     basePath: '../',
 
     frameworks: [ "mocha", "sinon-chai" ],
 
     files: [
-      { pattern: 'tests/tests.entry.js', watched: false },
+      //{ pattern: "node_modules/jquery/dist/jquery.js"},
+      //{ pattern: 'tests/tests.entry.js', watched: false }
+      ...testRequiresFiles,
+      { pattern: testFile, watched: false }
       // { pattern: 'tests/unit/angleGrinder/forms/*.js', watched: false },
     ],
 
     preprocessors: {
       //'src/vendor.js': ['webpack'],
       //'src/bundle.js': ["webpack", 'sourcemap'],
-      'tests/tests.entry.js': ["webpack",'sourcemap'],
+      'tests/tests.requires.js': ["webpack",'sourcemap'],
+      [testFile]: ["webpack",'sourcemap'],
       //"src/**/*.js": ["rollup"],
       "tests/unit/**/*.js": ["webpack",'sourcemap']
     },

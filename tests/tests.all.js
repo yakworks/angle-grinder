@@ -1,6 +1,7 @@
 
 import '../src/vendor'
-import 'angular-mocks/angular-mocks'
+import 'angular'
+import 'angular-mocks'
 
 // import * as utils1 from './unit/angleGrinder/utils/*.spec'
 // import * as utils2 from './unit/angleGrinder/utils/*Spec'
