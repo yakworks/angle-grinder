@@ -1,11 +1,8 @@
-/*
- * decaffeinate suggestions:
- * DS101: Remove unnecessary use of Array.from
- * DS102: Remove unnecessary code created because of implicit returns
- * DS207: Consider shorter variations of null checks
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
+import angular from 'angular'
+
 const docs = angular.module("exampleApp.docs", []);
+
+export default "exampleApp.docs"
 
 docs.directive("prettyprint", () => ({
   restrict: "C",

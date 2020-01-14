@@ -1,12 +1,8 @@
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * DS206: Consider reworking classes to avoid initClass
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-class ShowCtrl extends BaseCtrl {
+import BaseCtrl from '../../../../src/scripts/utils/BaseCtrl'
+
+export default class ShowCtrl extends BaseCtrl {
   static initClass() {
-  
+
     this.register("exampleApp", "users.ShowCtrl");
     this.inject("$scope", "$location", "exampleGrid", "sampleData", "user");
   }
@@ -31,4 +27,3 @@ class ShowCtrl extends BaseCtrl {
     return promise.then(() => this.$location.path("/examples/users"));
   }
 }
-ShowCtrl.initClass();

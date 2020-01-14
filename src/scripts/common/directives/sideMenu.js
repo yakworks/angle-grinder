@@ -1,5 +1,6 @@
 import angular from 'angular'
 import commonModule from '../commonModule'
+import _ from 'lodash'
 
 angular.module(commonModule).directive('agSideMenu', [
   '$window', '$timeout', ($window, $timeout) => ({

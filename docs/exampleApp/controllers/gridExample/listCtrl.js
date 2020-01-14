@@ -1,13 +1,9 @@
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * DS206: Consider reworking classes to avoid initClass
- * DS207: Consider shorter variations of null checks
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-class IndexCtrl extends BaseCtrl {
+import BaseCtrl from '../../../../src/scripts/utils/BaseCtrl'
+import _ from 'lodash'
+
+export default class ListCtrl extends BaseCtrl {
   static initClass() {
-  
+
     this.register("exampleApp", "gridExample.ListCtrl");
     this.inject("$scope", "$q", "$log", "sampleData", "exampleGrid", "FormDialogServ");
   }
@@ -92,4 +88,4 @@ class IndexCtrl extends BaseCtrl {
     }
   }
 }
-IndexCtrl.initClass();
+

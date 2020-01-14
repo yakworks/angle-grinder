@@ -41,12 +41,23 @@ module.exports = (env, argv) => {
     },
     output: {
       path: path.resolve('./dist'), //path.join(__dirname, "dist"),
-      filename: (chunkData) => `[name]${minDescriptor}.js`
+      filename: (chunkData) => `[name]${minDescriptor}.js`,
+      libraryTarget: 'umd'
     },
     module: {
       rules: [
         { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/},
       ] //end rules
+    },
+    /**
+     * Dev server configuration
+     * Reference: http://webpack.github.io/docs/configuration.html#devserver
+     * Reference: http://webpack.github.io/docs/webpack-dev-server.html
+     */
+    devServer: {
+      contentBase: './src/public',
+      stats: 'minimal',
+      host: '0.0.0.0'
     }
   }
 }

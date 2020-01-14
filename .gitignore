@@ -93,3 +93,4 @@ web-app/WEB-INF/atmosphere-meteor-decorators.xml
 .grails/
 
 
+.cache

@@ -1,12 +1,8 @@
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * DS206: Consider reworking classes to avoid initClass
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-class IndexCtrl extends BaseCtrl {
+import BaseCtrl from '../../../../src/scripts/utils/BaseCtrl'
+
+export default class IndexCtrl extends BaseCtrl {
   static initClass() {
-  
+
     this.register("exampleApp", "usersDialog.ListCtrl");
     this.inject("$scope", "usersDialogGrid", "Users", "DialogCrudCtrlMixin", "MassUpdateMixin");
   }
@@ -37,4 +33,3 @@ class IndexCtrl extends BaseCtrl {
     );
   }
 }
-IndexCtrl.initClass();

@@ -1,11 +1,5 @@
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * DS202: Simplify dynamic range loops
- * DS206: Consider reworking classes to avoid initClass
- * DS207: Consider shorter variations of null checks
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
+import angular from 'angular'
+
 const dataGenerator = angular.module("exampleApp.dataGenerator", []);
 
 dataGenerator.value("random", {
@@ -21,13 +15,9 @@ dataGenerator.value("random", {
     const randomMilis = this.range(min, max);
     return new Date(randomMilis);
   }
-}
-);
+})
 
 class SampleData {
-  static initClass() {
-    this.$inject = ["random"];
-  }
   constructor(random) {
     this.random = random;
   }
@@ -56,8 +46,8 @@ class SampleData {
     return rows;
   }
 }
-SampleData.initClass();
+SampleData.$inject = ["random"]
 
-dataGenerator.factory("sampleData", [
-  "$injector", $injector => $injector.instantiate(SampleData)
-]);
+dataGenerator.factory("sampleData", SampleData);
+
+export default dataGenerator.name

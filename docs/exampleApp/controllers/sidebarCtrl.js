@@ -1,12 +1,8 @@
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * DS206: Consider reworking classes to avoid initClass
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-class SidebarCtrl extends BaseCtrl {
+import BaseCtrl from '../../../src/scripts/utils/BaseCtrl'
+
+export default class SidebarCtrl extends BaseCtrl {
   static initClass() {
-  
+
     this.register("exampleApp");
     this.inject("$rootScope", "$scope", "$location", "$routeParams", "scrollTo");
   }
@@ -32,4 +28,4 @@ class SidebarCtrl extends BaseCtrl {
     }
   }
 }
-SidebarCtrl.initClass();
+

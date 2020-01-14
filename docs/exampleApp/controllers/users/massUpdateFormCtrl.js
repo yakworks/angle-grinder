@@ -1,12 +1,8 @@
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * DS206: Consider reworking classes to avoid initClass
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-class MassUpdateFormCtrl extends BaseCtrl {
+import BaseCtrl from '../../../../src/scripts/utils/BaseCtrl'
+
+export default class MassUpdateFormCtrl extends BaseCtrl {
   static initClass() {
-  
+
     this.register("exampleApp", "users.MassUpdateFormCtrl");
     this.inject("$scope", "massUpdateFormCtrlMixin", "dialog", "Users", "selectedIds", "grid");
   }
@@ -25,4 +21,3 @@ class MassUpdateFormCtrl extends BaseCtrl {
     return this.$scope.records = {creditInfo: {allowance: 0}};
   }
 }
-MassUpdateFormCtrl.initClass();

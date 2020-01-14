@@ -1,11 +1,7 @@
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * DS207: Consider shorter variations of null checks
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
+import angular from 'angular'
+import _ from 'lodash'
 
- angular.module("exampleApp.grids").factory("usersGrid", [
+angular.module("exampleApp.grids").factory("usersGrid", [
   "$filter", function($filter) {
 
     const showActionLink = (cellVal, options, rowdata) => `\

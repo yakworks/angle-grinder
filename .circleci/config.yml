@@ -26,7 +26,6 @@ orbs:
   compare-url: iynere/compare-url@1.1.0
 
 workflows:
-  version: 2.1
   build-flow:
     jobs:
     - build:

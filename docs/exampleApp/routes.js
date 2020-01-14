@@ -1,13 +1,7 @@
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-// Routes for the application
+import angular from 'angular'
+import exAppMod from './example.module'
 
-const app = angular.module("exampleApp");
-
-app.config([
+angular.module(exAppMod).config([
   "$provide", "$routeProvider",
   ($provide, $routeProvider) => $routeProvider
     .when("/",

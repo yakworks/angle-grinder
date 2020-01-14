@@ -1,2 +1,2 @@
 import * as ven from './vendor'
-import * as app from './scripts/application'
+import * as app from './angle-grinder.js'
