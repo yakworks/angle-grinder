@@ -1,9 +1,7 @@
-// import $ from 'jquery'
+//jquery should be included seperately
 window.jQuery = require('jquery')
 window.$ = window.jQuery
 
-// require('sweetalert')
-// window.toastr = require('toastr')
 // require('lodash')
 // require('angular')
 // require('angular-animate')
@@ -12,12 +10,12 @@ window.$ = window.jQuery
 // require('angular-sanitize')
 // require('angular-scroll')
 // require('angular-xeditable')
-//require('angular-drag-and-drop-lists/angular-drag-and-drop-lists.js')
-//require('angular-ui-bootstrap')
+// require('angular-drag-and-drop-lists/angular-drag-and-drop-lists.js')
+// require('angular-ui-bootstrap')
 
-require('free-jqgrid/js/jquery.jqgrid.src.js')
-require('Select2/select2.js')
+require('free-jqgrid/js/jquery.jqgrid.src')
+require('Select2/select2')
 require('moment')
-require('eonasdan-bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js')
+require('eonasdan-bootstrap-datetimepicker/src/js/bootstrap-datetimepicker')
 // require('toastr/toastr.js')
 // require('sweetalert/lib/sweet-alert.js')

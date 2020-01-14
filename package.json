@@ -3,7 +3,11 @@
   "license": "MIT",
   "version": "3.0.0",
   "scripts": {
-    "test": "karma start tests/karma.conf.js --single-run --no-auto-watch --no-sandbox",
+    "build": "rimraf dist && yarn build:prod",
+    "build:dev": "webpack --config config/webpack.config.js --mode=development",
+    "build:prod": "webpack --config config/webpack.config.js --mode=production",
+    "test": "karma start tests/karma.conf.js --single-run --no-auto-watch --no-sandbox $*",
+    "test:single": "yarn test $*",
     "lint": "eslint src/",
     "lint:fix": "eslint src/ --fix"
   },
