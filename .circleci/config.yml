@@ -29,13 +29,6 @@ workflows:
   version: 2.1
   build-flow:
     jobs:
-      - build:
-          context: 9cibot-context #context with shared ENV vars
-
-workflows:
-  version: 2.1
-  build-flow:
-    jobs:
     - build:
         context: 9cibot-context # context with shared ENV vars
     # - build-grails:
