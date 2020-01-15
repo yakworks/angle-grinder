@@ -1,0 +1,228 @@
+<div class="bs-docs-section">
+
+<div class="page-header">
+  <h1 id="develop">Develop AngleGrinder</h1>
+</div>
+<p class="lead">There are a few easy ways to quickly get started with AngleGrinder</p>
+
+<h3 id="develop-checkout">Checkout from GitHub repository</h3>
+
+<pre class="prettyprint lang-sh">
+git checkout https://github.com/9ci/angle-grinder.git
+</pre>
+
+<h3 id="develop-install-nodejs">Install the latest nodejs version</h3>
+
+<pre class="prettyprint lang-sh">
+sudo apt-get install build-essential openssl libssl-dev pkg-config
+
+wget http://nodejs.org/dist/v0.10.12/node-v0.10.12.tar.gz
+tar -xzf node-v0.10.12.tar.gz
+
+cd node-v0.10.12
+./configure
+make
+sudo make instal
+</pre>
+
+<h3 id="develop-install-libraries">Install required tools and libraries</h3>
+
+Install <a href="https://npmjs.org/">npm</a> packages for
+<span class="label label-info">coffee-script</span>,
+<span class="label label-info">grunt-cli</span>,
+<span class="label label-info">bower</span> and
+<span class="label label-info">karma</span>
+
+<br/>
+
+<pre class="prettyprint lang-sh">
+npm install -g coffee-script
+npm install -g grunt-cli
+npm install -g bower
+npm install -g karma
+</pre>
+
+Install npm and bower components
+<br/>
+
+<pre class="prettyprint lang-sh">
+npm install
+bower install
+</pre>
+
+Install <span class="label label-info">foreman</span> ruby gem
+<br/>
+
+<pre class="prettyprint lang-sh">
+gem install foreman
+</pre>
+
+<h3 id="develop-grunt-tasts">Grunt tasks</h3>
+
+The list of basic <a href="http://gruntjs.com/">grunt</a> tasks useful during the delopment:
+
+<dl>
+  <dt><code>grunt server</code></dt>
+  <dd>Compile assets and start the web server on <code>localhost:9000</code></dd>
+
+  <dt><code>grunt build</code></dt>
+  <dd>Build the production minified release of AngleGrinder</dd>
+
+  <dt><code>grunt clean</code></dt>
+  <dd>Clear all temporary files and folders including the production release</dd>
+</dl>
+
+<h3 id="develop-running-tests">Running tests</h3>
+
+<dl>
+  <dt><code>grunt coffeling</code></dt>
+  <dd>Run style checker for <a href="http://coffeescript.org/">CoffeeScript</a> source files</dd>
+
+  <dt><code>grunt test</code></dt>
+  <dd>
+    Run unit tests.<br/>
+    It will also generate <a href="http://gotwarlost.github.io/istanbul">istanbul</a> test coverage report inside <code>./coverate</code>
+    directory.
+  </dd>
+
+  <dt><code>grunt test:casperjs</code></dt>
+  <dd>Run CasperJS integration tests</dd>
+</dl>
+
+Unit test might be also executed directly by <a href="http://karma-runner.github.io">karma</a> with the following
+command <code>karma start test/karma-coffee.conf.coffee</code>.
+<br/>
+Karma watches all the files, specified within the configuration file, and whenever any file changes, it triggers the
+test run.
+
+<br/>
+<br/>
+
+Example tests execution output:
+
+<pre class="prettyprint lang-sh">
+> karma start test/karma-coffee.conf.coffee
+................................................................................
+................................................................................
+....
+PhantomJS 1.9.1 (Linux): Executed 164 of 164 SUCCESS (1.386 secs / 0.854 secs)
+</pre>
+
+<h3 id="develop-running-app">Running the example application</h3>
+
+Execute <code>foreman start</code> and navigate to <code>http://localhost:9000</code>.<br/>
+This command will start <code>grunt server</code> along with simple express application.
+
+<h3 id="develop-directory-structure">Directory structure</h3>
+
+<h4>Application sources and tests</h4>
+
+<ul>
+  <li>
+    <span class="label label-info">app</span>
+    - contains CoffeeScript sources, styles, images, fonts and other assets
+    <ul>
+      <li>
+        <span class="label label-info">app/scripts</span>
+        - CoffeeScript sources
+      </li>
+      <li>
+        <span class="label label-info">app/styles</span>
+        - less and css stylesheets
+      </li>
+      <li>
+        <span class="label label-info">app/views</span>
+        - html views used by AngularJS
+      </li>
+    </ul>
+  </li>
+  <li>
+    <span class="label label-info">tests</span>
+    - contains tests for the application
+    <ul>
+      <li>
+        <span class="label label-info">tests/unit</span>
+        - unit tests for AngularJS components
+      </li>
+      <li>
+        <span class="label label-info">tests/casperjs</span>
+        - CasperJS integration specs
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h4>Third-party libraries</h4>
+
+<ul>
+  <li>
+    <span class="label label-info">bower_components</span>
+    - components installed by bower
+  </li>
+  <li>
+    <span class="label label-info">custom_components</span>
+    - custom components
+  </li>
+  <li>
+    <span class="label label-info">node_modules</span>
+    - locally installed npm packages
+  </li>
+</ul>
+
+<h4>Generated stuff</h4>
+
+<ul>
+  <li>
+    <span class="label label-info">dev</span>
+    - compiled development release
+  </li>
+  <li>
+    <span class="label label-info">dist</span>
+    - created by grunt build command,
+    contains the production concatenated and minified release of the app
+  </li>
+</ul>
+
+<h2 id="develop-building">Building the app</h2>
+
+Build it with <code>grunt build</code> command.<br/>
+This command will generate the following files.
+
+<pre class="prettyprint lang-sh">
+dist
+├── scripts
+│   ├── angle-grinder.alerts.min.js
+│   ├── angle-grinder.common.min.js
+│   ├── angle-grinder.forms.min.js
+│   ├── angle-grinder.gridz.min.js
+│   ├── angle-grinder.spinner.min.js
+│   ├── angularjs-all.min.js
+│   ├── bootstrap.min.js
+│   ├── gridz.min.js
+│   ├── jquery.min.js
+│   ├── scripts.min.js
+│   └── underscore.min.js
+└── styles
+├── bootstrap.min.css
+├── gridz.min.css
+└── style.min.css
+</pre>
+
+<dl>
+  <dt><a href="{{ page.base_path }}docs#docs-alerts">angleGrinder.alerts.min.js</a></dt>
+  <dd>AngularJS module for handling <a href="http://getbootstrap.com/2.3.2/javascript.html#alerts">alerts</a></dd>
+
+  <dt><a href="{{ page.base_path }}docs#docs-common">angleGrinder.common.min.js</a></dt>
+  <dd>AngularJS module with common services used in various places of the app</dd>
+
+  <dt><a href="{{ page.base_path }}docs#docs-forms">angleGrinder.forms.min.js</a></dt>
+  <dd>AngularJS module with some useful forms extensions</dd>
+
+  <dt><a href="{{ page.base_path }}docs#docs-gridz">angleGrinder.gridz.min.js</a></dt>
+  <dd>AngularJS wrapper for <a href="http://www.trirand.com/blog/">jqGrid</a></dd>
+
+  <dt><a href="{{ page.base_path }}docs#docs-spinner">angleGrinder.spinner.min.js</a></dt>
+  <dd>AngularJS module for displaying spinners</dd>
+</dl>
+
+</div>

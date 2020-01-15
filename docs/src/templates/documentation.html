@@ -1,0 +1,1279 @@
+<div class="bs-docs-section">
+  <div class="page-header">
+    <h1 id="docs">AngleGrinder Documentation</h1>
+  </div>
+
+  <h2 id="docs-common"><code>angleGrinder.common</code> module</h2>
+
+  Contains common services used in various places of the application.
+
+  <h3 id="docs-common-pathWithContext">pathWithContext</h3>
+
+  This service might be used for appending the context path to the given url.
+  It helps to make the app more context path agnostic.<br/>
+  Usage:
+
+<pre class="prettyprint">
+class UsersListCtrl
+  @$inject = ["$scope", "pathWithContext"]
+    constructor: ($scope, pathWithContext) ->
+
+  $scope.gridOptions =
+    # now the grid data url will be context aware
+    url: pathWithContext("/api/users")
+    # ...other grid options
+
+angular.module("myApp")
+  .controller("UsersListCtrl", UsersListCtrl)
+</pre>
+
+  <h4>Configuration</h4>
+
+  Inside grails application the context path might be taken from <code>request.contextPath</code> property
+  and assigned to the <code>body</code> html element.
+
+<pre class="prettyprint lang-html">
+&lt;body data-context-path=&quot;${request.contextPath}&quot;&gt;
+&lt;/body&gt;
+</pre>
+
+  During AngularJS application initialization this variable could be used for configuring the
+  <code>pathWithContext</code> service provider.
+
+<pre class="prettyprint">
+app = angular.module("myApp", [
+  "angleGrinder.common"
+])
+
+# Sample `pathWithContext` configuration block
+app.config [
+  "pathWithContextProvider", (pathWithContextProvider) ->
+    contextPath = $("body").data("context-path")
+    pathWithContextProvider.setContextPath(contextPath) if contextPath?
+]
+</pre>
+
+  <h3 id="docs-common-pendingRequests">pendingRequests</h3>
+
+  Service designed for the internal usage.<br/>
+  For example it is used for enabling / disabling <code>ag-submit-button</code> and <code>ag-delete-button</code>.
+
+<pre class="prettyprint">
+app = angular.module("myApp", [
+  "angleGrinder.common"
+])
+
+class MyCtrl
+  @$inject = ["$scope", "pendingRequests"]
+  constructor: ($scope, pendingRequests) ->
+
+    # will return `true` if any http request is in progress
+    pendingRequests.any()
+
+    # shortcut for `pendingRequests.any()`
+    pendingRequests()
+
+    # returns `true` if any http DELETE request is in progress
+    pendingRequests.for("DELETE")
+
+    # returns `true` if POST or PUT request is in progress
+    # it can accept multiple arguments with other http methods
+    pendingRequests.for("POST", "PUT")
+
+app.controller("MyCtrl", MyCtrl)
+</pre>
+
+  <h3 id="add-empty-option">addEmptyOption</h3>
+
+  Directive which adds empty value for select dropdown list, to allow user select "nothing" without passing it from backend.<br/>
+  Example usage:
+
+<pre class="prettyprint">
+app = angular.module("myApp", [
+  "angleGrinder.common"
+])
+</pre>
+
+<pre class="prettyprint">
+&lt;form editable-form name="xeditableForm" class="form-horizontal no-margin" onaftersave="update(user)">
+    &lt;span class="title">Editable Select with &lt;code>add-empty-option&lt;/code>&lt;/span>
+    &lt;span editable-select="user.contractId2"
+        e-ng-options="c.id as c.name for c in contracts"
+        e-add-empty-option
+        e-name="contract">{{user.contractId2}}&lt;/span>
+    &lt;/div>
+     &lt;div editable-form-buttons="xeditableForm">&lt;/div>
+ &lt;/form>
+</pre>
+
+  <h3 id="embeddedJson">embeddedJsonServ service</h3>
+
+  Makes it possible to reference embedded json from html into angular controllers<br/>
+  Example usage:
+
+<pre class="prettyprint">
+    &lt;div ng-app="myApp">
+        &lt;script type="application/embedded-json" name="testJson">[{"name": "Joe", "id":1}, {"name": "Doe", "id":2}]&lt;/script>
+        &lt;section ng-controller="MyCtrl" class="content">
+            &lt;div>
+                First Name {{firstName}}
+            &lt;/div>
+            &lt;div>
+                Second Name {{secondName}}
+            &lt;/div>
+        &lt;/section>
+    &lt;/div>
+</pre>
+
+<pre class="prettyprint">
+class MyCtrl
+
+  @$inject = ["$scope", "embeddedJsonServ"]
+  constructor: ($scope, embeddedJsonServ) ->
+    json = embeddedJsonServ("testJson")
+    $scope.firstName = json[0].name
+    $scope.secondName = json[1].name
+
+angular.module("myApp")
+  .controller("MyCtrl", MyCtrl)
+</pre>
+
+  <h3 id="resourceTemplateServ">resourceTemplateServ service</h3>
+
+  Generate a template url for the given resource and path. It takes context path from body element.<br/>
+  Example usage:
+
+<pre class="prettyprint">
+    &lt;body ng-app="myApp"
+          data-context-path="someContextPath">
+        &lt;section ng-controller="MyCtrl">
+            
+        &lt;/section>
+    &lt;/body>
+</pre>
+
+<pre class="prettyprint">
+app = angular.module("user")
+
+app.config ["$routeProvider", "resourceTemplateServ", "arBatchResolver",
+  ($routeProvider, resourceTemplateServ, arBatchResolver) ->
+    userTpl = (path) -> resourceTemplateServ("/user", path)
+
+    $routeProvider
+      .when "/",
+        template: ""
+
+      .when "/:id"
+        templateUrl: userTpl "show"
+        reloadOnSearch: false
+        controller: "MyCtrl"
+
+      .otherwise redirectTo: "/"
+]
+
+</pre>
+
+
+  <h2 id="docs-resources"><code>angleGrinder.resources</code> module</h2>
+
+  This module defines the resource mappings required by Angular JS to map to a
+  standard Grails CRUD URL scheme that uses <code>"/$controller/$action?/$id?"</code>.
+
+  <h3 id="docs-resources-resourceBuilder">resourceBuilder</h3>
+
+  A factory which creates a resource object that lets you interact with RESTful server-side data sources.<br/>
+  It decorates standard AngularJS <code>$resource</code> service with some useful methods
+  internally used by other services and directives in the application.<br/>
+
+  Example usage:
+
+<pre class="prettyprint">
+app = angular.module("myApp", [
+  "angleGrinder.common"
+])
+
+class MyCtrl
+  @$inject = ["$scope", "resourceBuilder"]
+  constructor: ($scope, resourceBuilder) ->
+
+    # Create resource for users
+    Users = resourceBuilder("/user")
+    # load all users
+    $scope.users = Users.get()
+
+    # create a record
+    user = new Users(login: "foo")
+    user.save() # will perform create action
+    user.login = "new-foo"
+    user.save() # will perform update action
+
+    # retrieve a record from the server side
+    user = Users.get(id: 123)
+
+app.controller("MyCtrl", MyCtrl)
+</pre>
+
+  <h4>Methods on the resource object</h4>
+
+  <dl>
+    <dt><code>resourceName()</code></dt>
+    <dd>
+      Returns resource name.<br/>
+      This method is internally used by other services like <code>ag-server-validation-errors</code>
+    </dd>
+
+    <dt><code>persisted()</code></dt>
+    <dd>
+      Returns <code>true</code> is a record is persisted on the server side.<br/>
+      (it has <code>id</code> property)
+    </dd>
+
+    <dt><code>newRecord()</code></dt>
+    <dd>
+      Opposite to <code>persisted()</code> method.<br/>
+      Returns <code>true</code> is the record is not persisted on the server side.
+    </dd>
+
+    <dt><code>save()</code></dt>
+    <dd>
+      Backbone style save() that inserts or updated the record<br/>
+      based on the presence of an <code>id</code>.
+    </dd>
+
+    <dt><code>delete()</code></dt>
+    <dd>
+      Performs http DELETE action.
+    </dd>
+  </dl>
+
+  <span class="label label-info">note</span> context path will be automatically appended to the given path via <code>pathWithContext</code> service
+
+  <h3 id="docs-resources-Resource">Resource</h3>
+
+  Build default resource for the current page.<br/>
+  For example we could have the following html page:
+
+<pre class="prettyprint lang-html">
+&lt;body data-context-path=&quot;${request.contextPath}&quot;
+      data-resource-name=&quot;user&quot;
+      data-resource-path=&quot;/api/users&quot;&gt;
+&lt;/body&gt;
+</pre>
+
+  <code>Resource</code> service for this page will create resource objects for handling users api.<br/>
+  Internally it calls <code>resourceBuilder("/api/users", "user")</code> service.
+
+  <h2 id="docs-spinner"><code>angleGrinder.spinner</code> module</h2>
+
+  Contains a directive for displaying spinner loding animation on the page.<br/>
+  Example usage:
+
+<pre class="prettyprint">
+app = angular.module("myApp", [
+  "angleGrinder.spinner"
+])
+</pre>
+
+  Include it anywhere you want to see the spinner. For instance:
+
+<pre class="prettyprint lang-html">
+&lt;div class=&quot;navbar navbar-inverse navbar-fixed-top&quot;&gt;
+  &lt;div class=&quot;navbar-inner&quot;&gt;
+    &lt;div class=&quot;container&quot;&gt;
+      &lt;div&gt;
+        &lt;ul class=&quot;nav pull-right&quot;&gt;
+          &lt;ag-spinner&gt;&lt;/ag-spinner&gt;
+        &lt;/ul&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</pre>
+
+  <h2 id="docs-alerts"><code>angleGrinder.alerts</code> module</h2>
+
+  AngularJS service and directive for displaying alerts.<br/>
+  Include <code>angleGrinder.alerts</code> module in the application
+
+<pre class="prettyprint">
+app = angular.module("myApp", [
+  "angleGrinder.alerts"
+])
+</pre>
+
+  Include container for alerts somewhere on the page
+
+<pre class="prettyprint lang-html">
+&lt;div ng-app=&quot;myApp&quot;&gt;
+  &lt;section ng-controller=&quot;MyCtrl&quot; class=&quot;content&quot;&gt;
+    &lt;ag-alerts&gt;&lt;/ag-alerts&gt;
+  &lt;/section&gt;
+&lt;/div&gt;
+</pre>
+
+  Inject <code>alert</code> service
+
+<pre class="prettyprint">
+class MyCtrl
+
+  @$inject = ["alerts"]
+  constructor: (alerts) ->
+    alerts.info "Hello World!"
+    alerts.error "Something went wrong!"
+
+angular.module("myApp")
+  .controller("MyCtrl", MyCtrl)
+</pre>
+
+  <code>alert</code> service might be injected as regular AngularJS service.
+  For example:
+
+<pre class="prettyprint">
+# Intercepts all HTTP errors and displays a flash message
+app.factory "httpErrorsInterceptor", [
+  "$injector", "$q", "alerts", ($injector, $q, alerts) ->
+    (promise) ->
+      $http = $injector.get("$http")
+
+      onError = (response) ->
+        # display error message
+        errorMessage = response.data?.error || "Unexpected HTTP error"
+        alerts.error(errorMessage)
+
+        $q.reject(response)
+        promise.then(null, onError)
+
+      promise.then(null, onError)
+  ]
+</pre>
+
+  <h2 id="docs-forms"><code>angleGrinder.forms</code> module</h2>
+
+  Bunch of extensions used for building forms.
+
+  <h3 id="docs-forms-basic">Basic example</h3>
+
+  The view
+
+<pre class="prettyprint lang-html">
+&lt;div ng-controller=&quot;org.FormController&quot;&gt;
+  &lt;form name=&quot;editForm&quot; novalidate class=&quot;form-horizontal no-margin&quot;
+        ag-submit=&quot;save(org)&quot;&gt;
+
+    &lt;div ag-field-group for=&quot;name&quot;&gt;
+      &lt;label class=&quot;control-label&quot;&gt;Name&lt;/label&gt;
+
+      &lt;div class=&quot;controls&quot;&gt;
+        &lt;input type=&quot;text&quot; name=&quot;name&quot; placeholder=&quot;Enter Name&quot;
+               ng-model=&quot;org.name&quot; autofocus required /&gt;
+        &lt;ag-validation-errors for=&quot;name&quot; /&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div ag-field-group for=&quot;num&quot;&gt;
+      &lt;label class=&quot;control-label&quot;&gt;Num&lt;/label&gt;
+
+      &lt;div class=&quot;controls&quot;&gt;
+        &lt;input type=&quot;text&quot; name=&quot;num&quot; placeholder=&quot;Enter num&quot;
+               ng-model=&quot;org.num&quot; autofocus required /&gt;
+        &lt;ag-validation-errors for=&quot;num&quot; required=&quot;This field is required&quot; /&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;form-actions&quot;&gt;
+      &lt;ag-submit-button&gt;&lt;/ag-submit-button&gt;
+    &lt;/div&gt;
+  &lt;/form&gt;
+&lt;/div&gt;
+</pre>
+
+  and the controller
+
+<pre class="prettyprint">
+class FormCtrl
+
+  @$inject = ["$scope", "resourceBuilder"]
+  $scope.org = resourceBuilder("/api/org")
+
+  $scope.save = (org) ->
+    return if $scope.editForm.$invalid
+    org.save()
+
+angular.module("myApp")
+  .controller("org.FormCtrl", FormCtrl)
+</pre>
+
+  <h3 id="docs-forms-validations">Form validations</h3>
+
+  Set of directives and services for displaying various validation errors.
+
+  <h4>agFieldGroup directive</h4>
+
+  Provides integration with <a href="http://getbootstrap.com/2.3.2/base-css.html#forms">bootstrap</a> form's validation styles.<br/>
+  This directive simply wraps labels and controls in <code>div.control-group</code> element.
+  <br/>
+  <br/>
+  For example
+
+<pre class="prettyprint lang-html">
+&lt;div ag-field-group for=&quot;name&quot;&gt;
+  &lt;label class=&quot;control-label&quot;&gt;Name&lt;/label&gt;
+
+  &lt;div class=&quot;controls&quot;&gt;
+    &lt;input type=&quot;text&quot; name=&quot;name&quot; placeholder=&quot;Enter Name&quot;
+           ng-model=&quot;org.name&quot; required /&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</pre>
+
+  will generate the following markup:
+
+<pre class="prettyprint lang-html">
+&lt;div class=&quot;control-group&quot;&gt;
+  &lt;!-- form inputs --&gt;
+&lt;/div&gt;
+</pre>
+
+  If one the fields listed in <code>for="*"</code> attribute contains errors the directive will
+  add <code>error</code> css class to the element.<br/>
+  For example:
+
+<pre class="prettyprint lang-html">
+&lt;div class=&quot;control-group error&quot;&gt;
+  &lt;!-- input that violates validation --&gt;
+&lt;/div&gt;
+</pre>
+
+  <h4>agValidationErrors directive</h4>
+
+  This directive is responsible for displaying validation messages for invalid fields.<br/>
+
+<pre class="prettyprint lang-html">
+&lt;div class=&quot;controls&quot;&gt;
+  &lt;input type=&quot;password&quot; name=&quot;password&quot;
+         ng-model=&quot;user.password&quot;
+         ng-required=&quot;user.newRecord()&quot;
+         ng-minlength=&quot;6&quot; /&gt;
+  &lt;ag-validation-errors for=&quot;password&quot; /&gt;
+&lt;/div&gt;
+</pre>
+
+  Default validation messages are defined in <code>validationMessages</code> service.
+
+<pre class="prettyprint">
+forms.value "validationMessages",
+  required: "This field is required"
+  mismatch: "Does not match the confirmation"
+  minlength: "This field is too short"
+  maxlength: "This field is too long"
+  email: "Invalid email address"
+  pattern: "Invalid pattern"
+</pre>
+
+  A message for the given validation could be overridden in the directive.<br/>
+  For example:
+
+<pre class="prettyprint lang-html">
+&lt;div class=&quot;controls&quot;&gt;
+  &lt;!-- password field from the previous example --&gt;
+
+  &lt;ag-validation-errors
+      for=&quot;password&quot;
+      required=&quot;Password is required&quot;
+      minlength=&quot;Password must be at least 6 characters&quot; /&gt;
+&lt;/div&gt;
+</pre>
+
+  <h4>agServerValidationErrors directive</h4>
+
+  Adds ability to display validation errors from the server side along with standard validation messages.
+
+<pre class="prettyprint lang-html">
+&lt;form name=&quot;editForm&quot; novalidate class=&quot;form-horizontal no-margin&quot;
+      ag-server-validation-errors&gt;
+
+  &lt;!-- form inputs --&gt;
+&lt;/form&gt;
+</pre>
+
+  This directive expects that validation errors will come from the server side with the following format:
+
+<pre class="prettyprint">
+{
+  "code": 422,
+  "status": "error",
+  "message": "User save failed",
+  "errors": {
+    "user": {
+      "login": "Login must be unique"
+    }
+  }
+}
+</pre>
+
+  <ul>
+    <li>HTTP response code must be <code>422</code> (unprocessable entity)</li>
+    <li>returned JSON response must include "errors" object</li>
+    <li>entity name and error key must match entity and field name defined on the client side</li>
+  </ul>
+
+  <h4 id="ag-max-lines">maxLines directive</h4>
+
+  Adds validation for textarea to limit number of lines<br/>
+  Example usage:
+
+<pre class="prettyprint">
+&lt;form name="userForm" class="form-horizontal no-margin"
+      novalidate="true"
+      ag-submit="save(user)">
+
+    &lt;div ag-field-group for="customerLocationStreet">
+        &lt;label>Address&lt;/label>
+        &lt;textarea name="customerLocationStreet" rows="2"  ng-model="user.street1"
+                  ag-max-lines="2">&lt;/textarea>
+        &lt;ag-validation-errors for="customerLocationStreet" maxlines="Max 2 lines are allowed"/>
+    &lt;/div>
+    &lt;div class="form-actions">
+        &lt;ag-submit-button>&lt;/ag-submit-button>
+    &lt;/div>
+&lt;/form>
+</pre>
+
+  <h3 id="ag-bind">agBind directive</h3>
+
+  Should be using for displaying model value for xeditable fields in a view mode<br/>
+  Example usage:
+
+<pre class="prettyprint">
+&lt;form editable-form name="xeditableForm" class="form-horizontal no-margin" onaftersave="update(user)">
+     &lt;div ag-field-group for="name">
+         &lt;span class="title">Name&lt;/span>
+            &lt;span editable-text="user.name"
+                  e-name="name"
+                  e-required="true"
+                  ag-bind="user.name">&lt;/span>
+     &lt;/div>
+     &lt;div editable-form-buttons="xeditableForm">&lt;/div>
+ &lt;/form>
+</pre>
+
+<h3 id="ag-select-bind">agSelectBind directive</h3>
+
+  Should be using for displaying model value for xeditable select fields in a view mode,
+  displays name of the group element(name of the field that should be displayed can be configured with <code>ag-select-bind-field</code>),
+  the <code>id</code> of the selected value will be saved to model.<br/>
+  Example usage:
+
+<pre class="prettyprint">
+&lt;form editable-form name="form" class="form-horizontal no-margin" novalidate  ag-server-validation-errors  onaftersave="update(customer)">
+    &lt;div>
+        &lt;span class="title">Select&lt;/span>
+            &lt;span editable-select="offer.discount"
+                e-ng-options="d.id as d.name for d in discounts"
+                ag-select-bind="offer.discount"
+                ag-select-bind-for="discounts"
+                ag-select-bind-field="name"
+                e-add-empty-option
+                e-name="discounts">&lt;/span>
+    &lt;/div>
+ &lt;/form>
+</pre>
+
+<h3 id="panel-form-mixin">panelFormMixin</h3>
+
+Adds some useful stuff for editable forms. <br/>
+  Example usage:
+
+<pre class="prettyprint">
+&lt;form editable-form name="form" class="form-horizontal no-margin" novalidate  ag-server-validation-errors  onaftersave="update(user)">
+    &lt;div>
+        &lt;span class="title">Select&lt;/span>
+            &lt;span editable-text="user.name"
+                ag-bind="user.name"
+                e-name="name">&lt;/span>
+    &lt;/div>
+ &lt;/form>
+</pre>
+  
+<pre class="prettyprint">
+class MyCtrl
+
+  @$inject = ["$scope", "panelFormMixin"]
+  constructor: ($scope, panelFormMixin) ->
+    panelFormMixin $scope, formName: "form"
+    
+    # @override `panelFormMixin`
+    $scope.update = (user) ->
+        form = $scope[formName]
+        return if form.$invalid
+
+        $log.info "updating the form", form, user
+        user.$save()
+        $scope.showForm = false
+    
+
+angular.module("myApp")
+  .controller("MyCtrl", MyCtrl)
+</pre>
+
+<h3 id="ag-panel-states">agPanelStates</h3>
+
+Adds 3 buttons for panel to collapse, expand panel. Requires content to be wrapped with panel. For grids on collapse shows
+only one row and hides footer, for panels with several elements hides all elements that don't have `stay-on-collapse` directive.
+On expand opens full screen modal with panel content<br/>
+Example usage for grid:
+
+<pre class="prettyprint">
+&lt;div  class="ag-panels-row">
+    &lt;div class="ag-panel">
+        &lt;div class="ag-panel-states navbar navbar-grid navbar-default">
+            &lt;div class="navbar-inner with-selected-pointer with-grid-options">
+                &lt;ul class="nav navbar-nav col-sm-4">
+                    &lt;li>
+                        &lt;a href="" ng-click="createRecord()">
+                            &lt;i class="fa fa-user">&lt;/i>
+                        &lt;/a>
+                    &lt;/li>
+                &lt;/ul>
+                &lt;ul class="nav navbar-nav pull-right">
+                    &lt;li>
+                        &lt;a title="search screen" ng-click="showSearchForm = !showSearchForm" href="">
+                            &lt;i class="fa fa-search">&lt;/i>
+                        &lt;/a>
+                    &lt;/li>
+                &lt;/ul>
+
+                &lt;ag-grid-quick-search for="usersGrid" filters="filters">&lt;/ag-grid-quick-search>
+            &lt;/div>
+        &lt;/div>
+
+        &lt;div ag-grid="gridOptions"
+             ag-grid-name="usersGrid">&lt;/div>
+    &lt;/div>
+&lt;/div>
+</pre>
+</br>
+Example usage for form:
+<pre class="prettyprint">
+&lt;div class="panel rcm-panel panel-default financial ag-panels-row ag-panel">
+    &lt;div editable-panel-heading="editForm" class="ag-panel-states">Xeditable Form&lt;/div>
+
+    &lt;div class="panel-body ">
+        &lt;form editable-form name="editForm"
+              class="form-horizontal no-margin"
+              novalidate="true"
+              onaftersave="save(editForm, org)">
+
+            &lt;div stay-on-collapse>
+                &lt;span class="title">Phone&lt;/span>
+        &lt;span editable-text="org.phone"
+              e-name="orgPhone"
+              e-placeholder="org phone">{{org.phone}}&lt;/span>
+            &lt;/div>
+
+            &lt;div>
+                &lt;span class="title">State&lt;/span>
+        &lt;span editable-text="org.state"
+              e-name="orgState"
+              e-placeholder="org state">{{org.state}}&lt;/span>
+            &lt;/div>
+        &lt;/form>
+    &lt;/div>
+&lt;/div>
+</pre>
+
+  <h3 id="docs-forms-ag-submit-button">agSubmitButton directive</h3>
+
+  Renders a default button for creating or updating the resource.
+
+<pre class="prettyprint lang-html">
+&lt;div class=&quot;form-actions&quot;&gt;
+  &lt;ag-submit-button&gt;&lt;/ag-submit-button&gt;
+&lt;/div&gt;
+</pre>
+
+  <ul>
+    <li>it will have default label "Save"</li>
+    <li>the button will be automatically disabled if <code>POST</code> or <code>PUT</code> request is in progress</li>
+    <li>if request is in progress the label will be changed to "Save..."</li>
+  </ul>
+
+  <h3 id="docs-forms-ag-delete-button">agDeleteButton directive</h3>
+
+  Double check delete button. The basic idea was taken from <a href="http://williamcsete.com/sandbox/double-delete">http://williamcsete.com/sandbox/double-delete</a>.
+  Example usage:
+
+<pre class="prettyprint lang-html">
+&lt;div class=&quot;form-actions&quot;&gt;
+  &lt;ag-delete-button when-confirmed=&quot;delete(user)&quot;&gt;&lt;/ag-delete-button&gt;
+&lt;/div&gt;
+</pre>
+
+  <code>when-confirmed={expression}</code> - expression to evaluate upon the second click
+  (when the action was confirmed)
+
+  <br/>
+  <br/>
+
+  <ul>
+    <li>it will have default label "Delete"</li>
+    <li>after the first click it will be changed to in-place confirmation</li>
+    <li>the button will be automatically disabled if <code>POST</code> or <code>DELETE</code> request is in progress</li>
+    <li>if request is in progress the label will be changed to "Delete..."</li>
+  </ul>
+
+  <h3 id="docs-forms-confirmationDialog">confirmationDialog service</h3>
+
+  Generic confirmation dialog.<br/>
+  Example usage in the controller:
+
+<pre class="prettyprint">
+class MyCtrl
+  @$inject = ["$scope", "confirmationDialog"]
+  constructor: ($scope, confirmationDialog) ->
+
+  $scope.deleteRecord = (item) ->
+    confirmationDialog.open().result.then (confirmed) ->
+      item.delete() if confirmed
+
+angular.module("myApp")
+  .controller("MyCtrl", MyCtrl)
+</pre>
+
+  <h3 id="docs-forms-FormDialogServ">FormDialogServ service</h3>
+
+  Displays a dialog with a form for creating or updating a record.
+  Used mostly on dialog based CRUD pages.<br/>
+  Example usage:
+
+<pre class="prettyprint">
+class MyCtrl
+
+  @$inject = ["$scope", "FormDialogServ", "Users"]
+  constructor: ($scope, FormDialogServ, Users) ->
+    # Displays a form for creating a new user
+    $scope.createRecord = ->
+      user = new Users()
+      FormDialogServ.open("/user/formTemplate", user)
+
+    # Displays a form for editing an exiting user
+    $scope.editRecord = (id) ->
+      Users.get { id: id }, (user) ->
+        FormDialogServ.open("/user/formTemplate", user)
+
+angular.module("myApp")
+  .controller("tabbedOrg.MyCtrl", MyCtrl)
+</pre>
+
+  Example template for the dialog <code>/user/formTemplate</code>:
+
+<pre class="prettyprint lang-html">
+&lt;div class=&quot;modal-header&quot;&gt;
+  &lt;button type=&quot;button&quot; class=&quot;close&quot; ng-click=&quot;closeDialog()&quot;&gt;&amp;times;&lt;/button&gt;
+  &lt;h3 ng-hide=&quot;item.persisted()&quot;&gt;Create New ${entityName}&lt;/h3&gt;
+  &lt;h3 ng-show=&quot;item.persisted()&quot;&gt;Edit ${entityName}&lt;/h3&gt;
+&lt;/div&gt;
+
+&lt;form name=&quot;editForm&quot; class=&quot;form-horizontal no-margin&quot; novalidate
+      ag-submit=&quot;save(item)&quot;&gt;
+  &lt;div class=&quot;modal-body&quot; ng-controller=&quot;user.FormCtrl&quot;&gt;
+
+    &lt;div ag-field-group for=&quot;contactFirstName,contactLastName&quot;&gt;
+      &lt;label class=&quot;control-label&quot;&gt;${ag.label(code: &quot;contact.name&quot;)}&lt;/label&gt;
+
+      &lt;div class=&quot;controls&quot;&gt;
+        &lt;input type=&quot;text&quot; placeholder=&quot;${ag.label(code: 'contact.firstName')}&quot;
+               name=&quot;contactFirstName&quot;
+               ng-model=&quot;item.contact.firstName&quot; required autofocus&gt;
+        &lt;ag-validation-errors for=&quot;contactFirstName&quot; /&gt;
+      &lt;/div&gt;
+
+      &lt;div class=&quot;controls&quot; style=&quot;margin-top:5px&quot;&gt;
+        &lt;input type=&quot;text&quot; placeholder=&quot;${ag.label(code: 'contact.lastName')}&quot;
+               name=&quot;contactLastName&quot;
+               ng-model=&quot;item.contact.lastName&quot; /&gt;
+        &lt;ag-validation-errors for=&quot;contactLastName&quot; /&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;modal-footer&quot;&gt;
+      &lt;span ng-hide=&quot;!item.persisted()&quot;&gt;
+          &lt;ag-delete-button when-confirmed=&quot;delete(item)&quot;&gt;&lt;/ag-delete-button&gt;
+      &lt;/span&gt;
+
+    &lt;ag-cancel-button ng-click=&quot;closeDialog()&quot;&gt;&lt;/ag-cancel-button&gt;
+    &lt;ag-submit-button&gt;&lt;/ag-submit-button&gt;
+  &lt;/div&gt;
+&lt;/form&gt;
+</pre>
+
+  <h3 id="editable-panel-heading">Editable Panel Heading</h3>
+
+  Directive adds panel heading with button for edit mode<br/>
+  Example usage:
+
+<pre class="prettyprint">
+app = angular.module("myApp", [
+  "angleGrinder.form"
+])
+</pre>
+
+<pre class="prettyprint">
+&lt;div class="panel panel-default">
+    &lt;div editable-panel-heading="xeditableForm">Financial&lt;/div>
+
+    &lt;div class="panel-body">
+
+        &lt;form editable-form name="xeditableForm" class="form-horizontal no-margin" onaftersave="update(user)">
+            &lt;div ag-field-group for="name">
+                &lt;span class="title">Name&lt;/span>
+            &lt;span editable-text="user.name"
+                  e-name="name"
+                  e-required="true"
+                  ag-bind="user.name">&lt;/span>
+            &lt;/div>
+            &lt;div>&lt;span class="title">Editable Select&lt;/span>
+            &lt;span editable-select="user.contractId"
+                e-ng-options="c.id as c.name for c in contracts"
+                e-name="contract"
+                ag-bind="user.contractId">&lt;/span>
+            &lt;/div>
+            &lt;div editable-form-buttons="xeditableForm">&lt;/div>
+        &lt;/form>
+    &lt;/div>
+&lt;/div>
+</pre>
+
+
+  <h2 id="docs-gridz"><code>angleGrinder.gridz</code> module</h2>
+
+  AngularJS directive for <a href="http://www.trirand.com/blog">jqGrid</a>
+
+  <h3 id="docs-gridz-basic">Basic example</h3>
+
+  Include <code>angleGrinder.gridz</code> module in the application:
+
+<pre class="prettyprint">
+app = angular.module("myApp", [
+  "angleGrinder.gridz"
+])
+</pre>
+
+  Example AngularJS controller:
+
+<pre class="prettyprint">
+class ListCtrl
+
+  @$inject = ["$scope", "sampleData"]
+  constructor: ($scope, @sampleData) ->
+    # assign grid options to the scope
+    $scope.gridOptions =
+      data: @generateSampleData()
+      datatype: "local"
+      colModel: @gridColumns()
+      sortname: "id"
+
+  # Generates sample data to feed the grid
+  generateSampleData: ->
+    @sampleData.generate(100)
+
+  # Defines grid column model
+  # see http://www.trirand.com/jqgridwiki/doku.php?id=wiki:colmodel_options
+  gridColumns: ->
+  [
+      name: "id"
+      label: "Inv No"
+      width: 60
+      sorttype: "int"
+    ,
+      name: "customer.name"
+      label: "Customer"
+      formatter: "editActionLink"
+    ,
+      name: "invoiceDate"
+      label: "Date"
+    ,
+      name: "note"
+      label: "Note"
+    ,
+      name: "complete"
+      label: "Complete"
+  ]
+
+angular.module("myApp")
+  .controller("ListCtrl", ListCtrl)
+</pre>
+
+  Directive usage:
+
+<pre class="prettyprint lang-html">
+&lt;body ng-app=&quot;myApp&quot;&gt;
+  &lt;div ng-controller=&quot;ListCtrl&quot;&gt;
+    &lt;div ag-grid=&quot;gridOptions&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+</pre>
+
+  <h3 id="docs-gridz-ajax">Grid with server side data</h3>
+
+<pre class="prettyprint">
+class UsersListCtrl
+  @$inject = ["$scope"]
+  constructor: ($scope) ->
+
+  $scope.gridOptions =
+    url: "/api/users"
+    colModel: @gridColumns()
+    rowNum: 10
+    sortname: "id"
+
+  # Handle the grid's quick search action
+  $scope.quickSearch = (search) ->
+    $scope.$broadcast "searchUpdated", search
+
+  # see the previous example
+  gridColumns: ->
+    []
+
+angular.module("myApp")
+  .controller("UsersListCtrl", UsersListCtrl)
+</pre>
+
+<pre class="prettyprint lang-hmtl">
+&lt;body ng-app=&quot;myApp&quot;&gt;
+  &lt;div ng-controller=&quot;UsersListCtrl&quot;&gt;
+    &lt;div ag-grid=&quot;gridOptions&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+</pre>
+
+  <h3 id="docs-gridz-toolbar">Grid with toolbar</h3>
+
+<pre class="prettyprint lang-html">
+&lt;div class=&quot;navbar navbar-grid&quot;&gt;
+  &lt;div class=&quot;navbar-inner with-selected-pointer with-grid-options&quot;&gt;
+    &lt;ul class=&quot;nav&quot;&gt;
+      &lt;li&gt;&lt;span class=&quot;fa fa-selected-pointer&quot;&gt; &lt;/span&gt;&lt;/li&gt;
+      &lt;li class=&quot;dropdown selected-actions&quot;&gt;
+        &lt;a data-toggle=&quot;dropdown&quot; class=&quot;dropdown-toggle&quot; href=&quot;&quot;&gt;
+          Actions &lt;b class=&quot;caret&quot;&gt;&lt;/b&gt;
+        &lt;/a&gt;
+        &lt;ul class=&quot;dropdown-menu&quot;&gt;
+          &lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;i class=&quot;fa fa-eye&quot;&gt;&lt;/i&gt; View&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;i class=&quot;fa fa-external-link&quot;&gt;&lt;/i&gt; Export&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;i class=&quot;fa fa-trash-o&quot;&gt;&lt;/i&gt; Delete&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li class=&quot;divider-vertical&quot;&gt;&lt;/li&gt;
+      &lt;li&gt;
+        &lt;a href=&quot;&quot; class=&quot;create-button&quot; ng-click=&quot;createRecord()&quot;&gt;
+          &lt;i class=&quot;fa fa-pencil-square-o&quot;&gt;&lt;/i&gt;New
+        &lt;/a&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;ul class=&quot;nav pull-right&quot;&gt;
+      &lt;li&gt;&lt;a href=&quot;#&quot; title=&quot;search screen&quot;&gt;&lt;i class=&quot;fa fa-search&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;/li&gt;
+      &lt;li class=&quot;divider-vertical skinny&quot;&gt;&lt;/li&gt;
+      &lt;li class=&quot;dropdown grid-options&quot;&gt;
+        &lt;a data-toggle=&quot;dropdown&quot; class=&quot;dropdown-toggle&quot; href=&quot;#&quot;&gt;
+          &lt;i class=&quot;fa fa-cog&quot;&gt;&lt;/i&gt;&lt;b class=&quot;caret&quot;&gt;&lt;/b&gt;&lt;/i&gt;
+        &lt;/a&gt;
+        &lt;ul class=&quot;dropdown-menu&quot;&gt;
+          &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Columns&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Another action&lt;/a&gt;&lt;/li&gt;
+          &lt;li class=&quot;divider&quot;&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Separated link&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;form action=&quot;&quot; class=&quot;navbar-search pull-right&quot;&gt;
+      &lt;input type=&quot;text&quot; value=&quot;&quot; placeholder=&quot;Search&quot;
+             class=&quot;search-query col-md-2&quot; /&gt;
+    &lt;/form&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div ag-grid=&quot;gridOptions&quot;&gt;&lt;/div&gt;
+</pre>
+
+  <h3 id="docs-gridz-search">Grid with advanced search form</h3>
+
+<pre class="prettyprint lang-html">
+&lt;div collapse=&quot;!showSearchForm&quot;
+     ng-include src=&quot;'templates/user/search_form.html'&quot;&gt;&lt;/div&gt;
+
+&lt;div class=&quot;navbar navbar-grid&quot;&gt;
+  &lt;ul&gt;
+    &lt;li&gt;
+      &lt;a href=&quot;&quot; title=&quot;search screen&quot;
+         ng-click=&quot;showSearchForm = !showSearchForm&quot;&gt;
+        &lt;i class=&quot;fa fa-search&quot;&gt;&lt;/i&gt;
+      &lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+
+  &lt;div ag-grid=&quot;gridOptions&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+</pre>
+
+<h4>Sample search form</h4>
+
+<pre class="prettyprint lang-html">
+&lt;div class=&quot;well&quot;&gt;
+  &lt;form ag-search-form class=&quot;form-horizontal form-multi-column no-margin&quot;&gt;
+    &lt;div class=&quot;row&quot;&gt;
+      &lt;div class=&quot;control-group col-md-6&quot;&gt;
+        &lt;label class=&quot;control-label&quot;&gt;Name&lt;/label&gt;
+        &lt;div class=&quot;controls&quot;&gt;
+          &lt;input class=&quot;form-control&quot; type=&quot;text&quot;
+                 ng-model=&quot;search.name&quot;&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;div class=&quot;control-group col-md-6&quot;&gt;
+        &lt;label class=&quot;control-label&quot;&gt;Allowance&lt;/label&gt;
+        &lt;div class=&quot;controls&quot;&gt;
+          &lt;input class=&quot;form-control&quot; type=&quot;text&quot;
+                 ng-model=&quot;search.allowance&quot;&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;pull-right&quot;&gt;
+      &lt;ag-search-button&gt;&lt;/ag-search-button&gt;
+      &lt;ag-reset-search-button&gt;&lt;/ag-reset-search-button&gt;
+    &lt;/div&gt;
+  &lt;/form&gt;
+&lt;/div&gt;
+</pre>
+
+  There is no need to implement a separate controller for handling the grid's advanced search.
+  Everything will be transparently handled by the following directives
+  <span class="label label-info">ag-search-form</span>,
+  <span class="label label-info">ag-search-button</span> and
+  <span class="label label-info">ag-search-reset-search-button</span>.
+
+  <br/>
+  <br/>
+
+  <span class="label label-info">note</span> advanced grid's search should be handled on the server side.
+
+</div>
+
+<h3 id="apply-formatters">applyFormatters service</h3>
+
+Service to apply formatters for grids<br/>
+Example usage:
+
+<pre class="prettyprint">
+class ListCtrl
+
+  @$inject = ["$scope", "$log", "Resource", "$filter", "DialogCrudCtrlMixin", "applyFormatters"]
+  constructor: ($scope, $log, Resource, @$filter, DialogCrudCtrlMixin, applyFormatters) ->
+
+    $scope.gridOptions =
+      path: "/user/list?format=json"
+      colModel: @colModel()
+      multiselect: false # turn off multiselect
+      shrinkToFit: true # makes columns fit to width
+      sortname: "login"
+      sortorder: "asc"
+
+    DialogCrudCtrlMixin $scope,
+      Resource: Resource
+      gridName: "usersGrid"
+      templateUrl: "/user/formTemplate"
+      beforeEdit: (record) ->
+        user = angular.copy(record)
+        # convert `Contact.type` enum field to the string
+        user.contact.type = record.contact.type?.name
+        user
+
+  colModel: ->
+    [
+      { name: "id", label: "ID", width: 30, fixed: true }
+      { name: "contact.name", label: "Contact Name", width: 100, fixed: true, formatter: "editActionLink" }
+      { name: "contact.email", label: "Contact Email", width: 70, align: "right", formatter: "email" }
+      { name: "login", label: "Login", width: 70 }
+      { name: "activeDate", label: "Active Date", width: 70, formatter: "dateFormat" }
+      { name: "inactive", label: "Inactive", width: 30, align: "center", formatter: "okIcon" }
+    ]
+
+  formatters =
+      dateFormat: (cellVal, options, rowData) ->
+        filter("agDate")(cellVal, false, 'MM/DD/YYYY')
+
+  applyFormatters(colModel, formatters)
+
+
+angular.module("angleGrinder")
+  .controller("user.ListCtrl", ListCtrl)
+</pre>
+
+So you don't need to specify function in <code>colModel</code>
+
+<h3 id="grid-crud">gridCrud directive</h3>
+
+Allows to edit grid row with for that is on top of the grid. Supports double click on a cell to open edit form and put
+focus on cell that was clicked<br/>
+Example usage:
+
+<pre class="prettyprint">
+&lt;div class="ag-panels-row" ng-controller="MyCtrl">
+    &lt;div class="ag-panel">
+        &lt;div grid-crud
+             template="/user/formTemplate"
+             resource="user"
+             grid-name="paymentGrid"
+             before-save="beforeUserSave"
+             after-save="afterUserSave">
+        &lt;/div>
+        &lt;div ag-grid="gridOptions" ag-grid-name="userGrid" edit-action="edit" id="userGrid">&lt;/div>
+    &lt;/div>
+&lt;/div>
+</pre>
+
+<pre class="prettyprint">
+class MyCtrl
+
+  @$inject = ["$scope", "$http", "$log", "pathWithContext", "resourceBuilder"]
+  constructor: ($scope, $http, $log, pathWithContext, resourceBuilder) ->
+
+    $scope.beforePaymentSave = (user) ->
+      # Execute some actions before save
+
+    $scope.afterPaymentSave = (user) ->
+      # Execute some actions after save, for example log or broadcast
+
+    $scope.user  = resourceBuilder("/user", "user")
+
+angular.module("myApp").controller("MyCtrl", MyCtrl)
+
+</pre>
+<h2 id="docs-dates">Dates Processing</h2>
+
+Some directives and aproaches that are used to handle dates and time zones
+
+<h3 id="docs-dates-datepicker">ag-datepicker</h3>
+
+Datepicker. View(what will be shown in input field) and model(what will be saved to scope) format can be configured.
+Formats can be configured with <code>datepicker-options="{format: 'MM/DD/YY', isoFormat: 'YYYY-DD-MM'}"</code>, where
+<code>format</code> - view format and <code>isoFormat</code> - model format. Default view format is <code>MM/DD/YYYY</code>
+can be configured with <code>agDate</code> provider.
+The second way to change model format is to use "date-type" property, available formats are:
+        <ul>
+            <li>date</li>
+            <li>localDate</li>
+            <li>localDateTime</li>
+        </ul>
+Which can be configured in <code>agDate</code> provider.<br/>
+<code>ag-date</code> provider example:
+<pre class="prettyprint">
+app.config [
+  "agDateProvider", (provider) ->
+    provider.setViewFormat("MM/DD/YY")
+    provider.setLocalDateFormat("YYYY-MM-DD")
+]
+</pre>
+
+<span class="label label-info">note</span> You should use <a href="http://momentjs.com/docs/#/parsing/string-format/">
+momentjs formats</a> for filter.<br/>
+
+Datepicker can be used in 3 ways:
+<pre class="prettyprint">
+&lt;ag-datepicker ng-model="birthday"></ag-datepicker>
+
+
+&lt;input type="text" ag-datepicker ng-model="birthday"/>
+
+
+&lt;div class="col-sm-5">
+    &lt;div class="input-group">
+        &lt;div ag-datepicker ng-model="orgShowCase.exampleLocalDate" datepicker-options="{inline: true}"></div>
+    &lt;/div>
+&lt;/div>
+</pre>
+The first example - it is for datepicker with button.</br>
+The second - for input field with datepicker popup on click inside input.</br>
+The last one - for inline datepicker.
+
+<h3 id="docs-dates-date-filter">Date filter</h3>
+<code>agDate</code> filter is using momentjs. Default format is "MMM DD, YYYY".
+<span class="label label-info">note</span> You should use <a href="http://momentjs.com/docs/#/parsing/string-format/">
+momentjs formats</a>.
+
+<h3 id="docs-dates-backend">Back-end</h3>
+
+<h4>Date binding</h4>
+A setting in Config.groovy defines the date formats which will be used application-wide when binding params to a Date
+<code>
+<pre>
+grails.databinding.dateFormats = [
+    'MMddyyyy', 'yyyy-MM-dd HH:mm:ss.S', "yyyy-MM-dd'T'hh:mm:ss'Z'"
+]
+</pre>
+        </code>
+        The formats specified in <code>grails.databinding.dateFormats</code> will be attempted in the order in which they are included in the List.
+
+        You can override these application-wide formats for an individual command object using @BindingFormat
+        <code>
+<pre>
+class Person {
+    @BindingFormat('MMddyyyy')
+    Date birthDate
+}
+</pre>
+        </code>
+
+To make work with dates on back-end side easier <a href="http://gpc.github.io/joda-time/guide/introduction.html">Joda Time plugin</a> is used.
+
+We have 3 main date types fields:
+        <ul>
+            <li><span class="label label-info">date without time</span> - it could be birthDate, so doesn't matter what time is it, we need only date</li>
+            <li><span class="label label-info">date that is adjusted to user time zone</span> - it could be reminder date</li>
+            <li><span class="label label-info">date that should pass time zone from server</span> - let's call it "post date"</li>
+        </ul>
+
+<h4>Birth Date</h4>
+On back-end side date should be declared as Joda time type <code>LocalDate</code>. which parses dates from format "yyyy-mm-dd"
+and, what more importent, returns to client in the same format. Example:
+<code>
+<pre>
+class Person {
+    LocalDate birthDate
+    static mapping = {
+        birthDate type: PersistentLocalDate
+    }
+}
+</pre>
+</code>
+
+<h4>Post Date</h4>
+This date type can be very usefull if there is date that is specified on backend, but should be valid for user in the other time zone.
+On back-end side date should be declared as Joda time type <code>DateTime</code>. which parses dates from format "yyy-MM-ddTHH:mm:ss+00:00"
+and returns to client in the same format. Example:
+<code>
+<pre>
+class Person {
+    DateTime postDate
+    static mapping = {
+        postDate type: PersistentLocalDate
+    }
+}
+</pre>
+</code>
+
+<h4>Reminder Date</h4>
+This date should be used if we need a date that is adjusted to users timezone.
+On back-end side date should be declared as Java Date field. Example:
+<code>
+<pre>
+class Person {
+    Date reminderDate
+}
+</pre>
+</code>
+To client it will be passed as "yyy-MM-ddTHH:mm:ssZ" and will be adjusted to current client time zone.
+You can look on the examples on user form in ag-demo app

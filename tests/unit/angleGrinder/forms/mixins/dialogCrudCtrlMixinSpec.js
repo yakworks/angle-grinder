@@ -1,9 +1,9 @@
 import formsModule from '~/scripts/forms'
-import exampleAppResources from '../../../../../docs/exampleApp/modules/resources'
+import userResModule from './userResourcesMockup'
 
 describe("dialogCrudCtrlMixinSpec", function() {
 
-  beforeEach(angular.mock.module(exampleAppResources));
+  beforeEach(angular.mock.module(userResModule));
 
   beforeEach(angular.mock.module(formsModule, function($provide) {
     // stub `FormDialogServ` service

@@ -4,12 +4,17 @@
   "version": "3.0.0",
   "scripts": {
     "build": "rimraf dist && yarn build:prod",
-    "build:dev": "webpack --config config/webpack.config.js --mode=development",
-    "build:prod": "webpack --config config/webpack.config.js --mode=production",
+    "build:dev": "webpack --config config/webpack.config.js --mode=development --bail --profile --progress",
+    "build:prod": "webpack --config config/webpack.config.js --mode=production --bail --profile --progress",
+    "build:app": "webpack --bail --profile --progress --mode=production",
+    "clean": "rimraf dist && rimraf build",
     "test": "karma start tests/karma.conf.js --single-run --no-auto-watch --no-sandbox $*",
-    "test:single": "yarn test $*",
     "lint": "eslint src/",
-    "lint:fix": "eslint src/ --fix"
+    "lint-fix": "eslint src/ --fix",
+    "start-docs": "webpack-dev-server --history-api-fallback --inline --progress --foo=bar --mode=development --port 3000 --content-base ./docs",
+    "start-sandbox": "webpack-dev-server --history-api-fallback --inline --progress --foo=bar --mode=development --port 3000 --content-base ./examples/sandbox",
+    "parcel": "parcel examples/simple/index.html",
+    "parcel:build": "parcel build examples/simple/index.html"
   },
   "dependencies": {
     "Select2": "^3.5.7",
@@ -27,7 +32,8 @@
     "core-js": "^3.6.2",
     "eonasdan-bootstrap-datetimepicker": "4.17.47",
     "font-awesome": "~4.3.0",
-    "free-jqgrid": "4.15.5",
+    "fontawesome": "^5.6.3",
+    "free-jqgrid": "4.13.6",
     "google-code-prettify": "1.0.1",
     "jquery": "3.4.1",
     "later": "*",
@@ -44,6 +50,7 @@
     "@rollup/plugin-commonjs": "^11.0.1",
     "@rollup/plugin-node-resolve": "^7.0.0",
     "angular-mocks": "1.6.10",
+    "autoprefixer": "^9.7.3",
     "babel-loader": "^8.0.6",
     "babel-plugin-angularjs-annotate": "^0.10.0",
     "babel-plugin-lodash": "^3.3.4",
@@ -51,6 +58,8 @@
     "babel-plugin-wildcard": "^6.0.0",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
+    "copy-webpack-plugin": "^5.1.1",
+    "css-loader": "^3.4.2",
     "eslint": "^6.8.0",
     "eslint-config-standard": "^14.1.0",
     "eslint-plugin-angular": "^4.0.1",
@@ -58,6 +67,8 @@
     "eslint-plugin-node": "^11.0.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
+    "file-loader": "^5.0.2",
+    "html-webpack-plugin": "^3.2.0",
     "inject-imports-loader": "^1.0.2",
     "jsdom": "^15.2.1",
     "karma": "^4.4.1",
@@ -72,18 +83,26 @@
     "karma-sinon-chai": "^2.0.2",
     "karma-sourcemap-loader": "^0.3.7",
     "karma-webpack": "^4.0.2",
+    "less": "^3.10.3",
+    "less-loader": "^5.0.0",
     "load-grunt-tasks": "^0.6.0",
     "mime": "^1.2.11",
+    "mini-css-extract-plugin": "^0.9.0",
     "mocha": "^1.20.4",
     "nodemon": "^1.2.0",
+    "parcel-bundler": "^1.12.4",
+    "parcel-plugin-static-files-copy": "^2.2.1",
+    "postcss-loader": "^3.0.0",
     "protractor": "^1.0.0",
     "puppeteer": "^1.19.0",
+    "raw-loader": "^4.0.0",
     "request": "^2.36.0",
     "rollup": "1.26.5",
     "rollup-plugin-auto-external": "^2.0.0",
     "rollup-plugin-babel": "^4.3.3",
     "sinon": "^8.0.4",
     "sinon-chai": "^3.4.0",
+    "style-loader": "^1.1.2",
     "webpack": "^4.41.5",
     "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.10.1"
@@ -95,5 +114,17 @@
   "bugs": {
     "url": "https://github.com/9ci/angle-grinder/issues"
   },
-  "homepage": "https://github.com/9ci/angle-grinder"
+  "homepage": "https://github.com/9ci/angle-grinder",
+  "browserslist": [
+    "last 2 version",
+    "> 2%"
+  ],
+  "staticFiles": {
+    "staticPath": [
+      {
+        "staticPath": "examples/simple/static",
+        "staticOutDir": "static"
+      }
+    ]
+  }
 }

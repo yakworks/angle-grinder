@@ -1,11 +1,11 @@
 import formsModule from '~/scripts/forms'
-import exampleAppResources from '../../../../../docs/exampleApp/modules/resources'
+import userResModule from './userResourcesMockup'
 
 describe("massUpdateFormCtrlMixinSpec", function() {
 
   beforeEach(angular.mock.module(formsModule));
 
-  beforeEach(angular.mock.module(exampleAppResources, ($provide) => $provide.decorator("Users", function($delegate, $q) {
+  beforeEach(angular.mock.module(userResModule, ($provide) => $provide.decorator("Users", function($delegate, $q) {
     const deferred = $q.defer();
 
     // always resolved

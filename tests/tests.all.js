@@ -3,6 +3,13 @@ import '../src/vendor'
 import 'angular'
 import 'angular-mocks'
 
+// shorter alternate method to try is this when using webpack
+function importAll (r) {
+  r.keys().forEach(r);
+}
+importAll(require.context('./unit/angleGrinder/', true, /\.js$/))
+
+//longer esm method
 // import * as utils1 from './unit/angleGrinder/utils/*.spec'
 // import * as utils2 from './unit/angleGrinder/utils/*Spec'
 // import * as alerts from './unit/angleGrinder/alerts/*Spec'
@@ -13,9 +20,3 @@ import 'angular-mocks'
 // import * as pwc from './unit/angleGrinder/pathWithContext/*Spec'
 // import * as rs from './unit/angleGrinder/resourceSupport/*Spec'
 // import * as sel2 from './unit/angleGrinder/select2/*Spec'
-
-// shorter alternate method to try is this when using webpack
-function importAll (r) {
-  r.keys().forEach(r);
-}
-importAll(require.context('./unit/angleGrinder/', true, /\.js$/))

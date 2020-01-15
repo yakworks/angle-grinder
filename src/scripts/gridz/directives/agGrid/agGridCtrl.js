@@ -1,9 +1,9 @@
 import angular from 'angular'
 import gridzModule from '../../gridzModule'
 import BaseCtrl from '../../../utils/BaseCtrl'
+import _ from 'lodash'
 
 const gridz = angular.module(gridzModule)
-
 
 // Wrapper for jqGrid public API
 // Controller instance could be published to the parent scope

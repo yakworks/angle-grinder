@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Parcel/Angular 1.6 Test</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body ng-app="exampleApp">
+    <div >
+      <div data-ng-controller="testController as vm">
+        {{vm.hello}}
+      </div>
+
+      <div data-ng-controller="testController2 as vm1">
+        {{vm1.hello}}
+      </div>
+
+      <div data-ng-controller="testController3">
+        {{hello}}
+      </div>
+    </div>
+
+    <my-comp></my-comp>
+    <my-bar></my-bar>
+
+    <script src="./main.js"></script>
+  </body>
+</html>
