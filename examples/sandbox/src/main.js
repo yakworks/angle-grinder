@@ -2,7 +2,7 @@ import angular from 'angular'
 import uibootstrap from 'angular-ui-bootstrap' // uibootstrap is just a string with the name of the module
 import AppCtrl from './controllers/AppCtrl'
 import AppConfigSvc from './services/AppConfigSvc'
-import '~/styles/combo.js'
+import '~/styles/all.js'
 import './app.css'
 
 const app = () => {

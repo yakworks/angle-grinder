@@ -7,7 +7,9 @@ import udg from './grids/usersDialogGrid'
 import ug from './grids/usersGrid'
 import './controllers'
 import SidebarCtrl from './controllers/sidebarCtrl'
-import '~/styles/combo.js'
+import 'google-code-prettify/src/prettify'
+import '~/styles/all.js'
+import '~/styles/docs.js'
 
 const emod = angular.module(exampleAppName)
 

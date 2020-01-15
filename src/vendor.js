@@ -1,4 +1,4 @@
-//jquery should be included seperately
+// jquery should be included seperately
 window.jQuery = require('jquery')
 window.$ = window.jQuery
 
@@ -13,9 +13,15 @@ window.$ = window.jQuery
 // require('angular-drag-and-drop-lists/angular-drag-and-drop-lists.js')
 // require('angular-ui-bootstrap')
 
+require('bootstrap/js/dropdown')
+require('bootstrap/js/tooltip')
+require('bootstrap/js/popover')
+
 require('free-jqgrid/js/jquery.jqgrid.src')
+
 require('Select2/select2')
 require('moment')
 require('eonasdan-bootstrap-datetimepicker/src/js/bootstrap-datetimepicker')
+require('later/later')
 // require('toastr/toastr.js')
 // require('sweetalert/lib/sweet-alert.js')
