@@ -1,5 +1,6 @@
 import angular from 'angular'
 import gridzModule from '../gridzModule'
+import _ from 'lodash'
 
 var gridz = angular.module(gridzModule)
 

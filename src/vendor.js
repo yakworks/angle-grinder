@@ -16,6 +16,7 @@ window.$ = window.jQuery
 require('bootstrap/js/dropdown')
 require('bootstrap/js/tooltip')
 require('bootstrap/js/popover')
+require('../components/bootstrapx-clickover/bootstrapx-clickover')
 
 require('free-jqgrid/js/jquery.jqgrid.src')
 

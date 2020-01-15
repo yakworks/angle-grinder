@@ -1,0 +1,41 @@
+<h4>{{first.title}}</h4>
+
+<div>foo: {{foo}}</div>
+
+<h5>Dates</h5>
+
+<div>{{birthDate}}</div>
+
+<ul>
+  <li>{{birthDate | agDate}}</li>
+  <li>{{birthDate | agDate: true :'MM/DD/YY H:mm a'}}</li>
+  <li>{{birthDate | agDate: true :'MMMM, D, YYYY'}}</li>
+
+  <li>{{user.birthDate}}</li>
+  <li>{{user.birthDate | agDate: true :'MM/DD/YY'}}</li>
+  <li>{{user.birthDate | agDate: true :'MM/DD/YY H:mm a'}}</li>
+</ul>
+<h6>Date picker</h6>
+<div ag-datepicker>
+    <input type="text" name="weddingDate"
+           ng-model="user.weddingDate" />
+</div>
+Stored in model: {{user.weddingDate}}
+
+<h6>Date picker with trimmed time</h6>
+<div ag-datepicker>
+    <input ag-trim-time="user.payDate" type="text" name="payDate"
+           ng-model="user.payDate" />
+</div>
+Stored in model: {{user.payDate}}
+
+<h5>Currencies</h5>
+
+<div>{{price}}</div>
+
+<ul>
+  <li>{{price | agCurrency}}</li>
+  <li>{{price | agCurrency:'zł'}}</li>
+  <li>{{price | agCurrency:'euro'}}</li>
+  <li>{{price | agCurrency:'GBP'}}</li>
+</ul>

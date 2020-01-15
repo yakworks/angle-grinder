@@ -1,5 +1,6 @@
 'use strict'
-// Modules
+//https://github.com/wbkd/webpack-starter/blob/master/webpack/webpack.config.prod.js
+
 const webpack = require('webpack')
 const autoprefixer = require('autoprefixer')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
@@ -37,17 +38,30 @@ module.exports = (env, argv) => {
         {
           test: /\.css$/,
           use: [
-            styleLoader,
-            'css-loader',
+            {
+              loader: styleLoader
+            },
+            {
+              loader: 'css-loader',
+              options: { sourceMap: true }
+            },
             //'postcss-loader'
           ]
         },
         {
           test: /\.less$/,
           use: [
-            styleLoader, // creates style nodes from JS strings
-            'css-loader', // translates CSS into CommonJS
-            'less-loader' // compiles Less to CSS
+            {
+              loader: styleLoader // creates style nodes from JS strings
+            },
+            {
+              loader: 'css-loader', // translates CSS into CommonJS
+              options: { sourceMap: true }
+            },
+            {
+              loader: 'less-loader', // compiles Less to CSS
+              options: { sourceMap: true }
+            }
           ],
         },
         {
