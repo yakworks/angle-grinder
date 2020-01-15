@@ -1,52 +1,50 @@
 <h2 class="page-header">Grid example</h2>
 
-<div class="navbar navbar-grid navbar-default">
-    <div class="navbar-inner with-selected-pointer with-grid-options">
-        <ul class="nav navbar-nav">
-            <li class="dropdown selected-actions ">
-                <a data-toggle="dropdown" class="dropdown-toggle" href="#" style="padding-left: 2px">
-                    <i class="fa fa-selected-pointer"> </i> Actions <b class="caret"></b>
+<div class="ag-panels-row">
+  <div class="ag-panel">
+    <div class="navbar navbar-default  navbar-toolbar navbar-grid">
+      <div class="navbar-inner position-relative with-selected-pointer with-grid-options">
+          <button data-target=".navbar-collapse" data-toggle="collapse" class="navbar-toggle">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+          </button>
+          <div class="collapse navbar-collapse no-padding" >
+            <ul class="nav navbar-nav">
+              <li class="menu-arrow"><i class="icon-selected-pointer"></i></li>
+              <li>
+                <a uib-tooltip="Export to Excel" ag-grid-xls-export=""></a>
+              </li>
+              <li>
+                <a ng-click="massUpdate()" uib-tooltip="Mass Update"><i class="fa fa-edit"></i></a>
+              </li>
+            </ul>
+            <ul class="nav navbar-nav">
+              <li class="divider-vertical"></li>
+              <li>
+                <a ng-click="createRecord()" ag-new-button href="">
                 </a>
-                <ul class="dropdown-menu">
-                    <li><a href=""><i class="fa fa-eye"></i> View</a></li>
-                    <li><a href=""><i class="fa fa-external-link"></i> Export</a></li>
-                    <li class="divider"></li>
-                    <li><a href=""><i class="fa fa-trash-o"></i> Delete</a></li>
-                </ul>
-            </li>
-            <li class="divider-vertical"></li>
-            <li>
-                <a href="" class="create-button" ng-click="createRecord()">
-                    <i class="fa fa-plus-circle"></i> Add new record
+              </li>
+            </ul>
+            <ag-panel-states>
+              <ag-manage-grid-columns grid="exampleGrid"></ag-manage-grid-columns>
+              <ag-reload-grid for="exampleGrid"></ag-reload-grid>
+              <ag-reset-sort-grid for="exampleGrid"></ag-reset-sort-grid>
+            </ag-panel-states>
+            <ul class="nav navbar-nav pull-right">
+              <li>
+                <a title="search screen" ng-click="showSearchForm = !showSearchForm" href="">
+                    <i class="fa fa-search"></i>
                 </a>
-            </li>
-        </ul>
-
-        <ul class="nav navbar-nav pull-right">
-            <li>
-                <form action="" class="navbar-form navbar-right">
-                </form>
-                <input type="text" value="" placeholder="Search" class="col-md-2 form-control"/>
-            </li>
-            <li><a href="" title="search screen"><i class="fa fa-search"></i></a></li>
-            <li class="divider-vertical skinny"></li>
-            <li class="dropdown grid-options">
-                <a data-toggle="dropdown" class="dropdown-toggle" href=""><i class="fa fa-cog"></i><b
-                        class="caret"></b></i></a>
-                <ul class="dropdown-menu">
-                    <li><a href=""><i class="fa fa-th-list"></i> Columns</a></li>
-                    <li><a href=""><i class="fa fa-pencil-square-o"></i> Another action</a></li>
-                    <li class="divider"></li>
-                    <li><a href=""><i class="fa fa-external-link"></i> Separated link</a></li>
-                </ul>
-            </li>
-        </ul>
-
+              </li>
+            </ul>
+            <ag-grid-quick-search for="exampleGrid" filters="filters"></ag-grid-quick-search>
+          </div>
+      </div>
     </div>
+    <div ag-grid="gridOptions" ag-grid-name="exampleGrid"></div>
+  </div>
 </div>
-
-<div ag-grid="gridOptions"
-     ag-grid-name="exampleGrid"></div>
 
 <button class="btn" ng-click="getSelectedRowsData()">Get selected rows data</button>
 <code>{{selectedRowsData | json}}</code>

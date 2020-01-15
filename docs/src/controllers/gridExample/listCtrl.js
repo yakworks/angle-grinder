@@ -47,7 +47,7 @@ export default class ListCtrl extends BaseCtrl {
     });
 
     const dialogOptions = {record, grid: this.$scope.exampleGrid};
-    return this.FormDialogServ.open("/templates/gridExample/form.html", dialogOptions);
+    return this.FormDialogServ.open("/partials/gridExample/form.html", dialogOptions);
   }
 
   createRecord() {
@@ -66,7 +66,7 @@ export default class ListCtrl extends BaseCtrl {
     });
 
     const dialogOptions = {record, grid: this.$scope.exampleGrid};
-    return this.FormDialogServ.open("/templates/gridExample/form.html", dialogOptions).result
+    return this.FormDialogServ.open("/partials/gridExample/form.html", dialogOptions).result
       .then(record => this.data.push(record));
   }
 

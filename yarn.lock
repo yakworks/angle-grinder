@@ -4876,10 +4876,10 @@ fragment-cache@^0.2.1:
   dependencies:
     map-cache "^0.2.2"
 
-free-jqgrid@4.13.6:
-  version "4.13.6"
-  resolved "https://registry.yarnpkg.com/free-jqgrid/-/free-jqgrid-4.13.6.tgz#9c636f5bb2d85ad276b0c0a616698ce3e9a2b364"
-  integrity sha1-nGNvW7LYWtJ2sMCmFmmM4+mis2Q=
+free-jqgrid@4.13.3:
+  version "4.13.3"
+  resolved "https://registry.yarnpkg.com/free-jqgrid/-/free-jqgrid-4.13.3.tgz#11d988fc15976e52fece2935fc3f035500e0940f"
+  integrity sha1-EdmI/BWXblL+zik1/D8DVQDglA8=
 
 fresh@0.5.2:
   version "0.5.2"

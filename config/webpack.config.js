@@ -32,8 +32,8 @@ module.exports = (env, argv) => {
           vendor: {
             test: /node_modules/,
             chunks: "all",
-            name: `angular-libs${minDescriptor}`,
-            priority: 10,
+            name: `vendor-libs${minDescriptor}`,
+            priority: 10, //lower priority so it won't pick up jquery
             enforce: true
           }
         }

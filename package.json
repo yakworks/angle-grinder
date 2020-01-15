@@ -11,7 +11,7 @@
     "test": "karma start tests/karma.conf.js --single-run --no-auto-watch --no-sandbox $*",
     "lint": "eslint src/",
     "lint-fix": "eslint src/ --fix",
-    "start-docs": "webpack-dev-server --history-api-fallback --inline --progress --foo=bar --mode=development --port 3000 --content-base ./docs",
+    "start-docs": "webpack-dev-server --history-api-fallback --inline --foo=bar --mode=development --port 3000 --content-base ./docs",
     "start-sandbox": "webpack-dev-server --history-api-fallback --inline --progress --foo=bar --mode=development --port 3000 --content-base ./examples/sandbox",
     "parcel": "parcel examples/simple/index.html",
     "parcel:build": "parcel build examples/simple/index.html"
@@ -33,7 +33,7 @@
     "eonasdan-bootstrap-datetimepicker": "4.17.47",
     "font-awesome": "~4.3.0",
     "fontawesome": "^5.6.3",
-    "free-jqgrid": "4.13.6",
+    "free-jqgrid": "4.13.3",
     "google-code-prettify": "1.0.1",
     "jquery": "3.4.1",
     "later": "*",

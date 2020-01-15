@@ -10,5 +10,5 @@ import '../../components/jquery-file-upload-angular/css/jquery.fileupload.css'
 import 'angular-xeditable/dist/css/xeditable.css'
 
 import 'free-jqgrid/css/ui.jqgrid.css'
-//import 'free-jqgrid/plugins/css/ui.multiselect.css'
+import 'free-jqgrid/plugins/ui.multiselect.css'
 import './gridz.less'
