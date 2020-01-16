@@ -32,6 +32,18 @@ TODO will add in make commands
 
 - `yarn start-sandbox` runs the sandbox app
 
+### Running ag-demo
+
+- `yarn start-ag-demo` should be availiable on localhost:3000 to sanity check
+
+- `yarn build-ag-demo` build into the ag-demo-grails/src/main/webapp
+
+- `yarn watch-ag-demo` will watch the files in ag-demo-ui andd build into grails
+
+- `gradle .....???` TODO Alexey please update how to run grails app
+
+
+
 **for the sample grails demo app**
 
 ```
