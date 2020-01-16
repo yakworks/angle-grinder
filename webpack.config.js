@@ -16,12 +16,12 @@ module.exports = function(env, argv) {
   const MAIN_ENTRY = `${CONTENT_BASE}/src/main.js`
   console.log("argv", argv)
   let isProd = argv.mode === 'production'
-  let minDescriptor = isProd ? '.min' : ''
+  let minDescriptor  = ''// = isProd ? '.min' : '' //for now don't add min so grails dev is easier
   let devtool = isProd ? 'source-map' : 'inline-source-map'
   let pathout = argv.pathout ? path.resolve(argv.pathout) : path.resolve('./dist')
   //let pathout = path.resolve('./examples/ag-demo-grails/src/main/webapp')
   //let styleLoader = isProd ? MiniCssExtractPlugin.loader : 'style-loader'
-  let styleLoader = MiniCssExtractPlugin.loader
+  let styleLoader = MiniCssExtractPlugin.loader //always use this as it shows the sourcemaps in browser
   console.log("argv.mode", argv.mode); console.log("isProd", isProd); console.log("styleLoader", styleLoader);
 
   let cfg = {

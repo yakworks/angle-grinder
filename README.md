@@ -38,7 +38,7 @@ TODO will add in make commands
 
 - `yarn build-ag-demo` build into the ag-demo-grails/src/main/webapp
 
-- `yarn watch-ag-demo` will watch the files in ag-demo-ui andd build into grails
+- `yarn watch-ag-demo` will watch the files in ag-demo-ui and build into grails
 
 - `gradle .....???` TODO Alexey please update how to run grails app
 
