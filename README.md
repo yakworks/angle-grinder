@@ -26,6 +26,12 @@ TODO will add in make commands
 - `yarn` to install
 - `yarn test` to run all tests
 
+### Running Sample Docs
+
+- `yarn start-docs` should be availiable on localhost:3000
+
+- `yarn start-sandbox` runs the sandbox app
+
 **for the sample grails demo app**
 
 ```
