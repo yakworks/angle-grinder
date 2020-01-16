@@ -1,4 +1,4 @@
-import BaseCtrl from '../../../src/scripts/utils/BaseCtrl'
+import BaseCtrl from '~/scripts/utils/BaseCtrl'
 
 export default class IndexCtrl extends BaseCtrl {
   static initClass() {

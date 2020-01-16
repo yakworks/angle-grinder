@@ -21,15 +21,15 @@ export default class IndexCtrl extends BaseCtrl {
     this.DialogCrudCtrlMixin(this.$scope, {
       Resource: this.Users,
       gridName: "usersGrid",
-      templateUrl: "templates/usersDialog/form.html"
-    }
-    );
+      template: "partials/usersDialog/form.html"
+    });
 
     return this.MassUpdateMixin(this.$scope, {
-      templateUrl: "/templates/users/massUpdateForm.html",
+      templateUrl: "/partials/users/massUpdateForm.html",
       controller: "users.MassUpdateFormCtrl",
       gridName: "usersGrid"
-    }
-    );
+    });
+
   }
+
 }

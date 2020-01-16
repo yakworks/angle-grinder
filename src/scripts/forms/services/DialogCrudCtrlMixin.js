@@ -8,13 +8,13 @@ mixin.factory('DialogCrudCtrlMixin', [
   '$log', '$parse', 'FormDialogServ', 'ConfirmationDialogServ', 'alerts',
   ($log, $parse, FormDialogServ, ConfirmationDialogServ, alerts) => function($scope, options) {
     if (options == null) { options = {} }
-    const { Resource, gridName, templateUrl, extraDialogOptions } = options
+    const { Resource, gridName, templateUrl, template, extraDialogOptions } = options
 
     // Retrieve a grid controller from the scope
     const getGrid = () => $parse(gridName)($scope)
 
     const openEditDialogFor = function(record) {
-      const dialogOptions = { record, grid: getGrid(), scope: $scope }
+      const dialogOptions = { record, grid: getGrid(), scope: $scope, template: template }
       return FormDialogServ.open(templateUrl, _.extend(dialogOptions, extraDialogOptions))
     }
 

@@ -1,0 +1,54 @@
+<h2 class="page-header">Grid example</h2>
+
+<div class="ag-panels-row">
+  <div class="ag-panel">
+    <div class="navbar navbar-default  navbar-toolbar navbar-grid">
+      <div class="navbar-inner position-relative with-selected-pointer with-grid-options">
+          <div class="collapse navbar-collapse no-padding" >
+            <ul class="nav navbar-nav">
+              <li class="menu-arrow"><i class="icon-selected-pointer"></i></li>
+              <li>
+                <a ag-grid-xls-export=""></a>
+              </li>
+              <li>
+                <a ng-click="massUpdate()" uib-tooltip="Mass Update" >
+                  <i class="fa fa-edit"></i></a>
+              </li>
+            </ul>
+            <ul class="nav navbar-nav">
+              <li class="divider-vertical"></li>
+              <li>
+                <a ng-click="createRecord()" ag-new-button ></a>
+              </li>
+              <li>
+                <a ng-click="$ctrl.createDialog()" >new ui dialog</a>
+              </li>
+            </ul>
+            <ag-panel-states>
+              <ag-manage-grid-columns grid="exampleGrid"></ag-manage-grid-columns>
+              <ag-reload-grid for="exampleGrid"></ag-reload-grid>
+              <ag-reset-sort-grid for="exampleGrid"></ag-reset-sort-grid>
+            </ag-panel-states>
+            <ul class="nav navbar-nav pull-right">
+              <li>
+                <a title="search screen" ng-click="showSearchForm = !showSearchForm" href="">
+                    <i class="fa fa-search"></i>
+                </a>
+              </li>
+            </ul>
+            <ag-grid-quick-search for="exampleGrid" filters="filters"></ag-grid-quick-search>
+          </div>
+      </div>
+    </div>
+    <div ag-grid="gridOptions" ag-grid-name="exampleGrid"></div>
+  </div>
+</div>
+
+<button class="btn" ng-click="getSelectedRowsData()">Get selected rows data</button>
+<code>{{selectedRowsData | json}}</code>
+
+<h3>Custom col model</h3>
+
+<div ag-grid="otherGridOptions"
+     ag-grid-col-model='[{"name": "id", "label": "Inv No", "width": 60}, {"name": "customer.name", "label": "Customer", "formatter": "editActionLink"}]'
+     ag-grid-name="otherExampleGrid"></div>

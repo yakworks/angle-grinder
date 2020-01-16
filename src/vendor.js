@@ -14,8 +14,8 @@ window.$ = window.jQuery
 // require('angular-ui-bootstrap')
 
 require('bootstrap/js/dropdown')
-require('bootstrap/js/tooltip')
-require('bootstrap/js/popover')
+require('bootstrap/js/tooltip') //required by popover
+require('bootstrap/js/popover') //required by clickover
 require('../components/bootstrapx-clickover/bootstrapx-clickover')
 
 require('free-jqgrid/js/jquery.jqgrid.src')

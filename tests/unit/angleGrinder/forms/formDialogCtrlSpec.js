@@ -7,7 +7,7 @@ describe("module: angleGrinder.forms", function() {
   return describe("controller: FormDialogCtrl", function() {
     let $scope = null;
 
-    let $modalInstance = null;
+    let $uibModalInstance = null;
     let record = null;
     let grid = null;
 
@@ -16,7 +16,7 @@ describe("module: angleGrinder.forms", function() {
 
       // mock services
 
-      $modalInstance = {close: sinon.stub()};
+      $uibModalInstance = {close: sinon.stub()};
 
       record = {
         id: 567,
@@ -31,7 +31,7 @@ describe("module: angleGrinder.forms", function() {
       return $controller("FormDialogCtrl", {
         $scope,
 
-        $modalInstance,
+        $uibModalInstance,
         dialogOptions: {
           record,
           grid
@@ -46,8 +46,8 @@ describe("module: angleGrinder.forms", function() {
     describe("#closeDialog", () => it("closes a dialog", function() {
       $scope.closeDialog();
 
-      expect($modalInstance.close).to.have.been.called;
-      return expect($modalInstance.close).to.have.been.calledWith(record);
+      expect($uibModalInstance.close).to.have.been.called;
+      return expect($uibModalInstance.close).to.have.been.calledWith(record);
     }));
 
     describe("#save", () => describe("when the form is valid", function() {
@@ -84,7 +84,7 @@ describe("module: angleGrinder.forms", function() {
           return expect(grid.saveRow).to.have.been.calledWith(567, record);
         });
 
-        return it("closes the dialog", () => expect($modalInstance.close).to.have.been.called);
+        return it("closes the dialog", () => expect($uibModalInstance.close).to.have.been.called);
       });
     }));
 
@@ -113,7 +113,7 @@ describe("module: angleGrinder.forms", function() {
           return expect(grid.removeRow).to.have.been.calledWith(567);
         });
 
-        return it("closes the dialog", () => expect($modalInstance.close.called).to.be.true);
+        return it("closes the dialog", () => expect($uibModalInstance.close.called).to.be.true);
       });
 
       return describe("on error", function() {
@@ -130,7 +130,7 @@ describe("module: angleGrinder.forms", function() {
 
         it("does not remove a row from the grid", () => expect(grid.removeRow.called).to.be.false);
 
-        return it("does not close the dialog", () => expect($modalInstance.close.called).to.be.false);
+        return it("does not close the dialog", () => expect($uibModalInstance.close.called).to.be.false);
       });
     });
   });

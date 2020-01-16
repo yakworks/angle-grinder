@@ -1,11 +1,11 @@
-import BaseCtrl from '../../../../src/scripts/utils/BaseCtrl'
+import BaseCtrl from '~/scripts/utils/BaseCtrl'
 import _ from 'lodash'
 
 export default class ListCtrl extends BaseCtrl {
   static initClass() {
 
     this.register("exampleApp", "gridExample.ListCtrl");
-    this.inject("$scope", "$q", "$log", "sampleData", "exampleGrid", "FormDialogServ");
+    this.inject("$scope", "$q", "$log", "sampleData", "exampleGrid", "FormDialogServ", "$uibModal");
   }
 
   initialize() {
@@ -47,7 +47,7 @@ export default class ListCtrl extends BaseCtrl {
     });
 
     const dialogOptions = {record, grid: this.$scope.exampleGrid};
-    return this.FormDialogServ.open("/templates/gridExample/form.html", dialogOptions);
+    return this.FormDialogServ.open("/partials/gridExample/form.html", dialogOptions);
   }
 
   createRecord() {
@@ -66,7 +66,7 @@ export default class ListCtrl extends BaseCtrl {
     });
 
     const dialogOptions = {record, grid: this.$scope.exampleGrid};
-    return this.FormDialogServ.open("/templates/gridExample/form.html", dialogOptions).result
+    return this.FormDialogServ.open("/partials/gridExample/form.html", dialogOptions).result
       .then(record => this.data.push(record));
   }
 
@@ -87,5 +87,22 @@ export default class ListCtrl extends BaseCtrl {
       return row;
     }
   }
+  createDialog() {
+    // var parentElem = parentSelector ?
+    //   angular.element($document[0].querySelector('.modal-demo ' + parentSelector)) : undefined;
+    var modalInstance = this.$uibModal.open({
+      template: require('./simpleDialog.html')
+      //controller: 'ModalInstanceCtrl',
+      //controllerAs: '$ctrl',
+      //size: size,
+      //appendTo: parentElem
+    });
+
+    // modalInstance.result.then(function (selectedItem) {
+    //   $ctrl.selected = selectedItem;
+    // }, function () {
+    //   $log.info('Modal dismissed at: ' + new Date());
+    // });
+  };
 }
 

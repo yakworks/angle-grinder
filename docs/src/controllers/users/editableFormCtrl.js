@@ -75,3 +75,4 @@ export default class EditableFormCtrl extends BaseCtrl {
     return promise;
   }
 }
+EditableFormCtrl.initClass()

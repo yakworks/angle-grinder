@@ -10,12 +10,14 @@ forms.factory('FormDialogServ', [
   '$uibModal', 'pathWithContext',
   ($modal, pathWithContext) => ({
     open(templateUrl, dialogOptions) {
-      let scope
+      let scope, template
       if (dialogOptions == null) { dialogOptions = {} }
       if (angular.isDefined(dialogOptions.scope)) { ({ scope } = dialogOptions) }
+      if (angular.isDefined(dialogOptions.scope)) { ({ template } = dialogOptions) }
 
       return $modal.open({
-        templateUrl: pathWithContext(templateUrl),
+        //template: template,
+        templateUrl: pathWithContext(templateUrl?templateUrl:""),
         controller: 'FormDialogCtrl',
         keyboard: false, // do not close the dialog with ESC key
         backdrop: 'static', // do not close on click outside of the dialog
@@ -47,7 +49,7 @@ class FormDialogCtrl extends BaseCtrl {
 
   static initClass() {
     this.register(forms, 'FormDialogCtrl')
-    this.inject('$scope', '$rootScope', '$log', '$modalInstance', 'dialogOptions')
+    this.inject('$scope', '$rootScope', '$log', '$uibModalInstance', 'dialogOptions')
   }
 
   initialize() {
@@ -66,7 +68,7 @@ class FormDialogCtrl extends BaseCtrl {
   // Closes the dialog
   closeDialog() {
     this.$log.info('[ag] closing the dialog')
-    return this.$modalInstance.close(this.record)
+    return this.$uibModalInstance.close(this.record)
   }
 
   // If form is valid performs server side update
