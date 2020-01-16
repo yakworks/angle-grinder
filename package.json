@@ -7,7 +7,7 @@
     "build:dev": "webpack --config config/webpack.config.js --mode=development --bail --profile --progress",
     "build:wip": "webpack --config config/webpack.config.js --mode=production --bail --profile --progress",
     "build:docs": "webpack --mode=production --bail --profile --progress --content-base ./docs",
-    "build-ag-demo": "webpack --mode=production --bail --profile --progress --content-base ./examples/ag-demo-ui -o ./examples/ag-demo-grails/src/main/webapp",
+    "build-ag-demo": "webpack --mode=production --bail --profile --progress --content-base ./examples/ag-demo-ui --pathout ./examples/ag-demo-grails/src/main/webapp",
     "build:app": "webpack --bail --profile --progress --mode=production",
     "clean": "rimraf dist && rimraf build",
     "test": "karma start tests/karma.conf.js --single-run --no-auto-watch --no-sandbox $*",
