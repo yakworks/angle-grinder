@@ -55,4 +55,5 @@ deps upgrades, many needed for umd modules
 Notes for migration:
 - lets get RCM master converted to js first.
 - IsFalsy and DeepPick, DeepDiff got moved to just imports
-- 
+- ui.bootstrap after 0.14 $modalInstance -> $uibModalInstance
+

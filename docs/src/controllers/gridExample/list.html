@@ -4,26 +4,24 @@
   <div class="ag-panel">
     <div class="navbar navbar-default  navbar-toolbar navbar-grid">
       <div class="navbar-inner position-relative with-selected-pointer with-grid-options">
-          <button data-target=".navbar-collapse" data-toggle="collapse" class="navbar-toggle">
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-          </button>
           <div class="collapse navbar-collapse no-padding" >
             <ul class="nav navbar-nav">
               <li class="menu-arrow"><i class="icon-selected-pointer"></i></li>
               <li>
-                <a uib-tooltip="Export to Excel" ag-grid-xls-export=""></a>
+                <a ag-grid-xls-export=""></a>
               </li>
               <li>
-                <a ng-click="massUpdate()" uib-tooltip="Mass Update"><i class="fa fa-edit"></i></a>
+                <a ng-click="massUpdate()" uib-tooltip="Mass Update" >
+                  <i class="fa fa-edit"></i></a>
               </li>
             </ul>
             <ul class="nav navbar-nav">
               <li class="divider-vertical"></li>
               <li>
-                <a ng-click="createRecord()" ag-new-button href="">
-                </a>
+                <a ng-click="createRecord()" ag-new-button ></a>
+              </li>
+              <li>
+                <a ng-click="$ctrl.createDialog()" >new ui dialog</a>
               </li>
             </ul>
             <ag-panel-states>

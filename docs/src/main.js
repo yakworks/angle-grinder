@@ -43,7 +43,7 @@ emod.directive('app', app)
 
 emod.directive('navbarTop', () => {
   return {
-    template: require('./templates/navbar/navbarTop.html'),
+    template: require('./templates/navbarTop.html'),
     //controller: 'AppCtrl',
     //controllerAs: 'appCtrl'
   }

@@ -1,6 +1,6 @@
 import angular from 'angular'
 import ngRoute from 'angular-route'
-import 'angular-ui-bootstrap'
+import uibModName from 'angular-ui-bootstrap'
 import ngScroll from 'angular-scroll'
 import ConfirmationDialogServ from './services/ConfirmationDialogServ'
 import _ from 'lodash'
@@ -8,8 +8,7 @@ import _ from 'lodash'
 const MOD_NAME = 'ag.common'
 export default MOD_NAME
 var common = angular.module(MOD_NAME, [
-  'ui.bootstrap.modal',
-  'ui.bootstrap.popover',
+  uibModName,
   ngRoute,
   ngScroll // Scroll
 ])
@@ -50,3 +49,8 @@ common.value('camelize', str => str.replace(/(\-|\.|_|\s)+(.)?/g, function(match
 
 // Due to changes in angular 1.6 see https://docs.angularjs.org/guide/migration#commit-aa077e8
 common.config(['$locationProvider', $locationProvider => $locationProvider.hashPrefix('')])
+
+//FIX the bad location on popover
+common.config(function($uibTooltipProvider) {
+  $uibTooltipProvider.options({appendToBody: true})
+})

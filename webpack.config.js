@@ -42,14 +42,14 @@ module.exports = function(env, argv) {
           //default: false,
           //vendors: false,
           jquery: {
-            test: /[\\/]node_modules[\\/](jquery|free-jqgrid|Select2|moment|toastr|sweetalert|eonasdan)/,
+            test: /[\\/]node_modules[\\/](jquery|free-jqgrid|Select2|moment|toastr|sweetalert|eonasdan).*\.js/,
             chunks: "all",
             name: `jquery-libs${minDescriptor}`,
             priority: 20, //A module can belong to multiple cache groups. The optimization will prefer the cache group with a higher priority
             enforce: true //says to always build chunk and ignore min/max size stuff
           },
           vendor: {
-            test: /node_modules/,
+            test: /node_modules[\\/].*\.js/,
             chunks: "all",
             name: `vendor-libs${minDescriptor}`,
             priority: 10, //lower priority so it won't pick up jquery
@@ -77,9 +77,7 @@ module.exports = function(env, argv) {
         {
           test: /\.less$/,
           use: [
-            {
-              loader: styleLoader // creates style nodes from JS strings
-            },
+            { loader: styleLoader },// creates style nodes from JS strings
             {
               loader: 'css-loader', // translates CSS into CommonJS
               options: { sourceMap: true }
@@ -91,8 +89,20 @@ module.exports = function(env, argv) {
           ],
         },
         {
-          test: /\.(png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot)$/,
+          test: /\.(png|jpg|jpeg|gif|svg)$/,
           loader: 'file-loader'
+        },
+        {
+          test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+          use: [
+            {
+              loader: 'file-loader',
+              options: {
+                name: '[name].[ext]',
+                outputPath: 'fonts/'
+              }
+            }
+          ]
         },
         {
           test: /\.html$/,

@@ -40,3 +40,4 @@ export default class FormCtrl extends BaseCtrl {
     return user.delete({success: onSuccess});
   }
 }
+FormCtrl.initClass()

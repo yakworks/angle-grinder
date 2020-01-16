@@ -1,4 +1,4 @@
-import BaseCtrl from '../../../../src/scripts/utils/BaseCtrl'
+import BaseCtrl from '~/scripts/utils/BaseCtrl'
 
 export default class ListCtrl extends BaseCtrl {
   static initClass() {
@@ -21,10 +21,11 @@ export default class ListCtrl extends BaseCtrl {
     );
 
     return this.MassUpdateMixin(this.$scope, {
-      templateUrl: "/templates/users/massUpdateForm.html",
+      template: require("./massUpdateForm.html"),
       controller: "users.MassUpdateFormCtrl",
       gridName: "usersGrid"
     }
     );
   }
 }
+ListCtrl.initClass()

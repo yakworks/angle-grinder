@@ -14,23 +14,24 @@ angular.module(exAppMod).config([
       {redirectTo: "/examples/gridExample"})
 
     .when("/examples/gridExample", {
-      template: require("./templates/gridExample/list.html"),
-      controller: "gridExample.ListCtrl"
+      template: require("./controllers/gridExample/list.html"),
+      controller: "gridExample.ListCtrl",
+      controllerAs: "$ctrl"
     }).when("/examples/usersDialog", {
-      template: require("./templates/usersDialog/list.html"),
+      template: require("./controllers/usersDialog/list.html"),
       controller: "usersDialog.ListCtrl"
     }).when("/examples/users", {
-      template: require("./templates/users/list.html"),
+      template: require("./controllers/users/list.html"),
       controller: "users.ListCtrl"
     }).when("/examples/users/create", {
-      template: require("./templates/users/form.html"),
+      template: require("./controllers/users/form.html"),
       controller: "users.FormCtrl",
       resolve: { user: ["Users", Users => new Users()]
     }
     })
 
     .when("/examples/users/:id", {
-      template: require("./templates/users/show.html"),
+      template: require("./controllers/users/show.html"),
       controller: "users.ShowCtrl",
       resolve: { user: [
         "$route", "userResolver", ($route, userResolver) => userResolver($route.current.params.id)
@@ -39,7 +40,7 @@ angular.module(exAppMod).config([
     })
 
     .when("/examples/users/:id/edit", {
-      template: require("./templates/users/form.html"),
+      template: require("./controllers/users/form.html"),
       controller: "users.FormCtrl",
       resolve: { user: [
         "$route", "userResolver", ($route, userResolver) => userResolver($route.current.params.id)
@@ -48,16 +49,16 @@ angular.module(exAppMod).config([
     })
 
     .when("/examples/fileUpload", {
-      template: require("./templates/fileUpload/index.html"),
+      template: require("./controllers/fileUpload/index.html"),
       controller: "fileUpload.IndexCtrl"
     }).when("/examples/tabs", {
-      template: require("./templates/tabs/index.html"),
+      template: require("./controllers/tabs/index.html"),
       controller: "tabs.IndexCtrl"
     }).when("/examples/panels", {
-      template: require("./templates/panels/index.html"),
+      template: require("./controllers/panels/index.html"),
       controller: "panels.IndexCtrl"
     }).when("/examples/xeditable", {
-      template: require("./templates/xeditable/index.html"),
+      template: require("./controllers/xeditable/index.html"),
       controller: "xeditable.IndexCtrl"
     }).otherwise({redirectTo: "/"})
 ]);

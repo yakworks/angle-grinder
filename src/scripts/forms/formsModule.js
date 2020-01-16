@@ -5,27 +5,12 @@ import alerts from '../alerts'
 import agPathWithContext from '../pathWithContext'
 import xeditable from 'angular-xeditable'
 import _ from 'lodash'
-import 'angular-ui-bootstrap'
+import uibModName from 'angular-ui-bootstrap'
 
 const MOD_NAME = 'angleGrinder.forms'
 export default MOD_NAME
 var forms = angular.module(MOD_NAME, [
-  'ui.bootstrap.collapse',
-  'ui.bootstrap.accordion',
-  'ui.bootstrap.alert',
-  'ui.bootstrap.buttons',
-  'ui.bootstrap.carousel',
-  'ui.bootstrap.dateparser',
-  'ui.bootstrap.position',
-  'ui.bootstrap.dropdown',
-  'ui.bootstrap.stackedMap',
-  'ui.bootstrap.modal',
-  'ui.bootstrap.pagination',
-  'ui.bootstrap.progressbar',
-  'ui.bootstrap.rating',
-  'ui.bootstrap.tabs',
-  'ui.bootstrap.tpls',
-  'ui.bootstrap.tooltip',
+  uibModName,
   xeditable,
   agPathWithContext,
   agCommon,
