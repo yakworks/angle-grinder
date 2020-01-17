@@ -6,7 +6,9 @@ const autoprefixer = require('autoprefixer')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-var path = require("path");
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+//const CleanWebpackPlugin = require('clean-webpack-plugin')
+const path = require("path");
 
 
 module.exports = function(env, argv) {
@@ -64,16 +66,21 @@ module.exports = function(env, argv) {
       rules: [
         { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/},
         {
-          test: /\.css$/,
+          test: /\.(scss|css|sass)$/,
           use: [
-            {
-              loader: styleLoader
-            },
-            {
-              loader: 'css-loader',
-              options: { sourceMap: true }
-            },
-            //'postcss-loader'
+            { loader: styleLoader },
+            // translates CSS into CommonJS
+            { loader: 'css-loader', options: { sourceMap: true } },
+            // Runs compiled CSS through postcss for vendor prefixing
+            { loader: 'postcss-loader', options: { sourceMap: true } },
+            { loader: 'sass-loader',
+              options: {
+                sourceMap: true,
+                sassOptions: {
+                  outputStyle: 'compressed', //try expanded too
+                }
+              }
+            }
           ]
         },
         {
@@ -84,6 +91,10 @@ module.exports = function(env, argv) {
               loader: 'css-loader', // translates CSS into CommonJS
               options: { sourceMap: true }
             },
+            { // Runs compiled CSS through postcss for vendor prefixing
+              loader: 'postcss-loader',
+              options: { sourceMap: true }
+            },
             {
               loader: 'less-loader', // compiles Less to CSS
               options: { sourceMap: true }
@@ -91,16 +102,27 @@ module.exports = function(env, argv) {
           ],
         },
         {
-          test: /\.(png|jpg|jpeg|gif|woff(2)?|ttf|eot|svg)$/,
-          use: [
-            {
-              loader: 'file-loader',
-              options: {
-                name: '[name].[ext]',
-                outputPath: 'assets/'
-              }
+          // Load all images as base64 encoding if they are smaller than 8192 bytes
+          test: /\.(png|jpg|gif)$/,
+          use: [{
+            loader: 'url-loader',
+            options: {
+              // On development we want to see where the file is coming from, hence we preserve the [path]
+              name: '[path][name].[ext]?hash=[hash:20]',
+              limit: 8192
             }
-          ]
+          }]
+        },
+        {
+          // Load all icons
+          test: /\.(eot|woff|woff2|svg|ttf)([\?]?.*)$/,
+          use: [{
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+              outputPath: 'assets/'
+            }
+          }]
         },
         {
           test: /\.html$/,
@@ -112,31 +134,55 @@ module.exports = function(env, argv) {
       ] //end rules
     },
     plugins:[
-      new webpack.LoaderOptionsPlugin({
-        test: /\.scss$/i,
-        options: {
-          postcss: {
-            plugins: [autoprefixer]
-          }
-        }
-      }),
+      // new webpack.LoaderOptionsPlugin({
+      //   test: /\.scss$/i,
+      //   options: {
+      //     postcss: {
+      //       plugins: [autoprefixer]
+      //     }
+      //   }
+      // }),
       new HtmlWebpackPlugin({
         template: `${CONTENT_PUBLIC}/index.html`,
         //inject: 'body'
       }),
       new CopyWebpackPlugin([{
         from: path.resolve(CONTENT_PUBLIC)
-      }])
-    ]
-  }
-  //if(isProd){
-    cfg.plugins.push(
+      }]),
       new MiniCssExtractPlugin({
         filename: 'assets/[name].css',
         allChunks: true
       })
+    ],
+    //command line options
+    bail: true, //Fail out on the first error --bail
+    profile: false
+  }
+  if(isProd){
+    cfg.plugins.push(
+      new OptimizeCssAssetsPlugin({
+        cssProcessor: require('cssnano'),
+        cssProcessorOptions: {
+          map: {
+            inline: false,
+          },
+          discardComments: {
+            removeAll: true
+          },
+          discardUnused: false
+        },
+        canPrint: true
+      })
     )
-  //}
+  }
+  cfg.devServer = {
+    compress: true, //gzips before serving so we can see file size
+    port: 3000,
+    // historyApiFallback: true,
+    //inline: false, //default:true script will be inserted in your bundle to take care of live reloading
+
+  }
+
   return cfg
 
   // let devConfig = getConfig(false)

@@ -2,7 +2,7 @@ import angular from 'angular'
 
 const dataGenerator = angular.module("exampleApp.dataGenerator", []);
 
-const randomGen = {
+export let randomGen = {
   range(min, max) {
     return Math.floor((Math.random() * (max - min)) + min);
   },
