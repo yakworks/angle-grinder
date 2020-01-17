@@ -8,6 +8,7 @@ function importAll (r) {
   r.keys().forEach(r);
 }
 importAll(require.context('./unit/angleGrinder/', true, /\.js$/))
+importAll(require.context('./unit/docs/', true, /\.js$/))
 
 //longer esm method
 // import * as utils1 from './unit/angleGrinder/utils/*.spec'

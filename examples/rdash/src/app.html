@@ -1,0 +1,16 @@
+<div class="wrapper" ng-controller="MasterCtrl">
+
+  <div id="page-wrapper" ng-class="{'open': toggle}" ng-cloak>
+
+    <sidebar-paper></sidebar-paper>
+
+    <div class="main-panel">
+
+      <navbar-top></navbar-top>
+
+      <!-- Main Content -->
+      <div ui-view class="content"></div>
+
+    </div><!-- End Content Wrapper -->
+  </div><!-- End Page Wrapper -->
+</div>
