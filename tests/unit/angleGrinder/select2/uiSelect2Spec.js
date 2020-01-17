@@ -13,7 +13,7 @@ angular.module(uiselect2).directive('injectTransformers', [ function () {
       var local = scope.$eval(attr.injectTransformers);
 
       if (!angular.isObject(local) || !angular.isFunction(local.fromModel) || !angular.isFunction(local.fromElement)) {
-          throw "The injectTransformers directive must be bound to an object with two functions (`fromModel` and `fromElement`)";
+        throw "The injectTransformers directive must be bound to an object with two functions (`fromModel` and `fromElement`)";
       }
 
       ngModel.$parsers.push(local.fromElement);
@@ -114,35 +114,25 @@ describe('uiSelect2', function () {
   }
 
   describe('with a <select> element', function () {
-    describe('compiling this directive', function () {
-      it('should throw an error if we have no model defined', function () {
-        expect(function(){
-          compile('<select type="text" ui-select2></select>');
-        }).to.throw();
-      });
-      it('should create proper DOM structure', function () {
-        var element = compile('<select ui-select2 ng-model="foo"></select>');
-        expect(element.siblings().is('div.select2-container')).to.be.true
-      });
-      it('should not modify the model if there is no initial value', function(){
-        //TODO
-      });
-    });
-    describe('when model is changed programmatically', function(){
-      describe('for single select', function(){
-        it('should set select2 to the value', function(){
+
+    describe('when model is changed programmatically', function() {
+      describe('for single select', function () {
+        it('should set select2 to the value', function () {
           scope.foo = 'First';
           var element = compile('<select ui-select2 ng-model="foo"><option>First</option><option>Second</option></select>');
           expect(element.select2('val')).to.equal('First');
           scope.$apply('foo = "Second"');
           expect(element.select2('val')).to.equal('Second');
         });
-        xit('should handle falsey values', function(){
+        it('should handle falsey values', function () {
           scope.foo = 'First';
           var element = compile('<select ui-select2="{allowClear:true}" ng-model="foo"><option>First</option><option>Second</option></select>');
           expect(element.select2('val')).to.equal('First');
+          console.log("22222222222222222222222222222222222222222222222222222222222")
           scope.$apply('foo = false');
+          console.log("foo 22222222222222222222222222222222222222222222222222222222222")
           expect(element.select2('val')).to.be.null
+          console.log("33333 22222222222222222222222222222222222222222222222222222222222")
           scope.$apply('foo = "Second"');
           scope.$apply('foo = null');
           expect(element.select2('val')).to.be.null

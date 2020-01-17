@@ -38,5 +38,5 @@ app.filter('localDate', ['agDate', (agDate) => function(input) {
 // date with time and no timezone formated to the minutes
 app.filter('localDateTime', () => function(input) {
   if (isFalsy(input)) { return '' }
-  return moment(input).format('MM/DD/YYYY h:mma')
+  return moment.utc(input).format('MM/DD/YYYY h:mma')
 })

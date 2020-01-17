@@ -2,6 +2,7 @@ var webpackConfig = require('./karma.webpack.js');
 
 // Reference: http://karma-runner.github.io/0.12/config/configuration-file.html
 module.exports = function karmaConfig (config) {
+  process.env.TZ = 'Etc/UTC'; // some tests requires UTC timezone to pass
   // default test file
   let testFile = 'tests/tests.all.js'
   // the following allow us to do `yarn test --tests singleTestFile*` or `yarn test --tests /common/*`
