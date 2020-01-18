@@ -1,0 +1,543 @@
+<!-- START CONTAINER FLUID -->
+<div class="container-fluid container-fixed-lg">
+    <ul class="breadcrumb">
+        <li>
+            <a>Home</a>
+        </li>
+        <li><a class="active">Portlets</a>
+        </li>
+    </ul>
+    <!-- END BREADCRUMB -->
+    <!-- START PANEL -->
+    <div class="panel panel-transparent">
+        <div class="panel-heading ">
+            <div class="panel-title">Pages Portlets
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="col-md-4 no-padding">
+                <div class="p-r-30">
+                    <h3>Effortless Customization</h3>
+                    <br>
+                    <p>Portlets are pluggable UI components that are managed and displayed in a web portal. Portlets in Pages are created by reusing the <a href="http://getbootstrap.com/components/#panels">panels</a> introduced in Bootstrap to enable effortless customization.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-8 sm-no-padding">
+                <div class="panel panel-transparent">
+                    <div class="panel-body no-padding">
+                        <div id="portlet-advance" class="panel panel-default" pg-portlet on-refresh="refreshWithErrorTest('#portlet-advance')">
+                            <div class="panel-heading ">
+                                <div class="panel-title">Portlet Title
+                                </div>
+                                <div class="panel-controls">
+                                    <ul>
+                                        <li>
+                                            <div class="dropdown">
+                                                <a id="portlet-settings" data-target="#" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
+                                                    <i class="portlet-icon portlet-icon-settings "></i>
+                                                </a>
+                                                <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="portlet-settings">
+                                                    <li><a>API</a>
+                                                    </li>
+                                                    <li><a>Preferences</a>
+                                                    </li>
+                                                    <li><a>About</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                        <li><a href="" data-toggle="collapse" class="portlet-collapse"><i class="portlet-icon portlet-icon-collapse"></i></a>
+                                        </li>
+                                        <li><a href="" data-toggle="refresh" class="portlet-refresh"><i class="portlet-icon portlet-icon-refresh"></i></a>
+                                        </li>
+                                        <li><a href="" data-toggle="maximize" class="portlet-maximize"><i class="portlet-icon portlet-icon-maximize"></i></a>
+                                        </li>
+                                        <li><a href="" data-toggle="close" class="portlet-close"><i class="portlet-icon portlet-icon-close"></i></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <h3>
+                                                <span class="semi-bold">Advance</span> Tools</h3>
+                                <p>We have crafted Pages Portlets to suit any use case. Add a maximize button <i class="pg-fullscreen"></i> into your portlets controls bar to make the portlets go full-screen. This will come handy if you want to show lot of content inside a portlets and want to give the content some room to breath</p>
+                                <br>
+                                <div>
+                                    <div class="profile-img-wrapper m-t-5 inline">
+                                        <img width="35" height="35" ui-jq="unveil" data-src-retina="assets/img/profiles/avatar_small2x.jpg" data-src="assets/img/profiles/avatar_small.jpg" alt="" src="assets/img/profiles/avatar_small2x.jpg">
+                                        <div class="chat-status available">
+                                        </div>
+                                    </div>
+                                    <div class="inline m-l-10">
+                                        <p class="small hint-text m-t-5">VIA senior product manage
+                                            <br>for UI/UX at REVOX</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END PANEL -->
+</div>
+<!-- END CONTAINER FLUID -->
+<!-- START CONTAINER FLUID -->
+<div class="container-fluid container-fixed-lg">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-transparent">
+                <div class="panel-heading">
+                    <div class="panel-title">Portlet Tools
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div pg-portlet class="panel panel-default" id="portlet-basic" on-refresh="refreshTest('#portlet-basic')">
+                                <div class="panel-heading ">
+                                    <div class="panel-title">Portlet Title
+                                    </div>
+                                    <div class="panel-controls">
+                                        <ul>
+                                            <li><a href="" data-toggle="collapse" class="portlet-collapse"><i class="portlet-icon portlet-icon-collapse"></i></a>
+                                            </li>
+                                            <li><a href="" data-toggle="refresh" class="portlet-refresh"><i class="portlet-icon portlet-icon-refresh"></i></a>
+                                            </li>
+                                            <li><a href="" data-toggle="close" class="portlet-close"><i class="portlet-icon portlet-icon-close"></i></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="panel-body">
+                                    <h3>
+                                                    <span class="semi-bold">Basic</span> Tools</h3>
+                                    <p>Basic Portlet tools include a slide toggle button <i class="portlet-icon portlet-icon-collapse"></i>, refresh button <i class="portlet-icon portlet-icon-refresh"></i> and a close button <i class="portlet-icon portlet-icon-close"></i> All these are fully customizable and come with callback functions to integrate with your code. Clicking on the refresh button will simulate an AJAX call.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="panel panel-default" pg-portlet>
+                                <div class="panel-heading">
+                                    <div class="panel-title">Portlet One
+                                    </div>
+                                    <div class="panel-controls">
+                                        <ul>
+                                            <li><a href="" data-toggle="close" class="portlet-close"><i class="portlet-icon portlet-icon-close"></i></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="panel-body">
+                                    <h3>
+                                                    <span class="semi-bold">Without</span> Scroll</h3>
+                                    <p>When it comes to digital design, the lines between functionality, aesthetics, and psychology are inseparably blurred. Without the constraints of the physical world, there’s no natural form to fall back on, and every bit of constraint and affordance</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="panel panel-default" pg-portlet>
+                                <div class="panel-heading">
+                                    <div class="panel-title">Portlet Two
+                                    </div>
+                                    <div class="panel-controls">
+                                        <ul>
+                                            <li><a href="" data-toggle="close" class="portlet-close"><i class="portlet-icon portlet-icon-close"></i></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="scrollable" ui-jq="scrollbar" ui-options="{
+            ignoreOverlay: false
+        }">
+                                        <div class="demo-portlet-scrollable">
+                                            <h3>
+                                                            <span class="semi-bold">With</span> Scroll</h3>
+                                            <p>When it comes to digital design, the lines between functionality, aesthetics, and psychology are inseparably blurred. Without the constraints of the physical world, there’s no natural form to fall back on, and every bit of constraint and affordance must be introduced intentionally. Good design makes a product useful. A product is bought to be used. It has to satisfy certain criteria, not only functional, but also psychological and aesthetic. Good design emphasizes the usefulness of a product whilst disregarding anything that could possibly detract from it. It’s always obvious when design is an afterthought. The hallmarks of the engineering-first approach are everywhere: inscrutable interfaces, convoluted workflows, user guides the size of The Iliad. This was the dominant approach for the first several decades of personal computing, and it’s left its mark in the form of software designed with its creators in mind, rather than its users.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END CONTAINER FLUID -->
+<!-- START CONTAINER FLUID -->
+<div class="container-fluid container-fixed-lg">
+    <div class="panel panel-transparent">
+        <div class="panel-heading">
+            <div class="panel-title">Style Options
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading separator">
+                            <div class="panel-title">Portlet Three
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <h3>
+                                                    <span class="semi-bold">With</span> Separator</h3>
+                            <p>When it comes to digital design, the lines between functionality, aesthetics, and psychology are inseparably blurred. Without the constraints of the physical world, there’s no natural form to fall back on, and every bit of constraint and affordance must be introduced intentionally. Good design makes a product useful. A product is bought to be used. </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="panel panel-transparent">
+                        <div class="panel-heading">
+                            <div class="panel-title">Portlet Four
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <h3>
+                                                    <span class="semi-bold">Transparent</span>
+                                                </h3>
+                            <p>When it comes to digital design, the lines between functionality, aesthetics, and psychology are inseparably blurred. Without the constraints of the physical world, there’s no natural form to fall back on, and every bit of constraint and affordance must be introduced intentionally. Good design makes a product useful. A product is bought to be used.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="panel panel-default bg-success">
+                        <div class="panel-heading separator">
+                            <div class="panel-title">Portlet Three
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <h3>
+                                                    <span class="semi-bold">With</span> Separator</h3>
+                            <p class="text-black hint-text">When it comes to digital design, the lines between functionality, aesthetics, and psychology are inseparably blurred. Without the constraints of the physical world, there’s no natural form to fall back on, and every bit of constraint and affordance must be introduced intentionally. Good design makes a product useful. A product is bought to be used.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END CONTAINER FLUID -->
+<!-- START CONTAINER FLUID -->
+<div class="container-fluid container-fixed-lg">
+    <!-- START PANEL -->
+    <div class="panel panel-transparent">
+        <div class="panel-body">
+            <div class="col-md-4 no-padding">
+                <div class="p-r-30">
+                    <h3>SVG animated progress indicators</h3>
+                    <br>
+                    <p>Pages comes with two types of inderminate progress indicators: linear and circular. These have been created using animated SVGs to support various screen sizes and retina displays. We have integrated them into portlets too.
+                    </p>
+                    <div class="inline">
+                        <p class="small hint-text">
+                            <br> <a href="progress.html">More about progress &amp; activity indicators</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8 sm-no-padding">
+                <div class="panel panel-transparent">
+                    <div class="panel-body no-padding">
+                        <div pg-portlet id="portlet-circular-minimal" class="panel panel-default" progress="circle-lg" overlay-opacity="0.6" on-refresh="refreshTest('#portlet-circular-minimal')">
+                            <div class="panel-heading ">
+                                <div class="panel-title">Portlet Title
+                                </div>
+                                <div class="panel-controls">
+                                    <ul>
+                                        <li><a data-toggle="refresh" class="portlet-refresh" href="" data-toggle="refresh"><i class="portlet-icon portlet-icon-refresh-lg-master"></i></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <h3>
+                                <span class="semi-bold">Minimal</span> Portlet</h3>
+                                <p>Click on the refresh icon to simulate an AJAX call and to see an animated circular progress indicatorabove the portlet. This is the Pages default progress indicator for portlets. Don't like this style? Simply change the style by setting portlet options.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END PANEL -->
+</div>
+<!-- END CONTAINER FLUID -->
+<!-- START CONTAINER FLUID -->
+<div class="container-fluid container-fixed-lg">
+    <div class="panel panel-transparent">
+        <div class="panel-heading">
+            <div class="panel-title">Portlet Progress indicators
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <div pg-portlet id="portlet-linear" class="panel panel-default" progress="bar" on-refresh="refreshTest('#portlet-linear')">
+                        <div class="panel-heading ">
+                            <div class="panel-title">Portlet Title
+                            </div>
+                            <div class="panel-controls">
+                                <ul>
+                                    <li><a class="portlet-collapse" href="" data-toggle="collapse"><i class="portlet-icon portlet-icon-collapse"></i></a>
+                                    </li>
+                                    <li><a class="portlet-refresh" href="" data-toggle="refresh"><i class="portlet-icon portlet-icon-refresh"></i></a>
+                                    </li>
+                                    <li><a class="portlet-close" href="" data-toggle="close"><i class="portlet-icon portlet-icon-close"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <h3>
+                                <span class="semi-bold">Linear</span> Progress</h3>
+                            <p>Click on the refresh icon to simulate an AJAX call and to see an animated progress bar indicator above the portlet. These progress bars come in seven different colors that are available in the Pages contextual color scheme.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div pg-portlet id="portlet-circular" class="panel panel-default" progress="circle" on-refresh="refreshTest('#portlet-circular')">
+                        <div class="panel-heading ">
+                            <div class="panel-title">Portlet Title
+                            </div>
+                            <div class="panel-controls">
+                                <ul>
+                                    <li><a class="portlet-collapse" href="" data-toggle="collapse"><i class="portlet-icon portlet-icon-collapse"></i></a>
+                                    </li>
+                                    <li><a class="portlet-refresh" href="" data-toggle="refresh"><i class="portlet-icon portlet-icon-refresh"></i></a>
+                                    </li>
+                                    <li><a class="portlet-close" href="" data-toggle="close"><i class="portlet-icon portlet-icon-close"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <h3>
+                                <span class="semi-bold">Circular</span> Progress</h3>
+                            <p>Click on the refresh icon to simulate an AJAX call and to see an animated circular progress indicatorabove the portlet. This is the Pages default progress indicator for portlets. Don't like this style? Simply change the style by setting portlet options.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END CONTAINER FLUID -->
+<!-- START CONTAINER FLUID -->
+<div class="container-fluid container-fixed-lg">
+    <div class="panel panel-transparent">
+        <div class="panel-heading">
+            <div class="panel-title">Portlet Progress Indicator colors
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <div pg-portlet id="portlet-linear-color" class="panel panel-default" progress='bar' progress-color='success' on-refresh="refreshTest('#portlet-linear-color')">
+                        <div class="panel-heading ">
+                            <div class="panel-title">Portlet Title
+                            </div>
+                            <div class="panel-controls">
+                                <ul>
+                                    <li><a class="portlet-collapse" href="" data-toggle="collapse"><i class="portlet-icon portlet-icon-collapse"></i></a>
+                                    </li>
+                                    <li><a class="portlet-refresh" href="" data-toggle="refresh"><i class="portlet-icon portlet-icon-refresh"></i></a>
+                                    </li>
+                                    <li><a class="portlet-close" href="" data-toggle="close"><i class="portlet-icon portlet-icon-close"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <h3>
+                                <span class="semi-bold">Linear</span> Progress</h3>
+                            <p>Click on the refresh icon to simulate an AJAX call and to see an animated progress bar indicator above the portlet. These progress bars come in seven different colors that are available in the Pages contextual color scheme.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div pg-portlet id="portlet-circular-color" class="panel panel-default" progress="circle" progress-color="success" on-refresh="refreshTest('#portlet-circular-color')">
+                        <div class="panel-heading ">
+                            <div class="panel-title">Portlet Title
+                            </div>
+                            <div class="panel-controls">
+                                <ul>
+                                    <li><a class="portlet-collapse" href="" data-toggle="collapse"><i class="portlet-icon portlet-icon-collapse"></i></a>
+                                    </li>
+                                    <li><a class="portlet-refresh" href="" data-toggle="refresh"><i class="portlet-icon portlet-icon-refresh"></i></a>
+                                    </li>
+                                    <li><a class="portlet-close" href="" data-toggle="close"><i class="portlet-icon portlet-icon-close"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <h3>
+                                <span class="semi-bold">Circular</span> Progress</h3>
+                            <p>Click on the refresh icon to simulate an AJAX call and to see an animated circular progress indicatorabove the portlet. This is the Pages default progress indicator for portlets. Don't like this style? Simply change the style by setting portlet options.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div pg-portlet id="portlet-error" class="panel panel-default" on-refresh="refreshWithErrorTest('#portlet-error')">
+                        <div class="panel-heading">
+                            <div class="panel-title">Portlet Title
+                            </div>
+                            <div class="panel-controls">
+                                <ul>
+                                    <li><a class="portlet-collapse" href="" data-toggle="collapse"><i class="portlet-icon portlet-icon-collapse"></i></a>
+                                    </li>
+                                    <li><a class="portlet-refresh" href="" data-toggle="refresh"><i class="portlet-icon portlet-icon-refresh"></i></a>
+                                    </li>
+                                    <li><a class="portlet-close" href="" data-toggle="close"><i class="portlet-icon portlet-icon-close"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <h3>
+                                            Portlet with <span class="semi-bold">Errors</span></h3>
+                            <p>Anything that can go wrong will go wrong. Click on the refresh icon in the portlet controls to the top right to see how an error message can be displayed inside a portlet. Recommended to use with failed AJAX callbacks that are triggered from a portlet.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END CONTAINER FLUID -->
+<!-- START CONTAINER FLUID -->
+<div class="container-fluid container-fixed-lg">
+    <div class="panel panel-transparent">
+        <div class="panel-heading">
+            <div class="panel-title">Draggable Portlets
+            </div>
+        </div>
+        <div class="panel-body sortable">
+            <div class="row">
+                <div class="col-md-6 sortable-column" ui-jq="sortable" ui-options='{connectWith: ".sortable .row .col-md-6",
+        handle: ".panel-heading",
+        cancel: ".portlet-close",
+        placeholder: "sortable-box-placeholder round-all",
+        forcePlaceholderSize: true,
+        tolerance: "pointer",
+        forceHelperSize: true,
+        revert: true,
+        helper: "original",
+        opacity: 0.8,
+        iframeFix: false}'>
+                    <div class="panel panel-default bg-danger" pg-portlet>
+                        <div class="panel-heading">
+                            <div class="panel-title">Draggable Portlet
+                            </div>
+                            <div class="panel-controls">
+                                <ul>
+                                    <li><a class="portlet-collapse" href="" data-toggle="collapse"><i class="portlet-icon portlet-icon-collapse"></i></a>
+                                    </li>
+                                    <li><a class="portlet-refresh" href="" data-toggle="refresh"><i class="portlet-icon portlet-icon-refresh"></i></a>
+                                    </li>
+                                    <li><a class="portlet-close" href="" data-toggle="close"><i class="portlet-icon portlet-icon-close"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <h3 class="text-white">
+                                <span class="semi-bold">Drag</span> me!</h3>
+                            <p class="text-white">When it comes to digital design, the lines between functionality, aesthetics, and psychology are inseparably blurred. Without the constraints of the physical world, there’s no natural form to fall back on, and every bit of constraint and affordance must be introduced intentionally. Good design makes a product useful. A product is bought to be used. It has to satisfy certain criteria, not only functional, but also psychological and aesthetic. </p>
+                        </div>
+                    </div>
+                    <div class="panel panel-default bg-complete" pg-portlet>
+                        <div class="panel-heading">
+                            <div class="panel-title">Draggable Portlet
+                            </div>
+                            <div class="panel-controls">
+                                <ul>
+                                    <li><a class="portlet-collapse" href="" data-toggle="collapse"><i class="portlet-icon portlet-icon-collapse"></i></a>
+                                    </li>
+                                    <li><a class="portlet-refresh" href="" data-toggle="refresh"><i class="portlet-icon portlet-icon-refresh"></i></a>
+                                    </li>
+                                    <li><a class="portlet-close" href="" data-toggle="close"><i class="portlet-icon portlet-icon-close"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <h3 class="text-white">
+                                <span class="semi-bold">Drag</span> me!</h3>
+                            <p class="text-white">When it comes to digital design, the lines between functionality, aesthetics, and psychology are inseparably blurred. Without the constraints of the physical world, there’s no natural form to fall back on, and every bit of constraint and affordance must be introduced intentionally. Good design makes a product useful. A product is bought to be used. It has to satisfy certain criteria, not only functional, but also psychological and aesthetic. </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 sortable-column" ui-jq="sortable" ui-options='{connectWith: ".sortable .row .col-md-6",
+        handle: ".panel-heading",
+        cancel: ".portlet-close",
+        placeholder: "sortable-box-placeholder round-all",
+        forcePlaceholderSize: true,
+        tolerance: "pointer",
+        forceHelperSize: true,
+        revert: true,
+        helper: "original",
+        opacity: 0.8,
+        iframeFix: false}'>
+                    <div class="panel panel-default bg-primary" pg-portlet>
+                        <div class="panel-heading">
+                            <div class="panel-title">Draggable Portlet
+                            </div>
+                            <div class="panel-controls">
+                                <ul>
+                                    <li><a class="portlet-collapse text-white" href="" data-toggle="collapse"><i class="portlet-icon portlet-icon-collapse"></i></a>
+                                    </li>
+                                    <li><a class="portlet-refresh text-white" href="" data-toggle="refresh"><i class="portlet-icon portlet-icon-refresh"></i></a>
+                                    </li>
+                                    <li><a class="portlet-close text-white" href="" data-toggle="close"><i class="portlet-icon portlet-icon-close"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <h3 class="text-white">
+                                <span class="semi-bold">Drag</span> me!</h3>
+                            <p class="text-white">When it comes to digital design, the lines between functionality, aesthetics, and psychology are inseparably blurred. Without the constraints of the physical world, there’s no natural form to fall back on, and every bit of constraint and affordance must be introduced intentionally. Good design makes a product useful. A product is bought to be used. It has to satisfy certain criteria, not only functional, but also psychological and aesthetic. </p>
+                        </div>
+                    </div>
+                    <div class="panel panel-default bg-success" pg-portlet>
+                        <div class="panel-heading">
+                            <div class="panel-title">Draggable Portlet
+                            </div>
+                            <div class="panel-controls">
+                                <ul>
+                                    <li><a class="portlet-collapse" href="" data-toggle="collapse"><i class="portlet-icon portlet-icon-collapse"></i></a>
+                                    </li>
+                                    <li><a class="portlet-refresh" href="" data-toggle="refresh"><i class="portlet-icon portlet-icon-refresh"></i></a>
+                                    </li>
+                                    <li><a class="portlet-close" href="" data-toggle="close"><i class="portlet-icon portlet-icon-close"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <h3 class="text-white">
+                                <span class="semi-bold">Drag</span> me!</h3>
+                            <p class="text-white">When it comes to digital design, the lines between functionality, aesthetics, and psychology are inseparably blurred. Without the constraints of the physical world, there’s no natural form to fall back on, and every bit of constraint and affordance must be introduced intentionally. A product is bought to be used. It has to satisfy certain criteria, not only functional, but also psychological and aesthetic.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END CONTAINER FLUID -->

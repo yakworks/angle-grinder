@@ -1,0 +1,9 @@
+/*
+ *  jQuery Menu Clipper - v0.0.1
+ *  Clips overflowing items from a navigation bar and adds them into a dropdown
+ *  https://github.com/praveenaj/jquery-menuclipper
+ *
+ *  Made by Praveena Sarathchandra
+ *  Under MIT License
+ */
+!function(a,b){function c(b,c){this.element=b,this.options=a.extend({},e,c),this._defaults=e,this._name=d,this.init()}var d="menuclipper",e={menu:".menuclipper-menu",item:".menuclipper-menu > li",bufferWidth:100};c.prototype={init:function(){this.refresh()},refresh:function(){var b=a(this.element),c=a(this.options.item),d=b.outerWidth(!0),e=0,f=-1,g=this;c.each(function(b){var c=a(this).actual("outerWidth",{includeMargin:!0});c+e+g.options.bufferWidth<d?(e+=c,a(this).removeClass("hidden")):(0>f&&(f=b),a(this).addClass("hidden"))});var h=c.splice(f,c.length),i=a(a(".menuclipper-dropdown").length?".menuclipper-dropdown":'<div class="dropdown menuclipper-dropdown"/>');!a(".menuclipper-dropdown").length&&i.append('<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></button>');var j=a(a(".menuclipper-dropdown-menu").length?".menuclipper-dropdown-menu":'<ul class="dropdown-menu menuclipper-dropdown-menu pull-right" role="menu"/>');if(f>-1){i.show(),i.insertAfter(c.eq(f-1)),j.empty();for(var k in h){var l='<li role="presentation">'+a(h[k]).html()+"</li>";j.append(l)}!a(".menuclipper-dropdown-menu").length&&i.append(j)}else i.hide()}},a.fn[d]=function(b){return this.each(function(){a.data(this,"plugin_"+d)||a.data(this,"plugin_"+d,new c(this,b))})};var f;a(b).on("resize",function(){clearTimeout(f),f=setTimeout(function(){var b=a(".menuclipper");b.each(function(){var b=a(this).data("plugin_"+d);b.refresh()})},100)})}(jQuery,window,document);

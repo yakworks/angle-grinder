@@ -1,0 +1,48 @@
+/*------------------------------------------------------------------
+Pages IE 9 Fixes
+Optional File
+------------------------------------------------------------------ */
+.cs-select .cs-options{
+    left:0;
+}
+.cs-select .cs-placeholder{
+    width: auto;
+}
+.cs-select > span::after, .cs-select .cs-selected span::after{
+    top: 7px;
+}
+.cs-skin-slide .cs-options{
+    top: 0;
+    border: 1px solid #ccc;
+    background: #fff;
+}
+
+.select2-container .select2-choice,
+.select2-container .select2-choice .select2-arrow,
+.select2-container-multi .select2-choices .select2-search-choice,
+.select2-container-active .select2-choice, .select2-container-active .select2-choices{
+    filter: none;
+}
+
+.nav-tabs-fillup > li > a:after{
+    background-color: transparent;
+    border-color: transparent;
+}
+.nav-tabs-fillup > li > a{
+    border-color: transparent;
+}
+.nav-tabs-fillup > li.active > a,
+.nav-tabs-fillup > li.active > a:hover,
+.nav-tabs-fillup > li.active > a:focus{
+    background-color: #10CFBD;
+}
+
+.calendar .calendar-container .week-view .tble {
+    width: 100%;
+}
+
+.calendar-container {
+    .grid{
+        overflow-x:hidden;
+    }
+}

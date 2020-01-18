@@ -1,0 +1,74 @@
+<!-- START JUMBOTRON -->
+<div class="jumbotron" data-pages="parallax">
+    <div class="container-fluid container-fixed-lg">
+        <div class="inner">
+            <!-- START BREADCRUMB -->
+            <ul class="breadcrumb">
+                <li>
+                    <a href="">UI Elements</a>
+                </li>
+                <li><a href="" class="active">Nestables</a>
+                </li>
+            </ul>
+            <!-- END BREADCRUMB -->
+            <div class="row">
+                <div class="col-lg-7 col-md-6 ">
+                    <!-- START PANEL -->
+                    <div class="full-height">
+                        <div class="panel-body text-center">
+                            <img class="image-responsive-height demo-mw-600" src="assets/img/demo/nest.png" alt="">
+                        </div>
+                    </div>
+                    <!-- END PANEL -->
+                </div>
+                <div class="col-lg-5 col-md-6 ">
+                    <!-- START PANEL -->
+                    <div class="panel panel-transparent">
+                        <div class="panel-body">
+                            <h3 class="">
+                                           Nestables
+                                        </h3>
+                            <p>This is powered by the JQuery nestable plugin, we have customized it to suite the design scheme and color pallete
+                            </p>
+                            <br>
+                            <div class="col-sm-12 no-padding">
+                                <a href="http://dbushell.github.io/Nestable/" target="_blank" class="btn btn-complete">See Plugin</a>
+                                <p class="small hinted-text inline p-l-10 no-margin col-middle">
+                                    http://dbushell.github.io/Nestable/
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END PANEL -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END JUMBOTRON -->
+<!-- START CONTAINER FLUID -->
+<div class="container-fluid container-fixed-lg">
+    <div class="row">
+        <div class="col-sm-6">
+            <!-- START PANEL -->
+            <div class="panel panel-transparent">
+                <div class="panel-heading">
+                    <div class="panel-title">Basic Nestables
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <p>Netables and also draggable using touch devices, you can simply create on by with an Ordered list, further reading please reffer documentation</p>
+                    <div ng-nestable ng-model="items">
+                        <div>
+                            <!-- this element is the template for each menu item -->
+                            <!-- the $item is available on scope and is the reference to the menu item object -->
+                            {{$item}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END PANEL -->
+        </div>
+    </div>
+</div>
+<!-- END CONTAINER FLUID -->

@@ -1,0 +1,190 @@
+<div class="quickview-wrapper builder hidden-sm hidden-xs" id="builder" ng-controller="BuilderOptionsCtrl" ng-class="{ 'open' : includes('app.builder') }">
+    <div class="p-l-30 p-r-30 ">
+        <a class="builder-close quickview-toggle pg-close" data-toggle="quickview" data-toggle-element="#builder" href=""></a>
+        <a class="builder-toggle" data-toggle="quickview" data-toggle-element="#builder"><i class="pg pg-theme"></i></a>
+        <ul class="nav nav-tabs nav-tabs-simple nav-tabs-primary m-t-10" ng-show="includes('app.builder')">
+            <li class="active">
+                <a data-toggle="tab" href="#tabLayouts" pg-tab>Layouts</a>
+            </li>
+            <li>
+                <a data-toggle="tab" href="#tabThemes" pg-tab>Colors</a>
+            </li>
+            <li>
+                <a data-toggle="tab" href="#tabContent" pg-tab>Content</a>
+            </li>
+        </ul>
+        <div class="tab-content m-b-30 p-l-30">
+            <div class="tab-pane active " id="tabLayouts" ng-show="includes('app.builder')">
+                <div class="scrollable">
+                    <div class="p-l-10 p-r-50">
+                        <h5 class="semi-bold">
+          Layout options
+        </h5>
+                        <p class="no-margin">
+                            Builder make it easier
+                        </p>
+                        <p class="small hint-text m-b-20">
+                            Customize and Preview your dashboard.
+                        </p>
+                        <div class="row p-b-35">
+                            <div class="col-xs-6 ">
+                                <a class="btn-toggle-layout fs-12 " href="" ng-click="setMenu('menuDefault',1)" ng-class="{'active':builder.layout.menu == 'menuDefault' }"><img alt="Menu divided icon" class="m-b-15" src="assets/img/demo/menu_divided_con.png" data-src="assets/img/demo/menu_divided_con.png" data-src-retina="assets/img/demo/menu_divided_con_2x.png" width="126" height="95">
+                                    <span class="text-dark m-t-5">Divided Header & Condensed / Quick
+            Menu</span>
+                                </a>
+                            </div>
+                            <div class="col-xs-6">
+                                <a class="btn-toggle-layout fs-12" href="" ng-click="setMenu('menuBelow',2)" ng-class="{'active':builder.layout.menu == 'menuBelow'}">
+                                    <img alt="Full header icon" class="m-b-15 " src="assets/img/demo/full_header_con.png" data-src-retina="assets/img/demo/full_header_con_2x.png" width="126" height="95"> <span class="text-dark m-t-5">Full Width Header & Condensed/ Quick
+            Menu</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row p-b-10 ">
+                            <div class="col-xs-6">
+                                <a class="btn-toggle-layout fs-12" href="" ng-click="setMenu('menuPinned',3)" ng-class="{'active':builder.layout.menu == 'menuPinned'}">
+                                    <img alt="Menu divided" class="m-b-15" src="assets/img/demo/menu_divided.png" data-src="assets/img/demo/menu_divided.png" data-src-retina="assets/img/demo/menu_divided_2x.png" width="126" height="95"> <span class="text-dark m-t-5">Divided Header & Fixed/Pinned Menu</span>
+                                </a>
+                            </div>
+                            <div class="col-xs-6">
+                                <a class="btn-toggle-layout fs-12" href="" ng-click="setMenu('menuPinnedBelow',4)" ng-class="{'active':builder.layout.menu == 'menuPinnedBelow'}"><img alt="Full header" class="m-b-15" src="assets/img/demo/full_header.png" data-src="assets/img/demo/full_header.png" data-src-retina="assets/img/demo/full_header_2x.png" width="126" height="95">
+                                    <span class="text-dark m-t-5">Full Width Header & Fixed/Pinned
+            Menu</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane " id="tabThemes" ng-class="{ 'active': !includes('app.builder') }">
+                <div class="scrollable full-height">
+                    <div class="p-l-10 p-r-50">
+                        <h5 class="semi-bold">
+            Color Options
+          </h5>
+                        <p class=" hint-text no-margin">
+                            Color makes it different
+                        </p>
+                        <p class="small hint-text m-b-20">
+                            Customize and Preview your dashboard.
+                        </p>
+                        <a href="" class="btn-toggle-theme b-a b-grey theme-selector m-b-30" ng-click="setTheme('default',1)" ng-class="{'active':builder.theme == 'default' }">
+                            <img alt="Theme default" src="assets/img/demo/theme_default.png" class="image-responsive-height">
+                            <div class="p-l-15 p-r-20 p-b-10 p-t-10">
+                                <p class="no-margin">
+                                    <span class="block font-montserrat text-uppercase fs-12 bold">Default</span>
+                                    <span class="fs-11">pages default color palette</span>
+                                </p>
+                            </div>
+                        </a>
+                        <a href="" class="btn-toggle-theme b-a b-grey theme-selector m-b-30" ng-click="setTheme('corporate',2)" ng-class="{'active':builder.theme == 'corporate' }">
+                            <img alt="Theme corporate" src="assets/img/demo/theme_corporate.png" class="image-responsive-height">
+                            <div class="p-l-15 p-r-20 p-b-10 p-t-10">
+                                <p class="no-margin">
+                                    <span class="block font-montserrat text-uppercase fs-12 bold">Corporate</span>
+                                    <span class="fs-11">give your an a profesional look</span>
+                                </p>
+                            </div>
+                        </a>
+                        <a href="" class="btn-toggle-theme b-a b-grey theme-selector m-b-30" ng-click="setTheme('retro',3)" ng-class="{'active':builder.theme == 'retro' }">
+                            <img alt="Theme retro" src="assets/img/demo/theme_retro.png" class="image-responsive-height">
+                            <div class="p-l-15 p-r-20 p-b-10 p-t-10">
+                                <p class="no-margin">
+                                    <span class="block font-montserrat text-uppercase fs-12 bold">Retro</span>
+                                    <span class="fs-11">calm color palette</span>
+                                </p>
+                            </div>
+                        </a>
+                        <a href="" class="btn-toggle-theme b-a b-grey theme-selector m-b-30" ng-click="setTheme('unlax',4)" ng-class="{'active':builder.theme == 'unlax' }">
+                            <img alt="Theme unlax" src="assets/img/demo/theme_unlax.png" class="image-responsive-height">
+                            <div class="p-l-15 p-r-20 p-b-10 p-t-10">
+                                <p class="no-margin">
+                                    <span class="block font-montserrat text-uppercase fs-12 bold">Unlax</span>
+                                    <span class="fs-11">calm color palette</span>
+                                </p>
+                            </div>
+                        </a>
+                        <a href="" class="btn-toggle-theme b-a b-grey theme-selector m-b-30" ng-click="setTheme('vibes',5)" ng-class="{'active':builder.theme == 'vibes' }">
+                            <img alt="Thmeme vibes" src="assets/img/demo/theme_vibes.png" class="image-responsive-height">
+                            <div class="p-l-15 p-r-20 p-b-10 p-t-10">
+                                <p class="no-margin">
+                                    <span class="block font-montserrat text-uppercase fs-12 bold">Vibes</span>
+                                    <span class="fs-11">calm color palette</span>
+                                </p>
+                            </div>
+                        </a>
+                        <a href="" class="btn-toggle-theme b-a b-grey theme-selector m-b-30" ng-click="setTheme('abstract',6)" ng-class="{'active':builder.theme == 'abstract' }">
+                            <img alt="Theme abstract" src="assets/img/demo/theme_abstract.png" class="image-responsive-height">
+                            <div class="p-l-15 p-r-20 p-b-10 p-t-10">
+                                <p class="no-margin">
+                                    <span class="block font-montserrat text-uppercase fs-12 bold">Abstract</span>
+                                    <span class="fs-11">calm color palette</span>
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane " id="tabContent" ng-show="includes('app.builder')">
+                <div class="scrollable">
+                    <div class="p-l-10 p-r-50">
+                        <h5 class="semi-bold">
+          Content
+        </h5>
+                        <p class=" hint-text no-margin">
+                            Builder make it easier
+                        </p>
+                        <p class="small hint-text m-b-20">
+                            Customize and Preview your dashboard.
+                        </p>
+                        <ul class="p-b-50">
+                            <li class="full-width m-b-30">
+                                <a class="btn-toggle-content content-select" href="" ng-click="setContent('plainContent',1)" ng-class="{'active':content == 'plainContent'}">
+                                    <img alt="Blank" class="m-b-10 image-responsive-height" src="assets/img/demo/blank.svg"> Plain
+                                </a>
+                            </li>
+                            <li class="full-width m-b-30">
+                                <a class="btn-toggle-content content-select" href="" ng-click="setContent('parallaxCoverpage',2)" ng-class="{'active':content == 'parallaxCoverpage'}">
+                                    <img alt="Parallax cover" class="m-b-10 image-responsive-height" src="assets/img/demo/paralax_cover.gif"> Coverpage with parallax</a>
+                            </li>
+                            <li class="full-width m-b-30">
+                                <a class="btn-toggle-content content-select" href="" ng-click="setContent('fullheightParallax',3)" ng-class="{'active':content == 'fullheightParallax'}">
+                                    <img alt="Parallax full" class="m-b-10 image-responsive-height" src="assets/img/demo/paralax_full.gif"> Full height coverpage with parallax</a>
+                            </li>
+                            <li class="full-width m-b-30">
+                                <a class="btn-toggle-content content-select" href="" ng-click="setContent('titleParallax',4)" ng-class="{'active':content == 'titleParallax'}">
+                                    <img alt="Parallax title" class="m-b-10 image-responsive-height" src="assets/img/demo/paralax_title.gif"> Page title parallax
+                                </a>
+                            </li>
+                            <li class="full-width m-b-30">
+                                <a class="btn-toggle-content content-select" href="" ng-click="setContent('columns-3-9',5)" ng-class="{'active':content == 'columns-3-9'}">
+                                    <img alt="3_9" class="m-b-10 image-responsive-height" src="assets/img/demo/3_9.svg"> Column view (3 : 9)</a>
+                            </li>
+                            <li class="full-width m-b-30">
+                                <a class="btn-toggle-content content-select" href="" ng-click="setContent('columns-9-3',6)" ng-class="{'active':content == 'columns-9-3'}">
+                                    <img alt="9_3" class="m-b-10 image-responsive-height" src="assets/img/demo/9_3.svg"> Column view (9 : 3)</a>
+                            </li>
+                            <li class="full-width m-b-30">
+                                <a class="btn-toggle-content content-select" href="" ng-click="setContent('columns-6-6',7)" ng-class="{'active':content == 'columns-6-6'}">
+                                    <img alt="6_6" class="m-b-10 image-responsive-height" src="assets/img/demo/6_6.svg"> Column view (6 : 6)</a>
+                            </li>
+                            <li class="full-width m-b-30">
+                              <a class="btn-toggle-content content-select" href="" ng-click="setContent('horizontal-menu',8)" ng-class="{'active':content == 'horizontal-menu'}">
+                                 <img alt="6_6" class="m-b-10 image-responsive-height" src="assets/img/demo/6_6.svg">
+                                Horizontal Menu
+                              </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="pull-bottom p-b-15 p-l-15 p-r-15 b-t b-grey p-t-15 m-l-15 m-r-15 bg-white builder-footer" ng-show="includes('app.builder')">
+            <div class="pull-right">
+                <form ng-submit="exportCode()" id="exportForm">
+                    <button id="btnExport" class="btn btn-cons btn-primary" type="submit">Export</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

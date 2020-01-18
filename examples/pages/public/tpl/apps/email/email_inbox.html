@@ -1,0 +1,107 @@
+<div class="split-view">
+    <!-- START EMAILS LIST -->
+    <div class="split-list" ng-controller="EmailListCtrl"> 
+        <a class="list-refresh" href=""><i class="fa fa-refresh"></i></a>
+        <div data-email="list" ui-jq="ioslist">
+            <!-- START EMAIL LIST SORTED BY DATE -->
+                <div class="list-view-group-container" ng-repeat="email in emails">
+                    <div class="list-view-group-header"><span>{{email.group}}</span></div>
+
+                    <ul class="no-padding">
+                    	<li ng-repeat="item in email.list" class="item padding-15" data-email-id="{{item.id}}" ng-click="view(emailId)" ng-init="emailId = item.id"> 
+                                    <div class="thumbnail-wrapper d32 circular bordered {{item.color}}"> 
+                                        <img width="40" height="40" alt="" ng-src="{{item.dpRetina}}"> 
+                                    </div> 
+                                    <div class="checkbox  no-margin p-l-10"> 
+                                        <input type="checkbox" value="1" id="emailcheckbox-{{$parent.$index}}-{{$index}}"> 
+                                        <label for="emailcheckbox-{{$parent.$index}}-{{$index}}"></label> 
+                                    </div> 
+                                    <div class="inline m-l-15"> 
+                                        <p class="recipients no-margin hint-text small">{{formatTo(item.to)}}</p> 
+                                        <p class="subject no-margin">{{item.subject}}</p> 
+                                        <p class="body no-margin"> 
+                                         {{formatBody(item.body)}}
+                                        </p> 
+                                    </div> 
+                                    <div class="datetime">{{item.time}}</div> 
+                                    <div class="clearfix"></div> 
+                                </li>
+                    </ul>
+            </div>
+            <!-- END EMAIL LIST SORTED BY DATE -->
+        </div>
+    </div>
+    <!-- END EMAILS LIST -->
+    <!-- START OPENED EMAIL -->
+    <div data-email="opened" class="split-details" ng-controller="EmailViewCtrl">
+        <div class="no-result" ng-hide="email">
+            <h1>No email has been selected</h1>
+        </div>
+         <div class="email-content-wrapper" ng-show="email">
+            <div class="actions-wrapper menuclipper bg-master-lightest" ui-jq="menuclipper" ui-options="{bufferWidth: 20}">
+                <ul class="actions menuclipper-menu no-margin p-l-20 ">
+                    <li class="visible-sm-inline-block visible-xs-inline-block">
+                        <a ng-click="showInbox()" class="email-list-toggle"><i class="fa fa-angle-left"></i> All Inboxes
+                                    </a>
+                    </li>
+                    <li class="no-padding "><a href="" class="text-info">Reply</a>
+                    </li>
+                    <li class="no-padding "><a href="">Reply all</a>
+                    </li>
+                    <li class="no-padding "><a href="">Forward</a>
+                    </li>
+                    <li class="no-padding "><a href="">Mark as read</a>
+                    </li>
+                    <li class="no-padding "><a href="" class="text-danger">Delete</a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="email-content">
+                <div class="email-content-header">
+                    <div class="thumbnail-wrapper d48 circular bordered">
+                        <img width="40" height="40" alt="" ui-jq="unveil" data-src-retina="assets/img/profiles/avatar2x.jpg" data-src="assets/img/profiles/avatar.jpg" src="assets/img/profiles/avatar2x.jpg">
+                    </div>
+                    <div class="sender inline m-l-10">
+                        <p class="name no-margin bold">{{email.from}}
+                        </p>
+                        <p class="datetime no-margin">{{email.datetime}}</p>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="subject m-t-20 m-b-20 semi-bold">{{email.subject}}
+                    </div>
+                    <div class="fromto">
+                        <div class="pull-left">
+                            <div class="btn-group dropdown-default">
+                                <a class="btn dropdown-toggle btn-small btn-rounded" data-toggle="dropdown" href="">
+                                            David Nester
+                                            <span class="caret"></span>
+                                            </a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="">Action</a>
+                                    </li>
+                                    <li><a href="">Friend</a>
+                                    </li>
+                                    <li><a href="">Report</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <label class="inline">
+                                <span class="muted">&nbsp;&nbsp;to</span>
+                                <span class=" small-text">johnsmith@skyace.com</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="email-content-body m-t-20" ng-bind-html="emailHTML" >
+                </div>
+                <div class="wysiwyg5-wrapper b-a b-grey m-t-30">
+                    <textarea class="email-reply" placeholder="Reply" reply-editor></textarea>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- END OPENED EMAIL -->
+</div>

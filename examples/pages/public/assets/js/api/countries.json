@@ -1,0 +1,109 @@
+{
+	"mapwidth":"1600",
+	"mapheight":"1000",
+	"categories":[
+
+	],
+	"levels":[
+		{
+			"id":"countries",
+			"title":"Countries",
+			"map":"assets/img/maps/pages-map.svg",
+			"minimap":"assets/img/maps/us-small.jpg",
+			"locations":[
+			{
+					"id":"au",
+					"title":"Australia",
+					"description":"<strong>AU</strong> Australia",
+					"action": "tooltip",
+					"pin": "marker green",
+					"x":"0.84330813",
+					"y":"0.744442"
+				},
+				{
+					"id":"ca",
+					"title":"Canada",
+					"description":"<strong>CA</strong> Canada",
+					"action": "tooltip",
+					"pin": "marker-alt red",
+					"x":"0.19892563",
+					"y":"0.278466"
+				},
+				{
+					"id":"ru",
+					"title":"Russia",
+					"description":"<strong>RU</strong> Russia",
+					"action": "tooltip",
+					"pin": "pulse blue",
+					"x":"0.77368313",
+					"y":"0.206653"
+				},
+				{
+					"id":"br",
+					"title":"Brazil",
+					"description":"<strong>BR</strong> Brazil",
+					"action": "tooltip",
+					
+					"pin": "pulse-alt",
+					"x":"0.32112063",
+					"y":"0.677865"
+				},
+				{
+					"id":"us",
+					"title":"United States",
+					"description":"<strong>US</strong> United States",
+					"action": "tooltip",
+					
+					"pin": "marker",
+					"x":"0.20611313",
+					"y":"0.39528375"
+				},
+				{
+					"id":"fr",
+					"title":"France",
+					"description":"<strong>FR</strong> France",
+					"action": "tooltip",
+					
+					"pin": "marker-alt purple",
+					"x":"0.47772563",
+					"y":"0.379214"
+				},
+				{
+					"id":"jp",
+					"title":"Japan",
+					"description":"<strong>JP</strong> Japan",
+					"action": "tooltip",
+					
+					"pin": "marker red",
+					"x":"0.85154688",
+					"y":"0.435778"
+				},
+				{
+					"id":"za",
+					"title":"South Africa",
+					"description":"<strong>ZA</strong> South Africa",
+					"action": "tooltip",
+					
+					"pin": "marker red",
+					"x":"0.54246",
+					"y":"0.746012"
+				},
+				{
+					"id":"pt",
+					"title":"Portugal",
+					"description":"<strong>PT</strong> Portugal",
+					"action": "tooltip",
+					
+					"pin": "marker red",
+					"x":"0.45162625",
+					"y":"0.424397"
+				}
+
+				
+			]
+		}
+	],
+	"minimap":"true",
+	"sidebar":"true",
+	"zoomlimit":"4"
+}

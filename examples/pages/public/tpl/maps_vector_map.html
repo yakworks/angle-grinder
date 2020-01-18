@@ -1,0 +1,32 @@
+<div class="map-container full-width full-height relative">
+    <div class="map-controls">
+        <div class="pull-left">
+            <div class="btn-group btn-group-vertical" data-toggle="buttons-radio">
+                <button class="btn btn-xs"><i class="fa fa-plus"></i>
+                </button>
+                <button class="btn btn-xs"><i class="fa fa-minus"></i>
+                </button>
+            </div>
+            <br>
+            <a href="" class="btn btn-xs m-t-10 clear-map">
+                <i class="fa fa-arrows"></i>
+            </a>
+        </div>
+        <div class="pull-left m-l-15">
+            <form role="form">
+                <div pg-form-group class="form-group form-group-default input-group" style="width:150px">
+                    <label>Country</label>
+                    <div class="controls">
+                        <ui-select multiple ng-model="mapLocations" theme="select2" ng-disabled="disabled" style="width: 300px;" append-to-body="true">
+                            <ui-select-match placeholder="Select a location">{{$item}}</ui-select-match>
+                            <ui-select-choices repeat="location in locations | filter:$select.search">
+                                {{location.title}}
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div id="mapplic" mapplic></div>
+</div>

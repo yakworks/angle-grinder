@@ -1,0 +1,325 @@
+<!-- START CONTAINER FLUID -->
+<div class="container-fluid container-fixed-lg">
+    <!-- START BREADCRUMB -->
+    <ul class="breadcrumb">
+        <li>
+            <a href="">UI Elements</a>
+        </li>
+        <li><a href="" class="active">Form layouts</a>
+        </li>
+    </ul>
+    <!-- END BREADCRUMB -->
+    <div class="row">
+        <div class="col-lg-7 col-md-6 ">
+            <!-- START PANEL -->
+            <div class="panel panel-transparent">
+                <div class="panel-body">
+                    <form name="personal" id="form-personal" role="form" novalidate>
+                        <div class="row clearfix">
+                            <div class="col-sm-6">
+                                <div pg-form-group class="form-group form-group-default required" ng-class="{ 'has-error' : personal.firstName.$invalid && !personal.firstName.$pristine }">
+                                    <label>First name</label>
+                                    <input type="text" class="form-control" name="firstName" ng-model="user.firstName" required>
+                                </div>
+                                <label class="error" for="firstName" ng-show="personal.firstName.$invalid && !personal.firstName.$pristine">This field is required.</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <div pg-form-group class="form-group form-group-default" ng-class="{ 'has-error' : personal.lastName.$invalid && !personal.lastName.$pristine }">
+                                    <label>Last name</label>
+                                    <input type="text" class="form-control" name="lastName" ng-model="user.lastName" required>
+                                </div>
+                                <label class="error" for="lastName" ng-show="personal.lastName.$invalid && !personal.lastName.$pristine">This field is required.</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div pg-form-group class="form-group form-group-default input-group" ng-class="{ 'has-error' : personal.username.$invalid && !personal.username.$pristine }">
+                                    <label>Pages username</label>
+                                    <input type="text" class="form-control" name="username" placeholder="yourname.pages.com (this can be changed later)" ng-model="user.username" required>
+                                    <span class="input-group-addon">
+                                                       .pages.com
+                                                    </span>
+                                </div>
+                                <label class="error" for="username" ng-show="personal.username.$invalid && !personal.username.$pristine">This field is required.</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div pg-form-group class="form-group form-group-default" ng-class="{ 'has-error' : personal.password.$invalid && !personal.password.$pristine }">
+                                    <label>Password</label>
+                                    <input type="password" class="form-control" name="password" placeholder="Minimum of 4 characters." ng-model="user.password" required>
+                                </div>
+                                <label class="error" for="password" ng-show="personal.password.$invalid && !personal.password.$pristine">This field is required.</label>
+                                <label class="error" for="password" ng-show="personal.password.$error.minlength">Password should have at least 4 characters</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div pg-form-group class="form-group form-group-default" ng-class="{ 'has-error' : personal.email.$invalid && !personal.email.$pristine }">
+                                    <label>Email</label>
+                                    <input type="email" class="form-control" name="email" placeholder="We’ll send your login details to this address" ng-model="user.email" required>
+                                </div>
+                                <label class="error" for="email" ng-show="personal.email.$invalid && !personal.email.$pristine">Enter a valid email.</label>
+                            </div>
+                        </div>
+                        <p class="pull-left">
+                            I agree to the <a href="">Pages Terms</a> and <a href="">Privacy</a>.
+                        </p>
+                        <p class="pull-right">
+                            <a href="">Help? Contact Support</a>
+                        </p>
+                        <div class="clearfix"></div>
+                        <button class="btn btn-primary" type="submit" ng-disabled="personal.$invalid">Create a new account</button>
+                    </form>
+                </div>
+            </div>
+            <!-- END PANEL -->
+        </div>
+        <div class="col-lg-5 col-md-6">
+            <!-- START PANEL -->
+            <div class="panel panel-transparent">
+                <div class="panel-heading">
+                    <div class="panel-title">Validation
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <h3>Showcase and guide users with a <br>
+                            better User Interface &amp; Experience.</h3>
+                    <p>Forms are one of the most important components
+                        <br> when it comes to a dashboard. Recognizing that fact, users are
+                        <br>able work in a maximum content width.</p>
+                    <br>
+                    <p class="small hint-text m-t-5">VIA senior product manager
+                        <br> for UI/UX at REVOX</p>
+                    <button class="btn btn-primary btn-cons">More</button>
+                </div>
+            </div>
+            <!-- END PANEL -->
+        </div>
+    </div>
+</div>
+<!-- END CONTAINER FLUID -->
+<!-- START CONTAINER FLUID -->
+<div class="container-fluid container-fixed-lg bg-white">
+    <div class="row">
+        <div class="col-sm-5">
+            <!-- START PANEL -->
+            <div class="panel panel-transparent">
+                <div class="panel-heading">
+                    <div class="panel-title">Attached form layouts
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <h3>Attach your Forms to Organize 
+                                &amp; Create Contemporary feels</h3>
+                    <p>Despite the UI, We thought of the User experience, With attached From Layouts you can simply categories Important fields and prioritize them.</p>
+                    <br>
+                    <div>
+                        <div class="profile-img-wrapper m-t-5 inline">
+                            <img width="35" height="35" src="assets/img/profiles/avatar_small.jpg" alt="" data-src="assets/img/profiles/avatar_small.jpg" ui-jq="unveil" data-src-retina="assets/img/profiles/avatar_small2x.jpg">
+                            <div class="chat-status available">
+                            </div>
+                        </div>
+                        <div class="inline m-l-10">
+                            <p class="small hint-text">VIA senior product manage
+                                <br> for UI/UX at REVOX</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END PANEL -->
+        </div>
+        <div class="col-sm-7">
+            <!-- START PANEL -->
+            <div class="panel panel-transparent">
+                <div class="panel-body">
+                    <form id="form-project" role="form" autocomplete="off" name="project" novalidate>
+                        <p>Basic Information</p>
+                        <div class="form-group-attached">
+                            <div pg-form-group class="form-group form-group-default required" ng-class="{ 'has-error' : project.projectName.$invalid && !project.projectName.$pristine }">
+                                <label>Project name</label>
+                                <input type="text" class="form-control" name="projectName" ng-model="project_.projectName" ui-jq="popover" data-container="body" data-placement="top" data-content="This field is required" data-trigger="manual" validate-attached-form-element required>
+                            </div>
+                            <div class="row clearfix">
+                                <div class="col-sm-6">
+                                    <div pg-form-group class="form-group form-group-default required" ng-class="{ 'has-error' : project.firstName.$invalid && !project.firstName.$pristine }">
+                                        <label>First name</label>
+                                        <input type="text" class="form-control" name="firstName" ng-model="project_.firstName" ui-jq="popover" data-container="body" data-placement="top" data-content="This field is required" data-trigger="manual" validate-attached-form-element required>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div pg-form-group class="form-group form-group-default">
+                                        <label>Last name</label>
+                                        <input type="text" class="form-control" name="lastName">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="m-t-10">Advanced Information</p>
+                        <div class="form-group-attached">
+                            <div pg-form-group class="form-group form-group-default">
+                                <label>Investor <i class="fa fa-info text-complete m-l-5"></i>
+                                </label>
+                                <input type="text" class="form-control" name="investor">
+                            </div>
+                            <div class="row clearfix">
+                                <div class="col-sm-6">
+                                    <div pg-form-group class="form-group form-group-default required" ng-class="{ 'has-error' : project.startDate.$invalid && !project.startDate.$pristine }">
+                                        <label>Starting date</label>
+                                        <input id="start-date" type="text" class="form-control date" name="startDate" ng-model="project_.startDate" ui-jq="datepicker" ui-jq="popover" data-container="body" data-placement="top" data-content="This field is required" data-trigger="manual" validate-attached-form-element required>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div pg-form-group class="form-group form-group-default">
+                                        <label>Deadline</label>
+                                        <input id="end-date" type="text" class="form-control date" ui-jq="datepicker" name="endDate" ng-model="project_.endDate">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div pg-form-group class="form-group form-group-default required" ng-class="{ 'has-error' : project.url.$invalid && !project.startDate.$pristine }">
+                                        <label>Website</label>
+                                        <input type="text" class="form-control" name="url" ng-model="project_.url">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group form-group-default input-group">
+                                        <label class="inline">Availability</label>
+                                        <span class="input-group-addon bg-transparent">
+                                            <input type="checkbox" data-init-plugin="switchery" data-size="small" data-color="primary" checked="checked" />
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div pg-form-group class="form-group form-group-default input-group" ng-class="{ 'has-error' : project.budget.$invalid && !project.startDate.$pristine }">
+                                        <label>Budget</label>
+                                        <input type="number" class="form-control usd" name="budget" ng-model="project_.budget" ng-pattern="/^(\$?)(\d{1,3}(\,\d{3})*|(\d+))(\.\d{2})?$/" required>
+                                        <span class="input-group-addon">
+                                                       USD
+                                                    </span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div pg-form-group class="form-group form-group-default input-group" ng-class="{ 'has-error' : project.profit.$invalid && !project.startDate.$pristine }">
+                                        <label>Profit</label>
+                                        <input type="number" class="form-control usd" name="profit" ng-model="project_.profit" ng-pattern="/^(\$?)(\d{1,3}(\,\d{3})*|(\d+))(\.\d{2})?$/">
+                                        <span class="input-group-addon">
+                                                       USD
+                                                    </span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div pg-form-group class="form-group form-group-default input-group" ng-class="{ 'has-error' : project.revenue.$invalid && !project.startDate.$pristine }">
+                                        <label>Revenue</label>
+                                        <input type="number" class="form-control usd" name="revenue" ng-model="project_.revenue" ng-pattern="/^(\$?)(\d{1,3}(\,\d{3})*|(\d+))(\.\d{2})?$/">
+                                        <span class="input-group-addon">
+                                                       USD
+                                                    </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="pull-left">
+                            <div class="checkbox check-success  ">
+                                <input type="checkbox" checked="checked" value="1" id="checkbox-agree">
+                                <label for="checkbox-agree">I hereby certify that the information above is true and accurate</label>
+                            </div>
+                        </div>
+                        <br>
+                        <button class="btn btn-success" type="submit" ng-disabled="project.$invalid">Submit</button>
+                        <button class="btn btn-default"><i class="pg-close"></i> Clear</button>
+                    </form>
+                </div>
+            </div>
+            <!-- END PANEL -->
+        </div>
+    </div>
+</div>
+<!-- END CONTAINER FLUID -->
+<!-- START CONTAINER FLUID -->
+<div class="container-fluid container-fixed-lg">
+    <!-- START PANEL -->
+    <div class="panel panel-transparent">
+        <div class="panel-heading">
+            <div class="panel-title">Separated form layouts
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-sm-10">
+                    <h3>Simple but not simpler, Seperate your forms and create diversified info graphic</h3>
+                    <p>Want it to be more Descriptive and User Friendly, We Made it possible, Use Seperated Form Layouts Structure to Presentate your Form Fields.
+                    </p>
+                    <br>
+                    <p class="small hint-text">To Add A full Width Portlet - Class - portlet-full This can be used in any
+                        <br> widget or situation, Highly Recomended on Forms and tables</p>
+                    <form id="form-work" class="form-horizontal" role="form" autocomplete="off" name="work" novalidate>
+                        <div class="form-group">
+                            <label for="fname" class="col-sm-3 control-label">Name</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="fname" placeholder="Full name" name="name" ng-class="{'error': work.name.$invalid && !work.name.$pristine}" ng-model="work_.name" required>
+                                <label class="error" for="fname" ng-show="work.name.$invalid && !work.name.$pristine">This field is required.</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Your gender</label>
+                            <div class="col-sm-9">
+                                <div class="radio radio-success">
+                                    <input type="radio" value="male" name="optionyes" id="male" ng-model="work_.gender">
+                                    <label for="male">Male</label>
+                                    <input type="radio" checked="checked" value="female" name="optionyes" id="female" ng-model="work_.gender">
+                                    <label for="female">Female</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Work</label>
+                            <div class="col-sm-9">
+                                <p>Have you Worked at page Inc. before, Or joined the Pages Supirior Club?</p>
+                                <p class="hint-text small">If yes State which Place, if yes note date and Job CODE / Membership Number</p>
+                                <div class="row">
+                                    <div class="col-sm-5">
+                                        <input type="text" name="place" ng-model="work_.place" class="form-control" ng-class="{'error': work.place.$invalid && !work.place.$pristine}" required>
+                                        <label class="error" for="place" ng-show="work.place.$invalid && !work.place.$pristine">This field is required.</label>
+                                    </div>
+                                    <div class="col-sm-5 sm-m-t-10">
+                                        <input type="text" placeholder="Code/Number" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="position" class="col-sm-3 control-label">Position applying for</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="position" class="form-control" id="position" placeholder="Designation" ng-model="work_.position" ng-class="{'error': work.position.$invalid && !work.position.$pristine}" required>
+                                <label class="error" for="position" ng-show="work.position.$invalid && !work.position.$pristine">This field is required.</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="name" class="col-sm-3 control-label">Description</label>
+                            <div class="col-sm-9">
+                                <textarea class="form-control" id="name" placeholder="Briefly Describe your Abilities"></textarea>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p>I hereby certify that the information above is true and accurate. </p>
+                            </div>
+                            <div class="col-sm-9">
+                                <button class="btn btn-success" type="submit" ng-disabled="work.$invalid">Submit</button>
+                                <button class="btn btn-default"><i class="pg-close"></i> Clear</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END PANEL -->
+</div>
+<!-- END CONTAINER FLUID -->

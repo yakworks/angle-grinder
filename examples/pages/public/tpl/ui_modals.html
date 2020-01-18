@@ -1,0 +1,260 @@
+<!-- START JUMBOTRON -->
+<div class="jumbotron" data-pages="parallax">
+    <div class="container-fluid container-fixed-lg">
+        <div class="inner">
+            <!-- START BREADCRUMB -->
+            <ul class="breadcrumb">
+                <li>
+                    <a href="">UI Elements</a>
+                </li>
+                <li><a href="" class="active">Modals</a>
+                </li>
+            </ul>
+            <!-- END BREADCRUMB -->
+            <div class="container-md-height m-b-20">
+                <div class="row row-md-height">
+                    <div class="col-lg-7 col-md-6 col-md-height col-middle bg-white">
+                        <!-- START PANEL -->
+                        <div class="full-height">
+                            <div class="panel-body text-center">
+                                <img class="image-responsive-height demo-mw-400" src="assets/img/demo/modal_hero.gif" alt="">
+                            </div>
+                        </div>
+                        <!-- END PANEL -->
+                    </div>
+                    <div class="col-lg-5 col-md-height col-md-6 col-top">
+                        <!-- START PANEL -->
+                        <div class="panel panel-transparent">
+                            <div class="panel-heading">
+                                <div class="panel-title">Getting started
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <h3>A modal helps to displays content that temporarily blocks interactions with a web site</h3>
+                                <p>These are native boostrap modals and work as the same way as it does but more awesome with the added styles and animation giving the user more options to go to</p>
+                                <br>
+                                <div>
+                                    <div class="profile-img-wrapper m-t-5 inline">
+                                        <img width="35" height="35" src="assets/img/profiles/avatar_small.jpg" alt="" data-src="assets/img/profiles/avatar_small.jpg" ui-jq="unveil" data-src-retina="assets/img/profiles/avatar_small2x.jpg">
+                                        <div class="chat-status available">
+                                        </div>
+                                    </div>
+                                    <div class="inline m-l-10">
+                                        <p class="small hint-text m-t-5">VIA senior product manage
+                                            <br> for UI/UX at REVOX</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END PANEL -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END JUMBOTRON -->
+<!-- START CONTAINER FLUID -->
+<div class="container-fluid container-fixed-lg">
+    <div class="row">
+        <div class="col-sm-4">
+            <!-- START PANEL -->
+            <div class="panel panel-transparent">
+                <div class="panel-heading">
+                    <div class="panel-title">Boostrap Native Modals
+                    </div>
+                </div>
+                <div class="panel-body">
+                    Boostrap modals are something very functional and we began to think how to make something better even better. The modals were styled to suite pages color scheme and animation, we did not stop here we added more, Read more.
+                </div>
+            </div>
+            <!-- END PANEL -->
+        </div>
+        <div class="col-sm-4">
+            <!-- START PANEL -->
+            <div class="panel panel-transparent">
+                <div class="panel-heading">
+                    <div class="panel-title">Style and Animation
+                    </div>
+                </div>
+                <div class="panel-body">
+                    These modals are customized with new animations and style, now pages modals support up to 3 different versions and each version have small, medium and large modals. This helps you to make your app look even better
+                </div>
+            </div>
+            <!-- END PANEL -->
+        </div>
+        <div class="col-sm-4">
+            <!-- START PANEL -->
+            <div class="panel panel-transparent">
+                <div class="panel-heading">
+                    <div class="panel-title">Functional
+                    </div>
+                </div>
+                <div class="panel-body">
+                    We did not just go for the looks and compromise functionality, since they are boostrap modals they are responsive and fast and works on all screens.
+                </div>
+            </div>
+            <!-- END PANEL -->
+        </div>
+    </div>
+</div>
+<!-- END CONTAINER FLUID -->
+<!-- START CONTAINER FLUID -->
+<div class="container-fluid container-fixed-lg bg-white">
+    <div class="panel panel-transparent">
+        <div class="panel-heading">
+            <div class="panel-title">Boostrap Native Modals
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-lg-4 col-sm-6">
+                    <div class="panel panel-transparent">
+                        <div class="panel-heading no-padding">
+                            <div class="panel-title">
+                                Slide Up
+                            </div>
+                        </div>
+                        <div class="panel-body no-padding">
+                            <div class="m-b-15">
+                                <img alt="" src="assets/img/demo/1.svg" class="full-width">
+                            </div>
+                            <p>
+                                This modal slides in from the bottom and rests on the middle of the screen, to add this simply add the class
+                                <code>slide-up</code> to the <code>modal</code> div
+                            </p>
+                            <div class="radio radio-success inline">
+                                <input id="slideup_full" name="slideup_toggler" type="radio" value="full" ng-model="modal.slideUp">
+                                <label for="slideup_full">Large</label>
+                                <br>
+                                <input id="slideup_default" name="slideup_toggler" type="radio" value="default" ng-model="modal.slideUp" checked>
+                                <label for="slideup_default">Default</label>
+                                <br>
+                                <input id="slideup_small" name="slideup_toggler" type="radio" value="mini" ng-model="modal.slideUp">
+                                <label for="slideup_small">Small</label>
+                            </div>
+                            <button class="btn btn-green btn-lg pull-right bottom-right" id="btnToggleSlideUpSize" ng-click="toggleSlideUpSize()">Generate</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-6">
+                    <div class="column-body">
+                        <div class="panel panel-transparent">
+                            <div class="panel-heading no-padding">
+                                <div class="panel-title">
+                                    Stick Up
+                                </div>
+                            </div>
+                            <div class="panel-body no-padding">
+                                <div class="m-b-15">
+                                    <img alt="" src="assets/img/demo/2.svg" class="full-width">
+                                </div>
+                                <p>
+                                    This modal slides in from the top and rests on the top of the screen, to add this simply add the class
+                                    <code>stick-up</code> to the <code>modal</code> div
+                                </p>
+                                <div class="radio radio-success inline">
+                                    <input id="stickup_full" name="stickup_toggler" type="radio" value="full" ng-model="modal.stickUp">
+                                    <label for="stickup_full">Large</label>
+                                    <br>
+                                    <input id="stickup_default" name="stickup_toggler" type="radio" value="default" ng-model="modal.stickUp" checked>
+                                    <label for="stickup_default">Default</label>
+                                    <br>
+                                    <input id="stickup_small" name="stickup_toggler" type="radio" value="mini" ng-model="modal.stickUp">
+                                    <label for="stickup_small">Small</label>
+                                </div>
+                                <button class="btn btn-green btn-lg bottom-right" id="btnStickUpSizeToggler" ng-click="stickUpSizeToggler()">Generate</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 visible-lg">
+                    <div class="panel panel-transparent">
+                        <div class="panel-heading no-padding">
+                            <div class="panel-title">
+                                Slide Right
+                            </div>
+                        </div>
+                        <div class="panel-body no-padding">
+                            <div class="m-b-15">
+                                <img alt="" src="assets/img/demo/4.svg" class="full-width">
+                            </div>
+                            <p>
+                                This modal slides from the right side <code>slide-right</code> to the <code>modal</code> div
+                            </p>
+                            <button class="btn btn-green btn-lg pull-right" data-target="#modalSlideLeft" data-toggle="modal" ng-click="modalSlideLeft()">Generate</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 hidden-lg">
+                    <div class="panel panel-transparent">
+                        <div class="panel-heading no-padding">
+                            <div class="panel-title">
+                                Fill in Modal
+                            </div>
+                        </div>
+                        <div class="panel-body no-padding">
+                            <div class="m-b-15">
+                                <img alt="" src="assets/img/demo/3.svg" class="full-width">
+                            </div>
+                            <p>
+                                This modal zooms from the middle and fills in <code>fill-in</code> to the <code>modal</code> div
+                            </p>
+                            <button class="btn btn-green btn-lg pull-right" data-target="#modalFillIn" data-toggle="modal" id="btnFillSizeToggler" ng-click="fillSizeToggler()">Generate</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 hidden-lg">
+                    <div class="panel panel-transparent">
+                        <div class="panel-heading no-padding">
+                            <div class="panel-title">
+                                Slide Right
+                            </div>
+                        </div>
+                        <div class="panel-body no-padding">
+                            <div class="m-b-15">
+                                <img alt="" src="assets/img/demo/4.svg" class="full-width">
+                            </div>
+                            <p>
+                                This modal slides from the right side <code>slide-right</code> to the <code>modal</code> div
+                            </p>
+                            <button class="btn btn-green btn-lg pull-right" data-target="#modalSlideLeft" data-toggle="modal" ng-click="modalSlideLeft()">Generate</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- START PANEL -->
+        <div class="panel panel-transparent visible-lg">
+            <div class="panel-heading">
+                <div class="panel-title">
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-4 ">
+                        <div class="panel panel-transparent">
+                            <div class="panel-heading no-padding">
+                                <div class="panel-title">
+                                    Fill in Modal
+                                </div>
+                            </div>
+                            <div class="panel-body no-padding">
+                                <div class="m-b-15">
+                                    <img alt="" src="assets/img/demo/3.svg" class="full-width">
+                                </div>
+                                <p>
+                                    This modal zooms from the middle and fills in <code>fill-in</code> to the <code>modal</code> div
+                                </p>
+                                <button class="btn btn-green btn-lg pull-right" data-target="#modalFillIn" data-toggle="modal" id="btnFillSizeToggler2">Generate</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END PANEL -->
+    </div>
+</div>

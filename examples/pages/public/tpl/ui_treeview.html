@@ -1,0 +1,96 @@
+<!-- START JUMBOTRON -->
+<div class="jumbotron" data-pages="parallax">
+    <div class="container-fluid container-fixed-lg">
+        <div class="inner">
+            <!-- START BREADCRUMB -->
+            <ul class="breadcrumb">
+                <li>
+                    <a href="">UI Elements</a>
+                </li>
+                <li><a href="" class="active">Tree View</a>
+                </li>
+            </ul>
+            <!-- END BREADCRUMB -->
+            <div class="row">
+                <div class="col-lg-7 col-md-6 ">
+                    <!-- START PANEL -->
+                    <div class="panel panel-transparent">
+                        <div class="panel-heading">
+                            <div class="panel-title">Getting started
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5 col-md-6 ">
+                    <!-- START PANEL -->
+                    <div class="panel panel-transparent">
+                        <div class="panel-body">
+                            <h3 class="">
+                                            Tree view
+                                        </h3>
+                            <p>This is powered by Angular Bootstrap Nav Tree, most extensively used tree view directive which is easy use and customize, for further more we have explained how to set up you tree view on pages
+                            </p>
+                            <br>
+                            <a href="https://github.com/nickperkinslondon/angular-bootstrap-nav-tree" target="_blank" class="btn btn-complete">See Plugin</a>
+                            <p class="small hinted-text inline v-align-middle m-l-10">see the homepage 
+                                <br> https://github.com/nickperkinslondon/angular-bootstrap-nav-tree
+                            </p>
+                        </div>
+                    </div>
+                    <!-- END PANEL -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END JUMBOTRON -->
+<!-- START CONTAINER FLUID -->
+<div class="container-fluid container-fixed-lg">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="panel-title">Drag n Drop
+            </div>
+        </div>
+        <div class="panel-body">
+            <table>
+                <tr>
+                    <td style="vertical-align:top">
+                        <br>
+                        <button ng-click="try_changing_the_tree_data()" class="btn btn-default btn-sm">Change The Tree Definition</button>
+                        <br>
+                        <button ng-click="try_async_load()" class="btn btn-default btn-sm">Load Tree Data Asynchronously</button>
+                        <hr>
+                        <h5>Test the Tree Control API:</h5>
+                        <br>
+                        <button ng-click="my_tree.select_first_branch()" class="btn btn-default btn-sm">First Branch</button>
+                        <br>
+                        <button ng-click="my_tree.select_next_sibling()" class="btn btn-default btn-sm">Next Sibling</button>
+                        <button ng-click="my_tree.select_prev_sibling()" class="btn btn-default btn-sm">Prev Sibling</button>
+                        <br>
+                        <button ng-click="my_tree.select_next_branch()" class="btn btn-default btn-sm">Next Branch</button>
+                        <button ng-click="my_tree.select_prev_branch()" class="btn btn-default btn-sm">Prev Branch</button>
+                        <br>
+                        <button ng-click="my_tree.select_parent_branch()" class="btn btn-default btn-sm">Parent</button>
+                        <hr>
+                        <button ng-click="my_tree.expand_branch()" class="btn btn-default btn-sm">Expand</button>
+                        <button ng-click="my_tree.collapse_branch()" class="btn btn-default btn-sm">Collapse</button>
+                        <button ng-click="my_tree.expand_all()" class="btn btn-default btn-sm">Expand All</button>
+                        <button ng-click="my_tree.collapse_all()" class="btn btn-default btn-sm">Collapse All</button>
+                        <hr>
+                        <button ng-click="try_adding_a_branch()" class="btn btn-default btn-sm">Add Branch</button>
+                    </td>
+                    <td style="vertical-align:top">
+                        <div style="width:250px;margin-left:100px;background:whitesmoke;border:1px solid lightgray;border-radius:5px;">
+                            <span ng-if="doing_async">...loading...</span>
+                            <abn-tree tree-data="my_data" tree-control="my_tree" on-select="my_tree_handler(branch)" expand-level="2" initial-selection="Granny Smith"></abn-tree>
+                        </div>
+                    </td>
+                    <td style="padding:20px;vertical-align:top;">
+                        <div style="width:300px" class="alert alert-warning">{{ output }}</div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<!-- END CONTAINER FLUID -->

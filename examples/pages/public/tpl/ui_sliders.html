@@ -1,0 +1,762 @@
+<!-- START JUMBOTRON -->
+<div class="jumbotron" data-pages="parallax">
+    <div class="container-fluid container-fixed-lg">
+        <div class="inner">
+            <!-- START BREADCRUMB -->
+            <ul class="breadcrumb">
+                <li>
+                    <a href="">UI Elements</a>
+                </li>
+                <li><a href="" class="active">sliders</a>
+                </li>
+            </ul>
+            <!-- END BREADCRUMB -->
+            <div class="container-md-height m-b-20">
+                <div class="row row-md-height">
+                    <div class="col-lg-7 col-md-6 col-md-height col-middle bg-white">
+                        <!-- START PANEL -->
+                        <div class="full-height">
+                            <div class="panel-body text-center">
+                                <img class="image-responsive-height demo-mw-300" src="assets/img/demo/slider_hero.gif" alt="">
+                            </div>
+                        </div>
+                        <!-- END PANEL -->
+                    </div>
+                    <div class="col-lg-5 col-md-height col-md-6 col-top">
+                        <!-- START PANEL -->
+                        <div class="panel panel-transparent">
+                            <div class="panel-heading">
+                                <div class="panel-title">Getting started
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <h3>Sometimes small things matter the most in life!</h3>
+                                <p>A slider, also known as a track bar, allows users to set or adjust a value. When the user changes the value, it does not change the format of the interface or other info on the screen.</p>
+                                <br>
+                                <div>
+                                    <div class="profile-img-wrapper m-t-5 inline">
+                                        <img width="35" height="35" src="assets/img/profiles/avatar_small.jpg" alt="" data-src="assets/img/profiles/avatar_small.jpg" ui-jq="unveil" data-src-retina="assets/img/profiles/avatar_small2x.jpg">
+                                        <div class="chat-status available">
+                                        </div>
+                                    </div>
+                                    <div class="inline m-l-10">
+                                        <p class="small hint-text m-t-5">VIA senior product manage
+                                            <br> for UI/UX at REVOX</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END PANEL -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END JUMBOTRON -->
+<!-- START CONTAINER FLUID -->
+<div class="container-fluid container-fixed-lg">
+    <div class="row">
+        <div class="col-sm-5">
+            <!-- START PANEL -->
+            <div class="panel panel-transparent">
+                <div class="panel-heading">
+                    <div class="panel-title">noUISlider slider
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <p class="m-b-20">noUiSlider is a range slider without bloat. It offers a ton off features, and it is as small, lightweight and minimal as possible, which is great for mobile use on the many supported devices.
+                        <br>
+                        <br>
+                    </p>
+                    <div class="col-md-8 disable-hover-scale no-padding m-t-20">
+                        <div class="bg-master m-b-10" id="slider-tooltips" ui-jq="noUiSlider" ui-options="{
+            start: 40,
+            connect: 'lower',
+            range: {
+                'min': 0,
+                'max': 100
+            }
+        }"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- END PANEL -->
+        </div>
+        <div class="col-sm-7">
+            <div class="col-sm-6">
+                <!-- START PANEL -->
+                <div class="panel panel-transparent">
+                    <div class="panel-heading">
+                        <div class="panel-title">Responsive All Around
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <p>noUiSlider works with pretty much any device, mouse, touchscreen or both, and it'll work beautifully in responsive designs.</p>
+                        <br>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <a href="http://refreshless.com/nouislider/" target="_blank" class="btn btn-complete">See Plugin</a>
+                                <p class="small hint-text m-t-20 col-middle">
+                                    see the plugin for uiSlider
+                                    <br> http://refreshless.com/nouislider/
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- END PANEL -->
+            </div>
+            <div class="col-sm-6">
+                <!-- START PANEL -->
+                <div class="panel panel-transparent">
+                    <div class="panel-heading">
+                        <div class="panel-title">Compatible with all browsers
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <p>noUiSlider supports IE9 and up, and of course the latest versions of the 'evergreen' browsers: Chrome, Safari, Firefox and Opera.</p>
+                    </div>
+                </div>
+                <!-- END PANEL -->
+            </div>
+        </div>
+    </div>
+    <!-- START PANEL -->
+    <div class="panel panel-transparent">
+        <div class="panel-heading">
+            <div class="panel-title">Nouilslider options
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="panel panel-transparent">
+                        <div class="panel-body no-top-padding">
+                            <h5>Connect</h5>
+                            <p>Basic slider with different color options, use of the below classes to quickly create a styled slider. Uses native boostrap colors scheme classes
+                            </p>
+                            <div class="row">
+                                <div class="col-md-5 col-lg-5 padding-20">
+                                    <div class="nouislider_element bg-master m-b-10" ui-jq="noUiSlider" ui-options="{
+                start: 90,
+                connect: 'lower',
+                range: {
+                    'min': 0,
+                    'max': 100
+                }
+            }">
+                                    </div>
+                                    <br>
+                                    <div class="nouislider_element bg-danger m-b-10" ui-jq="noUiSlider" ui-options="{
+                start: 70,
+                connect: 'lower',
+                range: {
+                    'min': 0,
+                    'max': 100
+                }
+            }">
+                                    </div>
+                                    <br>
+                                    <div class="nouislider_element bg-warning m-b-10" ui-jq="noUiSlider" ui-options="{
+                start: 20,
+                connect: 'lower',
+                range: {
+                    'min': 0,
+                    'max': 100
+                }
+            }">
+                                    </div>
+                                    <br>
+                                    <div class="nouislider_element bg-success m-b-10" ui-jq="noUiSlider" ui-options="{
+                start: 50,
+                connect: 'lower',
+                range: {
+                    'min': 0,
+                    'max': 100
+                }
+            }">
+                                    </div>
+                                    <br>
+                                    <div class="nouislider_element bg-complete m-b-10" ui-jq="noUiSlider" ui-options="{
+                start: 30,
+                connect: 'lower',
+                range: {
+                    'min': 0,
+                    'max': 100
+                }
+            }">
+                                    </div>
+                                    <br>
+                                    <div class="nouislider_element bg-primary m-b-10" ui-jq="noUiSlider" ui-options="{
+                start: 50,
+                connect: 'lower',
+                range: {
+                    'min': 0,
+                    'max': 100
+                }
+            }">
+                                    </div>
+                                    <br>
+                                </div>
+                                <div class="col-md-5">
+                                    <p class="small hint-text">All the colours included in pages color pallete is applicable to the default pages slider.</p>
+                                    <a href="" class="btn btn-warning">See color Pallete</a>
+                                </div>
+                            </div>
+                            <br>
+                            <p>The slider variations are made by the ciours included as the base clours excluding the menue base color.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="panel panel-transparent">
+                        <div class="panel-body no-top-padding">
+                            <h5>Connect</h5>
+                            <p>The connect setting can be used to control the bar between the handles, or the edges of the slider. Use "lower" to connect to the lower side, or "upper" to connect to the upper side. Setting true sets the bar between the handles.
+                            </p>
+                            <div class="row">
+                                <div class="col-sm-5 padding-20">
+                                    <div class="nouislider_element bg-primary m-b-10" ui-jq="noUiSlider" ui-options="{
+                start: 50,
+                connect: 'lower',
+                range: {
+                    'min': 0,
+                    'max': 100
+                }
+            }">
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-transparent">
+                        <div class="panel-body no-top-padding">
+                            <h5>Margin</h5>
+                            <p>When using two handles, the minimum distance between the handles can be set using the margin option. The margin value is relative to the value set in 'range'. This option is only available on standard linear sliders.
+                            </p>
+                            <div class="row">
+                                <div class="col-sm-5 padding-20">
+                                    <div class="bg-complete m-b-10" id="slider-margin" ui-jq="noUiSlider" ui-options="{
+            start: [20, 80],
+            margin: 30,
+            connect: true,
+            range: {
+                'min': 0,
+                'max': 100
+            }
+        }">
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="panel panel-transparent">
+                        <div class="panel-body no-top-padding">
+                            <h5>Limit</h5>
+                            <p>The limit option is the oposite of the margin option, limiting the maximum distance between two handles. As with the margin option, the limit option can only be used on linear sliders.</p>
+                            <div class="row">
+                                <div class="col-sm-5 padding-20">
+                                    <div class="bg-success m-b-10" id="slider-limit" ui-jq="noUiSlider" ui-options="{
+            start: [10, 120],
+            limit: 40,
+            behaviour: 'drag',
+            connect: true,
+            range: {
+                'min': 0,
+                'max': 100
+            }
+        }" noui-link="{min: '#slider-limit-value-min', max: '#slider-limit-value-max'}">
+                                    </div>
+                                    <p>
+                                        Min: <span id="slider-limit-value-min"></span>
+                                        <br> Max: <span id="slider-limit-value-max"></span>
+                                    </p>
+                                </div>
+                                <div class="col-md-5">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-transparent">
+                        <div class="panel-body no-top-padding">
+                            <h5>Step</h5>
+                            <p>By default, the slider slides fluently. In order to make the handles jump between intervals, you can use this option. The step option is relative to the values provided to range.
+                            </p>
+                            <div class="row">
+                                <div class="col-sm-5 padding-20">
+                                    <div class="bg-danger m-b-10" id="slider-step" ui-jq="noUiSlider" ui-options="{
+            start: [20, 80],
+            step: 10,
+            connect: true,
+            range: {
+                'min': 0,
+                'max': 100
+            }
+        }">
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="panel panel-transparent">
+                        <div class="panel-body no-top-padding">
+                            <h5>Orientation</h5>
+                            <p>The orientation setting can be used to set the slider to "vertical" or "horizontal".Set dimensions! Vertical sliders don't assume a default height, so you'll need to set one. You can use any unit you want, including % or px.
+                            </p>
+                            <div class="row">
+                                <div class="col-sm-5 padding-20">
+                                    <div class="bg-success vertical-slider" id="slider-vertical" ui-jq="noUiSlider" ui-options="{
+            start: [20, 80],
+            step: 10,
+            margin: 20,
+            connect: true,
+            direction: 'rtl',
+            orientation: 'vertical',
+            range: {
+                'min': 0,
+                'max': 100
+            }
+        }">
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END PANEL -->
+    <div class="row">
+        <div class="col-sm-5">
+            <!-- START PANEL -->
+            <div class="panel panel-transparent">
+                <div class="panel-heading">
+                    <div class="panel-title">
+                        Ion.range Slider
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <p>
+                        Ion.RangeSlider is easily customizable range slider which supports events and public methods which has flexible settings that can be completely altered with CSS.
+                    </p>
+                    <br>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <a href="http://ionden.com/a/plugins/ion.rangeSlider/en.html" target="_blank" class="btn btn-complete">See Plugin</a>
+                            <p class="small hinted-text inline p-l-10 no-margin col-middle">
+                                see the plugin for uiSlider
+                                <br> http://ionden.com/a/plugins/ion.rangeSlider/en.html
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END PANEL -->
+        </div>
+        <div class="col-sm-7">
+            <div class="col-sm-6">
+                <!-- START PANEL -->
+                <div class="panel panel-transparent">
+                    <div class="panel-heading">
+                        <div class="panel-title">Advance Options
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <p>Ion.RangeSlider is the best when dealing for advanced options. It has many features like , Ability to prettify large numbers,Support of custom values diapason, etc..
+                        </p>
+                    </div>
+                </div>
+                <!-- END PANEL -->
+            </div>
+            <div class="col-sm-6">
+                <!-- START PANEL -->
+                <div class="panel panel-transparent">
+                    <div class="panel-heading">
+                        <div class="panel-title">Automatic Generated Grid
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <p>
+                            The sliders are made with an automatically generated grid system which will adupt to any screen size.
+                        </p>
+                    </div>
+                </div>
+                <!-- END PANEL -->
+            </div>
+        </div>
+    </div>
+    <!-- START PANEL -->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="panel-title">
+                Ion.range options
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="panel panel-transparent">
+                        <div class="panel-heading">
+                            <div class="panel-title">
+                                ION.Range Options
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <h5 class="semi-bold">Color Options</h5>
+                            <p>Basic slider with different color options, use of the below classes to quickly create a styled slider. Uses native boostrap colors scheme classes</p>
+                            <div class="irs-wrapper primary">
+                                <input type="text" name="" value="0;4000" class="ion_slider" ui-jq="ionRangeSlider" ui-options="{
+            min: 0,
+            max: 4000,
+            type: 'double',
+            prefix: '$',
+            maxPostfix: '+',
+            prettify_enabled: false,
+            grid: true
+        }" />
+                            </div>
+                            <br>
+                            <div class="irs-wrapper complete">
+                                <input type="text" name="" value="0;3000" class="ion_slider" ui-jq="ionRangeSlider" ui-options="{
+            min: 0,
+            max: 3000,
+            type: 'double',
+            prefix: '$',
+            maxPostfix: '+',
+            prettify_enabled: false,
+            grid: true
+        }" />
+                            </div>
+                            <br>
+                            <div class="irs-wrapper success">
+                                <input type="text" name="" value="0;2000" class="ion_slider" ui-jq="ionRangeSlider" ui-options="{
+            min: 0,
+            max: 2000,
+            type: 'double',
+            prefix: '$',
+            maxPostfix: '+',
+            prettify_enabled: false,
+            grid: true
+        }" />
+                            </div>
+                            <br>
+                            <div class="irs-wrapper danger">
+                                <input type="text" name="" value="0;1000" class="ion_slider" ui-jq="ionRangeSlider" ui-options="{
+            min: 0,
+            max: 1000,
+            type: 'double',
+           prefix: '$',
+            maxPostfix: '+',
+            prettify_enabled: false,
+            grid: true
+        }" />
+                            </div>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="panel panel-transparent">
+                        <div class="panel-heading">
+                            <div class="panel-title">
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <div class="irs-wrapper blue">
+                                        <input type="text" id="example_1" name="example_name" value="0;2057" ui-jq="ionRangeSlider" ui-options="{
+            min: 0,
+            max: 5000,
+            type: 'double',
+             prefix: '$',
+            maxPostfix: '+',
+            prettify_enabled: false,
+            grid: true
+        }" />
+                                    </div>
+                                    <div class="row fs-13 m-t-20">
+                                        <div class="col-sm-6">
+                                            Size set from <code>0</code>to <code>5000</code>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            Adding postfix <code>+</code>to max value
+                                        </div>
+                                    </div>
+                                    <div class="row fs-13">
+                                        <div class="col-sm-6">
+                                            Set slider type to <code>double</code>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            symbol as prefix <code>$</code>
+                                        </div>
+                                    </div>
+                                    <div class="row fs-13">
+                                        <div class="col-sm-6">
+                                            Set slider type to <code>double</code>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            Grid <code>TRUE</code>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-transparent">
+                        <div class="panel-heading">
+                            <div class="panel-title">
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <div class="irs-wrapper blue">
+                                        <input type="text" id="example_2" name="example_name" value="30000;90000" ui-jq="ionRangeSlider" ui-options='{
+            min: 1000,
+            max: 100000,
+            from: 30000,
+            to: 90000,
+            type: "double",
+            step: 500,
+            postfix: " €",
+            grid: true
+        }' />
+                                    </div>
+                                    <div class="row fs-13 m-t-20">
+                                        <div class="col-sm-6 m-b-10">
+                                            Size set from
+                                            <code>1000</code>to
+                                            <code>100 000</code>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            Value from
+                                            <code>30 000</code>to
+                                            <code>90 000</code>
+                                        </div>
+                                    </div>
+                                    <div class="row fs-13">
+                                        <div class="col-sm-6">
+                                            Adding postfix
+                                            <code>EURO</code>to max value
+                                        </div>
+                                        <div class="col-sm-6">
+                                            symbol as prefix <code>$</code>
+                                        </div>
+                                    </div>
+                                    <div class="row fs-13">
+                                        <div class="col-sm-6">
+                                            Set slider type to
+                                            <code>double</code>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            symbol as prefix
+                                            <code>$</code>
+                                        </div>
+                                    </div>
+                                    <div class="row fs-13">
+                                        <div class="col-sm-6">
+                                            Grid
+                                            <code>TRUE</code>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- START PANEL -->
+        <div class="panel panel-transparent">
+            <div class="panel-heading">
+                <div class="panel-title">
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="panel panel-transparent">
+                            <div class="panel-heading">
+                                <div class="panel-title">
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-10">
+                                        <div class="irs-wrapper blue">
+                                            <input type="text" id="example_3" name="example_name" value="0" ui-jq="ionRangeSlider" ui-options='{
+            min: 0,
+            max: 10,
+            type: "single",
+            step: 0.1,
+            postfix: " carats",
+            prettify_enabled: false,
+            grid: true
+        }' />
+                                        </div>
+                                        <div class="row fs-13 m-t-20">
+                                            <div class="col-sm-6">
+                                                Size set from
+                                                <code>0</code>to
+                                                <code>10</code>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                Set fractional setp
+                                                <code>0.1</code>
+                                            </div>
+                                        </div>
+                                        <div class="row fs-13">
+                                            <div class="col-sm-6">
+                                                Grid
+                                                <code>TRUE</code>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-transparent">
+                            <div class="panel-heading">
+                                <div class="panel-title">
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-10">
+                                        <div class="irs-wrapper blue">
+                                            <input type="text" id="example_4" name="example_name" value="0" ui-jq="ionRangeSlider" ui-options='{
+            min: -50,
+            max: 50,
+            from: 0,
+            postfix: "°",
+            prettify_enabled: false,
+            grid: true
+        }' />
+                                        </div>
+                                        <div class="row fs-13 m-t-20">
+                                            <div class="col-sm-6">
+                                                Size set from
+                                                <code>-50</code>+50
+                                                <code>5000</code>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                Set FROM value to
+                                                <code>0</code>
+                                            </div>
+                                        </div>
+                                        <div class="row fs-13">
+                                            <div class="col-sm-6">
+                                                symbol as prefix
+                                                <code>Degress</code>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="panel panel-transparent">
+                            <div class="panel-heading">
+                                <div class="panel-title">
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-10">
+                                        <div class="irs-wrapper blue">
+                                            <input type="text" id="example_5" name="example_name" value="0" ui-jq="ionRangeSlider" ui-options='{
+            values: [
+                "January", "February",
+                "March", "April",
+                "May", "June",
+                "July", "August",
+                "September", "October",
+                "November", "December"
+            ],
+            type: "single",
+            grid: true
+        }' />
+                                        </div>
+                                        <div class="row fs-13 m-t-20">
+                                            <div class="col-sm-6">
+                                                Set values array to month names
+                                            </div>
+                                            <div class="col-sm-6">
+                                                Adding postfix
+                                                <code>+</code>to max value
+                                            </div>
+                                        </div>
+                                        <div class="row fs-13">
+                                            <div class="col-sm-6">
+                                                Everything else will be automatically adjusted
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-transparent">
+                            <div class="panel-heading">
+                                <div class="panel-title">
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-10">
+                                        <div class="irs-wrapper blue">
+                                            <input type="text" id="example_6" name="example_name" value="0" ui-jq="ionRangeSlider" ui-options='{
+            min: 10000,
+            max: 100000,
+            step: 1000,
+            postfix: " miles",
+            from: 55000,
+            hideMinMax: false,
+            hideFromTo: true
+        }' />
+                                        </div>
+                                        <div class="row fs-13 m-t-20">
+                                            <div class="col-sm-6">
+                                                Set step value to
+                                                <code>1000</code>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                Slider value
+                                                <code>Hide</code>
+                                            </div>
+                                        </div>
+                                        <div class="row fs-13">
+                                            <div class="col-sm-6">
+                                                Adding postfix
+                                                <code>Miles</code>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END PANEL -->
+    </div>
+</div>
+<!-- END CONTAINER FLUID -->

@@ -53,7 +53,8 @@ module.exports = function(env, argv) {
             enforce: true //says to always build chunk and ignore min/max size stuff
           },
           vendor: {
-            test: /node_modules[\\/].*\.js/,
+            //test: /node_modules[\\/].*\.js/,
+            test: /node_modules/,
             chunks: "all",
             name: `vendor-libs${minDescriptor}`,
             priority: 10, //lower priority so it won't pick up jquery
@@ -156,7 +157,7 @@ module.exports = function(env, argv) {
     ],
     //command line options
     bail: true, //Fail out on the first error --bail
-    profile: false
+    //profile: false //list info on whats going on
   }
   if(isProd){
     cfg.plugins.push(

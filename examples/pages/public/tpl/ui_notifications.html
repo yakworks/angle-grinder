@@ -1,0 +1,426 @@
+<!-- START JUMBOTRON -->
+<div ng-controller="NotificationCtrl">
+    <div class="jumbotron" data-pages="parallax">
+        <div class="container-fluid container-fixed-lg">
+            <div class="inner">
+                <!-- START BREADCRUMB -->
+                <ul class="breadcrumb">
+                    <li>
+                        <a href="">UI Elements</a>
+                    </li>
+                    <li><a href="" class="active">Notifications</a>
+                    </li>
+                </ul>
+                <!-- END BREADCRUMB -->
+                <div class="container-md-height m-b-20">
+                    <div class="row row-md-height">
+                        <div class="col-lg-7 col-md-6 col-md-height col-middle bg-white">
+                            <!-- START PANEL -->
+                            <div class="full-height">
+                                <div class="panel-body text-center">
+                                    <img class="image-responsive-height demo-mw-500" src="assets/img/demo/notifications_hero.gif" alt="">
+                                </div>
+                            </div>
+                            <!-- END PANEL -->
+                        </div>
+                        <div class="col-lg-5 col-md-height col-md-6 col-top">
+                            <!-- START PANEL -->
+                            <div class="panel panel-transparent">
+                                <div class="panel-heading">
+                                    <div class="panel-title">Getting started
+                                    </div>
+                                </div>
+                                <div class="panel-body">
+                                    <h3>For Your Information - FYI</h3>
+                                    <p>Breaking convention again, we have inctroduced a notification system which variates based on the type and level of importance of the message. Thanks to this, an alert by the side of your screen would easily catch your attention.</p>
+                                    <br>
+                                    <div>
+                                        <div class="profile-img-wrapper m-t-5 inline">
+                                            <img width="35" height="35" src="assets/img/profiles/avatar_small.jpg" alt="" data-src="assets/img/profiles/avatar_small.jpg" ui-jq="unveil" data-src-retina="assets/img/profiles/avatar_small2x.jpg">
+                                            <div class="chat-status available">
+                                            </div>
+                                        </div>
+                                        <div class="inline m-l-10">
+                                            <p class="small hint-text m-t-5">VIA senior product manage
+                                                <br> for UI/UX at REVOX</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- END PANEL -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END JUMBOTRON -->
+    <!-- START CONTAINER FLUID -->
+    <div class="container-fluid container-fixed-lg">
+        <div class="row">
+            <div class="col-sm-6">
+                <!-- START PANEL -->
+                <div class="panel panel-transparent">
+                    <div class="panel-heading">
+                        <div class="panel-title">Pages notification
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <p>Notifications provide alerts and related information for pages Framework.As an important part of pages user interface, we made a tool for much easier visualizations</p>
+                    </div>
+                </div>
+                <!-- END PANEL -->
+            </div>
+            <div class="col-sm-3">
+                <!-- START PANEL -->
+                <div class="panel panel-transparent">
+                    <div class="panel-heading">
+                        <div class="panel-title">Alert
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <p>Individual alerts will be visible and depending on the level of its importance, will have dedicated colours and sized indicating specified scenarios. </p>
+                    </div>
+                </div>
+                <!-- END PANEL -->
+            </div>
+            <div class="col-sm-3">
+                <!-- START PANEL -->
+                <div class="panel panel-transparent">
+                    <div class="panel-heading">
+                        <div class="panel-title">Robust and lightweight
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <p>CSS3 powered transitions and animations for greater user experience.</p>
+                    </div>
+                </div>
+                <!-- END PANEL -->
+            </div>
+        </div>
+    </div>
+    <!-- END CONTAINER FLUID -->
+    <!-- START CONTAINER FLUID -->
+    <div class="container-fluid container-fixed-lg bg-white">
+        <div class="row">
+            <div class="col-sm-6">
+                <!-- START PANEL -->
+                <div class="panel panel-transparent">
+                    <div class="panel-heading">
+                        <div class="panel-title">Select a notification style
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div role="tablist">
+                            <a class="btn btn-default btn-cons btn-rounded btn-notification-style m-b-10" ng-class="{'active':notification.type=='bar'}" ng-click="setType('bar')" role="tab" data-toggle="tab" data-type="position-bar">Notification Bar</a>
+                            <a class="btn btn-default btn-cons btn-rounded btn-notification-style m-b-10" ng-class="{'active':notification.type=='flip'}" ng-click="setType('flip')" role="tab" data-toggle="tab" data-type="position-flip">Bouncy Flip</a>
+                            <a class="btn btn-default btn-cons btn-rounded btn-notification-style m-b-10" ng-class="{'active':notification.type=='circle'}" ng-click="setType('circle')" role="tab" data-toggle="tab" data-type="position-circle">Circle Notification</a>
+                            <a class="btn btn-default btn-cons btn-rounded btn-notification-style m-b-10" ng-class="{'active':notification.type=='simple'}" ng-click="setType('simple')" role="tab" data-toggle="tab" data-type="position-simple">Simple Alert</a>
+                        </div>
+                        <div class="config-notification">
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div class="tab-pane" id="loadingBar" ng-class="{'active':notification.type=='bar'}">
+                                    <h4 class="semi-bold">Notification Bar</h4>
+                                    <h5 class="">Awesome Loading Circle Animation</h5>
+                                    <p class="small hint-text">Highly Customizable, Change radius, Add Content Change X , Y Axis, Change svg animation</p>
+                                </div>
+                                <div class="tab-pane" id="bouncyFlip" ng-class="{'active':notification.type=='flip'}">
+                                    <h4 class="semi-bold">Bouncy Flip</h4>
+                                    <h5 class="">Awesome Loading Circle Animation</h5>
+                                    <p class="small hint-text">Highly Customizable, Change radius, Add Content Change X , Y Axis, Change svg animation</p>
+                                </div>
+                                <div class="tab-pane" id="circleNotification" ng-class="{'active':notification.type=='circle'}">
+                                    <h4 class="semi-bold">Circle Notification</h4>
+                                    <h5 class="">Awesome Loading Circle Animation</h5>
+                                    <p class="small hint-text">Highly Customizable, Change radius, Add Content Change X , Y Axis, Change svg animation</p>
+                                </div>
+                                <div class="tab-pane" id="simpleAlert" ng-class="{'active':notification.type=='simple'}">
+                                    <h4 class="semi-bold">Simple Alert</h4>
+                                    <h5 class="">Simple alert</h5>
+                                    <p class="small hint-text">Highly Customizable, Change radius, Add Content Change X , Y Axis, Change svg animation</p>
+                                </div>
+                            </div>
+                            <form role="form" name="notificationForm" novalidate>
+                                <div pg-form-group class="form-group form-group-default required">
+                                    <label class="highlight">Message</label>
+                                    <input type="text" ng-model="notification.message" class="form-control notification-message" placeholder="Type your message here" value="This notification looks so perfect!" required>
+                                </div>
+                                <select class="cs-select cs-skin-slide notification-type" ng-model="notification.color" cs-select>
+                                    <option value="info">Info</option>
+                                    <option value="warning">Warning</option>
+                                    <option value="success">Success</option>
+                                    <option value="danger">Danger</option>
+                                    <option value="default">Default</option>
+                                </select>
+                                <button class="btn btn-success show-notification" ng-click="showNotification()" ng-disabled="notificationForm.$invalid">Show</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- END PANEL -->
+            </div>
+            <div class="col-sm-6">
+                <!-- START PANEL -->
+                <div class="panel panel-transparent">
+                    <div class="panel-heading">
+                        <div class="panel-title">Select Position
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div ng-show="notification.type == 'bar'">
+                            <div class="notification-positions">
+                                <div class="position pull-top" ng-click="setPosition('top')" ng-class="{'active': notification.position == 'top' }">
+                                    <img alt="Loading bar" src="assets/img/notifications/loading_bar.svg" class="">
+                                </div>
+                                <div class="position pull-bottom" ng-click="setPosition('bottom')" ng-class="{'active': notification.position == 'bottom' }">
+                                    <img alt="Loading bar" src="assets/img/notifications/loading_bar.svg" class="">
+                                </div>
+                            </div>
+                        </div>
+                        <div ng-show="notification.type == 'flip'">
+                            <div class="notification-positions">
+                                <div class="pull-top full-width">
+                                    <div class="position pull-left" ng-click="setPosition('top-left', $event)" ng-class="{'active': notification.position == 'top-left' }">
+                                        <img alt="Bounce progress" src="assets/img/notifications/bounce_progress.svg" class="">
+                                    </div>
+                                    <div class="position pull-right" ng-click="setPosition('top-right', $event)" ng-class="{'active': notification.position == 'top-right' }">
+                                        <img alt="Bounce progress" src="assets/img/notifications/bounce_progress.svg" class="">
+                                    </div>
+                                </div>
+                                <div class="pull-bottom full-width">
+                                    <div class="position pull-left" ng-click="setPosition('bottom-left', $event)" ng-class="{'active': notification.position == 'bottom-left' }">
+                                        <img alt="Bounce progress" src="assets/img/notifications/bounce_progress.svg" class="">
+                                    </div>
+                                    <div class="position pull-right" ng-click="setPosition('bottom-right', $event)" ng-class="{'active': notification.position == 'bottom-right' }">
+                                        <img alt="Bounce progress" src="assets/img/notifications/bounce_progress.svg" class="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div ng-show="notification.type == 'circle'">
+                            <div class="notification-positions">
+                                <div class="pull-top full-width">
+                                    <div class="position pull-left" ng-click="setPosition('top-left', $event)" ng-class="{'active': notification.position == 'top-left' }">
+                                        <img alt="Circle progress" src="assets/img/notifications/circle_progress.svg" class="">
+                                    </div>
+                                    <div class="position pull-right" ng-click="setPosition('top-right', $event)" ng-class="{'active': notification.position == 'top-right' }">
+                                        <img alt="Circle progress" src="assets/img/notifications/circle_progress.svg" class="">
+                                    </div>
+                                </div>
+                                <div class="pull-bottom full-width">
+                                    <div class="position pull-left" ng-click="setPosition('bottom-left', $event)" ng-class="{'active': notification.position == 'bottom-left' }">
+                                        <img alt="Circle progress" src="assets/img/notifications/circle_progress.svg" class="">
+                                    </div>
+                                    <div class="position pull-right" ng-click="setPosition('bottom-right', $event)" ng-class="{'active': notification.position == 'bottom-right' }">
+                                        <img alt="Circle progress" src="assets/img/notifications/circle_progress.svg" class="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div ng-show="notification.type == 'simple'">
+                            <div class="notification-positions">
+                                <div class="pull-top full-width">
+                                    <div class="position pull-left" ng-click="setPosition('top-left', $event)" ng-class="{'active': notification.position == 'top-left' }">
+                                        <img alt="Simple alert" src="assets/img/notifications/simple_alert.svg" class="">
+                                    </div>
+                                    <div class="position pull-right" ng-click="setPosition('top-right', $event)" ng-class="{'active': notification.position == 'top-right' }">
+                                        <img alt="Simple alert" src="assets/img/notifications/simple_alert.svg" class="">
+                                    </div>
+                                </div>
+                                <div class="pull-bottom full-width">
+                                    <div class="position pull-left" ng-click="setPosition('bottom-left', $event)" ng-class="{'active': notification.position == 'bottom-left' }">
+                                        <img alt="Simple alert" src="assets/img/notifications/simple_alert.svg" class="">
+                                    </div>
+                                    <div class="position pull-right" ng-click="setPosition('bottom-right', $event)" ng-class="{'active': notification.position == 'bottom-right' }">
+                                        <img alt="Simple alert" src="assets/img/notifications/simple_alert.svg" class="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END PANEL -->
+                </div>
+            </div>
+        </div>
+        <!-- END CONTAINER FLUID -->
+        <!-- START CONTAINER FLUID -->
+        <div class="container-fluid container-fixed-lg">
+            <!-- START PANEL -->
+            <div class="panel panel-transparent">
+                <div class="panel-heading">
+                    <div class="panel-title">Simple alerts
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h3>Where ever you are we’ll keep you notified and up to date!</h3>
+                            <p>Alerts help to gain user attention and give feedback for proccessed task. These alerts are built with different background and borders to show.</p>
+                            <br>
+                            <div>
+                                <div class="profile-img-wrapper m-t-5 inline">
+                                    <img alt="Avatar" width="35" height="35" src="assets/img/profiles/avatar_small.jpg" data-src="assets/img/profiles/avatar_small.jpg" ui-jq="unveil" data-src-retina="assets/img/profiles/avatar_small2x.jpg">
+                                    <div class="chat-status available">
+                                    </div>
+                                </div>
+                                <div class="inline m-l-10">
+                                    <p class="small hint-text m-t-5">VIA senior product manage
+                                        <br> for UI/UX at REVOX</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 sm-p-t-15">
+                            <div class="alert alert-danger" role="alert">
+                                <button class="close" data-dismiss="alert"></button>
+                                <strong>Danger: </strong>The daily report has failed
+                            </div>
+                            <div class="alert alert-warning" role="alert">
+                                <button class="close" data-dismiss="alert"></button>
+                                <strong>Warning: </strong>Bandwidth limit exceeded
+                            </div>
+                            <div class="alert alert-success" role="alert">
+                                <button class="close" data-dismiss="alert"></button>
+                                <strong>Success: </strong>The page has been added.
+                            </div>
+                            <div class="alert alert-info" role="alert">
+                                <button class="close" data-dismiss="alert"></button>
+                                <strong>Info: </strong>You have 198 messages
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END PANEL -->
+        </div>
+        <!-- END CONTAINER FLUID -->
+        <!-- START CONTAINER FLUID -->
+        <div class="container-fluid container-fixed-lg">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <!-- START PANEL -->
+                    <div class="panel panel-transparent">
+                        <div class="panel-heading">
+                            <div class="panel-title">Descriptive alerts
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <p>Alerts can be multilined. Feel free to include any HTML inside your alerts</p>
+                            <br>
+                            <div class="alert alert-info" role="alert">
+                                <p class="pull-left">Meeting rescheduled</p>
+                                <button class="close" data-dismiss="alert"></button>
+                                <div class="clearfix"></div>
+                                <br>
+                                <p>The STG Meeting has been resheduled to the following date : 2014-12-17</p>
+                                <br>
+                                <p>Please complete the attendance form to confirm your attendance</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END PANEL -->
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <!-- START PANEL -->
+                    <div class="panel panel-transparent">
+                        <div class="panel-heading">
+                            <div class="panel-title">Alert with link
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <p>You can also use a link to show more information about the notification. Use the .alert-link utility class to quickly provide matching colored links within any alert.</p>
+                            <br>
+                            <div class="alert alert-info" role="alert">
+                                <p class="pull-left">Your data limit has exceeded</p>
+                                <button class="close" data-dismiss="alert"></button>
+                                <p class="pull-right bold no-margin"><a href="">See all now</a>
+                                </p>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END PANEL -->
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <!-- START PANEL -->
+                    <div class="panel panel-transparent">
+                        <div class="panel-heading">
+                            <div class="panel-title">Bordered alerts
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <p>By default all Pages alerts are borderless. To add a border, simply append the class .bordered</p>
+                            <br>
+                            <div class="alert alert-info bordered" role="alert">
+                                <p class="pull-left"><strong>Info:</strong> You have 198 messages</p>
+                                <button class="close" data-dismiss="alert"></button>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END PANEL -->
+                </div>
+            </div>
+        </div>
+        <!-- END CONTAINER FLUID -->
+        <!-- START CONTAINER FLUID -->
+        <div class="container-fluid container-fixed-lg">
+            <div class="row">
+                <div class="col-sm-6">
+                    <!-- START PANEL -->
+                    <div class="panel panel-transparent">
+                        <div class="panel-heading">
+                            <div class="panel-title">Simple labels
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row-fluid">
+                                <p>A label, with optional background colors. Use the
+                                    <code>label</code>class to create a label</p>
+                                <br>
+                                <span class="label">DEFAULT</span>
+                                <span class="label label-success">VIEW</span>
+                                <span class="label label-warning">HOLD</span>
+                                <span class="label label-important">ALERT</span>
+                                <span class="label label-info">SUCCESS</span>
+                                <span class="label label-inverse">SOLD</span>
+                                <br>
+                                <br>
+                                <h4>Badge
+                                    <span class="semi-bold">Variations</span>
+                                </h4>
+                                <p>A Badge, with optional background colors. Use the
+                                    <code>badge</code>class to create a Badge</p>
+                                <span class="badge">2</span>&nbsp;&nbsp;
+                                <span class="badge badge-success">8</span>&nbsp;&nbsp;
+                                <span class="badge badge-warning">12</span>&nbsp;&nbsp;
+                                <span class="badge badge-important">300</span>&nbsp;&nbsp;
+                                <span class="badge badge-info">25</span>&nbsp;&nbsp;
+                                <span class="badge badge-inverse">5</span>&nbsp;&nbsp;</div>
+                        </div>
+                    </div>
+                    <!-- END PANEL -->
+                </div>
+                <div class="col-sm-6">
+                    <!-- START PANEL -->
+                    <div class="panel panel-transparent">
+                        <div class="panel-heading">
+                            <div class="panel-title">Tooltips
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <p>Tooltips can be a helpful way to provide information to visitors without creating clutter in a design. Tooltip plugin let’s you transform native tooltip’s into customizable overlays. You can adjust their content, position and appearance.</p>
+                            <br>
+                            <button title="" data-toggle="tooltip" class="btn btn-default tip m-b-5 m-r-5" type="button" data-original-title="Up here!" ui-jq="tooltip">Top</button>
+                            <button data-placement="right" title="" data-toggle="tooltip" class="btn btn-default tip m-b-5 m-r-5" type="button" data-original-title="Hello there!" ui-jq="tooltip">Right</button>
+                            <button data-placement="bottom" title="" data-toggle="tooltip" class="btn btn-default tip m-b-5 m-r-5" type="button" data-original-title="Look down!" ui-jq="tooltip">Down</button>
+                            <button data-placement="left" title="" data-toggle="tooltip" class="btn btn-default tip m-b-5 m-r-5" type="button" data-original-title="Over here!" ui-jq="tooltip">Left</button>
+                            <br>
+                        </div>
+                    </div>
+                    <!-- END PANEL -->
+                </div>
+            </div>
+        </div>
+        <!-- END CONTAINER FLUID -->
+    </div>
