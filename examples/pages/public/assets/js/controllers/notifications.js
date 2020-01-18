@@ -37,7 +37,7 @@ angular.module('app')
                     break;
                 case 'circle':
                     // Slide-in a circle notification from sides
-                    // You have to provide the HTML for thumbnail 
+                    // You have to provide the HTML for thumbnail
                     $('body').pgNotification({
                         style: 'circle',
                         title: 'John Doe',
@@ -45,7 +45,7 @@ angular.module('app')
                         position: position,
                         timeout: 0,
                         type: color,
-                        thumbnail: '<img width="40" height="40" style="display: inline-block;" src="assets/img/profiles/avatar2x.jpg" data-src="assets/img/profiles/avatar.jpg" ui-jq="unveil" data-src-retina="assets/img/profiles/avatar2x.jpg" alt="">'
+                        thumbnail: '<img width="40" height="40" style="display: inline-block;" src="assets/img/profiles/avatar2x.jpg" data-src="assets/img/profiles/avatar.jpg"  data-src-retina="assets/img/profiles/avatar2x.jpg" alt="">'
                     }).show();
                     break;
                 case 'simple':

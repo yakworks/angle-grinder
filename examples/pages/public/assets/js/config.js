@@ -28,7 +28,6 @@ angular.module('app')
                                     'rickshaw',
                                     'metrojs',
                                     'sparkline',
-                                    'skycons',
                                     'switchery'
                                 ], {
                                     insertBefore: '#lazyload_placeholder'
@@ -166,7 +165,7 @@ angular.module('app')
                 templateUrl: "tpl/app.boxed.html"
             })
 
-            // UI Elements 
+            // UI Elements
             .state('app.ui', {
                     url: '/ui',
                     template: '<div ui-view></div>'
@@ -233,7 +232,7 @@ angular.module('app')
                 .state('app.ui.tabs', {
                     url: '/tabs',
                     templateUrl: 'tpl/ui_tabs.html',
-                    resolve: { 
+                    resolve: {
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
                                 'tabcollapse'

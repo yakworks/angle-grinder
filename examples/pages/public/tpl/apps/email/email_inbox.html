@@ -1,30 +1,30 @@
 <div class="split-view">
     <!-- START EMAILS LIST -->
-    <div class="split-list" ng-controller="EmailListCtrl"> 
+    <div class="split-list" ng-controller="EmailListCtrl">
         <a class="list-refresh" href=""><i class="fa fa-refresh"></i></a>
-        <div data-email="list" ui-jq="ioslist">
+        <div data-email="list" >
             <!-- START EMAIL LIST SORTED BY DATE -->
                 <div class="list-view-group-container" ng-repeat="email in emails">
                     <div class="list-view-group-header"><span>{{email.group}}</span></div>
 
                     <ul class="no-padding">
-                    	<li ng-repeat="item in email.list" class="item padding-15" data-email-id="{{item.id}}" ng-click="view(emailId)" ng-init="emailId = item.id"> 
-                                    <div class="thumbnail-wrapper d32 circular bordered {{item.color}}"> 
-                                        <img width="40" height="40" alt="" ng-src="{{item.dpRetina}}"> 
-                                    </div> 
-                                    <div class="checkbox  no-margin p-l-10"> 
-                                        <input type="checkbox" value="1" id="emailcheckbox-{{$parent.$index}}-{{$index}}"> 
-                                        <label for="emailcheckbox-{{$parent.$index}}-{{$index}}"></label> 
-                                    </div> 
-                                    <div class="inline m-l-15"> 
-                                        <p class="recipients no-margin hint-text small">{{formatTo(item.to)}}</p> 
-                                        <p class="subject no-margin">{{item.subject}}</p> 
-                                        <p class="body no-margin"> 
+                    	<li ng-repeat="item in email.list" class="item padding-15" data-email-id="{{item.id}}" ng-click="view(emailId)" ng-init="emailId = item.id">
+                                    <div class="thumbnail-wrapper d32 circular bordered {{item.color}}">
+                                        <img width="40" height="40" alt="" ng-src="{{item.dpRetina}}">
+                                    </div>
+                                    <div class="checkbox  no-margin p-l-10">
+                                        <input type="checkbox" value="1" id="emailcheckbox-{{$parent.$index}}-{{$index}}">
+                                        <label for="emailcheckbox-{{$parent.$index}}-{{$index}}"></label>
+                                    </div>
+                                    <div class="inline m-l-15">
+                                        <p class="recipients no-margin hint-text small">{{formatTo(item.to)}}</p>
+                                        <p class="subject no-margin">{{item.subject}}</p>
+                                        <p class="body no-margin">
                                          {{formatBody(item.body)}}
-                                        </p> 
-                                    </div> 
-                                    <div class="datetime">{{item.time}}</div> 
-                                    <div class="clearfix"></div> 
+                                        </p>
+                                    </div>
+                                    <div class="datetime">{{item.time}}</div>
+                                    <div class="clearfix"></div>
                                 </li>
                     </ul>
             </div>
@@ -60,7 +60,7 @@
             <div class="email-content">
                 <div class="email-content-header">
                     <div class="thumbnail-wrapper d48 circular bordered">
-                        <img width="40" height="40" alt="" ui-jq="unveil" data-src-retina="assets/img/profiles/avatar2x.jpg" data-src="assets/img/profiles/avatar.jpg" src="assets/img/profiles/avatar2x.jpg">
+                        <img width="40" height="40" alt=""  data-src-retina="assets/img/profiles/avatar2x.jpg" data-src="assets/img/profiles/avatar.jpg" src="assets/img/profiles/avatar2x.jpg">
                     </div>
                     <div class="sender inline m-l-10">
                         <p class="name no-margin bold">{{email.from}}
