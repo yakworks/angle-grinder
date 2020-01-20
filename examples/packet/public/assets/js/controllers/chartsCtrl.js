@@ -3,7 +3,8 @@
  * controllers for tc-angular-chartjs
  * tc-angular-chartjs provides you with directives for all chartjs chart types.
  */
-app.controller('ChartCtrl1', ["$scope",
+
+angular.module('app').controller('ChartCtrl1', ["$scope",
 function($scope) {
 	$scope.labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
 	$scope.series = ['My First dataset', 'My Second dataset'];
@@ -65,8 +66,9 @@ function($scope) {
 		datasetFill: true
 	};
 
-}]);
-app.controller('ChartCtrl2', ["$scope",
+}
+])
+.controller('ChartCtrl2', ["$scope",
 function($scope) {
 	$scope.labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
 	$scope.series = ['My First dataset', 'My Second dataset'];
@@ -115,8 +117,8 @@ function($scope) {
 
 	};
 
-}]);
-app.controller('ChartCtrl3', ["$scope",
+}])
+.controller('ChartCtrl3', ["$scope",
 function($scope) {
 	$scope.labels = ['Red', 'Green', 'Yellow'];
 	$scope.data = [300, 50, 100];
@@ -153,8 +155,8 @@ function($scope) {
 
 	};
 
-}]);
-app.controller('ChartCtrl4', ["$scope",
+}])
+.controller('ChartCtrl4', ["$scope",
 function($scope) {
 	$scope.labels = ['Red', 'Green', 'Yellow'];
 	$scope.data = [300, 50, 100];
@@ -192,8 +194,8 @@ function($scope) {
 
 	};
 
-}]);
-app.controller('ChartCtrl5', ["$scope",
+}])
+.controller('ChartCtrl5', ["$scope",
 function($scope) {
 	$scope.labels = ['Red', 'Green', 'Yellow', 'Grey', 'Dark Grey'];
 	$scope.data = [300, 50, 100, 40, 120];
@@ -245,8 +247,8 @@ function($scope) {
 		animateScale: false
 	};
 
-}]);
-app.controller('ChartCtrl6', ["$scope",
+}])
+.controller('ChartCtrl6', ["$scope",
 function($scope) {
 	$scope.labels = ['Eating', 'Drinking', 'Sleeping', 'Designing', 'Coding', 'Cycling', 'Running'];
 	$scope.series = ['My First dataset', 'My Second dataset'];

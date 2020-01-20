@@ -2,7 +2,8 @@
 /**
  * controller for Messages
  */
-app.controller('ChatCtrl', ["$scope", function ($scope) {
+
+angular.module('app').controller('ChatCtrl', ["$scope", function ($scope) {
 
     $scope.selfIdUser = 50223456;
     $scope.otherIdUser = 50223457;

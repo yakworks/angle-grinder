@@ -3,13 +3,13 @@
  * controller for xeditable
  */
 
-app.controller('TextSimpleCtrl', ["$scope",
+angular.module('app').controller('TextSimpleCtrl', ["$scope",
 function ($scope) {
     $scope.example = {
         name: 'awesome user'
     };
-}]);
-app.controller('SelectLocalCtrl', ["$scope", "$filter",
+}])
+.controller('SelectLocalCtrl', ["$scope", "$filter",
 function ($scope, $filter) {
     $scope.example = {
         status: 2
@@ -35,14 +35,14 @@ function ($scope, $filter) {
         });
         return ($scope.example.status && selected.length) ? selected[0].text : 'Not set';
     };
-}]);
-app.controller('TextareaCtrl', ["$scope",
+}])
+.controller('TextareaCtrl', ["$scope",
 function ($scope) {
     $scope.example = {
         desc: 'Awesome user \ndescription!'
     };
-}]);
-app.controller('SelectRemoteCtrl', ["$scope", "$filter", "$http",
+}])
+.controller('SelectRemoteCtrl', ["$scope", "$filter", "$http",
 function ($scope, $filter, $http) {
     $scope.example = {
         group: 4,
@@ -65,14 +65,14 @@ function ($scope, $filter, $http) {
             $scope.example.groupName = selected.length ? selected[0].text : null;
         }
     });
-}]);
-app.controller('CheckboxCtrl', ["$scope",
+}])
+.controller('CheckboxCtrl', ["$scope",
 function ($scope) {
     $scope.example = {
         remember: true
     };
-}]);
-app.controller('ChecklistCtrl', ["$scope", "$filter",
+}])
+.controller('ChecklistCtrl', ["$scope", "$filter",
 function ($scope, $filter) {
     $scope.example = {
         status: [2, 3]
@@ -99,8 +99,8 @@ function ($scope, $filter) {
         return selected.length ? selected.join(', ') : 'Not set';
     };
 
-}]);
-app.controller('RadiolistCtrl', ["$scope", "$filter",
+}])
+.controller('RadiolistCtrl', ["$scope", "$filter",
 function ($scope, $filter) {
     $scope.example = {
         status: 2
@@ -120,8 +120,8 @@ function ($scope, $filter) {
         });
         return ($scope.example.status && selected.length) ? selected[0].text : 'Not set';
     };
-}]);
-app.controller('ValidateLocalCtrl', function($scope) {
+}])
+.controller('ValidateLocalCtrl', function($scope) {
   $scope.user = {
     name: 'awesome user'
   };
@@ -131,8 +131,8 @@ app.controller('ValidateLocalCtrl', function($scope) {
       return "Username should be `awesome`";
     }
   };
-});
-app.controller('SelectNobuttonsCtrl', ["$scope", "$filter",
+})
+.controller('SelectNobuttonsCtrl', ["$scope", "$filter",
 function ($scope, $filter) {
     $scope.user = {
         status: 2
@@ -158,8 +158,8 @@ function ($scope, $filter) {
         });
         return ($scope.user.status && selected.length) ? selected[0].text : 'Not set';
     };
-}]);
-app.controller('SelectMultipleCtrl', ["$scope", "$filter",
+}])
+.controller('SelectMultipleCtrl', ["$scope", "$filter",
 function ($scope, $filter) {
     $scope.user = {
         status: [2, 4]

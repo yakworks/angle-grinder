@@ -1,8 +1,9 @@
 'use strict';
-/** 
+/**
   * controller for Validation Form example
 */
-app.controller('ValidationCtrl', ["$scope", "$state", "$timeout", "SweetAlert", function ($scope, $state, $timeout, SweetAlert) {
+
+angular.module('app').controller('ValidationCtrl', ["$scope", "$state", "$timeout", "SweetAlert", function ($scope, $state, $timeout, SweetAlert) {
 
     $scope.master = $scope.myModel;
     $scope.form = {

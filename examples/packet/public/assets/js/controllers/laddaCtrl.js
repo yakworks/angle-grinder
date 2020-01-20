@@ -1,9 +1,9 @@
 'use strict';
-/** 
+/**
   * controller for angular-ladda
   * An angular directive wrapper for Ladda buttons.
 */
-app.controller('LaddaCtrl', ["$scope", "$timeout", function ($scope, $timeout) {
+angular.module('app').controller('LaddaCtrl', ["$scope", "$timeout", function ($scope, $timeout) {
     $scope.ldloading = {};
     $scope.clickBtn = function (style) {
         $scope.ldloading[style.replace('-', '_')] = true;

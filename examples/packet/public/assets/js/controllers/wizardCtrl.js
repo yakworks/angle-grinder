@@ -1,8 +1,9 @@
 'use strict';
-/** 
+/**
   * controller for Wizard Form example
 */
-app.controller('WizardCtrl', ['$scope', 'ngNotify',
+
+angular.module('app').controller('WizardCtrl', ['$scope', 'ngNotify',
 function ($scope, ngNotify) {
     $scope.currentStep = 1;
 

@@ -3,8 +3,8 @@ import appName from './app.module'
 import './config.constant'
 import './config.router'
 
-const app = angular.module(appName)
-export default app.name
+const app = angular.module('app')
+//export default app.name
 
 app.run(['$rootScope', '$state', '$stateParams',
 function ($rootScope, $state, $stateParams) {

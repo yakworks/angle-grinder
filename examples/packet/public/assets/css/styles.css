@@ -1,4 +1,4 @@
-/* ---------------------------------------------------------------------- 
+/* ----------------------------------------------------------------------
 >>> TABLE OF CONTENT
 -------------------------------------------------------------------------
 1 - Basic Elements & Classes
@@ -2065,7 +2065,7 @@ span[role="slider"] {
   margin-top: -7px;
 }
 #sidebar > div nav > ul li a .icon-arrow:before {
-  content: "\e64a";
+  content: "\e649";
   font-family: themify;
 }
 #sidebar > div nav > ul li.open {
@@ -8315,7 +8315,7 @@ input[type="radio"], input[type="checkbox"] {
   padding-left: 30px !important;
   position: relative;
   line-height: 23px;
-  transition: border 0.2s linear 0s, color 0.2s linear 0s;
+  /* transition: border 0.2s linear 0s, color 0.2s linear 0s; */
   white-space: nowrap;
 }
 .clip-check label:before {
@@ -8330,7 +8330,7 @@ input[type="radio"], input[type="checkbox"] {
   width: 20px;
   border-radius: 0;
   top: 1px;
-  transition: border 0.2s linear 0s, color 0.2s linear 0s;
+  /* transition: border 0.2s linear 0s, color 0.2s linear 0s; */
 }
 .clip-check label:after {
   display: inline-block;
@@ -8339,7 +8339,7 @@ input[type="radio"], input[type="checkbox"] {
   left: 4px;
   position: absolute;
   top: -1px;
-  transition: border 0.2s linear 0s, color 0.2s linear 0s;
+  /* transition: border 0.2s linear 0s, color 0.2s linear 0s; */
   width: 19px;
 }
 .clip-check input[type="checkbox"] {

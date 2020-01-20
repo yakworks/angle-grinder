@@ -1,8 +1,9 @@
 'use strict';
-/** 
+/**
   * controller for angular-ckeditor
 */
-app.controller('CkeditorCtrl', ["$scope", function ($scope) {
+
+angular.module('app').controller('CkeditorCtrl', ["$scope", function ($scope) {
 
     // Editor options.
     $scope.options = {

@@ -1,9 +1,10 @@
 'use strict';
-/** 
-  * controllers for angular-nestable 
+/**
+  * controllers for angular-nestable
   * Angular module for jQuery nestable plugin
 */
-app.controller('nestableCtrl', ["$scope", function ($scope) {
+angular.module('app')
+.controller('nestableCtrl', ["$scope", function ($scope) {
     $scope.mdl = [{
         item: {
             text: 'Products'

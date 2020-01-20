@@ -1,9 +1,10 @@
 'use strict';
-/** 
+/**
   * controller for angular-bootstrap-nav-tree
   * An AngularJS directive that creates a Tree based on a Bootstrap "nav" list.
 */
-app.controller('TreeCtrl', ["$scope", "$timeout", function ($scope, $timeout) {
+
+angular.module('app').controller('TreeCtrl', ["$scope", "$timeout", function ($scope, $timeout) {
     var apple_selected, tree, treedata_avm, treedata_geography;
     $scope.my_tree_handler = function (branch) {
         var _ref;

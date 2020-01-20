@@ -2,7 +2,8 @@
 /**
  * controller for Ng-notify
  */
-app.controller('NgNotifyDemoCtrl', ['$scope', 'ngNotify',
+
+angular.module('app').controller('NgNotifyDemoCtrl', ['$scope', 'ngNotify',
 function ($scope, ngNotify) {
     $scope.notify = {
         theme: 'pure',

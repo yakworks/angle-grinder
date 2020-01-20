@@ -3,7 +3,7 @@
  * controllers used for the dashboard
  */
 
-app.controller('ProductsCtrl', ["$scope",
+angular.module('app').controller('ProductsCtrl', ["$scope",
 function($scope) {
 	$scope.labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 	$scope.series = ['Alpha', 'Omega', 'Kappa'];
@@ -50,8 +50,8 @@ function($scope) {
         animationEasing : "easeInOutExpo"
 	};
 
-}]);
-app.controller('SalesCtrl', ["$scope",
+}])
+.controller('SalesCtrl', ["$scope",
 function($scope) {
 	$scope.labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
 	$scope.series = ['First', 'Second'];
@@ -86,8 +86,8 @@ function($scope) {
 		barDatasetSpacing : 1
 	};
 
-}]);
-app.controller('AcquisitionCtrl', ["$scope",
+}])
+.controller('AcquisitionCtrl', ["$scope",
 function($scope) {
 	$scope.labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
 	$scope.series = ['dataset'];
@@ -113,8 +113,8 @@ function($scope) {
 		barValueSpacing : 5
 	};
 
-}]);
-app.controller('ConversionsCtrl', ["$scope",
+}])
+.controller('ConversionsCtrl', ["$scope",
 function($scope) {
 	$scope.labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 	$scope.series = ['Transactions', 'Unique Visitors'];
@@ -157,8 +157,8 @@ function($scope) {
 		animationEasing : "easeInOutExpo"
 	};
 
-}]);
-app.controller('BarCtrl', ["$scope",
+}])
+.controller('BarCtrl', ["$scope",
 function($scope) {
 	$scope.labels = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'a', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'i', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 	$scope.series = ['dataset'];
@@ -182,8 +182,8 @@ function($scope) {
 		barValueSpacing : 5
 	};
 
-}]);
-app.controller('BarCtrl2', ["$scope",
+}])
+.controller('BarCtrl2', ["$scope",
 function($scope) {
 	$scope.labels = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'a', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'i', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 	$scope.series = ['dataset'];
@@ -207,8 +207,8 @@ function($scope) {
 		barValueSpacing: 5
 	};
 
-}]);
-app.controller('LineCtrl', ["$scope",
+}])
+.controller('LineCtrl', ["$scope",
 function($scope) {
 	$scope.labels = ['a', 'b', 'c', 'd', 'e', 'f', 'g'];
 	$scope.series = ['dataset'];
@@ -247,8 +247,8 @@ function($scope) {
 		animationEasing : "easeInOutExpo"
 	};
 
-}]);
-app.controller('RandomCtrl', function($scope, $interval) {
+}])
+.controller('RandomCtrl', function($scope, $interval) {
 	$scope.randomUsers = 0;
 	var interval = 1500;
 
@@ -262,8 +262,8 @@ app.controller('RandomCtrl', function($scope, $interval) {
 		}, interval);
 	};
 	$scope.realtime();
-});
-app.controller('KnobCtrl1', function($scope) {
+})
+.controller('KnobCtrl1', function($scope) {
 	$scope.value = 65;
 	$scope.options = {
 		unit : "%",
@@ -276,8 +276,8 @@ app.controller('KnobCtrl1', function($scope) {
 		trackColor : 'rgba(154,137,181,0.6)',
 		barColor : 'rgba(154,137,181,0.9)'
 	};
-});
-app.controller('KnobCtrl2', function($scope) {
+})
+.controller('KnobCtrl2', function($scope) {
 	$scope.value = 330;
 	$scope.options = {
 		unit : "MB",
@@ -291,8 +291,8 @@ app.controller('KnobCtrl2', function($scope) {
 		barColor : 'rgba(154,137,181,0.9)',
 		max : 1024
 	};
-});
-app.controller('KnobCtrl3', function($scope) {
+})
+.controller('KnobCtrl3', function($scope) {
     $scope.value = 65;
     $scope.options = {
         unit : "%",
@@ -305,8 +305,8 @@ app.controller('KnobCtrl3', function($scope) {
         trackColor : 'rgba(255,255,255,0.4)',
         barColor : '#8773A8'
     };
-});
-app.controller('KnobCtrl4', function($scope) {
+})
+.controller('KnobCtrl4', function($scope) {
     $scope.value = 330;
     $scope.options = {
         unit : "MB",
@@ -320,8 +320,8 @@ app.controller('KnobCtrl4', function($scope) {
         barColor : '#8773A8',
         max : 1024
     };
-});
-app.controller('SocialCtrl1', ["$scope",
+})
+.controller('SocialCtrl1', ["$scope",
 function($scope) {
 
 	$scope.labels = ['Facebook', 'Twitter', 'YouTube', 'Spotify'];
@@ -345,8 +345,8 @@ function($scope) {
 		animateRotate : true,
 		animateScale : false
 	};
-}]);
-app.controller('SocialCtrl2', ["$scope",
+}])
+.controller('SocialCtrl2', ["$scope",
 function($scope) {
 
 	$scope.labels = ['Facebook', 'Twitter', 'YouTube', 'Spotify'];
@@ -369,8 +369,8 @@ function($scope) {
 		animateRotate : true,
 		animateScale : false
 	};
-}]);
-app.controller('SocialCtrl3', ["$scope",
+}])
+.controller('SocialCtrl3', ["$scope",
 function($scope) {
 
 	$scope.labels = ['Fb', 'YT', 'Tw'];
@@ -395,8 +395,8 @@ function($scope) {
 
 	};
 
-}]);
-app.controller('SocialCtrl4', ["$scope",
+}])
+.controller('SocialCtrl4', ["$scope",
 function($scope) {
 	$scope.labels = ['Sc', 'Ad'];
 	$scope.data = [200, 150];
@@ -419,8 +419,8 @@ function($scope) {
 
 	};
 
-}]);
-app.controller('PerformanceCtrl1', ["$scope",
+}])
+.controller('PerformanceCtrl1', ["$scope",
 function($scope) {
 	$scope.value = 85;
 	$scope.options = {
@@ -432,8 +432,8 @@ function($scope) {
 		trackColor : 'rgba(52,152,219,.1)',
 		barColor : 'rgba(69,204,206,.5)'
 	};
-}]);
-app.controller('BudgetCtrl', ["$scope",
+}])
+.controller('BudgetCtrl', ["$scope",
 function($scope) {
 	$scope.dailyValue = "25";
 	$scope.totalValue = "750";

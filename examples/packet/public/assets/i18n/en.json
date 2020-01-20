@@ -94,9 +94,7 @@
             "tables": {
                 "MAIN": "Tables",
                 "BASIC": "Basic Tables",
-                "RESPONSIVE": "Responsive Tables",
-                "DYNAMIC": "Dynamic Tables",
-                "DATA": "ngTable"
+                "RESPONSIVE": "Responsive Tables"
             },
             "forms": {
                 "MAIN": "Forms",

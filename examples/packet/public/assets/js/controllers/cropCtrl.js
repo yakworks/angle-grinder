@@ -1,9 +1,10 @@
 'use strict';
-/** 
+/**
   * controller for ngImgCrop
   * Simple Image Crop directive for AngularJS.
 */
-app.controller('CropCtrl', ["$scope", function ($scope) {
+
+angular.module('app').controller('CropCtrl', ["$scope", function ($scope) {
     $scope.myImage = '';
     $scope.myCroppedImage = '';
     $scope.cropType = "square";

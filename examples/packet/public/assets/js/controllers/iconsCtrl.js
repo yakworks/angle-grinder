@@ -1,8 +1,9 @@
 'use strict';
-/** 
+/**
   * controllers that generate the list of icons (Fontawesome and Themify)
 */
-app.controller('IconsCtrl', ["$scope", function ($scope) {
+
+angular.module('app').controller('IconsCtrl', ["$scope", function ($scope) {
 
     $scope.icons = [{
         "type": "fontawesome",

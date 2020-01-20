@@ -1,21 +1,19 @@
 import angular from 'angular'
-import appName from './app.module'
 
-const app = angular.module(appName)
-
+const app = angular.module('app')
 /**
  * Config for the router
  */
 app.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$compileProvider', '$filterProvider', '$provide', '$ocLazyLoadProvider', 'JS_REQUIRES',
 function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvider, $filterProvider, $provide, $ocLazyLoadProvider, jsRequires) {
 
-    app.controller = $controllerProvider.register;
-    app.directive = $compileProvider.directive;
-    app.filter = $filterProvider.register;
-    app.factory = $provide.factory;
-    app.service = $provide.service;
-    app.constant = $provide.constant;
-    app.value = $provide.value;
+    // app.controller = $controllerProvider.register;
+    // app.directive = $compileProvider.directive;
+    // app.filter = $filterProvider.register;
+    // app.factory = $provide.factory;
+    // app.service = $provide.service;
+    // app.constant = $provide.constant;
+    // app.value = $provide.value;
 
     // LAZY MODULES
 
@@ -38,7 +36,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         abstract: true
     }).state('app.dashboard', {
         url: "/dashboard",
-        template: require("./dashboard.html"),
+        template: require("./dashboards/dashboard.html"),
         resolve: loadSequence('d3', 'ui.knob', 'countTo', 'dashboardCtrl'),
         title: 'Dashboard',
         ncyBreadcrumb: {

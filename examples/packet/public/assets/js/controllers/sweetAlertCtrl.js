@@ -1,9 +1,10 @@
 'use strict';
-/** 
+/**
   * controller for ngSweetAlert
   * AngularJS wrapper for SweetAlert
 */
-app.controller('SweetAlertCtrl', ['$scope', 'SweetAlert', function ($scope, SweetAlert) {
+
+angular.module('app').controller('SweetAlertCtrl', ['$scope', 'SweetAlert', function ($scope, SweetAlert) {
 
     $scope.demo1 = function () {
         SweetAlert.swal({

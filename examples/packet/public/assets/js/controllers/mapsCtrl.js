@@ -1,9 +1,11 @@
 'use strict';
-/** 
-  * controllers for GoogleMap 
+/**
+  * controllers for GoogleMap
   * AngularJS Directive
 */
-app.controller('MapCoordinatesCtrl', ["$scope", "$compile", function ($scope, $compile) {
+
+angular.module('app')
+.controller('MapCoordinatesCtrl', ["$scope", "$compile", function ($scope, $compile) {
     var TILE_SIZE = 256;
 
     function bound(value, opt_min, opt_max) {
@@ -60,8 +62,8 @@ app.controller('MapCoordinatesCtrl', ["$scope", "$compile", function ($scope, $c
         $scope.pixelCoordinate = new google.maps.Point($scope.worldCoordinate.x * numTiles, $scope.worldCoordinate.y * numTiles);
         $scope.tileCoordinate = new google.maps.Point(Math.floor($scope.pixelCoordinate.x / TILE_SIZE), Math.floor($scope.pixelCoordinate.y / TILE_SIZE));
     });
-}]);
-app.controller('EventSimpleCtrl', ['$scope', '$timeout',
+}])
+.controller('EventSimpleCtrl', ['$scope', '$timeout',
 function ($scope, $timeout) {
     var marker, map;
     $scope.$on('mapInitialized', function (evt, evtMap) {
@@ -77,8 +79,8 @@ function ($scope, $timeout) {
         map.setZoom(8);
         map.setCenter(marker.getPosition());
     }
-}]);
-app.controller('EventPropertiesCtrl', ["$scope", function ($scope) {
+}])
+.controller('EventPropertiesCtrl', ["$scope", function ($scope) {
     $scope.$on('mapInitialized', function (evt, map) {
         var infoWindow = map.infoWindows[1];
         $scope.zoomChanged = function (e) {
@@ -86,8 +88,8 @@ app.controller('EventPropertiesCtrl', ["$scope", function ($scope) {
             map.setCenter(infoWindow.getPosition());
         }
     });
-}]);
-app.controller('ControlCustomStateCtrl', ["$scope", function ($scope) {
+}])
+.controller('ControlCustomStateCtrl', ["$scope", function ($scope) {
     $scope.home = new google.maps.LatLng(41.850033, -87.6500523);
     $scope.goHome = function () {
         $scope.map.setCenter($scope.home);

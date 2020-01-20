@@ -1,10 +1,10 @@
 'use strict';
 /**
  * controllers for dynamic table
- * Remove/delete a table row dynamically 
+ * Remove/delete a table row dynamically
  */
 
-app.controller("dynamicTableCtrl", ['$scope', '$http', function ($scope, $http) {
+angular.module('app').controller("dynamicTableCtrl", ['$scope', '$http', function ($scope, $http) {
     $scope.companies = [
 	                    {
 	                        'name': 'Infosys Technologies',
@@ -39,7 +39,7 @@ app.controller("dynamicTableCtrl", ['$scope', '$http', function ($scope, $http) 
     $scope.addRowAsyncAsNV = function () {
         $scope.companies.push({ 'name': $scope.name, 'employees': $scope.employees, 'headoffice': $scope.headoffice });
         // Writing it to the server
-        //		
+        //
         var data = 'name=' + $scope.name + '&employees=' + $scope.employees + '&headoffice=' + $scope.headoffice;
         $http.post('/savecompany', data)
 		.success(function (data, status, headers, config) {

@@ -97,7 +97,8 @@ function ($document, $rootScope) {
         return $('.app-sidebar-fixed').length;
     }
 
-}).directive('appAside', ['$window', '$rootScope', '$timeout', 'APP_MEDIAQUERY',
+})
+.directive('appAside', ['$window', '$rootScope', '$timeout', 'APP_MEDIAQUERY',
 function ($window, $rootScope, $timeout, mq) {
     var $html = $('html'), $win = $($window), _this, wrap = $('.app-aside');
     return {
@@ -118,7 +119,7 @@ function ($window, $rootScope, $timeout, mq) {
                 if (_this.next().is('ul') && _this.parent().toggleClass('open')) {
 
                     _this.next().slideToggle(200, function () {
-                        $win.trigger("resize");
+                        //$win.trigger("resize");
 
                     });
                     e.stopPropagation();

@@ -3,7 +3,7 @@
  * controller for Date Range Picker
  */
 
-app.controller('DateRangeCtrl', function ($scope) {
+angular.module('app').controller('DateRangeCtrl', function ($scope) {
     $scope.dates = {
         startDate: moment('2013-09-20'),
         endDate: moment('2013-09-25')

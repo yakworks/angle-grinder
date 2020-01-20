@@ -2,7 +2,8 @@
 /**
  * Controller of the angularBootstrapCalendarApp
 */
-app.controller('CalendarCtrl', ["$scope", "$aside", "moment", "SweetAlert", "calendarConfig", function ($scope, $aside, moment, SweetAlert, calendarConfig) {
+angular.module('app')
+.controller('CalendarCtrl', ["$scope", "$aside", "moment", "SweetAlert", "calendarConfig", function ($scope, $aside, moment, SweetAlert, calendarConfig) {
 
 
     var vm = this;
@@ -130,7 +131,7 @@ app.controller('CalendarCtrl', ["$scope", "$aside", "moment", "SweetAlert", "cal
                     $scope.startOpened = !$scope.startOpened;
                 };
 
-                $scope.changeTypeEvent = function (event) {                   
+                $scope.changeTypeEvent = function (event) {
                     switch (event.type) {
                         case 'job':
                             event.color.primary = calendarConfig.colorTypes.job;
@@ -187,7 +188,7 @@ app.controller('CalendarCtrl', ["$scope", "$aside", "moment", "SweetAlert", "cal
     };
 
     $scope.eventDeleted = function (event) {
-        deleteEvent(event)        
+        deleteEvent(event)
     };
 
     function deleteEvent(event) {

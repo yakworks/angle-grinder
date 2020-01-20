@@ -1,8 +1,8 @@
-console.log("WTF")
+console.log("MAIN.JS kicking off")
 //CSS and Sass
 
 //<!-- Packet Scripts -->
-// import "./app"
+import "./app"
 // import "./app.module"
 // import "./config.constant"
 // import "./config.router"

@@ -3,7 +3,8 @@
  * controller for ngImgCrop
  * Simple Image Crop directive for AngularJS.
  */
-app.controller('Crop2Ctrl', ["$scope", "$uibModal",
+
+angular.module('app').controller('Crop2Ctrl', ["$scope", "$uibModal",
 function($scope, $uibModal) {
 
 	$scope.options = {

@@ -2,7 +2,8 @@
 /**
  * controller for ng-knob
  */
-app.controller('knobCtrl1', function ($scope) {
+
+angular.module('app').controller('knobCtrl1', function ($scope) {
     $scope.value = 65;
     $scope.options = {
         skin: {
@@ -25,8 +26,8 @@ app.controller('knobCtrl1', function ($scope) {
         step: 5,
         displayPrevious: true
     };
-});
-app.controller('knobCtrl2', function ($scope) {
+})
+.controller('knobCtrl2', function ($scope) {
     $scope.value = 84;
     $scope.options = {
         skin: {
@@ -40,8 +41,8 @@ app.controller('knobCtrl2', function ($scope) {
         barWidth: 30,
         textColor: '#494B52'
     };
-});
-app.controller('knobCtrl3', function ($scope) {
+})
+.controller('knobCtrl3', function ($scope) {
     $scope.value = 65;
     $scope.options = {
         unit: "%",
@@ -57,8 +58,8 @@ app.controller('knobCtrl3', function ($scope) {
         trackColor: '#656D7F',
         barColor: '#2CC185'
     };
-});
-app.controller('knobCtrl4', function ($scope) {
+})
+.controller('knobCtrl4', function ($scope) {
     $scope.value = 70;
     $scope.options = {
         displayPrevious: true,
@@ -69,8 +70,8 @@ app.controller('knobCtrl4', function ($scope) {
         prevBarColor: 'rgba(0,0,0,.2)',
         textColor: 'rgba(255,0,0,.6)'
     };
-});
-app.controller('knobCtrl5', function ($scope) {
+})
+.controller('knobCtrl5', function ($scope) {
     $scope.value = 85;
     $scope.options = {
         scale: {
@@ -87,8 +88,8 @@ app.controller('knobCtrl5', function ($scope) {
         trackColor: 'rgba(52,152,219,.1)',
         barColor: 'rgba(52,152,219,.5)'
     };
-});
-app.controller('knobCtrl6', function ($scope) {
+})
+.controller('knobCtrl6', function ($scope) {
     $scope.value = 350;
     $scope.options = {
         min: -1000,
@@ -98,8 +99,8 @@ app.controller('knobCtrl6', function ($scope) {
         trackWidth: 15,
         barWidth: 30
     };
-});
-app.controller('knobCtrl7', function ($scope) {
+})
+.controller('knobCtrl7', function ($scope) {
     $scope.value = 65;
     $scope.options = {
         scale: {
@@ -114,8 +115,8 @@ app.controller('knobCtrl7', function ($scope) {
         barWidth: 40,
         trackColor: 'rgba(0,0,0,.1)'
     };
-});
-app.controller('knobCtrl8', function ($scope) {
+})
+.controller('knobCtrl8', function ($scope) {
     $scope.value = 65;
     $scope.options = {
         displayInput: false,
@@ -127,8 +128,8 @@ app.controller('knobCtrl8', function ($scope) {
         trackColor: 'rgba(33,33,33,.2)',
         barColor: 'rgba(255,221,51,1)'
     };
-});
-app.controller('knobCtrl9', function ($scope) {
+})
+.controller('knobCtrl9', function ($scope) {
     $scope.value = 65;
     $scope.options = {
         bgColor: '#2C3E50',
@@ -137,11 +138,11 @@ app.controller('knobCtrl9', function ($scope) {
         barColor: '#FFAE1A',
         textColor: '#eee'
     };
-});
-app.controller('knobCtrl10', function ($scope) {
+})
+.controller('knobCtrl10', function ($scope) {
     $scope.value = 65;
-});
-app.controller('knobCtrl11', function ($scope) {
+})
+.controller('knobCtrl11', function ($scope) {
     $scope.value = 65;
     $scope.options = {
         startAngle: 90,
@@ -159,8 +160,8 @@ app.controller('knobCtrl11', function ($scope) {
             quantity: 5
         }
     };
-});
-app.controller('knobCtrl12', function ($scope) {
+})
+.controller('knobCtrl12', function ($scope) {
     $scope.value = 256;
     $scope.options = {
         startAngle: 30,

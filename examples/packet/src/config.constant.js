@@ -1,17 +1,16 @@
 import angular from 'angular'
-import appName from './app.module'
 
-const app = angular.module(appName)
 /**
  * Config constant
  */
-app.constant('APP_MEDIAQUERY', {
+angular.module('app')
+.constant('APP_MEDIAQUERY', {
     'desktopXL': 1200,
     'desktop': 992,
     'tablet': 768,
     'mobile': 480
-});
-app.constant('JS_REQUIRES', {
+})
+.constant('JS_REQUIRES', {
     //*** Scripts
     scripts: {
         //*** Javascript Plugins
@@ -33,7 +32,6 @@ app.constant('JS_REQUIRES', {
         'vAccordionCtrl': 'assets/js/controllers/vAccordionCtrl.js',
         'ckeditorCtrl': 'assets/js/controllers/ckeditorCtrl.js',
         'laddaCtrl': 'assets/js/controllers/laddaCtrl.js',
-        'ngTableCtrl': 'assets/js/controllers/ngTableCtrl.js',
         'cropCtrl': 'assets/js/controllers/cropCtrl.js',
         'asideCtrl': 'assets/js/controllers/asideCtrl.js',
         'toasterCtrl': 'assets/js/controllers/toasterCtrl.js',

@@ -219,5 +219,35 @@ app.controller('AppCtrl',
         });
         $('footer').show();
       }
-    });
-  });
+    })
+
+    $scope.foo = 'bar'
+
+    $scope.sideMenuItems = [
+      {
+        title: "Dashboard",
+        icon: "fa fa-home",
+        sref: "app.dashboard"
+      },
+      {
+        title: "Forms",
+        icon: "fa fa-pencil",
+        sref: "app.form",
+        items: [
+          {
+            title: "Form Elements",
+            sref: "app.form.elements"
+          },
+          {
+            title: "Pickers",
+            sref: "app.form.pickers"
+          }
+        ]
+      }
+    ];
+  }
+);
+app.config(function($compileProvider){
+  $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|javascript):/);
+});
+

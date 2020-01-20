@@ -1,6 +1,7 @@
 'use strict';
 
 /* Controllers */
+let app = angular.module('app')
 
 app.controller('SliderCtrl', ['$scope',
 function ($scope) {

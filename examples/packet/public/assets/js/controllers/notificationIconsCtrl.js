@@ -3,7 +3,8 @@
  * controller for ngImgCrop
  * Simple Image Crop directive for AngularJS.
  */
-app.controller('NotificationIconsCtrl', ["$scope", "$interval",
+
+angular.module('app').controller('NotificationIconsCtrl', ["$scope", "$interval",
 function ($scope, $interval) {
 
     var autoCounter = function (index, start, steps, delay) {

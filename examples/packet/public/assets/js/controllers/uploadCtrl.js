@@ -1,8 +1,9 @@
 'use strict';
-/** 
+/**
   * controllers for Angular File Upload
 */
-app.controller('UploadCtrl', ['$scope', 'FileUploader',
+
+angular.module('app').controller('UploadCtrl', ['$scope', 'FileUploader',
 function ($scope, FileUploader) {
     var uploaderImages = $scope.uploaderImages = new FileUploader({
         url: 'upload.php'
