@@ -44,6 +44,7 @@ angular.module('ui.select2', [])
 
         return {
           pre: function(scope, elm, attrs, controller) {
+            console.log("preeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee")
             // instance-specific options
             var opts = angular.extend({}, options, scope.$eval(attrs.uiSelect2))
 
@@ -57,6 +58,8 @@ angular.module('ui.select2', [])
                 angular.forEach(select2_data, function(value, index) {
                   model.push(value.id)
                 })
+                console.log(select2_data)
+                console.log(model)
               } else {
                 model = select2_data
               }
@@ -67,20 +70,21 @@ angular.module('ui.select2', [])
           Convert from Angular view-model to Select2 view-model.
           */
             var convertToSelect2Model = function(angular_data) {
-              console.log("1111111111111111111111111111111111")
-              console.log(angular_data);
               var model = []
-              if (_.isNil(angular_data)) {
+              if (!angular_data) {
                 return model
               }
 
               if (opts.simple_tags) {
                 model = []
+                console.log("+++>>>>>>>>>>>>>>>>>>>>>>>")
+                console.log(angular_data)
                 angular.forEach(
                   angular_data,
                   function(value, index) {
                     model.push({ id: value, text: value })
                   })
+                console.log(model)
               } else {
                 model = angular_data
               }
@@ -96,35 +100,27 @@ angular.module('ui.select2', [])
             }
 
             if (controller) {
-              // Watch the model for programmatic changes
-              scope.$watch(tAttrs.ngModel, function(current, old) {
-                if (!current) {
-                  return
-                }
-                if (current === old) {
-                  return
-                }
-                controller.$render()
-              }, true)
-              controller.$render = function() {
-                console.log("3333333333333333333333333333333333333333333333333333333333333")
-                console.log(controller.$viewValue)
-                console.log("44443333333333333333333333333333333333333333333333333333333333333")
+              const renFunc = function() {
+                console.log("run render func")
                 if (isSelect) {
                   elm.select2('val', controller.$viewValue)
                 } else {
+                  console.log("multiple")
                   if (opts.multiple) {
                     controller.$isEmpty = function(value) {
                       return !value || value.length === 0
                     }
                     var viewValue = controller.$viewValue
+                    console.log("viewValue   "+ viewValue)
+                    console.log("modelValue   "+ controller.$modelValue)
                     if (angular.isString(viewValue)) {
                       viewValue = viewValue.split(',')
                     }
-                    console.log(viewValue)
-                    elm.select2(
-                      'data', convertToSelect2Model(viewValue))
+                    console.log("set convertToSelect2Model")
+                    elm.select2('data', convertToSelect2Model(viewValue))
+                    console.log("after convertToSelect2Model")
                     if (opts.sortable) {
+                      console.log("sortable")
                       elm.select2('container').find('ul.select2-choices').sortable({
                         containment: 'parent',
                         start: function() {
@@ -148,19 +144,35 @@ angular.module('ui.select2', [])
                 }
               }
 
+              controller.$render = renFunc()
+
+              // Watch the model for programmatic changes
+              scope.$watch(tAttrs.ngModel, function(current, old) {
+                console.log("waaaaaaaaaaaaaaaach")
+                /* if (!current) {
+                   return
+                 }
+                 if (current === old) {
+                   return
+                 }*/
+                renFunc()
+              }, true)
+
+
               // Watch the options dataset for changes
-              console.log(watch)
+              console.log("watch for "+watch)
               if (watch) {
+                console.log("inside watch")
                 scope.$watch(watch, function(newVal, oldVal, scope) {
                   console.log("444444444444444444444444444444444`121`21")
-                  if (angular.equals(newVal, oldVal)) {
+                  /*if (angular.equals(newVal, oldVal)) {
                     return
-                  }
+                  }*/
                   // Delayed so that the options have time to be rendered
                   $timeout(function() {
                     elm.select2('val', controller.$viewValue)
                     // Refresh angular to remove the superfluous option
-                    controller.$render()
+                    renFunc()
                     if (newVal && !oldVal && controller.$setPristine) {
                       controller.$setPristine(true)
                     }
@@ -168,9 +180,8 @@ angular.module('ui.select2', [])
                 })
               }
 
-
-
               if (!isSelect) {
+                console.log("isSElect!!!!!!!!!!!!!!!!!!!!!!!!")
                 // Set the view and model value and update the angular template manually for the ajax/multiple select2.
                 elm.bind('change', function(e) {
                   e.stopImmediatePropagation()
@@ -178,6 +189,7 @@ angular.module('ui.select2', [])
                   if (scope.$$phase || scope.$root.$$phase) {
                     return
                   }
+                  console.log("apply values")
                   scope.$apply(function() {
                     controller.$setViewValue(
                       convertToAngularModel(elm.select2('data')))
@@ -243,7 +255,9 @@ angular.module('ui.select2', [])
               }
             })
           },
+
           post: function(scope, elm, attrs, controller) {
+            console.log("posts section")
             // Update valid and dirty statuses
             controller.$parsers.push(function(value) {
               var div = elm.prev()
@@ -256,7 +270,7 @@ angular.module('ui.select2', [])
                 .toggleClass('ng-pristine', controller.$pristine)
               return value
             })
-        }
+          }
         }
       }
     }

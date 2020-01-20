@@ -128,11 +128,9 @@ describe('uiSelect2', function () {
           scope.foo = 'First';
           var element = compile('<select ui-select2="{allowClear:true}" ng-model="foo"><option>First</option><option>Second</option></select>');
           expect(element.select2('val')).to.equal('First');
-          console.log("22222222222222222222222222222222222222222222222222222222222")
           scope.$apply('foo = false');
-          console.log("foo 22222222222222222222222222222222222222222222222222222222222")
+          console.log(element.select2('val'))
           expect(element.select2('val')).to.be.null
-          console.log("33333 22222222222222222222222222222222222222222222222222222222222")
           scope.$apply('foo = "Second"');
           scope.$apply('foo = null');
           expect(element.select2('val')).to.be.null
@@ -184,7 +182,7 @@ describe('uiSelect2', function () {
       scope.$apply('multiple = false');
       expect(element.siblings().hasClass('select2-container-multi')).to.be.false
     });
-    xit('should observe an option with ng-repeat for changes', function(){
+    it('should observe an option with ng-repeat for changes', function(){
       scope.items = ['first', 'second', 'third'];
       scope.foo = 'fourth';
       var element = compile('<select ui-select2 ng-model="foo"><option ng-repeat="item in items">{{item}}</option></select>');
@@ -219,12 +217,12 @@ describe('uiSelect2', function () {
           var element = compile('<input ng-model="foo" ui-select2="options">');
           //sinon.spy($.fn, 'select2');
           scope.$apply('foo={ id: 1, text: "first" }');
-          expect(element.select2).toHaveBeenCalledWith('data', { id: 1, text: "first" });
+          expect(element.select2).to.have.been.calledWith('data', { id: 1, text: "first" });
         });
         it('should call select2(val, ...) for strings', function(){
           var element = compile('<input ng-model="foo" ui-select2="options">');
           scope.$apply('foo="first"');
-          expect(element.select2).toHaveBeenCalledWith('val', 'first');
+          expect(element.select2).to.have.been.calledWith('val', 'first');
         });
       });
       describe('for multi-select', function(){
@@ -240,12 +238,12 @@ describe('uiSelect2', function () {
           scope.$apply('foo=[]');
           expect(element.select2).to.have.been.calledWith('data', []);
         });
-        xit('should call select2(val, ...) for strings', function(){
+       /* xit('should call select2(val, ...) for strings', function(){
           var element = compile('<input ng-model="foo" multiple ui-select2="options">');
           //sinon.spy($.fn, 'select2');
           scope.$apply('foo="first,second"');
           expect(element.select2).toHaveBeenCalledWith('val', 'first,second');
-        });
+        });*/
       });
     });
     describe('consumers of ngModel should correctly use $viewValue', function() {
@@ -282,11 +280,11 @@ describe('uiSelect2', function () {
         expect(element.select2).should.always.have.been.calledWith('data', [{ id: 1, text: "first - I've been formatted" },{ id: 2, text: "second - I've been formatted" }]);
       });
       // isMultiple...
-      xit('should use any formatters if present (input multi select - non array)', function() {
+      /*xit('should use any formatters if present (input multi select - non array)', function() {
         var element = compile('<input ng-model="foo" multiple ui-select2="options" inject-transformers="transformers">');
         scope.$apply('foo={ id: 1, text: "first" }');
         expect(element.select2).should.always.have.been.calledWith('val', { id: 1, text: "first - I've been formatted" });
-      });
+      });*/
 
       // !isMultiple
       xit('should use any formatters if present (input - single select - object)', function() {
@@ -340,7 +338,7 @@ describe('uiSelect2', function () {
     });
 
     //FIXME not sure why this is failing
-    xit('updated the view when model changes with complex object', function(){
+    it('updated the view when model changes with complex object', function(){
       scope.foo = [{'id': '0', 'text': '0'}];
       scope.options['multiple'] = true;
       var element = compile('<input ng-model="foo" ui-select2="options">');
