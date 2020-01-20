@@ -1,7 +1,8 @@
 'use strict';
-/** 
-  * Returns the id of the selected e-mail. 
+/**
+  * Returns the id of the selected e-mail.
 */
+let app = angular.module('app')
 app.directive('messageItem', ['$location', function ($location) {
     return {
         restrict: 'EA',

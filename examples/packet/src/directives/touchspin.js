@@ -1,4 +1,5 @@
 'use strict';
+let app = angular.module('app')
 app.directive('touchspin', function () {
     return {
         restrict: 'EA',

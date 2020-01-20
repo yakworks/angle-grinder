@@ -2,6 +2,7 @@
 /**
  * Add several features to panels.
  */
+let app = angular.module('app')
 app.directive('ctPaneltool', function () {
     var templates = {
         /* jshint multistr: true */

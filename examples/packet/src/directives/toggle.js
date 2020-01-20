@@ -1,7 +1,8 @@
 'use strict';
-/** 
-  * A simple but useful and efficient directive to toggle a class to an element.   
+/**
+  * A simple but useful and efficient directive to toggle a class to an element.
 */
+let app = angular.module('app')
 app.factory('ToggleHelper', ['$rootScope',
 function ($rootScope) {
     return {

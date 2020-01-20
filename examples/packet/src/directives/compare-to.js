@@ -1,7 +1,8 @@
 'use strict';
-/** 
+/**
   * Password-check directive.
 */
+let app = angular.module('app')
 app.directive('compareTo', function () {
     return {
         require: "ngModel",

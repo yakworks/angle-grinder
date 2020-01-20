@@ -4,6 +4,7 @@
  * You must use it as a class.
  * Combined with the class .cs-skin-slide it creates a slide <select>
  */
+let app = angular.module('app')
 app.factory('SelectFx', ["$http",
 function ($http) {
     function hasParent(e, p) {

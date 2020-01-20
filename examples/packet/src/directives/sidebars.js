@@ -2,6 +2,7 @@
 /**
  * A set of directives for left and right sidebar.
  */
+let app = angular.module('app')
 app.directive('sidebar', ['$document', '$rootScope',
 function ($document, $rootScope) {
     return {

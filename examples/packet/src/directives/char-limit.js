@@ -1,4 +1,5 @@
 'use strict';
+let app = angular.module('app')
 app.directive('maxlength', function() {
 	return {
 		restrict : 'A',

@@ -1,5 +1,6 @@
 (function () {
     'use strict';
+    let app = angular.module('app')
     app.directive('clipChat', ClipChat);
 
     function ClipChat() {

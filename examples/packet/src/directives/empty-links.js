@@ -1,7 +1,8 @@
 'use strict';
-/** 
+/**
   * Prevent default action on empty links.
 */
+let app = angular.module('app')
 app.directive('a', function () {
     return {
         restrict: 'E',

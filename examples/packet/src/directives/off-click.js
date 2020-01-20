@@ -1,7 +1,8 @@
 'use strict';
-/** 
-  * It's like click, but when you don't click on your element. 
+/**
+  * It's like click, but when you don't click on your element.
 */
+let app = angular.module('app')
 app.directive('offClick', ['$rootScope', '$parse', function ($rootScope, $parse) {
     var id = 0;
     var listeners = {};
