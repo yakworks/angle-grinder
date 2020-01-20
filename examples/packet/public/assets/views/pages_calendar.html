@@ -1,0 +1,174 @@
+<!-- start: BREADCRUMB -->
+<div class="breadcrumb-wrapper">
+    <h4 class="mainTitle no-margin" translate="sidebar.nav.pages.CALENDAR">CALENDAR</h4>
+
+    <div ncy-breadcrumb class="pull-right"></div>
+</div>
+<!-- end: BREADCRUMB -->
+<!-- start: CALENDAR -->
+<div class="container-fluid container-fullw" ng-controller="CalendarCtrl">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-white">
+                <div class="panel-body">
+                    <!-- /// controller:  'CalendarCtrl' -  localtion: assets/js/controllers/calendarCtrl.js /// -->
+                    <div ng-controller="CalendarCtrl" id="demo">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="margin-bottom-30">
+                                    <button class="btn btn-primary btn-o btn-wide" ng-click="addEvent()">
+                                        <i class="ti-plus"></i> Add new event
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h2 class="text-center margin-bottom-20 margin-top-20">{{ calendarTitle }} </h2>
+                            </div>
+                            <div class="col-xs-8">
+                                <div class="btn-group">
+                                    <button class="btn btn-primary" mwl-date-modifier date="calendarDate" decrement="calendarView">
+                                        <i class="ti-angle-left"></i>
+                                    </button>
+                                    <button class="btn btn-primary" mwl-date-modifier date="calendarDate" increment="calendarView">
+                                        <i class="ti-angle-right"></i>
+                                    </button>
+                                </div>
+                                <button class="btn btn-primary btn-o" mwl-date-modifier date="calendarDate" set-to-today>
+                                    Today
+                                </button>
+                            </div>
+                            <div class="col-xs-4 text-right">
+                                <div class="visible-md visible-lg hidden-sm hidden-xs">
+                                    <div class="btn-group">
+                                        <label class="btn btn-primary" ng-model="calendarView" uib-btn-radio="'year'"> Year </label>
+                                        <label class="btn btn-primary" ng-model="calendarView" uib-btn-radio="'month'"> Month </label>
+                                        <label class="btn btn-primary" ng-model="calendarView" uib-btn-radio="'week'"> Week </label>
+                                        <label class="btn btn-primary" ng-model="calendarView" uib-btn-radio="'day'"> Day </label>
+                                    </div>
+                                </div>
+                                <div class="visible-xs visible-sm hidden-md hidden-lg">
+                                    <div class="btn-group" uib-dropdown>
+                                        <button type="button" class="btn btn-primary dropdown-toggle" uib-dropdown-toggle>
+                                            <i class="fa fa-cog"></i>&nbsp;<span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu pull-right dropdown-light" role="menu">
+                                            <li>
+                                                <a ng-model="calendarView" uib-btn-radio="'year'" href=""> Year </a>
+                                            </li>
+                                            <li>
+                                                <a ng-model="calendarView" uib-btn-radio="'month'" href=""> Month </a>
+                                            </li>
+                                            <li>
+                                                <a ng-model="calendarView" uib-btn-radio="'week'" href=""> Week </a>
+                                            </li>
+                                            <li>
+                                                <a ng-model="calendarView" uib-btn-radio="'day'" href=""> Day </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <mwl-calendar events="events" view="calendarView" view-date="calendarDate" view-title="calendarTitle" current-day="calendarDay"
+                                      on-event-click="eventClicked(calendarEvent)" on-edit-event-click="eventEdited(calendarEvent)" on-delete-event-click="eventDeleted(calendarEvent)"
+                                      cell-is-open="false"></mwl-calendar>
+                        <br>
+                        <br>
+                        <br>
+                        <!-- start: EDIT EVENT TEMPLATE -->
+                        <script type="text/ng-template" id="calendarEvent.html">
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label>
+                                        Event title
+                                    </label>
+                                    <input type="text" placeholder="Enter title" class="form-control underline text-large" ng-model="event.title">
+                                </div>
+                                <div class="form-group">
+                                    <label>
+                                        Start
+                                    </label>
+                                    <span class="input-icon">
+                                        <input type="text" class="form-control underline" ng-click="startOpen = !startOpen" show-weeks="false" uib-datepicker-popup="fullDate" ng-model="event.startsAt" is-open="startOpen" ng-init="startOpen = false" max-date="event.endsAt" close-text="Close" />
+                                        <i class="ti-calendar"></i>
+                                    </span>
+                                    <div uib-timepicker ng-model="event.startsAt" show-meridian="true" ng-show="!event.allDay"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label>
+                                        End
+                                    </label>
+                                    <span class="input-icon">
+                                        <input type="text" class="form-control underline" ng-click="endOpen = !endOpen" show-weeks="false" uib-datepicker-popup="fullDate" ng-model="event.endsAt" is-open="endOpen" ng-init="endOpen = false" min-date="event.startsAt" close-text="Close" />
+                                        <i class="ti-calendar"></i>
+                                    </span>
+                                    <div uib-timepicker ng-model="event.endsAt" show-meridian="true" ng-show="!event.allDay"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label>
+                                        Category
+                                    </label>
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <div class="radio clip-radio radio-primary">
+                                                <input type="radio" id="job" name="optionsCategory" value="job" ng-model="event.type" ng-change="changeTypeEvent(event)">
+                                                <label for="job">
+                                                    <span class="fa fa-circle text-primary"></span> Job
+                                                </label>
+                                            </div>
+                                            <div class="radio clip-radio radio-primary">
+                                                <input type="radio" id="home" name="optionsCategory" value="home" ng-model="event.type" ng-change="changeTypeEvent(event)">
+                                                <label for="home">
+                                                    <span class="fa fa-circle text-purple"></span> Home
+                                                </label>
+                                            </div>
+                                            <div class="radio clip-radio radio-primary">
+                                                <input type="radio" id="off-site-work" name="optionsCategory" value="off-site-work" ng-model="event.type" ng-change="changeTypeEvent(event)">
+                                                <label for="off-site-work">
+                                                    <span class="fa fa-circle text-green"></span> Off site
+                                                </label>
+                                            </div>
+                                            <div class="radio clip-radio radio-primary">
+                                                <input type="radio" id="cancelled" name="optionsCategory" value="cancelled" ng-model="event.type" ng-change="changeTypeEvent(event)">
+                                                <label for="cancelled">
+                                                    <span class="fa fa-circle text-yellow"></span> Cancelled
+                                                </label>
+                                            </div>
+                                            <div class="radio clip-radio radio-primary">
+                                                <input type="radio" id="generic" name="optionsCategory" value="generic" ng-model="event.type" ng-change="changeTypeEvent(event)">
+                                                <label for="generic">
+                                                    <span class="fa fa-circle text-info"></span> Generic
+                                                </label>
+                                            </div>
+                                            <div class="radio clip-radio radio-primary">
+                                                <input type="radio" id="to-do" name="optionsCategory" value="to-do" ng-model="event.type" ng-change="changeTypeEvent(event)">
+                                                <label for="to-do">
+                                                    <span class="fa fa-circle text-orange"></span> ToDo
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-danger btn-o" ng-click="deleteEvent(event)">
+                                    Delete
+                                </button>
+                                <button class="btn btn-primary btn-o" ng-click="cancel()">
+                                    Ok
+                                </button>
+                            </div>
+                        </script>
+                    </div>
+                    
+                    <!-- end: EDIT EVENT TEMPLATE -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<!-- end: CALENDAR -->

@@ -1,0 +1,107 @@
+/* ---------------------------------------------------------------------- */
+/*  Calendar
+/* ---------------------------------------------------------------------- */
+.cal-month-box {
+    border-right: none !important;
+    border-bottom: none !important;
+}
+
+.event {
+    border: none !important;
+    box-shadow: none !important;
+    height: 8px !important;
+    width: 8px !important;
+}
+
+.event-job {
+    background-color: $primary !important;
+}
+
+.event-home {
+    background-color: $purple !important;
+}
+
+.event-to-do {
+    background-color: $orange !important;
+}
+
+.event-cancelled {
+    background-color: $yellow !important;
+}
+
+.event-generic {
+    background-color: $info !important;
+}
+
+.event-off-site-work {
+    background-color: $green !important;
+}
+
+.day-highlight.dh-event-job {
+    border: none !important;
+    background-color: rgba($primary, 0.3) !important;
+}
+
+.day-highlight.dh-event-home {
+    border: none !important;
+    background-color: rgba($purple, 0.3) !important;
+}
+
+.day-highlight.dh-event-to-do {
+    border: none !important;
+    background-color: rgba($orange, 0.3) !important;
+}
+
+.day-highlight.dh-event-cancelled {
+    border: none !important;
+    background-color: rgba($yellow, 0.3) !important;
+}
+
+.day-highlight.dh-event-generic {
+    border: none !important;
+    background-color: rgba($info, 0.3) !important;
+}
+
+.day-highlight.dh-event-off-site-work {
+    border: none !important;
+    background-color: rgba($info, 0.3) !important;
+}
+
+.cal-slide-content {
+    background-color: #F2F2F2 !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+
+    li {
+        padding: 20px;
+        border-bottom: 1px dotted $border-default;
+
+        &:hover {
+            background-color: #DDDDE8 !important;
+        }
+
+        a.event-item {
+            color: $text-color !important;
+            font-weight: 400;
+        }
+    }
+}
+
+.cal-day-today {
+    background: none !important;
+}
+
+.cal-month-box .cal-day-today span[data-cal-date] {
+    font-size: 1.2em !important;
+    color: #fff !important;
+    background: $primary !important;
+    opacity: 1 !important;
+    padding: 2px 5px;
+    border-radius: 50%;
+    min-width: 26px;
+    text-align: center;
+}
+
+.cal-events-num {
+    display: none;
+}

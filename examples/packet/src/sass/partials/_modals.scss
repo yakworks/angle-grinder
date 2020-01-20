@@ -1,0 +1,40 @@
+/* ---------------------------------------------------------------------- */
+/*  Modals
+/* ---------------------------------------------------------------------- */
+.modal-backdrop {
+    background-color: #000;
+    bottom: 0;
+    position: fixed;
+
+    &.in {
+        opacity: 0.4;
+    }
+}
+
+.modal-backdrop {
+    z-index: 9998 !important;
+}
+
+.modal {
+    z-index: 9999 !important;
+}
+
+.modal-content {
+    background: #ffffff;
+    box-shadow: none;
+}
+
+.modal-footer, .modal-header {
+    border-color: rgba(0, 0, 0, 0.07);
+}
+
+.ng-aside.horizontal .modal-dialog {
+    min-height: 100% !important;
+    bottom: 0;
+    height: auto !important;
+
+    .modal-content {
+        height: auto !important;
+        min-height: 100% !important;
+    }
+}

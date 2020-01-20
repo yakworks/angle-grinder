@@ -1,0 +1,82 @@
+<!-- start: BREADCRUMB -->
+<div class="breadcrumb-wrapper">
+    <h4 class="mainTitle no-margin" translate="sidebar.nav.tables.DYNAMIC">DYNAMIC TABLES</h4>
+
+    <div ncy-breadcrumb class="pull-right"></div>
+</div>
+<!-- end: BREADCRUMB -->
+<!-- start: DYNAMIC TABLE -->
+<div class="container-fluid container-fullw">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-white">
+                <div class="panel-body">
+                    <h5 class="over-title margin-bottom-15">Dynamic <span class="text-bold">Table</span></h5>
+                    <p>
+                        Delete the row by pressing the delete button. Alternatively, play around by adding and deleting/removing the rows.
+                    </p>
+                    <!-- /// controller:  'ngTableCtrl' -  localtion: assets/js/controllers/ngTableCtrl.js /// -->
+                    <div ng-controller="dynamicTableCtrl">
+                        <div class="col-md-6">
+                            <div class="padding-bottom-20">
+                                <h3>Add a Company</h3>
+                            </div>
+                            <form class="form-horizontal padding-bottom-20" role="form" ng-submit="addRow()">
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Name</label>
+                                    <div class="col-md-4">
+                                        <input type="text" class="form-control" name="name" ng-model="name" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Employees</label>
+                                    <div class="col-md-4">
+                                        <input type="text" class="form-control" name="employees" ng-model="employees" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Headoffice</label>
+                                    <div class="col-md-4">
+                                        <input type="text" class="form-control" name="headoffice" ng-model="headoffice" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-offset-2 col-md-4">
+                                        <input type="submit" value="Submit" class="btn btn-primary btn-wide pull-right" />
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Name </th>
+                                            <th>Employees </th>
+                                            <th>Head Office </th>
+                                            <th>Action </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="company in companies">
+                                            <td>{{company.name}} </td>
+                                            <td>{{company.employees}} </td>
+                                            <td>{{company.headoffice}} </td>
+                                            <td>
+                                                <button type="button" class="btn btn-red btn-wide btn-scroll btn-scroll-top ti-trash" ng-click="removeRow(company.name)">
+                                                    <span>Remove</span>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end: DYNAMIC TABLE -->

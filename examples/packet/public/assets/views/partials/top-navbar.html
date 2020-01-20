@@ -1,0 +1,134 @@
+<!-- start: TOP NAVBAR -->
+<header class="navbar navbar-default navbar-static-top hidden-print">
+    <!-- start: NAVBAR HEADER -->
+    <div class="navbar-header">
+        <button href="javascript:void(0)" class="menu-mobile-toggler btn no-radius pull-left hidden-md hidden-lg" id="horizontal-menu-toggler" ng-click="menuToggle()" v-pressable>
+            <i class="fa fa-bars"></i>
+        </button>
+        <button href="javascript:void(0)" class="sidebar-mobile-toggler btn no-radius pull-left hidden-md hidden-lg" id="sidebar-toggler" ng-click="toggle('sidebar')" v-pressable>
+            <i class="fa fa-bars"></i>
+        </button>
+        <a class="navbar-brand" ui-sref="app.dashboard"> <img ng-src="{{app.layout.logo}}" alt="{{app.name}}" /> </a>
+        <a class="navbar-brand navbar-brand-collapsed" ui-sref="app.dashboard"> <img ng-src="{{app.layout.logoCollapsed}}" alt="" /> </a>
+        <button class="btn pull-right menu-toggler visible-xs-block" id="menu-toggler" ng-click="navbarCollapsed = !navbarCollapsed" v-pressable>
+            <i ng-class="navbarCollapsed ? 'fa fa-folder' : 'fa fa-folder-open'"></i> <small><i class="fa fa-caret-down margin-left-5"></i></small>      	
+        </button>
+    </div>
+    <!-- end: NAVBAR HEADER -->
+    <!-- start: NAVBAR COLLAPSE -->
+    <div class="navbar-collapse collapse" uib-collapse="navbarCollapsed" ng-init="navbarCollapsed = true" off-click="navbarCollapsed = true" off-click-if='!navbarCollapsed' off-click-filter="'#menu-toggler'">
+        <ul class="nav navbar-left hidden-sm hidden-xs">
+            <li class="sidebar-toggler-wrapper">
+                <div>
+                    <button href="javascript:void(0)" class="btn sidebar-toggler visible-md visible-lg" ng-click="app.layout.isSidebarClosed = !app.layout.isSidebarClosed" v-pressable>
+                        <i class="fa fa-bars"></i>
+                    </button>
+                </div>
+            </li>
+            <li>
+                <a ng-click="goFullscreen()"> <i class="fa fa-expand" ng-show="!isFullscreen"></i> <i class="fa fa-compress" ng-show="isFullscreen"></i></a>
+            </li>
+            <li>
+                <form role="search" class="navbar-form main-search">
+                    <div class="form-group">
+                        <input type="text" placeholder="{{ 'search.PLACEHOLDER' | translate }}" class="form-control">
+                        <button class="btn search-button" type="submit">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </form>
+            </li>
+        </ul>
+        <ul class="nav navbar-right" ct-fullheight="window" data-ct-fullheight-exclusion="header" data-ct-fullheight-if="isSmallDevice">
+            <!-- start: MESSAGES DROPDOWN -->
+            <!-- /// controller:  'InboxCtrl' -  localtion: assets/js/controllers/InboxCtrl.js /// -->
+            <li class="dropdown" uib-dropdown on-toggle="toggled(open)" ng-controller="InboxCtrl">
+                <a href class="dropdown-toggle" uib-dropdown-toggle>
+                    <notification-icon count='scopeVariable'>
+                        <i class="fa fa-envelope"></i>
+                    </notification-icon>
+                </a>
+                <ul class="dropdown-menu dropdown-light dropdown-messages dropdown-large animated fadeInUpShort">
+                    <li>
+                        <span class="dropdown-header" translate="topbar.messages.HEADER"> Unread messages</span>
+                    </li>
+                    <li>
+                        <div class="drop-down-wrapper ps-container">
+                            <ul>
+                                <li class="unread" ng-repeat="message in messages | orderBy: 'date':true | limitTo:3 ">
+                                    <a href="javascript:;" ng-class="{ unread: !message.read }">
+                                        <div class="clearfix">
+                                            <div class="thread-image">
+                                                <img ng-src="{{ message.avatar && message.avatar || noAvatarImg }}" alt="" class="img-responsive img-rounded">
+                                            </div>
+                                            <div class="thread-content">
+                                                <span class="author">{{message.from}}</span>
+                                                <span class="preview">{{ message.content | htmlToPlaintext | words:15 :true }}</span>
+                                                <span class="time"> {{ message.date | date: "MM/dd/yyyy 'at' h:mma" }}</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="view-all">
+                        <a href="javascript:void(0)" translate="topbar.messages.SEEALL"> See All </a>
+                    </li>
+                </ul>
+            </li>
+            <!-- end: MESSAGES DROPDOWN -->
+            <!-- start: ACTIVITIES DROPDOWN -->
+            <li class="dropdown" uib-dropdown on-toggle="toggled(open)">
+                <a href class="dropdown-toggle" uib-dropdown-toggle><i class="fa fa-bell"></i></a>
+                <ul class="dropdown-menu dropdown-light dropdown-messages dropdown-large animated fadeInUpShort">
+                    <li>
+                        <span class="dropdown-header" translate="topbar.activities.HEADER"> You have new notifications</span>
+                    </li>
+                    <li>
+                        <div class="drop-down-wrapper ps-container">
+                            <div class="list-group no-margin">
+                                <a class="media list-group-item" href=""> <img class="img-circle" alt="..." src="assets/images/avatar-1.jpg"> <span class="media-body block no-margin"> Use awesome animate.css <small class="block text-grey">10 minutes ago</small> </span> </a>
+                                <a class="media list-group-item" href=""> <span class="media-body block no-margin"> 1.0 initial released <small class="block text-grey">1 hour ago</small> </span> </a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="view-all">
+                        <a href="javascript:void(0)" translate="topbar.activities.SEEALL"> See All </a>
+                    </li>
+                </ul>
+            </li>
+            <!-- end: ACTIVITIES DROPDOWN -->
+            <!-- start: LANGUAGE SWITCHER -->
+            <li class="dropdown" uib-dropdown on-toggle="toggled(open)">
+                <a href class="dropdown-toggle" uib-dropdown-toggle> <i class="flag-icon" ng-class="'flagstyle'| translate"></i><span>&nbsp;{{language.selected}}</span> </a>
+                <ul role="menu" class="dropdown-menu dropdown-light animated fadeInUpShort ">
+                    <li ng-repeat="(localeId, langName) in language.available">
+                        <a ng-click="language.set(localeId, $event)" href="javascript:void(0)" class="menu-toggler"> {{langName}} </a>
+                    </li>
+                </ul>
+            </li>
+            <!-- end: LANGUAGE SWITCHER -->
+        </ul>
+        <!-- start: MENU TOGGLER FOR MOBILE DEVICES -->
+        <div class="close-handle visible-xs-block menu-toggler" ng-click="navbarCollapsed = true" ng-swipe-up="navbarCollapsed = true">
+            <div class="arrow-left"></div>
+            <div class="arrow-right"></div>
+        </div>
+        <!-- end: MENU TOGGLER FOR MOBILE DEVICES -->
+    </div>
+    <button class="sidebar-mobile-toggler dropdown-off-sidebar btn hidden-md hidden-lg" ng-click="toggle('off-sidebar')" v-pressable>
+        &nbsp;
+    </button>
+    <button class="dropdown-off-sidebar btn hidden-sm hidden-xs" ng-click="toggle('off-sidebar')" v-pressable>
+        &nbsp;
+    </button>
+    <!-- end: NAVBAR COLLAPSE -->
+</header>
+<!-- end: TOP NAVBAR -->
+<!-- start: HORIZONTAL MENU -->
+<div data-ng-include=" 'assets/views/partials/horizontal-menu.html' " class="navbar navbar-default horizontal-menu collapse" uib-collapse="horizontalNavbarCollapsed" off-click="menuInit(true)" off-click-if='!horizontalNavbarCollapsed' off-click-filter="'#horizontal-menu-toggler'">
+
+</div>
+<!-- end: HORIZONTAL MENU -->

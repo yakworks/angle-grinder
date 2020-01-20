@@ -1,0 +1,92 @@
+<!-- start: BREADCRUMB -->
+<div class="breadcrumb-wrapper">
+    <h4 class="mainTitle no-margin" translate="sidebar.nav.element.TREEVIEW">TREEVIEW</h4>
+
+    <div ncy-breadcrumb class="pull-right"></div>
+</div>
+<!-- end: BREADCRUMB -->
+<!-- start: BOOTSRAP NAV TREE -->
+<div class="container-fluid container-fullw">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-white">
+                <div class="panel-body">
+                    <h5 class="over-title margin-bottom-15"><span class="text-bold">Angular Bootstrap Nav Tree</span></h5>
+                    <p>
+                        This is a Tree directive for Angular JS apps that use Bootstrap CSS.
+                    </p>
+                    <!-- /// controller:  'TreeCtrl' -  localtion: assets/js/controllers/treeCtrl.js /// -->
+                    <div ng-controller="TreeCtrl">
+                        <div class="row">
+                            <div class="col-md-8 col-sm-6">
+                                <div class="panel panel-white">
+                                    <div class="panel-body">
+                                        <div class="box-tree">
+                                            <span ng-if="doing_async">...loading...</span>
+                                            <abn-tree tree-data="my_data" tree-control="my_tree" on-select="my_tree_handler(branch)" expand-level="2" initial-selection="Granny Smith" icon-leaf="ti-file" icon-expand="ti-plus" icon-collapse="ti-minus"></abn-tree>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="alert alert-warning">
+                                    {{ output }}
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6">
+                                <button ng-click="try_changing_the_tree_data()" class="btn btn-primary btn-o margin-bottom-15">
+                                    Change The Tree Definition
+                                </button>
+                                <br>
+                                <button ng-click="try_async_load()" class="btn btn-primary btn-o">
+                                    Load Tree Data Asynchronously
+                                </button>
+                                <hr>
+                                <h5>Test the Tree Control API:</h5>
+                                <br>
+                                <button ng-click="my_tree.select_first_branch()" class="btn btn-primary btn-sm margin-bottom-10">
+                                    First Branch
+                                </button>
+                                <br>
+                                <button ng-click="my_tree.select_next_sibling()" class="btn btn-primary btn-sm margin-bottom-10">
+                                    Next Sibling
+                                </button>
+                                <button ng-click="my_tree.select_prev_sibling()" class="btn btn-primary btn-sm margin-bottom-10">
+                                    Prev Sibling
+                                </button>
+                                <br>
+                                <button ng-click="my_tree.select_next_branch()" class="btn btn-primary btn-sm margin-bottom-10">
+                                    Next Branch
+                                </button>
+                                <button ng-click="my_tree.select_prev_branch()" class="btn btn-primary btn-sm margin-bottom-10">
+                                    Prev Branch
+                                </button>
+                                <br>
+                                <button ng-click="my_tree.select_parent_branch()" class="btn btn-primary btn-sm margin-bottom-10">
+                                    Parent
+                                </button>
+                                <hr>
+                                <button ng-click="my_tree.expand_branch()" class="btn btn-primary btn-sm margin-bottom-10">
+                                    Expand
+                                </button>
+                                <button ng-click="my_tree.collapse_branch()" class="btn btn-primary btn-sm margin-bottom-10">
+                                    Collapse
+                                </button>
+                                <button ng-click="my_tree.expand_all()" class="btn btn-primary btn-sm margin-bottom-10">
+                                    Expand All
+                                </button>
+                                <button ng-click="my_tree.collapse_all()" class="btn btn-primary btn-sm margin-bottom-10">
+                                    Collapse All
+                                </button>
+                                <hr>
+                                <button ng-click="try_adding_a_branch()" class="btn btn-primary btn-sm margin-bottom-10">
+                                    Add Branch
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end: BOOTSRAP NAV TREE -->

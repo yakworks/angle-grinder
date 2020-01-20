@@ -1,0 +1,54 @@
+<!-- start: SEARCH FORM -->
+<div class="search-form hidden-md hidden-lg">
+    <form class="navbar-form" role="search">
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="{{ 'search.PLACEHOLDER' | translate }}">
+            <button class="btn search-button" type="submit">
+                <i class="ti-search"></i>
+            </button>
+        </div>
+    </form>
+</div>
+<!-- end: SEARCH FORM -->
+<!-- start: USER OPTIONS -->
+<div class="nav-user-wrapper">
+    <div class="media">
+        <div class="media-left">
+            <a class="profile-card-photo" href="#"><img alt="" src="assets/images/avatar-1.jpg"></a>
+        </div>
+        <div class="media-body">
+            <span class="media-heading text-white">Peter Clark</span>
+            <div class="text-small text-white-transparent">
+                UI Designer
+            </div>
+        </div>
+
+        <div class="media-right media-middle">
+            <div uib-dropdown is-open="status.isopen">
+                <a href class="dropdown-toggle btn btn-transparent text-white" uib-dropdown-toggle><i class="fa fa-caret-down"></i> </a>
+                <ul class="dropdown-menu pull-right animated fadeInRight">
+                    <li>
+                        <a ui-sref="app.pages.user" translate="topbar.user.PROFILE"> My Profile </a>
+                    </li>
+                    <li>
+                        <a ui-sref="app.pages.calendar" translate="topbar.user.CALENDAR"> My Calendar </a>
+                    </li>
+                    <li>
+                        <a ui-sref="app.pages.messages" translate="topbar.user.MESSAGES"> My Messages (3) </a>
+                    </li>
+                    <li>
+                        <a ui-sref="login.lockscreen" translate="topbar.user.LOCKSCREEN"> Lock Screen </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a ui-sref="login.signin" translate="topbar.user.LOGOUT"> Log Out </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end: USER OPTIONS -->
+<!-- start: SIDEBAR -->
+<nav data-ng-include=" 'assets/views/partials/nav.html' "></nav>
+<!-- end: SIDEBAR -->

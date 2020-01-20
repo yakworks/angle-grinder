@@ -1,0 +1,397 @@
+<!-- start: BREADCRUMB -->
+<div class="breadcrumb-wrapper">
+    <h4 class="mainTitle no-margin" translate="sidebar.nav.forms.WIZARD">FORM WIZARD</h4>
+
+    <div ncy-breadcrumb class="pull-right"></div>
+</div>
+<!-- end: BREADCRUMB -->
+<!-- start: WIZARD DEMO -->
+<div class="container-fluid container-fullw">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-white">
+                <div class="panel-body">
+                    <h5 class="over-title margin-bottom-15">Wizard <span class="text-bold">demo</span></h5>
+                    <p>
+                        Some textboxes in this example is required.
+                    </p>
+                    <!-- /// controller:  'WizardCtrl' -  localtion: assets/js/controllers/wizardCtrl.js /// -->
+                    <div ng-controller="WizardCtrl">
+                        <!-- start: WIZARD FORM -->
+                        <form name="Form" id="form" novalidate>
+                            <div id="wizard" class="swMain">
+                                <!-- start: WIZARD SEPS -->
+                                <ul>
+                                    <li ng-click="form.goTo(Form, 1)">
+                                        <a href ng-class="{'selected' : currentStep >= 1, 'done' : currentStep > 1}">
+                                            <div class="stepNumber">
+                                                1
+                                            </div> <span class="stepDesc text-small"> Personal Information </span>
+                                        </a>
+                                    </li>
+                                    <li ng-click="form.goTo(Form, 2)">
+                                        <a href ng-class="{'selected' : currentStep >= 2, 'done' : currentStep > 2}">
+                                            <div class="stepNumber">
+                                                2
+                                            </div> <span class="stepDesc text-small"> Create an account </span>
+                                        </a>
+                                    </li>
+                                    <li ng-click="form.goTo(Form, 3)">
+                                        <a href ng-class="{'selected' : currentStep >= 3, 'done' : currentStep > 3}">
+                                            <div class="stepNumber">
+                                                3
+                                            </div> <span class="stepDesc text-small"> Billing details </span>
+                                        </a>
+                                    </li>
+                                    <li ng-click="form.goTo(Form, 4)">
+                                        <a href ng-class="{'selected' : currentStep >= 4, 'done' : currentStep > 4}">
+                                            <div class="stepNumber">
+                                                4
+                                            </div> <span class="stepDesc text-small"> Complete </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <!-- end: WIZARD SEPS -->
+                                <!-- start: WIZARD STEP 1 -->
+                                <div id="step-1" ng-show="currentStep == 1">
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <div class="padding-30">
+                                                <h2 class="StepTitle"><i class="ti-face-smile fa-2x text-primary block margin-bottom-10"></i> Enter your personal information</h2>
+                                                <p>
+                                                    This is an added measure against fraud and to help with billing issues.
+                                                </p>
+                                                <p class="text-small">
+                                                    Enter security questions in case you lose access to your account.
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-7">
+                                            <fieldset>
+                                                <legend>
+                                                    Personal Information
+                                                </legend>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group" ng-class="{'has-error':Form.firstName.$dirty && Form.firstName.$invalid, 'has-success':Form.firstName.$valid}">
+                                                            <label> First Name <span class="symbol required"></span> </label>
+                                                            <input type="text" placeholder="Enter your First Name" class="form-control" name="firstName" ng-model="myModel.firstName" ng-required="currentStep == 1" />
+                                                            <span class="error text-small block" ng-if="Form.firstName.$dirty && Form.firstName.$invalid">First Name is required</span>
+                                                            <span class="success text-small" ng-if="Form.firstName.$valid">Thank You!</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group" ng-class="{'has-error':Form.lastName.$dirty && Form.lastName.$invalid, 'has-success':Form.lastName.$valid}">
+                                                            <label class="control-label"> Last Name <span class="symbol required"></span> </label>
+                                                            <input type="text" placeholder="Enter your Last Name" class="form-control" name="lastName" ng-model="myModel.lastName" ng-required="currentStep == 1" />
+                                                            <span class="error text-small block" ng-if="Form.lastName.$dirty && Form.lastName.$invalid">Last Name is required</span>
+                                                            <span class="success text-small" ng-if="Form.lastName.$valid">Wonderful!</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label class="block"> Gender </label>
+                                                            <div class="clip-radio radio-primary">
+                                                                <input type="radio" id="wz-female" name="gender" value="female" ng-model="myModel.gender">
+                                                                <label for="wz-female"> Female </label>
+                                                                <input type="radio" id="wz-male" name="gender" value="male" ng-model="myModel.gender">
+                                                                <label for="wz-male"> Male </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label> Choose your country or region </label>
+                                                            <span class="clip-select">
+                                                                <select class="form-control" name="country" ng-model="myModel.country">
+                                                                    <option value="">&nbsp;</option>
+                                                                    <option value="AL">Alabama</option>
+                                                                    <option value="AK">Alaska</option>
+                                                                    <option value="AZ">Arizona</option>
+                                                                    <option value="AR">Arkansas</option>
+                                                                    <option value="CA">California</option>
+                                                                    <option value="CO">Colorado</option>
+                                                                    <option value="CT">Connecticut</option>
+                                                                    <option value="DE">Delaware</option>
+                                                                    <option value="FL">Florida</option>
+                                                                    <option value="GA">Georgia</option>
+                                                                    <option value="HI">Hawaii</option>
+                                                                    <option value="ID">Idaho</option>
+                                                                    <option value="IL">Illinois</option>
+                                                                    <option value="IN">Indiana</option>
+                                                                    <option value="IA">Iowa</option>
+                                                                    <option value="KS">Kansas</option>
+                                                                    <option value="KY">Kentucky</option>
+                                                                    <option value="LA">Louisiana</option>
+                                                                    <option value="ME">Maine</option>
+                                                                    <option value="MD">Maryland</option>
+                                                                    <option value="MA">Massachusetts</option>
+                                                                    <option value="MI">Michigan</option>
+                                                                    <option value="MN">Minnesota</option>
+                                                                    <option value="MS">Mississippi</option>
+                                                                    <option value="MO">Missouri</option>
+                                                                    <option value="MT">Montana</option>
+                                                                    <option value="NE">Nebraska</option>
+                                                                    <option value="NV">Nevada</option>
+                                                                    <option value="NH">New Hampshire</option>
+                                                                    <option value="NJ">New Jersey</option>
+                                                                    <option value="NM">New Mexico</option>
+                                                                    <option value="NY">New York</option>
+                                                                    <option value="NC">North Carolina</option>
+                                                                    <option value="ND">North Dakota</option>
+                                                                    <option value="OH">Ohio</option>
+                                                                    <option value="OK">Oklahoma</option>
+                                                                    <option value="OR">Oregon</option>
+                                                                    <option value="PA">Pennsylvania</option>
+                                                                    <option value="RI">Rhode Island</option>
+                                                                    <option value="SC">South Carolina</option>
+                                                                    <option value="SD">South Dakota</option>
+                                                                    <option value="TN">Tennessee</option>
+                                                                    <option value="TX">Texas</option>
+                                                                    <option value="UT">Utah</option>
+                                                                    <option value="VT">Vermont</option>
+                                                                    <option value="VA">Virginia</option>
+                                                                    <option value="WA">Washington</option>
+                                                                    <option value="WV">West Virginia</option>
+                                                                    <option value="WI">Wisconsin</option>
+                                                                    <option value="WY">Wyoming</option>
+                                                                </select>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <p>
+                                                    <a href uib-popover="Your personal information is not required for unlawful purposes, but only in order to proceed in this tutorial" popover-placement="top" popover-title="Don't worry!"> Why do you need my personal information? </a>
+                                                </p>
+                                            </fieldset>
+                                            <fieldset>
+                                                <legend>
+                                                    Security question
+                                                </legend>
+                                                <p>
+                                                    Enter security questions in case you lose access to your account. <span class="text-small block">Be sure to pick questions that you will remember the answers to.</span>
+                                                </p>
+                                                <uib-accordion close-others="oneAtATime" class="accordion">
+                                                    <div uib-accordion-group is-open="question1.open">
+                                                        <uib-accordion-heading>
+                                                            What was the name of your first stuffed animal? <i class="pull-right" ng-class="{'ti-angle-down': question1.open, 'ti-angle-right': !question1.open}"></i>
+                                                        </uib-accordion-heading>
+                                                        <div class="form-group">
+                                                            <input type="text" class="form-control" name="stuffedAnimal" ng-model="myModel.stuffedAnimal" placeholder="Enter the the name of your first stuffed animal">
+                                                        </div>
+                                                    </div>
+                                                    <div uib-accordion-group is-open="question2.open">
+                                                        <uib-accordion-heading>
+                                                            What is your grandfather's first name? <i class="pull-right" ng-class="{'ti-angle-down': question2.open, 'ti-angle-right': !question2.open}"></i>
+                                                        </uib-accordion-heading>
+                                                        <div class="form-group">
+                                                            <input type="text" class="form-control" name="grandfatherName" ng-model="myModel.grandfatherName" placeholder="Enter your grandfather's first name">
+                                                        </div>
+                                                    </div>
+                                                    <div uib-accordion-group is-open="question3.open">
+                                                        <uib-accordion-heading>
+                                                            In what city your grandmother live? <i class="pull-right" ng-class="{'ti-angle-down': question3.open, 'ti-angle-right': !question3.open}"></i>
+                                                        </uib-accordion-heading>
+                                                        <div class="form-group">
+                                                            <input type="text" class="form-control" name="grandmotherCity" ng-model="myModel.grandmotherCity" placeholder="Enter your grandfather's first name">
+                                                        </div>
+                                                    </div>
+                                                </uib-accordion>
+                                            </fieldset>
+                                            <div class="form-group">
+                                                <button class="btn btn-primary btn-o next-step btn-wide pull-right" ng-click="form.next(Form)">
+                                                    Next <i class="fa fa-arrow-circle-right"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- end: WIZARD STEP 1 -->
+                                <!-- start: WIZARD STEP 2 -->
+                                <div id="step-2" ng-show="currentStep == 2">
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <div class="padding-30">
+                                                <h2 class="StepTitle">Create an account <span class="text-large block">to manage everything you do with ng-Clip</span></h2>
+                                                <p>
+                                                    You’ll enjoy personal services and great benefits including:
+                                                </p>
+                                                <p class="text-small">
+                                                    <ul class="no-margin">
+                                                        <li>
+                                                            Access to exclusive releases and limited products.
+                                                        </li>
+                                                        <li>
+                                                            ng-Clip services, benefits and promotions.
+                                                        </li>
+                                                    </ul>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-7">
+                                            <fieldset>
+                                                <legend>
+                                                    Account Credential
+                                                </legend>
+                                                <div class="form-group" ng-class="{'has-error':Form.email.$dirty && Form.email.$invalid, 'has-success':Form.email.$valid}">
+                                                    <label class="control-label"> Email <span class="symbol required"></span> </label>
+                                                    <input type="email" placeholder="Enter a valid E-mail" class="form-control" name="email" ng-model="myModel.email" ng-required="currentStep == 2">
+                                                    <span class="error text-small block" ng-if="Form.email.$dirty && Form.email.$error.required">Email is required.</span>
+                                                    <span class="error text-small block" ng-if="Form.email.$error.email">Please, enter a valid email address.</span>
+                                                    <span class="success text-small" ng-if="Form.email.$valid">It's a valid e-mail!</span>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group" ng-class="{'has-error':Form.password.$dirty && Form.password.$invalid, 'has-success':Form.password.$valid}">
+                                                            <label class="control-label"> Password <span class="symbol required"></span> </label>
+                                                            <input type="password" placeholder="Enter a Password" class="form-control" name="password" ng-model="myModel.password" ng-required="currentStep == 2" />
+                                                            <span class="error text-small block" ng-if="Form.password.$dirty && Form.password.$error.required">Password is required.</span>
+                                                            <span class="success text-small block" ng-if="Form.password.$valid">Ok!</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group" ng-class="{'has-error':Form.password2.$dirty && Form.password2.$error.compareTo || Form.password2.$dirty && Form.password2.$invalid, 'has-success':Form.password2.$valid}">
+                                                            <label class="control-label"> Repeat Password <span class="symbol required"></span> </label>
+                                                            <input type="password" placeholder="Repeat Password" class="form-control" name="password2" ng-model="myModel.password2" compare-to="myModel.password" ng-required="currentStep == 2" />
+                                                            <span class="error text-small block" ng-if="Form.password2.$dirty && Form.password2.$error.required">Repeat password is required!</span>
+                                                            <span class="error text-small block" ng-if="Form.password2.$dirty && Form.password2.$error.compareTo">Passwords do not match!</span>
+                                                            <span class="success text-small block" ng-if="Form.password2.$valid">Passwords match!</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                            <div class="form-group">
+                                                <button class="btn btn-primary btn-o back-step btn-wide pull-left" ng-click="form.prev(Form)">
+                                                    <i class="fa fa-circle-arrow-left"></i> Back
+                                                </button>
+                                                <button class="btn btn-primary btn-o next-step btn-wide pull-right" ng-click="form.next(Form)">
+                                                    Next <i class="fa fa-arrow-circle-right"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- end: WIZARD STEP 2 -->
+                                <!-- start: WIZARD STEP 3 -->
+                                <div id="step-3" ng-show="currentStep == 3">
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <div class="padding-30">
+                                                <h2 class="StepTitle">Enter billing details</h2>
+                                                <p class="text-large">
+                                                    You will need to enter your billing address and select your payment method.
+                                                </p>
+                                                <p class="text-small">
+                                                    You can use most major credit card, as well as PayPal.
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-7">
+                                            <fieldset>
+                                                <legend>
+                                                    Payment Method
+                                                </legend>
+                                                <label> Payment type </label>
+                                                <div class="form-group">
+                                                    <div class="btn-group">
+                                                        <label class="btn btn-primary btn-sm" ng-model="myModel.paymentMethod" uib-btn-radio="'creditcard'"> <i class="fa fa-cc-visa"></i> <i class="fa fa-cc-mastercard"></i> Credit Card </label>
+                                                        <label class="btn btn-primary btn-sm" ng-model="myModel.paymentMethod" uib-btn-radio="'paypal'"> <i class="fa fa-cc-paypal"></i> PayPal </label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label> Card Number </label>
+                                                    <input type="text" class="form-control" name="cardNumber" ng-model="myModel.cardNumber" placeholder="Enter Your Card Number">
+                                                </div>
+                                                <label> Expires </label>
+                                                <div class="row">
+                                                    <div class="col-md-4 col-sm-6">
+                                                        <div class="form-group">
+                                                            <select class="cs-select cs-skin-slide" ng-model="myModel.expiresMonth">
+                                                                <option value="" disabled>Month</option>
+                                                                <option value="January">January</option>
+                                                                <option value="February">February</option>
+                                                                <option value="March">March</option>
+                                                                <option value="April">April</option>
+                                                                <option value="May">May</option>
+                                                                <option value="June">June</option>
+                                                                <option value="July">July</option>
+                                                                <option value="August">August</option>
+                                                                <option value="September">September</option>
+                                                                <option value="October">October</option>
+                                                                <option value="November">November</option>
+                                                                <option value="December">December</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 col-sm-6">
+                                                        <div class="form-group">
+                                                            <select class="cs-select cs-skin-slide" ng-model="myModel.expiresYear">
+                                                                <option value="" disabled>Year</option>
+                                                                <option value="2015">2015</option>
+                                                                <option value="2016">2016</option>
+                                                                <option value="2017">2017</option>
+                                                                <option value="2018">2018</option>
+                                                                <option value="2019">2019</option>
+                                                                <option value="2020">2020</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-xs-12">
+                                                        <label> Security code </label>
+                                                        <div class="row">
+                                                            <div class="col-xs-3">
+                                                                <div class="form-group">
+                                                                    <input type="text" class="form-control" name="securityCode" placeholder="Security code" ng-model="myModel.securityCode">
+                                                                </div>
+                                                            </div>
+                                                            <span class="help-inline col-xs-4"> <a href uib-popover="The security code is a three-digit number on the back of your credit card, immediately following your main card number." popover-placement="top" popover-title="How to find the security code"><i class="ti-help-alt text-large text-primary"></i></a> </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                            <div class="form-group">
+                                                <button class="btn btn-primary btn-o back-step btn-wide pull-left" ng-click="form.prev(Form)">
+                                                    <i class="fa fa-circle-arrow-left"></i> Back
+                                                </button>
+                                                <button class="btn btn-primary btn-o next-step btn-wide pull-right" ng-click="form.next(Form)">
+                                                    Next <i class="fa fa-arrow-circle-right"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- end: WIZARD STEP 3 -->
+                                <!-- start: WIZARD STEP 4 -->
+                                <div id="step-4" ng-show="currentStep == 4">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="text-center">
+                                                <h1 class=" ti-check block text-primary"></h1>
+                                                <h2 class="StepTitle">Congratulations!</h2>
+                                                <p class="text-large">
+                                                    Your tutorial is complete.
+                                                </p>
+                                                <p class="text-small">
+                                                    Thank you for your registration. Your transaction has been completed, and a receipt for your purchase has been emailed to you.  You may log into your account to view details of this transaction.
+                                                </p>
+                                                <a class="btn btn-primary btn-o" href ng-click="form.goTo(Form, 1)"> Back to first step </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- end: WIZARD STEP 4 -->
+                            </div>
+                            <pre class="code margin-top-20">{{ myModel | json }}</pre>
+                        </form>
+                        <!-- end: WIZARD FORM -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- start: WIZARD DEMO -->

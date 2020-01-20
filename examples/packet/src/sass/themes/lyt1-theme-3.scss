@@ -1,0 +1,565 @@
+/* ---------------------------------------------------------------------- */
+/*  Layout1 - Theme 3
+/* ---------------------------------------------------------------------- */
+
+@import "modules/variables";
+$app-background: #F8FAFA;
+//NAV HEADER COLORS
+$header-background: #485058;
+$headerBorder-color: transparent;
+$headerText-color: $white;
+$headerElements-color: #CCDBDA;
+//NAV COLLAPSE COLORS
+$collapse-background: #485058;
+$collapseBorder-color: transparent;
+$collapseText-color: $white;
+$collapseButton-background: $green;
+$collapseButton-color: $white;
+$collapseElements-color: $white;
+$collapseShadow: none;
+$menuMobile-color: darken($header-background, 5%);
+$menuMobileBorder-color: $black;
+//SIDEBAR COLORS
+$sidebar-background: #485058;
+$sidebarText-color: $white;
+$sidebarBorder-color: transparent;
+$sidebarBorder-width: 0;
+//MAIN NAVIGATION COLORS
+$nav-background: #CFD3D8;
+$navText-color: #464F57;
+$navTextHover-color: #363C42;
+$navTextActive-color: #363C42;
+$navActive-color: $green;
+$navHover-color: darken($nav-background, 5%);
+//OTHERS COLORS
+$loadingbar-color: $green;
+$selection-background: $green;
+$selection-color: $white;
+
+::-moz-selection {
+    background: $selection-background;
+    text-shadow: none;
+    color: $selection-color;
+}
+
+::selection {
+    background: $selection-background;
+    text-shadow: none;
+    color: $selection-color;
+}
+
+body {
+    background: $app-background;
+}
+
+.app-content {
+    @media (max-width: $screen-sm-max) {
+        background: $app-background;
+    }
+}
+
+.navbar {
+    .navbar-header {
+        background: $header-background !important;
+        border-right-color: $headerBorder-color !important;
+        border-bottom-color: $headerBorder-color !important;
+
+        .sidebar-toggler, .sidebar-mobile-toggler {
+            color: $headerElements-color !important;
+        }
+
+        .navbar-brand {
+            color: $headerText-color !important;
+        }
+
+        .menu-toggler {
+            color: rgba($headerElements-color, 0.7) !important;
+              &:hover {
+                  color: rgba($headerElements-color, 1) !important;
+              }
+        }
+
+        .sidebar-mobile-toggler {
+            background-color: $collapseButton-background !important;
+            border-color: $collapseButton-background !important;
+            color: $collapseButton-color !important;
+
+            > i {
+                color: $collapseButton-color !important;
+            }
+
+            &:hover {
+                background-color: lighten($collapseButton-background, 10%) !important;
+                border-color: lighten($collapseButton-background, 10%) !important;
+                color: $collapseButton-color !important;
+            }
+
+            &:active,
+            &.active,
+            &.active:focus,
+            &:active:focus,
+            &:active:hover,
+            &.dropdown-toggle:active:hover {
+                background-color: darken($collapseButton-background, 5%) !important;
+                border-color: darken($collapseButton-background, 5%) !important;
+            }
+
+            &:focus {
+                background-color: lighten($collapseButton-background, 15%) !important;
+                border-color: lighten($collapseButton-background, 15%) !important;
+                color: $collapseButton-color !important;
+            }
+
+            &.disabled:hover,
+            &.disabled:focus,
+            &.disabled:active,
+            &.disabled.active,
+            &[disabled],
+            &[disabled]:hover,
+            &[disabled]:focus,
+            &[disabled]:active,
+            &[disabled].active,
+            fieldset[disabled] &:hover,
+            fieldset[disabled] &:focus,
+            fieldset[disabled] &:active,
+            fieldset[disabled] &.active {
+                background-color: lighten($collapseButton-background, 20%) !important;
+                border-color: lighten($collapseButton-background, 20%) !important;
+                color: $collapseButton-color !important;
+            }
+        }
+    }
+
+    .navbar-collapse {
+        background: $collapse-background !important;
+        border-bottom-color: $collapseBorder-color !important;
+        box-shadow: $collapseShadow !important;
+
+        .navbar-left {
+            > li {
+                @media (min-width: $screen-sm-min) {
+                    &:before {
+                        background: -moz-linear-gradient(top, rgba($collapseText-color,0) 0%, rgba($collapseText-color,0.2) 50%, rgba($collapseText-color,0) 100%); /* FF3.6-15 */
+                        background: -webkit-linear-gradient(top, rgba($collapseText-color,0) 0%,rgba($collapseText-color,0.2) 50%,rgba($collapseText-color,0) 100%); /* Chrome10-25,Safari5.1-6 */
+                        background: linear-gradient(to bottom, rgba($collapseText-color,0) 0%,rgba($collapseText-color,0.2) 50%,rgba($collapseText-color,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+                        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=$collapseText-color, endColorstr=$collapseText-color,GradientType=0 ); /* IE6-9 */
+                    }
+                }
+
+                .main-search {
+                    .form-control {
+                        color: $collapseText-color !important;
+
+                        &::-webkit-input-placeholder {
+                            color: rgba($collapseText-color, 0.3) !important;
+                        }
+
+                        &:-moz-placeholder {
+                            /* Firefox 18- */
+                            color: rgba($collapseText-color, 0.3) !important;
+                        }
+
+                        &::-moz-placeholder {
+                            /* Firefox 19+ */
+                            color: rgba($collapseText-color, 0.3) !important;
+                        }
+
+                        &:-ms-input-placeholder {
+                            color: rgba($collapseText-color, 0.3) !important;
+                        }
+                    }
+
+                    .search-button {
+                        color: rgba($collapseElements-color, 0.7);
+
+                        &:hover, &:active, &:focus {
+                            color: rgba($collapseElements-color, 1);
+                        }
+                    }
+                }
+
+                > a {
+                    color: rgba($collapseText-color, 0.7);
+
+                    i {
+                        color: rgba($collapseElements-color, 0.7) !important;
+                    }
+
+                    &:hover {
+                        color: rgba($collapseText-color, 1);
+
+                        i {
+                            color: rgba($collapseElements-color, 1) !important;
+                        }
+                    }
+                }
+
+                @media (max-width: $screen-xs-max) {
+                    border-bottom: 1px solid $menuMobileBorder-color !important;
+                }
+
+                &.sidebar-toggler-wrapper {
+                    .btn {
+                        background-color: $collapseButton-background;
+                        border-color: $collapseButton-background;
+                        color: $collapseButton-color !important;
+
+                        > i {
+                            color: $collapseButton-color !important;
+                        }
+
+                        &:hover {
+                            background-color: lighten($collapseButton-background, 10%) !important;
+                            border-color: lighten($collapseButton-background, 10%);
+                            color: $collapseButton-color !important;
+                        }
+
+                        &:active,
+                        &.active,
+                        &.active:focus,
+                        &:active:focus,
+                        &:active:hover,
+                        &.dropdown-toggle:active:hover {
+                            background-color: darken($collapseButton-background, 5%) !important;
+                            border-color: darken($collapseButton-background, 5%);
+                        }
+
+                        &:focus {
+                            background-color: lighten($collapseButton-background, 15%);
+                            border-color: lighten($collapseButton-background, 15%);
+                            color: $collapseButton-color !important;
+                        }
+
+                        &.disabled:hover,
+                        &.disabled:focus,
+                        &.disabled:active,
+                        &.disabled.active,
+                        &[disabled],
+                        &[disabled]:hover,
+                        &[disabled]:focus,
+                        &[disabled]:active,
+                        &[disabled].active,
+                        fieldset[disabled] &:hover,
+                        fieldset[disabled] &:focus,
+                        fieldset[disabled] &:active,
+                        fieldset[disabled] &.active {
+                            background-color: lighten($collapseButton-background, 20%);
+                            border-color: lighten($collapseButton-background, 20%);
+                            color: $collapseButton-color !important;
+                        }
+                    }
+                }
+            }
+        }
+
+        .navbar-right {
+            > li {
+                @media (min-width: $screen-sm-min) {
+                    &:before {
+                        background: -moz-linear-gradient(top, rgba($collapseText-color,0) 0%, rgba($collapseText-color,0.2) 50%, rgba($collapseText-color,0) 100%); /* FF3.6-15 */
+                        background: -webkit-linear-gradient(top, rgba($collapseText-color,0) 0%,rgba($collapseText-color,0.2) 50%,rgba($collapseText-color,0) 100%); /* Chrome10-25,Safari5.1-6 */
+                        background: linear-gradient(to bottom, rgba($collapseText-color,0) 0%,rgba($collapseText-color,0.2) 50%,rgba($collapseText-color,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+                        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=$collapseText-color, endColorstr=$collapseText-color,GradientType=0 ); /* IE6-9 */
+                    }
+                }
+
+                > a {
+                    color: rgba($collapseText-color, 0.7);
+
+                    i {
+                        color: rgba($collapseElements-color, 0.7) !important;
+                    }
+
+                    &:hover {
+                        color: rgba($collapseText-color, 1);
+
+                        i {
+                            color: rgba($collapseElements-color, 1) !important;
+                        }
+                    }
+                }
+            }
+
+            .angular-notifications-icon {
+                background: $collapseButton-background;
+            }
+        }
+
+        @media (max-width: $screen-sm-max) {
+            background: $header-background !important;
+            box-shadow: none;
+
+            .navbar-right {
+                > li {
+                    > a {
+                        color: rgba($headerText-color, 0.7);
+
+                        i {
+                            color: rgba($headerElements-color, 0.7) !important;
+                        }
+
+                        &:hover {
+                            color: rgba($headerText-color, 1);
+
+                            i {
+                                color: rgba($headerElements-color, 1) !important;
+                            }
+                        }
+                    }
+
+                    &.open {
+                        background: darken($header-background, 8%) !important;
+                    }
+
+                    @media (max-width: $screen-xs-max) {
+                        border-bottom: 1px solid $menuMobileBorder-color !important;
+                    }
+                }
+            }
+        }
+
+        @media (max-width: $screen-xs-max) {
+            background: $menuMobile-color !important;
+
+            .close-handle {
+                background: $header-background;
+
+                .arrow-left, .arrow-right {
+                    background-color: $headerElements-color;
+                }
+            }
+
+            .navbar-right {
+                .current-user {
+                    a {
+                        i {
+                            color: $white !important;
+                            background: rgba($headerElements-color, 0.3);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .dropdown-off-sidebar {
+        border-left-color: $collapseBorder-color !important;
+        background: $collapse-background !important;
+        color: rgba($collapseElements-color, 0.7) !important;
+
+        @media (min-width: $screen-sm-min) {
+            &:hover {
+                color: rgba($collapseElements-color, 1) !important;
+            }
+        }
+
+        @media (max-width: $screen-sm-max) {
+            background: $header-background !important;
+            border-left-color: $headerBorder-color !important;
+            color: rgba($headerElements-color, 0.7) !important;
+            &:hover {
+                color: rgba($headerElements-color, 1) !important;
+            }
+        }
+    }
+}
+
+#sidebar {
+    background: $sidebar-background;
+
+    &:before {
+        @media (min-width: $screen-md-min) {
+            background-color: $sidebar-background;
+        }
+    }
+
+    &:after {
+        @media (min-width: $screen-md-min) {
+            background-color: $nav-background;
+        }
+    }
+
+    .nav-user-wrapper {
+        background: $sidebar-background !important;
+    }
+
+    .sidebar-container {
+        background: $nav-background !important;
+    }
+
+    > div nav {
+
+        .navbar-title {
+            color: $navText-color;
+        }
+
+        @media (min-width: $screen-md-min) {
+            &:before {
+                background: $sidebar-background;
+            }
+
+            &:after {
+                background: $nav-background;
+            }
+        }
+
+        > ul > li {
+            a {
+                color: $navText-color;
+
+                .icon-arrow {
+                    color: $navText-color;
+                }
+            }
+
+            &.open, &:hover {
+                background: darken($nav-background, 5%) !important;
+
+                > a {
+                    color: $navTextHover-color !important;
+
+                    .icon-arrow {
+                        color: $navTextHover-color;
+                    }
+                }
+            }
+
+            .letter-icon-wrapper {
+                background: $sidebar-background !important;
+            }
+
+            &.active {
+                background: $app-background !important;
+
+                &.open {
+                    background: $app-background !important;
+                }
+
+                .letter-icon-wrapper {
+                    background: $navActive-color !important;
+                }
+
+                a {
+                    color: $navTextActive-color;
+                }
+            }
+        }
+
+        .folders {
+            .letter-icon-wrapper {
+                background: $navActive-color !important;
+            }
+        }
+    }
+}
+
+ul.sub-menu {
+    li {
+
+        .no-touch & {
+            &:hover {
+                background: lighten($nav-background, 5%) !important;
+
+                > a, > a i {
+                    color: $navTextActive-color !important;
+                }
+            }
+        }
+
+        &.open {
+            background: none !important;
+
+            > a, > a i {
+                color: $navTextHover-color !important;
+            }
+        }
+
+        &.active, &.active:hover {
+            background: lighten($nav-background, 3%) !important;
+        }
+    }
+}
+
+.app-sidebar-closed {
+    #sidebar > div nav {
+        > ul > li {
+            &:hover, &.hover {
+                background: darken($nav-background, 5%) !important;
+            }
+
+            &.active, &.active.open {
+                background: $app-background !important;
+            }
+        }
+    }
+
+    .app-aside {
+
+        @media (min-width: $screen-md-min) {
+            > .item-inner {
+                background-color: $sidebar-background !important;
+
+                &:before {
+                    border-color: darken($nav-background, 5%);
+                }
+
+                &.active {
+                    background-color: $navActive-color !important;
+
+                    &:before {
+                        border-color: $app-background;
+                    }
+                }
+            }
+
+            ul.sub-menu {
+                background: $app-background !important;
+                border: $sidebar-background !important;
+
+                > li {
+                    a {
+                        color: $navText-color;
+
+                        .icon-arrow {
+                            color: $navText-color;
+                        }
+                    }
+
+                    &:hover, &.active, &.active.open {
+                        background: none !important;
+
+                        > a {
+                            color: $navTextActive-color;
+
+                            .icon-arrow {
+                                color: $navTextActive-color;
+                            }
+                        }
+                    }
+
+                    > a {
+                        color: $navText-color;
+
+                        .icon-arrow {
+                            color: $navText-color;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.main-content {
+    background: $app-background !important;
+}
+
+#app {
+    > footer {
+        background-color: $app-background !important;
+    }
+}
+
+#loading-bar .bar {
+    background: $loadingbar-color !important;
+}

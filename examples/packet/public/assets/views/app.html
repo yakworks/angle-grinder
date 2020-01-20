@@ -1,0 +1,23 @@
+<!-- toaster directive -->
+<toaster-container toaster-options="{'position-class': 'toast-top-right', 'close-button':true}"></toaster-container>
+<!-- / toaster directive -->
+<!-- sidebar -->
+<div class="sidebar app-aside hidden-print" id="sidebar" toggleable parent-active-class="app-slide-off">
+    <div perfect-scrollbar wheel-propagation="false" suppress-scroll-x="true" class="sidebar-container">
+        <div data-ng-include=" 'assets/views/partials/sidebar.html' "></div>
+    </div>
+</div>
+<!-- / sidebar -->
+<div class="app-content" ng-class="{loading: loading}">
+    <!-- top navbar -->
+    <ng-include src=" 'assets/views/partials/top-navbar.html' "></ng-include>
+    <!-- / top navbar -->
+    <!-- main content -->
+    <div data-ng-include=" 'assets/views/partials/main-content.html' " class="main-content"></div>
+    <!-- / main content -->
+</div>
+<!-- footer -->
+<footer data-ng-include=" 'assets/views/partials/footer.html' " class="hidden-print"></footer>
+<!-- / footer -->
+<div data-ng-include=" 'assets/views/partials/off-sidebar.html' " id="off-sidebar" class="sidebar hidden-print" toggleable parent-active-class="app-offsidebar-open"></div>
+<div data-ng-include=" 'assets/views/partials/settings.html' " toggleable class="settings panel panel-default hidden-xs hidden-sm hidden-print" id="settings"></div>

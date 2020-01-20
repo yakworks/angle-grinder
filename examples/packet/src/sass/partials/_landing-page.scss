@@ -1,0 +1,241 @@
+/* ---------------------------------------------------------------------- */
+/*  Landing Page
+/* ---------------------------------------------------------------------- */
+.landing-page {
+    .container-fullw {
+        position: static;
+    }
+
+    .navbar {
+        position: fixed !important;
+        background: transparent;
+        max-height: $header-height;
+        min-height: 40px;
+        border-radius: 0;
+
+        @media (min-width: $screen-md-min) {
+            @include transition(height 0.5s, background 0.5s);
+        }
+
+        @media (max-width: $screen-sm-max) {
+            background: $black;
+
+            > .container {
+                width: auto !important;
+            }
+        }
+
+        .navbar-header {
+            position: relative !important;
+            background: transparent !important;
+            height: auto;
+            border: none;
+            width: auto !important;
+            box-shadow: none !important;
+
+            .navbar-brand {
+                opacity: 1 !important;
+                top: 0 !important;
+                
+                @media (min-width: $screen-md-min) {
+                    @include transition(all 0.5s);
+
+                    img {
+                        @include transition(all 0.5s);
+                        max-width: 200px;
+                    }
+                }
+            }
+
+            @media (max-width: $screen-xs-max) {
+                text-align: center;
+
+                .navbar-brand {
+                    float: none;
+                }
+
+                .landing-menu-toggler {
+                    height: auto !important;
+                    line-height: normal !important;
+                    position: absolute;
+                    left: 15px;
+                    top: 15px;
+                }
+            }
+        }
+
+        .navbar-collapse {
+            position: relative !important;
+            background: transparent !important;
+            height: auto;
+            border: none !important;
+            box-shadow: none !important;
+
+            @media (min-width: $screen-sm-min) {
+                margin: 0;
+            }
+
+            .nav {
+                margin: 0 !important;
+
+                li {
+                    &.active {
+                        > a {
+                            background: transparent !important;
+                            color: #fff;
+                        }
+                    }
+
+                    > a {
+                        color: #fff;
+                        position: relative;
+                        text-transform: uppercase;
+                        @include transition(all 0.5s);
+                        padding: 0 5px !important;
+                        font-size: 12px;
+                        
+                        &:hover {
+                            color: #fff;
+                        }
+
+                        &.active {
+                            &:before {
+                                content: " ";
+                                position: absolute;
+                                height: 3px;
+                                left: 0;
+                                top: 0;
+                                right: 0;
+                                background: $red;
+                            }
+                        }
+                    }
+                }
+            }
+
+            @media (max-width: $screen-sm-max) {
+                padding: 0 !important;
+            }
+
+            @media (max-width: $screen-xs-max) {
+                background: $black !important;
+
+                .nav {
+                    margin: 0;
+
+                    > li {
+                        padding: 0;
+
+                        > a {
+                            &.active {
+                                &:before {
+                                    top: auto;
+                                    bottom: 0;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        &.min {
+            @media (min-width: $screen-md-min) {
+                height: 40px;
+                line-height: 40px;
+                background: $black;
+
+                .navbar-header, .navbar-collapse {
+                    height: 40px !important;
+                }
+
+                .navbar-brand {
+                    height: 40px;
+                    line-height: 40px;
+
+                    img {
+                        max-width: 70px !important;
+                    }
+                }
+
+                .navbar-nav {
+                    > li {
+                        > a {
+                            line-height: 40px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .landing-content {
+        height: 470px;
+
+        @media (min-width: $screen-md-min) {
+            .app-navbar-fixed & {
+                margin-top: - $header-height;
+            }
+        }
+        
+        .carousel {
+            height: 470px;
+            width: 100%;
+            position: relative;
+            margin-bottom: 0 !important;
+    
+            .slick-list {
+                overflow: visible;
+            }
+    
+            .slick-slide {
+                height: 470px;
+                background-size: cover !important;
+                background-position: center center !important;
+            }
+    
+            .caption {
+                position: absolute;
+                top: 130px;
+                left: 15px;
+                bottom: auto;
+                right: auto;
+                text-align: left;
+            }
+    
+            .image {
+                position: absolute;
+                right: 10px;
+                top: 135px;
+            }
+    
+            .slick-dots {
+                bottom: 0 !important;
+            }
+        }
+    }
+    .section-features {
+        background-image: url("../images/section_features.png");
+        background-repeat: no-repeat;
+        background-position: center bottom;
+    }
+
+    .section-testimonials {
+        background-image: url("../images/section_testimonials.jpg") !important;
+        background-repeat: no-repeat !important;
+        background-position: center bottom !important;
+        padding-bottom: 250px !important;
+    }
+
+    .testimonial-thumb {
+        margin: 0 auto;
+        max-width: 80px;
+    }
+
+    .section-contact {
+        background-image: url("../images/word_map.png");
+        background-position: 50% 50%;
+        background-repeat: no-repeat;
+        margin-top: 60px;
+    }
+}

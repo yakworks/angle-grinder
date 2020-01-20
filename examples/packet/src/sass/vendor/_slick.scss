@@ -1,0 +1,71 @@
+/* ---------------------------------------------------------------------- */
+/*  Slick Carousel
+/* ---------------------------------------------------------------------- */
+
+.slick-slide {
+    outline: none !important;
+}
+
+.slick-slider {
+    margin-bottom: 0 !important;    
+}
+
+.slick-dots li button::before {
+    font-size: 12px !important;
+}
+
+.slick-dots {
+    padding-left: 5px !important;
+    padding-right: 5px !important;
+
+    li {
+        margin: 0 !important;
+    }
+}
+
+.slick-prev:before, .slick-next:before {
+    font-family: 'fontawesome' !important;
+    font-size: 40px !important;
+}
+
+.slick-prev:before {
+    content: '\f104' !important;
+}
+
+.slick-next:before {
+    content: '\f105' !important;
+}
+
+.dots-left {
+    .slick-dots {
+        text-align: left;
+    }
+}
+
+.dots-right {
+    .slick-dots {
+        text-align: right;
+    }
+}
+
+.dots-white {
+    .slick-dots {
+        li button:before {
+            color: $white !important;
+        }
+    }
+}
+
+.slick-prev {
+    left: 5px !important;
+    z-index: 1;
+}
+
+.slick-next {
+    right: 5px !important;
+    z-index: 1;
+}
+
+.slide {
+    display: none;
+}

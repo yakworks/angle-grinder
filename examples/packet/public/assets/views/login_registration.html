@@ -1,0 +1,98 @@
+<!-- start: REGISTRATION -->
+<div class="row">
+    <div class="main-login col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4 col-lg-2 col-lg-offset-5">
+        <div class="logo text-center">
+            <img src="assets/images/logo-big.png" alt="{{app.name}}" class="img-responsive" />
+        </div>
+        <p class="text-center text-dark text-bold text-extra-large margin-top-15">
+            Sign Up
+        </p>
+        <p class="text-center">
+            Enter your personal details below:
+        </p>
+        <!-- start: REGISTER BOX -->
+        <div class="box-register">
+            <form class="form-register">
+                <div class="form-group">
+                    <input type="text" class="form-control" name="full_name" placeholder="Full Name">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="address" placeholder="Address">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="city" placeholder="City">
+                </div>
+                <div class="form-group">
+                    <label class="block text-center text-small">
+                        Gender:
+                    </label>
+                    <div class="clip-radio radio-primary text-center">
+                        <input type="radio" id="rg-female" name="gender" value="female">
+                        <label for="rg-female">
+                            Female
+                        </label>
+                        <input type="radio" id="rg-male" name="gender" value="male">
+                        <label for="rg-male">
+                            Male
+                        </label>
+                    </div>
+                </div>
+                <p>
+                    Enter your account details below:
+                </p>
+                <div class="form-group">
+                    <input type="email" class="form-control" name="email" placeholder="Email">
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" name="password_again" placeholder="Password Again">
+                </div>
+                <div class="form-group">
+                    <div class="checkbox clip-check check-primary">
+                        <input type="checkbox" id="agree" value="agree">
+                        <label for="agree">
+                            I agree
+                        </label>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <p class="text-center">
+                        Already have an account?
+                        <a ui-sref="login.signin">
+                            Log-in
+                        </a>
+                    </p>
+                    <button type="submit" class="btn btn-red btn-block">
+                        Submit
+                    </button>
+                </div>
+                <hr />
+                <p class="margin-top-10 text-center">
+                    Or sign up with a social network
+                </p>
+                <div class="social-icons text-center">
+                    <ul>
+                        <li class="social-twitter" uib-tooltip="Twitter" tooltip-placement="top">
+                            <a target="_blank" href="#"> Twitter </a>
+                        </li>
+                        <li class="social-google" uib-tooltip="Google" tooltip-placement="top">
+                            <a target="_blank" href="#"> Google </a>
+                        </li>
+                        <li class="social-facebook" uib-tooltip="Facebook" tooltip-placement="top">
+                            <a target="_blank" href="#"> Facebook </a>
+                        </li>
+                    </ul>
+                </div>
+            </form>
+            <!-- start: COPYRIGHT -->
+            <div class="copyright">
+                {{app.year}} &copy; {{ app.name }} by {{ app.author }}.
+            </div>
+            <!-- end: COPYRIGHT -->
+        </div>
+        <!-- end: REGISTER BOX -->
+    </div>
+</div>
+<!-- end: REGISTRATION -->

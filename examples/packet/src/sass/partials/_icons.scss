@@ -1,0 +1,447 @@
+/* ---------------------------------------------------------------------- */
+/*  Icons
+/* ---------------------------------------------------------------------- */
+.fa-round {
+    border: 0.1em solid #eee;
+    border-radius: 100%;
+    padding: 0.2em 0.25em 0.15em;
+}
+
+.the-icons {
+    list-style: none;
+    margin: 20px 0;
+    padding: 0;
+
+    .fa-hover {
+        display: block;
+        height: 32px;
+        line-height: 32px;
+        padding-left: 10px;
+        color: #8B91A0;
+        cursor: pointer;
+
+        .no-touch & {
+            @include transition(font-size, .2s, ease 0s);
+
+            &:hover {
+                font-size: 20px;
+
+                .fa, [class*="ti-"] {
+                    font-size: 20px;
+                }
+            }
+        }
+
+        .fa, [class*="ti-"] {
+            display: inline-block;
+            font-size: 14px;
+            margin-right: 10px;
+            text-align: right;
+            width: 32px;
+            color: $primary;
+        }
+    }
+}
+
+.big-icon {
+    font-size: 100px;
+}
+
+.icon-thumbnail {
+    background: #21252d;
+    color: #fff;
+    display: inline-block;
+    font-family: "Segoe UI","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    height: 30px;
+    line-height: 30px;
+    position: relative;
+    text-align: center;
+    vertical-align: middle;
+    width: 30px;
+    border-radius: 5px;
+
+    > i {
+        font-size: 14px;
+    }
+
+    .active & {
+        background: red;
+    }
+}
+
+.letter-icon-wrapper {
+    height: 40px;
+    width: 40px;
+    background-color: #B2B7BB;
+    color: $white;
+    white-space: nowrap;
+    text-align: center;
+    margin: 0;
+    font-size: 21px;
+    display: inline-block;
+    @include transition (all 0.5s);
+
+    > span, > i {
+        line-height: 40px;
+    }
+
+    > i {
+        font-size: 19px;
+    }
+
+    &.size-lg {
+        height: 50px;
+        width: 50px;
+        font-size: 27px;
+
+        > span, > i {
+            line-height: 50px;
+        }
+
+        > i {
+            font-size: 25px;
+        }
+    }
+
+    &.size-sm {
+        height: 30px;
+        width: 30px;
+        font-size: 14px;
+
+        > span, > i {
+            line-height: 30px;
+        }
+
+        > i {
+            font-size: 12px;
+        }
+    }
+
+    &.box-circle {
+        border-radius: 50%;
+    }
+
+    &.box-round {
+        border-radius: 10%;
+    }
+
+    &.border {
+        border: 5px solid #fff;
+        line-height: 30px;
+
+        &.size-lg {
+            line-height: 40px;
+        }
+
+        &.size-sm {
+            line-height: 20px;
+        }
+    }
+
+    .letter-icon, i {
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    &.letter-color-a {
+        background-color: #5A8770 !important;
+
+        &.hover {
+            background-color: darken(#5A8770, 10%) !important;
+        }
+    }
+
+    &.letter-color-b {
+        background-color: #C0392B !important;
+
+        &.hover {
+            background-color: darken(#C0392B, 10%) !important;
+        }
+    }
+
+    &.letter-color-c {
+        background-color: #6FA9AB !important;
+
+        &.hover {
+            background-color: darken(#6FA9AB, 10%) !important;
+        }
+    }
+
+    &.letter-color-d {
+        background-color: #F5AF29 !important;
+
+        &.hover {
+            background-color: darken(#F5AF29, 10%) !important;
+        }
+    }
+
+    &.letter-color-e {
+        background-color: #0088B9 !important;
+
+        &.hover {
+            background-color: darken(#0088B9, 10%) !important;
+        }
+    }
+
+    &.letter-color-f {
+        background-color: #F18636 !important;
+
+        &.hover {
+            background-color: darken(#F18636, 10%) !important;
+        }
+    }
+
+    &.letter-color-g {
+        background-color: #D35400 !important;
+
+        &.hover {
+            background-color: darken(#D35400, 10%) !important;
+        }
+    }
+
+    &.letter-color-h {
+        background-color: #A6B12E !important;
+
+        &.hover {
+            background-color: darken(#A6B12E, 10%) !important;
+        }
+    }
+
+    &.letter-color-i {
+        background-color: #9B59B6 !important;
+
+        &.hover {
+            background-color: darken(#9B59B6, 10%) !important;
+        }
+    }
+
+    &.letter-color-j {
+        background-color: #F5888D !important;
+
+        &.hover {
+            background-color: darken(#F5888D, 10%) !important;
+        }
+    }
+
+    &.letter-color-k {
+        background-color: #B49255 !important;
+
+        &.hover {
+            background-color: darken(#B49255, 10%) !important;
+        }
+    }
+
+    &.letter-color-l {
+        background-color: #407887 !important;
+
+        &.hover {
+            background-color: darken(#407887, 10%) !important;
+        }
+    }
+
+    &.letter-color-m {
+        background-color: #7F8C8D !important;
+
+        &.hover {
+            background-color: darken(#7F8C8D, 10%) !important;
+        }
+    }
+
+    &.letter-color-n {
+        background-color: #1ABC9C !important;
+
+        &.hover {
+            background-color: darken(#1ABC9C, 10%) !important;
+        }
+    }
+
+    &.letter-color-o {
+        background-color: #BE5464 !important;
+
+        &.hover {
+            background-color: darken(#BE5464, 10%) !important;
+        }
+    }
+
+    &.letter-color-p {
+        background-color: #3DC34B !important;
+
+        &.hover {
+            background-color: darken(#3DC34B, 10%) !important;
+        }
+    }
+
+    &.letter-color-q {
+        background-color: #64471E !important;
+
+        &.hover {
+            background-color: darken(#64471E, 10%) !important;
+        }
+    }
+
+    &.letter-color-r {
+        background-color: #2D59D7 !important;
+
+        &.hover {
+            background-color: darken(#2D59D7, 10%) !important;
+        }
+    }
+
+    &.letter-color-s {
+        background-color: #616F51 !important;
+
+        &.hover {
+            background-color: darken(#616F51, 10%) !important;
+        }
+    }
+
+    &.letter-color-t {
+        background-color: #4DA7CE !important;
+
+        &.hover {
+            background-color: darken(#4DA7CE, 10%) !important;
+        }
+    }
+
+    &.letter-color-u {
+        background-color: #AFAF50 !important;
+
+        &.hover {
+            background-color: darken(#AFAF50, 10%) !important;
+        }
+    }
+
+    &.letter-color-v {
+        background-color: #008C69 !important;
+
+        &.hover {
+            background-color: darken(#008C69, 10%) !important;
+        }
+    }
+
+    &.letter-color-w {
+        background-color: #947499 !important;
+
+        &.hover {
+            background-color: darken(#947499, 10%) !important;
+        }
+    }
+
+    &.letter-color-x {
+        background-color: #328E93 !important;
+
+        &.hover {
+            background-color: darken(#328E93, 10%) !important;
+        }
+    }
+
+    &.letter-color-y {
+        background-color: #EAB71C !important;
+
+        &.hover {
+            background-color: darken(#EAB71C, 10%) !important;
+        }
+    }
+
+    &.letter-color-z {
+        background-color: #407887 !important;
+
+        &.hover {
+            background-color: darken(#407887, 10%) !important;
+        }
+    }
+
+    &.letter-color-0 {
+        background-color: #92B74A !important;
+
+        &.hover {
+            background-color: darken(#92B74A, 10%) !important;
+        }
+    }
+
+    &.letter-color-1 {
+        background-color: #51A8B9 !important;
+
+        &.hover {
+            background-color: darken(#51A8B9, 10%) !important;
+        }
+    }
+
+    &.letter-color-2 {
+        background-color: #E4BD02 !important;
+
+        &.hover {
+            background-color: darken(#E4BD02, 10%) !important;
+        }
+    }
+
+    &.letter-color-3 {
+        background-color: #ED726D !important;
+
+        &.hover {
+            background-color: darken(#ED726D, 10%) !important;
+        }
+    }
+
+    &.letter-color-4 {
+        background-color: #3E7B02 !important;
+
+        &.hover {
+            background-color: darken(#3E7B02, 10%) !important;
+        }
+    }
+
+    &.letter-color-5 {
+        background-color: #EE3E02 !important;
+
+        &.hover {
+            background-color: darken(#EE3E02, 10%) !important;
+        }
+    }
+
+    &.letter-color-6 {
+        background-color: #976ECA !important;
+
+        &.hover {
+            background-color: darken(#328E93, 10%) !important;
+        }
+    }
+
+    &.letter-color-7 {
+        background-color: #E27C4B !important;
+
+        &.hover {
+            background-color: darken(#E27C4B, 10%) !important;
+        }
+    }
+
+    &.letter-color-8 {
+        background-color: #754634 !important;
+
+        &.hover {
+            background-color: darken(#754634, 10%) !important;
+        }
+    }
+
+    &.letter-color-9 {
+        background-color: #667268 !important;
+
+        &.hover {
+            background-color: darken(#667268, 10%) !important;
+        }
+    }
+
+    &.letter-custom {
+        background-color: #ec971f;
+    }
+
+    &.letter-custom-hover {
+        background-color: #b5a8c9;
+
+        &:hover {
+            background-color: darken(#c3a86a, 10%);
+        }
+    }
+}

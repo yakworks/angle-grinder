@@ -1,0 +1,33 @@
+/* ---------------------------------------------------------------------- */
+/*  Notification Icons
+/* ---------------------------------------------------------------------- */
+.demo-notification-icons {
+    notification-icon {
+        display: table;
+        margin: 0 auto;
+    }
+}
+
+.custom-style .angular-notifications-icon {
+    left: -10px;
+    background: yellow;
+    color: black;
+    width: 30px;
+    height: 30px;
+    font-weight: bolder;
+    font-size: 1.2em;
+}
+
+.angular-notifications-icon.my-custom-animation {
+    @include transition(0.5s linear all);
+}
+
+.angular-notifications-icon.my-custom-animation-add {
+    background: black;
+    color: white;
+}
+
+.angular-notifications-icon.my-custom-animation-add-active {
+    background: yellow;
+    color: black;
+}

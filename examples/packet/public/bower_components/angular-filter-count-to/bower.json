@@ -1,0 +1,23 @@
+{
+  "name": "angular-filter-count-to",
+  "version": "0.0.9",
+  "main": [
+    "dist/angular-filter-count-to.min.js"
+  ],
+  "ignore": [
+    "node_modules"
+  ],
+  "location": "https://github.com/pfitzpaddy/angular-filter-count-to",
+  "licence": "MIT",
+  "keywords": [
+    "angular",
+    "directive",
+    "countTo"
+  ],
+  "dependencies": {
+    "angular": "1.4.2"
+  },
+  "resolutions": {
+    "angular": "1.4.2"
+  }
+}

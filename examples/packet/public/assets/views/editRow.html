@@ -1,0 +1,37 @@
+<table class="table no-bg">
+    <tr>
+        <td rowspan="2">
+            ID: {{p.id}}
+            <input type="hidden" name="id" value="{{p.id}}">
+        </td>
+        <td>Firstname:</td>
+        <td>
+            <input class="form-control" type="text" name="fn" class="w100" ng-model="p.fn">
+        </td>
+        <td>Description: </td>
+        <td>
+            <input class="form-control" type="text" name="dc" class="w180" ng-model="p.dc">
+        </td>
+        <td>Email:</td>
+        <td>
+            <input class="form-control" type="text" name="em" class="w180" ng-model="p.em">
+        </td>
+    </tr>
+    <tr>
+        <td>Lastname:</td>
+        <td>
+            <input class="form-control" type="text" name="ln" class="w100" ng-model="p.ln">
+        </td>
+        <td>Phone: </td>
+        <td>
+            <input class="form-control" type="text" name="ph" class="w120" ng-model="p.ph">
+        </td>
+        <td colspan="2">
+            <div class="pull-right">
+                <input type="button" class="btn btn-primary btn-sm margin-right-15" value=" save " onclick="alert('Save :)')">
+                <input type="button" class="btn btn-primary btn-sm" value=" cancel" ng-click="setEditId(-1)">
+            </div>
+        </td>
+    </tr>
+</table>
+<!--  class="editRowTd" -->

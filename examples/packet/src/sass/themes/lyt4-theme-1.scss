@@ -1,0 +1,432 @@
+/* ---------------------------------------------------------------------- */
+/*  Layout4 - Theme 1
+/* ---------------------------------------------------------------------- */
+
+@import "modules/variables";
+$app-background: #F1F3FA;
+//NAV HEADER COLORS
+$header-background: $white;
+$headerBorder-color: rgba(0, 0, 0, 0.15);
+$headerText-color: #333;
+$headerElements-color: #333;
+//NAV COLLAPSE COLORS
+$collapse-background: $white;
+$collapseBorder-color: rgba(0, 0, 0, 0.15);
+$collapseText-color: #333;
+$collapseButton-background: #5B9BD1;
+$collapseButton-color: #fff;
+$collapseElements-color: #333;
+$collapseShadow: none;
+$menuMobile-color: $collapse-background;
+$menuMobileBorder-color: darken($collapse-background, 5%);
+//HORIZONTAL MENU COLORS
+$menu-background: #E1E6F4;
+$menuText-color: #777;
+$menuTextHover-color: $black;
+$menuTextActive-color: $white;
+$menuText-background: none;
+$menuTextHover-background: darken($menu-background, 5%);
+$menuTextActive-background: darken($menu-background, 10%);
+$menuBorder-color: transparent;
+$menuShadow: 0 0 4px rgba(21, 31, 57, 0.4);
+//OTHERS COLORS
+$loadingbar-color: $primary;
+$selection-background: $primary;
+$selection-color: $white;
+
+::-moz-selection {
+    background: $selection-background;
+    text-shadow: none;
+    color: $selection-color;
+}
+
+::selection {
+    background: $selection-background;
+    text-shadow: none;
+    color: $selection-color;
+}
+
+body {
+    background: $app-background;
+}
+
+.app-content {
+    @media (max-width: $screen-sm-max) {
+        background: $app-background;
+    }
+}
+
+.navbar {
+    .navbar-header {
+        background: $header-background !important;
+        border-right-color: none !important;
+        border-bottom-color: $headerBorder-color !important;
+
+        .sidebar-toggler, .sidebar-mobile-toggler {
+            color: $headerElements-color !important;
+        }
+
+        .navbar-brand {
+            color: $headerText-color !important;
+        }
+
+        .menu-toggler {
+            color: rgba($headerElements-color, 0.7) !important;
+              &:hover {
+                  color: rgba($headerElements-color, 1) !important;
+              }
+        }
+
+        .sidebar-mobile-toggler, .menu-mobile-toggler {
+            background-color: $collapseButton-background !important;
+            border-color: $collapseButton-background !important;
+            color: $collapseButton-color !important;
+
+            > i {
+                color: $collapseButton-color !important;
+            }
+
+            &:hover {
+                background-color: lighten($collapseButton-background, 10%) !important;
+                border-color: lighten($collapseButton-background, 10%) !important;
+                color: $collapseButton-color !important;
+            }
+
+            &:active,
+            &.active,
+            &.active:focus,
+            &:active:focus,
+            &:active:hover,
+            &.dropdown-toggle:active:hover {
+                background-color: darken($collapseButton-background, 5%) !important;
+                border-color: darken($collapseButton-background, 5%) !important;
+            }
+
+            &:focus {
+                background-color: lighten($collapseButton-background, 15%) !important;
+                border-color: lighten($collapseButton-background, 15%) !important;
+                color: $collapseButton-color !important;
+            }
+
+            &.disabled:hover,
+            &.disabled:focus,
+            &.disabled:active,
+            &.disabled.active,
+            &[disabled],
+            &[disabled]:hover,
+            &[disabled]:focus,
+            &[disabled]:active,
+            &[disabled].active,
+            fieldset[disabled] &:hover,
+            fieldset[disabled] &:focus,
+            fieldset[disabled] &:active,
+            fieldset[disabled] &.active {
+                background-color: lighten($collapseButton-background, 20%) !important;
+                border-color: lighten($collapseButton-background, 20%) !important;
+                color: $collapseButton-color !important;
+            }
+        }
+    }
+
+    .navbar-collapse {
+        background: $collapse-background !important;
+        border-bottom-color: $collapseBorder-color !important;
+        box-shadow: $collapseShadow !important;
+
+        .navbar-left {
+            > li {
+                @media (min-width: $screen-sm-min) {
+                    &:before {
+                        background: -moz-linear-gradient(top, rgba($collapseText-color,0) 0%, rgba($collapseText-color,0.2) 50%, rgba($collapseText-color,0) 100%); /* FF3.6-15 */
+                        background: -webkit-linear-gradient(top, rgba($collapseText-color,0) 0%,rgba($collapseText-color,0.2) 50%,rgba($collapseText-color,0) 100%); /* Chrome10-25,Safari5.1-6 */
+                        background: linear-gradient(to bottom, rgba($collapseText-color,0) 0%,rgba($collapseText-color,0.2) 50%,rgba($collapseText-color,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+                        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=$collapseText-color, endColorstr=$collapseText-color,GradientType=0 ); /* IE6-9 */
+                    }
+                }
+
+                .main-search {
+                    .form-control {
+                        color: $collapseText-color !important;
+
+                        &::-webkit-input-placeholder {
+                            color: rgba($collapseText-color, 0.3) !important;
+                        }
+
+                        &:-moz-placeholder {
+                            /* Firefox 18- */
+                            color: rgba($collapseText-color, 0.3) !important;
+                        }
+
+                        &::-moz-placeholder {
+                            /* Firefox 19+ */
+                            color: rgba($collapseText-color, 0.3) !important;
+                        }
+
+                        &:-ms-input-placeholder {
+                            color: rgba($collapseText-color, 0.3) !important;
+                        }
+                    }
+
+                    .search-button {
+                        color: rgba($collapseElements-color, 0.7);
+
+                        &:hover, &:active, &:focus {
+                            color: rgba($collapseElements-color, 1);
+                        }
+                    }
+                }
+
+                > a {
+                    color: rgba($collapseText-color, 0.7);
+
+                    i {
+                        color: rgba($collapseElements-color, 0.7) !important;
+                    }
+
+                    &:hover {
+                        color: rgba($collapseText-color, 1);
+
+                        i {
+                            color: rgba($collapseElements-color, 1) !important;
+                        }
+                    }
+                }
+
+                @media (max-width: $screen-xs-max) {
+                    border-bottom: 1px solid $menuMobileBorder-color !important;
+                }
+
+                &.sidebar-toggler-wrapper {
+                    .btn {
+                        background-color: $collapseButton-background;
+                        border-color: $collapseButton-background;
+                        color: $collapseButton-color !important;
+
+                        > i {
+                            color: $collapseButton-color !important;
+                        }
+
+                        &:hover {
+                            background-color: lighten($collapseButton-background, 10%) !important;
+                            border-color: lighten($collapseButton-background, 10%);
+                            color: $collapseButton-color !important;
+                        }
+
+                        &:active,
+                        &.active,
+                        &.active:focus,
+                        &:active:focus,
+                        &:active:hover,
+                        &.dropdown-toggle:active:hover {
+                            background-color: darken($collapseButton-background, 5%) !important;
+                            border-color: darken($collapseButton-background, 5%);
+                        }
+
+                        &:focus {
+                            background-color: lighten($collapseButton-background, 15%);
+                            border-color: lighten($collapseButton-background, 15%);
+                            color: $collapseButton-color !important;
+                        }
+
+                        &.disabled:hover,
+                        &.disabled:focus,
+                        &.disabled:active,
+                        &.disabled.active,
+                        &[disabled],
+                        &[disabled]:hover,
+                        &[disabled]:focus,
+                        &[disabled]:active,
+                        &[disabled].active,
+                        fieldset[disabled] &:hover,
+                        fieldset[disabled] &:focus,
+                        fieldset[disabled] &:active,
+                        fieldset[disabled] &.active {
+                            background-color: lighten($collapseButton-background, 20%);
+                            border-color: lighten($collapseButton-background, 20%);
+                            color: $collapseButton-color !important;
+                        }
+                    }
+                }
+            }
+        }
+
+        .navbar-right {
+            > li {
+                @media (min-width: $screen-sm-min) {
+                    &:before {
+                        background: -moz-linear-gradient(top, rgba($collapseText-color,0) 0%, rgba($collapseText-color,0.2) 50%, rgba($collapseText-color,0) 100%); /* FF3.6-15 */
+                        background: -webkit-linear-gradient(top, rgba($collapseText-color,0) 0%,rgba($collapseText-color,0.2) 50%,rgba($collapseText-color,0) 100%); /* Chrome10-25,Safari5.1-6 */
+                        background: linear-gradient(to bottom, rgba($collapseText-color,0) 0%,rgba($collapseText-color,0.2) 50%,rgba($collapseText-color,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+                        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=$collapseText-color, endColorstr=$collapseText-color,GradientType=0 ); /* IE6-9 */
+                    }
+                }
+
+                > a {
+                    color: rgba($collapseText-color, 0.7);
+
+                    i {
+                        color: rgba($collapseElements-color, 0.7) !important;
+                    }
+
+                    &:hover {
+                        color: rgba($collapseText-color, 1);
+
+                        i {
+                            color: rgba($collapseElements-color, 1) !important;
+                        }
+                    }
+                }
+            }
+
+            .angular-notifications-icon {
+                background: $collapseButton-background;
+            }
+        }
+
+        @media (max-width: $screen-sm-max) {
+            background: $header-background !important;
+            box-shadow: none;
+
+            .navbar-right {
+                > li {
+                    > a {
+                        color: rgba($headerText-color, 0.7);
+
+                        i {
+                            color: rgba($headerElements-color, 0.7) !important;
+                        }
+
+                        &:hover {
+                            color: rgba($headerText-color, 1);
+
+                            i {
+                                color: rgba($headerElements-color, 1) !important;
+                            }
+                        }
+                    }
+
+                    &.open {
+                        background: darken($header-background, 8%) !important;
+                    }
+
+                    @media (max-width: $screen-xs-max) {
+                        border-bottom: 1px solid $menuMobileBorder-color !important;
+                    }
+                }
+            }
+        }
+
+        @media (max-width: $screen-xs-max) {
+            background: $menuMobile-color !important;
+
+            .close-handle {
+                background: $header-background;
+
+                .arrow-left, .arrow-right {
+                    background-color: $headerElements-color;
+                }
+            }
+
+            .navbar-right {
+                .current-user {
+                    a {
+                        i {
+                            color: $white !important;
+                            background: rgba($headerElements-color, 0.3);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .dropdown-off-sidebar {
+        border-left-color: transparent !important;
+        background: $collapse-background !important;
+        color: rgba($collapseElements-color, 0.7) !important;
+
+        @media (min-width: $screen-sm-min) {
+            &:hover {
+                color: rgba($collapseElements-color, 1) !important;
+            }
+        }
+
+        @media (max-width: $screen-sm-max) {
+            background: $header-background !important;
+            border-bottom-color: $headerBorder-color !important;
+            color: rgba($headerElements-color, 0.7) !important;
+            &:hover {
+                color: rgba($headerElements-color, 1) !important;
+            }
+        }
+    }
+}
+
+.horizontal-menu {
+    background: $menu-background;
+    box-shadow: $menuShadow;
+
+    .navbar-nav > li {
+        > a {
+            background: $menuText-background !important;
+            color: $menuText-color !important;
+
+            &:hover {
+                background: $menuTextHover-background !important;
+                color: $menuTextHover-color !important;
+            }
+        }
+
+        &.open {
+            > a {
+                color: $menuTextHover-color !important;
+                background: $menuTextHover-background !important;
+
+                &:hover {
+                    color: $menuTextHover-color !important;
+                }
+            }
+        }
+
+        &.active {
+            > a {
+                color: $menuTextActive-color !important;
+                background: $menuTextActive-background !important;
+
+                &:hover {
+                    color: $menuTextActive-color !important;
+                }
+            }
+        }
+
+        .dropdown-menu {
+            @media (max-width: $screen-sm-max) {
+                a {
+                    color: $menuText-color !important;
+                }
+            }
+        }
+    }
+
+    .close-handle {
+        background: $menu-background;
+
+        > div {
+            background: $menuTextHover-color;
+        }
+    }
+}
+
+.main-content {
+    background: $app-background !important;
+}
+
+#app {
+    > footer {
+        background-color: $app-background !important;
+    }
+}
+
+#loading-bar .bar {
+    background: $loadingbar-color !important;
+}

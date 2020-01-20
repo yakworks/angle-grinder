@@ -1,0 +1,48 @@
+{
+  "name": "angular-bootstrap-nav-tree",
+  "description": "A Tree Control for AngularJS, using CSS animation and Bootstrap style",
+  "main": [
+    "dist/abn_tree_directive.js",
+    "dist/abn_tree.css"
+  ],
+  "licence": "MIT",
+  "keywords": [
+    "angularjs",
+    "bootstrap",
+    "tree",
+    "widget"
+  ],
+  "authors": [
+    "Nick Perkins"
+  ],
+  "homepage": "https://github.com/nickperkinslondon/angular-bootstrap-nav-tree",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/nickperkinslondon/angular-bootstrap-nav-tree"
+  },
+  "ignore": [
+    "src",
+    "temp",
+    "test",
+    ".gitignore",
+    "Gruntfile.coffee",
+    "Gruntfile.js",
+    "bower.json",
+    "package.json",
+    "README.md"
+  ],
+  "dependencies": {
+    "angular": ">=1.0",
+    "bootstrap": ">=2.3"
+  },
+  "_release": "e840f9e154",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "e840f9e154ff4c6ae0ed3318d06d36eb46640a0a"
+  },
+  "_source": "https://github.com/nickperkinslondon/angular-bootstrap-nav-tree.git",
+  "_target": "*",
+  "_originalSource": "angular-bootstrap-nav-tree",
+  "_direct": true
+}

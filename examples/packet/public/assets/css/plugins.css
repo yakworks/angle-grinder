@@ -1,0 +1,1276 @@
+@charset "UTF-8";
+/* ---------------------------------------------------------------------- 
+>>> TABLE OF CONTENT
+-------------------------------------------------------------------------
+1 - TREE
+2 - IMAGE CROP    
+3 - PERFECT-SCROLLBAR
+4 - FILE UPLOAD
+5 - NESTABLE
+6 - SWEET ALERT
+7 - CALENDAR
+8 - CHARTJS
+9 - NOTIFICATION ICONS
+10 - ANGULAR AWESOME SLIDER
+11 - BOOTSTRAP DATERANGE PICKER
+12 - ANGULAR COLORPICKER
+13 - CKEDITOR
+14 - SLICK
+15 - ANGULAR-UI-SWITCH
+/* ---------------------------------------------------------------------- */
+/*
+
+
+
+*/
+/* ---------------------------------------------------------------------- */
+/*  Tree
+/* ---------------------------------------------------------------------- */
+.box-tree .nav > li > a {
+  color: #8e8e93;
+  font-size: 14px;
+}
+.box-tree .nav > li > a:hover, .box-tree .nav > li > a:focus {
+  color: #5b5b60;
+}
+.box-tree .nav > li > a i {
+  color: #58748B;
+}
+.box-tree .nav > li.active > a, .box-tree .nav > li.active > a:hover, .box-tree .nav > li.active a:focus {
+  color: #ffffff;
+}
+.box-tree .nav > li.active > a i, .box-tree .nav > li.active > a:hover i, .box-tree .nav > li.active a:focus i {
+  color: #ffffff;
+}
+
+/* ---------------------------------------------------------------------- */
+/*  Crop Image
+/* ---------------------------------------------------------------------- */
+.cropBox {
+  background-color: #f5f5f5;
+  border-radius: 4px;
+  color: #666;
+  margin-bottom: 20px;
+  padding: 10px;
+}
+
+.cropArea {
+  height: 350px;
+  overflow: hidden;
+  background-color: #ffffff;
+}
+
+.croppedBox {
+  width: 220px;
+  height: 220px;
+}
+.croppedBox > div {
+  background: #fff url(../images/picture.svg) center center no-repeat;
+  background-size: 50px 50px;
+  height: 200px;
+}
+
+img-crop {
+  background: url(../images/picture.svg) center center no-repeat;
+  background-size: 100px 100px;
+}
+
+#crop-target {
+  display: inline-block;
+}
+@media (max-width: 991px) {
+  #crop-target {
+    max-width: 100% !important;
+  }
+}
+
+.crop-image {
+  overflow: auto;
+  max-height: 600px;
+  min-height: 600px;
+}
+@media (max-width: 991px) {
+  .crop-image {
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+}
+
+.crop-image .crop-wrapper {
+  display: table;
+  width: 100%;
+  height: 600px;
+  background: url(../images/bg_transparent.png);
+}
+@media (max-width: 991px) {
+  .crop-image .crop-wrapper {
+    height: auto !important;
+  }
+}
+
+.crop-image .crop-wrapper .crop-active {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.crop-image .jcrop-active, .crop-image .jcrop-holder {
+  margin: 0 auto;
+}
+
+.thumbnail.crop-preview .preview-wrapper {
+  position: relative;
+  background: url(../images/picture.svg) center center no-repeat;
+  background-size: 100px 100px;
+}
+
+.thumbnail.crop-preview .preview-wrapper canvas {
+  width: 100% !important;
+}
+
+.jcrop-keymgr {
+  opacity: 0;
+}
+
+.crop-tools {
+  padding-left: 60px;
+  position: relative;
+}
+@media (max-width: 991px) {
+  .crop-tools {
+    display: none !important;
+  }
+}
+
+.btn-fit-image {
+  position: absolute;
+  left: 0;
+}
+
+.modal-close-button {
+  position: absolute;
+  right: 0;
+  top: 0;
+  background: none;
+}
+
+/* ---------------------------------------------------------------------- */
+/*  Perfect Scrollbar
+/* ---------------------------------------------------------------------- */
+*[perfect-scrollbar] {
+  overflow-y: hidden !important;
+}
+
+.touch .app-mobile *[perfect-scrollbar] {
+  overflow-y: scroll !important;
+  -webkit-overflow-scrolling: touch !important;
+}
+
+.ps-container > .ps-scrollbar-y-rail > .ps-scrollbar-y {
+  background-color: #666C71 !important;
+}
+
+.ps-container:hover.ps-in-scrolling.ps-y > .ps-scrollbar-y-rail {
+  background-color: transparent !important;
+}
+
+.ps-container:hover.ps-in-scrolling.ps-y > .ps-scrollbar-y-rail {
+  background-color: transparent !important;
+}
+
+.app-sidebar-closed #sidebar .ps-container:hover > .ps-scrollbar-y-rail {
+  opacity: 0 !important;
+}
+
+.app-sidebar-closed #sidebar .ps-container:hover > .ps-scrollbar-y-rail:hover {
+  opacity: 1 !important;
+}
+
+.ps-container:hover > .ps-scrollbar-y-rail:hover {
+  background-color: transparent !important;
+  opacity: 0.9 !important;
+}
+
+.ps-container > .ps-scrollbar-y-rail > .ps-scrollbar-y {
+  background-color: #666C71 !important;
+}
+
+.ps-container:hover > .ps-scrollbar-y-rail:hover > .ps-scrollbar-y {
+  background-color: #666C71 !important;
+}
+
+.ps-container:hover > .ps-scrollbar-y-rail:hover {
+  background-color: transparent !important;
+}
+
+.ps-container:hover.ps-in-scrolling.ps-y > .ps-scrollbar-y-rail {
+  background-color: transparent !important;
+}
+
+.ps-container.ps-in-scrolling.ps-y > .ps-scrollbar-y-rail {
+  background-color: transparent !important;
+}
+
+.ps-container > .ps-scrollbar-y-rail, .ps-container > .ps-scrollbar-y-rail > .ps-scrollbar-y {
+  width: 7px !important;
+  border-radius: 0 !important;
+}
+
+/* ---------------------------------------------------------------------- */
+/*  File Upload
+/* ---------------------------------------------------------------------- */
+.my-drop-zone {
+  border: dotted 1px lightgray;
+}
+
+.nv-file-over {
+  border: dotted 1px #C82E29;
+}
+
+/* Default class applied to drop zones on over */
+.another-file-over-class {
+  border: dotted 1px #5A8770;
+}
+
+.file-upload canvas {
+  background-color: #f3f3f3;
+  -webkit-box-shadow: 3px 3px 3px 0 #e3e3e3;
+  -moz-box-shadow: 3px 3px 3px 0 #e3e3e3;
+  box-shadow: 3px 3px 3px 0 #e3e3e3;
+  border: 1px solid #c3c3c3;
+  height: 100px;
+  margin: 6px 0 0 6px;
+}
+
+/* ---------------------------------------------------------------------- */
+/*  Nestable
+/* ---------------------------------------------------------------------- */
+.angular-ui-tree-handle {
+  background: #f7f7f8;
+  border: 1px solid #c8c7cc;
+  color: #8e8e93;
+  padding: 10px 10px;
+  font-size: 14px;
+  font-weight: normal !important;
+}
+
+.angular-ui-tree-handle:hover {
+  color: #5b5b60;
+  background: #eaeaec;
+  border-color: #a6a4ac;
+}
+
+.angular-ui-tree-placeholder {
+  background: #f0f9ff;
+  border: 2px dashed #bed2db;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.group-title {
+  background-color: #687074 !important;
+  color: #FFF !important;
+}
+
+/**
+ * Nestable
+ */
+.dd {
+  position: relative;
+  display: block;
+  margin: 0;
+  padding: 0;
+  max-width: 600px;
+  list-style: none;
+  font-size: 13px;
+  line-height: 20px;
+}
+
+.dd-list {
+  display: block;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.dd-list .dd-list {
+  padding-left: 30px;
+}
+
+.dd-collapsed .dd-list {
+  display: none;
+}
+
+.dd-item,
+.dd-empty,
+.dd-placeholder {
+  display: block;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  min-height: 20px;
+  font-size: 13px;
+  line-height: 20px;
+}
+
+.dd-handle {
+  display: block;
+  margin: 5px 0;
+  padding: 10px 10px;
+  text-decoration: none;
+  border: 1px solid #ebebeb;
+  background: #fff;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+}
+
+.dd-handle:hover {
+  background: #fff;
+}
+
+.dd-item > button {
+  display: block;
+  position: relative;
+  cursor: pointer;
+  float: left;
+  width: 25px;
+  height: 30px;
+  margin: 5px 0;
+  padding: 0;
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  border: 0;
+  background: transparent;
+  font-size: 12px;
+  line-height: 1;
+  text-align: center;
+  font-weight: bold;
+}
+
+.dd-item > button:before {
+  content: '+';
+  display: block;
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  text-indent: 0;
+}
+
+.dd-item > button[data-action="collapse"]:before {
+  content: '-';
+}
+
+.dd-placeholder,
+.dd-empty {
+  margin: 5px 0;
+  padding: 0;
+  min-height: 30px;
+  background: #f2fbff;
+  border: 1px dashed #b6bcbf;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+
+.dd-empty {
+  border: 1px dashed #bbb;
+  min-height: 100px;
+  background-color: #e5e5e5;
+  background-size: 60px 60px;
+  background-position: 0 0, 30px 30px;
+}
+
+.dd-dragel {
+  position: absolute;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.dd-dragel > .dd-item .dd-handle {
+  margin-top: 0;
+}
+
+.dd-dragel .dd-handle {
+  -webkit-box-shadow: 2px 4px 6px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 2px 4px 6px 0 rgba(0, 0, 0, 0.1);
+}
+
+/**
+ * Nestable Extras
+ */
+.nestable-lists {
+  display: block;
+  clear: both;
+  padding: 30px 0;
+  width: 100%;
+  border: 0;
+  border-top: 2px solid #ddd;
+  border-bottom: 2px solid #ddd;
+}
+
+@media only screen and (min-width: 700px) {
+  .dd + .dd {
+    margin-left: 2%;
+  }
+}
+.dd-hover > .dd-handle {
+  background: #2ea8e5 !important;
+}
+
+/**
+ * Nestable Draggable Handles
+ */
+.dd3-content {
+  display: block;
+  margin: 5px 0;
+  padding: 10px 10px 10px 50px;
+  text-decoration: none;
+  border: 1px solid #ebebeb;
+  background: #fff;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+}
+
+.dd-dragel > .dd3-item > .dd3-content {
+  margin: 0;
+}
+
+.dd3-item > button {
+  margin-left: 40px;
+}
+
+.dd3-handle {
+  position: absolute;
+  margin: 0;
+  left: 0;
+  top: 0;
+  cursor: pointer;
+  width: 40px;
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  border: 1px solid #ebebeb;
+  background: #fff;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.dd3-handle:before {
+  content: 'Ôëí';
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 10px;
+  width: 100%;
+  text-align: center;
+  text-indent: 0;
+  color: #ccc;
+  font-size: 20px;
+  font-weight: normal;
+}
+
+.dd3-handle:hover {
+  background: #f7f7f7;
+}
+
+.dd {
+  max-width: none !important;
+}
+
+.dd-item > button:before {
+  content: "\e649" !important;
+  font-family: "themify";
+  color: #58748B;
+}
+
+.dd-item > button[data-action="collapse"]:before {
+  content: "\e64b" !important;
+}
+
+.dd-handle {
+  background: #f7f7f8 !important;
+  border: 1px solid #c8c7cc !important;
+  color: #8e8e93 !important;
+}
+
+.dd-handle:hover {
+  background: #eaeaec !important;
+  border-color: #a6a4ac !important;
+}
+
+/* ---------------------------------------------------------------------- */
+/*  Sweet Alert
+/* ---------------------------------------------------------------------- */
+.sweet-overlay {
+  z-index: 9998 !important;
+}
+
+.sweet-alert {
+  z-index: 9999 !important;
+}
+.sweet-alert h2 {
+  color: #5b5b60 !important;
+  font-family: "Raleway", sans-serif !important;
+  font-weight: 300 !important;
+}
+.sweet-alert button {
+  padding: 5px 32px !important;
+  box-shadow: none !important;
+}
+
+/* ---------------------------------------------------------------------- */
+/*  Calendar
+/* ---------------------------------------------------------------------- */
+.cal-month-box {
+  border-right: none !important;
+  border-bottom: none !important;
+}
+
+.event {
+  border: none !important;
+  box-shadow: none !important;
+  height: 8px !important;
+  width: 8px !important;
+}
+
+.event-job {
+  background-color: #58748B !important;
+}
+
+.event-home {
+  background-color: #9A89B5 !important;
+}
+
+.event-to-do {
+  background-color: #F18636 !important;
+}
+
+.event-cancelled {
+  background-color: #EEB424 !important;
+}
+
+.event-generic {
+  background-color: #46b8da !important;
+}
+
+.event-off-site-work {
+  background-color: #5A8770 !important;
+}
+
+.day-highlight.dh-event-job {
+  border: none !important;
+  background-color: rgba(88, 116, 139, 0.3) !important;
+}
+
+.day-highlight.dh-event-home {
+  border: none !important;
+  background-color: rgba(154, 137, 181, 0.3) !important;
+}
+
+.day-highlight.dh-event-to-do {
+  border: none !important;
+  background-color: rgba(241, 134, 54, 0.3) !important;
+}
+
+.day-highlight.dh-event-cancelled {
+  border: none !important;
+  background-color: rgba(238, 180, 36, 0.3) !important;
+}
+
+.day-highlight.dh-event-generic {
+  border: none !important;
+  background-color: rgba(70, 184, 218, 0.3) !important;
+}
+
+.day-highlight.dh-event-off-site-work {
+  border: none !important;
+  background-color: rgba(70, 184, 218, 0.3) !important;
+}
+
+.cal-slide-content {
+  background-color: #F2F2F2 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+.cal-slide-content li {
+  padding: 20px;
+  border-bottom: 1px dotted #c8c7cc;
+}
+.cal-slide-content li:hover {
+  background-color: #DDDDE8 !important;
+}
+.cal-slide-content li a.event-item {
+  color: #8e8e93 !important;
+  font-weight: 400;
+}
+
+.cal-day-today {
+  background: none !important;
+}
+
+.cal-month-box .cal-day-today span[data-cal-date] {
+  font-size: 1.2em !important;
+  color: #fff !important;
+  background: #58748B !important;
+  opacity: 1 !important;
+  padding: 2px 5px;
+  border-radius: 50%;
+  min-width: 26px;
+  text-align: center;
+}
+
+.cal-events-num {
+  display: none;
+}
+
+/* ---------------------------------------------------------------------- */
+/*  Chartjs
+/* ---------------------------------------------------------------------- */
+canvas.chart-bar, canvas.chart-line {
+  max-width: 100% !important;
+  display: block;
+}
+
+.chart {
+  margin: 0;
+}
+
+.mini-pie-100 {
+  height: 100px;
+  position: relative;
+  width: 60px;
+  display: inline-block;
+}
+.mini-pie-100 canvas {
+  height: 100px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 60px;
+}
+.mini-pie-100 span {
+  line-height: 100px;
+}
+
+.mini-pie-150 {
+  height: 150px;
+  position: relative;
+  width: 150px;
+  display: inline-block;
+}
+.mini-pie-150 canvas {
+  height: 150px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 150px;
+}
+.mini-pie-150 span {
+  line-height: 150px;
+}
+
+/* ---------------------------------------------------------------------- */
+/*  Notification Icons
+/* ---------------------------------------------------------------------- */
+.demo-notification-icons notification-icon {
+  display: table;
+  margin: 0 auto;
+}
+
+.custom-style .angular-notifications-icon {
+  left: -10px;
+  background: yellow;
+  color: black;
+  width: 30px;
+  height: 30px;
+  font-weight: bolder;
+  font-size: 1.2em;
+}
+
+.angular-notifications-icon.my-custom-animation {
+  -moz-transition: linear 0.5s all;
+  -o-transition: linear 0.5s all;
+  -webkit-transition: linear 0.5s all;
+  transition: linear 0.5s all;
+}
+
+.angular-notifications-icon.my-custom-animation-add {
+  background: black;
+  color: white;
+}
+
+.angular-notifications-icon.my-custom-animation-add-active {
+  background: yellow;
+  color: black;
+}
+
+/* ---------------------------------------------------------------------- */
+/*  Angular-awesome-slider
+/* ---------------------------------------------------------------------- */
+.clip-slider.jslider {
+  height: 2.1em !important;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.clip-slider.jslider .jslider-bg i {
+  margin-top: 10px;
+}
+.clip-slider.jslider .jslider-bg i.default {
+  width: 0 !important;
+}
+.clip-slider.jslider .jslider-value, .clip-slider.jslider .jslider-label {
+  font-size: 10px !important;
+}
+.clip-slider.jslider div.jslider-pointer {
+  background: #dddddd !important;
+  background: -moz-linear-gradient(top, #dddddd 0%, #e2e2e2 13%, white 97%) !important;
+  background: -webkit-gradient(left top, left bottom, color-stop(0%, #dddddd), color-stop(13%, #e2e2e2), color-stop(97%, white)) !important;
+  background: -webkit-linear-gradient(top, #dddddd 0%, #e2e2e2 13%, white 97%) !important;
+  background: -o-linear-gradient(top, #dddddd 0%, #e2e2e2 13%, white 97%) !important;
+  background: -ms-linear-gradient(top, #dddddd 0%, #e2e2e2 13%, white 97%) !important;
+  background: linear-gradient(to bottom, #dddddd 0%, #e2e2e2 13%, #ffffff 97%) !important;
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dddddd', endColorstr='#ffffff', GradientType=0 ) !important;
+  box-shadow: 0 2px 1px -1px #ffffff inset, 0 1px 3px rgba(0, 0, 0, 0.39) !important;
+  height: 26px !important;
+  opacity: 1;
+  width: 26px !important;
+  margin-top: 1px;
+  margin-left: -13px !important;
+  border-radius: 50%;
+}
+.clip-slider.jslider.vertical {
+  height: 100% !important;
+  position: relative;
+  top: 0;
+  margin: 0;
+  display: inline-block;
+}
+.clip-slider.jslider.vertical .jslider-bg i {
+  margin-top: 0;
+}
+.clip-slider.jslider.vertical .jslider-bg i.default {
+  width: 0 !important;
+}
+.clip-slider.jslider.vertical div.jslider-scale ins {
+  left: -5px;
+}
+.clip-slider.jslider.vertical div.jslider-label {
+  top: 0;
+}
+.clip-slider.jslider.vertical div.jslider-label.jslider-label-to {
+  top: auto;
+  bottom: 0;
+}
+.clip-slider.jslider.vertical div.jslider-pointer {
+  margin-left: -11px !important;
+}
+.clip-slider div.jslider-scale span {
+  position: absolute;
+  height: 5px;
+  border-left: 1px solid #fff !important;
+  font-size: 0;
+  width: 1px;
+  margin-top: 1px !important;
+}
+
+/* ---------------------------------------------------------------------- */
+/*  bootstrap daterangepicker
+/* ---------------------------------------------------------------------- */
+.daterangepicker .calendar th {
+  font-family: inherit !important;
+  color: #5b5b60;
+  font-size: 11px;
+}
+.daterangepicker .calendar th.month {
+  font-size: 17px;
+  color: #8e8e93;
+}
+.daterangepicker .calendar td {
+  font-family: inherit !important;
+}
+.daterangepicker .calendar td.in-range {
+  background-color: rgba(88, 116, 139, 0.1);
+}
+.daterangepicker .calendar td.active {
+  background-color: #58748B;
+  border-color: #58748B;
+  border-radius: 0px;
+  position: relative;
+  border: none;
+}
+.daterangepicker .calendar td.active::before {
+  border-left: 6px solid transparent;
+  border-top: 6px solid #fff;
+  content: '';
+  height: 0;
+  position: absolute;
+  right: 2px;
+  top: 2px;
+  width: 0;
+}
+.daterangepicker .calendar td.active:hover {
+  background-color: #58748B;
+  border-color: #58748B;
+}
+.daterangepicker .input-mini {
+  padding: 5px 4px 5px 30px !important;
+}
+.daterangepicker .input-mini:focus {
+  outline: none;
+}
+.daterangepicker .range_inputs .daterangepicker_start_input, .daterangepicker .range_inputs .daterangepicker_end_input {
+  float: none !important;
+  padding-left: 0 !important;
+}
+.daterangepicker .range_inputs .daterangepicker_start_input label, .daterangepicker .range_inputs .daterangepicker_start_input input, .daterangepicker .range_inputs .daterangepicker_end_input label, .daterangepicker .range_inputs .daterangepicker_end_input input {
+  width: 100% !important;
+}
+.daterangepicker .range_inputs .daterangepicker_end_input {
+  float: none !important;
+}
+.daterangepicker .range_inputs .applyBtn {
+  background-color: #58748B;
+  border-color: #58748B;
+  color: #ffffff;
+  display: block;
+  width: 100%;
+  margin-bottom: 5px;
+}
+.daterangepicker .range_inputs .applyBtn:hover {
+  background-color: #718ea5 !important;
+  border-color: #718ea5;
+  color: #ffffff;
+}
+.daterangepicker .range_inputs .applyBtn:active, .daterangepicker .range_inputs .applyBtn.active, .daterangepicker .range_inputs .applyBtn.active:focus, .daterangepicker .range_inputs .applyBtn:active:focus, .daterangepicker .range_inputs .applyBtn:active:hover, .daterangepicker .range_inputs .applyBtn.dropdown-toggle:active:hover {
+  background-color: #4e677b !important;
+  border-color: #4e677b;
+}
+.daterangepicker .range_inputs .applyBtn:focus {
+  background-color: #819aaf;
+  border-color: #819aaf;
+}
+.daterangepicker .range_inputs .cancelBtn {
+  border: 1px solid #c8c7cc;
+  color: #8e8e93;
+  display: block;
+  width: 100%;
+}
+.daterangepicker .range_inputs .cancelBtn:hover {
+  color: #ffffff;
+  border-color: #8e8e93;
+  background: #8e8e93 !important;
+}
+.daterangepicker .range_inputs .cancelBtn:active, .daterangepicker .range_inputs .cancelBtn.active, .daterangepicker .range_inputs .cancelBtn.active:focus, .daterangepicker .range_inputs .cancelBtn:active:focus, .daterangepicker .range_inputs .cancelBtn:active:hover {
+  background-color: #818187 !important;
+  border-color: #818187 !important;
+  color: #ffffff !important;
+}
+.daterangepicker .range_inputs .cancelBtn:focus {
+  background-color: #b5b5b8;
+  border-color: #b5b5b8;
+  color: #ffffff;
+}
+.daterangepicker .range_inputs .cancelBtn:focus .caret {
+  border-top-color: #ffffff;
+}
+.daterangepicker .range_inputs .cancelBtn.disabled:hover, .daterangepicker .range_inputs .cancelBtn.disabled:focus, .daterangepicker .range_inputs .cancelBtn.disabled:active, .daterangepicker .range_inputs .cancelBtn.disabled.active, .daterangepicker .range_inputs .cancelBtn[disabled], .daterangepicker .range_inputs .cancelBtn[disabled]:hover, .daterangepicker .range_inputs .cancelBtn[disabled]:focus, .daterangepicker .range_inputs .cancelBtn[disabled]:active, .daterangepicker .range_inputs .cancelBtn[disabled].active, fieldset[disabled] .daterangepicker .range_inputs .cancelBtn:hover, fieldset[disabled] .daterangepicker .range_inputs .cancelBtn:focus, fieldset[disabled] .daterangepicker .range_inputs .cancelBtn:active, fieldset[disabled] .daterangepicker .range_inputs .cancelBtn.active {
+  border-color: #c2c2c5;
+  color: #c2c2c5;
+}
+.daterangepicker .ranges li {
+  transition: all 0.3s ease 0s !important;
+  border: 1px solid #c8c7cc !important;
+  color: #8e8e93 !important;
+  background: none !important;
+  border-radius: 3px !important;
+}
+.daterangepicker .ranges li:hover {
+  color: #ffffff !important;
+  border-color: #58748B !important;
+  background: #58748B !important;
+}
+.daterangepicker .ranges li.active, .daterangepicker .ranges li.active:hover {
+  background-color: #58748B !important;
+  border-color: #58748B !important;
+  color: #ffffff !important;
+}
+@media (max-width: 991px) {
+  .daterangepicker .calendar {
+    float: none !important;
+  }
+  .daterangepicker .calendar.first.right {
+    margin-top: 100%;
+  }
+  .daterangepicker .calendar.second.left {
+    position: absolute;
+    top: 0;
+  }
+  .daterangepicker .ranges {
+    float: none !important;
+    width: auto !important;
+  }
+}
+
+/* ---------------------------------------------------------------------- */
+/*  bootstrap daterangepicker
+/* ---------------------------------------------------------------------- */
+.sp-container {
+  z-index: 1088 !important;
+  background-color: #fff !important;
+  border: 1px solid #c8c7cc !important;
+}
+.sp-container .sp-thumb-el:hover {
+  border-color: #aeacb4 !important;
+}
+.sp-container input {
+  outline: none !important;
+}
+.sp-container .sp-thumb-active {
+  border-color: #bbbac0 !important;
+}
+.sp-container .sp-thumb-active .sp-thumb-inner {
+  background-image: none !important;
+}
+.sp-container .sp-thumb-active .sp-thumb-inner:after {
+  position: absolute;
+  content: "";
+  font-family: 'FontAwesome';
+  content: "\f00c";
+  left: 2px;
+  top: 2px;
+}
+.sp-container .sp-thumb-active.sp-thumb-dark .sp-thumb-inner:after {
+  color: #fff;
+}
+.sp-container .sp-button-container, .sp-container .sp-palette-button-container {
+  margin-top: 5px;
+}
+.sp-container .sp-button-container a, .sp-container .sp-button-container button, .sp-container .sp-palette-button-container a, .sp-container .sp-palette-button-container button {
+  display: inline-block;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  transition: all 0.3s ease 0s !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  position: relative;
+  border-radius: 2px;
+}
+.sp-container .sp-button-container a:focus, .sp-container .sp-button-container a:active:focus, .sp-container .sp-button-container a:active, .sp-container .sp-button-container button:focus, .sp-container .sp-button-container button:active:focus, .sp-container .sp-button-container button:active, .sp-container .sp-palette-button-container a:focus, .sp-container .sp-palette-button-container a:active:focus, .sp-container .sp-palette-button-container a:active, .sp-container .sp-palette-button-container button:focus, .sp-container .sp-palette-button-container button:active:focus, .sp-container .sp-palette-button-container button:active {
+  outline: thin dotted;
+  outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -2px;
+}
+.sp-container .sp-button-container a:hover, .sp-container .sp-button-container a:focus, .sp-container .sp-button-container button:hover, .sp-container .sp-button-container button:focus, .sp-container .sp-palette-button-container a:hover, .sp-container .sp-palette-button-container a:focus, .sp-container .sp-palette-button-container button:hover, .sp-container .sp-palette-button-container button:focus {
+  color: #333;
+  text-decoration: none;
+}
+.sp-container .sp-button-container a:active, .sp-container .sp-button-container button:active, .sp-container .sp-palette-button-container a:active, .sp-container .sp-palette-button-container button:active {
+  background-image: none;
+  outline: 0;
+  -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+}
+.sp-container .sp-button-container a[disabled], .sp-container .sp-button-container button[disabled], .sp-container .sp-palette-button-container a[disabled], .sp-container .sp-palette-button-container button[disabled] {
+  cursor: not-allowed;
+  filter: alpha(opacity=65);
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  opacity: .65;
+}
+.sp-container .sp-button-container a.sp-choose, .sp-container .sp-button-container a.sp-palette-toggle, .sp-container .sp-button-container button.sp-choose, .sp-container .sp-button-container button.sp-palette-toggle, .sp-container .sp-palette-button-container a.sp-choose, .sp-container .sp-palette-button-container a.sp-palette-toggle, .sp-container .sp-palette-button-container button.sp-choose, .sp-container .sp-palette-button-container button.sp-palette-toggle {
+  background-color: #58748B;
+  border-color: #58748B;
+  color: #ffffff;
+}
+.sp-container .sp-button-container a.sp-choose:hover, .sp-container .sp-button-container a.sp-palette-toggle:hover, .sp-container .sp-button-container button.sp-choose:hover, .sp-container .sp-button-container button.sp-palette-toggle:hover, .sp-container .sp-palette-button-container a.sp-choose:hover, .sp-container .sp-palette-button-container a.sp-palette-toggle:hover, .sp-container .sp-palette-button-container button.sp-choose:hover, .sp-container .sp-palette-button-container button.sp-palette-toggle:hover {
+  background-color: #718ea5 !important;
+  border-color: #718ea5;
+  color: #ffffff;
+  background-image: none !important;
+}
+.sp-container .sp-button-container a.sp-choose:active, .sp-container .sp-button-container a.sp-choose.active, .sp-container .sp-button-container a.sp-choose.active:focus, .sp-container .sp-button-container a.sp-choose:active:focus, .sp-container .sp-button-container a.sp-choose:active:hover, .sp-container .sp-button-container a.sp-choose.dropdown-toggle:active:hover, .sp-container .sp-button-container a.sp-palette-toggle:active, .sp-container .sp-button-container a.sp-palette-toggle.active, .sp-container .sp-button-container a.sp-palette-toggle.active:focus, .sp-container .sp-button-container a.sp-palette-toggle:active:focus, .sp-container .sp-button-container a.sp-palette-toggle:active:hover, .sp-container .sp-button-container a.sp-palette-toggle.dropdown-toggle:active:hover, .sp-container .sp-button-container button.sp-choose:active, .sp-container .sp-button-container button.sp-choose.active, .sp-container .sp-button-container button.sp-choose.active:focus, .sp-container .sp-button-container button.sp-choose:active:focus, .sp-container .sp-button-container button.sp-choose:active:hover, .sp-container .sp-button-container button.sp-choose.dropdown-toggle:active:hover, .sp-container .sp-button-container button.sp-palette-toggle:active, .sp-container .sp-button-container button.sp-palette-toggle.active, .sp-container .sp-button-container button.sp-palette-toggle.active:focus, .sp-container .sp-button-container button.sp-palette-toggle:active:focus, .sp-container .sp-button-container button.sp-palette-toggle:active:hover, .sp-container .sp-button-container button.sp-palette-toggle.dropdown-toggle:active:hover, .sp-container .sp-palette-button-container a.sp-choose:active, .sp-container .sp-palette-button-container a.sp-choose.active, .sp-container .sp-palette-button-container a.sp-choose.active:focus, .sp-container .sp-palette-button-container a.sp-choose:active:focus, .sp-container .sp-palette-button-container a.sp-choose:active:hover, .sp-container .sp-palette-button-container a.sp-choose.dropdown-toggle:active:hover, .sp-container .sp-palette-button-container a.sp-palette-toggle:active, .sp-container .sp-palette-button-container a.sp-palette-toggle.active, .sp-container .sp-palette-button-container a.sp-palette-toggle.active:focus, .sp-container .sp-palette-button-container a.sp-palette-toggle:active:focus, .sp-container .sp-palette-button-container a.sp-palette-toggle:active:hover, .sp-container .sp-palette-button-container a.sp-palette-toggle.dropdown-toggle:active:hover, .sp-container .sp-palette-button-container button.sp-choose:active, .sp-container .sp-palette-button-container button.sp-choose.active, .sp-container .sp-palette-button-container button.sp-choose.active:focus, .sp-container .sp-palette-button-container button.sp-choose:active:focus, .sp-container .sp-palette-button-container button.sp-choose:active:hover, .sp-container .sp-palette-button-container button.sp-choose.dropdown-toggle:active:hover, .sp-container .sp-palette-button-container button.sp-palette-toggle:active, .sp-container .sp-palette-button-container button.sp-palette-toggle.active, .sp-container .sp-palette-button-container button.sp-palette-toggle.active:focus, .sp-container .sp-palette-button-container button.sp-palette-toggle:active:focus, .sp-container .sp-palette-button-container button.sp-palette-toggle:active:hover, .sp-container .sp-palette-button-container button.sp-palette-toggle.dropdown-toggle:active:hover {
+  background-color: #4e677b !important;
+  border-color: #4e677b;
+}
+.sp-container .sp-button-container a.sp-choose:focus, .sp-container .sp-button-container a.sp-palette-toggle:focus, .sp-container .sp-button-container button.sp-choose:focus, .sp-container .sp-button-container button.sp-palette-toggle:focus, .sp-container .sp-palette-button-container a.sp-choose:focus, .sp-container .sp-palette-button-container a.sp-palette-toggle:focus, .sp-container .sp-palette-button-container button.sp-choose:focus, .sp-container .sp-palette-button-container button.sp-palette-toggle:focus {
+  background-color: #819aaf;
+  border-color: #819aaf;
+}
+.sp-container .sp-button-container a.sp-choose.disabled:hover, .sp-container .sp-button-container a.sp-choose.disabled:focus, .sp-container .sp-button-container a.sp-choose.disabled:active, .sp-container .sp-button-container a.sp-choose.disabled.active, .sp-container .sp-button-container a.sp-choose[disabled], .sp-container .sp-button-container a.sp-choose[disabled]:hover, .sp-container .sp-button-container a.sp-choose[disabled]:focus, .sp-container .sp-button-container a.sp-choose[disabled]:active, .sp-container .sp-button-container a.sp-choose[disabled].active, fieldset[disabled] .sp-container .sp-button-container a.sp-choose:hover, fieldset[disabled] .sp-container .sp-button-container a.sp-choose:focus, fieldset[disabled] .sp-container .sp-button-container a.sp-choose:active, fieldset[disabled] .sp-container .sp-button-container a.sp-choose.active, .sp-container .sp-button-container a.sp-palette-toggle.disabled:hover, .sp-container .sp-button-container a.sp-palette-toggle.disabled:focus, .sp-container .sp-button-container a.sp-palette-toggle.disabled:active, .sp-container .sp-button-container a.sp-palette-toggle.disabled.active, .sp-container .sp-button-container a.sp-palette-toggle[disabled], .sp-container .sp-button-container a.sp-palette-toggle[disabled]:hover, .sp-container .sp-button-container a.sp-palette-toggle[disabled]:focus, .sp-container .sp-button-container a.sp-palette-toggle[disabled]:active, .sp-container .sp-button-container a.sp-palette-toggle[disabled].active, fieldset[disabled] .sp-container .sp-button-container a.sp-palette-toggle:hover, fieldset[disabled] .sp-container .sp-button-container a.sp-palette-toggle:focus, fieldset[disabled] .sp-container .sp-button-container a.sp-palette-toggle:active, fieldset[disabled] .sp-container .sp-button-container a.sp-palette-toggle.active, .sp-container .sp-button-container button.sp-choose.disabled:hover, .sp-container .sp-button-container button.sp-choose.disabled:focus, .sp-container .sp-button-container button.sp-choose.disabled:active, .sp-container .sp-button-container button.sp-choose.disabled.active, .sp-container .sp-button-container button.sp-choose[disabled], .sp-container .sp-button-container button.sp-choose[disabled]:hover, .sp-container .sp-button-container button.sp-choose[disabled]:focus, .sp-container .sp-button-container button.sp-choose[disabled]:active, .sp-container .sp-button-container button.sp-choose[disabled].active, fieldset[disabled] .sp-container .sp-button-container button.sp-choose:hover, fieldset[disabled] .sp-container .sp-button-container button.sp-choose:focus, fieldset[disabled] .sp-container .sp-button-container button.sp-choose:active, fieldset[disabled] .sp-container .sp-button-container button.sp-choose.active, .sp-container .sp-button-container button.sp-palette-toggle.disabled:hover, .sp-container .sp-button-container button.sp-palette-toggle.disabled:focus, .sp-container .sp-button-container button.sp-palette-toggle.disabled:active, .sp-container .sp-button-container button.sp-palette-toggle.disabled.active, .sp-container .sp-button-container button.sp-palette-toggle[disabled], .sp-container .sp-button-container button.sp-palette-toggle[disabled]:hover, .sp-container .sp-button-container button.sp-palette-toggle[disabled]:focus, .sp-container .sp-button-container button.sp-palette-toggle[disabled]:active, .sp-container .sp-button-container button.sp-palette-toggle[disabled].active, fieldset[disabled] .sp-container .sp-button-container button.sp-palette-toggle:hover, fieldset[disabled] .sp-container .sp-button-container button.sp-palette-toggle:focus, fieldset[disabled] .sp-container .sp-button-container button.sp-palette-toggle:active, fieldset[disabled] .sp-container .sp-button-container button.sp-palette-toggle.active, .sp-container .sp-palette-button-container a.sp-choose.disabled:hover, .sp-container .sp-palette-button-container a.sp-choose.disabled:focus, .sp-container .sp-palette-button-container a.sp-choose.disabled:active, .sp-container .sp-palette-button-container a.sp-choose.disabled.active, .sp-container .sp-palette-button-container a.sp-choose[disabled], .sp-container .sp-palette-button-container a.sp-choose[disabled]:hover, .sp-container .sp-palette-button-container a.sp-choose[disabled]:focus, .sp-container .sp-palette-button-container a.sp-choose[disabled]:active, .sp-container .sp-palette-button-container a.sp-choose[disabled].active, fieldset[disabled] .sp-container .sp-palette-button-container a.sp-choose:hover, fieldset[disabled] .sp-container .sp-palette-button-container a.sp-choose:focus, fieldset[disabled] .sp-container .sp-palette-button-container a.sp-choose:active, fieldset[disabled] .sp-container .sp-palette-button-container a.sp-choose.active, .sp-container .sp-palette-button-container a.sp-palette-toggle.disabled:hover, .sp-container .sp-palette-button-container a.sp-palette-toggle.disabled:focus, .sp-container .sp-palette-button-container a.sp-palette-toggle.disabled:active, .sp-container .sp-palette-button-container a.sp-palette-toggle.disabled.active, .sp-container .sp-palette-button-container a.sp-palette-toggle[disabled], .sp-container .sp-palette-button-container a.sp-palette-toggle[disabled]:hover, .sp-container .sp-palette-button-container a.sp-palette-toggle[disabled]:focus, .sp-container .sp-palette-button-container a.sp-palette-toggle[disabled]:active, .sp-container .sp-palette-button-container a.sp-palette-toggle[disabled].active, fieldset[disabled] .sp-container .sp-palette-button-container a.sp-palette-toggle:hover, fieldset[disabled] .sp-container .sp-palette-button-container a.sp-palette-toggle:focus, fieldset[disabled] .sp-container .sp-palette-button-container a.sp-palette-toggle:active, fieldset[disabled] .sp-container .sp-palette-button-container a.sp-palette-toggle.active, .sp-container .sp-palette-button-container button.sp-choose.disabled:hover, .sp-container .sp-palette-button-container button.sp-choose.disabled:focus, .sp-container .sp-palette-button-container button.sp-choose.disabled:active, .sp-container .sp-palette-button-container button.sp-choose.disabled.active, .sp-container .sp-palette-button-container button.sp-choose[disabled], .sp-container .sp-palette-button-container button.sp-choose[disabled]:hover, .sp-container .sp-palette-button-container button.sp-choose[disabled]:focus, .sp-container .sp-palette-button-container button.sp-choose[disabled]:active, .sp-container .sp-palette-button-container button.sp-choose[disabled].active, fieldset[disabled] .sp-container .sp-palette-button-container button.sp-choose:hover, fieldset[disabled] .sp-container .sp-palette-button-container button.sp-choose:focus, fieldset[disabled] .sp-container .sp-palette-button-container button.sp-choose:active, fieldset[disabled] .sp-container .sp-palette-button-container button.sp-choose.active, .sp-container .sp-palette-button-container button.sp-palette-toggle.disabled:hover, .sp-container .sp-palette-button-container button.sp-palette-toggle.disabled:focus, .sp-container .sp-palette-button-container button.sp-palette-toggle.disabled:active, .sp-container .sp-palette-button-container button.sp-palette-toggle.disabled.active, .sp-container .sp-palette-button-container button.sp-palette-toggle[disabled], .sp-container .sp-palette-button-container button.sp-palette-toggle[disabled]:hover, .sp-container .sp-palette-button-container button.sp-palette-toggle[disabled]:focus, .sp-container .sp-palette-button-container button.sp-palette-toggle[disabled]:active, .sp-container .sp-palette-button-container button.sp-palette-toggle[disabled].active, fieldset[disabled] .sp-container .sp-palette-button-container button.sp-palette-toggle:hover, fieldset[disabled] .sp-container .sp-palette-button-container button.sp-palette-toggle:focus, fieldset[disabled] .sp-container .sp-palette-button-container button.sp-palette-toggle:active, fieldset[disabled] .sp-container .sp-palette-button-container button.sp-palette-toggle.active {
+  background-color: #90a6b9;
+  border-color: #90a6b9;
+  color: #ffffff;
+}
+.sp-container .sp-button-container a.sp-cancel, .sp-container .sp-button-container button.sp-cancel, .sp-container .sp-palette-button-container a.sp-cancel, .sp-container .sp-palette-button-container button.sp-cancel {
+  border: 1px solid #c8c7cc !important;
+  color: #8e8e93 !important;
+}
+.sp-container .sp-button-container a.sp-cancel:hover, .sp-container .sp-button-container button.sp-cancel:hover, .sp-container .sp-palette-button-container a.sp-cancel:hover, .sp-container .sp-palette-button-container button.sp-cancel:hover {
+  color: #ffffff !important;
+  border-color: #8e8e93 !important;
+  background: #8e8e93 !important;
+}
+.sp-container .sp-button-container a.sp-cancel:active, .sp-container .sp-button-container a.sp-cancel.active, .sp-container .sp-button-container a.sp-cancel.active:focus, .sp-container .sp-button-container a.sp-cancel:active:focus, .sp-container .sp-button-container a.sp-cancel:active:hover, .sp-container .sp-button-container button.sp-cancel:active, .sp-container .sp-button-container button.sp-cancel.active, .sp-container .sp-button-container button.sp-cancel.active:focus, .sp-container .sp-button-container button.sp-cancel:active:focus, .sp-container .sp-button-container button.sp-cancel:active:hover, .sp-container .sp-palette-button-container a.sp-cancel:active, .sp-container .sp-palette-button-container a.sp-cancel.active, .sp-container .sp-palette-button-container a.sp-cancel.active:focus, .sp-container .sp-palette-button-container a.sp-cancel:active:focus, .sp-container .sp-palette-button-container a.sp-cancel:active:hover, .sp-container .sp-palette-button-container button.sp-cancel:active, .sp-container .sp-palette-button-container button.sp-cancel.active, .sp-container .sp-palette-button-container button.sp-cancel.active:focus, .sp-container .sp-palette-button-container button.sp-cancel:active:focus, .sp-container .sp-palette-button-container button.sp-cancel:active:hover {
+  background-color: #818187 !important;
+  border-color: #818187 !important;
+  color: #ffffff !important;
+}
+.sp-container .sp-button-container a.sp-cancel:focus, .sp-container .sp-button-container button.sp-cancel:focus, .sp-container .sp-palette-button-container a.sp-cancel:focus, .sp-container .sp-palette-button-container button.sp-cancel:focus {
+  background-color: #b5b5b8;
+  border-color: #b5b5b8;
+  color: #ffffff;
+}
+
+.sp-replacer {
+  background-color: #fff !important;
+  border: 1px solid #c8c7cc !important;
+  position: relative;
+  border-radius: 5px;
+}
+.sp-replacer:after {
+  position: absolute;
+  font-family: 'FontAwesome';
+  content: "\f107";
+  right: 5px;
+  top: 7px;
+  color: #5b5b60;
+}
+.sp-replacer:hover {
+  border-color: #aeacb4 !important;
+}
+.sp-replacer:hover:after {
+  color: #2a2a2b !important;
+}
+.sp-replacer.sp-disabled {
+  border-color: #e2e2e4 !important;
+}
+.sp-replacer.sp-disabled:after {
+  color: #e2e2e4 !important;
+}
+.sp-replacer.sp-disabled:hover {
+  border-color: #e2e2e4 !important;
+}
+.sp-replacer .sp-preview {
+  width: 24px;
+  height: 24px;
+  border-color: #94929b !important;
+  margin-right: 20px !important;
+}
+.sp-replacer .sp-dd {
+  display: none;
+}
+
+/* ---------------------------------------------------------------------- */
+/*  CKeditor
+/* ---------------------------------------------------------------------- */
+.cke_chrome {
+  -moz-box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+  border: 1px solid #c8c7cc !important;
+}
+.cke_chrome .cke_top {
+  -moz-box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+  background-image: none !important;
+  background-color: #FFFFFF !important;
+  border-bottom: 1px solid #c8c7cc !important;
+}
+.cke_chrome .cke_toolgroup {
+  -moz-box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+  background-image: none !important;
+  border: 1px solid #c8c7cc !important;
+  background: #ffffff;
+}
+.cke_chrome .cke_toolgroup a.cke_button {
+  padding: 8px 10px;
+}
+.cke_chrome .cke_toolgroup a.cke_button span {
+  color: #8e8e93 !important;
+}
+.cke_chrome .cke_toolgroup a.cke_button:hover {
+  background-color: #e2e2e4 !important;
+  -moz-box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+  background-image: none !important;
+}
+.cke_chrome .cke_combo_button {
+  padding: 4px;
+  -moz-box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+  background-image: none !important;
+  border: 1px solid #c8c7cc !important;
+  background: #ffffff;
+}
+.cke_chrome .cke_combo_button span {
+  color: #8e8e93 !important;
+}
+.cke_chrome .cke_combo_button:hover {
+  background-color: #e2e2e4 !important;
+  -moz-box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+  background-image: none !important;
+}
+.cke_chrome .cke_bottom {
+  -moz-box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+  background-image: none !important;
+  background-color: #FFFFFF !important;
+}
+
+/* ---------------------------------------------------------------------- */
+/*  Slick Carousel
+/* ---------------------------------------------------------------------- */
+.slick-slide {
+  outline: none !important;
+}
+
+.slick-slider {
+  margin-bottom: 0 !important;
+}
+
+.slick-dots li button::before {
+  font-size: 12px !important;
+}
+
+.slick-dots {
+  padding-left: 5px !important;
+  padding-right: 5px !important;
+}
+.slick-dots li {
+  margin: 0 !important;
+}
+
+.slick-prev:before, .slick-next:before {
+  font-family: 'fontawesome' !important;
+  font-size: 40px !important;
+}
+
+.slick-prev:before {
+  content: '\f104' !important;
+}
+
+.slick-next:before {
+  content: '\f105' !important;
+}
+
+.dots-left .slick-dots {
+  text-align: left;
+}
+
+.dots-right .slick-dots {
+  text-align: right;
+}
+
+.dots-white .slick-dots li button:before {
+  color: #ffffff !important;
+}
+
+.slick-prev {
+  left: 5px !important;
+  z-index: 1;
+}
+
+.slick-next {
+  right: 5px !important;
+  z-index: 1;
+}
+
+.slide {
+  display: none;
+}
+
+/* ---------------------------------------------------------------------- */
+/*  angular-ui-switch
+/* ---------------------------------------------------------------------- */
+.switch.checked.azure {
+  background: #5B9BD1;
+  border-color: #5B9BD1;
+}
+.switch.checked.light-azure {
+  background: #6fa7d7;
+  border-color: #6fa7d7;
+}
+.switch.checked.dark-azure {
+  background: #3782c2;
+  border-color: #3782c2;
+}
+.switch.checked.primary {
+  background: #58748B;
+  border-color: #58748B;
+}
+.switch.checked.light-primary {
+  background: #718ea5;
+  border-color: #718ea5;
+}
+.switch.checked.dark-primary {
+  background: #445a6c;
+  border-color: #445a6c;
+}
+.switch.checked.purple {
+  background: #9A89B5;
+  border-color: #9A89B5;
+}
+.switch.checked.light-purple {
+  background: #b5a8c9;
+  border-color: #b5a8c9;
+}
+.switch.checked.dark-purple {
+  background: #7f6aa1;
+  border-color: #7f6aa1;
+}
+.switch.checked.red {
+  background: #C82E29;
+  border-color: #C82E29;
+}
+.switch.checked.light-red {
+  background: #da4f4a;
+  border-color: #da4f4a;
+}
+.switch.checked.dark-red {
+  background: #9e2420;
+  border-color: #9e2420;
+}
+.switch.checked.blue {
+  background: #407887;
+  border-color: #407887;
+}
+.switch.checked.light-blue {
+  background: #5097aa;
+  border-color: #5097aa;
+}
+.switch.checked.dark-blue {
+  background: #305964;
+  border-color: #305964;
+}
+.switch.checked.light {
+  background: rgba(255, 255, 255, 0.5);
+  border-color: rgba(255, 255, 255, 0.5);
+}

@@ -1,0 +1,331 @@
+<!-- start: HORIZONTAL MENU -->
+<div class="horizontal-menu-wrapper">
+	<div class="horizontal-nav-container" ct-fullheight="window" data-ct-fullheight-exclusion="header" data-ct-fullheight-if="isSmallDevice">
+		<ul class="nav navbar-nav no-border">
+			<li ui-sref-active="active">
+				<a ui-sref="app.dashboard"> <letter-icon data="{{ 'sidebar.nav.dashboard.MAIN' | translate }}" color="auto" char-count="2" size="sm"></letter-icon> <span translate="sidebar.nav.dashboard.MAIN"> Dashboard </span> </a>
+			</li>
+			<li ng-class="{'active':$state.includes('app.ui')}" uib-dropdown auto-close="outsideClick">
+				<a href="javascript:void(0)" uib-dropdown-toggle> <letter-icon data="{{ 'sidebar.nav.element.MAIN' | translate }}" color="auto" char-count="2" size="sm"></letter-icon> <span translate="sidebar.nav.element.MAIN"> UI Elements</span> <span class="caret"></span></a>
+				<ul uib-dropdown-menu>
+					<li ui-sref-active="active">
+						<a ui-sref="app.ui.elements"> <span translate="sidebar.nav.element.ELEMENTS"> Elements </span> </a>
+					</li>
+					<li ui-sref-active="active">
+						<a ui-sref="app.ui.buttons"> <span translate="sidebar.nav.element.BUTTONS"> Buttons </span> </a>
+					</li>
+					<li ui-sref-active="active">
+						<a ui-sref="app.ui.links"> <span translate="sidebar.nav.element.LINKS"> Links </span> </a>
+					</li>
+					<li class="dropdown-submenu" ng-class="{active:$state.includes('app.ui.icons') || $state.includes('app.ui.lineicons')}">
+						<a href="#"> Icons </a>
+						<ul class="dropdown-menu">
+							<li ui-sref-active="active">
+								<a ui-sref="app.ui.icons"> <span translate="sidebar.nav.element.FONTAWESOME"> Font Awesome Icons </span> </a>
+							</li>
+							<li ui-sref-active="active">
+								<a ui-sref="app.ui.lineicons"> <span translate="sidebar.nav.element.LINEARICONS"> Linear Icons </span> </a>
+							</li>
+						</ul>
+					</li>
+
+					<li ui-sref-active="active">
+						<a ui-sref="app.ui.modals"> <span translate="sidebar.nav.element.MODALS"> Modals </span> </a>
+					</li>
+					<li ui-sref-active="active">
+						<a ui-sref="app.ui.toggle"> <span translate="sidebar.nav.element.TOGGLE"> Toggle </span> </a>
+					</li>
+					<li ui-sref-active="active">
+						<a ui-sref="app.ui.tabs_accordions"> <span translate="sidebar.nav.element.TABS"> Tabs &amp; Accordions </span> </a>
+					</li>
+					<li ui-sref-active="active">
+						<a ui-sref="app.ui.panels"> <span translate="sidebar.nav.element.PANELS"> Panels </span> </a>
+					</li>
+					<li ui-sref-active="active">
+						<a ui-sref="app.ui.notifications"> <span translate="sidebar.nav.element.NOTIFICATIONS"> Notifications </span> </a>
+					</li>
+					<li ui-sref-active="active">
+						<a ui-sref="app.ui.treeview"> <span translate="sidebar.nav.element.TREEVIEW"> Treeview </span> </a>
+					</li>
+					<li ui-sref-active="active">
+						<a ui-sref="app.ui.media"> <span translate="sidebar.nav.element.MEDIA"> Media Object </span> </a>
+					</li>
+					<li ui-sref-active="active">
+						<a ui-sref="app.ui.nestable"> <span translate="sidebar.nav.element.NESTABLE"> Nestable List </span> </a>
+					</li>
+					<li ui-sref-active="active">
+						<a ui-sref="app.ui.typography"> <span translate="sidebar.nav.element.TYPOGRAPHY"> Typography </span> </a>
+					</li>
+
+				</ul>
+			</li>
+			<li class="mega-menu" uib-dropdown uib-dropdown auto-close="outsideClick" ng-class="{'active':$state.includes('app.table') || $state.includes('app.form') || $state.includes('login') || $state.includes('app.pages')}">
+				<a href="javascript:void(0)" uib-dropdown-toggle> <letter-icon data="Components" color="auto" char-count="2" size="sm"></letter-icon> <span translate="sidebar.nav.components.MAIN">Components</span> <span class="caret"></span></a>
+				<ul uib-dropdown-menu>
+					<li>
+						<!-- start: MEGA MENU CONTENT -->
+						<div class="mega-menu-content">
+							<div class="col-md-3">
+								<ul class="mega-sub-menu padding-top-0">
+									<li>
+										<span class="mega-menu-sub-title text-uppercase text-light text-bold text-extra-small padding-top-25 padding-bottom-10" translate="sidebar.nav.tables.MAIN">Tables</span>
+										<ul>
+											<li ui-sref-active="active">
+												<a ui-sref="app.table.basic"> <span translate="sidebar.nav.tables.BASIC">Basic Tables</span> </a>
+											</li>
+											<li ui-sref-active="active">
+												<a ui-sref="app.table.responsive"> <span translate="sidebar.nav.tables.RESPONSIVE">Responsive Tables</span> </a>
+											</li>
+											<li ui-sref-active="active">
+												<a ui-sref="app.table.dynamic"> <span translate="sidebar.nav.tables.DYNAMIC">Dynamic Tables</span> </a>
+											</li>
+											<li ui-sref-active="active">
+												<a ui-sref="app.table.data"> <span translate="sidebar.nav.tables.DATA">Advanced Data Tables</span> </a>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</div>
+							<div class="col-md-3">
+								<ul class="mega-sub-menu padding-top-0">
+									<li>
+										<span class="mega-menu-sub-title text-uppercase text-light text-bold text-extra-small padding-top-25 padding-bottom-10" translate="sidebar.nav.forms.MAIN">Forms</span>
+										<ul>
+											<li ui-sref-active="active">
+												<a ui-sref="app.form.elements"> <span translate="sidebar.nav.forms.ELEMENTS">Form Elements</span> </a>
+											</li>
+											<li ui-sref-active="active">
+												<a ui-sref="app.form.xeditable"> <span translate="sidebar.nav.forms.XEDITABLE">Form Elements</span> </a>
+											</li>
+											<li ui-sref-active="active">
+												<a ui-sref="app.form.texteditor"> <span translate="sidebar.nav.forms.TEXTEDITOR">Text Editor</span> </a>
+											</li>
+											<li ui-sref-active="active">
+												<a ui-sref="app.form.wizard"> <span translate="sidebar.nav.forms.WIZARD">Form Wizard</span> </a>
+											</li>
+											<li ui-sref-active="active">
+												<a ui-sref="app.form.validation"> <span translate="sidebar.nav.forms.VALIDATION">Form Validation</span> </a>
+											</li>
+											<li ui-sref-active="active">
+												<a ui-sref="app.form.cropping"> <span translate="sidebar.nav.forms.CROPPING">Image Cropping</span> </a>
+											</li>
+											<li ui-sref-active="active">
+												<a ui-sref="app.form.upload"> <span translate="sidebar.nav.forms.UPLOAD">Multiple File Upload</span> </a>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</div>
+							<div class="col-md-3">
+								<ul class="mega-sub-menu padding-top-0">
+									<li>
+										<span class="mega-menu-sub-title text-uppercase text-light text-bold text-extra-small padding-top-25 padding-bottom-10" translate="sidebar.nav.login.MAIN">Login</span>
+										<ul>
+											<li ui-sref-active="active">
+												<a ui-sref="login.signin"> <span translate="sidebar.nav.login.LOGIN"> Login Form </span> </a>
+											</li>
+											<li ui-sref-active="active">
+												<a ui-sref="login.registration"> <span translate="sidebar.nav.login.REGISTRATION"> Registration Form </span> </a>
+											</li>
+											<li ui-sref-active="active">
+												<a ui-sref="login.forgot"> <span translate="sidebar.nav.login.FORGOT"> Forgot Password Form </span> </a>
+											</li>
+											<li ui-sref-active="active">
+												<a ui-sref="login.lockscreen"> <span translate="sidebar.nav.login.LOCKSCREEN"> Lock Screen </span> </a>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</div>
+							<div class="col-md-3">
+								<ul class="mega-sub-menu padding-top-0">
+									<li>
+										<span class="mega-menu-sub-title text-uppercase text-light text-bold text-extra-small padding-top-25 padding-bottom-10" translate="sidebar.nav.pages.MAIN"> Pages </span>
+										<ul>
+											<li ui-sref-active="active">
+												<a ui-sref="app.pages.user"> <span translate="sidebar.nav.pages.USERPROFILE">User Profile</span> </a>
+											</li>
+											<li ui-sref-active="active">
+												<a ui-sref="app.pages.invoice"> <span translate="sidebar.nav.pages.INVOICE">Invoice</span> </a>
+											</li>
+											<li ui-sref-active="active">
+												<a ui-sref="app.pages.timeline"> <span translate="sidebar.nav.pages.TIMELINE">Timeline</span> </a>
+											</li>
+											<li ui-sref-active="active">
+												<a ui-sref="app.pages.calendar"> <span translate="sidebar.nav.pages.CALENDAR">Calendar</span> </a>
+											</li>
+											<li ui-sref-active="active">
+												<a ui-sref="app.pages.messages"> <span translate="sidebar.nav.pages.MESSAGES">Messages</span> </a>
+											</li>
+											<li ui-sref-active="active">
+												<a ui-sref="app.pages.blank"> <span translate="sidebar.nav.pages.BLANKPAGE">Blank Page</span> </a>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<!-- end: MEGA MENU CONTENT -->
+					</li>
+				</ul>
+			</li>
+			<li ng-class="{'active':$state.includes('app.utilities') || $state.includes('app.charts') || $state.includes('app.maps')}" uib-dropdown uib-dropdown auto-close="outsideClick">
+				<a href="javascript:void(0)" uib-dropdown-toggle> <letter-icon data="Page Kits" color="auto" char-count="2" size="sm"></letter-icon> <span> Page Kits</span> <span class="caret"></span></a>
+				<ul uib-dropdown-menu>
+					<li class="dropdown-header text-uppercase text-light text-bold text-extra-small padding-top-25 padding-bottom-10" translate="sidebar.nav.utilities.MAIN">
+						Utilities
+					</li>
+					<li ui-sref-active="active">
+						<a ui-sref="app.utilities.search"> <span translate="sidebar.nav.utilities.SEARCHRESULT">Search Results</span> </a>
+					</li>
+					<li ui-sref-active="active">
+						<a ui-sref="error.404"> <span translate="sidebar.nav.utilities.ERROR404">Error 404</span> </a>
+					</li>
+					<li ui-sref-active="active">
+						<a ui-sref="error.500"> <span translate="sidebar.nav.utilities.ERROR500">Error 500</span> </a>
+					</li>
+					<li ui-sref-active="active">
+						<a ui-sref="app.utilities.pricing"> <span translate="sidebar.nav.utilities.PRICING">Pricing Table</span> </a>
+					</li>
+					<li class="dropdown-header text-uppercase text-light text-bold text-extra-small padding-top-25 padding-bottom-10" translate="sidebar.nav.4level.MAIN">
+						Menu Levels
+					</li>
+					<li class="dropdown-submenu">
+						<a href="#" translate="sidebar.nav.4level.Item1.MAIN">Item 1</a>
+						<ul class="dropdown-menu">
+							<li class="dropdown-submenu" ui-sref-active="active">
+								<a href="javascript:;"> <span translate="sidebar.nav.4level.Item1.link1.MAIN">Sample Link 1</span></a>
+								<ul class="dropdown-menu">
+									<li>
+										<a href="#" translate="sidebar.nav.4level.Item1.link1.LINK1"> Sample Link 1 </a>
+									</li>
+									<li>
+										<a href="#" translate="sidebar.nav.4level.Item1.link1.LINK2"> Sample Link 2 </a>
+									</li>
+									<li>
+										<a href="#" translate="sidebar.nav.4level.Item1.link1.LINK3"> Sample Link 3 </a>
+									</li>
+								</ul>
+							</li>
+							<li class="dropdown-submenu" ui-sref-active="active">
+								<a href="javascript:;"> <span translate="sidebar.nav.4level.Item1.link2.MAIN">Sample Link 2</span></a>
+								<ul class="dropdown-menu">
+									<li>
+										<a href="#" translate="sidebar.nav.4level.Item1.link2.LINK1"> Sample Link 1 </a>
+									</li>
+									<li>
+										<a href="#" translate="sidebar.nav.4level.Item1.link2.LINK2"> Sample Link 2 </a>
+									</li>
+									<li>
+										<a href="#" translate="sidebar.nav.4level.Item1.link2.LINK3"> Sample Link 3 </a>
+									</li>
+								</ul>
+							</li>
+							<li class="dropdown-submenu" ui-sref-active="active">
+								<a href="javascript:;"> <span translate="sidebar.nav.4level.Item1.link3.MAIN">Sample Link 3</span></a>
+								<ul class="dropdown-menu">
+									<li>
+										<a href="#" translate="sidebar.nav.4level.Item1.link3.LINK1"> Sample Link 1 </a>
+									</li>
+									<li>
+										<a href="#" translate="sidebar.nav.4level.Item1.link3.LINK2"> Sample Link 2 </a>
+									</li>
+									<li>
+										<a href="#" translate="sidebar.nav.4level.Item1.link3.LINK3"> Sample Link 3 </a>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+					<li class="dropdown-submenu">
+						<a href="#" translate="sidebar.nav.4level.Item2.MAIN">Item 2</a>
+						<ul class="dropdown-menu">
+							<li class="dropdown-submenu" ui-sref-active="active">
+								<a href="javascript:;"> <span translate="sidebar.nav.4level.Item2.link1.MAIN">Sample Link 1</span></a>
+								<ul class="dropdown-menu">
+									<li>
+										<a href="#" translate="sidebar.nav.4level.Item2.link1.LINK1"> Sample Link 1 </a>
+									</li>
+									<li>
+										<a href="#" translate="sidebar.nav.4level.Item2.link1.LINK2"> Sample Link 2 </a>
+									</li>
+									<li>
+										<a href="#" translate="sidebar.nav.4level.Item2.link1.LINK3"> Sample Link 3 </a>
+									</li>
+								</ul>
+							</li>
+							<li class="dropdown-submenu" ui-sref-active="active">
+								<a href="javascript:;"> <span translate="sidebar.nav.4level.Item2.link2.MAIN">Sample Link 2</span></a>
+								<ul class="dropdown-menu">
+									<li>
+										<a href="#" translate="sidebar.nav.4level.Item2.link2.LINK1"> Sample Link 1 </a>
+									</li>
+									<li>
+										<a href="#" translate="sidebar.nav.4level.Item2.link2.LINK2"> Sample Link 2 </a>
+									</li>
+									<li>
+										<a href="#" translate="sidebar.nav.4level.Item2.link2.LINK3"> Sample Link 3 </a>
+									</li>
+								</ul>
+							</li>
+							<li class="dropdown-submenu" ui-sref-active="active">
+								<a href="javascript:;"> <span translate="sidebar.nav.4level.Item2.link3.MAIN">Sample Link 3</span></a>
+								<ul class="dropdown-menu">
+									<li>
+										<a href="#" translate="sidebar.nav.4level.Item2.link3.LINK1"> Sample Link 1 </a>
+									</li>
+									<li>
+										<a href="#" translate="sidebar.nav.4level.Item2.link3.LINK2"> Sample Link 2 </a>
+									</li>
+									<li>
+										<a href="#" translate="sidebar.nav.4level.Item2.link3.LINK3"> Sample Link 3 </a>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+					<li class="dropdown-header text-uppercase text-light text-bold text-extra-small padding-top-25 padding-bottom-10" translate="sidebar.nav.utilities.MAIN">
+						Utilities
+					</li>
+					<li ui-sref-active="active">
+						<a ui-sref="app.maps"> <span translate="sidebar.nav.maps.MAIN"> Maps </span> </a>
+					</li>
+					<li ui-sref-active="active">
+						<a ui-sref="app.charts"> <span translate="sidebar.nav.charts.MAIN"> Charts </span> </a>
+					</li>
+				</ul>
+			</li>
+		</ul>
+		<ul class="nav navbar-nav navbar-right">
+			<li class="dropdown" uib-dropdown>
+				<a href="#" class="dropdown-toggle nav-user-wrapper" data-toggle="dropdown" uib-dropdown-toggle> <img alt="" src="assets/images/avatar-1.jpg"> <span>Peter Clark</span> <span class="caret"></span> </a>
+
+				<ul class="dropdown-menu pull-right animated fadeInRight">
+					<li>
+						<a ui-sref="app.pages.user" translate="topbar.user.PROFILE"> My Profile </a>
+					</li>
+					<li>
+						<a ui-sref="app.pages.calendar" translate="topbar.user.CALENDAR"> My Calendar </a>
+					</li>
+					<li>
+						<a ui-sref="app.pages.messages" translate="topbar.user.MESSAGES"> My Messages (3) </a>
+					</li>
+					<li>
+						<a ui-sref="login.lockscreen" translate="topbar.user.LOCKSCREEN"> Lock Screen </a>
+					</li>
+					<li class="divider"></li>
+					<li>
+						<a ui-sref="login.signin" translate="topbar.user.LOGOUT"> Log Out </a>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+	<!-- start: MENU TOGGLER FOR MOBILE DEVICES -->
+	<div class="close-handle visible-xs-block visible-sm-block menu-toggler" ng-click="menuInit(true)" ng-swipe-up="menuInit(true)">
+		<div class="arrow-left"></div>
+		<div class="arrow-right"></div>
+	</div>
+	<!-- end: MENU TOGGLER FOR MOBILE DEVICES -->
+</div>
+<!-- end: HORIZONTAL MENU -->

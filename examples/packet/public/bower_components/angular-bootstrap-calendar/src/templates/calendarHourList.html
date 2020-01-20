@@ -1,0 +1,51 @@
+<div class="cal-day-panel-hour">
+
+  <div class="cal-day-hour" ng-repeat="hour in vm.hourGrid track by $index">
+
+    <div
+      class="cal-day-hour-part"
+      ng-repeat="segment in hour.segments track by $index"
+      ng-class="[{ 'cal-day-hour-part-selected': vm.dateRangeSelect &&
+                vm.dateRangeSelect.startDate <= segment.date &&
+                segment.date < vm.dateRangeSelect.endDate }, segment.cssClass]"
+      ng-click="vm.onTimespanClick({calendarDate: segment.date})"
+      mwl-droppable
+      on-drop="vm.eventDropped(dropData.event, segment.date)"
+      mwl-drag-select="!!vm.onDateRangeSelect"
+      on-drag-select-start="vm.onDragSelectStart(segment.date)"
+      on-drag-select-move="vm.onDragSelectMove(segment.nextSegmentDate)"
+      on-drag-select-end="vm.onDragSelectEnd(segment.nextSegmentDate)"
+      ng-if="!vm.dayWidth">
+      <div class="cal-day-hour-part-time">
+        <strong ng-bind="segment.date | calendarDate:'hour':true" ng-show="segment.isStart"></strong>
+      </div>
+    </div>
+
+    <div
+      class="cal-day-hour-part"
+      ng-repeat="segment in hour.segments track by $index"
+      ng-if="vm.dayWidth">
+      <div class="cal-day-hour-part-time">
+        <strong ng-bind="segment.date | calendarDate:'hour':true" ng-show="segment.isStart"></strong>
+        &nbsp;
+      </div>
+      <div
+        class="cal-day-hour-part-spacer"
+        ng-repeat="day in segment.days track by $index"
+        ng-style="{width: (vm.dayWidth - ($last ? vm.scrollBarWidth : 0)) + 'px'}"
+        ng-class="[{ 'cal-day-hour-part-selected': vm.dateRangeSelect &&
+                vm.dateRangeSelect.startDate <= day.date &&
+                day.date < vm.dateRangeSelect.endDate }, day.cssClass]"
+        ng-click="vm.onTimespanClick({calendarDate: day.date})"
+        mwl-droppable
+        on-drop="vm.eventDropped(dropData.event, day.date)"
+        mwl-drag-select="!!vm.onDateRangeSelect"
+        on-drag-select-start="vm.onDragSelectStart(day.date)"
+        on-drag-select-move="vm.onDragSelectMove(day.nextSegmentDate)"
+        on-drag-select-end="vm.onDragSelectEnd(day.nextSegmentDate)">
+      </div>
+    </div>
+
+  </div>
+
+</div>

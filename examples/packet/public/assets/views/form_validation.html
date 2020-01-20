@@ -1,0 +1,237 @@
+<!-- start: BREADCRUMB -->
+<div class="breadcrumb-wrapper">
+    <h4 class="mainTitle no-margin" translate="sidebar.nav.forms.VALIDATION">FORM VALIDATION</h4>
+
+    <div ncy-breadcrumb class="pull-right"></div>
+</div>
+<!-- end: BREADCRUMB -->
+<!-- start: FORM VALIDATION -->
+<div class="container-fluid container-fullw">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-white">
+                <div class="panel-body">
+                    <h5 class="over-title margin-bottom-15">AngularJS directives for <span class="text-bold">form validation</span></h5>
+                    <p>
+                        AngularJS has many directives to run form validation. Some of these (like required, pattern, etc.) repeat the behaviour of the new HTML5 attributes. The advantage of using AngularJS directives instead of classic HTML5 attributes, is that AngularJS way allows to mantain the two way data binding between model and view.
+                    </p>
+                    <!-- /// controller:  'ValidationCtrl' -  localtion: assets/js/controllers/validationCtrl.js /// -->
+                    <div ng-controller="ValidationCtrl">
+                        <form name="Form" id="form1" novalidate ng-submit="form.submit(Form)">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <fieldset>
+                                        <legend>
+                                            Success and Error Message
+                                        </legend>
+                                        <div class="form-group" ng-class="{'has-error':Form.firstName.$dirty && Form.firstName.$invalid, 'has-success':Form.firstName.$valid}">
+                                            <label class="control-label"> First Name <span class="symbol required"></span> </label>
+                                            <input type="text" placeholder="Enter your First Name" class="form-control" name="firstName" ng-model="myModel.firstName" required />
+                                            <span class="error text-small block" ng-if="Form.firstName.$dirty && Form.firstName.$invalid">First Name is required</span>
+                                            <span class="success text-small" ng-if="Form.firstName.$valid">Thank You!</span>
+                                        </div>
+                                        <div class="form-group" ng-class="{'has-error':Form.lastName.$dirty && Form.lastName.$invalid, 'has-success':Form.lastName.$valid}">
+                                            <label class="control-label"> Last Name <span class="symbol required"></span> </label>
+                                            <input type="text" placeholder="Enter your Last Name" class="form-control" name="lastName" ng-model="myModel.lastName" required />
+                                            <span class="error text-small block" ng-if="Form.lastName.$dirty && Form.lastName.$invalid">Last Name is required</span>
+                                            <span class="success text-small" ng-if="Form.lastName.$valid">Wonderful!</span>
+                                        </div>
+                                        <div class="form-group" ng-class="{'has-error':Form.email.$dirty && Form.email.$invalid, 'has-success':Form.email.$valid}">
+                                            <label class="control-label"> Email <span class="symbol required"></span> </label>
+                                            <input type="email" placeholder="Enter a valid E-mail" class="form-control" name="email" ng-model="myModel.email" required>
+                                            <span class="error text-small block" ng-if="Form.email.$dirty && Form.email.$error.required">Email is required.</span>
+                                            <span class="error text-small block" ng-if="Form.email.$error.email">Please, enter a valid email address.</span>
+                                            <span class="success text-small" ng-if="Form.email.$valid">It's a valid e-mail!</span>
+                                        </div>
+                                        <div class="form-group" ng-class="{'has-error':Form.gender.$dirty && Form.gender.$invalid, 'has-success':Form.gender.$valid}">
+                                            <label class="control-label block"> Gender <span class="symbol required"></span> </label>
+                                            <div class="clip-radio radio-primary">
+                                                <input type="radio" id="wd-female" name="gender" value="female" ng-model="myModel.gender" required>
+                                                <label for="wd-female"> Female </label>
+                                                <input type="radio" id="wd-male" name="gender" value="male" ng-model="myModel.gender" required>
+                                                <label for="wd-male"> Male </label>
+                                            </div>
+                                            <span class="error text-small block" ng-if="Form.gender.$dirty && Form.gender.$error.required">Gender is required.</span>
+                                            <span class="success text-small block" ng-if="Form.gender.$valid && form.gender == 'male'">Thank You, Mr. {{form.lastName}}!</span>
+                                            <span class="success text-small block" ng-if="Form.gender.$valid && form.gender == 'female'">Thank You, Mrs. {{form.lastName}}!</span>
+                                        </div>
+                                        <div class="form-group" ng-class="{'has-error':Form.password.$dirty && Form.password.$invalid, 'has-success':Form.password.$valid}">
+                                            <label class="control-label"> Password <span class="symbol required"></span> </label>
+                                            <input type="password" placeholder="Enter a Password" class="form-control" name="password" ng-model="myModel.password" required />
+                                            <span class="error text-small block" ng-if="Form.password.$dirty && Form.password.$error.required">Password is required.</span>
+                                            <span class="success text-small block" ng-if="Form.password.$valid">Ok!</span>
+                                        </div>
+                                        <div class="form-group" ng-class="{'has-error':Form.password2.$dirty && Form.password2.$error.compareTo || Form.password2.$dirty && Form.password2.$invalid, 'has-success':Form.password2.$valid}">
+                                            <label class="control-label"> Repeat Password <span class="symbol required"></span> </label>
+                                            <input type="password" placeholder="Repeat Password" class="form-control" name="password2" ng-model="myModel.password2" compare-to="myModel.password" required />
+                                            <span class="error text-small block" ng-if="Form.password2.$dirty && Form.password2.$error.required">Repeat password is required!</span>
+                                            <span class="error text-small block" ng-if="Form.password2.$dirty && Form.password2.$error.compareTo">Passwords do not match!</span>
+                                            <span class="success text-small block" ng-if="Form.password2.$valid">Passwords match!</span>
+                                        </div>
+                                        <div class="form-group" ng-class="{'has-error':Form.country.$dirty && Form.country.$invalid, 'has-success':Form.country.$valid}">
+                                            <label for="form-field-select-1"> Choose your country or region <span class="symbol required"></span> </label>
+                                            <select class="form-control" name="country" ng-model="myModel.country" required>
+                                                <option value="">&nbsp;</option>
+                                                <option value="AL">Alabama</option>
+                                                <option value="AK">Alaska</option>
+                                                <option value="AZ">Arizona</option>
+                                                <option value="AR">Arkansas</option>
+                                                <option value="CA">California</option>
+                                                <option value="CO">Colorado</option>
+                                                <option value="CT">Connecticut</option>
+                                                <option value="DE">Delaware</option>
+                                                <option value="FL">Florida</option>
+                                                <option value="GA">Georgia</option>
+                                                <option value="HI">Hawaii</option>
+                                                <option value="ID">Idaho</option>
+                                                <option value="IL">Illinois</option>
+                                                <option value="IN">Indiana</option>
+                                                <option value="IA">Iowa</option>
+                                                <option value="KS">Kansas</option>
+                                                <option value="KY">Kentucky</option>
+                                                <option value="LA">Louisiana</option>
+                                                <option value="ME">Maine</option>
+                                                <option value="MD">Maryland</option>
+                                                <option value="MA">Massachusetts</option>
+                                                <option value="MI">Michigan</option>
+                                                <option value="MN">Minnesota</option>
+                                                <option value="MS">Mississippi</option>
+                                                <option value="MO">Missouri</option>
+                                                <option value="MT">Montana</option>
+                                                <option value="NE">Nebraska</option>
+                                                <option value="NV">Nevada</option>
+                                                <option value="NH">New Hampshire</option>
+                                                <option value="NJ">New Jersey</option>
+                                                <option value="NM">New Mexico</option>
+                                                <option value="NY">New York</option>
+                                                <option value="NC">North Carolina</option>
+                                                <option value="ND">North Dakota</option>
+                                                <option value="OH">Ohio</option>
+                                                <option value="OK">Oklahoma</option>
+                                                <option value="OR">Oregon</option>
+                                                <option value="PA">Pennsylvania</option>
+                                                <option value="RI">Rhode Island</option>
+                                                <option value="SC">South Carolina</option>
+                                                <option value="SD">South Dakota</option>
+                                                <option value="TN">Tennessee</option>
+                                                <option value="TX">Texas</option>
+                                                <option value="UT">Utah</option>
+                                                <option value="VT">Vermont</option>
+                                                <option value="VA">Virginia</option>
+                                                <option value="WA">Washington</option>
+                                                <option value="WV">West Virginia</option>
+                                                <option value="WI">Wisconsin</option>
+                                                <option value="WY">Wyoming</option>
+                                            </select>
+                                            <span class="error text-small block" ng-if="Form.country.$dirty && Form.country.$error.required">Country is required.</span>
+                                            <span class="success text-small block" ng-if="Form.country.$valid">Lovely place!</span>
+                                        </div>
+                                        <div class="form-group" ng-class="{'has-error': Form.acceptTerms.$dirty && Form.acceptTerms.$invalid, 'has-success':Form.acceptTerms.$valid}">
+                                            <label class="control-label"> Consent and Acknowledgement <span class="symbol required"></span> </label>
+                                            <div class="checkbox">
+                                                <label class="clip-check">
+                                                    <input type="checkbox" value="" name="acceptTerms" ng-model="myModel.acceptTerms" required="">
+                                                    <i></i> I read and accept the terms and conditions
+                                                </label>
+                                            </div>
+                                            <span class="error text-small block" ng-if="Form.acceptTerms.$dirty && Form.acceptTerms.$error.required">You must accept terms and conditions!</span>
+                                            <span class="success text-small block" ng-if="Form.acceptTerms.$valid">Thank You!</span>
+                                        </div>
+                                    </fieldset>
+                                    <fieldset>
+                                        <legend>
+                                            Only Error Message
+                                        </legend>
+                                        <div class="form-group" ng-class="{'has-error':Form.url.$dirty && Form.url.$invalid, 'has-success':Form.url.$valid}">
+                                            <label class="control-label"> Url <span class="symbol required"></span> </label>
+                                            <input type="text" placeholder="Url" class="form-control" name="url" ng-model="myModel.url" ng-pattern="/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/" required />
+                                            <span class="error text-small block" ng-if="Form.url.$dirty && Form.url.$error.required">Url is required!</span>
+                                            <span class="error text-small block" ng-if="Form.url.$error.pattern">Not Valid Url!</span>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                                <div class="col-md-6">
+                                    <fieldset>
+                                        <legend>
+                                            No Messages
+                                        </legend>
+                                        <div class="form-group" ng-class="{'has-error':Form.number.$dirty && Form.number.$invalid, 'has-success':Form.number.$valid}">
+                                            <label class="control-label"> Your favorite number <span class="symbol required"></span> </label>
+                                            <input type="text" placeholder="Enter your favorite number" class="form-control" name="number" ng-model="myModel.number" ng-pattern="/^[0-9]*$/" required />
+                                        </div>
+                                        <div class="form-group" ng-class="{'has-error':Form.letter.$dirty && Form.letter.$invalid, 'has-success':Form.letter.$valid}">
+                                            <label class="control-label"> Your favorite letter <span class="symbol required"></span> </label>
+                                            <input type="text" placeholder="Enter your favorite letter" class="form-control" name="letter" ng-model="myModel.letter" ng-pattern="/[a-zA-Z]/" required />
+                                        </div>
+                                    </fieldset>
+                                    <fieldset>
+                                        <legend>
+                                            Min Length and Max Length
+                                        </legend>
+                                        <div class="form-group" ng-class="{'has-error':Form.minText.$dirty && Form.minText.$invalid, 'has-success':Form.minText.$valid}">
+                                            <label class="control-label"> Text with at least 3 characters <span class="symbol required"></span> </label>
+                                            <input type="text" name="minText" placeholder="Enter text" class="form-control" ng-model="myModel.minText" ng-minlength="3" required />
+                                            <span class="error text-small block" ng-if="Form.minText.$error.minlength">Too short!</span>
+                                        </div>
+                                        <div class="form-group" ng-class="{'has-error':Form.maxText.$dirty && Form.maxText.$invalid, 'has-success':Form.maxText.$valid}">
+                                            <label class="control-label"> Text with a maximum of 5 characters <span class="symbol required"></span> </label>
+                                            <input type="text" name="maxText" placeholder="Enter text" class="form-control" ng-model="myModel.maxText" ng-maxlength="5" required />
+                                            <span class="error text-small block" ng-if="Form.maxText.$error.maxlength">Too long!</span>
+                                        </div>
+                                        <div class="form-group" ng-class="{'has-error':Form.minMaxText.$dirty && Form.minMaxText.$invalid, 'has-success':Form.minMaxText.$valid}">
+                                            <label class="control-label"> Text with a minimum of 2 and a maximum of 6 characters <span class="symbol required"></span> </label>
+                                            <input type="text" name="minMaxText" placeholder="Enter text" class="form-control" ng-model="myModel.minMaxText" ng-minlength="2" ng-maxlength="6" required />
+                                            <span class="error text-small block" ng-if="Form.minMaxText.$error.maxlength">Too long!</span>
+                                            <span class="error text-small block" ng-if="Form.minMaxText.$error.minlength">Too short!</span>
+                                        </div>
+                                    </fieldset>
+                                    <fieldset>
+                                        <legend>
+                                            Min Number and Max Number
+                                        </legend>
+                                        <div class="form-group" ng-class="{'has-error':Form.maxNumber.$dirty && Form.maxNumber.$invalid, 'has-success':Form.maxNumber.$valid}">
+                                            <label class="control-label"> Number smaller than 10 <span class="symbol required"></span> </label>
+                                            <input type="number" name="maxNumber" placeholder="Enter number" class="form-control" ng-model="myModel.maxNumber" max="10" required />
+                                            <span class="error text-small block" ng-if="Form.maxNumber.$error.max">Number must not be higher than 10!</span>
+                                            <span class="error text-small block" ng-if="Form.maxNumber.$error.number">Not valid number!</span>
+                                        </div>
+                                        <div class="form-group" ng-class="{'has-error':Form.minNumber.$dirty && Form.minNumber.$invalid, 'has-success':Form.minNumber.$valid}">
+                                            <label class="control-label"> Number higher than 10 <span class="symbol required"></span> </label>
+                                            <input type="number" name="minNumber" placeholder="Enter number" class="form-control" ng-model="myModel.minNumber" min="10" required />
+                                            <span class="error text-small block" ng-if="Form.minNumber.$error.min">Number must be higher than 10!</span>
+                                            <span class="error text-small block" ng-if="Form.minNumber.$error.number">Not valid number!</span>
+                                        </div>
+                                        <div class="form-group" ng-class="{'has-error':Form.minMaxNumber.$dirty && Form.minMaxNumber.$invalid, 'has-success':Form.minMaxNumber.$valid}">
+                                            <label class="control-label"> Number between 10 and 100 <span class="symbol required"></span> </label>
+                                            <input type="number" name="minMaxNumber" placeholder="Enter number" class="form-control" ng-model="myModel.minMaxNumber" min="10" max="100" required />
+                                            <span class="error text-small block" ng-if="Form.minMaxNumber.$error.max">Number must not be higher than 100!</span>
+                                            <span class="error text-small block" ng-if="Form.minMaxNumber.$error.min">Number must be higher than 10!</span>
+                                            <span class="error text-small block" ng-if="Form.minMaxNumber.$error.number">Not valid number!</span>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="pull-right">
+                                        <button type="submit" class="btn btn-primary">
+                                            Submit
+                                        </button>
+                                        <button type="reset" class="btn btn-primary btn-o" ng-click="form.reset(Form)">
+                                            Reset
+                                        </button>
+                                        <button class="btn btn-default">
+                                            checkValid = {{ Form.$valid }}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <pre class="margin-top-20">{{ myModel | json }}</pre>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end: FORM VALIDATION -->

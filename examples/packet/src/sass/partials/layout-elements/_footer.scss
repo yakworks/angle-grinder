@@ -1,0 +1,118 @@
+/* ---------------------------------------------------------------------- */
+/*  Footer
+/* ---------------------------------------------------------------------- */
+#app {
+    > footer {
+        background-color: lighten($grey, 18%);
+        border-top: none;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        position: absolute;
+        font-size: $font-size-small;
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+        z-index: 1088;
+
+
+        .footer-inner {
+            padding: 0 35px;
+            line-height: $footer-height;
+            @media (max-width: $screen-sm-max) {
+                padding: 0 15px;
+            }
+        }
+    }
+
+    @media (min-width: $screen-md-min) {
+        > footer {
+            margin-left: $sideBar-width;
+            @include transition (margin 0.5s);
+        }
+
+        &.app-sidebar-closed {
+            > footer {
+                margin-left: $sideBar-closed-width;
+            }
+        }
+
+        &.app-footer-fixed {
+            > footer {
+                position: fixed;
+            }
+
+            .app-boxed-page & {
+                > footer {
+                    width: 970px;
+                    margin: 0 auto !important;
+                }
+            }
+        }
+
+        &.lyt-2 {
+            > footer {
+                margin-left: $sideBar-width - 40;
+            }
+        }
+
+        &.lyt-2.app-sidebar-closed {
+            > footer {
+                margin-left: $sideBar-closed-width - 20;
+            }
+        }
+
+        &.lyt-4 {
+            > footer {
+                margin-left: 0 !important;
+            }
+        }
+        
+        &.lyt-6 {
+            > footer {
+                margin-left: $sideBar-width - 70;
+            }
+        }
+        
+        &.lyt-6.app-sidebar-closed {
+            > footer {
+                margin-left: $sideBar-closed-width - 20;
+            }
+        }
+
+        .app-boxed-page & {
+            > footer {
+                margin-left: 0;
+            }
+        }
+    }
+
+    @media (min-width: $screen-lg-min) {
+        &.app-footer-fixed {
+            .app-boxed-page & {
+                > footer {
+                    width: 1170px;
+                }
+            }
+        }
+    }
+
+    @media (max-width: $screen-sm-max) {
+
+        &.app-slide-off, &.app-offsidebar-open {
+            > footer {
+                display: none;
+            }
+        }
+    }
+}
+
+.go-top {
+    cursor: pointer;
+    font-size: 16px;
+    margin-bottom: 0;
+    margin-right: 0;
+    text-decoration: none;
+    line-height: $footer-height;
+    text-align: center;
+    padding: 10px;
+}

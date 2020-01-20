@@ -1,0 +1,537 @@
+<!-- start: BREADCRUMB -->
+<div class="breadcrumb-wrapper">
+    <h4 class="mainTitle no-margin" translate="sidebar.nav.element.NOTIFICATIONS">NOTIFICATIONS</h4>
+
+    <div ncy-breadcrumb class="pull-right"></div>
+</div>
+<!-- end: BREADCRUMB -->
+<!-- start: SWEETALERT -->
+<div class="container-fluid container-fullw">
+    <!-- /// controller:  'SweetAlertCtrl' -  localtion: assets/js/controllers/sweetAlertCtrl.js /// -->
+    <div ng-controller="SweetAlertCtrl">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-white">
+                    <div class="panel-body">
+                        <h5 class="over-title margin-bottom-15"><span class="text-bold">ngSweetAlert</span></h5>
+                        <p>
+                            AngularJS wrapper for SweetAlert. Sweet Alert is a beautiful replacement for Javascript's "Alert".
+                        </p>
+                        <div class="row">
+                            <div class="col-lg-4 col-sm-6">
+                                <div class="panel panel-transparent min-height-200">
+                                    <div class="panel-heading">
+                                        <div class="panel-title">
+                                            Basic message
+                                        </div>
+                                    </div>
+                                    <div class="panel-body">
+                                        <p class="margin-bottom-30">
+                                            Show a basic message to give information to the user or to warn about a potentially damaging operation.
+                                        </p>
+                                        <button class="btn btn-primary pull-right" ng-click="demo1();">
+                                            Open Message
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-sm-6">
+                                <div class="panel panel-transparent min-height-200">
+                                    <div class="panel-heading">
+                                        <div class="panel-title">
+                                            Title with a text under
+                                        </div>
+                                    </div>
+                                    <div class="panel-body">
+                                        <p class="margin-bottom-30">
+                                            Not enough basic message? Show more information to the user by entering a text below the title
+                                        </p>
+                                        <button class="btn btn-primary pull-right" ng-click="demo2();">
+                                            Open Message
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-sm-6">
+                                <div class="panel panel-transparent min-height-200">
+                                    <div class="panel-heading">
+                                        <div class="panel-title">
+                                            Success message
+                                        </div>
+                                    </div>
+                                    <div class="panel-body">
+                                        <p class="margin-bottom-30">
+                                            Shows the user a message to warn him that a certain operation is successful.
+                                        </p>
+                                        <button class="btn btn-primary pull-right" ng-click="demo3();">
+                                            Open Message
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-sm-6">
+                                <div class="panel panel-transparent min-height-200">
+                                    <div class="panel-heading">
+                                        <div class="panel-title">
+                                            Warning message
+                                        </div>
+                                    </div>
+                                    <div class="panel-body">
+                                        <p class="margin-bottom-30">
+                                            Shows the user a warning message, with a function attached to the "Confirm" button.
+                                        </p>
+                                        <button class="btn btn-primary pull-right" ng-click="demo4();">
+                                            Open Message
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-sm-6">
+                                <div class="panel panel-transparent min-height-200">
+                                    <div class="panel-heading">
+                                        <div class="panel-title">
+                                            Another warning message
+                                        </div>
+                                    </div>
+                                    <div class="panel-body">
+                                        <p class="margin-bottom-30">
+                                            By passing a parameter to warning message, you can execute something else for "Cancel".
+                                        </p>
+                                        <button class="btn btn-primary pull-right" ng-click="demo5();">
+                                            Open Message
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-sm-6">
+                                <div class="panel panel-transparent min-height-200">
+                                    <div class="panel-heading">
+                                        <div class="panel-title">
+                                            Custom icon
+                                        </div>
+                                    </div>
+                                    <div class="panel-body">
+                                        <p class="margin-bottom-30">
+                                            If desired, you can make more effective the message by adding a custom icon
+                                        </p>
+                                        <button class="btn btn-primary pull-right" ng-click="demo6();">
+                                            Open Message
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end: SWEETALERT -->
+<!-- start: NG-NOTIFY -->
+<div class="container-fluid container-fullw">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-white">
+                <div class="panel-body">
+                    <h5 class="over-title margin-bottom-15"><span class="text-bold">Ng-notify</span></h5>
+                    <p>
+                        A simple, lightweight module for displaying notifications.
+                    </p>
+                    <!-- /// controller:  'NgNotifyDemoCtrl' -  localtion: assets/js/controllers/notifyCtrl.js /// -->
+                    <div ng-controller="NgNotifyDemoCtrl">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label> Message </label>
+                                    <textarea class="form-control" placeholder="Enter a message" rows="5" ng-model="notify.text"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="form-field-select-1"> Position </label>
+                                    <span class="clip-select">
+                                        <select class="form-control" ng-model="notify.position">
+                                            <option value="top">Top</option>
+                                            <option value="bottom">Bottom</option>
+                                        </select>
+                                    </span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="form-field-select-1"> Theme </label>
+                                    <span class="clip-select">
+                                        <select class="form-control" ng-model="notify.theme">
+                                            <option value="pure">pure</option>
+                                            <option value="pastel">pastel</option>
+                                            <option value="prime">prime</option>
+                                            <option value="pitchy">pitchy</option>
+                                        </select>
+                                    </span>
+                                </div>
+                                <div class="form-group">
+                                    <label> Duration </label>
+                                    <input type="text" class="form-control" ng-model="notify.duration">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <label> Ng-notify Type </label>
+                                <div class="radio clip-radio radio-primary">
+                                    <input type="radio" id="notifydefault" name="notification" ng-model="notify.type" value="default">
+                                    <label for="notifydefault"> Default </label>
+                                </div>
+                                <div class="radio clip-radio radio-primary">
+                                    <input type="radio" id="notifysuccess" name="notification" ng-model="notify.type" value="success">
+                                    <label for="notifysuccess"> Success </label>
+                                </div>
+                                <div class="radio clip-radio radio-primary">
+                                    <input type="radio" id="notifyinfo" name="notification" ng-model="notify.type" value="info">
+                                    <label for="notifyinfo"> Info </label>
+                                </div>
+                                <div class="radio clip-radio radio-primary">
+                                    <input type="radio" id="notifygrimace" name="notification" ng-model="notify.type" value="grimace">
+                                    <label for="notifygrimace"> Grimace </label>
+                                </div>
+                                <div class="radio clip-radio radio-primary">
+                                    <input type="radio" id="notifywarning" name="notification" ng-model="notify.type" value="warn">
+                                    <label for="notifywarning"> Warning </label>
+                                </div>
+                                <div class="radio clip-radio radio-primary">
+                                    <input type="radio" id="notifyerror" name="notification" ng-model="notify.type" value="error">
+                                    <label for="notifyerror"> Error </label>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn btn-o btn-primary" ng-click="set()">
+                            Show Notification
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end: NG-NOTIFY -->
+<!-- start: TOASTER -->
+<div class="container-fluid container-fullw">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-white">
+                <div class="panel-body">
+                    <h5 class="over-title margin-bottom-15"><span class="text-bold">Toaster notifications for Angular</span></h5>
+                    <p>
+                        AngularJS Toaster is an AngularJS port of the toastr non-blocking notification jQuery library.
+                    </p>
+                    <!-- /// controller:  'ToasterDemoCtrl' -  localtion: assets/js/controllers/toasterCtrl.js /// -->
+                    <div ng-controller="ToasterDemoCtrl">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label> Title </label>
+                                    <input type="text" class="form-control" placeholder="Enter a title..." ng-model="toaster.title">
+                                </div>
+                                <div class="form-group">
+                                    <label> Message </label>
+                                    <textarea class="form-control" placeholder="Enter a message" rows="5" ng-model="toaster.text"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <label> Toast Type </label>
+                                <div class="radio clip-radio radio-primary">
+                                    <input type="radio" id="typesuccess" name="toasts" ng-model="toaster.type" value="success">
+                                    <label for="typesuccess"> Success </label>
+                                </div>
+                                <div class="radio clip-radio radio-primary">
+                                    <input type="radio" id="typeinfo" name="toasts" ng-model="toaster.type" value="info">
+                                    <label for="typeinfo"> Info </label>
+                                </div>
+                                <div class="radio clip-radio radio-primary">
+                                    <input type="radio" id="typewait" name="toasts" ng-model="toaster.type" value="wait">
+                                    <label for="typewait"> Wait </label>
+                                </div>
+                                <div class="radio clip-radio radio-primary">
+                                    <input type="radio" id="typewarning" name="toasts" ng-model="toaster.type" value="warning">
+                                    <label for="typewarning"> Warning </label>
+                                </div>
+                                <div class="radio clip-radio radio-primary">
+                                    <input type="radio" id="typeerror" name="toasts" ng-model="toaster.type" value="error">
+                                    <label for="typeerror"> Error </label>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn btn-o btn-primary" ng-click="pop()">
+                            Show a Toaster
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end: TOASTER -->
+<!-- start: NOTIFICATION ICONS -->
+<div class="container-fluid container-fullw">
+    <!-- /// controller:  'SweetAlertCtrl' -  localtion: assets/js/controllers/notificationIconsCtrl.js /// -->
+    <div ng-controller="NotificationIconsCtrl">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-white">
+                    <div class="panel-body">
+                        <h5 class="over-title margin-bottom-15">Angular <span class="text-bold">Notification Icons</span></h5>
+                        <p>
+                            Add notification popups to any element.
+                        </p>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="padding-20">
+                                    <notification-icon count="autoPending[0]">
+                                        <i class="fa fa-envelope-o fa-3x"></i>
+                                    </notification-icon>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row margin-top-20 demo-notification-icons">
+                            <div class="col-md-6">
+                                <!-- start: ALERTS PANEL -->
+                                <div class="panel panel-white">
+                                    <div class="panel-body">
+                                        <h5 class="margin-bottom-20">Default Animations</h5>
+                                        <div class="row">
+                                            <div class="col-md-3 col-xs-6 text-center margin-top-15">
+                                                <notification-icon animation='grow' ng-init="animationsPending = 0" count='animationsPending'>
+                                                    <i class="fa fa-envelope-o fa-3x"></i>
+                                                </notification-icon>
+                                                Grow
+                                            </div>
+
+                                            <div class="col-md-3 col-xs-6 text-center margin-top-15">
+                                                <notification-icon animation='bounce' count='animationsPending'>
+                                                    <i class="fa fa-envelope-o fa-3x"></i>
+                                                </notification-icon>
+                                                Bounce
+                                            </div>
+
+                                            <div class="col-md-3 col-xs-6 text-center margin-top-15">
+                                                <notification-icon animation='shake' count='animationsPending'>
+                                                    <i class="fa fa-envelope-o fa-3x"></i>
+                                                </notification-icon>
+                                                Shake
+                                            </div>
+
+                                            <div class="col-md-3 col-xs-6 text-center margin-top-15">
+                                                <notification-icon animation='none' disappear-animation='bounce' count='animationsPending'>
+                                                    <i class="fa fa-envelope-o fa-3x"></i>
+                                                </notification-icon>
+                                                Bounce on disappear
+                                            </div>
+                                        </div>
+
+                                        <div class="margin-top-25 text-center">
+                                            <button class="btn btn-primary margin-top-15" ng-click="animationsPending = animationsPending + 1">
+                                                Add Notification
+                                            </button>
+
+                                            <button class="btn btn-primary margin-top-15" ng-click="animationsPending = 0">
+                                                Clear Notifications
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <!-- start: ALERTS PANEL -->
+                                <div class="panel panel-white">
+                                    <div class="panel-body">
+                                        <h5 class="margin-bottom-20">Custom style and animations</h5>
+                                        <div class="row">
+                                            <div class="col-md-12 text-center margin-top-15 custom-style">
+                                                <notification-icon animation='my-custom-animation' ng-init="customPending = 0" count='customPending'>
+                                                    <i class="fa fa-envelope-o fa-3x"></i>
+                                                </notification-icon>
+                                                Custom
+                                            </div>
+                                        </div>
+
+                                        <div class="margin-top-25 text-center">
+                                            <button class="btn btn-primary margin-top-15" ng-click="customPending = customPending + 1">
+                                                Add Notification
+                                            </button>
+
+                                            <button class="btn btn-primary margin-top-15" ng-click="customPending = 0">
+                                                Clear Notifications
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end: NOTIFICATION ICONS -->
+<!-- start: ALERTS AND NOTIFICATIONS -->
+<div class="container-fluid container-fullw">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-white">
+                <div class="panel-body">
+                    <h5 class="over-title margin-bottom-15">Inline <span class="text-bold">Alerts and Notifications</span></h5>
+                    <p>
+                        Provide contextual feedback messages for typical user actions with the handful of available and flexible messages.
+                    </p>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <!-- start: ALERTS PANEL -->
+                            <h5 class="over-title">Alerts</h5>
+                            <div class="panel panel-white">
+                                <div class="panel-body">
+                                    <h5 class="margin-bottom-20">Basic</h5>
+                                    <p class="text-small">
+                                        Wrap any text and an optional dismiss button in
+                                        <code>
+                                            .alert
+                                        </code>
+                                        and one of the four contextual classes (e.g.,
+                                        <code>
+                                            .alert-success
+                                        </code>
+                                        ) for basic alert messages.
+                                    </p>
+                                    <p class="text-small">
+                                        Use the
+                                        <code>
+                                            .alert-link
+                                        </code>
+                                        utility class to quickly provide matching colored links within any alert.
+                                    </p>
+                                    <div class="alert alert-success">
+                                        <button data-ct-dismiss="alert" class="close">
+                                            &times;
+                                        </button>
+                                        <strong>Well done!</strong> You successfully read <a class="alert-link" href="#"> this important alert message </a>
+                                        .
+                                    </div>
+                                    <div class="alert alert-info">
+                                        <button data-ct-dismiss="alert" class="close">
+                                            &times;
+                                        </button>
+                                        <strong>Heads up!</strong>
+                                        This
+                                        <a class="alert-link" href="#"> alert needs your attention </a>
+                                        , but it's not super important.
+                                    </div>
+                                    <div class="alert alert-warning">
+                                        <button data-ct-dismiss="alert" class="close">
+                                            &times;
+                                        </button>
+                                        <strong>Warning!</strong>
+                                        Better check yourself, you're
+                                        <a class="alert-link" href="#"> not looking too good </a>
+                                        .
+                                    </div>
+                                    <div class="alert alert-danger">
+                                        <button data-ct-dismiss="alert" class="close">
+                                            &times;
+                                        </button>
+                                        <strong>Oh snap!</strong>
+                                        <a class="alert-link" href="#"> Change a few things up </a>
+                                        and try submitting again.
+                                    </div>
+                                    <h5 class="margin-bottom-20">AngularJS-version of bootstrap's alert</h5>
+                                    <p class="text-small">
+                                        This directive can be used to generate alerts from the dynamic model data (using the
+                                        <code>
+                                            ng-repeat
+                                        </code>
+                                        directive);
+                                        The presence of the
+                                        <code>
+                                            close
+                                        </code>
+                                        attribute determines if a close button is displayed
+                                    </p>
+                                    <!-- /// controller:  'AlertDemoCtrl' -  localtion: assets/js/controllers/bootstrapCtrl.js /// -->
+                                    <div ng-controller="AlertDemoCtrl">
+                                        <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">
+                                            {{alert.msg}}
+                                        </uib-alert>
+                                        <button class='btn btn-primary btn-o' ng-click="addAlert()">
+                                            Add Alert
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end: ALERTS PANEL -->
+                        </div>
+                        <div class="col-md-6">
+                            <!-- start: NOTIFICATION PANEL -->
+                            <h5 class="over-title">Notifications</h5>
+                            <div class="panel panel-transparent">
+                                <div class="panel-body">
+                                    <div class="alert alert-block alert-danger fade in">
+                                        <button data-ct-dismiss="alert" class="close" type="button">
+                                            &times;
+                                        </button>
+                                        <h4 class="alert-heading margin-bottom-10"><i class="ti-close"></i> Error!</h4>
+                                        <p class="margin-bottom-10">
+                                            Duis mollis, est non commodo luctus,
+                                            nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum.
+                                        </p>
+                                        <p>
+                                            <a href="#" class="btn btn-danger"> Take this action </a>
+                                            <a href="#" class="btn btn-o btn-danger"> Or do this </a>
+                                        </p>
+                                    </div>
+                                    <div class="alert alert-block alert-success fade in">
+                                        <button data-ct-dismiss="alert" class="close" type="button">
+                                            &times;
+                                        </button>
+                                        <h4 class="alert-heading margin-bottom-10"><i class="ti-check"></i> Success!</h4>
+                                        <p class="margin-bottom-10">
+                                            Duis mollis, est non commodo luctus,
+                                            nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum.
+                                        </p>
+                                        <p>
+                                            <a href="#" class="btn btn-success"> Take this action </a>
+                                            <a href="#" class="btn btn-o btn-success"> Or do this </a>
+                                        </p>
+                                    </div>
+                                    <div class="alert alert-block alert-info fade in">
+                                        <button data-ct-dismiss="alert" class="close" type="button">
+                                            &times;
+                                        </button>
+                                        <h4 class="alert-heading margin-bottom-10"><i class="ti-info"></i> Info!</h4>
+                                        <p class="margin-bottom-10">
+                                            Duis mollis, est non commodo luctus,
+                                            nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum.
+                                        </p>
+                                        <p>
+                                            <a href="#" class="btn btn-info"> Take this action </a>
+                                            <a href="#" class="btn btn-o btn-info"> Or do this </a>
+                                        </p>
+                                    </div>
+                                    <div class="alert alert-block alert-warning fade in">
+                                        <button data-ct-dismiss="alert" class="close" type="button">
+                                            &times;
+                                        </button>
+                                        <h4 class="alert-heading margin-bottom-10"><i class="ti-alert"></i> Warning!</h4>
+                                        <p class="margin-bottom-10">
+                                            Duis mollis, est non commodo luctus,
+                                            nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum.
+                                        </p>
+                                        <p>
+                                            <a href="#" class="btn btn-warning"> Take this action </a>
+                                            <a href="#" class="btn btn-o btn-warning"> Or do this </a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end: NOTIFICATION PANEL -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end: ALERTS AND NOTIFICATIONS -->

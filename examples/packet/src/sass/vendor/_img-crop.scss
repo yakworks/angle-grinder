@@ -1,0 +1,108 @@
+/* ---------------------------------------------------------------------- */
+/*  Crop Image
+/* ---------------------------------------------------------------------- */
+.cropBox {
+    background-color: #f5f5f5;
+    border-radius: 4px;
+    color: #666;
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+.cropArea {
+    height: 350px;
+    overflow: hidden;
+    background-color: #ffffff;
+}
+
+.croppedBox {
+    width: 220px;
+    height: 220px;
+
+    > div {
+        background: #fff url(../images/picture.svg) center center no-repeat;
+        background-size: 50px 50px;
+        height: 200px;
+    }
+}
+
+img-crop {
+    background: url(../images/picture.svg) center center no-repeat;
+    background-size: 100px 100px;
+}
+
+#crop-target {
+    display: inline-block;
+
+    @media (max-width: $screen-sm-max) {
+        max-width: 100% !important;
+    }
+}
+
+.crop-image {
+    overflow: auto;
+    max-height: 600px;
+    min-height: 600px;
+
+    @media (max-width: $screen-sm-max) {
+        min-height: 0 !important;
+        max-height: none !important;
+        overflow: visible !important;
+    }
+}
+
+.crop-image .crop-wrapper {
+    display: table;
+    width: 100%;
+    height: 600px;
+    background: url(../images/bg_transparent.png);
+
+    @media (max-width: $screen-sm-max) {
+        height: auto !important;
+    }
+}
+
+.crop-image .crop-wrapper .crop-active {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.crop-image .jcrop-active, .crop-image .jcrop-holder {
+    margin: 0 auto;
+}
+
+.thumbnail.crop-preview .preview-wrapper {
+    position: relative;
+    background: url(../images/picture.svg) center center no-repeat;
+    background-size: 100px 100px;
+}
+
+.thumbnail.crop-preview .preview-wrapper canvas {
+    width: 100% !important;
+}
+
+.jcrop-keymgr {
+    opacity: 0;
+}
+
+.crop-tools {
+    padding-left: 60px;
+    position: relative;
+
+    @media (max-width: $screen-sm-max) {
+        display: none !important;
+    }
+}
+
+.btn-fit-image {
+    position: absolute;
+    left: 0;
+}
+
+.modal-close-button {
+    position: absolute;
+    right: 0;
+    top: 0;
+    background: none;
+}

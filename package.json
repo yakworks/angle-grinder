@@ -15,6 +15,7 @@
     "start-docs": "webpack-dev-server --mode=development --content-base ./docs ",
     "start-sandbox": "webpack-dev-server ---mode=development --content-base ./examples/sandbox",
     "start-pages": "webpack-dev-server --mode=development --content-base ./examples/pages --no-info",
+    "start-packet": "webpack-dev-server --mode=development --content-base ./examples/packet --no-info",
     "start-rdash": "webpack-dev-server --mode=development --content-base ./examples/rdash ",
     "start-ag-demo": "webpack-dev-server --mode=development --content-base ./examples/ag-demo-ui",
     "build-ag-demo": "webpack --mode=production --profile --progress --content-base ./examples/ag-demo-ui --pathout ./examples/ag-demo-grails/src/main/webapp",

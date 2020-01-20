@@ -1,0 +1,251 @@
+<!-- start: BREADCRUMB -->
+<div class="breadcrumb-wrapper">
+    <h4 class="mainTitle no-margin" translate="sidebar.nav.tables.DATA">NGTABLE</h4>
+
+    <div ncy-breadcrumb class="pull-right"></div>
+</div>
+<!-- end: BREADCRUMB -->
+<!-- start: SIMPLE TABLE WITH PAGINATION -->
+<div class="container-fluid container-fullw">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-white">
+                <div class="panel-body">
+                    <h5 class="over-title margin-bottom-15">Simple table <span class="text-bold">with pagination</span></h5>
+                    <!-- /// controller:  'ngTableCtrl' -  localtion: assets/js/controllers/ngTableCtrl.js /// -->
+                    <div ng-controller="ngTableCtrl">
+                        <p>
+                            <strong>Page:</strong> {{tableParams.page()}}
+                        </p>
+                        <p>
+                            <strong>Count per page:</strong> {{tableParams.count()}}
+                        </p>
+                        <table ng-table="tableParams" class="table table-striped">
+                            <tr ng-repeat="user in $data">
+                                <td data-title="'Name'">{{user.name}}</td>
+                                <td data-title="'Alias'">{{user.alias}}</td>
+                                <td data-title="'Publisher'">{{user.publisher}}</td>
+                                <td data-title="'Gender'">{{user.gender}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end: SIMPLE TABLE WITH PAGINATION -->
+<!-- start: PAGINATION TEMPLATE -->
+<div class="container-fluid container-fullw">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-white">
+                <div class="panel-body">
+                    <h5 class="over-title margin-bottom-15">Pagination <span class="text-bold">template</span></h5>
+                    <!-- /// controller:  'ngTableCtrl' -  localtion: assets/js/controllers/ngTableCtrl.js /// -->
+                    <div ng-controller="ngTableCtrl">
+                        <p>
+                            <strong>Page:</strong> {{tableParams.page()}}
+                        </p>
+                        <p>
+                            <strong>Count per page:</strong> {{tableParams.count()}}
+                        </p>
+                        <table ng-table="tableParams" class="table table-striped" template-pagination="custom/pager">
+                            <tr ng-repeat="user in $data">
+                                <td data-title="'Name'">{{user.name}}</td>
+                                <td data-title="'Alias'">{{user.alias}}</td>
+                                <td data-title="'Publisher'">{{user.publisher}}</td>
+                                <td data-title="'Gender'">{{user.gender}}</td>
+                            </tr>
+                        </table>
+                        <script type="text/ng-template" id="custom/pager">
+                            <ul class="pager ng-cloak">
+                                <li ng-repeat="page in pages"
+                                    ng-class="{'disabled': !page.active, 'previous': page.type == 'prev', 'next': page.type == 'next'}"
+                                    ng-show="page.type == 'prev' || page.type == 'next'" ng-switch="page.type">
+                                    <a ng-switch-when="prev" ng-click="params.page(page.number)" href="">&laquo; Previous</a>
+                                    <a ng-switch-when="next" ng-click="params.page(page.number)" href="">Next &raquo;</a>
+                                </li>
+                                <li>
+                                    <div class="btn-group">
+                                        <button type="button" ng-class="{'active':params.count() == 10}" ng-click="params.count(10)" class="btn btn-default">10</button>
+                                        <button type="button" ng-class="{'active':params.count() == 25}" ng-click="params.count(25)" class="btn btn-default">25</button>
+                                        <button type="button" ng-class="{'active':params.count() == 50}" ng-click="params.count(50)" class="btn btn-default">50</button>
+                                        <button type="button" ng-class="{'active':params.count() == 100}" ng-click="params.count(100)" class="btn btn-default">100</button>
+                                    </div>
+                                </li>
+                            </ul>
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end: PAGINATION TEMPLATE -->
+<!-- start: TABLE WITH SORTING -->
+<div class="container-fluid container-fullw">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-white">
+                <div class="panel-body">
+                    <h5 class="over-title margin-bottom-15">Table <span class="text-bold">with sorting</span></h5>
+                    <!-- /// controller:  'ngTableCtrl2' -  localtion: assets/js/controllers/ngTableCtrl.js /// -->
+                    <div ng-controller="ngTableCtrl2">
+                        <div class="row margin-bottom-10">
+                            <div class="col-md-12">
+                                <button ng-click="tableParams.sorting({})" class="btn btn-default pull-right">
+                                    Clear sorting
+                                </button>
+                            </div>
+                        </div>
+                        <strong>Sorting:</strong> {{tableParams.sorting()|json}}
+                        <table ng-table="tableParams" class="table table-striped">
+                            <tr ng-repeat="user in $data">
+                                <td data-title="'Name'" sortable="'name'">{{user.name}}</td>
+                                <td data-title="'Alias'" sortable="'alias'">{{user.alias}}</td>
+                                <td data-title="'Publisher'" sortable="'publisher'">{{user.publisher}}</td>
+                                <td data-title="'Gender'" sortable="'gender'">{{user.gender}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end: TABLE WITH SORTING -->
+<!-- start: TABLE WITH FILTERS -->
+<div class="container-fluid container-fullw">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-white">
+                <div class="panel-body">
+                    <h5 class="over-title margin-bottom-15">Table <span class="text-bold">with filters</span></h5>
+                    <!-- /// controller:  'ngTableCtrl3' -  localtion: assets/js/controllers/ngTableCtrl.js /// -->
+                    <div ng-controller="ngTableCtrl3">
+                        <strong>Filter:</strong> {{tableParams.filter()|json}}
+                        <table ng-table="tableParams" show-filter="true" class="table table-striped">
+                            <tr ng-repeat="user in $data">
+                                <td data-title="'Name'" filter="{ 'name': 'text' }"> {{user.name}} </td>
+                                <td data-title="'Alias'">{{user.alias}}</td>
+                                <td data-title="'Publisher'">{{user.publisher}}</td>
+                                <td data-title="'Gender'">{{user.gender}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end: TABLE WITH FILTERS -->
+<!-- start: CELL AND ROW TEMPLATE -->
+<div class="container-fluid container-fullw">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-white">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5 class="over-title margin-bottom-15">Cell <span class="text-bold">Template</span></h5>
+                            <div class="panel panel-white">
+                                <div class="panel-body">
+                                    <!-- /// controller:  'ngTableCtrl4' -  localtion: assets/js/controllers/ngTableCtrl.js /// -->
+                                    <div ng-controller="ngTableCtrl4">
+                                        <div class="row margin-bottom-10">
+                                            <div class="col-md-12">
+                                                <button ng-click="tableParams.sorting({})" class="btn btn-default pull-right">
+                                                    Clear sorting
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <table ng-table="tableParams" class="table">
+                                            <tr ng-repeat="user in $data">
+                                                <td data-title="'Name'"> {{user.name}} </td>
+                                                <td data-title="'Alias'"> {{user.alias}} </td>
+                                                <td data-title="'Power'" sortable="'power'"><span ng-class="{ 'plus': user.power >= 50,'minus': user.power < 50 }">{{user.power}}</span></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h5 class="over-title margin-bottom-15">Row <span class="text-bold">Template</span></h5>
+                            <div class="panel panel-white">
+                                <div class="panel-body">
+                                    <!-- /// controller:  'ngTableCtrl5' -  localtion: assets/js/controllers/ngTableCtrl.js /// -->
+                                    <div ng-controller="ngTableCtrl5">
+                                        <div class="row margin-bottom-10">
+                                            <div class="col-md-12">
+                                                <button ng-click="tableParams.sorting({})" class="btn btn-default pull-right">
+                                                    Clear sorting
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <table ng-table="tableParams" class="table">
+                                            <tr ng-repeat="user in $data" ng-class="{ 'info': user.power > 90 }">
+                                                <td data-title="'Name'"> {{user.name}} </td>
+                                                <td data-title="'Alias'"> {{user.alias}} </td>
+                                                <td data-title="'Power'" sortable="'power'"> {{user.power}} </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end: CELL AND ROW TEMPLATE -->
+<!-- start: INLINE EDIT EXAMPLE -->
+<div class="container-fluid container-fullw">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-white">
+                <div class="panel-body">
+                    <h5 class="over-title margin-bottom-15">Inline <span class="text-bold">edit example</span></h5>
+                    <!-- /// controller:  'ngTableCtrl6' -  localtion: assets/js/controllers/ngTableCtrl.js /// -->
+                    <div ng-controller="ngTableCtrl6">
+                        <div class="row margin-bottom-10">
+                            <div class="col-md-12">
+                                <button ng-click="tableParams.sorting({})" class="btn btn-default pull-right">
+                                    Clear sorting
+                                </button>
+                            </div>
+                        </div>
+                        <strong>Sorting:</strong> {{tableParams.sorting()|json}}
+                        <div class="table-responsive">
+                            <table ng-table="tableParams" class="table">
+                                <tbody ng-repeat="p in $data">
+                                    <tr id="tr{{p.id}}" ng-class-odd="'odd'" ng-class-even="'even'">
+                                        <td class="rowTd" data-title="'ID'" sortable="'id'">{{p.id}}</td>
+                                        <td class="rowTd" data-title="'Firstname'" sortable="'fn'">{{p.fn}}</td>
+                                        <td class="rowTd" data-title="'Lastname'" sortable="'ln'">{{p.ln}}</td>
+                                        <td class="rowTd" data-title="'Description'" sortable="'dc'">{{p.dc}}</td>
+                                        <td class="rowTd" data-title="'Email'" sortable="'em'">{{p.em}}</td>
+                                        <td class="rowTd" data-title="'Phone'" sortable="'ph'">{{p.ph}}</td>
+                                        <td class="rowTd">
+                                            <div class="pull-right margin-right-10">
+                                                <input type=button class="btn btn-primary btn-o btn-sm" id="editRowBtn{{p.id}}" value="edit"
+                                                       ng-click="setEditId(p.id)">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr ng-show="editId===p.id" ng-if="editId===p.id">
+                                        <td colspan="7" ng-include src="'assets/views/editRow.html'"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end: INLINE EDIT EXAMPLE -->

@@ -1,0 +1,836 @@
+<!-- start: LANDING PAGE -->
+<div class="landing-page">
+    <div id="section-0">
+        <div class="navbar navbar-default" id="landing-header" role="navigation" landing-header>
+            <!-- start: TOP NAVIGATION CONTAINER -->
+            <div class="container">
+                <div class="navbar-header">
+                    <!-- start: RESPONSIVE MENU TOGGLER -->
+                    <a class="landing-menu-toggler btn btn-red hidden-sm hidden-md hidden-lg mobile-button" id="landing-menu-toggler" ng-click="landingNavbarCollapsed = !landingNavbarCollapsed">
+                        <span class="sr-only">Toggle navigation</span> <i class="fa fa-bars"></i>
+                    </a>
+                    <!-- end: RESPONSIVE MENU TOGGLER -->
+                    <!-- start: LOGO -->
+                    <a href="index.html" class="navbar-brand">
+                        <img src="assets/images/logo.png" alt="Clip-Two">
+                    </a>
+                    <!-- end: LOGO -->
+                </div>
+                <div class="navbar-collapse collapse" uib-collapse="landingNavbarCollapsed" ng-init="landingNavbarCollapsed = true" off-click="landingNavbarCollapsed = true" off-click-if='!landingNavbarCollapsed' off-click-filter="'#landing-menu-toggler'">
+                    <ul class="nav navbar-nav navbar-right" ct-fullheight="window" data-ct-fullheight-exclusion="#landing-header" data-ct-fullheight-if="isSmallDevice">
+                        <li class="active">
+                            <a href="#section-0" du-smooth-scroll du-scrollspy offset="30" ng-click="landingNavbarCollapsed = true">
+                                Home
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#section-1" du-smooth-scroll du-scrollspy offset="30" ng-click="landingNavbarCollapsed = true">
+                                Features
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#section-2" du-smooth-scroll du-scrollspy offset="30" ng-click="landingNavbarCollapsed = true">
+                                Testimonials
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#section-3" du-smooth-scroll du-scrollspy offset="30" ng-click="landingNavbarCollapsed = true">
+                                Team Members
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#section-4" du-smooth-scroll du-scrollspy offset="30" ng-click="landingNavbarCollapsed = true">
+                                Pricing
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#section-5" du-smooth-scroll du-scrollspy offset="30" ng-click="landingNavbarCollapsed = true">
+                                Contact Us
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- start: MENU TOGGLER FOR MOBILE DEVICES -->
+                    <div class="close-handle visible-xs-block menu-toggler" ng-click="landingNavbarCollapsed = true" ng-swipe-up="landingNavbarCollapsed = true">
+                        <div class="arrow-left"></div>
+                        <div class="arrow-right"></div>
+                    </div>
+                    <!-- end: MENU TOGGLER FOR MOBILE DEVICES -->
+                </div>
+            </div>
+            <!-- end: TOP NAVIGATION CONTAINER -->
+        </div>
+        <div class="landing-content dots-left dots-white">
+            <!-- start: CAROUSEL -->
+            <slick dots=true arrows=false infinite=false speed=300 autoplay=true autoplay-speed=6000 slides-to-show=1 slides-to-scroll=1 class="carousel">
+                <div class="slide" style="background: url('assets/images/carousel/carousel001.jpg')">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="caption">
+                                    <h1 class="text-white text-bold">
+                                        Build
+                                        <br>
+                                        a powerful
+                                        <br>
+                                        web application
+                                        <br>
+                                        for your business
+                                    </h1>
+                                    <p class="text-white">
+                                        Add the content and we'll do the rest to get you a great page rank.
+                                    </p>
+                                    <p>
+                                        <button class="btn btn-red margin-right-5" ui-sref="app.dashboard" role="button" v-pressable>
+                                            SEE DEMO
+                                        </button>
+                                        <a ui-sref="login.registration" class="btn btn-default">
+                                            Sign up for a business account
+                                        </a>
+                                    </p>
+                                </div>
+                                <div class="image hidden-sm hidden-xs">
+                                    <img src="assets/images/desktop.png" alt="" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide" style="background: url('assets/images/carousel/carousel002.jpg')">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="caption">
+                                    <h1 class="text-white text-bold">
+                                        Build
+                                        <br>
+                                        a powerful
+                                        <br>
+                                        web application
+                                        <br>
+                                        for your business
+                                    </h1>
+                                    <p class="text-white">
+                                        Add the content and we'll do the rest to get you a great page rank.
+                                    </p>
+                                    <p>
+                                        <button class="btn btn-red margin-right-5" ui-sref="app.dashboard" role="button" v-pressable>
+                                            SEE DEMO
+                                        </button>
+                                        <a ui-sref="login.registration" class="btn btn-default">
+                                            Sign up for a business account
+                                        </a>
+                                    </p>
+                                </div>
+                                <div class="image hidden-sm hidden-xs">
+                                    <img src="assets/images/laptop.png" alt="" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </slick>
+            <!-- end: CAROUSEL -->
+        </div>
+        <section class="container-fluid container-fullw padding-bottom-30 bg-white padding-top-70">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2 class="text-center">Why Choose Us?</h2>
+                        <hr />
+                    </div>
+                    <div class="col-md-4">
+                        <h4 class="over-title margin-bottom-15">Advanced Tools and <span class="text-bold">Software</span></h4>
+                        <p>
+                            Lid est laborum dolo rumes fugats untras. Etharums ser quidem rerum facilis dolores nemis omnis fugats vitaes nemo minima rerums unsers sadips amets.
+                        </p>
+                        <p>
+                            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+                        </p>
+                    </div>
+                    <div class="col-md-4">
+                        <h4 class="over-title margin-bottom-15">Exclusive Industry <span class="text-bold">Knowledge</span></h4>
+                        <p>
+                            Lid est laborum dolo rumes fugats untras. Etharums ser quidem rerum facilis dolores nemis omnis fugats vitaes nemo minima rerums unsers sadips amets.
+                        </p>
+                        <p>
+                            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+                        </p>
+                    </div>
+                    <div class="col-md-4">
+                        <h4 class="over-title margin-bottom-15">Cost <span class="text-bold">Benefit</span></h4>
+                        <p>
+                            Lid est laborum dolo rumes fugats untras. Etharums ser quidem rerum facilis dolores nemis omnis fugats vitaes nemo minima rerums unsers sadips amets.
+                        </p>
+                        <p>
+                            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <!-- start: SECTION 1 -->
+    <div id="section-1">
+        <section class="container-fluid container-fullw padding-bottom-30 section-features">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-6 col-xs-offset-3 col-md-8 col-sm-8 col-md-offset-0 col-sm-offset-0">
+                        <h2>FEATURES</h2>
+                        <hr>
+                        <p class="margin-bottom-30">
+                            Nulla consequat massa quis enim. <strong>Donec pede justo</strong> fringilla vel, aliquet nec, vulputate eget, arcu.
+                            <br>
+                            In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6 col-xs-offset-3 col-md-8 col-sm-8 col-md-offset-0 col-sm-offset-0">
+                        <div class="row" ng-appear="animationBlock1 = true">
+                            <div class="col-sm-6">
+                                <div class="padding-top-40 padding-bottom-40">
+                                    <div class="block">
+                                        <i class="text-red fa fa-desktop fa-3x" ng-class="{'animated fadeInUp': animationBlock1}"></i>
+                                    </div>
+                                    <div ng-class="{'animated fadeInDown': animationBlock1}">
+                                        <div class="margin-top-20">
+                                            <h4 class="margin-bottom-25 text-uppercase cl-effect-3">
+                                                <a href="#">
+                                                    Responsive Framework
+                                                </a>
+                                            </h4>
+                                            <p>
+                                                Aliquam volutpat mi at mi hendrerit, sed gravida sapien efficitur. Sed mollis elit posuere, molestie lorem at, tristique magna.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="padding-top-40 padding-bottom-40">
+                                    <div class="block">
+                                        <i class="text-red fa fa-diamond fa-3x" ng-class="{'animated fadeInUp': animationBlock1}"></i>
+                                    </div>
+                                    <div ng-class="{'animated fadeInDown': animationBlock1}">
+                                        <div class="margin-top-20">
+                                            <h4 class="margin-bottom-25 text-uppercase cl-effect-3">
+                                                <a href="#">
+                                                    Clean Design
+                                                </a>
+                                            </h4>
+                                            <p>
+                                                Nullam fringilla, risus id suscipit dignissim, sem urna feugiat sapien, non tempor ligula lacus quis nisi. Aliquam laoreet porta congue.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" ng-appear="animationBlock2 = true">
+                            <div class="col-sm-6">
+                                <div class="padding-top-40 padding-bottom-40">
+                                    <div class="block">
+                                        <i class="text-red fa fa-rocket fa-3x" ng-class="{'animated fadeInUp': animationBlock2}"></i>
+                                    </div>
+                                    <div ng-class="{'animated fadeInDown': animationBlock2}">
+                                        <div class="margin-top-20">
+                                            <h4 class="margin-bottom-25 text-uppercase cl-effect-3">
+                                                <a href="#">
+                                                    Style Switcher
+                                                </a>
+                                            </h4>
+                                            <p>
+                                                Praesent scelerisque lorem vel nulla accumsan tincidunt eget sit amet mi. Donec ultricies lacinia mi, et porta nisi congue quis.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="padding-top-40 padding-bottom-40">
+                                    <div class="block">
+                                        <i class="text-red fa fa-life-ring fa-3x" ng-class="{'animated fadeInUp': animationBlock2}"></i>
+                                    </div>
+                                    <div ng-class="{'animated fadeInDown': animationBlock2}">
+                                        <div class="margin-top-20">
+                                            <h4 class="margin-bottom-25 text-uppercase cl-effect-3">
+                                                <a href="#">
+                                                    Free updates &amp; support
+                                                </a>
+                                            </h4>
+                                            <p>
+                                                Cras non enim consequat, vehicula leo eu, convallis leo. Interdum et malesuada fames ac ante ipsum primis in faucibus.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="container-fluid container-fullw bg-white padding-bottom-0 overflow-hidden">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <h2>Take advantage of great responsive dynamic views</h2>
+                        <hr>
+                        <p class="margin-bottom-30">
+                            Nulla consequat massa quis enim. <strong>Donec pede justo</strong> fringilla vel, aliquet nec, vulputate eget, arcu.
+                            <br>
+                            In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.
+                        </p>
+                        <img src="assets/images/graphic.jpg" class="img-responsive inline-block" ng-appear="animationBlock3 = true" ng-class="{'animated fadeInUp': animationBlock3}" />
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="container-fluid container-fullw no-padding no-border">
+            <a class="btn btn-red btn-block no-radius wrap">
+                <div class="container clearfix margin-top-35 margin-bottom-35">
+                    <h2 class="no-margin text-white">Do great things with a productive admin dashboard template. <strong>See More</strong></h2>
+                </div>
+            </a>
+        </section>
+    </div>
+    <!-- end: SECTION 1 -->
+    <!-- start: SECTION 2 -->
+    <div id="section-2">
+        <section class="container-fluid container-fullw padding-bottom-30 bg-white no-border section-testimonials">
+            <div class="container">
+                <div class="row padding-bottom-40">
+                    <div class="col-md-12">
+                        <h2 class="center padding-top-30 padding-bottom-30">WHAT OUR CUSTOMERS SAY ABOUT US</h2>
+                        <div id="testimonial" ng-appear="animationBlock4 = true">
+                            <slick dots=true infinite=false speed=300 slides-to-show=1 slides-to-scroll=1>
+                                <div class="padding-left-50 padding-right-50">
+                                    <div class="testimonial-container center">
+                                        <img src="assets/images/team-1.jpg" class="img-circle testimonial-thumb" alt="" ng-class="{'animated flipInY': animationBlock4}" />
+                                        <p class="testimonial_author" ng-class="{'animated fadeInDown': animationBlock4}">
+                                            Robert Kelley - <span class="author_company text-red">Apple Inc</span>
+                                        </p>
+                                        <h4 class="testimonial-text" ng-class="{'animated fadeInUp': animationBlock4}">Lorem ipsum dolor sit amet, feugiat delicata liberavisse id cum, no quo maiorum intellegebat, liber regione eu sit. Mea cu case ludus integre, vide viderer eleifend ex mea. His ay diceret, cum et atqui placerat.</h4>
+                                    </div>
+                                </div>
+                                <div class="padding-left-50 padding-right-50">
+                                    <div class="testimonial-container center">
+                                        <img src="assets/images/team-2.jpg" class="img-circle testimonial-thumb" alt="" ng-class="{'animated flipInY': animationBlock4}" />
+                                        <p class="testimonial_author" ng-class="{'animated fadeInDown': animationBlock4}">
+                                            William Greeson - <span class="author_company text-red">Microsoft Corporation</span>
+                                        </p>
+                                        <h4 class="testimonial-text" ng-class="{'animated fadeInUp': animationBlock4}">Etiam interdum elementum elit interdum vulputate. Vivamus tristique, dolor ut sodales pulvinar, diam metus facilisis dui, vel pretium ex elit non dui.</h4>
+                                    </div>
+                                </div>
+                                <div class="padding-left-50 padding-right-50">
+                                    <div class="testimonial-container center">
+                                        <img src="assets/images/team-3.jpg" class="img-circle testimonial-thumb" alt="" ng-class="{'animated flipInY': animationBlock4}" />
+                                        <p class="testimonial_author" ng-class="{'animated fadeInDown': animationBlock4}">
+                                            Angela N. Seaton - <span class="author_company text-red">Amazon.com</span>
+                                        </p>
+                                        <h4 class="testimonial-text" ng-class="{'animated fadeInUp': animationBlock4}">Suspendisse mauris nunc, luctus suscipit volutpat sed, sodales non mi. Quisque pretium gravida urna maximus imperdiet. In blandit nisi ipsum.</h4>
+                                    </div>
+                                </div>
+                            </slick>
+                        </div>
+                    </div>
+                </div>
+                <hr class="margin-bottom-40" />
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="media padding-left-10 padding-right-10">
+                            <a href="#" class="pull-left">
+                                <img alt="image" class="img-circle testimonial-thumb" src="assets/images/team-6.jpg">
+                            </a>
+                            <div class="media-body ">
+                                <strong>Todd S. Smith</strong> - <strong class="text-red">Amazon.com</strong>
+                                <br>
+                                <small class="text-light">Today 4:55 PM</small>
+                                <div class="well padding-15 margin-top-15">
+                                    In placerat feugiat odio a ullamcorper. Aliquam vel justo vel nisl sollicitudin bibendum. Donec a vehicula risus, a pellentesque metus.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="media padding-left-10 padding-right-10">
+                            <a href="#" class="pull-left">
+                                <img alt="image" class="img-circle testimonial-thumb" src="assets/images/team-7.jpg">
+                            </a>
+                            <div class="media-body ">
+                                <strong>Leslie M. Day</strong> - <strong class="text-red">Apple Inc</strong>
+                                <br>
+                                <small class="text-light">Today 10:28 AM</small>
+                                <div class="well padding-15 margin-top-15">
+                                    Sed feugiat iaculis dignissim. Nam sed sem a nisl porttitor fermentum nec et ante. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="media padding-left-10 padding-right-10">
+                            <a href="#" class="pull-left">
+                                <img alt="image" class="img-circle testimonial-thumb" src="assets/images/team-10.jpg">
+                            </a>
+                            <div class="media-body ">
+                                <strong>Francisco S. Harding</strong> - <strong class="text-red">Apple Inc</strong>
+                                <br>
+                                <small class="text-light">Yesterday 3:52 PM</small>
+                                <div class="well padding-15 margin-top-15">
+                                    Suspendisse vel felis lorem. Phasellus interdum, est ut fringilla tristique, purus arcu congue magna, sit amet ornare neque purus sed nisl.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="media padding-left-10 padding-right-10">
+                            <a href="#" class="pull-left">
+                                <img alt="image" class="img-circle testimonial-thumb" src="assets/images/team-11.jpg">
+                            </a>
+                            <div class="media-body ">
+                                <strong>Manuel Barnhardt</strong> - <strong class="text-red">Microsoft Corporation</strong>
+                                <br>
+                                <small class="text-light">Yesterday 6:11 PM</small>
+                                <div class="well padding-15 margin-top-15">
+                                    Curabitur facilisis pretium cursus. Nulla aliquam mauris ac tortor condimentum, eu tempor ante efficitur. Nunc vestibulum nibh quis dolor scelerisque dapibus eget a est.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="container-fluid container-fullw padding-bottom-30 bg-black">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3 col-sm-6">
+                        <div class="padding-40 text-center" ng-appear="countTo1 = 8522">
+                            <i class="fa fa-code fa-4x text-red"></i>
+                            <span class="block counter" count-to="{{countTo1}}" value="0" duration="1" filter="number">8522</span>
+                            <hr class="white-line" />
+                            <p class="block text-light">
+                                LINES OF CODE
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="padding-40 text-center" ng-appear="countTo2 = 532">
+                            <i class="fa fa-folder-open fa-4x text-red"></i>
+                            <span class="block counter" count-to="{{countTo2}}" value="0" duration="1" filter="number">532</span>
+                            <hr class="white-line" />
+                            <p class="block text-light">
+                                ANNUAL PROJECTS
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="padding-40 text-center" ng-appear="countTo3 = 118">
+                            <i class="fa fa-line-chart fa-4x text-red"></i>
+                            <div class="block">
+                                <span class="counter" count-to="{{countTo3}}" value="0" duration="1" filter="number">118</span>
+                                <span class="counter-symbol">%</span>
+                            </div>
+                            <hr class="white-line" />
+                            <p class="block text-light">
+                                AVERAGE PROFIT MARKUP
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="padding-40 text-center" ng-appear="countTo4 = 4832">
+                            <i class="fa fa-child fa-4x text-red"></i>
+                            <span class="block counter" count-to="{{countTo4}}" value="0" duration="1" filter="number">4832</span>
+                            <hr class="white-line" />
+                            <p class="block text-light">
+                                SATISFIED CUSTOMERS
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="container-fluid container-fullw padding-bottom-30 bg-white">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-4 text-center">
+                        <img class="img-responsive inline margin-top-40" src="assets/images/iphone.png" ng-appear="animationBlock5 = true" ng-class="{'animated fadeInLeft': animationBlock5}">
+                    </div>
+                    <div class="col-sm-8">
+                        <h2 class="margin-top-30">Ultra-Responsive Design</h2>
+                        <p>
+                            Lid est laborum dolo rumes fugats untras. Etha rums ser quidem rerum facilis dolores nemis onis fugats vitaes nemo minima rerums unsers sadips amets.
+                        </p>
+                        <p>
+                            Ut enim ad minim veniam, quis nostrud Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci amets uns.
+                        </p>
+                        <p>
+                            Etharums ser quidem rerum facilis dolores nemis omnis fugats vitaes nemo minima rerums unsers sadips ameet quasi architecto beatae vitae dicta sunt explicabo.
+                        </p>
+                        <button type="button" class="btn btn-red btn-wide btn-scroll btn-scroll-top fa-arrow-right">
+                            <span>Learn more...</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <!-- end: SECTION 2 -->
+    <!-- start: SECTION 3 -->
+    <div id="section-3">
+        <section class="container-fluid container-fullw padding-bottom-30">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2 class="text-center">Team Members</h2>
+                        <hr />
+                        <p class="text-center">
+                            Nulla consequat massa quis enim. <strong>Donec pede justo</strong> fringilla vel, aliquet nec, vulputate eget, arcu.
+                            <br>
+                            In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.
+                        </p>
+                        <div class="row">
+                            <div>
+                                <ul class="team-list list-unstyled">
+                                    <li class="col-xs-6 col-md-3">
+                                        <div>
+                                            <div class="thumb icons-effect margin-bottom-15">
+                                                <img alt="" src="assets/images/team-4.jpg" class="img-responsive img-rounded">
+                                                <div class="mask img-rounded">
+                                                    <div class="icons-wrapper">
+                                                        <div class="icons">
+                                                            <a class="icon" href="#">
+                                                                <span class="fa-stack fa-2x"> <i class="fa fa-circle fa-stack-2x text-red"></i> <i class="fa fa-facebook fa-stack-1x fa-inverse"></i> </span>
+                                                            </a>
+                                                            <a class="icon" href="#">
+                                                                <span class="fa-stack fa-2x"> <i class="fa fa-circle fa-stack-2x text-red"></i> <i class="fa fa-google-plus fa-stack-1x fa-inverse"></i> </span>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <h3>Micheal Hanson</h3>
+                                            <div class="text-small margin-bottom-5">
+                                                Junior Developer
+                                            </div>
+                                            <div class="team-member-description">
+                                                <p class="text-dark">
+                                                    Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. <strong>Lorem ipsum dolor</strong> sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="col-xs-6 col-md-3">
+                                        <div>
+                                            <div class="thumb icons-effect margin-bottom-15">
+                                                <img alt="" src="assets/images/team-5.jpg" class="img-responsive img-rounded">
+                                                <div class="mask img-rounded">
+                                                    <div class="icons-wrapper">
+                                                        <div class="icons">
+                                                            <a class="icon" href="#">
+                                                                <span class="fa-stack fa-2x"> <i class="fa fa-circle fa-stack-2x text-red"></i> <i class="fa fa-twitter fa-stack-1x fa-inverse"></i> </span>
+                                                            </a>
+                                                            <a class="icon" href="#">
+                                                                <span class="fa-stack fa-2x"> <i class="fa fa-circle fa-stack-2x text-red"></i> <i class="fa fa-facebook fa-stack-1x fa-inverse"></i> </span>
+                                                            </a>
+                                                            <a class="icon" href="#">
+                                                                <span class="fa-stack fa-2x"> <i class="fa fa-circle fa-stack-2x text-red"></i> <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i> </span>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <h3>Caroline Garrett</h3>
+                                            <div class="text-small margin-bottom-5">
+                                                Web Editor
+                                            </div>
+                                            <div class="team-member-description">
+                                                <p class="text-dark">
+                                                    Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. <strong>Lorem ipsum dolor</strong> sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="col-xs-6 col-md-3">
+                                        <div>
+                                            <div class="thumb icons-effect margin-bottom-15">
+                                                <img alt="" src="assets/images/team-6.jpg" class="img-responsive img-rounded">
+                                                <div class="mask img-rounded">
+                                                    <div class="icons-wrapper">
+                                                        <div class="icons">
+                                                            <a class="icon" href="#">
+                                                                <span class="fa-stack fa-2x"> <i class="fa fa-circle fa-stack-2x text-red"></i> <i class="fa fa-facebook fa-stack-1x fa-inverse"></i> </span>
+                                                            </a>
+                                                            <a class="icon" href="#">
+                                                                <span class="fa-stack fa-2x"> <i class="fa fa-circle fa-stack-2x text-red"></i> <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i> </span>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <h3>Wilbert Thomas</h3>
+                                            <div class="text-small margin-bottom-5">
+                                                UI Designer
+                                            </div>
+                                            <div class="team-member-description">
+                                                <p class="text-dark">
+                                                    Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. <strong>Lorem ipsum dolor</strong> sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="col-xs-6 col-md-3">
+                                        <div>
+                                            <div class="thumb icons-effect margin-bottom-15">
+                                                <img alt="" src="assets/images/team-7.jpg" class="img-responsive img-rounded">
+                                                <div class="mask img-rounded">
+                                                    <div class="icons-wrapper">
+                                                        <div class="icons">
+                                                            <a class="icon" href="#">
+                                                                <span class="fa-stack fa-2x"> <i class="fa fa-circle fa-stack-2x text-red"></i> <i class="fa fa-twitter fa-stack-1x fa-inverse"></i> </span>
+                                                            </a>
+                                                            <a class="icon" href="#">
+                                                                <span class="fa-stack fa-2x"> <i class="fa fa-circle fa-stack-2x text-red"></i> <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i> </span>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <h3>Kim Logan</h3>
+                                            <div class="text-small margin-bottom-5">
+                                                Project Account Manager
+                                            </div>
+                                            <div class="team-member-description">
+                                                <p class="text-dark">
+                                                    Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. <strong>Lorem ipsum dolor</strong> sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <!-- end: SECTION 3 -->
+    <!-- start: SECTION 4 -->
+    <div id="section-4">
+        <section class="container-fluid container-fullw padding-bottom-30 bg-white">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2 class="text-center">Pricing</h2>
+                        <hr />
+                        <p class="text-center">
+                            Nulla consequat massa quis enim. <strong>Donec pede justo</strong> fringilla vel, aliquet nec, vulputate eget, arcu.
+                            <br>
+                            In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.
+                        </p>
+                        <div class="pricing-table pricing-green">
+                            <div class="col-lg-3 col-md-3 col-xs-6">
+                                <ul class="plan plan1">
+                                    <li class="plan-name">
+                                        Basic
+                                    </li>
+                                    <li class="plan-price">
+                                        <h3> $19 <span class="price-cents">99</span><span class="price-month">/month</span></h3>
+                                    </li>
+                                    <li>
+                                        <strong>5GB</strong> Storage
+                                    </li>
+                                    <li>
+                                        <strong>1GB</strong> RAM
+                                    </li>
+                                    <li>
+                                        <strong>400GB</strong> Bandwidth
+                                    </li>
+                                    <li>
+                                        <strong>10</strong> Email Address
+                                    </li>
+                                    <li>
+                                        <strong>Forum</strong> Support
+                                    </li>
+                                    <li class="plan-action">
+                                        <a href="#" class="btn btn-red btn-lg">
+                                            Signup
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-xs-6">
+                                <ul class="plan plan2 featured">
+                                    <li class="plan-name">
+                                        Standard
+                                    </li>
+                                    <li class="plan-price">
+                                        <h3> $29 <span class="price-cents">99</span><span class="price-month">/month</span></h3>
+                                    </li>
+                                    <li>
+                                        <strong>5GB</strong> Storage
+                                    </li>
+                                    <li>
+                                        <strong>1GB</strong> RAM
+                                    </li>
+                                    <li>
+                                        <strong>400GB</strong> Bandwidth
+                                    </li>
+                                    <li>
+                                        <strong>10</strong> Email Address
+                                    </li>
+                                    <li>
+                                        <strong>Forum</strong> Support
+                                    </li>
+                                    <li class="plan-action">
+                                        <a href="#" class="btn btn-red btn-lg">
+                                            Signup
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-xs-6">
+                                <ul class="plan plan3">
+                                    <li class="plan-name">
+                                        Advanced
+                                    </li>
+                                    <li class="plan-price">
+                                        <h3> $49 <span class="price-cents">99</span><span class="price-month">/month</span></h3>
+                                    </li>
+                                    <li>
+                                        <strong>50GB</strong> Storage
+                                    </li>
+                                    <li>
+                                        <strong>8GB</strong> RAM
+                                    </li>
+                                    <li>
+                                        <strong>1024GB</strong> Bandwidth
+                                    </li>
+                                    <li>
+                                        <strong>Unlimited</strong> Email Address
+                                    </li>
+                                    <li>
+                                        <strong>Forum</strong> Support
+                                    </li>
+                                    <li class="plan-action">
+                                        <a href="#" class="btn btn-red btn-lg">
+                                            Signup
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-xs-6">
+                                <ul class="plan plan4">
+                                    <li class="plan-name">
+                                        Mighty
+                                    </li>
+                                    <li class="plan-price">
+                                        <h3> $99 <span class="price-cents">99</span><span class="price-month">/month</span></h3>
+                                    </li>
+                                    <li>
+                                        <strong>50GB</strong> Storage
+                                    </li>
+                                    <li>
+                                        <strong>8GB</strong> RAM
+                                    </li>
+                                    <li>
+                                        <strong>1024GB</strong> Bandwidth
+                                    </li>
+                                    <li>
+                                        <strong>Unlimited</strong> Email Address
+                                    </li>
+                                    <li>
+                                        <strong>Forum</strong> Support
+                                    </li>
+                                    <li class="plan-action">
+                                        <a href="#" class="btn btn-red btn-lg">
+                                            Signup
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <!-- end: SECTION 4 -->
+    <!-- start: SECTION 5 -->
+    <div id="section-5">
+        <section class="container-fluid container-fullw padding-bottom-30 section-contact">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2 class="text-center">Contact Us</h2>
+                        <p class="center margin-bottom-30">
+                            Nulla consequat massa quis enim. <strong>Donec pede justo</strong> fringilla vel, aliquet nec, vulputate eget, arcu.
+                            <br>
+                            In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3 col-lg-offset-3">
+                        <address>
+                            <h4 class="margin-bottom-5 text-red">Main Office:</h4>
+                            1234 Street Name
+                            <br>
+                            City Name, United States
+                            <br>
+                            <abbr title="Phone">P:</abbr> (123) 456-7890
+                        </address>
+                    </div>
+                    <div class="col-lg-4">
+                        <h4 class="margin-bottom-5 text-red">Get in touch</h4>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eget leo at velit imperdiet varius. In eu ipsum vitae velit congue iaculis vitae at risus.
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <a href="mailto:test@email.com" class="btn btn-red margin-top-30">
+                            Subscribe to Our Newsletter
+                        </a>
+                        <p class="margin-top-10">
+                            Or follow us on your favorite social media sites
+                        </p>
+                        <div class="social-icons">
+                            <ul>
+                                <li class="social-twitter" uib-tooltip="Twitter" tooltip-placement="top">
+                                    <a target="_blank" href="#">
+                                        Twitter
+                                    </a>
+                                </li>
+                                <li class="social-linkedin" uib-tooltip="Linkedin" tooltip-placement="top">
+                                    <a target="_blank" href="#">
+                                        Linkedin
+                                    </a>
+                                </li>
+                                <li class="social-facebook" uib-tooltip="Facebook" tooltip-placement="top">
+                                    <a target="_blank" href="#">
+                                        Facebook
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <p class="margin-top-20">
+                            &copy; {{app.year}} <span class="text-bold text-uppercase">{{ app.author }}</span>. <span translate="footer.copyright.MESSAGE">All rights reserved</span>
+                            <br>
+                            Curabitur eget leo at velit imperdiet varius. In eu ipsum vitae velit congue iaculis vitae at risus.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <!-- end: SECTION 5 -->
+</div>
+<!-- end: LANDING PAGE -->

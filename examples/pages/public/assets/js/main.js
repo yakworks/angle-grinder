@@ -1,6 +1,6 @@
 /* ============================================================
  * File: main.js
- * Main Controller to set global scope variables. 
+ * Main Controller to set global scope variables.
  * ============================================================ */
 
 angular.module('app')
@@ -39,10 +39,10 @@ angular.module('app')
 
 angular.module('app')
     /*
-        Use this directive together with ng-include to include a 
+        Use this directive together with ng-include to include a
         template file by replacing the placeholder element
     */
-    
+
     .directive('includeReplace', function() {
         return {
             require: 'ngInclude',
