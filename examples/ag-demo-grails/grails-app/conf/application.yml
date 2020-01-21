@@ -73,6 +73,9 @@ grails:
                 scriptlets: html
                 taglib: none
                 staticparts: none
+
+    resources:
+        pattern: /**
 endpoints:
     jmx:
         unique-names: true
