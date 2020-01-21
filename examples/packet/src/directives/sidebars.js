@@ -119,7 +119,7 @@ function ($window, $rootScope, $timeout, mq) {
                 if (_this.next().is('ul') && _this.parent().toggleClass('open')) {
 
                     _this.next().slideToggle(200, function () {
-                        //$win.trigger("resize");
+                        $win.trigger("resize");
                     });
                     e.stopPropagation();
                     e.preventDefault();

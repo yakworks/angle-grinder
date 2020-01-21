@@ -6,17 +6,23 @@ const app = angular.module('app')
  */
 app.config(function ($stateProvider, $urlRouterProvider) {
 
-  // APPLICATION ROUTES
-  // -----------------------------------
-  // For any unmatched url, redirect to /app/dashboard
-  $urlRouterProvider.otherwise("/app/ui/elements");
-  //
-  // Set up the states
+  //$urlRouterProvider.otherwise("/app/ui/elements");
+  $urlRouterProvider.otherwise("/app/dashboard");
+
   $stateProvider.state('app', {
     url: "/app",
     template: require("./app.html"),
     //resolve: loadSequence('chartjs', 'chart.js', 'chatCtrl'),
     abstract: true
+  })
+  .state('app.dashboard', {
+    url: "/dashboard",
+    template: require("./dashboards/dashyak.html"),
+    //resolve: loadSequence('d3', 'ui.knob', 'countTo', 'dashboardCtrl'),
+    title: 'Dashboard',
+    ncyBreadcrumb: {
+      label: 'Dashboard'
+    }
   })
   .state('app.ui', {
     url: '/ui',

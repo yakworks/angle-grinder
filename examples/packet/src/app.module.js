@@ -5,7 +5,9 @@ import 'angular-ui-router'
 import ngAnimate from 'angular-animate'
 import ngLadda from 'angular-ladda'
 import angular_translate from 'angular-translate'
+import 'angular-translate-loader-static-files'
 import angular_loading_bar from 'angular-loading-bar'
+import ngSanitize from 'angular-sanitize'
 import 'angular-breadcrumb' //'ncy-angular-breadcrumb'
 import vButton from 'v-button'
 import fullscreen from './utils/fullscreen'
@@ -23,7 +25,8 @@ export default angular.module("app", [
   ngLadda,
   vButton,
   truncate_filters,
-  angular_translate
+  angular_translate,
+  ngSanitize
 ]).name
 
 // export default angular.module("app", [
