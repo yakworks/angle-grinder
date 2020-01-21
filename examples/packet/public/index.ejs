@@ -54,7 +54,7 @@
     <% for (var style in htmlWebpackPlugin.files.css) { %>
     <link rel="stylesheet" href="<%= htmlWebpackPlugin.files.css[style] %>">
     <% } %>
-    <link rel="stylesheet" href="assets/css/plugins.css">
+    <!-- <link rel="stylesheet" href="assets/css/plugins.css"> -->
     <!-- Packet Theme -->
     <link rel="stylesheet" data-ng-href="assets/css/themes/{{ app.layout.theme }}.css" />
     <!-- Favicon -->
@@ -74,6 +74,9 @@
     <script src="../../bower_components/sweetalert/dist/sweetalert.min.js"></script>
     <script src="../../bower_components/spin.js/spin.js"></script>
     <script src="../../bower_components/ladda/dist/ladda.min.js"></script>
+    <% for (var jsfile in htmlWebpackPlugin.files.js) { %>
+    <script src="<%= htmlWebpackPlugin.files.js[jsfile]%>"></script>
+    <% } %>
     <!-- <script src="../../bower_components/slick-carousel/slick/slick.min.js"></script> -->
     <!-- Angular -->
     <!-- <script src="../../bower_components/angular/angular.min.js"></script>

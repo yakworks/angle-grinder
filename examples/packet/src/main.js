@@ -1,6 +1,8 @@
 console.log("MAIN.JS kicking off")
 //CSS and Sass
-import './styles/plugins.scss'
+//import './assets/vendor.js'
+import './assets/styles.scss'
+import './assets/plugins.scss'
 
 //<!-- Packet Scripts -->
 import "./app"
