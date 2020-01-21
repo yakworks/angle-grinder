@@ -1,0 +1,40 @@
+<!-- start: BREADCRUMB -->
+<div class="breadcrumb-wrapper">
+    <h4 class="mainTitle no-margin" translate="sidebar.nav.element.LINEARICONS">LINEAR ICONS</h4>
+
+    <div ncy-breadcrumb class="pull-right"></div>
+</div>
+<!-- end: BREADCRUMB -->
+<!-- start: PAGE TITLE -->
+<section id="page-title" class="page-title-center">
+    <div class="row">
+        <div class="col-sm-8 col-sm-offset-2">
+            <span class="mainDescription">Themify Icons is a complete set of icons for use in web design and apps, consisting of 320+ pixel-perfect, hand-crafted icons that draw inspiration from Apple iOS 7</span>
+            <input ng-model="search" class="form-control text-center margin-top-15" type="text" placeholder="Search {{icons.name}} icons...">
+        </div>
+    </div>
+</section>
+<!-- end: PAGE TITLE -->
+<!-- start: THEMIFY ICONS -->
+<!-- /// controller:  'IconsCtrl' -  localtion: assets/js/controllers/iconsCtrl.js /// -->
+<div ng-controller="IconsCtrl">
+    <div ng-repeat="icons in icons | filter: { type: 'themify' }">
+        <div class="container-fluid container-fullw" ng-repeat="sections in icons.sections" ng-if="(sections.icons | filter: search).length">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-white">
+                        <div class="panel-body">
+                            <h5 class="over-title margin-bottom-15">{{sections.title}}</h5>
+                            <div class="row the-icons">
+                                <div class="fa-hover col-md-3 col-sm-4" ng-repeat="item in sections.icons | filter: search">
+                                    <i class="{{icons.prefix}} {{item}}"></i> {{item}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end: THEMIFY ICONS -->

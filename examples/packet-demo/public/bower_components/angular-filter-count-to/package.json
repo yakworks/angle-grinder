@@ -1,0 +1,17 @@
+{
+  "name": "angular-filter-count-to",
+  "version": "0.0.9",
+  "description": "AngularJS directive to animate counting to a number",
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-uglify": "~0.2.2"
+  },
+  "homepage": "http://pfitzpaddy.github.io/angular-filter-count-to/",
+  "repository": {
+      "type": "git",
+      "url": "https://github.com/pfitzpaddy/angular-filter-count-to.git"
+  },
+  "author": "Patrick Fitzgerald",
+  "license": "MIT",
+  "readmeFilename": "README.md"
+}

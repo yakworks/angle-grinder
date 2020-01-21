@@ -1,0 +1,252 @@
+{
+    "flagstyle": "flag-icon-it",
+    "dashboard": {
+        "WELCOME": "Benvenuto in {{appName}}"
+    },
+    "search": {
+        "PLACEHOLDER": "Cerca..."
+    },
+    "topbar": {
+        "messages": {
+            "MAIN": "Messaggi",
+            "HEADER": "Messaggi non letti",
+            "SEEALL": "Leggi tutti"
+        },
+
+        "activities": {
+            "MAIN": "Attività",
+            "HEADER": "Ci sono nuove notifiche",
+            "SEEALL": "Leggi tutte"
+        },
+        "user": {
+            "PROFILE": "Il mio Profilo",
+            "CALENDAR": "Il mio Calendario",
+            "MESSAGES": "I miei Messaggi",
+            "LOCKSCREEN": "Blocca Schermata",
+            "LOGOUT": "Esci"
+        }
+    },
+    "offsidebar": {
+        "chat": {
+            "ONLINE": "On-Line",
+            "OFFLINE": "Off-Line",
+            "BACK": "Indietro",
+            "SEND": "Invia",
+            "PLACEHOLDER": "Messaggio"
+        },
+        "favorites": {
+            "MAIN": "Preferiti"
+        },
+        "settings": {
+            "MAIN": "Impostazioni Generali",
+            "NOTIFICATIONS": "Abilita Notifiche",
+            "SHOWEMAIL": "Mostra la tua E-mail",
+            "SHOWUSERS": "Mostra Utenti Offline",
+            "EMAILALERT": "Abilita Avvisi E-mail",
+            "SMSALERT": "Abilita Avvisi SMS",
+            "SAVE": "Salva Modifiche"
+        }
+    },
+    "sidebar": {
+        "heading": {
+            "NAVIGATION": "Navigazione Principale",
+            "FEATURES": "Funzionalità Base",
+            "DOCUMENTATION": "Documentazione"
+        },
+        "nav": {
+            "dashboard": {
+                "MAIN": "Dashboard"
+            },
+            "pagelayouts": {
+                "MAIN": "Layout di Pagina",
+                "FIXEDHEADER": "Fixed Header",
+                "FIXEDSIDEBAR": "Fixed Sidebar",
+                "FIXEDHEADERSIDEBAR": "Fixed Header &amp; Sidebar",
+                "FIXEDFOOTER": "Fixed Footer",
+                "BOXEDPAGE": "Boxed Page"
+            },
+            "layouts": {
+                "MAIN": "Layouts"
+            },
+            "components": {
+                "MAIN": "Componenti"
+            },
+            "element": {
+                "MAIN": "Interfaccia Utente",
+                "ELEMENTS": "Elementi",
+                "BUTTONS": "Bottoni",
+                "LINKS": "Effetti sui Link",
+                "FONTAWESOME": "Icone Font Awesome",
+                "LINEARICONS": "Icone Lineari",
+                "LETTERICONS": "Letter Icons",
+                "MODALS": "Finestre Modali",
+                "TOGGLE": "Toggle",
+                "TABS": "Tabs e Accordions",
+                "PANELS": "Riquadri",
+                "NOTIFICATIONS": "Notifiche",
+                "SLIDERS": "Cursori di Scorrimento",
+                "KNOB": "Knob component",
+                "TREEVIEW": "Viste ad Albero",
+                "MEDIA": "Media",
+                "NESTABLE": "Liste Ordinabili",
+                "TYPOGRAPHY": "Stili Tipografici"
+            },
+            "tables": {
+                "MAIN": "Tabelle",
+                "BASIC": "Tabelle Basiche",
+                "RESPONSIVE": "Tabelle Adattabili",
+                "DYNAMIC": "Tabelle Dinamiche",
+                "DATA": "ngTable"
+            },
+            "forms": {
+                "MAIN": "Form e Moduli",
+                "ELEMENTS": "Elementi del Form",
+                "PICKERS": "Pickers",
+                "XEDITABLE": "Elementi Editabili",
+                "TEXTEDITOR": "Editor di Testi",
+                "WIZARD": "Form a Step Successivi",
+                "VALIDATION": "Validazione dei Form",
+                "CROPPING": "Ritaglio Immagini",
+                "UPLOAD": "Upload Multiplo di File"
+            },
+            "login": {
+                "MAIN": "Login",
+                "LOGIN": "Modulo di Login",
+                "REGISTRATION": "Modulo di Registrazione",
+                "FORGOT": "Modulo di Recupero Password",
+                "LOCKSCREEN": "Blocco Schermata"
+            },
+            "pages": {
+                "MAIN": "Pagine",
+                "USERPROFILE": "Profilo Utente",
+                "INVOICE": "Fattura",
+                "TIMELINE": "Timeline",
+                "CALENDAR": "Calendario",
+                "MESSAGES": "Messaggistica",
+                "BLANKPAGE": "Pagina Base"
+            },
+            "utilities": {
+                "MAIN": "Utilità",
+                "SEARCHRESULT": "Risultati di Ricerca",
+                "ERROR404": "Errore 404",
+                "ERROR500": "Errore 500",
+                "PRICING": "Tabelle dei Prezzi"
+            },
+            "3level": {
+                "MAIN": "Menù a 3 Livelli",
+                "Item1": {
+                    "MAIN": "Elemento 1",
+                    "LINK1": "Link di Esempio 1",
+                    "LINK2": "Link di Esempio 2",
+                    "LINK3": "Link di Esempio 3"
+                },
+                "Item2": {
+                    "MAIN": "Elemento 2",
+                    "LINK1": "Link di Esempio 1",
+                    "LINK2": "Link di Esempio 2",
+                    "LINK3": "Link di Esempio 3"
+                },
+                "Item3": {
+                    "MAIN": "Elemento 3",
+                    "LINK1": "Link di Esempio 1",
+                    "LINK2": "Link di Esempio 2",
+                    "LINK3": "Link di Esempio 3"
+                }
+            },
+            "4level": {
+                "MAIN": "Menù a 4 Livelli",
+                "Item1": {
+                    "MAIN": "Elemento 1",
+                    "link1": {
+                        "MAIN": "Link di Esempio 1",
+                        "LINK1": "Link 1",
+                        "LINK2": "Link 2",
+                        "LINK3": "Link 3"
+                    },
+                    "link2": {
+                        "MAIN": "Link di Esempio 2",
+                        "LINK1": "Link 1",
+                        "LINK2": "Link 2",
+                        "LINK3": "Link 3"
+                    },
+                    "link3": {
+                        "MAIN": "Link di Esempio 3",
+                        "LINK1": "Link 1",
+                        "LINK2": "Link 2",
+                        "LINK3": "Link 3"
+                    }
+                },
+                "Item2": {
+                    "MAIN": "Elemento 2",
+                    "link1": {
+                        "MAIN": "Link di Esempio 1",
+                        "LINK1": "Link 1",
+                        "LINK2": "Link 2",
+                        "LINK3": "Link 3"
+                    },
+                    "link2": {
+                        "MAIN": "Link di Esempio 2",
+                        "LINK1": "Link 1",
+                        "LINK2": "Link 2",
+                        "LINK3": "Link 3"
+                    },
+                    "link3": {
+                        "MAIN": "Link di Esempio 3",
+                        "LINK1": "Link 1",
+                        "LINK2": "Link 2",
+                        "LINK3": "Link 3"
+                    }
+                },
+                "Item3": {
+                    "MAIN": "Elemento 3",
+                    "link1": {
+                        "MAIN": "Link di Esempio 1",
+                        "LINK1": "Link 1",
+                        "LINK2": "Link 2",
+                        "LINK3": "Link 3"
+                    },
+                    "link2": {
+                        "MAIN": "Link di Esempio 2",
+                        "LINK1": "Link 1",
+                        "LINK2": "Link 2",
+                        "LINK3": "Link 3"
+                    },
+                    "link3": {
+                        "MAIN": "Link di Esempio 3",
+                        "LINK1": "Link 1",
+                        "LINK2": "Link 2",
+                        "LINK3": "Link 3"
+                    }
+                }
+            },
+            "maps": {
+                "MAIN": "Mappe"
+            },
+            "charts": {
+                "MAIN": "Grafici"
+            },
+            "landing": {
+                "MAIN": "Landing Page"
+            },
+            "rtl": {
+                "MAIN": "RTL Version"
+            },
+            "ltr": {
+                "MAIN": "LTR Version"
+            }
+        }
+    },
+    "footer": {
+        "copyright": {
+            "MAIN": "Copyright",
+            "MESSAGE": "Tutti i diritti riservati"
+        }
+    },
+    "setting": {
+        "MAIN": "Seleziona Stile",
+        "FIXEDHEADER": "Testata fissa",
+        "FIXEDSIDEBAR": "Barra laterale fissa",
+        "CLOSEDSIDEBAR": "Barra laterale chiusa",
+        "FIXEDFOOTER": "Piè di pagina fisso"
+    }
+}

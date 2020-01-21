@@ -65,7 +65,7 @@ module.exports = function(env, argv) {
     },
     module: {
       rules: [
-        { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/},
+        { test: /\.js$/, loader: 'babel-loader', exclude: /(node_modules|bower_components)/},
         {
           test: /\.(scss|css|sass)$/,
           use: [
@@ -144,8 +144,11 @@ module.exports = function(env, argv) {
       //   }
       // }),
       new HtmlWebpackPlugin({
-        template: `${CONTENT_PUBLIC}/index.html`,
+        title: 'Custom template using lodash',
+        template: `${CONTENT_PUBLIC}/index.ejs`,
         //inject: 'body'
+        inject: false,
+        minify: false
       }),
       new CopyWebpackPlugin([{
         from: path.resolve(CONTENT_PUBLIC)
@@ -177,7 +180,7 @@ module.exports = function(env, argv) {
     )
   }
   cfg.devServer = {
-    compress: true, //gzips before serving so we can see file size
+    //compress: true, //gzips before serving so we can see file size
     port: 3000,
     // historyApiFallback: true,
     //inline: false, //default:true script will be inserted in your bundle to take care of live reloading

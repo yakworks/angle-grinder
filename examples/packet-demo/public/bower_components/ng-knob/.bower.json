@@ -1,0 +1,44 @@
+{
+  "name": "ng-knob",
+  "version": "0.1.3",
+  "authors": [
+    "RadMie <radoslaw.mietkiewicz@gmail.com>"
+  ],
+  "description": "Angular.js Knob directive",
+  "main": "dist/ng-knob.js",
+  "homepage": "https://radmie.github.io/ng-knob",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/RadMie/ng-knob.git"
+  },
+  "keywords": [
+    "angular",
+    "d3",
+    "control",
+    "ui",
+    "gauge",
+    "knob"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.4.x",
+    "d3": "^3.5.x"
+  },
+  "_release": "0.1.3",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.1.3",
+    "commit": "fa096d0cb8886ea55078d91e8a3a91e269f0e901"
+  },
+  "_source": "https://github.com/RadMie/ng-knob.git",
+  "_target": "^0.1.3",
+  "_originalSource": "ng-knob",
+  "_direct": true
+}

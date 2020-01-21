@@ -1,0 +1,233 @@
+<!-- start: BREADCRUMB -->
+<div class="breadcrumb-wrapper">
+    <h4 class="mainTitle no-margin" translate="sidebar.nav.charts.MAIN">Charts</h4>
+
+    <div ncy-breadcrumb class="pull-right"></div>
+</div>
+<!-- end: BREADCRUMB -->
+<!-- start: LINE CHART -->
+<div class="container-fluid container-fullw">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-white">
+                <div class="panel-body">
+                    <h5 class="over-title margin-bottom-15">Line <span class="text-bold">Chart</span></h5>
+                    <div class="row">
+                        <!-- /// controller:  'ChartCtrl1' -  localtion: assets/js/controllers/chartsCtrl.js /// -->
+                        <div ng-controller="ChartCtrl1">
+                            <div class="col-sm-6">
+                                <canvas class="chart chart-line" chart-data="data" chart-options="options" chart-labels="labels" chart-series="series" chart-colours="colors" chart-legend="true"></canvas>
+                            </div>
+                            <div class="col-sm-6">
+                                <p class="margin-bottom-20">
+                                    A line chart is a way of plotting data points on a line.
+                                    Often, it is used to show trend data, and the comparison of two data sets.
+                                </p>
+                                <p>
+                                    The line chart requires an array of labels for each of the data points. This is shown on the X axis. The data for line charts is broken up into an array of datasets. Each dataset has a colour for the fill, a colour for the line and colours for the points and strokes of the points. These colours are strings just like CSS. You can use RGBA, RGB, HEX or HSL notation.
+                                </p>
+                                <p>
+                                    The label key on each dataset is optional, and can be used when generating a scale for the chart.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end: LINE CHART -->
+<!-- start: BAR CHART -->
+<div class="container-fluid container-fullw">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-white">
+                <div class="panel-body">
+                    <h5 class="over-title margin-bottom-15">Bar <span class="text-bold">Chart</span></h5>
+                    <div class="row">
+                        <!-- /// controller:  'ChartCtrl2' -  localtion: assets/js/controllers/chartsCtrl.js /// -->
+                        <div ng-controller="ChartCtrl2">
+                            <div class="col-sm-6">
+                                <p class="margin-bottom-20">
+                                    A bar chart is a way of showing data as bars.
+                                    It is sometimes used to show trend data, and the comparison of multiple data sets side by side.
+                                </p>
+                                <p>
+                                    The bar chart has the a very similar data structure to the line chart, and has an array of datasets, each with colours and an array of data. Again, colours are in CSS format.
+                                    We have an array of labels too for display. In the example, we are showing the same data as the previous line chart example.
+                                </p>
+                                <p>
+                                    The label key on each dataset is optional, and can be used when generating a scale for the chart.
+                                </p>
+                            </div>
+                            <div class="col-sm-6">
+                                <canvas class="chart chart-bar" chart-data="data" chart-options="options" chart-labels="labels" chart-series="series" chart-colours="colors" chart-legend="true"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end: BAR CHART -->
+<!-- start: DOUGHNUT CHART -->
+<div class="container-fluid container-fullw">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-white">
+                <div class="panel-body">
+                    <h5 class="over-title margin-bottom-15">Doughnut <span class="text-bold">Chart</span></h5>
+                    <div class="row">
+                        <!-- /// controller:  'ChartCtrl3' -  localtion: assets/js/controllers/chartsCtrl.js /// -->
+                        <div ng-controller="ChartCtrl3">
+                            <div class="col-sm-6">
+                                <div class="text-center margin-bottom-15">
+                                	<canvas class="chart chart-doughnut" chart-data="data" chart-options="options" chart-labels="labels" chart-series="series" chart-colours="colors" chart-legend="true"></canvas>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <p>
+                                    Pie and doughnut charts are probably the most commonly used chart there are. They are divided into segments, the arc of each segment shows the proportional value of each piece of data.
+                                </p>
+                                <p>
+                                    They are excellent at showing the relational proportions between data.
+                                </p>
+                                <p>
+                                    Pie and doughnut charts are effectively the same class in Chart.js, but have one different default value - their
+                                    <code>
+                                        percentageInnerCutout
+                                    </code>
+                                    . This equates what percentage of the inner should be cut out. This defaults to
+                                    <code>
+                                        0
+                                    </code>
+                                    for pie charts, and
+                                    <code>
+                                        50
+                                    </code>
+                                    for doughnuts.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end: DOUGHNUT CHART -->
+<!-- start: PIE CHART -->
+<div class="container-fluid container-fullw">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-white">
+                <div class="panel-body">
+                    <h5 class="over-title margin-bottom-15">Pie <span class="text-bold">Chart</span></h5>
+                    <div class="row">
+                        <!-- /// controller:  'ChartCtrl4' -  localtion: assets/js/controllers/chartsCtrl.js /// -->
+                        <div ng-controller="ChartCtrl4">
+                            <div class="col-sm-6">
+                                <p>
+                                    Pie and doughnut charts are probably the most commonly used chart there are. They are divided into segments, the arc of each segment shows the proportional value of each piece of data.
+                                </p>
+                                <p>
+                                    They are excellent at showing the relational proportions between data.
+                                </p>
+                                <p>
+                                    Pie and doughnut charts are effectively the same class in Chart.js, but have one different default value - their
+                                    <code>
+                                        percentageInnerCutout
+                                    </code>
+                                    . This equates what percentage of the inner should be cut out. This defaults to
+                                    <code>
+                                        0
+                                    </code>
+                                    for pie charts, and
+                                    <code>
+                                        50
+                                    </code>
+                                    for doughnuts.
+                                </p>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="text-center margin-bottom-15">
+                                    <canvas class="chart chart-pie" chart-data="data" chart-options="options" chart-labels="labels" chart-series="series" chart-colours="colors" chart-legend="true"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end: PIE CHART -->
+<!-- start: POLAR AREA CHART -->
+<div class="container-fluid container-fullw">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-white">
+                <div class="panel-body">
+                    <h5 class="over-title margin-bottom-15">Polar Area <span class="text-bold">Chart</span></h5>
+                    <div class="row">
+                        <!-- /// controller:  'ChartCtrl5' -  localtion: assets/js/controllers/chartsCtrl.js /// -->
+                        <div ng-controller="ChartCtrl5">
+                            <div class="col-sm-6">
+                                <div class="text-center margin-bottom-15">
+                                    <canvas class="chart chart-polar-area" chart-data="data" chart-options="options" chart-labels="labels" chart-series="series" chart-colours="colors" chart-legend="true"></canvas>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <p>
+                                    Polar area charts are similar to pie charts, but each segment has the same angle - the radius of the segment differs depending on the value.
+                                </p>
+                                <p>
+                                    This type of chart is often useful when we want to show a comparison data similar to a pie chart, but also show a scale of values for context.
+                                </p>
+                                <p>
+                                    As you can see, for the chart data you pass in an array of objects, with a value and a colour. The value attribute should be a number, while the color attribute should be a string. Similar to CSS, for this string you can use HEX notation, RGB, RGBA or HSL.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end: POLAR AREA CHART -->
+<!-- start: RADAR CHART -->
+<div class="container-fluid container-fullw">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-white">
+                <div class="panel-body">
+                    <h5 class="over-title margin-bottom-15">Radar <span class="text-bold">Chart</span></h5>
+                    <div class="row">
+                        <!-- /// controller:  'ChartCtrl6' -  localtion: assets/js/controllers/chartsCtrl.js /// -->
+                        <div ng-controller="ChartCtrl6">
+                            <div class="col-sm-6">
+                                <p>
+                                    A radar chart is a way of showing multiple data points and the variation between them.
+                                </p>
+                                <p>
+                                    They are often useful for comparing the points of two or more different data sets.
+                                </p>
+                                <p>
+                                    For a radar chart, to provide context of what each point means, we include an array of strings that show around each point in the chart.
+                                    For the radar chart data, we have an array of datasets. Each of these is an object, with a fill colour, a stroke colour, a colour for the fill of each point, and a colour for the stroke of each point. We also have an array of data values.
+                                </p>
+                            </div>
+                            <div class="col-sm-6">
+                                <canvas class="chart chart-radar" chart-data="data" chart-options="options" chart-labels="labels" chart-series="series" chart-colours="colors" chart-legend="true"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end: RADAR CHART -->

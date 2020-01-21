@@ -1,0 +1,214 @@
+<!-- start: BREADCRUMB -->
+<div class="breadcrumb-wrapper">
+    <h4 class="mainTitle no-margin" translate="sidebar.nav.element.MODALS">MODALS</h4>
+
+    <div ncy-breadcrumb class="pull-right"></div>
+</div>
+<!-- end: BREADCRUMB -->
+<!-- start: UI BOOTSTRAP MODALS -->
+<div class="container-fluid container-fullw">
+    <!-- /// controller:  'ModalDemoCtrl' -  localtion: assets/js/controllers/bootstrapCtrl.js /// -->
+    <div ng-controller="ModalDemoCtrl">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-white">
+                    <div class="panel-body">
+                        <h5 class="over-title margin-bottom-15">UI Bootstrap <span class="text-bold">Modals</span></h5>
+                        <p>
+                            $modal is a service to quickly create AngularJS-powered modal windows. Creating custom modals is straightforward: create a partial view, its controller and reference them when using the service.
+                        </p>
+                        <script type="text/ng-template" id="myModalContent.html">
+                            <div class="modal-header">
+                                <h3 class="modal-title">I'm a modal!</h3>
+                            </div>
+                            <div class="modal-body">
+                                <ul>
+                                    <li ng-repeat="item in items">
+                                        <a ng-click="selected.item = item">{{ item }}</a>
+                                    </li>
+                                </ul>
+                                Selected: <b>{{ selected.item }}</b>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-primary" ng-click="ok()">OK</button>
+                                <button class="btn btn-primary btn-o" ng-click="cancel()">Cancel</button>
+                            </div>
+                        </script>
+                        <div class="row">
+                            <div class="col-lg-4 col-sm-6">
+                                <div class="panel panel-transparent">
+                                    <div class="panel-heading">
+                                        <div class="panel-title">
+                                            Default Modal
+                                        </div>
+                                    </div>
+                                    <div class="panel-body">
+                                        <p class="margin-bottom-30">
+                                            Toggle a modal by clicking the button below. It will slide down and fade in from the top of the page.
+                                        </p>
+                                        <button class="btn btn-primary btn-o pull-right" ng-click="open()">
+                                            Open Deafult Modal
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-sm-6">
+                                <div class="panel panel-transparent">
+                                    <div class="panel-heading">
+                                        <div class="panel-title">
+                                            Large Modal
+                                        </div>
+                                    </div>
+                                    <div class="panel-body">
+                                        <p class="margin-bottom-30">
+                                            Modals have a large optional size, available by setting option
+                                            <code>
+                                                size: 'lg'
+                                            </code>
+                                            in the method
+                                            <code>
+                                                open(options)
+                                            </code>
+                                        </p>
+                                        <button class="btn btn-primary btn-o pull-right" ng-click="open('lg')">
+                                            Open Large Modal
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-sm-6">
+                                <div class="panel panel-transparent">
+                                    <div class="panel-heading">
+                                        <div class="panel-title">
+                                            Small Modal
+                                        </div>
+                                    </div>
+                                    <div class="panel-body">
+                                        <p class="margin-bottom-30">
+                                            Modals have a small optional size, available by setting option
+                                            <code>
+                                                size: 'sm'
+                                            </code>
+                                            in the method
+                                            <code>
+                                                open(options)
+                                            </code>
+                                        </p>
+                                        <button class="btn btn-primary btn-o pull-right" ng-click="open('sm')">
+                                            Open Small Modal
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div ng-show="selected" class="margin-top-15 text-small">
+                            Selection from a modal: {{ selected }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end: UI BOOTSTRAP MODALS -->
+<!-- start: ASIDE -->
+<div class="container-fluid container-fullw">
+    <!-- /// controller:  'AsideCtrl' -  localtion: assets/js/controllers/asideCtrl.js /// -->
+    <div ng-controller="AsideCtrl">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-white">
+                    <div class="panel-body">
+                        <h5 class="over-title">Angular <span class="text-bold">Aside</span></h5>
+                        <p class="margin-bottom-30">
+                            Off canvas side menu to use with ui-bootstrap. Extends ui-bootstrap's $modal provider.
+                        </p>
+                        <script type="text/ng-template" id="asideContent.html">
+                            <div class="modal-header">
+                                <h3 class="modal-title">ngAside</h3>
+                            </div>
+                            <div class="modal-body">
+                                Look i'm in aside.
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-primary" ng-click="ok($event)">OK</button>
+                                <button class="btn btn-primary" ng-click="cancel($event)">Cancel</button>
+                            </div>
+                        </script>
+                        <div class="row">
+                            <div class="col-sm-6 col-lg-3">
+                                <div class="panel panel-white">
+                                    <div class="panel-heading">
+                                        <div class="panel-title">
+                                            Up Aside
+                                        </div>
+                                    </div>
+                                    <div class="panel-body">
+                                        <p class="margin-bottom-30">
+                                            This modal slide down from the top of the page.
+                                        </p>
+                                        <button type="button" class="btn btn-primary btn-block btn-scroll btn-scroll-top ti-arrow-up" ng-click="openAside('top')">
+                                            <span>Up</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-lg-3">
+                                <div class="panel panel-white">
+                                    <div class="panel-heading">
+                                        <div class="panel-title">
+                                            Left Aside
+                                        </div>
+                                    </div>
+                                    <div class="panel-body">
+                                        <p class="margin-bottom-30">
+                                            This modal slides from the left side of the page.
+                                        </p>
+                                        <button type="button" class="btn btn-primary btn-block btn-scroll btn-scroll-top ti-arrow-left" ng-click="openAside('left')">
+                                            <span>Left</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-lg-3">
+                                <div class="panel panel-white">
+                                    <div class="panel-heading">
+                                        <div class="panel-title">
+                                            Down Aside
+                                        </div>
+                                    </div>
+                                    <div class="panel-body">
+                                        <p class="margin-bottom-30">
+                                            This modal slide up from the bottom of the page.
+                                        </p>
+                                        <button type="button" class="btn btn-primary btn-block btn-scroll btn-scroll-top ti-arrow-down" ng-click="openAside('bottom')">
+                                            <span>Down</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-lg-3">
+                                <div class="panel panel-white">
+                                    <div class="panel-heading">
+                                        <div class="panel-title">
+                                            Right Aside
+                                        </div>
+                                    </div>
+                                    <div class="panel-body">
+                                        <p class="margin-bottom-30">
+                                            This modal slides from the right side of the page
+                                        </p>
+                                        <button type="button" class="btn btn-primary btn-block btn-scroll btn-scroll-top ti-arrow-right" ng-click="openAside('right')">
+                                            <span>Right</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end: ASIDE -->

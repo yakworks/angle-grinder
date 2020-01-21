@@ -1,0 +1,60 @@
+/* ---------------------------------------------------------------------- */
+/*  CKeditor
+/* ---------------------------------------------------------------------- */
+
+.cke_chrome {
+    @include box-shadow(none !important);
+    border: 1px solid $border-default !important;
+
+    .cke_top {
+        @include box-shadow(none !important);
+        background-image: none !important;
+        background-color: #FFFFFF !important;
+        border-bottom: 1px solid $border-default !important;
+    }
+
+    .cke_toolgroup {
+        @include box-shadow(none !important);
+        background-image: none !important;
+        border: 1px solid $border-default !important;
+        background: $white;
+
+        a.cke_button {
+            padding: 8px 10px;
+
+            span {
+                color: $text-color !important;
+            }
+
+            &:hover {
+                background-color: lighten($border-default, 10%) !important;
+                @include box-shadow(none !important);
+                background-image: none !important;
+            }
+        }
+    }
+
+    .cke_combo_button {
+        padding: 4px;
+        @include box-shadow(none !important);
+        background-image: none !important;
+        border: 1px solid $border-default !important;
+        background: $white;
+
+        span {
+            color: $text-color !important;
+        }
+
+        &:hover {
+            background-color: lighten($border-default, 10%) !important;
+            @include box-shadow(none !important);
+            background-image: none !important;
+        }
+    }
+
+    .cke_bottom {
+        @include box-shadow(none !important);
+        background-image: none !important;
+        background-color: #FFFFFF !important;
+    }
+}

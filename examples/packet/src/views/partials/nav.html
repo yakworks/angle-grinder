@@ -1,0 +1,106 @@
+<!-- start: MAIN NAVIGATION MENU -->
+<script type="text/ng-template" id="menuItemTree">
+  <a ui-sref="{{subItem.items ? '-' : subItem.sref}}">
+    <span class="title" > {{ subItem.title }} </span>
+    <i class="icon-arrow" ng-if="subItem.items"></i>
+  </a>
+  <ul class="sub-menu" ng-if="subItem.items">
+      <li ng-repeat="subItem in subItem.items" ng-include="'menuItemTree'">
+      </li>
+  </ul>
+</script>
+<ul class="main-navigation-menu">
+  <li ng-repeat="mitem in sideMenuItems" class="{{$state.includes(mitem.sref) ? 'active open' : ''}}">
+    <a ui-sref="{{mitem.items ? '-' : mitem.sref}}" href="{{mitem.items ? 'javascript:void(0)' : ''}}">
+      <div class="item-content">
+        <div class="item-media">
+          <i class="{{mitem.icon}}"></i>
+        </div>
+        <div class="item-inner">
+          <span class="title"> {{ mitem.title }} </span>
+          <i class="icon-arrow" ng-if="mitem.items"></i>
+        </div>
+      </div>
+    </a>
+    <ul class="sub-menu" ng-if="mitem.items">
+      <li ng-repeat="subItem in mitem.items" ng-include="'menuItemTree'" ui-sref-active="active"></li>
+    </ul>
+  </li>
+</ul>
+
+<div class="navbar-title">
+  <span >Main Navigation</span>
+</div>
+<ul class="main-navigation-menu">
+  <li>
+    <a href="javascript:void(0)">
+      <div class="item-content">
+        <div class="item-media">
+          <i class="fa fa-folder-open"></i>
+        </div>
+        <div class="item-inner">
+          <span class="title" > Menu Levels </span><i class="icon-arrow"></i>
+        </div>
+      </div>
+    </a>
+    <ul class="sub-menu">
+      <li>
+        <a href="javascript:;"> <span >Item 1</span> <i class="icon-arrow"></i>
+        </a>
+        <ul class="sub-menu">
+          <li>
+            <a href="javascript:;"> <span >Sample Link 1</span> <i
+                class="icon-arrow"></i> </a>
+            <ul class="sub-menu">
+              <li>
+                <a href="#" > Sample Link 1 </a>
+              </li>
+              <li>
+                <a href="#"> Sample Link 2 </a>
+              </li>
+              <li>
+                <a href="#"> Sample Link 3 </a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="javascript:;"> <span>Sample Link 2</span> <i
+                class="icon-arrow"></i> </a>
+            <ul class="sub-menu">
+              <li>
+                <a href="#"> Sample Link 1 </a>
+              </li>
+              <li>
+                <a href="#" > Sample Link 2 </a>
+              </li>
+              <li>
+                <a href="#"> Sample Link 3 </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+
+</ul>
+<!-- end: MAIN NAVIGATION MENU -->
+<!-- start: FEATURES -->
+<div class="navbar-title">
+  <span translate="sidebar.heading.FEATURES | translate">Core Features</span>
+</div>
+<ul class="folders">
+  <li>
+    <a ui-sref="landing.welcome">
+      <div class="item-content">
+        <div class="item-media">
+          <i class="fa fa-gift"></i>
+        </div>
+        <div class="item-inner">
+          <span class="title"> Landing Page </span>
+        </div>
+      </div>
+    </a>
+  </li>
+</ul>
+<!-- end: FEATURES -->

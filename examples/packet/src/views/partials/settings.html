@@ -1,0 +1,98 @@
+<!-- start: SETTINGS -->
+<button ct-toggle="toggle" target="settings" parent-active-class="active" class="btn btn-default">
+    <i class="fa fa-spin fa-gear"></i>
+</button>
+<div class="panel-heading ng-scope" translate="setting.MAIN">
+    Style Selector
+</div>
+<div class="panel-body ng-scope">
+    <!-- start: FIXED HEADER -->
+    <div class="setting-box clearfix">
+        <span class="setting-title pull-left" translate="setting.FIXEDHEADER"> Fixed header</span>
+        <span class="setting-switch pull-right"> <switch ng-model="app.layout.isNavbarFixed" class="green"></switch> </span>
+    </div>
+    <!-- end: FIXED HEADER -->
+    <!-- start: FIXED SIDEBAR -->
+    <div class="setting-box clearfix" ng-hide="app.layout.isBoxedPage">
+        <span class="setting-title pull-left" translate="setting.FIXEDSIDEBAR">Fixed sidebar</span>
+        <span class="setting-switch pull-right"> <switch ng-model="app.layout.isSidebarFixed" class="green"></switch> </span>
+    </div>
+    <!-- end: FIXED SIDEBAR -->
+    <!-- start: CLOSED SIDEBAR -->
+    <div class="setting-box clearfix">
+        <span class="setting-title pull-left" translate="setting.CLOSEDSIDEBAR">Closed sidebar</span>
+        <span class="setting-switch pull-right"> <switch ng-model="app.layout.isSidebarClosed" class="green"></switch> </span>
+    </div>
+    <!-- end: CLOSED SIDEBAR -->
+    <!-- start: FIXED FOOTER -->
+    <div class="setting-box clearfix">
+        <span class="setting-title pull-left" translate="setting.FIXEDFOOTER">Fixed footer</span>
+        <span class="setting-switch pull-right"> <switch ng-model="app.layout.isFooterFixed" class="green"></switch> </span>
+    </div>
+    <!-- end: FIXED FOOTER -->
+    <!-- start: THEME SWITCHER -->
+    <div class="colors-row setting-box">
+        <div class="color-theme lyt2-theme-1">
+            <div class="color-layout">
+                <label ng-click=" app.layout.theme='lyt2-theme-1'; ">
+                    <input type="radio" name="setting-theme" ng-model="app.layout.theme" value="lyt2-theme-1">
+                    <span class="fa fa-check-circle lyt-check text-extra-large"></span> <span class="split header"> <span class="color th-header"></span> <span class="color th-collapse"><i class="color-button"></i></span> </span> <span class="split"> <span class="color th-sidebar"><i class="element"></i></span> <span class="color th-body"></span> </span>
+                </label>
+            </div>
+        </div>
+        <div class="color-theme lyt2-theme-2">
+            <div class="color-layout">
+                <label ng-click=" app.layout.theme='lyt2-theme-2'; ">
+                    <input type="radio" name="setting-theme" ng-model="app.layout.theme" value="lyt2-theme-2">
+                    <span class="fa fa-check-circle lyt-check text-extra-large"></span> <span class="split header"> <span class="color th-header"></span> <span class="color th-collapse"><i class="color-button"></i></span> </span> <span class="split"> <span class="color th-sidebar"><i class="element"></i></span> <span class="color th-body"></span> </span>
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="colors-row setting-box">
+        <div class="color-theme lyt2-theme-3">
+            <div class="color-layout">
+                <label ng-click=" app.layout.theme='lyt2-theme-3'; ">
+                    <input type="radio" name="setting-theme" ng-model="app.layout.theme" value="lyt2-theme-3">
+                    <span class="fa fa-check-circle lyt-check text-extra-large"></span> <span class="split header"> <span class="color th-header"></span> <span class="color th-collapse"><i class="color-button"></i></span> </span> <span class="split"> <span class="color th-sidebar"><i class="element"></i></span> <span class="color th-body"></span> </span>
+                </label>
+            </div>
+        </div>
+        <div class="color-theme lyt2-theme-4">
+            <div class="color-layout">
+                <label ng-click=" app.layout.theme='lyt2-theme-4'; ">
+                    <input type="radio" name="setting-theme" ng-model="app.layout.theme" value="lyt2-theme-4">
+                    <span class="fa fa-check-circle lyt-check text-extra-large"></span> <span class="split header"> <span class="color th-header"></span> <span class="color th-collapse"><i class="color-button"></i></span> </span> <span class="split"> <span class="color th-sidebar"><i class="element"></i></span> <span class="color th-body"></span> </span>
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="colors-row setting-box">
+        <div class="color-theme lyt2-theme-5">
+            <div class="color-layout">
+                <label ng-click=" app.layout.theme='lyt2-theme-5'; ">
+                    <input type="radio" name="setting-theme" ng-model="app.layout.theme" value="lyt2-theme-5">
+                    <span class="fa fa-check-circle lyt-check text-extra-large"></span> <span class="split header"> <span class="color th-header"></span> <span class="color th-collapse"><i class="color-button"></i></span> </span> <span class="split"> <span class="color th-sidebar"><i class="element"></i></span> <span class="color th-body"></span> </span>
+                </label>
+            </div>
+        </div>
+        <div class="color-theme lyt2-theme-6">
+            <div class="color-layout">
+                <label ng-click=" app.layout.theme='lyt2-theme-6'; ">
+                    <input type="radio" name="setting-theme" ng-model="app.layout.theme" value="lyt2-theme-6">
+                    <span class="fa fa-check-circle lyt-check text-extra-large"></span> <span class="split header"> <span class="color th-header"></span> <span class="color th-collapse"><i class="color-button"></i></span> </span> <span class="split"> <span class="color th-sidebar"><i class="element"></i></span> <span class="color th-body"></span> </span>
+                </label>
+            </div>
+        </div>
+    </div>
+    <!-- end: THEME SWITCHER -->
+</div>
+<div class="panel-footer">
+    <button class="btn btn-primary ladda-button btn-squared btn-sm btn-o" ng-click="resetLayout()" ladda="loading_reset" data-style="slide-up" ng-init="!loading_reset" data-spinner-size="10" data-spinner-color="#999999">
+        Reset
+    </button>
+    <button class="btn btn-primary ladda-button pull-right btn-squared btn-sm btn-wide" ng-click="saveLayout()" ladda="loading_save" data-style="slide-up" ng-init="!loading_save" data-spinner-size="10">
+        Save
+    </button>
+</div>
+<!-- end: SETTINGS -->

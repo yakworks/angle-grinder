@@ -1,0 +1,252 @@
+{
+    "flagstyle": "flag-icon-de",
+    "dashboard": {
+        "WELCOME": "Willkommen in {{appName}}"
+    },
+    "search": {
+        "PLACEHOLDER": "Suche..."
+    },
+    "topbar": {
+        "messages": {
+            "MAIN": "Nachrichten",
+            "HEADER": "Ungelesene Nachrichten",
+            "SEEALL": "Alle anzeigen"
+        },
+
+        "activities": {
+            "MAIN": "Aktivitäten",
+            "HEADER": "Sie haben neue Benachrichtigungen",
+            "SEEALL": "Alle anzeigen"
+        },
+        "user": {
+            "PROFILE": "Mein Profil",
+            "CALENDAR": "Mein Kalender",
+            "MESSAGES": "Meine Nachrichten",
+            "LOCKSCREEN": "Displaysperre",
+            "LOGOUT": "Ausloggen"
+        }
+    },
+    "offsidebar": {
+        "chat": {
+            "ONLINE": "On-Line",
+            "OFFLINE": "Off-Line",
+            "BACK": "Zurück",
+            "SEND": "Senden",
+            "PLACEHOLDER": "Nachricht"
+        },
+        "favorites": {
+            "MAIN": "Favoriten"
+        },
+        "settings": {
+            "MAIN": "Allgemeine Einstellungen",
+            "NOTIFICATIONS": "Benachrichtigungen aktivieren",
+            "SHOWEMAIL": "Ihre E-Mail anzeigen",
+            "SHOWUSERS": "Offline Benutzer anzeigen",
+            "EMAILALERT": "E-mail Alerts",
+            "SMSALERT": "SMS Alerts",
+            "SAVE": "Änderungen"
+        }
+    },
+    "sidebar": {
+        "heading": {
+            "NAVIGATION": "Hauptnavigation",
+            "FEATURES": "Hauptfunktionen",
+            "DOCUMENTATION": "Dokumentation"
+        },
+        "nav": {
+            "dashboard": {
+                "MAIN": "Dashboard"
+            },
+            "pagelayouts": {
+                "MAIN": "Page Layouts",
+                "FIXEDHEADER": "Fixed Header",
+                "FIXEDSIDEBAR": "Fixed Sidebar",
+                "FIXEDHEADERSIDEBAR": "Fixed Header &amp; Sidebar",
+                "FIXEDFOOTER": "Fixed Footer",
+                "BOXEDPAGE": "Boxed Page"
+            },
+            "layouts": {
+                "MAIN": "Layouts"
+            },
+            "components": {
+                "MAIN": "Komponenten"
+            },
+            "element": {
+                "MAIN": "UI Elemente",
+                "ELEMENTS": "Elemente",
+                "BUTTONS": "Tasten",
+                "LINKS": "Auswirkungen auf Links",
+                "FONTAWESOME": "Font Awesome Icons",
+                "LINEARICONS": "Lineare Ikonen",
+                "LETTERICONS": "Letter Icons",
+                "MODALS": "Modals",
+                "TOGGLE": "Toggle",
+                "TABS": "Tabs & Accordions",
+                "PANELS": "Panels",
+                "NOTIFICATIONS": "Benachrichtigungen",
+                "SLIDERS": "Sliders",
+                "KNOB": "Knob component",
+                "TREEVIEW": "TreeView",
+                "MEDIA": "Media",
+                "NESTABLE": "Nestable List",
+                "TYPOGRAPHY": "Typographie"
+            },
+            "tables": {
+                "MAIN": "Tabellen",
+                "BASIC": "Basisitabellen",
+                "RESPONSIVE": "Anpassungsfähige Tabellen",
+                "DYNAMIC": "Dynamische Tabellen",
+                "DATA": "ngTable"
+            },
+            "forms": {
+                "MAIN": "Formulare",
+                "ELEMENTS": "Formularelemente",
+                "PICKERS": "Pickers",
+                "XEDITABLE": "Elemente Editable",
+                "TEXTEDITOR": "Texteditor",
+                "WIZARD": "Forumularwizard",
+                "VALIDATION": "Formularvalidierung",
+                "CROPPING": "Bild ausschneiden",
+                "UPLOAD": "Multiple File Upload"
+            },
+            "login": {
+                "MAIN": "Login",
+                "LOGIN": "Login Formular",
+                "REGISTRATION": "Registrierungsformular",
+                "FORGOT": "Formular Passwort vergessen",
+                "LOCKSCREEN": "Displaysperre"
+            },
+            "pages": {
+                "MAIN": "Seiten",
+                "USERPROFILE": "Benutzerprofil",
+                "INVOICE": "Rechnung",
+                "TIMELINE": "Zeitplan",
+                "CALENDAR": "Kalender",
+                "MESSAGES": "Nachrichten",
+                "BLANKPAGE": "Starter Page"
+            },
+            "utilities": {
+                "MAIN": "Utilities",
+                "SEARCHRESULT": "Ergebnisse",
+                "ERROR404": "Fehler 404",
+                "ERROR500": "Fehler 500",
+                "PRICING": "Preistabelle"
+            },
+            "3level": {
+                "MAIN": "3 Level Menu",
+                "Item1": {
+                    "MAIN": "Element 1",
+                    "LINK1": "Musterlink 1",
+                    "LINK2": "Musterlink 2",
+                    "LINK3": "Musterlink 3"
+                },
+                "Item2": {
+                    "MAIN": "Element 2",
+                    "LINK1": "Musterllink 1",
+                    "LINK2": "Musterlink 2",
+                    "LINK3": "Musterlink 3"
+                },
+                "Item3": {
+                    "MAIN": "Element 3",
+                    "LINK1": "Musterlink 1",
+                    "LINK2": "Musterlink 2",
+                    "LINK3": "Musterlink 3"
+                }
+            },
+            "4level": {
+                "MAIN": "4 Level Menu",
+                "Item1": {
+                    "MAIN": "Element 1",
+                    "link1": {
+                        "MAIN": "Musterlink 1",
+                        "LINK1": "Link 1",
+                        "LINK2": "Link 2",
+                        "LINK3": "Link 3"
+                    },
+                    "link2": {
+                        "MAIN": "Musterlink 2",
+                        "LINK1": "Link 1",
+                        "LINK2": "Link 2",
+                        "LINK3": "Link 3"
+                    },
+                    "link3": {
+                        "MAIN": "Musterlink 3",
+                        "LINK1": "Link 1",
+                        "LINK2": "Link 2",
+                        "LINK3": "Link 3"
+                    }
+                },
+                "Item2": {
+                    "MAIN": "Element 2",
+                    "link1": {
+                        "MAIN": "Musterlink 1",
+                        "LINK1": "Link 1",
+                        "LINK2": "Link 2",
+                        "LINK3": "Link 3"
+                    },
+                    "link2": {
+                        "MAIN": "Musterlink 2",
+                        "LINK1": "Link 1",
+                        "LINK2": "Link 2",
+                        "LINK3": "Link 3"
+                    },
+                    "link3": {
+                        "MAIN": "Musterlink 3",
+                        "LINK1": "Link 1",
+                        "LINK2": "Link 2",
+                        "LINK3": "Link 3"
+                    }
+                },
+                "Item3": {
+                    "MAIN": "Element 3",
+                    "link1": {
+                        "MAIN": "Musterlink 1",
+                        "LINK1": "Link 1",
+                        "LINK2": "Link 2",
+                        "LINK3": "Link 3"
+                    },
+                    "link2": {
+                        "MAIN": "Musterlink 2",
+                        "LINK1": "Link 1",
+                        "LINK2": "Link 2",
+                        "LINK3": "Link 3"
+                    },
+                    "link3": {
+                        "MAIN": "Musterlink 3",
+                        "LINK1": "Link 1",
+                        "LINK2": "Link 2",
+                        "LINK3": "Link 3"
+                    }
+                }
+            },
+            "maps": {
+                "MAIN": "Mappen"
+            },
+            "charts": {
+                "MAIN": "Graphiken"
+            },
+            "landing": {
+                "MAIN": "Landing Page"
+            },
+            "rtl": {
+                "MAIN": "RTL Version"
+            },
+            "ltr": {
+                "MAIN": "LTR Version"
+            }
+        }
+    },
+    "footer": {
+        "copyright": {
+            "MAIN": "Urrehberrechte",
+            "MESSAGE": "Alle Rechte Vorbehalten"
+        }
+    },
+    "setting": {
+        "MAIN": "Stilauswahl",
+        "FIXEDHEADER": "Feststehende Kopfzeile",
+        "FIXEDSIDEBAR": "Feststehende Seitenleiste",
+        "CLOSEDSIDEBAR": "Geschlossene Seitenleiste",
+        "FIXEDFOOTER": "Festehende Fußzeile"
+    }
+}

@@ -1,0 +1,24 @@
+{
+  "name": "angular-translate-storage-local",
+  "description": "A plugin for Angular Translate",
+  "version": "2.15.2",
+  "main": "./angular-translate-storage-local.js",
+  "ignore": [],
+  "author": "Pascal Precht",
+  "license": "MIT",
+  "dependencies": {
+    "angular-translate": "~2.15.2",
+    "angular-translate-storage-cookie": "~2.15.2"
+  },
+  "homepage": "https://github.com/PascalPrecht/bower-angular-translate-storage-local",
+  "_release": "2.15.2",
+  "_resolution": {
+    "type": "version",
+    "tag": "2.15.2",
+    "commit": "cc0ed798b7ce5fb51f3a699de781fd2661e5980e"
+  },
+  "_source": "https://github.com/PascalPrecht/bower-angular-translate-storage-local.git",
+  "_target": "^2.15.2",
+  "_originalSource": "angular-translate-storage-local",
+  "_direct": true
+}

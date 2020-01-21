@@ -1,0 +1,72 @@
+<div class="message-actions">
+    <ul class="actions no-margin no-padding block">
+        <li class="email-list-toggle">
+            <a ui-sref="app.pages.messages"><i class="fa fa-angle-left"></i> All Inboxes </a>
+        </li>
+        <li class="actions-dropdown">
+            <span class="dropdown" uib-dropdown on-toggle="toggled(open)">
+                <a href class="dropdown-toggle" uib-dropdown-toggle class="btn btn-transparent">
+                    <i class="caret"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-light">
+                    <li>
+                        <a href="#">
+                            Reply
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            Reply all
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            Forward
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            Delete
+                        </a>
+                    </li>
+                </ul>
+            </span>
+        </li>
+        <li class="no-padding">
+            <a class="text-info" href="#">
+                Reply
+            </a>
+        </li>
+        <li class="no-padding">
+            <a href="#">
+                Reply all
+            </a>
+        </li>
+        <li class="no-padding">
+            <a href="#">
+                Forward
+            </a>
+        </li>
+        <li class="no-padding">
+            <a href="#">
+                Delete
+            </a>
+        </li>
+    </ul>
+</div>
+<div class="message-header">
+    <img alt="{{ message.from }}" ng-src="{{ message.avatar && message.avatar || noAvatarImg }}" class="message-item-avatar">
+    <div class="message-time">
+        {{message.date | date: "MM/dd/yyyy 'at' h:mma" }}
+    </div>
+    <div class="message-from" ng-if="message.email">
+        {{message.from}} &lt;{{message.email}}&gt;
+    </div>
+    <div class="message-to">
+        To: Peter Clark
+    </div>
+</div>
+<div class="message-subject">
+    <span class="spam" ng-if="message.spam">[SPAM] </span> {{message.subject}}
+</div>
+<div class="message-content" ng-bind-html="message.content"></div>

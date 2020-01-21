@@ -1,0 +1,361 @@
+<!-- start: BREADCRUMB -->
+<div class="breadcrumb-wrapper">
+    <h4 class="mainTitle no-margin" translate="sidebar.nav.element.TABS">TABS &amp; ACCORDIONS</h4>
+
+    <div ncy-breadcrumb class="pull-right"></div>
+</div>
+<!-- end: BREADCRUMB -->
+<!-- start: TABS -->
+<!-- /// controller:  'TabsDemoCtrl' -  localtion: assets/js/controllers/bootstrapCtrl.js /// -->
+<div ng-controller="TabsDemoCtrl">
+    <div class="container-fluid container-fullw">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-white">
+                    <div class="panel-body">
+                        <h5 class="over-title margin-bottom-15">Togglable <span class="text-bold">Tabs</span></h5>
+                        <p>
+                            Add quick, dynamic tab functionality to transition through panes of content, even via dropdown menus.
+                        </p>
+                        <uib-tabset class="tabbable" active="active">
+                            <uib-tab index="0" heading="Static title">
+                                <h4>Static content</h4>
+                                <p>
+                                    Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla
+                                    facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent.
+                                </p>
+                                <p>
+                                    Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse.
+                                    Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro
+                                    keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex
+                                    squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel,
+                                    butcher voluptate nisi qui.
+                                </p>
+                            </uib-tab>
+                            <uib-tab index="$index + 1" ng-repeat="tab in tabs" heading="{{tab.title}}" disable="tab.disabled">
+                                {{tab.content}}
+                            </uib-tab>
+                            <uib-tab index="3" select="alertMe()">
+                                <uib-tab-heading>
+                                    <i class="glyphicon glyphicon-bell"></i> Alert!
+                                </uib-tab-heading>
+                                I've got an HTML heading, and a select callback. Pretty cool!
+                            </uib-tab>
+                        </uib-tabset>
+                        <p>
+                            <a class="btn btn-primary btn-o" href="javascript:void(0)" ng-click="active = 1"> Go to tab 2 </a>
+                            <a class="btn btn-primary btn-o" href="javascript:void(0)" ng-click="active = 2"> Go to tab 3 </a>
+                            <a class="btn btn-default" href="javascript:void(0)" ng-click="tabs[1].disabled = ! tabs[1].disabled"> Enable / Disable third tab </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid container-fullw">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-white">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <h5 class="over-title margin-bottom-15">Justified <span class="text-bold">Tabs</span></h5>
+                                <p>
+                                    Easily make tabs or pills equal widths of their parent. On smaller screens, the nav links are stacked.
+                                </p>
+                                <uib-tabset justified="true" class="tabbable">
+                                    <uib-tab heading="Justified">
+                                        Justified content
+                                    </uib-tab>
+                                    <uib-tab heading="SJ">
+                                        Short Labeled Justified content
+                                    </uib-tab>
+                                    <uib-tab heading="Long Justified">
+                                        Long Labeled Justified content
+                                    </uib-tab>
+                                </uib-tabset>
+                            </div>
+                            <div class="col-lg-6">
+                                <h5 class="over-title margin-bottom-15"><span class="text-bold">Pills</span></h5>
+                                <p>
+                                    Take that same HTML, but use
+                                    <code>
+                                        type="pills"
+                                    </code>
+                                    attribute:
+                                </p>
+                                <uib-tabset class="tabbable" type="pills">
+                                    <uib-tab heading="Pill title">
+                                        Pill content
+                                    </uib-tab>
+                                    <uib-tab heading="Pill title 2">
+                                        Pill content 2
+                                    </uib-tab>
+                                    <uib-tab heading="Pill title 3">
+                                        Pill content 3
+                                    </uib-tab>
+                                </uib-tabset>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid container-fullw">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-white">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <h5 class="over-title margin-bottom-15">Left <span class="text-bold">Tabs</span></h5>
+                                <p>
+                                    Add class
+                                    <code>
+                                        tabs-left
+                                    </code>
+                                    to
+                                    <code>
+                                        &lt;tabset&gt;
+                                    </code>
+                                    .
+                                </p>
+                                <uib-tabset class="tabbable tabs-left">
+                                    <uib-tab>
+                                        <uib-tab-heading>
+                                            Tab 1
+                                        </uib-tab-heading>
+                                        <p>
+                                            Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth.
+                                        </p>
+                                        <p>
+                                            Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.
+                                        </p>
+                                    </uib-tab>
+                                    <uib-tab>
+                                        <uib-tab-heading>
+                                            Tab 2
+                                        </uib-tab-heading>
+                                        <p>
+                                            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est.
+                                        </p>
+                                        <p>
+                                            Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth.
+                                        </p>
+                                    </uib-tab>
+                                    <uib-tab>
+                                        <uib-tab-heading>
+                                            Tab 3
+                                        </uib-tab-heading>
+                                        <p>
+                                            Trust fund seitan letterpress, keytar raw denim keffiyeh etsy art party before they sold out master cleanse gluten-free squid scenester freegan cosby sweater. Fanny pack portland seitan DIY, art party locavore wolf cliche high life echo park Austin.
+                                        </p>
+                                        <p>
+                                            Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth.
+                                        </p>
+                                    </uib-tab>
+                                </uib-tabset>
+                            </div>
+                            <div class="col-lg-6">
+                                <h5 class="over-title margin-bottom-15">Right <span class="text-bold">Tabs</span></h5>
+                                <p>
+                                    Add class
+                                    <code>
+                                        tabs-right
+                                    </code>
+                                    to
+                                    <code>
+                                        &lt;tabset&gt;
+                                    </code>
+                                    .
+                                </p>
+                                <uib-tabset class="tabbable tabs-right">
+                                    <uib-tab>
+                                        <uib-tab-heading>
+                                            Tab 1
+                                        </uib-tab-heading>
+                                        <p>
+                                            Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth.
+                                        </p>
+                                        <p>
+                                            Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.
+                                        </p>
+                                    </uib-tab>
+                                    <uib-tab>
+                                        <uib-tab-heading>
+                                            Tab 2
+                                        </uib-tab-heading>
+                                        <p>
+                                            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est.
+                                        </p>
+                                        <p>
+                                            Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth.
+                                        </p>
+                                    </uib-tab>
+                                    <uib-tab>
+                                        <uib-tab-heading>
+                                            Tab 3
+                                        </uib-tab-heading>
+                                        <p>
+                                            Trust fund seitan letterpress, keytar raw denim keffiyeh etsy art party before they sold out master cleanse gluten-free squid scenester freegan cosby sweater. Fanny pack portland seitan DIY, art party locavore wolf cliche high life echo park Austin.
+                                        </p>
+                                        <p>
+                                            Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth.
+                                        </p>
+                                    </uib-tab>
+                                </uib-tabset>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end: TABS -->
+<!-- start: UI BOOTSTRAP ACCORDION -->
+<!-- /// controller:  'AccordionDemoCtrl' -  localtion: assets/js/controllers/bootstrapCtrl.js /// -->
+<div ng-controller="AccordionDemoCtrl">
+    <div class="container-fluid container-fullw">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-white">
+                    <div class="panel-body">
+                        <h5 class="over-title margin-bottom-15"><span class="text-bold">Ui Bootsrap Accordions</span></h5>
+                        <p>
+                            The accordion directive builds on top of the collapse directive to provide a list of items, with collapsible bodies that are collapsed or expanded by clicking on the item's header.
+                        </p>
+                        <p>
+                            <button class="btn btn-primary btn-sm" ng-click="status.open = !status.open">
+                                Toggle last panel
+                            </button>
+                            <button class="btn btn-primary btn-sm" ng-click="status.isFirstDisabled = ! status.isFirstDisabled">
+                                Enable / Disable first panel
+                            </button>
+                        </p>
+                        <div class="checkbox clip-check check-primary">
+                            <input type="checkbox" id="ng-model=" oneatatime"" ng-model="oneAtATime">
+                            <label for="ng-model=" oneatatime""> Open only one at a time </label>
+                        </div>
+                        <uib-accordion close-others="oneAtATime" class="accordion">
+                            <div uib-accordion-group heading="Static Header, initially expanded" is-open="status.isFirstOpen" is-disabled="status.isFirstDisabled">
+                                This content is straight in the template.
+                            </div>
+                            <div uib-accordion-group heading="{{group.title}}" ng-repeat="group in groups">
+                                {{group.content}}
+                            </div>
+                            <div uib-accordion-group heading="Dynamic Body Content">
+                                <p>
+                                    The body of the accordion group grows to fit the contents
+                                </p>
+                                <button class="btn btn-default btn-sm" ng-click="addItem()">
+                                    Add Item
+                                </button>
+                                <div ng-repeat="item in items">
+                                    {{item}}
+                                </div>
+                            </div>
+                            <div uib-accordion-group is-open="status.open">
+                                <uib-accordion-heading>
+                                    I can have markup, too! <i class="pull-right fa" ng-class="{'fa-angle-down ': status.open, 'fa-angle-right': !status.open}"></i>
+                                </uib-accordion-heading>
+                                This is just some content to illustrate fancy headings.
+                            </div>
+                        </uib-accordion>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end: UI BOOTSTRAP ACCORDION -->
+<!-- start: VACCORDION -->
+<div class="container-fluid container-fullw">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-white">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h5 class="over-title margin-bottom-15"><span class="text-bold">vAccordion</span></h5>
+                            <p>
+                                AngularJS multi-level accordion component.
+                            </p>
+                        </div>
+                        <!-- /// controller:  'vAccordionCtrl' -  localtion: assets/js/controllers/vAccordionCtrl.js /// -->
+                        <div ng-controller="vAccordionCtrl">
+                            <div class="col-md-6">
+                                <div class="panel panel-transparent">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">Works with (or without) ng-repeat</h4>
+                                    </div>
+                                    <div class="panel-body">
+                                        <v-accordion class="vAccordion--default" control="firstAccordionControl">
+                                            <v-pane ng-repeat="pane in panes" expanded="$last">
+                                                <v-pane-header>
+                                                    <h5>{{ pane.header }}</h5>
+                                                </v-pane-header>
+                                                <v-pane-content>
+                                                    <p>
+                                                        {{ pane.content }}
+                                                    </p>
+                                                    <v-accordion ng-if="pane.subpanes">
+                                                        <v-pane ng-repeat="subpane in pane.subpanes">
+                                                            <v-pane-header>
+                                                                <h5>{{ subpane.header }}</h5>
+                                                            </v-pane-header>
+                                                            <v-pane-content>
+                                                                <p>
+                                                                    {{ subpane.content }}
+                                                                </p>
+                                                            </v-pane-content>
+                                                        </v-pane>
+                                                    </v-accordion>
+                                                </v-pane-content>
+                                            </v-pane>
+                                        </v-accordion>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="panel panel-transparent">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">Allows multiple sections open at once</h4>
+                                    </div>
+                                    <div class="panel-body">
+                                        <v-accordion class="vAccordion--default" multiple control="secondAccordionControl">
+                                            <v-pane ng-repeat="pane in panes" expanded="$first">
+                                                <v-pane-header>
+                                                    <h5>{{ pane.header }}</h5>
+                                                </v-pane-header>
+                                                <v-pane-content>
+                                                    <p>
+                                                        {{ pane.content }}
+                                                    </p>
+                                                    <v-accordion allow-multiple ng-if="pane.subpanes">
+                                                        <v-pane ng-repeat="subpane in pane.subpanes">
+                                                            <v-pane-header>
+                                                                <h5>{{ subpane.header }}</h5>
+                                                            </v-pane-header>
+                                                            <v-pane-content>
+                                                                <p>
+                                                                    {{ subpane.content }}
+                                                                </p>
+                                                            </v-pane-content>
+                                                        </v-pane>
+                                                    </v-accordion>
+                                                </v-pane-content>
+                                            </v-pane>
+                                        </v-accordion>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end: VACCORDION -->

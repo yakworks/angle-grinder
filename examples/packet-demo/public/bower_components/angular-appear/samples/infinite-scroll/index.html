@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Infinite Scroll</title>
+  <link href='https://fonts.googleapis.com/css?family=Roboto+Slab' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+  <script src="https://cdn.rawgit.com/emn178/jquery-appear/master/build/jquery.appear.min.js"></script>
+  <script type="text/javascript" src="https://emn178.github.io/js-throttle-debounce/src/js-throttle-debounce.js"></script>
+  <script type="text/javascript" src="../../src/angular-appear.js"></script>
+  <script>
+    if (location.protocol != 'file:') {
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-44208259-3', 'auto');
+      ga('send', 'pageview');
+    }
+  </script>
+</head>
+<body ng-app="demo" ng-controller="DemoCtrl">
+  <div id="header">
+    <h1>Infinite Scroll</h1>
+    <a href="https://github.com/emn178/angular-appear"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://github-camo.global.ssl.fastly.net/a6677b08c955af8400f44c6298f40e7d19cc5b2d/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677261795f3664366436642e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png"></a>
+  </div>
+  <div id="body">
+    <div id="description">
+      <p>
+        Content will be loaded when scrolling to end of page.
+      </p>
+      <p>
+        Scroll down to see the effect.
+      </p>
+    </div>
+    <div id="code-block">
+      <h3>HTML</h3>
+      <pre class="brush: html">
+        &lt;div id=&quot;loading&quot;&gt;
+          &lt;img src=&quot;loading.gif&quot; ng-hide=&quot;nomore&quot; ng-appearing=&quot;load()&quot; /&gt;
+          &lt;p ng-show=&quot;nomore&quot;&gt;No more data&lt;/p&gt;
+        &lt;/div&gt;
+      </pre>
+    </div>
+    <div id="posts">
+      <div class="post" ng-repeat="post in posts">
+        <a class="avatar" href="#"><img src="avatar.jpg"></a>
+        <div class="content">
+          <h5 class="username"><a href="#">{{post.nsername}}</a></h5>
+          <div class="message">{{post.message}}</div>
+        </div>
+      </div>
+    </div>
+    <div id="loading">
+      <img src="loading.gif" ng-hide="nomore" ng-appearing="load()" />
+      <p ng-show="nomore">No more data</p>
+    </div>
+  </div>
+  <div id="footer">
+    © 2014-2016 angular-appear Demo
+  </div>
+  <script>
+    var maxPosts = 30;
+    var batchPosts = 5;
+
+    angular.module('demo', ['ngAppear'])
+    .controller('DemoCtrl', ['$scope', '$timeout', function ($scope, $timeout) {
+      $scope.posts = [];
+      $scope.nomore = false;
+      $scope.load = function () {
+        $timeout(function () {
+          for (var i = 0;i < batchPosts && $scope.posts.length < maxPosts;++i) {
+            $scope.posts.push({username: 'Username', message: 'This is message.'});
+          }
+          if ($scope.posts.length == maxPosts) {
+            $scope.nomore = true;
+          }
+        }, 500);
+      }.throttle();
+    }]);
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/styles/shCore.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/styles/shThemeDefault.css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shCore.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shBrushJScript.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shBrushXml.js"></script>
+  <script>
+    SyntaxHighlighter.all();
+  </script>
+</body>
+</html>

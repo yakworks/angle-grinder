@@ -1,0 +1,126 @@
+<!-- start: MESSAGES -->
+<div ct-fullheight data-ct-fullheight-exclusion="header, footer">
+    <!-- /// controller:  'InboxCtrl' -  localtion: assets/js/controllers/inboxCtrl.js /// -->
+    <div class="inbox" id="inbox" ng-controller="InboxCtrl" toggleable active-class="message-open">
+        <!-- start: EMAIL OPTIONS -->
+        <div class="col email-options">
+            <div class="padding-15">
+                <button class="btn btn-primary btn-block margin-bottom-30">
+                    Compose {{$scope.isLargeDevice}}
+                </button>
+                <p class="email-options-title no-margin">
+                    BROWSE
+                </p>
+                <ul class="main-options padding-15">
+                    <li>
+                        <a href ng-click="filters = {sent: false}">
+                            <span class="title"><i class="ti-import"></i> Inbox</span>
+                            <span class="badge pull-right" ng-if="messages.length">{{(messages |filter: filters = {sent: false}).length}}</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href ng-click="filters = {sent: true}">
+                            <span class="title"><i class="ti-upload"></i> Sent</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href ng-click="filters = {spam: true}">
+                            <span class="title"><i class="ti-na"></i> Spam</span>
+                            <span class="badge pull-right" ng-if="(messages |filter: {spam: true}).length">{{(messages |filter: filters = {spam: true}).length}}</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href ng-click="filters = {starred: true}">
+                            <span class="title"><i class="ti-star"></i> Starred</span>
+                            <span class="badge pull-right" ng-if="(messages |filter: {starred: true}).length">{{(messages |filter: filters = {starred: true}).length}}</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- end: EMAIL OPTIONS -->
+        <!-- start: EMAIL LIST -->
+        <div class="col email-list" ng-hide="$state.current.name.indexOf('inbox')>= 0 && isMobileDevice">
+            <div class="wrap-list">
+                <div class="wrap-options" id="wrap-options" toggleable active-class="search-open">
+                    <div class="messages-options padding-15">
+                        <div class="btn-group" uib-dropdown>
+                            <button type="button" class="btn btn-primary btn-wide">
+                                Compose
+                            </button>
+                            <button type="button" class="btn btn-primary dropdown-toggle" uib-dropdown-toggle>
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu dropdown-light" role="menu">
+                                <li>
+                                    <a href ng-click="filters = {sent: false}">
+                                        <span class="title"><i class="ti-import"></i> Inbox</span>
+                                        <span class="badge" ng-if="messages.length">{{(messages |filter: filters = {sent: false}).length}}</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href ng-click="filters = {sent: true}">
+                                        <span class="title"><i class="ti-upload"></i> Sent</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href ng-click="filters = {spam: true}">
+                                        <span class="title"><i class="ti-na"></i> Spam</span>
+                                        <span class="badge" ng-if="(messages |filter: {spam: true}).length">{{(messages |filter: filters = {spam: true}).length}}</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href ng-click="filters = {starred: true}">
+                                        <span class="title"><i class="ti-star"></i> Starred</span>
+                                        <span class="badge" ng-if="(messages |filter: {starred: true}).length">{{(messages |filter: filters = {starred: true}).length}}</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <button class="btn btn-transparent pull-right open-message-search" ct-toggle="on" target="wrap-options">
+                            <i class="ti-search"></i>
+                        </button>
+                        <button class="btn btn-transparent pull-right close-message-search" ct-toggle="off" target="wrap-options" ng-click="inbox.search = {}">
+                            <i class="ti-close"></i>
+                        </button>
+                    </div>
+                    <div class="messages-search">
+                        <form>
+                            <input type="text" class="form-control underline" placeholder="Search messages..." ng-model="inbox.search.$">
+                        </form>
+                    </div>
+                </div>
+                <ul class="messages-list" perfect-scrollbar wheel-propagation="true" suppress-scroll-x="true">
+                    <li ng-if="!messages.length">
+                        <div class="">
+                            No messages! Try sending one to a friend.
+                        </div>
+                    </li>
+                    <li class="messages-item" ng-class="{starred: message.starred}" ng-repeat="message in messages | orderBy: 'date':true | filter:filters | filter:inbox.search">
+                        <a message-item="{{message.id}}" ui-sref="app.pages.messages.inbox({ inboxID:message.id })" href>
+                            <span title="{{ message.starred && 'Remove star' || 'Mark as starred' }}" class="messages-item-star" ng-click="message.starred = !message.starred"><i class="fa fa-star"></i></span>
+                            <img alt="{{ message.from }}" ng-src="{{ message.avatar && message.avatar || noAvatarImg }}" class="messages-item-avatar bordered border-primary">
+                            <span class="messages-item-from">{{ message.from }}</span>
+                            <div class="messages-item-time">
+                                <span class="text">{{ message.date | date: "MM/dd/yyyy 'at' h:mma" }}</span>
+                            </div>
+                            <span class="messages-item-subject"> <em class="spam" ng-if="message.spam">[SPAM] </em> {{ message.subject }}</span>
+                            <span class="messages-item-content">{{ message.content | htmlToPlaintext | words:15 :true }}</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- end: EMAIL LIST -->
+        <!-- start: EMAIL READER -->
+        <div class="email-reader" perfect-scrollbar wheel-propagation="true" suppress-scroll-x="true" ng-show="$state.current.name.indexOf('inbox')>= 0 || isLargeDevice || isSmallDevice">
+            <div ui-view>
+                <div class="no-messages">
+                    <h2>No email has been selected</h2>
+                </div>
+            </div>
+        </div>
+        <!-- end: EMAIL READER -->
+    </div>
+</div>
+<!-- end: MESSAGES -->

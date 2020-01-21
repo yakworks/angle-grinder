@@ -1,0 +1,18 @@
+<div class="events-list" ng-show="day.events.length > 0">
+  <a
+    ng-repeat="event in day.events | orderBy:'startsAt' track by event.calendarEventId"
+    href="javascript:;"
+    ng-click="$event.stopPropagation(); vm.onEventClick({calendarEvent: event})"
+    class="pull-left event"
+    ng-class="event.cssClass"
+    ng-style="{backgroundColor: event.color.primary}"
+    ng-mousedown="$event.stopPropagation()"
+    ng-mouseenter="vm.highlightEvent(event, true)"
+    ng-mouseleave="vm.highlightEvent(event, false)"
+    tooltip-append-to-body="true"
+    uib-tooltip-html="vm.calendarEventTitle.monthViewTooltip(event) | calendarTrustAsHtml"
+    mwl-draggable="event.draggable === true"
+    drop-data="{event: event, draggedFromDate: day.date.toDate()}"
+    auto-scroll="vm.draggableAutoScroll">
+  </a>
+</div>

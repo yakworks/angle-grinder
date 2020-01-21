@@ -1,0 +1,64 @@
+/* ---------------------------------------------------------------------- */
+/*  Perfect Scrollbar
+/* ---------------------------------------------------------------------- */
+*[perfect-scrollbar] {
+    overflow-y: hidden !important;
+}
+
+.touch .app-mobile *[perfect-scrollbar] {
+    overflow-y: scroll !important;
+    -webkit-overflow-scrolling: touch !important;
+}
+
+.ps-container > .ps-scrollbar-y-rail > .ps-scrollbar-y {
+    background-color: #666C71 !important;
+}
+
+.ps-container:hover.ps-in-scrolling.ps-y > .ps-scrollbar-y-rail {
+    background-color: transparent !important;
+}
+
+.ps-container:hover.ps-in-scrolling.ps-y > .ps-scrollbar-y-rail {
+    background-color: transparent !important;
+}
+
+#sidebar .ps-container:hover > .ps-scrollbar-y-rail {
+    .app-sidebar-closed & {
+        opacity: 0 !important;
+    }
+}
+#sidebar .ps-container:hover > .ps-scrollbar-y-rail:hover {
+    .app-sidebar-closed & {
+        opacity: 1 !important;
+    }
+}
+
+.ps-container:hover > .ps-scrollbar-y-rail:hover {
+    background-color: transparent !important;
+    opacity: 0.9 !important;
+}
+
+.ps-container > .ps-scrollbar-y-rail > .ps-scrollbar-y {
+    background-color: #666C71 !important;
+}
+
+.ps-container:hover > .ps-scrollbar-y-rail:hover > .ps-scrollbar-y {
+    background-color: #666C71 !important;
+}
+
+.ps-container:hover > .ps-scrollbar-y-rail:hover {
+    background-color: transparent !important;
+}
+
+.ps-container:hover.ps-in-scrolling.ps-y > .ps-scrollbar-y-rail {
+    background-color: transparent !important;
+}
+
+.ps-container.ps-in-scrolling.ps-y > .ps-scrollbar-y-rail {
+    background-color: transparent !important;
+}
+
+.ps-container > .ps-scrollbar-y-rail, .ps-container > .ps-scrollbar-y-rail > .ps-scrollbar-y {
+    width: 7px !important;
+    border-radius: 0 !important;
+}

@@ -1,0 +1,969 @@
+<!-- start: BREADCRUMB -->
+<div class="breadcrumb-wrapper">
+    <h4 class="mainTitle no-margin" translate="sidebar.nav.element.ELEMENTS">ELEMENTS</h4>
+
+    <div ncy-breadcrumb class="pull-right"></div>
+</div>
+<!-- end: BREADCRUMB -->
+<!-- start: LIST GROUP -->
+<div class="container-fluid container-fullw">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-white">
+                <div class="panel-body">
+                    <h5 class="over-title margin-bottom-15">List <span class="text-bold">Group</span></h5>
+                    <p>
+                        List groups are a flexible and powerful component for displaying not only simple lists of elements, but complex ones with custom content.
+                    </p>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="panel panel-transparent">
+                                <div class="panel-heading">
+                                    <div class="panel-title">
+                                        Basic example with Badges
+                                    </div>
+                                </div>
+                                <div class="panel-body">
+                                    <p class="text-small">
+                                        The most basic list group is simply an unordered list with list items, and the proper classes. Add the badges component to any list group item and it will automatically be positioned on the right.
+                                    </p>
+                                    <ul class="list-group">
+                                        <li class="list-group-item">
+                                            <span class="badge">14</span>
+                                            Cras justo odio
+                                        </li>
+                                        <li class="list-group-item">
+                                            <span class="badge">2</span>
+                                            Dapibus ac facilisis in
+                                        </li>
+                                        <li class="list-group-item">
+                                            <span class="badge">1</span>
+                                            Morbi leo risus
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="panel panel-transparent">
+                                <div class="panel-heading">
+                                    <div class="panel-title">
+                                        Linked items
+                                    </div>
+                                </div>
+                                <div class="panel-body">
+                                    <p class="text-small">
+                                        Linkify list group items by using anchor tags instead of list items (that also means a parent
+                                        <code>
+                                            &lt;div&gt;
+                                        </code>
+                                        instead of an
+                                        <code>
+                                            &lt;ul&gt;
+                                        </code>
+                                        ). No need for individual parents around each element.
+                                    </p>
+                                    <div class="list-group">
+                                        <a class="list-group-item active" href="#"> Cras justo odio </a>
+                                        <a class="list-group-item" href="#"> Dapibus ac facilisis in </a>
+                                        <a class="list-group-item" href="#"> Porta ac consectetur ac </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="panel panel-transparent">
+                                <div class="panel-heading">
+                                    <div class="panel-title">
+                                        Contextual classes
+                                    </div>
+                                </div>
+                                <div class="panel-body">
+                                    <p class="text-small">
+                                        Use contextual classes to style list items, default or linked. Also includes
+                                        <code>
+                                            .active
+                                        </code>
+                                        state.
+                                    </p>
+                                    <div class="list-group">
+                                        <a class="list-group-item list-group-item-success" href="#"> Dapibus ac facilisis in </a>
+                                        <a class="list-group-item list-group-item-info" href="#"> Cras sit amet nibh libero </a>
+                                        <a class="list-group-item list-group-item-warning" href="#"> Porta ac consectetur ac </a>
+                                        <a class="list-group-item list-group-item-danger" href="#"> Vestibulum at eros </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="panel panel-transparent">
+                                <div class="panel-heading">
+                                    <div class="panel-title">
+                                        Custom content
+                                    </div>
+                                </div>
+                                <div class="panel-body">
+                                    <p class="text-small">
+                                        Add nearly any HTML within, even for linked list groups like the one below.
+                                    </p>
+                                    <div class="list-group">
+                                        <a class="list-group-item active" href="#">
+                                            <h5 class="list-group-item-heading">List group item heading</h5>
+                                            <p class="list-group-item-text">
+                                                Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.
+                                            </p>
+                                        </a>
+                                        <a class="list-group-item" href="#">
+                                            <h5 class="list-group-item-heading">List group item heading</h5>
+                                            <p class="list-group-item-text">
+                                                Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.
+                                            </p>
+                                        </a>
+                                        <a class="list-group-item" href="#">
+                                            <h5 class="list-group-item-heading">List group item heading</h5>
+                                            <p class="list-group-item-text">
+                                                Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.
+                                            </p>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- end: LIST GROUP -->
+<!-- start: TOOLTIPS -->
+<div class="container-fluid container-fullw">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-white">
+                <div class="panel-body">
+                    <h5 class="over-title margin-bottom-15"><span class="text-bold">Tooltips</span></h5>
+                    <p>
+                        A lightweight, extensible directive for fancy tooltip creation. The tooltip directive supports multiple placements, optional transition animation, and more.
+                    </p>
+                    <!-- /// controller:  'TooltipDemoCtrl' -  localtion: assets/js/controllers/bootstrapCtrl.js /// -->
+                    <div ng-controller="TooltipDemoCtrl">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="panel panel-transparent">
+                                    <div class="panel-heading">
+                                        <div class="panel-title">
+                                            Static Tooltip
+                                        </div>
+                                    </div>
+                                    <div class="panel-body">
+                                        <p class="text-small">
+                                            Four options are available: top, right, bottom, and left aligned.
+                                        </p>
+                                        <div class="static-tooltip">
+                                            <div class="tooltip left">
+                                                <div class="tooltip-arrow"></div>
+                                                <div class="tooltip-inner">
+                                                    Tooltip on the left
+                                                </div>
+                                            </div>
+                                            <div class="tooltip top">
+                                                <div class="tooltip-arrow"></div>
+                                                <div class="tooltip-inner">
+                                                    Tooltip on the top
+                                                </div>
+                                            </div>
+                                            <div class="tooltip bottom">
+                                                <div class="tooltip-arrow"></div>
+                                                <div class="tooltip-inner">
+                                                    Tooltip on the bottom
+                                                </div>
+                                            </div>
+                                            <div class="tooltip right">
+                                                <div class="tooltip-arrow"></div>
+                                                <div class="tooltip-inner">
+                                                    Tooltip on the right
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="panel panel-transparent">
+                                    <div class="panel-heading">
+                                        <div class="panel-title">
+                                            Dynamic Tooltip
+                                        </div>
+                                    </div>
+                                    <div class="panel-body">
+                                        <span class="text-extra-large margin-bottom-10 block"> <a href="#" uib-tooltip="{{dynamicTooltip}}"> {{dynamicTooltipText}} </a> </span>
+                                        <div class="form-group">
+                                            <label> Dynamic Tooltip Text </label>
+                                            <input type="text" ng-model="dynamicTooltipText" class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                            <label> Dynamic Tooltip Popup Text </label>
+                                            <input type="text" ng-model="dynamicTooltip" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="panel panel-white">
+                                    <div class="panel-body">
+                                        <p class="text-small">
+                                            Hover over the links below to see tooltips:
+                                        </p>
+                                        <p>
+                                            Pellentesque
+                                            <a href="#" uib-tooltip="{{dynamicTooltip}}"> {{dynamicTooltipText}} </a>
+                                            ,
+                                            sit amet venenatis urna cursus eget nunc scelerisque viverra mauris, in
+                                            aliquam. Tincidunt lobortis feugiat vivamus at
+                                            <a href="#" tooltip-placement="left" uib-tooltip="On the Left!"> left </a>
+                                            eget
+                                            arcu dictum varius duis at consectetur lorem. Vitae elementum curabitur
+                                            <a href="#" tooltip-placement="right" uib-tooltip="On the Right!"> right </a>
+                                            nunc sed velit dignissim sodales ut eu sem integer vitae. Turpis egestas
+                                            <a href="#" tooltip-placement="bottom" uib-tooltip="On the Bottom!"> bottom </a>
+                                            pharetra convallis posuere morbi leo urna,
+                                            <a href="#" tooltip-animation="false" uib-tooltip="I don't fade. :-("> fading </a>
+                                            at elementum eu, facilisis sed odio morbi quis commodo odio. In cursus
+                                            <a uib-tooltip="appears with delay" tooltip-popup-delay="1000" href="#">show delay</a>
+                                            turpis massa tincidunt dui ut. In cursus
+                                            <a uib-tooltip="hides with delay" tooltip-popup-close-delay="1000" href="#">hide delay</a>
+                                            nunc sed velit dignissim sodales ut eu sem integer vitae. Turpis egestas
+                                        </p>
+                                        <p>
+                                            I can even contain HTML.
+                                            <a href="#" uib-tooltip-html="htmlTooltip"> Check me out! </a>
+                                        </p>
+                                        <p>
+                                            <style>
+                                                /* Specify styling for tooltip contents */
+                                                .tooltip.customClass .tooltip-inner {
+                                                    color: #880000;
+                                                    background-color: #ffff66;
+                                                    box-shadow: 0 6px 12px rgba(0,0,0,.175);
+                                                }
+                                                /* Hide arrow */
+                                                .tooltip.customClass .tooltip-arrow {
+                                                    display: none;
+                                                }
+                                            </style>
+                                            I can have a custom class. <a tooltip-class="customClass" uib-tooltip="I can have a custom class applied to me!" href="#">Check me out!</a>
+                                        </p>
+                                        <form role="form">
+                                            <div class="form-group">
+                                                <label>Or use custom triggers, like focus: </label>
+                                                <input type="text" class="form-control" tooltip-placement="top" tooltip-trigger="focus" uib-tooltip="See? Now click away..." value="Click me!">
+                                            </div>
+
+                                            <div ng-class="{'has-error' : !inputModel}" class="form-group has-error">
+                                                <label>Disable tooltips conditionally:</label>
+                                                <input type="text" tooltip-enable="!inputModel" tooltip-trigger="mouseenter" tooltip-placement="top" uib-tooltip="Enter something in this input field to disable this tooltip" placeholder="Hover over this for a tooltip until this is filled" class="form-control ng-pristine ng-untouched ng-valid" ng-model="inputModel">
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end: TOOLTIPS -->
+<!-- start: POPOVERS -->
+<div class="container-fluid container-fullw">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-white">
+                <div class="panel-body">
+                    <h5 class="over-title margin-bottom-15"><span class="text-bold">Popovers</span></h5>
+                    <p>
+                        A lightweight, extensible directive for add small overlays of content, like those on the iPad, to any element for housing secondary information..
+                    </p>
+                    <!-- /// controller:  'PopoverDemoCtrl' -  localtion: assets/js/controllers/bootstrapCtrl.js /// -->
+                    <div ng-controller="PopoverDemoCtrl">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="panel panel-transparent">
+                                    <div class="panel-heading">
+                                        <div class="panel-title">
+                                            Static Popover
+                                        </div>
+                                    </div>
+                                    <div class="panel-body">
+                                        <p class="text-small">
+                                            Four options are available: top, right, bottom, and left aligned.
+                                        </p>
+                                        <label> Popover Type </label>
+                                        <div class="radio clip-radio radio-primary">
+                                            <input type="radio" ng-model="popoverType" name="popoverType" id="top" value="top">
+                                            <label for="top"> Popover top </label>
+                                        </div>
+                                        <div class="radio clip-radio radio-primary">
+                                            <input type="radio" ng-model="popoverType" name="popoverType" id="left" value="left">
+                                            <label for="left"> Popover left </label>
+                                        </div>
+                                        <div class="radio clip-radio radio-primary">
+                                            <input type="radio" ng-model="popoverType" name="popoverType" id="right" value="right">
+                                            <label for="right"> Popover right </label>
+                                        </div>
+                                        <div class="radio clip-radio radio-primary">
+                                            <input type="radio" ng-model="popoverType" name="popoverType" id="bottom" value="bottom">
+                                            <label for="bottom"> Popover bottom </label>
+                                        </div>
+                                        <div class="static-popover">
+                                            <div class="popover" ng-class="popoverType">
+                                                <div class="arrow"></div>
+                                                <h3 class="popover-title">Popover {{popoverType}}</h3>
+                                                <div class="popover-content">
+                                                    <p>
+                                                        Sed posuere consectetur est at lobortis. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="panel panel-transparent">
+                                    <div class="panel-heading">
+                                        <div class="panel-title">
+                                            Dynamic Popover
+                                        </div>
+                                    </div>
+                                    <div class="panel-body">
+                                        <span class="text-extra-large margin-bottom-10 block">
+                                            <button uib-popover="{{dynamicPopover}}" popover-placement="{{popoverType}}" popover-title="{{dynamicPopoverTitle}}" class="btn btn-o btn-primary">
+                                                Show dynamic Popover
+                                            </button>
+                                        </span>
+                                        <div class="form-group">
+                                            <label> Popover Title: </label>
+                                            <input type="text" ng-model="dynamicPopoverTitle" class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                            <label> Popover Text: </label>
+                                            <input type="text" ng-model="dynamicPopover" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-transparent">
+                                    <div class="panel-heading">
+                                        <div class="panel-title">
+                                            Others
+                                        </div>
+                                    </div>
+                                    <div class="panel-body">
+                                        <p class="text-small">
+                                            The popover directives provides several optional attributes to control how it will display
+                                        </p>
+                                        <p>
+                                            <button uib-popover="I appeared on mouse enter!" popover-title="The title." popover-trigger="mouseenter" class="btn btn-o btn-primary btn-wide">
+                                                Mouseenter
+                                            </button>
+                                            <button popover-animation="true" uib-popover="I fade in and out!" popover-title="The title." class="btn btn-o btn-primary btn-wide">
+                                                fading
+                                            </button>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end: POPOVERS -->
+<!-- start: PROGRESS BARS -->
+<div class="container-fluid container-fullw">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-white">
+                <div class="panel-body">
+                    <h5 class="over-title">Progress <span class="text-bold">Bars</span></h5>
+                    <p class="margin-bottom-30">
+                        Provide up-to-date feedback on the progress of a workflow or action with simple yet flexible progress bars.
+                    </p>
+                    <div class="alert alert-block alert-warning">
+                        Progress bars use CSS3 gradients, transitions, and animations to achieve all their effects. These features are not supported in IE7-9 or older versions of Firefox. Versions earlier than Internet Explorer 10 and Opera 12 do not support animations.
+                    </div>
+                    <!-- /// controller:  'ProgressDemoCtrl' -  localtion: assets/js/controllers/bootstrapCtrl.js /// -->
+                    <div ng-controller="ProgressDemoCtrl">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="panel panel-transparent">
+                                    <div class="panel-heading">
+                                        <div class="panel-title">
+                                            Static Progress Bars
+                                        </div>
+                                    </div>
+                                    <div class="panel-body">
+                                        <p class="text-small">
+                                            Progress bars use some of the same button and alert classes for consistent styles.
+                                        </p>
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <p>
+                                                    <h5>Basic</h5>
+                                                </p>
+                                                <uib-progressbar value="60" class="progress-xs"></uib-progressbar>
+                                                <uib-progressbar value="40" class="progress-xs" type="success"></uib-progressbar>
+                                                <uib-progressbar value="20" class="progress-xs" type="info"></uib-progressbar>
+                                                <uib-progressbar value="60" class="progress-xs" type="warning"></uib-progressbar>
+                                                <uib-progressbar value="80" class="progress-xs" type="danger"></uib-progressbar>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <p>
+                                                    <h5>Striped</h5>
+                                                </p>
+                                                <uib-progressbar value="60" class="progress-striped progress-xs"></uib-progressbar>
+                                                <uib-progressbar value="40" class="progress-striped progress-xs" type="success"></uib-progressbar>
+                                                <uib-progressbar value="20" class="progress-striped progress-xs" type="info"></uib-progressbar>
+                                                <uib-progressbar value="60" class="progress-striped progress-xs" type="warning"></uib-progressbar>
+                                                <uib-progressbar value="80" class="progress-striped progress-xs" type="danger"></uib-progressbar>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <p>
+                                                    <h5>Animated</h5>
+                                                </p>
+                                                <uib-progressbar value="60" class="progress-striped progress-xs active"></uib-progressbar>
+                                                <uib-progressbar value="40" class="progress-striped progress-xs active" type="success"></uib-progressbar>
+                                                <uib-progressbar value="20" class="progress-striped progress-xs active" type="info"></uib-progressbar>
+                                                <uib-progressbar value="60" class="progress-striped progress-xs active" type="warning"></uib-progressbar>
+                                                <uib-progressbar value="80" class="progress-striped progress-xs active" type="danger"></uib-progressbar>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <p>
+                                                    <h5>Sizes</h5>
+                                                </p>
+                                                <uib-progressbar value="60" class="progress-xs"></uib-progressbar>
+                                                <uib-progressbar value="40" class="progress-sm"></uib-progressbar>
+                                                <uib-progressbar value="20"></uib-progressbar>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <p>
+                                                    <h5>With label</h5>
+                                                </p>
+                                                <uib-progressbar value="22" type="warning">
+                                                    22%
+                                                </uib-progressbar>
+                                                <uib-progressbar max="200" value="166" type="danger">
+                                                    166 / 200
+                                                </uib-progressbar>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="panel panel-transparent">
+                                    <div class="panel-heading">
+                                        <div class="panel-title">
+                                            Dynamic Progress Bars
+                                        </div>
+                                    </div>
+                                    <div class="panel-body">
+                                        <p class="text-small">
+                                            A progress bar directive that is focused on providing feedback on the progress of a workflow or action.
+                                            It supports multiple (stacked) bars into the same
+                                            <code>
+                                                &lt;progress&gt;
+                                            </code>
+                                            element or a single
+                                            <code>
+                                                &lt;progressbar&gt;
+                                            </code>
+                                            element with optional
+                                            <code>
+                                                max
+                                            </code>
+                                            attribute and transition animations.
+                                        </p>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <p>
+                                                    <h5>Dynamic</h5>
+                                                </p>
+                                                <button class="btn btn-primary btn-o block margin-bottom-10" type="button" ng-click="random()">
+                                                    Randomize
+                                                </button>
+                                                <p>
+                                                    max value
+                                                </p>
+                                                <uib-progressbar max="max" value="dynamic">
+                                                    <span>{{dynamic}} / {{max}}</span>
+                                                </uib-progressbar>
+                                                <p>
+                                                    No animation
+                                                </p>
+                                                <uib-progressbar animate="false" value="dynamic" type="success">
+                                                    <b>{{dynamic}}%</b>
+                                                </uib-progressbar>
+                                                <p>
+                                                    Object (changes type based on value)
+                                                </p>
+                                                <uib-progressbar class="progress-striped active" value="dynamic" type="{{type}}">
+                                                    {{type}} <span ng-show="showWarning">! Watch out!</span>
+                                                </uib-progressbar>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <p>
+                                                    <h5>Stacked</h5>
+                                                </p>
+                                                <button class="btn btn-primary btn-o block margin-bottom-10" type="button" ng-click="randomStacked()">
+                                                    Randomize
+                                                </button>
+                                                <p class="text-small">
+                                                    Place multiple bars into the same .progress to stack them.
+                                                </p>
+                                                <uib-progress>
+                                                    <uib-bar ng-repeat="bar in stacked track by $index" value="bar.value" type="{{bar.type}}">
+                                                        <span ng-hide="bar.value < 5">{{bar.value}}%</span>
+                                                    </uib-bar>
+                                                </uib-progress>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end: PROGRESS BARS -->
+<!-- start: PAGINATION -->
+<div class="container-fluid container-fullw">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-white">
+                <div class="panel-body">
+                    <h5 class="over-title margin-bottom-15"><span class="text-bold">Pagination</span></h5>
+                    <p>
+                        Provide pagination links for your site or app with the multi-page pagination component, or the simpler pager alternative.
+                        Simple pagination, great for apps and search results. The large block is hard to miss, easily scalable, and provides large click areas.
+                    </p>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="panel panel-transparent">
+                                <div class="panel-heading">
+                                    <div class="panel-title">
+                                        Default Pagination
+                                    </div>
+                                </div>
+                                <div class="panel-body">
+                                    <p class="text-small">
+                                        Simple pagination, great for apps and search results. The large block is hard to miss, easily scalable, and provides large click areas.
+                                    </p>
+                                    <div>
+                                        <ul class="pagination margin-bottom-10">
+                                            <li>
+                                                <a href="#"> <i class="ti-arrow-left"></i> </a>
+                                            </li>
+                                            <li>
+                                                <a href="#"> 1 </a>
+                                            </li>
+                                            <li>
+                                                <a href="#"> 2 </a>
+                                            </li>
+                                            <li>
+                                                <a href="#"> 3 </a>
+                                            </li>
+                                            <li>
+                                                <a href="#"> 4 </a>
+                                            </li>
+                                            <li>
+                                                <a href="#"> <i class="ti-arrow-right"></i> </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <p class="text-small">
+                                        Fancy larger or smaller pagination? Add
+                                        <code>
+                                            .pagination-lg
+                                        </code>
+                                        or
+                                        <code>
+                                            .pagination-sm
+                                        </code>
+                                        for additional sizes.
+                                    </p>
+                                    <div>
+                                        <ul class="pagination pagination-lg margin-bottom-10">
+                                            <li>
+                                                <a href="#"> <i class="ti-arrow-left"></i> </a>
+                                            </li>
+                                            <li>
+                                                <a href="#"> 1 </a>
+                                            </li>
+                                            <li>
+                                                <a href="#"> 2 </a>
+                                            </li>
+                                            <li>
+                                                <a href="#"> 3 </a>
+                                            </li>
+                                            <li>
+                                                <a href="#"> <i class="ti-arrow-right"></i> </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <ul class="pagination pagination-sm margin-bottom-10">
+                                            <li>
+                                                <a href="#"> <i class="ti-arrow-left"></i> </a>
+                                            </li>
+                                            <li>
+                                                <a href="#"> 1 </a>
+                                            </li>
+                                            <li>
+                                                <a href="#"> 2 </a>
+                                            </li>
+                                            <li>
+                                                <a href="#"> 3 </a>
+                                            </li>
+                                            <li>
+                                                <a href="#"> 4 </a>
+                                            </li>
+                                            <li>
+                                                <a href="#"> <i class="ti-arrow-right"></i> </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="panel panel-transparent">
+                                <div class="panel-heading">
+                                    <div class="panel-title">
+                                        Colorful
+                                    </div>
+                                </div>
+                                <div class="panel-body">
+                                    <p class="text-small">
+                                        Use any of the available button classes to quickly create a styled pagination.
+                                    </p>
+                                    <div>
+                                        <ul class="pagination pagination-blue margin-bottom-10">
+                                            <li class="disabled">
+                                                <a href="#"><i class="ti-angle-left"></i></a>
+                                            </li>
+                                            <li class="active">
+                                                <a href="#"> 1 </a>
+                                            </li>
+                                            <li>
+                                                <a href="#"> 2 </a>
+                                            </li>
+                                            <li>
+                                                <a href="#"> 3 </a>
+                                            </li>
+                                            <li>
+                                                <a href="#"> 4 </a>
+                                            </li>
+                                            <li>
+                                                <a href="#"><i class="ti-angle-right"></i></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <ul class="pagination pagination-green margin-bottom-10">
+                                            <li class="disabled">
+                                                <a href="#"><i class="ti-angle-left"></i></a>
+                                            </li>
+                                            <li class="active">
+                                                <a href="#"> 1 </a>
+                                            </li>
+                                            <li>
+                                                <a href="#"> 2 </a>
+                                            </li>
+                                            <li>
+                                                <a href="#"> 3 </a>
+                                            </li>
+                                            <li>
+                                                <a href="#"> 4 </a>
+                                            </li>
+                                            <li>
+                                                <a href="#"><i class="ti-angle-right"></i></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <ul class="pagination pagination-red margin-bottom-10">
+                                            <li class="disabled">
+                                                <a href="#"><i class="ti-angle-left"></i></a>
+                                            </li>
+                                            <li class="active">
+                                                <a href="#"> 1 </a>
+                                            </li>
+                                            <li>
+                                                <a href="#"> 2 </a>
+                                            </li>
+                                            <li>
+                                                <a href="#"> 3 </a>
+                                            </li>
+                                            <li>
+                                                <a href="#"> 4 </a>
+                                            </li>
+                                            <li>
+                                                <a href="#"><i class="ti-angle-right"></i></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /// controller:  'PaginationDemoCtrl' -  localtion: assets/js/controllers/bootstrapCtrl.js /// -->
+                    <div ng-controller="PaginationDemoCtrl">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="panel panel-transparent">
+                                    <div class="panel-heading">
+                                        <div class="panel-title">
+                                            Dynamic Pagination
+                                        </div>
+                                    </div>
+                                    <div class="panel-body">
+                                        <p class="text-small">
+                                            A lightweight pagination directive that is focused on ... providing pagination & will take care of visualising a pagination bar and enable / disable buttons correctly!
+                                        </p>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <p>
+                                                    <h5>Default</h5>
+                                                </p>
+                                                <div>
+                                                    <uib-pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()"></uib-pagination>
+                                                </div>
+                                                <div>
+                                                    <uib-pagination boundary-links="true" total-items="totalItems" ng-model="currentPage" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></uib-pagination>
+                                                </div>
+                                                <div>
+                                                    <uib-pagination direction-links="false" boundary-links="true" total-items="totalItems" ng-model="currentPage"></uib-pagination>
+                                                </div>
+                                                <div>
+                                                    <uib-pagination direction-links="false" total-items="totalItems" ng-model="currentPage" num-pages="smallnumPages"></uib-pagination>
+                                                </div>
+                                                <div class="well">
+                                                    The selected page no: {{currentPage}}
+                                                </div>
+                                                <button class="btn btn-primary btn-o" ng-click="setPage(3)">
+                                                    Set current page to: 3
+                                                </button>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <p>
+                                                    <h5>Pager</h5>
+                                                </p>
+                                                <uib-pager total-items="totalItems" ng-model="currentPage"></uib-pager>
+                                                <p>
+                                                    <h5>Limit the maximum visible buttons</h5>
+                                                </p>
+                                                <div>
+                                                    <uib-pagination total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true"></uib-pagination>
+                                                </div>
+                                                <div>
+                                                    <uib-pagination total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="false" num-pages="numPages"></uib-pagination>
+                                                </div>
+                                                <div class="well">
+                                                    Page: {{bigCurrentPage}} / {{numPages}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end: PAGINATION -->
+<!-- start: LABELS AND BADGES -->
+<div class="container-fluid container-fullw">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-white">
+                <div class="panel-body">
+                    <h5 class="over-title">Labels and <span class="text-bold">Badges</span></h5>
+                    <p>
+                        Using Twitter Bootstrap, you may create inline labels, i.e. Label and annotate text and badges, i.e. indicators and unread counts.
+                    </p>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="panel panel-white">
+                                <div class="panel-heading">
+                                    <div class="panel-title">
+                                        Available labels
+                                    </div>
+                                </div>
+                                <div class="panel-body">
+                                    <p class="text-small">
+                                        Add any of the below mentioned modifier classes to change the appearance of a label.
+                                    </p>
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Labels</th>
+                                                <th>Class</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><span class="label label-default"> Default</span></td>
+                                                <td>
+                                                    <code>
+                                                        label label-default
+                                                    </code>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="label label-success"> Success</span></td>
+                                                <td>
+                                                    <code>
+                                                        label label-success
+                                                    </code>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="label label-warning"> Warning</span></td>
+                                                <td>
+                                                    <code>
+                                                        label label-warning;
+                                                    </code>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="label label-danger"> Danger</span></td>
+                                                <td>
+                                                    <code>
+                                                        label label-danger
+                                                    </code>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="label label-info"> Info</span></td>
+                                                <td>
+                                                    <code>
+                                                        label label-info
+                                                    </code>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="label label-inverse"> Inverse</span></td>
+                                                <td>
+                                                    <code>
+                                                        label label-inverse
+                                                    </code>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="panel panel-white">
+                                <div class="panel-heading">
+                                    <div class="panel-title">
+                                        Available badges
+                                    </div>
+                                </div>
+                                <div class="panel-body">
+                                    <p class="text-small">
+                                        Easily highlight new or unread items by adding a
+                                        <code>
+                                            &lt;span class="badge"&gt;
+                                        </code>
+                                        to links, Bootstrap navs, and more.
+                                    </p>
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th class="hidden-xs">Name</th>
+                                                <th>Example</th>
+                                                <th>Class</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="hidden-xs"> Default </td>
+                                                <td><span class="badge"> 1</span></td>
+                                                <td>
+                                                    <code>
+                                                        badge badge-default
+                                                    </code>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="hidden-xs"> Success </td>
+                                                <td><span class="badge badge-success"> 2</span></td>
+                                                <td>
+                                                    <code>
+                                                        badge badge-success
+                                                    </code>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="hidden-xs"> Warning </td>
+                                                <td><span class="badge badge-warning"> 4</span></td>
+                                                <td>
+                                                    <code>
+                                                        badge badge-warning
+                                                    </code>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="hidden-xs"> Danger </td>
+                                                <td><span class="badge badge-danger"> 6</span></td>
+                                                <td>
+                                                    <code>
+                                                        badge badge-danger
+                                                    </code>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="hidden-xs"> Info </td>
+                                                <td><span class="badge badge-info"> 8</span></td>
+                                                <td>
+                                                    <code>
+                                                        badge badge-info
+                                                    </code>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="hidden-xs"> Inverse </td>
+                                                <td><span class="badge badge-inverse"> 10</span></td>
+                                                <td>
+                                                    <code>
+                                                        badge badge-inverse
+                                                    </code>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end: LABELS AND BADGES -->

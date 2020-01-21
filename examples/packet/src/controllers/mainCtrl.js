@@ -4,11 +4,8 @@
  */
 let app = angular.module('app')
 app.controller('AppCtrl',
-  function ($rootScope, $scope, $state, $swipe, $translate, $localStorage,
-    $window, $document, $timeout, cfpLoadingBar, Fullscreen, $transitions) {
+  function ($rootScope, $scope, $state, $window, $document, $timeout, Fullscreen, cfpLoadingBar, $transitions) {
 
-    // Loading bar transition
-    // -----------------------------------
     var $win = $($window), $body = $('body');
 
     $scope.horizontalNavbarCollapsed = true;
@@ -82,8 +79,9 @@ app.controller('AppCtrl',
 
     var defaultlayout = $scope.app.defaultLayout;
     // save settings to local storage
-    if (angular.isDefined($localStorage.lay)) {
-      $scope.app.layout = angular.copy($localStorage.lay);
+    var slay = localStorage.getItem('packet-lay');
+    if (slay !== null) {
+      $scope.app.layout = angular.copy(slay);
 
     }
 
@@ -91,7 +89,7 @@ app.controller('AppCtrl',
       $scope.loading_reset = true;
       // start loading
       $timeout(function () {
-        delete $localStorage.lay;
+        localStorage.removeItem('packet-lay');
         $scope.app.layout = angular.copy($rootScope.app.defaultLayout);
         $scope.loading_reset = false;
         // stop loading
@@ -102,7 +100,8 @@ app.controller('AppCtrl',
       $scope.loading_save = true;
       // start loading
       $timeout(function () {
-        $localStorage.lay = angular.copy($scope.app.layout);
+        localStorage.setItem('packet-lay', angular.copy($scope.app.layout))
+        //$localStorage.lay = angular.copy($scope.app.layout);
         $scope.loading_save = false;
         // stop loading
       }, 500);
@@ -124,33 +123,6 @@ app.controller('AppCtrl',
       $document.scrollTopAnimated(0, 600);
 
     };
-
-    // angular translate
-    // ----------------------
-    $scope.language = {
-      // Handles language dropdown
-      listIsOpen: false,
-      // list of available languages
-      available: {
-        'en': 'English',
-        'it_IT': 'Italiano',
-        'de_DE': 'Deutsch'
-      },
-      // display always the current ui language
-      init: function () {
-        var proposedLanguage = $translate.proposedLanguage() || $translate.use();
-        var preferredLanguage = $translate.preferredLanguage();
-        // we know we have set a preferred one in app.config
-        $scope.language.selected = $scope.language.available[(proposedLanguage || preferredLanguage)];
-      },
-      set: function (localeId, ev) {
-        $translate.use(localeId);
-        $scope.language.selected = $scope.language.available[localeId];
-        $scope.language.listIsOpen = !$scope.language.listIsOpen;
-      }
-    };
-
-    $scope.language.init();
 
     // Fullscreen
     $scope.isFullscreen = false;
@@ -230,17 +202,17 @@ app.controller('AppCtrl',
         sref: "app.dashboard"
       },
       {
-        title: "Forms",
-        icon: "fa fa-pencil",
-        sref: "app.form",
+        title: "Elements",
+        icon: "fa fa-flask",
+        sref: "app.ui",
         items: [
           {
-            title: "Form Elements",
-            sref: "app.form.elements"
+            title: "Elements",
+            sref: "app.ui.elements"
           },
           {
-            title: "Pickers",
-            sref: "app.form.pickers"
+            title: "Buttons",
+            sref: "app.ui.buttons"
           }
         ]
       }

@@ -1,0 +1,209 @@
+<!-- start: BREADCRUMB -->
+<div class="breadcrumb-wrapper">
+	<h4 class="mainTitle no-margin" translate="sidebar.nav.forms.CROPPING">IMAGE CROPPING</h4>
+
+	<div ncy-breadcrumb class="pull-right"></div>
+</div>
+<!-- end: BREADCRUMB -->
+<div class="container-fluid container-fullw">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-white">
+				<div class="panel-body">
+					<h5 class="over-title margin-bottom-15">ct-crop <span class="text-bold">directive</span></h5>
+					<p class="margin-bottom-20">
+						The
+						<code>
+							ct-crop
+						</code>
+						directive makes you easily crop images. Thanks to the powerful Jcrop and Angular Awesome Slider functionality, ct-crop will make you work less and get the best result you can.
+					</p>
+					<!-- /// controller:  'Crop2Ctrl' -  localtion: assets/js/controllers/crop2Ctrl.js /// -->
+					<div ng-controller="Crop2Ctrl">
+						<div class="col-md-3">
+							<ct-crop crop-options="options" crop-labels="labels" crop-callback="updateCrop"></ct-crop>
+						</div>
+						<div class="col-md-9">
+							<div class="radio clip-radio radio-primary">
+								<input type="radio" id="radio0" name="inline" value="0" ng-model="ch" ng-change="changeImg()" >
+								<label for="radio0"> Image 1 </label>
+							</div>
+							<div class="radio clip-radio radio-primary">
+								<input type="radio" id="radio1" name="inline" value="1" ng-model="ch" ng-change="changeImg()" >
+								<label for="radio1"> Image 2 </label>
+							</div>
+							<div class="radio clip-radio radio-primary">
+								<input type="radio" id="radio2" value="2" ng-model="ch" ng-change="changeImg()" name="inline">
+								<label for="radio2"> Image 3 (autoOpenModal = false) </label>
+							</div>
+							<pre>{{cropItem | json}}</pre>
+						</div>
+					</div>
+					<div class="col-md-12">
+						<div class="well">
+							<p class="margin-bottom-20">
+								To activate the image crop, just use the following code in your html:
+							</p>
+							<p class="margin-bottom-20">
+								<code>
+									&lt;ct-crop url-image="url" crop-options="options" crop-labels="labels" crop-callback="updateCrop"&gt;&lt;/ct-crop&gt;
+								</code>
+							</p>
+							<p class="margin-bottom-20">
+								The
+								<code>
+									crop-options
+								</code>
+								attribute refers to an object in order set up the crop parameters.
+								<ul>
+									<li>
+										<strong>url</strong>: image directory
+									</li>
+									<li>
+										<strong>cropX</strong>: the X coordinate of the left top corner from which che crop rectangle starts (default: 0)
+									</li>
+									<li>
+										<strong>cropY</strong>: the Y coordinate of the left top corner from which che crop rectangle starts (default: 0)
+									</li>
+									<li>
+										<strong>cropWidth</strong>: the crop rectangle width (measured in pixels)
+									</li>
+									<li>
+										<strong>cropHeight</strong>: the crop rectangle height (measured in pixels)
+									</li>
+									<li>
+										<strong>cropMaxWidth</strong>: the crop rectangle maximum width
+									</li>
+									<li>
+										<strong>cropMaxHeight</strong>: the crop rectangle maximum height
+									</li>
+									<li>
+										<strong>cropMinWidth</strong>: the crop rectangle minimum width
+									</li>
+									<li>
+										<strong>cropMinHeight</strong>: the crop rectangle minimum height
+									</li>
+									<li>
+										<strong>autoOpenModal</strong>: <em>true/false</em> value which specifies whether the crop management modal has to open automatically or not when changing the image url
+									</li>
+								</ul>
+							</p>
+							<p class="margin-bottom-20">
+								The <code>
+									crop-labels</code>
+								attribute refers to an object in order customize the modal title, the texts and the button icons.
+								<ul>
+									<li>
+										<strong>modalTitle</strong>: the crop management modal
+									</li>
+									<li>
+										<strong>modalButton</strong>: an object with two parameters:
+										<ul>
+											<li>
+												<em>label</em>: open-modal button text
+											</li>
+											<li>
+												<em>icon</em>: the chosen icon class
+											</li>
+										</ul>
+									</li>
+									<li>
+										<strong>cropButton</strong>: an object with two parameters:
+										<ul>
+											<li>
+												<em>label</em>: crop button text
+											</li>
+											<li>
+												<em>icon</em>: the chosen icon class
+											</li>
+										</ul>
+									</li>
+									<li>
+										<strong>cancelButton</strong>: an object with two parameters:
+										<ul>
+											<li>
+												<em>label</em>: cancel button tooltip
+											</li>
+											<li>
+												<em>icon</em>: the chosen icon class for Cancel button
+											</li>
+										</ul>
+									</li>
+									<li>
+										<strong>fitButton</strong>: an object with two parameters:
+										<ul>										
+											<li>
+												<em>label</em>: text appearing in the button tooltips. It eases the image resize according to the cropping area minimum width.
+											</li>
+											<li>
+												<em>icon</em>: the chosen icon class for Cancel button
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</p>
+							<p class="margin-bottom-20">
+								The <code>
+									crop-callback</code>
+								attribute refers to a function you can activate by clicking on the crop button. It shows an event with all the useful cropping informations.
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- start: IMAGE CROP EXAMPLE -->
+<div class="container-fluid container-fullw">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-white">
+				<div class="panel-body">
+					<h5 class="over-title margin-bottom-15">Image Crop <span class="text-bold">example</span></h5>
+					<p class="margin-bottom-20">
+						Add the image crop directive
+						<code>
+							&lt;img-crop&gt;
+						</code>
+						to the HTML file where you want to use an image crop control.
+						<br />
+						<em>Note:</em>
+						a container, you place the directive to, should have some pre-defined size (absolute or relative to its parent). That's required, because the image crop control fits the size of its container.
+					</p>
+					<!-- /// controller:  'CropCtrl' -  localtion: assets/js/controllers/cropCtrl.js /// -->
+					<div ng-controller="CropCtrl">
+						<div class="row">
+							<div class="col-md-12 margin-bottom-30">
+								<span class="btn btn-primary btn-file"> Select an image file
+									<input type="file" id="fileInput" />
+								</span>
+								<div class="btn-group">
+									<label class="btn btn-default btn-primary btn-o" ng-model="cropType" uib-btn-radio="'square'"> Square </label>
+									<label class="btn btn-primary btn-o" ng-model="cropType" uib-btn-radio="'circle'"> Circle </label>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="cropBox">
+									<div class="cropArea">
+										<img-crop image="myImage" result-image="myCroppedImage" area-type="{{cropType}}"></img-crop>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="cropBox croppedBox">
+									<div>
+										<img ng-src="{{myCroppedImage}}" />
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- end: IMAGE CROP EXAMPLE -->

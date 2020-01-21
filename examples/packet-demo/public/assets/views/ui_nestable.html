@@ -1,0 +1,35 @@
+<!-- start: BREADCRUMB -->
+<div class="breadcrumb-wrapper">
+    <h4 class="mainTitle no-margin" translate="sidebar.nav.element.NESTABLE">NESTABLE LIST</h4>
+
+    <div ncy-breadcrumb class="pull-right"></div>
+</div>
+<!-- end: BREADCRUMB -->
+<!-- start: NESTABLE LIST -->
+<div class="container-fluid container-fullw">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-white">
+                <div class="panel-body">
+                    <!-- /// controller:  'nestableCtrl' -  localtion: assets/js/controllers/nestableCtrl.js /// -->
+                    <div ng-controller="nestableCtrl">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div ng-nestable ng-model="mdl">
+                                    {{$item.text}}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <h5>Data binding</h5>
+                                <div class="well">
+                                    {{mdl | json}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end: NESTABLE LIST -->

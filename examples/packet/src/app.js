@@ -1,13 +1,11 @@
 import angular from 'angular'
 import appName from './app.module'
-import './config.constant'
 import './config.router'
 
 const app = angular.module('app')
 //export default app.name
 
-app.run(['$rootScope', '$state', '$stateParams',
-function ($rootScope, $state, $stateParams) {
+app.run(function ($rootScope, $state, $stateParams) {
 
     // Attach Fastclick for eliminating the 300ms delay between a physical tap and the firing of a click event on mobile browsers
     FastClick.attach(document.body);
@@ -49,59 +47,52 @@ function ($rootScope, $state, $stateParams) {
         job: 'ng-Dev',
         picture: 'app/img/user/02.jpg'
     };
-}]);
-// translate config
-app.config(['$translateProvider',
-function ($translateProvider) {
+});
 
-    // prefix and suffix information  is required to specify a pattern
-    // You can simply use the static-files loader with this pattern:
-    $translateProvider.useStaticFilesLoader({
-        prefix: 'assets/i18n/',
-        suffix: '.json'
-    });
-
-    // Since you've now registered more then one translation table, angular-translate has to know which one to use.
-    // This is where preferredLanguage(langKey) comes in.
-    $translateProvider.preferredLanguage('en');
-
-    // Store the language in the local storage
-    $translateProvider.useLocalStorage();
-
-    // Enable sanitize
-    $translateProvider.useSanitizeValueStrategy('sanitize');
-
-}]);
+app.constant('APP_MEDIAQUERY', {
+    'desktopXL': 1200,
+    'desktop': 992,
+    'tablet': 768,
+    'mobile': 480
+})
 // Angular-Loading-Bar
 // configuration
-app.config(['cfpLoadingBarProvider',
-function (cfpLoadingBarProvider) {
+app.config(function (cfpLoadingBarProvider) {
     cfpLoadingBarProvider.includeBar = true;
     cfpLoadingBarProvider.includeSpinner = false;
-
-}]);
+});
 // Angular-breadcrumb
 // configuration
 app.config(function ($breadcrumbProvider) {
-    $breadcrumbProvider.setOptions({
-        template: '<ul class="breadcrumb"><li><a ui-sref="app.dashboard"><i class="fa fa-home margin-right-5 text-large text-dark"></i>Home</a></li><li ng-repeat="step in steps">{{step.ncyBreadcrumbLabel}}</li></ul>'
-    });
+  $breadcrumbProvider.setOptions({
+    template: '<ul class="breadcrumb"><li><a ui-sref="app.dashboard"><i class="fa fa-home margin-right-5 text-large text-dark"></i>Home</a></li><li ng-repeat="step in steps">{{step.ncyBreadcrumbLabel}}</li></ul>'
+  });
 });
 // ng-storage
 //set a prefix to avoid overwriting any local storage variables
-app.config(['$localStorageProvider',
-    function ($localStorageProvider) {
-        $localStorageProvider.setKeyPrefix('PacketLtr2');
-    }]);
+// app.config(function ($localStorageProvider) {
+//   $localStorageProvider.setKeyPrefix('PacketLtr2');
+// });
 //filter to convert html to plain text
 app.filter('htmlToPlaintext', function () {
-      return function (text) {
-          return String(text).replace(/<[^>]+>/gm, '');
-      };
+  return function (text) {
+    return String(text).replace(/<[^>]+>/gm, '');
   }
-);
+});
 //Custom UI Bootstrap Calendar Popup Template
-app.run(["$templateCache", function ($templateCache) {
+app.run(function ($templateCache) {
+  //let url = './views/partials/sidebar.html'
+  $templateCache.put('./views/partials/sidebar.html', require('./views/partials/sidebar.html'))
+  $templateCache.put('./views/partials/nav.html', require('./views/partials/nav.html'))
+  $templateCache.put('./views/partials/top-navbar.html', require('./views/partials/top-navbar.html'))
+  $templateCache.put('./views/partials/main-content.html', require('./views/partials/main-content.html'))
+  $templateCache.put('./views/partials/footer.html', require('./views/partials/footer.html'))
+  $templateCache.put('./views/partials/settings.html', require('./views/partials/settings.html'))
+  $templateCache.put('./views/partials/off-sidebar.html', require('./views/partials/off-sidebar.html'))
+});
+
+//Custom UI Bootstrap Calendar Popup Template
+app.run(function ($templateCache) {
     $templateCache.put("uib/template/datepickerPopup/popup.html",
         "<div>\n" +
 	    "  <ul class=\"uib-datepicker-popup clip-datepicker dropdown-menu\" dropdown-nested ng-if=\"isOpen\" ng-style=\"{top: position.top+'px', left: position.left+'px'}\" ng-keydown=\"keydown($event)\" ng-click=\"$event.stopPropagation()\">\n" +
@@ -170,4 +161,4 @@ app.run(["$templateCache", function ($templateCache) {
 	    "  </tbody>\n" +
 	    "</table>\n" +
 	    "");
-}]);
+});

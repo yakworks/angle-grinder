@@ -1,0 +1,43 @@
+body {
+  padding-top: 80px;
+}
+pre {
+  border: none;
+  color: #2c3e50;
+}
+.table-bordered {
+    border-color: #2C3E50;
+}
+.table-bordered > thead > tr {
+  background-color: #2C3E50;
+  color: #ecf0f1;
+}
+.table-bordered > thead > tr > th {
+  border-color: #2C3E50;
+}
+.table-bordered > tbody > tr > td {
+  border-color: #2C3E50;
+}
+footer {
+  background-color: #2C3E50;
+  padding: 20px 0;
+  margin-top: 40px
+}
+footer p {
+  margin: 0;
+}
+.row1 {
+ -webkit-column-width: 24em;
+    -moz-column-width: 24em;
+         column-width: 24em;
+ -webkit-column-gap: 1em;
+    -moz-column-gap: 1em;
+         column-gap: 1em;
+  margin-left: 0;
+  margin-right: 0;
+}
+.item {
+ display: inline-block;
+ padding:  .25rem;
+ width:  100%;
+}

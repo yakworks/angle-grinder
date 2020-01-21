@@ -1,0 +1,83 @@
+<div
+  class="cal-context"
+  ng-switch="vm.view"
+  ng-if="vm.templatesLoaded">
+
+  <div class="alert alert-danger" ng-switch-default>The value passed to the view attribute of the calendar is not set</div>
+
+  <div class="alert alert-danger" ng-hide="vm.viewDate">The value passed to view-date attribute of the calendar is not set</div>
+
+  <mwl-calendar-year
+    events="vm.events"
+    view-date="vm.viewDate"
+    on-event-click="vm.onEventClick"
+    on-event-times-changed="vm.onEventTimesChanged"
+    on-timespan-click="vm.onTimespanClick"
+    cell-is-open="vm.cellIsOpen"
+    cell-modifier="vm.cellModifier"
+    slide-box-disabled="vm.slideBoxDisabled"
+    custom-template-urls="vm.customTemplateUrls"
+    template-scope="vm.templateScope"
+    cell-auto-open-disabled="vm.cellAutoOpenDisabled"
+    ng-switch-when="year">
+  </mwl-calendar-year>
+
+  <mwl-calendar-month
+    events="vm.events"
+    view-date="vm.viewDate"
+    on-event-click="vm.onEventClick"
+    on-event-times-changed="vm.onEventTimesChanged"
+    on-timespan-click="vm.onTimespanClick"
+    on-date-range-select="vm.onDateRangeSelect"
+    cell-is-open="vm.cellIsOpen"
+    cell-modifier="vm.cellModifier"
+    slide-box-disabled="vm.slideBoxDisabled"
+    custom-template-urls="vm.customTemplateUrls"
+    template-scope="vm.templateScope"
+    cell-auto-open-disabled="vm.cellAutoOpenDisabled"
+    draggable-auto-scroll="vm.draggableAutoScroll"
+    ng-switch-when="month">
+  </mwl-calendar-month>
+
+  <mwl-calendar-week
+    events="vm.events"
+    view-date="vm.viewDate"
+    on-event-click="vm.onEventClick"
+    on-event-times-changed="vm.onEventTimesChanged"
+    day-view-start="vm.dayViewStart"
+    day-view-end="vm.dayViewEnd"
+    day-view-split="vm.dayViewSplit"
+    day-view-event-chunk-size="vm.dayViewEventChunkSize"
+    on-timespan-click="vm.onTimespanClick"
+    on-date-range-select="vm.onDateRangeSelect"
+    custom-template-urls="vm.customTemplateUrls"
+    cell-modifier="vm.cellModifier"
+    template-scope="vm.templateScope"
+    draggable-auto-scroll="vm.draggableAutoScroll"
+    ng-switch-when="week">
+  </mwl-calendar-week>
+
+  <mwl-calendar-day
+    events="vm.events"
+    view-date="vm.viewDate"
+    on-event-click="vm.onEventClick"
+    on-event-times-changed="vm.onEventTimesChanged"
+    on-timespan-click="vm.onTimespanClick"
+    on-date-range-select="vm.onDateRangeSelect"
+    day-view-start="vm.dayViewStart"
+    day-view-end="vm.dayViewEnd"
+    day-view-split="vm.dayViewSplit"
+    day-view-event-chunk-size="vm.dayViewEventChunkSize"
+    day-view-event-width="vm.dayViewEventWidth"
+    custom-template-urls="vm.customTemplateUrls"
+    cell-modifier="vm.cellModifier"
+    template-scope="vm.templateScope"
+    day-view-time-position="vm.dayViewTimePosition || 'default'"
+    draggable-auto-scroll="vm.draggableAutoScroll"
+    ng-class="{
+      'time-on-side' : vm.dayViewTimePosition === 'side',
+      'time-hidden' : vm.dayViewTimePosition === 'hidden'
+    }"
+    ng-switch-when="day">
+  </mwl-calendar-day>
+</div>
