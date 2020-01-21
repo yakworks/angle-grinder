@@ -129,7 +129,7 @@ describe('uiSelect2', function () {
           var element = compile('<select ui-select2="{allowClear:true}" ng-model="foo"><option>First</option><option>Second</option></select>');
           expect(element.select2('val')).to.equal('First');
           scope.$apply('foo = false');
-          console.log(element.select2('val'))
+
           expect(element.select2('val')).to.be.null
           scope.$apply('foo = "Second"');
           scope.$apply('foo = null');
@@ -347,7 +347,7 @@ describe('uiSelect2', function () {
       scope.foo.push({'id': '1', 'text': '1'});
       scope.$digest();
 
-      console.log(element.select2('data'))
+
       expect(element.select2('data')).to.deep.equal(
         [{'id': '0', 'text': '0'}, {'id': '1', 'text': '1'}]);
     });
@@ -362,11 +362,10 @@ describe('uiSelect2', function () {
       });
 
       it('Initialize the select2 view based on list of strings.', function() {
-        scope.foo = ['tag1', 'tag2'];
-
+        //scope.foo = ['tag1', 'tag2'];
         var element = compile('<input ng-model="foo" ui-select2="options">');
+        scope.foo = ['tag1', 'tag2'];
         scope.$digest();
-
         expect(element.select2('data')).to.deep.equal([
           {'id': 'tag1', 'text': 'tag1'},
           {'id': 'tag2', 'text': 'tag2'}
@@ -376,9 +375,9 @@ describe('uiSelect2', function () {
       it(
       'When list is empty select2 view model is also initialized as empty',
       function() {
-        scope.foo = [];
 
         var element = compile('<input ng-model="foo" ui-select2="options">');
+        scope.foo = [''];
         scope.$digest();
 
         expect(element.select2('data')).to.deep.equal([{'id': '', 'text': ''}]);
@@ -387,16 +386,14 @@ describe('uiSelect2', function () {
       it(
       'Updating the model with a string will update the select2 view model.',
       function() {
-        scope.foo = [];
-        var element = compile('<input ng-model="foo" ui-select2="options">');
-        scope.$digest();
 
+        var element = compile('<input ng-model="foo" ui-select2="options">');
+
+        scope.foo =[''];
         scope.foo.push('tag1');
         scope.$digest();
-        //console.log("element.select2('data') ************************ ", element.select2('data'))
-        expect(element.select2('data')).to.deep.equal([
-          {'id': '', 'text': ''}, {'id': 'tag1', 'text': 'tag1'}
-          ]);
+        expect(element.select2('data')[0]).to.deep.equal({'id': '', 'text': ''});
+        expect(element.select2('data')[1]).to.deep.equal({'id': 'tag1', 'text': 'tag1'});
       });
 
       it(

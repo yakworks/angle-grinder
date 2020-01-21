@@ -13,7 +13,7 @@ describe("module:angleGrinder.gridz controller: gridCrudCtrl", function() {
   let grid = null;
   let ctrl = null;
 
-  beforeEach(inject(function($rootScope, $controller) {
+  beforeEach(inject(function($rootScope, $controller, $timeout) {
     parentScope = $rootScope.$new();
     grid = {
       saveRow: sinon.stub(),
