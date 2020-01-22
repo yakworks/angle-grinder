@@ -32,7 +32,7 @@ app.run(function ($rootScope, $state, $stateParams) {
       isSidebarClosed: false, // true if you want to initialize the template with closed sidebar
       isFooterFixed: false, // true if you want to initialize the template with fixed footer
       isBoxedPage: false, // true if you want to initialize the template with boxed layout
-      theme: 'lyt2-theme-1', // indicate the theme chosen for your project
+      theme: 'lyt2-theme-2', // indicate the theme chosen for your project
       logo: 'assets/images/yak-logo1.png', // relative path of the project logo
       logoHeight: 22,
       logoCollapsed: 'assets/images/yak-white.png', // relative path of the collapsed logo

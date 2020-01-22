@@ -9,6 +9,10 @@
       </li>
   </ul>
 </script>
+
+<div class="navbar-title">
+  <span >Main Navigation</span>
+</div>
 <ul class="main-navigation-menu">
   <li ng-repeat="mitem in sideMenuItems" class="{{$state.includes(mitem.sref) ? 'active open' : ''}}">
     <a ui-sref="{{mitem.items ? '-' : mitem.sref}}" href="{{mitem.items ? 'javascript:void(0)' : ''}}">
