@@ -30,7 +30,7 @@ $link-color: #000 !important;
 }
 
 #sidebar > div nav {
-    padding-top: 20px;
+    padding-top: 0px;
 
     @media (min-width: $screen-md-min) {
         width: $sideBar-width - 10;
@@ -441,31 +441,6 @@ ul.sub-menu {
                             }
                         }
                     }
-                }
-            }
-        }
-
-        &.lyt-3 {
-            .app-aside {
-                > .item-inner {
-                    left: $sideBar-closed-width - 11;
-                    width: $sideBar-width + 1;
-                }
-
-                > .sub-menu {
-                    left: $sideBar-closed-width - 10;
-                }
-            }
-        }
-
-        &.lyt-3.app-sidebar-fixed {
-            .app-aside {
-                > .item-inner {
-                    left: $sideBar-closed-width - 1 !important;
-                }
-
-                > .sub-menu {
-                    left: $sideBar-closed-width !important;
                 }
             }
         }

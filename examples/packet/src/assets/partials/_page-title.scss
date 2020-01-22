@@ -12,15 +12,6 @@
         padding: 15px;
     }
 
-    .lyt-3 &, .lyt-4 & {
-        border: 1px solid rgba(0, 0, 0, 0.07);
-        margin: 30px 0 0 0;
-
-        @media (min-width: $screen-md-min) {
-            margin: 30px 15px 0;
-        }
-    }
-
     .breadcrumb {
         background-color: transparent;
         margin: 0;

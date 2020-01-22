@@ -8,8 +8,11 @@
         <button href="javascript:void(0)" class="sidebar-mobile-toggler btn no-radius pull-left hidden-md hidden-lg" id="sidebar-toggler" ng-click="toggle('sidebar')" v-pressable>
             <i class="fa fa-bars"></i>
         </button>
-        <a class="navbar-brand" ui-sref="app.dashboard"> <img ng-src="{{app.layout.logo}}" alt="{{app.name}}" /> </a>
-        <a class="navbar-brand navbar-brand-collapsed" ui-sref="app.dashboard"> <img ng-src="{{app.layout.logoCollapsed}}" alt="" /> </a>
+        <a class="navbar-brand" ui-sref="app.dashboard">
+          <img ng-src="{{app.layout.logo}}" alt="{{app.name}}" style="{{'height:' + app.layout.logoHeight + 'px'}}" />
+        </a>
+        <a class="navbar-brand navbar-brand-collapsed" ui-sref="app.dashboard">
+          <img ng-src="{{app.layout.logoCollapsed}}" alt="" style="{{'height:' + app.layout.logoCollapsedHeight + 'px'}}" /> </a>
         <button class="btn pull-right menu-toggler visible-xs-block" id="menu-toggler" ng-click="navbarCollapsed = !navbarCollapsed" v-pressable>
             <i ng-class="navbarCollapsed ? 'fa fa-folder' : 'fa fa-folder-open'"></i> <small><i class="fa fa-caret-down margin-left-5"></i></small>
         </button>

@@ -143,9 +143,6 @@ function ($window, $rootScope, $timeout, mq) {
 
                         menuTitle.addClass("active");
                     }
-                    if ($('#app').hasClass('lyt-3')) {
-                        space = $('#sidebar > .sidebar-container').position().top - $('header').outerHeight() + _this.position().top;
-                    }
 
                     var offset = $('#sidebar > .sidebar-container > div').position().top + $('.nav-user-wrapper').outerHeight() + $('header').outerHeight();
                     var itemTop = isSidebarFixed() && !isBoxedPage() ? _this.parent().position().top + offset + space : (_this.parent().offset().top - $('header').outerHeight());
