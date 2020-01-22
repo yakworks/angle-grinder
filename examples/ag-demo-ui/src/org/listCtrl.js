@@ -4,13 +4,11 @@
  * DS206: Consider reworking classes to avoid initClass
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-class ListCtrl {
-  static initClass() {
-  
-    this.$inject = ["$scope", "Resource", "SinglePageCrudCtrlMixin", "MassUpdateMixin"];
-  }
-  constructor($scope, Resource, SinglePageCrudCtrlMixin, MassUpdateMixin) {
 
+/* @ngInject */
+export default class ListCtrl {
+  constructor($scope, Resource, SinglePageCrudCtrlMixin, MassUpdateMixin) {
+    console.log("List ctr!!!!")
     $scope.gridOptions = {
       path: "/org/list?format=json",
       colModel: this.colModel(),
@@ -60,7 +58,3 @@ class ListCtrl {
     ];
   }
 }
-ListCtrl.initClass();
-
-angular.module("angleGrinder")
-  .controller("org.ListCtrl", ListCtrl);

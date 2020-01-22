@@ -3,6 +3,10 @@
     <meta name="layout" content="agAdmin"/>
     <g:set var="entityName" value="${ag.label(code: "org")}"/>
     <title>${entityName} Admin</title>
+    <g:javascript src="../jquery-libs.js" />
+    <g:javascript src="../vendor-libs.js" />
+    <g:javascript src="../main.js" />
+
 </head>
 
 <body data-resource-name="org"

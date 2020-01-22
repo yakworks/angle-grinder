@@ -1,5 +1,5 @@
 <!doctype html>
-<html ng-app="app.module" lang="en">
+<html ng-app="admin.org" lang="en">
 <head>
   <meta charset="UTF-8">
   <title>Angular App</title>
@@ -8,7 +8,12 @@
 
   <base href="/">
 </head>
-<body>
-  <app></app>
+<body data-resource-name="org"
+      data-resource-path="/org">
+
+<div >
+  <ag-alerts></ag-alerts>
+  <ng-view></ng-view>
+</div>
 </body>
 </html>

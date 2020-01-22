@@ -14,7 +14,7 @@
     <asset:javascript src="app.js"/>
     <asset:stylesheet href="style.css"/>
     <g:layoutHead/>
-
+    <link href="/assets/main.css" rel="stylesheet">
     <style>
     body {
         padding-top: 40px;

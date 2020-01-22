@@ -1,4 +1,5 @@
 import angular from 'angular'
+import '~/bundle.js'
 import uibootstrap from 'angular-ui-bootstrap' // uibootstrap is just a string with the name of the module
 import AppCtrl from './sanityCheck/AppCtrl'
 import AppConfigSvc from './sanityCheck/AppConfigSvc'
@@ -6,6 +7,7 @@ import Org from './org/index'
 import '~/styles/all.js' //using ~/ points to the main projects src dir
 import './app.css'
 
+/*
 const app = () => {
   return {
     template: require('./app.html'),
@@ -21,3 +23,4 @@ angular.module('app.module', [uibootstrap])
   .controller('AppCtrl', AppCtrl)
 
 export default 'app.module'
+*/

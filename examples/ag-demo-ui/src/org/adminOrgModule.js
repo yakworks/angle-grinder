@@ -1,9 +1,9 @@
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-const org = angular.module("admin.org", ["angleGrinder"]);
+import angular from "angular";
+import angleGrinder from '~/angle-grinder'
+
+const MOD_NAME = 'admin.org'
+export default MOD_NAME
+var org = angular.module(MOD_NAME, [angleGrinder]);
 
 org.config([
   "$routeProvider", $routeProvider => $routeProvider
