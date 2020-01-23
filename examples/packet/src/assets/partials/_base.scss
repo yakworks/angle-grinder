@@ -16,7 +16,7 @@ body {
   direction: ltr;
   overflow-x: hidden;
   height: 100%;
-  //font-family: $font-family-default;
+  font-family: $font-family-base;
   //font-size: $font-size-base;
   padding: 0;
   margin: 0;
@@ -73,7 +73,7 @@ h2 {
 h3,
 h4,
 h5 {
-  font-family: $font-family-default;
+  font-family: $font-family-base;
 }
 
 h1,

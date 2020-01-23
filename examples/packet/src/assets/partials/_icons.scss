@@ -74,7 +74,7 @@
 .letter-icon-wrapper {
     height: 40px;
     width: 40px;
-    background-color: #B2B7BB;
+    background-color: #879BAC;
     color: $white;
     white-space: nowrap;
     text-align: center;
@@ -106,12 +106,12 @@
     }
 
     &.size-sm {
-        height: 30px;
-        width: 30px;
+        height: 36px;
+        width: 36px;
         font-size: 14px;
 
         > span, > i {
-            line-height: 30px;
+            line-height: 36px;
         }
 
         > i {

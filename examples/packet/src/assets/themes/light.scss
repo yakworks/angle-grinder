@@ -3,7 +3,7 @@
 /* ---------------------------------------------------------------------- */
 
 @import "../variables";
-$app-background: #F0F3F4;
+$app-background: #F7FAFB;
 //NAV HEADER COLORS
 $header-background: #4F5A67;
 $headerBorder-color: transparent;
@@ -405,6 +405,7 @@ body {
 
     .sidebar-container {
         background: $nav-background !important;
+        border-right: 1px solid $navHover-color;
     }
 
     > div nav {
