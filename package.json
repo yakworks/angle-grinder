@@ -3,7 +3,7 @@
   "license": "MIT",
   "version": "3.0.0",
   "scripts": {
-    "build": "rimraf dist && yarn build:prod",
+    "build": "rimraf dist && yarn build:wip",
     "build:dev": "webpack --config config/webpack.config.js --mode=development --bail --profile --progress",
     "build:wip": "webpack --config config/webpack.config.js --mode=production --bail --profile --progress",
     "build:docs": "webpack --mode=production --bail --profile --progress --content-base ./docs",
@@ -123,7 +123,7 @@
     "webpack-dev-server": "^3.10.1"
   },
   "engines": {
-    "node": "0.10.x",
+    "node": "10.13.0",
     "npm": "1.2.x"
   },
   "bugs": {

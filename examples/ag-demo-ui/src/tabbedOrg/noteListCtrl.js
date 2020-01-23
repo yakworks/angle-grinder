@@ -1,15 +1,5 @@
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * DS206: Consider reworking classes to avoid initClass
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-// TODO plurarize this one and contacts
-class NoteListCtrl {
-  static initClass() {
-  
-    this.$inject = ["$scope", "resourceBuilder", "DialogCrudCtrlMixin"];
-  }
+/* @ngInject */
+export default class NoteListCtrl {
   constructor($scope, resourceBuilder, DialogCrudCtrlMixin) {
     // Create resource for users (contacts)
     const Notes = resourceBuilder("/note");
@@ -45,7 +35,5 @@ class NoteListCtrl {
     ];
   }
 }
-NoteListCtrl.initClass();
 
-angular.module("angleGrinder")
-  .controller("tabbedOrg.NoteListCtrl", NoteListCtrl);
+

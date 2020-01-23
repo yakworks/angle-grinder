@@ -41,7 +41,7 @@ TODO will add in make commands
 
 - `yarn watch-ag-demo` will watch the files in ag-demo-ui and build into grails
 
-- `gradle bootRun` to run grails demo app
+- `./gradlew bootRun` to run grails demo app
 
 
 for the sample node app and docs

@@ -1,14 +1,5 @@
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * DS206: Consider reworking classes to avoid initClass
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-class ContactListCtrl {
-  static initClass() {
-  
-    this.$inject = ["$scope", "resourceBuilder", "DialogCrudCtrlMixin", ];
-  }
+/* @ngInject */
+export default class ContactListCtrl {
   constructor($scope, resourceBuilder, DialogCrudCtrlMixin) {
     // Create resource for the users (contacts)
     const Users = resourceBuilder("/user");
@@ -48,7 +39,4 @@ class ContactListCtrl {
     ];
   }
 }
-ContactListCtrl.initClass();
 
-angular.module("angleGrinder")
-  .controller("tabbedOrg.ContactListCtrl", ContactListCtrl);
