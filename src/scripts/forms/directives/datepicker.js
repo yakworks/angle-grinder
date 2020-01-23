@@ -2,7 +2,6 @@ import angular from 'angular'
 import formsModule from '../formsModule'
 import moment from 'moment'
 import 'eonasdan-bootstrap-datetimepicker/src/js/bootstrap-datetimepicker'
-// import moment from 'moment'
 import _ from 'lodash'
 
 var forms = angular.module(formsModule)
@@ -70,9 +69,7 @@ forms.directive('agDatepicker', [
       }
 
       const options = angular.extend(defaultOptions, $scope.$eval($attrs.datepickerOptions))
-      const {
-        isoFormat
-      } = options
+      const { isoFormat } = options
       delete options.isoFormat
 
       // Decorate datepicker with button and some usefull stuff if directive is element, not attribute
@@ -87,7 +84,7 @@ forms.directive('agDatepicker', [
         if (ngModelCtrl) {
           return $timeout(function() {
             if (!_.isNil(event.date) && (event.date._d !== undefined)) {
-              ngModelCtrl.$setViewValue(moment(event.date._d).format(isoFormat))
+              ngModelCtrl.$setViewValue(moment.utc(event.date._d).format(isoFormat))
               return ngModelCtrl.$setValidity('dateFormat', agDate.isValid(ngModelCtrl.$modelValue, isoFormat))
             } else {
               return ngModelCtrl.$setViewValue('')
@@ -99,7 +96,7 @@ forms.directive('agDatepicker', [
       const setPickerValue = function() {
         let date = null
         if (ngModelCtrl && ngModelCtrl.$viewValue) {
-          date = moment(ngModelCtrl.$viewValue, isoFormat)
+          date = moment.utc(ngModelCtrl.$viewValue, isoFormat)
         }
         const datepicker = $element.data('DateTimePicker')
         if (datepicker) { return datepicker.date(date) }
@@ -127,7 +124,7 @@ forms.directive('agDate', [
         const isValid = agDate.isValid(viewValue, dateFormat)
         ngModelCtrl.$setValidity('dateFormat', isValid)
         if (isValid) {
-          return moment(viewValue, dateFormat).format(modelFormat)
+          return moment.utc(viewValue, dateFormat).format(modelFormat)
         } else {
           return ''
         }
@@ -136,7 +133,7 @@ forms.directive('agDate', [
       return ngModelCtrl.$formatters.push(function(modelValue) {
         const isValid = agDate.isValid(modelValue, modelFormat)
         ngModelCtrl.$setValidity('dateFormat', isValid)
-        return moment(modelValue, modelFormat).format(dateFormat)
+        return moment.utc(modelValue, modelFormat).format(dateFormat)
       })
     }
   })

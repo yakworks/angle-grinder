@@ -60,7 +60,7 @@ smod.directive('agSelect2', [
           if (options.width == null) { options.width = 'resolve' }
 
           // create `ajax`
-          if (!!_.isNil(options.ajax) && !_.isNil(attrs.selectAjaxUrl)) {
+          if (_.isNil(options.ajax) && !_.isNil(attrs.selectAjaxUrl)) {
             options.ajax = {
               url: pathWithContext(attrs.selectAjaxUrl),
               data(term, page) {

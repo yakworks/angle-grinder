@@ -1,603 +1,673 @@
-/*
-describe "module: angleGrinder.gridz, conroller: AgGridCtrl", ->
+import agGridz from '~/scripts/gridz'
 
-  beforeEach module agGridz, ($provide) ->
-    * spy for `FlattenServ` service
-    $provide.decorator "FlattenServ", ($delegate) ->
-      sinon.spy($delegate)
+describe("module: angleGrinder.gridz, conroller: AgGridCtrl", function() {
 
-    * mock `xlsData` service
-    $provide.value "xlsData", sinon.mock()
+  beforeEach(angular.mock.module(agGridz, function($provide)  {
+      // spy for `FlattenServ` service
+      $provide.decorator("FlattenServ", $delegate => sinon.spy($delegate));
 
-    return
+      // mock `xlsData` service
+      $provide.value("xlsData", sinon.mock());
 
-  ctrl = null
-  jqGridEl = null
+    })
+  );
 
-  before ->
-    @gridParams =
-      colModel: [{ name: "foo", hidden: true }, { name: "bar", hidden: false }]
+  let ctrl = null;
+  let jqGridEl = null;
 
-  beforeEach inject ($controller) ->
-    jqGridEl = sinon.stub($().jqGrid())
+  before(function() {
+    return this.gridParams = {colModel: [{ name: "foo", hidden: true }, { name: "bar", hidden: false }]};});
 
-    * stub some grid element methods
-    jqGridEl.attr = (name) -> "gridId"
-    jqGridEl.getGridParam = (name) => @gridParams[name]
+  beforeEach(inject(function($controller) {
+      jqGridEl = sinon.stub($().jqGrid());
 
-    * stub jQuery element
-    $element =
-      find: (->
-        stub = sinon.stub()
-        stub.withArgs("table.gridz").returns(jqGridEl)
-        return stub
-      )()
+      // stub some grid element methods
+      jqGridEl.attr = name => "gridId";
+      jqGridEl.getGridParam = name => this.gridParams[name];
 
-    * initialzie the controller
-    ctrl = $controller "AgGridCtrl",
-      $element: $element, $attrs: {agGrid: 'gridId'}
+      // stub jQuery element
+      const $element = {
+        find: (function() {
+          const stub = sinon.stub();
+          stub.withArgs("table.gridz").returns(jqGridEl);
+          return stub;
+        })()
+      };
 
-    sinon.stub(ctrl, "flashOnSuccess")
+      // initialzie the controller
+      ctrl = $controller("AgGridCtrl",
+        {$element, $attrs: {agGrid: 'gridId'}});
 
-  describe "#getGridId", ->
+      return sinon.stub(ctrl, "flashOnSuccess");
+    })
+  );
 
-    it "returns grid element id", ->
-      expect(ctrl.getGridId()).to.eq "gridId"
+  describe("#getGridId", () => it("returns grid element id", () => expect(ctrl.getGridId()).to.eq("gridId")));
 
-  describe "#reload", ->
+  describe("#reload", function() {
 
-    it "reloads the grid", ->
-      * When
-      ctrl.reload()
+    it("reloads the grid", function() {
+      // When
+      ctrl.reload();
 
-      * Then
-      expect(jqGridEl.trigger).to.have.been.called
-      expect(jqGridEl.trigger).to.have.been.calledWith("reloadGrid")
+      // Then
+      expect(jqGridEl.trigger).to.have.been.called;
+      return expect(jqGridEl.trigger).to.have.been.calledWith("reloadGrid");
+    });
 
-    it "returns a promise", inject ($rootScope) ->
-      * When
-      promise = ctrl.reload()
-      $rootScope.$broadcast "gridz:loadComplete", foo: "bar"
+    return it("returns a promise", inject(function($rootScope) {
+        // When
+        const promise = ctrl.reload();
+        $rootScope.$broadcast("gridz:loadComplete", {foo: "bar"});
 
-      * Then
-      resolvedValue = null
-      promise.then (data) -> resolvedValue = data
+        // Then
+        let resolvedValue = null;
+        promise.then(data => resolvedValue = data);
 
-      expect(resolvedValue).to.be.null
-      $rootScope.$digest()
-      expect(resolvedValue).to.have.property "foo", "bar"
+        expect(resolvedValue).to.be.null;
+        $rootScope.$digest();
+        return expect(resolvedValue).to.have.property("foo", "bar");
+      })
+    );
+  });
 
-  describe "#getParam", ->
-    before -> @gridParams.foo = "bar"
+  describe("#getParam", function() {
+    before(function() { return this.gridParams.foo = "bar"; });
 
-    it "retrieves a particular grid parameter", ->
-      expect(ctrl.getParam("foo")).to.eq "bar"
+    return it("retrieves a particular grid parameter", () => expect(ctrl.getParam("foo")).to.eq("bar"));
+  });
 
-  describe "#setParam", ->
-    it "sets a particular grid parameter", ->
-      * When
-      ctrl.setParam(foo: "bar")
+  describe("#setParam", () => it("sets a particular grid parameter", function() {
+    // When
+    ctrl.setParam({foo: "bar"});
 
-      * Then
-      expect(jqGridEl.setGridParam).to.have.been.called
-      expect(jqGridEl.setGridParam).to.have.been.calledWith(foo: "bar")
+    // Then
+    expect(jqGridEl.setGridParam).to.have.been.called;
+    return expect(jqGridEl.setGridParam).to.have.been.calledWith({foo: "bar"});
+  }));
 
-  describe "#updateRow", ->
+  describe("#updateRow", function() {
 
-    context "simple update", ->
+    context("simple update", function() {
 
-      it "updates a row with the given id", ->
-        * When
-        ctrl.updateRow(123, foo: "bar")
+      it("updates a row with the given id", function() {
+        // When
+        ctrl.updateRow(123, {foo: "bar"});
 
-        * Then
-        expect(jqGridEl.setRowData).to.have.been.called
-        expect(jqGridEl.setRowData).to.have.been.calledWith(123, foo: "bar")
+        // Then
+        expect(jqGridEl.setRowData).to.have.been.called;
+        return expect(jqGridEl.setRowData).to.have.been.calledWith(123, {foo: "bar"});
+      });
 
-      it "flattens data before inserting it to the grid", inject (FlattenServ) ->
-        * When
-        ctrl.updateRow(123, foo: bar: "biz")
+      it("flattens data before inserting it to the grid", inject(function(FlattenServ) {
+          // When
+          ctrl.updateRow(123, {foo: {bar: "biz"}});
 
-        * Then
-        expect(FlattenServ).to.have.been.called
-        expect(FlattenServ).to.have.been.calledWith(foo: bar: "biz")
+          // Then
+          expect(FlattenServ).to.have.been.called;
+          return expect(FlattenServ).to.have.been.calledWith({foo: {bar: "biz"}});
+        })
+      );
 
-      it "flashes the updated row", ->
-        * Given
-        ctrl.updateRow(123, foo: "bar")
+      return it("flashes the updated row", function() {
+        // Given
+        ctrl.updateRow(123, {foo: "bar"});
 
-        * Then
-        expect(ctrl.flashOnSuccess).to.have.been.called
-        expect(ctrl.flashOnSuccess).to.have.been.calledWith(123)
+        // Then
+        expect(ctrl.flashOnSuccess).to.have.been.called;
+        return expect(ctrl.flashOnSuccess).to.have.been.calledWith(123);
+      });
+    });
 
-    context "when the new data contain empty values", ->
-      beforeEach ->
-        * stub previous row data
-        jqGridEl.getRowData.withArgs(123).returns
-          "-row_action_col": "html code for the popup"
+    return context("when the new data contain empty values", function() {
+      beforeEach(() => // stub previous row data
+        jqGridEl.getRowData.withArgs(123).returns({
+          "-row_action_col": "html code for the popup",
           foo: "foo", "bar.baz": "baz", "bar.biz": "biz"
+        }));
+
+      return it("clears the empty values", function() {
+        // When
+        ctrl.updateRow(123, {foo: "bar", baz: "baz", bar: {}});
+
+        // Then
+        expect(jqGridEl.setRowData).to.have.been.called;
+
+        const {
+          args
+        } = jqGridEl.setRowData.getCall(0);
+        expect(args[0]).to.eq(123);
+
+        expect(args[1]).to.have.property("foo", "bar");
+        expect(args[1]).to.have.property("baz", "baz");
+        expect(args[1]).to.have.property("bar.baz", null);
+        return expect(args[1]).to.have.property("bar.biz", null);
+      });
+    });
+  });
+
+  describe("#addRow", function() {
+
+    describe("when the position is not specified", () => it("adds a row at the first position", function() {
+      // When
+      ctrl.addRow(234, {foo: "biz"});
+
+      // Then
+      expect(jqGridEl.addRowData).to.have.been.called;
+      return expect(jqGridEl.addRowData).to.have.been.calledWith(234, {foo: "biz"}, "first");
+    }));
+
+    describe("when the position is specified", () => it("adds a row at the specified position", function() {
+      // When
+      ctrl.addRow(234, {foo: "biz"}, "last");
+
+      // Then
+      expect(jqGridEl.addRowData).to.have.been.called;
+      return expect(jqGridEl.addRowData).to.have.been.calledWith(234, {foo: "biz"}, "last");
+    }));
+
+    it("flattens data before inserting it to the grid", inject(function(FlattenServ) {
+        // When
+        ctrl.addRow(234, {foo: {bar: "baz"}});
+
+        // Then
+        expect(FlattenServ).to.have.been.called;
+        return expect(FlattenServ).to.have.been.calledWith({foo: {bar: "baz"}});
+      })
+    );
+
+    it("flashes the inserted row", function() {
+      // When
+      ctrl.addRow(234, {foo: "bar"});
+
+      // Then
+      expect(ctrl.flashOnSuccess).to.have.been.called;
+      return expect(ctrl.flashOnSuccess).to.have.been.calledWith(234);
+    });
+
+    return it("broadcasts `gridz:rowAdded` event", inject(function($rootScope) {
+        // Given
+        sinon.spy($rootScope, "$broadcast");
+
+        // When
+        ctrl.addRow(234, {foo: "bar"});
+        expect($rootScope.$broadcast).to.have.been.called;
+        expect($rootScope.$broadcast).to.have.been.calledWith("gridz:rowAdded", "gridId", 234, {foo: "bar"});
+
+        // stop spying
+        return $rootScope.$broadcast.restore();
+      })
+    );
+  });
+
+  describe("#saveRow", function() {
+
+    describe("when a row exists in the grid", function() {
+      beforeEach(() => jqGridEl.getInd.returns(true));
+
+      return it("updates a row with the given id", function() {
+        // When
+        ctrl.saveRow(123, {foo: "bar"});
+
+        // Then
+        expect(jqGridEl.setRowData).to.have.been.called;
+        expect(jqGridEl.setRowData).to.have.been.calledWith(123, {foo: "bar"});
+
+        return expect(jqGridEl.addRowData).to.not.have.been.called;
+      });
+    });
+
+    return describe("otherwise", function() {
+      beforeEach(() => jqGridEl.getInd.returns(false));
+
+      return it("inserts a new row at the beginning", function() {
+        // When
+        ctrl.saveRow(234, {foo: "biz"});
+
+        // Then
+        expect(jqGridEl.addRowData).to.have.been.called;
+        expect(jqGridEl.addRowData).to.have.been.calledWith(234, {foo: "biz"}, "first");
+
+        return expect(jqGridEl.setRowData).to.not.have.been.called;
+      });
+    });
+  });
+
+  describe("#hasRow", function() {
+
+    describe("if a row with the given id exists", () => it("returns true", function() {
+      // Given
+      jqGridEl.getInd.returns({id: 123, foo: "bar"});
+
+      // When
+      expect(ctrl.hasRow(123)).to.be.true;
+
+      // Then
+      expect(jqGridEl.getInd).to.have.been.called;
+      return expect(jqGridEl.getInd).to.have.been.calledWith(123);
+    }));
+
+    return describe("otherwise", () => it("returns false", function() {
+      // Given
+      jqGridEl.getInd.returns(false);
+
+      // When
+      expect(ctrl.hasRow(234)).to.be.false;
+
+      // Then
+      expect(jqGridEl.getInd).to.have.been.called;
+      return expect(jqGridEl.getInd).to.have.been.calledWith(234);
+    }));
+  });
+
+  describe("#getIds", () => it("returns an array of the id's in the current grid view", function() {
+    // Given
+    jqGridEl.getDataIDs.returns([1, 2, 3]);
+
+    // When
+    expect(ctrl.getIds()).to.deep.eq([1, 2, 3]);
+
+    // Then
+    return expect(jqGridEl.getDataIDs).to.have.been.called;
+  }));
+
+  describe("#removeRow", function() {
+    it("removes a row with the given id", function() {
+      // Given stub with callback
+      ctrl.flashOnSuccess.restore();
+
+      sinon.stub(ctrl, "flashOnSuccess")
+      ctrl.flashOnSuccess = (id, callback) => callback()
+
+      // When
+      ctrl.removeRow(123);
+
+      // Then
+      expect(jqGridEl.delRowData).to.have.been.called;
+      return expect(jqGridEl.delRowData).to.have.been.calledWith(123);
+    });
+
+    return it("flashes the removed row", function() {
+      // Given
+      ctrl.removeRow(345);
+
+      // Then
+      expect(ctrl.flashOnSuccess).to.have.been.called;
+      return expect(ctrl.flashOnSuccess).to.have.been.calledWith(345);
+    });
+  });
 
-      it "clears the empty values", ->
-        * When
-        ctrl.updateRow(123, foo: "bar", baz: "baz", bar: {})
+  describe("#search", function() {
+    it("sets search filters and triggers grid reload", function() {
+      // When
+      ctrl.search({login: "foo"});
 
-        * Then
-        expect(jqGridEl.setRowData).to.have.been.called
+      // Then
+      expect(jqGridEl.setGridParam).to.have.been.called;
+      expect(jqGridEl.setGridParam).to.have.been.calledWith({page: 1, search: true, postData: {filters: '{"login":"foo"}'}});
 
-        args = jqGridEl.setRowData.getCall(0).args
-        expect(args[0]).to.eq 123
+      expect(jqGridEl.trigger).to.have.been.called;
+      return expect(jqGridEl.trigger).to.have.been.calledWith("reloadGrid");
+    });
 
-        expect(args[1]).to.have.property "foo", "bar"
-        expect(args[1]).to.have.property "baz", "baz"
-        expect(args[1]).to.have.property "bar.baz", null
-        expect(args[1]).to.have.property "bar.biz", null
+    return it("returns a promise", inject(function($rootScope) {
+        // Given
+        const promise = ctrl.search({login: "foo"});
+        $rootScope.$broadcast("gridz:loadComplete", {}, {foo: "bar"});
 
-  describe "#addRow", ->
+        let resolvedValue = null;
+        promise.then(data => resolvedValue = data);
+        expect(resolvedValue).to.be.null;
 
-    describe "when the position is not specified", ->
-      it "adds a row at the first position", ->
-        * When
-        ctrl.addRow(234, foo: "biz")
+        // When
+        $rootScope.$apply();
 
-        * Then
-        expect(jqGridEl.addRowData).to.have.been.called
-        expect(jqGridEl.addRowData).to.have.been.calledWith(234, foo: "biz", "first")
+        // Then
+        expect(resolvedValue).to.not.be.null;
+        return expect(resolvedValue).to.deep.equal({login: "foo"});
+      })
+    );
+  });
 
-    describe "when the position is specified", ->
-      it "adds a row at the specified position", ->
-        * When
-        ctrl.addRow(234, foo: "biz", "last")
+  describe("#getSelectedRowIds", function() {
+    before(function() { return this.gridParams.selarrrow = [1, 2, 3]; });
+
+    return it("returns a list of selected row ids", () => expect(ctrl.getSelectedRowIds()).to.deep.eq([1, 2, 3]));
+  });
+
+  describe("#getSelectedRows", function() {
+    beforeEach(function() {
+      jqGridEl.getRowData.withArgs(1).returns({id:1});
+      jqGridEl.getRowData.withArgs(2).returns({id:2});
+      return jqGridEl.getRowData.withArgs(3).returns({id:3});
+    });
+
+    it("returns empty array when no rows are selected", function() {
+      this.gridParams.selarrrow = [];
+      const data = ctrl.getSelectedRows();
+      return expect(data.length).to.eq(0);
+    });
+
 
-        * Then
-        expect(jqGridEl.addRowData).to.have.been.called
-        expect(jqGridEl.addRowData).to.have.been.calledWith(234, foo: "biz", "last")
+    return it("returns selected row objects", function() {
+      this.gridParams.selarrrow = [1, 2, 3];
+      const data = ctrl.getSelectedRows();
+      expect(data.length).to.eq(3);
+      expect(jqGridEl.getRowData.getCall(0).calledWith(1)).to.be.true;
+      expect(jqGridEl.getRowData.getCall(1).calledWith(2)).to.be.true;
+      return expect(jqGridEl.getRowData.getCall(2).calledWith(3)).to.be.true;
+    });
+  });
 
-    it "flattens data before inserting it to the grid", inject (FlattenServ) ->
-      * When
-      ctrl.addRow(234, foo: bar: "baz")
 
-      * Then
-      expect(FlattenServ).to.have.been.called
-      expect(FlattenServ).to.have.been.calledWith(foo: bar: "baz")
+  describe("#getRowData", () => it("returns a row data for the given id", function() {
+    // When
+    ctrl.getRowData(567);
 
-    it "flashes the inserted row", ->
-      * When
-      ctrl.addRow(234, foo: "bar")
+    // Then
+    expect(jqGridEl.getRowData).to.have.been.called;
+    return expect(jqGridEl.getRowData).to.have.been.calledWith(567);
+  }));
 
-      * Then
-      expect(ctrl.flashOnSuccess).to.have.been.called
-      expect(ctrl.flashOnSuccess).to.have.been.calledWith(234)
+  describe("#addJSONData", function() {
+    let stub = null;
 
-    it "broadcasts `gridz:rowAdded` event", inject ($rootScope) ->
-      * Given
-      sinon.spy($rootScope, "$broadcast")
+    beforeEach(inject(function($rootScope) {
+        stub = sinon.stub();
+        jqGridEl.get.withArgs(0).returns({addJSONData: stub});
 
-      * When
-      ctrl.addRow(234, foo: "bar")
-      expect($rootScope.$broadcast).to.have.been.called
-      expect($rootScope.$broadcast).to.have.been.calledWith("gridz:rowAdded", "gridId", 234, foo: "bar")
+        sinon.spy($rootScope, "$broadcast");
+        return ctrl.addJSONData({page: 1, rows: [{name: "foo"}, {name: "bar"}]});
+      })
+    );
 
-      * stop spying
-      $rootScope.$broadcast.restore()
+    afterEach(inject($rootScope => $rootScope.$broadcast.restore())
+    );
 
-  describe "#saveRow", ->
+    it("poulates the grid with the given data", () => expect(stub).to.have.been.called);
 
-    describe "when a row exists in the grid", ->
-      beforeEach -> jqGridEl.getInd.returns(true)
+    return it("broadcasts `gridz:loadComplete` event", inject($rootScope => expect($rootScope.$broadcast).to.have.been.called)
+    );
+  });
 
-      it "updates a row with the given id", ->
-        * When
-        ctrl.saveRow(123, foo: "bar")
+  describe("#isColumnHidden", function() {
 
-        * Then
-        expect(jqGridEl.setRowData).to.have.been.called
-        expect(jqGridEl.setRowData).to.have.been.calledWith(123, foo: "bar")
+    it("is defined", () => expect(ctrl.isColumnHidden).to.not.be.undefined);
 
-        expect(jqGridEl.addRowData).to.not.have.been.called
+    describe("when a column with the given id is hidden", () => it("returns true", () => expect(ctrl.isColumnHidden("foo")).to.be.true));
 
-    describe "otherwise", ->
-      beforeEach -> jqGridEl.getInd.returns(false)
+    describe("when a column with the given id is not hidden", () => it("returns true", () => expect(ctrl.isColumnHidden("bar")).to.be.false));
 
-      it "inserts a new row at the beginning", ->
-        * When
-        ctrl.saveRow(234, foo: "biz")
+    return describe("when a column with is missing", () => it("returns undefined", () => expect(ctrl.isColumnHidden("fooBar")).to.be.undefined));
+  });
 
-        * Then
-        expect(jqGridEl.addRowData).to.have.been.called
-        expect(jqGridEl.addRowData).to.have.been.calledWith(234, foo: "biz", "first")
+  describe("#toggleColumn", function() {
+    it("is defined", () => expect(ctrl.toggleColumn).to.not.be.undefined);
 
-        expect(jqGridEl.setRowData).to.not.have.been.called
+    describe("when the column is hidden", function() {
+      beforeEach(() => ctrl.toggleColumn("foo"));
 
-  describe "#hasRow", ->
+      it("shows the column", function() {
+        expect(jqGridEl.jqGrid).to.have.been.called;
+        return expect(jqGridEl.jqGrid).to.have.been.calledWith("showCol", "foo");
+      });
 
-    describe "if a row with the given id exists", ->
-      it "returns true", ->
-        * Given
-        jqGridEl.getInd.returns(id: 123, foo: "bar")
+      return it("resizes the grid", function() {
+        expect(jqGridEl.trigger).to.have.been.called;
+        return expect(jqGridEl.trigger).to.have.been.calledWith("resize");
+      });
+    });
 
-        * When
-        expect(ctrl.hasRow(123)).to.be.true
-
-        * Then
-        expect(jqGridEl.getInd).to.have.been.called
-        expect(jqGridEl.getInd).to.have.been.calledWith(123)
+    return describe("when the column is not hidden", function() {
+      beforeEach(() => ctrl.toggleColumn("bar"));
 
-    describe "otherwise", ->
-      it "returns false", ->
-        * Given
-        jqGridEl.getInd.returns(false)
+      it("hides the column", function() {
+        expect(jqGridEl.jqGrid).to.have.been.called;
+        return expect(jqGridEl.jqGrid).to.have.been.calledWith("hideCol", "bar");
+      });
 
-        * When
-        expect(ctrl.hasRow(234)).to.be.false
+      return it("resizes the grid", function() {
+        expect(jqGridEl.trigger).to.have.been.called;
+        return expect(jqGridEl.trigger).to.have.been.calledWith("resize");
+      });
+    });
+  });
 
-        * Then
-        expect(jqGridEl.getInd).to.have.been.called
-        expect(jqGridEl.getInd).to.have.been.calledWith(234)
+  describe("#columnChooser", function() {
+    it("is defined", () => expect(ctrl.columnChooser).to.not.be.undefined);
 
-  describe "#getIds", ->
-    it "returns an array of the id's in the current grid view", ->
-      * Given
-      jqGridEl.getDataIDs.returns([1, 2, 3])
+    return it("calls `columnChooser` method on the jqGrid", function() {
+      // When
+      ctrl.columnChooser();
 
-      * When
-      expect(ctrl.getIds()).to.deep.eq [1, 2, 3]
+      // Then
+      expect(jqGridEl.jqGrid).to.have.been.called;
+      return expect(jqGridEl.jqGrid).to.have.been.calledWith("columnChooser");
+    });
+  });
 
-      * Then
-      expect(jqGridEl.getDataIDs).to.have.been.called
+  describe("pagination", function() {
 
-  describe "#removeRow", ->
-    it "removes a row with the given id", ->
-      * Given stub with callback
-      ctrl.flashOnSuccess.restore()
-      sinon.stub(ctrl, "flashOnSuccess", (id, callback) -> callback())
+    describe("#getCurrentPage", function() {
+      before(function() { return this.gridParams.page = 2; });
 
-      * When
-      ctrl.removeRow(123)
+      return it("returns the current page", () => expect(ctrl.getCurrentPage()).to.eq(2));
+    });
 
-      * Then
-      expect(jqGridEl.delRowData).to.have.been.called
-      expect(jqGridEl.delRowData).to.have.been.calledWith(123)
+    describe("#getTotalRecords", function() {
+      before(function() { return this.gridParams.records = 20; });
 
-    it "flashes the removed row", ->
-      * Given
-      ctrl.removeRow(345)
+      return it("returns the total number of records", () => expect(ctrl.getTotalRecords()).to.eq(20));
+    });
 
-      * Then
-      expect(ctrl.flashOnSuccess).to.have.been.called
-      expect(ctrl.flashOnSuccess).to.have.been.calledWith(345)
+    describe("#getPageSize", function() {
+      before(function() { return this.gridParams.rowNum = 10; });
 
-  describe "#search", ->
-    it "sets search filters and triggers grid reload", ->
-      * When
-      ctrl.search(login: "foo")
+      return it("returns the total number of records", () => expect(ctrl.getPageSize()).to.eq(10));
+    });
 
-      * Then
-      expect(jqGridEl.setGridParam).to.have.been.called
-      expect(jqGridEl.setGridParam).to.have.been.calledWith(page: 1, search: true, postData: filters: '{"login":"foo"}')
+    describe("#getTotalPages", function() {
+      before(function() {
+        this.gridParams.records = 999;
+        return this.gridParams.rowNum = 10;
+      });
 
-      expect(jqGridEl.trigger).to.have.been.called
-      expect(jqGridEl.trigger).to.have.been.calledWith("reloadGrid")
+      return it("return the total number of pages", () => expect(ctrl.getTotalPages()).to.eq(100));
+    });
+
+    describe("#isFirstPage", function() {
 
-    it "returns a promise", inject ($rootScope) ->
-      * Given
-      promise = ctrl.search(login: "foo")
-      $rootScope.$broadcast "gridz:loadComplete", {}, foo: "bar"
+      context("if the current grid view displays the first page", function() {
+        before(function() { return this.gridParams.page = 1; });
 
-      resolvedValue = null
-      promise.then (data) -> resolvedValue = data
-      expect(resolvedValue).to.be.null
+        return it("returns true", () => expect(ctrl.isFirstPage()).to.be.true);
+      });
 
-      * When
-      $rootScope.$apply()
-
-      * Then
-      expect(resolvedValue).to.not.be.null
-      expect(resolvedValue).to.deep.equal login: "foo"
-
-  describe "#getSelectedRowIds", ->
-    before -> @gridParams.selarrrow = [1, 2, 3]
-
-    it "returns a list of selected row ids", ->
-      expect(ctrl.getSelectedRowIds()).to.deep.eq [1, 2, 3]
-
-  describe "#getSelectedRows", ->
-    beforeEach ->
-      jqGridEl.getRowData.withArgs(1).returns id:1
-      jqGridEl.getRowData.withArgs(2).returns id:2
-      jqGridEl.getRowData.withArgs(3).returns id:3
-
-    it "returns empty array when no rows are selected", ->
-      @gridParams.selarrrow = []
-      data = ctrl.getSelectedRows()
-      expect(data.length).to.eq 0
-
-
-    it "returns selected row objects", ->
-      @gridParams.selarrrow = [1, 2, 3]
-      data = ctrl.getSelectedRows()
-      expect(data.length).to.eq 3
-      expect(jqGridEl.getRowData.getCall(0).calledWith(1)).to.be.true
-      expect(jqGridEl.getRowData.getCall(1).calledWith(2)).to.be.true
-      expect(jqGridEl.getRowData.getCall(2).calledWith(3)).to.be.true
-
-
-  describe "#getRowData", ->
-
-    it "returns a row data for the given id", ->
-      * When
-      ctrl.getRowData(567)
-
-      * Then
-      expect(jqGridEl.getRowData).to.have.been.called
-      expect(jqGridEl.getRowData).to.have.been.calledWith(567)
-
-  describe "#addJSONData", ->
-    stub = null
-
-    beforeEach inject ($rootScope) ->
-      stub = sinon.stub()
-      jqGridEl.get.withArgs(0).returns(addJSONData: stub)
-
-      sinon.spy($rootScope, "$broadcast")
-      ctrl.addJSONData(page: 1, rows: [{name: "foo"}, {name: "bar"}])
-
-    afterEach inject ($rootScope) ->
-      $rootScope.$broadcast.restore()
-
-    it "poulates the grid with the given data", ->
-      expect(stub).to.have.been.called
-
-    it "broadcasts `gridz:loadComplete` event", inject ($rootScope) ->
-      expect($rootScope.$broadcast).to.have.been.called
-
-  describe "#isColumnHidden", ->
-
-    it "is defined", ->
-      expect(ctrl.isColumnHidden).to.not.be.undefined
-
-    describe "when a column with the given id is hidden", ->
-
-      it "returns true", ->
-        expect(ctrl.isColumnHidden("foo")).to.be.true
-
-    describe "when a column with the given id is not hidden", ->
-
-      it "returns true", ->
-        expect(ctrl.isColumnHidden("bar")).to.be.false
-
-    describe "when a column with is missing", ->
-
-      it "returns undefined", ->
-        expect(ctrl.isColumnHidden("fooBar")).to.be.undefined
-
-  describe "#toggleColumn", ->
-    it "is defined", ->
-      expect(ctrl.toggleColumn).to.not.be.undefined
-
-    describe "when the column is hidden", ->
-      beforeEach -> ctrl.toggleColumn("foo")
-
-      it "shows the column", ->
-        expect(jqGridEl.jqGrid).to.have.been.called
-        expect(jqGridEl.jqGrid).to.have.been.calledWith("showCol", "foo")
-
-      it "resizes the grid", ->
-        expect(jqGridEl.trigger).to.have.been.called
-        expect(jqGridEl.trigger).to.have.been.calledWith("resize")
-
-    describe "when the column is not hidden", ->
-      beforeEach -> ctrl.toggleColumn("bar")
-
-      it "hides the column", ->
-        expect(jqGridEl.jqGrid).to.have.been.called
-        expect(jqGridEl.jqGrid).to.have.been.calledWith("hideCol", "bar")
-
-      it "resizes the grid", ->
-        expect(jqGridEl.trigger).to.have.been.called
-        expect(jqGridEl.trigger).to.have.been.calledWith("resize")
-
-  describe "#columnChooser", ->
-    it "is defined", ->
-      expect(ctrl.columnChooser).to.not.be.undefined
-
-    it "calls `columnChooser` method on the jqGrid", ->
-      * When
-      ctrl.columnChooser()
-
-      * Then
-      expect(jqGridEl.jqGrid).to.have.been.called
-      expect(jqGridEl.jqGrid).to.have.been.calledWith("columnChooser")
-
-  describe "pagination", ->
-
-    describe "#getCurrentPage", ->
-      before -> @gridParams.page = 2
-
-      it "returns the current page", ->
-        expect(ctrl.getCurrentPage()).to.eq 2
-
-    describe "#getTotalRecords", ->
-      before -> @gridParams.records = 20
-
-      it "returns the total number of records", ->
-        expect(ctrl.getTotalRecords()).to.eq 20
-
-    describe "#getPageSize", ->
-      before -> @gridParams.rowNum = 10
-
-      it "returns the total number of records", ->
-        expect(ctrl.getPageSize()).to.eq 10
-
-    describe "#getTotalPages", ->
-      before ->
-        @gridParams.records = 999
-        @gridParams.rowNum = 10
-
-      it "return the total number of pages", ->
-        expect(ctrl.getTotalPages()).to.eq 100
-
-    describe "#isFirstPage", ->
-
-      context "if the current grid view displays the first page", ->
-        before -> @gridParams.page = 1
-
-        it "returns true", ->
-          expect(ctrl.isFirstPage()).to.be.true
-
-      context "otherwise", ->
-        before -> @gridParams.page = 2
-
-        it "returns true", ->
-          expect(ctrl.isFirstPage()).to.be.false
-
-    describe "#isLastPage", ->
-      before ->
-        @gridParams.records = 30
-        @gridParams.rowNum = 10
-
-      context "if the current grid view displays the last page", ->
-        before -> @gridParams.page = 3
-
-        it "returns true", ->
-          expect(ctrl.isLastPage()).to.be.true
-
-      context "otherwise", ->
-        before -> @gridParams.page = 1
-
-        it "returns true", ->
-          expect(ctrl.isLastPage()).to.be.false
-
-    describe "#firstPage", ->
-
-      it "loads the first page", ->
-        * When
-        ctrl.firstPage()
-
-        * Then
-        expect(jqGridEl.setGridParam).to.have.been.calledWith(page: 1)
-        expect(jqGridEl.trigger).to.have.been.calledWith("reloadGrid")
-
-      it "returns a promise", ->
-        promise = ctrl.firstPage()
-        expect(promise.then).to.be.a "function"
-
-    describe "#prevPage", ->
-      before ->
-        @gridParams.records = 999
-        @gridParams.rowNum = 10
-
-      context "on the other than the first", ->
-        before -> @gridParams.page = 3
-
-        it "loads the previous page", ->
-          * When
-          ctrl.prevPage()
-
-          * Then
-          expect(jqGridEl.setGridParam).to.have.been.calledWith(page: 2)
-          expect(jqGridEl.trigger).to.have.been.calledWith("reloadGrid")
-
-        it "returns a promise", ->
-          promise = ctrl.prevPage()
-          expect(promise.then).to.be.a "function"
-
-      context "on the first page", ->
-        before -> @gridParams.page = 1
-
-        it "loads the last page", ->
-          * When
-          ctrl.prevPage()
-
-          * Then
-          expect(jqGridEl.setGridParam).to.have.been.calledWith(page: 100)
-          expect(jqGridEl.trigger).to.have.been.calledWith("reloadGrid")
-
-        it "returns a promise", ->
-          promise = ctrl.prevPage()
-          expect(promise.then).to.be.a "function"
-
-    describe "#nextPage", ->
-      before ->
-        @gridParams.records = 6
-        @gridParams.rowNum = 2
-
-      context "on the page other then the last one", ->
-        before -> @gridParams.page = 2
-
-        it "loads the next page", ->
-          * When
-          ctrl.nextPage()
-
-          * Then
-          expect(jqGridEl.setGridParam).to.have.been.calledWith(page: 3)
-          expect(jqGridEl.trigger).to.have.been.calledWith("reloadGrid")
-
-        it "returns a promise", ->
-          promise = ctrl.nextPage()
-          expect(promise.then).to.be.a "function"
-
-      context "on the last page", ->
-        before -> @gridParams.page = 3
-
-        it "loads the first page", ->
-          * When
-          ctrl.nextPage()
-
-          * Then
-          expect(jqGridEl.setGridParam).to.have.been.calledWith(page: 1)
-          expect(jqGridEl.trigger).to.have.been.calledWith("reloadGrid")
-
-        it "returns a promise", ->
-          promise = ctrl.nextPage()
-          expect(promise.then).to.be.a "function"
-
-    describe "#lastPage", ->
-      before ->
-        @gridParams.records = 999
-        @gridParams.rowNum = 5
-
-      it "loads the last page", ->
-        * When
-        ctrl.lastPage()
-
-        * Then
-        expect(jqGridEl.setGridParam).to.have.been.calledWith(page: 200)
-        expect(jqGridEl.trigger).to.have.been.calledWith("reloadGrid")
-
-      it "returns a promise", ->
-        promise = ctrl.lastPage()
-        expect(promise.then).to.be.a "function"
-
-    describe "#loadPage", ->
-
-      it "loads the specific page", ->
-        * When
-        ctrl.loadPage(123)
-
-        * Then
-        expect(jqGridEl.setGridParam).to.have.been.calledWith(page: 123)
-        expect(jqGridEl.trigger).to.have.been.calledWith("reloadGrid")
-
-      it "returns a promise", inject ($rootScope) ->
-        * When
-        promise = ctrl.loadPage(123)
-        $rootScope.$broadcast "gridz:loadComplete", foo: "bar"
-
-        resolvedValue = null
-        promise.then (data) -> resolvedValue = data
-
-        expect(resolvedValue).to.be.null
-        $rootScope.$apply()
-        expect(resolvedValue).to.have.property "foo", "bar"
-
-  describe "#getXlsDataUri", ->
-
-    it "returns data url for xls export", inject (xlsData) ->
-      ctrl.getXlsDataUri()
-
-      expect(xlsData.called).to.be.true
-
-      args = xlsData.getCall(0).args
-      expect(args[0]).to.eq "gridId"
-      expect(args[1]).to.deep.eq [1, 2, 3]
-*/
+      return context("otherwise", function() {
+        before(function() { return this.gridParams.page = 2; });
+
+        return it("returns true", () => expect(ctrl.isFirstPage()).to.be.false);
+      });
+    });
+
+    describe("#isLastPage", function() {
+      before(function() {
+        this.gridParams.records = 30;
+        return this.gridParams.rowNum = 10;
+      });
+
+      context("if the current grid view displays the last page", function() {
+        before(function() { return this.gridParams.page = 3; });
+
+        return it("returns true", () => expect(ctrl.isLastPage()).to.be.true);
+      });
+
+      return context("otherwise", function() {
+        before(function() { return this.gridParams.page = 1; });
+
+        return it("returns true", () => expect(ctrl.isLastPage()).to.be.false);
+      });
+    });
+
+    describe("#firstPage", function() {
+
+      it("loads the first page", function() {
+        // When
+        ctrl.firstPage();
+
+        // Then
+        expect(jqGridEl.setGridParam).to.have.been.calledWith({page: 1});
+        return expect(jqGridEl.trigger).to.have.been.calledWith("reloadGrid");
+      });
+
+      return it("returns a promise", function() {
+        const promise = ctrl.firstPage();
+        return expect(promise.then).to.be.a("function");
+      });
+    });
+
+    describe("#prevPage", function() {
+      before(function() {
+        this.gridParams.records = 999;
+        return this.gridParams.rowNum = 10;
+      });
+
+      context("on the other than the first", function() {
+        before(function() { return this.gridParams.page = 3; });
+
+        it("loads the previous page", function() {
+          // When
+          ctrl.prevPage();
+
+          // Then
+          expect(jqGridEl.setGridParam).to.have.been.calledWith({page: 2});
+          return expect(jqGridEl.trigger).to.have.been.calledWith("reloadGrid");
+        });
+
+        return it("returns a promise", function() {
+          const promise = ctrl.prevPage();
+          return expect(promise.then).to.be.a("function");
+        });
+      });
+
+      return context("on the first page", function() {
+        before(function() { return this.gridParams.page = 1; });
+
+        it("loads the last page", function() {
+          // When
+          ctrl.prevPage();
+
+          // Then
+          expect(jqGridEl.setGridParam).to.have.been.calledWith({page: 100});
+          return expect(jqGridEl.trigger).to.have.been.calledWith("reloadGrid");
+        });
+
+        return it("returns a promise", function() {
+          const promise = ctrl.prevPage();
+          return expect(promise.then).to.be.a("function");
+        });
+      });
+    });
+
+    describe("#nextPage", function() {
+      before(function() {
+        this.gridParams.records = 6;
+        return this.gridParams.rowNum = 2;
+      });
+
+      context("on the page other then the last one", function() {
+        before(function() { return this.gridParams.page = 2; });
+
+        it("loads the next page", function() {
+          // When
+          ctrl.nextPage();
+
+          // Then
+          expect(jqGridEl.setGridParam).to.have.been.calledWith({page: 3});
+          return expect(jqGridEl.trigger).to.have.been.calledWith("reloadGrid");
+        });
+
+        return it("returns a promise", function() {
+          const promise = ctrl.nextPage();
+          return expect(promise.then).to.be.a("function");
+        });
+      });
+
+      return context("on the last page", function() {
+        before(function() { return this.gridParams.page = 3; });
+
+        it("loads the first page", function() {
+          // When
+          ctrl.nextPage();
+
+          // Then
+          expect(jqGridEl.setGridParam).to.have.been.calledWith({page: 1});
+          return expect(jqGridEl.trigger).to.have.been.calledWith("reloadGrid");
+        });
+
+        return it("returns a promise", function() {
+          const promise = ctrl.nextPage();
+          return expect(promise.then).to.be.a("function");
+        });
+      });
+    });
+
+    describe("#lastPage", function() {
+      before(function() {
+        this.gridParams.records = 999;
+        return this.gridParams.rowNum = 5;
+      });
+
+      it("loads the last page", function() {
+        // When
+        ctrl.lastPage();
+
+        // Then
+        expect(jqGridEl.setGridParam).to.have.been.calledWith({page: 200});
+        return expect(jqGridEl.trigger).to.have.been.calledWith("reloadGrid");
+      });
+
+      return it("returns a promise", function() {
+        const promise = ctrl.lastPage();
+        return expect(promise.then).to.be.a("function");
+      });
+    });
+
+    return describe("#loadPage", function() {
+
+      it("loads the specific page", function() {
+        // When
+        ctrl.loadPage(123);
+
+        // Then
+        expect(jqGridEl.setGridParam).to.have.been.calledWith({page: 123});
+        return expect(jqGridEl.trigger).to.have.been.calledWith("reloadGrid");
+      });
+
+      return it("returns a promise", inject(function($rootScope) {
+          // When
+          const promise = ctrl.loadPage(123);
+          $rootScope.$broadcast("gridz:loadComplete", {foo: "bar"});
+
+          let resolvedValue = null;
+          promise.then(data => resolvedValue = data);
+
+          expect(resolvedValue).to.be.null;
+          $rootScope.$apply();
+          return expect(resolvedValue).to.have.property("foo", "bar");
+        })
+      );
+    });
+  });
+
+  return describe("#getXlsDataUri", () => it("returns data url for xls export", inject(function(xlsData) {
+    ctrl.getXlsDataUri();
+
+    expect(xlsData.called).to.be.true;
+
+    const {
+      args
+    } = xlsData.getCall(0);
+    expect(args[0]).to.eq("gridId");
+    return expect(args[1]).to.deep.eq([1, 2, 3]);})));
+});

@@ -25,6 +25,7 @@ TODO will add in make commands
 
 - `yarn` to install
 - `yarn test` to run all tests
+- `yarn test --tests *alerts*` to run specific test, for example alerts
 
 ### Running Sample Docs
 
