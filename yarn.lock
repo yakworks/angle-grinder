@@ -5483,6 +5483,15 @@ from@^0.1.7:
   resolved "https://registry.yarnpkg.com/from/-/from-0.1.7.tgz#83c60afc58b9c56997007ed1a768b3ab303a44fe"
   integrity sha1-g8YK/Fi5xWmXAH7Rp2izqzA6RP4=
 
+fs-extra@^6.0.1:
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-6.0.1.tgz#8abc128f7946e310135ddc93b98bddb410e7a34b"
+  integrity sha512-GnyIkKhhzXZUWFCaJzvyDLEEgDkPfb4/TPvJCJVuS8MWZgoSsErf++QpiAlDnKFcqhRlm+tIOcencCjyJE6ZCA==
+  dependencies:
+    graceful-fs "^4.1.2"
+    jsonfile "^4.0.0"
+    universalify "^0.1.0"
+
 fs-extra@^7.0.1:
   version "7.0.1"
   resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-7.0.1.tgz#4f189c44aa123b895f722804f55ea23eadc348e9"
@@ -6266,6 +6275,11 @@ html-tags@^1.0.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/html-tags/-/html-tags-1.2.0.tgz#c78de65b5663aa597989dd2b7ab49200d7e4db98"
   integrity sha1-x43mW1Zjqll5id0rerSSANfk25g=
+
+html-webpack-exclude-assets-plugin@^0.0.7:
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/html-webpack-exclude-assets-plugin/-/html-webpack-exclude-assets-plugin-0.0.7.tgz#ee69906adb3d869e4e29f29b0f3e99b53fa87c99"
+  integrity sha512-gaYKMGBPDts3Fb1WXyDEEcS/0TSRg2IDl3EsbQL2AkKWTqdjSKwfQ8Iz0RhPiWErJfqhq5/wkhoYyjQoG55pug==
 
 html-webpack-plugin@^3.2.0:
   version "3.2.0"
@@ -8254,7 +8268,14 @@ moment-timezone@^0.4.0:
   dependencies:
     moment ">= 2.6.0"
 
-"moment@>= 2.6.0", moment@>=2.7.0, moment@^2.10:
+moment-timezone@^0.5.27:
+  version "0.5.27"
+  resolved "https://registry.yarnpkg.com/moment-timezone/-/moment-timezone-0.5.27.tgz#73adec8139b6fe30452e78f210f27b1f346b8877"
+  integrity sha512-EIKQs7h5sAsjhPCqN6ggx6cEbs94GK050254TIJySD1bzoM5JTYDwAU1IoVOeTOL6Gm27kYJ51/uuvq1kIlrbw==
+  dependencies:
+    moment ">= 2.9.0"
+
+"moment@>= 2.6.0", "moment@>= 2.9.0", moment@>=2.7.0, moment@^2.10:
   version "2.24.0"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.24.0.tgz#0d055d53f5052aa653c9f6eb68bb5d12bf5c2b5b"
   integrity sha512-bV7f+6l2QigeBBZSM/6yTNq4P2fNpSWj/0e7jQcy87A8e7o2nAfP/34/2ky5Vw4B9S446EtIhodAzkFCcR4dQg==
@@ -11831,6 +11852,13 @@ text-table@^0.2.0:
   resolved "https://registry.yarnpkg.com/text-table/-/text-table-0.2.0.tgz#7f5ee823ae805207c00af2df4a84ec3fcfa570b4"
   integrity sha1-f17oI66AUgfACvLfSoTsP8+lcLQ=
 
+themes-switch@^1.0.8:
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/themes-switch/-/themes-switch-1.0.8.tgz#58d786281d57b96aa5d3723e689c02b2ca7f2007"
+  integrity sha512-RWrP2QdgxcV+Xvn7SKjYDuqgnn1YGHQ2KcjxLmuKt0RJTT72VcT9CvLaAhFVp1KEgIb3S7ZX/us3io8KMhLo4A==
+  dependencies:
+    fs-extra "^6.0.1"
+
 through2@^0.5.1:
   version "0.5.1"
   resolved "https://registry.yarnpkg.com/through2/-/through2-0.5.1.tgz#dfdd012eb9c700e2323fd334f38ac622ab372da7"
@@ -12667,6 +12695,11 @@ webpack-dev-server@^3.10.1:
     webpack-log "^2.0.0"
     ws "^6.2.1"
     yargs "12.0.5"
+
+webpack-fix-style-only-entries@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/webpack-fix-style-only-entries/-/webpack-fix-style-only-entries-0.4.0.tgz#a027ceb960447b29eed2c56d9ddc003e52d60fb5"
+  integrity sha512-6TDa56V/xSOw6CBVlhFm6J+xXY2oJzx7CEgH0dmex2Xe1rwb95KkLl3rXvSNpO4wyahwD3YnYqffDNR0LH1BNQ==
 
 webpack-log@^2.0.0:
   version "2.0.0"

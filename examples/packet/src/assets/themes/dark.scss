@@ -1,21 +1,21 @@
 /* ---------------------------------------------------------------------- */
-/*  Layout2 - Theme 5
+/*  Layout2 - Theme 1
 /* ---------------------------------------------------------------------- */
 
-@import "modules/variables";
+@import "../variables";
 $app-background: #F0F3F4;
 //NAV HEADER COLORS
-$header-background: $green;
+$header-background: #1C2B36;
 $headerBorder-color: transparent;
 $headerText-color: $white;
 $headerElements-color: $white;
 //NAV COLLAPSE COLORS
-$collapse-background: $white;
+$collapse-background: #F3F3F4;
 $collapseBorder-color: #e7eaec;
-$collapseText-color: #000;
-$collapseButton-background: $green;
+$collapseText-color: #333;
+$collapseButton-background: #7266BA;
 $collapseButton-color: $white;
-$collapseElements-color: #000;
+$collapseElements-color: #333;
 $collapseShadow: none;
 $menuMobile-color: darken($header-background, 15%);
 $menuMobileBorder-color: darken($header-background, 20%);
@@ -29,10 +29,10 @@ $nav-background: #1C2B36;
 $navText-color: #a7b1c2;
 $navTextHover-color: $white;
 $navTextActive-color: $white;
-$navActive-color: $red;
+$navActive-color: #7266BA;
 $navHover-color: #15232D;
 //OTHERS COLORS
-$loadingbar-color: $red;
+$loadingbar-color: #7266BA;
 $selection-background: $primary;
 $selection-color: $white;
 
@@ -281,7 +281,7 @@ body {
             }
 
             .angular-notifications-icon {
-                background: darken($collapseButton-background, 5%);
+                background: $collapseButton-background;
             }
         }
 

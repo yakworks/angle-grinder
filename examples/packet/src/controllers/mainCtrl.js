@@ -8,14 +8,6 @@ app.controller('AppCtrl',
 
     var $win = $($window), $body = $('body');
 
-    $scope.horizontalNavbarCollapsed = true;
-    $scope.menuInit = function (value) {
-      $scope.horizontalNavbarCollapsed = value;
-    };
-    $scope.menuToggle = function (value) {
-      $scope.horizontalNavbarCollapsed = !$scope.horizontalNavbarCollapsed;
-    };
-
     $scope.slickConfig = {
       enabled: true,
       dots: true,

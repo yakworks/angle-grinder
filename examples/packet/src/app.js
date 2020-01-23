@@ -7,7 +7,7 @@ const app = angular.module('app')
 
 app.run(function ($rootScope, $state, $stateParams) {
 
-  // Set some reference to access them from any scope
+  // Set the ui-router state vars to global root to access them from any scope
   $rootScope.$state = $state;
   $rootScope.$stateParams = $stateParams;
 
@@ -32,9 +32,9 @@ app.run(function ($rootScope, $state, $stateParams) {
       isSidebarClosed: false, // true if you want to initialize the template with closed sidebar
       isFooterFixed: false, // true if you want to initialize the template with fixed footer
       isBoxedPage: false, // true if you want to initialize the template with boxed layout
-      theme: 'lyt2-theme-2', // indicate the theme chosen for your project
+      theme: 'light', // indicate the theme chosen for your project
       logo: 'assets/images/yak-logo1.png', // relative path of the project logo
-      logoHeight: 22,
+      logoWidth: 150,
       logoCollapsed: 'assets/images/yak-white.png', // relative path of the collapsed logo
       logoCollapsedHeight: 23 // relative path of the collapsed logo
     },

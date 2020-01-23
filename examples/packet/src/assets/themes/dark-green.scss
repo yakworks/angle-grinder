@@ -1,11 +1,11 @@
 /* ---------------------------------------------------------------------- */
-/*  Layout2 - Theme 6
+/*  Layout2 - Theme 5
 /* ---------------------------------------------------------------------- */
 
-@import "modules/variables";
+@import "../variables";
 $app-background: #F0F3F4;
 //NAV HEADER COLORS
-$header-background: $red;
+$header-background: $green;
 $headerBorder-color: transparent;
 $headerText-color: $white;
 $headerElements-color: $white;
@@ -13,7 +13,7 @@ $headerElements-color: $white;
 $collapse-background: $white;
 $collapseBorder-color: #e7eaec;
 $collapseText-color: #000;
-$collapseButton-background: $red;
+$collapseButton-background: $green;
 $collapseButton-color: $white;
 $collapseElements-color: #000;
 $collapseShadow: none;
@@ -29,10 +29,10 @@ $nav-background: #1C2B36;
 $navText-color: #a7b1c2;
 $navTextHover-color: $white;
 $navTextActive-color: $white;
-$navActive-color: $green;
+$navActive-color: $red;
 $navHover-color: #15232D;
 //OTHERS COLORS
-$loadingbar-color: $green;
+$loadingbar-color: $red;
 $selection-background: $primary;
 $selection-color: $white;
 

@@ -1,38 +1,38 @@
 /* ---------------------------------------------------------------------- */
-/*  Layout2 - Theme 3
+/*  Layout2 - Theme 2
 /* ---------------------------------------------------------------------- */
 
-@import "modules/variables";
+@import "../variables";
 $app-background: #F0F3F4;
 //NAV HEADER COLORS
-$header-background: #293441;
+$header-background: #4F5A67;
 $headerBorder-color: transparent;
 $headerText-color: $white;
 $headerElements-color: $white;
 //NAV COLLAPSE COLORS
-$collapse-background: #293441;
+$collapse-background: #4F5A67;
 $collapseBorder-color: transparent;
-$collapseText-color: $white;
-$collapseButton-background: #27ABB6;
+$collapseText-color: #fff;
+$collapseButton-background: $red;
 $collapseButton-color: $white;
-$collapseElements-color: $white;
+$collapseElements-color: #fff;
 $collapseShadow: none;
 $menuMobile-color: darken($header-background, 15%);
 $menuMobileBorder-color: darken($header-background, 20%);
 //SIDEBAR COLORS
-$sidebar-background: #343F4E;
+$sidebar-background: $white;
 $sidebarText-color: $white;
 $sidebarBorder-color: transparent;
 $sidebarBorder-width: 0;
 //MAIN NAVIGATION COLORS
-$nav-background: #343F4E;
-$navText-color: #BAC1CD;
-$navTextHover-color: $white;
-$navTextActive-color: $white;
-$navActive-color: #27ABB6;
-$navHover-color: #323D4B;
+$nav-background: $white;
+$navText-color: #797973;
+$navTextHover-color: #484844;
+$navTextActive-color: #484844;
+$navActive-color: $red;
+$navHover-color: #F1F1F1;
 //OTHERS COLORS
-$loadingbar-color: #27ABB6;
+$loadingbar-color: $red;
 $selection-background: $primary;
 $selection-color: $white;
 
