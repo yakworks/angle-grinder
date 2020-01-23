@@ -14,7 +14,13 @@
     <asset:javascript src="app.js"/>
     <asset:stylesheet href="style.css"/>
     <g:layoutHead/>
-    <link href="/assets/main.css" rel="stylesheet">
+   <link href="../main.css" rel="stylesheet"> %{--TODO: find out why doesnt work in assets forlder--}%
+    <g:javascript src="../jquery-libs.js" />
+    <g:javascript src="../vendor-libs.js" />
+    <g:javascript src="../main.js" />
+<script></script>
+    %{--<link rel="stylesheet" href="./assets/main.css">--}%
+
     <style>
     body {
         padding-top: 40px;

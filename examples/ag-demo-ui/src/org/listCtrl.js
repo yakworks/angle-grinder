@@ -7,10 +7,9 @@
 
 /* @ngInject */
 export default class ListCtrl {
-  constructor($scope, Resource, SinglePageCrudCtrlMixin, MassUpdateMixin) {
-    console.log("List ctr!!!!")
+  constructor($scope, Resource, SinglePageCrudCtrlMixin, MassUpdateMixin, pathWithContext) {
     $scope.gridOptions = {
-      path: "/org/list?format=json",
+      url: pathWithContext("/org/list?format=json"),
       colModel: this.colModel(),
       multiselect: true,
       shrinkToFit: true, // makes columns fit to width

@@ -1,6 +1,7 @@
 import sweetAlert from 'sweetalert'
 window.sweetAlert = window.swal = sweetAlert
 
+/* @ngInject */
 export default class ConfirmationDialogServ {
   constructor($log, $q) {
     this.$log = $log
