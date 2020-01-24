@@ -1,5 +1,5 @@
 /* @ngInject */
-class FormCtrl {
+export default class FormCtrl {
   constructor($scope, $http, pathWithContext, orgSelectOptions) {
     $scope.save = (form, orgShowCase) => orgShowCase.$save();
 
@@ -8,5 +8,3 @@ class FormCtrl {
 }
 
 
-angular.module("admin.org")
-  .controller("orgShowCase.FormCtrl", FormCtrl);

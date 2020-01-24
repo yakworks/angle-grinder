@@ -1,10 +1,10 @@
 /* @ngInject */
-class ListCtrl {
+export default class ListCtrl {
   constructor($scope, $log, Resource, $filter, DialogCrudCtrlMixin) {
 
     this.$filter = $filter;
     $scope.gridOptions = {
-      path: "/orgShowCaseDao/list?format=json",
+      path: "/orgShowCase/list?format=json",
       colModel: this.colModel(),
       multiselect: false, // turn off multiselect
       shrinkToFit: true, // makes columns fit to width
@@ -19,7 +19,7 @@ class ListCtrl {
     DialogCrudCtrlMixin($scope, {
       Resource,
       gridName: "orgShowCaseGrid",
-      templateUrl: "/orgShowCaseDao/formTemplate",
+      templateUrl: "/orgShowCase/formTemplate",
       beforeEdit(record) {
         // saves data from server to compare retrieved data and data that will be send to the server
         $scope.tzShowCase = angular.copy(record);
@@ -42,4 +42,4 @@ class ListCtrl {
   }
 }
 
-angular.module("admin.org").controller("orgShowCase.ListCtrl", ListCtrl);
+

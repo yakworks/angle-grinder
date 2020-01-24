@@ -38,7 +38,7 @@
                     <li><a href="${createLink(controller: 'user')}">List Users</a></li>
                     <li><a href="${createLink(controller: 'org')}">List Orgs</a></li>
                     <li><a href="${createLink(controller: 'orgTabs')}">List Orgs with Tabs</a></li>
-                    <li><a href="${createLink(controller: 'orgShowCaseDao')}">List Org Show Case</a></li>
+                    <li><a href="${createLink(controller: 'orgShowCase')}">List Org Show Case</a></li>
                 </ul>
 
                 <ul class="navbar-nav nav pull-right">
@@ -91,7 +91,7 @@
                 <li><a href="${request.contextPath}">
                     <i class="fa fa-chevron-right"></i> List Orgs with Tabs</a>
                 </li>
-                <li><a href="${createLink(controller: 'orgShowCaseDao')}">
+                <li><a href="${createLink(controller: 'orgShowCase')}">
                     <i class="fa fa-chevron-right"></i> List Org Show Case</a>
                 </li>
             </ul>

@@ -4,6 +4,7 @@ import uibootstrap from 'angular-ui-bootstrap' // uibootstrap is just a string w
 import Org from './org/index'
 import OrgTab from './tabbedOrg/index'
 import User from './user/index'
+import OrgShowCase from './orgShowCase/index'
 import '~/styles/all.js' //using ~/ points to the main projects src dir
 import './app.css'
 
