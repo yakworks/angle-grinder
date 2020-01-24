@@ -41,7 +41,7 @@
 
 <h3 class="page-header"><g:message code="default.list.label" args="[entityName]"/></h3>
 
-<div ng-app="angleGrinder" ng-controller="user.ListCtrl" class="ag-panels-row"
+<div ng-app="user" ng-controller="user.ListCtrl" class="ag-panels-row"
      ng-init="editTemplateUrl = '${createLink(action: 'editPartial')}' ">
 
     <ag-alerts></ag-alerts>
@@ -75,9 +75,6 @@
 
     <div ag-grid="gridOptions"
          ag-grid-name="usersGrid"></div>
-
-    <legend>UI-grid</legend>
-    <div> <div id="grid1" ui-grid="gridOptionsUI" ui-grid-resize-columns ui-grid-pagination ui-grid-edit class="grid"></div></div>
 </div>
 
 </body>
