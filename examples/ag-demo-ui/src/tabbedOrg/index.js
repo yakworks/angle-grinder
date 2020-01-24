@@ -1,27 +1,12 @@
-import ListCtrl from './listCtrl'
-import FormCtrl from './formCtrl'
+import ContactListCtrl from './contactListCtrl'
+import orgShowCaseCtrl from './orgShowCaseCtrl'
 import ShowCtrl from './showCtrl'
-import MassUpdateFormCtrl from './MassUpdateFormCtrl'
-import adminOrg from './adminOrgModule'
+import adminOrgTabs from './tabbedOrgModule'
 import NoteListCtrl from "./noteListCtrl";
 
-angular.module("admin.org")
-  .controller("org.FormCtrl", FormCtrl)
-  .controller("org.ListCtrl", ListCtrl)
-  .controller("org.ShowCtrl", ShowCtrl)
-  .controller("org.MassUpdateFormCtrl", MassUpdateFormCtrl)
-
-angular.module("angleGrinder")
-  .controller("tabbedOrg.ContactListCtrl", ContactListCtrl);
-
-angular.module("angleGrinder")
-  .controller("tabbedOrg.NoteListCtrl", NoteListCtrl);
-
-
-angular.module("angleGrinder")
-  .controller("tabbedOrg.orgShowCaseCtrl", orgShowCaseCtrl);
-
-
-angular.module("angleGrinder")
+angular.module("admin.orgTabs")
+  .controller("tabbedOrg.ContactListCtrl", ContactListCtrl)
+  .controller("tabbedOrg.NoteListCtrl", NoteListCtrl)
+  .controller("tabbedOrg.orgShowCaseCtrl", orgShowCaseCtrl)
   .controller("tabbedOrg.ShowCtrl", ShowCtrl);
-export default adminOrg
+export default adminOrgTabs

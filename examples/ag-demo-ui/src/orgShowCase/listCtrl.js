@@ -1,14 +1,5 @@
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * DS206: Consider reworking classes to avoid initClass
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
+/* @ngInject */
 class ListCtrl {
-  static initClass() {
-  
-    this.$inject = ["$scope", "$log", "Resource", "$filter", "DialogCrudCtrlMixin"];
-  }
   constructor($scope, $log, Resource, $filter, DialogCrudCtrlMixin) {
 
     this.$filter = $filter;
@@ -50,6 +41,5 @@ class ListCtrl {
     ];
   }
 }
-ListCtrl.initClass();
 
 angular.module("admin.org").controller("orgShowCase.ListCtrl", ListCtrl);

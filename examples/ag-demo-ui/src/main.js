@@ -2,6 +2,7 @@ import '~/vendor'
 import angular from 'angular'
 import uibootstrap from 'angular-ui-bootstrap' // uibootstrap is just a string with the name of the module
 import Org from './org/index'
+import OrgTab from './tabbedOrg/index'
 import '~/styles/all.js' //using ~/ points to the main projects src dir
 import './app.css'
 

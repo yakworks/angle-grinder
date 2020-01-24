@@ -18,5 +18,6 @@ org.config([
       "$route", "resourceResolver", ($route, resourceResolver) => resourceResolver($route.current.params.id)
     ]
   }
+
   })
 ]);

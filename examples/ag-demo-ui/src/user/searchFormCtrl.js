@@ -3,11 +3,8 @@
  * DS206: Consider reworking classes to avoid initClass
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
+/* @ngInject */
 class SearchForm {
-  static initClass() {
-  
-    this.$inject = ["$scope"];
-  }
   constructor($scope) {
     $scope.search = {contact: {type: []}};
 
@@ -18,7 +15,6 @@ class SearchForm {
     };
   }
 }
-SearchForm.initClass();
 
 angular.module("angleGrinder")
   .controller("user.SearchForm", SearchForm);

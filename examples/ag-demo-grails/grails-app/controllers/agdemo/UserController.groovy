@@ -78,8 +78,8 @@ class UserController extends BaseDomainController {
 
     def saveOrUpdate() {
         try {
-            def result = params.id ? repo.update(params) : repo.create(params)
-            render BeanPathTools.buildMapFromPaths(result.entity, selectFields) as JSON
+            def entity = params.id ? repo.update(params) : repo.create(params)
+            render BeanPathTools.buildMapFromPaths(entity, selectFields) as JSON
         } catch (EntityValidationException e) {
             response.status = 409
             def emsg = (e.hasProperty("messageMap")) ? g.message(code: e.messageMap?.code, args: e.messageMap?.args, default: e.messageMap?.defaultMessage) : null
