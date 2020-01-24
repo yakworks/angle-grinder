@@ -1,8 +1,8 @@
 package agdemo
 
 class UrlMappings {
-
     static mappings = {
+
         "/$controller/$action?/$id?" {
             constraints {
                 // apply constraints here
@@ -13,5 +13,4 @@ class UrlMappings {
         '/demo'(uri:"index.html")
         "500"(view: "/error")
     }
-
 }

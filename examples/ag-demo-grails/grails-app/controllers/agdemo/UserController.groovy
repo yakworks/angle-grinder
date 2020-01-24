@@ -65,12 +65,12 @@ class UserController extends BaseDomainController {
         return datalist
     }
 
-    // TODO serve it as static asset
+    // TODO serve it as static assets
     def formTemplate() {
         render(template: "form")
     }
 
-    // TODO serve it as static asset
+    // TODO serve it as static assets
     def searchPartial() {
         def user = new User()
         render(template: "search", model: [user: user])
