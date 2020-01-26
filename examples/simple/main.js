@@ -1,7 +1,7 @@
 //require('angular')
 import 'angular'
-import '../../src/vendor'
-import agMod from '../../src/angle-grinder'
+import '~/vendor'
+import agMod from '~/angle-grinder'
 //import '../styles/boot.less'
 import compHtml from './static/comp.html'
 

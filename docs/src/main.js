@@ -1,4 +1,4 @@
-import '../../src/vendor'
+import '~/vendor'
 import angular from 'angular'
 import exampleAppName from './example.module'
 import routes from './routes'
@@ -8,7 +8,7 @@ import ug from './grids/usersGrid'
 import './controllers'
 import SidebarCtrl from './controllers/sidebarCtrl'
 import 'google-code-prettify/src/prettify'
-import '~/styles/all.js'
+import '~/styles/all.css.js'
 import '~/styles/docs.css'
 
 const emod = angular.module(exampleAppName)

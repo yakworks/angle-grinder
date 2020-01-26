@@ -1,23 +1,14 @@
 .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
   background-color: #e6e6e6;
   background-repeat: no-repeat;
-  background-image: -webkit-linear-gradient(#fff, #fff 25%, #e6e6e6);
-  background-image: -moz-linear-gradient(top, #fff, #fff 25%, #e6e6e6);
-  background-image: -o-linear-gradient(#fff, #fff 25%, #e6e6e6);
   background-image: linear-gradient(#fff, #fff 25%, #e6e6e6);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#e6e6e6', GradientType=0);
   text-shadow: 0 1px 1px rgba(255, 255, 255, .75);
   color: #333;
   font-size: 13px;
   line-height: normal;
   border: 1px solid #ccc;
   border-bottom-color: #bbb;
-  -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, .2), 0 1px 2px rgba(0, 0, 0, .05);
-  -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, .2), 0 1px 2px rgba(0, 0, 0, .05);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, .2), 0 1px 2px rgba(0, 0, 0, .05);
-  -webkit-transition: .1s linear background-image;
-  -moz-transition: .1s linear background-image;
-  -o-transition: .1s linear background-image;
   transition: .1s linear background-image;
   overflow: visible
 }
@@ -32,8 +23,6 @@
 
 .ui-jqgrid {
   border: 1px solid #D4D4D4;
-  -webkit-box-sizing: content-box;
-  -moz-box-sizing: content-box;
   box-sizing: content-box;
   .ui-jqgrid-titlebar {
     height: 40px;
@@ -255,11 +244,7 @@
   }
   .ui-widget-content.ui-state-highlight {
     background-color: #EEDC94;
-    background-image: -webkit-linear-gradient(top, #fceec1, #eedc94);
-    background-image: -moz-linear-gradient(top, #fceec1, #eedc94);
-    background-image: -o-linear-gradient(top, #fceec1, #eedc94);
     background-image: linear-gradient(top, #fceec1, #eedc94);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fceec1', endColorstr='#eedc94', GradientType=0);
     background-repeat: repeat-x;
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
     opacity: 1;
@@ -394,8 +379,6 @@ form[ag-search-form] {
     line-height: 18px;
     color: #555;
     border: 1px solid #ccc;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
     border-radius: 3px
   }
 
@@ -435,7 +418,7 @@ form[ag-search-form] {
     .input-group {
       display: inline-table;
       margin: 0 !important;
-      width: calc(~'(100% - 5px)/2') !important;
+      width: calc((100% - 5px)/2) !important;
     }
 
     .input-group:nth-child(2) {
@@ -505,7 +488,7 @@ form[ag-search-form] {
 
 
 .ui-state-disabled, .ui-widget-content .ui-state-disabled, .ui-widget-header .ui-state-disabled {
-  opacity: .35;
+  opacity: 0.35;
 }
 
 .ui-state-disabled .ui-icon {
