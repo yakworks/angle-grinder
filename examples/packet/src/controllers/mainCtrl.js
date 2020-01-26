@@ -1,6 +1,6 @@
 'use strict';
 /**
- * Clip-Two Main Controller
+ * Main Application Controller
  */
 let app = angular.module('app')
 app.controller('AppCtrl',
@@ -8,17 +8,7 @@ app.controller('AppCtrl',
 
     var $win = $($window), $body = $('body');
 
-    $scope.slickConfig = {
-      enabled: true,
-      dots: true,
-      arrows: false,
-      autoplay: false,
-      draggable: true,
-      infinite: false,
-      slidesToShow: 1,
-      slidesToScroll: 1
-    };
-
+    //the ui-router events, see https://stackoverflow.com/a/43553641
     $transitions.onStart({}, function (trans) {
       //start loading bar on stateChangeStart
       cfpLoadingBar.start();
@@ -37,6 +27,7 @@ app.controller('AppCtrl',
       }
     });
 
+    //the ui-router events, see https://stackoverflow.com/a/43553641
     $transitions.onSuccess({}, function (trans) {
       //stop loading bar on stateChangeSuccess
       $scope.$on('$viewContentLoaded', function (event) {
@@ -71,7 +62,7 @@ app.controller('AppCtrl',
 
     var defaultlayout = $scope.app.defaultLayout;
     // save settings to local storage
-    var slay = localStorage.getItem('packet-lay');
+    var slay = localStorage.getItem('yak-layout');
     if (slay !== null) {
       $scope.app.layout = angular.copy(slay);
 
@@ -81,7 +72,7 @@ app.controller('AppCtrl',
       $scope.loading_reset = true;
       // start loading
       $timeout(function () {
-        localStorage.removeItem('packet-lay');
+        localStorage.removeItem('yak-layout');
         $scope.app.layout = angular.copy($rootScope.app.defaultLayout);
         $scope.loading_reset = false;
         // stop loading
@@ -92,7 +83,7 @@ app.controller('AppCtrl',
       $scope.loading_save = true;
       // start loading
       $timeout(function () {
-        localStorage.setItem('packet-lay', angular.copy($scope.app.layout))
+        localStorage.setItem('yak-layout', angular.copy($scope.app.layout))
         //$localStorage.lay = angular.copy($scope.app.layout);
         $scope.loading_save = false;
         // stop loading
@@ -186,32 +177,7 @@ app.controller('AppCtrl',
     })
 
     $scope.foo = 'bar'
-
-    $scope.sideMenuItems = [
-      {
-        title: "Dashboard",
-        icon: "fa fa-home",
-        sref: "app.dashboard"
-      },
-      {
-        title: "Elements",
-        icon: "fa fa-flask",
-        sref: "app.ui",
-        items: [
-          {
-            title: "Elements",
-            sref: "app.ui.elements"
-          },
-          {
-            title: "Buttons",
-            sref: "app.ui.buttons"
-          }
-        ]
-      }
-    ];
   }
 );
-app.config(function($compileProvider){
-  $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|javascript):/);
-});
+
 

@@ -14,7 +14,7 @@ app.run(function ($rootScope, $state, $stateParams) {
   // GLOBAL APP SCOPE
   // set below basic information
   $rootScope.app = {
-    name: 'Packet', // name of your project
+    name: 'Yak Works Template', // name of your project
     author: 'ClipTheme', // author's name or company name
     description: 'Angular Bootstrap Admin Template', // brief description
     version: '1.0', // current version
@@ -82,6 +82,11 @@ app.config(function (cfpLoadingBarProvider) {
   cfpLoadingBarProvider.includeBar = true;
   cfpLoadingBarProvider.includeSpinner = false;
 });
+
+app.config(function($compileProvider){
+  $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|javascript):/);
+});
+
 // Angular-breadcrumb
 // configuration
 app.config(function ($breadcrumbProvider) {
@@ -92,7 +97,7 @@ app.config(function ($breadcrumbProvider) {
 // ng-storage
 //set a prefix to avoid overwriting any local storage variables
 // app.config(function ($localStorageProvider) {
-//   $localStorageProvider.setKeyPrefix('PacketLtr2');
+//   $localStorageProvider.setKeyPrefix('yak-layout');
 // });
 //filter to convert html to plain text
 app.filter('htmlToPlaintext', function () {

@@ -48,8 +48,7 @@
     "core-js": "^3.6.2",
     "eonasdan-bootstrap-datetimepicker": "4.17.47",
     "fastclick": "^1.0.6",
-    "font-awesome": "~4.3.0",
-    "fontawesome": "^5.6.3",
+    "font-awesome": "^4.7.0",
     "free-jqgrid": "4.13.3",
     "google-code-prettify": "1.0.1",
     "jquery": "3.4.1",
@@ -61,6 +60,7 @@
     "rdash-ui": "^1.0.1",
     "select2-bootstrap-css": "~1.4.6",
     "sweetalert": "0.5.0",
+    "sweetalert2": "^9.7.0",
     "ti-icons": "^0.1.2",
     "toastr": "~2.1.4",
     "v-button": "^1.2.1"

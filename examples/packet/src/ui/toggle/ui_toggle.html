@@ -1,0 +1,68 @@
+<!-- start: BREADCRUMB -->
+<div class="breadcrumb-wrapper">
+    <h4 class="mainTitle no-margin" translate="sidebar.nav.element.TOGGLE">TOGGLE</h4>
+
+    <div ncy-breadcrumb class="pull-right"></div>
+</div>
+<!-- end: BREADCRUMB -->
+<!-- start: TOGGLE EXAMPLE 1 -->
+<div class="container-fluid container-fullw">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-white">
+                <div class="panel-body">
+                    <h5 class="over-title margin-bottom-15">Lightbulb <span class="text-bold">Example</span></h5>
+                    <p>
+                        The element that contains the icon "lightbulb", has the directive <code>
+                            toggleable
+                        </code>
+                        , which indicates that it is ready to alternate some class.
+                        The class is specified in the <code>
+                            activeClass
+                        </code>
+                        attribute (in this example <code>
+                            text-yellow
+                        </code>
+                        ).
+                    </p>
+                    <p class="text-center big-icon" active-class="text-yellow" id="lightbulb" toggleable>
+                        <i class="fa fa-lightbulb-o"></i>
+                    </p>
+                    <div class="btn-group btn-group-justified margin-bottom-30">
+                        <a href class="btn btn-o btn-primary" target="lightbulb" ct-toggle="toggle"> Toggle </a>
+                        <a href class="btn btn-o btn-primary" target="lightbulb" ct-toggle="on"> Turn On </a>
+                        <a href class="btn btn-o btn-primary" target="lightbulb" ct-toggle="off"> Turn Off </a>
+                    </div>
+                    <p>
+                        Through the directive <code>
+                            ctToggle
+                        </code>
+                        , the buttons can activate, turn off, or toggle class to the target element (which is indicated by its ID)
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end: TOGGLE EXAMPLE 1 -->
+<!-- start: TOGGLE EXAMPLE 2 -->
+<div class="container-fluid container-fullw">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-white">
+                <div class="panel-body">
+                    <h5 class="over-title margin-bottom-15">Heart <span class="text-bold">Example</span></h5>
+                    <p class="text-center big-icon" active-class="heart-pulse" id="heart" toggleable>
+                        <i class="fa fa-heart-o"></i>
+                    </p>
+                    <div class="btn-group btn-group-justified margin-bottom-30">
+                        <a href class="btn btn-o btn-primary" target="heart" ct-toggle="toggle"> Toggle </a>
+                        <a href class="btn btn-o btn-primary" target="heart" ct-toggle="on"> Turn On </a>
+                        <a href class="btn btn-o btn-primary" target="heart" ct-toggle="off"> Turn Off </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end: TOGGLE EXAMPLE 2 -->

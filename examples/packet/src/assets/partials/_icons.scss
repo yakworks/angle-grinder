@@ -24,17 +24,17 @@
             transition: font-size, .2s, ease 0s;
 
             &:hover {
-                font-size: 20px;
+                font-size: 24px;
 
                 .fa, [class*="ti-"] {
-                    font-size: 20px;
+                    font-size: 24px;
                 }
             }
         }
 
         .fa, [class*="ti-"] {
             display: inline-block;
-            font-size: 14px;
+            font-size: 20px;
             margin-right: 10px;
             text-align: right;
             width: 32px;

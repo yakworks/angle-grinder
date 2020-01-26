@@ -1,18 +1,16 @@
 console.log("MAIN.JS kicking off")
 //CSS and Sass
-import './assets/vendor-css.js'
+import './assets/vendor.css.js'
 import './assets/styles.scss'
 import './assets/plugins.scss'
 
 // VENDOR
 import './vendor'
 
-//<!-- Packet Scripts -->
 import "./app"
 // import "./app.module"
 // import "./config.constant"
 // import "./config.router"
-// //<!-- Packet Directives -->
 import "./directives/toggle.js"
 import "./directives/perfect-scrollbar.js"
 // import "./directives/empty-links.js"
@@ -32,8 +30,14 @@ import "./directives/letter-icon.js"
 // import "./directives/landing-header.js"
 // import "./directives/ct-crop.js"
 // import "./directives/ct-crop.js"
-// // //<!-- Packet Controllers -->
+
+// Controllers
 import "./controllers/mainCtrl"
 import "./controllers/inboxCtrl"
 import "./controllers/bootstrapCtrl"
 import "./controllers/chatCtrl"
+import "./controllers/SideNavCtrl"
+//UI Demo
+import "./ui/buttons"
+import "./ui/icons"
+import "./ui/alerts"

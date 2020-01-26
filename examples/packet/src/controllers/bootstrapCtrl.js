@@ -3,37 +3,7 @@
  * controllers for UI Bootstrap components
  */
 let app = angular.module('app')
-app.controller('AlertDemoCtrl', ["$scope",
-function($scope) {
-	$scope.alerts = [{
-		type : 'danger',
-		msg : 'Oh snap! Change a few things up and try submitting again.'
-	}, {
-		type : 'success',
-		msg : 'Well done! You successfully read this important alert message.'
-	}];
-
-	$scope.addAlert = function() {
-		$scope.alerts.push({
-			msg : 'Another alert!'
-		});
-	};
-
-	$scope.closeAlert = function(index) {
-		$scope.alerts.splice(index, 1);
-	};
-}]).controller('ButtonsCtrl', ["$scope",
-function($scope) {
-	$scope.singleModel = 1;
-
-	$scope.radioModel = 'Middle';
-
-	$scope.checkModel = {
-		left : false,
-		middle : true,
-		right : false
-	};
-}]).controller('ProgressDemoCtrl', ["$scope",
+app.controller('ProgressDemoCtrl', ["$scope",
 function($scope) {
 	$scope.max = 200;
 
@@ -122,23 +92,6 @@ function($scope) {
 	}, {
 		stateOff : 'glyphicon-off'
 	}];
-}]).controller('DropdownCtrl', ["$scope", "$log",
-function($scope, $log) {
-	$scope.items = ['The first choice!', 'And another choice for you.', 'but wait! A third!'];
-
-	$scope.status = {
-		isopen : false
-	};
-
-	$scope.toggled = function(open) {
-		$log.log('Dropdown is now: ', open);
-	};
-
-	$scope.toggleDropdown = function($event) {
-		$event.preventDefault();
-		$event.stopPropagation();
-		$scope.status.isopen = !$scope.status.isopen;
-	};
 }]).controller('TabsDemoCtrl', ["$scope", "SweetAlert",
 function($scope, SweetAlert) {
 	$scope.tabs = [{
@@ -284,23 +237,6 @@ function($scope, $log) {
 		$scope.dt = null;
 	};
 
-}]).controller('DropdownCtrl', ["$scope", "$log",
-function($scope, $log) {
-	$scope.items = ['The first choice!', 'And another choice for you.', 'but wait! A third!'];
-
-	$scope.status = {
-		isopen : false
-	};
-
-	$scope.toggled = function(open) {
-		$log.log('Dropdown is now: ', open);
-	};
-
-	$scope.toggleDropdown = function($event) {
-		$event.preventDefault();
-		$event.stopPropagation();
-		$scope.status.isopen = !$scope.status.isopen;
-	};
 }]).controller('ModalDemoCtrl', ["$scope", "$uibModal", "$log",
 function($scope, $uibModal, $log) {
 

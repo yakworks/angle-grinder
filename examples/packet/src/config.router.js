@@ -17,7 +17,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
   })
   .state('app.dashboard', {
     url: "/dashboard",
-    template: require("./dashboards/dashyak.html"),
+    template: require("./dashboards/dashboard.html"),
     //resolve: loadSequence('d3', 'ui.knob', 'countTo', 'dashboardCtrl'),
     title: 'Dashboard',
     ncyBreadcrumb: {
@@ -32,23 +32,45 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       label: 'UI Elements'
     }
   })
+  .state('app.ui.alerts', {
+    url: '/alerts',
+    template: require("./ui/alerts/alerts.html"),
+    title: 'Alerts',
+    ncyBreadcrumb: {
+      label: 'Alerts'
+    }
+  })
   .state('app.ui.elements', {
     url: '/elements',
     template: require("./ui/elements/ui_elements.html"),
-    //templateUrl: "assets/views/ui_elements.html",
     title: 'Elements',
     icon: 'ti-layout-media-left-alt',
     ncyBreadcrumb: {
       label: 'Elements'
     }
   })
-  // .state('app.ui.buttons', {
-  //   url: '/buttons',
-  //   templateUrl: "assets/views/ui_buttons.html",
-  //   title: 'Buttons',
-  //   resolve: loadSequence('laddaCtrl'),
-  //   ncyBreadcrumb: {
-  //     label: 'Buttons'
-  //   }
-  // })
+  .state('app.ui.buttons', {
+    url: '/buttons',
+    template: require("./ui/buttons/ui_buttons.html"),
+    title: 'Buttons',
+    ncyBreadcrumb: {
+      label: 'Buttons'
+    }
+  })
+  .state('app.ui.icons', {
+    url: '/icons',
+    template: require("./ui/icons/ui_icons.html"),
+    title: 'Icons',
+    ncyBreadcrumb: {
+      label: 'Icons'
+    }
+  })
+  .state('app.ui.letter-icons', {
+    url: '/letter-icons',
+    component: 'letterIcons',
+    title: 'Letter Icons',
+    ncyBreadcrumb: {
+      label: 'Letter Icons'
+    }
+  })
 })
