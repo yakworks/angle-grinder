@@ -1,7 +1,7 @@
 import angular from "angular";
-import angleGrinder from '~/angle-grinder'
+import adminOrg from '../org/adminOrgModule'
 
-const MOD_NAME = 'tabbed.org'
+const MOD_NAME = 'admin.orgTabs'
 export default MOD_NAME
-var org = angular.module(MOD_NAME, [angleGrinder]);
+angular.module(MOD_NAME, [adminOrg]);
 

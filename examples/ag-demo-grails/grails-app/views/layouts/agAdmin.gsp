@@ -11,15 +11,12 @@
     <link rel="apple-touch-icon" href="${resource(dir: 'images', file: 'apple-touch-icon.png')}">
     <link rel="apple-touch-icon" sizes="114x114" href="${resource(dir: 'images', file: 'apple-touch-icon-retina.png')}">
 
-    <asset:javascript src="app.js"/>
-    <asset:stylesheet href="style.css"/>
+
     <g:layoutHead/>
-   <link href="../main.css" rel="stylesheet"> %{--TODO: find out why doesnt work in assets forlder--}%
-    <g:javascript src="../jquery-libs.js" />
-    <g:javascript src="../vendor-libs.js" />
-    <g:javascript src="../main.js" />
-<script></script>
-    %{--<link rel="stylesheet" href="./assets/main.css">--}%
+   <link href="/assets/main.css" rel="stylesheet">
+    <script src="/jquery-libs.js" type="text/javascript"></script>
+    <script src="/vendor-libs.js" type="text/javascript"></script>
+    <script src="/main.js" type="text/javascript"></script>
 
     <style>
     body {
@@ -41,7 +38,7 @@
                     <li><a href="${createLink(controller: 'user')}">List Users</a></li>
                     <li><a href="${createLink(controller: 'org')}">List Orgs</a></li>
                     <li><a href="${createLink(controller: 'orgTabs')}">List Orgs with Tabs</a></li>
-                    <li><a href="${createLink(controller: 'orgShowCaseDao')}">List Org Show Case</a></li>
+                    <li><a href="${createLink(controller: 'orgShowCase')}">List Org Show Case</a></li>
                 </ul>
 
                 <ul class="navbar-nav nav pull-right">
@@ -94,7 +91,7 @@
                 <li><a href="${request.contextPath}">
                     <i class="fa fa-chevron-right"></i> List Orgs with Tabs</a>
                 </li>
-                <li><a href="${createLink(controller: 'orgShowCaseDao')}">
+                <li><a href="${createLink(controller: 'orgShowCase')}">
                     <i class="fa fa-chevron-right"></i> List Org Show Case</a>
                 </li>
             </ul>

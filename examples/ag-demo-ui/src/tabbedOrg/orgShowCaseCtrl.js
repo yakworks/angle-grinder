@@ -2,7 +2,7 @@
 export default class orgShowCaseCtrl {
   constructor($scope, $controller, $location, alerts, resourceBuilder) {
 
-    const orgShowCase  = resourceBuilder("/orgShowCaseDao", "orgShowCase");
+    const orgShowCase  = resourceBuilder("/orgShowCase", "orgShowCase");
 
     orgShowCase.get({id: $scope.org.orgShowCaseId}, function(resp) {
       $scope.orgShowCase = resp;

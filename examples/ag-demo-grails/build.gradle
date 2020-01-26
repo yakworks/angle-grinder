@@ -41,8 +41,6 @@ dependencies {
   compile project(':angle-grinder')
   compile "org.grails.plugins:async"
   compile "org.grails:grails-plugin-rest"
-  compile 'com.bertramlabs.plugins:asset-pipeline-grails:3.0.11'
-  compile 'com.bertramlabs.plugins:coffee-asset-pipeline:3.0.11'
   compile "org.grails.plugins:audit-trail:3.0.9"
   compile 'org.grails.plugins:joda-time:2.0.0'
   testCompile "org.grails.plugins:build-test-data:3.0.1"

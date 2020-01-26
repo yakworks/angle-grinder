@@ -14,11 +14,11 @@ import grails.validation.ValidationException
 
 abstract class BaseDomainController {
     def ajaxGrid = true
-    abstract domainClass
+    abstract getDomainClass()
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     protected GormRepo getRepo() {
-        domainClass.repo
+        domainClass.repo as GormRepo
     }
 
     @PostConstruct
@@ -113,10 +113,10 @@ abstract class BaseDomainController {
     protected renderSuccess(String actionMeth, result) {
         log.debug("renderSuccess ${request.format}")
         if (request.format == 'json' || response.format == 'json') {
-            render successModel(result.entity.id) as JSON
+            render successModel(entity.id) as JSON
             return
         } else {
-            redirect(action: actionMeth, id: result.entity.id)
+            redirect(action: actionMeth, id: entity.id)
             return
         }
     }
@@ -154,8 +154,8 @@ abstract class BaseDomainController {
         def responseJson = [:]
         try {
             def p = BeanPathTools.flattenMap(request, request.JSON)
-            def result = p.id ? repo.update(p) : saveDomain(p)
-            render ExportUtil.buildMapFromPaths(result.entity, selectFields) as JSON
+            def entity = p.id ? repo.update(p) : saveDomain(p)
+            render ExportUtil.buildMapFromPaths(entity, selectFields) as JSON
             return
         } catch (ValidationException e) {
             response.status = 422
