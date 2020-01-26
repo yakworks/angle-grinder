@@ -51,7 +51,7 @@ describe("agDateFilterSpec", function() {
     // Tests work only with TZ UTC+00:00, otherwise - fail.
     // In these tests checks how output date changes if incoming date has different time zone.
     // It can fail if environment specified not as `UTC`.
-    xit("use time zones if `useTimeZone` flag true", function() {
+    it("use time zones if `useTimeZone` flag true", function() {
       provider.setDefaultFormat("MMM DD, YYYY, HH:mm:ss");
       expect(filter("2010-06-26T22:00:00Z", true)).to.eq("Jun 26, 2010, 22:00:00");
       expect(filter("2010-06-26T22:00:00+00:00", true)).to.eq("Jun 26, 2010, 22:00:00");

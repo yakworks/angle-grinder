@@ -1,5 +1,6 @@
 import compileTemplate from '../../helpers/compileTemplate'
 import agGridz from '~/scripts/gridz'
+import _ from 'lodash'
 describe("agGridzSpec", function() {
 
   beforeEach(angular.mock.module(agGridz, function($provide) {
@@ -27,11 +28,12 @@ describe("agGridzSpec", function() {
 
     beforeEach(inject(function($rootScope) {
       // create a spy on the gridz plugin
+
       gridzSpy = sinon.spy($.fn, "gridz");
 
       //FIXME this was causing the "Cannot read property 'hDiv' of null" error on jqgrid
       // create a stub for jQuery.is(":visible") method
-      isVisibleStub = sinon.stub(jQuery.prototype, "is");
+      isVisibleStub = sinon.stub($.prototype, "is");
       isVisibleStub.withArgs(":visible").returns(true);
 
       $scope = $rootScope.$new();
@@ -61,7 +63,7 @@ describe("agGridzSpec", function() {
     );
 
     //FIXME this is causing the hdi
-    xdescribe("when `ag-grid-name` is not provided", function() {
+    describe("when `ag-grid-name` is not provided", function() {
       beforeEach(inject($injector => ({element} = compileTemplate(`\
 <div ag-grid="gridOptions"></div>\
 `, $injector, $scope)))
@@ -122,7 +124,7 @@ describe("agGridzSpec", function() {
           it "is assigned to the scope", ->
             expect($scope.grid.projects).to.not.be.undefined*/
 
-    xdescribe("when `ag-grid-col-model` is provided", function() {
+    describe("when `ag-grid-col-model` is provided", function() {
 
       beforeEach(inject(function($injector) {
         const colModel = [{name: "dynamicFoo", label: "Foo"}, {name: "dynamicBar", label: "Bar", search: true}];
@@ -150,7 +152,7 @@ describe("agGridzSpec", function() {
       });
     });
 
-    xdescribe("grid without the pager", function() {
+    describe("grid without the pager", function() {
 
       beforeEach(inject(function($injector) {
         $scope.gridOptions.pager = false;

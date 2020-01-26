@@ -23,3 +23,107 @@ grails.plugin.springsecurity.active = false
 
 grails.resources.pattern = '/**'
 grails.databinding.dateFormats = ["yyyy-MM-dd'T'HH:mm:ss'Z'", "yyyy-MM-dd'T'HH:mm:ss.S'Z'","yyyy-MM-dd'T'HH:mm:ss","yyyy-MM-dd"]
+
+
+
+grails {
+    profile = 'web'
+    codegen {
+        defaultPackage = 'agdemo'
+    }
+}
+
+info {
+    app {
+        name = '@info.app.name@'
+        version = '@info.app.version@'
+        grailsVersion = '@info.app.grailsVersion@'
+    }
+}
+
+spring {
+    groovy {
+        template['check-template-location'] = false
+    }
+}
+
+hibernate {
+    naming_strategy = 'org.hibernate.cfg.DefaultNamingStrategy'
+    cache {
+        queries = false
+    }
+}
+
+grails {
+    mime {
+        disable {
+            accept {
+                header {
+                    userAgents = ['Gecko', 'WebKit', 'Presto', 'Trident']
+                }
+            }
+        }
+
+        types {
+            all = '*/*'
+            atom = 'application/atom+xml'
+            css = 'text/css'
+            csv = 'text/csv'
+            form = 'application/x-www-form-urlencoded'
+            html = ['text/html', 'application/xhtml+xml']
+            js = 'text/javascript'
+            json = ['application/json', 'text/json']
+            multipartForm = 'multipart/form-data'
+            rss = 'application/rss+xml'
+            text = 'text/plain'
+            hal = ['application/hal+json', 'application/hal+xml']
+            xml = ['text/xml', 'application/xml']
+        }
+    }
+    urlmapping {
+        cache {
+            maxsize = 1000
+        }
+    }
+    controllers {
+        defaultScope = 'singleton'
+    }
+    converters {
+        encoding = 'UTF-8'
+    }
+    views {
+        //default{ codec = 'html' }
+        gsp {
+            encoding = 'UTF-8'
+            htmlcodec = 'xml'
+            codecs {
+                expression = 'html'
+                scriptlets = 'html'
+                taglib = 'none'
+                staticparts = 'none'
+            }
+        }
+    }
+}
+dataSource {
+    pooled = true
+    jmxExport = true
+    driverClassName = 'org.h2.Driver'
+    dbCreate = ''
+    username = 'sa'
+    password = ''
+}
+environments {
+    development {
+        dataSource {
+            dbCreate = 'create-drop'
+            url = 'jdbc:h2:mem:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE'
+        }
+    }
+    test {
+        dataSource {
+            dbCreate = 'update'
+            url = 'jdbc:h2:mem:testDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE'
+        }
+    }
+}

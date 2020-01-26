@@ -65,12 +65,12 @@ class UserController extends BaseDomainController {
         return datalist
     }
 
-    // TODO serve it as static asset
+    // TODO serve it as static assets
     def formTemplate() {
         render(template: "form")
     }
 
-    // TODO serve it as static asset
+    // TODO serve it as static assets
     def searchPartial() {
         def user = new User()
         render(template: "search", model: [user: user])
@@ -78,8 +78,8 @@ class UserController extends BaseDomainController {
 
     def saveOrUpdate() {
         try {
-            def result = params.id ? repo.update(params) : repo.create(params)
-            render BeanPathTools.buildMapFromPaths(result.entity, selectFields) as JSON
+            def entity = params.id ? repo.update(params) : repo.create(params)
+            render BeanPathTools.buildMapFromPaths(entity, selectFields) as JSON
         } catch (EntityValidationException e) {
             response.status = 409
             def emsg = (e.hasProperty("messageMap")) ? g.message(code: e.messageMap?.code, args: e.messageMap?.args, default: e.messageMap?.defaultMessage) : null

@@ -4,11 +4,9 @@
  * DS206: Consider reworking classes to avoid initClass
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-class ShowCtrl {
-  static initClass() {
-  
-    this.$inject = ["$scope", "$location", "org"];
-  }
+
+/* @ngInject */
+export default class ShowCtrl {
   constructor($scope, $location, org) {
     $scope.org = org;
 
@@ -18,7 +16,3 @@ class ShowCtrl {
     };
   }
 }
-ShowCtrl.initClass();
-
-angular.module("angleGrinder")
-  .controller("org.ShowCtrl", ShowCtrl);

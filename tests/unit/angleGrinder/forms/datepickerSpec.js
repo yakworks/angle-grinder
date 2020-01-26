@@ -49,7 +49,7 @@ describe("module: angleGrinder.forms", () => describe("directive: agDatepicker",
 
     it("displays the current value", () => expect(element.find("input").val()).to.eq("03/01/1990"));
 
-    return xit("saves local date time to model", inject(function($timeout){
+    return it("saves local date time to model", inject(function($timeout){
       $timeout.flush();
       return expect($scope.user.birthday).to.eq("1990-03-01T00:00+00:00");
     })

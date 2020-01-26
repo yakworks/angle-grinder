@@ -1,17 +1,8 @@
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * DS206: Consider reworking classes to avoid initClass
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-class orgShowCaseCtrl {
-  static initClass() {
-  
-    this.$inject = ["$scope", "$controller", "$location", "alerts", "resourceBuilder"];
-  }
+/* @ngInject */
+export default class orgShowCaseCtrl {
   constructor($scope, $controller, $location, alerts, resourceBuilder) {
 
-    const orgShowCase  = resourceBuilder("/orgShowCaseDao", "orgShowCase");
+    const orgShowCase  = resourceBuilder("/orgShowCase", "orgShowCase");
 
     orgShowCase.get({id: $scope.org.orgShowCaseId}, function(resp) {
       $scope.orgShowCase = resp;
@@ -21,8 +12,5 @@ class orgShowCaseCtrl {
     $scope.save = orgShowCase => orgShowCase.$save();
   }
 }
-orgShowCaseCtrl.initClass();
 
 
-angular.module("angleGrinder")
-  .controller("tabbedOrg.orgShowCaseCtrl", orgShowCaseCtrl);

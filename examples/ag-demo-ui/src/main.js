@@ -1,10 +1,25 @@
+import '~/vendor'
 import angular from 'angular'
 import uibootstrap from 'angular-ui-bootstrap' // uibootstrap is just a string with the name of the module
-import AppCtrl from './sanityCheck/AppCtrl'
-import AppConfigSvc from './sanityCheck/AppConfigSvc'
+import Org from './org/index'
+import OrgTab from './tabbedOrg/index'
+import User from './user/index'
+import OrgShowCase from './orgShowCase/index'
 import '~/styles/all.js' //using ~/ points to the main projects src dir
 import './app.css'
 
+const forms = angular.module("angleGrinder.forms");
+
+//Just an example for configuring dates formats
+forms.config([
+  "agDateProvider", function(provider) {
+    provider.setViewFormat("MM/DD/YY");
+    return provider.setLocalDateFormat("YYYY-MM-DD");
+  }
+]);
+
+
+/*
 const app = () => {
   return {
     template: require('./app.html'),
@@ -20,3 +35,4 @@ angular.module('app.module', [uibootstrap])
   .controller('AppCtrl', AppCtrl)
 
 export default 'app.module'
+*/

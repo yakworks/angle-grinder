@@ -6,10 +6,10 @@ var forms = angular.module(formsModule)
 
 forms.value("getRealPanelHeight", function(el) {
   const bodyEl = el.find(".panel-body:visible")
-  const oldHeight = bodyEl.height()
+  const oldHeight = $(bodyEl).height()
 
   bodyEl.css("min-height", "auto")
-  const height = el.height()
+  const height = $(el).height()
   // Do not equalize if element collapsed
   if (angular.element(bodyEl).attr("collapsed")) {
     bodyEl.css("min-height", 0)

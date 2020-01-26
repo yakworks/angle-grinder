@@ -15,4 +15,4 @@ export default function compileTemplate(template, $injector, $scope = null) {
   $scope.$apply(() => $compile(element)($scope));
 
   return {element, $scope};
-};
+}

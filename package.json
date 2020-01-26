@@ -3,7 +3,7 @@
   "license": "MIT",
   "version": "3.0.0",
   "scripts": {
-    "build": "rimraf dist && yarn build:prod",
+    "build": "rimraf dist && yarn build:wip",
     "build:dev": "webpack --config config/webpack.config.js --mode=development --bail --profile --progress",
     "build:wip": "webpack --config config/webpack.config.js --mode=production --bail --profile --progress",
     "build:docs": "webpack --mode=production --bail --profile --progress --content-base ./docs",
@@ -19,8 +19,8 @@
     "build-packet": "rimraf dist && webpack --config examples/packet/webpack.config.js --mode=production --content-base ./examples/packet",
     "start-rdash": "webpack-dev-server --mode=development --content-base ./examples/rdash ",
     "start-ag-demo": "webpack-dev-server --mode=development --content-base ./examples/ag-demo-ui",
-    "build-ag-demo": "webpack --mode=production --profile --progress --content-base ./examples/ag-demo-ui --pathout ./examples/ag-demo-grails/src/main/webapp",
-    "watch-ag-demo": "webpack --watch --mode=development --progress --content-base ./examples/ag-demo-ui --pathout ./examples/ag-demo-grails/src/main/webapp",
+    "build-ag-demo": "webpack --mode=production --profile --progress --content-base ./examples/ag-demo-ui --pathout ./examples/ag-demo-grails/src/main/resources/public",
+    "watch-ag-demo": "webpack --watch --mode=development --progress --content-base ./examples/ag-demo-ui --pathout ./examples/ag-demo-grails/src/main/resources/public",
     "parcel": "parcel examples/simple/index.html",
     "parcel:build": "parcel build examples/simple/index.html"
   },
@@ -140,7 +140,7 @@
     "webpack-fix-style-only-entries": "^0.4.0"
   },
   "engines": {
-    "node": "0.10.x",
+    "node": "10.13.0",
     "npm": "1.2.x"
   },
   "bugs": {
