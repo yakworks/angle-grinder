@@ -1855,10 +1855,15 @@ amdefine@>=0.0.4:
   resolved "https://registry.yarnpkg.com/amdefine/-/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
   integrity sha1-SlKCrBZHKek2Gbz9OtFR+BfOkfU=
 
-angular-animate@1.7.9:
+angular-animate@^1.7.9:
   version "1.7.9"
   resolved "https://registry.yarnpkg.com/angular-animate/-/angular-animate-1.7.9.tgz#a397f82434c1e7ed5b7a298fa70fc3de989a6785"
   integrity sha512-fV+AISy/HTzurQH2ngsJg+lLIvfu0ahc1h4AYKauaXVw97rZc2k4iUA1bMstiEyClsdayQX568kjQc1NK+oYhw==
+
+angular-breadcrumb@^0.5.0:
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/angular-breadcrumb/-/angular-breadcrumb-0.5.0.tgz#058abe6984f1b82ff6ac37888ef9afccbc8f63b2"
+  integrity sha1-BYq+aYTxuC/2rDeIjvmvzLyPY7I=
 
 angular-cookies@^1.7.9:
   version "1.7.9"
@@ -1869,6 +1874,18 @@ angular-drag-and-drop-lists@2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/angular-drag-and-drop-lists/-/angular-drag-and-drop-lists-2.1.0.tgz#da10cc85c804251fbaaa84d837f7380fb0cd780f"
   integrity sha1-2hDMhcgEJR+6qoTYN/c4D7DNeA8=
+
+angular-ladda@^0.4.3:
+  version "0.4.3"
+  resolved "https://registry.yarnpkg.com/angular-ladda/-/angular-ladda-0.4.3.tgz#2b4134c68f20522136f9b6ae6411b55cfbf47c31"
+  integrity sha1-K0E0xo8gUiE2+bauZBG1XPv0fDE=
+  dependencies:
+    ladda ">=0.9.8"
+
+angular-loading-bar@^0.9.0:
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/angular-loading-bar/-/angular-loading-bar-0.9.0.tgz#37ef52c25f102c216e7b3cdfd2fc5a5df9628e45"
+  integrity sha1-N+9Swl8QLCFuezzf0vxaXflijkU=
 
 angular-mocks@1.6.10:
   version "1.6.10"
@@ -1885,7 +1902,7 @@ angular-route@1.7.9:
   resolved "https://registry.yarnpkg.com/angular-route/-/angular-route-1.7.9.tgz#f9910a2af0ba3ad7a969c5dd369b8360d0d5e4ef"
   integrity sha512-vRoj5hzdQtWbODhWJqDzD1iNOEfCKshO6GFBuPVV7RHlPjzIc4R2dHCc7Qiv/8F3LDxJDohc6vSnTDMLHuaqeA==
 
-angular-sanitize@1.7.9:
+angular-sanitize@^1.7.9:
   version "1.7.9"
   resolved "https://registry.yarnpkg.com/angular-sanitize/-/angular-sanitize-1.7.9.tgz#6b4d5e826abdabd352b13a7c65c8c74daf6a7b15"
   integrity sha512-nB/xe7JQWF9nLvhHommAICQ3eWrfRETo0EVGFESi952CDzDa+GAJ/2BFBNw44QqQPxj1Xua/uYKrbLsOGWZdbQ==
@@ -1894,6 +1911,20 @@ angular-scroll@1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/angular-scroll/-/angular-scroll-1.0.2.tgz#2768ff35dbe1ce40e0c3fbedd4534888299c3e2d"
   integrity sha1-J2j/NdvhzkDgw/vt1FNIiCmcPi0=
+
+angular-translate-loader-static-files@^2.18.2:
+  version "2.18.2"
+  resolved "https://registry.yarnpkg.com/angular-translate-loader-static-files/-/angular-translate-loader-static-files-2.18.2.tgz#c179673e76524ab07bf26b8f3a725fa08a937cfb"
+  integrity sha512-fhQNn2e0LOOH3YY5fFeLIgSGHuF/QvoX5dqnF7eaacpEMCzBf6OkVp1SMwEhjGjDIuntJbLGCh5CM5dMpiZYUA==
+  dependencies:
+    angular-translate "~2.18.2"
+
+angular-translate@^2.18.2, angular-translate@~2.18.2:
+  version "2.18.2"
+  resolved "https://registry.yarnpkg.com/angular-translate/-/angular-translate-2.18.2.tgz#2a26653d179f7043c0ffa66fdf65155d01c82e06"
+  integrity sha512-aAtNieh0fUv6yM6vKuWsdswT0BbOf6kvsu+QZ15Fp10rKEienMs3M8aPWyd9IVZ5pA1GaRJir6T8OvWGG4J+Fw==
+  dependencies:
+    angular "^1.7.9"
 
 angular-ui-bootstrap@^2.5.6:
   version "2.5.6"
@@ -1914,10 +1945,15 @@ angular-xeditable@^0.10.2:
   dependencies:
     angular "~1.x"
 
-angular@1.7.9, angular@~1.x:
+angular@1.7.9, angular@^1.7.9, angular@~1.x:
   version "1.7.9"
   resolved "https://registry.yarnpkg.com/angular/-/angular-1.7.9.tgz#e52616e8701c17724c3c238cfe4f9446fd570bc4"
   integrity sha512-5se7ZpcOtu0MBFlzGv5dsM1quQDoDeUTwZrWjGtTNA7O88cD8TEk5IEKCTDa3uECV9XnvKREVUr7du1ACiWGFQ==
+
+animate.css@^3.7.2:
+  version "3.7.2"
+  resolved "https://registry.yarnpkg.com/animate.css/-/animate.css-3.7.2.tgz#e73e0d50e92cb1cfef1597d9b38a9481020e08ea"
+  integrity sha512-0bE8zYo7C0KvgOYrSVfrzkbYk6IOTVPNqkiHg2cbyF4Pq/PXzilz4BRWA3hwEUBoMp5VBgrC29lQIZyhRWdBTw==
 
 ansi-align@^2.0.0:
   version "2.0.0"
@@ -5110,6 +5146,11 @@ fast-levenshtein@~2.0.6:
   resolved "https://registry.yarnpkg.com/fast-levenshtein/-/fast-levenshtein-2.0.6.tgz#3d8a5c66883a16a30ca8643e851f19baa7797917"
   integrity sha1-PYpcZog6FqMMqGQ+hR8Zuqd5eRc=
 
+fastclick@^1.0.6:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/fastclick/-/fastclick-1.0.6.tgz#161625b27b1a5806405936bda9a2c1926d06be6a"
+  integrity sha1-FhYlsnsaWAZAWTa9qaLBkm0Gvmo=
+
 fastparse@^1.1.1:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/fastparse/-/fastparse-1.1.2.tgz#91728c5a5942eced8531283c79441ee4122c35a9"
@@ -5347,15 +5388,10 @@ follow-redirects@^1.0.0:
   dependencies:
     debug "^3.0.0"
 
-font-awesome@~4.3.0:
-  version "4.3.0"
-  resolved "https://registry.yarnpkg.com/font-awesome/-/font-awesome-4.3.0.tgz#44eeb790cdf986642786f33fce784764f1841c40"
-  integrity sha1-RO63kM35hmQnhvM/znhHZPGEHEA=
-
-fontawesome@^5.6.3:
-  version "5.6.3"
-  resolved "https://registry.yarnpkg.com/fontawesome/-/fontawesome-5.6.3.tgz#73f0b865fa2b0b384e69d531c05a02c643b72f95"
-  integrity sha512-FCc+CawwsJWWprVEg9X14yI7zI+l9YVAyhzgu70qwGeDn0tLLDH/dVfqgij72g4BBGgLGfK2qnvFGAmYUkhaWg==
+font-awesome@^4.7.0:
+  version "4.7.0"
+  resolved "https://registry.yarnpkg.com/font-awesome/-/font-awesome-4.7.0.tgz#8fa8cf0411a1a31afd07b06d2902bb9fc815a133"
+  integrity sha1-j6jPBBGhoxr9B7BtKQK7n8gVoTM=
 
 for-in@^1.0.1, for-in@^1.0.2:
   version "1.0.2"
@@ -7387,6 +7423,13 @@ kind-of@^6.0.0, kind-of@^6.0.2:
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-6.0.2.tgz#01146b36a6218e64e58f3a8d66de5d7fc6f6d051"
   integrity sha512-s5kLOcnH0XqDO+FvuaLX8DDjZ18CGFk7VygH40QoKPUQhW4e2rvM0rwUq0t8IQDOwYSeLK01U90OjzBTme2QqA==
 
+ladda@>=0.9.8:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/ladda/-/ladda-2.0.1.tgz#523bb026dfbc804bb37615a08189405406198732"
+  integrity sha512-ynRaMdW9y9ABRdTUWa60HSQjtTkoEZMiQDzzYsX8yxIEm7mxL/sxpvoLutYox1XluRif3DxLDg+3Dl1wurjnJg==
+  dependencies:
+    spin.js "^4.0.0"
+
 last-call-webpack-plugin@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/last-call-webpack-plugin/-/last-call-webpack-plugin-3.0.0.tgz#9742df0e10e3cf46e5c0381c2de90d3a7a2d7555"
@@ -8206,7 +8249,14 @@ moment-timezone@^0.4.0:
   dependencies:
     moment ">= 2.6.0"
 
-"moment@>= 2.6.0", moment@>=2.7.0, moment@^2.10:
+moment-timezone@^0.5.27:
+  version "0.5.27"
+  resolved "https://registry.yarnpkg.com/moment-timezone/-/moment-timezone-0.5.27.tgz#73adec8139b6fe30452e78f210f27b1f346b8877"
+  integrity sha512-EIKQs7h5sAsjhPCqN6ggx6cEbs94GK050254TIJySD1bzoM5JTYDwAU1IoVOeTOL6Gm27kYJ51/uuvq1kIlrbw==
+  dependencies:
+    moment ">= 2.9.0"
+
+"moment@>= 2.6.0", "moment@>= 2.9.0", moment@>=2.7.0, moment@^2.10:
   version "2.24.0"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.24.0.tgz#0d055d53f5052aa653c9f6eb68bb5d12bf5c2b5b"
   integrity sha512-bV7f+6l2QigeBBZSM/6yTNq4P2fNpSWj/0e7jQcy87A8e7o2nAfP/34/2ky5Vw4B9S446EtIhodAzkFCcR4dQg==
@@ -9254,6 +9304,11 @@ pend@~1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/pend/-/pend-1.2.0.tgz#7a57eb550a6783f9115331fcf4663d5c8e007a50"
   integrity sha1-elfrVQpng/kRUzH89GY9XI4AelA=
+
+perfect-scrollbar@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/perfect-scrollbar/-/perfect-scrollbar-1.5.0.tgz#821d224ed8ff61990c23f26db63048cdc75b6b83"
+  integrity sha512-NrNHJn5mUGupSiheBTy6x+6SXCFbLlm8fVZh9moIzw/LgqElN5q4ncR4pbCBCYuCJ8Kcl9mYM0NgDxvW+b4LxA==
 
 performance-now@^2.1.0:
   version "2.1.0"
@@ -11287,6 +11342,11 @@ spdy@^4.0.1:
     select-hose "^2.0.0"
     spdy-transport "^3.0.0"
 
+spin.js@^4.0.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/spin.js/-/spin.js-4.1.0.tgz#afcf12738fafd5f6aa0a385a5b4cec45c86a3555"
+  integrity sha512-WI8O1OdJlKjialIhB9Z5RfFFM4pI7Hohik76bB3N4Ep3N/vTDPZiRU8QeefyLbmpI5n2bFQXgticl2g+/KiKYA==
+
 split-string@^3.0.1, split-string@^3.0.2:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/split-string/-/split-string-3.1.0.tgz#7cb09dda3a86585705c64b39a6466038682e8fe2"
@@ -11685,6 +11745,11 @@ svgo@^1.0.0, svgo@^1.3.2:
     unquote "~1.1.1"
     util.promisify "~1.0.0"
 
+sweetalert2@^9.7.0:
+  version "9.7.0"
+  resolved "https://registry.yarnpkg.com/sweetalert2/-/sweetalert2-9.7.0.tgz#4a3c4c9e360169ebcb70c2d648cc47b8f3d6e314"
+  integrity sha512-oGGj9hzl/HFx5I33VQyuYCIr3O1HBpQWB10MGYgzbc/3YWKaViH26U1eqq1N+5wtNlviscRBu+4vhSC/237THw==
+
 sweetalert@0.5.0:
   version "0.5.0"
   resolved "https://registry.yarnpkg.com/sweetalert/-/sweetalert-0.5.0.tgz#74817517b96ebb98fa2e542318f2f1d5286ffe23"
@@ -11806,6 +11871,11 @@ thunky@^1.0.2:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/thunky/-/thunky-1.1.0.tgz#5abaf714a9405db0504732bbccd2cedd9ef9537d"
   integrity sha512-eHY7nBftgThBqOyHGVN+l8gF0BucP09fMo0oO/Lb0w1OF80dJv+lDVpXG60WMQvkcxAkNybKsrEIE3ZtKGmPrA==
+
+ti-icons@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/ti-icons/-/ti-icons-0.1.2.tgz#8bd9b96d2fabd1ffe1efc7534d3dd3b989651f93"
+  integrity sha1-i9m5bS+r0f/h78dTTT3TuYllH5M=
 
 tildify@^1.0.0:
   version "1.2.0"
@@ -12360,6 +12430,11 @@ uuid@^3.0.1, uuid@^3.3.2:
   version "3.3.3"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.3.3.tgz#4568f0216e78760ee1dbf3a4d2cf53e224112866"
   integrity sha512-pW0No1RGHgzlpHJO1nsVrHKpOEIxkGg1xB+v0ZmdNH5OAeAwzAVrCnI2/6Mtx+Uys6iaylxa+D3g4j63IKKjSQ==
+
+v-button@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/v-button/-/v-button-1.2.1.tgz#11c331fe47e1c9a14232f4d925d194f514fcf1d4"
+  integrity sha1-EcMx/kfhyaFCMvTZJdGU9RT88dQ=
 
 v8-compile-cache@2.0.3:
   version "2.0.3"
