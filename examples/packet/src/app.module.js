@@ -8,7 +8,7 @@ import angular_translate from 'angular-translate'
 import 'angular-translate-loader-static-files'
 import angular_loading_bar from 'angular-loading-bar'
 import ngSanitize from 'angular-sanitize'
-import mdMarkdownIt from 'angular-markdown-it'
+//import mdMarkdownIt from 'angular-markdown-it'
 import 'angular-breadcrumb' //'ncy-angular-breadcrumb'
 import vButton from 'v-button'
 import fullscreen from './utils/fullscreen'
@@ -26,7 +26,7 @@ export default angular.module("app", [
   vButton,
   truncate_filters,
   angular_translate,
-  mdMarkdownIt,
+  //mdMarkdownIt,
   ngSanitize
 ]).name
 
