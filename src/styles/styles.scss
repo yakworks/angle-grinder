@@ -121,12 +121,9 @@ select:extend(.select2-chosen) {
   background-color: #fff;
   cursor: pointer;
   padding: 4px;
-  -moz-appearance: none;
 }
 
 select {
-  -moz-appearance: none;
-  -webkit-appearance: none;
   appearance: none;
 }
 
@@ -695,8 +692,6 @@ textarea,
   display: -ms-flexbox;
   display: flex;
   overflow: hidden;
-  -webkit-flex-wrap: wrap;
-  -ms-flex-wrap: wrap;
   flex-wrap: wrap;
 }
 
