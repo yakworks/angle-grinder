@@ -1,7 +1,7 @@
 import compileTemplate from '../../helpers/compileTemplate'
 import agGridz from '~/scripts/gridz'
 import _ from 'lodash'
-describe("agGridzSpec", function() {
+xdescribe("agGridzSpec", function() {
 
   beforeEach(angular.mock.module(agGridz, function($provide) {
     $provide.value("ActionPopupHandler", sinon.stub());
