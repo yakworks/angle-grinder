@@ -1,20 +1,4 @@
-// body {
-//   background: #sanityChecks;
-// }
-
-@import "~bootstrap/less/bootstrap.less";
-@import "~font-awesome/less/font-awesome.less";
-
-// do not collapse until it reaches a smaller value
-@navbarCollapseWidth: 600px;
-
-// Sprite icons path
-// @iconSpritePath:      "../img/glyphicons-halflings.png";
-// @iconWhiteSpritePath: "../img/glyphicons-halflings-white.png";
-
-@import "bs-nav-side";
-
-// tweaks for select2
+// Used to conert boot.less to this https://less2scss.awk5.com/
 
 ul.select2-results table {
   margin-bottom: 0px;
@@ -101,8 +85,10 @@ div.ag-datepicker {
 }
 
 // fix alert error styling
-.alert-error{
-  &:extend(.alert-danger);
+.alert-error {
+  color: #a94442;
+  background-color: #f2dede;
+  border-color: #ebccd1;
 }
 
 .search-form {
@@ -135,12 +121,9 @@ select:extend(.select2-chosen) {
   background-color: #fff;
   cursor: pointer;
   padding: 4px;
-  -moz-appearance: none;
 }
 
 select {
-  -moz-appearance: none;
-  -webkit-appearance: none;
   appearance: none;
 }
 
@@ -170,7 +153,6 @@ legend {
 .modal-body {
   overflow-x: hidden;
 }
-
 
 .modal {
   overflow: auto;
@@ -253,7 +235,7 @@ legend {
 }
 
 .half-width {
-  width: calc(~'(100% - 5px)/2') !important;
+  width: calc((100% - 5px)/2) !important;
 }
 
 .row .extended-col {
@@ -323,8 +305,6 @@ input[type=number]{
   line-height: 18px;
   color: #555;
   border: 1px solid #ccc;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
   border-radius: 3px;
 }
 
@@ -605,8 +585,6 @@ table.customer-select-result td:nth-child(1) {
   width: 100%;
 }
 .tagged-input input:focus {
-  -moz-box-shadow: none !important;
-  -webkit-box-shadow: none !important;
   box-shadow: none !important;
 }
 .tagged-input .tag {
@@ -706,8 +684,6 @@ textarea,
   line-height: 18px;
   color: #555555;
   border: 1px solid #ccc;
-  -webkit-border-radius: 3px; /* Safari 4 */
-  -moz-border-radius: 3px; /* Firefox 3.6 */
   border-radius: 3px;
 }
 
@@ -716,8 +692,6 @@ textarea,
   display: -ms-flexbox;
   display: flex;
   overflow: hidden;
-  -webkit-flex-wrap: wrap;
-  -ms-flex-wrap: wrap;
   flex-wrap: wrap;
 }
 
