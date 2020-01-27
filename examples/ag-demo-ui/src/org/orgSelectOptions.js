@@ -1,8 +1,8 @@
-
+/* @ngInject */
 export default class OrgSelectOptions {
-  constructor(select2Options, pathWithContext){
+  constructor(Select2Options, pathWithContext){
     return function () {
-      return select2Options({
+      return Select2Options({
         width: 190,
         ajax: {
           url: pathWithContext("/org/pickList")
