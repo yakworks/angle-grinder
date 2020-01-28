@@ -145,7 +145,7 @@ module.exports = function(env, argv) {
       // }),
       new HtmlWebpackPlugin({
         title: 'Custom template using lodash',
-        template: `${CONTENT_PUBLIC}/index.ejs`,
+        template: `${CONTENT_PUBLIC}/index.html`,
         //inject: 'body'
         inject: false,
         minify: false
