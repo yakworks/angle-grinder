@@ -9,6 +9,8 @@ import './controllers'
 import SidebarCtrl from './controllers/sidebarCtrl'
 import 'google-code-prettify/src/prettify'
 import '~/styles/all.css.js'
+//import '../../examples/packet/src/assets/styles.scss'
+import '../../examples/packet/src/assets/plugins.scss'
 import '~/styles/docs.css'
 
 const emod = angular.module(exampleAppName)

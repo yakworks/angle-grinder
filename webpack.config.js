@@ -147,7 +147,7 @@ module.exports = function(env, argv) {
         title: 'Custom template using lodash',
         template: `${CONTENT_PUBLIC}/index.html`,
         //inject: 'body'
-        inject: false,
+        //inject: false,
         minify: false
       }),
       new CopyWebpackPlugin([{
