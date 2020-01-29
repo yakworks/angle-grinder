@@ -4,7 +4,7 @@
 .settings {
   position: fixed !important;
   right: -240px;
-  top: 120px;
+  top: 100px;
   -webkit-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0);
   transition: right 0.2s ease 0s;
@@ -24,7 +24,7 @@
     left: -44px;
     padding: 10px 15px;
     position: absolute;
-    top: 41px;
+    top: 0px;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
     -webkit-transform: translateZ(0);

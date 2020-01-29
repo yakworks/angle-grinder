@@ -1,7 +1,8 @@
 console.log("MAIN.JS kicking off")
 //CSS and Sass
 //import './assets/vendor.css.js'
-import '~/styles/all.css.js'
+import '~/styles/vendor.css.js'
+import '~/styles/all.scss'
 import './assets/styles.scss'
 import './assets/plugins.scss'
 
@@ -42,3 +43,6 @@ import "./controllers/SideNavCtrl"
 import "./ui/buttons"
 import "./ui/icons"
 import "./ui/alerts"
+import "./ui/tabs"
+import "./grids"
+import "./forms/selectCtrl"

@@ -42,6 +42,10 @@ app.controller('SideNavCtrl',
             sref: "app.ui.modals"
           },
           {
+            title: "Panels",
+            sref: "app.ui.panels"
+          },
+          {
             title: "Tabs",
             sref: "app.ui.tabs"
           },
@@ -50,7 +54,41 @@ app.controller('SideNavCtrl',
             sref: "app.ui.toggle"
           }
         ]
-      }
+      },
+      {
+        title: "Forms",
+        icon: "fa fa-file-text-o",
+        sref: "app.forms",
+        items: [
+          {
+            title: "Form Elements",
+            sref: "app.forms.elements"
+          },
+          {
+            title: "Xeditable",
+            sref: "app.forms.xeditable"
+          },
+          {
+            title: "Cust Example",
+            sref: "app.forms.cust"
+          }
+        ]
+      },
+      {
+        title: "Grids",
+        icon: "fa fa-table ",
+        sref: "app.grids",
+        items: [
+          {
+            title: "Edit",
+            sref: "app.grids.edit"
+          },
+          {
+            title: "Panel",
+            sref: "app.grids.Panel"
+          }
+        ]
+      },
     ];
   }
 );

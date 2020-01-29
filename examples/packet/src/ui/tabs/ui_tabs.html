@@ -1,0 +1,107 @@
+<!-- start: BREADCRUMB -->
+<div class="breadcrumb-wrapper">
+    <h4 class="mainTitle no-margin" translate="sidebar.nav.element.TABS">TABS &amp; ACCORDIONS</h4>
+
+    <div ncy-breadcrumb class="pull-right"></div>
+</div>
+<!-- end: BREADCRUMB -->
+<!-- start: TABS -->
+<!-- /// controller:  'TabsDemoCtrl' -  localtion: assets/js/controllers/bootstrapCtrl.js /// -->
+<div ng-controller="TabsDemoCtrl">
+    <div class="container-fluid container-fullw">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-white">
+                    <div class="panel-body">
+                        <h5 class="over-title margin-bottom-15">Togglable <span class="text-bold">Tabs</span></h5>
+                        <p>
+                            Add quick, dynamic tab functionality to transition through panes of content, even via dropdown menus.
+                        </p>
+                        <uib-tabset class="tabbable" active="active">
+                            <uib-tab index="0" heading="Static title">
+                                <h4>Static content</h4>
+                                <p>
+                                    Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla
+                                    facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent.
+                                </p>
+                                <p>
+                                    Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse.
+                                    Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro
+                                    keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex
+                                    squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel,
+                                    butcher voluptate nisi qui.
+                                </p>
+                            </uib-tab>
+                            <uib-tab index="$index + 1" ng-repeat="tab in tabs" heading="{{tab.title}}" disable="tab.disabled">
+                                {{tab.content}}
+                            </uib-tab>
+                            <uib-tab index="3" select="alertMe()">
+                                <uib-tab-heading>
+                                    <i class="glyphicon glyphicon-bell"></i> Alert!
+                                </uib-tab-heading>
+                                I've got an HTML heading, and a select callback. Pretty cool!
+                            </uib-tab>
+                        </uib-tabset>
+                        <p>
+                            <a class="btn btn-primary btn-o" href="javascript:void(0)" ng-click="active = 1"> Go to tab 2 </a>
+                            <a class="btn btn-primary btn-o" href="javascript:void(0)" ng-click="active = 2"> Go to tab 3 </a>
+                            <a class="btn btn-default" href="javascript:void(0)" ng-click="tabs[1].disabled = ! tabs[1].disabled"> Enable / Disable third tab </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid container-fullw">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-white">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <h5 class="over-title margin-bottom-15">Justified <span class="text-bold">Tabs</span></h5>
+                                <p>
+                                    Easily make tabs or pills equal widths of their parent. On smaller screens, the nav links are stacked.
+                                </p>
+                                <uib-tabset justified="true" class="tabbable">
+                                    <uib-tab heading="Justified">
+                                        Justified content
+                                    </uib-tab>
+                                    <uib-tab heading="SJ">
+                                        Short Labeled Justified content
+                                    </uib-tab>
+                                    <uib-tab heading="Long Justified">
+                                        Long Labeled Justified content
+                                    </uib-tab>
+                                </uib-tabset>
+                            </div>
+                            <div class="col-lg-6">
+                                <h5 class="over-title margin-bottom-15"><span class="text-bold">Pills</span></h5>
+                                <p>
+                                    Take that same HTML, but use
+                                    <code>
+                                        type="pills"
+                                    </code>
+                                    attribute:
+                                </p>
+                                <uib-tabset class="tabbable" type="pills">
+                                    <uib-tab heading="Pill title">
+                                        Pill content
+                                    </uib-tab>
+                                    <uib-tab heading="Pill title 2">
+                                        Pill content 2
+                                    </uib-tab>
+                                    <uib-tab heading="Pill title 3">
+                                        Pill content 3
+                                    </uib-tab>
+                                </uib-tabset>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end: TABS -->
+

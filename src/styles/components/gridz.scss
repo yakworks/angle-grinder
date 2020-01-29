@@ -1,3 +1,10 @@
+@import '~free-jqgrid/css/ui.jqgrid.css';
+@import '~free-jqgrid/plugins/ui.multiselect.css';
+
+.ui-jqgrid .ui-jqgrid-view {
+  font-size: 14px;
+}
+
 .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
   background-color: #e6e6e6;
   background-repeat: no-repeat;
@@ -160,28 +167,42 @@
       border-top-style: ridge !important;
     }
   }
+  /** Pager **/
   .ui-jqgrid-pager {
     background: #F9F9F9;
-    border: 1px solid #D3D3D3;
+    //border: 1px solid #D3D3D3;
+    border-width: 1px 0 0 0;
     line-height: 15px;
-    height: 45px;
+    height: 36px;
+
+    .ui-pager-control{
+      font-size: 12px;
+    }
+    select.ui-pg-selbox {
+      font-size: 12px !important;
+      min-width: 40px;
+      height: auto;
+      padding: 1px 8px !important;
+      line-height: normal;
+      display: inline-block !important;
+    }
+    input.ui-pg-input {
+      width: 22px;
+      font-size: 12px !important;
+      padding: 1px 4px !important;
+    }
+
   }
+
   .ui-pg-input {
     font-size: inherit;
     width: inherit;
     height: inherit;
   }
-  .ui-pg-selbox {
-    height: auto;
-    width: 70px;
-    margin: 0px;
-    padding: 1px 8px !important;
-    line-height: normal;
-    display: inline-block !important;
-  }
+
 
   .ui-pager-control {
-    height: 50px;
+    height: 36px;
     position: relative;
   }
   .ui-pg-button:hover {
@@ -212,9 +233,7 @@
   border: 0px;
   padding: 2px
 }
-.ui-jqgrid .ui-jqgrid-view, .ui-jqgrid .ui-paging-info, .ui-jqgrid .ui-pg-table,.ui-jqgrid .ui-pg-selbox {
-  font-size: 14px;
-}
+
 .ui-jqgrid tr.jqgrow, .ui-jqgrid tr.ui-row-ltr {
   border: none;
 }
@@ -243,9 +262,9 @@
     opacity: 1;
   }
   .ui-widget-content.ui-state-highlight {
-    background-color: #EEDC94;
-    background-image: linear-gradient(to bottom, #fceec1, #eedc94);
-    background-repeat: repeat-x;
+    background-color: #fff8e5;
+    //background-image: linear-gradient(to bottom, #fceec1, #eedc94);
+    //background-repeat: repeat-x;
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
     opacity: 1;
     *position: fixed;
@@ -308,6 +327,10 @@
 }
 .navbar-grid {
   margin-bottom: 0;
+  border-bottom: none;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+
   .ui-jqgrid {
     border: 1px solid #D4D4D4;
     border-radius: 0 0 4px 4px;
@@ -457,9 +480,6 @@ form[ag-search-form] {
   color: #0088CC;
 }
 
-.select-wrapper select.ui-pg-selbox  {
-  min-width: 40px;
-}
 
 .ui-icon {
   width: 16px;

@@ -1,19 +1,20 @@
-form[editable-form] .editable-datepicker input {
+form[editable-form] {
+  .editable-datepicker input {
     width: 125px;
-}
+  }
 
-form[editable-form] .editable-checkbox input {
+  .editable-checkbox input {
     width: auto;
-}
+  }
 
-form[editable-form] div {
+  div {
     height: auto;
     padding: 5px 0;
     margin-bottom: 3px;
     min-height: 5px;
-}
+  }
 
-form[editable-form] .title {
+  .title {
     display: inline-block;
     font-weight: bold;
     padding-top: 5px;
@@ -22,43 +23,41 @@ form[editable-form] .title {
     text-align: right;
     margin-right: 8px;
     margin-left: 5px;
-}
+  }
 
-form[editable-form] .editable {
+  .editable {
     display: inline-block;
     padding-top: 5px;
     vertical-align: top;
-}
-
-.editable-controls .select2-container {
-  width: 167px !important;
-}
-
-form[editable-form] select {
-  width: 155px;
-  padding: 6px 2px 6px 10px;
-  border-radius: 5px;
-}
-
-
-form[editable-form] .editable-error {
+  }
+  select {
+    width: 155px;
+    padding: 6px 2px 6px 10px;
+    border-radius: 5px;
+  }
+  .editable-error {
     color: #b94a48;
-}
+  }
 
-form[editable-form] input.ng-invalid {
+  input.ng-invalid {
     border-color: #b94a48;
-}
+  }
 
-form[editable-form] input {
+  input {
     width: 167px;
     -ms-box-sizing:content-box;
     -moz-box-sizing:content-box;
     box-sizing:content-box;
     -webkit-box-sizing:content-box;
     height: 20px;
+  }
+  select.editable-input{
+    width: 167px;
+  }
 }
-form[editable-form] select.editable-input{
-  width: 167px;
+
+.editable-controls .select2-container {
+  width: 167px !important;
 }
 
 input[type=number].editable-input {

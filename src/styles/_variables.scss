@@ -58,7 +58,6 @@ $white: #ffffff; // White
 $border-default: #c8c7cc !default;
 
 $text-color: #8e8e93 !default;
-//$text-color: $black !default;
 $text-dark: darken($text-color, 20%) !default;
 $text-light: lighten($text-color, 5%) !default;
 $link-color: $primary !default;

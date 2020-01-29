@@ -45,6 +45,7 @@
     "blueimp-load-image": "~1.11.0",
     "bootstrap": "3.3.7",
     "bootstrap-sass": "^3.4.1",
+    "bulma": "^0.8.0",
     "core-js": "^3.6.2",
     "eonasdan-bootstrap-datetimepicker": "4.17.47",
     "fastclick": "^1.0.6",
