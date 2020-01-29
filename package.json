@@ -20,7 +20,7 @@
     "start-rdash": "webpack-dev-server --mode=development --content-base ./examples/rdash ",
     "start-ag-demo": "webpack-dev-server --mode=development --content-base ./examples/ag-demo-ui",
     "build-ag-demo": "webpack --mode=production --profile --progress --content-base ./examples/ag-demo-ui --pathout ./examples/ag-demo-grails/src/main/resources/public",
-    "watch-ag-demo": "webpack --watch --mode=development --progress --content-base ./examples/ag-demo-ui --pathout ./examples/ag-demo-grails/src/main/resources/public",
+    "watch-ag-demo": "webpack --watch --mode=development --progress --content-base ./examples/ag-demo-ui --pathout ./examples/ag-demo-grails/src/main/webapp",
     "parcel": "parcel examples/simple/index.html",
     "parcel:build": "parcel build examples/simple/index.html"
   },

@@ -3,7 +3,7 @@ import FormCtrl from './formCtrl'
 import '../org/index'
 import adminOrg from '../org/adminOrgModule'
 
-angular.module("admin.org")
+angular.module(adminOrg)
   .controller("orgShowCase.FormCtrl", FormCtrl)
   .controller("orgShowCase.ListCtrl", ListCtrl);
 export default adminOrg

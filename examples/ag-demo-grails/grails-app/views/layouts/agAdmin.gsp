@@ -68,43 +68,8 @@
         </div>
 </div>
 
-<div id="page" class="container">
-    <g:unless test="${hideSidebar}">
-        <aside class="sidebar col-sm-3">
-            <ul class="nav list-group nav-side">
-                <li>
-                    %{--TODO figure out why does it breaks the link--}%
-                    <a data-toggle="collapse" href="${createLink(controller: 'user')}" class="accordion-toggle">
-                        Users<i class="fa fa-chevron-right"></i>
-                    </a>
-
-                    <div id="user-submenu" class="collapse accordion-body">
-                        <ul class="nav nav-list submenu">
-                            <li class=""><a href="${createLink(controller: 'user')}">List Users</a></li>
-                            <li><a href="${createLink(controller: 'user')}">Add New User</a></li>
-                        </ul>
-                    </div>
-                </li>
-                <li><a href="${createLink(controller: 'org')}">
-                    <i class="fa fa-chevron-right"></i> List Orgs</a>
-                </li>
-                <li><a href="${request.contextPath}">
-                    <i class="fa fa-chevron-right"></i> List Orgs with Tabs</a>
-                </li>
-                <li><a href="${createLink(controller: 'orgShowCase')}">
-                    <i class="fa fa-chevron-right"></i> List Org Show Case</a>
-                </li>
-            </ul>
-        </aside>
-
-        <section class="content col-sm-9">
-            <g:layoutBody/>
-        </section>
-    </g:unless>
-
-    <g:else>
-        <g:layoutBody/>
-    </g:else>
+<div id="page" class="container top-margin-20 no-padding">
+	<g:layoutBody/>
 </div>
 
 </body>
