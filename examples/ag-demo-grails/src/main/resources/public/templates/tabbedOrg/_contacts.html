@@ -1,0 +1,65 @@
+<div ng-controller="tabbedOrg.ContactListCtrl">
+
+    <div ng-show="showSearchForm" class="search-form-panel">
+        <div class="well">
+            <form ag-search-form="contactsGrid" class="form-horizontal form-multi-column">
+
+
+                <div class="form-group row">
+                    <label class="control-label col-md-4">Name</label>
+
+                    <div class="col-md-4">
+                        <input class="input-block-level" type="text" ng-model="filters.contact.name">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="control-label col-md-4">Login</label>
+
+                    <div class="col-md-4">
+                        <input class="input-block-level" type="text" ng-model="filters.login">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="control-label col-md-4">Contact email</label>
+
+                    <div class="col-md-4">
+                        <input class="input-block-level" type="text" ng-model="filters.contact.email">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="pull-right">
+                        <ag-search-button></ag-search-button>
+                        <ag-reset-search-button></ag-reset-search-button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="navbar navbar-toolbar navbar-grid navbar-default">
+        <div class="navbar-inner with-selected-pointer with-grid-options">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="" ng-click="createRecord()">
+                        <i class="fa fa-user"></i> Create Contact</a>
+                </li>
+
+            </ul>
+            <ul class="nav navbar-nav pull-right">
+                <li>
+                    <a title="search screen" ng-click="showSearchForm = !showSearchForm" href="">
+                        <i class="fa fa-search"></i>
+                    </a>
+                </li>
+            </ul>
+            <ag-grid-quick-search for="contactsGrid" filters="filters.quickSearch"></ag-grid-quick-search>
+        </div>
+    </div>
+
+    <div ng-show="gridOptions"
+         ag-grid="gridOptions"
+         ag-grid-name="contactsGrid"></div>
+</div>
