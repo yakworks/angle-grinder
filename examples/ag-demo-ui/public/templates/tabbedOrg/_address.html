@@ -1,60 +1,124 @@
-<form name="editForm"
-      class="form-horizontal container"
-      novalidate="true"
-      ng-submit="save(editForm, org)">
+<div class="row">
 
-  <div ag-field-group for="phone" class="row form-group">
-    <label class="control-label col-md-2">Phone</label>
+  <div class="col-md-4">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          Setup
+        </h4>
+      </div>
+      <div class="panel-body">
+        <form name="editForm" class="form-horizontal" novalidate="true" ng-submit="save(editForm, org)">
 
-    <div class="col-md-9">
-      <input type="text" name="phone" placeholder="Phone number"
-             ng-model="org.phone" autofocus required/>
-      <ag-validation-errors for="phone" required="This field is required"/>
+          <div ag-field-group for="phone">
+            <label class="control-label required">Phone</label>
+            <div class="controls">
+              <input type="text" name="phone" placeholder="Phone number" ng-model="org.phone" ng-required>
+              <ag-validation-errors for="phone" />
+            </div>
+          </div>
+
+          <div ag-field-group for="state">
+            <label class="control-label">State</label>
+
+            <div class="controls">
+              <input type="text" name="state" placeholder="Enter state" ng-model="org.state" autofocus required />
+              <ag-validation-errors for="state" required="This field is required" />
+            </div>
+          </div>
+
+          <div ag-field-group for="city">
+            <label class="control-label">City</label>
+
+            <div class="controls">
+              <input type="text" name="city" placeholder="Enter city name" ng-model="org.city" autofocus required />
+              <ag-validation-errors for="city" required="This field is required" />
+            </div>
+          </div>
+
+          <div ag-field-group for="zip">
+            <label class="control-label col-md-2">Zip Code</label>
+
+            <div class="controls">
+              <input type="text" name="zip" placeholder="Enter zip code" ng-model="org.zip" autofocus required />
+              <ag-validation-errors for="zip" required="This field is required" />
+            </div>
+          </div>
+
+          <div ag-field-group for="street">
+            <label class="control-label">Street</label>
+
+            <div class="controls">
+              <input type="text" name="street" placeholder="Enter street name" ng-model="org.street" autofocus
+                required />
+              <ag-validation-errors for="street" required="This field is required" />
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <ag-submit-button></ag-submit-button>
+          </div>
+
+        </form>
+      </div>
     </div>
   </div>
+  <div class="col-md-4">
+    <div class="panel panel-default">
+      <div editable-panel-heading="editForm">Xeditable Form</div>
+      <div class="panel-body">
+        <form editable-form name="editForm" class="form-horizontal no-margin" novalidate="true"
+          onaftersave="save(editForm, org)">
 
-  <div ag-field-group for="state" class="row form-group">
-    <label class="control-label col-md-2">State</label>
+          <div stay-on-collapse class="edit-group">
+            <span class="title">Phone</span>
+            <span editable-text="org.phone"
+              ag-bind="org.phone"
+              e-name="orgPhone"
+              e-placeholder="org phone">
+            </span>
+          </div>
 
-    <div class="col-md-9">
-      <input type="text" name="state" placeholder="Enter state"
-             ng-model="org.state" autofocus required/>
-      <ag-validation-errors for="state" required="This field is required"/>
+          <div class="edit-group">
+            <span class="title">Street</span>
+            <span editable-text="org.street" e-name="orgStreet" e-placeholder="org street">{{org.street}}</span>
+          </div>
+
+          <div class="edit-group">
+            <span class="title">City</span>
+            <span editable-text="org.city" e-name="orgCity" e-placeholder="org city">{{org.city}}</span>
+          </div>
+
+          <div class="edit-group">
+            <span class="title">State</span>
+            <span editable-text="org.state" e-name="orgState" e-placeholder="org state">{{org.state}}</span>
+          </div>
+
+          <div class="edit-group">
+            <span class="title">Zip</span>
+            <span editable-text="org.zip" e-name="orgZip" e-placeholder="org zip">{{org.zip}}</span>
+          </div>
+
+          <div class="edit-group">
+            <span class="title">Address date</span>
+            <span editable-datepicker="org.addressDate" e-name="addressDate"
+              e-placeholder="address date">{{org.addressDate}}</span>
+          </div>
+
+          <div class="edit-group">
+            <span class="title">Description</span>
+            <span editable-textarea="org.description" e-name="description"
+              e-placeholder="description">{{org.description}}</span>
+          </div>
+
+          <div class="edit-group">
+            <span class="title">Org type</span>
+            <span editable-select="org.type" e-name="type"
+              e-ng-options="type for type in orgTypes">{{org.type}}</span>
+          </div>
+          <div editable-form-buttons="editForm"></div>
+        </form>
+      </div>
     </div>
   </div>
-
-  <div ag-field-group for="city" class="row form-group">
-    <label class="control-label col-md-2">City</label>
-
-    <div class="col-md-9">
-      <input type="text" name="city" placeholder="Enter city name"
-             ng-model="org.city" autofocus required/>
-      <ag-validation-errors for="city" required="This field is required"/>
-    </div>
-  </div>
-
-  <div ag-field-group for="zip" class="row form-group">
-    <label class="control-label col-md-2">Zip Code</label>
-
-    <div class="col-md-9">
-      <input type="text" name="zip" placeholder="Enter zip code"
-             ng-model="org.zip" autofocus required/>
-      <ag-validation-errors for="zip" required="This field is required"/>
-    </div>
-  </div>
-
-  <div ag-field-group for="street" class="row form-group">
-    <label class="control-label col-md-2">Street</label>
-
-    <div class="col-md-9">
-      <input type="text" name="street" placeholder="Enter street name"
-             ng-model="org.street" autofocus required/>
-      <ag-validation-errors for="street" required="This field is required"/>
-    </div>
-  </div>
-
-  <div class="form-actions">
-    <ag-submit-button></ag-submit-button>
-  </div>
-
-</form>
+</div>

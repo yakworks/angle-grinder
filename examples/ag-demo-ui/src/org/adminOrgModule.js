@@ -16,7 +16,7 @@ org.config([
     })
 
     .when("/:id", {
-      templateUrl: "../templates/org/show.html",
+      templateUrl: "../templates/tabbedOrg/show.html",
       controller: "org.ShowCtrl",
       resolve: { org: [
           "$route", "resourceResolver", ($route, resourceResolver) => resourceResolver($route.current.params.id)

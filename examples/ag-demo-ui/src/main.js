@@ -6,7 +6,7 @@ import OrgTab from './tabbedOrg/index'
 import User from './user/index'
 import OrgShowCase from './orgShowCase/index'
 import '~/styles/all.css.js' //using ~/ points to the main projects src dir
-import './app.css'
+//import './app.css'
 
 const forms = angular.module("angleGrinder.forms");
 
