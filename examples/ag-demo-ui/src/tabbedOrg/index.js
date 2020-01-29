@@ -4,7 +4,7 @@ import ShowCtrl from './showCtrl'
 import adminOrgTabs from './tabbedOrgModule'
 import NoteListCtrl from "./noteListCtrl";
 
-angular.module("admin.orgTabs")
+angular.module(adminOrgTabs)
   .controller("tabbedOrg.ContactListCtrl", ContactListCtrl)
   .controller("tabbedOrg.NoteListCtrl", NoteListCtrl)
   .controller("tabbedOrg.orgShowCaseCtrl", orgShowCaseCtrl)
