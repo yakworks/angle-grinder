@@ -34,11 +34,12 @@ import "./directives/letter-icon.js"
 // import "./directives/ct-crop.js"
 
 // Controllers
-import "./controllers/mainCtrl"
+import "./app/AppCtrl"
+// examples
 import "./controllers/inboxCtrl"
 import "./controllers/bootstrapCtrl"
 import "./controllers/chatCtrl"
-import "./controllers/SideNavCtrl"
+import "./app/sidebar/SideNavCtrl"
 //UI Demo
 import "./ui/buttons"
 import "./ui/icons"

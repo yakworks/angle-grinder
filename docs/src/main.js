@@ -11,8 +11,8 @@ import 'google-code-prettify/src/prettify'
 // Styles
 import '~/styles/vendor.css.js'
 import '~/styles/all.css.js'
-import '../../examples/packet/src/assets/styles.scss'
-import '../../examples/packet/src/assets/plugins.scss'
+import '../../examples/demo/src/assets/styles.scss'
+import '../../examples/demo/src/assets/plugins.scss'
 import './docs.css'
 
 const emod = angular.module(exampleAppName)

@@ -76,7 +76,7 @@ angular.module(MOD_NAME, [
         addSiblings(state);
       }
     }
-    console.log("state ", state)
+    //console.log("state ", state)
     return self;
   };
 
