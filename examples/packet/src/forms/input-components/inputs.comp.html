@@ -1,0 +1,30 @@
+<form name="form" class="form-horizontal-fixed" autocomplete="off" novalidate>
+  <legend>form-input-comps</legend>
+  <fieldset>
+    <y-input name="name" ng-model="$ctrl.vm.name" minimum-length="2" required ></y-input>
+    <y-input type="email" name="email" ng-model="$ctrl.vm.email" required ></y-input>
+    <y-input name="website" ng-model="$ctrl.vm.website" ></y-input>
+    <y-select name="normalSelect" ng-model="$ctrl.vm.normalSelect" options-data="$ctrl.vm.normalSelectOptions"></y-select>
+    <y-select name="normalSelectJson" ng-model="$ctrl.vm.normalSelectJson"
+      options-data='[{"id": 99, "name": "Foo"}, {"id": 100, "name": "Bar"}, {"id": 101, "name": "Baz"}]'>
+    </y-select>
+    </y-select>
+    <ag-select2
+      ng-model="$ctrl.vm.select2"
+      select-ajax-url="/customer/pickList"
+      select-ajax-quiet-millis="250"
+			select-minimum-input-length="2">
+    </ag-select2>
+  </fieldset>
+  <div class="form-group">
+    <div class="controls">
+      <button ng-click="$ctrl.save(form)" ng-disabled="form.$invalid || form.$pending" class="btn btn-primary">Save</button>
+    </div>
+  </div>
+
+</form>
+
+<hr>
+<h3>Model</h3>
+<pre ng-cloak>form.$invalid: {{form.$invalid}}</pre>
+<pre ng-cloak>vm: {{$ctrl.vm | json}}</pre>

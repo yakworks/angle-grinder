@@ -76,9 +76,7 @@ forms.directive("agLength",
   })]
 )
 
-forms.directive("agFieldGroup", [
-  "$timeout", "$log", "$interpolate",
-  ($timeout, $log, $interpolate) => ({
+forms.directive("agFieldGroup", ($timeout, $log, $interpolate) => ({
     restrict: "A",
     require: "^form",
     replace: true,
@@ -129,7 +127,7 @@ forms.directive("agFieldGroup", [
       })
     }
   })
-])
+)
 
 forms.directive("agValidationErrors",
   ["validationMessages", "$interpolate", (validationMessages, $interpolate) => ({
@@ -310,5 +308,5 @@ const requiredDirective = [() => ({
 })
 ]
 
-forms.directive("required", requiredDirective)
-forms.directive("ngRequired", requiredDirective)
+//forms.directive("required", requiredDirective)
+//forms.directive("ngRequired", requiredDirective)

@@ -5,6 +5,7 @@ import Org from './org/index'
 import OrgTab from './tabbedOrg/index'
 import User from './user/index'
 import OrgShowCase from './orgShowCase/index'
+import '~/styles/vendor.css.js'
 import '~/styles/all.scss' //using ~/ points to the main projects src dir
 //import './app.css'
 

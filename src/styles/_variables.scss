@@ -108,3 +108,5 @@ $screen-lg-min: 1200px !default;
 $screen-xs-max: ($screen-sm-min - 1) !default;
 $screen-sm-max: ($screen-md-min - 1) !default;
 $screen-md-max: ($screen-lg-min - 1) !default;
+
+$checkbox-focus: 0 0px 4px 2px #78aad6 !default;

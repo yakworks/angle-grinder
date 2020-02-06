@@ -31,6 +31,7 @@ angular.module('ui.select2', [])
         var repeatAttr
         var isSelect = tElm.is('select')
         var isMultiple = angular.isDefined(tAttrs.multiple)
+        var elname = tElm.attr("name") //for logging
 
         // Enable watching of the options dataset if in use
         if (tElm.is('select')) {
@@ -46,10 +47,12 @@ angular.module('ui.select2', [])
           pre: function(scope, elm, attrs, controller) {
             // instance-specific options
             var opts = angular.extend({}, options, scope.$eval(attrs.uiSelect2))
+            /** force isSelect if set in options*/
+            if(opts.isSelect) isSelect = true
 
-            /*
-          Convert from Select2 view-model to Angular view-model.
-          */
+            console.log(`${elname} -- isSelect:${isSelect} isMultiple:${isMultiple}`)
+
+            /* Convert from Select2 view-model to Angular view-model.*/
             var convertToAngularModel = function(select2_data) {
               var model
               if (opts.simple_tags) {
@@ -101,6 +104,7 @@ angular.module('ui.select2', [])
               const renFunc = function() {
 
                 if (isSelect) {
+                  console.log(`${elname} isSelect=true so using elm.select2('val' `, controller.$viewValue)
                   elm.select2('val', controller.$viewValue)
                 } else {
 
@@ -131,11 +135,15 @@ angular.module('ui.select2', [])
                       })
                     }
                   } else {
+
                     if (angular.isObject(controller.$viewValue)) {
+                      console.log(`${elname} -- elm.select2('data', `, controller.$viewValue)
                       elm.select2('data', controller.$viewValue)
                     } else if (!controller.$viewValue) {
+                      console.log("-- elm.select2('data', null)", controller.$viewValue)
                       elm.select2('data', null)
                     } else {
+                      console.log("-- elm.select2('val', controller.$viewValue)", controller.$viewValue)
                       elm.select2('val', controller.$viewValue)
                     }
                   }
@@ -168,6 +176,7 @@ angular.module('ui.select2', [])
                   }*/
                   // Delayed so that the options have time to be rendered
                   $timeout(function() {
+                    console.log("$timeout elm.select2('val', controller.$viewValue)", controller.$viewValue)
                     elm.select2('val', controller.$viewValue)
                     // Refresh angular to remove the superfluous option
                     renFunc()
@@ -189,6 +198,8 @@ angular.module('ui.select2', [])
                   }
 
                   scope.$apply(function() {
+                    console.log(" elm.select2('data')", elm.select2('data'))
+                    console.log(" elm.select2('val')", elm.select2('val'))
                     controller.$setViewValue(
                       convertToAngularModel(elm.select2('data')))
                   })
@@ -199,6 +210,7 @@ angular.module('ui.select2', [])
                   opts.initSelection = function(element, callback) {
                     initSelection(element, function(value) {
                       var isPristine = controller.$pristine
+                      //console.log("initSelection controller.$setViewValue(value ", value)
                       controller.$setViewValue(convertToAngularModel(value))
                       callback(value)
                       if (isPristine) {
@@ -210,6 +222,7 @@ angular.module('ui.select2', [])
                 }
               }
             }
+            //console.log("opts for select2",opts)
 
             elm.bind('$destroy', function() {
               elm.select2('destroy')
@@ -226,17 +239,25 @@ angular.module('ui.select2', [])
             if (attrs.ngMultiple) {
               scope.$watch(attrs.ngMultiple, function(newVal) {
                 attrs.$set('multiple', !!newVal)
+                //console.log("opts for select2",opts)
                 elm.select2(opts)
               })
             }
 
             // Initialize the plugin late so that the injected DOM does not disrupt the template compiler
             $timeout(function() {
-
+              console.log(`${elname} Initialize -- isSelect:${isSelect} isMultiple:${isMultiple}`)
+              //console.log("opts for select2",opts)
               elm.select2(opts)
 
               // Set initial value - I'm not sure about this but it seems to need to be there
-              elm.select2('data', controller.$modelValue)
+              if(isMultiple) {
+                console.log("isMultiple so using elm.select2('data' ", controller.$viewValue)
+                elm.select2('val', controller.$modelValue)
+              } else {
+                console.log("not isMultiple so elm.select2('val' ", controller.$viewValue)
+                elm.select2('val', controller.$modelValue)
+              }
               // important!
               controller.$render()
 

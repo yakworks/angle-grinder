@@ -1,0 +1,54 @@
+
+
+.nav.nav-tabs {
+  margin-bottom: 10px;
+}
+
+.navbar-nav>li>.btn-link {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+/*bootstrap 3 doesn't have divider*/
+.navbar .divider-vertical {
+  height: 50px;
+  margin: 0 9px;
+  border-right: 1px solid #ddd;
+  border-left: 1px solid #fff;
+}
+
+.navbar-inverse .divider-vertical {
+  height: 50px;
+  border-right-color: #222222;
+  border-left-color: #111111;
+}
+
+.navbar-toolbar {
+  min-height: 40px;
+  li {
+    a {
+      padding: 10px;
+    }
+    .btn {
+      padding: 10px;
+    }
+    ul.dropdown-menu {
+      li {
+        a {
+          padding: 2px 0 2px 10px;
+        }
+      }
+    }
+  }
+  ul {
+    li.divider-vertical {
+      height: 42px;
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .navbar-collapse .nav > .divider-vertical {
+    display: none;
+  }
+}

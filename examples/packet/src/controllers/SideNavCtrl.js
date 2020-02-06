@@ -9,6 +9,8 @@ app.controller('SideNavCtrl',
     $scope.sideMenuItems = [
       {
         title: "Dashboard",
+        url: "/dashboard",
+        //templateUrl: require("./dashboards/dashyak.html"),
         icon: "fa fa-home",
         sref: "app.dashboard"
       },
@@ -16,7 +18,7 @@ app.controller('SideNavCtrl',
         title: "Elements",
         icon: "fa fa-flask",
         sref: "app.ui",
-        items: [
+        children: [
           {
             title: "Alerts",
             sref: "app.ui.alerts"
@@ -59,7 +61,15 @@ app.controller('SideNavCtrl',
         title: "Forms",
         icon: "fa fa-file-text-o",
         sref: "app.forms",
-        items: [
+        children: [
+          {
+            title: "Form Examples",
+            sref: "app.forms.horizontal-examples"
+          },
+          {
+            title: "Form AG Inputs",
+            sref: "app.forms.input-components"
+          },
           {
             title: "Form Elements",
             sref: "app.forms.elements"
@@ -68,17 +78,14 @@ app.controller('SideNavCtrl',
             title: "Xeditable",
             sref: "app.forms.xeditable"
           },
-          {
-            title: "Cust Example",
-            sref: "app.forms.cust"
-          }
+
         ]
       },
       {
         title: "Grids",
         icon: "fa fa-table ",
         sref: "app.grids",
-        items: [
+        children: [
           {
             title: "Edit",
             sref: "app.grids.edit"

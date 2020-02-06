@@ -53,3 +53,10 @@ then open http://localhost:9000
 Run `node_modules/blueimp-file-upload-node/server.js`
 and navigate to `http://localhost:9000/#/examples/fileUpload`
 
+
+### migration notes
+
+- form-multi-column no-margin classes can go away, they don't seem to do anything
+- form-multi-column no-margin classes can go away, they don't seem to do anything
+- IsFalsy and DeepPick, DeepDiff got moved to just imports
+- ui.bootstrap after 0.14 $modalInstance -> $uibModalInstance

@@ -13,7 +13,8 @@
 
 
     <g:layoutHead/>
-   <link href="/assets/main.css" rel="stylesheet">
+    <link href="/vendor-libs.css" rel="stylesheet">
+    <link href="/assets/main.css" rel="stylesheet">
     <script src="/jquery-libs.js" type="text/javascript"></script>
     <script src="/vendor-libs.js" type="text/javascript"></script>
     <script src="/main.js" type="text/javascript"></script>

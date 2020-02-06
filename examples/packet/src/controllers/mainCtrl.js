@@ -51,7 +51,7 @@ app.controller('AppCtrl',
       }
 
       // Save the route title
-      $rootScope.currTitle = $state.current.title;
+      $rootScope.currTitle = $state.current.data.title;
     });
 
 
