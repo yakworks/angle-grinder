@@ -1,6 +1,6 @@
 import angular from 'angular'
 import commonModule from './commonModule'
-import { isFalsy } from '~/scripts/utils/isFalsy'
+import { isFalsy } from '../../scripts/utils/isFalsy'
 import _ from 'lodash'
 
 var app = angular.module(commonModule)
