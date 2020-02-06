@@ -53,4 +53,3 @@ then open http://localhost:9000
 Run `node_modules/blueimp-file-upload-node/server.js`
 and navigate to `http://localhost:9000/#/examples/fileUpload`
 
-foo
