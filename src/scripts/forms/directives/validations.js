@@ -82,9 +82,7 @@ forms.directive('agFieldGroup', ($timeout, $log, $interpolate) => ({
   replace: true,
   transclude: true,
 
-  template: '\
-<div class="form-group" ng-transclude></div>\
-',
+  template: '<div class="form-group" ng-transclude></div>',
 
   link(scope, element, attrs, formCtrl) {
     const fields = _.map((attrs.for || '').split(','), fieldExpr => $interpolate(fieldExpr)(scope))
@@ -240,7 +238,7 @@ forms.directive('agServerValidationErrors', ['alerts', alerts => ({
           if (oldVal === newVal) { return }
 
           // Remove server side error for the field when its value was changed
-          formCtrl[field]?.$setValidity('server', true)
+          if (formCtrl[field]) formCtrl[field].$setValidity('server', true)
           formCtrl.$serverErrors[field] = null
           return unregister()
         })
@@ -268,7 +266,7 @@ forms.factory('serverValidationErrorsHandler', [
 
           // ..set an error for the current form
           if (typeof message === 'string') {
-            form[field]?.$setValidity('server', false)
+            if (form[field]) form[field].$setValidity('server', false)
             result.push(form.$serverErrors[field] = message)
           } else {
             result.push(undefined)
@@ -293,16 +291,16 @@ forms.factory('serverValidationErrorsHandler', [
 ])
 
 // Automatically add asterisk to required fields.
-const requiredDirective = [() => ({
-  restrict: 'A',
-  scope: false,
+// const requiredDirective = [() => ({
+//   restrict: 'A',
+//   scope: false,
 
-  link(scope, element) {
-    // console.log element.closest("label")
-    return element.closest('.form-group').find('.control-label').addClass('required')
-  }
-})
-]
+//   link(scope, element) {
+//     // console.log element.closest("label")
+//     return element.closest('.form-group').find('.control-label').addClass('required')
+//   }
+// })
+// ]
 
 // forms.directive("required", requiredDirective)
 // forms.directive("ngRequired", requiredDirective)

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import angular from 'angular'
 import gridzModule from './gridzModule'
 import _ from 'lodash'

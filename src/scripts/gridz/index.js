@@ -1,4 +1,3 @@
-import angular from 'angular'
 import gridzModule from './gridzModule'
 import './gridPagerCtrlMixin'
 import './services/ActionPopupHandler'

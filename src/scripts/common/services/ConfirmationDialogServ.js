@@ -1,11 +1,14 @@
 import sweetAlert from 'sweetalert'
-window.sweetAlert = window.swal = sweetAlert
 
 /* @ngInject */
 export default class ConfirmationDialogServ {
   constructor($log, $q) {
     this.$log = $log
     this.$q = $q
+  }
+
+  swal(options, callback) {
+    sweetAlert(options, callback)
   }
 
   open(options) {
@@ -36,7 +39,7 @@ export default class ConfirmationDialogServ {
 
     const defer = this.$q.defer()
 
-    swal({
+    this.swal({
       title: options.message,
       allowEscapeKey: false,
       showCancelButton: true,

@@ -211,9 +211,9 @@ forms.directive('agPanelStates', [
     ],
 
     link(scope, element, attrs, ctrl, transcludeFn) {
-      const buttonList = angular.element($compile('\
-<ul name="agPanelStates" class="nav navbar-nav panel-states pull-right"></ul>\
-')(scope))
+      const buttonList = angular.element($compile(`
+<ul name="agPanelStates" class="nav navbar-nav panel-states pull-right"></ul>
+`)(scope))
 
       // add user buttons
       transcludeFn(scope, cloneContent => angular.forEach(cloneContent, function(element) {

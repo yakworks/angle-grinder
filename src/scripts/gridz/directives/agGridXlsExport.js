@@ -44,11 +44,11 @@ gridz.directive('agGridXlsExport', [
             link.href = dataUri
             link.setAttribute('download', 'download.xls')
             document.body.appendChild(link)
-            const click_ev = document.createEvent('MouseEvents')
+            const clickev = document.createEvent('MouseEvents')
             // initialize the event
-            click_ev.initEvent('click', true, true)
+            clickev.initEvent('click', true, true)
             // trigger the event
-            return link.dispatchEvent(click_ev)
+            return link.dispatchEvent(clickev)
           }
         } else {
           return NotificationDialogServ.open('Please select at least one row.')

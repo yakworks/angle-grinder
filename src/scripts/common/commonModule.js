@@ -5,7 +5,7 @@ import ngScroll from 'angular-scroll'
 import ngcookies from 'angular-cookies'
 import ngAnimate from 'angular-animate'
 import ngLadda from 'angular-ladda'
-import angular_loading_bar from 'angular-loading-bar'
+import ngLoadingBar from 'angular-loading-bar'
 import vButton from 'v-button'
 
 import ConfirmationDialogServ from './services/ConfirmationDialogServ'
@@ -19,7 +19,7 @@ var common = angular.module(MOD_NAME, [
   ngcookies,
   ngAnimate,
   ngLadda,
-  angular_loading_bar,
+  ngLoadingBar,
   vButton,
   ngScroll // Scroll
 ])

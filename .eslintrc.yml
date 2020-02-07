@@ -17,6 +17,8 @@ ignorePatterns:
   - "node_modules/"
   - "webpack*.*"
 rules:
+  no-return-assign: 0
+  no-useless-escape: 0
   space-before-function-paren:
     - error
     - anonymous: never

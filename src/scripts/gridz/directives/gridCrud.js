@@ -128,11 +128,10 @@ class GridCrudCtrl {
     }
 
     const editAction = function(id) {
-      let record
       $scope.unHighlightCell($scope.lastSelectedRow, $scope.lastSelectedCell)
       $log.info(`[gridCrud] Edit ${resourceName} : ${id}`)
       $scope.lastSelectedRow = id
-      return record = Resource.get({ id }, function(r) {
+      return Resource.get({ id }, function(r) {
         $scope[resourceName] = restrictResource(r, allowedFields)
         return showForm()
       })

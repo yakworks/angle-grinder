@@ -36,9 +36,6 @@ gridz.directive('agResetSortGrid', [
         }
       }
     },
-
-    template: '\
-<a class="list" uib-tooltip="Reset Sorting" ng-click="resetSort()"><i class="fa fa-sort"></i></a>\
-'
+    template: '<a class="list" uib-tooltip="Reset Sorting" ng-click="resetSort()"><i class="fa fa-sort"></i></a>'
   })
 ])
