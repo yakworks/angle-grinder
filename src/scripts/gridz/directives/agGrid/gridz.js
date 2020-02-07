@@ -348,7 +348,7 @@ class Gridz {
 </div>\
 `,
       onShown() {
-        return self.actionPopupOnShow.call(self, this)
+        return self.actionPopupOnShow(this)
       }
     })
   }

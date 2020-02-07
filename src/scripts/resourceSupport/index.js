@@ -1,4 +1,3 @@
-import angular from 'angular'
 import resourceModule from './resourceModule'
 // import './resourceBuilder'
 import './ResourceTemplateServ'

@@ -8,10 +8,10 @@ angular.module(commonModule).directive('agSideMenu', [
 
     link(scope, element, attr) {
       let headerHeight = 0
-      let elScrollTopOriginal = 0
+      // let elScrollTopOriginal = 0
       $timeout(function() {
         const header = angular.element(document.getElementById(attr.header))
-        elScrollTopOriginal = element.offset().top
+        // elScrollTopOriginal = element.offset().top
         if (!_.isNil(angular.element(header)[0])) { return headerHeight = angular.element(header)[0].offsetHeight }
       })
 

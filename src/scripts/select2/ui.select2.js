@@ -28,7 +28,6 @@ angular.module('ui.select2', [])
       compile: function(tElm, tAttrs) {
         var isSelect = tElm.is('select')
         var isMultiple = angular.isDefined(tAttrs.multiple)
-        var elname = tElm.attr('name') // for logging
 
         var watch
         var repeatOption
@@ -44,6 +43,7 @@ angular.module('ui.select2', [])
           }
         }
 
+        // var elname = tElm.attr('name') // for logging
         const log = function(msg, val) {
           // console.log(`[${elname}] - ${msg}`, val)
         }

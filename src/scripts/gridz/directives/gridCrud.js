@@ -73,7 +73,7 @@ app.directive('gridCrud', ['$controller', '$timeout', ($controller, $timeout) =>
 })
 ])
 
-export class GridCrudCtrl {
+class GridCrudCtrl {
   constructor($scope, $element, $attrs, $parse, $log, resourceBuilder, $window, restrictResource, $uibModal, pathWithContext, $timeout) {
     let Resource = null
     let beforeSave = null
@@ -128,11 +128,10 @@ export class GridCrudCtrl {
     }
 
     const editAction = function(id) {
-      let record
       $scope.unHighlightCell($scope.lastSelectedRow, $scope.lastSelectedCell)
       $log.info(`[gridCrud] Edit ${resourceName} : ${id}`)
       $scope.lastSelectedRow = id
-      return record = Resource.get({ id }, function(r) {
+      return Resource.get({ id }, function(r) {
         $scope[resourceName] = restrictResource(r, allowedFields)
         return showForm()
       })

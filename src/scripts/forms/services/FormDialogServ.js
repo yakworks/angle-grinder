@@ -10,10 +10,10 @@ forms.factory('FormDialogServ', [
   '$uibModal', 'pathWithContext',
   ($modal, pathWithContext) => ({
     open(templateUrl, dialogOptions) {
-      let scope, template
+      let scope
       if (dialogOptions == null) { dialogOptions = {} }
       if (angular.isDefined(dialogOptions.scope)) { ({ scope } = dialogOptions) }
-      if (angular.isDefined(dialogOptions.scope)) { ({ template } = dialogOptions) }
+      // if (angular.isDefined(dialogOptions.scope)) { ({ template } = dialogOptions) }
 
       return $modal.open({
         // template: template,

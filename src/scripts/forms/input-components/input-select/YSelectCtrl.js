@@ -3,10 +3,9 @@ import InputBase from '../input-base'
 export default class YSelectCtrl extends InputBase {
   optionsData
 
-  constructor($element, $timeout) {
-    super($element, $timeout)
-  }
-
+  // constructor($element, $timeout) {
+  //   super($element, $timeout)
+  // }
   $onInit() {
     console.log('YSelectCtrl $onInit with this.$element', this.$element)
     super.onInit()
@@ -16,7 +15,7 @@ export default class YSelectCtrl extends InputBase {
 
   $postLink() {
     const el = this.$element
-    const $sel = this.$element.find('ng-transclude > select')
+    const $sel = el.find('ng-transclude > select')
     console.log('postLink $sel ', $sel)
     // $sel.addClass("form-control")
     // el.find("ng-transclude > select").children().appendTo(el.find("select.comp_select"))

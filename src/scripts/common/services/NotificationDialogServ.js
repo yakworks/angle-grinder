@@ -1,6 +1,7 @@
 import BaseCtrl from '../../utils/BaseCtrl'
 import angular from 'angular'
 import commonModule from '../commonModule'
+import sweetAlert from 'sweetalert'
 
 const app = angular.module(commonModule)
 
@@ -41,7 +42,7 @@ class NotificationDialogServ {
     this.$log.info('Opening notification dialog, message:', options.message)
     const defer = this.$q.defer()
 
-    swal({
+    sweetAlert({
       title: options.message,
       allowEscapeKey: false,
       confirmButtonText: options.okLabel

@@ -42,7 +42,7 @@ agmod.factory('httpErrorsInterceptor', [
         return response
       },
       responseError: function(response) {
-        var errorMessage, _ref
+        var errorMessage
         var genericErrorMessage = (response.statusText ? response.statusText : 'Unexpected HTTP error') + ' ' + response.status + ' : ' + response.config.url
         var responseData = response.data
 
@@ -93,7 +93,7 @@ agmod.controller('MainCtrl', [
       onRegisterApi: function(gridApi) {
         $scope.gridApi = gridApi
         $scope.gridApi.core.on.sortChanged($scope, function(grid, sortColumns) {
-          if (sortColumns.length == 0) {
+          if (sortColumns.length === 0) {
             paginationOptions.sort = null
           } else {
             paginationOptions.sort = sortColumns[0].sort.direction

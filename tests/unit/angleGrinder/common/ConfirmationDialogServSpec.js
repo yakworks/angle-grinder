@@ -37,10 +37,10 @@ describe("ConfirmationDialogServSpec", () => describe("service: ConfirmationDial
 
 
   return it("returns a promise which is resolved  when user click ok or cancel button", inject(function(ConfirmationDialogServ, $rootScope) {
-    const { swal } = window;
+    //const { swal } = window;
 
     let callback = null;
-    window.swal = (opts, cbl) => callback = cbl; //Override global swal function so we can get handle of callback and simulate ok/cancel button clicks
+    ConfirmationDialogServ.swal = (opts, cbl) => callback = cbl; //Override global swal function so we can get handle of callback and simulate ok/cancel button clicks
 
     //open confirmation dialog
     let handler = sinon.stub();
@@ -72,7 +72,6 @@ describe("ConfirmationDialogServSpec", () => describe("service: ConfirmationDial
     expect(handler.called).to.be.true;
     expect(handler.calledWith(false)).to.be.true;
 
-    return window.swal = swal;
   })
   );
 }));

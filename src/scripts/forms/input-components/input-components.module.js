@@ -4,8 +4,11 @@ import YSelectCtrl from './input-select/YSelectCtrl'
 import InputPasswordComponent from './input-password/input-password.component'
 // import StringUtility from './string-utility';
 
-export default angular
-  .module('inputComponents', [])
+const MOD_NAME = 'inputComponents'
+export default MOD_NAME
+
+angular
+  .module(MOD_NAME, [])
   .component('yInput', {
     transclude: true,
     template: require('./input-text/y-input.component.html'),
@@ -57,4 +60,3 @@ export default angular
       required: '@'
     }
   })
-  .name

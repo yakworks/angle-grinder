@@ -21,7 +21,8 @@ gridz.directive('agReloadGrid', [
         const selRow = angular.copy($scope.grid.getParam('selrow'))
         const selRows = angular.copy($scope.grid.getParam('selarrrow'))
         // Save grid scroll position
-        const scrollPosition = $scope.grid.getGridEl().closest('.ui-jqgrid-bdiv').scrollTop()
+        // const scrollPosition = $scope.grid.getGridEl().closest('.ui-jqgrid-bdiv').scrollTop()
+        $scope.grid.getGridEl().closest('.ui-jqgrid-bdiv').scrollTop()
 
         // Some grids may have selection in gridComplete so to be sure that after reload grid will have the same selection
         // set it after grid complete
@@ -38,8 +39,6 @@ gridz.directive('agReloadGrid', [
       }
     },
 
-    template: '\
-<a class="list" uib-tooltip="Reload Grid" ng-click="reload()"><i class="fa fa-refresh"></i></a>\
-'
+    template: '<a class="list" uib-tooltip="Reload Grid" ng-click="reload()"><i class="fa fa-refresh"></i></a>'
   })
 ])
