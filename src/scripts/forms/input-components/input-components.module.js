@@ -3,9 +3,10 @@ import YInputCtrl from './input-text/YInputCtrl'
 import YSelectCtrl from './input-select/YSelectCtrl'
 import InputPasswordComponent from './input-password/input-password.component'
 // import StringUtility from './string-utility';
+const MOD_NAME = 'inputComponents'
+export default MOD_NAME
 
-export default angular
-  .module('inputComponents', [])
+angular.module(MOD_NAME, [])
   .component('yInput', {
     transclude: true,
     template: require('./input-text/y-input.component.html'),
