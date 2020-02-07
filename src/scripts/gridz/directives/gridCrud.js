@@ -73,7 +73,7 @@ app.directive("gridCrud", ["$controller", "$timeout", ($controller, $timeout) =>
 })
 ])
 
-class GridCrudCtrl {
+export class GridCrudCtrl {
   constructor($scope, $element, $attrs, $parse, $log, resourceBuilder, $window, restrictResource, $uibModal, pathWithContext, $timeout) {
 
     let Resource = null
