@@ -17,7 +17,7 @@ Website Documentation and Examples: http://9ci.github.io/angle-grinder
 ### Prerequisites
 
 1. Docker
-2. node(version >= v10.13.0) and yarn for dev on your system
+2. node(version >= v10.13.0) and (yarn)[https://classic.yarnpkg.com/en/docs/install/#mac-stable]  for dev on your system
 
 ### Running Tests
 
@@ -35,13 +35,13 @@ TODO will add in make commands
 
 ### Running ag-demo
 
-- `yarn start-ag-demo` should be available on localhost:3000 to sanity check
+- `yarn start-ag-demo` should be available on localhost:3000 to sanity check, most part of functions wont work
 
-- `yarn build-ag-demo` build into the ag-demo-grails/src/main/webapp
+- `yarn build-ag-demo` transpiles  and bundles js code and copies into the ag-demo-grails/src/main/resources/public , do not put assets to web-app folder, because it wont be included into jar file
 
-- `yarn watch-ag-demo` will watch the files in ag-demo-ui and build into grails
+- `yarn watch-ag-demo` will watch the files in ag-demo-ui and build into grails if any change is made
 
-- `./gradlew bootRun` to run grails demo app
+- `./gradlew bootRun` to run grails demo app, needs 
 
 
 for the sample node app and docs
