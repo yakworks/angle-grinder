@@ -1,6 +1,6 @@
 import angular from 'angular'
 import ngAnimate from 'angular-animate'
-import agMod from '../../src/angle-grinder'
+import agMod from '~/angle-grinder'
 import exResources from './modules/resources'
 import exGrids from './grids/grids.module'
 import exDocs from './modules/docs'

@@ -1,0 +1,185 @@
+<fieldset>
+
+  <div ag-field-group for="name">
+    <label class="control-label">Name</label>
+    <div class="controls">
+      <div class="row">
+        <div class="col-md-6">
+          <input type="text" name="firstName" placeholder="first name" ag-focus ng-model="$ctrl.vm.firstName"
+          ng-required="true" class="form-control"/>
+        </div>
+        <div class="col-md-6">
+          <input type="text" name="lastName" placeholder="last name" ag-focus ng-model="$ctrl.vm.lastName"
+          ng-required="true" class="form-control"/>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div ag-field-group for="customerInfoPhone">
+    <label class="control-label">Phone</label>
+    <div class="controls">
+      <input type="text" name="customerInfoPhone" placeholder="Main Phone" ng-model="$ctrl.vm.info.phone"
+        class="form-control"/>
+      <ag-validation-errors for="customerInfoPhone" />
+    </div>
+  </div>
+  <div ag-field-group for="customerInfoWebsite">
+    <label class="control-label">Website</label>
+    <div class="controls">
+      <input type="text" name="customerInfoWebsite" placeholder="www.9ci.com"
+        ng-model="$ctrl.vm.info.website" class="form-control"/>
+      <ag-validation-errors for="customerInfoWebsite" />
+    </div>
+  </div>
+  <hr>
+  <div ag-field-group >
+    <label class="control-label">Select Normal</label>
+    <div class="controls">
+      <select id="sel" name="sel" ng-model="$ctrl.vm.sel" class="form-control">
+        <option value="0">Foo</option>
+        <option value="1">Bar</option>
+        <option value="2">Baz</option>
+      </select>
+      <ag-validation-errors for="sel" required="This field is required" />
+    </div>
+  </div>
+  <div ag-field-group >
+    <label class="control-label">Select2</label>
+    <div class="controls">
+      <select id="sel2" name="sel2" ng-model="$ctrl.vm.sel2.id"
+          ui-select2="{allowClear: true, placeholder: 'select a foo'}"
+          class="form-control" normalSelectOptions>
+        <option value=""></option>
+        <option value="0">Foo</option>
+        <option value="1">Bar</option>
+        <option value="2">Baz</option>
+      </select>
+      <ag-validation-errors for="sel2" required="This field is required" />
+    </div>
+  </div>
+  <div ag-field-group >
+    <label class="control-label">Select2 Multi</label>
+    <div class="controls">
+      <select name="selectMutiple" multiple="true" ng-model="$ctrl.vm.selectMutiple"
+          ui-select2="{closeOnSelect: false, maximumSelectionSize: 3 }"
+          class="form-control">
+        <option value=""></option>
+        <option value="0">Foo</option>
+        <option value="1">Bar</option>
+        <option value="2">Baz</option>
+      </select>
+    </div>
+  </div>
+  <div ag-field-group >
+    <label class="control-label">Select2 Multi-Input</label>
+    <div class="controls">
+      <input id="sel22" name="sel22" multiple ng-model="$ctrl.vm.sel2MultiInput"
+          ui-select2="$ctrl.uiSelect2MultiOpts"
+          class="form-control">
+      </input>
+      <ag-validation-errors for="sel22" required="This field is required" />
+    </div>
+  </div>
+  <div ag-field-group >
+    <label class="control-label">Select2 Input</label>
+    <div class="controls">
+      <input id="sel22" name="sel22" ng-model="$ctrl.vm.sel2Input"
+          ui-select2="$ctrl.uiSelect2Opts"
+          class="form-control">
+      </input>
+      <ag-validation-errors for="sel22" required="This field is required" />
+    </div>
+  </div>
+
+  <div ag-field-group>
+    <label class="control-label">Bulma Select</label>
+    <div class="controls">
+      <div class="select">
+        <select id="sel4" name="sel4" ng-model="$ctrl.vm.bulmaSel">
+          <option value=""></option>
+          <option value="0">Foo</option>
+          <option value="1">Bar</option>
+          <option value="2">a really long option</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</fieldset>
+<fieldset>
+  <legend>Check boxes</legend>
+  <div ag-field-group for="name">
+    <label class="control-label">Normal field</label>
+    <div class="controls">
+      <input type="text" name="name" placeholder="Customer name" ag-focus ng-model="$ctrl.vm.name"
+        ng-required="true" class="form-control"/>
+      <ag-validation-errors for="name" required="This field is required" />
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="controls">
+      <div class="checkbox">
+        <label class="form-check">
+          <input type="checkbox" ng-model="$ctrl.vm.checkbox1"><i></i>
+          checkbox only right label
+        </label>
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label">Normal Check box</label>
+    <div class="controls">
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" ng-model="$ctrl.vm.checkbox2">
+          some label text
+        </label>
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label">Switch box</label>
+    <div class="controls">
+      <div class="checkbox">
+        <label class="form-switch">
+          <input type="checkbox" ng-model="$ctrl.vm.checkbox3"><i></i>
+        </label>
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label">form-check box</label>
+    <div class="controls">
+      <div class="checkbox">
+        <label class="form-check">
+          <input type="checkbox" checked><i></i>
+        </label>
+      </div>
+      <div class="checkbox">
+        <label class="form-check">
+          <input type="checkbox" checked><i></i>
+          Default Option with some long text
+        </label>
+      </div>
+      <div class="checkbox">
+        <label class="form-check is-success">
+          <input type="checkbox" checked><i></i>
+          success
+        </label>
+      </div>
+      <div class="checkbox">
+        <label class="form-check is-warning">
+          <input type="checkbox" checked><i></i>
+          warning
+        </label>
+      </div>
+      <div class="checkbox">
+        <label class="form-check is-danger">
+          <input type="checkbox" checked><i></i>
+          danger
+        </label>
+      </div>
+    </div>
+  </div>
+</fieldset>
+<h3>Model</h3>
+<pre ng-cloak>vm: {{$ctrl.vm | json}}</pre>

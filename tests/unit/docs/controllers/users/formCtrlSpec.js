@@ -1,6 +1,6 @@
 import docResMod from '#/docs/src/main'
 
-describe("controller: users.FormCtrl", function() {
+xdescribe("controller: users.FormCtrl", function() {
 
   beforeEach(angular.mock.module(docResMod, function($provide) {
     $provide.value("$location", {path: sinon.stub()});

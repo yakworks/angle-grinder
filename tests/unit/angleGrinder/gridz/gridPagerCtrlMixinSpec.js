@@ -5,7 +5,7 @@ describe("module: angleGrinder.gridz", function() {
   beforeEach(angular.mock.module(agGridz, function($provide) {
     $provide.value("$location", {path: sinon.stub()});
   })
-  );
+  )
 
   return describe("controller: gridPagerCtrlMixin", function() {
 

@@ -6,9 +6,8 @@ var forms = angular.module(formsModule)
 
 // Decorates all editable inputs with mechanism
 // for displaying validation errors.
-forms.config(["$provide", $provide => $provide.decorator("editableDirectiveFactory", [
-  "$delegate", "validationMessages", function($delegate, validationMessages) {
-
+forms.config(['$provide', $provide => $provide.decorator('editableDirectiveFactory', [
+  '$delegate', 'validationMessages', function($delegate, validationMessages) {
     // collect all error messages for the given model
     const errorsFor = function(model) {
       const callback = function(result, invalid, error) {
@@ -16,7 +15,7 @@ forms.config(["$provide", $provide => $provide.decorator("editableDirectiveFacto
         return result
       }
 
-      return _.reduce(model.$error, callback, []).join(", ")
+      return _.reduce(model.$error, callback, []).join(', ')
     }
 
     return function() {
@@ -25,7 +24,7 @@ forms.config(["$provide", $provide => $provide.decorator("editableDirectiveFacto
         link
       } = directive
 
-      directive.compile = (element, attrs) => (function(scope, element, attrs, ctrl) {
+      directive.compile = (element, attrs) => function(scope, element, attrs, ctrl) {
         link.apply(this, arguments)
 
         const form = ctrl[1]
@@ -46,7 +45,7 @@ forms.config(["$provide", $provide => $provide.decorator("editableDirectiveFacto
             }
 
             if (model?.$valid) {
-              return form.$setError(name, "")
+              return form.$setError(name, '')
             }
           })
         }
@@ -62,7 +61,7 @@ forms.config(["$provide", $provide => $provide.decorator("editableDirectiveFacto
         if (!_.isNil(options)) {
           return scope.options = options
         }
-      })
+      }
 
       return directive
     }

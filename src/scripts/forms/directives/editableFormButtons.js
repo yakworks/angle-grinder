@@ -1,5 +1,6 @@
 import angular from 'angular'
 import formsModule from '../formsModule'
+import _ from 'lodash'
 
 var app = angular.module(formsModule)
 

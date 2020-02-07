@@ -1,0 +1,115 @@
+
+  <fieldset ng-form="contact">
+    <legend>Bootstrap form-horizontal</legend>
+    <p>Bootstrap 3 with form-horizontal use col-* classes on control-label and around input </p>
+    <div class="form-group" for="name">
+      <label class="control-label col-sm-4">Name</label>
+      <div class="controls col-sm-8">
+        <input type="text" name="name" placeholder="Customer name" ag-focus ng-model="customer.name"
+          ng-required class="form-control" />
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-4">Normal Select</label>
+      <div class="controls col-sm-8">
+        <select name="sel1" ng-model="customer.sel1" class="form-control">
+          <option value="0">Foo</option>
+          <option value="1">Bar</option>
+          <option value="2">option with some long text</option>
+        </select>
+      </div>
+    </div>
+    <div ag-field-group>
+      <label class="control-label col-sm-4">Select2</label>
+      <div class="controls col-sm-8">
+        <select name="sel2" ng-model="customer.sel2"
+          ui-select2="{closeOnSelect: false, minimumInputLength:null}" class="form-control">
+          <option value="0">Foo</option>
+          <option value="1">Bar Baz Buzz</option>
+        </select>
+      </div>
+    </div>
+    <div ag-field-group>
+      <label class="control-label col-sm-4">Select2 Multi</label>
+      <div class="controls col-sm-8">
+        <select name="sel3" multiple="true" ng-model="customer.sel3"
+          ui-select2="{closeOnSelect: false}" class="form-control">
+          <option value="0">Foo</option>
+          <option value="1">Bar</option>
+          <option value="2">Baz</option>
+        </select>
+      </div>
+    </div>
+    <div ag-field-group>
+      <label class="control-label col-sm-4">Bulma Select</label>
+      <div class="controls col-sm-8">
+        <div class="select">
+          <select id="sel4" name="sel4" ng-model="customer.sel4">
+            <option value="0">Foo</option>
+            <option value="1">Bar</option>
+            <option value="2">a really long option</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-4">Normal Check box</label>
+      <div class="col-sm-8">
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" class="large">
+            Option 1
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-4">Stylish Check box</label>
+      <div class="col-sm-8">
+        <div class="checkbox stylish">
+          <input id="checkbox1" type="checkbox" checked>
+          <label></label>
+        </div>
+        <div class="checkbox stylish checkbox-primary">
+          <input id="checkbox2" type="checkbox" checked>
+          <label for="checkbox2">
+            Option one is this and that&mdash;be sure to include why it's great
+          </label>
+        </div>
+        <div class="checkbox stylish checkbox-success">
+          <input id="checkbox3" class="styled" type="checkbox" checked>
+          <label for="checkbox3">
+            Success
+          </label>
+        </div>
+        <div class="checkbox stylish checkbox-info">
+          <input id="checkbox4" class="styled" type="checkbox" checked>
+          <label for="checkbox4">
+            Info
+          </label>
+        </div>
+        <div class="checkbox stylish checkbox-warning">
+          <input id="checkbox5" type="checkbox" class="styled" checked>
+          <label for="checkbox5">
+            Warning
+          </label>
+        </div>
+        <div class="checkbox stylish checkbox-danger">
+          <input id="checkbox6" type="checkbox" class="styled" checked>
+          <label for="checkbox6">
+            Danger
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-4">Switch box</label>
+      <div class="col-sm-8">
+        <span class="setting-switch">
+          <label class="form-switch">
+            <input type="checkbox" ng-model="app.layout.isNavbarFixed"><i></i>
+          </label>
+        </span>
+      </div>
+    </div>
+  </fieldset>

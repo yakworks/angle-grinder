@@ -1,0 +1,84 @@
+
+
+.no-wrap {
+  white-space: nowrap;
+}
+
+.page-header-noborder {
+  border-bottom: none;
+  margin-bottom: 10px;
+}
+
+.no-gutters [class*="col-xs-"],
+.no-gutters [class*="col-sm-"],
+.no-gutters [class*="col-md-"] {
+  padding: 0 !important;
+}
+
+.flexbox {
+  display: inline-flex;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.full-width {
+  width: 100% !important;
+}
+
+.half-width {
+  width: calc((100% - 5px)/2) !important;
+}
+
+.row .extended-col {
+  width: 20%;
+}
+
+.no-margin {
+  margin: 0!important;
+}
+
+.top-margin-5 {
+  margin-top: 5px!important;
+}
+
+.top-margin-10 {
+  margin-top: 10px!important;
+}
+
+.top-margin-20 {
+  margin-top: 20px!important;
+}
+
+.left-margin-5 {
+  margin-left: 5px!important;
+}
+
+.left-margin-10 {
+  margin-left: 10px!important;
+}
+
+.left-margin-20 {
+  margin-left: 20px!important;
+}
+
+.right-margin-5 {
+  margin-right: 5px!important;
+}
+
+.bottom-margin-5 {
+  margin-bottom: 5px!important;
+}
+
+.bottom-margin-10 {
+  margin-bottom: 10px!important;
+}
+
+.bottom-margin-20 {
+  margin-bottom: 20px!important;
+}
+
+.no-padding {
+  padding: 0!important;
+}

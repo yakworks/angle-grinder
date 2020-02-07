@@ -1,0 +1,257 @@
+<!-- start: OFF RIGHT SIDEBAR TABSET -->
+<uib-tabset class="sidebar-wrapper" justified="true">
+    <!-- start: TAB USER -->
+    <uib-tab>
+        <uib-tab-heading>
+            <i class="ti-comments"></i>
+        </uib-tab-heading>
+        <!-- /// controller:  'ChatCtrl' -  localtion: assets/js/controllers/chatCtrl.js /// -->
+        <div id="users" toggleable active-class="chat-open" ng-controller="ChatCtrl">
+            <div class="users-list">
+                <div class="sidebar-content" perfect-scrollbar wheel-propagation="false" suppress-scroll-x="true">
+                    <h5 class="sidebar-title" translate="offsidebar.chat.ONLINE">On-line</h5>
+                    <ul class="media-list">
+                        <li class="media">
+                            <a ct-toggle="on" target="users" href ng-click="setOtherId(50223457)">
+                                <i class="fa fa-circle status-online"></i>
+                                <img alt="..." src="assets/images/avatar-2.jpg" class="media-object">
+                                <div class="media-body">
+                                    <h4 class="media-heading">Nicole Bell</h4>
+                                    <span> Content Designer </span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="media">
+                            <a ct-toggle="on" target="users" href ng-click="setOtherId(50223458)">
+                                <div class="user-label">
+                                    <span class="label label-success">3</span>
+                                </div>
+                                <i class="fa fa-circle status-online"></i>
+                                <img alt="..." src="assets/images/avatar-3.jpg" class="media-object">
+                                <div class="media-body">
+                                    <h4 class="media-heading">Steven Thompson</h4>
+                                    <span> Visual Designer </span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="media">
+                            <a ct-toggle="on" target="users" href ng-click="setOtherId(50223459)">
+                                <i class="fa fa-circle status-online"></i>
+                                <img alt="..." src="assets/images/avatar-4.jpg" class="media-object">
+                                <div class="media-body">
+                                    <h4 class="media-heading">Ella Patterson</h4>
+                                    <span> Web Editor </span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="media">
+                            <a ct-toggle="on" target="users" href ng-click="setOtherId(50223460)">
+                                <i class="fa fa-circle status-online"></i>
+                                <img alt="..." src="assets/images/avatar-5.jpg" class="media-object">
+                                <div class="media-body">
+                                    <h4 class="media-heading">Kenneth Ross</h4>
+                                    <span> Senior Designer </span>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                    <h5 class="sidebar-title" translate="offsidebar.chat.OFFLINE">Off-line</h5>
+                    <ul class="media-list">
+                        <li class="media">
+                            <a ct-toggle="on" target="users" href ng-click="setOtherId(50223457)">
+                                <img alt="..." src="assets/images/avatar-6.jpg" class="media-object">
+                                <div class="media-body">
+                                    <h4 class="media-heading">Nicole Bell</h4>
+                                    <span> Content Designer </span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="media">
+                            <a ct-toggle="on" target="users" href ng-click="setOtherId(50223458)">
+                                <div class="user-label">
+                                    <span class="label label-success">3</span>
+                                </div>
+                                <img alt="..." src="assets/images/avatar-7.jpg" class="media-object">
+                                <div class="media-body">
+                                    <h4 class="media-heading">Steven Thompson</h4>
+                                    <span> Visual Designer </span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="media">
+                            <a ct-toggle="on" target="users" href ng-click="setOtherId(50223459)">
+                                <img alt="..." src="assets/images/avatar-8.jpg" class="media-object">
+                                <div class="media-body">
+                                    <h4 class="media-heading">Ella Patterson</h4>
+                                    <span> Web Editor </span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="media">
+                            <a ct-toggle="on" target="users" href ng-click="setOtherId(50223460)">
+                                <img alt="..." src="assets/images/avatar-9.jpg" class="media-object">
+                                <div class="media-body">
+                                    <h4 class="media-heading">Kenneth Ross</h4>
+                                    <span> Senior Designer </span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="media">
+                            <a ct-toggle="on" target="users" href ng-click="setOtherId(50223459)">
+                                <img alt="..." src="assets/images/avatar-10.jpg" class="media-object">
+                                <div class="media-body">
+                                    <h4 class="media-heading">Ella Patterson</h4>
+                                    <span> Web Editor </span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="media">
+                            <a ct-toggle="on" target="users" href ng-click="setOtherId(50223460)">
+                                <img alt="..." src="assets/images/avatar-5.jpg" class="media-object">
+                                <div class="media-body">
+                                    <h4 class="media-heading">Kenneth Ross</h4>
+                                    <span> Senior Designer </span>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="user-chat">
+                <div class="chat-content ">
+                    <a class="sidebar-back pull-left" href="#" ct-toggle="off" target="users"><i class="ti-angle-left"></i> <span translate="offsidebar.chat.BACK">Back</span></a>
+                    <div class="sidebar-content" id="off-chat" perfect-scrollbar wheel-propagation="false" suppress-scroll-x="true">
+
+                        <clip-chat messages="chat" id-self="selfIdUser" id-other="otherIdUser"></clip-chat>
+                    </div>
+                </div>
+                <chat-submit submit-function="sendMessage" ng-model="chatMessage" scroll-element="#off-chat"></chat-submit>
+
+            </div>
+        </div>
+    </uib-tab>
+    <!-- end: TAB USER -->
+    <!-- start: TAB FAVORITES -->
+    <uib-tab>
+        <uib-tab-heading>
+            <i class="ti-heart"></i>
+        </uib-tab-heading>
+        <div class="tab-pane" id="favorites">
+            <div class="users-list">
+                <div class="sidebar-content" perfect-scrollbar wheel-propagation="false" suppress-scroll-x="true">
+                    <h5 class="sidebar-title" translate="offsidebar.favorites.MAIN">Favorites</h5>
+                    <ul class="media-list">
+                        <li class="media">
+                            <a href="#">
+                                <img alt="..." src="assets/images/avatar-7.jpg" class="media-object">
+                                <div class="media-body">
+                                    <h4 class="media-heading">Nicole Bell</h4>
+                                    <span> Content Designer </span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="media">
+                            <a href="#">
+                                <div class="user-label">
+                                    <span class="label label-success">3</span>
+                                </div>
+                                <img alt="..." src="assets/images/avatar-6.jpg" class="media-object">
+                                <div class="media-body">
+                                    <h4 class="media-heading">Steven Thompson</h4>
+                                    <span> Visual Designer </span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="media">
+                            <a href="#">
+                                <img alt="..." src="assets/images/avatar-10.jpg" class="media-object">
+                                <div class="media-body">
+                                    <h4 class="media-heading">Ella Patterson</h4>
+                                    <span> Web Editor </span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="media">
+                            <a href="#">
+                                <img alt="..." src="assets/images/avatar-2.jpg" class="media-object">
+                                <div class="media-body">
+                                    <h4 class="media-heading">Kenneth Ross</h4>
+                                    <span> Senior Designer </span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="media">
+                            <a href="#">
+                                <img alt="..." src="assets/images/avatar-4.jpg" class="media-object">
+                                <div class="media-body">
+                                    <h4 class="media-heading">Ella Patterson</h4>
+                                    <span> Web Editor </span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="media">
+                            <a href="#">
+                                <img alt="..." src="assets/images/avatar-5.jpg" class="media-object">
+                                <div class="media-body">
+                                    <h4 class="media-heading">Kenneth Ross</h4>
+                                    <span> Senior Designer </span>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </uib-tab>
+    <!-- end: TAB FAVORITES -->
+    <!-- start: TAB GENERAL SETTING -->
+    <uib-tab>
+        <uib-tab-heading>
+            <i class="ti-settings"></i>
+        </uib-tab-heading>
+        <div class="tab-pane" id="settings">
+            <div class="sidebar-content" perfect-scrollbar wheel-propagation="false" suppress-scroll-x="true">
+                <h5 class="sidebar-title" translate="offsidebar.settings.MAIN">General Settings</h5>
+                <ul class="media-list">
+                    <li class="media">
+                        <div class="padding-10">
+                            <switch ng-model="enable.notifications" ng-init="enable.notifications = true" class="green display-table-cell"></switch>
+                            <span class="display-table-cell vertical-align-middle padding-left-10" translate="offsidebar.settings.NOTIFICATIONS">Enable Notifications</span>
+                        </div>
+                    </li>
+                    <li class="media">
+                        <div class="padding-10">
+                            <switch ng-model="show.email" ng-init="show.email = false" class="green display-table-cell"></switch>
+                            <span class="display-table-cell vertical-align-middle padding-left-10" translate="offsidebar.settings.SHOWEMAIL">Show your E-mail</span>
+                        </div>
+                    </li>
+                    <li class="media">
+                        <div class="padding-10">
+                            <switch ng-model="show.users" ng-init="show.users = true" class="green display-table-cell"></switch>
+                            <span class="display-table-cell vertical-align-middle padding-left-10" translate="offsidebar.settings.SHOWUSERS">Show Offline Users</span>
+                        </div>
+                    </li>
+                    <li class="media">
+                        <div class="padding-10">
+                            <switch ng-model="email.alert" ng-init="email.alert = true" class="green display-table-cell"></switch>
+                            <span class="display-table-cell vertical-align-middle padding-left-10" translate="offsidebar.settings.EMAILALERT">E-mail Alerts</span>
+                        </div>
+                    </li>
+                    <li class="media">
+                        <div class="padding-10">
+                            <switch ng-model="sms.alert" ng-init="sms.alert = false" class="green display-table-cell"></switch>
+                            <span class="display-table-cell vertical-align-middle padding-left-10" translate="offsidebar.settings.SMSALERT">SMS Alerts</span>
+                        </div>
+                    </li>
+                </ul>
+                <div class="save-options">
+                    <button class="btn btn-success">
+                        <i class="icon-settings"></i><span translate="offsidebar.settings.SAVE">Save Changes</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </uib-tab>
+    <!-- end: TAB GENERAL SETTING -->
+</uib-tabset>
+<!-- end: OFF RIGHT SIDEBAR TABSET -->

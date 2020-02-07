@@ -53,7 +53,8 @@ module.exports = function(env, argv) {
             enforce: true //says to always build chunk and ignore min/max size stuff
           },
           vendor: {
-            test: /node_modules[\\/].*\.js/,
+            //test: /node_modules[\\/].*\.js/,
+            test: /node_modules/,
             chunks: "all",
             name: `vendor-libs${minDescriptor}`,
             priority: 10, //lower priority so it won't pick up jquery
@@ -64,7 +65,7 @@ module.exports = function(env, argv) {
     },
     module: {
       rules: [
-        { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/},
+        { test: /\.js$/, loader: 'babel-loader', exclude: /(node_modules|bower_components)/},
         {
           test: /\.(scss|css|sass)$/,
           use: [
@@ -82,24 +83,6 @@ module.exports = function(env, argv) {
               }
             }
           ]
-        },
-        {
-          test: /\.less$/,
-          use: [
-            { loader: styleLoader },// creates style nodes from JS strings
-            {
-              loader: 'css-loader', // translates CSS into CommonJS
-              options: { sourceMap: true }
-            },
-            { // Runs compiled CSS through postcss for vendor prefixing
-              loader: 'postcss-loader',
-              options: { sourceMap: true }
-            },
-            {
-              loader: 'less-loader', // compiles Less to CSS
-              options: { sourceMap: true }
-            }
-          ],
         },
         {
           // Load all images as base64 encoding if they are smaller than 8192 bytes
@@ -143,8 +126,11 @@ module.exports = function(env, argv) {
       //   }
       // }),
       new HtmlWebpackPlugin({
+        title: 'Custom template using lodash',
         template: `${CONTENT_PUBLIC}/index.html`,
         //inject: 'body'
+        //inject: false,
+        minify: false
       }),
       new CopyWebpackPlugin([{
         from: path.resolve(CONTENT_PUBLIC)
@@ -156,7 +142,7 @@ module.exports = function(env, argv) {
     ],
     //command line options
     bail: true, //Fail out on the first error --bail
-    profile: false
+    //profile: false //list info on whats going on
   }
   if(isProd){
     cfg.plugins.push(
@@ -176,7 +162,7 @@ module.exports = function(env, argv) {
     )
   }
   cfg.devServer = {
-    compress: true, //gzips before serving so we can see file size
+    //compress: true, //gzips before serving so we can see file size
     port: 3000,
     // historyApiFallback: true,
     //inline: false, //default:true script will be inserted in your bundle to take care of live reloading

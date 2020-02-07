@@ -1,0 +1,85 @@
+/* ---------------------------------------------------------------------- */
+/*  angular-ui-switch
+/* ---------------------------------------------------------------------- */
+
+.switch.checked {
+    &.azure {
+        background: $azure;
+        border-color: $azure;
+    }
+
+    &.light-azure {
+        background: $lightAzure;
+        border-color: $lightAzure;
+    }
+
+    &.dark-azure {
+        background: $darkAzure;
+        border-color: $darkAzure;
+    }
+
+    &.primary {
+        background: $primary;
+        border-color: $primary;
+    }
+
+    &.light-primary {
+        background: $lightPrimary;
+        border-color: $lightPrimary;
+    }
+
+    &.dark-primary {
+        background: $darkPrimary;
+        border-color: $darkPrimary;
+    }
+
+    &.purple {
+        background: $purple;
+        border-color: $purple;
+    }
+
+    &.light-purple {
+        background: $lightPurple;
+        border-color: $lightPurple;
+    }
+
+    &.dark-purple {
+        background: $darkPurple;
+        border-color: $darkPurple;
+    }
+
+    &.red {
+        background: $red;
+        border-color: $red;
+    }
+
+    &.light-red {
+        background: $lightRed;
+        border-color: $lightRed;
+    }
+
+    &.dark-red {
+        background: $darkRed;
+        border-color: $darkRed;
+    }
+
+    &.blue {
+        background: $blue;
+        border-color: $blue;
+    }
+
+    &.light-blue {
+        background: $lightBlue;
+        border-color: $lightBlue;
+    }
+
+    &.dark-blue {
+        background: $darkBlue;
+        border-color: $darkBlue;
+    }
+
+    &.light {
+        background: rgba($white, 0.5);
+        border-color: rgba($white, 0.5);
+    }
+}

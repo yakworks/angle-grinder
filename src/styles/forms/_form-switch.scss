@@ -1,0 +1,71 @@
+// Below is the styling needed
+label.form-switch {
+  position: relative;
+  display: inline-block;
+  align-items: center;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  padding-left: 0;
+
+  i {
+    position: relative;
+    display: inline-block;
+    margin-right: .5rem;
+    width: 46px;
+    height: 26px;
+    background-color: #e6e6e6;
+    border-radius: 23px;
+    vertical-align: text-bottom;
+    transition: all 0.3s linear;
+
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      width: 22px;
+      height: 22px;
+      background-color: #fff;
+      border-radius: 11px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, .3);
+      transform: translate3d(2px,2px,0);
+      transition: all 0.2s ease-in-out;
+    }
+  }
+
+  &:active {
+    i::after {
+      width: 28px;
+      transform: translate3d(2px,2px,0);
+    }
+
+    input[type=checkbox] {
+      &:checked + i::after {
+        transform: translate3d(16px,2px,0);
+      }
+    }
+  }
+
+  input[type=checkbox] {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+
+    &:checked + i {
+      background-color: $success;
+
+      &::before {
+        transform: translate3d(18px,2px,0) scale3d(0,0,0);
+      }
+
+      &::after {
+        transform: translate3d(22px,2px,0);
+      }
+    }
+    &:focus+i {
+      //outline: #5d9dd5 solid 1px;
+      box-shadow: $checkbox-focus;
+      //box-shadow: 0 0 0 2px rgba(40, 137, 167, 0.25);
+    }
+
+  }
+}

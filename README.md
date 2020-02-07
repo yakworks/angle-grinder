@@ -27,11 +27,11 @@ TODO will add in make commands
 - `yarn test` to run all tests
 - `yarn test --tests *alerts*` to run specific test, for example alerts
 
-### Running Sample Docs
+### Running the demos
 
-- `yarn start-docs` should be availiable on localhost:3000
+- `yarn start-demo` should be availiable on localhost:3000
 
-- `yarn start-sandbox` runs the sandbox app
+- `yarn start-docs` runs the docs app
 
 ### Running ag-demo
 
@@ -53,3 +53,10 @@ then open http://localhost:9000
 Run `node_modules/blueimp-file-upload-node/server.js`
 and navigate to `http://localhost:9000/#/examples/fileUpload`
 
+
+### migration notes
+
+- form-multi-column no-margin classes can go away, they don't seem to do anything
+- form-multi-column no-margin classes can go away, they don't seem to do anything
+- IsFalsy and DeepPick, DeepDiff got moved to just imports
+- ui.bootstrap after 0.14 $modalInstance -> $uibModalInstance

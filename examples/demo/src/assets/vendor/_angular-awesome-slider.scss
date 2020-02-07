@@ -1,0 +1,82 @@
+/* ---------------------------------------------------------------------- */
+/*  Angular-awesome-slider
+/* ---------------------------------------------------------------------- */
+.clip-slider {
+    &.jslider {
+        height: 2.1em !important;
+        margin-top: 20px;
+        margin-bottom: 20px;
+
+        .jslider-bg i {
+            margin-top: 10px;
+
+            &.default {
+                width: 0 !important;
+            }
+        }
+
+        .jslider-value, .jslider-label {
+            font-size: 10px !important;
+        }
+
+        div.jslider-pointer {
+            background: rgba(221,221,221,1) !important;
+            background: -moz-linear-gradient(top, rgba(221,221,221,1) 0%, rgba(226,226,226,1) 13%, rgba(255,255,255,1) 97%) !important;
+            background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(221,221,221,1)), color-stop(13%, rgba(226,226,226,1)), color-stop(97%, rgba(255,255,255,1))) !important;
+            background: -webkit-linear-gradient(top, rgba(221,221,221,1) 0%, rgba(226,226,226,1) 13%, rgba(255,255,255,1) 97%) !important;
+            background: -o-linear-gradient(top, rgba(221,221,221,1) 0%, rgba(226,226,226,1) 13%, rgba(255,255,255,1) 97%) !important;
+            background: -ms-linear-gradient(top, rgba(221,221,221,1) 0%, rgba(226,226,226,1) 13%, rgba(255,255,255,1) 97%) !important;
+            background: linear-gradient(to bottom, rgba(221,221,221,1) 0%, rgba(226,226,226,1) 13%, rgba(255,255,255,1) 97%) !important;
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dddddd', endColorstr='#ffffff', GradientType=0 ) !important;
+            box-shadow: 0 2px 1px -1px #ffffff inset, 0 1px 3px rgba(0, 0, 0, 0.39) !important;
+            height: 26px !important;
+            opacity: 1;
+            width: 26px !important;
+            margin-top: 1px;
+            margin-left: -13px !important;
+            border-radius: 50%;
+        }
+
+        &.vertical {
+            height: 100% !important;
+            position: relative;
+            top: 0;
+            margin: 0;
+            display: inline-block;
+
+            .jslider-bg i {
+                margin-top: 0;
+
+                &.default {
+                    width: 0 !important;
+                }
+            }
+
+            div.jslider-scale ins {
+                left: -5px;
+            }
+
+            div.jslider-label {
+                top: 0;
+
+                &.jslider-label-to {
+                    top: auto;
+                    bottom: 0;
+                }
+            }
+
+            div.jslider-pointer {
+                margin-left: -11px !important;
+            }
+        }
+    }
+
+    div.jslider-scale span {
+        position: absolute;
+        height: 5px;
+        border-left: 1px solid #fff !important;
+        font-size: 0;
+        width: 1px;
+        margin-top: 1px !important;
+    }
+}

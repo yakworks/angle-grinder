@@ -3,13 +3,15 @@ import agCommon from '../common'
 import agSelect2 from '../select2'
 import alerts from '../alerts'
 import agPathWithContext from '../pathWithContext'
+import inputCompMod from './input-components/input-components.module'
 import xeditable from 'angular-xeditable'
-import _ from 'lodash'
+//import _ from 'lodash'
 import uibModName from 'angular-ui-bootstrap'
 
 const MOD_NAME = 'angleGrinder.forms'
 export default MOD_NAME
 var forms = angular.module(MOD_NAME, [
+  inputCompMod,
   uibModName,
   xeditable,
   agPathWithContext,
@@ -52,33 +54,33 @@ forms.run([
   }
 ])
 
-forms.config(['$provide', $provide => // Decorate select tags, wrap inside 'select-wrapper' so we can add dropdown arrow to standard html selects
-  $provide.decorator('selectDirective', ['$delegate', function($delegate) {
-    const directive = $delegate[0]
-    const {
-      link
-    } = directive
+// forms.config(['$provide', $provide => // Decorate select tags, wrap inside 'select-wrapper' so we can add dropdown arrow to standard html selects
+//   $provide.decorator('selectDirective', ['$delegate', function($delegate) {
+//     const directive = $delegate[0]
+//     const {
+//       link
+//     } = directive
 
-    directive.compile = (element, attrs) => ({
-      pre(scope, element, attrs, ctrl) {
-        if (_.isFunction(link.pre)) { return link.pre(scope, element, attrs, ctrl) }
-      },
+//     directive.compile = (element, attrs) => ({
+//       pre(scope, element, attrs, ctrl) {
+//         if (_.isFunction(link.pre)) { return link.pre(scope, element, attrs, ctrl) }
+//       },
 
-      post(scope, element, attrs, ctrl) {
-        // Add wrapper, if its not already wrapped and its not a select2-wrapper.
-        if (!(element.parent().attr('class') === 'select-wrapper') && (element.attr('ui-select2') === undefined)) {
-          const template = angular.element("<div class='select-wrapper'></div>")
-          element.wrap(template)
-        }
+//       post(scope, element, attrs, ctrl) {
+//         // Add wrapper, if its not already wrapped and its not a select2-wrapper.
+//         if (!(element.parent().attr('class') === 'select-wrapper') && (element.attr('ui-select2') === undefined)) {
+//           const template = angular.element("<div class='select-wrapper'></div>")
+//           element.wrap(template)
+//         }
 
-        if (_.isFunction(link.post)) { return link.post(scope, element, attrs, ctrl) }
-      }
-    })
+//         if (_.isFunction(link.post)) { return link.post(scope, element, attrs, ctrl) }
+//       }
+//     })
 
-    return $delegate
-  }
-  ])
-])
+//     return $delegate
+//   }
+//   ])
+// ])
 
 // TODO: refactor, can cause errors swallowing
 forms.config(['$qProvider', $qProvider => $qProvider.errorOnUnhandledRejections(false)

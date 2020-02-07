@@ -5,7 +5,7 @@ import MassUpdateFormCtrl from './MassUpdateFormCtrl'
 import adminOrg from './adminOrgModule'
 import OrgSelectOptions from "./orgSelectOptions";
 
-angular.module("admin.org")
+angular.module(adminOrg)
   .controller("org.FormCtrl", FormCtrl)
   .controller("org.ListCtrl", ListCtrl)
   .controller("org.ShowCtrl", ShowCtrl)

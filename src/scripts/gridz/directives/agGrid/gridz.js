@@ -7,7 +7,7 @@ class Gridz {
 
   init(element, opts) {
     this.gridEl = $(element)
-    this.gridId = this.gridEl.attr("id")
+    this.gridId = this.gridEl.attr('id')
 
     // the containing div for the grid, will be built after jqGrid is called
     this.gboxId = `gbox_${this.gridId}`
@@ -35,7 +35,7 @@ class Gridz {
       let resp
       this.beforeSelectRow.apply(this, arguments)
       if ($.isFunction(optBeforeSelectRow)) { resp = optBeforeSelectRow.apply(this, arguments) }
-      if ((resp === true) || (_.isNil(resp))) {  return true } else { return false }
+      if ((resp === true) || (_.isNil(resp))) { return true } else { return false }
     }.bind(this)
 
     // Events .. onSelectRow
@@ -58,7 +58,7 @@ class Gridz {
     options.gridComplete = function() {
       this.gridComplete.apply(this)
       if ($.isFunction(_gridComplete)) { _gridComplete.apply(this, arguments) }
-      this.gridEl.trigger("gridComplete")
+      this.gridEl.trigger('gridComplete')
       if (this.options.multiSetSelection) { return this.memoizeSelectedRows() }
     }.bind(this)
 
@@ -68,27 +68,27 @@ class Gridz {
     // Due to the fact that if id(or other unique) field is on the first place, the other sorting wont have any sense
     // `sortLast` option is added to move unique column to the last place
     //   Example: if user first sorted by id and then by name sort params will be look like {sortName: 'name asc, id', order: 'asc'}
-    options.onSortCol = (sortname, x, order)=> {
+    options.onSortCol = (sortname, x, order) => {
       if (options.multiSort) {
-        const id = options.sortLast || "id"
+        const id = options.sortLast || 'id'
         if (sortname.indexOf(id) > -1) {
           sortname = sortname + ` ${order}`
           const sortArray = sortname.split(',')
           const res = []
           let sort = null
           const idRegex = new RegExp(`(${id}[ ]+(asc|desc))`)
-          _.each(sortArray, function(it){
+          _.each(sortArray, function(it) {
             it = it.trim()
             if (_.isNil(idRegex.exec(it))) {
               return res.push(it)
             } else {
-              return sort = it.split(" ")
+              return sort = it.split(' ')
             }
           })
           if (sort) { res.push(sort[0]) }
-          sortname = res.join(",")
-          this.gridEl.jqGrid("setGridParam", {sortname})
-          if (sort) { return this.gridEl.jqGrid("setGridParam", {order: sort[1]}) }
+          sortname = res.join(',')
+          this.gridEl.jqGrid('setGridParam', { sortname })
+          if (sort) { return this.gridEl.jqGrid('setGridParam', { order: sort[1] }) }
         }
       }
     }
@@ -99,7 +99,7 @@ class Gridz {
 
     // if sortable is true then add exclusion for the action column
     if (options.actionPopup && options.sortable) {
-      options.sortable = {exclude: `#${this.gridId}_-row_action_col`}
+      options.sortable = { exclude: `#${this.gridId}_-row_action_col` }
     }
 
     return options
@@ -126,24 +126,22 @@ class Gridz {
     } = this.gridEl[0]
 
     // get id of the previous selected row
-    const startId = this.gridEl.jqGrid("getGridParam", "selrow")
-    const isCheckBox = $(e.target).hasClass("cbox")
+    const startId = this.gridEl.jqGrid('getGridParam', 'selrow')
+    const isCheckBox = $(e.target).hasClass('cbox')
 
     if (!e.ctrlKey && !e.shiftKey && !e.metaKey && !isCheckBox) {
       // Reset selection if multiboxonly is set to true read http://www.trirand.com/jqgridwiki/doku.php?id=wiki:options
       // default multiboxonly doesn't work with ctrl/shift keys.
-      if (this.gridEl.jqGrid("getGridParam", "agMultiboxonly")) { this.gridEl.jqGrid("resetSelection") }
+      if (this.gridEl.jqGrid('getGridParam', 'agMultiboxonly')) { this.gridEl.jqGrid('resetSelection') }
     }
     if (startId && e.shiftKey) {
-
-      this.gridEl.jqGrid("resetSelection")
+      this.gridEl.jqGrid('resetSelection')
 
       // get DOM elements of the previous selected and
       // the selected rows
       const startRow = rows.namedItem(startId)
       const endRow = rows.namedItem(rowid)
       if (startRow && endRow) {
-
         // get min and max from the indexes of the previous selected
         // and the selected rows
         const iStart = Math.min(startRow.rowIndex, endRow.rowIndex)
@@ -153,7 +151,7 @@ class Gridz {
         while (i <= iEnd) {
           // the row with rowid will be selected by
           // jqGrid. So we don't need select it
-          if (i !== rowIdIndex) { this.gridEl.jqGrid("setSelection", rows[i].id, false) }
+          if (i !== rowIdIndex) { this.gridEl.jqGrid('setSelection', rows[i].id, false) }
           i++
         }
       }
@@ -171,7 +169,7 @@ class Gridz {
 
   memoizeSelectedRows() {
     const selectedRows = this.selectedRowIds
-    return _.each(this.gridEl.jqGrid("getGridParam", "selarrrow"), function(id) {
+    return _.each(this.gridEl.jqGrid('getGridParam', 'selarrrow'), function(id) {
       if (!(Array.from(selectedRows).includes(id))) { return selectedRows.push(id) }
     })
   }
@@ -180,19 +178,19 @@ class Gridz {
     if (this.options.multiSetSelection) { return this.selectedRowIds = [] }
   }
 
-  onSelectRow(rowid, isChecked,e) {
-    if (this.gridEl.jqGrid("getGridParam", "agRowNumber")) {
-    //Add number of selected row in grid(nmber for all pages)
+  onSelectRow(rowid, isChecked, e) {
+    if (this.gridEl.jqGrid('getGridParam', 'agRowNumber')) {
+    // Add number of selected row in grid(nmber for all pages)
       const ids = this.gridEl.getDataIDs()
-      let text = ""
-      //check if only one row is selected
-      if (this.gridEl.jqGrid("getGridParam", "selarrrow").length === 1) {
-        //add to the grid footer number of the row in total for all pages
-        const rowNum = (( this.gridEl.jqGrid("getGridParam", "page") - 1 ) * this.gridEl.jqGrid("getGridParam", "rowNum")) + ids.indexOf(rowid) + 1
+      let text = ''
+      // check if only one row is selected
+      if (this.gridEl.jqGrid('getGridParam', 'selarrrow').length === 1) {
+        // add to the grid footer number of the row in total for all pages
+        const rowNum = ((this.gridEl.jqGrid('getGridParam', 'page') - 1) * this.gridEl.jqGrid('getGridParam', 'rowNum')) + ids.indexOf(rowid) + 1
         text = `Current row # ${rowNum} | `
       }
 
-      const pager = this.gridEl.parent().parent().parent().parent().find("#paymentGrid-pager_right")
+      const pager = this.gridEl.parent().parent().parent().parent().find('#paymentGrid-pager_right')
       const span = pager.find('#rowNum')
       if (span.length === 0) {
         pager.prepend(`<span id='rowNum'>${text} </span>`)
@@ -205,12 +203,12 @@ class Gridz {
       if (!isChecked) { this.selectedRowIds.splice(this.selectedRowIds.indexOf(rowid), 1) }
       if (e?.shiftKey) {
         const grid = this.gridEl
-        grid.jqGrid("resetSelection")
-        grid.jqGrid("setSelection", rowid)
+        grid.jqGrid('resetSelection')
+        grid.jqGrid('setSelection', rowid)
         const selectedRows = this.selectedRowIds
-        const selected = grid.jqGrid("getGridParam", "selarrrow")
+        const selected = grid.jqGrid('getGridParam', 'selarrrow')
         _.each(selectedRows, function(id) {
-          if (!(Array.from(selected).includes(id))) { return grid.jqGrid("setSelection", id) }
+          if (!(Array.from(selected).includes(id))) { return grid.jqGrid('setSelection', id) }
         })
       }
     }
@@ -223,15 +221,14 @@ class Gridz {
   This will work for reponsive and fluid layouts
   */
   responsiveResize() {
-    const gboxId = `#gbox_${this.gridEl.attr("id")}`
-    return $(window).on("resize", (event, ui) => {
-
+    const gboxId = `#gbox_${this.gridEl.attr('id')}`
+    return $(window).on('resize', (event, ui) => {
       // Get width of parent container which is assumed to be expanded to span
       let parWidth
       if ($(gboxId).parent().width() > 0) {
         parWidth = $(gboxId).parent().width()
       } else {
-        parWidth = $("#page").width()
+        parWidth = $('#page').width()
       }
       const curWidth = $(gboxId).width()
       const w = parWidth - 1 // add -1 Fudge factor to prevent horizontal scrollbars
@@ -242,17 +239,17 @@ class Gridz {
     })
   }
 
-  //*************Action popup methods*************
+  //* ************Action popup methods*************
 
   /*
   adds the action column and formatter.
   */
   addRowActionColumn() {
-    const containerId = `gbox_${this.gridEl.attr("id")}`
+    const containerId = `gbox_${this.gridEl.attr('id')}`
 
     const actionCol = {
-      name: "-row_action_col", // can't resize
-      label: " ",
+      name: '-row_action_col', // can't resize
+      label: ' ',
       width: 20,
       sortable: false,
       search: false,
@@ -286,13 +283,11 @@ class Gridz {
 `
   }
 
-
-
-  popupSetup(columnName, innerHTML){
+  popupSetup(columnName, innerHTML) {
     return $(`.${columnName}`).clickover({
       global_close: true,
       html: true,
-      content: "<div></div>",
+      content: '<div></div>',
       template: `\
 <div class="popover row-action-popover">
   <div class="arrow"></div>
@@ -304,7 +299,7 @@ class Gridz {
         let content = innerHTML
         if (typeof innerHTML === 'function') {
           self = this
-          const params= JSON.parse(this.$element[0].attributes.popUpParams.value)
+          const params = JSON.parse(this.$element[0].attributes.popUpParams.value)
           content = innerHTML(this, params)
         }
         return self.$tip[0].innerHTML = content
@@ -319,7 +314,7 @@ class Gridz {
       options
     } = this
 
-    let actionMenu = ""
+    let actionMenu = ''
     if (!_.isNil(options.actionPopup.resetSelection) && (options.actionPopup.resetSelection !== false)) {
       options.actionPopup.resetSelection = true
     }
@@ -342,7 +337,7 @@ class Gridz {
 `
     }
 
-    return $(".jqg-row-action").clickover({
+    return $('.jqg-row-action').clickover({
       global_close: true,
       html: true,
       content: actionMenu,
@@ -361,66 +356,65 @@ class Gridz {
   // fired when the clickover is shown
   actionPopupOnShow(clickoverEl) {
     const self = this
-    const id = $(clickoverEl.$element, this.gridEl.rows).parents("tr:first").attr("id")
+    const id = $(clickoverEl.$element, this.gridEl.rows).parents('tr:first').attr('id')
 
-    this.gridEl.data("actionRowId", id)
+    this.gridEl.data('actionRowId', id)
     if (this.options.actionPopup.resetSelection) {
-      this.gridEl.jqGrid("resetSelection")
-      this.gridEl.jqGrid("setSelection", id)
+      this.gridEl.jqGrid('resetSelection')
+      this.gridEl.jqGrid('setSelection', id)
     }
 
     const menuEl = $(`#${self.gboxId} .dropdown-menu`)
 
-    menuEl.on("click", "li a.row_action_show", e => {
+    menuEl.on('click', 'li a.row_action_show', e => {
       e.preventDefault()
-      return this.gridEl.trigger("showAction", [id, self])
-  })
+      return this.gridEl.trigger('showAction', [id, self])
+    })
 
-    menuEl.on("click", "li a.row_action_edit", e => {
+    menuEl.on('click', 'li a.row_action_edit', e => {
       e.preventDefault()
-      return this.gridEl.trigger("editAction", [id, self])
-  })
+      return this.gridEl.trigger('editAction', [id, self])
+    })
 
-    menuEl.on("click", "li a.row_action_delete", e => {
+    menuEl.on('click', 'li a.row_action_delete', e => {
       e.preventDefault()
-      return this.gridEl.trigger("deleteAction", [id, self])
-  })
+      return this.gridEl.trigger('deleteAction', [id, self])
+    })
 
-    return menuEl.on("click", "li a.row_action_mass_update", e => {
+    return menuEl.on('click', 'li a.row_action_mass_update', e => {
       e.preventDefault()
-      return this.gridEl.trigger("massUpdateAction", [])
-  })
+      return this.gridEl.trigger('massUpdateAction', [])
+    })
   }
 
   editOndblClick() {
     const self = this
     const grid = this.gridEl
-    return this.options.ondblClickRow = id => grid.trigger("editAction", [id, self])
+    return this.options.ondblClickRow = id => grid.trigger('editAction', [id, self])
   }
 }
 
 // register namespace
-$.extend(true, window, {grinder: {Grid: Gridz}})
+$.extend(true, window, { grinder: { Grid: Gridz } })
 
 // Jquery Plugin definition
 $.fn.gridz = function(option) {
   let instance
-  if (typeof option === "string") {
+  if (typeof option === 'string') {
     const otherArgs = Array.prototype.slice.call(arguments, 1)
-    instance = $(this).data("gridz")
+    instance = $(this).data('gridz')
     if (instance && instance[option]) {
       instance[option].apply(this, otherArgs)
-    }
-    else {} // try passing through to jqgrid
+    } else {} // try passing through to jqgrid
     return $(this).jqGrid(arguments)
   }
 
   return this.each(function() {
     const el = $(this)
 
-    instance = el.data("gridz")
-    const options = typeof option === "object" ? option : {}
-    if (!instance) { return el.data("gridz", (instance = new Gridz(this, options))) }
+    instance = el.data('gridz')
+    const options = typeof option === 'object' ? option : {}
+    if (!instance) { return el.data('gridz', (instance = new Gridz(this, options))) }
   })
 }
 
@@ -428,10 +422,10 @@ $.fn.gridz.Constructor = Gridz
 
 $.fn.gridz.defaults = {
   prmNames: {
-    page: "page",
-    rows: "max",
-    sort: "sort",
-    order: "order"
+    page: 'page',
+    rows: 'max',
+    sort: 'sort',
+    order: 'order'
   },
 
   jsonReader: {
@@ -441,15 +435,15 @@ $.fn.gridz.defaults = {
   // Defines in what format to expect the data that fills the grid.
   //   json  - use internal jqgrid function to load the data via ajax
   //   local - use local data
-  datatype: "json",
+  datatype: 'json',
 
-  mtype: "GET", // for the ajax json read
+  mtype: 'GET', // for the ajax json read
   rowNum: 20, // num rows to show by default
   rowList: [10, 20, 50, 100],
   altRows: true,
   shrinkToFit: false,
   autowidth: true,
-  height: "100%",
+  height: '100%',
   sortable: true,
   multiselect: true, // one or more row selections
   viewrecords: true, // shows beginning and ending record number in the grid, out of the total number of records in the query.
@@ -457,7 +451,7 @@ $.fn.gridz.defaults = {
   // {0} - the start position of the records depending on page number and number of requested records
   // {1} - the end position
   // {2} - total records returned from the server.
-  recordtext: "Records {0} - {1} of {2}",
+  recordtext: 'Records {0} - {1} of {2}',
 
   beforeSelectRow: null,
   gridComplete: null,
@@ -472,26 +466,25 @@ $.extend($.fn.fmatter, {
 
   // use `agDateFilter` for format dates
   date(cellVal, options) {
-    return window.columnAligner("date", window.agDateFilter(cellVal), options)
+    return window.columnAligner('date', window.agDateFilter(cellVal), options)
   },
 
   // use `agCurrencyFilter` for format currencies
   currency(cellVal, options) {
-    return window.columnAligner("currency", window.agCurrencyFilter(cellVal), options)
+    return window.columnAligner('currency', window.agCurrencyFilter(cellVal), options)
   },
 
   // use `agCurrencyFilter` for format currencies, use 0 for empty/null/undefined value
   currencyOrZero(cellVal, options) {
-    if ((typeof(cellVal) === 'undefined') || (cellVal === null) || (cellVal === 'null') || (cellVal === '')) {
+    if ((typeof (cellVal) === 'undefined') || (cellVal === null) || (cellVal === 'null') || (cellVal === '')) {
       cellVal = 0
     }
 
-    return window.columnAligner("currency", window.agCurrencyFilter(cellVal), options)
+    return window.columnAligner('currency', window.agCurrencyFilter(cellVal), options)
   },
 
-
   okIcon(cellVal, options, rowdata) {
-    if (cellVal) { return "<i class='fa fa-check'></i>" } else { return "" }
+    if (cellVal) { return "<i class='fa fa-check'></i>" } else { return '' }
   },
 
   editActionLink(cellVal, options, rowdata) {
@@ -502,21 +495,19 @@ $.extend($.fn.fmatter, {
 }
 )
 
-
 const currencyUnformatter = function(cellVal) {
-  if ((typeof(cellVal) === 'undefined') || (cellVal === null) || (cellVal === 'null') || (cellVal === '')) {
+  if ((typeof (cellVal) === 'undefined') || (cellVal === null) || (cellVal === 'null') || (cellVal === '')) {
     return 0
   } else {
-    return parseFloat(cellVal.replace(/[^0-9\.-]+/g,""))
+    return parseFloat(cellVal.replace(/[^0-9\.-]+/g, ''))
   }
 }
 
-
 $.extend($.fn.fmatter?.currency,
-  {unformat: currencyUnformatter})
+  { unformat: currencyUnformatter })
 
 $.extend($.fn.fmatter?.currencyOrZero,
-  {unformat: currencyUnformatter})
+  { unformat: currencyUnformatter })
 
 // Returns the template for data column alignment.
 // type    - type of a columns (e.g. currency, date, link)

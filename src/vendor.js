@@ -14,8 +14,8 @@ window.$ = window.jQuery
 // require('angular-ui-bootstrap')
 
 require('bootstrap/js/dropdown')
-require('bootstrap/js/tooltip') //required by popover
-require('bootstrap/js/popover') //required by clickover
+require('bootstrap/js/tooltip') // required by popover
+require('bootstrap/js/popover') // required by clickover
 require('../components/bootstrapx-clickover/bootstrapx-clickover')
 
 require('free-jqgrid/js/jquery.jqgrid.src')
@@ -24,5 +24,7 @@ require('Select2/select2')
 require('moment')
 require('eonasdan-bootstrap-datetimepicker/src/js/bootstrap-datetimepicker')
 require('later/later')
-// require('toastr/toastr.js')
-// require('sweetalert/lib/sweet-alert.js')
+require('perfect-scrollbar')
+require('toastr/toastr.js')
+require('sweetalert/lib/sweet-alert.js')
+require('ladda')

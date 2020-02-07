@@ -2,9 +2,7 @@ import angular from "angular";
 import angleGrinder from '~/angle-grinder'
 
 const MOD_NAME = 'admin.org'
-export default MOD_NAME
-var org = angular.module(MOD_NAME, [angleGrinder]);
-
+const org = angular.module(MOD_NAME, [angleGrinder]);
 org.config([
   "$routeProvider", $routeProvider => $routeProvider
     .when("/", {
@@ -18,7 +16,7 @@ org.config([
     })
 
     .when("/:id", {
-      templateUrl: "../templates/org/show.html",
+      templateUrl: "../templates/tabbedOrg/show.html",
       controller: "org.ShowCtrl",
       resolve: { org: [
           "$route", "resourceResolver", ($route, resourceResolver) => resourceResolver($route.current.params.id)
@@ -37,3 +35,4 @@ org.config([
 
     .otherwise({redirectTo: "/"})
 ]);
+export default MOD_NAME

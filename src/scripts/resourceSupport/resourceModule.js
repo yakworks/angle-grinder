@@ -21,7 +21,7 @@ resources.factory('resourceBuilder', [
       if (RestContext.length > 0) {
         basePath = '/api' + basePath
       }
-      if(!basePath){
+      if (!basePath) {
 
       }
       if (resourceName == null) {

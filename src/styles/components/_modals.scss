@@ -1,0 +1,109 @@
+/* ---------------------------------------------------------------------- */
+/*  Modals
+/* ---------------------------------------------------------------------- */
+.modal-backdrop {
+    background-color: #000;
+    bottom: 0;
+    position: fixed;
+
+    &.in {
+        opacity: 0.4;
+    }
+}
+
+.modal-backdrop {
+    z-index: 9998 !important;
+}
+
+.modal {
+    z-index: 9999 !important;
+}
+
+.modal-content {
+    background: #ffffff;
+    box-shadow: none;
+}
+
+.modal-footer, .modal-header {
+    border-color: rgba(0, 0, 0, 0.07);
+}
+
+.ng-aside.horizontal .modal-dialog {
+    min-height: 100% !important;
+    bottom: 0;
+    height: auto !important;
+
+    .modal-content {
+        height: auto !important;
+        min-height: 100% !important;
+    }
+}
+
+/** Legacy from old RCM */
+
+.modal-fullscreen {
+  display: block;
+  background: #ffffff;
+  .container {
+    width: 100%;
+  }
+}
+
+/* Never show horizontal pager inside dialogs */
+.modal-body {
+  overflow-x: hidden;
+}
+
+.modal {
+  overflow: auto;
+}
+
+.modal-lg {
+  height: auto;
+  width: auto;
+  max-height: none;
+  overflow: auto;
+}
+
+.modal-body-lg {
+  position: relative;
+  overflow-y: auto;
+  max-height: 85%;
+  padding: 15px;
+}
+
+.modal-fullscreen {
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.modal-fullscreen > div {
+  padding: 1%;
+}
+
+.modal-fullscreen .modal-body {
+  max-height: inherit;
+  margin: 0;
+  margin-right: auto;
+  margin-left: auto;
+  width: 100%;
+}
+
+.modal-md {
+  left: 0;
+  height: 100%;
+  width: 80%;
+}
+
+.modal-md > div {
+  padding: 1%;
+}
+
+.modal-md .modal-body {
+  max-height: inherit;
+  margin: 0;
+  margin-right: auto;
+  margin-left: auto;
+  width: 100%;
+}
