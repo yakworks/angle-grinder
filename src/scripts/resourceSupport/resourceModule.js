@@ -106,8 +106,8 @@ resources.factory('resourceBuilder', [
 resources.factory('Resource', [
   '$document', 'resourceBuilder', function($document, resourceBuilder) {
     var $body = $document.find('body')
-    var url = $($body).data('resource-path')
-    var name = $($body).data('resource-name')
+    var url = $body.data('resource-path')
+    var name = $body.data('resource-name')
 
     return resourceBuilder(url, name)
   }
