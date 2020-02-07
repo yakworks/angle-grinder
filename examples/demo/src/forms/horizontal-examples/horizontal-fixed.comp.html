@@ -58,16 +58,6 @@
     </div>
   </div>
   <div ag-field-group >
-    <label class="control-label">Select2 Input</label>
-    <div class="controls">
-      <input id="sel22" name="sel22" ng-model="$ctrl.vm.sel2Input"
-          ui-select2="$ctrl.uiSelect2Opts"
-          class="form-control">
-      </input>
-      <ag-validation-errors for="sel22" required="This field is required" />
-    </div>
-  </div>
-  <div ag-field-group >
     <label class="control-label">Select2 Multi</label>
     <div class="controls">
       <select name="selectMutiple" multiple="true" ng-model="$ctrl.vm.selectMutiple"
@@ -80,6 +70,27 @@
       </select>
     </div>
   </div>
+  <div ag-field-group >
+    <label class="control-label">Select2 Multi-Input</label>
+    <div class="controls">
+      <input id="sel22" name="sel22" multiple ng-model="$ctrl.vm.sel2MultiInput"
+          ui-select2="$ctrl.uiSelect2MultiOpts"
+          class="form-control">
+      </input>
+      <ag-validation-errors for="sel22" required="This field is required" />
+    </div>
+  </div>
+  <div ag-field-group >
+    <label class="control-label">Select2 Input</label>
+    <div class="controls">
+      <input id="sel22" name="sel22" ng-model="$ctrl.vm.sel2Input"
+          ui-select2="$ctrl.uiSelect2Opts"
+          class="form-control">
+      </input>
+      <ag-validation-errors for="sel22" required="This field is required" />
+    </div>
+  </div>
+
   <div ag-field-group>
     <label class="control-label">Bulma Select</label>
     <div class="controls">

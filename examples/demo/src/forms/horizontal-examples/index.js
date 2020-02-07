@@ -21,13 +21,22 @@ class FormCtrl {
     //formatSelection: formatResult,
     //formatResult: formatResult
   }
+  uiSelect2MultiOpts = {
+    data: {
+      results: this.normalSelectOptions,
+      text: 'name'
+    },
+    //formatSelection: formatResult,
+    //formatResult: formatResult
+  }
 
   vm = {
     sel2Input: 1,
     sel2: {
       id: 1
     },
-    selectMutiple: [ 0, 1]
+    selectMutiple: [ 0, 1],
+    sel2MultiInput: [{'id': '1', 'name': 'Option A'}]
   }
 
   constructor (){

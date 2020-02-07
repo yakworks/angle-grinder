@@ -85,24 +85,6 @@ module.exports = function(env, argv) {
           ]
         },
         {
-          test: /\.less$/,
-          use: [
-            { loader: styleLoader },// creates style nodes from JS strings
-            {
-              loader: 'css-loader', // translates CSS into CommonJS
-              options: { sourceMap: true }
-            },
-            { // Runs compiled CSS through postcss for vendor prefixing
-              loader: 'postcss-loader',
-              options: { sourceMap: true }
-            },
-            {
-              loader: 'less-loader', // compiles Less to CSS
-              options: { sourceMap: true }
-            }
-          ],
-        },
-        {
           // Load all images as base64 encoding if they are smaller than 8192 bytes
           test: /\.(png|jpg|gif)$/,
           use: [{

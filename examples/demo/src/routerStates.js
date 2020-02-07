@@ -22,6 +22,14 @@ let formStates = {
       template: require("./forms/input-components/index.html")
     },
     {
+      name: 'horizontal-examples',
+      template: require("./forms/horizontal-examples/index.html"),
+    },
+    {
+      name: 'select2',
+      template: require("./forms/select2/index.html"),
+    },
+    {
       name: 'elements',
       template: require("./forms/form_elements.html"),
     },
@@ -32,10 +40,6 @@ let formStates = {
       // ncyBreadcrumb: {
       //   label: 'Grids'
       // },
-    },
-    {
-      name: 'horizontal-examples',
-      template: require("./forms/horizontal-examples/index.html"),
     }
   ]
 }

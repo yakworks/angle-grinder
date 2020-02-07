@@ -15,7 +15,7 @@ app.run(function ($rootScope, $state, $stateParams) {
   // set below basic information
   $rootScope.app = {
     name: 'Yak Works Template', // name of your project
-    author: 'ClipTheme', // author's name or company name
+    author: 'YakWorks', // author's name or company name
     description: 'Angular Bootstrap Admin Template', // brief description
     version: '1.0', // current version
     year: ((new Date()).getFullYear()), // automatic current year (for copyright information)

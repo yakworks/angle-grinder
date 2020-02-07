@@ -907,13 +907,13 @@ li.spinner {
   width: 45px;
 }
 
-li.spinner i.spin:before {
-  content: url("../img/ajax-loader.gif");
+/* li.spinner i.spin:before {
+  content: url("img/ajax-loader.gif");
 }
 
 .nav-tabs li.loading a:after {
-  content: url("../img/ajax-loader.gif");
-}
+  content: url("img/ajax-loader.gif");
+} */
 
 /****** pretify.css **********/
 .com { color: #93a1a1; }

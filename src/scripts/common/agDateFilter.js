@@ -21,7 +21,7 @@ app.provider('agDateFilter', function() {
         if (useTimeZone == null) { useTimeZone = false }
         if (format == null) { format = defaultFormat }
         if (isFalsy(date)) { return '' }
-
+        //console.log("moment(date)", date)
         return moment(date).format(format)
       }
     ]
