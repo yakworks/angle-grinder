@@ -61,7 +61,7 @@ common.value('camelize', str => str.replace(/(\-|\.|_|\s)+(.)?/g, function(match
 // Due to changes in angular 1.6 see https://docs.angularjs.org/guide/migration#commit-aa077e8
 common.config(['$locationProvider', $locationProvider => $locationProvider.hashPrefix('')])
 
-//FIX the bad location on popover
+// FIX the bad location on popover
 common.config(function($uibTooltipProvider) {
-  $uibTooltipProvider.options({appendToBody: true})
+  $uibTooltipProvider.options({ appendToBody: true })
 })

@@ -1,6 +1,6 @@
-import "bootstrap/dist/css/bootstrap.css"
-import "font-awesome/css/font-awesome.css"
-import "ti-icons/css/themify-icons.css"
+import 'bootstrap/dist/css/bootstrap.css'
+import 'font-awesome/css/font-awesome.css'
+import 'ti-icons/css/themify-icons.css'
 import 'perfect-scrollbar/css/perfect-scrollbar.css'
 import 'toastr/build/toastr.css'
 import 'sweetalert/lib/sweet-alert.css'
@@ -14,4 +14,3 @@ import 'angular-xeditable/dist/css/xeditable.css'
 // OLD?
 import 'eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css' // change to scss
 import '../../components/jquery-file-upload-angular/css/jquery.fileupload.css'
-

@@ -16,8 +16,8 @@ forms.factory('FormDialogServ', [
       if (angular.isDefined(dialogOptions.scope)) { ({ template } = dialogOptions) }
 
       return $modal.open({
-        //template: template,
-        templateUrl: pathWithContext(templateUrl?templateUrl:""),
+        // template: template,
+        templateUrl: pathWithContext(templateUrl || ''),
         controller: 'FormDialogCtrl',
         keyboard: false, // do not close the dialog with ESC key
         backdrop: 'static', // do not close on click outside of the dialog
