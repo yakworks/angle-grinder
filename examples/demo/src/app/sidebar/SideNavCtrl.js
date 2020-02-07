@@ -4,12 +4,11 @@ import appRoot from '../../routerStates.js'
 /**
  * Clip-Two Main Controller
  */
-let app = angular.module('app')
+const app = angular.module('app')
 app.controller('SideNavCtrl',
-  function ($scope) {
-
+  function($scope) {
     $scope.sideMenuItems = appRoot.children
-    console.log("$scope.sideMenuItems ", $scope.sideMenuItems)
+    console.log('$scope.sideMenuItems ', $scope.sideMenuItems)
     // [
     //   {
     //     title: "Dashboard",
@@ -102,6 +101,4 @@ app.controller('SideNavCtrl',
     //   },
     // ];
   }
-);
-
-
+)

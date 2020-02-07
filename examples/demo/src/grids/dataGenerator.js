@@ -1,29 +1,28 @@
 
-export let randomGen = {
+export const randomGen = {
   range(min, max) {
-    return Math.floor((Math.random() * (max - min)) + min);
+    return Math.floor((Math.random() * (max - min)) + min)
   },
   date(minDate, maxDate) {
-    if (maxDate == null) { maxDate = new Date(); }
-    const min = minDate.getTime();
-    const max = maxDate.getTime();
+    if (maxDate == null) { maxDate = new Date() }
+    const min = minDate.getTime()
+    const max = maxDate.getTime()
 
-    const randomMilis = this.range(min, max);
-    return new Date(randomMilis);
+    const randomMilis = this.range(min, max)
+    return new Date(randomMilis)
   }
 }
 
-export function generateData(count){
-  if (count == null) { count = 50; }
-  const rows = [];
+export function generateData(count) {
+  if (count == null) { count = 50 }
+  const rows = []
 
-  for (let id = 1, end = count, asc = 1 <= end; asc ? id <= end : id >= end; asc ? id++ : id--) {
+  for (let id = 1, end = count, asc = end >= 1; asc ? id <= end : id >= end; asc ? id++ : id--) {
     rows.push({
       id,
       invoiceDate: randomGen.date(new Date(2001, 1, 1)),
       tranDate: randomGen.date(new Date(2001, 1, 1)),
-      customer: { name: `Test Customer ${id}`
-    },
+      customer: { name: `Test Customer ${id}` },
       name: `Test Item ${id}`,
       description: `Test Description ${id}`,
       note: `Note number ${id}`,
@@ -34,5 +33,5 @@ export function generateData(count){
     })
   }
 
-  return rows;
+  return rows
 }

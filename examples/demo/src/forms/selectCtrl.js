@@ -1,83 +1,79 @@
-'use strict';
+'use strict'
 /**
  * AngularJS default filter with the following expression:
  * "person in people | filter: {name: $select.search, age: $select.search}"
  * performs a AND between 'name: $select.search' and 'age: $select.search'.
  * We want to perform a OR.
  */
-let app = angular.module('app')
+const app = angular.module('app')
 
-app.filter('propsFilter', function () {
-  return function (items, props) {
-    var out = [];
+app.filter('propsFilter', function() {
+  return function(items, props) {
+    var out = []
 
     if (angular.isArray(items)) {
-      items.forEach(function (item) {
-        var itemMatches = false;
+      items.forEach(function(item) {
+        var itemMatches = false
 
-        var keys = Object.keys(props);
+        var keys = Object.keys(props)
         for (var i = 0; i < keys.length; i++) {
-          var prop = keys[i];
-          var text = props[prop].toLowerCase();
+          var prop = keys[i]
+          var text = props[prop].toLowerCase()
           if (item[prop].toString().toLowerCase().indexOf(text) !== -1) {
-            itemMatches = true;
-            break;
+            itemMatches = true
+            break
           }
         }
 
         if (itemMatches) {
-          out.push(item);
+          out.push(item)
         }
-      });
+      })
     } else {
       // Let the output be the input untouched
-      out = items;
+      out = items
     }
 
-    return out;
-  };
-});
+    return out
+  }
+})
 
-app.controller('SelectCtrl', ["$scope", "$http", "$timeout", function ($scope, $http, $timeout) {
-  $scope.disabled = undefined;
-  $scope.searchEnabled = undefined;
+app.controller('SelectCtrl', ['$scope', '$http', '$timeout', function($scope, $http, $timeout) {
+  $scope.disabled = undefined
+  $scope.searchEnabled = undefined
 
-  $scope.enable = function () {
-    $scope.disabled = false;
-  };
-
-  $scope.disable = function () {
-    $scope.disabled = true;
-  };
-
-  $scope.enableSearch = function () {
-    $scope.searchEnabled = true;
+  $scope.enable = function() {
+    $scope.disabled = false
   }
 
-  $scope.disableSearch = function () {
-    $scope.searchEnabled = false;
+  $scope.disable = function() {
+    $scope.disabled = true
   }
 
-  $scope.clear = function () {
-    $scope.person.selected = undefined;
-    $scope.address.selected = undefined;
-    $scope.country.selected = undefined;
-  };
+  $scope.enableSearch = function() {
+    $scope.searchEnabled = true
+  }
 
-  $scope.someGroupFn = function (item) {
+  $scope.disableSearch = function() {
+    $scope.searchEnabled = false
+  }
 
-    if (item.name[0] >= 'A' && item.name[0] <= 'M')
-      return 'From A - M';
+  $scope.clear = function() {
+    $scope.person.selected = undefined
+    $scope.address.selected = undefined
+    $scope.country.selected = undefined
+  }
 
-    if (item.name[0] >= 'N' && item.name[0] <= 'Z')
-      return 'From N - Z';
+  $scope.someGroupFn = function(item) {
+    if (item.name[0] >= 'A' && item.name[0] <= 'M') { return 'From A - M' }
 
-  };
+    if (item.name[0] >= 'N' && item.name[0] <= 'Z') { return 'From N - Z' }
+  }
 
-  $scope.personAsync = { selected: "wladimir@email.com" };
-  $scope.peopleAsync = [];
+  $scope.personAsync = { selected: 'wladimir@email.com' }
+  $scope.peopleAsync = []
 
-  $timeout(function () {
+  $timeout(function() {
     $scope.peopleAsync = [
       { name: 'Adam', email: 'adam@email.com', age: 12, country: 'United States' },
       { name: 'Amalie', email: 'amalie@email.com', age: 12, country: 'Argentina' },
@@ -89,34 +85,34 @@ app.controller('SelectCtrl', ["$scope", "$http", "$timeout", function ($scope, $
       { name: 'Natasha', email: 'natasha@email.com', age: 54, country: 'Ecuador' },
       { name: 'Michael', email: 'michael@email.com', age: 15, country: 'Colombia' },
       { name: 'Nicolás', email: 'nicole@email.com', age: 43, country: 'Colombia' }
-    ];
-  }, 3000);
+    ]
+  }, 3000)
 
-  $scope.counter = 0;
-  $scope.someFunction = function (item, model) {
-    $scope.counter++;
-    $scope.eventResult = { item: item, model: model };
-  };
+  $scope.counter = 0
+  $scope.someFunction = function(item, model) {
+    $scope.counter++
+    $scope.eventResult = { item: item, model: model }
+  }
 
-  $scope.removed = function (item, model) {
+  $scope.removed = function(item, model) {
     $scope.lastRemoved = {
       item: item,
       model: model
-    };
-  };
+    }
+  }
 
-  $scope.tagTransform = function (newTag) {
+  $scope.tagTransform = function(newTag) {
     var item = {
       name: newTag,
       email: newTag + '@email.com',
       age: 'unknown',
       country: 'unknown'
-    };
+    }
 
-    return item;
-  };
+    return item
+  }
 
-  $scope.person = {};
+  $scope.person = {}
   $scope.people = [
     { name: 'Adam', email: 'adam@email.com', age: 12, country: 'United States' },
     { name: 'Amalie', email: 'amalie@email.com', age: 12, country: 'Argentina' },
@@ -128,31 +124,30 @@ app.controller('SelectCtrl', ["$scope", "$http", "$timeout", function ($scope, $
     { name: 'Natasha', email: 'natasha@email.com', age: 54, country: 'Ecuador' },
     { name: 'Michael', email: 'michael@email.com', age: 15, country: 'Colombia' },
     { name: 'Nicolás', email: 'nicolas@email.com', age: 43, country: 'Colombia' }
-  ];
+  ]
 
-  $scope.availableColors = ['Red', 'Green', 'Blue', 'Yellow', 'Magenta', 'Maroon', 'Umbra', 'Turquoise'];
+  $scope.availableColors = ['Red', 'Green', 'Blue', 'Yellow', 'Magenta', 'Maroon', 'Umbra', 'Turquoise']
 
-  $scope.multipleDemo = {};
-  $scope.multipleDemo.colors = ['Blue', 'Red'];
-  $scope.multipleDemo.colors2 = ['Blue', 'Red'];
-  $scope.multipleDemo.selectedPeople = [$scope.people[5], $scope.people[4]];
-  $scope.multipleDemo.selectedPeople2 = $scope.multipleDemo.selectedPeople;
-  $scope.multipleDemo.selectedPeopleWithGroupBy = [$scope.people[8], $scope.people[6]];
-  $scope.multipleDemo.selectedPeopleSimple = ['samantha@email.com', 'wladimir@email.com'];
+  $scope.multipleDemo = {}
+  $scope.multipleDemo.colors = ['Blue', 'Red']
+  $scope.multipleDemo.colors2 = ['Blue', 'Red']
+  $scope.multipleDemo.selectedPeople = [$scope.people[5], $scope.people[4]]
+  $scope.multipleDemo.selectedPeople2 = $scope.multipleDemo.selectedPeople
+  $scope.multipleDemo.selectedPeopleWithGroupBy = [$scope.people[8], $scope.people[6]]
+  $scope.multipleDemo.selectedPeopleSimple = ['samantha@email.com', 'wladimir@email.com']
 
-
-  $scope.address = {};
-  $scope.refreshAddresses = function (address) {
-    var params = { address: address, sensor: false };
+  $scope.address = {}
+  $scope.refreshAddresses = function(address) {
+    var params = { address: address, sensor: false }
     return $http.get(
       'http://maps.googleapis.com/maps/api/geocode/json',
       { params: params }
-    ).then(function (response) {
-      $scope.addresses = response.data.results;
-    });
-  };
+    ).then(function(response) {
+      $scope.addresses = response.data.results
+    })
+  }
 
-  $scope.country = {};
+  $scope.country = {}
   $scope.countries = [ // Taken from https://gist.github.com/unceus/6501985
     { name: 'Afghanistan', code: 'AF' },
     { name: 'Åland Islands', code: 'AX' },
@@ -397,5 +392,5 @@ app.controller('SelectCtrl', ["$scope", "$http", "$timeout", function ($scope, $
     { name: 'Yemen', code: 'YE' },
     { name: 'Zambia', code: 'ZM' },
     { name: 'Zimbabwe', code: 'ZW' }
-  ];
-}]);
+  ]
+}])

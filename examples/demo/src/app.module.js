@@ -5,7 +5,7 @@ import 'angular-translate-loader-static-files'
 import fullscreen from './utils/fullscreen'
 import truncate_filters from './utils/truncate.filters'
 
-export default angular.module("app", [
+export default angular.module('app', [
   agMod,
   fullscreen,
   truncate_filters,

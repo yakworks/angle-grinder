@@ -4,7 +4,6 @@ import Swal from 'sweetalert2'
 
 /* @ngInject */
 export default class SweetAlertCtrl {
-
   constructor() {
     this.swalInstance = Swal.mixin({
       showClass: {
@@ -14,15 +13,15 @@ export default class SweetAlertCtrl {
     })
   }
 
-  fire(opts){
+  fire(opts) {
     return this.swalInstance.fire(opts)
   }
 
   fireTitleText() {
     this.fire({
-      title: "Big Title",
+      title: 'Big Title',
       text: "It's a pretty message, isn't it?",
-      confirmButtonColor: "#007AFF",
+      confirmButtonColor: '#007AFF',
       showClass: {
         popup: 'animated fadeIn'
       }
@@ -34,15 +33,15 @@ export default class SweetAlertCtrl {
       title: 'Are you sure?',
       text: "You won't be able to revert this!",
       icon: 'warning',
-      showCancelButton: true,
-      //confirmButtonColor: '#3085d6',
-      //cancelButtonColor: '#d33',
-      //confirmButtonText: 'Yes, delete it!'
+      showCancelButton: true
+      // confirmButtonColor: '#3085d6',
+      // cancelButtonColor: '#d33',
+      // confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
       if (result.value) {
         this.fire({
           title: 'Deleted!',
-          text:'Your file has been deleted.',
+          text: 'Your file has been deleted.',
           icon: 'success'
         })
       }

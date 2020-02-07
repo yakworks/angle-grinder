@@ -6,10 +6,9 @@ const app = angular.module('app')
 /**
  * Config for the router
  */
-app.config(function ($stateProvider, $urlRouterProvider, stateHelperProvider) {
-
-  //$urlRouterProvider.otherwise("/app/ui/elements");
-  $urlRouterProvider.otherwise("/app/dashboard");
+app.config(function($stateProvider, $urlRouterProvider, stateHelperProvider) {
+  // $urlRouterProvider.otherwise("/app/ui/elements");
+  $urlRouterProvider.otherwise('/app/dashboard')
 
   stateHelperProvider.state(appRoot)
 
@@ -21,11 +20,10 @@ app.config(function ($stateProvider, $urlRouterProvider, stateHelperProvider) {
   //     label: 'Panel'
   //   }
   // })
-
 })
 
-//Custom UI Bootstrap Calendar Popup Template
-app.run(function ($templateCache) {
-  //let url = './views/partials/sidebar.html'
-  $templateCache.put('route/app.forms.input-components.html', require("./forms/input-components/index.html"))
-});
+// Custom UI Bootstrap Calendar Popup Template
+app.run(function($templateCache) {
+  // let url = './views/partials/sidebar.html'
+  $templateCache.put('route/app.forms.input-components.html', require('./forms/input-components/index.html'))
+})
