@@ -22,7 +22,7 @@ import './directives/panel-tools.js'
 import './directives/char-limit.js'
 import './directives/dismiss.js'
 import './directives/compare-to.js'
-import './directives/select.js'
+//import './directives/select.js'
 import './directives/messages.js'
 // import "./directives/chat.js"
 import './directives/touchspin.js'
