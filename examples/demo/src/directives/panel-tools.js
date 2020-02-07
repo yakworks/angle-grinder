@@ -66,26 +66,26 @@ app.directive('panelRefresh', function() {
     restrict: 'A',
     controller: ['$scope', '$element',
       function($scope, $element) {
-		    var refreshEvent = 'panel-refresh'; var csspinnerClass = 'csspinner'; var defaultSpinner = 'load1'
+        var refreshEvent = 'panel-refresh'; var csspinnerClass = 'csspinner'; var defaultSpinner = 'load1'
 
-		    // method to clear the spinner when done
-		    function removeSpinner() {
-		        this.removeClass(csspinnerClass)
-		    }
+        // method to clear the spinner when done
+        function removeSpinner() {
+          this.removeClass(csspinnerClass)
+        }
 
-		    // catch clicks to toggle panel refresh
-		    $element.on('click', function() {
-		        var $this = $(this); var panel = $this.parents('.panel').eq(0); var spinner = $this.data('spinner') || defaultSpinner
+        // catch clicks to toggle panel refresh
+        $element.on('click', function() {
+          var $this = $(this); var panel = $this.parents('.panel').eq(0); var spinner = $this.data('spinner') || defaultSpinner
 
-		        // start showing the spinner
-		        panel.addClass(csspinnerClass + ' ' + spinner)
+          // start showing the spinner
+          panel.addClass(csspinnerClass + ' ' + spinner)
 
-		        // attach as public method
-		        panel.removeSpinner = removeSpinner
+          // attach as public method
+          panel.removeSpinner = removeSpinner
 
-		        // Trigger the event and send the panel object
-		        $this.trigger(refreshEvent, [panel])
-		    })
+          // Trigger the event and send the panel object
+          $this.trigger(refreshEvent, [panel])
+        })
       }]
 
   }
@@ -96,22 +96,22 @@ app.directive('panelDismiss', function() {
     restrict: 'A',
     controller: ['$scope', '$element',
       function($scope, $element) {
-		    var parent = $(this).closest('.panel')
-		    $element.on('click', function() {
-		        var parent = $(this).closest('.panel')
+        var parent = $(this).closest('.panel')
+        $element.on('click', function() {
+          var parent = $(this).closest('.panel')
 
-		        destroyPanel()
+          destroyPanel()
 
-		        function destroyPanel() {
-		            var col = parent.parent()
-		            parent.fadeOut(300, function() {
-		                $(this).remove()
-		                if (col.is('[class*="col-"]') && col.children('*').length === 0) {
-		                    col.remove()
-		                }
-		            })
-		        }
-		    })
+          function destroyPanel() {
+            var col = parent.parent()
+            parent.fadeOut(300, function() {
+              $(this).remove()
+              if (col.is('[class*="col-"]') && col.children('*').length === 0) {
+                col.remove()
+              }
+            })
+          }
+        })
       }]
 
   }

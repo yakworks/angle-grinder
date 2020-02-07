@@ -1,6 +1,6 @@
 import _ from 'lodash'
 
-function formatResult(item) { return item.id + " - " + item.name; }
+function formatResult(item) { return item.id + ' - ' + item.name }
 
 class FormCompCtrl {
   vm = {
@@ -8,9 +8,9 @@ class FormCompCtrl {
   }
 
   select2Data = [
-    {id: '1', name: 'Option A'},
-    {id: '2', name: 'Option B'},
-    {id: '3', name: 'Option C'}
+    { id: '1', name: 'Option A' },
+    { id: '2', name: 'Option B' },
+    { id: '3', name: 'Option C' }
   ]
 
   save(myForm) {
@@ -22,7 +22,7 @@ class FormCompCtrl {
   }
 
   validatePassword(e) {
-    let x = e
+    const x = e
   }
 }
 

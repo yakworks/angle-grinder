@@ -1,3 +1,4 @@
+/* eslint-disable no-undef, no-return-assign */
 import _ from 'lodash'
 
 export default class BaseCtrl {

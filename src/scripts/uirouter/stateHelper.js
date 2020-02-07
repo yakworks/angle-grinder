@@ -1,5 +1,5 @@
 import angular from 'angular'
-import ui_router from 'angular-ui-router'
+import uiRouter from 'angular-ui-router'
 import 'angular-breadcrumb' // 'ncy-angular-breadcrumb'
 import stringUtils from '../utils/stringUtils'
 // from https://github.com/marklagendijk/ui-router.stateHelper
@@ -8,7 +8,7 @@ const MOD_NAME = 'ui.router.stateHelper'
 export default MOD_NAME
 
 angular.module(MOD_NAME, [
-  ui_router,
+  uiRouter,
   'ncy-angular-breadcrumb'
 ])
   .provider('stateHelper', function($stateProvider) {
@@ -92,10 +92,6 @@ angular.module(MOD_NAME, [
         state._orgigName = state.name
         state.name = (angular.isObject(state._parent) ? state._parent.name : state._parent) + '.' + state.name
       }
-    }
-
-    function capitalizeFirstLetter(string) {
-      return string.charAt(0).toUpperCase() + string.slice(1)
     }
 
     function addSiblings(state) {

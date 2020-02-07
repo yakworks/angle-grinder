@@ -4,8 +4,6 @@ import _ from 'lodash'
  * String parsing helpers
  */
 export class StringUtils {
-  constructor() {}
-
   /**
    * returns capital words from string
    * @param {*} inString

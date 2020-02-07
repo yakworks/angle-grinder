@@ -8,16 +8,16 @@ var forms = angular.module(formsModule)
 //   <ag-delete-button when-confirmed="delete(record)"></ag-delete-button>
 //
 //   `when-confirmed` function to call when the action was confirmed
-forms.directive("agDeleteButton", () => ({
-  restrict: "E",
+forms.directive('agDeleteButton', () => ({
+  restrict: 'E',
   replace: true,
 
   scope: {
-    whenConfirmed: "&"
+    whenConfirmed: '&'
   },
 
   controller: [
-    "$scope", function($scope) {
+    '$scope', function($scope) {
       $scope.confirmation = false
 
       $scope.showConfirmation = () => $scope.confirmation = true

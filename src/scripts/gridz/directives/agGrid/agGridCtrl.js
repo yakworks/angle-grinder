@@ -10,32 +10,31 @@ const gridz = angular.module(gridzModule)
 // with `ag-grid-name` directive, for example:
 // `<div ag-grid="gridOptions" ag-grid-name="usersGrid"></div>`
 var AgGridCtrl = (function() {
-  let highlightClass = undefined
+  let highlightClass
   AgGridCtrl = class AgGridCtrl extends BaseCtrl {
     static initClass() {
-
-      this.register(gridz, "AgGridCtrl")
-      this.inject("$rootScope", "$element", "$attrs", "$q", "hasSearchFilters", "FlattenServ", "xlsData", "csvData")
+      this.register(gridz, 'AgGridCtrl')
+      this.inject('$rootScope', '$element', '$attrs', '$q', 'hasSearchFilters', 'FlattenServ', 'xlsData', 'csvData')
 
       highlightClass = 'ui-state-highlight'
     }
 
     getGridEl() {
-      return this.gridEl || (this.gridEl = this.$element.find("table.gridz"))
+      return this.gridEl || (this.gridEl = this.$element.find('table.gridz'))
     }
 
     getGridId() {
-      return this.getGridEl().attr("id")
+      return this.getGridEl().attr('id')
     }
 
     // Gives the currently selected rows when multiselect is set to true.
     // This is a one-dimensional array and the values in the array correspond
     // to the selected id's in the grid.
     getSelectedRowIds() {
-      return this.getParam("selarrrow")
+      return this.getParam('selarrrow')
     }
 
-    //Gives selected row objects, [{id:1..}, {id:2..}]
+    // Gives selected row objects, [{id:1..}, {id:2..}]
     getSelectedRows() {
       const getRowData = _.bind(this.getRowData, this)
       const ids = this.getSelectedRowIds()
@@ -54,7 +53,7 @@ var AgGridCtrl = (function() {
       return this.getGridEl().getRowData(rowId)
     }
 
-    //Return all rows
+    // Return all rows
     getAllRows() {
       return this.getGridEl().getRowData()
     }
@@ -66,20 +65,20 @@ var AgGridCtrl = (function() {
       this.getGridEl().get(0).addJSONData(data)
 
       // broadcasts the AngularJS event
-      return this.$rootScope.$broadcast("gridz:loadComplete", data)
+      return this.$rootScope.$broadcast('gridz:loadComplete', data)
     }
 
     // Reloads the grid with the current settings
-    reload(options){
+    reload(options) {
       if (options == null) { options = [] }
       const deferred = this.$q.defer()
 
-      var unregister = this.$rootScope.$on("gridz:loadComplete", function(_, data) {
+      var unregister = this.$rootScope.$on('gridz:loadComplete', function(_, data) {
         deferred.resolve(data)
         return unregister()
       })
 
-      this.getGridEl().trigger("reloadGrid", options)
+      this.getGridEl().trigger('reloadGrid', options)
 
       return deferred.promise
     }
@@ -113,13 +112,13 @@ var AgGridCtrl = (function() {
 
         // set empty values
         if (emptyMissingCells) {
-          for (let key of Array.from(diff)) { flatData[key] = null }
+          for (const key of Array.from(diff)) { flatData[key] = null }
         }
       }
 
       this.getGridEl().setRowData(id, flatData)
       this.flashOnSuccess(id)
-      return this.$rootScope.$broadcast("gridz:rowUpdated", this.$attrs.agGrid, id, data)
+      return this.$rootScope.$broadcast('gridz:rowUpdated', this.$attrs.agGrid, id, data)
     }
 
     // Inserts a new row with id = rowid containing the data in data (an object) at
@@ -127,9 +126,9 @@ var AgGridCtrl = (function() {
     // The syntax of the data object is: {name1:value1,name2: value2...}
     // where name is the name of the column as described in the colModel and the value is the value.
     addRow(id, data, position) {
-      if (position == null) { position = "first" }
+      if (position == null) { position = 'first' }
       this.getGridEl().addRowData(id, this.FlattenServ(data), position)
-      this.$rootScope.$broadcast("gridz:rowAdded", this.$attrs.agGrid, id, data)
+      this.$rootScope.$broadcast('gridz:rowAdded', this.$attrs.agGrid, id, data)
       return this.flashOnSuccess(id)
     }
 
@@ -146,17 +145,17 @@ var AgGridCtrl = (function() {
 
     // Returns the current page
     getCurrentPage() {
-      return this.getParam("page")
+      return this.getParam('page')
     }
 
     // Returns the total number of records
     getTotalRecords() {
-      return this.getParam("records")
+      return this.getParam('records')
     }
 
     // Returns the number of rows per page
     getPageSize() {
-      return this.getParam("rowNum")
+      return this.getParam('rowNum')
     }
 
     // Returns the total number of pages
@@ -200,7 +199,7 @@ var AgGridCtrl = (function() {
 
     // Load the specific page
     loadPage(page) {
-      this.setParam({page})
+      this.setParam({ page })
       return this.reload()
     }
 
@@ -225,8 +224,7 @@ var AgGridCtrl = (function() {
       const params = {
         page: 1,
         search: this.hasSearchFilters(filters),
-        postData: { filters: JSON.stringify(filters)
-      }
+        postData: { filters: JSON.stringify(filters) }
       }
 
       this.setParam(params)
@@ -239,13 +237,13 @@ var AgGridCtrl = (function() {
 
     // Returns `true` if a columnt with the given id is hidden
     isColumnHidden(columnId) {
-      const column = _.find(this.getParam("colModel"), {name: columnId})
+      const column = _.find(this.getParam('colModel'), { name: columnId })
       return column?.hidden
     }
 
     // Toggle visibility of a column with the given id
     toggleColumn(columnId) {
-      const showOrHide = this.isColumnHidden(columnId) ? "showCol" : "hideCol"
+      const showOrHide = this.isColumnHidden(columnId) ? 'showCol' : 'hideCol'
       this.getGridEl().jqGrid(showOrHide, columnId)
       return this._triggerResize()
     }
@@ -258,16 +256,16 @@ var AgGridCtrl = (function() {
       if (options == null) { options = {} }
       options.done = perm => {
         // call `remapColumns` method in order to reorder the columns
-        if (perm) { this.getGridEl().jqGrid("remapColumns", perm, true) }
+        if (perm) { this.getGridEl().jqGrid('remapColumns', perm, true) }
 
         // TODO wrap it into service
         // Store chosen column in the local storage
-        const chosenColumns = _.map(this._getColModel(), column => _.pick(column, "name", "hidden"))
+        const chosenColumns = _.map(this._getColModel(), column => _.pick(column, 'name', 'hidden'))
 
         return window.localStorage.setItem(`gridz.${this.getGridId()}.chosenColumns`, angular.toJson(chosenColumns))
       }
 
-      return this.getGridEl().jqGrid("columnChooser", options)
+      return this.getGridEl().jqGrid('columnChooser', options)
     }
 
     // Returns data uri with xls file content for rows from the current grid view.
@@ -284,30 +282,30 @@ var AgGridCtrl = (function() {
     // TODO fix grid resizing issues
     // TODO resize after column chooser dialog
     _triggerResize() {
-      return this.getGridEl().trigger("resize")
+      return this.getGridEl().trigger('resize')
     }
 
     // Flash the given row
     flashOnSuccess(id, complete) {
       if (complete == null) { complete = angular.noop }
-      return this._flashRow(id, "#DFF0D8", complete)
+      return this._flashRow(id, '#DFF0D8', complete)
     }
 
     // Flash the row with red background
     flashOnError(id, complete) {
       if (complete == null) { complete = angular.noop }
-      return this._flashRow(id, "#FF0000", complete)
+      return this._flashRow(id, '#FF0000', complete)
     }
 
     _flashRow(id, color, complete) {
-      if (color == null) { color = "#DFF0D8" }
+      if (color == null) { color = '#DFF0D8' }
       if (complete == null) { complete = angular.noop }
       const rowEl = $(this.getGridEl()[0].rows.namedItem(id))
 
-      rowEl.css("background-color", color)
-      rowEl.delay(250).fadeOut("medium", () => rowEl.css("background-color", ""))
+      rowEl.css('background-color', color)
+      rowEl.delay(250).fadeOut('medium', () => rowEl.css('background-color', ''))
 
-      return rowEl.fadeIn("fast", () => complete())
+      return rowEl.fadeIn('fast', () => complete())
     }
 
     addClass(id, clazz, animation) {
@@ -316,8 +314,8 @@ var AgGridCtrl = (function() {
 
       if (!rowEl.hasClass(clazz)) {
         if (animation) {
-          rowEl.delay(250).fadeOut("medium", () => rowEl.addClass(clazz))
-          return rowEl.fadeIn("fast", () => angular.noop())
+          rowEl.delay(250).fadeOut('medium', () => rowEl.addClass(clazz))
+          return rowEl.fadeIn('fast', () => angular.noop())
         } else {
           return rowEl.addClass(clazz)
         }
@@ -330,8 +328,8 @@ var AgGridCtrl = (function() {
 
       if (rowEl.hasClass(clazz)) {
         if (animation) {
-          rowEl.delay(250).fadeOut("medium", () => rowEl.removeClass(clazz))
-          return rowEl.fadeIn("fast", () => angular.noop())
+          rowEl.delay(250).fadeOut('medium', () => rowEl.removeClass(clazz))
+          return rowEl.fadeIn('fast', () => angular.noop())
         } else {
           return rowEl.removeClass(clazz)
         }
@@ -354,7 +352,7 @@ var AgGridCtrl = (function() {
 
     addAdditionalFooter(data) {
       const footerRow = this.$element.find('tr.footrow')
-      let newFooterRow = undefined
+      let newFooterRow
       newFooterRow = this.$element.find('tr.myfootrow')
       if (newFooterRow.length === 0) {
         // add second row of the footer if it's not exist
@@ -365,9 +363,9 @@ var AgGridCtrl = (function() {
       // calculate the value for the second footer row
       return (() => {
         const result = []
-        for (let k in data) {
+        for (const k in data) {
           const v = data[k]
-          const td = newFooterRow.find("[aria-describedby=\"arTranGrid_" + k + '"' + ']')
+          const td = newFooterRow.find('[aria-describedby="arTranGrid_' + k + '"' + ']')
           if (td.length > 0) {
             if (!isNaN(v)) {
               result.push(td[0].innerHTML = `<div class='pull-right currency-content'>${v}</div>`)

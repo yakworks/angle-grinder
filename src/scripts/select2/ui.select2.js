@@ -45,7 +45,7 @@ angular.module('ui.select2', [])
         }
 
         const log = function(msg, val) {
-          console.log(`[${elname}] - ${msg}`, val)
+          // console.log(`[${elname}] - ${msg}`, val)
         }
 
         return {
@@ -55,31 +55,31 @@ angular.module('ui.select2', [])
 
             // if modelType is object then will use the elm.select2('data') and will store the selected
             // object(s) in the ng-model as objects instead of as just the ids
-            let useDataObject = false
+            // let useDataObject = false
             let dataVar = 'val'
 
             // uses elm.select2('val') when its a select and we want the id in the model not the object.
             // when its on and input and its set to multiple then we will use 'data' so it creates and array of obbjecgs for
             // selection and not array of ids
-            if (opts.useDataObject == undefined && !isSelect && isMultiple) {
+            if (opts.useDataObject === undefined && !isSelect && isMultiple) {
               opts.useDataObject = true
             }
             if (opts.useDataObject) {
-              useDataObject = true
+              // useDataObject = true
               dataVar = 'data'
             }
             log(`isSelect: ${isSelect} , isMultiple: ${isMultiple}, dataVar: ${dataVar}`)
 
             /* Convert from Select2 view-model to Angular view-model. */
-            var convertToAngularModel = function(select2_data) {
+            var convertToAngularModel = function(selData) {
               var model
               if (opts.simple_tags) {
                 model = []
-                angular.forEach(select2_data, function(value, index) {
+                angular.forEach(selData, function(value, index) {
                   model.push(value.id)
                 })
               } else {
-                model = select2_data
+                model = selData
               }
               return model
             }
@@ -112,12 +112,12 @@ angular.module('ui.select2', [])
                 scope.$watch(watch, function(newVal, oldVal, scope) {
                   // Delayed so that the options have time to be rendered
                   $timeout(function() {
-                    // console.log("$timeout elm.select2('val', controller.$viewValue)", controller.$viewValue)
-                    elm.select2(dataVar, controller.$viewValue)
+                    // console.log("$timeout elm.select2('val', ngModelCtrl.$viewValue)", ngModelCtrl.$viewValue)
+                    elm.select2(dataVar, ngModelCtrl.$viewValue)
                     // Refresh angular to remove the superfluous option
                     renFunc()
-                    if (newVal && !oldVal && controller.$setPristine) {
-                      controller.$setPristine(true)
+                    if (newVal && !oldVal && ngModelCtrl.$setPristine) {
+                      ngModelCtrl.$setPristine(true)
                     }
                   })
                 })

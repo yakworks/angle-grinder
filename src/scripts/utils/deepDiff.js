@@ -23,7 +23,8 @@ export function deepDiff(oldVal, newVal, allowed, reqFields) {
       if ((!_.isNil(oldVal) && _.isEqual(v, oldVal[k])) || (k === '$cachedData')) {
         return
       }
-      return diff[k] = _.isObject(v) ? diffRecursive(oldVal[k], v) : newVal[k]
+      diff[k] = _.isObject(v) ? diffRecursive(oldVal[k], v) : newVal[k]
+      return diff[k]
     })
     return diff
   }
@@ -34,7 +35,7 @@ export function deepDiff(oldVal, newVal, allowed, reqFields) {
 }
 
 export function deepPick(obj, ...keys) {
-  const result = new Object()
+  const result = {}
 
   for (const path of Array.from(keys)) {
     const value = getDeep(obj, path)
@@ -68,5 +69,6 @@ export function setDeep(obj, path, value) {
     obj = (obj[key] = (_.isObject(obj[key]) ? obj[key] : {}))
   }
 
-  return obj[keys[i]] = value
+  obj[keys[i]] = value
+  return value
 }

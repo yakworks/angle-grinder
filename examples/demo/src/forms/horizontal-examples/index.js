@@ -1,15 +1,16 @@
 import _ from 'lodash'
 
-console.log("***WTF")
+console.log('***WTF')
 
-function formatResult(item) { return item.id + " - " + item.name; }
+function formatResult(item) { return item.id + ' - ' + item.name }
 
 class FormCtrl {
   normalSelectOptions = [
-    {id: 1, name: 'Option A'},
-    {id: 2, name: 'Option B'},
-    {id: 3, name: 'Option C'}
+    { id: 1, name: 'Option A' },
+    { id: 2, name: 'Option B' },
+    { id: 3, name: 'Option C' }
   ]
+
   uiSelect2Opts = {
     isSelect: true,
     allowClear: true,
@@ -17,17 +18,18 @@ class FormCtrl {
     data: {
       results: this.normalSelectOptions,
       text: 'name'
-    },
-    //formatSelection: formatResult,
-    //formatResult: formatResult
+    }
+    // formatSelection: formatResult,
+    // formatResult: formatResult
   }
+
   uiSelect2MultiOpts = {
     data: {
       results: this.normalSelectOptions,
       text: 'name'
-    },
-    //formatSelection: formatResult,
-    //formatResult: formatResult
+    }
+    // formatSelection: formatResult,
+    // formatResult: formatResult
   }
 
   vm = {
@@ -35,12 +37,12 @@ class FormCtrl {
     sel2: {
       id: 1
     },
-    selectMutiple: [ 0, 1],
-    sel2MultiInput: [{'id': '1', 'name': 'Option A'}]
+    selectMutiple: [0, 1],
+    sel2MultiInput: [{ id: '1', name: 'Option A' }]
   }
 
-  constructor (){
-    //vm = this
+  constructor() {
+    // vm = this
     // let model = {
     //   name: 'jim',
     //   switch: true

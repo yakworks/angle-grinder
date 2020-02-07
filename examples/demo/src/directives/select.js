@@ -16,9 +16,6 @@ app.factory('SelectFx', ['$http',
       return (el !== false)
     };
 
-    /**
-	 * extend obj function
-	 */
     function extend(a, b) {
       for (var key in b) {
         if (b.hasOwnProperty(key)) {
@@ -28,9 +25,6 @@ app.factory('SelectFx', ['$http',
       return a
     }
 
-    /**
-	 * SelectFx function
-	 */
     function SelectFx(el, options) {
       this.el = el[0]
       this.options = extend({}, this.options)
@@ -97,9 +91,6 @@ app.factory('SelectFx', ['$http',
       window.classie = classie
     }
 
-    /**
-	 * SelectFx options
-	 */
     SelectFx.prototype.options = {
       // if true all the links will open in a new tab.
       // if we want to be redirected when we click an option, we need to define a data-link attr on the option of the native select element
@@ -113,9 +104,9 @@ app.factory('SelectFx', ['$http',
     }
 
     /**
-	 * init function
-	 * initialize and cache some vars
-	 */
+     *init function
+     *initialize and cache some vars
+     */
     SelectFx.prototype._init = function() {
       var selectDisabled = false
       var createSelect = true
@@ -215,9 +206,7 @@ app.factory('SelectFx', ['$http',
         this.selEl.appendChild(this.el)
       }
     }
-    /**
-	 * initialize the events
-	 */
+
     SelectFx.prototype._initEvents = function(a) {
       var self = this
       if (a) {
@@ -254,12 +243,12 @@ app.factory('SelectFx', ['$http',
             ev.preventDefault()
             self._navigateOpts('prev')
             break
-            // down key
+          // down key
           case 40:
             ev.preventDefault()
             self._navigateOpts('next')
             break
-            // space key
+          // space key
           case 32:
             ev.preventDefault()
             if (self._isOpen() && typeof self.preSelCurrent !== 'undefined' && self.preSelCurrent !== -1) {
@@ -267,7 +256,7 @@ app.factory('SelectFx', ['$http',
             }
             self._toggleSelect()
             break
-            // enter key
+          // enter key
           case 13:
             ev.preventDefault()
             if (self._isOpen() && typeof self.preSelCurrent !== 'undefined' && self.preSelCurrent !== -1) {
@@ -275,7 +264,7 @@ app.factory('SelectFx', ['$http',
               self._toggleSelect()
             }
             break
-            // esc key
+          // esc key
           case 27:
             ev.preventDefault()
             if (self._isOpen()) {
@@ -285,9 +274,7 @@ app.factory('SelectFx', ['$http',
         }
       })
     }
-    /**
-	 * navigate with up/dpwn keys
-	 */
+
     SelectFx.prototype._navigateOpts = function(dir) {
       if (!this._isOpen()) {
         this._toggleSelect()
@@ -305,9 +292,9 @@ app.factory('SelectFx', ['$http',
       }
     }
     /**
-	 * open/close select
-	 * when opened show the default placeholder if any
-	 */
+     * open/close select
+     * when opened show the default placeholder if any
+     */
     SelectFx.prototype._toggleSelect = function() {
       // remove focus class if any..
       this._removeFocus()
@@ -327,14 +314,14 @@ app.factory('SelectFx', ['$http',
       }
     }
     /**
-	 * detect if .cs-options wrapper is active for each select
-	 */
+     * detect if .cs-options wrapper is active for each select
+     */
     SelectFx.prototype._styleExist = function(e) {
       return (' ' + e.className + ' ').indexOf(' cs-options ') > -1
     }
     /**
-	 * change option - the new value is set
-	 */
+     * change option - the new value is set
+     */
     SelectFx.prototype._changeOption = function() {
       // if pre selected current (if we navigate with the keyboard)...
       if (typeof this.preSelCurrent !== 'undefined' && this.preSelCurrent !== -1) {
@@ -374,14 +361,14 @@ app.factory('SelectFx', ['$http',
       this.options.onChange(this.el.value)
     }
     /**
-	 * returns true if select element is opened
-	 */
+     * returns true if select element is opened
+     */
     SelectFx.prototype._isOpen = function(opt) {
       return classie.has(this.selEl, 'cs-active')
     }
     /**
-	 * removes the focus class from the option
-	 */
+     * removes the focus class from the option
+     */
     SelectFx.prototype._removeFocus = function(opt) {
       var focusEl = this.selEl.querySelector('li.cs-focus')
       if (focusEl) {

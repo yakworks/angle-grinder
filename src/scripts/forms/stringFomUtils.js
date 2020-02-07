@@ -1,7 +1,8 @@
+/* eslint no-useless-escape: "off" */
 import _ from 'lodash'
 
 export class StringUtility {
-  constructor() {}
+  // constructor() {}
 
   parseWords(inString) {
     if (inString && inString.length > 1) {
@@ -34,15 +35,15 @@ export class StringUtility {
   // great post on password strength checking
   // http://stackoverflow.com/questions/948172/password-strength-meter
   /*
-	Password Text Range:
-	    >= 90: Very Secure
-	    >= 80: Secure
-	    >= 70: Very Strong
-	    >= 60: Strong
-	    >= 50: Average
-	    >= 25: Weak
-	    >= 0: Very Weak
-	*/
+  Password Text Range:
+  >= 90: Very Secure
+  >= 80: Secure
+  >= 70: Very Strong
+  >= 60: Strong
+  >= 50: Average
+  >= 25: Weak
+  >= 0: Very Weak
+  */
   checkPassword(password) {
     const UpperCase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
     const LowerCase = 'abcdefghijklmnopqrstuvwxyz'
