@@ -1,0 +1,28 @@
+<form name="customerForm" xt-form class="form-horizontal-fixed" novalidate>
+<fieldset>
+  <div class="form-group has-error">
+    <label class="control-label" for="name">Name</label>
+    <div class="controls">
+      <input name="name" id="basicUsername" type="text" placeholder="enter name" ng-model="$ctrl.vm.name"
+        class="form-control" required/>
+      <xt-validation-inline for="basicUsername"></xt-validation-inline>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label">Phone</label>
+    <div class="controls">
+      <input type="text" name="customerInfoPhone" placeholder="Main Phone" ng-model="$ctrl.vm.info.phone"
+        class="form-control"/>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label">Website</label>
+    <div class="controls">
+      <input type="text" name="customerInfoWebsite" placeholder="www.9ci.com"
+        ng-model="$ctrl.vm.info.website" class="form-control"/>
+    </div>
+  </div>
+</fieldset>
+</form>
+<h3>Model</h3>
+<pre ng-cloak>vm: {{$ctrl.vm | json}}</pre>

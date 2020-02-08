@@ -2,6 +2,7 @@ import angular from 'angular'
 import formsModule from '../formsModule'
 import _ from 'lodash'
 import { isFalsy, isEmpty } from '../../utils/isFalsy'
+import {isAttrTruthy} from '../../utils/ngHelpers'
 
 var forms = angular.module(formsModule)
 
@@ -127,82 +128,81 @@ forms.directive('agFieldGroup', ($timeout, $log, $interpolate) => ({
 })
 )
 
-forms.directive('agValidationErrors',
-  ['validationMessages', '$interpolate', (validationMessages, $interpolate) => ({
-    restrict: 'E',
-    require: '^form',
-    replace: true,
+forms.directive('agValidationErrors', (validationMessages, $interpolate) => ({
+  restrict: 'E',
+  require: '^form',
+  replace: true,
 
-    link(scope, element, attrs, formCtrl) {
-      const fieldName = $interpolate(attrs.for)(scope)
-      const field = formCtrl[fieldName]
+  link(scope, element, attrs, formCtrl) {
+    const fieldName = $interpolate(attrs.for)(scope)
+    console.log("fieldName", fieldName)
+    const field = formCtrl[fieldName]
+    console.log("field", field)
 
-      // Do cleanup
-      const clearErrors = () => element.html('')
+    // Do cleanup
+    const clearErrors = () => element.html('')
 
-      // Try to take an errors message from the attribute
-      // otherwise fallback to the default error message
-      const messageFor = error => attrs[error] || validationMessages[error]
+    // Try to take an errors message from the attribute
+    // otherwise fallback to the default error message
+    const messageFor = error => attrs[error] || validationMessages[error]
 
-      const appendError = function(message, klass) {
-        if (klass == null) { klass = '' }
-        return element.append(`\
-  <span class="help-inline ${klass}">${message}</span>\
-  `
-        )
-      }
-
-      const displayErrorMessages = function() {
-        clearErrors()
-
-        // Display client side errors
-        return (() => {
-          const result = []
-          for (const error in field.$error) {
-            const invalid = field.$error[error]
-            if (!invalid) { continue }
-
-            const message = messageFor(error)
-            if (!_.isNil(message)) { result.push(appendError(message)) } else {
-              result.push(undefined)
-            }
-          }
-          return result
-        })()
-      }
-
-      // Clear validation errors when the field is valid
-      let initial = true
-      const isValid = () => formCtrl[fieldName]?.$valid
-      scope.$watch(isValid, function() {
-        if (!initial) { displayErrorMessages() }
-        return initial = false
-      })
-
-      // Display validation errors while typing
-      const getViewValue = () => formCtrl[fieldName]?.$viewValue
-      scope.$watch(getViewValue, function() {
-        if (field.$dirty) { return displayErrorMessages() }
-      })
-
-      // Display validation errors when the form is submitted
-      const isSubmitted = () => formCtrl.$submitted
-      scope.$watch(isSubmitted, function(submitted) {
-        if (submitted) { return displayErrorMessages() }
-      })
-
-      // Display server side errors
-      const getServerErrors = () => formCtrl.$serverErrors?.[fieldName]
-      return scope.$watch(getServerErrors, function(serverError) {
-        if (!_.isNil(serverError)) {
-          return appendError(serverError, 'server-error')
-        } else {
-          return element.find('.server-error').remove()
-        }
-      })
+    const appendError = function(message, klass) {
+      if (klass == null) { klass = '' }
+      return element.append(`<span class="help-inline ${klass}">${message}</span>`
+      )
     }
-  })]
-)
+
+    const displayErrorMessages = function() {
+      clearErrors()
+
+      // Display client side errors
+      return (() => {
+        const result = []
+        for (const error in field.$error) {
+          const invalid = field.$error[error]
+          if (!invalid) { continue }
+
+          const message = messageFor(error)
+          if (!_.isNil(message)) { result.push(appendError(message)) } else {
+            result.push(undefined)
+          }
+        }
+        console.log("displayErrorMessages", result)
+        return result
+      })()
+    }
+
+    // Clear validation errors when the field is valid
+    let initial = true
+    const isValid = () => formCtrl[fieldName]?.$valid
+    scope.$watch(isValid, function() {
+      if (!initial) { displayErrorMessages() }
+      return initial = false
+    })
+
+    // Display validation errors while typing
+    const getViewValue = () => formCtrl[fieldName]?.$viewValue
+    scope.$watch(getViewValue, function() {
+      if (field.$dirty) { return displayErrorMessages() }
+    })
+
+    // Display validation errors when the form is submitted
+    const isSubmitted = () => formCtrl.$submitted
+    scope.$watch(isSubmitted, function(submitted) {
+      if (submitted) { return displayErrorMessages() }
+    })
+
+    // Display server side errors
+    const getServerErrors = () => formCtrl.$serverErrors?.[fieldName]
+    return scope.$watch(getServerErrors, function(serverError) {
+      if (!_.isNil(serverError)) {
+        return appendError(serverError, 'server-error')
+      } else {
+        return element.find('.server-error').remove()
+      }
+    })
+  }
+}))
 
 forms.directive('agServerValidationErrors', ['alerts', alerts => ({
   restrict: 'A',
@@ -291,16 +291,29 @@ forms.factory('serverValidationErrorsHandler', [
 ])
 
 // Automatically add asterisk to required fields.
-// const requiredDirective = [() => ({
-//   restrict: 'A',
-//   scope: false,
+const requiredDirective = [() => ({
+  restrict: 'A',
+  scope: false,
 
-//   link(scope, element) {
-//     // console.log element.closest("label")
-//     return element.closest('.form-group').find('.control-label').addClass('required')
-//   }
-// })
-// ]
+  link(scope, element) {
+    // console.log element.closest("label")
+    return element.closest('.form-group').find('.control-label').addClass('required')
+  }
+})
+]
 
 // forms.directive("required", requiredDirective)
-// forms.directive("ngRequired", requiredDirective)
+
+forms.directive("ngRequired", function() {
+ return {
+    restrict: 'A',
+    scope: false,
+
+    link($scope, element, $attrs) {
+      // console.log element.closest("label")
+      if (isAttrTruthy($scope, $attrs.ngRequired)){
+        element.closest('.form-group').find('.control-label').addClass('required')
+      }
+    }
+  }
+})

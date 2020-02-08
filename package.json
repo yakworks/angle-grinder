@@ -44,7 +44,7 @@
     "angular-xeditable": "^0.10.2",
     "animate.css": "^3.7.2",
     "blueimp-load-image": "~1.11.0",
-    "bootstrap": "3.3.7",
+    "bootstrap": "^4.4.1",
     "bootstrap-sass": "^3.4.1",
     "bulma": "^0.8.0",
     "core-js": "^3.6.2",

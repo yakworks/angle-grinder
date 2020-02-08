@@ -22,6 +22,10 @@ const formStates = {
       template: require('./forms/input-components/index.html')
     },
     {
+      name: 'xtform',
+      template: require('./forms/xtform/index.html')
+    },
+    {
       name: 'horizontal-examples',
       template: require('./forms/horizontal-examples/index.html')
     },

@@ -1,16 +1,17 @@
-import InputBase from '../input-base'
+import YBaseComponent from '../YBaseComponent'
 /* @ngInject */
-export default class YSelectCtrl extends InputBase {
-  optionsData
+export default class YSelectCtrl extends YBaseComponent {
+  items
 
-  // constructor($element, $timeout) {
-  //   super($element, $timeout)
-  // }
+  constructor($element, $timeout) {
+    super($element, $timeout)
+  }
+
   $onInit() {
     console.log('YSelectCtrl $onInit with this.$element', this.$element)
     super.onInit()
     super.validate()
-    this.ngOptions = 'value.id as value.name for value in cmpCtrl.optionsData'
+    this.ngOptions = 'value.id as value.name for value in cmpCtrl.items'
   }
 
   $postLink() {

@@ -1,20 +1,26 @@
 import stringUtils from '../stringFomUtils'
 import _ from 'lodash'
+/* @ngInject */
+export default class YBaseComponent {
 
-export default class InputBaseComponent {
-  label
-  ngModelCtrl
-  value
-  name
   id
+  label
+  name
+  ngModelCtrl
+  formCtrl
+  value
   validationError
   minimumLength
   maximumLength
   placeholder
   isRequired = false
-  helpMessage
+  hint
   type
   required
+  clearable
+  loading
+
+  errors
 
   constructor($element, $timeout) {
     this.$element = $element
@@ -22,26 +28,23 @@ export default class InputBaseComponent {
   }
 
   onInit() {
-    this.logDebugs()
-    // if required is added it wont be undefined and will have blank str if no value is set
-    if (this.required === '' || this.required === 'true') {
-      this.isRequired = true
-    }
-    this.type = this.type || 'text'
-    console.log('******** id **********', this.id)
     this.id = this.id || _.uniqueId(`${this.name}_`)
-    console.log('******** id **********', this.id)
+    this.logDebug(`[${this.id}] - pre onInit()`)
+    console.log(`[${this.id}] - formCtrl`, this.formCtrl)
+    this.type = this.type || 'text'
+
     if (this.name && !this.label) {
       this.label = stringUtils.parseWords(this.name)
     }
     this.placeholder = this.placeholder || this.label?.toLowerCase()
 
-    this.ngModelCtrl.$render = () => {
-      this.value = this.ngModelCtrl.$viewValue
-    }
-    console.log('******** ngModelCtrl **********', this.ngModelCtrl)
+    //console.log('******** ngModelCtrl **********', this.ngModelCtrl)
     if (!this.maximumLength) {
       this.maximumLength = 50
+    }
+    // if required is added it wont be undefined and may have blank str if no value is set
+    if (this.required === '' || this.required === 'true') {
+      this.isRequired = true
     }
     // if(this.minimumLength) {
     //  this.isRequired = true
@@ -49,11 +52,15 @@ export default class InputBaseComponent {
     // this.ngModelCtrl.$viewChangeListeners.push(function() {
     //   console.log("******** viewChangeListeners **********")
     // });
+    this.ngModelCtrl.$render = () => {
+      this.value = this.ngModelCtrl.$viewValue
+    }
+
   }
 
   onChange() {
-    console.log('******** onChange ********** this.value ', this.value)
-    console.log('******** onChange ********** this.ngModelCtrl ', this.ngModelCtrl)
+    //console.log('******** onChange ********** this.value ', this.value)
+    //console.log('******** onChange ********** this.ngModelCtrl ', this.ngModelCtrl)
     try {
       if (this.value && this.maximumLength && this.value.length > this.maximumLength) {
         this.value = this.value.substring(0, this.maximumLength)
@@ -65,31 +72,44 @@ export default class InputBaseComponent {
     this.ngModelCtrl.$setViewValue(this.value)
   }
 
+
+
   validate() {
-    if (this.isRequired && this.minimumLength) {
-      if (!this.value || this.value.length < this.minimumLength) {
-        this.validationError = `has a minium length of ${this.minimumLength}`
-        return false
-      }
-    }
+    // console.log("this.name", this.name)
+    // console.log("this.formCtrl", this.formCtrl)
+    // let field = this.formCtrl.name
+    // console.log("field", field)
+    //this.errors = this.formCtrl[this.name].$error
+
+    this.validationError = ''
+    let valid = true
+
     if (this.value) {
+      if (this.minimumLength && this.value.length < this.minimumLength) {
+        this.validationError = `has a minium length of ${this.minimumLength}`
+        valid = false
+      }
       if (this.maximumLength && this.value.length > this.maximumLength) {
         this.validationError = `has a maximum length of ${this.maximumLength}`
         // log this to your system as a security message
-        return false
+        valid = false
       }
       if (this.type === 'email' && !stringUtils.isEmailValid(this.value)) {
         this.validationError = ' has invalid email format'
-        return false
+        valid = false
       }
       if (this.type === 'url' && !stringUtils.isUrlValid(this.value)) {
         this.validationError = ' has invalid url format'
-        return false
+        valid = false
+      }
+    } else {
+      if (this.isRequired) {
+        this.validationError = ` is required`
+        valid = false
       }
     }
-
-    this.validationError = ''
-    return true
+    this.logDebug(`[${this.id}] - validate: ${valid}, validationError: ${this.validationError}`)
+    return valid
   }
 
   $postLink() {
@@ -100,7 +120,7 @@ export default class InputBaseComponent {
     })
   }
 
-  logDebugs() {
+  logDebug(prefix) {
     // just an area to log shit out to console to figure out whats going on
     // this.$attrs.class = "foo"
     // this.$element.addClass('foo')
@@ -112,6 +132,6 @@ export default class InputBaseComponent {
     // if(this.$attrs.required != undefined && this.$attrs.required !== 'false' ){
     //   console.log("******* Has Required Attribute ********")
     // }
-    console.log('InputBaseComponent', this)
+    console.log(prefix, this)
   }
 }

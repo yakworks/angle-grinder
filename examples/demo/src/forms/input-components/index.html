@@ -1,4 +1,4 @@
-<div class="breadcrumb-wrapper">
+<div class="breadcrumb-wrapper mb-2">
   <h4 class="mainTitle no-margin">{{currTitle}}</h4>
   <div ncy-breadcrumb class="pull-right"></div>
 </div>
@@ -7,18 +7,13 @@
   var dataSim = [{"id": 99, "name": "Foo"}, {"id": 100, "name": "Bar"}, {"id": 101, "name": "Baz"}];
 </script>
 
-<div class="container-fluid container-fullw">
-  <div class="row">
-    <div class="col-sm-6">
-      <div class="panel panel-white">
-        <div class="panel-body">
-          <form-input-comps></form-input-comps>
-        </div>
-        <!--/panel-body-->
-      </div>
-      <!--/panel-->
-    </div>
-    <!--/col-->
-  </div><!-- row -->
-</div>
+<div class="columns">
+  <div class="column is-one-third">
+    <form-input-comps></form-input-comps>
+    <form-select-comps></form-select-comps>
+  </div><!-- /column -->
+  <div class="column is-one-third">
+    <form-select-comps></form-select-comps>
+  </div><!-- /column -->
+</div><!-- /columns -->
 
