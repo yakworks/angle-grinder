@@ -1,13 +1,14 @@
-xtForm.directive('xtValidationSummary', function ($templateCache) {
+// FIXME WIP
+agForm.directive('agValidationSummary', function ($templateCache) {
   'use strict';
 
   return {
-    require: ['^xtForm', '^form'],
+    require: ['^agForm', '^form'],
     restrict: 'EA',
     replace: true,
     scope: true,
     template: function (element, attrs) {
-      return $templateCache.get(attrs.templateUrl || 'xtForm/summary/validationSummary.html');
+      return $templateCache.get(attrs.templateUrl || 'agForm/summary/validationSummary.html');
     },
     link: function (scope, element, attrs, ctrls) {
 
@@ -37,7 +38,7 @@ xtForm.directive('xtValidationSummary', function ($templateCache) {
         scope.showErrors = scope.errors.length > 0;
       }
 
-      scope.$on('XtForm.ErrorsUpdated', redrawErrors);
+      scope.$on('AgForm.ErrorsUpdated', redrawErrors);
     }
   };
 });

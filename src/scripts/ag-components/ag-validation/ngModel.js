@@ -1,19 +1,16 @@
 import angular from 'angular'
 import $log from '../../utils/Log'
 
-angular.module('xtForm').directive('ngModel', function (xtFormConfig, $rootScope, $interpolate, $document) {
+angular.module('agValidations').directive('ngModel', function (agValidationsConfig, $rootScope, $interpolate, $document) {
   'use strict';
 
-  var UNTOUCHED_CLASS = 'ng-untouched',
-    TOUCHED_CLASS = 'ng-touched';
-
   return {
-    require: ['ngModel', '^?xtForm', '^?form'],
+    require: ['ngModel', '^?agForm', '^?form'],
     link: function (scope, element, attrs, ctrls) {
 
-      var defaultErrors = xtFormConfig.getErrorMessages(),
+      var defaultErrors = agValidationsConfig.getErrorMessages(),
         ngModel = ctrls[0],
-        xtForm = ctrls[1],
+        agForm = ctrls[1],
         form = ctrls[2],
         validationStrategyFn;
 
@@ -21,7 +18,7 @@ angular.module('xtForm').directive('ngModel', function (xtFormConfig, $rootScope
        * Active the directive
        */
       function activate() {
-        validationStrategyFn = xtForm.getValidationStrategy();
+        validationStrategyFn = agForm.getValidationStrategy();
         ngModel.$untouched = true;
 
         // add extensions to ngModel
@@ -29,7 +26,7 @@ angular.module('xtForm').directive('ngModel', function (xtFormConfig, $rootScope
         angular.extend(ngModel, {
           $focused: false,
           $label: labelEl.length > 0 ? labelEl[0].innerText : '',
-          $xtErrors: []
+          $agErrors: []
         });
 
         // set errors on the ngModel when $error changes
@@ -37,7 +34,7 @@ angular.module('xtForm').directive('ngModel', function (xtFormConfig, $rootScope
           return ngModel.$error;
         }, updateErrors, true);
 
-        scope.$on('XtForm.ForceErrorUpdate', updateErrors);
+        scope.$on('AgForm.ForceErrorUpdate', updateErrors);
 
         element
           .on('focus', function () {
@@ -68,7 +65,7 @@ angular.module('xtForm').directive('ngModel', function (xtFormConfig, $rootScope
        * Sets the $xtErrors collection on validation change
        */
       function updateErrors() {
-        ngModel.$xtErrors = [];
+        ngModel.$agErrors = [];
 
         angular.forEach(ngModel.$error, function (value, key) {
           let shouldVal = validationStrategyFn(form, ngModel)
@@ -85,19 +82,19 @@ angular.module('xtForm').directive('ngModel', function (xtFormConfig, $rootScope
             // in priority over the required message if both fail.
             // TODO will likely need to introduce priorities of error messages
             if (key === 'required') {
-              ngModel.$xtErrors.push(error);
+              ngModel.$agErrors.push(error);
             } else {
-              ngModel.$xtErrors.unshift(error);
+              ngModel.$agErrors.unshift(error);
             }
           }
 
 
         });
 
-        $rootScope.$broadcast('XtForm.ErrorsUpdated', ngModel);
+        $rootScope.$broadcast('AgForm.ErrorsUpdated', ngModel);
       }
 
-      if (xtForm) {
+      if (agForm) {
         activate();
       }
     }

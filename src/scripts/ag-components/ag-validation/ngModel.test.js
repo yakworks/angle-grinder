@@ -3,9 +3,9 @@
 describe('ngModel directive', function () {
 
     var element, input, ngModel, $compile, $el,
-        $rootScope, xtFormCtrl,
+        $rootScope, agFormCtrl,
         templates = {
-            form: '<form xt-form>',
+            form: '<form ag-form>',
             unActivated: '<form><input ng-model="firstName"></form>',
             noLabel: '<input ng-model="firstName">',
             label: '<label for="test">Test</label><input id="test" ng-model="firstName">'
@@ -13,14 +13,14 @@ describe('ngModel directive', function () {
 
     function setup(template, validationStrategy) {
 
-        // First add xt-form so that we can mock out the controller methods
+        // First add ag-form so that we can mock out the controller methods
         $el = $(templates.form);
         $('body').append($el);
         element = $compile($el)($rootScope);
-        xtFormCtrl = element.controller('xtForm');
+        agFormCtrl = element.controller('agForm');
 
         // setup spy
-        var spy = spyOn(xtFormCtrl, 'getValidationStrategy');
+        var spy = spyOn(agFormCtrl, 'getValidationStrategy');
         if (validationStrategy) {
             spy.andCallFake(validationStrategy);
         }
@@ -33,7 +33,7 @@ describe('ngModel directive', function () {
         ngModel = input.controller('ngModel');
     }
 
-    beforeEach(module('xtForm'));
+    beforeEach(module('agValidations'));
     beforeEach(inject(function (_$rootScope_, _$compile_) {
         $rootScope = _$rootScope_;
         $compile = _$compile_;
@@ -49,18 +49,18 @@ describe('ngModel directive', function () {
 
         it('should initialize errors to be an empty object', function () {
             setup(templates.label);
-            expect(ngModel.$xtErrors).toEqual({});
+            expect(ngModel.$agErrors).toEqual({});
         });
 
-        it('should read the validation strategy from the XtFormController', function () {
+        it('should read the validation strategy from the AgFormController', function () {
             setup(templates.label);
-            expect(xtFormCtrl.getValidationStrategy).toHaveBeenCalled();
+            expect(agFormCtrl.getValidationStrategy).toHaveBeenCalled();
         });
 
-        it('should not activate the directive if the ng-model is not inside an xt-form', function () {
+        it('should not activate the directive if the ng-model is not inside an ag-form', function () {
             element = $compile(templates.unActivated)($rootScope);
             ngModel = element.find('input').controller('ngModel');
-            expect(ngModel.$xtErrors).toBeUndefined();
+            expect(ngModel.$agErrors).toBeUndefined();
         });
     });
 
@@ -70,7 +70,7 @@ describe('ngModel directive', function () {
             setup(templates.label);
         });
 
-        it('should update errors on XtForm.ForceErrorUpdate event', function () {
+        it('should update errors on AgForm.ForceErrorUpdate event', function () {
 
         });
 
@@ -82,7 +82,7 @@ describe('ngModel directive', function () {
 
         });
 
-        it('should broadcast XtForm.ErrorsUpdated event after update', function () {
+        it('should broadcast AgForm.ErrorsUpdated event after update', function () {
 
         });
 

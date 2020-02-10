@@ -1,6 +1,6 @@
 import angular from 'angular'
 
-angular.module('xtForm').provider('xtFormConfig', function () {
+angular.module('agValidations').provider('agValidationsConfig', function () {
   'use strict';
 
   var self = this

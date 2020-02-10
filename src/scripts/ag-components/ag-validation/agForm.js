@@ -1,37 +1,37 @@
 import angular from 'angular'
 
-angular.module('xtForm')
-  .directive('xtForm', function ($timeout) {
+angular.module('agValidations')
+  .directive('agForm', function ($timeout) {
     'use strict';
 
     return {
       require: '',
       priority: -1,
-      controller: 'XtFormController',
-      controllerAs: 'xtForm',
-      link: function (scope, element, attrs, xtForm) {
+      controller: 'AgFormController',
+      controllerAs: 'agForm',
+      link: function (scope, element, attrs, agForm) {
         element
           .on('submit', function () {
             scope.$apply(function () {
-              xtForm.submit();
+              agForm.submit();
             });
           })
           .on('reset', function () {
             $timeout(function () {
-              xtForm.reset();
+              agForm.reset();
             });
           });
       }
     };
   })
-  .controller('XtFormController', function ($scope, $element, $attrs, xtFormConfig, $window) {
+  .controller('AgFormController', function ($scope, $element, $attrs, agValidationsConfig, $window) {
     'use strict';
 
     var vm = this,
       form = $element.controller('form'),
       validationStrategy = $attrs.strategy ?
-        xtFormConfig.getValidationStrategy($attrs.strategy) :
-        xtFormConfig.getDefaultValidationStrategy();
+        agValidationsConfig.getValidationStrategy($attrs.strategy) :
+        agValidationsConfig.getDefaultValidationStrategy();
 
     //polyfill for setSubmitted pre 1.3
     function setSubmitted() {
@@ -71,7 +71,7 @@ angular.module('xtForm')
           });
         }
 
-        $scope.$broadcast('XtForm.ForceErrorUpdate', null, 'submit');
+        $scope.$broadcast('AgForm.ForceErrorUpdate', null, 'submit');
       },
 
       reset: function () {
@@ -79,7 +79,7 @@ angular.module('xtForm')
         vm.form.$setUntouched();
         setUnsubmitted();
 
-        $scope.$broadcast('XtForm.ForceErrorUpdate', null, 'reset');
+        $scope.$broadcast('AgForm.ForceErrorUpdate', null, 'reset');
       }
 
     });

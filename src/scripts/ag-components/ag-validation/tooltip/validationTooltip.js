@@ -1,12 +1,13 @@
-xtForm.directive('xtValidationTooltip', function () {
+// TODO WIP
+agForm.directive('agValidationTooltip', function () {
   'use strict';
 
   return {
-    require: ['^xtForm', '^ngModel'],
+    require: ['^agForm', '^ngModel'],
     restrict: 'EA',
     link: function (scope, element, attrs, ctrls) {
 
-      var xtForm = ctrls[0];
+      var agForm = ctrls[0];
       var ngModel = ctrls[1];
 
       var ngModelElement;
@@ -21,7 +22,7 @@ xtForm.directive('xtValidationTooltip', function () {
         setupTooltipElement();
 
         // Subscribe to "errors updated" event and redraw errors when changed
-        scope.$on('XtForm.ErrorsUpdated', function (message, model) {
+        scope.$on('AgForm.ErrorsUpdated', function (message, model) {
           if (model === null || model === ngModel) {
             redrawErrors();
           }
@@ -30,7 +31,7 @@ xtForm.directive('xtValidationTooltip', function () {
 
       function setupTooltipElement() {
 
-        element.addClass('xt-error-container');
+        element.addClass('ag-error-container');
 
         // default SELECT tooltip placement to top
         if (element[0].nodeName.toUpperCase() === 'SELECT' && !attrs.placement) {
@@ -42,7 +43,7 @@ xtForm.directive('xtValidationTooltip', function () {
           animation: false,
           html: true,
           placement: attrs.placement || 'bottom',
-          trigger: xtForm.tooltipTrigger || 'manual',
+          trigger: agForm.tooltipTrigger || 'manual',
           container: attrs.container || 'body'
         });
       }
@@ -50,12 +51,12 @@ xtForm.directive('xtValidationTooltip', function () {
       function setupNgModel() {
 
         // allow for a different tooltip container that is not on the ngModel element
-        var ngModelElementId = attrs['for'] || attrs.xtValidationTooltip;
+        var ngModelElementId = attrs['for'] || attrs.agValidationTooltip;
         ngModelElement = ngModelElementId ?
           angular.element(document.getElementById(ngModelElementId)) :
           element;
 
-        ngModelElement.addClass('xt-validation-tooltip');
+        ngModelElement.addClass('ag-validation-tooltip');
 
         if (!!ngModelElement.attr('required')) {
           ngModelElement.attr('aria-required', true);
@@ -93,7 +94,7 @@ xtForm.directive('xtValidationTooltip', function () {
       }
 
       if (!$ || !angular.isFunction($.fn.tooltip)) {
-        throw new Error('xtform requires a jquery tooltip plugin, like bootstrap.js');
+        throw new Error('agform requires a jquery tooltip plugin, like bootstrap.js');
       }
 
       activate();
