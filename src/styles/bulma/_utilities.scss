@@ -1,0 +1,31 @@
+@import "bulma-initial-variables";
+//@import "~bulma/sass/utilities/_all.sass";
+@import "~bulma/sass/utilities/initial-variables.sass";
+@import "~bulma/sass/utilities/functions.sass";
+// there is a problem with the bulma findDarkColor, doesn't alway darken so override.
+@function findDarkColor($color) {
+  @if type-of($color) == 'color' {
+    @return scale-color($danger, $lightness: -20%);
+  }
+  @return $text-strong;
+}
+
+@import "~bulma/sass/utilities/derived-variables.sass";
+
+@debug "***** $danger: #{$danger}"; //#540817
+$danger-darker30: scale-color($danger, $lightness: -30%);
+@debug "***** $danger-darker30: #{$danger-darker30}"; //#540817
+$danger-darker50: scale-color($danger, $lightness: -50%);
+@debug "***** $danger-darker50: #{$danger-darker50}"; //#540817
+@debug "***** $findDarkColor($danger): #{findDarkColor($danger)}"; //#ea2e54
+@debug "***** $danger-dark: #{$danger-dark}"; //#ea2e54
+@debug "***** $findDarkColor($danger-dark): #{findDarkColor($danger-dark)}"; //#ea2e54
+
+@import "~bulma/sass/utilities/animations.sass";
+@import "~bulma/sass/utilities/mixins.sass";
+@import "~bulma/sass/utilities/controls.sass";
+
+@import "~bulma/sass/grid/columns.sass";
+@import "~bulma/sass/components/card.sass";
+@import "~bulma/sass/form/shared.sass";
+@import "~bulma/sass/form/select.sass";

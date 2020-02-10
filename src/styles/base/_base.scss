@@ -12,11 +12,11 @@ html {
 }
 
 body {
-  color: $text-color;
+  color: $text;
   direction: ltr;
   overflow-x: hidden;
   height: 100%;
-  font-family: $font-family-base;
+  font-family: $family-primary;
   //font-size: 16px;
   font-size: $font-size-base;
   padding: 0;
@@ -68,13 +68,7 @@ a {
 
 h1,
 h2 {
-  font-family: $font-family-primary;
-}
-
-h3,
-h4,
-h5 {
-  font-family: $font-family-base;
+  font-family: $family-secondary;
 }
 
 h1,
@@ -94,7 +88,7 @@ h5 {
 }
 
 h5.over-title {
-  font-family: $font-family-secondary;
+  font-family: $family-secondary;
   font-size: $font-size-large;
 }
 

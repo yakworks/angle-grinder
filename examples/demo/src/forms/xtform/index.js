@@ -1,17 +1,8 @@
 import _ from 'lodash'
 
 class FormCtrl {
-
-  vm = {
-  }
-
+  vm = {}
   constructor() {
-    // vm = this
-    // let model = {
-    //   name: 'jim',
-    //   switch: true
-    // }
-    // _.merge(this,model)
   }
 }
 

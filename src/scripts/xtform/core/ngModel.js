@@ -1,4 +1,5 @@
 import angular from 'angular'
+import $log from '../../utils/Log'
 
 angular.module('xtForm').directive('ngModel', function (xtFormConfig, $rootScope, $interpolate, $document) {
   'use strict';
@@ -14,15 +15,12 @@ angular.module('xtForm').directive('ngModel', function (xtFormConfig, $rootScope
         ngModel = ctrls[0],
         xtForm = ctrls[1],
         form = ctrls[2],
-        setTouchedFn,
         validationStrategyFn;
 
       /**
        * Active the directive
        */
       function activate() {
-
-        setTouchedFn = ngModel.$setTouched;
         validationStrategyFn = xtForm.getValidationStrategy();
         ngModel.$untouched = true;
 
@@ -57,11 +55,12 @@ angular.module('xtForm').directive('ngModel', function (xtFormConfig, $rootScope
       }
 
       function getErrorMessageForKey(key) {
+        // allows to add a msg-{error key} to override whats in
         var attrKey = 'msg' + key[0].toUpperCase() + key.substring(1);
-
+        $log.debug("getErrorMessageForKey", {attrs, key, defaultErrorsKey: defaultErrors[key] })
         // use either the provided string as an interpolated attribute, or the default message
         return attrs[attrKey] ?
-          attrs[attrKey] :
+          $interpolate(attrs[attrKey])(attrs) :
           $interpolate(defaultErrors[key])(attrs);
       }
 
@@ -73,10 +72,9 @@ angular.module('xtForm').directive('ngModel', function (xtFormConfig, $rootScope
 
         angular.forEach(ngModel.$error, function (value, key) {
           let shouldVal = validationStrategyFn(form, ngModel)
-          console.log("shouldVal", shouldVal)
-          console.log("value", value)
+          //console.log(`shouldVal:${shouldVal} , value:${value}`)
           var showErrors = value && shouldVal;
-          console.log("showErrors", showErrors)
+
           if (showErrors) {
             var error = {
               key: key,

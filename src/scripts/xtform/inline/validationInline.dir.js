@@ -1,6 +1,6 @@
 import angular from 'angular'
 
-angular.module('xtForm').directive('xtValidationInline', function ($templateCache) {
+angular.module('xtForm').directive('xtValidationInline', function ($timeout) {
   'use strict';
 
   var _uniqueIdCounter = 0;
@@ -15,19 +15,26 @@ angular.module('xtForm').directive('xtValidationInline', function ($templateCach
     scope: true,
     replace: true,
     template: require('./validationInline.html'),
-    link: function (scope, element, attrs) {
-
+    scope: {
+      mctrl: '='
+    },
+    link: function (scope, element, attrs, ctrl) {
       var inputId = attrs['for'] || attrs.xtValidationInline;
       if (angular.isUndefined(inputId)) {
         throw new Error('The validation input id must be specified eg. for="id"');
       }
 
-      var inputEl = angular.element(document.getElementById(inputId));
-      if (inputEl.length === 0) {
-        throw new Error('Can not find input element for the validation directive');
-      }
+      var inputEl, ngModel
 
-      var ngModel = inputEl.controller('ngModel');
+      //run in new cycle to ensure that getElementById(inputId) will succeed as its not there when using components
+      $timeout(function() {
+        inputEl = angular.element(document.getElementById(inputId));
+        if (inputEl.length === 0) {
+          throw new Error('Can not find input element for the validation directive');
+        }
+        ngModel = inputEl.controller('ngModel');
+        activate();
+      })
 
       /**
        * Activates the directive
@@ -79,7 +86,7 @@ angular.module('xtForm').directive('xtValidationInline', function ($templateCach
         }
       }
 
-      activate();
+
     }
   };
 });

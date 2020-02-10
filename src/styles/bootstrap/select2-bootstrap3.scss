@@ -319,16 +319,16 @@
     @include border-right-radius(0 !important);
   }
   .input-group.input-group-sm.select2-bootstrap-prepend & {
-    border-bottom-right-radius: $border-radius-small !important;  
+    border-bottom-right-radius: $border-radius-small !important;
   }
   .input-group.input-group-lg.select2-bootstrap-prepend & {
-    border-bottom-right-radius: $border-radius-large !important;  
+    border-bottom-right-radius: $border-radius-large !important;
   }
   .input-group.input-group-sm.select2-bootstrap-append & {
-    border-bottom-left-radius: $border-radius-small !important;  
+    border-bottom-left-radius: $border-radius-small !important;
   }
   .input-group.input-group-lg.select2-bootstrap-append & {
-    border-bottom-left-radius: $border-radius-large !important;  
+    border-bottom-left-radius: $border-radius-large !important;
   }
 }
 

@@ -42,7 +42,7 @@ div.tab-pane {
 
 // fix alert error styling
 .alert-error {
-  color: #a94442;
+  color: $danger;
   background-color: #f2dede;
   border-color: #ebccd1;
 }
@@ -57,7 +57,7 @@ div.tab-pane {
 }
 
 ag-validation-errors .help-inline {
-  color: #a94442;
+  color: $danger;
 }
 
 legend {
@@ -164,7 +164,7 @@ legend {
 label.required:after {
     margin-left: 3px;
     content: "*";
-    color: red;
+    color: $danger;
 }
 
 
@@ -252,7 +252,7 @@ table.customer-select-result td:nth-child(1) {
 /*Tag Input directive styles end*/
 
 .check-mark-false {
-  color: red;
+  color: $danger;
   font-size: 16px;
 }
 

@@ -1,28 +1,46 @@
-<form name="customerForm" xt-form class="form-horizontal-fixed" novalidate>
+<form name="customerForm" xt-form class="form-horizontal-fixed" role="form" novalidate>
 <fieldset>
-  <div class="form-group has-error">
+  <div class="form-group">
     <label class="control-label" for="name">Name</label>
     <div class="controls">
-      <input name="name" id="basicUsername" type="text" placeholder="enter name" ng-model="$ctrl.vm.name"
-        class="form-control" required/>
-      <xt-validation-inline for="basicUsername"></xt-validation-inline>
+      <input name="name" id="name" type="text" placeholder="enter name, min length 3" ng-model="$ctrl.vm.name"
+        class="form-control" required ng-minlength="3" ag-focus>
+      <xt-validation-inline for="name"></xt-validation-inline>
     </div>
   </div>
   <div class="form-group">
-    <label class="control-label">Phone</label>
+    <label class="control-label" for="email_1">Email</label>
     <div class="controls">
-      <input type="text" name="customerInfoPhone" placeholder="Main Phone" ng-model="$ctrl.vm.info.phone"
-        class="form-control"/>
+      <input id="email_1" name="email" type="email" ng-model="$ctrl.vm.email" class="form-control"
+           placeholder="Must be valid email">
+      <xt-validation-inline for="email_1"></xt-validation-inline>
     </div>
   </div>
   <div class="form-group">
-    <label class="control-label">Website</label>
+      <label class="control-label" for="amount_1">Amount</label>
+      <div class="controls">
+        <input id="amount_1" name="amount" type="number" ng-model="$ctrl.vm.number" class="form-control"
+            placeholder="Must be between > 1 and <= 9 and max 2 decimal places" min="1" max="9"
+            ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" msg-pattern="precision can't be greater than 2 decimal places" >
+        <xt-validation-inline for="amount_1"></xt-validation-inline>
+      </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label" for="initeger_1">Integer</label>
     <div class="controls">
-      <input type="text" name="customerInfoWebsite" placeholder="www.9ci.com"
-        ng-model="$ctrl.vm.info.website" class="form-control"/>
+      <input id="initeger_1" name="int" type="number" ng-model="$ctrl.vm.int" class="form-control"
+          placeholder="enter integer > 0" min="1" integer>
+      <xt-validation-inline for="initeger_1"></xt-validation-inline>
     </div>
   </div>
 </fieldset>
+<div class="form-group">
+  <div class="controls">
+    <button ng-click="$ctrl.save(form)" class="btn btn-primary">Foo</button>
+    <button ng-click="$ctrl.save(form)" class="btn btn-primary">Bar</button>
+  </div>
+</div>
 </form>
-<h3>Model</h3>
-<pre ng-cloak>vm: {{$ctrl.vm | json}}</pre>
+<pre ng-cloak>model: {{$ctrl.vm | json}}</pre>
+<button ng-click="showSource = true" ng-show="!showSource" class="btn btn-primary">Show Source</button>
+<snippets ng-show="showSource" path="./xtform/" files="['xtform.comp.html', 'index.js']"></snippets>

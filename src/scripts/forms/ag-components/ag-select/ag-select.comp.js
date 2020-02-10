@@ -1,15 +1,15 @@
 import angular from 'angular'
-import YSelectCtrl from './YSelectCtrl'
+import AgSelectCtrl from './AgSelectCtrl'
 
-const MOD_NAME = 'forms.yselect'
+const MOD_NAME = 'forms.ag-select'
 export default MOD_NAME
 
 angular
   .module(MOD_NAME, [])
-  .component('ySelect', {
+  .component('agSelect', {
     transclude: true,
-    template: require('./y-select.comp.html'),
-    controller: YSelectCtrl,
+    template: require('./ag-select.comp.html'),
+    controller: AgSelectCtrl,
     controllerAs: 'cmpCtrl',
     require: {
       ngModelCtrl: 'ngModel'

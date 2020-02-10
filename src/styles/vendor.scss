@@ -1,5 +1,5 @@
-@import './vendor/bootstrap3';
-@import './vendor/bootstrap4';
+@import './bootstrap/bootstrap3';
+@import './bootstrap/bootstrap4';
 
 // font-awesome
 $fa-font-path: "~font-awesome/fonts";
@@ -7,4 +7,4 @@ $fa-font-path: "~font-awesome/fonts";
 
 // Select2
 @import '~Select2/select2.css';
-@import './vendor/select2-bootstrap3.scss';
+@import './bootstrap/select2-bootstrap3.scss';

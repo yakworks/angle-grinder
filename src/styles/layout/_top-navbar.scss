@@ -90,7 +90,7 @@ header.navbar {
       color: $grey;
 
       &:hover {
-        color: $darkGrey;
+        color: $grey-dark;
       }
     }
 
@@ -102,7 +102,7 @@ header.navbar {
       padding-bottom: 0;
 
       &:hover {
-        color: $darkGrey;
+        color: $grey-dark;
       }
     }
 
@@ -158,7 +158,7 @@ header.navbar {
       min-width: 50px;
 
       &:hover {
-        color: $darkGrey;
+        color: $grey-dark;
       }
     }
 
@@ -853,7 +853,7 @@ header.navbar {
                 margin-bottom: 5px;
                 padding: 10px;
                 border-bottom: none;
-                background-color: $lightGrey;
+                background-color: $grey-light;
                 text-align: left;
 
                 &.unread {
@@ -882,7 +882,7 @@ header.navbar {
                   display: block;
                   font-size: $font-size-extra-small;
                   line-height: normal;
-                  color: $darkGrey;
+                  color: $grey-dark;
                 }
 
                 .time {
@@ -891,7 +891,7 @@ header.navbar {
                   font-size: $font-size-extra-small;
                   font-style: italic;
                   font-weight: 600;
-                  color: $darkGrey;
+                  color: $grey-dark;
                 }
               }
             }

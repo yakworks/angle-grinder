@@ -51,7 +51,7 @@ label.form-switch {
     pointer-events: none;
 
     &:checked + i {
-      background-color: $success;
+      background-color: $primary;
 
       &::before {
         transform: translate3d(18px,2px,0) scale3d(0,0,0);
@@ -67,5 +67,23 @@ label.form-switch {
       //box-shadow: 0 0 0 2px rgba(40, 137, 167, 0.25);
     }
 
+  }
+
+  &.is-info [type=checkbox]:checked+i::before {
+    background: $info;
+    border-color: $info;
+  }
+
+  &.is-success [type=checkbox]:checked+i::before {
+    background: $success;
+    border-color: $success;
+  }
+  &.is-danger [type=checkbox]:checked+i::before {
+    background: $danger;
+    border-color: $danger;
+  }
+  &.is-warning [type=checkbox]:checked+i::before {
+    background: $warning;
+    border-color: $warning;
   }
 }

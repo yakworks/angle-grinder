@@ -1,6 +1,6 @@
-import YBaseComponent from '../YBaseComponent'
+import AgBaseComponent from '../AgBaseComponent'
 /* @ngInject */
-export default class YInputCtrl extends YBaseComponent {
+export default class AgInputCtrl extends AgBaseComponent {
   constructor($element, $timeout) {
     super($element, $timeout)
   }

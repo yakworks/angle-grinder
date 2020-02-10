@@ -1,13 +1,13 @@
 import angular from 'angular'
-import YInputCtrl from './YInputCtrl'
+import AgInputCtrl from './AgInputCtrl'
 
 export default angular
-  .module('forms.yinput', [])
-  .component('yInput', {
+  .module('forms.ag-input', [])
+  .component('agInput', {
     transclude: true,
-    template: require('./y-input.comp.html'),
+    template: require('./ag-input.comp.html'),
     // controller: ["$attrs", InputTextComponent],
-    controller: YInputCtrl,
+    controller: AgInputCtrl,
     controllerAs: 'cmpCtrl',
     require: {
       ngModelCtrl: 'ngModel',
