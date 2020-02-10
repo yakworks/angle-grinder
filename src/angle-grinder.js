@@ -5,6 +5,7 @@ import uiRouterStateHelper from './scripts/uirouter/stateHelper'
 import agCommon from './scripts/common'
 import agSelect2 from './scripts/select2'
 import forms from './scripts/forms'
+import agCompMod from './scripts/ag-components/ag-components.module'
 import gridz from './scripts/gridz'
 import alertsMod from './scripts/alerts'
 
@@ -15,6 +16,7 @@ var agmod = angular.module('angleGrinder', [
   agCommon,
   agPathWithContext,
   gridz,
+  agCompMod,
   forms,
   alertsMod
 ])

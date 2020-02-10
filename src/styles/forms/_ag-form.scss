@@ -1,0 +1,28 @@
+
+//Variables from bulma
+
+$danger-border: rgba($danger, 0.40);
+//$danger-border: $danger;
+//$danger-darker: rgba($danger, 0.50);
+
+.ng-invalid.ng-touched {
+  border-color: $danger-border;
+}
+
+input.ng-dirty.ng-invalid,
+select.ng-dirty.ng-invalid,
+textarea.ng-dirty.ng-invalid {
+  border-color: $danger-border;
+}
+
+.ng-submitted input.ng-invalid,
+.ng-submitted select.ng-invalid,
+.ng-submitted textarea.ng-invalid {
+  border-color: $danger-border;
+}
+
+.ag-validation-inline {
+  font-size: $font-size-small;
+  color: $danger-dark;
+  display: inline-block;
+}

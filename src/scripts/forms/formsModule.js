@@ -3,7 +3,6 @@ import agCommon from '../common'
 import agSelect2 from '../select2'
 import alerts from '../alerts'
 import agPathWithContext from '../pathWithContext'
-import inputCompMod from './input-components/input-components.module'
 import xeditable from 'angular-xeditable'
 // import _ from 'lodash'
 import uibModName from 'angular-ui-bootstrap'
@@ -11,7 +10,6 @@ import uibModName from 'angular-ui-bootstrap'
 const MOD_NAME = 'angleGrinder.forms'
 export default MOD_NAME
 var forms = angular.module(MOD_NAME, [
-  inputCompMod,
   uibModName,
   xeditable,
   agPathWithContext,

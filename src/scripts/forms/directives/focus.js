@@ -5,8 +5,11 @@ var forms = angular.module(formsModule)
 
 // Sets focus on the element with the given name
 // Works in conjunction with `agFocus` directive
-forms.factory('focus', ['$rootScope', '$timeout', ($rootScope, $timeout) => name => $timeout(() => $rootScope.$broadcast('focusOn', name))
-])
+forms.factory('focus', ($rootScope, $timeout) => {
+  return function(name) {
+    $timeout(() => $rootScope.$broadcast('focusOn', name))
+  }
+})
 
 // Sets the focus on the element
 // TODO change it to `focus-if`

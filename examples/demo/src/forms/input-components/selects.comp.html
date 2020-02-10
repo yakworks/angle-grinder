@@ -1,0 +1,26 @@
+<div class="card">
+  <div class="card-content">
+    <form name="form" class="form-horizontal-fixed" autocomplete="off" novalidate>
+      <legend>ag-select</legend>
+      <fieldset>
+        <ag-select name="normalSelect" ng-model="$ctrl.vm.normalSelect" items="$ctrl.selectOptionsData"></ag-select>
+        <ag-select name="normalSelectJson" ng-model="$ctrl.vm.normalSelectJson"
+        items='[{"id": 99, "name": "Foo"}, {"id": 100, "name": "Bar"}, {"id": 101, "name": "Baz"}]'>
+        </ag-select>
+        <!-- <ag-select2
+          ng-model="$ctrl.vm.select2"
+          select-ajax-url="/customer/pickList"
+          select-ajax-quiet-millis="250"
+          select-minimum-input-length="2">
+        </ag-select2> -->
+      </fieldset>
+      <div class="form-group">
+        <div class="controls">
+          <button ng-click="$ctrl.save(form)" class="btn btn-primary">Save</button>
+        </div>
+      </div>
+    </form>
+    <pre ng-cloak>form.$invalid: {{form.$invalid}}</pre>
+    <pre ng-cloak>model: {{$ctrl.vm | json}}</pre>
+  </div> <!-- /card-content -->
+</div> <!-- /card -->

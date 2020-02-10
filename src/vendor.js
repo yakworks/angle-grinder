@@ -13,9 +13,10 @@ window.$ = window.jQuery
 // require('angular-drag-and-drop-lists/angular-drag-and-drop-lists.js')
 // require('angular-ui-bootstrap')
 
-require('bootstrap/js/dropdown')
-require('bootstrap/js/tooltip') // required by popover
-require('bootstrap/js/popover') // required by clickover
+require('bootstrap-sass/assets/javascripts/bootstrap/dropdown')
+require('bootstrap-sass/assets/javascripts/bootstrap/tooltip') // required by popover
+require('bootstrap-sass/assets/javascripts/bootstrap/popover') // required by clickover
+
 require('../components/bootstrapx-clickover/bootstrapx-clickover')
 
 require('free-jqgrid/js/jquery.jqgrid.src')

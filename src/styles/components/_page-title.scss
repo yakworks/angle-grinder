@@ -73,7 +73,7 @@
   }
 
   .mainDescription {
-    font-family: $font-family-secondary;
+    font-family: $family-secondary;
     color: #777;
     display: block;
     font-size: 18px;
@@ -97,7 +97,7 @@
     right: 30px !important;
     top: 50% !important;
     width: auto !important;
-    font-family: $font-family-secondary;
+    font-family: $family-secondary;
 
     @media (max-width: $screen-xs-max) {
       left: 0 !important;

@@ -632,7 +632,7 @@ ul.sub-menu {
     border: none !important;
     border-radius: 0;
     box-shadow: none !important;
-    color: $text-color;
+    color: $grey-dark;
     display: block;
     transition: all 300ms ease-in 0s;
     width: 100%;
@@ -646,7 +646,7 @@ ul.sub-menu {
       transition: all 300ms ease-in 0s;
 
       + .search-button {
-        color: $darkGrey;
+        color: $grey-darker;
       }
     }
   }

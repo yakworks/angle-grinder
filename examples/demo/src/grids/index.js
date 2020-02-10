@@ -12,8 +12,8 @@ app.config(['agDateFilterProvider', provider => // set default date format
 
 app.config(['agCurrencyFilterProvider', function(provider) {
   // set default currency format
-  provider.setDefaultFormat('<%= amount %> <%= symbol %>')
-  return provider.setDefaultSymbol('GBP')
+  // provider.setDefaultFormat('<%= amount %> <%= symbol %>')
+  // return provider.setDefaultSymbol('GBP')
 }
 ])
 

@@ -1018,10 +1018,6 @@ h1.text-extra-large {
     color: $blue !important;
 }
 
-.text-pink {
-    color: $pink !important;
-}
-
 .text-purple {
     color: $purple !important;
 }
@@ -1099,12 +1095,12 @@ a.text-light:hover {
 }
 
 .bg-light-primary {
-    background: $lightPrimary !important;
+    background: $primary-light !important;
     color: $white;
 }
 
 .bg-dark-primary {
-    background: $darkPrimary !important;
+    background: $primary-dark!important;
     color: $white;
 }
 
@@ -1125,170 +1121,6 @@ a.text-light:hover {
 
 .bg-danger {
     background: $danger !important;
-    color: $white;
-}
-
-.bg-azure {
-    background: $azure !important;
-    color: $white;
-}
-
-.bg-light-azure {
-    background: $lightAzure !important;
-    color: $white;
-}
-
-.bg-dark-azure {
-    background: $darkAzure !important;
-    color: $white;
-}
-
-.bg-red {
-    background: $red !important;
-    color: $white;
-}
-
-.bg-light-red {
-    background: $lightRed !important;
-    color: $white;
-}
-
-.bg-dark-red {
-    background: $darkRed !important;
-    color: $white;
-}
-
-.bg-green {
-    background: $green !important;
-    color: $white;
-}
-
-.bg-light-green {
-    background: $lightGreen !important;
-    color: $white;
-}
-
-.bg-dark-green {
-    background: $darkGreen !important;
-    color: $white;
-}
-
-.bg-orange {
-    background: $orange !important;
-    color: $white;
-}
-
-.bg-light-orange {
-    background: $lightOrange !important;
-    color: $white;
-}
-
-.bg-dark-orange {
-    background: $darkOrange !important;
-    color: $white;
-}
-
-.bg-blue {
-    background: $blue !important;
-    color: $white;
-}
-
-.bg-light-blue {
-    background: $lightBlue !important;
-    color: $white;
-}
-
-.bg-dark-blue {
-    background: $darkBlue !important;
-    color: $white;
-}
-
-.bg-pink {
-    background: $pink !important;
-    color: $white;
-}
-
-.bg-light-pink {
-    background: $lightPink !important;
-    color: $white;
-}
-
-.bg-dark-pink {
-    background: $darkPink !important;
-    color: $white;
-}
-
-.bg-purple {
-    background: $purple !important;
-    color: $white;
-}
-
-.bg-light-purple {
-    background: $lightPurple !important;
-    color: $white;
-}
-
-.bg-dark-purple {
-    background: $darkPurple !important;
-    color: $white;
-}
-
-.bg-beige {
-    background: $beige !important;
-    color: $white;
-}
-
-.bg-light-beige {
-    background: $lightBeige !important;
-    color: $white;
-}
-
-.bg-dark-beige {
-    background: $darkBeige !important;
-    color: $white;
-}
-
-.bg-grey {
-    background: $grey !important;
-    color: $white;
-}
-
-.bg-light-grey {
-    background: $lightGrey !important;
-}
-
-.bg-dark-grey {
-    background: $darkGrey !important;
-    color: $white;
-}
-
-.bg-yellow {
-    background: $yellow !important;
-    color: $white;
-}
-
-.bg-light-yellow {
-    background: $lightYellow !important;
-    color: $white;
-}
-
-.bg-dark-yellow {
-    background: $darkYellow !important;
-    color: $white;
-}
-
-.bg-bricky {
-    background: $bricky !important;
-    color: $white;
-}
-
-.bg-light-bricky {
-    background: $lightBricky !important;
-    color: $white;
-}
-
-.bg-dark-bricky {
-    background: $darkBricky !important;
     color: $white;
 }
 

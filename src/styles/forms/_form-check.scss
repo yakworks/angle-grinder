@@ -38,8 +38,8 @@ label.form-check {
     }
 
     &:checked+i::before {
-      background: #337ab7;
-      border-color: #337ab7;
+      background: $primary;
+      border-color: $primary;
     }
 
     &:disabled+i::before {
@@ -66,6 +66,11 @@ label.form-check {
     &:checked+i::after {
       opacity: 1;
     }
+  }
+
+  &.is-info [type=checkbox]:checked+i::before {
+    background: $info;
+    border-color: $info;
   }
 
   &.is-success [type=checkbox]:checked+i::before {

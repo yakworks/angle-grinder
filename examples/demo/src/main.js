@@ -8,6 +8,10 @@ import './assets/plugins.scss'
 // VENDOR
 import '~/vendor'
 
+//logging turn on debug
+import $log from '~/scripts/utils/Log'
+$log.debugEnabled(true)
+
 import './app'
 // import "./app.module"
 // import "./config.constant"

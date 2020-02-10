@@ -3,11 +3,9 @@ import _ from 'lodash'
 function formatResult(item) { return item.id + ' - ' + item.name }
 
 class FormCompCtrl {
-  vm = {
+  vm = {}
 
-  }
-
-  select2Data = [
+  selectOptionsData = [
     { id: '1', name: 'Option A' },
     { id: '2', name: 'Option B' },
     { id: '3', name: 'Option C' }
@@ -30,4 +28,8 @@ angular.module('app')
   .component('formInputComps', {
     controller: FormCompCtrl,
     template: require('./inputs.comp.html')
+  })
+  .component('formSelectComps', {
+    controller: FormCompCtrl,
+    template: require('./selects.comp.html')
   })

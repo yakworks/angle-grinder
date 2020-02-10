@@ -156,7 +156,7 @@
     font-size: 21px;
 
     &:hover {
-      color: $darkGrey;
+      color: $grey-darker;
     }
   }
 
@@ -406,7 +406,7 @@
               font-size: $font-size-base;
               letter-spacing: 0.5px;
               font-weight: 600;
-              font-family: $font-family-secondary;
+              font-family: $family-secondary;
             }
 
             &.active {
