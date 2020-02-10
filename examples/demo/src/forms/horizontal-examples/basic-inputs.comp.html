@@ -1,0 +1,28 @@
+<fieldset>
+
+  <div ag-field-group for="name">
+    <label class="control-label">Name</label>
+    <div class="controls">
+      <input type="text" id="name_1" name="name" placeholder="Name" ng-model="$ctrl.vm.name" class="form-control" required>
+      <ag-validation-inline for="name_1"></ag-validation-inline>
+    </div>
+    </div>
+  </div>
+  <div ag-field-group for="customerInfoPhone">
+    <label class="control-label">Phone</label>
+    <div class="controls">
+      <input type="text" name="customerInfoPhone" placeholder="Main Phone" ng-model="$ctrl.vm.info.phone"
+        class="form-control"/>
+      <ag-validation-errors for="customerInfoPhone" />
+    </div>
+  </div>
+  <div ag-field-group for="customerInfoWebsite">
+    <label class="control-label">Website</label>
+    <div class="controls">
+      <input type="text" name="customerInfoWebsite" placeholder="www.9ci.com"
+        ng-model="$ctrl.vm.info.website" class="form-control"/>
+      <ag-validation-errors for="customerInfoWebsite" />
+    </div>
+  </div>
+</fieldset>
+<pre ng-cloak>model: {{$ctrl.vm | json}}</pre>

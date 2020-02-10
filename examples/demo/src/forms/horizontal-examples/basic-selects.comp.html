@@ -1,0 +1,75 @@
+<fieldset>
+  <div ag-field-group >
+    <label class="control-label">Select Normal</label>
+    <div class="controls">
+      <select id="sel" name="sel" ng-model="$ctrl.vm.sel" class="form-control">
+        <option value="0">Foo</option>
+        <option value="1">Bar</option>
+        <option value="2">Baz</option>
+      </select>
+      <ag-validation-errors for="sel" required="This field is required" />
+    </div>
+  </div>
+  <div ag-field-group >
+    <label class="control-label">Select2</label>
+    <div class="controls">
+      <select id="sel2" name="sel2" ng-model="$ctrl.vm.sel2.id"
+          ui-select2="{allowClear: true, placeholder: 'select a foo'}"
+          class="form-control" normalSelectOptions>
+        <option value=""></option>
+        <option value="0">Foo</option>
+        <option value="1">Bar</option>
+        <option value="2">Baz</option>
+      </select>
+      <ag-validation-errors for="sel2" required="This field is required" />
+    </div>
+  </div>
+  <div ag-field-group >
+    <label class="control-label">Select2 Multi</label>
+    <div class="controls">
+      <select name="selectMutiple" multiple="true" ng-model="$ctrl.vm.selectMutiple"
+          ui-select2="{closeOnSelect: false, maximumSelectionSize: 3 }"
+          class="form-control">
+        <option value=""></option>
+        <option value="0">Foo</option>
+        <option value="1">Bar</option>
+        <option value="2">Baz</option>
+      </select>
+    </div>
+  </div>
+  <div ag-field-group >
+    <label class="control-label">Select2 Multi-Input</label>
+    <div class="controls">
+      <input id="sel22" name="sel22" multiple ng-model="$ctrl.vm.sel2MultiInput"
+          ui-select2="$ctrl.uiSelect2MultiOpts"
+          class="form-control">
+      </input>
+      <ag-validation-errors for="sel22" required="This field is required" />
+    </div>
+  </div>
+  <div ag-field-group >
+    <label class="control-label">Select2 Input</label>
+    <div class="controls">
+      <input id="sel22" name="sel22" ng-model="$ctrl.vm.sel2Input"
+          ui-select2="$ctrl.uiSelect2Opts"
+          class="form-control">
+      </input>
+      <ag-validation-errors for="sel22" required="This field is required" />
+    </div>
+  </div>
+
+  <div ag-field-group>
+    <label class="control-label">Bulma Select</label>
+    <div class="controls">
+      <div class="select">
+        <select id="sel4" name="sel4" ng-model="$ctrl.vm.bulmaSel">
+          <option value=""></option>
+          <option value="0">Foo</option>
+          <option value="1">Bar</option>
+          <option value="2">a really long option</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</fieldset>
+<pre ng-cloak>model: {{$ctrl.vm | json}}</pre>

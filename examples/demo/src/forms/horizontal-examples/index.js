@@ -4,7 +4,7 @@ console.log('***WTF')
 
 function formatResult(item) { return item.id + ' - ' + item.name }
 
-class FormCtrl {
+class SelectsCtrl {
   normalSelectOptions = [
     { id: 1, name: 'Option A' },
     { id: 2, name: 'Option B' },
@@ -40,15 +40,6 @@ class FormCtrl {
     selectMutiple: [0, 1],
     sel2MultiInput: [{ id: '1', name: 'Option A' }]
   }
-
-  constructor() {
-    // vm = this
-    // let model = {
-    //   name: 'jim',
-    //   switch: true
-    // }
-    // _.merge(this,model)
-  }
 }
 
 angular.module('app')
@@ -57,7 +48,15 @@ angular.module('app')
   //   controllerAs: 'vm',
   //   template: require('./form-horizontal-boot.comp.html')
   // })
-  .component('formHorizontalFixed', {
-    controller: FormCtrl,
-    template: require('./horizontal-fixed.comp.html')
+  .component('basicInputsExample', {
+    //controller: FormCtrl,
+    template: require('./basic-inputs.comp.html')
+  })
+  .component('basicSelectsExample', {
+    controller: SelectsCtrl,
+    template: require('./basic-selects.comp.html')
+  })
+  .component('basicChecksExample', {
+    //controller: FormCtrl,
+    template: require('./basic-checks.comp.html')
   })
