@@ -4,6 +4,7 @@ import gorm.tools.Pager
 import gorm.tools.beans.BeanPathTools
 import gorm.tools.repository.errors.EntityValidationException
 import grails.converters.JSON
+import grails.plugin.gormtools.ErrorMessageService
 
 class OrgController extends BaseDomainController {
 
@@ -82,10 +83,11 @@ class OrgController extends BaseDomainController {
         try {
             def entity = params.id ? repo.update(params) : repo.create(params)
             render BeanPathTools.buildMapFromPaths(entity, selectFields) as JSON
-        } catch (EntityValidationException e) {
-            response.status = 409
-            def emsg = (e.hasProperty("messageMap")) ? g.message(code: e.messageMap?.code, args: e.messageMap?.args, default: e.messageMap?.defaultMessage) : null
-            render(plugin: "rally", template: "edit", model: [user: e.meta?.user ?: e.entity, errorMsg: emsg])
+        } catch (Exception e) {
+            log.error("saveJson with error: $e.message", e)
+            Map errResponse = errorMessageService.buildErrorResponse(e)
+            response.status = errResponse.code
+            render errResponse as JSON
         }
     }
 

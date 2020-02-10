@@ -75,7 +75,10 @@ angular.module('agValidations').directive('ngModel', function(agValidationsConfi
           })
       }
 
-      function getErrorMessageForKey(key) {
+      function getErrorMessageForKey(key, fieldName) {
+        if(key === '$$server'){
+          return form.$serverErrors[fieldName]
+        }
         // allows to add a msg-{error key} to override whats in
         var attrKey = 'msg' + key[0].toUpperCase() + key.substring(1)
         $log.debug('getErrorMessageForKey', { attrs, key, defaultErrorsKey: defaultErrors[key] })
@@ -99,7 +102,7 @@ angular.module('agValidations').directive('ngModel', function(agValidationsConfi
           if (showErrors) {
             var error = {
               key: key,
-              message: getErrorMessageForKey(key)
+              message: getErrorMessageForKey(key, ngModel.$name) //we need name for handling backend errors
             }
 
             // This is a bit of hack right now to ensure that data type validation errors are shown
