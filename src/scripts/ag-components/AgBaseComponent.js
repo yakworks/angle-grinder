@@ -4,7 +4,6 @@ import _ from 'lodash'
 
 /* @ngInject */
 export default class AgBaseComponent {
-
   id
   label
   name
@@ -56,13 +55,12 @@ export default class AgBaseComponent {
     this.ngModelCtrl.$render = () => {
       this.value = this.ngModelCtrl.$viewValue
     }
-
   }
 
   onChange() {
-    $log.debug("onChange", this)
-    //console.log('******** onChange ********** this.value ', this.value)
-    //console.log('******** onChange ********** this.ngModelCtrl ', this.ngModelCtrl)
+    $log.debug('onChange', this)
+    // console.log('******** onChange ********** this.value ', this.value)
+    // console.log('******** onChange ********** this.ngModelCtrl ', this.ngModelCtrl)
     try {
       if (this.value && this.maximumLength && this.value.length > this.maximumLength) {
         this.value = this.value.substring(0, this.maximumLength)

@@ -11,7 +11,7 @@ export default angular
     controllerAs: 'cmpCtrl',
     require: {
       ngModelCtrl: 'ngModel',
-      formCtrl: '^form',
+      formCtrl: '^form'
     },
     bindings: {
       ngModel: '=',

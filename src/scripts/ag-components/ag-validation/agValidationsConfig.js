@@ -1,10 +1,10 @@
 import angular from 'angular'
 
-angular.module('agValidations').provider('agValidationsConfig', function () {
-  'use strict';
+angular.module('agValidations').provider('agValidationsConfig', function() {
+  'use strict'
 
   var self = this
-  let _errors = {
+  const _errors = {
     minlength: 'Needs to be at least {{ngMinlength}} characters long',
     maxlength: 'Can be no longer than {{ngMaxlength}} characters long',
     required: 'This field is required',
@@ -22,74 +22,74 @@ angular.module('agValidations').provider('agValidationsConfig', function () {
     month: 'Must be a valid month',
     $$server: 'An error has occurred'
   }
-  let _validationStrategyFn;
+  let _validationStrategyFn
 
   angular.extend(self, {
 
     $validationStrategies: {
-      invalid: function (form) {
+      invalid: function(form) {
         // console.log("validationStrategies invalid", form.$invalid)
-        return form.$invalid;
+        return form.$invalid
       },
-      submitted: function (form) {
+      submitted: function(form) {
         // console.log("validationStrategies submitted", form.$invalid && form.$submitted)
-        return form.$invalid && form.$submitted;
+        return form.$invalid && form.$submitted
       },
-      dirty: function (form, ngModel) {
+      dirty: function(form, ngModel) {
         // console.log("validationStrategies dirty", ngModel.$invalid && ngModel.$dirty)
-        return ngModel.$invalid && ngModel.$dirty;
+        return ngModel.$invalid && ngModel.$dirty
       },
-      dirtyOrTouchedOrSubmitted: function (form, ngModel) {
+      dirtyOrTouchedOrSubmitted: function(form, ngModel) {
         // console.log("validationStrategies dirtyOrSubmitted")
-        return ngModel.$invalid && (form.$submitted || ngModel.$dirty || ngModel.$touched);
+        return ngModel.$invalid && (form.$submitted || ngModel.$dirty || ngModel.$touched)
       },
-      dirtyOrSubmitted: function (form, ngModel) {
+      dirtyOrSubmitted: function(form, ngModel) {
         // console.log("validationStrategies dirtyOrSubmitted")
-        return ngModel.$invalid && (form.$submitted || ngModel.$dirty);
+        return ngModel.$invalid && (form.$submitted || ngModel.$dirty)
       },
-      focusedAndDirtyOrSubmitted: function (form, ngModel) {
+      focusedAndDirtyOrSubmitted: function(form, ngModel) {
         // console.log("validationStrategies focusedAndDirtyOrSubmitted")
-        return ngModel.$invalid && (ngModel.$focused && (ngModel.$dirty || form.$submitted));
+        return ngModel.$invalid && (ngModel.$focused && (ngModel.$dirty || form.$submitted))
       },
-      dirtyAndFocusedOrSubmitted: function (form, ngModel) {
+      dirtyAndFocusedOrSubmitted: function(form, ngModel) {
         // console.log("validationStrategies dirtyAndFocusedOrSubmitted")
-        return ngModel.$invalid && (form.$submitted || (ngModel.$dirty && ngModel.$focused));
+        return ngModel.$invalid && (form.$submitted || (ngModel.$dirty && ngModel.$focused))
       }
     },
 
-    addValidationStrategy: function (name, fn) {
-      self.$validationStrategies[name] = fn;
+    addValidationStrategy: function(name, fn) {
+      self.$validationStrategies[name] = fn
     },
 
-    setDefaultValidationStrategy: function (strategy) {
+    setDefaultValidationStrategy: function(strategy) {
       if (!self.$validationStrategies[strategy]) {
-        throw new Error('Could not find validation strategy by name: ' + strategy);
+        throw new Error('Could not find validation strategy by name: ' + strategy)
       }
-      _validationStrategyFn = self.$validationStrategies[strategy];
+      _validationStrategyFn = self.$validationStrategies[strategy]
     },
 
-    setErrorMessages: function (errors) {
-      angular.extend(_errors, errors);
+    setErrorMessages: function(errors) {
+      angular.extend(_errors, errors)
     }
 
-  });
+  })
 
-  this.$get = function () {
+  this.$get = function() {
     return {
-      getErrorMessages: function () {
-        return angular.copy(_errors);
+      getErrorMessages: function() {
+        return angular.copy(_errors)
       },
-      getValidationStrategy: function (name) {
+      getValidationStrategy: function(name) {
         if (!self.$validationStrategies[name]) {
-          throw new Error('Could not find validation strategy by name: ' + name);
+          throw new Error('Could not find validation strategy by name: ' + name)
         }
-        return self.$validationStrategies[name];
+        return self.$validationStrategies[name]
       },
-      getDefaultValidationStrategy: function () {
-        return _validationStrategyFn;
+      getDefaultValidationStrategy: function() {
+        return _validationStrategyFn
       }
-    };
-  };
+    }
+  }
 
-  self.setDefaultValidationStrategy('dirtyOrSubmitted');
-});
+  self.setDefaultValidationStrategy('dirtyOrSubmitted')
+})

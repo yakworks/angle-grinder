@@ -1,4 +1,6 @@
+/* eslint-disable no-useless-constructor */
 import AgBaseComponent from '../AgBaseComponent'
+
 /* @ngInject */
 export default class AgSelectCtrl extends AgBaseComponent {
   items

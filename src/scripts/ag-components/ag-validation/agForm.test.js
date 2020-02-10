@@ -1,5 +1,5 @@
-'use strict';
+'use strict'
 
-describe('agForm directive', function () {
+describe('agForm directive', function() {
 
-});
+})

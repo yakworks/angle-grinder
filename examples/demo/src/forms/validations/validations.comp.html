@@ -1,19 +1,19 @@
 <form name="customerForm" ag-form class="form-horizontal-fixed" role="form" novalidate>
 <fieldset>
   <div class="form-group">
-    <label class="control-label" for="name">Name</label>
+    <label class="control-label">Name</label>
     <div class="controls">
-      <input name="name" id="name" type="text" placeholder="enter name, min length 3" ng-model="$ctrl.vm.name"
+      <input name="name" type="text" placeholder="enter name, min length 3" ng-model="$ctrl.vm.name"
         class="form-control" required ng-minlength="3" ag-focus>
-      <ag-validation-inline for="name"></ag-validation-inline>
+      <ag-validation-inline ></ag-validation-inline>
     </div>
   </div>
   <div class="form-group">
-    <label class="control-label" for="email_1">Email</label>
+    <label class="control-label" >Email</label>
     <div class="controls">
-      <input id="email_1" name="email" type="email" ng-model="$ctrl.vm.email" class="form-control"
+      <input name="email" type="email" ng-model="$ctrl.vm.email" class="form-control"
            placeholder="Must be valid email">
-      <ag-validation-inline for="email_1"></ag-validation-inline>
+      <ag-validation-inline ></ag-validation-inline>
     </div>
   </div>
   <div class="form-group">

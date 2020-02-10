@@ -1,86 +1,86 @@
 import angular from 'angular'
 
 angular.module('agValidations')
-  .directive('agForm', function ($timeout) {
-    'use strict';
+  .directive('agForm', function($timeout) {
+    'use strict'
 
     return {
       require: '',
       priority: -1,
       controller: 'AgFormController',
       controllerAs: 'agForm',
-      link: function (scope, element, attrs, agForm) {
+      link: function(scope, element, attrs, agForm) {
         element
-          .on('submit', function () {
-            scope.$apply(function () {
-              agForm.submit();
-            });
+          .on('submit', function() {
+            scope.$apply(function() {
+              agForm.submit()
+            })
           })
-          .on('reset', function () {
-            $timeout(function () {
-              agForm.reset();
-            });
-          });
+          .on('reset', function() {
+            $timeout(function() {
+              agForm.reset()
+            })
+          })
       }
-    };
+    }
   })
-  .controller('AgFormController', function ($scope, $element, $attrs, agValidationsConfig, $window) {
-    'use strict';
+  .controller('AgFormController', function($scope, $element, $attrs, agValidationsConfig, $window) {
+    'use strict'
 
-    var vm = this,
-      form = $element.controller('form'),
-      validationStrategy = $attrs.strategy ?
-        agValidationsConfig.getValidationStrategy($attrs.strategy) :
-        agValidationsConfig.getDefaultValidationStrategy();
+    var vm = this
+    var form = $element.controller('form')
+    var validationStrategy = $attrs.strategy
+      ? agValidationsConfig.getValidationStrategy($attrs.strategy)
+      : agValidationsConfig.getDefaultValidationStrategy()
 
-    //polyfill for setSubmitted pre 1.3
+    // polyfill for setSubmitted pre 1.3
     function setSubmitted() {
       if (angular.isFunction(form.$setSubmitted)) {
-        form.$setSubmitted();
-        return;
+        form.$setSubmitted()
+        return
       }
-      form.$submitted = true;
-      $element.addClass('ng-submitted');
+      form.$submitted = true
+      $element.addClass('ng-submitted')
     }
 
     function setUnsubmitted() {
       if (angular.isFunction(form.$setSubmitted)) {
-        return;
+        return
       }
-      form.$submitted = false;
-      $element.removeClass('ng-submitted');
+      form.$submitted = false
+      $element.removeClass('ng-submitted')
     }
 
     angular.extend(vm, {
 
       form: form,
 
-      getValidationStrategy: function () {
-        return validationStrategy;
+      getValidationStrategy: function() {
+        return validationStrategy
       },
 
       tooltipTrigger: $attrs.tooltipTrigger,
 
-      submit: function () {
-        setSubmitted();
+      submit: function() {
+        setSubmitted()
 
         // focus first error if required
         if (form.$invalid && $attrs.focusError) {
-          $window.setTimeout(function () {
-            $element.find('.ng-invalid:input:visible:first').focus();
-          });
+          $window.setTimeout(function() {
+            $element.find('.ng-invalid:input:visible:first').focus()
+          })
         }
 
-        $scope.$broadcast('AgForm.ForceErrorUpdate', null, 'submit');
+        $scope.$broadcast('AgForm.ForceErrorUpdate', null, 'submit')
       },
 
-      reset: function () {
-        vm.form.$setPristine();
-        vm.form.$setUntouched();
-        setUnsubmitted();
+      reset: function() {
+        vm.form.$setPristine()
+        vm.form.$setUntouched()
+        setUnsubmitted()
 
-        $scope.$broadcast('AgForm.ForceErrorUpdate', null, 'reset');
+        $scope.$broadcast('AgForm.ForceErrorUpdate', null, 'reset')
       }
 
-    });
-  });
+    })
+  })

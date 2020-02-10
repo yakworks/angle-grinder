@@ -7,15 +7,15 @@
  * @description
  * Use the `$logProvider` to configure how the application logs messages
  */
-import _ from 'lodash'
+// import _ from 'lodash'
 
 class Log {
   static factory() {
-    return new Log();
+    return new Log()
   }
 
   constructor() {
-    this._debug = false;
+    this._debug = false
   }
 
   /**
@@ -27,10 +27,10 @@ class Log {
    */
   debugEnabled(flag) {
     if (flag !== undefined && flag !== null) {
-      this._debug = flag;
-      return this;
+      this._debug = flag
+      return this
     } else {
-      return this._debug;
+      return this._debug
     }
   }
 
@@ -42,7 +42,7 @@ class Log {
    * Write a log message
    */
   log(...args) {
-    this.consoleLog('log', args);
+    this.consoleLog('log', args)
   }
 
   /**
@@ -53,7 +53,7 @@ class Log {
    * Write an information message
    */
   info(...args) {
-    this.consoleLog('info', args);
+    this.consoleLog('info', args)
   }
 
   /**
@@ -64,7 +64,7 @@ class Log {
    * Write a warning message
    */
   warn(...args) {
-    this.consoleLog('warn', args);
+    this.consoleLog('warn', args)
   }
 
   /**
@@ -75,7 +75,7 @@ class Log {
    * Write an error message
    */
   error(...args) {
-    this.consoleLog('error', args);
+    this.consoleLog('error', args)
   }
 
   /**
@@ -87,9 +87,9 @@ class Log {
    */
   debug(...args) {
     if (this._debug) {
-      //for now changed this to info so we don't have to turn on verbose in log level in chrome debugger
-      //this.consoleLog('debug', args);
-      this.consoleLog('info', args);
+      // for now changed this to info so we don't have to turn on verbose in log level in chrome debugger
+      // this.consoleLog('debug', args);
+      this.consoleLog('info', args)
     }
   }
 
@@ -98,12 +98,12 @@ class Log {
       if (arg.stack) {
         arg = (arg.message && arg.stack.indexOf(arg.message) === -1)
           ? 'Error: ' + arg.message + '\n' + arg.stack
-          : arg.stack;
+          : arg.stack
       } else if (arg.sourceURL) {
-        arg = arg.message + '\n' + arg.sourceURL + ':' + arg.line;
+        arg = arg.message + '\n' + arg.sourceURL + ':' + arg.line
       }
     }
-    return arg;
+    return arg
   }
 
   noop() {
@@ -111,36 +111,33 @@ class Log {
   }
 
   consoleLog(type, args) {
-    let c = window.console || {},
-      logFn = c[type] || c.log || this.noop,
-      hasApply = false;
+    const c = window.console || {}
+    const logFn = c[type] || c.log || this.noop
+    let hasApply = false
 
     // Note: reading logFn.apply throws an error in IE11 in IE8 document mode.
     // The reason behind this is that console.log has type "object" in IE8...
     try {
-      hasApply = !!logFn.apply;
+      hasApply = !!logFn.apply
     } catch (e) {
     }
 
     if (hasApply) {
-      var _args = [];
+      var _args = []
       args.forEach((arg) => {
-        _args.push(this.formatError(arg));
-      });
-      logFn.apply(c, _args);
-    }
-    else {
+        _args.push(this.formatError(arg))
+      })
+      logFn.apply(c, _args)
+    } else {
       // we are IE which either doesn't have window.console => this is noop and we do nothing,
       // or we are IE where console.log doesn't have apply so we log at least first 2 args
-      logFn(args[0], args[1] == null ? '' : args[1]);
+      logFn(args[0], args[1] == null ? '' : args[1])
     }
-
   }
-
 }
 
-Log.factory.$inject = [];
+Log.factory.$inject = []
 
-let _instance = Log.factory();
+const _instance = Log.factory()
 
-export default _instance;
+export default _instance
