@@ -73,7 +73,7 @@ class OrgController extends BaseDomainController {
     def get() {
         def org = Org.get(params.id)
         if (org) {
-            render ExportUtil.buildMapFromPaths(org, selectFields) as JSON
+            render BeanPathTools.buildMapFromPaths(org, selectFields) as JSON
         } else {
             notFound params.id
         }
@@ -189,7 +189,7 @@ class OrgController extends BaseDomainController {
             org.timeZone = params.timeZone
             org.save()
 
-            data.push ExportUtil.buildMapFromPaths(org, selectFields)
+            data.push BeanPathTools.buildMapFromPaths(org, selectFields)
         }
 
         response.status = 200

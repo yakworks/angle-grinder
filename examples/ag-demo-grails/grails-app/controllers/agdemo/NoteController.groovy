@@ -1,5 +1,6 @@
 package agdemo
 
+import gorm.tools.beans.BeanPathTools
 import grails.converters.JSON
 
 class NoteController extends BaseDomainController {
@@ -10,7 +11,7 @@ class NoteController extends BaseDomainController {
     def get() {
         def note = domainClass.get(params.id)
         if (note) {
-            render ExportUtil.buildMapFromPaths(note, selectFields) as JSON
+            render BeanPathTools.buildMapFromPaths(note, selectFields) as JSON
         } else {
             notFound params.id
         }

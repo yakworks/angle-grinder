@@ -1,6 +1,5 @@
 package agdemo
 
-import agdemo.ExportUtil
 import grails.plugin.gormtools.ErrorMessageService
 
 import javax.annotation.PostConstruct
@@ -159,9 +158,8 @@ abstract class BaseDomainController {
         try {
             def p = BeanPathTools.flattenMap(request, request.JSON)
             def entity = p.id ? repo.update(p) : saveDomain(p)
-            render ExportUtil.buildMapFromPaths(entity, selectFields) as JSON
+            render BeanPathTools.buildMapFromPaths(entity, selectFields) as JSON
         } catch (Exception e) {
-            println "22222222222222222222222222222222222222222222222222222"
             log.error("saveJson with error: $e.message", e)
             Map errResponse = errorMessageService.buildErrorResponse(e)
             response.status = errResponse.code
