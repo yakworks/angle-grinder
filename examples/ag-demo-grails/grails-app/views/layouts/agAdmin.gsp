@@ -37,7 +37,7 @@
             <div class="navbar-collapse collapse">
                 <ul class="navbar-nav nav">
                     <li><a href="${createLink(controller: 'user')}">List Users</a></li>
-                    <li><a href="${createLink(controller: 'org')}">List Orgs</a></li>
+                    <li><a href="${createLink(controller: 'orgTabs')}">List Orgs</a></li>
 %{--                    <li><a href="${createLink(controller: 'orgShowCase')}">List Org Show Case</a></li>--}%
                 </ul>
 

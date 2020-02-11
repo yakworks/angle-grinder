@@ -1,8 +1,6 @@
 <div class="subnav">
     <ul class="nav navbar-nav nav-pills">
         <li><a href="#/"><i class="fa fa-list"></i> Org List</a></li>
-        <li><a ng-show="org.persisted()" href="#/{{org.id}}"><i class="fa fa-th"></i> Show org</a></li>
-        <li><a ng-hide="org.persisted()" href="#/create"><i class="fa fa-plus"></i> New org</a></li>
     </ul>
 </div>
 
@@ -19,21 +17,22 @@
 
         <div ag-field-group for="name">
             <div class="form-group">
-                <label class="control-label col-sm-4">Name</label>
+                <label class="control-label">Name</label>
 
-                <div class="col-sm-8">
+                <div class="controls">
                     <input type="text" name="name" placeholder="Enter Name"
-                           ng-model="org.name" autofocus required/>
+                           ng-model="org.name" autofocus required/><div>To check server validation errors set name to Yodo, which is not unique and saving will fail on server side</div>
                     <ag-validation-errors for="name" required="This field is required"/>
                 </div>
+
             </div>
         </div>
 
         <div ag-field-group for="num">
             <div class="form-group">
-                <label class="control-label col-sm-4">Num</label>
+                <label class="control-label ">Num</label>
 
-                <div class="col-sm-8">
+                <div class="controls">
                     <input type="text" name="num" placeholder="Enter num"
                            ng-model="org.num" required/>
                     <ag-validation-errors for="num" required="This field is required"/>
@@ -43,9 +42,9 @@
 
         <div ag-field-group for="timeZone">
             <div class="form-group">
-                <label class="control-label col-sm-4">Time Zone</label>
+                <label class="control-label ">Time Zone</label>
 
-                <div class="col-sm-8">
+                <div class="controls">
                     <select ui-select2 ng-model="org.timeZone" name="timeZone"
                             ng-required="true"
                             data-placeholder="Pick a Time Zone">
