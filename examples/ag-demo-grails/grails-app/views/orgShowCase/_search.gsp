@@ -1,5 +1,5 @@
 <div class="well" style="padding-bottom: 40px">
-    <form ag-search-form="orgShowCaseGrid" class="form-horizontal form-multi-column no-margin">
+    <form ag-search-form="orgShowCaseGrid" class="form-horizontal-fixed form-multi-column no-margin">
 
         <div class="row">
             <div class="form-group col-md-6">

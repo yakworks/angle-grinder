@@ -10,7 +10,7 @@
     </h3>
 </div>
 
-<form name="editForm" class="form-horizontal" novalidate
+<form name="editForm" class="form-horizontal-fixed" novalidate
       ag-server-validation-errors
       ng-submit="save(orgShowCase)">
     <div class="modal-body" ng-controller="orgShowCase.FormCtrl" style="height:60%; overflow:auto;">

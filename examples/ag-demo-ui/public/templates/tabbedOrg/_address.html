@@ -8,7 +8,7 @@
         </h4>
       </div>
       <div class="panel-body">
-        <form name="editForm" class="form-horizontal" novalidate="true" ng-submit="save(editForm, org)">
+        <form name="editForm" class="form-horizontal-fixed" novalidate="true" ng-submit="save(editForm, org)">
 
           <div ag-field-group for="phone">
             <label class="control-label required">Phone</label>
@@ -67,7 +67,7 @@
     <div class="panel panel-default">
       <div editable-panel-heading="editForm">Xeditable Form</div>
       <div class="panel-body">
-        <form editable-form name="editForm" class="form-horizontal no-margin" novalidate="true"
+        <form editable-form name="editForm" class="form-horizontal-fixed no-margin" novalidate="true"
           onaftersave="save(editForm, org)">
 
           <div stay-on-collapse class="edit-group">
