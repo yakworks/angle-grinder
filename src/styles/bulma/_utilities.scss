@@ -15,15 +15,21 @@
 @import "~bulma/sass/utilities/mixins.sass";
 @import "~bulma/sass/utilities/controls.sass";
 
-@debug "***** $red: #{$red}"; //#af0d2e
-@debug "***** $danger: #{$danger}"; //#af0d2e
-@debug "***** $findDarkColor($red): #{findDarkColor($red)}"; //#ee1642
-@debug "***** $danger-dark: #{$danger-dark}"; //#ee1642
+// @debug "***** $red: #{$red}"; //#af0d2e
+// @debug "***** $danger: #{$danger}"; //#af0d2e
+// @debug "***** $findDarkColor($red): #{findDarkColor($red)}"; //#ee1642
+// @debug "***** $danger-dark: #{$danger-dark}"; //#ee1642
 
-//***** $red: #af0d2e
-//***** $danger: #af0d2e
-//***** $findDarkColor($red): #ee1642
-//***** $danger-dark: #ee1642
+// MIXIN  helpers from boot strap
+
+@mixin form-control-focus($color: $input-focus-border-color) {
+  $color-rgba: rgba(red($color), green($color), blue($color), .6);
+  &:focus {
+    border-color: $color;
+    outline: 0;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px $color-rgba;
+  }
+}
 
 @mixin border-top-radius($radius) {
   border-top-left-radius: $radius;

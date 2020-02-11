@@ -1,12 +1,18 @@
 @import "bulma-initial-variables";
 @import "utilities";
 
+//match bootstrap inputs focus colors
+$ifoc-color: #66afe9;
+$input-focus-border-color: $ifoc-color;
+$input-focus-box-shadow-color: rgba(red($ifoc-color), green($ifoc-color), blue($ifoc-color), .6);
+$input-focus-box-shadow-size: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px;
+$input-arrow: $primary !default;
+
 @import "~bulma/sass/grid/columns.sass";
 @import "~bulma/sass/components/card.sass";
 @import "~bulma/sass/form/shared.sass";
 @import "~bulma/sass/form/select.sass";
 @import "~bulma/sass/elements/box.sass";
 @import "~bulma/sass/elements/button.sass";
-
 
 @import "select2-bulma";
