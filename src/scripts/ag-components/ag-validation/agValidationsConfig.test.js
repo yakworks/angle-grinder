@@ -1,6 +1,6 @@
 import angular from 'angular'
 import '~/vendor'
-import "angular-mocks"
+import 'angular-mocks'
 import agMod from '~/angle-grinder'
 
 describe('agConfig provider', function() {
@@ -12,7 +12,7 @@ describe('agConfig provider', function() {
         provider = agValidationsConfig
       })
 
-    angular.mock.module('agValidations', 'test.agForm')
+    angular.mock.module(agMod, 'test.agForm')
     inject(function(_agValidationsConfig_) {
       agValidationsConfig = _agValidationsConfig_
     })

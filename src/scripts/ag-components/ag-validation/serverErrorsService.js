@@ -8,7 +8,7 @@ export default class ServerErrorsService {
   // }
 
   // function reference so this can be recursive
-  setErrorsFn = function(form, errors) {
+  setErrorsFn(form, errors) {
     // cleanup previous errors
     form.$serverErrors = {}
 
@@ -20,7 +20,7 @@ export default class ServerErrorsService {
         const message = errors[field]
         const formField = form[field]
         if ((typeof message === 'object') && !_.isNil(formField)) {
-          setErrorsFn(formField, message)
+          this.setErrorsFn(formField, message)
         }
 
         // ..set an error for the current form
@@ -29,12 +29,12 @@ export default class ServerErrorsService {
           form.$serverErrors[field] = message
           result.push(message)
         } else {
-          //FIXME why would we push undefined here?
+          // FIXME why would we push undefined here?
           result.push(undefined)
         }
       }
       return result
-    })() //FIXME why are we doing this?
+    })() // FIXME why are we doing this?
   }
 
   setErrors(form, response, resourceName) {
@@ -49,7 +49,7 @@ export default class ServerErrorsService {
     return this.setErrorsFn(form, errors)
   }
 }
-//ServerErrorsService.$inject = ['alertTimeout']
+// ServerErrorsService.$inject = ['alertTimeout']
 
 // Handles server side errors
 angular.module(agValMod).service('serverErrorsService', ServerErrorsService)

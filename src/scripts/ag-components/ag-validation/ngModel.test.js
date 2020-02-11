@@ -1,6 +1,6 @@
 import angular from 'angular'
 import '~/vendor'
-import "angular-mocks"
+import 'angular-mocks'
 import agMod from '~/angle-grinder'
 
 describe('ngModel directive', function() {
@@ -11,7 +11,7 @@ describe('ngModel directive', function() {
     unActivated: '<form><input ng-model="firstName"></form>',
     noLabel: '<input ng-model="firstName">',
     label: '<label for="test">Test</label><input id="test" ng-model="firstName">',
-    labelControl:`
+    labelControl: `
       <div class="form-group">
         <label class="control-label">FirstName</label>
         <div class="controls">
