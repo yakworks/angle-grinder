@@ -505,11 +505,12 @@ describe("module: angleGrinder.forms validations", function() {
         const response = {
           status: 422,
           data: {
-            errors: { user: {
-              login: "is required",
-              email: "is not an email address"
+            errors: {
+              user: {
+                login: "is required",
+                email: "is not an email address"
+              }
             }
-          }
           }
         };
 

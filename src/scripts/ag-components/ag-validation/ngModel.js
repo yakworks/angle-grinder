@@ -1,8 +1,10 @@
 import angular from 'angular'
 import _ from 'lodash'
 import $log from '../../utils/Log'
+import agValMod from './agValidations.module'
 
-angular.module('agValidations').directive('ngModel', function(agValidationsConfig, $rootScope, $interpolate, $document) {
+angular.module(agValMod)
+.directive('ngModel', function(agValidationsConfig, $rootScope, $interpolate, $document) {
   'use strict'
 
   return {
@@ -24,7 +26,9 @@ angular.module('agValidations').directive('ngModel', function(agValidationsConfi
           element.attr('id', attrs.id)
         }
 
-        const labelEl = element.closest('.form-group').find('.control-label')
+        let labelEl = $(element).closest('.form-group').find('.control-label')
+        //if labelnot found using form-group then brute force look for <label for="theId"> format
+        labelEl = labelEl || $document[0].querySelectorAll('label[for="' + attrs.id + '"]')
         // add required to label and for id if not exists
         if (labelEl) {
           if (attrs.required || attrs.ngRequired) {
@@ -36,7 +40,7 @@ angular.module('agValidations').directive('ngModel', function(agValidationsConfi
           }
         }
         // add "for" attr on ag-validation-inline el
-        const agValEl = element.closest('.controls').find('ag-validation-inline')
+        const agValEl = $(element).closest('.controls').find('ag-validation-inline')
         if (agValEl && !agValEl.attr('for')) {
           $log.debug("adding 'for' to ag-validation-inline'", agValEl)
           agValEl.attr('for', attrs.id)
@@ -52,7 +56,7 @@ angular.module('agValidations').directive('ngModel', function(agValidationsConfi
           $label: labelEl.length > 0 ? labelEl[0].innerText : '',
           $agErrors: []
         })
-
+        $log.debug("ngModel", ngModel)
         // set errors on the ngModel when $error changes
         scope.$watch(function() {
           return ngModel.$error
@@ -62,14 +66,14 @@ angular.module('agValidations').directive('ngModel', function(agValidationsConfi
 
         element
           .on('focus', function() {
-            // ngModel.$focused = true;
+            ngModel.$focused = true;
             updateErrors()
             scope.$apply()
           })
           .on('blur', function() {
             // set touched right away so the updateErrors is picked up
             ngModel.$setTouched()
-            // ngModel.$focused = false;
+            ngModel.$focused = false;
             updateErrors()
             scope.$apply()
           })

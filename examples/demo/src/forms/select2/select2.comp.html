@@ -14,6 +14,17 @@
   <div ag-field-group >
     <label class="control-label">Select2 Select</label>
     <div class="controls">
+      <select class="form-control" name="selSelect" ng-model="$ctrl.vm.selSelect" ui-select2>
+        <option value="foo1">Foo</option>
+        <option value="bar2">Bar</option>
+        <option value="baz3">Baz</option>
+      </select>
+      <span class="help-block">no options, no empty option</span>
+    </div>
+  </div>
+  <div ag-field-group >
+    <label class="control-label">Select2 Select</label>
+    <div class="controls">
       <select class="form-control" name="selSelect" ng-model="$ctrl.vm.selSelect"
           ui-select2="{allowClear: true, placeholder: 'select a foo'}">
         <option></option>
