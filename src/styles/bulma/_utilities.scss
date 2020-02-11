@@ -2,30 +2,53 @@
 //@import "~bulma/sass/utilities/_all.sass";
 @import "~bulma/sass/utilities/initial-variables.sass";
 @import "~bulma/sass/utilities/functions.sass";
-// there is a problem with the bulma findDarkColor, doesn't alway darken so override.
+
+//there is a problem with the bulma findDarkColor, doesn't alway darken so override.
 @function findDarkColor($color) {
   @if type-of($color) == 'color' {
     @return scale-color($danger, $lightness: -20%);
   }
   @return $text-strong;
 }
-
 @import "~bulma/sass/utilities/derived-variables.sass";
-
-@debug "***** $danger: #{$danger}"; //#540817
-$danger-darker30: scale-color($danger, $lightness: -30%);
-@debug "***** $danger-darker30: #{$danger-darker30}"; //#540817
-$danger-darker50: scale-color($danger, $lightness: -50%);
-@debug "***** $danger-darker50: #{$danger-darker50}"; //#540817
-@debug "***** $findDarkColor($danger): #{findDarkColor($danger)}"; //#ea2e54
-@debug "***** $danger-dark: #{$danger-dark}"; //#ea2e54
-@debug "***** $findDarkColor($danger-dark): #{findDarkColor($danger-dark)}"; //#ea2e54
-
 @import "~bulma/sass/utilities/animations.sass";
 @import "~bulma/sass/utilities/mixins.sass";
 @import "~bulma/sass/utilities/controls.sass";
 
-@import "~bulma/sass/grid/columns.sass";
-@import "~bulma/sass/components/card.sass";
-@import "~bulma/sass/form/shared.sass";
-@import "~bulma/sass/form/select.sass";
+// @debug "***** $red: #{$red}"; //#af0d2e
+// @debug "***** $danger: #{$danger}"; //#af0d2e
+// @debug "***** $findDarkColor($red): #{findDarkColor($red)}"; //#ee1642
+// @debug "***** $danger-dark: #{$danger-dark}"; //#ee1642
+
+// MIXIN  helpers from boot strap
+
+@mixin form-control-focus($color: $input-focus-border-color) {
+  $color-rgba: rgba(red($color), green($color), blue($color), .6);
+  &:focus {
+    border-color: $color;
+    outline: 0;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px $color-rgba;
+  }
+}
+
+@mixin border-top-radius($radius) {
+  border-top-left-radius: $radius;
+  border-top-right-radius: $radius;
+}
+@mixin border-right-radius($radius) {
+  border-top-right-radius: $radius;
+  border-bottom-right-radius: $radius;
+}
+@mixin border-bottom-radius($radius) {
+  border-bottom-right-radius: $radius;
+  border-bottom-left-radius: $radius;
+}
+@mixin border-left-radius($radius) {
+  border-top-left-radius: $radius;
+  border-bottom-left-radius: $radius;
+}
+@mixin transition($transition...) {
+  -webkit-transition: $transition;
+       -o-transition: $transition;
+          transition: $transition;
+}

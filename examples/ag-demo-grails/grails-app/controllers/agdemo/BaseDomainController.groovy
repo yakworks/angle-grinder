@@ -1,5 +1,7 @@
 package agdemo
 
+import grails.plugin.gormtools.ErrorMessageService
+
 import javax.annotation.PostConstruct
 
 import gorm.tools.Pager
@@ -16,7 +18,8 @@ abstract class BaseDomainController {
     def ajaxGrid = true
     abstract getDomainClass()
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
-
+    def selectFields = ['*']
+    ErrorMessageService errorMessageService
     protected GormRepo getRepo() {
         domainClass.repo as GormRepo
     }
@@ -155,24 +158,12 @@ abstract class BaseDomainController {
         try {
             def p = BeanPathTools.flattenMap(request, request.JSON)
             def entity = p.id ? repo.update(p) : saveDomain(p)
-            render ExportUtil.buildMapFromPaths(entity, selectFields) as JSON
-            return
-        } catch (ValidationException e) {
-            response.status = 422
-            responseJson = [
-                    "status": 422,
-                    "message": buildMsg(e.messageMap),
-                    "messageCode": e.messageMap.code
-            ]
-            responseJson.errors = e.entity.errors.fieldErrors.groupBy {
-                GrailsNameUtils.getPropertyNameRepresentation(it.objectName)
-            }.each {
-                it.value = it.value.collectEntries {
-                    [(it.field): message(error: it)]
-                }
-            }
-
-            render responseJson as JSON
+            render BeanPathTools.buildMapFromPaths(entity, selectFields) as JSON
+        } catch (Exception e) {
+            log.error("saveJson with error: $e.message", e)
+            Map errResponse = errorMessageService.buildErrorResponse(e)
+            response.status = errResponse.code
+            render errResponse as JSON
         }
     }
 

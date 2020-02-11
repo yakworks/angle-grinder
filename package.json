@@ -23,7 +23,8 @@
     "build-ag-demo": "webpack --mode=production --profile --progress --content-base ./examples/ag-demo-ui --pathout ./examples/ag-demo-grails/src/main/webapp",
     "watch-ag-demo": "webpack --watch --mode=development --config examples/ag-demo-ui/webpack.config.js --progress --content-base ./examples/ag-demo-ui --pathout ./examples/ag-demo-grails/src/main/webapp",
     "parcel": "parcel examples/simple/index.html",
-    "parcel:build": "parcel build examples/simple/index.html"
+    "parcel:build": "parcel build examples/simple/index.html",
+    "jest": "jest"
   },
   "dependencies": {
     "Select2": "^3.5.7",
@@ -54,6 +55,7 @@
     "font-awesome": "^4.7.0",
     "free-jqgrid": "4.13.3",
     "google-code-prettify": "1.0.1",
+    "jest": "^25.1.0",
     "jquery": "3.4.1",
     "later": "*",
     "lodash": "~4.17.15",

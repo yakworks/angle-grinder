@@ -1,8 +1,10 @@
-'use strict'
+import angular from 'angular'
+import '~/vendor'
+import 'angular-mocks'
+import agMod from '~/angle-grinder'
 
 describe('agConfig provider', function() {
-  var provider,
-    agValidationsConfig
+  var provider, agValidationsConfig
 
   beforeEach(function() {
     angular.module('test.agForm', [])
@@ -10,7 +12,7 @@ describe('agConfig provider', function() {
         provider = agValidationsConfig
       })
 
-    module('gValidations', 'test.agForm')
+    angular.mock.module(agMod, 'test.agForm')
     inject(function(_agValidationsConfig_) {
       agValidationsConfig = _agValidationsConfig_
     })

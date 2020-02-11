@@ -1,6 +1,7 @@
 package agdemo
 
 import gorm.tools.Pager
+import gorm.tools.beans.BeanPathTools
 import gorm.tools.beans.DateUtil
 import gorm.tools.repository.RepoMessage
 import grails.converters.JSON
@@ -16,7 +17,7 @@ class OrgShowCaseController extends BaseDomainController {
     def get() {
         def org = domainClass.get(params.id)
         if (org) {
-            render agdemo.ExportUtil.buildMapFromPaths(org, selectFields) as JSON
+            render BeanPathTools.buildMapFromPaths(org, selectFields) as JSON
         } else {
             render RepoMessage.notFound(domainClass.name, [id: params.id])
         }

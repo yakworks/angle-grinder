@@ -1,4 +1,7 @@
-'use strict'
+import angular from 'angular'
+import '~/vendor'
+import 'angular-mocks'
+import agMod from '~/angle-grinder'
 
 describe('ngModel directive', function() {
   var element; var input; var ngModel; var $compile; var $el
@@ -7,7 +10,16 @@ describe('ngModel directive', function() {
     form: '<form ag-form>',
     unActivated: '<form><input ng-model="firstName"></form>',
     noLabel: '<input ng-model="firstName">',
-    label: '<label for="test">Test</label><input id="test" ng-model="firstName">'
+    label: '<label for="test">Test</label><input id="test" ng-model="firstName">',
+    labelControl: `
+      <div class="form-group">
+        <label class="control-label">FirstName</label>
+        <div class="controls">
+          <input name="firstName" type="text" placeholder="enter name, min length 3" ng-model="$ctrl.vm.name"
+            class="form-control" required ng-minlength="3">
+        </div>
+      </div>
+    `
   }
 
   function setup(template, validationStrategy) {
@@ -31,7 +43,7 @@ describe('ngModel directive', function() {
     ngModel = input.controller('ngModel')
   }
 
-  beforeEach(module('agValidations'))
+  beforeEach(angular.mock.module(agMod))
   beforeEach(inject(function(_$rootScope_, _$compile_) {
     $rootScope = _$rootScope_
     $compile = _$compile_
@@ -44,9 +56,9 @@ describe('ngModel directive', function() {
   })
 
   describe('activation', function() {
-    it('should initialize errors to be an empty object', function() {
+    it('should initialize errors to be an empty array', function() {
       setup(templates.label)
-      expect(ngModel.$agErrors).toEqual({})
+      expect(ngModel.$agErrors).toEqual([])
     })
 
     it('should read the validation strategy from the AgFormController', function() {
@@ -103,7 +115,7 @@ describe('ngModel directive', function() {
 
   describe('setting $label on ngModel', function() {
     it('should set $label on ngModel if label is found', function() {
-      setup(templates.label)
+      setup(templates.labelControl)
       expect(ngModel.$label).toBe('Test')
     })
 
@@ -116,12 +128,6 @@ describe('ngModel directive', function() {
   describe('touched and focused functionality', function() {
     beforeEach(function() {
       setup(templates.noLabel)
-    })
-
-    it('should set $touched when focused', function() {
-      expect(ngModel.$touched).toBe(false)
-      input.triggerHandler('focus')
-      expect(ngModel.$touched).toBe(true)
     })
 
     it('should default $focused to false on activation', function() {

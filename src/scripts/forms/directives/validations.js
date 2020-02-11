@@ -265,7 +265,7 @@ forms.factory('serverValidationErrorsHandler', [
 
           // ..set an error for the current form
           if (typeof message === 'string') {
-            if (form[field]) form[field].$setValidity('server', false)
+            if (form[field]) form[field].$setValidity('$$server', false)
             result.push(form.$serverErrors[field] = message)
           } else {
             result.push(undefined)
