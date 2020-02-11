@@ -1,6 +1,7 @@
 import angular from 'angular'
+import agValMod from './agValidations.module'
 
-angular.module('agValidations').provider('agValidationsConfig', function() {
+angular.module(agValMod).provider('agValidationsConfig', function() {
   'use strict'
 
   var self = this

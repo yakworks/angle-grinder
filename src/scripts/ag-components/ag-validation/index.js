@@ -1,7 +1,7 @@
-import './agForm.module'
 import './ngModel'
 import './agForm'
+import './serverErrorsService'
 import './agValidationsConfig'
-import './inline/validationInline.dir'
+import './inline/agValidationInline.comp'
 
 export default 'agValidations'

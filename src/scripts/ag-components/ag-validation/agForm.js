@@ -1,6 +1,7 @@
 import angular from 'angular'
+import agValMod from './agValidations.module'
 
-angular.module('agValidations')
+angular.module(agValMod)
   .directive('agForm', function($timeout) {
     'use strict'
 
@@ -17,6 +18,7 @@ angular.module('agValidations')
             })
           })
           .on('reset', function() {
+            // should we be using a $scope.$evalAsync(
             $timeout(function() {
               agForm.reset()
             })

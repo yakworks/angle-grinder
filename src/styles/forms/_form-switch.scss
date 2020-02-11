@@ -51,7 +51,7 @@ label.form-switch {
     pointer-events: none;
 
     &:checked + i {
-      background-color: $primary;
+      background-color: $success;
 
       &::before {
         transform: translate3d(18px,2px,0) scale3d(0,0,0);
@@ -74,9 +74,9 @@ label.form-switch {
     border-color: $info;
   }
 
-  &.is-success [type=checkbox]:checked+i::before {
-    background: $success;
-    border-color: $success;
+  &.is-primary [type=checkbox]:checked+i::before {
+    background: $primary;
+    border-color: $primary;
   }
   &.is-danger [type=checkbox]:checked+i::before {
     background: $danger;

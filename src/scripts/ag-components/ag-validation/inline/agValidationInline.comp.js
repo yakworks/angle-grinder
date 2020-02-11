@@ -1,6 +1,8 @@
 import angular from 'angular'
+import agValMod from '../agValidations.module'
+
 /* eslint-disable */
-angular.module('agValidations').directive('agValidationInline', function($timeout) {
+angular.module(agValMod).directive('agValidationInline', function($timeout) {
   'use strict'
 
   var _uniqueIdCounter = 0
@@ -25,7 +27,10 @@ angular.module('agValidations').directive('agValidationInline', function($timeou
 
       // run in new cycle to ensure that getElementById(inputId) will succeed as its not there when using components
       $timeout(function() {
-        inputEl = element.prev('input, select, textarea')
+        //inputEl = element.prev('input, select, textarea')
+        inputEl = element.closest('.controls').find('input:first-child, select:first-child, textarea:first-child')
+        // if inputEl is not imediate previous item then find it by using closest
+        inputEl = inputEl || angular.element(document.getElementById(inputId))
         // inputEl = angular.element(document.getElementById(inputId))
         if (inputEl.length === 0) {
           throw new Error('Can not find input element for the validation directive')

@@ -68,14 +68,14 @@ label.form-check {
     }
   }
 
-  &.is-info [type=checkbox]:checked+i::before {
-    background: $info;
-    border-color: $info;
-  }
-
   &.is-success [type=checkbox]:checked+i::before {
     background: $success;
     border-color: $success;
+  }
+
+  &.is-info [type=checkbox]:checked+i::before {
+    background: $info;
+    border-color: $info;
   }
   &.is-danger [type=checkbox]:checked+i::before {
     background: $danger;
