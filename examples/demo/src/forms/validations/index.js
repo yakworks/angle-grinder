@@ -1,9 +1,24 @@
 import _ from 'lodash'
+import Swal from 'sweetalert2'
 
 class ValidationsCtrl {
+  menuDisplay = 'Choose an action'
+
+  menuItems = [
+      { display: '<strong>Action</strong>', action: () => Swal.fire('something special') },
+      { display: 'Another action'},
+      { divider: true},
+      { display: 'Separated link'}
+  ]
+
   vm = {}
+
   constructor(serverErrorsService) {
     this.serverErrorsService = serverErrorsService
+  }
+
+  menuItemClick = function(menuItem, e){
+    console.log('menuItemClick', { menuItem, e})
   }
 
   mockServerValidation(model) {

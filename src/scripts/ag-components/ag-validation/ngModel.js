@@ -1,7 +1,11 @@
 import angular from 'angular'
 import _ from 'lodash'
-import $log from '../../utils/Log'
 import agValMod from './agValidations.module'
+
+// import $log from '../../utils/Log'
+function ldebug(msg, o) {
+  // $log.debug(msg, o)
+}
 
 angular.module(agValMod)
   .directive('ngModel', function(agValidationsConfig, $rootScope, $interpolate, $document) {
@@ -32,7 +36,7 @@ angular.module(agValMod)
           // add required to label and for id if not exists
           if (labelEl) {
             if (attrs.required || attrs.ngRequired) {
-            // $log.debug("adding required class to labelEl", labelEl)
+              ldebug('adding required class to labelEl', labelEl)
               labelEl.addClass('required')
             }
             if (!labelEl.attr('for')) {
@@ -42,7 +46,7 @@ angular.module(agValMod)
           // add "for" attr on ag-validation-inline el
           const agValEl = $(element).closest('.controls').find('ag-validation-inline')
           if (agValEl && !agValEl.attr('for')) {
-            $log.debug("adding 'for' to ag-validation-inline'", agValEl)
+            ldebug("adding 'for' to ag-validation-inline'", agValEl)
             agValEl.attr('for', attrs.id)
           }
 
@@ -56,7 +60,7 @@ angular.module(agValMod)
             $label: labelEl.length > 0 ? labelEl[0].innerText : '',
             $agErrors: []
           })
-          $log.debug('ngModel', ngModel)
+          ldebug('ngModel', ngModel)
           // set errors on the ngModel when $error changes
           scope.$watch(function() {
             return ngModel.$error
@@ -85,7 +89,7 @@ angular.module(agValMod)
           }
           // allows to add a msg-{error key} to override whats in
           var attrKey = 'msg' + key[0].toUpperCase() + key.substring(1)
-          $log.debug('getErrorMessageForKey', { attrs, key, defaultErrorsKey: defaultErrors[key] })
+          ldebug('getErrorMessageForKey', { attrs, key, defaultErrorsKey: defaultErrors[key] })
           // use either the provided string as an interpolated attribute, or the default message
           return attrs[attrKey]
             ? $interpolate(attrs[attrKey])(attrs)

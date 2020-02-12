@@ -1,7 +1,5 @@
 import _ from 'lodash'
 
-console.log('***WTF')
-
 function formatResult(item) { return item.id + ' - ' + item.name }
 
 class SelectsCtrl {
