@@ -53,6 +53,21 @@
                 </div>
             </div>
             </div>
+            <div class="column is-one-third">
+                <div class="form-group">
+                    <label class="control-label">Active Date</label>
+
+                    <div class="controls range-date-pickers">
+                        <ag-datepicker ng-model="filters.activeDate.from"
+                                       ag-trim-time="filters.activeDate.from"
+                                       placeholder="from"></ag-datepicker>
+
+                        <ag-datepicker ng-model="filters.activeDate.to"
+                                       ag-trim-time="filters.activeDate.to"
+                                       placeholder="to"></ag-datepicker>
+                    </div>
+                </div>
+            </div>
         </div>
 
 

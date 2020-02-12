@@ -2,6 +2,8 @@ package agdemo
 
 import gorm.tools.Pager
 import gorm.tools.beans.BeanPathTools
+import gorm.tools.beans.DateUtil
+import gorm.tools.beans.IsoDateUtil
 import gorm.tools.repository.errors.EntityValidationException
 import grails.converters.JSON
 
@@ -60,6 +62,10 @@ class UserController extends BaseDomainController {
 
             if (filters?.login)
                 ilike 'login', filters.login
+            if (filters?.activeDate?.from)
+                gte 'activeDate', DateUtil.fromLocalDate(IsoDateUtil.parseLocalDate(filters?.activeDate?.from))
+            if (filters?.activeDate?.to)
+                lte 'activeDate', DateUtil.fromLocalDate(IsoDateUtil.parseLocalDate(filters?.activeDate?.to))
 
             if (params.sort)
                 order(params.sort, params.order)
