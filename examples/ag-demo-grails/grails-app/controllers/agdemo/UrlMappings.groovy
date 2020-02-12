@@ -9,7 +9,7 @@ class UrlMappings {
             }
         }
 
-        '/org'(controller: 'org', action:'index')
+        '/org'(controller: 'orgTabs', action:'index')
         '/demo'(uri:"index.html")
         "500"(view: "/error")
     }
