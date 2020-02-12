@@ -58,7 +58,7 @@ smod.directive('agSelect2', [
           }
           // set the default `width`
           if (options.width == null) { options.width = 'resolve' }
-          if (options.initSelection == null) { options.initSelection = ()=> {} }
+          if (options.initSelection == null) { options.initSelection = () => {} }
 
           // create `ajax`
           if (_.isNil(options.ajax) && !_.isNil(attrs.selectAjaxUrl)) {

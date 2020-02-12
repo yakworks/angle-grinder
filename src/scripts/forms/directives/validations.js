@@ -215,8 +215,7 @@ forms.directive('agServerValidationErrors', ['alerts', alerts => ({
       const result = []
       for (const field in formCtrl.$serverErrors) {
         const message = formCtrl.$serverErrors[field]
-        if (formCtrl[field]) { continue } // If field is present in form, continue
-                                          // so we dont alert message
+        if (formCtrl[field]) { continue } // If field is present in form, continue so we dont alert message
         formCtrl.$serverErrors[field] = null // Display error and remove it.
         result.push(alerts.error(message))
       }
@@ -232,7 +231,6 @@ forms.directive('agServerValidationErrors', ['alerts', alerts => ({
       displayGlobalErrors()
       // Iterate through all fields with server validation errors
       return _.each(serverErrors, (val, field) => {
-
         // Register change listener for those fields
         let unregister
         const getViewValue = () => formCtrl[field]?.$viewValue
