@@ -1,3 +1,4 @@
+import grails.converters.JSON
 import groovy.json.JsonSlurper
 
 import agdemo.Contact
@@ -6,6 +7,9 @@ import agdemo.OrgRepo
 import agdemo.User
 import grails.core.GrailsApplication
 
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 class BootStrap {
 
@@ -13,6 +17,19 @@ class BootStrap {
     GrailsApplication grailsApplication
 
     def init = { servletContext ->
+        JSON.registerObjectMarshaller(Date) {
+            //Added JSON marshaller for dates to avoid time zone applying
+            return it.format("yyyy-MM-dd'T'HH:mm:ss")
+        }
+        JSON.registerObjectMarshaller(LocalDate) { LocalDate ld ->
+            //Added JSON marshaller for dates to avoid time zone applying
+            return DateTimeFormatter.ISO_LOCAL_DATE.format((LocalDate)ld)
+        }
+        JSON.registerObjectMarshaller(LocalDateTime) { LocalDateTime ld ->
+            //Added JSON marshaller for dates to avoid time zone applying
+            return DateTimeFormatter.ISO_LOCAL_DATE_TIME.format((LocalDateTime)ld)
+        }
+
         def contactFile = grailsApplication.mainContext.getResource("classpath:contact.json")
         def userFile = grailsApplication.mainContext.getResource("classpath:user.json")
         def orgFile = grailsApplication.mainContext.getResource("classpath:org.json")

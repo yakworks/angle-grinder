@@ -8,23 +8,27 @@
       ng-submit="save(editForm, note)">
 
   <div class="modal-body">
-    <div ag-field-group for="name">
-      <label class="control-label col-md-3">Name</label>
+    <div class="columns">
+      <div class="column">
+        <div ag-field-group for="name">
+          <label class="control-label">Name</label>
 
-      <div class="col-md-4">
-        <input type="text" name="name" placeholder="Enter name"
-               ng-model="note.name" ng-required="true" />
-        <ag-validation-errors for="name" />
-      </div>
-    </div>
+          <div class="controls">
+            <input type="text" name="name" placeholder="Enter name" class="form-control"
+                   ng-model="note.name" ng-required="true"/>
+            <ag-validation-errors for="name"/>
+          </div>
+        </div>
 
-    <div ag-field-group for="content">
-      <label class="control-label col-md-3">Content</label>
+        <div ag-field-group for="content">
+          <label class="control-label ">Content</label>
 
-      <div class="col-md-4">
-        <textarea name="content" rows="5"
+          <div class="controls">
+        <textarea name="content" rows="5" class="form-control"
                   ng-model="note.content" ng-required="true"></textarea>
-        <ag-validation-errors for="content" />
+            <ag-validation-errors for="content"/>
+          </div>
+        </div>
       </div>
     </div>
   </div>

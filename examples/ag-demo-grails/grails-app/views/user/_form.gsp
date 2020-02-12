@@ -8,7 +8,7 @@
     <span ng-switch-when="false">Create New ${entityName}</span>
   </h3>
 </div>
-
+<div class="columns"><div class="column">
 <form name="editForm" class="form-horizontal-fixed" novalidate
       ag-server-validation-errors
       ng-submit="save(user)">
@@ -20,7 +20,7 @@
           <label class="control-label">${ag.label(code: "contact.name")}</label>
 
           <div class="controls">
-            <input type="text" placeholder="${ag.label(code: 'contact.firstName')}"
+            <input class="form-control"  type="text" placeholder="${ag.label(code: 'contact.firstName')}"
                    name="firstName"
                    ng-model="user.contact.firstName" required autofocus>
             <ag-validation-errors for="firstName"/>
@@ -29,7 +29,7 @@
 
         <div class="form-group">
           <div class="controls">
-            <input type="text" placeholder="${ag.label(code: 'contact.lastName')}"
+            <input class="form-control"  type="text" placeholder="${ag.label(code: 'contact.lastName')}"
                    name="lastName"
                    ng-model="user.contact.lastName"/>
             <ag-validation-errors for="lastName"/>
@@ -40,33 +40,33 @@
           <label class="control-label">${ag.label(code: "contact.email")}</label>
 
           <div class="controls">
-            <input type="email" placeholder="Email"
+            <input class="form-control"  type="email" placeholder="Email"
                    name="email" ng-model="user.contact.email"/>
             <ag-validation-errors for="email"/>
           </div>
         </div>
       </div>
 
-      <div ag-field-group for="type">
-        <div class="form-group">
+
+        <div ag-field-group for="type" class="form-group">
           <label class="control-label">${ag.label(code: "contact.type")}</label>
 
           <div class="controls">
-            <select ui-select2="{width: '160px'}" name="type" name="type" ng-model="user.contact.type">
+            <select class="form-control" ui-select2="{closeOnSelect: false}" name="type" name="type" ng-model="user.contact.type">
               <option value="ADMIN">admin</option>
               <option value="CUSTOMER">customer</option>
             </select>
             <ag-validation-errors for="type"/>
           </div>
         </div>
-      </div>
+
 
       <div ag-field-group for="orgId">
         <div class="form-group">
           <label class="control-label">${ag.label(code: "user.org")}</label>
 
           <div class="controls">
-            <select name="orgId" ui-select2="{width: '160px'}"
+            <select class="form-control" name="orgId" ui-select2="{}"
                     ng-model="user.contact.org.id"
                     ng-required="true">
               <option value="">-- chose org --</option>
@@ -96,7 +96,7 @@
         <label class="control-label">${ag.label(code: "user.login")}</label>
 
         <div class="controls">
-          <input type="text"
+          <input class="form-control"  type="text"
                  name="login" ng-model="user.login" required/>
           <ag-validation-errors for="login"/>
         </div>
@@ -107,7 +107,7 @@
       <div class="form-group">
         <label class="control-label">${ag.label(code: "activeDate")}</label>
 
-        <div class="controls" style="width: 160px">
+        <div class="controls">
           <ag-datepicker date-type="date"
                          ng-model="user.activeDate"
                          ng-required="true"
@@ -125,7 +125,7 @@
 
         <div>
           <div class="controls">
-            <input type="password" placeholder="${ag.label(code: 'user.password')}"
+            <input class="form-control"  type="password" placeholder="${ag.label(code: 'user.password')}"
                    name="password"
                    ng-model="user.password"
                    ng-required="user.newRecord()" ng-minlength="6"/>
@@ -136,7 +136,7 @@
 
       <div class="form-group">
         <div class="controls">
-          <input type="password" placeholder="Confirm Password"
+          <input class="form-control"  type="password" placeholder="Confirm Password"
                  name="repassword"
                  ng-model="user.repassword"
                  ng-required="user.newRecord()" ng-minlength="6" match="user.password"/>
@@ -165,3 +165,4 @@
       <ag-submit-button></ag-submit-button>
     </div>
 </form>
+</div></div>
