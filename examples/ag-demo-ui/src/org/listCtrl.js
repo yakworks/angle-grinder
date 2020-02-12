@@ -1,6 +1,7 @@
 /* @ngInject */
 export default class ListCtrl {
   constructor($scope, Resource, SinglePageCrudCtrlMixin, MassUpdateMixin, pathWithContext) {
+    $scope.timeZones = ['Europe/Moscow', 'Asia/Shanghai', 'America/Sao_Paulo']
     $scope.gridOptions = {
       url: pathWithContext("/org/list?format=json"),
       colModel: this.colModel(),

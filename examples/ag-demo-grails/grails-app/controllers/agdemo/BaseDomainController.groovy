@@ -18,7 +18,6 @@ abstract class BaseDomainController {
     def ajaxGrid = true
     abstract getDomainClass()
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
-    def selectFields = ['*']
     ErrorMessageService errorMessageService
     protected GormRepo getRepo() {
         domainClass.repo as GormRepo

@@ -1,1 +1,1 @@
-<g:include controller="org" action="index"></g:include>
+<g:include controller="orgTabs" action="index"></g:include>
