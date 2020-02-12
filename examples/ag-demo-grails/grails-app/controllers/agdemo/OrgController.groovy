@@ -36,6 +36,14 @@ class OrgController extends BaseDomainController {
 
             if (filters?.num)
                 ilike 'num', filters.num + "%"
+            if (filters?.id)
+                eq 'id', filters.id.toLong()
+            if (filters?.ids)
+                inList 'id', (filters.ids as Long[])
+            if (filters?.zone)
+                eq 'timeZone', filters.zone
+            if (filters?.zones)
+                inList 'timeZone', (filters.zones as String[])
 
             if (params.sort)
                 order(params.sort, params.order)

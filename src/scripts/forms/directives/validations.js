@@ -216,7 +216,7 @@ forms.directive('agServerValidationErrors', ['alerts', alerts => ({
       for (const field in formCtrl.$serverErrors) {
         const message = formCtrl.$serverErrors[field]
         if (formCtrl[field]) { continue } // If field is present in form, continue
-
+                                          // so we dont alert message
         formCtrl.$serverErrors[field] = null // Display error and remove it.
         result.push(alerts.error(message))
       }
@@ -226,10 +226,13 @@ forms.directive('agServerValidationErrors', ['alerts', alerts => ({
     // Hide server side validation errors while typing
     const getServerErrors = () => formCtrl.$serverErrors
 
-    return scope.$watch(getServerErrors, function(serverErrors) {
+    return scope.$watch(getServerErrors, function(serverErrors, old) {
+      console.log(serverErrors)
+      console.log(old)
       displayGlobalErrors()
       // Iterate through all fields with server validation errors
-      return angular.forEach(serverErrors, function(_, field) {
+      return _.each(serverErrors, (val, field) => {
+
         // Register change listener for those fields
         let unregister
         const getViewValue = () => formCtrl[field]?.$viewValue
@@ -237,7 +240,7 @@ forms.directive('agServerValidationErrors', ['alerts', alerts => ({
           if (oldVal === newVal) { return }
 
           // Remove server side error for the field when its value was changed
-          if (formCtrl[field]) formCtrl[field].$setValidity('server', true)
+          if (formCtrl[field]) formCtrl[field].$setValidity('$$server', true)
           formCtrl.$serverErrors[field] = null
           return unregister()
         })
