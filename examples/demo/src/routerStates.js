@@ -119,12 +119,31 @@ const gridsStates = {
   ]
 }
 
+const componentsStates = {
+  name: 'components',
+  abstract: true,
+  template: '<div ui-view class="fade-in-up"></div>',
+  data: {
+    icon: 'fa fa-plug '
+  },
+  // data: { title: 'Grids'},
+  // ncyBreadcrumb: {
+  //   label: 'Grids'
+  // },
+  children: [
+    {
+      name: 'dropdown',
+      component: 'demoDropdownIndex'
+    }
+  ]
+}
+
 const appRoot = {
   name: 'app',
   url: '/app',
   template: require('./app.html'),
   abstract: true,
-  children: [dashStates, formStates, uiStates, gridsStates]
+  children: [dashStates, componentsStates, formStates, uiStates, gridsStates]
 }
 
 export default appRoot

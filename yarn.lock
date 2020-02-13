@@ -1750,6 +1750,11 @@
     "@parcel/utils" "^1.11.0"
     physical-cpu-count "^2.0.0"
 
+"@popperjs/core@^2.0.6":
+  version "2.0.6"
+  resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.0.6.tgz#5a39ac118811ca844155b0ad5190b8c24f35e533"
+  integrity sha512-zj7Gw8QC4jmR92eKUvtrZUEpl2ypRbq+qlE4pwf9n2hnUO9BOAcWUs4/Ht+gNIbFt98xtqhLvccdCfD469MzpQ==
+
 "@rollup/plugin-commonjs@^11.0.1":
   version "11.0.1"
   resolved "https://registry.yarnpkg.com/@rollup/plugin-commonjs/-/plugin-commonjs-11.0.1.tgz#6056a6757286901cc6c1599123e6680a78cad6c2"
@@ -2231,6 +2236,14 @@ angular-drag-and-drop-lists@2.1.0:
   resolved "https://registry.yarnpkg.com/angular-drag-and-drop-lists/-/angular-drag-and-drop-lists-2.1.0.tgz#da10cc85c804251fbaaa84d837f7380fb0cd780f"
   integrity sha1-2hDMhcgEJR+6qoTYN/c4D7DNeA8=
 
+angular-highlightjs@^0.7.1:
+  version "0.7.1"
+  resolved "https://registry.yarnpkg.com/angular-highlightjs/-/angular-highlightjs-0.7.1.tgz#d7e0e1f59db4de63f00573218a6472a59ff183f4"
+  integrity sha1-1+Dh9Z203mPwBXMhimRypZ/xg/Q=
+  dependencies:
+    angular "^1.0.1"
+    highlight.js ">7.0.0"
+
 angular-ladda@^0.4.3:
   version "0.4.3"
   resolved "https://registry.yarnpkg.com/angular-ladda/-/angular-ladda-0.4.3.tgz#2b4134c68f20522136f9b6ae6411b55cfbf47c31"
@@ -2258,7 +2271,7 @@ angular-route@1.7.9:
   resolved "https://registry.yarnpkg.com/angular-route/-/angular-route-1.7.9.tgz#f9910a2af0ba3ad7a969c5dd369b8360d0d5e4ef"
   integrity sha512-vRoj5hzdQtWbODhWJqDzD1iNOEfCKshO6GFBuPVV7RHlPjzIc4R2dHCc7Qiv/8F3LDxJDohc6vSnTDMLHuaqeA==
 
-angular-sanitize@^1.7.9:
+angular-sanitize@^1.3.2, angular-sanitize@^1.7.9:
   version "1.7.9"
   resolved "https://registry.yarnpkg.com/angular-sanitize/-/angular-sanitize-1.7.9.tgz#6b4d5e826abdabd352b13a7c65c8c74daf6a7b15"
   integrity sha512-nB/xe7JQWF9nLvhHommAICQ3eWrfRETo0EVGFESi952CDzDa+GAJ/2BFBNw44QqQPxj1Xua/uYKrbLsOGWZdbQ==
@@ -2306,7 +2319,7 @@ angular-xeditable@^0.10.2:
   dependencies:
     angular "~1.x"
 
-angular@1.7.9, angular@^1.7.9, angular@~1.x:
+angular@1.7.9, angular@^1.0.1, angular@^1.3.2, angular@^1.7.9, angular@~1.x:
   version "1.7.9"
   resolved "https://registry.yarnpkg.com/angular/-/angular-1.7.9.tgz#e52616e8701c17724c3c238cfe4f9446fd570bc4"
   integrity sha512-5se7ZpcOtu0MBFlzGv5dsM1quQDoDeUTwZrWjGtTNA7O88cD8TEk5IEKCTDa3uECV9XnvKREVUr7du1ACiWGFQ==
@@ -6793,6 +6806,11 @@ hex-color-regex@^1.1.0:
   resolved "https://registry.yarnpkg.com/hex-color-regex/-/hex-color-regex-1.1.0.tgz#4c06fccb4602fe2602b3c93df82d7e7dbf1a8a8e"
   integrity sha512-l9sfDFsuqtOqKDsQdqrMRk0U85RZc0RtOR9yPI7mRVOa4FsR/BVnZ0shmQRM96Ji99kYZP/7hn1cedc1+ApsTQ==
 
+highlight.js@>7.0.0:
+  version "9.18.1"
+  resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-9.18.1.tgz#ed21aa001fe6252bb10a3d76d47573c6539fe13c"
+  integrity sha512-OrVKYz70LHsnCgmbXctv/bfuvntIKDz177h0Co37DQ5jamGZLVmoCVMtjMtNZY3X9DrCcKfklHPNeA0uPZhSJg==
+
 hmac-drbg@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/hmac-drbg/-/hmac-drbg-1.0.1.tgz#d2745701025a6c775a6c545793ed502fc0c649a1"
@@ -9500,6 +9518,15 @@ next-tick@^0.2.2:
   version "0.2.2"
   resolved "https://registry.yarnpkg.com/next-tick/-/next-tick-0.2.2.tgz#75da4a927ee5887e39065880065b7336413b310d"
   integrity sha1-ddpKkn7liH45BliABltzNkE7MQ0=
+
+ng-showdown@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/ng-showdown/-/ng-showdown-1.1.0.tgz#b783cb1097630ff521def3b751020b4dd656589c"
+  integrity sha1-t4PLEJdjD/Uh3vO3UQILTdZWWJw=
+  dependencies:
+    angular "^1.3.2"
+    angular-sanitize "^1.3.2"
+    showdown "1.x"
 
 nice-try@^1.0.4:
   version "1.0.5"
@@ -12300,6 +12327,13 @@ shellwords@^0.1.1:
   resolved "https://registry.yarnpkg.com/shellwords/-/shellwords-0.1.1.tgz#d6b9181c1a48d397324c84871efbcfc73fc0654b"
   integrity sha512-vFwSUfQvqybiICwZY5+DAWIPLKsWO31Q91JSKl3UYv+K5c2QRPzn0qzec6QPu1Qc9eHYItiP3NdJqNVqetYAww==
 
+showdown@1.x:
+  version "1.9.1"
+  resolved "https://registry.yarnpkg.com/showdown/-/showdown-1.9.1.tgz#134e148e75cd4623e09c21b0511977d79b5ad0ef"
+  integrity sha512-9cGuS382HcvExtf5AHk7Cb4pAeQQ+h0eTr33V1mu+crYWV4KvWAw6el92bDrqGEk5d46Ai/fhbEUwqJ/mTCNEA==
+  dependencies:
+    yargs "^14.2"
+
 sigmund@~1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/sigmund/-/sigmund-1.0.1.tgz#3ff21f198cad2175f9f3b781853fd94d0d19b590"
@@ -14420,7 +14454,7 @@ yargs@13.2.4:
     y18n "^4.0.0"
     yargs-parser "^13.1.0"
 
-yargs@^14.0.0:
+yargs@^14.0.0, yargs@^14.2:
   version "14.2.2"
   resolved "https://registry.yarnpkg.com/yargs/-/yargs-14.2.2.tgz#2769564379009ff8597cdd38fba09da9b493c4b5"
   integrity sha512-/4ld+4VV5RnrynMhPZJ/ZpOCGSCeghMykZ3BhdFBDa9Wy/RH6uEGNWDJog+aUlq+9OM1CFTgtYRW5Is1Po9NOA==
