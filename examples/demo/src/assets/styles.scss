@@ -1,44 +1,6 @@
+@import "~bulma/sass/utilities/_all.sass";
 
-@import "snippets";
+@import "examples";
+@import "codeview";
 
-//@import "compass";
-@import "variables";
-// @import "partials/base";
-// @import "partials/layout";
-// @import "partials/utilities";
-// @import "partials/dropdown-menu";
-
-//@import "partials/tabs";
-//@import "partials/panels";
-//@import "partials/pagination";
-//@import "partials/accordion";
-// @import "partials/animations";
-// @import "partials/progressbar";
-// @import "partials/labels-and-badges";
-// @import "partials/form-elements";
-// @import "partials/icons";
-// @import "partials/buttons";
-@import "partials/links";
-@import "partials/form-wizard";
-@import "partials/login";
-@import "partials/invoice";
-@import "partials/timeline";
-@import "partials/tables";
-@import "partials/media";
-@import "partials/hover";
-
-@import "partials/user-profile";
-@import "partials/pages-calendar";
-@import "partials/todo";
-@import "partials/chat";
-@import "partials/messages";
-
-//@import "partials/modals";
-@import "partials/maps";
-@import "partials/pricing-table";
-@import "partials/error";
-//@import "partials/page-title";
-//@import "partials/tooltips";
-//@import "partials/popovers";
-//@import "partials/datepicker";
-//@import "partials/switch";
+@import "partials";

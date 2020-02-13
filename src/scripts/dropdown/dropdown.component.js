@@ -4,14 +4,14 @@ import template from './dropdown.html'
 const DEFAULT_MENU_DISPLAY = 'Action'
 
 // Set up controller
-class Controller {
+class controller {
   constructor($element) {
     this.$element = $element
   }
 
   $onInit() {
     this.menuDisplay = this.menuDisplay || DEFAULT_MENU_DISPLAY
-    this.buttonStyle = this.buttonStyle || 'default'
+    this.color = this.color || 'default'
   }
 
   fireMenuClick(menuItem, event) {
@@ -28,9 +28,10 @@ class Controller {
 export default {
   transclude: true,
   bindings: {
+    color: '@',
     menuItems: '<',
     menuClick: '='
   },
   template,
-  controller: Controller
+  controller
 }

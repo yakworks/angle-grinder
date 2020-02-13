@@ -4,11 +4,31 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 
+// WE Override primarily for the following reasone
+// 1. so we don't include the glyphs
+// 2. so we can overrride the form-control-focus to make it look like 4 and Bulma
+
 // SEE https://github.com/twbs/bootstrap-sass
 
 // Core variables and mixins
 @import "~bootstrap-sass/assets/stylesheets/bootstrap/variables";
 @import "~bootstrap-sass/assets/stylesheets/bootstrap/mixins";
+
+//box-shadow: $input-focus-box-shadow-size $input-focus-box-shadow-color
+// $input-focus-box-shadow-size: 0 0 0 0.125em !default;
+// $input-focus-box-shadow-color: rgba($link, 0.25) !default;
+// make focus more like BS4 and bulma
+@mixin form-control-focus($color: $input-border-focus) {
+  //$color-rgba: rgba(red($color), green($color), blue($color), .6);
+  $input-focus-box-shadow-size: 0 0 0 0.125em !default;
+  $input-focus-box-shadow-color: rgba(red($color), green($color), blue($color), .6) !default;
+  &:focus {
+    border-color: $color;
+    outline: 0;
+    box-shadow: $input-focus-box-shadow-size $input-focus-box-shadow-color;
+    //@include box-shadow(inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px $color-rgba);
+  }
+}
 
 // Reset and dependencies
 @import "~bootstrap-sass/assets/stylesheets/bootstrap/normalize";
@@ -23,6 +43,8 @@
 @import "~bootstrap-sass/assets/stylesheets/bootstrap/tables";
 @import "~bootstrap-sass/assets/stylesheets/bootstrap/forms";
 @import "~bootstrap-sass/assets/stylesheets/bootstrap/buttons";
+
+
 
 // Components
 @import "~bootstrap-sass/assets/stylesheets/bootstrap/component-animations";

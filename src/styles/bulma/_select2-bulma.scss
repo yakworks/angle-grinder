@@ -10,6 +10,22 @@ $select2-font-size: 14px;
   color: $input-color;
 }
 
+@mixin delete-icon ($delSize: $size-normal) {
+  @extend %delete;
+  background-image: none !important;
+  position: absolute;
+  height: $delSize;
+  max-height: $delSize;
+  max-width: $delSize;
+  min-height: $delSize;
+  min-width: $delSize;
+  width: $delSize;
+  border-radius: $delSize;
+  top: 50%;
+  margin-top: -($delSize/2);
+  margin-right: 5px;
+}
+
 .select2-container .select2-choices .select2-search-field input,
 .select2-container .select2-choice,
 .select2-container .select2-choices {
@@ -26,6 +42,10 @@ $select2-font-size: 14px;
     margin: 0;
     padding: 0;
   }
+  &.select2-dropdown-open .select2-choice{
+    color: $input-disabled-color
+  }
+
   &.select2-allowclear {
 
     .select2-choice .select2-chosen {
@@ -33,20 +53,7 @@ $select2-font-size: 14px;
     }
 
     abbr.select2-search-choice-close {
-      @extend %delete;
-      background-image: none !important;
-      position: absolute;
-      $delSize: $size-normal;
-      height: $delSize;
-      max-height: $delSize;
-      max-width: $delSize;
-      min-height: $delSize;
-      min-width: $delSize;
-      width: $delSize;
-      border-radius: $delSize;
-      top: 50%;
-      margin-top: -($delSize/2);
-      margin-right: 5px;
+      @include delete-icon(14px);
     }
   }
   .select2-choice {
@@ -77,8 +84,10 @@ $select2-font-size: 14px;
       margin-top: 5px;
       margin-bottom: 3px;
       line-height: 1em;
+      padding: 4px 20px 4px 5px;
     }
     .select2-search-choice {
+      font-size: .93em; //13px is base is 14px
       color: $button-color;
       background: $button-background-color;
       border-color: $button-border-color;
@@ -113,6 +122,12 @@ $select2-font-size: 14px;
     color: $input-arrow;
     box-sizing: border-box;
   }
+  .select2-search-choice-close {
+    @include delete-icon(14px);
+    margin-top: -8px;
+    margin-right: -1px;
+    left: inherit;
+  }
 }
 
 // search field for single drop
@@ -126,6 +141,9 @@ $select2-font-size: 14px;
 
   .select2-search input {
     @include sel2-input-defaults ;
+    background-image: none !important;
+    padding-top: 2px;
+    padding-bottom: 2px;
   }
 
   .select2-results li {

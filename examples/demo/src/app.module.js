@@ -1,17 +1,15 @@
 import angular from 'angular'
-import agMod from '~/angle-grinder'
-import angular_translate from 'angular-translate'
+import agModule from '~/angle-grinder'
+import ngTranslateModule from 'angular-translate'
 import 'angular-translate-loader-static-files'
 import fullscreen from './utils/fullscreen'
 import truncate_filters from './utils/truncate.filters'
 
-// demo resources
-import 'ng-showdown' //markdown
-import 'angular-highlightjs'; //source code highlighter
-import 'highlight.js/styles/darkula.css'; // try darkula too
-import Demo from './utils/demo/demo.module'
+// demo examples helpers
+import snippetsModule from './utils/demo/demo.module'
 
-import DropdownDemo from './components/dropdown'
+// demo sections
+import componentsModule from './components'
 
 // these can probably go away
 import 'prismjs/prism'
@@ -22,14 +20,12 @@ import 'angular-snippets/dist/themes/bootstrap-tabs/theme.js'
 
 
 export default angular.module('app', [
-  'ng-showdown',
-  'hljs',
-  Demo,
-  agMod,
-  DropdownDemo,
+  agModule,
+  snippetsModule,
+  componentsModule,
   fullscreen,
   truncate_filters,
-  angular_translate,
+  ngTranslateModule, //remove this, only here to get demo working
   'Snippets',
   'SnippetsThemeBootstrapTabs'
 ]).name

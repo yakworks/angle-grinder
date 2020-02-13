@@ -133,7 +133,7 @@ const componentsStates = {
   children: [
     {
       name: 'dropdown',
-      component: 'dropdownDemoIndex'
+      component: 'demoDropdownIndex'
     }
   ]
 }

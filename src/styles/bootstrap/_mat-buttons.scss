@@ -1,0 +1,66 @@
+
+@mixin btn($class,$bg){
+  .btn-#{$class} {
+    background-size: 200% 200%;
+    background-position: 50%;
+
+    &:focus {
+      background-color: $bg;
+    }
+
+    &:hover,
+    &:active:hover {
+      background-color: darken($bg, 6%);
+      border-color: transparent;
+    }
+
+    &:active {
+      border-color: transparent;
+      background-color: darken($bg, 12%);
+      @include gradient-radial(darken($bg, 12%) 10%, $bg 11%);
+      background-size: 1000% 1000%;
+      @include box-shadow(2px 2px 4px rgba(0,0,0,.4));
+    }
+  }
+}
+
+@include btn(default,$btn-default-bg);
+@include btn(primary,$btn-primary-bg);
+@include btn(success,$btn-success-bg);
+@include btn(info,$btn-info-bg);
+@include btn(warning,$btn-warning-bg);
+@include btn(danger,$btn-danger-bg);
+@include btn(link,#fff);
+
+$shadow:  0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+$shadow1: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+
+.btn {
+  //text-transform: uppercase;
+  border: none;
+  box-shadow: $shadow1;
+  transition: all 0.4s;
+  border-color: transparent;
+
+  &-link {
+    border-radius: $btn-border-radius-base;
+    box-shadow: none;
+    color: $btn-default-color;
+
+    &:hover,
+    &:focus {
+      box-shadow: none;
+      color: $btn-default-color;
+      text-decoration: none;
+    }
+  }
+
+  &-default {
+
+    &.disabled {
+      background-color: rgba(0, 0, 0, 0.1);
+      color: rgba(0, 0, 0, 0.4);
+      opacity: 1;
+    }
+  }
+}
