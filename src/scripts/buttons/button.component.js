@@ -8,7 +8,7 @@ class Controller {
   }
 
   $onInit() {
-    //setup defaults
+    // setup defaults
     this.type = this.type || 'default'
     // if disabled is added it wont be undefined and may have blank str if no value is set
     this.disabled = (this.disabled === '' || this.disabled === 'true')
