@@ -1,4 +1,4 @@
-'use strict'
+import appState from '~/scripts/utils/AppState'
 /**
  * Main Application Controller
  */

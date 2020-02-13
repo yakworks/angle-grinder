@@ -1,6 +1,7 @@
 import angular from 'angular'
 import appName from './app.module'
 import './config.router'
+import appState from '~/scripts/utils/AppState'
 
 const app = angular.module('app')
 // export default app.name
@@ -8,6 +9,7 @@ const app = angular.module('app')
 app.run(function($rootScope, $state, $stateParams) {
   // Set the ui-router state vars to global root to access them from any scope
   $rootScope.$state = $state
+  appState.$state = $state
   $rootScope.$stateParams = $stateParams
 
   // GLOBAL APP SCOPE

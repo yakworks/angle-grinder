@@ -24,5 +24,13 @@
       <ag-validation-errors for="customerInfoWebsite" />
     </div>
   </div>
+  <div ag-field-group for="customerInfoWebsite">
+    <label class="control-label">Website</label>
+    <div class="controls">
+      <input type="text" name="customerInfoWebsite" placeholder="www.9ci.com"
+        ng-model="$ctrl.vm.info.website" class="form-control"/>
+      <ag-validation-errors for="customerInfoWebsite" />
+    </div>
+  </div>
 </fieldset>
 <pre ng-cloak>model: {{$ctrl.vm | json}}</pre>
