@@ -7,16 +7,14 @@ describe('agConfig provider', function() {
   var provider, agValidationsConfig
 
   beforeEach(function() {
-    angular.module('test.agForm', [])
-      .config(function(agValidationsConfig) {
-        provider = agValidationsConfig
-      })
-
-    angular.mock.module(agMod, 'test.agForm')
-    inject(function(_agValidationsConfig_) {
-      agValidationsConfig = _agValidationsConfig_
+    angular.mock.module(agMod, function(agValidationsConfigProvider) {
+      provider = agValidationsConfigProvider;
     })
   })
+
+  beforeEach(inject(function (_agValidationsConfig_) {
+    agValidationsConfig =  _agValidationsConfig_
+  }))
 
   describe('validation strategy configuration', function() {
     it('should add a custom validation strategy', function() {
