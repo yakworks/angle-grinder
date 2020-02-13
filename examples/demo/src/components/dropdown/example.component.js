@@ -1,6 +1,4 @@
 import dropdownDemoModule from './dropdown-demo'
-//import appState from '~/scripts/utils/AppState'
-
 // Import Raw Files
 import htmlRaw from '!raw-loader!./dropdown-demo.html';
 import jsRaw from '!raw-loader!./dropdown-demo.js';
@@ -10,20 +8,11 @@ class controller {
   html = htmlRaw
   js = jsRaw
   md = mdRaw
-
-  constructor($element) {
-    this.$element = $element;
-  }
-
-  // get title() {
-  //   return appState.title
-  // }
 }
 
 const template = `
 <p>
-    While it appear as a modal for tablet and smartphones,
-    Dropdowns with <code>hoverable</code> prop won't change it's behavior to avoid any malfunction with hover.
+    Lorem Ipsum
 </p>
 <div class="example-section">
   <div class="example is-vertical">
