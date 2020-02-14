@@ -1,4 +1,4 @@
-// Import Template
+import _ from 'lodash'
 import template from './button.html'
 
 // Set up controller
@@ -24,7 +24,7 @@ class Controller {
   }
 
   fireClick(event) {
-    if (typeof this.buttonClick === "function") { // if there is a default then use it
+    if (_.isFunction(this.buttonClick)) { // if there is a default then use it
       this.buttonClick(event)
     }
   }

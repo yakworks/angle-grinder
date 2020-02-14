@@ -3,7 +3,7 @@
 import '~/styles/vendor.css.js'
 import '~/styles/all.scss'
 import './assets/styles.scss'
-import './assets/plugins.scss'
+//import './assets/plugins.scss'
 
 // VENDOR
 import '~/vendor'

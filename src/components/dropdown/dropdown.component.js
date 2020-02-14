@@ -1,4 +1,4 @@
-// Import Template
+import _ from 'lodash'
 import template from './dropdown.html'
 
 const DEFAULT_MENU_DISPLAY = 'Action'
@@ -16,9 +16,9 @@ class controller {
 
   fireMenuClick(menuItem, event) {
     // if it has an action then fire that
-    if (menuItem.action) {
+    if (_.isFunction(menuItem.action)) {
       menuItem.action(menuItem, event)
-    } else if (this.menuClick) { // if there is a default then use it
+    } else if (_.isFunction(this.menuClick)) { // if there is a default then use it
       this.menuClick(menuItem, event)
     }
   }
