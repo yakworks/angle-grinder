@@ -1,4 +1,4 @@
-import template from './dropdown-demo.html';
+import template from './component.html';
 import Swal from 'sweetalert2'
 
 class controller {
@@ -26,6 +26,6 @@ class controller {
 }
 
 export default angular
-  .module('module.demo.dropdownDemo', [])
+  .module('ag.demo.dropdownDemo', [])
   .component('dropdownDemo', { template, controller })
   .name;

@@ -1,8 +1,9 @@
 import angular from 'angular'
 import agValMod from '../agValidations.module'
+import _ from 'lodash'
 
 /* eslint-disable */
-angular.module(agValMod).directive('agValidationInline', function($timeout) {
+angular.module(agValMod).directive('agValidationInline', function($timeout, $document) {
   'use strict'
 
   var _uniqueIdCounter = 0
@@ -19,23 +20,16 @@ angular.module(agValMod).directive('agValidationInline', function($timeout) {
     template: require('./validationInline.html'),
     link: function(scope, element, attrs, ctrl) {
       var inputId = attrs.for || attrs.agValidationInline
-      // if (angular.isUndefined(inputId)) {
-      //   throw new Error('The validation input id must be specified eg. for="id"')
-      // }
-
       var inputEl, ngModel
 
       // run in new cycle to ensure that getElementById(inputId) will succeed as its not there when using components
       $timeout(function() {
-        //inputEl = element.prev('input, select, textarea')
         inputEl = element.closest('.controls').find('input:first-child, select:first-child, textarea:first-child')
-        // if inputEl is not imediate previous item then find it by using closest
-        inputEl = inputEl || angular.element(document.getElementById(inputId))
-        // inputEl = angular.element(document.getElementById(inputId))
-        if (inputEl.length === 0) {
-          throw new Error('Can not find input element for the validation directive')
+        inputEl = (inputEl?.length !== 0 ) ? inputEl : $document[0].getElementById(inputId)
+        if (_.isNil(inputEl) || inputEl.length === 0 ) {
+          throw new Error('Can not find input element to attach the validation directive')
         }
-        ngModel = inputEl.controller('ngModel')
+        ngModel = angular.element(inputEl).controller('ngModel')
         activate()
       })
 
@@ -75,12 +69,11 @@ angular.module(agValMod).directive('agValidationInline', function($timeout) {
        */
       function toggleAriaAttributes(showErrors) {
         if (showErrors) {
-          inputEl
-            .attr('aria-invalid', true)
-            .attr('aria-describedby', attrs.id)
+          inputEl.setAttribute('aria-invalid', true)
+          inputEl.setAttribute('aria-describedby', attrs.id)
         } else {
-          inputEl.removeAttr('aria-invalid')
-          inputEl.removeAttr('aria-describedby')
+          inputEl.removeAttribute('aria-invalid')
+          inputEl.removeAttribute('aria-describedby')
         }
       }
     }

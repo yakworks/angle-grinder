@@ -1,10 +1,17 @@
 // Colors
+// $grey-darker:  hsl(0, 0%, 21%) !default
+//$grey-dark:    hsl(0, 0%, 29%) !default
+//$grey:         hsl(0, 0%, 48%) !default
+// $grey-light:   hsl(0, 0%, 71%) !default
+// $grey-lighter: hsl(0, 0%, 86%) !default
+// $grey-lightest: hsl(0, 0%, 93%) !default
+
 ////////////////////////////////////////////////
 // SANDSTONE
 ////////////////////////////////////////////////
 $grey-darker: #2a2a26;
-$grey-dark: #3e3f3a;
-$grey: #8e8c84;
+$grey-dark: #3e3f3a !default
+$grey: #777670 !default
 $grey-light: #c9c8b8;
 $grey-lighter: #f1efe9;
 
@@ -69,12 +76,17 @@ $control-line-height: 1.5 !default
 $control-padding-vertical: calc(0.5em - #{$control-border-width}) !default
 $control-padding-horizontal: calc(0.75em - #{$control-border-width}) !default
 
-// Buttons
+// Button without is- specifier
 $button-color: $text-strong !default
 $button-background-color: $grey-lighter
 // $button-family: false !default
 $button-border-color: $grey-lighter
 //$button-border-width: $control-border-width !default
+// make the shadow bigger to sync with BS4
+$button-focus-box-shadow-size: 0 0 0 0.2rem !default
+//$button-focus-color: $grey-light !default
+$button-focus-border-color: $grey-light !default
+$button-focus-box-shadow-color: $grey-light !default
 
 //Inputs
 $input-color: $text-strong !default
@@ -172,7 +184,10 @@ $input-radius: $radius !default
 // $variable-columns: true !default
 
 
-// from DERIVED-VARIABLES
+// *************
+// ** From BULMA DERIVED-VARIABLES
+// *************
+
 // $primary: $turquoise !default
 
 // $info: $cyan !default

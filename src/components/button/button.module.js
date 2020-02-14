@@ -5,5 +5,5 @@ import './button.scss'
 // Register module, register component and export name
 export default angular
   .module('ag.components.button', [])
-  .component('agbutton', ButtonComponent)
+  .component('agButton', ButtonComponent)
   .name

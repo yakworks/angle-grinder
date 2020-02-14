@@ -132,8 +132,12 @@ const componentsStates = {
   // },
   children: [
     {
+      name: 'button',
+      component: 'buttonDemoIndex'
+    },
+    {
       name: 'dropdown',
-      component: 'demoDropdownIndex'
+      component: 'dropdownDemoIndex'
     }
   ]
 }

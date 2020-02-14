@@ -1,26 +1,39 @@
 /* eslint-disable */
+import agModule from '~/angle-grinder'
 
 describe('inline validation directive', function() {
-  var summary; var $rootScope; var element; var $compile
-  var templatePartial = '<span class="tpl"></span>'
-  var template = '<form ag-form strategy="dirty">' +
-      '<input id="firstName" name="firstName" ng-model="firstName" required msg-required="Test message">' +
-      '<ag-validation-inline id="yo" for="firstName"></ag-validation-inline>' +
-      '<input id="lastName" name="lastName" ng-model="lastName" msg-something="Something">' +
-      '<div ag-validation-inline="lastName"></div>' +
-      '</form>'
+  var summary, $rootScope, element, $compile, $timeout
 
-  beforeEach(module('agValidations'))
-  beforeEach(inject(function(_$rootScope_, _$compile_, $templateCache) {
+  var templatePartial = '<span class="tpl"></span>'
+  var template1 = `
+    <form ag-form>
+      <input id="firstName" name="firstName" ng-model="firstName" required msg-required="Test message">
+      <ag-validation-inline for="firstName"></ag-validation-inline>
+    </form>`
+  var template = `
+    <form ag-form strategy="dirty">
+      <input id="firstName" name="firstName" ng-model="firstName" required msg-required="Test message">
+      <ag-validation-inline id="yo" for="firstName"></ag-validation-inline>
+      <input id="lastName" name="lastName" ng-model="lastName" msg-something="Something">
+      <div ag-validation-inline="lastName" class='findme'></div>
+    </form>`
+
+  beforeEach(angular.mock.module(agModule))
+
+  beforeEach(inject(function(_$rootScope_, _$compile_, _$timeout_, $templateCache) {
     $compile = _$compile_
     $rootScope = _$rootScope_
-    $templateCache.put('agForm/inline/validationInline.html', templatePartial)
+    $timeout = _$timeout_
   }))
 
-  function setTemplate(template) {
+  function compileTemplate(template, $scope) {
     element = $(template)
     $('body').append(element)
-    element = $compile(element)($rootScope.$new())
+    $scope = $scope || $rootScope
+    element = $compile(element)($scope)
+    $rootScope.$apply()
+    $timeout.flush()
+    return element
   }
 
   afterEach(function() {
@@ -30,41 +43,48 @@ describe('inline validation directive', function() {
   })
 
   describe('activation', function() {
+    it('sanity check should compile', function() {
+      let scope = $rootScope.$new()
+      scope.user = {firstName: "jim"}
+      let el = compileTemplate(`
+        <form ag-form>
+          <input id="firstName" ng-model="user.firstName">
+          <ag-validation-inline for="firstName"></ag-validation-inline>
+        </form>`, scope)
+      //console.log("*************************** element", element)
+      expect(element.find('div').hasClass('ag-validation-inline')).toBe(true)
+      expect(element.find('input').val()).toBe("jim")
+    })
+
     it('should ensure that an input element is specified', function() {
       expect(function() {
         var tmp = '<form ag-form><ag-validation-inline></ag-validation-inline></form>'
-        setTemplate(tmp)
-      }).toThrow(new Error('The validation input id must be specified eg. for="id"'))
+        compileTemplate(tmp)
+      }).toThrow(new Error('Can not find input element to attach the validation directive'))
     })
 
     it('should ensure that the input element specified exists', function() {
       expect(function() {
         var tmp = '<form ag-form><ag-validation-inline for="el1"></ag-validation-inline></form>'
-        setTemplate(tmp)
-      }).toThrow(new Error('Can not find input element for the validation directive'))
+        compileTemplate(tmp)
+      }).toThrow()
     })
 
-    it('should add ag-validation-inline class to element', function() {
-      setTemplate(template)
-      expect(element.find('.tpl').hasClass('ag-validation-inline')).toBe(true)
-    })
-
-    it('should allow both element and attribute syntax', function() {
-      setTemplate(template)
-      expect(element.find('.tpl').length).toBe(2)
+    it('should be 2 setup with proper class', function() {
+      compileTemplate(template)
+      expect(element.find('.ag-validation-inline').length).toBe(2)
     })
 
     it('should create a unique id for the validation control if none specified', function() {
-      setTemplate(template)
-      expect(element.find('.tpl')[0].id).toBe('yo')
-      expect(element.find('.tpl')[1].id).toBe('validation_0')
+      compileTemplate(template)
+      expect(element.find('.findme')[0].id).toBe('validation_0')
     })
 
   })
 
   describe('redrawing errors', function() {
     it('should listen for AgForm.ErrorsUpdated event and draw if ngModel matches', function() {
-      setTemplate(template)
+      compileTemplate(template)
       $rootScope.$broadcast('AgForm.ErrorsUpdated', element.find('#firstName').controller('ngModel'))
 
       expect(element.find('#yo').scope().errors).toBeDefined()
@@ -72,7 +92,7 @@ describe('inline validation directive', function() {
     })
 
     it('should listen for AgForm.ErrorsUpdated event and draw if null ngModel sent', function() {
-      setTemplate(template)
+      compileTemplate(template)
       $rootScope.$broadcast('AgForm.ErrorsUpdated', null)
 
       expect(element.find('#yo').scope().errors).toBeDefined()
@@ -82,7 +102,7 @@ describe('inline validation directive', function() {
       var ngModel, validatorScope
 
       beforeEach(function() {
-        setTemplate(template)
+        compileTemplate(template)
         ngModel = element.find('#lastName').controller('ngModel')
         validatorScope = element.find('#validation_0').scope()
       })
@@ -92,10 +112,8 @@ describe('inline validation directive', function() {
         ngModel.$setValidity('something', false)
         $rootScope.$apply()
         $rootScope.$broadcast('AgForm.ErrorsUpdated', null)
-
-        expect(validatorScope.errors).toEqual([
-          { key: 'something', message: 'Something' }
-        ])
+        //console.log("*************************** validatorScope.errors", validatorScope.errors)
+        expect(validatorScope.errors[0].key).toBe('something')
         expect(validatorScope.showErrors).toBe(true)
       })
 
@@ -111,7 +129,7 @@ describe('inline validation directive', function() {
       var lastName, ngModel, validatorScope
 
       beforeEach(function() {
-        setTemplate(template)
+        compileTemplate(template)
         lastName = element.find('#lastName')
         ngModel = lastName.controller('ngModel')
         validatorScope = element.find('#validation_0').scope()

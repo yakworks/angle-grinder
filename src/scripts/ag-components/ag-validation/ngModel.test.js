@@ -1,6 +1,4 @@
-import angular from 'angular'
-import '~/vendor'
-import 'angular-mocks'
+/* eslint-disable */
 import agMod from '~/angle-grinder'
 
 describe('ngModel directive', function() {
@@ -21,6 +19,8 @@ describe('ngModel directive', function() {
       </div>
     `
   }
+
+  beforeEach(angular.mock.module(agMod))
 
   function setup(template, validationStrategy) {
     // First add ag-form so that we can mock out the controller methods
@@ -43,7 +43,8 @@ describe('ngModel directive', function() {
     ngModel = input.controller('ngModel')
   }
 
-  beforeEach(angular.mock.module(agMod))
+
+
   beforeEach(inject(function(_$rootScope_, _$compile_) {
     $rootScope = _$rootScope_
     $compile = _$compile_
@@ -116,7 +117,7 @@ describe('ngModel directive', function() {
   describe('setting $label on ngModel', function() {
     it('should set $label on ngModel if label is found', function() {
       setup(templates.labelControl)
-      expect(ngModel.$label).toBe('Test')
+      expect(ngModel.$label).toBe('FirstName')
     })
 
     it('should set $label to "" if no label is found', function() {

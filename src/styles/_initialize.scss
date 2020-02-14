@@ -1,0 +1,16 @@
+///////////////////
+// Call this to load the variables, mixins and functions
+// this should not really do anything to the scss output
+//////////////////
+
+@charset "utf-8";
+@import "initial-variables";
+@import "bulma";
+@import "variables";
+
+@import "base";
+@import "layout";
+@import "utilities";
+@import "components";
+
+@import "forms";

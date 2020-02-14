@@ -3,12 +3,12 @@ import './styles.scss'
 
 const template = `
 <demo-title-crumb></demo-title-crumb>
-<div class="container-fluid container-fullw demoDropdownIndex">
+<div class="container-fluid container-fullw dropdownDemoIndex">
   <dropdown-example></dropdown-example>
 </div>
 `
 // export module name
 export default angular
   .module(exampleModule)
-  .component('demoDropdownIndex', { template })
+  .component('dropdownDemoIndex', { template })
   .name
