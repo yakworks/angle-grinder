@@ -53,7 +53,7 @@ header.navbar {
       @media (min-width: $screen-md-min) {
         transition: all 0.5s;
         position: absolute;
-        left: 30px;
+        left: 50px;
         top: 0;
       }
 
@@ -84,101 +84,40 @@ header.navbar {
       }
     }
 
-    .sidebar-toggler {
-      font-size: $font-size-extra-large;
-      padding-right: 20px;
-      color: $grey;
-
-      &:hover {
-        color: $grey-dark;
-      }
-    }
-
     .sidebar-mobile-toggler,
-    .menu-mobile-toggler {
+    .sidebar-desk-toggler {
       padding-left: 15px;
       padding-right: 15px;
       padding-top: 0;
       padding-bottom: 0;
-
-      &:hover {
-        color: $grey-dark;
-      }
-    }
-
-    .sidebar-mobile-toggler {
-      background-color: $red;
-      border-color: $red;
-      color: $white;
-
-      &:hover {
-        background-color: lighten($red, 10%) !important;
-        border-color: lighten($red, 10%);
-        color: $white;
-      }
-
-      &:active,
-      &.active,
-      &.active:focus,
-      &:active:focus,
-      &:active:hover,
-      &.dropdown-toggle:active:hover {
-        background-color: darken($red, 5%) !important;
-        border-color: darken($red, 5%);
-      }
-
-      &:focus {
-        background-color: lighten($red, 15%);
-        border-color: lighten($red, 15%);
-        color: $white;
-      }
-
-      &.disabled:hover,
-      &.disabled:focus,
-      &.disabled:active,
-      &.disabled.active,
-      &[disabled],
-      &[disabled]:hover,
-      &[disabled]:focus,
-      &[disabled]:active,
-      &[disabled].active,
-      fieldset[disabled] &:hover,
-      fieldset[disabled] &:focus,
-      fieldset[disabled] &:active,
-      fieldset[disabled] &.active {
-        background-color: lighten($red, 20%);
-        border-color: lighten($red, 20%);
-        color: $white;
-      }
-    }
-
-    .menu-mobile-toggler {
       color: $white;
       font-size: $font-size-extra-large;
       min-width: 50px;
+      box-shadow: none;
 
       &:hover {
         color: $grey-dark;
       }
     }
 
-    // #horizontal-menu-toggler {
-    //   display: none;
-    // }
-
-    #sidebar-toggler {
+    #sidebar-desk-toggler {
       display: block;
     }
 
-    // @media (max-width: $screen-sm-max) {
-    //   #horizontal-menu-toggler {
-    //     display: none;
-    //   }
+    #sidebar-mobile-toggler {
+      display: none;
+      // display: block;
+    }
 
-    //   #sidebar-toggler {
-    //     display: block;
-    //   }
-    // }
+    @media (max-width: $screen-sm-max) {
+      #sidebar-desk-toggler  {
+        display: none;
+      }
+
+      #sidebar-mobile-toggler {
+        display: block;
+      }
+    }
   }
 
   .navbar-collapse {
@@ -578,64 +517,6 @@ header.navbar {
             &:active,
             &:focus {
               color: rgba($white, 1);
-            }
-          }
-        }
-
-        &.sidebar-toggler-wrapper {
-          > div {
-            line-height: $header-height;
-          }
-
-          &:before {
-            display: none;
-          }
-
-          .btn {
-            background-color: $red;
-            border-color: $red;
-            color: $white;
-            float: none !important;
-            display: inline-block !important;
-
-            &:hover {
-              background-color: lighten($red, 10%) !important;
-              border-color: lighten($red, 10%);
-              color: $white;
-            }
-
-            &:active,
-            &.active,
-            &.active:focus,
-            &:active:focus,
-            &:active:hover,
-            &.dropdown-toggle:active:hover {
-              background-color: darken($red, 5%) !important;
-              border-color: darken($red, 5%);
-            }
-
-            &:focus {
-              background-color: lighten($red, 15%);
-              border-color: lighten($red, 15%);
-              color: $white;
-            }
-
-            &.disabled:hover,
-            &.disabled:focus,
-            &.disabled:active,
-            &.disabled.active,
-            &[disabled],
-            &[disabled]:hover,
-            &[disabled]:focus,
-            &[disabled]:active,
-            &[disabled].active,
-            fieldset[disabled] &:hover,
-            fieldset[disabled] &:focus,
-            fieldset[disabled] &:active,
-            fieldset[disabled] &.active {
-              background-color: lighten($red, 20%);
-              border-color: lighten($red, 20%);
-              color: $white;
             }
           }
         }

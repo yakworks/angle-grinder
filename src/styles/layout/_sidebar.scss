@@ -161,17 +161,6 @@ $sidebar-item-open-background-color: $white-ter !default;
     }
   }
 
-  .sidebar-toggler {
-    font-size: $font-size-extra-large;
-    padding-right: 15px;
-    color: $white;
-    font-size: 21px;
-
-    &:hover {
-      color: $grey-darker;
-    }
-  }
-
   > div,
   .sidebar-container {
     height: 100%;
@@ -452,7 +441,9 @@ $sidebar-item-open-background-color: $white-ter !default;
       li {
         &.active,
         &.open {
-          background: $sidebar-item-active-background-color
+          background: $sidebar-item-active-background-color;
+          border-top-right-radius: 100px;
+          border-bottom-right-radius: 100px;
         }
 
         .no-touch & {

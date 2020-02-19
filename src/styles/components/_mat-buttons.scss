@@ -1,12 +1,34 @@
 // material buttons
 
 @mixin ripple(){
-  position: relative;
-  overflow: hidden;
-  transform: translate3d(0, 0, 0);
+  // position: relative;
+  // overflow: hidden;
+  // transform: translate3d(0, 0, 0);
 
-  &:after {
-    content: "";
+  // &:after {
+  //   content: "";
+  //   display: block;
+  //   position: absolute;
+  //   width: 100%;
+  //   height: 100%;
+  //   top: 0;
+  //   left: 0;
+  //   pointer-events: none;
+  //   background-image: radial-gradient(circle, #000 10%, transparent 10.01%);
+  //   background-repeat: no-repeat;
+  //   background-position: 50%;
+  //   transform: scale(10,10);
+  //   opacity: 0;
+  //   transition: transform .5s, opacity 1s;
+  // }
+
+  // &:active:after {
+  //   transform: scale(0,0);
+  //   opacity: .2;
+  //   transition: 0s;
+  // }
+  &:before {
+    content: '';
     display: block;
     position: absolute;
     width: 100%;
@@ -17,14 +39,14 @@
     background-image: radial-gradient(circle, #000 10%, transparent 10.01%);
     background-repeat: no-repeat;
     background-position: 50%;
-    transform: scale(10,10);
+    transform: scale(10, 10);
     opacity: 0;
-    transition: transform .5s, opacity 1s;
+    transition: transform 0.5s, opacity 1s;
   }
 
-  &:active:after {
-    transform: scale(0,0);
-    opacity: .2;
+  &:active:before {
+    transform: scale(0, 0);
+    opacity: 0.2;
     transition: 0s;
   }
 }
@@ -122,6 +144,34 @@ $shadow1: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.1
   }
 }
 
+.btn-transparent {
+  background: none;
+  //border-color: rgba($white, 0.6);
+  //border-width: 1px;
+  color: inherit;
+  box-shadow: none;
+
+  &:hover, &:focus, &:active, &.active {
+      background-color: rgba($black, 0.1);
+      //border-color: rgba($white, 0.8);
+  }
+
+  &.disabled:hover, &.disabled:focus, &.disabled:active, &.disabled.active, &[disabled]:hover, &[disabled]:focus, &[disabled]:active, &[disabled].active, fieldset[disabled] &:hover, fieldset[disabled] &:focus, fieldset[disabled] &:active, fieldset[disabled] &.active {
+      background: none;
+      border-color: rgba($white, 0.3);
+      color: $white;
+  }
+
+  .caret {
+      border-top-color: rgba($black, 0.1);
+  }
+
+  .dropup & {
+      .caret {
+          border-bottom: 4px solid rgba($black, 0.1);
+      }
+  }
+}
 
 // Material looking buttons
 
@@ -145,13 +195,19 @@ $shadow1: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.1
 
   &.is-active,
   &:active {
+    border-color: transparent;
     box-shadow: $shadow-large;
   }
-
+  //$button-focus-box-shadow-size: 0 0 0 0.2rem !default
   &.is-focused,
   &:focus {
-    border-color: transparent;
+    //border-color: transparent;
+    &:not(:active ) {
+      box-shadow: $shadow2;
+      //box-shadow: 0 0 0 0.15rem darken($button-background-color, 3)
+    }
   }
+  @include ripple;
 
   @each $name, $pair in $colors {
     $color: nth($pair, 1);
@@ -167,6 +223,7 @@ $shadow1: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.1
       &:active {
         box-shadow: $shadow-large;
       }
+      //@include ripple;
     }
   }
 
@@ -174,27 +231,6 @@ $shadow1: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.1
     box-shadow: none;
   }
 
-  // &:before {
-  //   content: '';
-  //   display: block;
-  //   position: absolute;
-  //   width: 100%;
-  //   height: 100%;
-  //   top: 0;
-  //   left: 0;
-  //   pointer-events: none;
-  //   background-image: radial-gradient(circle, #000 10%, transparent 10.01%);
-  //   background-repeat: no-repeat;
-  //   background-position: 50%;
-  //   transform: scale(10, 10);
-  //   opacity: 0;
-  //   transition: transform 0.5s, opacity 1s;
-  // }
 
-  // &:active:before {
-  //   transform: scale(0, 0);
-  //   opacity: 0.2;
-  //   transition: 0s;
-  // }
 }
 
