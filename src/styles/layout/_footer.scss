@@ -48,18 +48,6 @@
       }
     }
 
-    &.lyt-2 {
-      > footer {
-        margin-left: $sideBar-width - 40;
-      }
-    }
-
-    &.lyt-2.app-sidebar-closed {
-      > footer {
-        margin-left: $sideBar-closed-width - 20;
-      }
-    }
-
     .app-boxed-page & {
       > footer {
         margin-left: 0;

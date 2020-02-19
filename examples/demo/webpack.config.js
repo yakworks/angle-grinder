@@ -155,6 +155,14 @@ module.exports = function(env, argv) {
     //command line options
     bail: true, //Fail out on the first error --bail
     //profile: false //list info on whats going on
+
+    resolve: {
+      //extensions: ['.js', '.vue', '.json'],
+      alias: {
+        'angle-grinder': path.resolve('./','src'),
+        //Components: path.resolve(__dirname, "..", "src", "components"),
+      }
+    }
   }
   if(isProd){
     cfg.plugins.push(
@@ -173,9 +181,13 @@ module.exports = function(env, argv) {
       })
     )
   }
+
   //add themes scss to entries
+  // ['light', 'dark', 'dark-red', 'dark-light', 'dark-green', 'dark-3'].forEach( (name) => {
+  //   cfg.entry[`theme-${name}`] = `${CONTENT_BASE}/src/assets/themes/${name}.scss`
+  // })
   ['light', 'dark', 'dark-red', 'dark-light', 'dark-green', 'dark-3'].forEach( (name) => {
-    cfg.entry[`theme-${name}`] = `${CONTENT_BASE}/src/assets/themes/${name}.scss`
+    cfg.entry[`theme-${name}`] = `./src/styles/themes/${name}.scss`
   })
 
   cfg.devServer = {

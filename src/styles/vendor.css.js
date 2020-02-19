@@ -1,4 +1,4 @@
-import './vendor.scss'
+import './vendor/_index.scss'
 import 'ti-icons/css/themify-icons.css'
 import 'perfect-scrollbar/css/perfect-scrollbar.css'
 import 'toastr/build/toastr.css'

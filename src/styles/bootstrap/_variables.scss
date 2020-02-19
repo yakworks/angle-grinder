@@ -1,7 +1,8 @@
 $bootstrap-sass-asset-helper: false !default;
 
-// Sync vars with Bulma, _initialize should be called before this
+// Sync vars with BULMA, _initialize should be called before this
 // Bootstrap Colors
+
 //== Colors
 //
 //## Gray and brand colors for use across Bootstrap.
@@ -21,7 +22,7 @@ $brand-danger:    $danger;
 
 //== Scaffolding
 //** Background color for `<body>`.
-$body-bg:           $background;
+$body-bg:           $body-background-color;
 //** Global text color on `<body>`.
 $text-color:        $text;
 

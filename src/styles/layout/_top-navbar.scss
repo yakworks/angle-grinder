@@ -162,15 +162,23 @@ header.navbar {
       }
     }
 
-    @media (max-width: $screen-sm-max) {
-      #horizontal-menu-toggler {
-        display: none;
-      }
+    // #horizontal-menu-toggler {
+    //   display: none;
+    // }
 
-      #sidebar-toggler {
-        display: block;
-      }
+    #sidebar-toggler {
+      display: block;
     }
+
+    // @media (max-width: $screen-sm-max) {
+    //   #horizontal-menu-toggler {
+    //     display: none;
+    //   }
+
+    //   #sidebar-toggler {
+    //     display: block;
+    //   }
+    // }
   }
 
   .navbar-collapse {
@@ -927,26 +935,7 @@ header.navbar {
     }
   }
 
-  .lyt-2 & {
-    .navbar-header {
-      @media (min-width: $screen-md-min) {
-        width: $sideBar-width - 40;
-
-        .navbar-brand.navbar-brand-collapsed {
-          padding: 0;
-          width: $sideBar-closed-width - 20 !important;
-        }
-      }
-    }
-
-    .navbar-collapse {
-      @media (min-width: $screen-md-min) {
-        margin-left: $sideBar-width - 40;
-      }
-    }
-  }
-
-  .lyt-2.app-sidebar-closed & {
+  .app-sidebar-closed & {
     .navbar-header {
       @media (min-width: $screen-md-min) {
         width: $sideBar-closed-width - 20 !important;

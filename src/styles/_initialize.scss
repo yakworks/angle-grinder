@@ -9,3 +9,5 @@
 @import "bulma/utilities";
 @import "utilities/mixins";
 @import "derived-variables";
+// packet variables merge this into derived-variables
+@import "variables";
