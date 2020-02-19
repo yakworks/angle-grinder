@@ -6,6 +6,136 @@ $header-color: $blue;
 $label-color: $red;
 $link-color: #000 !important;
 $sub-menu-active-background-color: $grey-lighter !default;
+$sidebar-item-active-background-color: $primary-light !default;
+
+// closed hover menu css
+.app-sidebar-closed ul.sub-menu {
+  clear: both;
+  list-style: none;
+  padding: 1px 0;
+  display: none;
+  margin: 0;
+  background-color: $white;
+  border: 1px solid $grey-lighter;
+
+  li {
+    background: none;
+    margin-bottom: 0;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 1px !important;
+    padding: 0;
+
+    &.active,
+    &.open {
+      background: $sidebar-item-active-background-color;
+    }
+
+    a {
+      background: none;
+      display: block;
+      font-size: $font-size-base !important;
+      font-weight: 300;
+      border: none;
+      margin: 0;
+      padding-bottom: 5px;
+      padding-left: 52px !important;
+      padding-right: 15px;
+      padding-top: 5px;
+      text-decoration: none;
+      white-space: nowrap;
+
+      .icon-arrow {
+        right: 5px !important;
+      }
+    }
+
+    &:hover {
+      > a {
+        > .icon-arrow {
+          opacity: 1 !important;
+        }
+      }
+    }
+
+    &.dropdown-header {
+      padding-left: 40px !important;
+    }
+
+    &.divider {
+      height: 1px;
+      margin: 9px 0;
+      overflow: hidden;
+      margin-left: 40px !important;
+    }
+
+    ul.sub-menu {
+      li {
+        a {
+          padding-left: 60px !important;
+
+          .icon-arrow {
+            right: 10px !important;
+          }
+        }
+
+        ul.sub-menu {
+          li {
+            a {
+              padding-left: 80px !important;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // .app-sidebar-closed & {
+  //   @media (min-width: $screen-md-min) {
+  //     border-right: 1px solid $border-default;
+  //     border-bottom: 1px solid $border-default;
+  //     background: $white;
+  //     left: $sideBar-closed-width;
+  //     position: absolute;
+  //     padding: 1px 0;
+  //     overflow-y: auto;
+  //     overflow-x: visible;
+  //     height: auto;
+  //     bottom: auto;
+  //     width: $sideBar-width;
+  //     z-index: 1050;
+  //     display: none;
+
+  //     > li {
+  //       a {
+  //         padding-left: 20px !important;
+  //         padding-right: 5px;
+  //       }
+
+  //       ul.sub-menu {
+  //         position: relative;
+  //         left: 0;
+  //         width: 100%;
+  //         border: none !important;
+
+  //         li {
+  //           a {
+  //             padding-left: 30px !important;
+  //           }
+
+  //           ul.sub-menu {
+  //             li {
+  //               a {
+  //                 padding-left: 50px !important;
+  //               }
+  //             }
+  //           }
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
+}
 
 @media (min-width: $screen-md-min) {
   .app-aside {
