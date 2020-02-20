@@ -49,9 +49,6 @@ export default class AgBaseComponent {
     // if(this.minimumLength) {
     //  this.isRequired = true
     // }
-    // this.ngModelCtrl.$viewChangeListeners.push(function() {
-    //   console.log("******** viewChangeListeners **********")
-    // });
     this.ngModelCtrl.$render = () => {
       this.value = this.ngModelCtrl.$viewValue
     }
@@ -59,8 +56,6 @@ export default class AgBaseComponent {
 
   onChange() {
     $log.debug('onChange', this)
-    // console.log('******** onChange ********** this.value ', this.value)
-    // console.log('******** onChange ********** this.ngModelCtrl ', this.ngModelCtrl)
     try {
       if (this.value && this.maximumLength && this.value.length > this.maximumLength) {
         this.value = this.value.substring(0, this.maximumLength)
@@ -79,7 +74,6 @@ export default class AgBaseComponent {
 
   $postLink() {
     this.$timeout(function() {
-      console.log('******* $postLink in $timeout')
       // var elem = document.getElementById(this.gridId);
       // do something with elem now that the DOM has had it's bindings applied
     })

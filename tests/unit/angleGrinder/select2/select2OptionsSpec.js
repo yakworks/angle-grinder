@@ -14,7 +14,6 @@ describe("elect2OptionsSpec", function() {
   it("builds default options", function() {
     expect(options).to.have.deep.property("width", "element");
     expect(options).to.have.deep.property("initSelection", angular.noop);
-    //console.log("************** options", options)
     return expect(options.ajax.dataType).to.eq("json");
   });
 

@@ -51,7 +51,6 @@ describe('inline validation directive', function() {
           <input id="firstName" ng-model="user.firstName">
           <ag-validation-inline for="firstName"></ag-validation-inline>
         </form>`, scope)
-      //console.log("*************************** element", element)
       expect(element.find('div').hasClass('ag-validation-inline')).toBe(true)
       expect(element.find('input').val()).toBe("jim")
     })
@@ -112,7 +111,6 @@ describe('inline validation directive', function() {
         ngModel.$setValidity('something', false)
         $rootScope.$apply()
         $rootScope.$broadcast('AgForm.ErrorsUpdated', null)
-        //console.log("*************************** validatorScope.errors", validatorScope.errors)
         expect(validatorScope.errors[0].key).toBe('something')
         expect(validatorScope.showErrors).toBe(true)
       })

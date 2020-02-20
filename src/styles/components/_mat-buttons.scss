@@ -70,7 +70,7 @@ $shadow-large: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 
 
     &:active {
       background-color: darken($bg,12%);
-      @include gradient-radial(darken($bg, 12%) 10%, $bg 11%);
+      //@include gradient-radial(darken($bg, 12%) 10%, $bg 11%);
       background-size: 1000% 1000%;
       box-shadow: 2px 2px 4px rgba(0,0,0,.4);
     }
@@ -121,27 +121,27 @@ $shadow1: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.1
     }
   }
 
-  &:after {
-    content: "";
-    display: block;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    pointer-events: none;
-    background-image: radial-gradient(circle, #000 10%, transparent 10.01%);
-    background-repeat: no-repeat;
-    background-position: 50%;
-    transform: scale(10,10);
-    opacity: 0;
-    transition: transform .5s, opacity 1s;
-  }
-  &:active:after {
-    transform: scale(0,0);
-    opacity: .2;
-    transition: 0s;
-  }
+  // &:after {
+  //   content: "";
+  //   display: block;
+  //   position: absolute;
+  //   width: 100%;
+  //   height: 100%;
+  //   top: 0;
+  //   left: 0;
+  //   pointer-events: none;
+  //   background-image: radial-gradient(circle, #000 10%, transparent 10.01%);
+  //   background-repeat: no-repeat;
+  //   background-position: 50%;
+  //   transform: scale(10,10);
+  //   opacity: 0;
+  //   transition: transform .5s, opacity 1s;
+  // }
+  // &:active:after {
+  //   transform: scale(0,0);
+  //   opacity: .2;
+  //   transition: 0s;
+  // }
 }
 
 .btn-transparent {
@@ -196,7 +196,7 @@ $shadow1: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.1
   &.is-active,
   &:active {
     border-color: transparent;
-    box-shadow: $shadow-large;
+    box-shadow: $shadow2;
   }
   //$button-focus-box-shadow-size: 0 0 0 0.2rem !default
   &.is-focused,
@@ -207,7 +207,9 @@ $shadow1: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.1
       //box-shadow: 0 0 0 0.15rem darken($button-background-color, 3)
     }
   }
-  @include ripple;
+  // &:not([disabled]){
+  //   @include ripple;
+  // }
 
   @each $name, $pair in $colors {
     $color: nth($pair, 1);
@@ -234,3 +236,23 @@ $shadow1: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.1
 
 }
 
+[ag-ripple] {
+  position: relative;
+  overflow: hidden;
+}
+.ag-ripple {
+  display: block;
+  position: absolute;
+  background-color: rgba(253, 253, 253, 0.4);
+  border-radius: 50%;
+  transform: scale(0);
+}
+.ag-ripple.animate {
+  animation: ripple 0.35s linear;
+}
+@keyframes ripple {
+  100% {
+    opacity: 0;
+    transform: scale(2.5);
+  }
+}

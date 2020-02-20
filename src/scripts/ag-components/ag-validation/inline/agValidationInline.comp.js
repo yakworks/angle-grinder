@@ -1,6 +1,7 @@
 import angular from 'angular'
 import agValMod from '../agValidations.module'
 import _ from 'lodash'
+import $log from '../../../utils/Log'
 
 /* eslint-disable */
 angular.module(agValMod).directive('agValidationInline', function($timeout, $document) {
@@ -68,6 +69,7 @@ angular.module(agValMod).directive('agValidationInline', function($timeout, $doc
        * @param showErrors true to add error state
        */
       function toggleAriaAttributes(showErrors) {
+        $log.debug("inputEl", inputEl)
         if (showErrors) {
           inputEl.setAttribute('aria-invalid', true)
           inputEl.setAttribute('aria-describedby', attrs.id)

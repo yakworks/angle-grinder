@@ -3,7 +3,6 @@ import formsModule from '~/scripts/forms'
 describe("Directive: agSubmit", function() {
 
   beforeEach(angular.mock.module(formsModule, function($provide) {
-    //console.log("12333333333333333333333333333333333333333")
     $provide.value("serverValidationErrorsHandler", sinon.stub());
   })
   );

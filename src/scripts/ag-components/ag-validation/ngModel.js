@@ -104,7 +104,6 @@ angular.module(agValMod)
 
           angular.forEach(ngModel.$error, function(value, key) {
             const shouldVal = validationStrategyFn(form, ngModel)
-            // console.log(`shouldVal:${shouldVal} , value:${value}`)
             var showErrors = value && shouldVal
 
             if (showErrors) {

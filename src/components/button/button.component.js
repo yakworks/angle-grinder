@@ -2,25 +2,17 @@ import _ from 'lodash'
 import template from './button.html'
 
 // Set up controller
-class Controller {
+class BtnController {
 
   constructor($element) {
     this.$element = $element
   }
 
   $onInit() {
-    let btnCls = this.buttonClass || ''
-    // setup defaults
-    if(this.color) btnCls = `${btnCls} is-${this.color}`
-    //this.colorClass = this.color ? `is-${this.color}` : ''
-    // console.log("------this.colorClass", this.colorClass)
-    // // if disabled is added it wont be undefined and may have blank str if no value is set
-    // this.disabled = (this.disabled === '' || this.disabled === 'true')
-    // this.isLoading = (this.isLoading === '' || this.isLoading === 'true')
-    // btnClass = this.isLoading ? `${btnClass} is-loading` : btnClass
+    this.btnCls = this.buttonClass || ''
+    // setup color class
+    if(this.color) this.btnCls = `${this.btnCls} is-${this.color}`
 
-    // console.log("------this.classes", this.classes)
-    this.buttonClass = btnCls
   }
 
   fireClick(event) {
@@ -29,24 +21,14 @@ class Controller {
     }
   }
 
-  //get ngClass(){
-    // return {
-    //   'is-loading': this.loading,
-    // }
-    // return {
-    //   'is-rounded': this.rounded,
-    //   'is-loading': this.loading,
-    //   'is-outlined': this.outlined,
-    //   'is-fullwidth': this.expanded,
-    //   'is-inverted': this.inverted,
-    //   'is-focused': this.focused,
-    //   'is-active': this.active,
-    //   'is-hovered': this.hovered,
-    //   'is-selected': this.selected
-    // }
+  get ngClass(){
+    //let self = this
+    return {
+      'is-loading': this.isLoading,
+    }
   }
 
-//}
+}
 
 // Define and export component
 export default {
@@ -56,11 +38,11 @@ export default {
     color: '@',
     // iconLeft: '@',
     // iconRight: '@',
-    // isLoading: '@',
-    // disabled: '<',
+    isLoading: '<',
+    isDisabled: '<',
     // size: '@',
     buttonClick: '='
   },
   template,
-  controller: Controller
+  controller: BtnController
 }

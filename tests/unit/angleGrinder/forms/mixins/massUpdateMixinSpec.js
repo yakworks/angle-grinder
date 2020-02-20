@@ -47,7 +47,6 @@ describe("massUpdateMixinSpec", function() {
         expect($uibModal.open).to.have.been.called;
 
         const args = $uibModal.open.getCall(0).args[0];
-        //console.log("*************args",args)
         expect(args.resolve.selectedIds).to.exist
         expect(args.resolve.grid).to.exist
         expect(args.resolve.extraParams).to.exist

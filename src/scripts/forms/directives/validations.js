@@ -226,8 +226,6 @@ forms.directive('agServerValidationErrors', ['alerts', alerts => ({
     const getServerErrors = () => formCtrl.$serverErrors
 
     return scope.$watch(getServerErrors, function(serverErrors, old) {
-      console.log(serverErrors)
-      console.log(old)
       displayGlobalErrors()
       // Iterate through all fields with server validation errors
       return _.each(serverErrors, (val, field) => {

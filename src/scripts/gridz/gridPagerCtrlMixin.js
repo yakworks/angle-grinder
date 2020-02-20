@@ -60,7 +60,6 @@ gridz.controller('gridPagerCtrlMixin', [
     }
 
     this.goTo = function(index) {
-      // console.log(index)
       const [ids, indx] = Array.from(getCurrent())
       return currIdSetter($scope, ids[index])
     }

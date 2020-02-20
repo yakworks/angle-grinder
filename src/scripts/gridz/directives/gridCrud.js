@@ -168,14 +168,12 @@ export class GridCrudCtrl {
 
     $scope.highlightCell = function(rowid, colname) {
       const q = grid().getGridEl()
-      // console.log(q)
       q.jqGrid('setCell', rowid, colname, '', { 'border-color': 'green', 'border-width': 'thin', 'border-style': 'double' })
       return null
     }
 
     $scope.unHighlightCell = function(rowid, colname) {
       const q = grid().getGridEl()
-      // console.log(q)
       q.jqGrid('setCell', rowid, colname, '', { 'border-width': '0px' })
       return null
     }
