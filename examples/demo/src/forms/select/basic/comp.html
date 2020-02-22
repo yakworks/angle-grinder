@@ -1,0 +1,17 @@
+<div class="form-group" >
+  <label class="control-label">Basic</label>
+  <div class="controls is-flex">
+    <input class="form-control" ng-model="$ctrl.vm.day"
+        data-placeholder="select a day"
+        ui-select2 ui-select2-data="['Mon','Tue','Wed','Thu','Fri','Sat','Sun']">
+    <input class="form-control ml-1" ng-model="$ctrl.vm.color"
+        ui-select2="{ allowClear: true, placeholder: 'select a color', data:['red','green']}"
+    >
+  </div>
+</div>
+<p>using ag-select component</p>
+<ag-select name="agSelect" ng-model="$ctrl.vm.color"
+  select-options="{ allowClear: true, placeholder: 'select a color', data: ['red','green'] }">
+</ag-select>
+<pre ng-cloak>vm1: {{$ctrl.vm}}</pre>
+

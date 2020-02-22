@@ -2,7 +2,7 @@
 @import "~bootstrap/scss/variables";
 @import "~bootstrap/scss/mixins";
 
-demo {
+demo-snippet {
   .live-example {
     @include media-breakpoint-down(sm) {
       border-bottom: 1px solid silver;
@@ -11,7 +11,7 @@ demo {
     }
   }
 
-  .md, .html, .javascript {
-    max-height: 500px;
-  }
+  // .md, .html, .javascript {
+  //   max-height: 500px;
+  // }
 }

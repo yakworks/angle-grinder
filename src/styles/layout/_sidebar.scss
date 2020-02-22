@@ -328,12 +328,12 @@ $sidebar-item-open-background-color: $white-ter !default;
       border-left: 4px solid transparent;
       display: block;
       position: relative;
-      padding: 5px;
+      padding: 5px 13px 5px 5px;
 
       .item-inner {
         padding: 10px 15px 10px 10px;
         font-size: $font-size-base;
-        letter-spacing: 1px;
+        letter-spacing: 0.5px;
         font-weight: 600;
         font-family: $family-secondary;
 

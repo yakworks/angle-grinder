@@ -1,6 +1,14 @@
-<button type="button" class="button {{$ctrl.btnCls}}"
-  ng-class="$ctrl.ngClass"
-  ng-click="$ctrl.buttonClick($event)"
-  ng-disabled="$ctrl.isDisabled" ag-ripple>
-    <span ng-transclude></span>
+<button type="button" class="button {{btnCtrl.btnCls}}"
+  ng-class="btnCtrl.ngClass"
+  ng-click="btnCtrl.buttonClick($event)"
+  ng-disabled="btnCtrl.isDisabled" >
+  <!-- <span> -->
+    <span ng-if="btnCtrl.iconLeftClass" class="icon">
+      <i class="{{btnCtrl.iconLeftClass}}"></i>
+    </span>
+    <span ng-if="btnCtrl.hasTranscluded" ng-transclude></span>
+    <span ng-if="btnCtrl.iconRightClass" class="icon is-medium">
+      <i class="{{btnCtrl.iconRightClass}}"></i>
+    </span>
+  <!-- </span> -->
 </button>

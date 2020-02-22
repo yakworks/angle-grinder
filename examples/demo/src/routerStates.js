@@ -18,8 +18,16 @@ const formStates = {
   abstract: true,
   children: [
     {
-      name: 'input-components',
-      template: require('./forms/input-components/index.html')
+      name: 'inputs',
+      component: 'agInputDemoIndex'
+    },
+    {
+      name: 'selects',
+      component: 'sel2DemoIndex'
+    },
+    {
+      name: 'xedit',
+      component: 'xeditDemoIndex'
     },
     {
       name: 'validations',
@@ -30,8 +38,8 @@ const formStates = {
       template: require('./forms/horizontal-examples/index.html')
     },
     {
-      name: 'select2',
-      template: require('./forms/select2/index.html')
+      name: 'select2-sandbox',
+      component: 'select2DemoIndex'
     },
     {
       name: 'elements',

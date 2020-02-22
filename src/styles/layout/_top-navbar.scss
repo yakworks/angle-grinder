@@ -9,6 +9,7 @@ header.navbar {
   border: none;
   margin-bottom: 0;
   height: $header-height;
+  background-color: $header-background-color;
 
   .loading-bar-wrapper {
     position: absolute;
@@ -26,7 +27,8 @@ header.navbar {
       width: $sideBar-width;
     }
 
-    background: $black;
+    //background: $black;
+    background-color: $header-background-color;
     border-bottom: 1px solid transparent;
     position: relative;
     height: $header-height;
@@ -123,7 +125,7 @@ header.navbar {
   .navbar-collapse {
     border-bottom: 1px solid transparent;
     border-top: none;
-    background: $black;
+    background-color: $header-background-color;
     padding-left: 15px !important;
     padding-right: 15px !important;
     position: relative;
@@ -365,7 +367,7 @@ header.navbar {
     width: 30px;
     line-height: $header-height - 1;
     color: rgba($white, 0.7);
-    background: $black;
+    background: transparent;
     padding-top: 0;
     padding-bottom: 0;
 

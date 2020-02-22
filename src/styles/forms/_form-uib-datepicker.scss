@@ -1,0 +1,108 @@
+
+.uib-datepicker-popup {
+  .uib-monthpicker, .uib-daypicker {
+    &:focus {
+      outline: none;
+    }
+  }
+  .btn.btn-default {
+    border: none;
+    box-shadow: none;
+    background-color: transparent;
+  }
+  .btn.uib-left{
+    min-height: 30px;
+    &:after {
+      position: absolute;
+      //font-size: $font-size-large;
+      padding: 0;
+      margin: 0;
+      font-family: "FontAwesome";
+      content: "\f053";
+      left: 10px;
+      top: 5px;
+    }
+  }
+  .btn.uib-right{
+    min-height: 30px;
+    &:after {
+      position: absolute;
+      //font-size: $font-size-large;
+      padding: 0;
+      margin: 0;
+      font-family: "FontAwesome";
+      content: "\f054";
+      //left: 10px;
+      top: 5px;
+    }
+  }
+  // .uib-day {
+
+  // }
+}
+.clip-datepicker {
+    padding: 10px;
+
+    &.well {
+        background: $white;
+        box-shadow: none;
+    }
+
+    table {
+        outline: none !important;
+
+        // thead {
+        //     .btn {
+        //         font-size: 17px;
+        //     }
+        // }
+    }
+
+    button {
+        border: none;
+        line-height: 1.8;
+
+        span {
+
+            &.text-info, &.text-current {
+                color: $primary !important;
+                font-weight: bold;
+
+                &::before {
+                    border-left: 6px solid transparent;
+                    border-top: 6px solid $primary;
+                    content: "";
+                    height: 0;
+                    position: absolute;
+                    right: 2px;
+                    top: 2px;
+                    width: 0;
+                }
+            }
+        }
+
+        &.active {
+            background-color: $primary !important;
+
+            &:active, &:focus {
+                background-color: $primary !important;
+            }
+
+
+            span {
+                color: $white !important;
+
+                &.text-info {
+
+                    &::before {
+                        border-top-color: $white;
+                    }
+                }
+            }
+        }
+
+        &.btn-current {
+            background-color: #F5F5F5;
+        }
+    }
+}

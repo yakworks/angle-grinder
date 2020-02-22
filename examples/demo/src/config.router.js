@@ -23,7 +23,7 @@ app.config(function($stateProvider, $urlRouterProvider, stateHelperProvider) {
 })
 
 // Custom UI Bootstrap Calendar Popup Template
-app.run(function($templateCache) {
-  // let url = './views/partials/sidebar.html'
-  $templateCache.put('route/app.forms.input-components.html', require('./forms/input-components/index.html'))
-})
+// app.run(function($templateCache) {
+//   // let url = './views/partials/sidebar.html'
+//   $templateCache.put('route/app.forms.input-components.html', require('./forms/input-components/index.html'))
+// })

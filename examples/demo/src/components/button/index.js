@@ -1,5 +1,5 @@
-import exampleModule from './demo/example.component'
-import colorsStatesModule from './colors-states/example.component'
+import exampleModule from './demo'
+import colorsStatesModule from './colors-states'
 import './styles.scss'
 
 const template = `

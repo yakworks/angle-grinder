@@ -31,7 +31,14 @@ $select2-font-size: 14px;
 .select2-container .select2-choices {
   @include sel2-input-defaults ;
 }
-
+.select2-drop.select2-drop-above {
+  margin-top: 1px;
+  border-top: 1px solid #aaa;
+  border-bottom: 0;
+  border-radius: 4px 4px 0 0;
+  -webkit-box-shadow: 0 -4px 5px rgba(0, 0, 0, .15);
+  box-shadow: 0 -4px 5px rgba(0, 0, 0, .15);
+}
 .select2-container {
 
   &.form-control {
@@ -105,6 +112,8 @@ $select2-font-size: 14px;
   }
   &.form-control {
     height: auto;
+    // for some reason xeditable sets whitespace to pre and this is needed to reset that back to normal
+    white-space: normal;
   }
 
   .select2-choices:after, .select2-choice:after {
@@ -152,7 +161,14 @@ $select2-font-size: 14px;
   &.select2-drop-active {
     border-color: $input-focus-border-color;
   }
-
+  &.select2-drop-above {
+    margin-top: 1px;
+    border-top: 1px solid #aaa;
+    border-bottom: 0;
+    border-radius: 4px 4px 0 0;
+    -webkit-box-shadow: 0 -4px 5px rgba(0, 0, 0, .15);
+    box-shadow: 0 -4px 5px rgba(0, 0, 0, .15);
+  }
 }
 
 .select2-chosen,
@@ -218,6 +234,7 @@ $select2-font-size: 14px;
   @include border-bottom-radius($control-radius !important);
   //background: $btn-default-bg;
   filter: none;
+  background-image: none;
   .input-group.select2-bootstrap-prepend & {
     @include border-left-radius(0 !important);
   }

@@ -23,7 +23,7 @@ app.directive('editableFormButtons', [
     },
 
     template: `\
-<div class="buttons">
+<div class="buttons is-right mt-1">
 <!--
 <button type="button" class="btn btn-default"
         ng-click="form.$show()"
@@ -32,8 +32,10 @@ app.directive('editableFormButtons', [
 </button>
 -->
 <span ng-if="form.$visible">
+  <button type="submit" class="btn btn-default btn-primary" ng-disabled="form.$invalid || form.$waiting">
+    <i class="fa fa-check fa-inverse"></i> Save
+  </button>
   <button type="button" class="btn" ng-disabled="form.$waiting" ng-click="cancel()"><i class="fa fa-times"></i> Cancel </button>
-  <button type="submit" class="btn btn-default btn-primary" ng-disabled="form.$invalid || form.$waiting"><i class="fa fa-check fa-inverse"></i> Save </button>
 </span>
 </div>\
 `

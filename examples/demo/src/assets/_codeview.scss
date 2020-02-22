@@ -1,4 +1,7 @@
 .codeview {
+  pre code {
+    white-space: pre;
+  }
   .codeview-title {
     // background: lighten($primary, 10%);
     background: $grey;

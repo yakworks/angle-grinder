@@ -25,10 +25,19 @@
     </div>
   </div>
   <div ag-field-group for="customerInfoWebsite">
-    <label class="control-label">Website</label>
+    <label class="control-label">Date Pick</label>
     <div class="controls">
-      <input type="text" name="customerInfoWebsite" placeholder="www.9ci.com"
-        ng-model="$ctrl.vm.info.website" class="form-control"/>
+      <div class="input-group">
+        <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt"
+              is-open="inputopened" ng-init="inputopened = false" ng-click="inputopened = !inputopened"
+              datepicker-options="{showWeeks : false, startingDay : 1}"
+              ng-required="true" close-text="Close" />
+        <span class="input-group-btn">
+          <button type="button" class="btn" ng-click="open()">
+            <i class="fa fa-calendar"></i>
+          </button>
+        </span>
+      </div>
       <ag-validation-errors for="customerInfoWebsite" />
     </div>
   </div>

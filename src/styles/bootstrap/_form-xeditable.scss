@@ -1,0 +1,68 @@
+.form-xeditable {
+
+  .edit-group {
+    margin-bottom: $form-group-margin-bottom;
+  }
+
+  // Consistent vertical alignment of radios and checkboxes
+  //
+  // Labels also get some reset styles, but that is scoped to a media query below.
+  .radio,
+  .checkbox,
+  .radio-inline,
+  .checkbox-inline {
+    padding-top: ($padding-base-vertical + 1); // Default padding plus a border
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  // Account for padding we're adding to ensure the alignment and of help text
+  // and other content below items
+  .radio,
+  .checkbox {
+    min-height: ($line-height-computed + ($padding-base-vertical + 1));
+  }
+
+  // Make form groups behave like rows
+  .edit-group {
+    @include make-row;
+  }
+
+  // Reset spacing and right align labels, but scope to media queries so that
+  // labels on narrow viewports stack the same as a default form example.
+  @media (min-width: $screen-sm-min) {
+    .control-label {
+      padding-top: ($padding-base-vertical + 1); // Default padding plus a border
+      margin-bottom: 0;
+      text-align: right;
+    }
+  }
+
+  // Validation states
+  //
+  // Reposition the icon because it's now within a grid column and columns have
+  // `position: relative;` on them. Also accounts for the grid gutter padding.
+  .has-feedback .form-control-feedback {
+    right: floor(($grid-gutter-width / 2));
+  }
+
+  // Form group sizes
+  //
+  // Quick utility class for applying `.input-lg` and `.input-sm` styles to the
+  // inputs and labels within a `.form-group`.
+  .edit-group-lg {
+    @media (min-width: $screen-sm-min) {
+      .control-label {
+        padding-top: ($padding-large-vertical + 1);
+        font-size: $font-size-large;
+      }
+    }
+  }
+  .edit-group-sm {
+    @media (min-width: $screen-sm-min) {
+      .control-label {
+        padding-top: ($padding-small-vertical + 1);
+        font-size: $font-size-small;
+      }
+    }
+  }
+}

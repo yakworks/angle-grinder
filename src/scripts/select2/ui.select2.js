@@ -1,5 +1,6 @@
 import angular from 'angular'
 import _ from 'lodash'
+import { convertSelect2Data } from './helpers'
 require('Select2/select2.js')
 
 /**
@@ -19,6 +20,7 @@ angular.module('ui.select2', [])
   .value('uiSelect2Config', {})
   .directive('uiSelect2', function(uiSelect2Config, $timeout) {
     var options = {}
+    // I think uiSelect2Config is the defaults
     if (uiSelect2Config) {
       angular.extend(options, uiSelect2Config)
     }
@@ -52,11 +54,31 @@ angular.module('ui.select2', [])
           pre: function(scope, elm, attrs, ngModelCtrl) {
             // instance-specific options
             var opts = angular.extend({}, options, scope.$eval(attrs.uiSelect2))
-
+            // if ui-select2-data attribute is set then assign it
+            const dataAttr = scope.$eval(attrs.uiSelect2Data)
+            if (dataAttr) {
+              opts.data = dataAttr
+            }
+            // setup defaults for data
+            if (opts.data) {
+              // if data is an array then tranform it down to be a property of results
+              if (Array.isArray(opts.data)) {
+                // convertSelect2Data makes ['red','green'] into [{id:'red',name'red}, etc...]
+                const results = convertSelect2Data(opts.data)
+                console.log('results', results)
+                opts.data = { results: results }
+              }
+              // if data.text is not set then deefault it to name (select2 defaults it to 'text')
+              if (opts.data.text === undefined) {
+                opts.data.text = 'name'
+              }
+            }
+            // if(attrs.uiSelect2Data) opts.data = scope.$eval(attrs.uiSelect2Data)
             // if modelType is object then will use the elm.select2('data') and will store the selected
             // object(s) in the ng-model as objects instead of as just the ids
             // let useDataObject = false
             let dataVar = 'val'
+            const idProp = opts.idProp ? opts.idProp : 'id'
 
             // uses elm.select2('val') when its a select and we want the id in the model not the object.
             // when its on and input and its set to multiple then we will use 'data' so it creates and array of obbjecgs for
@@ -165,7 +187,20 @@ angular.module('ui.select2', [])
 
               log(`elm.select2(${dataVar}, ngModelCtrl.$modelValue)`, ngModelCtrl.$modelValue)
               // needs to come aftre render so it removes the items
-              elm.select2(dataVar, ngModelCtrl.$modelValue)
+              // if(setterProp){
+              //   elm.select2('val', ngModelCtrl.$modelValue[idProp])
+              // } else {
+              //   elm.select2(dataVar, ngModelCtrl.$modelValue)
+              // }
+              if (ngModelCtrl.$modelValue) {
+                if (opts.useDataObject) {
+                  elm.select2('val', ngModelCtrl.$modelValue[idProp])
+                } else {
+                  elm.select2(dataVar, ngModelCtrl.$modelValue)
+                }
+              }
+              // let val = setterProp ? ngModelCtrl.$modelValue[setterProp] : ngModelCtrl.$modelValue
+              // elm.select2(dataVar, val)
 
               // Not sure if I should just check for !isSelect OR if I should check for 'tags' key
               // if (!opts.initSelection && !isSelect) {

@@ -1,10 +1,11 @@
 import angular from 'angular'
 import _ from 'lodash'
 import agValMod from './agValidations.module'
+import $log from '../../utils/Log'
+import { isAttrTruthy } from '../../utils/ngHelpers'
 
-// import $log from '../../utils/Log'
 function ldebug(msg, o) {
-  // $log.debug(msg, o)
+  $log.debug(msg, o)
 }
 
 angular.module(agValMod)
@@ -24,7 +25,8 @@ angular.module(agValMod)
        * Active the directive
        */
         function activate() {
-        // add id if it doesn't exist
+          ldebug('ngModel', ngModel)
+          // add id if it doesn't exist
           if (!attrs.id) {
             attrs.id = _.uniqueId(`${attrs.name}_`)
             element.attr('id', attrs.id)
@@ -35,7 +37,8 @@ angular.module(agValMod)
           labelEl = labelEl || $document[0].querySelectorAll('label[for="' + attrs.id + '"]')
           // add required to label and for id if not exists
           if (labelEl) {
-            if (attrs.required || attrs.ngRequired) {
+            ldebug('attrs.required ', { required: isAttrTruthy(scope, attrs.required), ngRequired: isAttrTruthy(scope, attrs.ngRequired) })
+            if (isAttrTruthy(scope, attrs.required) || isAttrTruthy(scope, attrs.ngRequired)) {
               ldebug('adding required class to labelEl', labelEl)
               labelEl.addClass('required')
             }
@@ -46,7 +49,7 @@ angular.module(agValMod)
           // add "for" attr on ag-validation-inline el
           const agValEl = $(element).closest('.controls').find('ag-validation-inline')
           if (agValEl && !agValEl.attr('for')) {
-            ldebug("adding 'for' to ag-validation-inline'", agValEl)
+            // ldebug("adding 'for' to ag-validation-inline'", agValEl)
             agValEl.attr('for', attrs.id)
           }
 

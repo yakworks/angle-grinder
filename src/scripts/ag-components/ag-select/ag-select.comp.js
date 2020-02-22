@@ -3,7 +3,7 @@ import AgSelectCtrl from './AgSelectCtrl'
 
 const MOD_NAME = 'forms.ag-select'
 export default MOD_NAME
-
+/** ** NOT USED, here for reference ***/
 angular
   .module(MOD_NAME, [])
   .component('agSelect', {

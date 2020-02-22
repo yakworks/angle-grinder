@@ -8,12 +8,12 @@ describe('agConfig provider', function() {
 
   beforeEach(function() {
     angular.mock.module(agMod, function(agValidationsConfigProvider) {
-      provider = agValidationsConfigProvider;
+      provider = agValidationsConfigProvider
     })
   })
 
-  beforeEach(inject(function (_agValidationsConfig_) {
-    agValidationsConfig =  _agValidationsConfig_
+  beforeEach(inject(function(_agValidationsConfig_) {
+    agValidationsConfig = _agValidationsConfig_
   }))
 
   describe('validation strategy configuration', function() {

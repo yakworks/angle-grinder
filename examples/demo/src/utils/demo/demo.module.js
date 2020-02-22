@@ -7,6 +7,7 @@ import 'highlight.js/styles/solarized-light.css';
 
 import demoSnippet from './demo-snippet.component';
 import demoTitleCrumb from './demo-title-crumb.component';
+import exampleSnippet from './example-snippet.component';
 import './demo.scss';
 
 // Register module, register component and export name
@@ -17,4 +18,5 @@ export default angular
   ])
   .component('demoSnippet', demoSnippet)
   .component('demoTitleCrumb', demoTitleCrumb)
+  .component('exampleSnippet', exampleSnippet)
   .name;

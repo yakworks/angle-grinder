@@ -18,6 +18,10 @@ var forms = angular.module(MOD_NAME, [
   alerts
 ])
 
+forms.run(function(editableOptions) {
+  editableOptions.theme = 'bs3'
+})
+
 forms.run([
   '$templateCache', function($templateCache) {
     // Override html template for the angular-ui/bootstrap pagination

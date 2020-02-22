@@ -1,7 +1,7 @@
 import angular from 'angular'
 
 export function isAttrTruthy(scope, attr) {
-  if (attr !== undefined) return false
+  if (attr === undefined) return false
   return (angular.isString(attr) && attr.length === 0) || truthy(scope.$eval(attr))
 }
 

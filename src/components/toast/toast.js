@@ -16,7 +16,7 @@ class Toast {
     error: {
       // don't auto dismiss on errors
       timeOut: 0,
-      extendedTimeOut:0,
+      extendedTimeOut: 0,
       progressBar: false
     },
     info: {},
@@ -26,15 +26,15 @@ class Toast {
       closeButton: true,
       progressBar: true,
       preventDuplicates: true,
-      //onclick: null,
+      // onclick: null,
       showDuration: '100',
-      extendedTimeOut: 0,
       hideEasing: 'linear',
       tapToDismiss: false,
       // How long the toast will display after a user hovers over it, 0 disables
       extendedTimeOut: 0
     }
   }
+
   types = {
     error: 'error',
     info: 'info',
@@ -42,16 +42,12 @@ class Toast {
     warning: 'warning'
   }
 
-  static factory() {
-    return new Log()
-  }
-
   constructor() {
     this.toastr = toastr
   }
 
   fire(type, message, title, options) {
-    let opts = _.merge(options, this.options.default, this.options[type])
+    const opts = _.merge(options, this.options.default, this.options[type])
     title = title || this.makeTitle(type)
     return this.toastr[type](message, title, opts)
   }
@@ -62,8 +58,8 @@ class Toast {
   error(message, title, options = {}) { return this.fire(this.types.success, message, title, options) }
   warn(message, title, options = {}) { return this.fire(this.types.success, message, title, options) }
 
-  makeTitle(type){
-    return
+  makeTitle(type) {
+
   }
 
   setTimeout(delay, type) {

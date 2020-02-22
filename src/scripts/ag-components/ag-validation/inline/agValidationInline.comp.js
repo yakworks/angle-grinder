@@ -1,7 +1,7 @@
 import angular from 'angular'
 import agValMod from '../agValidations.module'
 import _ from 'lodash'
-import $log from '../../../utils/Log'
+// import $log from '../../../utils/Log'
 
 /* eslint-disable */
 angular.module(agValMod).directive('agValidationInline', function($timeout, $document) {
@@ -26,7 +26,7 @@ angular.module(agValMod).directive('agValidationInline', function($timeout, $doc
       // run in new cycle to ensure that getElementById(inputId) will succeed as its not there when using components
       $timeout(function() {
         inputEl = element.closest('.controls').find('input:first-child, select:first-child, textarea:first-child')
-        inputEl = (inputEl?.length !== 0 ) ? inputEl : $document[0].getElementById(inputId)
+        inputEl = (inputEl?.length !== 0 ) ? inputEl[0] : $document[0].getElementById(inputId)
         if (_.isNil(inputEl) || inputEl.length === 0 ) {
           throw new Error('Can not find input element to attach the validation directive')
         }
@@ -69,7 +69,7 @@ angular.module(agValMod).directive('agValidationInline', function($timeout, $doc
        * @param showErrors true to add error state
        */
       function toggleAriaAttributes(showErrors) {
-        $log.debug("inputEl", inputEl)
+        //$log.debug("inputEl", inputEl)
         if (showErrors) {
           inputEl.setAttribute('aria-invalid', true)
           inputEl.setAttribute('aria-describedby', attrs.id)

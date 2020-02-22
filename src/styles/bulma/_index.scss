@@ -1,6 +1,8 @@
 // *** _initialize should have been called before importing this
 // as it takes care of the required @import "~bulma/sass/utilities/_all.sass ****
 
+@import "~bulma/sass/base/helpers.sass";
+
 @import "~bulma/sass/grid/_all.sass";
 
 @import "~bulma/sass/components/card.sass";
