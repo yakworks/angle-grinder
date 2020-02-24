@@ -59,6 +59,7 @@
     "google-code-prettify": "1.0.1",
     "jest": "^25.1.0",
     "jquery": "3.4.1",
+    "jquery-ui": "^1.12.1",
     "later": "*",
     "lodash": "~4.17.15",
     "moment": ">=2.7.0",

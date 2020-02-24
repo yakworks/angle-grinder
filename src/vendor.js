@@ -28,4 +28,8 @@ require('later/later')
 require('perfect-scrollbar')
 require('toastr/toastr.js')
 require('sweetalert/lib/sweet-alert.js')
+// used for grid pivot
+require('jquery-ui/ui/widgets/draggable')
+require('jquery-ui/ui/widgets/sortable')
+require('jquery-ui/ui/widgets/droppable')
 // require('ladda')
