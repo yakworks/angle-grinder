@@ -1,6 +1,11 @@
 'use strict'
-const app = angular.module('app')
-app.directive('maxlength', function() {
+/**
+ * directive to restrict the number of characters than can be entered based on maxlength setting
+ */
+import commonModule from '../commonModule'
+
+angular.module(commonModule)
+.directive('maxlength', function() {
   return {
     restrict: 'A',
     link: function($scope, $element, $attributes) {

@@ -1,10 +1,11 @@
 'use strict'
-
 /**
- * Creates a letter icon form text
+ * Creates a letter icon/avatar default from text similiar to what ios and android uses for contacts
  */
-const app = angular.module('app')
-app.directive('letterIcon', function() {
+import commonModule from '../commonModule'
+
+angular.module(commonModule)
+.directive('letterIcon', function() {
   return {
     restrict: 'AE',
     template: '<div class="letter-icon-wrapper"><span class="letter-icon">' + '{{letter}}</span></div>',

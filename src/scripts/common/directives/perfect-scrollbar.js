@@ -1,13 +1,13 @@
 /*
  * Angular Perfect scrollbar
  * Version 0.1.0
- * https://github.com/itsdrewmiller/angular-perfect-scrollbar
+ * see https://github.com/itsdrewmiller/angular-perfect-scrollbar
  */
 import PerfectScrollbar from 'perfect-scrollbar'
+import commonModule from '../commonModule'
 
-const app = angular.module('app')
-
-angular.module('app').directive('perfectScrollbar', function($parse, $window) {
+angular.module(commonModule)
+.directive('perfectScrollbar', function($parse, $window) {
   var psOptions = [
     'handlers',
     'wheelSpeed',

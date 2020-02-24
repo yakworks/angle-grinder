@@ -2,8 +2,10 @@
 /**
   * Prevent default action on empty links.
 */
-const app = angular.module('app')
-app.directive('a', function() {
+import commonModule from '../commonModule'
+
+angular.module(commonModule)
+.directive('a', function() {
   return {
     restrict: 'E',
     link: function(scope, elem, attrs) {

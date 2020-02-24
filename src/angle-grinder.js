@@ -9,6 +9,7 @@ import agCompMod from './scripts/ag-components/ag-components.module'
 import gridz from './scripts/gridz'
 import alertsMod from './scripts/alerts'
 import agComponentsModule from './components'
+import agSidebar from './scripts/sidebar/sidebars'
 
 var agmod = angular.module('angleGrinder', [
   resourceSupport,
@@ -20,7 +21,8 @@ var agmod = angular.module('angleGrinder', [
   agCompMod,
   forms,
   alertsMod,
-  agComponentsModule
+  agComponentsModule,
+  agSidebar
 ])
 
 export default agmod.name

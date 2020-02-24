@@ -13,28 +13,14 @@ import $log from '~/scripts/utils/Log'
 $log.debugEnabled(true)
 
 import './app'
-// import "./app.module"
-// import "./config.constant"
-// import "./config.router"
-import './directives/toggle.js'
-import './directives/perfect-scrollbar.js'
-// import "./directives/empty-links.js"
-import './directives/sidebars.js'
-import './directives/off-click.js'
+//import './directives/sidebars.js'
 import './directives/full-height.js'
 import './directives/panel-tools.js'
-import './directives/char-limit.js'
 import './directives/dismiss.js'
-import './directives/compare-to.js'
 //import './directives/select.js'
 import './directives/messages.js'
 // import "./directives/chat.js"
-import './directives/touchspin.js'
-import './directives/file-upload.js'
-import './directives/letter-icon.js'
-// import "./directives/landing-header.js"
-// import "./directives/ct-crop.js"
-// import "./directives/ct-crop.js"
+//import './directives/touchspin.js'
 
 // Controllers
 import './app/AppCtrl'
@@ -49,4 +35,3 @@ import './ui/icons'
 import './ui/alerts'
 import './ui/tabs'
 import './grids'
-import './forms/index-old'

@@ -31,27 +31,15 @@ const formStates = {
     },
     {
       name: 'validations',
-      template: require('./forms/validations/index.html')
+      template: require('./forms/validations-sandbox/index.html')
     },
     {
-      name: 'horizontal-examples',
-      template: require('./forms/horizontal-examples/index.html')
+      name: 'horizontal-sandbox',
+      template: require('./forms/horizontal-sandbox/index.html')
     },
     {
       name: 'select2-sandbox',
       component: 'select2DemoIndex'
-    },
-    {
-      name: 'elements',
-      template: require('./forms/form_elements.html')
-    },
-    {
-      name: 'xeditable',
-      template: require('./forms/form_xeditable.html'),
-      data: { title: 'X-Editable Elements' }
-      // ncyBreadcrumb: {
-      //   label: 'Grids'
-      // },
     }
   ]
 }

@@ -134,9 +134,7 @@ forms.directive('agValidationErrors', (validationMessages, $interpolate) => ({
 
   link(scope, element, attrs, formCtrl) {
     const fieldName = $interpolate(attrs.for)(scope)
-    console.log('fieldName', fieldName)
     const field = formCtrl[fieldName]
-    console.log('field', field)
 
     // Do cleanup
     const clearErrors = () => element.html('')

@@ -49,8 +49,9 @@ class ValidationsCtrl {
   }
 }
 
-angular.module('app')
+export default angular.module('demo.validationsExample',[])
   .component('validationsExample', {
     controller: ValidationsCtrl,
     template: require('./validations.comp.html')
   })
+  .name
