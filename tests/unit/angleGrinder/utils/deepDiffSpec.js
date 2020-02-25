@@ -1,4 +1,4 @@
-import {deepDiff} from 'angle-grinder/src/ng/utils/deepDiff'
+import {deepDiff} from 'angle-grinder/src/utils/deepDiff'
 
 describe("deepDiff", function() {
 

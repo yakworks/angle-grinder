@@ -9,7 +9,7 @@ import './assets/styles.scss'
 import '~/vendor'
 
 //logging turn on debug
-import $log from 'angle-grinder/src/ng/utils/Log'
+import $log from 'angle-grinder/src/utils/Log'
 $log.debugEnabled(true)
 
 import './app'

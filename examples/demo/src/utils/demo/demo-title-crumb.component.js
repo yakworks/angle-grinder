@@ -1,4 +1,4 @@
-import appState from 'angle-grinder/src/ng/utils/AppState'
+import appState from 'angle-grinder/src/tools/AppState'
 
 class controller {
   get title() {

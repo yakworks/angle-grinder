@@ -1,4 +1,4 @@
-import { isFalsy, isEmpty } from 'angle-grinder/src/ng/utils/isFalsy'
+import { isFalsy, isEmpty } from 'angle-grinder/src/utils/isFalsy'
 
 describe('isFalsy', () => {
   describe('func: isFalsy', function() {

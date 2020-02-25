@@ -1,7 +1,7 @@
 import angular from 'angular'
 import commonModule from './commonModule'
 import moment from 'moment'
-import { isFalsy } from '../utils/isFalsy'
+import { isFalsy } from '../../utils/isFalsy'
 
 var app = angular.module(commonModule)
 

@@ -1,5 +1,5 @@
 import template from './component.html';
-import toast from '~/components/toast'
+import toast from '~/tools/toast'
 
 class ClrController {
   content = 'Click Me'

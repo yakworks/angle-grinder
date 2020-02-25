@@ -5,10 +5,9 @@ import uiRouterStateHelper from './ng/uirouter/stateHelper'
 import agCommon from './ng/common'
 import agSelect2 from './ng/select2'
 import forms from './ng/forms'
-import agCompMod from './ng/ag-components/ag-components.module'
+import agCompMod from './ng/components/index.js'
 import gridz from './ng/gridz'
 import alertsMod from './ng/alerts'
-import agComponentsModule from './components'
 import agSidebar from './ng/sidebar/sidebars'
 
 var agmod = angular.module('angleGrinder', [
@@ -21,7 +20,6 @@ var agmod = angular.module('angleGrinder', [
   agCompMod,
   forms,
   alertsMod,
-  agComponentsModule,
   agSidebar
 ])
 
