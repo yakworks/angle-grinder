@@ -1,7 +1,7 @@
 import angular from 'angular'
 import uiRouter from 'angular-ui-router'
 import 'angular-breadcrumb' // 'ncy-angular-breadcrumb'
-import stringUtils from '../utils/stringUtils'
+import stringUtils from '../../utils/stringUtils'
 // from https://github.com/marklagendijk/ui-router.stateHelper
 
 const MOD_NAME = 'ui.router.stateHelper'

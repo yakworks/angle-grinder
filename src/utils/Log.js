@@ -1,5 +1,5 @@
 /**
- * This is the AngularJS $logProvider pulled out into a module that ES6
+ * This is the AngularJS $logProvider pulled out into a generic module that ES6
  * can use as a dependency and remove the old crazy dependency chain
  * adds in some sugar to make it easier to log and object
  * @ngdoc provider

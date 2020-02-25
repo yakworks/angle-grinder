@@ -1,7 +1,7 @@
 import angular from 'angular'
 import appName from './app.module'
 import './config.router'
-import appState from 'angle-grinder/src/ng/utils/AppState'
+import appState from 'angle-grinder/src/tools/AppState'
 
 const app = angular.module('app')
 // export default app.name

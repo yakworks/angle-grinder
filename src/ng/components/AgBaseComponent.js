@@ -1,5 +1,5 @@
-import stringUtils from '../utils/stringFomUtils'
-import $log from '../utils/Log'
+import stringUtils from '../../utils/stringFomUtils'
+import $log from '../../utils/Log'
 import _ from 'lodash'
 
 /* @ngInject */
