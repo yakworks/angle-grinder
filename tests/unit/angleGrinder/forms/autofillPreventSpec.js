@@ -1,4 +1,4 @@
-import formsModule from '~/scripts/forms'
+import formsModule from 'angle-grinder/src/ng/forms'
 
 describe("module: angleGrinder.forms directive: autofillPrevent", function() {
   beforeEach(angular.mock.module(formsModule));

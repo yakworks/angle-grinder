@@ -330,6 +330,10 @@ $sidebar-item-open-background-color: $white-ter !default;
       position: relative;
       padding: 5px 13px 5px 5px;
 
+      &:hover:not(.open) {
+        background: $sidebar-item-active-open-background-color !important;
+      }
+
       .item-inner {
         padding: 10px 15px 10px 10px;
         font-size: $font-size-base;
@@ -371,9 +375,9 @@ $sidebar-item-open-background-color: $white-ter !default;
         .letter-icon-wrapper {
           background: #81898f;
         }
-        &:hover {
-          background: $sidebar-item-hover-background-color !important;
-        }
+        // &:hover {
+        //   background: $sidebar-item-hover-background-color !important;
+        // }
       }
 
       > a {
@@ -381,7 +385,7 @@ $sidebar-item-open-background-color: $white-ter !default;
       }
 
       &.open {
-        background: $sidebar-item-open-background-color;
+        //background: $sidebar-item-open-background-color;
         .item-inner {
           .icon-arrow {
             &:before {
@@ -440,7 +444,8 @@ $sidebar-item-open-background-color: $white-ter !default;
 
       li {
         &.active,
-        &.open {
+        &.open,
+        &:hover {
           background: $sidebar-item-active-background-color;
           border-top-right-radius: 100px;
           border-bottom-right-radius: 100px;

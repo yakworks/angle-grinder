@@ -159,7 +159,7 @@ module.exports = function(env, argv) {
     resolve: {
       //extensions: ['.js', '.vue', '.json'],
       alias: {
-        'angle-grinder': path.resolve('./','src'),
+        'angle-grinder': path.resolve('./'),
         //Components: path.resolve(__dirname, "..", "src", "components"),
       }
     }

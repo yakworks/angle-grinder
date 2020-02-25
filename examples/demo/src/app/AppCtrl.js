@@ -1,4 +1,4 @@
-import appState from '~/scripts/utils/AppState'
+import appState from 'angle-grinder/src/ng/utils/AppState'
 /**
  * Main Application Controller
  */

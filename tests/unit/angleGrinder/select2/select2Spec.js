@@ -1,5 +1,5 @@
 import compileTemplate from '../../helpers/compileTemplate'
-import select2Mod from '~/scripts/select2'
+import select2Mod from 'angle-grinder/src/ng/select2'
 
 describe("select2Spec", function() {
 

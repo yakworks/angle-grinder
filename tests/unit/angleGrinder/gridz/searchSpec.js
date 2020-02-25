@@ -1,5 +1,5 @@
 import compileTemplate from '../../helpers/compileTemplate'
-import agGridz from '~/scripts/gridz'
+import agGridz from 'angle-grinder/src/ng/gridz'
 
 describe("module: angleGrinder.gridz", function() {
   beforeEach(angular.mock.module(agGridz));

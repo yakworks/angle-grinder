@@ -1,4 +1,4 @@
-import agCommon from '~/scripts/common'
+import agCommon from 'angle-grinder/src/ng/common'
 
 describe("agCurrencyFilterSpec", function() {
 

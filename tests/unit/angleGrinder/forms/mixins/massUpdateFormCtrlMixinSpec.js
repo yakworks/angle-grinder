@@ -1,4 +1,4 @@
-import formsModule from '~/scripts/forms'
+import formsModule from 'angle-grinder/src/ng/forms'
 import userResModule from './userResourcesMockup'
 
 describe("massUpdateFormCtrlMixinSpec", function() {

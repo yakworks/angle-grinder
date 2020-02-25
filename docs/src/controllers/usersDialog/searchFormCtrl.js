@@ -1,4 +1,4 @@
-import BaseCtrl from '../../../../src/scripts/utils/BaseCtrl'
+import BaseCtrl from 'angle-grinder/src/ng/utils/BaseCtrl'
 
 export default class SearchFormCtrl extends BaseCtrl {
   static initClass() {

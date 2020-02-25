@@ -1,4 +1,4 @@
-import agGridz from '~/scripts/gridz'
+import agGridz from 'angle-grinder/src/ng/gridz'
 
 describe("module:angleGrinder.gridz", () => describe("directive: gridCrud", function() {
 

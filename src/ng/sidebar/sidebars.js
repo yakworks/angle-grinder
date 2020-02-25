@@ -3,15 +3,15 @@
  * A set of directives for left and right sidebar.
  */
 export default 'ag.sidebar'
-angular.module('ag.sidebar',[])
-  .directive('agSidebar',function($document, $rootScope) {
+angular.module('ag.sidebar', [])
+  .directive('agSidebar', function($document, $rootScope) {
     return {
       replace: false,
       restrict: 'A',
       link: function(scope, elem, attrs) {
         var shouldCloseOnOuterClicks = true
 
-        if (attrs.closeOnOuterClicks == 'false' || attrs.closeOnOuterClicks == '0') {
+        if (attrs.closeOnOuterClicks === 'false' || attrs.closeOnOuterClicks === '0') {
           shouldCloseOnOuterClicks = false
         }
 
@@ -42,7 +42,7 @@ angular.module('ag.sidebar',[])
 
         if (shouldCloseOnOuterClicks) {
           clearCb1 = $rootScope.$on('ag.toggled', function(e, id, active) {
-            if (id == attrs.id) {
+            if (id === attrs.id) {
               if (active) {
                 setTimeout(function() {
                   $document.on('click tap', closeOnOuterClicks)
@@ -67,7 +67,7 @@ angular.module('ag.sidebar',[])
       link: function(scope, elem, attrs) {
         var wrap = $('.app-aside')
         var searchForm = elem.children('form')
-        var formWrap = elem.parent()
+        // var formWrap = elem.parent()
 
         $('.s-open').on('click', function(e) {
           searchForm.prependTo(wrap)
@@ -86,17 +86,18 @@ angular.module('ag.sidebar',[])
         }
       }
     }
-    function isSidebarClosed() {
-      return $('.app-sidebar-closed').length
-    }
+    // function isSidebarClosed() {
+    //   return $('.app-sidebar-closed').length
+    // }
 
-    function isSidebarFixed() {
-      return $('.app-sidebar-fixed').length
-    }
+    // function isSidebarFixed() {
+    //   return $('.app-sidebar-fixed').length
+    // }
   })
   .directive('agAside', ['$window', '$rootScope', '$timeout', 'APP_MEDIAQUERY',
     function($window, $rootScope, $timeout, mq) {
-      var $html = $('html'); var $win = $($window); var _this; var wrap = $('.app-aside')
+      var $html = $('html'); var $win = $($window); var _this
+      // var wrap = $('.app-aside')
       return {
         restrict: 'A',
 
@@ -195,7 +196,7 @@ angular.module('ag.sidebar',[])
               if (domLink.hash === newPath && (!isSidebarClosed() || isMobile())) {
                 if (link.closest('ul').hasClass('sub-menu')) {
                   menu = link.closest('ul')
-                  var activeMenu = menu
+                  // var activeMenu = menu
                   menu.slideDown(200).parent().siblings().children('.sub-menu').slideUp(200, function() {
                     $(this).parent().removeClass('open')
                   })
@@ -205,7 +206,7 @@ angular.module('ag.sidebar',[])
                   })
                 }
               }
-              activeMenu = null
+              // activeMenu = null
               menu = null
             })
           })
@@ -236,62 +237,62 @@ angular.module('ag.sidebar',[])
   //   return {
   //     restrict: 'C',
 
-  //     link: function(scope, elem, attrs) {
-  //       elem.on('click', function() {
-  //         $('.main-content').on('webkitTransitionEnd mozTransitionEnd oTransitionEnd otransitionend transitionend', function() {
-  //           // window.dispatchEvent(new Event('resize'));
-  //           $timeout(function() {
-  //             var evt = $window.document.createEvent('UIEvents')
-  //             evt.initUIEvent('resize', true, false, $window, 0)
-  //             $window.dispatchEvent(evt)
-  //           }, 500)
-  //           $('.main-content').off('webkitTransitionEnd mozTransitionEnd oTransitionEnd otransitionend transitionend')
-  //         })
-  //       })
-  //     }
-  //   }
-  // })
-  // .directive('ctSticky', function($window, $timeout) {
-  //   return {
-  //     restrict: 'A',
-  //     scope: {
-  //       ctStickyDisabled: '&'
-  //     },
-  //     link: function($scope, $element, $attributes) {
-  //       $timeout(function() {
-  //         var actualPadding = 90; var maxPadding = 60; var newPadding; var isSticky
-  //         var setPadding = function() {
-  //           newPadding = actualPadding - $window.scrollY
+//     link: function(scope, elem, attrs) {
+//       elem.on('click', function() {
+//         $('.main-content').on('webkitTransitionEnd mozTransitionEnd oTransitionEnd otransitionend transitionend', function() {
+//           // window.dispatchEvent(new Event('resize'));
+//           $timeout(function() {
+//             var evt = $window.document.createEvent('UIEvents')
+//             evt.initUIEvent('resize', true, false, $window, 0)
+//             $window.dispatchEvent(evt)
+//           }, 500)
+//           $('.main-content').off('webkitTransitionEnd mozTransitionEnd oTransitionEnd otransitionend transitionend')
+//         })
+//       })
+//     }
+//   }
+// })
+// .directive('ctSticky', function($window, $timeout) {
+//   return {
+//     restrict: 'A',
+//     scope: {
+//       ctStickyDisabled: '&'
+//     },
+//     link: function($scope, $element, $attributes) {
+//       $timeout(function() {
+//         var actualPadding = 90; var maxPadding = 60; var newPadding; var isSticky
+//         var setPadding = function() {
+//           newPadding = actualPadding - $window.scrollY
 
-  //           if ($window.scrollY < maxPadding) {
-  //             $element.css({
-  //               paddingTop: actualPadding - $window.scrollY
-  //             })
-  //           } else {
-  //             $element.css({
-  //               paddingTop: 30
-  //             })
-  //           }
-  //         }
-  //         if ($attributes.ctStickyDisabled) {
-  //           $scope.$watch($scope.ctStickyDisabled, function(newVal, oldVal) {
-  //             if (newVal && !oldVal) {
-  //               isSticky = false
-  //               $element.attr('style', function(i, style) {
-  //                 return style.replace(/padding[^;]+;?/g, '')
-  //               })
-  //             } else if (!newVal) {
-  //               isSticky = true
-  //               setPadding()
-  //             }
-  //           })
-  //         }
-  //         angular.element($window).on('scroll', function() {
-  //           if (isSticky) {
-  //             setPadding()
-  //           }
-  //         })
-  //       })
-  //     }
-  //   }
-  // })
+//           if ($window.scrollY < maxPadding) {
+//             $element.css({
+//               paddingTop: actualPadding - $window.scrollY
+//             })
+//           } else {
+//             $element.css({
+//               paddingTop: 30
+//             })
+//           }
+//         }
+//         if ($attributes.ctStickyDisabled) {
+//           $scope.$watch($scope.ctStickyDisabled, function(newVal, oldVal) {
+//             if (newVal && !oldVal) {
+//               isSticky = false
+//               $element.attr('style', function(i, style) {
+//                 return style.replace(/padding[^;]+;?/g, '')
+//               })
+//             } else if (!newVal) {
+//               isSticky = true
+//               setPadding()
+//             }
+//           })
+//         }
+//         angular.element($window).on('scroll', function() {
+//           if (isSticky) {
+//             setPadding()
+//           }
+//         })
+//       })
+//     }
+//   }
+// })

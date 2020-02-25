@@ -1,11 +1,11 @@
 import angular from 'angular'
 import _ from 'lodash'
 import agValMod from './agValidations.module'
-import $log from '../../utils/Log'
 import { isAttrTruthy } from '../../utils/ngHelpers'
 
+// import $log from '../../utils/Log'
 function ldebug(msg, o) {
-  $log.debug(msg, o)
+  // $log.debug(msg, o)
 }
 
 angular.module(agValMod)

@@ -1,4 +1,4 @@
-import formsModule from '~/scripts/forms'
+import formsModule from 'angle-grinder/src/ng/forms'
 import compileTemplate from '../../helpers/compileTemplate'
 
 describe("module: angleGrinder.forms directive: agSubmitButton", function() {
