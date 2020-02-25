@@ -29,13 +29,13 @@
                         <i class="fa fa-lightbulb-o"></i>
                     </p>
                     <div class="btn-group btn-group-justified margin-bottom-30">
-                        <a href class="btn btn-o btn-primary" target="lightbulb" ct-toggle="toggle"> Toggle </a>
-                        <a href class="btn btn-o btn-primary" target="lightbulb" ct-toggle="on"> Turn On </a>
-                        <a href class="btn btn-o btn-primary" target="lightbulb" ct-toggle="off"> Turn Off </a>
+                        <a href class="btn btn-o btn-primary" toggler="lightbulb"> Toggle </a>
+                        <a href class="btn btn-o btn-primary" toggler="{id: 'lightbulb', action: 'on'}"> Turn On </a>
+                        <a href class="btn btn-o btn-primary" toggler="{id: 'lightbulb', action: 'off'}" > Turn Off </a>
                     </div>
                     <p>
                         Through the directive <code>
-                            ctToggle
+                            togglerAction
                         </code>
                         , the buttons can activate, turn off, or toggle class to the target element (which is indicated by its ID)
                     </p>
@@ -56,9 +56,9 @@
                         <i class="fa fa-heart-o"></i>
                     </p>
                     <div class="btn-group btn-group-justified margin-bottom-30">
-                        <a href class="btn btn-o btn-primary" target="heart" ct-toggle="toggle"> Toggle </a>
-                        <a href class="btn btn-o btn-primary" target="heart" ct-toggle="on"> Turn On </a>
-                        <a href class="btn btn-o btn-primary" target="heart" ct-toggle="off"> Turn Off </a>
+                        <a href class="btn btn-o btn-primary" toggler="{id: 'heart'}"> Toggle </a>
+                        <a href class="btn btn-o btn-primary" toggler="{id: 'heart', action: 'on'}"> Turn On </a>
+                        <a href class="btn btn-o btn-primary" toggler="{id: 'heart', action: 'off'}" > Turn Off </a>
                     </div>
                 </div>
             </div>

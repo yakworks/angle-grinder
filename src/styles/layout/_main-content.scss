@@ -1,10 +1,12 @@
 /* ---------------------------------------------------------------------- */
 /*  Main Content
 /* ---------------------------------------------------------------------- */
+
+
 .main-content {
   min-height: 100%;
   position: relative;
-  background: lighten($grey, 18%);
+  background: $main-content-background;
 
   .container {
     max-width: none !important;
@@ -57,7 +59,7 @@
 
     .app-sidebar-closed & {
       z-index: 1049;
-      margin-left: $sideBar-closed-width;
+      margin-left: $sideBar-closed-width - 20;
     }
   }
 
@@ -65,15 +67,4 @@
     padding-top: $header-height;
   }
 
-  .lyt-2 & {
-    @media (min-width: $screen-md-min) {
-      margin-left: $sideBar-width - 40;
-    }
-  }
-
-  .lyt-2.app-sidebar-closed & {
-    @media (min-width: $screen-md-min) {
-      margin-left: $sideBar-closed-width - 20 !important;
-    }
-  }
 }

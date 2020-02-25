@@ -1,6 +1,13 @@
+const path = require("path");
+
 module.exports = {
   mode: 'development',
   devtool: 'inline-source-map',
+  resolve: {
+    alias: {
+      'angle-grinder': path.resolve('./'),
+    }
+  },
   module: {
     rules: [
       { test: /\.js$/, loader: 'babel-loader', exclude: /(node_modules|dist)/},

@@ -1,4 +1,4 @@
-import pwcModule from '~/scripts/pathWithContext'
+import pwcModule from 'angle-grinder/src/ng/pathWithContext'
 
 describe("pathWithContextSpec", function() {
 

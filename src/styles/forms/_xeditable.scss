@@ -1,0 +1,211 @@
+form[editable-form].form-xeditable {
+  .control-label {
+    color: #666666;
+    font-weight: bold;
+    text-align: left;
+    width: 50%;
+    float: left;
+    padding-top: 7px;
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+  .controls {
+    //color: #666666;
+    //font-weight: bold;
+    text-align: right;
+    width: 50%;
+    float: left;
+    padding-top: 7px;
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+  &.control-align-left {
+    .controls {
+      text-align: left;
+    }
+  }
+  .editable-wrap {
+    //color: #666666;
+    //font-weight: bold;
+    //text-align: right;
+    width: 50%;
+    float: left;
+    //padding-top: 7px;
+    float: left;
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+  .editable-wrap ag-datepicker.editable-input {
+    display: table;
+    // input {
+    //   width: 105px;
+    // }
+  }
+  hr {
+    margin: 0;
+    background-image: none;
+    border-top: 1px solid $border;
+  }
+  .edit-group {
+    margin: 0;
+    padding: 5px 0 5px 0;
+    &:not(:last-child){
+      border-bottom: 1px solid $border;
+    }
+  }
+
+  &.editing {
+    &.input-underline {
+      .edit-group {
+        padding-bottom: 0;
+      }
+      .editable-wrap {
+        margin-bottom: -1px;
+      }
+    }
+  }
+}
+
+form[editable-form] {
+  // .editable-datepicker input {
+  //   width: 125px;
+  // }
+
+  // .editable-checkbox input {
+  //   width: auto;
+  // }
+
+  // div {
+  //   height: auto;
+  //   padding: 5px 0;
+  //   margin-bottom: 3px;
+  //   min-height: 5px;
+  // }
+
+  .title {
+    display: inline-block;
+    font-weight: bold;
+    padding-top: 5px;
+    vertical-align: top;
+    min-width: 130px;
+    text-align: right;
+    margin-right: 8px;
+    margin-left: 5px;
+  }
+
+  // .control-label {
+  //   color: #666666;
+  //   font-weight: bold;
+  //   text-align: left;
+  //   width: 160px;
+  //   float: left;
+  //   padding-top: 7px;
+  //   margin-bottom: 0;
+  // }
+
+  // span.editable {
+  //   display: inline-block;
+  //   padding-top: 5px;
+  //   vertical-align: top;
+  // }
+
+  // select {
+  //   width: 155px;
+  //   padding: 6px 2px 6px 10px;
+  //   border-radius: 5px;
+  // }
+  .editable-error {
+    color: #b94a48;
+  }
+
+  input.ng-invalid {
+    border-color: #b94a48;
+  }
+
+  // input {
+  //   width: 167px;
+  //   -ms-box-sizing:content-box;
+  //   -moz-box-sizing:content-box;
+  //   box-sizing:content-box;
+  //   -webkit-box-sizing:content-box;
+  //   height: 20px;
+  // }
+  // select.editable-input{
+  //   width: 167px;
+  // }
+}
+
+// .editable-controls .select2-container {
+//   width: 167px !important;
+// }
+
+// input[type=number].editable-input {
+//     width: 158px;
+//     padding: 4px;
+//     font-size: 13px;
+//     line-height: 18px;
+//     color: #555;
+//     border: 1px solid #ccc;
+//     -webkit-border-radius: 3px;
+//     -moz-border-radius: 3px;
+//     border-radius: 3px;
+// }
+
+.panel-xeditable {
+
+  .panel-heading {
+    padding-top: 7px;
+    padding-bottom: 7px;
+  }
+  .panel-body {
+    padding: 10px 15px;
+  }
+  .panel-title {
+    font-size: 14px;
+    color: #666666;
+  }
+
+  dt {
+    text-align: left;
+  }
+  dd {
+    text-align: right;
+  }
+
+  form[editable-form] .title {
+    text-align: left;
+    font-size: 92%;
+    color: #666666;
+  }
+
+  form[editable-form] .title + span {
+    float: right;
+  }
+
+  // form[editable-form] .control-label + span.editable {
+  //   float: right;
+  // }
+
+  // form[editable-form] div {
+  //   height: auto;
+  //   padding: 2px 0;
+  //   margin-bottom: 2px;
+  //   min-height: 0px;
+  //   vertical-align: bottom;
+  //   line-height: 0.9 !important;
+  // }
+
+  form[editable-form] div.title {
+    vertical-align: middle !important;
+  }
+
+  .divider-horizontal {
+    border-bottom: 1px solid #eee;
+  }
+}

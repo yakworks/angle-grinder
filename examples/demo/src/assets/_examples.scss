@@ -1,4 +1,5 @@
-@import "~bulma/sass/utilities/_all.sass";
+
+$example-border: $yellow;
 
 .example-section {
  //make room for the little call out
@@ -8,7 +9,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  border: 1px solid $warning;
+  border: 1px solid $example-border;
   border-top-right-radius: $radius;
   border-bottom-right-radius: $radius;
   border-bottom-left-radius: $radius;
@@ -17,7 +18,7 @@
   .button-container {
     position: absolute;
     display: inline-flex;
-    background: $warning;
+    background: $example-border;
     border-radius: $radius $radius 0 0;
     bottom: 100%;
     right: -1px;
@@ -49,7 +50,7 @@
     margin-bottom: 1.5rem;
   }
   &:before {
-    background: $warning;
+    background: $example-border;
     border-radius: $radius $radius 0 0;
     bottom: 100%;
     content: "Example";
@@ -66,7 +67,7 @@
     padding: 1.5rem;
   }
   .codeview {
-    border-top: 1px solid $warning;
+    border-top: 1px solid $example-border;
   }
   &.is-vertical {
     @include desktop {
@@ -79,7 +80,7 @@
         display: flex;
         flex-direction: column;
         border-top: 0;
-        border-left: 1px solid $warning;
+        border-left: 1px solid $example-border;
       }
       .codeview,
       .highlight,

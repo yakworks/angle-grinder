@@ -9,6 +9,7 @@ header.navbar {
   border: none;
   margin-bottom: 0;
   height: $header-height;
+  background-color: $header-background-color;
 
   .loading-bar-wrapper {
     position: absolute;
@@ -26,7 +27,8 @@ header.navbar {
       width: $sideBar-width;
     }
 
-    background: $black;
+    //background: $black;
+    background-color: $header-background-color;
     border-bottom: 1px solid transparent;
     position: relative;
     height: $header-height;
@@ -53,7 +55,7 @@ header.navbar {
       @media (min-width: $screen-md-min) {
         transition: all 0.5s;
         position: absolute;
-        left: 30px;
+        left: 50px;
         top: 0;
       }
 
@@ -84,90 +86,37 @@ header.navbar {
       }
     }
 
-    .sidebar-toggler {
-      font-size: $font-size-extra-large;
-      padding-right: 20px;
-      color: $grey;
-
-      &:hover {
-        color: $grey-dark;
-      }
-    }
-
     .sidebar-mobile-toggler,
-    .menu-mobile-toggler {
+    .sidebar-desk-toggler {
       padding-left: 15px;
       padding-right: 15px;
       padding-top: 0;
       padding-bottom: 0;
-
-      &:hover {
-        color: $grey-dark;
-      }
-    }
-
-    .sidebar-mobile-toggler {
-      background-color: $red;
-      border-color: $red;
-      color: $white;
-
-      &:hover {
-        background-color: lighten($red, 10%) !important;
-        border-color: lighten($red, 10%);
-        color: $white;
-      }
-
-      &:active,
-      &.active,
-      &.active:focus,
-      &:active:focus,
-      &:active:hover,
-      &.dropdown-toggle:active:hover {
-        background-color: darken($red, 5%) !important;
-        border-color: darken($red, 5%);
-      }
-
-      &:focus {
-        background-color: lighten($red, 15%);
-        border-color: lighten($red, 15%);
-        color: $white;
-      }
-
-      &.disabled:hover,
-      &.disabled:focus,
-      &.disabled:active,
-      &.disabled.active,
-      &[disabled],
-      &[disabled]:hover,
-      &[disabled]:focus,
-      &[disabled]:active,
-      &[disabled].active,
-      fieldset[disabled] &:hover,
-      fieldset[disabled] &:focus,
-      fieldset[disabled] &:active,
-      fieldset[disabled] &.active {
-        background-color: lighten($red, 20%);
-        border-color: lighten($red, 20%);
-        color: $white;
-      }
-    }
-
-    .menu-mobile-toggler {
       color: $white;
       font-size: $font-size-extra-large;
       min-width: 50px;
+      box-shadow: none;
 
       &:hover {
         color: $grey-dark;
       }
     }
 
+    #sidebar-desk-toggler {
+      display: block;
+    }
+
+    #sidebar-mobile-toggler {
+      display: none;
+      // display: block;
+    }
+
     @media (max-width: $screen-sm-max) {
-      #horizontal-menu-toggler {
+      #sidebar-desk-toggler  {
         display: none;
       }
 
-      #sidebar-toggler {
+      #sidebar-mobile-toggler {
         display: block;
       }
     }
@@ -176,7 +125,7 @@ header.navbar {
   .navbar-collapse {
     border-bottom: 1px solid transparent;
     border-top: none;
-    background: $black;
+    background-color: $header-background-color;
     padding-left: 15px !important;
     padding-right: 15px !important;
     position: relative;
@@ -418,7 +367,7 @@ header.navbar {
     width: 30px;
     line-height: $header-height - 1;
     color: rgba($white, 0.7);
-    background: $black;
+    background: transparent;
     padding-top: 0;
     padding-bottom: 0;
 
@@ -570,64 +519,6 @@ header.navbar {
             &:active,
             &:focus {
               color: rgba($white, 1);
-            }
-          }
-        }
-
-        &.sidebar-toggler-wrapper {
-          > div {
-            line-height: $header-height;
-          }
-
-          &:before {
-            display: none;
-          }
-
-          .btn {
-            background-color: $red;
-            border-color: $red;
-            color: $white;
-            float: none !important;
-            display: inline-block !important;
-
-            &:hover {
-              background-color: lighten($red, 10%) !important;
-              border-color: lighten($red, 10%);
-              color: $white;
-            }
-
-            &:active,
-            &.active,
-            &.active:focus,
-            &:active:focus,
-            &:active:hover,
-            &.dropdown-toggle:active:hover {
-              background-color: darken($red, 5%) !important;
-              border-color: darken($red, 5%);
-            }
-
-            &:focus {
-              background-color: lighten($red, 15%);
-              border-color: lighten($red, 15%);
-              color: $white;
-            }
-
-            &.disabled:hover,
-            &.disabled:focus,
-            &.disabled:active,
-            &.disabled.active,
-            &[disabled],
-            &[disabled]:hover,
-            &[disabled]:focus,
-            &[disabled]:active,
-            &[disabled].active,
-            fieldset[disabled] &:hover,
-            fieldset[disabled] &:focus,
-            fieldset[disabled] &:active,
-            fieldset[disabled] &.active {
-              background-color: lighten($red, 20%);
-              border-color: lighten($red, 20%);
-              color: $white;
             }
           }
         }
@@ -927,26 +818,7 @@ header.navbar {
     }
   }
 
-  .lyt-2 & {
-    .navbar-header {
-      @media (min-width: $screen-md-min) {
-        width: $sideBar-width - 40;
-
-        .navbar-brand.navbar-brand-collapsed {
-          padding: 0;
-          width: $sideBar-closed-width - 20 !important;
-        }
-      }
-    }
-
-    .navbar-collapse {
-      @media (min-width: $screen-md-min) {
-        margin-left: $sideBar-width - 40;
-      }
-    }
-  }
-
-  .lyt-2.app-sidebar-closed & {
+  .app-sidebar-closed & {
     .navbar-header {
       @media (min-width: $screen-md-min) {
         width: $sideBar-closed-width - 20 !important;

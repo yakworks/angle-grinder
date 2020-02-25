@@ -2,12 +2,12 @@
 <header class="navbar navbar-default navbar-static-top hidden-print">
   <!-- start: NAVBAR HEADER -->
   <div class="navbar-header">
-    <button href="javascript:void(0)" class="menu-mobile-toggler btn no-radius pull-left"
-      id="horizontal-menu-toggler" ng-click="app.layout.isSidebarClosed = !app.layout.isSidebarClosed" v-pressable>
+    <button href="javascript:void(0)" class="sidebar-desk-toggler btn no-radius pull-left"
+      id="sidebar-desk-toggler" ng-click="app.layout.isSidebarClosed = !app.layout.isSidebarClosed" v-pressable>
       <i class="fa fa-bars"></i>
     </button>
-    <button href="javascript:void(0)" class="sidebar-mobile-toggler btn no-radius pull-left hidden-md hidden-lg"
-      id="sidebar-toggler" ng-click="toggle('sidebar')" v-pressable>
+    <button href="javascript:void(0)" class="sidebar-mobile-toggler btn no-radius pull-left"
+      id="sidebar-mobile-toggler" ng-click="toggle('sidebar')" v-pressable>
       <i class="fa fa-bars"></i>
     </button>
     <a class="navbar-brand" ui-sref="app.dashboard">
@@ -124,10 +124,10 @@
   </div>
   <button class="sidebar-mobile-toggler dropdown-off-sidebar btn hidden-md hidden-lg" ng-click="toggle('off-sidebar')"
     v-pressable>
-    &nbsp;
+    <i class="fa fa-bars"></i>
   </button>
   <button class="dropdown-off-sidebar btn hidden-sm hidden-xs" ng-click="toggle('off-sidebar')" v-pressable>
-    &nbsp;
+    <i class="fa fa-bars"></i>
   </button>
   <!-- end: NAVBAR COLLAPSE -->
 </header>

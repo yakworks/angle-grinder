@@ -1,4 +1,4 @@
-import {deepPick} from '~/scripts/utils/deepDiff'
+import {deepPick} from 'angle-grinder/src/ng/utils/deepDiff'
 
 describe("deepPick", function() {
 

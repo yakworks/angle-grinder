@@ -1,5 +1,5 @@
 import compileTemplate from '../../helpers/compileTemplate'
-import agGridz from '~/scripts/gridz'
+import agGridz from 'angle-grinder/src/ng/gridz'
 import _ from 'lodash'
 xdescribe("agGridzSpec", function() {
 

@@ -5,266 +5,18 @@ $base-color: #22262f;
 $header-color: $blue;
 $label-color: $red;
 $link-color: #000 !important;
+$sub-menu-active-background-color: $grey-lighter !default;
+$sidebar-item-active-background-color: $primary-light !default;
 
-.item-content {
-  align-items: center;
-  display: table-row;
-
-  .item-media {
-    display: table-cell;
-    padding: 10px;
-  }
-
-  .item-inner {
-    align-items: center;
-    display: table-cell;
-    padding: 10px 15px 10px 0;
-    width: 100%;
-    white-space: nowrap;
-    vertical-align: middle;
-
-    .active &,
-    .open &,
-    li:last-child & {
-      border-bottom-color: transparent !important;
-    }
-  }
-}
-
-#sidebar > div nav {
-  padding-top: 0px;
-
-  @media (min-width: $screen-md-min) {
-    width: $sideBar-width - 10;
-    position: relative;
-
-    &:before {
-      position: absolute;
-      content: "";
-      left: 0;
-      top: 0;
-      background: $black;
-      width: 10px;
-      height: 10px;
-    }
-
-    &:after {
-      position: absolute;
-      content: "";
-      left: 0;
-      top: 0;
-      background: #d7d6db;
-      width: 11px;
-      height: 11px;
-      border-top-left-radius: 5px;
-    }
-  }
-
-  > ul {
-    list-style: none;
-    margin: 0 0 10px 25px;
-    padding: 10px 0 0 0;
-    border-top: 1px solid transparent;
-    border-bottom: 1px solid transparent;
-    transition: all 0.5s;
-
-    @media (max-width: $screen-sm-max) {
-      margin: 0 10px 10px 10px;
-    }
-
-    > li {
-      border-top-left-radius: 8px;
-      border-bottom-left-radius: 8px;
-      margin: 0 0 10px 0;
-
-      @media (max-width: $screen-sm-max) {
-        border-top-right-radius: 8px;
-        border-bottom-right-radius: 8px;
-      }
-
-      a {
-        color: #666;
-        border-bottom: none;
-
-        i {
-          font-weight: normal;
-          opacity: 1;
-        }
-
-        .icon-arrow {
-          opacity: 0.6;
-        }
-
-        .letter-icon-wrapper {
-          background: #81898f;
-        }
-      }
-
-      > a {
-        display: table;
-      }
-
-      &.hover {
-        background: $grey;
-
-        > a {
-          color: $black;
-
-          i {
-            opacity: 1;
-          }
-        }
-      }
-
-      .no-touch & {
-        &:hover {
-          background: $grey;
-
-          > a {
-            color: $black;
-
-            i {
-              opacity: 1;
-            }
-          }
-        }
-      }
-
-      &.active {
-        background: lighten($grey, 18%) !important;
-        box-shadow: 3px 4px 8px -3px rgba(0, 0, 0, 0.4);
-        margin-right: -1px;
-
-        @media (max-width: $screen-sm-max) {
-          box-shadow: none;
-          margin-right: 0;
-        }
-
-        &:hover {
-          background: lighten($grey, 18%) !important;
-        }
-
-        &.open {
-          background: lighten($grey, 18%) !important;
-        }
-
-        > a {
-          background: none !important;
-          border-top: none !important;
-          color: $text-color;
-
-          .letter-icon-wrapper {
-            background: #666c71;
-          }
-
-          i {
-            color: $white;
-            opacity: 1;
-          }
-
-          .icon-arrow {
-            color: $black;
-          }
-        }
-      }
-    }
-
-    li {
-      border: none;
-      display: block;
-      position: relative;
-      padding: 5px;
-
-      .no-touch & {
-        transition: background-color 300ms linear;
-      }
-
-      .app-sidebar-closed & {
-        ul.sub-menu {
-          @media (min-width: $screen-md-min) {
-            display: none !important;
-          }
-        }
-      }
-
-      &.active {
-        > ul.sub-menu {
-          display: block;
-          padding: 0;
-        }
-      }
-
-      > a {
-        margin-top: -1px !important;
-        font-size: $font-size-normal;
-      }
-
-      a {
-        border: none;
-        font-weight: 400;
-        margin: 0;
-        position: relative;
-        text-decoration: none;
-
-        i[class*="ti-"] {
-          margin-right: 5px;
-          display: inline-block;
-          font-size: $font-size-extra-large;
-          position: relative;
-          top: 2px;
-        }
-
-        .icon-arrow {
-          position: absolute;
-          right: 0;
-          margin-right: 6px !important;
-          font-style: normal;
-          font-weight: normal;
-          color: $black;
-          font-size: 11px;
-          top: 50%;
-          margin-top: -7px;
-
-          &:before {
-            content: "\e64a";
-            font-family: themify;
-          }
-        }
-      }
-
-      &.open {
-        background: $grey;
-
-        > a {
-          color: $black;
-
-          i {
-            opacity: 1;
-          }
-
-          .icon-arrow {
-            &:before {
-              content: "\e64b";
-            }
-          }
-        }
-      }
-    }
-  }
-
-  .folders {
-    .letter-icon-wrapper {
-      background: $red;
-    }
-  }
-}
-
-ul.sub-menu {
+// closed hover menu css
+.app-sidebar-closed ul.sub-menu {
   clear: both;
   list-style: none;
   padding: 1px 0;
   display: none;
   margin: 0;
+  background-color: $white;
+  border: 1px solid $grey-lighter;
 
   li {
     background: none;
@@ -276,13 +28,7 @@ ul.sub-menu {
 
     &.active,
     &.open {
-      background: lighten($grey, 12%) !important;
-    }
-
-    .no-touch & {
-      &:hover {
-        background: lighten($grey, 14%);
-      }
+      background: $sidebar-item-active-background-color;
     }
 
     a {
@@ -344,51 +90,51 @@ ul.sub-menu {
     }
   }
 
-  .app-sidebar-closed & {
-    @media (min-width: $screen-md-min) {
-      border-right: 1px solid $border-default;
-      border-bottom: 1px solid $border-default;
-      background: $white;
-      left: $sideBar-closed-width;
-      position: absolute;
-      padding: 1px 0;
-      overflow-y: auto;
-      overflow-x: visible;
-      height: auto;
-      bottom: auto;
-      width: $sideBar-width;
-      z-index: 1050;
-      display: none;
+  // .app-sidebar-closed & {
+  //   @media (min-width: $screen-md-min) {
+  //     border-right: 1px solid $border-default;
+  //     border-bottom: 1px solid $border-default;
+  //     background: $white;
+  //     left: $sideBar-closed-width;
+  //     position: absolute;
+  //     padding: 1px 0;
+  //     overflow-y: auto;
+  //     overflow-x: visible;
+  //     height: auto;
+  //     bottom: auto;
+  //     width: $sideBar-width;
+  //     z-index: 1050;
+  //     display: none;
 
-      > li {
-        a {
-          padding-left: 20px !important;
-          padding-right: 5px;
-        }
+  //     > li {
+  //       a {
+  //         padding-left: 20px !important;
+  //         padding-right: 5px;
+  //       }
 
-        ul.sub-menu {
-          position: relative;
-          left: 0;
-          width: 100%;
-          border: none !important;
+  //       ul.sub-menu {
+  //         position: relative;
+  //         left: 0;
+  //         width: 100%;
+  //         border: none !important;
 
-          li {
-            a {
-              padding-left: 30px !important;
-            }
+  //         li {
+  //           a {
+  //             padding-left: 30px !important;
+  //           }
 
-            ul.sub-menu {
-              li {
-                a {
-                  padding-left: 50px !important;
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
+  //           ul.sub-menu {
+  //             li {
+  //               a {
+  //                 padding-left: 50px !important;
+  //               }
+  //             }
+  //           }
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
 }
 
 @media (min-width: $screen-md-min) {

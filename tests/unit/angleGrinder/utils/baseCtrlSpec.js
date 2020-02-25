@@ -1,4 +1,4 @@
-import BaseCtrl from '~/scripts/utils/BaseCtrl'
+import BaseCtrl from 'angle-grinder/src/ng/utils/BaseCtrl'
 
 describe("BaseCtrl", function() {
 

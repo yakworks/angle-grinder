@@ -3,7 +3,7 @@
 /* ---------------------------------------------------------------------- */
 #app {
   > footer {
-    background-color: lighten($grey, 18%);
+    //background-color: lighten($grey, 18%);
     border-top: none;
     bottom: 0;
     right: 0;
@@ -45,18 +45,6 @@
           width: 970px;
           margin: 0 auto !important;
         }
-      }
-    }
-
-    &.lyt-2 {
-      > footer {
-        margin-left: $sideBar-width - 40;
-      }
-    }
-
-    &.lyt-2.app-sidebar-closed {
-      > footer {
-        margin-left: $sideBar-closed-width - 20;
       }
     }
 

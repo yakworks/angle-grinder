@@ -1,4 +1,4 @@
-import BaseCtrl from '~/scripts/utils/BaseCtrl'
+import BaseCtrl from 'angle-grinder/src/ng/utils/BaseCtrl'
 import _ from 'lodash'
 
 export default class ListCtrl extends BaseCtrl {

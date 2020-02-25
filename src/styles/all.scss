@@ -1,10 +1,12 @@
 @charset "utf-8";
+@import "initialize";
 @import "bulma";
-@import "variables";
 
+
+
+// do overrides
 @import "base";
 @import "layout";
 @import "utilities";
 @import "components";
-
 @import "forms";

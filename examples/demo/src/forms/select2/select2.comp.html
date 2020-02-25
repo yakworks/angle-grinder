@@ -48,6 +48,15 @@
     </div>
   </div>
   <div ag-field-group >
+      <select name="selSelectMutiple" multiple="true" ng-model="$ctrl.vm.selSelectMutiple"
+          ui-select2="{closeOnSelect: false}"
+          class="form-control">
+        <option value="foo1">Foo</option>
+        <option value="bar2">Bar</option>
+        <option value="baz3">Baz</option>
+      </select>
+  </div>
+  <div ag-field-group >
     <label class="control-label">Select2 Select Multi</label>
     <div class="controls">
       <select name="selSelectMutiple" multiple="true" ng-model="$ctrl.vm.selSelectMutiple"
@@ -66,8 +75,17 @@
   <div ag-field-group >
     <label class="control-label">Select2 Input</label>
     <div class="controls">
-      <input name="selInput" ng-model="$ctrl.vm.selInput"
+      <input name="selInput" ng-model="$ctrl.vm.selInput.id"
           ui-select2="$ctrl.selInputOpts"
+          class="form-control">
+      </input>
+    </div>
+  </div>
+  <div ag-field-group >
+    <label class="control-label">Sel useDataObject</label>
+    <div class="controls">
+      <input name="selInput" ng-model="$ctrl.vm.useDataObject"
+          ui-select2="$ctrl.useDataObjectOpts"
           class="form-control">
       </input>
     </div>

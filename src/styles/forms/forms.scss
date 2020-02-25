@@ -102,53 +102,6 @@ legend {
   }
 }
 
-.panel {
-
-  .panel-heading {
-    padding-top: 7px;
-    padding-bottom: 7px;
-  }
-
-  .panel-title {
-    font-size: 14px;
-    color: #666666;
-  }
-
-  dt {
-    text-align: left;
-  }
-  dd {
-    text-align: right;
-  }
-
-  form[editable-form] .title {
-    text-align: left;
-    font-size: 92%;
-    color: #666666;
-  }
-
-  form[editable-form] .title + span {
-    float: right;
-  }
-
-  form[editable-form] div {
-    height: auto;
-    padding: 2px 0;
-    margin-bottom: 2px;
-    min-height: 0px;
-    vertical-align: bottom;
-    line-height: 0.9 !important;
-  }
-
-  form[editable-form] div.title {
-    vertical-align: middle !important;
-  }
-
-  .divider-horizontal {
-    border-bottom: 1px solid #eee;
-  }
-}
-
 //To make toastr icon show on the top, not on the center of toastr
 // #toast-container > .toast {
 //   background-position-x: 12px;

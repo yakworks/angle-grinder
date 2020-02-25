@@ -1,4 +1,4 @@
-import resourceSupport from '~/scripts/resourceSupport'
+import resourceSupport from 'angle-grinder/src/ng/resourceSupport'
 
 describe("restrictResourceSpec", function() {
 

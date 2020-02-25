@@ -1,4 +1,4 @@
-import uiselect2 from '~/scripts/select2'
+import uiselect2 from 'angle-grinder/src/ng/select2'
 
 /**
  * Copied from https://github.com/angular-ui/ui-select2

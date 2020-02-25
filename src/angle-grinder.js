@@ -1,14 +1,15 @@
 import angular from 'angular'
-import agPathWithContext from './scripts/pathWithContext'
-import resourceSupport from './scripts/resourceSupport'
-import uiRouterStateHelper from './scripts/uirouter/stateHelper'
-import agCommon from './scripts/common'
-import agSelect2 from './scripts/select2'
-import forms from './scripts/forms'
-import agCompMod from './scripts/ag-components/ag-components.module'
-import gridz from './scripts/gridz'
-import alertsMod from './scripts/alerts'
-import menuModule from './scripts/dropdown/dropdown.module'
+import agPathWithContext from './ng/pathWithContext'
+import resourceSupport from './ng/resourceSupport'
+import uiRouterStateHelper from './ng/uirouter/stateHelper'
+import agCommon from './ng/common'
+import agSelect2 from './ng/select2'
+import forms from './ng/forms'
+import agCompMod from './ng/ag-components/ag-components.module'
+import gridz from './ng/gridz'
+import alertsMod from './ng/alerts'
+import agComponentsModule from './components'
+import agSidebar from './ng/sidebar/sidebars'
 
 var agmod = angular.module('angleGrinder', [
   resourceSupport,
@@ -20,7 +21,8 @@ var agmod = angular.module('angleGrinder', [
   agCompMod,
   forms,
   alertsMod,
-  menuModule
+  agComponentsModule,
+  agSidebar
 ])
 
 export default agmod.name

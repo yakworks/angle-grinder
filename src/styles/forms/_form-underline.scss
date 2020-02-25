@@ -1,0 +1,65 @@
+
+.input-underline {
+  .ag-datepicker input,
+  textarea,
+  select,
+  input[type="text"],
+  input[type="password"],
+  input[type="datetime"],
+  input[type="datetime-local"],
+  input[type="date"],
+  input[type="month"],
+  input[type="time"],
+  input[type="week"],
+  input[type="number"],
+  input[type="email"],
+  input[type="url"],
+  input[type="search"],
+  input[type="tel"],
+  input[type="color"] {
+    background: none !important;
+    background-image: none !important;
+    border-bottom: 1px solid transparent !important;
+    border-top: none !important;
+    border-left: none !important;
+    border-right: none !important;
+    border-radius: 0 0 0 0 !important;
+    color: $text-dark !important;
+    font-family: inherit !important;
+    transition-duration: 0.1s !important;
+    box-shadow: none !important;
+    padding:0;
+    @include transition (border 300ms ease-out);
+
+    &:hover {
+      border-bottom: 1px solid darken($border-default, 10%) !important;
+      //border-color: darken($border-default, 10%) !important;
+    }
+
+    &:focus {
+        box-shadow: none !important;
+        border-bottom: 1px solid $link !important;
+        //border-color: $link !important;
+        background-color: none !important;
+    }
+  }
+  .select2-container-multi .select2-choices, .select2-container .select2-choice {
+    border-bottom: 1px solid transparent !important;
+    border-top: none !important;
+    border-left: none !important;
+    border-right: none !important;
+    border-radius: 0 0 0 0 !important;
+    &:hover {
+      border-bottom: 1px solid darken($border-default, 10%) !important;
+    }
+  }
+  .ag-datepicker .input-group-addon{
+    background-color: transparent;
+    border: none;
+    padding: 6px;
+  }
+  // select:not([multiple]) {
+  //   -webkit-appearance: none;
+  //   -moz-appearance: none;
+  // }
+}
