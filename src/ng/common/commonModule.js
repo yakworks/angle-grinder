@@ -4,6 +4,7 @@ import uibModName from 'angular-ui-bootstrap'
 import ngScroll from 'angular-scroll'
 import ngcookies from 'angular-cookies'
 import ngAnimate from 'angular-animate'
+import ngSanitize from 'angular-sanitize'
 // import ngLadda from 'angular-ladda'
 import ngLoadingBar from 'angular-loading-bar'
 import vButton from 'v-button'
@@ -18,6 +19,7 @@ var common = angular.module(MOD_NAME, [
   ngRoute,
   ngcookies,
   ngAnimate,
+  ngSanitize,
   // ngLadda,
   ngLoadingBar,
   vButton,
