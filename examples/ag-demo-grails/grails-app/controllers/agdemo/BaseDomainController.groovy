@@ -1,7 +1,5 @@
 package agdemo
 
-import grails.plugin.gormtools.ErrorMessageService
-
 import javax.annotation.PostConstruct
 
 import gorm.tools.Pager
@@ -11,6 +9,7 @@ import gorm.tools.repository.RepoMessage
 import gorm.tools.repository.RepoUtil
 import gorm.tools.repository.errors.EntityValidationException
 import grails.converters.JSON
+import grails.plugin.gormtools.ErrorMessageService
 import grails.util.GrailsNameUtils
 import grails.validation.ValidationException
 

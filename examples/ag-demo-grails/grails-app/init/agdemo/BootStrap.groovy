@@ -1,15 +1,15 @@
-import grails.converters.JSON
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+
 import groovy.json.JsonSlurper
 
 import agdemo.Contact
 import agdemo.Org
 import agdemo.OrgRepo
 import agdemo.User
+import grails.converters.JSON
 import grails.core.GrailsApplication
-
-import java.time.LocalDate
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 
 class BootStrap {
 

@@ -10,7 +10,7 @@ import gridz from './ng/gridz'
 import alertsMod from './ng/alerts'
 import agSidebar from './ng/sidebar/sidebars'
 
-//foo
+// foo
 
 var agmod = angular.module('angleGrinder', [
   resourceSupport,
