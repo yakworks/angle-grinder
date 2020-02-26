@@ -1,7 +1,7 @@
 {
   "name": "angle-grinder",
   "license": "MIT",
-  "version": "4.0.1",
+  "version": "4.0.2",
   "scripts": {
     "build": "rimraf dist && yarn build:wip",
     "build:dev": "webpack --config config/webpack.config.js --mode=development --bail --profile --progress",
