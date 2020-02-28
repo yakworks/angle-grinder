@@ -107,7 +107,7 @@ app.filter('htmlToPlaintext', function() {
 // Custom UI Bootstrap Calendar Popup Template
 app.run(function($templateCache) {
   // let url = './views/partials/sidebar.html'
-  $templateCache.put('./app/sidebar/index.html', require('./app/sidebar/index.html'))
+  $templateCache.put('./app/sidebar/index.html', require('./layout/sidebar/index.html'))
   $templateCache.put('./views/partials/top-navbar.html', require('./views/partials/top-navbar.html'))
   $templateCache.put('./views/partials/main-content.html', require('./views/partials/main-content.html'))
   $templateCache.put('./views/partials/footer.html', require('./views/partials/footer.html'))

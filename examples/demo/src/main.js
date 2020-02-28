@@ -23,12 +23,12 @@ import './directives/messages.js'
 //import './directives/touchspin.js'
 
 // Controllers
-import './app/AppCtrl'
+import './layout/AppCtrl'
 // examples
 import './controllers/inboxCtrl'
 import './controllers/bootstrapCtrl'
 import './controllers/chatCtrl'
-import './app/sidebar/SideNavCtrl'
+//import './layout/sidebar/SideNavCtrl'
 // UI Demo
 import './ui/buttons'
 import './ui/icons'

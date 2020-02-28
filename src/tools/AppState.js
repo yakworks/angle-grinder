@@ -13,7 +13,8 @@ class AppState {
     name: 'Demo', // name of your project
     author: 'YakWorks', // author's name or company name
     description: 'Angular Grinder Angular Library', // brief description
-    version: '4.0.x'
+    version: '4.0.x',
+    copyrightYear: '2020'
   }
 
   // currently logged in user info
