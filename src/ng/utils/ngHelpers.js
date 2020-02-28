@@ -1,5 +1,5 @@
 import angular from 'angular'
-
+import _ from 'lodash'
 /**
  * checks to see if an attribute it truthy
  *
@@ -14,4 +14,12 @@ export function isAttrTruthy(scope, attr) {
 export function truthy(val) {
   const truthy = angular.isString(val) ? val.length : !!val
   return truthy // angular.isString(val) ? val.length : !!val
+}
+
+export function expose(thisObj, $scope, ...members){
+  var fmap = _.map(members, (field) => [field, thisObj[field]])
+  return _.each(fmap, (...args) => {
+    const [field, entity] = Array.from(args[0])
+    return $scope[field] = typeof entity === 'function' ? _.bind(entity, thisObj) : entity
+  })
 }

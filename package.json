@@ -25,7 +25,8 @@
     "watch-ag-demo": "webpack --watch --mode=development --config examples/ag-demo-ui/webpack.config.js --progress --content-base ./examples/ag-demo-ui --pathout ./examples/ag-demo-grails/src/main/webapp",
     "parcel": "parcel examples/simple/index.html",
     "parcel:build": "parcel build examples/simple/index.html",
-    "jest": "jest"
+    "jest": "jest",
+    "svelte-dev": "webpack-dev-server --config examples/svelte/webpack.config.js --content-base examples/svelte"
   },
   "dependencies": {
     "@popperjs/core": "^2.0.6",

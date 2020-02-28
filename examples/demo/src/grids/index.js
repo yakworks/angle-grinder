@@ -4,7 +4,7 @@ import _ from 'lodash'
 
 const app = angular.module('app')
 
-GridList.initClass()
+app.controller('gridExample.ListCtrl',GridList)
 
 app.config(['agDateFilterProvider', provider => // set default date format
   provider.setDefaultFormat('MM/DD/YY H:mm a')

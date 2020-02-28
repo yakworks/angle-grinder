@@ -1,15 +1,21 @@
-import BaseCtrl from 'angle-grinder/src/ng/utils/BaseCtrl'
+//import BaseCtrl from 'angle-grinder/src/ng/utils/BaseCtrl'
+import {expose} from 'angle-grinder/src/ng/utils/ngHelpers'
 import _ from 'lodash'
 import { generateData } from './dataGenerator'
 
-export default class ListCtrl extends BaseCtrl {
-  static initClass() {
-    this.register('app', 'gridExample.ListCtrl')
-    this.inject('$scope', '$q', '$log', 'exampleGrid', 'FormDialogServ', '$uibModal')
+/* @ngInject */
+export default class ListCtrl {
+
+  constructor($scope, $q, exampleGrid, FormDialogServ, $uibModal){
+    this.$scope = $scope
+    this.$q = $q
+    this.exampleGrid = exampleGrid
+    this.FormDialogServ = FormDialogServ
+    this.$uibModal = $uibModal
   }
 
-  initialize() {
-    this.expose(this.$scope, 'getSelectedRowsData', 'editRecord', 'createRecord', 'deleteRecord')
+  $onInit() {
+    expose(this, this.$scope, 'getSelectedRowsData', 'editRecord', 'createRecord', 'deleteRecord')
 
     // initialize the grid with generated data
     this.data = generateData(100)
