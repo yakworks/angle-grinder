@@ -1510,15 +1510,23 @@ const findById = (data, id) => {
 const proxy = {
   // Priority processing.
   'GET /invoices': (req, res) => {
-    console.log('-1--->', req.params)
-    return res.json(invoices);
+    let result = invoices
+    console.log('invoice get', req.params)
+    const { query } = req
+    if (query._search && query._search === 'true'){
+      const filters = JSON.parse(query.filters)
+      if (filters.hasOwnProperty('complete')){
+        result = result.filter(inv => inv.complete === (filters.complete==='true'))
+      }
+    }
+    return res.json(result);
   },
   'GET /invoices/get/:id': (req, res) => {
     console.log('-1--->', req.params)
     return res.json(findById(invoices, req.params.id));
   },
   'POST /invoices/delete/:id': (req, res) => {
-    console.log('-1--->', req.params)
+    console.log('invoice delete', req.params)
     const row = findById(invoices, req.params.id)
     const index = invoices.indexOf(row)
     if (index > -1) {
@@ -1527,7 +1535,7 @@ const proxy = {
     return res.json(row);
   },
   'POST /invoices/update/:id': (req, res) => {
-    console.log('-1--->', req.params)
+    console.log('invoice update', req.params)
     const row = findById(invoices, req.params.id)
     const index = invoices.indexOf(row)
     if (index > -1) {
@@ -1536,7 +1544,7 @@ const proxy = {
     return res.json(invoices[index]);
   },
   'POST /invoices/save': (req, res) => {
-    console.log('-1--->', req)
+    console.log('invoice save', req.params)
     const id = invoices.slice(-1).id + 1
     const newRow = {...req.body, id: id}
     invoices.push(newRow);

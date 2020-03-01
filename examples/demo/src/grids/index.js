@@ -17,7 +17,11 @@ app.config(['agCurrencyFilterProvider', function(provider) {
 }
 ])
 
-app.factory('exampleGrid', [
+app.run(function($templateCache) {
+  $templateCache.put('exampleGridSearchForm.html', require('./templates/searchForm.html'))
+})
+
+app.factory('exampleGridOptions', [
   function() {
     const colModel = () => [{
       name: 'id',

@@ -10,7 +10,6 @@ forms.factory('FormDialogServ', [
   '$uibModal', 'pathWithContext',
   ($modal, pathWithContext) => ({
     open(templateUrl, dialogOptions) {
-      console.log("FormDialog Open ")
       let scope
       if (dialogOptions == null) { dialogOptions = {} }
       if (angular.isDefined(dialogOptions.scope)) { ({ scope } = dialogOptions) }
@@ -83,7 +82,6 @@ class FormDialogCtrl extends BaseCtrl {
 
     promise.then(record => {
       this.$log.info('[ag] record has been updated/created', record)
-      console.log(record)
       this.grid.saveRow(record.id, record)
       return this.$scope.closeDialog()
     })

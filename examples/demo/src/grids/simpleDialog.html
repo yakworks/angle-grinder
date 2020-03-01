@@ -13,6 +13,10 @@
                 ng-model="invoice.note" required >
       </ag-input>
 
+      <ag-select name="complete" ng-model="invoice.complete"
+                 select-options="{ allowClear: true, placeholder: 'select complete', data: ['true', 'false'] }">
+      </ag-select>
+
     </fieldset>
   </form>
 
