@@ -2,14 +2,23 @@
   <h3 class="modal-title" id="modal-title">I'm a modal!</h3>
 </div>
 <div class="modal-body" id="modal-body">
-  <ul>
-      <li >
-          <a href="#">Go Go Go Modal</a>
-      </li>
-  </ul>
+  <form name="invoiceForm" ag-form
+        class="form-horizontal-fixed" autocomplete="off" novalidate>
+    <fieldset>
+      <ag-input name="customerName" ng-model="invoice.customer.name"
+                minimum-length="2" required >
+      </ag-input>
+
+      <ag-input type="text" name="note"
+                ng-model="invoice.note" required >
+      </ag-input>
+
+    </fieldset>
+  </form>
 
 </div>
+
 <div class="modal-footer">
-  <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">OK</button>
-  <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
+  <button class="btn btn-primary" type="button" ng-click="save(invoice)">Save</button>
+  <button class="btn btn-warning" type="button" ng-click="closeDialog()">Cancel</button>
 </div>

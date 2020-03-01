@@ -60,7 +60,6 @@ app.factory('exampleGrid', [
     return function(options) {
       if (options == null) { options = {} }
       const defaults = {
-        datatype: 'local',
         colModel: colModel(),
         sortname: 'id',
         shrinkToFit: true

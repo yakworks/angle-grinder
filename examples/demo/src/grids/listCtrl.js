@@ -6,12 +6,14 @@ import { generateData } from './dataGenerator'
 /* @ngInject */
 export default class ListCtrl {
 
-  constructor($scope, $q, exampleGrid, FormDialogServ, $uibModal){
+  constructor($scope, $q, exampleGrid, FormDialogServ, $uibModal, resourceBuilder, DialogCrudCtrlMixin){
     this.$scope = $scope
     this.$q = $q
     this.exampleGrid = exampleGrid
     this.FormDialogServ = FormDialogServ
     this.$uibModal = $uibModal
+    this.resourceBuilder = resourceBuilder
+    this.DialogCrudCtrlMixin = DialogCrudCtrlMixin
   }
 
   $onInit() {
@@ -22,13 +24,23 @@ export default class ListCtrl {
     this.$scope.data = this.data
 
     const selectedRow = function() { return this.$log.debug('exampleGrid selected row:', arguments) }.bind(this)
-    this.$scope.gridOptions = this.exampleGrid({ data: this.data, onSelectRow: selectedRow })
-    this.$scope.otherGridOptions = this.exampleGrid({ data: this.data, pager: false })
+    //this.$scope.gridOptions = this.exampleGrid({ data: this.data, onSelectRow: selectedRow })
+    this.$scope.otherGridOptions = this.exampleGrid({ data: this.data, pager: false, datatype: 'local'})
+    const Invoices = this.resourceBuilder("/invoices", "invoice");
 
-    return this.$scope.selectedRowsData = []
+    this.$scope.gridOptions = this.exampleGrid({
+      path: `/invoices`
+    });
+
+    this.DialogCrudCtrlMixin(this.$scope, {
+        Resource: Invoices,
+        gridName: "exampleGrid",
+        template: require('./simpleDialog.html')
+      }
+    );
   }
 
-  getSelectedRowsData() {
+ /* getSelectedRowsData() {
     const ids = this.$scope.exampleGrid.getSelectedRowIds()
     return this.$scope.selectedRowsData = _.map(ids, function(id) {
       return this.$scope.exampleGrid.getRowData(id)
@@ -93,22 +105,6 @@ export default class ListCtrl {
       return row
     }
   }
+*/
 
-  createDialog() {
-    // var parentElem = parentSelector ?
-    //   angular.element($document[0].querySelector('.modal-demo ' + parentSelector)) : undefined;
-    var modalInstance = this.$uibModal.open({
-      template: require('./simpleDialog.html')
-      // controller: 'ModalInstanceCtrl',
-      // controllerAs: '$ctrl',
-      // size: size,
-      // appendTo: parentElem
-    })
-
-    // modalInstance.result.then(function (selectedItem) {
-    //   $ctrl.selected = selectedItem;
-    // }, function () {
-    //   $log.info('Modal dismissed at: ' + new Date());
-    // });
-  };
 }
