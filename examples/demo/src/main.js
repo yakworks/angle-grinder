@@ -12,7 +12,9 @@ import '~/vendor'
 import $log from 'angle-grinder/src/utils/Log'
 $log.debugEnabled(true)
 
-import './app'
+import './app.config'
+import './layout/AppCtrl'
+
 //import './directives/sidebars.js'
 import './directives/full-height.js'
 import './directives/panel-tools.js'
@@ -22,13 +24,11 @@ import './directives/messages.js'
 // import "./directives/chat.js"
 //import './directives/touchspin.js'
 
-// Controllers
-import './layout/AppCtrl'
 // examples
 import './controllers/inboxCtrl'
 import './controllers/bootstrapCtrl'
 import './controllers/chatCtrl'
-//import './layout/sidebar/SideNavCtrl'
+
 // UI Demo
 import './ui/buttons'
 import './ui/icons'

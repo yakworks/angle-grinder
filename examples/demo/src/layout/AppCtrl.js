@@ -12,18 +12,6 @@ app.controller('AppCtrl',
       // start loading bar on stateChangeStart
       cfpLoadingBar.start()
       $scope.horizontalNavbarCollapsed = true
-
-      var stateTo = trans.$to()
-      if (stateTo.name == 'app.pagelayouts.boxedpage') {
-        $body.addClass('app-boxed-page')
-      } else {
-        $body.removeClass('app-boxed-page')
-      }
-      if (typeof CKEDITOR !== 'undefined') {
-        for (name in CKEDITOR.instances) {
-          CKEDITOR.instances[name].destroy()
-        }
-      }
     })
 
     // the ui-router events, see https://stackoverflow.com/a/43553641

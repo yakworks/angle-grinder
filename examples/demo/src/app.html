@@ -1,21 +1,31 @@
 
-<toaster-container toaster-options="{'position-class': 'toast-top-right', 'close-button':true}"></toaster-container>
+<div id="app" class="lyt-2"
+ng-class="{
+  'app-mobile' : app.isMobile,
+  'app-navbar-fixed' : app.layout.isNavbarFixed,
+  'app-sidebar-fixed' : app.layout.isSidebarFixed,
+  'app-sidebar-closed':app.layout.isSidebarClosed,
+  'app-footer-fixed':app.layout.isFooterFixed
+}">
+  <toaster-container toaster-options="{'position-class': 'toast-top-right', 'close-button':true}"></toaster-container>
 
-<app-sidebar></app-sidebar>
-
-<div class="app-content" ng-class="{loading: loading}">
-    <!-- top navbar -->
+  <app-sidebar ng-model="app.showSidebar"></app-sidebar>
+  <!-- top navbar -->
+  <!-- / top navbar -->
+  <div class="app-content" ng-class="{loading: loading}">
     <ng-include src=" './views/partials/top-navbar.html' "></ng-include>
-    <!-- / top navbar -->
-    <!-- main content -->
-    <div data-ng-include=" './views/partials/main-content.html' " class="main-content"></div>
-    <!-- / main content -->
+      <!-- main content -->
+      <div data-ng-include=" './views/partials/main-content.html' " class="main-content"></div>
+      <!-- / main content -->
+  </div>
+
+  <!-- <footer data-ng-include="'./views/partials/footer.html'"></footer> -->
+  <app-footer></app-footer>
+
+  <div data-ng-include=" './views/partials/off-sidebar.html' " id="off-sidebar"
+      toggleable pdarent-active-class="app-offsidebar-open" ag-sidebar></div>
+  <div data-ng-include=" './views/partials/settings.html' "
+      toggleable class="settings panel panel-default hidden-xs hidden-sm hidden-print" id="settings"></div>
+
 </div>
 
-<!-- <footer data-ng-include="'./views/partials/footer.html'"></footer> -->
-<app-footer></app-footer>
-
-<div data-ng-include=" './views/partials/off-sidebar.html' " id="off-sidebar"
-    toggleable parent-active-class="app-offsidebar-open" ag-sidebar></div>
-<div data-ng-include=" './views/partials/settings.html' "
-    toggleable class="settings panel panel-default hidden-xs hidden-sm hidden-print" id="settings"></div>

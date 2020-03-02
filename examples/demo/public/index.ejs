@@ -26,8 +26,7 @@
 
 </head>
 <body ng-controller="AppCtrl">
-    <div ui-view id="app" class="lyt-2" ng-class="{'app-mobile' : app.isMobile, 'app-navbar-fixed' : app.layout.isNavbarFixed, 'app-sidebar-fixed' : app.layout.isSidebarFixed, 'app-sidebar-closed':app.layout.isSidebarClosed, 'app-footer-fixed':app.layout.isFooterFixed}">
-    </div>
+    <div ui-view></div>
 
     <% for (var jsfile in htmlWebpackPlugin.files.js) { %>
     <script src="<%= htmlWebpackPlugin.files.js[jsfile]%>"></script>
