@@ -15,22 +15,25 @@ resources.constant('RestContext', '')
 // Build a resource for the given restful url
 // TODO cleanup and spec this service
 // TODO consider move it to angle-grinder
-resources.factory('resourceBuilder', [
-  '$resource', 'pathWithContext', 'RestContext', function($resource, pathWithContext, RestContext) {
+resources.provider('resourceBuilder', function() {
+  let restContext = ''
+  return {
+    setRestContext: function(context) {
+      restContext = context
+    },
+    $get:  [
+  '$resource', 'pathWithContext', 'RestContext', function($resource, pathWithContext) {
     return function(basePath, resourceName) {
-      if (RestContext.length > 0) {
-        basePath = '/api' + basePath
-      }
-      if (!basePath) {
-
-      }
       if (resourceName == null) {
         resourceName = basePath.replace(/^(\/+)/, '')
+      }
+      if (restContext.length > 0) {
+        basePath = restContext + basePath
       }
       var pathWithoutContext = basePath
       basePath = pathWithContext(basePath)
       var Resource = null
-      if (RestContext.length > 0) {
+      if (restContext.length > 0) {
         Resource = $resource(basePath + '/:action/:id', { id: '@id' }, {
           list: { method: 'GET', params: { action: 'list' }, isArray: false },
           get: { method: 'GET' },
@@ -43,12 +46,12 @@ resources.factory('resourceBuilder', [
           massDelete: { method: 'POST', params: { action: 'massDelete' } }
         })
       } else {
-        Resource = $resource(basePath + '/:action/:id', { id: '@id' }, {
-          list: { method: 'GET', params: { action: 'list' }, isArray: false },
-          get: { method: 'GET', params: { action: 'get' } },
-          save: { method: 'POST', params: { action: 'save' } },
-          update: { method: 'POST', params: { action: 'update' } },
-          delete: { method: 'POST', params: { action: 'delete' } },
+        Resource = $resource(basePath + '/:id', { id: '@id' }, {
+          list: { method: 'GET', isArray: false },
+          get: { method: 'GET' },
+          save: { method: 'POST'},
+          update: { method: 'POST' },
+          delete: { method: 'POST'},
 
           // mass actions (for selected rows)
           massUpdate: { method: 'POST', params: { action: 'massUpdate' } },
@@ -99,7 +102,7 @@ resources.factory('resourceBuilder', [
       return Resource
     }
   }
-])
+]}})
 
 // This module defines the resource mappings required by Angular JS to map to a
 // standard Grails CRUD URL scheme that uses `"/$controller/$action?/$id?"`.
