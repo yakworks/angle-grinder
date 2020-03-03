@@ -24,11 +24,11 @@ export default angular.module('app.sidebar',[])
   .component('appSidebar', {
     controller,
     template: require('./index.html'),
-    require: {
-      ngModelCtrl: 'ngModel',
-    },
-    bindings: {
-      ngModel: '=',
-    }
+    // require: {
+    //   ngModelCtrl: 'ngModel',
+    // },
+    // bindings: {
+    //   ngModel: '=',
+    // }
   })
   .name
