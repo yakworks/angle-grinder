@@ -13,7 +13,7 @@ import $log from 'angle-grinder/src/utils/Log'
 $log.debugEnabled(true)
 
 import './app.config'
-import './layout/AppCtrl'
+import './AppCtrl'
 
 //import './directives/sidebars.js'
 import './directives/full-height.js'

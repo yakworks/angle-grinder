@@ -66,8 +66,8 @@
   }
 
   @media (max-width: $screen-sm-max) {
-    &.app-slide-off,
-    &.app-offsidebar-open {
+    &.app-sidebar-closed ,
+    &.app-sidebar-open  {
       .app-footer {
         display: none;
       }

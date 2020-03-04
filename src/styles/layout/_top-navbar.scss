@@ -161,8 +161,8 @@ header.navbar {
     }
   }
 
-  .app-slide-off &,
-  .app-offsidebar-open & {
+  .app-sidebar-closed &,
+  .app-sidebar-open  & {
     @media (max-width: $screen-sm-max) {
       position: absolute !important;
     }
