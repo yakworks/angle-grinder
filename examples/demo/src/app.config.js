@@ -30,7 +30,7 @@ app.run(function($rootScope, $state, $stateParams) {
     defaultLayout: {
       isNavbarFixed: true, // true if you want to initialize the template with fixed header
       isSidebarFixed: true, // true if you want to initialize the template with fixed sidebar
-      isSidebarClosed: false, // true if you want to initialize the template with closed sidebar
+      // isSidebarClosed: false, // true if you want to initialize the template with closed sidebar
       isFooterFixed: false, // true if you want to initialize the template with fixed footer
       isBoxedPage: false, // true if you want to initialize the template with boxed layout
       theme: 'light', // indicate the theme chosen for your project
@@ -47,6 +47,10 @@ app.run(function($rootScope, $state, $stateParams) {
     job: 'ng-Dev',
     picture: 'app/img/user/02.jpg'
   }
+  // appState defaults
+  appState.sidenav.open = true
+
+  $rootScope.appState = appState
 })
 
 // translate config

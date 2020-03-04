@@ -20,6 +20,12 @@ class AppState {
   // currently logged in user info
   user = {}
 
+  sidenav = {
+    open: true
+  }
+
+  layout = {}
+
   static factory() {
     return new AppState()
   }

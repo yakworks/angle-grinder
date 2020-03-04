@@ -245,6 +245,7 @@
         "FIXEDHEADER": "Fixed header",
         "FIXEDSIDEBAR": "Fixed sidebar",
         "CLOSEDSIDEBAR": "Closed sidebar",
+        "OPENSIDEBAR": "Open sidebar",
         "FIXEDFOOTER": "Fixed footer"
     }
 }

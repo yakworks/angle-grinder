@@ -25,13 +25,13 @@
     <!-- <link rel="stylesheet" data-ng-href="assets/theme/{{ app.layout.theme }}.css" /> -->
 
 </head>
-<body ng-controller="AppCtrl">
+<body ng-controller="AppCtrl as $appCtrl">
     <div ui-view id="app" class="lyt-2"
     ng-class="{
       'app-mobile' : app.isMobile,
       'app-navbar-fixed' : app.layout.isNavbarFixed,
       'app-sidebar-fixed' : app.layout.isSidebarFixed,
-      'app-sidebar-closed':app.layout.isSidebarClosed,
+      'app-sidebar-closed': !appState.sidenav.open,
       'app-footer-fixed':app.layout.isFooterFixed
     }">
     </div>
