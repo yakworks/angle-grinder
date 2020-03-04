@@ -166,7 +166,7 @@ class AppCtrl {
     console.log("appState.sidenav.open", appState.sidenav.open)
     //this.$scope.toggle('sidebar')
     appState.sidenav.open = !appState.sidenav.open
-    this.$rootScope.$emit('ag.sidenav.toggle', 'sidebar', appState.sidenav.open)
+    //this.$rootScope.$emit('ag.sidenav.toggle', 'sidebar', appState.sidenav.open)
     //app.layout.isSidebarClosed = !app.layout.isSidebarClosed
   }
 }

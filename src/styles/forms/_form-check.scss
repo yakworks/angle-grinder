@@ -30,11 +30,12 @@ label.form-check {
     position: absolute;
     opacity: 0;
     pointer-events: none;
-
     &:focus+i::before {
-      //outline: #5d9dd5 solid 1px;
-      box-shadow: $checkbox-focus;
-      //box-shadow: 0 0 0 2px rgba(40, 137, 167, 0.25);
+      // outline: #5d9dd5 solid 1px;
+      // box-shadow: $checkbox-focus;
+      // box-shadow: $input-focus-box-shadow-size rgba($link, 0.25)
+      box-shadow: $input-check-focus-box-shadow-size $input-check-focus-box-shadow-color
+      // box-shadow: 0 0 0 2px rgba(40, 137, 167, 0.25);
     }
 
     &:checked+i::before {
@@ -68,21 +69,44 @@ label.form-check {
     }
   }
 
-  &.is-success [type=checkbox]:checked+i::before {
-    background: $success;
-    border-color: $success;
+  &.is-success [type=checkbox]{
+    &:focus+i::before {
+      box-shadow: $input-check-focus-box-shadow-size rgba($success, 0.40);
+    }
+    &:checked+i::before {
+      background: $success;
+      border-color: $success;
+    }
   }
 
-  &.is-info [type=checkbox]:checked+i::before {
-    background: $info;
-    border-color: $info;
+  &.is-info [type=checkbox]{
+    &:focus+i::before {
+      box-shadow: $input-check-focus-box-shadow-size rgba($info, 0.40);
+    }
+    &:checked+i::before {
+      background: $info;
+      border-color: $info;
+    }
   }
-  &.is-danger [type=checkbox]:checked+i::before {
-    background: $danger;
-    border-color: $danger;
+
+  &.is-danger [type=checkbox]{
+    &:focus+i::before {
+      box-shadow: $input-check-focus-box-shadow-size rgba($danger, 0.40);
+    }
+    &:checked+i::before {
+      background: $danger;
+      border-color: $danger;
+    }
   }
-  &.is-warning [type=checkbox]:checked+i::before {
-    background: $warning;
-    border-color: $warning;
+
+  &.is-warning [type=checkbox]{
+    &:focus+i::before {
+      box-shadow: $input-check-focus-box-shadow-size rgba($warning, 0.40);
+    }
+    &:checked+i::before {
+      background: $warning;
+      border-color: $warning;
+    }
   }
+
 }

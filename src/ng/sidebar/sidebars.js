@@ -31,38 +31,38 @@ angular.module('ag.sidebar', [])
           return false
         }
 
-        var closeOnOuterClicks = function(e) {
-          console.log('closeOnOuterClicks called appState.sidenav.open',  appState.sidenav.open)
-          if (!isAncestorOrSelf(angular.element(e.target), elem)) {
-            //$rootScope.toggle(attrs.id, 'off')
-            console.log('appState.sidenav.open', appState.sidenav.open)
-            //appState.sidenav.open = false
-            e.preventDefault()
-            return false
-          }
-        }
+        // var closeOnOuterClicks = function(e) {
+        //   console.log('closeOnOuterClicks called appState.sidenav.open',  appState.sidenav.open)
+        //   if (!isAncestorOrSelf(angular.element(e.target), elem)) {
+        //     //$rootScope.toggle(attrs.id, 'off')
+        //     console.log('appState.sidenav.open', appState.sidenav.open)
+        //     //appState.sidenav.open = false
+        //     e.preventDefault()
+        //     return false
+        //   }
+        // }
 
         var clearCb1 = angular.noop()
 
-        if (shouldCloseOnOuterClicks) {
-          console.log("shouldCloseOnOuterClicks", shouldCloseOnOuterClicks)
-          console.log('shouldCloseOnOuterClicks appState.sidenav.open', appState.sidenav.open)
-          clearCb1 = $rootScope.$on('ag.sidenav.toggle', function(e, id, isOpen) {
-            console.log('shouldCloseOnOuterClicks ag.sidenav.toggle fired')
-            console.log('attrs.id', {id: id, 'attrs.id':attrs.id})
-            if (id === attrs.id) {
-              if (isOpen) {
-                setTimeout(function() {
-                  console.log('ag.sidenav.toggle isOpen $document.on closeOnOuterClicks')
-                  $document.on('click tap', closeOnOuterClicks)
-                }, 300)
-              } else {
-                console.log('ag.sidenav.toggle NOT isOpen $document.off closeOnOuterClicks')
-                $document.off('click tap', closeOnOuterClicks)
-              }
-            }
-          })
-        }
+        // if (shouldCloseOnOuterClicks) {
+        //   console.log("shouldCloseOnOuterClicks", shouldCloseOnOuterClicks)
+        //   console.log('shouldCloseOnOuterClicks appState.sidenav.open', appState.sidenav.open)
+        //   clearCb1 = $rootScope.$on('ag.sidenav.toggle', function(e, id, isOpen) {
+        //     console.log('shouldCloseOnOuterClicks ag.sidenav.toggle fired')
+        //     console.log('attrs.id', {id: id, 'attrs.id':attrs.id})
+        //     if (id === attrs.id) {
+        //       if (isOpen) {
+        //         setTimeout(function() {
+        //           console.log('ag.sidenav.toggle isOpen $document.on closeOnOuterClicks')
+        //           $document.on('click tap', closeOnOuterClicks)
+        //         }, 300)
+        //       } else {
+        //         console.log('ag.sidenav.toggle NOT isOpen $document.off closeOnOuterClicks')
+        //         $document.off('click tap', closeOnOuterClicks)
+        //       }
+        //     }
+        //   })
+        // }
 
         scope.$on('$destroy', function() {
           clearCb1()
