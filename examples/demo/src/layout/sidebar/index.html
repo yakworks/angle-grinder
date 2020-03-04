@@ -72,7 +72,7 @@
       </div>
       <ul class="main-navigation-menu">
         <li ng-repeat="mitem in $ctrl.sideMenuItems"
-            class="list-item {{$state.includes(mitem.name) ? 'active open' : ''}}"
+            class="list-item {{$ctrl.$state.includes(mitem.name) ? 'active open' : ''}}"
             ng-class="{ 'has-children' : mitem.children }"
             >
           <a ui-sref="{{mitem.children ? '-' : mitem.name}}" href="{{mitem.children ? 'javascript:void(0)' : ''}}">

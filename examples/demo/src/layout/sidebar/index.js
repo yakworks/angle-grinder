@@ -5,6 +5,7 @@ class controller {
 
   constructor($element) {
     this.$element = $element
+    this.$state = appState.$state
     this.appState = appState
     this.sideMenuItems = appRoot.children
   }
