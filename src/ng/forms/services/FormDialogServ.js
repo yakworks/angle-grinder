@@ -24,11 +24,10 @@ forms.factory('FormDialogServ', [
           dialogOptions() { return dialogOptions }
         }
       }
-      console.log(modalOptions)
       if(dialogOptions.template){
         modalOptions.template = dialogOptions.template
       } else {
-        modalOptions.templateUrl = templateUrl
+        modalOptions.templateUrl = pathWithContext(templateUrl || '')
       }
 
       $modal.open(modalOptions)

@@ -30,7 +30,7 @@ export default class ListCtrl {
     this.DialogCrudCtrlMixin(this.$scope, {
         Resource: Invoices,
         gridName: "exampleGrid",
-        template: require('../simpleDialog.html')
+        templateUrl: 'simpleDialog.html'
       }
     );
   }
