@@ -16,7 +16,7 @@ export function truthy(val) {
   return truthy // angular.isString(val) ? val.length : !!val
 }
 
-export function expose(thisObj, $scope, ...members){
+export function expose(thisObj, $scope, ...members) {
   var fmap = _.map(members, (field) => [field, thisObj[field]])
   return _.each(fmap, (...args) => {
     const [field, entity] = Array.from(args[0])
