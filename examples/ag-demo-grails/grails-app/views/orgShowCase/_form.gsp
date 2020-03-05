@@ -1,5 +1,5 @@
 <%@ page import="agdemo.Org" %>
-<g:set var="entityName" value="${ag.label(code: "orgShowCase")}"/>
+<g:set var="entityName" value="Org Show Case"/>
 
 <div class="modal-header">
     <button type="button" class="close" ng-click="closeDialog()" aria-hidden="true">&times;</button>

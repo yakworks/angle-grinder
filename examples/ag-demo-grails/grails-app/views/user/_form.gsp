@@ -1,4 +1,4 @@
-<g:set var="entityName" value="${ag.label(code: "user")}"/>
+<g:set var="entityName" value="User"/>
 
 <div class="modal-header">
   <button type="button" class="close" ng-click="closeDialog()" aria-hidden="true">&times;</button>
@@ -17,10 +17,10 @@
     <ng-form name="contact" ag-server-validation-errors>
       <div ag-field-group for="firstName,lastName,email">
         <div class="form-group">
-          <label class="control-label">${ag.label(code: "contact.name")}</label>
+          <label class="control-label">Name</label>
 
           <div class="controls">
-            <input class="form-control"  type="text" placeholder="${ag.label(code: 'contact.firstName')}"
+            <input class="form-control"  type="text" placeholder="First Name"
                    name="firstName"
                    ng-model="user.contact.firstName" required autofocus>
             <ag-validation-errors for="firstName"/>
@@ -29,7 +29,7 @@
 
         <div class="form-group">
           <div class="controls">
-            <input class="form-control"  type="text" placeholder="${ag.label(code: 'contact.lastName')}"
+            <input class="form-control"  type="text" placeholder="Last Name"
                    name="lastName"
                    ng-model="user.contact.lastName"/>
             <ag-validation-errors for="lastName"/>
@@ -37,7 +37,7 @@
         </div>
 
         <div class="form-group">
-          <label class="control-label">${ag.label(code: "contact.email")}</label>
+          <label class="control-label">Email</label>
 
           <div class="controls">
             <input class="form-control"  type="email" placeholder="Email"
@@ -49,7 +49,7 @@
 
 
         <div ag-field-group for="type" class="form-group">
-          <label class="control-label">${ag.label(code: "contact.type")}</label>
+          <label class="control-label">Type</label>
 
           <div class="controls">
             <select class="form-control" ui-select2="{closeOnSelect: false}" name="type" name="type" ng-model="user.contact.type">
@@ -63,7 +63,7 @@
 
       <div ag-field-group for="orgId">
         <div class="form-group">
-          <label class="control-label">${ag.label(code: "user.org")}</label>
+          <label class="control-label">Org</label>
 
           <div class="controls">
             <select class="form-control" name="orgId" ui-select2="{}"
@@ -80,7 +80,7 @@
       <div ag-field-group for="tagForReminders">
         <div class="form-group">
           <label class="control-label">
-            ${ag.label(code: 'contact.tagForReminders')}
+            Tag For Reminders
           </label>
 
           <div class="controls">
@@ -93,7 +93,7 @@
 
     <div ag-field-group for="login">
       <div class="form-group">
-        <label class="control-label">${ag.label(code: "user.login")}</label>
+        <label class="control-label">Login</label>
 
         <div class="controls">
           <input class="form-control"  type="text"
@@ -105,7 +105,7 @@
 
     <div ag-field-group for="activeDate">
       <div class="form-group">
-        <label class="control-label">${ag.label(code: "activeDate")}</label>
+        <label class="control-label">Active Date</label>
 
         <div class="controls">
           <ag-datepicker date-type="date"
@@ -121,11 +121,11 @@
 
     <div ag-field-group for="password,repassword">
       <div class="form-group">
-        <label class="control-label ">${ag.label(code: "user.password")}</label>
+        <label class="control-label ">Password</label>
 
         <div>
           <div class="controls">
-            <input class="form-control"  type="password" placeholder="${ag.label(code: 'user.password')}"
+            <input class="form-control"  type="password" placeholder="Pssword"
                    name="password"
                    ng-model="user.password"
                    ng-required="user.newRecord()" ng-minlength="6"/>
@@ -147,7 +147,7 @@
 
     <div class="form-group" ng-hide="user.newRecord()">
       <label class="control-label col-md-4">
-        ${ag.label(code: 'user.inactive')}
+        Inactive
       </label>
 
       <div class="col-md-4" style="margin-top: 7px;">
