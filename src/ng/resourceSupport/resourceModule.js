@@ -22,10 +22,13 @@ resources.provider('resourceBuilder', function() {
       restContext = context
     },
     $get:  [
-  '$resource', 'pathWithContext', 'RestContext', function($resource, pathWithContext) {
-    return function(basePath, resourceName) {
+  '$resource', 'pathWithContext', function($resource, pathWithContext) {
+    return function(basePath, resourceName, restCont = '') {
       if (resourceName == null) {
         resourceName = basePath.replace(/^(\/+)/, '')
+      }
+      if (restCont.length > 0){
+        restContext = restCont
       }
       if (restContext.length > 0) {
         basePath = restContext + basePath
@@ -34,8 +37,8 @@ resources.provider('resourceBuilder', function() {
       basePath = pathWithContext(basePath)
       var Resource = null
       if (restContext.length > 0) {
-        Resource = $resource(basePath + '/:action/:id', { id: '@id' }, {
-          list: { method: 'GET', params: { action: 'list' }, isArray: false },
+        Resource = $resource(basePath + '/:id', { id: '@id' }, {
+          list: { method: 'GET', isArray: false },
           get: { method: 'GET' },
           save: { method: 'POST' },
           update: { method: 'PUT' },
@@ -46,12 +49,12 @@ resources.provider('resourceBuilder', function() {
           massDelete: { method: 'POST', params: { action: 'massDelete' } }
         })
       } else {
-        Resource = $resource(basePath + '/:id', { id: '@id' }, {
-          list: { method: 'GET', isArray: false },
-          get: { method: 'GET' },
-          save: { method: 'POST'},
-          update: { method: 'POST' },
-          delete: { method: 'POST'},
+        Resource = $resource(basePath + '/:action/:id', { id: '@id' }, {
+          list: { method: 'GET', params: { action: 'list' }, isArray: false },
+          get: { method: 'GET', params: { action: 'get' } },
+          save: { method: 'POST', params: { action: 'save' } },
+          update: { method: 'POST', params: { action: 'update' } },
+          delete: { method: 'POST', params: { action: 'delete' } },
 
           // mass actions (for selected rows)
           massUpdate: { method: 'POST', params: { action: 'massUpdate' } },

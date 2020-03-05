@@ -1549,6 +1549,50 @@ const proxy = {
     const newRow = {...req.body, id: id}
     invoices.push(newRow);
     return res.json(newRow);
+  },
+
+
+
+  'GET /api/invoices': (req, res) => {
+    let result = invoices
+    console.log('invoice get', req.params)
+    const { query } = req
+    if (query._search && query._search === 'true'){
+      const filters = JSON.parse(query.filters)
+      if (filters.hasOwnProperty('complete')){
+        result = result.filter(inv => inv.complete === (filters.complete==='true'))
+      }
+    }
+    return res.json(result);
+  },
+  'GET /api/invoices/:id': (req, res) => {
+    console.log('-1--->', req.params)
+    return res.json(findById(invoices, req.params.id));
+  },
+  'DELETE /api/invoices/:id': (req, res) => {
+    console.log('invoice delete', req.params)
+    const row = findById(invoices, req.params.id)
+    const index = invoices.indexOf(row)
+    if (index > -1) {
+      invoices.splice(index, 1);
+    }
+    return res.json(row);
+  },
+  'PUT /api/invoices/:id': (req, res) => {
+    console.log('invoice update', req.params)
+    const row = findById(invoices, req.params.id)
+    const index = invoices.indexOf(row)
+    if (index > -1) {
+      invoices[index] = {...invoices[index], ...req.body};
+    }
+    return res.json(invoices[index]);
+  },
+  'POST /api/invoices/save': (req, res) => {
+    console.log('invoice save', req.params)
+    const id = invoices.slice(-1).id + 1
+    const newRow = {...req.body, id: id}
+    invoices.push(newRow);
+    return res.json(newRow);
   }
 }
 module.exports = (noProxy ? {} : delay(proxy, 1000));

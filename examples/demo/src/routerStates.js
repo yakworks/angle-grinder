@@ -111,6 +111,12 @@ const gridsStates = {
       template: require('./grids/list.html'),
       controller: 'gridExample.ListCtrl',
       controllerAs: '$ctrl'
+    },
+    {
+      name: 'Rest Api',
+      template: require('./grids/list.html'),
+      controller: 'gridExample.Rest.ListCtrl',
+      controllerAs: '$ctrl'
     }
   ]
 }
