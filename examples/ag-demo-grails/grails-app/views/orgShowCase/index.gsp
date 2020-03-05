@@ -1,7 +1,7 @@
 <html>
 <head>
     <meta name="layout" content="agAdmin"/>
-    <g:set var="entityName" value="${ag.label(code: "ShowCase")}"/>
+    <g:set var="entityName" value="ShowCase"/>
     <title>${entityName} Admin</title>
     <style type="text/css">
     .select2-container {

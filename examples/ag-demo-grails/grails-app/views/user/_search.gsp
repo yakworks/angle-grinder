@@ -6,7 +6,7 @@
         <div class="columns">
             <div class="column is-one-third">
                 <div class="form-group">
-                    <label class="control-label">${ag.label(code: "org")}</label>
+                    <label class="control-label">Org</label>
 
                     <div class="controls">
                         <g:select id="orgSelect" name="orgSelect"
@@ -20,7 +20,7 @@
 
 
             <div class="form-group">
-                <label class="control-label col-sm-4">${ag.label(code: "name")}</label>
+                <label class="control-label col-sm-4">Name</label>
 
                 <div class="controls">
                     <input class="form-control" type="text" ng-model="filters.contact.name">
@@ -28,7 +28,7 @@
             </div>
 
             <div class="form-group">
-                <label class="control-label col-sm-4">${ag.label(code: "login")}</label>
+                <label class="control-label col-sm-4">Login</label>
 
                 <div class="controls">
                     <input class="form-control" type="text" ng-model="filters.login">
@@ -37,7 +37,7 @@
 
 
             <div class="form-group">
-                <label class="control-label col-sm-4">${ag.label(code: "contact.email")}</label>
+                <label class="control-label col-sm-4">Email</label>
 
                 <div class="controls">
                     <input class="form-control" type="text" ng-model="filters.contact.email">
@@ -45,7 +45,7 @@
             </div>
 
             <div class="form-group">
-                <label class="control-label col-sm-4">${ag.label(code: "contact.type")}</label>
+                <label class="control-label col-sm-4">Type</label>
 
                 <div class="controls">
                     <input type="text" ui-select2="contactTypeSelectOptions" class="full-width"
