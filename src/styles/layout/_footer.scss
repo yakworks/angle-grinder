@@ -2,7 +2,7 @@
 /*  Footer
 /* ---------------------------------------------------------------------- */
 #app {
-  > footer {
+  .app-footer {
     //background-color: lighten($grey, 18%);
     border-top: none;
     bottom: 0;
@@ -24,24 +24,24 @@
   }
 
   @media (min-width: $screen-md-min) {
-    > footer {
+    .app-footer {
       margin-left: $sideBar-width;
       transition: margin 0.5s;
     }
 
     &.app-sidebar-closed {
-      > footer {
+      .app-footer {
         margin-left: $sideBar-closed-width;
       }
     }
 
     &.app-footer-fixed {
-      > footer {
+      .app-footer {
         position: fixed;
       }
 
       .app-boxed-page & {
-        > footer {
+        .app-footer {
           width: 970px;
           margin: 0 auto !important;
         }
@@ -49,7 +49,7 @@
     }
 
     .app-boxed-page & {
-      > footer {
+      .app-footer {
         margin-left: 0;
       }
     }
@@ -58,7 +58,7 @@
   @media (min-width: $screen-lg-min) {
     &.app-footer-fixed {
       .app-boxed-page & {
-        > footer {
+        .app-footer {
           width: 1170px;
         }
       }
@@ -66,9 +66,9 @@
   }
 
   @media (max-width: $screen-sm-max) {
-    &.app-slide-off,
-    &.app-offsidebar-open {
-      > footer {
+    &.app-sidebar-closed ,
+    &.app-sidebar-open  {
+      .app-footer {
         display: none;
       }
     }

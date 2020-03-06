@@ -1,7 +1,6 @@
 'use strict'
 /**
 * It's like click, but when you don't click on your element.
-* Not Used right now
 */
 import commonModule from '../commonModule'
 

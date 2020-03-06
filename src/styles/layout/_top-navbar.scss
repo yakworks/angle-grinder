@@ -23,6 +23,16 @@ header.navbar {
   .navbar-header {
     z-index: 10;
 
+    &:after {
+      content: "";
+      position: absolute;
+      width: 1px;
+      right: 0;
+      top: 5px;
+      bottom: 5px;
+      background: linear-gradient( to bottom, #ffffff00 0%,#ffffff33 50%,#ffffff00 100%);
+    }
+
     @media (min-width: $screen-sm-min) {
       width: $sideBar-width;
     }
@@ -38,8 +48,7 @@ header.navbar {
       transition: width 0.5s;
     }
 
-    a,
-    button {
+    a, button {
       line-height: $header-height;
       height: $header-height;
     }
@@ -47,6 +56,7 @@ header.navbar {
     button {
       background: none;
       border: none;
+      box-shadow: none;
     }
 
     .navbar-brand {
@@ -122,13 +132,26 @@ header.navbar {
     }
   }
 
-  .navbar-collapse {
+  .navbar-toolbar-menu {
+    // make it a columns
+    display: flex;
     border-bottom: 1px solid transparent;
     border-top: none;
     background-color: $header-background-color;
     padding-left: 15px !important;
     padding-right: 15px !important;
     position: relative;
+
+    .navbar-collapse {
+      flex-basis: 0;
+      flex-grow: 1;
+      flex-shrink: 1;
+    }
+    // right part of the menu with verticle dots menu, will always be shown in both desk top and mobile
+    .navbar-toolbar-right {
+      display: flex;
+      flex: none;
+    }
 
     @media (min-width: $screen-sm-min) {
       transition: margin 0.5s;
@@ -158,11 +181,94 @@ header.navbar {
     button {
       background: none;
       border: none;
+      box-shadow: none;
     }
   }
 
-  .app-slide-off &,
-  .app-offsidebar-open & {
+  .main-search {
+    width: 130px;
+    padding: 0;
+    display: inline-block;
+    background: none !important;
+    margin: 0 10px;
+    box-shadow: none;
+    border: none;
+    position: relative;
+
+    // separator lines for search and logo
+    &:before {
+      content: "";
+      position: absolute;
+      width: 1px;
+      left: 0;
+      top: 5px;
+      bottom: 5px;
+      background: linear-gradient( to bottom, #ffffff00 0%,#ffffff33 50%,#ffffff00 100%);
+    }
+    &:after {
+      content: "";
+      position: absolute;
+      width: 1px;
+      right: 0;
+      top: 5px;
+      bottom: 5px;
+      background: linear-gradient( to bottom, #ffffff00 0%,#ffffff33 50%,#ffffff00 100%);
+    }
+
+    .form-group {
+      margin-bottom: 0;
+    }
+
+    .form-control {
+      background: none !important;
+      border: none !important;
+      font-size: 14px !important;
+      height: $header-height;
+      margin: 0;
+      z-index: 2000;
+      color: $white !important;
+      padding-right: 30px !important;
+
+      &::-webkit-input-placeholder {
+        color: rgba($white, 0.4);
+      }
+
+      &:-moz-placeholder {
+        color: rgba($white, 0.4);
+      }
+
+      &::-moz-placeholder {
+        color: rgba($white, 0.4);
+      }
+
+      &:-ms-input-placeholder {
+        color: rgba($white, 0.4);
+      }
+    }
+
+    .search-button {
+      background: none;
+      border: none;
+      border-radius: 0;
+      box-shadow: none !important;
+      color: rgba($white, 0.7);
+      position: absolute;
+      right: 0;
+      top: 0;
+      padding-top: 0;
+      padding-bottom: 0;
+      line-height: $header-height;
+
+      &:hover,
+      &:active,
+      &:focus {
+        color: rgba($white, 1);
+      }
+    }
+  }
+
+  .app-sidebar-closed &,
+  .app-sidebar-open  & {
     @media (max-width: $screen-sm-max) {
       position: absolute !important;
     }
@@ -170,7 +276,7 @@ header.navbar {
 
   .app-navbar-fixed & {
     @media (min-width: $screen-md-min) {
-      .navbar-collapse,
+      .navbar-toolbar-menu,
       .navbar-header {
         position: fixed;
         top: 0;
@@ -180,28 +286,10 @@ header.navbar {
       }
 
       .dropdown-off-sidebar {
-        position: fixed;
-        top: -1px;
         -webkit-transform: translateZ(0);
         border: none;
       }
 
-      .app-boxed-page & {
-        width: 970px;
-        position: fixed !important;
-
-        .navbar-collapse,
-        .navbar-header,
-        .dropdown-off-sidebar {
-          position: absolute !important;
-        }
-      }
-    }
-
-    @media (min-width: $screen-lg-min) {
-      .app-boxed-page & {
-        width: 1170px;
-      }
     }
   }
 
@@ -225,7 +313,7 @@ header.navbar {
         }
       }
 
-      .navbar-collapse {
+      .navbar-toolbar-menu {
         margin-left: $sideBar-closed-width;
       }
     }
@@ -245,10 +333,6 @@ header.navbar {
       @media (min-width: $screen-md-min) {
         position: fixed;
         top: 0;
-
-        .app-boxed-page & {
-          position: absolute !important;
-        }
       }
     }
   }
@@ -360,47 +444,42 @@ header.navbar {
   }
 
   .dropdown-off-sidebar {
-    position: absolute;
-    z-index: 11;
-    top: -1px;
-    right: 0;
-    width: 30px;
+    width: 48px;
     line-height: $header-height - 1;
     color: rgba($white, 0.7);
     background: transparent;
     padding-top: 0;
     padding-bottom: 0;
+    content: " ";
 
     &:hover {
       color: rgba($white, 1);
     }
 
-    &:after {
-      position: absolute;
-      font-size: $font-size-extra-large;
-      padding: 0;
-      margin: 0;
-      font-family: "themify";
-      content: "\e6da";
-      left: 5px;
-      top: 0;
-    }
-
-    .app-offsidebar-open & {
+    > i {
+      display: inline-block;
       &:after {
-        content: "\e6d9";
+        position: absolute;
+        font-size: $size-normal;
+        padding: 0;
+        margin: 0;
+        font-family: "themify";
+        content: "\e6e2";
+        left: 18px;
+        top: 0;
+        transform: rotate(-90deg);
       }
     }
 
-    .app-offsidebar-open & {
-      @media (min-width: $screen-md-min) {
-        position: fixed;
+    // .app-offsidebar-open & {
+    //   @media (min-width: $screen-md-min) {
+    //     position: fixed;
 
-        .app-boxed-page & {
-          position: absolute !important;
-        }
-      }
-    }
+    //     .app-boxed-page & {
+    //       position: absolute !important;
+    //     }
+    //   }
+    // }
 
     @media (max-width: $screen-sm-max) {
       width: 50px;
@@ -420,34 +499,6 @@ header.navbar {
         padding: 0 10px;
         position: relative;
 
-        &:before {
-          content: "";
-          position: absolute;
-          width: 1px;
-          left: 0;
-          top: 5px;
-          bottom: 5px;
-          background: -moz-linear-gradient(
-            top,
-            rgba(255, 255, 255, 0) 0%,
-            rgba(255, 255, 255, 0.2) 50%,
-            rgba(255, 255, 255, 0) 100%
-          ); /* FF3.6-15 */
-          background: -webkit-linear-gradient(
-            top,
-            rgba(255, 255, 255, 0) 0%,
-            rgba(255, 255, 255, 0.2) 50%,
-            rgba(255, 255, 255, 0) 100%
-          ); /* Chrome10-25,Safari5.1-6 */
-          background: linear-gradient(
-            to bottom,
-            rgba(255, 255, 255, 0) 0%,
-            rgba(255, 255, 255, 0.2) 50%,
-            rgba(255, 255, 255, 0) 100%
-          ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-          filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#00ffffff',GradientType=0 ); /* IE6-9 */
-        }
-
         > a {
           line-height: $header-height;
           padding: 0 15px;
@@ -460,118 +511,14 @@ header.navbar {
             background: none;
           }
         }
-
-        > .main-search {
-          float: left;
-          padding: 0;
-          display: inline-block;
-          background: none !important;
-          margin: 0;
-          box-shadow: none;
-          border: none;
-          position: relative;
-
-          .form-group {
-            margin-bottom: 0;
-          }
-
-          .form-control {
-            background: none !important;
-            border: none !important;
-            font-size: 14px !important;
-            height: $header-height;
-            margin: 0;
-            z-index: 2000;
-            color: $white !important;
-            padding-right: 30px !important;
-
-            &::-webkit-input-placeholder {
-              color: rgba($white, 0.4);
-            }
-
-            &:-moz-placeholder {
-              color: rgba($white, 0.4);
-            }
-
-            &::-moz-placeholder {
-              color: rgba($white, 0.4);
-            }
-
-            &:-ms-input-placeholder {
-              color: rgba($white, 0.4);
-            }
-          }
-
-          .search-button {
-            background: none;
-            border: none;
-            border-radius: 0;
-            box-shadow: none !important;
-            color: rgba($white, 0.7);
-            position: absolute;
-            right: 0;
-            top: 0;
-            padding-top: 0;
-            padding-bottom: 0;
-            line-height: $header-height;
-
-            &:hover,
-            &:active,
-            &:focus {
-              color: rgba($white, 1);
-            }
-          }
-        }
       }
     }
   }
 
   .navbar-right {
-    @media (min-width: $screen-md-min) {
-      position: relative;
-      margin: 0 15px 0 0;
-    }
-
-    @media (max-width: $screen-sm-max) and (min-width: $screen-xs-max) {
-      position: relative;
-      margin: 0 35px 0 0;
-    }
+    margin: 0;
 
     > li {
-      @media (min-width: $screen-sm-min) {
-        float: left;
-        position: relative;
-        padding: 0 10px;
-
-        &:before {
-          content: "";
-          position: absolute;
-          width: 1px;
-          right: 0;
-          top: 5px;
-          bottom: 5px;
-          background: -moz-linear-gradient(
-            top,
-            rgba(255, 255, 255, 0) 0%,
-            rgba(255, 255, 255, 0.2) 50%,
-            rgba(255, 255, 255, 0) 100%
-          ); /* FF3.6-15 */
-          background: -webkit-linear-gradient(
-            top,
-            rgba(255, 255, 255, 0) 0%,
-            rgba(255, 255, 255, 0.2) 50%,
-            rgba(255, 255, 255, 0) 100%
-          ); /* Chrome10-25,Safari5.1-6 */
-          background: linear-gradient(
-            to bottom,
-            rgba(255, 255, 255, 0) 0%,
-            rgba(255, 255, 255, 0.2) 50%,
-            rgba(255, 255, 255, 0) 100%
-          ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-          filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#00ffffff',GradientType=0 ); /* IE6-9 */
-        }
-      }
-
       @media (max-width: $screen-xs-max) {
         border-bottom: 1px solid rgba($white, 0.1);
 
@@ -598,6 +545,7 @@ header.navbar {
         font-weight: 600;
         letter-spacing: 0;
         line-height: $header-height;
+        width: 48px;
         opacity: 0.9;
         padding: 0 15px;
         position: relative;
@@ -825,7 +773,7 @@ header.navbar {
       }
     }
 
-    .navbar-collapse {
+    .navbar-toolbar-menu {
       @media (min-width: $screen-md-min) {
         margin-left: $sideBar-closed-width - 20;
       }

@@ -186,13 +186,16 @@ module.exports = function(env, argv) {
   // ['light', 'dark', 'dark-red', 'dark-light', 'dark-green', 'dark-3'].forEach( (name) => {
   //   cfg.entry[`theme-${name}`] = `${CONTENT_BASE}/src/assets/themes/${name}.scss`
   // })
-  ['light', 'dark', 'dark-red', 'dark-light', 'dark-green', 'dark-3'].forEach( (name) => {
-    cfg.entry[`theme-${name}`] = `./src/styles/themes/${name}.scss`
-  })
+
+  // ['light', 'dark', 'dark-red', 'dark-light', 'dark-green', 'dark-3'].forEach( (name) => {
+  //   cfg.entry[`theme-${name}`] = `./src/styles/themes/${name}.scss`
+  // })
 
   cfg.devServer = {
     //compress: true, //gzips before serving so we can see file size
+    disableHostCheck: true,
     port: 3000,
+    host: '0.0.0.0'
     // historyApiFallback: true,
     //inline: false, //default:true script will be inserted in your bundle to take care of live reloading
   }

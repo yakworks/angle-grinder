@@ -1,4 +1,5 @@
 import angular from 'angular'
+import _ from 'lodash'
 import appName from './app.module'
 import './config.router'
 import appState from 'angle-grinder/src/tools/AppState'
@@ -12,9 +13,38 @@ app.run(function($rootScope, $state, $stateParams) {
   appState.$state = $state
   $rootScope.$stateParams = $stateParams
 
+  let userInfo = {
+    id: '123',
+    name: 'Peter',
+    job: 'ng-Dev',
+    picture: 'app/img/user/02.jpg'
+  }
+  _.merge( appState.user, userInfo)
+
+  let defaultLayout = {
+    isNavbarFixed: true, // true if you want to initialize the template with fixed header
+    isSidebarFixed: true, // true if you want to initialize the template with fixed sidebar
+    isFooterFixed: false, // true if you want to initialize the template with fixed footer
+    theme: 'light', // indicate the theme chosen for your project
+    logo: 'assets/images/yak-logo1.png', // relative path of the project logo
+    logoWidth: 150,
+    logoCollapsed: 'assets/images/yak-white.png', // relative path of the collapsed logo
+    logoCollapsedHeight: 23 // relative path of the collapsed logo
+  }
+  _.merge( appState.layout, defaultLayout)
+
+  let info = {
+    name: 'Yak Works Template', // name of your project
+    author: 'YakWorks', // author's name or company name
+    description: 'Angular Admin Template', // brief description
+    version: '1.0', // current version
+    year: ((new Date()).getFullYear()), // automatic current year (for copyright information)
+  }
+  _.merge( appState.info, info)
+
   // GLOBAL APP SCOPE
   // set below basic information
-  $rootScope.app = {
+  let appConfig = {
     name: 'Yak Works Template', // name of your project
     author: 'YakWorks', // author's name or company name
     description: 'Angular Bootstrap Admin Template', // brief description
@@ -27,26 +57,21 @@ app.run(function($rootScope, $state, $stateParams) {
       };
       return check
     })(),
-    defaultLayout: {
-      isNavbarFixed: true, // true if you want to initialize the template with fixed header
-      isSidebarFixed: true, // true if you want to initialize the template with fixed sidebar
-      isSidebarClosed: false, // true if you want to initialize the template with closed sidebar
-      isFooterFixed: false, // true if you want to initialize the template with fixed footer
-      isBoxedPage: false, // true if you want to initialize the template with boxed layout
-      theme: 'light', // indicate the theme chosen for your project
-      logo: 'assets/images/yak-logo1.png', // relative path of the project logo
-      logoWidth: 150,
-      logoCollapsed: 'assets/images/yak-white.png', // relative path of the collapsed logo
-      logoCollapsedHeight: 23 // relative path of the collapsed logo
-    },
-    layout: ''
+    layout: {}
   }
-  $rootScope.app.layout = angular.copy($rootScope.app.defaultLayout)
+  _.merge(appConfig.layout, defaultLayout)
+  $rootScope.app = appConfig
+
   $rootScope.user = {
     name: 'Peter',
     job: 'ng-Dev',
     picture: 'app/img/user/02.jpg'
   }
+
+  // appState defaults
+  appState.sidenav.open = true
+
+  $rootScope.appState = appState
 })
 
 // translate config
@@ -107,7 +132,7 @@ app.filter('htmlToPlaintext', function() {
 // Custom UI Bootstrap Calendar Popup Template
 app.run(function($templateCache) {
   // let url = './views/partials/sidebar.html'
-  $templateCache.put('./app/sidebar/index.html', require('./app/sidebar/index.html'))
+  $templateCache.put('./app/sidebar/index.html', require('./layout/sidenav/index.html'))
   $templateCache.put('./views/partials/top-navbar.html', require('./views/partials/top-navbar.html'))
   $templateCache.put('./views/partials/main-content.html', require('./views/partials/main-content.html'))
   $templateCache.put('./views/partials/footer.html', require('./views/partials/footer.html'))

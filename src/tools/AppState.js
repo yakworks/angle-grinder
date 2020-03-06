@@ -9,15 +9,34 @@ class AppState {
   $state
 
   // the app object
-  app = {
+  info = {
     name: 'Demo', // name of your project
     author: 'YakWorks', // author's name or company name
     description: 'Angular Grinder Angular Library', // brief description
-    version: '4.0.x'
+    version: '4.0.x',
+    copyrightYear: '2020'
+  }
+
+  layout = {
+    isNavbarFixed: true, // true if you want to initialize the template with fixed header
+    isSidebarFixed: true, // true if you want to initialize the template with fixed sidebar
+    isSidebarOpen: false, // true if you want to initialize the template with closed sidebar
+    isFooterFixed: false // true if you want to initialize the template with fixed footer
+    // theme: 'light', // indicate the theme chosen for your project
+    // logo: 'assets/images/yak-logo1.png', // relative path of the project logo
+    // logoWidth: 150,
+    // logoCollapsed: 'assets/images/yak-white.png', // relative path of the collapsed logo
+    // logoCollapsedHeight: 23 // relative path of the collapsed logo
   }
 
   // currently logged in user info
   user = {}
+
+  sidenav = {
+    open: true
+  }
+
+  layout = {}
 
   static factory() {
     return new AppState()
@@ -31,20 +50,28 @@ class AppState {
    * the title of the current active state page/component
    */
   get title() {
-    return this.$state.current.data.title
+    return this.$state.current?.data?.title
   }
 
   /**
    * construct the page title from app name and title to show on head and browser tab
    */
   get pageTitle() {
-    return this.app.name + ' - ' + (this.title || this.app.description)
+    return this.info.name + ' - ' + (this.title || this.info.description)
   }
 
   get version() {
     // TODO for now hardcoded, should read from config or server files
-    return this.app.version
+    return this.info.version
   }
+
+  isMobile = (function() { // true if the browser is a mobile device
+    var check = false
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+      check = true
+    };
+    return check
+  })()
 }
 
 const _instance = AppState.factory()

@@ -3,15 +3,15 @@
   <!-- start: NAVBAR HEADER -->
   <div class="navbar-header">
     <button href="javascript:void(0)" class="sidebar-desk-toggler btn no-radius pull-left"
-      id="sidebar-desk-toggler" ng-click="$appCtrl.toggleSidenav()" v-pressable>
+      id="sidebar-desk-toggler" ng-click="$appBarCtrl.toggleSidenav()" v-pressable>
       <i class="fa fa-bars"></i>
     </button>
     <button href="javascript:void(0)" class="sidebar-mobile-toggler btn no-radius pull-left"
-      id="sidebar-mobile-toggler" ng-click="$appCtrl.toggleSidenav()" v-pressable>
+      id="sidebar-mobile-toggler" ng-click="$appBarCtrl.toggleSidenav()" v-pressable>
       <i class="fa fa-bars"></i>
     </button>
     <a class="navbar-brand" ui-sref="app.dashboard">
-      <img ng-src="{{app.layout.logo}}" alt="{{app.name}}" style="{{'width:' + app.layout.logoWidth + 'px'}}" />
+      <img ng-src="{{$appBarCtrl.layout.logo}}" alt="{{$appBarCtrl.info.name}}" style="{{'width:' + $appBarCtrl.layout.logoWidth + 'px'}}" />
     </a>
     <!-- <a class="navbar-brand navbar-brand-collapsed" ui-sref="app.dashboard">
       <img ng-src="{{app.layout.logoCollapsed}}" alt="" style="{{'height:' + app.layout.logoCollapsedHeight + 'px'}}" />
@@ -123,7 +123,7 @@
     </div>
     <!-- / NAVBAR COLLAPSE -->
     <div class="navbar-toolbar-right">
-      <button class="dropdown-off-sidebar btn " ng-click="toggle('off-sidebar')" v-pressable>
+      <button class="dropdown-off-sidebar btn " ng-click="$appBarCtrl.toggleRightSidebar()" v-pressable>
         <i/>
       </button>
     </div>

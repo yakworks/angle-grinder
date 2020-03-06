@@ -63,7 +63,9 @@ label.form-switch {
     }
     &:focus+i {
       //outline: #5d9dd5 solid 1px;
-      box-shadow: $checkbox-focus;
+      //box-shadow: $checkbox-focus;
+      //box-shadow: $input-focus-box-shadow-size $input-focus-box-shadow-color
+      box-shadow: $input-check-focus-box-shadow-size rgba($success, 0.40)
       //box-shadow: 0 0 0 2px rgba(40, 137, 167, 0.25);
     }
 

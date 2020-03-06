@@ -58,6 +58,8 @@ angular.module(commonModule)
       },
 
       updateElemClasses: function(elem, attrs, active) {
+        var parent = elem.parent()
+
         if (active) {
           if (attrs.activeClass) {
             elem.addClass(attrs.activeClass)
@@ -65,21 +67,20 @@ angular.module(commonModule)
           if (attrs.inactiveClass) {
             elem.removeClass(attrs.inactiveClass)
           }
-          var parent = elem.parent()
+
           if (attrs.parentActiveClass) {
             parent.addClass(attrs.parentActiveClass)
           }
           if (attrs.parentInactiveClass) {
             parent.removeClass(attrs.parentInactiveClass)
           }
-        } else {
+        } else { // inactive
           if (attrs.inactiveClass) {
             elem.addClass(attrs.inactiveClass)
           }
           if (attrs.activeClass) {
             elem.removeClass(attrs.activeClass)
           }
-          parent = elem.parent()
           if (attrs.parentInactiveClass) {
             parent.addClass(attrs.parentInactiveClass)
           }

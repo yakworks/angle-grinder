@@ -1,31 +1,26 @@
 import appState from 'angle-grinder/src/tools/AppState'
+
 /**
  * Main Application Controller
  */
-const app = angular.module('app')
-app.controller('AppCtrl',
-  function($rootScope, $scope, $state, $window, $document, $timeout, Fullscreen, cfpLoadingBar, $transitions) {
+class AppCtrl {
+
+  constructor($rootScope, $scope, $window, $document, $timeout, Fullscreen, cfpLoadingBar, $transitions){
+    this.$rootScope = $rootScope
+    this.$scope = $scope
+    //this.$win = $($window)
+    //this.$body = $('body')
+    this.layout = appState.layout
+
     var $win = $($window); var $body = $('body')
 
+    //this.routerTransitionsEvents()
     // the ui-router events, see https://stackoverflow.com/a/43553641
     $transitions.onStart({}, function(trans) {
       // start loading bar on stateChangeStart
       cfpLoadingBar.start()
       $scope.horizontalNavbarCollapsed = true
-
-      var stateTo = trans.$to()
-      if (stateTo.name == 'app.pagelayouts.boxedpage') {
-        $body.addClass('app-boxed-page')
-      } else {
-        $body.removeClass('app-boxed-page')
-      }
-      if (typeof CKEDITOR !== 'undefined') {
-        for (name in CKEDITOR.instances) {
-          CKEDITOR.instances[name].destroy()
-        }
-      }
     })
-
     // the ui-router events, see https://stackoverflow.com/a/43553641
     $transitions.onSuccess({}, function(trans) {
       // stop loading bar on stateChangeSuccess
@@ -48,16 +43,12 @@ app.controller('AppCtrl',
           scrollTop: 0
         }, 0)
       }
-
-      // Save the route title
-      $rootScope.currTitle = $state.current.data.title
     })
 
     $rootScope.pageTitle = function() {
-      return $rootScope.app.name + ' - ' + ($rootScope.currTitle || $rootScope.app.description)
+      return appState.pageTitle
     }
 
-    var defaultlayout = $scope.app.defaultLayout
     // save settings to local storage
     var slay = localStorage.getItem('yak-layout')
     if (slay !== null) {
@@ -86,7 +77,8 @@ app.controller('AppCtrl',
     }
     $scope.setLayout = function() {
       $scope.app.layout.isNavbarFixed = false
-      $scope.app.layout.isSidebarClosed = false
+      appState.sidenav.open = true
+      //$scope.app.layout.isSidebarClosed = false
       $scope.app.layout.isSidebarFixed = false
       $scope.app.layout.isFooterFixed = false
       $scope.app.layout.isBoxedPage = false
@@ -164,6 +156,19 @@ app.controller('AppCtrl',
       }
     })
 
-    $scope.foo = 'bar'
+    this.isMobile = (function() { // true if the browser is a mobile device
+      var check = false
+      if (/Android|iPhone|iPad|iPod|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        check = true
+      };
+      return check
+    })()
   }
-)
+
+  toggleSidenav(){
+    appState.sidenav.open = !appState.sidenav.open
+  }
+}
+
+const app = angular.module('app')
+app.controller('AppCtrl', AppCtrl)
