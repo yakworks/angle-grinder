@@ -28,12 +28,12 @@
 <body ng-controller="AppCtrl as $appCtrl">
     <div ui-view id="app" class="lyt-2"
     ng-class="{
-      'app-mobile' : app.isMobile,
-      'app-navbar-fixed' : app.layout.isNavbarFixed,
-      'app-sidebar-fixed' : app.layout.isSidebarFixed,
+      'app-mobile' : $appCtrl.isMobile,
+      'app-navbar-fixed' : $appCtrl.layout.isNavbarFixed,
+      'app-sidebar-fixed' : $appCtrl.layout.isSidebarFixed,
       'app-sidebar-open': appState.sidenav.open,
       'app-sidebar-closed': !appState.sidenav.open,
-      'app-footer-fixed':app.layout.isFooterFixed
+      'app-footer-fixed':$appCtrl.layout.isFooterFixed
     }">
     </div>
 

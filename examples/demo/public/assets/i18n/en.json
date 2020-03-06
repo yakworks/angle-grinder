@@ -4,7 +4,7 @@
         "WELCOME": "Welcome to {{appName}}"
     },
     "search": {
-        "PLACEHOLDER": "Enter search text here..."
+        "PLACEHOLDER": "Search..."
     },
     "topbar": {
         "messages": {

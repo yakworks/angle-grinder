@@ -5,72 +5,6 @@ import appState from 'angle-grinder/src/tools/AppState'
  */
 export default 'ag.sidebar'
 angular.module('ag.sidebar', [])
-  .directive('agSidebar', function($document, $rootScope) {
-    return {
-      replace: false,
-      restrict: 'A',
-      link: function(scope, elem, attrs) {
-        var shouldCloseOnOuterClicks = true
-
-        if (attrs.closeOnOuterClicks === 'false' || attrs.closeOnOuterClicks === '0') {
-          shouldCloseOnOuterClicks = false
-        }
-
-        var isAncestorOrSelf = function(element, target) {
-          var parent = element
-
-          while (parent.length > 0) {
-            if (parent[0] === target[0]) {
-              parent = null
-              return true
-            }
-            parent = parent.parent()
-          }
-
-          parent = null
-          return false
-        }
-
-        // var closeOnOuterClicks = function(e) {
-        //   console.log('closeOnOuterClicks called appState.sidenav.open',  appState.sidenav.open)
-        //   if (!isAncestorOrSelf(angular.element(e.target), elem)) {
-        //     //$rootScope.toggle(attrs.id, 'off')
-        //     console.log('appState.sidenav.open', appState.sidenav.open)
-        //     //appState.sidenav.open = false
-        //     e.preventDefault()
-        //     return false
-        //   }
-        // }
-
-        var clearCb1 = angular.noop()
-
-        // if (shouldCloseOnOuterClicks) {
-        //   console.log("shouldCloseOnOuterClicks", shouldCloseOnOuterClicks)
-        //   console.log('shouldCloseOnOuterClicks appState.sidenav.open', appState.sidenav.open)
-        //   clearCb1 = $rootScope.$on('ag.sidenav.toggle', function(e, id, isOpen) {
-        //     console.log('shouldCloseOnOuterClicks ag.sidenav.toggle fired')
-        //     console.log('attrs.id', {id: id, 'attrs.id':attrs.id})
-        //     if (id === attrs.id) {
-        //       if (isOpen) {
-        //         setTimeout(function() {
-        //           console.log('ag.sidenav.toggle isOpen $document.on closeOnOuterClicks')
-        //           $document.on('click tap', closeOnOuterClicks)
-        //         }, 300)
-        //       } else {
-        //         console.log('ag.sidenav.toggle NOT isOpen $document.off closeOnOuterClicks')
-        //         $document.off('click tap', closeOnOuterClicks)
-        //       }
-        //     }
-        //   })
-        // }
-
-        scope.$on('$destroy', function() {
-          clearCb1()
-          $document.off('click tap', closeOnOuterClicks)
-        })
-      }
-    }
-  })
   .directive('agNavSearch', function() {
     return {
       restrict: 'A',
@@ -104,7 +38,7 @@ angular.module('ag.sidebar', [])
     //   return $('.app-sidebar-fixed').length
     // }
   })
-  .directive('agAside', ['$window', '$rootScope', '$timeout', 'APP_MEDIAQUERY',
+  .directive('agSidebar', ['$window', '$rootScope', '$timeout', 'APP_MEDIAQUERY',
     function($window, $rootScope, $timeout, mq) {
       var $html = $('html'); var $win = $($window); var _this
       // var wrap = $('.app-aside')
@@ -118,6 +52,7 @@ angular.module('ag.sidebar', [])
           var wrap = $('.app-aside')
           var space = 0
           elem.on('click', 'li > a', function(e) {
+            // this mess is for opening sub-menus
             _this = $(this)
             if (isSidebarClosed() && !isMobile() && !_this.closest('ul').hasClass('sub-menu')) { return }
 

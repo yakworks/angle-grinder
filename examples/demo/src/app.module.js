@@ -7,8 +7,7 @@ import fullscreen from './utils/fullscreen'
 import truncate_filters from './utils/truncate.filters'
 
 //app layout items
-import footerModule from './layout/footer'
-import sidebarModule from './layout/sidebar'
+import layoutModule from './layout'
 
 // demo/examples/source panels
 import snippetsModule from './utils/demo/demo.module'
@@ -19,8 +18,7 @@ import formsModule from './forms'
 
 export default angular.module('app', [
   agModule,
-  sidebarModule,
-  footerModule,
+  layoutModule,
   snippetsModule,
   componentsModule,
   formsModule,

@@ -3,8 +3,8 @@ import appState from 'angle-grinder/src/tools/AppState'
 class controller {
 
   constructor() {
-    this.year = appState.app.copyrightYear
-    this.author = appState.app.author
+    this.year = appState.info.copyrightYear
+    this.author = appState.info.author
   }
 }
 

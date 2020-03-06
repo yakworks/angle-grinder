@@ -5,11 +5,12 @@ import appState from 'angle-grinder/src/tools/AppState'
  */
 class AppCtrl {
 
-  constructor($rootScope, $scope, $state, $window, $document, $timeout, Fullscreen, cfpLoadingBar, $transitions){
+  constructor($rootScope, $scope, $window, $document, $timeout, Fullscreen, cfpLoadingBar, $transitions){
     this.$rootScope = $rootScope
     this.$scope = $scope
-    this.$win = $($window)
-    this.$body = $('body')
+    //this.$win = $($window)
+    //this.$body = $('body')
+    this.layout = appState.layout
 
     var $win = $($window); var $body = $('body')
 
@@ -42,16 +43,12 @@ class AppCtrl {
           scrollTop: 0
         }, 0)
       }
-
-      // Save the route title
-      $rootScope.currTitle = $state.current.data.title
     })
 
     $rootScope.pageTitle = function() {
-      return $rootScope.app.name + ' - ' + ($rootScope.currTitle || $rootScope.app.description)
+      return appState.pageTitle
     }
 
-    var defaultlayout = $scope.app.defaultLayout
     // save settings to local storage
     var slay = localStorage.getItem('yak-layout')
     if (slay !== null) {
@@ -159,15 +156,17 @@ class AppCtrl {
       }
     })
 
-    $scope.foo = 'bar'
+    this.isMobile = (function() { // true if the browser is a mobile device
+      var check = false
+      if (/Android|iPhone|iPad|iPod|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        check = true
+      };
+      return check
+    })()
   }
 
   toggleSidenav(){
-    console.log("appState.sidenav.open", appState.sidenav.open)
-    //this.$scope.toggle('sidebar')
     appState.sidenav.open = !appState.sidenav.open
-    //this.$rootScope.$emit('ag.sidenav.toggle', 'sidebar', appState.sidenav.open)
-    //app.layout.isSidebarClosed = !app.layout.isSidebarClosed
   }
 }
 
