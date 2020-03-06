@@ -8,6 +8,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const FixStyleOnlyEntriesPlugin = require("webpack-fix-style-only-entries")
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const apiMocker = require('mocker-api');
 //const HtmlWebpackExcludeAssetsPlugin = require('html-webpack-exclude-assets-plugin')
 //const ThemesGeneratorPlugin = require('themes-switch/ThemesGeneratorPlugin')
 //const CleanWebpackPlugin = require('clean-webpack-plugin')
@@ -192,6 +193,9 @@ module.exports = function(env, argv) {
   // })
 
   cfg.devServer = {
+    before(app){
+      apiMocker(app, path.resolve('./examples/demo/mocker/index.js'))
+    },
     //compress: true, //gzips before serving so we can see file size
     disableHostCheck: true,
     port: 3000,

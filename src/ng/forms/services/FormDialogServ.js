@@ -14,10 +14,7 @@ forms.factory('FormDialogServ', [
       if (dialogOptions == null) { dialogOptions = {} }
       if (angular.isDefined(dialogOptions.scope)) { ({ scope } = dialogOptions) }
       // if (angular.isDefined(dialogOptions.scope)) { ({ template } = dialogOptions) }
-
-      return $modal.open({
-        // template: template,
-        templateUrl: pathWithContext(templateUrl || ''),
+      const modalOptions = {
         controller: 'FormDialogCtrl',
         keyboard: false, // do not close the dialog with ESC key
         backdrop: 'static', // do not close on click outside of the dialog
@@ -26,7 +23,14 @@ forms.factory('FormDialogServ', [
         resolve: {
           dialogOptions() { return dialogOptions }
         }
-      })
+      }
+      if (dialogOptions.template) {
+        modalOptions.template = dialogOptions.template
+      } else {
+        modalOptions.templateUrl = pathWithContext(templateUrl || '')
+      }
+
+      return $modal.open(modalOptions)
     }
   })
 ])
@@ -77,7 +81,6 @@ class FormDialogCtrl extends BaseCtrl {
 
     promise.then(record => {
       this.$log.info('[ag] record has been updated/created', record)
-
       this.grid.saveRow(record.id, record)
       return this.$scope.closeDialog()
     })

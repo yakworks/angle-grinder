@@ -4,6 +4,10 @@
 </div>
 
 <div class="container-fluid container-fullw">
+
+  <div ng-show="showSearchForm" class="search-form">
+    <div class="well" ng-include="'exampleGridSearchForm.html'"></div>
+  </div>
   <div class="ag-panels-row">
     <div class="ag-panel">
       <div class="navbar navbar-default  navbar-toolbar navbar-grid">
@@ -12,7 +16,7 @@
               <ul class="nav navbar-nav">
                 <li class="menu-arrow"><i class="icon-selected-pointer"></i></li>
                 <li>
-                  <a ag-grid-xls-export=""></a>
+                  <a ag-grid-xls-export="exampleGrid"></a>
                 </li>
                 <li>
                   <a ng-click="massUpdate()" uib-tooltip="Mass Update" >
@@ -23,9 +27,6 @@
                 <li class="divider-vertical"></li>
                 <li>
                   <a ng-click="createRecord()" ag-new-button ></a>
-                </li>
-                <li>
-                  <a ng-click="$ctrl.createDialog()" >new ui dialog</a>
                 </li>
               </ul>
               <ag-panel-states>
