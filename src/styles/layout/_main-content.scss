@@ -21,7 +21,7 @@
   @media (min-width: $screen-md-min) {
     margin-top: $header-height;
     margin-left: $sideBar-width;
-    z-index: 1052;
+    z-index: 1040;
     transition: margin-left 0.5s;
 
     .app-navbar-fixed & {
