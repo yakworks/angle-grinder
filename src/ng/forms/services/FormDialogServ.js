@@ -30,7 +30,7 @@ forms.factory('FormDialogServ', [
         modalOptions.templateUrl = pathWithContext(templateUrl || '')
       }
 
-      $modal.open(modalOptions)
+      return $modal.open(modalOptions)
     }
   })
 ])
