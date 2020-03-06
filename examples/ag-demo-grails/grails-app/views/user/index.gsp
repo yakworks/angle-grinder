@@ -1,7 +1,7 @@
 <html>
 <head>
     <meta name="layout" content="agAdmin"/>
-    <g:set var="entityName" value="${ag.label(code: "user")}"/>
+    <g:set var="entityName" value="User"/>
     <title>${entityName} Admin</title>
 
     <style type="text/css">
