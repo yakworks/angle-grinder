@@ -1,5 +1,5 @@
 'use strict'
-import appState from 'angle-grinder/src/tools/AppState'
+// import appState from 'angle-grinder/src/tools/AppState'
 /**
  * A set of directives for left and right sidebar.
  */

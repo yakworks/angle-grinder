@@ -74,8 +74,7 @@ angular.module(commonModule)
           if (attrs.parentInactiveClass) {
             parent.removeClass(attrs.parentInactiveClass)
           }
-        }
-        else { //inactive
+        } else { // inactive
           if (attrs.inactiveClass) {
             elem.addClass(attrs.inactiveClass)
           }
