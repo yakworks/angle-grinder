@@ -14,7 +14,7 @@ forms.factory('FormDialogServ', [
       if (dialogOptions == null) { dialogOptions = {} }
       if (angular.isDefined(dialogOptions.scope)) { ({ scope } = dialogOptions) }
       // if (angular.isDefined(dialogOptions.scope)) { ({ template } = dialogOptions) }
-      const modalOptions= {
+      const modalOptions = {
         controller: 'FormDialogCtrl',
         keyboard: false, // do not close the dialog with ESC key
         backdrop: 'static', // do not close on click outside of the dialog
@@ -24,7 +24,7 @@ forms.factory('FormDialogServ', [
           dialogOptions() { return dialogOptions }
         }
       }
-      if(dialogOptions.template){
+      if (dialogOptions.template) {
         modalOptions.template = dialogOptions.template
       } else {
         modalOptions.templateUrl = pathWithContext(templateUrl || '')
