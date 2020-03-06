@@ -1,13 +1,17 @@
 import appState from 'angle-grinder/src/tools/AppState'
 
 class controller {
-  constructor() {
+  constructor($rootScope) {
     this.appState = appState
     this.layout = appState.layout
+    this.rootScope = $rootScope
   }
 
   toggleSidenav(){
     this.appState.sidenav.open = !this.appState.sidenav.open
+  }
+  toggleRightSidebar(){
+    this.rootScope.toggle('off-sidebar')
   }
 
 }
