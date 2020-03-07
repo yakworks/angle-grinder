@@ -89,52 +89,6 @@ $sidebar-item-active-background-color: $primary-light !default;
       }
     }
   }
-
-  // .app-sidebar-closed & {
-  //   @media (min-width: $screen-md-min) {
-  //     border-right: 1px solid $border-default;
-  //     border-bottom: 1px solid $border-default;
-  //     background: $white;
-  //     left: $sideBar-closed-width;
-  //     position: absolute;
-  //     padding: 1px 0;
-  //     overflow-y: auto;
-  //     overflow-x: visible;
-  //     height: auto;
-  //     bottom: auto;
-  //     width: $sideBar-width;
-  //     z-index: 1050;
-  //     display: none;
-
-  //     > li {
-  //       a {
-  //         padding-left: 20px !important;
-  //         padding-right: 5px;
-  //       }
-
-  //       ul.sub-menu {
-  //         position: relative;
-  //         left: 0;
-  //         width: 100%;
-  //         border: none !important;
-
-  //         li {
-  //           a {
-  //             padding-left: 30px !important;
-  //           }
-
-  //           ul.sub-menu {
-  //             li {
-  //               a {
-  //                 padding-left: 50px !important;
-  //               }
-  //             }
-  //           }
-  //         }
-  //       }
-  //     }
-  //   }
-  // }
 }
 
 @media (min-width: $screen-md-min) {
@@ -392,7 +346,7 @@ $sidebar-item-active-background-color: $primary-light !default;
       transition: all 300ms ease-in 0s;
 
       + .search-button {
-        color: $grey-darker;
+        color: $white;
       }
     }
   }

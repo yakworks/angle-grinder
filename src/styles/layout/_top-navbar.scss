@@ -186,7 +186,7 @@ header.navbar {
   }
 
   .main-search {
-    width: 130px;
+    //width: 130px;
     padding: 0;
     display: inline-block;
     background: none !important;
@@ -220,6 +220,7 @@ header.navbar {
     }
 
     .form-control {
+      width: 130px;
       background: none !important;
       border: none !important;
       font-size: 14px !important;
@@ -228,22 +229,24 @@ header.navbar {
       z-index: 2000;
       color: $white !important;
       padding-right: 30px !important;
-
-      &::-webkit-input-placeholder {
-        color: rgba($white, 0.4);
+      &:focus {
+        width: 180px !important;
       }
+      // &::-webkit-input-placeholder {
+      //   color: rgba($white, 0.4);
+      // }
 
-      &:-moz-placeholder {
-        color: rgba($white, 0.4);
-      }
+      // &:-moz-placeholder {
+      //   color: rgba($white, 0.4);
+      // }
 
-      &::-moz-placeholder {
-        color: rgba($white, 0.4);
-      }
+      // &::-moz-placeholder {
+      //   color: rgba($white, 0.4);
+      // }
 
-      &:-ms-input-placeholder {
-        color: rgba($white, 0.4);
-      }
+      // &:-ms-input-placeholder {
+      //   color: rgba($white, 0.4);
+      // }
     }
 
     .search-button {
