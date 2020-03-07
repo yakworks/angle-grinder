@@ -10,41 +10,7 @@
   </div>
   <div class="ag-panels-row">
     <div class="ag-panel">
-      <div class="navbar navbar-default  navbar-toolbar navbar-grid">
-        <div class="navbar-inner position-relative with-selected-pointer with-grid-options">
-            <div class="collapse navbar-collapse no-padding" >
-              <ul class="nav navbar-nav">
-                <li class="menu-arrow"><i class="icon-selected-pointer"></i></li>
-                <li>
-                  <a ag-grid-xls-export="exampleGrid"></a>
-                </li>
-                <li>
-                  <a ng-click="massUpdate()" uib-tooltip="Mass Update" >
-                    <i class="fa fa-edit"></i></a>
-                </li>
-              </ul>
-              <ul class="nav navbar-nav">
-                <li class="divider-vertical"></li>
-                <li>
-                  <a ng-click="createRecord()" ag-new-button ></a>
-                </li>
-              </ul>
-              <ag-panel-states>
-                <ag-manage-grid-columns grid="exampleGrid"></ag-manage-grid-columns>
-                <ag-reload-grid for="exampleGrid"></ag-reload-grid>
-                <ag-reset-sort-grid for="exampleGrid"></ag-reset-sort-grid>
-              </ag-panel-states>
-              <ul class="nav navbar-nav pull-right">
-                <li>
-                  <a title="search screen" ng-click="showSearchForm = !showSearchForm" href="">
-                      <i class="fa fa-search"></i>
-                  </a>
-                </li>
-              </ul>
-              <ag-grid-quick-search for="exampleGrid" filters="filters"></ag-grid-quick-search>
-            </div>
-        </div>
-      </div>
+      <ag-grid-toolbar grid="exampleGrid"></ag-grid-toolbar>
       <div ag-grid="gridOptions" ag-grid-name="exampleGrid"></div>
     </div>
   </div>
