@@ -1,9 +1,7 @@
 import angular from 'angular'
 import gridzModule from '../gridzModule'
-import _ from 'lodash'
 
 var gridz = angular.module(gridzModule)
-
 
 gridz.directive('agGridToolbar', () => ({
   restrict: 'E',
@@ -15,8 +13,8 @@ gridz.directive('agGridToolbar', () => ({
   controller: [
     '$scope', '$parse', '$attrs',
     function($scope, $parse, $attrs) {
-    $scope.parent = $scope.$parent
-  }],
+      $scope.parent = $scope.$parent
+    }],
 
   template: `\
 <div class="navbar navbar-default  navbar-toolbar navbar-grid">
@@ -56,4 +54,3 @@ gridz.directive('agGridToolbar', () => ({
       </div>\
 `
 }))
-
