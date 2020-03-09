@@ -1,7 +1,7 @@
 ///////////////////
 // Call this before any SCSS that is run, safe to depend on everywhere
 // to load the variables, mixins and functions
-// this should not really do anything to the scss output
+// any modifications should not do anything to the scss output, only add variables and functions
 //////////////////
 
 @charset "utf-8";

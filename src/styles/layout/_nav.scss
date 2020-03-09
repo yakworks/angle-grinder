@@ -99,19 +99,17 @@ $sidebar-item-active-background-color: $primary-light !default;
   }
 
   .app-sidebar-closed {
-    &.lyt-2 {
-      .app-aside {
-        nav {
-          padding-top: 0 !important;
+    .app-aside {
+      nav {
+        padding-top: 0 !important;
 
-          > ul {
-            margin-left: 0 !important;
-            margin-right: 0 !important;
+        > ul {
+          margin-left: 0 !important;
+          margin-right: 0 !important;
 
-            > li {
-              &.hover {
-                background: $black;
-              }
+          > li {
+            &.hover {
+              background: $black;
             }
           }
         }

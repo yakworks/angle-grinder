@@ -75,14 +75,6 @@ class AppCtrl {
         // stop loading
       }, 500)
     }
-    $scope.setLayout = function() {
-      $scope.app.layout.isNavbarFixed = false
-      appState.sidenav.open = true
-      //$scope.app.layout.isSidebarClosed = false
-      $scope.app.layout.isSidebarFixed = false
-      $scope.app.layout.isFooterFixed = false
-      $scope.app.layout.isBoxedPage = false
-    }
 
     // global function to scroll page up
     $scope.toTheTop = function() {

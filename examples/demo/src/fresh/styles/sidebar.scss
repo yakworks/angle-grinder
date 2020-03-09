@@ -1,0 +1,104 @@
+/* ==========================================================================
+Sidebar Styles
+========================================================================== */
+
+$sidebar-background-color: #344258 !default;
+$sidebar-font-color: findColorInvert($sidebar-background-color) !default;
+$sidebar-font-size: 16px;
+$sidebar-hover-color: $secondary;
+$sidebar-active-color: $secondary;
+
+
+.sidebar {
+  font-size: $sidebar-font-size;
+  background: $sidebar-background-color;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  //transform: translateX(-281px);
+  transition: all 0.3s;
+  z-index: 10000;
+  overflow-y: auto;
+
+  &.is-open {
+    transform: translateX(0);
+    width: 280px;
+  }
+
+  &:not(.is-open) {
+    width: 56px;
+
+    // hide drop down icon indicator
+    .sidebar-menu .list-item.has-children > a::after{
+      // moves it off visibility to right
+      right: -1.25em !important;
+    }
+  }
+
+  .sidebar-header {
+    height: 4.25rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid lighten($sidebar-background-color, 5%);
+    padding: 0 16px;
+
+    img {
+      height: 32px;
+    }
+
+    a {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  // more or less a copy of list-items so we can change/invert colors
+  .sidebar-nav.list {
+    .list-items{
+      max-width: 400px;
+      .list-item {
+        a {
+          color: $sidebar-font-color;
+          &:hover {
+            color: $sidebar-hover-color;
+          }
+        }
+
+        &.has-children {
+          &.active {
+            > a {
+              span, i {
+                color: $sidebar-active-color;
+              }
+              &:after {
+                border-color: $sidebar-active-color;
+              }
+            }
+          }
+
+          ul {
+            li {
+              a {
+                color: $sidebar-font-color;
+                background-color: darken($sidebar-background-color, 5%);
+                border-bottom-color: darken($sidebar-background-color, 2%);
+                font-size: 0.9rem;
+
+                &:hover {
+                  color: $sidebar-hover-color;
+                }
+              }
+            }
+          }
+
+          > a::after {
+            border-color: $sidebar-font-color;
+          }
+        }
+      }
+    }
+  }
+}
+

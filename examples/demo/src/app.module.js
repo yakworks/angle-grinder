@@ -16,6 +16,9 @@ import snippetsModule from './utils/demo/demo.module'
 import componentsModule from './components'
 import formsModule from './forms'
 
+// fresh sidebar
+import freshModule from './fresh'
+
 export default angular.module('app', [
   agModule,
   layoutModule,
@@ -25,4 +28,5 @@ export default angular.module('app', [
   fullscreen,
   truncate_filters,
   ngTranslateModule, //remove this, only here to get demo working
+  freshModule
 ]).name

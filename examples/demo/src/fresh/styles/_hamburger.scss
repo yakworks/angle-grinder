@@ -1,0 +1,89 @@
+//Sidebar animated icon trigger
+
+$burger-font-size: 24px;
+$burger-line-width: 3px;
+
+.hamburger {
+  font-size: $burger-font-size;
+
+  display: inline-block;
+
+  width: $burger-font-size;
+  height: $burger-font-size;
+  padding: 1px 1px 0 1px;
+
+  cursor: pointer;
+  transition: transform .2s ease-in-out;
+  vertical-align: middle;
+
+  border: 0 none;
+  background: transparent;
+
+  //fix for firefox
+  &:-moz-focus-inner {
+    padding: 0;
+    border: 0 none;
+  }
+  // focus fix for chrome
+  &:focus {
+    outline: 0;
+  }
+}
+
+.hamburger:before,
+.hamburger:after {
+  content: "";
+}
+
+.hamburger:before,
+.hamburger i,
+.hamburger:after {
+  display: block;
+
+  width: 100%;
+  height: $burger-line-width;
+  //margin: 0;
+  margin: 0 0 ($burger-line-width + 1) 0;
+
+  transition: transform 0.2s ease-in-out;
+
+  border-radius: $burger-line-width;
+  background: $secondary;
+}
+
+.hamburger:after {
+  margin: 0;
+}
+
+/**
+ * Styles for the active `.hamburger` icon
+ */
+.hamburger.is-open:before,
+.hamburger.is-open i,
+.hamburger.is-open:after {
+  background: $secondary;
+}
+
+/**
+ * LEFT ARROW
+ */
+ .hamburger.hamburger-arrow-left.is-open {
+  transform: rotate(180deg);
+}
+
+.hamburger.hamburger-arrow-left.is-open:before {
+  width: $burger-line-width * 5;
+  height: $burger-line-width + 1;
+  transform: translateX(($burger-line-width * 2) + 1) translateY($burger-line-width) rotate(45deg);
+}
+
+.hamburger.hamburger-arrow-left.is-open i {
+  height: $burger-line-width + 1;
+  border-radius: $burger-line-width;
+}
+
+.hamburger.hamburger-arrow-left.is-open:after {
+  height: $burger-line-width + 1;
+  width: $burger-line-width * 5;
+  transform: translateX(($burger-line-width * 2) + 1) translateY($burger-line-width * -1) rotate(-45deg);
+}
