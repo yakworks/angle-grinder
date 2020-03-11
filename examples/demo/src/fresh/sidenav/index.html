@@ -16,7 +16,7 @@
   <div class="sidebar-nav list">
 
     <script type="text/ng-template" id="menuItemTree">
-      <a ui-sref="{{subItem.children ? '-' : subItem.name}}">
+      <a ui-sref="{{subItem.children ? '-' : subItem.name}}" ng-click="$ctrl.itemClick(subItem, $event)">
         <span class="title" > {{ subItem.data.title }} </span>
       </a>
       <ul class="submenu" ng-if="subItem.children">
@@ -27,62 +27,20 @@
 
     <ul class="sidebar-menu list-items">
       <li ng-repeat="mitem in $ctrl.sideMenuItems"
-          class="list-item {{$ctrl.$state.includes(mitem.name) ? 'active' : ''}}"
-          ng-class="{ 'has-children' : mitem.children, 'is-open': $ctrl.isItemOpen(mitem) }"
-          >
-        <a href="{{mitem.children ? '' : mitem.name}}"
+          class="list-item"
+          ng-class="{
+            'has-children' : mitem.children,
+            'active': $ctrl.$state.includes(mitem.name),
+          }">
+        <a class="list-item-content"
+           href="{{mitem.children ? '' : mitem.name}}"
            ng-click="$ctrl.itemClick(mitem, $event)">
           <i class="{{mitem.data.icon}}"></i>
-          <span>{{ mitem.data.title }}</span>
+          <span class="list-item-title">{{ mitem.data.title }}</span>
         </a>
-        <ul class="submenu slide" ng-if="mitem.children" ng-show="$ctrl.isItemOpen(mitem)">
-          <li ng-repeat="subItem in mitem.children" ng-include="'menuItemTree'" ui-sref-active="active"></li>
-        </ul>
-      </li>
-    </ul>
-
-    <ul class="sidebar-menu list-items">
-      <li><span class="nav-section-title"></span></li>
-      <li class="list-item has-children">
-        <a href="#" ng-click="$ctrl.itemClick(mitem, $event)" >
-          <i class="material-icons">apps</i>
-          <span>Apps</span>
-        </a>
-        <ul>
-          <li><a href="#">Dashboard</a></li>
-          <li><a href="#">Account</a></li>
-          <li><a href="#">Documents</a></li>
-        </ul>
-      </li>
-      <li class="list-item has-children">
-        <a href="#">
-          <i class="material-icons">duo</i>
-          <span>Messages</span>
-        </a>
-        <ul>
-          <li><a href="#">Inbox</a></li>
-          <li><a href="#">Compose</a></li>
-          <li><a href="#">Video</a></li>
-        </ul>
-      </li>
-      <li class="list-item has-children">
-        <a href="#">
-          <i class="material-icons">insert_photo</i>
-          <span class="list-item-icon" >Media</span>
-        </a>
-        <ul>
-          <li><a href="#">Library</a></li>
-          <li><a href="#">Upload</a></li>
-        </ul>
-      </li>
-      <li class="list-item has-children">
-        <a href="#">
-          <i class="material-icons">policy</i>
-          <span>Settings</span>
-        </a>
-        <ul>
-          <li><a href="#">User settings</a></li>
-          <li><a href="#">App settings</a></li>
+        <ul class="submenu list-items" ng-if="mitem.children">
+          <li class="list-item" ng-repeat="subItem in mitem.children"
+            ng-include="'menuItemTree'" ui-sref-active="active"></li>
         </ul>
       </li>
     </ul>

@@ -43,6 +43,12 @@ $list-active-color: $secondary;
             width: 24px;
             text-align: center;}
         }
+        // list item content, don't wrap and hide overflow
+        > span {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
       }
 
       &.has-children {
@@ -74,15 +80,15 @@ $list-active-color: $secondary;
           }
         }
 
-        > ul {
+        > .list-items {
           display: none;
 
         }
 
-        ul {
+        .list-items {
           padding: 0px;
 
-          li {
+          .list-item {
             a {
               color: $white;
               background-color: darken($dark-grey, 5%);

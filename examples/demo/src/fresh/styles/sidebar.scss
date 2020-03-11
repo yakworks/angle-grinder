@@ -15,7 +15,7 @@ $sidebar-active-color: $secondary;
   left: 0px;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(126, 148, 182, 0.4);
 }
 
 .sidebar {
@@ -38,10 +38,17 @@ $sidebar-active-color: $secondary;
   &:not(.is-open) {
     width: 56px;
 
-    // hide drop down icon indicator
-    .sidebar-menu .list-item.has-children > a::after{
-      // moves it off visibility to right
-      right: -1.25em !important;
+    // hide text and drop down icon indicator
+    .sidebar-menu .list-item.has-children > a {
+      &:after {
+        // make it small
+        right: 9px !important;
+        width: .4em;
+        height: .4em;
+        border-radius: 1px;
+        border-width: 1px;
+        margin-top: -6px;
+      }
     }
   }
 
@@ -68,15 +75,6 @@ $sidebar-active-color: $secondary;
     .list-items {
       max-width: 400px;
 
-      // active list items
-      li.active {
-        > a {
-          span, i {
-            color: $sidebar-active-color;
-          }
-        }
-      }
-
       .list-item {
         a {
           color: $sidebar-font-color;
@@ -85,15 +83,24 @@ $sidebar-active-color: $secondary;
           }
         }
 
+        //active list-item
+        &.active {
+          > a {
+            span, i {
+              color: $sidebar-active-color;
+            }
+          }
+        }
+
+        //list-item with children
         &.has-children {
-          ul {
-            li {
+          .list-items {
+            .list-item {
               a {
                 color: $sidebar-font-color;
                 background-color: darken($sidebar-background-color, 5%);
                 border-bottom-color: darken($sidebar-background-color, 2%);
                 //font-size: 1rem;
-
                 &:hover {
                   color: $sidebar-hover-color;
                 }
@@ -105,14 +112,15 @@ $sidebar-active-color: $secondary;
           > a::after {
             border-color: $sidebar-font-color;
           }
-          &.is-open {
-            > a::after {
-              border-color: $sidebar-active-color;
-            }
+        }
+        // has-children and is-open
+        &.has-children.is-open {
+          > a::after {
+            border-color: $sidebar-active-color;
           }
         }
-      }
-    }
-  }
+      } // .list-item
+    } // .list-items
+  } // .sidebar-nav.list
 }
 
