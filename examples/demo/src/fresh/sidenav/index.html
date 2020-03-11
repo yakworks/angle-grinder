@@ -16,7 +16,9 @@
   <div class="sidebar-nav list">
 
     <script type="text/ng-template" id="menuItemTree">
-      <a ui-sref="{{subItem.children ? '-' : subItem.name}}" ng-click="$ctrl.itemClick(subItem, $event)">
+      <a ui-sref="{{subItem.children ? '-' : subItem.name}}"
+         class="list-item-content"
+         ng-click="$ctrl.itemClick(subItem, $event)">
         <span class="title" > {{ subItem.data.title }} </span>
       </a>
       <ul class="submenu" ng-if="subItem.children">
@@ -36,7 +38,7 @@
            href="{{mitem.children ? '' : mitem.name}}"
            ng-click="$ctrl.itemClick(mitem, $event)">
           <i class="{{mitem.data.icon}}"></i>
-          <span class="list-item-title">{{ mitem.data.title }}</span>
+          <span>{{ mitem.data.title }}</span>
         </a>
         <ul class="submenu list-items" ng-if="mitem.children">
           <li class="list-item" ng-repeat="subItem in mitem.children"

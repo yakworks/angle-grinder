@@ -69,58 +69,55 @@ $sidebar-active-color: $secondary;
       height: 24px;
     }
   }
+}
 
-  // more or less a copy of list-items so we can change/invert colors
-  .sidebar-nav.list {
-    .list-items {
-      max-width: 400px;
+// more or less a copy of list-items so we can change/invert colors
+.sidebar .sidebar-nav.list {
+  .list-items {
+    max-width: 400px;
 
-      .list-item {
-        a {
-          color: $sidebar-font-color;
-          &:hover {
-            color: $sidebar-hover-color;
-          }
+    .list-item {
+      .list-item-content {
+        color: $sidebar-font-color;
+        &:hover {
+          color: $sidebar-hover-color;
         }
+      }
 
-        //active list-item
-        &.active {
-          > a {
-            span, i {
-              color: $sidebar-active-color;
-            }
-          }
+      //active list-item
+      &.active {
+        > .list-item-content span, i {
+          color: $sidebar-active-color;
         }
+      }
 
-        //list-item with children
-        &.has-children {
-          .list-items {
-            .list-item {
-              a {
-                color: $sidebar-font-color;
-                background-color: darken($sidebar-background-color, 5%);
-                border-bottom-color: darken($sidebar-background-color, 2%);
-                //font-size: 1rem;
-                &:hover {
-                  color: $sidebar-hover-color;
-                }
+      //list-item with children
+      &.has-children {
+        .list-items {
+          .list-item {
+            .list-item-content {
+              color: $sidebar-font-color;
+              background-color: darken($sidebar-background-color, 5%);
+              border-bottom-color: darken($sidebar-background-color, 2%);
+              //font-size: 1rem;
+              &:hover {
+                color: $sidebar-hover-color;
               }
             }
           }
-
-          // dropdown arrow
-          > a::after {
-            border-color: $sidebar-font-color;
-          }
         }
-        // has-children and is-open
-        &.has-children.is-open {
-          > a::after {
-            border-color: $sidebar-active-color;
-          }
-        }
-      } // .list-item
-    } // .list-items
-  } // .sidebar-nav.list
-}
 
+        // dropdown arrow
+        > .list-item-content::after {
+          border-color: $sidebar-font-color;
+        }
+      }
+      // has-children and is-open
+      &.has-children.is-open {
+        > .list-item-content::after {
+          border-color: $sidebar-active-color;
+        }
+      }
+    } // .list-item
+  } // .list-items
+} // .sidebar-nav.list

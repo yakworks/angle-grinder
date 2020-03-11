@@ -8,109 +8,107 @@ $list-active-color: $secondary;
 
 .list {
   position: relative;
+}
 
-  .list-items {
-    margin: 0;
-    padding: 0;
-    // max-width: 400px;
-    list-style: none;
-    list-style-type: none;
-    // font-family: "Open Sans", sans-serif !important;
+.list .list-items {
+  margin: 0;
+  padding: 0;
+  // max-width: 400px;
+  list-style: none;
+  list-style-type: none;
+  // font-family: "Open Sans", sans-serif !important;
+}
 
-    .list-item {
-      position: relative;
+.list .list-items .list-item {
+  position: relative;
 
-      a {
-        display: flex;
-        align-items: center;
-        padding: 1em 1em;
-        text-decoration: none;
-        color: $list-color;
+  a {
+    display: flex;
+    align-items: center;
+    padding: 1em 1em;
+    text-decoration: none;
+    color: $list-color;
 
-        &:hover {
-          // padding: 20px 25px;
-          text-decoration: none;
-          color: $list-hover-color;
-        }
+    &:hover {
+      // padding: 20px 25px;
+      text-decoration: none;
+      color: $list-hover-color;
+    }
 
-        i {
-          margin-right: 20px;
-          // font awesome style
-          &.fa {
-            padding: 1px;
-            font-size: 22px;
-            height: 24px;
-            width: 24px;
-            text-align: center;}
-        }
-        // list item content, don't wrap and hide overflow
-        > span {
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
-        }
+    i {
+      margin-right: 20px;
+      // font awesome styles
+      &.fa {
+        padding: 1px;
+        font-size: 22px;
+        height: 24px;
+        width: 24px;
+        text-align: center;
       }
-
-      &.has-children {
-        // dropdown arrow
-        > a::after {
-          @extend %arrow;
-          z-index: 4;
-          transform: rotate(-135deg);
-          transition: all 0.5s;
-          // border-color: $white;
-          border-color: $primary;
-          right: 1.25rem;
-          top: 1.875em;
-        }
-
-        // dropdown arrow animation
-        &.is-open {
-          > a::after {
-            border-color: $list-active-color;
-            transform: rotate(-45deg);
-          }
-        }
-
-        &.active {
-          > a {
-            span, i {
-              color: $list-active-color;
-            }
-          }
-        }
-
-        > .list-items {
-          display: none;
-
-        }
-
-        .list-items {
-          padding: 0px;
-
-          .list-item {
-            a {
-              color: $white;
-              background-color: darken($dark-grey, 5%);
-              padding-left: 62px;
-              border-bottom: 1px solid darken($dark-grey, 2%);
-              font-size: 1rem;
-
-              &.active {
-                color: $list-active-color;
-              }
-              &:hover {
-                color: $primary;
-                padding-left: 62px;
-              }
-
-
-            }
-          }
-        }
-      }
+    }
+    // list item content, don't wrap and hide overflow
+    > span {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   }
 }
 
+.list .list-items .list-item.has-children {
+  // dropdown arrow
+  > .list-item-content::after {
+    @extend %arrow;
+    z-index: 4;
+    transform: rotate(-135deg);
+    transition: all 0.5s;
+    // border-color: $white;
+    border-color: $primary;
+    right: 1.25rem;
+    top: 1.875em;
+  }
+
+  // dropdown arrow animation
+  &.is-open {
+    > a::after {
+      border-color: $list-active-color;
+      transform: rotate(-45deg);
+    }
+  }
+
+  // active children
+  &.active {
+    > .list-item-content span,i {
+      color: $list-active-color;
+    }
+  }
+
+  // first child item group
+  > .list-items {
+    display: none;
+  }
+
+  // list item children
+  .list-items {
+    padding: 0px;
+
+    .list-item {
+      .list-item-content {
+        color: $white;
+        background-color: darken($dark-grey, 5%);
+        padding-left: 62px;
+        border-bottom: 1px solid darken($dark-grey, 2%);
+        font-size: 1rem;
+
+        &.active {
+          color: $list-active-color;
+        }
+        &:hover {
+          color: $primary;
+          padding-left: 62px;
+        }
+      }
+    }
+  } // sub .list-items
+} // .list-item.has-children
 
