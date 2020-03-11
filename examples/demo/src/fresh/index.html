@@ -1,6 +1,21 @@
-<fresh-appbar/>
+<!-- <nav class="navbar" ng-class="{'navbar-default': theme == 'white', 'navbar-inverse': theme == 'black'}">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <simple-sidebar open="$ctrl.appState.sidenav.open"
+          items="$ctrl.items"
+          title="$ctrl.menuTitle"
+          settings="$ctrl.settings">
+      </simple-sidebar>
+    </div>
+  </div>
+</nav> -->
+<fresh-appbar />
 
 <section class="">
+  <div class="wrap-content container fade-in-up" id="container">
+    <ui-view></ui-view>
+  </div>
+
   <div class="container">
     <div class="columns is-vcentered">
       <div class="column is-5 is-offset-1 landing-caption">
@@ -13,6 +28,12 @@
           </header>
           <ul class="list-items">
             <li><span class="nav-section-title"></span></li>
+            <li class="list-item">
+              <a href="#">
+                <i class="fa fa-home"></i>
+                <span>Dashboard</span>
+              </a>
+            </li>
             <li class="list-item">
               <a href="#">
                 <i class="material-icons">apps</i>
@@ -33,7 +54,7 @@
             <li class="list-item">
               <a href="#">
                 <i class="material-icons">insert_photo</i>
-                <span class="list-item-icon" >Media</span>
+                <span class="list-item-icon">Media</span>
               </a>
             </li>
           </ul>
@@ -79,4 +100,4 @@
   </div>
 </section>
 
-<fresh-sidenav/>
+<fresh-sidenav />

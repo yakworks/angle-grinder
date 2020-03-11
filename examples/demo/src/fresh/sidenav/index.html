@@ -1,17 +1,8 @@
-<div class="sidebar is-active" ng-class="{
-  'is-open': $ctrl.isOpen,
-}">
+<div class="sidebar is-active"
+    ng-class="{
+      'is-open': $ctrl.isOpen,
+    }">
   <div class="sidebar-header">
-    <!-- <div id="menu-icon-wrapper" class="menu-icon-wrapper" style="visibility: visible;">
-      <svg width="1000px" height="1000px">
-        <path class="path1" d="M 300 400 L 700 400 C 900 400 900 750 600 850 A 400 400 0 0 1 200 200 L 800 800">
-        </path>
-        <path class="path2" d="M 300 500 L 700 500"></path>
-        <path class="path3" d="M 700 600 L 300 600 C 100 600 100 200 400 150 A 400 380 0 1 1 200 800 L 800 200">
-        </path>
-      </svg>
-      <button id="menu-icon-trigger" class="menu-icon-trigger" ng-click="$ctrl.toggleSidenav()"></button>
-    </div> -->
     <button class="hamburger hamburger-arrow-left"
       ng-click="$ctrl.toggleSidenav()"
       ng-class="{
@@ -23,9 +14,37 @@
     <!-- <a class="sidebar-close" ng-click="$ctrl.toggleSidenav()"><i data-feather="x"></i></a> -->
   </div>
   <div class="sidebar-nav list">
+
+    <script type="text/ng-template" id="menuItemTree">
+      <a ui-sref="{{subItem.children ? '-' : subItem.name}}">
+        <span class="title" > {{ subItem.data.title }} </span>
+      </a>
+      <ul class="submenu" ng-if="subItem.children">
+          <li ng-repeat="subItem in subItem.children" ng-include="'menuItemTree'">
+          </li>
+      </ul>
+    </script>
+
+    <ul class="sidebar-menu list-items">
+      <li ng-repeat="mitem in $ctrl.sideMenuItems"
+          class="list-item {{$ctrl.$state.includes(mitem.name) ? 'active' : ''}}"
+          ng-class="{ 'has-children' : mitem.children, 'is-open': $ctrl.isItemOpen(mitem) }"
+          >
+        <a href="{{mitem.children ? '' : mitem.name}}"
+           ng-click="$ctrl.itemClick(mitem, $event)">
+          <i class="{{mitem.data.icon}}"></i>
+          <span>{{ mitem.data.title }}</span>
+        </a>
+        <ul class="submenu slide" ng-if="mitem.children" ng-show="$ctrl.isItemOpen(mitem)">
+          <li ng-repeat="subItem in mitem.children" ng-include="'menuItemTree'" ui-sref-active="active"></li>
+        </ul>
+      </li>
+    </ul>
+
     <ul class="sidebar-menu list-items">
       <li><span class="nav-section-title"></span></li>
-      <li class="list-item has-children"><a href="#">
+      <li class="list-item has-children">
+        <a href="#" ng-click="$ctrl.itemClick(mitem, $event)" >
           <i class="material-icons">apps</i>
           <span>Apps</span>
         </a>
@@ -69,3 +88,4 @@
     </ul>
   </div>
 </div>
+<div ng-if="$ctrl.isOpen" class="sidebar-body-overlay" ng-click="$ctrl.toggleSidenav()"></div>

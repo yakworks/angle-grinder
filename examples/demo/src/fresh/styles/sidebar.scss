@@ -8,6 +8,15 @@ $sidebar-font-size: 16px;
 $sidebar-hover-color: $secondary;
 $sidebar-active-color: $secondary;
 
+.sidebar-body-overlay {
+  position: fixed;
+  z-index: 999;
+  top: 0px;
+  left: 0px;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.2);
+}
 
 .sidebar {
   font-size: $sidebar-font-size;
@@ -56,8 +65,18 @@ $sidebar-active-color: $secondary;
 
   // more or less a copy of list-items so we can change/invert colors
   .sidebar-nav.list {
-    .list-items{
+    .list-items {
       max-width: 400px;
+
+      // active list items
+      li.active {
+        > a {
+          span, i {
+            color: $sidebar-active-color;
+          }
+        }
+      }
+
       .list-item {
         a {
           color: $sidebar-font-color;
@@ -67,24 +86,13 @@ $sidebar-active-color: $secondary;
         }
 
         &.has-children {
-          &.active {
-            > a {
-              span, i {
-                color: $sidebar-active-color;
-              }
-              &:after {
-                border-color: $sidebar-active-color;
-              }
-            }
-          }
-
           ul {
             li {
               a {
                 color: $sidebar-font-color;
                 background-color: darken($sidebar-background-color, 5%);
                 border-bottom-color: darken($sidebar-background-color, 2%);
-                font-size: 0.9rem;
+                //font-size: 1rem;
 
                 &:hover {
                   color: $sidebar-hover-color;
@@ -93,8 +101,14 @@ $sidebar-active-color: $secondary;
             }
           }
 
+          // dropdown arrow
           > a::after {
             border-color: $sidebar-font-color;
+          }
+          &.is-open {
+            > a::after {
+              border-color: $sidebar-active-color;
+            }
           }
         }
       }

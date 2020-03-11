@@ -11,11 +11,11 @@ angular.module('app')
 
   stateHelperProvider.state(appRoot)
 
-  $stateProvider.state({
-    name: 'fresh',
-    url: '/fresh',
-    component: 'freshApp'
-    //template: require('./app2.html')
-  })
+  // $stateProvider.state({
+  //   name: 'fresh',
+  //   url: '/fresh',
+  //   component: 'freshApp'
+  //   //template: require('./app2.html')
+  // })
 
 })

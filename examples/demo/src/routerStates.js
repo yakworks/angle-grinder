@@ -152,4 +152,13 @@ const appRoot = {
   children: [dashStates, componentsStates, formStates, uiStates, gridsStates]
 }
 
-export default appRoot
+const freshRoot = {
+  name: 'app',
+  url: '/app',
+  component: 'freshApp',
+  abstract: true,
+  children: [dashStates, componentsStates, formStates, uiStates, gridsStates]
+}
+
+export default freshRoot
+// export default appRoot
