@@ -5,7 +5,7 @@ import _ from 'lodash'
 //import * as sidenav from './sidenav'
 
 export function toggleSidenav(){
-  appState.sidenav.open ? closeSidenav() : openSidenav()
+  appState.sidenav.open ? minimizeSidenav() : openSidenav()
 }
 
 function openSidenav(){
@@ -14,7 +14,7 @@ function openSidenav(){
   appState.sidenav.open = true
 }
 
-function closeSidenav(){
+function minimizeSidenav(){
   appState.sidenav.open = false
   // close submenus
   $(".sidebar-menu .list-item").removeClass("is-open");
@@ -27,6 +27,7 @@ class controller {
     this.$timeout = $timeout
     this.$state = appState.$state
     this.appState = appState
+    this.layout = appState.layout
     this.sideMenuItems = appRoot.children
   }
 
@@ -35,8 +36,13 @@ class controller {
   }
 
   // checks if item is the active item
+  get isFixed() {
+    return appState.layout.isSidebarFixed
+  }
+
+  // checks if item is the active item
   isItemActive(mitem) {
-    return this.$state.includes(mitem.name)
+    return appState.$state.includes(mitem.name)
   }
 
   toggleSidenav(){
@@ -66,7 +72,8 @@ class controller {
       this.openItem = (this.openItem === mitem.name) ? '' : mitem.name
     } else {
       // it has no children, its a ui-router link
-      closeSidenav()
+      //if not fixed then close (minimize) on click
+      if(!this.isFixed) minimizeSidenav()
       appState.$state.go(mitem.name)
     }
   }

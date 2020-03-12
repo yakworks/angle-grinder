@@ -1,7 +1,11 @@
-// *** Use this instead of @import "~bulma/sass/utilities/_all.sass ****
-// fixes an issue with findDarkColor
+/**
+Copy of "~bulma/sass/utilities/_all.sass with fixes for findDarkColor
+Use this one instead.
+@see https://github.com/jgthms/bulma/issues/2805
+*/
 
-@import "~bulma/sass/utilities/initial-variables.sass";
+// our initial-variables should be imported before running this
+//@import "~bulma/sass/utilities/initial-variables.sass";
 @import "~bulma/sass/utilities/functions.sass";
 
 //there is a problem with the bulma findDarkColor, doesn't alway darken so override.
@@ -11,6 +15,7 @@
   }
   @return $text-strong;
 }
+
 @import "~bulma/sass/utilities/derived-variables.sass";
 @import "~bulma/sass/utilities/animations.sass";
 @import "~bulma/sass/utilities/mixins.sass";

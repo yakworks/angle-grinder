@@ -10,20 +10,21 @@
       }">
       <i></i>
     </button>
-    <!-- <img src="assets/images/logos/fresh-white-alt.svg"> -->
+    <img class="logo" src="assets/images/logos/fresh-white-alt.svg">
+    <span class="icon tack" ng-click="$ctrl.layout.isSidebarFixed = !$ctrl.layout.isSidebarFixed">
+      <i class="fa fa-thumb-tack"></i>
+    </span>
     <!-- <a class="sidebar-close" ng-click="$ctrl.toggleSidenav()"><i data-feather="x"></i></a> -->
   </div>
   <div class="sidebar-nav list">
 
     <script type="text/ng-template" id="menuItemTree">
-      <a ui-sref="{{subItem.children ? '-' : subItem.name}}"
-         class="list-item-content"
+      <a ui-sref="{{subItem.children ? '-' : subItem.name}}" class="list-item-content"
          ng-click="$ctrl.itemClick(subItem, $event)">
         <span class="title" > {{ subItem.data.title }} </span>
       </a>
-      <ul class="submenu" ng-if="subItem.children">
-          <li ng-repeat="subItem in subItem.children" ng-include="'menuItemTree'">
-          </li>
+      <ul class="submenu list-items" ng-if="subItem.children">
+        <li ng-repeat="subItem in subItem.children" ng-include="'menuItemTree'"></li>
       </ul>
     </script>
 
@@ -32,7 +33,7 @@
           class="list-item"
           ng-class="{
             'has-children' : mitem.children,
-            'active': $ctrl.$state.includes(mitem.name),
+            'active': $ctrl.appState.$state.includes(mitem.name),
           }">
         <a class="list-item-content"
            href="{{mitem.children ? '' : mitem.name}}"

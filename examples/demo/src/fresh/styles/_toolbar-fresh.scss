@@ -2,6 +2,9 @@
 toolbar overrides
 ========================================================================== */
 
+$toolbar-item-color: #999;
+$toolbar-fixed-a-color: #444F60;
+
 //toolbar
 .toolbar.is-fresh {
   position: relative;
@@ -46,7 +49,7 @@ toolbar overrides
 
   //toolbar items
   .toolbar-item {
-    color: $muted-grey;
+    color: $toolbar-item-color;
 
     &.is-secondary {
       &:hover {
@@ -58,14 +61,14 @@ toolbar overrides
       padding: 10px 0;
 
       .toolbar-link {
-        color: $muted-grey;
+        color: $toolbar-item-color;
 
         &:after {
           top: 55%;
           height: 0.5em;
           width: 0.5em;
           border-width: 2px;
-          border-color: $muted-grey;
+          border-color: $toolbar-item-color;
         }
       }
 
@@ -109,7 +112,7 @@ toolbar overrides
     box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.12);
 
     a {
-      color: $blue-grey;
+      color: $toolbar-fixed-a-color;
 
       &:hover {
         color: $primary;

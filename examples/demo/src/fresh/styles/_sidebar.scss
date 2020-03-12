@@ -4,9 +4,9 @@ Sidebar Styles
 
 $sidebar-background-color: #344258 !default;
 $sidebar-font-color: findColorInvert($sidebar-background-color) !default;
-$sidebar-font-size: 16px;
-$sidebar-hover-color: $secondary;
-$sidebar-active-color: $secondary;
+$sidebar-font-size: 16px !default;;
+$sidebar-nav-hover-color: $secondary !default;;
+$sidebar-nav-active-color: $secondary !default;;
 
 .sidebar-body-overlay {
   position: fixed;
@@ -32,12 +32,17 @@ $sidebar-active-color: $secondary;
 
   &.is-open {
     transform: translateX(0);
-    width: 280px;
+    width: $sidebar-nav-width;
   }
 
   &:not(.is-open) {
-    width: 56px;
+    width: $sidebar-nav-closed-width;
 
+    .sidebar-header {
+      .logo, .icon {
+        display: none;
+      }
+    }
     // hide text and drop down icon indicator
     .sidebar-menu .list-item.has-children > a {
       &:after {
@@ -55,13 +60,26 @@ $sidebar-active-color: $secondary;
   .sidebar-header {
     height: 4.25rem;
     display: flex;
-    justify-content: space-between;
+    //justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid lighten($sidebar-background-color, 5%);
     padding: 0 16px;
 
-    img {
+    .logo {
       height: 32px;
+      margin-left: 24px;
+    }
+
+    .icon.tack {
+      color: $sidebar-font-color;
+      position: absolute;
+      right: 5px;
+      top: 5px;
+      transform: rotate(45deg);
+
+      i.fa {
+        font-size: 14px;
+      }
     }
 
     a {
@@ -80,14 +98,14 @@ $sidebar-active-color: $secondary;
       .list-item-content {
         color: $sidebar-font-color;
         &:hover {
-          color: $sidebar-hover-color;
+          color: $sidebar-nav-hover-color;
         }
       }
 
       //active list-item
       &.active {
         > .list-item-content span, i {
-          color: $sidebar-active-color;
+          color: $sidebar-nav-active-color;
         }
       }
 
@@ -99,9 +117,8 @@ $sidebar-active-color: $secondary;
               color: $sidebar-font-color;
               background-color: darken($sidebar-background-color, 5%);
               border-bottom-color: darken($sidebar-background-color, 2%);
-              //font-size: 1rem;
               &:hover {
-                color: $sidebar-hover-color;
+                color: $sidebar-nav-hover-color;
               }
             }
           }
@@ -115,9 +132,26 @@ $sidebar-active-color: $secondary;
       // has-children and is-open
       &.has-children.is-open {
         > .list-item-content::after {
-          border-color: $sidebar-active-color;
+          border-color: $sidebar-nav-active-color;
         }
       }
     } // .list-item
   } // .list-items
 } // .sidebar-nav.list
+
+// FIXED
+.app-sidebar-fixed {
+  // dont show overlay
+  .sidebar-body-overlay {
+    display: none;
+  }
+}
+
+// media max of approx 768 make it mobile
+@include mobile {
+  .sidebar {
+    &:not(.is-open) {
+      width: 0;
+    }
+  }
+}

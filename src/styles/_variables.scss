@@ -1,3 +1,10 @@
+// Custom colors and vars for our theme
+
+// Custom colors and vars
+$secondary: $orange; // #F39200
+$accent: #00efb7;
+$dark-grey: #344258; //ends up as sidebar default
+
 //  Add Colour Settings
 // legacy, move these is we still want them
 $azure: #5B9BD1;
@@ -7,7 +14,6 @@ $bricky: #894550;
 // Theme vars
 $header-background-color: $primary;
 $main-content-background: #fff;
-$sidebar-background: $grey-lighter;
 $border-default: #c8c7cc !default;
 
 $text-color: $text !default;;
@@ -24,14 +30,28 @@ $font-size-extra-large: floor(($font-size-base * 1.35)) !default; // ~17px
 $font-size-small: ceil(($font-size-base * 0.85)) !default; // ~12px
 $font-size-extra-small: floor(($font-size-base * 0.85)) !default; // ~11px
 
+//**** Layout ******
+
 $h1-size-base: 36px !default;
 $h1-size-extra-large: floor(($h1-size-base * 1.40)) !default; // ~50px
 
 $header-height: 60px;
 $mobile-header-height: 50px;
 $horizontalMenu-height: 50px;
-$sideBar-width: 260px;
-$sideBar-closed-width: 70px;
+
+// Sidebar-nav
+$sideBar-width: 260px; //old remove
+$sideBar-closed-width: 70px; //old remove
+$sidebar-background: $grey-lighter; //old remove
+
+$sidebar-background-color: #344258 !default;
+$sidebar-font-color: findColorInvert($sidebar-background-color) !default;
+$sidebar-font-size: 16px;
+$sidebar-nav-hover-color: $secondary;
+$sidebar-nav-active-color: $secondary;
+$sidebar-nav-width: 260px;
+$sidebar-nav-closed-width: 56px;
+
 $footer-height: 50px;
 $horizontal-menu-height: 40px;
 $page-header-height: 90px;
