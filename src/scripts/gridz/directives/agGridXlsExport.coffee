@@ -108,7 +108,7 @@ gridz.directive "agGridXlsExport", [
                 else
                   val = value
                 if key not in exclude
-                  if isNaN(val) or val is "" or not val?
+                  if isNaN(val) or val is "" or not val? or (val.toString().indexOf('E') > 0)
                     result[key] = val
                   else
                     result[key] = Number(val)
