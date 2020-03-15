@@ -1,5 +1,4 @@
 import appState from 'angle-grinder/src/tools/AppState'
-import appRoot from '../../routerStates.js'
 
 class controller {
 
@@ -7,7 +6,7 @@ class controller {
     this.$element = $element
     this.$state = appState.$state
     this.appState = appState
-    this.sideMenuItems = appRoot.children
+    this.sideMenuItems = appState.routerStates.children
   }
 
   // $onInit() {

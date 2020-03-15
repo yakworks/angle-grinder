@@ -7,6 +7,10 @@ $sidebar-font-color: findColorInvert($sidebar-background-color) !default;
 $sidebar-font-size: 16px !default;;
 $sidebar-nav-hover-color: $secondary !default;;
 $sidebar-nav-active-color: $secondary !default;;
+$sidebar-nav-width: 260px;
+$sidebar-nav-closed-width: 56px;
+//point that sidebar becomes fixed and hidden on close
+$sidebar-nav-breakpoint: $desktop !default; //desktop is about the 1024 mark
 
 .sidebar-body-overlay {
   position: fixed;
@@ -71,6 +75,8 @@ $sidebar-nav-active-color: $secondary !default;;
     }
 
     .icon.tack {
+      background-color: transparent;
+      border: none;
       color: $sidebar-font-color;
       position: absolute;
       right: 5px;
@@ -78,7 +84,10 @@ $sidebar-nav-active-color: $secondary !default;;
       transform: rotate(45deg);
 
       i.fa {
-        font-size: 14px;
+        font-size: 12px;
+      }
+      &.is-fixed {
+        transform: rotate(0);
       }
     }
 
@@ -104,8 +113,13 @@ $sidebar-nav-active-color: $secondary !default;;
 
       //active list-item
       &.active {
-        > .list-item-content span, i {
-          color: $sidebar-nav-active-color;
+        > .list-item-content {
+          span, i {
+            color: $sidebar-nav-active-color;
+          }
+        }
+        &.has-children .list-item .list-item-content {
+          border-left: 1px solid $sidebar-nav-active-color;
         }
       }
 
@@ -115,11 +129,15 @@ $sidebar-nav-active-color: $secondary !default;;
           .list-item {
             .list-item-content {
               color: $sidebar-font-color;
-              background-color: darken($sidebar-background-color, 5%);
+              background-color: darken($sidebar-background-color, 4%);
               border-bottom-color: darken($sidebar-background-color, 2%);
               &:hover {
                 color: $sidebar-nav-hover-color;
               }
+            }
+
+            &.active > .list-item-content {
+              background-color: darken($sidebar-background-color, 5%);
             }
           }
         }
@@ -147,8 +165,8 @@ $sidebar-nav-active-color: $secondary !default;;
   }
 }
 
-// media max of approx 768 make it mobile
-@include mobile {
+// media max of approx 1024 make it mobile/tablet
+@include until($sidebar-nav-breakpoint) {
   .sidebar {
     &:not(.is-open) {
       width: 0;

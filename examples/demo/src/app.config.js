@@ -15,8 +15,8 @@ app.run(function($rootScope, $state, $stateParams) {
 
   let userInfo = {
     id: '123',
-    name: 'Peter',
-    job: 'ng-Dev',
+    name: 'Peter Schiff',
+    job: 'Bot Wrangler',
     picture: 'app/img/user/02.jpg'
   }
   _.merge( appState.user, userInfo)

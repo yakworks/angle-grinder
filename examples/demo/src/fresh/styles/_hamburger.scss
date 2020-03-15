@@ -10,7 +10,7 @@ $burger-line-width: 3px;
 
   width: $burger-font-size;
   height: $burger-font-size;
-  padding: 1px 1px 0 1px;
+  padding: 2px 1px 0 1px;
 
   cursor: pointer;
   transition: transform .2s ease-in-out;
@@ -28,68 +28,63 @@ $burger-line-width: 3px;
   &:focus {
     outline: 0;
   }
+  &:after {
+    content: "";
+    margin: 0;
+  }
+  &:before {
+    content: "";
+
+  }
+  i, &:before,  &:after  {
+    display: block;
+
+    width: 100%;
+    height: $burger-line-width;
+    //margin: 0;
+    margin: 0 0 ($burger-line-width + 1) 0;
+
+    transition: transform 0.2s ease-in-out;
+
+    border-radius: $burger-line-width;
+    background: $secondary;
+  }
+
+  // Styles for the active `.hamburger` icon
+  &.is-open {
+    i, &:before, &:after {
+      background: $secondary;
+    }
+  }
+
+  // LEFT ARROW
+  &.hamburger-arrow-left {
+    &.is-open {
+      transform: rotate(180deg);
+
+      &:before {
+        width: $burger-line-width * 5;
+        height: $burger-line-width + 1;
+        transform: translateX(($burger-line-width * 2) + 2) translateY($burger-line-width) rotate(45deg);
+      }
+
+      i {
+        height: $burger-line-width + 1;
+        border-radius: $burger-line-width;
+      }
+
+      &:after {
+        height: $burger-line-width + 1;
+        width: $burger-line-width * 5;
+        transform: translateX(($burger-line-width * 2) + 2) translateY($burger-line-width * -1) rotate(-45deg);
+      }
+    }
+  }
 }
 
-.hamburger:before,
-.hamburger:after {
-  content: "";
-}
 
-.hamburger:before,
-.hamburger i,
-.hamburger:after {
-  display: block;
-
-  width: 100%;
-  height: $burger-line-width;
-  //margin: 0;
-  margin: 0 0 ($burger-line-width + 1) 0;
-
-  transition: transform 0.2s ease-in-out;
-
-  border-radius: $burger-line-width;
-  background: $secondary;
-}
-
-.hamburger:after {
-  margin: 0;
-}
-
-/**
- * Styles for the active `.hamburger` icon
- */
-.hamburger.is-open:before,
-.hamburger.is-open i,
-.hamburger.is-open:after {
-  background: $secondary;
-}
-
-/**
- * LEFT ARROW
- */
- .hamburger.hamburger-arrow-left.is-open {
-  transform: rotate(180deg);
-}
-
-.hamburger.hamburger-arrow-left.is-open:before {
-  width: $burger-line-width * 5;
-  height: $burger-line-width + 1;
-  transform: translateX(($burger-line-width * 2) + 1) translateY($burger-line-width) rotate(45deg);
-}
-
-.hamburger.hamburger-arrow-left.is-open i {
-  height: $burger-line-width + 1;
-  border-radius: $burger-line-width;
-}
-
-.hamburger.hamburger-arrow-left.is-open:after {
-  height: $burger-line-width + 1;
-  width: $burger-line-width * 5;
-  transform: translateX(($burger-line-width * 2) + 1) translateY($burger-line-width * -1) rotate(-45deg);
-}
-
-//Sidebar animated icon trigger
-.menu-icon-wrapper {
+//Sidebar animated hamburger with the X to close
+.appbar-hamburger {
   position: relative;
   left: 0;
   top: 0;
@@ -130,6 +125,7 @@ $burger-line-width: 3px;
     }
   }
 
+  // the svg of the X
   &.is-open {
     svg {
       path {
@@ -148,7 +144,7 @@ $burger-line-width: 3px;
     }
   }
 
-  .menu-icon-trigger {
+  .appbar-hamburger-trigger {
     position: relative;
     width: 100%;
     height: 100%;

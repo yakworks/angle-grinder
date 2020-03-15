@@ -2,11 +2,14 @@
 toolbar overrides
 ========================================================================== */
 
-$toolbar-item-color: #999;
-$toolbar-fixed-a-color: #444F60;
+//$toolbar-item-color: #999;
+$toolbar-icon-color: $toolbar-item-color !default;
+$toolbar-fixed-a-color: #444F60 !default;
+$toolbar-icon-button-size: 48px !default;
+$toolbar-icon-size: 22px !default;
 
 //toolbar
-.toolbar.is-fresh {
+.appbar.toolbar{
   position: relative;
   min-height: 3.8rem;
   transition: all 0.3s;
@@ -14,10 +17,36 @@ $toolbar-fixed-a-color: #444F60;
 
   .container {
     min-height: 4rem;
+    // change padding back in case it fluid so hamburger lines up with sidebar
+    // padding-left: 16px;
   }
 
   &.no-shadow {
     box-shadow: none !important;
+  }
+
+  // change button defaults to be transparent
+  .button {
+    color: $toolbar-item-color;
+    box-shadow: none; //make sure its flat
+    background-color: inherit; //remove color
+    border-color: transparent;
+
+    &.is-icon {
+      width: $toolbar-icon-button-size;
+      height: $toolbar-icon-button-size;
+    }
+
+    i {
+      color: $toolbar-icon-color;
+      height: $toolbar-icon-size;
+      width: $toolbar-icon-size;
+      &.fa {
+        padding: 1px;
+        font-size: $toolbar-icon-size - 2px;
+        text-align: center;
+      }
+    }
   }
 
   //Responsive menu icon
@@ -29,6 +58,7 @@ $toolbar-fixed-a-color: #444F60;
   //Brand
   .toolbar-brand {
     min-height: 4rem;
+    //width: $sidebar-nav-width;
 
     img {
       max-height: 36px !important;

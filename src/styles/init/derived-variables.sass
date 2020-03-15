@@ -1,29 +1,42 @@
-//----------------------------
-// Taken from Bulma.
-// These are "more" derived variables to be run at the end of _initialize, after Bulmas
-// derived variables and controls, but before everything else.
-// Bulma puts some varaibles in the dirs and files where they are run,
-// such as for controls, buttons, etc.,
-// setting up some of these early here so we can use them before importing the Bulma scss
-// some we don't import, may are used to set the base Bootstrap variables
-//---------------------------------------
+/* ---------------------------------------------------------------------- */
+/* Taken from Bulma.
+/* These are derived variables to be run after initial-variables
+/* Bulma puts some varaibles in the dirs and files where they are run, such as for controls, buttons, etc.,
+/* setting up some of these early here so we can use them before importing the Bulma scss
+/* some we don't import, may are used to set the base Bootstrap variables
+/* ---------------------------------------------------------------------- */
 
-//**** utilities/derived-variables.sass  ****/
-//------------------------------------------
-// $scheme-main: $white !default
-// $scheme-main-bis: $white-bis !default
-// $scheme-main-ter: $white-ter !default
-// $scheme-invert: $black !default
-// $scheme-invert-bis: $black-bis !default
-// $scheme-invert-ter: $black-ter !default
-// $background: $white-ter !default
+/* ------BEFORE"~bulma/sass/utilities/derived-variables.sass"-------- */
+$primary: #325d88 !default
+$warning: $orange !default
+$orange-invert: #fff !default
+$warning-invert: $orange-invert !default
+// extra
+$secondary: $orange; // #F39200
+$accent: #00efb7;
+$dark-grey: #344258; //ends up as sidebar default
 
-//***** base/generic.sass VARIABLES *****/
+/* ------Bulmas derived-variables.sass-------- */
+@import "~bulma/sass/utilities/derived-variables.sass";
+
+//***** bulma/base/generic.sass VARIABLES *****/
 //------------------------------------------
 $body-background-color: $scheme-main !default
-$body-size: 14px !default
+// goofy name this is what sets the size of 1rem unit on html css, should not change from 16px
+$body-size: 16px !default
+$body-family: $family-primary !default
+$body-color: $text !default
+// $body-font-size: 1em !default;
+$body-font-size: .875rem !default
+$body-color: $text !default;
+$body-weight: $weight-normal !default;
+$body-line-height: 1.5 !default;
+$body-min-width: 300px !default
+$body-overflow-x: hidden !default
+$body-overflow-y: scroll !default
+$body-rendering: optimizeLegibility !default
 
-//**** form/shared.sass  ****/
+//**** bulma/form/shared.sass  ****/
 //---------------------------
 $input-border-color: #dadada !default
 $input-color: $text-strong !default
@@ -37,7 +50,7 @@ $input-icon-color: $border !default
 $input-icon-active-color: $text !default
 $input-radius: $radius !default
 
-//**** elements/button.sass  ****/
+//**** bulma/elements/button.sass  ****/
 //---------------------------
 // Button without is- specifier
 $button-color: $text-strong !default
@@ -52,10 +65,15 @@ $button-focus-border-color: $grey-light !default
 $button-focus-box-shadow-color: $grey-light !default
 
 
-//**** Other Custome Variables ****/
+//**** OUR Custom Variables ****/
 //---------------------------
+$azure: #5B9BD1;
+$beige: #D2BD8E;
+$bricky: #894550;
 
-
+// variable aliases
+$text-color: $text !default;;
+$text-dark: $text-strong !default;;
 
 // *********** Original utilities/derived-variables.sass from Bulma below for reference ************
 // $primary: $turquoise !default

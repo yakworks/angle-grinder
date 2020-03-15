@@ -1,16 +1,20 @@
 import angular from 'angular'
-import appRoot from './routerStates.js'
-
+import {packet, fresh} from './routerStates.js'
+import appState from 'angle-grinder/src/tools/AppState'
 /**
  * Config for the router
  */
 angular.module('app')
 .config(function($stateProvider, $urlRouterProvider, stateHelperProvider) {
   // $urlRouterProvider.otherwise("/app/ui/elements");
-  $urlRouterProvider.otherwise('/app/dashboard')
+  // $urlRouterProvider.otherwise('/app/dashboard')
 
-  stateHelperProvider.state(appRoot)
+  stateHelperProvider.state(fresh)
+  appState.routerStates = fresh
+  // stateHelperProvider.state(packet)
+  // appState.routerStates = packet
 
+  //console.log("appState.routerStates", appState.routerStates)
   // $stateProvider.state({
   //   name: 'fresh',
   //   url: '/fresh',

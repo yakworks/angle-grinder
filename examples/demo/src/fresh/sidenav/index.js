@@ -1,5 +1,5 @@
 import appState from 'angle-grinder/src/tools/AppState'
-import appRoot from '../../routerStates.js'
+//import routerStates from '../../routerStates.js'
 import _ from 'lodash'
 //import feather from 'feather-icons'
 //import * as sidenav from './sidenav'
@@ -28,7 +28,7 @@ class controller {
     this.$state = appState.$state
     this.appState = appState
     this.layout = appState.layout
-    this.sideMenuItems = appRoot.children
+    this.sideMenuItems = appState.routerStates.children
   }
 
   get isOpen() {
@@ -88,7 +88,7 @@ class controller {
   }
   // init code here
   // $onInit() {
-  //   this.openItem = this.$state.current.name
+  //   this.sideMenuItems = appState.routerStates.children
   // }
   // $onChanges(changesObj){
   //   console.log("sidebar $onChanges(changesObj)", changesObj)

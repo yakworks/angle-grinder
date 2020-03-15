@@ -107,6 +107,7 @@ class AppCtrl {
         height: e[a + 'Height']
       }
     }
+
     // function that adds information in a scope of the height and width of the page
     $scope.getWindowDimensions = function() {
       return {
@@ -119,6 +120,14 @@ class AppCtrl {
       $scope.windowHeight = newValue.h
       $scope.windowWidth = newValue.w
 
+      //Desktop
+      if (newValue.w >= 1024) {
+        appState.layout.isDektop = true
+        appState.layout.isSidebarFixed = true
+      } else {
+        appState.layout.isDektop = false
+        appState.layout.isSidebarFixed = false
+      }
       if (newValue.w >= 992) {
         $scope.isLargeDevice = true
       } else {
@@ -135,6 +144,7 @@ class AppCtrl {
         $scope.isMobileDevice = false
       }
     }, true)
+
     // Apply on resize
     $win.on('resize', function() {
       $scope.$apply()

@@ -119,6 +119,20 @@
         }
     }
 
+    &.size-xs {
+      height: 32px;
+      width: 32px;
+      font-size: 12px;
+
+      > span, > i {
+          line-height: 32px;
+      }
+
+      > i {
+          font-size: 12px;
+      }
+  }
+
     &.box-circle {
         border-radius: 50%;
     }

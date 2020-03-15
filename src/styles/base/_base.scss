@@ -1,6 +1,7 @@
 /* ---------------------------------------------------------------------- */
 /*  Basic Elements & Classes
 /* ---------------------------------------------------------------------- */
+
 html,
 body {
   height: 100%;
@@ -8,21 +9,27 @@ body {
 }
 
 html {
-  font-size: 14px;
+  background-color: $body-background-color;
+  font-size: $body-size;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  min-width: $body-min-width;
+  overflow-x: $body-overflow-x;
+  overflow-y: $body-overflow-y;
+  text-rendering: $body-rendering;
+  text-size-adjust: 100%;
 }
 
 body {
-  color: $text;
+  color: $body-color;
   direction: ltr;
   overflow-x: hidden;
   height: 100%;
   font-family: $family-primary;
-  //font-size: 16px;
-  font-size: $font-size-base;
+  font-size: $body-font-size;
+  line-height: $body-line-height;
   padding: 0;
   margin: 0;
-  //background: lighten($grey, 18%);
-  //-webkit-font-smoothing: antialiased !important;
 
   &.app-boxed-page {
     @media (min-width: $screen-md-min) {
@@ -57,12 +64,12 @@ button {
 }
 
 a {
-  color: $link-color;
+  color: $link;
 
   &:hover,
   &:focus,
   &:active {
-    color: darken($link-color, 20%);
+    color: darken($link, 20%);
   }
 }
 

@@ -5,10 +5,10 @@
 //////////////////
 
 @charset "utf-8";
-@import "initial-variables";
-@import "bulma/utilities";
+@import "setup/initial-variables";
+@import "bulma/init";
 @import "utilities/mixins";
-@import "derived-variables";
+@import "setup/derived-variables";
 
 // packet variables merge this into derived-variables
-@import "variables";
+@import "setup/variables";

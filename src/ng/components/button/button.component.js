@@ -17,6 +17,12 @@ class BtnController {
     this.btnCls = this.buttonClass || ''
     // setup color class
     if (this.color) this.btnCls = `${this.btnCls} is-${this.color}`
+    //if it only has an icon pro then assume thats it and add is-icon class
+    if (this.icon) {
+      this.btnCls = `${this.btnCls} is-icon`
+      // assign it to left, bulma will take care of center aligning it
+      this.iconLeft = this.icon
+    }
     this.setupIconClass('iconLeft')
     this.setupIconClass('iconRight')
   }
@@ -49,6 +55,7 @@ export default {
     color: '@',
     iconLeft: '@',
     iconRight: '@',
+    icon: '@',
     isLoading: '<',
     isDisabled: '<',
     // size: '@',

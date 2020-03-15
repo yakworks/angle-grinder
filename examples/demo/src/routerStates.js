@@ -144,21 +144,21 @@ const componentsStates = {
   ]
 }
 
-const appRoot = {
-  name: 'app',
-  url: '/app',
+export const packet = {
+  name: 'packet',
+  url: '/packet',
   template: require('./app.html'),
   abstract: true,
   children: [dashStates, componentsStates, formStates, uiStates, gridsStates]
 }
 
-const freshRoot = {
-  name: 'app',
-  url: '/app',
+export const fresh = {
+  name: 'fresh',
+  url: '/fresh',
   component: 'freshApp',
   abstract: true,
   children: [dashStates, componentsStates, formStates, uiStates, gridsStates]
 }
 
-export default freshRoot
+export default {packet, fresh}
 // export default appRoot

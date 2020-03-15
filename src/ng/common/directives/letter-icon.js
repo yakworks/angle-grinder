@@ -49,7 +49,7 @@ angular.module(commonModule)
           // If string is invalid, return false, otherwise return an array of the values
           return valid && values
         }
-        if (attrs.size && (attrs.size === 'sm' || attrs.size === 'lg')) {
+        if (attrs.size && (attrs.size === 'sm' || attrs.size === 'lg' || attrs.size === 'xs')) {
           elem.addClass('size-' + attrs.size)
         }
 

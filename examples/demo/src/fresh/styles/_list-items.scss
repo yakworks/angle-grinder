@@ -5,6 +5,7 @@ Sidebar Styles
 $list-color: $text;
 $list-hover-color: $secondary;
 $list-active-color: $secondary;
+$list-icon-size: 24px;
 
 .list {
   position: relative;
@@ -38,11 +39,11 @@ $list-active-color: $secondary;
     i {
       margin-right: 20px;
       // font awesome styles
+      height: $list-icon-size;
+      width: $list-icon-size;
       &.fa {
         padding: 1px;
-        font-size: 22px;
-        height: 24px;
-        width: 24px;
+        font-size: $list-icon-size - 2px;
         text-align: center;
       }
     }

@@ -1,27 +1,9 @@
 // Custom colors and vars for our theme
 
-// Custom colors and vars
-$secondary: $orange; // #F39200
-$accent: #00efb7;
-$dark-grey: #344258; //ends up as sidebar default
-
-//  Add Colour Settings
-// legacy, move these is we still want them
-$azure: #5B9BD1;
-$beige: #D2BD8E;
-$bricky: #894550;
-
 // Theme vars
 $header-background-color: $primary;
 $main-content-background: #fff;
 $border-default: #c8c7cc !default;
-
-$text-color: $text !default;;
-$text-dark: $text-strong !default;;
-//$text-light: lighten($text-color, 5%) !default;
-$link-color: $link !default;
-
-$font-family-monospace: $family-monospace;
 
 $font-size-base: $body-size !default;
 $font-size-normal: $body-size !default;

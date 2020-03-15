@@ -1,9 +1,43 @@
 /* ---------------------------------------------------------------------- */
-/*  Main Content
+/*  Main Parent <ui-view> content
 /* ---------------------------------------------------------------------- */
 
+.root-ui-view{
+  transition: margin-left 0.3s;
+}
+
+// Adjust for the fixed sidebar nav
+.app-sidebar-fixed {
+  .root-ui-view, .appbar-wrapper {
+    margin-left: $sidebar-nav-closed-width;
+  }
+}
+
 .app-sidebar-open.app-sidebar-fixed {
-  .main-view-wrapper{
+  .root-ui-view, .appbar-wrapper {
     margin-left:$sidebar-nav-width;
   }
+}
+
+.appbar {
+  .appbar-hamburger-wrapper {
+    display: none;
+  }
+}
+
+// media max of approx 1024 make it mobile/tablet
+@include until($sidebar-nav-breakpoint) {
+  .app-sidebar-fixed {
+    .root-ui-view, .navbar-wrapper{
+      margin-left:0;
+    }
+  }
+  .app-sidebar-closed {
+    .appbar {
+      .appbar-hamburger-wrapper {
+        display: flex;
+      }
+    }
+  }
+
 }

@@ -11,9 +11,10 @@
       <i></i>
     </button>
     <img class="logo" src="assets/images/logos/fresh-white-alt.svg">
-    <span class="icon tack" ng-click="$ctrl.layout.isSidebarFixed = !$ctrl.layout.isSidebarFixed">
+    <button title="toggle fixed sidebar" class="icon tack" ng-class="{ 'is-fixed': $ctrl.layout.isSidebarFixed}"
+      ng-click="$ctrl.layout.isSidebarFixed = !$ctrl.layout.isSidebarFixed">
       <i class="fa fa-thumb-tack"></i>
-    </span>
+    </button>
     <!-- <a class="sidebar-close" ng-click="$ctrl.toggleSidenav()"><i data-feather="x"></i></a> -->
   </div>
   <div class="sidebar-nav list">

@@ -1,10 +1,11 @@
-//---------------------------------------------------------------------
-// Taken from Bulma. Copy from bulma/sass/utilities/initial-variables.sass
-// These are the base variables used in utilities and bulma sass derived-variables uses them as well
-//---------------------------------------------------------------------
-// ***** Originals should be kept for reference if merging in changes for new version
-// KEEP THIS PART PRISTINE, ADD OUR EXTRAS AT END OR IN DERIVED
-// all of these should still have !default at end so they can be overrriden with an initial variables file
+/* ---------------------------------------------------------------------- */
+/* Taken from Bulma. Copy of bulma/sass/utilities/initial-variables.sass
+/* This is called before Bulmas and are the first variables to get set
+/* used in bulma's utilities and Bulma's derived-variables builds on them as well
+/* Originals should be kept for reference if merging in changes for new version
+/* KEEP THIS PART PRISTINE so its easier to merge, ADD OUR VARS IN INIT_VARS
+/* all of these should still have !default at end so they can be overrriden with an initial variables file
+/* ---------------------------------------------------------------------- */
 
 // Colors
 
@@ -79,7 +80,9 @@ $desktop: 960px + (2 * $gap) !default
 $widescreen: 1152px + (2 * $gap) !default
 $widescreen-enabled: true !default
 // 1344px container + 4rem
-$fullhd: 1344px + (2 * $gap) !default
+// $fullhd: 1344px + (2 * $gap) !default
+// oveerride to make full hd slightly larger 1440 is divisible by 12 and 16
+$fullhd: 1440px + (2 * $gap) !default
 $fullhd-enabled: true !default
 
 // Radius and Easing
@@ -97,11 +100,6 @@ $variable-columns: true !default
 
 // ********** END bulma/sass/utilities/initial-variables.sass
 
-// -----------------------------
-// Overrides to be run before Bulma's derived-variables.sass
+/* -----------------------------
+// OVERIDES for Bulma's derived-variables.sass
 // ------------------------------
-
-$primary: #325d88 !default
-$warning: $orange !default
-$orange-invert: #fff !default
-$warning-invert: $orange-invert !default
