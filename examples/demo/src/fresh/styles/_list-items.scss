@@ -1,11 +1,19 @@
-/* ==========================================================================
-Sidebar Styles
-========================================================================== */
+/* ------------------------------------------------------------- */
+/* List (material-ish)
+/* https://material.io/components/lists/#specs
+/* https://material.io/design/layout/spacing-methods.html#spacing
+/* -------------------------------------------------------------- */
+
+// sizes
+// $list-item-margin: 16px;
+//$list-item-with-icon-height: 56px;
+// $list-icon-margin-right
+// 16 + 24 + 16 + 16 = 72px
+$list-has-children-indent: $item-margin + $icon-dimensions + $item-margin + $item-margin; //72px
 
 $list-color: $text;
 $list-hover-color: $secondary;
 $list-active-color: $secondary;
-$list-icon-size: 24px;
 
 .list {
   position: relative;
@@ -23,12 +31,14 @@ $list-icon-size: 24px;
 .list .list-items .list-item {
   position: relative;
 
-  a {
+  .item-content {
     display: flex;
     align-items: center;
-    padding: 1em 1em;
+    //padding: 1em 1em;
+    padding-left: $item-margin;
     text-decoration: none;
     color: $list-color;
+    min-height: $item-min-height;
 
     &:hover {
       // padding: 20px 25px;
@@ -36,19 +46,32 @@ $list-icon-size: 24px;
       color: $list-hover-color;
     }
 
-    i {
-      margin-right: 20px;
-      // font awesome styles
-      height: $list-icon-size;
-      width: $list-icon-size;
-      &.fa {
+    // i {
+    //   margin-top: $item-margin; //16px
+    //   margin-bottom: $item-margin; //16px
+    //   margin-right: $item-margin * 2; //32px
+    //   // font awesome styles
+    //   height: $icon-dimensions; // 24
+    //   width: $icon-dimensions; // 24
+    //   &.fa, &.mdi {
+    //     padding: 1px;
+    //     font-size: calc(#{$icon-dimensions} - 2px); //22px
+    //     text-align: center;
+    //   }
+    // }
+
+    .icon {
+      margin-top: $item-margin; //16px
+      margin-bottom: $item-margin; //16px
+      margin-right: $item-margin * 2; //32px
+      i.fa, i.mdi {
         padding: 1px;
-        font-size: $list-icon-size - 2px;
+        font-size: calc(#{$icon-dimensions} - 2px); //22px
         text-align: center;
       }
     }
     // list item content, don't wrap and hide overflow
-    > span {
+    > .title {
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -58,7 +81,7 @@ $list-icon-size: 24px;
 
 .list .list-items .list-item.has-children {
   // dropdown arrow
-  > .list-item-content::after {
+  > .item-content::after {
     @extend %arrow;
     z-index: 4;
     transform: rotate(-135deg);
@@ -71,7 +94,7 @@ $list-icon-size: 24px;
 
   // dropdown arrow animation
   &.is-open {
-    > a::after {
+    > .item-content::after {
       border-color: $list-active-color;
       transform: rotate(-45deg);
     }
@@ -79,7 +102,7 @@ $list-icon-size: 24px;
 
   // active children
   &.active {
-    > .list-item-content span,i {
+    > .item-content span,i {
       color: $list-active-color;
     }
   }
@@ -94,10 +117,10 @@ $list-icon-size: 24px;
     padding: 0px;
 
     .list-item {
-      .list-item-content {
+      .item-content {
         color: $white;
         background-color: darken($dark-grey, 5%);
-        padding-left: 62px;
+        padding-left: 72px;
         border-bottom: 1px solid darken($dark-grey, 2%);
         font-size: 1rem;
 
@@ -106,7 +129,6 @@ $list-icon-size: 24px;
         }
         &:hover {
           color: $primary;
-          padding-left: 62px;
         }
       }
     }

@@ -18,7 +18,7 @@
     padding-bottom: $footer-height;
   }
 
-  @media (min-width: $screen-md-min) {
+  @media (min-width: $desktop) {
     margin-top: $header-height;
     margin-left: $sideBar-width;
     z-index: 1040;
@@ -63,7 +63,7 @@
     }
   }
 
-  @media (max-width: $screen-sm-max) {
+  @include until($desktop) {
     padding-top: $header-height;
   }
 

@@ -6,7 +6,7 @@
 $toolbar-background-color: $scheme-main !default
 $toolbar-box-shadow-size: 0 2px 0 0 !default
 $toolbar-box-shadow-color: $background !default
-$toolbar-height: 3.25rem !default
+$toolbar-breakpoint-height: $bar-breakpoint-height !default //$bar-breakpoint-height
 $toolbar-padding-vertical: 1rem !default
 $toolbar-padding-horizontal: 2rem !default
 $toolbar-z: 30 !default
@@ -59,7 +59,7 @@ $toolbar-breakpoint: $desktop !default
 
 .toolbar
   background-color: $toolbar-background-color
-  min-height: $toolbar-height
+  min-height: $bar-height
   position: relative
   z-index: $toolbar-z
   @each $name, $pair in $colors
@@ -113,7 +113,7 @@ $toolbar-breakpoint: $desktop !default
   & > .container
     align-items: stretch
     display: flex
-    min-height: $toolbar-height
+    min-height: $bar-height
     width: 100%
   &.has-shadow
     box-shadow: $toolbar-box-shadow-size $toolbar-box-shadow-color
@@ -130,16 +130,16 @@ $toolbar-breakpoint: $desktop !default
 html,
 body
   &.has-toolbar-fixed-top
-    padding-top: $toolbar-height
+    padding-top: $bar-height
   &.has-toolbar-fixed-bottom
-    padding-bottom: $toolbar-height
+    padding-bottom: $bar-height
 
 .toolbar-brand,
 .toolbar-tabs
   align-items: stretch
   display: flex
   flex-shrink: 0
-  min-height: $toolbar-height
+  min-height: $bar-height
 
 .toolbar-brand
   a.toolbar-item
@@ -155,7 +155,7 @@ body
 
 .toolbar-burger
   color: $toolbar-burger-color
-  +hamburger($toolbar-height)
+  +hamburger($bar-height)
   margin-left: auto
 
 .toolbar-menu
@@ -196,7 +196,7 @@ a.toolbar-item,
     flex-shrink: 1
   &.is-tab
     border-bottom: 1px solid transparent
-    min-height: $toolbar-height
+    min-height: $bar-height
     padding-bottom: calc(0.5rem - 1px)
     &:focus,
     &:hover
@@ -213,6 +213,10 @@ a.toolbar-item,
 .toolbar-content
   flex-grow: 1
   flex-shrink: 1
+
+.toolbar-title
+  font-size: $size-md
+  font-weight: $weight-medium
 
 .toolbar-link:not(.is-arrowless)
   padding-right: 2.5em
@@ -238,10 +242,15 @@ a.toolbar-item,
   margin: 0.5rem 0
 
 +until($toolbar-breakpoint)
+  .toolbar
+    min-height: $bar-breakpoint-height
   .toolbar > .container
     display: block
+    height: $bar-breakpoint-height
+    min-height: $bar-breakpoint-height
   .toolbar-brand,
   .toolbar-tabs
+    min-height: $bar-breakpoint-height
     .toolbar-item
       align-items: center
       display: flex
@@ -254,6 +263,9 @@ a.toolbar-item,
     padding: 0.5rem 0
     &.is-active
       display: block
+  .toolbar-burger
+    height: $bar-breakpoint-height
+    width: $bar-breakpoint-height
   // Fixed toolbar
   .toolbar
     &.is-fixed-bottom-touch,
@@ -269,14 +281,14 @@ a.toolbar-item,
     &.is-fixed-top-touch
       .toolbar-menu
         +overflow-touch
-        max-height: calc(100vh - #{$toolbar-height})
+        max-height: calc(100vh - #{$bar-breakpoint-height})
         overflow: auto
   html,
   body
     &.has-toolbar-fixed-top-touch
-      padding-top: $toolbar-height
+      padding-top: $bar-breakpoint-height
     &.has-toolbar-fixed-bottom-touch
-      padding-bottom: $toolbar-height
+      padding-bottom: $bar-breakpoint-height
 
 +from($toolbar-breakpoint)
   .toolbar,
@@ -286,7 +298,6 @@ a.toolbar-item,
     align-items: stretch
     display: flex
   .toolbar
-    min-height: $toolbar-height
     &.is-spaced
       padding: $toolbar-padding-vertical $toolbar-padding-horizontal
       .toolbar-start,
@@ -420,13 +431,13 @@ a.toolbar-item,
   html,
   body
     &.has-toolbar-fixed-top-desktop
-      padding-top: $toolbar-height
+      padding-top: $bar-height
     &.has-toolbar-fixed-bottom-desktop
-      padding-bottom: $toolbar-height
+      padding-bottom: $bar-height
     &.has-spaced-toolbar-fixed-top
-      padding-top: $toolbar-height + ($toolbar-padding-vertical * 2)
+      padding-top: $bar-height + ($toolbar-padding-vertical * 2)
     &.has-spaced-toolbar-fixed-bottom
-      padding-bottom: $toolbar-height + ($toolbar-padding-vertical * 2)
+      padding-bottom: $bar-height + ($toolbar-padding-vertical * 2)
   // Hover/Active states
   a.toolbar-item,
   .toolbar-link
@@ -445,4 +456,4 @@ a.toolbar-item,
 
 .hero
   &.is-fullheight-with-toolbar
-    min-height: calc(100vh - #{$toolbar-height})
+    min-height: calc(100vh - #{$bar-height})

@@ -14,9 +14,6 @@ $font-size-extra-small: floor(($font-size-base * 0.85)) !default; // ~11px
 
 //**** Layout ******
 
-$h1-size-base: 36px !default;
-$h1-size-extra-large: floor(($h1-size-base * 1.40)) !default; // ~50px
-
 $header-height: 60px;
 $mobile-header-height: 50px;
 $horizontalMenu-height: 50px;
@@ -37,25 +34,3 @@ $sidebar-nav-closed-width: 56px;
 $footer-height: 50px;
 $horizontal-menu-height: 40px;
 $page-header-height: 90px;
-
-//  breakpoints
-
-// Extra small screen / phone
-$screen-xs-min: 480px !default;
-
-// Small screen / tablet
-$screen-sm-min: 768px !default;
-
-// Medium screen / desktop
-$screen-md-min: 992px !default;
-
-// Large screen / wide desktop
-$screen-lg-min: 1200px !default;
-
-// So media queries don't overlap when required, provide a maximum
-$screen-xs-max: ($screen-sm-min - 1) !default;
-$screen-sm-max: ($screen-md-min - 1) !default;
-$screen-md-max: ($screen-lg-min - 1) !default;
-
-$checkbox-focus: 0 0px 4px 2px #78aad6 !default;
-

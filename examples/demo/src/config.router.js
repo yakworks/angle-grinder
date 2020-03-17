@@ -9,8 +9,10 @@ angular.module('app')
   // $urlRouterProvider.otherwise("/app/ui/elements");
   // $urlRouterProvider.otherwise('/app/dashboard')
 
+  $urlRouterProvider.otherwise('/fresh/dashboard')
   stateHelperProvider.state(fresh)
   appState.routerStates = fresh
+  //$urlRouterProvider.otherwise('/app/dashboard')
   // stateHelperProvider.state(packet)
   // appState.routerStates = packet
 

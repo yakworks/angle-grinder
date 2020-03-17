@@ -29,7 +29,7 @@
 
   // Reset spacing and right align labels, but scope to media queries so that
   // labels on narrow viewports stack the same as a default form example.
-  @media (min-width: $screen-sm-min) {
+  @media (min-width: $tablet) {
     .control-label {
       padding-top: ($padding-base-vertical + 1); // Default padding plus a border
       margin-bottom: 0;
@@ -50,7 +50,7 @@
   // Quick utility class for applying `.input-lg` and `.input-sm` styles to the
   // inputs and labels within a `.form-group`.
   .edit-group-lg {
-    @media (min-width: $screen-sm-min) {
+    @media (min-width: $tablet) {
       .control-label {
         padding-top: ($padding-large-vertical + 1);
         font-size: $font-size-large;
@@ -58,7 +58,7 @@
     }
   }
   .edit-group-sm {
-    @media (min-width: $screen-sm-min) {
+    @media (min-width: $tablet) {
       .control-label {
         padding-top: ($padding-small-vertical + 1);
         font-size: $font-size-small;

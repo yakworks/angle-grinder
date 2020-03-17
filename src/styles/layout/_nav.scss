@@ -90,7 +90,7 @@ $sidebar-item-active-background-color: $primary-light !default;
   }
 }
 
-@media (min-width: $screen-md-min) {
+@media (min-width: $desktop) {
   .app-aside {
     div {
       -webkit-transform: translateZ(0);
@@ -217,7 +217,7 @@ $sidebar-item-active-background-color: $primary-light !default;
   }
 
   .app-sidebar-closed {
-    @media (min-width: $screen-md-min) {
+    @media (min-width: $desktop) {
       #sidebar {
         > div nav > ul {
           li {

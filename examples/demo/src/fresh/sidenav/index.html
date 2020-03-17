@@ -1,8 +1,8 @@
-<div class="sidebar is-active"
+<div class="sidenav is-active"
     ng-class="{
       'is-open': $ctrl.isOpen,
     }">
-  <div class="sidebar-header">
+  <div class="sidenav-header">
     <button class="hamburger hamburger-arrow-left"
       ng-click="$ctrl.toggleSidenav()"
       ng-class="{
@@ -10,17 +10,18 @@
       }">
       <i></i>
     </button>
-    <img class="logo" src="assets/images/logos/fresh-white-alt.svg">
-    <button title="toggle fixed sidebar" class="icon tack" ng-class="{ 'is-fixed': $ctrl.layout.isSidebarFixed}"
-      ng-click="$ctrl.layout.isSidebarFixed = !$ctrl.layout.isSidebarFixed">
+    <!-- <img class="logo" src="assets/images/logos/fresh-white-alt.svg"> -->
+    <img class="logo" src="{{$ctrl.logo}}">
+    <button title="toggle fixed side menu" class="icon tack" ng-class="{ 'is-fixed': $ctrl.layout.isSidenavFixed}"
+      ng-click="$ctrl.layout.isSidenavFixed = !$ctrl.layout.isSidenavFixed">
       <i class="fa fa-thumb-tack"></i>
     </button>
-    <!-- <a class="sidebar-close" ng-click="$ctrl.toggleSidenav()"><i data-feather="x"></i></a> -->
+    <!-- <a class="sidenav-close" ng-click="$ctrl.toggleSidenav()"><i data-feather="x"></i></a> -->
   </div>
-  <div class="sidebar-nav list">
+  <div class="sidenav-nav list">
 
     <script type="text/ng-template" id="menuItemTree">
-      <a ui-sref="{{subItem.children ? '-' : subItem.name}}" class="list-item-content"
+      <a ui-sref="{{subItem.children ? '-' : subItem.name}}" class="item-content"
          ng-click="$ctrl.itemClick(subItem, $event)">
         <span class="title" > {{ subItem.data.title }} </span>
       </a>
@@ -29,18 +30,20 @@
       </ul>
     </script>
 
-    <ul class="sidebar-menu list-items">
+    <ul class="sidenav-menu list-items">
       <li ng-repeat="mitem in $ctrl.sideMenuItems"
           class="list-item"
           ng-class="{
             'has-children' : mitem.children,
             'active': $ctrl.appState.$state.includes(mitem.name),
           }">
-        <a class="list-item-content"
+        <a class="item-content"
            href="{{mitem.children ? '' : mitem.name}}"
            ng-click="$ctrl.itemClick(mitem, $event)">
-          <i class="{{mitem.data.icon}}"></i>
-          <span>{{ mitem.data.title }}</span>
+          <span class="icon">
+            <i class="{{mitem.data.icon}}"></i>
+          </span>
+          <span class="title">{{ mitem.data.title }}</span>
         </a>
         <ul class="submenu list-items" ng-if="mitem.children">
           <li class="list-item" ng-repeat="subItem in mitem.children"
@@ -50,4 +53,4 @@
     </ul>
   </div>
 </div>
-<div ng-if="$ctrl.isOpen" class="sidebar-body-overlay" ng-click="$ctrl.toggleSidenav()"></div>
+<div ng-if="$ctrl.isOpen" class="sidenav-body-overlay" ng-click="$ctrl.toggleSidenav()"></div>

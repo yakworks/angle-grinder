@@ -32,7 +32,7 @@ body {
   margin: 0;
 
   &.app-boxed-page {
-    @media (min-width: $screen-md-min) {
+    @media (min-width: $desktop) {
       background: url("./images/bg.png") rgba(0, 0, 0, 0) !important;
     }
   }
@@ -174,7 +174,7 @@ h5.over-title {
 }
 
 .app-navbar-fixed {
-  @media (min-width: $screen-md-min) {
+  @media (min-width: $desktop) {
     padding-top: $header-height;
   }
 }
@@ -185,18 +185,6 @@ h5.over-title {
   position: relative;
   width: 100%;
   overflow: hidden;
-
-  .app-boxed-page & {
-    @media (min-width: $screen-md-min) {
-      margin: 0 auto;
-      width: 970px;
-    }
-
-    @media (min-width: $screen-lg-min) {
-      margin: 0 auto;
-      width: 1170px;
-    }
-  }
 
   .app-content {
     height: 100%;
@@ -212,7 +200,7 @@ h5.over-title {
     }
   }
 
-  @media (max-width: $screen-sm-max) {
+  @include until($desktop) {
     width: 100%;
 
     .app-content {
@@ -329,7 +317,7 @@ h5.over-title {
     background-image: linear-gradient(to left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0));
   }
 
-  @media (max-width: $screen-sm-min) {
+  @media (max-width: $tablet) {
     padding-left: 15px;
     padding-right: 15px;
   }

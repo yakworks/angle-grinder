@@ -4,21 +4,23 @@ import _ from 'lodash'
 //import feather from 'feather-icons'
 //import * as sidenav from './sidenav'
 
+const SIDENAV_MENU_LIST_ITEM = '.sidenav-menu .list-item'
+
 export function toggleSidenav(){
   appState.sidenav.open ? minimizeSidenav() : openSidenav()
 }
 
 function openSidenav(){
-  $(".sidebar-menu .list-item.active .submenu").slideDown()
-  $(".sidebar-menu .list-item.active").addClass("is-open")
+  $(`${SIDENAV_MENU_LIST_ITEM}.active .submenu`).slideDown()
+  $(`${SIDENAV_MENU_LIST_ITEM}.active`).addClass("is-open")
   appState.sidenav.open = true
 }
 
 function minimizeSidenav(){
   appState.sidenav.open = false
   // close submenus
-  $(".sidebar-menu .list-item").removeClass("is-open");
-  $(".sidebar-menu .list-item .submenu").slideUp()
+  $(SIDENAV_MENU_LIST_ITEM).removeClass("is-open");
+  $(`${SIDENAV_MENU_LIST_ITEM} .submenu`).slideUp()
 }
 
 class controller {
@@ -35,9 +37,14 @@ class controller {
     return appState.sidenav.open
   }
 
+  get logo() {
+    //todo replace
+    return 'assets/images/logos/yak-white.svg'
+  }
+
   // checks if item is the active item
   get isFixed() {
-    return appState.layout.isSidebarFixed
+    return appState.layout.isSidenavFixed
   }
 
   // checks if item is the active item
@@ -60,13 +67,13 @@ class controller {
     if(mitem.children){
       $event.preventDefault()
       if (!$target.parent().hasClass("is-open")) {
-        $(".sidebar-menu .list-item .submenu").slideUp();
+        $(`${SIDENAV_MENU_LIST_ITEM} .submenu`).slideUp();
         $target.next().slideToggle();
-        $(".sidebar-menu .list-item").removeClass("is-open");
+        $(SIDENAV_MENU_LIST_ITEM).removeClass("is-open");
         $target.parent().addClass("is-open");
       } else {
         $target.next().slideToggle();
-        $(".sidebar-menu .list-item").removeClass("is-open");
+        $(SIDENAV_MENU_LIST_ITEM).removeClass("is-open");
       }
       // if openItem is equal item then its open so null out to close it
       this.openItem = (this.openItem === mitem.name) ? '' : mitem.name
@@ -74,6 +81,13 @@ class controller {
       // it has no children, its a ui-router link
       //if not fixed then close (minimize) on click
       if(!this.isFixed) minimizeSidenav()
+      //make sure others are closed
+      // if its a link on header without children then it will parent will NOT be a submenu
+      if (!$target.parent().parent().hasClass("submenu")) {
+        $(`${SIDENAV_MENU_LIST_ITEM} .submenu`).slideUp();
+        $(SIDENAV_MENU_LIST_ITEM).removeClass("is-open");
+        $target.parent().addClass("is-open");
+      }
       appState.$state.go(mitem.name)
     }
   }
@@ -82,8 +96,8 @@ class controller {
   $postLink() {
     //make sure the submenu is shown for active menu item
     this.$timeout(function() {
-      $(".sidebar-menu .list-item.active .submenu").show()
-      $(".sidebar-menu .list-item.active").addClass("is-open")
+      $(`${SIDENAV_MENU_LIST_ITEM}.active .submenu`).show()
+      $(`${SIDENAV_MENU_LIST_ITEM}.active`).addClass("is-open")
     })
   }
   // init code here
@@ -91,7 +105,7 @@ class controller {
   //   this.sideMenuItems = appState.routerStates.children
   // }
   // $onChanges(changesObj){
-  //   console.log("sidebar $onChanges(changesObj)", changesObj)
+  //   console.log("sidenav $onChanges(changesObj)", changesObj)
   // }
 
 }

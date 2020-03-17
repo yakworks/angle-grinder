@@ -15,7 +15,8 @@
 
     <!-- Google fonts -->
     <link href="http://fonts.googleapis.com/css?family=Lato:300,400,400italic,600,700|Raleway:300,400,500,600,700|Crete+Round:400italic" rel="stylesheet" type="text/css" />
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Material icons https://materialdesignicons.com/-->
+    <link href="https://cdn.materialdesignicons.com/5.0.45/css/materialdesignicons.min.css" rel="stylesheet">
 
     <!-- doing in manually so we can exclude the theme css and make sure it runs before theme switcher -->
     <% htmlWebpackPlugin.files.css.forEach( function(name){
@@ -39,8 +40,11 @@
     </div> -->
     <div ui-view id="app" ng-class="{
       'app-sidebar-fixed' : $appCtrl.layout.isSidebarFixed,
+      'app-sidenav-fixed' : $appCtrl.layout.isSidebarFixed,
       'app-sidebar-open': appState.sidenav.open,
-      'app-sidebar-closed': !appState.sidenav.open
+      'app-sidebar-closed': !appState.sidenav.open,
+      'app-sidenav-open': appState.sidenav.open,
+      'app-sidenav-closed': !appState.sidenav.open
     }"></div>
     <% for (var jsfile in htmlWebpackPlugin.files.js) { %>
     <script src="<%= htmlWebpackPlugin.files.js[jsfile]%>"></script>

@@ -19,15 +19,45 @@ $dark-grey: #344258; //ends up as sidebar default
 /* ------Bulmas derived-variables.sass-------- */
 @import "~bulma/sass/utilities/derived-variables.sass";
 
+//**** OUR Custom Variables ****/
+//---------------------------
+$azure: #5B9BD1;
+$beige: #D2BD8E;
+$bricky: #894550;
+
+// variable aliases
+$size-sm: 0.75rem !default // 12px
+$size-14: 0.875rem !default // 14px
+$size-normal: 1rem !default // 16px
+$size-md: 1.25rem !default // 20px
+$size-lg: 1.5rem !default // 24pxpx
+
+$text-color: $text !default;
+$text-dark: $text-strong !default;
+
+// base material item sizes and spacing
+$icon-dimensions: 1.5rem !default;
+
+$item-height: 3.5rem !default // 56px
+$item-min-height: 3rem !default // 48px
+// $item-button-height is for buttons, checks, etc
+$item-control-height: 2.25rem !default // 36px
+$item-margin: 1rem !default //16px
+
+$bar-breakpoint-height: 3.5rem !default // 56px for mobile and tablet
+$bar-height: 4rem !default // 64px for desktop+
+$bar-dense-height: 3rem !default // 48px when is-dense is set
+
+
 //***** bulma/base/generic.sass VARIABLES *****/
 //------------------------------------------
 $body-background-color: $scheme-main !default
 // goofy name this is what sets the size of 1rem unit on html css, should not change from 16px
-$body-size: 16px !default
+$body-size: 16px !default // this is the base size and is what 1rem is equal to.
 $body-family: $family-primary !default
 $body-color: $text !default
 // $body-font-size: 1em !default;
-$body-font-size: .875rem !default
+$body-font-size: $size-14 !default
 $body-color: $text !default;
 $body-weight: $weight-normal !default;
 $body-line-height: 1.5 !default;
@@ -67,13 +97,8 @@ $button-focus-box-shadow-color: $grey-light !default
 
 //**** OUR Custom Variables ****/
 //---------------------------
-$azure: #5B9BD1;
-$beige: #D2BD8E;
-$bricky: #894550;
 
-// variable aliases
-$text-color: $text !default;;
-$text-dark: $text-strong !default;;
+
 
 // *********** Original utilities/derived-variables.sass from Bulma below for reference ************
 // $primary: $turquoise !default

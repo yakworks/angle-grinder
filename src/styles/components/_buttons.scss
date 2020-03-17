@@ -1,4 +1,8 @@
-// material style button overrides
+/* ------------------------------------------------------------- */
+/* Button (material-ish)
+/* https://material.io/components/buttons/#specs
+/* -------------------------------------------------------------- */
+
 
 @mixin ripple($ripColor: #000){
   &:before {

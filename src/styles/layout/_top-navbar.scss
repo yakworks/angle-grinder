@@ -33,7 +33,7 @@ header.navbar {
       background: linear-gradient( to bottom, #ffffff00 0%,#ffffff33 50%,#ffffff00 100%);
     }
 
-    @media (min-width: $screen-sm-min) {
+    @media (min-width: $tablet) {
       width: $sideBar-width;
     }
 
@@ -43,7 +43,7 @@ header.navbar {
     position: relative;
     height: $header-height;
 
-    @media (min-width: $screen-md-min) {
+    @media (min-width: $desktop) {
       border-right: 1px solid transparent;
       transition: width 0.5s;
     }
@@ -62,7 +62,7 @@ header.navbar {
     .navbar-brand {
       padding: 0 15px;
 
-      @media (min-width: $screen-md-min) {
+      @media (min-width: $desktop) {
         transition: all 0.5s;
         position: absolute;
         left: 50px;
@@ -72,7 +72,7 @@ header.navbar {
       &.navbar-brand-collapsed {
         display: none;
 
-        @media (min-width: $screen-md-min) {
+        @media (min-width: $desktop) {
           display: inline-block;
           opacity: 0;
           left: -150%;
@@ -121,7 +121,7 @@ header.navbar {
       // display: block;
     }
 
-    @media (max-width: $screen-sm-max) {
+    @include until($desktop) {
       #sidebar-desk-toggler  {
         display: none;
       }
@@ -153,7 +153,7 @@ header.navbar {
       flex: none;
     }
 
-    @media (min-width: $screen-sm-min) {
+    @media (min-width: $tablet) {
       transition: margin 0.5s;
       margin-left: $sideBar-width;
       height: $header-height !important;
@@ -163,7 +163,7 @@ header.navbar {
       }
     }
 
-    @media (max-width: $screen-xs-max) {
+    @include until($tablet) {
       padding-left: 0 !important;
       padding-right: 0 !important;
       overflow: hidden !important;
@@ -272,13 +272,13 @@ header.navbar {
 
   .app-sidebar-closed &,
   .app-sidebar-open  & {
-    @media (max-width: $screen-sm-max) {
+    @include until($desktop) {
       position: absolute !important;
     }
   }
 
   .app-navbar-fixed & {
-    @media (min-width: $screen-md-min) {
+    @media (min-width: $desktop) {
       .navbar-toolbar-menu,
       .navbar-header {
         position: fixed;
@@ -297,12 +297,12 @@ header.navbar {
   }
 
   .app-sidebar-closed & {
-    @media (min-width: $screen-md-min) {
+    @media (min-width: $desktop) {
       .navbar-header {
         width: $sideBar-closed-width;
 
         .navbar-brand {
-          @media (min-width: $screen-md-min) {
+          @media (min-width: $desktop) {
             top: -200%;
             opacity: 0;
           }
@@ -322,7 +322,7 @@ header.navbar {
     }
   }
 
-  @media (max-width: $screen-sm-max) {
+  @include until($desktop) {
     left: 0;
     margin: 0;
     position: absolute;
@@ -333,7 +333,7 @@ header.navbar {
 
   .app-sidebar-fixed & {
     .navbar-header {
-      @media (min-width: $screen-md-min) {
+      @media (min-width: $desktop) {
         position: fixed;
         top: 0;
       }
@@ -406,7 +406,7 @@ header.navbar {
       min-width: 20px;
       line-height: 20px;
 
-      @media (max-width: $screen-xs-max) {
+      @include until($tablet) {
         margin: 0;
         position: absolute !important;
         border-color: $white;
@@ -475,7 +475,7 @@ header.navbar {
     }
 
     // .app-offsidebar-open & {
-    //   @media (min-width: $screen-md-min) {
+    //   @media (min-width: $desktop) {
     //     position: fixed;
 
     //     .app-boxed-page & {
@@ -484,7 +484,7 @@ header.navbar {
     //   }
     // }
 
-    @media (max-width: $screen-sm-max) {
+    @include until($desktop) {
       width: 50px;
 
       &:after {
@@ -497,7 +497,7 @@ header.navbar {
     margin-left: -15px;
 
     > li {
-      @media (min-width: $screen-sm-min) {
+      @media (min-width: $tablet) {
         float: left;
         padding: 0 10px;
         position: relative;
@@ -522,7 +522,7 @@ header.navbar {
     margin: 0;
 
     > li {
-      @media (max-width: $screen-xs-max) {
+      @include until($tablet) {
         border-bottom: 1px solid rgba($white, 0.1);
 
         &:last-child {
@@ -584,7 +584,7 @@ header.navbar {
             line-height: 20px !important;
             right: -15px;
 
-            @media (max-width: $screen-xs-max) {
+            @include until($tablet) {
               margin: 0;
               position: absolute !important;
               border-color: $white;
@@ -607,7 +607,7 @@ header.navbar {
           }
         }
 
-        @media (max-width: $screen-xs-max) {
+        @include until($tablet) {
           a {
             display: block;
             float: none;
@@ -741,7 +741,7 @@ header.navbar {
         }
       }
 
-      @media (max-width: $screen-xs-max) {
+      @include until($tablet) {
         position: relative;
         width: 100% !important;
         max-width: 100% !important;
@@ -761,7 +761,7 @@ header.navbar {
     }
 
     > li {
-      @media (max-width: $screen-xs-max) {
+      @include until($tablet) {
         float: left;
         width: 100%;
         padding: 10px;
@@ -771,13 +771,13 @@ header.navbar {
 
   .app-sidebar-closed & {
     .navbar-header {
-      @media (min-width: $screen-md-min) {
+      @media (min-width: $desktop) {
         width: $sideBar-closed-width - 20 !important;
       }
     }
 
     .navbar-toolbar-menu {
-      @media (min-width: $screen-md-min) {
+      @media (min-width: $desktop) {
         margin-left: $sideBar-closed-width - 20;
       }
     }

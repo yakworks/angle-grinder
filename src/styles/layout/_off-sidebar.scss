@@ -24,7 +24,7 @@
         top: 45px;
     }
 
-    @media (max-width: $screen-sm-max) {
+    @include until($desktop) {
         position: fixed;
         top: 0;
         right: 0;
@@ -48,14 +48,14 @@
         }
     }
 
-    @media (min-width: $screen-md-min) {
+    @media (min-width: $desktop) {
         .app-offsidebar-open & {
              -webkit-transform: translate3d(0, 0, 0);
             transform: translate3d(0, 0, 0);
         }
     }
 
-    @media (max-width: $screen-sm-max) {
+    @include until($desktop) {
         .app-offsidebar-open & {
             z-index: 1;
             -webkit-transform: translate3d(0, 0, 0);

@@ -124,9 +124,11 @@ class AppCtrl {
       if (newValue.w >= 1024) {
         appState.layout.isDektop = true
         appState.layout.isSidebarFixed = true
+        appState.layout.isSidenavFixed = true
       } else {
         appState.layout.isDektop = false
         appState.layout.isSidebarFixed = false
+        appState.layout.isSidenavFixed = false
       }
       if (newValue.w >= 992) {
         $scope.isLargeDevice = true

@@ -6,16 +6,16 @@
   transition: margin-left 0.3s;
 }
 
-// Adjust for the fixed sidebar nav
-.app-sidebar-fixed {
+// Adjust for the fixed sidenav nav
+.app-sidenav-fixed {
   .root-ui-view, .appbar-wrapper {
-    margin-left: $sidebar-nav-closed-width;
+    margin-left: $sidenav-nav-closed-width;
   }
 }
 
-.app-sidebar-open.app-sidebar-fixed {
+.app-sidenav-open.app-sidenav-fixed {
   .root-ui-view, .appbar-wrapper {
-    margin-left:$sidebar-nav-width;
+    margin-left:$sidenav-nav-width;
   }
 }
 
@@ -26,13 +26,13 @@
 }
 
 // media max of approx 1024 make it mobile/tablet
-@include until($sidebar-nav-breakpoint) {
-  .app-sidebar-fixed {
+@include until($sidenav-nav-breakpoint) {
+  .app-sidenav-fixed {
     .root-ui-view, .navbar-wrapper{
       margin-left:0;
     }
   }
-  .app-sidebar-closed {
+  .app-sidenav-closed {
     .appbar {
       .appbar-hamburger-wrapper {
         display: flex;

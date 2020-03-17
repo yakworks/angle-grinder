@@ -11,15 +11,9 @@ $toolbar-icon-size: 22px !default;
 //toolbar
 .appbar.toolbar{
   position: relative;
-  min-height: 3.8rem;
+  //min-height: $bar-height;
   transition: all 0.3s;
   z-index: 29;
-
-  .container {
-    min-height: 4rem;
-    // change padding back in case it fluid so hamburger lines up with sidebar
-    // padding-left: 16px;
-  }
 
   &.no-shadow {
     box-shadow: none !important;
@@ -49,16 +43,14 @@ $toolbar-icon-size: 22px !default;
     }
   }
 
-  //Responsive menu icon
-  .toolbar-burger {
-    width: 4rem;
-    height: 4rem;
-  }
+  // Responsive menu icon
+  // .toolbar-burger {
+  //   width: 4rem;
+  //   height: 4rem;
+  // }
 
   //Brand
   .toolbar-brand {
-    min-height: 4rem;
-    //width: $sidebar-nav-width;
 
     img {
       max-height: 36px !important;
@@ -137,7 +129,7 @@ $toolbar-icon-size: 22px !default;
     top: 0;
     left: 0;
     width: 100%;
-    min-height: 4rem !important;
+    // min-height: 4rem !important;
     background: $white;
     box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.12);
 
@@ -147,6 +139,16 @@ $toolbar-icon-size: 22px !default;
       &:hover {
         color: $primary;
       }
+    }
+  }
+}
+
+// up to about 1024 (tablet size)
+@include until($desktop) {
+  .appbar.toolbar{
+    .container {
+      height: $bar-breakpoint-height;
+      min-height: $bar-breakpoint-height;
     }
   }
 }

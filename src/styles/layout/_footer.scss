@@ -17,13 +17,13 @@
     .footer-inner {
       padding: 0 35px;
       line-height: $footer-height;
-      @media (max-width: $screen-sm-max) {
+      @include until($desktop) {
         padding: 0 15px;
       }
     }
   }
 
-  @media (min-width: $screen-md-min) {
+  @media (min-width: $desktop) {
     .app-footer {
       margin-left: $sideBar-width;
       transition: margin 0.5s;
@@ -55,17 +55,7 @@
     }
   }
 
-  @media (min-width: $screen-lg-min) {
-    &.app-footer-fixed {
-      .app-boxed-page & {
-        .app-footer {
-          width: 1170px;
-        }
-      }
-    }
-  }
-
-  @media (max-width: $screen-sm-max) {
+  @include until($desktop) {
     &.app-sidebar-closed ,
     &.app-sidebar-open  {
       .app-footer {

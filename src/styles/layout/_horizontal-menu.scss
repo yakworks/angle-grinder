@@ -11,14 +11,14 @@
   z-index: 1088;
   height: auto;
 
-  @media (min-width: $screen-md-min) {
+  @media (min-width: $desktop) {
     max-height: $horizontalMenu-height;
     display: none;
   }
 
   .navbar-nav {
     &.navbar-right {
-      @media (min-width: $screen-md-min) {
+      @media (min-width: $desktop) {
         margin-right: 0;
 
         li:last-child {
@@ -49,13 +49,13 @@
         }
 
         &.nav-user-wrapper {
-          @media (min-width: $screen-md-min) {
+          @media (min-width: $desktop) {
             padding-left: 0;
             padding-top: 0;
             padding-bottom: 0;
           }
 
-          @media (max-width: $screen-sm-max) {
+          @include until($desktop) {
             img {
               width: 30px;
             }
@@ -95,7 +95,7 @@
     }
   }
 
-  @media (max-width: $screen-sm-max) {
+  @include until($desktop) {
     padding: 0;
     position: absolute;
     overflow: hidden;
