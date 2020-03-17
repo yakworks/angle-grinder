@@ -1,19 +1,20 @@
-<div class="sidenav is-active"
+<div class="sidenav"
     ng-class="{
-      'is-open': $ctrl.isOpen,
+      'is-active': $ctrl.isOpen,
     }">
   <div class="sidenav-header">
     <button class="hamburger hamburger-arrow-left"
       ng-click="$ctrl.toggleSidenav()"
       ng-class="{
-        'is-open': $ctrl.isOpen,
+        'is-active': $ctrl.isOpen,
       }">
       <i></i>
     </button>
     <!-- <img class="logo" src="assets/images/logos/fresh-white-alt.svg"> -->
     <img class="logo" src="{{$ctrl.logo}}">
-    <button title="toggle fixed side menu" class="icon tack" ng-class="{ 'is-fixed': $ctrl.layout.isSidenavFixed}"
-      ng-click="$ctrl.layout.isSidenavFixed = !$ctrl.layout.isSidenavFixed">
+    <button title="toggle fixed side menu" class="icon tack"
+        ng-class="{ 'is-fixed': $ctrl.layout.isSidenavFixed}"
+        ng-click="$ctrl.layout.isSidenavFixed = !$ctrl.layout.isSidenavFixed">
       <i class="fa fa-thumb-tack"></i>
     </button>
     <!-- <a class="sidenav-close" ng-click="$ctrl.toggleSidenav()"><i data-feather="x"></i></a> -->
@@ -35,7 +36,7 @@
           class="list-item"
           ng-class="{
             'has-children' : mitem.children,
-            'active': $ctrl.appState.$state.includes(mitem.name),
+            'is-active': $ctrl.appState.$state.includes(mitem.name),
           }">
         <a class="item-content"
            href="{{mitem.children ? '' : mitem.name}}"
@@ -47,7 +48,7 @@
         </a>
         <ul class="submenu list-items" ng-if="mitem.children">
           <li class="list-item" ng-repeat="subItem in mitem.children"
-            ng-include="'menuItemTree'" ui-sref-active="active"></li>
+            ng-include="'menuItemTree'" ui-sref-active="is-active"></li>
         </ul>
       </li>
     </ul>

@@ -11,8 +11,9 @@ export function toggleSidenav(){
 }
 
 function openSidenav(){
-  $(`${SIDENAV_MENU_LIST_ITEM}.active .submenu`).slideDown()
-  $(`${SIDENAV_MENU_LIST_ITEM}.active`).addClass("is-open")
+  $(`${SIDENAV_MENU_LIST_ITEM}.is-active .submenu`).slideDown()
+  //ui-router sref set is-active, make sure the active link is-open too
+  $(`${SIDENAV_MENU_LIST_ITEM}.is-active`).addClass("is-open")
   appState.sidenav.open = true
 }
 
@@ -96,8 +97,8 @@ class controller {
   $postLink() {
     //make sure the submenu is shown for active menu item
     this.$timeout(function() {
-      $(`${SIDENAV_MENU_LIST_ITEM}.active .submenu`).show()
-      $(`${SIDENAV_MENU_LIST_ITEM}.active`).addClass("is-open")
+      $(`${SIDENAV_MENU_LIST_ITEM}.is-active .submenu`).show()
+      $(`${SIDENAV_MENU_LIST_ITEM}.is-active`).addClass("is-open")
     })
   }
   // init code here

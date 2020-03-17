@@ -51,7 +51,7 @@ $burger-line-width: 3px;
   }
 
   // Styles for the active `.hamburger` icon
-  &.is-open {
+  &.is-active {
     i, &:before, &:after {
       background: $secondary;
     }
@@ -59,7 +59,7 @@ $burger-line-width: 3px;
 
   // LEFT ARROW
   &.hamburger-arrow-left {
-    &.is-open {
+    &.is-active {
       transform: rotate(180deg);
 
       &:before {
@@ -126,7 +126,7 @@ $burger-line-width: 3px;
   }
 
   // the svg of the X
-  &.is-open {
+  &.is-active {
     svg {
       path {
         &.path1 {

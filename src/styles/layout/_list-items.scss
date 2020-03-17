@@ -46,20 +46,6 @@ $list-active-color: $secondary;
       color: $list-hover-color;
     }
 
-    // i {
-    //   margin-top: $item-margin; //16px
-    //   margin-bottom: $item-margin; //16px
-    //   margin-right: $item-margin * 2; //32px
-    //   // font awesome styles
-    //   height: $icon-dimensions; // 24
-    //   width: $icon-dimensions; // 24
-    //   &.fa, &.mdi {
-    //     padding: 1px;
-    //     font-size: calc(#{$icon-dimensions} - 2px); //22px
-    //     text-align: center;
-    //   }
-    // }
-
     .icon {
       margin-top: $item-margin; //16px
       margin-bottom: $item-margin; //16px
@@ -101,8 +87,8 @@ $list-active-color: $secondary;
   }
 
   // active children
-  &.active {
-    > .item-content span,i {
+  &.is-active {
+    > .item-content .title, .icon {
       color: $list-active-color;
     }
   }
@@ -124,7 +110,7 @@ $list-active-color: $secondary;
         border-bottom: 1px solid darken($dark-grey, 2%);
         font-size: 1rem;
 
-        &.active {
+        &.is-active {
           color: $list-active-color;
         }
         &:hover {

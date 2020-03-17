@@ -42,12 +42,12 @@ $sidenav-header-logo-tablet-height: $bar-breakpoint-height - 2rem !default; // 2
   z-index: 10000;
   overflow-y: auto;
 
-  &.is-open {
+  &.is-active {
     transform: translateX(0);
     width: $sidenav-nav-width;
   }
 
-  &:not(.is-open) {
+  &:not(.is-active) {
     width: $sidenav-nav-closed-width;
 
     .sidenav-header {
@@ -131,7 +131,7 @@ $sidenav-header-logo-tablet-height: $bar-breakpoint-height - 2rem !default; // 2
       }
 
       //active list-item
-      &.active {
+      &.is-active {
         > .item-content {
           .title, .icon {
             color: $sidenav-nav-active-color;
@@ -156,7 +156,7 @@ $sidenav-header-logo-tablet-height: $bar-breakpoint-height - 2rem !default; // 2
               }
             }
 
-            &.active > .item-content {
+            &.is-active > .item-content {
               background-color: darken($sidenav-background-color, 5%);
             }
           }
@@ -188,7 +188,7 @@ $sidenav-header-logo-tablet-height: $bar-breakpoint-height - 2rem !default; // 2
 // $sidenav-nav-breakpoint defaults to $desktop which is about 1024 (tablet size)
 @include until($sidenav-nav-breakpoint) {
   .sidenav {
-    &:not(.is-open) {
+    &:not(.is-active) {
       width: 0;
     }
     .sidenav-header {
