@@ -1,0 +1,137 @@
+/* ------------------------------------------------------------- */
+/* List (material-ish)
+/* https://material.io/components/lists/#specs
+/* https://material.io/design/layout/spacing-methods.html#spacing
+/* -------------------------------------------------------------- */
+
+// sizes
+// $list-item-margin: 16px;
+//$list-item-with-icon-height: 56px;
+// $list-icon-margin-right
+// 16 + 24 + 16 + 16 = 72px
+$list-has-children-indent: $item-margin + $icon-dimensions + $item-margin + $item-margin; //72px
+
+$list-color: $text;
+$list-hover-color: $secondary;
+$list-active-color: $secondary;
+
+.list {
+  position: relative;
+}
+
+.list .list-items {
+  margin: 0;
+  padding: 0;
+  // max-width: 400px;
+  list-style: none;
+  list-style-type: none;
+  // font-family: "Open Sans", sans-serif !important;
+}
+
+.list .list-items .list-item {
+  position: relative;
+
+  .item-content {
+    display: flex;
+    align-items: center;
+    //padding: 1em 1em;
+    padding-left: $item-margin;
+    text-decoration: none;
+    color: $list-color;
+    min-height: $item-min-height;
+
+    &:hover {
+      // padding: 20px 25px;
+      text-decoration: none;
+      color: $list-hover-color;
+    }
+
+    // i {
+    //   margin-top: $item-margin; //16px
+    //   margin-bottom: $item-margin; //16px
+    //   margin-right: $item-margin * 2; //32px
+    //   // font awesome styles
+    //   height: $icon-dimensions; // 24
+    //   width: $icon-dimensions; // 24
+    //   &.fa, &.mdi {
+    //     padding: 1px;
+    //     font-size: calc(#{$icon-dimensions} - 2px); //22px
+    //     text-align: center;
+    //   }
+    // }
+
+    .icon {
+      margin-top: $item-margin; //16px
+      margin-bottom: $item-margin; //16px
+      margin-right: $item-margin * 2; //32px
+      i.fa, i.mdi {
+        padding: 1px;
+        font-size: calc(#{$icon-dimensions} - 2px); //22px
+        text-align: center;
+      }
+    }
+    // list item content, don't wrap and hide overflow
+    > .title {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+}
+
+.list .list-items .list-item.has-children {
+  // dropdown arrow
+  > .item-content::after {
+    @extend %arrow;
+    z-index: 4;
+    transform: rotate(-135deg);
+    transition: all 0.5s;
+    // border-color: $white;
+    border-color: $primary;
+    right: 1.25rem;
+    top: 1.875em;
+  }
+
+  // dropdown arrow animation
+  &.is-open {
+    > .item-content::after {
+      border-color: $list-active-color;
+      transform: rotate(-45deg);
+    }
+  }
+
+  // active children
+  &.active {
+    > .item-content span,i {
+      color: $list-active-color;
+    }
+  }
+
+  // first child item group
+  > .list-items {
+    display: none;
+  }
+
+  // submenu list item children
+  .list-items {
+    padding: 0px;
+
+    .list-item {
+      .item-content {
+        color: $white;
+        background-color: darken($dark-grey, 5%);
+        padding-left: 72px;
+        border-bottom: 1px solid darken($dark-grey, 2%);
+        font-size: 1rem;
+
+        &.active {
+          color: $list-active-color;
+        }
+        &:hover {
+          color: $primary;
+        }
+      }
+    }
+  } // sub .list-items
+} // .list-item.has-children
+

@@ -1,4 +1,4 @@
-import './styles/_index.scss'
+//import './styles/_index.scss'
 import template from './index.html';
 import sidenavModule from './sidenav'
 //import simpleSidenavModule from './sidenav/simple-sidenav'

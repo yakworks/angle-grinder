@@ -1,0 +1,198 @@
+/* --------------------------------------------
+/* Sidenav slide in side menu style
+/* -------------------------------------------- */
+$sidenav-background-color: #344258 !default;
+
+$sidenav-font-color: findColorInvert($sidenav-background-color) !default;
+$sidenav-font-size: $size-normal !default; // 16
+$sidenav-font-weight: $weight-semibold !default;
+$sidenav-children-font-size: $size-14 !default; // 14
+
+$sidenav-nav-hover-color: $secondary !default;
+$sidenav-nav-active-color: $secondary !default;
+$sidenav-nav-width: 256px !default;
+$sidenav-nav-closed-width: $icon-dimensions + $item-margin + $item-margin !default; // 24px + 16px + 16px = 56
+//point that sidenav becomes fixed and hidden on close
+$sidenav-nav-breakpoint: $desktop !default; //desktop is about the 1024 mark
+
+$sidenav-header-height: 4rem !default; // 64
+$sidenav-header-logo-height: $bar-height - 2rem !default; // 64 - 16 - 16 = 32
+// for mobile and tablet
+$sidenav-header-logo-tablet-height: $bar-breakpoint-height - 2rem !default; // 24
+
+.sidenav-body-overlay {
+  position: fixed;
+  z-index: 999;
+  top: 0px;
+  left: 0px;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(126, 148, 182, 0.4);
+}
+
+.sidenav {
+  font-size: $sidenav-font-size;
+  background: $sidenav-background-color;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  //transform: translateX(-281px);
+  transition: all 0.3s;
+  z-index: 10000;
+  overflow-y: auto;
+
+  &.is-open {
+    transform: translateX(0);
+    width: $sidenav-nav-width;
+  }
+
+  &:not(.is-open) {
+    width: $sidenav-nav-closed-width;
+
+    .sidenav-header {
+      .logo, .icon {
+        display: none;
+      }
+      .hamburger {
+        margin-right: 0;
+      }
+    }
+    // hide text and drop down icon indicator
+    .sidenav-menu .list-item.has-children > a {
+      &:after {
+        // make it small
+        right: 9px !important;
+        width: .4em;
+        height: .4em;
+        border-radius: 1px;
+        border-width: 1px;
+        margin-top: -6px;
+      }
+    }
+  }
+
+  // --- keep similiar to toolbar, see that scss file for more detailed specs ---
+  // By default, the toolbar is 64px high on desktop and 56px high on mobile.
+  // There are a number of helper components available to use with the toolbar.
+  .sidenav-header {
+    height: $bar-height;
+    display: flex;
+    //justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid lighten($sidenav-background-color, 5%);
+    padding: 0 $item-margin;
+
+    .hamburger {
+      margin-right: $item-margin * 2;
+    }
+
+    .logo {
+      height: $sidenav-header-logo-height;
+    }
+
+    .icon.tack {
+      background-color: transparent;
+      border: none;
+      color: $sidenav-font-color;
+      position: absolute;
+      right: 5px;
+      top: 5px;
+      transform: rotate(45deg);
+
+      i.fa {
+        font-size: 12px;
+      }
+      &.is-fixed {
+        transform: rotate(0);
+      }
+    }
+
+    a {
+      width: $icon-dimensions;
+      height: $icon-dimensions;
+    }
+  }
+}
+
+// more or less a copy of list-items so we can change/invert colors
+.sidenav .sidenav-nav.list {
+  .list-items {
+    max-width: 400px;
+
+    .list-item {
+      .item-content {
+        color: $sidenav-font-color;
+        font-weight: $sidenav-font-weight;
+
+        &:hover {
+          color: $sidenav-nav-hover-color;
+        }
+      }
+
+      //active list-item
+      &.active {
+        > .item-content {
+          .title, .icon {
+            color: $sidenav-nav-active-color;
+          }
+        }
+        &.has-children .list-item .item-content {
+          border-left: 1px solid $sidenav-nav-active-color;
+        }
+      }
+
+      //list-item with children
+      &.has-children {
+        .list-items {
+          .list-item {
+            .item-content {
+              font-size: $sidenav-children-font-size;
+              color: $sidenav-font-color;
+              background-color: darken($sidenav-background-color, 4%);
+              border-bottom-color: darken($sidenav-background-color, 2%);
+              &:hover {
+                color: $sidenav-nav-hover-color;
+              }
+            }
+
+            &.active > .item-content {
+              background-color: darken($sidenav-background-color, 5%);
+            }
+          }
+        }
+
+        // dropdown arrow
+        > .item-content::after {
+          border-color: $sidenav-font-color;
+        }
+      }
+      // has-children and is-open
+      &.has-children.is-open {
+        > .item-content::after {
+          border-color: $sidenav-nav-active-color;
+        }
+      }
+    } // .list-item
+  } // .list-items
+} // .sidenav-nav.list
+
+// FIXED
+.app-sidenav-fixed {
+  // dont show overlay
+  .sidenav-body-overlay {
+    display: none;
+  }
+}
+
+// $sidenav-nav-breakpoint defaults to $desktop which is about 1024 (tablet size)
+@include until($sidenav-nav-breakpoint) {
+  .sidenav {
+    &:not(.is-open) {
+      width: 0;
+    }
+    .sidenav-header {
+      height: $bar-breakpoint-height;
+    }
+  }
+}

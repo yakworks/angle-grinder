@@ -1,10 +1,8 @@
+@import "~angle-grinder/src/styles/init";
 
-@import "top-navbar";
-@import "sidebar";
-@import "nav";
-@import "navbar";
-@import "main-content";
-@import "footer";
-@import "settings";
-@import "off-sidebar";
-@import "horizontal-menu";
+@import 'hamburger';
+@import 'list-items';
+@import 'sidenav'; //depends on list-items
+@import 'toolbar';
+@import 'appbar';
+@import 'responsive';
