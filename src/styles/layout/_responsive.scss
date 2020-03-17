@@ -2,7 +2,7 @@
 /*  Main Parent <ui-view> content
 /* ---------------------------------------------------------------------- */
 
-.root-ui-view{
+.root-ui-view, .appbar-wrapper{
   transition: margin-left 0.3s;
 }
 

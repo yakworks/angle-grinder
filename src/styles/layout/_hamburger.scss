@@ -1,15 +1,15 @@
 //Sidenav animated icon trigger
 
-$burger-font-size: 24px;
+$burger-size: 24px;
 $burger-line-width: 3px;
 
 .hamburger {
-  font-size: $burger-font-size;
+  //font-size: $burger-size;
 
   display: inline-block;
 
-  width: $burger-font-size;
-  height: $burger-font-size;
+  width: $burger-size;
+  height: $burger-size;
   padding: 2px 1px 0 1px;
 
   cursor: pointer;
@@ -42,7 +42,7 @@ $burger-line-width: 3px;
     width: 100%;
     height: $burger-line-width;
     //margin: 0;
-    margin: 0 0 ($burger-line-width + 1) 0;
+    margin: 0 0 ($burger-line-width * 2) 0;
 
     transition: transform 0.2s ease-in-out;
 
@@ -63,20 +63,22 @@ $burger-line-width: 3px;
       transform: rotate(180deg);
 
       &:before {
-        width: $burger-line-width * 5;
-        height: $burger-line-width + 1;
-        transform: translateX(($burger-line-width * 2) + 2) translateY($burger-line-width) rotate(45deg);
+        width: $burger-line-width * 4;
+        height: $burger-line-width;
+        transform: translateX(($burger-line-width * 3) + 2) translateY($burger-line-width * 2 - 1) rotate(45deg);
       }
 
       i {
-        height: $burger-line-width + 1;
+        height: $burger-line-width;
         border-radius: $burger-line-width;
+        margin-left: 4px;
+        width: $burger-size - 6px;
       }
 
       &:after {
-        height: $burger-line-width + 1;
-        width: $burger-line-width * 5;
-        transform: translateX(($burger-line-width * 2) + 2) translateY($burger-line-width * -1) rotate(-45deg);
+        width: $burger-line-width * 4;
+        height: $burger-line-width;
+        transform: translateX(($burger-line-width * 3) + 2) translateY($burger-line-width * -2 + 1) rotate(-45deg);
       }
     }
   }

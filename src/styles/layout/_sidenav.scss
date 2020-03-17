@@ -137,9 +137,6 @@ $sidenav-header-logo-tablet-height: $bar-breakpoint-height - 2rem !default; // 2
             color: $sidenav-nav-active-color;
           }
         }
-        &.has-children .list-item .item-content {
-          border-left: 1px solid $sidenav-nav-active-color;
-        }
       }
 
       //list-item with children
@@ -166,11 +163,16 @@ $sidenav-header-logo-tablet-height: $bar-breakpoint-height - 2rem !default; // 2
         > .item-content::after {
           border-color: $sidenav-font-color;
         }
-      }
-      // has-children and is-open
-      &.has-children.is-open {
-        > .item-content::after {
-          border-color: $sidenav-nav-active-color;
+        // ".has-children.is-active"
+        &.is-active  {
+          // dropdown arrow active on first child item-content
+          > .item-content::after {
+            border-color: $sidenav-nav-active-color;
+          }
+          // set a border left on all children
+          .list-item .item-content {
+            border-left: 1px solid $sidenav-nav-active-color;
+          }
         }
       }
     } // .list-item
