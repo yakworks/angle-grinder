@@ -36,6 +36,7 @@ gridz.directive('agGridToolbar', () => ({
                   <a ng-click="parent.createRecord()" ag-new-button ></a>
                 </li>
               </ul>
+              <ng-transclude></ng-transclude>
               <ag-panel-states>
                 <ag-manage-grid-columns grid="grid"></ag-manage-grid-columns>
                 <ag-reload-grid for="grid"></ag-reload-grid>
