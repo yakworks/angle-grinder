@@ -19,25 +19,6 @@ $toolbar-icon-button-size: 3rem !default;
     box-shadow: none !important;
   }
 
-  // change button defaults to be transparent
-  .button {
-    &.is-icon-button {
-      width: $toolbar-icon-button-size;
-      height: $toolbar-icon-button-size;
-    }
-
-    // i {
-    //   color: $toolbar-icon-color;
-    //   height: $toolbar-icon-size;
-    //   width: $toolbar-icon-size;
-    //   &.fa {
-    //     padding: 1px;
-    //     font-size: $toolbar-icon-size - 2px;
-    //     text-align: center;
-    //   }
-    // }
-  }
-
   .toolbar-title {
     font-size: $size-large
   }
@@ -142,28 +123,3 @@ $toolbar-icon-button-size: 3rem !default;
   }
 }
 
-// up to about 1024 (tablet size)
-@include until($desktop) {
-  .appbar.toolbar{
-    .container {
-      height: $bar-breakpoint-height;
-      min-height: $bar-breakpoint-height;
-    }
-  }
-}
-
-//Cloned fixed toolbar
-#toolbar-clone {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background: $white;
-  transform: translateY(-100%);
-  z-index: 100;
-  box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.12);
-
-  &.is-active {
-    transform: translateY(0);
-  }
-}

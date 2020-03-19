@@ -17,7 +17,7 @@
 $button-font-size: $size-16 !default;
 $button-height: 2.25em !default; //36px
 $button-icon-size: 1.125em !default; //18px
-$button-icon-solo-size: 1.5em !default;  //24px
+$button-icon-solo-size: 1.5em !default;  //24px for
 $button-icon-button-size: $button-height !default; //36px
 
 $shadow2:  0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
@@ -42,29 +42,21 @@ $shadow-large: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 
   padding: 0 $button-padding-horizontal;
   box-shadow: $shadow1;
   transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1), background-color 300ms ease;
+  justify-content: center;
 
   &.is-icon-button {
-    $padding-calc: calc(#{($button-height - $button-icon-solo-size)/2} - #{$button-border-width});
-
+    border-width: 0px;
     width: $button-icon-button-size;
     min-width: $button-icon-button-size;
-    //padding: $padding-calc $padding-calc;
+    padding: 0;
     border-radius: 50%;
     background-color: transparent;
     box-shadow: none;
-    // &.is-active,
-    // &:active {
-    //   border-color: transparent;
-    //   box-shadow: none;
-    //   background-color: transparent;
-    // }
-    // &.is-focused,
-    // &:focus {
-    //   &:not(:active) {
-    //     border-color: transparent;
-    //     box-shadow: none;
-    //   }
-    // }
+    .icon {
+      &.is-solo, &.is-solo:last-child  {
+        margin: 0;
+      }
+    }
   }
 
   &.is-hovered,
@@ -83,15 +75,9 @@ $shadow-large: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 
   &:focus {
     border-color: transparent;
     &:not(:active) {
-      //box-shadow: $shadow2;
       box-shadow: $button-focus-box-shadow-size $button-focus-box-shadow-color
-      //box-shadow: $button-focus-box-shadow-size rgba($button-color, 0.25)
-      //box-shadow: 0 0 0 0.15rem darken($button-background-color, 3)
     }
   }
-  // &:not([disabled]){
-  //   @include ripple($button-color);
-  // }
 
   // add specifier to force icon location
   .icon {
@@ -205,8 +191,3 @@ $shadow-large: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 
     transform: scale(2.5);
   }
 }
-
-/* ------------------------------------------------------------- */
-/* Bootstraps
-/* -------------------------------------------------------------- */
-@import "buttons-bs"
