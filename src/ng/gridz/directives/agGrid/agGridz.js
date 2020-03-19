@@ -18,7 +18,7 @@ gridz.directive('agGrid', [
 
       // read grid options
       const optionsPromise = $parse(attrs.agGrid)(scope)
-      //for the cases when options are promises(when it loads from backend)
+      // for the cases when options are promises(when it loads from backend)
       $q.when(optionsPromise).then(options => {
         if (!options) { throw new Error('undefined grid options') }
 
@@ -73,8 +73,8 @@ gridz.directive('agGrid', [
                     $(this).parent().remove()
                     $('#' + gridId).jqGrid('groupingRemove')
                     $('#' + gridId).jqGrid('groupingGroupBy', $(`#${alias}GroupDropDown div.tag:not(.placeholder)`).map(function() {
-                        return $(this).attr('data-column')
-                      }).get()
+                      return $(this).attr('data-column')
+                    }).get()
                     )
                     if ($(`#${alias}GroupDropDown div.tag:not(.placeholder)`).length === 0) {
                       $('<div class="placeholder"></div>').appendTo($this)
@@ -84,8 +84,8 @@ gridz.directive('agGrid', [
                   groupingColumn.appendTo($this)
                   $('#' + gridId).jqGrid('groupingRemove')
                   $('#' + gridId).jqGrid('groupingGroupBy', $(`#${alias}GroupDropDown div.tag:not(.placeholder)`).map(function() {
-                      return $(this).attr('data-column')
-                    }).get()
+                    return $(this).attr('data-column')
+                  }).get()
                   )
                 }
               }).sortable({
@@ -96,8 +96,8 @@ gridz.directive('agGrid', [
                 stop() {
                   $('#' + gridId).jqGrid('groupingRemove')
                   $('#' + gridId).jqGrid('groupingGroupBy', $(`#${alias}GroupDropDown div.tag:not(.placeholder)`).map(function() {
-                      return $(this).attr('data-column')
-                    }).get()
+                    return $(this).attr('data-column')
+                  }).get()
                   )
                 }
               })
@@ -154,16 +154,16 @@ gridz.directive('agGrid', [
           gridEl.gridz(options)
           if (options.filterToolbar) {
             gridEl.jqGrid('filterToolbar', {
-                beforeSearch() {
-                  const postData = gridEl.jqGrid('getGridParam', 'postData')
-                  const defaultFilters = postData.defaultFilters || postData.filters
-                  const filters = (_.extend(JSON.parse(defaultFilters), (_.pick(postData, (value, key) => !['page', 'filters', 'max', 'sort', 'order', 'nd', '_search'].includes(key)))))
-                  filters.firstLoad = false
-                  postData.defaultFilters = defaultFilters
-                  postData.filters = JSON.stringify(filters)
-                  return console.log('Toolbar Search')
-                }
+              beforeSearch() {
+                const postData = gridEl.jqGrid('getGridParam', 'postData')
+                const defaultFilters = postData.defaultFilters || postData.filters
+                const filters = (_.extend(JSON.parse(defaultFilters), (_.pick(postData, (value, key) => !['page', 'filters', 'max', 'sort', 'order', 'nd', '_search'].includes(key)))))
+                filters.firstLoad = false
+                postData.defaultFilters = defaultFilters
+                postData.filters = JSON.stringify(filters)
+                return console.log('Toolbar Search')
               }
+            }
             )
           }
 
@@ -213,21 +213,20 @@ gridz.directive('agGrid', [
             // We have to do timeout because of this issue with uib-tab https://github.com/angular-ui/bootstrap/issues/3796
             // Otherwise when tab is clicked and digest cycle ($watch) runs, the element.is(":visible") is still false, and hence grid is never initialized.
             timeoutPromise = $timeout(function() {
-                if (!element.is(':visible')) { return }
-                // initialize the grid on the visible element
-                initializeGrid()
+              if (!element.is(':visible')) { return }
+              // initialize the grid on the visible element
+              initializeGrid()
 
-                // unregister the watcher to free resources
-                return unregister()
-              }
+              // unregister the watcher to free resources
+              return unregister()
+            }
 
-              , 100, false) // Here false means don't fire new digest cycle, otherwise $watch will be called infinitely.
+            , 100, false) // Here false means don't fire new digest cycle, otherwise $watch will be called infinitely.
 
             return false
           })
         }
       })
-
     }
 
     return {
