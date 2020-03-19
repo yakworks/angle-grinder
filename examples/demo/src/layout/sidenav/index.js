@@ -6,7 +6,7 @@ class controller {
     this.$element = $element
     this.$state = appState.$state
     this.appState = appState
-    this.sideMenuItems = appState.routerStates.children
+    this.sideMenuItems = appState.packetStates.children
   }
 
   // $onInit() {

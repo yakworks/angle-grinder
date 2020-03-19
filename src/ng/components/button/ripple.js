@@ -26,7 +26,7 @@ export default angular
             ripple.style.width = size + 'px'
             ripple.style.height = size + 'px'
           }
-          //ripple.style.display = 'block'
+          // ripple.style.display = 'block'
 
           // Remove animation effect
           ripple.className = ripple.className.replace(/ ?(animate)/g, '')
@@ -71,7 +71,7 @@ export default angular
           ripple.className += ' animate'
           // ripple.style.display = 'none'
         }
-        //ripple.style.display = 'none'
+        // ripple.style.display = 'none'
 
         var eventType = ('ontouchstart' in document) ? 'touchstart' : 'mousedown'
         element.on(eventType, func)

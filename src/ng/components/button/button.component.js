@@ -3,7 +3,6 @@ import template from './button.html'
 
 // Set up controller
 class BtnController {
-
   constructor($element, $transclude) {
     this.$element = $element
     // this.$transclude = $transclude
@@ -18,7 +17,7 @@ class BtnController {
     this.btnCls = this.buttonClass || ''
     // setup color class
     if (this.color) this.btnCls = `${this.btnCls} is-${this.color}`
-    //if its icon then its an an icon button with no border, set is-icon-button
+    // if its icon then its an an icon button with no border, set is-icon-button
     if (this.icon) {
       this.btnCls = `${this.btnCls} is-icon-button`
       this.iconSolo = this.icon
