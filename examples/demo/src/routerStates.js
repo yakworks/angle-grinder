@@ -5,7 +5,7 @@ const dashStates = {
   template: require('./dashboards/dashyak.html'),
   // resolve: loadSequence('d3', 'ui.knob', 'countTo', 'dashboardCtrl'),
   data: {
-    icon: 'fa fa-home'
+    icon: 'mdi mdi-monitor-dashboard'
   }
 }
 
@@ -13,7 +13,7 @@ const formStates = {
   name: 'forms',
   template: '<div ui-view class="fade-in-up"></div>',
   data: {
-    icon: 'fa fa-flask'
+    icon: 'mdi mdi-id-card'
   },
   abstract: true,
   children: [
@@ -50,7 +50,7 @@ const uiStates = {
   abstract: true,
   data: {
     title: 'UI Elements',
-    icon: 'fa fa-file-text-o'
+    icon: 'fa fa-flask'
   },
   children: [
     {
@@ -134,7 +134,7 @@ const componentsStates = {
   // },
   children: [
     {
-      name: 'button',
+      name: 'buttons',
       component: 'buttonDemoIndex'
     },
     {
@@ -144,12 +144,21 @@ const componentsStates = {
   ]
 }
 
-const appRoot = {
-  name: 'app',
-  url: '/app',
+export const packet = {
+  name: 'packet',
+  url: '/packet',
   template: require('./app.html'),
   abstract: true,
   children: [dashStates, componentsStates, formStates, uiStates, gridsStates]
 }
 
-export default appRoot
+export const fresh = {
+  name: 'fresh',
+  url: '/fresh',
+  component: 'freshApp',
+  abstract: true,
+  children: [dashStates, componentsStates, formStates, uiStates, gridsStates]
+}
+
+export default {packet, fresh}
+// export default appRoot

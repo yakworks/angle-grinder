@@ -1,0 +1,23 @@
+///////////////////
+// Call this before any SCSS that is run, safe to depend on everywhere
+// to load the variables, mixins and functions
+// any modifications should not do anything to the scss output, only add variables and functions
+//////////////////
+
+@charset "utf-8";
+
+/* Variables Setup */
+/****** tweak of Bulma utilities/_all **********/
+@import "initial-variables.sass";
+@import "functions";
+@import "derived-variables";
+// rest of bulma
+@import "~bulma/sass/utilities/animations.sass";
+@import "~bulma/sass/utilities/mixins.sass";
+@import "~bulma/sass/utilities/controls.sass";
+
+// packet variables merge this into derived-variables
+@import "variables";
+
+// DEPRECATE This when we get rid of all old packet scss
+@import "../utilities/mixins";

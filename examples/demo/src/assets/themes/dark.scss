@@ -2,7 +2,7 @@
 /*  Layout2 - Theme 1
 /* ---------------------------------------------------------------------- */
 
-@import "../../../../../src/styles/initialize";
+@import "~angle-grinder/src/styles/init";
 $app-background: #F0F3F4;
 //NAV HEADER COLORS
 $header-background: #1C2B36;
@@ -53,7 +53,7 @@ body {
 }
 
 .app-content {
-    @media (max-width: $screen-sm-max) {
+    @include until($desktop) {
         background: $app-background;
     }
 }
@@ -137,7 +137,7 @@ body {
 
         .navbar-left {
             > li {
-                @media (min-width: $screen-sm-min) {
+                @media (min-width: $tablet) {
                     &:before {
                         background: -moz-linear-gradient(top, rgba($collapseText-color,0) 0%, rgba($collapseText-color,0.2) 50%, rgba($collapseText-color,0) 100%); /* FF3.6-15 */
                         background: -webkit-linear-gradient(top, rgba($collapseText-color,0) 0%,rgba($collapseText-color,0.2) 50%,rgba($collapseText-color,0) 100%); /* Chrome10-25,Safari5.1-6 */
@@ -194,7 +194,7 @@ body {
                     }
                 }
 
-                @media (max-width: $screen-xs-max) {
+                @include until($tablet) {
                     border-bottom: 1px solid $menuMobileBorder-color !important;
                 }
 
@@ -254,7 +254,7 @@ body {
 
         .navbar-right {
             > li {
-                @media (min-width: $screen-sm-min) {
+                @media (min-width: $tablet) {
                     &:before {
                         background: -moz-linear-gradient(top, rgba($collapseText-color,0) 0%, rgba($collapseText-color,0.2) 50%, rgba($collapseText-color,0) 100%); /* FF3.6-15 */
                         background: -webkit-linear-gradient(top, rgba($collapseText-color,0) 0%,rgba($collapseText-color,0.2) 50%,rgba($collapseText-color,0) 100%); /* Chrome10-25,Safari5.1-6 */
@@ -285,7 +285,7 @@ body {
             }
         }
 
-        @media (max-width: $screen-sm-max) {
+        @include until($desktop) {
             background: $header-background !important;
             box-shadow: none;
             border-bottom-color: transparent !important;
@@ -312,14 +312,14 @@ body {
                         background: darken($header-background, 8%) !important;
                     }
 
-                    @media (max-width: $screen-xs-max) {
+                    @include until($tablet) {
                         border-bottom: 1px solid $menuMobileBorder-color !important;
                     }
                 }
             }
         }
 
-        @media (max-width: $screen-xs-max) {
+        @include until($tablet) {
             background: $menuMobile-color !important;
 
             .close-handle {
@@ -348,13 +348,13 @@ body {
         background: $collapse-background !important;
         color: rgba($collapseElements-color, 0.7) !important;
 
-        @media (min-width: $screen-sm-min) {
+        @media (min-width: $tablet) {
             &:hover {
                 color: rgba($collapseElements-color, 1) !important;
             }
         }
 
-        @media (max-width: $screen-sm-max) {
+        @include until($desktop) {
             background: $header-background !important;
             border-left-color: $headerBorder-color !important;
             color: rgba($headerElements-color, 0.7) !important;
@@ -369,14 +369,14 @@ body {
     background: $sidebar-background;
 
     &:before {
-        @media (min-width: $screen-md-min) {
+        @media (min-width: $desktop) {
             background-color: $sidebar-background !important;
             z-index: 0;
         }
     }
 
     &:after {
-        @media (min-width: $screen-md-min) {
+        @media (min-width: $desktop) {
             background-color: $nav-background;
         }
     }
@@ -412,7 +412,7 @@ body {
             color: $navText-color;
         }
 
-        @media (min-width: $screen-md-min) {
+        @media (min-width: $desktop) {
             &:before {
                 background: $sidebar-background;
             }
@@ -527,7 +527,7 @@ ul.sub-menu {
 
     .app-aside {
 
-        @media (min-width: $screen-md-min) {
+        @media (min-width: $desktop) {
             > .item-inner {
                 background-color: $sidebar-background !important;
 

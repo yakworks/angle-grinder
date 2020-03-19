@@ -75,14 +75,6 @@ class AppCtrl {
         // stop loading
       }, 500)
     }
-    $scope.setLayout = function() {
-      $scope.app.layout.isNavbarFixed = false
-      appState.sidenav.open = true
-      //$scope.app.layout.isSidebarClosed = false
-      $scope.app.layout.isSidebarFixed = false
-      $scope.app.layout.isFooterFixed = false
-      $scope.app.layout.isBoxedPage = false
-    }
 
     // global function to scroll page up
     $scope.toTheTop = function() {
@@ -115,6 +107,7 @@ class AppCtrl {
         height: e[a + 'Height']
       }
     }
+
     // function that adds information in a scope of the height and width of the page
     $scope.getWindowDimensions = function() {
       return {
@@ -127,6 +120,16 @@ class AppCtrl {
       $scope.windowHeight = newValue.h
       $scope.windowWidth = newValue.w
 
+      //Desktop
+      if (newValue.w >= 1024) {
+        appState.layout.isDektop = true
+        appState.layout.isSidebarFixed = true
+        appState.layout.isSidenavFixed = true
+      } else {
+        appState.layout.isDektop = false
+        appState.layout.isSidebarFixed = false
+        appState.layout.isSidenavFixed = false
+      }
       if (newValue.w >= 992) {
         $scope.isLargeDevice = true
       } else {
@@ -143,6 +146,7 @@ class AppCtrl {
         $scope.isMobileDevice = false
       }
     }, true)
+
     // Apply on resize
     $win.on('resize', function() {
       $scope.$apply()

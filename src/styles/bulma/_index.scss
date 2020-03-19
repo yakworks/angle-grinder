@@ -1,19 +1,33 @@
-// *** _initialize should have been called before importing this
+/*! bulma.io v0.8.0 | MIT License | github.com/jgthms/bulma */
+// *** styles/init should have been imported before importing this
 // as it takes care of the required @import "~bulma/sass/utilities/_all.sass ****
+// @import "sass/utilities/_all"
 
+// *** sass/base/ ***
+// @import "sass/base/_all"
 @import "~bulma/sass/base/helpers.sass";
 
-@import "~bulma/sass/grid/_all.sass";
-
-@import "~bulma/sass/components/card.sass";
-// == form
-@import "~bulma/sass/form/shared.sass";
-@import "~bulma/sass/form/select.sass";
 // == Elements
+// @import "sass/elements/_all"
 @import "~bulma/sass/elements/box.sass";
 @import "~bulma/sass/elements/button.sass";
+@import "~bulma/sass/elements/container.sass";
 @import "~bulma/sass/elements/content.sass";
-@import "~bulma/sass/elements/icon.sass";
+
+// == Form
+// @import "sass/form/_all"
+@import "~bulma/sass/form/shared.sass";
+@import "~bulma/sass/form/select.sass";
+
+// == Components
+// @import "sass/components/_all"
+@import "~bulma/sass/components/card.sass";
+
+// == Grid
+@import "~bulma/sass/grid/_all.sass";
+
+// == Layout
+// @import "sass/layout/_all"
 // copied in title as without a better specifier it conflicts with them
 @import "_title.sass";
 

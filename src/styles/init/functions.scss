@@ -1,0 +1,20 @@
+/**
+Copy of "~bulma/sass/utilities/functions.sass with fixes for findDarkColor
+Use this one instead.
+@see https://github.com/jgthms/bulma/issues/2805
+*/
+
+// our initial-variables should be imported before running this
+//@import "~bulma/sass/utilities/initial-variables.sass";
+@import "~bulma/sass/utilities/functions.sass";
+
+// override findDarkColor, there is a problem with the bulma findDarkColor,
+// doesn't alway darken so override.
+@function findDarkColor($color) {
+  @if type-of($color) == 'color' {
+    @return scale-color($danger, $lightness: -20%);
+  }
+  @return $text-strong;
+}
+
+/* other mixins used in setting up variables */

@@ -1,7 +1,9 @@
 
 //@import "dropdown-menu";
 @import "select2-bulma";
+@import "icon";
 @import "buttons";
+@import "buttons-bs";
 
 @import 'animations';
 //@import "labels-and-badges";
@@ -10,5 +12,9 @@
 @import "bread-crumb-title";
 @import "popovers";
 @import "datepicker";
-
+@import 'list-items';
+@import 'hamburger';
+@import "toolbar";
+@import "toolbar-extra";
+@import "appbar";
 @import "gridz";

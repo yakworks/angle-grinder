@@ -3,7 +3,7 @@ import './styles.scss'
 
 const template = `
 <demo-title-crumb></demo-title-crumb>
-<div class="container-fluid container-fullw dropdownDemoIndex">
+<div class="dropdownDemoIndex">
   <dropdown-example></dropdown-example>
 </div>
 `

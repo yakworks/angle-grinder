@@ -1,0 +1,48 @@
+/* ==========================================================================
+toolbar overrides
+========================================================================== */
+/* DEPENDS ON toolbar.scss */
+//$toolbar-item-color: #999;
+$toolbar-icon-color: $toolbar-item-color !default;
+$toolbar-fixed-a-color: #444F60 !default;
+$toolbar-icon-size: 1.5rem !default;
+$toolbar-icon-button-size: 3rem !default;
+
+//toolbar
+.toolbar{
+
+  .button {
+    height: $toolbar-icon-button-size;
+    &.is-icon-button {
+      width: $toolbar-icon-button-size;
+    }
+    .icon {
+      &.is-solo, &.is-solo:last-child  {
+        margin: 0;
+        height: $toolbar-icon-size;
+        width: $toolbar-icon-size;
+      }
+    }
+    &.is-focused,
+    &:focus {
+      border-color: transparent;
+      &:not(:active) {
+        box-shadow: none;
+      }
+    }
+  }
+
+  .toolbar-title {
+    font-size: $size-medium
+  }
+}
+
+// up to about 1024 (tablet size)
+@include until($desktop) {
+  .toolbar{
+    .container {
+      height: $bar-breakpoint-height;
+      min-height: $bar-breakpoint-height;
+    }
+  }
+}

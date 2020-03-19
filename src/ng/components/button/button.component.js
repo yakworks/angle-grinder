@@ -17,6 +17,12 @@ class BtnController {
     this.btnCls = this.buttonClass || ''
     // setup color class
     if (this.color) this.btnCls = `${this.btnCls} is-${this.color}`
+    // if its icon then its an an icon button with no border, set is-icon-button
+    if (this.icon) {
+      this.btnCls = `${this.btnCls} is-icon-button`
+      this.iconSolo = this.icon
+    }
+    this.setupIconClass('iconSolo')
     this.setupIconClass('iconLeft')
     this.setupIconClass('iconRight')
   }
@@ -24,6 +30,7 @@ class BtnController {
   setupIconClass(fldName) {
     let icoVal = this[fldName]
     if (icoVal && icoVal.startsWith('fa-')) icoVal = `fa ${icoVal}`
+    if (icoVal && icoVal.startsWith('mdi-')) icoVal = `mdi ${icoVal}`
     this[`${fldName}Class`] = icoVal
   }
 
@@ -49,6 +56,8 @@ export default {
     color: '@',
     iconLeft: '@',
     iconRight: '@',
+    iconSolo: '@',
+    icon: '@',
     isLoading: '<',
     isDisabled: '<',
     // size: '@',

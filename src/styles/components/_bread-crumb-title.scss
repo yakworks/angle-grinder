@@ -8,7 +8,7 @@
   padding: 15px 35px;
   margin: 0 -15px;
 
-  @media (max-width: $screen-sm-max) {
+  @include until($desktop) {
     padding: 15px;
   }
 
@@ -22,7 +22,7 @@
     top: 50%;
     margin-top: -10px;
 
-    @media (max-width: $screen-sm-max) {
+    @include until($desktop) {
       display: none;
     }
   }
@@ -48,7 +48,7 @@
   margin-left: -15px;
   margin-right: -15px;
 
-  @media (max-width: $screen-xs-max) {
+  @include until($tablet) {
     text-align: center;
     padding: 20px 0;
   }
@@ -67,7 +67,7 @@
     padding: 0;
     text-transform: uppercase;
 
-    @media (max-width: $screen-xs-max) {
+    @include until($tablet) {
       font-size: 24px;
     }
   }
@@ -99,7 +99,7 @@
     width: auto !important;
     font-family: $family-secondary;
 
-    @media (max-width: $screen-xs-max) {
+    @include until($tablet) {
       left: 0 !important;
       margin: 15px 0 0 !important;
       position: relative !important;

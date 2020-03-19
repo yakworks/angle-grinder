@@ -1,0 +1,99 @@
+/* ------------------------------------------------------------- */
+/* Buttons, a material'ish modification of BOOTSTRAPS buttons
+/* https://material.io/components/buttons/#specs
+/* -------------------------------------------------------------- */
+
+@mixin btn($class,$bg){
+  .btn-#{$class} {
+    background-size: 200% 200%;
+    background-position: 50%;
+
+    &:focus {
+      background-color: $bg;
+    }
+
+    &:hover,
+    &:active:hover {
+      background-color: lighten($bg,4%);
+    }
+
+    &:active {
+      background-color: darken($bg,12%);
+      //@include gradient-radial(darken($bg, 12%) 10%, $bg 11%);
+      background-size: 1000% 1000%;
+      box-shadow: 2px 2px 4px rgba(0,0,0,.4);
+    }
+  }
+}
+
+//@include btn(default, $button-background-color);
+@include btn(primary,$primary);
+@include btn(success,$success);
+@include btn(info,$info);
+@include btn(warning,$warning);
+@include btn(danger,$danger);
+@include btn(link,#fff);
+
+.btn {
+  // text-transform: uppercase;
+  // border: none;
+  box-shadow: $shadow1;
+  // transition: all 0.4s;
+  transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1),
+  background-color 300ms ease;
+  position: relative;
+  overflow: hidden;
+  transform: translate3d(0, 0, 0);
+  font-size: $button-font-size;
+
+  &-link {
+    border-radius: $control-radius;
+    box-shadow: none;
+    color: $button-color;
+
+    &:hover,
+    &:focus {
+      box-shadow: none;
+      color: $button-color;
+      text-decoration: none;
+    }
+  }
+
+  &-default {
+
+    &.disabled {
+      background-color: rgba(0, 0, 0, 0.1);
+      color: rgba(0, 0, 0, 0.4);
+      opacity: 1;
+    }
+  }
+}
+
+.btn-transparent {
+  background: none;
+  //border-color: rgba($white, 0.6);
+  //border-width: 1px;
+  color: inherit;
+  box-shadow: none;
+
+  &:hover, &:focus, &:active, &.active {
+      background-color: rgba($black, 0.1);
+      //border-color: rgba($white, 0.8);
+  }
+
+  &.disabled:hover, &.disabled:focus, &.disabled:active, &.disabled.active, &[disabled]:hover, &[disabled]:focus, &[disabled]:active, &[disabled].active, fieldset[disabled] &:hover, fieldset[disabled] &:focus, fieldset[disabled] &:active, fieldset[disabled] &.active {
+      background: none;
+      border-color: rgba($white, 0.3);
+      color: $white;
+  }
+
+  .caret {
+      border-top-color: rgba($black, 0.1);
+  }
+
+  .dropup & {
+      .caret {
+          border-bottom: 4px solid rgba($black, 0.1);
+      }
+  }
+}

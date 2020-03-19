@@ -9,8 +9,9 @@ class ExController {
 }
 
 const template = `
-<h1 class="is-title">Color and States</h1>
+
 <div class="example-section mb-4">
+  <h4>Color and States</h4>
   <div class="example is-vertical">
     <div class="example-component">
       <button-colors-demo> </button-colors-demo>

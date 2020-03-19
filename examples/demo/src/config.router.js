@@ -1,29 +1,32 @@
 import angular from 'angular'
+import {packet, fresh} from './routerStates.js'
+import appState from 'angle-grinder/src/tools/AppState'
+import _ from "lodash"
 
-import appRoot from './routerStates.js'
-
-const app = angular.module('app')
 /**
  * Config for the router
  */
-app.config(function($stateProvider, $urlRouterProvider, stateHelperProvider) {
+angular.module('app')
+.config(function($stateProvider, $urlRouterProvider, stateHelperProvider) {
   // $urlRouterProvider.otherwise("/app/ui/elements");
-  $urlRouterProvider.otherwise('/app/dashboard')
+  // $urlRouterProvider.otherwise('/app/dashboard')
+  let freshCopy = _.cloneDeep(fresh)
+  let packetCopy = _.cloneDeep(packet)
 
-  stateHelperProvider.state(appRoot)
+  $urlRouterProvider.otherwise('/fresh/dashboard')
+  stateHelperProvider.state(freshCopy)
+  appState.routerStates = freshCopy
 
-  // $stateProvider.state('app.grids.panel', {
-  //   url: '/panel',
-  //   template: require("./grids/panel.html"),
-  //   title: 'Panel',
-  //   ncyBreadcrumb: {
-  //     label: 'Panel'
-  //   }
+  //$urlRouterProvider.otherwise('/packet/dashboard')
+  stateHelperProvider.state(packetCopy)
+  appState.packetStates = packetCopy
+
+  //console.log("appState.routerStates", appState.routerStates)
+  // $stateProvider.state({
+  //   name: 'fresh',
+  //   url: '/fresh',
+  //   component: 'freshApp'
+  //   //template: require('./app2.html')
   // })
-})
 
-// Custom UI Bootstrap Calendar Popup Template
-// app.run(function($templateCache) {
-//   // let url = './views/partials/sidebar.html'
-//   $templateCache.put('route/app.forms.input-components.html', require('./forms/input-components/index.html'))
-// })
+})

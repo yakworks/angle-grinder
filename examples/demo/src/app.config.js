@@ -15,15 +15,16 @@ app.run(function($rootScope, $state, $stateParams) {
 
   let userInfo = {
     id: '123',
-    name: 'Peter',
-    job: 'ng-Dev',
+    name: 'Peter Schiff',
+    job: 'Bot Wrangler',
     picture: 'app/img/user/02.jpg'
   }
   _.merge( appState.user, userInfo)
 
   let defaultLayout = {
     isNavbarFixed: true, // true if you want to initialize the template with fixed header
-    isSidebarFixed: true, // true if you want to initialize the template with fixed sidebar
+    isSidebarFixed: true, // DEPRECATED true if you want to initialize the template with fixed sidebar
+    isSidenavFixed: true, // true if you want to initialize the template with fixed sidebar
     isFooterFixed: false, // true if you want to initialize the template with fixed footer
     theme: 'light', // indicate the theme chosen for your project
     logo: 'assets/images/yak-logo1.png', // relative path of the project logo

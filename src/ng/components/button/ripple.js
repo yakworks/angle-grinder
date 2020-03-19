@@ -19,14 +19,14 @@ export default angular
 
             // Prepend ripple to element
             this.appendChild(ripple, this.firstChild)
-
-            // Set ripple size
-            if (!ripple.offsetHeight && !ripple.offsetWidth) {
-              size = Math.max(element[0].offsetWidth, element[0].offsetHeight)
-              ripple.style.width = size + 'px'
-              ripple.style.height = size + 'px'
-            }
           }
+          // Set ripple size
+          if (!ripple.offsetHeight && !ripple.offsetWidth) {
+            size = Math.max(element[0].offsetWidth, element[0].offsetHeight)
+            ripple.style.width = size + 'px'
+            ripple.style.height = size + 'px'
+          }
+          // ripple.style.display = 'block'
 
           // Remove animation effect
           ripple.className = ripple.className.replace(/ ?(animate)/g, '')
@@ -69,7 +69,9 @@ export default angular
 
           // Add animation effect
           ripple.className += ' animate'
+          // ripple.style.display = 'none'
         }
+        // ripple.style.display = 'none'
 
         var eventType = ('ontouchstart' in document) ? 'touchstart' : 'mousedown'
         element.on(eventType, func)

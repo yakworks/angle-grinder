@@ -11,8 +11,8 @@ class controller {
 }
 
 const template = `
-<h1 class="is-title">Basic Example</h1>
 <div class="example-section mb-4">
+  <h4>Basic Default Example</h4>
   <div class="example is-vertical">
     <div class="example-component">
       <button-demo></button-demo>
