@@ -3,7 +3,6 @@ import colorsStatesModule from './colors-states'
 import './styles.scss'
 
 const template = `
-<demo-title-crumb></demo-title-crumb>
 <div class="buttonDemoIndex">
   <button-example></button-example>
   <button-colors-example></button-colors-example>

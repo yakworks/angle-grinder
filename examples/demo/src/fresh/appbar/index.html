@@ -16,7 +16,7 @@
         </div>
       </a>
       <div class="toolbar-item">
-        <div class="toolbar-title">Title</div>
+        <div class="toolbar-title">{{$ctrl.title}}</div>
       </div>
       <!-- <a class="toolbar-item" href="https://cssninja.io" >
         <img src="assets/images/logos/fresh-alt.svg" alt="" width="112" height="28">
@@ -35,14 +35,13 @@
       </div>
 
       <div class="toolbar-end">
-        <ag-button icon="fa-comment-o" button-class="is-rounded"></ag-button>
-        <ag-button icon="fa-bell-o" button-class="is-rounded"></ag-button>
-        <ag-button icon="fa-expand" button-class="is-rounded"></ag-button>
-        <button class="button is-icon is-rounded pl-0 pr-0">
+        <ag-button icon="fa-comment-o"></ag-button>
+        <ag-button icon="fa-bell-o"></ag-button>
+        <ag-button icon="fa-expand"></ag-button>
+        <button class="button is-icon is-rounded pl-0 pr-0" v-pressable>
           <letter-icon data="AG" box="circle" char-count="2" size="xs"></letter-icon>
         </button>
-        <ag-button icon="fa-ellipsis-v" button-class="is-rounded"></ag-button>
-        </div>
+        <ag-button icon="fa-ellipsis-v"></ag-button>
       </div>
     </div>
   </div>

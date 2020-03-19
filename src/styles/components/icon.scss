@@ -1,5 +1,16 @@
 @import "~bulma/sass/elements/icon.sass";
 
+@mixin iconSize ($icon-size) {
+  height: $icon-size;
+  width: $icon-size;
+
+  i.fa, i.mdi {
+    padding: 1px;
+    font-size: calc(#{$icon-size} - 2px); //26px
+    text-align: center;
+  }
+}
+
 // change default fa and mdi font sizes
 .icon {
   i.fa, i.mdi {

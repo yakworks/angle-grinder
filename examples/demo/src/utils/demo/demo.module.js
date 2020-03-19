@@ -1,6 +1,7 @@
 // Import Resources
 import 'ng-showdown' //markdown
-import 'angular-highlightjs'; //source code highlighter
+//import 'angular-highlightjs'; //source code highlighter
+import highlightjsModule from './highlightjs.component'; //source code highlighter
 //import 'highlight.js/styles/darkula.css'; // try darkula too
 import 'highlight.js/styles/solarized-light.css';
 //import 'highlight.js/styles/atom-one-light.css';
@@ -14,7 +15,7 @@ import './demo.scss';
 export default angular
   .module('module.demo.snippets', [
     'ng-showdown',
-    'hljs'
+    highlightjsModule
   ])
   .component('demoSnippet', demoSnippet)
   .component('demoTitleCrumb', demoTitleCrumb)

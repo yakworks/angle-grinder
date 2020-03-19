@@ -47,6 +47,7 @@
     }
     pre {
       padding: 0;
+      margin: 0;
       code {
         overflow: hidden;
         max-height: 600px;
@@ -108,8 +109,13 @@
 
   background-color: #fffdf8;
 
+  code.hljs {
+    max-height: 300px;
+  }
+
   pre {
     padding: 0;
+    margin: 0;
     border: none;
     background-color: transparent;
   }

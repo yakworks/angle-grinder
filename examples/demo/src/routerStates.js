@@ -134,7 +134,7 @@ const componentsStates = {
   // },
   children: [
     {
-      name: 'button',
+      name: 'buttons',
       component: 'buttonDemoIndex'
     },
     {

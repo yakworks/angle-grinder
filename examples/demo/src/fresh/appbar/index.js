@@ -12,6 +12,10 @@ class controller {
     toggleSidenav()
   }
 
+  get title() {
+    return appState.title
+  }
+
   // $postLink() {
   // }
 

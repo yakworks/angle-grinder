@@ -25,25 +25,28 @@ $azure: #5B9BD1;
 $beige: #D2BD8E;
 $bricky: #894550;
 
-// variable aliases
-$size-sm: 0.75rem !default // 12px
+$size-small: 0.75rem !default // 12px
 $size-14: 0.875rem !default // 14px
-$size-normal: 1rem !default // 16px
-$size-md: 1.25rem !default // 20px
-$size-lg: 1.5rem !default // 24pxpx
+$size-16: 1rem !default // 16px
+$size-normal: $size-14 !default // used in controls mixin, etc..
+$size-default: $size-16 !default // 16px
+$size-medium: 1.25rem !default // 20px
+$size-large: 1.5rem !default // 24pxpx
 
 $text-color: $text !default;
 $text-dark: $text-strong !default;
 
 // base material item sizes and spacing
-$icon-dimensions: 1.5rem !default;
+$icon-dimensions: 1.5rem !default; //24px
 
+// items
 $item-height: 3.5rem !default // 56px
 $item-min-height: 3rem !default // 48px
 // $item-button-height is for buttons, checks, etc
 $item-control-height: 2.25rem !default // 36px
 $item-margin: 1rem !default //16px
 
+// toolbars
 $bar-breakpoint-height: 3.5rem !default // 56px for mobile and tablet
 $bar-height: 4rem !default // 64px for desktop+
 $bar-dense-height: 3rem !default // 48px when is-dense is set
@@ -53,11 +56,11 @@ $bar-dense-height: 3rem !default // 48px when is-dense is set
 //------------------------------------------
 $body-background-color: $scheme-main !default
 // goofy name this is what sets the size of 1rem unit on html css, should not change from 16px
-$body-size: 16px !default // this is the base size and is what 1rem is equal to.
+$body-size: 16px !default // bad name, this is the html base size and is what 1rem is equal to.
 $body-family: $family-primary !default
 $body-color: $text !default
 // $body-font-size: 1em !default;
-$body-font-size: $size-14 !default
+$body-font-size: $size-14 !default // the default body size .875rem=14px
 $body-color: $text !default;
 $body-weight: $weight-normal !default;
 $body-line-height: 1.5 !default;
@@ -80,20 +83,14 @@ $input-icon-color: $border !default
 $input-icon-active-color: $text !default
 $input-radius: $radius !default
 
-//**** bulma/elements/button.sass  ****/
-//---------------------------
-// Button without is- specifier
-$button-color: $text-strong !default
-$button-background-color: $grey-lighter !default
-// $button-family: false !default
-$button-border-color: $grey-lighter !default
-//$button-border-width: $control-border-width !default
-// make the shadow bigger to sync with BS4
-$button-focus-box-shadow-size: 0 0 0 0.2rem !default
-//$button-focus-color: $grey-light !default
-$button-focus-border-color: $grey-light !default
-$button-focus-box-shadow-color: $grey-light !default
-
+/* ------ bulma/elements/button.sass  ----- */
+// These are needed here so that we can use them to set the BS4 defaults
+$button-color: $text-strong !default;
+//$button-background-color: $scheme-main !default;
+$button-background-color: $light !default;
+$button-border-color: $border !default
+//$button-focus-box-shadow-size: 0 0 0 0.125em !default
+$button-focus-box-shadow-size: 0 0 0 0.2rem !default; // make the shadow bigger to sync with BS4
 
 //**** OUR Custom Variables ****/
 //---------------------------

@@ -5,8 +5,8 @@ toolbar overrides
 //$toolbar-item-color: #999;
 $toolbar-icon-color: $toolbar-item-color !default;
 $toolbar-fixed-a-color: #444F60 !default;
-$toolbar-icon-button-size: 48px !default;
-$toolbar-icon-size: 22px !default;
+$toolbar-icon-button-size: 3rem !default;
+//$toolbar-icon-size: 22px !default;
 
 //toolbar
 .appbar.toolbar{
@@ -21,30 +21,25 @@ $toolbar-icon-size: 22px !default;
 
   // change button defaults to be transparent
   .button {
-    color: $toolbar-item-color;
-    box-shadow: none; //make sure its flat
-    background-color: inherit; //remove color
-    border-color: transparent;
-
-    &.is-icon {
+    &.is-icon-button {
       width: $toolbar-icon-button-size;
       height: $toolbar-icon-button-size;
     }
 
-    i {
-      color: $toolbar-icon-color;
-      height: $toolbar-icon-size;
-      width: $toolbar-icon-size;
-      &.fa {
-        padding: 1px;
-        font-size: $toolbar-icon-size - 2px;
-        text-align: center;
-      }
-    }
+    // i {
+    //   color: $toolbar-icon-color;
+    //   height: $toolbar-icon-size;
+    //   width: $toolbar-icon-size;
+    //   &.fa {
+    //     padding: 1px;
+    //     font-size: $toolbar-icon-size - 2px;
+    //     text-align: center;
+    //   }
+    // }
   }
 
   .toolbar-title {
-    font-size: $size-lg
+    font-size: $size-large
   }
 
   // Responsive menu icon

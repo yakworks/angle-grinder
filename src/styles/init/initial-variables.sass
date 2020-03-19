@@ -45,10 +45,14 @@ $purple:       hsl(271, 100%, 71%) !default
 $red:          #d9534f !default
 
 // Typography
-
-$family-sans-serif: BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif !default
-$family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !default
-$render-mode: optimizeLegibility !default
+$family-sans-serif:  -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif !default
+$family-monospace:   SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !default
+$render-mode:        optimizeLegibility !default
+// from BS4
+// $font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
+// $font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !default;
+// $font-family-base: $font-family-sans-serif !default;
+$font-family-base: $family-sans-serif !default;
 
 $size-1: 3rem !default
 $size-2: 2.5rem !default
@@ -99,7 +103,3 @@ $speed: 86ms !default
 $variable-columns: true !default
 
 // ********** END bulma/sass/utilities/initial-variables.sass
-
-/* -----------------------------
-// OVERIDES for Bulma's derived-variables.sass
-// ------------------------------
