@@ -16,6 +16,7 @@ import './directives/agReloadGrid'
 import './directives/agResetSortGrid'
 import './directives/gridCrud'
 import './directives/search'
+import './directives/toolbar'
 
 import './directives/agGrid/gridz'
 import './directives/agGrid/agGridz'
