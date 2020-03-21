@@ -26,7 +26,8 @@
     "parcel": "parcel examples/simple/index.html",
     "parcel:build": "parcel build examples/simple/index.html",
     "jest": "jest",
-    "svelte-dev": "webpack-dev-server --config examples/svelte/webpack.config.js --content-base examples/svelte"
+    "svelte-dev": "webpack-dev-server --config examples/svelte/webpack.config.js --content-base examples/svelte",
+    "precommit": "eslint src/ --fix && eslint examples/demo/ --fix"
   },
   "dependencies": {
     "@popperjs/core": "^2.0.6",
