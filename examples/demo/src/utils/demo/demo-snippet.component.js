@@ -1,4 +1,4 @@
-let template = `
+const template = `
 <uib-tabset class="tabbable" active="active">
   <uib-tab index="0" heading="html" ng-if="$ctrl.rawHtml">
     <div hljs hljs-source="$ctrl.rawHtml" hljs-language="html"></div>
@@ -32,4 +32,4 @@ export default {
   },
   controller,
   template
-};
+}

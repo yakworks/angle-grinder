@@ -10,6 +10,6 @@ const template = `
 `
 // export module name
 export default angular
-  .module('ag.demo.buttonDemo-all', [ exampleModule, colorsStatesModule])
+  .module('ag.demo.buttonDemo-all', [exampleModule, colorsStatesModule])
   .component('buttonDemoIndex', { template })
   .name

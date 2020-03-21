@@ -28,6 +28,11 @@
     "jest": "jest",
     "svelte-dev": "webpack-dev-server --config examples/svelte/webpack.config.js --content-base examples/svelte"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn lint-fix"
+    }
+  },
   "dependencies": {
     "@popperjs/core": "^2.0.6",
     "Select2": "^3.5.7",
@@ -106,6 +111,7 @@
     "file-loader": "^5.0.2",
     "html-webpack-exclude-assets-plugin": "^0.0.7",
     "html-webpack-plugin": "^3.2.0",
+    "husky": "^4.2.3",
     "inject-imports-loader": "^1.0.2",
     "jsdoc-to-markdown": "^5.0.3",
     "jsdom": "^15.2.1",

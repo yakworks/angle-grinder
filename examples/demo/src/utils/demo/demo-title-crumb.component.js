@@ -5,7 +5,7 @@ class controller {
     return appState.title
   }
 }
-let template = `
+const template = `
 <div class="breadcrumb-wrapper">
   <h4 class="mainTitle no-margin">{{$ctrl.title}}</h4>
   <div ncy-breadcrumb class="pull-right"></div>
@@ -16,5 +16,4 @@ export default {
   transclude: true,
   controller,
   template
-};
-
+}

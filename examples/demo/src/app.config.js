@@ -13,15 +13,15 @@ app.run(function($rootScope, $state, $stateParams) {
   appState.$state = $state
   $rootScope.$stateParams = $stateParams
 
-  let userInfo = {
+  const userInfo = {
     id: '123',
     name: 'Peter Schiff',
     job: 'Bot Wrangler',
     picture: 'app/img/user/02.jpg'
   }
-  _.merge( appState.user, userInfo)
+  _.merge(appState.user, userInfo)
 
-  let defaultLayout = {
+  const defaultLayout = {
     isNavbarFixed: true, // true if you want to initialize the template with fixed header
     isSidebarFixed: true, // DEPRECATED true if you want to initialize the template with fixed sidebar
     isSidenavFixed: true, // true if you want to initialize the template with fixed sidebar
@@ -32,20 +32,20 @@ app.run(function($rootScope, $state, $stateParams) {
     logoCollapsed: 'assets/images/yak-white.png', // relative path of the collapsed logo
     logoCollapsedHeight: 23 // relative path of the collapsed logo
   }
-  _.merge( appState.layout, defaultLayout)
+  _.merge(appState.layout, defaultLayout)
 
-  let info = {
+  const info = {
     name: 'Yak Works Template', // name of your project
     author: 'YakWorks', // author's name or company name
     description: 'Angular Admin Template', // brief description
     version: '1.0', // current version
-    year: ((new Date()).getFullYear()), // automatic current year (for copyright information)
+    year: ((new Date()).getFullYear()) // automatic current year (for copyright information)
   }
-  _.merge( appState.info, info)
+  _.merge(appState.info, info)
 
   // GLOBAL APP SCOPE
   // set below basic information
-  let appConfig = {
+  const appConfig = {
     name: 'Yak Works Template', // name of your project
     author: 'YakWorks', // author's name or company name
     description: 'Angular Bootstrap Admin Template', // brief description

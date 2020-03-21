@@ -40,14 +40,14 @@ class SelectsCtrl {
   }
 }
 
-export default angular.module('demo.horizonal-sandbox',[])
+export default angular.module('demo.horizonal-sandbox', [])
   // .component('formHorizontalBoot', {
   //   controller: FormCtrl,
   //   controllerAs: 'vm',
   //   template: require('./form-horizontal-boot.comp.html')
   // })
   .component('basicInputsExample', {
-    //controller: FormCtrl,
+    // controller: FormCtrl,
     template: require('./basic-inputs.comp.html')
   })
   .component('basicSelectsExample', {
@@ -55,7 +55,7 @@ export default angular.module('demo.horizonal-sandbox',[])
     template: require('./basic-selects.comp.html')
   })
   .component('basicChecksExample', {
-    //controller: FormCtrl,
+    // controller: FormCtrl,
     template: require('./basic-checks.comp.html')
   })
   .name

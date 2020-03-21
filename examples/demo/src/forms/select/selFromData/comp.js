@@ -1,7 +1,7 @@
-import template from './comp.html';
+import template from './comp.html'
 
 class controller {
-  vm = { selected: {id: 2}} //set default value
+  vm = { selected: { id: 2 } } // set default value
   selectData = [
     { id: 1, name: 'Option 1' },
     { id: 2, name: 'Option 2' },
@@ -18,4 +18,4 @@ class controller {
 
 const COMP = 'demoSelDataInput'
 export default angular.module(`ag.demo.${COMP}`, [])
-  .component(COMP, { template, controller}).name
+  .component(COMP, { template, controller }).name

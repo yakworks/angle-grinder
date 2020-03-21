@@ -1,8 +1,8 @@
 import compDemoModule from './agInput'
 // Import Raw Files
-import htmlRaw from '!raw-loader!./agInput.html';
-import jsRaw from '!raw-loader!./agInput.js';
-import mdRaw from '!raw-loader!./docs.md';
+import htmlRaw from '!raw-loader!./agInput.html'
+import jsRaw from '!raw-loader!./agInput.js'
+import mdRaw from '!raw-loader!./docs.md'
 
 class controller {
   html = htmlRaw

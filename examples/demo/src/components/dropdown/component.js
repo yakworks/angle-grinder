@@ -1,4 +1,4 @@
-import template from './component.html';
+import template from './component.html'
 import Swal from 'sweetalert2'
 
 class controller {
@@ -7,17 +7,19 @@ class controller {
       display: '<strong>Main Action</strong>',
       action: () => Swal.fire('a special event')
     },
-    { display: 'Active action', class: 'active',
+    {
+      display: 'Active action',
+      class: 'active',
       anyExtraInfo: 'can have any extra info needed when selected'
     },
-    { divider: true},
-    { display: 'Disabled link', class: 'disabled'},
-    { display: 'Separated link'},
-    { display: 'This will not be added', class: 'hidden'}
+    { divider: true },
+    { display: 'Disabled link', class: 'disabled' },
+    { display: 'Separated link' },
+    { display: 'This will not be added', class: 'hidden' }
   ]
 
-  menuItemClick = function(menuItem, event){
-    console.log('menuItemClick params', { menuItem, event})
+  menuItemClick = function(menuItem, event) {
+    console.log('menuItemClick params', { menuItem, event })
     Swal.fire(
       `${menuItem.display} item clicked `,
       `<pre><code class="json">${JSON.stringify(menuItem, null, 2)}</code></pre>`
@@ -28,4 +30,4 @@ class controller {
 export default angular
   .module('ag.demo.dropdownDemo', [])
   .component('dropdownDemo', { template, controller })
-  .name;
+  .name

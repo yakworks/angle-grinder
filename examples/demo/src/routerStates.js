@@ -160,5 +160,5 @@ export const fresh = {
   children: [dashStates, componentsStates, formStates, uiStates, gridsStates]
 }
 
-export default {packet, fresh}
+export default { packet, fresh }
 // export default appRoot

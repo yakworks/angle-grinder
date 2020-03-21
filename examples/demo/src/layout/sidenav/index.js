@@ -1,7 +1,6 @@
 import appState from 'angle-grinder/src/tools/AppState'
 
 class controller {
-
   constructor($element) {
     this.$element = $element
     this.$state = appState.$state
@@ -14,16 +13,15 @@ class controller {
   //   super.validate()
   // }
 
-  $onChanges(changesObj){
-    console.log("sidebar $onChanges(changesObj)", changesObj)
+  $onChanges(changesObj) {
+    console.log('sidebar $onChanges(changesObj)', changesObj)
   }
-
 }
 
-export default angular.module('app.sidebar',[])
+export default angular.module('app.sidebar', [])
   .component('appSidebar', {
     controller,
-    template: require('./index.html'),
+    template: require('./index.html')
     // require: {
     //   ngModelCtrl: 'ngModel',
     // },

@@ -12,14 +12,14 @@ app.config(['agDateFilterProvider', provider => // set default date format
   provider.setDefaultFormat('MM/DD/YY H:mm a')
 ])
 
-app.config(['agCurrencyFilterProvider', function (provider) {
+app.config(['agCurrencyFilterProvider', function(provider) {
   // set default currency format
   // provider.setDefaultFormat('<%= amount %> <%= symbol %>')
   // return provider.setDefaultSymbol('GBP')
 }
 ])
 
-app.run(function ($templateCache) {
+app.run(function($templateCache) {
   $templateCache.put('exampleGridSearchForm.html', require('./templates/searchForm.html'))
   $templateCache.put('/simpleDialog.html', require('./simpleDialog.html'))
 })
@@ -32,38 +32,38 @@ export function exampleGridOptions() {
     sorttype: 'int',
     align: 'right'
   },
-    {
-      name: 'customer.name',
-      label: 'Customer',
-      formatter: 'editActionLink'
-    },
-    {
-      name: 'invoiceDate',
-      label: 'Date',
-      width: 100,
-      formatter: 'date'
-    },
-    {
-      name: 'amount',
-      label: 'Amount',
-      width: 80,
-      formatter: 'currency'
-    },
-    {
-      name: 'note',
-      label: 'Note'
-    },
-    {
-      name: 'complete',
-      label: 'Complete',
-      width: 80,
-      fixed: true,
-      align: 'center',
-      formatter: 'okIcon'
-    }
+  {
+    name: 'customer.name',
+    label: 'Customer',
+    formatter: 'editActionLink'
+  },
+  {
+    name: 'invoiceDate',
+    label: 'Date',
+    width: 100,
+    formatter: 'date'
+  },
+  {
+    name: 'amount',
+    label: 'Amount',
+    width: 80,
+    formatter: 'currency'
+  },
+  {
+    name: 'note',
+    label: 'Note'
+  },
+  {
+    name: 'complete',
+    label: 'Complete',
+    width: 80,
+    fixed: true,
+    align: 'center',
+    formatter: 'okIcon'
+  }
   ]
 
-  return function (options) {
+  return function(options) {
     if (options == null) {
       options = {}
     }
@@ -78,4 +78,3 @@ export function exampleGridOptions() {
 }
 
 app.factory('exampleGridOptions', exampleGridOptions)
-
