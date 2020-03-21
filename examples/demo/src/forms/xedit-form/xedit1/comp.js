@@ -1,15 +1,16 @@
-import template from './comp.html';
+import template from './comp.html'
 
 class controller {
   org = {
     phone: '888-555-1212',
-    city: 'Chicago',
+    city: 'Chicago'
   }
+
   roles = [
-    { id: "admin", name: "admin" },
-    { id: "user", name: "user" },
-    { id: "guest", name: "guest" },
-    { id: "moderator", name: "moderator" }
+    { id: 'admin', name: 'admin' },
+    { id: 'user', name: 'user' },
+    { id: 'guest', name: 'guest' },
+    { id: 'moderator', name: 'moderator' }
   ]
 
   normalSelectOptions = [
@@ -43,4 +44,4 @@ export default angular
     template,
     controller
   })
-  .name;
+  .name

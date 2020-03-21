@@ -1,13 +1,13 @@
 import compDemoModule from './comp'
 
-import htmlRaw from '!raw-loader!./comp.html';
-import jsRaw from '!raw-loader!./comp.js';
-//import mdRaw from '!raw-loader!./docs.md';
+import htmlRaw from '!raw-loader!./comp.html'
+import jsRaw from '!raw-loader!./comp.js'
+// import mdRaw from '!raw-loader!./docs.md';
 
 class controller {
   rawHtml = htmlRaw
   rawJs = jsRaw
-  //rawMd = mdRaw
+  // rawMd = mdRaw
 }
 
 const template = `

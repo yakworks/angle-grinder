@@ -7,16 +7,16 @@ class controller {
     this.rootScope = $rootScope
   }
 
-  toggleSidenav(){
+  toggleSidenav() {
     this.appState.sidenav.open = !this.appState.sidenav.open
   }
-  toggleRightSidebar(){
+
+  toggleRightSidebar() {
     this.rootScope.toggle('off-sidebar')
   }
-
 }
 
-export default angular.module('app.appbar',[])
+export default angular.module('app.appbar', [])
   .component('appBar', {
     controller,
     controllerAs: '$appBarCtrl',

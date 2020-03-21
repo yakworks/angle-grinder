@@ -4,17 +4,16 @@ import appState from 'angle-grinder/src/tools/AppState'
  * Main Application Controller
  */
 class AppCtrl {
-
-  constructor($rootScope, $scope, $window, $document, $timeout, Fullscreen, cfpLoadingBar, $transitions){
+  constructor($rootScope, $scope, $window, $document, $timeout, Fullscreen, cfpLoadingBar, $transitions) {
     this.$rootScope = $rootScope
     this.$scope = $scope
-    //this.$win = $($window)
-    //this.$body = $('body')
+    // this.$win = $($window)
+    // this.$body = $('body')
     this.layout = appState.layout
 
     var $win = $($window); var $body = $('body')
 
-    //this.routerTransitionsEvents()
+    // this.routerTransitionsEvents()
     // the ui-router events, see https://stackoverflow.com/a/43553641
     $transitions.onStart({}, function(trans) {
       // start loading bar on stateChangeStart
@@ -120,7 +119,7 @@ class AppCtrl {
       $scope.windowHeight = newValue.h
       $scope.windowWidth = newValue.w
 
-      //Desktop
+      // Desktop
       if (newValue.w >= 1024) {
         appState.layout.isDektop = true
         appState.layout.isSidebarFixed = true
@@ -169,7 +168,7 @@ class AppCtrl {
     })()
   }
 
-  toggleSidenav(){
+  toggleSidenav() {
     appState.sidenav.open = !appState.sidenav.open
   }
 }

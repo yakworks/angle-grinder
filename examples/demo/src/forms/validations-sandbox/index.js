@@ -5,10 +5,10 @@ class ValidationsCtrl {
   menuDisplay = 'Choose an action'
 
   menuItems = [
-      { display: '<strong>Action</strong>', action: () => Swal.fire('something special') },
-      { display: 'Another action'},
-      { divider: true},
-      { display: 'Separated link'}
+    { display: '<strong>Action</strong>', action: () => Swal.fire('something special') },
+    { display: 'Another action' },
+    { divider: true },
+    { display: 'Separated link' }
   ]
 
   vm = {}
@@ -17,20 +17,20 @@ class ValidationsCtrl {
     this.serverErrorsService = serverErrorsService
   }
 
-  menuItemClick = function(menuItem, e){
-    console.log('menuItemClick', { menuItem, e})
+  menuItemClick = function(menuItem, e) {
+    console.log('menuItemClick', { menuItem, e })
   }
 
   mockServerValidation(model) {
-    if(model.name === 'bill'){
+    if (model.name === 'bill') {
       return {
         status: 422,
-        data:{
+        data: {
           errors: {
             org: {
-              name: "no more bills in Org"
+              name: 'no more bills in Org'
             },
-            name: "no more bills"
+            name: 'no more bills'
           }
         }
       }
@@ -39,9 +39,9 @@ class ValidationsCtrl {
     // return {status: 422, data:{errors: {org: {name: "An Error message from server on field name, with value: " + val}}}}
   }
 
-  save(form){
-    let errors = this.mockServerValidation(this.vm)
-    if(errors){
+  save(form) {
+    const errors = this.mockServerValidation(this.vm)
+    if (errors) {
       // pass in org resource to use drill into errors
       // this.serverErrorsService.setErrors(form, errors, "org")
       this.serverErrorsService.setErrors(form, errors)
@@ -49,7 +49,7 @@ class ValidationsCtrl {
   }
 }
 
-export default angular.module('demo.validationsExample',[])
+export default angular.module('demo.validationsExample', [])
   .component('validationsExample', {
     controller: ValidationsCtrl,
     template: require('./validations.comp.html')

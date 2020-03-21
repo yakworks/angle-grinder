@@ -1,6 +1,6 @@
 import basicModule from './basic'
 import selFromDataModule from './selFromData'
-//import agSelectModule from './selects'
+// import agSelectModule from './selects'
 import './styles.scss'
 
 const template = `
@@ -14,8 +14,8 @@ const template = `
 export default angular
   .module('ag.demo.sel2-all', [
     basicModule,
-    selFromDataModule,
-    //agSelectModule
+    selFromDataModule
+    // agSelectModule
   ])
   .component('sel2DemoIndex', { template })
   .name

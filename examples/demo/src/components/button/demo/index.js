@@ -1,8 +1,8 @@
 import compDemoModule from './component'
 // Import Raw Files
-import htmlRaw from '!raw-loader!./component.html';
-import jsRaw from '!raw-loader!./component.js';
-import mdRaw from '!raw-loader!./docs.md';
+import htmlRaw from '!raw-loader!./component.html'
+import jsRaw from '!raw-loader!./component.js'
+import mdRaw from '!raw-loader!./docs.md'
 
 class controller {
   html = htmlRaw

@@ -1,14 +1,13 @@
 import appState from 'angle-grinder/src/tools/AppState'
-import {toggleSidenav} from '../sidenav'
+import { toggleSidenav } from '../sidenav'
 
 class controller {
-
   constructor($element) {
     this.$element = $element
     this.appState = appState
   }
 
-  toggleSidenav(){
+  toggleSidenav() {
     toggleSidenav()
   }
 
@@ -18,12 +17,11 @@ class controller {
 
   // $postLink() {
   // }
-
 }
 
-export default angular.module('demo.fresh.appbar',[])
+export default angular.module('demo.fresh.appbar', [])
   .component('freshAppbar', {
     controller,
-    template: require('./index.html'),
+    template: require('./index.html')
   })
   .name

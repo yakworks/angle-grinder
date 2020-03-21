@@ -43,7 +43,7 @@ export default class Alerts {
   error(text) { return this.wrapMessage(text, 'error') }
 
   setTimeout(delay, type) {
-    if (     !_.isNil(type)) {
+    if (!_.isNil(type)) {
       return this.alertsOptions[type].timeOut = delay
     } else {
       return this.alertsOptions.defaultOptions.timeOut = delay

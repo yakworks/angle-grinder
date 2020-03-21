@@ -9,23 +9,23 @@ export default angular.module('simple-sidebar', [])
       items: '=',
       open: '=',
       title: '=',
-      settings: '=',
+      settings: '='
     },
     template: require('./simple-sidenav.html'),
-    link: function (scope, element, attrs) {
-      scope.slide;
-      if (scope.open ) {
-        scope.slide = 'in';
+    link: function(scope, element, attrs) {
+      scope.slide
+      if (scope.open) {
+        scope.slide = 'in'
       }
 
-      scope.openSidebar = function () {
+      scope.openSidebar = function() {
         scope.open = true
-        scope.slide = 'in';
+        scope.slide = 'in'
       }
 
-      scope.closeSidebar = function () {
+      scope.closeSidebar = function() {
         scope.open = false
-        scope.slide = 'out';
+        scope.slide = 'out'
       }
     }
   }))

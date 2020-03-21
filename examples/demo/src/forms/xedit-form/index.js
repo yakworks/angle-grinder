@@ -1,5 +1,5 @@
 import xedit1Module from './xedit1'
-//import agSelectModule from './selects'
+// import agSelectModule from './selects'
 import './styles.scss'
 
 const template = `
@@ -11,8 +11,8 @@ const template = `
 // export module name
 export default angular
   .module('ag.demo.xedit-all', [
-    xedit1Module,
-    //agSelectModule
+    xedit1Module
+    // agSelectModule
   ])
   .component('xeditDemoIndex', { template })
   .name

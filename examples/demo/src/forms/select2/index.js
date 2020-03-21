@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import idxtemplate from './index.html';
+import idxtemplate from './index.html'
 
 function formatResult(item) { return item.id + ' - ' + item.name }
 
@@ -55,10 +55,10 @@ class Select2DataCtrl extends Select2Ctrl {
     selInputMulti: [
       { id: 1, name: 'Option 1' }
     ],
-    selInput:{ id: 2 },
+    selInput: { id: 2 },
     useDataObject: {
       id: 3,
-      name: "Option 3"
+      name: 'Option 3'
     },
     selSelectMutiple: [
       'bar2'
@@ -84,14 +84,14 @@ class Select2DataCtrl extends Select2Ctrl {
 //   })
 
 export default angular
-.module('ag.demo.select2-all', [])
-.component('select2Comps', {
-  controller: Select2Ctrl,
-  template: require('./select2.comp.html')
-})
-.component('select2CompsData', {
-  controller: Select2DataCtrl,
-  template: require('./select2.comp.html')
-})
-.component('select2DemoIndex', { template: idxtemplate })
-.name
+  .module('ag.demo.select2-all', [])
+  .component('select2Comps', {
+    controller: Select2Ctrl,
+    template: require('./select2.comp.html')
+  })
+  .component('select2CompsData', {
+    controller: Select2DataCtrl,
+    template: require('./select2.comp.html')
+  })
+  .component('select2DemoIndex', { template: idxtemplate })
+  .name

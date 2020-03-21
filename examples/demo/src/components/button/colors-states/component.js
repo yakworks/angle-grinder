@@ -1,4 +1,4 @@
-import template from './component.html';
+import template from './component.html'
 import toast from '~/tools/toast'
 
 class ClrController {
@@ -9,14 +9,14 @@ class ClrController {
     this.$timeout = $timeout
   }
 
-  btnClick = function(event){
-    console.log("btnClick event ", event)
-    toast.success("It is done")
+  btnClick = function(event) {
+    console.log('btnClick event ', event)
+    toast.success('It is done')
   }
 
   toggleLoading = (event) => {
-    //console.log("toggleLoading this", this)
-    console.log("startLoading event ", event)
+    // console.log("toggleLoading this", this)
+    console.log('startLoading event ', event)
     this.loading = !this.loading
     this.$timeout(() => {
       this.loading = !this.loading
@@ -30,4 +30,4 @@ export default angular
     template: template,
     controller: ClrController
   })
-  .name;
+  .name

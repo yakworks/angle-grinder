@@ -9,6 +9,6 @@ const template = `
 `
 // export module name
 export default angular
-  .module('ag.demo.agInputs-all', [ exampleModule])
+  .module('ag.demo.agInputs-all', [exampleModule])
   .component('agInputDemoIndex', { template })
   .name
