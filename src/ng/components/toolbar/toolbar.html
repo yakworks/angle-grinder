@@ -1,0 +1,18 @@
+<button type="button" class="button {{btnCtrl.btnCls}}"
+  ng-class="btnCtrl.ngClass"
+  ng-click="btnCtrl.buttonClick($event)"
+  ng-disabled="btnCtrl.isDisabled" ag-ripple>
+  <!-- <span> -->
+    <span ng-if="btnCtrl.iconLeftClass" class="icon is-first-child">
+      <i class="{{btnCtrl.iconLeftClass}}"></i>
+    </span>
+    <span ng-if="btnCtrl.hasTranscluded" ng-transclude></span>
+    <span class="ag-ripple animate"></span>
+    <span ng-if="btnCtrl.iconSoloClass" class="icon is-solo">
+      <i class="{{btnCtrl.iconSoloClass}}"></i>
+    </span>
+    <span ng-if="btnCtrl.iconRightClass" class="icon is-last-child">
+      <i class="{{btnCtrl.iconRightClass}}"></i>
+    </span>
+  <!-- </span> -->
+</button>

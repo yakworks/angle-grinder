@@ -7,7 +7,8 @@ import fullscreen from './utils/fullscreen'
 import truncate_filters from './utils/truncate.filters'
 
 //app layout items
-import layoutModule from './layout'
+import packetLayoutModule from './packet'
+import freshLayoutModule from './fresh'
 
 // demo/examples/source panels
 import snippetsModule from './utils/demo/demo.module'
@@ -17,16 +18,16 @@ import componentsModule from './components'
 import formsModule from './forms'
 
 // fresh sidebar
-import freshModule from './fresh'
+
 
 export default angular.module('app', [
   agModule,
-  layoutModule,
+  packetLayoutModule,
+  freshLayoutModule,
   snippetsModule,
   componentsModule,
   formsModule,
   fullscreen,
   truncate_filters,
   ngTranslateModule, //remove this, only here to get demo working
-  freshModule
 ]).name

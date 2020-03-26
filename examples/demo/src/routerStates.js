@@ -147,7 +147,7 @@ const componentsStates = {
 export const packet = {
   name: 'packet',
   url: '/packet',
-  template: require('./app.html'),
+  template: require('./packet/index.html'),
   abstract: true,
   children: [dashStates, componentsStates, formStates, uiStates, gridsStates]
 }
