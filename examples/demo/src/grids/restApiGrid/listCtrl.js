@@ -3,9 +3,10 @@ import { expose } from 'angle-grinder/src/ng/utils/ngHelpers'
 
 /* @ngInject */
 export default class ListCtrl {
-  constructor($scope, exampleGridOptions, resourceBuilder, DialogCrudCtrlMixin) {
+  constructor($scope, exampleGridOptions, ConfigCache, resourceBuilder, DialogCrudCtrlMixin) {
     this.$scope = $scope
     this.exampleGridOptions = exampleGridOptions
+    this.ConfigCache = ConfigCache
     this.resourceBuilder = resourceBuilder
     this.DialogCrudCtrlMixin = DialogCrudCtrlMixin
   }
@@ -22,9 +23,13 @@ export default class ListCtrl {
     this.$scope.otherGridOptions = this.exampleGridOptions({ data: this.data, pager: false, datatype: 'local' })
     const Invoices = this.resourceBuilder('/invoices', 'invoice', '/api')
 
-    this.$scope.gridOptions = this.exampleGridOptions({
+    /*this.$scope.gridOptions = this.exampleGridOptions({
       path: '/api/invoices'
-    })
+    })*/
+    const updateGridOptions = (gridOptions) => {
+      return {...gridOptions, path: '/api/invoices'}
+    }
+    this.$scope.gridOptions = this.ConfigCache.get('/api/invoices/gridOptions', updateGridOptions)
 
     this.DialogCrudCtrlMixin(this.$scope, {
       Resource: Invoices,
@@ -34,7 +39,7 @@ export default class ListCtrl {
     )
   }
 
-  getSelectedRowsData() {
+/*  getSelectedRowsData() {
     return this.$scope.exampleGridOptions.getSelectedRows()
-  }
+  }*/
 }
