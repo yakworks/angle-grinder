@@ -3,8 +3,8 @@ import commonModule from './commonModule'
 
 var app = angular.module(commonModule)
 
-app.provider('ConfigCache', function () {
-  this.$get = ['$cacheFactory', '$http', 'pathWithContext', '$q', '$timeout', function ($cacheFactory, $http, pathWithContext, $q,) {
+app.provider('ConfigCache', function() {
+  this.$get = ['$cacheFactory', '$http', 'pathWithContext', '$q', '$timeout', function($cacheFactory, $http, pathWithContext, $q) {
     const cache = $cacheFactory('configsFromServer')
     const urls = []
     const hasUrl = (url) => {
@@ -12,15 +12,15 @@ app.provider('ConfigCache', function () {
     }
 
     const cloneConfig = (conf) => {
-      //jqgrid adds `action` column to colModel, and if we return same object it will add column on each reload
+      // jqgrid adds `action` column to colModel, and if we return same object it will add column on each reload
       if (conf.colModel) {
-        return {...conf, colModel: [...conf.colModel]}
+        return { ...conf, colModel: [...conf.colModel] }
       }
-      return {...conf}
+      return { ...conf }
     }
     const putToCache = (url, value) => {
       if (angular.isUndefined(cache.get(url))) {
-        urls.push(url);
+        urls.push(url)
       }
       cache.put(url, cloneConfig(value))
     }
@@ -28,13 +28,13 @@ app.provider('ConfigCache', function () {
       return cloneConfig(cache.get(key))
     }
     return {
-      put: function (url, value) {
+      put: function(url, value) {
         putToCache(url, value)
       },
-      get: function (url, onSuccess = data => {
-        return {...data}
+      get: function(url, onSuccess = data => {
+        return { ...data }
       }) {
-        const def = $q.defer();
+        const def = $q.defer()
         if (hasUrl(url)) {
           def.resolve(onSuccess(getFromCache(url)))
         } else {
@@ -57,5 +57,5 @@ app.provider('ConfigCache', function () {
         return hasUrl(url)
       }
     }
-  }];
+  }]
 })
