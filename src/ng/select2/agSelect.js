@@ -45,6 +45,9 @@ smod.directive('agSelect2', [
           if (!_.isNil(attrs.selectMultiple)) {
             options.multiple = attrs.selectMultiple === 'true'
           }
+          if (!_.isNil(attrs.selectUseDataObject)) {
+            options.useDataObject = attrs.selectUseDataObject === 'true'
+          }
           scope.options = options
 
           // read `minimumInputLength` option from the attribute
