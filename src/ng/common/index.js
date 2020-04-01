@@ -5,6 +5,7 @@ import './agDateTimeFilter'
 import './checkMarkFilter'
 import './newLinesFilter'
 import './percentageFilter'
+import './ConfigCache'
 import './services'
 import './directives'
 
