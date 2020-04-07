@@ -1,11 +1,11 @@
 /* @ngInject */
 export default class NoteListCtrl {
-  constructor($scope, resourceBuilder, DialogCrudCtrlMixin) {
+  constructor($scope, resourceBuilder, DialogCrudCtrlMixin, $stateParams) {
     // Create resource for users (contacts)
     const Notes = resourceBuilder("/note");
-
+    console.log(Notes)
     $scope.gridOptions = {
-      path: `/org/listNotes/${$scope.org.id}?format=json`,
+      path: `/api/org/listNotes/${$stateParams.id}?format=json`,
       colModel: this.colModel(),
       multiselect: false, // turn off multiselect
       shrinkToFit: true, // makes columns fit to width
@@ -20,7 +20,7 @@ export default class NoteListCtrl {
       templateUrl: "/templates/note/form.html",
       beforeCreate(note) {
         // assign parent org to the note
-        note.org = $scope.$org;
+        note.org = {id: $stateParams.id}
         return note;
       }
     }

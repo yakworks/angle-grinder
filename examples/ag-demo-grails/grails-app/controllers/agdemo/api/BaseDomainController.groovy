@@ -1,6 +1,4 @@
-package agdemo
-
-import javax.annotation.PostConstruct
+package agdemo.api
 
 import gorm.tools.Pager
 import gorm.tools.beans.BeanPathTools
@@ -13,10 +11,13 @@ import grails.plugin.gormtools.ErrorMessageService
 import grails.util.GrailsNameUtils
 import grails.validation.ValidationException
 
+import javax.annotation.PostConstruct
+
 abstract class BaseDomainController {
+    static namespace = 'api'
     def ajaxGrid = true
     abstract getDomainClass()
-    static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
+    static allowedMethods = [save: "POST", update: ["PUT", "POST"], delete: ["POST", "DELETE"]]
     ErrorMessageService errorMessageService
     protected GormRepo getRepo() {
         domainClass.repo as GormRepo

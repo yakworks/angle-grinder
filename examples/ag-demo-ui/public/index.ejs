@@ -15,6 +15,8 @@
 
     <!-- Google fonts -->
     <link href="http://fonts.googleapis.com/css?family=Lato:300,400,400italic,600,700|Raleway:300,400,500,600,700|Crete+Round:400italic" rel="stylesheet" type="text/css" />
+    <!-- Material icons https://materialdesignicons.com/-->
+    <link href="https://cdn.materialdesignicons.com/5.0.45/css/materialdesignicons.min.css" rel="stylesheet">
 
     <!-- doing in manually so we can exclude the theme css and make sure it runs before theme switcher -->
     <% htmlWebpackPlugin.files.css.forEach( function(name){
@@ -22,13 +24,28 @@
         <link rel="stylesheet" href="<%= name %>">
     <% }}) %>
 
-    <link rel="stylesheet" data-ng-href="assets/theme/{{ app.layout.theme }}.css" />
+    <!-- <link rel="stylesheet" data-ng-href="assets/theme/{{ app.layout.theme }}.css" /> -->
 
 </head>
-<body ng-controller="AppCtrl">
-    <div ui-view id="app" class="lyt-2" ng-class="{'app-mobile' : app.isMobile, 'app-navbar-fixed' : app.layout.isNavbarFixed, 'app-sidebar-fixed' : app.layout.isSidebarFixed, 'app-sidebar-closed':app.layout.isSidebarClosed, 'app-footer-fixed':app.layout.isFooterFixed}">
-    </div>
-
+<body ng-controller="AppCtrl as $appCtrl">
+    <!-- <div ui-view id="app" class="lyt-2"
+    ng-class="{
+      'app-mobile' : $appCtrl.isMobile,
+      'app-navbar-fixed' : $appCtrl.layout.isNavbarFixed,
+      'app-sidebar-fixed' : $appCtrl.layout.isSidebarFixed,
+      'app-sidebar-open': appState.sidenav.open,
+      'app-sidebar-closed': !appState.sidenav.open,
+      'app-footer-fixed':$appCtrl.layout.isFooterFixed
+    }">
+    </div> -->
+    <div ui-view id="app" ng-class="{
+      'app-sidebar-fixed' : $appCtrl.layout.isSidebarFixed,
+      'app-sidenav-fixed' : $appCtrl.layout.isSidebarFixed,
+      'app-sidebar-open': appState.sidenav.open,
+      'app-sidebar-closed': !appState.sidenav.open,
+      'app-sidenav-open': appState.sidenav.open,
+      'app-sidenav-closed': !appState.sidenav.open
+    }"></div>
     <% for (var jsfile in htmlWebpackPlugin.files.js) { %>
     <script src="<%= htmlWebpackPlugin.files.js[jsfile]%>"></script>
     <% } %>

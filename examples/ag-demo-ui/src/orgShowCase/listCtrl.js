@@ -4,7 +4,7 @@ export default class ListCtrl {
 
     this.$filter = $filter;
     $scope.gridOptions = {
-      path: "/orgShowCase/list?format=json",
+      path: "/api/orgShowCase/list?format=json",
       colModel: this.colModel(),
       multiselect: false, // turn off multiselect
       shrinkToFit: true, // makes columns fit to width

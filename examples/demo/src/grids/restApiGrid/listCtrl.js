@@ -23,11 +23,11 @@ export default class ListCtrl {
     this.$scope.otherGridOptions = this.exampleGridOptions({ data: this.data, pager: false, datatype: 'local' })
     const Invoices = this.resourceBuilder('/invoices', 'invoice', '/api')
 
-    /*this.$scope.gridOptions = this.exampleGridOptions({
+    /* this.$scope.gridOptions = this.exampleGridOptions({
       path: '/api/invoices'
-    })*/
+    }) */
     const updateGridOptions = (gridOptions) => {
-      return {...gridOptions, path: '/api/invoices'}
+      return { ...gridOptions, path: '/api/invoices' }
     }
     this.$scope.gridOptions = this.ConfigCache.get('/api/invoices/gridOptions', updateGridOptions)
 
@@ -41,5 +41,5 @@ export default class ListCtrl {
 
 /*  getSelectedRowsData() {
     return this.$scope.exampleGridOptions.getSelectedRows()
-  }*/
+  } */
 }

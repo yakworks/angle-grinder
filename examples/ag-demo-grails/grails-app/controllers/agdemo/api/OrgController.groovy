@@ -1,10 +1,11 @@
-package agdemo
+package agdemo.api
 
+import agdemo.Note
+import agdemo.Org
+import agdemo.User
 import gorm.tools.Pager
 import gorm.tools.beans.BeanPathTools
-import gorm.tools.repository.errors.EntityValidationException
 import grails.converters.JSON
-import grails.plugin.gormtools.ErrorMessageService
 
 class OrgController extends BaseDomainController {
 
@@ -117,12 +118,11 @@ class OrgController extends BaseDomainController {
         def qslike = (filters?.quickSearch) ? (filters?.quickSearch + "%") : null
 
         def datalist = crit.list(max: pager.max, offset: pager.offset) {
-          contact{
-            org{
-              eq "id", params.id.toLong()
+            contact {
+                org {
+                    eq "id", params.id.toLong()
+                }
             }
-          }
-
 
             if (qslike) {
                 or {
@@ -136,19 +136,19 @@ class OrgController extends BaseDomainController {
             def fcontact = filters?.contact
 
             if (fcontact?.name) {
-              contact{
-                or {
-                    ilike 'lastName', fcontact.name
-                    ilike 'firstName', fcontact.name
-                  }
+                contact {
+                    or {
+                        ilike 'lastName', fcontact.name
+                        ilike 'firstName', fcontact.name
+                    }
 
                 }
             }
 
             if (fcontact?.email)
-              contact {
-                ilike 'contact.email', fcontact.email
-              }
+                contact {
+                    ilike 'contact.email', fcontact.email
+                }
 
             if (filters?.login)
                 ilike 'login', filters.login

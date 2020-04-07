@@ -1,5 +1,8 @@
-package agdemo
+package agdemo.api
 
+
+import agdemo.ContactType
+import agdemo.User
 import gorm.tools.Pager
 import gorm.tools.beans.BeanPathTools
 import gorm.tools.beans.DateUtil

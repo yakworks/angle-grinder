@@ -1,5 +1,6 @@
-package agdemo
+package agdemo.api
 
+import agdemo.Note
 import gorm.tools.beans.BeanPathTools
 import grails.converters.JSON
 

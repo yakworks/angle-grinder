@@ -1,11 +1,11 @@
 /* @ngInject */
 export default class ContactListCtrl {
-  constructor($scope, resourceBuilder, DialogCrudCtrlMixin) {
+  constructor($scope, resourceBuilder, DialogCrudCtrlMixin, $stateParams) {
     // Create resource for the users (contacts)
     const Users = resourceBuilder("/user");
-
+    console.log($stateParams)
     $scope.gridOptions = {
-      path: `/org/listUsers/${$scope.org.id}?format=json`,
+      path: `/api/org/listUsers/${$stateParams.id}?format=json`,
       colModel: this.colModel(),
       multiselect: false, // turn off multiselect
       shrinkToFit: true, // makes columns fit to width

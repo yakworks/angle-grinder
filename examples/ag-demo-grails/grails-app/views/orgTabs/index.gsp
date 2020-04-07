@@ -11,7 +11,7 @@
 <div ng-app="admin.orgTabs" ng-init="grid = {}">
     <ag-alerts></ag-alerts>
 
-    <ng-view></ng-view>
+    <ui-view></ui-view>
 </div>
 
 </body>

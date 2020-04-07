@@ -1,11 +1,12 @@
 'use strict'
 //https://github.com/wbkd/webpack-starter/blob/master/webpack/webpack.config.prod.js
 
-const webpack = require('webpack')
-const autoprefixer = require('autoprefixer')
+//const webpack = require('webpack')
+//const autoprefixer = require('autoprefixer')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const FixStyleOnlyEntriesPlugin = require("webpack-fix-style-only-entries")
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 //const CleanWebpackPlugin = require('clean-webpack-plugin')
 const path = require("path");
@@ -102,7 +103,7 @@ module.exports = function(env, argv) {
           use: [{
             loader: 'file-loader',
             options: {
-              name: '[name].[ext]',
+              name: '[path][name].[ext]',
               outputPath: 'assets/'
             }
           }]
@@ -117,32 +118,47 @@ module.exports = function(env, argv) {
       ] //end rules
     },
     plugins:[
-      // new webpack.LoaderOptionsPlugin({
-      //   test: /\.scss$/i,
-      //   options: {
-      //     postcss: {
-      //       plugins: [autoprefixer]
-      //     }
-      //   }
-      // }),
+      //if the entry is a scss such as for themes this will remove the js file that is erroniouly created, wil be fixed in webpack5
+      new FixStyleOnlyEntriesPlugin(),
       new HtmlWebpackPlugin({
-        title: 'Custom template using lodash',
-        template: `${CONTENT_PUBLIC}/index.html`,
-        //inject: 'body'
-        //inject: false,
+        //title: 'Custom template using lodash',
+        template: `${CONTENT_PUBLIC}/index.ejs`,
+        inject: false,
         minify: false
+        // excludeAssets: /theme.+\.css$/ //not working when we do it by hand like we are in the index.ejs
       }),
+      //new HtmlWebpackExcludeAssetsPlugin(),
       new CopyWebpackPlugin([{
         from: path.resolve(CONTENT_PUBLIC)
       }]),
       new MiniCssExtractPlugin({
-        filename: 'assets/[name].css',
+        moduleFilename: ({ name }) => {
+          return /theme/.test(name) ? `assets/theme/${name.replace('theme-','')}.css` : `assets/${name}.css`
+          //return `${prefix}/${name}.css`
+        },
+        //filename: 'assets/[name].css',
         allChunks: true
-      })
+      }),
+      // new ThemesGeneratorPlugin({
+      //   srcDir: `${CONTENT_BASE}/src`,
+      //   themesDir: `${CONTENT_BASE}/src/assets/themes`,
+      //   outputDir: 'assets/themes',
+      //   useStaticThemeName: true,
+      //   defaultStyleName: 'default.scss',
+      //   importAfterVariables: true
+      // })
     ],
     //command line options
     bail: true, //Fail out on the first error --bail
     //profile: false //list info on whats going on
+
+    resolve: {
+      //extensions: ['.js', '.vue', '.json'],
+      alias: {
+        'angle-grinder': path.resolve('./'),
+        //Components: path.resolve(__dirname, "..", "src", "components"),
+      }
+    }
   }
   if(isProd){
     cfg.plugins.push(

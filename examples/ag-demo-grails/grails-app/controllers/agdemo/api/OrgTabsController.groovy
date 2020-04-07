@@ -1,4 +1,4 @@
-package agdemo
+package agdemo.api
 
 class OrgTabsController extends OrgController {
 

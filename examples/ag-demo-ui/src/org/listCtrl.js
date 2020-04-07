@@ -3,7 +3,7 @@ export default class ListCtrl {
   constructor($scope, Resource, SinglePageCrudCtrlMixin, MassUpdateMixin, pathWithContext) {
     $scope.timeZones = ['Europe/Moscow', 'Asia/Shanghai', 'America/Sao_Paulo']
     $scope.gridOptions = {
-      url: pathWithContext("/org/list?format=json"),
+      url: pathWithContext("/api/org/list?format=json"),
       colModel: this.colModel(),
       multiselect: true,
       shrinkToFit: true, // makes columns fit to width

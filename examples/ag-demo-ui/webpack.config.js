@@ -8,6 +8,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const FixStyleOnlyEntriesPlugin = require("webpack-fix-style-only-entries")
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const apiMocker = require('mocker-api');
 //const HtmlWebpackExcludeAssetsPlugin = require('html-webpack-exclude-assets-plugin')
 //const ThemesGeneratorPlugin = require('themes-switch/ThemesGeneratorPlugin')
 //const CleanWebpackPlugin = require('clean-webpack-plugin')
@@ -33,7 +34,8 @@ module.exports = function(env, argv) {
     devtool: devtool,
     entry: {
       main: MAIN_ENTRY,
-      // theme entries are added below
+      // 'theme-dark': `${CONTENT_BASE}/src/assets/themes/dark.scss`,
+      // 'theme-light': `${CONTENT_BASE}/src/assets/themes/light.scss`,
     },
     output: {
       path: pathout, //path.join(__dirname, "dist"),
@@ -52,7 +54,7 @@ module.exports = function(env, argv) {
             test: /[\\/]node_modules[\\/](jquery|free-jqgrid|Select2|moment|toastr|sweetalert|eonasdan).*\.js/,
             chunks: "all",
             name: `jquery-libs${minDescriptor}`,
-            priority: 20, //A module can belong to multiple cache groups. will prefer the cache group with a higher priority
+            priority: 20, //A module can belong to multiple cache groups. The optimization will prefer the cache group with a higher priority
             enforce: true //says to always build chunk and ignore min/max size stuff
           },
           vendor: {
@@ -141,11 +143,19 @@ module.exports = function(env, argv) {
         },
         //filename: 'assets/[name].css',
         allChunks: true
-      })
+      }),
     ],
     //command line options
     bail: true, //Fail out on the first error --bail
     //profile: false //list info on whats going on
+
+    resolve: {
+      //extensions: ['.js', '.vue', '.json'],
+      alias: {
+        'angle-grinder': path.resolve('./'),
+        //Components: path.resolve(__dirname, "..", "src", "components"),
+      }
+    }
   }
   if(isProd){
     cfg.plugins.push(
@@ -164,6 +174,7 @@ module.exports = function(env, argv) {
       })
     )
   }
+
   //add themes scss to entries
   // ['light', 'dark', 'dark-red', 'dark-light', 'dark-green', 'dark-3'].forEach( (name) => {
   //   cfg.entry[`theme-${name}`] = `${CONTENT_BASE}/src/assets/themes/${name}.scss`
@@ -172,6 +183,7 @@ module.exports = function(env, argv) {
   cfg.devServer = {
     //compress: true, //gzips before serving so we can see file size
     port: 3000,
+    host: '0.0.0.0'
     // historyApiFallback: true,
     //inline: false, //default:true script will be inserted in your bundle to take care of live reloading
   }

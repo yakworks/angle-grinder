@@ -1,71 +1,54 @@
-<div class="panel rcm-panel panel-default financial ag-panels-row ag-panel">
-    <div editable-panel-heading="editForm" class="ag-panel-states">Xeditable Form</div>
-
-    <div class="panel-body ">
-        <form editable-form name="editForm"
-              class="form-horizontal-fixed no-margin"
-              novalidate="true"
-              onaftersave="save(editForm, org)">
-
-            <div stay-on-collapse>
-                <span class="title">Phone</span>
-        <span editable-text="org.phone"
-              e-name="orgPhone"
-              e-placeholder="org phone">{{org.phone}}</span>
+<div class="columns">
+  <div class="column is-one-third">
+    <div class="panel panel-default panel-xeditable">
+      <div editable-panel-heading="editForm">Xeditable Form</div>
+      <div class="panel-body">
+        <form editable-form name="editForm" class="form-xeditable no-margin input-underline" novalidate="true"
+              onaftersave="save(editForm, org)" ng-class="{editing: editForm.$visible}">
+          <div stay-on-collapse class="edit-group">
+            <label class="control-label">Phone</label>
+            <div class="controls" editable-text="org.phone"
+                 ag-bind="org.phone"
+                 e-placeholder="org phone">
             </div>
+          </div>
+          <div class="edit-group">
+            <label class="control-label">City</label>
+            <div class="controls"
+                 editable-text="org.city"
+                 e-placeholder="org city"><span>{{org.city}}</span></div>
+          </div>
 
-            <div>
-                <span class="title">State</span>
-        <span editable-text="org.state"
-              e-name="orgState"
-              e-placeholder="org state">{{org.state}}</span>
+          <div class="edit-group">
+            <label class="control-label">State</label>
+            <div class="controls"
+                 editable-text="org.state"
+                 e-name="orgState"
+                 e-placeholder="org state">{{org.state}}
             </div>
+          </div>
 
-            <div>
-                <span class="title">City</span>
-        <span editable-text="org.city"
-              e-name="orgCity"
-              e-placeholder="org city">{{org.city}}</span>
+          <div class="edit-group">
+            <label class="control-label">Birthday Date</label>
+            <div class="controls"
+                 editable-datepicker="org.birthdayDate"
+                 e-name="birthdayDate"
+                 e-placeholder="birthday date">{{org.birthdayDate}}
             </div>
+          </div>
 
-            <div>
-                <span class="title">Zip</span>
-        <span editable-text="org.zip"
-              e-name="orgZip"
-              e-placeholder="org zip">{{org.zip}}</span>
+          <div class="edit-group">
+            <label class="control-label">Description</label>
+            <div class="controls"
+                 editable-textarea="org.description"
+                 e-name="description"
+                 e-placeholder="description">{{org.description}}
             </div>
+          </div>
 
-            <div>
-                <span class="title">Street</span>
-        <span editable-text="org.street"
-              e-name="orgStreet"
-              e-placeholder="org street">{{org.street}}</span>
-            </div>
-
-            <div>
-                <span class="title">Address date</span>
-        <span editable-datepicker="org.addressDate"
-              e-name="addressDate"
-              e-placeholder="address date">{{org.addressDate}}</span>
-            </div>
-
-            <div>
-                <span class="title">Description</span>
-            <span editable-textarea="org.description"
-                  e-name="description"
-                  e-placeholder="description">{{org.description}}</span>
-            </div>
-
-            <div>
-                <span class="title">Org type</span>
-            <span editable-select="org.type"
-                  e-name="type"
-                  e-ng-options="type for type in orgTypes">{{org.type}}</span>
-            </div>
-
-
-            <div editable-form-buttons="editForm"></div>
-
+          <div editable-form-buttons="editForm"></div>
         </form>
+      </div>
     </div>
+  </div>
 </div>
