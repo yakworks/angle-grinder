@@ -1,11 +1,10 @@
-<g:set var="entityName" value="User"/>
 
 <div class="modal-header">
   <button type="button" class="close" ng-click="closeDialog()" aria-hidden="true">&times;</button>
 
   <h3 ng-switch="user.persisted()">
-    <span ng-switch-when="true">Edit ${entityName}</span>
-    <span ng-switch-when="false">Create New ${entityName}</span>
+    <span ng-switch-when="true">Edit User</span>
+    <span ng-switch-when="false">Create New User</span>
   </h3>
 </div>
 <div class="columns"><div class="column">
@@ -84,7 +83,7 @@
           </label>
 
           <div class="controls">
-            <g:checkBox name="tagForReminders" ng-model="user.contact.tagForReminders"/>
+            <input type="checkbox" name="tagForReminders" ng-model="user.contact.tagForReminders"/>
           </div>
 
         </div>
@@ -151,7 +150,7 @@
       </label>
 
       <div class="col-md-4" style="margin-top: 7px;">
-        <g:checkBox name="tagForReminders" ng-model="user.inactive"/>
+        <input type="checkbox" name="tagForReminders" ng-model="user.inactive"/>
       </div>
 
     </div>

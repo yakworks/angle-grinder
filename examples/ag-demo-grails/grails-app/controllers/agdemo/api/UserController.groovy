@@ -28,8 +28,6 @@ class UserController extends BaseDomainController {
         def qslike = (filters?.quickSearch) ? (filters?.quickSearch + "%") : null
 
         def datalist = crit.list(max: pager.max, offset: pager.offset) {
-            createAlias("contact", "contact")
-
             if (qslike) {
                 or {
                     ilike 'login', qslike
@@ -57,9 +55,8 @@ class UserController extends BaseDomainController {
 
             if (fcontact?.type) {
                 def contactTypes = fcontact.type.collect {
-                    ContactType.byName(it.id)
+                    ContactType.byName(it)
                 }
-
                 'in' 'contact.type', contactTypes
             }
 
@@ -75,17 +72,6 @@ class UserController extends BaseDomainController {
         }
 
         return datalist
-    }
-
-    // TODO serve it as static assets
-    def formTemplate() {
-        render(template: "form")
-    }
-
-    // TODO serve it as static assets
-    def searchPartial() {
-        def user = new User()
-        render(template: "search", model: [user: user])
     }
 
     def saveOrUpdate() {
@@ -106,6 +92,23 @@ class UserController extends BaseDomainController {
         } else {
             notFound params.id
         }
+    }
+
+    protected Map getGridOptions() {
+        return [
+            path: "/api/user/list?format=json",
+        colModel: [
+            [ name: "id", label: "ID", width: 30, fixed: true ],
+            [ name: "contact.name", label: "Contact Name", width: 100, fixed: true, formatter: "editActionLink" ],
+            [ name: "contact.email", label: "Contact Email", width: 70, align: "right", formatter: "email" ],
+            [ name: "login", label: "Login", width: 70 ],
+            [ name: "activeDate", label: "Active Date", width: 70, formatter: "date"],
+            [ name: "inactive", label: "Inactive", width: 30, align: "center", formatter: "okIcon" ]
+        ],
+        multiselect: false, // turn off multiselect
+        shrinkToFit: true, // makes columns fit to width
+        sortname: "login",
+        sortorder: "asc"]
     }
 
 }

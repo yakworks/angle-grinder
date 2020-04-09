@@ -22,7 +22,7 @@ export default class ListCtrl {
     );
 
     MassUpdateMixin($scope, {
-      templateUrl: "/templates/org/massUpdateForm.html",
+      template: require("../../public/templates/org/massUpdateForm.html"),
       controller: "org.MassUpdateFormCtrl",
       gridName: "orgGrid"
     }

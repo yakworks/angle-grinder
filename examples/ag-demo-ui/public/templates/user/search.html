@@ -1,4 +1,3 @@
-<%@ page import="agdemo.Org" %>
 <div class="well" ng-controller="user.SearchForm">
     <form ag-search-form="usersGrid" class="form-horizontal-fixed form-multi-column no-margin"
           style="padding-bottom: 30px">
@@ -9,10 +8,18 @@
                     <label class="control-label">Org</label>
 
                     <div class="controls">
-                        <g:select id="orgSelect" name="orgSelect"
-                                  from="${agdemo.Org.list()}" optionKey="id" optionValue="name"
-                                  multiple="true" ng-model="filters.orgIds" ui-select2="{closeOnSelect: false}"
-                                  class="form-control"/>
+                      <ag-select2 select-ajax-url="/api/org/pickList"
+                                  select-ajax-quiet-millis="250"
+                                  select-all
+                                  select-use-data-object
+                                  select-multiple
+                                  ng-model="filters.orgIds">
+                        <table ag-select2-result class="table table-condensed org-select-result">
+                          <tr>
+                            <td>{{item.name}}</td>
+                          </tr>
+                        </table>
+                      </ag-select2>
                     </div>
 
                 </div>
@@ -35,25 +42,26 @@
                 </div>
             </div>
 
+            </div>
+            <div class="column is-one-third">
 
-            <div class="form-group">
+              <div class="form-group">
                 <label class="control-label col-sm-4">Email</label>
 
                 <div class="controls">
-                    <input class="form-control" type="text" ng-model="filters.contact.email">
+                  <input class="form-control" type="text" ng-model="filters.contact.email">
                 </div>
-            </div>
+              </div>
 
-            <div class="form-group">
+              <div class="form-group">
                 <label class="control-label col-sm-4">Type</label>
 
                 <div class="controls">
-                    <input type="text" ui-select2="contactTypeSelectOptions" class="full-width"
-                           name="contactType" ng-model="filters.contact.type"/>
+                  <input type="text" ui-select2="contactTypeSelectOptions" class="full-width"
+                         name="contactType" ng-model="filters.contact.type"/>
                 </div>
-            </div>
-            </div>
-            <div class="column is-one-third">
+              </div>
+
                 <div class="form-group">
                     <label class="control-label">Active Date</label>
 

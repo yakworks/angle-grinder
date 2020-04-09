@@ -6,14 +6,20 @@ var mixin = angular.module(formsModule)
 
 mixin.factory('MassUpdateMixin', [
   '$log', '$parse', '$uibModal', 'pathWithContext', 'NotificationDialogServ',
-  ($log, $parse, $modal, pathWithContext, NotificationDialogServ) => function($scope, args) {
-    if (args == null) { args = {} }
-    let { gridName, templateUrl, controller, extraParams } = args
-    if (controller == null) { controller = 'MassUpdateFormCtrl' }
+  ($log, $parse, $modal, pathWithContext, NotificationDialogServ) => function ($scope, args) {
+    if (args == null) {
+      args = {}
+    }
+    let {gridName, templateUrl, controller, extraParams, template} = args
+    if (controller == null) {
+      controller = 'MassUpdateFormCtrl'
+    }
 
-    return $scope.massUpdate = function() {
+    return $scope.massUpdate = function () {
       const grid = $parse(gridName)($scope)
-      if (_.isNil(grid)) { throw new Error('the grid is not defined') }
+      if (_.isNil(grid)) {
+        throw new Error('the grid is not defined')
+      }
 
       // ..grab selected row ids
       const selectedIds = grid.getSelectedRowIds()
@@ -21,21 +27,29 @@ mixin.factory('MassUpdateMixin', [
         NotificationDialogServ.open('Please select at least one row.')
         return
       }
-
-      return $modal.open({
-
-        templateUrl: pathWithContext(templateUrl),
+      const modalOptions = {
         controller,
-
         keyboard: false, // do not close the dialog with ESC key
         backdrop: 'static', // do not close on click outside of the dialog
 
         resolve: {
-          selectedIds() { return selectedIds },
-          grid() { return grid },
-          extraParams() { return extraParams }
+          selectedIds() {
+            return selectedIds
+          },
+          grid() {
+            return grid
+          },
+          extraParams() {
+            return extraParams
+          }
         }
-      })
+      }
+      if (template) {
+        modalOptions.template = template
+      } else {
+        modalOptions.templateUrl = pathWithContext(templateUrl)
+      }
+      return $modal.open(modalOptions)
     }
   }
 
@@ -44,12 +58,14 @@ mixin.factory('MassUpdateMixin', [
 // Decorates the $scope with mass update magic
 mixin.factory('massUpdateFormCtrlMixin', [
   '$log', 'MassUpdateHandler',
-  ($log, MassUpdateHandler) => function($scope, args) {
-    if (args == null) { args = {} }
-    const { dialog, Resource, selectedIds, grid, beforeSave } = args
+  ($log, MassUpdateHandler) => function ($scope, args) {
+    if (args == null) {
+      args = {}
+    }
+    const {dialog, Resource, selectedIds, grid, beforeSave} = args
 
     // Generic method for mass updating selected rows
-    $scope.massUpdate = function(records) {
+    $scope.massUpdate = function (records) {
       let data = angular.copy(records)
       $log.info('[forms] mass update', data)
 
@@ -59,10 +75,10 @@ mixin.factory('massUpdateFormCtrlMixin', [
         data = beforeSave(data)
       }
 
-      const params = { ids: selectedIds, data }
+      const params = {ids: selectedIds, data}
       const promise = Resource.massUpdate(params).$promise
 
-      return promise.then(function(result) {
+      return promise.then(function (result) {
         MassUpdateHandler(grid, result)
         grid.clearSelection()
         $scope.closeDialog()
@@ -72,7 +88,7 @@ mixin.factory('massUpdateFormCtrlMixin', [
     }
 
     // Generic method for closing the mass update dialog
-    return $scope.closeDialog = function() {
+    return $scope.closeDialog = function () {
       $log.info('[forms] closing the mass update dialog')
       return dialog.close()
     }

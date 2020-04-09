@@ -17,6 +17,8 @@ abstract class BaseDomainController {
     static namespace = 'api'
     def ajaxGrid = true
     abstract getDomainClass()
+    protected List<String> getPickShowFields() { return ['*'] }
+    protected List<String> getPicSearchableFields() { return [] }
     static allowedMethods = [save: "POST", update: ["PUT", "POST"], delete: ["POST", "DELETE"]]
     ErrorMessageService errorMessageService
     protected GormRepo getRepo() {
@@ -276,13 +278,32 @@ abstract class BaseDomainController {
         }
     }
 
+    def pickList(){
+        Pager pager = new Pager(params)
+        Map criterias = [:]
+        String qslike = (params.q) ? ((params.q as String) + "%") : null
+        List picks = getRepo().query([criteria: criterias, max: pager.max])
+
+        Pager pagedList = pager.setupData(picks, pickShowFields)
+        render pagedList.jsonData as JSON
+    }
+
+    protected Map getGridOptions() {
+        return [:]
+    }
+
+    def gridOptions() {
+        String gridOptsJson = gridOptions as JSON
+        render(gridOptsJson)
+    }
+
     def deleteJson() {
         log.debug("in deleteJson with ${params}")
 
         def responseJson = [:]
         try {
             def result = repo.removeById(params.id)
-            render result as JSON
+            render(status: 204)
         } catch (ValidationException e) {
             log.debug("saveJson with error")
             response.status = 422
