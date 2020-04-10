@@ -76,7 +76,7 @@ class FormDialogCtrl extends BaseCtrl {
   }
 
   // If form is valid performs server side update
-  save(form, record) {
+  save(record) {
     const promise = record.save().$promise
 
     promise.then(record => {

@@ -1,7 +1,7 @@
 /* @ngInject */
 export default class MassUpdateFormCtrl {
   constructor($scope, massUpdateFormCtrlMixin, dialog, Resource, selectedIds, grid) {
-    $scope.records = {timeZone: "UTC"};
+    $scope.records = { timeZone: 'UTC' }
 
     massUpdateFormCtrlMixin($scope, {
       dialog,
@@ -9,7 +9,6 @@ export default class MassUpdateFormCtrl {
       selectedIds,
       grid
     }
-    );
+    )
   }
 }
-

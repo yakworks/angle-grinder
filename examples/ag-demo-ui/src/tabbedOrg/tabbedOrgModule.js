@@ -1,4 +1,4 @@
-import angular from "angular";
+import angular from 'angular'
 import adminOrg from '../org/adminOrgModule'
 
 const MOD_NAME = 'admin.orgTabs'

@@ -1,4 +1,4 @@
-import angular from "angular";
+import angular from 'angular'
 import angleGrinder from '~/angle-grinder'
 
 const MOD_NAME = 'demo.note'
