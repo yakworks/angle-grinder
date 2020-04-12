@@ -1,12 +1,13 @@
 /* @ngInject */
 export default class ShowCtrl {
-  constructor($scope, $controller, $location, alerts, org) {
-    $scope.org = org
+  constructor($scope, $controller, $location, alerts) {
+    console.log("orgShowTab controller")
+    $scope.org = {id: 1}
 
     $scope.orgTypes = ['company', 'organisation']
 
     // setup the grid pager
-    $scope.currentId = org.id
+    $scope.currentId = $scope.org.id
     $scope.gridPager = $controller('gridPagerCtrlMixin', {
       $scope,
       gridName: 'grid.org',

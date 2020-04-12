@@ -5,10 +5,15 @@ const MOD_NAME = 'user'
 export default MOD_NAME
 var app = angular.module(MOD_NAME, [angleGrinder])
 
+app.config(function(resourceBuilderProvider) {
+  resourceBuilderProvider.setRestContext('/api')
+})
+
+
 app.config(function($stateProvider, $urlRouterProvider) {
   console.log('user App')
   const list = {
-    name: 'list',
+    name: 'userList',
     controller: 'user.ListCtrl',
     url: '/',
     template: require('../../public/templates/user/list.html')

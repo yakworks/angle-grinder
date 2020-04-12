@@ -3,7 +3,6 @@ export default class ContactListCtrl {
   constructor($scope, resourceBuilder, DialogCrudCtrlMixin, $stateParams) {
     // Create resource for the users (contacts)
     const Users = resourceBuilder('/user')
-    console.log($stateParams)
     $scope.gridOptions = {
       path: `/api/org/listUsers/${$stateParams.id}?format=json`,
       colModel: this.colModel(),
@@ -13,14 +12,13 @@ export default class ContactListCtrl {
       sortname: 'login',
       sortorder: 'asc'
     }
-
     DialogCrudCtrlMixin($scope, {
       Resource: Users,
       gridName: 'contactsGrid',
-      templateUrl: '/user/formTemplate',
+      template: require('../../public/templates/user/form.html'),
       beforeCreate(user) {
         user.contact = {
-          org: $scope.org,
+          org: {id: $stateParams.id},
           type: 'CUSTOMER'
         }
         return user

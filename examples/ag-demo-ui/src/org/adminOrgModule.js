@@ -11,14 +11,14 @@ org.config(function(resourceBuilderProvider) {
 org.config(function($stateProvider, $urlRouterProvider) {
   console.log('orgAdmin App config')
   const list = {
-    name: 'list',
+    name: 'orgList',
     controller: 'org.ListCtrl',
     url: '/',
     template: require('../../public/templates/org/list.html')
   }
 
   const create = {
-    name: 'create',
+    name: 'orgCreate',
     url: '/create',
     controller: 'org.FormCtrl',
     template: require('../../public/templates/org/form.html'),
@@ -26,25 +26,21 @@ org.config(function($stateProvider, $urlRouterProvider) {
   }
 
   const show = {
-    name: 'show',
+    name: 'orgShow',
     url: '/{id}',
     template: require('../../public/templates/tabbedOrg/show.html'),
     resolve: {
-      org: [
-        '$transition$', 'resourceResolver', ($transition$, resourceResolver) => resourceResolver($transition$.params().id)
-      ]
+      org:  ($transition$, resourceResolver) => resourceResolver($transition$.params().id)
     }
   }
 
   const edit = {
-    name: 'edit',
+    name: 'orgEdit',
     url: '/{id}/edit',
     template: require('../../public/templates/org/form.html'),
     controller: 'org.FormCtrl',
     resolve: {
-      org: [
-        '$transition$', 'resourceResolver', ($transition$, resourceResolver) => resourceResolver($transition$.params().id)
-      ]
+      org:  ($transition$, resourceResolver) => resourceResolver($transition$.params().id)
     }
   }
   $stateProvider.state(list)
@@ -53,36 +49,4 @@ org.config(function($stateProvider, $urlRouterProvider) {
   $urlRouterProvider.otherwise('/')
 })
 
-/* org.config([
-  "$routeProvider", $routeProvider => $routeProvider
-    .when("/", {
-      templateUrl: "../templates/org/list.html",
-      controller: "org.ListCtrl"
-    }).when("/create", {
-      templateUrl: "../templates/org/form.html",
-      controller: "org.FormCtrl",
-      resolve: { org: ["Resource", Resource => new Resource()]
-      }
-    })
-
-    .when("/:id", {
-      templateUrl: "../templates/tabbedOrg/show.html",
-      controller: "org.ShowCtrl",
-      resolve: { org: [
-          "$route", "resourceResolver", ($route, resourceResolver) => resourceResolver($route.current.params.id)
-        ]
-      }
-    })
-
-    .when("/:id/edit", {
-      templateUrl: "../templates/org/form.html",
-      controller: "org.FormCtrl",
-      resolve: { org: [
-          "$route", "resourceResolver", ($route, resourceResolver) => resourceResolver($route.current.params.id)
-        ]
-      }
-    })
-
-    .otherwise({redirectTo: "/"})
-]); */
 export default MOD_NAME

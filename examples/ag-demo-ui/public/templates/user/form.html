@@ -65,12 +65,8 @@
           <label class="control-label">Org</label>
 
           <div class="controls">
-            <select class="form-control" name="orgId" ui-select2="{}"
-                    ng-model="user.contact.org.id"
-                    ng-required="true">
-              <option value="">-- chose org --</option>
-              <option ng-repeat="org in orgs" value="{{org.id}}">{{org.name}}</option>
-            </select>
+            <input ng-model="user.contact.org.id" class="form-control" name="orgId" ui-select2="orgSelectOptions">
+
             <ag-validation-errors for="orgId"/>
           </div>
         </div>
@@ -107,7 +103,7 @@
         <label class="control-label">Active Date</label>
 
         <div class="controls">
-          <ag-datepicker date-type="date"
+          <ag-datepicker
                          ng-model="user.activeDate"
                          ng-required="true"
                          name="activeDate"/>

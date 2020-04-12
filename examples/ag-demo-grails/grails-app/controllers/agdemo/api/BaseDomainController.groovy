@@ -19,7 +19,7 @@ abstract class BaseDomainController {
     abstract getDomainClass()
     protected List<String> getPickShowFields() { return ['*'] }
     protected List<String> getPicSearchableFields() { return [] }
-    static allowedMethods = [save: "POST", update: ["PUT", "POST"], delete: ["POST", "DELETE"]]
+    static allowedMethods = [save: "POST", update: ["PUT", "POST"], delete: ["POST", "DELETE"], massUpdate: "POST"]
     ErrorMessageService errorMessageService
     protected GormRepo getRepo() {
         domainClass.repo as GormRepo

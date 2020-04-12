@@ -1,13 +1,8 @@
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * DS206: Consider reworking classes to avoid initClass
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-
 /* @ngInject */
 export default class FormCtrl {
   constructor($scope, $location, org) {
+    console.log(org)
+    console.log($scope)
     $scope.org = org
 
     $scope.save = function(form, org) {
