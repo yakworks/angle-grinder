@@ -7,7 +7,6 @@ var mixin = angular.module(formsModule)
 mixin.factory('MassUpdateMixin', [
   '$log', '$parse', '$uibModal', 'pathWithContext', 'NotificationDialogServ',
   ($log, $parse, $uibModal, pathWithContext, NotificationDialogServ) => function($scope, args = {}) {
-
     let { gridName, templateUrl, controller, extraParams, template } = args
     if (controller == null) {
       controller = 'MassUpdateFormCtrl'
