@@ -4,6 +4,6 @@ import '../org/index'
 import adminOrg from '../org/adminOrgModule'
 
 angular.module(adminOrg)
-  .controller("orgShowCase.FormCtrl", FormCtrl)
-  .controller("orgShowCase.ListCtrl", ListCtrl);
+  .controller('orgShowCase.FormCtrl', FormCtrl)
+  .controller('orgShowCase.ListCtrl', ListCtrl)
 export default adminOrg

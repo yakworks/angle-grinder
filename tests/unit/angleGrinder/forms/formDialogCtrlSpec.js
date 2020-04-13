@@ -30,7 +30,6 @@ describe("module: angleGrinder.forms", function() {
 
       return $controller("FormDialogCtrl", {
         $scope,
-
         $uibModalInstance,
         dialogOptions: {
           record,

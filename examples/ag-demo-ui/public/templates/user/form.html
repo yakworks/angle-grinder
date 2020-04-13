@@ -1,11 +1,10 @@
-<g:set var="entityName" value="User"/>
 
 <div class="modal-header">
   <button type="button" class="close" ng-click="closeDialog()" aria-hidden="true">&times;</button>
 
   <h3 ng-switch="user.persisted()">
-    <span ng-switch-when="true">Edit ${entityName}</span>
-    <span ng-switch-when="false">Create New ${entityName}</span>
+    <span ng-switch-when="true">Edit User</span>
+    <span ng-switch-when="false">Create New User</span>
   </h3>
 </div>
 <div class="columns"><div class="column">
@@ -66,12 +65,8 @@
           <label class="control-label">Org</label>
 
           <div class="controls">
-            <select class="form-control" name="orgId" ui-select2="{}"
-                    ng-model="user.contact.org.id"
-                    ng-required="true">
-              <option value="">-- chose org --</option>
-              <option ng-repeat="org in orgs" value="{{org.id}}">{{org.name}}</option>
-            </select>
+            <input ng-model="user.contact.org.id" class="form-control" name="orgId" ui-select2="orgSelectOptions">
+
             <ag-validation-errors for="orgId"/>
           </div>
         </div>
@@ -84,7 +79,7 @@
           </label>
 
           <div class="controls">
-            <g:checkBox name="tagForReminders" ng-model="user.contact.tagForReminders"/>
+            <input type="checkbox" name="tagForReminders" ng-model="user.contact.tagForReminders"/>
           </div>
 
         </div>
@@ -108,7 +103,7 @@
         <label class="control-label">Active Date</label>
 
         <div class="controls">
-          <ag-datepicker date-type="date"
+          <ag-datepicker
                          ng-model="user.activeDate"
                          ng-required="true"
                          name="activeDate"/>
@@ -151,7 +146,7 @@
       </label>
 
       <div class="col-md-4" style="margin-top: 7px;">
-        <g:checkBox name="tagForReminders" ng-model="user.inactive"/>
+        <input type="checkbox" name="tagForReminders" ng-model="user.inactive"/>
       </div>
 
     </div>

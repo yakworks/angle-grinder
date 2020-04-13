@@ -1,0 +1,36 @@
+<h3 class="page-header">User</h3>
+
+<div  ng-controller="user.ListCtrl" class="ag-panels-row">
+
+  <ag-alerts></ag-alerts>
+
+  <div ng-show="showSearchForm" class="search-form-panel">
+    <div ng-include="'user/list/searchForm.html'"></div>
+  </div>
+  <div class="ag-panel">
+    <div class="navbar navbar-toolbar navbar-grid navbar-default">
+      <div class="navbar-inner with-selected-pointer with-grid-options">
+        <ul class="nav navbar-nav col-sm-4">
+          <li>
+            <a href="" ng-click="createRecord()">
+              <i class="fa fa-user"></i><g:message code="default.new.label" args="[entityName]"/>
+            </a>
+          </li>
+        </ul>
+        <ag-panel-states>
+          <ag-reload-grid for="usersGrid"></ag-reload-grid>
+        </ag-panel-states>
+        <ul class="nav navbar-nav pull-right">
+          <li>
+            <a title="search screen" ng-click="showSearchForm = !showSearchForm" href="">
+              <i class="fa fa-search"></i>
+            </a>
+          </li>
+        </ul>
+        <ag-grid-quick-search for="usersGrid" filters="filters"></ag-grid-quick-search>
+      </div>
+    </div>
+
+    <div ag-grid="gridOptions"
+         ag-grid-name="usersGrid"></div>
+  </div>

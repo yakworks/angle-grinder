@@ -1503,7 +1503,7 @@ const invoices = [
     complete: true
   }
 ]
-const gridOptions = ()=>{
+const gridOptions = () => {
   const colModel = () => [{
     name: 'id',
     label: 'Inv No',
@@ -1511,35 +1511,35 @@ const gridOptions = ()=>{
     sorttype: 'int',
     align: 'right'
   },
-    {
-      name: 'customer.name',
-      label: 'Customer',
-      formatter: 'editActionLink'
-    },
-    {
-      name: 'invoiceDate',
-      label: 'Date',
-      width: 100,
-      formatter: 'date'
-    },
-    {
-      name: 'amount',
-      label: 'Amount',
-      width: 80,
-      formatter: 'currency'
-    },
-    {
-      name: 'note',
-      label: 'Note'
-    },
-    {
-      name: 'complete',
-      label: 'Complete',
-      width: 80,
-      fixed: true,
-      align: 'center',
-      formatter: 'okIcon'
-    }
+  {
+    name: 'customer.name',
+    label: 'Customer',
+    formatter: 'editActionLink'
+  },
+  {
+    name: 'invoiceDate',
+    label: 'Date',
+    width: 100,
+    formatter: 'date'
+  },
+  {
+    name: 'amount',
+    label: 'Amount',
+    width: 80,
+    formatter: 'currency'
+  },
+  {
+    name: 'note',
+    label: 'Note'
+  },
+  {
+    name: 'complete',
+    label: 'Complete',
+    width: 80,
+    fixed: true,
+    align: 'center',
+    formatter: 'okIcon'
+  }
   ]
 
   return function(options) {
@@ -1552,7 +1552,7 @@ const gridOptions = ()=>{
       shrinkToFit: true
     }
 
-    return {...defaults, ...options}
+    return { ...defaults, ...options }
   }
 }
 

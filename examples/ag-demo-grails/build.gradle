@@ -45,3 +45,8 @@ dependencies {
   compile 'org.grails.plugins:joda-time:2.0.0'
   testCompile "org.grails.plugins:build-test-data:3.0.1"
 }
+
+bootRun {
+
+  addResources = true //to reload staic resources
+}

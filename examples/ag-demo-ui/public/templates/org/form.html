@@ -1,76 +1,46 @@
 <div class="subnav">
-  <ul class="nav navbar-nav nav-pills">
-    <li><a href="#/"><i class="fa fa-list"></i> Org List</a></li>
-  </ul>
+    <ul class="nav navbar-nav nav-pills">
+        <li><a href="#/"><i class="fa fa-list"></i> Org List</a></li>
+        <li><a ng-show="org.persisted()" href="#/{{org.id}}"><i class="fa fa-th"></i> Show org</a></li>
+        <li><a ng-hide="org.persisted()" href="#/create"><i class="fa fa-plus"></i> New org</a></li>
+    </ul>
 </div>
 
 <section class="anchor">
-  <h3 class="page-header" ng-switch="org.persisted()">
-    <span ng-switch-when="true">Edit org</span>
-    <span ng-switch-when="false">Create org</span>
-  </h3>
-
-  <form name="editForm" class="form-horizontal-fixed"
-        novalidate="true"
-        ag-server-validation-errors
-        ng-submit="save(editForm, org)">
-    <div class="columns">
-      <div class="column is-two-fifths">
-        <div ag-field-group for="name">
-          <div class="form-group">
-            <label class="control-label">Name</label>
-
-            <div class="controls">
-              <input class="form-control" type="text" name="name" placeholder="Enter Name"
-                     ng-model="org.name" autofocus required/>
-              <div>To check server validation errors set name to Yodo, which is not unique and saving will fail on
-                server side
+    <h3 class="page-header" ng-switch="org.persisted()">
+        <span ng-switch-when="true">Edit org</span>
+        <span ng-switch-when="false">Create org</span>
+    </h3>
+  <div class="container-fluid container-fullw">
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="panel panel-white">
+          <div class="panel-body">
+            <form name="inputForm" ag-form class="form-horizontal-fixed"
+                  novalidate="true"
+                  ag-server-validation-errors
+                  ng-submit="save(inputForm, org)">
+              <legend>Create Org</legend>
+              <ag-input name="name" ng-model="org.name" required/>
+              <ag-input name="num" ng-model="org.num" required/>
+              <div ag-field-group >
+                <label class="control-label">Time Zone</label>
+                <div class="controls">
+                  <input name="timeZone" class="form-control" ng-model="org.timeZone"
+                         ui-select2 ui-select2-data="['UTC-6','UTC-2','UTC','UTC+2']">
+                </div>
               </div>
-              <ag-validation-errors for="name" required="This field is required"/>
-            </div>
 
-          </div>
-        </div>
-
-        <div ag-field-group for="num">
-          <div class="form-group">
-            <label class="control-label ">Num</label>
-
-            <div class="controls">
-              <input class="form-control" type="text" name="num" placeholder="Enter num"
-                     ng-model="org.num" required/>
-              <ag-validation-errors for="num" required="This field is required"/>
-            </div>
-          </div>
-        </div>
-
-        <div ag-field-group for="timeZone">
-          <div class="form-group">
-            <label class="control-label ">Time Zone</label>
-
-            <div class="controls">
-              <select class="form-control" ui-select2 ng-model="org.timeZone" name="timeZone"
-                      ng-required="true"
-                      data-placeholder="Pick a Time Zone">
-                <option value=""></option>
-                <option value="UTC-6">UTC-6</option>
-                <option value="UTC-2">UTC-2</option>
-                <option value="UTC">UTC</option>
-                <option value="UTC+2">UTC+2</option>
-              </select>
-
-              <ag-validation-errors for="timeZone" required="This field is required"/>
-            </div>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <div class="col-xs-offset-4 col-xs-10">
-            <ag-submit-button></ag-submit-button>
-            <a href="#/" class="btn btn-default">Cancel</a>
-          </div>
-        </div>
+              <div class="form-group">
+                <div class="col-xs-offset-4 col-xs-10">
+                  <ag-submit-button></ag-submit-button>
+                  <a href="#/" class="btn btn-default">Cancel</a>
+                </div>
+              </div>
+            </form>
+          </div><!--/panel-body-->
+        </div><!--/panel-->
       </div>
     </div>
-  </form>
+  </div>
 </section>

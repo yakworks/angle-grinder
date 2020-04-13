@@ -1,3 +1,6 @@
+import agdemo.OrgShowCase
+import agdemo.OrgShowCaseRepo
+
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -14,6 +17,7 @@ import grails.core.GrailsApplication
 class BootStrap {
 
     OrgRepo orgRepo
+    OrgShowCaseRepo orgShowCaseRepo
     GrailsApplication grailsApplication
 
     def init = { servletContext ->
@@ -34,8 +38,10 @@ class BootStrap {
         def userFile = grailsApplication.mainContext.getResource("classpath:user.json")
         def orgFile = grailsApplication.mainContext.getResource("classpath:org.json")
         def orgs = new JsonSlurper().parse(orgFile.getInputStream())
+        OrgShowCase orgShowCase = OrgShowCase.repo.create([flush: true], [name: "name"] )
         orgs.each {
             it.description = (it.description.size() >= 255) ? it.description[0..254] : it.description
+            it.orgShowCaseId  = 1
             orgRepo.create(it)
         }
 

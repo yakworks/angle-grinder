@@ -45,8 +45,8 @@ resources.provider('resourceBuilder', function() {
               delete: { method: 'DELETE' },
 
               // mass actions (for selected rows)
-              massUpdate: { method: 'POST', params: { action: 'massUpdate' } },
-              massDelete: { method: 'POST', params: { action: 'massDelete' } }
+              massUpdate: { method: 'POST', url: basePath + '/massUpdate' },
+              massDelete: { method: 'POST', url: basePath + '/massDelete' }
             })
           } else {
             Resource = $resource(basePath + '/:action/:id', { id: '@id' }, {

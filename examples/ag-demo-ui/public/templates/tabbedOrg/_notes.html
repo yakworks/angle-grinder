@@ -1,18 +1,14 @@
-<div ng-controller="tabbedOrg.NoteListCtrl">
-  <div class="nav navbar-toolbar navbar-grid">
+<div ng-controller="demo.NoteListCtrl">
+  <div class="navbar navbar-toolbar navbar-grid navbar-default">
     <div class="navbar-inner with-selected-pointer with-grid-options">
-      <ul class="nav">
+      <ul class="nav navbar-nav">
         <li class="col-md-3">
           <a href="" ng-click="createRecord()">
-            <i class="fa fa-user"></i> Create note
+            <i class="fa fa-plus"></i>
           </a>
         </li>
-          <li>
-              <ag-grid-quick-search  for="contactsGrid" filters="filters.quickSearch"></ag-grid-quick-search>
-          </li>
       </ul>
-
-    </div>
+      <ag-grid-quick-search  for="contactsGrid" filters="filters.quickSearch"></ag-grid-quick-search>    </div>
   </div>
 
   <div ng-show="gridOptions"

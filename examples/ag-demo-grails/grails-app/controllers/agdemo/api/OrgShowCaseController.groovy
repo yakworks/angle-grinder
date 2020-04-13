@@ -1,5 +1,6 @@
-package agdemo
+package agdemo.api
 
+import agdemo.OrgShowCase
 import gorm.tools.Pager
 import gorm.tools.beans.BeanPathTools
 import gorm.tools.beans.DateUtil
@@ -24,12 +25,12 @@ class OrgShowCaseController extends BaseDomainController {
     }
 
     def formTemplate() {
-        render(template: "form")
+        render(template: "form1")
     }
 
     def searchPartial() {
         def orgShowCase = new OrgShowCase()
-        render(template: "search", model: [orgShowCase: orgShowCase])
+        render(template: "search1", model: [orgShowCase: orgShowCase])
     }
 
     protected def listCriteria() {

@@ -1,6 +1,4 @@
-package agdemo
-
-import javax.annotation.PostConstruct
+package agdemo.api
 
 import gorm.tools.Pager
 import gorm.tools.beans.BeanPathTools
@@ -13,10 +11,15 @@ import grails.plugin.gormtools.ErrorMessageService
 import grails.util.GrailsNameUtils
 import grails.validation.ValidationException
 
+import javax.annotation.PostConstruct
+
 abstract class BaseDomainController {
+    static namespace = 'api'
     def ajaxGrid = true
     abstract getDomainClass()
-    static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
+    protected List<String> getPickShowFields() { return ['*'] }
+    protected List<String> getPicSearchableFields() { return [] }
+    static allowedMethods = [save: "POST", update: ["PUT", "POST"], delete: ["POST", "DELETE"], massUpdate: "POST"]
     ErrorMessageService errorMessageService
     protected GormRepo getRepo() {
         domainClass.repo as GormRepo
@@ -275,13 +278,32 @@ abstract class BaseDomainController {
         }
     }
 
+    def pickList(){
+        Pager pager = new Pager(params)
+        Map criterias = [:]
+        String qslike = (params.q) ? ((params.q as String) + "%") : null
+        List picks = getRepo().query([criteria: criterias, max: pager.max])
+
+        Pager pagedList = pager.setupData(picks, pickShowFields)
+        render pagedList.jsonData as JSON
+    }
+
+    protected Map getGridOptions() {
+        return [:]
+    }
+
+    def gridOptions() {
+        String gridOptsJson = gridOptions as JSON
+        render(gridOptsJson)
+    }
+
     def deleteJson() {
         log.debug("in deleteJson with ${params}")
 
         def responseJson = [:]
         try {
             def result = repo.removeById(params.id)
-            render result as JSON
+            render(status: 204)
         } catch (ValidationException e) {
             log.debug("saveJson with error")
             response.status = 422

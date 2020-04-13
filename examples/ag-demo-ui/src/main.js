@@ -6,19 +6,18 @@ import OrgTab from './tabbedOrg/index'
 import User from './user/index'
 import OrgShowCase from './orgShowCase/index'
 import '~/styles/vendor.css.js'
-import '~/styles/all.scss' //using ~/ points to the main projects src dir
-//import './app.css'
+import '~/styles/all.scss' // using ~/ points to the main projects src dir
+// import './app.css'
 
-const forms = angular.module("angleGrinder.forms");
+const forms = angular.module('angleGrinder.forms')
 
-//Just an example for configuring dates formats
+// Just an example for configuring dates formats
 forms.config([
-  "agDateProvider", function(provider) {
-    provider.setViewFormat("MM/DD/YY");
-    return provider.setLocalDateFormat("YYYY-MM-DD");
+  'agDateProvider', function(provider) {
+    provider.setViewFormat('MM/DD/YY')
+    return provider.setLocalDateFormat('YYYY-MM-DD')
   }
-]);
-
+])
 
 /*
 const app = () => {

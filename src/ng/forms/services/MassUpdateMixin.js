@@ -6,14 +6,17 @@ var mixin = angular.module(formsModule)
 
 mixin.factory('MassUpdateMixin', [
   '$log', '$parse', '$uibModal', 'pathWithContext', 'NotificationDialogServ',
-  ($log, $parse, $modal, pathWithContext, NotificationDialogServ) => function($scope, args) {
-    if (args == null) { args = {} }
-    let { gridName, templateUrl, controller, extraParams } = args
-    if (controller == null) { controller = 'MassUpdateFormCtrl' }
+  ($log, $parse, $uibModal, pathWithContext, NotificationDialogServ) => function($scope, args = {}) {
+    let { gridName, templateUrl, controller, extraParams, template } = args
+    if (controller == null) {
+      controller = 'MassUpdateFormCtrl'
+    }
 
     return $scope.massUpdate = function() {
       const grid = $parse(gridName)($scope)
-      if (_.isNil(grid)) { throw new Error('the grid is not defined') }
+      if (_.isNil(grid)) {
+        throw new Error('the grid is not defined')
+      }
 
       // ..grab selected row ids
       const selectedIds = grid.getSelectedRowIds()
@@ -21,21 +24,29 @@ mixin.factory('MassUpdateMixin', [
         NotificationDialogServ.open('Please select at least one row.')
         return
       }
-
-      return $modal.open({
-
-        templateUrl: pathWithContext(templateUrl),
+      const modalOptions = {
         controller,
-
         keyboard: false, // do not close the dialog with ESC key
         backdrop: 'static', // do not close on click outside of the dialog
 
         resolve: {
-          selectedIds() { return selectedIds },
-          grid() { return grid },
-          extraParams() { return extraParams }
+          selectedIds() {
+            return selectedIds
+          },
+          grid() {
+            return grid
+          },
+          extraParams() {
+            return extraParams
+          }
         }
-      })
+      }
+      if (template) {
+        modalOptions.template = template
+      } else {
+        modalOptions.templateUrl = pathWithContext(templateUrl)
+      }
+      return $uibModal.open(modalOptions)
     }
   }
 
@@ -45,7 +56,9 @@ mixin.factory('MassUpdateMixin', [
 mixin.factory('massUpdateFormCtrlMixin', [
   '$log', 'MassUpdateHandler',
   ($log, MassUpdateHandler) => function($scope, args) {
-    if (args == null) { args = {} }
+    if (args == null) {
+      args = {}
+    }
     const { dialog, Resource, selectedIds, grid, beforeSave } = args
 
     // Generic method for mass updating selected rows

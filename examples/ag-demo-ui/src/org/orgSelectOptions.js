@@ -1,18 +1,17 @@
 /* @ngInject */
 export default class OrgSelectOptions {
-  constructor(Select2Options, pathWithContext){
-    return function () {
+  constructor(Select2Options, pathWithContext) {
+    return function() {
       return Select2Options({
-        width: 190,
+        width: "resolve",
         ajax: {
-          url: pathWithContext("/org/pickList")
+          url: pathWithContext('/api/org/pickList')
         },
 
-// formatters for result and selection
-        formatResult(org) {  return org.name; },
-        formatSelection(org) { return org.name; }
+        // formatters for result and selection
+        formatResult(org) { return org.name },
+        formatSelection(org) { return org.name }
       })
-
     }
   }
 }
