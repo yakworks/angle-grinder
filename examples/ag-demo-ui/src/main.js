@@ -8,6 +8,8 @@ import OrgShowCase from './orgShowCase/index'
 import '~/styles/vendor.css.js'
 import '~/styles/all.scss' // using ~/ points to the main projects src dir
 // import './app.css'
+import './AppCtrl'
+import './app.config'
 
 const forms = angular.module('angleGrinder.forms')
 
