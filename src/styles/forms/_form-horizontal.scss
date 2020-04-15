@@ -3,28 +3,38 @@
  * the new form-horizontal in BS3+ uses col-x for sizing labels as form-groups are "rows"
  * this old way has a fixed size on the labels and does not make width 100% on the inputs
  */
- //@import "~bootstrap-sass/bootstrap/variables";
- //@import "~bootstrap-sass/assets/stylesheets/bootstrap/variables";
- //@import "~bootstrap-sass/assets/stylesheets/bootstrap/mixins";
- /***** bootstrap forms ****/
- $padding-base-vertical: 6px;
- //FIXME move this up and out and actually compute it propery
- $line-height-computed: 20px;
+
+//@import "~bootstrap-sass/bootstrap/variables";
+//@import "~bootstrap-sass/assets/stylesheets/bootstrap/variables";
+//@import "~bootstrap-sass/assets/stylesheets/bootstrap/mixins";
+
+/***** bootstrap forms ****/
+$padding-base-vertical: 6px;
+//FIXME move this up and out and actually compute it propery
+$line-height-computed: 20px;
+
+$control-label-font-size: $size-14 !default;;
+// for 14 use .6rem, 16 use .5rem
+$control-label-padding: .6rem !default;
+$control-label-width: 160px !default;
+$control-margin-left: $control-label-width + 10px !default;
+$control-label-color: $grey-dark !default;
 
 .form-horizontal-fixed {
 
   .control-label {
-    color: #666666;
-    font-weight: bold;
+    color: $control-label-color;
+    font-size: $control-label-font-size;
+    font-weight: $weight-medium;
     text-align: right;
-    width: 160px;
+    width: $control-label-width;
     float: left;
-    padding-top: 7px;
+    padding-top: $control-label-padding;
     margin-bottom: 0;
   }
 
   .controls {
-    margin-left: 180px;
+    margin-left: $control-margin-left;
   }
 
   .form-actions {
@@ -34,6 +44,7 @@
     background-color: #f5f5f5;
     border-top: 1px solid #e5e5e5;
   }
+
   // Consistent vertical alignment of radios and checkboxes
   //
   // Labels also get some reset styles, but that is scoped to a media query below.

@@ -14,7 +14,8 @@
 // $button-focus-box-shadow-color: $grey-light !default;
 
 /* yak ui - added variables */
-$button-font-size: $size-16 !default;
+$button-font-size: $size-normal !default;
+$button-font-weight: $weight-medium !default;
 $button-height: 2.25em !default; //36px
 $button-icon-size: 1.125em !default; //18px
 $button-icon-solo-size: 1.5em !default;  //24px for
@@ -34,6 +35,7 @@ $shadow-large: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 
   text-align: center;
   // vertical-align: middle;
   font-size: $button-font-size;
+  font-weight: $button-font-weight;
   position: relative;
   overflow: hidden;
   transform: translate3d(0, 0, 0);
