@@ -58,6 +58,10 @@ form[editable-form].form-xeditable {
     &:not(:last-child){
       border-bottom: 1px solid $border;
     }
+    &:focus-within {
+      border-bottom: 1px solid $link !important;
+    }
+
   }
 
   &.editing {
