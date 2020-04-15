@@ -18,8 +18,8 @@ $input-check-focus-box-shadow-color: rgba($link, 0.35) !default;
 //Overrides
 .form-control {
   box-shadow: none;
-  line-height: 1.5;
-  height: calc(1.5em + .75rem + 2px);
+  font-size: 1rem;
+  line-height: $control-line-height;
+  height: $control-height;
   padding: .375rem .75rem;
-  border-radius: .25rem;
 }

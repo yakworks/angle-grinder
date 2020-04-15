@@ -86,20 +86,18 @@ $select2-font-size: 14px;
   .select2-choices {
     background: none;
     padding: 0;
+    height: 2.5em !important;
 
-    .select2-search-choice{
+    .select2-search-choice {
       margin-top: 5px;
       margin-bottom: 3px;
-      line-height: 1em;
+      line-height: 1.25;
       padding: 4px 20px 4px 5px;
-    }
-    .select2-search-choice {
       font-size: .93em; //13px is base is 14px
       color: $button-color;
       background: $button-background-color;
       border-color: $button-border-color;
-      //@debug reset-filter;
-      -webkit-box-shadow: none;
+      border-radius: 8px;
       box-shadow: none;
     }
     .select2-search-choice-focus {
@@ -133,7 +131,6 @@ $select2-font-size: 14px;
   }
   .select2-search-choice-close {
     @include delete-icon(14px);
-    margin-top: -8px;
     margin-right: -1px;
     left: inherit;
   }

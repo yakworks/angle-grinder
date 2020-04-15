@@ -1,6 +1,8 @@
 import _ from 'lodash'
 import template from './toolbar.html'
 
+// WORK IN PROGRESS
+
 // Set up controller
 export class ToolbarController {
   constructor($element, $transclude) {
