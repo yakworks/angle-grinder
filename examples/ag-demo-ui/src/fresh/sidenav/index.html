@@ -22,7 +22,7 @@
   <div class="sidenav-nav list">
 
     <script type="text/ng-template" id="menuItemTree">
-      <a ui-sref="{{subItem.children ? '-' : subItem.name}}" class="item-content"
+      <a ng-hide="subItem.sidenavItem === false" ui-sref="{{subItem.children ? '-' : subItem.name}}" class="item-content"
          ng-click="$ctrl.itemClick(subItem, $event)">
         <span class="title" > {{ subItem.data.title }} </span>
       </a>

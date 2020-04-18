@@ -1,8 +1,4 @@
 import appState from 'angle-grinder/src/tools/AppState'
-// import routerStates from '../../routerStates.js'
-import _ from 'lodash'
-// import feather from 'feather-icons'
-// import * as sidenav from './sidenav'
 
 const SIDENAV_MENU_LIST_ITEM = '.sidenav-menu .list-item'
 
@@ -31,6 +27,7 @@ class controller {
     this.appState = appState
     this.layout = appState.layout
     this.sideMenuItems = appState.routerStates.children
+    console.log(appState.routerStates.children)
   }
 
   get isOpen() {
@@ -100,13 +97,7 @@ class controller {
       $(`${SIDENAV_MENU_LIST_ITEM}.is-active`).addClass('is-open')
     })
   }
-  // init code here
-  // $onInit() {
-  //   this.sideMenuItems = appState.routerStates.children
-  // }
-  // $onChanges(changesObj){
-  //   console.log("sidenav $onChanges(changesObj)", changesObj)
-  // }
+
 }
 
 export default angular.module('demo.fresh.sidenav', [])

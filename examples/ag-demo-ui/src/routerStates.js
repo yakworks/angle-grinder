@@ -3,6 +3,7 @@ const orgEditState = {
   url: '/{id}',
   template: require('../public/templates/org/form.html'),
   controller: 'org.FormCtrl',
+  sidenavItem: false,
   resolve: {
     org:  ($transition$, resourceResolver) => resourceResolver($transition$.params().id)
   }
@@ -22,8 +23,6 @@ const orgListStates = {
   // template: require("./dashboards/dashboard.html"),
   template: require('../public/templates/org/list.html'),
   controller: 'org.ListCtrl',
-  // resolve: loadSequence('d3', 'ui.knob', 'countTo', 'dashboardCtrl'),
-
 }
 
 const org = {
@@ -67,5 +66,5 @@ export const fresh = {
   component: 'freshApp'
 }
 
-export default { packet, fresh, orgEditState }
+export default { packet, fresh }
 // export default appRoot

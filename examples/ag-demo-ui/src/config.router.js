@@ -11,7 +11,7 @@ angular.module('app')
     const freshCopy = _.cloneDeep(fresh)
     const packetCopy = _.cloneDeep(packet)
     //$stateProvider.state(orgEditState)
-    $urlRouterProvider.otherwise('/fresh/org')
+    $urlRouterProvider.otherwise('/fresh/org/list')
     stateHelperProvider.state(freshCopy)
     appState.routerStates = freshCopy
 
