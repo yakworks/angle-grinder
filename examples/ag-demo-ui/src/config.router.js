@@ -1,5 +1,5 @@
 import angular from 'angular'
-import { packet, fresh } from './routerStates.js'
+import { packet, fresh, orgEditState } from './routerStates.js'
 import appState from 'angle-grinder/src/tools/AppState'
 import _ from 'lodash'
 
@@ -8,11 +8,9 @@ import _ from 'lodash'
  */
 angular.module('app')
   .config(function($stateProvider, $urlRouterProvider, stateHelperProvider) {
-    // $urlRouterProvider.otherwise("/app/ui/elements");
-    // $urlRouterProvider.otherwise('/app/dashboard')
     const freshCopy = _.cloneDeep(fresh)
     const packetCopy = _.cloneDeep(packet)
-
+    //$stateProvider.state(orgEditState)
     $urlRouterProvider.otherwise('/fresh/org')
     stateHelperProvider.state(freshCopy)
     appState.routerStates = freshCopy
@@ -21,11 +19,4 @@ angular.module('app')
     stateHelperProvider.state(packetCopy)
     appState.packetStates = packetCopy
 
-    // console.log("appState.routerStates", appState.routerStates)
-    // $stateProvider.state({
-    //   name: 'fresh',
-    //   url: '/fresh',
-    //   component: 'freshApp'
-    //   //template: require('./app2.html')
-    // })
   })

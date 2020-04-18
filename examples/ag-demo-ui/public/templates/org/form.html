@@ -1,16 +1,4 @@
-<div class="subnav">
-    <ul class="nav navbar-nav nav-pills">
-        <li><a href="#/"><i class="fa fa-list"></i> Org List</a></li>
-        <li><a ng-show="org.persisted()" href="#/{{org.id}}"><i class="fa fa-th"></i> Show org</a></li>
-        <li><a ng-hide="org.persisted()" href="#/create"><i class="fa fa-plus"></i> New org</a></li>
-    </ul>
-</div>
-
 <section class="anchor">
-    <h3 class="page-header" ng-switch="org.persisted()">
-        <span ng-switch-when="true">Edit org</span>
-        <span ng-switch-when="false">Create org</span>
-    </h3>
   <div class="container-fluid container-fullw">
     <div class="row">
       <div class="col-sm-6">
@@ -20,7 +8,6 @@
                   novalidate="true"
                   ag-server-validation-errors
                   ng-submit="save(inputForm, org)">
-              <legend>Create Org</legend>
               <ag-input name="name" ng-model="org.name" required/>
               <ag-input name="num" ng-model="org.num" required/>
               <div ag-field-group >

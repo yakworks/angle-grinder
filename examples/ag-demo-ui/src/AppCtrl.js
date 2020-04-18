@@ -14,7 +14,7 @@ import freshLayoutModule from './fresh'
 // demo/examples/source panels
 import snippetsModule from './utils/demo/demo.module'
 
-import org from './org'
+import org from './tabbedOrg'
 import user from './user'
 
 // demo sections

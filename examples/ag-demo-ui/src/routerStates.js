@@ -1,14 +1,41 @@
+const orgEditState = {
+  name: 'edit',
+  url: '/{id}',
+  template: require('../public/templates/org/form.html'),
+  controller: 'org.FormCtrl',
+  resolve: {
+    org:  ($transition$, resourceResolver) => resourceResolver($transition$.params().id)
+  }
+}
 
-const orgStates = {
-  name: 'org',
+const orgCreate = {
+  name: 'create',
+  url: '/create',
+  controller: 'org.FormCtrl',
+  template: require('../public/templates/org/form.html'),
+  resolve: { org: ['Resource', Resource => new Resource()] }
+}
+
+const orgListStates = {
+  name: 'list',
+  url: '',
   // template: require("./dashboards/dashboard.html"),
   template: require('../public/templates/org/list.html'),
   controller: 'org.ListCtrl',
   // resolve: loadSequence('d3', 'ui.knob', 'countTo', 'dashboardCtrl'),
+
+}
+
+const org = {
+  name: 'org',
+  abstract: true,
+  url: '/org',
   data: {
     icon: 'mdi mdi-monitor-dashboard'
-  }
+  },
+  children: [orgListStates, orgEditState, orgCreate]
 }
+
 const userStates = {
   name: 'user',
   // template: require("./dashboards/dashboard.html"),
@@ -20,143 +47,10 @@ const userStates = {
   }
 }
 
-/*const formStates = {
-  name: 'forms',
-  template: '<div ui-view class="fade-in-up"></div>',
-  data: {
-    icon: 'mdi mdi-id-card'
-  },
-  abstract: true,
-  children: [
-    {
-      name: 'inputs',
-      component: 'agInputDemoIndex'
-    },
-    {
-      name: 'selects',
-      component: 'sel2DemoIndex'
-    },
-    {
-      name: 'xedit',
-      component: 'xeditDemoIndex'
-    },
-    {
-      name: 'validations',
-      template: require('./forms/validations-sandbox/index.html')
-    },
-    {
-      name: 'horizontal-sandbox',
-      template: require('./forms/horizontal-sandbox/index.html')
-    },
-    {
-      name: 'select2-sandbox',
-      component: 'select2DemoIndex'
-    }
-  ]
-}
 
-const uiStates = {
-  name: 'ui',
-  template: '<div ui-view class="fade-in-up"></div>',
-  abstract: true,
-  data: {
-    title: 'UI Elements',
-    icon: 'fa fa-flask'
-  },
-  children: [
-    {
-      name: 'alerts',
-      template: require('./ui/alerts/alerts.html')
-    },
-    {
-      name: 'elements',
-      template: require('./ui/elements/ui_elements.html'),
-      title: 'Elements',
-      icon: 'ti-layout-media-left-alt'
-    },
-    {
-      name: 'buttons',
-      template: require('./ui/buttons/ui_buttons.html')
-    },
-    {
-      name: 'icons',
-      template: require('./ui/icons/ui_icons.html')
-    },
-    {
-      name: 'letter-icons',
-      component: 'letterIcons'
-    },
-    {
-      name: 'modals',
-      template: require('./ui/modals/ui_modals.html')
-    },
-    {
-      name: 'panels',
-      template: require('./ui/panels/ui_panels.html')
-    },
-    {
-      name: 'toggle',
-      template: require('./ui/toggle/ui_toggle.html')
-    },
-    {
-      name: 'tabs',
-      template: require('./ui/tabs/ui_tabs.html')
-    }
-  ]
-}
-
-const gridsStates = {
-  name: 'grids',
-  abstract: true,
-  template: '<div ui-view class="fade-in-up"></div>',
-  data: {
-    icon: 'fa fa-table '
-  },
-  // data: { title: 'Grids'},
-  // ncyBreadcrumb: {
-  //   label: 'Grids'
-  // },
-  children: [
-    {
-      name: 'edit',
-      template: require('./grids/list.html'),
-      controller: 'gridExample.ListCtrl',
-      controllerAs: '$ctrl'
-    },
-    {
-      name: 'Rest Api',
-      template: require('./grids/list.html'),
-      controller: 'gridExample.Rest.ListCtrl',
-      controllerAs: '$ctrl'
-    }
-  ]
-}
-
-const componentsStates = {
-  name: 'components',
-  abstract: true,
-  template: '<div ui-view class="fade-in-up"></div>',
-  data: {
-    icon: 'fa fa-plug '
-  },
-  // data: { title: 'Grids'},
-  // ncyBreadcrumb: {
-  //   label: 'Grids'
-  // },
-  children: [
-    {
-      name: 'buttons',
-      component: 'buttonDemoIndex'
-    },
-    {
-      name: 'dropdown',
-      component: 'dropdownDemoIndex'
-    }
-  ]
-}*/
 const baseState = {
   abstract: true,
-  children: [orgStates, userStates]
+  children: [org, userStates]
 }
 
 export const packet = {
@@ -173,5 +67,5 @@ export const fresh = {
   component: 'freshApp'
 }
 
-export default { packet, fresh }
+export default { packet, fresh, orgEditState }
 // export default appRoot

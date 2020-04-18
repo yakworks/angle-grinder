@@ -8,24 +8,24 @@ const org = angular.module(MOD_NAME, [angleGrinder, contactModule, noteModule])
 org.config(function(resourceBuilderProvider) {
   resourceBuilderProvider.setRestContext('/api')
 })
-org.config(function($stateProvider, $urlRouterProvider) {
+/*org.config(function($stateProvider, $urlRouterProvider) {
   console.log('orgAdmin App config')
-  const list = {
+/!*  const list = {
     name: 'orgList',
     controller: 'org.ListCtrl',
     url: '/',
     template: require('../../public/templates/org/list.html')
-  }
+  }*!/
 
-  const create = {
-    name: 'orgCreate',
-    url: '/create',
+/!*  const create = {
+    name: 'fresh.org.create',
+    url: '/fresh/org/create',
     controller: 'org.FormCtrl',
     template: require('../../public/templates/org/form.html'),
     resolve: { org: ['Resource', Resource => new Resource()] }
-  }
+  }*!/
 
-  const show = {
+/!*  const show = {
     name: 'orgShow',
     url: '/{id}',
     template: require('../../public/templates/tabbedOrg/show.html'),
@@ -42,11 +42,11 @@ org.config(function($stateProvider, $urlRouterProvider) {
     resolve: {
       org:  ($transition$, resourceResolver) => resourceResolver($transition$.params().id)
     }
-  }
+  }*!/
   $stateProvider.state(list)
   $stateProvider.state(create)
   $stateProvider.state(show)
   $urlRouterProvider.otherwise('/')
-})
+})*/
 
 export default MOD_NAME
