@@ -1,44 +1,10 @@
 import appState from 'angle-grinder/src/tools/AppState'
-
-import angular from 'angular'
-import agModule from '~/angle-grinder'
-
-import ngTranslateModule from 'angular-translate'
-import 'angular-translate-loader-static-files'
-import fullscreen from './utils/fullscreen'
-import truncateFilters from './utils/truncate.filters'
-
-// app layout items
-import freshLayoutModule from './fresh'
-
-// demo/examples/source panels
-import snippetsModule from './utils/demo/demo.module'
-
-import org from './tabbedOrg'
-import user from './user'
-
-// demo sections
-/* import componentsModule from './components'
-import formsModule from './forms' */
-
-// fresh sidebar
-
-var app = angular.module('app', [
-  agModule,
-  freshLayoutModule,
-  snippetsModule,
-  fullscreen,
-  truncateFilters,
-  org,
-  user
-])
-
+import appModule from './app.module'
 /**
  * Main Application Controller
  */
 class AppCtrl {
   constructor($rootScope, $scope, $window, $document, $timeout, Fullscreen, cfpLoadingBar, $transitions) {
-    console.log('Apppp ctrl')
     this.$rootScope = $rootScope
     this.$scope = $scope
     // this.$win = $($window)
@@ -207,4 +173,5 @@ class AppCtrl {
   }
 }
 
+const app = angular.module(appModule)
 app.controller('AppCtrl', AppCtrl)

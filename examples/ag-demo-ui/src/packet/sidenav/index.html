@@ -56,7 +56,7 @@
       <!-- start: MAIN NAVIGATION MENU -->
 
       <script type="text/ng-template" id="menuItemTree">
-        <a ui-sref="{{subItem.children ? '-' : subItem.name}}">
+        <a  ng-hide="subItem.sidenavItem === false" ui-sref="{{subItem.children ? '-' : subItem.name}}">
           <span class="title" > {{ subItem.data.title }} </span>
           <i class="icon-arrow" ng-if="subItem.children"></i>
         </a>
