@@ -75,8 +75,6 @@ app.run(function($rootScope, $state, $stateParams) {
   $rootScope.appState = appState
 })
 
-
-
 app.constant('APP_MEDIAQUERY', {
   desktopXL: 1200,
   desktop: 992,

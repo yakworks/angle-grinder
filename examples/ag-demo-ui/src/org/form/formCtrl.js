@@ -1,14 +1,15 @@
 /* @ngInject */
 export default class FormCtrl {
-  constructor($scope, $location, org) {
-    console.log(org)
-    console.log($scope)
-    $scope.org = org
+  constructor($location) {
+    this.$location = $location
+  }
 
-    $scope.save = function(form, org) {
+    save = function(form, org) {
+      console.log(org)
+      console.log(this)
       if (form.$invalid) { return }
 
-      const onSuccess = org => $location.path(`/${org.id}`)
+      const onSuccess = org => this.$location.path(`/fresh/org/${org.id}`)
 
       const onError = function(response) {
         if (response.status === 422) {
@@ -21,5 +22,4 @@ export default class FormCtrl {
 
       return org.save({ success: onSuccess, error: onError })
     }
-  }
 }

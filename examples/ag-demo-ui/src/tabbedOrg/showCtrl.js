@@ -1,8 +1,8 @@
 /* @ngInject */
 export default class ShowCtrl {
   constructor($scope, $controller, $location, alerts) {
-    console.log("orgShowTab controller")
-    $scope.org = {id: 1}
+    console.log('orgShowTab controller')
+    $scope.org = $scope.$parent.org
 
     $scope.orgTypes = ['company', 'organisation']
 

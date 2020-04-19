@@ -8,7 +8,7 @@ const org = angular.module(MOD_NAME, [angleGrinder, contactModule, noteModule])
 org.config(function(resourceBuilderProvider) {
   resourceBuilderProvider.setRestContext('/api')
 })
-/*org.config(function($stateProvider, $urlRouterProvider) {
+/* org.config(function($stateProvider, $urlRouterProvider) {
   console.log('orgAdmin App config')
 /!*  const list = {
     name: 'orgList',
@@ -47,6 +47,6 @@ org.config(function(resourceBuilderProvider) {
   $stateProvider.state(create)
   $stateProvider.state(show)
   $urlRouterProvider.otherwise('/')
-})*/
+}) */
 
 export default MOD_NAME

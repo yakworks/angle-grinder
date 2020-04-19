@@ -3,7 +3,7 @@ export default class OrgSelectOptions {
   constructor(Select2Options, pathWithContext) {
     return function() {
       return Select2Options({
-        width: "resolve",
+        width: 'resolve',
         ajax: {
           url: pathWithContext('/api/org/pickList')
         },

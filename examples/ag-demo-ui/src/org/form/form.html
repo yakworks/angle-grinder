@@ -7,13 +7,13 @@
             <form name="inputForm" ag-form class="form-horizontal-fixed"
                   novalidate="true"
                   ag-server-validation-errors
-                  ng-submit="save(inputForm, org)">
-              <ag-input name="name" ng-model="org.name" required/>
-              <ag-input name="num" ng-model="org.num" required/>
+                  ng-submit="$ctrl.save(inputForm, $ctrl.org)">
+              <ag-input name="name" ng-model="$ctrl.org.name" required/>
+              <ag-input name="num" ng-model="$ctrl.org.num" required/>
               <div ag-field-group >
                 <label class="control-label">Time Zone</label>
                 <div class="controls">
-                  <input name="timeZone" class="form-control" ng-model="org.timeZone"
+                  <input name="timeZone" class="form-control" ng-model="$ctrl.org.timeZone"
                          ui-select2 ui-select2-data="['UTC-6','UTC-2','UTC','UTC+2']">
                 </div>
               </div>

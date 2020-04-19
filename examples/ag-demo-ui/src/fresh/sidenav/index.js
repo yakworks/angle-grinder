@@ -97,7 +97,6 @@ class controller {
       $(`${SIDENAV_MENU_LIST_ITEM}.is-active`).addClass('is-open')
     })
   }
-
 }
 
 export default angular.module('demo.fresh.sidenav', [])

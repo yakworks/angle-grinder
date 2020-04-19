@@ -4,7 +4,7 @@ import adminOrgTabs from './tabbedOrgModule'
 import FormCtrl from '../user/formCtrl'
 
 var module = angular.module(adminOrgTabs)
-  module
+module
   .controller('user.FormCtrl', FormCtrl)
   .controller('tabbedOrg.orgShowCaseCtrl', orgShowCaseCtrl)
   .controller('tabbedOrg.ShowCtrl', ShowCtrl)

@@ -4,7 +4,7 @@ export default class MassUpdateFormCtrl {
     $scope.records = { timeZone: 'UTC' }
     massUpdateFormCtrlMixin($scope, {
       dialog: $uibModalInstance,
-      Resource: resourceBuilder("/org"),
+      Resource: resourceBuilder('/org'),
       selectedIds,
       grid
     }

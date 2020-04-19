@@ -1,28 +1,24 @@
 const orgEditState = {
   name: 'edit',
   url: '/{id}',
-  template: require('../public/templates/org/form.html'),
-  controller: 'org.FormCtrl',
+  template: require('../public/templates/tabbedOrg/show.html'),
+  controller: 'org.ShowCtrl',
   sidenavItem: false,
   resolve: {
-    org:  ($transition$, resourceResolver) => resourceResolver($transition$.params().id)
+    org: ['$transition$', 'resourceResolver', ($transition$, resourceResolver) => resourceResolver($transition$.params().id)]
   }
 }
 
 const orgCreate = {
   name: 'create',
   url: '/create',
-  controller: 'org.FormCtrl',
-  template: require('../public/templates/org/form.html'),
+  component: 'orgForm',
   resolve: { org: ['Resource', Resource => new Resource()] }
 }
 
 const orgListStates = {
   name: 'list',
-  url: '',
-  // template: require("./dashboards/dashboard.html"),
-  template: require('../public/templates/org/list.html'),
-  controller: 'org.ListCtrl',
+  component: 'orgList'
 }
 
 const org = {
@@ -37,15 +33,12 @@ const org = {
 
 const userStates = {
   name: 'user',
-  // template: require("./dashboards/dashboard.html"),
   template: require('../public/templates/user/list.html'),
   controller: 'user.ListCtrl',
-  // resolve: loadSequence('d3', 'ui.knob', 'countTo', 'dashboardCtrl'),
   data: {
     icon: 'mdi mdi-monitor-dashboard'
   }
 }
-
 
 const baseState = {
   abstract: true,
@@ -54,15 +47,13 @@ const baseState = {
 
 export const packet = {
   ...baseState,
-  name: 'packet',
-  url: '/packet',
-  template: require('./packet/index.html'),
+  name: 'app',
+  template: require('./packet/index.html')
 }
 
 export const fresh = {
   ...baseState,
-  name: 'fresh',
-  url: '/fresh',
+  name: 'app',
   component: 'freshApp'
 }
 

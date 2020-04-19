@@ -9,7 +9,6 @@ app.config(function(resourceBuilderProvider) {
   resourceBuilderProvider.setRestContext('/api')
 })
 
-
 app.config(function($stateProvider, $urlRouterProvider) {
   console.log('user App')
   const list = {

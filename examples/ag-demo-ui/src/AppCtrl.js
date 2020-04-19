@@ -8,7 +8,7 @@ import 'angular-translate-loader-static-files'
 import fullscreen from './utils/fullscreen'
 import truncateFilters from './utils/truncate.filters'
 
-//app layout items
+// app layout items
 import freshLayoutModule from './fresh'
 
 // demo/examples/source panels
@@ -18,8 +18,8 @@ import org from './tabbedOrg'
 import user from './user'
 
 // demo sections
-/*import componentsModule from './components'
-import formsModule from './forms'*/
+/* import componentsModule from './components'
+import formsModule from './forms' */
 
 // fresh sidebar
 
@@ -33,13 +33,12 @@ var app = angular.module('app', [
   user
 ])
 
-
 /**
  * Main Application Controller
  */
 class AppCtrl {
   constructor($rootScope, $scope, $window, $document, $timeout, Fullscreen, cfpLoadingBar, $transitions) {
-    console.log("Apppp ctrl")
+    console.log('Apppp ctrl')
     this.$rootScope = $rootScope
     this.$scope = $scope
     // this.$win = $($window)
