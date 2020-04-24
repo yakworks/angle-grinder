@@ -9,6 +9,10 @@ app.config(function(resourceBuilderProvider) {
   resourceBuilderProvider.setRestContext('/api')
 })
 
+app.config(function(ResourceProvider) {
+  ResourceProvider.setBasePath('/user')
+})
+
 app.config(function($stateProvider, $urlRouterProvider) {
   console.log('user App')
   const list = {

@@ -1,7 +1,7 @@
 const orgEditState = {
   name: 'edit',
   url: '/{id}',
-  template: require('../public/templates/tabbedOrg/show.html'),
+  template: require('../../public/templates/tabbedOrg/show.html'),
   controller: 'org.ShowCtrl',
   sidenavItem: false,
   resolve: {
@@ -33,7 +33,7 @@ const org = {
 
 const userStates = {
   name: 'user',
-  template: require('../public/templates/user/list.html'),
+  template: require('../../public/templates/user/list.html'),
   controller: 'user.ListCtrl',
   data: {
     icon: 'mdi mdi-monitor-dashboard'

@@ -8,9 +8,9 @@ import OrgShowCase from './orgShowCase/index'
 import '~/styles/vendor.css.js'
 import '~/styles/all.scss' // using ~/ points to the main projects src dir
 // import './app.css'
-import './AppCtrl'
-import './app.config'
-import './dummyControllers/inboxCtrl'
+import './layout/AppCtrl'
+import './layout/app.config'
+import './layout/dummyControllers/inboxCtrl'
 const forms = angular.module('angleGrinder.forms')
 
 // Just an example for configuring dates formats
