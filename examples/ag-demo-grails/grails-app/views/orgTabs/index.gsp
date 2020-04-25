@@ -6,12 +6,11 @@
 </head>
 
 <body data-resource-name="org"
-      data-resource-path="/org">
+      data-resource-path="/org"
+      ng-app="admin.orgTabs">
 
-<div ng-app="admin.orgTabs" ng-init="grid = {}">
-    <ag-alerts></ag-alerts>
+<div ng-init="grid = {}">
 
-    <ui-view></ui-view>
 </div>
 
 </body>

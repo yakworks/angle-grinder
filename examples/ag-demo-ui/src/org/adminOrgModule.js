@@ -2,9 +2,10 @@ import angular from 'angular'
 import angleGrinder from '~/angle-grinder'
 import contactModule from '../contact'
 import noteModule from '../note'
+import layout from '../layout/app.module'
 
 const MOD_NAME = 'admin.org'
-const org = angular.module(MOD_NAME, [angleGrinder, contactModule, noteModule])
+const org = angular.module(MOD_NAME, [angleGrinder, contactModule, noteModule, layout])
 org.config(function(resourceBuilderProvider) {
   resourceBuilderProvider.setRestContext('/api')
 })

@@ -1,9 +1,10 @@
 import angular from 'angular'
 import angleGrinder from '~/angle-grinder'
+import layout from '../layout/app.module'
 
 const MOD_NAME = 'user'
 export default MOD_NAME
-var app = angular.module(MOD_NAME, [angleGrinder])
+var app = angular.module(MOD_NAME, [angleGrinder, layout])
 
 app.config(function(resourceBuilderProvider) {
   resourceBuilderProvider.setRestContext('/api')
