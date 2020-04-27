@@ -21,32 +21,23 @@ const orgListStates = {
   component: 'orgList'
 }
 
-const org = {
-  name: 'org',
-  abstract: true,
-  url: '/org',
-  data: {
-    icon: 'mdi mdi-monitor-dashboard'
-  },
-  children: [orgListStates, orgEditState, orgCreate]
-}
-
-const userStates = {
+/*const userStates = {
   name: 'user',
   template: require('../../public/templates/user/list.html'),
   controller: 'user.ListCtrl',
   data: {
     icon: 'mdi mdi-monitor-dashboard'
   }
-}
+}*/
 
 const baseState = {
-  abstract: true,
-  children: [org, userStates]
+
 }
 
 export const packet = {
-  ...baseState,
+  abstract: true,
+ // children: [org, userStates],
+  url:'^',
   name: 'app',
   template: require('./packet/index.html')
 }

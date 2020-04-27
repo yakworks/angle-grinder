@@ -5,7 +5,7 @@ class controller {
     this.$element = $element
     this.$state = appState.$state
     this.appState = appState
-    this.sideMenuItems = appState.routerStates.children
+    this.sideMenuItems = [{data:{title: "Org", href: 'org'}}, {data:{title: "User", href: 'user'}}]//appState.routerStates.children
   }
 
   // $onInit() {

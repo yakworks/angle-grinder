@@ -10,7 +10,6 @@ import '~/styles/all.scss' // using ~/ points to the main projects src dir
 // import './app.css'
 import './layout/AppCtrl'
 import './layout/app.config'
-import './layout/dummyControllers/inboxCtrl'
 const forms = angular.module('angleGrinder.forms')
 
 // Just an example for configuring dates formats

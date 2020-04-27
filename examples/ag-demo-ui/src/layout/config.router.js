@@ -11,9 +11,9 @@ angular.module('app')
     // const app = _.cloneDeep(fresh)
     const app = _.cloneDeep(packet)
     // $stateProvider.state(orgEditState)
-    $urlRouterProvider.otherwise('/app/org/list')
-    stateHelperProvider.state(app)
-    appState.routerStates = app
+    //$urlRouterProvider.otherwise('/app/org/list')
+    //stateHelperProvider.state(app)
+    //appState.routerStates = app
 
     // $urlRouterProvider.otherwise('/packet/dashboard')
     /*

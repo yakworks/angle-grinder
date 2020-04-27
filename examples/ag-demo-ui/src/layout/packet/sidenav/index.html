@@ -74,7 +74,18 @@
             class="list-item {{$ctrl.$state.includes(mitem.name) ? 'active open' : ''}}"
             ng-class="{ 'has-children' : mitem.children }"
             >
-          <a ui-sref="{{mitem.children ? '-' : mitem.name}}" href="{{mitem.children ? 'javascript:void(0)' : ''}}">
+          <a ng-if="!mitem.data.href" ui-sref="{{mitem.children ? '-' : mitem.name}}" href="{{mitem.children ? 'javascript:void(0)' : ''}}">
+            <div class="item-content {{mitem.children ? 'has-children' : ''}}">
+              <div class="item-media">
+                <i class="{{mitem.data.icon}}"></i>
+              </div>
+              <div class="item-inner">
+                <span class="title"> {{ mitem.data.title }} </span>
+                <i class="icon-arrow" ng-if="mitem.children"></i>
+              </div>
+            </div>
+          </a>
+          <a  ng-if="mitem.data.href" href="{{mitem.data.href}}">
             <div class="item-content {{mitem.children ? 'has-children' : ''}}">
               <div class="item-media">
                 <i class="{{mitem.data.icon}}"></i>
