@@ -31,12 +31,12 @@ export default class ListCtrl {
 
   colModel() {
     const showActionLink = (cellVal, options, rowdata) => `\
-<a href="#/app/org/${rowdata.id}">${cellVal}</a>\
+<a href="#/${rowdata.id}">${cellVal}</a>\
 `
 
     const showLink = function(cellVal, options, rowdata) {
       const content = `\
-<a href="#/app/org/${rowdata.id}">${cellVal}</a>\
+<a href="#/${rowdata.id}">${cellVal}</a>\
 `
       return window.columnAligner('link', content)
     }

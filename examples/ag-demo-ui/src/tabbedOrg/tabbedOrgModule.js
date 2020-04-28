@@ -6,7 +6,7 @@ const MOD_NAME = 'admin.orgTabs'
 angular.module(MOD_NAME, [adminOrg, layout])
   .config(function($stateProvider, $urlRouterProvider, stateHelperProvider) {
     stateHelperProvider.state(orgState)
-    $urlRouterProvider.otherwise('/list')
+    $urlRouterProvider.otherwise('/')
   })
 
 const orgEditState = {

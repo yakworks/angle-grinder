@@ -1,12 +1,15 @@
 import appState from 'angle-grinder/src/tools/AppState'
 
 class controller {
-  constructor($element) {
+  constructor($element, $location) {
+    this.$location = $location
     this.$element = $element
     this.$state = appState.$state
     this.appState = appState
     this.sideMenuItems = [{data:{title: "Org", href: 'org'}}, {data:{title: "User", href: 'user'}}]//appState.routerStates.children
   }
+
+  getCurrentUrl = () => this.$location.absUrl().split('#')[0].split('/')[3]
 
   // $onInit() {
   //   super.onInit()
