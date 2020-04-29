@@ -13,7 +13,7 @@ angular.module('app')
     // $stateProvider.state(orgEditState)
     //$urlRouterProvider.otherwise('/app/org/list')
     //stateHelperProvider.state(app)
-    //appState.routerStates = app
+    appState.routerStates = app
 
     // $urlRouterProvider.otherwise('/packet/dashboard')
     /*

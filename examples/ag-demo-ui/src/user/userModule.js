@@ -2,6 +2,7 @@ import angular from 'angular'
 import angleGrinder from '~/angle-grinder'
 import layout from '../layout/app.module'
 import layoutStateWrapper from "../layout/layoutStateWrapper"
+import userStates from './states'
 
 const MOD_NAME = 'user'
 export default MOD_NAME
@@ -24,14 +25,3 @@ app.config(function ($stateProvider, $urlRouterProvider, stateHelperProvider) {
 app.run(function ($templateCache) {
   $templateCache.put('user/list/searchForm.html', require('../../public/templates/user/search.html'))
 })
-
-export const userStates = {
-  name: 'user',
-  url: '/',
-  template: require('../../public/templates/user/list.html'),
-  controller: 'user.ListCtrl',
-  data: {
-    icon: 'mdi mdi-monitor-dashboard'
-  }
-}
-

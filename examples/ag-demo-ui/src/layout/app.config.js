@@ -35,9 +35,9 @@ app.run(function($rootScope, $state, $stateParams) {
   _.merge(appState.layout, defaultLayout)
 
   const info = {
-    name: 'Yak Works Template', // name of your project
+    name: 'Grails Yak Works Template', // name of your project
     author: 'YakWorks', // author's name or company name
-    description: 'Angular Admin Template', // brief description
+    description: 'Grails - Angular Admin Template', // brief description
     version: '1.0', // current version
     year: ((new Date()).getFullYear()) // automatic current year (for copyright information)
   }
@@ -46,9 +46,9 @@ app.run(function($rootScope, $state, $stateParams) {
   // GLOBAL APP SCOPE
   // set below basic information
   const appConfig = {
-    name: 'Yak Works Template', // name of your project
+    name: 'Grails Yak Works Demo', // name of your project
     author: 'YakWorks', // author's name or company name
-    description: 'Angular Bootstrap Admin Template', // brief description
+    description: 'Grails Angular Bootstrap Demo', // brief description
     version: '1.0', // current version
     year: ((new Date()).getFullYear()), // automatic current year (for copyright information)
     isMobile: (function() { // true if the browser is a mobile device
