@@ -1,4 +1,5 @@
 import appState from 'angle-grinder/src/tools/AppState'
+import { filterChildren } from '../../utils'
 
 const SIDENAV_MENU_LIST_ITEM = '.sidenav-menu .list-item'
 
@@ -21,13 +22,13 @@ function minimizeSidenav() {
 }
 
 class controller {
-  constructor($element, $timeout) {
+  constructor($element, $timeout, $window) {
     this.$timeout = $timeout
     this.$state = appState.$state
     this.appState = appState
     this.layout = appState.layout
-    this.sideMenuItems = appState.routerStates.children
-    console.log(appState.routerStates.children)
+    this.$window = $window
+    this.sideMenuItems = filterChildren(appState.routerStates).children
   }
 
   get isOpen() {
@@ -61,7 +62,7 @@ class controller {
     console.log('$target', $target)
 
     // if it has children then expand it
-    if (mitem.children) {
+    if (mitem.children && mitem.children.length>0) {
       $event.preventDefault()
       if (!$target.parent().hasClass('is-open')) {
         $(`${SIDENAV_MENU_LIST_ITEM} .submenu`).slideUp()
@@ -85,7 +86,13 @@ class controller {
         $(SIDENAV_MENU_LIST_ITEM).removeClass('is-open')
         $target.parent().addClass('is-open')
       }
-      appState.$state.go(mitem.name)
+      console.log("sssssssssssss", mitem.data.href)
+      if (mitem.data.href){
+        this.$window.location.href = ('/'+mitem.data.href)
+      } else {
+        appState.$state.go(mitem.name)
+      }
+
     }
   }
 

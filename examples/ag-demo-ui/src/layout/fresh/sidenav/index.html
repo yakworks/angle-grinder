@@ -35,11 +35,11 @@
       <li ng-repeat="mitem in $ctrl.sideMenuItems"
           class="list-item"
           ng-class="{
-            'has-children' : mitem.children,
+            'has-children' : (mitem.children && mitem.children.length > 0),
             'is-active': $ctrl.appState.$state.includes(mitem.name),
           }">
         <a class="item-content"
-           href="{{mitem.children ? '' : mitem.name}}"
+           href="{{mitem.children && mitem.children.length>0 ? '' : mitem.name}}"
            ng-click="$ctrl.itemClick(mitem, $event)">
           <span class="icon">
             <i class="{{mitem.data.icon}}"></i>

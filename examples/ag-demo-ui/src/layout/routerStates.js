@@ -1,5 +1,6 @@
 import orgStates from '../org/states'
 import userStates from '../user/states'
+import './fresh'
 
 export const packet = {
   abstract: true,
@@ -10,8 +11,11 @@ export const packet = {
 }
 
 export const fresh = {
+  abstract: true,
+  url:'^',
   name: 'app',
-  component: 'freshApp'
+  component: 'freshApp',
+  children: [orgStates, userStates]
 }
 
 export default { packet, fresh }

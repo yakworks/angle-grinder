@@ -29,7 +29,7 @@ app.run(function($rootScope, $state, $stateParams) {
     theme: 'light', // indicate the theme chosen for your project
     logo: 'assets/images/yak-logo1.png', // relative path of the project logo
     logoWidth: 150,
-    logoCollapsed: 'assets/images/yak-white.png', // relative path of the collapsed logo
+    logoCollapsed: 'public/assets/yak-white.png', // relative path of the collapsed logo
     logoCollapsedHeight: 23 // relative path of the collapsed logo
   }
   _.merge(appState.layout, defaultLayout)

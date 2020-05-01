@@ -4,6 +4,6 @@ export default (state) => {
     children: [state],
     url: '^',
     name: 'app',
-    template: require('../layout/packet/index.html')
+    component: 'freshApp'
   }
 }

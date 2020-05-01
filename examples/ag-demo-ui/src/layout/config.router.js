@@ -8,16 +8,6 @@ import _ from 'lodash'
  */
 angular.module('app')
   .config(function($stateProvider, $urlRouterProvider, stateHelperProvider) {
-    // const app = _.cloneDeep(fresh)
-    const app = _.cloneDeep(packet)
-    // $stateProvider.state(orgEditState)
-    //$urlRouterProvider.otherwise('/app/org/list')
-    //stateHelperProvider.state(app)
+    const app = _.cloneDeep(fresh)
     appState.routerStates = app
-
-    // $urlRouterProvider.otherwise('/packet/dashboard')
-    /*
-    stateHelperProvider.state(packetCopy)
-    appState.packetStates = packetCopy
-*/
   })

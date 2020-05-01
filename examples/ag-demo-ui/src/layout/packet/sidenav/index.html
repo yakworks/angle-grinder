@@ -58,7 +58,7 @@
       <script type="text/ng-template" id="menuItemTree">
         <a  ng-hide="subItem.sidenavItem === false" ui-sref="{{subItem.children ? '-' : subItem.name}}">
           <span class="title" > {{ subItem.data.title }} </span>
-          <i class="icon-arrow" ng-if="subItem.children"></i>
+          <i class="icon-arrow" ng-if="subItem.children && subItem.children.length > 0"></i>
         </a>
         <ul class="sub-menu" ng-if="subItem.children">
             <li ng-repeat="subItem in subItem.children" ng-include="'menuItemTree'">
@@ -92,11 +92,11 @@
               </div>
               <div class="item-inner">
                 <span class="title"> {{ mitem.data.title }} </span>
-                <i class="icon-arrow" ng-if="mitem.children"></i>
+                <i class="icon-arrow" ng-if="mitem.children && mitem.children.length > 0"></i>
               </div>
             </div>
           </a>
-          <ul class="sub-menu" ng-if="mitem.children">
+          <ul class="sub-menu" ng-if="mitem.children && mitem.children.length > 0">
             <li ng-repeat="subItem in mitem.children" ng-include="'menuItemTree'" ui-sref-active="active"></li>
           </ul>
         </li>
