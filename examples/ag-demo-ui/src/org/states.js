@@ -31,7 +31,7 @@ export default {
   data: {
     href: 'org',
     title: 'Org',
-    icon: 'mdi mdi-monitor-dashboard'
+    icon: 'mdi mdi-id-card'
   },
   children: [orgListStates, orgEditState, orgCreate]
 }
