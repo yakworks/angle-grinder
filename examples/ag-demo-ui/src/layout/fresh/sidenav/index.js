@@ -22,12 +22,13 @@ function minimizeSidenav() {
 }
 
 class controller {
-  constructor($element, $timeout, $window) {
+  constructor($element, $timeout, $window, $location) {
     this.$timeout = $timeout
     this.$state = appState.$state
     this.appState = appState
     this.layout = appState.layout
     this.$window = $window
+    this.$location = $location
     this.sideMenuItems = filterChildren(appState.routerStates).children
   }
 
@@ -94,7 +95,7 @@ class controller {
 
     }
   }
-
+  getCurrentUrl = () => this.$location.absUrl().split('#')[0].split('/')[3]
   // final run, basically an "after init"
   $postLink() {
     // make sure the submenu is shown for active menu item
