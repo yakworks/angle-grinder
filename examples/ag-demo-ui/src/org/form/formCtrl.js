@@ -5,8 +5,6 @@ export default class FormCtrl {
   }
 
     save = function(form, org) {
-      console.log(org)
-      console.log(this)
       if (form.$invalid) { return }
 
       const onSuccess = org => this.$location.path(`/fresh/org/${org.id}`)

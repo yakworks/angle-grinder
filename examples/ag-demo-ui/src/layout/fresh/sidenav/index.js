@@ -86,7 +86,6 @@ class controller {
         $(SIDENAV_MENU_LIST_ITEM).removeClass('is-open')
         $target.parent().addClass('is-open')
       }
-      console.log("sssssssssssss", mitem.data.href)
       if (mitem.data.href){
         this.$window.location.href = ('/'+mitem.data.href)
       } else {
