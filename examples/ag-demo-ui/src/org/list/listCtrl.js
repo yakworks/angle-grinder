@@ -1,7 +1,21 @@
 /* @ngInject */
 export default class ListCtrl {
-  constructor($scope, Resource, SinglePageCrudCtrlMixin, MassUpdateMixin, pathWithContext, ConfigCache) {
+  constructor($scope, Resource, SinglePageCrudCtrlMixin, MassUpdateMixin, pathWithContext, ConfigCache, ApplyFormattersServ) {
     $scope.timeZones = ['Europe/Moscow', 'Asia/Shanghai', 'America/Sao_Paulo']
+
+    const formatters = {
+      showActionLink: (cellVal, options, rowdata) => `\
+<a href="#/${rowdata.id}">${cellVal}</a>\
+`,
+
+      showLink: function (cellVal, options, rowdata) {
+        const content = `\
+<a href="#/${rowdata.id}">${cellVal}</a>\
+`
+        return window.columnAligner('link', content)
+      }
+
+    }
 
    const gridOptions  =function () {
       const func = (data) => {
@@ -16,6 +30,7 @@ export default class ListCtrl {
             rowList: [5, 10, 20]
             }
           )
+        ApplyFormattersServ(options.colModel, formatters)
         return  options
       }
       return ConfigCache.get(`/api/org/gridOptions`, func)
