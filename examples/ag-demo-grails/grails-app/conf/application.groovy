@@ -127,3 +127,20 @@ environments {
         }
     }
 }
+
+app {
+    resources {
+        currentTenant = { return [id: 1, num: "test-tenant"] }
+        setup.location = "setup" //directory under rootlocation where tenant specific config files can be put
+        rootLocation = { args ->
+            File file = new File("./rootLocation")
+            if (!file.exists()) {
+                println "Creating rootLocation ${file.canonicalPath}"
+                file.mkdirs()
+            }
+            return file.canonicalPath
+        }
+
+    }
+}
+

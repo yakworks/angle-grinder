@@ -1,18 +1,27 @@
 /* @ngInject */
 export default class ListCtrl {
-  constructor($scope, Resource, SinglePageCrudCtrlMixin, MassUpdateMixin, pathWithContext) {
+  constructor($scope, Resource, SinglePageCrudCtrlMixin, MassUpdateMixin, pathWithContext, ConfigCache) {
     $scope.timeZones = ['Europe/Moscow', 'Asia/Shanghai', 'America/Sao_Paulo']
-    $scope.gridOptions = {
-      url: pathWithContext('/api/org/list?format=json'),
-      colModel: this.colModel(),
-      multiselect: true,
-      shrinkToFit: true, // makes columns fit to width
-      sortname: 'num',
-      sortorder: 'asc',
 
-      rowNum: 5,
-      rowList: [5, 10, 20]
+   const gridOptions  =function () {
+      const func = (data) => {
+        const options =
+          angular.extend(data, {
+            url: pathWithContext('/api/org/list?format=json'),
+            multiselect: true,
+            shrinkToFit: true, // makes columns fit to width
+            sortname: 'num',
+            sortorder: 'asc',
+            rowNum: 5,
+            rowList: [5, 10, 20]
+            }
+          )
+        return  options
+      }
+      return ConfigCache.get(`/api/org/gridOptions`, func)
     }
+
+    $scope.gridOptions = gridOptions()
 
     SinglePageCrudCtrlMixin($scope, {
       Resource,

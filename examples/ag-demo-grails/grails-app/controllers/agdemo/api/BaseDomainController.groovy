@@ -10,6 +10,7 @@ import grails.converters.JSON
 import grails.plugin.gormtools.ErrorMessageService
 import grails.util.GrailsNameUtils
 import grails.validation.ValidationException
+import org.grails.plugins.appsetupconfig.AppSetupService
 
 import javax.annotation.PostConstruct
 
@@ -20,7 +21,9 @@ abstract class BaseDomainController {
     protected List<String> getPickShowFields() { return ['*'] }
     protected List<String> getPicSearchableFields() { return [] }
     static allowedMethods = [save: "POST", update: ["PUT", "POST"], delete: ["POST", "DELETE"], massUpdate: "POST"]
+    Map defaultGridOptions = [colModel: [[name: 'id']]]
     ErrorMessageService errorMessageService
+    AppSetupService appSetupService
     protected GormRepo getRepo() {
         domainClass.repo as GormRepo
     }
@@ -288,8 +291,17 @@ abstract class BaseDomainController {
         render pagedList.jsonData as JSON
     }
 
+    protected Map getExternalConfig() {
+        ConfigObject controllerConfig = grailsApplication.setupConfig.screens."$controllerName"
+        return controllerConfig
+    }
+
     protected Map getGridOptions() {
-        return [:]
+        def options = externalConfig.list.gridz
+        if (!options) {
+            return defaultGridOptions
+        }
+        return appSetupService.getValue(options)
     }
 
     def gridOptions() {
