@@ -105,6 +105,13 @@ class UserController extends BaseDomainController {
             [ name: "activeDate", label: "Active Date", width: 70, formatter: "date"],
             [ name: "inactive", label: "Inactive", width: 30, align: "center", formatter: "okIcon" ]
         ],
+        actionPopup: [ menuList:
+               """
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="#" class="row_action_edit" data-dismiss="clickover"><i class="fa fa-edit"></i> edit</a></li>
+                <li><a href="#" class="row_action_delete" data-dismiss="clickover"><i class="fa fa-trash"></i> delete</a></li>
+                </ul>"""
+        ],
         multiselect: false, // turn off multiselect
         shrinkToFit: true, // makes columns fit to width
         sortname: "login",

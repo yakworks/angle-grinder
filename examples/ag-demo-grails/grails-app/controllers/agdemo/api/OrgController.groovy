@@ -100,16 +100,6 @@ class OrgController extends BaseDomainController {
         }
     }
 
-    def delete() {
-        if (request.format == "json" || response.format == "json") {
-            def org = domainClass.get(params.id)
-            if (org) {
-                repo.remove(org)
-                render org as JSON
-            }
-        }
-    }
-
     def listUsers() {
         def pager = new Pager(params as Map)
         def crit = User.createCriteria()

@@ -1,5 +1,6 @@
 package agdemo.api
 
+import agdemo.User
 import gorm.tools.Pager
 import gorm.tools.beans.BeanPathTools
 import gorm.tools.repository.GormRepo
@@ -10,6 +11,7 @@ import grails.converters.JSON
 import grails.plugin.gormtools.ErrorMessageService
 import grails.util.GrailsNameUtils
 import grails.validation.ValidationException
+import org.grails.datastore.gorm.GormEntity
 import org.grails.plugins.appsetupconfig.AppSetupService
 
 import javax.annotation.PostConstruct
@@ -103,7 +105,6 @@ abstract class BaseDomainController {
         domainInstance.properties = params
         return [(domainInstanceName): domainInstance]
     }
-
 
     def edit(Long id) {
         def domainInstance = domainClass.get(id)
@@ -246,38 +247,39 @@ abstract class BaseDomainController {
         }
     }
 
+    protected Map deleteDomain(Map p) {
+        GormEntity entity = repo.get(p)
+        repo.remove(entity)
+        String message = RepoMessage.deleted(entity, RepoMessage.badge(entity.id, entity))
+        [ok: true, id: entity.id, message: message]
+    }
+
     def delete() {
-        if (request.format == 'json' || response.format == 'json') {
-            deleteJson()
-            return
-        }
-
-        def commonParams
-
+        log.debug("in deleteJson with ${params}")
         try {
-            def result = null
-            commonParams = (request.format == 'json' ? request.JSON : params) // get the appropriate params based on request format
-            result = repo.removeById(commonParams.id)
-            flash.message = result.message
-            withFormat {
-                html {
-                    redirect(action: "list")
-                }
-                json {
-                    render successModel(commonParams.id) as JSON
-                }
-            }
+            Map result = deleteDomain(params)
+            response.status = 200
+            render(result as JSON)
         } catch (ValidationException e) {
-            flash.message = e.messageMap
-            withFormat {
-                html {
-                    redirect(action: "show", id: commonParams.id)
-                }
-                json {
-                    response.status = 409 //Bad Request Error
-                    render errorModel(e.entity, e.meta) as JSON
-                }
-            }
+            log.error("delete with error", e)
+            response.status = 422
+            def responseJson = [
+                "code"       : 422,
+                "status"     : "error",
+                "message"    : errorMessageService.buildMsg(e.messageMap),
+                "messageCode": e.messageMap.code
+            ]
+            render responseJson as JSON
+        } catch (Exception e) {
+            log.error("delete with error", e)
+            response.status = 400
+            def responseJson = [
+                "code"   : 400,
+                "status" : "error",
+                "message": e.message,
+                "error"  : e.message
+            ]
+            render responseJson as JSON
         }
     }
 
@@ -307,29 +309,6 @@ abstract class BaseDomainController {
     def gridOptions() {
         String gridOptsJson = gridOptions as JSON
         render(gridOptsJson)
-    }
-
-    def deleteJson() {
-        log.debug("in deleteJson with ${params}")
-
-        def responseJson = [:]
-        try {
-            def result = repo.removeById(params.id)
-            render(status: 204)
-        } catch (ValidationException e) {
-            log.debug("saveJson with error")
-            response.status = 422
-            responseJson = [
-                    "status": 422,
-                    "message": buildMsg(e.messageMap),
-                    "messageCode": e.messageMap.code
-            ]
-            render responseJson as JSON
-        }
-    }
-
-    protected def deleteDomain() {
-        return repo.removeById(params.id)
     }
 
     protected buildMsg(msgMap) {
