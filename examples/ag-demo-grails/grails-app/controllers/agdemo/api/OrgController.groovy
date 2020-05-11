@@ -5,6 +5,7 @@ import agdemo.Org
 import agdemo.User
 import gorm.tools.Pager
 import gorm.tools.beans.BeanPathTools
+import gorm.tools.hibernate.criteria.CriteriaUtils
 import grails.converters.JSON
 
 class OrgController extends BaseDomainController {
@@ -45,9 +46,7 @@ class OrgController extends BaseDomainController {
                 eq 'timeZone', filters.zone
             if (filters?.zones)
                 inList 'timeZone', (filters.zones as String[])
-
-            if (params.sort)
-                order(params.sort, params.order)
+            CriteriaUtils.applyOrder(params, delegate)
         }
 
         return datalist

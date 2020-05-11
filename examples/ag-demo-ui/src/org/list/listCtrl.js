@@ -27,7 +27,15 @@ export default class ListCtrl {
             sortname: 'num',
             sortorder: 'asc',
             rowNum: 5,
-            rowList: [5, 10, 20]
+            dropGrouping: true,
+            //filterToolbar: true
+            grouping:true,
+            groupingView : {
+              groupText: ['<span style="text-transform: uppercase; font-weight: bold"> {0}</span> <span style="font-weight: 800; color: gray">Count:{1}  Sum of IDs: <span class="trim-currency">{id}</span> '],
+              groupColumnShow: [true],
+              showSummaryOnHide: false
+            },
+            rowList: [5, 10, 20, 50, 100]
             }
           )
         ApplyFormattersServ(options.colModel, formatters)

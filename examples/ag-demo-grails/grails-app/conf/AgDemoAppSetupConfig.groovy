@@ -22,7 +22,7 @@ screens {
             fields = ["*"]
             gridz = {
                 colModel = [
-                    [name: 'id', label: 'ID', width: 30, fixed: true, formatter: 'showActionLink'],
+                    [name: 'id', label: 'ID', width: 30, fixed: true, formatter: 'showActionLink', summaryType: 'sum'],
                     [name: 'name', label: 'Name (right aligned)', width: 150, fixed: true, formatter: 'showLink'],
                     [name: 'name', label: 'Name', width: 100, fixed: true, formatter: 'showActionLink'],
                     [name: 'num', label: 'Num', width: 70],
