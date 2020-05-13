@@ -27,7 +27,10 @@
     <!-- <link rel="stylesheet" data-ng-href="assets/theme/{{ app.layout.theme }}.css" /> -->
 
 </head>
-<body ng-controller="AppCtrl as $appCtrl">
+<body ng-controller="AppCtrl as $appCtrl"
+      data-resource-name="org"
+      data-resource-path="/org">
+<!-- ^^^ TODO: remove from here just temp hack-->
     <!-- <div ui-view id="app" class="lyt-2"
     ng-class="{
       'app-mobile' : $appCtrl.isMobile,

@@ -18,7 +18,7 @@ export default class ContactListCtrl {
       template: require('../../public/templates/user/form.html'),
       beforeCreate(user) {
         user.contact = {
-          org: {id: $stateParams.id},
+          org: { id: $stateParams.id },
           type: 'CUSTOMER'
         }
         return user

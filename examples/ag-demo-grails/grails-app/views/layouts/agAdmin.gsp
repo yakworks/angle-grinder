@@ -10,7 +10,7 @@
     <link rel="shortcut icon" href="${resource(dir: 'images', file: 'favicon.ico')}" type="image/x-icon">
     <link rel="apple-touch-icon" href="${resource(dir: 'images', file: 'apple-touch-icon.png')}">
     <link rel="apple-touch-icon" sizes="114x114" href="${resource(dir: 'images', file: 'apple-touch-icon-retina.png')}">
-
+    <link href="https://cdn.materialdesignicons.com/5.0.45/css/materialdesignicons.min.css" rel="stylesheet">
 
     <g:layoutHead/>
     <link href="/vendor-libs.css" rel="stylesheet">
@@ -19,58 +19,22 @@
     <script src="/vendor-libs.js" type="text/javascript"></script>
     <script src="/main.js" type="text/javascript"></script>
 
-    <style>
-    body {
-        padding-top: 40px;
-    }
-    </style>
 </head>
 
 <body data-context-path="${request.contextPath}"
       data-resource-name="${pageProperty(name: 'body.data-resource-name')}"
-      data-resource-path="${pageProperty(name: 'body.data-resource-path')}">
+      data-resource-path="${pageProperty(name: 'body.data-resource-path')}"
+      ng-app="${pageProperty(name: 'body.ng-app')}"
+      ng-controller="AppCtrl as  \$appCtrl">
+<div ui-view id="app" ng-class="{
+      'app-sidebar-fixed' : $appCtrl.layout.isSidebarFixed,
+      'app-sidenav-fixed' : $appCtrl.layout.isSidebarFixed,
+      'app-sidebar-open': appState.sidenav.open,
+      'app-sidebar-closed': !appState.sidenav.open,
+      'app-sidenav-open': appState.sidenav.open,
+      'app-sidenav-closed': !appState.sidenav.open
+    }"></div>
 
-<div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <a class="navbar-brand" href="${request.contextPath}">Example Admin</a>
-
-            <div class="navbar-collapse collapse">
-                <ul class="navbar-nav nav">
-                    <li><a href="${createLink(controller: 'user')}">List Users</a></li>
-                    <li><a href="${createLink(controller: 'orgTabs')}">List Orgs</a></li>
-%{--                    <li><a href="${createLink(controller: 'orgShowCase')}">List Org Show Case</a></li>--}%
-                </ul>
-
-                <ul class="navbar-nav nav pull-right">
-                    <li><a href="#"><i class="fa fa-cogs"></i> Control Panel</a></li>
-                    <li class="divider-vertical"></li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle " data-toggle="dropdown">
-                            <i class="fa fa-user"></i> Joshua Burnett <b class="caret"></b>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a href="#"><i class="fa fa-user"></i> Account Settings</a>
-                            </li>
-
-                            <li>
-                                <a href="#"><i class="fa fa-lock"></i> Change Password</a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="#"><i class="fa fa-power-off"></i> Logout</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <ag-spinner></ag-spinner>
-                </ul>
-            </div>
-        </div>
-</div>
-
-<div id="page" class="container top-margin-20 no-padding">
-	<g:layoutBody/>
-</div>
-
+<g:layoutBody/>
 </body>
 </html>

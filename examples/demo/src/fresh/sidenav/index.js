@@ -31,6 +31,7 @@ class controller {
     this.appState = appState
     this.layout = appState.layout
     this.sideMenuItems = appState.routerStates.children
+    console.log(this.sideMenuItems)
   }
 
   get isOpen() {

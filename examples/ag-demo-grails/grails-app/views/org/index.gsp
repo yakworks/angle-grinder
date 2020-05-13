@@ -7,12 +7,8 @@
 </head>
 
 <body data-resource-name="org"
-      data-resource-path="/org">
-
-<div ng-app="admin.org">
-    <ag-alerts></ag-alerts>
-    <ui-view></ui-view>
-</div>
+      data-resource-path="/org"
+      ng-app="admin.org">
 
 </body>
 </html>
