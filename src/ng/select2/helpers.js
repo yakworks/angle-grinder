@@ -1,5 +1,5 @@
 /**
- * converts an array of strings to
+ * converts an array of strings to and object map
  *
  * @param {Array} strArray - the array to convert
  */

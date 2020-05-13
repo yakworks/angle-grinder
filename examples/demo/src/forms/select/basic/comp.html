@@ -5,13 +5,27 @@
         data-placeholder="select a day"
         ui-select2 ui-select2-data="['Mon','Tue','Wed','Thu','Fri','Sat','Sun']">
     <input class="form-control ml-1" ng-model="$ctrl.vm.color"
-        ui-select2="{ allowClear: true, placeholder: 'select a color', data:['red','green']}"
+        ui-select2="{ allowClear: true, placeholder: 'select a color', data:['red','green', 'blue']}"
+    >
+  </div>
+</div>
+<div class="form-group" >
+  <label class="control-label">Multi</label>
+  <div class="controls is-flex">
+    <input multiple class="form-control" ng-model="$ctrl.vm.daysMulti"
+        data-placeholder="select multiple days"
+        ui-select2 ui-select2-data="$ctrl.dayData">
+    <input multiple class="form-control ml-1" ng-model="$ctrl.vm.colorsMulti"
+        ui-select2="{placeholder: 'select mutiple colors', data: $ctrl.colorData}"
     >
   </div>
 </div>
 <p>using ag-select component</p>
 <ag-select name="agSelect" ng-model="$ctrl.vm.color"
-  select-options="{ allowClear: true, placeholder: 'select a color', data: ['red','green'] }">
+  select-options="{ allowClear: true, placeholder: 'select a color', data: $ctrl.colorData }">
 </ag-select>
-<pre ng-cloak>vm1: {{$ctrl.vm}}</pre>
+<ag-select name="agSelect" label="Multi" ng-model="$ctrl.vm.color"
+  select-options="{ multiple: true, closeOnSelect: false, placeholder: 'select mutiple colors', data: $ctrl.colorData}">
+</ag-select>
+<pre ng-cloak>model: {{$ctrl.vm | json}}</pre>
 

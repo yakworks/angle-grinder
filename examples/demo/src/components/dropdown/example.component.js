@@ -11,9 +11,6 @@ class controller {
 }
 
 const template = `
-<p>
-    Lorem Ipsum
-</p>
 <div class="example-section">
   <div class="example is-vertical">
     <div class="example-component">
