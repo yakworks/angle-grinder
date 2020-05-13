@@ -1,16 +1,4 @@
-<div class="subnav">
-    <ul class="nav navbar-nav nav-pills">
-        <li><a href="#/"><i class="fa fa-list"></i> Org List</a></li>
-        <li><a ng-show="org.persisted()" href="#/{{org.id}}"><i class="fa fa-th"></i> Show org</a></li>
-        <li><a ng-hide="org.persisted()" href="#/create"><i class="fa fa-plus"></i> New org</a></li>
-    </ul>
-</div>
-
 <section class="anchor">
-    <h3 class="page-header" ng-switch="org.persisted()">
-        <span ng-switch-when="true">Edit org</span>
-        <span ng-switch-when="false">Create org</span>
-    </h3>
   <div class="container-fluid container-fullw">
     <div class="row">
       <div class="col-sm-6">
@@ -19,14 +7,13 @@
             <form name="inputForm" ag-form class="form-horizontal-fixed"
                   novalidate="true"
                   ag-server-validation-errors
-                  ng-submit="save(inputForm, org)">
-              <legend>Create Org</legend>
-              <ag-input name="name" ng-model="org.name" required/>
-              <ag-input name="num" ng-model="org.num" required/>
+                  ng-submit="$ctrl.save(inputForm, $ctrl.org)">
+              <ag-input name="name" ng-model="$ctrl.org.name" required/>
+              <ag-input name="num" ng-model="$ctrl.org.num" required/>
               <div ag-field-group >
                 <label class="control-label">Time Zone</label>
                 <div class="controls">
-                  <input name="timeZone" class="form-control" ng-model="org.timeZone"
+                  <input name="timeZone" class="form-control" ng-model="$ctrl.org.timeZone"
                          ui-select2 ui-select2-data="['UTC-6','UTC-2','UTC','UTC+2']">
                 </div>
               </div>
@@ -34,7 +21,7 @@
               <div class="form-group">
                 <div class="col-xs-offset-4 col-xs-10">
                   <ag-submit-button></ag-submit-button>
-                  <a href="#/" class="btn btn-default">Cancel</a>
+                  <a ui-sref="app.org.list" class="btn btn-default">Cancel</a>
                 </div>
               </div>
             </form>

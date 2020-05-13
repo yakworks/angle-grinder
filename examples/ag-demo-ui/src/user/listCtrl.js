@@ -1,9 +1,8 @@
 /* @ngInject */
 export default class ListCtrl {
-  constructor($scope, $log, Resource, $filter, DialogCrudCtrlMixin, ConfigCache, $http) {
+  constructor($scope, $log, Resource, $filter, DialogCrudCtrlMixin, ConfigCache, $state) {
     this.$filter = $filter
     $scope.gridOptions = ConfigCache.get('/api/user/gridOptions')
-
     DialogCrudCtrlMixin($scope, {
       Resource,
       gridName: 'usersGrid',

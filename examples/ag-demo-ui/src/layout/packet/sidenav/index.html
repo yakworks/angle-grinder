@@ -1,0 +1,108 @@
+<div class="sidebar app-aside" id="sidebar" toggleable ag-sidebar ag-aside>
+  <perfect-scrollbar class="scroller sidebar-container"
+    wheel-propagation="true" wheel-speed="10" min-scrollbar-length="20" suppress-scroll-x="true" >
+
+    <!-- start: SEARCH FORM -->
+    <div class="search-form hidden-md hidden-lg" ag-nav-search>
+      <form class="navbar-form" role="search">
+          <div class="form-group">
+              <input type="text" class="form-control" placeholder="{{ 'search.PLACEHOLDER' | translate }}">
+              <button class="btn search-button" type="submit">
+                  <i class="ti-search"></i>
+              </button>
+          </div>
+      </form>
+    </div>
+    <!-- end: SEARCH FORM -->
+
+    <!-- start: USER OPTIONS -->
+    <div class="nav-user-wrapper">
+      <div class="media">
+          <div class="media-left">
+              <!-- <a class="profile-card-photo" href="#"><img alt="" src="assets/images/avatar-1.jpg"></a> -->
+              <letter-icon data="PC" box="circle" char-count="2" size="sm"></letter-icon>
+              <!-- <letter-icon data="PC" box="circle" char-count="2" color="#407887"  size="sm"></letter-icon> -->
+          </div>
+          <div class="media-body">
+              <span class="media-heading">Jack Daniels</span>
+              <div class="text-small">
+                  A/R Manager
+              </div>
+          </div>
+
+          <div class="media-right media-middle">
+              <div uib-dropdown is-open="status.isopen">
+                  <a href class="dropdown-toggle btn btn-transparent" uib-dropdown-toggle><i class="fa fa-caret-down"></i> </a>
+                  <ul class="dropdown-menu pull-right animated fadeDownShort">
+                      <li>
+                          <a ui-sref="app.pages.user"> My Profile </a>
+                      </li>
+                      <li>
+                          <a ui-sref="app.pages.calendar"> Change Password</a>
+                      </li>
+                      <li class="divider"></li>
+                      <li>
+                          <a ui-sref="login.signin"> Log Out </a>
+                      </li>
+                  </ul>
+              </div>
+          </div>
+      </div>
+    </div>
+    <hr role="separator" aria-orientation="horizontal">
+    <!-- end: USER OPTIONS -->
+    <!-- start: SIDEBAR -->
+    <nav>
+      <!-- start: MAIN NAVIGATION MENU -->
+
+      <script type="text/ng-template" id="menuItemTree">
+        <a  ng-hide="subItem.sidenavItem === false" ui-sref="{{subItem.children ? '-' : subItem.name}}">
+          <span class="title" > {{ subItem.data.title }} </span>
+          <i class="icon-arrow" ng-if="subItem.children && subItem.children.length > 0"></i>
+        </a>
+        <ul class="sub-menu" ng-if="subItem.children">
+            <li ng-repeat="subItem in subItem.children" ng-include="'menuItemTree'">
+            </li>
+        </ul>
+      </script>
+
+      <div class="navbar-title">
+        <span>Main Menu</span>
+      </div>
+      <ul class="main-navigation-menu">
+        <li ng-repeat="mitem in $ctrl.sideMenuItems"
+            class="list-item {{$ctrl.$state.includes(mitem.name) || $ctrl.getCurrentUrl() === mitem.data.href  ? 'active open' : ''}}"
+            ng-class="{ 'has-children' : mitem.children }"
+            >
+          <a ng-if="!mitem.data.href" ui-sref="{{mitem.children ? '-' : mitem.name}}" href="{{mitem.children ? 'javascript:void(0)' : ''}}">
+            <div class="item-content {{mitem.children ? 'has-children' : ''}}">
+              <div class="item-media">
+                <i class="{{mitem.data.icon}}"></i>
+              </div>
+              <div class="item-inner">
+                <span class="title"> {{ mitem.data.title }} </span>
+                <i class="icon-arrow" ng-if="mitem.children"></i>
+              </div>
+            </div>
+          </a>
+          <a  ng-if="mitem.data.href" href="{{mitem.data.href}}">
+            <div class="item-content {{mitem.children ? 'has-children' : ''}}">
+              <div class="item-media">
+                <i class="{{mitem.data.icon}}"></i>
+              </div>
+              <div class="item-inner">
+                <span class="title"> {{ mitem.data.title }} </span>
+                <i class="icon-arrow" ng-if="mitem.children && mitem.children.length > 0"></i>
+              </div>
+            </div>
+          </a>
+          <ul class="sub-menu" ng-if="mitem.children && mitem.children.length > 0">
+            <li ng-repeat="subItem in mitem.children" ng-include="'menuItemTree'" ui-sref-active="active"></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <!-- end: SIDEBAR -->
+  </perfect-scrollbar>
+</div><!-- / sidebar -->
+

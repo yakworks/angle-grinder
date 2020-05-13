@@ -8,7 +8,8 @@ import OrgShowCase from './orgShowCase/index'
 import '~/styles/vendor.css.js'
 import '~/styles/all.scss' // using ~/ points to the main projects src dir
 // import './app.css'
-
+import './layout/AppCtrl'
+import './layout/app.config'
 const forms = angular.module('angleGrinder.forms')
 
 // Just an example for configuring dates formats
@@ -18,21 +19,3 @@ forms.config([
     return provider.setLocalDateFormat('YYYY-MM-DD')
   }
 ])
-
-/*
-const app = () => {
-  return {
-    template: require('./app.html'),
-    controller: 'AppCtrl',
-    controllerAs: 'appCtrl'
-  }
-}
-
-// the es6 pattern is to setup the module and then export the string name of the module
-angular.module('app.module', [uibootstrap])
-  .directive('app', app)
-  .service('appConfigSvc', AppConfigSvc)
-  .controller('AppCtrl', AppCtrl)
-
-export default 'app.module'
-*/

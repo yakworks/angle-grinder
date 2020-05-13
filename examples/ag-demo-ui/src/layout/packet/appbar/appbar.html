@@ -3,15 +3,15 @@
   <!-- start: NAVBAR HEADER -->
   <div class="navbar-header">
     <button href="javascript:void(0)" class="sidebar-desk-toggler btn no-radius pull-left"
-      id="sidebar-desk-toggler" ng-click="$appCtrl.toggleSidenav()" v-pressable>
+      id="sidebar-desk-toggler" ng-click="$appBarCtrl.toggleSidenav()" v-pressable>
       <i class="fa fa-bars"></i>
     </button>
     <button href="javascript:void(0)" class="sidebar-mobile-toggler btn no-radius pull-left"
-      id="sidebar-mobile-toggler" ng-click="$appCtrl.toggleSidenav()" v-pressable>
+      id="sidebar-mobile-toggler" ng-click="$appBarCtrl.toggleSidenav()" v-pressable>
       <i class="fa fa-bars"></i>
     </button>
     <a class="navbar-brand" ui-sref="app.dashboard">
-      <img ng-src="{{app.layout.logo}}" alt="{{app.name}}" style="{{'width:' + app.layout.logoWidth + 'px'}}" />
+      <img ng-src="{{$appBarCtrl.layout.logo}}" alt="{{$appBarCtrl.info.name}}" style="{{'width:' + $appBarCtrl.layout.logoWidth + 'px'}}" />
     </a>
     <!-- <a class="navbar-brand navbar-brand-collapsed" ui-sref="app.dashboard">
       <img ng-src="{{app.layout.logoCollapsed}}" alt="" style="{{'height:' + app.layout.logoCollapsedHeight + 'px'}}" />
@@ -33,10 +33,10 @@
               ng-show="isFullscreen"></i></a>
         </li>
       </ul>
-      <ul class="nav navbar-nav navbar-right m-r-0" ct-fullheight="window" data-ct-fullheight-exclusion="header"
+      <!--<ul class="nav navbar-nav navbar-right m-r-0" ct-fullheight="window" data-ct-fullheight-exclusion="header"
         data-ct-fullheight-if="isSmallDevice">
-        <!-- start: MESSAGES DROPDOWN -->
-        <!-- /// controller:  'InboxCtrl' -  localtion: assets/js/controllers/InboxCtrl.js /// -->
+        &lt;!&ndash; start: MESSAGES DROPDOWN &ndash;&gt;
+        &lt;!&ndash; /// controller:  'InboxCtrl' -  localtion: assets/js/controllers/InboxCtrl.js /// &ndash;&gt;
         <li class="dropdown" uib-dropdown on-toggle="toggled(open)" ng-controller="InboxCtrl">
           <a href class="dropdown-toggle" uib-dropdown-toggle>
             <notification-icon count='scopeVariable'>
@@ -74,8 +74,8 @@
             </li>
           </ul>
         </li>
-        <!-- end: MESSAGES DROPDOWN -->
-        <!-- start: ACTIVITIES DROPDOWN -->
+        &lt;!&ndash; end: MESSAGES DROPDOWN &ndash;&gt;
+        &lt;!&ndash; start: ACTIVITIES DROPDOWN &ndash;&gt;
         <li class="dropdown" uib-dropdown on-toggle="toggled(open)">
           <a href class="dropdown-toggle" uib-dropdown-toggle><i class="fa fa-bell"></i></a>
           <ul class="dropdown-menu dropdown-light dropdown-messages dropdown-large animated fadeInUpShort">
@@ -98,9 +98,9 @@
             </li>
           </ul>
         </li>
-        <!-- end: ACTIVITIES DROPDOWN -->
+        &lt;!&ndash; end: ACTIVITIES DROPDOWN &ndash;&gt;
 
-      </ul>
+      </ul>-->
       <ul class="nav navbar-nav navbar-right hidden-sm hidden-xs">
         <li>
           <form role="search" class="navbar-form main-search">
@@ -123,7 +123,7 @@
     </div>
     <!-- / NAVBAR COLLAPSE -->
     <div class="navbar-toolbar-right">
-      <button class="dropdown-off-sidebar btn " ng-click="toggle('off-sidebar')" v-pressable>
+      <button class="dropdown-off-sidebar btn " ng-click="$appBarCtrl.toggleRightSidebar()" v-pressable>
         <i/>
       </button>
     </div>

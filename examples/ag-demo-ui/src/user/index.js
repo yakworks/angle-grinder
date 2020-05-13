@@ -2,7 +2,7 @@ import ListCtrl from './listCtrl'
 import FormCtrl from './formCtrl'
 import SearchForm from './searchFormCtrl'
 import user from './userModule'
-import orgSelectOptions from "../org/orgSelectOptions";
+import orgSelectOptions from '../org/orgSelectOptions'
 
 angular.module(user)
   .controller('user.FormCtrl', FormCtrl)

@@ -4,4 +4,4 @@ include 'plugin'
 findProject(':plugin').name = 'angle-grinder'
 
 include 'examples/ag-demo-grails'
-findProject(':examples/ag-demo-grails').name = 'ag-demo'
+findProject(':examples/ag-demo-grails').name = 'agDemo'

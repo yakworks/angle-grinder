@@ -10,7 +10,7 @@ var resources = angular.module(MOD_NAME, [
   ngRoute,
   agPathWithContext
 ])
-
+const getResourceName = (basePath) => basePath.replace(/^(\/+)/, '')
 resources.constant('RestContext', '')
 // Build a resource for the given restful url
 // TODO cleanup and spec this service
@@ -25,7 +25,7 @@ resources.provider('resourceBuilder', function() {
       '$resource', 'pathWithContext', function($resource, pathWithContext) {
         return function(basePath, resourceName, restCont = '') {
           if (resourceName == null) {
-            resourceName = basePath.replace(/^(\/+)/, '')
+            resourceName = getResourceName(basePath)
           }
           if (restCont.length > 0) {
             restContext = restCont
@@ -111,15 +111,28 @@ resources.provider('resourceBuilder', function() {
 
 // This module defines the resource mappings required by Angular JS to map to a
 // standard Grails CRUD URL scheme that uses `"/$controller/$action?/$id?"`.
-resources.factory('Resource', [
-  '$document', 'resourceBuilder', function($document, resourceBuilder) {
-    var $body = $document.find('body')
-    var url = $body.data('resource-path')
-    var name = $body.data('resource-name')
+resources.provider('Resource', function() {
+  let basePath
+  let resourceName
+  return {
+    setBasePath: function(path) {
+      basePath = path
+      resourceName = getResourceName(path)
+    },
+    setResourceName: function(name) {
+      resourceName = name
+    },
+    $get: ['$document', 'resourceBuilder', function($document, resourceBuilder) {
+      const $body = $document.find('body')
+      const url = basePath || $body.data('resource-path')
+      const name = resourceName || $body.data('resource-name')
 
-    return resourceBuilder(url, name)
+      return resourceBuilder(url, name)
+    }
+    ]
   }
-])
+}
+)
 
 // Tries to load an user record with the given id taken from route params
 resources.factory('resourceResolver', [
