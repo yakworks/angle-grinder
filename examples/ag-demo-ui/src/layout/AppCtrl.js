@@ -1,5 +1,6 @@
 import appState from 'angle-grinder/src/tools/AppState'
 import appModule from './app.module'
+import _ from 'lodash'
 /**
  * Main Application Controller
  */
@@ -51,7 +52,7 @@ class AppCtrl {
     // save settings to local storage
     var slay = localStorage.getItem('yak-layout')
     if (slay !== null) {
-      $scope.app.layout = angular.copy(slay)
+      $scope.app.layout = _.cloneDeep(slay)
     }
 
     $scope.resetLayout = function() {
@@ -59,7 +60,7 @@ class AppCtrl {
       // start loading
       $timeout(function() {
         localStorage.removeItem('yak-layout')
-        $scope.app.layout = angular.copy($rootScope.app.defaultLayout)
+        $scope.app.layout = _.cloneDeep($rootScope.app.defaultLayout)
         $scope.loading_reset = false
         // stop loading
       }, 500)
@@ -68,8 +69,7 @@ class AppCtrl {
       $scope.loading_save = true
       // start loading
       $timeout(function() {
-        localStorage.setItem('yak-layout', angular.copy($scope.app.layout))
-        // $localStorage.lay = angular.copy($scope.app.layout);
+        localStorage.setItem('yak-layout', _.cloneDeep($scope.app.layout))
         $scope.loading_save = false
         // stop loading
       }, 500)

@@ -24,10 +24,6 @@ class OrgShowCaseController extends BaseDomainController {
         }
     }
 
-    def formTemplate() {
-        render(template: "form1")
-    }
-
     def searchPartial() {
         def orgShowCase = new OrgShowCase()
         render(template: "search1", model: [orgShowCase: orgShowCase])

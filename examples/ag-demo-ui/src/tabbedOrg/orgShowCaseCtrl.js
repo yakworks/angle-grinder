@@ -1,3 +1,5 @@
+import _ from 'lodash'
+
 /* @ngInject */
 export default class orgShowCaseCtrl {
   constructor($scope, $controller, $location, alerts, resourceBuilder, org) {
@@ -5,7 +7,7 @@ export default class orgShowCaseCtrl {
     const orgShowCase = resourceBuilder('/orgShowCase', 'orgShowCase')
     orgShowCase.get({ id: $scope.org.orgShowCaseId }, function(resp) {
       $scope.orgShowCase = resp
-      return $scope.tzShowCase = angular.copy($scope.orgShowCase)
+      return $scope.tzShowCase = _.cloneDeep($scope.orgShowCase)
     })
 
     $scope.save = orgShowCase => orgShowCase.$save()
