@@ -1,4 +1,5 @@
 import angular from 'angular'
+import agFormMod from './ag-form'
 import agInputModule from './ag-input/ag-input.comp'
 import agSelectModule from './ag-select2'
 import agValMod from './ag-validation'
@@ -12,6 +13,7 @@ const MOD_NAME = 'ag.form.components'
 export default MOD_NAME
 
 angular.module(MOD_NAME, [
+  agFormMod,
   agValMod,
   agSelectModule,
   agInputModule,

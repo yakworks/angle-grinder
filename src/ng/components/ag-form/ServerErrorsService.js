@@ -1,7 +1,5 @@
-import angular from 'angular'
 import _ from 'lodash'
 import $log from '../../../utils/Log'
-import agValMod from './agValidations.module'
 
 export default class ServerErrorsService {
   // constructor(alertTimeout) {
@@ -34,7 +32,7 @@ export default class ServerErrorsService {
         }
       }
       return result
-    })() // FIXME why are we doing this?
+    })() // FIXME why are we doing this like this?
   }
 
   setErrors(form, response, resourceName) {
@@ -49,7 +47,3 @@ export default class ServerErrorsService {
     return this.setErrorsFn(form, errors)
   }
 }
-// ServerErrorsService.$inject = ['alertTimeout']
-
-// Handles server side errors
-angular.module(agValMod).service('serverErrorsService', ServerErrorsService)
