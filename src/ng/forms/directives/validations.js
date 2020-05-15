@@ -85,6 +85,7 @@ forms.directive('agFieldGroup', ($timeout, $log, $interpolate) => ({
   template: '<div class="form-group" ng-transclude></div>',
 
   link(scope, element, attrs, formCtrl) {
+    // TODO whats this do?
     const fields = _.map((attrs.for || '').split(','), fieldExpr => $interpolate(fieldExpr)(scope))
 
     const toggleErrors = () => $timeout(function() {

@@ -3,24 +3,27 @@ import AgInputCtrl from './AgInputCtrl'
 
 export default angular
   .module('forms.ag-input', [])
-  .component('agInput', {
+  .directive('agInput', () => ({
+    restrict: 'E',
+    replace: true,
     transclude: true,
     template: require('./ag-input.comp.html'),
-    // controller: ["$attrs", InputTextComponent],
     controller: AgInputCtrl,
     controllerAs: 'cmpCtrl',
     require: {
       ngModelCtrl: 'ngModel',
       formCtrl: '^form'
     },
-    bindings: {
+    bindToController: true,
+    scope: {
       ngModel: '=',
       label: '@',
       minimumLength: '@',
       maximumLength: '@',
       name: '@',
       type: '@',
+      placeholder: '@',
       required: '@'
     }
-  })
+  }))
   .name

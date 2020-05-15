@@ -11,14 +11,14 @@ class controller {
 }
 
 const template = `
-<h1 class="is-title">ag-input</h1>
 <div class="example-section mb-4">
+  <h4>ag-input</h4>
   <div class="example is-vertical">
     <div class="example-component">
       <ag-input-demo></ag-input-demo>
     </div>
     <div class="codeview">
-      <demo-snippet raw-js='$ctrl.js' raw-html='$ctrl.html' raw-md='$ctrl.md' max-height="300px"></demo-snippet>
+      <demo-snippet raw-js='$ctrl.js' raw-html='$ctrl.html' raw-md='$ctrl.md' max-height="400px"></demo-snippet>
     </div>
   </div>
 </div>

@@ -1,34 +1,32 @@
 import angular from 'angular'
-import agValMod from './agValidations.module'
 
-angular.module(agValMod)
-  .directive('agForm', function($timeout) {
-    'use strict'
+export default agForm
 
-    return {
-      require: '',
-      priority: -1,
-      controller: 'AgFormController',
-      controllerAs: 'agForm',
-      link: function(scope, element, attrs, agForm) {
-        element
-          .on('submit', function() {
-            scope.$apply(function() {
-              agForm.submit()
-            })
+/* @ngInject */
+function agForm($timeout) {
+  return {
+    require: '',
+    priority: -1,
+    controller: AgFormController,
+    controllerAs: 'agForm',
+    link: function(scope, element, attrs, agForm) {
+      element
+        .on('submit', function() {
+          scope.$apply(function() {
+            agForm.submit()
           })
-          .on('reset', function() {
-            // should we be using a $scope.$evalAsync(
-            $timeout(function() {
-              agForm.reset()
-            })
+        })
+        .on('reset', function() {
+          // should we be using a $scope.$evalAsync(
+          scope.$evalAsync(function() {
+            agForm.reset()
           })
-      }
+        })
     }
-  })
-  .controller('AgFormController', function($scope, $element, $attrs, agValidationsConfig, $window) {
-    'use strict'
+  }
 
+  /* @ngInject */
+  function AgFormController($scope, $element, $attrs, agValidationsConfig, $window) {
     var vm = this
     var form = $element.controller('form')
     var validationStrategy = $attrs.strategy
@@ -84,5 +82,6 @@ angular.module(agValMod)
         $scope.$broadcast('AgForm.ForceErrorUpdate', null, 'reset')
       }
 
-    })
-  })
+    }) // end angular.extend
+  }
+}

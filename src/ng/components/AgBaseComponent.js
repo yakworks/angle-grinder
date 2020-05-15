@@ -20,7 +20,7 @@ export default class AgBaseComponent {
   required
   clearable
   loading
-
+  placeholder
   errors
 
   constructor($element, $timeout) {
