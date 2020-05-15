@@ -133,7 +133,6 @@ angular.module(agValMod)
           $rootScope.$broadcast('AgForm.ErrorsUpdated', ngModel)
         }
 
-
         //
         if (agForm) {
           activate()
