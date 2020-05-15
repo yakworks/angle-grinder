@@ -22,14 +22,16 @@ function minimizeSidenav() {
 }
 
 class controller {
-  constructor($element, $timeout, $window, $location) {
+  constructor($element, $timeout, $window, $location, ConfigCache) {
     this.$timeout = $timeout
     this.$state = appState.$state
     this.appState = appState
     this.layout = appState.layout
     this.$window = $window
     this.$location = $location
-    this.sideMenuItems = filterChildren(appState.routerStates).children
+    ConfigCache.get('/api/config/sidebar').then((resp) => {
+      this.sideMenuItems = resp
+    })
   }
 
   get isOpen() {

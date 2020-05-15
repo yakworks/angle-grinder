@@ -1,5 +1,12 @@
 package appsetup
 
+app {
+    sidebar = [
+        [data: [title: 'Org section', icon: 'mdi mdi-id-card'], children: [[data: [title: 'Org', href: 'org']]]],
+        [data: [title: 'User section', icon: 'mdi mdi-id-card'], children: [[data: [title: 'User', href: 'user']]]]
+    ]
+}
+
 screens {
     defaultActions {
         open {

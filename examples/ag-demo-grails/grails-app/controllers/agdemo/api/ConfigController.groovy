@@ -24,6 +24,15 @@ class ConfigController {
         }
         return appSetupService.getValue(options)
     }
+    def app(){
+        ConfigObject appConfig = grailsApplication.setupConfig.app
+        render appConfig as JSON
+    }
+
+    def sidebar(){
+        render grailsApplication.setupConfig.app.sidebar as JSON
+    }
+
     def gridOptions() {
         println gridOptions
         String gridOptsJson = gridOptions as JSON
