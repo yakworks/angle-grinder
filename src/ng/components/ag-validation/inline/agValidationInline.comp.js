@@ -24,7 +24,8 @@ angular.module(agValMod).directive('agValidationInline', function($timeout, $doc
       var inputEl, ngModel
 
       // run in new cycle to ensure that getElementById(inputId) will succeed as its not there when using components
-      scope.$evalAsync(function() {
+      //scope.$evalAsync(function() {
+      $timeout(function() { //needs to be timeout and not $evalAsync, tests fail with evalAsync, not sure why
         inputEl = element.closest('.controls').find('input:first-child, select:first-child, textarea:first-child')
         inputEl = (inputEl?.length !== 0 ) ? inputEl[0] : $document[0].getElementById(inputId)
         if (_.isNil(inputEl) || inputEl.length === 0 ) {
