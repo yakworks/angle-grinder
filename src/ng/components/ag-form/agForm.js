@@ -4,7 +4,6 @@ export default agForm
 
 /* @ngInject */
 function agForm($timeout) {
-
   return {
     require: '',
     priority: -1,
@@ -83,6 +82,6 @@ function agForm($timeout) {
         $scope.$broadcast('AgForm.ForceErrorUpdate', null, 'reset')
       }
 
-    }) //end angular.extend
+    }) // end angular.extend
   }
 }
