@@ -19,7 +19,7 @@ angular.module(agValMod)
           })
           .on('reset', function() {
             // should we be using a $scope.$evalAsync(
-            $timeout(function() {
+            scope.$evalAsync(function() {
               agForm.reset()
             })
           })

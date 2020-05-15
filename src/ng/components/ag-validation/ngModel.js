@@ -8,6 +8,10 @@ function ldebug(msg, o) {
   // $log.debug(msg, o)
 }
 
+/**
+ * Overrides angulars ng-model directive for agForms, key line is at end, only runs activate if its parent
+ * is a agForm
+ */
 angular.module(agValMod)
   .directive('ngModel', function(agValidationsConfig, $rootScope, $interpolate, $document) {
     'use strict'
@@ -129,6 +133,8 @@ angular.module(agValMod)
           $rootScope.$broadcast('AgForm.ErrorsUpdated', ngModel)
         }
 
+
+        //
         if (agForm) {
           activate()
         }
