@@ -22,34 +22,30 @@
   <div class="sidenav-nav list">
 
     <script type="text/ng-template" id="menuItemTree">
-      <a ui-sref="{{subItem.children ? '-' : subItem.name}}" class="item-content"
-         ng-click="$ctrl.itemClick(subItem, $event)">
-        <span class="title" > {{ subItem.data.title }} </span>
+      <a href="{{mitem.children ? '' : mitem.name}}" class="item-content"
+         ng-click="$ctrl.itemClick(mitem, $event)">
+        <span class="icon" ng-if="mitem.data.icon">
+          <i class="{{mitem.data.icon}}"></i>
+        </span>
+        <span class="title" > {{ mitem.data.title }} </span>
       </a>
-      <ul class="submenu list-items" ng-if="subItem.children">
-        <li ng-repeat="subItem in subItem.children" ng-include="'menuItemTree'"></li>
+      <ul class="submenu list-items" ng-if="mitem.children">
+        <li class="list-item" ng-repeat="mitem in mitem.children" ng-include="'menuItemTree'"
+        ng-class="{
+          'has-children' : mitem.children,
+          'is-active': $ctrl.appState.$state.includes(mitem.name)
+        }"></li>
       </ul>
     </script>
 
     <ul class="sidenav-menu list-items">
       <li ng-repeat="mitem in $ctrl.sideMenuItems"
           class="list-item"
+          ng-include="'menuItemTree'"
           ng-class="{
             'has-children' : mitem.children,
-            'is-active': $ctrl.appState.$state.includes(mitem.name),
+            'is-active': $ctrl.appState.$state.includes(mitem.name)
           }">
-        <a class="item-content"
-           href="{{mitem.children ? '' : mitem.name}}"
-           ng-click="$ctrl.itemClick(mitem, $event)">
-          <span class="icon">
-            <i class="{{mitem.data.icon}}"></i>
-          </span>
-          <span class="title">{{ mitem.data.title }}</span>
-        </a>
-        <ul class="submenu list-items" ng-if="mitem.children">
-          <li class="list-item" ng-repeat="subItem in mitem.children"
-            ng-include="'menuItemTree'" ui-sref-active="is-active"></li>
-        </ul>
       </li>
     </ul>
   </div>

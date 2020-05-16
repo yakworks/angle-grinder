@@ -144,6 +144,49 @@ const componentsStates = {
   ]
 }
 
+const levelStates = {
+  name: 'levels',
+  abstract: true,
+  template: '<div ui-view class="fade-in-up"></div>',
+  data: {
+    icon: 'fa fa-plug '
+  },
+  children: [
+    {
+      name: 'Foo Fuzz',
+      children: [
+        {
+          name: 'level3a',
+          data: {
+            title: 'Foo Bar Baz Buzz Boogaloo',
+          },
+          template: '<h4>level3a</h4>'
+        },
+        {
+          name: 'level3b',
+          template: '<h4>level3b</h4>'
+        }
+      ]
+    },
+    {
+      name: 'Bar Bazz',
+      children: [
+        {
+          name: 'level3c',
+          data: {
+            title: 'Bar Bazz Boogaloo',
+          },
+          template: '<h4>level3c</h4>'
+        },
+        {
+          name: 'level3d',
+          template: '<h4>level3d</h4>'
+        }
+      ]
+    },
+  ]
+}
+
 export const packet = {
   name: 'packet',
   url: '/packet',
@@ -157,7 +200,7 @@ export const fresh = {
   url: '/fresh',
   component: 'freshApp',
   abstract: true,
-  children: [dashStates, componentsStates, formStates, uiStates, gridsStates]
+  children: [dashStates, componentsStates, formStates, uiStates, gridsStates,levelStates]
 }
 
 export default { packet, fresh }
