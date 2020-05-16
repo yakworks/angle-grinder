@@ -1,6 +1,7 @@
 import angular from 'angular'
 import { packet, fresh } from './routerStates.js'
 import appState from 'angle-grinder/src/tools/AppState'
+import stateHelperInit from 'angle-grinder/src/ng/uirouter/stateHelperInit'
 import _ from 'lodash'
 
 /**
@@ -10,16 +11,19 @@ angular.module('app')
   .config(function($stateProvider, $urlRouterProvider, stateHelperProvider) {
   // $urlRouterProvider.otherwise("/app/ui/elements");
   // $urlRouterProvider.otherwise('/app/dashboard')
-    const freshCopy = _.cloneDeep(fresh)
+    const freshRouterStates = _.cloneDeep(fresh)
+    const freshMenu = _.cloneDeep(fresh)
     const packetCopy = _.cloneDeep(packet)
 
     $urlRouterProvider.otherwise('/fresh/dashboard')
-    stateHelperProvider.state(freshCopy)
-    appState.routerStates = freshCopy
+    stateHelperProvider.state(freshRouterStates)
+
+    stateHelperInit(freshMenu)
+    appState.sideMenuConfig = freshMenu
 
     // $urlRouterProvider.otherwise('/packet/dashboard')
-    stateHelperProvider.state(packetCopy)
-    appState.packetStates = packetCopy
+    // stateHelperProvider.state(packetCopy)
+    // appState.packetStates = packetCopy
 
     // console.log("appState.routerStates", appState.routerStates)
     // $stateProvider.state({

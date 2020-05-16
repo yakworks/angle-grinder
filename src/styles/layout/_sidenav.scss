@@ -159,6 +159,31 @@ $sidenav-header-logo-tablet-height: $bar-breakpoint-height - 2rem !default; // 2
           }
         }
 
+        //submenu level2
+        .submenu.list-items {
+          .list-item {
+            .item-content {
+              //padding-left: $list-has-children-indent + 1rem;
+              &:after {
+                //top: 1.5rem;
+                left: 3.0rem;
+                right: 0;
+              }
+            }
+            //submenu level3+
+            .submenu.list-items {
+              .list-item {
+                .item-content {
+                  background-color: darken($sidenav-background-color, 8%);
+                  border-bottom-color: darken($sidenav-background-color, 4%);
+                  padding-left: $list-has-children-indent + 1rem;
+                  //border-left: 1px solid lighten($sidenav-nav-active-color, 10%);
+                }
+              }
+            }
+          }
+        }
+
         // dropdown arrow
         > .item-content::after {
           border-color: $sidenav-font-color;
@@ -177,6 +202,7 @@ $sidenav-header-logo-tablet-height: $bar-breakpoint-height - 2rem !default; // 2
       }
     } // .list-item
   } // .list-items
+
 } // .sidenav-nav.list
 
 // FIXED

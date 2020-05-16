@@ -9,11 +9,11 @@
 //$list-item-with-icon-height: 56px;
 // $list-icon-margin-right
 // 16 + 24 + 16 + 16 = 72px
-$list-has-children-indent: $item-margin + $icon-dimensions + $item-margin + $item-margin; //72px
+// $list-has-children-indent: $item-margin + $icon-dimensions + $item-margin + $item-margin; //72px
 
-$list-color: $text;
-$list-hover-color: $secondary;
-$list-active-color: $secondary;
+$list-color: $text !default;
+$list-hover-color: $secondary !default;
+$list-active-color: $secondary !default;
 
 .list {
   position: relative;
@@ -83,6 +83,7 @@ $list-active-color: $secondary;
     > .item-content::after {
       border-color: $list-active-color;
       transform: rotate(-45deg);
+      top: 1.75em;
     }
   }
 
