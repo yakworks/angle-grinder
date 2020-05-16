@@ -1,5 +1,5 @@
 import angular from 'angular'
-import { packet, fresh } from './routerStates.js'
+import { fresh } from './routerStates.js'
 import appState from 'angle-grinder/src/tools/AppState'
 import _ from 'lodash'
 

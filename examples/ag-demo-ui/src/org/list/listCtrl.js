@@ -1,3 +1,4 @@
+import _ from 'lodash'
 /* @ngInject */
 export default class ListCtrl {
   constructor($scope, Resource, SinglePageCrudCtrlMixin, MassUpdateMixin, pathWithContext, ConfigCache, ApplyFormattersServ) {
@@ -20,7 +21,7 @@ export default class ListCtrl {
    const gridOptions  =function () {
       const func = (data) => {
         const options =
-          angular.extend(data, {
+          _.extend(data, {
             url: pathWithContext('/api/org/list?format=json'),
             multiselect: true,
             shrinkToFit: true, // makes columns fit to width

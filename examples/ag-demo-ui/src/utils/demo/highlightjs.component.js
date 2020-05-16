@@ -1,5 +1,6 @@
 /* global angular, hljs */
 import hljs from 'highlight.js'
+import _ from 'lodash'
 
 /**
  * returns a function to transform attrs to supported ones
@@ -56,10 +57,10 @@ ngModule.provider('hljsService', function() {
 
   return {
     setOptions: function(options) {
-      angular.extend(_hljsOptions, options)
+      _.extend(_hljsOptions, options)
     },
     getOptions: function() {
-      return angular.copy(_hljsOptions)
+      return _.cloneDeep(_hljsOptions)
     },
     $get: function() {
       (hljs.configure || angular.noop)(_hljsOptions)

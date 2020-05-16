@@ -1,3 +1,5 @@
+import _ from 'lodash'
+
 /* @ngInject */
 export default class ListCtrl {
   constructor($scope, $log, Resource, $filter, DialogCrudCtrlMixin) {
@@ -11,7 +13,7 @@ export default class ListCtrl {
       sortorder: 'asc'
     }
 
-    $scope.tzShowCase = angular.copy(Resource)
+    $scope.tzShowCase = _.cloneDeep(Resource)
 
     $scope.filters = {}
 
@@ -21,8 +23,8 @@ export default class ListCtrl {
       templateUrl: '/orgShowCase/formTemplate',
       beforeEdit(record) {
         // saves data from server to compare retrieved data and data that will be send to the server
-        $scope.tzShowCase = angular.copy(record)
-        const orgShowCase = angular.copy(record)
+        $scope.tzShowCase = _.cloneDeep(record)
+        const orgShowCase = _.cloneDeep(record)
         // convert `Contact.type` enum field to the string
         return orgShowCase
       }
