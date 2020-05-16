@@ -2,8 +2,8 @@ package appsetup
 
 app {
     sidebar = [
-        [data: [title: 'Org section', icon: 'mdi mdi-id-card'], children: [[data: [title: 'Org', href: 'org']]]],
-        [data: [title: 'User section', icon: 'mdi mdi-id-card'], children: [[data: [title: 'User', href: 'user']]]]
+        [title: 'Org section', icon: 'mdi mdi-id-card', children: [[title: 'Org', href: '/org', children: [['title': 'test']]]]],
+        [title: 'User section', icon: 'mdi mdi-id-card', children: [[title: 'User', href: '/user']]]
     ]
 }
 

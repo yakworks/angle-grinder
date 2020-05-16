@@ -1,5 +1,8 @@
 import appState from 'angle-grinder/src/tools/AppState'
-import { filterChildren } from '../../utils'
+// import routerStates from '../../routerStates.js'
+import _ from 'lodash'
+// import feather from 'feather-icons'
+// import * as sidenav from './sidenav'
 
 const SIDENAV_MENU_LIST_ITEM = '.sidenav-menu .list-item'
 
@@ -30,7 +33,7 @@ class controller {
     this.$window = $window
     this.$location = $location
     ConfigCache.get('/api/config/sidebar').then((resp) => {
-      this.sideMenuItems = resp
+      this.sideMenuItems = Object.values(resp)
     })
   }
 
@@ -65,7 +68,7 @@ class controller {
     console.log('$target', $target)
 
     // if it has children then expand it
-    if (mitem.children && mitem.children.length>0) {
+    if (mitem.children) {
       $event.preventDefault()
       if (!$target.parent().hasClass('is-open')) {
         $(`${SIDENAV_MENU_LIST_ITEM} .submenu`).slideUp()
@@ -89,8 +92,8 @@ class controller {
         $(SIDENAV_MENU_LIST_ITEM).removeClass('is-open')
         $target.parent().addClass('is-open')
       }
-      if (mitem.data.href){
-        this.$window.location.href = ('/'+mitem.data.href)
+      if (mitem.href){
+        this.$window.location.href = mitem.href
       } else {
         appState.$state.go(mitem.name)
       }
