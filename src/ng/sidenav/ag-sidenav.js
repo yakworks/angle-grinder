@@ -1,5 +1,4 @@
-import appState from 'angle-grinder/src/tools/AppState'
-import _ from 'lodash'
+import appState from '../../tools/AppState'
 
 const SIDENAV_MENU_LIST_ITEM = '.sidenav-menu .list-item'
 
@@ -22,12 +21,13 @@ function minimizeSidenav() {
 }
 
 class controller {
-  constructor($element, $timeout) {
+  constructor($timeout) {
     this.$timeout = $timeout
     this.$state = appState.$state
     this.appState = appState
     this.layout = appState.layout
     this.sideMenuItems = appState.sideMenuConfig.children
+    this.toggleSidenav = toggleSidenav
   }
 
   get isOpen() {
@@ -35,8 +35,7 @@ class controller {
   }
 
   get logo() {
-    // todo replace
-    return 'assets/images/logos/yak-white.svg'
+    return this.layout.logo
   }
 
   // checks if item is the active item
@@ -54,30 +53,24 @@ class controller {
     return this.openItem?.startsWith(mitem.name)
   }
 
-  toggleSidenav() {
-    toggleSidenav()
-  }
-
   itemClick(mitem, $event) {
     const $target = $($event.currentTarget)
-    const $liTarget = $target.parent()
-    const $ulMenuTarget = $target.parent().parent()
-    const $childMenu = $target.next()
+    const $liTarget = $target.parent() // li element container
+    const $ulMenuTarget = $target.parent().parent() // the ul list ccontainer element
+    const $childMenu = $target.next() // the child ul
     // make sure sidenav is open
     appState.sidenav.open = true
 
-    if($liTarget.hasClass('is-open')){
-      //simple toggling item item closed if its open.
+    if ($liTarget.hasClass('is-open')) {
+      // simple toggling item item closed if its open.
       this.openItem = ''
       $childMenu.slideToggle()
       $liTarget.removeClass('is-open')
-    }
-    else {
-      //its wasn't open so make sure the others are closed
-      //slide the open one up
-      $('li > .submenu', $ulMenuTarget ).slideUp()
-      //remove the open class
-      $('li.is-open', $ulMenuTarget ).removeClass('is-open')
+    } else {
+      // its wasn't open so slide the open one up
+      $('li > .submenu', $ulMenuTarget).slideUp()
+      // remove the open class
+      $('li.is-open', $ulMenuTarget).removeClass('is-open')
 
       if (mitem.children) {
         // has children so open it up
@@ -100,15 +93,11 @@ class controller {
     // make sure the submenu is shown for active menu item
     this.$timeout(function() {
       openSidenav()
-      //$(`${SIDENAV_MENU_LIST_ITEM}.is-active .submenu`).show()
-      //$(`${SIDENAV_MENU_LIST_ITEM}.is-active`).addClass('is-open')
     })
   }
 }
 
-export default angular.module('demo.fresh.sidenav', [])
-  .component('freshSidenav', {
-    controller,
-    template: require('./index.html')
-  })
-  .name
+export default {
+  controller,
+  template: require('./ag-sidenav.html')
+}
