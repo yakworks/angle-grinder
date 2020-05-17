@@ -3,7 +3,6 @@ import AgSelectRestCtrl from './AgSelectRestCtrl'
 
 const MOD_NAME = 'forms.ag-selectRest'
 export default MOD_NAME
-/** ** NOT USED, here for reference ***/
 angular
   .module(MOD_NAME, [])
   .component('agSelectRest', {
@@ -17,6 +16,7 @@ angular
     bindings: {
       url: '@',
       items: '<',
+      multiple: '@',
       label: '@',
       minimumLength: '@',
       maximumLength: '@',

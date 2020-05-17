@@ -1,50 +1,12 @@
-<!--
-<div ag-field-group for="{{cmpCtrl.id}}">
-  <label class="control-label"
-      ng-class="{required:cmpCtrl.isRequired}"
-      for="{{cmpCtrl.id}}">{{cmpCtrl.label}}</label>
-  <div class="controls" >
-    <select
-      class="form-control comp_select"
-			placeholder="{{cmpCtrl.placeholder}}"
-			name="{{cmpCtrl.name}}"
-			id="{{cmpCtrl.id}}"
-			ng-model="cmpCtrl.value"
-			ng-change="cmpCtrl.onChange()"
-      ng-required="cmpCtrl.isRequired"
-      ng-options="{{cmpCtrl.ngOptions}}">
-      <option value="" ng-show="!cmpCtrl.isRequired"></option>
-    </select>
-    <p class="help-block" ng-show="cmpCtrl.helpMessage">{{cmpCtrl.helpMessage}}</p>
-    <ag-validation-errors for="{{cmpCtrl.name}}" />
-    <error-message ng-show="{{cmpCtrl.name}}Form.{{cmpCtrl.name}}.$invalid && cmpCtrl.validationError && ({{cmpCtrl.name}}Form.{{cmpCtrl.name}}.$touched || {{cmpCtrl.name}}Form.$$parentForm.$submitted)">{{cmpCtrl.validationError}}</error-message>
-  </div>
-</div>
--->
-<style>
-  .table {
-    margin-bottom: 0px;
-  }
-  .table > thead > tr > th, .table > thead > tr > td, .table > tbody > tr > th, .table > tbody > tr > td, .table > tfoot > tr > th, .table > tfoot > tr > td {
-    border-top: 0px;
-  }
-</style>
-<div class="form-group">
-  <label class="control-label">Org</label>
-
+<div class="form-group" >
+  <label class="control-label">{{cmpCtrl.label}}</label>
   <div class="controls">
-    <ag-select2 select-ajax-url="{{cmpCtrl.url}}"
-                select-ajax-quiet-millis="250"
-                select-all
-                select-use-data-object
-                select-multiple
-                ng-model="cmpCtrl.value">
-      <table ag-select2-result class="table table-condensed org-select-result">
-        <tr>
-          <td>{{item.name}}</td>
-        </tr>
-      </table>
-    </ag-select2>
+    <input  class="form-control"
+            ng-model="cmpCtrl.value"
+            id="{{cmpCtrl.id}}"
+            ng-change="cmpCtrl.onChange()"
+            ng-required="{{cmpCtrl.isRequired}}"
+            ui-select2="cmpCtrl.selectOptions">
+    <ag-validation-inline for="{{cmpCtrl.id}}" ></ag-validation-inline>
   </div>
-
 </div>

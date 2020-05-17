@@ -40,7 +40,12 @@ class UserController extends BaseDomainController {
                 'in' ('contact.org.id', filters.org.collect { it.id as Long })
             }
             if (filters?.orgIds) {
-                'in' ('contact.org.id', (filters.orgIds as Long[]) )
+                contact{
+                    org{
+                        'in' ('id', (filters.orgIds.collect{it.toLong()}) )
+                    }
+                }
+
             }
 
             def fcontact = filters?.contact
