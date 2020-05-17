@@ -14,6 +14,7 @@ export default class AgSelectRestCtrl extends AgBaseComponent {
     super.validate()
     this.selectOptions = this.Select2Options({
       width: 'auto',
+      quietMillis: 250,
       multiple: this.multiple !== undefined,
       ajax: {
         url: this.pathWithContext(this.url)
