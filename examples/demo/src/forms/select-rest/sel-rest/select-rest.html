@@ -2,12 +2,12 @@
       class="form-horizontal-fixed" autocomplete="off" novalidate>
   <fieldset>
     <ag-select-rest name="multipleCountry"
+                    output="name"
                     multiple
                     ng-model="$ctrl.vm.multiRestSelect.ids"
                     url="/countries/pickList"/>
 
     <ag-select-rest name="country"
-                    output="id,name"
                     ng-model="$ctrl.vm.restSelect.id"
                     url="/countries/pickList"/>
 

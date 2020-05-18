@@ -13,8 +13,7 @@ export default class AgSelectRestCtrl extends AgBaseComponent {
   $onInit() {
     super.onInit()
     super.validate()
-    console.log(this.output)
-    const fields = ['id', 'name']
+    const fields = (this.output || 'id,name').split(',')
     const buildResult = (item) => {
       return fields.map((k) => item[k]).join(' - ')
     }
