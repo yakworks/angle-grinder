@@ -86,7 +86,7 @@ $select2-font-size: 14px;
   .select2-choices {
     background: none;
     padding: 0;
-    height: 2.5em !important;
+    //height: 2.5em !important;
 
     .select2-search-choice {
       margin-top: 5px;
@@ -138,8 +138,8 @@ $select2-font-size: 14px;
 
 // search field for single drop
 .select2-drop {
-  //border: 1px solid #dbdbdb !important;
-  border-top: none !important;
+  // border: 1px solid #dbdbdb !important;
+  // border-top: none !important;
 
   .select2-search {
     padding-top: 0;

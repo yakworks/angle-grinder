@@ -4,7 +4,7 @@ import idxtemplate from './index.html'
 function formatResult(item) { return item.id + ' - ' + item.name }
 
 class Select2Ctrl {
-  normalSelectOptions = [
+  selectData = [
     { id: 1, name: 'Option 1' },
     { id: 2, name: 'Option 2' },
     { id: 3, name: 'Option 3' }
@@ -14,12 +14,8 @@ class Select2Ctrl {
     // isSelect: true,
     allowClear: true,
     placeholder: 'select a foo',
-    // data: {
-    //   results: this.normalSelectOptions,
-    //   text: 'name'
-    // },
     data: {
-      results: this.normalSelectOptions,
+      results: this.selectData,
       text: 'name'
     }
     // useDataObject: true
@@ -30,7 +26,7 @@ class Select2Ctrl {
   selInputMultiOpts = {
     closeOnSelect: false,
     data: {
-      results: this.normalSelectOptions,
+      results: this.selectData,
       text: 'name'
     }
     // formatSelection: formatResult,
@@ -39,11 +35,9 @@ class Select2Ctrl {
 
   useDataObjectOpts = {
     useDataObject: true,
+    placeholder: 'select a thing',
     allowClear: true,
-    data: {
-      results: this.normalSelectOptions,
-      text: 'name'
-    }
+    data: this.selectData
   }
 
   constructor() {

@@ -65,7 +65,7 @@ angular.module('ui.select2', [])
               if (Array.isArray(opts.data)) {
                 // convertSelect2Data makes ['red','green'] into [{id:'red',name'red}, etc...]
                 const results = convertSelect2Data(opts.data)
-                console.log('results', results)
+                // console.log('results', results)
                 opts.data = { results: results }
               }
               // if data.text is not set then deefault it to name (select2 defaults it to 'text')

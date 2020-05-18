@@ -1,7 +1,9 @@
 import template from './comp.html'
 
 class controller {
-  vm = { selected: { id: 2 } } // set default value
+  vm = {
+    selected: { id: 2 }
+  } // set default value
   selectData = [
     { id: 1, name: 'Option 1' },
     { id: 2, name: 'Option 2' },
@@ -10,8 +12,15 @@ class controller {
 
   sel2Opts = {
     allowClear: true,
-    placeholder: 'select a foo',
+    // placeholder: 'select a foo',
     useDataObject: true,
+    data: this.selectData
+  }
+
+  sel2MultiOpts = {
+    placeholder: 'select many foos',
+    useDataObject: true,
+    multiple: true,
     data: this.selectData
   }
 }

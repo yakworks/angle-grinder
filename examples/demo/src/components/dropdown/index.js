@@ -2,7 +2,7 @@ import exampleModule from './example.component'
 import './styles.scss'
 
 const template = `
-<demo-title-crumb></demo-title-crumb>
+<!-- <demo-title-crumb></demo-title-crumb> -->
 <div class="dropdownDemoIndex">
   <dropdown-example></dropdown-example>
 </div>

@@ -2,8 +2,7 @@ import exampleModule from './inputs'
 import './styles.scss'
 
 const template = `
-<demo-title-crumb></demo-title-crumb>
-<div class="container-fluid container-fullw buttonDemoIndex">
+<div class="inputDemoIndex">
   <ag-input-example></ag-input-example>
 </div>
 `

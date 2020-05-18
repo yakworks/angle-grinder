@@ -1,7 +1,7 @@
-import compDemoModule from './agInput'
+import compDemoModule from './selectRest'
 // Import Raw Files
-import htmlRaw from '!raw-loader!./agInput.html'
-import jsRaw from '!raw-loader!./agInput.js'
+import htmlRaw from '!raw-loader!./select-rest.html'
+import jsRaw from '!raw-loader!./selectRest.js'
 import mdRaw from '!raw-loader!./docs.md'
 
 class controller {
@@ -15,7 +15,7 @@ const template = `
   <h4>ag-input</h4>
   <div class="example is-vertical">
     <div class="example-component">
-      <ag-input-demo></ag-input-demo>
+      <sel-rest-demo/>
     </div>
     <div class="codeview">
       <demo-snippet raw-js='$ctrl.js' raw-html='$ctrl.html' raw-md='$ctrl.md' max-height="400px"></demo-snippet>
@@ -26,7 +26,7 @@ const template = `
 // export the module name
 export default angular
   .module(compDemoModule)
-  .component('agInputExample', {
+  .component('selRestExample', {
     template,
     controller
   })

@@ -101,7 +101,7 @@
   }
 }
 
-// our mods
+// our changes here
 .codeview {
 
   // padding-top: 5px;
@@ -110,7 +110,7 @@
   background-color: #fffdf8;
 
   code.hljs {
-    max-height: 300px;
+    max-height: inherit;
   }
 
   pre {
@@ -118,6 +118,7 @@
     margin: 0;
     border: none;
     background-color: transparent;
+    max-height: inherit;
   }
   .nav-tabs > li > a {
     border: none;

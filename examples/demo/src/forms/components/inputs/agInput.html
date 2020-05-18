@@ -2,12 +2,20 @@
       class="form-horizontal-fixed" autocomplete="off" novalidate>
   <fieldset>
     <ag-input name="name" ng-model="$ctrl.vm.name"
-              minimum-length="2" required >
+              minimum-length="2" placeholder="Enter Name" required >
     </ag-input>
-    <ag-input type="email" name="email"
-              ng-model="$ctrl.vm.email" required >
+    <ag-input type="email" name="email" ng-model="$ctrl.vm.email" >
     </ag-input>
-    <ag-input name="website" ng-model="$ctrl.vm.website" ></ag-input>
+    <ag-input name="website" ng-model="$ctrl.vm.website" required="false"></ag-input>
+
+    <div class="form-group" for="customerInfoWebsite">
+      <label class="control-label required">Title</label>
+      <div class="controls">
+        <input type="text" name="title" placeholder="job title"
+          ng-model="$ctrl.vm.title" class="form-control" required="true"/>
+        <ag-validation-inline for="website2"></ag-validation-inline>
+      </div>
+    </div>
   </fieldset>
   <div class="form-group">
     <div class="controls">
