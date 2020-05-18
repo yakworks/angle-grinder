@@ -15,11 +15,10 @@ angular
     },
     bindings: {
       url: '@',
-      items: '<',
+      output: '@',
+      inputLength: '@',
       multiple: '@',
       label: '@',
-      minimumLength: '@',
-      maximumLength: '@',
       name: '@',
       required: '@'
     }
