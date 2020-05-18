@@ -3,6 +3,7 @@ import agValMod from '../agValidations.module'
 import _ from 'lodash'
 // import $log from '../../../utils/Log'
 
+// ideas taken from https://github.com/refactorthis/xtform
 /* eslint-disable */
 angular.module(agValMod).directive('agValidationInline', function($timeout, $document) {
   'use strict'
