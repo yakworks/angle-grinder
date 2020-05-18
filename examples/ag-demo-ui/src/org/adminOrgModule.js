@@ -7,7 +7,7 @@ import orgState from './states'
 import layoutStateWrapper from "../layout/layoutStateWrapper";
 
 const MOD_NAME = 'admin.org'
-const org = angular.module(MOD_NAME, [angleGrinder, contactModule, noteModule, layout])
+const org = angular.module(MOD_NAME, [angleGrinder, contactModule, noteModule, layout, 'forms.ag-selectRest'])
 org.config(function(resourceBuilderProvider) {
   resourceBuilderProvider.setRestContext('/api')
 })

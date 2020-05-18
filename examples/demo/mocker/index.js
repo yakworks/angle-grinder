@@ -1561,6 +1561,18 @@ const findById = (data, id) => {
   return data.find((obj) => obj.id === numId)
 }
 const proxy = {
+  'GET /countries/pickList': (req, res) => {
+    const { query } = req
+    const { q } = query
+    const rows = [{id:1, name: 'USA'}, {id:2, name: 'Ukraine'}, {id: 3, name: 'Poland'}]
+
+    return res.json({
+    page: 1,
+    records: 3,
+    rows: (q ? rows.filter(country =>  country.name.toLowerCase().indexOf(q.toLowerCase()) > -1): rows),
+    total: 1})
+  },
+
   // Priority processing.
   'GET /invoices': (req, res) => {
     let result = invoices

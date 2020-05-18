@@ -1,57 +1,16 @@
 <div class="well" ng-controller="user.SearchForm">
-    <form ag-search-form="usersGrid" class="form-horizontal-fixed form-multi-column no-margin"
+    <form ag-form="usersGrid" ag-search-form="usersGrid" class="form-horizontal-fixed form-multi-column no-margin"
           style="padding-bottom: 30px">
 
         <div class="columns">
             <div class="column is-one-third">
-                <div class="form-group">
-                    <label class="control-label">Org</label>
-
-                    <div class="controls">
-                      <ag-select2 select-ajax-url="/api/org/pickList"
-                                  select-ajax-quiet-millis="250"
-                                  select-all
-                                  select-use-data-object
-                                  select-multiple
-                                  ng-model="filters.orgIds">
-                        <table ag-select2-result class="table table-condensed org-select-result">
-                          <tr>
-                            <td>{{item.name}}</td>
-                          </tr>
-                        </table>
-                      </ag-select2>
-                    </div>
-
-                </div>
-
-
-
-            <div class="form-group">
-                <label class="control-label col-sm-4">Name</label>
-
-                <div class="controls">
-                    <input class="form-control" type="text" ng-model="filters.contact.name">
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="control-label col-sm-4">Login</label>
-
-                <div class="controls">
-                    <input class="form-control" type="text" ng-model="filters.login">
-                </div>
-            </div>
+              <ag-select-rest name="org" multiple url="/api/org/pickList" ng-model="filters.orgIds"/>
+              <ag-input name="name" ng-model="filters.contact.name"/>
+              <ag-input name="Login" ng-model="filters.login"/>
 
             </div>
             <div class="column is-one-third">
-
-              <div class="form-group">
-                <label class="control-label col-sm-4">Email</label>
-
-                <div class="controls">
-                  <input class="form-control" type="text" ng-model="filters.contact.email">
-                </div>
-              </div>
+              <ag-input name="email" type="email" ng-model="filters.contact.email"></ag-input>
 
               <div class="form-group">
                 <label class="control-label col-sm-4">Type</label>
