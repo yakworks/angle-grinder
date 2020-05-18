@@ -7,7 +7,6 @@ export default MOD_NAME
 
 /* @ngInject */
 class controller extends AgBaseComponent {
-
   constructor($element, $timeout) {
     super($element, $timeout)
   }
