@@ -40,6 +40,10 @@ const formStates = {
     {
       name: 'select2-sandbox',
       component: 'select2DemoIndex'
+    },
+    {
+      name: 'ag-select-rest',
+      component: 'selRestDemoIndex'
     }
   ]
 }
