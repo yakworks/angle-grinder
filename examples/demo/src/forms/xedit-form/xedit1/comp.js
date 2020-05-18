@@ -13,7 +13,7 @@ class controller {
     { id: 'moderator', name: 'moderator' }
   ]
 
-  normalSelectOptions = [
+  selectData = [
     { id: 1, name: 'Option 1' },
     { id: 2, name: 'Option 2' },
     { id: 3, name: 'Option 3' }
@@ -24,7 +24,7 @@ class controller {
     allowClear: true,
     placeholder: 'Select a foo',
     data: {
-      results: this.normalSelectOptions,
+      results: this.selectData,
       text: 'name'
     }
   }
@@ -32,7 +32,7 @@ class controller {
   selInputMultiOpts = {
     closeOnSelect: false,
     data: {
-      results: this.normalSelectOptions,
+      results: this.selectData,
       text: 'name'
     }
   }
