@@ -27,5 +27,8 @@
 <ag-select name="agSelect" label="Multi" ng-model="$ctrl.vm.color"
   select-options="{ multiple: true, closeOnSelect: false, placeholder: 'select mutiple colors', data: $ctrl.colorData}">
 </ag-select>
+<ag-select name="agSelect" label="Foo" ng-model="$ctrl.vm.foo"
+  select-options="$ctrl.fooOpts">
+</ag-select>
 <pre ng-cloak>model: {{$ctrl.vm | json}}</pre>
 

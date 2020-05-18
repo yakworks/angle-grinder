@@ -12,7 +12,7 @@ class controller {
 
   sel2Opts = {
     allowClear: true,
-    placeholder: 'select a foo',
+    // placeholder: 'select a foo',
     useDataObject: true,
     data: this.selectData
   }

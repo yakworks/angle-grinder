@@ -3,7 +3,7 @@ import _ from 'lodash'
 function formatResult(item) { return item.id + ' - ' + item.name }
 
 class SelectsCtrl {
-  normalSelectOptions = [
+  selectData = [
     { id: 1, name: 'Option A' },
     { id: 2, name: 'Option B' },
     { id: 3, name: 'Option C' }
@@ -14,7 +14,7 @@ class SelectsCtrl {
     allowClear: true,
     placeholder: 'select a foo',
     data: {
-      results: this.normalSelectOptions,
+      results: this.selectData,
       text: 'name'
     }
     // formatSelection: formatResult,
@@ -23,7 +23,7 @@ class SelectsCtrl {
 
   uiSelect2MultiOpts = {
     data: {
-      results: this.normalSelectOptions,
+      results: this.selectData,
       text: 'name'
     }
     // formatSelection: formatResult,
