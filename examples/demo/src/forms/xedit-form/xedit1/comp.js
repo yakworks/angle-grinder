@@ -23,6 +23,7 @@ class controller {
     // isSelect: true,
     allowClear: true,
     placeholder: 'Select a foo',
+    useDataObject: true,
     data: {
       results: this.selectData,
       text: 'name'
