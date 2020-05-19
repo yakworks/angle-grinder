@@ -166,14 +166,14 @@ angular.module('ui.select2', [])
                   })
                 })
               }
-              //if its ajax & multiple & closeOnSelect then override defaults so it works
-              if(opts.multiple && opts.ajax && !opts.closeOnSelect){
-                elm.bind("select2-selecting", function(e) {
-                  e.preventDefault();
+              // if its ajax & multiple & closeOnSelect then override defaults so it works
+              if (opts.multiple && opts.ajax && !opts.closeOnSelect) {
+                elm.bind('select2-selecting', function(e) {
+                  e.preventDefault()
                   var data = ngModelCtrl.$modelValue || []
                   data.push(e.object)
                   ngModelCtrl.$setViewValue(data)
-                });
+                })
               }
             }
             // console.log("opts for select2",opts)
@@ -206,11 +206,11 @@ angular.module('ui.select2', [])
               // }
               if (ngModelCtrl.$modelValue) {
                 log(`Initialize elm.select2(${dataVar}, ngModelCtrl.$modelValue)`, ngModelCtrl.$modelValue)
-                let mdata = ngModelCtrl.$modelValue
-                //if its useDataObject & existing data has only and "id" then let select pick it up
-                if(opts.useDataObject && !opts.multiple && _.keys(mdata).length === 1){
+                const mdata = ngModelCtrl.$modelValue
+                // if its useDataObject & existing data has only and "id" then let select pick it up
+                if (opts.useDataObject && !opts.multiple && _.keys(mdata).length === 1) {
                   elm.select2('val', mdata[idProp])
-                } else if (opts.useDataObject || opts.multiple){ //if its multi, always use 'data'
+                } else if (opts.useDataObject || opts.multiple) { // if its multi, always use 'data'
                   elm.select2(dataVar, mdata)
                 } else {
                   elm.select2('val', mdata[idProp])
