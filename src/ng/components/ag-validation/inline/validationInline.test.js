@@ -59,7 +59,7 @@ describe('inline validation directive', function() {
       expect(function() {
         var tmp = '<form ag-form><ag-validation-inline></ag-validation-inline></form>'
         compileTemplate(tmp)
-      }).toThrow(new Error('Can not find input element to attach the validation directive'))
+      }).toThrow(new Error('Can not find input element for the validation directive'))
     })
 
     it('should ensure that the input element specified exists', function() {

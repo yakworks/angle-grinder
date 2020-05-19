@@ -1,5 +1,7 @@
 <div class="form-group">
-  <label class="control-label" for="{{cmpCtrl.id}}">{{cmpCtrl.label}}</label>
+  <label class="control-label"
+      ng-class="{required: cmpCtrl.isRequired}"
+      for="{{cmpCtrl.id}}">{{cmpCtrl.label}}</label>
   <div class="controls">
     <input
       class="form-control"

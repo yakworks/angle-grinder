@@ -6,7 +6,7 @@ export default angular
   .directive('agInput', () => ({
     restrict: 'E',
     replace: true,
-    transclude: true,
+    // transclude: true,
     template: require('./ag-input.comp.html'),
     controller: AgInputCtrl,
     controllerAs: 'cmpCtrl',
