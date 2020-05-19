@@ -33,74 +33,7 @@
               ng-show="isFullscreen"></i></a>
         </li>
       </ul>
-<!--      <ul class="nav navbar-nav navbar-right m-r-0" ct-fullheight="window" data-ct-fullheight-exclusion="header"
-        data-ct-fullheight-if="isSmallDevice">
-        &lt;!&ndash; start: MESSAGES DROPDOWN &ndash;&gt;
-        &lt;!&ndash; /// controller:  'InboxCtrl' -  localtion: assets/js/controllers/InboxCtrl.js /// &ndash;&gt;
-        <li class="dropdown" uib-dropdown on-toggle="toggled(open)" ng-controller="InboxCtrl">
-          <a href class="dropdown-toggle" uib-dropdown-toggle>
-            <notification-icon count='scopeVariable'>
-              <i class="fa fa-envelope"></i>
-            </notification-icon>
-          </a>
-          <ul class="dropdown-menu dropdown-light dropdown-messages dropdown-large animated fadeInUpShort">
-            <li>
-              <span class="dropdown-header" translate="topbar.messages.HEADER"> Unread messages</span>
-            </li>
-            <li>
-              <div class="drop-down-wrapper ps-container">
-                <ul>
-                  <li class="unread" ng-repeat="message in messages | orderBy: 'date':true | limitTo:3 ">
-                    <a href="javascript:;" ng-class="{ unread: !message.read }">
-                      <div class="clearfix">
-                        <div class="thread-image">
-                          <img ng-src="{{ message.avatar && message.avatar || noAvatarImg }}" alt=""
-                            class="img-responsive img-rounded">
-                        </div>
-                        <div class="thread-content">
-                          <span class="author">{{message.from}}</span>
-                          <span class="preview">{{ message.content | htmlToPlaintext | words:15 :true }}</span>
-                          <span class="time"> {{ message.date | date: "MM/dd/yyyy 'at' h:mma" }}</span>
-                        </div>
-                      </div>
-                    </a>
-                  </li>
 
-                </ul>
-              </div>
-            </li>
-            <li class="view-all">
-              <a href="javascript:void(0)" translate="topbar.messages.SEEALL"> See All </a>
-            </li>
-          </ul>
-        </li>
-        &lt;!&ndash; end: MESSAGES DROPDOWN &ndash;&gt;
-        &lt;!&ndash; start: ACTIVITIES DROPDOWN &ndash;&gt;
-        <li class="dropdown" uib-dropdown on-toggle="toggled(open)">
-          <a href class="dropdown-toggle" uib-dropdown-toggle><i class="fa fa-bell"></i></a>
-          <ul class="dropdown-menu dropdown-light dropdown-messages dropdown-large animated fadeInUpShort">
-            <li>
-              <span class="dropdown-header" translate="topbar.activities.HEADER"> You have new notifications</span>
-            </li>
-            <li>
-              <div class="drop-down-wrapper ps-container">
-                <div class="list-group no-margin">
-                  <a class="media list-group-item" href=""> <img class="img-circle" alt="..."
-                      src="assets/images/avatar-1.jpg"> <span class="media-body block no-margin"> Use awesome animate.css
-                      <small class="block text-grey">10 minutes ago</small> </span> </a>
-                  <a class="media list-group-item" href=""> <span class="media-body block no-margin"> 1.0 initial released
-                      <small class="block text-grey">1 hour ago</small> </span> </a>
-                </div>
-              </div>
-            </li>
-            <li class="view-all">
-              <a href="javascript:void(0)" translate="topbar.activities.SEEALL"> See All </a>
-            </li>
-          </ul>
-        </li>
-        &lt;!&ndash; end: ACTIVITIES DROPDOWN &ndash;&gt;
-
-      </ul>-->
       <ul class="nav navbar-nav navbar-right hidden-sm hidden-xs">
         <li>
           <form role="search" class="navbar-form main-search">

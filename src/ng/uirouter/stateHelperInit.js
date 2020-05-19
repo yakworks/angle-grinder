@@ -48,11 +48,11 @@ export default function stateHelperInit(state, opts) {
       stateHelperInit(childState, options)
     })
 
-    if (options.siblingTraversal) {
+    if (options.siblingTraversal && state.sidenavItem !== false) {
       addSiblings(state)
     }
   }
-  // console.log("state ", state)
+   console.log("state ", state)
   return self
 }
 

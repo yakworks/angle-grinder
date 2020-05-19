@@ -3,6 +3,8 @@ import _ from 'lodash'
 import appName from './app.module'
 import './config.router'
 import appState from 'angle-grinder/src/tools/AppState'
+import orgStates from "../org/states";
+import userStates from "../user/states";
 
 const app = angular.module('app')
 // export default app.name
@@ -12,6 +14,7 @@ app.run(function($rootScope, $state, $stateParams) {
   $rootScope.$state = $state
   appState.$state = $state
   $rootScope.$stateParams = $stateParams
+  appState.sideMenuConfig = {children: [{data:{icon: 'mdi mdi-id-card', title: 'Org Section'}, children:[orgStates]}, userStates]}
 
   const userInfo = {
     id: '123',
