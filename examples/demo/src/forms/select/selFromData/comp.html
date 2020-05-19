@@ -1,14 +1,11 @@
-<div ag-field-group >
-  <label class="control-label">From Data</label>
-  <div class="controls">
-    <input class="form-control" ng-model="$ctrl.vm.selected" ui-select2="$ctrl.sel2Opts">
-  </div>
-</div>
 <ag-select name="agSelect" ng-model="$ctrl.vm.selected"
   select-options="$ctrl.sel2Opts">
 </ag-select>
 <ag-select name="agSelect" label="multiple" ng-model="$ctrl.vm.selectedMulti"
-  select-options="$ctrl.sel2MultiOpts">
+  select-options="$ctrl.multiOpts">
+</ag-select>
+<ag-select name="multipleColors" label="multiple color tags" ng-model="$ctrl.vm.selectedColors"
+  select-options="$ctrl.multiTagsOpts">
 </ag-select>
 <pre ng-cloak>model: {{$ctrl.vm | json}}</pre>
 

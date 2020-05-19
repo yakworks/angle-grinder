@@ -7,6 +7,7 @@ export default class AgSelectRestCtrl extends AgBaseComponent {
   selectOptions = {}
   opts = {
     minimumInputLength: 3,
+    closeOnSelect: false,
     useDataObject: true,
     ajax: {
       dataType: 'json',
@@ -56,8 +57,34 @@ export default class AgSelectRestCtrl extends AgBaseComponent {
     return markup;
   }
 
+  // $postLink(scope, elm) {
+  //   let el = this.$element
+  //   this.$timeout(function() {
+  //     el.on("select2-selecting", function(e) {
+  //       e.preventDefault();
+  //       handleSelection(e, el);
+  //     });
+  //   })
+  // }
+
   // onChange() {
   //   super.onChange()
   //   super.validate()
   // }
+}
+
+// hack so closeOnSelect: false works
+// https://github.com/select2/select2/issues/2264#issuecomment-213003190
+function handleSelection(e, target){
+  e.preventDefault();
+  console.log("e.obj", e.object)
+  var data = target.select2('data');
+  data.push(e.object)
+  //target.select2('val', data)
+  // data.push({
+  //             'id': e.object.id,
+  //             'name': e.object.name
+  //         });
+  target.select2('data', data);
+  target.select2("open");
 }

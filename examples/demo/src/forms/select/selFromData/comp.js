@@ -2,8 +2,20 @@ import template from './comp.html'
 
 class controller {
   vm = {
-    selected: { id: 2 }
-  } // set default value
+    selected: { id: 2 },
+    selectedColors: ['red', 'blue'],
+    selectedMulti: [
+      {
+        "id": 1,
+        "name": "Option 1"
+      },
+      {
+        "id": 2,
+        "name": "Option 2"
+      }
+    ]
+  }
+
   selectData = [
     { id: 1, name: 'Option 1' },
     { id: 2, name: 'Option 2' },
@@ -16,11 +28,16 @@ class controller {
     data: this.selectData
   }
 
-  sel2MultiOpts = {
+  multiOpts = {
     placeholder: 'select many foos',
     useDataObject: true,
     multiple: true,
     data: this.selectData
+  }
+  multiTagsOpts = {
+    placeholder: 'select some tags',
+    multiple: true,
+    data: ['red','blue','yellow']
   }
 }
 

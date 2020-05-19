@@ -47,9 +47,9 @@ angular.module('ui.select2', [])
           }
         }
 
-        // var elname = tElm.attr('name') // for logging
+        var elname = tElm.attr('name') // for logging
         const log = function(msg, val) {
-          // console.log(`[${elname}] - ${msg}`, val)
+          console.log(`[${elname}] - ${msg}`, val)
         }
 
         return {
@@ -155,11 +155,9 @@ angular.module('ui.select2', [])
                 // Set the view and model value and update the angular template manually for the ajax/multiple select2.
                 elm.bind('change', function(e) {
                   e.stopImmediatePropagation()
-
                   if (scope.$$phase || scope.$root.$$phase) {
                     return
                   }
-
                   scope.$apply(function() {
                     const dmodel = convertToAngularModel(elm.select2(dataVar))
                     log(`!isSelect using elm.select2('data') scope.$apply ngModelCtrl.$setViewValue(${dmodel}`)
@@ -167,6 +165,15 @@ angular.module('ui.select2', [])
                     // ngModelCtrl.$modelValue = elm.select2(dataVar)
                   })
                 })
+              }
+              //if its ajax & multiple & closeOnSelect then override defaults so it works
+              if(opts.multiple && opts.ajax && !opts.closeOnSelect){
+                elm.bind("select2-selecting", function(e) {
+                  e.preventDefault();
+                  var data = ngModelCtrl.$modelValue || []
+                  data.push(e.object)
+                  ngModelCtrl.$setViewValue(data)
+                });
               }
             }
             // console.log("opts for select2",opts)
@@ -191,7 +198,6 @@ angular.module('ui.select2', [])
               // important!
               ngModelCtrl.$render()
 
-              log(`elm.select2(${dataVar}, ngModelCtrl.$modelValue)`, ngModelCtrl.$modelValue)
               // needs to come aftre render so it removes the items
               // if(setterProp){
               //   elm.select2('val', ngModelCtrl.$modelValue[idProp])
@@ -199,10 +205,15 @@ angular.module('ui.select2', [])
               //   elm.select2(dataVar, ngModelCtrl.$modelValue)
               // }
               if (ngModelCtrl.$modelValue) {
-                if (opts.useDataObject) {
-                  elm.select2('val', ngModelCtrl.$modelValue[idProp])
+                log(`Initialize elm.select2(${dataVar}, ngModelCtrl.$modelValue)`, ngModelCtrl.$modelValue)
+                let mdata = ngModelCtrl.$modelValue
+                //if its useDataObject & existing data has only and "id" then let select pick it up
+                if(opts.useDataObject && !opts.multiple && _.keys(mdata).length === 1){
+                  elm.select2('val', mdata[idProp])
+                } else if (opts.useDataObject || opts.multiple){ //if its multi, always use 'data'
+                  elm.select2(dataVar, mdata)
                 } else {
-                  elm.select2(dataVar, ngModelCtrl.$modelValue)
+                  elm.select2('val', mdata[idProp])
                 }
               }
               // let val = setterProp ? ngModelCtrl.$modelValue[setterProp] : ngModelCtrl.$modelValue
