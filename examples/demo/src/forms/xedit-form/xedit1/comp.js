@@ -20,8 +20,6 @@ class controller {
   ]
 
   selectInputOpts = {
-    // isSelect: true,
-    allowClear: true,
     placeholder: 'Select a foo',
     data: this.selectData,
     useDataObject: true
