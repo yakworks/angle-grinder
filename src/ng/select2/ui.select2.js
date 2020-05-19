@@ -47,8 +47,6 @@ angular.module('ui.select2', [])
           }
         }
 
-
-
         // var elname = tElm.attr('name') // for logging
         const log = function(msg, val) {
           // console.log(`[${elname}] - ${msg}`, val)
@@ -58,8 +56,8 @@ angular.module('ui.select2', [])
           pre: function(scope, elm, attrs, ngModelCtrl) {
             // instance-specific options
             var opts = angular.extend({}, options, scope.$eval(attrs.uiSelect2))
-            //select2 needs placeholder if allowClear=true.
-            if(opts.allowClear && !attrs.placeholder && !opts.placeholder){
+            // select2 needs placeholder if allowClear=true.
+            if (opts.allowClear && !attrs.placeholder && !opts.placeholder) {
               opts.placeholder = ' '
             }
             // if ui-select2-data attribute is set then assign it
