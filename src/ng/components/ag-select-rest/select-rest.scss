@@ -1,0 +1,12 @@
+table.select-rest-result {
+  margin-bottom: 0px;
+
+  tbody td {
+    border-top: none;
+    text-align: left;
+
+    &:nth-child(1) {
+      width: 60px;
+    }
+  }
+}

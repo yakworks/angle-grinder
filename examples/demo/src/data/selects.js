@@ -1,3 +1,6 @@
+
+//export {people, colors, countries, countriesWithId, invoices}
+
 const people = [
   { name: 'Adam', email: 'adam@email.com', age: 12, country: 'United States' },
   { name: 'Amalie', email: 'amalie@email.com', age: 12, country: 'Argentina' },
@@ -11,7 +14,16 @@ const people = [
   { name: 'Nicolás', email: 'nicole@email.com', age: 43, country: 'Colombia' }
 ]
 
-const availableColors = ['Red', 'Green', 'Blue', 'Yellow', 'Magenta', 'Maroon', 'Umbra', 'Turquoise']
+const colors = ['Red', 'Green', 'Blue', 'Yellow', 'Magenta', 'Maroon', 'Umbra', 'Turquoise']
+
+exports.countriesWithId = function(){
+  countries.forEach(function(part, index) {
+    part['id'] = index
+    part['num'] = part['code'] // simulate our org.num
+  });
+  return countries
+}
+
 const countries = [ // Taken from https://gist.github.com/unceus/6501985
   { name: 'Afghanistan', code: 'AF' },
   { name: 'Åland Islands', code: 'AX' },
