@@ -2,12 +2,10 @@ import compDemoModule from './selectRest'
 // Import Raw Files
 import htmlRaw from '!raw-loader!./select-rest.html'
 import jsRaw from '!raw-loader!./selectRest.js'
-import mdRaw from '!raw-loader!./docs.md'
 
 class controller {
   html = htmlRaw
   js = jsRaw
-  md = mdRaw
 }
 
 const template = `

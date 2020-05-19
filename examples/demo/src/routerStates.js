@@ -26,6 +26,10 @@ const formStates = {
       component: 'sel2DemoIndex'
     },
     {
+      name: 'selects-rest',
+      component: 'selRestDemoIndex'
+    },
+    {
       name: 'xedit',
       component: 'xeditDemoIndex'
     },
@@ -40,10 +44,6 @@ const formStates = {
     {
       name: 'select2-sandbox',
       component: 'select2DemoIndex'
-    },
-    {
-      name: 'ag-select-rest',
-      component: 'selRestDemoIndex'
     }
   ]
 }
