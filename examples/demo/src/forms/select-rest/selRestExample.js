@@ -4,23 +4,18 @@ import htmlRaw from '!raw-loader!./select-rest.html'
 import jsRaw from '!raw-loader!./selectRest.js'
 
 class controller {
-  html = htmlRaw
-  js = jsRaw
+  rawHtml = htmlRaw
+  rawJs = jsRaw
 }
 
 const template = `
-<div class="example-section mb-4">
-  <h4>ag-input</h4>
-  <div class="example is-vertical">
-    <div class="example-component">
-      <sel-rest-demo/>
-    </div>
-    <div class="codeview">
-      <demo-snippet raw-js='$ctrl.js' raw-html='$ctrl.html' raw-md='$ctrl.md' max-height="400px"></demo-snippet>
-    </div>
-  </div>
-</div>
+<example-snippet raw-js='$ctrl.rawJs' raw-html='$ctrl.rawHtml' raw-md='$ctrl.rawMd' max-height="500px">
+  <form name="selForm" ag-form class="form-horizontal-fixed" novalidate>
+    <sel-rest-demo/>
+  </form>
+</example-snippet>
 `
+
 // export the module name
 export default angular
   .module(compDemoModule)
