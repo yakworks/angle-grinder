@@ -4,8 +4,7 @@ import selFromDataModule from './selFromData'
 import './styles.scss'
 
 const template = `
-<demo-title-crumb></demo-title-crumb>
-<div class="container-fluid container-fullw buttonDemoIndex">
+<div class="mt-3">
   <ex-sel-basic/>
   <ex-sel-data/>
 </div>
