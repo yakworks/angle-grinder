@@ -19,7 +19,9 @@ export default 'ui.select2'
 angular.module('ui.select2', [])
   .value('uiSelect2Config', {})
   .directive('uiSelect2', function(uiSelect2Config, $timeout) {
-    var options = {}
+    var options = {
+      allowClear: true
+    }
     // I think uiSelect2Config is the defaults
     if (uiSelect2Config) {
       angular.extend(options, uiSelect2Config)
@@ -54,6 +56,10 @@ angular.module('ui.select2', [])
           pre: function(scope, elm, attrs, ngModelCtrl) {
             // instance-specific options
             var opts = angular.extend({}, options, scope.$eval(attrs.uiSelect2))
+            // select2 needs placeholder if allowClear=true.
+            if (opts.allowClear && !attrs.placeholder && !opts.placeholder) {
+              opts.placeholder = ' '
+            }
             // if ui-select2-data attribute is set then assign it
             const dataAttr = scope.$eval(attrs.uiSelect2Data)
             if (dataAttr) {

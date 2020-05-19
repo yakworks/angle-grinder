@@ -12,7 +12,6 @@ class Select2Ctrl {
 
   selInputOpts = {
     // isSelect: true,
-    allowClear: true,
     placeholder: 'select a foo',
     data: {
       results: this.selectData,
@@ -36,7 +35,6 @@ class Select2Ctrl {
   useDataObjectOpts = {
     useDataObject: true,
     placeholder: 'select a thing',
-    allowClear: true,
     data: this.selectData
   }
 

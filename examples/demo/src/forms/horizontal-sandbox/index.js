@@ -11,7 +11,6 @@ class SelectsCtrl {
 
   uiSelect2Opts = {
     isSelect: true,
-    allowClear: true,
     placeholder: 'select a foo',
     data: {
       results: this.selectData,

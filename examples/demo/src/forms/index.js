@@ -4,7 +4,7 @@ import validateSandModule from './validations-sandbox'
 import compsModule from './components'
 import selectModule from './select'
 import selectRestModule from './select-rest'
-import select2Module from './select2'
+import select2Module from './select2-sandbox'
 import xeditModule from './xedit-form'
 
 // export module name

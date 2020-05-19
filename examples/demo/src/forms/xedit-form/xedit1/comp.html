@@ -49,7 +49,7 @@
               editable-custom="$ctrl.org.selectInput"
               ag-bind="$ctrl.org.selectInput.name"></div>
             <div editable-custom-template class="controls">
-              <input name="selInput" ng-model="$ctrl.org.selectInput.id"
+              <input name="selInput" ng-model="$ctrl.org.selectInput"
                 ui-select2="$ctrl.selectInputOpts"
                 class="form-control">
               </input>
@@ -62,7 +62,7 @@
               <select name="role" class="form-control"
                       ng-model="$data"
                       ui-select2="{width: 'element'}">
-                <option ng-repeat="role in $ctrl.roles1" value="{{role.id}}">{{role.name}}</option>
+                <option ng-repeat="role in $ctrl.roles" value="{{role.id}}">{{role.name}}</option>
               </select>
             </div>
           </div>
@@ -75,7 +75,7 @@
                       ng-model="$data"
                       ui-select2="{closeOnSelect: false, width: 'element'}"
                       multiple="true">
-                <option ng-repeat="role in $ctrl.roles2" value="{{role.id}}">{{role.name}}</option>
+                <option ng-repeat="role in $ctrl.roles" value="{{role.id}}">{{role.name}}</option>
               </select>
             </div>
           </div>

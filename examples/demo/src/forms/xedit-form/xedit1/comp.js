@@ -20,22 +20,14 @@ class controller {
   ]
 
   selectInputOpts = {
-    // isSelect: true,
-    allowClear: true,
     placeholder: 'Select a foo',
-    useDataObject: true,
-    data: {
-      results: this.selectData,
-      text: 'name'
-    }
+    data: this.selectData,
+    useDataObject: true
   }
 
   selInputMultiOpts = {
     closeOnSelect: false,
-    data: {
-      results: this.selectData,
-      text: 'name'
-    }
+    data: this.selectData
   }
 }
 
