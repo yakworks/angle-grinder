@@ -52,7 +52,7 @@ export default function stateHelperInit(state, opts) {
       addSiblings(state)
     }
   }
-  //console.log('state ', state)
+  // console.log('state ', state)
   return self
 }
 
