@@ -16,9 +16,9 @@ import OrgTab from './tabbedOrg/index'
 import User from './user/index'
 import OrgShowCase from './orgShowCase/index'
 
-// import './app.css'
 import './layout/AppCtrl'
 import './layout/app.config'
+
 const forms = angular.module('angleGrinder.forms')
 
 // Just an example for configuring dates formats

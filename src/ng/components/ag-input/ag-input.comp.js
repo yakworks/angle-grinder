@@ -18,6 +18,7 @@ export default angular
     scope: {
       ngModel: '=',
       label: '@',
+      hint: '@',
       minimumLength: '@',
       maximumLength: '@',
       name: '@',
