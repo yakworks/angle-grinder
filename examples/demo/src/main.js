@@ -34,4 +34,5 @@ import './ui/icons'
 import './ui/alerts'
 import './ui/tabs'
 import './grids'
-$log.debugEnabled(true)
+
+//$log.debugEnabled(true)

@@ -2,9 +2,11 @@ import template from './comp.html'
 
 class controller {
   vm = {
-    selected: { id: 2 },
-    selectedColors: ['red', 'blue'],
-    selectedMulti: [
+    singleColor: 'blue',
+    multiColorTags: ['red', 'blue'],
+    singlePickId: 1,
+    singlePick: { id: 2 },
+    multiPick: [
       {
         "id": 1,
         "name": "Option 1"
@@ -15,29 +17,53 @@ class controller {
       }
     ]
   }
+  vm2 = {
+    singleColor: 'yellow',
+    multiColorTags: ['yellow', 'blue'],
+    singlePick: { id: 3 },
+    multiPick: [
+      {
+        "id": 3,
+        "name": "Option 3"
+      }
+    ]
+  }
 
-  selectData = [
+  picklistData = [
     { id: 1, name: 'Option 1' },
     { id: 2, name: 'Option 2' },
     { id: 3, name: 'Option 3' }
   ]
+  colorData = ['red','blue','yellow']
 
-  sel2Opts = {
-    // placeholder: 'select a foo',
-    useDataObject: true,
-    data: this.selectData
+  singleColorOpts = {
+    //useDataObject: false,
+    data: this.colorData
   }
 
-  multiOpts = {
-    placeholder: 'select many foos',
+  multiColorOpts = {
+    useDataObject: false,
+    multiple: true,
+    data: this.colorData
+  }
+
+  singlePickOpts = {
+    useDataObject: true,
+    data: this.picklistData
+  }
+
+  multiPickOpts = {
     useDataObject: true,
     multiple: true,
-    data: this.selectData
+    closeOnSelect: false,
+    data: this.picklistData
   }
-  multiTagsOpts = {
-    placeholder: 'select some tags',
-    multiple: true,
-    data: ['red','blue','yellow']
+
+  changeModelData(){
+    this.vm = this.vm2
+  }
+  clearData(){
+    this.vm = {}
   }
 }
 

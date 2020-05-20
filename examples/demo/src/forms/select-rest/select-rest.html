@@ -14,4 +14,9 @@
                 ng-model="$ctrl.vm.multiCountryData"
                 url="/countries/pickList"/>
 
+<ag-select-rest name="user"
+                select-options="$ctrl.userSelectOpts"
+                ng-model="$ctrl.vm.users"
+                url="/users"/>
+
 <pre ng-cloak>model: {{$ctrl.vm | json}}</pre>

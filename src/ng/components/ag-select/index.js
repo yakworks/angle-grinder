@@ -57,6 +57,7 @@ angular
       selectOptions: '<',
       label: '@',
       name: '@',
+      placeholder: '@',
       required: '@'
     }
   })

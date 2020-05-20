@@ -57,34 +57,25 @@ export default class AgSelectRestCtrl extends AgBaseComponent {
     return markup;
   }
 
-  // $postLink(scope, elm) {
-  //   let el = this.$element
-  //   this.$timeout(function() {
-  //     el.on("select2-selecting", function(e) {
-  //       e.preventDefault();
-  //       handleSelection(e, el);
-  //     });
-  //   })
-  // }
+  // if its multiple & closeOnSelect:false then squinky hack so it stays open
+  // https://github.com/select2/select2/issues/2264#issuecomment-213003190
+  $postLink(scope, elm) {
+    if(this.opts.multiple && !this.opts.closeOnSelect){
+      this.$timeout(() => {
+        let inputEl = angular.element(document.getElementById(this.id))
+        inputEl.bind('select2-selecting', function(e) {
+          e.preventDefault()
+          let ngModelCtrl = inputEl.controller('ngModel')
+          var data = ngModelCtrl.$modelValue || []
+          data.push(e.object)
+          ngModelCtrl.$setViewValue(data)
+        })
+      })
+    }
+  }
 
   // onChange() {
   //   super.onChange()
   //   super.validate()
   // }
-}
-
-// hack so closeOnSelect: false works
-// https://github.com/select2/select2/issues/2264#issuecomment-213003190
-function handleSelection(e, target){
-  e.preventDefault();
-  console.log("e.obj", e.object)
-  var data = target.select2('data');
-  data.push(e.object)
-  //target.select2('val', data)
-  // data.push({
-  //             'id': e.object.id,
-  //             'name': e.object.name
-  //         });
-  target.select2('data', data);
-  target.select2("open");
 }

@@ -11,7 +11,7 @@ class controller {
 }
 
 const template = `
-<example-snippet raw-js='$ctrl.rawJs' raw-html='$ctrl.rawHtml' raw-md='$ctrl.rawMd' max-height="300px">
+<example-snippet raw-js='$ctrl.rawJs' raw-html='$ctrl.rawHtml' raw-md='$ctrl.rawMd' max-height="600px">
   <p>options and initial data populated from controller</p>
   <form name="selForm" ag-form class="form-horizontal-fixed" novalidate>
     <demo-sel-data-input/>
