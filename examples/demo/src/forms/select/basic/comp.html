@@ -1,11 +1,12 @@
+
 <div class="form-group" >
   <label class="control-label">Basic</label>
   <div class="controls is-flex">
     <input class="form-control" ng-model="$ctrl.vm.day"
-        data-placeholder="select a day"
+        placeholder="select a day"
         ui-select2 ui-select2-data="['Mon','Tue','Wed','Thu','Fri','Sat','Sun']">
     <input class="form-control ml-1" ng-model="$ctrl.vm.color"
-        ui-select2="{ allowClear: true, placeholder: 'select a color', data:['red','green', 'blue']}"
+        ui-select2="{ allowClear: false, placeholder: 'select a color', data:['red','green', 'blue']}"
     >
   </div>
 </div>
@@ -13,22 +14,37 @@
   <label class="control-label">Multi</label>
   <div class="controls is-flex">
     <input multiple class="form-control" ng-model="$ctrl.vm.daysMulti"
-        data-placeholder="select multiple days"
+        placeholder="select multiple days"
         ui-select2 ui-select2-data="$ctrl.dayData">
     <input multiple class="form-control ml-1" ng-model="$ctrl.vm.colorsMulti"
-        ui-select2="{placeholder: 'select mutiple colors', data: $ctrl.colorData}"
+        ui-select2="{placeholder: 'select mutiple colors', useDataObject: false, data: $ctrl.colorData}"
     >
   </div>
 </div>
 <p>using ag-select component</p>
-<ag-select name="agSelect" ng-model="$ctrl.vm.color"
-  select-options="{ allowClear: true, placeholder: 'select a color', data: $ctrl.colorData }">
+<ag-select name="agSelect" ng-model="$ctrl.vm.agColor" placeholder="select a color"
+  select-options="{ data: $ctrl.colorData }">
 </ag-select>
-<ag-select name="agSelect" label="Multi" ng-model="$ctrl.vm.color"
-  select-options="{ multiple: true, closeOnSelect: false, placeholder: 'select mutiple colors', data: $ctrl.colorData}">
+<p>useDataObject:true by default on multiple, set to false here</p>
+<ag-select name="agSelect" label="Multi" ng-model="$ctrl.vm.agColors"
+  select-options="{ multiple: true, closeOnSelect: false, useDataObject:false, data: $ctrl.colorData}">
 </ag-select>
-<ag-select name="agSelect" label="Foo" ng-model="$ctrl.vm.foo"
-  select-options="$ctrl.fooOpts">
+<p>id only</p>
+<ag-select name="fooId" ng-model="$ctrl.vm.fooId" required
+  select-options="{data: $ctrl.fooData}">
 </ag-select>
+<p>using ag-select component useDataObject:true</p>
+<ag-select name="foo" ng-model="$ctrl.vm.foo" required
+  select-options="{useDataObject: true, data: $ctrl.fooData}">
+</ag-select>
+<ag-select name="fooList" ng-model="$ctrl.vm.fooList" required
+  select-options="{useDataObject: true, multiple: true, closeOnSelect: false, data: $ctrl.fooData}">
+</ag-select>
+
+<div class="form-group">
+  <div class="controls">
+    <button class="btn btn-primary">Save</button>
+  </div>
+</div>
 <pre ng-cloak>model: {{$ctrl.vm | json}}</pre>
 

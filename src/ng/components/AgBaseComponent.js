@@ -30,7 +30,7 @@ export default class AgBaseComponent {
 
   onInit() {
     this.id = this.id || _.uniqueId(`${this.name}_`)
-    $log.debug(`[${this.id}] - formCtrl`, this.formCtrl)
+    // $log.debug(`[${this.id}] - formCtrl`, this.formCtrl)
 
     this.type = this.type || 'text'
 

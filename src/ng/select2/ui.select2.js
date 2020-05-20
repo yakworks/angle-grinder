@@ -17,31 +17,25 @@ require('Select2/select2.js')
 export default 'ui.select2'
 
 angular.module('ui.select2', [])
-  .value('uiSelect2Config', {})
-  .directive('uiSelect2', function(uiSelect2Config, $timeout) {
-    var options = {}
-    // I think uiSelect2Config is the defaults
-    if (uiSelect2Config) {
-      angular.extend(options, uiSelect2Config)
-    }
+  .directive('uiSelect2', function($timeout) {
     return {
       require: 'ngModel',
       priority: 1,
       compile: function(tElm, tAttrs) {
-        var isSelect = tElm.is('select')
+        // if its populated from a select element and not from options.data
+
         var isMultiple = angular.isDefined(tAttrs.multiple)
 
-        var watch
-        var repeatOption
-        var repeatAttr
+        var isSelectElm = tElm.is('select')
+        var watchSelectOptionsEl
 
-        // Enable watching of the options dataset if in use
-        if (isSelect) {
-          repeatOption = tElm.find('optgroup[ng-repeat], optgroup[data-ng-repeat], option[ng-repeat], option[data-ng-repeat]')
+        // Enable watching of the options dataset if its an html select
+        if (isSelectElm) {
+          const repeatOption = tElm.find('optgroup[ng-repeat], optgroup[data-ng-repeat], option[ng-repeat], option[data-ng-repeat]')
 
           if (repeatOption.length) {
-            repeatAttr = repeatOption.attr('ng-repeat') || repeatOption.attr('data-ng-repeat')
-            watch = jQuery.trim(repeatAttr.split('|')[0]).split(' ').pop()
+            const repeatAttr = repeatOption.attr('ng-repeat') || repeatOption.attr('data-ng-repeat')
+            watchSelectOptionsEl = jQuery.trim(repeatAttr.split('|')[0]).split(' ').pop()
           }
         }
 
@@ -53,7 +47,14 @@ angular.module('ui.select2', [])
         return {
           pre: function(scope, elm, attrs, ngModelCtrl) {
             // instance-specific options
-            var opts = angular.extend({}, options, scope.$eval(attrs.uiSelect2))
+            var defaults = {
+              allowClear: true
+            }
+            var opts = angular.extend({}, defaults, scope.$eval(attrs.uiSelect2))
+            // select2 needs placeholder if allowClear=true.
+            if (opts.allowClear && !attrs.placeholder && !opts.placeholder) {
+              opts.placeholder = ' '
+            }
             // if ui-select2-data attribute is set then assign it
             const dataAttr = scope.$eval(attrs.uiSelect2Data)
             if (dataAttr) {
@@ -83,30 +84,16 @@ angular.module('ui.select2', [])
             // uses elm.select2('val') when its a select and we want the id in the model not the object.
             // when its on and input and its set to multiple then we will use 'data' so it creates and array of obbjecgs for
             // selection and not array of ids
-            if (opts.useDataObject === undefined && !isSelect && isMultiple) {
+            if (opts.useDataObject === undefined && !isSelectElm && isMultiple) {
               opts.useDataObject = true
             }
             if (opts.useDataObject) {
               // useDataObject = true
               dataVar = 'data'
             }
-            log(`isSelect: ${isSelect} , isMultiple: ${isMultiple}, dataVar: ${dataVar}`)
+            log(`isSelectElm: ${isSelectElm} , isMultiple: ${isMultiple}, dataVar: ${dataVar}`)
 
-            /* Convert from Select2 view-model to Angular view-model. */
-            var convertToAngularModel = function(selData) {
-              var model
-              if (opts.simple_tags) {
-                model = []
-                angular.forEach(selData, function(value, index) {
-                  model.push(value.id)
-                })
-              } else {
-                model = selData
-              }
-              return model
-            }
-
-            if (isSelect) {
+            if (isSelectElm) {
               // Use <select multiple> instead
               delete opts.multiple
               delete opts.initSelection
@@ -114,30 +101,45 @@ angular.module('ui.select2', [])
               opts.multiple = true
             }
 
-            if (ngModelCtrl) {
-              const renFunc = function() {
-                log('elm.select2(dataVar, ngModelCtrl.$modelValue) ', ngModelCtrl.$modelValue)
-                elm.select2(dataVar, ngModelCtrl.$modelValue)
+            const updateSelectFromModel = function() {
+              log(`Initialize elm.select2(${dataVar}, ngModelCtrl.$modelValue)`, ngModelCtrl.$modelValue)
+              const mdata = ngModelCtrl.$modelValue
+              // if its useDataObject & existing data has only and "id" then let select pick it up
+              if (opts.useDataObject && !opts.multiple && _.keys(mdata).length === 1) {
+                elm.select2('val', mdata[idProp])
+              } else if (opts.useDataObject || opts.multiple) { // if its multi, always use 'data'
+                elm.select2(dataVar, mdata)
+              } else {
+                elm.select2('val', mdata)
               }
+            }
 
-              ngModelCtrl.$render = renFunc
+            if (ngModelCtrl) {
+              // const renFunc = function() {
+              //   log('elm.select2(dataVar, ngModelCtrl.$modelValue) ', ngModelCtrl.$modelValue)
+              //   //elm.select2(dataVar, ngModelCtrl.$modelValue)
+              //   updateSelectFromModel()
+              // }
+
+              // ngModelCtrl.$render = renFunc
 
               // Watch the model for programmatic changes
               scope.$watch(tAttrs.ngModel, function(current, old) {
                 if (_.isEqual(current, old)) return
-                elm.select2(dataVar, current)
+                updateSelectFromModel()
+                // elm.select2(dataVar, current)
                 // renFunc()
               }, true)
 
-              // Watch the options dataset for changes
-              if (watch) {
-                scope.$watch(watch, function(newVal, oldVal, scope) {
+              // Watch the html select options for changes
+              if (isSelectElm && watchSelectOptionsEl) {
+                scope.$watch(watchSelectOptionsEl, function(newVal, oldVal, scope) {
                   // Delayed so that the options have time to be rendered
                   $timeout(function() {
                     // console.log("$timeout elm.select2('val', ngModelCtrl.$viewValue)", ngModelCtrl.$viewValue)
                     elm.select2(dataVar, ngModelCtrl.$viewValue)
                     // Refresh angular to remove the superfluous option
-                    renFunc()
+                    // renFunc()
                     if (newVal && !oldVal && ngModelCtrl.$setPristine) {
                       ngModelCtrl.$setPristine(true)
                     }
@@ -145,23 +147,28 @@ angular.module('ui.select2', [])
                 })
               }
 
-              if (!isSelect) {
+              if (!isSelectElm) {
                 // Set the view and model value and update the angular template manually for the ajax/multiple select2.
                 elm.bind('change', function(e) {
                   e.stopImmediatePropagation()
-
                   if (scope.$$phase || scope.$root.$$phase) {
                     return
                   }
-
                   scope.$apply(function() {
-                    const dmodel = convertToAngularModel(elm.select2(dataVar))
-                    log(`!isSelect using elm.select2('data') scope.$apply ngModelCtrl.$setViewValue(${dmodel}`)
                     ngModelCtrl.$setViewValue(elm.select2(dataVar))
-                    // ngModelCtrl.$modelValue = elm.select2(dataVar)
                   })
                 })
               }
+              // if its ajax & multiple & closeOnSelect then tweak a hack so it stays open
+              // from https://github.com/select2/select2/issues/2264#issuecomment-213003190
+              // if (opts.multiple && opts.ajax && !opts.closeOnSelect) {
+              //   elm.bind('select2-selecting', function(e) {
+              //     e.preventDefault()
+              //     var data = ngModelCtrl.$modelValue || []
+              //     data.push(e.object)
+              //     ngModelCtrl.$setViewValue(data)
+              //   })
+              // }
             }
             // console.log("opts for select2",opts)
 
@@ -179,33 +186,20 @@ angular.module('ui.select2', [])
 
             // Initialize the plugin late so that the injected DOM does not disrupt the template compiler
             $timeout(function() {
-              log(`Initialize -- isSelect:${isSelect} isMultiple:${isMultiple}`)
+              log(`Initialize -- isSelectElm:${isSelectElm} isMultiple:${isMultiple}`)
               // console.log("opts for select2",opts)
               elm.select2(opts)
               // important!
-              ngModelCtrl.$render()
+              // ngModelCtrl.$render()
 
-              log(`elm.select2(${dataVar}, ngModelCtrl.$modelValue)`, ngModelCtrl.$modelValue)
-              // needs to come aftre render so it removes the items
-              // if(setterProp){
-              //   elm.select2('val', ngModelCtrl.$modelValue[idProp])
-              // } else {
-              //   elm.select2(dataVar, ngModelCtrl.$modelValue)
-              // }
               if (ngModelCtrl.$modelValue) {
-                if (opts.useDataObject) {
-                  elm.select2('val', ngModelCtrl.$modelValue[idProp])
-                } else {
-                  elm.select2(dataVar, ngModelCtrl.$modelValue)
-                }
+                updateSelectFromModel()
               }
-              // let val = setterProp ? ngModelCtrl.$modelValue[setterProp] : ngModelCtrl.$modelValue
-              // elm.select2(dataVar, val)
 
-              // Not sure if I should just check for !isSelect OR if I should check for 'tags' key
-              // if (!opts.initSelection && !isSelect) {
+              // Not sure if I should just check for !isSelectElm OR if I should check for 'tags' key
+              // if (!opts.initSelection && !isSelectElm) {
               //   let amodel = convertToAngularModel(elm.select2('data'))
-              //   log("not !opts.initSelection && !isSelect convertToAngularModel(elm.select2('data'))")
+              //   log("not !opts.initSelection && !isSelectElm convertToAngularModel(elm.select2('data'))")
               //   var isPristine = ngModelCtrl.$pristine
               //   ngModelCtrl.$pristine = false
               //   log("calling ngModelCtrl.$setViewValue with ", amodel)

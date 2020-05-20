@@ -1,17 +1,29 @@
-const people = [
-  { name: 'Adam', email: 'adam@email.com', age: 12, country: 'United States' },
-  { name: 'Amalie', email: 'amalie@email.com', age: 12, country: 'Argentina' },
-  { name: 'Estefanía', email: 'estefania@email.com', age: 21, country: 'Argentina' },
-  { name: 'Adrian', email: 'adrian@email.com', age: 21, country: 'Ecuador' },
-  { name: 'Wladimir', email: 'wladimir@email.com', age: 30, country: 'Ecuador' },
-  { name: 'Samantha', email: 'samantha@email.com', age: 30, country: 'United States' },
-  { name: 'Nicole', email: 'nicole@email.com', age: 43, country: 'Colombia' },
-  { name: 'Natasha', email: 'natasha@email.com', age: 54, country: 'Ecuador' },
-  { name: 'Michael', email: 'michael@email.com', age: 15, country: 'Colombia' },
-  { name: 'Nicolás', email: 'nicole@email.com', age: 43, country: 'Colombia' }
+
+//export {people, colors, countries, countriesWithId, invoices}
+
+exports.people = [
+  { id: 1, name: 'Adam', email: 'adam@email.com', age: 12, country: 'United States' },
+  { id: 2, name: 'Amalie', email: 'amalie@email.com', age: 12, country: 'Argentina' },
+  { id: 3, name: 'Estefanía', email: 'estefania@email.com', age: 21, country: 'Argentina' },
+  { id: 4, name: 'Adrian', email: 'adrian@email.com', age: 21, country: 'Ecuador' },
+  { id: 5, name: 'Wladimir', email: 'wladimir@email.com', age: 30, country: 'Ecuador' },
+  { id: 6, name: 'Samantha', email: 'samantha@email.com', age: 30, country: 'United States' },
+  { id: 7, name: 'Nicole', email: 'nicole@email.com', age: 43, country: 'Colombia' },
+  { id: 8, name: 'Natasha', email: 'natasha@email.com', age: 54, country: 'Ecuador' },
+  { id: 9, name: 'Burnett, Logan', email: 'logan@email.com', age: 10, country: 'US' },
+  { id: 10, name: 'Burnett, Wyatt', email: 'Wyatt@email.com', age: 7, country: 'Colombia' }
 ]
 
-const availableColors = ['Red', 'Green', 'Blue', 'Yellow', 'Magenta', 'Maroon', 'Umbra', 'Turquoise']
+const colors = ['Red', 'Green', 'Blue', 'Yellow', 'Magenta', 'Maroon', 'Umbra', 'Turquoise']
+
+exports.countriesWithId = function(){
+  countries.forEach(function(part, index) {
+    part['id'] = index
+    part['num'] = part['code'] // simulate our org.num
+  });
+  return countries
+}
+
 const countries = [ // Taken from https://gist.github.com/unceus/6501985
   { name: 'Afghanistan', code: 'AF' },
   { name: 'Åland Islands', code: 'AX' },

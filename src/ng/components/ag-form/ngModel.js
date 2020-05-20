@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import { isAttrTruthy } from '../../utils/ngHelpers'
+// import { isAttrTruthy } from '../../utils/ngHelpers'
 
 // import $log from '../../utils/Log'
 function ldebug(msg, o) {
@@ -37,22 +37,22 @@ function ngModel(agValidationsConfig, $rootScope, $interpolate, $document) {
         // if labelnot found using form-group then brute force look for <label for="theId"> format
         labelEl = labelEl || $document[0].querySelectorAll('label[for="' + attrs.id + '"]')
         // add required to label and for id if not exists
-        if (labelEl) {
-          ldebug('attrs.required ', { required: isAttrTruthy(scope, attrs.required), ngRequired: isAttrTruthy(scope, attrs.ngRequired) })
-          if (isAttrTruthy(scope, attrs.required) || isAttrTruthy(scope, attrs.ngRequired)) {
-            ldebug('adding required class to labelEl', labelEl)
-            labelEl.addClass('required')
-          }
-          if (!labelEl.attr('for')) {
-            labelEl.attr('for', attrs.id)
-          }
-        }
+        // if (labelEl) {
+        //   ldebug('attrs.required ', { required: isAttrTruthy(scope, attrs.required), ngRequired: isAttrTruthy(scope, attrs.ngRequired) })
+        //   if (isAttrTruthy(scope, attrs.required) || isAttrTruthy(scope, attrs.ngRequired)) {
+        //     ldebug('adding required class to labelEl', labelEl)
+        //     labelEl.addClass('required')
+        //   }
+        //   if (!labelEl.attr('for')) {
+        //     labelEl.attr('for', attrs.id)
+        //   }
+        // }
         // add "for" attr on ag-validation-inline el
-        const agValEl = $(element).closest('.controls').find('ag-validation-inline')
-        if (agValEl && !agValEl.attr('for')) {
-          // ldebug("adding 'for' to ag-validation-inline'", agValEl)
-          agValEl.attr('for', attrs.id)
-        }
+        // const agValEl = $(element).closest('.controls').find('ag-validation-inline')
+        // if (agValEl && !agValEl.attr('for')) {
+        //   // ldebug("adding 'for' to ag-validation-inline'", agValEl)
+        //   agValEl.attr('for', attrs.id)
+        // }
 
         validationStrategyFn = agForm.getValidationStrategy()
         ngModel.$untouched = true

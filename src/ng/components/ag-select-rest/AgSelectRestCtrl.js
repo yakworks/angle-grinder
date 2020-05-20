@@ -1,43 +1,81 @@
 /* eslint-disable*/
 import AgBaseComponent from '../AgBaseComponent'
+import _ from 'lodash'
+
 /* @ngInject */
 export default class AgSelectRestCtrl extends AgBaseComponent {
-  output
+  selectOptions = {}
+  opts = {
+    minimumInputLength: 3,
+    closeOnSelect: false,
+    useDataObject: true,
+    ajax: {
+      dataType: 'json',
+      quietMillis: 250,
+      data: function (term, pageNum) { // page is the one-based page number tracked by Select2
+        if (pageNum == null) { pageNum = 1 }
+        return {
+          q: term, //search term
+          page: pageNum, // page number
+          // sorting and pagination
+          sort: 'id',
+          order: 'asc',
+          max: 20
+        }
+      },
+      results: function (result, page) {
+        return { results: result.rows, more: page < result.total }
+      }
+    },
+    formatResult: this.repoFormatResult,
+    formatSelection: (item) => item.name,
+    initSelection: angular.noop // needs to be here or it blows up setting value
+    //dropdownCssClass: "bigdrop", // apply a special css
+    //escapeMarkup: function (m) { return m; } // don't escape is rendering html
+  }
 
-  constructor($element, $timeout, pathWithContext, Select2Options) {
+  constructor($element, $timeout, pathWithContext) {
     super($element, $timeout)
-    this.Select2Options = Select2Options
     this.pathWithContext = pathWithContext
   }
 
   $onInit() {
     super.onInit()
-    super.validate()
-    const fields = (this.output || 'id,name').split(',')
-    const buildResult = (item) => {
-      return fields.map((k) => item[k]).join(' - ')
+    _.merge(this.opts, this.selectOptions)
+    this.opts.ajax.url = this.pathWithContext(this.url)
+  }
+
+  repoFormatResult(item) {
+    var markup = `
+      <table class="table table-condensed select-rest-result">
+        <tr>
+          <td>${item.num}</td>
+          <td>${item.name}</td>
+        </tr>
+      </table>
+    `
+    return markup;
+  }
+
+  // if its multiple & closeOnSelect:false then squinky hack so it stays open
+  // https://github.com/select2/select2/issues/2264#issuecomment-213003190
+  $postLink(scope, elm) {
+    if(this.opts.multiple && !this.opts.closeOnSelect){
+      this.$timeout(() => {
+        let inputEl = angular.element(document.getElementById(this.id))
+        inputEl.bind('select2-selecting', function(e) {
+          e.preventDefault()
+          let ngModelCtrl = inputEl.controller('ngModel')
+          var data = ngModelCtrl.$modelValue || []
+          data.push(e.object)
+          ngModelCtrl.$setViewValue(data)
+        })
+      })
     }
-    this.selectOptions = this.Select2Options({
-      width: 'auto',
-      quietMillis: 250,
-      multiple: this.multiple !== undefined,
-      minimumInputLength: this.inputLength || 2,
-      ajax: {
-        url: this.pathWithContext(this.url)
-      },
-
-      // formatters for result and selection
-      formatResult(item) {
-        return buildResult(item)
-      },
-      formatSelection(item) {
-        return buildResult(item)
-      }
-    })
   }
 
-  onChange() {
-    super.onChange()
-    super.validate()
-  }
+  // onChange() {
+  //   super.onChange()
+  //   super.validate()
+  // }
 }

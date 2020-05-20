@@ -2,26 +2,68 @@ import template from './comp.html'
 
 class controller {
   vm = {
-    selected: { id: 2 }
-  } // set default value
-  selectData = [
+    singleColor: 'blue',
+    multiColorTags: ['red', 'blue'],
+    singlePickId: 1,
+    singlePick: { id: 2 },
+    multiPick: [
+      {
+        "id": 1,
+        "name": "Option 1"
+      },
+      {
+        "id": 2,
+        "name": "Option 2"
+      }
+    ]
+  }
+  vm2 = {
+    singleColor: 'yellow',
+    multiColorTags: ['yellow', 'blue'],
+    singlePick: { id: 3 },
+    multiPick: [
+      {
+        "id": 3,
+        "name": "Option 3"
+      }
+    ]
+  }
+
+  picklistData = [
     { id: 1, name: 'Option 1' },
     { id: 2, name: 'Option 2' },
     { id: 3, name: 'Option 3' }
   ]
+  colorData = ['red','blue','yellow']
 
-  sel2Opts = {
-    allowClear: true,
-    // placeholder: 'select a foo',
-    useDataObject: true,
-    data: this.selectData
+  singleColorOpts = {
+    //useDataObject: false,
+    data: this.colorData
   }
 
-  sel2MultiOpts = {
-    placeholder: 'select many foos',
+  multiColorOpts = {
+    useDataObject: false,
+    multiple: true,
+    data: this.colorData
+  }
+
+  singlePickOpts = {
+    useDataObject: true,
+    data: this.picklistData
+  }
+
+  multiPickOpts = {
     useDataObject: true,
     multiple: true,
-    data: this.selectData
+    closeOnSelect: false,
+    data: this.picklistData
+  }
+
+  changeModelData(){
+    this.vm = this.vm2
+  }
+  clearData(){
+    this.vm = {}
   }
 }
 

@@ -24,17 +24,26 @@ angular.module(agValMod).directive('agValidationInline', function($timeout, $doc
       var inputId = attrs.for || attrs.agValidationInline
       var inputEl, ngModel
 
-      // run in new cycle to ensure that getElementById(inputId) will succeed as its not there when using components
-      //scope.$evalAsync(function() {
-      $timeout(function() { //needs to be timeout and not $evalAsync, tests fail with evalAsync, not sure why
-        inputEl = element.closest('.controls').find('input:first-child, select:first-child, textarea:first-child')
-        inputEl = (inputEl?.length !== 0 ) ? inputEl[0] : $document[0].getElementById(inputId)
-        if (_.isNil(inputEl) || inputEl.length === 0 ) {
-          throw new Error('Can not find input element to attach the validation directive')
+      $timeout(function() {
+        inputEl = document.getElementById(inputId)
+        if (_.isNil(inputEl)) {
+          inputEl = element.closest('.controls').find('input:first-child, select:first-child, textarea:first-child')[0]
+          if (_.isNil(inputEl)) throw new Error('Can not find input element for the validation directive');
         }
         ngModel = angular.element(inputEl).controller('ngModel')
         activate()
       })
+      // run in new cycle to ensure that getElementById(inputId) will succeed as its not there when using components
+      // scope.$evalAsync(function() {
+      // $timeout(function() { //needs to be timeout and not $evalAsync, tests fail with evalAsync, not sure why
+      //   inputEl = element.closest('.controls').find('input:first-child, select:first-child, textarea:first-child')
+      //   inputEl = (inputEl?.length !== 0 ) ? inputEl[0] : $document[0].getElementById(inputId)
+      //   if (_.isNil(inputEl) || inputEl.length === 0 ) {
+      //     throw new Error('Can not find input element to attach the validation directive')
+      //   }
+      //   ngModel = angular.element(inputEl).controller('ngModel')
+      //   activate()
+      // })
 
       /**
        * Activates the directive
@@ -72,12 +81,13 @@ angular.module(agValMod).directive('agValidationInline', function($timeout, $doc
        */
       function toggleAriaAttributes(showErrors) {
         //$log.debug("inputEl", inputEl)
+        let angEl = angular.element(inputEl)
         if (showErrors) {
-          inputEl.setAttribute('aria-invalid', true)
-          inputEl.setAttribute('aria-describedby', attrs.id)
+          angEl.attr('aria-invalid', true)
+          angEl.attr('aria-describedby', attrs.id)
         } else {
-          inputEl.removeAttribute('aria-invalid')
-          inputEl.removeAttribute('aria-describedby')
+          angEl.removeAttr('aria-invalid')
+          angEl.removeAttr('aria-describedby')
         }
       }
     }

@@ -8,7 +8,7 @@
         <option value="bar2">Bar</option>
         <option value="baz3">Baz</option>
       </select>
-      <span class="help-block">no options, no empty option</span>
+      <p class="help">no options, no empty option</p>
     </div>
   </div>
   <div ag-field-group >
@@ -26,13 +26,13 @@
     <label class="control-label">Select2 Select</label>
     <div class="controls">
       <select class="form-control" name="selSelect" ng-model="$ctrl.vm.selSelect"
-          ui-select2="{allowClear: true, placeholder: 'select a foo'}">
+          ui-select2="{allowClear: false, placeholder: 'select a foo'}">
         <option></option>
         <option value="foo1">Foo</option>
         <option value="bar2">Bar</option>
         <option value="baz3">Baz</option>
       </select>
-      <span class="help-block">with {allowClear: true, placeholder: 'select a foo'}</span>
+      <span class="help-block">with {allowClear: false, placeholder: 'select a foo'}</span>
     </div>
   </div>
   <div ag-field-group >

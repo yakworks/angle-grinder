@@ -31,14 +31,7 @@ $select2-font-size: 14px;
 .select2-container .select2-choices {
   @include sel2-input-defaults ;
 }
-.select2-drop.select2-drop-above {
-  margin-top: 1px;
-  border-top: 1px solid #aaa;
-  border-bottom: 0;
-  border-radius: 4px 4px 0 0;
-  -webkit-box-shadow: 0 -4px 5px rgba(0, 0, 0, .15);
-  box-shadow: 0 -4px 5px rgba(0, 0, 0, .15);
-}
+
 .select2-container {
 
   &.form-control {
@@ -163,8 +156,10 @@ $select2-font-size: 14px;
     border-top: 1px solid #aaa;
     border-bottom: 0;
     border-radius: 4px 4px 0 0;
-    -webkit-box-shadow: 0 -4px 5px rgba(0, 0, 0, .15);
-    box-shadow: 0 -4px 5px rgba(0, 0, 0, .15);
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, .15);
+    .select2-input {
+      margin-top: 6px;
+    }
   }
 }
 
