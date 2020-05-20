@@ -19,17 +19,15 @@ class controller {
   }
 
   userSelectOpts = {
-    useDataObject: true,
+    minimumInputLength: 0,
     multiple: true,
-    closeOnSelect: false,
+    closeOnSelect: true,
     formatResult: (item) => {
       return `
-        <table class="table table-condensed select-rest-result">
-          <tr>
-            <td>${item.name}</td>
-            <td>${item.email}</td>
-          </tr>
-        </table>`
+        <div>${item.name}</div>
+        <small>&lt;${item.email}></small>
+        <hr class="m-0">
+      `
     }
   }
 }
