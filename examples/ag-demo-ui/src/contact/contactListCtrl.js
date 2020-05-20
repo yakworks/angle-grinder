@@ -15,7 +15,7 @@ export default class ContactListCtrl {
     DialogCrudCtrlMixin($scope, {
       Resource: Users,
       gridName: 'contactsGrid',
-      template: require('../../public/templates/user/form.html'),
+      template: require('../user/form/form.html'),
       beforeCreate(user) {
         user.contact = {
           org: { id: $stateParams.id },

@@ -1,7 +1,7 @@
 import orgShowCaseCtrl from './orgShowCaseCtrl'
 import ShowCtrl from './showCtrl'
 import adminOrgTabs from './tabbedOrgModule'
-import FormCtrl from '../user/formCtrl'
+import FormCtrl from '../user/form/formCtrl'
 
 var module = angular.module(adminOrgTabs)
 module

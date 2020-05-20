@@ -5,11 +5,10 @@ import _ from 'lodash'
  * Main Application Controller
  */
 class AppCtrl {
-  constructor($rootScope, $scope, $window, $document, $timeout, Fullscreen, cfpLoadingBar, $transitions) {
+  constructor($rootScope, $scope, $window, $document, $timeout, cfpLoadingBar, $transitions) {
     this.$rootScope = $rootScope
     this.$scope = $scope
-    // this.$win = $($window)
-    // this.$body = $('body')
+
     this.layout = appState.layout
 
     var $win = $($window); var $body = $('body')
@@ -52,6 +51,7 @@ class AppCtrl {
     // save settings to local storage
     var slay = localStorage.getItem('yak-layout')
     if (slay !== null) {
+      $scope.app = {}
       $scope.app.layout = _.cloneDeep(slay)
     }
 
@@ -78,20 +78,6 @@ class AppCtrl {
     // global function to scroll page up
     $scope.toTheTop = function() {
       $document.scrollTopAnimated(0, 600)
-    }
-
-    // Fullscreen
-    $scope.isFullscreen = false
-    $scope.goFullscreen = function() {
-      $scope.isFullscreen = !$scope.isFullscreen
-      if (Fullscreen.isEnabled()) {
-        Fullscreen.cancel()
-      } else {
-        Fullscreen.all()
-      }
-
-      // Set Fullscreen to a specific element (bad practice)
-      // Fullscreen.enable( document.getElementById('img') )
     }
 
     // Function that find the exact height and width of the viewport in a cross-browser way
