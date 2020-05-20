@@ -10,13 +10,12 @@ class ClrController {
   }
 
   btnClick = function(event) {
-    console.log('btnClick event ', event)
+    //('btnClick event ', event)
     toast.success('It is done')
   }
 
   toggleLoading = (event) => {
     // console.log("toggleLoading this", this)
-    console.log('startLoading event ', event)
     this.loading = !this.loading
     this.$timeout(() => {
       this.loading = !this.loading

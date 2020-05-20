@@ -73,12 +73,17 @@ const proxy = {
       rows = rows.filter(country =>  country.name.toLowerCase().indexOf(q.toLowerCase()) > -1)
     }
 
-    return res.json({
-      page: 1,
-      records: 3,
-      rows: rows,
-      total: 1
-    })
+    return res.json({ page: 1, records: 3, rows: rows, total: 1 })
+  },
+
+  'GET /users': (req, res) => {
+    const q = req.query.q
+    let rows = data.people
+    if(q) {
+      rows = rows.filter(user =>  user.name.toLowerCase().indexOf(q.toLowerCase()) > -1)
+    }
+
+    return res.json({ page: 1, records: 3, rows: rows, total: 1 })
   },
 
   // Priority processing.

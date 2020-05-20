@@ -1,6 +1,6 @@
 
 <ag-select-rest name="multipleCountry"
-                select-options="{ multiple: true, closeOnSelect: false }"
+                select-options="{ multiple: true}"
                 ng-model="$ctrl.vm.multipleCountry"
                 url="/countries/pickList"/>
 
@@ -10,8 +10,13 @@
 
 <ag-select-rest name="multiCountryData"
                 label="multiCountryData"
-                select-options="{ multiple: true, closeOnSelect: false }"
+                select-options="{ multiple: true }"
                 ng-model="$ctrl.vm.multiCountryData"
                 url="/countries/pickList"/>
+
+<ag-select-rest name="user"
+                select-options="$ctrl.userSelectOpts"
+                ng-model="$ctrl.vm.users"
+                url="/users"/>
 
 <pre ng-cloak>model: {{$ctrl.vm | json}}</pre>

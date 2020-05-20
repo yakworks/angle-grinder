@@ -7,6 +7,7 @@ export default class AgSelectRestCtrl extends AgBaseComponent {
   selectOptions = {}
   opts = {
     minimumInputLength: 3,
+    closeOnSelect: false,
     useDataObject: true,
     ajax: {
       dataType: 'json',
@@ -54,6 +55,23 @@ export default class AgSelectRestCtrl extends AgBaseComponent {
       </table>
     `
     return markup;
+  }
+
+  // if its multiple & closeOnSelect:false then squinky hack so it stays open
+  // https://github.com/select2/select2/issues/2264#issuecomment-213003190
+  $postLink(scope, elm) {
+    if(this.opts.multiple && !this.opts.closeOnSelect){
+      this.$timeout(() => {
+        let inputEl = angular.element(document.getElementById(this.id))
+        inputEl.bind('select2-selecting', function(e) {
+          e.preventDefault()
+          let ngModelCtrl = inputEl.controller('ngModel')
+          var data = ngModelCtrl.$modelValue || []
+          data.push(e.object)
+          ngModelCtrl.$setViewValue(data)
+        })
+      })
+    }
   }
 
   // onChange() {

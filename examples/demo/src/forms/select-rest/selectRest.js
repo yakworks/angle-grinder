@@ -17,6 +17,19 @@ class controller {
       }
     ]
   }
+
+  userSelectOpts = {
+    minimumInputLength: 0,
+    multiple: true,
+    closeOnSelect: true,
+    formatResult: (item) => {
+      return `
+        <div>${item.name}</div>
+        <small>&lt;${item.email}></small>
+        <hr class="m-0">
+      `
+    }
+  }
 }
 
 export default angular.module('ag.demo.selectRest', [])
