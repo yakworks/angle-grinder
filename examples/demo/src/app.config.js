@@ -23,7 +23,6 @@ app.run(function($rootScope, $state, $stateParams) {
 
   const defaultLayout = {
     isNavbarFixed: true, // true if you want to initialize the template with fixed header
-    isSidebarFixed: true, // DEPRECATED true if you want to initialize the template with fixed sidebar
     isSidenavFixed: true, // true if you want to initialize the template with fixed sidebar
     isFooterFixed: false, // true if you want to initialize the template with fixed footer
     theme: 'light', // indicate the theme chosen for your project
@@ -43,32 +42,6 @@ app.run(function($rootScope, $state, $stateParams) {
     year: ((new Date()).getFullYear()) // automatic current year (for copyright information)
   }
   _.merge(appState.info, info)
-
-  // GLOBAL APP SCOPE
-  // set below basic information
-  const appConfig = {
-    name: 'Yak Works Template', // name of your project
-    author: 'YakWorks', // author's name or company name
-    description: 'Angular Bootstrap Admin Template', // brief description
-    version: '1.0', // current version
-    year: ((new Date()).getFullYear()), // automatic current year (for copyright information)
-    isMobile: (function() { // true if the browser is a mobile device
-      var check = false
-      if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-        check = true
-      };
-      return check
-    })(),
-    layout: {}
-  }
-  _.merge(appConfig.layout, defaultLayout)
-  $rootScope.app = appConfig
-
-  $rootScope.user = {
-    name: 'Peter',
-    job: 'ng-Dev',
-    picture: 'app/img/user/02.jpg'
-  }
 
   // appState defaults
   appState.sidenav.open = true
@@ -96,12 +69,6 @@ app.config(function($translateProvider) {
   $translateProvider.useSanitizeValueStrategy('sanitize')
 })
 
-app.constant('APP_MEDIAQUERY', {
-  desktopXL: 1200,
-  desktop: 992,
-  tablet: 768,
-  mobile: 480
-})
 // Angular-Loading-Bar
 // configuration
 app.config(function(cfpLoadingBarProvider) {

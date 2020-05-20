@@ -13,7 +13,7 @@ angular.module('app')
   // $urlRouterProvider.otherwise('/app/dashboard')
     const freshRouterStates = _.cloneDeep(fresh)
     const freshMenu = _.cloneDeep(fresh)
-    const packetCopy = _.cloneDeep(packet)
+    // const packetCopy = _.cloneDeep(packet)
 
     $urlRouterProvider.otherwise('/fresh/dashboard')
     stateHelperProvider.state(freshRouterStates)
