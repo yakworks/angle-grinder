@@ -67,12 +67,12 @@ legend {
   margin-bottom: 10px;
 }
 
-.label {
-  margin-left: 4px;
-}
-.label:first-child {
-  margin-left: 0;
-}
+// .label {
+//   margin-left: 4px;
+// }
+// .label:first-child {
+//   margin-left: 0;
+// }
 
 .fixed-menu {
   position: fixed;
@@ -113,13 +113,6 @@ legend {
   top: 58px;
   right: 12px;
 }
-
-label.required:after {
-    margin-left: 3px;
-    content: "*";
-    color: $danger;
-}
-
 
 table.customer-select-result td:nth-child(1) {
   width: 60px;

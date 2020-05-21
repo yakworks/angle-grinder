@@ -19,6 +19,7 @@
 			maxlength="{{::cmpCtrl.maximumLength}}"
 			>
     </input>
+    <p class="help" ng-if="cmpCtrl.hint">{{::cmpCtrl.hint}}</p>
     <ag-validation-inline for="{{::cmpCtrl.id}}" ></ag-validation-inline>
     <!-- <span class="help-block" ng-show="cmpCtrl.hint">{{cmpCtrl.hint}}</span> -->
   </div>

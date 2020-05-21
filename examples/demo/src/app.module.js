@@ -1,5 +1,5 @@
 import angular from 'angular'
-import agModule from '~/angle-grinder'
+import agModule from 'angle-grinder/src/angle-grinder'
 
 import ngTranslateModule from 'angular-translate'
 import 'angular-translate-loader-static-files'

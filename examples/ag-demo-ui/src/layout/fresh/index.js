@@ -1,9 +1,6 @@
-// import './styles/_index.scss'
 import template from './index.html'
-import sidenavModule from './sidenav'
-// import simpleSidenavModule from './sidenav/simple-sidenav'
+import sidenavModule from 'angle-grinder/src/ng/sidenav'
 import appbarModule from './appbar'
-// import * as sidenav from './sidenav/sidenav'
 
 // import appRoot from '../routerStates.js'
 import appState from 'angle-grinder/src/tools/AppState'

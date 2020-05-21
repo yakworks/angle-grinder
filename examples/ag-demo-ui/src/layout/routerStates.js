@@ -8,8 +8,7 @@ export const fresh = {
   abstract: true,
   url:'^',
   name: 'app',
-  component: 'freshApp',
-  children: states
+  component: 'freshApp'
 }
 
 export default { fresh }

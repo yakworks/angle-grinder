@@ -26,3 +26,14 @@ textarea.ng-dirty.ng-invalid {
   color: $danger-dark;
   display: inline-block;
 }
+
+// hint/help text
+p.help {
+  margin-bottom: 0px;
+}
+
+label.required:after {
+  margin-left: 3px;
+  content: "*";
+  color: $danger;
+}

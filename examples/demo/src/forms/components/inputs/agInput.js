@@ -1,5 +1,5 @@
 import template from './agInput.html'
-import toast from '~/tools/toast'
+import toast from 'angle-grinder/src/tools/toast'
 
 class controller {
   content = 'Click Me'

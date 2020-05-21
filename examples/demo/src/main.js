@@ -1,9 +1,7 @@
 // CSS and Sass
-// import './assets/vendor.css.js'
-import '~/styles/vendor.css.js'
-import '~/styles/all.scss'
+import 'angle-grinder/src/styles/vendor.css.js'
+import 'angle-grinder/src/styles/all.scss'
 import './assets/styles.scss'
-// import './assets/plugins.scss'
 
 // VENDOR
 import '~/vendor'
@@ -35,4 +33,4 @@ import './ui/alerts'
 import './ui/tabs'
 import './grids'
 
-//$log.debugEnabled(true)
+$log.debugEnabled(false)

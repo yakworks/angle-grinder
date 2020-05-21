@@ -3,6 +3,8 @@ import _ from 'lodash'
 import appName from './app.module'
 import './config.router'
 import appState from 'angle-grinder/src/tools/AppState'
+import orgStates from "../org/states";
+import userStates from "../user/states";
 
 const app = angular.module('app')
 // export default app.name
@@ -12,6 +14,7 @@ app.run(function($rootScope, $state, $stateParams) {
   $rootScope.$state = $state
   appState.$state = $state
   $rootScope.$stateParams = $stateParams
+  appState.sideMenuConfig = {children: [{data:{icon: 'mdi mdi-id-card', title: 'Org Section'}, children:[orgStates]}, userStates]}
 
   const userInfo = {
     id: '123',
@@ -43,44 +46,12 @@ app.run(function($rootScope, $state, $stateParams) {
   }
   _.merge(appState.info, info)
 
-  // GLOBAL APP SCOPE
-  // set below basic information
-  const appConfig = {
-    name: 'Grails Yak Works Demo', // name of your project
-    author: 'YakWorks', // author's name or company name
-    description: 'Grails Angular Bootstrap Demo', // brief description
-    version: '1.0', // current version
-    year: ((new Date()).getFullYear()), // automatic current year (for copyright information)
-    isMobile: (function() { // true if the browser is a mobile device
-      var check = false
-      if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-        check = true
-      };
-      return check
-    })(),
-    layout: {}
-  }
-  _.merge(appConfig.layout, defaultLayout)
-  $rootScope.app = appConfig
-
-  $rootScope.user = {
-    name: 'Peter',
-    job: 'ng-Dev',
-    picture: 'app/img/user/02.jpg'
-  }
-
   // appState defaults
   appState.sidenav.open = true
 
   $rootScope.appState = appState
 })
 
-app.constant('APP_MEDIAQUERY', {
-  desktopXL: 1200,
-  desktop: 992,
-  tablet: 768,
-  mobile: 480
-})
 // Angular-Loading-Bar
 // configuration
 app.config(function(cfpLoadingBarProvider) {

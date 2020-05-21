@@ -3,8 +3,8 @@
  * Make element 100% height of browser window.
  */
 const app = angular.module('app')
-app.directive('ctFullheight', ['$window', '$rootScope', '$timeout', 'APP_MEDIAQUERY',
-  function($window, $rootScope, $timeout, mq) {
+app.directive('ctFullheight',
+  function($window, $timeout) {
     return {
       restrict: 'AE',
       scope: {
@@ -66,4 +66,4 @@ app.directive('ctFullheight', ['$window', '$rootScope', '$timeout', 'APP_MEDIAQU
         })
       }
     }
-  }])
+  })

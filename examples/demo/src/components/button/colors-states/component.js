@@ -1,5 +1,5 @@
 import template from './component.html'
-import toast from '~/tools/toast'
+import toast from 'angle-grinder/src/tools/toast'
 
 class ClrController {
   content = 'Click Me'

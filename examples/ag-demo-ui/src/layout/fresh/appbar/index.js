@@ -1,5 +1,5 @@
 import appState from 'angle-grinder/src/tools/AppState'
-import { toggleSidenav } from '../sidenav'
+import { toggleSidenav } from 'angle-grinder/src/ng/sidenav/ag-sidenav'
 
 class controller {
   constructor($element) {
