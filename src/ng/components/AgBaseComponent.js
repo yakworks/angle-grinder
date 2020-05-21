@@ -4,28 +4,10 @@ import _ from 'lodash'
 
 /* @ngInject */
 export default class AgBaseComponent {
-  id
-  label
-  name
-  ngModelCtrl
-  formCtrl
-  value
-  validationError
-  minimumLength
-  maximumLength
-  placeholder
   isRequired = false
-  hint
-  type
-  required
-  clearable
-  loading
-  placeholder
-  errors
 
-  constructor($element, $timeout) {
+  constructor($element) {
     this.$element = $element
-    this.$timeout = $timeout
   }
 
   onInit() {
@@ -46,6 +28,10 @@ export default class AgBaseComponent {
     if (this.required === '' || this.required === 'true') {
       this.isRequired = true
     }
+    if (this.ngRequired === '' || this.ngRequired === 'true') {
+      this.isRequired = true
+    }
+
     // if(this.minimumLength) {
     //  this.isRequired = true
     // }
@@ -72,10 +58,10 @@ export default class AgBaseComponent {
     return true
   }
 
-  $postLink() {
-    this.$timeout(function() {
-      // var elem = document.getElementById(this.gridId);
-      // do something with elem now that the DOM has had it's bindings applied
-    })
-  }
+  // $postLink() {
+  //   this.$timeout(function() {
+  //     // var elem = document.getElementById(this.gridId);
+  //     // do something with elem now that the DOM has had it's bindings applied
+  //   })
+  // }
 }

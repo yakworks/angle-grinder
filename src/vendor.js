@@ -2,17 +2,6 @@
 window.jQuery = require('jquery')
 window.$ = window.jQuery
 
-// require('lodash')
-// require('angular')
-// require('angular-animate')
-// require('angular-route')
-// require('angular-resource')
-// require('angular-sanitize')
-// require('angular-scroll')
-// require('angular-xeditable')
-// require('angular-drag-and-drop-lists/angular-drag-and-drop-lists.js')
-// require('angular-ui-bootstrap')
-
 require('bootstrap-sass/assets/javascripts/bootstrap/dropdown')
 require('bootstrap-sass/assets/javascripts/bootstrap/tooltip') // required by popover
 require('bootstrap-sass/assets/javascripts/bootstrap/popover') // required by clickover

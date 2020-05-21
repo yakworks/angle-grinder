@@ -4,28 +4,16 @@
     <ag-input name="name" ng-model="$ctrl.vm.name" hint="this is a hint, must be > 2 chars"
               minimum-length="2" placeholder="Enter Name" required >
     </ag-input>
-    <ag-input type="email" name="email" ng-model="$ctrl.vm.email" >
+    <ag-input type="email" name="email" ng-model="$ctrl.vm.email" ng-required="true">
     </ag-input>
-    <ag-input name="website" ng-model="$ctrl.vm.website" required="false"></ag-input>
+    <ag-input name="website" ng-model="$ctrl.vm.website" ng-required="false"></ag-input>
 
     <div class="form-group">
       <label class="control-label required">Title</label>
       <div class="controls">
         <input type="text" name="website2" placeholder="job title"
-          ng-model="$ctrl.vm.title" class="form-control" required="true"/>
+          ng-model="$ctrl.vm.title" class="form-control" ng-required="true"/>
         <ag-validation-inline></ag-validation-inline>
-      </div>
-    </div>
-    <div class="field is-horizontal">
-      <div class="field-label is-normal">
-        <label class="label">Normal label</label>
-      </div>
-      <div class="field-body">
-        <div class="field">
-          <div class="control">
-            <input class="input" type="text" placeholder="Normal sized input">
-          </div>
-        </div>
       </div>
     </div>
   </fieldset>

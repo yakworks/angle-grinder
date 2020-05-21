@@ -1,1 +1,13 @@
 // put style overrides
+.field.column {
+  padding-bottom: 0 !important;
+}
+
+.label.column {
+  padding-top: calc(1em + 1px);
+  //padding-bottom: calc(.375rem + 1px);
+  padding-bottom: 0 !important;
+  font-size: inherit;
+  text-align: right;
+  // line-height: 1.5;
+}
