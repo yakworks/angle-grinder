@@ -23,5 +23,5 @@ app.config(function ($stateProvider, $urlRouterProvider, stateHelperProvider) {
 })
 
 app.run(function ($templateCache) {
-  $templateCache.put('user/list/searchForm.html', require('../../public/templates/user/search.html'))
+  $templateCache.put('user/list/searchForm.html', require('./searchForm/search.html'))
 })

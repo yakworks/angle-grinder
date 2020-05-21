@@ -8,7 +8,7 @@ export default class ListCtrl {
     DialogCrudCtrlMixin($scope, {
       Resource,
       gridName: 'usersGrid',
-      template: require('../../public/templates/user/form.html'),
+      template: require('../form/form.html'),
       beforeEdit(record) {
         // saves data from server to compare retrieved data and data that will be send to the server
         $scope.tzShowCase = _.cloneDeep(record)
