@@ -114,13 +114,6 @@ legend {
   right: 12px;
 }
 
-label.required:after {
-    margin-left: 3px;
-    content: "*";
-    color: $danger;
-}
-
-
 table.customer-select-result td:nth-child(1) {
   width: 60px;
 }

@@ -4,7 +4,7 @@ import 'angle-grinder/src/styles/all.scss'
 import './assets/styles.scss'
 
 // VENDOR
-import 'angle-grinder/src/vendor'
+import '~/vendor'
 
 // logging turn on debug
 import $log from 'angle-grinder/src/utils/Log'
@@ -33,4 +33,4 @@ import './ui/alerts'
 import './ui/tabs'
 import './grids'
 
-//$log.debugEnabled(true)
+$log.debugEnabled(false)
