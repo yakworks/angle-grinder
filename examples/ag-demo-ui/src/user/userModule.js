@@ -1,7 +1,7 @@
 import angular from 'angular'
 import angleGrinder from '~/angle-grinder'
 import layout from '../layout/app.module'
-import layoutStateWrapper from "../layout/layoutStateWrapper"
+import layoutStateWrapper from '../layout/layoutStateWrapper'
 import userStates from './states'
 
 const MOD_NAME = 'user'
@@ -20,8 +20,4 @@ app.config(function ($stateProvider, $urlRouterProvider, stateHelperProvider) {
   //$stateProvider.state(userStates)
   stateHelperProvider.state(layoutStateWrapper(userStates))
   $urlRouterProvider.otherwise('/')
-})
-
-app.run(function ($templateCache) {
-  $templateCache.put('user/list/searchForm.html', require('./searchForm/search.html'))
 })
