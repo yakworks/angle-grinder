@@ -31,3 +31,9 @@ textarea.ng-dirty.ng-invalid {
 p.help {
   margin-bottom: 0px;
 }
+
+label.required:after {
+  margin-left: 3px;
+  content: "*";
+  color: $danger;
+}
