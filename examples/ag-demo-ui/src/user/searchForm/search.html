@@ -1,45 +1,36 @@
 <div class="well">
-    <form ag-form="usersGrid" ag-search-form="usersGrid" class="form-horizontal-fixed form-multi-column no-margin">
+  <form ag-form="usersGrid" ag-search-form="usersGrid" class="form-horizontal-fixed form-multi-column no-margin">
 
-        <div class="columns">
-            <div class="column is-one-third">
-              <ag-select-rest name="org" multiple url="/api/org/pickList" ng-model="filters.orgIds"/>
-              <ag-input name="name" ng-model="filters.contact.name"/>
-              <ag-input name="Login" ng-model="filters.login"/>
+    <div class="columns">
+      <div class="column is-one-third">
+        <ag-select-rest name="org" multiple url="/api/org/pickList" ng-model="filters.orgIds"/>
+        <ag-input name="name" ng-model="filters.contact.name"/>
+        <ag-input name="Login" ng-model="filters.login"/>
 
-            </div>
-            <div class="column is-one-third">
-              <ag-input name="email" type="email" ng-model="filters.contact.email"></ag-input>
+      </div>
+      <div class="column is-one-third">
+        <ag-input name="email" type="email" ng-model="filters.contact.email"></ag-input>
+        <ag-select name="type" ng-model="filters.contact.type" select-options="{ data: ['admin', 'customer'], multiple: true }"/>
+        <div class="form-group">
+          <label class="control-label">Active Date</label>
 
-              <div class="form-group">
-                <label class="control-label col-sm-4">Type</label>
+          <div class="controls range-date-pickers">
+            <ag-datepicker ng-model="filters.activeDate.from"
+                           ag-trim-time="filters.activeDate.from"
+                           placeholder="from"></ag-datepicker>
 
-                <div class="controls">
-                  <input type="text" ui-select2="contactTypeSelectOptions" class="full-width"
-                         name="contactType" ng-model="filters.contact.type"/>
-                </div>
-              </div>
-
-                <div class="form-group">
-                    <label class="control-label">Active Date</label>
-
-                    <div class="controls range-date-pickers">
-                        <ag-datepicker ng-model="filters.activeDate.from"
-                                       ag-trim-time="filters.activeDate.from"
-                                       placeholder="from"></ag-datepicker>
-
-                        <ag-datepicker ng-model="filters.activeDate.to"
-                                       ag-trim-time="filters.activeDate.to"
-                                       placeholder="to"></ag-datepicker>
-                    </div>
-                </div>
-            </div>
+            <ag-datepicker ng-model="filters.activeDate.to"
+                           ag-trim-time="filters.activeDate.to"
+                           placeholder="to"></ag-datepicker>
+          </div>
         </div>
+      </div>
+    </div>
 
 
-        <div class="pull-right">
-            <ag-search-button></ag-search-button>
-            <ag-reset-search-button></ag-reset-search-button>
-        </div>
-    </form>
+    <div class="pull-right">
+      <ag-search-button></ag-search-button>
+      <ag-reset-search-button></ag-reset-search-button>
+    </div>
+  </form>
 </div>

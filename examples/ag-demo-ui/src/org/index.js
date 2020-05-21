@@ -1,7 +1,7 @@
 import orgform from './form/component'
 import orgList from './list/component'
-import ShowCtrl from './showCtrl'
-import MassUpdateFormCtrl from './MassUpdateFormCtrl'
+import ShowCtrl from './show/showCtrl'
+import MassUpdateFormCtrl from './massUpdate/MassUpdateFormCtrl'
 import adminOrg from './adminOrgModule'
 import OrgSelectOptions from './orgSelectOptions'
 
