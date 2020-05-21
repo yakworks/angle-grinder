@@ -1,7 +1,7 @@
 import angular from 'angular'
 import formsModule from '../formsModule'
 import moment from 'moment'
-//import 'eonasdan-bootstrap-datetimepicker/src/js/bootstrap-datetimepicker'
+// import 'eonasdan-bootstrap-datetimepicker/src/js/bootstrap-datetimepicker'
 import _ from 'lodash'
 
 var forms = angular.module(formsModule)
