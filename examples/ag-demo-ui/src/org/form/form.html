@@ -10,14 +10,7 @@
                   ng-submit="$ctrl.save(inputForm, $ctrl.org)">
               <ag-input name="name" ng-model="$ctrl.org.name" required/>
               <ag-input name="num" ng-model="$ctrl.org.num" required/>
-              <div ag-field-group >
-                <label class="control-label">Time Zone</label>
-                <div class="controls">
-                  <input name="timeZone" class="form-control" ng-model="$ctrl.org.timeZone"
-                         ui-select2 ui-select2-data="['UTC-6','UTC-2','UTC','UTC+2']">
-                </div>
-              </div>
-
+              <ag-select name="timeZone" ng-model="$ctrl.org.timeZone" select-options="{ data: ['UTC-6','UTC-2','UTC','UTC+2'], multiple: true }"/>
               <div class="form-group">
                 <div class="col-xs-offset-4 col-xs-10">
                   <ag-submit-button></ag-submit-button>

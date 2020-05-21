@@ -1,5 +1,6 @@
 import orgform from './form/component'
 import orgList from './list/component'
+import search from'./searchForm'
 import ShowCtrl from './show/showCtrl'
 import MassUpdateFormCtrl from './massUpdate/MassUpdateFormCtrl'
 import adminOrg from './adminOrgModule'
