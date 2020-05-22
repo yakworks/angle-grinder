@@ -35,7 +35,8 @@ export default class AgSelectRestCtrl extends AgBaseComponent {
   }
 
   constructor($element, $timeout, pathWithContext) {
-    super($element, $timeout)
+    super($element)
+    this.$timeout = $timeout
     this.pathWithContext = pathWithContext
   }
 
@@ -74,8 +75,4 @@ export default class AgSelectRestCtrl extends AgBaseComponent {
     }
   }
 
-  // onChange() {
-  //   super.onChange()
-  //   super.validate()
-  // }
 }

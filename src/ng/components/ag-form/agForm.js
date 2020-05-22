@@ -1,4 +1,6 @@
 import angular from 'angular'
+import _ from 'lodash'
+// import Log from '../../../utils/Log'
 
 export default agForm
 
@@ -32,6 +34,12 @@ function agForm($timeout) {
     var validationStrategy = $attrs.strategy
       ? agValidationsConfig.getValidationStrategy($attrs.strategy)
       : agValidationsConfig.getDefaultValidationStrategy()
+
+    // Log.debug('$attrs',$attrs)
+    this.isHorizontal = !_.isUndefined($attrs.isHorizontal)
+    this.labelClass = $attrs.labelClass
+    // set default to is-3
+    if (this.isHorizontal && !this.labelClass) this.labelClass = 'is-3'
 
     // polyfill for setSubmitted pre 1.3
     function setSubmitted() {

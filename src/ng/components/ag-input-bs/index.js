@@ -10,12 +10,6 @@ class Controller extends AgBaseComponent {
 
   $onInit() {
     super.onInit()
-    super.validate()
-  }
-
-  onChange() {
-    super.onChange()
-    super.validate()
   }
 }
 

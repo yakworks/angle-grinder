@@ -1,9 +1,9 @@
 import _ from 'lodash'
 // import { isAttrTruthy } from '../../utils/ngHelpers'
 
-import $log from '../../../utils/Log'
+// import $log from '../../../utils/Log'
 function ldebug(msg, o) {
-  $log.debug(msg, o)
+  // $log.debug(msg, o)
 }
 export default ngModel
 

@@ -1,0 +1,32 @@
+<form name="formHor" ag-form is-horizontal label-class="is-2" autocomplete="off" novalidate>
+  <legend class="mb-4">horizontal standard</legend>
+  <ag-input ng-model="$ctrl.vm.name" required ></ag-input>
+  <ag-input ng-model="$ctrl.vm.email" ></ag-input>
+
+
+  <legend class="mt-4 mb-4">horizontal with columns</legend>
+  <div class="columns mb-0">
+    <ag-label label="Name" ng-required="true"></ag-label>
+    <ag-input label="" ng-model="$ctrl.vm.name" required ></ag-input>
+    <ag-input label="" ng-model="$ctrl.vm.email" ></ag-input>
+  </div>
+
+  <ag-input label="Address" placeholder="Street" ng-model="$ctrl.vm.address.street" ></ag-input>
+
+  <div class="columns mb-0">
+    <ag-label label=" "></ag-label>
+    <ag-input label="" ng-model="$ctrl.vm.address.city" ></ag-input>
+    <ag-input class="is-2" label="" ng-model="$ctrl.vm.address.state" ></ag-input>
+    <ag-input class="is-3" label="" ng-model="$ctrl.vm.address.zipCode" ></ag-input>
+  </div>
+  <ag-input ng-model="$ctrl.vm.website" ></ag-input>
+  <div class="field is-grouped">
+    <div class="control">
+      <ag-button type="submit" color="primary">Submit</ag-button>
+    </div>
+    <div class="control">
+      <ag-button type="reset" ng-click="$ctrl.reset()">Reset</ag-button>
+    </div>
+  </div>
+</form>
+<pre ng-cloak class="mt-4">form.$invalid: {{form.$invalid}}<br>model: {{$ctrl.vm | json}}</pre>

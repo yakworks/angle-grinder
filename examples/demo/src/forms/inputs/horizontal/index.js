@@ -1,7 +1,7 @@
 import compDemoModule from './comp'
 
 const template = `
-<example-snippet raw-js='$ctrl.rawJs' raw-html='$ctrl.rawHtml' raw-md='$ctrl.rawMd' max-height="500px">
+<example-snippet raw-js='$ctrl.rawJs' raw-html='$ctrl.rawHtml' raw-md='$ctrl.rawMd' max-height="600px">
   <input-horizontal-demo></input-horizontal-demo>
 </example-snippet>
 `
