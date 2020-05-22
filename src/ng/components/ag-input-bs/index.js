@@ -1,7 +1,7 @@
 import AgBaseComponent from '../AgBaseComponent'
 import compDefaults from '../utils/componentDirective'
 import scopeDefaults from '../utils/scopeDefaults'
-
+// The bootstrap version
 /* @ngInject */
 class Controller extends AgBaseComponent {
   // constructor($element) {
@@ -16,10 +16,6 @@ class Controller extends AgBaseComponent {
   onChange() {
     super.onChange()
     super.validate()
-  }
-
-  hasLabel() {
-    return !!this.label
   }
 }
 

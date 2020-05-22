@@ -1,8 +1,8 @@
 import angular from 'angular'
 import agFormMod from './ag-form'
 import agLabel from './ag-label'
-import agInputField from './ag-input-field'
 import agInput from './ag-input'
+import agInputBs from './ag-input-bs'
 import agSelectModule from './ag-select'
 import agSelectRest from './ag-select-rest'
 import agValMod from './ag-validation'
@@ -24,5 +24,5 @@ angular.module(MOD_NAME, [
   buttonModule
 ])
   .directive('agLabel', agLabel)
-  .directive('agInputField', agInputField)
   .directive('agInput', agInput)
+  .directive('agInputBs', agInputBs)

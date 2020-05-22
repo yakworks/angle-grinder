@@ -17,6 +17,10 @@ class Controller extends AgBaseComponent {
     super.onChange()
     super.validate()
   }
+
+  hasLabel() {
+    return !!this.label
+  }
 }
 
 export default () => ({
@@ -29,6 +33,7 @@ export default () => ({
   },
   scope: {
     ...scopeDefaults.formComp,
+    ngModel: '=',
     type: '@',
     minimumLength: '@',
     maximumLength: '@'

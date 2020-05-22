@@ -1,12 +1,12 @@
 <form name="form" ag-form
       class="form-horizontal-fixed" autocomplete="off" novalidate>
   <fieldset>
-    <ag-input name="name" ng-model="$ctrl.vm.name" hint="this is a hint, must be > 2 chars"
+    <ag-input-bs name="name" ng-model="$ctrl.vm.name" hint="this is a hint, must be > 2 chars"
               minimum-length="2" placeholder="Enter Name" required >
-    </ag-input>
-    <ag-input type="email" name="email" ng-model="$ctrl.vm.email" ng-required="true">
-    </ag-input>
-    <ag-input name="website" ng-model="$ctrl.vm.website" ng-required="false"></ag-input>
+    </ag-input-bs>
+    <ag-input-bs type="email" name="email" ng-model="$ctrl.vm.email" ng-required="true">
+    </ag-input-bs>
+    <ag-input-bs name="website" ng-model="$ctrl.vm.website" ng-required="false"></ag-input-bs>
 
     <div class="form-group">
       <label class="control-label required">Title</label>

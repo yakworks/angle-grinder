@@ -2,13 +2,13 @@ import compDemoModule from './comp'
 
 const template = `
 <example-snippet raw-js='$ctrl.rawJs' raw-html='$ctrl.rawHtml' raw-md='$ctrl.rawMd' max-height="500px">
-  <bulma-demo></bulma-demo>
+  <input-horizontal-demo></input-horizontal-demo>
 </example-snippet>
 `
 // export the module name
 export default angular
   .module(compDemoModule)
-  .component('bulmaExample', {
+  .component('inputHorizontalExample', {
     template,
     controller: function() {
       this.rawHtml = require('./comp.html')

@@ -1,0 +1,26 @@
+<div class="form-group">
+  <label class="control-label"
+      ng-class="{required: $ctrl.isRequired}"
+      for="{{::$ctrl.id}}">{{::$ctrl.label}}</label>
+  <div class="controls">
+    <input
+      class="form-control"
+			type="{{::$ctrl.type}}"
+			placeholder="{{::$ctrl.placeholder}}"
+			autocomplete="off"
+			ng-model-options="{allowInvalid: true, debounce: 250}"
+			name="{{::$ctrl.name}}"
+			id="{{::$ctrl.id}}"
+			ng-model="$ctrl.value"
+			ng-change="$ctrl.onChange()"
+			ng-required="{{::$ctrl.isRequired}}"
+			ng-minlength="::$ctrl.minimumLength"
+			ng-maxlength="::$ctrl.maximumLength"
+			maxlength="{{::$ctrl.maximumLength}}"
+			>
+    </input>
+    <p class="help" ng-if="$ctrl.hint">{{::$ctrl.hint}}</p>
+    <ag-validation-inline for="{{::$ctrl.id}}" ></ag-validation-inline>
+    <!-- <span class="help-block" ng-show="$ctrl.hint">{{$ctrl.hint}}</span> -->
+  </div>
+</div>
