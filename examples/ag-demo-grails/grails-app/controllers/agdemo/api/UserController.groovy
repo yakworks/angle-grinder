@@ -15,7 +15,7 @@ class UserController extends BaseDomainController {
 
     def domainClass = User
 
-    def selectFields = ["*", "contact.*"]
+    def selectFields = ["*", "contact.*", "contact.org.*"]
 
     def index() {
     }
