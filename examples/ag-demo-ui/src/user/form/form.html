@@ -19,17 +19,7 @@
           <ag-input type="email" name="email" ng-model="user.contact.email" required="" />
           <ag-select name="type" ng-model="filters.contact.type" select-options="{ data: ['admin', 'customer'], multiple: true }"/>
           <ag-select-rest name="org" multiple url="/api/org/pickList" ng-model="user.contact.org.id"/>
-
-          <div ag-field-group for="tagForReminders">
-            <div class="form-group">
-              <label class="control-label">
-                Tag For Reminders
-              </label>
-              <div class="controls">
-                <input type="checkbox" name="tagForReminders" ng-model="user.contact.tagForReminders"/>
-              </div>
-            </div>
-          </div>
+          <ag-checkbox name="tagForReminders" ng-model="user.contact.tagForReminders"></ag-checkbox>
         </ng-form>
         <ag-input name="login" ng-model="user.login" required ></ag-input>
 

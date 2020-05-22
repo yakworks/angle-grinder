@@ -1,0 +1,16 @@
+<div class="form-check form-group">
+  <label class="control-label"
+      for="{{::cmpCtrl.id}}">{{::cmpCtrl.label}}</label>
+  <div class="controls">
+    <input
+      class="form-check-input"
+			type="checkbox"
+			name="{{::cmpCtrl.name}}"
+			id="{{::cmpCtrl.id}}"
+			ng-model="cmpCtrl.value"
+			ng-change="cmpCtrl.onChange()"
+			>
+    </input>
+    <p class="help" ng-if="cmpCtrl.hint">{{::cmpCtrl.hint}}</p>
+  </div>
+</div>
