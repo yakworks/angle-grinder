@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: yakworks/alpine-java:jdk8-builder-node
+      - image: node:12
 
     parallelism: 1
     # resource_class: large
