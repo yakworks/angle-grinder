@@ -1,0 +1,16 @@
+<div class="field" ng-class="{column: $ctrl.isHorizontal}">
+  <ag-label label-class="{{$ctrl.labelClass}}" ng-if="$ctrl.label" label="{{$ctrl.label}}"></ag-label>
+  <div class="control">
+    <label class="form-check" ng-class="$ctrl.checkClass">
+      <input
+        type="checkbox"
+        name="{{::$ctrl.name}}"
+        id="{{::$ctrl.id}}"
+        ng-model="$ctrl.value"
+        ng-change="$ctrl.onChange()"
+      >
+      <i></i>
+      {{::$ctrl.hint}}
+    </label>
+  </div>
+</div>

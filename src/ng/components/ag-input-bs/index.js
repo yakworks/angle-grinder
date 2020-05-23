@@ -1,4 +1,4 @@
-import AgBaseComponent from '../AgBaseComponent'
+import AgBaseComponent from '../AgBaseControl'
 import compDefaults from '../utils/componentDirective'
 import scopeDefaults from '../utils/scopeDefaults'
 // The bootstrap version

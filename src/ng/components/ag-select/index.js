@@ -1,6 +1,6 @@
 /* eslint-disable no-useless-constructor, no-unused-vars */
 import angular from 'angular'
-import AgBaseComponent from '../AgBaseComponent'
+import AgBaseComponent from '../AgBaseControl'
 import _ from 'lodash'
 
 const MOD_NAME = 'forms.ag-select'
