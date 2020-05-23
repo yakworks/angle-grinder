@@ -16,8 +16,8 @@ $line-height-computed: 20px;
 $control-label-font-size: $size-14 !default;;
 // for 14 use .6rem, 16 use .5rem
 $control-label-padding: .6rem !default;
-$control-label-width: 160px !default;
-$control-margin-left: $control-label-width + 10px !default;
+$control-label-width: 120px !default;
+$control-margin-left: $control-label-width + 16px !default;
 $control-label-color: $grey-dark !default;
 
 .form-horizontal-fixed {

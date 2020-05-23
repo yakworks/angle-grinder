@@ -4,24 +4,7 @@ import _ from 'lodash'
 
 /* @ngInject */
 export default class AgBaseComponent {
-  id
-  label
-  name
-  ngModelCtrl
-  formCtrl
-  value
-  validationError
-  minimumLength
-  maximumLength
-  placeholder
   isRequired = false
-  hint
-  type
-  required
-  clearable
-  loading
-  placeholder
-  errors
 
   constructor($element, $timeout) {
     this.$element = $element
@@ -29,26 +12,40 @@ export default class AgBaseComponent {
   }
 
   onInit() {
-    this.id = this.id || _.uniqueId(`${this.name}_`)
-    // $log.debug(`[${this.id}] - formCtrl`, this.formCtrl)
-
     this.type = this.type || 'text'
-
-    if (this.name && !this.label) {
-      this.label = stringUtils.parseWords(this.name)
+    const modelPath = this.$element.attr('ng-model')
+    if (modelPath) {
+      this.modelKey = _.split(modelPath, '.').slice(-1).pop()
     }
-    this.placeholder = this.placeholder || this.label?.toLowerCase()
+    // passing in a blank string to label will not be undefined, and is how to blank it out
+    if (typeof this.label === 'undefined') {
+      this.label = stringUtils.parseWords(this.modelKey)
+    }
+    this.placeholder = this.placeholder || (this.label || stringUtils.parseWords(this.modelKey))
+
+    // figure out an id for the field if it doesn't have one
+    if (!this.id) {
+      const idKey = `field_${this.type}_${this.modelKey}`
+      this.id = _.uniqueId(`${idKey}_`)
+    }
+    if (!this.name) {
+      this.name = this.id
+    }
 
     if (!this.maximumLength) {
       this.maximumLength = 50
     }
     // if required is added it wont be undefined and may have blank str if no value is set
-    if (this.required === '' || this.required === 'true') {
+    if (this.required === '' || this.required === 'true' ||
+        this.ngRequired === '' || this.ngRequired === 'true') {
       this.isRequired = true
     }
-    // if(this.minimumLength) {
-    //  this.isRequired = true
-    // }
+    if (this.formCtrl) {
+      if (!this.isHorizontal) this.isHorizontal = this.formCtrl.isHorizontal
+      if (!this.labelClass && this.formCtrl.labelClass) this.labelClass = this.formCtrl.labelClass
+    }
+    // if (this.isHorizontal) this.labelClass = `column ${this.labelClass}`
+
     this.ngModelCtrl.$render = () => {
       this.value = this.ngModelCtrl.$viewValue
     }
@@ -73,9 +70,15 @@ export default class AgBaseComponent {
   }
 
   $postLink() {
-    this.$timeout(function() {
-      // var elem = document.getElementById(this.gridId);
-      // do something with elem now that the DOM has had it's bindings applied
+    this.$timeout(() => {
+      if (this.isHorizontal && this.label) {
+        // move label out and wrap with a column div
+        const label = this.$element.find('label.label')
+        var content = angular.element('<div class="columns is-mobile"></div>')
+        this.$element.wrap(content)
+        this.$element.parent().prepend(label)
+        // this.$element.replaceWith(content);
+      }
     })
   }
 }
