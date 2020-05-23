@@ -5,5 +5,6 @@ import controler from './listCtrl'
 
 angular.module(orgModule).component('orgList', {
   template: require('./list.html'),
-  controller: controler
+  controller: controler,
+  controllerAs: 'vm'
 })
