@@ -29,11 +29,35 @@ textarea.ng-dirty.ng-invalid {
 
 // hint/help text
 p.help {
+  //remove the bottom margin if its set on p like from bootstrap
   margin-bottom: 0px;
 }
 
 label.required:after {
-  margin-left: 3px;
+  margin-left: 1px;
   content: "*";
   color: $danger;
+  position: absolute;
 }
+
+// Bulma overrides
+.label {
+  font-size: $label-font-size;
+}
+
+.columns:not(:last-child) {
+  // remove paddings on columns if its not the last item
+  .field.column {
+    padding-bottom: 0 !important;
+  }
+  .label.column {
+    padding-bottom: 0 !important;
+  }
+}
+
+.label.column {
+  //centers labels vertically
+  padding-top: $label-padding-top;
+  text-align: right;
+}
+

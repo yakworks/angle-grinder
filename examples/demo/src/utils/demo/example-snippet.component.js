@@ -11,10 +11,17 @@ const template = `
 `
 
 class controller {
-  // $onInit() {
-  //   this.maxHeight = this.maxHeight || '300px'
-  //   console.log("rawHtml", this.rawHtml)
-  // }
+  /* @ngInject */
+  constructor($element, $timeout) {
+    this.$element = $element
+    this.$timeout = $timeout
+  }
+  $postLink() {
+    this.$timeout(() => {
+      let eComp = $(this.$element).find('.example-component')
+      $(this.$element).find('.hljs-container').css('max-height', eComp.innerHeight() - 50);
+    })
+  }
 }
 
 // Define and export component

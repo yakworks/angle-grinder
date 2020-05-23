@@ -1,0 +1,41 @@
+<form name="form" ag-form autocomplete="off" novalidate>
+  <legend>basic vertical</legend>
+
+  <ag-input ng-model="$ctrl.vm.name" hint="this is a hint, must be > 2 chars"
+    minimum-length="2" placeholder="John Smith" required >
+  </ag-input>
+  <ag-input type="email" label="User Email" ng-model="$ctrl.vm.email"
+    ng-required="true" input-class='is-success' placeholder="john@email.com">
+  </ag-input>
+  <ag-input ng-model="$ctrl.vm.website" ng-required="false"></ag-input>
+  <ag-input ng-model="$ctrl.vm.address" ></ag-input>
+
+  <legend>using columns</legend>
+  <div class="columns mb-0">
+    <ag-input class="column" ng-model="$ctrl.vm.name" required>
+    </ag-input>
+    <ag-input class="column" type="email" ng-model="$ctrl.vm.email"
+      input-class='is-success'>
+    </ag-input>
+  </div>
+  <ag-input label="Address" ng-model="$ctrl.vm.address.street" placeholder="Street">
+  </ag-input>
+  <div class="columns mb-0">
+    <ag-input class="column" label="" ng-model="$ctrl.vm.address.city">
+    </ag-input>
+    <ag-input class="column is-2" label="" ng-model="$ctrl.vm.address.state">
+    </ag-input>
+    <ag-input class="column is-3" label="" ng-model="$ctrl.vm.address.zipcode">
+    </ag-input>
+  </div>
+
+  <div class="field is-grouped">
+    <div class="control">
+      <ag-button type="submit" color="primary">Submit</ag-button>
+    </div>
+    <div class="control">
+      <ag-button type="reset" ng-click="$ctrl.reset()">Reset</ag-button>
+    </div>
+  </div>
+</form>
+<pre ng-cloak class="mt-4">form.$invalid: {{form.$invalid}}<br>model: {{$ctrl.vm | json}}</pre>

@@ -14,6 +14,7 @@ class BtnController {
   }
 
   $onInit() {
+    this.btnType = this.type || 'button'
     this.btnCls = this.buttonClass || ''
     // setup color class
     if (this.color) this.btnCls = `${this.btnCls} is-${this.color}`
@@ -61,7 +62,8 @@ export default {
     isLoading: '<',
     isDisabled: '<',
     // size: '@',
-    buttonClick: '='
+    buttonClick: '=',
+    type: '@'
   },
   template,
   controller: BtnController,

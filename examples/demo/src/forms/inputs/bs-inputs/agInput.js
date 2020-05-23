@@ -12,7 +12,7 @@ class controller {
 
 export default angular
   .module('ag.demo.agInput', [])
-  .component('agInputDemo', {
+  .component('bsInputDemo', {
     template,
     controller
   })

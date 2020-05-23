@@ -1,7 +1,7 @@
 // import buttonsModule from './buttons'
 import horSandModule from './horizontal-sandbox'
 import validateSandModule from './validations-sandbox'
-import compsModule from './components'
+import compsModule from './inputs'
 import selectModule from './select'
 import selectRestModule from './select-rest'
 import select2Module from './select2-sandbox'
