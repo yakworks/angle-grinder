@@ -53,7 +53,7 @@ forms.provider('agDate', function() {
 })
 
 // uses http://eonasdan.github.io/bootstrap-datetimepicker/
-forms.directive('agDatepicker', [
+forms.directive('agDatepickerBs', [
   '$timeout', 'agDate', ($timeout, agDate) => ({
     require: 'ngModel',
     restrict: 'AE',

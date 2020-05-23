@@ -7,6 +7,7 @@ import selectRestModule from './select-rest'
 import select2Module from './select2-sandbox'
 import xeditModule from './xedit-form'
 import checkboxModule from './checkbox'
+import datepickerModule from './datepicker'
 
 // export module name
 export default angular
@@ -18,6 +19,7 @@ export default angular
     checkboxModule,
     xeditModule,
     horSandModule,
-    validateSandModule
+    validateSandModule,
+    datepickerModule
   ])
   .name
