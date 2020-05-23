@@ -30,6 +30,10 @@ const formStates = {
       component: 'selRestDemoIndex'
     },
     {
+      name: 'checkbox',
+      component: 'checkboxDemoIndex'
+    },
+    {
       name: 'xedit',
       component: 'xeditDemoIndex'
     },

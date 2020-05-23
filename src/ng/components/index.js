@@ -1,5 +1,6 @@
 import angular from 'angular'
 import agFormMod from './ag-form'
+import agCheckboxModule from './ag-checkbox/ag-checkbox.comp'
 import agLabel from './ag-label'
 import agInput from './ag-input'
 import agInputBs from './ag-input-bs'
@@ -20,6 +21,7 @@ angular.module(MOD_NAME, [
   agValMod,
   agSelectModule,
   agSelectRest,
+  agCheckboxModule,
   dropdownModule,
   buttonModule
 ])

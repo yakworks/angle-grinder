@@ -1,6 +1,6 @@
 import angular from 'angular'
 
-import orgModule from '../adminOrgModule'
+import orgModule from '../module'
 import controler from './listCtrl'
 
 angular.module(orgModule).component('orgList', {

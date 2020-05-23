@@ -1,14 +1,14 @@
 import angular from 'angular'
 
-import orgModule from '../adminOrgModule'
-import controler from './formCtrl'
+import module from '../module'
+import controller from './formCtrl'
 
-angular.module(orgModule).component('orgForm', {
+angular.module(module).component('orgForm', {
   bindings: {
     // one-way input binding, e.g.,
     // automatically bound to `org` on the controller
     org: '<'
   },
   template: require('./form.html'),
-  controller: controler
+  controller: controller
 })

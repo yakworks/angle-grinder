@@ -55,7 +55,7 @@ export default class ListCtrl {
     )
 
     MassUpdateMixin($scope, {
-      template: require('../../../public/templates/org/massUpdateForm.html'),
+      template: require('../massUpdate/massUpdateForm.html'),
       controller: 'org.MassUpdateFormCtrl',
       gridName: 'orgGrid'
     }

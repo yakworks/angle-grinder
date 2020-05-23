@@ -1,5 +1,5 @@
 import angular from 'angular'
-import adminOrg from '../org/adminOrgModule'
+import adminOrg from '../org/module'
 import layout from '../layout/app.module'
 
 const MOD_NAME = 'admin.orgTabs'

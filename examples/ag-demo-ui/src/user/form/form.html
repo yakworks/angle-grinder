@@ -1,4 +1,3 @@
-
 <div class="modal-header">
   <button type="button" class="close" ng-click="closeDialog()" aria-hidden="true">&times;</button>
 
@@ -7,157 +6,52 @@
     <span ng-switch-when="false">Create New User</span>
   </h3>
 </div>
-<div class="columns"><div class="column">
-<form name="editForm" class="form-horizontal-fixed" novalidate
-      ag-server-validation-errors
-      ng-submit="save(user)">
-  <div class="modal-body" style="height:60%; overflow:auto;">
+<div class="columns">
+  <div class="column">
+    <form ag-form="editForm" name="editForm" class="form-horizontal-fixed" novalidate
+          ag-server-validation-errors
+          ng-submit="save(user)">
+      <div class="modal-body" style="height:60%; overflow:auto;">
 
-    <ng-form name="contact" ag-server-validation-errors>
-      <div ag-field-group for="firstName,lastName,email">
-        <div class="form-group">
-          <label class="control-label">Name</label>
+        <ng-form name="contact" ag-server-validation-errors>
+          <ag-input name="firstName" ng-model="user.contact.firstName" required ></ag-input>
+          <ag-input name="lastName" ng-model="user.contact.lastName" required ></ag-input>
+          <ag-input type="email" name="email" ng-model="user.contact.email" required="" />
+          <ag-select name="type" ng-model="filters.contact.type.name" select-options="{ data: ['admin', 'customer'], multiple: true }"/>
+          <ag-select-rest name="org" multiple url="/api/org/pickList" ng-model="user.contact.org"/>
+          <ag-checkbox name="tagForReminders" ng-model="user.contact.tagForReminders"></ag-checkbox>
+        </ng-form>
+        <ag-input name="login" ng-model="user.login" required ></ag-input>
 
-          <div class="controls">
-            <input class="form-control"  type="text" placeholder="First Name"
-                   name="firstName"
-                   ng-model="user.contact.firstName" required autofocus>
-            <ag-validation-errors for="firstName"/>
+        <div ag-field-group for="activeDate">
+          <div class="form-group">
+            <label class="control-label">Active Date</label>
+
+            <div class="controls">
+              <ag-datepicker
+                ng-model="user.activeDate"
+                ng-required="true"
+                name="activeDate"/>
+              </ag-datepicker>
+
+              <ag-validation-errors for="activeDate"/>
+            </div>
           </div>
         </div>
+        <ag-input name="password" ng-model="user.password" hint="must be more 6 chars"
+                  minimum-length="6" required ></ag-input>
+        <ag-input name="rePassword" hint="must be more 6 chars"
+                  minimum-length="6" ng-model="user.repassword" required ></ag-input>
+        <ag-checkbox ng-hide="user.newRecord()"" name="inactive" ng-model="user.inactive"></ag-checkbox>
+          <div class="modal-footer">
+          <span ng-if="user.persisted()">
+            <ag-delete-button when-confirmed="delete(item)"></ag-delete-button>
+          </span>
 
-        <div class="form-group">
-          <div class="controls">
-            <input class="form-control"  type="text" placeholder="Last Name"
-                   name="lastName"
-                   ng-model="user.contact.lastName"/>
-            <ag-validation-errors for="lastName"/>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label class="control-label">Email</label>
-
-          <div class="controls">
-            <input class="form-control"  type="email" placeholder="Email"
-                   name="email" ng-model="user.contact.email"/>
-            <ag-validation-errors for="email"/>
-          </div>
+          <ag-cancel-button ng-click="closeDialog()"></ag-cancel-button>
+          <ag-submit-button></ag-submit-button>
         </div>
       </div>
-
-
-        <div ag-field-group for="type" class="form-group">
-          <label class="control-label">Type</label>
-
-          <div class="controls">
-            <select class="form-control" ui-select2="{closeOnSelect: false}" name="type" name="type" ng-model="user.contact.type">
-              <option value="ADMIN">admin</option>
-              <option value="CUSTOMER">customer</option>
-            </select>
-            <ag-validation-errors for="type"/>
-          </div>
-        </div>
-
-
-      <div ag-field-group for="orgId">
-        <div class="form-group">
-          <label class="control-label">Org</label>
-
-          <div class="controls">
-            <input ng-model="user.contact.org.id" class="form-control" name="orgId" ui-select2="orgSelectOptions">
-
-            <ag-validation-errors for="orgId"/>
-          </div>
-        </div>
-      </div>
-
-      <div ag-field-group for="tagForReminders">
-        <div class="form-group">
-          <label class="control-label">
-            Tag For Reminders
-          </label>
-
-          <div class="controls">
-            <input type="checkbox" name="tagForReminders" ng-model="user.contact.tagForReminders"/>
-          </div>
-
-        </div>
-      </div>
-    </ng-form>
-
-    <div ag-field-group for="login">
-      <div class="form-group">
-        <label class="control-label">Login</label>
-
-        <div class="controls">
-          <input class="form-control"  type="text"
-                 name="login" ng-model="user.login" required/>
-          <ag-validation-errors for="login"/>
-        </div>
-      </div>
-    </div>
-
-    <div ag-field-group for="activeDate">
-      <div class="form-group">
-        <label class="control-label">Active Date</label>
-
-        <div class="controls">
-          <ag-datepicker
-                         ng-model="user.activeDate"
-                         ng-required="true"
-                         name="activeDate"/>
-        </ag-datepicker>
-
-          <ag-validation-errors for="activeDate"/>
-        </div>
-      </div>
-    </div>
-
-    <div ag-field-group for="password,repassword">
-      <div class="form-group">
-        <label class="control-label ">Password</label>
-
-        <div>
-          <div class="controls">
-            <input class="form-control"  type="password" placeholder="Pssword"
-                   name="password"
-                   ng-model="user.password"
-                   ng-required="user.newRecord()" ng-minlength="6"/>
-            <ag-validation-errors for="password"/>
-          </div>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <div class="controls">
-          <input class="form-control"  type="password" placeholder="Confirm Password"
-                 name="repassword"
-                 ng-model="user.repassword"
-                 ng-required="user.newRecord()" ng-minlength="6" match="user.password"/>
-          <ag-validation-errors for="repassword"/>
-        </div>
-      </div>
-    </div>
-
-    <div class="form-group" ng-hide="user.newRecord()">
-      <label class="control-label col-md-4">
-        Inactive
-      </label>
-
-      <div class="col-md-4" style="margin-top: 7px;">
-        <input type="checkbox" name="tagForReminders" ng-model="user.inactive"/>
-      </div>
-
-    </div>
-
-    <div class="modal-footer">
-      <span ng-if="user.persisted()">
-        <ag-delete-button when-confirmed="delete(item)"></ag-delete-button>
-      </span>
-
-      <ag-cancel-button ng-click="closeDialog()"></ag-cancel-button>
-      <ag-submit-button></ag-submit-button>
-    </div>
-</form>
-</div></div>
+    </form>
+  </div>
+</div>
