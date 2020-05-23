@@ -10,9 +10,7 @@ class controller {
 
 const template = `
 <example-snippet raw-js='$ctrl.rawJs' raw-html='$ctrl.rawHtml' raw-md='$ctrl.rawMd' max-height="500px">
-  <form name="selForm" ag-form class="form-horizontal-fixed" novalidate>
-    <checkbox-demo/>
-  </form>
+  <checkbox-demo/>
 </example-snippet>
 `
 

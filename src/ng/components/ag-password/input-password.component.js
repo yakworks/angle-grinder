@@ -1,4 +1,4 @@
-import InputBase from '../AgBaseComponent'
+import InputBase from '../AgBaseControl'
 import stringUtils from '../../../utils/stringFomUtils'
 
 // WIP not finished yet!

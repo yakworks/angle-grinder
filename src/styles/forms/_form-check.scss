@@ -1,26 +1,34 @@
 
+.checkbox {
+  display: flex;
+  margin-top: 0;
+  margin-bottom: 0;
+  height: $control-height;
+}
 label.form-check {
   display: flex;
   align-items: center;
-  //margin: 2px 0;
+  margin-bottom: 0;
   padding-left: 0;
+  height: $control-height;
+  // hint text
+  font-size: $label-font-size;
+  font-weight: $weight-medium;
 
   i {
     position: relative;
     cursor: pointer;
     font: normal normal normal 11px/1 FontAwesome;
     text-rendering: auto;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    margin-right: 5px;
+    margin-right: .5rem;
 
     &::before {
       content: '';
       display: block;
       //margin-right: 5px;
       //margin: 0 3px;
-      height: 17px;
-      width: 17px;
+      height: 18px;
+      width: 18px;
       border: 1px #cccccc solid;
       border-radius: 3px;
     }
@@ -50,17 +58,17 @@ label.form-check {
 
     + i::after {
       content: "\f00c";
-      font-size: 11px;
+      font-size: 12px;
       position: absolute;
-      line-height: 16px;
+      line-height: 18px;
       text-align: center;
       color: white;
       top: 0px;
       left: 0px;
       //margin: 0 3px;
-      height: 16px;
-      width: 16px;
-      border: 1px rgba(0, 0, 0, 0) solid;
+      height: 18px;
+      width: 18px;
+      //border: 1px rgba(0, 0, 0, 0) solid;
       opacity: 0;
     }
 
@@ -111,8 +119,8 @@ label.form-check {
 
 }
 
-.controls .form-check-input {
-  width: 16px;
-  height: 16px;
-  margin-top: 11px;
-}
+// .controls .form-check-input {
+//   width: 16px;
+//   height: 16px;
+//   margin-top: 11px;
+// }

@@ -1,13 +1,16 @@
 // switch that looks simliar to an apple ios style
 label.form-switch {
-  position: relative;
-  display: inline-block;
+  display: flex;
   align-items: center;
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
+  height: $control-height;
+  margin-bottom: 0;
   padding-left: 0;
+  // hint text
+  font-size: $label-font-size;
+  font-weight: $weight-medium;
 
   i {
+    cursor: pointer;
     position: relative;
     display: inline-block;
     margin-right: .5rem;

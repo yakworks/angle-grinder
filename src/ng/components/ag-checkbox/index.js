@@ -8,16 +8,13 @@ class Controller extends AgBaseControl {
 
 export default () => ({
   ...AgBaseControl.common.dir,
-  template: require('./ag-input.html'),
+  template: require('./ag-checkbox.html'),
   controller: Controller,
   require: {
     ngModelCtrl: 'ngModel',
     formCtrl: '^agForm'
   },
   scope: {
-    ...AgBaseControl.common.scope,
-    type: '@',
-    minimumLength: '@',
-    maximumLength: '@'
+    ...AgBaseControl.common.scope
   }
 })

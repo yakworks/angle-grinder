@@ -2,10 +2,10 @@ import stringUtils from '../../utils/stringFomUtils'
 import $log from '../../utils/Log'
 import _ from 'lodash'
 
-/* @ngInject */
-export default class AgBaseComponent {
+export default class AgBaseControl {
   isRequired = false
 
+  /* @ngInject */
   constructor($element, $timeout) {
     this.$element = $element
     this.$timeout = $timeout
@@ -80,5 +80,26 @@ export default class AgBaseComponent {
         // this.$element.replaceWith(content);
       }
     })
+  }
+}
+
+AgBaseControl.common = {
+  dir: {
+    restrict: 'E',
+    replace: true,
+    controllerAs: '$ctrl',
+    bindToController: true
+  },
+  scope: {
+    label: '@',
+    hint: '@',
+    name: '@',
+    placeholder: '@',
+    required: '@',
+    ngRequired: '@',
+    fieldClass: '@',
+    inputClass: '@',
+    labelClass: '@',
+    isHorizontal: '@'
   }
 }

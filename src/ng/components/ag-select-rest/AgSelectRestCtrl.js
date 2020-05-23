@@ -1,5 +1,5 @@
 /* eslint-disable*/
-import AgBaseComponent from '../AgBaseComponent'
+import AgBaseComponent from '../AgBaseControl'
 import _ from 'lodash'
 
 /* @ngInject */
