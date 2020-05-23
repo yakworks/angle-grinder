@@ -11,18 +11,15 @@ jobs:
     steps:
       - checkout
       # - run: apk add yarn
-      # - restore_cache: # special step to restore the dependency cache
-      #     # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
-      #     key: dependency-cache-{{ checksum "yarn.lock" }}
+      - restore_cache:
+          key: dependency-cache-{{ checksum "yarn.lock" }}
       - run:
           name: yarn install
           command: yarn install
-      - save_cache: # special step to save the dependency cache
+      - save_cache:
           key: dependency-cache-{{ checksum "yarn.lock" }}
           paths:
             - ./node_modules
-      # - run: apk add yarn
-      # - run: yarn
       - run: yarn test
       - run: yarn test-jasmine
       # - run:
