@@ -9,7 +9,8 @@ const formComp = {
   ngRequired: '@',
   fieldClass: '@',
   inputClass: '@',
-  labelClass: '@'
+  labelClass: '@',
+  isHorizontal: '@'
 }
 
 export default { formComp }

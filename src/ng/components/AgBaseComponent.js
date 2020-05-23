@@ -6,8 +6,9 @@ import _ from 'lodash'
 export default class AgBaseComponent {
   isRequired = false
 
-  constructor($element) {
+  constructor($element, $timeout) {
     this.$element = $element
+    this.$timeout = $timeout
   }
 
   onInit() {
@@ -39,6 +40,11 @@ export default class AgBaseComponent {
         this.ngRequired === '' || this.ngRequired === 'true') {
       this.isRequired = true
     }
+    if (this.formCtrl) {
+      if (!this.isHorizontal) this.isHorizontal = this.formCtrl.isHorizontal
+      if (!this.labelClass && this.formCtrl.labelClass) this.labelClass = this.formCtrl.labelClass
+    }
+    // if (this.isHorizontal) this.labelClass = `column ${this.labelClass}`
 
     this.ngModelCtrl.$render = () => {
       this.value = this.ngModelCtrl.$viewValue
@@ -63,10 +69,16 @@ export default class AgBaseComponent {
     return true
   }
 
-  // $postLink() {
-  //   this.$timeout(function() {
-  //     // var elem = document.getElementById(this.gridId);
-  //     // do something with elem now that the DOM has had it's bindings applied
-  //   })
-  // }
+  $postLink() {
+    this.$timeout(() => {
+      if (this.isHorizontal && this.label) {
+        // move label out and wrap with a column div
+        const label = this.$element.find('label.label')
+        var content = angular.element('<div class="columns is-mobile"></div>')
+        this.$element.wrap(content)
+        this.$element.parent().prepend(label)
+        // this.$element.replaceWith(content);
+      }
+    })
+  }
 }
