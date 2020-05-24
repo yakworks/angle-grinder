@@ -1,41 +1,52 @@
 <form name="formCheck" ag-form is-horizontal label-class="is-3" autocomplete="off" novalidate>
   <legend class="mb-4">horizontal standard</legend>
   <ag-input ng-model="$ctrl.vm.name" required ></ag-input>
-  <ag-checkbox ng-model="$ctrl.vm.checkBox" hint="this is the hint text"></ag-checkbox>
+
+  <ag-checkbox ng-model="$ctrl.vm.defaultCheckbox" hint="this is the hint text"></ag-checkbox>
+
+  <ag-checkbox label="Styled" ng-model="$ctrl.vm.successCheck"
+    color="success" hint="Success" is-dense></ag-checkbox>
+  <ag-checkbox label=" " ng-model="$ctrl.vm.warningCheck"
+    color="warning" hint="Warning" is-dense ></ag-checkbox>
+  <ag-checkbox label=" " ng-model="$ctrl.vm.dangerCheck"
+    color="danger" hint="Danger" is-dense></ag-checkbox>
+  <ag-checkbox label=" " ng-model="$ctrl.vm.infoCheck"
+    color="info" hint="Info"></ag-checkbox>
+
+  <ag-checkbox label="Falsy Checks" ng-model="$ctrl.vm.defaultZero"
+    hint="0 is false" is-dense></ag-checkbox>
+  <ag-checkbox label=" " ng-model="$ctrl.vm.normalFalse"
+    hint="false is false" is-dense ></ag-checkbox>
+  <ag-checkbox label=" " ng-model="$ctrl.vm.emptyString"
+    hint="Empty string is false" is-dense ></ag-checkbox>
+  <ag-checkbox label=" " ng-model="$ctrl.vm.defaultUndefined"
+    hint="undefined is false" is-dense></ag-checkbox>
+  <ag-checkbox label=" " ng-model="$ctrl.vm.stringFalse"
+    hint="string false is true"></ag-checkbox>
 
   <div class="columns is-mobile">
-    <label class="label column is-3">Check Box</label>
+    <label class="label column is-3">Html Check</label>
     <div class="field column" >
-      <div class="control">
-        <label class="form-check">
+      <div class="control is-checkbox">
+        <label>
+          <input type="checkbox" ng-model="$ctrl.vm.htmlCheck"><i></i>
+          This is the hint text
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <div class="columns is-mobile">
+    <label class="label column is-3">Switch</label>
+    <div class="field column" >
+      <div class="control is-switch">
+        <label>
           <input type="checkbox" checked><i></i>
           This is the hint text
         </label>
       </div>
     </div>
   </div>
-  <div class="columns is-mobile">
-    <label class="label column is-3">Switch</label>
-    <div class="field column" >
-      <div class="control">
-        <label class="form-switch">
-          <input type="checkbox" checked><i></i>
-        </label>
-      </div>
-    </div>
-  </div>
-  <ag-input ng-model="$ctrl.vm.sanity" required ></ag-input>
+
 </form>
 <pre ng-cloak class="mt-4">form.$invalid: {{formCheck.$invalid}}<br>model: {{$ctrl.vm | json}}</pre>
-
-<form name="selForm" ag-form class="form-horizontal-fixed" novalidate>
-
-<ag-checkbox name="active" ng-model="$ctrl.vm.isActive"></ag-checkbox>
-<ag-checkbox name="defaultTrue" ng-model="$ctrl.vm.defaultTrue"></ag-checkbox>
-<ag-checkbox name="defaultFalse" ng-model="$ctrl.vm.defaultFalse"></ag-checkbox>
-<ag-checkbox name="defaultOne" ng-model="$ctrl.vm.defaultOne"></ag-checkbox>
-<ag-checkbox name="defaultZero" ng-model="$ctrl.vm.defaultZero"></ag-checkbox>
-<ag-input name="input" ng-model="$ctrl.vm.input"></ag-input>
-
-</form>
-<pre ng-cloak>model: {{$ctrl.vm | json}}</pre>

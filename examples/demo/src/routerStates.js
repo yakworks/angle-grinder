@@ -34,6 +34,10 @@ const formStates = {
       component: 'checkboxDemoIndex'
     },
     {
+      name: 'datepicker',
+      component: 'datepickerDemoIndex'
+    },
+    {
       name: 'xedit',
       component: 'xeditDemoIndex'
     },

@@ -1,0 +1,13 @@
+<form name="datepickerForm" ag-form class="form-horizontal-fixed" novalidate>
+
+  <ag-datepicker date-type='date' ng-model="$ctrl.vm.date"></ag-datepicker>
+  <ag-datepicker ng-model="$ctrl.vm.localDate"></ag-datepicker>
+  <ag-datepicker date-type="localDateTime" ng-model="$ctrl.vm.localDateTime"></ag-datepicker>
+</form>
+
+<form is-horizontal name="datepickerFormPredefined" ag-form class="form-horizontal-fixed mt-4" novalidate>
+  <ag-datepicker date-type='date' ng-model="$ctrl.vm.predefined.date"></ag-datepicker>
+  <ag-datepicker ng-model="$ctrl.vm.predefined.localDate"></ag-datepicker>
+  <ag-datepicker date-type="localDateTime" ng-model="$ctrl.vm.predefined.localDateTime"></ag-datepicker>
+</form>
+<pre ng-cloak class="mt-4">model: {{$ctrl.vm | json}}</pre>

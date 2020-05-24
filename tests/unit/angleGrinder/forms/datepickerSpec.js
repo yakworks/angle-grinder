@@ -13,9 +13,9 @@ describe("module: angleGrinder.forms", () => describe("directive: agDatepicker",
       $scope.user = {birthday: "1990-03-01"};
 
       const template = `\
-<ag-datepicker ng-model="user.birthday"
+<ag-datepicker-bs ng-model="user.birthday"
        name="birthday" >
-</ag-datepicker>\
+</ag-datepicker-bs>\
 `;
       element = $compile(template)($scope);
       return $rootScope.$apply();
@@ -37,10 +37,10 @@ describe("module: angleGrinder.forms", () => describe("directive: agDatepicker",
       $scope.user = {birthday: "1990-03-01"};
 
       const template = `\
-<ag-datepicker ng-model="user.birthday"
+<ag-datepicker-bs ng-model="user.birthday"
        date-type="date"
        name="birthday" >
-</ag-datepicker>\
+</ag-datepicker-bs>\
 `;
       element = $compile(template)($scope);
       return $rootScope.$apply();
@@ -62,10 +62,10 @@ describe("module: angleGrinder.forms", () => describe("directive: agDatepicker",
       $scope.user = {birthday: "1990-03-01"};
 
       const template = `\
-<ag-datepicker ng-model="user.birthday"
+<ag-datepicker-bs ng-model="user.birthday"
        date-type="localDateTime"
        name="birthday" >
-</ag-datepicker>\
+</ag-datepicker-bs>\
 `;
       element = $compile(template)($scope);
       return $rootScope.$apply();

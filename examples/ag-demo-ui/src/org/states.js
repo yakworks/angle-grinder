@@ -1,7 +1,7 @@
 const orgEditState = {
   name: 'edit',
   url: '/{id}',
-  template: require('./tabbedOrg/show.html'),
+  template: require('../tabbedOrg/tabbedOrg/show.html'),
   controller: 'org.ShowCtrl',
   sidenavItem: false,
   resolve: {
