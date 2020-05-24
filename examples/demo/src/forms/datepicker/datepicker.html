@@ -1,6 +1,12 @@
 <form name="selForm" ag-form class="form-horizontal-fixed" novalidate>
 
-<ag-datepicker ng-model="$ctrl.vm.date"></ag-datepicker>
+<ag-datepicker date-type='date' ng-model="$ctrl.vm.date"></ag-datepicker>
+<ag-datepicker ng-model="$ctrl.vm.localDate"></ag-datepicker>
+<ag-datepicker date-type="localDateTime" ng-model="$ctrl.vm.localDateTime"></ag-datepicker>
+
+  <ag-datepicker date-type='date' ng-model="$ctrl.vm.predefinedDate"></ag-datepicker>
+  <ag-datepicker ng-model="$ctrl.vm.predefinedLocalDate"></ag-datepicker>
+  <ag-datepicker date-type="localDateTime" ng-model="$ctrl.vm.predefinedLocalDateTime"></ag-datepicker>
 
 </form>
 <pre ng-cloak>model: {{$ctrl.vm | json}}</pre>

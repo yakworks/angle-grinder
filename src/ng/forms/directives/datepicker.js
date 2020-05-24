@@ -75,7 +75,8 @@ forms.directive('agDatepickerBs', [
       // Decorate datepicker with button and some usefull stuff if directive is element, not attribute
       if (_.isNil($attrs.agDatepicker)) {
         $element.addClass('input-group').addClass('date').addClass('ag-datepicker')
-        const input = `<input name='${$attrs.id || ''}' class='form-control' placeholder='${$attrs.placeholder || ''}' ${!_.isNil($attrs.disabled) ? 'disabled' : undefined}>
+        const input = `<input name='${$attrs.id || ''}' class='form-control input' placeholder='${$attrs.placeholder || ''}'
+${!_.isNil($attrs.disabled) ? 'disabled' : undefined}>
 <span class="input-group-addon"><i class="fa fa-calendar"></i></span>`
         $element.append(input)
       }

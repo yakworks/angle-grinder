@@ -4,11 +4,12 @@
   <div class="control">
     <ag-datepicker-bs
       ng-class="$ctrl.inputClass"
-			type="{{$ctrl.type}}"
+      style="width: 100%"
 			placeholder="{{::$ctrl.placeholder}}"
 			ng-model-options="{allowInvalid: true, debounce: 250}"
 			name="{{::$ctrl.name}}"
 			id="{{::$ctrl.id}}"
+      date-type="{{::$ctrl.dateType}}"
 			ng-model="$ctrl.value"
 			ng-change="$ctrl.onChange()"
 			ng-required="{{::$ctrl.isRequired}}"

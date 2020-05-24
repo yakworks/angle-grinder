@@ -17,7 +17,6 @@ export default () => ({
   scope: {
     ...AgBaseControl.common.scope,
     type: '@',
-    minimumLength: '@',
-    maximumLength: '@'
+    dateType: '@'
   }
 })
