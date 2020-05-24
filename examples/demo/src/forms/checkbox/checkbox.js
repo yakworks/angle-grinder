@@ -9,7 +9,7 @@ class controller {
     dangerCheck: 1,
     normalFalse: false,
     stringFalse: "false",
-    defaultEmptyString: '',
+    emptyString: '',
     defaultZero: 0
   }
 }
