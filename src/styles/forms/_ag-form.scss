@@ -56,10 +56,10 @@ label.required:after {
 }
 
 .label.column {
-  // padding-top: $label-padding-top;
+  padding-top: $label-padding-top;
   text-align: right;
   // centers labels vertically
   height: $control-height;
-  line-height: $control-height;
+  //line-height: $control-height;
 }
 

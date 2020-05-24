@@ -53,8 +53,7 @@ forms.provider('agDate', function() {
 })
 
 // uses http://eonasdan.github.io/bootstrap-datetimepicker/
-forms.directive('agDatepickerBs', [
-  '$timeout', 'agDate', ($timeout, agDate) => ({
+forms.directive('agDatepickerBs', ($timeout, agDate) => ({
     require: 'ngModel',
     restrict: 'AE',
 
@@ -65,7 +64,9 @@ forms.directive('agDatepickerBs', [
     link($scope, $element, $attrs, ngModelCtrl) {
       const defaultOptions = {
         format: agDate.getViewFormat(),
-        isoFormat: agDate.getIsoFormat($attrs.dateType)
+        isoFormat: agDate.getIsoFormat($attrs.dateType),
+        keepOpen: true,
+        debug: true
       }
 
       const options = angular.extend(defaultOptions, $scope.$eval($attrs.datepickerOptions))
@@ -108,7 +109,7 @@ forms.directive('agDatepickerBs', [
       return setPickerValue()
     }
   })
-])
+)
 
 forms.directive('agDate', [
   'agDate', agDate => ({

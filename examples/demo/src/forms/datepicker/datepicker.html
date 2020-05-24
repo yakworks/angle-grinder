@@ -1,6 +1,7 @@
-<form name="selForm" ag-form class="form-horizontal-fixed" novalidate>
+<form name="selForm" ag-form is-horizontal label-class="is-2" novalidate>
 
-<ag-datepicker ng-model="$ctrl.vm.date"></ag-datepicker>
+  <ag-input ng-model="$ctrl.vm.name"></ag-input>
+  <ag-datepicker ng-model="$ctrl.vm.date"></ag-datepicker>
 
 </form>
-<pre ng-cloak>model: {{$ctrl.vm | json}}</pre>
+<pre ng-cloak class="mt-4">model: {{$ctrl.vm | json}}</pre>
