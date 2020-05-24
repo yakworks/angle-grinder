@@ -15,6 +15,6 @@ export default () => ({
     formCtrl: '^agForm'
   },
   scope: {
-    ...AgBaseControl.common.scope,
+    ...AgBaseControl.common.scope
   }
 })

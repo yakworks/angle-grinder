@@ -54,61 +54,61 @@ forms.provider('agDate', function() {
 
 // uses http://eonasdan.github.io/bootstrap-datetimepicker/
 forms.directive('agDatepickerBs', ($timeout, agDate) => ({
-    require: 'ngModel',
-    restrict: 'AE',
+  require: 'ngModel',
+  restrict: 'AE',
 
-    scope: {
-      datepickerOptions: '@'
-    },
+  scope: {
+    datepickerOptions: '@'
+  },
 
-    link($scope, $element, $attrs, ngModelCtrl) {
-      const defaultOptions = {
-        format: agDate.getViewFormat(),
-        isoFormat: agDate.getIsoFormat($attrs.dateType),
-        keepOpen: true,
-        debug: true
-      }
-
-      const options = angular.extend(defaultOptions, $scope.$eval($attrs.datepickerOptions))
-      const { isoFormat } = options
-      delete options.isoFormat
-
-      // Decorate datepicker with button and some usefull stuff if directive is element, not attribute
-      if (_.isNil($attrs.agDatepicker)) {
-        $element.addClass('input-group').addClass('date').addClass('ag-datepicker')
-        const input = `<input name='${$attrs.id || ''}' class='form-control' placeholder='${$attrs.placeholder || ''}' ${!_.isNil($attrs.disabled) ? 'disabled' : undefined}>
-<span class="input-group-addon"><i class="fa fa-calendar"></i></span>`
-        $element.append(input)
-      }
-
-      $element.on('dp.change', function(event) {
-        if (ngModelCtrl) {
-          return $timeout(function() {
-            if (!_.isNil(event.date) && (event.date._d !== undefined)) {
-              ngModelCtrl.$setViewValue(moment.utc(event.date._d).format(isoFormat))
-              return ngModelCtrl.$setValidity('dateFormat', agDate.isValid(ngModelCtrl.$modelValue, isoFormat))
-            } else {
-              return ngModelCtrl.$setViewValue('')
-            }
-          })
-        }
-      }).datetimepicker(options)
-
-      const setPickerValue = function() {
-        let date = null
-        if (ngModelCtrl && ngModelCtrl.$viewValue) {
-          date = moment.utc(ngModelCtrl.$viewValue, isoFormat)
-        }
-        const datepicker = $element.data('DateTimePicker')
-        if (datepicker) { return datepicker.date(date) }
-      }
-
-      if (ngModelCtrl) {
-        ngModelCtrl.$render = () => setPickerValue()
-      }
-      return setPickerValue()
+  link($scope, $element, $attrs, ngModelCtrl) {
+    const defaultOptions = {
+      format: agDate.getViewFormat(),
+      isoFormat: agDate.getIsoFormat($attrs.dateType),
+      keepOpen: true,
+      debug: true
     }
-  })
+
+    const options = angular.extend(defaultOptions, $scope.$eval($attrs.datepickerOptions))
+    const { isoFormat } = options
+    delete options.isoFormat
+
+    // Decorate datepicker with button and some usefull stuff if directive is element, not attribute
+    if (_.isNil($attrs.agDatepicker)) {
+      $element.addClass('input-group').addClass('date').addClass('ag-datepicker')
+      const input = `<input name='${$attrs.id || ''}' class='form-control' placeholder='${$attrs.placeholder || ''}' ${!_.isNil($attrs.disabled) ? 'disabled' : undefined}>
+<span class="input-group-addon"><i class="fa fa-calendar"></i></span>`
+      $element.append(input)
+    }
+
+    $element.on('dp.change', function(event) {
+      if (ngModelCtrl) {
+        return $timeout(function() {
+          if (!_.isNil(event.date) && (event.date._d !== undefined)) {
+            ngModelCtrl.$setViewValue(moment.utc(event.date._d).format(isoFormat))
+            return ngModelCtrl.$setValidity('dateFormat', agDate.isValid(ngModelCtrl.$modelValue, isoFormat))
+          } else {
+            return ngModelCtrl.$setViewValue('')
+          }
+        })
+      }
+    }).datetimepicker(options)
+
+    const setPickerValue = function() {
+      let date = null
+      if (ngModelCtrl && ngModelCtrl.$viewValue) {
+        date = moment.utc(ngModelCtrl.$viewValue, isoFormat)
+      }
+      const datepicker = $element.data('DateTimePicker')
+      if (datepicker) { return datepicker.date(date) }
+    }
+
+    if (ngModelCtrl) {
+      ngModelCtrl.$render = () => setPickerValue()
+    }
+    return setPickerValue()
+  }
+})
 )
 
 forms.directive('agDate', [

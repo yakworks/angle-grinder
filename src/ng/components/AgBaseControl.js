@@ -74,7 +74,7 @@ export default class AgBaseControl {
       if (this.isHorizontal && this.label) {
         // move label out and wrap with a column div
         const label = this.$element.find('label.label')
-        let colClass = this.columnsClass || ''
+        const colClass = this.columnsClass || ''
         var content = angular.element(`<div class="columns is-mobile ${colClass}"></div>`)
         this.$element.wrap(content)
         this.$element.parent().prepend(label)
