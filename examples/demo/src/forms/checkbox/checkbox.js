@@ -2,10 +2,15 @@ import template from './checkbox.html'
 
 class controller {
   vm = {
-    defaultTrue: true,
-    defaultFalse: false,
-    defaultOne: 1,
-    defaultZero: 0,
+    defaultCheckbox: true,
+    successCheck: true,
+    infoCheck: 'on',
+    warningCheck: 100,
+    dangerCheck: 1,
+    normalFalse: false,
+    stringFalse: "false",
+    defaultEmptyString: '',
+    defaultZero: 0
   }
 }
 
