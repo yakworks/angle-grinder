@@ -1,5 +1,5 @@
 import stringUtils from '../../utils/stringFomUtils'
-//import Log from '../../utils/Log'
+// import Log from '../../utils/Log'
 import _ from 'lodash'
 
 export default class AgBaseControl {
