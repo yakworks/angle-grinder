@@ -13,9 +13,7 @@ class controller {
 const template = `
 <example-snippet raw-js='$ctrl.rawJs' raw-html='$ctrl.rawHtml' raw-md='$ctrl.rawMd' max-height="600px">
   <p>input element basic single select example with array of strings</p>
-  <form name="selForm" ag-form class="form-horizontal-fixed" novalidate>
-    <demo-sel-input/>
-  </form>
+  <demo-sel-input/>
 </example-snippet>
 `
 // export the module name

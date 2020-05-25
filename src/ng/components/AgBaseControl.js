@@ -1,14 +1,15 @@
 import stringUtils from '../../utils/stringFomUtils'
-import $log from '../../utils/Log'
+// import Log from '../../utils/Log'
 import _ from 'lodash'
 
 export default class AgBaseControl {
   isRequired = false
 
   /* @ngInject */
-  constructor($element, $timeout) {
+  constructor($element, $timeout, $scope) {
     this.$element = $element
     this.$timeout = $timeout
+    this.$scope = $scope
   }
 
   onInit() {
@@ -49,10 +50,24 @@ export default class AgBaseControl {
     this.ngModelCtrl.$render = () => {
       this.value = this.ngModelCtrl.$viewValue
     }
+
+    // if isHorizontal, move label outside and wrap in a columns div
+    if (this.isHorizontal && this.label) {
+      this.$timeout(() => {
+        const el = this.$element
+        // needs to be in timeout so all things have rendered.
+        const label = el.find('.label')
+        // Log.debug("label", label)
+        const colClass = this.columnsClass || ''
+        var content = angular.element(`<div class="columns is-mobile ${colClass}"></div>`)
+        el.wrap(content)
+        el.parent().prepend(label)
+      })
+    }
   }
 
   onChange() {
-    $log.debug('onChange', this)
+    // Log.debug('onChange', this)
     try {
       if (this.value && this.maximumLength && this.value.length > this.maximumLength) {
         this.value = this.value.substring(0, this.maximumLength)
@@ -69,19 +84,11 @@ export default class AgBaseControl {
     return true
   }
 
-  $postLink() {
-    this.$timeout(() => {
-      if (this.isHorizontal && this.label) {
-        // move label out and wrap with a column div
-        const label = this.$element.find('label.label')
-        const colClass = this.columnsClass || ''
-        var content = angular.element(`<div class="columns is-mobile ${colClass}"></div>`)
-        this.$element.wrap(content)
-        this.$element.parent().prepend(label)
-        // this.$element.replaceWith(content);
-      }
-    })
-  }
+  // $postLink() {
+  //   this.$scope.$evalAsync(() => {
+
+  //   })
+  // }
 }
 
 AgBaseControl.common = {

@@ -19,13 +19,16 @@ class Controller {
 
 export default () => ({
   ...compDefaults,
+  transclude: true,
+  controllerAs: '$ctrl',
+  bindToController: true,
   template: require('./ag-label.html'),
   controller: Controller,
   require: {
     formCtrl: '^agForm'
   },
   scope: {
-    label: '@',
+    // label: '@',
     labelClass: '@',
     required: '@',
     ngRequired: '@',
