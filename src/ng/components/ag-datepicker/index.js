@@ -21,6 +21,7 @@ class Controller extends AgBaseControl {
     const options = angular.extend(defaultOptions, this.$scope.$eval(this.datepickerOptions))
     const { isoFormat } = options
     delete options.isoFormat
+    $element.addClass('input-group')
 
     $element.on('dp.change', function(event) {
       if (ngModelCtrl) {
@@ -35,22 +36,19 @@ class Controller extends AgBaseControl {
       }
     }).datetimepicker(options)
 
-    this.ngModelCtrl.$render = () => {
-      this.value = moment.utc(this.ngModelCtrl.$viewValue, isoFormat)
-      // const datepicker = $element.data('DateTimePicker')
-      // if (datepicker) this.value = datepicker.date(this.value)
+    const setPickerValue = function() {
+      let date = null
+      if (ngModelCtrl && ngModelCtrl.$viewValue) {
+        date = moment.utc(ngModelCtrl.$viewValue, isoFormat)
+      }
+      const datepicker = $element.data('DateTimePicker')
+      if (datepicker) { return datepicker.date(date) }
     }
-    // const setPickerValue = function() {
-    //   let date = null
-    //   if (ngModelCtrl.$viewValue) {
-    //     date = moment.utc(ngModelCtrl.$viewValue, isoFormat)
-    //   }
-    //   // const datepicker = $element.data('DateTimePicker')
-    //   // if (datepicker) { return datepicker.date(date) }
-    //   this.value = moment.utc(ngModelCtrl.$viewValue, isoFormat)
-    // }
-    // ngModelCtrl.$render = setPickerValue
-    // return setPickerValue()
+
+    if (ngModelCtrl) {
+      ngModelCtrl.$render = () => setPickerValue()
+    }
+    return setPickerValue()
   }
 }
 
