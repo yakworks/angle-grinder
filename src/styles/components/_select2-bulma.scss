@@ -34,7 +34,7 @@ $select2-font-size: 14px;
 
 .select2-container {
 
-  &.form-control {
+  &.form-control, &.input {
     //background: transparent;
     box-shadow: none;
     border: none;
@@ -101,7 +101,7 @@ $select2-font-size: 14px;
       box-shadow: none;
     }
   }
-  &.form-control {
+  &.form-control, &.input {
     height: auto;
     // for some reason xeditable sets whitespace to pre and this is needed to reset that back to normal
     white-space: normal;

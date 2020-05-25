@@ -1,26 +1,41 @@
+<form name="formHor" ag-form is-horizontal label-class="is-3" autocomplete="off" novalidate class="form-horizontal-fixed">
 
-<div class="form-group" >
-  <label class="control-label">Basic</label>
-  <div class="controls is-flex">
-    <input class="form-control" ng-model="$ctrl.vm.day"
-        placeholder="select a day"
-        ui-select2 ui-select2-data="['Mon','Tue','Wed','Thu','Fri','Sat','Sun']">
-    <input class="form-control ml-1" ng-model="$ctrl.vm.color"
-        ui-select2="{ allowClear: false, placeholder: 'select a color', data:['red','green', 'blue']}"
-    >
+<div class="columns is-mobile">
+  <ag-label>Normal Selects</ag-label>
+  <div class="field column is-grouped">
+    <div class="control is-expanded">
+      <div class="select">
+        <select>
+          <option>Select dropdown foo</option>
+          <option>With options</option>
+        </select>
+      </div>
+    </div>
+    <div class="control is-expanded">
+      <div class="select">
+        <select>
+          <option>Select dropdown foo</option>
+          <option>With options</option>
+        </select>
+      </div>
+    </div>
   </div>
 </div>
-<div class="form-group" >
-  <label class="control-label">Multi</label>
-  <div class="controls is-flex">
-    <input multiple class="form-control" ng-model="$ctrl.vm.daysMulti"
-        placeholder="select multiple days"
-        ui-select2 ui-select2-data="$ctrl.dayData">
-    <input multiple class="form-control ml-1" ng-model="$ctrl.vm.colorsMulti"
-        ui-select2="{placeholder: 'select mutiple colors', useDataObject: false, data: $ctrl.colorData}"
-    >
+
+<div class="columns is-mobile">
+  <ag-label>Basic Select2</ag-label>
+  <div class="field column is-grouped">
+    <div class="control is-expanded">
+      <input class="input" ng-model="$ctrl.vm.day"
+        placeholder="select a day" ui-select2 ui-select2-data="['Mon','Tue','Wed','Thu','Fri','Sat','Sun']">
+    </div>
+    <div class="control is-expanded">
+      <input class="input" ng-model="$ctrl.vm.color"
+        ui-select2="{ allowClear: false, placeholder: 'select a color', data:['red','green', 'blue']}">
+    </div>
   </div>
 </div>
+
 <p>using ag-select component</p>
 <ag-select name="agSelect" ng-model="$ctrl.vm.agColor" placeholder="select a color"
   select-options="{ data: $ctrl.colorData }">
@@ -46,5 +61,6 @@
     <button class="btn btn-primary">Save</button>
   </div>
 </div>
+</form>
 <pre ng-cloak>model: {{$ctrl.vm | json}}</pre>
 
