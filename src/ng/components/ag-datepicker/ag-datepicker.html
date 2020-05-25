@@ -1,19 +1,25 @@
 <div class="field" ng-class="{column: $ctrl.isHorizontal}">
   <ag-label label-class="{{$ctrl.labelClass}}" ng-if="$ctrl.label" label="{{$ctrl.label}}"
       ng-required="{{$ctrl.isRequired}}" ></ag-label>
-  <div class="control is-expanded">
-    <ag-datepicker-bs
-      ng-class="$ctrl.inputClass"
-      style="width: 100%"
-			placeholder="{{::$ctrl.placeholder}}"
-			ng-model-options="{allowInvalid: true, debounce: 250}"
-			name="{{::$ctrl.name}}"
-			id="{{::$ctrl.id}}"
-      date-type="{{::$ctrl.dateType}}"
-			ng-model="$ctrl.value"
-			ng-change="$ctrl.onChange()"
-			ng-required="{{::$ctrl.isRequired}}"
-			>
+  <div class="field has-addons">
+    <div class="control is-expanded">
+      <input
+        class="input"
+        ng-class="$ctrl.inputClass"
+        type="{{$ctrl.type}}"
+        placeholder="{{$ctrl.placeholder}}"
+        name="{{$ctrl.name}}"
+        id="{{$ctrl.id}}"
+        ng-model="$ctrl.value"
+        ng-change="$ctrl.onChange()"
+        ng-required="{{::$ctrl.isRequired}}"
+        >
+    </div>
+    <div class="control">
+      <a class="button is-light is-flat datepickerbutton">
+        <i class="fa fa-calendar"></i>
+      </a>
+    </div>
   </div>
   <p class="help" ng-if="$ctrl.hint">{{::$ctrl.hint}}</p>
   <ag-validation-inline for="{{::$ctrl.id}}" ></ag-validation-inline>
