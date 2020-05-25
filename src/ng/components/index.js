@@ -4,7 +4,7 @@ import agCheckbox from './ag-checkbox'
 import agLabel from './ag-label'
 import agInput from './ag-input'
 import agInputBs from './ag-input-bs'
-import agSelectModule from './ag-select'
+import agSelect from './ag-select'
 import agSelectRest from './ag-select-rest'
 import agDatepicker from './ag-datepicker'
 import agValMod from './ag-validation'
@@ -20,7 +20,6 @@ export default MOD_NAME
 angular.module(MOD_NAME, [
   agFormMod,
   agValMod,
-  agSelectModule,
   agSelectRest,
   dropdownModule,
   buttonModule
@@ -28,5 +27,6 @@ angular.module(MOD_NAME, [
   .directive('agCheckbox', agCheckbox)
   .directive('agLabel', agLabel)
   .directive('agInput', agInput)
+  .directive('agSelect', agSelect)
   .directive('agDatepicker', agDatepicker)
   .directive('agInputBs', agInputBs)
