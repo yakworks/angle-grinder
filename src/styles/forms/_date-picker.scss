@@ -19,16 +19,3 @@ div.ag-datepicker {
 .datepicker-column {
   width: 135px;
 }
-
-// temp hack
-.has-addons.datepicker {
-  input {
-    //border-bottom-right-radius: 0px;
-    //border-top-right-radius: 0px;
-  }
-  .button {
-    //border-bottom-left-radius: 0px;
-    //border-top-left-radius: 0px;
-    height: 100%;
-  }
-}
