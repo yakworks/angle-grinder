@@ -2,8 +2,8 @@
   <ag-label label-class="{{$ctrl.labelClass}}" ng-if="$ctrl.label"
       ng-required="{{$ctrl.isRequired}}">{{$ctrl.label}}</ag-label>
   <div class="field has-addons">
-    <div class="control is-expanded">
-      <ag-datepicker-control
+    <div class="control" ng-class="{'is-expanded': $ctrl.expanded}">
+      <ag-datepicker-input
         parent-ctrl="$ctrl"
         placeholder="{{$ctrl.placeholder}}"
         ng-model="$ctrl.value"
@@ -11,7 +11,7 @@
         ng-required="{{$ctrl.isRequired}}"
         model-key="{{$ctrl.modelKey}}"
         ng-blur="$ctrl.onBlur()"
-      ></ag-datepicker-control>
+      ></ag-datepicker-input>
     </div>
     <div class="control">
       <a class="button is-addon" ng-click="$ctrl.showDatepicker()">

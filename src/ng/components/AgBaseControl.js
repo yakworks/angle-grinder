@@ -12,7 +12,7 @@ export default class AgBaseControl {
     this.$scope = $scope
   }
 
-  setupDefaults() {
+  initDefaults() {
     this.type = this.type || 'text'
     const modelPath = this.$element.attr('ng-model')
     if (!this.modelKey && modelPath) {
@@ -42,16 +42,18 @@ export default class AgBaseControl {
   }
 
   onInit() {
-    this.setupDefaults()
+    this.initDefaults()
 
-    if (this.formCtrl) {
-      if (!this.isHorizontal) this.isHorizontal = this.formCtrl.isHorizontal
-      if (!this.labelClass && this.formCtrl.labelClass) this.labelClass = this.formCtrl.labelClass
-    }
     // if (this.isHorizontal) this.labelClass = `column ${this.labelClass}`
 
     this.ngModelCtrl.$render = () => {
       this.value = this.ngModelCtrl.$viewValue
+    }
+
+    // Do the label positioning based on isHorizontal
+    if (this.formCtrl) {
+      if (!this.isHorizontal) this.isHorizontal = this.formCtrl.isHorizontal
+      if (!this.labelClass && this.formCtrl.labelClass) this.labelClass = this.formCtrl.labelClass
     }
 
     // if isHorizontal, move label outside and wrap in a columns div

@@ -1,8 +1,8 @@
 
 <form is-horizontal name="datepickerFormPredefined" ag-form class="form-horizontal-fixed mt-4" novalidate>
-  <ag-datepicker ng-model="$ctrl.vm.jsDate"></ag-datepicker>
+  <ag-datepicker ng-model="$ctrl.vm.jsDate" ></ag-datepicker>
   <ag-datepicker ng-model="$ctrl.vm.isoDate"></ag-datepicker>
-  <ag-datepicker ng-model="$ctrl.vm.localDateTime"></ag-datepicker>
+  <ag-datepicker ng-model="$ctrl.vm.localDateTime" is-expanded></ag-datepicker>
 
   <div class="field has-addons date">
     <div class="control">
@@ -16,6 +16,17 @@
     </div>
   </div>
 
+  <div class="field is-grouped is-grouped-centered mt-4">
+    <div class="control">
+      <ag-button type="submit" color="primary">Submit</ag-button>
+    </div>
+    <div class="control">
+      <ag-button type="reset" ng-click="$ctrl.vm = {}">Reset</ag-button>
+    </div>
+    <div class="control">
+      <ag-button ng-click="$ctrl.changeModelData()">Change Model Data</ag-button>
+    </div>
+  </div>
 </form>
 
 <pre ng-cloak class="mt-4">model: {{$ctrl.vm | json}}</pre>

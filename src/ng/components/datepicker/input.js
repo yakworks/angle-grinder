@@ -25,15 +25,16 @@ class Controller extends AgBaseControl {
   $onInit() {
     Log.debug('onInit parentCtrl', this.parentCtrl)
 
-    super.setupDefaults()
+    // sets up unique id, etc..
+    super.initDefaults()
 
     const { ngModelCtrl, $element, $timeout } = this
 
     _.merge(this.opts, this.datepickerOptions)
     // const options = angular.extend(defaultOptions, this.$scope.$eval(this.datepickerOptions))
 
-    // const elem = $element[0].querySelector('.input.is-datepicker')
-    const input = $element.find('.input.is-datepicker')[0]
+    const input = $element[0].querySelector('.input.is-datepicker')
+    // const input = $element[0]
 
     $timeout(() => {
       this.datepicker = new Datepicker(input, this.opts)
@@ -51,8 +52,10 @@ class Controller extends AgBaseControl {
   onChange() {
     const dateVal = Datepicker.parseDate(this.value, this.opts.format)
     const isoDate = Datepicker.formatDate(dateVal, this.isoFormat)
-    // Log.debug('onChange isoDate' + this.id, isoDate)
     this.ngModelCtrl.$setViewValue(isoDate)
+    Log.debug('onChange', isoDate)
+    // if dialog is open then update the change there too
+    if (this.datepicker.active) this.datepicker.update()
   }
 
   onBlur() {
@@ -65,9 +68,25 @@ class Controller extends AgBaseControl {
   }
 }
 
+const template = `
+<input
+  type="text"
+  class="input is-datepicker"
+  ng-class="$ctrl.inputClass"
+  placeholder="{{$ctrl.placeholder}}"
+  name="{{$ctrl.name}}"
+  id="{{$ctrl.id}}"
+  ng-model="$ctrl.value"
+  ng-model-options='{ debounce: 500 }'
+  ng-change="$ctrl.onChange()"
+  ng-blur="$ctrl.onBlur()"
+  ng-required="{{$ctrl.isRequired}}"
+>
+`
 export default () => ({
   ...AgBaseControl.common.dir,
-  template: require('./control.html'),
+  replace: false,
+  template: template,
   controller: Controller,
   require: {
     ngModelCtrl: 'ngModel',
