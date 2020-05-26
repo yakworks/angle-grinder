@@ -23,8 +23,9 @@ class Controller extends AgBaseControl {
   }
 
   $onInit() {
-    Log.debug('onInit parentCtrl', this.parentCtrl)
-
+    if (this.inputId) {
+      this.elementId = this.inputId
+    }
     // sets up unique id, etc..
     super.initDefaults()
 
@@ -75,7 +76,7 @@ const template = `
   ng-class="$ctrl.inputClass"
   placeholder="{{$ctrl.placeholder}}"
   name="{{$ctrl.name}}"
-  id="{{$ctrl.id}}"
+  id="{{$ctrl.elementId}}"
   ng-model="$ctrl.value"
   ng-model-options='{ debounce: 500 }'
   ng-change="$ctrl.onChange()"
@@ -96,6 +97,7 @@ export default () => ({
     ...AgBaseControl.common.scope,
     parentCtrl: '=',
     modelKey: '@',
-    datepickerOptions: '@'
+    datepickerOptions: '@',
+    inputId: '@'
   }
 })

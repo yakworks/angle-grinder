@@ -1,6 +1,6 @@
 
-<form is-horizontal name="datepickerFormPredefined" ag-form class="form-horizontal-fixed mt-4" novalidate>
-  <ag-datepicker ng-model="$ctrl.vm.jsDate" ></ag-datepicker>
+<form name="dpForm" ag-form is-horizontal>
+  <ag-datepicker ng-model="$ctrl.vm.jsDate" required hint="comes from new Date()"></ag-datepicker>
   <ag-datepicker ng-model="$ctrl.vm.isoDate"></ag-datepicker>
   <ag-datepicker ng-model="$ctrl.vm.localDateTime" is-expanded></ag-datepicker>
 
@@ -32,8 +32,6 @@
 <pre ng-cloak class="mt-4">model: {{$ctrl.vm | json}}</pre>
 
 <form name="datepickerForm" ag-form novalidate>
-  <ag-datepicker date-type='date' ng-model="$ctrl.vm.date"></ag-datepicker>
-  <ag-datepicker ng-model="$ctrl.vm.localDate"></ag-datepicker>
-  <ag-datepicker date-type="localDateTime" ng-model="$ctrl.vm.localDateTime"></ag-datepicker>
+  <ag-datepicker label='Vertical Label' ng-model="$ctrl.vm.vertLabelDate"></ag-datepicker>
 </form>
 

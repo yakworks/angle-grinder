@@ -1,5 +1,5 @@
 import stringUtils from '../../utils/stringFomUtils'
-
+// import Log from '../../utils/Log'
 import _ from 'lodash'
 
 export default class AgBaseControl {
@@ -24,14 +24,15 @@ export default class AgBaseControl {
     }
     this.placeholder = this.placeholder || (this.label || stringUtils.parseWords(this.modelKey))
 
-    // figure out an id for the field if it doesn't have one
-    if (!this.id) {
+    // if its not passed in then create a unique id for this component
+    if (!this.elementId) {
       const idKey = `field_${this.type}_${this.modelKey}`
-      this.id = _.uniqueId(`${idKey}_`)
+      this.elementId = _.uniqueId(`${idKey}_`)
     }
+    // Log.debug("this.elementId", this.elementId)
 
     if (!this.name) {
-      this.name = this.id
+      this.name = this.elementId
     }
 
     // if required is added it wont be undefined and may have blank str if no value is set
@@ -43,8 +44,6 @@ export default class AgBaseControl {
 
   onInit() {
     this.initDefaults()
-
-    // if (this.isHorizontal) this.labelClass = `column ${this.labelClass}`
 
     this.ngModelCtrl.$render = () => {
       this.value = this.ngModelCtrl.$viewValue
@@ -82,7 +81,6 @@ export default class AgBaseControl {
 
   // $postLink() {
   //   this.$scope.$evalAsync(() => {
-
   //   })
   // }
 }
@@ -95,7 +93,6 @@ AgBaseControl.common = {
     bindToController: true
   },
   scope: {
-    // id: '@',
     label: '@',
     hint: '@',
     name: '@',

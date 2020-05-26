@@ -6,7 +6,7 @@
       class="form-control"
       name="$ctrl.name"
       placeholder="{{$ctrl.placeholder}}"
-			id="{{$ctrl.id}}"
+			id="{{$ctrl.elementId}}"
 			ng-model="$ctrl.value"
 			ng-change="$ctrl.onChange()"
       ng-required="$ctrl.isRequired"
@@ -15,5 +15,5 @@
     </input>
   </div>
   <p class="help" ng-if="$ctrl.hint">{{::$ctrl.hint}}</p>
-  <ag-validation-inline for="{{$ctrl.id}}" ></ag-validation-inline>
+  <ag-validation-inline for="{{$ctrl.elementId}}" ></ag-validation-inline>
 </div>
