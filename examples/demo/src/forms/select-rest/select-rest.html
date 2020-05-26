@@ -1,22 +1,19 @@
+<form name="dpForm" ag-form is-horizontal class="form-horizontal-fixed">
+  <ag-input required ng-model="$ctrl.vm.input"></ag-input>
 
-<ag-select-rest name="multipleCountry"
-                select-options="{ multiple: true}"
-                ng-model="$ctrl.vm.multipleCountry"
-                url="/countries/pickList"/>
+  <ag-select-rest select-options="{ multiple: true}"
+                  ng-model="$ctrl.vm.multipleCountry"
+                  url="/countries/pickList"/>
 
-<ag-select-rest name="country"
-                ng-model="$ctrl.vm.country"
-                url="/countries/pickList"/>
+  <ag-select-rest ng-model="$ctrl.vm.country"
+                  url="/countries/pickList"/>
 
-<ag-select-rest name="multiCountryData"
-                label="multiCountryData"
-                select-options="{ multiple: true }"
-                ng-model="$ctrl.vm.multiCountryData"
-                url="/countries/pickList"/>
-
-<ag-select-rest name="user"
-                select-options="$ctrl.userSelectOpts"
-                ng-model="$ctrl.vm.users"
-                url="/users"/>
-
+  <ag-select-rest name="multiCountryData"
+                  select-options="{ multiple: true }"
+                  ng-model="$ctrl.vm.multiCountryData"
+                  url="/countries/pickList"/>
+  <ag-select-rest select-options="$ctrl.userSelectOpts"
+                  ng-model="$ctrl.vm.users"
+                  url="/users"/>
+</form>
 <pre ng-cloak>model: {{$ctrl.vm | json}}</pre>

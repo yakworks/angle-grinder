@@ -1,18 +1,18 @@
 <div class="well">
-  <form ag-form="usersGrid" ag-search-form="usersGrid" class="form-horizontal-fixed form-multi-column no-margin">
+  <form ag-form="usersGrid" is-horizontal ag-search-form="usersGrid" class="form-horizontal-fixed form-multi-column no-margin">
 
     <div class="columns">
       <div class="column is-one-third">
-        <ag-select-rest name="org" multiple url="/api/org/pickList" ng-model="filters.orgIds"/>
-        <ag-input name="name" ng-model="filters.contact.name"/>
-        <ag-input name="Login" ng-model="filters.login"/>
+        <ag-select-rest label="Org" multiple url="/api/org/pickList" ng-model="filters.orgIds"/>
+        <ag-input ng-model="filters.contact.name"/>
+        <ag-input ng-model="filters.login"/>
 
       </div>
       <div class="column is-one-third">
-        <ag-input name="email" type="email" ng-model="filters.contact.email"></ag-input>
-        <ag-select name="type" ng-model="filters.contact.type" select-options="{ data: ['admin', 'customer'], multiple: true }"/>
+        <ag-input type="email" ng-model="filters.contact.email"></ag-input>
+        <ag-select ng-model="filters.contact.type" select-options="{ data: ['admin', 'customer'], multiple: true }"/>
         <div class="form-group">
-          <label class="control-label">Active Date</label>
+          <ag-label>Active Date</ag-label>
 
           <div class="controls range-date-pickers">
             <ag-datepicker ng-model="filters.activeDate.from"
