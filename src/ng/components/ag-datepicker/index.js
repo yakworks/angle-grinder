@@ -1,8 +1,21 @@
 import AgBaseControl from '../AgBaseControl'
-import moment from 'moment'
+// see https://mymth.github.io/vanillajs-datepicker/#/
+import { Datepicker } from 'vanillajs-datepicker'
+// import Log from '../../../utils/Log'
 import _ from 'lodash'
 
 class Controller extends AgBaseControl {
+  isoFormat = 'yyyy-mm-dd'
+  datepickerOptions = {}
+  opts = {
+    autohide: true,
+    clearBtn: true,
+    showOnFocus: false,
+    todayBtn: true,
+    buttonClass: 'button is-flat is-white',
+    format: 'mm/dd/yyyy'
+  }
+
   /* @ngInject */
   constructor($element, $timeout, $scope, agDate) {
     super($element, $timeout, $scope)
@@ -11,44 +24,44 @@ class Controller extends AgBaseControl {
 
   $onInit() {
     super.onInit()
-    const { agDate, ngModelCtrl, $element, $timeout } = this
-    const defaultOptions = {
-      format: agDate.getViewFormat(),
-      isoFormat: agDate.getIsoFormat(this.dateType)
-      // keepOpen: true,
-      // debug: true
-    }
-    const options = angular.extend(defaultOptions, this.$scope.$eval(this.datepickerOptions))
-    const { isoFormat } = options
-    delete options.isoFormat
-    $element.addClass('input-group')
+    const { ngModelCtrl, $element, $timeout } = this
 
-    $element.on('dp.change', function(event) {
-      if (ngModelCtrl) {
-        return $timeout(function() {
-          if (!_.isNil(event.date) && (event.date._d !== undefined)) {
-            ngModelCtrl.$setViewValue(moment.utc(event.date._d).format(isoFormat))
-            return ngModelCtrl.$setValidity('dateFormat', agDate.isValid(ngModelCtrl.$modelValue, isoFormat))
-          } else {
-            return ngModelCtrl.$setViewValue('')
-          }
-        })
-      }
-    }).datetimepicker(options)
+    _.merge(this.opts, this.datepickerOptions)
+    // const options = angular.extend(defaultOptions, this.$scope.$eval(this.datepickerOptions))
 
-    const setPickerValue = function() {
-      let date = null
-      if (ngModelCtrl && ngModelCtrl.$viewValue) {
-        date = moment.utc(ngModelCtrl.$viewValue, isoFormat)
-      }
-      const datepicker = $element.data('DateTimePicker')
-      if (datepicker) { return datepicker.date(date) }
-    }
+    // const elem = $element[0].querySelector('.input.is-datepicker')
+    const input = $element.find('.input.is-datepicker')[0]
 
-    if (ngModelCtrl) {
-      ngModelCtrl.$render = () => setPickerValue()
+    $timeout(() => {
+      this.datepicker = new Datepicker(input, this.opts)
+    })
+    // input.addEventListener('changeDate', function(e){
+    //   Log.debug('changeDate', e)
+    // });
+
+    this.ngModelCtrl.$render = () => {
+      const dateVal = Datepicker.parseDate(ngModelCtrl.$viewValue, this.isoFormat)
+      this.value = Datepicker.formatDate(dateVal, this.opts.format)
     }
-    return setPickerValue()
+  }
+
+  onChange() {
+    const dateVal = Datepicker.parseDate(this.value, this.opts.format)
+    const isoDate = Datepicker.formatDate(dateVal, this.isoFormat)
+    // Log.debug('onChange isoDate' + this.id, isoDate)
+    this.ngModelCtrl.$setViewValue(isoDate)
+  }
+
+  onBlur() {
+    this.datepicker.update()
+  }
+
+  showDatepicker() {
+    this.datepicker.show()
+  }
+
+  $onDestroy() {
+    this.datepicker.destroy()
   }
 }
 

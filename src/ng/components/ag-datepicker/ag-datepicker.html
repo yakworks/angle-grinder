@@ -1,22 +1,24 @@
-<div class="field" ng-class="{column: $ctrl.isHorizontal}">
+<div class="field " ng-class="{column: $ctrl.isHorizontal}">
   <ag-label label-class="{{$ctrl.labelClass}}" ng-if="$ctrl.label"
       ng-required="{{$ctrl.isRequired}}">{{$ctrl.label}}</ag-label>
   <div class="field has-addons">
-    <div class="control">
+    <div class="control is-expanded">
       <input
-        class="input"
+        class="input is-datepicker"
         ng-class="$ctrl.inputClass"
         type="{{$ctrl.type}}"
         placeholder="{{$ctrl.placeholder}}"
         name="{{$ctrl.name}}"
         id="{{$ctrl.id}}"
         ng-model="$ctrl.value"
+        ng-model-options='{ debounce: 500 }'
         ng-change="$ctrl.onChange()"
+        ng-blur="$ctrl.onBlur()"
         ng-required="{{::$ctrl.isRequired}}"
         >
     </div>
     <div class="control">
-      <a class="button is-addon datepickerbutton">
+      <a class="button is-addon" ng-click="$ctrl.showDatepicker()">
         <i class="fa fa-calendar"></i>
       </a>
     </div>

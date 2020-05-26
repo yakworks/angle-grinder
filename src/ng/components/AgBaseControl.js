@@ -1,5 +1,5 @@
 import stringUtils from '../../utils/stringFomUtils'
-// import Log from '../../utils/Log'
+import Log from '../../utils/Log'
 import _ from 'lodash'
 
 export default class AgBaseControl {
@@ -67,15 +67,17 @@ export default class AgBaseControl {
   }
 
   onChange() {
-    // Log.debug('onChange', this)
+    Log.debug('onChange', this)
     try {
       if (this.value && this.maximumLength && this.value.length > this.maximumLength) {
         this.value = this.value.substring(0, this.maximumLength)
       }
     } catch (e) {
+      Log.debug('onChange error', e)
       this.value = ''
       // log this to your system as a security message
     }
+    Log.debug('onChange $setViewValue', this.value)
     this.ngModelCtrl.$setViewValue(this.value)
   }
 

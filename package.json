@@ -80,7 +80,8 @@
     "sweetalert2": "^9.7.0",
     "ti-icons": "^0.1.2",
     "toastr": "~2.1.4",
-    "v-button": "^1.2.1"
+    "v-button": "^1.2.1",
+    "vanillajs-datepicker": "yakworks/vanillajs-datepicker#no_refresh_on_tab_key"
   },
   "devDependencies": {
     "@babel/core": "^7.7.7",
