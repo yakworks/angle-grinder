@@ -10,7 +10,7 @@
 			autocomplete="off"
 			ng-model-options="{allowInvalid: true, debounce: 250}"
 			name="{{::$ctrl.name}}"
-			id="{{::$ctrl.id}}"
+			id="{{::$ctrl.elementId}}"
 			ng-model="$ctrl.value"
 			ng-change="$ctrl.onChange()"
 			ng-required="{{::$ctrl.isRequired}}"
@@ -20,5 +20,5 @@
 			>
   </div>
   <p class="help" ng-if="$ctrl.hint">{{::$ctrl.hint}}</p>
-  <ag-validation-inline for="{{::$ctrl.id}}" ></ag-validation-inline>
+  <ag-validation-inline for="{{::$ctrl.elementId}}" ></ag-validation-inline>
 </div>

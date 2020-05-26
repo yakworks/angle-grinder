@@ -12,10 +12,10 @@ export default class AgBaseControl {
     this.$scope = $scope
   }
 
-  onInit() {
+  initDefaults() {
     this.type = this.type || 'text'
     const modelPath = this.$element.attr('ng-model')
-    if (modelPath) {
+    if (!this.modelKey && modelPath) {
       this.modelKey = _.split(modelPath, '.').slice(-1).pop()
     }
     // passing in a blank string to label will not be undefined, and is how to blank it out
@@ -24,31 +24,35 @@ export default class AgBaseControl {
     }
     this.placeholder = this.placeholder || (this.label || stringUtils.parseWords(this.modelKey))
 
-    // figure out an id for the field if it doesn't have one
-    if (!this.id) {
+    // if its not passed in then create a unique id for this component
+    if (!this.elementId) {
       const idKey = `field_${this.type}_${this.modelKey}`
-      this.id = _.uniqueId(`${idKey}_`)
+      this.elementId = _.uniqueId(`${idKey}_`)
     }
+    // Log.debug("this.elementId", this.elementId)
+
     if (!this.name) {
-      this.name = this.id
+      this.name = this.elementId
     }
 
-    if (!this.maximumLength) {
-      this.maximumLength = 50
-    }
     // if required is added it wont be undefined and may have blank str if no value is set
     if (this.required === '' || this.required === 'true' ||
         this.ngRequired === '' || this.ngRequired === 'true') {
       this.isRequired = true
     }
-    if (this.formCtrl) {
-      if (!this.isHorizontal) this.isHorizontal = this.formCtrl.isHorizontal
-      if (!this.labelClass && this.formCtrl.labelClass) this.labelClass = this.formCtrl.labelClass
-    }
-    // if (this.isHorizontal) this.labelClass = `column ${this.labelClass}`
+  }
+
+  onInit() {
+    this.initDefaults()
 
     this.ngModelCtrl.$render = () => {
       this.value = this.ngModelCtrl.$viewValue
+    }
+
+    // Do the label positioning based on isHorizontal
+    if (this.formCtrl) {
+      if (!this.isHorizontal) this.isHorizontal = this.formCtrl.isHorizontal
+      if (!this.labelClass && this.formCtrl.labelClass) this.labelClass = this.formCtrl.labelClass
     }
 
     // if isHorizontal, move label outside and wrap in a columns div
@@ -67,15 +71,6 @@ export default class AgBaseControl {
   }
 
   onChange() {
-    // Log.debug('onChange', this)
-    try {
-      if (this.value && this.maximumLength && this.value.length > this.maximumLength) {
-        this.value = this.value.substring(0, this.maximumLength)
-      }
-    } catch (e) {
-      this.value = ''
-      // log this to your system as a security message
-    }
     this.ngModelCtrl.$setViewValue(this.value)
   }
 
@@ -86,7 +81,6 @@ export default class AgBaseControl {
 
   // $postLink() {
   //   this.$scope.$evalAsync(() => {
-
   //   })
   // }
 }

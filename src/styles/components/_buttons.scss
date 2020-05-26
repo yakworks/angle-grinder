@@ -193,3 +193,17 @@ $shadow-large: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 
     transform: scale(2.5);
   }
 }
+
+/* when inside field controls make them same height as the control */
+.field {
+  .control {
+    .button {
+      height: $control-height;
+      &.is-addon {
+        box-shadow: none;
+        border-color: $input-border-color;
+        background-color: $input-background-color
+      }
+    }
+  }
+}

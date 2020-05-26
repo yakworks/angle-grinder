@@ -1,8 +1,23 @@
 import AgBaseControl from '../AgBaseControl'
+// import Log from '../../../utils/Log'
+// import _ from 'lodash'
 
 class Controller extends AgBaseControl {
   $onInit() {
     super.onInit()
+    if (this.isExpanded === '' || this.isExpanded === 'true') {
+      this.expanded = true
+    }
+  }
+
+  getDatepicker() {
+    const input = this.$element.find('.input.is-datepicker')[0]
+    return input.datepicker
+  }
+
+  showDatepicker() {
+    this.getDatepicker().update()
+    this.getDatepicker().show()
   }
 }
 
@@ -16,7 +31,7 @@ export default () => ({
   },
   scope: {
     ...AgBaseControl.common.scope,
-    type: '@',
-    dateType: '@'
+    datepickerOptions: '@',
+    isExpanded: '@'
   }
 })

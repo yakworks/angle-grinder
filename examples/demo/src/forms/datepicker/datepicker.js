@@ -2,12 +2,17 @@ import template from './datepicker.html'
 
 class controller {
   vm = {
-    predefined: {
-      localDate: '2020-05-25',
-      localDateTime: '2020-05-24T10:00',
-      date: new Date()
-    }
-
+    jsDate: new Date(),
+    isoDate: '2020-05-01',
+    localDateTime: '2020-05-02T10:00'
+  }
+  vm2 = {
+    jsDate: '2021-01-01',
+    isoDate: '2021-01-02',
+    localDateTime: '2022-01-03T10:00'
+  }
+  changeModelData(){
+    this.vm = this.vm2
   }
 }
 

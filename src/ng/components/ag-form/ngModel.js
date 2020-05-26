@@ -1,6 +1,5 @@
-import _ from 'lodash'
+// import _ from 'lodash'
 // import { isAttrTruthy } from '../../utils/ngHelpers'
-
 // import $log from '../../../utils/Log'
 function ldebug(msg, o) {
   // $log.debug(msg, o)
@@ -28,10 +27,10 @@ function ngModel(agValidationsConfig, $rootScope, $interpolate, $document) {
       function activate() {
         ldebug('ngModel', ngModel)
         // add id if it doesn't exist
-        if (!attrs.id) {
-          attrs.id = _.uniqueId(`${attrs.name}_`)
-          element.attr('id', attrs.id)
-        }
+        // if (!attrs.id) {
+        //   attrs.id = _.uniqueId(`${attrs.name}_`)
+        //   element.attr('id', attrs.id)
+        // }
 
         let labelEl = $(element).closest('.form-group').find('.control-label')
         // if labelnot found using form-group then brute force look for <label for="theId"> format
