@@ -1,8 +1,8 @@
 import _ from 'lodash'
 /* @ngInject */
 export default class ListCtrl {
-  constructor(Resource, SinglePageCrudCtrlMixin, MassUpdateMixin, pathWithContext, ConfigCache, ApplyFormattersServ) {
-    this.timeZones = ['Europe/Moscow', 'Asia/Shanghai', 'America/Sao_Paulo']
+  constructor($scope, Resource, SinglePageCrudCtrlMixin, MassUpdateMixin, pathWithContext, ConfigCache, ApplyFormattersServ) {
+    $scope.timeZones = ['Europe/Moscow', 'Asia/Shanghai', 'America/Sao_Paulo']
 
     const formatters = {
       showActionLink: (cellVal, options, rowdata) => `\
@@ -45,16 +45,16 @@ export default class ListCtrl {
       return ConfigCache.get(`/api/org/gridOptions`, func)
     }
 
-    this.gridOptions = gridOptions()
+    $scope.gridOptions = gridOptions()
 
-    SinglePageCrudCtrlMixin(this, {
+    SinglePageCrudCtrlMixin($scope, {
       Resource,
       resourcePath: '/org',
       gridName: 'orgGrid'
     }
     )
 
-    MassUpdateMixin(this, {
+    MassUpdateMixin($scope, {
       template: require('../massUpdate/massUpdateForm.html'),
       controller: 'org.MassUpdateFormCtrl',
       gridName: 'orgGrid'
