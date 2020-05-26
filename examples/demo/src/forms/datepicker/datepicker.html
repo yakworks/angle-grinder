@@ -1,15 +1,28 @@
 
+<form is-horizontal name="datepickerFormPredefined" ag-form class="form-horizontal-fixed mt-4" novalidate>
+  <ag-datepicker ng-model="$ctrl.vm.jsDate"></ag-datepicker>
+  <ag-datepicker ng-model="$ctrl.vm.isoDate"></ag-datepicker>
+  <ag-datepicker ng-model="$ctrl.vm.localDateTime"></ag-datepicker>
+
+  <div class="field has-addons date">
+    <div class="control">
+      <input type="text" name="range-start" class="input datepicker-input">
+    </div>
+    <div class="control">
+      <a class="button is-static is-addon">to</a>
+    </div>
+    <div class="control">
+      <input type="text" name="range-end" class="input datepicker-input">
+    </div>
+  </div>
+
+</form>
+
+<pre ng-cloak class="mt-4">model: {{$ctrl.vm | json}}</pre>
+
 <form name="datepickerForm" ag-form novalidate>
   <ag-datepicker date-type='date' ng-model="$ctrl.vm.date"></ag-datepicker>
   <ag-datepicker ng-model="$ctrl.vm.localDate"></ag-datepicker>
   <ag-datepicker date-type="localDateTime" ng-model="$ctrl.vm.localDateTime"></ag-datepicker>
 </form>
-
-<form is-horizontal name="datepickerFormPredefined" ag-form class="form-horizontal-fixed mt-4" novalidate>
-  <ag-datepicker ng-model="$ctrl.vm.jsDate"></ag-datepicker>
-  <ag-datepicker ng-model="$ctrl.vm.isoDate"></ag-datepicker>
-  <ag-datepicker ng-model="$ctrl.vm.localDateTime"></ag-datepicker>
-</form>
-<pre ng-cloak class="mt-4">model: {{$ctrl.vm | json}}</pre>
-
 

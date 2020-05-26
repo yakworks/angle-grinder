@@ -3,19 +3,15 @@
       ng-required="{{$ctrl.isRequired}}">{{$ctrl.label}}</ag-label>
   <div class="field has-addons">
     <div class="control is-expanded">
-      <input
-        class="input is-datepicker"
-        ng-class="$ctrl.inputClass"
-        type="{{$ctrl.type}}"
+      <ag-datepicker-control
+        parent-ctrl="$ctrl"
         placeholder="{{$ctrl.placeholder}}"
-        name="{{$ctrl.name}}"
-        id="{{$ctrl.id}}"
         ng-model="$ctrl.value"
-        ng-model-options='{ debounce: 500 }'
         ng-change="$ctrl.onChange()"
+        ng-required="{{$ctrl.isRequired}}"
+        model-key="{{$ctrl.modelKey}}"
         ng-blur="$ctrl.onBlur()"
-        ng-required="{{::$ctrl.isRequired}}"
-        >
+      ></ag-datepicker-control>
     </div>
     <div class="control">
       <a class="button is-addon" ng-click="$ctrl.showDatepicker()">
@@ -24,5 +20,5 @@
     </div>
   </div>
   <p class="help" ng-if="$ctrl.hint">{{::$ctrl.hint}}</p>
-  <ag-validation-inline for="{{::$ctrl.id}}" ></ag-validation-inline>
+  <ag-validation-inline for="{{$ctrl.id}}" ></ag-validation-inline>
 </div>

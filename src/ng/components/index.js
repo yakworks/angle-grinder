@@ -7,6 +7,7 @@ import agInputBs from './ag-input-bs'
 import agSelect from './ag-select'
 import agSelectRest from './ag-select-rest'
 import agDatepicker from './ag-datepicker'
+import agDatepickerControl from './datepicker/control'
 import agValMod from './ag-validation'
 import dropdownModule from './dropdown/dropdown.module'
 import buttonModule from './button/button.module'
@@ -29,4 +30,5 @@ angular.module(MOD_NAME, [
   .directive('agInput', agInput)
   .directive('agSelect', agSelect)
   .directive('agDatepicker', agDatepicker)
+  .directive('agDatepickerControl', agDatepickerControl)
   .directive('agInputBs', agInputBs)

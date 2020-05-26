@@ -21,10 +21,11 @@ angular.module(agValMod).directive('agValidationInline', function($timeout, $doc
     replace: true,
     template: require('./validationInline.html'),
     link: function(scope, element, attrs, ctrl) {
-      var inputId = attrs.for || attrs.agValidationInline
+      //var inputId = attrs.for || attrs.agValidationInline
       var inputEl, ngModel
 
       $timeout(function() {
+        let inputId = attrs.for || attrs.agValidationInline
         inputEl = document.getElementById(inputId)
         if (_.isNil(inputEl)) {
           inputEl = element.closest('.controls').find('input:first-child, select:first-child, textarea:first-child')[0]

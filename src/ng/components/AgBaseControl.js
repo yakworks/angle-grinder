@@ -1,5 +1,5 @@
 import stringUtils from '../../utils/stringFomUtils'
-import Log from '../../utils/Log'
+
 import _ from 'lodash'
 
 export default class AgBaseControl {
@@ -12,10 +12,10 @@ export default class AgBaseControl {
     this.$scope = $scope
   }
 
-  onInit() {
+  setupDefaults() {
     this.type = this.type || 'text'
     const modelPath = this.$element.attr('ng-model')
-    if (modelPath) {
+    if (!this.modelKey && modelPath) {
       this.modelKey = _.split(modelPath, '.').slice(-1).pop()
     }
     // passing in a blank string to label will not be undefined, and is how to blank it out
@@ -29,18 +29,21 @@ export default class AgBaseControl {
       const idKey = `field_${this.type}_${this.modelKey}`
       this.id = _.uniqueId(`${idKey}_`)
     }
+
     if (!this.name) {
       this.name = this.id
     }
 
-    if (!this.maximumLength) {
-      this.maximumLength = 50
-    }
     // if required is added it wont be undefined and may have blank str if no value is set
     if (this.required === '' || this.required === 'true' ||
         this.ngRequired === '' || this.ngRequired === 'true') {
       this.isRequired = true
     }
+  }
+
+  onInit() {
+    this.setupDefaults()
+
     if (this.formCtrl) {
       if (!this.isHorizontal) this.isHorizontal = this.formCtrl.isHorizontal
       if (!this.labelClass && this.formCtrl.labelClass) this.labelClass = this.formCtrl.labelClass
@@ -67,17 +70,6 @@ export default class AgBaseControl {
   }
 
   onChange() {
-    Log.debug('onChange', this)
-    try {
-      if (this.value && this.maximumLength && this.value.length > this.maximumLength) {
-        this.value = this.value.substring(0, this.maximumLength)
-      }
-    } catch (e) {
-      Log.debug('onChange error', e)
-      this.value = ''
-      // log this to your system as a security message
-    }
-    Log.debug('onChange $setViewValue', this.value)
     this.ngModelCtrl.$setViewValue(this.value)
   }
 
@@ -101,6 +93,7 @@ AgBaseControl.common = {
     bindToController: true
   },
   scope: {
+    // id: '@',
     label: '@',
     hint: '@',
     name: '@',
