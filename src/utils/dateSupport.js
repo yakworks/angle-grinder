@@ -10,7 +10,7 @@ const datepickerDefaults = {
   clearBtn: true,
   showOnFocus: false,
   todayBtn: true,
-  buttonClass: 'button is-flat is-white',
+  buttonClass: 'button is-white',
   format: 'mm/dd/yyyy'
 }
 

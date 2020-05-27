@@ -12768,9 +12768,9 @@ validate-npm-package-license@^3.0.1:
     spdx-correct "^3.0.0"
     spdx-expression-parse "^3.0.0"
 
-vanillajs-datepicker@yakworks/vanillajs-datepicker#no_refresh_on_tab_key:
+vanillajs-datepicker@yakworks/vanillajs-datepicker:
   version "1.0.2"
-  resolved "https://codeload.github.com/yakworks/vanillajs-datepicker/tar.gz/7207e9454f5a391a9fb571cf4e97dadf8461b334"
+  resolved "https://codeload.github.com/yakworks/vanillajs-datepicker/tar.gz/eaf120619151ba0d9a921b768c00e17f09e2255c"
 
 vary@~1.0.1:
   version "1.0.1"
