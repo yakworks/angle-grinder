@@ -4,6 +4,7 @@ import _ from 'lodash'
 class controller {
   vm ={}
   vm1 = {
+    name: 'bill',
     jsDate: new Date(),
     isoDate: '2020-05-01',
     localDateTime: '2020-05-02T10:00',

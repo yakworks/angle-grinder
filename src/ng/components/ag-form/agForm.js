@@ -41,6 +41,10 @@ function agForm($timeout) {
     // set default to is-3
     if (this.isHorizontal && !this.labelClass) this.labelClass = 'is-3'
 
+    // add autocomplete="off" novalidate
+    $element.attr('novalidate',true)
+    $element.attr('autocomplete', "off")
+
     // polyfill for setSubmitted pre 1.3
     function setSubmitted() {
       if (angular.isFunction(form.$setSubmitted)) {
