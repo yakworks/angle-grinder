@@ -82,7 +82,7 @@
     "ti-icons": "^0.1.2",
     "toastr": "~2.1.4",
     "v-button": "^1.2.1",
-    "vanillajs-datepicker": "yakworks/vanillajs-datepicker#no_refresh_on_tab_key"
+    "vanillajs-datepicker": "yakworks/vanillajs-datepicker"
   },
   "devDependencies": {
     "@babel/core": "^7.7.7",

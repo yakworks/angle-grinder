@@ -1,5 +1,6 @@
 
 <form name="dpForm" ag-form is-horizontal>
+  <ag-input ng-model="$ctrl.vm.name" required hint="sanity check"></ag-input>
   <ag-datepicker ng-model="$ctrl.vm.jsDate" required hint="comes from new Date()"></ag-datepicker>
   <ag-datepicker ng-model="$ctrl.vm.isoDate"></ag-datepicker>
   <ag-datepicker ng-model="$ctrl.vm.localDateTime" is-expanded></ag-datepicker>
