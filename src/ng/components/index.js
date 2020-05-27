@@ -22,7 +22,6 @@ export default MOD_NAME
 angular.module(MOD_NAME, [
   agFormMod,
   agValMod,
-  agSelectRest,
   dropdownModule,
   buttonModule
 ])
@@ -34,3 +33,4 @@ angular.module(MOD_NAME, [
   .directive('agDatepickerInput', agDatepickerInput)
   .directive('agDaterange', agDaterange)
   .directive('agInputBs', agInputBs)
+  .directive('agSelectRest', agSelectRest)

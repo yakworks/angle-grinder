@@ -1,23 +1,10 @@
 <div class="well">
-    <form ag-search-form="orgGrid" class="form-horizontal-fixed form-multi-column no-margin">
+    <form ag-form ag-search-form="orgGrid" is-horizontal class="form-horizontal-fixed form-multi-column no-margin">
 
       <div class="columns">
         <div class="column is-one-third">
-            <div class="form-group">
-                <label class="control-label col-sm-4">Name</label>
-
-                <div class="controls">
-                    <input class="form-control" type="text" ng-model="filters.name">
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="control-label col-sm-4">Num</label>
-
-                <div class="controls">
-                    <input class="form-control" type="text" ng-model="filters.num">
-                </div>
-            </div>
+          <ag-input ng-model="filters.name"></ag-input>
+          <ag-input ng-model="filters.num"></ag-input>
         </div>
       </div>
             <div class="pull-right">

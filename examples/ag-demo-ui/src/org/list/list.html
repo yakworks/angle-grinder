@@ -11,7 +11,7 @@
                     <i class="fa fa-selected-pointer"></i> Actions <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a href="" ng-click="vm.massUpdate()"><i class="fa fa-pencil-square-o"></i> Mass update</a></li>
+                    <li><a href="" ng-click="massUpdate()"><i class="fa fa-pencil-square-o"></i> Mass update</a></li>
                 </ul>
             </li>
             <li class="divider-vertical"></li>
@@ -26,7 +26,7 @@
           </ag-panel-states>
           <ul class="nav navbar-nav pull-right">
               <li>
-                  <a title="search screen" ng-click="vm.showSearchForm = !vm.showSearchForm" href="">
+                  <a title="search screen" ng-click="showSearchForm = !showSearchForm" href="">
                       <i class="fa fa-search"></i>
                   </a>
               </li>
@@ -34,7 +34,7 @@
           <ag-grid-quick-search for="orgGrid" filters="vm.filters"></ag-grid-quick-search>
       </div>
   </div>
-  <div ag-grid="vm.gridOptions" ag-grid-name="orgGrid"></div>
+  <div ag-grid="gridOptions" ag-grid-name="orgGrid"></div>
 </div>
 
 </div>

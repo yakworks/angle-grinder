@@ -8,46 +8,26 @@
 </div>
 <div class="columns">
   <div class="column">
-    <form ag-form="editForm" name="editForm" class="form-horizontal-fixed" novalidate
-          ag-server-validation-errors
-          ng-submit="save(user)">
+    <form name="editForm" ag-form is-horizontal label-class="is-3" autocomplete="off" novalidate
+          class="form-horizontal-fixed" ag-server-validation-errors ng-submit="save(user)">
       <div class="modal-body" style="height:60%; overflow:auto;">
+        <ag-input ng-model="user.contact.firstName" required></ag-input>
+        <ag-input ng-model="user.contact.lastName" required></ag-input>
+        <ag-input type="email" ng-model="user.contact.email" required=""/>
+        <ag-select label="Type" ng-model="filters.contact.type.name"
+                   select-options="{ data: ['admin', 'customer'], multiple: true }"/>
+        <ag-select-rest multiple url="/api/org/pickList" ng-model="user.contact.org"/>
+        <ag-checkbox ng-model="user.contact.tagForReminders"></ag-checkbox>
+        <ag-input ng-model="user.login" required></ag-input>
+        <ag-datepicker ng-model="user.activeDate" is-expanded required=""></ag-datepicker>
 
-        <ng-form name="contact" ag-server-validation-errors>
-          <ag-input name="firstName" ng-model="user.contact.firstName" required ></ag-input>
-          <ag-input name="lastName" ng-model="user.contact.lastName" required ></ag-input>
-          <ag-input type="email" name="email" ng-model="user.contact.email" required="" />
-          <ag-select name="type" ng-model="filters.contact.type.name" select-options="{ data: ['admin', 'customer'], multiple: true }"/>
-          <ag-select-rest name="org" multiple url="/api/org/pickList" ng-model="user.contact.org"/>
-          <ag-checkbox name="tagForReminders" ng-model="user.contact.tagForReminders"></ag-checkbox>
-        </ng-form>
-        <ag-input name="login" ng-model="user.login" required ></ag-input>
-
-        <div ag-field-group for="activeDate">
-          <div class="form-group">
-            <label class="control-label">Active Date</label>
-
-            <div class="controls">
-              <ag-datepicker
-                ng-model="user.activeDate"
-                ng-required="true"
-                name="activeDate"/>
-              </ag-datepicker>
-
-              <ag-validation-errors for="activeDate"/>
-            </div>
-          </div>
-        </div>
-        <ag-input name="password" ng-model="user.password" hint="must be more 6 chars"
-                  minimum-length="6" required ></ag-input>
-        <ag-input name="rePassword" hint="must be more 6 chars"
-                  minimum-length="6" ng-model="user.repassword" required ></ag-input>
-        <ag-checkbox ng-hide="user.newRecord()"" name="inactive" ng-model="user.inactive"></ag-checkbox>
-          <div class="modal-footer">
-          <span ng-if="user.persisted()">
-            <ag-delete-button when-confirmed="delete(item)"></ag-delete-button>
-          </span>
-
+        <ag-input ng-model="user.password" hint="must be more 6 chars"
+                  minimum-length="6" required></ag-input>
+        <ag-input hint="must be more 6 chars"
+                  minimum-length="6" ng-model="user.repassword" required></ag-input>
+        <ag-checkbox ng-hide="user.newRecord()"
+        " name="inactive" ng-model="user.inactive"></ag-checkbox>
+        <div class="modal-footer">
           <ag-cancel-button ng-click="closeDialog()"></ag-cancel-button>
           <ag-submit-button></ag-submit-button>
         </div>

@@ -4,12 +4,12 @@
   <div class="control">
     <input
       class="form-control"
-      name="$ctrl.name"
-      placeholder="{{$ctrl.placeholder}}"
-			id="{{$ctrl.elementId}}"
+      name="{{::$ctrl.name}}"
+      placeholder="{{::$ctrl.placeholder}}"
+      id="{{::$ctrl.elementId}}"
 			ng-model="$ctrl.value"
 			ng-change="$ctrl.onChange()"
-      ng-required="$ctrl.isRequired"
+      ng-required="{{$ctrl.isRequired}}"
       ui-select2="$ctrl.selectOptions"
 			>
     </input>

@@ -19,7 +19,7 @@ class Controller extends AgBaseControl {
   $onInit() {
     _.merge(this.opts, this.datepickerOptions)
     this.placeholder = this.opts.fromField.placeholder
-    this.placeholderTo = this.opts.fromField.placeholder
+    this.placeholderTo = this.opts.toField.placeholder
 
     super.onInit()
     const fromFld = this.opts.fromField.name
