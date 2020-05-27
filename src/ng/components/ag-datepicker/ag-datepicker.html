@@ -5,13 +5,11 @@
     <div class="control" ng-class="{'is-expanded': $ctrl.expanded}">
       <ag-datepicker-input
         input-id="{{$ctrl.elementId}}"
-        parent-ctrl="$ctrl"
         placeholder="{{$ctrl.placeholder}}"
         ng-model="$ctrl.value"
         ng-change="$ctrl.onChange()"
         ng-required="{{$ctrl.isRequired}}"
-        model-key="{{$ctrl.modelKey}}"
-        ng-blur="$ctrl.onBlur()"
+        datepicker-options="$ctrl.datepickerOptions"
       ></ag-datepicker-input>
     </div>
     <div class="control">

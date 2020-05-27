@@ -1,20 +1,13 @@
 import AgBaseControl from '../AgBaseControl'
 // see https://mymth.github.io/vanillajs-datepicker/#/
 import { Datepicker } from 'vanillajs-datepicker'
-import Log from '../../../utils/Log'
-import _ from 'lodash'
+import { mergeDatepickerOpts, isoDateToDisplay, displayDateToIso } from 'angle-grinder/src/utils/dateSupport'
+// import Log from '../../../utils/Log'
+// import _ from 'lodash'
 
 class Controller extends AgBaseControl {
   isoFormat = 'yyyy-mm-dd'
   datepickerOptions = {}
-  opts = {
-    autohide: true,
-    clearBtn: true,
-    showOnFocus: false,
-    todayBtn: true,
-    buttonClass: 'button is-flat is-white',
-    format: 'mm/dd/yyyy'
-  }
 
   /* @ngInject */
   constructor($element, $timeout, $scope, agDate) {
@@ -31,8 +24,8 @@ class Controller extends AgBaseControl {
 
     const { ngModelCtrl, $element, $timeout } = this
 
-    _.merge(this.opts, this.datepickerOptions)
-    // const options = angular.extend(defaultOptions, this.$scope.$eval(this.datepickerOptions))
+    // Log.debug('this.datepickerOptions', this.datepickerOptions)
+    this.opts = mergeDatepickerOpts(this.datepickerOptions)
 
     const input = $element[0].querySelector('.input.is-datepicker')
     // const input = $element[0]
@@ -40,27 +33,25 @@ class Controller extends AgBaseControl {
     $timeout(() => {
       this.datepicker = new Datepicker(input, this.opts)
     })
+    // to add listeners for Datepicker
     // input.addEventListener('changeDate', function(e){
     //   Log.debug('changeDate', e)
     // });
 
     this.ngModelCtrl.$render = () => {
-      const dateVal = Datepicker.parseDate(ngModelCtrl.$viewValue, this.isoFormat)
-      this.value = Datepicker.formatDate(dateVal, this.opts.format)
+      this.value = isoDateToDisplay(ngModelCtrl.$viewValue)
     }
   }
 
   onChange() {
-    const dateVal = Datepicker.parseDate(this.value, this.opts.format)
-    const isoDate = Datepicker.formatDate(dateVal, this.isoFormat)
+    // Log.debug('onChange this.value', this.value)
+    const isoDate = displayDateToIso(this.value)
     this.ngModelCtrl.$setViewValue(isoDate)
-    Log.debug('onChange', isoDate)
     // if dialog is open then update the change there too
     if (this.datepicker.active) this.datepicker.update()
   }
 
   onBlur() {
-    Log.debug('onBlur')
     this.datepicker.update()
   }
 
@@ -95,9 +86,7 @@ export default () => ({
   },
   scope: {
     ...AgBaseControl.common.scope,
-    parentCtrl: '=',
-    modelKey: '@',
-    datepickerOptions: '@',
+    datepickerOptions: '<',
     inputId: '@'
   }
 })
