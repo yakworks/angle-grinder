@@ -1,52 +1,30 @@
 <div class="field " ng-class="{column: $ctrl.isHorizontal}">
   <ag-label label-class="{{$ctrl.labelClass}}" ng-if="$ctrl.label"
       ng-required="{{$ctrl.isRequired}}">{{$ctrl.label}}</ag-label>
-
-  <div class="field has-addons">
-    <div class="control">
-      <input
-        type="text"
-        class="input is-datepicker-from"
-        placeholder="{{$ctrl.rangeStart.placeholder}}"
-        name="{{$ctrl.rangeStart.name}}"
-        id="{{$ctrl.rangeStart.id}}"
-        ng-model="$ctrl.value.from"
-        ng-model-options='{ debounce: 500 }'
+  <div class="field has-addons mb-0">
+    <div class="control is-expanded" >
+      <ag-datepicker-input
+        input-id="{{$ctrl.elementId}}"
+        placeholder="{{$ctrl.placeholder}}"
+        ng-model="$ctrl.valueFrom"
         ng-change="$ctrl.onChange()"
-        ng-blur="$ctrl.onBlur()"
-        ng-required="{{::$ctrl.isRequired}}"
-        >
+        ng-required="{{$ctrl.isRequired}}"
+        datepicker-options="$ctrl.opts"
+      ></ag-datepicker-input>
     </div>
     <div class="control">
       <a class="button is-static is-addon">to</a>
     </div>
-    <div class="control">
-      <input type="text" name="range-end" class="input datepicker-input">
-    </div>
-  </div>
-
-  <div class="field has-addons">
-    <div class="control is-expanded">
-      <input
-        class="input is-datepicker"
-        ng-class="$ctrl.inputClass"
-        type="{{$ctrl.type}}"
-        placeholder="{{$ctrl.placeholder}}"
-        name="{{$ctrl.name}}"
-        id="{{$ctrl.id}}"
-        ng-model="$ctrl.value"
-        ng-model-options='{ debounce: 500 }'
+    <div class="control is-expanded" >
+      <ag-datepicker-input
+        input-id="{{$ctrl.elementToId}}"
+        placeholder="{{$ctrl.placeholderTo}}"
+        ng-model="$ctrl.valueTo"
         ng-change="$ctrl.onChange()"
-        ng-blur="$ctrl.onBlur()"
-        ng-required="{{::$ctrl.isRequired}}"
-        >
-    </div>
-    <div class="control">
-      <a class="button is-addon" ng-click="$ctrl.showDatepicker()">
-        <i class="fa fa-calendar"></i>
-      </a>
+        ng-required="{{$ctrl.isRequiredTo}}"
+        datepicker-options="$ctrl.opts"
+      ></ag-datepicker-input>
     </div>
   </div>
   <p class="help" ng-if="$ctrl.hint">{{::$ctrl.hint}}</p>
-  <ag-validation-inline for="{{::$ctrl.id}}" ></ag-validation-inline>
 </div>

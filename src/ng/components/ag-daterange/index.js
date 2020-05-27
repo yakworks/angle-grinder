@@ -1,73 +1,52 @@
 import AgBaseControl from '../AgBaseControl'
-// see https://mymth.github.io/vanillajs-datepicker/#/
-import { Datepicker } from 'vanillajs-datepicker'
 // import Log from '../../../utils/Log'
 import _ from 'lodash'
 
 class Controller extends AgBaseControl {
-  isoFormat = 'yyyy-mm-dd'
   datepickerOptions = {}
   opts = {
-    autohide: true,
-    clearBtn: true,
     showOnFocus: true,
-    todayBtn: true,
-    buttonClass: 'button is-flat is-white',
-    format: 'mm/dd/yyyy'
-  }
-
-  /* @ngInject */
-  constructor($element, $timeout, $scope, agDate) {
-    super($element, $timeout, $scope)
-    this.agDate = agDate
+    fromField: {
+      name: 'from',
+      placeholder: 'from date'
+    },
+    toField: {
+      name: 'to',
+      placeholder: 'end date'
+    }
   }
 
   $onInit() {
-    super.onInit()
-    const { ngModelCtrl, $element, $timeout } = this
-
     _.merge(this.opts, this.datepickerOptions)
-    // const options = angular.extend(defaultOptions, this.$scope.$eval(this.datepickerOptions))
+    this.placeholder = this.opts.fromField.placeholder
+    this.placeholderTo = this.opts.fromField.placeholder
 
-    // const elem = $element[0].querySelector('.input.is-datepicker')
-    const input = $element.find('.input.is-datepicker')[0]
-
-    $timeout(() => {
-      this.datepicker = new Datepicker(input, this.opts)
-    })
-    // input.addEventListener('changeDate', function(e){
-    //   Log.debug('changeDate', e)
-    // });
+    super.onInit()
+    const fromFld = this.opts.fromField.name
+    const toFld = this.opts.toField.name
 
     this.ngModelCtrl.$render = () => {
-      const dateVal = Datepicker.parseDate(ngModelCtrl.$viewValue, this.isoFormat)
-      this.value = Datepicker.formatDate(dateVal, this.opts.format)
+      let vmv = this.ngModelCtrl.$viewValue
+      vmv = _.isEmpty(vmv) ? { [fromFld]: '', [toFld]: '' } : vmv
+      // Log.debug('vmv', vmv)
+      this.valueFrom = vmv[fromFld] || ''
+      this.valueTo = vmv[toFld] || ''
     }
   }
 
   onChange() {
-    const dateVal = Datepicker.parseDate(this.value, this.opts.format)
-    const isoDate = Datepicker.formatDate(dateVal, this.isoFormat)
-    // Log.debug('onChange isoDate' + this.id, isoDate)
-    this.ngModelCtrl.$setViewValue(isoDate)
-  }
+    const fromFld = this.opts.fromField.name
+    const toFld = this.opts.toField.name
 
-  onBlur() {
-    this.datepicker.update()
-  }
-
-  showDatepicker() {
-    this.datepicker.show()
-  }
-
-  $onDestroy() {
-    this.datepicker.destroy()
+    const fromToObj = { [fromFld]: this.valueFrom, [toFld]: this.valueTo }
+    // Log.debug('onChange fromToObj', fromToObj)
+    this.ngModelCtrl.$setViewValue(fromToObj)
   }
 }
 
 export default () => ({
   ...AgBaseControl.common.dir,
-  template: require('./ag-datepicker.html'),
+  template: require('./ag-daterange.html'),
   controller: Controller,
   require: {
     ngModelCtrl: 'ngModel',
@@ -75,8 +54,6 @@ export default () => ({
   },
   scope: {
     ...AgBaseControl.common.scope,
-    type: '@',
-    dateType: '@',
-    datepickerOptions: '@'
+    datepickerOptions: '<'
   }
 })

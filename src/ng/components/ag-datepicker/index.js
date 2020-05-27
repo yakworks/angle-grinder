@@ -16,7 +16,7 @@ class Controller extends AgBaseControl {
   }
 
   showDatepicker() {
-    this.getDatepicker().update()
+    // this.getDatepicker().update()
     this.getDatepicker().show()
   }
 }
@@ -31,7 +31,7 @@ export default () => ({
   },
   scope: {
     ...AgBaseControl.common.scope,
-    datepickerOptions: '@',
+    datepickerOptions: '<',
     isExpanded: '@'
   }
 })
