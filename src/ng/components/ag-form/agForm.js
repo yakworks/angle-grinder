@@ -42,8 +42,8 @@ function agForm($timeout) {
     if (this.isHorizontal && !this.labelClass) this.labelClass = 'is-3'
 
     // add autocomplete="off" novalidate
-    $element.attr('novalidate',true)
-    $element.attr('autocomplete', "off")
+    $element.attr('novalidate', true)
+    $element.attr('autocomplete', 'off')
 
     // polyfill for setSubmitted pre 1.3
     function setSubmitted() {
