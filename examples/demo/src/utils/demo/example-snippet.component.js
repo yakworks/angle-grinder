@@ -19,7 +19,8 @@ class controller {
   $postLink() {
     this.$timeout(() => {
       let eComp = $(this.$element).find('.example-component')
-      $(this.$element).find('.hljs-container').css('max-height', eComp.innerHeight() - 32);
+      let srcHeight = eComp.innerHeight() - 32
+      $(this.$element).find('.hljs-container').css('max-height', (srcHeight < 300)? 300 : srcHeight);
     })
   }
 }

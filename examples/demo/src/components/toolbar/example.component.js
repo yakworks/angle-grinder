@@ -2,33 +2,22 @@ import dropdownDemoModule from './component'
 // Import Raw Files
 import htmlRaw from '!raw-loader!./component.html';
 import jsRaw from '!raw-loader!./component.js';
-import mdRaw from '!raw-loader!./docs.md';
 
 class controller {
-  html = htmlRaw
-  js = jsRaw
-  md = mdRaw
+  rawHtml = htmlRaw
+  rawJs = jsRaw
 }
 
 const template = `
-<p>
-    Lorem Ipsum
-</p>
-<div class="example-section">
-  <div class="example is-vertical">
-    <div class="example-component">
-      <dropdown-demo></dropdown-demo>
-    </div>
-    <div class="codeview">
-      <demo-snippet raw-js='$ctrl.js' raw-html='$ctrl.html' raw-md='$ctrl.md' max-height="300px"></demo-snippet>
-    </div>
-  </div>
-</div>
+<example-snippet raw-js='$ctrl.rawJs' raw-html='$ctrl.rawHtml' raw-md='$ctrl.rawMd' max-height="500px">
+  <toolbar-demo/>
+</example-snippet>
 `
+
 // export the module name
 export default angular
   .module(dropdownDemoModule)
-  .component('dropdownExample', {
+  .component('toolbarDemoExample', {
     template,
     controller
   })

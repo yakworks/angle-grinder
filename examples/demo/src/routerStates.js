@@ -152,6 +152,10 @@ const componentsStates = {
     {
       name: 'dropdown',
       component: 'dropdownDemoIndex'
+    },
+    {
+      name: 'toolbar',
+      component: 'toolbarDemoIndex'
     }
   ]
 }
