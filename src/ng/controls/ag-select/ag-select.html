@@ -3,7 +3,8 @@
       ng-required="{{$ctrl.isRequired}}" >{{$ctrl.label}}</ag-label>
   <div class="control">
     <input
-      class="form-control"
+      class="input"
+      ng-class="$ctrl.inputClass"
       name="{{::$ctrl.name}}"
       placeholder="{{::$ctrl.placeholder}}"
       id="{{::$ctrl.elementId}}"

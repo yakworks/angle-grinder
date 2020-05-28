@@ -3,16 +3,16 @@
             ng-required="{{$ctrl.isRequired}}" >{{$ctrl.label}}</ag-label>
   <div class="control">
     <input
-      class="form-control"
+      class="input"
       ng-class="$ctrl.inputClass"
       name="{{::$ctrl.name}}"
 			id="{{::$ctrl.elementId}}"
       placeholder="{{::$ctrl.placeholder}}"
-			autocomplete="off"
       ng-model="$ctrl.value"
       ng-change="$ctrl.onChange()"
       ng-required="{{$ctrl.isRequired}}"
-      ui-select2="$ctrl.opts">
+      ui-select2="$ctrl.opts"
+      >
     <p class="help" ng-if="$ctrl.hint">{{::$ctrl.hint}}</p>
     <ag-validation-inline for="{{$ctrl.elementId}}" ></ag-validation-inline>
   </div>
