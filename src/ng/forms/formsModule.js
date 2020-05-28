@@ -1,6 +1,6 @@
 import angular from 'angular'
 import agCommon from '../common'
-import agSelect2 from '../select2'
+import agSelect2 from '../legacy/select2'
 import alerts from '../alerts'
 import agPathWithContext from '../pathWithContext'
 import xeditable from 'angular-xeditable'

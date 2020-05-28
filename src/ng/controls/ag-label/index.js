@@ -1,4 +1,3 @@
-import compDefaults from '../utils/componentDirective'
 // import Log from '../../../utils/Log'
 
 class Controller {
@@ -18,10 +17,11 @@ class Controller {
 }
 
 export default () => ({
-  ...compDefaults,
-  transclude: true,
+  restrict: 'E',
+  replace: true,
   controllerAs: '$ctrl',
   bindToController: true,
+  transclude: true,
   template: require('./ag-label.html'),
   controller: Controller,
   require: {

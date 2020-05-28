@@ -74,3 +74,17 @@ $panel-default-border: $border;
 
 //== dropdown
 $dropdown-border: $border;
+
+//== navbar
+$navbar-default-color: $text-light !default;
+$navbar-default-bg: $white-bis !default;
+$navbar-default-border:  $border !default;
+
+// Navbar links
+$navbar-default-link-color:         $text-light !default;
+$navbar-default-link-hover-color:   $text-strong !default;
+// $navbar-default-link-hover-bg:      transparent !default;
+$navbar-default-link-active-color:  $text !default;
+// $navbar-default-link-active-bg:     darken($navbar-default-bg, 6.5%) !default;
+$navbar-default-link-disabled-color:       #ccc !default;
+// $navbar-default-link-disabled-bg:          transparent !default;

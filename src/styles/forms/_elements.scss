@@ -20,3 +20,28 @@
 .form-control::-webkit-input-placeholder {
   color: #aaa;
 }
+
+// basic defaults for consistency for 3rd party componets we cant control
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="search"],
+input[type="url"],
+input[type="password"],
+input[type="checkbox"],
+textarea{
+  // display: inline-block;
+  // padding: 4px;
+  // font-size: 13px;
+  // line-height: 18px;
+  color: $input-color;
+  border: 1px solid $input-border-color;
+  border-radius: $control-radius;
+}
+
+select {
+  color: $input-color;
+  -moz-appearance: none;
+  border: 1px solid $input-border-color;
+  border-radius: $control-radius;
+}

@@ -1,4 +1,4 @@
-import select2Mod from 'angle-grinder/src/ng/select2'
+import select2Mod from 'angle-grinder/src/ng/legacy/select2'
 
 describe("elect2OptionsSpec", function() {
 

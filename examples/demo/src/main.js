@@ -27,7 +27,6 @@ import './controllers/bootstrapCtrl'
 import './controllers/chatCtrl'
 
 // UI Demo
-import './ui/buttons'
 import './ui/icons'
 import './ui/alerts'
 import './ui/tabs'

@@ -1,5 +1,4 @@
 import template from './comp.html'
-import { convertSelect2Data } from 'angle-grinder/src/ng/select2/helpers'
 
 class controller {
   colorData = ['red', 'green', 'blue']

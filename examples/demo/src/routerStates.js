@@ -76,10 +76,6 @@ const uiStates = {
       icon: 'ti-layout-media-left-alt'
     },
     {
-      name: 'buttons',
-      template: require('./ui/buttons/ui_buttons.html')
-    },
-    {
       name: 'icons',
       template: require('./ui/icons/ui_icons.html')
     },
@@ -152,6 +148,10 @@ const componentsStates = {
     {
       name: 'dropdown',
       component: 'dropdownDemoIndex'
+    },
+    {
+      name: 'toolbar',
+      component: 'toolbarDemoIndex'
     }
   ]
 }
