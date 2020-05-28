@@ -4,6 +4,7 @@ import agCheckbox from './ag-checkbox'
 import agLabel from './ag-label'
 import agInput from './ag-input'
 import agInputBs from './ag-input-bs'
+import uiSelect2Mod from './ui-select2/ui.select2'
 import agSelect from './ag-select'
 import agSelectRest from './ag-select-rest'
 import agDatepicker from './ag-datepicker'
@@ -19,6 +20,7 @@ export default MOD_NAME
 
 angular.module(MOD_NAME, [
   agFormMod,
+  uiSelect2Mod,
   agValMod
 ])
   .directive('agCheckbox', agCheckbox)
