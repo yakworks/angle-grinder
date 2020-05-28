@@ -1,7 +1,7 @@
 import angular from 'angular'
 import agCommon from '../common'
 import resourceSupport from '../resourceSupport'
-import agSelect2 from '../select2'
+import agSelect2 from '../legacy/select2'
 import ngSanitize from 'angular-sanitize'
 import 'angular-drag-and-drop-lists'
 import 'free-jqgrid/js/jquery.jqgrid.src.js'

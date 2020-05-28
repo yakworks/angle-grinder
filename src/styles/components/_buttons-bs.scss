@@ -37,7 +37,7 @@
 .btn {
   // text-transform: uppercase;
   // border: none;
-  box-shadow: $shadow1;
+  // box-shadow: $shadow1;
   // transition: all 0.4s;
   transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1),
   background-color 300ms ease;
@@ -66,6 +66,10 @@
       color: rgba(0, 0, 0, 0.4);
       opacity: 1;
     }
+  }
+
+  &.is-raised {
+    box-shadow: $shadow1;
   }
 }
 

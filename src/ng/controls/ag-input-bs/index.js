@@ -1,9 +1,8 @@
-import AgBaseComponent from '../AgBaseControl'
-import compDefaults from '../utils/componentDirective'
-import scopeDefaults from '../utils/scopeDefaults'
+import AgBaseControl from '../AgBaseControl'
+
 // The bootstrap version
 /* @ngInject */
-class Controller extends AgBaseComponent {
+class Controller extends AgBaseControl {
   // constructor($element) {
   //   super($element)
   // }
@@ -14,7 +13,7 @@ class Controller extends AgBaseComponent {
 }
 
 export default () => ({
-  ...compDefaults,
+  ...AgBaseControl.common.dir,
   template: require('./ag-input.html'),
   controller: Controller,
   require: {
@@ -22,7 +21,7 @@ export default () => ({
     formCtrl: '^form'
   },
   scope: {
-    ...scopeDefaults.formComp,
+    ...AgBaseControl.common.scope,
     type: '@',
     minimumLength: '@',
     maximumLength: '@'
