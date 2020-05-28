@@ -9,7 +9,6 @@ class Controller extends AgBaseControl {
     minimumInputLength: 3,
     closeOnSelect: false,
     useDataObject: true,
-    width: 'element',
     ajax: {
       dataType: 'json',
       quietMillis: 250,
@@ -79,7 +78,6 @@ class Controller extends AgBaseControl {
 }
 export default () => ({
   ...AgBaseControl.common.dir,
-  replace: false,
   template: require('./select-rest.html'),
   controller: Controller,
   require: {
