@@ -14,7 +14,9 @@ $toolbar-dense-icon-button-size: 2.5rem !default;
 $toolbar-dense-control-height: 2rem !default;
 
 //toolbar
-.toolbar{
+.toolbar {
+  z-index: unset;
+
   > .container .toolbar-menu {
     margin-left: -0.75rem;
   }

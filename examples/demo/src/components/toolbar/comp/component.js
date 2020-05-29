@@ -4,18 +4,18 @@ import Swal from 'sweetalert2'
 class controller {
   menuItems = [
     {
-      display: '<strong>Main Action</strong>',
+      display: 'Refresh', icon: 'fa-refresh',
       action: () => Swal.fire('a special event')
     },
     {
-      display: 'Active action',
-      class: 'active',
-      anyExtraInfo: 'can have any extra info needed when selected'
+      display: 'Reset Sort', icon: 'fa-sort',
+    },
+    {
+      display: 'Column Config', icon: 'fa-exchange',
     },
     { divider: true },
-    { display: 'Disabled link', class: 'disabled' },
-    { display: 'Separated link' },
-    { display: 'This will not be added', class: 'hidden' }
+    { display: 'Hide/Show Toggle', icon: 'fa-minus' },
+    { display: 'Expand', icon: 'fa-expand' }
   ]
 
   menuItemClick = function(menuItem, event) {

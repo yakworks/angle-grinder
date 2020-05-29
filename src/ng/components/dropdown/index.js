@@ -28,6 +28,12 @@ class Controller {
       this.menuClick(menuItem, event)
     }
   }
+
+  getIconClass(itemIcon) {
+    if(!itemIcon) return
+    if (itemIcon.startsWith('fa-')) return `fa ${itemIcon}`
+    if (itemIcon.startsWith('mdi-')) return `mdi ${itemIcon}`
+  }
 }
 
 export default () => ({

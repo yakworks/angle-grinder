@@ -7,7 +7,12 @@
   </ag-button>
   <ul class="dropdown-menu {{dropCtrl.menuClass}}">
     <li ng-repeat="menuItem in dropCtrl.menuItems" ng-class="{ divider: menuItem.divider }" class="{{menuItem.class}}">
-      <a ng-if="!menuItem.divider" ng-bind-html="menuItem.display" ng-click="dropCtrl.fireMenuClick(menuItem, $event)"></a>
+      <a ng-if="!menuItem.divider" ng-click="dropCtrl.fireMenuClick(menuItem, $event)">
+        <span ng-if="menuItem.icon" class="icon is-small mr-1">
+          <i class="{{dropCtrl.getIconClass(menuItem.icon)}}"></i>
+        </span>
+        <span ng-bind-html="menuItem.display" ></span>
+      </a>
     </li>
     <!-- <li role="separator" class="divider"></li> -->
   </ul>

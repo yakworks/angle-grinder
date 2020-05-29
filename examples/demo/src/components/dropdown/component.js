@@ -5,10 +5,12 @@ class controller {
   menuItems = [
     {
       display: '<strong>Main Action</strong>',
+      icon: 'fa-thumbs-up',
       action: () => Swal.fire('a special event')
     },
     {
       display: 'Active action',
+      icon: 'mdi-gauge',
       class: 'active',
       anyExtraInfo: 'can have any extra info needed when selected'
     },
