@@ -74,7 +74,6 @@ mixin.factory('massUpdateFormCtrlMixin', [
 
       const params = { ids: selectedIds, data }
       const promise = Resource.massUpdate(params).$promise
-
       return promise.then(function(result) {
         MassUpdateHandler(grid, result)
         grid.clearSelection()

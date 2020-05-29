@@ -174,6 +174,17 @@ const proxy = {
     const newRow = { ...req.body, id: id }
     invoices.push(newRow)
     return res.json(newRow)
+  },
+  'POST /api/invoices/massUpdate': (req, res) => {
+    console.log('invoice massUpdate', req.body)
+    const ids = req.body.ids
+    const data = req.body.data
+    const updData = ids.map(id => {
+      const inv = findById(invoices, id)
+      inv.note = data.note
+      return inv
+    })
+    return res.json({data: updData, errors: []})
   }
 }
 module.exports = (noProxy ? {} : delay(proxy, 100))

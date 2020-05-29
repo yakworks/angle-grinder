@@ -1,6 +1,6 @@
 // import BaseCtrl from 'angle-grinder/src/ng/utils/BaseCtrl'
 import { expose } from 'angle-grinder/src/ng/utils/ngHelpers'
-import { generateData } from './dataGenerator'
+import { generateData } from '../dataGenerator'
 
 /* @ngInject */
 export default class ListCtrl {
@@ -30,7 +30,7 @@ export default class ListCtrl {
     this.DialogCrudCtrlMixin(this.$scope, {
       Resource: Invoices,
       gridName: 'exampleGrid',
-      template: require('./simpleDialog.html')
+      template: require('../simpleDialog.html')
     }
     )
   }

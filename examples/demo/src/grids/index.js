@@ -1,12 +1,9 @@
 import angular from 'angular'
-import GridList from './listCtrl'
-import RestGridList from './restApiGrid/listCtrl'
+import './restApiGrid/component'
+import './grid/component'
 import _ from 'lodash'
 
 const app = angular.module('app')
-
-app.controller('gridExample.ListCtrl', GridList)
-app.controller('gridExample.Rest.ListCtrl', RestGridList)
 
 app.config(['agDateFilterProvider', provider => // set default date format
   provider.setDefaultFormat('MM/DD/YY H:mm a')

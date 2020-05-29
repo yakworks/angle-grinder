@@ -10,12 +10,6 @@ gridz.directive('agGridToolbar', () => ({
   scope: {
     grid: '='
   },
-  controller: [
-    '$scope', '$parse', '$attrs',
-    function($scope, $parse, $attrs) {
-      $scope.parent = $scope.$parent
-    }],
-
   template: `\
 <div class="navbar navbar-default  navbar-toolbar navbar-grid">
         <div class="navbar-inner position-relative with-selected-pointer with-grid-options">
@@ -26,14 +20,14 @@ gridz.directive('agGridToolbar', () => ({
                   <a ag-grid-xls-export="grid"></a>
                 </li>
                 <li>
-                  <a ng-click="massUpdate()" uib-tooltip="Mass Update" >
+                  <a ng-click="$parent.massUpdate()" uib-tooltip="Mass Update" >
                     <i class="fa fa-edit"></i></a>
                 </li>
               </ul>
               <ul class="nav navbar-nav">
                 <li class="divider-vertical"></li>
                 <li>
-                  <a ng-click="parent.createRecord()" ag-new-button ></a>
+                  <a ng-click="$parent.createRecord()" ag-new-button ></a>
                 </li>
               </ul>
               <ng-transclude></ng-transclude>

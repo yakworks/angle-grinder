@@ -13,7 +13,6 @@ const gridz = angular.module(gridzModule)
 gridz.directive('agGridXlsExport', [
   '$window', 'NotificationDialogServ', '$compile', ($window, NotificationDialogServ, $compile) => ({
     restrict: 'A',
-
     link(scope, element, attrs) {
     // Add table symbol if no child is specified
       if (!element[0].firstChild) {
@@ -23,7 +22,7 @@ gridz.directive('agGridXlsExport', [
       return element.on('click', function(event) {
         event.preventDefault()
 
-        const grid = scope.$grid
+        const grid = scope.$grid || scope.grid
 
         if (grid.getSelectedRowIds().length !== 0) {
         // if browser is IE then open new window and show SaveAs dialog, else use dataUri approach

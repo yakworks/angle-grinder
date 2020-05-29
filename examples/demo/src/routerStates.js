@@ -116,15 +116,11 @@ const gridsStates = {
   children: [
     {
       name: 'edit',
-      template: require('./grids/list.html'),
-      controller: 'gridExample.ListCtrl',
-      controllerAs: '$ctrl'
+      component: 'demoGrid'
     },
     {
       name: 'Rest Api',
-      template: require('./grids/list.html'),
-      controller: 'gridExample.Rest.ListCtrl',
-      controllerAs: '$ctrl'
+      component: 'restApiGrid'
     }
   ]
 }
