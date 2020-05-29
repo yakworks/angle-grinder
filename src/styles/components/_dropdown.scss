@@ -1,0 +1,15 @@
+/* ------------------------------------------------------------- */
+/* Dropdown button, merger of bulma and bootstrap
+/* -------------------------------------------------------------- */
+
+@import '~bootstrap/scss/mixins/caret';
+$enable-caret: true !default;
+$caret-width:  .3em !default;
+$caret-vertical-align: $caret-width * .85 !default;
+$caret-spacing:        $caret-width * .85 !default;
+
+.dropdown-toggle {
+  white-space: nowrap;
+  // Generate the caret automatically
+  @include caret();
+}

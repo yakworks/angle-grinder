@@ -6,6 +6,6 @@ class controller {
 }
 
 export default angular
-  .module('ag.demo.toolbarDemo', [])
-  .component('toolbarDemo', { template, controller })
+  .module('ag.demo.toolbarHtmlDemo', [])
+  .component('toolbarHtmlDemo', { template, controller })
   .name;
