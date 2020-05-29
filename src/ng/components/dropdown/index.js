@@ -16,8 +16,8 @@ class Controller {
     if (!this.icon) {
       this.bCls = `${this.bCls} dropdown-toggle`
     }
-    //this.bCls = "foo"
-    //console.log("this.btnCls" , this.bCls )
+    // this.bCls = "foo"
+    // console.log("this.btnCls" , this.bCls )
   }
 
   fireMenuClick(menuItem, event) {
