@@ -1,14 +1,16 @@
 // import BaseCtrl from 'angle-grinder/src/ng/utils/BaseCtrl'
 import { expose } from 'angle-grinder/src/ng/utils/ngHelpers'
+import MassUpdateFormCtrl from "./massUpdate/MassUpdateFormCtrl";
 
 /* @ngInject */
 export default class ListCtrl {
-  constructor($scope, exampleGridOptions, ConfigCache, resourceBuilder, DialogCrudCtrlMixin) {
+  constructor($scope, exampleGridOptions, ConfigCache, resourceBuilder, DialogCrudCtrlMixin, MassUpdateMixin) {
     this.$scope = $scope
     this.exampleGridOptions = exampleGridOptions
     this.ConfigCache = ConfigCache
     this.resourceBuilder = resourceBuilder
     this.DialogCrudCtrlMixin = DialogCrudCtrlMixin
+    this.MassUpdateMixin = MassUpdateMixin
   }
 
   $onInit() {
@@ -19,13 +21,9 @@ export default class ListCtrl {
     this.$scope.data = this.data
 
     const selectedRow = function() { return this.$log.debug('exampleGridOptions selected row:', arguments) }.bind(this)
-    // this.$scope.gridOptions = this.exampleGridOptions({ data: this.data, onSelectRow: selectedRow })
     this.$scope.otherGridOptions = this.exampleGridOptions({ data: this.data, pager: false, datatype: 'local' })
     const Invoices = this.resourceBuilder('/invoices', 'invoice', '/api')
 
-    /* this.$scope.gridOptions = this.exampleGridOptions({
-      path: '/api/invoices'
-    }) */
     const updateGridOptions = (gridOptions) => {
       return { ...gridOptions, path: '/api/invoices' }
     }
@@ -37,9 +35,12 @@ export default class ListCtrl {
       templateUrl: 'simpleDialog.html'
     }
     )
+
+    this.MassUpdateMixin(this.$scope, {
+      template: require('./massUpdate/massUpdateForm.html'),
+      controller: MassUpdateFormCtrl,
+      gridName: 'exampleGrid'
+    })
   }
 
-/*  getSelectedRowsData() {
-    return this.$scope.exampleGridOptions.getSelectedRows()
-  } */
 }
