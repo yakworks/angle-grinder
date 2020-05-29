@@ -11,13 +11,6 @@ class Controller {
   $onInit() {
     this.menuDisplay = this.menuDisplay || DEFAULT_MENU_DISPLAY
     this.color = this.color || 'default'
-    this.bCls = this.buttonClass || ''
-    // if its icon then its an an icon button with no border, set is-icon-button
-    if (!this.icon) {
-      this.bCls = `${this.bCls} dropdown-toggle`
-    }
-    // this.bCls = "foo"
-    // console.log("this.btnCls" , this.bCls )
   }
 
   fireMenuClick(menuItem, event) {
@@ -28,33 +21,19 @@ class Controller {
       this.menuClick(menuItem, event)
     }
   }
-
-  getIconClass(itemIcon) {
-    if (!itemIcon) return
-    if (itemIcon.startsWith('fa-')) return `fa ${itemIcon}`
-    if (itemIcon.startsWith('mdi-')) return `mdi ${itemIcon}`
-  }
 }
 
 export default () => ({
   restrict: 'E',
   replace: true,
-  controllerAs: 'dropCtrl',
+  controllerAs: 'tbCtrl',
   bindToController: true,
   transclude: true,
-  template: require('./dropdown.html'),
+  template: require('./toolbar.html'),
   controller: Controller,
   scope: {
     color: '@',
     menuItems: '<',
-    menuClick: '=',
-    menuClass: '@',
-    buttonClass: '@',
-    iconLeft: '@',
-    iconRight: '@',
-    iconSolo: '@',
-    icon: '@',
-    isLoading: '<',
-    isDisabled: '<'
+    menuClick: '='
   }
 })

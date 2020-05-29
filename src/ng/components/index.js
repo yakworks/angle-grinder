@@ -1,6 +1,7 @@
 import angular from 'angular'
 import agButton from './button'
 import agDropdown from './dropdown'
+import agToolbar from './toolbar'
 import rippleModule from './button/ripple'
 
 const MOD_NAME = 'ag.components'
@@ -11,3 +12,4 @@ angular.module(MOD_NAME, [
 ])
   .directive('agButton', agButton)
   .directive('agDropdown', agDropdown)
+  .directive('agToolbar', agToolbar)

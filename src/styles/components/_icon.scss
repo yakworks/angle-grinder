@@ -24,6 +24,14 @@
     height: $icon-dimensions;
     width: $icon-dimensions;
   }
+
+  &.is-small {
+    height: $icon-dimensions-small;
+    width: $icon-dimensions-small;
+    i.fa, i.mdi {
+      font-size: $icon-dimensions-small;
+    }
+  }
 }
 /* --- "~bulma/sass/elements/icon.sass" copy for refernece --- */
 // $icon-dimensions: 1.5rem !default

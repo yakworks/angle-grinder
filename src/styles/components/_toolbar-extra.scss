@@ -14,8 +14,15 @@ $toolbar-dense-icon-button-size: 2.5rem !default;
 $toolbar-dense-control-height: 2rem !default;
 
 //toolbar
-.toolbar{
+.toolbar {
+  z-index: unset;
 
+  > .container .toolbar-menu {
+    margin-left: -0.75rem;
+  }
+  .toolbar-end, .toolbar-start, .toolbar-menu {
+    align-items: center;
+  }
   .button {
     height: $toolbar-icon-button-size;
     &.is-icon-button {
@@ -44,6 +51,16 @@ $toolbar-dense-control-height: 2rem !default;
     //   }
     // }
   }
+  .selection-pointer {
+    padding: 14px 0px 4px 3px;
+    color: $toolbar-icon-color;
+    > i {
+      transform: rotate(180deg);
+      &:before {
+        content: "\f148";
+      }
+    }
+  }
 
   .divider-vertical {
     height: 2rem;
@@ -59,6 +76,11 @@ $toolbar-dense-control-height: 2rem !default;
   .input.is-search {
     max-width: 8rem;
   }
+
+  .spacer {
+    flex-grow: 1!important;
+  }
+
 
   &.is-dense {
     height: $bar-dense-height;

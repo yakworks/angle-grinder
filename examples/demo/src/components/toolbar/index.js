@@ -1,13 +1,15 @@
-import exampleModule from './example.component'
+import htmlModule from './html'
+import compModule from './comp'
 import './styles.scss'
 
 const template = `
 <div class="toolbarDemoIndex">
-  <toolbar-demo-example></toolbar-demo-example>
+  <toolbar-html-example></toolbar-html-example>
+  <toolbar-comp-example></toolbar-comp-example>
 </div>
 `
 // export module name
 export default angular
-  .module(exampleModule)
+  .module('ag.demo.toolbarDemoIndex', [htmlModule, compModule])
   .component('toolbarDemoIndex', { template })
   .name

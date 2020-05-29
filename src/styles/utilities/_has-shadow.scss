@@ -1,0 +1,76 @@
+/** materials elevations shadows */
+
+@import '../tools/_functions.sass';
+@import '../tools/_elevation.sass';
+
+$shadow-key-umbra-opacity: rgba(0, 0, 0, 0.2) !default;
+$shadow-key-penumbra-opacity: rgba(0, 0, 0, 0.14) !default;
+$shadow-key-ambient-opacity: rgba(0, 0, 0, 0.12) !default;
+
+$shadow-key-umbra: () !default;
+$shadow-key-umbra: map-deep-merge(
+  (
+    0: (0px 0px 0px 0px $shadow-key-umbra-opacity),
+    1: (0px 2px 1px -1px $shadow-key-umbra-opacity),
+    2: (0px 3px 1px -2px $shadow-key-umbra-opacity),
+    3: (0px 3px 3px -2px $shadow-key-umbra-opacity),
+    4: (0px 2px 4px -1px $shadow-key-umbra-opacity),
+    5: (0px 3px 5px -1px $shadow-key-umbra-opacity),
+    6: (0px 3px 5px -1px $shadow-key-umbra-opacity),
+    7: (0px 4px 5px -2px $shadow-key-umbra-opacity),
+    8: (0px 5px 5px -3px $shadow-key-umbra-opacity),
+    9: (0px 5px 6px -3px $shadow-key-umbra-opacity),
+    10: (0px 6px 6px -3px $shadow-key-umbra-opacity),
+    11: (0px 6px 7px -4px $shadow-key-umbra-opacity)
+  ),
+  $shadow-key-umbra
+);
+
+$shadow-key-penumbra: () !default;
+$shadow-key-penumbra: map-deep-merge(
+  (
+    0: (0px 0px 0px 0px $shadow-key-penumbra-opacity),
+    1: (0px 1px 1px 0px $shadow-key-penumbra-opacity),
+    2: (0px 2px 2px 0px $shadow-key-penumbra-opacity),
+    3: (0px 3px 4px 0px $shadow-key-penumbra-opacity),
+    4: (0px 4px 5px 0px $shadow-key-penumbra-opacity),
+    5: (0px 5px 8px 0px $shadow-key-penumbra-opacity),
+    6: (0px 6px 10px 0px $shadow-key-penumbra-opacity),
+    7: (0px 7px 10px 1px $shadow-key-penumbra-opacity),
+    8: (0px 8px 10px 1px $shadow-key-penumbra-opacity),
+    9: (0px 9px 12px 1px $shadow-key-penumbra-opacity),
+    10: (0px 10px 14px 1px $shadow-key-penumbra-opacity),
+    11: (0px 11px 15px 1px $shadow-key-penumbra-opacity),
+    12: (0px 12px 17px 2px $shadow-key-penumbra-opacity)
+  ),
+  $shadow-key-penumbra
+);
+
+$shadow-key-ambient: () !default;
+$shadow-key-ambient: map-deep-merge(
+  (
+    0: (0px 0px 0px 0px $shadow-key-ambient-opacity),
+    1: (0px 1px 3px 0px $shadow-key-ambient-opacity),
+    2: (0px 1px 5px 0px $shadow-key-ambient-opacity),
+    3: (0px 1px 8px 0px $shadow-key-ambient-opacity),
+    4: (0px 1px 10px 0px $shadow-key-ambient-opacity),
+    5: (0px 1px 14px 0px $shadow-key-ambient-opacity),
+    6: (0px 1px 18px 0px $shadow-key-ambient-opacity),
+    7: (0px 2px 16px 1px $shadow-key-ambient-opacity),
+    8: (0px 3px 14px 2px $shadow-key-ambient-opacity),
+    9: (0px 3px 16px 2px $shadow-key-ambient-opacity),
+    10: (0px 4px 18px 3px $shadow-key-ambient-opacity),
+    11: (0px 4px 20px 3px $shadow-key-ambient-opacity),
+    12: (0px 5px 22px 4px $shadow-key-ambient-opacity)
+  ),
+  $shadow-key-ambient
+);
+
+$z: 12;
+@while $z >= 0 {
+  .has-shadow-#{$z} {
+    @include elevation($z, $important: true);
+  }
+
+  $z: $z - 1;
+}
