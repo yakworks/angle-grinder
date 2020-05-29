@@ -14,7 +14,7 @@ gridz.directive('agGridXlsExport', [
   '$window', 'NotificationDialogServ', '$compile', ($window, NotificationDialogServ, $compile) => ({
     restrict: 'A',
     scope: {
-      grid: '=agGridXlsExport', // assign grid instance
+      grid: '=agGridXlsExport' // assign grid instance
     },
     link(scope, element, attrs) {
     // Add table symbol if no child is specified
