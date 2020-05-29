@@ -1,11 +1,13 @@
 import angular from 'angular'
-import dropdownModule from './dropdown/dropdown.module'
-import buttonModule from './button/button.module'
+import agButton from './button'
+import agDropdown from './dropdown'
+import rippleModule from './button/ripple'
 
 const MOD_NAME = 'ag.components'
 export default MOD_NAME
 
 angular.module(MOD_NAME, [
-  dropdownModule,
-  buttonModule
+  rippleModule
 ])
+  .directive('agButton', agButton)
+  .directive('agDropdown', agDropdown)

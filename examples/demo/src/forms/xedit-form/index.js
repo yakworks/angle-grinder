@@ -1,6 +1,5 @@
 import xedit1Module from './xedit1'
-// import agSelectModule from './selects'
-import './styles.scss'
+
 
 const template = `
 <demo-title-crumb></demo-title-crumb>

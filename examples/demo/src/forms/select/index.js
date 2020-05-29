@@ -1,7 +1,5 @@
 import basicModule from './basic'
 import selFromDataModule from './selFromData'
-// import agSelectModule from './selects'
-import './styles.scss'
 
 const template = `
 <div class="mt-3">
