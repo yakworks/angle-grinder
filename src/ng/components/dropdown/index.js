@@ -1,10 +1,9 @@
+// import Log from '../../../utils/Log'
 import _ from 'lodash'
-import template from './dropdown.html'
 
 const DEFAULT_MENU_DISPLAY = 'Action'
 
-// Set up controller
-class controller {
+class Controller {
   constructor($element) {
     this.$element = $element
   }
@@ -24,14 +23,24 @@ class controller {
   }
 }
 
-// Define and export component
-export default {
+export default () => ({
+  restrict: 'E',
+  replace: true,
+  controllerAs: 'dropCtrl',
+  bindToController: true,
   transclude: true,
-  bindings: {
+  template: require('./dropdown.html'),
+  controller: Controller,
+  scope: {
     color: '@',
     menuItems: '<',
-    menuClick: '='
-  },
-  template,
-  controller
-}
+    menuClick: '=',
+    buttonClass: '@',
+    iconLeft: '@',
+    iconRight: '@',
+    iconSolo: '@',
+    icon: '@',
+    isLoading: '<',
+    isDisabled: '<'
+  }
+})

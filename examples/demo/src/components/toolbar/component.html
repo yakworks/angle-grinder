@@ -1,30 +1,43 @@
-<div class="toolbar is-transparent is-raised-2" role="navigation" aria-label="main navigation">
+<div class="toolbar is-light has-shadow is-dense" role="navigation" aria-label="main navigation">
   <div class="container">
-    <div class="toolbar-brand">
-      <sidenav-hamburger></sidenav-hamburger>
-      <div class="toolbar-item">
-        <div class="toolbar-title">{{$ctrl.title}}</div>
-      </div>
-      <a role="button" class="toolbar-burger" aria-label="menu" aria-expanded="false" data-target="toolbar-menu">
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-      </a>
-    </div>
-
     <div id="toolbar-menu" class="toolbar-menu is-static">
-
       <div class="toolbar-start">
-        <!-- start menu items here -->
+        <div class="menu-arrow"><i class="icon-selected-pointer"></i></div>
+        <ag-button icon="fa-edit"></ag-button>
+        <ag-button icon="fa-table"></ag-button>
+        <div class="divider-vertical"></div>
+        <ag-button icon="fa-plus"></ag-button>
       </div>
 
       <div class="toolbar-end">
-        <ag-button icon="fa-comment-o"></ag-button>
-        <ag-button icon="fa-bell-o"></ag-button>
-        <ag-button icon="fa-expand"></ag-button>
-        <button class="button is-icon-button is-avatar" ag-ripple>
-          <letter-icon data="AG" box="circle" char-count="2" size="xs"></letter-icon>
-        </button>
+        <div class="toolbar-item p-0">
+          <input type="text" class="input is-rounded is-search" placeholder="quick search">
+        </div>
+        <ag-button icon="fa-search"></ag-button>
+        <ag-button icon="mdi-dots-vertical"></ag-button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toolbar is-light is-raised-2 is-dense mt-4" role="navigation" aria-label="main navigation">
+  <div class="container">
+    <div id="toolbar-menu" class="toolbar-menu is-static">
+      <div class="toolbar-start">
+        <ag-button icon="fa-bars"></ag-button>
+      </div>
+      <div class="toolbar-end">
+        <div class="toolbar-item">
+          <div class="buttons has-addons">
+            <ag-button ng-model="quickPick.states" uib-btn-radio="'all'">All</ag-button>
+            <ag-button ng-model="quickPick.states" uib-btn-radio="'open'">Open</ag-button>
+            <ag-button ng-model="quickPick.states" uib-btn-radio="'closed'">Closed</ag-button>
+          </div>
+        </div>
+        <div class="toolbar-item p-0">
+          <input type="text" class="input is-rounded is-search" placeholder="quick search">
+        </div>
+        <ag-button icon="fa-search"></ag-button>
         <ag-button icon="mdi-dots-vertical"></ag-button>
       </div>
     </div>

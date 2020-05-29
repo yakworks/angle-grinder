@@ -1,34 +1,57 @@
 <div class="columns">
   <div class="column is-half">
-    <button type="button" class="button is-primary" ag-ripple>
-      Basic
-    </button>
-    <ag-button>Default</ag-button>
-    <ag-button color="primary">Primary</ag-button>
-    <ag-button color="success">Success</ag-button>
-    <ag-button color="info">Info</ag-button>
-    <ag-button color="warning">Warning</ag-button>
-    <ag-button color="danger">Danger</ag-button>
-    <ag-button color="link">Link</ag-button>
-    <ag-button color="light">Light</ag-button>
-    <ag-button color="dark">Dark</ag-button>
-    <ag-button color="white">White</ag-button>
-    <ag-button color="success" icon-left="fa-check">Save</ag-button>
-    <ag-button color="warning" icon-right="fa-plug">Plug</ag-button>
-    <ag-button icon="fa-thumbs-up"></ag-button>
-    <ag-button icon-solo="fa-thumbs-up"></ag-button>
-    <ag-button color="danger" icon="fa-heart"></ag-button>
-    <ag-button color="danger" icon-solo="fa-heart"></ag-button>
+    <div class="buttons">
+      <button type="button" class="button is-primary" ag-ripple>
+        Basic
+      </button>
+      <ag-button>Default</ag-button>
+      <ag-button color="primary">Primary</ag-button>
+      <ag-button color="success">Success</ag-button>
+      <ag-button color="info">Info</ag-button>
+      <ag-button color="warning">Warning</ag-button>
+      <ag-button color="danger">Danger</ag-button>
+      <ag-button color="link">Link</ag-button>
+      <ag-button color="light">Light</ag-button>
+      <ag-button color="dark">Dark</ag-button>
+      <ag-button color="white">White</ag-button>
+      <ag-button color="success" icon-left="fa-check">Save</ag-button>
+      <ag-button color="warning" icon-right="fa-plug">Plug</ag-button>
+      <ag-button icon="fa-thumbs-up"></ag-button>
+      <ag-button icon-solo="fa-thumbs-up"></ag-button>
+      <ag-button color="danger" icon="fa-heart"></ag-button>
+      <ag-button color="danger" icon-solo="fa-heart"></ag-button>
+    </div>
   </div>
   <div class="column is-half">
-    <ag-button is-disabled="true">Disabled</ag-button>
-    <ag-button button-class="is-raised">Raised</ag-button>
-    <ag-button color="primary" button-class="is-raised">Raised</ag-button>
-    <ag-button color="primary" button-class="is-outlined">Outline</ag-button>
-    <ag-button color="danger" button-class="is-outlined">Outline</ag-button>
-    <ag-button color="primary" button-class="is-rounded">Round</ag-button>
-    <ag-button color="info" button-class="is-fullwidth">Full Width</ag-button>
-    <ag-button color="primary" button-click="$ctrl.toggleLoading" is-loading="$ctrl.loading">Toggle Loading</ag-button>
+    <div class="buttons">
+      <ag-button is-disabled="true">Disabled</ag-button>
+      <ag-button button-class="is-raised">Raised</ag-button>
+      <ag-button color="primary" button-class="is-raised">Raised</ag-button>
+      <ag-button color="primary" button-class="is-outlined">Outline</ag-button>
+      <ag-button color="danger" button-class="is-outlined">Outline</ag-button>
+      <ag-button color="primary" button-class="is-rounded">Round</ag-button>
+      <ag-button color="info" button-class="is-fullwidth">Full Width</ag-button>
+      <ag-button color="primary" ng-click="$ctrl.toggleLoading()" is-loading="$ctrl.loading">Toggle Loading
+      </ag-button>
+    </div>
     <pre>loading: {{$ctrl.loading}}</pre>
   </div>
+</div>
+
+<div class="btn-group mb-4">
+  <button class="btn btn-default" ng-model="quickPick.states" uib-btn-radio="'all'">
+    All
+  </button>
+  <button class="btn btn-default" ng-model="quickPick.states" uib-btn-radio="'open'">
+    Open
+  </button>
+  <button class="btn btn-default" ng-model="quickPick.states" uib-btn-radio="'closed'">
+    Closed
+  </button>
+</div>
+
+<div class="buttons has-addons ">
+  <ag-button ng-model="quickPick.states" uib-btn-radio="'all'">All</ag-button>
+  <ag-button ng-model="quickPick.states" uib-btn-radio="'open'">Open</ag-button>
+  <ag-button ng-model="quickPick.states" uib-btn-radio="'closed'">Closed</ag-button>
 </div>

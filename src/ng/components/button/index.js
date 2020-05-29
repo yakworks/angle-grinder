@@ -1,8 +1,6 @@
-import _ from 'lodash'
-import template from './button.html'
+// import Log from '../../../utils/Log'
 
-// Set up controller
-class BtnController {
+class Controller {
   constructor($element, $transclude) {
     this.$element = $element
     // this.$transclude = $transclude
@@ -49,10 +47,15 @@ class BtnController {
   }
 }
 
-// Define and export component
-export default {
+export default () => ({
+  restrict: 'E',
+  replace: true,
+  controllerAs: 'btnCtrl',
+  bindToController: true,
   transclude: true,
-  bindings: {
+  template: require('./button.html'),
+  controller: Controller,
+  scope: {
     buttonClass: '@',
     color: '@',
     iconLeft: '@',
@@ -64,8 +67,5 @@ export default {
     // size: '@',
     buttonClick: '=',
     type: '@'
-  },
-  template,
-  controller: BtnController,
-  controllerAs: 'btnCtrl'
-}
+  }
+})
