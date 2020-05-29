@@ -74,8 +74,7 @@ mixin.factory('massUpdateFormCtrlMixin', [
 
       const params = { ids: selectedIds, data }
       const promise = Resource.massUpdate(params).$promise
-      console.log(promise)
-      promise.then(result => {
+      return promise.then(function(result) {
         MassUpdateHandler(grid, result)
         grid.clearSelection()
         $scope.closeDialog()
