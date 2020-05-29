@@ -30,7 +30,7 @@ class Controller {
   }
 
   getIconClass(itemIcon) {
-    if(!itemIcon) return
+    if (!itemIcon) return
     if (itemIcon.startsWith('fa-')) return `fa ${itemIcon}`
     if (itemIcon.startsWith('mdi-')) return `mdi ${itemIcon}`
   }
