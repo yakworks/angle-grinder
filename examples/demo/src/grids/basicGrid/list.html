@@ -11,11 +11,11 @@
   <div class="ag-panels-row">
     <div class="ag-panel">
      <!-- <ag-grid-toolbar grid="exampleGrid"></ag-grid-toolbar>-->
-      <div ag-grid="gridOptions" ag-grid-name="exampleGrid"></div>
+      <div ag-grid="$ctrl.gridOptions" ag-grid-name="exampleGrid"></div>
     </div>
   </div>
 
   <button class="btn" ng-click="$ctrl.getSelectedRowsData()">Get selected rows data</button>
-  <code>{{selectedRowsData | json}}</code>
 
+  <pre ng-cloak class="mt-4">Selected Rows data: {{$ctrl.selectedRowsData | json}}</pre>
 </div>
