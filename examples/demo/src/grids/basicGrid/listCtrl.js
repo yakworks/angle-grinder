@@ -1,7 +1,7 @@
 // import BaseCtrl from 'angle-grinder/src/ng/utils/BaseCtrl'
 import { expose } from 'angle-grinder/src/ng/utils/ngHelpers'
 import { generateData } from '../dataGenerator'
-import gridOptions from "../gridOptions"
+import exampleGridOptions from "../exampleGridOptions"
 import angular from "angular";
 
 /* @ngInject */
@@ -26,10 +26,25 @@ export default class ListCtrl {
     this.$scope.editRecord = (invoice) => {
       this.showForm(invoice)
     }
+
+    this.$scope.save = (invoice) => {
+      if (invoice.id) {
+        this.$scope.exampleGrid.updateRow(invoice.id, invoice)
+      } else {
+        invoice.id = new Date().getMilliseconds() //random id
+        this.$scope.exampleGrid.addRow(invoice.id, invoice)
+        this.closeDialog()
+      }
+    }
+
+    this.$scope.closeDialog = () => {
+      this.$scope.modal.close()
+    }
+
   }
 
   selectedRow = function() { return this.$log.debug('exampleGridOptions selected row:', arguments) }.bind(this)
-  gridOptions = gridOptions( {data: generateData(100), onSelectRow: this.selectedRow, pager: false, datatype: 'local' })
+  gridOptions = exampleGridOptions( {data: generateData(100), onSelectRow: this.selectedRow, pager: false, datatype: 'local' })
   showForm = (data) => {
     if (data){
       this.$scope.invoice = data
@@ -43,20 +58,6 @@ export default class ListCtrl {
       this.$scope.modal = this.$uibModal.open(
         modalOptions
       )
-  }
-
-  save = (invoice) => {
-    if (invoice.id) {
-      this.$scope.exampleGrid.updateRow(invoice.id, invoice)
-    } else {
-      invoice.id = new Date().getMilliseconds() //random id
-      this.$scope.exampleGrid.addRow(invoice.id, invoice)
-      this.closeDialog()
-    }
-  }
-
-  closeDialog = () => {
-    this.$scope.modal.close()
   }
 
   getSelectedRowsData() {

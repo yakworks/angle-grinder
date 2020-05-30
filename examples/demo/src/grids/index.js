@@ -2,7 +2,7 @@ import angular from 'angular'
 import './restApiGrid/component'
 import './grid/component'
 import './basicGrid/component'
-import './searchForm/component'
+import './commonComponents/searchForm/component'
 
 const app = angular.module('app')
 
@@ -18,7 +18,7 @@ app.config(['agCurrencyFilterProvider', function(provider) {
 ])
 
 app.run(function($templateCache) {
-  $templateCache.put('exampleGridSearchForm.html', require('./searchForm/searchForm.html'))
-  $templateCache.put('formDialog.html', require('./form/formDialog.html'))
+  $templateCache.put('exampleGridSearchForm.html', require('./commonComponents/searchForm/searchForm.html'))
+  $templateCache.put('formDialog.html', require('./commonComponents/form/formDialog.html'))
 })
 
