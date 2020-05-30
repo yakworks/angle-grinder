@@ -1,6 +1,6 @@
 // import BaseCtrl from 'angle-grinder/src/ng/utils/BaseCtrl'
 import { expose } from 'angle-grinder/src/ng/utils/ngHelpers'
-import MassUpdateFormCtrl from "./massUpdate/MassUpdateFormCtrl";
+import MassUpdateFormCtrl from "../commonComponents/massUpdate/MassUpdateFormCtrl";
 
 /* @ngInject */
 export default class ListCtrl {
@@ -16,12 +16,6 @@ export default class ListCtrl {
   $onInit() {
     expose(this, this.$scope, 'getSelectedRowsData', 'editRecord', 'createRecord', 'deleteRecord')
 
-    // initialize the grid with generated data
-    this.data = []
-    this.$scope.data = this.data
-
-    const selectedRow = function() { return this.$log.debug('exampleGridOptions selected row:', arguments) }.bind(this)
-    this.$scope.otherGridOptions = this.exampleGridOptions({ data: this.data, pager: false, datatype: 'local' })
     const Invoices = this.resourceBuilder('/invoices', 'invoice', '/api')
 
     const updateGridOptions = (gridOptions) => {
@@ -37,7 +31,7 @@ export default class ListCtrl {
     )
 
     this.MassUpdateMixin(this.$scope, {
-      template: require('./massUpdate/massUpdateForm.html'),
+      template: require('../commonComponents/massUpdate/massUpdateForm.html'),
       controller: MassUpdateFormCtrl,
       gridName: 'exampleGrid'
     })

@@ -1,4 +1,5 @@
 import exampleGridOptions from "../exampleGridOptions"
+import MassUpdateFormCtrl from "../commonComponents/massUpdate/MassUpdateFormCtrl";
 
 /*
   Example with resource based on grails based endpoint names
@@ -7,10 +8,11 @@ import exampleGridOptions from "../exampleGridOptions"
 
 /* @ngInject */
 export default class ListCtrl {
-  constructor($scope, resourceBuilder, DialogCrudCtrlMixin) {
+  constructor($scope, resourceBuilder, DialogCrudCtrlMixin, MassUpdateMixin) {
     this.$scope = $scope
     this.resourceBuilder = resourceBuilder
     this.DialogCrudCtrlMixin = DialogCrudCtrlMixin
+    this.MassUpdateMixin = MassUpdateMixin
   }
 
   $onInit() {
@@ -20,6 +22,12 @@ export default class ListCtrl {
       Resource: Invoices,
       gridName: 'exampleGrid',
       template: require('../commonComponents/form/formDialog.html')
+    })
+
+    this.MassUpdateMixin(this.$scope, {
+      template: require('../commonComponents/massUpdate/massUpdateForm.html'),
+      controller: MassUpdateFormCtrl,
+      gridName: 'exampleGrid'
     })
   }
 
