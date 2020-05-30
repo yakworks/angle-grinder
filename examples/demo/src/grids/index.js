@@ -17,9 +17,8 @@ app.config(['agCurrencyFilterProvider', function(provider) {
 }
 ])
 
-/*
 app.run(function($templateCache) {
   $templateCache.put('exampleGridSearchForm.html', require('./searchForm/searchForm.html'))
-  $templateCache.put('/simpleDialog.html', require('./simpleDialog.html'))
+  $templateCache.put('formDialog.html', require('./form/formDialog.html'))
 })
-*/
+
