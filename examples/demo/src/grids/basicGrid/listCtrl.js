@@ -13,12 +13,6 @@ export default class ListCtrl {
   }
 
   $onInit() {
-    // initialize the grid with generated data
-    const data = generateData(100)
-
-    const selectedRow = function() { return this.$log.debug('exampleGridOptions selected row:', arguments) }.bind(this)
-    this.gridOptions = gridOptions({ data, onSelectRow: selectedRow, pager: false, datatype: 'local' })
-
     /*!!!!!!!!!!!!!!!! Below are some functions to emulate grid CRUD  that usually is done with mixins for resource !!!!!!!!!!!!!!!!!!!!!!!!!!!   */
     this.$scope.createRecord = ()=> {
       this.showForm()
@@ -34,6 +28,8 @@ export default class ListCtrl {
     }
   }
 
+  selectedRow = function() { return this.$log.debug('exampleGridOptions selected row:', arguments) }.bind(this)
+  gridOptions = gridOptions( {data: generateData(100), onSelectRow: this.selectedRow, pager: false, datatype: 'local' })
   showForm = (data) => {
     if (data){
       this.$scope.invoice = data
