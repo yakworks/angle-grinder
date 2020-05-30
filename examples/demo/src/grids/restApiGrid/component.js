@@ -1,11 +1,10 @@
 import controller from './listCtrl'
-import template from '../grid/list.html'
+import template from './list.html'
 
 export default angular
   .module('app')
   .component('restApiGrid', {
     template,
-    controller,
-    controllerAs: '$ctrl'
+    controller
   })
   .name // .name returns the module name

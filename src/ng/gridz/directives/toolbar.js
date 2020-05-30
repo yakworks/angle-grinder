@@ -38,7 +38,7 @@ gridz.directive('agGridToolbar', () => ({
               </ag-panel-states>
               <ul class="nav navbar-nav pull-right">
                 <li>
-                  <a title="search screen" ng-click="parent.showSearchForm = !parent.showSearchForm" href="">
+                  <a title="search screen" ng-click="$parent.showSearchForm = !$parent.showSearchForm" href="">
                       <i class="fa fa-search"></i>
                   </a>
                 </li>

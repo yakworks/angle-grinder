@@ -1,6 +1,8 @@
-// import BaseCtrl from 'angle-grinder/src/ng/utils/BaseCtrl'
-import { expose } from 'angle-grinder/src/ng/utils/ngHelpers'
 import { generateData } from '../dataGenerator'
+
+/*
+  Example with resource based on grails based endpoint names
+*/
 
 /* @ngInject */
 export default class ListCtrl {
@@ -12,15 +14,6 @@ export default class ListCtrl {
   }
 
   $onInit() {
-    expose(this, this.$scope, 'getSelectedRowsData', 'editRecord', 'createRecord', 'deleteRecord')
-
-    // initialize the grid with generated data
-    this.data = generateData(100)
-    this.$scope.data = this.data
-
-    const selectedRow = function() { return this.$log.debug('exampleGridOptions selected row:', arguments) }.bind(this)
-    // this.$scope.gridOptions = this.exampleGridOptions({ data: this.data, onSelectRow: selectedRow })
-    this.$scope.otherGridOptions = this.exampleGridOptions({ data: this.data, pager: false, datatype: 'local' })
     const Invoices = this.resourceBuilder('/invoices', 'invoice')
 
     this.$scope.gridOptions = this.exampleGridOptions({
@@ -31,11 +24,13 @@ export default class ListCtrl {
       Resource: Invoices,
       gridName: 'exampleGrid',
       template: require('../simpleDialog.html')
+    })
+
+    this.$scope.getSelectedRowsData = () =>{
+      return this.$scope.exampleGridOptions.getSelectedRows()
     }
-    )
+
   }
 
-  getSelectedRowsData() {
-    return this.$scope.exampleGridOptions.getSelectedRows()
-  }
+
 }

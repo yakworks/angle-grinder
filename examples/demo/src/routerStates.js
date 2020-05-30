@@ -109,17 +109,17 @@ const gridsStates = {
   data: {
     icon: 'fa fa-table '
   },
-  // data: { title: 'Grids'},
-  // ncyBreadcrumb: {
-  //   label: 'Grids'
-  // },
   children: [
     {
-      name: 'edit',
+      name: 'Basic Demo Grid',
+      component: 'basicDemoGrid'
+    },
+    {
+      name: 'Demo Grid',
       component: 'demoGrid'
     },
     {
-      name: 'Rest Api',
+      name: 'Rest Api Grid',
       component: 'restApiGrid'
     }
   ]

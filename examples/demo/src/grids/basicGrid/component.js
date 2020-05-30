@@ -3,7 +3,7 @@ import template from './list.html'
 
 export default angular
   .module('app')
-  .component('demoGrid', {
+  .component('basicDemoGrid', {
     template,
     controller
   })
