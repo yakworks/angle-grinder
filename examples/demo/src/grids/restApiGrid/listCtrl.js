@@ -1,12 +1,11 @@
 // import BaseCtrl from 'angle-grinder/src/ng/utils/BaseCtrl'
 import { expose } from 'angle-grinder/src/ng/utils/ngHelpers'
-import MassUpdateFormCtrl from "../commonComponents/massUpdate/MassUpdateFormCtrl";
+import MassUpdateFormCtrl from "../commonComponents/massUpdate/MassUpdateFormCtrl"
 
 /* @ngInject */
 export default class ListCtrl {
-  constructor($scope, exampleGridOptions, ConfigCache, resourceBuilder, DialogCrudCtrlMixin, MassUpdateMixin) {
+  constructor($scope, ConfigCache, resourceBuilder, DialogCrudCtrlMixin, MassUpdateMixin) {
     this.$scope = $scope
-    this.exampleGridOptions = exampleGridOptions
     this.ConfigCache = ConfigCache
     this.resourceBuilder = resourceBuilder
     this.DialogCrudCtrlMixin = DialogCrudCtrlMixin

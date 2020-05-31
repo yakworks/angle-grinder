@@ -116,11 +116,11 @@ const gridsStates = {
     },
     {
       name: 'Demo Grid',
-      component: 'demoGrid'
+      component: 'demoGridExample'
     },
     {
       name: 'Rest Api Grid',
-      component: 'restApiGrid'
+      component: 'restGridExample'
     }
   ]
 }
