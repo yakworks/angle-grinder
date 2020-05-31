@@ -8,6 +8,7 @@ gridz.directive('agGridToolbar', () => ({
   replace: true,
   transclude: true,
   scope: {
+    ctrl: '=',
     grid: '='
   },
   template: `\
@@ -27,7 +28,7 @@ gridz.directive('agGridToolbar', () => ({
               <ul class="nav navbar-nav">
                 <li class="divider-vertical"></li>
                 <li>
-                  <a ng-click="$parent.createRecord()" ag-new-button ></a>
+                  <a ng-click="ctrl.createRecord()" ag-new-button ></a>
                 </li>
               </ul>
               <ng-transclude></ng-transclude>
@@ -38,7 +39,7 @@ gridz.directive('agGridToolbar', () => ({
               </ag-panel-states>
               <ul class="nav navbar-nav pull-right">
                 <li>
-                  <a title="search screen" ng-click="$parent.showSearchForm = !$parent.showSearchForm" href="">
+                  <a title="search screen" ng-click="ctrl.showSearchForm = !ctrl.showSearchForm" href="">
                       <i class="fa fa-search"></i>
                   </a>
                 </li>

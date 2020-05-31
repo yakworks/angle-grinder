@@ -5,6 +5,18 @@ import Log from 'angle-grinder/src/utils/Log'
 
 /* @ngInject */
 export default class ListCtrl {
+  showSearchForm = true
+
+  gridOptions = exampleGridOptions({
+    data: generateData(100),
+    onSelectRow: args => Log.debug('exampleGridOptions selected row:', args),
+    pager: false,
+    datatype: 'local'
+  })
+
+  //getter to get scope reference
+  get grid() { return this.$scope.exampleGrid }
+
   constructor($scope, $uibModal) {
     this.$scope = $scope
     this.$uibModal = $uibModal
@@ -13,7 +25,6 @@ export default class ListCtrl {
   $onInit() {
     let {$scope} = this
     // Below are some functions to emulate grid CRUD  that usually is done with mixins for resource
-    $scope.createRecord = () => { this.showForm({})}
 
     $scope.deleteRecord = (id) => {
       this.grid.removeRow(id)
@@ -25,19 +36,12 @@ export default class ListCtrl {
       this.showForm(data)
     }
   }
-  get grid() { return this.$scope.exampleGrid }
 
-  selectedRow = (args) => {
-    return Log.debug('exampleGridOptions selected row:', args)
+  createRecord(){
+    this.showForm({})
   }
-  gridOptions = exampleGridOptions({
-    data: generateData(100),
-    onSelectRow: this.selectedRow,
-    pager: false,
-    datatype: 'local'
-  })
 
-  showForm = (data) => {
+  showForm(data) {
     this.invoice = data
     const modalOptions = {
       template: require('./form/formDialog.html'),
