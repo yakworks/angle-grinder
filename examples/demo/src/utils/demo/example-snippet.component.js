@@ -1,6 +1,8 @@
+import _ from "lodash";
+
 const template = `
 <div class="example-section mb-4">
-  <div class="example is-vertical">
+  <div class="example" ng-class="$ctrl.direction">
     <div class="example-component" ng-transclude>
     </div>
     <div class="codeview">
@@ -15,6 +17,10 @@ class controller {
   constructor($element, $timeout) {
     this.$element = $element
     this.$timeout = $timeout
+  }
+
+  $onInit() {
+    this.direction = !_.isUndefined(this.isHorizontal) ? 'is-horizontal' : 'is-vertical'
   }
   $postLink() {
     this.$timeout(() => {
@@ -32,7 +38,8 @@ export default {
     rawHtml: '<',
     rawJs: '<',
     rawMd: '<',
-    maxHeight: '@'
+    maxHeight: '@',
+    isHorizontal: '@'
   },
   controller,
   template
