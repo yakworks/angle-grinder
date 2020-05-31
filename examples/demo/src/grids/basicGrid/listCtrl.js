@@ -11,21 +11,21 @@ export default class ListCtrl {
   }
 
   $onInit() {
+    let {$scope} = this
     // Below are some functions to emulate grid CRUD  that usually is done with mixins for resource
-    this.$scope.createRecord = () => {
-      this.showForm()
+    $scope.createRecord = () => { this.showForm({})}
+
+    $scope.deleteRecord = (id) => {
+      this.grid.removeRow(id)
     }
 
-    this.$scope.deleteRecord = (id) => {
-      this.$scope.exampleGrid.removeRow(id)
-    }
-
-    this.$scope.editRecord = (id) => {
-      this.$scope.invoice = this.$scope.exampleGrid.getRowData(id)
-      this.$scope.invoice.customer = {name: this.$scope.invoice['customer.name']}
-      this.showForm()
+    $scope.editRecord = (id) => {
+      let data = this.grid.getRowData(id)
+      invoice.customer = {name: invoice['customer.name']}
+      this.showForm(data)
     }
   }
+  get grid() { return this.$scope.exampleGrid }
 
   selectedRow = (args) => {
     return Log.debug('exampleGridOptions selected row:', args)
@@ -38,32 +38,33 @@ export default class ListCtrl {
   })
 
   showForm = (data) => {
+    this.invoice = data
     const modalOptions = {
       template: require('./form/formDialog.html'),
       keyboard: false, // do not close the dialog with ESC key
       backdrop: 'static', // do not close on click outside of the dialog,
       scope: this.$scope
     }
-    this.$scope.modal = this.$uibModal.open(
+    this.form = this.$uibModal.open(
       modalOptions
     )
   }
 
-  save = (invoice) => {
+  save(invoice){
     if (invoice.id) {
-      this.$scope.exampleGrid.updateRow(invoice.id, invoice)
+      this.grid.updateRow(invoice.id, invoice)
     } else {
       invoice.id = new Date().getMilliseconds() //random id
-      this.$scope.exampleGrid.addRow(invoice.id, invoice)
+      this.grid.addRow(invoice.id, invoice)
     }
     this.closeDialog()
   }
 
-  closeDialog = () => {
-    this.$scope.modal.close()
+  closeDialog(){
+    this.form.close()
   }
 
   getSelectedRowsData() {
-    this.selectedRowsData = this.$scope.exampleGrid.getSelectedRows()
+    this.selectedRowsData = this.grid.getSelectedRows()
   }
 }
