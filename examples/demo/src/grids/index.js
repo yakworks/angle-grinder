@@ -1,7 +1,7 @@
 import angular from 'angular'
 import './restApiGrid/component'
 import './grid/component'
-import './basicGrid/component'
+import './basicGrid/basicGridExample'
 import './commonComponents/searchForm/component'
 
 const app = angular.module('app')

@@ -112,7 +112,7 @@ const gridsStates = {
   children: [
     {
       name: 'Basic Demo Grid',
-      component: 'basicDemoGrid'
+      component: 'basicGridExample'
     },
     {
       name: 'Demo Grid',
