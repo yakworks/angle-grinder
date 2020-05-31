@@ -5,13 +5,13 @@
   <form name="invoiceForm" ag-form is-horizontal>
     <fieldset>
       {{invoice}}
-      <ag-input label="Customer Name" ng-model="invoice.customer.name"
+      <ag-input label="Customer Name" ng-model="$ctrl.invoice.customer.name"
                 minimum-length="2" required >
       </ag-input>
 
-      <ag-input ng-model="invoice.note" required />
+      <ag-input ng-model="$ctrl.invoice.note" required />
 
-      <ag-select ng-model="invoice.complete"
+      <ag-select ng-model="$ctrl.invoice.complete"
                  select-options="{ placeholder: 'select complete', data: ['true', 'false'] }">
       </ag-select>
 
@@ -21,6 +21,6 @@
 </div>
 
 <div class="modal-footer">
-  <button class="btn btn-primary" type="button" ng-click="$ctrl.save(invoice)">Save</button>
+  <button class="btn btn-primary" type="button" ng-click="$ctrl.save($ctrl.invoice)">Save</button>
   <button class="btn btn-warning" type="button" ng-click="$ctrl.closeDialog()">Cancel</button>
 </div>
