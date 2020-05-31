@@ -1,17 +1,17 @@
 // import BaseCtrl from 'angle-grinder/src/ng/utils/BaseCtrl'
 import {generateData} from '../dataGenerator'
 import exampleGridOptions from "../exampleGridOptions"
+import Log from 'angle-grinder/src/utils/Log'
 
 /* @ngInject */
 export default class ListCtrl {
-  constructor($scope, $log, $uibModal) {
+  constructor($scope, $uibModal) {
     this.$scope = $scope
-    this.$log = $log
     this.$uibModal = $uibModal
   }
 
   $onInit() {
-    /*!!!!!!!!!!!!!!!! Below are some functions to emulate grid CRUD  that usually is done with mixins for resource !!!!!!!!!!!!!!!!!!!!!!!!!!!   */
+    // Below are some functions to emulate grid CRUD  that usually is done with mixins for resource
     this.$scope.createRecord = () => {
       this.showForm()
     }
@@ -27,9 +27,9 @@ export default class ListCtrl {
     }
   }
 
-  selectedRow = function () {
-    return this.$log.debug('exampleGridOptions selected row:', arguments)
-  }.bind(this)
+  selectedRow = (args) => {
+    return Log.debug('exampleGridOptions selected row:', args)
+  }
   gridOptions = exampleGridOptions({
     data: generateData(100),
     onSelectRow: this.selectedRow,
