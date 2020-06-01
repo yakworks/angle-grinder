@@ -33,7 +33,7 @@ export default class ListCtrl {
     $scope.editRecord = (id) => {
       let data = this.grid.getRowData(id)
       // FIXME why do we have to do this? for this basic example can't we just bind it?
-      data.customer = {name: inv['customer.name']}
+      data.customer = {name: data['customer.name']}
       this.showForm(data)
     }
   }
