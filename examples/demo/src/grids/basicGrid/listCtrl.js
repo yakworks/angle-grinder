@@ -5,6 +5,7 @@ import Log from 'angle-grinder/src/utils/Log'
 
 /* @ngInject */
 export default class ListCtrl {
+  foo = "bar"
   showSearchForm = true
 
   gridOptions = exampleGridOptions({
@@ -24,7 +25,6 @@ export default class ListCtrl {
 
   $onInit() {
     let {$scope} = this
-    // Below are some functions to emulate grid CRUD  that usually is done with mixins for resource
 
     $scope.deleteRecord = (id) => {
       this.grid.removeRow(id)
@@ -32,7 +32,8 @@ export default class ListCtrl {
 
     $scope.editRecord = (id) => {
       let data = this.grid.getRowData(id)
-      invoice.customer = {name: invoice['customer.name']}
+      // FIXME why do we have to do this? for this basic example can't we just bind it?
+      data.customer = {name: inv['customer.name']}
       this.showForm(data)
     }
   }
@@ -42,7 +43,7 @@ export default class ListCtrl {
   }
 
   showForm(data) {
-    this.invoice = data
+    this.vm = data
     const modalOptions = {
       template: require('./form/formDialog.html'),
       keyboard: false, // do not close the dialog with ESC key
@@ -54,12 +55,12 @@ export default class ListCtrl {
     )
   }
 
-  save(invoice){
-    if (invoice.id) {
-      this.grid.updateRow(invoice.id, invoice)
+  save(data){
+    if (data.id) {
+      this.grid.updateRow(data.id, data)
     } else {
-      invoice.id = new Date().getMilliseconds() //random id
-      this.grid.addRow(invoice.id, invoice)
+      data.id = new Date().getMilliseconds() //random id
+      this.grid.addRow(data.id, data)
     }
     this.closeDialog()
   }
