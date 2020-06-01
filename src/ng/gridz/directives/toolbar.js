@@ -21,14 +21,14 @@ gridz.directive('agGridToolbar', () => ({
                   <a ag-grid-xls-export="grid"></a>
                 </li>
                 <li>
-                  <a ng-click="$parent.massUpdate()" uib-tooltip="Mass Update" >
+                  <a ng-click="actionCtrl.massUpdate()" uib-tooltip="Mass Update" >
                     <i class="fa fa-edit"></i></a>
                 </li>
               </ul>
               <ul class="nav navbar-nav">
                 <li class="divider-vertical"></li>
                 <li>
-                  <a ng-click="ctrl.createRecord()" ag-new-button ></a>
+                  <a ng-click="actionCtrl.createRecord()" ag-new-button ></a>
                 </li>
               </ul>
               <ng-transclude></ng-transclude>
@@ -39,7 +39,7 @@ gridz.directive('agGridToolbar', () => ({
               </ag-panel-states>
               <ul class="nav navbar-nav pull-right">
                 <li>
-                  <a title="search screen" ng-click="ctrl.showSearchForm = !ctrl.showSearchForm" href="">
+                  <a title="search screen" ng-click="actionCtrl.showSearchForm = !actionCtrl.showSearchForm" href="">
                       <i class="fa fa-search"></i>
                   </a>
                 </li>
