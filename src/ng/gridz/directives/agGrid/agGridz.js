@@ -13,6 +13,7 @@ gridz.directive('agGrid', [
 
       // publish agGrid controller to the parent scope
       const alias = attrs.agGridName
+      const actionCtrl = scope[attrs.actionCtrl]
       if (alias) { $parse(alias).assign(scope, gridCtrl) }
       $parse('$grid').assign(scope, gridCtrl) // Make the grid available to controllers as $scope.$grid
 
@@ -168,7 +169,7 @@ gridz.directive('agGrid', [
           }
 
           // initialize actionPopup handler
-          ActionPopupHandler(gridEl, scope, attrs)
+          ActionPopupHandler(gridEl, actionCtrl || scope, attrs)
           return angular.element(element.find('select').wrap('<span class="select-wrapper"></span>'))
         }
 
