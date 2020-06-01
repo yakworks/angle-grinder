@@ -26,17 +26,21 @@ export default class ListCtrl {
   $onInit() {
     let {$scope} = this
 
-    $scope.deleteRecord = (id) => {
-      this.grid.removeRow(id)
-    }
+    // FIXME, get rid of these by passing the actionCtrl to the grid somehow
+    $scope.deleteRecord = (id) => { this.deleteRecord(id) }
+    $scope.editRecord = (id) => { this.editRecord(id) }
+  }
 
-    $scope.editRecord = (id) => {
-      let data = this.grid.getRowData(id)
-      // normally when dealing with rest we would get the object from server based on selected id
-      // here we need to get the "flattened" grid data back into object form
-      data.customer = {name: data['customer.name']}
-      this.showForm(data)
-    }
+  editRecord(id) {
+    let data = this.grid.getRowData(id)
+    // normally when dealing with rest we would get the object from server based on selected id
+    // here we need to get the "flattened" grid data back into object form
+    data.customer = {name: data['customer.name']}
+    this.showForm(data)
+  }
+
+  deleteRecord(id){
+    this.grid.removeRow(id)
   }
 
   createRecord(){
