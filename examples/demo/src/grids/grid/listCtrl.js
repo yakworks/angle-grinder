@@ -26,7 +26,7 @@ export default class ListCtrl {
       template: require('../commonComponents/form/formDialog.html')
     })
 
-    this.MassUpdateMixin($scope, {
+    this.MassUpdateMixin(this, {
       template: require('../commonComponents/massUpdate/massUpdateForm.html'),
       controller: MassUpdateFormCtrl,
       gridName: 'exampleGrid'

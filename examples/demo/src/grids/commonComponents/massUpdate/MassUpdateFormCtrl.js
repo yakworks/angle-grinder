@@ -1,9 +1,8 @@
 /* @ngInject */
 export default class MassUpdateFormCtrl {
   constructor($scope, massUpdateFormCtrlMixin, $uibModalInstance, resourceBuilder, selectedIds, grid, extraParams) {
-
     const Resource = resourceBuilder("/invoices")
-    massUpdateFormCtrlMixin($scope, {
+    massUpdateFormCtrlMixin(this, {
         dialog: $uibModalInstance,
         Resource,
         selectedIds,
