@@ -8,6 +8,8 @@ import MassUpdateFormCtrl from "../commonComponents/massUpdate/MassUpdateFormCtr
 
 /* @ngInject */
 export default class ListCtrl {
+  showSearchForm = true
+
   constructor($scope, resourceBuilder, DialogCrudCtrlMixin, MassUpdateMixin) {
     this.$scope = $scope
     this.resourceBuilder = resourceBuilder
@@ -17,14 +19,14 @@ export default class ListCtrl {
 
   $onInit() {
     const Invoices = this.resourceBuilder('/invoices', 'invoice')
-
-    this.DialogCrudCtrlMixin(this.$scope, {
+    let {$scope} = this
+    this.DialogCrudCtrlMixin($scope, {
       Resource: Invoices,
       gridName: 'exampleGrid',
       template: require('../commonComponents/form/formDialog.html')
     })
 
-    this.MassUpdateMixin(this.$scope, {
+    this.MassUpdateMixin($scope, {
       template: require('../commonComponents/massUpdate/massUpdateForm.html'),
       controller: MassUpdateFormCtrl,
       gridName: 'exampleGrid'
@@ -35,6 +37,9 @@ export default class ListCtrl {
     path: '/invoices'
   })
 
+  createRecord(){
+    this.$scope.createRecord()
+  }
   getSelectedRowsData() {
     this.selectedRowsData = this.$scope.exampleGrid.getSelectedRows()
   }

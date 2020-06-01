@@ -1,8 +1,8 @@
 <div class="container-fluid container-fullw">
-  <grid-search ng-show="showSearchForm" ></grid-search>
+  <grid-search ng-show="$ctrl.showSearchForm" ></grid-search>
   <div class="ag-panels-row">
     <div class="ag-panel">
-      <ag-grid-toolbar grid="exampleGrid"></ag-grid-toolbar>
+      <ag-grid-toolbar grid="exampleGrid" ctrl="$ctrl"></ag-grid-toolbar>
       <div ag-grid="$ctrl.gridOptions" ag-grid-name="exampleGrid"></div>
     </div>
   </div>
