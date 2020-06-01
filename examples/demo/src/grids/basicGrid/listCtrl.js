@@ -32,7 +32,8 @@ export default class ListCtrl {
 
     $scope.editRecord = (id) => {
       let data = this.grid.getRowData(id)
-      // FIXME why do we have to do this? for this basic example can't we just bind it?
+      // normally when dealing with rest we would get the object from server based on selected id
+      // here we need to get the "flattened" grid data back into object form
       data.customer = {name: data['customer.name']}
       this.showForm(data)
     }
