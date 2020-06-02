@@ -10,14 +10,14 @@ class controller {
 
 const template = `
 <example-snippet is-horizontal raw-js='$ctrl.rawJs' raw-html='$ctrl.rawHtml' raw-md='$ctrl.rawMd' >
-  <demo-grid>
+  <legacy-grid>
 </example-snippet>
 `
 
 // export the module name
 export default angular
   .module('app')
-  .component('demoGridExample', {
+  .component('legacyGridExample', {
     template,
     controller
   })

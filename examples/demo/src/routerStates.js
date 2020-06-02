@@ -116,7 +116,7 @@ const gridsStates = {
     },
     {
       name: 'Legacy Demo Grid',
-      component: 'demoGridExample'
+      component: 'legacyGridExample'
     },
     {
       name: 'Rest Demo Grid',

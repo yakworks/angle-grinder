@@ -1,0 +1,25 @@
+<form ag-form ag-search-form="exampleGrid" is-horizontal class="extended-search-form clearfix">
+  <div class="columns">
+    <div class="column is-one-third">
+      <ag-input name="customerName" ng-model="filters.customer.name">
+      </ag-input>
+    </div>
+
+    <!-- ************ column 2 *************-->
+    <div class="column is-one-third">
+      <ag-select name="complete" ng-model="filters.complete"
+                 select-options="{ placeholder: 'select complete', data: ['true', 'false'] }">
+      </ag-select>
+    </div>
+
+    <!-- ************ column 3 *************-->
+    <div class="column is-one-third">
+
+    </div>
+  </div>
+
+  <div class="is-pulled-right">
+    <ag-search-button></ag-search-button>
+    <ag-reset-search-button></ag-reset-search-button>
+  </div>
+</form>

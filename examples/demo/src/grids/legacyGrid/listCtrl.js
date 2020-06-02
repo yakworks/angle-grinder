@@ -37,10 +37,10 @@ export default class ListCtrl {
     path: '/invoices'
   })
 
-  createRecord(){
+  createRecord = () => {
     this.$scope.createRecord()
   }
-  getSelectedRowsData() {
+  getSelectedRowsData = () => {
     this.selectedRowsData = this.$scope.exampleGrid.getSelectedRows()
   }
 }
