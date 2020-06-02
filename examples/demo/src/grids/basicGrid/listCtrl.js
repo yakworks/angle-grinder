@@ -23,15 +23,7 @@ export default class ListCtrl {
     this.$uibModal = $uibModal
   }
 
-  $onInit() {
-    let {$scope} = this
-
-    // FIXME, get rid of these by passing the actionCtrl to the grid somehow
-    $scope.deleteRecord = (id) => { this.deleteRecord(id) }
-    $scope.editRecord = (id) => { this.editRecord(id) }
-  }
-
-  editRecord(id) {
+  editRecord = (id) => {
     let data = this.grid.getRowData(id)
     // normally when dealing with rest we would get the object from server based on selected id
     // here we need to get the "flattened" grid data back into object form
@@ -39,11 +31,11 @@ export default class ListCtrl {
     this.showForm(data)
   }
 
-  deleteRecord(id){
+  deleteRecord = (id) => {
     this.grid.removeRow(id)
   }
 
-  createRecord(){
+  createRecord = () => {
     this.showForm({})
   }
 
@@ -74,7 +66,7 @@ export default class ListCtrl {
     this.form.close()
   }
 
-  getSelectedRowsData() {
+  getSelectedRowsData = () => {
     this.selectedRowsData = this.grid.getSelectedRows()
   }
 }

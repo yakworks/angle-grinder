@@ -8,7 +8,7 @@ gridz.directive('agGridToolbar', () => ({
   replace: true,
   transclude: true,
   scope: {
-    ctrl: '=',
+    actionCtrl: '=',
     grid: '='
   },
   template: `\
@@ -21,7 +21,7 @@ gridz.directive('agGridToolbar', () => ({
                   <a ag-grid-xls-export="grid"></a>
                 </li>
                 <li>
-                  <a ng-click="actionCtrl.massUpdate()" uib-tooltip="Mass Update" >
+                  <a ng-click="massUpdate()" uib-tooltip="Mass Update" >
                     <i class="fa fa-edit"></i></a>
                 </li>
               </ul>
