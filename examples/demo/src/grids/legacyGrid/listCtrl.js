@@ -40,6 +40,10 @@ export default class ListCtrl {
   createRecord = () => {
     this.$scope.createRecord()
   }
+  massUpdate = () => {
+    this.$scope.massUpdate()
+  }
+
   getSelectedRowsData = () => {
     this.selectedRowsData = this.$scope.exampleGrid.getSelectedRows()
   }
