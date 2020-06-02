@@ -1,12 +1,13 @@
 import angular from 'angular'
 import gridzModule from '../../gridzModule'
+import agGridCtrl from './agGridCtrl'
+import Log from 'angle-grinder/src/utils/Log'
 import _ from 'lodash'
 
 const gridz = angular.module(gridzModule)
 
-gridz.directive('agGrid', [
-  '$timeout', '$log', '$parse', '$q', 'agGridDataLoader', 'ActionPopupHandler', 'pathWithContext', 'camelize',
-  function($timeout, $log, $parse, $q, agGridDataLoader, ActionPopupHandler, pathWithContext, camelize) {
+gridz.directive('agGrid',
+  function($timeout, $parse, $q, agGridDataLoader, ActionPopupHandler, pathWithContext, camelize) {
     const link = function(scope, element, attrs, gridCtrl) {
       // find grid placeholder
       const gridEl = element.find('table.gridz')
@@ -28,13 +29,13 @@ gridz.directive('agGrid', [
 
         // kill the grid when the related scope is destroyed
         scope.$on('$destroy', function() {
-          $log.debug('[agGrid] destroying the grid', gridEl)
+          Log.debug('[agGrid] destroying the grid', gridEl)
           return gridEl.jqGrid('GridDestroy')
         })
 
         // Initializes a grid with the given options
         const initializeGrid = function() {
-          $log.debug(`[agGrid] initializing '${alias}' with`, options)
+          Log.debug(`[agGrid] initializing '${alias}' with`, options)
 
           // assign the url
           if (!(!_.isNil(options.url)) && (!_.isNil(options.path))) {
@@ -204,7 +205,7 @@ gridz.directive('agGrid', [
           return initializeGrid()
         } else {
           let unregister
-          $log.info('grid is not visible:', alias)
+          Log.info('grid is not visible:', alias)
 
           // Initialize the grid when the element will be visible
           let timeoutPromise = null
@@ -233,8 +234,8 @@ gridz.directive('agGrid', [
     return {
       restrict: 'A',
 
-      require: 'agGrid',
-      controller: 'AgGridCtrl',
+      // require: 'agGrid',
+      controller: agGridCtrl,
 
       template: `\
 <table class="gridz"></table>
@@ -253,4 +254,4 @@ gridz.directive('agGrid', [
       }
     }
   }
-])
+)
