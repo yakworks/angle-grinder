@@ -39,16 +39,26 @@ export default class ListCtrl {
     this.showForm({})
   }
 
-  showForm(data) {
-    this.vm = data
-    const modalOptions = {
-      template: require('./form/formDialog.html'),
+  modalOptions(template) {
+    return {
+      template: template,
       keyboard: false, // do not close the dialog with ESC key
       backdrop: 'static', // do not close on click outside of the dialog,
       scope: this.$scope
     }
+  }
+
+  massUpdate = () => {
+    // here just for example, does nothing
     this.form = this.$uibModal.open(
-      modalOptions
+      this.modalOptions(require('massUpdate/massUpdateForm.html'))
+    )
+  }
+
+  showForm(data) {
+    this.vm = data
+    this.form = this.$uibModal.open(
+      this.modalOptions(require('./form/formDialog.html'))
     )
   }
 
@@ -62,7 +72,7 @@ export default class ListCtrl {
     this.closeDialog()
   }
 
-  closeDialog(){
+  closeDialog = () => {
     this.form.close()
   }
 
