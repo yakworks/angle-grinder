@@ -51,7 +51,7 @@ export default class ListCtrl {
   massUpdate = () => {
     // here just for example, does nothing
     this.form = this.$uibModal.open(
-      this.modalOptions(require('massUpdate/massUpdateForm.html'))
+      this.modalOptions(require('./massUpdate/massUpdateForm.html'))
     )
   }
 
