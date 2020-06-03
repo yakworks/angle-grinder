@@ -3,6 +3,7 @@ import './restGrid/component'
 import './legacyGrid/component'
 import './basicGrid/basicGridExample'
 import './legacyGrid/demoGridExample'
+import './legacyGrid/searchForm/component'
 import './restGrid/restGridExample'
 import './commonComponents/searchForm/component'
 

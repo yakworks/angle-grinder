@@ -23,9 +23,15 @@ gridz.value('hasSearchFilters', function(filters) {
 gridz.directive('agSearchButton', () => ({
   restrict: 'E',
   replace: true,
+  scope: {
+    filters: '='
+  },
+  link(scope, element, attrs, form) {
+    scope.doAdvancedSearch = scope.advancedSearch || scope.$parent.advancedSearch
+  },
 
   template: `\
-<button type="submit" ng-click="advancedSearch(filters)" ng-disabled="searching" class="btn btn-info">
+<button type="submit" ng-click="doAdvancedSearch(filters)" ng-disabled="searching" class="btn btn-info">
   <i class="fa fa-search fa-inverse"></i> Search<span ng-show="searching">...</span>
 </button>\
 `
@@ -60,7 +66,7 @@ gridz.directive('agSearchForm', ['$log', $log => ({
       // Perform server side grid filtering
       const gridSearch = function(filters) {
         if (filters == null) { filters = {} }
-        const grid = $parse($attrs.agSearchForm)($scope)
+        const grid = $parse($attrs.agSearchForm)($scope) || $parse($attrs.agSearchForm)($scope.$parent.$parent)
 
         if (_.isNil(grid)) {
           $log.warn('[gridz] grid is not defined')
