@@ -1,9 +1,9 @@
-.extended-search-form{
-  padding: 1.25rem 1.5rem;
+.extended-search-form {
+  padding: 1.25rem;
   display: block;
-  margin: 0 0 11px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  margin: 0 0 0.75rem 0;
+  border: 1px solid $border;
+  border-radius: $radius;
 
   &.ng-hide-add,
   &.ng-hide-remove {
