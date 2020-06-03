@@ -7,4 +7,7 @@ export default angular
     template,
     controller
   })
+  .component('basicSearchForm', {
+    template: require('./form/searchForm.html')
+  })
   .name // .name returns the module name

@@ -13,7 +13,7 @@ gridz.factory('ActionPopupHandler', [
         $log.info(`Trigger '${action}' for row '${id}'`)
         return scope[action](id)
         // Not sure why do we need scope.$apply here
-        //return scope.$apply(() => scope[action](id))
+        // return scope.$apply(() => scope[action](id))
       } else {
         return $log.warn(`\`$scope.${action}\` is not defined`)
       }
