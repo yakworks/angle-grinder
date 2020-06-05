@@ -10,6 +10,8 @@ import agSelectRest from './ag-select-rest'
 import agDatepicker from './ag-datepicker'
 import agDatepickerInput from './ag-datepicker/input'
 import agDaterange from './ag-daterange'
+import agAmount from './ag-amount-range/ag-amount'
+import agAmountRange from './ag-amount-range'
 import agValMod from './ag-validation'
 
 // import InputPasswordComponent from './ag-password/input-password.component'
@@ -30,5 +32,7 @@ angular.module(MOD_NAME, [
   .directive('agDatepicker', agDatepicker)
   .directive('agDatepickerInput', agDatepickerInput)
   .directive('agDaterange', agDaterange)
+  .directive('agAmount', agAmount)
+  .directive('agAmountRange', agAmountRange)
   .directive('agInputBs', agInputBs)
   .directive('agSelectRest', agSelectRest)
