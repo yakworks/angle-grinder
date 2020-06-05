@@ -7,12 +7,20 @@ import Log from 'angle-grinder/src/utils/Log'
 export default class ListCtrl {
   foo = "bar"
   showSearchForm = true
+  data = generateData(100)
 
   gridOptions = exampleGridOptions({
-    data: generateData(100),
     onSelectRow: args => Log.debug('exampleGridOptions selected row:', args),
     pager: false,
-    datatype: 'local'
+    datatype: (params, loadingDivSelector) => {
+      Log.debug("params", params)
+      Log.debug("loadingDivSelector", loadingDivSelector)
+      this.grid.addJSONData(this.data)
+      // show/hide the loading animation
+      // const loadingEl = $document.find('#' + $.jgrid.jqID(loadingDivSelector))
+      // loadingEl.show()
+      // loadingEl.hide()
+    }
   })
 
   //getter to get scope reference
