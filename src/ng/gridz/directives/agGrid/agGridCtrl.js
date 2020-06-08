@@ -1,22 +1,18 @@
-import angular from 'angular'
-import gridzModule from '../../gridzModule'
-import BaseCtrl from '../../../utils/BaseCtrl'
 import _ from 'lodash'
 
-const gridz = angular.module(gridzModule)
+export default class AgGridCtrl {
+    highlightClass = 'ui-state-highlight'
 
-// Wrapper for jqGrid public API
-// Controller instance could be published to the parent scope
-// with `ag-grid-name` directive, for example:
-// `<div ag-grid="gridOptions" ag-grid-name="usersGrid"></div>`
-var AgGridCtrl = (function() {
-  let highlightClass
-  AgGridCtrl = class AgGridCtrl extends BaseCtrl {
-    static initClass() {
-      this.register(gridz, 'AgGridCtrl')
-      this.inject('$rootScope', '$element', '$attrs', '$q', 'hasSearchFilters', 'FlattenServ', 'xlsData', 'csvData')
-
-      highlightClass = 'ui-state-highlight'
+    /* @ngInject */
+    constructor($rootScope, $element, $attrs, $q, hasSearchFilters, FlattenServ, xlsData, csvData) {
+      this.$rootScope = $rootScope
+      this.$element = $element
+      this.$attrs = $attrs
+      this.$q = $q
+      this.hasSearchFilters = hasSearchFilters
+      this.FlattenServ = FlattenServ
+      this.csvData = csvData
+      this.xlsData = xlsData
     }
 
     getGridEl() {
@@ -336,17 +332,18 @@ var AgGridCtrl = (function() {
       }
     }
 
+    // FIXME its not clear to me what these are for. The grid seems to works without the highloghtclass workgin
     highlightRow(id) {
       const rowEl = $(this.getGridEl()[0].rows.namedItem(id))
-      if (!rowEl.hasClass(highlightClass)) {
-        return rowEl.addClass(highlightClass)
+      if (!rowEl.hasClass(this.highlightClass)) {
+        return rowEl.addClass(this.highlightClass)
       }
     }
 
     unHighlightRow(id) {
       const rowEl = $(this.getGridEl()[0].rows.namedItem(id))
-      if (rowEl.hasClass(highlightClass)) {
-        return rowEl.removeClass(highlightClass)
+      if (rowEl.hasClass(this.highlightClass)) {
+        return rowEl.removeClass(this.highlightClass)
       }
     }
 
@@ -379,7 +376,4 @@ var AgGridCtrl = (function() {
         return result
       })()
     }
-  }
-  AgGridCtrl.initClass()
-  return AgGridCtrl
-})()
+}

@@ -3,9 +3,11 @@ import template from './list.html'
 
 export default angular
   .module('app')
-  .component('demoGrid', {
+  .component('basicDemoGrid', {
     template,
-    controller,
-    controllerAs: '$ctrl'
+    controller
+  })
+  .component('basicSearchForm', {
+    template: require('./form/searchForm.html')
   })
   .name // .name returns the module name

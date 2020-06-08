@@ -1,4 +1,5 @@
 import agGridz from 'angle-grinder/src/ng/gridz'
+import agGridCtrl from 'angle-grinder//src/ng/gridz/directives/agGrid/agGridCtrl'
 
 describe("module: angleGrinder.gridz, conroller: AgGridCtrl", function() {
 
@@ -18,7 +19,7 @@ describe("module: angleGrinder.gridz, conroller: AgGridCtrl", function() {
   before(function() {
     return this.gridParams = {colModel: [{ name: "foo", hidden: true }, { name: "bar", hidden: false }]};});
 
-  beforeEach(inject(function($controller) {
+  beforeEach(inject(function($rootScope, $q, hasSearchFilters, FlattenServ, xlsData, csvData) {
       jqGridEl = sinon.stub($().jqGrid());
 
       // stub some grid element methods
@@ -35,8 +36,8 @@ describe("module: angleGrinder.gridz, conroller: AgGridCtrl", function() {
       };
 
       // initialzie the controller
-      ctrl = $controller("AgGridCtrl",
-        {$element, $attrs: {agGrid: 'gridId'}});
+      ctrl = new agGridCtrl($rootScope, $element, {agGrid: 'gridId'}, $q, hasSearchFilters, FlattenServ, xlsData, csvData)
+        //$controller(agGridCtrl, {$element, $attrs: {agGrid: 'gridId'}})
 
       return sinon.stub(ctrl, "flashOnSuccess");
     })

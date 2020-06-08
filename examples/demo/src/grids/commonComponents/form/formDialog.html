@@ -2,18 +2,15 @@
   <h3 class="modal-title" id="modal-title">I'm a modal!</h3>
 </div>
 <div class="modal-body" id="modal-body">
-  <form name="invoiceForm" ag-form
-        class="form-horizontal-fixed" autocomplete="off" novalidate>
+  <form name="invoiceForm" ag-form is-horizontal>
     <fieldset>
-      <ag-input name="customerName" ng-model="invoice.customer.name"
+      <ag-input label="Customer Name" ng-model="invoice.customer.name"
                 minimum-length="2" required >
       </ag-input>
 
-      <ag-input type="text" name="note"
-                ng-model="invoice.note" required >
-      </ag-input>
+      <ag-input ng-model="invoice.note" required />
 
-      <ag-select name="complete" ng-model="invoice.complete"
+      <ag-select ng-model="invoice.complete"
                  select-options="{ placeholder: 'select complete', data: ['true', 'false'] }">
       </ag-select>
 

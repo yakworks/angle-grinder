@@ -128,6 +128,17 @@ const proxy = {
     invoices.push(newRow)
     return res.json(newRow)
   },
+  'POST /invoices/massUpdate': (req, res) => {
+    console.log('invoice massUpdate', req.body)
+    const ids = req.body.ids
+    const data = req.body.data
+    const updData = ids.map(id => {
+      const inv = findById(invoices, id)
+      inv.note = data.note
+      return inv
+    })
+    return res.json({data: updData, errors: []})
+  },
 
   'GET /api/invoices/gridOptions': (req, res) => {
     console.log('invoice get grid OPtions', req.params)

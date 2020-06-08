@@ -1,0 +1,16 @@
+<div class="modal-header">
+  <button type="button" class="close" ng-click="$ctrl.closeDialog()" aria-hidden="true">&times;</button>
+  <h3>Mass update</h3>
+</div>
+
+<form name="massUpdateForm" ag-form is-horizontal novalidate class="form-horizontal-fixed"
+      ng-submit="massUpdate(records)">
+  <div class="modal-body">
+    <ag-input ng-model="records.note"></ag-input>
+  </div>
+
+  <div class="modal-footer">
+    <ag-submit-button></ag-submit-button>
+    <ag-cancel-button ng-click="$ctrl.closeDialog()"></ag-cancel-button>
+  </div>
+</form>

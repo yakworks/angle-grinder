@@ -1,0 +1,21 @@
+<div class="container-fluid container-fullw">
+
+  <div ng-show="$ctrl.showSearchForm" class="search-form">
+    <grid-search></grid-search>
+  </div>
+  <div class="ag-panels-row">
+    <div class="ag-panel">
+      <ag-grid-toolbar grid="exampleGrid" ctrl="$ctrl">
+        <ul class="nav navbar-nav">
+          <li>
+            <a ng-click="$ctrl.getSelectedRowsData()" >Get selected rows data</a>
+          </li>
+        </ul>
+      </ag-grid-toolbar>
+      <div ag-grid="$ctrl.gridOptions" ag-grid-name="exampleGrid"></div>
+    </div>
+  </div>
+
+  <pre ng-cloak class="mt-4">Selected Rows data: {{$ctrl.selectedRowsData | json}}</pre>
+
+</div>

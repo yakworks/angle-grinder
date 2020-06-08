@@ -1,18 +1,20 @@
 import angular from 'angular'
 import gridzModule from '../../gridzModule'
+import agGridCtrl from './agGridCtrl'
+import Log from 'angle-grinder/src/utils/Log'
 import _ from 'lodash'
 
 const gridz = angular.module(gridzModule)
 
-gridz.directive('agGrid', [
-  '$timeout', '$log', '$parse', '$q', 'agGridDataLoader', 'ActionPopupHandler', 'pathWithContext', 'camelize',
-  function($timeout, $log, $parse, $q, agGridDataLoader, ActionPopupHandler, pathWithContext, camelize) {
+gridz.directive('agGrid',
+  function($timeout, $parse, $q, agGridDataLoader, ActionPopupHandler, pathWithContext, camelize) {
     const link = function(scope, element, attrs, gridCtrl) {
       // find grid placeholder
       const gridEl = element.find('table.gridz')
 
       // publish agGrid controller to the parent scope
       const alias = attrs.agGridName
+      const actionCtrl = scope[attrs.actionCtrl]
       if (alias) { $parse(alias).assign(scope, gridCtrl) }
       $parse('$grid').assign(scope, gridCtrl) // Make the grid available to controllers as $scope.$grid
 
@@ -27,13 +29,13 @@ gridz.directive('agGrid', [
 
         // kill the grid when the related scope is destroyed
         scope.$on('$destroy', function() {
-          $log.debug('[agGrid] destroying the grid', gridEl)
+          Log.debug('[agGrid] destroying the grid', gridEl)
           return gridEl.jqGrid('GridDestroy')
         })
 
         // Initializes a grid with the given options
         const initializeGrid = function() {
-          $log.debug(`[agGrid] initializing '${alias}' with`, options)
+          Log.debug(`[agGrid] initializing '${alias}' with`, options)
 
           // assign the url
           if (!(!_.isNil(options.url)) && (!_.isNil(options.path))) {
@@ -168,7 +170,7 @@ gridz.directive('agGrid', [
           }
 
           // initialize actionPopup handler
-          ActionPopupHandler(gridEl, scope, attrs)
+          ActionPopupHandler(gridEl, actionCtrl || scope, attrs)
           return angular.element(element.find('select').wrap('<span class="select-wrapper"></span>'))
         }
 
@@ -203,7 +205,7 @@ gridz.directive('agGrid', [
           return initializeGrid()
         } else {
           let unregister
-          $log.info('grid is not visible:', alias)
+          Log.info('grid is not visible:', alias)
 
           // Initialize the grid when the element will be visible
           let timeoutPromise = null
@@ -232,8 +234,8 @@ gridz.directive('agGrid', [
     return {
       restrict: 'A',
 
-      require: 'agGrid',
-      controller: 'AgGridCtrl',
+      // require: 'agGrid',
+      controller: agGridCtrl,
 
       template: `\
 <table class="gridz"></table>
@@ -252,4 +254,4 @@ gridz.directive('agGrid', [
       }
     }
   }
-])
+)

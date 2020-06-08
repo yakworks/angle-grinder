@@ -1,0 +1,25 @@
+<div class="modal-header">
+  <h3 class="modal-title" id="modal-title">I'm a modal!</h3>
+</div>
+<div class="modal-body" id="modal-body">
+  <form name="invoiceForm" ag-form is-horizontal>
+    <fieldset>
+      <ag-input label="Customer Name" ng-model="$ctrl.vm.customer.name"
+                minimum-length="2" required >
+      </ag-input>
+
+      <ag-input ng-model="$ctrl.vm.note" required />
+
+      <ag-select ng-model="$ctrl.vm.complete"
+                 select-options="{ placeholder: 'select complete', data: ['true', 'false'] }">
+      </ag-select>
+
+    </fieldset>
+  </form>
+
+</div>
+
+<div class="modal-footer">
+  <button class="btn btn-primary" type="button" ng-click="$ctrl.save($ctrl.vm)">Save</button>
+  <button class="btn btn-warning" type="button" ng-click="$ctrl.closeDialog()">Cancel</button>
+</div>

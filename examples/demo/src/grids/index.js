@@ -1,7 +1,11 @@
 import angular from 'angular'
-import './restApiGrid/component'
-import './grid/component'
-import _ from 'lodash'
+import './restGrid/component'
+import './legacyGrid/component'
+import './basicGrid/basicGridExample'
+import './legacyGrid/demoGridExample'
+import './legacyGrid/searchForm/component'
+import './restGrid/restGridExample'
+import './commonComponents/searchForm/component'
 
 const app = angular.module('app')
 
@@ -17,61 +21,7 @@ app.config(['agCurrencyFilterProvider', function(provider) {
 ])
 
 app.run(function($templateCache) {
-  $templateCache.put('exampleGridSearchForm.html', require('./templates/searchForm.html'))
-  $templateCache.put('/simpleDialog.html', require('./simpleDialog.html'))
+  $templateCache.put('exampleGridSearchForm.html', require('./commonComponents/searchForm/searchForm.html'))
+  $templateCache.put('formDialog.html', require('./commonComponents/form/formDialog.html'))
 })
 
-export function exampleGridOptions() {
-  const colModel = () => [{
-    name: 'id',
-    label: 'Inv No',
-    width: 60,
-    sorttype: 'int',
-    align: 'right'
-  },
-  {
-    name: 'customer.name',
-    label: 'Customer',
-    formatter: 'editActionLink'
-  },
-  {
-    name: 'invoiceDate',
-    label: 'Date',
-    width: 100,
-    formatter: 'date'
-  },
-  {
-    name: 'amount',
-    label: 'Amount',
-    width: 80,
-    formatter: 'currency'
-  },
-  {
-    name: 'note',
-    label: 'Note'
-  },
-  {
-    name: 'complete',
-    label: 'Complete',
-    width: 80,
-    fixed: true,
-    align: 'center',
-    formatter: 'okIcon'
-  }
-  ]
-
-  return function(options) {
-    if (options == null) {
-      options = {}
-    }
-    const defaults = {
-      colModel: colModel(),
-      sortname: 'id',
-      shrinkToFit: true
-    }
-
-    return _.extend(defaults, options)
-  }
-}
-
-app.factory('exampleGridOptions', exampleGridOptions)
