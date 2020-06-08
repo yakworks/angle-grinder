@@ -38,6 +38,10 @@ const formStates = {
       component: 'datepickerDemoIndex'
     },
     {
+      name: 'tagInput',
+      component: 'tagInputDemoIndex'
+    },
+    {
       name: 'xedit',
       component: 'xeditDemoIndex'
     },

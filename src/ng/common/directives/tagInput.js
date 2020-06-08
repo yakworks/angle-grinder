@@ -13,7 +13,6 @@ angular.module(commonModule).directive('tagInput', () => ({
   },
 
   link($scope, element, attrs, required) {
-    console.log(required)
     $scope.tagVal = ''
     $scope.style = attrs.style || ''
     $scope.placeholder = attrs.placeholder
