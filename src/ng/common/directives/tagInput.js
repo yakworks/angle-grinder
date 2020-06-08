@@ -1,9 +1,9 @@
 import angular from 'angular'
 import commonModule from '../commonModule'
-
+// TODO: refactor to make it component
 angular.module(commonModule).directive('tagInput', () => ({
   restrict: 'E',
-
+  transclude: true,
   scope: {
     tags: '=ngModel'
   },
@@ -12,6 +12,7 @@ angular.module(commonModule).directive('tagInput', () => ({
     $scope.tagVal = ''
     $scope.style = attrs.style || ''
     $scope.placeholder = attrs.placeholder
+    $scope.label = attrs.label
     $scope.defaultWidth = '10px'
 
     $scope.tagArray = function() {
@@ -69,5 +70,23 @@ angular.module(commonModule).directive('tagInput', () => ({
     })
   },
 
-  template: "<div class='tagged-input'><div class='tag' ng-repeat=\"tag in tagArray() track by $index\"><a href='javascript:' class='delete-tag' ng-click='deleteTag($index)'><i class='glyphicon glyphicon-remove'></i></a>{{tag}}</div><input type='text' style='width:  {{inputWidth}}' ng-model='tagVal' placeholder='{{placeholder}}'/></div>"
+  template: `
+<div class="columns">
+<ag-label label-class="is-2">{{label}}</ag-label>
+<div class="field column has-addons mb-0">
+  <div class="control is-expanded">
+    <div class='tagged-input input'>
+      <div class='tag' ng-repeat="tag in tagArray() track by $index">
+      {{tag}}
+        <a href='javascript:' class='delete-tag' ng-click='deleteTag($index)'>
+          <i class="fa fa-times-circle" aria-hidden="true"></i></a>
+      </div>
+      <input type='text' class="input" ng-model='tagVal' placeholder='{{placeholder}}'/>
+    </div>
+  </div>
+  <div class="control" >
+        <ng-transclude class="is-addon"></ng-transclude>
+    </div>
+</div>
+</div>`
 }))
