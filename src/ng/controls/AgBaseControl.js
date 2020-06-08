@@ -95,7 +95,7 @@ AgBaseControl.common = {
     controllerAs: '$ctrl',
     bindToController: true,
     transclude: {
-      'addon': '?a'
+      addon: '?a'
     }
   },
   scope: {
