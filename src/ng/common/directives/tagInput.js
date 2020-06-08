@@ -7,13 +7,19 @@ angular.module(commonModule).directive('tagInput', () => ({
   scope: {
     tags: '=ngModel'
   },
+  require: {
+    ngModelCtrl: 'ngModel',
+    formCtrl: '^agForm'
+  },
 
-  link($scope, element, attrs) {
+  link($scope, element, attrs, required) {
+    console.log(required)
     $scope.tagVal = ''
     $scope.style = attrs.style || ''
     $scope.placeholder = attrs.placeholder
     $scope.label = attrs.label
     $scope.defaultWidth = '10px'
+    $scope.labelClass = required.formCtrl.labelClass
 
     $scope.tagArray = function() {
       if ($scope.tags === undefined) { return [] }
@@ -72,7 +78,7 @@ angular.module(commonModule).directive('tagInput', () => ({
 
   template: `
 <div class="columns">
-<ag-label label-class="is-2">{{label}}</ag-label>
+<ag-label label-class="{{labelClass}}">{{label}}</ag-label>
 <div class="field column has-addons mb-0">
   <div class="control is-expanded">
     <div class='tagged-input input'>
