@@ -173,6 +173,10 @@ table.customer-select-result td:nth-child(1) {
 .tagged-input input:focus {
   box-shadow: none !important;
 }
+.tagged-input.input {
+  min-height: 40px;
+  height: auto;
+}
 .tagged-input .tag {
   padding: 2px 4px;
   line-height: 13px;
