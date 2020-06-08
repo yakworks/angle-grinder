@@ -148,8 +148,8 @@ table.customer-select-result td:nth-child(1) {
 
 /*Tag Input directive*/
 .tagged-input {
-  border: 1px solid #ccc;
-  padding: 4px;
+  border: 1px solid $border;
+  padding: 0;
   display: inline-block;
   width: 100%;
   border-bottom-left-radius: 3px;
@@ -159,38 +159,38 @@ table.customer-select-result td:nth-child(1) {
   -moz-appearance: textfield;
 }
 .tagged-input input {
-  display: inline-block;
-  float: left;
-  height: 24px;
-  padding: 4px!important;
-  border: 0!important;
-  -moz-box-shadow: none !important;
-  -webkit-box-shadow: none !important;
+  //float: left;
+  height: 32px;
+  //padding: 4px !important;
+  border: 0 !important;
   box-shadow: none !important;
-  font-size: 13px;
-  width: 100%;
+  font-size: $size-14;
+  flex-grow: 1;
+  flex-basis: 0;
+  flex-shrink: 1;
+
 }
 .tagged-input input:focus {
   box-shadow: none !important;
 }
 .tagged-input.input {
+  display: flex;
+  flex-wrap: wrap;
   min-height: 40px;
   height: auto;
 }
 .tagged-input .tag {
-  padding: 2px 4px;
-  line-height: 13px;
+  padding: 4px;
+  line-height: 14px;
   color: #555;
-  font-size: 13px;
-  background: #fff;
-  border: solid 1px;
-  border-color: #ccc;
+  font-size: $size-14;
+  // background: #fff;
+  border: solid 1px $border;
   border-radius: 2px ;
   display: inline-block;
   float: left;
   border-radius: 2px;
-  margin: 2px 5px 2px 0px;
-  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;
+  margin: 6px 0px 4px 4px;
 }
 .tagged-input .tag .delete-tag i {
   font-size: 12px;
