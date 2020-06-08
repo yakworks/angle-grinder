@@ -10,7 +10,10 @@ export default class AgBaseControl {
     this.$element = $element
     this.$timeout = $timeout
     this.$scope = $scope
-    this.$transclude = $transclude
+    $transclude((clone) => {
+      // if clone.length then it has inner content/text for button
+      if (clone.length) this.hasTranscluded = true
+    })
   }
 
   initDefaults() {
@@ -41,7 +44,6 @@ export default class AgBaseControl {
         this.ngRequired === '' || this.ngRequired === 'true') {
       this.isRequired = true
     }
-    this.hasAddon = this.$transclude.isSlotFilled('addon')
   }
 
   onInit() {
@@ -70,7 +72,6 @@ export default class AgBaseControl {
         el.parent().prepend(label)
       })
     }
-    console.log(this.$transclude.isSlotFilled('addon'))
   }
 
   onChange() {
@@ -94,9 +95,7 @@ AgBaseControl.common = {
     replace: true,
     controllerAs: '$ctrl',
     bindToController: true,
-    transclude: {
-      addon: '?a'
-    }
+    transclude: true,
   },
   scope: {
     label: '@',

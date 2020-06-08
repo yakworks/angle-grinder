@@ -10,8 +10,8 @@ class Controller extends AgBaseControl {
   datepickerOptions = {}
 
   /* @ngInject */
-  constructor($element, $timeout, $scope, agDate) {
-    super($element, $timeout, $scope)
+  constructor($element, $timeout, $scope, agDate, $transclude) {
+    super($element, $timeout, $scope, $transclude)
     this.agDate = agDate
   }
 
