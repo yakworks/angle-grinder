@@ -30,6 +30,8 @@ class controller {
   }
 
   picklistData = [
+    // { id: 'all', name: 'Select All', disabled: true },
+    { id: 'all', name: 'Select All'},
     { id: 1, name: 'Option 1' },
     { id: 2, name: 'Option 2' },
     { id: 3, name: 'Option 3' }
@@ -56,7 +58,18 @@ class controller {
     useDataObject: true,
     multiple: true,
     closeOnSelect: false,
-    data: this.picklistData
+    data: this.picklistData,
+    formatResult:function(object, container, query){
+      console.log("formatResult", object)
+      if(object.id=='all' || object.id=='clear')
+        return `
+          <span class="all" style="font-size:12px; margin-top:-3px; margin-bottom:-3px;""><i class="fa fa-th"></i> ${object.name} </span> |
+          <span class="clear" style="font-size:12px; margin-top:-3px; margin-bottom:-3px;""><i class="fa fa-times-circle"></i> Clear All</span>
+        `
+        //return '<span style="color:#31708F;font-size:10px;"><i class="fa fa-th"></i> '+object.name+'</span>';
+
+      return object.name;
+    }
   }
 
   changeModelData(){
