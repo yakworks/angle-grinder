@@ -151,12 +151,12 @@ angular.module('ui.select2', [])
                 // Set the view and model value and update the angular template manually for the ajax/multiple select2.
                 elm.bind('change', function(e) {
                   e.stopImmediatePropagation()
-                  console.log("change", e)
-                  if(_.includes(e.val, 'all')){
-                    console.log("includes opts.data", opts.data)
-                    var selected = [];
+                  console.log('change', e)
+                  if (_.includes(e.val, 'all')) {
+                    console.log('includes opts.data', opts.data)
+                    var selected = []
                     opts.data.results.forEach(item => {
-                      if(item.id !== 'all') {
+                      if (item.id !== 'all') {
                         selected[selected.length] = item
                       }
                     })
@@ -216,25 +216,25 @@ angular.module('ui.select2', [])
               log(`Initialize -- isSelectElm:${isSelectElm} isMultiple:${isMultiple}`)
               // console.log("opts for select2",opts)
               // elm.select2(opts)
-              var select2 = elm.select2(opts).data("select2")
+              var select2 = elm.select2(opts).data('select2')
               // important!
               // ngModelCtrl.$render()
               // see https://stackoverflow.com/questions/15636302/attach-click-event-to-element-in-select2-result/15637696#15637696
               select2.onSelect = (function(fn) {
                 return function(data, options) {
-                    var target;
-                    if (options != null) {
-                        target = $(options.target);
-                    }
-                    console.log("onSelect data", data)
-                    console.log("onSelect target", target)
-                    if (target && target.hasClass('info')) {
-                        alert('click!');
-                    } else {
-                        return fn.apply(this, arguments);
-                    }
+                  var target
+                  if (options != null) {
+                    target = $(options.target)
+                  }
+                  console.log('onSelect data', data)
+                  console.log('onSelect target', target)
+                  if (target && target.hasClass('info')) {
+                    alert('click!')
+                  } else {
+                    return fn.apply(this, arguments)
+                  }
                 }
-              })(select2.onSelect);
+              })(select2.onSelect)
 
               if (ngModelCtrl.$modelValue) {
                 updateSelectFromModel()
