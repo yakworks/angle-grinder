@@ -232,7 +232,7 @@ angular.module('ui.select2', [])
               select2.onSelect = (function(fn) {
                 return function(data, options) {
                   var target = (options != null) ? $(options.target) : false
-                  //clear all menu item if showSelectAll is true
+                  // clear all menu item if showSelectAll is true
                   if (target && target.hasClass('clear-all')) {
                     elm.select2(dataVar, [])
                     ngModelCtrl.$setViewValue([])
