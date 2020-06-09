@@ -231,12 +231,8 @@ angular.module('ui.select2', [])
               // see https://stackoverflow.com/questions/15636302/attach-click-event-to-element-in-select2-result/15637696#15637696
               select2.onSelect = (function(fn) {
                 return function(data, options) {
-                  var target
-                  if (options != null) {
-                    target = $(options.target)
-                  }
-                  console.log('onSelect data', data)
-                  console.log('onSelect target', target)
+                  var target = (options != null) ? $(options.target) : false
+                  //clear all menu item if showSelectAll is true
                   if (target && target.hasClass('clear-all')) {
                     elm.select2(dataVar, [])
                     ngModelCtrl.$setViewValue([])
