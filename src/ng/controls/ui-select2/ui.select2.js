@@ -61,7 +61,7 @@ angular.module('ui.select2', [])
               opts.data = dataAttr
             }
 
-            if(opts.multiple) isMultiple = true
+            if (opts.multiple) isMultiple = true
 
             // setup defaults for data
             if (opts.data) {
