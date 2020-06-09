@@ -6,10 +6,11 @@ export default class AgBaseControl {
   isRequired = false
 
   /* @ngInject */
-  constructor($element, $timeout, $scope) {
+  constructor($element, $timeout, $scope, $transclude) {
     this.$element = $element
     this.$timeout = $timeout
     this.$scope = $scope
+    this.$transclude = $transclude
   }
 
   initDefaults() {
@@ -40,6 +41,7 @@ export default class AgBaseControl {
         this.ngRequired === '' || this.ngRequired === 'true') {
       this.isRequired = true
     }
+    this.hasAddon = this.$transclude.isSlotFilled('addon')
   }
 
   onInit() {
@@ -68,6 +70,7 @@ export default class AgBaseControl {
         el.parent().prepend(label)
       })
     }
+    console.log(this.$transclude.isSlotFilled('addon'))
   }
 
   onChange() {
@@ -90,7 +93,10 @@ AgBaseControl.common = {
     restrict: 'E',
     replace: true,
     controllerAs: '$ctrl',
-    bindToController: true
+    bindToController: true,
+    transclude: {
+      addon: '?a'
+    }
   },
   scope: {
     label: '@',

@@ -35,8 +35,8 @@ class Controller extends AgBaseControl {
   }
 
   /* @ngInject */
-  constructor($element, $timeout, pathWithContext, $scope) {
-    super($element,$timeout,$scope)
+  constructor($element, $timeout, pathWithContext, $scope, $transclude) {
+    super($element,$timeout,$scope, $transclude)
     this.pathWithContext = pathWithContext
   }
 
