@@ -159,7 +159,7 @@ angular.module('ui.select2', [])
                         <span class="select-all-menu">
                           <span class="select-all">
                           <i class="fa fa-th"></i> Select All &nbsp; | </span>
-                          <span class="clear-all"> Clear All </span>
+                          <span class="clear-all"> x Clear All </span>
                         </span>
                       `
                     }
@@ -239,6 +239,7 @@ angular.module('ui.select2', [])
                   console.log('onSelect target', target)
                   if (target && target.hasClass('clear-all')) {
                     elm.select2(dataVar, [])
+                    ngModelCtrl.$setViewValue([])
                     elm.select2('close')
                   } else {
                     return fn.apply(this, arguments)
