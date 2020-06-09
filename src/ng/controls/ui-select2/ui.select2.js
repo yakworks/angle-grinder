@@ -60,6 +60,9 @@ angular.module('ui.select2', [])
             if (dataAttr) {
               opts.data = dataAttr
             }
+
+            if(opts.multiple) isMultiple = true
+
             // setup defaults for data
             if (opts.data) {
               // if data is an array then tranform it down to be a property of results
