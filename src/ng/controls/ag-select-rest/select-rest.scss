@@ -10,3 +10,11 @@ table.select-rest-result {
     }
   }
 }
+
+.field.has-addons {
+  .select2-container .select2-choice, .select2-container .select2-choices {
+    border-bottom-right-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+  }
+
+}

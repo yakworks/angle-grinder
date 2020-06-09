@@ -55,7 +55,14 @@
 <ag-select name="fooList" ng-model="$ctrl.vm.fooList" required
   select-options="{useDataObject: true, multiple: true, closeOnSelect: false, data: $ctrl.fooData}">
 </ag-select>
-
+<ag-select ng-model="$ctrl.vm.addonButton"
+  select-options="{useDataObject: true, multiple: true, closeOnSelect: false, data: $ctrl.fooData}">
+  <button class="button is-addon">Test</button>
+</ag-select>
+<ag-select ng-model="$ctrl.vm.addonLink"
+  select-options="{useDataObject: true, multiple: true, closeOnSelect: false, data: $ctrl.fooData}">
+  <a class="button is-addon">Test Link</a>
+</ag-select>
 <div class="form-group">
   <div class="controls">
     <button class="btn btn-primary">Save</button>

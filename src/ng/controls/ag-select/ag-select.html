@@ -1,7 +1,8 @@
 <div class="field" ng-class="{column: $ctrl.isHorizontal}">
   <ag-label label-class="{{$ctrl.labelClass}}" ng-if="$ctrl.label"
       ng-required="{{$ctrl.isRequired}}" >{{$ctrl.label}}</ag-label>
-  <div class="control">
+  <div class="field" ng-class="{'has-addons mb-0': $ctrl.hasTranscluded}">
+    <div class="control" ng-class="{'is-expanded': $ctrl.hasTranscluded}">
     <input
       class="input"
       ng-class="$ctrl.inputClass"
@@ -14,6 +15,10 @@
       ui-select2="$ctrl.selectOptions"
 			>
     </input>
+    </div>
+    <div class="control select-addon" ng-if="$ctrl.hasTranscluded">
+      <ng-transclude ng-transclude-slot="{{$ctrl.transcludeSlot}}"></ng-transclude>
+    </div>
   </div>
   <p class="help" ng-if="$ctrl.hint">{{::$ctrl.hint}}</p>
   <ag-validation-inline for="{{$ctrl.elementId}}" ></ag-validation-inline>
