@@ -335,3 +335,17 @@ $select2-font-size: 14px;
   height: 1px !important;
   position: absolute !important;
 }
+
+// for the select all menu item we add in the angular component
+.select2-results {
+  .select-all-menu {
+    color: $link;
+    font-size: $size-10;
+  }
+  .select-all, .clear-all{
+    padding: 4px;
+  }
+  .select2-highlighted .select-all-menu{
+    color: $white;
+  }
+}

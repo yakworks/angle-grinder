@@ -148,21 +148,43 @@ angular.module('ui.select2', [])
               }
 
               if (!isSelectElm) {
-                // Set the view and model value and update the angular template manually for the ajax/multiple select2.
-                elm.bind('change', function(e) {
-                  e.stopImmediatePropagation()
-                  console.log('change', e)
-                  if (_.includes(e.val, 'all')) {
+                const showSelectAll = opts.showSelectAll
+                if (showSelectAll) {
+                  // if it has opts.showSelectAll the add menu item
+                  opts.data.results = [{ id: 'selectAll' }, ...opts.data.results]
+                  opts.formatResult = function(object, container, query) {
+                    console.log('formatResult', object)
+                    if (object.id === 'selectAll') {
+                      return `
+                        <span class="select-all-menu">
+                          <span class="select-all">
+                          <i class="fa fa-th"></i> Select All &nbsp; | </span>
+                          <span class="clear-all"> Clear All </span>
+                        </span>
+                      `
+                    }
+                    return object.name
+                  }
+                }
+                const handleSelectAll = function(e) {
+                  if (!showSelectAll) return // exit fast if we showSelectAll menu is not enabled
+                  if (_.includes(e.val, 'selectAll')) {
                     console.log('includes opts.data', opts.data)
                     var selected = []
                     opts.data.results.forEach(item => {
-                      if (item.id !== 'all') {
+                      if (item.id !== 'selectAll') {
                         selected[selected.length] = item
                       }
                     })
                     elm.select2(dataVar, selected)
                     elm.select2('close')
                   }
+                }
+                // Set the view and model value and update the angular template manually for the ajax/multiple select2.
+                elm.bind('change', function(e) {
+                  e.stopImmediatePropagation()
+                  // console.log('change', e)
+                  handleSelectAll(e)
                   if (scope.$$phase || scope.$root.$$phase) {
                     return
                   }
@@ -170,20 +192,6 @@ angular.module('ui.select2', [])
                     ngModelCtrl.$setViewValue(elm.select2(dataVar))
                   })
                 })
-                // $('.select2').on("change", function(e) {
-                //   if($.inArray('all', e.val)===0){
-                //       var selected = [];
-                //       $(this).find("option").each(function(i,e){
-                //           if($(e).attr("value")=='all' || $(e).attr("value")=='clear')
-                //               return true;
-
-                //           selected[selected.length]=$(e).attr("value");
-                //       });
-                //       $(this).select2('val',selected);
-                //   }else if($.inArray('clear', e.val)===0){
-                //       $(this).select2('val','');
-                //   }
-                // });
               }
 
               // if its ajax & multiple & closeOnSelect then tweak a hack so it stays open
@@ -219,6 +227,7 @@ angular.module('ui.select2', [])
               var select2 = elm.select2(opts).data('select2')
               // important!
               // ngModelCtrl.$render()
+
               // see https://stackoverflow.com/questions/15636302/attach-click-event-to-element-in-select2-result/15637696#15637696
               select2.onSelect = (function(fn) {
                 return function(data, options) {
@@ -228,8 +237,9 @@ angular.module('ui.select2', [])
                   }
                   console.log('onSelect data', data)
                   console.log('onSelect target', target)
-                  if (target && target.hasClass('info')) {
-                    alert('click!')
+                  if (target && target.hasClass('clear-all')) {
+                    elm.select2(dataVar, [])
+                    elm.select2('close')
                   } else {
                     return fn.apply(this, arguments)
                   }
