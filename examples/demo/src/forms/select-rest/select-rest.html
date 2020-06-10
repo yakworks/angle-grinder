@@ -1,10 +1,8 @@
 <form name="selRestForm" ag-form is-horizontal>
 
-  <ag-input ng-model="$ctrl.vm.inputTest"><a>test</a></ag-input>
-
   <ag-select-rest select-options="{ multiple: true}"
                   ng-model="$ctrl.vm.multipleCountry"
-                  url="/countries/pickList"><a><i class="fa fa-search"></i></a></ag-select-rest>
+                  url="/countries/pickList"></ag-select-rest>
   <ag-select-rest ng-model="$ctrl.vm.country"
                   url="/countries/pickList"/>
 
@@ -16,5 +14,15 @@
   <ag-select-rest select-options="$ctrl.userSelectOpts"
                   ng-model="$ctrl.vm.users"
                   url="/users"/>
+
+  <ag-select-rest select-options="$ctrl.userSelectOpts" hint="this is a hint"
+                  ng-model="$ctrl.vm.addonButton"
+                  url="/users"><ag-button icon-solo="fa-search" class="is-addon has-text-primary"></ag-button>
+  </ag-select-rest>
+  <ag-select-rest select-options="$ctrl.userSelectOpts"
+                  ng-model="$ctrl.vm.addonLink"
+                  url="/users">
+    <a class="button is-addon">Test Link</a>
+  </ag-select-rest>
 </form>
 <pre ng-cloak class="mt-4">model: {{$ctrl.vm | json}}</pre>

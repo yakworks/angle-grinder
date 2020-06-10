@@ -21,6 +21,13 @@
     <ag-input class="is-3" label="" ng-model="$ctrl.vm.address.zipCode" ></ag-input>
   </div>
   <ag-input label="This is a long label" ng-model="$ctrl.vm.website" ></ag-input>
+  <ag-input ng-model="$ctrl.vm.addonButton">
+    <ag-button icon-solo="fa-heart" class="has-text-danger is-addon"></ag-button>
+  </ag-input>
+  <ag-input ng-model="$ctrl.vm.addonButton">
+    <ag-button color="primary" icon-left="fa-search">Search</ag-button>
+  </ag-input>
+  <ag-input ng-model="$ctrl.vm.addonLink" ><a class="button is-addon has-text-link">Test Link</a></ag-input>
   <div class="field is-grouped is-grouped-centered mt-4">
     <div class="control">
       <ag-button type="submit" color="primary">Submit</ag-button>

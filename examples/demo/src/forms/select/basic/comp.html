@@ -37,7 +37,7 @@
 </div>
 
 <p>using ag-select component</p>
-<ag-select name="agSelect" ng-model="$ctrl.vm.agColor" placeholder="select a color"
+<ag-select name="agSelect" ng-model="$ctrl.vm.agColor" placeholder="select a color" hint="this is a hint"
   select-options="{ data: $ctrl.colorData }">
 </ag-select>
 <p>useDataObject:false, its true by default on multiple</p>
@@ -56,7 +56,14 @@
 <ag-select ng-model="$ctrl.vm.fooList" required hint="showSelectAll:true"
   select-options="{multiple: true, closeOnSelect: false, data: $ctrl.fooData, showSelectAll:true}">
 </ag-select>
-
+<ag-select ng-model="$ctrl.vm.addonButton" hint="this is a hint"
+  select-options="{useDataObject: true, multiple: true, closeOnSelect: false, data: $ctrl.fooData}">
+  <ag-button icon-left="fa-search" color="addon">Search</ag-button>
+</ag-select>
+<ag-select ng-model="$ctrl.vm.addonLink"
+  select-options="{useDataObject: true, multiple: true, closeOnSelect: false, data: $ctrl.fooData}">
+  <a class="button is-addon">Test Link</a>
+</ag-select>
 <div class="form-group">
   <div class="controls">
     <button class="btn btn-primary">Save</button>
