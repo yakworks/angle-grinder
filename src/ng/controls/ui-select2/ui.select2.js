@@ -60,6 +60,9 @@ angular.module('ui.select2', [])
             if (dataAttr) {
               opts.data = dataAttr
             }
+
+            if (opts.multiple) isMultiple = true
+
             // setup defaults for data
             if (opts.data) {
               // if data is an array then tranform it down to be a property of results
@@ -148,9 +151,43 @@ angular.module('ui.select2', [])
               }
 
               if (!isSelectElm) {
+                const showSelectAll = opts.showSelectAll
+                if (showSelectAll) {
+                  // if it has opts.showSelectAll the add menu item
+                  opts.data.results = [{ id: 'selectAll' }, ...opts.data.results]
+                  opts.formatResult = function(object, container, query) {
+                    console.log('formatResult', object)
+                    if (object.id === 'selectAll') {
+                      return `
+                        <span class="select-all-menu">
+                          <span class="select-all">
+                          <i class="fa fa-th"></i> Select All &nbsp; | </span>
+                          <span class="clear-all"> x Clear All </span>
+                        </span>
+                      `
+                    }
+                    return object.name
+                  }
+                }
+                const handleSelectAll = function(e) {
+                  if (!showSelectAll) return // exit fast if we showSelectAll menu is not enabled
+                  if (_.includes(e.val, 'selectAll')) {
+                    console.log('includes opts.data', opts.data)
+                    var selected = []
+                    opts.data.results.forEach(item => {
+                      if (item.id !== 'selectAll') {
+                        selected[selected.length] = item
+                      }
+                    })
+                    elm.select2(dataVar, selected)
+                    elm.select2('close')
+                  }
+                }
                 // Set the view and model value and update the angular template manually for the ajax/multiple select2.
                 elm.bind('change', function(e) {
                   e.stopImmediatePropagation()
+                  // console.log('change', e)
+                  handleSelectAll(e)
                   if (scope.$$phase || scope.$root.$$phase) {
                     return
                   }
@@ -159,6 +196,7 @@ angular.module('ui.select2', [])
                   })
                 })
               }
+
               // if its ajax & multiple & closeOnSelect then tweak a hack so it stays open
               // from https://github.com/select2/select2/issues/2264#issuecomment-213003190
               // if (opts.multiple && opts.ajax && !opts.closeOnSelect) {
@@ -188,9 +226,25 @@ angular.module('ui.select2', [])
             $timeout(function() {
               log(`Initialize -- isSelectElm:${isSelectElm} isMultiple:${isMultiple}`)
               // console.log("opts for select2",opts)
-              elm.select2(opts)
+              // elm.select2(opts)
+              var select2 = elm.select2(opts).data('select2')
               // important!
               // ngModelCtrl.$render()
+
+              // see https://stackoverflow.com/questions/15636302/attach-click-event-to-element-in-select2-result/15637696#15637696
+              select2.onSelect = (function(fn) {
+                return function(data, options) {
+                  var target = (options != null) ? $(options.target) : false
+                  // clear all menu item if showSelectAll is true
+                  if (target && target.hasClass('clear-all')) {
+                    elm.select2(dataVar, [])
+                    ngModelCtrl.$setViewValue([])
+                    elm.select2('close')
+                  } else {
+                    return fn.apply(this, arguments)
+                  }
+                }
+              })(select2.onSelect)
 
               if (ngModelCtrl.$modelValue) {
                 updateSelectFromModel()

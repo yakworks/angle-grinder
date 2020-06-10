@@ -40,7 +40,7 @@
 <ag-select name="agSelect" ng-model="$ctrl.vm.agColor" placeholder="select a color" hint="this is a hint"
   select-options="{ data: $ctrl.colorData }">
 </ag-select>
-<p>useDataObject:true by default on multiple, set to false here</p>
+<p>useDataObject:false, its true by default on multiple</p>
 <ag-select name="agSelect" label="Multi" ng-model="$ctrl.vm.agColors"
   select-options="{ multiple: true, closeOnSelect: false, useDataObject:false, data: $ctrl.colorData}">
 </ag-select>
@@ -48,12 +48,13 @@
 <ag-select name="fooId" ng-model="$ctrl.vm.fooId" required
   select-options="{data: $ctrl.fooData}">
 </ag-select>
-<p>using ag-select component useDataObject:true</p>
-<ag-select name="foo" ng-model="$ctrl.vm.foo" required
-  select-options="{useDataObject: true, data: $ctrl.fooData}">
+<p>using ag-select component useDataObject:true on single select</p>
+<ag-select ng-model="$ctrl.vm.foo" required
+  select-options="{ useDataObject:true, data: $ctrl.fooData}">
 </ag-select>
-<ag-select name="fooList" ng-model="$ctrl.vm.fooList" required
-  select-options="{useDataObject: true, multiple: true, closeOnSelect: false, data: $ctrl.fooData}">
+<p>useDataObject:true by default on multiple </p>
+<ag-select ng-model="$ctrl.vm.fooList" required hint="showSelectAll:true"
+  select-options="{multiple: true, closeOnSelect: false, data: $ctrl.fooData, showSelectAll:true}">
 </ag-select>
 <ag-select ng-model="$ctrl.vm.addonButton" hint="this is a hint"
   select-options="{useDataObject: true, multiple: true, closeOnSelect: false, data: $ctrl.fooData}">

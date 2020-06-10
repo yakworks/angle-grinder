@@ -56,7 +56,8 @@ class controller {
     useDataObject: true,
     multiple: true,
     closeOnSelect: false,
-    data: this.picklistData
+    data: this.picklistData,
+    showSelectAll: true
   }
 
   changeModelData(){
