@@ -2,7 +2,7 @@
   <ag-label label-class="{{$ctrl.labelClass}}" ng-if="$ctrl.label"
             ng-required="{{$ctrl.isRequired}}">{{$ctrl.label}}
   </ag-label>
-  <div class="field" ng-class="{'has-addons mb-0': $ctrl.hasTranscluded}">
+  <div class="field mb-0" ng-class="{'has-addons': $ctrl.hasTranscluded}">
     <div class="control" ng-class="{'is-expanded': $ctrl.hasTranscluded}">
       <input
         class="input"
@@ -21,8 +21,7 @@
         maxlength="{{::$ctrl.maximumLength}}"
       >
     </div>
-    <div class="control" ng-if="$ctrl.hasTranscluded">
-      <ng-transclude ng-transclude-slot="{{$ctrl.transcludeSlot}}"></ng-transclude>
+    <div class="control" ng-if="$ctrl.hasTranscluded" ng-transclude>
     </div>
   </div>
   <p class="help" ng-if="$ctrl.hint">{{::$ctrl.hint}}</p>

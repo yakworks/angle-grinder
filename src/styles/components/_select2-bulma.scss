@@ -79,7 +79,7 @@ $select2-font-size: 14px;
   .select2-choices {
     background: none;
     padding: 0;
-    //height: 2.5em !important;
+    height: $control-height !important;
 
     .select2-search-choice {
       margin-top: 5px;
@@ -90,7 +90,7 @@ $select2-font-size: 14px;
       color: $button-color;
       background: $button-background-color;
       border-color: $button-border-color;
-      border-radius: 8px;
+      border-radius: $radius;
       box-shadow: none;
     }
     .select2-search-choice-focus {
@@ -334,4 +334,13 @@ $select2-font-size: 14px;
   width: 1px !important;
   height: 1px !important;
   position: absolute !important;
+}
+
+// bulma field addons
+.field.has-addons {
+  .select2-container .select2-choice,
+  .select2-container .select2-choices {
+    border-bottom-right-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+  }
 }

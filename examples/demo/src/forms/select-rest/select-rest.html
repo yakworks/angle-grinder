@@ -15,9 +15,9 @@
                   ng-model="$ctrl.vm.users"
                   url="/users"/>
 
-  <ag-select-rest select-options="$ctrl.userSelectOpts"
+  <ag-select-rest select-options="$ctrl.userSelectOpts" hint="this is a hint"
                   ng-model="$ctrl.vm.addonButton"
-                  url="/users"><button class="button is-addon">Test</button>
+                  url="/users"><ag-button icon-solo="fa-search" class="is-addon has-text-primary"></ag-button>
   </ag-select-rest>
   <ag-select-rest select-options="$ctrl.userSelectOpts"
                   ng-model="$ctrl.vm.addonLink"

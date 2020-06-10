@@ -9,7 +9,9 @@
   </ag-input>
   <ag-input ng-model="$ctrl.vm.website" ng-required="false"></ag-input>
   <ag-input ng-model="$ctrl.vm.address" ></ag-input>
-  <ag-input ng-model="$ctrl.vm.addonButton" ><button class="button is-addon">Test</button></ag-input>
+  <ag-input ng-model="$ctrl.vm.addonButton" >
+    <ag-button icon-solo="fa-thumbs-up" color="addon"></ag-button>
+  </ag-input>
   <ag-input ng-model="$ctrl.vm.addonLink" ><a class="button is-addon">Test Link</a></ag-input>
 
   <legend>using columns</legend>
