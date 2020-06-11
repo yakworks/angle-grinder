@@ -80,13 +80,11 @@ angular.module(commonModule).directive('tagInput', () => ({
 <ag-label label-class="{{labelClass}}">{{label}}</ag-label>
 <div class="field column has-addons mb-0">
   <div class="control is-expanded">
-    <div class='tagged-input input' >
-      <div class="tags">
-        <span class="tag is-light" ng-repeat="tag in tagArray() track by $index">
-          {{tag}}
-          <button class="delete is-small" ng-click='deleteTag($index)'></button>
-        </span>
-      </div>
+    <div class='tag-input input tags' >
+      <span class="tag is-light" ng-repeat="tag in tagArray() track by $index">
+        {{tag}}
+        <button class="delete is-small" ng-click='deleteTag($index)'></button>
+      </span>
       <input type='text' class="input" ng-model='tagVal' placeholder='{{placeholder}}'/>
     </div>
   </div>

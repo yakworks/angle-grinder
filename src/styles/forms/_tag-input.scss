@@ -1,0 +1,39 @@
+
+.tag-input {
+  //override inputs for div
+  &.input {
+    padding-top: 4px;
+    padding-bottom: 0;
+    display: flex;
+    flex-wrap: wrap;
+    min-height: $input-height;
+    height: auto; //set to auto so it can wrap and grow for lots of tags
+
+    &:focus-within {
+      border-color: $input-focus-border-color;
+      box-shadow: $input-focus-box-shadow-size $input-focus-box-shadow-color;
+    }
+  }
+  // overrides for default bulma tags
+  &.tags .tag {
+    margin-bottom: 4px;
+    font-size: .875rem;
+  }
+
+  // inner input, overrides
+  input {
+    //float: left;
+    height: $input-height * 0.75;
+    padding: 0;
+    padding-bottom: 4px;
+    border: 0 !important;
+    box-shadow: none !important;
+    font-size: $size-14;
+    flex-grow: 1;
+    flex-basis: 0;
+    flex-shrink: 1;
+    &:focus {
+      box-shadow: none !important;
+    }
+  }
+}
