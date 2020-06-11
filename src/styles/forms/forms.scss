@@ -179,27 +179,27 @@ table.customer-select-result td:nth-child(1) {
   min-height: 40px;
   height: auto;
 }
-.tagged-input .tag {
-  padding: 4px;
-  line-height: 14px;
-  color: #555;
-  font-size: $size-14;
-  // background: #fff;
-  border: solid 1px $border;
-  border-radius: 2px ;
-  display: inline-block;
-  float: left;
-  border-radius: 2px;
-  margin: 6px 0px 4px 4px;
-}
-.tagged-input .tag .delete-tag i {
-  font-size: 12px;
-  margin-right: 4px;
-  color: rgba(128, 128, 128, 0.78)
-}
-.tagged-input .tag .delete-tag i:hover {
-  color: rgba(128, 128, 128, 1)
-}
+// .tagged-input .tag {
+//   padding: 4px;
+//   line-height: 14px;
+//   color: #555;
+//   font-size: $size-14;
+//   // background: #fff;
+//   border: solid 1px $border;
+//   border-radius: 2px ;
+//   display: inline-block;
+//   float: left;
+//   border-radius: 2px;
+//   margin: 6px 0px 4px 4px;
+// }
+// .tagged-input .tag .delete-tag i {
+//   font-size: 12px;
+//   margin-right: 4px;
+//   color: rgba(128, 128, 128, 0.78)
+// }
+// .tagged-input .tag .delete-tag i:hover {
+//   color: rgba(128, 128, 128, 1)
+// }
 /*Tag Input directive styles end*/
 
 .check-mark-false {

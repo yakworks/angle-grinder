@@ -36,8 +36,12 @@ $size-large: $size-24 !default // 24px
 
 $size-default: $size-16 !default // 16px
 
+$light  : $white-ter !default;
+$light-invert    : findColorInvert($light) !default;
+// Lists and maps
+$custom-colors: ("lighter": ($white-bis, $light-invert)) !default
 //******** Bulmas derived-variables.sass ***********/
-@import "~bulma/sass/utilities/derived-variables.sass";
+@import "~bulma/sass/utilities/derived-variables.scss";
 
 //**** POST depends on derived-variables.sass ****/
 $text-color: $text !default;

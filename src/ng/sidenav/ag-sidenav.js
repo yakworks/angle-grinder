@@ -92,6 +92,8 @@ class controller {
   $postLink() {
     // make sure the submenu is shown for active menu item
     this.$timeout(function() {
+      //add listener to fire resize event for gridz after open/closed transition is finished
+      $(SIDENAV_MENU_LIST_ITEM).on("transitionend", () => window.dispatchEvent(new Event('resize')))
       openSidenav()
     })
   }

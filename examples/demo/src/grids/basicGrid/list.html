@@ -1,17 +1,40 @@
-<div class="container-fluid container-fullw">
+<div>
   <basic-search-form ng-show="$ctrl.showSearchForm"></basic-search-form>
-  <div class="ag-panels-row">
-    <div class="ag-panel">
-      <ag-grid-toolbar grid="exampleGrid" action-ctrl="$ctrl">
-        <ul class="nav navbar-nav">
-          <li>
-            <a ng-click="$ctrl.getSelectedRowsData()" >Get selected rows data</a>
-          </li>
-        </ul>
-      </ag-grid-toolbar>
-      <div ag-grid="$ctrl.gridOptions" ag-grid-name="exampleGrid" action-ctrl="$ctrl"></div>
+  <ag-grid-toolbar grid="exampleGrid" action-ctrl="$ctrl">
+    <ul class="nav navbar-nav">
+      <li>
+        <a ng-click="$ctrl.getSelectedRowsData()" >Get selected rows data</a>
+      </li>
+    </ul>
+  </ag-grid-toolbar>
+
+  <ag-toolbar class="is-lighter is-dense has-border">
+    <div class="selection-pointer"><i class="fa"></i></div>
+    <ag-button icon="fa-edit" uib-tooltip="Mass Update" ng-click="$ctrl.massUpdate()"></ag-button>
+    <ag-button icon="fa-table" uib-tooltip="Export to Excel" ng-click="$ctrl.excelExport()"></ag-button>
+    <div class="divider-vertical"></div>
+    <ag-button icon="fa-plus" uib-tooltip="Create New" ng-click="$ctrl.createRecord()"></ag-button>
+    <div class="spacer"></div>
+    <div class="toolbar-item">
+      <div class="buttons has-addons">
+        <ag-button ng-model="quickPick.states" uib-btn-radio="'all'">All</ag-button>
+        <ag-button ng-model="quickPick.states" uib-btn-radio="'open'">Open</ag-button>
+        <ag-button ng-model="quickPick.states" uib-btn-radio="'closed'">Closed</ag-button>
+      </div>
     </div>
-  </div>
+    <div class="toolbar-item p-0">
+      <input type="text" class="input is-rounded is-search" placeholder="quick search">
+    </div>
+    <ag-button icon="fa-search" ng-click="$ctrl.showSearchForm = !$ctrl.showSearchForm"></ag-button>
+    <ag-dropdown
+      menu-items="$ctrl.menuItems"
+      menu-click="$ctrl.menuItemClick"
+      menu-class="dropdown-menu-right"
+      icon="mdi-dots-vertical">
+    </ag-dropdown>
+  </ag-toolbar>
+
+  <div ag-grid="$ctrl.gridOptions" ag-grid-name="exampleGrid" action-ctrl="$ctrl"></div>
 
   <pre ng-cloak class="mt-4">Selected Rows data: {{$ctrl.selectedRowsData | json}}</pre>
 </div>

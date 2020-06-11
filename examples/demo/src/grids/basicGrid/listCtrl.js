@@ -31,7 +31,7 @@ export default class ListCtrl {
     this.$uibModal = $uibModal
   }
 
-  editRecord = (id) => {
+  editRecord(id) {
     let data = this.grid.getRowData(id)
     // normally when dealing with rest we would get the object from server based on selected id
     // here we need to get the "flattened" grid data back into object form
@@ -39,11 +39,11 @@ export default class ListCtrl {
     this.showForm(data)
   }
 
-  deleteRecord = (id) => {
+  deleteRecord(id){
     this.grid.removeRow(id)
   }
 
-  createRecord = () => {
+  createRecord() {
     this.showForm({})
   }
 
@@ -56,7 +56,7 @@ export default class ListCtrl {
     }
   }
 
-  massUpdate = () => {
+  massUpdate() {
     // here just for example, does nothing
     this.form = this.$uibModal.open(
       this.modalOptions(require('./form/massUpdateForm.html'))
@@ -84,7 +84,7 @@ export default class ListCtrl {
     this.form.close()
   }
 
-  getSelectedRowsData = () => {
+  getSelectedRowsData() {
     this.selectedRowsData = this.grid.getSelectedRows()
   }
 }

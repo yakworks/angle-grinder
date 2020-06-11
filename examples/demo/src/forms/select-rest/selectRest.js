@@ -26,7 +26,7 @@ class controller {
       return `
         <div>${item.name}</div>
         <small>&lt;${item.email}></small>
-        <hr class="m-0">
+        <hr class="my-0">
       `
     }
   }
