@@ -146,18 +146,18 @@ class AppCtrl {
       }
     }, true)
 
-    // Apply on resize
-    $win.on('resize', function() {
-      $scope.$apply()
-      if ($scope.isLargeDevice) {
-        $('#app .main-content').css({
-          position: 'relative',
-          top: 'auto',
-          width: 'auto'
-        })
-        $('footer').show()
-      }
-    })
+    // // Apply on resize
+    // $win.on('resize', function() {
+    //   $scope.$apply()
+    //   if ($scope.isLargeDevice) {
+    //     $('#app .main-content').css({
+    //       position: 'relative',
+    //       top: 'auto',
+    //       width: 'auto'
+    //     })
+    //     $('footer').show()
+    //   }
+    // })
 
     this.isMobile = (function() { // true if the browser is a mobile device
       var check = false

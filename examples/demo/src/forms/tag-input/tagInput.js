@@ -3,7 +3,7 @@ import template from './tag-input.html'
 class controller {
   vm = {
     nums: '',
-    predefined: 'foo,bar,qwe'
+    predefined: 'foo,bar,qwe,asfdasf,asdf,qewr,zxvszvx,asdfadsf,dfgsdfgsdg'
   }
   alert = () => {
     alert(this.vm.nums)

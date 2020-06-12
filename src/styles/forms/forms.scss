@@ -146,62 +146,6 @@ table.customer-select-result td:nth-child(1) {
   transform: translateY(-50%);
 }
 
-/*Tag Input directive*/
-.tagged-input {
-  border: 1px solid $border;
-  padding: 0;
-  display: inline-block;
-  width: 100%;
-  border-bottom-left-radius: 3px;
-  border-top-left-radius: 3px;
-  background-color: white;
-  -webkit-appearance: textfield;
-  -moz-appearance: textfield;
-}
-.tagged-input input {
-  //float: left;
-  height: 32px;
-  //padding: 4px !important;
-  border: 0 !important;
-  box-shadow: none !important;
-  font-size: $size-14;
-  flex-grow: 1;
-  flex-basis: 0;
-  flex-shrink: 1;
-
-}
-.tagged-input input:focus {
-  box-shadow: none !important;
-}
-.tagged-input.input {
-  display: flex;
-  flex-wrap: wrap;
-  min-height: 40px;
-  height: auto;
-}
-.tagged-input .tag {
-  padding: 4px;
-  line-height: 14px;
-  color: #555;
-  font-size: $size-14;
-  // background: #fff;
-  border: solid 1px $border;
-  border-radius: 2px ;
-  display: inline-block;
-  float: left;
-  border-radius: 2px;
-  margin: 6px 0px 4px 4px;
-}
-.tagged-input .tag .delete-tag i {
-  font-size: 12px;
-  margin-right: 4px;
-  color: rgba(128, 128, 128, 0.78)
-}
-.tagged-input .tag .delete-tag i:hover {
-  color: rgba(128, 128, 128, 1)
-}
-/*Tag Input directive styles end*/
-
 .check-mark-false {
   color: $danger;
   font-size: 16px;
