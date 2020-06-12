@@ -274,8 +274,8 @@ export default class AgGridCtrl {
       if (this.getSelectedRowIds().length !== 0) {
         // if browser is IE then open new window and show SaveAs dialog, else use dataUri approach
         // can this part be deprecated?
-        if ((this.$window.navigator.userAgent.indexOf('MSIE ') > 0)
-            || !!this.$window.navigator.userAgent.match(/Trident.*rv\:11\./)) {
+        if ((this.$window.navigator.userAgent.indexOf('MSIE ') > 0) ||
+            !!this.$window.navigator.userAgent.match(/Trident.*rv\:11\./)) {
           let iframe = document.createElement('IFRAME')
           iframe.style.display = 'none'
           document.body.appendChild(iframe)
