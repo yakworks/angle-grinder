@@ -23,6 +23,25 @@ export default class ListCtrl {
     }
   })
 
+  menuItems = [
+    {
+      display: 'Refresh', icon: 'fa-refresh',
+      action: () => Swal.fire('a special event')
+    },
+    { display: 'Reset Sort', icon: 'fa-sort' },
+    { display: 'Column Config', icon: 'fa-exchange' },
+    { divider: true },
+    { display: 'Hide/Show Toggle', icon: 'fa-minus' },
+    { display: 'Expand', icon: 'fa-expand' }
+  ]
+
+  menuItemClick = function(menuItem, event) {
+    console.log('menuItemClick params', { menuItem, event })
+    Swal.fire(
+      `${menuItem.display} item clicked `,
+      `<pre><code class="json">${JSON.stringify(menuItem, null, 2)}</code></pre>`
+    )
+  }
   //getter to get scope reference
   get grid() { return this.$scope.exampleGrid }
 
@@ -61,6 +80,10 @@ export default class ListCtrl {
     this.form = this.$uibModal.open(
       this.modalOptions(require('./form/massUpdateForm.html'))
     )
+  }
+
+  xlsExport() {
+    this.grid.xlsExport()
   }
 
   showForm(data) {

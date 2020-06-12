@@ -1,19 +1,13 @@
 <div>
   <basic-search-form ng-show="$ctrl.showSearchForm"></basic-search-form>
-  <ag-grid-toolbar grid="exampleGrid" action-ctrl="$ctrl">
-    <ul class="nav navbar-nav">
-      <li>
-        <a ng-click="$ctrl.getSelectedRowsData()" >Get selected rows data</a>
-      </li>
-    </ul>
-  </ag-grid-toolbar>
 
   <ag-toolbar class="is-lighter is-dense has-border">
     <div class="selection-pointer"><i class="fa"></i></div>
     <ag-button icon="fa-edit" uib-tooltip="Mass Update" ng-click="$ctrl.massUpdate()"></ag-button>
-    <ag-button icon="fa-table" uib-tooltip="Export to Excel" ng-click="$ctrl.excelExport()"></ag-button>
+    <ag-button icon="fa-table" uib-tooltip="Export to Excel" ng-click="$ctrl.xlsExport()"></ag-button>
     <div class="divider-vertical"></div>
     <ag-button icon="fa-plus" uib-tooltip="Create New" ng-click="$ctrl.createRecord()"></ag-button>
+    <ag-button color="light" ng-click="$ctrl.getSelectedRowsData()">Show Selected Data</ag-button>
     <div class="spacer"></div>
     <div class="toolbar-item">
       <div class="buttons has-addons">
@@ -25,7 +19,8 @@
     <div class="toolbar-item p-0">
       <input type="text" class="input is-rounded is-search" placeholder="quick search">
     </div>
-    <ag-button icon="fa-search" ng-click="$ctrl.showSearchForm = !$ctrl.showSearchForm"></ag-button>
+    <ag-button icon="fa-search" uib-tooltip="Show Search Form"
+      ng-click="$ctrl.showSearchForm = !$ctrl.showSearchForm" ></ag-button>
     <ag-dropdown
       menu-items="$ctrl.menuItems"
       menu-click="$ctrl.menuItemClick"

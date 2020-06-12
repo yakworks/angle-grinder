@@ -4,7 +4,7 @@ export default class AgGridCtrl {
     highlightClass = 'ui-state-highlight'
 
     /* @ngInject */
-    constructor($rootScope, $element, $attrs, $q, hasSearchFilters, FlattenServ, xlsData, csvData) {
+    constructor($rootScope, $element, $attrs, $q, hasSearchFilters, FlattenServ, xlsData, csvData, $window) {
       this.$rootScope = $rootScope
       this.$element = $element
       this.$attrs = $attrs
@@ -13,6 +13,7 @@ export default class AgGridCtrl {
       this.FlattenServ = FlattenServ
       this.csvData = csvData
       this.xlsData = xlsData
+      this.$window = $window
     }
 
     getGridEl() {
@@ -267,6 +268,37 @@ export default class AgGridCtrl {
     // Returns data uri with xls file content for rows from the current grid view.
     getXlsDataUri() {
       return this.xlsData(this.getGridId(), this.getSelectedRowIds())
+    }
+
+    xlsExport() {
+      if (this.getSelectedRowIds().length !== 0) {
+        // if browser is IE then open new window and show SaveAs dialog, else use dataUri approach
+        // can this part be deprecated?
+        if ((this.$window.navigator.userAgent.indexOf('MSIE ') > 0)
+            || !!this.$window.navigator.userAgent.match(/Trident.*rv\:11\./)) {
+          let iframe = document.createElement('IFRAME')
+          iframe.style.display = 'none'
+          document.body.appendChild(iframe)
+          iframe = iframe.contentWindow || iframe.contentDocument
+          const csvData = 'sep=|\r\n' + this.getCsvData()
+          iframe.document.open('text/html', 'replace')
+          iframe.document.write(csvData)
+          iframe.document.close()
+          iframe.focus()
+          return iframe.document.execCommand('SaveAs', true, 'download.csv')
+        } else {
+          const dataUri = this.getXlsDataUri()
+          const link = document.createElement('a')
+          link.href = dataUri
+          link.setAttribute('download', 'download.xls')
+          document.body.appendChild(link)
+          const clickev = document.createEvent('MouseEvents')
+          // initialize the event
+          clickev.initEvent('click', true, true)
+          // trigger the event
+          return link.dispatchEvent(clickev)
+        }
+      }
     }
 
     getCsvData() {
