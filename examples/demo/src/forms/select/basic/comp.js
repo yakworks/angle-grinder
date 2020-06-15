@@ -6,7 +6,9 @@ class controller {
   fooData = [
     { id: 1, name: 'Foo 1' },
     { id: 2, name: 'Foo 2' },
-    { id: 3, name: 'Foo 3' }
+    { id: 3, name: 'Foo 3' },
+    { id: 4, name: 'Foo bar bazz buzz' },
+    { id: 5, name: 'buzz blaz big' }
   ]
 }
 

@@ -2,6 +2,7 @@
 import {generateData} from '../dataGenerator'
 import exampleGridOptions from "../exampleGridOptions"
 import Log from 'angle-grinder/src/utils/Log'
+import Swal from 'angle-grinder/src/tools/swal'
 
 /* @ngInject */
 export default class ListCtrl {
