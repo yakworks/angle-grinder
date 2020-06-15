@@ -79,7 +79,7 @@ $select2-font-size: 14px;
   .select2-choices {
     background: none;
     padding: 0;
-    height: $control-height !important;
+    // height: $control-height !important;
 
     .select2-search-choice {
       margin-top: 5px;
@@ -170,6 +170,7 @@ $select2-font-size: 14px;
   padding-bottom: $control-padding-vertical ;
   padding-left: $control-padding-horizontal;
   padding-right: $control-padding-horizontal;
+  margin: 0px
 }
 
 /**
