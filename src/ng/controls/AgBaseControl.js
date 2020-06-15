@@ -10,9 +10,9 @@ export default class AgBaseControl {
     this.$element = $element
     this.$timeout = $timeout
     this.$scope = $scope
-    //this.$transclude = $transclude
+    // this.$transclude = $transclude
     $transclude((clone) => {
-      clone.each((i,el) => {
+      clone.each((i, el) => {
         if ($(el).html() !== undefined) {
           this.hasTranscluded = true
         }
