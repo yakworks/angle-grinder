@@ -17,18 +17,17 @@ export default class AgGridCtrl {
     }
 
     $onInit() {
-      console.log("AgGridCtrl $onInit")
-      let {$element, $attrs} = this
+      console.log('AgGridCtrl $onInit')
+      const { $element, $attrs } = this
       // modify grid html element, generate grid id from the name or assign default value
       const id = !_.isNil($attrs.agGridName) ? _.camelCase($attrs.agGridName) : 'gridz'
 
       $element.find('table.gridz').attr('id', id)
       $element.find('div.gridz-pager').attr('id', `${id}-pager`)
-
     }
 
     $postLink() {
-      console.log("AgGridCtrl $postLink")
+      console.log('AgGridCtrl $postLink')
     }
 
     getGridEl() {

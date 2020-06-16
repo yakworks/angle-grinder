@@ -9,7 +9,7 @@ const gridz = angular.module(gridzModule)
 gridz.directive('agGrid',
   function($timeout, $parse, $q, agGridDataLoader, ActionPopupHandler, pathWithContext) {
     const link = function(scope, element, attrs, gridCtrl) {
-      console.log("AgGrids post link")
+      console.log('AgGrids post link')
       // find grid placeholder
       const gridEl = element.find('table.gridz')
 
