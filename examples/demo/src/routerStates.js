@@ -101,7 +101,8 @@ const uiStates = {
     },
     {
       name: 'tabs',
-      template: require('./ui/tabs/ui_tabs.html')
+      children: [{name: 'basic', component: 'basicTabsExample'}, {name: 'complex', component: 'complexTabsExample'}]
+
     }
   ]
 }
