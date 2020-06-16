@@ -16,6 +16,21 @@ export default class AgGridCtrl {
       this.$window = $window
     }
 
+    $onInit() {
+      console.log("AgGridCtrl $onInit")
+      let {$element, $attrs} = this
+      // modify grid html element, generate grid id from the name or assign default value
+      const id = !_.isNil($attrs.agGridName) ? _.camelCase($attrs.agGridName) : 'gridz'
+
+      $element.find('table.gridz').attr('id', id)
+      $element.find('div.gridz-pager').attr('id', `${id}-pager`)
+
+    }
+
+    $postLink() {
+      console.log("AgGridCtrl $postLink")
+    }
+
     getGridEl() {
       return this.gridEl || (this.gridEl = this.$element.find('table.gridz'))
     }
@@ -24,11 +39,19 @@ export default class AgGridCtrl {
       return this.getGridEl().attr('id')
     }
 
+    getGridz() {
+      return this.getGridEl().data('gridz')
+    }
+
     // Gives the currently selected rows when multiselect is set to true.
     // This is a one-dimensional array and the values in the array correspond
     // to the selected id's in the grid.
     getSelectedRowIds() {
       return this.getParam('selarrrow')
+    }
+
+    hasSelectedRowIds() {
+      return this.getParam('selarrrow').length > 0
     }
 
     // Gives selected row objects, [{id:1..}, {id:2..}]

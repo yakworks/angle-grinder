@@ -7,15 +7,18 @@ import _ from 'lodash'
 const gridz = angular.module(gridzModule)
 
 gridz.directive('agGrid',
-  function($timeout, $parse, $q, agGridDataLoader, ActionPopupHandler, pathWithContext, camelize) {
+  function($timeout, $parse, $q, agGridDataLoader, ActionPopupHandler, pathWithContext) {
     const link = function(scope, element, attrs, gridCtrl) {
+      console.log("AgGrids post link")
       // find grid placeholder
       const gridEl = element.find('table.gridz')
 
       // publish agGrid controller to the parent scope
       const alias = attrs.agGridName
       const actionCtrl = scope[attrs.actionCtrl]
+      // scope[agGridName] will be set to gridCtrl
       if (alias) { $parse(alias).assign(scope, gridCtrl) }
+      // assign scope.$grid as well to gridCtrl
       $parse('$grid').assign(scope, gridCtrl) // Make the grid available to controllers as $scope.$grid
 
       // read grid options
@@ -113,7 +116,11 @@ gridz.directive('agGrid',
 
           const groupCheckBox = '.jqgroup > td > .cbox'
 
+          gridEl.on('jqGridSelectRow', function() {
+            console.log('jqGridSelectRow')
+          })
           gridEl.on('jqGridSelectAll', function() {
+            console.log('jqGridSelectAll')
             if (options.dropGrouping) {
               const isChecked = $('#cb_' + alias).is(':checked')
               const selectedIds = gridEl.jqGrid('getGridParam', 'selarrrow')
@@ -154,6 +161,7 @@ gridz.directive('agGrid',
 
           // initialize jqGrid on the given element
           gridEl.gridz(options)
+
           if (options.filterToolbar) {
             gridEl.jqGrid('filterToolbar', {
               beforeSearch() {
@@ -233,25 +241,23 @@ gridz.directive('agGrid',
 
     return {
       restrict: 'A',
-
-      // require: 'agGrid',
       controller: agGridCtrl,
-
       template: `\
 <table class="gridz"></table>
-<div class="gridz-pager"></div>\
-`,
+<div class="gridz-pager"></div>`,
 
-      compile(element, attrs) {
-        // modify grid html element, generate grid id from the name or assign default value
-        const id = !_.isNil(attrs.agGridName) ? camelize(attrs.agGridName) : 'gridz'
+      // compile(element, attrs) {
+      //   console.log("AgGrids compile")
+      //   // modify grid html element, generate grid id from the name or assign default value
+      //   const id = !_.isNil(attrs.agGridName) ? _.camelCase(attrs.agGridName) : 'gridz'
 
-        element.find('table.gridz').attr('id', id)
-        element.find('div.gridz-pager').attr('id', `${id}-pager`)
+      //   element.find('table.gridz').attr('id', id)
+      //   element.find('div.gridz-pager').attr('id', `${id}-pager`)
 
-        // return linking function which will be called at a later time
-        return { post: link }
-      }
+      //   // return linking function which will be called at a later time
+      //   return { post: link }
+      // },
+      link: link
     }
   }
 )

@@ -9,13 +9,21 @@ export default class ListCtrl {
   foo = "bar"
   showSearchForm = true
   data = generateData(100)
+  hasSelected = false
 
+  onSelect = () => {
+    this.$scope.$evalAsync(()=>{
+      this.hasSelected = this.grid.hasSelectedRowIds()
+    })
+  }
   gridOptions = exampleGridOptions({
-    onSelectRow: args => Log.debug('exampleGridOptions selected row:', args),
+    onSelectRow: this.onSelect,
+    onSelectAll: this.onSelect,
     pager: false,
     datatype: (params, loadingDivSelector) => {
       Log.debug("params", params)
       Log.debug("loadingDivSelector", loadingDivSelector)
+      Log.debug("this.grid.getGridz", this.grid.getGridz())
       this.grid.addJSONData(this.data)
       // show/hide the loading animation
       // const loadingEl = $document.find('#' + $.jgrid.jqID(loadingDivSelector))

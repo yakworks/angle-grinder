@@ -55,11 +55,6 @@ common.factory('pendingRequests', function($http) {
   return pendingRequests
 })
 
-// Camelizes the given string
-common.value('camelize', str => str.replace(/(\-|\.|_|\s)+(.)?/g, function(match, p1, p2) {
-  if (p2) { return p2.toUpperCase() } else { return '' }
-}))
-
 // Due to changes in angular 1.6 see https://docs.angularjs.org/guide/migration#commit-aa077e8
 common.config(['$locationProvider', $locationProvider => $locationProvider.hashPrefix('')])
 
