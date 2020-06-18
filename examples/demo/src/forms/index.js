@@ -9,6 +9,7 @@ import xeditModule from './xedit-form'
 import checkboxModule from './checkbox'
 import tagInputModule from './tag-input'
 import datepickerModule from './datepicker'
+import textarea from './textarea'
 
 // export module name
 export default angular
@@ -22,6 +23,7 @@ export default angular
     horSandModule,
     validateSandModule,
     datepickerModule,
-    tagInputModule
+    tagInputModule,
+    textarea
   ])
   .name
