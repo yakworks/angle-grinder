@@ -5,12 +5,12 @@
   <div class="field mb-0">
     <div class="control">
       <textarea
-        class="input"
+        class="textarea"
         ng-class="$ctrl.inputClass"
         type="{{$ctrl.type}}"
         placeholder="{{::$ctrl.placeholder}}"
         autocomplete="off"
-        rows="4" cols="50"
+        rows="{{::$ctrl.rows}}"
         ng-model-options="{allowInvalid: true, debounce: 250}"
         name="{{::$ctrl.name}}"
         id="{{::$ctrl.elementId}}"

@@ -3,9 +3,6 @@ import AgBaseControl from '../AgBaseControl'
 class Controller extends AgBaseControl {
   $onInit() {
     super.onInit()
-    if (!this.maximumLength) {
-      this.maximumLength = 50
-    }
   }
 
   onChange() {
@@ -34,6 +31,7 @@ export default () => ({
     ...AgBaseControl.common.scope,
     type: '@',
     minimumLength: '@',
-    maximumLength: '@'
+    maximumLength: '@',
+    rows: '@'
   }
 })
