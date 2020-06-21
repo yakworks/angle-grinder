@@ -1,0 +1,9 @@
+<form name="textareaForm" ag-form>
+<ag-textarea rows="3" ng-model="$ctrl.vm.description"></ag-textarea>
+</form>
+<legend class="mt-4 mb-4">horizontal</legend>
+<form name="textareaHorizontalForm" ag-form is-horizontal>
+  <ag-textarea ng-model="$ctrl.vm.task"></ag-textarea>
+  <ag-textarea rows="5" ng-model="$ctrl.vm.note"></ag-textarea>
+</form>
+<pre ng-cloak class="mt-4">model: {{$ctrl.vm | json}}</pre>
