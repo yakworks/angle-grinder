@@ -58,23 +58,98 @@
 
 
 <div ng-controller="ComplexTabsDemoCtrl">
-  <div class="container-fluid container-fullw">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="panel panel-white">
-          <div class="panel-body">
-            <uib-tabset class="tabbable" active="active">
-              <uib-tab index="0" heading="X editable">
-                <xedit1-demo></xedit1-demo>
-              </uib-tab>
-              <uib-tab index="3">
-                <uib-tab-heading><i class="fa fa-table"></i> Grid </uib-tab-heading>
-                <rest-api-grid>
-              </uib-tab>
-            </uib-tabset>
+  <uib-tabset class="tabbable" active="active">
+    <uib-tab index="0" heading="X editable">
+      <div class="columns">
+
+        <div class="column">
+          <xedit1-demo></xedit1-demo>
+        </div>
+
+        <div class="column">
+          <div class="card">
+            <div class="card-header">
+              Card 1
+            </div>
+            <div class="card-body">
+              <table class="table">
+                <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">First</th>
+                  <th scope="col">Last</th>
+                  <th scope="col">Handle</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <th scope="row">1</th>
+                  <td>Mark</td>
+                  <td>Otto</td>
+                  <td>@mdo</td>
+                </tr>
+                <tr>
+                  <th scope="row">2</th>
+                  <td>Jacob</td>
+                  <td>Thornton</td>
+                  <td>@fat</td>
+                </tr>
+                <tr>
+                  <th scope="row">3</th>
+                  <td>Larry</td>
+                  <td>the Bird</td>
+                  <td>@twitter</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="column">
+          <div class="card">
+            <div class="card-header">
+              Card 2
+            </div>
+            <div class="card-body">
+              <table class="table table-striped">
+                <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">First</th>
+                  <th scope="col">Last</th>
+                  <th scope="col">Handle</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <th scope="row">1</th>
+                  <td>Mark</td>
+                  <td>Otto</td>
+                  <td>@mdo</td>
+                </tr>
+                <tr>
+                  <th scope="row">2</th>
+                  <td>Jacob</td>
+                  <td>Thornton</td>
+                  <td>@fat</td>
+                </tr>
+                <tr>
+                  <th scope="row">3</th>
+                  <td>Larry</td>
+                  <td>the Bird</td>
+                  <td>@twitter</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
+
+    </uib-tab>
+    <uib-tab index="1">
+      <uib-tab-heading><i class="fa fa-table"></i> Grid</uib-tab-heading>
+      <basic-demo-grid></basic-demo-grid>
+    </uib-tab>
+  </uib-tabset>
 </div>

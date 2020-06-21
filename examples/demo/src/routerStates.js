@@ -22,6 +22,10 @@ const formStates = {
       component: 'agInputDemoIndex'
     },
     {
+      name: 'textarea',
+      component: 'textareaDemoIndex'
+    },
+    {
       name: 'selects',
       component: 'sel2DemoIndex'
     },
