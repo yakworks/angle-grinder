@@ -1,7 +1,5 @@
 <h3 class="view-header">
-  Ref# <em>{{$ctrl.vm.refnum}}</em>
-  Amount: <em>{{$ctrl.vm.amount | agCurrency}}</em>
-  Due Date: <em>{{$ctrl.vm.dueDate | agDate}}</em>
+  Due Date: <em>{{dueDate | agDate}}</em>
 </h3>
 
 <ag-toolbar class="is-lighter is-dense has-border">
@@ -16,46 +14,45 @@
     </div>
   </div>
 </ag-toolbar>
+<div class="well well-sm">
+  <div class="columns equal">
+    <div class="column">
 
-<div class="columns equal">
-  <div class="column">
-
-    <div class="well white height100">
-      <dl class="panel-body">
-
-        <dt>Name</dt>
-        <dd > John Doe</dd>
-      </dl>
+      <div class="well white height100">
+        <dl class="panel-body">
+          <dt>Name</dt>
+          <dd>John Doe</dd>
+        </dl>
+      </div>
     </div>
-  </div>
 
-  <div class="column">
-    <div class="well white height100">
-      <dl class="panel-body">
+    <div class="column">
+      <div class="well white height100">
+        <dl class="panel-body">
 
-        <dt>Street</dt>
-        <dd> Random 123</dd>
+          <dt>Street</dt>
+          <dd> Random 123</dd>
 
-        <dt>City</dt>
-        <dd >Chicago</dd>
+          <dt>City</dt>
+          <dd>Chicago</dd>
 
-        <dt>Country</dt>
-        <dd >USA</dd>
-      </dl>
+          <dt>Country</dt>
+          <dd>USA</dd>
+        </dl>
+      </div>
     </div>
-  </div>
 
-  <div class="column">
-    <div class="well white height100">
-      <dl class="panel-body">
-        <dt>Company</dt>
-        <dd> Home inc</dd>
-      </dl>
+    <div class="column">
+      <div class="well white height100">
+        <dl class="panel-body">
+          <dt>Company</dt>
+          <dd> Home inc</dd>
+        </dl>
+      </div>
     </div>
-  </div>
 
+  </div>
 </div>
-
 
 <div ng-controller="ComplexTabsDemoCtrl">
   <uib-tabset class="tabbable" active="active">
