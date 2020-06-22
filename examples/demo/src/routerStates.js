@@ -22,6 +22,10 @@ const formStates = {
       component: 'agInputDemoIndex'
     },
     {
+      name: 'textarea',
+      component: 'textareaDemoIndex'
+    },
+    {
       name: 'selects',
       component: 'sel2DemoIndex'
     },
@@ -101,7 +105,8 @@ const uiStates = {
     },
     {
       name: 'tabs',
-      template: require('./ui/tabs/ui_tabs.html')
+      children: [{name: 'basic', component: 'basicTabsExample'}, {name: 'complex', component: 'complexTabsExample'}]
+
     }
   ]
 }

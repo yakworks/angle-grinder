@@ -1,0 +1,29 @@
+<div class="field" ng-class="{column: $ctrl.isHorizontal}">
+  <ag-label label-class="{{$ctrl.labelClass}}" ng-if="$ctrl.label"
+            ng-required="{{$ctrl.isRequired}}">{{$ctrl.label}}
+  </ag-label>
+  <div class="field mb-0">
+    <div class="control">
+      <textarea
+        class="textarea"
+        ng-class="$ctrl.inputClass"
+        type="{{$ctrl.type}}"
+        placeholder="{{::$ctrl.placeholder}}"
+        autocomplete="off"
+        rows="{{::$ctrl.rows}}"
+        ng-model-options="{allowInvalid: true, debounce: 250}"
+        name="{{::$ctrl.name}}"
+        id="{{::$ctrl.elementId}}"
+        ng-model="$ctrl.value"
+        ng-change="$ctrl.onChange()"
+        ng-required="{{::$ctrl.isRequired}}"
+        ng-minlength="::$ctrl.minimumLength"
+        ng-maxlength="::$ctrl.maximumLength"
+        maxlength="{{::$ctrl.maximumLength}}"
+      ></textarea>
+    </div>
+  </div>
+  <p class="help" ng-if="$ctrl.hint">{{::$ctrl.hint}}</p>
+  <ag-validation-inline for="{{::$ctrl.elementId}}"></ag-validation-inline>
+</div>
+
