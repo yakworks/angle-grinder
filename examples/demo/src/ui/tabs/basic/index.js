@@ -1,22 +1,24 @@
-import angular from 'angular'
-import Swal from 'sweetalert2'
+import compDemoModule from './component'
+// Import Raw Files
+import htmlRaw from '!raw-loader!./ui_tabs.html'
+import jsRaw from '!raw-loader!./component'
 
-angular.module('app').controller('TabsDemoCtrl', function($scope) {
-  $scope.tabs = [{
-    title: 'Dynamic Title 1',
-    content: 'Dynamic content 1'
-  }, {
-    title: 'Dynamic Title 2',
-    content: 'Dynamic content 2',
-    disabled: false
-  }]
+class controller {
+  rawHtml = htmlRaw
+  rawJs = jsRaw
+}
 
-  $scope.alertMe = function() {
-    setTimeout(function() {
-      Swal.fire({
-        title: 'You\'ve selected the alert tab!',
-        confirmButtonColor: '#007AFF'
-      })
-    })
-  }
-})
+const template = `
+<example-snippet is-horizontal raw-js='$ctrl.rawJs' raw-html='$ctrl.rawHtml' raw-md='$ctrl.rawMd' >
+  <demo-tabs>
+</example-snippet>
+`
+
+// export the module name
+export default angular
+  .module('app')
+  .component('basicTabsExample', {
+    template,
+    controller
+  })
+  .name // .name returns the module name
