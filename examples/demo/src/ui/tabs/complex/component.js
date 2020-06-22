@@ -1,7 +1,13 @@
-import controller from './index'
 import template from './complex_tabs.html'
 import '../../../grids/basicGrid/component'
 import '../../../forms/xedit-form/xedit1/comp'
+
+class controller {
+  vm = {
+    dueDate: new Date()
+  }
+
+}
 
 export default angular
   .module('app')
