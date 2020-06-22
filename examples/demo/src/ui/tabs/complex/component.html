@@ -1,5 +1,5 @@
 <h3 class="view-header">
-  Due Date: <em>{{dueDate | agDate}}</em>
+  Due Date: <em>{{$ctrl.dueDate | agDate}}</em>
 </h3>
 
 <ag-toolbar class="is-lighter is-dense has-border">
@@ -17,7 +17,6 @@
 <div class="well well-sm">
   <div class="columns equal">
     <div class="column">
-
       <div class="well white full-height">
         <dl class="panel-body">
           <dt>Name</dt>
@@ -54,7 +53,7 @@
   </div>
 </div>
 
-<div ng-controller="ComplexTabsDemoCtrl">
+<div>
   <uib-tabset class="tabbable" active="active">
     <uib-tab index="0" heading="X editable">
       <div class="columns">

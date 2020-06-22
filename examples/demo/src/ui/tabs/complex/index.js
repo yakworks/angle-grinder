@@ -1,14 +1,24 @@
-import angular from 'angular'
+import compDemoModule from './component'
+// Import Raw Files
+import htmlRaw from '!raw-loader!./component.html'
+import jsRaw from '!raw-loader!./component'
 
-angular.module('app').controller('ComplexTabsDemoCtrl', function($scope) {
-  $scope.tabs = [{
-    title: 'Form',
-    content: 'Dynamic content 1'
-  }, {
-    title: 'Grid',
-    content: '',
-    disabled: false
-  }]
-  $scope.dueDate = new Date()
+class controller {
+  rawHtml = htmlRaw
+  rawJs = jsRaw
+}
 
-})
+const template = `
+<example-snippet is-horizontal raw-js='$ctrl.rawJs' raw-html='$ctrl.rawHtml' raw-md='$ctrl.rawMd' >
+  <complex-demo-tabs>
+</example-snippet>
+`
+
+// export the module name
+export default angular
+  .module('app')
+  .component('complexTabsExample', {
+    template,
+    controller
+  })
+  .name // .name returns the module name

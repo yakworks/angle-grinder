@@ -1,2 +1,2 @@
-import './basic/tabsExample'
-import './complex/complexTabsExample'
+import './basic'
+import './complex'
