@@ -1,3 +1,59 @@
+<h3 class="view-header">
+  Due Date: <em>{{dueDate | agDate}}</em>
+</h3>
+
+<ag-toolbar class="is-lighter is-dense has-border">
+
+  <ag-button icon="fa-plus" uib-tooltip="Create New" ng-click="$ctrl.createRecord()"></ag-button>
+  <ag-button color="light">Action</ag-button>
+  <div class="spacer"></div>
+  <div class="toolbar-item">
+    <div class="buttons has-addons">
+      <ag-button ng-model="quickPick.states" uib-btn-radio="'open'">Open</ag-button>
+      <ag-button ng-model="quickPick.states" uib-btn-radio="'closed'">Close</ag-button>
+    </div>
+  </div>
+</ag-toolbar>
+<div class="well well-sm">
+  <div class="columns equal">
+    <div class="column">
+
+      <div class="well white full-height">
+        <dl class="panel-body">
+          <dt>Name</dt>
+          <dd>John Doe</dd>
+        </dl>
+      </div>
+    </div>
+
+    <div class="column">
+      <div class="well white full-height">
+        <dl class="panel-body">
+
+          <dt>Street</dt>
+          <dd> Random 123</dd>
+
+          <dt>City</dt>
+          <dd>Chicago</dd>
+
+          <dt>Country</dt>
+          <dd>USA</dd>
+        </dl>
+      </div>
+    </div>
+
+    <div class="column">
+      <div class="well white full-height">
+        <dl class="panel-body">
+          <dt>Company</dt>
+          <dd> Home inc</dd>
+        </dl>
+      </div>
+    </div>
+
+  </div>
+</div>
+
 <div ng-controller="ComplexTabsDemoCtrl">
   <uib-tabset class="tabbable" active="active">
     <uib-tab index="0" heading="X editable">

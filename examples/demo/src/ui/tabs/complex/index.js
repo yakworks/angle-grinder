@@ -9,5 +9,6 @@ angular.module('app').controller('ComplexTabsDemoCtrl', function($scope) {
     content: '',
     disabled: false
   }]
+  $scope.dueDate = new Date()
 
 })
