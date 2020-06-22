@@ -2,26 +2,16 @@ import compDemoModule from './component'
 // Import Raw Files
 import htmlRaw from '!raw-loader!./component.html'
 import jsRaw from '!raw-loader!./component.js'
-import mdRaw from '!raw-loader!./docs.md'
 
 class controller {
-  html = htmlRaw
-  js = jsRaw
-  md = mdRaw
+  rawHtml = htmlRaw
+  rawJs = jsRaw
 }
 
 const template = `
-<div class="example-section mb-4">
-  <h4>Basic Default Example</h4>
-  <div class="example is-vertical">
-    <div class="example-component">
-      <button-demo></button-demo>
-    </div>
-    <div class="codeview">
-      <demo-snippet raw-js='$ctrl.js' raw-html='$ctrl.html' raw-md='$ctrl.md' max-height="300px"></demo-snippet>
-    </div>
-  </div>
-</div>
+<example-snippet raw-js='$ctrl.rawJs' raw-html='$ctrl.rawHtml'>
+  <button-demo></button-demo>
+</example-snippet>
 `
 // export the module name
 export default angular
@@ -29,5 +19,4 @@ export default angular
   .component('buttonExample', {
     template,
     controller
-  })
-  .name // .name returns the module name
+  }).name // .name returns the module name

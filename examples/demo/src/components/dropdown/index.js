@@ -1,14 +1,18 @@
-import exampleModule from './example.component'
-import './styles.scss'
+import compDemoModule from './component'
 
 const template = `
-<!-- <demo-title-crumb></demo-title-crumb> -->
-<div class="dropdownDemoIndex">
-  <dropdown-example></dropdown-example>
-</div>
+<example-snippet raw-js='$ctrl.rawJs' raw-html='$ctrl.rawHtml' raw-md='$ctrl.rawMd'>
+  <dropdown-demo></dropdown-demo>
+</example-snippet>
 `
 // export module name
 export default angular
-  .module(exampleModule)
-  .component('dropdownDemoIndex', { template })
-  .name
+  .module(compDemoModule)
+  .component('dropdownDemoIndex', {
+    template: template,
+    controller: function() {
+      this.rawHtml = require('./component.html')
+      this.rawMd = require('!raw-loader!./docs.md').default
+      this.rawJs = require('!raw-loader!./component.js').default
+    }
+  }).name
