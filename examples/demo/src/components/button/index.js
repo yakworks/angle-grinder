@@ -4,7 +4,9 @@ import './styles.scss'
 
 const template = `
 <div class="buttonDemoIndex">
+  <p>Basic Default Example</p>
   <button-example></button-example>
+  <p>Colors and States</p>
   <button-colors-example></button-colors-example>
 </div>
 `

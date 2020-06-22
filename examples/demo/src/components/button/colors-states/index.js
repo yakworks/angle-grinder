@@ -1,32 +1,17 @@
 import compDemoModule from './component'
-// Import Raw Files
-import htmlRaw from '!raw-loader!./component.html'
-import jsRaw from '!raw-loader!./component.js'
-
-class ExController {
-  html = htmlRaw
-  js = jsRaw
-}
 
 const template = `
-
-<div class="example-section mb-4">
-  <h4>Color and States</h4>
-  <div class="example is-vertical">
-    <div class="example-component">
-      <button-colors-demo> </button-colors-demo>
-    </div>
-    <div class="codeview">
-      <demo-snippet raw-js='$ctrl.js' raw-html='$ctrl.html' raw-md='$ctrl.md' max-height="300px"></demo-snippet>
-    </div>
-  </div>
-</div>
+<example-snippet raw-js='$ctrl.rawJs' raw-html='$ctrl.rawHtml' raw-md='$ctrl.rawMd' >
+  <button-colors-demo></button-colors-demo>
+</example-snippet>
 `
 // export the module name
 export default angular
   .module(compDemoModule)
   .component('buttonColorsExample', {
     template: template,
-    controller: ExController
-  })
-  .name // .name returns the module name
+    controller: function() {
+      this.rawHtml = require('./component.html')
+      this.rawJs = require('!raw-loader!./component.js').default //js as text hack
+    }
+  }).name // .name returns the module name
