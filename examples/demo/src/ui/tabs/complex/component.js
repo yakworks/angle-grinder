@@ -1,4 +1,4 @@
-import template from './complex_tabs.html'
+import template from './component.html'
 import '../../../grids/basicGrid/component'
 import '../../../forms/xedit-form/xedit1/comp'
 

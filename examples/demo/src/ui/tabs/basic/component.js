@@ -1,4 +1,4 @@
-import template from './ui_tabs.html'
+import template from './component.html'
 
 import angular from 'angular'
 import Swal from 'sweetalert2'
