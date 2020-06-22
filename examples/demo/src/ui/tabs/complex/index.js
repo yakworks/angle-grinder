@@ -1,6 +1,6 @@
 import compDemoModule from './component'
 // Import Raw Files
-import htmlRaw from '!raw-loader!./complex_tabs.html'
+import htmlRaw from '!raw-loader!./component.html'
 import jsRaw from '!raw-loader!./component'
 
 class controller {
