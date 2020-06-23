@@ -4,6 +4,7 @@ import Log from 'angle-grinder/src/utils/Log'
 
 export default class AgGridCtrl {
     highlightClass = 'ui-state-highlight'
+    systemColumns = ['cb', '-row_action_col']
 
     /* @ngInject */
     constructor($rootScope, $element, $attrs, $q, hasSearchFilters, FlattenServ, xlsData, csvData, $window) {
@@ -124,16 +125,16 @@ export default class AgGridCtrl {
       // const scrollPosition = $scope.grid.getGridEl().closest('.ui-jqgrid-bdiv').scrollTop()
       gridEl.closest('.ui-jqgrid-bdiv').scrollTop()
 
-      // Some grids may have selection in gridComplete so to be sure that after reload grid will have the same selection
-      // set it after grid complete
-      gridEl.one('jqGridAfterGridComplete', () => {
+      const afterGridComplete = () => {
         this.clearSelection()
         if (this.getParam('multiselect')) {
-          return _.each(selRows, id => gridEl.jqGrid('setSelection', id))
+          _.each(selRows, id => gridEl.jqGrid('setSelection', id))
         } else {
-          return gridEl.jqGrid('setSelection', selRow)
+          gridEl.jqGrid('setSelection', selRow)
         }
-      })
+        gridEl.off('jqGridAfterGridComplete', afterGridComplete)
+      }
+      // gridEl.off('jqGridAfterGridComplete', afterGridComplete).on('jqGridAfterGridComplete', afterGridComplete);
       // {current: true} - used for keep multi select
       return this.reload([{ current: true }])
     }
@@ -143,8 +144,8 @@ export default class AgGridCtrl {
       angular.forEach(colModel, column => column.lso = (column.name === columnName) || (column.name === 'id') ? order : '')
 
       this.$element.find('span.s-ico').hide()
-      this.setParam({ sortname: columnName, order }).trigger('reloadGrid')
-
+      this.setParam({ sortname: columnName, order }) // .trigger('reloadGrid')
+      this.reload([{ current: true }])
       const column = angular.element(`[id$='_${columnName}']`)
       // column.find('span.s-ico').show()
 
@@ -166,6 +167,40 @@ export default class AgGridCtrl {
     // Sets the given grid parameter
     setParam(params) {
       return this.getGridEl().setGridParam(params)
+    }
+
+    // returns the column model
+    getColModel() {
+      return this.getParam('colModel')
+      // return _.filter(this.getParam('colModel'), gridColumn => {
+      //   return !systemColumns.includes(gridColumn.name)
+      // })
+    }
+
+    // reconfigures columns, expects an objecct with a visible array and hidden array
+    configColumns(colConfig) {
+      const colSetup = { newColumnsOrder: [], displayedColumns: [], hiddenColumns: [] }
+
+      this.getColModel().forEach((column, index) => {
+        if (this.systemColumns.includes(column.name)) {
+          return colSetup.newColumnsOrder.push(index)
+        }
+      })
+
+      colConfig.visible.forEach(function(column, index) {
+        colSetup.displayedColumns.push(column.name)
+        colSetup.newColumnsOrder.push(column.originalId)
+      })
+
+      colConfig.hidden.forEach(function(column, index) {
+        colSetup.hiddenColumns.push(column.name)
+        colSetup.newColumnsOrder.push(column.originalId)
+      })
+
+      const gridEl = this.getGridEl()
+      gridEl.remapColumns(colSetup.newColumnsOrder, true)
+      gridEl.jqGrid('showCol', colSetup.displayedColumns)
+      gridEl.jqGrid('hideCol', colSetup.hiddenColumns)
     }
 
     // Updates the values (using the data array) in the row with rowid.

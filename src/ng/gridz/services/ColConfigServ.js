@@ -1,66 +1,39 @@
 import angular from 'angular'
 import gridzModule from '../gridzModule'
 // import _ from 'lodash'
-// import Log from 'angle-grinder/src/utils/Log'
+import Log from 'angle-grinder/src/utils/Log'
 
+/**
+ * Opens dialog to show,hide and change order of columns
+ */
 const gridz = angular.module(gridzModule)
 
 class ColumnConfigCtrl {
-  // Names of columns which are not displayed at the "Manage Columns" modal.
-  // These columns are placed at first positions of a grid.
-  systemColumns = ['cb', '-row_action_col']
+  gridColumns = {
+    hidden: [],
+    visible: []
+  }
 
   constructor($uibModalInstance, gridCtrl) {
     this.$uibModalInstance = $uibModalInstance
     this.gridCtrl = gridCtrl
+    this.colModel = gridCtrl.getColModel()
+    Log.debug('gridCtrl', gridCtrl)
 
-    // let gridEl = gridCtrl.getGridEl()
-    this.colModel = gridCtrl.getParam('colModel')
-
-    this.gridColumns = {
-      available: [],
-      displayed: []
-    }
-    const self = this
-    let element = null
-    this.colModel.forEach(function(gridColumn, index) {
-      if (!self.systemColumns.includes(gridColumn.name)) {
-        element = { originalId: index, label: gridColumn.label, name: gridColumn.name }
+    this.colModel.forEach((gridColumn, index) => {
+      if (!gridCtrl.systemColumns.includes(gridColumn.name)) {
+        const element = { originalId: index, label: gridColumn.label, name: gridColumn.name }
         if (gridColumn.hidden) {
-          return self.gridColumns.available.push(element)
+          return this.gridColumns.hidden.push(element)
         } else {
-          return self.gridColumns.displayed.push(element)
+          return this.gridColumns.visible.push(element)
         }
       }
     })
   }
 
   save() {
-    const gridEl = this.gridCtrl.getGridEl()
-
-    const newColumnsOrder = []
-    const displayedColumns = []
-    const hiddenColumns = []
-    const self = this
-    this.colModel.forEach(function(column, index) {
-      if (self.systemColumns.includes(column.name)) {
-        return newColumnsOrder.push(index)
-      }
-    })
-
-    this.gridColumns.displayed.forEach(function(column, index) {
-      displayedColumns.push(column.name)
-      return newColumnsOrder.push(column.originalId)
-    })
-
-    this.gridColumns.available.forEach(function(column, index) {
-      hiddenColumns.push(column.name)
-      return newColumnsOrder.push(column.originalId)
-    })
-
-    gridEl.remapColumns(newColumnsOrder, true)
-    gridEl.jqGrid('showCol', displayedColumns)
-    gridEl.jqGrid('hideCol', hiddenColumns)
+    this.gridCtrl.configColumns(this.gridColumns)
     return this.$uibModalInstance.close()
   }
 
@@ -70,7 +43,7 @@ class ColumnConfigCtrl {
 }
 
 gridz.service('ColumnConfigServ', function($uibModal) {
-  this.open = (grid) => {
+  this.open = (gridCtrl) => {
     // Log.debug("ColumnConfigServ open grid", grid)
     const modalInstance = $uibModal.open({
       controller: ColumnConfigCtrl,
@@ -79,9 +52,7 @@ gridz.service('ColumnConfigServ', function($uibModal) {
       backdrop: 'static',
       // scope: {grid: scope.$grid},
       resolve: {
-        gridCtrl: function() {
-          return grid
-        }
+        gridCtrl: () => gridCtrl
       },
       template: modalTemp
     })

@@ -2,6 +2,9 @@ import angular from 'angular'
 import gridzModule from '../gridzModule'
 import _ from 'lodash'
 
+/**
+ * Dataloader for grid that talks to rest interface
+ */
 const gridz = angular.module(gridzModule)
 
 class GridDataLoader {

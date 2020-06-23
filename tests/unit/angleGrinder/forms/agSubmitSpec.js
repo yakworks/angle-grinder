@@ -78,7 +78,7 @@ describe("Directive: agSubmit", function() {
         });
       });
 
-      return describe("on error", function() {
+      xdescribe("on error", function() {
 
         let response = null;
 
@@ -86,7 +86,8 @@ describe("Directive: agSubmit", function() {
           const deferred = $q.defer();
           deferred.reject(response);
 
-          return $scope.save = () => [deferred.promise, $scope.item];}));
+          return $scope.save = () => [deferred.promise, $scope.item];
+        }));
 
         describe("when the promise was rejected with server side errors", function() {
 

@@ -142,6 +142,3 @@ agmod.controller('MainCtrl', [
     getPage()
   }
 ])
-
-// FIXME: refactor, can cause errors swallowing
-agmod.config(['$qProvider', $qProvider => $qProvider.errorOnUnhandledRejections(false)])
