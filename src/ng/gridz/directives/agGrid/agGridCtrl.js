@@ -1,7 +1,10 @@
+/* eslint-disable no-unused-vars */
 import _ from 'lodash'
+import Log from 'angle-grinder/src/utils/Log'
 
 export default class AgGridCtrl {
     highlightClass = 'ui-state-highlight'
+    systemColumns = ['cb', '-row_action_col']
 
     /* @ngInject */
     constructor($rootScope, $element, $attrs, $q, hasSearchFilters, FlattenServ, xlsData, csvData, $window) {
@@ -16,6 +19,29 @@ export default class AgGridCtrl {
       this.$window = $window
     }
 
+    $onInit() {
+      // Log.debug('AgGridCtrl $onInit')
+      const { $element, $attrs } = this
+      // modify grid html element, generate grid id from the name or assign default value
+      const id = !_.isNil($attrs.agGridName) ? _.camelCase($attrs.agGridName) : 'gridz'
+
+      this.getGridEl().attr('id', id)
+      $element.find('div.gridz-pager').attr('id', `${id}-pager`)
+
+      // set the hasSelected flag
+      const onSelect = () => {
+        this.$rootScope.$evalAsync(() => {
+          this.hasSelected = (this.getSelectedRowIds().length > 0)
+        })
+      }
+      this.getGridEl().on('jqGridSelectRow', onSelect)
+      this.getGridEl().on('jqGridSelectAll', onSelect)
+    }
+
+    $postLink() {
+      // Log.debug('AgGridCtrl $postLink')
+    }
+
     getGridEl() {
       return this.gridEl || (this.gridEl = this.$element.find('table.gridz'))
     }
@@ -24,11 +50,19 @@ export default class AgGridCtrl {
       return this.getGridEl().attr('id')
     }
 
+    getGridz() {
+      return this.getGridEl().data('gridz')
+    }
+
     // Gives the currently selected rows when multiselect is set to true.
     // This is a one-dimensional array and the values in the array correspond
     // to the selected id's in the grid.
     getSelectedRowIds() {
       return this.getParam('selarrrow')
+    }
+
+    hasSelectedRowIds() {
+      return this.getParam('selarrrow').length > 0
     }
 
     // Gives selected row objects, [{id:1..}, {id:2..}]
@@ -80,6 +114,51 @@ export default class AgGridCtrl {
       return deferred.promise
     }
 
+    // reloads and keeps what was selected
+    reloadKeepSelected() {
+      // Save id of the selected row
+      const selRow = angular.copy(this.getParam('selrow'))
+      const selRows = angular.copy(this.getParam('selarrrow'))
+
+      const gridEl = this.getGridEl()
+      // Save grid scroll position
+      // const scrollPosition = $scope.grid.getGridEl().closest('.ui-jqgrid-bdiv').scrollTop()
+      gridEl.closest('.ui-jqgrid-bdiv').scrollTop()
+
+      const afterGridComplete = () => {
+        this.clearSelection()
+        if (this.getParam('multiselect')) {
+          _.each(selRows, id => gridEl.jqGrid('setSelection', id))
+        } else {
+          gridEl.jqGrid('setSelection', selRow)
+        }
+        gridEl.off('jqGridAfterGridComplete', afterGridComplete)
+      }
+      // gridEl.off('jqGridAfterGridComplete', afterGridComplete).on('jqGridAfterGridComplete', afterGridComplete);
+      // {current: true} - used for keep multi select
+      return this.reload([{ current: true }])
+    }
+
+    resetSort(columnName = 'id', order = 'asc') {
+      const colModel = this.getParam('colModel')
+      angular.forEach(colModel, column => column.lso = (column.name === columnName) || (column.name === 'id') ? order : '')
+
+      this.$element.find('span.s-ico').hide()
+      this.setParam({ sortname: columnName, order }) // .trigger('reloadGrid')
+      this.reload([{ current: true }])
+      const column = angular.element(`[id$='_${columnName}']`)
+      // column.find('span.s-ico').show()
+
+      const disabledClassName = 'ui-state-disabled'
+      if (order === 'asc') {
+        column.find('.ui-icon-asc').removeClass(disabledClassName)
+        column.find('.ui-icon-desc').addClass(disabledClassName)
+      } else {
+        column.find('.ui-icon-asc').addClass(disabledClassName)
+        column.find('.ui-icon-desc').removeClass(disabledClassName)
+      }
+    }
+
     // Gets a particular grid parameter
     getParam(name) {
       return this.getGridEl().getGridParam(name)
@@ -88,6 +167,40 @@ export default class AgGridCtrl {
     // Sets the given grid parameter
     setParam(params) {
       return this.getGridEl().setGridParam(params)
+    }
+
+    // returns the column model
+    getColModel() {
+      return this.getParam('colModel')
+      // return _.filter(this.getParam('colModel'), gridColumn => {
+      //   return !systemColumns.includes(gridColumn.name)
+      // })
+    }
+
+    // reconfigures columns, expects an objecct with a visible array and hidden array
+    configColumns(colConfig) {
+      const colSetup = { newColumnsOrder: [], displayedColumns: [], hiddenColumns: [] }
+
+      this.getColModel().forEach((column, index) => {
+        if (this.systemColumns.includes(column.name)) {
+          return colSetup.newColumnsOrder.push(index)
+        }
+      })
+
+      colConfig.visible.forEach(function(column, index) {
+        colSetup.displayedColumns.push(column.name)
+        colSetup.newColumnsOrder.push(column.originalId)
+      })
+
+      colConfig.hidden.forEach(function(column, index) {
+        colSetup.hiddenColumns.push(column.name)
+        colSetup.newColumnsOrder.push(column.originalId)
+      })
+
+      const gridEl = this.getGridEl()
+      gridEl.remapColumns(colSetup.newColumnsOrder, true)
+      gridEl.jqGrid('showCol', colSetup.displayedColumns)
+      gridEl.jqGrid('hideCol', colSetup.hiddenColumns)
     }
 
     // Updates the values (using the data array) in the row with rowid.
@@ -243,26 +356,6 @@ export default class AgGridCtrl {
       const showOrHide = this.isColumnHidden(columnId) ? 'showCol' : 'hideCol'
       this.getGridEl().jqGrid(showOrHide, columnId)
       return this._triggerResize()
-    }
-
-    // Invokes a dialog for choosing and reordering grid's columns
-    // see: http://www.trirand.com/jqgridwiki/doku.php?id=wiki%3ajquery_ui_methods#column_chooser
-    columnChooser(options) {
-      // Function which will be called when the user press Ok button
-      // inside the column chooser dialog.
-      if (options == null) { options = {} }
-      options.done = perm => {
-        // call `remapColumns` method in order to reorder the columns
-        if (perm) { this.getGridEl().jqGrid('remapColumns', perm, true) }
-
-        // TODO wrap it into service
-        // Store chosen column in the local storage
-        const chosenColumns = _.map(this._getColModel(), column => _.pick(column, 'name', 'hidden'))
-
-        return window.localStorage.setItem(`gridz.${this.getGridId()}.chosenColumns`, angular.toJson(chosenColumns))
-      }
-
-      return this.getGridEl().jqGrid('columnChooser', options)
     }
 
     // Returns data uri with xls file content for rows from the current grid view.

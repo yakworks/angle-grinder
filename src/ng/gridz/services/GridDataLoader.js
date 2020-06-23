@@ -2,9 +2,12 @@ import angular from 'angular'
 import gridzModule from '../gridzModule'
 import _ from 'lodash'
 
+/**
+ * Dataloader for grid that talks to rest interface
+ */
 const gridz = angular.module(gridzModule)
 
-class AgGridDataLoaderClass {
+class GridDataLoader {
   constructor($log, $http, $document) {
     // url - data source url
     // gridCtrl - grid controller instance
@@ -33,5 +36,4 @@ class AgGridDataLoaderClass {
   }
 }
 
-AgGridDataLoaderClass.$inject = ['$log', '$http', '$document']
-gridz.service('agGridDataLoader', AgGridDataLoaderClass)
+gridz.service('GridDataLoader', GridDataLoader)

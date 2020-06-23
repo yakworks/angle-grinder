@@ -156,7 +156,7 @@ angular.module('ui.select2', [])
                   // if it has opts.showSelectAll the add menu item
                   opts.data.results = [{ id: 'selectAll' }, ...opts.data.results]
                   opts.formatResult = function(object, container, query) {
-                    console.log('formatResult', object)
+                    log('formatResult', object)
                     if (object.id === 'selectAll') {
                       return `
                         <span class="select-all-menu">
@@ -172,7 +172,7 @@ angular.module('ui.select2', [])
                 const handleSelectAll = function(e) {
                   if (!showSelectAll) return // exit fast if we showSelectAll menu is not enabled
                   if (_.includes(e.val, 'selectAll')) {
-                    console.log('includes opts.data', opts.data)
+                    log('includes opts.data', opts.data)
                     var selected = []
                     opts.data.results.forEach(item => {
                       if (item.id !== 'selectAll') {
@@ -186,7 +186,6 @@ angular.module('ui.select2', [])
                 // Set the view and model value and update the angular template manually for the ajax/multiple select2.
                 elm.bind('change', function(e) {
                   e.stopImmediatePropagation()
-                  // console.log('change', e)
                   handleSelectAll(e)
                   if (scope.$$phase || scope.$root.$$phase) {
                     return
@@ -208,7 +207,6 @@ angular.module('ui.select2', [])
               //   })
               // }
             }
-            // console.log("opts for select2",opts)
 
             elm.bind('$destroy', function() {
               elm.select2('destroy')

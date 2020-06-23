@@ -2,6 +2,7 @@
 const data = require('../src/data/selects')
 const invoices = require('../src/data/invoices')
 const delay = require('mocker-api/utils/delay')
+const _ = require('lodash');
 
 const noProxy = process.env.NO_PROXY === 'true'
 
@@ -89,13 +90,19 @@ const proxy = {
   // Priority processing.
   'GET /invoices': (req, res) => {
     let result = invoices
-    console.log('invoice get', req.params)
+    // console.log('req', req)
+    // console.log('res', res)
+    // console.log('invoice get', req.params)
     const { query } = req
+    console.log('query', query)
     if (query._search && query._search === 'true') {
       const filters = JSON.parse(query.filters)
       if (filters.hasOwnProperty('complete')) {
         result = result.filter(inv => inv.complete === (filters.complete === 'true'))
       }
+    }
+    if (query.sort) {
+      result = _.orderBy(result, query.sort , query.order)
     }
     return res.json(result)
   },

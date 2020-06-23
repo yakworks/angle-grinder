@@ -1,4 +1,6 @@
+/* eslint-disable no-unused-vars */
 import _ from 'lodash'
+import Log from 'angle-grinder/src/utils/Log'
 
 class Gridz {
   constructor(element, options) {
@@ -411,10 +413,16 @@ $.fn.gridz = function(option) {
 
   return this.each(function() {
     const el = $(this)
-
+    // Log.debug("gridz el", el)
     instance = el.data('gridz')
+
     const options = typeof option === 'object' ? option : {}
-    if (!instance) { return el.data('gridz', (instance = new Gridz(this, options))) }
+    // Log.debug("gridz instance", instance)
+    if (!instance) {
+      const ginstance = el.data('gridz', (instance = new Gridz(this, options)))
+      // Log.debug("el.data('gridz')", el.data('gridz'))
+      return ginstance
+    }
   })
 }
 

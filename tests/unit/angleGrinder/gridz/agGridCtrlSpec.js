@@ -434,19 +434,6 @@ describe("module: angleGrinder.gridz, conroller: AgGridCtrl", function() {
     });
   });
 
-  describe("#columnChooser", function() {
-    it("is defined", () => expect(ctrl.columnChooser).to.not.be.undefined);
-
-    return it("calls `columnChooser` method on the jqGrid", function() {
-      // When
-      ctrl.columnChooser();
-
-      // Then
-      expect(jqGridEl.jqGrid).to.have.been.called;
-      return expect(jqGridEl.jqGrid).to.have.been.calledWith("columnChooser");
-    });
-  });
-
   describe("pagination", function() {
 
     describe("#getCurrentPage", function() {

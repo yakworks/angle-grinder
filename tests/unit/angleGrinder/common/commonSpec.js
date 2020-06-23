@@ -39,17 +39,4 @@ describe("commonSpec", function() {
       }));
     });
   });
-
-  return describe("service: camelize", function() {
-
-    context("when the input is dasherized", () => it("camalizes the input", inject(function(camelize) {
-      expect(camelize("foo_bar")).to.eq("fooBar");
-      expect(camelize("foo.bar.baz")).to.eq("fooBarBaz");
-      return expect(camelize("-foo-bar")).to.eq("FooBar");
-    })
-    ));
-
-    return context("when the input is not dasherized", () => it("does nothing", inject(camelize => expect(camelize("foobar")).to.eq("foobar"))
-    ));
-  });
 });

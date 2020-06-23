@@ -9,13 +9,21 @@ export default class ListCtrl {
   foo = "bar"
   showSearchForm = true
   data = generateData(100)
+  hasSelected = false
 
+  // onSelect = () => {
+  //   this.$scope.$evalAsync(()=>{
+  //     this.hasSelected = this.grid.hasSelectedRowIds()
+  //   })
+  // }
   gridOptions = exampleGridOptions({
-    onSelectRow: args => Log.debug('exampleGridOptions selected row:', args),
+    // onSelectRow: this.onSelect,
+    // onSelectAll: this.onSelect,
     pager: false,
     datatype: (params, loadingDivSelector) => {
       Log.debug("params", params)
       Log.debug("loadingDivSelector", loadingDivSelector)
+      Log.debug("this.grid.getGridz", this.grid.getGridz())
       this.grid.addJSONData(this.data)
       // show/hide the loading animation
       // const loadingEl = $document.find('#' + $.jgrid.jqID(loadingDivSelector))
@@ -26,11 +34,10 @@ export default class ListCtrl {
 
   menuItems = [
     {
-      display: 'Refresh', icon: 'fa-refresh',
-      action: () => Swal.fire('a special event')
+      display: 'Refresh', icon: 'fa-refresh', action: () => this.grid.reloadKeepSelected()
     },
-    { display: 'Reset Sort', icon: 'fa-sort' },
-    { display: 'Column Config', icon: 'fa-exchange' },
+    { display: 'Reset Sort', icon: 'fa-sort', action: () => this.grid.resetSort() },
+    { display: 'Column Config', icon: 'fa-exchange', action: () => this.ColumnConfigServ.open(this.grid) },
     { divider: true },
     { display: 'Hide/Show Toggle', icon: 'fa-minus' },
     { display: 'Expand', icon: 'fa-expand' }
@@ -46,9 +53,10 @@ export default class ListCtrl {
   //getter to get scope reference
   get grid() { return this.$scope.exampleGrid }
 
-  constructor($scope, $uibModal) {
+  constructor($scope, $uibModal, ColumnConfigServ) {
     this.$scope = $scope
     this.$uibModal = $uibModal
+    this.ColumnConfigServ = ColumnConfigServ
   }
 
   editRecord(id) {
@@ -69,6 +77,14 @@ export default class ListCtrl {
 
   modalOptions(template) {
     return {
+      // controller: function ($uibModalInstance, $scope) {
+      //   this.cancel = () => {
+      //     console.log("MassUpdateCtrl cancel scope", $scope)
+      //     $uibModalInstance.dismiss('cancel')
+      //   }
+      // },
+      // controllerAs: '$ctrl',
+      // bindToController: true,
       template: template,
       keyboard: false, // do not close the dialog with ESC key
       backdrop: 'static', // do not close on click outside of the dialog,
@@ -76,11 +92,24 @@ export default class ListCtrl {
     }
   }
 
-  massUpdate() {
+  showMassUpdate() {
+    let modalOpts = {
+      controller: function ($uibModalInstance, $scope) {
+        this.cancel = () => {
+          console.log("MassUpdateCtrl cancel scope", $scope)
+          $uibModalInstance.dismiss('cancel')
+        }
+      },
+      controllerAs: '$ctrl',
+      // bindToController: true,
+      template: require('./form/massUpdateForm.html'),
+      keyboard: false, // do not close the dialog with ESC key
+      backdrop: 'static', // do not close on click outside of the dialog,
+      // scope: this.$scope
+    }
     // here just for example, does nothing
-    this.form = this.$uibModal.open(
-      this.modalOptions(require('./form/massUpdateForm.html'))
-    )
+    this.form = this.$uibModal.open(modalOpts)
+    console.log("showMassUpdate", this.form)
   }
 
   xlsExport() {
@@ -110,5 +139,19 @@ export default class ListCtrl {
 
   getSelectedRowsData() {
     this.selectedRowsData = this.grid.getSelectedRows()
+  }
+}
+
+class MassUpdateCtrl {
+
+  constructor($scope, $uibModalInstance) {
+    console.log("MassUpdateCtrl constructor scope", $scope)
+    this.$scope = $scope
+    this.$uibModalInstance = $uibModalInstance
+  }
+
+  cancel() {
+    console.log("MassUpdateCtrl cancel scope", this.$scope)
+    this.$uibModalInstance.dismiss('cancel')
   }
 }

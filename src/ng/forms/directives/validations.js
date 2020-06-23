@@ -165,7 +165,6 @@ forms.directive('agValidationErrors', (validationMessages, $interpolate) => ({
             result.push(undefined)
           }
         }
-        console.log('displayErrorMessages', result)
         return result
       })()
     }
