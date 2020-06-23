@@ -1,7 +1,7 @@
 import angular from 'angular'
 import gridzModule from '../gridzModule'
 // import _ from 'lodash'
-import Log from 'angle-grinder/src/utils/Log'
+// import Log from 'angle-grinder/src/utils/Log'
 
 /**
  * Opens dialog to show,hide and change order of columns
@@ -18,7 +18,7 @@ class ColumnConfigCtrl {
     this.$uibModalInstance = $uibModalInstance
     this.gridCtrl = gridCtrl
     this.colModel = gridCtrl.getColModel()
-    Log.debug('gridCtrl', gridCtrl)
+    //Log.debug('ColumnConfigCtrl gridCtrl', gridCtrl)
 
     this.colModel.forEach((gridColumn, index) => {
       if (!gridCtrl.systemColumns.includes(gridColumn.name)) {
