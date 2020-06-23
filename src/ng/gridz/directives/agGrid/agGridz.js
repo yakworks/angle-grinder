@@ -7,11 +7,11 @@ import _ from 'lodash'
 const gridz = angular.module(gridzModule)
 
 gridz.directive('agGrid',
-  function($timeout, $parse, $q, agGridDataLoader, ActionPopupHandler, pathWithContext) {
+  function($timeout, $parse, $q, GridDataLoader, ActionPopupHandler, pathWithContext) {
     const link = function(scope, element, attrs, gridCtrl) {
-      console.log('AgGrids post link')
+      // Log.debug('AgGrids post link')
       // find grid placeholder
-      const gridEl = element.find('table.gridz')
+      const gridEl = gridCtrl.getGridEl()
 
       // publish agGrid controller to the parent scope
       const alias = attrs.agGridName
@@ -32,13 +32,13 @@ gridz.directive('agGrid',
 
         // kill the grid when the related scope is destroyed
         scope.$on('$destroy', function() {
-          Log.debug('[agGrid] destroying the grid', gridEl)
+          // Log.debug('[agGrid] destroying the grid', gridEl)
           return gridEl.jqGrid('GridDestroy')
         })
 
         // Initializes a grid with the given options
         const initializeGrid = function() {
-          Log.debug(`[agGrid] initializing '${alias}' with`, options)
+          // Log.debug(`[agGrid] initializing '${alias}' with`, options)
 
           // assign the url
           if (!(!_.isNil(options.url)) && (!_.isNil(options.path))) {
@@ -47,13 +47,11 @@ gridz.directive('agGrid',
 
           // use `$http` service to load the grid data
           if ((options.datatype === undefined) || (options.datatype === null)) {
-            options.datatype = agGridDataLoader(options.url, gridCtrl)
+            options.datatype = GridDataLoader(options.url, gridCtrl)
           }
 
           if (options.dropGrouping) {
-            const {
-              groupingView
-            } = options
+            const { groupingView } = options
             groupingView.groupText = groupingView.groupText.map(value => '<input type="checkbox" class="cbox"/>' + value)
             gridEl.jqGrid('setGridParam', 'groupingView', groupingView)
           }
@@ -116,11 +114,7 @@ gridz.directive('agGrid',
 
           const groupCheckBox = '.jqgroup > td > .cbox'
 
-          gridEl.on('jqGridSelectRow', function() {
-            console.log('jqGridSelectRow')
-          })
           gridEl.on('jqGridSelectAll', function() {
-            console.log('jqGridSelectAll')
             if (options.dropGrouping) {
               const isChecked = $('#cb_' + alias).is(':checked')
               const selectedIds = gridEl.jqGrid('getGridParam', 'selarrrow')
@@ -171,7 +165,7 @@ gridz.directive('agGrid',
                 filters.firstLoad = false
                 postData.defaultFilters = defaultFilters
                 postData.filters = JSON.stringify(filters)
-                return console.log('Toolbar Search')
+                // return console.log('Toolbar Search')
               }
             }
             )
@@ -226,12 +220,9 @@ gridz.directive('agGrid',
               if (!element.is(':visible')) { return }
               // initialize the grid on the visible element
               initializeGrid()
-
               // unregister the watcher to free resources
               return unregister()
-            }
-
-            , 100, false) // Here false means don't fire new digest cycle, otherwise $watch will be called infinitely.
+            }, 100, false) // Here false means don't fire new digest cycle, otherwise $watch will be called infinitely.
 
             return false
           })

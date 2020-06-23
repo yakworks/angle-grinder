@@ -4,7 +4,7 @@ import _ from 'lodash'
 
 const gridz = angular.module(gridzModule)
 
-class AgGridDataLoaderClass {
+class GridDataLoader {
   constructor($log, $http, $document) {
     // url - data source url
     // gridCtrl - grid controller instance
@@ -33,5 +33,4 @@ class AgGridDataLoaderClass {
   }
 }
 
-AgGridDataLoaderClass.$inject = ['$log', '$http', '$document']
-gridz.service('agGridDataLoader', AgGridDataLoaderClass)
+gridz.service('GridDataLoader', GridDataLoader)

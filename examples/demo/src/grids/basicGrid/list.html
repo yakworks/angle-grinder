@@ -2,9 +2,9 @@
   <basic-search-form ng-show="$ctrl.showSearchForm"></basic-search-form>
 
   <ag-toolbar class="is-lighter is-dense has-border">
-    <div class="toolbar-item px-0 py-0" ng-show="$ctrl.hasSelected">
+    <div class="toolbar-item px-0 py-0" ng-show="$ctrl.grid.hasSelected">
       <div class="selection-pointer"><i class="fa"></i></div>
-      <ag-button icon="fa-edit" uib-tooltip="Mass Update" ng-click="$ctrl.massUpdate()"></ag-button>
+      <ag-button icon="fa-edit" uib-tooltip="Mass Update" ng-click="$ctrl.showMassUpdate()"></ag-button>
       <ag-button icon="fa-table" uib-tooltip="Export to Excel" ng-click="$ctrl.xlsExport()"></ag-button>
       <div class="divider-vertical"></div>
     </div>

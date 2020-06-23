@@ -1,6 +1,6 @@
 import agGridz from 'angle-grinder/src/ng/gridz'
 
-describe("module: angleGrinder.gridz, service: agGridDataLoader", function() {
+describe("module: angleGrinder.gridz, service: GridDataLoader", function() {
 
   let loadingEl = null;
 
@@ -25,10 +25,10 @@ describe("module: angleGrinder.gridz, service: agGridDataLoader", function() {
   let gridCtrl = null;
   let loader = null;
 
-  beforeEach(inject(function($httpBackend, agGridDataLoader) {
+  beforeEach(inject(function($httpBackend, GridDataLoader) {
     gridCtrl = {addJSONData: sinon.stub()};
 
-    loader = agGridDataLoader("/api/users", gridCtrl);
+    loader = GridDataLoader("/api/users", gridCtrl);
     return $httpBackend.expectGET("/api/users?page=1").respond(201, []);
   })
   );

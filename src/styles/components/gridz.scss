@@ -26,6 +26,16 @@ $grid-border: $border;
   overflow: visible
 }
 
+// when dragging to reposition columns
+.ui-widget-content .ui-state-default.ui-sortable-helper {
+  background-image: linear-gradient($grey-lightest);
+}
+
+// last column
+.ui-widget-content th.ui-state-default:last-child{
+  border-right-color: transparent;
+}
+
 .ui-jqgrid .ui-jqgrid-bdiv tr.ui-row-ltr>td {
   border: 0;
 }
@@ -491,8 +501,8 @@ $grid-border: $border;
 .manage-columns-modal ul[dnd-list] li {
   background-color: #fff;
   border: 1px solid #ddd;
-  border-top-right-radius: 4px;
-  border-top-left-radius: 4px;
+  // border-top-right-radius: 4px;
+  // border-top-left-radius: 4px;
   display: block;
   padding: 5px 15px;
   margin-bottom: -1px;

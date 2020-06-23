@@ -119,8 +119,8 @@ gridz.directive('agManageGridColumns', [
   </div>
 
   <div class="modal-footer">
-      <ag-cancel-button ng-click="cancel()"></ag-cancel-button>
       <div class="btn btn-default btn-primary" ng-click="save()"><i class="fa fa-check fa-inverse"></i> Save</div>
+      <ag-cancel-button ng-click="cancel()"></ag-cancel-button>
   </div>
 </div>\
 `

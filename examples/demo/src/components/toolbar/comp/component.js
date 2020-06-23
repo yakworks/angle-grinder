@@ -19,7 +19,7 @@ class controller {
   ]
 
   menuItemClick = function(menuItem, event) {
-    console.log('menuItemClick params', { menuItem, event })
+    // console.log('menuItemClick params', { menuItem, event })
     Swal.fire(
       `${menuItem.display} item clicked `,
       `<pre><code class="json">${JSON.stringify(menuItem, null, 2)}</code></pre>`
