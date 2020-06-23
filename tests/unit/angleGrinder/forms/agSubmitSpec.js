@@ -78,14 +78,16 @@ describe("Directive: agSubmit", function() {
         });
       });
 
-      xdescribe("on error", function() {
+      describe("on error", function() {
 
         let response = null;
 
         beforeEach(inject(function($q) {
-          const deferred = $q.defer();
-          deferred.reject(response);
-
+          const deferred = $q.defer()
+          deferred.reject(response)
+          // FIXME agSubmit got te promise and adds catch to it, but for some reason until we have it here it throws
+          // Possibly unhandled rejection
+          deferred.promise.catch(angular.noop)
           return $scope.save = () => [deferred.promise, $scope.item];
         }));
 
