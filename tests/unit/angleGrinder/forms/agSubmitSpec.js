@@ -1,4 +1,5 @@
-import formsModule from 'angle-grinder/src/ng/forms'
+import formsModule from 'angle-grinder/src/angle-grinder'
+//import agMod from '~/angle-grinder'
 
 describe("Directive: agSubmit", function() {
 
