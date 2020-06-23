@@ -18,7 +18,7 @@ class ColumnConfigCtrl {
     this.$uibModalInstance = $uibModalInstance
     this.gridCtrl = gridCtrl
     this.colModel = gridCtrl.getColModel()
-    //Log.debug('ColumnConfigCtrl gridCtrl', gridCtrl)
+    // Log.debug('ColumnConfigCtrl gridCtrl', gridCtrl)
 
     this.colModel.forEach((gridColumn, index) => {
       if (!gridCtrl.systemColumns.includes(gridColumn.name)) {
