@@ -4,6 +4,7 @@ import _ from 'lodash'
 
 export default class AgBaseControl {
   isRequired = false
+  isDisabled= false
 
   /* @ngInject */
   constructor($element, $timeout, $scope, $transclude) {
@@ -47,6 +48,11 @@ export default class AgBaseControl {
     if (this.required === '' || this.required === 'true' ||
         this.ngRequired === '' || this.ngRequired === 'true') {
       this.isRequired = true
+    }
+    // if disabled is added it wont be undefined and may have blank str if no value is set
+    if (this.disabled === '' || this.disabled === 'true' ||
+        this.ngDisabled === '' || this.ngDisabled === 'true') {
+      this.isDisabled = true
     }
     // this.transcludeSlot = ['link', 'button'].filter((trans) => this.$transclude.isSlotFilled(trans))[0]
     // this.hasTranscluded = !!this.transcludeSlot
@@ -109,6 +115,7 @@ AgBaseControl.common = {
     name: '@',
     placeholder: '@',
     required: '@',
+    disabled: '@',
     ngRequired: '@',
     fieldClass: '@',
     inputClass: '@',

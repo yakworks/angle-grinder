@@ -73,6 +73,7 @@ const template = `
   ng-change="$ctrl.onChange()"
   ng-blur="$ctrl.onBlur()"
   ng-required="{{$ctrl.isRequired}}"
+  ng-disabled="{{$ctrl.isDisabled}}"
 >
 `
 export default () => ({
