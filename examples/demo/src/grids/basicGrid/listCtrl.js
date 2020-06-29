@@ -3,19 +3,23 @@ import {generateData} from '../dataGenerator'
 import exampleGridOptions from "../exampleGridOptions"
 import Log from 'angle-grinder/src/utils/Log'
 import Swal from 'angle-grinder/src/tools/swal'
+import _ from 'lodash'
 
 /* @ngInject */
 export default class ListCtrl {
   foo = "bar"
   showSearchForm = true
   data = generateData(100)
-  hasSelected = false
 
-  // onSelect = () => {
-  //   this.$scope.$evalAsync(()=>{
-  //     this.hasSelected = this.grid.hasSelectedRowIds()
-  //   })
-  // }
+  toolbarOptions = {
+    selectedButtons: [
+      { icon: 'fa-table', tooltip: "Promise To Pay", action: () => this.ptp() }
+    ],
+    leftButtons: [
+      { icon: 'fa-table', tooltip: "Export to Excel", action: () => this.gridCtrl.xlsExport() }
+    ]
+  }
+
   gridOptions = exampleGridOptions({
     // onSelectRow: this.onSelect,
     // onSelectAll: this.onSelect,
@@ -23,8 +27,9 @@ export default class ListCtrl {
     datatype: (params, loadingDivSelector) => {
       Log.debug("params", params)
       Log.debug("loadingDivSelector", loadingDivSelector)
-      Log.debug("this.grid.getGridz", this.grid.getGridz())
-      this.grid.addJSONData(this.data)
+      Log.debug("this.grid.getGridz", this.gridCtrl.getGridz())
+      this.data = _.orderBy(this.data, params.sort , params.order)
+      this.gridCtrl.addJSONData(this.data)
       // show/hide the loading animation
       // const loadingEl = $document.find('#' + $.jgrid.jqID(loadingDivSelector))
       // loadingEl.show()
@@ -32,26 +37,8 @@ export default class ListCtrl {
     }
   })
 
-  menuItems = [
-    {
-      display: 'Refresh', icon: 'fa-refresh', action: () => this.grid.reloadKeepSelected()
-    },
-    { display: 'Reset Sort', icon: 'fa-sort', action: () => this.grid.resetSort() },
-    { display: 'Column Config', icon: 'fa-exchange', action: () => this.ColumnConfigServ.open(this.grid) },
-    { divider: true },
-    { display: 'Hide/Show Toggle', icon: 'fa-minus' },
-    { display: 'Expand', icon: 'fa-expand' }
-  ]
-
-  menuItemClick = function(menuItem, event) {
-    console.log('menuItemClick params', { menuItem, event })
-    Swal.fire(
-      `${menuItem.display} item clicked `,
-      `<pre><code class="json">${JSON.stringify(menuItem, null, 2)}</code></pre>`
-    )
-  }
   //getter to get scope reference
-  get grid() { return this.$scope.exampleGrid }
+  get gridCtrl() { return this.$scope.exampleGrid }
 
   constructor($scope, $uibModal, ColumnConfigServ) {
     this.$scope = $scope
@@ -60,7 +47,7 @@ export default class ListCtrl {
   }
 
   editRecord(id) {
-    let data = this.grid.getRowData(id)
+    let data = this.gridCtrl.getRowData(id)
     // normally when dealing with rest we would get the object from server based on selected id
     // here we need to get the "flattened" grid data back into object form
     data.customer = {name: data['customer.name']}
@@ -68,7 +55,7 @@ export default class ListCtrl {
   }
 
   deleteRecord(id){
-    this.grid.removeRow(id)
+    this.gridCtrl.removeRow(id)
   }
 
   createRecord() {
@@ -112,10 +99,6 @@ export default class ListCtrl {
     console.log("showMassUpdate", this.form)
   }
 
-  xlsExport() {
-    this.grid.xlsExport()
-  }
-
   showForm(data) {
     this.vm = data
     this.form = this.$uibModal.open(
@@ -125,10 +108,10 @@ export default class ListCtrl {
 
   save(data){
     if (data.id) {
-      this.grid.updateRow(data.id, data)
+      this.gridCtrl.updateRow(data.id, data)
     } else {
       data.id = new Date().getMilliseconds() //random id
-      this.grid.addRow(data.id, data)
+      this.gridCtrl.addRow(data.id, data)
     }
     this.closeDialog()
   }
@@ -137,8 +120,9 @@ export default class ListCtrl {
     this.form.close()
   }
 
-  getSelectedRowsData() {
-    this.selectedRowsData = this.grid.getSelectedRows()
+  displaySelectedRowsData() {
+    console.log("displaySelectedRowsData")
+    this.selectedRowsData = this.gridCtrl.getSelectedRows()
   }
 }
 

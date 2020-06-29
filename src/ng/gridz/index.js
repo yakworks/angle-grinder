@@ -17,10 +17,12 @@ import './directives/agReloadGrid'
 import './directives/agResetSortGrid'
 import './directives/gridCrud'
 import './directives/search'
-import './directives/toolbar'
+// import './directives/toolbar'
 
 import './directives/agGrid/gridz'
 import './directives/agGrid/agGridz'
 import './directives/agGrid/agGridCtrl'
+
+import './ag-grid/agGridz.js'
 
 export default gridzModule

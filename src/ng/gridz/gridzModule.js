@@ -5,6 +5,7 @@ import agSelect2 from '../legacy/select2'
 import ngSanitize from 'angular-sanitize'
 import 'angular-drag-and-drop-lists'
 import 'free-jqgrid/js/jquery.jqgrid.src.js'
+import toolbarMod from './toolbar'
 
 const MOD_NAME = 'angleGrinder.gridz'
 export default MOD_NAME
@@ -13,7 +14,8 @@ var gridz = angular.module('angleGrinder.gridz', [
   resourceSupport,
   agSelect2,
   ngSanitize,
-  'dndLists'
+  'dndLists',
+  toolbarMod
 ])
 
 // Globally expose custom formatters for dates and currencies.

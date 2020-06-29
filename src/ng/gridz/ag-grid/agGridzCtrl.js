@@ -7,8 +7,9 @@ export default class AgGridCtrl {
     systemColumns = ['cb', '-row_action_col']
 
     /* @ngInject */
-    constructor($rootScope, $element, $attrs, $q, hasSearchFilters, FlattenServ, xlsData, csvData, $window) {
+    constructor($rootScope, $scope, $element, $attrs, $q, hasSearchFilters, FlattenServ, xlsData, csvData, $window) {
       this.$rootScope = $rootScope
+      this.$scope = $scope
       this.$element = $element
       this.$attrs = $attrs
       this.$q = $q
@@ -23,10 +24,12 @@ export default class AgGridCtrl {
       // Log.debug('AgGridCtrl $onInit')
       const { $element, $attrs } = this
       // modify grid html element, generate grid id from the name or assign default value
-      this.gridId = !_.isNil($attrs.agGridName) ? _.camelCase($attrs.agGridName) : 'gridz'
+      this.gridId = !_.isNil($attrs.gridId) ? _.camelCase($attrs.gridId) : 'gridz'
       const id = this.gridId
 
-      this.getGridEl().attr('id', id)
+      const gridEl = this.getGridEl()
+
+      gridEl.attr('id', id)
       $element.find('div.gridz-pager').attr('id', `${id}-pager`)
 
       // set the hasSelected flag
@@ -35,13 +38,17 @@ export default class AgGridCtrl {
           this.hasSelected = (this.getSelectedRowIds().length > 0)
         })
       }
-      this.getGridEl().on('jqGridSelectRow', onSelect)
-      this.getGridEl().on('jqGridSelectAll', onSelect)
+      gridEl.on('jqGridSelectRow', onSelect)
+      gridEl.on('jqGridSelectAll', onSelect)
     }
 
     // $postLink() {
     // Log.debug('AgGridCtrl $postLink')
     // }
+
+    $onDestroy() {
+      this.getGridEl().jqGrid('GridDestroy')
+    }
 
     getGridEl() {
       return this.gridEl || (this.gridEl = this.$element.find('table.gridz'))
