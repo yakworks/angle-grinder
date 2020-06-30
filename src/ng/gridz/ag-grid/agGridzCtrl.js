@@ -24,7 +24,7 @@ export default class AgGridCtrl {
       // Log.debug('AgGridCtrl $onInit')
       const { $element, $attrs } = this
       // modify grid html element, generate grid id from the name or assign default value
-      this.gridId = !_.isNil($attrs.gridId) ? _.camelCase($attrs.gridId) : 'gridz'
+      // this.gridId = !_.isNil($attrs.gridId) ? _.camelCase($attrs.gridId) : 'gridz'
       const id = this.gridId
 
       const gridEl = this.getGridEl()

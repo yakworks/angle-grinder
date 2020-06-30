@@ -12,12 +12,28 @@ export default class ListCtrl {
   data = generateData(100)
 
   toolbarOptions = {
-    selectedButtons: [
-      { icon: 'fa-table', tooltip: "Promise To Pay", action: () => this.ptp() }
-    ],
-    leftButtons: [
-      { icon: 'fa-table', tooltip: "Export to Excel", action: () => this.gridCtrl.xlsExport() }
-    ]
+    selectedButtons: {
+      ptp: { icon: 'fa-heart', tooltip: "Promise To Pay", action: () => this.ptp() },
+      showSelected: { display:'Display Selected' , color: 'light', action: () => this.displaySelectedRowsData() }
+    },
+    leftButtons: {
+      import: { display:'import' , color: 'light', action: () => this.import() },
+      drop: {
+        display:'drop' , color: 'light',
+        menuItems: [
+          {
+            display: '<strong>Main Action</strong>',
+            icon: 'fa-thumbs-up',
+            action: () => Swal.fire('Main Action')
+          },
+          {
+            display: 'Other Action',
+            icon: 'mdi-gauge',
+            action: () => Swal.fire('Other Action')
+          }
+        ]
+      }
+    }
   }
 
   gridOptions = exampleGridOptions({
@@ -38,10 +54,13 @@ export default class ListCtrl {
   })
 
   //getter to get scope reference
-  get gridCtrl() { return this.$scope.exampleGrid }
+  // get gridCtrl() { return this.$element this.$scope.exampleGrid }
 
-  constructor($scope, $uibModal, ColumnConfigServ) {
+  get gridCtrl() { return this.$element.find('ag-gridz').controller('agGridz') }
+
+  constructor($scope, $element, $uibModal, ColumnConfigServ) {
     this.$scope = $scope
+    this.$element = $element
     this.$uibModal = $uibModal
     this.ColumnConfigServ = ColumnConfigServ
   }
@@ -123,6 +142,11 @@ export default class ListCtrl {
   displaySelectedRowsData() {
     console.log("displaySelectedRowsData")
     this.selectedRowsData = this.gridCtrl.getSelectedRows()
+  }
+
+  import() {
+    console.log("import")
+    Swal.fire('import something')
   }
 }
 

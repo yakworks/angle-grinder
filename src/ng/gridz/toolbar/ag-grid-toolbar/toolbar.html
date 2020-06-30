@@ -1,16 +1,20 @@
 <ag-toolbar class="is-lighter is-dense has-border">
   <div class="toolbar-item px-0 py-0" ng-show="tbCtrl.gridCtrl.hasSelected">
     <div class="selection-pointer"><i class="fa"></i></div>
-    <ag-button ng-repeat="btnItem in tbCtrl.selectedButtons"
-      icon="{{btnItem.icon}}" uib-tooltip="{{btnItem.tooltip}}"
-      ng-click="tbCtrl.fireButtonClick(btnItem, $event)">
-    </ag-button>
+    <ag-button ng-repeat="(key, btnItem) in tbCtrl.selectedButtons"
+      icon="{{btnItem.icon}}" uib-tooltip="{{btnItem.tooltip}}" color="{{btnItem.color}}"
+      ng-click="tbCtrl.fireButtonClick(key, btnItem, $event)">{{btnItem.display}}</ag-button>
     <div class="divider-vertical"></div>
   </div>
-  <ag-button icon="fa-plus" uib-tooltip="Create New" ng-click="tbCtrl.gridCtrl.actionCtrl.createRecord()"></ag-button>
-  <ag-button color="light" ng-click="tbCtrl.gridCtrl.actionCtrl.displaySelectedRowsData()">Show Selected</ag-button>
-
+  <tb-button ng-repeat="(key, btnItem) in tbCtrl.leftButtons" opts="btnItem"></tb-button>
   <div class="spacer"></div>
+  <div class="toolbar-item" ng-bind-html="tbCtrl.display">
+    <div class="buttons has-addons">
+      <ag-button ng-model="quickPick.states" uib-btn-radio="'all'">All</ag-button>
+      <ag-button ng-model="quickPick.states" uib-btn-radio="'open'">Open</ag-button>
+      <ag-button ng-model="quickPick.states" uib-btn-radio="'closed'">Closed</ag-button>
+    </div>
+  </div>
   <div class="toolbar-item">
     <div class="buttons has-addons">
       <ag-button ng-model="quickPick.states" uib-btn-radio="'all'">All</ag-button>
