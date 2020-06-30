@@ -336,6 +336,11 @@ export default class AgGridCtrl {
     }
 
     // Sets the grid search filters and triggers a reload
+    quickSearch(queryText) {
+      return this.search({ quickSearch: queryText })
+    }
+
+    // Sets the grid search filters and triggers a reload
     search(filters) {
       const deferred = this.$q.defer()
 

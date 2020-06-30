@@ -10,7 +10,7 @@ class Controller {
   $onInit() {
     const opts = this.opts
     if (opts.display && !opts.color) {
-      opts.color = 'light'
+      opts.color = 'transparent'
     }
     // if it has menu items then its a dropdown not a button
     if (opts.menuItems) {

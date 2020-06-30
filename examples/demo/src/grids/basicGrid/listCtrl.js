@@ -12,14 +12,23 @@ export default class ListCtrl {
   data = generateData(100)
 
   toolbarOptions = {
+    rightSection: {
+      template:`
+        <div class="buttons has-addons">
+          <ag-button ng-model="$ctrl.vm.quickPick.states" uib-btn-radio="'all'">All</ag-button>
+          <ag-button ng-model="$ctrl.vm.quickPick.states" uib-btn-radio="'open'">Open</ag-button>
+          <ag-button ng-model="$ctrl.vm.quickPick.states" uib-btn-radio="'closed'">Closed</ag-button>
+        </div>`,
+      scope: () => this.$scope
+    },
     selectedButtons: {
       ptp: { icon: 'fa-heart', tooltip: "Promise To Pay", action: () => this.ptp() },
-      showSelected: { display:'Display Selected' , color: 'light', action: () => this.displaySelectedRowsData() }
+      showSelected: { display:'Display Selected' , action: () => this.displaySelectedRowsData() }
     },
     leftButtons: {
-      import: { display:'import' , color: 'light', action: () => this.import() },
+      import: { display:'import' , action: () => this.import() },
       drop: {
-        display:'drop' , color: 'light',
+        display:'drop' , color: 'primary',
         menuItems: [
           {
             display: '<strong>Main Action</strong>',
