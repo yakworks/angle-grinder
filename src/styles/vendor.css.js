@@ -11,5 +11,4 @@ import 'v-button/dist/v-button.css'
 // import 'ladda/dist/ladda-themeless.min.css'
 import 'angular-xeditable/dist/css/xeditable.css'
 // OLD?
-import 'eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css' // change to scss
 import '../../components/jquery-file-upload-angular/css/jquery.fileupload.css'

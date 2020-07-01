@@ -1,8 +1,6 @@
 import angular from 'angular'
 import formsModule from '../formsModule'
 import moment from 'moment'
-// import 'eonasdan-bootstrap-datetimepicker/src/js/bootstrap-datetimepicker'
-import _ from 'lodash'
 
 var forms = angular.module(formsModule)
 
@@ -51,77 +49,6 @@ forms.provider('agDate', function() {
     ]
   }
 })
-
-// uses http://eonasdan.github.io/bootstrap-datetimepicker/
-forms.directive('agDatepickerBs', ($timeout, agDate) => ({
-  require: 'ngModel',
-  restrict: 'AE',
-
-  scope: {
-    datepickerOptions: '@'
-  },
-
-  link($scope, $element, $attrs, ngModelCtrl) {
-    const defaultOptions = {
-      format: agDate.getViewFormat(),
-      isoFormat: agDate.getIsoFormat($attrs.dateType),
-      keepOpen: true,
-      debug: true
-    }
-
-    const options = angular.extend(defaultOptions, $scope.$eval($attrs.datepickerOptions))
-    const { isoFormat } = options
-    delete options.isoFormat
-
-    // Decorate datepicker with button and some usefull stuff if directive is element, not attribute
-    if (_.isNil($attrs.agDatepicker)) {
-      $element.addClass('input-group')
-      const input = `<div class="field has-addons datepicker">
-      <div class="control">
-          <input class="input" type="text"
-          name='${$attrs.id || ''}'
-          placeholder="${$attrs.placeholder || ''}"
-          ${!_.isNil($attrs.disabled) ? 'disabled' : undefined}
-          >
-          </div>
-        <span class="control date-button">
-          <a class="button is-light is-flat datepickerbutton"> <!--datepickerbutton - based on it dp.change is fired-->
-            <i class="fa fa-calendar"></i>
-          </a>
-        </span>
-      </div>`
-      $element.append(input)
-    }
-
-    $element.on('dp.change', function(event) {
-      if (ngModelCtrl) {
-        return $timeout(function() {
-          if (!_.isNil(event.date) && (event.date._d !== undefined)) {
-            ngModelCtrl.$setViewValue(moment.utc(event.date._d).format(isoFormat))
-            return ngModelCtrl.$setValidity('dateFormat', agDate.isValid(ngModelCtrl.$modelValue, isoFormat))
-          } else {
-            return ngModelCtrl.$setViewValue('')
-          }
-        })
-      }
-    }).datetimepicker(options)
-
-    const setPickerValue = function() {
-      let date = null
-      if (ngModelCtrl && ngModelCtrl.$viewValue) {
-        date = moment.utc(ngModelCtrl.$viewValue, isoFormat)
-      }
-      const datepicker = $element.data('DateTimePicker')
-      if (datepicker) { return datepicker.date(date) }
-    }
-
-    if (ngModelCtrl) {
-      ngModelCtrl.$render = () => setPickerValue()
-    }
-    return setPickerValue()
-  }
-})
-)
 
 forms.directive('agDate', [
   'agDate', agDate => ({

@@ -8,7 +8,7 @@ forms.directive('editableDatepicker', function(editableDirectiveFactory, $filter
   return editableDirectiveFactory({
     directiveName: 'editableDatepicker',
 
-    inputTpl: '<ag-datepicker-bs ng-model="$data" datepicker-options="{{options}}"></ag-datepicker-bs>',
+    inputTpl: '<ag-datepicker ng-model="$data" datepicker-options="{{options}}"></ag-datepicker>',
 
     render() {
       return this.parent.render.call(this)
