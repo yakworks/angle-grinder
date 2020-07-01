@@ -9,11 +9,12 @@
         ng-model="$ctrl.value"
         ng-change="$ctrl.onChange()"
         ng-required="{{$ctrl.isRequired}}"
+        disabled="{{$ctrl.isDisabled}}"
         datepicker-options="$ctrl.datepickerOptions"
       ></ag-datepicker-input>
     </div>
     <div class="control">
-      <a class="button is-addon" ng-click="$ctrl.showDatepicker()">
+      <a class="button is-addon" ng-click="$ctrl.showDatepicker()" ng-disabled="{{$ctrl.isDisabled}}">
         <i class="fa fa-calendar"></i>
       </a>
     </div>

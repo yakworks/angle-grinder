@@ -1,6 +1,6 @@
 import formsModule from 'angle-grinder/src/ng/forms'
 
-describe("module: angleGrinder.forms", () => describe("directive: editableDatepicker", function() {
+xdescribe("module: angleGrinder.forms", () => describe("directive: editableDatepicker", function() {
 
   beforeEach(angular.mock.module(formsModule));
 

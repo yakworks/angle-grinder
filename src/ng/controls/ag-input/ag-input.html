@@ -16,6 +16,7 @@
         ng-model="$ctrl.value"
         ng-change="$ctrl.onChange()"
         ng-required="{{::$ctrl.isRequired}}"
+        ng-disabled="{{::$ctrl.isDisabled}}"
         ng-minlength="::$ctrl.minimumLength"
         ng-maxlength="::$ctrl.maximumLength"
         maxlength="{{::$ctrl.maximumLength}}"
