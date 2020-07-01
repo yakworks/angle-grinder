@@ -1,4 +1,3 @@
-
 <form name="dpForm" ag-form is-horizontal>
   <ag-input ng-model="$ctrl.vm.name" required hint="sanity check"></ag-input>
   <ag-datepicker ng-model="$ctrl.vm.jsDate" required hint="comes from new Date()"></ag-datepicker>
@@ -31,3 +30,21 @@
   <ag-datepicker label='Vertical Label' ng-model="$ctrl.vm.vertLabelDate"></ag-datepicker>
 </form>
 
+
+<div ng-controller="ModalDemoCtrl" class="mt-4">
+  <script type="text/ng-template" id="myModalContent.html">
+    <div class="modal-header">
+      <h3 class="modal-title">I'm a modal!</h3>
+    </div>
+    <div class="modal-body" ag-form>
+      <ag-datepicker ng-model="test"></ag-datepicker>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-primary" ng-click="ok()">OK</button>
+      <button class="btn btn-primary btn-o" ng-click="cancel()">Cancel</button>
+    </div>
+  </script>
+  <button class="btn btn-primary btn-o" ng-click="open()">
+    Open Modal to test datepicker
+  </button>
+</div>
