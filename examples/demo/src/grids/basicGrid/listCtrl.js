@@ -7,19 +7,18 @@ import _ from 'lodash'
 
 /* @ngInject */
 export default class ListCtrl {
-  foo = "bar"
+
   showSearchForm = true
-  data = generateData(100)
 
   toolbarOptions = {
+    scope: () => this.$scope,
     rightSection: {
       template:`
         <div class="buttons has-addons">
           <ag-button ng-model="$ctrl.vm.quickPick.states" uib-btn-radio="'all'">All</ag-button>
           <ag-button ng-model="$ctrl.vm.quickPick.states" uib-btn-radio="'open'">Open</ag-button>
           <ag-button ng-model="$ctrl.vm.quickPick.states" uib-btn-radio="'closed'">Closed</ag-button>
-        </div>`,
-      scope: () => this.$scope
+        </div>`
     },
     selectedButtons: {
       ptp: { icon: 'fa-heart', tooltip: "Promise To Pay", action: () => this.ptp() },
@@ -37,7 +36,7 @@ export default class ListCtrl {
           },
           {
             display: 'Other Action',
-            icon: 'mdi-gauge',
+            // icon: 'mdi-gauge',
             action: () => Swal.fire('Other Action')
           }
         ]
@@ -62,7 +61,7 @@ export default class ListCtrl {
   //   }
   // })
 
-  get gridCtrl() { return this.$element.find('ag-gridz').controller('agGridz') }
+  get gridCtrl() { return this.$element.find('gridz').controller('gridz') }
 
   /* @ngInject */
   constructor($scope, $element, $uibModal, Invoices) {
@@ -79,9 +78,8 @@ export default class ListCtrl {
         this.gridCtrl.toggleLoading(true)
         this.Invoices.query(params)
           .then( response => {
-            return this.gridCtrl.addJSONData(response)
-            // console.log("response", response)
-            // return gridCtrl.addJSONData(response.data)
+            let data = _.orderBy(response, params.sort , params.order)
+            return this.gridCtrl.addJSONData(data)
           })
           .finally(() =>  {
             this.gridCtrl.toggleLoading(false)
@@ -172,19 +170,5 @@ export default class ListCtrl {
   import() {
     console.log("import")
     Swal.fire('import something')
-  }
-}
-
-class MassUpdateCtrl {
-
-  constructor($scope, $uibModalInstance) {
-    console.log("MassUpdateCtrl constructor scope", $scope)
-    this.$scope = $scope
-    this.$uibModalInstance = $uibModalInstance
-  }
-
-  cancel() {
-    console.log("MassUpdateCtrl cancel scope", this.$scope)
-    this.$uibModalInstance.dismiss('cancel')
   }
 }

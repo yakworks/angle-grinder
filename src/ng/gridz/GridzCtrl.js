@@ -2,7 +2,7 @@
 import _ from 'lodash'
 import Log from 'angle-grinder/src/utils/Log'
 
-export default class AgGridCtrl {
+export default class GridzCtrl {
     highlightClass = 'ui-state-highlight'
     systemColumns = ['cb', '-row_action_col']
 

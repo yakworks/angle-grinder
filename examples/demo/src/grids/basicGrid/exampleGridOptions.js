@@ -36,12 +36,12 @@ export default function exampleGridOptions(options) {
       label: 'Note'
     },
     {
-      name: 'complete',
-      label: 'Complete',
+      name: 'state',
+      label: 'State',
       width: 80,
       fixed: true,
       align: 'center',
-      formatter: 'okIcon'
+      // formatter: 'okIcon'
     }
   ]
 

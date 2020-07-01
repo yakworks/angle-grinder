@@ -1,6 +1,7 @@
 import {pushToArr, guid, setProp} from "../utils/util";
+import _ from 'lodash'
 
-const REST_DELAY = 100
+const REST_DELAY = 500
 /**
  * This class simulates a RESTful resource, but the API calls fetch data from
  * Session Storage instead of an HTTP call.
@@ -83,8 +84,18 @@ export default class SessionStorage {
   //
   query(params) {
     return this.all(items => {
-      return items
+      let filtered = items
+      if(params.filters) filtered = this.filter(items, params)
+      return filtered
     })
+  }
+
+  filter(items, params) {
+    let filtered = items
+    let filter = JSON.parse(params.filters)
+    // quick search
+    if(filter.quickSearch) filtered = filterIt(items, filter.quickSearch)
+    return filtered
   }
 
   /** Returns a promise for the item with the given identifier */
@@ -132,3 +143,22 @@ export default class SessionStorage {
   }
 }
 // SessionStorage.$inject = ['$http', '$timeout', '$q', 'sessionStorageKey', 'sourceUrl'];
+
+// function filterIt(arr, searchKey) {
+//   return arr.filter(obj => _.includes(obj,searchKey))
+// }
+
+function filterIt(arr, searchKey) {
+  return arr.filter(obj => hasSome(obj, searchKey))
+}
+
+function hasSome(obj, searchKey){
+  return Object.keys(obj).some(key => {
+    const val = obj[key]
+    if(_.isPlainObject(val)){
+      return hasSome(val, searchKey)
+    } else {
+      return _.isString(val) ? val.toString().toLowerCase().includes(searchKey) : val == searchKey
+    }
+  })
+}

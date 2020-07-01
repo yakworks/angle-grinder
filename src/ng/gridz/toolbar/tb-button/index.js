@@ -23,8 +23,8 @@ export default () => ({
   restrict: 'E',
   // replace: true,
   require: {
-    gridCtrl: '^agGridz',
-    tbCtrl: '^agGridToolbar'
+    gridCtrl: '^gridz',
+    tbCtrl: '^gridzToolbar'
   },
   template: require('./tbButton.html'),
   bindToController: {

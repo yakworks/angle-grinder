@@ -1,11 +1,11 @@
 <div>
   <basic-search-form ng-show="$ctrl.showSearchForm"></basic-search-form>
 
-  <ag-gridz grid-options="$ctrl.gridOptions"
-            toolbar-options="$ctrl.toolbarOptions"
-            grid-id="exampleGrid"
-            action-ctrl="$ctrl">
-  </ag-gridz>
+  <gridz grid-options="$ctrl.gridOptions"
+        toolbar-options="$ctrl.toolbarOptions"
+        grid-id="basicGrid"
+        action-ctrl="$ctrl">
+  </gridz>
 
   <pre ng-cloak class="mt-4">vm: {{$ctrl.vm | json}}</pre>
   <pre ng-cloak class="mt-4">Selected Rows data: {{$ctrl.selectedRowsData | json}}</pre>

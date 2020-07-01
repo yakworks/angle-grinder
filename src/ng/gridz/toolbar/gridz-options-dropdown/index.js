@@ -28,7 +28,7 @@ export default () => ({
   // replace: true,
   controllerAs: 'optsCtrl',
   require: {
-    gridCtrl: '^agGridz'
+    gridCtrl: '^gridz'
   },
   bindToController: {
     menuItems: '<',

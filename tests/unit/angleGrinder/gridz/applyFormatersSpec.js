@@ -1,4 +1,5 @@
-import agGridz from 'angle-grinder/src/ng/gridz'
+import 'angle-grinder/src/ng/gridz'
+import agGridz from 'angle-grinder/src/ng/legacy/ag-grid'
 
 describe("module: angleGrinder.gridz", function() {
 

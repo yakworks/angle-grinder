@@ -1,6 +1,8 @@
 import compileTemplate from '../../helpers/compileTemplate'
-import agGridz from 'angle-grinder/src/ng/gridz'
+import 'angle-grinder/src/ng/gridz'
+import agGridz from 'angle-grinder/src/ng/legacy/ag-grid'
 import _ from 'lodash'
+
 xdescribe("agGridzSpec", function() {
 
   beforeEach(angular.mock.module(agGridz, function($provide) {

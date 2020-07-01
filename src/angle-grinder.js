@@ -4,6 +4,7 @@ import agCommon from './ng/common'
 import agCompMod from './ng/components'
 import agControlsMod from './ng/controls'
 import forms from './ng/forms'
+import agGridMod from './ng/legacy/ag-grid'
 import gridz from './ng/gridz'
 import agPathWithContext from './ng/pathWithContext'
 import resourceSupport from './ng/resourceSupport'
@@ -20,6 +21,7 @@ var agmod = angular.module('angleGrinder', [
   agCommon,
   agPathWithContext,
   gridz,
+  agGridMod,
   agCompMod,
   agControlsMod,
   forms,

@@ -4,7 +4,7 @@ import _ from 'lodash'
 export default () => ({
   restrict: 'E',
   require: {
-    gridCtrl: '^agGridz'
+    gridCtrl: '^gridz'
   },
   template: require('./toolbar.html'),
   bindToController: true,
@@ -52,7 +52,7 @@ class Controller {
     if (rightSec) {
       const rightHtml = this.$element.find('.right-html')
       rightHtml.append(rightSec.template)
-      const scope = rightSec.scope ? rightSec.scope() : this.$scope
+      const scope = this.options.scope ? this.options.scope() : this.$scope
       this.$compile(rightHtml)(scope)
     }
     this.setupSearchInput()
