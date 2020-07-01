@@ -3,6 +3,10 @@ import angular from 'angular'
 import gridzModule from './gridzModule'
 import _ from 'lodash'
 
+/**
+ * allows to iterate through grid on an opened view,
+ * for example on customer show page, we can change prev/next with arrows
+ */
 var gridz = angular.module(gridzModule)
 
 gridz.controller('gridPagerCtrlMixin', [

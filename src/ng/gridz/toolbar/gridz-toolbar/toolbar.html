@@ -1,0 +1,19 @@
+<ag-toolbar class="is-lighter is-dense has-border">
+  <div class="toolbar-item px-0 py-0" ng-show="tbCtrl.gridCtrl.hasSelected">
+    <div class="selection-pointer"><i class="fa"></i></div>
+    <tb-button ng-repeat="(key, btnItem) in tbCtrl.opts.selectedButtons" opts="btnItem"></tb-button>
+    <!-- <ag-button ng-repeat="(key, btnItem) in tbCtrl.opts.selectedButtons"
+      icon="{{btnItem.icon}}" uib-tooltip="{{btnItem.tooltip}}" color="{{btnItem.color}}"
+      ng-click="tbCtrl.fireButtonClick(key, btnItem, $event)">{{btnItem.display}}</ag-button> -->
+    <div class="divider-vertical"></div>
+  </div>
+  <tb-button ng-repeat="(key, btnItem) in tbCtrl.opts.leftButtons" opts="btnItem"></tb-button>
+  <div class="spacer"></div>
+  <div class="toolbar-item right-html" ></div>
+  <div class="toolbar-item p-0 quick-search-item" ng-show="tbCtrl.opts.showQuickSearch">
+    <input type="text" class="input is-rounded is-search quick-search" placeholder="quick search" ng-model="tbCtrl.quickSearchEntry">
+  </div>
+  <ag-button ng-if="tbCtrl.opts.showSearchFormButton" icon="fa-search" uib-tooltip="Show Search Form"
+    ng-click="tbCtrl.gridCtrl.actionCtrl.showSearchForm = !tbCtrl.gridCtrl.actionCtrl.showSearchForm" ></ag-button>
+  <gridz-options-dropdown></gridz-options-dropdown>
+</ag-toolbar>

@@ -104,7 +104,7 @@ const proxy = {
     if (query.sort) {
       result = _.orderBy(result, query.sort , query.order)
     }
-    return res.json(result)
+    return res.json({page:1, total:5, records:100, rows: result})
   },
   'GET /invoices/get/:id': (req, res) => {
     console.log('-1--->', req.params)

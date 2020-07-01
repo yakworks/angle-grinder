@@ -1,12 +1,11 @@
 import angular from 'angular'
-import gridzModule from '../gridzModule'
+import grid2Mod from '../../module'
 // import _ from 'lodash'
 // import Log from 'angle-grinder/src/utils/Log'
 
 /**
  * Opens dialog to show,hide and change order of columns
  */
-const gridz = angular.module(gridzModule)
 
 class ColumnConfigCtrl {
   gridColumns = {
@@ -42,7 +41,7 @@ class ColumnConfigCtrl {
   }
 }
 
-gridz.service('ColumnConfigServ', function($uibModal) {
+angular.module(grid2Mod).service('ColumnConfigServ', function($uibModal) {
   this.open = (gridCtrl) => {
     // Log.debug("ColumnConfigServ open grid", grid)
     const modalInstance = $uibModal.open({
@@ -54,7 +53,7 @@ gridz.service('ColumnConfigServ', function($uibModal) {
       resolve: {
         gridCtrl: () => gridCtrl
       },
-      template: modalTemp
+      template: require('./dialog.html')
     })
     // prevents the "Possibly unhandled rejection: cancel"
     modalInstance.result.catch(function() { modalInstance.close() })
@@ -65,38 +64,3 @@ gridz.service('ColumnConfigServ', function($uibModal) {
     // });
   }
 })
-
-const modalTemp = `\
-<div class="manage-columns-modal">
-<div class="modal-header">
-  <button type="button" class="close" ng-click="$ctrl.cancel()">&times;</button>
-  <h3>Manage Columns</h3>
-</div>
-
-<div class="modal-body">
-    <div ng-repeat="(listName, list) in $ctrl.gridColumns" class="col-md-6">
-        <div class="panel panel-info">
-            <div class="panel-heading">
-                <h3 class="panel-title">{{listName}} columns</h3>
-            </div>
-            <div class="panel-body simpleDemo">
-
-                <ul dnd-list="list">
-                    <li ng-repeat="item in list"
-                        dnd-draggable="item"
-                        dnd-moved="list.splice($index, 1)"
-                        dnd-effect-allowed="move">
-                        {{item.label}}
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="modal-footer">
-    <div class="btn btn-default btn-primary" ng-click="$ctrl.save()"><i class="fa fa-check fa-inverse"></i> Save</div>
-    <ag-cancel-button ng-click="$ctrl.cancel()"></ag-cancel-button>
-</div>
-</div>\
-`

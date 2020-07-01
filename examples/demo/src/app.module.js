@@ -17,11 +17,15 @@ import snippetsModule from './utils/demo/demo.module'
 import componentsModule from './components'
 import formsModule from './forms'
 
+// store
+// import storeModule from './store'
+
 // fresh sidebar
 
 
 export default angular.module('app', [
   agModule,
+  // storeModule,
   packetLayoutModule,
   freshLayoutModule,
   snippetsModule,

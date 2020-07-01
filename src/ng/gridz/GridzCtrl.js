@@ -2,13 +2,14 @@
 import _ from 'lodash'
 import Log from 'angle-grinder/src/utils/Log'
 
-export default class AgGridCtrl {
+export default class GridzCtrl {
     highlightClass = 'ui-state-highlight'
     systemColumns = ['cb', '-row_action_col']
 
     /* @ngInject */
-    constructor($rootScope, $element, $attrs, $q, hasSearchFilters, FlattenServ, xlsData, csvData, $window) {
+    constructor($rootScope, $scope, $element, $attrs, $q, hasSearchFilters, FlattenServ, xlsData, csvData, $window) {
       this.$rootScope = $rootScope
+      this.$scope = $scope
       this.$element = $element
       this.$attrs = $attrs
       this.$q = $q
@@ -23,9 +24,12 @@ export default class AgGridCtrl {
       // Log.debug('AgGridCtrl $onInit')
       const { $element, $attrs } = this
       // modify grid html element, generate grid id from the name or assign default value
-      const id = !_.isNil($attrs.agGridName) ? _.camelCase($attrs.agGridName) : 'gridz'
+      // this.gridId = !_.isNil($attrs.gridId) ? _.camelCase($attrs.gridId) : 'gridz'
+      const id = this.gridId
 
-      this.getGridEl().attr('id', id)
+      const gridEl = this.getGridEl()
+
+      gridEl.attr('id', id)
       $element.find('div.gridz-pager').attr('id', `${id}-pager`)
 
       // set the hasSelected flag
@@ -34,12 +38,16 @@ export default class AgGridCtrl {
           this.hasSelected = (this.getSelectedRowIds().length > 0)
         })
       }
-      this.getGridEl().on('jqGridSelectRow', onSelect)
-      this.getGridEl().on('jqGridSelectAll', onSelect)
+      gridEl.on('jqGridSelectRow', onSelect)
+      gridEl.on('jqGridSelectAll', onSelect)
     }
 
-    $postLink() {
-      // Log.debug('AgGridCtrl $postLink')
+    // $postLink() {
+    // Log.debug('AgGridCtrl $postLink')
+    // }
+
+    $onDestroy() {
+      this.getGridEl().jqGrid('GridDestroy')
     }
 
     getGridEl() {
@@ -139,18 +147,18 @@ export default class AgGridCtrl {
       return this.reload([{ current: true }])
     }
 
-    resetSort(columnName = 'id', order = 'asc') {
+    resetSort(sortname = 'id', sortorder = 'asc') {
       const colModel = this.getParam('colModel')
-      angular.forEach(colModel, column => column.lso = (column.name === columnName) || (column.name === 'id') ? order : '')
+      angular.forEach(colModel, column => column.lso = (column.name === sortname) || (column.name === 'id') ? sortorder : '')
 
       this.$element.find('span.s-ico').hide()
-      this.setParam({ sortname: columnName, order }) // .trigger('reloadGrid')
+      this.setParam({ sortname, sortorder }) // .trigger('reloadGrid')
       this.reload([{ current: true }])
-      const column = angular.element(`[id$='_${columnName}']`)
+      const column = angular.element(`[id$='_${sortname}']`)
       // column.find('span.s-ico').show()
 
       const disabledClassName = 'ui-state-disabled'
-      if (order === 'asc') {
+      if (sortorder === 'asc') {
         column.find('.ui-icon-asc').removeClass(disabledClassName)
         column.find('.ui-icon-desc').addClass(disabledClassName)
       } else {
@@ -328,6 +336,11 @@ export default class AgGridCtrl {
     }
 
     // Sets the grid search filters and triggers a reload
+    quickSearch(queryText) {
+      return this.search({ quickSearch: queryText })
+    }
+
+    // Sets the grid search filters and triggers a reload
     search(filters) {
       const deferred = this.$q.defer()
 
@@ -396,6 +409,11 @@ export default class AgGridCtrl {
 
     getCsvData() {
       return this.csvData(this.getGridId(), this.getSelectedRowIds())
+    }
+
+    toggleLoading(show = true) {
+      const loadEl = this.$element.find(`#load_${this.gridId}`)
+      return show ? loadEl.show() : loadEl.hide()
     }
 
     // Triggers grid's resize event

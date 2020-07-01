@@ -1,5 +1,6 @@
-import agGridz from 'angle-grinder/src/ng/gridz'
-import agGridCtrl from 'angle-grinder//src/ng/gridz/directives/agGrid/agGridCtrl'
+import 'angle-grinder/src/ng/gridz'
+import agGridz from 'angle-grinder/src/ng/legacy/ag-grid'
+import agGridCtrl from 'angle-grinder/src/ng/legacy/ag-grid/directives/agGrid/agGridCtrl'
 
 describe("module: angleGrinder.gridz, conroller: AgGridCtrl", function() {
 

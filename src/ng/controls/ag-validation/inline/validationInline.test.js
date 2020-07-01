@@ -18,7 +18,9 @@ describe('inline validation directive', function() {
       <div ag-validation-inline="lastName" class='findme'></div>
     </form>`
 
-  beforeEach(angular.mock.module(agModule))
+  beforeEach(angular.mock.module(agModule,function($compileProvider)  {
+    $compileProvider.debugInfoEnabled(true)
+  }))
 
   beforeEach(inject(function(_$rootScope_, _$compile_, _$timeout_, $templateCache) {
     $compile = _$compile_
