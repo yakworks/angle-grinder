@@ -16,6 +16,7 @@ class Controller extends AgBaseControl {
   }
 
   showDatepicker() {
+    if (this.isDisabled) return
     // this.getDatepicker().update()
     this.getDatepicker().show()
   }
