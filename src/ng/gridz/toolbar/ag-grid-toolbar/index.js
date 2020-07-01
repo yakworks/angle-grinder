@@ -3,13 +3,12 @@ import _ from 'lodash'
 
 export default () => ({
   restrict: 'E',
-  // replace: true,
   require: {
     gridCtrl: '^agGridz'
   },
-  // transclude: true,
   template: require('./toolbar.html'),
-  bindToController: {
+  bindToController: true,
+  scope: {
     options: '<'
   },
   controller: Controller,
@@ -36,6 +35,8 @@ class Controller {
   }
 
   $onInit() {
+    console.log("this.$scope", this.$scope)
+    //
     // console.log('this.gridCtrl', this.gridCtrl)
     // this.actionCtrl = this.gridCtrl.actionCtrl
     // console.log("this.gridCtrl", this.gridCtrl)

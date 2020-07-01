@@ -1,6 +1,6 @@
 // import BaseCtrl from 'angle-grinder/src/ng/utils/BaseCtrl'
 import {generateData} from '../dataGenerator'
-import exampleGridOptions from "../exampleGridOptions"
+import exampleGridOptions from "./exampleGridOptions"
 import Log from 'angle-grinder/src/utils/Log'
 import Swal from 'angle-grinder/src/tools/swal'
 import _ from 'lodash'
@@ -28,7 +28,7 @@ export default class ListCtrl {
     leftButtons: {
       import: { display:'import' , action: () => this.import() },
       drop: {
-        display:'drop' , color: 'primary',
+        display:'drop',
         menuItems: [
           {
             display: '<strong>Main Action</strong>',
@@ -45,33 +45,49 @@ export default class ListCtrl {
     }
   }
 
-  gridOptions = exampleGridOptions({
-    // onSelectRow: this.onSelect,
-    // onSelectAll: this.onSelect,
-    pager: false,
-    datatype: (params, loadingDivSelector) => {
-      Log.debug("params", params)
-      Log.debug("loadingDivSelector", loadingDivSelector)
-      Log.debug("this.grid.getGridz", this.gridCtrl.getGridz())
-      this.data = _.orderBy(this.data, params.sort , params.order)
-      this.gridCtrl.addJSONData(this.data)
-      // show/hide the loading animation
-      // const loadingEl = $document.find('#' + $.jgrid.jqID(loadingDivSelector))
-      // loadingEl.show()
-      // loadingEl.hide()
-    }
-  })
-
-  //getter to get scope reference
-  // get gridCtrl() { return this.$element this.$scope.exampleGrid }
+  // gridOptions = exampleGridOptions({
+  //   // onSelectRow: this.onSelect,
+  //   // onSelectAll: this.onSelect,
+  //   pager: false,
+  //   datatype: (params, loadingDivSelector) => {
+  //     Log.debug("params", params)
+  //     Log.debug("loadingDivSelector", loadingDivSelector)
+  //     Log.debug("this.grid.getGridz", this.gridCtrl.getGridz())
+  //     this.data = _.orderBy(this.data, params.sort , params.order)
+  //     this.gridCtrl.addJSONData(this.data)
+  //     // show/hide the loading animation
+  //     // const loadingEl = $document.find('#' + $.jgrid.jqID(loadingDivSelector))
+  //     // loadingEl.show()
+  //     // loadingEl.hide()
+  //   }
+  // })
 
   get gridCtrl() { return this.$element.find('ag-gridz').controller('agGridz') }
 
-  constructor($scope, $element, $uibModal, ColumnConfigServ) {
+  /* @ngInject */
+  constructor($scope, $element, $uibModal, Invoices) {
     this.$scope = $scope
     this.$element = $element
     this.$uibModal = $uibModal
-    this.ColumnConfigServ = ColumnConfigServ
+    this.Invoices = Invoices
+  }
+
+  $onInit() {
+    this.gridOptions = exampleGridOptions({
+      pager: false,
+      datatype: (params) => {
+        this.gridCtrl.toggleLoading(true)
+        this.Invoices.query(params)
+          .then( response => {
+            return this.gridCtrl.addJSONData(response)
+            // console.log("response", response)
+            // return gridCtrl.addJSONData(response.data)
+          })
+          .finally(() =>  {
+            this.gridCtrl.toggleLoading(false)
+          })
+      }
+    })
   }
 
   editRecord(id) {

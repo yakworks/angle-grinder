@@ -1,5 +1,6 @@
-import {pushToArr, guid, setProp} from "./util";
+import {pushToArr, guid, setProp} from "../utils/util";
 
+const REST_DELAY = 100
 /**
  * This class simulates a RESTful resource, but the API calls fetch data from
  * Session Storage instead of an HTTP call.
@@ -12,7 +13,7 @@ import {pushToArr, guid, setProp} from "./util";
  *
  * For an example, please see dataSources.js
  */
-export class SessionStorage {
+export default class SessionStorage {
   /**
    * Creates a new SessionStorage object
    *
@@ -21,15 +22,14 @@ export class SessionStorage {
    * @param $q Pass in the $q service
    * @param sessionStorageKey The session storage key. The data will be stored in browser's session storage under this key.
    * @param sourceUrl The url that contains the initial data.
-   * @param AppConfig Pass in the AppConfig object
    */
-  constructor($http, $timeout, $q, sessionStorageKey, sourceUrl, AppConfig) {
+  constructor($http, $timeout, $q, sessionStorageKey, sourceUrl) {
     let data, fromSession = sessionStorage.getItem(sessionStorageKey);
     // A promise for *all* of the data.
     this._data = undefined;
 
     // For each data object, the _idProp defines which property has that object's unique identifier
-    this._idProp = "_id";
+    this._idProp = "id";
 
     // A basic triple-equals equality checker for two values
     this._eqFn = (l, r) => l[this._idProp] === r[this._idProp];
@@ -38,7 +38,6 @@ export class SessionStorage {
     this.$q = $q;
     this.$timeout = $timeout;
     this.sessionStorageKey = sessionStorageKey;
-    this.AppConfig = AppConfig; // Used to get the REST latency simulator,
 
     if (fromSession) {
       try {
@@ -68,7 +67,7 @@ export class SessionStorage {
 
   /** Helper which simulates a delay, then provides the `thenFn` with the data */
   all(thenFn) {
-    return this.$timeout(() => this._data, this.AppConfig.restDelay).then(thenFn);
+    return this.$timeout(() => this._data, REST_DELAY).then(thenFn);
   }
 
   /** Given a sample item, returns a promise for all the data for items which have the same properties as the sample */
@@ -79,6 +78,13 @@ export class SessionStorage {
         Object.keys(example).reduce((memo, key) => memo && contains(example[key], item[key]), true);
     return this.all(items =>
         items.filter(matchesExample.bind(null, exampleItem)));
+  }
+
+  //
+  query(params) {
+    return this.all(items => {
+      return items
+    })
   }
 
   /** Returns a promise for the item with the given identifier */
@@ -117,5 +123,12 @@ export class SessionStorage {
       return this._commit(items).then(() => item);
     });
   }
+
+  gridDataLoader(gridCtrl){
+    return function(params) {
+      gridCtrl.toggleLoading(true)
+      return this.all(items => items)
+    }
+  }
 }
-SessionStorage.$inject = ['$http', '$timeout', '$q', 'sessionStorageKey', 'sourceUrl', 'AppConfig'];
+// SessionStorage.$inject = ['$http', '$timeout', '$q', 'sessionStorageKey', 'sourceUrl'];
