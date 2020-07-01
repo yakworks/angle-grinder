@@ -6,6 +6,14 @@ const _ = require('lodash');
 
 const noProxy = process.env.NO_PROXY === 'true'
 
+const pagination = (rows, query) => {
+  return {
+    rows: rows.slice((query.page - 1) * query.max, query.page * query.max), page: query.page,
+    records: rows.length,
+    total: Math.floor(result.length / query.max) + (rows.length % query.max === 0 ? 0 : 1)
+  }
+};
+
 const gridOptions = () => {
   const colModel = () => [{
     name: 'id',
@@ -104,7 +112,7 @@ const proxy = {
     if (query.sort) {
       result = _.orderBy(result, query.sort , query.order)
     }
-    return res.json(result)
+    return res.json(pagination(result, query))
   },
   'GET /invoices/get/:id': (req, res) => {
     console.log('-1--->', req.params)
@@ -162,7 +170,7 @@ const proxy = {
         result = result.filter(inv => inv.complete === (filters.complete === 'true'))
       }
     }
-    return res.json(result)
+    return res.json(pagination(result, query))
   },
   'GET /api/invoices/:id': (req, res) => {
     console.log('-1--->', req.params)
