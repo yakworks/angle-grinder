@@ -35,7 +35,7 @@ class Controller {
   }
 
   $onInit() {
-    console.log("this.$scope", this.$scope)
+    console.log('this.$scope', this.$scope)
     //
     // console.log('this.gridCtrl', this.gridCtrl)
     // this.actionCtrl = this.gridCtrl.actionCtrl
