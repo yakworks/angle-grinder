@@ -81,7 +81,6 @@ export default class AgBaseControl {
         const label = el.find('.label')
         // Log.debug("label", label)
         const colClass = this.columnsClass || ''
-        const getter = this.$parse(attributes['ng-hide'] || attributes['ng-if'])
         //when we append label it still shown when we hide a component with ng-hide, so need to add ng-hide class manually
         if (attributes['ng-hide']) {
           this.$scope.$watch(() => {
