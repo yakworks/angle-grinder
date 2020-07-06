@@ -18,11 +18,11 @@ export default () => ({
 class Controller {
   opts = {
     selectedButtons: {
-      massUpdate: { icon: 'fa-edit', tooltip: 'Mass Update', action: () => this.gridCtrl.actionCtrl.showMassUpdate() },
+      massUpdate: { icon: 'fa-edit', tooltip: 'Mass Update', action: () => this.gridCtrl.listCtrl.showMassUpdate() },
       export: { icon: 'fa-table', tooltip: 'Export to Excel', action: () => this.gridCtrl.xlsExport() }
     },
     leftButtons: {
-      createNew: { icon: 'fa-plus', tooltip: 'Create New', action: () => this.gridCtrl.actionCtrl.createRecord() }
+      createNew: { icon: 'fa-plus', tooltip: 'Create New', action: () => this.gridCtrl.listCtrl.create() }
     },
     showQuickSearch: true,
     showSearchFormButton: true
@@ -35,15 +35,8 @@ class Controller {
   }
 
   $onInit() {
-    console.log('this.$scope', this.$scope)
-    //
-    // console.log('this.gridCtrl', this.gridCtrl)
-    // this.actionCtrl = this.gridCtrl.actionCtrl
-    // console.log("this.gridCtrl", this.gridCtrl)
-    console.log('this.options', this.options)
     if (this.options) {
       _.merge(this.opts, this.options)
-      console.log('this.opts', this.opts)
     }
   }
 

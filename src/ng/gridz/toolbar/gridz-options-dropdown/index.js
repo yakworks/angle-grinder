@@ -7,7 +7,9 @@ class Controller {
       display: 'Refresh', icon: 'fa-refresh', action: () => this.gridCtrl.reloadKeepSelected()
     },
     { display: 'Reset Sort', icon: 'fa-sort', action: () => this.gridCtrl.resetSort() },
-    { display: 'Column Config', icon: 'fa-exchange', action: () => this.ColumnConfigServ.open(this.gridCtrl) },
+    { divider: true },
+    { display: 'Column Config', icon: 'fa-columns', action: () => this.ColumnConfigServ.open(this.gridCtrl) },
+    { display: 'Density Toggle', icon: 'fa-compress', action: () => this.gridCtrl.isDense = !this.gridCtrl.isDense },
     { divider: true },
     { display: 'Hide/Show Toggle', icon: 'fa-minus' },
     { display: 'Expand', icon: 'fa-expand' }

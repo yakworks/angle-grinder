@@ -140,4 +140,6 @@ Log.factory.$inject = []
 
 const _instance = Log.factory()
 
+window.Log = _instance
+
 export default _instance

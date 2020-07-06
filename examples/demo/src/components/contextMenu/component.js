@@ -1,5 +1,5 @@
 import template from './component.html'
-import Swal from 'sweetalert2'
+import Swal from 'angle-grinder/src/tools/swal'
 
 class controller {
   player = {
@@ -7,22 +7,50 @@ class controller {
   }
 
   items = [
-    { name: 'Small Health Potion', cost: 4},
-    { name: 'Small Mana Potion', cost: 5 },
-    { name: 'Iron Short Sword', cost: 12 }
+    { name: 'Health Potion', cost: 4},
+    { name: 'Mana Potion', cost: 5 },
+    { name: 'Iron Sword', cost: 12 }
   ]
 
-  menuOptions = [
-    ['Buy', ($itemScope) => {
-      this.player.gold -= $itemScope.item.cost;
-    }],
-    null,
-    ['Sell', ($itemScope) => {
-      this.player.gold += $itemScope.item.cost;
-    }, function ($itemScope) {
-      return $itemScope.item.name.match(/Iron/) == null;
-    }],
-    null,
+  menuOptionsObject = {
+    edit: {
+      display: 'Edit',
+      icon: 'fa-pencil-square-o'
+    },
+    delete: {
+      display: 'Delete',
+      icon: 'fa-trash-o'
+    }
+  }
+
+  contextMenuClick = (model, menuItem, event, elScope) => {
+    Log.debug("contextMenuClick this", this)
+    Log.debug("contextMenuClick elScope", elScope)
+    Log.debug("contextMenuClick event", event)
+    Log.debug("contextMenuClick menuItem", menuItem)
+    Log.debug("contextMenuClick model", model)
+    Swal.fire(`contextMenuClick key ${menuItem.key}`)
+  }
+
+  fullMontyMenuOptions = [
+    {
+      display: '<strong>Buy</strong>',
+      action: (model, menuItem, event, elScope) => {
+        Log.debug("contextMenuClick elScope", elScope)
+        Log.debug("contextMenuClick event", event)
+        Log.debug("contextMenuClick menuItem", menuItem)
+        Log.debug("contextMenuClick modelValue", model)
+        this.player.gold -= model.item.cost;
+      }
+    },
+    {
+      display: 'Sell',
+      action: (elScope) => {
+        this.player.gold += elScope.item.cost;
+      },
+      enabled: (elScope) => !elScope.item.name.match(/Iron/)
+    },
+    { divider: true },
     ['More...', [
       ['Alert Cost', function ($itemScope) {
         alert($itemScope.item.cost);
@@ -81,62 +109,44 @@ class controller {
     },
     {
       text: function() { return 'Text Using Function'; },
-      hasBottomDivider: function () {
-        return this.showHiddenOption;
-      },
+      hasBottomDivider: () => this.showHiddenOption,
       children: [],
     },
     {
       html: function() { return '<a><b>HTML Using Function</b></a>'; },
-      hasTopDivider: function () {
-        return !this.showHiddenOption;
-      }
     },
     {
       text: 'Hidden option',
-      displayed: function () {
+      displayed: () => {
         return this.showHiddenOption;
       }
     }
   ];
 
   otherMenuOptions = [
-    ['Favorite Color', function ($itemScope, event, modelValue, text, $li) {
-      alert(modelValue);
-      console.info($itemScope);
-      console.info(event);
-      console.info(modelValue);
-      console.info(text);
-      console.info($li);
+    ['Favorite Color', function (model, menuItem, event, elScope) {
+      alert(model);
     }]
   ]
 
   customHtml = '<div style="cursor: pointer; background-color: pink"><i class="glyphicon glyphicon-ok-sign"></i> Testing Custom </div>';
   customItem = {
     html: this.customHtml,
-    click: function ($itemScope, event, modelValue, text, $li) {
+    click() {
       alert('custom html');
-      console.info($itemScope);
-      console.info(event);
-      console.info(modelValue);
-      console.info(text);
-      console.info($li);
     }
   };
 
   customDisabledItem = {
     html: 'I\'m Disabled',
-    click: function ($itemScope, $event, value) {
-      console.log('expect to never get here!');
-    },
-    enabled: function ($itemScope, $event, value) {
+    enabled: () =>  {
       console.log('can\'t click');
       return false;
     }
   };
 
   customHTMLOptions = [this.customItem, this.customDisabledItem,
-    ['Example 1', function ($itemScope, $event, value) {
+    ['Example 1', () =>  {
       alert('Example 1');
     }]
   ];

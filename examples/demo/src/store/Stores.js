@@ -17,7 +17,7 @@ import {SessionStorage} from "./sessionStorage"
  */
 
 /** A fake Contacts REST client API */
-export class InvoiceStore extends SessionStorage {
+export class InvoiceApi extends SessionStorage {
   /* @ngInject */
   constructor($http, $timeout, $q) {
     super($http, $timeout, $q, "invoices", "data/Invoices.json");

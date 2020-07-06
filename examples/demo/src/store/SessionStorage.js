@@ -135,11 +135,17 @@ export default class SessionStorage {
     });
   }
 
-  gridDataLoader(gridCtrl){
-    return function(params) {
-      gridCtrl.toggleLoading(true)
-      return this.all(items => items)
-    }
+  // load results of a query into gridCtrl
+  gridLoader(gridCtrl, params) {
+    gridCtrl.toggleLoading(true)
+    this.query(params)
+    .then( response => {
+      let data = _.orderBy(response, params.sort , params.order)
+      return gridCtrl.addJSONData(data)
+    })
+    .finally(() =>  {
+      gridCtrl.toggleLoading(false)
+    })
   }
 }
 // SessionStorage.$inject = ['$http', '$timeout', '$q', 'sessionStorageKey', 'sourceUrl'];

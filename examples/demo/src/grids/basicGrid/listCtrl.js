@@ -1,14 +1,15 @@
-// import BaseCtrl from 'angle-grinder/src/ng/utils/BaseCtrl'
-import {generateData} from '../dataGenerator'
+import BaseListCtrl from 'angle-grinder/src/ng/gridz/list/BaseListCtrl'
 import exampleGridOptions from "./exampleGridOptions"
 import Log from 'angle-grinder/src/utils/Log'
 import Swal from 'angle-grinder/src/tools/swal'
 import _ from 'lodash'
 
 /* @ngInject */
-export default class ListCtrl {
+export default class ListCtrl extends BaseListCtrl {
 
   showSearchForm = true
+  editFormTpl = require('./form/editDialog.html')
+  massUpdateTpl = require('./form/massUpdateForm.html')
 
   toolbarOptions = {
     scope: () => this.$scope,
@@ -44,122 +45,36 @@ export default class ListCtrl {
     }
   }
 
-  // gridOptions = exampleGridOptions({
-  //   // onSelectRow: this.onSelect,
-  //   // onSelectAll: this.onSelect,
-  //   pager: false,
-  //   datatype: (params, loadingDivSelector) => {
-  //     Log.debug("params", params)
-  //     Log.debug("loadingDivSelector", loadingDivSelector)
-  //     Log.debug("this.grid.getGridz", this.gridCtrl.getGridz())
-  //     this.data = _.orderBy(this.data, params.sort , params.order)
-  //     this.gridCtrl.addJSONData(this.data)
-  //     // show/hide the loading animation
-  //     // const loadingEl = $document.find('#' + $.jgrid.jqID(loadingDivSelector))
-  //     // loadingEl.show()
-  //     // loadingEl.hide()
-  //   }
-  // })
-
-  get gridCtrl() { return this.$element.find('gridz').controller('gridz') }
+  colModel = [
+    { name: 'id', label: 'id', width: 20, sorttype: 'int', align: 'right'},
+    { name: 'customer.name', label: 'Customer', formatter: 'editActionLink'},
+    { name: 'tranDate', label: 'Date', width: 100, formatter: 'date' },
+    { name: 'refnum', label: 'Ref#', width: 100},
+    { name: 'amount', label: 'Amount', width: 80, formatter: 'currency'},
+    { name: 'comments', label: 'Comments'},
+    { name: 'state', label: 'State', width: 80, fixed: true, align: 'center'} // formatter: 'okIcon' }
+  ]
 
   /* @ngInject */
   constructor($scope, $element, $uibModal, Invoices) {
-    this.$scope = $scope
-    this.$element = $element
-    this.$uibModal = $uibModal
+    super($scope, $element, $uibModal)
     this.Invoices = Invoices
+    this.dataStore = Invoices
   }
 
   $onInit() {
-    this.gridOptions = exampleGridOptions({
+    this.gridOptions = {
+      colModel: this.colModel,
+      sortname: 'id',
+      shrinkToFit: true,
+      // selectFirstRow: true,
+      contextMenu: true,
       pager: false,
-      datatype: (params) => {
-        this.gridCtrl.toggleLoading(true)
-        this.Invoices.query(params)
-          .then( response => {
-            let data = _.orderBy(response, params.sort , params.order)
-            return this.gridCtrl.addJSONData(data)
-          })
-          .finally(() =>  {
-            this.gridCtrl.toggleLoading(false)
-          })
-      }
-    })
-  }
-
-  editRecord(id) {
-    let data = this.gridCtrl.getRowData(id)
-    // normally when dealing with rest we would get the object from server based on selected id
-    // here we need to get the "flattened" grid data back into object form
-    data.customer = {name: data['customer.name']}
-    this.showForm(data)
-  }
-
-  deleteRecord(id){
-    this.gridCtrl.removeRow(id)
-  }
-
-  createRecord() {
-    this.showForm({})
-  }
-
-  modalOptions(template) {
-    return {
-      // controller: function ($uibModalInstance, $scope) {
-      //   this.cancel = () => {
-      //     console.log("MassUpdateCtrl cancel scope", $scope)
-      //     $uibModalInstance.dismiss('cancel')
-      //   }
-      // },
-      // controllerAs: '$ctrl',
-      // bindToController: true,
-      template: template,
-      keyboard: false, // do not close the dialog with ESC key
-      backdrop: 'static', // do not close on click outside of the dialog,
-      scope: this.$scope
+      // denseRows: true,
+      // filterToolbar: true,
+      // searching: { defaultSearch: "cn" },
+      datatype: this.dataLoader()
     }
-  }
-
-  showMassUpdate() {
-    let modalOpts = {
-      controller: function ($uibModalInstance, $scope) {
-        this.cancel = () => {
-          console.log("MassUpdateCtrl cancel scope", $scope)
-          $uibModalInstance.dismiss('cancel')
-        }
-      },
-      controllerAs: '$ctrl',
-      // bindToController: true,
-      template: require('./form/massUpdateForm.html'),
-      keyboard: false, // do not close the dialog with ESC key
-      backdrop: 'static', // do not close on click outside of the dialog,
-      // scope: this.$scope
-    }
-    // here just for example, does nothing
-    this.form = this.$uibModal.open(modalOpts)
-    console.log("showMassUpdate", this.form)
-  }
-
-  showForm(data) {
-    this.vm = data
-    this.form = this.$uibModal.open(
-      this.modalOptions(require('./form/editDialog.html'))
-    )
-  }
-
-  save(data){
-    if (data.id) {
-      this.gridCtrl.updateRow(data.id, data)
-    } else {
-      data.id = new Date().getMilliseconds() //random id
-      this.gridCtrl.addRow(data.id, data)
-    }
-    this.closeDialog()
-  }
-
-  closeDialog = () => {
-    this.form.close()
   }
 
   displaySelectedRowsData() {
