@@ -40,6 +40,13 @@ form[editable-form].form-xeditable {
     min-height: 1px;
     padding-right: 15px;
     padding-left: 15px;
+    white-space: initial;
+    .editable-input {
+      width: 100% !important;
+    }
+    .is-addon {
+      border: 0;
+    }
   }
   .editable-wrap ag-datepicker.editable-input {
     display: table;
