@@ -49,6 +49,7 @@ export default class GridzCtrl {
     gridzInit.setupCtxMenu(this, gridOptions)
     gridzInit.setupDataLoader(this, gridOptions)
     gridzInit.setupGridCompleteEvent(this, gridEl, gridOptions)
+    gridzInit.setupFormatters(this, gridEl, gridOptions)
   }
 
   // $postLink() {
@@ -221,14 +222,9 @@ export default class GridzCtrl {
   }
 
   contextMenuClick = (model, menuItem) => {
-    const id = model.id
-    const menuItemKey = menuItem.key
-    this.listCtrl.fireRowAction(model, menuItem)
-    Log.debug("contextMenuClick this.listCtrl", this.listCtrl)
-    Log.debug("contextMenuClick this", this)
-    Log.debug("contextMenuClick id", id)
-    Log.debug("menuItem.key", menuItem.key)
-
+    Log.debug("contextMenuClick model", model)
+    Log.debug("contextMenuClick menuItem", menuItem)
+    return this.listCtrl.fireRowAction(model, menuItem)
   }
 
   // Updates the values (using the data array) in the row with rowid.

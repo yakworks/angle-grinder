@@ -86,9 +86,19 @@ export function setupGridCompleteEvent(gridCtrl, gridEl, options) {
   })
 }
 
+export function setupFormatters(gridCtrl, gridEl, options) {
+  //add any events etc for formatters
+  gridEl.on('click', 'a.editActionLink', function(event) {
+    event.preventDefault()
+    const id = $(this).parents('tr:first').attr('id')
+    return gridCtrl.contextMenuClick({id: id}, {key: 'edit'})
+  })
+}
+
 export default {
   setupCtxMenu,
   setupDataLoader,
-  setupGridCompleteEvent
+  setupGridCompleteEvent,
+  setupFormatters
 }
 

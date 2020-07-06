@@ -18,11 +18,11 @@ export default () => ({
 class Controller {
   opts = {
     selectedButtons: {
-      massUpdate: { icon: 'fa-edit', tooltip: 'Mass Update', action: () => this.gridCtrl.listCtrl.showMassUpdate() },
-      export: { icon: 'fa-table', tooltip: 'Export to Excel', action: () => this.gridCtrl.xlsExport() }
+      massUpdate: { icon: 'fa-edit', tooltip: 'Mass Update' },
+      xlsExport: { icon: 'fa-table', tooltip: 'Export to Excel' }
     },
     leftButtons: {
-      createNew: { icon: 'fa-plus', tooltip: 'Create New', action: () => this.gridCtrl.listCtrl.create() }
+      create: { icon: 'fa-plus', tooltip: 'Create New' }
     },
     showQuickSearch: true,
     showSearchFormButton: true
@@ -69,11 +69,13 @@ class Controller {
   }
 
   fireButtonClick(key, btnItem, event) {
+    btnItem['key'] = key
+    console.log("fireButtonClick btnItem", btnItem)
     // if it has an action then fire that
     if (_.isFunction(btnItem.action)) {
       btnItem.action(btnItem, event)
-    } else if (_.isFunction(this.buttonClick)) { // if there is a default then use it
-      this.buttonClick(btnItem, event)
+    } else {
+      this.gridCtrl.listCtrl.fireToolbarAction(btnItem, event)
     }
   }
 }

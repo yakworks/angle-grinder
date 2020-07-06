@@ -25,13 +25,23 @@ export default class BaseListCtrl {
   fireRowAction(model, menuItem) {
     switch (menuItem.key) {
       case 'edit':
-        this.edit(model.id)
-        break;
+        return this.edit(model.id)
       case 'delete':
-        this.delete(model.id)
-        break;
+        return this.delete(model.id)
       // default:
       //   alert( "I don't know such values" );
+    }
+  }
+
+  fireToolbarAction(btnItem, event) {
+    console.log("fireToolbarAction btnItem", btnItem)
+    switch (btnItem.key) {
+      case 'create':
+        return this.create()
+      case 'massUpdate':
+        return this.showMassUpdate()
+      case 'export':
+        return this.xlsExport()
     }
   }
 
@@ -48,7 +58,7 @@ export default class BaseListCtrl {
   }
 
   create() {
-    this.showForm({})
+    this.showForm(this.editFormTpl, {})
   }
 
   modalOptions(template) {
