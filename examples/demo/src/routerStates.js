@@ -121,16 +121,20 @@ const gridsStates = {
   children: [
     {
       name: 'Basic Demo Grid',
-      component: 'basicGridExample'
+      component: 'basicGridIndex'
     },
     {
-      name: 'Legacy Demo Grid',
-      component: 'legacyGridExample'
+      name: 'AppConfig Demo Grid',
+      component: 'configGridIndex'
     },
-    {
-      name: 'Rest Demo Grid',
-      component: 'restGridExample'
-    }
+    // {
+    //   name: 'Legacy Demo Grid',
+    //   component: 'legacyGridExample'
+    // },
+    // {
+    //   name: 'Rest Demo Grid',
+    //   component: 'restGridExample'
+    // }
   ]
 }
 

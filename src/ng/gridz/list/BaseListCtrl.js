@@ -1,15 +1,23 @@
 // import Log from 'angle-grinder/src/utils/Log'
 import _ from 'lodash'
 
+// see https://stackoverflow.com/questions/53349705/constructor-and-class-properties-within-javascript-mixins
+// and https://alligator.io/js/class-composition/ for class composition
 export default class BaseListCtrl {
 
   showSearchForm = true
 
-  /* @ngInject */
-  constructor($scope, $element, $uibModal) {
-    this.$scope = $scope
-    this.$element = $element
-    this.$uibModal = $uibModal
+  static $inject = ['$scope', '$element', '$uibModal']
+
+  constructor(...args) {
+    let argObj = this.constructor.$inject.reduce((obj, item, index) => {
+      obj[item] = args[index]
+      return obj
+    }, {})
+    _.defaults(this, argObj)
+    // console.log("args", args)
+    // console.log("argObj", argObj)
+    // console.log("this.constructor.$inject", this.constructor.$inject)
   }
 
   onInit() {
