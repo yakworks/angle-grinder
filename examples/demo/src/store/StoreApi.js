@@ -26,10 +26,10 @@ export class RestDataStore{
   }
 
   makeStore(name, path){
-    return new SessionStorageApi(this.$http, this.$timeout, this.$q, name, path)
+    return new SessionStorageApi(name, path)
   }
 
-  get invoiceApi() { return this.makeStore("invoices", "data/Invoices.json")}
+  get invoiceApi() { return new SessionStorageApi("invoices", "data/Invoices.json")}
 
 }
 

@@ -1,5 +1,6 @@
 // import Log from 'angle-grinder/src/utils/Log'
 import _ from 'lodash'
+import toast from 'angle-grinder/src/tools/toast'
 
 // see https://stackoverflow.com/questions/53349705/constructor-and-class-properties-within-javascript-mixins
 // and https://alligator.io/js/class-composition/ for class composition
@@ -53,11 +54,11 @@ export default class BaseListCtrl {
     }
   }
 
-  edit(id) {
-    let data = this.gridCtrl.getRowData(id)
-    // normally when dealing with rest we would get the object from server based on selected id
-    // here we need to get the "flattened" grid data back into object form
-    data.customer = {name: data['customer.name']}
+  async edit(id) {
+    this.gridCtrl.toggleLoading(true)
+    //let data = this.gridCtrl.getRowData(id)
+    let data = await this.dataStore.get(id)
+    this.gridCtrl.toggleLoading(false)
     this.showForm(this.editFormTpl, data)
   }
 

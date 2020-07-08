@@ -73,7 +73,7 @@ app.config(function($translateProvider) {
 // configuration
 app.config(function(cfpLoadingBarProvider) {
   cfpLoadingBarProvider.includeBar = true
-  cfpLoadingBarProvider.includeSpinner = false
+  cfpLoadingBarProvider.includeSpinner = true
 })
 
 app.config(function($compileProvider) {
@@ -109,3 +109,38 @@ app.filter('htmlToPlaintext', function() {
 //   $templateCache.put('./views/partials/off-sidebar.html', require('./views/partials/off-sidebar.html'))
 // })
 
+// see https://stackoverflow.com/questions/45827733/replacing-http-with-fetch-api
+app.run(normalizePromiseSideEffects);
+
+normalizePromiseSideEffects.$inject = ['$rootScope'];
+
+function normalizePromiseSideEffects($rootScope) {
+  attachScopeApplicationToPromiseMethod('then');
+  attachScopeApplicationToPromiseMethod('catch');
+  attachScopeApplicationToPromiseMethod('finally');
+
+  function attachScopeApplicationToPromiseMethod(methodName) {
+    const NativePromiseAPI = window.Promise;
+    const nativeImplementation = NativePromiseAPI.prototype[methodName];
+
+    NativePromiseAPI.prototype[methodName] = function(...promiseArgs) {
+      const newPromiseArgs = promiseArgs.map(wrapFunctionInScopeApplication);
+      return nativeImplementation.bind(this)(...newPromiseArgs);
+    };
+  }
+
+  function wrapFunctionInScopeApplication(fn) {
+    if (!_.isFunction(fn) || fn.isScopeApplicationWrapped) {
+      return fn;
+    }
+
+    const wrappedFn = (...args) => {
+      const result = fn(...args);
+      // this API is used since it's $q was using in AngularJS src
+      $rootScope.$evalAsync();
+      return result;
+    };
+    wrappedFn.isScopeApplicationWrapped = true;
+    return wrappedFn;
+  }
+}

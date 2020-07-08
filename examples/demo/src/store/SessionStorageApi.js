@@ -1,8 +1,8 @@
-import {pushToArr, guid, setProp} from "../utils/util";
+import {guid} from "../utils/util";
 import ky from 'ky'
 import _ from 'lodash'
 
-const REST_DELAY = 1000
+const REST_DELAY = 500
 /**
  * This class simulates a RESTful resource, but the API calls fetch data from
  * Session Storage instead of an HTTP call.
@@ -19,13 +19,10 @@ export default class SessionStorageApi {
   /**
    * Creates a new SessionStorage object
    *
-   * @param $http Pass in the $http service
-   * @param $timeout Pass in the $timeout service
-   * @param $q Pass in the $q service
    * @param sessionStorageKey The session storage key. The data will be stored in browser's session storage under this key.
    * @param sourceUrl The url that contains the initial data.
    */
-  constructor($http, $timeout, $q, sessionStorageKey, sourceUrl) {
+  constructor(sessionStorageKey, sourceUrl) {
     // let data, fromSession = sessionStorage.getItem(sessionStorageKey);
     // A promise for *all* of the data.
     this._data = undefined;
@@ -37,24 +34,8 @@ export default class SessionStorageApi {
     this._eqFn = (l, r) => l[this._idProp] === r[this._idProp];
 
     // Services required to implement the fake REST API
-    this.$q = $q;
-    this.$timeout = $timeout;
     this.sessionStorageKey = sessionStorageKey;
 
-    // if (fromSession) {
-    //   try {
-    //     // Try to parse the existing data from the Session Storage API
-    //     data = JSON.parse(fromSession);
-    //   } catch (e) {
-    //     console.log("Unable to parse session messages, retrieving intial data.");
-    //   }
-    // }
-
-    // Create a promise for the data; Either the existing data from session storage, or the initial data via $http request
-    // this._data = (data ? Promise.resolve(data) : $http.get(sourceUrl).then(resp => resp.data))
-    //     .then(this._commit.bind(this))
-    //     .then(() => JSON.parse(sessionStorage.getItem(sessionStorageKey)))
-    //     .then(array => array.map(stripHashKey));
     this._data = this.getData(sourceUrl)
   }
 
@@ -89,7 +70,7 @@ export default class SessionStorageApi {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
   /** Helper which simulates a delay, then provides the `thenFn` with the data */
-  async getData() {
+  async dataDelay() {
     await this.delay()
     return this._data
   }
@@ -100,13 +81,14 @@ export default class SessionStorageApi {
         ("" + inString).indexOf("" + search) !== -1;
     let matchesExample = (example, item) =>
         Object.keys(example).reduce((memo, key) => memo && contains(example[key], item[key]), true);
-    return this.all(items =>
-        items.filter(matchesExample.bind(null, exampleItem)));
+
+    let items = await this.dataDelay()
+    return items.filter(matchesExample.bind(null, exampleItem))
   }
 
   //
   async query(params) {
-    let filtered = await this.getData()
+    let filtered = await this.dataDelay()
     if(params.filters) filtered = this.filter(filtered, params)
     return filtered
   }
@@ -121,27 +103,28 @@ export default class SessionStorageApi {
 
   /** Returns a promise for the item with the given identifier */
   async get(id) {
-    let items = await this.getData()
-    return items.find(item => item[this._idProp] === id)
+    let items = await this.dataDelay()
+    let item = items.find(item => item.id == id)
+    return item
   }
 
   /** Returns a promise to save the item.  It delegates to put() or post() if the object has or does not have an identifier set */
-  save(item) {
+  async save(item) {
     return item[this._idProp] ? this.put(item) : this.post(item);
   }
 
   /** Returns a promise to save (POST) a new item.   The item's identifier is auto-assigned. */
   async post(item) {
     item[this._idProp] = guid();
-    let items = await this.getData()
-    pushToArr(items, item)
+    let items = await this.dataDelay()
+    items.push(item)
     this._commit(items)
     return item
   }
 
   /** Returns a promise to save (PUT) an existing item. */
   async put(item, eqFn = this._eqFn) {
-    let data = await this.getData()
+    let data = await this.dataDelay()
     let idx = findItemIndex(data, item)
     data[idx] = item
     this._commit(data)
@@ -150,7 +133,7 @@ export default class SessionStorageApi {
 
   /** Returns a promise to remove (DELETE) an item. */
   async remove(item, eqFn = this._eqFn) {
-    let data = await this.getData()
+    let data = await this.dataDelay()
     let idx = findItemIndex(data, item)
     data.splice(idx, 1)
     return this._commit(data)
@@ -162,15 +145,6 @@ export default class SessionStorageApi {
     return idx
   }
 
-  // load results of a query into gridCtrl
-  // gridLoader(gridCtrl, params) {
-  //   gridCtrl.toggleLoading(true)
-  //   this.query(params)
-  //   .then( res => {
-  //     let data = _.orderBy(res, params.sort , params.order)
-  //     gridCtrl.addJSONData(data)
-  //   })
-  // }
   // load results of a query into gridCtrl
   async gridLoader(gridCtrl, params) {
     gridCtrl.toggleLoading(true)

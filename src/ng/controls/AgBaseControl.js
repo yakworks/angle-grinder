@@ -27,8 +27,9 @@ export default class AgBaseControl {
     if (!this.modelKey && modelPath) {
       this.modelKey = _.split(modelPath, '.').slice(-1).pop()
     }
+    //if(this.)
     // passing in a blank string to label will not be undefined, and is how to blank it out
-    if (typeof this.label === 'undefined') {
+    if (typeof this.label == 'undefined') {
       this.label = stringUtils.parseWords(this.modelKey)
     }
     this.placeholder = this.placeholder || (this.label || stringUtils.parseWords(this.modelKey))
@@ -111,6 +112,7 @@ AgBaseControl.common = {
   },
   scope: {
     label: '@',
+    labelKey: '@',
     hint: '@',
     name: '@',
     placeholder: '@',

@@ -8,7 +8,7 @@
   "plugins": [
     "angularjs-annotate",
     "lodash",
-    "@babel/plugin-transform-runtime",
+    "babel-plugin-transform-async-to-promises",
     "@babel/plugin-proposal-class-properties",
     "@babel/plugin-proposal-optional-chaining",
     "wildcard",

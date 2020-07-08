@@ -7,7 +7,9 @@
       <ag-input label="Customer Name" ng-model="$ctrl.vm.customer.name"
                 minimum-length="2" required >
       </ag-input>
-
+      <ag-input ng-model="$ctrl.vm.refnum" required />
+      <ag-datepicker ng-model="$ctrl.vm.tranDate"></ag-datepicker>
+      <ag-input ng-model="$ctrl.vm.amount" required />
       <ag-input ng-model="$ctrl.vm.comments" required />
 
       <ag-select ng-model="$ctrl.vm.state"
@@ -20,6 +22,8 @@
 </div>
 
 <div class="modal-footer">
-  <button class="btn btn-primary" type="button" ng-click="$ctrl.save($ctrl.vm)">Save</button>
-  <button class="btn btn-warning" type="button" ng-click="$ctrl.closeDialog()">Cancel</button>
+  <ag-button color="primary" icon-left="fa-check" is-loading="searching"
+    ng-click="$ctrl.save($ctrl.vm)" >Save</ag-button>
+  <ag-button color="light" icon-left="fa-times"
+    ng-click="$ctrl.closeDialog()">Cancel</ag-button>
 </div>

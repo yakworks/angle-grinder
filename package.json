@@ -30,7 +30,6 @@
     "svelte-dev": "webpack-dev-server --config examples/svelte/webpack.config.js --content-base examples/svelte"
   },
   "dependencies": {
-    "@babel/plugin-transform-runtime": "^7.10.4",
     "@popperjs/core": "^2.0.6",
     "Select2": "^3.5.7",
     "angular": "1.7.9",
@@ -38,6 +37,7 @@
     "angular-breadcrumb": "^0.5.0",
     "angular-cookies": "^1.7.9",
     "angular-drag-and-drop-lists": "2.1.0",
+    "angular-formly": "^8.4.1",
     "angular-highlightjs": "^0.7.1",
     "angular-ladda": "^0.4.3",
     "angular-loading-bar": "^0.9.0",
@@ -51,6 +51,7 @@
     "angular-ui-router": "^1.0.24",
     "angular-xeditable": "^0.10.2",
     "animate.css": "^3.7.2",
+    "api-check": "^7.5.5",
     "blueimp-load-image": "~1.11.0",
     "bootstrap": "^4.4.1",
     "bootstrap-sass": "^3.4.1",
@@ -93,6 +94,7 @@
     "babel-plugin-angularjs-annotate": "^0.10.0",
     "babel-plugin-lodash": "^3.3.4",
     "babel-plugin-root-import": "^6.4.1",
+    "babel-plugin-transform-async-to-promises": "^0.8.15",
     "babel-plugin-wildcard": "^6.0.0",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",

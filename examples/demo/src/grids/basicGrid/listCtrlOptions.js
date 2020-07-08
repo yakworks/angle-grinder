@@ -59,5 +59,33 @@ export default function buildOptions(ctrl){ return {
     // filterToolbar: true,
     // searching: { defaultSearch: "cn" },
     datatype: ctrl.dataLoader()
-  }
+  },
+  formFields: [
+    {
+      key: 'customer.name',
+      type: 'input',
+      templateOptions: {
+        label: 'Customer',
+        required: true,
+        placeholder: 'Cust Name'
+      }
+    },
+    {
+      key: 'refnum',
+      type: 'input',
+      templateOptions: {
+        label: 'Ref #',
+        required: true,
+        placeholder: 'Invoice or Memo Num'
+      }
+    },
+    {
+      key: 'comments',
+      type: 'input',
+      templateOptions: {
+        placeholder: 'Comments or Note'
+      }
+    }
+  ]
+
 }}

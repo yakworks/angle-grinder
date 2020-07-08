@@ -9,7 +9,8 @@ export default class GridzCtrl {
   isDense = false
 
   /* @ngInject */
-  constructor($rootScope, $scope, $element, $attrs, $q, $compile, hasSearchFilters, FlattenServ, xlsData, csvData, $window) {
+  constructor($rootScope, $scope, $element, $attrs, $q, $compile, hasSearchFilters,
+              FlattenServ, xlsData, csvData, cfpLoadingBar, $window) {
     this.$rootScope = $rootScope
     this.$scope = $scope
     this.$element = $element
@@ -21,6 +22,7 @@ export default class GridzCtrl {
     this.csvData = csvData
     this.xlsData = xlsData
     this.$window = $window
+    this.cfpLoadingBar = cfpLoadingBar
   }
 
   $onInit() {
@@ -429,6 +431,14 @@ export default class GridzCtrl {
 
   toggleLoading(show = true) {
     const loadEl = this.$element.find(`#load_${this.gridId}`)
+    if(show){
+      this.cfpLoadingBar.start()
+      this.cfpLoadingBar.set(0.3)
+      loadEl.show()
+    } else {
+      this.cfpLoadingBar.complete()
+      loadEl.hide()
+    }
     return show ? loadEl.show() : loadEl.hide()
   }
 
