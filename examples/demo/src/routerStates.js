@@ -127,10 +127,10 @@ const gridsStates = {
       name: 'AppConfig Demo Grid',
       component: 'configGridIndex'
     },
-    // {
-    //   name: 'Legacy Demo Grid',
-    //   component: 'legacyGridExample'
-    // },
+    {
+      name: 'Legacy Demo Grid',
+      component: 'legacyGridIndex'
+    }
     // {
     //   name: 'Rest Demo Grid',
     //   component: 'restGridExample'

@@ -1,13 +1,9 @@
 import exampleGridOptions from "../exampleGridOptions"
 import MassUpdateFormCtrl from "../commonComponents/massUpdate/MassUpdateFormCtrl";
-
-/*
-  Example with resource based on grails based endpoint names
-  data is retrived from mocker
-*/
+import template from './list.html'
 
 /* @ngInject */
-export default class ListCtrl {
+class ListCtrl {
   showSearchForm = true
 
   constructor($scope, resourceBuilder, DialogCrudCtrlMixin, MassUpdateMixin) {
@@ -48,3 +44,24 @@ export default class ListCtrl {
     this.selectedRowsData = this.$scope.exampleGrid.getSelectedRows()
   }
 }
+
+/* @ngInject */
+class SearchController {
+  constructor($scope){
+    this.$scope = $scope
+  }
+  filters = {}
+}
+
+export default angular
+  .module('ag.demo.legacyGridDemo', [])
+  .component('legacyGridDemo', { template, controller: ListCtrl })
+  .component('legacySearchForm', {
+    template: require('./form/searchForm.html'),
+    controller: SearchController,
+    controllerAs: 'searchCtrl',
+    bindings: {
+      filters: '<'
+    },
+  })
+  .name

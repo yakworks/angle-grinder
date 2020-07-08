@@ -1,16 +1,16 @@
 import angular from 'angular'
 import basicGridModule from './basicGrid'
 import configGridModule from './configGrid'
+import legacyGridModule from './legacyGrid'
 // import './restGrid/component'
-// import './legacyGrid/component'
-// import './legacyGrid/demoGridExample'
 // import './legacyGrid/searchForm/component'
 // import './restGrid/restGridExample'
 // import './commonComponents/searchForm/component'
 
 const gapp = angular.module('demo.gridz', [
   basicGridModule,
-  configGridModule
+  configGridModule,
+  legacyGridModule
 ])
 
 gapp.config(['agDateFilterProvider', provider => // set default date format
