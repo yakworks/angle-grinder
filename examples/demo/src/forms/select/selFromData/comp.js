@@ -1,5 +1,6 @@
 import template from './comp.html'
 
+/* @ngInject */
 class controller {
   vm = {
     singleColor: 'blue',
@@ -14,6 +15,20 @@ class controller {
       {
         "id": 2,
         "name": "Option 2"
+      }
+    ],
+    custRest: {
+      "id": 6,
+      "name": "Thoughtstorm"
+    },
+    custRestMulti: [
+      {
+        "id": 5,
+        "name": "Quimm"
+      },
+      {
+        "id": 6,
+        "name": "Thoughtstorm"
       }
     ]
   }
@@ -58,6 +73,24 @@ class controller {
     closeOnSelect: false,
     data: this.picklistData,
     showSelectAll: true
+  }
+
+  custApiData = { results: () => this.customerApi.pickList() }
+
+  custRestOpts = {
+    useDataObject: true,
+    data: this.custApiData
+  }
+  custRestMultiOpts = {
+    useDataObject: true,
+    multiple: true,
+    closeOnSelect: false,
+    data: this.custApiData,
+    showSelectAll: true
+  }
+
+  constructor(restDataStore) {
+    this.customerApi = restDataStore.customerApi
   }
 
   changeModelData(){

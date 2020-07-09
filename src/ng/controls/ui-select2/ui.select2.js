@@ -1,6 +1,6 @@
 import angular from 'angular'
 import _ from 'lodash'
-import { convertSelect2Data } from './helpers'
+import {setupData, convertSelect2Data, dataQuery} from './dataQuery'
 require('Select2/select2.js')
 
 /**
@@ -63,20 +63,8 @@ angular.module('ui.select2', [])
 
             if (opts.multiple) isMultiple = true
 
-            // setup defaults for data
-            if (opts.data) {
-              // if data is an array then tranform it down to be a property of results
-              if (Array.isArray(opts.data)) {
-                // convertSelect2Data makes ['red','green'] into [{id:'red',name'red}, etc...]
-                const results = convertSelect2Data(opts.data)
-                // console.log('results', results)
-                opts.data = { results: results }
-              }
-              // if data.text is not set then deefault it to name (select2 defaults it to 'text')
-              if (opts.data.text === undefined) {
-                opts.data.text = 'name'
-              }
-            }
+            setupData(opts)
+
             // if(attrs.uiSelect2Data) opts.data = scope.$eval(attrs.uiSelect2Data)
             // if modelType is object then will use the elm.select2('data') and will store the selected
             // object(s) in the ng-model as objects instead of as just the ids
@@ -118,14 +106,6 @@ angular.module('ui.select2', [])
             }
 
             if (ngModelCtrl) {
-              // const renFunc = function() {
-              //   log('elm.select2(dataVar, ngModelCtrl.$modelValue) ', ngModelCtrl.$modelValue)
-              //   //elm.select2(dataVar, ngModelCtrl.$modelValue)
-              //   updateSelectFromModel()
-              // }
-
-              // ngModelCtrl.$render = renFunc
-
               // Watch the model for programmatic changes
               scope.$watch(tAttrs.ngModel, function(current, old) {
                 if (_.isEqual(current, old)) return
@@ -154,7 +134,8 @@ angular.module('ui.select2', [])
                 const showSelectAll = opts.showSelectAll
                 if (showSelectAll) {
                   // if it has opts.showSelectAll the add menu item
-                  opts.data.results = [{ id: 'selectAll' }, ...opts.data.results]
+                  // console.log("opts.data", opts.data)
+                  // opts.data.results = [{ id: 'selectAll' }, ...opts.data.results]
                   opts.formatResult = function(object, container, query) {
                     log('formatResult', object)
                     if (object.id === 'selectAll') {
@@ -172,15 +153,18 @@ angular.module('ui.select2', [])
                 const handleSelectAll = function(e) {
                   if (!showSelectAll) return // exit fast if we showSelectAll menu is not enabled
                   if (_.includes(e.val, 'selectAll')) {
-                    log('includes opts.data', opts.data)
-                    var selected = []
-                    opts.data.results.forEach(item => {
-                      if (item.id !== 'selectAll') {
-                        selected[selected.length] = item
-                      }
+                    // dataResults is set on first query to show.
+                    Promise.resolve(opts.dataResults).then(res => {
+                      var selected = []
+                      res.forEach(item => {
+                        if (item.id !== 'selectAll') {
+                          selected[selected.length] = item
+                        }
+                      })
+                      elm.select2(dataVar, selected)
+                      elm.select2('close')
+                      ngModelCtrl.$setViewValue(elm.select2(dataVar))
                     })
-                    elm.select2(dataVar, selected)
-                    elm.select2('close')
                   }
                 }
                 // Set the view and model value and update the angular template manually for the ajax/multiple select2.
@@ -223,11 +207,13 @@ angular.module('ui.select2', [])
             // Initialize the plugin late so that the injected DOM does not disrupt the template compiler
             $timeout(function() {
               log(`Initialize -- isSelectElm:${isSelectElm} isMultiple:${isMultiple}`)
-              // console.log("opts for select2",opts)
-              // elm.select2(opts)
+
+              // const cdata = _.cloneDeep(opts.data)
+              // delete opts.data.results;
+              // if(opts.data) opts.query = dataQuery(opts.data)
+
+              // initialize the select2
               var select2 = elm.select2(opts).data('select2')
-              // important!
-              // ngModelCtrl.$render()
 
               // see https://stackoverflow.com/questions/15636302/attach-click-event-to-element-in-select2-result/15637696#15637696
               select2.onSelect = (function(fn) {

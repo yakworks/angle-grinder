@@ -35,16 +35,17 @@ export default class SessionStorageApi {
 
     // Services required to implement the fake REST API
     this.sessionStorageKey = sessionStorageKey;
-
+    console.log('SessionStorageApi constructor')
     this._data = this.getData(sourceUrl)
   }
 
   async getData(sourceUrl){
+    console.log('getData with sourceUrl', sourceUrl)
     try {
       let data = checkSession()
       if(data) return data
     } catch (e) {
-      console.log("Unable to parse session messages, retrieving intial data.");
+      console.log(`Unable to parse session for ${sourceUrl}, retrieving intial data.`);
     }
     const parsed = await ky.get(sourceUrl).json()
     this._commit(parsed)
@@ -90,7 +91,19 @@ export default class SessionStorageApi {
   async query(params) {
     let filtered = await this.dataDelay()
     if(params.filters) filtered = this.filter(filtered, params)
+    console.log('filtered', filtered)
     return filtered
+  }
+
+  //
+  async pickList(params) {
+    let dta = await this.dataDelay()
+    if(params?.filters) dta = this.filter(dta, params)
+    dta = dta.reduce(function(acc, item) {
+      acc.push(_.pick(item, ['id', 'name']))
+      return acc
+    }, [])
+    return dta
   }
 
   filter(items, params) {

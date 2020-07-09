@@ -39,6 +39,13 @@
 <p>using ag-select component</p>
 <ag-select name="agSelect" ng-model="$ctrl.vm.agColor" placeholder="select a color" hint="this is a hint"
   select-options="{ data: $ctrl.colorData }"></ag-select>
+
+<p>rest data from promise</p>
+<ag-select name="agSelect" ng-model="$ctrl.vm.cust"
+    select-options="{ data: $ctrl.custApiData }"></ag-select>
+<ag-select name="agSelect" ng-model="$ctrl.vm.custMulti"
+    select-options="{ multiple: true, closeOnSelect: false, showSelectAll:true, data: $ctrl.custApiData }"></ag-select>
+
 <p>useDataObject:false, its true by default on multiple</p>
 <ag-select name="agSelect" label="Multi" ng-model="$ctrl.vm.agColors"
   select-options="{ multiple: true, closeOnSelect: false, useDataObject:false, data: $ctrl.colorData}"></ag-select>
