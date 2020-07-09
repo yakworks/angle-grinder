@@ -19,11 +19,13 @@ class controller {
     ],
     custRest: {
       "id": 6,
+      "num": 'foo',
       "name": "Thoughtstorm"
     },
     custRestMulti: [
       {
         "id": 5,
+        "num": 'foo',
         "name": "Quimm"
       },
       {
@@ -64,6 +66,7 @@ class controller {
 
   singlePickOpts = {
     useDataObject: true,
+    initSelection: true,
     data: this.picklistData
   }
 

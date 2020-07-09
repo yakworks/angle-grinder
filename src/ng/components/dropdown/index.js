@@ -1,5 +1,5 @@
 // import Log from '../../../utils/Log'
-import {getIconClass} from '../../../utils/icon'
+import { getIconClass } from '../../../utils/icon'
 import _ from 'lodash'
 
 const DEFAULT_MENU_DISPLAY = 'Action'

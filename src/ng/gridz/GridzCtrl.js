@@ -10,7 +10,7 @@ export default class GridzCtrl {
 
   /* @ngInject */
   constructor($rootScope, $scope, $element, $attrs, $q, $compile, hasSearchFilters,
-              FlattenServ, xlsData, csvData, cfpLoadingBar, $window) {
+    FlattenServ, xlsData, csvData, cfpLoadingBar, $window) {
     this.$rootScope = $rootScope
     this.$scope = $scope
     this.$element = $element
@@ -124,7 +124,7 @@ export default class GridzCtrl {
     if (options == null) { options = [] }
     const deferred = this.$q.defer()
 
-    var unregister = this.$rootScope.$on('gridz:loadComplete', function (_, data) {
+    var unregister = this.$rootScope.$on('gridz:loadComplete', function(_, data) {
       deferred.resolve(data)
       return unregister()
     })
@@ -207,12 +207,12 @@ export default class GridzCtrl {
       }
     })
 
-    colConfig.visible.forEach(function (column, index) {
+    colConfig.visible.forEach(function(column, index) {
       colSetup.displayedColumns.push(column.name)
       colSetup.newColumnsOrder.push(column.originalId)
     })
 
-    colConfig.hidden.forEach(function (column, index) {
+    colConfig.hidden.forEach(function(column, index) {
       colSetup.hiddenColumns.push(column.name)
       colSetup.newColumnsOrder.push(column.originalId)
     })
@@ -224,8 +224,8 @@ export default class GridzCtrl {
   }
 
   contextMenuClick = (model, menuItem) => {
-    Log.debug("contextMenuClick model", model)
-    Log.debug("contextMenuClick menuItem", menuItem)
+    Log.debug('contextMenuClick model', model)
+    Log.debug('contextMenuClick menuItem', menuItem)
     return this.listCtrl.fireRowAction(model, menuItem)
   }
 
@@ -431,7 +431,7 @@ export default class GridzCtrl {
 
   toggleLoading(show = true) {
     const loadEl = this.$element.find(`#load_${this.gridId}`)
-    if(show){
+    if (show) {
       this.cfpLoadingBar.start()
       this.cfpLoadingBar.set(0.3)
       loadEl.show()

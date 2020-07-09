@@ -1,4 +1,3 @@
-import angular from 'angular'
 import grid2Mod from './module'
 import './toolbar'
 import './support'

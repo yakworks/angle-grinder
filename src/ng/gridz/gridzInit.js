@@ -1,11 +1,11 @@
-import Log from 'angle-grinder/src/utils/Log'
+// import Log from 'angle-grinder/src/utils/Log'
 import _ from 'lodash'
 
 /**
 * functions to initialize the grid
 */
 
-let defaultCtxMenuOptions = {
+const defaultCtxMenuOptions = {
   edit: {
     display: 'Edit',
     icon: 'fa-pencil-square-o'
@@ -16,15 +16,15 @@ let defaultCtxMenuOptions = {
   }
 }
 
-export function init(opts, gridCtrl){
+export function init(opts, gridCtrl) {
   setupCtxMenu(opts, gridCtrl)
 }
 
-export function setupCtxMenu(gridCtrl, opts){
-  if(!opts.contextMenu) return
+export function setupCtxMenu(gridCtrl, opts) {
+  if (!opts.contextMenu) return
 
-  if(opts.contextMenu === true) {
-    //use the defaults
+  if (opts.contextMenu === true) {
+    // use the defaults
     gridCtrl.ctxMenuOptions = defaultCtxMenuOptions
     addCtxMenuIconColumn(opts)
   }
@@ -73,9 +73,9 @@ export function setupGridCompleteEvent(gridCtrl, gridEl, options) {
     gridCtrl.$compile(gridEl)(gridCtrl.$scope)
 
     // Add `min` class to remove pading to minimize row height
-    if (options.minRowHeight ||  options.denseRows) {
+    if (options.minRowHeight || options.denseRows) {
       gridCtrl.isDense = true
-      //return _.each(gridEl[0].rows, it => angular.element(it).addClass('min'))
+      // return _.each(gridEl[0].rows, it => angular.element(it).addClass('min'))
     }
     if (options.selectFirstRow === true) {
       const dataIds = gridEl.getDataIDs()
@@ -87,11 +87,11 @@ export function setupGridCompleteEvent(gridCtrl, gridEl, options) {
 }
 
 export function setupFormatters(gridCtrl, gridEl, options) {
-  //add any events etc for formatters
+  // add any events etc for formatters
   gridEl.on('click', 'a.editActionLink', function(event) {
     event.preventDefault()
     const id = $(this).parents('tr:first').attr('id')
-    return gridCtrl.contextMenuClick({id: id}, {key: 'edit'})
+    return gridCtrl.contextMenuClick({ id: id }, { key: 'edit' })
   })
 }
 
@@ -101,4 +101,3 @@ export default {
   setupGridCompleteEvent,
   setupFormatters
 }
-

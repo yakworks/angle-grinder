@@ -1,9 +1,8 @@
-import _ from 'lodash'
+// import _ from 'lodash'
 
-export function setupData(opts){
+export function setupData(opts) {
   // setup defaults for data
   if (opts.data) {
-
     // if data is an array then tranform it down to be a property of results
     if (Array.isArray(opts.data)) {
       // convertSelect2Data makes ['red','green'] into [{id:'red',name'red}, etc...]
@@ -32,54 +31,54 @@ export function dataQuery(opts) {
   }
 
   if (!$.isFunction(data.results)) {
-    let dres = data.results;
+    const dres = data.results
     data.results = () => dres
   }
 
   if ($.isFunction(data) === false) {
-    let tmp = data;
-    data = function() { return tmp; };
+    const tmp = data
+    data = function() { return tmp }
   }
 
   // cache the data.results
   // let dataResults
 
-  return function (query) {
-    var t = query.term, filtered = { results: [] }, process;
+  return function(query) {
+    var t = query.term; var filtered = { results: [] }; var process
     opts.dataResults = opts.dataResults || data().results()
-    if (t === "") {
+    if (t === '') {
       Promise.resolve(opts.dataResults).then(res => {
         // add the selectAll option if enabled
         if (opts.showSelectAll) res = [{ id: 'selectAll' }, ...res]
-        return query.callback({results: res})
+        return query.callback({ results: res })
       })
-      return;
+      return
     }
 
-    process = function (datum, collection) {
-      var group, attr;
+    process = function(datum, collection) {
+      var group //, attr
       if (datum.children) {
-        group = {};
-        for (attr in datum) {
-          if (datum.hasOwnProperty(attr)) group[attr] = datum[attr];
-        }
-        group.children = [];
-        datum.children.forEach( childDatum => process(childDatum, group.children) )
+        group = {}
+        // does searching on any attributes too
+        // for (attr in datum) {
+        //   if (datum.hasOwnProperty(attr)) group[attr] = datum[attr]
+        // }
+        group.children = []
+        datum.children.forEach(childDatum => process(childDatum, group.children))
         if (group.children.length || query.matcher(t, getText(group), datum)) {
-          collection.push(group);
+          collection.push(group)
         }
       } else {
         if (query.matcher(t, getText(datum), datum)) {
-          collection.push(datum);
+          collection.push(datum)
         }
       }
-    };
+    }
     Promise.resolve(opts.dataResults).then(res => {
-      res.forEach( datum => process(datum, filtered.results) );
-      query.callback(filtered);
+      res.forEach(datum => process(datum, filtered.results))
+      query.callback(filtered)
     })
-
-  };
+  }
 }
 
 /**

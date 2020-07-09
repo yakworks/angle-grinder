@@ -25,7 +25,7 @@ forms.config(['formlyConfigProvider', function(formlyConfig) {
     name: 'input',
     template: `<ag-input ng-model="model[options.key]" label-key="options.key"
       label="{{options.templateOptions.label}}"></ag-input>`
-  });
+  })
 }])
 
 forms.run(function(editableOptions) {

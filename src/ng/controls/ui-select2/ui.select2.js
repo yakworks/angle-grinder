@@ -1,6 +1,6 @@
 import angular from 'angular'
 import _ from 'lodash'
-import {setupData, convertSelect2Data, dataQuery} from './dataQuery'
+import { setupData } from './dataQuery'
 require('Select2/select2.js')
 
 /**
@@ -61,8 +61,9 @@ angular.module('ui.select2', [])
               opts.data = dataAttr
             }
 
-            if (opts.multiple) isMultiple = true
-
+            if (opts.multiple) {
+              isMultiple = true
+            }
             setupData(opts)
 
             // if(attrs.uiSelect2Data) opts.data = scope.$eval(attrs.uiSelect2Data)
@@ -78,6 +79,13 @@ angular.module('ui.select2', [])
             if (opts.useDataObject === undefined && !isSelectElm && isMultiple) {
               opts.useDataObject = true
             }
+
+            // don't do initSelection with useDataObject, its screws it up and preruns the promise for rest
+            if (!opts.initSelection && opts.useDataObject) opts.initSelection = function(element, callback) { }
+            // if initSelection is a boolean true then remove it so the default in Select2 can take over
+            // useful to set true on single selects when you only id and want to get the name display from select2
+            if (opts.initSelection === true) delete opts.initSelection
+
             if (opts.useDataObject) {
               // useDataObject = true
               dataVar = 'data'

@@ -36,7 +36,8 @@ export default class SessionStorageApi {
     // Services required to implement the fake REST API
     this.sessionStorageKey = sessionStorageKey;
     console.log('SessionStorageApi constructor')
-    this._data = this.getData(sourceUrl)
+    this.sourceUrl = sourceUrl
+    //this._data = this.getData(sourceUrl)
   }
 
   async getData(sourceUrl){
@@ -73,7 +74,7 @@ export default class SessionStorageApi {
   /** Helper which simulates a delay, then provides the `thenFn` with the data */
   async dataDelay() {
     await this.delay()
-    return this._data
+    return this.getData(this.sourceUrl)
   }
 
   /** Given a sample item, returns a promise for all the data for items which have the same properties as the sample */
