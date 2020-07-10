@@ -4,26 +4,26 @@
 <form name="editForm" ag-form is-horizontal>
   <div class="modal-body" id="modal-body">
     <fieldset>
-      <ag-input label="Customer Name" ng-model="$ctrl.vm.customer.name"
+      <ag-input label="Customer Name" ng-model="dlgCtrl.vm.customer.name"
         min-length="2" required >
       </ag-input>
-      <ag-input ng-model="$ctrl.vm.refnum" min-length="4" max-length="6" required />
-      <ag-datepicker ng-model="$ctrl.vm.tranDate" required></ag-datepicker>
-      <ag-input ng-model="$ctrl.vm.amount" required />
-      <ag-select ng-model="$ctrl.vm.state" required
+      <ag-input ng-model="dlgCtrl.vm.refnum" min-length="4" max-length="6" required />
+      <ag-datepicker ng-model="dlgCtrl.vm.tranDate" required></ag-datepicker>
+      <ag-input ng-model="dlgCtrl.vm.amount" required />
+      <ag-select ng-model="dlgCtrl.vm.state" required
                  select-options="{ placeholder: 'select complete',
                  data: [{id:0, name:'Open'}, {id:1, name: 'Closed'}, {id:2, name:'Draft'}] }">
       </ag-select>
-      <ag-textarea rows="3" ng-model="$ctrl.vm.comments"></ag-textarea>
+      <ag-textarea rows="3" ng-model="dlgCtrl.vm.comments"></ag-textarea>
     </fieldset>
   </div>
 
   <div class="modal-footer">
     <ag-button color="primary" icon-left="fa-check" >Validate</ag-button>
-    <ag-button color="primary" icon-left="fa-check" is-loading="searching"
-      ng-click="$ctrl.save(editForm, $ctrl.vm)" >Save</ag-button>
+    <ag-button color="primary" icon-left="fa-check" is-loading="dlgCtrl.isSaving"
+      ng-click="dlgCtrl.save()" >Save</ag-button>
     <ag-button color="light" icon-left="fa-times"
-      ng-click="$ctrl.closeDialog()">Cancel</ag-button>
+      ng-click="dlgCtrl.cancel()">Cancel</ag-button>
   </div>
 </form>
-<pre ng-cloak class="mt-4">editForm.$invalid: {{editForm.$invalid}}<br>model: {{$ctrl.vm | json}}</pre>
+<pre ng-cloak class="mt-4">editForm.$invalid: {{editForm.$invalid}}<br>model: {{dlgCtrl.vm | json}}</pre>

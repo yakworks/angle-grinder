@@ -7,10 +7,11 @@ export default class AgBaseControl {
   isDisabled= false
 
   /* @ngInject */
-  constructor($element, $timeout, $scope, $transclude) {
+  constructor($element, $timeout, $scope, $transclude, $parse) {
     this.$element = $element
     this.$timeout = $timeout
     this.$scope = $scope
+    this.$parse = $parse
     // this.$transclude = $transclude
     $transclude((clone) => {
       clone.each((i, el) => {
@@ -76,14 +77,40 @@ export default class AgBaseControl {
     if (this.isHorizontal && this.label) {
       this.$timeout(() => {
         const el = this.$element
+        const attributes = el[0].attributes
         // needs to be in timeout so all things have rendered.
         const label = el.find('.label')
         // Log.debug("label", label)
         const colClass = this.columnsClass || ''
+
         var content = angular.element(`<div class="columns is-mobile ${colClass}"></div>`)
         el.wrap(content)
         el.parent().prepend(label)
+
+        // when we append label it still shown when we hide a component with ng-hide, so need to add ng-hide class manually
+        if (attributes['ng-hide'] || attributes['ng-show']) {
+          this.$scope.$watch(() => {
+            return el.attr('class')
+          }, (newValue) => {
+            this.$timeout(() => {
+              ['ng-hide', 'ng-show'].forEach((clazz) => {
+                if (newValue.indexOf(clazz) > -1) {
+                  el.parent().addClass(clazz)
+                } else {
+                  el.parent().removeClass(clazz)
+                }
+              })
+            })
+          })
+        }
       })
+    }
+  }
+
+  $onDestroy() {
+    if (this.isHorizontal && this.label) {
+      // to hide wrapper when we hide component with ng-if, we remove because label is adding after each component creating
+      this.$element.parent().remove()
     }
   }
 

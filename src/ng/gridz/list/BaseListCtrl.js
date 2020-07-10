@@ -54,41 +54,87 @@ export default class BaseListCtrl {
   }
 
   async edit(id) {
-    this.gridCtrl.toggleLoading(true)
-    // let data = this.gridCtrl.getRowData(id)
-    const data = await this.dataStore.get(id)
-    this.gridCtrl.toggleLoading(false)
-    this.showForm(this.editFormTpl, data)
+    try {
+      this.gridCtrl.toggleLoading(true)
+      const vm = await this.dataStore.get(id)
+      this.showEditForm(vm)
+    } catch(er) {
+      // toast alert the error
+      console.log("edit error", er)
+    } finally {
+      this.gridCtrl.toggleLoading(false)
+    }
   }
 
-  delete(id) {
-    this.gridCtrl.removeRow(id)
+  showEditForm(model) {
+    const modInst = this.$uibModal.open(
+      this.getEditModalOptions(this.editFormTpl, model)
+    )
+    modInst.result.then( editedModel => {
+      this.gridCtrl.updateRow(editedModel.id, editedModel)
+    }, function () {
+      console.log('Modal dismissed at: ' + new Date());
+    })
+  }
+
+  getEditModalOptions(template, model) {
+    // const listCtrl = this
+    return {
+      controller: this.getEditModalCtrl(model, this.dataStore),
+      controllerAs: 'dlgCtrl',
+      template: template,
+      keyboard: false, // do not close the dialog with ESC key
+      backdrop: 'static', // do not close on click outside of the dialog,
+      //scope: this.$scope
+    }
+  }
+
+  getEditModalCtrl(model, dataStore) {
+    const listCtrl = this
+    return function($uibModalInstance, $scope) {
+      console.log('$scope',$scope)
+      this.vm = model
+
+      this.save = async () => {
+        console.log('edit modal save scope', $scope)
+        const {editForm} = $scope
+        if (editForm.$invalid || editForm.$pristine) return
+        this.isSaving = true
+        try {
+          await dataStore.save(this.vm)
+          $uibModalInstance.close(this.vm)
+        } catch (error) {
+          console.log('error', error)
+          return
+        } finally {
+          this.isSaving = false
+        }
+      }
+
+      this.cancel = () => {
+        console.log('modal cancel scope', $scope)
+        $uibModalInstance.result.catch(function() { $uibModalInstance.close() })
+        $uibModalInstance.dismiss('cancel')
+      }
+
+      // prevents the "Possibly unhandled rejection: cancel"
+      $uibModalInstance.result.catch(function() { $uibModalInstance.close() })
+
+    }
+  }
+
+  async delete(id) {
+    try {
+      await this.dataStore.remove(id)
+      this.gridCtrl.removeRow(id)
+    } catch(er) {
+      // toast alert the error
+      console.log("delete error", er)
+    }
   }
 
   create() {
     this.showForm(this.editFormTpl, {})
-  }
-
-  modalOptions(template) {
-    const listCtrl = this
-    return {
-      controller: function ($uibModalInstance, $scope) {
-        this.cancel = () => {
-          console.log("MassUpdateCtrl cancel scope", $scope)
-          $uibModalInstance.dismiss('cancel')
-        }
-        this.save = () => {
-          console.log("MassUpdateCtrl save scope", $scope)
-          $uibModalInstance.dismiss('cancel')
-        }
-      },
-      // controllerAs: '$ctrl',
-      // bindToController: true,
-      template: template,
-      keyboard: false, // do not close the dialog with ESC key
-      backdrop: 'static', // do not close on click outside of the dialog,
-      scope: this.$scope
-    }
   }
 
   showMassUpdate() {
@@ -116,16 +162,16 @@ export default class BaseListCtrl {
     this.form = this.$uibModal.open(
       this.modalOptions(formTpl)
     )
-    console.log('this.form',this.form)
+    console.log('this.form', this.form)
   }
 
   async save(editForm, data) {
-    console.log("editForm", editForm)
-    if(editForm.$invalid || editForm.$pristine) return
+    console.log('editForm', editForm)
+    if (editForm.$invalid || editForm.$pristine) return
     try {
       await this.dataStore.save(data)
-    } catch(error){
-      console.log("error", error)
+    } catch (error) {
+      console.log('error', error)
       return
     }
 
@@ -141,4 +187,42 @@ export default class BaseListCtrl {
   closeDialog = () => {
     this.form.close()
   }
+}
+
+class EditModalCtrl {
+
+  constructor($uibModalInstance, $scope) {
+    this.modalInstance = $uibModalInstance
+    this.$scope = $scope
+  }
+
+  cancel() {
+    console.log('modal cancel scope', this.$scope)
+    const {editForm} = this.$scope
+
+  }
+
+  save() {
+    console.log('modal cancel scope', this.$scope)
+    const {editForm} = this.$scope
+
+  }
+}
+
+function fnEditModalCtrl($uibModalInstance, $scope) {
+  // prevents the "Possibly unhandled rejection: cancel"
+  $uibModalInstance.result.catch(function() { $uibModalInstance.close() })
+
+  this.cancel = () => {
+    console.log('modal cancel scope', $scope)
+    $uibModalInstance.dismiss('cancel')
+  }
+  this.save = () => {
+    console.log('edit modal save scope', $scope)
+    if (editForm.$invalid || editForm.$pristine) return
+    this.isSaving = true
+
+    $uibModalInstance.dismiss('cancel')
+  }
+  console.log('$scope',$scope)
 }

@@ -146,9 +146,9 @@ export default class SessionStorageApi {
   }
 
   /** Returns a promise to remove (DELETE) an item. */
-  async remove(item, eqFn = this._eqFn) {
+  async remove(id) {
     let data = await this.dataDelay()
-    let idx = this.findItemIndex(data, item)
+    let idx = this.findItemIndex(data, {id})
     data.splice(idx, 1)
     return this._commit(data)
   }
