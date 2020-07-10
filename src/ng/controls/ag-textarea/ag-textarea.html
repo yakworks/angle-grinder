@@ -7,7 +7,6 @@
       <textarea
         class="textarea"
         ng-class="$ctrl.inputClass"
-        type="{{$ctrl.type}}"
         placeholder="{{::$ctrl.placeholder}}"
         autocomplete="off"
         rows="{{::$ctrl.rows}}"
@@ -17,9 +16,8 @@
         ng-model="$ctrl.value"
         ng-change="$ctrl.onChange()"
         ng-required="{{::$ctrl.isRequired}}"
-        ng-minlength="::$ctrl.minimumLength"
-        ng-maxlength="::$ctrl.maximumLength"
-        maxlength="{{::$ctrl.maximumLength}}"
+        ng-minlength="::$ctrl.minLength"
+        ng-maxlength="::$ctrl.maxLength"
       ></textarea>
     </div>
   </div>

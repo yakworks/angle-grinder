@@ -17,9 +17,8 @@
         ng-change="$ctrl.onChange()"
         ng-required="{{::$ctrl.isRequired}}"
         ng-disabled="{{::$ctrl.isDisabled}}"
-        ng-minlength="::$ctrl.minimumLength"
-        ng-maxlength="::$ctrl.maximumLength"
-        maxlength="{{::$ctrl.maximumLength}}"
+        ng-minlength="::$ctrl.minLength"
+        ng-maxlength="::$ctrl.maxLength"
       >
     </div>
     <div class="control" ng-if="$ctrl.hasTranscluded" ng-transclude>

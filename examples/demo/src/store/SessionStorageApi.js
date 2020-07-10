@@ -35,18 +35,19 @@ export default class SessionStorageApi {
 
     // Services required to implement the fake REST API
     this.sessionStorageKey = sessionStorageKey;
-    console.log('SessionStorageApi constructor')
     this.sourceUrl = sourceUrl
     //this._data = this.getData(sourceUrl)
   }
 
   async getData(sourceUrl){
-    console.log('getData with sourceUrl', sourceUrl)
     try {
-      let data = checkSession()
-      if(data) return data
+      let data = this.checkSession(this.sessionStorageKey)
+      if(data) {
+        console.log(`found ${this.sessionStorageKey} in sessionStorage`)
+        return data
+      }
     } catch (e) {
-      console.log(`Unable to parse session for ${sourceUrl}, retrieving intial data.`);
+      console.log(`Unable to parse session for ${sourceUrl}, retrieving intial data.`, e);
     }
     const parsed = await ky.get(sourceUrl).json()
     this._commit(parsed)
@@ -55,8 +56,8 @@ export default class SessionStorageApi {
     return array
   }
 
-  checkSession() {
-    const fromSession = sessionStorage.getItem(this.sessionStorageKey)
+  checkSession(sessionStorageKey) {
+    const fromSession = sessionStorage.getItem(sessionStorageKey)
     if (fromSession) {
       return JSON.parse(fromSession)
     }
@@ -92,7 +93,6 @@ export default class SessionStorageApi {
   async query(params) {
     let filtered = await this.dataDelay()
     if(params.filters) filtered = this.filter(filtered, params)
-    console.log('filtered', filtered)
     return filtered
   }
 
@@ -139,7 +139,7 @@ export default class SessionStorageApi {
   /** Returns a promise to save (PUT) an existing item. */
   async put(item, eqFn = this._eqFn) {
     let data = await this.dataDelay()
-    let idx = findItemIndex(data, item)
+    let idx = this.findItemIndex(data, item)
     data[idx] = item
     this._commit(data)
     return item
@@ -148,7 +148,7 @@ export default class SessionStorageApi {
   /** Returns a promise to remove (DELETE) an item. */
   async remove(item, eqFn = this._eqFn) {
     let data = await this.dataDelay()
-    let idx = findItemIndex(data, item)
+    let idx = this.findItemIndex(data, item)
     data.splice(idx, 1)
     return this._commit(data)
   }

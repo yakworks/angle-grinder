@@ -70,13 +70,18 @@ export default class BaseListCtrl {
   }
 
   modalOptions(template) {
+    const listCtrl = this
     return {
-      // controller: function ($uibModalInstance, $scope) {
-      //   this.cancel = () => {
-      //     console.log("MassUpdateCtrl cancel scope", $scope)
-      //     $uibModalInstance.dismiss('cancel')
-      //   }
-      // },
+      controller: function ($uibModalInstance, $scope) {
+        this.cancel = () => {
+          console.log("MassUpdateCtrl cancel scope", $scope)
+          $uibModalInstance.dismiss('cancel')
+        }
+        this.save = () => {
+          console.log("MassUpdateCtrl save scope", $scope)
+          $uibModalInstance.dismiss('cancel')
+        }
+      },
       // controllerAs: '$ctrl',
       // bindToController: true,
       template: template,
@@ -88,13 +93,13 @@ export default class BaseListCtrl {
 
   showMassUpdate() {
     const modalOpts = {
-      controller: function($uibModalInstance, $scope) {
-        this.cancel = () => {
-          console.log('MassUpdateCtrl cancel scope', $scope)
-          $uibModalInstance.dismiss('cancel')
-        }
-      },
-      controllerAs: '$ctrl',
+      // controller: function($uibModalInstance, $scope) {
+      //   this.cancel = () => {
+      //     console.log('MassUpdateCtrl cancel scope', $scope)
+      //     $uibModalInstance.dismiss('cancel')
+      //   }
+      // },
+      // controllerAs: '$ctrl',
       // bindToController: true,
       template: this.massUpdateTpl,
       keyboard: false, // do not close the dialog with ESC key
@@ -111,9 +116,19 @@ export default class BaseListCtrl {
     this.form = this.$uibModal.open(
       this.modalOptions(formTpl)
     )
+    console.log('this.form',this.form)
   }
 
-  save(data) {
+  async save(editForm, data) {
+    console.log("editForm", editForm)
+    if(editForm.$invalid || editForm.$pristine) return
+    try {
+      await this.dataStore.save(data)
+    } catch(error){
+      console.log("error", error)
+      return
+    }
+
     if (data.id) {
       this.gridCtrl.updateRow(data.id, data)
     } else {

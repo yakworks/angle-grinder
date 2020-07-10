@@ -9,7 +9,7 @@ import _ from 'lodash'
 class ListCtrl extends BaseListCtrl {
   isLoaded = false
 
-  editFormTpl = require('./form/formlyDialog.html')
+  editFormTpl = require('./form/editDialog.html')
   massUpdateTpl = require('./form/massUpdateForm.html')
 
   static $inject = _.union(super.$inject, ['restDataStore', '$timeout'])
@@ -37,7 +37,10 @@ class ListCtrl extends BaseListCtrl {
 
 export default angular
   .module('ag.demo.basicGridDemo', [])
-  .component('basicGridDemo', { template, controller: ListCtrl })
+  .component('basicGridDemo', {
+    template: template,
+    controller: ListCtrl
+  })
   .component('basicSearchForm', {
     template: require('./form/searchForm.html')
   })
