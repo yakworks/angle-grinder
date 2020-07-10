@@ -56,7 +56,7 @@ app.run(function($rootScope, $state, $stateParams) {
 // configuration
 app.config(function(cfpLoadingBarProvider) {
   cfpLoadingBarProvider.includeBar = true
-  cfpLoadingBarProvider.includeSpinner = false
+  cfpLoadingBarProvider.includeSpinner = true
 })
 
 app.config(function($compileProvider) {

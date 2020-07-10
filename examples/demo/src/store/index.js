@@ -1,6 +1,6 @@
-import {InvoiceStore} from "./Stores";
+import {RestDataStore} from "./StoreApi";
 
 // export module name
-export default angular.module('ag.demo.stores', [])
-  .service('InvoiceStore', InvoiceStore)
+export default angular.module('ag.demo.api', [])
+  .service('restDataStore', RestDataStore)
   .name

@@ -3,6 +3,7 @@
   <ag-input ng-model="$ctrl.vm.name" required ></ag-input>
   <ag-input ng-model="$ctrl.vm.disabled" disabled ></ag-input>
   <ag-input ng-model="$ctrl.vm.email" ></ag-input>
+  <ag-input label="show" ng-model="$ctrl.vm.hide" ng-show="!$ctrl.vm.hideInput" ></ag-input>
   <ag-input ng-model="$ctrl.vm.hide" ng-hide="$ctrl.vm.hideInput" ></ag-input>
   <ag-input ng-model="$ctrl.vm.if" ng-if="!$ctrl.vm.ifInput" ></ag-input>
   <ag-button ng-click="$ctrl.vm.hideInput=!$ctrl.vm.hideInput">ng-hide</ag-button>

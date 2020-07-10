@@ -6,17 +6,27 @@ import agPathWithContext from '../pathWithContext'
 import xeditable from 'angular-xeditable'
 // import _ from 'lodash'
 import uibModName from 'angular-ui-bootstrap'
+import formlyModName from 'angular-formly'
 
 const MOD_NAME = 'angleGrinder.forms'
 export default MOD_NAME
 var forms = angular.module(MOD_NAME, [
   uibModName,
+  formlyModName,
   xeditable,
   agPathWithContext,
   agCommon,
   agSelect2,
   alerts
 ])
+
+forms.config(['formlyConfigProvider', function(formlyConfig) {
+  formlyConfig.setType({
+    name: 'input',
+    template: `<ag-input ng-model="model[options.key]" label-key="options.key"
+      label="{{options.templateOptions.label}}"></ag-input>`
+  })
+}])
 
 forms.run(function(editableOptions) {
   editableOptions.theme = 'bs3'

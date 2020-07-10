@@ -1,4 +1,5 @@
 // import Log from '../../../utils/Log'
+import { getIconClass } from '../../../utils/icon'
 
 class Controller {
   constructor($element, $transclude) {
@@ -27,10 +28,7 @@ class Controller {
   }
 
   setupIconClass(fldName) {
-    let icoVal = this[fldName]
-    if (icoVal && icoVal.startsWith('fa-')) icoVal = `fa ${icoVal}`
-    if (icoVal && icoVal.startsWith('mdi-')) icoVal = `mdi ${icoVal}`
-    this[`${fldName}Class`] = icoVal
+    this[`${fldName}Class`] = getIconClass(this[fldName])
   }
 
   fireClick(event) {

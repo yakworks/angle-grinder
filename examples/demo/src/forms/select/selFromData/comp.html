@@ -17,6 +17,15 @@
 <ag-select name="multiPick" label="multiple options" ng-model="$ctrl.vm.multiPick"
   select-options="$ctrl.multiPickOpts">
 </ag-select>
+
+<ag-select name="singlePick" ng-model="$ctrl.vm.custRest"
+  select-options="$ctrl.custRestOpts">
+</ag-select>
+
+<ag-select name="multiPick" label="restful multiple" ng-model="$ctrl.vm.custRestMulti"
+  select-options="$ctrl.custRestMultiOpts">
+</ag-select>
+
 <div class="form-group">
   <div class="controls">
     <button ng-click="$ctrl.changeModelData()" class="button">Change Model Data</button>

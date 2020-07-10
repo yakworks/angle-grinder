@@ -1,7 +1,6 @@
 @import '~free-jqgrid/css/ui.jqgrid.css';
 @import '~free-jqgrid/plugins/ui.multiselect.css';
 
-
 $grid-selected-color: #d9efef !default;
 $grid-hover-color: #F3F3F3 !default;
 $grid-alt-row-color: #F5F9F9 !default;
@@ -163,15 +162,6 @@ $grid-border: $border;
     }
   }
 
-  a.jqg-row-action {
-    font-size: 12px;
-    padding: 6px;
-    margin-left: -6px;
-    color: #777777;
-  }
-  a.jqg-row-action:hover {
-    color: #333333;
-  }
   .ui-icon-triangle-1-n {
     background-position: 1px -16px;
   }
@@ -249,6 +239,12 @@ $grid-border: $border;
   padding: 2px
 }
 
+// is-dense
+.ui-jqgrid .gridz.is-dense .jqgrow td {
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
 .ui-jqgrid tr.jqgrow, .ui-jqgrid tr.ui-row-ltr {
   border: none;
 }
@@ -258,12 +254,23 @@ $grid-border: $border;
     background-color: #FFF;
     opacity: 1;
 
-    a {
-      color: #0088CC;
+    // context menu cog icon
+    a.jqg-context-menu {
+      font-size: 12px;
+      padding: 6px;
+      margin-left: -6px;
+      color: #404040;
     }
 
+    // legacy row
     a.jqg-row-action {
+      font-size: 12px;
+      padding: 6px;
+      margin-left: -6px;
       color: #404040;
+    }
+    a.jqg-row-action:hover {
+      color: #333333;
     }
   }
   .ui-widget-content.ui-priority-secondary {
@@ -417,11 +424,6 @@ $grid-border: $border;
   background-color: #ffff00 !important;
   background-image: none !important;
 }
-
-.ui-jqgrid a {
-  color: #0088CC;
-}
-
 
 .ui-icon {
   width: 16px;

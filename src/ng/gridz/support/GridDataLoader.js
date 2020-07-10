@@ -9,6 +9,7 @@ const gridz = angular.module(gridzModule)
 
 class GridDataLoader {
   constructor($http) {
+    // see https://stackoverflow.com/questions/24595460/how-to-access-update-rootscope-from-outside-angular
     const $injector = angular.element(document.body).injector()
     const http = $injector.get('$http')
     // url - data source url

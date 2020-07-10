@@ -3,19 +3,9 @@ import AgBaseControl from '../AgBaseControl'
 class Controller extends AgBaseControl {
   $onInit() {
     super.onInit()
-  }
-
-  onChange() {
-    try {
-      if (this.value && this.maximumLength && this.value.length > this.maximumLength) {
-        this.value = this.value.substring(0, this.maximumLength)
-      }
-    } catch (e) {
-      // Log.debug('onChange error', e)
-      this.value = ''
+    if (!this.maxLength) {
+      this.maxLength = 255
     }
-    // Log.debug('onChange $setViewValue', this.value)
-    this.ngModelCtrl.$setViewValue(this.value)
   }
 }
 
@@ -29,9 +19,8 @@ export default () => ({
   },
   scope: {
     ...AgBaseControl.common.scope,
-    type: '@',
-    minimumLength: '@',
-    maximumLength: '@',
+    minLength: '@',
+    maxLength: '@',
     rows: '@'
   }
 })

@@ -10,6 +10,7 @@ class Controller extends AgBaseControl {
     closeOnSelect: false,
     useDataObject: true,
     ajax: {
+      cache: true,
       dataType: 'json',
       quietMillis: 250,
       data: function (term, pageNum) { // page is the one-based page number tracked by Select2

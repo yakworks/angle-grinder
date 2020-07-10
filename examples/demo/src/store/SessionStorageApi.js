@@ -1,4 +1,5 @@
-import {pushToArr, guid, setProp} from "../utils/util";
+import {guid} from "../utils/util";
+import ky from 'ky'
 import _ from 'lodash'
 
 const REST_DELAY = 500
@@ -14,18 +15,15 @@ const REST_DELAY = 500
  *
  * For an example, please see dataSources.js
  */
-export default class SessionStorage {
+export default class SessionStorageApi {
   /**
    * Creates a new SessionStorage object
    *
-   * @param $http Pass in the $http service
-   * @param $timeout Pass in the $timeout service
-   * @param $q Pass in the $q service
    * @param sessionStorageKey The session storage key. The data will be stored in browser's session storage under this key.
    * @param sourceUrl The url that contains the initial data.
    */
-  constructor($http, $timeout, $q, sessionStorageKey, sourceUrl) {
-    let data, fromSession = sessionStorage.getItem(sessionStorageKey);
+  constructor(sessionStorageKey, sourceUrl) {
+    // let data, fromSession = sessionStorage.getItem(sessionStorageKey);
     // A promise for *all* of the data.
     this._data = undefined;
 
@@ -36,58 +34,77 @@ export default class SessionStorage {
     this._eqFn = (l, r) => l[this._idProp] === r[this._idProp];
 
     // Services required to implement the fake REST API
-    this.$q = $q;
-    this.$timeout = $timeout;
     this.sessionStorageKey = sessionStorageKey;
+    this.sourceUrl = sourceUrl
+    //this._data = this.getData(sourceUrl)
+  }
 
-    if (fromSession) {
-      try {
-        // Try to parse the existing data from the Session Storage API
-        data = JSON.parse(fromSession);
-      } catch (e) {
-        console.log("Unable to parse session messages, retrieving intial data.");
+  async getData(sourceUrl){
+    try {
+      let data = this.checkSession(this.sessionStorageKey)
+      if(data) {
+        console.log(`found ${this.sessionStorageKey} in sessionStorage`)
+        return data
       }
+    } catch (e) {
+      console.log(`Unable to parse session for ${sourceUrl}, retrieving intial data.`, e);
     }
+    const parsed = await ky.get(sourceUrl).json()
+    this._commit(parsed)
+    const array = JSON.parse(sessionStorage.getItem(this.sessionStorageKey))
+    // console.log("array", array)
+    return array
+  }
 
-    let stripHashKey = (obj) =>
-        setProp(obj, '$$hashKey', undefined);
-
-    // Create a promise for the data; Either the existing data from session storage, or the initial data via $http request
-    this._data = (data ? $q.resolve(data) : $http.get(sourceUrl).then(resp => resp.data))
-        .then(this._commit.bind(this))
-        .then(() => JSON.parse(sessionStorage.getItem(sessionStorageKey)))
-        .then(array => array.map(stripHashKey));
-
+  checkSession(sessionStorageKey) {
+    const fromSession = sessionStorage.getItem(sessionStorageKey)
+    if (fromSession) {
+      return JSON.parse(fromSession)
+    }
   }
 
   /** Saves all the data back to the session storage */
   _commit(data) {
     sessionStorage.setItem(this.sessionStorageKey, JSON.stringify(data));
-    return this.$q.resolve(data);
+    return data
   }
 
+  delay(ms = REST_DELAY) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
   /** Helper which simulates a delay, then provides the `thenFn` with the data */
-  all(thenFn) {
-    return this.$timeout(() => this._data, REST_DELAY).then(thenFn);
+  async dataDelay() {
+    await this.delay()
+    return this.getData(this.sourceUrl)
   }
 
   /** Given a sample item, returns a promise for all the data for items which have the same properties as the sample */
-  search(exampleItem) {
+  async search(exampleItem) {
     let contains = (search, inString) =>
         ("" + inString).indexOf("" + search) !== -1;
     let matchesExample = (example, item) =>
         Object.keys(example).reduce((memo, key) => memo && contains(example[key], item[key]), true);
-    return this.all(items =>
-        items.filter(matchesExample.bind(null, exampleItem)));
+
+    let items = await this.dataDelay()
+    return items.filter(matchesExample.bind(null, exampleItem))
   }
 
   //
-  query(params) {
-    return this.all(items => {
-      let filtered = items
-      if(params.filters) filtered = this.filter(items, params)
-      return filtered
-    })
+  async query(params) {
+    let filtered = await this.dataDelay()
+    if(params.filters) filtered = this.filter(filtered, params)
+    return filtered
+  }
+
+  //
+  async pickList(params) {
+    let dta = await this.dataDelay()
+    if(params?.filters) dta = this.filter(dta, params)
+    dta = dta.reduce(function(acc, item) {
+      acc.push(_.pick(item, ['id', 'name']))
+      return acc
+    }, [])
+    return dta
   }
 
   filter(items, params) {
@@ -99,46 +116,60 @@ export default class SessionStorage {
   }
 
   /** Returns a promise for the item with the given identifier */
-  get(id) {
-    return this.all(items =>
-        items.find(item => item[this._idProp] === id));
+  async get(id) {
+    let items = await this.dataDelay()
+    let item = items.find(item => item.id == id)
+    return item
   }
 
   /** Returns a promise to save the item.  It delegates to put() or post() if the object has or does not have an identifier set */
-  save(item) {
+  async save(item) {
     return item[this._idProp] ? this.put(item) : this.post(item);
   }
 
   /** Returns a promise to save (POST) a new item.   The item's identifier is auto-assigned. */
-  post(item) {
+  async post(item) {
     item[this._idProp] = guid();
-    return this.all(items => pushToArr(items, item)).then(this._commit.bind(this));
+    let items = await this.dataDelay()
+    items.push(item)
+    this._commit(items)
+    return item
   }
 
   /** Returns a promise to save (PUT) an existing item. */
-  put(item, eqFn = this._eqFn) {
-    return this.all(items => {
-      let idx = items.findIndex(eqFn.bind(null, item));
-      if (idx === -1) throw Error(`${item} not found in ${this}`);
-      items[idx] = item;
-      return this._commit(items).then(() => item);
-    });
+  async put(item, eqFn = this._eqFn) {
+    let data = await this.dataDelay()
+    let idx = this.findItemIndex(data, item)
+    data[idx] = item
+    this._commit(data)
+    return item
   }
 
   /** Returns a promise to remove (DELETE) an item. */
-  remove(item, eqFn = this._eqFn) {
-    return this.all(items => {
-      let idx = items.findIndex(eqFn.bind(null, item));
-      if (idx === -1) throw Error(`${item} not found in ${this}`);
-      items.splice(idx, 1);
-      return this._commit(items).then(() => item);
-    });
+  async remove(id) {
+    let data = await this.dataDelay()
+    let idx = this.findItemIndex(data, {id})
+    data.splice(idx, 1)
+    return this._commit(data)
   }
 
-  gridDataLoader(gridCtrl){
-    return function(params) {
-      gridCtrl.toggleLoading(true)
-      return this.all(items => items)
+  findItemIndex(data, item, eqFn = this._eqFn) {
+    let idx = data.findIndex(eqFn.bind(null, item))
+    if (idx === -1) throw Error(`${item} not found in ${this}`)
+    return idx
+  }
+
+  // load results of a query into gridCtrl
+  async gridLoader(gridCtrl, params) {
+    gridCtrl.toggleLoading(true)
+    try {
+      let data = await this.query(params)
+      data = _.orderBy(data, params.sort , params.order)
+      return gridCtrl.addJSONData(data)
+    } catch(error) {
+      console.error(error)
+    } finally {
+      gridCtrl.toggleLoading(false)
     }
   }
 }

@@ -1,4 +1,5 @@
 // import Log from '../../../utils/Log'
+import { getIconClass } from '../../../utils/icon'
 import _ from 'lodash'
 
 const DEFAULT_MENU_DISPLAY = 'Action'
@@ -29,10 +30,8 @@ class Controller {
     }
   }
 
-  getIconClass(itemIcon) {
-    if (!itemIcon) return
-    if (itemIcon.startsWith('fa-')) return `fa ${itemIcon}`
-    if (itemIcon.startsWith('mdi-')) return `mdi ${itemIcon}`
+  getIconClass(name) {
+    return getIconClass(name)
   }
 }
 

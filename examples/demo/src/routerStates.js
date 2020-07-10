@@ -121,16 +121,20 @@ const gridsStates = {
   children: [
     {
       name: 'Basic Demo Grid',
-      component: 'basicGridExample'
+      component: 'basicGridIndex'
+    },
+    {
+      name: 'AppConfig Demo Grid',
+      component: 'configGridIndex'
     },
     {
       name: 'Legacy Demo Grid',
-      component: 'legacyGridExample'
-    },
-    {
-      name: 'Rest Demo Grid',
-      component: 'restGridExample'
+      component: 'legacyGridIndex'
     }
+    // {
+    //   name: 'Rest Demo Grid',
+    //   component: 'restGridExample'
+    // }
   ]
 }
 
@@ -153,6 +157,10 @@ const componentsStates = {
     {
       name: 'dropdown',
       component: 'dropdownDemoIndex'
+    },
+    {
+      name: 'contextMenu',
+      component: 'contextMenuIndex'
     },
     {
       name: 'toolbar',

@@ -28,6 +28,7 @@ export default class AgBaseControl {
     if (!this.modelKey && modelPath) {
       this.modelKey = _.split(modelPath, '.').slice(-1).pop()
     }
+    // if(this.)
     // passing in a blank string to label will not be undefined, and is how to blank it out
     if (typeof this.label === 'undefined') {
       this.label = stringUtils.parseWords(this.modelKey)
@@ -81,33 +82,35 @@ export default class AgBaseControl {
         const label = el.find('.label')
         // Log.debug("label", label)
         const colClass = this.columnsClass || ''
-        // when we append label it still shown when we hide a component with ng-hide, so need to add ng-hide class manually
-        if (attributes['ng-hide']) {
-          this.$scope.$watch(() => {
-            return el.attr('class')
-          }, (newValue) => {
-            this.$timeout(() => {
-              if (newValue.indexOf('ng-hide') > -1) {
-                label.addClass('ng-hide')
-              } else {
-                label.removeClass('ng-hide')
-              }
-            })
-          })
-        }
 
         var content = angular.element(`<div class="columns is-mobile ${colClass}"></div>`)
         el.wrap(content)
         el.parent().prepend(label)
+
+        // when we append label it still shown when we hide a component with ng-hide, so need to add ng-hide class manually
+        if (attributes['ng-hide'] || attributes['ng-show']) {
+          this.$scope.$watch(() => {
+            return el.attr('class')
+          }, (newValue) => {
+            this.$timeout(() => {
+              ['ng-hide', 'ng-show'].forEach((clazz) => {
+                if (newValue.indexOf(clazz) > -1) {
+                  el.parent().addClass(clazz)
+                } else {
+                  el.parent().removeClass(clazz)
+                }
+              })
+            })
+          })
+        }
       })
     }
   }
 
   $onDestroy() {
     if (this.isHorizontal && this.label) {
-      const el = this.$element
-      // to hide label when we hide component with ng-if, we remove because label is adding after each component creating
-      el.parent().find('label')[0].remove()
+      // to hide wrapper when we hide component with ng-if, we remove because label is adding after each component creating
+      this.$element.parent().remove()
     }
   }
 
@@ -136,6 +139,7 @@ AgBaseControl.common = {
   },
   scope: {
     label: '@',
+    labelKey: '@',
     hint: '@',
     name: '@',
     placeholder: '@',

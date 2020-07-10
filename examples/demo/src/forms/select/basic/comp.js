@@ -1,5 +1,6 @@
 import template from './comp.html'
 
+/* @ngInject */
 class controller {
   colorData = ['red', 'green', 'blue']
   dayData = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun']
@@ -10,6 +11,16 @@ class controller {
     { id: 4, name: 'Foo bar bazz buzz' },
     { id: 5, name: 'buzz blaz big' }
   ]
+
+  custApiData = { results: () => this.customerApi.pickList() }
+
+  constructor(restDataStore) {
+    this.customerApi = restDataStore.customerApi
+  }
+
+  // $onInit() {
+  //   this.custApiData = { results: () => this.customerApi.pickList() }
+  // }
 }
 
 const COMP = 'demoSelInput'

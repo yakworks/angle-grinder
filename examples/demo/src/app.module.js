@@ -16,21 +16,23 @@ import snippetsModule from './utils/demo/demo.module'
 // demo sections
 import componentsModule from './components'
 import formsModule from './forms'
+import gridsModule from './grids'
 
 // store
-// import storeModule from './store'
+import storeApiModule from './store'
 
 // fresh sidebar
 
 
 export default angular.module('app', [
   agModule,
-  // storeModule,
+  storeApiModule,
   packetLayoutModule,
   freshLayoutModule,
   snippetsModule,
   componentsModule,
   formsModule,
+  gridsModule,
   fullscreen,
   truncateFilters,
   ngTranslateModule // remove this, only here to get demo working

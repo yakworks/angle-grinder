@@ -1,0 +1,56 @@
+<div>
+  <div>
+      <strong>Gold: </strong>
+      {{$ctrl.player.gold}}
+  </div>
+  <ag-button ng-click="$ctrl.showHiddenOption = !$ctrl.showHiddenOption">
+    Toggle Hidden Option ({{$ctrl.showHiddenOption}})
+  </ag-button>
+  <br/>
+  <br/>
+  <div class="list-group">
+      <a href="#"
+         class="list-group-item"
+         ng-repeat="item in $ctrl.items"
+         context-menu="$ctrl.fullMontyMenuOptions"
+         context-menu-empty-text="'SOME TEXT FOR EMPTY'">
+          <span class="badge">{{item.cost}}</span>
+          {{item.name}}
+      </a>
+  </div>
+
+  <button class="btn btn-default"
+          context-menu="$ctrl.menuOptionsObject"
+          context-menu-click="$ctrl.contextMenuClick"
+          context-menu-model="'foo bar'"
+          context-menu-on="click, contextmenu"
+          >Left or Right Click</button>
+
+  <br/>
+  <br/>
+  <button class="btn btn-default"
+          context-menu="$ctrl.otherMenuOptions"
+          context-menu-orientation="left"
+          model="'Blue'">Left oriented context menu</button>
+
+  <br/>
+  <br/>
+  <button class="btn btn-default"
+          context-menu="$ctrl.otherMenuOptions"
+          allow-event-propagation="true"
+          model="'Blue'">Right Click allow event propagation</button>
+
+  <br/>
+  <br/>
+  <button class="btn btn-default"
+          context-menu="$ctrl.otherMenuOptions"
+          context-menu-on="click"
+          model="'Red'">Left Click</button>
+
+  <br/>
+  <br/>
+  <button class="btn btn-default"
+          context-menu="$ctrl.customHTMLOptions"
+          >Custom HTML</button>
+
+</div>

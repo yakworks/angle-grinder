@@ -1,5 +1,5 @@
 import template from './component.html'
-import '../../../grids/basicGrid/component'
+import '../../../grids/basicGrid/listComp'
 import '../../../forms/xedit-form/xedit1/comp'
 
 class controller {
