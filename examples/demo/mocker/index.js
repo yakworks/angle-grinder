@@ -10,7 +10,7 @@ const pagination = (rows, query) => {
   return {
     rows: rows.slice((query.page - 1) * query.max, query.page * query.max), page: query.page,
     records: rows.length,
-    total: Math.floor(result.length / query.max) + (rows.length % query.max === 0 ? 0 : 1)
+    total: Math.floor(rows.length / query.max) + (rows.length % query.max === 0 ? 0 : 1)
   }
 };
 
