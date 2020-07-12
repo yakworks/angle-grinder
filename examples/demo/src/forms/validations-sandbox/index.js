@@ -1,57 +1,17 @@
-import _ from 'lodash'
-import Swal from 'sweetalert2'
+import compDemoModule from './component'
 
-class ValidationsCtrl {
-  menuDisplay = 'Choose an action'
-
-  menuItems = [
-    { display: '<strong>Action</strong>', action: () => Swal.fire('something special') },
-    { display: 'Another action' },
-    { divider: true },
-    { display: 'Separated link' }
-  ]
-
-  vm = {}
-
-  constructor(serverErrorsService) {
-    this.serverErrorsService = serverErrorsService
-  }
-
-  menuItemClick = function(menuItem, e) {
-    console.log('menuItemClick', { menuItem, e })
-  }
-
-  mockServerValidation(model) {
-    if (model.name === 'bill') {
-      return {
-        status: 422,
-        data: {
-          errors: {
-            org: {
-              name: 'no more bills in Org'
-            },
-            name: 'no more bills'
-          }
-        }
-      }
+const template = `
+<example-snippet raw-js='$ctrl.rawJs' raw-html='$ctrl.rawHtml' raw-md='$ctrl.rawMd'>
+  <validation-demo></validation-demo>
+</example-snippet>
+`
+// export module name
+export default angular
+  .module(compDemoModule)
+  .component('validationDemoIndex', {
+    template: template,
+    controller: function() {
+      this.rawHtml = require('./component.html')
+      this.rawJs = require('!raw-loader!./component.js').default
     }
-    // for child fields
-    // return {status: 422, data:{errors: {org: {name: "An Error message from server on field name, with value: " + val}}}}
-  }
-
-  save(form) {
-    const errors = this.mockServerValidation(this.vm)
-    if (errors) {
-      // pass in org resource to use drill into errors
-      // this.serverErrorsService.setErrors(form, errors, "org")
-      this.serverErrorsService.setErrors(form, errors)
-    }
-  }
-}
-
-export default angular.module('demo.validationsExample', [])
-  .component('validationsExample', {
-    controller: ValidationsCtrl,
-    template: require('./validations.comp.html')
-  })
-  .name
+  }).name

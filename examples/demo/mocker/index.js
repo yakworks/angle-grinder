@@ -211,6 +211,20 @@ const proxy = {
       return inv
     })
     return res.json({data: updData, errors: []})
+  },
+
+  'POST /validation/mock': (req, res) => {
+    if (req.body.name === 'bill') {
+      return res.status(422).json({
+          errors: {
+            org: {
+              name: 'no more bills in Org'
+            },
+            name: 'no more bills'
+          }
+      })
+    }
+    return res.json(req.body)
   }
 }
 module.exports = (noProxy ? {} : delay(proxy, 100))

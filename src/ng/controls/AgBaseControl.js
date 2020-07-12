@@ -43,7 +43,8 @@ export default class AgBaseControl {
     // Log.debug("this.elementId", this.elementId)
 
     if (!this.name) {
-      this.name = this.elementId
+      // to be able to handle server errors by field name
+      this.name = this.modelKey
     }
 
     // if required is added it wont be undefined and may have blank str if no value is set
