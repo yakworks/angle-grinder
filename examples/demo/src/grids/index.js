@@ -1,5 +1,6 @@
 import angular from 'angular'
 import basicGridModule from './basicGrid'
+import basicRestGridModule from './basicGridRest'
 import configGridModule from './configGrid'
 import legacyGridModule from './legacyGrid'
 // import './restGrid/component'
@@ -9,6 +10,7 @@ import legacyGridModule from './legacyGrid'
 
 const gapp = angular.module('demo.gridz', [
   basicGridModule,
+  basicRestGridModule,
   configGridModule,
   legacyGridModule
 ])

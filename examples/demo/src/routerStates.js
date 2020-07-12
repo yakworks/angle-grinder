@@ -120,8 +120,12 @@ const gridsStates = {
   },
   children: [
     {
-      name: 'Basic Demo Grid',
+      name: 'basic-grid',
       component: 'basicGridIndex'
+    },
+    {
+      name: 'basic-rest-grid',
+      component: 'basicGridRestIndex'
     },
     {
       name: 'AppConfig Demo Grid',

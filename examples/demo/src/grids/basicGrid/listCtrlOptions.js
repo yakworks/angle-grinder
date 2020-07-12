@@ -54,11 +54,11 @@ export default function buildOptions(ctrl){ return {
     shrinkToFit: true,
     // selectFirstRow: true,
     contextMenu: true,
-    pager: false,
+    pager: true,
     // denseRows: true,
     // filterToolbar: true,
     // searching: { defaultSearch: "cn" },
-    datatype: ctrl.dataLoader()
+    datatype: (params) => ctrl.gridLoader(params)
   },
   formFields: [
     {

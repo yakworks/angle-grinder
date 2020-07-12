@@ -58,7 +58,7 @@ export default function buildOptions(ctrl){ return {
     // denseRows: true,
     // filterToolbar: true,
     // searching: { defaultSearch: "cn" },
-    datatype: ctrl.dataLoader()
+    datatype: ctrl.gridLoader()
   },
   formFields: [
     {
