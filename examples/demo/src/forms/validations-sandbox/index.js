@@ -23,26 +23,6 @@ class ValidationsCtrl {
     console.log('menuItemClick', { menuItem, e })
   }
 
-/*
-  mockServerValidation(model) {
-    if (model.name === 'bill') {
-      return {
-        status: 422,
-        data: {
-          errors: {
-            org: {
-              name: 'no more bills in Org'
-            },
-            name: 'no more bills'
-          }
-        }
-      }
-    }
-    // for child fields
-    // return {status: 422, data:{errors: {org: {name: "An Error message from server on field name, with value: " + val}}}}
-  }
-*/
-
   save(form) {
     this.$http.post('http://localhost:3000/validation/mock', this.vm).then(resp => {
       console.log('all saved', resp)

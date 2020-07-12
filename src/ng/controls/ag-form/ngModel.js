@@ -69,6 +69,13 @@ function ngModel(agValidationsConfig, $rootScope, $interpolate, $document) {
           return ngModel.$error
         }, updateErrors, true)
 
+        // Update errors after server error is returned
+        const getServerErrors = () => form.$error.$$server
+        scope.$watch(getServerErrors, function(serverError) {
+            if(serverError)
+              updateErrors()
+        })
+
         scope.$on('AgForm.ForceErrorUpdate', updateErrors)
 
         element
