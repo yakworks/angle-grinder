@@ -1,5 +1,4 @@
-<form name="customerForm" is-horizontal ag-submit="$ctrl.save(customerForm)" ag-form class="form-horizontal-fixed"
-      role="form" novalidate>
+<form name="customerForm" is-horizontal ag-submit="$ctrl.save(customerForm)" ag-form>
 
   <ag-input min-length="3" required ag-focus ng-model="$ctrl.vm.name"
             placeholder="min length 3, enter bill for sim server error"></ag-input>
@@ -54,4 +53,3 @@
   </div>
 </form>
 <pre ng-cloak>model: {{$ctrl.vm | json}}</pre>
-<button ng-click="showSource = true" ng-show="!showSource" class="btn btn-primary">Show Source</button>

@@ -1,6 +1,8 @@
 // import _ from 'lodash'
 // import { isAttrTruthy } from '../../utils/ngHelpers'
 // import $log from '../../../utils/Log'
+import _ from "lodash";
+
 function ldebug(msg, o) {
   // $log.debug(msg, o)
 }
@@ -71,9 +73,22 @@ function ngModel(agValidationsConfig, $rootScope, $interpolate, $document) {
 
         // Update errors after server error is returned
         const getServerErrors = () => form.$error.$$server
-        scope.$watch(getServerErrors, function(serverError) {
-            if(serverError)
+        scope.$watch(getServerErrors, function(serverErrors) {
+            if(serverErrors){
+              _.each(serverErrors, (val) => {
+                const field = val.$name
+                const getViewValue = () => form[field]?.$viewValue
+                scope.$watch(getViewValue, function(oldVal, newVal) {
+                  if (oldVal === newVal) { return }
+                  // Remove server side error for the field when its value was changed
+                  if (form[field]) form[field].$setValidity('$$server', true)
+                  form.$serverErrors[field] = null
+                  updateErrors()
+                })
+              })
               updateErrors()
+            }
+
         })
 
         scope.$on('AgForm.ForceErrorUpdate', updateErrors)
