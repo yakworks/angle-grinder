@@ -2,7 +2,7 @@
 import template from './list.html'
 import BaseListCtrl from 'angle-grinder/src/ng/gridz/list/BaseListCtrl'
 import buildOptions from "./listCtrlOptions"
-import dataStores from '../../store/LocalDataStores'
+import localStoreApi from '../../store/LocalStoreApi'
 import Log from 'angle-grinder/src/utils/Log'
 import Swal from 'angle-grinder/src/tools/swal'
 import _ from 'lodash'
@@ -17,7 +17,7 @@ class ListCtrl extends BaseListCtrl {
 
   constructor(...args) {
     super(...args)
-    this.dataStore = dataStores.invoiceApi
+    this.dataApi = localStoreApi.invoice
   }
 
   $onInit() {

@@ -1,0 +1,55 @@
+<form name="customerForm" is-horizontal ag-submit="$ctrl.save(customerForm)" ag-form>
+
+  <ag-input min-length="3" required ag-focus ng-model="$ctrl.vm.name"
+            placeholder="min length 3, enter bill for sim server error"></ag-input>
+  <ag-input type="email" ng-model="$ctrl.vm.email" placeholder="Must be valid email"></ag-input>
+  <div class="columns is-mobile">
+    <ag-label label-class="is-3">Amount</ag-label>
+    <div class="field column">
+      <div class="field mb-0">
+        <div class="control">
+          <input
+            class="input"
+            type="number"
+            placeholder="Must be between > 1 and <= 9 and max 2 decimal places" min="1" max="9"
+            ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" msg-pattern="precision can't be greater than 2 decimal places"
+            autocomplete="off"
+            name="amount"
+            id="amount_1"
+            ng-model="$ctrl.vm.number"
+          >
+        </div>
+      </div>
+      <ag-validation-inline for="amount_1"></ag-validation-inline>
+    </div>
+  </div>
+
+  <div class="columns is-mobile">
+    <ag-label label-class="is-3">Integer</ag-label>
+    <div class="field column">
+      <div class="field mb-0">
+        <div class="control">
+          <input
+            class="input"
+            id="initeger_1"
+            name="int"
+            type="number"
+            ng-model="$ctrl.vm.int"
+            placeholder="enter integer > 0"
+            min="1"
+            integer
+          >
+        </div>
+      </div>
+      <ag-validation-inline for="initeger_1"></ag-validation-inline>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="controls">
+      <button class="btn btn-primary">Save</button>
+      <button ng-click="$ctrl.save(form)" class="btn btn-primary">Bar</button>
+      <ag-dropdown menu-items="$ctrl.menuItems" menu-click="$ctrl.menuItemClick">Actions</ag-dropdown>
+    </div>
+  </div>
+</form>
+<pre ng-cloak>model: {{$ctrl.vm | json}}</pre>

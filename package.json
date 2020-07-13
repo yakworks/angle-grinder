@@ -4,6 +4,7 @@
   "version": "4.0.2",
   "scripts": {
     "build": "rimraf dist && yarn build:wip",
+    "transpile": "babel ./examples/demo/mocker --out-dir ./examples/demo/mocker-server",
     "build:dev": "webpack --config config/webpack.config.js --mode=development --bail --profile --progress",
     "build:wip": "webpack --config config/webpack.config.js --mode=production --bail --profile --progress",
     "build:docs": "webpack --mode=production --bail --profile --progress --content-base ./docs",
@@ -82,6 +83,7 @@
     "vanillajs-datepicker": "yakworks/vanillajs-datepicker"
   },
   "devDependencies": {
+    "@babel/cli": "^7.10.4",
     "@babel/core": "^7.7.7",
     "@babel/plugin-proposal-class-properties": "^7.8.3",
     "@babel/plugin-proposal-optional-chaining": "^7.7.5",

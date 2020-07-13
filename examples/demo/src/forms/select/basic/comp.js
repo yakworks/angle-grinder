@@ -14,8 +14,8 @@ class controller {
 
   custApiData = { results: () => this.customerApi.pickList() }
 
-  constructor(restDataStore) {
-    this.customerApi = restDataStore.customerApi
+  constructor(localStoreApi) {
+    this.customerApi = localStoreApi.customer
   }
 
   // $onInit() {

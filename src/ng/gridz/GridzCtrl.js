@@ -224,8 +224,6 @@ export default class GridzCtrl {
   }
 
   contextMenuClick = (model, menuItem) => {
-    Log.debug('contextMenuClick model', model)
-    Log.debug('contextMenuClick menuItem', menuItem)
     return this.listCtrl.fireRowAction(model, menuItem)
   }
 

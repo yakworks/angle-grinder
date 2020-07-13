@@ -4,15 +4,15 @@ const _ = require('lodash')
  * Memstore Api, can be extended or used as a test express back end for a rest server.
  * Uses commonjs and not es6 exports so it compatible with node and doesn't need babel
  */
-class MemStoreApi {
+class MemDataApi {
   // used to simulate a delay is used for testing
-  delay = 0
+  mockDelay = 0
 
   /**
    * @param data the data to initialize this with
    */
-  constructor(data, delay) {
-    this.delay = delay || this.delay
+  constructor(data, mockDelay) {
+    this.mockDelay = mockDelay || this.mockDelay
 
     // A promise for *all* of the data.
     this._data = data// argMap.data;
@@ -28,23 +28,22 @@ class MemStoreApi {
     return this._data
   }
 
-  /** Saves all the data back to the session storage */
   _commit(data) {
     this._data = data
     return this._data
   }
 
   delay(ms) {
-    ms = ms || this.delay
+    ms = ms || this.mockDelay
     return new Promise(resolve => setTimeout(resolve, ms));
   }
-  /** Helper which simulates a delay, then provides the `thenFn` with the data */
+
   async data() {
     await this.delay()
     return this.getData()
   }
 
-  /** Given a sample item, returns a promise for all the data for items which have the same properties as the sample */
+  /** TODO - Given a sample item, returns a promise for all the data for items which have the same properties as the sample */
   async qbe(exampleItem) {
     let contains = (search, inString) =>
         ("" + inString).indexOf("" + search) !== -1;
@@ -57,14 +56,14 @@ class MemStoreApi {
 
   //
   async search(params) {
-    console.log("query params", params)
+    // console.log("query params", params)
     let filtered = await this.data()
     // console.log("query filtered", filtered)
     if(params.filters) filtered = this.filter(filtered, params)
     filtered = _.orderBy(filtered, params.sort , params.order)
     // console.log("query filtered orderBy", filtered)
     let paged = pagination(filtered, params)
-    console.log("query paged", paged)
+    // console.log("query paged", paged)
     return paged
   }
 
@@ -104,32 +103,30 @@ class MemStoreApi {
     let data = await this.data()
     item.id = _.max(data.map(it => it.id)) + 1
     data.push(item)
-    this._commit(data)
     data = this._commit(data)
-    console.log("post item", item)
     return item
   }
 
   /** Returns a promise to save (PUT) an existing item. */
-  async put(item, eqFn = this._eqFn) {
+  async put(item) {
     let data = await this.data()
     let idx = this.findItemIndex(data, item)
     data[idx] = item
     data = this._commit(data)
-    console.log("idx", idx)
-    console.log("data[idx]", data[idx])
     return data[idx]
   }
 
   /** Returns a promise to remove (DELETE) an item. */
   async remove(id) {
+    const intId = parseInt(id)
     let data = await this.data()
-    let idx = this.findItemIndex(data, {id})
-    data.splice(idx, 1)
+    _.remove(data, function(item) {
+      return item.id === intId
+    })
     return this._commit(data)
   }
 
-  findItemIndex(data, item, eqFn = this._eqFn) {
+  findItemIndex(data, item) {
     let idx = data.findIndex(eqFn.bind(null, item))
     if (idx === -1) throw Error(`${item} not found in ${this}`)
     return idx
@@ -166,4 +163,4 @@ function hasSome(obj, searchKey){
   })
 }
 
-module.exports = MemStoreApi
+module.exports = MemDataApi

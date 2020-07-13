@@ -3,10 +3,10 @@
 // see https://stackoverflow.com/questions/53349705/constructor-and-class-properties-within-javascript-mixins
 // and https://alligator.io/js/class-composition/ for class composition
 export default class EditModalCtrl {
-  constructor($uibModalInstance, $scope, dataStore, vm) {
+  constructor($uibModalInstance, $scope, dataApi, vm) {
     this.modal = $uibModalInstance
     this.$scope = $scope
-    this.dataStore = dataStore
+    this.dataApi = dataApi
     this.vm = vm
   }
 
@@ -16,7 +16,7 @@ export default class EditModalCtrl {
     if (editForm.$invalid || editForm.$pristine) return
     this.isSaving = true
     try {
-      const savedItem = await this.dataStore.save(this.vm)
+      const savedItem = await this.dataApi.save(this.vm)
       this.modal.close(savedItem)
     } catch (er) {
       this.handleError(er)

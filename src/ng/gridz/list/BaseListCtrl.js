@@ -42,7 +42,7 @@ export default class BaseListCtrl {
   async edit(id) {
     this.gridCtrl.toggleLoading(true)
     try {
-      const vm = await this.dataStore.get(id)
+      const vm = await this.dataApi.get(id)
       this.showEditForm(vm)
     } catch (er) {
       this.handleError(er)
@@ -60,11 +60,16 @@ export default class BaseListCtrl {
     const modInst = this.$uibModal.open(
       this.getEditModalOptions(this.editFormTpl, model)
     )
-    modInst.result.then(editedVm => {
+    modInst.result
+    .then(editedVm => {
       isUpdate ? this.gridCtrl.updateRow(editedVm.id, editedVm) : this.gridCtrl.addRow(editedVm.id, editedVm)
-    }, function() {
+    })
+    .catch(() => {
       console.log('Modal dismissed at: ' + new Date())
     })
+    // , () => {
+    //   console.log('Modal dismissed at: ' + new Date())
+    // })
   }
 
   getEditModalOptions(template, model) {
@@ -77,7 +82,7 @@ export default class BaseListCtrl {
       backdrop: 'static', // do not close on click outside of the dialog,
       resolve: {
         vm: () => model,
-        dataStore: () => this.dataStore
+        dataApi: () => this.dataApi
       }
       // scope: this.$scope
     }
@@ -99,7 +104,7 @@ export default class BaseListCtrl {
 
   async delete(id) {
     try {
-      await this.dataStore.remove(id)
+      await this.dataApi.remove(id)
       this.gridCtrl.removeRow(id)
     } catch (er) {
       this.handleError(er)
@@ -110,7 +115,7 @@ export default class BaseListCtrl {
   async gridLoader(params) {
     this.gridCtrl.toggleLoading(true)
     try {
-      const data = await this.dataStore.search(params)
+      const data = await this.dataApi.search(params)
       this.gridCtrl.addJSONData(data)
     } catch (er) {
       this.handleError(er)

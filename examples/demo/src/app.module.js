@@ -19,14 +19,14 @@ import formsModule from './forms'
 import gridsModule from './grids'
 
 // store
-import storeApiModule from './store'
+import dataApiModule from './store'
 
 // fresh sidebar
 
 
 export default angular.module('app', [
   agModule,
-  storeApiModule,
+  dataApiModule,
   packetLayoutModule,
   freshLayoutModule,
   snippetsModule,

@@ -1,5 +1,5 @@
 // import {guid} from "../utils/util"
-import MemStoreApi from './MemStoreApi'
+import MemDataApi from './MemDataApi'
 import ky from 'ky'
 import _ from 'lodash'
 
@@ -16,7 +16,7 @@ const REST_DELAY = 500
  *
  * For an example, please see dataSources.js
  */
-export default class SessionStoreApi extends MemStoreApi {
+export default class SessionStorageApi extends MemDataApi {
   /**
    * Creates a new SessionStorage object
    *
