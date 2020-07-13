@@ -10,7 +10,7 @@
       <ag-input ng-model="dlgCtrl.vm.refnum" min-length="4" max-length="8" required></ag-input>
       <ag-datepicker ng-model="dlgCtrl.vm.tranDate" required></ag-datepicker>
       <ag-input ng-model="dlgCtrl.vm.amount" required></ag-input>
-      <ag-select label="Customer Name" ng-model="dlgCtrl.vm.state"
+      <ag-select label="Tran State" ng-model="dlgCtrl.vm.state"
         select-options="{ useDataObject:true, dataApiKey: 'tranState'}" required>
       </ag-select>
       <ag-checkbox label="Taxable?" ng-model="dlgCtrl.vm.hasTax" hint="tax should be calculated"></ag-checkbox>
