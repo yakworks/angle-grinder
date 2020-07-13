@@ -3,7 +3,8 @@ import {RestStoreApi} from "./RestStoreApi";
 
 // export module name
 export default angular.module('ag.demo.api', [])
-  .service('dataStoreApi', LocalStoreApi) //this is the default, used in components
   .service('localStoreApi', LocalStoreApi)
   .service('restStoreApi', RestStoreApi)
+  //this is the default, used in components, change it to RestStore to test that
+  .service('dataStoreApi', LocalStoreApi)
   .name

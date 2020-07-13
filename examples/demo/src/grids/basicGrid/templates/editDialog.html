@@ -4,15 +4,14 @@
 <form name="editForm" ag-form is-horizontal>
   <div class="modal-body" id="modal-body">
     <fieldset>
-      <ag-input label="Customer Name" ng-model="dlgCtrl.vm.customer.name"
-        min-length="2" required >
-      </ag-input>
+      <ag-select label="Customer Name" ng-model="dlgCtrl.vm.customer"
+        select-options="{ useDataObject:true, dataApiKey: 'customer'}" required>
+      </ag-select>
       <ag-input ng-model="dlgCtrl.vm.refnum" min-length="4" max-length="8" required></ag-input>
       <ag-datepicker ng-model="dlgCtrl.vm.tranDate" required></ag-datepicker>
       <ag-input ng-model="dlgCtrl.vm.amount" required></ag-input>
-      <ag-select ng-model="dlgCtrl.vm.state" required
-                 select-options="{ placeholder: 'select complete', useDataObject: true,
-                 data: [{id:0, name:'Open'}, {id:1, name: 'Closed'}, {id:2, name:'Draft'}] }">
+      <ag-select label="Customer Name" ng-model="dlgCtrl.vm.state"
+        select-options="{ useDataObject:true, dataApiKey: 'tranState'}" required>
       </ag-select>
       <ag-textarea rows="3" ng-model="dlgCtrl.vm.comments"></ag-textarea>
     </fieldset>
