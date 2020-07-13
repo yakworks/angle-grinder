@@ -10,6 +10,7 @@ import checkboxModule from './checkbox'
 import tagInputModule from './tag-input'
 import datepickerModule from './datepicker'
 import textarea from './textarea'
+import amount from './amount'
 
 // export module name
 export default angular
@@ -24,6 +25,7 @@ export default angular
     validateSandModule,
     datepickerModule,
     tagInputModule,
-    textarea
+    textarea,
+    amount
   ])
   .name
