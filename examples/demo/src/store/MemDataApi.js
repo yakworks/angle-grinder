@@ -127,7 +127,7 @@ class MemDataApi {
   }
 
   findItemIndex(data, item) {
-    let idx = data.findIndex(eqFn.bind(null, item))
+    let idx = data.findIndex(this._eqFn.bind(null, item))
     if (idx === -1) throw Error(`${item} not found in ${this}`)
     return idx
   }
