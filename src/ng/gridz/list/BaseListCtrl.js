@@ -61,12 +61,12 @@ export default class BaseListCtrl {
       this.getEditModalOptions(this.editFormTpl, model)
     )
     modInst.result
-    .then(editedVm => {
-      isUpdate ? this.gridCtrl.updateRow(editedVm.id, editedVm) : this.gridCtrl.addRow(editedVm.id, editedVm)
-    })
-    .catch(() => {
-      console.log('Modal dismissed at: ' + new Date())
-    })
+      .then(editedVm => {
+        isUpdate ? this.gridCtrl.updateRow(editedVm.id, editedVm) : this.gridCtrl.addRow(editedVm.id, editedVm)
+      })
+      .catch(() => {
+        console.log('Modal dismissed at: ' + new Date())
+      })
     // , () => {
     //   console.log('Modal dismissed at: ' + new Date())
     // })
