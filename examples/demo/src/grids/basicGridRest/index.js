@@ -1,13 +1,13 @@
 import compDemoModule from './listComp'
 
-const template = `\
+const template = `
 <example-snippet is-horizontal raw-js='$ctrl.rawJs' raw-html='$ctrl.rawHtml' raw-md='$ctrl.rawMd' >
-  <basic-grid-demo></basic-grid-demo>
-</example-snippet>`
-
+  <basic-rest-grid-demo></basic-rest-grid-demo>
+</example-snippet>
+`
 export default angular
   .module(compDemoModule)
-  .component('basicGridIndex', {
+  .component('basicGridRestIndex', {
     template: template,
     controller: function() {
       this.rawHtml = require('./list.html')

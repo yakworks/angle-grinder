@@ -43,22 +43,24 @@ export default function buildOptions(ctrl){ return {
   gridOptions: {
     colModel: [
       { name: 'id', label: 'id', width: 20, sorttype: 'int', align: 'right'},
+      { name: 'customer.id', label: 'CustomerId', hidden: true},
       { name: 'customer.name', label: 'Customer', formatter: 'editActionLink'},
       { name: 'tranDate', label: 'Date', width: 100, formatter: 'date' },
-      { name: 'refnum', label: 'Ref#', width: 100},
+      { name: 'refnum', label: 'Refnum', width: 100},
       { name: 'amount', label: 'Amount', width: 80, formatter: 'currency'},
       { name: 'comments', label: 'Comments'},
-      { name: 'state', label: 'State', width: 80, fixed: true, align: 'center'} // formatter: 'okIcon' }
+      { name: 'state.id', label: 'StateId', width: 80, align: 'center', hidden: true},
+      { name: 'state.name', label: 'State', width: 80, align: 'center'} // formatter: 'okIcon' }
     ],
     sortname: 'id',
     shrinkToFit: true,
     // selectFirstRow: true,
     contextMenu: true,
-    pager: false,
+    pager: true,
     // denseRows: true,
     // filterToolbar: true,
     // searching: { defaultSearch: "cn" },
-    datatype: ctrl.dataLoader()
+    datatype: (params) => ctrl.gridLoader(params)
   },
   formFields: [
     {

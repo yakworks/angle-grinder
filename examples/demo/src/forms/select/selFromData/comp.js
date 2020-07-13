@@ -18,19 +18,19 @@ class controller {
       }
     ],
     custRest: {
-      "id": 6,
+      "id": 2,
       "num": 'foo',
-      "name": "Thoughtstorm"
+      "name": "Yodo"
     },
     custRestMulti: [
       {
-        "id": 5,
+        "id": 2,
         "num": 'foo',
-        "name": "Quimm"
+        "name": "Yodo"
       },
       {
-        "id": 6,
-        "name": "Thoughtstorm"
+        "id": 3,
+        "name": "Omba"
       }
     ]
   }
@@ -92,8 +92,8 @@ class controller {
     showSelectAll: true
   }
 
-  constructor(restDataStore) {
-    this.customerApi = restDataStore.customerApi
+  constructor(localStoreApi) {
+    this.customerApi = localStoreApi.customer
   }
 
   changeModelData(){

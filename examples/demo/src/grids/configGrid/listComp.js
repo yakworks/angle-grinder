@@ -1,6 +1,7 @@
 //import controller from './listCtrl'
 import template from './list.html'
 import BaseListCtrl from 'angle-grinder/src/ng/gridz/list/BaseListCtrl'
+import restStoreApi from '../../store/RestStoreApi'
 import buildOptions from "./listCtrlOptions"
 import Log from 'angle-grinder/src/utils/Log'
 import Swal from 'angle-grinder/src/tools/swal'
@@ -9,20 +10,20 @@ import _ from 'lodash'
 class ListCtrl extends BaseListCtrl {
   isLoaded = false
 
-  editFormTpl = require('./form/editDialog.html')
-  massUpdateTpl = require('./form/massUpdateForm.html')
+  editFormTpl = require('../basicGrid/templates/editDialog.html')
+  massUpdateTpl = require('../basicGrid/templates/massUpdateForm.html')
 
-  static $inject = _.union(super.$inject, ['restDataStore', 'appConfigApi'])
+  //static $inject = _.union(super.$inject, ['dataStores', 'appConfigApi'])
 
   constructor(...args) {
     super(...args)
-    this.dataStore = this.restDataStore.invoiceApi
+    this.dataApi = restStoreApi.invoice
   }
 
   $onInit() {
     _.defaults(this, buildOptions(this))
-    //simulate
-    this.$timeout(() => this.isInit = true, 1000)
+    // simulate
+    // this.$timeout(() => this.isInit = true, 1000)
   }
 
   displaySelectedRowsData() {

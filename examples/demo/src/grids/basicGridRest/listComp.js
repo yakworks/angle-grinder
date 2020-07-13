@@ -1,23 +1,22 @@
 //import controller from './listCtrl'
 import template from './list.html'
 import BaseListCtrl from 'angle-grinder/src/ng/gridz/list/BaseListCtrl'
-import buildOptions from "./listCtrlOptions"
-import localStoreApi from '../../store/LocalStoreApi'
-import Log from 'angle-grinder/src/utils/Log'
+import buildOptions from "../basicGrid/listCtrlOptions"
+import restStoreApi from '../../store/RestStoreApi'
 import Swal from 'angle-grinder/src/tools/swal'
 import _ from 'lodash'
 
 class ListCtrl extends BaseListCtrl {
   isLoaded = false
 
-  editFormTpl = require('./templates/editDialog.html')
-  massUpdateTpl = require('./templates/massUpdateForm.html')
+  editFormTpl = require('../basicGrid/templates/editDialog.html')
+  massUpdateTpl = require('../basicGrid/templates/massUpdateForm.html')
 
   // static $inject = _.union(super.$inject, ['restDataStore', '$timeout'])
 
   constructor(...args) {
     super(...args)
-    this.dataApi = localStoreApi.invoice
+    this.dataApi = restStoreApi.invoice
   }
 
   $onInit() {
@@ -37,12 +36,12 @@ class ListCtrl extends BaseListCtrl {
 }
 
 export default angular
-  .module('ag.demo.basicGridDemo', [])
-  .component('basicGridDemo', {
+  .module('ag.demo.basicRestGridDemo', [])
+  .component('basicRestGridDemo', {
     template: template,
     controller: ListCtrl
   })
-  .component('basicSearchForm', {
-    template: require('./templates/searchForm.html')
+  .component('basicRestSearchForm', {
+    template: require('../basicGrid/templates/searchForm.html')
   })
   .name

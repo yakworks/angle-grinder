@@ -1,5 +1,7 @@
 // import Log from 'angle-grinder/src/utils/Log'
-import _ from 'lodash'
+// import _ from 'lodash'
+import EditModalCtrl from './EditModalCtrl'
+import { argsMerge } from '../../utils/classUtils'
 // import toast from 'angle-grinder/src/tools/toast'
 
 // see https://stackoverflow.com/questions/53349705/constructor-and-class-properties-within-javascript-mixins
@@ -7,28 +9,12 @@ import _ from 'lodash'
 export default class BaseListCtrl {
   showSearchForm = true
 
-  static $inject = ['$scope', '$element', '$uibModal']
-
+  static $inject = ['$scope', '$element', '$uibModal', '$timeout']
   constructor(...args) {
-    const argObj = this.constructor.$inject.reduce((obj, item, index) => {
-      obj[item] = args[index]
-      return obj
-    }, {})
-    _.defaults(this, argObj)
-    // console.log("args", args)
-    // console.log("argObj", argObj)
-    // console.log("this.constructor.$inject", this.constructor.$inject)
-  }
-
-  onInit() {
-    // todo
+    argsMerge(this, args)
   }
 
   get gridCtrl() { return this.$element.find('gridz').controller('gridz') }
-
-  dataLoader() {
-    return (params) => this.dataStore.gridLoader(this.gridCtrl, params)
-  }
 
   fireRowAction(model, menuItem) {
     switch (menuItem.key) {
@@ -54,98 +40,58 @@ export default class BaseListCtrl {
   }
 
   async edit(id) {
+    this.gridCtrl.toggleLoading(true)
     try {
-      this.gridCtrl.toggleLoading(true)
-      const vm = await this.dataStore.get(id)
+      const vm = await this.dataApi.get(id)
       this.showEditForm(vm)
     } catch (er) {
-      // toast alert the error
-      console.log('edit error', er)
+      this.handleError(er)
     } finally {
       this.gridCtrl.toggleLoading(false)
     }
   }
 
+  create(model = {}) {
+    this.showEditForm(model)
+  }
+
   showEditForm(model) {
+    const isUpdate = !!model.id
     const modInst = this.$uibModal.open(
       this.getEditModalOptions(this.editFormTpl, model)
     )
-    modInst.result.then(editedModel => {
-      this.gridCtrl.updateRow(editedModel.id, editedModel)
-    }, function() {
-      console.log('Modal dismissed at: ' + new Date())
-    })
+    modInst.result
+      .then(editedVm => {
+        isUpdate ? this.gridCtrl.updateRow(editedVm.id, editedVm) : this.gridCtrl.addRow(editedVm.id, editedVm)
+      })
+      .catch(() => {
+        console.log('Modal dismissed at: ' + new Date())
+      })
+    // , () => {
+    //   console.log('Modal dismissed at: ' + new Date())
+    // })
   }
 
   getEditModalOptions(template, model) {
     // const listCtrl = this
     return {
-      controller: this.getEditModalCtrl(model, this.dataStore),
+      controller: this.editModalCtrl,
       controllerAs: 'dlgCtrl',
       template: template,
       keyboard: false, // do not close the dialog with ESC key
-      backdrop: 'static' // do not close on click outside of the dialog,
+      backdrop: 'static', // do not close on click outside of the dialog,
+      resolve: {
+        vm: () => model,
+        dataApi: () => this.dataApi
+      }
       // scope: this.$scope
     }
   }
 
-  getEditModalCtrl(model, dataStore) {
-    // const listCtrl = this
-    return function($uibModalInstance, $scope) {
-      console.log('$scope', $scope)
-      this.vm = model
-
-      this.save = async () => {
-        console.log('edit modal save scope', $scope)
-        const { editForm } = $scope
-        if (editForm.$invalid || editForm.$pristine) return
-        this.isSaving = true
-        try {
-          await dataStore.save(this.vm)
-          $uibModalInstance.close(this.vm)
-        } catch (error) {
-          console.log('error', error)
-          return
-        } finally {
-          this.isSaving = false
-        }
-      }
-
-      this.cancel = () => {
-        console.log('modal cancel scope', $scope)
-        $uibModalInstance.result.catch(function() { $uibModalInstance.close() })
-        $uibModalInstance.dismiss('cancel')
-      }
-
-      // prevents the "Possibly unhandled rejection: cancel"
-      $uibModalInstance.result.catch(function() { $uibModalInstance.close() })
-    }
-  }
-
-  async delete(id) {
-    try {
-      await this.dataStore.remove(id)
-      this.gridCtrl.removeRow(id)
-    } catch (er) {
-      // toast alert the error
-      console.log('delete error', er)
-    }
-  }
-
-  create() {
-    this.showForm(this.editFormTpl, {})
-  }
+  get editModalCtrl() { return EditModalCtrl }
 
   showMassUpdate() {
     const modalOpts = {
-      // controller: function($uibModalInstance, $scope) {
-      //   this.cancel = () => {
-      //     console.log('MassUpdateCtrl cancel scope', $scope)
-      //     $uibModalInstance.dismiss('cancel')
-      //   }
-      // },
-      // controllerAs: '$ctrl',
-      // bindToController: true,
       template: this.massUpdateTpl,
       keyboard: false, // do not close the dialog with ESC key
       backdrop: 'static' // do not close on click outside of the dialog,
@@ -156,34 +102,30 @@ export default class BaseListCtrl {
     console.log('showMassUpdate', this.form)
   }
 
-  showForm(formTpl, data) {
-    this.vm = data
-    this.form = this.$uibModal.open(
-      this.modalOptions(formTpl)
-    )
-    console.log('this.form', this.form)
-  }
-
-  async save(editForm, data) {
-    console.log('editForm', editForm)
-    if (editForm.$invalid || editForm.$pristine) return
+  async delete(id) {
     try {
-      await this.dataStore.save(data)
-    } catch (error) {
-      console.log('error', error)
-      return
+      await this.dataApi.remove(id)
+      this.gridCtrl.removeRow(id)
+    } catch (er) {
+      this.handleError(er)
     }
-
-    if (data.id) {
-      this.gridCtrl.updateRow(data.id, data)
-    } else {
-      data.id = new Date().getMilliseconds() // random id
-      this.gridCtrl.addRow(data.id, data)
-    }
-    this.closeDialog()
   }
 
-  closeDialog = () => {
-    this.form.close()
+  // load results of a query into gridCtrl
+  async gridLoader(params) {
+    this.gridCtrl.toggleLoading(true)
+    try {
+      const data = await this.dataApi.search(params)
+      this.gridCtrl.addJSONData(data)
+    } catch (er) {
+      this.handleError(er)
+    } finally {
+      this.gridCtrl.toggleLoading(false)
+    }
+  }
+
+  handleError(er) {
+    // FIXME handle a graceful way of displayiing exception
+    console.error(er)
   }
 }

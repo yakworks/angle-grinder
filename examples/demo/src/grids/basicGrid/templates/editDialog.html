@@ -10,7 +10,7 @@
       <ag-input ng-model="dlgCtrl.vm.refnum" min-length="4" max-length="6" required />
       <ag-datepicker ng-model="dlgCtrl.vm.tranDate" required></ag-datepicker>
       <ag-input ng-model="dlgCtrl.vm.amount" required />
-      <ag-select ng-model="dlgCtrl.vm.state" required
+      <ag-select ng-model="dlgCtrl.vm.state.id" required
                  select-options="{ placeholder: 'select complete',
                  data: [{id:0, name:'Open'}, {id:1, name: 'Closed'}, {id:2, name:'Draft'}] }">
       </ag-select>
@@ -19,7 +19,6 @@
   </div>
 
   <div class="modal-footer">
-    <ag-button color="primary" icon-left="fa-check" >Validate</ag-button>
     <ag-button color="primary" icon-left="fa-check" is-loading="dlgCtrl.isSaving"
       ng-click="dlgCtrl.save()" >Save</ag-button>
     <ag-button color="light" icon-left="fa-times"
