@@ -1,6 +1,10 @@
 // import _ from 'lodash'
 
-export function setupData(opts) {
+export function setupData(opts, dataStoreApi) {
+  if(opts.dataApiKey) {
+    const dataApiKey = opts.dataApiKey
+    opts.data = { results: () => dataStoreApi[dataApiKey].pickList() }
+  }
   // setup defaults for data
   if (opts.data) {
     // if data is an array then tranform it down to be a property of results

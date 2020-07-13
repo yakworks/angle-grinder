@@ -17,7 +17,7 @@ require('Select2/select2.js')
 export default 'ui.select2'
 
 angular.module('ui.select2', [])
-  .directive('uiSelect2', function($timeout) {
+  .directive('uiSelect2', function($timeout, dataStoreApi) {
     return {
       require: 'ngModel',
       priority: 1,
@@ -64,7 +64,7 @@ angular.module('ui.select2', [])
             if (opts.multiple) {
               isMultiple = true
             }
-            setupData(opts)
+            setupData(opts, dataStoreApi)
 
             // if(attrs.uiSelect2Data) opts.data = scope.$eval(attrs.uiSelect2Data)
             // if modelType is object then will use the elm.select2('data') and will store the selected
