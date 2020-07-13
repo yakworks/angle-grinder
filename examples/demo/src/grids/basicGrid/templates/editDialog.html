@@ -13,6 +13,7 @@
       <ag-select label="Customer Name" ng-model="dlgCtrl.vm.state"
         select-options="{ useDataObject:true, dataApiKey: 'tranState'}" required>
       </ag-select>
+      <ag-checkbox label="Taxable?" ng-model="dlgCtrl.vm.hasTax" hint="tax should be calculated"></ag-checkbox>
       <ag-textarea rows="3" ng-model="dlgCtrl.vm.comments"></ag-textarea>
     </fieldset>
   </div>

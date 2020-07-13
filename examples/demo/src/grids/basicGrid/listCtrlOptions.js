@@ -50,7 +50,8 @@ export default function buildOptions(ctrl){ return {
       { name: 'amount', label: 'Amount', width: 80, formatter: 'currency'},
       { name: 'comments', label: 'Comments'},
       { name: 'state.id', label: 'StateId', width: 80, align: 'center', hidden: true},
-      { name: 'state.name', label: 'State', width: 80, align: 'center'} // formatter: 'okIcon' }
+      { name: 'state.name', label: 'State', width: 60, align: 'center'},
+      { name: 'hasTax', label: 'Taxable', width: 60, align: 'center', formatter: 'okIcon'} // formatter: 'okIcon' }
     ],
     sortname: 'id',
     shrinkToFit: true,
