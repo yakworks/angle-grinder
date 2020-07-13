@@ -1,5 +1,5 @@
 const _ = require('lodash');
-const MemDataApi = require('../src/store/MemDataApi');
+const MemDataApi = require('../../../src/dataApi/MemDataApi');
 const REST_DELAY = 500
 
 function generateApi(epoint, data) {

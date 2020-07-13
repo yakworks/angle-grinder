@@ -1,7 +1,7 @@
 // import {guid} from "../utils/util"
 import MemDataApi from './MemDataApi'
 import ky from 'ky'
-import _ from 'lodash'
+// import _ from 'lodash'
 
 const REST_DELAY = 500
 /**
@@ -25,28 +25,28 @@ export default class SessionStorageApi extends MemDataApi {
    */
   constructor(storageKey, sourceUrl) {
     super({}, REST_DELAY)
-    this._data = undefined;
+    this._data = undefined
 
     // For each data object, the _idProp defines which property has that object's unique identifier
-    this._idProp = "id";
+    this._idProp = 'id'
 
     // A basic triple-equals equality checker for two values
-    this._eqFn = (l, r) => l[this._idProp] === r[this._idProp];
+    this._eqFn = (l, r) => l[this._idProp] === r[this._idProp]
 
     // Services required to implement the fake REST API
-    this.storageKey = storageKey;
+    this.storageKey = storageKey
     this.sourceUrl = sourceUrl
   }
 
-  async getData(){
+  async getData() {
     try {
-      let data = this.checkSession()
-      if(data) {
+      const data = this.checkSession()
+      if (data) {
         console.log(`found ${this.storageKey} in sessionStorage`)
         return data
       }
     } catch (e) {
-      console.log(`Unable to parse session for ${this.sourceUrl}, retrieving intial data.`, e);
+      console.log(`Unable to parse session for ${this.sourceUrl}, retrieving intial data.`, e)
     }
     const parsed = await ky.get(this.sourceUrl).json()
     this._commit(parsed)
@@ -64,8 +64,7 @@ export default class SessionStorageApi extends MemDataApi {
 
   /** Saves all the data back to the session storage */
   _commit(data) {
-    sessionStorage.setItem(this.storageKey, JSON.stringify(data));
+    sessionStorage.setItem(this.storageKey, JSON.stringify(data))
     return data
   }
-
 }

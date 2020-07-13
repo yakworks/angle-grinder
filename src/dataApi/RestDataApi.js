@@ -1,5 +1,5 @@
 import ky from 'ky'
-import _ from 'lodash'
+// import _ from 'lodash'
 
 /**
  * This common wrapper around RESTful resource
@@ -19,7 +19,7 @@ export default class RestDataApi {
 
   //
   async search(params) {
-    const opts = {searchParams: params}
+    const opts = { searchParams: params }
     // console.log("query opts", opts)
     const data = await ky.get(this.endpoint, opts).json()
     return data
@@ -27,7 +27,7 @@ export default class RestDataApi {
 
   //
   async pickList(params) {
-    const opts = {searchParams: params}
+    const opts = { searchParams: params }
     // console.log("query opts", opts)
     const data = await ky.get(`${this.endpoint}/pickList`, opts).json()
     return data
@@ -41,22 +41,22 @@ export default class RestDataApi {
 
   /** Returns a promise to save the item.  It delegates to put() or post() if the object has or does not have an identifier set */
   async save(item) {
-    console.log("save item", item)
-    return item[this._idProp] ? this.put(item) : this.post(item);
+    console.log('save item', item)
+    return item[this._idProp] ? this.put(item) : this.post(item)
   }
 
   /** Returns a promise to save (POST) a new item.   The item's identifier is auto-assigned. */
   async post(item) {
-    console.log("post item", item)
-    let newItem = await ky.post(`${this.endpoint}`, {json: item}).json()
-    console.log("posted newItem", newItem)
+    console.log('post item', item)
+    const newItem = await ky.post(`${this.endpoint}`, { json: item }).json()
+    console.log('posted newItem', newItem)
     return newItem
   }
 
   /** Returns a promise to save (PUT) an existing item. */
   async put(item) {
-    console.log("put item", item)
-    let newItem = await ky.put(`${this.endpoint}`, {json: item}).json()
+    console.log('put item', item)
+    const newItem = await ky.put(`${this.endpoint}`, { json: item }).json()
     return newItem
   }
 

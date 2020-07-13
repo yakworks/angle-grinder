@@ -1,4 +1,4 @@
-import RestDataApi from "./RestDataApi"
+import RestDataApi from 'angle-grinder/src/dataApi/RestDataApi'
 
 function makeDataApi(endpoint){
   return new RestDataApi(`api/${endpoint}`)

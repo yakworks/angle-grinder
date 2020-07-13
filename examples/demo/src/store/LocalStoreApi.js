@@ -1,4 +1,4 @@
-import SessionStorageApi from "./SessionStorageApi"
+import SessionStorageApi from 'angle-grinder/src/dataApi/SessionStorageApi'
 
 function makeDataApi(name, path){
   return new SessionStorageApi(name, path)
