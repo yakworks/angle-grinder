@@ -1,7 +1,7 @@
 // import _ from 'lodash'
 
 export function setupData(opts, dataStoreApi) {
-  if(opts.dataApiKey) {
+  if (opts.dataApiKey) {
     const dataApiKey = opts.dataApiKey
     opts.data = { results: () => dataStoreApi[dataApiKey].pickList() }
   }
