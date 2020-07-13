@@ -1,4 +1,4 @@
-import RestDataApi from "./RestDataApi"
+import RestDataApi from 'angle-grinder/src/dataApi/RestDataApi'
 
 function makeDataApi(endpoint){
   return new RestDataApi(`api/${endpoint}`)
@@ -16,6 +16,7 @@ export class RestStoreApi {
 
   get customer() { return makeDataApi("customer")}
   get invoice() { return makeDataApi("invoice")}
+  get tranState() { return makeDataApi("tranState")}
 
 }
 

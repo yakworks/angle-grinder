@@ -1,4 +1,4 @@
-import SessionStorageApi from "./SessionStorageApi"
+import SessionStorageApi from 'angle-grinder/src/dataApi/SessionStorageApi'
 
 function makeDataApi(name, path){
   return new SessionStorageApi(name, path)
@@ -16,6 +16,7 @@ export class LocalStoreApi{
 
   get customer() { return makeDataApi("customers", "data/Customers.json")}
   get invoice() { return makeDataApi("invoices", "data/Invoices.json")}
+  get tranState() { return makeDataApi("tranStates", "data/TranStates.json")}
 
 }
 

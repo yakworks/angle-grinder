@@ -2,6 +2,9 @@
 import AgBaseControl from '../AgBaseControl'
 import _ from 'lodash'
 
+/**
+ * the heavy lifting is done in the modified ui-select2 directive
+ */
 class Controller extends AgBaseControl {
   $onInit() {
     super.onInit()

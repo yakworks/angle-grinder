@@ -48,6 +48,9 @@ agmod.config(function($compileProvider) {
   $compileProvider.debugInfoEnabled(false)
 })
 
+// default store, should be overriden in production, here so testing works
+agmod.service('dataStoreApi', function() {})
+
 // Intercepts all HTTP errors and displays a flash message
 agmod.factory('httpErrorsInterceptor', [
   '$injector', '$q', 'alerts', function($injector, $q, alerts) {

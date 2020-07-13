@@ -7,11 +7,11 @@ export default class AgBaseControl {
   isDisabled= false
 
   /* @ngInject */
-  constructor($element, $timeout, $scope, $transclude, $parse) {
+  constructor($element, $timeout, $scope, $transclude) {
     this.$element = $element
     this.$timeout = $timeout
     this.$scope = $scope
-    this.$parse = $parse
+    // this.dataStoreApi = dataStoreApi
     // this.$transclude = $transclude
     $transclude((clone) => {
       clone.each((i, el) => {

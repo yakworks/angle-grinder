@@ -1,4 +1,5 @@
 import uiselect2 from 'angle-grinder/src/ng/controls/ui-select2/ui.select2.js'
+// import mainMod from 'angle-grinder/src/angle-grinder'
 
 /**
  * Copied from https://github.com/angular-ui/ui-select2
@@ -22,12 +23,20 @@ angular.module(uiselect2).directive('injectTransformers', [ function () {
   };
 }]);
 
+// default store, should be overriden in production, here so testing works
+angular.module(uiselect2).service('dataStoreApi', function() {})
+
 /*global describe, beforeEach, module, inject, it, spyOn, expect, $ */
 describe('uiSelect2', function () {
   'use strict';
 
   var scope, $compile, options, $timeout;
   var sandbox = sinon.createSandbox()
+
+  // beforeEach(angular.mock.module(mainMod, function($provide) {
+  //   $provide.value("serverValidationErrorsHandler", sinon.stub());
+  // }));
+
   beforeEach(function () {
     sandbox.spy($.fn, 'select2')
     sandbox.spy($.fn, 'val');
