@@ -7,11 +7,16 @@ const noProxy = process.env.NO_PROXY === 'true'
 const invoiceData = require('../public/data/Invoices.json')
 const tranStateData = require('../public/data/TranStates.json')
 const customerData = require('../public/data/Customers.json')
+const invoiceConfigData = require('../public/data/InvoiceConfig.json')
 
 const proxy = {
   ...generateApi("invoice", invoiceData),
   ...generateApi("tranState", tranStateData),
   ...generateApi("customer", customerData),
+
+  'GET /api/appConfig/invoice': (req, res) => {
+    return res.json(invoiceConfigData)
+  },
 
   'GET /countries/pickList': (req, res) => {
     const q = req.query.q
@@ -19,7 +24,6 @@ const proxy = {
     if(q) {
       rows = rows.filter(country =>  country.name.toLowerCase().indexOf(q.toLowerCase()) > -1)
     }
-
     return res.json({ page: 1, records: 3, rows: rows, total: 1 })
   },
 

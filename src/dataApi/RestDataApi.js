@@ -41,21 +41,20 @@ export default class RestDataApi {
 
   /** Returns a promise to save the item.  It delegates to put() or post() if the object has or does not have an identifier set */
   async save(item) {
-    console.log('save item', item)
     return item[this._idProp] ? this.put(item) : this.post(item)
   }
 
   /** Returns a promise to save (POST) a new item.   The item's identifier is auto-assigned. */
   async post(item) {
-    console.log('post item', item)
+    // console.log('post item', item)
     const newItem = await ky.post(`${this.endpoint}`, { json: item }).json()
-    console.log('posted newItem', newItem)
+    // console.log('posted newItem', newItem)
     return newItem
   }
 
   /** Returns a promise to save (PUT) an existing item. */
   async put(item) {
-    console.log('put item', item)
+    // console.log('put item', item)
     const newItem = await ky.put(`${this.endpoint}`, { json: item }).json()
     return newItem
   }

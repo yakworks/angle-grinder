@@ -11,7 +11,7 @@ export default class EditModalCtrl {
   }
 
   async save() {
-    console.log('edit modal save scope', this.$scope)
+    // console.log('edit modal save scope', this.$scope)
     const { editForm } = this.$scope
     if (editForm.$invalid || editForm.$pristine) return
     this.isSaving = true

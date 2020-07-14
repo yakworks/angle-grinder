@@ -43,7 +43,6 @@ export default class ServerErrorsService {
       $log.warn('Response does not contain validation errors', response)
       return
     }
-    console.log('last step')
     // recursively set errors on the form
     return this.setErrorsFn(form, errors)
   }

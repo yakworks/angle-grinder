@@ -4,12 +4,13 @@ import BaseListCtrl from 'angle-grinder/src/ng/gridz/list/BaseListCtrl'
 import buildOptions from "../basicGrid/listCtrlOptions"
 import restStoreApi from '../../store/RestStoreApi'
 import Swal from 'angle-grinder/src/tools/swal'
+import toast from 'angle-grinder/src/tools/toast'
 import _ from 'lodash'
 
 class ListCtrl extends BaseListCtrl {
   isLoaded = false
 
-  editFormTpl = require('../basicGrid/templates/editDialog.html')
+  editFormTpl = require('./formlyDialog.html')
   massUpdateTpl = require('../basicGrid/templates/massUpdateForm.html')
 
   // static $inject = _.union(super.$inject, ['restDataStore', '$timeout'])
@@ -20,7 +21,50 @@ class ListCtrl extends BaseListCtrl {
   }
 
   $onInit() {
-    _.defaults(this, buildOptions(this))
+    this.doConfig()
+  }
+
+  async doConfig(){
+    let cfg = await restStoreApi.appConfig("invoice")
+    cfg.gridOptions.datatype = (params) => this.gridLoader(params)
+    cfg.toolbarOptions.scope = () => this.$scope
+    _.defaults(this, cfg)
+    this.isConfigured = true
+
+    this.editForm = [
+      {
+        key: 'customer',
+        type: 'select',
+        templateOptions: {
+          label: 'Customer',
+          required: true,
+          placeholder: 'Customer',
+
+        }
+      },
+      {
+        key: 'refnum',
+        type: 'input',
+        templateOptions: {
+          label: 'Ref #',
+          required: true,
+          placeholder: 'Invoice or Memo Num'
+        }
+      },
+      {
+        key: 'comments',
+        type: 'input',
+        templateOptions: {
+          placeholder: 'Comments or Note'
+        }
+      }
+    ]
+  }
+
+  fireToolbarAction(btnItem, event) {
+    super.fireToolbarAction(btnItem, event)
+    // if btnItem.key is the same name as function then it will be fired
+    if(btnItem.key === 'showSelected') this.displaySelectedRowsData()
   }
 
   displaySelectedRowsData() {
@@ -28,11 +72,16 @@ class ListCtrl extends BaseListCtrl {
     this.selectedRowsData = this.gridCtrl.getSelectedRows()
   }
 
+  // these are called because the super.fireToolbarAction will look for same function name
+  // as the key
   import() {
     console.log("import")
-    Swal.fire('import something')
+    toast.success('import something')
   }
 
+  ptp() {
+    toast.success('ptp')
+  }
 }
 
 export default angular

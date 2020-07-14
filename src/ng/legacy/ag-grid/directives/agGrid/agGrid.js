@@ -236,18 +236,6 @@ gridz.directive('agGrid',
       template: `\
 <table class="gridz"></table>
 <div class="gridz-pager"></div>`,
-
-      // compile(element, attrs) {
-      //   console.log("AgGrids compile")
-      //   // modify grid html element, generate grid id from the name or assign default value
-      //   const id = !_.isNil(attrs.agGridName) ? _.camelCase(attrs.agGridName) : 'gridz'
-
-      //   element.find('table.gridz').attr('id', id)
-      //   element.find('div.gridz-pager').attr('id', `${id}-pager`)
-
-      //   // return linking function which will be called at a later time
-      //   return { post: link }
-      // },
       link: link
     }
   }

@@ -28,7 +28,6 @@ export default class BaseListCtrl {
   }
 
   fireToolbarAction(btnItem, event) {
-    console.log('fireToolbarAction btnItem', btnItem)
     switch (btnItem.key) {
       case 'create':
         return this.create()
@@ -36,6 +35,10 @@ export default class BaseListCtrl {
         return this.showMassUpdate()
       case 'export':
         return this.xlsExport()
+      default:
+        if(_.isFunction(this[btnItem.key])){
+          this[btnItem.key](btnItem, event)
+        }
     }
   }
 
@@ -99,7 +102,6 @@ export default class BaseListCtrl {
     }
     // here just for example, does nothing
     this.form = this.$uibModal.open(modalOpts)
-    console.log('showMassUpdate', this.form)
   }
 
   async delete(id) {

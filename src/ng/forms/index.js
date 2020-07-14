@@ -1,4 +1,5 @@
 import formsModule from './formsModule'
+import './formlyTypes'
 import './directives/agBind'
 import './directives/agDeleteButton'
 import './directives/agMaxLines'
