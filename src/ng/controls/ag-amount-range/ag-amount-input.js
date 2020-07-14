@@ -26,6 +26,7 @@ const template = `
       ng-model="$ctrl.value"
       ng-change="$ctrl.onChange()"
       ng-required="{{::$ctrl.isRequired}}"
+      ag-number
     >
   </div>
 `

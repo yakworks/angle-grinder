@@ -1,5 +1,11 @@
 <form name="form" ag-form is-horizontal>
-  <ag-amount step="1" ng-model="$ctrl.vm.integer"></ag-amount>
-  <ag-amount-range ng-model="$ctrl.vm.integerRange"></ag-amount-range>
+  <ag-amount ng-model="$ctrl.vm.number"></ag-amount>
+  <ag-amount ng-model="$ctrl.vm.validDataString"></ag-amount>
+  <ag-amount ng-model="$ctrl.vm.validDataNumber"></ag-amount>
+  <ag-amount ng-model="$ctrl.vm.expData"></ag-amount>
+  <ag-amount ng-model="$ctrl.vm.invalidData"></ag-amount>
+  <ag-amount-range ng-model="$ctrl.vm.range"></ag-amount-range>
 </form>
+<ag-button ng-click="$ctrl.fillData()">Fill data</ag-button>
+<ag-button ng-click="$ctrl.resetData()">Reset</ag-button>
 <pre ng-cloak class="mt-4">form.$invalid: {{form.$invalid}}<br>model: {{$ctrl.vm | json}}</pre>
