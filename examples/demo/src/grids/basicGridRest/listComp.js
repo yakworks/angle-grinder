@@ -21,6 +21,71 @@ class ListCtrl extends BaseListCtrl {
   }
 
   $onInit() {
+    this.cfg = {
+      editForm: [
+      {
+        key: 'customer',
+        type: 'select',
+        templateOptions: {
+          label: 'Customer',
+          required: true,
+          placeholder: 'Customer select',
+          dataApiKey: 'customer'
+        }
+      },
+      {
+        key: 'refnum',
+        type: 'input',
+        templateOptions: {
+          label: 'Ref #',
+          required: true,
+          minLength: 4,
+          placeholder: 'Invoice or Memo Num'
+        }
+      },
+      {
+        key: 'tranDate',
+        type: 'date',
+        templateOptions: {
+          label: 'Inv Date',
+          required: true
+        }
+      },
+      {
+        key: 'amount',
+        type: 'input',
+        templateOptions: {
+          label: 'Amount',
+          required: true
+        }
+      },
+      {
+        key: 'state',
+        type: 'select',
+        templateOptions: {
+          label: 'State',
+          required: true,
+          dataApiKey: 'tranState'
+        }
+      },
+      {
+        key: 'hasTax',
+        type: 'checkbox',
+        templateOptions: {
+          label: 'Taxable?'
+        }
+      },
+      {
+        key: 'comments',
+        type: 'textarea',
+        templateOptions: {
+          label: 'Comments',
+          placeholder: 'Comments or Note',
+          rows:3
+        }
+      }
+    ]}
+
     this.doConfig()
   }
 
@@ -28,73 +93,8 @@ class ListCtrl extends BaseListCtrl {
     let cfg = await restStoreApi.appConfig("invoice")
     cfg.gridOptions.datatype = (params) => this.gridLoader(params)
     cfg.toolbarOptions.scope = () => this.$scope
-    _.defaults(this, cfg)
+    _.defaults(this.cfg, cfg)
     this.isConfigured = true
-
-    this.cfg = {
-      editForm: [
-        {
-          key: 'customer',
-          type: 'select',
-          templateOptions: {
-            label: 'Customer',
-            required: true,
-            placeholder: 'Customer select',
-            dataApiKey: 'customer'
-          }
-        },
-        {
-          key: 'refnum',
-          type: 'input',
-          templateOptions: {
-            label: 'Ref #',
-            required: true,
-            placeholder: 'Invoice or Memo Num'
-          }
-        },
-        {
-          key: 'tranDate',
-          type: 'date',
-          templateOptions: {
-            label: 'Inv Date',
-            required: true
-          }
-        },
-        {
-          key: 'amount',
-          type: 'input',
-          templateOptions: {
-            label: 'Amount',
-            required: true
-          }
-        },
-        {
-          key: 'state',
-          type: 'select',
-          templateOptions: {
-            label: 'State',
-            required: true,
-            dataApiKey: 'tranState'
-          }
-        },
-        {
-          key: 'hasTax',
-          type: 'checkbox',
-          templateOptions: {
-            label: 'Taxable?'
-          }
-        },
-        {
-          key: 'comments',
-          type: 'textarea',
-          templateOptions: {
-            label: 'Comments',
-            placeholder: 'Comments or Note',
-            rows:3
-          }
-        }
-      ]
-    }
   }
 
   fireToolbarAction(btnItem, event) {

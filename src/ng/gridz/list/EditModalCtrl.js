@@ -14,6 +14,7 @@ export default class EditModalCtrl {
   async save() {
     // console.log('edit modal save scope', this.$scope)
     const { editForm } = this.$scope
+    console.log("this.editFormCtrl", this.editFormCtrl)
     if (editForm.$invalid || editForm.$pristine) return
     this.isSaving = true
     try {
@@ -33,7 +34,7 @@ export default class EditModalCtrl {
   }
 
   handleError(er) {
-    // FIXME handle a graceful way of displayiing exception
+    // FIXME handle a graceful way of displayiing errors
     console.error(er)
   }
 }

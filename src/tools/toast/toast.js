@@ -54,9 +54,9 @@ class Toast {
 
   // Helper methods for various alerts types
   success(message, title, options = {}) { return this.fire(this.types.success, message, title, options) }
-  info(message, title, options = {}) { return this.fire(this.types.success, message, title, options) }
-  error(message, title, options = {}) { return this.fire(this.types.success, message, title, options) }
-  warn(message, title, options = {}) { return this.fire(this.types.success, message, title, options) }
+  info(message, title, options = {}) { return this.fire(this.types.info, message, title, options) }
+  error(message, title, options = {}) { return this.fire(this.types.error, message, title, options) }
+  warn(message, title, options = {}) { return this.fire(this.types.warning, message, title, options) }
 
   makeTitle(type) {
 

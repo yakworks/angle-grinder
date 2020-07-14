@@ -25,7 +25,7 @@ angular.module('ui.select2', [])
         // if its populated from a select element and not from options.data
 
         var isMultiple = angular.isDefined(tAttrs.multiple)
-
+        //console.log("api-key attr", tAttrs.apiKey)
         var isSelectElm = tElm.is('select')
         var watchSelectOptionsEl
 
@@ -46,6 +46,7 @@ angular.module('ui.select2', [])
 
         return {
           pre: function(scope, elm, attrs, ngModelCtrl) {
+
             // instance-specific options
             var defaults = {
               allowClear: true
@@ -64,6 +65,8 @@ angular.module('ui.select2', [])
             if (opts.multiple) {
               isMultiple = true
             }
+            const apiKey = attrs.apiKey
+            if(apiKey) opts.dataApiKey = apiKey
             setupData(opts, dataStoreApi)
 
             // if(attrs.uiSelect2Data) opts.data = scope.$eval(attrs.uiSelect2Data)

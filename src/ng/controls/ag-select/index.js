@@ -27,6 +27,7 @@ export default () => ({
   },
   scope: {
     ...AgBaseControl.common.scope,
-    selectOptions: '<'
+    selectOptions: '<',
+    apiKey: '@'
   }
 })

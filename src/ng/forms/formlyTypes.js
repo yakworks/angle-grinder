@@ -5,7 +5,7 @@ forms.config(['formlyConfigProvider', function(formlyConfig) {
   formlyConfig.setType({
     name: 'input',
     template: `<ag-input ng-model="model[options.key]" label-key="options.key"
-      label="{{to.label}}"></ag-input>`
+      label="{{to.label}}" min-length="{{to.minLength}}" max-length="{{to.maxLength}}" ></ag-input>`
   })
   formlyConfig.setType({
     name: 'textarea',
@@ -15,7 +15,7 @@ forms.config(['formlyConfigProvider', function(formlyConfig) {
   formlyConfig.setType({
     name: 'select',
     template: `<ag-select label="{{to.label}}" ng-model="model[options.key]"
-        select-options="{ useDataObject:true, dataApiKey: '{{to.dataApiKey}}'}" data-api-key="{{to.dataApiKey}}">
+        select-options="{ useDataObject:true}" api-key="{{to.dataApiKey}}">
       </ag-select>`
   })
 

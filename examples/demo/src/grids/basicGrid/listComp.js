@@ -21,7 +21,7 @@ class ListCtrl extends BaseListCtrl {
   }
 
   $onInit() {
-    _.defaults(this, buildOptions(this))
+    this.cfg = buildOptions(this)
   }
 
   displaySelectedRowsData() {

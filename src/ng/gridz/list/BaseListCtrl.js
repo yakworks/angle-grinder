@@ -2,7 +2,7 @@
 // import _ from 'lodash'
 import EditModalCtrl from './EditModalCtrl'
 import { argsMerge } from '../../utils/classUtils'
-// import toast from 'angle-grinder/src/tools/toast'
+import toast from 'angle-grinder/src/tools/toast'
 
 // see https://stackoverflow.com/questions/53349705/constructor-and-class-properties-within-javascript-mixins
 // and https://alligator.io/js/class-composition/ for class composition
@@ -128,7 +128,7 @@ export default class BaseListCtrl {
   }
 
   handleError(er) {
-    // FIXME handle a graceful way of displayiing exception
     console.error(er)
+    toast.error(er)
   }
 }

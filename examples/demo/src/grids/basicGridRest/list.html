@@ -1,8 +1,8 @@
 <div ng-if="$ctrl.isConfigured">
   <basic-rest-search-form ng-show="$ctrl.showSearchForm"></basic-rest-search-form>
 
-  <gridz grid-options="$ctrl.gridOptions"
-        toolbar-options="$ctrl.toolbarOptions"
+  <gridz grid-options="$ctrl.cfg.gridOptions"
+        toolbar-options="$ctrl.cfg.toolbarOptions"
         grid-id="basicGrid"
         list-ctrl="$ctrl">
   </gridz>
