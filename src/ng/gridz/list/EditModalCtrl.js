@@ -3,11 +3,12 @@
 // see https://stackoverflow.com/questions/53349705/constructor-and-class-properties-within-javascript-mixins
 // and https://alligator.io/js/class-composition/ for class composition
 export default class EditModalCtrl {
-  constructor($uibModalInstance, $scope, dataApi, vm) {
+  constructor($uibModalInstance, $scope, dataApi, vm, cfg) {
     this.modal = $uibModalInstance
     this.$scope = $scope
     this.dataApi = dataApi
     this.vm = vm
+    this.cfg = cfg
   }
 
   async save() {

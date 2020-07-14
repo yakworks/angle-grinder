@@ -31,34 +31,36 @@ class ListCtrl extends BaseListCtrl {
     _.defaults(this, cfg)
     this.isConfigured = true
 
-    this.editForm = [
-      {
-        key: 'customer',
-        type: 'select',
-        templateOptions: {
-          label: 'Customer',
-          required: true,
-          placeholder: 'Customer',
-
+    this.cfg = {
+      editForm: [
+        {
+          key: 'customer',
+          type: 'select',
+          templateOptions: {
+            label: 'Customer',
+            required: true,
+            placeholder: 'Customer select',
+            dataApiKey: 'customer'
+          }
+        },
+        {
+          key: 'refnum',
+          type: 'input',
+          templateOptions: {
+            label: 'Ref #',
+            required: true,
+            placeholder: 'Invoice or Memo Num'
+          }
+        },
+        {
+          key: 'comments',
+          type: 'input',
+          templateOptions: {
+            placeholder: 'Comments or Note'
+          }
         }
-      },
-      {
-        key: 'refnum',
-        type: 'input',
-        templateOptions: {
-          label: 'Ref #',
-          required: true,
-          placeholder: 'Invoice or Memo Num'
-        }
-      },
-      {
-        key: 'comments',
-        type: 'input',
-        templateOptions: {
-          placeholder: 'Comments or Note'
-        }
-      }
-    ]
+      ]
+    }
   }
 
   fireToolbarAction(btnItem, event) {

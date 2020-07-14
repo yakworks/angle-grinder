@@ -85,7 +85,8 @@ export default class BaseListCtrl {
       backdrop: 'static', // do not close on click outside of the dialog,
       resolve: {
         vm: () => model,
-        dataApi: () => this.dataApi
+        dataApi: () => this.dataApi,
+        cfg: () => this.cfg
       }
       // scope: this.$scope
     }

@@ -11,7 +11,7 @@ forms.config(['formlyConfigProvider', function(formlyConfig) {
   formlyConfig.setType({
     name: 'select',
     template: `<ag-select label="{{to.label}}" ng-model="model[options.key]"
-        select-options="{ useDataObject:true, dataApiKey: 'to.dataApiKey'}" required>
+        select-options="{ useDataObject:true, dataApiKey: '{{to.dataApiKey}}'}" data-api-key="{{to.dataApiKey}}">
       </ag-select>`
   })
 }])
