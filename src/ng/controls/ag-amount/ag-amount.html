@@ -1,0 +1,32 @@
+<div class="field" ng-class="{column: $ctrl.isHorizontal}">
+  <ag-label label-class="{{$ctrl.labelClass}}" ng-if="$ctrl.label"
+            ng-required="{{$ctrl.isRequired}}">{{$ctrl.label}}
+  </ag-label>
+  <div class="field mb-0" ng-class="{'has-addons': $ctrl.hasTranscluded}">
+    <div class="control" ng-class="{'is-expanded': $ctrl.hasTranscluded}">
+      <input
+        class="input"
+        ng-class="$ctrl.inputClass"
+        type="text"
+        placeholder="{{::$ctrl.placeholder}}"
+        autocomplete="off"
+        step="{{::$ctrl.step}}"
+        ng-model-options="{allowInvalid: true, debounce: 250}"
+        name="{{::$ctrl.name}}"
+        id="{{::$ctrl.elementId}}"
+        ng-model="$ctrl.value"
+        ng-change="$ctrl.onChange()"
+        ng-required="{{::$ctrl.isRequired}}"
+        ng-disabled="{{::$ctrl.isDisabled}}"
+        ng-minlength="::$ctrl.minLength"
+        ng-maxlength="::$ctrl.maxLength"
+        ag-number
+      >
+    </div>
+    <div class="control" ng-if="$ctrl.hasTranscluded" ng-transclude>
+    </div>
+  </div>
+  <p class="help" ng-if="$ctrl.hint">{{::$ctrl.hint}}</p>
+  <ag-validation-inline for="{{::$ctrl.elementId}}"></ag-validation-inline>
+</div>
+

@@ -18,13 +18,15 @@ app.directive('agNumber', function() {
       ctrl.$parsers.push(function(value) {
         const empty = ctrl.$isEmpty(value)
         if (empty || NUMBER_REGEXP.test(value)) {
+          ctrl.$setValidity('number', true)
           if (value === '') {
             return null
           } else if (empty) {
             return value
           } else { return parseFloat(value) }
         } else {
-          return undefined
+          ctrl.$setValidity('number', false)
+          return true
         }
       })
 

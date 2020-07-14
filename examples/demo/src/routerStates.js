@@ -20,6 +20,9 @@ const formStates = {
     {
       name: 'inputs',
       component: 'agInputDemoIndex'
+    },{
+      name: 'amount',
+      component: 'agAmountDemoIndex'
     },
     {
       name: 'textarea',
