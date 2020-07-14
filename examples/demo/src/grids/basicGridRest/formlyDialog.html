@@ -1,0 +1,16 @@
+<div class="modal-header">
+  <h3 class="modal-title" id="modal-title">Edit</h3>
+</div>
+<div class="modal-body" id="modal-body">
+  <formly-form ag-form is-horizontal model="dlgCtrl.vm" fields="dlgCtrl.cfg.editForm" form="dlgCtrl.editFormCtrl">
+
+  </formly-form>
+</div>
+
+<div class="modal-footer">
+  <ag-button color="primary" icon-left="fa-check" is-loading="dlgCtrl.isSaving"
+    ng-click="dlgCtrl.save()" >Save</ag-button>
+  <ag-button color="light" icon-left="fa-times"
+    ng-click="dlgCtrl.cancel()">Cancel</ag-button>
+</div>
+<pre ng-cloak class="mt-4">editFormCtrl.$invalid: {{dlgCtrl.editFormCtrl.$invalid}}<br>model: {{dlgCtrl.vm | json}}</pre>

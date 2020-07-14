@@ -59,6 +59,16 @@ function makeMap(epoint, api) {
       })
     },
 
+    [`PATCH /api/${epoint}/massUpdate`]: (req, res) => {
+      // console.log('PUT /api/invoice req.body', req.body)
+      const { body } = req
+      api.massUpdate(body)
+      .then((data) => {
+        // console.log("PUT invoice data", data)
+        return res.json(data)
+      })
+    },
+
     [`DELETE /api/${epoint}`]: (req, res) => {
       // console.log("get invoice id params", req.params)
       api.remove(req.params.id)

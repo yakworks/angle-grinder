@@ -42,7 +42,7 @@ export default class SessionStorageApi extends MemDataApi {
     try {
       const data = this.checkSession()
       if (data) {
-        console.log(`found ${this.storageKey} in sessionStorage`)
+        console.log(`using ${this.storageKey} in sessionStorage`)
         return data
       }
     } catch (e) {
@@ -51,7 +51,6 @@ export default class SessionStorageApi extends MemDataApi {
     const parsed = await ky.get(this.sourceUrl).json()
     this._commit(parsed)
     const array = JSON.parse(sessionStorage.getItem(this.storageKey))
-    // console.log("array", array)
     return array
   }
 

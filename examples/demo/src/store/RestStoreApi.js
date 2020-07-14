@@ -1,4 +1,5 @@
 import RestDataApi from 'angle-grinder/src/dataApi/RestDataApi'
+import ky from 'ky'
 
 function makeDataApi(endpoint){
   return new RestDataApi(`api/${endpoint}`)
@@ -17,6 +18,10 @@ export class RestStoreApi {
   get customer() { return makeDataApi("customer")}
   get invoice() { return makeDataApi("invoice")}
   get tranState() { return makeDataApi("tranState")}
+
+  appConfig(configKey) {
+    return ky.get(`api/appConfig/${configKey}`).json()
+  }
 
 }
 

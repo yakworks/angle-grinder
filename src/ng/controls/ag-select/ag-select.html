@@ -12,7 +12,8 @@
         ng-model="$ctrl.value"
         ng-change="$ctrl.onChange()"
         ng-required="{{$ctrl.isRequired}}"
-        ui-select2="$ctrl.selectOptions"
+        ui-select2="{{$ctrl.selectOptions}}"
+        api-key="{{$ctrl.apiKey}}"
         >
     </div>
     <div class="control" ng-if="$ctrl.hasTranscluded" ng-transclude></div>

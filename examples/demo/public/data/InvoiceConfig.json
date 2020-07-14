@@ -1,0 +1,73 @@
+{
+  "toolbarOptions":{
+    "scope":{},
+    "rightSection": {
+      "template":[
+        "<div class=\"buttons has-addons\">",
+        "<ag-button ng-model=\"$ctrl.quickPick.states\" uib-btn-radio=\"'all'\">All</ag-button>",
+        "<ag-button ng-model=\"$ctrl.quickPick.states\" uib-btn-radio=\"'open'\">Open</ag-button>",
+        "<ag-button ng-model=\"$ctrl.quickPick.states\" uib-btn-radio=\"'closed'\">Closed</ag-button>",
+        "</div>"
+      ]
+    },
+    "selectedButtons":{
+      "ptp":{"icon":"fa-heart","tooltip":"Promise To Pay"},
+      "showSelected":{
+        "label":"Display Selected",
+        "tooltip":"Display selected rows data in panel below"
+      }
+    },
+    "leftButtons":{
+      "import":{"display":"import"},
+      "drop":{
+        "display":"drop menu",
+        "menuItems":[
+          {
+            "display":"<strong>Main Action</strong>",
+            "icon":"fa-thumbs-up"
+          },
+          {"display":"Other Action"}
+        ]
+      }
+    }
+  },
+  "gridOptions":{
+    "colModel":[
+      {"name":"id","label":"id","width":20,"sorttype":"int","align":"right"},
+      {"name":"customer.id","label":"CustomerId","hidden":true},
+      {"name":"customer.name","label":"Customer","formatter":"editActionLink"},
+      {"name":"tranDate","label":"Date","width":100,"formatter":"date"},
+      {"name":"refnum","label":"Refnum","width":100},
+      {"name":"amount","label":"Amount","width":80,"formatter":"currency"},
+      {"name":"comments","label":"Comments"},
+      {"name":"state.id", "label":"StateId", "width":80, "align":"center", "hidden":true},
+      {"name":"state.name","label":"State","width":60,"align":"center"},
+      {"name":"hasTax", "label":"Taxable", "width":60, "align":"center", "formatter":"okIcon"}
+    ],
+    "sortname":"id",
+    "shrinkToFit":true,
+    "contextMenu":true,
+    "pager":true
+  },
+  "editForm":[
+    {
+      "key":"customer",
+      "type":"select",
+      "templateOptions":{
+        "label":"Customer",
+        "required":true,
+        "placeholder":"Cust Name"
+      }
+    },
+    {
+      "key":"refnum",
+      "type":"input",
+      "templateOptions":{"label":"Ref #","required":true,"placeholder":"Invoice or Memo Num"}
+    },
+    {
+      "key":"comments",
+      "type":"input",
+      "templateOptions":{"placeholder":"Comments or Note"}
+    }
+  ]
+}

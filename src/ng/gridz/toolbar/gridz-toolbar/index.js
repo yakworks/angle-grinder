@@ -44,7 +44,8 @@ class Controller {
     const rightSec = this.options.rightSection
     if (rightSec) {
       const rightHtml = this.$element.find('.right-html')
-      rightHtml.append(rightSec.template)
+      const tpl = rightSec.template
+      rightHtml.append(Array.isArray(tpl) ? tpl.join('\n') : tpl)
       const scope = this.options.scope ? this.options.scope() : this.$scope
       this.$compile(rightHtml)(scope)
     }

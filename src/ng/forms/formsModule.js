@@ -20,14 +20,6 @@ var forms = angular.module(MOD_NAME, [
   alerts
 ])
 
-forms.config(['formlyConfigProvider', function(formlyConfig) {
-  formlyConfig.setType({
-    name: 'input',
-    template: `<ag-input ng-model="model[options.key]" label-key="options.key"
-      label="{{options.templateOptions.label}}"></ag-input>`
-  })
-}])
-
 forms.run(function(editableOptions) {
   editableOptions.theme = 'bs3'
 })

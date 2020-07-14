@@ -2,7 +2,7 @@
 // import _ from 'lodash'
 import EditModalCtrl from './EditModalCtrl'
 import { argsMerge } from '../../utils/classUtils'
-// import toast from 'angle-grinder/src/tools/toast'
+import toast from 'angle-grinder/src/tools/toast'
 
 // see https://stackoverflow.com/questions/53349705/constructor-and-class-properties-within-javascript-mixins
 // and https://alligator.io/js/class-composition/ for class composition
@@ -28,7 +28,6 @@ export default class BaseListCtrl {
   }
 
   fireToolbarAction(btnItem, event) {
-    console.log('fireToolbarAction btnItem', btnItem)
     switch (btnItem.key) {
       case 'create':
         return this.create()
@@ -36,6 +35,10 @@ export default class BaseListCtrl {
         return this.showMassUpdate()
       case 'export':
         return this.xlsExport()
+      default:
+        if (_.isFunction(this[btnItem.key])) {
+          this[btnItem.key](btnItem, event)
+        }
     }
   }
 
@@ -82,7 +85,8 @@ export default class BaseListCtrl {
       backdrop: 'static', // do not close on click outside of the dialog,
       resolve: {
         vm: () => model,
-        dataApi: () => this.dataApi
+        dataApi: () => this.dataApi,
+        cfg: () => this.cfg
       }
       // scope: this.$scope
     }
@@ -99,7 +103,6 @@ export default class BaseListCtrl {
     }
     // here just for example, does nothing
     this.form = this.$uibModal.open(modalOpts)
-    console.log('showMassUpdate', this.form)
   }
 
   async delete(id) {
@@ -125,7 +128,7 @@ export default class BaseListCtrl {
   }
 
   handleError(er) {
-    // FIXME handle a graceful way of displayiing exception
     console.error(er)
+    toast.error(er)
   }
 }
