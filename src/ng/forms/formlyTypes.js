@@ -26,6 +26,11 @@ forms.config(['formlyConfigProvider', function(formlyConfig) {
 
   formlyConfig.setType({
     name: 'date',
-    template: '<ag-datepicker label="{{to.label}}" ng-model="model[options.key]"></ag-datepicker>'
+    template: '<ag-datepicker is-expanded label="{{to.label}}" ng-model="model[options.key]"></ag-datepicker>'
+  })
+
+  formlyConfig.setType({
+    name: 'amount',
+    template: '<ag-amount label="{{to.label}}" ng-model="model[options.key]"></ag-amount>'
   })
 }])
