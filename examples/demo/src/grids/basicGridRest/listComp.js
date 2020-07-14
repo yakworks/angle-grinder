@@ -53,10 +53,44 @@ class ListCtrl extends BaseListCtrl {
           }
         },
         {
-          key: 'comments',
+          key: 'tranDate',
+          type: 'date',
+          templateOptions: {
+            label: 'Inv Date',
+            required: true
+          }
+        },
+        {
+          key: 'amount',
           type: 'input',
           templateOptions: {
-            placeholder: 'Comments or Note'
+            label: 'Amount',
+            required: true
+          }
+        },
+        {
+          key: 'state',
+          type: 'select',
+          templateOptions: {
+            label: 'State',
+            required: true,
+            dataApiKey: 'tranState'
+          }
+        },
+        {
+          key: 'hasTax',
+          type: 'checkbox',
+          templateOptions: {
+            label: 'Taxable?'
+          }
+        },
+        {
+          key: 'comments',
+          type: 'textarea',
+          templateOptions: {
+            label: 'Comments',
+            placeholder: 'Comments or Note',
+            rows:3
           }
         }
       ]
