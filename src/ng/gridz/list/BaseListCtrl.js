@@ -36,7 +36,7 @@ export default class BaseListCtrl {
       case 'export':
         return this.xlsExport()
       default:
-        if(_.isFunction(this[btnItem.key])){
+        if (_.isFunction(this[btnItem.key])) {
           this[btnItem.key](btnItem, event)
         }
     }

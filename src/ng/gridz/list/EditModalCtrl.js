@@ -13,7 +13,7 @@ export default class EditModalCtrl {
 
   async save() {
     // call the agForm submit so it brodcasts and shows the errors
-    const {agForm} = this.$scope
+    const { agForm } = this.$scope
     agForm.submit()
     // console.log("this", this)
     if (agForm.form.$invalid || agForm.form.$pristine) return

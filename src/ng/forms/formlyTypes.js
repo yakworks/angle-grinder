@@ -9,7 +9,7 @@ forms.config(['formlyConfigProvider', function(formlyConfig) {
   })
   formlyConfig.setType({
     name: 'textarea',
-    template: `<ag-textarea label="{{to.label}}" rows="{{to.rows}}" ng-model="model[options.key]"></ag-textarea>`
+    template: '<ag-textarea label="{{to.label}}" rows="{{to.rows}}" ng-model="model[options.key]"></ag-textarea>'
   })
 
   formlyConfig.setType({
@@ -21,11 +21,11 @@ forms.config(['formlyConfigProvider', function(formlyConfig) {
 
   formlyConfig.setType({
     name: 'checkbox',
-    template: `<ag-checkbox label="{{to.label}}" ng-model="model[options.key]" hint="{{to.label}}"></ag-checkbox>`
+    template: '<ag-checkbox label="{{to.label}}" ng-model="model[options.key]" hint="{{to.label}}"></ag-checkbox>'
   })
 
   formlyConfig.setType({
     name: 'date',
-    template: `<ag-datepicker label="{{to.label}}" ng-model="model[options.key]"></ag-datepicker>`
+    template: '<ag-datepicker label="{{to.label}}" ng-model="model[options.key]"></ag-datepicker>'
   })
 }])
