@@ -53,7 +53,7 @@ class ListCtrl extends BaseListCtrl {
       },
       {
         key: 'amount',
-        type: 'input',
+        type: 'amount',
         templateOptions: {
           label: 'Amount',
           required: true
