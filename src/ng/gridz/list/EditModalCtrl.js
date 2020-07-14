@@ -12,10 +12,9 @@ export default class EditModalCtrl {
   }
 
   async save() {
-    // console.log('edit modal save scope', this.$scope)
-    const { editForm } = this.$scope
-    console.log("this.editFormCtrl", this.editFormCtrl)
-    if (editForm.$invalid || editForm.$pristine) return
+    // call the agForm submit so it brodcasts and shows the errors
+    this.$scope.agForm.submit()
+    if (this.editFormCtrl.$invalid || this.editFormCtrl.$pristine) return
     this.isSaving = true
     try {
       const savedItem = await this.dataApi.save(this.vm)
