@@ -127,6 +127,23 @@ class MemDataApi {
     return this._commit(data)
   }
 
+  async massUpdate(muItem) {
+    let items = await this.data()
+    console.log("muItem", muItem)
+    let {data, ids} = muItem
+    let updateItems = []
+    ids.forEach(id => {
+      //let item = findById(id, items)
+      const idx = this.findItemIndex(items, {id: parseInt(id)})
+      items[idx] = _.merge(items[idx], data)
+      //data[idx] = item
+      console.log("merged item", items[idx])
+      //item = _.merge(item, data)
+      updateItems.push(items[idx])
+    });
+    return {data: updateItems}
+  }
+
   findItemIndex(data, item) {
     const idx = data.findIndex(this._eqFn.bind(null, item))
     if (idx === -1) throw Error(`${item} not found in ${this}`)
@@ -143,7 +160,7 @@ function pagination(rows, query) {
   }
 }
 
-function findById(data, id) {
+function findById(id, data) {
   const numId = parseInt(id)
   return data.find((obj) => obj.id === numId)
 }

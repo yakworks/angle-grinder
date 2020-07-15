@@ -8,7 +8,7 @@ import _ from 'lodash'
 class ListCtrl extends BaseListCtrl {
   appConfigKey = 'invoice'
 
-  massUpdateTpl = require('../basicGrid/templates/massUpdateForm.html')
+  // massUpdateTemplate = require('../basicGrid/templates/massUpdateForm.html')
 
   //static $inject = _.union(super.$inject, ['someService'])
   constructor(...args) {
@@ -19,7 +19,18 @@ class ListCtrl extends BaseListCtrl {
   $onInit() {
     this.isConfigured = false
     console.log("ListCtrl ", this)
-    this.cfg ={}
+    this.cfg = {
+      "massUpdateForm": [
+        {
+          "key":"customer",
+          "type":"select",
+          "templateOptions":{
+            "label":"Customer",
+            "dataApiKey":"customer"
+          }
+        }
+      ]
+    }
     this.doConfig()
   }
 

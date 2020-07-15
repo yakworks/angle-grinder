@@ -1,16 +1,19 @@
-<div class="modal-header">
-  <h3 class="modal-title" id="modal-title">Mass Update</h3>
+<div class="modal-card">
+  <header class="modal-card-head">
+    <span class="modal-card-title">Mass Update</span>
+    <button class="delete" aria-label="close" ng-click="dlgCtrl.cancel()"></button>
+  </header>
+  <section class="modal-card-body">
+    <formly-form ag-form is-horizontal model="dlgCtrl.vm" fields="dlgCtrl.cfg.massUpdateForm" form="dlgCtrl.massUpdateCtrl">
+    </formly-form>
+  </section>
+  <footer class="modal-card-foot">
+    <div class="buttons is-right">
+      <ag-button color="info" icon-left="fa-check" is-loading="dlgCtrl.isSaving"
+        ng-click="dlgCtrl.save()" >Update</ag-button>
+      <ag-button color="light" icon-left="fa-times"
+        ng-click="dlgCtrl.cancel()">Cancel</ag-button>
+    </div>
+  </footer>
+  <pre ng-cloak class="mt-4">massUpdateCtrl.$invalid: {{dlgCtrl.massUpdateCtrl.$invalid}}<br>model: {{dlgCtrl.vm | json}}</pre>
 </div>
-<div class="modal-body" id="modal-body">
-  <formly-form ag-form is-horizontal model="dlgCtrl.vm" fields="dlgCtrl.cfg.massUpdateForm" form="dlgCtrl.massUpdateCtrl">
-
-  </formly-form>
-</div>
-
-<div class="modal-footer">
-  <ag-button color="primary" icon-left="fa-check" is-loading="dlgCtrl.isSaving"
-    ng-click="dlgCtrl.save()" >Update</ag-button>
-  <ag-button color="light" icon-left="fa-times"
-    ng-click="dlgCtrl.cancel()">Cancel</ag-button>
-</div>
-<pre ng-cloak class="mt-4">massUpdateCtrl.$invalid: {{dlgCtrl.massUpdateCtrl.$invalid}}<br>model: {{dlgCtrl.vm | json}}</pre>

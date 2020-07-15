@@ -65,10 +65,10 @@
       "key":"refnum",
       "type":"input",
       "templateOptions":{
-        "label":"Ref #",
-        "required":true,
-        "minLength":4,
-        "placeholder":"Invoice or Memo Num"
+        "label": "Ref #",
+        "required": true,
+        "minLength": 4,
+        "placeholder": "Invoice or Memo Num"
       }
     },
     {

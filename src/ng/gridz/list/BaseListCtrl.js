@@ -115,8 +115,13 @@ export default class BaseListCtrl {
       this.getMassUpdateOptions()
     )
     modInst.result
-      .then(editedVm => {
-        // TODO do the grid updates
+      .then(res => {
+        if (!_.isNil(res.data)) {
+
+          for (const row of Array.from(res.data)) { grid.updateRow(row.id, row, false) }
+        } else {
+          // $log.warn('[forms] Invalid JSON response, missing data array')
+        }
       })
       .catch(() => {
         console.log('Modal dismissed at: ' + new Date())
@@ -133,7 +138,8 @@ export default class BaseListCtrl {
       resolve: {
         vm: () => model,
         dataApi: () => this.dataApi,
-        cfg: () => this.cfg
+        cfg: () => this.cfg,
+        selectedIds: () => this.gridCtrl.getSelectedRowIds()
       }
       // scope: this.$scope
     }

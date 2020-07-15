@@ -1,17 +1,20 @@
-<div class="modal-header">
-  <button type="button" class="close" ng-click="$ctrl.closeDialog()" aria-hidden="true">&times;</button>
-  <h3>Mass update</h3>
+<div class="modal-card">
+  <header class="modal-card-head">
+    <span class="modal-card-title">Mass Update</span>
+    <button class="delete" aria-label="close" ng-click="dlgCtrl.cancel()"></button>
+  </header>
+  <section class="modal-card-body">
+    <form name="massUpdateCtrl" ag-form is-horizontal class="form-horizontal-fixed">
+      <ag-input ng-model="dlgCtrl.vm.comments"></ag-input>
+    </form>
+  </section>
+  <footer class="modal-card-foot">
+    <div class="buttons is-right">
+      <ag-button color="info" icon-left="fa-check" is-loading="dlgCtrl.isSaving"
+        ng-click="dlgCtrl.save()" >Update</ag-button>
+      <ag-button color="light" icon-left="fa-times"
+        ng-click="dlgCtrl.cancel()">Cancel</ag-button>
+    </div>
+  </footer>
+  <!-- <pre ng-cloak class="mt-4">massUpdateCtrl.$invalid: {{dlgCtrl.massUpdateCtrl.$invalid}}<br>model: {{dlgCtrl.vm | json}}</pre> -->
 </div>
-
-<form name="massUpdateForm" ag-form is-horizontal novalidate class="form-horizontal-fixed"
-      ng-submit="massUpdate(records)">
-  <div class="modal-body">
-    <p></p>
-    <ag-input ng-model="records.note"></ag-input>
-  </div>
-
-  <div class="modal-footer">
-    <ag-submit-button></ag-submit-button>
-    <ag-cancel-button ng-click="$ctrl.cancel()"></ag-cancel-button>
-  </div>
-</form>

@@ -3,12 +3,13 @@
 // see https://stackoverflow.com/questions/53349705/constructor-and-class-properties-within-javascript-mixins
 // and https://alligator.io/js/class-composition/ for class composition
 export default class EditModalCtrl {
-  constructor($uibModalInstance, $scope, dataApi, vm, cfg) {
+  constructor($uibModalInstance, $scope, dataApi, vm, cfg, selectedIds) {
     this.modal = $uibModalInstance
     this.$scope = $scope
     this.dataApi = dataApi
     this.vm = vm
     this.cfg = cfg
+    this.selectedIds = selectedIds
   }
 
   async save() {
@@ -19,7 +20,10 @@ export default class EditModalCtrl {
     if (agForm.form.$invalid || agForm.form.$pristine) return
     this.isSaving = true
     try {
-      const results = await this.dataApi.massUpdate(this.vm)
+      const params = { ids: this.selectedIds, data: this.vm }
+      console.log("params", params)
+      const results = await this.dataApi.massUpdate(params)
+      console.log("results", results)
       this.modal.close(results)
     } catch (er) {
       this.handleError(er)

@@ -59,7 +59,7 @@ function makeMap(epoint, api) {
       })
     },
 
-    [`PATCH /api/${epoint}/massUpdate`]: (req, res) => {
+    [`POST /api/${epoint}/massUpdate`]: (req, res) => {
       // console.log('PUT /api/invoice req.body', req.body)
       const { body } = req
       api.massUpdate(body)
