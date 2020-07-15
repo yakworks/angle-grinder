@@ -15,6 +15,7 @@ import agAmountRange from './ag-amount-range'
 import agValMod from './ag-validation'
 import agTextarea from './ag-textarea'
 import agAmount from './ag-amount'
+import agOkCancel from './ag-ok-cancel'
 
 // import InputPasswordComponent from './ag-password/input-password.component'
 // import StringUtility from './string-utility';
@@ -40,3 +41,4 @@ angular.module(MOD_NAME, [
   .directive('agInputBs', agInputBs)
   .directive('agSelectRest', agSelectRest)
   .directive('agTextarea', agTextarea)
+  .directive('agOkCancel', agOkCancel)

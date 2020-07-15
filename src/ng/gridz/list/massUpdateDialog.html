@@ -8,12 +8,9 @@
     </formly-form>
   </section>
   <footer class="modal-card-foot">
-    <div class="buttons is-right">
-      <ag-button color="info" icon-left="fa-check" is-loading="dlgCtrl.isSaving"
-        ng-click="dlgCtrl.save()" >Update</ag-button>
-      <ag-button color="light" icon-left="fa-times"
-        ng-click="dlgCtrl.cancel()">Cancel</ag-button>
-    </div>
+    <ag-ok-cancel ok-label="Update" ok-click="dlgCtrl.save()" cancel-click="dlgCtrl.cancel()"
+    is-loading="dlgCtrl.isSaving">
+    </ag-ok-cancel>
   </footer>
   <pre ng-cloak class="mt-4">massUpdateCtrl.$invalid: {{dlgCtrl.massUpdateCtrl.$invalid}}<br>model: {{dlgCtrl.vm | json}}</pre>
 </div>

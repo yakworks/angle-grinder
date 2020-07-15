@@ -1,6 +1,6 @@
 <div class="modal-card">
   <header class="modal-card-head">
-    <span class="modal-card-title">Edit</span>
+    <span class="modal-card-title">{{dlgCtrl.title}}</span>
     <button class="delete" aria-label="close" ng-click="dlgCtrl.cancel()"></button>
   </header>
   <section class="modal-card-body">
@@ -8,12 +8,9 @@
     </formly-form>
   </section>
   <footer class="modal-card-foot">
-    <div class="buttons is-right">
-      <ag-button color="info" icon-left="fa-check" is-loading="dlgCtrl.isSaving"
-        ng-click="dlgCtrl.save()" >Save</ag-button>
-      <ag-button color="light" icon-left="fa-times"
-        ng-click="dlgCtrl.cancel()">Cancel</ag-button>
-    </div>
+    <ag-ok-cancel ok-label="Save" ok-click="dlgCtrl.save()" cancel-click="dlgCtrl.cancel()"
+    is-loading="dlgCtrl.isSaving">
+    </ag-ok-cancel>
   </footer>
   <!-- <pre ng-cloak class="mt-4">editFormCtrl.$invalid: {{dlgCtrl.editFormCtrl.$invalid}}<br>model: {{dlgCtrl.vm | json}}</pre> -->
 </div>
