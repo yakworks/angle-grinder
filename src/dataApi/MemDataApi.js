@@ -141,6 +141,7 @@ class MemDataApi {
       //item = _.merge(item, data)
       updateItems.push(items[idx])
     });
+    this._commit(items)
     return {data: updateItems}
   }
 

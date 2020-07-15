@@ -116,12 +116,10 @@ export default class BaseListCtrl {
     )
     modInst.result
       .then(res => {
-        if (!_.isNil(res.data)) {
-
-          for (const row of Array.from(res.data)) { grid.updateRow(row.id, row, false) }
-        } else {
-          // $log.warn('[forms] Invalid JSON response, missing data array')
-        }
+        console.log("res.data", res.data)
+        res.data.forEach(row => {
+          this.gridCtrl.updateRow(row.id, row, false)
+        });
       })
       .catch(() => {
         console.log('Modal dismissed at: ' + new Date())
