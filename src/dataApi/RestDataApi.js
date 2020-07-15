@@ -64,4 +64,9 @@ export default class RestDataApi {
     await ky.delete(`${this.endpoint}/${id}`)
     return true
   }
+
+  async massUpdate(muItem) {
+    const results = await ky.post(`${this.endpoint}/massUpdate`, { json: muItem }).json()
+    return results
+  }
 }

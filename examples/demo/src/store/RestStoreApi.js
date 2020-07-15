@@ -7,6 +7,7 @@ function makeDataApi(endpoint){
 
 /** main holder for api*/
 export class RestStoreApi {
+  _cached = {}
 
   static factory() {
     return new RestStoreApi()
@@ -21,6 +22,13 @@ export class RestStoreApi {
 
   appConfig(configKey) {
     return ky.get(`api/appConfig/${configKey}`).json()
+  }
+
+  /**
+   * checks cache and if not there then does a ky.get
+   */
+  configFromCache(key) {
+
   }
 
 }

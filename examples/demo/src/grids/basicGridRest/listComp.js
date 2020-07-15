@@ -1,100 +1,37 @@
 //import controller from './listCtrl'
 import template from './list.html'
 import BaseListCtrl from 'angle-grinder/src/ng/gridz/list/BaseListCtrl'
-import buildOptions from "../basicGrid/listCtrlOptions"
 import restStoreApi from '../../store/RestStoreApi'
-import Swal from 'angle-grinder/src/tools/swal'
 import toast from 'angle-grinder/src/tools/toast'
 import _ from 'lodash'
 
 class ListCtrl extends BaseListCtrl {
-  isLoaded = false
+  appConfigKey = 'invoice'
 
-  editFormTpl = require('./formlyDialog.html')
-  massUpdateTpl = require('../basicGrid/templates/massUpdateForm.html')
+  // massUpdateTemplate = require('../basicGrid/templates/massUpdateForm.html')
 
-  // static $inject = _.union(super.$inject, ['restDataStore', '$timeout'])
-
+  //static $inject = _.union(super.$inject, ['someService'])
   constructor(...args) {
     super(...args)
     this.dataApi = restStoreApi.invoice
   }
 
   $onInit() {
+    this.isConfigured = false
+    console.log("ListCtrl ", this)
     this.cfg = {
-      editForm: [
-      {
-        key: 'customer',
-        type: 'select',
-        templateOptions: {
-          label: 'Customer',
-          required: true,
-          placeholder: 'Customer select',
-          dataApiKey: 'customer'
+      "massUpdateForm": [
+        {
+          "key":"customer",
+          "type":"select",
+          "templateOptions":{
+            "label":"Customer",
+            "dataApiKey":"customer"
+          }
         }
-      },
-      {
-        key: 'refnum',
-        type: 'input',
-        templateOptions: {
-          label: 'Ref #',
-          required: true,
-          minLength: 4,
-          placeholder: 'Invoice or Memo Num'
-        }
-      },
-      {
-        key: 'tranDate',
-        type: 'date',
-        templateOptions: {
-          label: 'Inv Date',
-          required: true
-        }
-      },
-      {
-        key: 'amount',
-        type: 'amount',
-        templateOptions: {
-          label: 'Amount',
-          required: true
-        }
-      },
-      {
-        key: 'state',
-        type: 'select',
-        templateOptions: {
-          label: 'State',
-          required: true,
-          dataApiKey: 'tranState'
-        }
-      },
-      {
-        key: 'hasTax',
-        type: 'checkbox',
-        templateOptions: {
-          label: 'Taxable?'
-        }
-      },
-      {
-        key: 'comments',
-        type: 'textarea',
-        templateOptions: {
-          label: 'Comments',
-          placeholder: 'Comments or Note',
-          rows:3
-        }
-      }
-    ]}
-
+      ]
+    }
     this.doConfig()
-  }
-
-  async doConfig(){
-    let cfg = await restStoreApi.appConfig("invoice")
-    cfg.gridOptions.datatype = (params) => this.gridLoader(params)
-    cfg.toolbarOptions.scope = () => this.$scope
-    _.defaults(this.cfg, cfg)
-    this.isConfigured = true
   }
 
   fireToolbarAction(btnItem, event) {
@@ -123,6 +60,7 @@ class ListCtrl extends BaseListCtrl {
 export default angular
   .module('ag.demo.basicRestGridDemo', [])
   .component('basicRestGridDemo', {
+    bindings: { configKey: '<' },
     template: template,
     controller: ListCtrl
   })

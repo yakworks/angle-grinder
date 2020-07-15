@@ -1,20 +1,38 @@
 // import Log from 'angle-grinder/src/utils/Log'
 // import _ from 'lodash'
 import EditModalCtrl from './EditModalCtrl'
+import MassUpdateModalCtrl from './MassUpdateModalCtrl'
 import { argsMerge } from '../../utils/classUtils'
+import appConfigApi from '../../../dataApi/AppConfigApi'
 import toast from 'angle-grinder/src/tools/toast'
 
 // see https://stackoverflow.com/questions/53349705/constructor-and-class-properties-within-javascript-mixins
 // and https://alligator.io/js/class-composition/ for class composition
 export default class BaseListCtrl {
   showSearchForm = true
+  editTemplate = require('./editDialog.html')
+  massUpdateTemplate = require('./massUpdateDialog.html')
 
   static $inject = ['$scope', '$element', '$uibModal', '$timeout']
   constructor(...args) {
     argsMerge(this, args)
   }
 
+  async doConfig() {
+    let cfg = await appConfigApi.getConfig(this.appConfigKey)
+    cfg = _.cloneDeep(cfg)
+    // assign default datatype to grid loader
+    cfg.gridOptions.datatype = (params) => this.gridLoader(params)
+    // give toolbar scope
+    cfg.toolbarOptions.scope = () => this.$scope
+    // console.log("cfg",cfg)
+    _.defaults(this.cfg, cfg)
+    this.isConfigured = true
+  }
+
   get gridCtrl() { return this.$element.find('gridz').controller('gridz') }
+  get editModalCtrl() { return EditModalCtrl }
+  get massUpdateModalCtrl() { return MassUpdateModalCtrl }
 
   fireRowAction(model, menuItem) {
     switch (menuItem.key) {
@@ -46,7 +64,7 @@ export default class BaseListCtrl {
     this.gridCtrl.toggleLoading(true)
     try {
       const vm = await this.dataApi.get(id)
-      this.showEditForm(vm)
+      this.showEdit(vm)
     } catch (er) {
       this.handleError(er)
     } finally {
@@ -55,13 +73,13 @@ export default class BaseListCtrl {
   }
 
   create(model = {}) {
-    this.showEditForm(model)
+    this.showEdit(model)
   }
 
-  showEditForm(model) {
+  showEdit(model) {
     const isUpdate = !!model.id
     const modInst = this.$uibModal.open(
-      this.getEditModalOptions(this.editFormTpl, model)
+      this.getEditOptions(this.editTemplate, model)
     )
     modInst.result
       .then(editedVm => {
@@ -75,8 +93,8 @@ export default class BaseListCtrl {
     // })
   }
 
-  getEditModalOptions(template, model) {
-    // const listCtrl = this
+  // modal options for edit
+  getEditOptions(template, model) {
     return {
       controller: this.editModalCtrl,
       controllerAs: 'dlgCtrl',
@@ -92,18 +110,49 @@ export default class BaseListCtrl {
     }
   }
 
-  get editModalCtrl() { return EditModalCtrl }
-
   showMassUpdate() {
-    const modalOpts = {
-      template: this.massUpdateTpl,
+    const modInst = this.$uibModal.open(
+      this.getMassUpdateOptions()
+    )
+    modInst.result
+      .then(res => {
+        console.log('res.data', res.data)
+        res.data.forEach(row => {
+          this.gridCtrl.updateRow(row.id, row, false)
+        })
+      })
+      .catch(() => {
+        console.log('Modal dismissed at: ' + new Date())
+      })
+  }
+
+  getMassUpdateOptions(model = {}) {
+    return {
+      controller: this.massUpdateModalCtrl,
+      controllerAs: 'dlgCtrl',
+      template: this.massUpdateTemplate,
       keyboard: false, // do not close the dialog with ESC key
-      backdrop: 'static' // do not close on click outside of the dialog,
+      backdrop: 'static', // do not close on click outside of the dialog,
+      resolve: {
+        vm: () => model,
+        dataApi: () => this.dataApi,
+        cfg: () => this.cfg,
+        selectedIds: () => this.gridCtrl.getSelectedRowIds()
+      }
       // scope: this.$scope
     }
-    // here just for example, does nothing
-    this.form = this.$uibModal.open(modalOpts)
   }
+
+  // showMassUpdate() {
+  //   const modalOpts = {
+  //     template: this.massUpdateTpl,
+  //     keyboard: false, // do not close the dialog with ESC key
+  //     backdrop: 'static' // do not close on click outside of the dialog,
+  //     // scope: this.$scope
+  //   }
+  //   // here just for example, does nothing
+  //   this.form = this.$uibModal.open(modalOpts)
+  // }
 
   async delete(id) {
     try {

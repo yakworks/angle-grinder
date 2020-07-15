@@ -2,12 +2,13 @@ import compDemoModule from './listComp'
 
 const template = `
 <example-snippet is-horizontal raw-js='$ctrl.rawJs' raw-html='$ctrl.rawHtml' raw-md='$ctrl.rawMd' >
-  <basic-rest-grid-demo></basic-rest-grid-demo>
+  <basic-rest-grid-demo config-key="$ctrl.configKey"></basic-rest-grid-demo>
 </example-snippet>
 `
 export default angular
   .module(compDemoModule)
   .component('basicGridRestIndex', {
+    bindings: { configKey: '<' }, //comes from the router state
     template: template,
     controller: function() {
       this.rawHtml = require('./list.html')

@@ -4,9 +4,8 @@
     <button class="delete" aria-label="close" ng-click="dlgCtrl.cancel()"></button>
   </header>
   <section class="modal-card-body">
-    <form name="massUpdateCtrl" ag-form is-horizontal class="form-horizontal-fixed">
-      <ag-input ng-model="dlgCtrl.vm.comments"></ag-input>
-    </form>
+    <formly-form ag-form is-horizontal model="dlgCtrl.vm" fields="dlgCtrl.cfg.massUpdateForm" form="dlgCtrl.massUpdateCtrl">
+    </formly-form>
   </section>
   <footer class="modal-card-foot">
     <div class="buttons is-right">
@@ -16,5 +15,5 @@
         ng-click="dlgCtrl.cancel()">Cancel</ag-button>
     </div>
   </footer>
-  <!-- <pre ng-cloak class="mt-4">massUpdateCtrl.$invalid: {{dlgCtrl.massUpdateCtrl.$invalid}}<br>model: {{dlgCtrl.vm | json}}</pre> -->
+  <pre ng-cloak class="mt-4">massUpdateCtrl.$invalid: {{dlgCtrl.massUpdateCtrl.$invalid}}<br>model: {{dlgCtrl.vm | json}}</pre>
 </div>

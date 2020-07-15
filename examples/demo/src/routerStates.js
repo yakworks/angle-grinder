@@ -124,11 +124,15 @@ const gridsStates = {
   children: [
     {
       name: 'basic-grid',
-      component: 'basicGridIndex'
+      component: 'basicGridIndex',
+      url: '/foo'
     },
     {
       name: 'basic-rest-grid',
-      component: 'basicGridRestIndex'
+      component: 'basicGridRestIndex',
+      resolve: {
+        configKey: () => "invoices"
+      }
     },
     {
       name: 'AppConfig Demo Grid',
