@@ -128,21 +128,21 @@ class MemDataApi {
   }
 
   async massUpdate(muItem) {
-    let items = await this.data()
-    console.log("muItem", muItem)
-    let {data, ids} = muItem
-    let updateItems = []
+    const items = await this.data()
+    console.log('muItem', muItem)
+    const { data, ids } = muItem
+    const updateItems = []
     ids.forEach(id => {
-      //let item = findById(id, items)
-      const idx = this.findItemIndex(items, {id: parseInt(id)})
+      // let item = findById(id, items)
+      const idx = this.findItemIndex(items, { id: parseInt(id) })
       items[idx] = _.merge(items[idx], data)
-      //data[idx] = item
-      console.log("merged item", items[idx])
-      //item = _.merge(item, data)
+      // data[idx] = item
+      console.log('merged item', items[idx])
+      // item = _.merge(item, data)
       updateItems.push(items[idx])
-    });
+    })
     this._commit(items)
-    return {data: updateItems}
+    return { data: updateItems }
   }
 
   findItemIndex(data, item) {

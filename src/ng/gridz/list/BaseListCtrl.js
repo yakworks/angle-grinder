@@ -18,14 +18,14 @@ export default class BaseListCtrl {
     argsMerge(this, args)
   }
 
-  async doConfig(){
+  async doConfig() {
     let cfg = await appConfigApi.getConfig(this.appConfigKey)
     cfg = _.cloneDeep(cfg)
-    //assign default datatype to grid loader
+    // assign default datatype to grid loader
     cfg.gridOptions.datatype = (params) => this.gridLoader(params)
-    //give toolbar scope
+    // give toolbar scope
     cfg.toolbarOptions.scope = () => this.$scope
-    //console.log("cfg",cfg)
+    // console.log("cfg",cfg)
     _.defaults(this.cfg, cfg)
     this.isConfigured = true
   }
@@ -93,7 +93,7 @@ export default class BaseListCtrl {
     // })
   }
 
-  //modal options for edit
+  // modal options for edit
   getEditOptions(template, model) {
     return {
       controller: this.editModalCtrl,
@@ -116,10 +116,10 @@ export default class BaseListCtrl {
     )
     modInst.result
       .then(res => {
-        console.log("res.data", res.data)
+        console.log('res.data', res.data)
         res.data.forEach(row => {
           this.gridCtrl.updateRow(row.id, row, false)
-        });
+        })
       })
       .catch(() => {
         console.log('Modal dismissed at: ' + new Date())
