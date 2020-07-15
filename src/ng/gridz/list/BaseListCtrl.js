@@ -64,7 +64,7 @@ export default class BaseListCtrl {
     this.gridCtrl.toggleLoading(true)
     try {
       const vm = await this.dataApi.get(id)
-      this.showEdit("Edit", vm)
+      this.showEdit('Edit', vm)
     } catch (er) {
       this.handleError(er)
     } finally {
@@ -73,7 +73,7 @@ export default class BaseListCtrl {
   }
 
   create(model = {}) {
-    this.showEdit("Create", model)
+    this.showEdit('Create', model)
   }
 
   showEdit(title, model) {

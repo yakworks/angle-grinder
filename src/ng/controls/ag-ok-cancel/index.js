@@ -1,10 +1,7 @@
-import AgBaseControl from '../AgBaseControl'
-
-class Controller{
-
+class Controller {
   $onInit() {
-    if(!this.okLabel) this.okLabel = 'Ok'
-    if(!this.cancelLabel) this.cancelLabel = 'Cancel'
+    if (!this.okLabel) this.okLabel = 'Ok'
+    if (!this.cancelLabel) this.cancelLabel = 'Cancel'
   }
 }
 
@@ -13,7 +10,7 @@ export default () => ({
   replace: true,
   controllerAs: '$ctrl',
   bindToController: true,
-  //transclude: true
+  // transclude: true
   template: require('./ag-ok-cancel.html'),
   controller: Controller,
   scope: {
