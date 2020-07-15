@@ -1,9 +1,10 @@
-<div class="modal-header">
-  <h3 class="modal-title" id="modal-title">I'm a modal!</h3>
-</div>
-<form name="editForm" ag-form is-horizontal>
-  <div class="modal-body" id="modal-body">
-    <fieldset>
+<div class="modal-card">
+  <header class="modal-card-head">
+    <span class="modal-card-title">{{dlgCtrl.title}}</span>
+    <button class="delete" aria-label="close" ng-click="dlgCtrl.cancel()"></button>
+  </header>
+  <section class="modal-card-body">
+    <form name="editFormCtrl" ag-form is-horizontal>
       <ag-select label="Customer Name" ng-model="dlgCtrl.vm.customer"
         select-options="{ useDataObject:true, dataApiKey: 'customer'}" required>
       </ag-select>
@@ -15,14 +16,12 @@
       </ag-select>
       <ag-checkbox label="Taxable?" ng-model="dlgCtrl.vm.hasTax" hint="tax should be calculated"></ag-checkbox>
       <ag-textarea rows="3" ng-model="dlgCtrl.vm.comments"></ag-textarea>
-    </fieldset>
-  </div>
-
-  <div class="modal-footer">
-    <ag-button color="primary" icon-left="fa-check" is-loading="dlgCtrl.isSaving"
-      ng-click="dlgCtrl.save()" >Save</ag-button>
-    <ag-button color="light" icon-left="fa-times"
-      ng-click="dlgCtrl.cancel()">Cancel</ag-button>
-  </div>
-</form>
-<pre ng-cloak class="mt-4">editForm.$invalid: {{editForm.$invalid}}<br>model: {{dlgCtrl.vm | json}}</pre>
+    </form>
+  </section>
+  <footer class="modal-card-foot">
+    <ag-ok-cancel ok-label="Save" ok-click="dlgCtrl.save()" cancel-click="dlgCtrl.cancel()"
+    is-loading="dlgCtrl.isSaving">
+    </ag-ok-cancel>
+  </footer>
+  <pre ng-cloak class="mt-4">editFormCtrl.$invalid: {{dlgCtrl.editFormCtrl.$invalid}}<br>model: {{dlgCtrl.vm | json}}</pre>
+</div>

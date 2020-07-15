@@ -64,7 +64,7 @@ export default class BaseListCtrl {
     this.gridCtrl.toggleLoading(true)
     try {
       const vm = await this.dataApi.get(id)
-      this.showEdit(vm)
+      this.showEdit("Edit", vm)
     } catch (er) {
       this.handleError(er)
     } finally {
@@ -73,13 +73,13 @@ export default class BaseListCtrl {
   }
 
   create(model = {}) {
-    this.showEdit(model)
+    this.showEdit("Create", model)
   }
 
-  showEdit(model) {
+  showEdit(title, model) {
     const isUpdate = !!model.id
     const modInst = this.$uibModal.open(
-      this.getEditOptions(this.editTemplate, model)
+      this.getEditOptions(this.editTemplate, model, title)
     )
     modInst.result
       .then(editedVm => {
@@ -94,7 +94,7 @@ export default class BaseListCtrl {
   }
 
   // modal options for edit
-  getEditOptions(template, model) {
+  getEditOptions(template, model, title) {
     return {
       controller: this.editModalCtrl,
       controllerAs: 'dlgCtrl',
@@ -104,7 +104,8 @@ export default class BaseListCtrl {
       resolve: {
         vm: () => model,
         dataApi: () => this.dataApi,
-        cfg: () => this.cfg
+        cfg: () => this.cfg,
+        title: () => title
       }
       // scope: this.$scope
     }
