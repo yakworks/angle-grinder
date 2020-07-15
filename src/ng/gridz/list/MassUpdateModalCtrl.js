@@ -15,12 +15,12 @@ export default class EditModalCtrl {
     // call the agForm submit so it brodcasts and shows the errors
     const { agForm } = this.$scope
     agForm.submit()
-    console.log("this", this)
+    // console.log("this", this)
     if (agForm.form.$invalid || agForm.form.$pristine) return
     this.isSaving = true
     try {
-      const savedItem = await this.dataApi.save(this.vm)
-      this.modal.close(savedItem)
+      const results = await this.dataApi.massUpdate(this.vm)
+      this.modal.close(results)
     } catch (er) {
       this.handleError(er)
     } finally {

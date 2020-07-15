@@ -10,7 +10,7 @@ import _ from 'lodash'
 class ListCtrl extends BaseListCtrl {
   isLoaded = false
 
-  editFormTpl = require('./templates/editDialog.html')
+  editDialogTpl = require('./templates/editDialog.html')
   massUpdateTpl = require('./templates/massUpdateForm.html')
 
   // static $inject = _.union(super.$inject, ['restDataStore', '$timeout'])
