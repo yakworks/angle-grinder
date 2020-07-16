@@ -1,6 +1,7 @@
 import angular from 'angular'
 import _ from 'lodash'
 // import Log from '../../../utils/Log'
+import { isAttrTruthy } from '../../utils/ngHelpers'
 
 export default agForm
 
@@ -36,6 +37,7 @@ function agForm($timeout) {
       : agValidationsConfig.getDefaultValidationStrategy()
 
     // Log.debug('$attrs',$attrs)
+    // this.isHorizontal = isAttrTruthy($attrs.isHorizontal)
     this.isHorizontal = !_.isUndefined($attrs.isHorizontal)
     this.labelClass = $attrs.labelClass
     // set default to is-3

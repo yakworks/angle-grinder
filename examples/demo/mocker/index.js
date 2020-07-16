@@ -1,5 +1,7 @@
 const delay = require('mocker-api/utils/delay')
 const _ = require('lodash');
+const yaml = require('js-yaml');
+const fs = require('fs');
 const generateApi = require('./generateApi')
 
 const noProxy = process.env.NO_PROXY === 'true'
@@ -7,7 +9,9 @@ const noProxy = process.env.NO_PROXY === 'true'
 const invoiceData = require('../public/data/Invoices.json')
 const tranStateData = require('../public/data/TranStates.json')
 const customerData = require('../public/data/Customers.json')
-const invoiceConfigData = require('../public/data/InvoiceConfig.json')
+//const invoiceConfigData = require('../public/data/InvoiceConfig.json')
+//const custConfigYml = require('../public/data/CustomerConfig.yml')
+//const custConfigData = yaml.load(fs.readFileSync('./examples/demo/public/data/CustomerConfig.yml', 'utf8'))
 
 const proxy = {
   ...generateApi("invoice", invoiceData),
@@ -15,7 +19,12 @@ const proxy = {
   ...generateApi("customer", customerData),
 
   'GET /api/appConfig/invoice': (req, res) => {
+    const invoiceConfigData = yaml.load(fs.readFileSync('./examples/demo/public/data/InvoiceConfig.yml', 'utf8'))
     return res.json(invoiceConfigData)
+  },
+  'GET /api/appConfig/customer': (req, res) => {
+    const custConfigData = yaml.load(fs.readFileSync('./examples/demo/public/data/CustomerConfig.yml', 'utf8'))
+    return res.json(custConfigData)
   },
 
   'GET /countries/pickList': (req, res) => {

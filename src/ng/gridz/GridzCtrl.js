@@ -48,6 +48,7 @@ export default class GridzCtrl {
     gridEl.on('jqGridSelectRow', onSelect)
     gridEl.on('jqGridSelectAll', onSelect)
 
+    gridzInit.setupColModel(gridOptions)
     gridzInit.setupCtxMenu(this, gridOptions)
     gridzInit.setupDataLoader(this, gridOptions)
     gridzInit.setupGridCompleteEvent(this, gridEl, gridOptions)

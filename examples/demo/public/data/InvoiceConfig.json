@@ -1,6 +1,5 @@
 {
   "toolbarOptions":{
-    "scope":{},
     "rightSection": {
       "template":[
         "<div class=\"buttons has-addons\">",
