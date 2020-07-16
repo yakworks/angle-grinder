@@ -60,5 +60,5 @@ const proxy = {
     return res.json(req.body)
   }
 }
-module.exports = (noProxy ? {} : delay(proxy, 0))
+module.exports = (noProxy ? {} : delay(proxy, 100))
 // module.exports = proxy;

@@ -15,13 +15,14 @@ export default () => ({
   restrict: 'E',
   //replace: true,
   controllerAs: 'fbCtrl',
-  bindToController: true,
-  // transclude: true
-  template: template,
-  controller: Controller,
-  scope: {
+  bindToController: {
     model: '<',
     fields: '<',
     form: '=?'
-  }
+  },
+  // transclude: true
+  template: template,
+  controller: Controller
+  // don't do isolate scope here or forml doesnt set stuff right
+  // scope: {}
 })
