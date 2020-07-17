@@ -6,9 +6,8 @@ const template = `
 </example-snippet>
 `
 export default angular
-  .module(compDemoModule)
+.module(compDemoModule)
   .component('basicGridRestIndex', {
-    bindings: { configKey: '<' }, //comes from the router state
     template: template,
     controller: function() {
       this.rawHtml = require('./list.html')

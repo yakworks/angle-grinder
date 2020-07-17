@@ -11,6 +11,11 @@ export class StringUtility {
     return inString
   }
 
+  // if a.b.c will return just c
+  lastPathKey(modelPath) {
+    return _.split(modelPath, '.').slice(-1).pop()
+  }
+
   isEmailValid(email) {
     if (!email) {
       return true

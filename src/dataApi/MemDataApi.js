@@ -136,9 +136,7 @@ class MemDataApi {
       // let item = findById(id, items)
       const idx = this.findItemIndex(items, { id: parseInt(id) })
       items[idx] = _.merge(items[idx], data)
-      // data[idx] = item
-      console.log('merged item', items[idx])
-      // item = _.merge(item, data)
+      // console.log('merged item', items[idx])
       updateItems.push(items[idx])
     })
     this._commit(items)

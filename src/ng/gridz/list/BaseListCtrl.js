@@ -5,6 +5,7 @@ import MassUpdateModalCtrl from './MassUpdateModalCtrl'
 import { argsMerge } from '../../utils/classUtils'
 import appConfigApi from '../../../dataApi/AppConfigApi'
 import toast from 'angle-grinder/src/tools/toast'
+import { transformOptions } from '../../controls/formly/helpers'
 
 // see https://stackoverflow.com/questions/53349705/constructor-and-class-properties-within-javascript-mixins
 // and https://alligator.io/js/class-composition/ for class composition
@@ -19,13 +20,16 @@ export default class BaseListCtrl {
   }
 
   async doConfig() {
-    let cfg = await appConfigApi.getConfig(this.appConfigKey)
+    let cfg = await appConfigApi.getConfig(this.apiKey)
     cfg = _.cloneDeep(cfg)
     // assign default datatype to grid loader
     cfg.gridOptions.datatype = (params) => this.gridLoader(params)
+    if (!cfg.toolbarOptions) cfg.toolbarOptions = {}
     // give toolbar scope
     cfg.toolbarOptions.scope = () => this.$scope
-    // console.log("cfg",cfg)
+    if (cfg.editForm) cfg.editForm = transformOptions(cfg.editForm)
+    if (cfg.massUpdateForm) cfg.massUpdateForm = transformOptions(cfg.massUpdateForm)
+    console.log('doConfig this', this)
     _.defaults(this.cfg, cfg)
     this.isConfigured = true
   }

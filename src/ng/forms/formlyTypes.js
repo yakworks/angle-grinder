@@ -33,4 +33,9 @@ forms.config(['formlyConfigProvider', function(formlyConfig) {
     name: 'amount',
     template: '<ag-amount label="{{to.label}}" ng-model="model[options.key]"></ag-amount>'
   })
+
+  formlyConfig.setType({
+    name: 'label',
+    template: '<ag-label ng-required="{{to.required}}">{{to.label}}</ag-label>'
+  })
 }])

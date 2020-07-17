@@ -6,7 +6,7 @@ import toast from 'angle-grinder/src/tools/toast'
 import _ from 'lodash'
 
 class ListCtrl extends BaseListCtrl {
-  appConfigKey = 'invoice'
+  apiKey = 'invoice'
 
   // massUpdateTemplate = require('../basicGrid/templates/massUpdateForm.html')
 
@@ -60,7 +60,6 @@ class ListCtrl extends BaseListCtrl {
 export default angular
   .module('ag.demo.basicRestGridDemo', [])
   .component('basicRestGridDemo', {
-    bindings: { configKey: '<' },
     template: template,
     controller: ListCtrl
   })

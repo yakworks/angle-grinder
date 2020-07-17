@@ -11,9 +11,18 @@
   <div class="spacer"></div>
   <div class="toolbar-item right-html" ></div>
   <div class="toolbar-item p-0 quick-search-item" ng-show="tbCtrl.opts.showQuickSearch">
-    <input type="text" class="input is-rounded is-search quick-search" placeholder="quick search" ng-model="tbCtrl.quickSearchEntry">
+    <div class="control has-icons-right has-icons-left">
+      <input type="text" class="input is-rounded is-search quick-search" placeholder="Search" ng-model="tbCtrl.quickSearchEntry">
+      <span class="icon is-small is-left">
+        <i class="mdi mdi-magnify"></i>
+      </span>
+      <span class="icon is-small is-right">
+        <a class="delete is-small" ng-show="tbCtrl.quickSearchEntry" ng-click="tbCtrl.clearSearchInput()"></a>
+      </span>
+    </div>
+
   </div>
-  <ag-button ng-if="tbCtrl.opts.showSearchFormButton" icon="fa-search" uib-tooltip="Show Search Form"
+  <ag-button ng-if="tbCtrl.opts.showSearchFormButton" icon="mdi-text-box-search-outline" uib-tooltip="Show Search Filters Form"
     ng-click="tbCtrl.gridCtrl.listCtrl.showSearchForm = !tbCtrl.gridCtrl.listCtrl.showSearchForm" ></ag-button>
   <gridz-options-dropdown></gridz-options-dropdown>
 </ag-toolbar>

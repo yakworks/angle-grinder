@@ -63,3 +63,12 @@ label.required:after {
   //line-height: $control-height;
 }
 
+// formly
+// it does formly-field components with columns but underlying ag-input etc has the column as well
+.formly-field.column {
+  padding: 0;
+  > .label.column {
+    width: unset;
+  }
+}
+

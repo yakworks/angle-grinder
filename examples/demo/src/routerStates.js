@@ -123,20 +123,20 @@ const gridsStates = {
   },
   children: [
     {
+      name: 'basic-rest-grid',
+      component: 'agGridList',
+      resolve: {
+        apiKey: () => "customer"
+      }
+    },
+    {
       name: 'basic-grid',
       component: 'basicGridIndex',
       url: '/foo'
     },
     {
-      name: 'basic-rest-grid',
-      component: 'basicGridRestIndex',
-      resolve: {
-        configKey: () => "invoices"
-      }
-    },
-    {
-      name: 'AppConfig Demo Grid',
-      component: 'configGridIndex'
+      name: 'config-rest-grid',
+      component: 'basicGridRestIndex'
     },
     {
       name: 'Legacy Demo Grid',

@@ -1,5 +1,5 @@
 import InputBase from '../AgBaseControl'
-import stringUtils from '../../../utils/stringFomUtils'
+import stringUtils from '../../../utils/stringFormUtils'
 
 // WIP not finished yet!
 export default class InputPasswordComponent extends InputBase {

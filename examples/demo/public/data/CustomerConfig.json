@@ -1,0 +1,52 @@
+{
+  "toolbarOptions":{},
+  "gridOptions":{
+    "colModel":[
+      {"name":"id","label":"id","width":20,"sorttype":"int","align":"right"},
+      {"name":"num","label":"Num", "width": 60},
+      {"name":"name","label":"Name","formatter": "editActionLink"},
+      {"name":"city", "width":100},
+      {"name":"state", "width":60},
+      {"name":"postalCode", "label":"zip","width":60}
+    ],
+    "sortname":"id",
+    "shrinkToFit":true,
+    "contextMenu":true,
+    "pager":true
+  },
+  "editForm":[
+    {
+      "key":"num",
+      "type":"input",
+      "templateOptions":{
+        "label":"Cust #",
+        "required":true
+      }
+    },
+    {
+      "key":"name",
+      "type":"input",
+      "templateOptions":{
+        "label":"Name",
+        "required":true
+      }
+    },
+    {
+      "key":"city",
+      "type":"input",
+      "templateOptions":{
+        "label":"City"
+      }
+    },
+    {
+      "key":"state",
+      "type":"input",
+      "templateOptions":{"label":"state"}
+    },
+    {
+      "key":"postalCode",
+      "type":"input",
+      "templateOptions":{"label":"Zip"}
+    }
+  ]
+}
