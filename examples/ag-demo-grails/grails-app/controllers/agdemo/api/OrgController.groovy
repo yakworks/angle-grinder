@@ -83,7 +83,7 @@ class OrgController extends BaseDomainController {
         if (org) {
             render BeanPathTools.buildMapFromPaths(org, selectFields) as JSON
         } else {
-            notFound params.id
+            response.status = 404
         }
     }
 

@@ -11,37 +11,37 @@ import grails.converters.JSON
 import grails.plugin.gormtools.ErrorMessageService
 import grails.util.GrailsNameUtils
 import grails.validation.ValidationException
+import gorm.tools.repository.GormRepoEntity
 import org.grails.datastore.gorm.GormEntity
 import org.grails.plugins.appsetupconfig.AppSetupService
 
 import javax.annotation.PostConstruct
 
-abstract class BaseDomainController {
-    static namespace = 'api'
+abstract class BaseDomainController<D extends GormRepoEntity> extends RestApiRepoController<D> {
     def ajaxGrid = true
-    abstract getDomainClass()
+/*    abstract getDomainClass()
     protected List<String> getPickShowFields() { return ['*'] }
-    protected List<String> getPicSearchableFields() { return [] }
-    static allowedMethods = [save: "POST", update: ["PUT", "POST"], delete: ["POST", "DELETE"], massUpdate: "POST"]
+    protected List<String> getPicSearchableFields() { return [] }*/
+    // static allowedMethods = [save: "POST", update: ["PUT", "POST"], delete: ["POST", "DELETE"], massUpdate: "POST"]
     Map defaultGridOptions = [colModel: [[name: 'id']]]
     ErrorMessageService errorMessageService
     AppSetupService appSetupService
-    protected GormRepo getRepo() {
+   /* protected GormRepo getRepo() {
         domainClass.repo as GormRepo
-    }
+    }*/
 
-    @PostConstruct
+/*    @PostConstruct
     protected void init() {
-    }
+    }*/
 
-    protected String getDomainInstanceName() {
+   /* protected String getDomainInstanceName() {
         def suffix = grailsApplication.config?.grails?.scaffolding?.templates?.domainSuffix
         if (!suffix) {
             suffix = ''
         }
         def propName = GrailsNameUtils.getPropertyNameRepresentation(domainClass)
         "${propName}${suffix}"
-    }
+    }*/
 
     def index() {
         redirect(action: "list", params: params)

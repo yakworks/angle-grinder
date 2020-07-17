@@ -13,7 +13,7 @@ export default class ListCtrl {
         const content = `\
 <a href="#/${rowdata.id}">${cellVal}</a>\
 `
-        return window.columnAligner('link', content)
+        return content
       }
 
     }
