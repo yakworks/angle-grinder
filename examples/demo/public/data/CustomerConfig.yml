@@ -14,17 +14,50 @@ gridOptions:
   pager: true
 
 editForm:
-  num:
-    label: 'Cust #'
-    required: true
-  name:
-    required: true
-  city: {}
-  state: {}
-  postalCode:
-    label: Zip
+  fieldGroupA:
+    - type: label
+      label: 'Num / Name'
+      required: true
+      className: column is-3
+    - key: num
+      label: ''
+      placeholder: Customer Number
+      className: column is-3
+    - key: name
+      label: ''
+      placeholder: Customer Name
+
+  street:
+    label: Address
+    placeholder: Street
+
+  fieldGroupB:
+    - type: label
+      label: '' # blank label so its a placeholder
+      required: false
+      className: column is-3
+    - key: city
+      label: ''
+      placeholder: City
+    - key: state
+      label: ''
+      placeholder: State
+      className: column is-2
+    - key: postalCode
+      label: ''
+      placeholder: Zip
+      className: column is-2
   country: {}
   timezone: {}
 
 massUpdateForm:
-  country: {}
+  - key: country
+
+searchForm:
+  column1:
+    - key: num
+    - key: name
+  column2:
+    - key: country
+  column3:
+    - key: country

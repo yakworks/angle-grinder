@@ -18,11 +18,11 @@ export default () => ({
 class Controller {
   opts = {
     selectedButtons: {
-      massUpdate: { icon: 'fa-edit', tooltip: 'Mass Update' },
-      xlsExport: { icon: 'fa-table', tooltip: 'Export to Excel' }
+      massUpdate: { icon: 'mdi-square-edit-outline', tooltip: 'Mass Update' },
+      xlsExport: { icon: 'mdi-microsoft-excel', tooltip: 'Export to Excel' }
     },
     leftButtons: {
-      create: { icon: 'fa-plus', tooltip: 'Create New' }
+      create: { icon: 'mdi-text-box-plus-outline', tooltip: 'Create New' }
     },
     showQuickSearch: true,
     showSearchFormButton: true
@@ -67,6 +67,11 @@ class Controller {
         // scope.$apply()
       }
     })
+  }
+
+  clearSearchInput() {
+    this.quickSearchEntry = ''
+    this.gridCtrl.quickSearch('')
   }
 
   fireButtonClick(key, btnItem, event) {

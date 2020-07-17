@@ -13,7 +13,7 @@ class Controller {
 
 export default () => ({
   restrict: 'E',
-  //replace: true,
+  // replace: true,
   controllerAs: 'fbCtrl',
   bindToController: {
     model: '<',

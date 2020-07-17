@@ -13,18 +13,17 @@ const template = `
 </div>
 `
 class ListCtrl extends BaseListCtrl {
-
   static $inject = _.union(super.$inject, ['dataStoreApi'])
-  constructor(...args) {
-    super(...args)
-  }
+  // constructor(...args) {
+  //   super(...args)
+  // }
 
   $onInit() {
     this.isConfigured = false
-    console.log("this.dataStoreApi", this.dataStoreApi)
+    console.log('this.dataStoreApi', this.dataStoreApi)
     this.dataApi = this.dataStoreApi[this.apiKey]
-    console.log("this.dataApi", this.dataApi)
-    console.log("ListCtrl ", this)
+    console.log('this.dataApi', this.dataApi)
+    console.log('ListCtrl ', this)
     this.cfg = {}
     super.doConfig()
   }

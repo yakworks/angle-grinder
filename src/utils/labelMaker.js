@@ -12,6 +12,6 @@ export function parseWords(inString) {
   return inString
 }
 
-export function lastPathKey(modelPath){
+export function lastPathKey(modelPath) {
   return _.split(modelPath, '.').slice(-1).pop()
 }

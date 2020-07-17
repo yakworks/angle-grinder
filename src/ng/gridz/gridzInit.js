@@ -1,6 +1,6 @@
 // import Log from 'angle-grinder/src/utils/Log'
 import _ from 'lodash'
-import { forEach } from 'angular-ui-router'
+// import { forEach } from 'angular-ui-router'
 import { makeLabel } from '../../utils/labelMaker'
 /**
 * functions to initialize the grid
@@ -100,8 +100,8 @@ export function setupFormatters(gridCtrl, gridEl, options) {
  * transforms colModel, setups default label, etc
  */
 export function setupColModel(options) {
-  options.colModel.forEach((col,i) => {
-    if(!col.label) col.label = makeLabel(col.name)
+  options.colModel.forEach((col, i) => {
+    if (!col.label) col.label = makeLabel(col.name)
   })
 }
 

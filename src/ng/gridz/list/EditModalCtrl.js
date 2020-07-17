@@ -30,7 +30,7 @@ export default class EditModalCtrl {
   }
 
   cancel() {
-    console.log("cancel this", this)
+    console.log('cancel this', this)
     // prevents the "Possibly unhandled rejection: cancel"
     this.modal.result.catch(() => this.modal.close())
     this.modal.dismiss('cancel')

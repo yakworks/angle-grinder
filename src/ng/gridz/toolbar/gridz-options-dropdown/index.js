@@ -4,12 +4,12 @@
 class Controller {
   defaultMenuItems = [
     {
-      display: 'Refresh', icon: 'fa-refresh', action: () => this.gridCtrl.reloadKeepSelected()
+      display: 'Refresh', icon: 'mdi-refresh', action: () => this.gridCtrl.reloadKeepSelected()
     },
     { display: 'Reset Sort', icon: 'fa-sort', action: () => this.gridCtrl.resetSort() },
     { divider: true },
-    { display: 'Column Config', icon: 'fa-columns', action: () => this.ColumnConfigServ.open(this.gridCtrl) },
-    { display: 'Density Toggle', icon: 'fa-compress', action: () => this.gridCtrl.isDense = !this.gridCtrl.isDense },
+    { display: 'Column Config', icon: 'mdi-table-column-width', action: () => this.ColumnConfigServ.open(this.gridCtrl) },
+    { display: 'Density Toggle', icon: 'mdi-arrow-expand-vertical', action: () => this.gridCtrl.isDense = !this.gridCtrl.isDense },
     { divider: true },
     { display: 'Hide/Show Toggle', icon: 'fa-minus' },
     { display: 'Expand', icon: 'fa-expand' }

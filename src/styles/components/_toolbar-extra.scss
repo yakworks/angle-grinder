@@ -110,6 +110,16 @@ $toolbar-dense-control-height: 2rem !default;
       }
     }
 
+    .control.has-icons-right .input, .control.has-icons-right .select select {
+      padding-right: $toolbar-dense-control-height;
+    }
+    .control.has-icons-left .input, .control.has-icons-left .select select {
+      padding-left: $toolbar-dense-control-height;
+    }
+    .control.has-icons-left .icon, .control.has-icons-right .icon {
+      width: $toolbar-dense-control-height;
+      height: $toolbar-dense-control-height;
+    }
   }
 }
 

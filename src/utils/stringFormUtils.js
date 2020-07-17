@@ -12,7 +12,7 @@ export class StringUtility {
   }
 
   // if a.b.c will return just c
-  lastPathKey(modelPath){
+  lastPathKey(modelPath) {
     return _.split(modelPath, '.').slice(-1).pop()
   }
 
