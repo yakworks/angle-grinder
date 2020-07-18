@@ -21,11 +21,13 @@ editForm:
       className: column is-3
     - key: num
       label: ''
+      required: true
       hint: Unique Cust Num
       placeholder: Customer Number
       className: column is-3
     - key: name
       label: ''
+      required: true
       hint: Customer Name
       placeholder: Customer Name
 

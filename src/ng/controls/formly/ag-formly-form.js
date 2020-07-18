@@ -22,6 +22,7 @@ function formlyForm(formlyUsability, formlyWarn, $parse, formlyConfig, $interpol
     template: formlyFormGetTemplate,
     replace: true,
     transclude: true,
+    require: ['^agForm'],
     scope: {
       fields: '=',
       foo: '=',
@@ -34,7 +35,6 @@ function formlyForm(formlyUsability, formlyWarn, $parse, formlyConfig, $interpol
   }
 
   function formlyFormGetTemplate(el, attrs) {
-    console.log('formlyFormGetTemplate ')
     const rootEl = getRootEl()
     const fieldRootEl = getFieldRootEl()
     const formId = `formly_${currentFormId++}`
@@ -43,7 +43,7 @@ function formlyForm(formlyUsability, formlyWarn, $parse, formlyConfig, $interpol
       parentFormAttributes = copyAttributes(el.parent().parent()[0].attributes)
     }
     return `
-        <${rootEl} class="formly" ag-form is-horizontal
+        <${rootEl} class="formly"
                  name="${getFormName()}"
                  role="form" ${parentFormAttributes}>
           ${wrapColumns(getFieldRepeat())}
@@ -73,8 +73,6 @@ function formlyForm(formlyUsability, formlyWarn, $parse, formlyConfig, $interpol
     }
 
     function wrapColumns(fieldRepeat) {
-      console.log('attrs', attrs)
-      console.log('isAttrTruthy(attrs.isColumns)', isAttrTruthy(attrs.isColumns))
       if (isAttrTruthy(attrs.isColumns)) {
         return `
           <div class="columns">

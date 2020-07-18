@@ -22,7 +22,6 @@ export default class BaseListCtrl {
 
   async doConfig() {
     let cfg = await appConfigApi.getConfig(this.apiKey)
-    console.log('cfg', cfg)
     cfg = _.cloneDeep(cfg)
     // assign default datatype to grid loader
     cfg.gridOptions.datatype = (params) => this.gridLoader(params)

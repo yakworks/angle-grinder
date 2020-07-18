@@ -73,7 +73,6 @@ export default function FormlyFormController(
     if (!angular.isArray(fieldTransforms)) {
       fieldTransforms = [fieldTransforms]
     }
-    console.log('setupFields fieldTransforms', fieldTransforms)
     angular.forEach(fieldTransforms, function transformFields(fieldTransform) {
       if (fieldTransform) {
         $scope.fields = fieldTransform($scope.fields, $scope.model, $scope.options, $scope.form)
