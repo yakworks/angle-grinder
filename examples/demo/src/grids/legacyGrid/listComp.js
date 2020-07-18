@@ -1,5 +1,5 @@
 import exampleGridOptions from "./exampleGridOptions"
-import MassUpdateFormCtrl from "../commonComponents/massUpdate/MassUpdateFormCtrl";
+import MassUpdateFormCtrl from "./commonComponents/massUpdate/MassUpdateFormCtrl";
 import template from './list.html'
 
 /* @ngInject */
@@ -19,11 +19,11 @@ class ListCtrl {
     this.DialogCrudCtrlMixin($scope, {
       Resource: Invoices,
       gridName: 'exampleGrid',
-      template: require('../commonComponents/form/formDialog.html')
+      template: require('./commonComponents/form/formDialog.html')
     })
 
     this.MassUpdateMixin($scope, {
-      template: require('../commonComponents/massUpdate/massUpdateForm.html'),
+      template: require('./commonComponents/massUpdate/massUpdateForm.html'),
       controller: MassUpdateFormCtrl,
       gridName: 'exampleGrid'
     })

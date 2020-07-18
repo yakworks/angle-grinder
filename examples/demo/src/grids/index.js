@@ -20,8 +20,8 @@ gapp.config(['agDateFilterProvider', provider => // set default date format
 ])
 
 gapp.run(function($templateCache) {
-  $templateCache.put('exampleGridSearchForm.html', require('./commonComponents/searchForm/searchForm.html'))
-  $templateCache.put('formDialog.html', require('./commonComponents/form/formDialog.html'))
+  $templateCache.put('exampleGridSearchForm.html', require('./legacyGrid/commonComponents/searchForm/searchForm.html'))
+  $templateCache.put('formDialog.html', require('./legacyGrid/commonComponents/form/formDialog.html'))
 })
 
 export default gapp.name

@@ -1,6 +1,6 @@
 // import BaseCtrl from 'angle-grinder/src/ng/utils/BaseCtrl'
 import { expose } from 'angle-grinder/src/ng/utils/ngHelpers'
-import MassUpdateFormCtrl from "../commonComponents/massUpdate/MassUpdateFormCtrl"
+import MassUpdateFormCtrl from "../legacyGrid/commonComponents/massUpdate/MassUpdateFormCtrl"
 
 /* @ngInject */
 export default class ListCtrl {
@@ -31,7 +31,7 @@ export default class ListCtrl {
     this.gridOptions = this.ConfigCache.get('/api/invoices/gridOptions', updateGridOptions)
 
     this.MassUpdateMixin($scope, {
-      template: require('../commonComponents/massUpdate/massUpdateForm.html'),
+      template: require('../legacyGrid/commonComponents/massUpdate/massUpdateForm.html'),
       controller: MassUpdateFormCtrl,
       gridName: 'exampleGrid'
     })
