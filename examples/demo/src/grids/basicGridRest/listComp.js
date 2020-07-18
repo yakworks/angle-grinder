@@ -18,7 +18,7 @@ class ListCtrl extends BaseListCtrl {
 
   $onInit() {
     this.isConfigured = false
-    console.log("ListCtrl ", this)
+    // console.log("ListCtrl ", this)
     this.cfg = {
       "massUpdateForm": [
         {

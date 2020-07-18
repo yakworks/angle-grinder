@@ -1,6 +1,6 @@
 import angular from 'angular'
 import grid2Mod from './module'
-import GridzCtrl from './GridzCtrl'
+import GridCtrl from './GridCtrl'
 // import Log from 'angle-grinder/src/utils/Log'
 import _ from 'lodash'
 
@@ -67,7 +67,7 @@ angular.module(grid2Mod).directive('gridz',
 
     return {
       restrict: 'E',
-      controller: GridzCtrl,
+      controller: GridCtrl,
       controllerAs: 'gridCtrl',
       bindToController: {
         toolbarOptions: '<',

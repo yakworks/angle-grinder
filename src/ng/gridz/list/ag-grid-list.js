@@ -1,10 +1,11 @@
-import gridMod from '../module'
 import BaseListCtrl from 'angle-grinder/src/ng/gridz/list/BaseListCtrl'
 // import restStoreApi from '../../store/RestStoreApi'
 import _ from 'lodash'
 
 const template = `
 <div class="pt-2">
+  <ag-grid-list-search ng-if="$ctrl.isConfigured" list-ctrl="$ctrl" ng-show="$ctrl.showSearchForm">
+  </ag-grid-list-search>
   <gridz ng-if="$ctrl.isConfigured" grid-options="$ctrl.cfg.gridOptions"
         toolbar-options="$ctrl.cfg.toolbarOptions"
         grid-id="basicGrid"
@@ -26,11 +27,17 @@ class ListCtrl extends BaseListCtrl {
   }
 }
 
-export default angular
-  .module(gridMod)
-  .component('agGridList', {
-    bindings: { apiKey: '<' },
-    template: template,
-    controller: ListCtrl
-  })
-  .name
+export default {
+  bindings: { apiKey: '<' },
+  template: template,
+  controller: ListCtrl
+}
+
+// export default angular
+//   .module(gridMod)
+//   .component('agGridList', {
+//     bindings: { apiKey: '<' },
+//     template: template,
+//     controller: ListCtrl
+//   })
+//   .name
