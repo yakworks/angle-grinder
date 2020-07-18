@@ -6,13 +6,11 @@ import agPathWithContext from '../pathWithContext'
 import xeditable from 'angular-xeditable'
 // import _ from 'lodash'
 import uibModName from 'angular-ui-bootstrap'
-import formlyModName from 'angular-formly'
 
 const MOD_NAME = 'angleGrinder.forms'
 export default MOD_NAME
 var forms = angular.module(MOD_NAME, [
   uibModName,
-  formlyModName,
   xeditable,
   agPathWithContext,
   agCommon,

@@ -20,10 +20,7 @@ class ListCtrl extends BaseListCtrl {
 
   $onInit() {
     this.isConfigured = false
-    console.log('this.dataStoreApi', this.dataStoreApi)
     this.dataApi = this.dataStoreApi[this.apiKey]
-    console.log('this.dataApi', this.dataApi)
-    console.log('ListCtrl ', this)
     this.cfg = {}
     super.doConfig()
   }

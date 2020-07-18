@@ -43,14 +43,14 @@ angular.module(commonModule).directive('tagInput', () => ({
       return $scope.tags = tagArray.join(',')
     }
 
-    $scope.$watch('tagVal', function(newVal, oldVal) {
-      if ((newVal !== oldVal) || (newVal !== undefined)) {
-        const tempEl = $('<span>' + newVal + '</span>').appendTo('body')
-        $scope.inputWidth = tempEl.width() + 5
-        if ($scope.inputWidth < $scope.defaultWidth) { $scope.inputWidth = $scope.defaultWidth }
-        return tempEl.remove()
-      }
-    })
+    // $scope.$watch('tagVal', function(newVal, oldVal) {
+    //   if ((newVal !== oldVal) || (newVal !== undefined)) {
+    //     const tempEl = $('<span>' + newVal + '</span>').appendTo('body')
+    //     $scope.inputWidth = tempEl.width() + 5
+    //     if ($scope.inputWidth < $scope.defaultWidth) { $scope.inputWidth = $scope.defaultWidth }
+    //     return tempEl.remove()
+    //   }
+    // })
 
     element.bind('keydown', function(e) {
       const key = e.which

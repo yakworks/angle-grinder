@@ -1,0 +1,17 @@
+<form name="tagInputForm" ag-form is-horizontal label-class="is-2" autocomplete="off" novalidate>
+  <ag-input-list label="Nums" ng-model="$ctrl.vm.nums"
+    hint="enter on or more numbers" placeholder="Add a num" required>
+    <ag-button icon-solo="fa-heart" class="has-text-danger is-addon"></ag-button>
+  </ag-input-list>
+  <ag-input-list label="Preset" ng-model="$ctrl.vm.predefined"></ag-input-list>
+  <p>older tag-input</p>
+  <tag-input label="Nums" ng-model="$ctrl.vm.nums">
+    <button class="button is-addon" type="button" ng-click="$ctrl.alert()"><i class="fa fa-inbox"></i></button>
+  </tag-input>
+  <tag-input label="Predefined" ng-model="$ctrl.vm.predefined"></tag-input>
+
+  <div class="control">
+    <ag-button type="submit" color="primary">Submit</ag-button>
+  </div>
+</form>
+<pre ng-cloak class="mt-4">model: {{$ctrl.vm | json}}</pre>

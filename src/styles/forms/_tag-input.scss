@@ -1,4 +1,10 @@
 
+$danger-border: rgba($danger, 0.40);
+
+.ng-submitted .field.ng-invalid .tag-input.input {
+  border-color: $danger-border;
+}
+
 .tag-input {
   //override inputs for div
   &.input {

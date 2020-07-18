@@ -1,14 +1,27 @@
 import _ from 'lodash'
 import { makeLabel } from '../../../utils/labelMaker'
 
+export function transformFields(fields) {
+  // if its a plain object and first key starts with column and its a columns layout
+  if (_.isPlainObject(fields) && Object.keys(fields)[0].startsWith('column')) {
+    const colarr = _.map(fields, (val, key) => {
+      const valCopy = val
+      return doTransform(valCopy)
+    })
+    return { columns: colarr }
+  } else {
+    return doTransform(fields)
+  }
+}
+
 /**
  * transforms our simplified options into the formly way
  * @param {*} opts
  */
-export function transformOptions(opts) {
-  let optsAr = ensureArray(opts)
-  optsAr = doReduce(optsAr)
-
+export function doTransform(opts) {
+  // if its a plain object and first key starts with column and its a columns layout
+  // let optsAr = ensureArray(opts)
+  const optsAr = doReduce(ensureArray(opts))
   return optsAr
 }
 
@@ -28,11 +41,12 @@ function ensureArray(cfg) {
 }
 
 function doReduce(optsAr) {
-  const tplOptsKeys = ['label', 'required', 'placeholder', 'minLength', 'maxLength', 'rows', 'dataApiKey']
+  const tplOptsKeys = ['label', 'required', 'placeholder', 'hint', 'minLength',
+    'maxLength', 'rows', 'dataApiKey', 'selectOptions']
 
   return optsAr.reduce(function(accum, field) {
     if (field.fieldGroup) {
-      field.fieldGroup = doReduce(ensureArray(field.fieldGroup))
+      field.fieldGroup = doTransform(field.fieldGroup)
       // make sure each item in field group has columns class
       field.fieldGroup.forEach(it => {
         if (!it.className) it.className = 'column'
@@ -51,7 +65,9 @@ function doReduce(optsAr) {
       // merge in defaults for label and placeholder if they don't exist
       if (_.isUndefined(templateOptions.label)) templateOptions.label = makeLabel(field.key)
       if (_.isUndefined(templateOptions.placeholder)) templateOptions.placeholder = templateOptions.label
-
+      if (field.type === 'select') {
+        _.defaultsDeep(templateOptions, { selectOptions: { useDataObject: true } })
+      }
       _.defaultsDeep(field, { templateOptions })
     }
     accum.push(field)

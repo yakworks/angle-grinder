@@ -1,6 +1,4 @@
-// turn off formly's api-check before its loaded. should never be on in production
 import formsModule from './formsModule'
-import './formlyTypes'
 import './directives/agBind'
 import './directives/agDeleteButton'
 import './directives/agMaxLines'
@@ -29,8 +27,5 @@ import './services/MassUpdateHandler'
 import './services/MassUpdateMixin'
 import './services/PanelFormMixin'
 import './services/SinglePageCrudMixin'
-
-const apiCheck = require('api-check')
-apiCheck.globalConfig.disabled = true
 
 export default formsModule

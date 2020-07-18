@@ -63,6 +63,7 @@ angular.module('ui.select2', [])
 
             if (opts.multiple) {
               isMultiple = true
+              if (_.isUndefined(opts.closeOnSelect)) opts.closeOnSelect = false
             }
             const apiKey = attrs.apiKey
             if (apiKey) opts.dataApiKey = apiKey

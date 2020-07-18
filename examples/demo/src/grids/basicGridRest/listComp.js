@@ -41,7 +41,7 @@ class ListCtrl extends BaseListCtrl {
   }
 
   displaySelectedRowsData() {
-    console.log("displaySelectedRowsData")
+    // console.log("displaySelectedRowsData")
     this.selectedRowsData = this.gridCtrl.getSelectedRows()
   }
 
