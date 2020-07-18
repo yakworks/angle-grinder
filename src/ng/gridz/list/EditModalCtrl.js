@@ -2,6 +2,8 @@
 
 // see https://stackoverflow.com/questions/53349705/constructor-and-class-properties-within-javascript-mixins
 // and https://alligator.io/js/class-composition/ for class composition
+
+// TODO change to https://github.com/likeastore/ngDialog#api
 export default class EditModalCtrl {
   constructor($uibModalInstance, $scope, dataApi, vm, cfg, title) {
     this.modal = $uibModalInstance
@@ -16,7 +18,6 @@ export default class EditModalCtrl {
     // call the agForm submit so it brodcasts and shows the errors
     const { agForm } = this.$scope
     agForm.submit()
-    console.log('this', this)
     if (agForm.form.$invalid || agForm.form.$pristine) return
     this.isSaving = true
     try {
@@ -30,7 +31,6 @@ export default class EditModalCtrl {
   }
 
   cancel() {
-    console.log('cancel this', this)
     // prevents the "Possibly unhandled rejection: cancel"
     this.modal.result.catch(() => this.modal.close())
     this.modal.dismiss('cancel')

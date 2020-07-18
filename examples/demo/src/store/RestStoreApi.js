@@ -19,6 +19,7 @@ export class RestStoreApi {
   get customer() { return makeDataApi("customer")}
   get invoice() { return makeDataApi("invoice")}
   get tranState() { return makeDataApi("tranState")}
+  get tag() { return makeDataApi("tag")}
 
   appConfig(configKey) {
     return ky.get(`api/appConfig/${configKey}`).json()

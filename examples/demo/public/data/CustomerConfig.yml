@@ -21,10 +21,12 @@ editForm:
       className: column is-3
     - key: num
       label: ''
+      hint: Unique Cust Num
       placeholder: Customer Number
       className: column is-3
     - key: name
       label: ''
+      hint: Customer Name
       placeholder: Customer Name
 
   street:
@@ -49,6 +51,10 @@ editForm:
       className: column is-2
   country: {}
   timezone: {}
+  tags:
+    type: select
+    selectOptions: { multiple: true, showSelectAll: true }
+    dataApiKey: tag
 
 massUpdateForm:
   - key: country
@@ -56,8 +62,7 @@ massUpdateForm:
 searchForm:
   column1:
     - key: num
-    - key: name
   column2:
-    - key: country
+    - key: name
   column3:
     - key: country

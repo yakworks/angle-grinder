@@ -1,4 +1,4 @@
-import template from './tag-input.html'
+import template from './component.html'
 
 class controller {
   vm = {
@@ -10,6 +10,6 @@ class controller {
   }
 }
 
-export default angular.module('ag.demo.tagInput', [])
-  .component('tagInputDemo', { template, controller })
+export default angular.module('ag.demo.inputListDemo', [])
+  .component('inputListDemo', { template, controller })
   .name

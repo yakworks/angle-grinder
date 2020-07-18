@@ -1,0 +1,11 @@
+<ag-formly-form model="$ctrl.vm" fields="$ctrl.editFormFields" form="$ctrl.editFormCtrl">
+</ag-formly-form>
+<hr>
+<p>is-columns true and proper formatting for fields</p>
+<ag-formly-form model="$ctrl.vm"
+  fields="$ctrl.editCols" form="$ctrl.editColsCtrl" is-columns="true">
+</ag-formly-form>
+
+<pre ng-cloak class="mt-4">$ctrl.editFormCtrl.$invalid: {{$ctrl.editFormCtrl.$invalid}}
+  <br>model: {{$ctrl.vm | json}}
+</pre>

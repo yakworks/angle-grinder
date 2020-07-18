@@ -5,7 +5,7 @@ import MassUpdateModalCtrl from './MassUpdateModalCtrl'
 import { argsMerge } from '../../utils/classUtils'
 import appConfigApi from '../../../dataApi/AppConfigApi'
 import toast from 'angle-grinder/src/tools/toast'
-import { transformOptions } from '../../controls/formly/helpers'
+// import { transformOptions } from '../../controls/formly/helpers'
 
 // see https://stackoverflow.com/questions/53349705/constructor-and-class-properties-within-javascript-mixins
 // and https://alligator.io/js/class-composition/ for class composition
@@ -13,6 +13,7 @@ export default class BaseListCtrl {
   showSearchForm = true
   editTemplate = require('./editDialog.html')
   massUpdateTemplate = require('./massUpdateDialog.html')
+  searchTemplate = require('./searchForm.html')
 
   static $inject = ['$scope', '$element', '$uibModal', '$timeout']
   constructor(...args) {
@@ -21,15 +22,13 @@ export default class BaseListCtrl {
 
   async doConfig() {
     let cfg = await appConfigApi.getConfig(this.apiKey)
+    console.log('cfg', cfg)
     cfg = _.cloneDeep(cfg)
     // assign default datatype to grid loader
     cfg.gridOptions.datatype = (params) => this.gridLoader(params)
     if (!cfg.toolbarOptions) cfg.toolbarOptions = {}
     // give toolbar scope
     cfg.toolbarOptions.scope = () => this.$scope
-    if (cfg.editForm) cfg.editForm = transformOptions(cfg.editForm)
-    if (cfg.massUpdateForm) cfg.massUpdateForm = transformOptions(cfg.massUpdateForm)
-    console.log('doConfig this', this)
     _.defaults(this.cfg, cfg)
     this.isConfigured = true
   }
@@ -37,6 +36,7 @@ export default class BaseListCtrl {
   get gridCtrl() { return this.$element.find('gridz').controller('gridz') }
   get editModalCtrl() { return EditModalCtrl }
   get massUpdateModalCtrl() { return MassUpdateModalCtrl }
+  // get searchCtrl() { return SearchCtrl }
 
   fireRowAction(model, menuItem) {
     switch (menuItem.key) {
@@ -121,7 +121,7 @@ export default class BaseListCtrl {
     )
     modInst.result
       .then(res => {
-        console.log('res.data', res.data)
+        // console.log('res.data', res.data)
         res.data.forEach(row => {
           this.gridCtrl.updateRow(row.id, row, false)
         })

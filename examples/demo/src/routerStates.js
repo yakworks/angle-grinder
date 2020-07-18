@@ -45,8 +45,12 @@ const formStates = {
       component: 'datepickerDemoIndex'
     },
     {
-      name: 'tagInput',
-      component: 'tagInputDemoIndex'
+      name: 'input-csv-list',
+      component: 'agInputListDemoIndex'
+    },
+    {
+      name: 'formly-example',
+      component: 'agFormlyDemoIndex'
     },
     {
       name: 'xedit',

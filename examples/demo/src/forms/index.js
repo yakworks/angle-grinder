@@ -7,10 +7,11 @@ import selectRestModule from './select-rest'
 import select2Module from './select2-sandbox'
 import xeditModule from './xedit-form'
 import checkboxModule from './checkbox'
-import tagInputModule from './tag-input'
+import inputListModule from './input-list'
 import datepickerModule from './datepicker'
 import textarea from './textarea'
 import amount from './amount'
+import formlyModule from './formly'
 
 // export module name
 export default angular
@@ -24,8 +25,9 @@ export default angular
     horSandModule,
     validateSandModule,
     datepickerModule,
-    tagInputModule,
+    inputListModule,
     textarea,
-    amount
+    amount,
+    formlyModule
   ])
   .name

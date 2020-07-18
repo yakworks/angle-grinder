@@ -76,7 +76,6 @@ class Controller {
 
   fireButtonClick(key, btnItem, event) {
     btnItem.key = key
-    console.log('fireButtonClick btnItem', btnItem)
     // if it has an action then fire that
     if (_.isFunction(btnItem.action)) {
       btnItem.action(btnItem, event)

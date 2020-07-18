@@ -9,6 +9,7 @@ const noProxy = process.env.NO_PROXY === 'true'
 const invoiceData = require('../public/data/Invoices.json')
 const tranStateData = require('../public/data/TranStates.json')
 const customerData = require('../public/data/Customers.json')
+const tagData = require('../public/data/Tags.json')
 //const invoiceConfigData = require('../public/data/InvoiceConfig.json')
 //const custConfigYml = require('../public/data/CustomerConfig.yml')
 //const custConfigData = yaml.load(fs.readFileSync('./examples/demo/public/data/CustomerConfig.yml', 'utf8'))
@@ -17,6 +18,7 @@ const proxy = {
   ...generateApi("invoice", invoiceData),
   ...generateApi("tranState", tranStateData),
   ...generateApi("customer", customerData),
+  ...generateApi("tag", tagData),
 
   'GET /api/appConfig/invoice': (req, res) => {
     const invoiceConfigData = yaml.load(fs.readFileSync('./examples/demo/public/data/InvoiceConfig.yml', 'utf8'))

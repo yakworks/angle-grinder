@@ -1,8 +1,10 @@
 import angular from 'angular'
 import agFormMod from './ag-form'
+import agFormlyMod from './formly'
 import agCheckbox from './ag-checkbox'
 import agLabel from './ag-label'
 import agInput from './ag-input'
+import agInputList from './ag-input-list'
 import agInputBs from './ag-input-bs'
 import uiSelect2Mod from './ui-select2/ui.select2'
 import agSelect from './ag-select'
@@ -16,7 +18,6 @@ import agValMod from './ag-validation'
 import agTextarea from './ag-textarea'
 import agAmount from './ag-amount'
 import agOkCancel from './ag-ok-cancel'
-import agFormly from './formly/ag-formly'
 
 // import InputPasswordComponent from './ag-password/input-password.component'
 // import StringUtility from './string-utility';
@@ -26,12 +27,14 @@ export default MOD_NAME
 
 angular.module(MOD_NAME, [
   agFormMod,
+  agFormlyMod,
   uiSelect2Mod,
   agValMod
 ])
   .directive('agCheckbox', agCheckbox)
   .directive('agLabel', agLabel)
   .directive('agInput', agInput)
+  .directive('agInputList', agInputList)
   .directive('agSelect', agSelect)
   .directive('agDatepicker', agDatepicker)
   .directive('agDatepickerInput', agDatepickerInput)
@@ -43,4 +46,3 @@ angular.module(MOD_NAME, [
   .directive('agSelectRest', agSelectRest)
   .directive('agTextarea', agTextarea)
   .directive('agOkCancel', agOkCancel)
-  .directive('agFormly', agFormly)

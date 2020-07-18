@@ -1,9 +1,9 @@
 /* eslint-disable */
 import agMod from '~/angle-grinder'
 import _ from 'lodash'
-import {transformOptions} from './helpers'
+import {transformFields} from './helpers'
 
-describe('tranformOptions', () => {
+describe('transformFields', () => {
   let testOpts = {
     foo:{
       label: 'Cust #',
@@ -48,7 +48,8 @@ describe('tranformOptions', () => {
       templateOptions: {
         label: 'Baz Buzz',
         dataApiKey: 'barApi',
-        placeholder: 'Baz Buzz'
+        placeholder: 'Baz Buzz',
+        selectOptions: { useDataObject: true }
       }
     }
   ]
@@ -74,7 +75,8 @@ describe('tranformOptions', () => {
           templateOptions: {
             label: 'Baz Buzz',
             dataApiKey: 'barApi',
-            placeholder: 'Baz Buzz'
+            placeholder: 'Baz Buzz',
+            selectOptions: { useDataObject: true }
           }
         }
       ]
@@ -92,7 +94,7 @@ describe('tranformOptions', () => {
 
   describe('tranformOptions from object', function() {
     it('should tranformOptions from object', function() {
-      let topts = transformOptions(testOpts)
+      let topts = transformFields(testOpts)
       //console.log("topts", topts)
       topts.forEach((item, i) => {
         expect(item).toEqual(resultOpts[i])
@@ -101,7 +103,7 @@ describe('tranformOptions', () => {
     })
 
     it('should tranformOptions from array', function() {
-      let topts = transformOptions(testArray)
+      let topts = transformFields(testArray)
       //console.log("topts", topts)
       topts.forEach((item, i) => {
         expect(item).toEqual(resultOpts[i])
@@ -118,7 +120,7 @@ describe('tranformOptions', () => {
           maxLength: 50
         }
       ]
-      let formlyOpts = transformOptions(testFieldGroupArray)
+      let formlyOpts = transformFields(testFieldGroupArray)
       //console.log("topts", topts)
       expect(formlyOpts).toEqual(resultFieldGroup)
     })
@@ -131,9 +133,69 @@ describe('tranformOptions', () => {
         }
       }
 
-      let formlyOpts = transformOptions(testFieldGroupObject)
+      let formlyOpts = transformFields(testFieldGroupObject)
       //console.log("topts", topts)
       expect(formlyOpts).toEqual(resultFieldGroup)
+    })
+
+    it('should work with columns', function() {
+      let testCols = {
+        column1:{
+          foo:{}
+        },
+        column2:{
+          bar:{}
+        },
+        column3:{
+          baz:{},
+          buzz:{}
+        }
+      }
+
+      let resultCols = {
+        columns: [[
+          {
+            key: 'foo',
+            type: 'input',
+            templateOptions: {
+              label: 'Foo',
+              placeholder: 'Foo'
+            }
+          }
+        ],
+        [
+          {
+            key: 'bar',
+            type: 'input',
+            templateOptions: {
+              label: 'Bar',
+              placeholder: 'Bar'
+            }
+          }
+        ],
+        [
+          {
+            key: 'baz',
+            type: 'input',
+            templateOptions: {
+              label: 'Baz',
+              placeholder: 'Baz'
+            }
+          },
+          {
+            key: 'buzz',
+            type: 'input',
+            templateOptions: {
+              label: 'Buzz',
+              placeholder: 'Buzz'
+            }
+          }
+        ]]
+      }
+
+      let formlyOpts = transformFields(testCols)
+      //console.log("topts", topts)
+      expect(formlyOpts).toEqual(resultCols)
     })
   })
 
