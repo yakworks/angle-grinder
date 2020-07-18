@@ -1,4 +1,4 @@
-import exampleGridOptions from "../exampleGridOptions"
+import exampleGridOptions from "./exampleGridOptions"
 import MassUpdateFormCtrl from "../commonComponents/massUpdate/MassUpdateFormCtrl";
 import template from './list.html'
 
