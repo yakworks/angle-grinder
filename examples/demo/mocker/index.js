@@ -15,10 +15,10 @@ const tagData = require('../public/data/Tags.json')
 //const custConfigData = yaml.load(fs.readFileSync('./examples/demo/public/data/CustomerConfig.yml', 'utf8'))
 
 const proxy = {
-  ...generateApi("invoice", invoiceData),
-  ...generateApi("tranState", tranStateData),
-  ...generateApi("customer", customerData),
-  ...generateApi("tag", tagData),
+  ...generateApi("invoice", invoiceData).urls,
+  ...generateApi("tranState", tranStateData).urls,
+  ...generateApi("customer", customerData).urls,
+  ...generateApi("tag", tagData).urls,
 
   'GET /api/appConfig/invoice': (req, res) => {
     const invoiceConfigData = yaml.load(fs.readFileSync('./examples/demo/public/data/InvoiceConfig.yml', 'utf8'))
