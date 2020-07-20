@@ -186,6 +186,10 @@ const componentsStates = {
     {
       name: 'toolbar',
       component: 'toolbarDemoIndex'
+    },
+    {
+      name: 'sweetalert',
+      component: 'sweetalertDemoIndex'
     }
   ]
 }

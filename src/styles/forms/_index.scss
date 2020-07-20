@@ -1,21 +1,10 @@
-@import 'forms';
 @import 'elements';
 @import 'checkbox';
 @import 'switch';
 @import "tag-input";
-@import 'form-horizontal';
 @import 'form-underline';
-@import 'fields-panel';
 @import 'xeditable';
 @import "search-form";
 @import "ag-form";
 @import "datepicker";
 
-//Overrides, DEPRECATE this
-.form-control {
-  box-shadow: none;
-  font-size: 1rem;
-  line-height: $control-line-height;
-  height: $control-height;
-  padding: .375rem .75rem;
-}

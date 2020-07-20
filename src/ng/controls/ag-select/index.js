@@ -23,7 +23,7 @@ export default () => ({
   controller: Controller,
   require: {
     ngModelCtrl: 'ngModel',
-    formCtrl: '^agForm'
+    formCtrl: '^?agForm'
   },
   scope: {
     ...AgBaseControl.common.scope,

@@ -3,6 +3,7 @@ import dropdownModule from './dropdown'
 import buttonModule from './button'
 import toolbarModule from './toolbar'
 import contextMenuMod from './contextMenu'
+import sweetalertMod from './sweetalert'
 
 // export module name
 export default angular
@@ -10,6 +11,7 @@ export default angular
     buttonModule,
     dropdownModule,
     toolbarModule,
-    contextMenuMod
+    contextMenuMod,
+    sweetalertMod
   ])
   .name

@@ -40,9 +40,11 @@ $light  : $white-ter !default;
 $light-invert    : findColorInvert($light) !default;
 // Lists and maps
 $custom-colors: ("lighter": ($white-bis, $light-invert)) !default
+
 //******** Bulmas derived-variables.sass ***********/
 @import "~bulma/sass/utilities/derived-variables.scss";
-
+// @debug "$primary-dark: #{$primary-dark}";
+// @debug "colors: #{$colors}";
 //**** POST depends on derived-variables.sass ****/
 $text-color: $text !default;
 $text-dark: $text-strong !default;

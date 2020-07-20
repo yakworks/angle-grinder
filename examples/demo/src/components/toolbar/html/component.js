@@ -1,5 +1,4 @@
 import template from './component.html';
-import Swal from 'sweetalert2'
 
 class controller {
 

@@ -19,18 +19,7 @@ class ListCtrl extends BaseListCtrl {
   $onInit() {
     this.isConfigured = false
     // console.log("ListCtrl ", this)
-    this.cfg = {
-      "massUpdateForm": [
-        {
-          "key":"customer",
-          "type":"select",
-          "templateOptions":{
-            "label":"Customer",
-            "dataApiKey":"customer"
-          }
-        }
-      ]
-    }
+    this.cfg = {}
     this.doConfig()
   }
 
@@ -62,8 +51,5 @@ export default angular
   .component('basicRestGridDemo', {
     template: template,
     controller: ListCtrl
-  })
-  .component('basicRestSearchForm', {
-    template: require('../basicGrid/templates/searchForm.html')
   })
   .name
