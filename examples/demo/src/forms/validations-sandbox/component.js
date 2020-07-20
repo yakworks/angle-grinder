@@ -1,5 +1,6 @@
 import template from './component.html'
 import Swal from 'angle-grinder/src/tools/swal'
+import ky from 'ky'
 
 class controller {
   menuDisplay = 'Choose an action'
@@ -13,23 +14,22 @@ class controller {
 
   vm = {}
 
-  constructor(serverErrorsService, $http, $timeout) {
-    this.serverErrorsService = serverErrorsService
-    this.$http = $http
-    this.$timeout = $timeout
+  constructor($scope) {
+    this.$scope = $scope
   }
 
   menuItemClick = function(menuItem, e) {
     console.log('menuItemClick', { menuItem, e })
   }
 
-  save(form) {
-    this.$http.post('http://localhost:3000/validation/mock', this.vm).then(resp => {
-      console.log('all saved', resp)
-    }, errorResp => {
-      this.serverErrorsService.setErrors(form, errorResp)
-      console.log('form has validation errors', errorResp)
-    })
+  async serverValidate(agForm) {
+    console.log('this.$scope', this.$scope)
+    try {
+      const savedItem = await ky.post('http://localhost:3000/validation/mock', { json: this.vm }).json()
+    } catch (er) {
+      await agForm.setServerErrors(er.response)
+      console.log('form has validation errors', er.response)
+    }
   }
 }
 

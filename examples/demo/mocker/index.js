@@ -10,6 +10,8 @@ const invoiceData = require('../public/data/Invoices.json')
 const tranStateData = require('../public/data/TranStates.json')
 const customerData = require('../public/data/Customers.json')
 const tagData = require('../public/data/Tags.json')
+
+const custApi = require('./customerApi')
 //const invoiceConfigData = require('../public/data/InvoiceConfig.json')
 //const custConfigYml = require('../public/data/CustomerConfig.yml')
 //const custConfigData = yaml.load(fs.readFileSync('./examples/demo/public/data/CustomerConfig.yml', 'utf8'))
@@ -17,7 +19,7 @@ const tagData = require('../public/data/Tags.json')
 const proxy = {
   ...generateApi("invoice", invoiceData).urls,
   ...generateApi("tranState", tranStateData).urls,
-  ...generateApi("customer", customerData).urls,
+  ...custApi.urls,
   ...generateApi("tag", tagData).urls,
 
   'GET /api/appConfig/invoice': (req, res) => {

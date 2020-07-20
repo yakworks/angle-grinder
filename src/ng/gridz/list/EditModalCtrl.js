@@ -36,8 +36,10 @@ export default class EditModalCtrl {
     this.modal.dismiss('cancel')
   }
 
-  handleError(er) {
-    // FIXME handle a graceful way of displayiing errors
-    console.error(er)
+  async handleError(er) {
+    const { agForm } = this.$scope
+    // let errors = await er.response.json()
+    agForm.setServerErrors(er.response)
+    // console.error("handleError errors", errors)
   }
 }
