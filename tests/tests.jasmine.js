@@ -7,7 +7,7 @@ import 'angular-mocks'
 function importAll (r) {
   r.keys().forEach(r);
 }
-importAll(require.context('../src/ng/', true, /\.test\.js$/))
+importAll(require.context('../src/', true, /\.test\.js$/))
 //importAll(require.context('./unit/docs/', true, /\.js$/))
 
 //longer esm method

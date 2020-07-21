@@ -34,8 +34,8 @@ function makeMap(epoint, api) {
       [`GET /api/${epoint}`]: (req, res) => {
         // console.log("get invoice req.query  ", req.query)
         const { query } = req
-        api.search(query)
-        .then((data) => {
+        console.log("search query ", query)
+        api.search(query).then((data) => {
           // console.log("get invoice data", data)
           return res.json(data)
         })

@@ -9,13 +9,12 @@ export default class GridCtrl {
   isDense = false
 
   /* @ngInject */
-  constructor($rootScope, $scope, $element, $attrs, $q, $compile, hasSearchFilters,
+  constructor($rootScope, $scope, $element, $attrs, $compile, hasSearchFilters,
     FlattenServ, xlsData, csvData, cfpLoadingBar, $window) {
     this.$rootScope = $rootScope
     this.$scope = $scope
     this.$element = $element
     this.$attrs = $attrs
-    this.$q = $q
     this.$compile = $compile
     this.hasSearchFilters = hasSearchFilters
     this.FlattenServ = FlattenServ
@@ -122,17 +121,14 @@ export default class GridCtrl {
 
   // Reloads the grid with the current settings
   reload(options) {
-    if (options == null) { options = [] }
-    const deferred = this.$q.defer()
-
-    var unregister = this.$rootScope.$on('gridz:loadComplete', function(_, data) {
-      deferred.resolve(data)
-      return unregister()
+    return new Promise( (resolve) => {
+      if (options == null) { options = [] }
+      var unregister = this.$rootScope.$on('gridz:loadComplete', function(_, data) {
+        resolve(data)
+        return unregister()
+      })
+      this.getGridEl().trigger('reloadGrid', options)
     })
-
-    this.getGridEl().trigger('reloadGrid', options)
-
-    return deferred.promise
   }
 
   // reloads and keeps what was selected
@@ -353,26 +349,35 @@ export default class GridCtrl {
   }
 
   // Sets the grid search filters and triggers a reload
-  quickSearch(queryText) {
+  async quickSearch(queryText) {
     return this.search({ quickSearch: queryText })
   }
 
   // Sets the grid search filters and triggers a reload
-  search(filters) {
-    const deferred = this.$q.defer()
-
-    const params = {
-      page: 1,
-      search: this.hasSearchFilters(filters),
-      postData: { filters: JSON.stringify(filters) }
+  async search(filters) {
+    if (filters == null) { filters = {} }
+    // let filters = this.searchModel
+    try {
+      this.isSearching = true
+      const params = {
+        page: 1,
+        search: this.hasSearchFilters(filters),
+        postData: { filters: JSON.stringify(filters) }
+      }
+      console.log('search params', params)
+      this.setParam(params)
+      await this.reload()
+    } catch (er) {
+      console.error('search error', er)
     }
+  }
 
-    this.setParam(params)
-
-    const promise = this.reload()
-    promise.then(() => deferred.resolve(filters))
-
-    return deferred.promise
+  hasSearchFilters(filters){
+    return Object.values(filters).some(val => {
+      if (_.isNil(val)) return false
+      if (_.isString(val) && _.trim(val) === '') return false
+      return true
+    })
   }
 
   // Returns `true` if a columnt with the given id is hidden

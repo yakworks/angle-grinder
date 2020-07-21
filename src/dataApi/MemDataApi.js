@@ -45,25 +45,30 @@ class MemDataApi {
   }
 
   /** TODO - Given a sample item, returns a promise for all the data for items which have the same properties as the sample */
-  async qbe(exampleItem) {
-    const contains = (search, inString) =>
-      ('' + inString).indexOf('' + search) !== -1
+
+  qbe(items, exampleItem) {
+    const contains = (search, inString) => inString.toString().toLowerCase().includes(search.toString().toLowerCase())
+
     const matchesExample = (example, item) =>
       Object.keys(example).reduce((memo, key) => memo && contains(example[key], item[key]), true)
 
-    const items = await this.data()
     return items.filter(matchesExample.bind(null, exampleItem))
   }
 
   //
   async search(params) {
-    // console.log("query params", params)
-    let filtered = await this.data()
-    // console.log("query filtered", filtered)
-    if (params.filters) filtered = this.filter(filtered, params)
-    filtered = _.orderBy(filtered, params.sort, params.order)
+    let list = await this.data()
+    if (params.filters){
+      const filters = JSON.parse(params.filters)
+      if (filters.quickSearch){
+        list = searchAny(list, filters.quickSearch)
+      } else {
+        list = this.qbe(list, filters)
+      }
+    }
+    list = _.orderBy(list, params.sort, params.order)
     // console.log("query filtered orderBy", filtered)
-    const paged = pagination(filtered, params)
+    const paged = pagination(list, params)
     // console.log("query paged", paged)
     return paged
   }
@@ -84,6 +89,7 @@ class MemDataApi {
     const filter = JSON.parse(params.filters)
     // quick search
     if (filter.quickSearch) filtered = filterIt(items, filter.quickSearch)
+
     return filtered
   }
 
@@ -164,7 +170,7 @@ function findById(id, data) {
   return data.find((obj) => obj.id === numId)
 }
 
-function filterIt(arr, searchKey) {
+function searchAny(arr, searchKey) {
   return arr.filter(obj => hasSome(obj, searchKey))
 }
 
