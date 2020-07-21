@@ -34,6 +34,7 @@ dependencies {
   compile "org.grails.plugins:views-json"
   compile "org.grails.plugins:gorm-tools:$vPluginGormTools"
   testCompile "org.grails.plugins:gorm-tools:$vPluginGormTools"
+  compile "org.grails.plugins:gorm-rest-api:3.3.2-SNAPSHOT"
   compile "org.grails.plugins:view-tools:1.2.1"
   compile("org.grails.plugins:app-setup-config:1.0.3")
   compile "org.grails.plugins:hibernate5"
