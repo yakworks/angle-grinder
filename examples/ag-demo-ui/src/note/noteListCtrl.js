@@ -3,7 +3,6 @@ export default class NoteListCtrl {
   constructor($scope, resourceBuilder, DialogCrudCtrlMixin, $stateParams) {
     // Create resource for users (contacts)
     const Notes = resourceBuilder('/note')
-    console.log(Notes)
     $scope.gridOptions = {
       path: `/api/org/listNotes/${$stateParams.id}?format=json`,
       colModel: this.colModel(),

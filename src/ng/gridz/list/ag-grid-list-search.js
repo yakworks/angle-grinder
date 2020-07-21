@@ -19,7 +19,6 @@ export default {
   controller: function($scope) {
     this.$onInit = () => {
       $scope.listCtrl = this.listCtrl
-      console.log('$scope', $scope)
     }
   },
   bindings: {

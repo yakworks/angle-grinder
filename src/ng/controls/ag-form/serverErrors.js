@@ -5,8 +5,6 @@ import Log from '../../../utils/Log'
 function setServerErrors(form, errors) {
   // cleanup previous errors
   form.$serverErrors = {}
-  console.log('form', form)
-  console.log('errors', errors)
   // iterate through all server side validation errors
   const result = []
   for (const field in errors) {
@@ -16,7 +14,6 @@ function setServerErrors(form, errors) {
     if ((typeof message === 'object') && !_.isNil(formField)) {
       setServerErrors(formField, message)
     }
-
     // ..set an error for the current form
     if (typeof message === 'string') {
       if (formField) formField.$setValidity('$$server', false)
@@ -27,8 +24,8 @@ function setServerErrors(form, errors) {
       result.push(undefined)
     }
   }
-  console.log('result', result)
-  console.log('form.$serverErrors', form.$serverErrors)
+  // console.log('result', result)
+  // console.log('form.$serverErrors', form.$serverErrors)
   return result
 }
 

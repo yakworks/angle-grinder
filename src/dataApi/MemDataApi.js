@@ -135,7 +135,6 @@ class MemDataApi {
 
   async massUpdate(muItem) {
     const items = await this.data()
-    console.log('muItem', muItem)
     const { data, ids } = muItem
     const updateItems = []
     ids.forEach(id => {

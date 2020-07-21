@@ -171,7 +171,7 @@ export default class BaseListCtrl {
   async gridLoader(params) {
     this.gridCtrl.toggleLoading(true)
     try {
-      console.log("gridLoader params", params)
+      // console.log("gridLoader params", params)
       const data = await this.dataApi.search(params)
       this.gridCtrl.addJSONData(data)
     } catch (er) {

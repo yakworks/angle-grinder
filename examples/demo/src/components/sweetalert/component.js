@@ -60,7 +60,6 @@ class controller {
       // cancelButtonColor: '#d33',
       // confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
-      console.log("result", result)
       if (result.value) {
         toast.success('Your file has been deleted.', 'Deleted!')
         Swal.fire(

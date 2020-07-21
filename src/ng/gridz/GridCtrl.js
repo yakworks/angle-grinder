@@ -364,7 +364,7 @@ export default class GridCtrl {
         search: this.hasSearchFilters(filters),
         postData: { filters: JSON.stringify(filters) }
       }
-      console.log('search params', params)
+      // console.log('search params', params)
       this.setParam(params)
       await this.reload()
     } catch (er) {
