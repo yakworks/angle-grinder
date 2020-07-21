@@ -1,7 +1,7 @@
 import template from './component.html'
 
 import angular from 'angular'
-import Swal from 'sweetalert2'
+import Swal from 'angle-grinder/src/tools/swal'
 
 class controller {
   vm = {

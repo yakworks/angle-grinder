@@ -39,7 +39,7 @@ $sidenav-header-logo-tablet-height: $bar-breakpoint-height - 2rem !default; // 2
   left: 0;
   //transform: translateX(-281px);
   transition: all 0.3s;
-  z-index: 10000;
+  z-index: 1050;
   overflow-y: auto;
 
   &.is-active {

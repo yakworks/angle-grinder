@@ -25,7 +25,7 @@ export default () => ({
   template: require('./ag-label.html'),
   controller: Controller,
   require: {
-    formCtrl: '^agForm'
+    formCtrl: '^?agForm'
   },
   scope: {
     // label: '@',

@@ -1,5 +1,6 @@
 <div >
-  <basic-rest-search-form ng-show="$ctrl.showSearchForm"></basic-rest-search-form>
+  <ag-grid-list-search ng-if="$ctrl.isConfigured" list-ctrl="$ctrl" ng-show="$ctrl.showSearchForm">
+  </ag-grid-list-search>
 
   <gridz ng-if="$ctrl.isConfigured" grid-options="$ctrl.cfg.gridOptions"
         toolbar-options="$ctrl.cfg.toolbarOptions"

@@ -1,7 +1,8 @@
 <form name="customerForm" is-horizontal ag-submit="$ctrl.save(customerForm)" ag-form>
 
   <ag-input min-length="3" required ag-focus ng-model="$ctrl.vm.name"
-            placeholder="min length 3, enter bill for sim server error"></ag-input>
+            placeholder="min length 3, enter bill for sim server error"
+            hint="enter bill to see simulated server error"></ag-input>
   <ag-input type="email" ng-model="$ctrl.vm.email" placeholder="Must be valid email"></ag-input>
   <div class="columns is-mobile">
     <ag-label label-class="is-3">Amount</ag-label>
@@ -47,7 +48,7 @@
   <div class="form-group">
     <div class="controls">
       <button class="btn btn-primary">Save</button>
-      <button ng-click="$ctrl.save(form)" class="btn btn-primary">Bar</button>
+      <button ng-click="$ctrl.serverValidate(agForm)" class="btn btn-primary">serverValidate</button>
       <ag-dropdown menu-items="$ctrl.menuItems" menu-click="$ctrl.menuItemClick">Actions</ag-dropdown>
     </div>
   </div>

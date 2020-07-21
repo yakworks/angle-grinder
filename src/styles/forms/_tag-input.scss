@@ -14,6 +14,7 @@ $danger-border: rgba($danger, 0.40);
     flex-wrap: wrap;
     min-height: $input-height;
     height: auto; //set to auto so it can wrap and grow for lots of tags
+    margin-bottom: 0;
 
     &:focus-within {
       border-color: $input-focus-border-color;

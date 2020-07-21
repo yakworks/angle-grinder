@@ -15,7 +15,7 @@ angular.module(agValMod).directive('agValidationInline', function($timeout, $doc
   }
 
   return {
-    require: ['^agForm'],
+    require: ['^?agForm'],
     restrict: 'EA',
     scope: true,
     replace: true,
@@ -28,7 +28,8 @@ angular.module(agValMod).directive('agValidationInline', function($timeout, $doc
         let inputId = attrs.for || attrs.agValidationInline
         inputEl = document.getElementById(inputId)
         if (_.isNil(inputEl)) {
-          inputEl = element.closest('.controls').find('input:first-child, select:first-child, textarea:first-child')[0]
+          //console.log("element", element.closest('.field').find('.control .input'))
+          inputEl = element.closest('.field').find('input:first-child, select:first-child, textarea:first-child')[0]
           if (_.isNil(inputEl)) throw new Error('Can not find input element for the validation directive');
         }
         ngModel = angular.element(inputEl).controller('ngModel')

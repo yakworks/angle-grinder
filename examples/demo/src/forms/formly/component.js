@@ -9,17 +9,32 @@ class controller {
     baz:{}
   }
   editColFields = {
-    column1:{
-      foo:{}
-    },
-    column2:{
-      bar:{}
-    },
-    column3:{
-      baz:{}
-    }
+    column1:[
+      {key: 'foo'},
+      {key: 'foo2'}
+    ],
+    column2:[
+      {key: 'bar'},
+      {key: 'bar2'}
+    ],
+    column3:[
+      {key: 'baz'}
+    ]
   }
 
+  // editColFields = {
+  //   column1:[
+  //     {key: 'foo'},
+  //     {key: 'foo2'}
+  //   ],
+  //   column2:[
+  //     {key: 'bar'},
+  //     {key: 'bar2'}
+  //   ],
+  //   column3:[
+  //     {key: 'baz'}
+  //   ]
+  // }
 }
 
 export default angular.module('demo.formlyExample', [])

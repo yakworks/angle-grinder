@@ -140,7 +140,6 @@ class controller {
   customDisabledItem = {
     html: 'I\'m Disabled',
     enabled: () =>  {
-      console.log('can\'t click');
       return false;
     }
   };

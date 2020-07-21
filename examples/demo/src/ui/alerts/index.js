@@ -1,10 +1,8 @@
 import angular from 'angular'
-import SweetAlertCtrl from './SweetAlertCtrl'
 import ToastrDemoCtrl from './ToastrDemoCtrl'
 import NotificationIconsCtrl from './NotificationIconsCtrl'
 
 angular.module('app')
-  .controller('SweetAlertCtrl', SweetAlertCtrl)
   .controller('ToastrDemoCtrl', ToastrDemoCtrl)
   .controller('AlertDemoCtrl', function($scope) {
     $scope.alerts = [{

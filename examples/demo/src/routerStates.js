@@ -127,20 +127,26 @@ const gridsStates = {
   },
   children: [
     {
-      name: 'basic-rest-grid',
+      name: 'vanilla-agGridList',
       component: 'agGridList',
+      data: { title: 'Vanilla rest agGridList'},
       resolve: {
-        apiKey: () => "customer"
+        apiKey: () => "customer",
+        notification: () => ({
+          class: "is-primary is-light",
+          text: "Uses ui-router to send rest apiKey to generic agGridList component"
+        })
       }
+    },
+    {
+      name: 'override-rest-grid',
+      data: { title: 'Custom Grid Comp'},
+      component: 'basicGridRestIndex'
     },
     {
       name: 'basic-grid',
       component: 'basicGridIndex',
       url: '/foo'
-    },
-    {
-      name: 'config-rest-grid',
-      component: 'basicGridRestIndex'
     },
     {
       name: 'Legacy Demo Grid',
@@ -180,6 +186,10 @@ const componentsStates = {
     {
       name: 'toolbar',
       component: 'toolbarDemoIndex'
+    },
+    {
+      name: 'sweetalert',
+      component: 'sweetalertDemoIndex'
     }
   ]
 }

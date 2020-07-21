@@ -1,10 +1,10 @@
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2/dist/sweetalert2.js'
 
-const swalInstance = Swal.mixin({
-  showClass: {
-    // the default bouncy animation is really annoying/distressing, only thing not sweet about it
-    popup: 'animated fadeIn faster'
-  }
-})
+// const swalInstance = Swal.mixin({
+//   showClass: {
+//     // the default bouncy animation is really annoying/distressing, only thing not sweet about it
+//     popup: 'animated fadeIn faster'
+//   }
+// })
 
-export default swalInstance
+export default Swal // swalInstance

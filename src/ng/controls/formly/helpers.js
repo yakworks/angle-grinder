@@ -53,7 +53,8 @@ function doReduce(optsAr) {
       })
       _.defaults(field, { className: 'columns' })
     } else {
-      _.defaults(field, { type: 'input' })
+      const key = field.key
+      _.defaults(field, { type: 'input', name: key })
       // pull out the keys into own object
       const tplOpts = _.pick(field, tplOptsKeys)
       const templateOptions = field.templateOptions || {}

@@ -5,7 +5,6 @@ class controller {
   content = 'Click Me'
 
   btnClick = function(event) {
-    console.log('btnClick event ', event)
     toast.success('Clicked event')
   }
 }

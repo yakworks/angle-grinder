@@ -13,7 +13,7 @@ export default class BaseListCtrl {
   showSearchForm = true
   editTemplate = require('./editDialog.html')
   massUpdateTemplate = require('./massUpdateDialog.html')
-  searchTemplate = require('./searchForm.html')
+  //  searchTemplate = require('./searchForm.html')
 
   static $inject = ['$scope', '$element', '$uibModal', '$timeout']
   constructor(...args) {
@@ -171,12 +171,24 @@ export default class BaseListCtrl {
   async gridLoader(params) {
     this.gridCtrl.toggleLoading(true)
     try {
+      // console.log("gridLoader params", params)
       const data = await this.dataApi.search(params)
       this.gridCtrl.addJSONData(data)
     } catch (er) {
       this.handleError(er)
     } finally {
       this.gridCtrl.toggleLoading(false)
+    }
+  }
+
+  async search(filters) {
+    try {
+      this.isSearching = true
+      await this.gridCtrl.search(filters)
+    } catch (er) {
+      console.error('search error', er)
+    } finally {
+      this.isSearching = false
     }
   }
 

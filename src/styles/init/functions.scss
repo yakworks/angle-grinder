@@ -12,7 +12,7 @@ Use this one instead.
 // doesn't alway darken so override.
 @function findDarkColor($color) {
   @if type-of($color) == 'color' {
-    @return scale-color($danger, $lightness: -20%);
+    @return scale-color($color, $lightness: -20%);
   }
   @return $text-strong;
 }

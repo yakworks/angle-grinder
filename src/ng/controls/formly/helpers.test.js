@@ -36,6 +36,7 @@ describe('transformFields', () => {
     {
       key: 'foo',
       type: 'input',
+      name: 'foo',
       templateOptions: {
         label: 'Cust #',
         required: true,
@@ -45,6 +46,7 @@ describe('transformFields', () => {
     {
       key: 'bar.bazBuzz',
       type: 'select',
+      name: 'bar.bazBuzz',
       templateOptions: {
         label: 'Baz Buzz',
         dataApiKey: 'barApi',
@@ -60,6 +62,7 @@ describe('transformFields', () => {
       fieldGroup: [
         {
           key: 'foo',
+          name: 'foo',
           type: 'input',
           className: 'column',
           templateOptions: {
@@ -70,6 +73,7 @@ describe('transformFields', () => {
         },
         {
           key: 'bar.bazBuzz',
+          name: 'bar.bazBuzz',
           type: 'select',
           className: 'column',
           templateOptions: {
@@ -84,6 +88,7 @@ describe('transformFields', () => {
     {
       key: 'name',
       type: 'input',
+      name: 'name',
       templateOptions: {
         label: 'Name',
         maxLength: 50,
@@ -156,6 +161,7 @@ describe('transformFields', () => {
         columns: [[
           {
             key: 'foo',
+            name: 'foo',
             type: 'input',
             templateOptions: {
               label: 'Foo',
@@ -166,6 +172,7 @@ describe('transformFields', () => {
         [
           {
             key: 'bar',
+            name: 'bar',
             type: 'input',
             templateOptions: {
               label: 'Bar',
@@ -176,6 +183,7 @@ describe('transformFields', () => {
         [
           {
             key: 'baz',
+            name: 'baz',
             type: 'input',
             templateOptions: {
               label: 'Baz',
@@ -184,6 +192,7 @@ describe('transformFields', () => {
           },
           {
             key: 'buzz',
+            name: 'buzz',
             type: 'input',
             templateOptions: {
               label: 'Buzz',

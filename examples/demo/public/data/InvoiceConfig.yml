@@ -68,3 +68,26 @@ editForm:
     type: textarea
     placeholder: Notes
     rows: 3
+
+searchForm:
+  column1:
+    - key: refnum
+      type: input-list
+    - key: ext.orderNum
+      type: input-list
+    - key: amount
+      type: amount-range
+  column2:
+    - key: state
+      type: select
+      dataApiKey: tranState
+    - key: hasTax
+      type: checkbox
+      label: Taxable?
+    - key: tranDate
+      type: date-range
+  column3:
+    - key: customer
+      type: select
+      dataApiKey: customer
+    - key: comments

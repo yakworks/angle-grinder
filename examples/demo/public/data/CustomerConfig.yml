@@ -34,6 +34,7 @@ editForm:
   street:
     label: Address
     placeholder: Street
+    hint: enter 911 for a server error
 
   fieldGroupB:
     - type: label
@@ -53,6 +54,9 @@ editForm:
       className: column is-2
   country: {}
   timezone: {}
+  nested.foo:
+    label: 'nested.foo'
+    hint: enter 911 for a server error
   tags:
     type: select
     selectOptions: { multiple: true, showSelectAll: true }
@@ -64,7 +68,11 @@ massUpdateForm:
 searchForm:
   column1:
     - key: num
-  column2:
+      type: input-list
     - key: name
+      type: input-list
+  column2:
+    - key: city
+    - key: state
   column3:
     - key: country
