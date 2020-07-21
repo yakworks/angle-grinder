@@ -12,7 +12,7 @@ class UrlMappings {
         '/org'(controller: 'orgTabs', action: 'index')
         '/demo'(uri: "index.html")
         "500"(view: "/error")
-
+        '/api/orgApi/gridOptions'(controller: 'orgApi', action: 'gridOptions')
         group("/api") {
             delete "/$controller/$id(.$format)?" { action = "delete" }
             get "/$controller(.$format)?" { action = "index" }
@@ -26,9 +26,9 @@ class UrlMappings {
             }
             post "/$controller(.$format)?" { action = "save" }
             post "/$controller/$action?"()
-            put "/$controller/$id(.$format)?" { action = "update" }
-            patch "/$controller/$id(.$format)?" { action = "update" }
-            get "/$controller/$action/"()
+            put "/$controller/$id" { action = "update" }
+            patch "/$controller/$id" { action = "update" }
+            get "/$controller/$action/"{action = "gridOptions"}
             get "/$controller/$action/$id"()
         }
     }

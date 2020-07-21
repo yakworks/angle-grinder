@@ -6,7 +6,7 @@ import gorm.tools.Pager
 import gorm.tools.hibernate.criteria.CriteriaUtils
 import grails.converters.JSON
 
-class OrgApiController extends RestApiRepoController<Org> implements BaseDomainControllerTrait {
+class OrgApiController extends BaseApiDomainController<Org> {
     OrgApiController() {
         super(Org, false)
     }

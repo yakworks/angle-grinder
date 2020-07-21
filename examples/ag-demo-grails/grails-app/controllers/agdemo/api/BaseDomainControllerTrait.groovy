@@ -6,6 +6,7 @@ import grails.core.GrailsApplication
 import org.grails.plugins.appsetupconfig.AppSetupService
 
 trait BaseDomainControllerTrait {
+    static namespace = 'api'
     AppSetupService appSetupService
     GrailsApplication grailsApplication
     def getDomainClass() {
