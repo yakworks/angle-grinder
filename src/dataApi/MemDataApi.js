@@ -58,9 +58,9 @@ class MemDataApi {
   //
   async search(params) {
     let list = await this.data()
-    if (params.filters){
+    if (params.filters) {
       const filters = JSON.parse(params.filters)
-      if (filters.quickSearch){
+      if (filters.quickSearch) {
         list = searchAny(list, filters.quickSearch)
       } else {
         list = this.qbe(list, filters)
@@ -82,15 +82,6 @@ class MemDataApi {
       return acc
     }, [])
     return dta
-  }
-
-  filter(items, params) {
-    let filtered = items
-    const filter = JSON.parse(params.filters)
-    // quick search
-    if (filter.quickSearch) filtered = filterIt(items, filter.quickSearch)
-
-    return filtered
   }
 
   /** Returns a promise for the item with the given identifier */

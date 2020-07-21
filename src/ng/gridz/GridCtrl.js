@@ -121,7 +121,7 @@ export default class GridCtrl {
 
   // Reloads the grid with the current settings
   reload(options) {
-    return new Promise( (resolve) => {
+    return new Promise((resolve) => {
       if (options == null) { options = [] }
       var unregister = this.$rootScope.$on('gridz:loadComplete', function(_, data) {
         resolve(data)
@@ -372,7 +372,7 @@ export default class GridCtrl {
     }
   }
 
-  hasSearchFilters(filters){
+  hasSearchFilters(filters) {
     return Object.values(filters).some(val => {
       if (_.isNil(val)) return false
       if (_.isString(val) && _.trim(val) === '') return false
