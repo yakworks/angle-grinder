@@ -68,7 +68,11 @@ massUpdateForm:
 searchForm:
   column1:
     - key: num
-  column2:
+      type: input-list
     - key: name
+      type: input-list
+  column2:
+    - key: city
+    - key: state
   column3:
     - key: country

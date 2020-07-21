@@ -11,11 +11,10 @@
         </span>
         <input type='text' class="input"
           ng-model='$ctrl.newTag'
-          placeholder="{{::$ctrl.placeholder}}" />
+          placeholder="{{::$ctrl.placeholder}}">
       </div>
     </div>
-    <div class="control" ng-if="$ctrl.hasTranscluded" ng-transclude>
-    </div>
+    <div class="control" ng-if="$ctrl.hasTranscluded" ng-transclude></div>
   </div>
   <input class="input is-hidden"
         type="text"
