@@ -2,14 +2,16 @@ const delay = require('mocker-api/utils/delay')
 const _ = require('lodash');
 const yaml = require('js-yaml');
 const fs = require('fs');
-const generateApi = require('./generateApi')
+const generateApi = require('./generateApi').generateApi
 
 const noProxy = process.env.NO_PROXY === 'true'
 
+const people = require('../src/data/selects').people
 const invoiceData = require('../public/data/Invoices.json')
 const tranStateData = require('../public/data/TranStates.json')
-const customerData = require('../public/data/Customers.json')
+// const customerData = require('../public/data/Customers.json')
 const tagData = require('../public/data/Tags.json')
+const countryData = require('../public/data/countries.json')
 
 const custApi = require('./customerApi')
 //const invoiceConfigData = require('../public/data/InvoiceConfig.json')
@@ -33,21 +35,21 @@ const proxy = {
 
   'GET /countries/pickList': (req, res) => {
     const q = req.query.q
-    let rows = countriesWithId
+    let rows = countryData
     if(q) {
       rows = rows.filter(country =>  country.name.toLowerCase().indexOf(q.toLowerCase()) > -1)
     }
-    return res.json({ page: 1, records: 3, rows: rows, total: 1 })
+    return res.json({ page: 1, records: 3, data: rows, total: 1 })
   },
 
   'GET /users': (req, res) => {
     const q = req.query.q
-    let rows = data.people
+    let rows = people
     if(q) {
       rows = rows.filter(user =>  user.name.toLowerCase().indexOf(q.toLowerCase()) > -1)
     }
 
-    return res.json({ page: 1, records: 3, rows: rows, total: 1 })
+    return res.json({ page: 1, records: 3, data: rows, total: 1 })
   },
 
   'POST /validation/mock': (req, res) => {

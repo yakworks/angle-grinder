@@ -10,7 +10,7 @@ class Controller extends AgBaseControl {
     closeOnSelect: false,
     useDataObject: true,
     ajax: {
-      cache: true,
+      // cache: true,
       dataType: 'json',
       quietMillis: 250,
       data: function (term, pageNum) { // page is the one-based page number tracked by Select2
@@ -19,16 +19,17 @@ class Controller extends AgBaseControl {
           q: term, //search term
           page: pageNum, // page number
           // sorting and pagination
-          sort: 'id',
+          sort: 'name',
           order: 'asc',
           max: 20
         }
       },
       results: function (result, page) {
-        return { results: result.rows, more: page < result.total }
+        return { results: result.data, more: page < result.total }
       }
     },
-    formatResult: this.repoFormatResult,
+    displayFields:['num','name'],
+    formatResult: (item) => this.repoFormatResult(item),
     formatSelection: (item) => item.name,
     initSelection: angular.noop // needs to be here or it blows up setting value
     //dropdownCssClass: "bigdrop", // apply a special css
@@ -48,11 +49,12 @@ class Controller extends AgBaseControl {
   }
 
   repoFormatResult(item) {
+    let displayTds = ''
+    this.opts.displayFields.forEach( it => displayTds = `${displayTds} <td>${item[it]}</td>` )
     var markup = `
       <table class="table table-condensed select-rest-result">
         <tr>
-          <td>${item.num}</td>
-          <td>${item.name}</td>
+          ${displayTds}
         </tr>
       </table>
     `

@@ -4,12 +4,10 @@ const REST_DELAY = 100
 
 function generateApi(epoint, data) {
   const store = new MemDataApi(data, REST_DELAY)
-  return makeMap(epoint, store)
+  return makeUrls(epoint, store)
 }
 
-module.exports = generateApi
-
-function makeMap(epoint, api) {
+function makeUrls(epoint, api) {
   return {
     dataApi: api,
     urls: {
@@ -82,3 +80,6 @@ function makeMap(epoint, api) {
   }
 }
 
+
+exports.generateApi = generateApi
+exports.makeUrls = makeUrls

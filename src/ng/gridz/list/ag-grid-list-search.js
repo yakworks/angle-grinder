@@ -6,7 +6,8 @@ const template = `
     fields="listCtrl.cfg.searchForm" form="listCtrl.searchFormCtrl" is-columns="true">
     <ag-ok-cancel ok-label="Search"
       ok-click="listCtrl.search(listCtrl.searchModel)"
-      cancel-click="listCtrl.searchReset()"
+      cancel-click="listCtrl.searchReset(agForm)"
+      cancel-label="Reset"
       is-loading="listCtrl.isSearching">
     </ag-ok-cancel>
   </ag-formly-form>

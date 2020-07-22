@@ -1,14 +1,15 @@
 <form name="selRestForm" ag-form is-horizontal>
 
-  <ag-select-rest select-options="{ multiple: true}"
-                  ng-model="$ctrl.vm.multipleCountry"
-                  url="/countries/pickList">
+  <ag-select-rest select-options="{ multiple: true, minimumInputLength: 1}"
+                  ng-model="$ctrl.vm.multipleCustomer"
+                  url="/api/customer/pickList">
   </ag-select-rest>
-  <ag-select-rest ng-model="$ctrl.vm.country"
+  <ag-select-rest ng-model="$ctrl.vm.countryCode"
+                  select-options="{ displayFields:['id','name'], useDataObject:false, minimumInputLength: 1 }"
                   url="/countries/pickList"/>
 
   <ag-select-rest name="multiCountryData"
-                  select-options="{ multiple: true }"
+                  select-options="{ multiple: true, displayFields:['id','name'] }"
                   ng-model="$ctrl.vm.multiCountryData"
                   url="/countries/pickList"/>
 

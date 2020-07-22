@@ -1,4 +1,4 @@
-// import _ from 'lodash'
+import _ from 'lodash'
 
 export function setupData(opts, dataStoreApi) {
   if (opts.dataApiKey) {
@@ -52,9 +52,13 @@ export function dataQuery(opts) {
     opts.dataResults = opts.dataResults || data().results()
     if (t === '') {
       Promise.resolve(opts.dataResults).then(res => {
+        let dta = res
+        console.log('dta', dta)
+        // if its an object then assume it pager object with data key
+        if (_.isPlainObject(res)) dta = res.data
         // add the selectAll option if enabled
-        if (opts.showSelectAll) res = [{ id: 'selectAll' }, ...res]
-        return query.callback({ results: res })
+        if (opts.showSelectAll) dta = [{ id: 'selectAll' }, ...dta]
+        return query.callback({ results: dta })
       })
       return
     }
@@ -79,7 +83,11 @@ export function dataQuery(opts) {
       }
     }
     Promise.resolve(opts.dataResults).then(res => {
-      res.forEach(datum => process(datum, filtered.results))
+      let dta = res
+      // if its an object then assume it pager object with data key
+      if (_.isPlainObject(res)) dta = res.data
+
+      dta.forEach(datum => process(datum, filtered.results))
       query.callback(filtered)
     })
   }

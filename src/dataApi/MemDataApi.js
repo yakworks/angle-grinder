@@ -8,7 +8,7 @@ const _ = require('lodash')
 class MemDataApi {
   // used to simulate a delay is used for testing
   mockDelay = 0
-
+  pickListFields = ['id', 'name']
   /**
    * @param data the data to initialize this with
    */
@@ -44,44 +44,60 @@ class MemDataApi {
     return this.getData()
   }
 
-  /** TODO - Given a sample item, returns a promise for all the data for items which have the same properties as the sample */
-
-  qbe(items, exampleItem) {
-    const contains = (search, inString) => inString.toString().toLowerCase().includes(search.toString().toLowerCase())
-
-    const matchesExample = (example, item) =>
-      Object.keys(example).reduce((memo, key) => memo && contains(example[key], item[key]), true)
-
-    return items.filter(matchesExample.bind(null, exampleItem))
+  // query by example object
+  qbe(items, qbeItem) {
+    return items.filter(it => {
+      return _.isMatchWith(it, qbeItem, (objValue, srcValue) => {
+        // console.log("objValue", objValue)
+        //  console.log("srcValue", srcValue)
+        if (_.isString(objValue) && _.isString(srcValue)) {
+          return objValue.toLowerCase().includes(srcValue.toLowerCase())
+        }
+        return undefined // return undefined puts it through the built in lodash match
+      })
+    })
   }
 
   //
   async search(params) {
     let list = await this.data()
-    if (params.filters) {
-      const filters = JSON.parse(params.filters)
-      if (filters.quickSearch) {
-        list = searchAny(list, filters.quickSearch)
-      } else {
-        list = this.qbe(list, filters)
-      }
-    }
+    const isSearch = params._search === 'true' || params._search === true
+    if (isSearch) list = this.filter(list, params)
+
     list = _.orderBy(list, params.sort, params.order)
-    // console.log("query filtered orderBy", filtered)
-    const paged = pagination(list, params)
+    const paged = this.pagination(list, params)
     // console.log("query paged", paged)
     return paged
   }
 
+  filter(list, params) {
+    let flist = list
+    if (params.filters) {
+      const filters = JSON.parse(params.filters)
+      if (filters.quickSearch) {
+        flist = this.searchAny(list, filters.quickSearch)
+      } else {
+        flist = this.qbe(list, filters)
+      }
+    }
+    return flist
+  }
+
   //
   async pickList(params) {
-    let dta = await this.data()
-    if (params && params.filters) dta = this.filter(dta, params)
-    dta = dta.reduce(function(acc, item) {
-      acc.push(_.pick(item, ['id', 'name']))
+    let list = await this.data()
+    if (params) {
+      if (params.filters) list = this.filter(list, params)
+      if (params.q) list = this.searchAny(list, params.q)
+    }
+    list = list.reduce((acc, item) => {
+      acc.push(_.pick(item, this.pickListFields))
       return acc
     }, [])
-    return dta
+    // console.log('pickList list', list)
+    const paged = this.pagination(list, params)
+    // console.log('pickList paged', paged)
+    return paged
   }
 
   /** Returns a promise for the item with the given identifier */
@@ -144,31 +160,39 @@ class MemDataApi {
     if (idx === -1) throw Error(`${item} not found in ${this}`)
     return idx
   }
-}
 
-function pagination(rows, query) {
-  return {
-    rows: rows.slice((query.page - 1) * query.max, query.page * query.max),
-    page: query.page,
-    records: rows.length,
-    total: Math.floor(rows.length / query.max) + (rows.length % query.max === 0 ? 0 : 1)
+  pagination(items, query) {
+    if (!query) query = {}
+    const page = query.page || 1
+    const max = query.max || 20
+
+    return {
+      data: items.slice((page - 1) * max, page * max),
+      page: page,
+      records: items.length,
+      total: Math.floor(items.length / max) + (items.length % max === 0 ? 0 : 1)
+    }
+  }
+
+  searchAny(arr, searchKey) {
+    return arr.filter(obj => hasSomeDeep(obj, searchKey))
   }
 }
 
-function findById(id, data) {
-  const numId = parseInt(id)
-  return data.find((obj) => obj.id === numId)
-}
+// function findById(id, data) {
+//   const numId = parseInt(id)
+//   return data.find((obj) => obj.id === numId)
+// }
 
-function searchAny(arr, searchKey) {
-  return arr.filter(obj => hasSome(obj, searchKey))
-}
+// function searchAny(arr, searchKey) {
+//   return arr.filter(obj => hasSome(obj, searchKey))
+// }
 
-function hasSome(obj, searchKey) {
+function hasSomeDeep(obj, searchKey) {
   return Object.keys(obj).some(key => {
     const val = obj[key]
     if (_.isPlainObject(val)) {
-      return hasSome(val, searchKey)
+      return hasSomeDeep(val, searchKey)
     } else {
       return _.isString(val) ? val.toString().toLowerCase().includes(searchKey) : val == searchKey
     }

@@ -440,9 +440,8 @@ $.fn.gridz.defaults = {
     sort: 'sort',
     order: 'order'
   },
-
-  jsonReader: {
-    repeatitems: false
+  localReader: {
+    root: 'data'
   },
 
   // Defines in what format to expect the data that fills the grid.

@@ -1,10 +1,17 @@
 const _ = require('lodash');
 
-const generateApi = require('./generateApi')
+const makeUrls = require('./generateApi').makeUrls
+const MemDataApi = require('../../../src/dataApi/MemDataApi');
 const customerData = require('../public/data/Customers.json')
 const epoint = 'customer'
-let custApi = generateApi(epoint, customerData)
-const dataApi = custApi.dataApi
+const dataApi = new MemDataApi(customerData)
+dataApi.pickListFields = ['id', 'num', 'name']
+
+let custApi = makeUrls(epoint, dataApi)
+
+// const epoint = 'customer'
+// const generateApi = require('./generateApi').generateApi
+// let custApi = generateApi(epoint, customerData)
 
 // overrides to we can simmulate some errors
 let overrides = {

@@ -76,3 +76,4 @@ searchForm:
     - key: state
   column3:
     - key: country
+    - key: timezone

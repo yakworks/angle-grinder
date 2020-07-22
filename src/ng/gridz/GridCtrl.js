@@ -111,8 +111,6 @@ export default class GridCtrl {
 
   // Populates the grid with the given data.
   addJSONData(data) {
-    // The addJSONData is very old method which uses still expandos
-    // to the DOM element of the grid (<table> element).
     this.getGridEl().get(0).addJSONData(data)
 
     // broadcasts the AngularJS event

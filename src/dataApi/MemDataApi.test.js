@@ -12,12 +12,31 @@ describe('MemDataApi', () => {
   const data = JSON.parse(dataJson)
   const api = new MemDataApi(JSON.parse(dataJson))
 
-  describe('searching', function() {
-    it('query by example function', function() {
-      const result = api.qbe(data, {refnum: '762'})
+  describe('qbe', function() {
+    it('query by example simple single', function() {
+      const result = api.qbe(data, {refnum: '762', amount: 3240.77})
       // console.log("result", result)
       expect(result.length).toEqual(1)
     })
+
+    it('playing with isMatchWith', function() {
+
+      var match = {refnum: '762', amount: 3240.77, customer:{id:7}}
+
+      const hit = _.isMatchWith(data[0], match, (objValue, srcValue) => {
+        console.log("objValue", objValue)
+        console.log("srcValue", srcValue)
+        if(_.isString(objValue) && _.isString(srcValue)){
+          return objValue.toLowerCase().includes(srcValue.toLowerCase())
+        }
+        return undefined
+      })
+      console.log("hit", hit)
+      expect(hit).toBe(true)
+    })
+  })
+
+  describe('searching', function() {
 
     it('search', async function() {
       const params = {
@@ -29,7 +48,7 @@ describe('MemDataApi', () => {
       }
       const result = await api.search(params)
       // console.log("result", result)
-      expect(result.rows.length).toEqual(4)
+      expect(result.data.length).toEqual(4)
       expect(result.page).toEqual(1)
       expect(result.records).toEqual(4)
       expect(result.total).toEqual(1)
@@ -45,7 +64,28 @@ describe('MemDataApi', () => {
         filters: '{"quickSearch":"762"}'
       }
       const result = await api.search(params)
-      expect(result.rows.length).toEqual(1)
+      expect(result.data.length).toEqual(1)
+    })
+
+    it('filter quicksearch', function() {
+      const params = {
+        filters: '{"quickSearch":"762341"}'
+      }
+      const result = api.filter(data, params)
+      expect(result.length).toEqual(1)
+    })
+
+    it('searchAny function', function() {
+      const result = api.searchAny(data, "762341")
+      expect(result.length).toEqual(1)
+    })
+  })
+
+  describe('picklist', function() {
+    it('should return paged data', async function() {
+      const result = await api.pickList()
+      //console.log("result", result)
+      expect(result.data.length).toEqual(4)
     })
   })
 

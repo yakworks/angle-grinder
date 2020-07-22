@@ -192,6 +192,12 @@ export default class BaseListCtrl {
     }
   }
 
+  searchReset(searchForm) {
+    console.log('searchReset agForm', searchForm)
+    this.searchModel = {}
+    searchForm.reset()
+  }
+
   handleError(er) {
     console.error(er)
     toast.error(er)

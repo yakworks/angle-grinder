@@ -7,7 +7,7 @@ const template = `
 <div class="inputDemoIndex">
   <input-horizontal-example></input-horizontal-example>
   <input-basic-example></input-basic-example>
-  <bs-input-example></bs-input-example>
+  <!--<bs-input-example></bs-input-example>-->
 </div>
 `
 // export module name
