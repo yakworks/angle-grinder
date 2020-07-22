@@ -22,6 +22,7 @@ apply plugin:"org.grails.plugins.views-json"
 repositories {
     mavenLocal()
     maven { url "https://repo.grails.org/grails/core" }
+  maven { url "http://repo.9ci.com/oss-snapshots" }
 }
 
 dependencies {
@@ -45,7 +46,7 @@ dependencies {
     compile "org.hibernate:hibernate-core:5.1.16.Final"
   compile "org.grails.plugins:gorm-tools:$vPluginGormTools"
   testCompile "org.grails.plugins:gorm-tools:$vPluginGormTools"
-  compile "org.grails.plugins:gorm-rest-api:3.3.6"
+  compile "org.grails.plugins:gorm-rest-api:3.3.2-SNAPSHOT"
     compile "org.grails.plugins:views-json"
     compile "org.grails.plugins:views-json-templates"
     console "org.grails:grails-console"
