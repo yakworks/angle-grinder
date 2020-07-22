@@ -5,22 +5,16 @@ import gorm.restapi.controller.RestApiRepoController
 import gorm.tools.Pager
 import gorm.tools.beans.BeanPathTools
 import gorm.tools.repository.GormRepo
-import gorm.tools.repository.GormRepoEntity
-import gorm.tools.repository.RepoMessage
-import gorm.tools.repository.RepoUtil
-import gorm.tools.repository.errors.EntityValidationException
 import grails.converters.JSON
 import grails.plugin.gormtools.ErrorMessageService
 import grails.util.GrailsNameUtils
 import grails.validation.ValidationException
-import org.grails.datastore.gorm.GormEntity
 import org.grails.plugins.appsetupconfig.AppSetupService
 
 import javax.annotation.PostConstruct
 
 abstract class BaseApiDomainController<D> extends RestApiRepoController<D> {
     static namespace = 'api'
-    def ajaxGrid = true
 
     BaseApiDomainController(Class<D> entityClass) {
         super(entityClass)
@@ -72,16 +66,7 @@ abstract class BaseApiDomainController<D> extends RestApiRepoController<D> {
     }
 
     def list() {
-        if (response.format == 'json') {
             listJson()
-        } else {
-            if (ajaxGrid) {
-                return listModel()
-            } else {
-                forward(action: "listhtml")
-                return //stop the flow
-            }
-        }
     }
 
     def listJson() {
@@ -109,24 +94,6 @@ abstract class BaseApiDomainController<D> extends RestApiRepoController<D> {
         def pageData = pagedList(listCriteria())
         def propName = GrailsNameUtils.getPropertyNameRepresentation(domainClass)
         return [("${propName}List".toString()): pageData.data, ("${propName}ListTotal".toString()): pageData.recordCount]
-    }
-
-    def create() {
-        def domainInstance = domainClass.newInstance()
-        domainInstance.properties = params
-        return [(domainInstanceName): domainInstance]
-    }
-
-    def edit(Long id) {
-        def domainInstance = domainClass.get(id)
-        if (!domainInstance) {
-            flash.message = RepoMessage.notFound(GrailsNameUtils.getShortName(domainClass), params)
-            redirect(action: "list")
-            return
-        } else {
-            return [(domainInstanceName): domainInstance]
-        }
-
     }
 
     def renderSuccess(String actionMeth, result) {
@@ -188,111 +155,6 @@ abstract class BaseApiDomainController<D> extends RestApiRepoController<D> {
         return repo.create(p)
     }
 
-    def show(Long id) {
-        try {
-            def domainInstance = showDomain(id)
-            withFormat {
-                html {
-                    return [(domainInstanceName): domainInstance]
-                }
-                json {
-                    render domainInstance as JSON
-                }
-            }
-        } catch (ValidationException e) {
-            flash.message = e.messageMap
-            withFormat {
-                html {
-                    redirect(action: "list")
-                }
-                json {
-                    response.status = 409 //Bad Request Error
-                    render errorModel(e.entity, e.meta) as JSON
-                }
-            }
-        }
-    }
-
-    def showDomain(Long id) {
-        def domainInstance = domainClass.get(id)
-        if (!domainInstance) {
-            throw new EntityValidationException(RepoMessage.notFound(GrailsNameUtils.getShortName(domainClass), params), null)
-        }
-        return domainInstance
-    }
-
-    def update() {
-        if (request.format == 'json' || response.format == 'json') {
-            saveOrUpdateJson()
-            return
-        }
-        try {
-            def result = updateDomain()
-            flash.message = result.message
-            renderSuccess('show', result)
-            return
-        } catch (ValidationException e) {
-            flash.message = e.messageMap
-            renderError('edit', e)
-            return
-        }
-    }
-
-    def updateDomain(opts = null) {
-        params.remove('companyId')
-        log.debug "updateDomain with ${params}"
-        def res = repo.update(params)
-        if (opts?.flush) RepoUtil.flush()
-        return res
-    }
-
-    def saveOrUpdate() {
-        try {
-            def result = params.id ? repo.update(params) : repo.create(params)
-            //all was good render a success save message
-            render message(code: 'user.saved')
-        } catch (EntityValidationException e) {
-            response.status = 409
-            def emsg = (e.hasProperty("messageMap")) ? g.message(code: e.messageMap?.code, args: e.messageMap?.args, default: e.messageMap?.defaultMessage) : null
-            render(template: "userEdit", model: [user: e.meta?.user ?: e.entity, errorMsg: emsg])
-        }
-    }
-
-    Map deleteDomain(Map p) {
-        GormEntity entity = repo.get(p)
-        repo.remove(entity)
-        String message = RepoMessage.deleted(entity, RepoMessage.badge(entity.id, entity))
-        [ok: true, id: entity.id, message: message]
-    }
-
-    def delete() {
-        log.debug("in deleteJson with ${params}")
-        try {
-            Map result = deleteDomain(params)
-            response.status = 200
-            render(result as JSON)
-        } catch (ValidationException e) {
-            log.error("delete with error", e)
-            response.status = 422
-            def responseJson = [
-                "code"       : 422,
-                "status"     : "error",
-                "message"    : errorMessageService.buildMsg(e.messageMap),
-                "messageCode": e.messageMap.code
-            ]
-            render responseJson as JSON
-        } catch (Exception e) {
-            log.error("delete with error", e)
-            response.status = 400
-            def responseJson = [
-                "code"   : 400,
-                "status" : "error",
-                "message": e.message,
-                "error"  : e.message
-            ]
-            render responseJson as JSON
-        }
-    }
 
     def pickList(){
         Pager pager = new Pager(params)

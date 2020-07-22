@@ -22,7 +22,7 @@ export default class ListCtrl {
       const func = (data) => {
         const options =
           _.extend(data, {
-            url: pathWithContext('/api/org/list?format=json'),
+            url: pathWithContext('/api/orgApi'),
             multiselect: true,
             shrinkToFit: true, // makes columns fit to width
             sortname: 'num',
@@ -42,7 +42,7 @@ export default class ListCtrl {
         ApplyFormattersServ(options.colModel, formatters)
         return  options
       }
-      return ConfigCache.get(`/api/org/gridOptions`, func)
+      return ConfigCache.get(`/api/orgApi/gridOptions`, func)
     }
 
     $scope.gridOptions = gridOptions()

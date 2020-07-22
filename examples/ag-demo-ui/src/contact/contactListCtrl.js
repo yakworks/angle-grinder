@@ -4,7 +4,7 @@ export default class ContactListCtrl {
     // Create resource for the users (contacts)
     const Users = resourceBuilder('/user')
     $scope.gridOptions = {
-      path: `/api/org/listUsers/${$stateParams.id}?format=json`,
+      path: `/api/orgApi/listUsers/${$stateParams.id}?format=json`,
       colModel: this.colModel(),
       multiselect: false, // turn off multiselect
       shrinkToFit: true, // makes columns fit to width

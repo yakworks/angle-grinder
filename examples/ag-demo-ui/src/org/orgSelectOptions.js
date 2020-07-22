@@ -5,7 +5,7 @@ export default class OrgSelectOptions {
       return Select2Options({
         width: 'resolve',
         ajax: {
-          url: pathWithContext('/api/org/pickList')
+          url: pathWithContext('/api/orgApi/pickList')
         },
 
         // formatters for result and selection

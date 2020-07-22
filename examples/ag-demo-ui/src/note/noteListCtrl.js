@@ -5,7 +5,7 @@ export default class NoteListCtrl {
     const Notes = resourceBuilder('/note')
     console.log(Notes)
     $scope.gridOptions = {
-      path: `/api/org/listNotes/${$stateParams.id}?format=json`,
+      path: `/api/orgApi/listNotes/${$stateParams.id}?format=json`,
       colModel: this.colModel(),
       multiselect: false, // turn off multiselect
       shrinkToFit: true, // makes columns fit to width

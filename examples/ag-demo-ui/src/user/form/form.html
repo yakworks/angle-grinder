@@ -16,7 +16,7 @@
         <ag-input type="email" ng-model="user.contact.email" required=""/>
         <ag-select label="Type" ng-model="filters.contact.type.name"
                    select-options="{ data: ['admin', 'customer'], multiple: true }"/>
-        <ag-select-rest multiple url="/api/org/pickList" ng-model="user.contact.org"/>
+        <ag-select-rest multiple url="/api/orgApi/pickList" ng-model="user.contact.org"/>
         <ag-checkbox ng-model="user.contact.tagForReminders"></ag-checkbox>
         <ag-input ng-model="user.login" required></ag-input>
         <ag-datepicker ng-model="user.activeDate" is-expanded required=""></ag-datepicker>
