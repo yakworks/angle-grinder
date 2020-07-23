@@ -1,5 +1,4 @@
-package demo.gorm.rest.api
-
+package demo
 import gorm.restapi.controller.RestApiRepoController
 import gorm.tools.Pager
 import grails.converters.JSON

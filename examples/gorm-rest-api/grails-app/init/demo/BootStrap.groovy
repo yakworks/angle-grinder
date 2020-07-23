@@ -1,4 +1,4 @@
-package demo.gorm.rest.api
+package demo
 
 import grails.converters.JSON
 import grails.core.GrailsApplication

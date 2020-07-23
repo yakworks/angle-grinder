@@ -1,4 +1,4 @@
-package demo.gorm.rest.api
+package demo
 
 class UrlMappings {
 

@@ -4,7 +4,7 @@ grails:
       enabled: true
     profile: rest-api
     codegen:
-        defaultPackage: demo.gorm.rest.api
+        defaultPackage: demo
     gorm:
         reactor:
             # Whether to translate GORM events into Reactor events

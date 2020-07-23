@@ -1,5 +1,4 @@
-package demo.gorm.rest.api
-
+package demo
 
 class Customer implements Serializable {
     String name

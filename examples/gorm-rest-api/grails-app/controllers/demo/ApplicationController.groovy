@@ -1,5 +1,4 @@
-package demo.gorm.rest.api
-
+package demo
 import grails.core.GrailsApplication
 import grails.plugins.*
 

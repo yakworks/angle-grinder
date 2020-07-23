@@ -1,4 +1,4 @@
-package demo.gorm.rest.api
+package demo
 
 import grails.boot.GrailsApp
 import grails.boot.config.GrailsAutoConfiguration
