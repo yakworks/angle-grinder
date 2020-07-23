@@ -49,7 +49,7 @@ function makeUrls(epoint, api) {
         })
       },
 
-      [`PUT /api/${epoint}`]: (req, res) => {
+      [`PUT /api/${epoint}/:id`]: (req, res) => {
         // console.log('PUT /api/invoice req.body', req.body)
         const { body } = req
         api.put(body)
