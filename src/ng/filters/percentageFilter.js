@@ -1,7 +1,7 @@
 import angular from 'angular'
-import commonModule from './commonModule'
+import filtersModule from './filtersModule'
 
-var app = angular.module(commonModule)
+var app = angular.module(filtersModule)
 
 // Percentage filter, based on https://github.com/vpegado/angular-percentage-filter
 app.filter('percentage', () => function(input, decimals, suffix) {

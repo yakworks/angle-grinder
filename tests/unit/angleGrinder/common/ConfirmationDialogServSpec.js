@@ -1,8 +1,8 @@
-import agCommon from 'angle-grinder/src/ng/common'
+import agMod from '~/angle-grinder'
 
 describe("ConfirmationDialogServSpec", () => describe("service: ConfirmationDialogServClass", function() {
   let $scope = null;
-  beforeEach(angular.mock.module(agCommon))
+  beforeEach(angular.mock.module(agMod))
 
   beforeEach(inject($rootScope => $scope = $rootScope.$new())
   );

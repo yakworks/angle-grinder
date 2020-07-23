@@ -1,9 +1,9 @@
 import angular from 'angular'
-import commonModule from './commonModule'
+import filtersModule from './filtersModule'
 import { isFalsy } from '../../utils/isFalsy'
 import _ from 'lodash'
 
-var app = angular.module(commonModule)
+var app = angular.module(filtersModule)
 
 app.provider('agCurrencyFilter', function() {
   let defaultSymbol = '$'

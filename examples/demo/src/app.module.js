@@ -15,7 +15,7 @@ import snippetsModule from './utils/demo/demo.module'
 
 // demo sections
 import componentsModule from './components'
-import formsModule from './forms'
+import formsModule from './controls'
 import gridsModule from './grids'
 
 // store

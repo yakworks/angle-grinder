@@ -1,4 +1,4 @@
-import alertsMod from 'angle-grinder/src/ng/alerts'
+import alertsMod from 'angle-grinder/src/ng/legacy/alerts'
 
 describe("Alerts", function() {
   let alerts = null;

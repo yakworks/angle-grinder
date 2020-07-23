@@ -1,7 +1,7 @@
 import angular from 'angular'
-import commonModule from './commonModule'
+import filtersModule from './filtersModule'
 
-angular.module(commonModule).provider('agDateTimeFilter', function() {
+angular.module(filtersModule).provider('agDateTimeFilter', function() {
   // see https://docs.angularjs.org/api/ng/filter/date
   let defaultFormat = 'DD MMM YYYY HH:mm A'
 
