@@ -1,4 +1,4 @@
-import BaseCtrl from '../../utils/BaseCtrl'
+import BaseCtrl from '../../../utils/BaseCtrl'
 import angular from 'angular'
 import formsModule from '../formsModule'
 

@@ -1,6 +1,6 @@
 import angular from 'angular'
 import formsModule from '../formsModule'
-import { isFalsy } from '../../../utils/isFalsy'
+import { isFalsy } from '../../../../utils/isFalsy'
 
 var app = angular.module(formsModule)
 // Validates text area to have not more then specified number of lines

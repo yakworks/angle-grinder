@@ -5,9 +5,9 @@ import ngScroll from 'angular-scroll'
 import ngcookies from 'angular-cookies'
 import ngAnimate from 'angular-animate'
 import ngSanitize from 'angular-sanitize'
-// import ngLadda from 'angular-ladda'
 import ngLoadingBar from 'angular-loading-bar'
 import vButton from 'v-button'
+import filtersModule from '../filters'
 
 import ConfirmationDialogServ from './services/ConfirmationDialogServ'
 import _ from 'lodash'
@@ -20,24 +20,13 @@ var common = angular.module(MOD_NAME, [
   ngcookies,
   ngAnimate,
   ngSanitize,
-  // ngLadda,
   ngLoadingBar,
   vButton,
-  ngScroll // Scroll
+  ngScroll, // Scroll
+  filtersModule
 ])
-  .service('ConfirmationDialogServ', ConfirmationDialogServ)
 
-// change default locale to use `-` symbol for negative currencies
-common.config(function($localeProvider, $provide) {
-  const defaultLocale = $localeProvider.$get()
-
-  angular.extend(defaultLocale.NUMBER_FORMATS.PATTERNS[1], {
-    negPre: '-',
-    negSuf: ''
-  })
-
-  return $provide.value('$locale', defaultLocale)
-})
+common.service('ConfirmationDialogServ', ConfirmationDialogServ)
 
 // Decorates `$http.pendingRequests` with some useful features
 common.factory('pendingRequests', function($http) {

@@ -1,9 +1,9 @@
 import angular from 'angular'
-import commonModule from './commonModule'
+import filtersModule from './filtersModule'
 import moment from 'moment'
 import { isFalsy } from '../../utils/isFalsy'
 
-var app = angular.module(commonModule)
+var app = angular.module(filtersModule)
 
 app.provider('agDateFilter', function() {
   // see https://docs.angularjs.org/api/ng/filter/date

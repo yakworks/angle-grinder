@@ -1,7 +1,7 @@
 import angular from 'angular'
 import formsModule from '../formsModule'
 import _ from 'lodash'
-import { isFalsy, isEmpty } from '../../../utils/isFalsy'
+import { isFalsy, isEmpty } from '../../../../utils/isFalsy'
 
 var forms = angular.module(formsModule)
 

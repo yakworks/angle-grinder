@@ -1,7 +1,7 @@
 import angular from 'angular'
-import commonModule from './commonModule'
+import filtersModule from './filtersModule'
 
-var app = angular.module(commonModule)
+var app = angular.module(filtersModule)
 
 // Convert line braks to html
 app.filter('newLines', () => function(text) {

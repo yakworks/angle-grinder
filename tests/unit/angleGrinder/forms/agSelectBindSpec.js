@@ -1,4 +1,4 @@
-import formsModule from 'angle-grinder/src/ng/forms'
+import formsModule from 'angle-grinder/src/ng/legacy/forms'
 
 describe("agSelectBindSpec", function() {
 

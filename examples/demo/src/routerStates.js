@@ -10,7 +10,7 @@ const dashStates = {
 }
 
 const formStates = {
-  name: 'forms',
+  name: 'controls',
   template: '<div ui-view class="fade-in-up"></div>',
   data: {
     icon: 'mdi mdi-id-card'
@@ -62,7 +62,7 @@ const formStates = {
     },
     {
       name: 'horizontal-sandbox',
-      template: require('./forms/horizontal-sandbox/index.html')
+      template: require('./controls/horizontal-sandbox/index.html')
     },
     {
       name: 'select2-sandbox',

@@ -1,8 +1,8 @@
 import angular from 'angular'
-import commonModule from './commonModule'
+import filtersModule from './filtersModule'
 
 // Filter for boolean values, presents '✓' or '✘'
-angular.module(commonModule).filter('checkMark', () => function(input, options) {
+angular.module(filtersModule).filter('checkMark', () => function(input, options) {
   if (options == null) { options = {} }
   if (input) {
     if (options.hideTruth) { return '' }
