@@ -4,7 +4,7 @@ import appState from 'angle-grinder/src/tools/AppState'
  * Main Application Controller
  */
 class AppCtrl {
-  constructor($rootScope, $scope, $document, $timeout, Fullscreen, cfpLoadingBar, $transitions) {
+  constructor($rootScope, $scope, $document, $timeout, cfpLoadingBar, $transitions) {
     this.$rootScope = $rootScope
     this.$scope = $scope
     this.layout = appState.layout
@@ -38,50 +38,9 @@ class AppCtrl {
       return appState.pageTitle
     }
 
-    // save settings to local storage
-    var slay = localStorage.getItem('yak-layout')
-    if (slay !== null) {
-      $scope.app.layout = angular.copy(slay)
-    }
-
-    $scope.resetLayout = function() {
-      $scope.loading_reset = true
-      // start loading
-      $timeout(function() {
-        localStorage.removeItem('yak-layout')
-        $scope.app.layout = angular.copy($rootScope.app.defaultLayout)
-        $scope.loading_reset = false
-        // stop loading
-      }, 500)
-    }
-    $scope.saveLayout = function() {
-      $scope.loading_save = true
-      // start loading
-      $timeout(function() {
-        localStorage.setItem('yak-layout', angular.copy($scope.app.layout))
-        // $localStorage.lay = angular.copy($scope.app.layout);
-        $scope.loading_save = false
-        // stop loading
-      }, 500)
-    }
-
     // global function to scroll page up
     $scope.toTheTop = function() {
       $document.scrollTopAnimated(0, 600)
-    }
-
-    // Fullscreen
-    $scope.isFullscreen = false
-    $scope.goFullscreen = function() {
-      $scope.isFullscreen = !$scope.isFullscreen
-      if (Fullscreen.isEnabled()) {
-        Fullscreen.cancel()
-      } else {
-        Fullscreen.all()
-      }
-
-      // Set Fullscreen to a specific element (bad practice)
-      // Fullscreen.enable( document.getElementById('img') )
     }
 
     // Function that find the exact height and width of the viewport in a cross-browser way
@@ -136,26 +95,6 @@ class AppCtrl {
       }
     }, true)
 
-    // // Apply on resize
-    // $win.on('resize', function() {
-    //   $scope.$apply()
-    //   if ($scope.isLargeDevice) {
-    //     $('#app .main-content').css({
-    //       position: 'relative',
-    //       top: 'auto',
-    //       width: 'auto'
-    //     })
-    //     $('footer').show()
-    //   }
-    // })
-
-    this.isMobile = (function() { // true if the browser is a mobile device
-      var check = false
-      if (/Android|iPhone|iPad|iPod|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-        check = true
-      };
-      return check
-    })()
   }
 
   toggleSidenav() {

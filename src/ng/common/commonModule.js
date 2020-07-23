@@ -67,43 +67,43 @@ common.config(function(cfpLoadingBarProvider) {
   cfpLoadingBarProvider.includeSpinner = true
 })
 
-//common sanitation
+// common sanitation
 common.config(function($compileProvider) {
   $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|javascript):/)
 })
 
 // see https://stackoverflow.com/questions/45827733/replacing-http-with-fetch-api
-common.run(normalizePromiseSideEffects);
+common.run(normalizePromiseSideEffects)
 
-normalizePromiseSideEffects.$inject = ['$rootScope'];
+normalizePromiseSideEffects.$inject = ['$rootScope']
 
 function normalizePromiseSideEffects($rootScope) {
-  attachScopeApplicationToPromiseMethod('then');
-  attachScopeApplicationToPromiseMethod('catch');
-  attachScopeApplicationToPromiseMethod('finally');
+  attachScopeApplicationToPromiseMethod('then')
+  attachScopeApplicationToPromiseMethod('catch')
+  attachScopeApplicationToPromiseMethod('finally')
 
   function attachScopeApplicationToPromiseMethod(methodName) {
-    const NativePromiseAPI = window.Promise;
-    const nativeImplementation = NativePromiseAPI.prototype[methodName];
+    const NativePromiseAPI = window.Promise
+    const nativeImplementation = NativePromiseAPI.prototype[methodName]
 
     NativePromiseAPI.prototype[methodName] = function(...promiseArgs) {
-      const newPromiseArgs = promiseArgs.map(wrapFunctionInScopeApplication);
-      return nativeImplementation.bind(this)(...newPromiseArgs);
-    };
+      const newPromiseArgs = promiseArgs.map(wrapFunctionInScopeApplication)
+      return nativeImplementation.bind(this)(...newPromiseArgs)
+    }
   }
 
   function wrapFunctionInScopeApplication(fn) {
     if (!_.isFunction(fn) || fn.isScopeApplicationWrapped) {
-      return fn;
+      return fn
     }
 
     const wrappedFn = (...args) => {
-      const result = fn(...args);
+      const result = fn(...args)
       // this API is used since it's $q was using in AngularJS src
-      $rootScope.$evalAsync();
-      return result;
-    };
-    wrappedFn.isScopeApplicationWrapped = true;
-    return wrappedFn;
+      $rootScope.$evalAsync()
+      return result
+    }
+    wrappedFn.isScopeApplicationWrapped = true
+    return wrappedFn
   }
 }

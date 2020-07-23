@@ -8,7 +8,7 @@ describe("module: angleGrinder.gridz", function() {
   })
   )
 
-  return describe("controller: gridPagerCtrlMixin", function() {
+  xdescribe("controller: gridPagerCtrlMixin", function() {
 
     let $scope = null;
     let gridCtrl = null;
