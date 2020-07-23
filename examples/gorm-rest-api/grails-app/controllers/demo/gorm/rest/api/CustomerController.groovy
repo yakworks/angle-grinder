@@ -30,7 +30,7 @@ class CustomerController extends RestApiRepoController<Customer> {
 
     List listCriteria() {
         Pager pager = new Pager(params)
-        BuildableCriteria crit = entityClass.createCriteria()
+        BuildableCriteria crit = getEntityClass().createCriteria()
 
         Map filters = params.filters ? JSON.parse(params.filters) as Map : null
         def qslike = (filters?.quickSearch) ? (filters?.quickSearch + "%") : null
