@@ -4,14 +4,10 @@ import appState from 'angle-grinder/src/tools/AppState'
  * Main Application Controller
  */
 class AppCtrl {
-  constructor($rootScope, $scope, $window, $document, $timeout, Fullscreen, cfpLoadingBar, $transitions) {
+  constructor($rootScope, $scope, $document, $timeout, Fullscreen, cfpLoadingBar, $transitions) {
     this.$rootScope = $rootScope
     this.$scope = $scope
-    // this.$win = $($window)
-    // this.$body = $('body')
     this.layout = appState.layout
-
-    var $win = $($window); var $body = $('body')
 
     // this.routerTransitionsEvents()
     // the ui-router events, see https://stackoverflow.com/a/43553641
@@ -36,12 +32,6 @@ class AppCtrl {
       $('footer').show()
 
       window.scrollTo(0, 0)
-
-      if (angular.element('.email-reader').length) {
-        angular.element('.email-reader').animate({
-          scrollTop: 0
-        }, 0)
-      }
     })
 
     $rootScope.pageTitle = function() {

@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html lang="en" data-ng-app="app">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="{{app.description}}">
+    <meta name="keywords" content="app, responsive, angular, bootstrap, dashboard, admin">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="HandheldFriendly" content="true" />
+    <meta name="apple-touch-fullscreen" content="yes" />
+    <link rel="shortcut icon" href="favicon.ico" />
+
+    <title data-ng-bind="pageTitle()"><%= htmlWebpackPlugin.options.title %></title>
+
+    <!-- Google fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Lato:300,400,400italic,600,700|Raleway:300,400,500,600,700|Crete+Round:400italic" rel="stylesheet" type="text/css" />
+    <!-- Material icons https://materialdesignicons.com/-->
+    <link href="https://cdn.materialdesignicons.com/5.0.45/css/materialdesignicons.min.css" rel="stylesheet">
+
+    <!-- doing in manually so we can exclude the theme css and make sure it runs before theme switcher -->
+    <% htmlWebpackPlugin.files.css.forEach( function(name){
+        if(!(/theme.+\.css$/.test(name))) { %>
+        <link rel="stylesheet" href="<%= name %>">
+    <% }}) %>
+
+    <!-- <link rel="stylesheet" data-ng-href="assets/theme/{{ app.layout.theme }}.css" /> -->
+
+</head>
+<body ng-controller="AppCtrl as $appCtrl">
+    <div ui-view id="app" ng-class="{
+      'app-sidenav-fixed' : $appCtrl.layout.isSidebarFixed,
+      'app-sidenav-open': appState.sidenav.open,
+      'app-sidenav-closed': !appState.sidenav.open
+    }"></div>
+    <% for (var jsfile in htmlWebpackPlugin.files.js) { %>
+    <script src="<%= htmlWebpackPlugin.files.js[jsfile]%>"></script>
+    <% } %>
+
+</body>
+</html>

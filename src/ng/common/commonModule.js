@@ -5,9 +5,10 @@ import ngScroll from 'angular-scroll'
 import ngcookies from 'angular-cookies'
 import ngAnimate from 'angular-animate'
 import ngSanitize from 'angular-sanitize'
-// import ngLadda from 'angular-ladda'
 import ngLoadingBar from 'angular-loading-bar'
+import 'angular-breadcrumb'
 import vButton from 'v-button'
+import filtersModule from '../filters'
 
 import ConfirmationDialogServ from './services/ConfirmationDialogServ'
 import _ from 'lodash'
@@ -20,24 +21,14 @@ var common = angular.module(MOD_NAME, [
   ngcookies,
   ngAnimate,
   ngSanitize,
-  // ngLadda,
   ngLoadingBar,
+  'ncy-angular-breadcrumb',
   vButton,
-  ngScroll // Scroll
+  ngScroll, // Scroll
+  filtersModule
 ])
-  .service('ConfirmationDialogServ', ConfirmationDialogServ)
 
-// change default locale to use `-` symbol for negative currencies
-common.config(function($localeProvider, $provide) {
-  const defaultLocale = $localeProvider.$get()
-
-  angular.extend(defaultLocale.NUMBER_FORMATS.PATTERNS[1], {
-    negPre: '-',
-    negSuf: ''
-  })
-
-  return $provide.value('$locale', defaultLocale)
-})
+common.service('ConfirmationDialogServ', ConfirmationDialogServ)
 
 // Decorates `$http.pendingRequests` with some useful features
 common.factory('pendingRequests', function($http) {
@@ -62,3 +53,57 @@ common.config(['$locationProvider', $locationProvider => $locationProvider.hashP
 common.config(function($uibTooltipProvider) {
   $uibTooltipProvider.options({ appendToBody: true })
 })
+
+// Angular-breadcrumb
+common.config(function($breadcrumbProvider) {
+  $breadcrumbProvider.setOptions({
+    template: '<ul class="breadcrumb"><li><a ui-sref="app.dashboard"><i class="fa fa-home margin-right-5 text-large text-dark"></i>Home</a></li><li ng-repeat="step in steps">{{step.ncyBreadcrumbLabel}}</li></ul>'
+  })
+})
+
+// Angular-Loading-Bar
+common.config(function(cfpLoadingBarProvider) {
+  cfpLoadingBarProvider.includeBar = true
+  cfpLoadingBarProvider.includeSpinner = true
+})
+
+// common sanitation
+common.config(function($compileProvider) {
+  $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|javascript):/)
+})
+
+// see https://stackoverflow.com/questions/45827733/replacing-http-with-fetch-api
+common.run(normalizePromiseSideEffects)
+
+normalizePromiseSideEffects.$inject = ['$rootScope']
+
+function normalizePromiseSideEffects($rootScope) {
+  attachScopeApplicationToPromiseMethod('then')
+  attachScopeApplicationToPromiseMethod('catch')
+  attachScopeApplicationToPromiseMethod('finally')
+
+  function attachScopeApplicationToPromiseMethod(methodName) {
+    const NativePromiseAPI = window.Promise
+    const nativeImplementation = NativePromiseAPI.prototype[methodName]
+
+    NativePromiseAPI.prototype[methodName] = function(...promiseArgs) {
+      const newPromiseArgs = promiseArgs.map(wrapFunctionInScopeApplication)
+      return nativeImplementation.bind(this)(...newPromiseArgs)
+    }
+  }
+
+  function wrapFunctionInScopeApplication(fn) {
+    if (!_.isFunction(fn) || fn.isScopeApplicationWrapped) {
+      return fn
+    }
+
+    const wrappedFn = (...args) => {
+      const result = fn(...args)
+      // this API is used since it's $q was using in AngularJS src
+      $rootScope.$evalAsync()
+      return result
+    }
+    wrappedFn.isScopeApplicationWrapped = true
+    return wrappedFn
+  }
+}
