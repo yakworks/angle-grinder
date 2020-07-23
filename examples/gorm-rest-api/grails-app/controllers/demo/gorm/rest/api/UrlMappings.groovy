@@ -19,8 +19,8 @@ class UrlMappings {
             }
             post "/$controller(.$format)?" { action = "save" }
             post "/$controller/$action?"()
-            put "/$controller/$id" { action = "update" }
-            patch "/$controller/$id" { action = "update" }
+            put "/$controller/$id" { action = "put" }
+            patch "/$controller/$id" { action = "put" }
             get "/$controller/$action/"()
             get "/$controller/$action/$id"()
         }

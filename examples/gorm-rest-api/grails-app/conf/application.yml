@@ -1,5 +1,7 @@
 ---
 grails:
+    cors:
+      enabled: true
     profile: rest-api
     codegen:
         defaultPackage: demo.gorm.rest.api

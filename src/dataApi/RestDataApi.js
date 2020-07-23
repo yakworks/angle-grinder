@@ -53,9 +53,10 @@ export default class RestDataApi {
   }
 
   /** Returns a promise to save (PUT) an existing item. */
+  // TODO: probably should pass id either, or take item.id ?
   async put(item) {
     // console.log('put item', item)
-    const newItem = await ky.put(`${this.endpoint}`, { json: item }).json()
+    const newItem = await ky.put(`${this.endpoint}/${item.id}`, { json: item }).json()
     return newItem
   }
 

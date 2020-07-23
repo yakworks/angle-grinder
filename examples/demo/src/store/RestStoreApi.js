@@ -1,8 +1,9 @@
 import RestDataApi from 'angle-grinder/src/dataApi/RestDataApi'
 import ky from 'ky'
 
+// TODO: make it configurable on demo start
 function makeDataApi(endpoint){
-  return new RestDataApi(`api/${endpoint}`)
+  return new RestDataApi(`http://localhost:8080/api/${endpoint}`)
 }
 
 /** main holder for api*/
