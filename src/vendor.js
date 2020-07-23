@@ -6,7 +6,7 @@ require('bootstrap-sass/assets/javascripts/bootstrap/dropdown')
 require('bootstrap-sass/assets/javascripts/bootstrap/tooltip') // required by popover
 require('bootstrap-sass/assets/javascripts/bootstrap/popover') // required by clickover
 
-require('../components/bootstrapx-clickover/bootstrapx-clickover')
+require('../legacy/bootstrapx-clickover/bootstrapx-clickover')
 
 require('free-jqgrid/js/jquery.jqgrid.src')
 
