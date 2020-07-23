@@ -14,4 +14,11 @@ filtersMod.config(function($localeProvider, $provide) {
   return $provide.value('$locale', defaultLocale)
 })
 
+// filter to convert html to plain text
+filtersMod.filter('htmlToPlaintext', function() {
+  return function(text) {
+    return String(text).replace(/<[^>]+>/gm, '')
+  }
+})
+
 export default filtersMod.name

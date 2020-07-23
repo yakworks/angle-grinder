@@ -1,0 +1,154 @@
+.codeview {
+  pre code {
+    white-space: pre;
+  }
+  .codeview-title {
+    // background: lighten($primary, 10%);
+    background: $grey;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    line-height: 2;
+    min-height: 0.25rem;
+    color: $white;
+    font-size: $size-5;
+    border-top-left-radius: $radius;
+    border-top-right-radius: $radius;
+  }
+  .highlight {
+    position: relative;
+    text-align: left !important;
+    height: 3.25rem;
+    .button-container {
+      position: absolute;
+      display: inline-flex;
+      background: transparent;
+      border-radius: $radius $radius 0 0;
+      top: 0.25rem;
+      right: 1.35rem;
+      padding: 0 0 0 8px;
+      vertical-align: top;
+      .button {
+        display: flex;
+        align-items: flex-end;
+        padding: 0;
+        text-decoration: underline;
+        &:not(:last-child) {
+          margin-right: 0.5rem;
+        }
+        .icon {
+          margin-left: -2px;
+        }
+        &:hover,
+        &:focus {
+          color: $link;
+          background: transparent;
+        }
+      }
+    }
+    pre {
+      padding: 0;
+      margin: 0;
+      code {
+        overflow: hidden;
+        max-height: 600px;
+        &.hljs {
+          background: inherit;
+          color: inherit;
+          padding: 1.25rem 1.5rem;
+        }
+      }
+    }
+    .codeview-showcode,
+    .codeview-hidecode {
+      display: flex;
+      bottom: 0;
+      left: 0;
+      position: absolute;
+      right: 0;
+      top: 0;
+      align-items: center;
+      background-color: rgba($white, 0.8);
+      border: none;
+      color: $grey;
+      cursor: pointer;
+      font-size: 0.75rem;
+      justify-content: center;
+      width: 100%;
+      font-weight: $weight-semibold;
+      &:hover {
+        background-color: rgba($warning, 0.8);
+      }
+      .icon {
+        margin-right: 0.5rem;
+      }
+    }
+    .codeview-hidecode {
+      position: static;
+      height: 2rem;
+    }
+    &.is-expanded {
+      height: auto;
+      pre code {
+        overflow: inherit;
+      }
+    }
+    &.is-collapsed {
+      border: 1px solid $warning;
+    }
+  }
+  &:not(:last-child) {
+    margin-bottom: 1.5rem;
+  }
+}
+
+// our changes here
+.codeview {
+
+  // padding-top: 5px;
+  // padding-right: 5px;
+
+  background-color: #fffdf8;
+
+  code.hljs {
+    max-height: inherit;
+  }
+
+  pre {
+    padding: 0;
+    margin: 0;
+    border: none;
+    background-color: transparent;
+    max-height: inherit;
+  }
+  .nav-tabs > li > a {
+    border: none;
+    font-size: 13px;
+    padding: 5px 10px 0 10px;
+    text-decoration: underline !important;
+  }
+  .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover,
+  .nav-tabs > li.active > a:focus {
+    //background-color: #2b2b2b;
+    color: #666;
+    border: none;
+    background-color: transparent;
+    text-decoration: none !important;
+  }
+  .nav.nav-tabs {
+    margin-bottom: 7px;
+  }
+  .nav-tabs {
+    border-bottom: none;
+  }
+  .nav {
+    padding-left: 5px;
+  }
+  .hljs {
+    padding: 1em;
+    background-color: transparent;
+  }
+
+  .api-docs {
+    padding: 15px;
+  }
+}
