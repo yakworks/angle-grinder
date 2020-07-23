@@ -8,9 +8,11 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const FixStyleOnlyEntriesPlugin = require("webpack-fix-style-only-entries")
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const apiMocker = require('mocker-api');
+//const HtmlWebpackExcludeAssetsPlugin = require('html-webpack-exclude-assets-plugin')
+//const ThemesGeneratorPlugin = require('themes-switch/ThemesGeneratorPlugin')
 //const CleanWebpackPlugin = require('clean-webpack-plugin')
 const path = require("path");
-
 
 module.exports = function(env, argv) {
 
@@ -20,7 +22,7 @@ module.exports = function(env, argv) {
   console.log("argv", argv)
   let isProd = argv.mode === 'production'
   let minDescriptor  = ''// = isProd ? '.min' : '' //for now don't add min so grails dev is easier
-  let devtool = isProd ? 'source-map' : 'inline-source-map'
+  let devtool = isProd ? 'source-map' : 'inline-source-map' //'eval-source-map'
   let pathout = argv.pathout ? path.resolve(argv.pathout) : path.resolve('./dist')
   //let pathout = path.resolve('./examples/ag-demo-grails/src/main/webapp')
   //let styleLoader = isProd ? MiniCssExtractPlugin.loader : 'style-loader'
@@ -31,7 +33,9 @@ module.exports = function(env, argv) {
     mode: argv.mode,// || "production", pass in with --mode
     devtool: devtool,
     entry: {
-      main: MAIN_ENTRY
+      main: MAIN_ENTRY,
+      // 'theme-dark': `${CONTENT_BASE}/src/assets/themes/dark.scss`,
+      // 'theme-light': `${CONTENT_BASE}/src/assets/themes/light.scss`,
     },
     output: {
       path: pathout, //path.join(__dirname, "dist"),
@@ -69,6 +73,7 @@ module.exports = function(env, argv) {
         { test: /\.js$/, loader: 'babel-loader', exclude: /(node_modules|bower_components)/},
         {
           test: /\.(scss|css|sass)$/,
+          //exclude: /themes\/.+\.scss$/,
           use: [
             { loader: styleLoader },
             // translates CSS into CommonJS
@@ -79,7 +84,7 @@ module.exports = function(env, argv) {
               options: {
                 sourceMap: true,
                 sassOptions: {
-                  outputStyle: 'compressed', //try expanded too
+                  outputStyle: 'expanded' //'compressed', //try expanded too
                 }
               }
             }
@@ -177,12 +182,26 @@ module.exports = function(env, argv) {
       })
     )
   }
+
+  //add themes scss to entries
+  // ['light', 'dark', 'dark-red', 'dark-light', 'dark-green', 'dark-3'].forEach( (name) => {
+  //   cfg.entry[`theme-${name}`] = `${CONTENT_BASE}/src/assets/themes/${name}.scss`
+  // })
+
+  // ['light', 'dark', 'dark-red', 'dark-light', 'dark-green', 'dark-3'].forEach( (name) => {
+  //   cfg.entry[`theme-${name}`] = `./src/styles/themes/${name}.scss`
+  // })
+
   cfg.devServer = {
+    before(app){
+      apiMocker(app, path.resolve('./examples/demo/mocker/index.js'))
+    },
     //compress: true, //gzips before serving so we can see file size
+    disableHostCheck: true,
     port: 3000,
+    host: '0.0.0.0'
     // historyApiFallback: true,
     //inline: false, //default:true script will be inserted in your bundle to take care of live reloading
-
   }
 
   return cfg
