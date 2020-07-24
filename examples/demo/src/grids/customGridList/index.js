@@ -1,5 +1,5 @@
 import compDemoModule from './listComp'
-
+import editComp from "./editComp";
 const template = `
 <example-snippet is-horizontal raw-js='$ctrl.rawJs' raw-html='$ctrl.rawHtml' raw-md='$ctrl.rawMd' >
   <basic-rest-grid-demo config-key="$ctrl.configKey"></basic-rest-grid-demo>

@@ -23,6 +23,7 @@
 
     <script type="text/ng-template" id="menuItemTree">
       <a href="{{mitem.children ? '' : mitem.name}}" class="item-content"
+         ng-if="mitem.isMenuItem === undefined ? true : mitem.isMenuItem"
          ng-click="$ctrl.itemClick(mitem, $event)">
         <span class="icon" ng-if="mitem.data.icon">
           <i class="{{mitem.data.icon}}"></i>
