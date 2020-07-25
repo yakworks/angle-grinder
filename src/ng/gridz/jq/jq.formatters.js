@@ -34,7 +34,7 @@ $.extend($.fn.fmatter, {
 
   gridLink(cellVal, options, rowdata) {
     const id = rowdata.id
-    return `<a onClick="window.location.href += ('/'+${id})" href="#">${cellVal}</a>`
+    return `<a class="gridLink" href="#" >${cellVal}</a>`
   }
 })
 
