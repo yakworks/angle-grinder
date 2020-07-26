@@ -1,5 +1,5 @@
-import compDemoModule from './listComp'
-import editComp from "./editComp";
+import compDemoModule from './list/listComp'
+import editComp from "./edit/editComp";
 const template = `
 <example-snippet is-horizontal raw-js='$ctrl.rawJs' raw-html='$ctrl.rawHtml' raw-md='$ctrl.rawMd' >
   <basic-rest-grid-demo config-key="$ctrl.configKey"></basic-rest-grid-demo>
@@ -10,8 +10,8 @@ export default angular
   .component('basicGridRestIndex', {
     template: template,
     controller: function() {
-      this.rawHtml = require('./list.html')
-      this.rawJs = require('!raw-loader!./listComp.js').default
+      this.rawHtml = require('./list/list.html')
+      this.rawJs = require('!raw-loader!./list/listComp.js').default
     }
   }).name
 

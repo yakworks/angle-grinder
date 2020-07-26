@@ -3,8 +3,8 @@ import template from './edit.html'
 class EditCtrl {
   vm={}
   /* @ngInject */
-  constructor($stateParams) {
-    console.log($stateParams)
+  constructor($stateParams, $state) {
+    console.log($state.current.name)
     this.$stateParams = $stateParams
 
   }
