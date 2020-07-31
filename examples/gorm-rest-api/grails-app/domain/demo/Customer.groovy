@@ -1,5 +1,8 @@
 package demo
 
+import gorm.tools.rest.RestApi
+
+@RestApi(description = "Customer domain")
 class Customer implements Serializable {
     String name
     String num
@@ -9,4 +12,9 @@ class Customer implements Serializable {
     String postalCode
     String country
     String timezone
+
+    static quickSearchFields = ["name", "num"]
+    static constraints = {
+        name nullable: false
+    }
 }

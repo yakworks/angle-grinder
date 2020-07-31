@@ -1,0 +1,7 @@
+---
+restApi:
+  project:
+    includes:
+      default: ['*']
+      list: ['id', 'num', 'name']
+      pickList: ['id', 'num', 'name']
