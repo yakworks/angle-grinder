@@ -39,10 +39,11 @@ class Controller extends AgBaseControl {
   }
 
   addTag() {
-    if (this.newTag.length === 0) { return }
+    const newTag = this.newTag.replace(',', '')
+    if (newTag.length === 0) { return }
     const tagArray = this.tagArray()
-    if (!Array.from(tagArray).includes(this.newTag)) {
-      tagArray.push(this.newTag.replace(',', ''))
+    if (!Array.from(tagArray).includes(newTag)) {
+      tagArray.push(newTag)
       this.updateValue(tagArray)
     }
     return this.newTag = ''
