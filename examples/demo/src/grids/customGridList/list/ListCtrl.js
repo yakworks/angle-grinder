@@ -1,11 +1,11 @@
 //import controller from './listCtrl'
-import template from './list.html'
+// import template from './list.html'
 import BaseListCtrl from 'angle-grinder/src/ng/gridz/list/BaseListCtrl'
 import restStoreApi from '../../../store/RestStoreApi'
 import toast from 'angle-grinder/src/tools/toast'
 import _ from 'lodash'
 
-class ListCtrl extends BaseListCtrl {
+export default class ListCtrl extends BaseListCtrl {
   apiKey = 'invoice'
 
   // massUpdateTemplate = require('../basicGrid/templates/massUpdateForm.html')
@@ -46,10 +46,3 @@ class ListCtrl extends BaseListCtrl {
   }
 }
 
-export default angular
-  .module('ag.demo.basicRestGridDemo', [])
-  .component('basicRestGridDemo', {
-    template: template,
-    controller: ListCtrl
-  })
-  .name

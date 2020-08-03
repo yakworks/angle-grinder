@@ -126,12 +126,12 @@ const gridsStates = {
     icon: 'fa fa-table '
   },
   children: [
-  {
-    name: 'Edit Customer',
-    isMenuItem: false,
-    url: '/customer/:id',
-    component: 'basicRestEditGridDemo'
-  },
+    {
+      name: 'Edit Customer',
+      isMenuItem: false,
+      url: '/customer/:id',
+      component: 'customRestEditDemo'
+    },
     {
       name: 'vanilla-agGridList',
       url: '/customer',
