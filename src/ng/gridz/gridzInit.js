@@ -94,6 +94,12 @@ export function setupFormatters(gridCtrl, gridEl, options) {
     const id = $(this).parents('tr:first').attr('id')
     return gridCtrl.contextMenuClick({ id: id }, { key: 'edit' })
   })
+
+  gridEl.on('click', 'a.gridLink', function(event) {
+    event.preventDefault()
+    const id = $(this).parents('tr:first').attr('id')
+    window.location.href += '/' + id
+  })
 }
 
 /**

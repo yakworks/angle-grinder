@@ -30,6 +30,11 @@ $.extend($.fn.fmatter, {
 
   editActionLink(cellVal, options, rowdata) {
     return `<a class="editActionLink" href="#">${cellVal}</a>`
+  },
+
+  gridLink(cellVal, options, rowdata) {
+    const id = rowdata.id
+    return `<a class="gridLink" href="#" >${cellVal}</a>`
   }
 })
 
