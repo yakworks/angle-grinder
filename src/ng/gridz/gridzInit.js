@@ -98,9 +98,8 @@ export function setupFormatters(gridCtrl, gridEl, options) {
   gridEl.on('click', 'a.gridLink', function(event) {
     event.preventDefault()
     const id = $(this).parents('tr:first').attr('id')
-    window.location.href += '/'+id
+    window.location.href += '/' + id
   })
-
 }
 
 /**
