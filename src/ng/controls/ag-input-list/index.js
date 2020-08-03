@@ -35,16 +35,14 @@ class Controller extends AgBaseControl {
 
   tagArray() {
     if (this.value === undefined) { return [] }
-    return this.value.filter(tag => tag !== '')
+    return this.value
   }
 
   addTag() {
-    const newTag = this.newTag.replace(',', '')
-    if (newTag.length === 0) { return }
+    if (this.newTag.length === 0) { return }
     const tagArray = this.tagArray()
-    if (!Array.from(tagArray).includes(newTag)) {
-      tagArray.push(newTag)
-      this.updateValue(tagArray)
+    if (!Array.from(tagArray).includes(this.newTag)) {
+      this.updateValue(_.uniq([...tagArray, ...this.newTag.split(',')]))
     }
     return this.newTag = ''
   }
@@ -60,7 +58,7 @@ class Controller extends AgBaseControl {
   }
 
   updateValue(tagArray) {
-    this.value = tagArray
+    this.value = tagArray.filter(tag => tag !== '')
     this.onChange()
   }
 }
