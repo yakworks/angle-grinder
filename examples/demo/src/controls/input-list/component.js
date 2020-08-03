@@ -2,8 +2,18 @@ import template from './component.html'
 
 class controller {
   vm = {
-    nums: '',
-    predefined: 'foo,bar,qwe,asfdasf,asdf,qewr,zxvszvx,asdfadsf,dfgsdfgsdg'
+    nums: [],
+    predefined: [
+      'foo',
+      'bar',
+      'qwe',
+      'asfdasf',
+      'asdf',
+      'qewr',
+      'zxvszvx',
+      'asdfadsf',
+      'dfgsdfgsdg'
+    ]
   }
   alert = () => {
     alert(this.vm.nums)

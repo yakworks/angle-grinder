@@ -1,7 +1,7 @@
 # toolbarOptions: {}
 gridOptions:
   colModel:
-    - { name: id, width: 20, sorttype: int, align: right }
+    - { name: id, width: 20, sorttype: int, align: right, formatter: gridLink }
     - { name: num, width: 30 }
     - { name: name, formatter: editActionLink }
     - { name: city, width: 100 }

@@ -127,7 +127,14 @@ const gridsStates = {
   },
   children: [
     {
+      name: 'Edit Customer',
+      isMenuItem: false,
+      url: '/customer/:id',
+      component: 'customRestEditDemo'
+    },
+    {
       name: 'vanilla-agGridList',
+      url: '/customer',
       component: 'agGridList',
       data: { title: 'Vanilla rest agGridList'},
       resolve: {
