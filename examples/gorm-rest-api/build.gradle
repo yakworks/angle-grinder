@@ -1,27 +1,22 @@
 buildscript {
     repositories {
         mavenLocal()
+        maven { url "https://plugins.gradle.org/m2/" }
         maven { url "https://repo.grails.org/grails/core" }
     }
     dependencies {
         classpath "org.grails:grails-gradle-plugin:$grailsVersion"
         classpath "org.grails.plugins:hibernate5:${gormVersion-".RELEASE"}"
-        classpath "org.grails.plugins:views-gradle:1.2.9"
+        classpath "org.grails.plugins:views-gradle:1.3.0"
+        classpath "org.yakworks:gradle-plugins:1.1.14"
     }
 }
 
-version "0.1"
-group "demo.gorm.rest.api"
-
-apply plugin:"eclipse"
-apply plugin:"idea"
-apply plugin:"war"
-apply plugin:"org.grails.grails-web"
+apply plugin:'yakworks.grails-web'
 apply plugin:"org.grails.plugins.views-json"
 
 repositories {
-    mavenLocal()
-    maven { url "https://repo.grails.org/grails/core" }
+  //shipyak adds the other repos we need
   maven { url "http://repo.9ci.com/oss-snapshots" }
 }
 
@@ -39,24 +34,39 @@ dependencies {
     compile "org.grails:grails-plugin-datasource"
     compile "org.grails:grails-plugin-databinding"
     compile "org.grails:grails-web-boot"
+
     compile "org.grails:grails-logging"
     compile "org.grails.plugins:cache"
     compile "org.grails.plugins:async"
+    compile "org.grails.plugins:events"
+    compile "org.grails.plugins:external-config:$versionExternalConfig"
+
     compile "org.grails.plugins:hibernate5"
-    compile "org.hibernate:hibernate-core:5.1.16.Final"
-  compile "org.grails.plugins:gorm-tools:$vPluginGormTools"
-  testCompile "org.grails.plugins:gorm-tools:$vPluginGormTools"
-  compile "org.grails.plugins:gorm-rest-api:3.3.2-SNAPSHOT"
-    compile "org.grails.plugins:views-json"
-    compile "org.grails.plugins:views-json-templates"
+    compile "org.hibernate:hibernate-core:$versionHibernate"
+    compile "org.hibernate:hibernate-ehcache:$versionHibernate"
+
+    compile "org.grails.plugins:views-json:$versionViews"
+    compile "org.grails.plugins:views-json-templates:$versionViews"
+
     console "org.grails:grails-console"
     profile "org.grails.profiles:rest-api"
-    runtime "org.glassfish.web:el-impl:2.1.2-b03"
+
+    //runtime "org.glassfish.web:el-impl:2.1.2-b03"
+
+    compile 'org.grails.plugins:grails-java8:1.2.3'
+
+    compile "org.codehaus.gpars:gpars:1.2.0"
+
+    compile("org.grails.plugins:gorm-tools:$vPluginGormTools"){ changing = true }
+
+    // runtime "com.h2database:h2"
     runtime "com.h2database:h2"
-    runtime "org.apache.tomcat:tomcat-jdbc"
-    testCompile "org.grails:grails-gorm-testing-support"
+    runtime "com.zaxxer:HikariCP:3.4.5"
+
     testCompile "org.grails:grails-datastore-rest-client"
-    testCompile "org.grails:grails-web-testing-support"
+    testCompile "org.grails.plugins:geb"
+    testCompile "org.grails.plugins:build-test-data:$versionBuildTestData"
+    testCompile "org.grails:views-json-testing-support:$versionViews"
 }
 
 bootRun {
@@ -64,4 +74,11 @@ bootRun {
     addResources = true
     String springProfilesActive = 'spring.profiles.active'
     systemProperty springProfilesActive, System.getProperty(springProfilesActive)
+}
+
+configurations {
+  testCompile.extendsFrom compileOnly //includes the compileOnly in tests too so we don't have to list twice
+  all {
+    resolutionStrategy.cacheChangingModulesFor 1, 'seconds' //when changing = true this sets the cache time
+  }
 }

@@ -1,0 +1,8 @@
+---
+restApi:
+  customer:
+    entityClass: demo.Customer
+    includes:
+      # default: ['*']
+      # list: ['id', 'num', 'name']
+      pickList: ['id', 'num', 'name']

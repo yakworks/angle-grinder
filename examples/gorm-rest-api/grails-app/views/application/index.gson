@@ -1,15 +1,20 @@
-import grails.core.*
-import grails.util.*
-import grails.plugins.*
-import org.grails.core.artefact.*
+import grails.core.GrailsApplication
+import grails.core.GrailsClass
+import grails.plugins.GrailsPlugin
+import grails.plugins.GrailsPluginManager
+import grails.util.Environment
+import grails.util.GrailsUtil
+import org.grails.core.artefact.ControllerArtefactHandler
+import org.grails.core.artefact.DomainClassArtefactHandler
+import org.grails.core.artefact.ServiceArtefactHandler
 
 model {
-	GrailsApplication grailsApplication	
-	GrailsPluginManager pluginManager
+    GrailsApplication grailsApplication
+    GrailsPluginManager pluginManager
 }
 
 json {
-	message "Welcome to Grails!"
+    message "Welcome to Grails!"
     environment Environment.current.name
     appversion grailsApplication.metadata.getApplicationVersion()
     grailsversion GrailsUtil.grailsVersion
@@ -17,7 +22,7 @@ json {
     groovyversion GroovySystem.getVersion()
     jvmversion System.getProperty('java.version')
     reloadingagentenabled Environment.reloadingAgentEnabled
-    artefacts (
+    artefacts(
         controllers: grailsApplication.getArtefactInfo(ControllerArtefactHandler.TYPE).classesByName.size(),
         domains: grailsApplication.getArtefactInfo(DomainClassArtefactHandler.TYPE).classesByName.size(),
         services: grailsApplication.getArtefactInfo(ServiceArtefactHandler.TYPE).classesByName.size()
@@ -27,7 +32,7 @@ json {
         logicalPropertyName c.logicalPropertyName
     }
     plugins pluginManager.allPlugins, { GrailsPlugin plugin ->
-    	name plugin.name
-    	version plugin.version
+        name plugin.name
+        version plugin.version
     }
 }
