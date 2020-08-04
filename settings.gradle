@@ -7,5 +7,5 @@ include 'examples/ag-demo-grails'
 findProject(':examples/ag-demo-grails').name = 'agDemo'
 
 include 'examples/gorm-rest-api'
-findProject(':examples/gorm-rest-api').name = 'demoGormRestApi'
+findProject(':examples/gorm-rest-api').name = 'gorm-rest-api'
 

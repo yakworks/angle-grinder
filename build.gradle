@@ -13,15 +13,19 @@ buildscript {
 
 apply plugin: 'yakworks.shipyak' //our opinionated defaults for gradle groovy & grails projects
 
-
 subprojects {
+  repositories {
+    //shipyak adds the other repos we need
+    maven { url "http://repo.9ci.com/oss-snapshots" }
+    mavenLocal()
+  }
   plugins.withId('java') {
     sourceCompatibility = '1.8'
     targetCompatibility = '1.8'
 
     dependencies {
-      compile "org.grails.plugins:converters:3.3.1" //JSON converter
-      compile "org.grails:grails-plugin-controllers"
+      // compile "org.grails.plugins:converters:3.3.1" //JSON converter
+      // compile "org.grails:grails-plugin-controllers"
       testRuntime "com.h2database:h2"
       testRuntime "org.apache.tomcat:tomcat-jdbc"
 
