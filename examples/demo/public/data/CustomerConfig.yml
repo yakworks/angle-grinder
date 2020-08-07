@@ -10,6 +10,7 @@ gridOptions:
     - { name: country, width: 60 }
   sortname: id
   shrinkToFit: true
+  multiSort: true
   contextMenu: true
   pager: true
 
