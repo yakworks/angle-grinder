@@ -8,7 +8,7 @@ gridOptions:
     - { name: state, width: 60 }
     - { name: postalCode, label: Zip, width: 60 }
     - { name: country, width: 60 }
-  sortname: id
+  # sortname: name
   shrinkToFit: true
   multiSort: true
   contextMenu: true

@@ -59,26 +59,37 @@ class MemDataApi {
   }
 
   //
-  async search(params) {
+  async search(p) {
     let list = await this.data()
-    const isSearch = params._search === 'true' || params._search === true
-    if (isSearch) list = this.filter(list, params)
-
-    list = _.orderBy(list, params.sort, params.order)
-    const paged = this.pagination(list, params)
+    const isSearch = p._search === 'true' || p._search === true || p.q
+    if (isSearch) list = this.filter(list, p)
+    if (p.sort) {
+      const sortobj = p.sort.split(',').reduce((acc, item) => {
+        const sortar = item.trim().split(' ')
+        acc.sort.push(sortar[0])
+        acc.order.push(sortar[1])
+        return acc
+      }, { sort: [], order: [] })
+      console.log('sortobj', sortobj)
+      list = _.orderBy(list, sortobj.sort, sortobj.order)
+    }
+    const paged = this.pagination(list, p)
     // console.log("query paged", paged)
     return paged
   }
 
   filter(list, params) {
     let flist = list
-    if (params.filters) {
-      const filters = JSON.parse(params.filters)
-      if (filters.quickSearch) {
-        flist = this.searchAny(list, filters.quickSearch)
+    const filters = params.filters ? JSON.parse(params.filters) : null
+    if (filters) {
+      // const filters = JSON.parse(params.filters)
+      if (filters.qSearch) {
+        flist = this.searchAny(list, filters.qSearch)
       } else {
         flist = this.qbe(list, filters)
       }
+    } else if (params.q) {
+      flist = this.searchAny(list, params.q)
     }
     return flist
   }
@@ -87,8 +98,7 @@ class MemDataApi {
   async pickList(params) {
     let list = await this.data()
     if (params) {
-      if (params.filters) list = this.filter(list, params)
-      if (params.q) list = this.searchAny(list, params.q)
+      if (params.filters || params.q) list = this.filter(list, params)
     }
     list = list.reduce((acc, item) => {
       acc.push(_.pick(item, this.pickListFields))

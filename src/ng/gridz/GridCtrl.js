@@ -348,12 +348,12 @@ export default class GridCtrl {
 
   // Sets the grid search filters and triggers a reload
   async quickSearch(queryText) {
-    return this.search({ quickSearch: queryText })
+    return this.search(null, queryText)
   }
 
   // Sets the grid search filters and triggers a reload
-  async search(filters) {
-    if (filters == null) { filters = {} }
+  async search(filters, q) {
+    // if (filters == null) { filters = {} }
     // let filters = this.searchModel
     try {
       this.isSearching = true
@@ -362,6 +362,8 @@ export default class GridCtrl {
         search: this.hasSearchFilters(filters),
         postData: { filters: JSON.stringify(filters) }
       }
+      if (filters) params.postData.filters = JSON.stringify(filters)
+      if (q) params.postData.q = q
       // console.log('search params', params)
       this.setParam(params)
       await this.reload()
