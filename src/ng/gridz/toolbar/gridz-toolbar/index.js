@@ -58,19 +58,18 @@ class Controller {
       // 13 - Enter key code
       if (event.which === 13) {
         event.preventDefault()
-        this.gridCtrl.quickSearch(this.quickSearchEntry)
-        // this.quickSearchEntry = ""
+        this.gridCtrl.quickSearch(this.qSearchEntry)
       }
       // esc key
       if (event.which === 27) {
-        this.quickSearchEntry = ''
+        this.qSearchEntry = ''
         // scope.$apply()
       }
     })
   }
 
   clearSearchInput() {
-    this.quickSearchEntry = ''
+    this.qSearchEntry = ''
     this.gridCtrl.quickSearch('')
   }
 

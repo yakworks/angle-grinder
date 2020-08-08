@@ -168,11 +168,16 @@ export default class BaseListCtrl {
   }
 
   // load results of a query into gridCtrl
-  async gridLoader(params) {
+  async gridLoader(p) {
     this.gridCtrl.toggleLoading(true)
     try {
-      // console.log("gridLoader params", params)
-      const data = await this.dataApi.search(params)
+      // console.log("gridLoader params", p)
+      // fix up sort
+      if (p.sort && p.order) p.sort = `${p.sort} ${p.order}`
+      if (!p.sort) delete p.sort
+      delete p.order
+      // console.log('params after clean', p)
+      const data = await this.dataApi.search(p)
       this.gridCtrl.addJSONData(data)
     } catch (er) {
       this.handleError(er)

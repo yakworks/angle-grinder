@@ -54,25 +54,33 @@ describe('MemDataApi', () => {
       expect(result.total).toEqual(1)
     })
 
-    it('quick search', async function() {
+    it('q search', async function() {
       const params = {
         max: 20,
         order: "asc",
         page: 1,
         sort: "id",
         _search: true,
-        filters: '{"quickSearch":"762"}'
+        filters: '{"qSearch":"762"}'
       }
       const result = await api.search(params)
       expect(result.data.length).toEqual(1)
     })
 
-    it('filter quicksearch', function() {
+    it('filter qSearch', function() {
       const params = {
-        filters: '{"quickSearch":"762341"}'
+        filters: '{"qSearch":"762341"}'
       }
       const result = api.filter(data, params)
       expect(result.length).toEqual(1)
+    })
+
+    it('q search simple', async function() {
+      const params = {
+        q: "762341"
+      }
+      const result = await api.search(params)
+      expect(result.data.length).toEqual(1)
     })
 
     it('searchAny function', function() {

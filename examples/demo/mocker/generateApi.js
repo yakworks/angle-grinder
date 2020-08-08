@@ -69,7 +69,7 @@ function makeUrls(epoint, api) {
         })
       },
 
-      [`DELETE /api/${epoint}`]: (req, res) => {
+      [`DELETE /api/${epoint}/:id`]: (req, res) => {
         // console.log("get invoice id params", req.params)
         api.remove(req.params.id)
         .then(() => {
