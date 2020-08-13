@@ -10,6 +10,9 @@
     }
   }
   .icon {
+    &.is-small {
+      font-size: $size-14;
+    }
     &.is-clickable {
       pointer-events: auto;
       cursor: pointer;

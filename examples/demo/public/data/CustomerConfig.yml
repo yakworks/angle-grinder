@@ -71,7 +71,8 @@ searchForm:
     - key: num
       type: input-list
     - key: name
-      type: input-list
+      # this is the default, here as an example
+      type: input-wildcard
   column2:
     - key: city
     - key: state
