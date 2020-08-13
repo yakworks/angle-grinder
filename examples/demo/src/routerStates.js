@@ -20,7 +20,16 @@ const formStates = {
     {
       name: 'inputs',
       component: 'agInputDemoIndex'
-    },{
+    },
+    {
+      name: 'input-wildcard',
+      component: 'agInputWildcardIndex'
+    },
+    {
+      name: 'input-list',
+      component: 'agInputListDemoIndex'
+    },
+    {
       name: 'amount',
       component: 'agAmountDemoIndex'
     },
@@ -43,10 +52,6 @@ const formStates = {
     {
       name: 'datepicker',
       component: 'datepickerDemoIndex'
-    },
-    {
-      name: 'input-csv-list',
-      component: 'agInputListDemoIndex'
     },
     {
       name: 'formly-example',
@@ -77,7 +82,7 @@ const uiStates = {
   abstract: true,
   data: {
     title: 'UI Elements',
-    icon: 'fa fa-flask'
+    icon: 'fas fa-flask'
   },
   children: [
     {
@@ -123,7 +128,7 @@ const gridsStates = {
   abstract: true,
   template: '<div ui-view class="fade-in-up"></div>',
   data: {
-    icon: 'fa fa-table '
+    icon: 'mdi mdi-table-large'
   },
   children: [
     {
@@ -171,7 +176,7 @@ const componentsStates = {
   abstract: true,
   template: '<div ui-view class="fade-in-up"></div>',
   data: {
-    icon: 'fa fa-plug '
+    icon: 'fas fa-plug'
   },
   // data: { title: 'Grids'},
   // ncyBreadcrumb: {
@@ -206,7 +211,7 @@ const levelStates = {
   abstract: true,
   template: '<div ui-view class="fade-in-up"></div>',
   data: {
-    icon: 'fa fa-plug '
+    icon: 'fas fa-plug '
   },
   children: [
     {

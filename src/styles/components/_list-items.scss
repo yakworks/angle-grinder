@@ -50,9 +50,14 @@ $list-active-color: $secondary !default;
       margin-top: $item-margin; //16px
       margin-bottom: $item-margin; //16px
       margin-right: $item-margin * 2; //32px
-      i.fa, i.mdi {
+      i.mdi {
         padding: 1px;
         font-size: calc(#{$icon-dimensions} - 2px); //22px
+        text-align: center;
+      }
+      i.fa, i.far, i.fas, i.fal, i.fad {
+        padding: 1px;
+        font-size: calc(#{$icon-dimensions} - 4px); //22px
         text-align: center;
       }
     }
