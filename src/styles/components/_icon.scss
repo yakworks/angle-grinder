@@ -1,10 +1,16 @@
+$icon-dimensions-small: $size-14 !default;
 @import "~bulma/sass/elements/icon.sass";
 
 @mixin iconSize ($icon-size) {
   height: $icon-size;
   width: $icon-size;
 
-  i.fa, i.mdi {
+  i.fa, i.far, i.fas, i.fal, i.fad {
+    padding: 1px;
+    font-size: calc(#{$icon-size} - 4px); //26px
+    text-align: center;
+  }
+  i.mdi {
     padding: 1px;
     font-size: calc(#{$icon-size} - 2px); //26px
     text-align: center;
@@ -13,12 +19,16 @@
 
 // change default fa and mdi font sizes
 .icon {
-  i.fa, i.mdi {
+  i.fa, i.far, i.fas, i.fal, i.fad, i.mdi {
     padding: 1px;
-    font-size: $icon-dimensions; //calc(#{$icon-dimensions} - 2px); //22px
+    font-size: calc(#{$icon-dimensions} - 2px); //22px
     text-align: center;
     line-height: 1;
   }
+  i.mdi {
+    font-size: $icon-dimensions; //calc(#{$icon-dimensions} - 2px); //22px
+  }
+
   // add default so it can be changed back
   &.is-default {
     height: $icon-dimensions;
@@ -28,7 +38,7 @@
   &.is-small {
     height: $icon-dimensions-small;
     width: $icon-dimensions-small;
-    i.fa, i.mdi {
+    i.fa, i.far, i.fas, i.fal, i.fad, i.mdi {
       font-size: $icon-dimensions-small;
     }
   }

@@ -2,6 +2,9 @@
 window.jQuery = require('jquery')
 window.$ = window.jQuery
 
+// require('@fortawesome/fontawesome-free/js/all.js')
+// require('@fortawesome/fontawesome-free/js/v4-shims.js')
+
 require('bootstrap-sass/assets/javascripts/bootstrap/dropdown')
 require('bootstrap-sass/assets/javascripts/bootstrap/tooltip') // required by popover
 require('bootstrap-sass/assets/javascripts/bootstrap/popover') // required by clickover

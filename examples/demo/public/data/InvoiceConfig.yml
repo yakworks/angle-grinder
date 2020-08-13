@@ -75,12 +75,13 @@ searchForm:
     - key: refnum
       type: input-list
     - key: ext.orderNum
-      type: input-list
+      type: input-wildcard
     - key: amount
       type: amount-range
   column2:
     - key: state
       type: select
+      selectOptions: { multiple: true, showSelectAll: true }
       dataApiKey: tranState
     - key: hasTax
       type: checkbox
@@ -90,5 +91,7 @@ searchForm:
   column3:
     - key: customer
       type: select
+      selectOptions: { multiple: true }
       dataApiKey: customer
     - key: comments
+      type: input-wildcard

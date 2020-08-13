@@ -108,16 +108,17 @@ $select2-font-size: 14px;
   }
 
   .select2-choices:after, .select2-choice:after {
-    content:"\f142";
-    font-family: FontAwesome;
+    content:"\f141";
+    font-family: 'Font Awesome 5 Free';
     $icoSize: 1em;
     font-size: $icoSize;
+    font-weight: 900;
     //padding: 8px 8px;
     position: absolute;
     right: 0px;
     //top: 50%;
     margin-top: $icoSize/2;
-    margin-right: $icoSize;
+    margin-right: .625em;
     z-index: 4;
     color: $input-arrow;
     box-sizing: border-box;
