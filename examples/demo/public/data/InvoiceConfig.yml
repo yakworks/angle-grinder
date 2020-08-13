@@ -75,6 +75,7 @@ searchForm:
     - key: refnum
       type: input-list
     - key: ext.orderNum
+      type: input-wildcard
     - key: amount
       type: amount-range
   column2:
@@ -93,3 +94,4 @@ searchForm:
       selectOptions: { multiple: true }
       dataApiKey: customer
     - key: comments
+      type: input-wildcard

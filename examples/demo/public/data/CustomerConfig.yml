@@ -71,11 +71,15 @@ searchForm:
     - key: num
       type: input-list
     - key: name
-      # this is the default, here as an example
+      # TODO make this the default for search forms
       type: input-wildcard
   column2:
     - key: city
+      type: input-wildcard
     - key: state
+      type: input-wildcard
   column3:
     - key: country
+      type: input-wildcard
     - key: timezone
+      type: input-wildcard
