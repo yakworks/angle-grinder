@@ -13,8 +13,8 @@ gridOptions:
     - {name: hasTax, label: Taxable, width: 60, align: center, formatter: okIcon}
   sortname: id
   shrinkToFit: true
-  contextMenu: true
   multiSort: true
+  contextMenu: true
   pager: true
 
 toolbarOptions:
