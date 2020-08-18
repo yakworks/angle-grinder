@@ -22,68 +22,67 @@ restApi:
       contextMenu: true
       pager: true
 
-      editForm:
-        fieldGroupA:
-          - type: label
-            label: 'Num / Name'
-            required: true
-            className: column is-3
-          - key: num
-            label: ''
-            required: true
-            hint: Unique Cust Num
-            placeholder: Customer Number
-            className: column is-3
-          - key: name
-            label: ''
-            required: true
-            hint: Customer Name
-            placeholder: Customer Name
+    editForm:
+      fieldGroupA:
+        - type: label
+          label: 'Num / Name'
+          required: true
+          className: column is-3
+        - key: num
+          label: ''
+          required: true
+          hint: Unique Cust Num
+          placeholder: Customer Number
+          className: column is-3
+        - key: name
+          label: ''
+          required: true
+          hint: Customer Name
+          placeholder: Customer Name
 
-        street:
-          label: Address
-          placeholder: Street
-          hint: enter 911 for a server error
+      street:
+        label: Address
+        placeholder: Street
+        hint: enter 911 for a server error
 
-        fieldGroupB:
-          - type: label
-            label: '' # blank label so its a placeholder
-            required: false
-            className: column is-3
-          - key: city
-            label: ''
-            placeholder: City
-          - key: state
-            label: ''
-            placeholder: State
-            className: column is-2
-          - key: postalCode
-            label: ''
-            placeholder: Zip
-            className: column is-2
-        country: {}
-        timezone: {}
-        nested.foo:
-          label: 'nested.foo'
-          hint: enter 911 for a server error
-        tags:
-          type: select
-          selectOptions: { multiple: true, showSelectAll: true }
-          dataApiKey: tag
+      fieldGroupB:
+        - type: label
+          label: '' # blank label so its a placeholder
+          required: false
+          className: column is-3
+        - key: city
+          label: ''
+          placeholder: City
+        - key: state
+          label: ''
+          placeholder: State
+          className: column is-2
+        - key: postalCode
+          label: ''
+          placeholder: Zip
+          className: column is-2
+      country: {}
+      timezone: {}
+      nested.foo:
+        label: 'nested.foo'
+        hint: enter 911 for a server error
+      tags:
+        type: select
+        selectOptions: { multiple: true, showSelectAll: true }
+        dataApiKey: tag
+    massUpdateForm:
+      - key: country
 
-      massUpdateForm:
+    searchForm:
+      column1:
+        - key: num
+          type: input-list
+        - key: name
+          type: input-list
+      column2:
+        - key: city
+        - key: state
+      column3:
         - key: country
-
-      searchForm:
-        column1:
-          - key: num
-            type: input-list
-          - key: name
-            type: input-list
-        column2:
-          - key: city
-          - key: state
-        column3:
-          - key: country
-          - key: timezone
+        - key: timezone
 
