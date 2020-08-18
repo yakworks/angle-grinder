@@ -2,24 +2,25 @@
 restApi:
   customer:
     entityClass: demo.Customer
+    qSearch: ['num', 'name']
     includes:
       # default: ['*']
       # list: ['id', 'num', 'name']
       pickList: ['id', 'num', 'name']
-      gridOptions:
-        colModel:
-          - { name: id, width: 20, sorttype: int, align: right, formatter: gridLink }
-          - { name: num, width: 30 }
-          - { name: name, formatter: editActionLink }
-          - { name: city, width: 100 }
-          - { name: state, width: 60 }
-          - { name: postalCode, label: Zip, width: 60 }
-          - { name: country, width: 60 }
-        # sortname: name
-        shrinkToFit: true
-        multiSort: true
-        contextMenu: true
-        pager: true
+    gridOptions:
+      colModel:
+        - { name: id, width: 20, sorttype: int, align: right, formatter: gridLink }
+        - { name: num, width: 30 }
+        - { name: name, formatter: editActionLink }
+        - { name: city, width: 100 }
+        - { name: state, width: 60 }
+        - { name: postalCode, label: Zip, width: 60 }
+        - { name: country, width: 60 }
+      # sortname: name
+      shrinkToFit: true
+      multiSort: true
+      contextMenu: true
+      pager: true
 
       editForm:
         fieldGroupA:

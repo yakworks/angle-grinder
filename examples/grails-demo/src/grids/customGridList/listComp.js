@@ -47,7 +47,7 @@ class ListCtrl extends BaseListCtrl {
 }
 
 export default angular
-  .module('ag.demo.basicRestGridDemo', [])
+  .module('ag.demo.basicRestGridDemo', ['ag.demo.api'])
   .component('basicRestGridDemo', {
     template: template,
     controller: ListCtrl

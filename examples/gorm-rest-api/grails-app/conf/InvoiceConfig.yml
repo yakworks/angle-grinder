@@ -1,94 +1,91 @@
-gridOptions:
-  colModel:
-    - {name: id, label: id,width: 20,sorttype: int, align: right, hidden: true}
-    - {name: customer.id, label: custId, hidden: true}
-    - {name: customer.name,label: Customer, formatter: editActionLink}
-    - {name: tranDate, width: 100, formatter: date}
-    - {name: refnum, width: 100}
-    - {name: ext.orderNum, width: 60}
-    - {name: amount, width: 80,formatter: currency}
-    - {name: comments }
-    - {name: state.id, label: StateId, width: 80, align: center, hidden: true}
-    - {name: state.name, label: State, width: 60, align: center}
-    - {name: hasTax, label: Taxable, width: 60, align: center, formatter: okIcon}
-  sortname: id
-  shrinkToFit: true
-  multiSort: true
-  contextMenu: true
-  pager: true
+restApi:
+  invoice:
+    entityClass: demo.Invoice
+    qSearch: ['id']
+    includes:
+      pickList: ['id']
+    gridOptions:
+      colModel:
+        - {name: id, label: id,width: 20,sorttype: int, align: right, hidden: true}
+      sortname: id
+      shrinkToFit: true
+      multiSort: true
+      contextMenu: true
+      pager: true
 
-toolbarOptions:
-  rightSection:
-    template: |
-      <div class="buttons has-addons">
-        <ag-button ng-model="$ctrl.quickPick.states" uib-btn-radio="'all'">All</ag-button>
-        <ag-button ng-model="$ctrl.quickPick.states" uib-btn-radio="'open'">Open</ag-button>
-        <ag-button ng-model="$ctrl.quickPick.states" uib-btn-radio="'closed'">Closed</ag-button>
-      </div>
-  selectedButtons:
-    ptp:
-      icon: fa-heart
-      tooltip: Promise To Pay
-    showSelected:
-      label: Display Selected
-      tooltip: Display selected rows data in panel below
-  leftButtons:
-    import:
-      display: import
-    drop:
-      display: drop menu
-      menuItems:
-        - display: "<strong>Main Action</strong>"
-          icon: fa-thumbs-up
-        - display: Other Action
+    toolbarOptions:
+      rightSection:
+        template: |
+          <div class="buttons has-addons">
+            <ag-button ng-model="$ctrl.quickPick.states" uib-btn-radio="'all'">All</ag-button>
+            <ag-button ng-model="$ctrl.quickPick.states" uib-btn-radio="'open'">Open</ag-button>
+            <ag-button ng-model="$ctrl.quickPick.states" uib-btn-radio="'closed'">Closed</ag-button>
+          </div>
+      selectedButtons:
+        ptp:
+          icon: fa-heart
+          tooltip: Promise To Pay
+        showSelected:
+          label: Display Selected
+          tooltip: Display selected rows data in panel below
+      leftButtons:
+        import:
+          display: import
+        drop:
+          display: drop menu
+          menuItems:
+            - display: "<strong>Main Action</strong>"
+              icon: fa-thumbs-up
+            - display: Other Action
 
-editForm:
-  customer:
-    type: select
-    required: true
-    dataApiKey: customer
-  refnum:
-    required: true
-    minLength: 4
-  ext.orderNum:
-    label: 'Order #'
-    placeholder: Order Number
-  tranDate:
-    type: date
-    required: true
-  amount:
-    type: amount
-  state:
-    type: select
-    required: true
-    dataApiKey: tranState
-  hasTax:
-    type: checkbox
-    label: Taxable?
-  comments:
-    type: textarea
-    placeholder: Notes
-    rows: 3
+    editForm:
+      customer:
+        type: select
+        required: true
+        dataApiKey: customer
+      refnum:
+        required: true
+        minLength: 4
+      ext.orderNum:
+        label: 'Order #'
+        placeholder: Order Number
+      tranDate:
+        type: date
+        required: true
+      amount:
+        type: amount
+      state:
+        type: select
+        required: true
+        dataApiKey: tranState
+      hasTax:
+        type: checkbox
+        label: Taxable?
+      comments:
+        type: textarea
+        placeholder: Notes
+        rows: 3
 
-searchForm:
-  column1:
-    - key: refnum
-      type: input-list
-    - key: ext.orderNum
-      type: input-list
-    - key: amount
-      type: amount-range
-  column2:
-    - key: state
-      type: select
-      dataApiKey: tranState
-    - key: hasTax
-      type: checkbox
-      label: Taxable?
-    - key: tranDate
-      type: date-range
-  column3:
-    - key: customer
-      type: select
-      dataApiKey: customer
-    - key: comments
+    searchForm:
+      column1:
+        - key: refnum
+          type: input-list
+        - key: ext.orderNum
+          type: input-list
+        - key: amount
+          type: amount-range
+      column2:
+        - key: state
+          type: select
+          dataApiKey: tranState
+        - key: hasTax
+          type: checkbox
+          label: Taxable?
+        - key: tranDate
+          type: date-range
+      column3:
+        - key: customer
+          type: select
+          dataApiKey: customer
+        - key: comments
+

@@ -16,7 +16,6 @@ export class LocalStoreApi{
 
   get customer() { return makeDataApi("customers", "data/Customers.json")}
   get invoice() { return makeDataApi("invoices", "data/Invoices.json")}
-  get tranState() { return makeDataApi("tranStates", "data/TranStates.json")}
 
 }
 

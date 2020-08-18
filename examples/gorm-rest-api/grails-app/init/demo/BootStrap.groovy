@@ -12,6 +12,8 @@ class BootStrap {
         def customerFile = grailsApplication.mainContext.getResource('classpath:Customers.json')
         Object customers = new JsonSlurper().parse(customerFile.getInputStream())
         Customer.repo.batchCreate([:], customers)
+        Invoice.repo.create([refnum: '123'])
+
     }
     def destroy = {
     }

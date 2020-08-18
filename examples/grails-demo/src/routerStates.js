@@ -18,7 +18,7 @@ const gridsStates = {
   },
   children: [
     {
-      name: 'invoice',
+      name: 'customer',
       component: 'agGridList',
       data: { title: 'Vanilla rest agGridList'},
       resolve: {
