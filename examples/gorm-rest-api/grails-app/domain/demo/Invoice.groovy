@@ -1,7 +1,5 @@
 package demo
 
-import com.sun.org.apache.xpath.internal.operations.Bool
-
 class Invoice implements Serializable {
     String refnum
     Date tranDate

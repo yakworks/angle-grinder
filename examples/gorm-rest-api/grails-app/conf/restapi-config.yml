@@ -1,5 +1,11 @@
 ---
 restApi:
+  invo:
+    entityClass: demo.Invoice
+    qSearch: ['num', 'name']
+    includes:
+     pickList: ['id', 'num', 'name']
+
   customer:
     entityClass: demo.Customer
     qSearch: ['num', 'name']

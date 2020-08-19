@@ -1,6 +1,5 @@
 package demo.api
 
-import demo.Invoice
 import grails.converters.JSON
 import grails.core.GrailsApplication
 

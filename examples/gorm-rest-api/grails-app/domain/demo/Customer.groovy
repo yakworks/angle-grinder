@@ -1,8 +1,5 @@
 package demo
 
-import gorm.tools.rest.RestApi
-
-// @RestApi(description = "Customer domain")
 class Customer implements Serializable {
     String name
     String num
