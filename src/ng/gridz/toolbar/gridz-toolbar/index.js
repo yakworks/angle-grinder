@@ -19,7 +19,9 @@ class Controller {
   opts = {
     selectedButtons: {
       massUpdate: { icon: 'mdi-square-edit-outline', tooltip: 'Mass Update' },
-      xlsExport: { icon: 'mdi-microsoft-excel', tooltip: 'Export to Excel' }
+      xlsExport: { icon: 'far fa-file-excel', tooltip: 'Export to Excel' }
+      // massUpdate: { icon: 'far fa-edit', tooltip: 'Mass Update' },
+      // xlsExport: { icon: 'far fa-file-excel', tooltip: 'Export to Excel' }
     },
     leftButtons: {
       create: { icon: 'mdi-text-box-plus-outline', tooltip: 'Create New' }

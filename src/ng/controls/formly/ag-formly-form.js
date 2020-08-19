@@ -4,7 +4,7 @@ import angular from 'angular'
 // import { isAttrTruthy } from '../../utils/ngHelpers'
 export default formlyForm
 
-// if its present then its true, if its set to anuything but false then its true
+// if its present then its true, if its set to anything but false then its true
 function isAttrTruthy(attr) {
   if (attr === undefined) return false
   if (angular.isString(attr)) {

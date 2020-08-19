@@ -1,0 +1,25 @@
+
+// ** overrides for ag-input-wildcard for wildcard icon but can be used for any clickable icon
+.control {
+  &.has-icons-right{
+    .input:focus ~ .icon {
+      color: $input-icon-color;
+      &.is-active {
+        color: $primary
+      }
+    }
+  }
+  .icon {
+    &.is-small {
+      font-size: $size-14;
+    }
+    &.is-clickable {
+      pointer-events: auto;
+      cursor: pointer;
+      //color: $link
+    }
+    &.is-active {
+      color: $primary
+    }
+  }
+}

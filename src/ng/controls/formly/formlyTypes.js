@@ -9,6 +9,13 @@ export default function setupTypes(formlyConfig) {
     template: `<ag-input ng-model="model[options.key]" label-key="options.key"
       label="{{to.label}}" min-length="{{to.minLength}}" hint="{{to.hint}}" max-length="{{to.maxLength}}" ></ag-input>`
   })
+
+  setType({
+    name: 'input-wildcard',
+    template: `<ag-input-wildcard ng-model="model[options.key]" label-key="options.key"
+      label="{{to.label}}" min-length="{{to.minLength}}" hint="{{to.hint}}" max-length="{{to.maxLength}}" ></ag-input-wildcard>`
+  })
+
   setType({
     name: 'input-list',
     template: `<ag-input-list ng-model="model[options.key]" label-key="options.key"

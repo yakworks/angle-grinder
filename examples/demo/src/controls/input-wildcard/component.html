@@ -1,0 +1,11 @@
+<form name="form" ag-form is-horizontal>
+  <ag-input-wildcard ng-model="$ctrl.vm.name" hint="this is a hint, must be > 2 chars"
+    minimum-length="2" placeholder="filter by ...." required >
+  </ag-input-wildcard>
+  <ag-input-wildcard ng-model="$ctrl.vm.popName" hint="prepopulated"
+    minimum-length="2">
+  </ag-input-wildcard>
+</form>
+<ag-button ng-click="$ctrl.fillData()">Fill data</ag-button>
+<ag-button ng-click="$ctrl.resetData()">Reset</ag-button>
+<pre ng-cloak class="mt-4">form.$invalid: {{form.$invalid}}<br>model: {{$ctrl.vm | json}}</pre>

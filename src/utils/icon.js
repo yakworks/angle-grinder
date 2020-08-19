@@ -5,6 +5,7 @@
  */
 export function getIconClass(name) {
   if (!name) return
-  if (name.startsWith('fa-')) return `fa ${name}`
+  if (name.startsWith('fa-')) return `fas ${name}`
   if (name.startsWith('mdi-')) return `mdi ${name}`
+  return name
 }

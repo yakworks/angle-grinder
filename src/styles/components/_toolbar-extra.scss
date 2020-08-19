@@ -54,12 +54,12 @@ $toolbar-dense-control-height: 2rem !default;
   .selection-pointer {
     padding: 14px 0px 4px 3px;
     color: $toolbar-icon-color;
-    > i {
-      transform: rotate(180deg);
-      &:before {
-        content: "\f148";
-      }
-    }
+    // > i {
+    //   transform: rotate(180deg);
+    //   &:before {
+    //     content: "\f148";
+    //   }
+    // }
   }
 
   .divider-vertical {

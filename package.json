@@ -26,6 +26,7 @@
     "svelte-dev": "webpack-dev-server --config examples/svelte/webpack.config.js --content-base examples/svelte"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.14.0",
     "@popperjs/core": "^2.0.6",
     "Select2": "^3.5.7",
     "angular": "1.7.9",

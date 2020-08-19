@@ -4,6 +4,7 @@ import agFormlyMod from './formly'
 import agCheckbox from './ag-checkbox'
 import agLabel from './ag-label'
 import agInput from './ag-input'
+import agInputWildcard from './ag-input-wildcard'
 import agInputList from './ag-input-list'
 import agInputBs from './ag-input-bs'
 import uiSelect2Mod from './ui-select2/ui.select2'
@@ -34,6 +35,7 @@ angular.module(MOD_NAME, [
   .directive('agCheckbox', agCheckbox)
   .directive('agLabel', agLabel)
   .directive('agInput', agInput)
+  .directive('agInputWildcard', agInputWildcard)
   .directive('agInputList', agInputList)
   .directive('agSelect', agSelect)
   .directive('agDatepicker', agDatepicker)
