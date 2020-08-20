@@ -6,14 +6,14 @@ import grails.core.GrailsApplication
 class AppConfigController {
     static namespace = 'api'
     GrailsApplication grailsApplication
-    def customer() {
-        ConfigObject appConfig = grailsApplication.config.restApi.customer
+    def getConfig() {
+        ConfigObject appConfig = grailsApplication.config.restApi[configActionName()]
         render appConfig as JSON
     }
 
-    def invoice() {
-        ConfigObject appConfig = grailsApplication.config.restApi.invoice
-        render appConfig as JSON
+
+    String configActionName() {
+        request.forwardURI.split('/')[-1]
     }
 
 }

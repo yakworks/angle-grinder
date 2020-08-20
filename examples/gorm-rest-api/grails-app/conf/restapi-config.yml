@@ -1,6 +1,6 @@
 ---
 restApi:
-  invo:
+  invoice:
     entityClass: demo.Invoice
     qSearch: ['num', 'name']
     includes:

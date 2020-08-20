@@ -5,8 +5,9 @@ class Invoice implements Serializable {
     Date tranDate
     Customer customer
     BigDecimal amount
-    String state
     String comments
+    TranState state
+    Tag tag
     Boolean hasTax = false
 
 
