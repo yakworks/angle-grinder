@@ -7,9 +7,10 @@ function setServerErrors(form, errors) {
   form.$serverErrors = {}
   // iterate through all server side validation errors
   const result = []
-  for (const field in errors) {
+  for (const error of errors) {
+    const field = error.field
     // ..set errors on the nested form
-    const message = errors[field]
+    const message = error.message
     const formField = form[field]
     if ((typeof message === 'object') && !_.isNil(formField)) {
       setServerErrors(formField, message)

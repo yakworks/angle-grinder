@@ -4,12 +4,10 @@ import ky from 'ky'
 
 let client = ky.extend({
   // ... some config ...
-});
+})
 
 const setClientConfig = (config) => {
-  client = client.extend(config);
-};
+  client = client.extend(config)
+}
 
-export {client,
-  setClientConfig
-} // swalInstance
+export { client, setClientConfig } // swalInstance

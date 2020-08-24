@@ -13,5 +13,9 @@ class Customer implements Serializable {
     static qSearchFields = ["name", "num"]
     static constraints = {
         name nullable: false
+        street(validator: { val, thisdoc ->
+            if(val == '911') return ['wrong']
+            return true
+        })
     }
 }

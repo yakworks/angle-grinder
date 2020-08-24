@@ -1,4 +1,4 @@
-import {client as ky} from './ky'
+import { client as ky } from './ky'
 
 class LocalCache {
   _values = {}
