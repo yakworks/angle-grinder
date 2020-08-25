@@ -17,5 +17,9 @@ class Customer implements Serializable {
             if(val == '911') return ['wrong']
             return true
         })
+        city(validator: { val, thisdoc ->
+            if(thisdoc.street && !val) return ['wrong']
+            return true
+        })
     }
 }
