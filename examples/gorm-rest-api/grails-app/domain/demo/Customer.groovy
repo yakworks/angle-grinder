@@ -10,7 +10,9 @@ class Customer implements Serializable {
     String country
     String timezone
 
-    static qSearchFields = ["name", "num"]
+    static List qSearchIncludes = ["name", "num"]
+    static List pickListIncludes = ['id', 'num', 'name']
+
     static constraints = {
         name nullable: false
         street(validator: { val, thisdoc ->

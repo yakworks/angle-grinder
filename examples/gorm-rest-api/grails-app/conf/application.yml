@@ -8,7 +8,8 @@ grails:
   config:
     locations:
       - "classpath:restapi-config.yml"
-      - "classpath:InvoiceConfig.yml"
+      - "classpath:setupConfig/InvoiceConfig.yml"
+      - "classpath:setupConfig/CustomerConfig.yml"
 info:
   app:
     name: "@info.app.name@"

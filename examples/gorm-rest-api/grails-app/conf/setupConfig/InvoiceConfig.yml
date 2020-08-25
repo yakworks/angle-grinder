@@ -1,6 +1,5 @@
 restApi:
   invoice:
-    entityClass: demo.Invoice
     qSearch: ['id']
     includes:
       pickList: ['id']

@@ -11,7 +11,7 @@ class Invoice implements Serializable {
     Boolean hasTax = false
 
 
-    static qSearchFields = ["name", "num"]
+    static qSearchIncludes = ["name", "num"]
     static constraints = {
         tranDate nullable: true
         customer nullable: true
