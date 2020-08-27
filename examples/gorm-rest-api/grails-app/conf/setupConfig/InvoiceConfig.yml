@@ -6,6 +6,16 @@ restApi:
     gridOptions:
       colModel:
         - {name: id, label: id,width: 20,sorttype: int, align: right, hidden: true}
+        - {name: customer.id, label: custId, hidden: true}
+        - {name: customer.name,label: Customer, formatter: editActionLink}
+        - {name: tranDate, width: 100, formatter: date}
+        - {name: refnum, width: 100}
+        - {name: ext.orderNum, width: 60}
+        - {name: amount, width: 80,formatter: currency}
+        - {name: comments }
+        - {name: state.id, label: StateId, width: 80, align: center, hidden: true}
+        - {name: state.name, label: State, width: 60, align: center}
+        - {name: hasTax, label: Taxable, width: 60, align: center, formatter: okIcon}
       sortname: id
       shrinkToFit: true
       multiSort: true
@@ -55,7 +65,6 @@ restApi:
         type: amount
       state:
         type: select
-        required: true
         dataApiKey: tranState
       hasTax:
         type: checkbox

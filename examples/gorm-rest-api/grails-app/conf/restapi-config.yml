@@ -3,8 +3,18 @@ restApi:
   invoice:
     entityClass: demo.Invoice
     includes:
+     list: ['*', 'customer.*']
+     get: ['*', 'customer.*']
      pickList: ['id', 'num', 'name']
      qSearch: ['num', 'name']
 
   customer:
     entityClass: demo.Customer
+
+  tag:
+    entityClass: demo.Tag
+
+  tranState:
+    entityClass: demo.TranState
+    includes:
+      pickList: ['id', 'name']

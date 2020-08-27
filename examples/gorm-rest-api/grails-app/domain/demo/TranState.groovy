@@ -11,5 +11,6 @@ enum TranState implements IdEnum<TranState,Integer> {
 
     final Integer id
 
+
     TranState(Integer id) { this.id = id }
 }

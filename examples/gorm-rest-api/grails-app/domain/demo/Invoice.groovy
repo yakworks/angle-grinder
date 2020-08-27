@@ -1,23 +1,22 @@
 package demo
 
 class Invoice implements Serializable {
+    static hasMany = [tags: Tag]
     String refnum
     Date tranDate
     Customer customer
     BigDecimal amount
     String comments
     TranState state
-    Tag tag
     Boolean hasTax = false
 
+    static mapping = {
+        customer column: 'customerId'
+        state enumType: 'identity'
+    }
 
     static qSearchIncludes = ["name", "num"]
     static constraints = {
-        tranDate nullable: true
-        customer nullable: true
-        tranDate nullable: true
-        state nullable: true
-        comments nullable: true
-        amount nullable: true
+        comments size: 5..1000
     }
 }

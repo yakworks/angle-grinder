@@ -1,0 +1,8 @@
+import gorm.tools.beans.EntityMap
+
+model {
+    EntityMap entityMap
+    // Map renderArgs = [:]
+}
+// System.out.println "Model in _object $binding.variables"
+json g.render(entityMap)
