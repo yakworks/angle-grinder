@@ -38,7 +38,7 @@ export default class AgBaseControl {
     // if its not passed in then create a unique id for this component
     if (!this.elementId) {
       const idKey = `field_${this.type}_${this.modelKey}`
-      this.elementId = _.uniqueId(`${idKey}_`)
+      this.elementId =this.modelKey
     }
     // Log.debug("this.elementId", this.elementId)
 
@@ -152,6 +152,7 @@ AgBaseControl.common = {
     labelClass: '@',
     isHorizontal: '@',
     columnsClass: '@',
-    isDense: '@'
+    isDense: '@',
+    elementId: '@'
   }
 }
