@@ -7,7 +7,7 @@
     "jquery-ui": "1.12.1",
     "bootstrap": "3.3.4",
     "bootstrapx-clickover": "git://github.com/lecar-red/bootstrapx-clickover.git",
-    "select2": "~3.4.8",
+    "select2": "https://github.com/alexeyzvegintcev/select2.git#3.5.9",
     "select2-bootstrap-css": "~1.4.6",
     "font-awesome": "~4.3.0",
     "angular": "1.4.7",
