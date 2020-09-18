@@ -50,7 +50,7 @@ describe('agConfig provider', function() {
 
     it('should set the default strategy to "dirtyOrSubmitted"', function() {
       var actual = agValidationsConfig.getDefaultValidationStrategy()
-      expect(actual).toBe(provider.$validationStrategies.dirtyOrSubmitted)
+      expect(actual).toBe(provider.$validationStrategies.invalid)
     })
   })
 
