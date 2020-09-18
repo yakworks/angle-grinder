@@ -360,7 +360,7 @@ export default class GridCtrl {
       const params = {
         page: 1,
         search: this.hasSearchFilters(filters),
-        postData: { filters: JSON.stringify(filters) }
+        postData: {}
       }
       if (filters) params.postData.filters = JSON.stringify(filters)
       if (q) params.postData.q = q

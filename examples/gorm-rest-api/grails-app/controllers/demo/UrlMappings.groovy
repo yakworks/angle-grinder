@@ -24,6 +24,7 @@ class UrlMappings {
         //     get "/$controller/$action/"()
         //     get "/$controller/$action/$id"()
         // }
-
+           // get "/appConfig"( controller: 'appConfig', action: 'index')
+        get "/api/appConfig/$entity"(namespace: 'api', controller: 'appConfig', action: 'getConfig')
     }
 }

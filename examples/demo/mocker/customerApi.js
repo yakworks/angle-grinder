@@ -46,9 +46,9 @@ let overrides = {
 module.exports = _.merge(custApi,overrides)
 
 function simError(data) {
-  let errors = {}
-  if(data.street ===  '911') errors.street = 'street cant be 911'
-  if(data.nested && data.nested.foo ===  '911') errors.nested = { foo: 'foo 911'}
+  let errors
+  if(data.street ===  '911') errors = [{message: 'street cant be 911', field: 'street'}]
+  if(data.nested && data.nested.foo ===  '911') errors = [{ field: 'nested.foo', message: 'foo 911'}]
 
   return Object.keys(errors).length ? {errors} : false
 }

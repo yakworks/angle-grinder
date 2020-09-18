@@ -1,8 +1,5 @@
 package demo
 
-import gorm.tools.rest.RestApi
-
-// @RestApi(description = "Customer domain")
 class Customer implements Serializable {
     String name
     String num
@@ -13,8 +10,18 @@ class Customer implements Serializable {
     String country
     String timezone
 
-    static quickSearchFields = ["name", "num"]
+    static List qSearchIncludes = ["name", "num"]
+    static List pickListIncludes = ['id', 'num', 'name']
+
     static constraints = {
         name nullable: false
+        street(validator: { val, thisdoc ->
+            if(val == '911') return ['wrong']
+            return true
+        })
+        city(validator: { val, thisdoc ->
+            if(thisdoc.street && !val) return ['wrong']
+            return true
+        })
     }
 }

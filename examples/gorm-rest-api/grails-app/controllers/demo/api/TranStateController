@@ -1,0 +1,17 @@
+package demo.api
+
+import demo.TranState
+import gorm.tools.Pager
+
+class TranStateController {
+  static namespace = "api"
+  def pickList() {
+    Pager pager = new Pager(params)
+    // println "params ${params.class} $params"
+    List dlist = TranState.values()
+    List incs = ['*']
+    // passing renderArgs args would be usefull for 'renderNulls' if we want to include/exclude
+    respond([view: '/object/_pagedList'], [pager: pager.setupList(dlist, incs), renderArgs: [:]])
+    // respond query(params)
+  }
+}
