@@ -184,7 +184,7 @@ export class GridCrudCtrl {
       const {
         colModel
       } = $scope[`${e?.currentTarget?.id}`].getGridEl().getGridParam()
-      $scope.columnNameForFocus = colModel[iCol]?.['name']
+      $scope.columnNameForFocus = colModel[iCol]?.name
       editAction(rowid)
       return $scope.lastSelectedCell = iCol
     }

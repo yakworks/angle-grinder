@@ -38,7 +38,7 @@ export default class AgBaseControl {
     // if its not passed in then create a unique id for this component
     if (!this.elementId) {
       const idKey = `${this.formCtrl.form.$name}_${this.modelKey}`
-      this.elementId =idKey
+      this.elementId = idKey
     }
     // Log.debug("this.elementId", this.elementId)
 

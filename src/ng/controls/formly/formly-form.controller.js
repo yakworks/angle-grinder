@@ -12,8 +12,8 @@ export default function FormlyFormController(
   $scope.model = $scope.model || {}
   setupFields()
 
-  formlyConfig.extras.getFieldId = (options, model, scope)=> {
-    return [scope.form.$name, options.name].join("_")
+  formlyConfig.extras.getFieldId = (options, model, scope) => {
+    return [scope.form.$name, options.name].join('_')
   }
 
   // watch the model and evaluate watch expressions that depend on it.
