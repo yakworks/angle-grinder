@@ -1,6 +1,5 @@
 import htmlModule from './html'
 import compModule from './comp'
-import './styles.scss'
 
 const template = `
 <div class="toolbarDemoIndex">
