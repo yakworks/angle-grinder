@@ -15,7 +15,7 @@
     "lint-fix": "eslint src/ --fix",
     "lint-demo-fix": "eslint examples/demo/ --fix",
     "start-demo": "webpack-dev-server --mode=development --content-base ./examples/demo",
-    "grails-demo": "webpack-dev-server --mode=development --config examples/grails-demo/webpack.config.js --content-base ./examples/grails-demo",
+    "grails-demo": "webpack-dev-server --mode=development --content-base ./examples/grails-demo",
     "build-demo": "rimraf dis t && webpack --mode=production --content-base ./examples/demo",
     "start-ag-demo": "webpack-dev-server --mode=development --content-base ./examples/ag-demo-ui",
     "build-ag-demo": "webpack --mode=production --profile --progress --content-base ./examples/ag-demo-ui --pathout ./examples/ag-demo-grails/src/main/resources/public",
