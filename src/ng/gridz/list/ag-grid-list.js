@@ -1,4 +1,4 @@
-import BaseListCtrl from 'angle-grinder/src/ng/gridz/list/BaseListCtrl'
+import BaseListCtrl from '../../../../src/ng/gridz/list/BaseListCtrl'
 // import restStoreApi from '../../store/RestStoreApi'
 import _ from 'lodash'
 

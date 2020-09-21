@@ -1,4 +1,4 @@
-import appState from 'angle-grinder/src/tools/AppState'
+import appState from '../../../src/tools/AppState'
 import { toggleSidenav } from './ag-sidenav'
 
 const template = `

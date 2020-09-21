@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import _ from 'lodash'
-import Log from 'angle-grinder/src/utils/Log'
+import Log from '../../../../src/utils/Log'
 
 /**
  * jquery library to wrap jqgrid and add our defaults
