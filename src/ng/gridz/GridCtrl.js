@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import gridzInit from './gridzInit'
 import _ from 'lodash'
-import Log from 'angle-grinder/src/utils/Log'
+import Log from '../../../src/utils/Log'
 
 export default class GridCtrl {
   highlightClass = 'ui-state-highlight'

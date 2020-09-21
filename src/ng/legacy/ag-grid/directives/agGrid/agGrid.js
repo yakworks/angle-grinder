@@ -1,7 +1,7 @@
 import angular from 'angular'
 import gridzModule from '../../gridzModule'
 import agGridCtrl from './agGridCtrl'
-import Log from 'angle-grinder/src/utils/Log'
+import Log from '../../../../../../src/utils/Log'
 import _ from 'lodash'
 
 const gridz = angular.module(gridzModule)
