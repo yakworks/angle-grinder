@@ -52,7 +52,7 @@ class OrgController extends BaseDomainController {
         return datalist
     }
 
-    def pickList() {
+    def picklist() {
         def pager = new Pager(params)
         def crit = domainClass.createCriteria()
         def qslike = (params.q) ? (params.q + "%") : null

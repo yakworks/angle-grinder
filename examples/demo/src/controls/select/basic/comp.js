@@ -12,14 +12,14 @@ class controller {
     { id: 5, name: 'buzz blaz big' }
   ]
 
-  custApiData = { results: () => this.customerApi.pickList() }
+  custApiData = { results: () => this.customerApi.picklist() }
 
   constructor(localStoreApi) {
     this.customerApi = localStoreApi.customer
   }
 
   // $onInit() {
-  //   this.custApiData = { results: () => this.customerApi.pickList() }
+  //   this.custApiData = { results: () => this.customerApi.picklist() }
   // }
 }
 

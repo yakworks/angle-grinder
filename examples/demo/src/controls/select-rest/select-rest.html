@@ -2,16 +2,16 @@
 
   <ag-select-rest select-options="{ multiple: true, minimumInputLength: 1}"
                   ng-model="$ctrl.vm.multipleCustomer"
-                  url="/api/customer/pickList">
+                  url="/api/customer/picklist">
   </ag-select-rest>
   <ag-select-rest ng-model="$ctrl.vm.countryCode"
                   select-options="{ displayFields:['id','name'], useDataObject:false, minimumInputLength: 1 }"
-                  url="/countries/pickList"/>
+                  url="/countries/picklist"/>
 
   <ag-select-rest name="multiCountryData"
                   select-options="{ multiple: true, displayFields:['id','name'] }"
                   ng-model="$ctrl.vm.multiCountryData"
-                  url="/countries/pickList"/>
+                  url="/countries/picklist"/>
 
   <ag-select-rest select-options="$ctrl.userSelectOpts"
                   ng-model="$ctrl.vm.users"

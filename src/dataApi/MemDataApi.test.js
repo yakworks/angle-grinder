@@ -91,7 +91,7 @@ describe('MemDataApi', () => {
 
   describe('picklist', function() {
     it('should return paged data', async function() {
-      const result = await api.pickList()
+      const result = await api.picklist()
       //console.log("result", result)
       expect(result.data.length).toEqual(4)
     })

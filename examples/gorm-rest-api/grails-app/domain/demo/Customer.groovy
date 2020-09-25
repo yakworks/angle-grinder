@@ -11,7 +11,7 @@ class Customer implements Serializable {
     String timezone
 
     static List qSearchIncludes = ["name", "num"]
-    static List pickListIncludes = ['id', 'num', 'name']
+    static List picklistIncludes = ['id', 'num', 'name']
 
     static constraints = {
         name nullable: false
