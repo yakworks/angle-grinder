@@ -26,7 +26,7 @@ export default class RestDataApi {
   }
 
   //
-  async pickList(params) {
+  async picklist(params) {
     const opts = { searchParams: params }
     // console.log("query opts", opts)
     const data = await ky.get(`${this.endpoint}/picklist`, opts).json()

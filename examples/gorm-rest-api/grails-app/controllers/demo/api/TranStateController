@@ -5,7 +5,7 @@ import gorm.tools.Pager
 
 class TranStateController {
   static namespace = "api"
-  def pickList() {
+  def picklist() {
     Pager pager = new Pager(params)
     // println "params ${params.class} $params"
     List dlist = TranState.values()

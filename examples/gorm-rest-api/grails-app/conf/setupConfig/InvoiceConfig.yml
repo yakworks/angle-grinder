@@ -2,7 +2,7 @@ restApi:
   invoice:
     qSearch: ['id']
     includes:
-      pickList: ['id']
+      picklist: ['id']
     gridOptions:
       colModel:
         - {name: id, label: id,width: 20,sorttype: int, align: right, hidden: true}

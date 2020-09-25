@@ -11,12 +11,12 @@ function makeUrls(epoint, api) {
   return {
     dataApi: api,
     urls: {
-      [`GET /api/${epoint}/pickList`]: (req, res) => {
-        // console.log("get pickList req.query  ", req.query)
+      [`GET /api/${epoint}/picklist`]: (req, res) => {
+        // console.log("get picklist req.query  ", req.query)
         const { query } = req
-        api.pickList(query)
+        api.picklist(query)
         .then((data) => {
-          // console.log("get pickList data", data)
+          // console.log("get picklist data", data)
           return res.json(data)
         })
       },

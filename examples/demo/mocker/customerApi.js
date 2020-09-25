@@ -5,7 +5,7 @@ const MemDataApi = require('../../../src/dataApi/MemDataApi');
 const customerData = require('../public/data/Customers.json')
 const epoint = 'customer'
 const dataApi = new MemDataApi(customerData)
-dataApi.pickListFields = ['id', 'num', 'name']
+dataApi.picklistFields = ['id', 'num', 'name']
 
 let custApi = makeUrls(epoint, dataApi)
 

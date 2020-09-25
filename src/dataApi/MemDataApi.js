@@ -8,7 +8,7 @@ const _ = require('lodash')
 class MemDataApi {
   // used to simulate a delay is used for testing
   mockDelay = 0
-  pickListFields = ['id', 'name']
+  picklistFields = ['id', 'name']
   /**
    * @param data the data to initialize this with
    */
@@ -95,18 +95,18 @@ class MemDataApi {
   }
 
   //
-  async pickList(params) {
+  async picklist(params) {
     let list = await this.data()
     if (params) {
       if (params.filters || params.q) list = this.filter(list, params)
     }
     list = list.reduce((acc, item) => {
-      acc.push(_.pick(item, this.pickListFields))
+      acc.push(_.pick(item, this.picklistFields))
       return acc
     }, [])
-    // console.log('pickList list', list)
+    // console.log('picklist list', list)
     const paged = this.pagination(list, params)
-    // console.log('pickList paged', paged)
+    // console.log('picklist paged', paged)
     return paged
   }
 

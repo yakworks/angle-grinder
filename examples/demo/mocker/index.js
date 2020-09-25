@@ -33,7 +33,7 @@ const proxy = {
     return res.json(custConfigData)
   },
 
-  'GET /countries/pickList': (req, res) => {
+  'GET /countries/picklist': (req, res) => {
     const q = req.query.q
     let rows = countryData
     if(q) {

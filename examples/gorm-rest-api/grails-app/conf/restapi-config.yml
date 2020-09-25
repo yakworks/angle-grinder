@@ -5,7 +5,7 @@ restApi:
     includes:
      list: ['*', 'customer.*']
      get: ['*', 'customer.*']
-     pickList: ['id', 'num', 'name']
+     picklist: ['id', 'num', 'name']
      qSearch: ['num', 'name']
 
   customer:
@@ -17,4 +17,4 @@ restApi:
   tranState:
     entityClass: demo.TranState
     includes:
-      pickList: ['id', 'name']
+      picklist: ['id', 'name']

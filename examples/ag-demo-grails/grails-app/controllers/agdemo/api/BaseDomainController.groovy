@@ -283,7 +283,7 @@ abstract class BaseDomainController {
         }
     }
 
-    def pickList(){
+    def picklist(){
         Pager pager = new Pager(params)
         Map criterias = [:]
         String qslike = (params.q) ? ((params.q as String) + "%") : null

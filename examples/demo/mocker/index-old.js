@@ -75,7 +75,7 @@ const findById = (data, id) => {
 const countriesWithId = data.countriesWithId()
 
 const proxy = {
-  'GET /countries/pickList': (req, res) => {
+  'GET /countries/picklist': (req, res) => {
     const q = req.query.q
     let rows = countriesWithId
     if(q) {

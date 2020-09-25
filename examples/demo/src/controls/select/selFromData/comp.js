@@ -78,7 +78,7 @@ class controller {
     showSelectAll: true
   }
 
-  custApiData = { results: () => this.customerApi.pickList() }
+  custApiData = { results: () => this.customerApi.picklist() }
 
   custRestOpts = {
     useDataObject: true,
