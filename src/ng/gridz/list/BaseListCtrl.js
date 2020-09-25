@@ -5,6 +5,7 @@ import MassUpdateModalCtrl from './MassUpdateModalCtrl'
 import { argsMerge } from '../../utils/classUtils'
 import appConfigApi from '../../../dataApi/AppConfigApi'
 import toast from '../../../../src/tools/toast'
+import _ from 'lodash'
 // import { transformOptions } from '../../controls/formly/helpers'
 
 // see https://stackoverflow.com/questions/53349705/constructor-and-class-properties-within-javascript-mixins

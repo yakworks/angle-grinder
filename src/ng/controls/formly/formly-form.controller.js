@@ -1,4 +1,6 @@
 import angular from 'angular'
+import _ from 'lodash'
+
 import { transformFields } from './helpers'
 
 function isFieldGroup(field) {
