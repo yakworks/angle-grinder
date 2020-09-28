@@ -1,0 +1,19 @@
+gridOptions:
+  colModel:
+    - { name: id, hidden: true }
+    - { name: name, formatter: editActionLink }
+    - { name: description, width: 100 }
+  shrinkToFit: true
+  # contextMenu: true
+  pager: false
+  showSearchForm: false
+
+toolbarOptions:
+  selectedButtons:
+    massUpdate: { class: 'hidden' }
+  leftButtons:
+    create: { class: 'hidden' }
+  showSearchFormButton: false
+
+editForm:
+  description: {}

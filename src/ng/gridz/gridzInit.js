@@ -9,11 +9,11 @@ import { makeLabel } from '../../utils/labelMaker'
 const defaultCtxMenuOptions = {
   edit: {
     display: 'Edit',
-    icon: 'fa-pencil-square-o'
+    icon: 'far fa-edit'
   },
   delete: {
     display: 'Delete',
-    icon: 'fa-trash-o'
+    icon: 'far fa-trash-alt'
   }
 }
 
@@ -49,7 +49,7 @@ function addCtxMenuIconColumn(opts) {
         context-menu="gridCtrl.ctxMenuOptions"
         context-menu-click="gridCtrl.contextMenuClick"
         context-menu-on="gridz"
-        context-menu-model="{id: ${rowObject.id}}"><i class="fa fa-cog"></i></a>`
+        context-menu-model="{id: ${rowObject.id}}"><i class="fas fa-cog"></i></a>`
     }
   }
   opts.colModel.unshift(actionCol)

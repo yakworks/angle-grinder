@@ -25,10 +25,12 @@ export default class BaseListCtrl {
     cfg = _.cloneDeep(cfg)
     // assign default datatype to grid loader
     cfg.gridOptions.datatype = (params) => this.gridLoader(params)
+    if(cfg.gridOptions.showSearchForm !== undefined) this.showSearchForm = cfg.gridOptions.showSearchForm
     if (!cfg.toolbarOptions) cfg.toolbarOptions = {}
     // give toolbar scope
     cfg.toolbarOptions.scope = () => this.$scope
     _.defaults(this.cfg, cfg)
+
     this.isConfigured = true
   }
 

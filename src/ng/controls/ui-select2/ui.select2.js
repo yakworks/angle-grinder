@@ -153,7 +153,7 @@ angular.module('ui.select2', [])
                       return `
                         <span class="select-all-menu">
                           <span class="select-all">
-                          <i class="fa fa-th"></i> Select All &nbsp; | </span>
+                          <i class="fas fa-th"></i> Select All &nbsp; | </span>
                           <span class="clear-all"> x Clear All </span>
                         </span>
                       `

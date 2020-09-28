@@ -24,7 +24,11 @@ $input-check-focus-box-shadow-color: rgba($link, 0.35) !default;
     i {
       position: relative;
       cursor: pointer;
-      font: normal normal normal 11px/1 FontAwesome;
+      font-family: 'Font Awesome 5 Free';
+      font-weight: 900;
+      display: inline-block;
+      font-style: normal;
+      font-variant: normal;
       text-rendering: auto;
       margin-right: 0.5rem;
 

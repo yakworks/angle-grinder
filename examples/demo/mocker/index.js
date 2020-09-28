@@ -32,6 +32,10 @@ const proxy = {
     const custConfigData = yaml.load(fs.readFileSync('./examples/demo/public/data/CustomerConfig.yml', 'utf8'))
     return res.json(custConfigData)
   },
+  'GET /api/appConfig/tag': (req, res) => {
+    const custConfigData = yaml.load(fs.readFileSync('./examples/demo/public/data/TagConfig.yml', 'utf8'))
+    return res.json(custConfigData)
+  },
 
   'GET /countries/picklist': (req, res) => {
     const q = req.query.q

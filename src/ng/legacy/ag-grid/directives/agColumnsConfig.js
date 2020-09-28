@@ -119,7 +119,7 @@ gridz.directive('agManageGridColumns', [
   </div>
 
   <div class="modal-footer">
-      <div class="btn btn-default btn-primary" ng-click="save()"><i class="fa fa-check fa-inverse"></i> Save</div>
+      <div class="btn btn-default btn-primary" ng-click="save()"><i class="fas fa-check fa-inverse"></i> Save</div>
       <ag-cancel-button ng-click="cancel()"></ag-cancel-button>
   </div>
 </div>\
@@ -129,7 +129,7 @@ gridz.directive('agManageGridColumns', [
 
     template: `\
 <a ng-click="renderManageColumnsModal()">
-  <i class="fa fa-exchange" aria-hidden="true" uib-tooltip='Show, hide or reorder columns'></i>
+  <i class="fas fa-exchange" aria-hidden="true" uib-tooltip='Show, hide or reorder columns'></i>
 </a>\
 `
   })
