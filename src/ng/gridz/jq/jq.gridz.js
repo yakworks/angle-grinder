@@ -247,7 +247,6 @@ class Gridz {
       }
     })
   }
-
 }
 
 // register namespace
