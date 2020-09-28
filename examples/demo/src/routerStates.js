@@ -151,8 +151,21 @@ const gridsStates = {
       }
     },
     {
+      name: 'editOnly-agGridList',
+      url: '/tag',
+      component: 'agGridList',
+      data: { title: 'Edit Only agGridList'},
+      resolve: {
+        apiKey: () => "tag",
+        notification: () => ({
+          class: "is-primary is-light",
+          text: "Uses ui-router to send rest apiKey to generic agGridList component, configured to only allow editing desc"
+        })
+      }
+    },
+    {
       name: 'override-rest-grid',
-      data: { title: 'Custom Grid Comp'},
+      data: { title: 'Custom Grid Component'},
       component: 'basicGridRestIndex'
     },
     {

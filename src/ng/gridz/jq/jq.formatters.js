@@ -24,7 +24,7 @@ $.extend($.fn.fmatter, {
   },
 
   okIcon(cellVal, options, rowdata) {
-    return cellVal ? "<i class='fa fa-check'></i>" : ''
+    return cellVal ? "<i class='fas fa-check'></i>" : ''
   },
 
   editActionLink(cellVal, options, rowdata) {

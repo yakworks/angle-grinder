@@ -17,7 +17,7 @@ app.directive('menuItem', [
       scope.href = '#/' + attrs.for
       const parent = element.parent()
       if (!_.isNil(parent[0].attributes['list-icon'])) { listIcon = parent[0].attributes['list-icon'].value }
-      scope.icon = attrs.icon || listIcon || 'fa fa-circle'
+      scope.icon = attrs.icon || listIcon || 'fas fa-circle'
       return scope.isActive = () => $route.current?.page === attrs.for
     },
 

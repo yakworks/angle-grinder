@@ -20,7 +20,7 @@
         ng-minlength="::$ctrl.minLength"
         ng-maxlength="::$ctrl.maxLength"
       >
-      <a class="icon is-small is-right is-clickable" uib-tooltip="{{$ctrl.wildcard ? 'Disable Wildcard' : 'Enable Wildcard'}}"
+      <a class="icon is-right is-clickable" uib-tooltip="{{$ctrl.wildcard ? 'Disable Wildcard' : 'Enable Wildcard'}}"
         ng-class="{'is-active': $ctrl.wildcard && $ctrl.value}"
         ng-click="$ctrl.toggleWildcard()">
         <i class="fas fa-asterisk fa-xs"></i>

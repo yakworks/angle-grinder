@@ -57,7 +57,7 @@ common.config(function($uibTooltipProvider) {
 // Angular-breadcrumb
 common.config(function($breadcrumbProvider) {
   $breadcrumbProvider.setOptions({
-    template: '<ul class="breadcrumb"><li><a ui-sref="app.dashboard"><i class="fa fa-home margin-right-5 text-large text-dark"></i>Home</a></li><li ng-repeat="step in steps">{{step.ncyBreadcrumbLabel}}</li></ul>'
+    template: '<ul class="breadcrumb"><li><a ui-sref="app.dashboard"><i class="fas fa-home margin-right-5 text-large text-dark"></i>Home</a></li><li ng-repeat="step in steps">{{step.ncyBreadcrumbLabel}}</li></ul>'
   })
 })
 

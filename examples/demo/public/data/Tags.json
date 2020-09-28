@@ -1,18 +1,22 @@
 [
   {
     "id": 1,
-    "name": "Auto"
+    "name": "Auto",
+    "description": "Auto Foo"
   },
   {
     "id": 2,
-    "name": "Big Sky"
+    "name": "Big Sky",
+    "description": "Big Sky Foo"
   },
   {
     "id": 3,
-    "name": "COD"
+    "name": "COD",
+    "description": "COD Foo"
   },
   {
     "id": 4,
-    "name": "Prospect"
+    "name": "Prospect",
+    "description": "Prospect Foo"
   }
 ]

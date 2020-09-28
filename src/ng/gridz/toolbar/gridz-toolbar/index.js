@@ -18,13 +18,13 @@ export default () => ({
 class Controller {
   opts = {
     selectedButtons: {
-      massUpdate: { icon: 'mdi-square-edit-outline', tooltip: 'Mass Update' },
+      massUpdate: { icon: 'far fa-edit', tooltip: 'Mass Update' },
       xlsExport: { icon: 'far fa-file-excel', tooltip: 'Export to Excel' }
       // massUpdate: { icon: 'far fa-edit', tooltip: 'Mass Update' },
       // xlsExport: { icon: 'far fa-file-excel', tooltip: 'Export to Excel' }
     },
     leftButtons: {
-      create: { icon: 'mdi-text-box-plus-outline', tooltip: 'Create New' }
+      create: { icon: 'far fa-plus-square', tooltip: 'Create New' }
     },
     showQuickSearch: true,
     showSearchFormButton: true

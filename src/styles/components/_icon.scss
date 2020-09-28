@@ -21,7 +21,7 @@ $icon-dimensions-small: $size-14 !default;
 .icon {
   i.fa, i.far, i.fas, i.fal, i.fad, i.mdi {
     padding: 1px;
-    font-size: calc(#{$icon-dimensions} - 2px); //22px
+    // font-size: calc(#{$icon-dimensions} - 2px); //22px
     text-align: center;
     line-height: 1;
   }
