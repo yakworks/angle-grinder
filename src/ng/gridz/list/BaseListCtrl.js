@@ -14,7 +14,6 @@ export default class BaseListCtrl {
   editTemplate = require('./editDialog.html')
   massUpdateTemplate = require('./massUpdateDialog.html')
   //  searchTemplate = require('./searchForm.html')
-
   static $inject = ['$scope', '$element', '$uibModal', '$timeout']
   constructor(...args) {
     argsMerge(this, args)
@@ -30,8 +29,11 @@ export default class BaseListCtrl {
     // give toolbar scope
     cfg.toolbarOptions.scope = () => this.$scope
     _.defaults(this.cfg, cfg)
-
     this.isConfigured = true
+  }
+
+  applyFormatters() {
+    if(this.formatters)($.extend($.fn.fmatter, this.formatters))
   }
 
   get gridCtrl() { return this.$element.find('gridz').controller('gridz') }

@@ -28,13 +28,15 @@ class ListCtrl extends BaseListCtrl {
     this.dataApi = this.dataStoreApi[this.apiKey]
     this.cfg = {}
     super.doConfig()
+    this.applyFormatters()
   }
 }
 
 export default {
   bindings: {
     apiKey: '<',
-    notification: '<'
+    notification: '<',
+    formatters: '<'
   },
   template: template,
   controller: ListCtrl
