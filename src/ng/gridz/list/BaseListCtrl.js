@@ -2,7 +2,7 @@
 // import _ from 'lodash'
 import EditModalCtrl from './EditModalCtrl'
 import MassUpdateModalCtrl from './MassUpdateModalCtrl'
-import { argsMerge } from '../../utils/classUtils'
+import {argsMerge} from '../../utils/classUtils'
 import appConfigApi from '../../../dataApi/AppConfigApi'
 import toast from '../../../../src/tools/toast'
 // import { transformOptions } from '../../controls/formly/helpers'
@@ -33,7 +33,9 @@ export default class BaseListCtrl {
   }
 
   applyFormatters() {
-    if(this.formatters)($.extend($.fn.fmatter, this.formatters))
+    if (this.formatters) {
+      $.extend($.fn.fmatter, this.formatters)
+    }
   }
 
   get gridCtrl() { return this.$element.find('gridz').controller('gridz') }
