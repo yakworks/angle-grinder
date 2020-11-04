@@ -43,6 +43,8 @@
 <p>rest data from dataApiKey</p>
 <ag-select name="agSelect" ng-model="$ctrl.vm.cust"
     select-options="{ dataApiKey: 'customer' }"></ag-select>
+  <ag-select name="agSelect" ng-model="$ctrl.vm.custParams"
+    select-options="{ dataApiKey: 'customer', dataApiParams: {country: 'US'} }"></ag-select>
 <ag-select name="agSelect" ng-model="$ctrl.vm.custMulti"
     select-options="{ multiple: true, closeOnSelect: false, showSelectAll:true, dataApiKey: 'customer'}"></ag-select>
 

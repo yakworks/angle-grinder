@@ -95,5 +95,11 @@ restApi:
         - key: customer
           type: select
           dataApiKey: customer
+        - key: UScustomer
+          type: select
+          selectOptions:
+            dataApiKey: customer
+            dataApiParams:
+              country: US
         - key: comments
 
