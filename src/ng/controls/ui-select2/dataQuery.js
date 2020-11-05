@@ -3,7 +3,8 @@ import _ from 'lodash'
 export function setupData(opts, dataStoreApi) {
   if (opts.dataApiKey) {
     const dataApiKey = opts.dataApiKey
-    opts.data = { results: () => dataStoreApi[dataApiKey].picklist() }
+    const dataApiParams = opts.dataApiParams
+    opts.data = { results: () => dataStoreApi[dataApiKey].picklist(dataApiParams) }
   }
   // setup defaults for data
   if (opts.data) {

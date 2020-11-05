@@ -1,6 +1,5 @@
 restApi:
   customer:
-    entityClass: demo.Customer
     gridOptions:
       colModel:
         - { name: id, width: 20, sorttype: int, align: right, formatter: gridLink }
