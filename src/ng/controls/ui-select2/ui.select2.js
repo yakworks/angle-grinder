@@ -140,7 +140,9 @@ angular.module('ui.select2', [])
                   })
                 })
               }
-
+              const buildDisplayFields = (item) => {
+                return opts.displayFields.map(key => item[key]).join(' ')
+              }
               if (!isSelectElm) {
                 const showSelectAll = opts.showSelectAll
                 if (showSelectAll) {
@@ -158,6 +160,9 @@ angular.module('ui.select2', [])
                         </span>
                       `
                     }
+                    if (Array.isArray(opts.displayFields)) {
+                      return buildDisplayFields(object)
+                    }
                     return object.name
                   }
                 }
@@ -167,7 +172,7 @@ angular.module('ui.select2', [])
                     // dataResults is set on first query to show.
                     Promise.resolve(opts.dataResults).then(res => {
                       var selected = []
-                      res.forEach(item => {
+                      res.data.forEach(item => {
                         if (item.id !== 'selectAll') {
                           selected[selected.length] = item
                         }

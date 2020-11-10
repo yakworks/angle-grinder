@@ -15,7 +15,9 @@ export function setupData(opts, dataStoreApi) {
       // console.log('results', results)
       opts.data = { results: results }
     }
-
+    if (opts.displayFields) {
+      opts.data.text = opts.displayFields[0]
+    }
     // if data.text is not set then default it to name (select2 defaults it to 'text')
     if (opts.data.text === undefined) {
       opts.data.text = 'name'
@@ -32,7 +34,11 @@ export function dataQuery(opts) {
 
   const textField = data.text
   if (!$.isFunction(textField)) {
-    getText = (item) => item[textField]
+    if (Array.isArray(opts.displayFields)) {
+      getText = (item) => opts.displayFields.map(text => item[text]).join(' ')
+    } else {
+      getText = (item) => item[textField]
+    }
   }
 
   if (!$.isFunction(data.results)) {
