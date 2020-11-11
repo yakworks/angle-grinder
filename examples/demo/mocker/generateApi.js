@@ -16,6 +16,10 @@ function makeUrls(epoint, api) {
         const { query } = req
         api.picklist(query)
         .then((data) => {
+          if (!_.isEmpty(query)) {
+            const queriedData = data.data.filter(d => d.country === query.country)
+            return res.json({...queriedData, data: queriedData})
+          }
           // console.log("get picklist data", data)
           return res.json(data)
         })
