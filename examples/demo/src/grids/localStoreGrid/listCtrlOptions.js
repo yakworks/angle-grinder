@@ -58,9 +58,18 @@ export default function buildOptions(ctrl){ return {
     // selectFirstRow: true,
     contextMenu: true,
     pager: true,
+    footerrow: true,
     // denseRows: true,
     // filterToolbar: true,
     // searching: { defaultSearch: "cn" },
+    onSelectRow: () => {
+      const selectedRowsData = ctrl.gridCtrl.getSelectedRows()
+      ctrl.updateFooter({
+        refnum: 'Total', amount: selectedRowsData.reduce((sum, row) => {
+          return sum + row.amount
+        }, 0)
+      })
+    },
     datatype: (params) => ctrl.gridLoader(params)
   },
   formFields: [

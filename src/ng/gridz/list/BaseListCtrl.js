@@ -77,6 +77,10 @@ export default class BaseListCtrl {
     }
   }
 
+  updateFooter(data) {
+    this.gridCtrl.gridEl.footerData('set', data)
+  }
+
   create(model = {}) {
     this.showEdit('Create', model)
   }
