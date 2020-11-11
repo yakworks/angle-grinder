@@ -6,14 +6,10 @@ gridOptions:
   shrinkToFit: true
   # contextMenu: true
   pager: false
-  showSearchForm: false
-
-toolbarOptions:
-  selectedButtons:
-    massUpdate: { class: 'hidden' }
-  leftButtons:
-    create: { class: 'hidden' }
-  showSearchFormButton: false
+  toolbar:
+    leftButtons:
+      create: { class: 'hidden' }
 
 editForm:
+  name: { disabled: true}
   description: {}

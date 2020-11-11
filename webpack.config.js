@@ -198,7 +198,7 @@ module.exports = function(env, argv) {
     },
     //compress: true, //gzips before serving so we can see file size
     disableHostCheck: true,
-    port: 3000,
+    port: 3001,
     host: '0.0.0.0'
     // historyApiFallback: true,
     //inline: false, //default:true script will be inserted in your bundle to take care of live reloading

@@ -1,5 +1,5 @@
 // import Log from 'angle-grinder/src/utils/Log'
-// import _ from 'lodash'
+import _ from 'lodash'
 import EditModalCtrl from './EditModalCtrl'
 import MassUpdateModalCtrl from './MassUpdateModalCtrl'
 import { argsMerge } from '../../utils/classUtils'
@@ -9,8 +9,20 @@ import toast from '../../../../src/tools/toast'
 
 // see https://stackoverflow.com/questions/53349705/constructor-and-class-properties-within-javascript-mixins
 // and https://alligator.io/js/class-composition/ for class composition
+
 export default class BaseListCtrl {
-  showSearchForm = true
+  showSearchForm = false
+  defaultToolbarOpts = {
+    selectedButtons: {
+      massUpdate: { icon: 'far fa-edit', tooltip: 'Mass Update' },
+      xlsExport: { icon: 'far fa-file-excel', tooltip: 'Export to Excel' }
+    },
+    leftButtons: {
+      create: { icon: 'far fa-plus-square', tooltip: 'Create New' }
+    },
+    searchFormButton: { icon: 'mdi-text-box-search-outline', tooltip: 'Show Search Filters Form' }
+  }
+
   editTemplate = require('./editDialog.html')
   massUpdateTemplate = require('./massUpdateDialog.html')
   //  searchTemplate = require('./searchForm.html')
@@ -23,12 +35,26 @@ export default class BaseListCtrl {
   async doConfig() {
     let cfg = await appConfigApi.getConfig(this.apiKey)
     cfg = _.cloneDeep(cfg)
+    const gopts = cfg.gridOptions
     // assign default datatype to grid loader
-    cfg.gridOptions.datatype = (params) => this.gridLoader(params)
-    if (cfg.gridOptions.showSearchForm !== undefined) this.showSearchForm = cfg.gridOptions.showSearchForm
-    if (!cfg.toolbarOptions) cfg.toolbarOptions = {}
+    gopts.datatype = (params) => this.gridLoader(params)
+    if (!gopts.toolbar) gopts.toolbar = {}
+    const tbopts = _.merge({}, this.defaultToolbarOpts, gopts.toolbar)
+
+    // setup search form show based on if searchForm is configured
+    if (cfg.searchForm === undefined) {
+      this.showSearchForm = false
+      tbopts.searchFormButton.class = 'hidden'
+    }
+
+    if (cfg.massUpdateForm === undefined) {
+      tbopts.selectedButtons.massUpdate.class = 'hidden'
+    }
+
+    if (gopts.showSearchForm) this.showSearchForm = gopts.showSearchForm
     // give toolbar scope
-    cfg.toolbarOptions.scope = () => this.$scope
+    tbopts.scope = () => this.$scope
+    cfg.toolbarOptions = tbopts
     _.defaults(this.cfg, cfg)
 
     this.isConfigured = true
