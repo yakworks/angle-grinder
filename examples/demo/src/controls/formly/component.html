@@ -6,6 +6,11 @@
   fields="$ctrl.editColFields" form="$ctrl.editColsCtrl" is-columns="true">
 </ag-formly-form>
 
+<legend> Not Formly</legend>
+<form name="notFormly" ag-form is-horizontal>
+  <ag-input ng-model="$ctrl.testId"></ag-input>
+<form>
+
 <pre ng-cloak class="mt-4">$ctrl.editFormCtrl.$invalid: {{$ctrl.editFormCtrl.$invalid}}
   <br>model: {{$ctrl.vm | json}}
 </pre>
