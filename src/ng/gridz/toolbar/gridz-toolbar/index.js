@@ -20,14 +20,12 @@ class Controller {
     selectedButtons: {
       massUpdate: { icon: 'far fa-edit', tooltip: 'Mass Update' },
       xlsExport: { icon: 'far fa-file-excel', tooltip: 'Export to Excel' }
-      // massUpdate: { icon: 'far fa-edit', tooltip: 'Mass Update' },
-      // xlsExport: { icon: 'far fa-file-excel', tooltip: 'Export to Excel' }
     },
     leftButtons: {
       create: { icon: 'far fa-plus-square', tooltip: 'Create New' }
     },
-    showQuickSearch: true,
-    showSearchFormButton: true
+    searchFormButton: { icon: 'mdi-text-box-search-outline', tooltip: 'Show Search Filters Form' },
+    showQuickSearch: true
   }
 
   constructor($element, $compile, $scope) {

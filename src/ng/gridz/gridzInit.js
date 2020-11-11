@@ -2,6 +2,7 @@
 import _ from 'lodash'
 // import { forEach } from 'angular-ui-router'
 import { makeLabel } from '../../utils/labelMaker'
+
 /**
 * functions to initialize the grid
 */
