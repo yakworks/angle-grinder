@@ -75,7 +75,7 @@ class Gridz {
     //   Example: if user first sorted by id and then by name sort params will be look like {sortName: 'name asc, id', order: 'asc'}
     options.onSortCol = (sortname, x, order) => {
       if (options.multiSort) {
-        //console.log('onSortCol sortname order', sortname, order)
+        // console.log('onSortCol sortname order', sortname, order)
         const id = options.sortLast || 'id'
         if (sortname.indexOf(id) > -1) {
           sortname = sortname + ` ${order}`

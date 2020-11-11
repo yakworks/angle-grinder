@@ -10,7 +10,6 @@ import toast from '../../../../src/tools/toast'
 // see https://stackoverflow.com/questions/53349705/constructor-and-class-properties-within-javascript-mixins
 // and https://alligator.io/js/class-composition/ for class composition
 
-
 export default class BaseListCtrl {
   showSearchForm = false
   defaultToolbarOpts = {
@@ -21,7 +20,7 @@ export default class BaseListCtrl {
     leftButtons: {
       create: { icon: 'far fa-plus-square', tooltip: 'Create New' }
     },
-    searchFormButton: { icon: 'mdi-text-box-search-outline', tooltip: 'Show Search Filters Form' },
+    searchFormButton: { icon: 'mdi-text-box-search-outline', tooltip: 'Show Search Filters Form' }
   }
 
   editTemplate = require('./editDialog.html')
@@ -36,11 +35,11 @@ export default class BaseListCtrl {
   async doConfig() {
     let cfg = await appConfigApi.getConfig(this.apiKey)
     cfg = _.cloneDeep(cfg)
-    let gopts = cfg.gridOptions
+    const gopts = cfg.gridOptions
     // assign default datatype to grid loader
     gopts.datatype = (params) => this.gridLoader(params)
     if (!gopts.toolbar) gopts.toolbar = {}
-    let tbopts = _.merge({}, this.defaultToolbarOpts, gopts.toolbar)
+    const tbopts = _.merge({}, this.defaultToolbarOpts, gopts.toolbar)
 
     // setup search form show based on if searchForm is configured
     if (cfg.searchForm === undefined) {
@@ -60,7 +59,6 @@ export default class BaseListCtrl {
 
     this.isConfigured = true
   }
-
 
   get gridCtrl() { return this.$element.find('gridz').controller('gridz') }
   get editModalCtrl() { return EditModalCtrl }
