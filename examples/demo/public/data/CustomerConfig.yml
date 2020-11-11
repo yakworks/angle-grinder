@@ -9,10 +9,8 @@ gridOptions:
     - { name: postalCode, label: Zip, width: 60 }
     - { name: country, width: 60 }
   # sortname: name
-  shrinkToFit: true
   multiSort: true
   contextMenu: true
-  pager: true
 
 editForm:
   fieldGroupA:

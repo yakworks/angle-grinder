@@ -4,8 +4,8 @@ class controller {
   vm = {}
 
   editFormFields = {
-    foo:{},
-    bar:{},
+    foo:{ },
+    bar:{disabled: true },
     baz:{}
   }
   editColFields = {
