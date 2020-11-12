@@ -26,7 +26,6 @@ class Controller extends AgBaseControl {
   }
 
   repoFormatResult(item) {
-    console.log('333333333333333333333333')
     let displayTds = ''
     this.opts.displayFields.forEach(it => displayTds = `${displayTds} <td>${item[it]}</td>`)
     var markup = `
