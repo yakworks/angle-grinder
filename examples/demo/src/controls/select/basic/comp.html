@@ -47,6 +47,8 @@
     select-options="{ dataApiKey: 'customer', dataApiParams: {country: 'US'} }"></ag-select>
 <ag-select name="agSelect" ng-model="$ctrl.vm.custMulti"
     select-options="{ multiple: true, closeOnSelect: false, showSelectAll:true, dataApiKey: 'customer'}"></ag-select>
+  <ag-select name="agSelect" ng-model="$ctrl.vm.displayFields"
+             select-options="{ multiple: true, closeOnSelect: false, showSelectAll:true, dataApiKey: 'customer', displayFields:['name','num']}"></ag-select>
 
 <p>rest data from promise</p>
 <ag-select name="agSelect" ng-model="$ctrl.vm.cust"
