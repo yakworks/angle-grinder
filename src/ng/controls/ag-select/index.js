@@ -6,6 +6,11 @@ import _ from 'lodash'
  * the heavy lifting is done in the modified ui-select2 directive
  */
 class Controller extends AgBaseControl {
+  opts = {
+    displayFields: ['name'],
+    formatResult2: (item) => this.repoFormatResult(item)
+  }
+
   $onInit() {
     super.onInit()
     if (this.isRequired === true) {
@@ -14,6 +19,23 @@ class Controller extends AgBaseControl {
         this.selectOptions.allowClear = false
       }
     }
+
+    _.merge(this.opts, this.selectOptions)
+    this.options = this.opts
+    this.selectOptions.formatResult2 = (item) => this.repoFormatResult(item)
+  }
+
+  repoFormatResult(item) {
+    let displayTds = ''
+    this.opts.displayFields.forEach(it => displayTds = `${displayTds} <td>${item[it]}</td>`)
+    var markup = `
+      <table class="table table-condensed select-rest-result">
+        <tr>
+          ${displayTds}
+        </tr>
+      </table>
+    `
+    return markup
   }
 }
 
