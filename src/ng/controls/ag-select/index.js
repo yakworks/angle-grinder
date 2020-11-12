@@ -6,9 +6,8 @@ import _ from 'lodash'
  * the heavy lifting is done in the modified ui-select2 directive
  */
 class Controller extends AgBaseControl {
-
   opts = {
-    displayFields:['name'],
+    displayFields: ['name'],
     formatResult2: (item) => this.repoFormatResult(item)
   }
 
@@ -29,7 +28,7 @@ class Controller extends AgBaseControl {
   repoFormatResult(item) {
     console.log('333333333333333333333333')
     let displayTds = ''
-    this.opts.displayFields.forEach( it => displayTds = `${displayTds} <td>${item[it]}</td>` )
+    this.opts.displayFields.forEach(it => displayTds = `${displayTds} <td>${item[it]}</td>`)
     var markup = `
       <table class="table table-condensed select-rest-result">
         <tr>
@@ -37,7 +36,7 @@ class Controller extends AgBaseControl {
         </tr>
       </table>
     `
-    return markup;
+    return markup
   }
 }
 

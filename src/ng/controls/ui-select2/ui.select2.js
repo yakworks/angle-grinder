@@ -1,6 +1,6 @@
 import angular from 'angular'
 import _ from 'lodash'
-import {setupData} from './dataQuery'
+import { setupData } from './dataQuery'
 
 require('Select2/select2.js')
 
@@ -141,10 +141,6 @@ angular.module('ui.select2', [])
                   })
                 })
               }
-              const buildDisplayFields = (item) => {
-                console.log('eeeeeeeeeeeeee', item, opts.displayFields,  opts.displayFields.map(key => item[key]), opts.displayFields.map(key => item[key]).join(' '))
-                return opts.displayFields.map(key => item[key]).join(' ')
-              }
               if (!isSelectElm) {
                 const showSelectAll = opts.showSelectAll
                 if (showSelectAll) {
@@ -163,19 +159,22 @@ angular.module('ui.select2', [])
                       `
                     }
                     if (Array.isArray(opts.displayFields)) {
-                      let displayTds = ''
-                      opts.displayFields.forEach(it => displayTds = `${displayTds} <td>${object[it]}</td>`)
-                      var markup = `
+                      return formatFields(object)
+                    }
+                    return object.name
+                  }
+                }
+                const formatFields = (object) => {
+                  let displayTds = ''
+                  opts.displayFields.forEach(it => displayTds = `${displayTds} <td>${object[it]}</td>`)
+                  var markup = `
                             <table class="table table-condensed select-rest-result">
                               <tr>
                                 ${displayTds}
                               </tr>
                             </table>
                           `
-                      return markup;
-                    }
-                    return object.name
-                  }
+                  return markup
                 }
                 const handleSelectAll = function(e) {
                   if (!showSelectAll) return // exit fast if we showSelectAll menu is not enabled
