@@ -1,5 +1,3 @@
-import angular from "angular";
-
 export default function setupTypes(formlyConfig) {
   function setType(cfg) {
     formlyConfig.setType(cfg)
@@ -42,9 +40,9 @@ export default function setupTypes(formlyConfig) {
         select-options="to.selectOptions" api-key="{{to.dataApiKey}}">
         <ag-button color="{{to.addon.color}}" icon-left="{{to.addon.icon}}" ng-click="onClick($event)">{{to.addon.text}}</ag-button>
       </ag-select>`,
-    controller: ($scope) =>{
+    controller: ($scope) => {
       $scope.onClick = ($event) => {
-        if (angular.isString($scope.to.addon.action)) {
+        if (typeof $scope.to.addon.action === 'string') {
           const ctrl = $scope.$parent.$parent.$parent.$parent.ctrl
           const fn = ctrl[$scope.to.addon.action]
           fn.apply(ctrl, [$event])
