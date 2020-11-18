@@ -28,7 +28,8 @@ function formlyForm(formlyUsability, formlyWarn, $parse, formlyConfig, $interpol
       foo: '=',
       model: '=',
       form: '=?',
-      options: '=?'
+      options: '=?',
+      ctrl: '=?'
     },
     controller: 'FormlyFormController',
     link: formlyFormLink

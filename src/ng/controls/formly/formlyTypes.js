@@ -1,3 +1,4 @@
+import angular from "angular";
 
 export default function setupTypes(formlyConfig) {
   function setType(cfg) {
@@ -33,6 +34,25 @@ export default function setupTypes(formlyConfig) {
     template: `<ag-select label="{{to.label}}" ng-model="model[id]" hint="{{to.hint}}" element-id="{{id}}"
         select-options="to.selectOptions" api-key="{{to.dataApiKey}}">
       </ag-select>`
+  })
+
+  setType({
+    name: 'select-addon',
+    template: `<ag-select label="{{to.label}}" ng-model="model[id]" hint="{{to.hint}}" element-id="{{id}}"
+        select-options="to.selectOptions" api-key="{{to.dataApiKey}}">
+        <ag-button color="{{to.addon.color}}" icon-left="{{to.addon.icon}}" ng-click="onClick($event)">{{to.addon.text}}</ag-button>
+      </ag-select>`,
+    controller: ($scope) =>{
+      $scope.onClick = ($event) => {
+        if (angular.isString($scope.to.addon.action)) {
+          const ctrl = $scope.$parent.$parent.$parent.$parent.ctrl
+          const fn = ctrl[$scope.to.addon.action]
+          fn.apply(ctrl, [$event])
+        } else {
+          return $scope.to.addon.action($event)
+        }
+      }
+    }
   })
 
   setType({
