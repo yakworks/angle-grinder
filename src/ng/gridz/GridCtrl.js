@@ -362,7 +362,7 @@ export default class GridCtrl {
         search: this.hasSearchFilters(filters),
         postData: {}
       }
-      if (filters) params.postData.filters = JSON.stringify(filters)
+      if (filters) params.postData.q = JSON.stringify(filters)
       if (q || q === '') params.postData.q = q
       // console.log('search params', params)
       this.setParam(params)
