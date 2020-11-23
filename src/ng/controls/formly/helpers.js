@@ -42,8 +42,7 @@ function ensureArray(cfg) {
 
 function doReduce(optsAr) {
   const tplOptsKeys = ['label', 'required', 'placeholder', 'hint', 'minLength',
-    'maxLength', 'rows', 'dataApiKey', 'selectOptions', 'disabled']
-
+    'maxLength', 'rows', 'dataApiKey', 'selectOptions', 'disabled', 'addon']
   return optsAr.reduce(function(accum, field) {
     if (field.fieldGroup) {
       field.fieldGroup = doTransform(field.fieldGroup)

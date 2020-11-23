@@ -208,7 +208,10 @@ export default class BaseListCtrl {
       if (p.sort && p.order) p.sort = `${p.sort} ${p.order}`
       if (!p.sort) delete p.sort
       delete p.order
-      // console.log('params after clean', p)
+      // to be able to set default filters on the first load
+      if (!p.q && this.searchModel && this.searchModel !== {}) {
+        p.q = JSON.stringify(this.searchModel)
+      }
       const data = await this.dataApi.search(p)
       this.gridCtrl.addJSONData(data)
     } catch (er) {

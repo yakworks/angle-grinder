@@ -3,11 +3,13 @@ import template from './component.html'
 class controller {
   vm = {}
 
-  editFormFields = {
-    foo:{ },
-    bar:{disabled: true },
-    baz:{}
+  componentClick = ($event) => {
+    if (this.vm.formly_2_addonSelect){
+      return alert(`Customer ${this.vm.formly_2_addonSelect} is selected` )
+    }
+    alert('Search clicked')
   }
+
   editColFields = {
     column1:[
       {key: 'foo'},
@@ -18,7 +20,10 @@ class controller {
       {key: 'bar2'}
     ],
     column3:[
-      {key: 'baz'}
+      {key: 'baz'},
+      { key: 'addonSelect', type: 'select-addon', addon:{icon: 'fa-search', text: 'Search', action: 'componentClick'},
+        selectOptions: {dataApiKey: 'customer'}
+      }
     ]
   }
 
