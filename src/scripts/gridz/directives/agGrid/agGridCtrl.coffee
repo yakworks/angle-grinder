@@ -304,7 +304,12 @@ class AgGridCtrl extends BaseCtrl
     for k,v of data
       td = newFooterRow.find('[aria-describedby=' + '"arTranGrid_' + k + '"' + ']')
       if (td.length > 0)
-        if not isNaN(v)
+        withoutComma = v
+        if(_.isString(v)) 
+          #If its a string, remove currency format (If applied) before we check if its a number
+          withoutComma = v.replace(',', '')
+
+        if not isNaN(withoutComma)
           td[0].innerHTML = """<div class='pull-right currency-content'>#{v}</div>"""
         else
           td[0].innerHTML = """<div class=''>#{v}</div>"""
