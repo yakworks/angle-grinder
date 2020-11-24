@@ -68,9 +68,9 @@ function doReduce(optsAr, ctrl) {
       if (field.type === 'select') {
         _.defaultsDeep(templateOptions, { selectOptions: { useDataObject: true } })
       }
-      if (field.type.indexOf('addon') > -1 ){
+      if (field.type.indexOf('addon') > -1) {
         templateOptions.onClick = ($event) => {
-          if(!$event) return
+          if (!$event) return
           if (typeof templateOptions.addon.action === 'string') {
             const fn = ctrl[templateOptions.addon.action]
             fn.apply(ctrl, [$event])
