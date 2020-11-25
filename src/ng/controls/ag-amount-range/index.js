@@ -20,8 +20,10 @@ class Controller extends AgBaseControl {
 
   $onInit() {
     _.merge(this.opts, this.rangeOptions)
-    this.placeholder = this.opts.fromField.placeholder
+    this.placeholderFrom = this.opts.fromField.placeholder
     this.placeholderTo = this.opts.toField.placeholder
+    this.elementIdFrom = this.elementId + '_from'
+    this.elementIdTo = this.elementId + '_to'
 
     super.onInit()
   }

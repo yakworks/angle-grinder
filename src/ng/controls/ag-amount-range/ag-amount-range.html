@@ -5,8 +5,8 @@
     <div class="control is-expanded" >
       <ag-amount-input
         ng-class="$ctrl.inputClass"
-        input-id="{{$ctrl.elementId}}"
-        placeholder="{{$ctrl.placeholder}}"
+        input-id="{{::$ctrl.elementIdFrom}}"
+        placeholder="{{$ctrl.placeholderFrom}}"
         ng-change="$ctrl.onChange()"
         ng-model="$ctrl.valueFrom"></ag-amount-input>
     </div>
@@ -15,8 +15,8 @@
     </div>
     <div class="control is-expanded" >
       <ag-amount-input
-        input-id="{{$ctrl.elementToId}}"
-        placeholder="{{$ctrl.placeholderTo}}"
+        input-id="{{$ctrl.elementIdTo}}"
+        placeholder="{{::$ctrl.placeholderTo}}"
         ng-change="$ctrl.onChange()"
         ng-model="$ctrl.valueTo"
         ng-class="$ctrl.inputClass"></ag-amount-input>
