@@ -307,7 +307,7 @@ class AgGridCtrl extends BaseCtrl
         withoutComma = v
         if(_.isString(v)) 
           #If its a string, remove currency format (If applied) before we check if its a number
-          withoutComma = v.replace(',', '')
+          withoutComma = v.replaceAll(',', '')
 
         if not isNaN(withoutComma)
           td[0].innerHTML = """<div class='pull-right currency-content'>#{v}</div>"""
