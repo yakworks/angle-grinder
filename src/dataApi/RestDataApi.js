@@ -1,6 +1,4 @@
 import ky from 'ky'
-import {createQueryString, queryParams} from "../utils/urlUtils";
-// import _ from 'lodash'
 
 /**
  * This common wrapper around RESTful resource
