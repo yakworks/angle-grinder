@@ -55,7 +55,7 @@ class controller {
   }
 
   hasChildren(item) {
-    return  item?.children?.filter((child) => !(child.isMenuItem === false)).length > 0
+    return item?.children?.filter((child) => !(child.isMenuItem === false)).length > 0
   }
 
   itemClick(mitem, $event) {
