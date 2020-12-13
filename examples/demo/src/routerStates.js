@@ -132,16 +132,20 @@ const gridsStates = {
   },
   children: [
     {
-      name: 'Edit Customer',
-      isMenuItem: false,
-      url: '/customer/:id',
-      component: 'customRestEditDemo'
-    },
-    {
       name: 'vanilla-agGridList',
-      url: '/customer',
-      component: 'agGridList',
       data: { title: 'Vanilla rest agGridList'},
+      url: '/customer',
+      children: [{
+        name: 'list',
+        isMenuItem: false,
+        url: '/',
+        component: 'agGridList'
+      },{
+        name: 'Edit Customer',
+        isMenuItem: false,
+        url: '/:id',
+        component: 'customRestEditDemo'
+      }],
       resolve: {
         apiKey: () => "customer",
         notification: () => ({

@@ -22,18 +22,17 @@
   <div class="sidenav-nav list">
 
     <script type="text/ng-template" id="menuItemTree">
-      <a href="{{mitem.children ? '' : mitem.name}}" class="item-content"
-         ng-if="mitem.isMenuItem === undefined ? true : mitem.isMenuItem"
+      <a href="{{$ctrl.hasChildren(mitem) ? '' : (mitem.children ? mitem.children[0].name : mitem.name)}}" class="item-content"
          ng-click="$ctrl.itemClick(mitem, $event)">
         <span class="icon" ng-if="mitem.data.icon">
           <i class="{{mitem.data.icon}}"></i>
         </span>
         <span class="title" > {{ mitem.data.title }} </span>
       </a>
-      <ul class="submenu list-items" ng-if="mitem.children">
+      <ul class="submenu list-items" ng-if="$ctrl.hasChildren(mitem)">
         <li class="list-item" ng-repeat="mitem in mitem.children" ng-include="'menuItemTree'"
         ng-class="{
-          'has-children' : mitem.children,
+          'has-children' : $ctrl.hasChildren(mitem),
           'is-active': $ctrl.appState.$state.includes(mitem.name)
         }"></li>
       </ul>
@@ -44,7 +43,7 @@
           class="list-item"
           ng-include="'menuItemTree'"
           ng-class="{
-            'has-children' : mitem.children,
+            'has-children' : $ctrl.hasChildren(mitem),
             'is-active': $ctrl.appState.$state.includes(mitem.name)
           }">
       </li>
