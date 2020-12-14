@@ -134,11 +134,12 @@ const gridsStates = {
     {
       name: 'vanilla-agGridList',
       data: { title: 'Vanilla rest agGridList'},
+      abstract: 'fresh.grid.vanilla-agGridList.list',
       url: '/customer',
       children: [{
         name: 'list',
         isMenuItem: false,
-        url: '/',
+        url: '',
         component: 'agGridList'
       },{
         name: 'Edit Customer',
