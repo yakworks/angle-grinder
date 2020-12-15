@@ -1,13 +1,15 @@
+import _ from "lodash";
 
 export default class EditCtrl {
   vm={}
   /* @ngInject */
-  constructor($stateParams, $state) {
-    console.log($state.current.name)
+  constructor($stateParams, dataStoreApi) {
     this.$stateParams = $stateParams
-
+    this.dataStoreApi = dataStoreApi
   }
-  $onInit() {
-    this.vm={id : this.$stateParams.id}
+
+  async $onInit() {
+    this.dataApi = this.dataStoreApi[this.apiKey]
+    this.vm = await this.dataApi.get(this.$stateParams.id)
   }
 }

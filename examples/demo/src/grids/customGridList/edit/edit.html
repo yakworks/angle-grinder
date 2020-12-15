@@ -1,1 +1,29 @@
 Edit Customer with id = {{$ctrl.vm.id}}
+
+<div class="columns">
+  <div class="column is-one-third">
+    <div class="panel panel-default panel-xeditable">
+      <div editable-panel-heading="editForm">Customer Form</div>
+      <div class="panel-body" >
+        <form editable-form name="editForm" ag-form="" class="form-xeditable no-margin input-underline" novalidate="true"
+              onaftersave="save(editForm, org)" ng-class="{editing: editForm.$visible}">
+          <div class="edit-group">
+            <label class="control-label">City</label>
+            <div class="controls"
+                 editable-text="$ctrl.vm.city"
+                 e-placeholder="org city"><span>{{$ctrl.vm.city}}</span></div>
+          </div>
+
+          <div class="edit-group">
+            <label class="control-label">State</label>
+            <div class="controls"
+                 editable-text="$ctrl.vm.state"
+                 e-name="orgState"
+                 e-placeholder="org state">{{$ctrl.vm.state}}</div>
+          </div>
+          <div editable-form-buttons="editForm"></div>
+        </form>
+      </div>
+    </div>
+  </div><!-- /column -->
+</div><!-- /columns -->
