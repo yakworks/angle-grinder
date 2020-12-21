@@ -7,7 +7,6 @@ class controller {
   }
 
   get title() {
-    console.log(this.appState.$state.$current)
     return appState.title
   }
 
