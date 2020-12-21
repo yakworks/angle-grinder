@@ -7,9 +7,17 @@ class controller {
   }
 
   get title() {
+    console.log(this.appState.$state.$current)
     return appState.title
   }
 
+  get isEdit() {
+    return !!this.appState.$state.$current.params.id
+  }
+
+  goToParent() {
+    appState.$state.go(appState.$state.$current.parent.abstract)
+  }
 }
 
 export default angular.module('demo.fresh.appbar', [])
