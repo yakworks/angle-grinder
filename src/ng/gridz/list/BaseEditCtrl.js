@@ -1,8 +1,8 @@
 // import _ from 'lodash'
 
-import {argsMerge} from "../../utils/classUtils";
-import appConfigApi from "../../../dataApi/AppConfigApi";
-import _ from "lodash";
+import { argsMerge } from '../../utils/classUtils'
+import appConfigApi from '../../../dataApi/AppConfigApi'
+import _ from 'lodash'
 
 export default class EditModalCtrl {
   static $inject = ['$scope']
@@ -10,9 +10,6 @@ export default class EditModalCtrl {
   constructor(...args) {
     argsMerge(this, args)
   }
-
-
-
 
   async handleError(er) {
     const { agForm } = this.$scope
