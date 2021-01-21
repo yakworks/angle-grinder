@@ -1,5 +1,4 @@
 import ky from 'ky'
-// import _ from 'lodash'
 
 /**
  * This common wrapper around RESTful resource
@@ -27,7 +26,10 @@ export default class RestDataApi {
 
   //
   async picklist(params) {
-    const opts = { searchParams: params }
+    let opts = { searchParams: params }
+    if (params) {
+      opts = { searchParams: { q: params ? JSON.stringify(params) : '' } }
+    }
     // console.log("query opts", opts)
     const data = await ky.get(`${this.endpoint}/picklist`, opts).json()
     return data
