@@ -1,1 +1,13 @@
 Edit Customer with id = {{$ctrl.vm.id}}
+<div ng-if="$ctrl.isConfigured">
+  <ag-formly-form ag-form is-horizontal
+                  model="$ctrl.vm"
+                  fields="$ctrl.cfg.editForm" form="$ctrl.editCtrl" ctrl="$ctrl"  >
+  </ag-formly-form>
+  <div class="pt-2"></div>
+  <ag-ok-cancel ok-label="Save"
+                ok-click="$ctrl.save(agForm)"
+                is-loading="$ctrl.isSearching"
+                cancel-label="Cancel">
+  </ag-ok-cancel>
+</div>

@@ -24,6 +24,7 @@ class controller {
   constructor($timeout) {
     this.$timeout = $timeout
     this.$state = appState.$state
+    console.log(appState.$state.get())
     this.appState = appState
     this.layout = appState.layout
     this.sideMenuItems = appState.sideMenuConfig.children
@@ -53,6 +54,10 @@ class controller {
     return this.openItem?.startsWith(mitem.name)
   }
 
+  hasChildren(item) {
+    return item?.children?.filter((child) => !(child.isMenuItem === false)).length > 0
+  }
+
   itemClick(mitem, $event) {
     const $target = $($event.currentTarget)
     const $liTarget = $target.parent() // li element container
@@ -72,7 +77,7 @@ class controller {
       // remove the open class
       $('li.is-open', $ulMenuTarget).removeClass('is-open')
 
-      if (mitem.children) {
+      if (this.hasChildren(mitem)) {
         // has children so open it up
         $event.preventDefault()
         $liTarget.addClass('is-open')
@@ -83,7 +88,7 @@ class controller {
         // it has no children, its a ui-router link
         // if not fixed then close (minimize) on click
         if (!this.isFixed) minimizeSidenav()
-        appState.$state.go(mitem.name)
+        appState.$state.go(mitem.children ? mitem.children[0].name : mitem.name)
       }
     }
   }

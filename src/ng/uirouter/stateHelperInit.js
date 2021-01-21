@@ -20,7 +20,7 @@ export default function stateHelperInit(state, opts) {
     angular.extend(options, opts)
   }
   // by default set the url to the name
-  if (!state.url) {
+  if (!state.url && state.url !== '') {
     state.url = `/${state.name}`
   }
   // setup data for title etc if its not there

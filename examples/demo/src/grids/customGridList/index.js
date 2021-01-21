@@ -16,7 +16,11 @@ export default angular
   })
   .component('customRestEditDemo', {
     template: editTpl,
-    controller: EditCtrl
+    controller: EditCtrl,
+      bindings: {
+        apiKey: '<',
+        notification: '<'
+    }
   })
   .component('basicGridRestIndex', {
     template: template,

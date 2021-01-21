@@ -3,6 +3,7 @@
     <div class="toolbar-brand">
       <sidenav-hamburger></sidenav-hamburger>
       <div class="toolbar-item">
+        <a class="toolbar-title" ui-sref="{{$ctrl.appState.$state.$current.parent.name}}" ng-if="$ctrl.isEdit" target="_self" ><i class="mdi mdi-keyboard-backspace"></i></a>
         <div class="toolbar-title">{{$ctrl.title}}</div>
       </div>
       <a role="button" class="toolbar-burger" aria-label="menu" aria-expanded="false" data-target="toolbar-menu">
