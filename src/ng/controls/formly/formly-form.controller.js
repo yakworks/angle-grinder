@@ -62,7 +62,7 @@ export default function FormlyFormController(
     $scope.fields = $scope.fields || []
     // console.log("scope",scope)
     // console.log("scope.foo",scope.foo)
-    const flds = transformFields($scope.fields)
+    const flds = transformFields($scope.fields, $scope.ctrl)
     $scope.fields = flds
     if (_.isPlainObject(flds) && flds.columns) {
       $scope.fieldColumns = flds.columns
