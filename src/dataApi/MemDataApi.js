@@ -90,7 +90,7 @@ class MemDataApi {
         flist = this.qbe(list, filters)
       }
     } else if (params.q) {
-      flist = _.isPlainObject(q) ? this.qbe(list, q) :this.searchAny(list, q)
+      flist = _.isPlainObject(q) ? this.qbe(list, q) : this.searchAny(list, q)
     }
     return flist
   }

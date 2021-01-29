@@ -7,7 +7,7 @@ import _ from 'lodash'
 
 export default class ListCtrl extends BaseListCtrl {
   apiKey = 'invoice'
-
+  initSearch = {name: 'Yodo'}
   // massUpdateTemplate = require('../basicGrid/templates/massUpdateForm.html')
 
   //static $inject = _.union(super.$inject, ['someService'])

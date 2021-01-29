@@ -28,7 +28,7 @@ class ListCtrl extends BaseListCtrl {
     this.dataApi = this.dataStoreApi[this.apiKey]
     this.cfg = {}
     if (this.initSearch) {
-      this.searchModel = {...this.initSearch, ...this.searchModel}
+      this.searchModel = { ...this.initSearch, ...this.searchModel }
     }
     super.doConfig()
   }
