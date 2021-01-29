@@ -154,6 +154,30 @@ const gridsStates = {
           text: "Uses ui-router to send rest apiKey to generic agGridList component"
         })
       }
+    },{
+      name: 'vanilla-initSearch',
+      data: { title: 'Vanilla init search'},
+      abstract: 'fresh.grid.vanilla-agGridList.list',
+      url: '/customer',
+      children: [{
+        name: 'list',
+        isMenuItem: false,
+        url: '',
+        component: 'agGridList'
+      },{
+        name: 'Edit Customer',
+        isMenuItem: false,
+        url: '/:id',
+        component: 'customRestEditDemo'
+      }],
+      resolve: {
+        apiKey: () => "customer",
+        initSearch: () => ({name: 'Yodo'}),
+        notification: () => ({
+          class: "is-primary is-light",
+          text: "Uses ui-router to send rest apiKey to generic agGridList component"
+        })
+      }
     },
     {
       name: 'editOnly-agGridList',
