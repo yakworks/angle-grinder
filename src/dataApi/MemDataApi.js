@@ -81,6 +81,7 @@ class MemDataApi {
   filter(list, params) {
     let flist = list
     const filters = params.filters ? JSON.parse(params.filters) : null
+    const q = params.q ? JSON.parse(params.q) : null
     if (filters) {
       // const filters = JSON.parse(params.filters)
       if (filters.qSearch) {
@@ -89,7 +90,7 @@ class MemDataApi {
         flist = this.qbe(list, filters)
       }
     } else if (params.q) {
-      flist = this.searchAny(list, params.q)
+      flist = _.isPlainObject(q) ? this.qbe(list, q) :this.searchAny(list, q)
     }
     return flist
   }
