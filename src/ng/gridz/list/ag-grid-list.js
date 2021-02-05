@@ -27,6 +27,9 @@ class ListCtrl extends BaseListCtrl {
     this.isConfigured = false
     this.dataApi = this.dataStoreApi[this.apiKey]
     this.cfg = {}
+    if (this.initSearch) {
+      this.searchModel = { ...this.initSearch, ...this.searchModel }
+    }
     super.doConfig()
   }
 }
@@ -34,7 +37,8 @@ class ListCtrl extends BaseListCtrl {
 export default {
   bindings: {
     apiKey: '<',
-    notification: '<'
+    notification: '<',
+    initSearch: '<'
   },
   template: template,
   controller: ListCtrl
