@@ -1,5 +1,4 @@
 import BaseListCtrl from '../../../../src/ng/gridz/list/BaseListCtrl'
-// import restStoreApi from '../../store/RestStoreApi'
 import _ from 'lodash'
 
 const template = `
@@ -12,7 +11,7 @@ const template = `
   </ag-grid-list-search>
   <gridz ng-if="$ctrl.isConfigured" grid-options="$ctrl.cfg.gridOptions"
         toolbar-options="$ctrl.cfg.toolbarOptions"
-        grid-id="basicGrid"
+        grid-id="{{$ctrl.getGridId()}}"
         list-ctrl="$ctrl">
   </gridz>
 </div>

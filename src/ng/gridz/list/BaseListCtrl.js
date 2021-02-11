@@ -242,4 +242,10 @@ export default class BaseListCtrl {
     console.error(er)
     toast.error(er)
   }
+
+  // we need to generate gridId, because if we have 2 grids on a page they will have the same id and 2 pagers will
+  // be assisgned to the second grid
+  getGridId(){
+    return 'basicGrid' + this.apiKey
+  }
 }
