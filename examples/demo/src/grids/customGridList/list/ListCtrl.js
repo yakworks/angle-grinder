@@ -9,7 +9,11 @@ export default class ListCtrl extends BaseListCtrl {
   apiKey = 'invoice'
   initSearch = {name: 'Yodo'}
   // massUpdateTemplate = require('../basicGrid/templates/massUpdateForm.html')
-
+  eventHandlers = {
+    onSelect: (event, id) => {
+      alert(`Selected row with id = ${id}`)
+    }
+  }
   //static $inject = _.union(super.$inject, ['someService'])
   constructor(...args) {
     super(...args)

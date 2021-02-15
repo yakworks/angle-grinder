@@ -36,6 +36,9 @@ export default class BaseListCtrl {
     let cfg = await appConfigApi.getConfig(this.apiKey)
     cfg = _.cloneDeep(cfg)
     const gopts = cfg.gridOptions
+    if (this.eventHandlers) {
+      gopts.eventHandlers = this.eventHandlers
+    }
     // assign default datatype to grid loader
     gopts.datatype = (params) => this.gridLoader(params)
     if (!gopts.toolbar) gopts.toolbar = {}
@@ -233,8 +236,7 @@ export default class BaseListCtrl {
   }
 
   searchReset(searchForm) {
-    console.log('searchReset agForm', searchForm)
-    this.searchModel = {}
+    this.searchModel = this.initSearch || {}
     searchForm.reset()
   }
 
