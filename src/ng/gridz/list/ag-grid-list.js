@@ -12,7 +12,7 @@ const template = `
   </ag-grid-list-search>
   <gridz ng-if="$ctrl.isConfigured" grid-options="$ctrl.cfg.gridOptions"
         toolbar-options="$ctrl.cfg.toolbarOptions"
-        grid-id="basicGrid"
+        grid-id="{{$ctrl.gridId()}}"
         list-ctrl="$ctrl">
   </gridz>
 </div>
@@ -31,6 +31,12 @@ class ListCtrl extends BaseListCtrl {
       this.searchModel = { ...this.initSearch, ...this.searchModel }
     }
     super.doConfig()
+  }
+
+  // we need to generate gridId, because if we have 2 grids on a page they will have the same id and 2 pagers will
+  // be assisgned to the second grid
+  gridId(){
+    return this.apiKey+'Grid'
   }
 }
 
