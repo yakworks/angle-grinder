@@ -40,7 +40,7 @@ export default class GridCtrl {
 
     // set the hasSelected flag events
     const onSelect = (rowId, status, event) => {
-      if (gridOptions.eventHandlers?.onSelect && _.isFunction(gridOptions.eventHandlers.onSelect)){
+      if (gridOptions.eventHandlers?.onSelect && _.isFunction(gridOptions.eventHandlers.onSelect)) {
         gridOptions.eventHandlers.onSelect(rowId, status, event)
       }
       this.$rootScope.$evalAsync(() => {
