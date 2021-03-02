@@ -151,7 +151,7 @@ class MemDataApi {
     return this._commit(data)
   }
 
-  async massUpdate(muItem) {
+  async bulkUpdate(muItem) {
     const items = await this.data()
     const { data, ids } = muItem
     const updateItems = []

@@ -63,10 +63,10 @@ function makeUrls(epoint, api) {
         })
       },
 
-      [`POST /api/${epoint}/massUpdate`]: (req, res) => {
+      [`POST /api/${epoint}/bulkUpdate`]: (req, res) => {
         // console.log('PUT /api/invoice req.body', req.body)
         const { body } = req
-        api.massUpdate(body)
+        api.bulkUpdate(body)
         .then((data) => {
           // console.log("PUT invoice data", data)
           return res.json(data)

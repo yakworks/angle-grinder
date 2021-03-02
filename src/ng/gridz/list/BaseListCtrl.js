@@ -1,7 +1,7 @@
 // import Log from 'angle-grinder/src/utils/Log'
 import _ from 'lodash'
 import EditModalCtrl from './EditModalCtrl'
-import MassUpdateModalCtrl from './MassUpdateModalCtrl'
+import BulkUpdateModalCtrl from './BulkUpdateModalCtrl'
 import { argsMerge } from '../../utils/classUtils'
 import appConfigApi from '../../../dataApi/AppConfigApi'
 import toast from '../../../../src/tools/toast'
@@ -14,7 +14,7 @@ export default class BaseListCtrl {
   showSearchForm = false
   defaultToolbarOpts = {
     selectedButtons: {
-      massUpdate: { icon: 'far fa-edit', tooltip: 'Mass Update' },
+      bulkUpdate: { icon: 'far fa-edit', tooltip: 'Bulk Update' },
       xlsExport: { icon: 'far fa-file-excel', tooltip: 'Export to Excel' }
     },
     leftButtons: {
@@ -24,7 +24,7 @@ export default class BaseListCtrl {
   }
 
   editTemplate = require('./editDialog.html')
-  massUpdateTemplate = require('./massUpdateDialog.html')
+  bulkUpdateTemplate = require('./bulkUpdateDialog.html')
   //  searchTemplate = require('./searchForm.html')
 
   static $inject = ['$scope', '$element', '$uibModal', '$timeout']
@@ -50,8 +50,8 @@ export default class BaseListCtrl {
       tbopts.searchFormButton.class = 'hidden'
     }
 
-    if (cfg.massUpdateForm === undefined) {
-      tbopts.selectedButtons.massUpdate.class = 'hidden'
+    if (cfg.bulkUpdateForm === undefined) {
+      tbopts.selectedButtons.bulkUpdate.class = 'hidden'
     }
 
     if (gopts.showSearchForm) this.showSearchForm = gopts.showSearchForm
@@ -65,7 +65,7 @@ export default class BaseListCtrl {
 
   get gridCtrl() { return this.$element.find('gridz').controller('gridz') }
   get editModalCtrl() { return EditModalCtrl }
-  get massUpdateModalCtrl() { return MassUpdateModalCtrl }
+  get bulkUpdateModalCtrl() { return BulkUpdateModalCtrl }
   // get searchCtrl() { return SearchCtrl }
 
   fireRowAction(model, menuItem) {
@@ -83,8 +83,8 @@ export default class BaseListCtrl {
     switch (btnItem.key) {
       case 'create':
         return this.create()
-      case 'massUpdate':
-        return this.showMassUpdate()
+      case 'bulkUpdate':
+        return this.showBulkUpdate()
       case 'export':
         return this.xlsExport()
       case 'delete':
@@ -151,9 +151,9 @@ export default class BaseListCtrl {
     }
   }
 
-  showMassUpdate() {
+  showBulkUpdate() {
     const modInst = this.$uibModal.open(
-      this.getMassUpdateOptions()
+      this.getBulkUpdateOptions()
     )
     modInst.result
       .then(res => {
@@ -167,11 +167,11 @@ export default class BaseListCtrl {
       })
   }
 
-  getMassUpdateOptions(model = {}) {
+  getBulkUpdateOptions(model = {}) {
     return {
-      controller: this.massUpdateModalCtrl,
+      controller: this.bulkUpdateModalCtrl,
       controllerAs: 'dlgCtrl',
-      template: this.massUpdateTemplate,
+      template: this.bulkUpdateTemplate,
       keyboard: false, // do not close the dialog with ESC key
       backdrop: 'static', // do not close on click outside of the dialog,
       resolve: {
@@ -184,9 +184,9 @@ export default class BaseListCtrl {
     }
   }
 
-  // showMassUpdate() {
+  // showBulkUpdate() {
   //   const modalOpts = {
-  //     template: this.massUpdateTpl,
+  //     template: this.bulkUpdateTpl,
   //     keyboard: false, // do not close the dialog with ESC key
   //     backdrop: 'static' // do not close on click outside of the dialog,
   //     // scope: this.$scope

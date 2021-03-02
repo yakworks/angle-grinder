@@ -61,7 +61,7 @@ editForm:
     selectOptions: { multiple: true, showSelectAll: true }
     dataApiKey: tag
 
-massUpdateForm:
+bulkUpdateForm:
   - key: country
 
 searchForm:

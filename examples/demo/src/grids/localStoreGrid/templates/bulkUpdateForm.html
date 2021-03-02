@@ -1,10 +1,10 @@
 <div class="modal-card">
   <header class="modal-card-head">
-    <span class="modal-card-title">Mass Update</span>
+    <span class="modal-card-title">bulk Update</span>
     <button class="delete" aria-label="close" ng-click="dlgCtrl.cancel()"></button>
   </header>
   <section class="modal-card-body">
-    <form name="massUpdateCtrl" ag-form is-horizontal class="form-horizontal-fixed">
+    <form name="bulkUpdateCtrl" ag-form is-horizontal class="form-horizontal-fixed">
       <ag-input ng-model="dlgCtrl.vm.comments"></ag-input>
     </form>
   </section>
@@ -16,5 +16,5 @@
         ng-click="dlgCtrl.cancel()">Cancel</ag-button>
     </div>
   </footer>
-  <!-- <pre ng-cloak class="mt-4">massUpdateCtrl.$invalid: {{dlgCtrl.massUpdateCtrl.$invalid}}<br>model: {{dlgCtrl.vm | json}}</pre> -->
+  <!-- <pre ng-cloak class="mt-4">bulkUpdateCtrl.$invalid: {{dlgCtrl.bulkUpdateCtrl.$invalid}}<br>model: {{dlgCtrl.vm | json}}</pre> -->
 </div>

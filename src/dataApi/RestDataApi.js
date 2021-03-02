@@ -68,8 +68,8 @@ export default class RestDataApi {
     return true
   }
 
-  async massUpdate(muItem) {
-    const results = await ky.post(`${this.endpoint}/massUpdate`, { json: muItem }).json()
+  async bulkUpdate(muItem) {
+    const results = await ky.post(`${this.endpoint}/bulkUpdate`, { json: muItem }).json()
     return results
   }
 

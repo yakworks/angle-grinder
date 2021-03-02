@@ -8,7 +8,7 @@ import _ from 'lodash'
 export default class ListCtrl extends BaseListCtrl {
   apiKey = 'invoice'
   initSearch = {name: 'Yodo'}
-  // massUpdateTemplate = require('../basicGrid/templates/massUpdateForm.html')
+  // bulkUpdateTemplate = require('../basicGrid/templates/bulkUpdateForm.html')
   eventHandlers = {
     onSelect: (event, id) => {
       alert(`Selected row with id = ${id}`)

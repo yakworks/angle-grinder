@@ -11,7 +11,7 @@ class ListCtrl extends BaseListCtrl {
   isLoaded = false
 
   editTemplate = require('./templates/editDialog.html')
-  massUpdateTemplate = require('./templates/massUpdateForm.html')
+  bulkUpdateTemplate = require('./templates/bulkUpdateForm.html')
 
   // static $inject = _.union(super.$inject, ['restDataStore', '$timeout'])
 

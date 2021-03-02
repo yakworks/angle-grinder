@@ -21,7 +21,7 @@ export default class EditModalCtrl {
     this.isSaving = true
     try {
       const params = { ids: this.selectedIds, data: this.vm }
-      const results = await this.dataApi.massUpdate(params)
+      const results = await this.dataApi.bulkUpdate(params)
       this.modal.close(results)
     } catch (er) {
       this.handleError(er)
