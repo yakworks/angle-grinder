@@ -87,6 +87,8 @@ export default class BaseListCtrl {
         return this.showMassUpdate()
       case 'export':
         return this.xlsExport()
+      case 'delete':
+        return this.deleteSelected()
       default:
         if (_.isFunction(this[btnItem.key])) {
           this[btnItem.key](btnItem, event)
@@ -200,6 +202,11 @@ export default class BaseListCtrl {
     } catch (er) {
       this.handleError(er)
     }
+  }
+
+  async deleteSelected() {
+    const id = this.gridCtrl.getSelectedRowIds()[0]
+    this.delete(id)
   }
 
   // load results of a query into gridCtrl

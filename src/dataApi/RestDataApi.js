@@ -72,4 +72,19 @@ export default class RestDataApi {
     const results = await ky.post(`${this.endpoint}/massUpdate`, { json: muItem }).json()
     return results
   }
+
+  async postAction(path, body) {
+    const results = await ky.post(`${this.endpoint}/${path}`, { json: body }).json()
+    return results
+  }
+
+  async getAction(path) {
+    const results = await ky.post(`${this.endpoint}/${path}`).json()
+    return results
+  }
+
+  async countTotals(params) {
+    const results = await ky.post(`${this.endpoint}/countTotals`, {json: params}).json()
+    return results
+  }
 }
