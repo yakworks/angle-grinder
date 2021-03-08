@@ -41,7 +41,7 @@ class Controller {
   }
 
   $postLink() {
-    const rightSec = this.options.rightSection
+    const rightSec = this.options?.rightSection
     if (rightSec) {
       const rightHtml = this.$element.find('.right-html')
       const tpl = rightSec.template
