@@ -84,6 +84,10 @@ export default class GridCtrl {
     return this.getParam('selarrrow')
   }
 
+  getSelectedRowId() {
+    return this.getParam('selrow')
+  }
+
   hasSelectedRowIds() {
     return this.getParam('selarrrow').length > 0
   }
