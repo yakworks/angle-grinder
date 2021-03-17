@@ -84,7 +84,7 @@ export default class RestDataApi {
   }
 
   async countTotals(params) {
-    const results = await ky.post(`${this.endpoint}/countTotals`, {json: params}).json()
+    const results = await ky.post(`${this.endpoint}/countTotals`, { json: params }).json()
     return results
   }
 }
