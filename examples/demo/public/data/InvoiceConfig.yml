@@ -16,6 +16,7 @@ gridOptions:
   autowidth: true
   multiSort: true
   contextMenu: true
+  footerrow: true
 
   toolbarOptions:
     rightSection:

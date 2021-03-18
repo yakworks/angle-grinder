@@ -43,6 +43,13 @@ function makeUrls(epoint, api) {
         })
       },
 
+      [`POST /api/${epoint}/countTotals`]: (req, res) => {
+        // console.log("get invoice req.query  ", req.query)
+        const { query } = req
+        // console.log("search query ", query)
+        api.countTotals('amount').then(data => {return res.json(data)})
+      },
+
       [`POST /api/${epoint}`]: (req, res) => {
         // console.log('PUT /api/invoice req.body', req.body)
         const { body } = req
