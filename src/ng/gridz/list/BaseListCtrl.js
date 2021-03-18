@@ -41,8 +41,8 @@ export default class BaseListCtrl {
     }
     // assign default datatype to grid loader
     gopts.datatype = (params) => this.gridLoader(params)
-    if (!gopts.toolbar) gopts.toolbar = {}
-    const tbopts = _.merge({}, this.defaultToolbarOpts, gopts.toolbar)
+    if (!cfg.toolbarOptions) cfg.toolbarOptions = {}
+    const tbopts = _.merge({}, this.defaultToolbarOpts, cfg.toolbarOptions)
 
     // setup search form show based on if searchForm is configured
     if (cfg.searchForm === undefined) {

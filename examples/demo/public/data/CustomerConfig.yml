@@ -1,4 +1,9 @@
-# toolbarOptions: {}
+toolbarOptions:
+  selectedButtons:
+    delete:
+      icon: fa-trash-alt
+      tooltip: Delete
+
 gridOptions:
   colModel:
     - { name: id, width: 20, sorttype: int, align: right, formatter: gridLink }
