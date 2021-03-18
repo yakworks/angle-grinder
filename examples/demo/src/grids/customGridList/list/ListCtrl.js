@@ -11,7 +11,7 @@ export default class ListCtrl extends BaseListCtrl {
   // bulkUpdateTemplate = require('../basicGrid/templates/bulkUpdateForm.html')
   eventHandlers = {
     onSelect: (event, id) => {
-      alert(`Selected row with id = ${id}`)
+      toast.success(`Selected row with id = ${id}`)
     }
   }
   //static $inject = _.union(super.$inject, ['someService'])

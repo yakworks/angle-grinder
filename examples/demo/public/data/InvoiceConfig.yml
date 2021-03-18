@@ -17,7 +17,7 @@ gridOptions:
   multiSort: true
   contextMenu: true
 
-  toolbar:
+  toolbarOptions:
     rightSection:
       template: |
         <div class="buttons has-addons">

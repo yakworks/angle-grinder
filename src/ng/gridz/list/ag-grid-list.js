@@ -11,7 +11,7 @@ const template = `
   <ag-grid-list-search ng-if="$ctrl.isConfigured" list-ctrl="$ctrl" ng-show="$ctrl.showSearchForm">
   </ag-grid-list-search>
   <gridz ng-if="$ctrl.isConfigured" grid-options="$ctrl.cfg.gridOptions"
-        toolbar-options="$ctrl.cfg.toolbarOptions"
+        toolbar-options="$ctrl.cfg.gridOptions.toolbarOptions"
         grid-id="{{$ctrl.gridId()}}"
         list-ctrl="$ctrl">
   </gridz>

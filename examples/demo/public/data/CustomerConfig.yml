@@ -1,9 +1,3 @@
-toolbarOptions:
-  selectedButtons:
-    delete:
-      icon: fa-trash-alt
-      tooltip: Delete
-
 gridOptions:
   colModel:
     - { name: id, width: 20, sorttype: int, align: right, formatter: gridLink }
@@ -16,6 +10,12 @@ gridOptions:
   # sortname: name
   multiSort: true
   contextMenu: true
+
+  toolbarOptions:
+    selectedButtons:
+      delete:
+        icon: fa-trash-alt
+        tooltip: Delete
 
 editForm:
   fieldGroupA:
