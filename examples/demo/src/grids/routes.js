@@ -69,6 +69,11 @@ const gridsStates = {
       }
     },
     {
+      name: 'two-grids',
+      data: { title: 'Two grids'},
+      component: 'twoGrids'
+    },
+    {
       name: 'override-rest-grid',
       data: { title: 'Custom Grid Component'},
       component: 'basicGridRestIndex'
