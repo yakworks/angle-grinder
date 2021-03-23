@@ -251,4 +251,13 @@ export default class BaseListCtrl {
     console.error(er)
     toast.error(er)
   }
+
+  handleResults(response){
+    if (response.ok){
+      toast.success(` ${response.success.join('<br>')}`, response.defaultMessage)
+    } else {
+      toast.error(`${response.failed.join('<br>')} `, response.defaultMessage)
+    }
+  }
+
 }
