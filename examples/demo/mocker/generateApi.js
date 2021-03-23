@@ -80,6 +80,19 @@ function makeUrls(epoint, api) {
         })
       },
 
+      [`POST /api/${epoint}/ptp`]: (req, res) => {
+              // console.log('PUT /api/invoice req.body', req.body)
+              const { body } = req
+
+        const results = {
+                ok: Math.floor((Math.random() * 10) + 1) > 5,
+                failed: ['First row failed', 'Third row failed'],
+                success: ['First row finished successfully', 'Third row finished successfully'],
+                defaultMessage: 'PTP action'
+        }
+        return res.json(results)
+            },
+
       [`DELETE /api/${epoint}/:id`]: (req, res) => {
         // console.log("get invoice id params", req.params)
         api.remove(req.params.id)

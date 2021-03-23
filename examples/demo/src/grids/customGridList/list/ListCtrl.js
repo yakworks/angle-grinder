@@ -51,8 +51,9 @@ export default class ListCtrl extends BaseListCtrl {
     toast.success('import something')
   }
 
-  ptp() {
-    toast.success('ptp')
+  async ptp() {
+    const result = await this.dataApi.postAction('ptp')
+    this.handleResults(result)
   }
 }
 
