@@ -252,12 +252,11 @@ export default class BaseListCtrl {
     toast.error(er)
   }
 
-  handleResults(response){
-    if (response.ok){
+  handleResults(response) {
+    if (response.ok) {
       toast.success(` ${response.success.join('<br>')}`, response.defaultMessage)
     } else {
       toast.error(`${response.failed.join('<br>')} `, response.defaultMessage)
     }
   }
-
 }
