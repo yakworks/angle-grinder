@@ -191,7 +191,7 @@ class MemDataApi {
 
   async countTotals(field) {
     const items = await this.data()
-    return {[field]: items.reduce((sum, item) => sum + item.amount, 0)}
+    return { [field]: items.reduce((sum, item) => sum + item.amount, 0) }
   }
 }
 
