@@ -2,17 +2,16 @@ import angular from 'angular'
 import localStoreGrid from './localStoreGrid'
 import customGridList from './customGridList'
 import legacyGridModule from './legacyGrid'
+import twoGrids from './twoGrids'
 
 
 const gapp = angular.module('demo.gridz', [
   localStoreGrid,
   customGridList,
-  legacyGridModule
+  legacyGridModule,
+  twoGrids
 ])
 
-// gapp.config(['agDateFilterProvider', provider => // set default date format
-//   provider.setDefaultFormat('MM/DD/YY H:mm a')
-// ])
 
 gapp.run(function($templateCache) {
   $templateCache.put('exampleGridSearchForm.html', require('./legacyGrid/commonComponents/searchForm/searchForm.html'))
