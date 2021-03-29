@@ -21,7 +21,7 @@ gridz.directive('agGridToolbar', () => ({
                   <a ag-grid-xls-export="grid"></a>
                 </li>
                 <li>
-                  <a ng-click="actionCtrl.massUpdate()" uib-tooltip="Mass Update" >
+                  <a ng-click="actionCtrl.bulkUpdate()" uib-tooltip="Bulk Update" >
                     <i class="fa fa-edit"></i></a>
                 </li>
               </ul>

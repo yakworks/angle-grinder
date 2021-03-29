@@ -8,7 +8,7 @@ import _ from 'lodash'
 class ListCtrl extends BaseListCtrl {
   apiKey = 'invoice'
 
-  // massUpdateTemplate = require('../basicGrid/templates/massUpdateForm.html')
+  // massUpdateTemplate = require('../basicGrid/templates/bulkUpdateForm.html')
 
   //static $inject = _.union(super.$inject, ['someService'])
   constructor(...args) {

@@ -43,6 +43,13 @@ function makeUrls(epoint, api) {
         })
       },
 
+      [`POST /api/${epoint}/countTotals`]: (req, res) => {
+        // console.log("get invoice req.query  ", req.query)
+        const { query } = req
+        // console.log("search query ", query)
+        api.countTotals('amount').then(data => {return res.json(data)})
+      },
+
       [`POST /api/${epoint}`]: (req, res) => {
         // console.log('PUT /api/invoice req.body', req.body)
         const { body } = req
@@ -63,10 +70,10 @@ function makeUrls(epoint, api) {
         })
       },
 
-      [`POST /api/${epoint}/massUpdate`]: (req, res) => {
+      [`POST /api/${epoint}/bulkUpdate`]: (req, res) => {
         // console.log('PUT /api/invoice req.body', req.body)
         const { body } = req
-        api.massUpdate(body)
+        api.bulkUpdate(body)
         .then((data) => {
           // console.log("PUT invoice data", data)
           return res.json(data)

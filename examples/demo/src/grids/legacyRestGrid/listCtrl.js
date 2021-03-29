@@ -1,12 +1,12 @@
 // import BaseCtrl from 'angle-grinder/src/ng/utils/BaseCtrl'
 import { expose } from 'angle-grinder/src/ng/utils/ngHelpers'
-import MassUpdateFormCtrl from "../legacyGrid/commonComponents/massUpdate/MassUpdateFormCtrl"
+import bulkUpdateFormCtrl from "../legacyGrid/commonComponents/bulkUpdate/bulkUpdateFormCtrl"
 
 /* @ngInject */
 export default class ListCtrl {
   showSearchForm = true
 
-  constructor($scope, ConfigCache, resourceBuilder, DialogCrudCtrlMixin, MassUpdateMixin) {
+  constructor($scope, ConfigCache, resourceBuilder, DialogCrudCtrlMixin, bulkUpdateMixin) {
     this.$scope = $scope
     this.ConfigCache = ConfigCache
     this.resourceBuilder = resourceBuilder

@@ -39,7 +39,10 @@ export default class GridCtrl {
     }
 
     // set the hasSelected flag events
-    const onSelect = () => {
+    const onSelect = (rowId, status, event) => {
+      if (gridOptions.eventHandlers?.onSelect && _.isFunction(gridOptions.eventHandlers.onSelect)) {
+        gridOptions.eventHandlers.onSelect(rowId, status, event)
+      }
       this.$rootScope.$evalAsync(() => {
         this.hasSelected = (this.getSelectedRowIds().length > 0)
       })
@@ -79,6 +82,10 @@ export default class GridCtrl {
   // to the selected id's in the grid.
   getSelectedRowIds() {
     return this.getParam('selarrrow')
+  }
+
+  getSelectedRowId() {
+    return this.getParam('selrow')
   }
 
   hasSelectedRowIds() {

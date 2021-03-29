@@ -151,7 +151,7 @@ class MemDataApi {
     return this._commit(data)
   }
 
-  async massUpdate(muItem) {
+  async bulkUpdate(muItem) {
     const items = await this.data()
     const { data, ids } = muItem
     const updateItems = []
@@ -187,6 +187,11 @@ class MemDataApi {
 
   searchAny(arr, searchKey) {
     return arr.filter(obj => hasSomeDeep(obj, searchKey))
+  }
+
+  async countTotals(field) {
+    const items = await this.data()
+    return { [field]: items.reduce((sum, item) => sum + item.amount, 0) }
   }
 }
 

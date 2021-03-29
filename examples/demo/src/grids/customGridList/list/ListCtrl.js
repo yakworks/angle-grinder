@@ -8,19 +8,28 @@ import _ from 'lodash'
 export default class ListCtrl extends BaseListCtrl {
   apiKey = 'invoice'
   initSearch = {name: 'Yodo'}
-  // massUpdateTemplate = require('../basicGrid/templates/massUpdateForm.html')
-
+  // bulkUpdateTemplate = require('../basicGrid/templates/bulkUpdateForm.html')
+  eventHandlers = {
+    onSelect: (event, id) => {
+      toast.success(`Selected row with id = ${id}`)
+    }
+  }
   //static $inject = _.union(super.$inject, ['someService'])
   constructor(...args) {
     super(...args)
     this.dataApi = restStoreApi.invoice
   }
 
-  $onInit() {
+  async $onInit() {
     this.isConfigured = false
     // console.log("ListCtrl ", this)
     this.cfg = {}
-    this.doConfig()
+    await this.doConfig()
+    this.totals = await this.dataApi.countTotals()
+    this.updateFooter({
+      amount: 'Total',
+      ...this.totals
+    })
   }
 
   fireToolbarAction(btnItem, event) {
@@ -36,8 +45,9 @@ export default class ListCtrl extends BaseListCtrl {
 
   // these are called because the super.fireToolbarAction will look for same function name
   // as the key
-  import() {
+  async import() {
     console.log("import")
+    await this.dataApi.getA
     toast.success('import something')
   }
 

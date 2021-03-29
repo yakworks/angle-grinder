@@ -34,8 +34,8 @@ export default class EditModalCtrl {
       tbopts.searchFormButton.class = 'hidden'
     }
 
-    if (cfg.massUpdateForm === undefined) {
-      tbopts.selectedButtons.massUpdate.class = 'hidden'
+    if (cfg.bulkUpdateForm === undefined) {
+      tbopts.selectedButtons.bulkUpdate.class = 'hidden'
     }
 
     if (gopts.showSearchForm) this.showSearchForm = gopts.showSearchForm
