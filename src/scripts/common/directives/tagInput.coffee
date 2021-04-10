@@ -21,7 +21,7 @@ app.directive 'tagInput', ->
       return if $scope.tagVal.length is 0
       tagArray = $scope.tagArray()
       if $scope.tagVal not in tagArray
-        if ($scope.tagVal.indexOf(",") > -1 or $scope.tagVal.indexOf("+") > -1)
+        if ($scope.tagVal.indexOf(",") > -1 or $scope.tagVal.indexOf("+") > -1 or $scope.tagVal.indexOf(" ") > -1)
           tagArray = tagArray.concat(_.map($scope.tagVal.split(/[\s,+]+/), (e)-> e.trim()))
         else
           tagArray.push $scope.tagVal.trim()
