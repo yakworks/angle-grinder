@@ -25,8 +25,17 @@ export class AppConfigApi {
   // constructor() {
   // }
 
+  // Allows to use custom function to generate config key, for example namespace_key
+  configKeyGenerator = (configKey) => {
+    return configKey
+  }
+
+  setConfigKeyGenerator(generatorFunc) {
+    this.configKeyGenerator = generatorFunc
+  }
+
   getConfig(configKey) {
-    return this.configFromCache(`${this.prefixUrl}${configKey}`)
+    return this.configFromCache(`${this.prefixUrl}${this.configKeyGenerator(configKey)}`)
   }
 
   /**
