@@ -1,3 +1,8 @@
+### v4.0.4
+
+[Full Changelog](https://github.com/yakworks/angle-grinder/compare/v4.0.3...v4.0.4)
+- new modified shipkit to replace version on package.json [link](https://github.com/yakworks/angle-grinder/commit/12e48eb4f8e542bd752e9ef3eeb5ba7f90c82b17)
+
 ### v4.0.3
 
 [Full Changelog](https://github.com/yakworks/angle-grinder/compare/v4.0.1...v4.0.3)
@@ -146,5 +151,3 @@
 - Packet template (#437) [link](https://github.com/yakworks/angle-grinder/commit/183fbe4046f30479247784b218a4378fb21b4f8e)
 - v4.0.1 tag before merge of big changes for demo [link](https://github.com/yakworks/angle-grinder/commit/93a489e5a084cb8f56315c90e218994141ad9464)
 - readme update [link](https://github.com/yakworks/angle-grinder/commit/eb73ab129109809161953da8a2175bb2b07b4603)
-
-
