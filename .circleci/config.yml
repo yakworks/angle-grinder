@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: yakworks/alpine-node:node14
+      - image: yakworks/builder:node14
 
     parallelism: 1
     # resource_class: large
@@ -30,14 +30,11 @@ jobs:
       #     name: Update js code
       #     command: ./script/update-ag-plugin
 
-orbs:
-  compare-url: iynere/compare-url@1.1.0
-
 workflows:
   build-flow:
     jobs:
     - build:
-        context: 9cibot-context # context with shared ENV vars
+        context: bot-context # context with shared ENV vars
     # - build-grails:
     #     context: 9cibot-context
     #     requires: [build]
