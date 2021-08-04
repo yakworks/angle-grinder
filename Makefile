@@ -9,6 +9,8 @@ include $(SHIPKIT_MAKEFILES)/git-tools.make
 include $(SHIPKIT_MAKEFILES)/ship-version.make
 include $(SHIPKIT_MAKEFILES)/circle.make
 
+# -- Variables ---
+export BOT_EMAIL ?= 9cibot@9ci.com
 karma.sh = npx karma
 lint.sh = npx eslint
 
