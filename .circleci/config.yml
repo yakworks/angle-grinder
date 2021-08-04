@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: yakworks/builder:node14
+      - image: yakworks/builder:node14-chrome
 
     parallelism: 1
     # resource_class: large
