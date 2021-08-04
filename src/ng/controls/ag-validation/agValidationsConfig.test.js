@@ -48,9 +48,9 @@ describe('agConfig provider', function() {
       }).toThrow(new Error('Could not find validation strategy by name: tester123'))
     })
 
-    it('should set the default strategy to "dirtyOrSubmitted"', function() {
+    it('should get the default strategy of "dirtyOrSubmitted"', function() {
       var actual = agValidationsConfig.getDefaultValidationStrategy()
-      expect(actual).toBe(provider.$validationStrategies.invalid)
+      expect(actual).toBe(provider.$validationStrategies.dirtyOrSubmitted)
     })
   })
 
