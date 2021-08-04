@@ -9,18 +9,19 @@ export default class RestDataApi {
    *
    * @param prefixUrl The endpoint url prefix ex: /api or http://foo.com/api
    */
-  constructor(endpoint) {
+  constructor(endpoint, api) {
     // this.prefixUrl = prefixUrl
     this.endpoint = endpoint
     // this.api = ky.create({prefixUrl: prefixUrl});
     this._idProp = 'id'
+    this.api = api || ky
   }
 
   //
   async search(params) {
     const opts = { searchParams: params }
     // console.log("query opts", opts)
-    const data = await ky.get(this.endpoint, opts).json()
+    const data = await this.api.get(this.endpoint, opts).json()
     return data
   }
 
@@ -31,13 +32,13 @@ export default class RestDataApi {
       opts = { searchParams: { q: params ? JSON.stringify(params) : '' } }
     }
     // console.log("query opts", opts)
-    const data = await ky.get(`${this.endpoint}/picklist`, opts).json()
+    const data = await this.api.get(`${this.endpoint}/picklist`, opts).json()
     return data
   }
 
   /** Returns a promise for the item with the given identifier */
   async get(id) {
-    const item = await ky.get(`${this.endpoint}/${id}`).json()
+    const item = await this.api.get(`${this.endpoint}/${id}`).json()
     return item
   }
 
@@ -49,7 +50,7 @@ export default class RestDataApi {
   /** Returns a promise to save (POST) a new item.   The item's identifier is auto-assigned. */
   async post(item) {
     // console.log('post item', item)
-    const newItem = await ky.post(`${this.endpoint}`, { json: item }).json()
+    const newItem = await this.api.post(`${this.endpoint}`, { json: item }).json()
     // console.log('posted newItem', newItem)
     return newItem
   }
@@ -58,33 +59,33 @@ export default class RestDataApi {
   // TODO: probably should pass id either, or take item.id ?
   async put(item) {
     // console.log('put item', item)
-    const newItem = await ky.put(`${this.endpoint}/${item.id}`, { json: item }).json()
+    const newItem = await this.api.put(`${this.endpoint}/${item.id}`, { json: item }).json()
     return newItem
   }
 
   /** Returns a promise to remove (DELETE) an item. */
   async remove(id) {
-    await ky.delete(`${this.endpoint}/${id}`)
+    await this.api.delete(`${this.endpoint}/${id}`)
     return true
   }
 
   async bulkUpdate(muItem) {
-    const results = await ky.post(`${this.endpoint}/bulkUpdate`, { json: muItem }).json()
+    const results = await this.api.post(`${this.endpoint}/bulkUpdate`, { json: muItem }).json()
     return results
   }
 
   async postAction(path, body) {
-    const results = await ky.post(`${this.endpoint}/${path}`, { json: body }).json()
+    const results = await this.api.post(`${this.endpoint}/${path}`, { json: body }).json()
     return results
   }
 
   async getAction(path) {
-    const results = await ky.post(`${this.endpoint}/${path}`).json()
+    const results = await this.api.post(`${this.endpoint}/${path}`).json()
     return results
   }
 
   async countTotals(params) {
-    const results = await ky.post(`${this.endpoint}/countTotals`, { json: params }).json()
+    const results = await this.api.post(`${this.endpoint}/countTotals`, { json: params }).json()
     return results
   }
 }
