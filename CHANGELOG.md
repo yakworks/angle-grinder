@@ -1,3 +1,8 @@
+### v4.0.4
+
+[Full Changelog](https://github.com/yakworks/angle-grinder/compare/v4.0.3...v4.0.4)
+- RestDataApi added ability to customize ky client (#590) [link](https://github.com/yakworks/angle-grinder/commit/60c0c06e02811f1480319c9b7abf479d5d1e291b)
+
 ### v4.0.3
 
 [Full Changelog](https://github.com/yakworks/angle-grinder/compare/v4.0.2...v4.0.3)
