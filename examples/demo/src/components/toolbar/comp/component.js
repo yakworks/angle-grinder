@@ -1,17 +1,18 @@
-import template from './component.html';
+import template from './component.html'
 import Swal from 'angle-grinder/src/tools/swal'
 
 class controller {
   menuItems = [
     {
-      display: 'Refresh', icon: 'fa-refresh',
+      display: 'Refresh',
+      icon: 'fa-refresh',
       action: () => Swal.fire('a special event')
     },
     {
-      display: 'Reset Sort', icon: 'fa-sort',
+      display: 'Reset Sort', icon: 'fa-sort'
     },
     {
-      display: 'Column Config', icon: 'fa-exchange',
+      display: 'Column Config', icon: 'fa-exchange'
     },
     { divider: true },
     { display: 'Hide/Show Toggle', icon: 'fa-minus' },
@@ -30,4 +31,4 @@ class controller {
 export default angular
   .module('ag.demo.toolbarCompDemo', [])
   .component('toolbarCompDemo', { template, controller })
-  .name;
+  .name

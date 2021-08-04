@@ -12,7 +12,7 @@ export default angular
     template,
     controller: function() {
       this.rawHtml = require('./comp.html')
-      this.rawJs = require('!raw-loader!./comp.js').default //js as text hack
+      this.rawJs = require('!raw-loader!./comp.js').default // js as text hack
     }
   })
   .name

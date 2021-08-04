@@ -8,7 +8,7 @@ class controller {
     warningCheck: 100,
     dangerCheck: 1,
     normalFalse: false,
-    stringFalse: "false",
+    stringFalse: 'false',
     emptyString: '',
     defaultZero: 0
   }

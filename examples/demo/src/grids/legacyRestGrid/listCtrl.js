@@ -1,6 +1,6 @@
 // import BaseCtrl from 'angle-grinder/src/ng/utils/BaseCtrl'
 import { expose } from 'angle-grinder/src/ng/utils/ngHelpers'
-import bulkUpdateFormCtrl from "../legacyGrid/commonComponents/bulkUpdate/bulkUpdateFormCtrl"
+import bulkUpdateFormCtrl from '../legacyGrid/commonComponents/bulkUpdate/bulkUpdateFormCtrl'
 
 /* @ngInject */
 export default class ListCtrl {
@@ -15,7 +15,7 @@ export default class ListCtrl {
   }
 
   $onInit() {
-    let {$scope} = this
+    const { $scope } = this
     const Invoices = this.resourceBuilder('/invoices', 'invoice', '/api')
     this.DialogCrudCtrlMixin($scope, {
       Resource: Invoices,
@@ -40,6 +40,7 @@ export default class ListCtrl {
   createRecord(){
     this.$scope.createRecord()
   }
+
   getSelectedRowsData() {
     this.selectedRowsData = this.$scope.exampleGrid.getSelectedRows()
   }

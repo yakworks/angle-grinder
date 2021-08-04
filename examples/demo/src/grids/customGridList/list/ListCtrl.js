@@ -1,4 +1,4 @@
-//import controller from './listCtrl'
+// import controller from './listCtrl'
 // import template from './list.html'
 import BaseListCtrl from 'angle-grinder/src/ng/gridz/list/BaseListCtrl'
 import restStoreApi from '../../../store/RestStoreApi'
@@ -7,14 +7,15 @@ import _ from 'lodash'
 
 export default class ListCtrl extends BaseListCtrl {
   apiKey = 'invoice'
-  initSearch = {name: 'Yodo'}
+  initSearch = { name: 'Yodo' }
   // bulkUpdateTemplate = require('../basicGrid/templates/bulkUpdateForm.html')
   eventHandlers = {
     onSelect: (event, id) => {
       toast.success(`Selected row with id = ${id}`)
     }
   }
-  //static $inject = _.union(super.$inject, ['someService'])
+
+  // static $inject = _.union(super.$inject, ['someService'])
   constructor(...args) {
     super(...args)
     this.dataApi = restStoreApi.invoice
@@ -35,7 +36,7 @@ export default class ListCtrl extends BaseListCtrl {
   fireToolbarAction(btnItem, event) {
     super.fireToolbarAction(btnItem, event)
     // if btnItem.key is the same name as function then it will be fired
-    if(btnItem.key === 'showSelected') this.displaySelectedRowsData()
+    if (btnItem.key === 'showSelected') this.displaySelectedRowsData()
   }
 
   displaySelectedRowsData() {
@@ -46,7 +47,7 @@ export default class ListCtrl extends BaseListCtrl {
   // these are called because the super.fireToolbarAction will look for same function name
   // as the key
   async import() {
-    console.log("import")
+    console.log('import')
     await this.dataApi.getA
     toast.success('import something')
   }
@@ -56,4 +57,3 @@ export default class ListCtrl extends BaseListCtrl {
     this.handleResults(result)
   }
 }
-

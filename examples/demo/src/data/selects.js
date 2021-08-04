@@ -1,5 +1,5 @@
 
-//export {people, colors, countries, countriesWithId, invoices}
+// export {people, colors, countries, countriesWithId, invoices}
 
 exports.people = [
   { id: 1, name: 'Adam', email: 'adam@email.com', age: 12, country: 'United States' },
@@ -18,9 +18,9 @@ const colors = ['Red', 'Green', 'Blue', 'Yellow', 'Magenta', 'Maroon', 'Umbra', 
 
 exports.countriesWithId = function(){
   countries.forEach(function(part, index) {
-    part['id'] = index
-    part['num'] = part['code'] // simulate our org.num
-  });
+    part.id = index
+    part.num = part.code // simulate our org.num
+  })
   return countries
 }
 

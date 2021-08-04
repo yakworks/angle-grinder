@@ -15,4 +15,3 @@ export default angular
       this.rawJs = require('!raw-loader!./listComp.js').default
     }
   }).name
-

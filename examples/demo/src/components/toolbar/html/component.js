@@ -1,4 +1,4 @@
-import template from './component.html';
+import template from './component.html'
 
 class controller {
 
@@ -7,4 +7,4 @@ class controller {
 export default angular
   .module('ag.demo.toolbarHtmlDemo', [])
   .component('toolbarHtmlDemo', { template, controller })
-  .name;
+  .name

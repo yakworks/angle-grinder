@@ -1,4 +1,4 @@
-import _ from "lodash";
+import _ from 'lodash'
 
 const template = `
 <div class="example-section mb-4">
@@ -22,11 +22,12 @@ class controller {
   $onInit() {
     this.direction = !_.isUndefined(this.isHorizontal) ? 'is-horizontal' : 'is-vertical'
   }
+
   $postLink() {
     this.$timeout(() => {
-      let eComp = $(this.$element).find('.example-component')
-      let srcHeight = eComp.innerHeight() - 32
-      $(this.$element).find('.hljs-container').css('max-height', (srcHeight < 300)? 300 : srcHeight);
+      const eComp = $(this.$element).find('.example-component')
+      const srcHeight = eComp.innerHeight() - 32
+      $(this.$element).find('.hljs-container').css('max-height', (srcHeight < 300) ? 300 : srcHeight)
     })
   }
 }

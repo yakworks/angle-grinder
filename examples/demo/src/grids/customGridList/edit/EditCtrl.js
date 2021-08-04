@@ -1,5 +1,5 @@
-import _ from "lodash";
-import BaseEditCtrl from "angle-grinder/src/ng/gridz/list/BaseEditCtrl";
+import _ from 'lodash'
+import BaseEditCtrl from 'angle-grinder/src/ng/gridz/list/BaseEditCtrl'
 
 export default class EditCtrl extends BaseEditCtrl {
   vm = {}

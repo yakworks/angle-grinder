@@ -1,7 +1,7 @@
 import dropdownDemoModule from './component'
 // Import Raw Files
-import htmlRaw from '!raw-loader!./component.html';
-import jsRaw from '!raw-loader!./component.js';
+import htmlRaw from '!raw-loader!./component.html'
+import jsRaw from '!raw-loader!./component.js'
 
 class controller {
   rawHtml = htmlRaw

@@ -21,11 +21,11 @@ Website Documentation and Examples: http://9ci.github.io/angle-grinder
 
 ### Running Tests
 
-TODO will add in make commands
+- `make install`
+- `make check` to lint and run tests
+- `yarn test` to run karma and jasmine tess
 
-- `yarn` to install
-- `yarn test` to run all tests
-- `yarn test --tests *alerts*` to run specific test, for example alerts
+see `make help`
 
 ### Running the demos
 

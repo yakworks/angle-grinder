@@ -12,6 +12,7 @@ export default angular
     template: template,
     controller: function() {
       this.rawHtml = require('./component.html')
-      this.rawJs = require('!raw-loader!./component.js').default //js as text hack
+      // eslint-disable-next-line import/no-webpack-loader-syntax
+      this.rawJs = require('!raw-loader!./component.js').default // js as text hack
     }
   }).name // .name returns the module name

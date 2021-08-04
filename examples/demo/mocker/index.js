@@ -1,7 +1,7 @@
 const delay = require('mocker-api/utils/delay')
-const _ = require('lodash');
-const yaml = require('js-yaml');
-const fs = require('fs');
+// const _ = require('lodash')
+const yaml = require('js-yaml')
+const fs = require('fs')
 const generateApi = require('./generateApi').generateApi
 
 const noProxy = process.env.NO_PROXY === 'true'
@@ -14,15 +14,15 @@ const tagData = require('../public/data/Tags.json')
 const countryData = require('../public/data/countries.json')
 
 const custApi = require('./customerApi')
-//const invoiceConfigData = require('../public/data/InvoiceConfig.json')
-//const custConfigYml = require('../public/data/CustomerConfig.yml')
-//const custConfigData = yaml.load(fs.readFileSync('./examples/demo/public/data/CustomerConfig.yml', 'utf8'))
+// const invoiceConfigData = require('../public/data/InvoiceConfig.json')
+// const custConfigYml = require('../public/data/CustomerConfig.yml')
+// const custConfigData = yaml.load(fs.readFileSync('./examples/demo/public/data/CustomerConfig.yml', 'utf8'))
 
 const proxy = {
-  ...generateApi("invoice", invoiceData).urls,
-  ...generateApi("tranState", tranStateData).urls,
+  ...generateApi('invoice', invoiceData).urls,
+  ...generateApi('tranState', tranStateData).urls,
   ...custApi.urls,
-  ...generateApi("tag", tagData).urls,
+  ...generateApi('tag', tagData).urls,
 
   'GET /api/appConfig/invoice': (req, res) => {
     const invoiceConfigData = yaml.load(fs.readFileSync('./examples/demo/public/data/InvoiceConfig.yml', 'utf8'))
@@ -40,8 +40,8 @@ const proxy = {
   'GET /countries/picklist': (req, res) => {
     const q = req.query.q
     let rows = countryData
-    if(q) {
-      rows = rows.filter(country =>  country.name.toLowerCase().indexOf(q.toLowerCase()) > -1)
+    if (q) {
+      rows = rows.filter(country => country.name.toLowerCase().indexOf(q.toLowerCase()) > -1)
     }
     return res.json({ page: 1, records: 3, data: rows, total: 1 })
   },
@@ -49,8 +49,8 @@ const proxy = {
   'GET /users': (req, res) => {
     const q = req.query.q
     let rows = people
-    if(q) {
-      rows = rows.filter(user =>  user.name.toLowerCase().indexOf(q.toLowerCase()) > -1)
+    if (q) {
+      rows = rows.filter(user => user.name.toLowerCase().indexOf(q.toLowerCase()) > -1)
     }
 
     return res.json({ page: 1, records: 3, data: rows, total: 1 })
@@ -59,12 +59,12 @@ const proxy = {
   'POST /validation/mock': (req, res) => {
     if (req.body.name === 'bill') {
       return res.status(422).json({
-          errors: {
-            org: {
-              name: 'no more bills in Org'
-            },
-            name: 'no more bills'
-          }
+        errors: {
+          org: {
+            name: 'no more bills in Org'
+          },
+          name: 'no more bills'
+        }
       })
     }
     return res.json(req.body)

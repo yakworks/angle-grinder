@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: yakworks/alpine-node:node14
+      - image: yakworks/builder:node14-chrome
 
     parallelism: 1
     # resource_class: large
@@ -13,15 +13,15 @@ jobs:
       # - run: apk add yarn
       - restore_cache:
           key: dependency-cache-{{ checksum "yarn.lock" }}
-      - run:
-          name: yarn install
-          command: yarn install
+      - run: make install
       - save_cache:
           key: dependency-cache-{{ checksum "yarn.lock" }}
-          paths:
-            - ./node_modules
-      - run: yarn test-mocha
-      - run: yarn test-jasmine
+          paths: [ './node_modules' ]
+
+      - run: make lint
+      - run: make test.karma
+      - run: make test.jasmine
+
       # - run:
       #     name: ✔︎ -- Checks Full Run Tests [gradle check]
       #     command: ./gradlew check --max-workers=2
@@ -30,14 +30,11 @@ jobs:
       #     name: Update js code
       #     command: ./script/update-ag-plugin
 
-orbs:
-  compare-url: iynere/compare-url@1.1.0
-
 workflows:
   build-flow:
     jobs:
     - build:
-        context: 9cibot-context # context with shared ENV vars
+        context: bot-context # context with shared ENV vars
     # - build-grails:
     #     context: 9cibot-context
     #     requires: [build]

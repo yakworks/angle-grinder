@@ -15,6 +15,7 @@ class controller {
       'dfgsdfgsdg'
     ]
   }
+
   alert = () => {
     alert(this.vm.nums)
   }

@@ -1,0 +1,31 @@
+<section class="section has-background-white-bis pt-6" style="height: 100%;">
+
+  <div class="columns is-centered">
+    <div class="column is-8-tablet is-6-desktop is-4-widescreen">
+      <div class="box">
+        <div class="card-content">
+          <form name="formLogin" ag-form label-class="is-3">
+            <h2 class="title has-text-centered is-size-3">Please log in</h2>
+            <ag-input ng-model="$ctrl.vm.login" required ></ag-input>
+            <ag-input ng-model="$ctrl.vm.pword" type="password" label="Password" required ></ag-input>
+
+            <div class="field mt-3">
+              <ag-button color="primary" class="is-fullwidth"
+              ng-click="$ctrl.login($event)" >Login</ag-button>
+              <div class="ag-validation-inline" id="auth_validation" ng-show="$ctrl.response401">
+                <p class="help is-danger" >
+                  {{$ctrl.response401}}
+                </p>
+              </div>
+            </div>
+            <div class="field has-text-centered">
+              <a href="/auth/reset" class="text-muted">Forgot password?</a>
+              <small class="text-muted mx-1 d-none d-md-inline">|</small>
+              <a href="/auth/signup" class="text-muted d-block d-md-inline mt-2">Create an account</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

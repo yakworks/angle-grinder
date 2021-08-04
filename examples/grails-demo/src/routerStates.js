@@ -20,7 +20,7 @@ const gridsStates = {
     {
       name: 'customer',
       component: 'agGridList',
-      data: { title: 'Vanilla rest agGridList'},
+      data: { title: 'Vanilla rest agGridList' },
       resolve: {
         apiKey: () => "customer",
         notification: () => ({

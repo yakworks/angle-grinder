@@ -9,39 +9,40 @@ class controller {
     singlePick: { id: 2 },
     multiPick: [
       {
-        "id": 1,
-        "name": "Option 1"
+        id: 1,
+        name: 'Option 1'
       },
       {
-        "id": 2,
-        "name": "Option 2"
+        id: 2,
+        name: 'Option 2'
       }
     ],
     custRest: {
-      "id": 2,
-      "num": 'foo',
-      "name": "Yodo"
+      id: 2,
+      num: 'foo',
+      name: 'Yodo'
     },
     custRestMulti: [
       {
-        "id": 2,
-        "num": 'foo',
-        "name": "Yodo"
+        id: 2,
+        num: 'foo',
+        name: 'Yodo'
       },
       {
-        "id": 3,
-        "name": "Omba"
+        id: 3,
+        name: 'Omba'
       }
     ]
   }
+
   vm2 = {
     singleColor: 'yellow',
     multiColorTags: ['yellow', 'blue'],
     singlePick: { id: 3 },
     multiPick: [
       {
-        "id": 3,
-        "name": "Option 3"
+        id: 3,
+        name: 'Option 3'
       }
     ]
   }
@@ -51,10 +52,11 @@ class controller {
     { id: 2, name: 'Option 2' },
     { id: 3, name: 'Option 3' }
   ]
-  colorData = ['red','blue','yellow']
+
+  colorData = ['red', 'blue', 'yellow']
 
   singleColorOpts = {
-    //useDataObject: false,
+    // useDataObject: false,
     data: this.colorData
   }
 
@@ -84,6 +86,7 @@ class controller {
     useDataObject: true,
     data: this.custApiData
   }
+
   custRestMultiOpts = {
     useDataObject: true,
     multiple: true,
@@ -99,6 +102,7 @@ class controller {
   changeModelData(){
     this.vm = this.vm2
   }
+
   clearData(){
     this.vm = {}
   }

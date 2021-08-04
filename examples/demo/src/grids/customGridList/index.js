@@ -17,9 +17,9 @@ export default angular
   .component('customRestEditDemo', {
     template: editTpl,
     controller: EditCtrl,
-      bindings: {
-        apiKey: '<',
-        notification: '<'
+    bindings: {
+      apiKey: '<',
+      notification: '<'
     }
   })
   .component('basicGridRestIndex', {
@@ -29,4 +29,3 @@ export default angular
       this.rawJs = require('!raw-loader!./list/ListCtrl.js').default
     }
   }).name
-

@@ -32,6 +32,8 @@ class AppCtrl {
       $('footer').show()
 
       window.scrollTo(0, 0)
+
+      cfpLoadingBar.complete()
     })
 
     $rootScope.pageTitle = function() {

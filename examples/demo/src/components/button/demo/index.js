@@ -1,5 +1,6 @@
 import compDemoModule from './component'
 // Import Raw Files
+// eslint-disable-next-line import/no-webpack-loader-syntax
 import htmlRaw from '!raw-loader!./component.html'
 import jsRaw from '!raw-loader!./component.js'
 
