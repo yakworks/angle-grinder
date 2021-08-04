@@ -60,33 +60,20 @@ start.demo:
 
 # --------- ship, version, deploy ------------
 
-## ci deploy, main target to call from circle
-ship-it::
-	make secrets.decrypt-vault
-	make ci-credentials
-	make ship.release
-	$(log.done)
-
-# logs into git, kubectl and dockerhub
-ci-credentials: git.config-bot-user kubectl.config dockerhub.login
-	$(log.done)
+# replace the version in package.json with new dev one
+# should be run in its own make and after ship.version is run so new version is in version.properties
+ship.pkg-json-version:
+	sed -i.bak -e 's|"version":.*|"version": "$(VERSION)",|g' package.json && rm -- "package.json.bak"
 
 .PHONY: ship.release
 
 ifdef RELEASABLE_BRANCH
 
- ship.release: build ship.libs ship.docker kube.deploy
+ ship.release:
 	# this should happen last and in its own make as it will increment the version number which is used in scripts above
     # TODO it seems a bit backwards though and the scripts above should be modified
 	make ship.version
-	$(log.done)
-
- kube.deploy: kube.create-ns kube.clean
-	${kube_tools} apply_tpl $(APP_DIR)/src/deploy/app-configmap.tpl.yml
-	$(kube_tools) apply_tpl $(APP_DIR)/src/deploy/app-deploy.tpl.yml
-	# DB
-	$(kube_tools) apply_tpl $(APP_DIR)/src/deploy/db-service.tpl.yml
-	$(kube_tools) apply_tpl $(APP_DIR)/src/deploy/db-deploy-${DBMS}.tpl.yml
+	make ship.pkg-json-version
 	$(log.done)
 
 else

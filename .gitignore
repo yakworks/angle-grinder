@@ -95,3 +95,4 @@ web-app/WEB-INF/atmosphere-meteor-decorators.xml
 
 .cache
 examples/ag-demo-grails/src/main/resources/public
+.env
