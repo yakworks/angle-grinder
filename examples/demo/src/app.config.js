@@ -1,10 +1,10 @@
 import angular from 'angular'
 import _ from 'lodash'
-// import appName from './app.module'
+import appName from './app.module'
 import './config.router'
 import appState from 'angle-grinder/src/tools/AppState'
 
-const app = angular.module('app')
+const app = angular.module(appName)
 // export default app.name
 
 app.run(function($rootScope, $state, $stateParams) {
