@@ -1,3 +1,9 @@
+### v4.0.3
+
+[Full Changelog](https://github.com/yakworks/angle-grinder/compare/v4.0.2...v4.0.3)
+- Merge pull request #589 from alexeyzvegintcev/fix_demo [link](https://github.com/yakworks/angle-grinder/commit/c16b528904eee3e79bc56fea9f332e289acdd865)
+- Fixed demo [link](https://github.com/yakworks/angle-grinder/commit/26470b6a8222b54298d9a6d19d43c7a3e5ef9d00)
+
 ### v4.0.2
 
 [Full Changelog](https://github.com/yakworks/angle-grinder/compare/v4.0.1...v4.0.2)
@@ -139,5 +145,3 @@
 - Packet template (#437) [link](https://github.com/yakworks/angle-grinder/commit/183fbe4046f30479247784b218a4378fb21b4f8e)
 - v4.0.1 tag before merge of big changes for demo [link](https://github.com/yakworks/angle-grinder/commit/93a489e5a084cb8f56315c90e218994141ad9464)
 - readme update [link](https://github.com/yakworks/angle-grinder/commit/eb73ab129109809161953da8a2175bb2b07b4603)
-
-
