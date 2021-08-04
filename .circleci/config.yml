@@ -24,7 +24,7 @@ jobs:
 
       - run: make git.config-bot-user
       # if it meets the criteria to be IS_RELEASABLE, this will bump version and tag release on github
-      - run: make ship.release
+      - run: make ship.version
 
       # - run:
       #     name: ✔︎ -- Checks Full Run Tests [gradle check]
