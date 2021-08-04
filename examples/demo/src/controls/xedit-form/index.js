@@ -1,6 +1,5 @@
 import xedit1Module from './xedit1'
 
-
 const template = `
 <demo-title-crumb></demo-title-crumb>
 <div class="container-fluid container-fullw buttonDemoIndex">

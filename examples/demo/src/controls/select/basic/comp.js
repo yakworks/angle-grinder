@@ -3,7 +3,7 @@ import template from './comp.html'
 /* @ngInject */
 class controller {
   colorData = ['red', 'green', 'blue']
-  dayData = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun']
+  dayData = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
   fooData = [
     { id: 1, name: 'Foo 1' },
     { id: 2, name: 'Foo 2' },

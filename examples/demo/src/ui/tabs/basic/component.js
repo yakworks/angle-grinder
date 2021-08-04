@@ -25,7 +25,6 @@ class controller {
   }
 }
 
-
 export default angular
   .module('app')
   .component('demoTabs', {

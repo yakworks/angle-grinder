@@ -1,7 +1,7 @@
-//import controller from './listCtrl'
+// import controller from './listCtrl'
 import template from './list.html'
 import BaseListCtrl from 'angle-grinder/src/ng/gridz/list/BaseListCtrl'
-import buildOptions from "./listCtrlOptions"
+import buildOptions from './listCtrlOptions'
 import localStoreApi from '../../store/LocalStoreApi'
 import Log from 'angle-grinder/src/utils/Log'
 import Swal from 'angle-grinder/src/tools/swal'
@@ -25,12 +25,12 @@ class ListCtrl extends BaseListCtrl {
   }
 
   displaySelectedRowsData() {
-    console.log("displaySelectedRowsData")
+    console.log('displaySelectedRowsData')
     this.selectedRowsData = this.gridCtrl.getSelectedRows()
   }
 
   import() {
-    console.log("import")
+    console.log('import')
     Swal.fire('import something')
   }
 

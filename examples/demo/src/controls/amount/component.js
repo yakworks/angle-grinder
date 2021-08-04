@@ -9,11 +9,12 @@ class controller {
     this.vm.validDataString = '12.34'
     this.vm.validDataNumber = 12.56
   }
+
   resetData = () => {
     this.vm = {}
   }
 }
 
 export default angular.module('demo.amountDemo', [])
-  .component('amountExample', {template, controller})
+  .component('amountExample', { template, controller })
   .name

@@ -1,5 +1,5 @@
-import exampleGridOptions from "./exampleGridOptions"
-import MassUpdateFormCtrl from "./commonComponents/massUpdate/MassUpdateFormCtrl";
+import exampleGridOptions from './exampleGridOptions'
+import MassUpdateFormCtrl from './commonComponents/massUpdate/MassUpdateFormCtrl'
 import template from './list.html'
 
 /* @ngInject */
@@ -15,7 +15,7 @@ class ListCtrl {
 
   $onInit() {
     const Invoices = this.resourceBuilder('/invoices', 'invoice')
-    let {$scope} = this
+    const { $scope } = this
     this.DialogCrudCtrlMixin($scope, {
       Resource: Invoices,
       gridName: 'exampleGrid',
@@ -36,6 +36,7 @@ class ListCtrl {
   createRecord = () => {
     this.$scope.createRecord()
   }
+
   massUpdate = () => {
     this.$scope.massUpdate()
   }
@@ -50,6 +51,7 @@ class SearchController {
   constructor($scope){
     this.$scope = $scope
   }
+
   filters = {}
 }
 
@@ -62,6 +64,6 @@ export default angular
     controllerAs: 'searchCtrl',
     bindings: {
       filters: '<'
-    },
+    }
   })
   .name

@@ -39,7 +39,7 @@ const uiStates = {
     },
     {
       name: 'tabs',
-      children: [{name: 'basic', component: 'basicTabsExample'}, {name: 'complex', component: 'complexTabsExample'}]
+      children: [{ name: 'basic', component: 'basicTabsExample' }, { name: 'complex', component: 'complexTabsExample' }]
 
     }
   ]

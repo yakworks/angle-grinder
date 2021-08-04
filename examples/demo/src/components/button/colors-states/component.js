@@ -10,7 +10,7 @@ class ClrController {
   }
 
   btnClick = function(event) {
-    //('btnClick event ', event)
+    // ('btnClick event ', event)
     toast.success('It is done')
   }
 

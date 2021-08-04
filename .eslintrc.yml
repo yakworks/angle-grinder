@@ -19,6 +19,9 @@ ignorePatterns:
 rules:
   no-return-assign: 0
   no-useless-escape: 0
+  space-before-blocks: 0
+  padded-blocks: 0
+  import/no-webpack-loader-syntax: 0
   space-before-function-paren:
     - error
     - anonymous: never

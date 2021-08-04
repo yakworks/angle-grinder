@@ -92,5 +92,5 @@ angular.module(agValMod).provider('agValidationsConfig', function() {
     }
   }
   // use default validation strategy `invalid` to show user required fields on submit
-  self.setDefaultValidationStrategy('invalid')
+  self.setDefaultValidationStrategy('dirtyOrSubmitted')
 })

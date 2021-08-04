@@ -13,15 +13,15 @@ jobs:
       # - run: apk add yarn
       - restore_cache:
           key: dependency-cache-{{ checksum "yarn.lock" }}
-      - run:
-          name: yarn install
-          command: yarn install
+      - run: make install
       - save_cache:
           key: dependency-cache-{{ checksum "yarn.lock" }}
-          paths:
-            - ./node_modules
-      - run: yarn test-mocha
-      - run: yarn test-jasmine
+          paths: [ './node_modules' ]
+
+      - run: make lint
+      - run: make test.karma
+      - run: make test.jasmine
+
       # - run:
       #     name: ✔︎ -- Checks Full Run Tests [gradle check]
       #     command: ./gradlew check --max-workers=2

@@ -7,5 +7,5 @@ class controller {
 }
 
 export default angular.module('ag.demo.inputHorizontalDemo', [])
-.component('inputHorizontalDemo', {template, controller})
-.name
+  .component('inputHorizontalDemo', { template, controller })
+  .name

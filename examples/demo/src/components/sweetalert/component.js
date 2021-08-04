@@ -12,10 +12,11 @@ class controller {
   buttonClick(event) {
     // console.log('menuItemClick params', { menuItem, event })
     Swal.fire(
-      `The Title`,
-      `Some Text or <strong>html</strong>`
+      'The Title',
+      'Some Text or <strong>html</strong>'
     )
   }
+
   questionClick(event) {
     Swal.fire(
       'The Internet?',
@@ -23,6 +24,7 @@ class controller {
       'question'
     )
   }
+
   errorClick(event) {
     Swal.fire({
       icon: 'error',
@@ -38,8 +40,8 @@ class controller {
       title: 'Compiled Angular',
       showCloseButton: true,
       onOpen: (el) => {
-        //not ideal but it shows that it can be done
-        let cnt = this.$compile(`
+        // not ideal but it shows that it can be done
+        const cnt = this.$compile(`
         <ag-select ng-model="$ctrl.vm.cust" style="text-align: left"
           select-options="{ dataApiKey: 'customer' }"></ag-select>`)(this.$scope)
         $(el).find('#swal2-content').append(cnt).show()
@@ -53,9 +55,9 @@ class controller {
       text: "You won't be able to revert this!",
       icon: 'warning',
       confirmButtonText: 'Yes, delete it!',
-      cancelButtonText: "No",
+      cancelButtonText: 'No',
       showCancelButton: true,
-      showCloseButton: true,
+      showCloseButton: true
       // confirmButtonColor: '#3085d6',
       // cancelButtonColor: '#d33',
       // confirmButtonText: 'Yes, delete it!'
@@ -74,7 +76,7 @@ class controller {
   async withInputlick(event) {
     const result = await Swal.fire({
       title: 'Enter Foo Name?',
-      text: "What is the name of the foo",
+      text: 'What is the name of the foo',
       input: 'text',
       // inputValue: 'Bill',
       inputValidator: (value) => {
@@ -82,10 +84,10 @@ class controller {
           return 'You need to enter a name!'
         }
       },
-      confirmButtonText: "Change Name",
-      showCancelButton: true,
+      confirmButtonText: 'Change Name',
+      showCancelButton: true
     })
-    console.log("result", result)
+    console.log('result', result)
 
     toast.success(`your foo is now named ${result.value}`, 'Named Foo!')
   }

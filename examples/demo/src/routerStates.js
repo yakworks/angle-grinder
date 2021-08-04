@@ -1,8 +1,8 @@
-import gridsStates from "./grids/routes"
-import componentsStates from "./components/routes"
-import formStates from "./controls/routes"
-import uiStates from "./ui/routes"
-import dashStates from "./dashboards/routes"
+import gridsStates from './grids/routes'
+import componentsStates from './components/routes'
+import formStates from './controls/routes'
+import uiStates from './ui/routes'
+import dashStates from './dashboards/routes'
 
 const levelStates = {
   name: 'levels',
@@ -18,7 +18,7 @@ const levelStates = {
         {
           name: 'level3a',
           data: {
-            title: 'Foo Bar Baz Buzz Boogaloo',
+            title: 'Foo Bar Baz Buzz Boogaloo'
           },
           template: '<h4>level3a</h4>'
         },
@@ -34,7 +34,7 @@ const levelStates = {
         {
           name: 'level3c',
           data: {
-            title: 'Bar Bazz Boogaloo',
+            title: 'Bar Bazz Boogaloo'
           },
           template: '<h4>level3c</h4>'
         },
@@ -43,7 +43,7 @@ const levelStates = {
           template: '<h4>level3d</h4>'
         }
       ]
-    },
+    }
   ]
 }
 
@@ -60,8 +60,14 @@ export const fresh = {
   url: '/fresh',
   component: 'freshApp',
   abstract: true,
-  children: [dashStates, componentsStates, formStates, uiStates, gridsStates,levelStates]
+  children: [dashStates, componentsStates, formStates, uiStates, gridsStates, levelStates]
 }
 
-export default { packet, fresh }
+export const login = {
+  name: 'login',
+  url: '/login',
+  component: 'loginPage'
+}
+
+export default { packet, fresh, login }
 // export default appRoot

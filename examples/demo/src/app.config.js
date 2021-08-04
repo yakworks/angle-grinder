@@ -1,6 +1,6 @@
 import angular from 'angular'
 import _ from 'lodash'
-import appName from './app.module'
+// import appName from './app.module'
 import './config.router'
 import appState from 'angle-grinder/src/tools/AppState'
 
@@ -48,4 +48,3 @@ app.run(function($rootScope, $state, $stateParams) {
 
   $rootScope.appState = appState
 })
-

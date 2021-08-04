@@ -8,5 +8,5 @@ class controller {
 }
 
 export default angular.module('ag.demo.inputBasicDemo', [])
-.component('inputBasicDemo', {template, controller})
-.name
+  .component('inputBasicDemo', { template, controller })
+  .name

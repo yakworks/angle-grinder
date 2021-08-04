@@ -1,6 +1,6 @@
 import customerList from './customerList'
 import invoiceList from './invoistList'
-import SelectedRows from "./SelectedRows";
+import SelectedRows from './SelectedRows'
 
 const template = `
     <customer-list></customer-list>
@@ -12,6 +12,5 @@ export default angular
   .service('selectedRow', SelectedRows)
   .component('invoiceList', invoiceList)
   .component('customerList', customerList)
-  .component('twoGrids', {template})
+  .component('twoGrids', { template })
   .name
-

@@ -13,7 +13,7 @@ export default angular
     template,
     controller: function() {
       this.rawHtml = require('./agInput.html')
-      this.rawJs = require('!raw-loader!./agInput.js').default //js as text hack
+      this.rawJs = require('!raw-loader!./agInput.js').default // js as text hack
     }
   })
   .name

@@ -1,5 +1,5 @@
 import angular from 'angular'
-import { packet, fresh } from './routerStates'
+import { packet, fresh, login } from './routerStates'
 import appState from 'angle-grinder/src/tools/AppState'
 import stateHelperInit from 'angle-grinder/src/ng/uirouter/stateHelperInit'
 import _ from 'lodash'
@@ -21,6 +21,12 @@ angular.module('app')
     stateHelperInit(freshMenu)
     appState.sideMenuConfig = freshMenu
 
+    // $stateProvider.state({
+    //   name: 'login',
+    //   url: '/login',
+    //   template: '<h1>This is Login</h1>'
+    // })
+    $stateProvider.state(login)
     // $urlRouterProvider.otherwise('/packet/dashboard')
     // stateHelperProvider.state(packetCopy)
     // appState.packetStates = packetCopy

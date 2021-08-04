@@ -5,7 +5,7 @@ function makeDataApi(endpoint){
   return new RestDataApi(`api/${endpoint}`)
 }
 
-/** main holder for api*/
+/** main holder for api */
 export class RestStoreApi {
   _cached = {}
 
@@ -16,10 +16,10 @@ export class RestStoreApi {
   constructor() {
   }
 
-  get customer() { return makeDataApi("customer")}
-  get invoice() { return makeDataApi("invoice")}
-  get tranState() { return makeDataApi("tranState")}
-  get tag() { return makeDataApi("tag")}
+  get customer() { return makeDataApi('customer') }
+  get invoice() { return makeDataApi('invoice') }
+  get tranState() { return makeDataApi('tranState') }
+  get tag() { return makeDataApi('tag') }
 
   appConfig(configKey) {
     return ky.get(`api/appConfig/${configKey}`).json()
