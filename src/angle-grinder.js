@@ -3,7 +3,7 @@ import agCommon from './ng/common'
 import filtersMod from './ng/filters'
 import agCompMod from './ng/components'
 import agControlsMod from './ng/controls'
-import legacyMod from './ng/legacy'
+// import legacyMod from './ng/legacy'
 import gridz from './ng/gridz'
 import agPathWithContext from './ng/pathWithContext'
 import resourceSupport from './ng/resourceSupport'
@@ -19,7 +19,7 @@ var agmod = angular.module('angleGrinder', [
   filtersMod,
   agPathWithContext,
   gridz,
-  legacyMod,
+  // legacyMod,
   agCompMod,
   agControlsMod,
   agSidebar,
