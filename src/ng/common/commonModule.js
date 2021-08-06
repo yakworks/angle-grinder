@@ -9,6 +9,7 @@ import ngLoadingBar from 'angular-loading-bar'
 import 'angular-breadcrumb'
 import vButton from 'v-button'
 import filtersModule from '../filters'
+import alertsMod from './alerts'
 
 import ConfirmationDialogServ from './services/ConfirmationDialogServ'
 import _ from 'lodash'
@@ -25,7 +26,8 @@ var common = angular.module(MOD_NAME, [
   'ncy-angular-breadcrumb',
   vButton,
   ngScroll, // Scroll
-  filtersModule
+  filtersModule,
+  alertsMod
 ])
 
 common.service('ConfirmationDialogServ', ConfirmationDialogServ)
