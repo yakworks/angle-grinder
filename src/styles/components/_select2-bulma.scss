@@ -171,7 +171,8 @@ $select2-font-size: 14px;
   padding-bottom: $control-padding-vertical ;
   padding-left: $control-padding-horizontal;
   padding-right: $control-padding-horizontal;
-  margin: 0px
+  margin: 0px;
+  line-height: inherit;
 }
 
 /**

@@ -1,3 +1,57 @@
+
+$padding-base-vertical: 6px;
+$line-height-computed:  20px;
+$grid-gutter-width:     30px !default;
+
+
+.form-xeditable {
+
+  // .edit-group {
+  //   margin-bottom: $form-group-margin-bottom;
+  // }
+
+  // Consistent vertical alignment of radios and checkboxes
+  //
+  // Labels also get some reset styles, but that is scoped to a media query below.
+  .radio,
+  .checkbox,
+  .radio-inline,
+  .checkbox-inline {
+    padding-top: ($padding-base-vertical+ 1); // Default padding plus a border
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  // Account for padding we're adding to ensure the alignment and of help text
+  // and other content below items
+  .radio,
+  .checkbox {
+    min-height: ($line-height-computed + ($padding-base-vertical + 1));
+  }
+
+  // Make form groups behave like rows
+  .edit-group {
+    @include make-row;
+  }
+
+  // Reset spacing and right align labels, but scope to media queries so that
+  // labels on narrow viewports stack the same as a default form example.
+  @media (min-width: $tablet) {
+    .control-label {
+      padding-top: ($padding-base-vertical + 1); // Default padding plus a border
+      margin-bottom: 0;
+      text-align: right;
+    }
+  }
+
+  // Validation states
+  //
+  // Reposition the icon because it's now within a grid column and columns have
+  // `position: relative;` on them. Also accounts for the grid gutter padding.
+  .has-feedback .form-control-feedback {
+    right: floor(($grid-gutter-width / 2));
+  }
+}
+
 form[editable-form].form-xeditable {
   .control-label {
     color: #666666;

@@ -11,4 +11,4 @@ import 'v-button/dist/v-button.css'
 // import 'ladda/dist/ladda-themeless.min.css'
 import 'angular-xeditable/dist/css/xeditable.css'
 // OLD?
-import '../../legacy/jquery-file-upload-angular/css/jquery.fileupload.css'
+// import '../../legacy/jquery-file-upload-angular/css/jquery.fileupload.css'

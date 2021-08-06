@@ -1,0 +1,9 @@
+// Hacks to get it working without bootstrap
+// WIP DO NOT LEAVE IT LIKE THIS, REFACTOR ONCE DONE
+
+@import "navs";
+@import "container";
+
+.hidden {
+  display: none !important;
+}

@@ -7,19 +7,19 @@ class controller {
   }
 
   items = [
-    { name: 'Health Potion', cost: 4 },
-    { name: 'Mana Potion', cost: 5 },
-    { name: 'Iron Sword', cost: 12 }
+    { name: 'Health Potion', cost: 4, icon: 'fas fa-flask' },
+    { name: 'Mana Potion', cost: 5, icon: 'mdi mdi-flask-outline' },
+    { name: 'Iron Sword', cost: 12, icon: 'mdi mdi-sword' }
   ]
 
   menuOptionsObject = {
     edit: {
       display: 'Edit',
-      icon: 'fa-pencil-square-o'
+      icon: 'far fa-edit'
     },
     delete: {
       display: 'Delete',
-      icon: 'fa-trash-o'
+      icon: 'far fa-trash-alt'
     }
   }
 

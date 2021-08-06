@@ -29,7 +29,7 @@
         </span>
         <span class="title" > {{ mitem.data.title }} </span>
       </a>
-      <ul class="submenu list-items" ng-if="$ctrl.hasChildren(mitem)">
+      <ul class="submenu list-item-set" ng-if="$ctrl.hasChildren(mitem)">
         <li class="list-item" ng-repeat="mitem in mitem.children" ng-include="'menuItemTree'"
         ng-class="{
           'has-children' : $ctrl.hasChildren(mitem),
@@ -38,7 +38,7 @@
       </ul>
     </script>
 
-    <ul class="sidenav-menu list-items">
+    <ul class="sidenav-menu list-item-set">
       <li ng-repeat="mitem in $ctrl.sideMenuItems"
           class="list-item"
           ng-include="'menuItemTree'"

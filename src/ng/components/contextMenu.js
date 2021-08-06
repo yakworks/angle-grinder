@@ -460,7 +460,7 @@ angular.module(MOD_NAME, [])
       var customClass = params.customClass
 
       var $ul = $('<ul>')
-      $ul.addClass('dropdown-menu')
+      $ul.addClass('dropdown-menu-list dropdown-content')
       $ul.attr({ role: 'menu' })
       $ul.css({
         display: 'block',
@@ -469,7 +469,6 @@ angular.module(MOD_NAME, [])
         top: params.event.pageY + 'px',
         'z-index': 10000
       })
-
       if (customClass) { $ul.addClass(customClass) }
 
       return $ul
@@ -504,7 +503,7 @@ angular.module(MOD_NAME, [])
       var shouldRemove = true
 
       while ($curr.length) {
-        if ($curr.hasClass('dropdown-menu')) {
+        if ($curr.hasClass('dropdown-menu-list')) {
           shouldRemove = false
           break
         } else {

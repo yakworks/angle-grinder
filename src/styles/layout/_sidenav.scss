@@ -117,7 +117,7 @@ $sidenav-header-logo-tablet-height: $bar-breakpoint-height - 2rem !default; // 2
 
 // more or less a copy of list-items so we can change/invert colors
 .sidenav .sidenav-nav.list {
-  .list-items {
+  .list-item-set {
     max-width: 400px;
 
     .list-item {
@@ -141,7 +141,7 @@ $sidenav-header-logo-tablet-height: $bar-breakpoint-height - 2rem !default; // 2
 
       //list-item with children
       &.has-children {
-        .list-items {
+        .list-item-set {
           .list-item {
             .item-content {
               font-size: $sidenav-children-font-size;
@@ -160,7 +160,7 @@ $sidenav-header-logo-tablet-height: $bar-breakpoint-height - 2rem !default; // 2
         }
 
         //submenu level2
-        .submenu.list-items {
+        .submenu.list-item-set{
           .list-item {
             .item-content {
               //padding-left: $list-has-children-indent + 1rem;
@@ -171,7 +171,7 @@ $sidenav-header-logo-tablet-height: $bar-breakpoint-height - 2rem !default; // 2
               }
             }
             //submenu level3+
-            .submenu.list-items {
+            .submenu.list-item-set {
               .list-item {
                 .item-content {
                   background-color: darken($sidenav-background-color, 8%);
@@ -201,7 +201,7 @@ $sidenav-header-logo-tablet-height: $bar-breakpoint-height - 2rem !default; // 2
         }
       }
     } // .list-item
-  } // .list-items
+  } // .list-item-set
 
 } // .sidenav-nav.list
 

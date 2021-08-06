@@ -53,14 +53,6 @@ const formStates = {
     {
       name: 'validations',
       component: 'validationDemoIndex'
-    },
-    {
-      name: 'horizontal-sandbox',
-      template: require('./horizontal-sandbox/index.html')
-    },
-    {
-      name: 'select2-sandbox',
-      component: 'select2DemoIndex'
     }
   ]
 }
