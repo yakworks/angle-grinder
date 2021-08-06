@@ -1,5 +1,5 @@
 import angular from 'angular'
-import gridzModule from '../gridzModule'
+import gridzModule from '../../gridz/module'
 
 var gridz = angular.module(gridzModule)
 
