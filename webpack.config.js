@@ -1,7 +1,7 @@
 'use strict'
 //https://github.com/wbkd/webpack-starter/blob/master/webpack/webpack.config.prod.js
 
-//const webpack = require('webpack')
+const webpack = require('webpack')
 //const autoprefixer = require('autoprefixer')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
@@ -123,6 +123,7 @@ module.exports = function(env, argv) {
       ] //end rules
     },
     plugins:[
+      new webpack.EnvironmentPlugin(['BASE_URL']),
       //if the entry is a scss such as for themes this will remove the js file that is erroniouly created, wil be fixed in webpack5
       new FixStyleOnlyEntriesPlugin(),
       new HtmlWebpackPlugin({
@@ -152,6 +153,9 @@ module.exports = function(env, argv) {
       //   defaultStyleName: 'default.scss',
       //   importAfterVariables: true
       // })
+      new webpack.DefinePlugin({
+        BASE_URL: JSON.stringify(process.env.BASE_URL || 'http://localhost:8080/')
+      })
     ],
     //command line options
     bail: true, //Fail out on the first error --bail
