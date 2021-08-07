@@ -1,6 +1,5 @@
 'use strict'
-
-window.toastr = require('toastr')
+import toast from 'angle-grinder/src/tools/toast'
 
 /* @ngInject */
 export default class ToasterDemoCtrl {
@@ -11,6 +10,6 @@ export default class ToasterDemoCtrl {
   }
 
   pop(text) {
-    toastr[this.type](this.text, this.title)
+    toast[this.type](this.text, this.title)
   }
 }
