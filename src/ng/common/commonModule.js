@@ -1,6 +1,5 @@
 import angular from 'angular'
 import ngRoute from 'angular-route'
-import uibModName from 'angular-ui-bootstrap'
 import ngScroll from 'angular-scroll'
 import ngcookies from 'angular-cookies'
 import ngAnimate from 'angular-animate'
@@ -17,7 +16,7 @@ import _ from 'lodash'
 const MOD_NAME = 'ag.common'
 export default MOD_NAME
 var common = angular.module(MOD_NAME, [
-  uibModName,
+  // uibModName,
   ngRoute,
   ngcookies,
   ngAnimate,

@@ -4,6 +4,9 @@
   textarea,
   select,
   input {
+    height: $input-height;
+    font-size: $size-normal;
+    line-height: $control-line-height;
     background: none !important;
     background-image: none !important;
     border-bottom: 1px solid transparent !important;
@@ -28,6 +31,7 @@
         border-bottom: 1px solid transparent !important;
         //border-color: $link !important;
         background-color: none !important;
+        outline: none;
     }
   }
   .select2-container-multi .select2-choices, .select2-container .select2-choice {

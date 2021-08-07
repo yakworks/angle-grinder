@@ -1575,11 +1575,6 @@ angular-translate@^2.18.2, angular-translate@~2.18.4:
   dependencies:
     angular "^1.8.0"
 
-angular-ui-bootstrap@^2.5.6:
-  version "2.5.6"
-  resolved "https://registry.yarnpkg.com/angular-ui-bootstrap/-/angular-ui-bootstrap-2.5.6.tgz#23937322ec641a6fbee16498cc32452aa199e7c5"
-  integrity sha512-yzcHpPMLQl0232nDzm5P4iAFTFQ9dMw0QgFLuKYbDj9M0xJ62z0oudYD/Lvh1pWfRsukiytP4Xj6BHOSrSXP8A==
-
 angular-ui-router@^1.0.24:
   version "1.0.29"
   resolved "https://registry.yarnpkg.com/angular-ui-router/-/angular-ui-router-1.0.29.tgz#20ab76096613df60d3e3fb0e15eaea264c61df87"

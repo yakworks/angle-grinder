@@ -1,0 +1,82 @@
+<style type="text/css">
+  form.tab-form-demo .tab-pane {
+    margin: 20px 20px;
+  }
+</style>
+
+<div ng-controller="TabsDemoCtrl">
+  <p>Select a tab by setting active binding to true:</p>
+  <p>
+    <button type="button" class="btn btn-secondary btn-sm" ng-click="active = 1">Select second tab</button>
+    <button type="button" class="btn btn-secondary btn-sm" ng-click="active = 2">Select third tab</button>
+  </p>
+  <p>
+    <button type="button" class="btn btn-secondary btn-sm" ng-click="tabs[1].disabled = ! tabs[1].disabled">Enable / Disable third tab</button>
+  </p>
+  <hr />
+
+  <uib-tabset active="active">
+    <uib-tab index="0" heading="Static title">Static content</uib-tab>
+    <uib-tab index="$index + 1" ng-repeat="tab in tabs" heading="{{tab.title}}" disable="tab.disabled">
+      {{tab.content}}
+    </uib-tab>
+    <uib-tab index="3" select="alertMe()">
+      <uib-tab-heading>
+        <i class="fa-svg-icon">
+          <svg width="1792" height="1792" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M912 1696q0-16-16-16-59 0-101.5-42.5t-42.5-101.5q0-16-16-16t-16 16q0 73 51.5 124.5t124.5 51.5q16 0 16-16zm816-288q0 52-38 90t-90 38h-448q0 106-75 181t-181 75-181-75-75-181h-448q-52 0-90-38t-38-90q50-42 91-88t85-119.5 74.5-158.5 50-206 19.5-260q0-152 117-282.5t307-158.5q-8-19-8-39 0-40 28-68t68-28 68 28 28 68q0 20-8 39 190 28 307 158.5t117 282.5q0 139 19.5 260t50 206 74.5 158.5 85 119.5 91 88z"/></svg>
+        </i>
+        Alert!
+      </uib-tab-heading>
+      I've got an HTML heading, and a select callback. Pretty cool!
+    </uib-tab>
+  </uib-tabset>
+
+  <hr />
+
+  <uib-tabset active="activePill" vertical="true" type="pills">
+    <uib-tab index="0" heading="Vertical 1">Vertical content 1</uib-tab>
+    <uib-tab index="1" heading="Vertical 2">Vertical content 2</uib-tab>
+  </uib-tabset>
+
+  <hr />
+
+  <uib-tabset active="activeJustified" justified="true">
+    <uib-tab index="0" heading="Justified">Justified content</uib-tab>
+    <uib-tab index="1" heading="SJ">Short Labeled Justified content</uib-tab>
+    <uib-tab index="2" heading="Long Justified">Long Labeled Justified content</uib-tab>
+  </uib-tabset>
+
+  <hr />
+
+  Tabbed pills with CSS classes
+  <uib-tabset type="pills">
+    <uib-tab heading="Default Size">Tab 1 content</uib-tab>
+    <uib-tab heading="Small Button" classes="btn-sm">Tab 2 content</uib-tab>
+  </uib-tabset>
+
+  <hr />
+
+  Tabs using nested forms:
+  <form name="outerForm" class="tab-form-demo">
+    <uib-tabset active="activeForm">
+      <uib-tab index="0" heading="Form Tab">
+        <ng-form name="nestedForm">
+          <div class="form-group">
+            <label>Name</label>
+            <input type="text" class="form-control" required ng-model="model.name"/>
+          </div>
+        </ng-form>
+      </uib-tab>
+      <uib-tab index="1" heading="Tab One">
+        Some Tab Content
+      </uib-tab>
+      <uib-tab index="2" heading="Tab Two">
+        More Tab Content
+      </uib-tab>
+    </uib-tabset>
+  </form>
+  Model:
+  <pre>{{ model | json }}</pre>
+  Nested Form:
+  <pre>{{ outerForm.nestedForm | json }}</pre>
+</div>
