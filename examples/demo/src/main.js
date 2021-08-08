@@ -29,6 +29,7 @@ import './controllers/chatCtrl'
 // UI Demo
 import './ui/tabs'
 import './ui/alerts'
+import './ui/icons/'
 import './grids'
 
 $log.debugEnabled(true)
