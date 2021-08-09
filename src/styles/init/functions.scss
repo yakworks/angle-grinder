@@ -5,7 +5,7 @@ Use this one instead.
 */
 
 // our initial-variables should be imported before running this
-//@import "~bulma/sass/utilities/initial-variables.sass";
+
 @import "~bulma/sass/utilities/functions.sass";
 
 // override findDarkColor, there is a problem with the bulma findDarkColor,
@@ -18,7 +18,7 @@ Use this one instead.
 }
 
 /* other mixins used in setting up variables */
-
+// moved in from bootstrap for xeditable
 @mixin make-row($gutter: $grid-gutter-width) {
   display: flex;
   flex-wrap: wrap;

@@ -30,9 +30,11 @@ class Controller extends AgBaseControl {
     const input = $element[0].querySelector('.input.is-datepicker')
     // const input = $element[0]
 
-    $timeout(() => {
+    // $timeout(() => {
+    this.$scope.$evalAsync(() => {
       this.datepicker = new Datepicker(input, this.opts)
     })
+    // })
     // to add listeners for Datepicker
     // input.addEventListener('changeDate', function(e){
     //   Log.debug('changeDate', e)

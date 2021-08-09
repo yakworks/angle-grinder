@@ -18,7 +18,12 @@ class Controller extends AgBaseControl {
   showDatepicker() {
     if (this.isDisabled) return
     // this.getDatepicker().update()
-    this.getDatepicker().show()
+    this.$scope.$evalAsync(() => {
+      this.getDatepicker().show()
+    })
+    // this.$timeout(() => {
+    //   this.getDatepicker().show()
+    // })
   }
 }
 

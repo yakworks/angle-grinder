@@ -15,18 +15,19 @@
 // @import "mixins"
 // @import "controls"
 // @import "extends"
+
 @import "initial-variables";
-@import "functions";
-@import "derived-variables";
+@import "~bulma/sass/utilities/initial-variables.sass";
+
+@import "functions"; // we fix the color darken so use this one
+
+@import "variables-pre";
+@import "~bulma/sass/utilities/derived-variables.sass";
+@import "variables-post";
+
 // rest of bulma
 @import "~bulma/sass/utilities/mixins.sass";
 @import "~bulma/sass/utilities/controls.sass";
 @import "~bulma/sass/utilities/extends.sass";
-
-// packet variables merge this into derived-variables
-// @import "extra_variables";
-
-// DEPRECATE This when we get rid of all old packet scss
-// @import "extra_mixins";
 
 /* ------ END init/_index.scss ----- */

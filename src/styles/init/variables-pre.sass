@@ -1,0 +1,90 @@
+/* ---------------------------------------------------------------------- */
+/* These are BULMA derived variables to be run after initial-variables
+/* After initial-variables. Run BEFORE Bulma's derived-variables.sass
+/* ---------------------------------------------------------------------- */
+
+//**** Typography sizing ****/
+
+// Custom sizes, with default html font size of 16px, size-10 maps to 10px, etc..
+$size-10: 0.625rem !default // ~10px
+$size-12: 0.75rem !default // ~12px
+$size-14: 0.875rem !default // ~14px
+$size-16: 1rem !default // ~16px
+$size-18: 1.125rem !default // ~18px
+$size-20: 1.25rem !default // ~20px
+$size-24: 1.5rem !default // ~24px
+
+$sizes: $size-10 $size-12 $size-14 $size-16 $size-18 $size-20 $size-24 !default
+
+// Bulma size and family variables
+$size-small: $size-12 !default // 12px
+$size-normal: $size-16 !default // used in controls mixin, etc..
+$size-medium: $size-20 !default // 20px
+$size-large: $size-24 !default // 24px
+
+// HTML: font-size. kind of goofy name but in Bulma this is what sets the size of 1rem unit on html css
+$body-size: 16px !default // html: font-size
+
+$family-sans-serif: system-ui, -apple-system, BlinkMacSystemFont,  "Segoe UI", Roboto, "Helvetica Neue", Arial,"Noto Sans", "Liberation Sans", sans-serif,"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
+
+// $family-sans-serif:  -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif !default
+$family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !default
+
+$family-primary: $family-sans-serif !default
+$family-secondary: $family-sans-serif !default
+$family-code: $family-monospace !default
+
+// Bulma Text colors
+
+$text: $grey-dark !default
+$text-invert: findColorInvert($text) !default
+$text-light: $grey !default
+$text-strong: $grey-darker !default
+
+// this names make more sense and is easier to recall
+$text-color: $text !default
+$text-dark: $text-strong !default
+
+//**** COLOR and theme base variables ****/
+
+$primary: hsl(210, 50%, 37%) !default
+$info: $cyan !default
+$success: $green !default
+$danger: $red !default
+$warning: $orange !default
+
+$link: $blue !default
+
+// force it to white
+$orange-invert: #fff !default
+$warning-invert: $orange-invert !default
+
+$dark: $grey-darker !default
+
+// extra, not used in stock Bulma, future use
+$secondary: $orange
+$accent: #00efb7
+$azure: #5B9BD1
+$beige: #D2BD8E
+$bricky: #894550
+
+$scheme-main: $white !default
+$scheme-main-bis: $white-bis !default
+$scheme-main-ter: $white-ter !default
+$scheme-invert: $black !default
+$scheme-invert-bis: $black-bis !default
+$scheme-invert-ter: $black-ter !default
+
+$background: $white-ter !default
+
+// setup the light and light-invert early so we can add it to the custom-colors below
+$light  : $white-ter !default
+$light-invert    : findColorInvert($light) !default
+// more get added to this in Bulma's derived-variables.
+// bulma spins through these and setups up classes prefixed with is.
+// so this essentially sets up so we have a 'is-lighter' css class availiable for cards, toolbars etc
+$custom-colors: ("lighter": ($white-bis, $light-invert)) !default
+
+// Effects
+// $shadow: 0 0.5em 1em -0.125em rgba($scheme-invert, 0.1), 0 0px 0 1px rgba($scheme-invert, 0.02) !default
+$shadow: 0px 4px 16px rgba($scheme-invert, 0.12) !default

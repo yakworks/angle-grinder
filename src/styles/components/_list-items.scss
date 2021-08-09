@@ -112,9 +112,10 @@ $list-active-color: $secondary !default;
     .list-item {
       .item-content {
         color: $white;
-        background-color: darken($dark-grey, 5%);
+        /* FIXME these need to be moved as they are sidenave specific */
+        background-color: darken($sidenav-background-color, 5%);
         padding-left: 72px;
-        border-bottom: 1px solid darken($dark-grey, 2%);
+        border-bottom: 1px solid darken($sidenav-background-color, 2%);
         font-size: 1rem;
 
         &.is-active {
