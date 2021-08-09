@@ -72,4 +72,7 @@ build.demo:
 install-githooks:
 	git config core.hooksPath .githooks
 
+start.sandbox:
+	npx webpack-dev-server --mode=development --content-base ./examples/sandbox
+
 
