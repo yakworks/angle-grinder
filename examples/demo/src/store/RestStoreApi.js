@@ -2,7 +2,7 @@ import RestDataApi from 'angle-grinder/src/dataApi/RestDataApi'
 import ky from 'ky'
 
 function makeDataApi(endpoint){
-  return new RestDataApi(`api/${endpoint}`)
+  return new RestDataApi(`${configData.base_url}api/${endpoint}`)
 }
 
 /** main holder for api */
