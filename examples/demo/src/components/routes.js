@@ -23,12 +23,29 @@ const componentsStates = {
       component: 'contextMenuIndex'
     },
     {
-      name: 'toolbar',
-      component: 'toolbarDemoIndex'
+      name: 'letter-icons',
+      component: 'letterIcons'
+    },
+    {
+      name: 'modals',
+      template: require('./modals/ui_modals.html')
     },
     {
       name: 'sweetalert',
       component: 'sweetalertDemoIndex'
+    },
+    {
+      name: 'tabs',
+      children: [{ name: 'basic', component: 'basicTabsExample' }, { name: 'complex', component: 'complexTabsExample' }]
+
+    },
+    {
+      name: 'toast',
+      template: require('./toast/toast.html')
+    },
+    {
+      name: 'toolbar',
+      component: 'toolbarDemoIndex'
     }
   ]
 }

@@ -1,5 +1,5 @@
 const formStates = {
-  name: 'controls',
+  name: 'form-controls',
   template: '<div ui-view class="fade-in-up"></div>',
   data: {
     icon: 'mdi mdi-id-card'

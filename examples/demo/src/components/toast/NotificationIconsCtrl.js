@@ -4,7 +4,7 @@
  * Simple Image Crop directive for AngularJS.
  */
 
-angular.module('app').controller('NotificationIconsCtrl', ['$scope', '$interval',
+angular.module('demo.components').controller('NotificationIconsCtrl', ['$scope', '$interval',
   function($scope, $interval) {
     var autoCounter = function(index, start, steps, delay) {
       var numIterations = 0

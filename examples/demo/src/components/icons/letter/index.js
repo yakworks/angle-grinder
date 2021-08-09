@@ -1,6 +1,15 @@
 import angular from 'angular'
 
-angular.module('app')
+export default angular.module('demo.list.comps', [])
+  .component('letterIcons', {
+    controller: function() {
+      this.text = 'Bill'
+      this.size = 'sm'
+      this.box = 'circle'
+    },
+    // implicit controllerAs: '$ctrl',
+    template: require('./letterIcons.html')
+  })
   .component('letterIconsList', {
   // implicit controllerAs: '$ctrl',
     template: function($element, $attrs) {
@@ -16,3 +25,4 @@ angular.module('app')
       return tpl
     }
   })
+  .name

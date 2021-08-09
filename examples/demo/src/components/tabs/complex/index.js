@@ -16,7 +16,7 @@ const template = `
 
 // export the module name
 export default angular
-  .module('app')
+  .module(compDemoModule)
   .component('complexTabsExample', {
     template,
     controller

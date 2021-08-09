@@ -1,8 +1,8 @@
 import angular from 'angular'
 import ToastrDemoCtrl from './ToastrDemoCtrl'
-import NotificationIconsCtrl from './NotificationIconsCtrl'
+// import NotificationIconsCtrl from './NotificationIconsCtrl'
 
-angular.module('app')
+export default angular.module('demo.components.toast', [])
   .controller('ToastrDemoCtrl', ToastrDemoCtrl)
   .controller('AlertDemoCtrl', function($scope) {
     $scope.alerts = [{
@@ -23,3 +23,4 @@ angular.module('app')
       $scope.alerts.splice(index, 1)
     }
   })
+  .name

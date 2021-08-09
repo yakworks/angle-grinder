@@ -26,7 +26,7 @@ class controller {
 }
 
 export default angular
-  .module('app')
+  .module('demo.tabs.basic.comp', [])
   .component('demoTabs', {
     template,
     controller

@@ -8,7 +8,7 @@ class controller {
 }
 
 export default angular
-  .module('app')
+  .module('demo.tabs.complex.comp', [])
   .component('complexDemoTabs', {
     template,
     controller
