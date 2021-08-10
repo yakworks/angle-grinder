@@ -1,3 +1,8 @@
+### v4.0.5
+
+[Full Changelog](https://github.com/yakworks/angle-grinder/compare/v4.0.4...v4.0.5)
+- Demo build external config (#592) [link](https://github.com/yakworks/angle-grinder/commit/57c5540548d25638951b57fc8ba9c1fd38eb85a8)
+
 ### v4.0.4
 
 [Full Changelog](https://github.com/yakworks/angle-grinder/compare/v4.0.3...v4.0.4)
