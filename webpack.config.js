@@ -44,6 +44,7 @@ module.exports = function(env, argv) {
       publicPath: '/'
     },
     optimization: {
+      minimize: false,
       chunkIds: "named",
       moduleIds: 'hashed', //makes it so the vendor chunks are cached and not rebuilt everytime
       splitChunks: {
@@ -130,13 +131,21 @@ module.exports = function(env, argv) {
         //title: 'Custom template using lodash',
         template: `${CONTENT_PUBLIC}/index.ejs`,
         inject: false,
-        minify: false
+        minify: false,
+        configPath: isProd ? './config.js' : '../config.js'
         // excludeAssets: /theme.+\.css$/ //not working when we do it by hand like we are in the index.ejs
       }),
       //new HtmlWebpackExcludeAssetsPlugin(),
-      new CopyWebpackPlugin([{
-        from: path.resolve(CONTENT_PUBLIC)
-      }]),
+      new CopyWebpackPlugin(
+        [
+            {
+              from: path.resolve(CONTENT_PUBLIC)
+            },
+            {
+              from: path.resolve(`${CONTENT_BASE}/config.js`)
+            }],
+
+      ),
       new MiniCssExtractPlugin({
         moduleFilename: ({ name }) => {
           return /theme/.test(name) ? `assets/theme/${name.replace('theme-','')}.css` : `assets/${name}.css`
