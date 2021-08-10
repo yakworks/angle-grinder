@@ -40,6 +40,13 @@ const componentsStates = {
 
     },
     {
+      name: 'tiles-cards',
+      data: {
+        title: 'Tiles & Cards'
+      },
+      component: 'tilesCardsIndex'
+    },
+    {
       name: 'toast',
       template: require('./toast/toast.html')
     },

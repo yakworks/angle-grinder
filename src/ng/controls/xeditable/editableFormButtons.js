@@ -22,12 +22,10 @@ app.directive('editableFormButtons', [
     },
 
     template: `\
-<div class="buttons is-right mt-1">
+<div class="buttons is-right mt-2">
   <span ng-if="form.$visible">
-    <button type="submit" class="btn btn-default btn-primary" ng-disabled="form.$invalid || form.$waiting">
-      <i class="fa fa-check fa-inverse"></i> Save
-    </button>
-    <button type="button" class="btn" ng-disabled="form.$waiting" ng-click="cancel()"><i class="fa fa-times"></i> Cancel </button>
+    <ag-button type="submit" icon-left="fa-check" color="primary" ng-disabled="form.$invalid || form.$waiting">Save</ag-button>
+    <ag-button color="light" icon-left="fa-times" ng-disabled="form.$waiting" ng-click="cancel()">Cancel</ag-button>
   </span>
 </div>\
 `

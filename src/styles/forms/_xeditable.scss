@@ -3,6 +3,9 @@ $padding-base-vertical: 6px;
 $line-height-computed:  20px;
 $grid-gutter-width:     30px !default;
 
+$xedit-control-min-height: 48px;
+$xedit-control-padding: 12px;
+$xedit-edit-group-padding: $item-margin;
 
 .form-xeditable {
 
@@ -33,16 +36,6 @@ $grid-gutter-width:     30px !default;
     @include make-row;
   }
 
-  // Reset spacing and right align labels, but scope to media queries so that
-  // labels on narrow viewports stack the same as a default form example.
-  @media (min-width: $tablet) {
-    .control-label {
-      padding-top: ($padding-base-vertical + 1); // Default padding plus a border
-      margin-bottom: 0;
-      text-align: right;
-    }
-  }
-
   // Validation states
   //
   // Reposition the icon because it's now within a grid column and columns have
@@ -59,11 +52,9 @@ form[editable-form].form-xeditable {
     text-align: left;
     width: 50%;
     float: left;
-    padding-top: 7px;
+    padding: $xedit-control-padding 0;
     position: relative;
     min-height: 1px;
-    padding-right: 15px;
-    padding-left: 15px;
   }
   .controls {
     //color: #666666;
@@ -71,11 +62,9 @@ form[editable-form].form-xeditable {
     text-align: right;
     width: 50%;
     float: left;
-    padding-top: 7px;
+    padding: $xedit-control-padding 0;
     position: relative;
     min-height: 1px;
-    padding-right: 15px;
-    padding-left: 15px;
   }
   &.control-align-left {
     .controls {
@@ -83,20 +72,12 @@ form[editable-form].form-xeditable {
     }
   }
   .editable-wrap {
-    //color: #666666;
-    //font-weight: bold;
-    //text-align: right;
     width: 50%;
-    float: left;
-    //padding-top: 7px;
-    float: left;
     position: relative;
-    min-height: 1px;
-    padding-right: 15px;
-    padding-left: 15px;
     white-space: initial;
     .editable-input {
       width: 100% !important;
+      min-height: $xedit-control-min-height;
     }
     .is-addon {
       border: 0;
@@ -104,9 +85,6 @@ form[editable-form].form-xeditable {
   }
   .editable-wrap ag-datepicker.editable-input {
     display: table;
-    // input {
-    //   width: 105px;
-    // }
   }
   hr {
     margin: 0;
@@ -115,9 +93,14 @@ form[editable-form].form-xeditable {
   }
   .edit-group {
     margin: 0;
-    padding: 5px 0 5px 0;
+    padding: 0 $xedit-edit-group-padding;
+    min-height: $xedit-control-min-height;
+
     &:not(:last-child){
       border-bottom: 1px solid $border;
+    }
+    &:last-of-type{
+      border-bottom: 0px
     }
     &:focus-within {
       border-bottom: 1px solid $link !important;

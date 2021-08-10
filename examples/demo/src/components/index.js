@@ -7,6 +7,7 @@ import sweetalertMod from './sweetalert'
 import toastMod from './toast'
 import tabsMod from './tabs'
 import iconsMod from './icons'
+import tilesDemoMod from './tiles'
 // import modalsMod from './modals'
 
 // export module name
@@ -19,7 +20,7 @@ export default angular
     sweetalertMod,
     toastMod,
     tabsMod,
-    iconsMod
-    // modalsMod
+    iconsMod,
+    tilesDemoMod
   ])
   .name
