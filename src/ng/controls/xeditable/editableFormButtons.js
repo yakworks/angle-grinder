@@ -24,8 +24,8 @@ app.directive('editableFormButtons', [
     template: `\
 <div class="buttons is-right mt-2">
   <span ng-if="form.$visible">
-    <ag-button type="submit" icon-left="fa-check" color="primary" ng-disabled="form.$invalid || form.$waiting">Save</ag-button>
-    <ag-button color="light" icon-left="fa-times" ng-disabled="form.$waiting" ng-click="cancel()">Cancel</ag-button>
+    <ag-button type="submit" icon-left="fa-check" color="primary" is-disabled="form.$invalid || form.$waiting">Save</ag-button>
+    <ag-button color="light" icon-left="fa-times" is-disabled="form.$waiting" ng-click="cancel()">Cancel</ag-button>
   </span>
 </div>\
 `
