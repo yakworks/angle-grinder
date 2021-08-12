@@ -1,11 +1,11 @@
-import formsModule from 'angle-grinder/src/ng/legacy/forms'
+import commonModule from 'angle-grinder/src/ng/common/directives'
 
 describe("agNumberSpec", function() {
 
   let element = null;
   let scope = null;
 
-  beforeEach(angular.mock.module(formsModule));
+  beforeEach(angular.mock.module(commonModule));
 
   beforeEach(inject(function($rootScope, $compile) {
     element = angular.element('<input ag-number ng-model="test.number">');

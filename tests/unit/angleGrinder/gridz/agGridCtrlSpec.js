@@ -1,8 +1,8 @@
 import 'angle-grinder/src/ng/gridz'
-import agGridz from 'angle-grinder/src/ng/legacy/ag-grid'
-import agGridCtrl from 'angle-grinder/src/ng/legacy/ag-grid/directives/agGrid/agGridCtrl'
+import agGridz from 'angle-grinder/src/ng/gridz'
+import agGridCtrl from 'angle-grinder/src/ng/gridz/GridCtrl'
 
-describe("module: angleGrinder.gridz, conroller: AgGridCtrl", function() {
+xdescribe("module: angleGrinder.gridz, conroller: AgGridCtrl", function() {
 
   beforeEach(angular.mock.module(agGridz, function($provide)  {
       // spy for `FlattenServ` service

@@ -1,8 +1,8 @@
-import formsModule from 'angle-grinder/src/ng/legacy/forms'
+import module from 'angle-grinder/src/ng/controls/xeditable'
 
-describe("module: angleGrinder.forms", () => describe("directive: editableCustom", function() {
+describe(`module: ${module}`, () => describe("directive: editableCustom", function() {
 
-  beforeEach(angular.mock.module(formsModule));
+  beforeEach(angular.mock.module(module));
 
   let $scope = null;
   let element = null;

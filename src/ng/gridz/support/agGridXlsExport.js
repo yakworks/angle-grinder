@@ -1,5 +1,6 @@
 import angular from 'angular'
 import gridzModule from '../gridzModule'
+import Swal from 'angle-grinder/src/tools/swal'
 
 const gridz = angular.module(gridzModule)
 
@@ -50,7 +51,10 @@ gridz.directive('agGridXlsExport', [
             return link.dispatchEvent(clickev)
           }
         } else {
-          return NotificationDialogServ.open('Please select at least one row.')
+          Swal.fire(
+            '',
+            'Please select at least one row.'
+          )
         }
       })
     }

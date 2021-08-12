@@ -1,8 +1,8 @@
-import formsModule from 'angle-grinder/src/ng/legacy/forms'
+import commonModule from 'angle-grinder/src/ng/common'
 
 describe("agBindSpec", function() {
 
-  beforeEach(angular.mock.module(formsModule, function ($provide) {
+  beforeEach(angular.mock.module(commonModule, function ($provide) {
       // dummy filter witch always returns falsy values
       $provide.value("dummyFilter", () => {
         return null
