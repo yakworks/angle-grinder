@@ -1,3 +1,4 @@
+/* eslint-disable */
 describe('uib-dropdown', function() {
   var $animate, $compile, $rootScope, $document, $templateCache, dropdownConfig, element, menu, $browser, $log
 

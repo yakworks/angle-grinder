@@ -1,3 +1,4 @@
+/* eslint-disable */
 describe('tooltip', function() {
   var elm,
     elmBody,

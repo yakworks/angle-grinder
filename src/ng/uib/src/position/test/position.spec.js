@@ -1,3 +1,4 @@
+/* eslint-disable */
 describe('$uibPosition service', function() {
   var TargetElMock = function(width, height) {
     this.width = width

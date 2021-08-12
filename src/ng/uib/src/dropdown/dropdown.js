@@ -1,3 +1,4 @@
+/* eslint-disable */
 angular.module('ui.bootstrap.dropdown', ['ui.bootstrap.multiMap', 'ui.bootstrap.position'])
 
   .constant('uibDropdownConfig', {

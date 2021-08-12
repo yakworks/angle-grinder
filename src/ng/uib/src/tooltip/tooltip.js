@@ -1,3 +1,4 @@
+/* eslint-disable */
 /**
  * The following features are still outstanding: animation as a
  * function, placement as a function, inside, support for more triggers than

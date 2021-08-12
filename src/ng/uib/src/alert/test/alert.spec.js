@@ -1,3 +1,4 @@
+/* eslint-disable */
 describe('uib-alert', function() {
   var element, scope, $compile, $templateCache, $timeout
 

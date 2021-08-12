@@ -10,10 +10,10 @@ class Controller extends AgBaseControl {
   datepickerOptions = {}
 
   /* @ngInject */
-  constructor($element, $timeout, $scope, $transclude) {
-    super($element, $timeout, $scope, $transclude)
-    // this.agDate = agDate
-  }
+  // constructor($element, $timeout, $scope, $transclude) {
+  //   super($element, $timeout, $scope, $transclude)
+  //   // this.agDate = agDate
+  // }
 
   $onInit() {
     if (this.inputId) {
@@ -22,7 +22,7 @@ class Controller extends AgBaseControl {
     // sets up unique id, etc..
     super.initDefaults()
 
-    const { ngModelCtrl, $element, $timeout } = this
+    const { ngModelCtrl, $element } = this
 
     // Log.debug('this.datepickerOptions', this.datepickerOptions)
     this.opts = mergeDatepickerOpts(this.datepickerOptions)

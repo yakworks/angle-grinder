@@ -1,3 +1,4 @@
+/* eslint-disable */
 angular.module('ui.bootstrap.tabs', [])
 
   .controller('UibTabsetController', ['$scope', function($scope) {

@@ -1,3 +1,4 @@
+/* eslint-disable */
 describe('$uibResolve', function() {
   beforeEach(module('ui.bootstrap.modal'))
 

@@ -1,3 +1,4 @@
+/* eslint-disable */
 describe('popover', function() {
   var elm,
     elmBody,
