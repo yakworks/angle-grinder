@@ -1,9 +1,9 @@
-require('../multiMap');
-require('../position/index-nocss.js');
-require('./dropdown');
+require('../multiMap')
+require('../position/index-nocss.js')
+require('./dropdown')
 
-var MODULE_NAME = 'ui.bootstrap.module.dropdown';
+var MODULE_NAME = 'ui.bootstrap.module.dropdown'
 
-angular.module(MODULE_NAME, ['ui.bootstrap.dropdown']);
+angular.module(MODULE_NAME, ['ui.bootstrap.dropdown'])
 
-module.exports = MODULE_NAME;
+module.exports = MODULE_NAME

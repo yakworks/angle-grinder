@@ -1,7 +1,7 @@
-angular.module('ui.bootstrap.demo').controller('TooltipDemoCtrl', function ($scope, $sce) {
-  $scope.dynamicTooltip = 'Hello, World!';
-  $scope.dynamicTooltipText = 'dynamic';
-  $scope.htmlTooltip = $sce.trustAsHtml('I\'ve been made <b>bold</b>!');
+angular.module('ui.bootstrap.demo').controller('TooltipDemoCtrl', function($scope, $sce) {
+  $scope.dynamicTooltip = 'Hello, World!'
+  $scope.dynamicTooltipText = 'dynamic'
+  $scope.htmlTooltip = $sce.trustAsHtml('I\'ve been made <b>bold</b>!')
   $scope.placement = {
     options: [
       'top',
@@ -18,5 +18,5 @@ angular.module('ui.bootstrap.demo').controller('TooltipDemoCtrl', function ($sco
       'right-bottom'
     ],
     selected: 'top'
-  };
-});
+  }
+})

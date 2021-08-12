@@ -16,7 +16,7 @@ app.directive('editableCardHeading', [
       <button class="card-header-icon" aria-label="edit"
         ng-click="form.$show()"
         ng-if="!form.$visible">
-        <span class="icon"><i class="far fa-edit"></i></span>
+        <span class="icon is-small"><i class="far fa-edit"></i></span>
       </button>
     </header>
     `

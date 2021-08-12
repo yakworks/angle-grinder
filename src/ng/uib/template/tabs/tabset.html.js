@@ -1,4 +1,4 @@
-angular.module('uib/template/tabs/tabset.html', []).run(['$templateCache', function ($templateCache) {
+angular.module('uib/template/tabs/tabset.html', []).run(['$templateCache', function($templateCache) {
   $templateCache.put('uib/template/tabs/tabset.html',
     `<div>
       <div class="tabs {{tabset.type}}">

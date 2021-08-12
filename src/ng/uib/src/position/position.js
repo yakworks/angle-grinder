@@ -11,23 +11,23 @@ angular.module('ui.bootstrap.position', [])
      * Used by scrollbarWidth() function to cache scrollbar's width.
      * Do not access this variable directly, use scrollbarWidth() instead.
      */
-    var SCROLLBAR_WIDTH;
+    var SCROLLBAR_WIDTH
     /**
      * scrollbar on body and html element in IE and Edge overlay
      * content and should be considered 0 width.
      */
-    var BODY_SCROLLBAR_WIDTH;
+    var BODY_SCROLLBAR_WIDTH
     var OVERFLOW_REGEX = {
       normal: /(auto|scroll)/,
       hidden: /(auto|scroll|hidden)/
-    };
+    }
     var PLACEMENT_REGEX = {
       auto: /\s?auto?\s?/i,
       primary: /^(top|bottom|left|right)$/,
       secondary: /^(top|bottom|left|right|center)$/,
       vertical: /^(top|bottom)$/
-    };
-    var BODY_REGEX = /(HTML|BODY)/;
+    }
+    var BODY_REGEX = /(HTML|BODY)/
 
     return {
 
@@ -39,7 +39,7 @@ angular.module('ui.bootstrap.position', [])
        * @returns {element} A HTML element.
        */
       getRawNode: function(elem) {
-        return elem.nodeName ? elem : elem[0] || elem;
+        return elem.nodeName ? elem : elem[0] || elem
       },
 
       /**
@@ -51,9 +51,9 @@ angular.module('ui.bootstrap.position', [])
        * @returns {number} A valid number.
        */
       parseStyle: function(value) {
-        value = parseFloat(value);
+        value = parseFloat(value)
         // Math.abs to consider negative margins
-        return isFinite(value) ? Math.abs(value) : 0;
+        return isFinite(value) ? Math.abs(value) : 0
       },
 
       /**
@@ -64,19 +64,19 @@ angular.module('ui.bootstrap.position', [])
        * @returns {element} The closest positioned ancestor.
        */
       offsetParent: function(elem) {
-        elem = this.getRawNode(elem);
+        elem = this.getRawNode(elem)
 
-        var offsetParent = elem.offsetParent || $document[0].documentElement;
+        var offsetParent = elem.offsetParent || $document[0].documentElement
 
         function isStaticPositioned(el) {
-          return ($window.getComputedStyle(el).position || 'static') === 'static';
+          return ($window.getComputedStyle(el).position || 'static') === 'static'
         }
 
         while (offsetParent && offsetParent !== $document[0].documentElement && isStaticPositioned(offsetParent)) {
-          offsetParent = offsetParent.offsetParent;
+          offsetParent = offsetParent.offsetParent
         }
 
-        return offsetParent || $document[0].documentElement;
+        return offsetParent || $document[0].documentElement
       },
 
       /**
@@ -90,24 +90,24 @@ angular.module('ui.bootstrap.position', [])
       scrollbarWidth: function(isBody) {
         if (isBody) {
           if (angular.isUndefined(BODY_SCROLLBAR_WIDTH)) {
-            var bodyElem = $document.find('body');
-            bodyElem.addClass('uib-position-body-scrollbar-measure');
-            BODY_SCROLLBAR_WIDTH = $window.innerWidth - bodyElem[0].clientWidth;
-            BODY_SCROLLBAR_WIDTH = isFinite(BODY_SCROLLBAR_WIDTH) ? BODY_SCROLLBAR_WIDTH : 0;
-            bodyElem.removeClass('uib-position-body-scrollbar-measure');
+            var bodyElem = $document.find('body')
+            bodyElem.addClass('uib-position-body-scrollbar-measure')
+            BODY_SCROLLBAR_WIDTH = $window.innerWidth - bodyElem[0].clientWidth
+            BODY_SCROLLBAR_WIDTH = isFinite(BODY_SCROLLBAR_WIDTH) ? BODY_SCROLLBAR_WIDTH : 0
+            bodyElem.removeClass('uib-position-body-scrollbar-measure')
           }
-          return BODY_SCROLLBAR_WIDTH;
+          return BODY_SCROLLBAR_WIDTH
         }
 
         if (angular.isUndefined(SCROLLBAR_WIDTH)) {
-          var scrollElem = angular.element('<div class="uib-position-scrollbar-measure"></div>');
-          $document.find('body').append(scrollElem);
-          SCROLLBAR_WIDTH = scrollElem[0].offsetWidth - scrollElem[0].clientWidth;
-          SCROLLBAR_WIDTH = isFinite(SCROLLBAR_WIDTH) ? SCROLLBAR_WIDTH : 0;
-          scrollElem.remove();
+          var scrollElem = angular.element('<div class="uib-position-scrollbar-measure"></div>')
+          $document.find('body').append(scrollElem)
+          SCROLLBAR_WIDTH = scrollElem[0].offsetWidth - scrollElem[0].clientWidth
+          SCROLLBAR_WIDTH = isFinite(SCROLLBAR_WIDTH) ? SCROLLBAR_WIDTH : 0
+          scrollElem.remove()
         }
 
-        return SCROLLBAR_WIDTH;
+        return SCROLLBAR_WIDTH
       },
 
       /**
@@ -125,13 +125,13 @@ angular.module('ui.bootstrap.position', [])
        *   </ul>
        */
       scrollbarPadding: function(elem) {
-        elem = this.getRawNode(elem);
+        elem = this.getRawNode(elem)
 
-        var elemStyle = $window.getComputedStyle(elem);
-        var paddingRight = this.parseStyle(elemStyle.paddingRight);
-        var paddingBottom = this.parseStyle(elemStyle.paddingBottom);
-        var scrollParent = this.scrollParent(elem, false, true);
-        var scrollbarWidth = this.scrollbarWidth(BODY_REGEX.test(scrollParent.tagName));
+        var elemStyle = $window.getComputedStyle(elem)
+        var paddingRight = this.parseStyle(elemStyle.paddingRight)
+        var paddingBottom = this.parseStyle(elemStyle.paddingBottom)
+        var scrollParent = this.scrollParent(elem, false, true)
+        var scrollbarWidth = this.scrollbarWidth(BODY_REGEX.test(scrollParent.tagName))
 
         return {
           scrollbarWidth: scrollbarWidth,
@@ -141,7 +141,7 @@ angular.module('ui.bootstrap.position', [])
           heightOverflow: scrollParent.scrollHeight > scrollParent.clientHeight,
           bottom: paddingBottom + scrollbarWidth,
           originalBottom: paddingBottom
-        };
+        }
       },
 
       /**
@@ -154,11 +154,11 @@ angular.module('ui.bootstrap.position', [])
        * @returns {boolean} Whether the element is scrollable.
        */
       isScrollable: function(elem, includeHidden) {
-        elem = this.getRawNode(elem);
+        elem = this.getRawNode(elem)
 
-        var overflowRegex = includeHidden ? OVERFLOW_REGEX.hidden : OVERFLOW_REGEX.normal;
-        var elemStyle = $window.getComputedStyle(elem);
-        return overflowRegex.test(elemStyle.overflow + elemStyle.overflowY + elemStyle.overflowX);
+        var overflowRegex = includeHidden ? OVERFLOW_REGEX.hidden : OVERFLOW_REGEX.normal
+        var elemStyle = $window.getComputedStyle(elem)
+        return overflowRegex.test(elemStyle.overflow + elemStyle.overflowY + elemStyle.overflowX)
       },
 
       /**
@@ -175,34 +175,34 @@ angular.module('ui.bootstrap.position', [])
        * @returns {element} A HTML element.
        */
       scrollParent: function(elem, includeHidden, includeSelf) {
-        elem = this.getRawNode(elem);
+        elem = this.getRawNode(elem)
 
-        var overflowRegex = includeHidden ? OVERFLOW_REGEX.hidden : OVERFLOW_REGEX.normal;
-        var documentEl = $document[0].documentElement;
-        var elemStyle = $window.getComputedStyle(elem);
+        var overflowRegex = includeHidden ? OVERFLOW_REGEX.hidden : OVERFLOW_REGEX.normal
+        var documentEl = $document[0].documentElement
+        var elemStyle = $window.getComputedStyle(elem)
         if (includeSelf && overflowRegex.test(elemStyle.overflow + elemStyle.overflowY + elemStyle.overflowX)) {
-          return elem;
+          return elem
         }
-        var excludeStatic = elemStyle.position === 'absolute';
-        var scrollParent = elem.parentElement || documentEl;
+        var excludeStatic = elemStyle.position === 'absolute'
+        var scrollParent = elem.parentElement || documentEl
 
         if (scrollParent === documentEl || elemStyle.position === 'fixed') {
-          return documentEl;
+          return documentEl
         }
 
         while (scrollParent.parentElement && scrollParent !== documentEl) {
-          var spStyle = $window.getComputedStyle(scrollParent);
+          var spStyle = $window.getComputedStyle(scrollParent)
           if (excludeStatic && spStyle.position !== 'static') {
-            excludeStatic = false;
+            excludeStatic = false
           }
 
           if (!excludeStatic && overflowRegex.test(spStyle.overflow + spStyle.overflowY + spStyle.overflowX)) {
-            break;
+            break
           }
-          scrollParent = scrollParent.parentElement;
+          scrollParent = scrollParent.parentElement
         }
 
-        return scrollParent;
+        return scrollParent
       },
 
       /**
@@ -223,21 +223,21 @@ angular.module('ui.bootstrap.position', [])
        *   </ul>
        */
       position: function(elem, includeMagins) {
-        elem = this.getRawNode(elem);
+        elem = this.getRawNode(elem)
 
-        var elemOffset = this.offset(elem);
+        var elemOffset = this.offset(elem)
         if (includeMagins) {
-          var elemStyle = $window.getComputedStyle(elem);
-          elemOffset.top -= this.parseStyle(elemStyle.marginTop);
-          elemOffset.left -= this.parseStyle(elemStyle.marginLeft);
+          var elemStyle = $window.getComputedStyle(elem)
+          elemOffset.top -= this.parseStyle(elemStyle.marginTop)
+          elemOffset.left -= this.parseStyle(elemStyle.marginLeft)
         }
-        var parent = this.offsetParent(elem);
-        var parentOffset = {top: 0, left: 0};
+        var parent = this.offsetParent(elem)
+        var parentOffset = { top: 0, left: 0 }
 
         if (parent !== $document[0].documentElement) {
-          parentOffset = this.offset(parent);
-          parentOffset.top += parent.clientTop - parent.scrollTop;
-          parentOffset.left += parent.clientLeft - parent.scrollLeft;
+          parentOffset = this.offset(parent)
+          parentOffset.top += parent.clientTop - parent.scrollTop
+          parentOffset.left += parent.clientLeft - parent.scrollLeft
         }
 
         return {
@@ -245,7 +245,7 @@ angular.module('ui.bootstrap.position', [])
           height: Math.round(angular.isNumber(elemOffset.height) ? elemOffset.height : elem.offsetHeight),
           top: Math.round(elemOffset.top - parentOffset.top),
           left: Math.round(elemOffset.left - parentOffset.left)
-        };
+        }
       },
 
       /**
@@ -267,23 +267,22 @@ angular.module('ui.bootstrap.position', [])
        *   </ul>
        */
       offset: function(elem, includeMargins, $hostElem) {
-        elem = this.getRawNode(elem);
+        elem = this.getRawNode(elem)
 
-        var elemBCR = elem.getBoundingClientRect().toJSON();
-        var hostBCR = { top: 0, left: 0 };
+        var elemBCR = elem.getBoundingClientRect().toJSON()
+        var hostBCR = { top: 0, left: 0 }
 
         // when being placed relative to another element, we don't care about their offset
         // since we're parting from the `0, 0` of said host element to position `elem`.
         if ($hostElem) {
-          var hostOffset = $hostElem.offset();
-          elemBCR.top = elemBCR.top - hostOffset.top;
-          elemBCR.left = elemBCR.left - hostOffset.left;
-        }
-        else {
+          var hostOffset = $hostElem.offset()
+          elemBCR.top = elemBCR.top - hostOffset.top
+          elemBCR.left = elemBCR.left - hostOffset.left
+        } else {
           hostBCR = {
             top: $window.pageYOffset || $document[0].documentElement.scrollTop,
             left: $window.pageXOffset || $document[0].documentElement.scrollLeft
-          };
+          }
         }
 
         const offset = {
@@ -291,18 +290,18 @@ angular.module('ui.bootstrap.position', [])
           height: Math.round(angular.isNumber(elemBCR.height) ? elemBCR.height : elem.offsetHeight),
           top: Math.round(elemBCR.top + hostBCR.top),
           left: Math.round(elemBCR.left + hostBCR.left)
-        };
-
-        if (includeMargins) {
-          var styles = window.getComputedStyle(elem);
-          var verticalMargin = this.parseStyle(styles.marginTop) + this.parseStyle(styles.marginBottom);
-          var horisontalMargin = this.parseStyle(styles.marginLeft) + this.parseStyle(styles.marginRight);
-
-          offset.height += verticalMargin;
-          offset.width += horisontalMargin;
         }
 
-        return offset;
+        if (includeMargins) {
+          var styles = window.getComputedStyle(elem)
+          var verticalMargin = this.parseStyle(styles.marginTop) + this.parseStyle(styles.marginBottom)
+          var horisontalMargin = this.parseStyle(styles.marginLeft) + this.parseStyle(styles.marginRight)
+
+          offset.height += verticalMargin
+          offset.width += horisontalMargin
+        }
+
+        return offset
       },
 
       /**
@@ -329,30 +328,30 @@ angular.module('ui.bootstrap.position', [])
        *   </ul>
        */
       viewportOffset: function(elem, useDocument, includePadding) {
-        elem = this.getRawNode(elem);
-        includePadding = includePadding !== false ? true : false;
+        elem = this.getRawNode(elem)
+        includePadding = includePadding !== false
 
-        var elemBCR = elem.getBoundingClientRect();
-        var offsetBCR = {top: 0, left: 0, bottom: 0, right: 0};
+        var elemBCR = elem.getBoundingClientRect()
+        var offsetBCR = { top: 0, left: 0, bottom: 0, right: 0 }
 
-        var offsetParent = useDocument ? $document[0].documentElement : this.scrollParent(elem);
-        var offsetParentBCR = offsetParent.getBoundingClientRect();
+        var offsetParent = useDocument ? $document[0].documentElement : this.scrollParent(elem)
+        var offsetParentBCR = offsetParent.getBoundingClientRect()
 
-        offsetBCR.top = offsetParentBCR.top + offsetParent.clientTop;
-        offsetBCR.left = offsetParentBCR.left + offsetParent.clientLeft;
+        offsetBCR.top = offsetParentBCR.top + offsetParent.clientTop
+        offsetBCR.left = offsetParentBCR.left + offsetParent.clientLeft
         if (offsetParent === $document[0].documentElement) {
-          offsetBCR.top += $window.pageYOffset;
-          offsetBCR.left += $window.pageXOffset;
+          offsetBCR.top += $window.pageYOffset
+          offsetBCR.left += $window.pageXOffset
         }
-        offsetBCR.bottom = offsetBCR.top + offsetParent.clientHeight;
-        offsetBCR.right = offsetBCR.left + offsetParent.clientWidth;
+        offsetBCR.bottom = offsetBCR.top + offsetParent.clientHeight
+        offsetBCR.right = offsetBCR.left + offsetParent.clientWidth
 
         if (includePadding) {
-          var offsetParentStyle = $window.getComputedStyle(offsetParent);
-          offsetBCR.top += this.parseStyle(offsetParentStyle.paddingTop);
-          offsetBCR.bottom -= this.parseStyle(offsetParentStyle.paddingBottom);
-          offsetBCR.left += this.parseStyle(offsetParentStyle.paddingLeft);
-          offsetBCR.right -= this.parseStyle(offsetParentStyle.paddingRight);
+          var offsetParentStyle = $window.getComputedStyle(offsetParent)
+          offsetBCR.top += this.parseStyle(offsetParentStyle.paddingTop)
+          offsetBCR.bottom -= this.parseStyle(offsetParentStyle.paddingBottom)
+          offsetBCR.left += this.parseStyle(offsetParentStyle.paddingLeft)
+          offsetBCR.right -= this.parseStyle(offsetParentStyle.paddingRight)
         }
 
         return {
@@ -360,7 +359,7 @@ angular.module('ui.bootstrap.position', [])
           bottom: Math.round(offsetBCR.bottom - elemBCR.bottom),
           left: Math.round(elemBCR.left - offsetBCR.left),
           right: Math.round(offsetBCR.right - elemBCR.right)
-        };
+        }
       },
 
       /**
@@ -397,30 +396,30 @@ angular.module('ui.bootstrap.position', [])
        * </ul>
        */
       parsePlacement: function(placement) {
-        var autoPlace = PLACEMENT_REGEX.auto.test(placement);
+        var autoPlace = PLACEMENT_REGEX.auto.test(placement)
         if (autoPlace) {
-          placement = placement.replace(PLACEMENT_REGEX.auto, '');
+          placement = placement.replace(PLACEMENT_REGEX.auto, '')
         }
 
-        placement = placement.split('-');
+        placement = placement.split('-')
 
-        placement[0] = placement[0] || 'top';
+        placement[0] = placement[0] || 'top'
         if (!PLACEMENT_REGEX.primary.test(placement[0])) {
-          placement[0] = 'top';
+          placement[0] = 'top'
         }
 
-        placement[1] = placement[1] || 'center';
+        placement[1] = placement[1] || 'center'
         if (!PLACEMENT_REGEX.secondary.test(placement[1])) {
-          placement[1] = 'center';
+          placement[1] = 'center'
         }
 
         if (autoPlace) {
-          placement[2] = true;
+          placement[2] = true
         } else {
-          placement[2] = false;
+          placement[2] = false
         }
 
-        return placement;
+        return placement
       },
 
       /**
@@ -467,13 +466,13 @@ angular.module('ui.bootstrap.position', [])
        *   </ul>
        */
       positionElements: function(hostElem, targetElem, placement, appendTo, includeMargins) {
-        hostElem = this.getRawNode(hostElem);
-        targetElem = this.getRawNode(targetElem);
-        var appendToBody = appendTo === true;
+        hostElem = this.getRawNode(hostElem)
+        targetElem = this.getRawNode(targetElem)
+        var appendToBody = appendTo === true
 
         // need to read from prop to support tests.
-        var targetWidth = angular.isDefined(targetElem.offsetWidth) ? targetElem.offsetWidth : targetElem.prop('offsetWidth');
-        var targetHeight = angular.isDefined(targetElem.offsetHeight) ? targetElem.offsetHeight : targetElem.prop('offsetHeight');
+        var targetWidth = angular.isDefined(targetElem.offsetWidth) ? targetElem.offsetWidth : targetElem.prop('offsetWidth')
+        var targetHeight = angular.isDefined(targetElem.offsetHeight) ? targetElem.offsetHeight : targetElem.prop('offsetHeight')
 
         // if (includeMargins) {
         //   var styles = window.getComputedStyle(targetElem);
@@ -484,106 +483,105 @@ angular.module('ui.bootstrap.position', [])
         //   targetWidth += horisontalMargin;
         // }
 
-        placement = this.parsePlacement(placement);
+        placement = this.parsePlacement(placement)
 
         var hostElemPos = appendTo
           ? appendToBody
             ? this.offset(hostElem, false, null)
             : this.offset(hostElem, false, appendTo)
-          : this.position(hostElem, false);
-        var targetElemPos = {top: 0, left: 0, placement: ''};
+          : this.position(hostElem, false)
+        var targetElemPos = { top: 0, left: 0, placement: '' }
 
         if (placement[2]) {
-          var viewportOffset = this.viewportOffset(hostElem, appendToBody);
+          var viewportOffset = this.viewportOffset(hostElem, appendToBody)
 
-          var targetElemStyle = $window.getComputedStyle(targetElem);
+          var targetElemStyle = $window.getComputedStyle(targetElem)
           var adjustedSize = {
             width: targetWidth + Math.round(Math.abs(this.parseStyle(targetElemStyle.marginLeft) + this.parseStyle(targetElemStyle.marginRight))),
             height: targetHeight + Math.round(Math.abs(this.parseStyle(targetElemStyle.marginTop) + this.parseStyle(targetElemStyle.marginBottom)))
-          };
+          }
 
-          placement[0] = placement[0] === 'top' && adjustedSize.height > viewportOffset.top && adjustedSize.height <= viewportOffset.bottom ? 'bottom' :
-            placement[0] === 'bottom' && adjustedSize.height > viewportOffset.bottom && adjustedSize.height <= viewportOffset.top ? 'top' :
-              placement[0] === 'left' && adjustedSize.width > viewportOffset.left && adjustedSize.width <= viewportOffset.right ? 'right' :
-                placement[0] === 'right' && adjustedSize.width > viewportOffset.right && adjustedSize.width <= viewportOffset.left ? 'left' :
-                  placement[0];
+          placement[0] = placement[0] === 'top' && adjustedSize.height > viewportOffset.top && adjustedSize.height <= viewportOffset.bottom ? 'bottom'
+            : placement[0] === 'bottom' && adjustedSize.height > viewportOffset.bottom && adjustedSize.height <= viewportOffset.top ? 'top'
+              : placement[0] === 'left' && adjustedSize.width > viewportOffset.left && adjustedSize.width <= viewportOffset.right ? 'right'
+                : placement[0] === 'right' && adjustedSize.width > viewportOffset.right && adjustedSize.width <= viewportOffset.left ? 'left'
+                  : placement[0]
 
-          placement[1] = placement[1] === 'top' && adjustedSize.height - hostElemPos.height > viewportOffset.bottom && adjustedSize.height - hostElemPos.height <= viewportOffset.top ? 'bottom' :
-            placement[1] === 'bottom' && adjustedSize.height - hostElemPos.height > viewportOffset.top && adjustedSize.height - hostElemPos.height <= viewportOffset.bottom ? 'top' :
-              placement[1] === 'left' && adjustedSize.width - hostElemPos.width > viewportOffset.right && adjustedSize.width - hostElemPos.width <= viewportOffset.left ? 'right' :
-                placement[1] === 'right' && adjustedSize.width - hostElemPos.width > viewportOffset.left && adjustedSize.width - hostElemPos.width <= viewportOffset.right ? 'left' :
-                  placement[1];
+          placement[1] = placement[1] === 'top' && adjustedSize.height - hostElemPos.height > viewportOffset.bottom && adjustedSize.height - hostElemPos.height <= viewportOffset.top ? 'bottom'
+            : placement[1] === 'bottom' && adjustedSize.height - hostElemPos.height > viewportOffset.top && adjustedSize.height - hostElemPos.height <= viewportOffset.bottom ? 'top'
+              : placement[1] === 'left' && adjustedSize.width - hostElemPos.width > viewportOffset.right && adjustedSize.width - hostElemPos.width <= viewportOffset.left ? 'right'
+                : placement[1] === 'right' && adjustedSize.width - hostElemPos.width > viewportOffset.left && adjustedSize.width - hostElemPos.width <= viewportOffset.right ? 'left'
+                  : placement[1]
 
           if (placement[1] === 'center') {
             if (PLACEMENT_REGEX.vertical.test(placement[0])) {
-              var xOverflow = hostElemPos.width / 2 - targetWidth / 2;
+              var xOverflow = hostElemPos.width / 2 - targetWidth / 2
               if (viewportOffset.left + xOverflow < 0 && adjustedSize.width - hostElemPos.width <= viewportOffset.right) {
-                placement[1] = 'left';
+                placement[1] = 'left'
               } else if (viewportOffset.right + xOverflow < 0 && adjustedSize.width - hostElemPos.width <= viewportOffset.left) {
-                placement[1] = 'right';
+                placement[1] = 'right'
               }
             } else {
-              var yOverflow = hostElemPos.height / 2 - adjustedSize.height / 2;
+              var yOverflow = hostElemPos.height / 2 - adjustedSize.height / 2
               if (viewportOffset.top + yOverflow < 0 && adjustedSize.height - hostElemPos.height <= viewportOffset.bottom) {
-                placement[1] = 'top';
+                placement[1] = 'top'
               } else if (viewportOffset.bottom + yOverflow < 0 && adjustedSize.height - hostElemPos.height <= viewportOffset.top) {
-                placement[1] = 'bottom';
+                placement[1] = 'bottom'
               }
             }
           }
         }
 
-
         switch (placement[0]) {
           case 'top':
-            targetElemPos.top = hostElemPos.top - targetHeight;
-            break;
+            targetElemPos.top = hostElemPos.top - targetHeight
+            break
           case 'bottom':
-            targetElemPos.top = hostElemPos.top + hostElemPos.height;
-            break;
+            targetElemPos.top = hostElemPos.top + hostElemPos.height
+            break
           case 'left':
-            targetElemPos.left = hostElemPos.left - targetWidth;
-            break;
+            targetElemPos.left = hostElemPos.left - targetWidth
+            break
           case 'right':
-            targetElemPos.left = hostElemPos.left + hostElemPos.width;
-            break;
+            targetElemPos.left = hostElemPos.left + hostElemPos.width
+            break
         }
 
         switch (placement[1]) {
           case 'top':
-            targetElemPos.top = hostElemPos.top;
-            break;
+            targetElemPos.top = hostElemPos.top
+            break
           case 'bottom':
-            targetElemPos.top = hostElemPos.top + hostElemPos.height - targetHeight;
-            break;
+            targetElemPos.top = hostElemPos.top + hostElemPos.height - targetHeight
+            break
           case 'left':
-            targetElemPos.left = hostElemPos.left;
-            break;
+            targetElemPos.left = hostElemPos.left
+            break
           case 'right':
-            targetElemPos.left = hostElemPos.left + hostElemPos.width - targetWidth;
-            break;
+            targetElemPos.left = hostElemPos.left + hostElemPos.width - targetWidth
+            break
           case 'center':
             if (PLACEMENT_REGEX.vertical.test(placement[0])) {
-              targetElemPos.left = hostElemPos.left + hostElemPos.width / 2 - targetWidth / 2;
+              targetElemPos.left = hostElemPos.left + hostElemPos.width / 2 - targetWidth / 2
             } else {
-              targetElemPos.top = hostElemPos.top + hostElemPos.height / 2 - targetHeight / 2;
+              targetElemPos.top = hostElemPos.top + hostElemPos.height / 2 - targetHeight / 2
             }
-            break;
+            break
         }
 
-        targetElemPos.top = Math.round(targetElemPos.top);
-        targetElemPos.left = Math.round(targetElemPos.left);
+        targetElemPos.top = Math.round(targetElemPos.top)
+        targetElemPos.left = Math.round(targetElemPos.left)
         /* remove half pixel for centering on even-pixel element width/height */
         if (hostElemPos.height % 2 === 0) {
-          targetElemPos.top -= 0.5;
+          targetElemPos.top -= 0.5
         }
         if (hostElemPos.width % 2 === 0) {
-          targetElemPos.left -= 0.5;
+          targetElemPos.left -= 0.5
         }
 
-        targetElemPos.placement = placement[1] === 'center' ? placement[0] : placement[0] + '-' + placement[1];
+        targetElemPos.placement = placement[1] === 'center' ? placement[0] : placement[0] + '-' + placement[1]
 
-        return targetElemPos;
+        return targetElemPos
       },
 
       /**
@@ -602,7 +600,7 @@ angular.module('ui.bootstrap.position', [])
         if (placementClasses.indexOf('top') !== -1 && initialHeight !== currentHeight) {
           return {
             top: containerPosition.top - currentHeight + 'px'
-          };
+          }
         }
       },
 
@@ -615,21 +613,21 @@ angular.module('ui.bootstrap.position', [])
        * @param {string} placement - The placement for the elem.
        */
       positionArrow: function(elem, placement) {
-        elem = this.getRawNode(elem);
-        var isTooltip = true;
+        elem = this.getRawNode(elem)
+        var isTooltip = true
 
-        var innerElem = elem.querySelector('.tooltip-inner');
+        var innerElem = elem.querySelector('.tooltip-inner')
         if (!innerElem) {
           if (angular.element(elem).hasClass('popover')) {
-            isTooltip = false;
+            isTooltip = false
           } else {
-            return;
+            return
           }
         }
 
-        var arrowElem = elem.querySelector('.arrow');
+        var arrowElem = elem.querySelector('.arrow')
         if (!arrowElem) {
-          return;
+          return
         }
 
         var arrowCss = {
@@ -637,56 +635,56 @@ angular.module('ui.bootstrap.position', [])
           bottom: '',
           left: '',
           right: ''
-        };
+        }
 
-        placement = this.parsePlacement(placement);
+        placement = this.parsePlacement(placement)
         if (placement[1] === 'center') {
-          var arrowElemOffset = this.offset(arrowElem, true);
+          var arrowElemOffset = this.offset(arrowElem, true)
           if (PLACEMENT_REGEX.vertical.test(placement[0])) {
-            var aHW = arrowElemOffset.width / 2;
-            var eHW = this.offset(elem).width / 2;
-            var left = eHW - aHW;
-            arrowCss.left = '' + left + 'px';
+            var aHW = arrowElemOffset.width / 2
+            var eHW = this.offset(elem).width / 2
+            var left = eHW - aHW
+            arrowCss.left = '' + left + 'px'
           } else {
-            var aHH = arrowElemOffset.height / 2;
-            var eHH = this.offset(elem).height / 2;
-            var top = eHH - aHH;
-            arrowCss.top = '' + top + 'px';
+            var aHH = arrowElemOffset.height / 2
+            var eHH = this.offset(elem).height / 2
+            var top = eHH - aHH
+            arrowCss.top = '' + top + 'px'
           }
         }
 
-        var borderProp = 'border-' + placement[0] + '-width';
-        var borderWidth = $window.getComputedStyle(arrowElem)[borderProp];
+        var borderProp = 'border-' + placement[0] + '-width'
+        var borderWidth = $window.getComputedStyle(arrowElem)[borderProp]
 
-        var borderRadiusProp = 'border-';
+        var borderRadiusProp = 'border-'
         if (PLACEMENT_REGEX.vertical.test(placement[0])) {
-          borderRadiusProp += placement[0] + '-' + placement[1];
+          borderRadiusProp += placement[0] + '-' + placement[1]
         } else {
-          borderRadiusProp += placement[1] + '-' + placement[0];
+          borderRadiusProp += placement[1] + '-' + placement[0]
         }
-        borderRadiusProp += '-radius';
-        var borderRadius = $window.getComputedStyle(isTooltip ? innerElem : elem)[borderRadiusProp];
+        borderRadiusProp += '-radius'
+        var borderRadius = $window.getComputedStyle(isTooltip ? innerElem : elem)[borderRadiusProp]
 
         if (isTooltip) {
           switch (placement[0]) {
             case 'top':
-              arrowCss.bottom = '0';
-              break;
+              arrowCss.bottom = '0'
+              break
             case 'bottom':
-              arrowCss.top = '0';
-              break;
+              arrowCss.top = '0'
+              break
             case 'left':
-              arrowCss.right = '0';
-              break;
+              arrowCss.right = '0'
+              break
             case 'right':
-              arrowCss.left = '0';
-              break;
+              arrowCss.left = '0'
+              break
           }
         }
 
-        arrowCss[placement[1]] = borderRadius;
+        arrowCss[placement[1]] = borderRadius
 
-        angular.element(arrowElem).css(arrowCss);
+        angular.element(arrowElem).css(arrowCss)
       }
-    };
-  }]);
+    }
+  }])

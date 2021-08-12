@@ -1,1 +1,1 @@
-require('./multiMap.js');
+require('./multiMap.js')

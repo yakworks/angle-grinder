@@ -10,7 +10,7 @@ import vButton from 'v-button'
 import filtersModule from '../filters'
 import alertsMod from './alerts'
 
-import ConfirmationDialogServ from './services/ConfirmationDialogServ'
+// import ConfirmationDialogServ from './services/ConfirmationDialogServ'
 import _ from 'lodash'
 
 const MOD_NAME = 'ag.common'
@@ -29,7 +29,7 @@ var common = angular.module(MOD_NAME, [
   alertsMod
 ])
 
-common.service('ConfirmationDialogServ', ConfirmationDialogServ)
+// common.service('ConfirmationDialogServ', ConfirmationDialogServ)
 
 // Decorates `$http.pendingRequests` with some useful features
 common.factory('pendingRequests', function($http) {

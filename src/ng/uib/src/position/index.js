@@ -1,2 +1,2 @@
-require('./position.css');
-module.exports = require('./index-nocss.js');
+require('./position.css')
+module.exports = require('./index-nocss.js')

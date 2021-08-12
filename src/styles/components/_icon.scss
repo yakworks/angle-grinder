@@ -6,12 +6,12 @@ $icon-dimensions-small: $size-14 !default;
   width: $icon-size;
 
   i.fa, i.far, i.fas, i.fal, i.fad {
-    padding: 1px;
+    // padding: 1px;
     font-size: calc(#{$icon-size} - 4px); //26px
     text-align: center;
   }
   i.mdi {
-    padding: 1px;
+    // padding: 1px;
     font-size: calc(#{$icon-size} - 2px); //26px
     text-align: center;
   }
@@ -19,14 +19,17 @@ $icon-dimensions-small: $size-14 !default;
 
 // change default fa and mdi font sizes
 .icon {
-  i.fa, i.far, i.fas, i.fal, i.fad, i.mdi {
+  i.fa, i.far, i.fas, i.fal, i.fad {
     padding: 1px;
-    // font-size: calc(#{$icon-dimensions} - 2px); //22px
+    font-size: calc(#{$icon-dimensions} - 4px); //22px
     text-align: center;
     line-height: 1;
+    // font-size: $icon-dimensions;
   }
   i.mdi {
     font-size: $icon-dimensions; //calc(#{$icon-dimensions} - 2px); //22px
+    text-align: center;
+    line-height: 1;
   }
 
   // add default so it can be changed back

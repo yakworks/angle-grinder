@@ -8,6 +8,8 @@ import toastMod from './toast'
 import tabsMod from './tabs'
 import iconsMod from './icons'
 import tilesDemoMod from './tiles'
+import listsDemoMod from './lists'
+import chartsDemoMod from './charts'
 // import modalsMod from './modals'
 
 // export module name
@@ -21,6 +23,8 @@ export default angular
     toastMod,
     tabsMod,
     iconsMod,
-    tilesDemoMod
+    tilesDemoMod,
+    listsDemoMod,
+    chartsDemoMod
   ])
   .name

@@ -19,12 +19,20 @@ const componentsStates = {
       component: 'dropdownDemoIndex'
     },
     {
+      name: 'charts',
+      component: 'chartsDemoIndex'
+    },
+    {
       name: 'contextMenu',
       component: 'contextMenuIndex'
     },
     {
       name: 'letter-icons',
       component: 'letterIcons'
+    },
+    {
+      name: 'lists',
+      component: 'listsDemoIndex'
     },
     {
       name: 'modals',

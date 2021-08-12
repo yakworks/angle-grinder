@@ -5,46 +5,46 @@
  */
 angular.module('ui.bootstrap.popover', ['ui.bootstrap.tooltip'])
 
-.directive('uibPopoverTemplatePopup', function() {
-  return {
-    restrict: 'A',
-    scope: { uibTitle: '@', contentExp: '&', originScope: '&' },
-    templateUrl: 'uib/template/popover/popover-template.html'
-  };
-})
+  .directive('uibPopoverTemplatePopup', function() {
+    return {
+      restrict: 'A',
+      scope: { uibTitle: '@', contentExp: '&', originScope: '&' },
+      templateUrl: 'uib/template/popover/popover-template.html'
+    }
+  })
 
-.directive('uibPopoverTemplate', ['$uibTooltip', function($uibTooltip) {
-  return $uibTooltip('uibPopoverTemplate', 'popover', 'click', {
-    placementClassPrefix: 'bs-popover-',
-    useContentExp: true
-  });
-}])
+  .directive('uibPopoverTemplate', ['$uibTooltip', function($uibTooltip) {
+    return $uibTooltip('uibPopoverTemplate', 'popover', 'click', {
+      placementClassPrefix: 'bs-popover-',
+      useContentExp: true
+    })
+  }])
 
-.directive('uibPopoverHtmlPopup', function() {
-  return {
-    restrict: 'A',
-    scope: { contentExp: '&', uibTitle: '@' },
-    templateUrl: 'uib/template/popover/popover-html.html'
-  };
-})
+  .directive('uibPopoverHtmlPopup', function() {
+    return {
+      restrict: 'A',
+      scope: { contentExp: '&', uibTitle: '@' },
+      templateUrl: 'uib/template/popover/popover-html.html'
+    }
+  })
 
-.directive('uibPopoverHtml', ['$uibTooltip', function($uibTooltip) {
-  return $uibTooltip('uibPopoverHtml', 'popover', 'click', {
-    placementClassPrefix: 'bs-popover-',
-    useContentExp: true
-  });
-}])
+  .directive('uibPopoverHtml', ['$uibTooltip', function($uibTooltip) {
+    return $uibTooltip('uibPopoverHtml', 'popover', 'click', {
+      placementClassPrefix: 'bs-popover-',
+      useContentExp: true
+    })
+  }])
 
-.directive('uibPopoverPopup', function() {
-  return {
-    restrict: 'A',
-    scope: { uibTitle: '@', content: '@' },
-    templateUrl: 'uib/template/popover/popover.html'
-  };
-})
+  .directive('uibPopoverPopup', function() {
+    return {
+      restrict: 'A',
+      scope: { uibTitle: '@', content: '@' },
+      templateUrl: 'uib/template/popover/popover.html'
+    }
+  })
 
-.directive('uibPopover', ['$uibTooltip', function($uibTooltip) {
-  return $uibTooltip('uibPopover', 'popover', 'click', {
-    placementClassPrefix: 'bs-popover-'
-  });
-}]);
+  .directive('uibPopover', ['$uibTooltip', function($uibTooltip) {
+    return $uibTooltip('uibPopover', 'popover', 'click', {
+      placementClassPrefix: 'bs-popover-'
+    })
+  }])
