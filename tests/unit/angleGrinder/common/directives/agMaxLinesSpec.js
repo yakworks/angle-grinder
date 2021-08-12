@@ -1,4 +1,4 @@
-import commonModule from 'angle-grinder/src/ng/common/directives'
+import commonModule from 'angle-grinder/src/ng/common'
 
 describe("module: angleGrinder.forms", function() {
 

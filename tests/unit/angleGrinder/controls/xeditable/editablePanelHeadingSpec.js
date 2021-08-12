@@ -4,7 +4,7 @@ describe("module: angleGrinder.forms", function() {
 
   beforeEach(angular.mock.module(module));
 
-  return describe("directive: editablePanelHeading", function() {
+  return xdescribe("directive: editablePanelHeading", function() {
     let $scope = null;
     let element = null;
 

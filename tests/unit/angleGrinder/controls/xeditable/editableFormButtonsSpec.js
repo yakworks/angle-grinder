@@ -1,6 +1,6 @@
 import module from 'angle-grinder/src/ng/controls/xeditable'
 
-describe("module: angleGrinder.forms", () => describe("directive: editableFormButtons", function() {
+xdescribe("module: angleGrinder.forms", () => describe("directive: editableFormButtons", function() {
 
   beforeEach(angular.mock.module(module));
 
