@@ -1,13 +1,13 @@
 import angular from 'angular'
 import localStoreGrid from './localStoreGrid'
 import customGridList from './customGridList'
-import legacyGridModule from './legacyGrid'
+//import legacyGridModule from './legacyGrid'
 import twoGrids from './twoGrids'
 
 const gapp = angular.module('demo.gridz', [
   localStoreGrid,
   customGridList,
-  legacyGridModule,
+  //legacyGridModule,
   twoGrids
 ])
 

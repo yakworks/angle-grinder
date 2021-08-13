@@ -92,5 +92,7 @@ angular.module(agValMod).provider('agValidationsConfig', function() {
     }
   }
   // use default validation strategy `dirtyOrSubmitted` to only show user required fields on submit or dirty
+  // if you show invalid then it pops the message as soon as it detects editing before user has a chance to enter something
   self.setDefaultValidationStrategy('dirtyOrSubmitted')
+  // self.setDefaultValidationStrategy('invalid')
 })

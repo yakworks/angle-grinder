@@ -60,6 +60,10 @@ clean:
 start.demo:
 	npx webpack-dev-server --mode=development --content-base ./examples/demo
 
+## starts the demo app
+build.demo:
+	npx rimraf dist && npx webpack --mode=production --content-base ./examples/demo
+
 # --------- ship, version, deploy ------------
 
 
@@ -67,5 +71,8 @@ start.demo:
 
 install-githooks:
 	git config core.hooksPath .githooks
+
+start.sandbox:
+	npx webpack-dev-server --mode=development --content-base ./examples/sandbox
 
 

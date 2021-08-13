@@ -3,9 +3,10 @@
 @import "bulma";
 
 // do overrides
-@import "base";
+// @import "base";
+@import "bs_hacks";
 @import "layout";
-@import "packet";
+// @import "packet";
 @import "utilities";
 @import "components";
 @import "forms";

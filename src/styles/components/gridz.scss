@@ -81,12 +81,6 @@ $grid-border: $border;
       span.ui-jqgrid-resize {
         height: 45px !important;
       }
-      div {
-        padding-top: 12px;
-        padding-bottom: 12px;
-        overflow: visible;
-        height: auto;
-      }
     }
     th[id$=_cb] {
       border: none;

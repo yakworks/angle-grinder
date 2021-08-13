@@ -19,7 +19,7 @@ $list-active-color: $secondary !default;
   position: relative;
 }
 
-.list .list-items {
+.list .list-item-set {
   margin: 0;
   padding: 0;
   // max-width: 400px;
@@ -28,7 +28,7 @@ $list-active-color: $secondary !default;
   // font-family: "Open Sans", sans-serif !important;
 }
 
-.list .list-items .list-item {
+.list .list-item-set .list-item {
   position: relative;
 
   .item-content {
@@ -66,11 +66,12 @@ $list-active-color: $secondary !default;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      flex-grow: 1;
     }
   }
 }
 
-.list .list-items .list-item.has-children {
+.list .list-item-set .list-item.has-children {
   // dropdown arrow
   > .item-content::after {
     @extend %arrow;
@@ -100,20 +101,21 @@ $list-active-color: $secondary !default;
   }
 
   // first child item group
-  > .list-items {
+  > .list-item-set{
     display: none;
   }
 
   // submenu list item children
-  .list-items {
+  .list-item-set {
     padding: 0px;
 
     .list-item {
       .item-content {
         color: $white;
-        background-color: darken($dark-grey, 5%);
+        /* FIXME these need to be moved as they are sidenave specific */
+        background-color: darken($sidenav-background-color, 5%);
         padding-left: 72px;
-        border-bottom: 1px solid darken($dark-grey, 2%);
+        border-bottom: 1px solid darken($sidenav-background-color, 2%);
         font-size: 1rem;
 
         &.is-active {
@@ -124,6 +126,6 @@ $list-active-color: $secondary !default;
         }
       }
     }
-  } // sub .list-items
+  } // sub .list-item-set
 } // .list-item.has-children
 

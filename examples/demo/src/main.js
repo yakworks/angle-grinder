@@ -27,8 +27,6 @@ import './controllers/bootstrapCtrl'
 import './controllers/chatCtrl'
 
 // UI Demo
-import './ui/tabs'
-import './ui/alerts'
 import './grids'
 
 $log.debugEnabled(true)

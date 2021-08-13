@@ -1,5 +1,5 @@
 const template = `
-<uib-tabset class="tabbable" active="active">
+<uib-tabset >
   <uib-tab index="0" heading="html" ng-if="$ctrl.rawHtml">
     <div hljs hljs-source="$ctrl.rawHtml" hljs-language="html" class="hljs-container"></div>
   </uib-tab>

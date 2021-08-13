@@ -1,9 +1,13 @@
 // used in the xeditable panels
+
 .input-underline {
   .ag-datepicker input,
   textarea,
   select,
   input {
+    height: $input-height;
+    font-size: $size-normal;
+    line-height: $control-line-height;
     background: none !important;
     background-image: none !important;
     border-bottom: 1px solid transparent !important;
@@ -16,7 +20,7 @@
     transition-duration: 0.1s !important;
     box-shadow: none !important;
     padding: 0 0 0 6px;
-    @include transition (border 300ms ease-out);
+    transition: border 300ms ease-out;
 
     &:hover {
       border-bottom: 1px solid transparent !important;
@@ -28,6 +32,7 @@
         border-bottom: 1px solid transparent !important;
         //border-color: $link !important;
         background-color: none !important;
+        outline: none;
     }
   }
   .select2-container-multi .select2-choices, .select2-container .select2-choice {
@@ -35,7 +40,6 @@
     //border-radius: 0 0 0 0 !important;
     &:hover {
       border-bottom: 1px solid transparent !important;
-      //border-bottom: 1px solid darken($border-default, 10%) !important;
     }
   }
 

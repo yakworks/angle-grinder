@@ -26,6 +26,23 @@ $select2-font-size: 14px;
   margin-right: 5px;
 }
 
+@mixin border-top-radius($radius) {
+  border-top-left-radius: $radius;
+  border-top-right-radius: $radius;
+}
+@mixin border-right-radius($radius) {
+  border-top-right-radius: $radius;
+  border-bottom-right-radius: $radius;
+}
+@mixin border-bottom-radius($radius) {
+  border-bottom-right-radius: $radius;
+  border-bottom-left-radius: $radius;
+}
+@mixin border-left-radius($radius) {
+  border-top-left-radius: $radius;
+  border-bottom-left-radius: $radius;
+}
+
 .select2-container .select2-choices .select2-search-field input,
 .select2-container .select2-choice,
 .select2-container .select2-choices {
@@ -171,7 +188,8 @@ $select2-font-size: 14px;
   padding-bottom: $control-padding-vertical ;
   padding-left: $control-padding-horizontal;
   padding-right: $control-padding-horizontal;
-  margin: 0px
+  margin: 0px;
+  line-height: inherit;
 }
 
 /**
@@ -201,8 +219,7 @@ $select2-font-size: 14px;
   border-color: $input-focus-border-color;
   box-shadow: $input-focus-box-shadow-size $input-focus-box-shadow-color;
   outline: none;
-  $transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
-  @include transition($transition);
+  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
 }
 
 

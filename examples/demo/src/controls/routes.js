@@ -1,5 +1,5 @@
 const formStates = {
-  name: 'controls',
+  name: 'form-controls',
   template: '<div ui-view class="fade-in-up"></div>',
   data: {
     icon: 'mdi mdi-id-card'
@@ -53,14 +53,6 @@ const formStates = {
     {
       name: 'validations',
       component: 'validationDemoIndex'
-    },
-    {
-      name: 'horizontal-sandbox',
-      template: require('./horizontal-sandbox/index.html')
-    },
-    {
-      name: 'select2-sandbox',
-      component: 'select2DemoIndex'
     }
   ]
 }

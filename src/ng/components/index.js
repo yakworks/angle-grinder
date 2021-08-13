@@ -4,13 +4,15 @@ import agDropdown from './dropdown'
 import agToolbar from './toolbar'
 import rippleModule from './button/ripple'
 import contextMenuModule from './contextMenu'
+import apexCharts from './apexCharts'
 
 const MOD_NAME = 'ag.components'
 export default MOD_NAME
 
 angular.module(MOD_NAME, [
   rippleModule,
-  contextMenuModule
+  contextMenuModule,
+  apexCharts
 ])
   .directive('agButton', agButton)
   .directive('agDropdown', agDropdown)

@@ -1,6 +1,5 @@
 import angular from 'angular'
 import ngRoute from 'angular-route'
-import uibModName from 'angular-ui-bootstrap'
 import ngScroll from 'angular-scroll'
 import ngcookies from 'angular-cookies'
 import ngAnimate from 'angular-animate'
@@ -9,26 +8,27 @@ import ngLoadingBar from 'angular-loading-bar'
 import 'angular-breadcrumb'
 import vButton from 'v-button'
 import filtersModule from '../filters'
+import alertsMod from './alerts'
+import uiRouter from 'angular-ui-router'
 
-import ConfirmationDialogServ from './services/ConfirmationDialogServ'
 import _ from 'lodash'
 
 const MOD_NAME = 'ag.common'
 export default MOD_NAME
 var common = angular.module(MOD_NAME, [
-  uibModName,
+  // uibModName,
   ngRoute,
   ngcookies,
   ngAnimate,
   ngSanitize,
   ngLoadingBar,
+  uiRouter,
   'ncy-angular-breadcrumb',
   vButton,
   ngScroll, // Scroll
-  filtersModule
+  filtersModule,
+  alertsMod
 ])
-
-common.service('ConfirmationDialogServ', ConfirmationDialogServ)
 
 // Decorates `$http.pendingRequests` with some useful features
 common.factory('pendingRequests', function($http) {
@@ -50,9 +50,11 @@ common.factory('pendingRequests', function($http) {
 common.config(['$locationProvider', $locationProvider => $locationProvider.hashPrefix('')])
 
 // FIX the bad location on popover
+/*
 common.config(function($uibTooltipProvider) {
   $uibTooltipProvider.options({ appendToBody: true })
 })
+*/
 
 // Angular-breadcrumb
 common.config(function($breadcrumbProvider) {

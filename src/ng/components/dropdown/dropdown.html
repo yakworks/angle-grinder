@@ -5,30 +5,52 @@
   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     <ng-transclude></ng-transclude>
   </ag-button>
-  <ul class="dropdown-menu {{dropCtrl.menuClass}}">
-    <li ng-repeat="menuItem in dropCtrl.menuItems" ng-class="{ divider: menuItem.divider }" class="{{menuItem.class}}">
-      <a ng-if="!menuItem.divider" ng-click="dropCtrl.fireMenuClick(menuItem, $event)">
-        <span ng-if="menuItem.icon" class="icon is-small mr-1">
-          <i class="{{dropCtrl.getIconClass(menuItem.icon)}}"></i>
-        </span>
-        <span ng-bind-html="menuItem.display" ></span>
-      </a>
-    </li>
-    <!-- <li role="separator" class="divider"></li> -->
-  </ul>
+  <div class="dropdown-menu {{dropCtrl.menuClass}}">
+    <div class="dropdown-content">
+      <ul class="dropdown-menu-list">
+        <li ng-repeat="menuItem in dropCtrl.menuItems" ng-class="{ divider: menuItem.divider }" class="{{menuItem.class}}">
+          <a ng-if="!menuItem.divider" ng-click="dropCtrl.fireMenuClick(menuItem, $event)">
+            <span ng-if="menuItem.icon" class="icon is-small mr-1">
+              <i class="{{dropCtrl.getIconClass(menuItem.icon)}}"></i>
+            </span>
+            <span ng-bind-html="menuItem.display" ></span>
+          </a>
+        </li>
+        <!-- <li role="separator" class="divider"></li> -->
+      </ul>
+    </div>
+  </div>
 </div>
 
-<!-- BS4 Future use -->
-<!-- <div class="dropdown">
-    <button type="button" data-toggle="dropdown" class="btn btn-secondary dropdown-toggle" aria-haspopup="true" aria-expanded="false">
-        <span class="placeholder">{{ ::$ctrl.menuDisplay }}</span>
+<!-- TODO BULMA -->
+<!--
+<div class="dropdown is-active">
+  <div class="dropdown-trigger">
+    <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
+      <span>Dropdown button</span>
+      <span class="icon is-small">
+        <i class="fas fa-angle-down" aria-hidden="true"></i>
+      </span>
     </button>
-
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <a class="dropdown-item"
-           ng-repeat="menuAction in $ctrl.menuActions"
-           ng-bind-html="menuAction.display"
-           ng-click="menuAction.action()">
-        </a>
+  </div>
+  <div class="dropdown-menu" id="dropdown-menu" role="menu">
+    <div class="dropdown-content">
+      <a href="#" class="dropdown-item">
+        Dropdown item
+      </a>
+      <a class="dropdown-item">
+        Other dropdown item
+      </a>
+      <a href="#" class="dropdown-item is-active">
+        Active dropdown item
+      </a>
+      <a href="#" class="dropdown-item">
+        Other dropdown item
+      </a>
+      <hr class="dropdown-divider">
+      <a href="#" class="dropdown-item">
+        With a divider
+      </a>
     </div>
+  </div>
 </div> -->

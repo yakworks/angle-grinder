@@ -8,48 +8,59 @@
   </ag-button>
   <br/>
   <br/>
-  <div class="list-group">
-      <a href="#"
-         class="list-group-item"
-         ng-repeat="item in $ctrl.items"
-         context-menu="$ctrl.fullMontyMenuOptions"
-         context-menu-empty-text="'SOME TEXT FOR EMPTY'">
-          <span class="badge">{{item.cost}}</span>
-          {{item.name}}
-      </a>
+  <div class="card w-50 mb-4">
+    <div editable-card-heading="editForm">Supplies</div>
+    <div class="card-content p-0">
+      <div class="list">
+        <div class="list-item-set">
+          <div class="list-item"
+          ng-repeat="item in $ctrl.items"
+          context-menu="$ctrl.fullMontyMenuOptions">
+            <a class="item-content" context-menu="$ctrl.fullMontyMenuOptions" >
+              <span class="icon">
+                <i class="{{item.icon}}"></i>
+              </span>
+              <span class="title"> {{item.name}} </span>
+              <span class="tag is-primary is-light mr-3">{{item.cost}}</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <button class="btn btn-default"
+
+  <button class="button"
           context-menu="$ctrl.menuOptionsObject"
           context-menu-click="$ctrl.contextMenuClick"
           context-menu-model="'foo bar'"
           context-menu-on="click, contextmenu"
           >Left or Right Click</button>
 
-  <br/>
-  <br/>
-  <button class="btn btn-default"
+  <br>
+  <br>
+  <button class="button"
           context-menu="$ctrl.otherMenuOptions"
           context-menu-orientation="left"
           model="'Blue'">Left oriented context menu</button>
 
   <br/>
   <br/>
-  <button class="btn btn-default"
+  <button class="button"
           context-menu="$ctrl.otherMenuOptions"
           allow-event-propagation="true"
           model="'Blue'">Right Click allow event propagation</button>
 
   <br/>
   <br/>
-  <button class="btn btn-default"
+  <button class="button"
           context-menu="$ctrl.otherMenuOptions"
           context-menu-on="click"
           model="'Red'">Left Click</button>
 
   <br/>
   <br/>
-  <button class="btn btn-default"
+  <button class="button"
           context-menu="$ctrl.customHTMLOptions"
           >Custom HTML</button>
 

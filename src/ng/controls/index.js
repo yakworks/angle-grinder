@@ -19,6 +19,7 @@ import agValMod from './ag-validation'
 import agTextarea from './ag-textarea'
 import agAmount from './ag-amount'
 import agOkCancel from './ag-ok-cancel'
+import agXeditable from './xeditable'
 
 // import InputPasswordComponent from './ag-password/input-password.component'
 // import StringUtility from './string-utility';
@@ -30,7 +31,8 @@ angular.module(MOD_NAME, [
   agFormMod,
   agFormlyMod,
   uiSelect2Mod,
-  agValMod
+  agValMod,
+  agXeditable
 ])
   .directive('agCheckbox', agCheckbox)
   .directive('agLabel', agLabel)

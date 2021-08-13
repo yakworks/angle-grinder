@@ -10,6 +10,7 @@ $toolbar-icon-button-size: 3rem !default;
 $toolbar-border: $border !default;
 
 //dense
+$toolbar-dense-icon-size-fa: calc(1.25em - 4px) !default;
 $toolbar-dense-icon-size: calc(1.25em - 2px) !default;
 $toolbar-dense-icon-button-size: 2.5rem !default;
 $toolbar-dense-control-height: 2rem !default;
@@ -108,7 +109,10 @@ $toolbar-dense-control-height: 2rem !default;
           margin: 0;
           height: $toolbar-dense-icon-size;
           width: $toolbar-dense-icon-size;
-          i.fa {
+          i.fas, i.far, i.fab {
+            font-size: $toolbar-dense-icon-size-fa;
+          }
+          i.mdi{
             font-size: $toolbar-dense-icon-size;
           }
         }

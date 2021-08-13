@@ -64,6 +64,6 @@ export default () => ({
     isDisabled: '<',
     // size: '@',
     buttonClick: '=',
-    type: '@'
+    btnType: '@'
   }
 })

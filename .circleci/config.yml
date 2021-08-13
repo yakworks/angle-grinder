@@ -10,9 +10,9 @@ jobs:
 
     steps:
       - checkout
-      # - run: apk add yarn
       - restore_cache:
           key: dependency-cache-{{ checksum "yarn.lock" }}
+      - run: apk add yarn
       - run: make install
       - save_cache:
           key: dependency-cache-{{ checksum "yarn.lock" }}

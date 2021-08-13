@@ -4,6 +4,13 @@ import buttonModule from './button'
 import toolbarModule from './toolbar'
 import contextMenuMod from './contextMenu'
 import sweetalertMod from './sweetalert'
+import toastMod from './toast'
+import tabsMod from './tabs'
+import iconsMod from './icons'
+import tilesDemoMod from './tiles'
+import listsDemoMod from './lists'
+import chartsDemoMod from './charts'
+// import modalsMod from './modals'
 
 // export module name
 export default angular
@@ -12,6 +19,12 @@ export default angular
     dropdownModule,
     toolbarModule,
     contextMenuMod,
-    sweetalertMod
+    sweetalertMod,
+    toastMod,
+    tabsMod,
+    iconsMod,
+    tilesDemoMod,
+    listsDemoMod,
+    chartsDemoMod
   ])
   .name
