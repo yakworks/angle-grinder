@@ -1,8 +1,8 @@
-import formsModule from 'angle-grinder/src/ng/legacy/forms'
+import commonModule from 'angle-grinder/src/ng/common'
 
 describe("module: angleGrinder.forms", function() {
 
-  beforeEach(angular.mock.module(formsModule));
+  beforeEach(angular.mock.module(commonModule));
 
   let $scope = null;
 

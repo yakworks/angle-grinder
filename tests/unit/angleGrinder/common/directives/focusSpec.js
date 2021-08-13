@@ -1,9 +1,9 @@
-import formsModule from 'angle-grinder/src/ng/legacy/forms'
-import compileTemplate from '../../helpers/compileTemplate'
+import commonModule from 'angle-grinder/src/ng/common'
+import compileTemplate from '../../../helpers/compileTemplate'
 
 describe("module: angleGrinder.forms", function() {
 
-  beforeEach(angular.mock.module(formsModule));
+  beforeEach(angular.mock.module(commonModule));
 
   describe("service: focus", function() {
 

@@ -1,7 +1,7 @@
-import formsModule from 'angle-grinder/src/ng/legacy/forms'
+import commonModule from 'angle-grinder/src/ng/common/directives'
 
-describe("module: angleGrinder.forms directive: autofillPrevent", function() {
-  beforeEach(angular.mock.module(formsModule));
+xdescribe("module: angleGrinder.forms directive: autofillPrevent", function() {
+  beforeEach(angular.mock.module(commonModule));
 
   let element = null;
   let $scope = null;

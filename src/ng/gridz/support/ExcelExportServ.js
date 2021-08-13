@@ -43,7 +43,7 @@ XlsTemplateClass.$inject = ['$window']
 gridz.service('xlsTemplate', XlsTemplateClass)
 
 class GridDataClass {
-  constructor($document, $sanitize) {
+  constructor($document) {
     const findGridEl = gridId => $document.find(`div#gbox_${gridId}`)
 
     const prepareHeading = function(gridId) {
@@ -112,7 +112,7 @@ class GridDataClass {
   }
 }
 
-GridDataClass.$inject = ['$document', '$sanitize']
+GridDataClass.$inject = ['$document']
 gridz.service('gridData', GridDataClass)
 
 class XlsDataClass {

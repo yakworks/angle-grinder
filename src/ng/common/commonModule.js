@@ -9,6 +9,7 @@ import 'angular-breadcrumb'
 import vButton from 'v-button'
 import filtersModule from '../filters'
 import alertsMod from './alerts'
+import uiRouter from 'angular-ui-router'
 
 import _ from 'lodash'
 
@@ -21,6 +22,7 @@ var common = angular.module(MOD_NAME, [
   ngAnimate,
   ngSanitize,
   ngLoadingBar,
+  uiRouter,
   'ncy-angular-breadcrumb',
   vButton,
   ngScroll, // Scroll
@@ -48,9 +50,11 @@ common.factory('pendingRequests', function($http) {
 common.config(['$locationProvider', $locationProvider => $locationProvider.hashPrefix('')])
 
 // FIX the bad location on popover
+/*
 common.config(function($uibTooltipProvider) {
   $uibTooltipProvider.options({ appendToBody: true })
 })
+*/
 
 // Angular-breadcrumb
 common.config(function($breadcrumbProvider) {
