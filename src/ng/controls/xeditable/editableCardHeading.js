@@ -13,11 +13,11 @@ app.directive('editableCardHeading', [
     template: `\
     <header class="card-header">
       <p class="card-header-title" ng-transclude></p>
-      <button class="card-header-icon" aria-label="edit"
+      <ag-button button-class="card-header-icon"
+        ng-if="!form.$visible"
         ng-click="form.$show()"
-        ng-if="!form.$visible">
-        <span class="icon is-small"><i class="far fa-edit"></i></span>
-      </button>
+        icon="mdi mdi-pencil-outline">
+      </ag-button>
     </header>
     `
   })

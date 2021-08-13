@@ -4,6 +4,21 @@
 /* setting up some of these early here so we can use them before importing the Bulma scss
 /* ---------------------------------------------------------------------- */
 
+// spacing consitency, material-ish.
+// $sp-base is the base. can be adjusted to whatever and others will ratio accordingly
+// these are for gutters, margins, padding. want to keep it seperate from rem font size but could be tied by
+// setting sp-base to 1 rem.
+$sp-base: 16px !default
+$sp-16: $sp-base !default
+$sp-4: $sp-base * 0.25 !default
+$sp-8: $sp-base * 0.5 !default
+$sp-10: $sp-base* 0.625 !default
+$sp-12: $sp-base * 0.75 !default
+$sp-32: $sp-base * 2 !default
+$sp-36: $sp-base * 2.25 !default
+$sp-40: $sp-base * 2.5 !default
+$sp-48: $sp-base * 3 !default
+
 // base material item sizes and spacing
 $icon-dimensions: 1.5rem !default // ~24px
 

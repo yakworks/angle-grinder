@@ -25,7 +25,7 @@ $list-item-padding: 0 16px !default;
 $list-item-action-margin: 12px 0 !default;
 $list-item-avatar-horizontal-margin: 8px !default;
 
-$list-color: $text !default;
+// $list-color: $text !default;
 $list-hover-color: $secondary !default;
 $list-active-color: $secondary !default;
 
@@ -60,7 +60,7 @@ $list-dense-content-padding: 8px 0 !default;
     align-items: center;
     padding: $list-item-padding;
     text-decoration: none;
-    color: $list-color;
+    // color: $list-color;
     min-height: $list-item-min-height;
 
     .item-action {
@@ -103,6 +103,7 @@ $list-dense-content-padding: 8px 0 !default;
 
     .item-subtitle {
       font-size: .875rem;
+      color: $text-light;
     }
 
     .item-content {

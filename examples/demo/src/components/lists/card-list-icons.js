@@ -10,9 +10,9 @@ class controller {
 
 const template = `
 <div class="tile is-child card">
-  <div editable-card-heading="editForm">Standard List</div>
+  <div editable-card-heading="editForm">{{vm.title}}</div>
   <div class="card-content p-0">
-    <section class="listify">
+    <section class="listify {{vm.listClass}}">
       <div class="list-item-set">
         <div class="list-item" ng-repeat="item in vm.items">
           <div class="item-icon">
@@ -21,8 +21,12 @@ const template = `
           <div class="item-content">
             <span class="item-title"> {{item.name}} </span>
           </div>
+          <!-- <div class="item-action">
+             <span class="tag is-primary is-light">{{item.cost}}</span>
+           </div> -->
           <div class="item-action">
-            <span class="tag is-primary is-light">{{item.cost}}</span>
+            <ag-button button-class="" icon="mdi mdi-information">
+            </ag-button>
           </div>
         </div>
       </div>
@@ -31,8 +35,12 @@ const template = `
 </div>
 `
 export default () => ({
+  scope: {
+    listClass: '@',
+    title: '@'
+  },
   replace: true,
-  scope: {},
+  bindToController: true,
   controllerAs: 'vm',
   template: template,
   controller: controller

@@ -1,20 +1,17 @@
 import template from './component.html'
-import cardList from './card-list'
+import cardListBasic from './card-list-basic'
+import cardListIcons from './card-list-icons'
 import cardListDense from './card-list-dense'
 import cardListLong from './card-list-long'
 
 const comps = angular.module('ag.demo.listsComps', [])
-  .directive('cardList', cardList)
+  .directive('cardListIcons', cardListIcons)
   .directive('cardListDense', cardListDense)
   .directive('cardListLong', cardListLong)
+  .directive('cardListBasic', cardListBasic)
   .name
 
 class controller {
-  items = [
-    { name: 'Health Potion', cost: 4, icon: 'fas fa-flask' },
-    { name: 'Mana Potion', cost: 5, icon: 'mdi mdi-flask-outline' },
-    { name: 'Iron Sword', cost: 12, icon: 'mdi mdi-sword' }
-  ]
 }
 
 export default angular.module('ag.demo.listsDemo', [

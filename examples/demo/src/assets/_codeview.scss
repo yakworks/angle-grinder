@@ -120,28 +120,8 @@
     background-color: transparent;
     max-height: inherit;
   }
-  .nav-tabs > li > a {
-    border: none;
-    font-size: 13px;
-    padding: 5px 10px 0 10px;
-    text-decoration: underline !important;
-  }
-  .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover,
-  .nav-tabs > li.active > a:focus {
-    //background-color: #2b2b2b;
-    color: #666;
-    border: none;
-    background-color: transparent;
-    text-decoration: none !important;
-  }
-  .nav.nav-tabs {
-    margin-bottom: 7px;
-  }
-  .nav-tabs {
-    border-bottom: none;
-  }
-  .nav {
-    padding-left: 5px;
+  .tabs {
+    margin-bottom: 0;
   }
   .hljs {
     padding: 1em;
