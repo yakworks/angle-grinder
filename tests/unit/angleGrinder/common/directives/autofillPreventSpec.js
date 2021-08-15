@@ -1,6 +1,6 @@
-import commonModule from 'angle-grinder/src/ng/common/directives'
+import commonModule from 'angle-grinder/src/ng/common'
 
-xdescribe("module: angleGrinder.forms directive: autofillPrevent", function() {
+describe("module: angleGrinder.forms directive: autofillPrevent", function() {
   beforeEach(angular.mock.module(commonModule));
 
   let element = null;

@@ -4,7 +4,7 @@ describe("module: angleGrinder.forms", function() {
 
   beforeEach(angular.mock.module(module));
 
-  return xdescribe("directive: editablePanelHeading", function() {
+  return describe("directive: editableCardHeading", function() {
     let $scope = null;
     let element = null;
 
@@ -17,7 +17,7 @@ describe("module: angleGrinder.forms", function() {
       };
 
       element = angular.element(`\
-<div editable-panel-heading="form">Foo bar</div>\
+<div editable-card-heading="form">Foo bar</div>\
 `
       );
       $compile(element)($scope);
@@ -25,24 +25,24 @@ describe("module: angleGrinder.forms", function() {
     })
     );
 
-    it("has the heading", () => expect(element.hasClass("panel-heading")).to.be.true);
+    it("has the heading", () => expect(element.hasClass("card-header")).to.be.true);
 
-    it("has the title", () => expect(element.find("h4.panel-title").text()).to.contain("Foo bar"));
+    it("has the title", () => expect(element.find(".card-header-title").text()).to.contain("Foo bar"));
 
     return describe("edit button", function() {
 
-      it("is visible", () => expect(element.find("a.pull-right").length).to.eq(1));
+      it("shouldn be visible", () => expect(element.find(".icon.is-solo").length).to.eq(0));
 
       describe("on click", function() {
         beforeEach(() => element.find("a.pull-right").click());
 
-        return it("shows the form", () => expect($scope.form.$show).to.have.been.called);
+        return xit("shows the form", () => expect($scope.form.$show).to.have.been.called);
       });
 
       return describe("when the form is visible", function() {
         beforeEach(() => $scope.$apply("form.$visible = true"));
 
-        return it("is hidden", () => expect(element.find("a.pull-right").length).to.eq(0));
+        return it("is hidden", () => expect(element.find(".icon.is-solo").length).to.eq(0));
       });
     });
   });
