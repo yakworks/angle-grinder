@@ -4,4 +4,3 @@ angular.module('uib/template/tooltip/tooltip-html-popup.html', []).run(['$templa
     '<div class="tooltip-inner" ng-bind-html="contentExp()"></div>\n' +
     '')
 }])
-
