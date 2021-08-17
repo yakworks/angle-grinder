@@ -14,26 +14,31 @@ $sp-4: $sp-base * 0.25 !default
 $sp-8: $sp-base * 0.5 !default
 $sp-10: $sp-base* 0.625 !default
 $sp-12: $sp-base * 0.75 !default
+$sp-18: $sp-base * 1.125 !default
+$sp-20: $sp-base * 1.25 !default
+$sp-24: $sp-base * 1.5 !default
 $sp-32: $sp-base * 2 !default
 $sp-36: $sp-base * 2.25 !default
 $sp-40: $sp-base * 2.5 !default
 $sp-48: $sp-base * 3 !default
+$sp-56: $sp-base * 3.5 !default
 
 // base material item sizes and spacing
-$icon-dimensions: 1.5rem !default // ~24px
+$icon-dimensions: $sp-24 !default // ~24px
 
 // side nav
 $sidenav-background-color: #344258 //ends up as sidebar default
 
-// items, used in list items, sidenave, xedit, etc...
-// loosely sticking to material spacing for consitency
-$item-height: 3.5rem !default // 56px
-$item-min-height: 3rem !default // 48px
-// $item-button-height is for buttons, checks, etc
-$item-control-height: 2.25rem !default // 36px
-$item-margin: 1rem !default //16px
+// items, used in list items, sidenave, xedit, toolbar, etc...
+// loosely sticking to material spacing for consitency but making "dense" the default
+$item-height: $sp-48 !default // 48px
+$item-min-height: $sp-48 !default // 48px
+$item-margin: $sp-16 !default //16px
+
+$control-height: $sp-40 !default // 40px
+
 // list
-$list-has-children-indent: $item-margin + $icon-dimensions + $item-margin + $item-margin !default //72px
+$list-has-children-indent: $item-margin * 3 + $icon-dimensions !default //72px
 
 // toolbars
 $bar-breakpoint-height: 3.5rem !default // 56px for mobile and tablet

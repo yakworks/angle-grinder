@@ -175,7 +175,7 @@ $sidenav-header-logo-tablet-height: $bar-breakpoint-height - 2rem !default; // 2
                 .item-content {
                   background-color: darken($sidenav-background-color, 8%);
                   border-bottom-color: darken($sidenav-background-color, 4%);
-                  padding-left: $list-has-children-indent + 1rem;
+                  padding-left: calc($list-has-children-indent + 1rem);
                   //border-left: 1px solid lighten($sidenav-nav-active-color, 10%);
                 }
               }

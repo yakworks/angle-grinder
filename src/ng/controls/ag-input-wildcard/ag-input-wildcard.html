@@ -23,7 +23,7 @@
       <a class="icon is-right is-clickable" uib-tooltip="{{$ctrl.wildcard ? 'Disable Wildcard' : 'Enable Wildcard'}}"
         ng-class="{'is-active': $ctrl.wildcard && $ctrl.value}"
         ng-click="$ctrl.toggleWildcard()">
-        <i class="fas fa-asterisk fa-xs"></i>
+        <i class="fas fa-asterisk" style="font-size:12px"></i>
       </a>
     </div>
     <div class="control" ng-if="$ctrl.hasTranscluded" ng-transclude>

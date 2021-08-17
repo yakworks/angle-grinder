@@ -11,7 +11,7 @@ $toolbar-border: $border !default;
 
 //dense
 $toolbar-dense-icon-size-fa: calc(1.25em - 4px) !default;
-$toolbar-dense-icon-size: calc(1.25em - 2px) !default;
+$toolbar-dense-icon-size: calc(1.5em - 2px) !default;
 $toolbar-dense-icon-button-size: 2.5rem !default;
 $toolbar-dense-control-height: 2rem !default;
 
@@ -41,8 +41,8 @@ $toolbar-dense-control-height: 2rem !default;
       color: $toolbar-icon-color;
       &.is-solo, &.is-solo:last-child  {
         margin: 0;
-        height: $toolbar-icon-size;
-        width: $toolbar-icon-size;
+        // height: $toolbar-icon-size;
+        // width: $toolbar-icon-size;
       }
     }
     // &.is-focused,
@@ -107,8 +107,8 @@ $toolbar-dense-control-height: 2rem !default;
       .icon {
         &.is-solo, &.is-solo:last-child  {
           margin: 0;
-          height: $toolbar-dense-icon-size;
-          width: $toolbar-dense-icon-size;
+          // height: $toolbar-dense-icon-size;
+          // width: $toolbar-dense-icon-size;
           i.fas, i.far, i.fab {
             font-size: $toolbar-dense-icon-size-fa;
           }

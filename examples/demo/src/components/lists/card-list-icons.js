@@ -24,10 +24,14 @@ const template = `
           <!-- <div class="item-action">
              <span class="tag is-primary is-light">{{item.cost}}</span>
            </div> -->
+          <ag-button button-class="" icon="mdi mdi-dots-vertical">
+          <!--
+
           <div class="item-action">
-            <ag-button button-class="" icon="mdi mdi-information">
+            <ag-button button-class="" icon="mdi mdi-dots-vertical">
             </ag-button>
           </div>
+          -->
         </div>
       </div>
     </section>

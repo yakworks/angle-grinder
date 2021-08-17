@@ -78,6 +78,10 @@ $list-dense-content-padding: 8px 0 !default;
       margin-top: $list-spacing * 2;
     }
 
+    .button.is-icon-button:last-child  {
+      margin-right: -$sp-12;
+    }
+
     .item-action, .item-avatar, .item-icon {
       display: inline-flex;
       min-width: 24px;
