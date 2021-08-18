@@ -1,10 +1,10 @@
 <div class="manage-columns-modal">
-  <div class="modal-header">
-    <button type="button" class="close" ng-click="$ctrl.cancel()">&times;</button>
-    <h3>Manage Columns</h3>
+  <div class="modal-card-head">
+    <span class="modal-card-title">Manage Columns</span>
+    <button class="delete" aria-label="close" ng-click="$ctrl.cancel()"></button>
   </div>
 
-  <div class="modal-body">
+  <div class="modal-card-body">
     <div ng-repeat="(listName, list) in $ctrl.gridColumns" class="col-md-6">
       <div class="panel panel-info">
         <div class="panel-heading">
@@ -22,9 +22,10 @@
       </div>
     </div>
   </div>
+  <footer class="modal-card-foot">
+    <ag-ok-cancel ok-label="Save" ok-click="$ctrl.save()" cancel-click="$ctrl.cancel()"
+                  is-loading="dlgCtrl.isSaving">
+    </ag-ok-cancel>
+  </footer>
 
-  <div class="modal-footer">
-    <div class="btn btn-default btn-primary" ng-click="$ctrl.save()"><i class="fas fa-check fa-inverse"></i> Save</div>
-    <ag-cancel-button ng-click="$ctrl.cancel()"></ag-cancel-button>
-  </div>
 </div>

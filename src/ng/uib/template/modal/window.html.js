@@ -2,7 +2,7 @@ angular.module('uib/template/modal/window.html', []).run(['$templateCache', func
   $templateCache.put('uib/template/modal/window.html', `
     <div class="modal-dialog {{size ? 'modal-' + size : ''}}">
       <div class="modal-background"></div>
-      <div class=\"modal-content\" uib-modal-transclude></div>
+      <div class="modal-content" uib-modal-transclude></div>
     </div>
     `)
 }])
