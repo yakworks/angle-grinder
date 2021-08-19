@@ -7,7 +7,7 @@ $card-shadow: $shadow !default
 $card-radius: $radius-large !default
 
 // --- materialish card title, inspired by vuetify
-$card-title-adjacent-sibling-subtitle-margin-top: -$sp-16 !default;
+$card-title-adjacent-sibling-subtitle-margin-top: -$item-margin !default;
 $card-title-adjacent-sibling-subtitle-text-padding-top: 0 !default;
 $card-adjacent-sibling-text-padding-top: 0 !default;
 $card-title-font-size: $size-18 !default
@@ -15,12 +15,12 @@ $card-title-font-weight: $weight-medium !default
 // $card-title-letter-spacing: map-deep-get($headings, 'h6', 'letter-spacing') !default;
 // $card-title-line-height: map-deep-get($headings, 'h6', 'line-height') !default;
 
-$card-subtitle-padding: $sp-16 !default
+$card-subtitle-padding: $item-margin !default
 
 // ------
 $card-header-background-color: transparent !default
 $card-header-color: $text-strong !default
-$card-header-padding: $sp-4 $sp-16 !default
+$card-header-padding: $sp-4 $item-margin !default
 // $card-header-shadow: 0 0.125em 0.25em rgba($scheme-invert, 0.1) !default
 $card-header-shadow: 0 0.1em 0.1em rgba($scheme-invert, 0.1) !default
 
@@ -60,8 +60,9 @@ $card-media-margin: $block-spacing !default
     border-bottom-right-radius: $card-radius
 
 hr
+  height: 1px
   margin: 0 $card-subtitle-padding
-  background-color: $grey-lightest
+  background-color: $grey-lighter
 
 .card-subtitle, .card-text, .card-title
   padding: $card-subtitle-padding
@@ -91,6 +92,7 @@ hr
   box-shadow: $card-header-shadow
   display: flex
   padding: $card-header-padding
+  min-height: $item-height
 
 .card-header-title
   align-items: center
@@ -110,7 +112,7 @@ hr
   padding: $card-header-padding
 
 .card-header-icon:last-child
-    margin-right: -$sp-12;
+    margin-right: $icon-button-negative-margin;
 
 .card-image
   display: block

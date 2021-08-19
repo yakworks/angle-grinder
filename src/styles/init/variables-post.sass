@@ -4,10 +4,10 @@
 /* setting up some of these early here so we can use them before importing the Bulma scss
 /* ---------------------------------------------------------------------- */
 
-// spacing consitency, material-ish.
+// spacing consitency, material-ish. Based on 16px by default.
 // $sp-base is the base. can be adjusted to whatever and others will ratio accordingly
 // these are for gutters, margins, padding. want to keep it seperate from rem font size but could be tied by
-// setting sp-base to 1 rem.
+// can set sp-base to 1 rem. to keep it ratioed with font size.
 $sp-base: 16px !default
 $sp-16: $sp-base !default
 $sp-4: $sp-base * 0.25 !default
@@ -22,9 +22,14 @@ $sp-36: $sp-base * 2.25 !default
 $sp-40: $sp-base * 2.5 !default
 $sp-48: $sp-base * 3 !default
 $sp-56: $sp-base * 3.5 !default
+$sp-64: $sp-base * 4 !default
+$sp-88: $sp-base * 5.5 !default
 
 // base material item sizes and spacing
 $icon-dimensions: $sp-24 !default // ~24px
+$icon-button-dimensions: $sp-40 !default // ~40px
+// negative margin for moving icons etc over to centered for item lists, toolbars etc..
+$icon-button-negative-margin: -$icon-button-dimensions * 0.25 !default // ~10px
 
 // side nav
 $sidenav-background-color: #344258 //ends up as sidebar default
@@ -32,7 +37,8 @@ $sidenav-background-color: #344258 //ends up as sidebar default
 // items, used in list items, sidenave, xedit, toolbar, etc...
 // loosely sticking to material spacing for consitency but making "dense" the default
 $item-height: $sp-48 !default // 48px
-$item-min-height: $sp-48 !default // 48px
+$item-dense-height: $sp-40 !default // 48px
+$item-min-height: $item-height !default // 48px
 $item-margin: $sp-16 !default //16px
 
 $control-height: $sp-40 !default // 40px
