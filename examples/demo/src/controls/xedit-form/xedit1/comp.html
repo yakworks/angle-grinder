@@ -69,7 +69,7 @@
 
           <div class="edit-group">
             <label class="control-label">Multi Roles</label>
-            <div class="controls" editable-custom="$ctrl.org.roles">{{$ctrl.org.roles}}</div>
+            <div class="controls" editable-custom="$ctrl.org.roles"><ag-tag-list items="$ctrl.org.roles"></ag-tag-list></div>
             <div editable-custom-template class="controls">
               <select name="role" class="form-control"
                       ng-model="$data"

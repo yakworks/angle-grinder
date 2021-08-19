@@ -1,6 +1,6 @@
 import module from 'angle-grinder/src/ng/controls/xeditable'
 
-xdescribe("module: angleGrinder.forms", () => describe("directive: editableFormButtons", function() {
+describe("module: angleGrinder.forms", () => describe("directive: editableFormButtons", function() {
 
   beforeEach(angular.mock.module(module));
 
@@ -79,12 +79,11 @@ xdescribe("module: angleGrinder.forms", () => describe("directive: editableFormB
         element = $compile(template)($scope);
         $scope.$digest();
 
-        $scope.testForm.$visible = true;
+          $scope.testForm.$show()
         $scope.$digest();
-        return saveButtonEl = element.find("button:nth-child(2)");
+        return saveButtonEl = element.find("ag-button:nth-child(2)");
       })
       );
-
       it("is visible", () => expect(saveButtonEl.text()).to.contain("Cancel"));
 
       it("is enabled", () => expect(saveButtonEl.attr("disabled")).to.be.undefined);
@@ -95,7 +94,7 @@ xdescribe("module: angleGrinder.forms", () => describe("directive: editableFormB
           return $scope.$digest();
         });
 
-        return it("is disabled", () => expect(saveButtonEl.attr("disabled")).to.eq("disabled"));
+        return it("is disabled", () => expect(saveButtonEl.attr("is-disabled")).to.eq("form.$waiting"));
       });
 
       xdescribe("when the form is invalid", function() {
@@ -104,7 +103,7 @@ xdescribe("module: angleGrinder.forms", () => describe("directive: editableFormB
           $scope.$digest();
         });
 
-        it("is disabled", () => expect(saveButtonEl.attr("disabled")).to.eq("disabled"));
+        it("is disabled", () => expect(saveButtonEl.attr("is-disabled")).to.eq("form.$waiting"));
       });
 
       describe("on click", () => beforeEach(() => saveButtonEl[0].click()));
@@ -118,7 +117,7 @@ xdescribe("module: angleGrinder.forms", () => describe("directive: editableFormB
 
     return describe("`save` button", function() {
       let cancelButtonEl = null;
-      beforeEach(() => cancelButtonEl = element.find("button:nth-child(1)"));
+      beforeEach(() => cancelButtonEl = element.find("ag-button:nth-child(1)"));
 
       it("is visible", () => expect(cancelButtonEl.text()).to.contain("Save"));
 
@@ -130,7 +129,7 @@ xdescribe("module: angleGrinder.forms", () => describe("directive: editableFormB
           return $scope.$digest();
         });
 
-        return it("is disabled", () => expect(cancelButtonEl.attr("disabled")).to.eq("disabled"));
+        return it("is disabled", () => expect(cancelButtonEl.attr("is-disabled")).to.eq("form.$invalid || form.$waiting"));
       });
     });
   });
