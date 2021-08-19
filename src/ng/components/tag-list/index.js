@@ -10,6 +10,6 @@ export default () => ({
   template: '<span class="tags are-medium is-pulled-right"><span ng-repeat="item in tagListCtrl.items" class="tag">{{item}}</span></span>',
   controller: Controller,
   scope: {
-    items: '<',
+    items: '<'
   }
 })
