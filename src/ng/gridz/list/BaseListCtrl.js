@@ -85,8 +85,8 @@ export default class BaseListCtrl {
         return this.create()
       case 'bulkUpdate':
         return this.showBulkUpdate()
-      case 'export':
-        return this.xlsExport()
+      case 'xlsExport':
+        return this.gridCtrl.xlsExport()
       case 'delete':
         return this.deleteSelected()
       default:
