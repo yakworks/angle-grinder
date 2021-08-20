@@ -12,6 +12,7 @@
     "build-ag-demo": "webpack --mode=production --profile --progress --content-base ./examples/ag-demo-ui --pathout ./examples/ag-demo-grails/src/main/resources/public",
     "watch-ag-demo": "webpack --watch --mode=development --config examples/ag-demo-ui/webpack.config.js --progress --content-base ./examples/ag-demo-ui --pathout ./examples/ag-demo-grails/src/main/resources/public",
     "parcel": "parcel examples/simple/index.html",
+    "api": "webpack-dev-server --content-base ./examples/demo",
     "parcel:build": "parcel build examples/simple/index.html",
     "jest": "jest",
     "svelte-dev": "webpack-dev-server --config examples/svelte/webpack.config.js --content-base examples/svelte"

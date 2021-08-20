@@ -3,6 +3,7 @@ import _ from 'lodash'
 import appName from './app.module'
 import './config.router'
 import appState from 'angle-grinder/src/tools/AppState'
+import {setClientConfig} from "../../../src/dataApi/ky";
 
 const app = angular.module(appName)
 // export default app.name
@@ -47,4 +48,8 @@ app.run(function($rootScope, $state, $stateParams) {
   appState.sidenav.open = true
 
   $rootScope.appState = appState
+  setClientConfig({
+    // eslint-disable-next-line no-undef
+    prefixUrl: configData.base_url
+  })
 })
