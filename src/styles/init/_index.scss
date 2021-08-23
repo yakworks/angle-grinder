@@ -21,9 +21,11 @@
 
 @import "functions"; // we fix the color darken so use this one
 
-@import "variables-pre";
-@import "~bulma/sass/utilities/derived-variables.sass";
-@import "variables-post";
+@import "typography";
+
+@import "colors";
+// colors imports derived-variables, post-derived-variables sets up components
+@import "variables";
 
 // rest of bulma
 @import "~bulma/sass/utilities/mixins.sass";

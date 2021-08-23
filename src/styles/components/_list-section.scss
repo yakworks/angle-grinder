@@ -9,20 +9,20 @@
 //$list-item-with-icon-height: 56px;
 // $list-icon-margin-right
 // 16 + 24 + 16 + 16 = 72px
-// $list-has-children-indent: $item-margin + $icon-dimensions + $item-margin + $item-margin; //72px
+// $list-has-children-indent: $item-spacing + $icon-dimensions + $item-spacing + $item-spacing; //72px
 
 // base padding size that everything is a multiple of. based on materials layout
-$list-padding-y: $item-margin * 0.5 !default; // 8px
+$list-padding-y: $item-spacing * 0.5 !default; // 8px
 $list-content-padding-y: $sp-12 !default;
 
-$list-item-icon-margin-y: $item-margin !default;
+$list-item-icon-margin-y: $item-spacing !default;
 $list-item-icon-negative-margin: $icon-button-negative-margin !default;
 
 $list-item-min-height: 3em !default;
 $list-item-two-line-min-height: $sp-64 !default;
 $list-item-three-line-min-height: $sp-88 !default;
 
-$list-item-padding: 0 $item-margin !default;
+$list-item-padding: 0 $item-spacing !default;
 $list-item-action-margin: $sp-12 0 !default;
 $list-item-avatar-horizontal-margin: $list-padding-y !default;
 
@@ -89,7 +89,7 @@ $list-dense-content-padding: $list-padding-y 0 !default;
       min-width: 24px;
 
       &:first-child{
-        margin-right: $item-margin * 2;
+        margin-right: $item-spacing * 2;
       }
 
       &:last-of-type:not(:only-child){
@@ -189,17 +189,17 @@ $list-dense-content-padding: $list-padding-y 0 !default;
       .item-content {
         color: $white;
         /* FIXME these need to be moved as they are sidenave specific */
-        background-color: darken($sidenav-background-color, 5%);
+        // background-color: darken($sidenav-background-color, 5%);
         padding-left: 72px;
-        border-bottom: 1px solid darken($sidenav-background-color, 2%);
+        // border-bottom: 1px solid darken($sidenav-background-color, 2%);
         font-size: 1rem;
 
         &.is-active {
           color: $list-active-color;
         }
-        &:hover {
-          color: $primary;
-        }
+        // &:hover {
+        //   color: $primary;
+        // }
       }
     }
   } // sub .list-item-set

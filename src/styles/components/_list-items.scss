@@ -9,7 +9,7 @@
 //$list-item-with-icon-height: 56px;
 // $list-icon-margin-right
 // 16 + 24 + 16 + 16 = 72px
-// $list-has-children-indent: $item-margin + $icon-dimensions + $item-margin + $item-margin; //72px
+// $list-has-children-indent: $item-spacing + $icon-dimensions + $item-spacing + $item-spacing; //72px
 
 $list-color: $text !default;
 $list-hover-color: $secondary !default;
@@ -35,7 +35,7 @@ $list-active-color: $secondary !default;
     display: flex;
     align-items: center;
     //padding: 1em 1em;
-    padding-left: $item-margin;
+    padding-left: $item-spacing;
     text-decoration: none;
     color: $list-color;
     min-height: $item-min-height;
@@ -47,9 +47,9 @@ $list-active-color: $secondary !default;
     }
 
     .icon {
-      margin-top: $item-margin; //16px
-      margin-bottom: $item-margin; //16px
-      margin-right: $item-margin * 2; //32px
+      margin-top: $item-spacing; //16px
+      margin-bottom: $item-spacing; //16px
+      margin-right: $item-spacing * 2; //32px
       i.mdi {
         padding: 1px;
         font-size: calc(#{$icon-dimensions} - 2px); //22px

@@ -3,16 +3,14 @@
  * Primarily done as a more generic base and so we do not conflict with Bootstrap's navbar
  */
 
-$toolbar-container-padding: $sp-4 $item-spacing !default;
-
 $toolbar-background-color: $scheme-main !default
 $toolbar-box-shadow-size: 0 2px 0 0 !default
 $toolbar-box-shadow-color: $background !default
 $toolbar-breakpoint-height: $bar-breakpoint-height !default //$bar-breakpoint-height
 $toolbar-padding-vertical: 1rem !default
 $toolbar-padding-horizontal: 2rem !default
-$toolbar-z: 29 !default
-$toolbar-fixed-z: 29 !default
+$toolbar-z: 30 !default
+$toolbar-fixed-z: 30 !default
 
 $toolbar-item-color: $text !default
 $toolbar-item-hover-color: $link !default
@@ -112,13 +110,11 @@ $toolbar-breakpoint: $desktop !default
             &.is-active
               background-color: $color
               color: $color-invert
-  & > .toolbar-container
-    align-items: center
+  & > .container
+    align-items: stretch
     display: flex
-    padding: $toolbar-container-padding
-    position: relative
-    // min-height: $bar-height
-    // width: 100%
+    min-height: $bar-height
+    width: 100%
   &.has-shadow
     box-shadow: $toolbar-box-shadow-size $toolbar-box-shadow-color
   &.is-fixed-bottom,
@@ -130,9 +126,6 @@ $toolbar-breakpoint: $desktop !default
       box-shadow: $toolbar-bottom-box-shadow-size $toolbar-box-shadow-color
   &.is-fixed-top
     top: 0
-
-  .grow, .spacer
-    flex-grow: 1 !important
 
 html,
 body
@@ -251,7 +244,7 @@ a.toolbar-item,
 +until($toolbar-breakpoint)
   .toolbar
     min-height: $bar-breakpoint-height
-  .toolbar > .toolbar-container
+  .toolbar > .container
     display: block
     height: $bar-breakpoint-height
     min-height: $bar-breakpoint-height
@@ -418,8 +411,8 @@ a.toolbar-item,
       right: 0
   .toolbar-divider
     display: block
-  .toolbar > .toolbar-container,
-  .toolbar-container > .toolbar
+  .toolbar > .container,
+  .container > .toolbar
     .toolbar-brand
       margin-left: -.75rem
     .toolbar-menu

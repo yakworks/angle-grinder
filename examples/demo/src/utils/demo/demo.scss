@@ -1,17 +1,17 @@
-@import "~bootstrap/scss/_functions.scss"; // needed because of https://github.com/twbs/bootstrap/issues/23331
-@import "~bootstrap/scss/variables";
-@import "~bootstrap/scss/mixins";
+// @import "~bootstrap/scss/_functions.scss"; // needed because of https://github.com/twbs/bootstrap/issues/23331
+// @import "~bootstrap/scss/variables";
+// @import "~bootstrap/scss/mixins";
 
-demo-snippet {
-  .live-example {
-    @include media-breakpoint-down(sm) {
-      border-bottom: 1px solid silver;
-      padding-bottom: 2rem;
-      margin-bottom: 2rem;
-    }
-  }
+// demo-snippet {
+//   .live-example {
+//     @include media-breakpoint-down(sm) {
+//       border-bottom: 1px solid silver;
+//       padding-bottom: 2rem;
+//       margin-bottom: 2rem;
+//     }
+//   }
 
   // .md, .html, .javascript {
   //   max-height: 500px;
   // }
-}
+// }

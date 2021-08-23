@@ -1,5 +1,6 @@
 /* ---------------------------------------------------------------------- */
-/* After Bulmas derived-variables.sass
+/* should run after colors are setup and typography as well as Bulmas derived-variables.sass
+/* No colors should be here, keep them all in colors.sass so its easier to theme
 /* Bulma puts some varaibles in the dirs and sass files where they are run, such as for controls, buttons, etc.,
 /* setting up some of these early here so we can use them before importing the Bulma scss
 /* ---------------------------------------------------------------------- */
@@ -25,26 +26,29 @@ $sp-56: $sp-base * 3.5 !default
 $sp-64: $sp-base * 4 !default
 $sp-88: $sp-base * 5.5 !default
 
+$control-height: $sp-40 !default // 40px
+
+// borders
+$border-width: 1px !default
+
+//** default spacing for padding and margins **/
+$item-spacing: $sp-base !default //16px
+
 // base material item sizes and spacing
-$icon-dimensions: $sp-24 !default // ~24px
-$icon-button-dimensions: $sp-40 !default // ~40px
-// negative margin for moving icons etc over to centered for item lists, toolbars etc..
-$icon-button-negative-margin: -$icon-button-dimensions * 0.25 !default // ~10px
-
-// side nav
-$sidenav-background-color: #344258 //ends up as sidebar default
-
 // items, used in list items, sidenave, xedit, toolbar, etc...
 // loosely sticking to material spacing for consitency but making "dense" the default
 $item-height: $sp-48 !default // 48px
 $item-dense-height: $sp-40 !default // 48px
 $item-min-height: $item-height !default // 48px
-$item-margin: $sp-16 !default //16px
 
-$control-height: $sp-40 !default // 40px
+//** Icons defaults **/
+$icon-dimensions: $sp-24 !default // ~24px
+$icon-button-dimensions: $control-height !default // ~40px
+// negative margin for moving icons etc over to centered for item lists, toolbars etc..
+$icon-button-negative-margin: -$icon-button-dimensions * 0.3 !default // ~12px
 
 // list
-$list-has-children-indent: $item-margin * 3 + $icon-dimensions !default //72px
+$list-has-children-indent: $item-spacing * 3 + $icon-dimensions !default //72px
 
 // toolbars
 $bar-breakpoint-height: 3.5rem !default // 56px for mobile and tablet
@@ -61,37 +65,12 @@ $label-padding-top: 1.35rem !default
 $control-radius: $radius !default
 $control-radius-small: $radius-small !default
 $control-border-width: 1px !default
-// $control-height: calc(1.5em + .75rem + 2px) !default // Bootstrap defaults
-$control-height: 2.5rem !default
 $control-line-height: 1.5 !default
 $control-padding-vertical: calc(0.5em - #{$control-border-width}) !default
 $control-padding-horizontal: calc(0.75em - #{$control-border-width}) !default
 
-
-//**** bulma/form/shared.sass  ****/
-//---------------------------
-$input-border-color: $border !default
-$input-color: $text-strong !default
-// $input-focus-border-color:  #66afe9 !default//BS = $input-border-focus
-$input-focus-border-color: $link !default
-// $input-focus-box-shadow-color: rgba(red($ifoc-color), green($ifoc-color), blue($ifoc-color), .6);
-// $input-focus-box-shadow-size: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px;
-$input-arrow: $primary !default
-//$input-shadow: inset 0 0.0625em 0.125em rgba($scheme-invert, 0.05) !default
-// $input-placeholder-color: rgba($input-color, 0.3) !default
-$input-icon-color: $border !default
-$input-icon-active-color: $text !default
+// bulma/form/shared.sass
 $input-radius: $radius !default
-
-//*** bulma/elements/button.sass OVERRIDES ****/
-// These are needed here so that we can use them to set the BS4 defaults
-$button-color: $text-strong !default
-//$button-background-color: $scheme-main !default;
-$button-background-color: $light !default
-$button-border-color: $border !default
-//$button-focus-box-shadow-size: 0 0 0 0.125em !default
-$button-focus-box-shadow-size: 0 0 0 0.2rem !default // make the shadow bigger to sync with BS4
-$button-focus-border-color: $button-border-color !default
 
 /* ------ bulma/components/modal.sass OVERRIDES ----- */
 $modal-card-head-padding: 15px !default

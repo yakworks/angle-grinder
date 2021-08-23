@@ -5,9 +5,11 @@ $card-background-color: $scheme-main !default
 $card-shadow: $shadow !default
 // $card-radius: 0.25rem !default
 $card-radius: $radius-large !default
+$card-border-color: $border !default
+$card-hr-color: $card-border-color !default
 
 // --- materialish card title, inspired by vuetify
-$card-title-adjacent-sibling-subtitle-margin-top: -$item-margin !default;
+$card-title-adjacent-sibling-subtitle-margin-top: -$item-spacing !default;
 $card-title-adjacent-sibling-subtitle-text-padding-top: 0 !default;
 $card-adjacent-sibling-text-padding-top: 0 !default;
 $card-title-font-size: $size-18 !default
@@ -15,19 +17,21 @@ $card-title-font-weight: $weight-medium !default
 // $card-title-letter-spacing: map-deep-get($headings, 'h6', 'letter-spacing') !default;
 // $card-title-line-height: map-deep-get($headings, 'h6', 'line-height') !default;
 
-$card-subtitle-padding: $item-margin !default
+$card-subtitle-font-size: $size-short !default
+$card-subtitle-padding: $item-spacing !default
+$card-subtitle-color: $text-light !default
 
 // ------
 $card-header-background-color: transparent !default
 $card-header-color: $text-strong !default
-$card-header-padding: $sp-4 $item-margin !default
+$card-header-padding: $sp-4 $item-spacing !default
 // $card-header-shadow: 0 0.125em 0.25em rgba($scheme-invert, 0.1) !default
-$card-header-shadow: 0 0.1em 0.1em rgba($scheme-invert, 0.1) !default
+$card-header-shadow: 0 1px 2px $card-hr-color !default
 
 $card-header-weight: $weight-bold !default
 
 $card-content-background-color: transparent !default
-$card-content-padding: 1.5rem !default
+$card-content-padding: $item-spacing !default
 
 $card-footer-background-color: transparent !default
 $card-footer-border-top: 1px solid $border-light !default
@@ -43,11 +47,11 @@ $card-media-margin: $block-spacing !default
   max-width: 100%
   position: relative
 
-  > *:first-child
+  > *:first-child:not(.button):not(.delete)
     border-top-left-radius: inherit
     border-top-right-radius: inherit
 
-  > *:last-child
+  > *:last-child:not(.button):not(.delete)
     border-bottom-left-radius: inherit
     border-bottom-right-radius: inherit
 
@@ -60,9 +64,9 @@ $card-media-margin: $block-spacing !default
     border-bottom-right-radius: $card-radius
 
 hr
-  height: 1px
+  height: $border-width
   margin: 0 $card-subtitle-padding
-  background-color: $grey-lighter
+  background-color: $card-hr-color
 
 .card-subtitle, .card-text, .card-title
   padding: $card-subtitle-padding
@@ -78,14 +82,25 @@ hr
   // word-break: $card-title-word-break
 
   + .card-subtitle,
-  + .card-text
+  + .card-content
     padding-top: $card-adjacent-sibling-text-padding-top
 
   + .card-subtitle
     margin-top: $card-title-adjacent-sibling-subtitle-margin-top
 
+.card-subtitle
+  + .card-content
+    padding-top: $card-adjacent-sibling-text-padding-top
+
+.card-subtitle
+  font-size: $card-subtitle-font-size
+  color: $card-subtitle-color
+  // font-weight: $card-subtitle-font-weight
+  // line-height: $card-subtitle-line-height
+  // letter-spacing: $card-text-letter-spacing
+
 .card-header
-  @extend %card-item
+  // @extend %card-item
   align-items: center
   background-color: $card-header-background-color
   // align-items: stretch
@@ -152,5 +167,9 @@ hr
 // Combinations
 
 .card
+  &.is-outlined
+    background-color: transparent
+    border: $border-width solid $card-border-color
+
   .media:not(:last-child)
     margin-bottom: $card-media-margin

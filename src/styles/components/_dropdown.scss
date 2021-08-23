@@ -2,7 +2,7 @@
 /* Dropdown button, merger of bulma and bootstrap
 /* -------------------------------------------------------------- */
 
-@import '~bootstrap/scss/mixins/caret';
+@import '../utilities/caret';
 $enable-caret: true !default;
 $caret-width:  .3em !default;
 $caret-vertical-align: $caret-width * .85 !default;
@@ -110,6 +110,8 @@ $dropdown-item-disabled-color: $input-disabled-color !default;
   // Show the menu
   > .dropdown-menu {
     display: block;
+    // position: relative;
+    z-index: 99;
   }
 
   // Remove the outline when :focus is triggered

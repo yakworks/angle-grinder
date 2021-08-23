@@ -3,32 +3,59 @@ toolbar overrides
 ========================================================================== */
 /* DEPENDS ON toolbar.scss */
 //$toolbar-item-color: #999;
-$toolbar-icon-color: $text-light !default;
-$toolbar-fixed-a-color: #444F60 !default;
-$toolbar-icon-size: 1.5rem !default;
+
+$toolbar-item-negative-margin: $icon-button-negative-margin !default;
+
+$toolbar-title-padding: $icon-button-dimensions * .5 !default;
+
+$toolbar-icon-color: $icon-default-color !default;
+// $toolbar-icon-size: 1.5rem !default;
 $toolbar-icon-button-size: 3rem !default;
+
+$toolbar-fixed-a-color: #444F60 !default;
 $toolbar-border: $border !default;
 
 //dense
+$toolbar-dense-height: $item-height !default;
 $toolbar-dense-icon-size-fa: calc(1.25em - 4px) !default;
 $toolbar-dense-icon-size: calc(1.5em - 2px) !default;
-$toolbar-dense-icon-button-size: 2.5rem !default;
-$toolbar-dense-control-height: 2rem !default;
+// $toolbar-dense-icon-button-size: 2.5rem !default;
+$toolbar-dense-control-height: $toolbar-dense-height - $item-spacing !default;
 
 //toolbar
 .toolbar {
-  z-index: unset;
+  contain: layout;
+  display: block;
+  flex: 1 1 auto;
+  max-width: 100%;
+  // z-index: unset;
 
-  > .container .toolbar-menu {
-    margin-left: -0.75rem;
+  > .toolbar-container .toolbar-menu {
+    margin-left: $toolbar-item-negative-margin;
   }
   .toolbar-end, .toolbar-start, .toolbar-menu {
     align-items: center;
   }
+
+  .toolbar-container > .button.is-icon-button:first-child {
+    margin-left: $toolbar-item-negative-margin;
+  }
+
+  .toolbar-container > .button.is-icon-button:last-child  {
+    margin-right: $toolbar-item-negative-margin
+  }
+  //fix buttons grouping margins
+  .buttons{
+    &:last-child {
+      margin-bottom: 0;
+    }
+    .button {
+      margin-bottom: 0;
+    }
+  }
+
   .button {
-    height: $toolbar-icon-button-size;
     &.is-icon-button {
-      width: $toolbar-icon-button-size;
       &.is-focused,
       &:focus {
         border-color: transparent;
@@ -72,7 +99,8 @@ $toolbar-dense-control-height: 2rem !default;
   }
 
   .toolbar-title {
-    font-size: $size-medium
+    font-size: $size-medium;
+    padding-left: $toolbar-title-padding;
   }
 
   .input.is-search {
@@ -80,7 +108,7 @@ $toolbar-dense-control-height: 2rem !default;
   }
 
   .spacer {
-    flex-grow: 1!important;
+    flex-grow: 1 !important;
   }
 
   &.has-border {
@@ -92,29 +120,32 @@ $toolbar-dense-control-height: 2rem !default;
     height: $bar-dense-height;
     min-height: $bar-dense-height;
 
-    .container {
+    .toolbar-container {
       height: $bar-dense-height;
       min-height: $bar-dense-height;
     }
-    .button, .input{
+    .button:not(.is-icon-button ), .input {
       height: $toolbar-dense-control-height;
     }
+    // .button, .input{
+    //   height: $toolbar-dense-control-height;
+    // }
     .button {
-      &.is-icon-button {
-        height: $toolbar-dense-icon-button-size;
-        width: $toolbar-dense-icon-button-size;
-      }
+      // &.is-icon-button {
+      //   height: $toolbar-dense-icon-button-size;
+      //   width: $toolbar-dense-icon-button-size;
+      // }
       .icon {
         &.is-solo, &.is-solo:last-child  {
           margin: 0;
           // height: $toolbar-dense-icon-size;
           // width: $toolbar-dense-icon-size;
-          i.fas, i.far, i.fab {
-            font-size: $toolbar-dense-icon-size-fa;
-          }
-          i.mdi{
-            font-size: $toolbar-dense-icon-size;
-          }
+          // i.fas, i.far, i.fab {
+          //   font-size: $toolbar-dense-icon-size-fa;
+          // }
+          // i.mdi{
+          //   font-size: $toolbar-dense-icon-size;
+          // }
         }
       }
     }
@@ -135,7 +166,7 @@ $toolbar-dense-control-height: 2rem !default;
 // up to about 1024 (tablet size)
 @include until($desktop) {
   .toolbar{
-    .container {
+    .toolbar-container {
       height: $bar-breakpoint-height;
       min-height: $bar-breakpoint-height;
     }

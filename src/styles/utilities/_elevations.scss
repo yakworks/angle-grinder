@@ -22,7 +22,8 @@ $shadow-key-umbra: map-deep-merge(
     8: (0px 5px 5px -3px $shadow-key-umbra-opacity),
     9: (0px 5px 6px -3px $shadow-key-umbra-opacity),
     10: (0px 6px 6px -3px $shadow-key-umbra-opacity),
-    11: (0px 6px 7px -4px $shadow-key-umbra-opacity)
+    11: (0px 6px 7px -4px $shadow-key-umbra-opacity),
+    12: (0px 7px 8px -4px $shadow-key-umbra-opacity),
   ),
   $shadow-key-umbra
 );
@@ -69,9 +70,8 @@ $shadow-key-ambient: map-deep-merge(
 
 $z: 12;
 @while $z >= 0 {
-  .has-shadow-#{$z} {
+  .elevation-#{$z} {
     @include elevation($z, $important: true);
   }
-
   $z: $z - 1;
 }
