@@ -7,7 +7,7 @@ export default () => ({
   replace: true,
   controllerAs: 'tagListCtrl',
   bindToController: true,
-  template: '<span class="tags are-medium is-pulled-right"><span ng-repeat="item in tagListCtrl.items" class="tag">{{item}}</span></span>',
+  template: '<span class="tags is-pulled-right"><span ng-repeat="item in tagListCtrl.items" class="tag">{{item}}</span></span>',
   controller: Controller,
   scope: {
     items: '<'
