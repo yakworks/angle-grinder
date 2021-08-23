@@ -49,6 +49,7 @@ app.run(function($rootScope, $state, $stateParams) {
 
   $rootScope.appState = appState
   setClientConfig({
+    // configData comes from index.html - to be able to change backend url on fly after build, takes data from `config.js` in root folder of the app
     // eslint-disable-next-line no-undef
     prefixUrl: configData.base_url
   })

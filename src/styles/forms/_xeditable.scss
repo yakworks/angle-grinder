@@ -8,7 +8,9 @@ $xedit-control-padding: 12px;
 $xedit-edit-group-padding: $item-spacing;
 
 .form-xeditable {
-
+  [editable-textarea] {
+    white-space: pre;
+  }
   // .edit-group {
   //   margin-bottom: $form-group-margin-bottom;
   // }
