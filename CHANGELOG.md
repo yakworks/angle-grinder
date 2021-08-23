@@ -1,3 +1,8 @@
+### v4.0.9
+
+[Full Changelog](https://github.com/yakworks/angle-grinder/compare/v4.0.8...v4.0.9)
+- make tags consitent across input and xedit display, increased default font size default tag. (#600) [link](https://github.com/yakworks/angle-grinder/commit/08fcd0c9f7323a67d704eda12e00cfe3b52e4042)
+
 ### v4.0.8
 
 [Full Changelog](https://github.com/yakworks/angle-grinder/compare/v4.0.7...v4.0.8)
