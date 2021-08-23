@@ -21,11 +21,6 @@ $danger-border: rgba($danger, 0.40);
       box-shadow: $input-focus-box-shadow-size $input-focus-box-shadow-color;
     }
   }
-  // overrides for default bulma tags
-  &.tags .tag {
-    margin-bottom: 4px;
-    font-size: .875rem;
-  }
 
   // inner input, overrides
   input {
