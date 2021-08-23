@@ -188,18 +188,12 @@ $list-dense-content-padding: $list-padding-y 0 !default;
     .list-item {
       .item-content {
         color: $white;
-        /* FIXME these need to be moved as they are sidenave specific */
-        // background-color: darken($sidenav-background-color, 5%);
         padding-left: 72px;
-        // border-bottom: 1px solid darken($sidenav-background-color, 2%);
         font-size: 1rem;
 
         &.is-active {
           color: $list-active-color;
         }
-        // &:hover {
-        //   color: $primary;
-        // }
       }
     }
   } // sub .list-item-set

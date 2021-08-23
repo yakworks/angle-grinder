@@ -146,7 +146,7 @@ $sidenav-header-logo-tablet-height: $bar-breakpoint-height - 2rem !default; // 2
               font-size: $sidenav-children-font-size;
               color: $sidenav-font-color;
               background-color: darken($sidenav-background-color, 4%);
-              border-bottom-color: darken($sidenav-background-color, 2%);
+              border-bottom: 1px solid darken($sidenav-background-color, 2%);
               &:hover {
                 color: $sidenav-nav-hover-color;
               }
