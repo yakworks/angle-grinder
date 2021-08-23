@@ -1,3 +1,8 @@
+### v4.0.11
+
+[Full Changelog](https://github.com/yakworks/angle-grinder/compare/v4.0.10...v4.0.11)
+- 593 xedit tweaks (#601) [link](https://github.com/yakworks/angle-grinder/commit/53f6d360a1749f38f1bce13bc657fc5102b9f0b4)
+
 ### v4.0.10
 
 [Full Changelog](https://github.com/yakworks/angle-grinder/compare/v4.0.9...v4.0.10)
