@@ -1,6 +1,6 @@
-import commonModule from 'angle-grinder/src/ng/common/directives'
+import commonModule from 'angle-grinder/src/ng/common'
 
-xdescribe("agNumberSpec", function() {
+describe("agNumberSpec", function() {
 
   let element = null;
   let scope = null;

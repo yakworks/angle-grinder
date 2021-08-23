@@ -1,6 +1,6 @@
 import angular from 'angular'
 import xeditable from 'angular-xeditable'
 
-angular.module('ag.xeditable', [
+export default angular.module('ag.xeditable', [
   xeditable
-])
+]).name
