@@ -9,38 +9,40 @@
 //$list-item-with-icon-height: 56px;
 // $list-icon-margin-right
 // 16 + 24 + 16 + 16 = 72px
-// $list-has-children-indent: $item-margin + $icon-dimensions + $item-margin + $item-margin; //72px
+// $list-has-children-indent: $item-spacing + $icon-dimensions + $item-spacing + $item-spacing; //72px
 
 // base padding size that everything is a multiple of. based on materials layout
-$list-spacing: 8px;
+$list-padding-y: $item-spacing * 0.5 !default; // 8px
+$list-content-padding-y: $sp-12 !default;
 
-$list-item-icon-margin-y: 16px !default;
+$list-item-icon-margin-y: $item-spacing !default;
+$list-item-icon-negative-margin: $icon-button-negative-margin !default;
 
 $list-item-min-height: 3em !default;
-$list-item-two-line-min-height: 64px !default;
-$list-item-three-line-min-height: 88px !default;
+$list-item-two-line-min-height: $sp-64 !default;
+$list-item-three-line-min-height: $sp-88 !default;
 
-$list-padding: 8px 0 !default;
-$list-item-padding: 0 16px !default;
-$list-item-action-margin: 12px 0 !default;
-$list-item-avatar-horizontal-margin: 8px !default;
+$list-item-padding: 0 $item-spacing !default;
+$list-item-action-margin: $sp-12 0 !default;
+$list-item-avatar-horizontal-margin: $list-padding-y !default;
 
 // $list-color: $text !default;
 $list-hover-color: $secondary !default;
 $list-active-color: $secondary !default;
 
-$list-dense-icon-height: 24px !default;
-$list-dense-icon-margin: 8px !default;
-$list-dense-min-height: 40px !default;
+$list-dense-icon-height: $sp-24 !default;
+$list-dense-icon-margin: $list-padding-y !default;
+$list-dense-min-height: $item-dense-height !default;
+
 $list-item-dense-title-line-height: 1rem !default;
-$list-item-dense-two-line-min-height: 60px !default;
-$list-item-dense-three-line-min-height: 76px !default;
-$list-dense-content-padding: 8px 0 !default;
+$list-item-dense-two-line-min-height: $list-item-two-line-min-height - 4px !default;
+$list-item-dense-three-line-min-height: $list-item-three-line-min-height - 12px !default;
+$list-dense-content-padding: $list-padding-y 0 !default;
 
 .listify {
   // position: relative;
   display: block;
-  padding: $list-padding;
+  padding: $list-padding-y 0;
   position: static;
   transition: box-shadow .28s cubic-bezier(.4,0,.2,1);
 
@@ -69,13 +71,17 @@ $list-dense-content-padding: 8px 0 !default;
     }
 
     .item-avatar {
-      margin-bottom: $list-spacing;
-      margin-top: $list-spacing;
+      margin-bottom: $list-padding-y;
+      margin-top: $list-padding-y;
     }
 
     .item-icon {
-      margin-bottom: $list-spacing * 2;
-      margin-top: $list-spacing * 2;
+      margin-bottom: $list-padding-y * 2;
+      margin-top: $list-padding-y * 2;
+    }
+
+    .button.is-icon-button:last-child  {
+      margin-right: $list-item-icon-negative-margin;
     }
 
     .item-action, .item-avatar, .item-icon {
@@ -83,11 +89,11 @@ $list-dense-content-padding: 8px 0 !default;
       min-width: 24px;
 
       &:first-child{
-        margin-right: 32px;
+        margin-right: $item-spacing * 2;
       }
 
       &:last-of-type:not(:only-child){
-        margin-left: $list-spacing;
+        margin-left: $list-padding-y;
       }
     }
 
@@ -102,7 +108,7 @@ $list-dense-content-padding: 8px 0 !default;
     }
 
     .item-subtitle {
-      font-size: .875rem;
+      font-size: $size-short;
       color: $text-light;
     }
 
@@ -113,7 +119,7 @@ $list-dense-content-padding: 8px 0 !default;
       flex-wrap: wrap;
       flex: 1 1;
       overflow: hidden;
-      padding: 12px 0;
+      padding: $list-content-padding-y 0;
     }
   }
 
@@ -130,7 +136,7 @@ $list-dense-content-padding: 8px 0 !default;
       padding: $list-dense-content-padding;
     }
     .item-title {
-      font-size: $size-14;
+      font-size: $size-short;
     }
     .item-action {
       height: $list-dense-icon-height;
@@ -182,17 +188,11 @@ $list-dense-content-padding: 8px 0 !default;
     .list-item {
       .item-content {
         color: $white;
-        /* FIXME these need to be moved as they are sidenave specific */
-        background-color: darken($sidenav-background-color, 5%);
         padding-left: 72px;
-        border-bottom: 1px solid darken($sidenav-background-color, 2%);
         font-size: 1rem;
 
         &.is-active {
           color: $list-active-color;
-        }
-        &:hover {
-          color: $primary;
         }
       }
     }

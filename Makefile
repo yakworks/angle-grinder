@@ -65,8 +65,7 @@ build.demo:
 	npx rimraf dist && npx webpack --mode=production --content-base ./examples/demo
 
 run.build:
-	cd dist && python -m SimpleHTTPServer 8090
-
+	cd dist && python -m SimpleHTTPServer 8090 & npx webpack-dev-server --content-base ./examples/demo
 # --------- ship, version, deploy ------------
 
 

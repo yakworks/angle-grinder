@@ -13,11 +13,15 @@ $size-16: 1rem !default // ~16px
 $size-18: 1.125rem !default // ~18px
 $size-20: 1.25rem !default // ~20px
 $size-24: 1.5rem !default // ~24px
+$size-32: 2rem !default // ~32px
+$size-40: 2.5rem !default // ~40px
 
 $sizes: $size-10 $size-12 $size-14 $size-16 $size-18 $size-20 $size-24 !default
 
 // Bulma size and family variables
+$size-xsmall: $size-10 !default // 12px
 $size-small: $size-12 !default // 12px
+$size-short: $size-14 !default // 12px
 $size-normal: $size-16 !default // used in controls mixin, etc..
 $size-medium: $size-20 !default // 20px
 $size-large: $size-24 !default // 24px
@@ -34,58 +38,3 @@ $family-primary: $family-sans-serif !default
 $family-secondary: $family-sans-serif !default
 $font-alt: 'Montserrat', sans-serif !default
 $family-code: $family-monospace !default
-
-// Bulma Text colors
-
-$text: $grey-darker !default
-$text-invert: findColorInvert($text) !default
-$text-light: $grey !default
-$text-strong: $black-ter !default
-
-// this names make more sense and is easier to recall
-$text-color: $text !default
-$text-dark: $text-strong !default
-
-//**** COLOR and theme base variables ****/
-
-$primary: hsl(210, 50%, 37%) !default
-$info: $cyan !default
-$success: $green !default
-$danger: $red !default
-$warning: $orange !default
-
-$link: $blue !default
-
-// force it to white
-$orange-invert: #fff !default
-$warning-invert: $orange-invert !default
-
-$dark: $grey-darker !default
-
-// extra, not used in stock Bulma, future use
-$secondary: $orange
-$accent: #00efb7
-$azure: #5B9BD1
-$beige: #D2BD8E
-$bricky: #894550
-
-$scheme-main: $white !default
-$scheme-main-bis: $white-bis !default
-$scheme-main-ter: $white-ter !default
-$scheme-invert: $black !default
-$scheme-invert-bis: $black-bis !default
-$scheme-invert-ter: $black-ter !default
-
-$background: $white-ter !default
-
-// setup the light and light-invert early so we can add it to the custom-colors below
-$light  : $white-ter !default
-$light-invert    : findColorInvert($light) !default
-// more get added to this in Bulma's derived-variables.
-// bulma spins through these and setups up classes prefixed with is.
-// so this essentially sets up so we have a 'is-lighter' css class availiable for cards, toolbars etc
-$custom-colors: ("lighter": ($white-bis, $light-invert)) !default
-
-// Effects
-// $shadow: 0 0.5em 1em -0.125em rgba($scheme-invert, 0.1), 0 0px 0 1px rgba($scheme-invert, 0.02) !default
-$shadow: 0px 4px 16px rgba($scheme-invert, 0.12) !default

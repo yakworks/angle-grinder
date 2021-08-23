@@ -25,3 +25,8 @@ Use this one instead.
   margin-right: -$gutter / 2;
   margin-left: -$gutter / 2;
 }
+
+// define HSL color variable
+@mixin defineColorHSL($color, $hue, $saturation, $lightness) {
+  #{$color}: unquote("hsl(#{$hue}, #{$saturation}, #{$lightness})");#{$color}-h: #{$hue};#{$color}-s: #{$saturation};#{$color}-l: #{$lightness};
+}
