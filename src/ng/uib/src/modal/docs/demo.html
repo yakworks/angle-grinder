@@ -1,9 +1,9 @@
 <div ng-controller="ModalDemoCtrl as $ctrl" class="modal-demo">
     <script type="text/ng-template" id="myModalContent.html">
-        <div class="modal-header">
-            <h3 class="modal-title" id="modal-title">I'm a modal!</h3>
+        <div class="modal-card-head">
+            <h3 class="modal-card-title" id="modal-card-title">I'm a modal!</h3>
         </div>
-        <div class="modal-body" id="modal-body">
+        <div class="modal-card-body" id="modal-body">
             <ul>
                 <li ng-repeat="item in $ctrl.items">
                     <a href="#" ng-click="$event.preventDefault(); $ctrl.selected.item = item">{{ item }}</a>
@@ -11,16 +11,16 @@
             </ul>
             Selected: <b>{{ $ctrl.selected.item }}</b>
         </div>
-        <div class="modal-footer">
+        <div class="modal-card-foot">
             <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">OK</button>
             <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
         </div>
     </script>
     <script type="text/ng-template" id="stackedModal.html">
-        <div class="modal-header">
-            <h3 class="modal-title" id="modal-title-{{name}}">The {{name}} modal!</h3>
+        <div class="modal-card-head">
+            <h3 class="modal-card-title" id="modal-card-title-{{name}}">The {{name}} modal!</h3>
         </div>
-        <div class="modal-body" id="modal-body-{{name}}">
+        <div class="modal-card-body" id="modal-body-{{name}}">
             Having multiple modals open at once is probably bad UX but it's technically possible.
         </div>
     </script>

@@ -1,19 +1,19 @@
 <div class="container-fluid container-fullw">
     <!-- /// controller:  'ModalDemoCtrl' -  localtion: assets/js/controllers/bootstrapCtrl.js /// -->
     <div ng-controller="ModalDemoCtrl">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="panel panel-white">
-                    <div class="panel-body">
+        <div class="columns">
+            <div class="column mt-1">
+                <div class="card">
+                    <div class="card-content">
                         <h5 class="over-title margin-bottom-15">UI Bootstrap <span class="text-bold">Modals</span></h5>
                         <p>
                             $modal is a service to quickly create AngularJS-powered modal windows. Creating custom modals is straightforward: create a partial view, its controller and reference them when using the service.
                         </p>
                         <script type="text/ng-template" id="myModalContent.html">
-                            <div class="modal-header">
-                                <h3 class="modal-title">I'm a modal!</h3>
+                            <div class="modal-card-head">
+                                <h3 class="modal-card-title">I'm a modal!</h3>
                             </div>
-                            <div class="modal-body">
+                            <div class="modal-card-body">
                                 <ul>
                                     <li ng-repeat="item in items">
                                         <a ng-click="selected.item = item">{{ item }}</a>
@@ -21,20 +21,20 @@
                                 </ul>
                                 Selected: <b>{{ selected.item }}</b>
                             </div>
-                            <div class="modal-footer">
+                            <div class="modal-card-foot">
                                 <button class="btn btn-primary" ng-click="ok()">OK</button>
                                 <button class="btn btn-primary btn-o" ng-click="cancel()">Cancel</button>
                             </div>
                         </script>
-                        <div class="row">
-                            <div class="col-lg-4 col-sm-6">
-                                <div class="panel panel-transparent">
-                                    <div class="panel-heading">
-                                        <div class="panel-title">
+                        <div class="column ">
+                            <div class="is-one-third">
+                                <div class="card  mt-1">
+                                    <div class="card-header">
+                                        <div class="card-header-title">
                                             Default Modal
                                         </div>
                                     </div>
-                                    <div class="panel-body">
+                                    <div class="card-content">
                                         <p class="margin-bottom-30">
                                             Toggle a modal by clicking the button below. It will slide down and fade in from the top of the page.
                                         </p>
@@ -44,14 +44,14 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-4 col-sm-6">
-                                <div class="panel panel-transparent">
-                                    <div class="panel-heading">
-                                        <div class="panel-title">
+                            <div class="is-one-third">
+                                <div class="card  mt-1">
+                                    <div class="card-header">
+                                        <div class="card-header-title">
                                             Large Modal
                                         </div>
                                     </div>
-                                    <div class="panel-body">
+                                    <div class="card-content">
                                         <p class="margin-bottom-30">
                                             Modals have a large optional size, available by setting option
                                             <code>
@@ -68,14 +68,14 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-4 col-sm-6">
-                                <div class="panel panel-transparent">
-                                    <div class="panel-heading">
-                                        <div class="panel-title">
+                            <div class="is-one-third">
+                                <div class="card  mt-1">
+                                    <div class="card-header">
+                                        <div class="card-header-title">
                                             Small Modal
                                         </div>
                                     </div>
-                                    <div class="panel-body">
+                                    <div class="card-content">
                                         <p class="margin-bottom-30">
                                             Modals have a small optional size, available by setting option
                                             <code>
