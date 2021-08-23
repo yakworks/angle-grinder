@@ -1,3 +1,8 @@
+### v4.0.10
+
+[Full Changelog](https://github.com/yakworks/angle-grinder/compare/v4.0.9...v4.0.10)
+- 591 bs fixes (#599) [link](https://github.com/yakworks/angle-grinder/commit/798226827d0829d2a4df9c7077fc80efe5c2f82c)
+
 ### v4.0.9
 
 [Full Changelog](https://github.com/yakworks/angle-grinder/compare/v4.0.8...v4.0.9)
