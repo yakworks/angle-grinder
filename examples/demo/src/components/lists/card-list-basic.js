@@ -4,7 +4,7 @@ class controller {
   items = [
     { title: 'Single Line' },
     { title: 'Two-line item', subtitle: 'Secondary text' },
-    { title: 'Three-line item', subtitle: "If you don't know, the thing to do is not to get scared,", subtitle2: 'but to learn.' }
+    { title: 'Three-line item', subtitle: "If you don't know, the thing to do ", subtitle2: 'is not to get scared, but to learn.' }
   ]
 }
 

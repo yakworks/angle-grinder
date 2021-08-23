@@ -19,8 +19,16 @@ const componentsStates = {
       component: 'dropdownDemoIndex'
     },
     {
+      name: 'cards',
+      component: 'cardsDemoIndex'
+    },
+    {
       name: 'charts',
       component: 'chartsDemoIndex'
+    },
+    {
+      name: 'colors',
+      component: 'colorsDemoIndex'
     },
     {
       name: 'contextMenu',

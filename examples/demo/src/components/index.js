@@ -10,6 +10,8 @@ import iconsMod from './icons'
 import tilesDemoMod from './tiles'
 import listsDemoMod from './lists'
 import chartsDemoMod from './charts'
+import cardsDemoMod from './cards'
+import colorsDemoMod from './colors'
 // import modalsMod from './modals'
 
 // export module name
@@ -25,6 +27,8 @@ export default angular
     iconsMod,
     tilesDemoMod,
     listsDemoMod,
-    chartsDemoMod
+    chartsDemoMod,
+    cardsDemoMod,
+    colorsDemoMod
   ])
   .name

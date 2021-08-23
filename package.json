@@ -1,7 +1,7 @@
 {
   "name": "angle-grinder",
   "license": "MIT",
-  "version": "4.0.8",
+  "version": "4.0.9",
   "scripts": {
     "build": "rimraf dist && yarn build:wip",
     "transpile": "babel ./examples/demo/mocker --out-dir ./examples/demo/mocker-server",
@@ -12,6 +12,7 @@
     "build-ag-demo": "webpack --mode=production --profile --progress --content-base ./examples/ag-demo-ui --pathout ./examples/ag-demo-grails/src/main/resources/public",
     "watch-ag-demo": "webpack --watch --mode=development --config examples/ag-demo-ui/webpack.config.js --progress --content-base ./examples/ag-demo-ui --pathout ./examples/ag-demo-grails/src/main/resources/public",
     "parcel": "parcel examples/simple/index.html",
+    "api": "webpack-dev-server --content-base ./examples/demo",
     "parcel:build": "parcel build examples/simple/index.html",
     "jest": "jest",
     "svelte-dev": "webpack-dev-server --config examples/svelte/webpack.config.js --content-base examples/svelte"
@@ -41,7 +42,7 @@
     "apexcharts": "^3.27.3",
     "api-check": "^7.5.5",
     "blueimp-load-image": "~1.11.0",
-    "bootstrap": "^4.4.1",
+    "bootstrap": "4.6.0",
     "bootstrap-sass": "^3.4.1",
     "bulma": "^0.9.3",
     "core-js": "^3.6.2",
@@ -61,6 +62,7 @@
     "moment": ">=2.7.0",
     "moment-timezone": "^0.5.27",
     "perfect-scrollbar": "^1.5.0",
+    "popper.js": "^1.16.1",
     "prismjs": "^1.19.0",
     "sweetalert2": "^9.7.0",
     "ti-icons": "^0.1.2",

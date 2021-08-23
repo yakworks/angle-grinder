@@ -2,15 +2,12 @@
 /* Sidenav slide in side menu style
 /* -------------------------------------------- */
 
-$sidenav-font-color: findColorInvert($sidenav-background-color) !default;
 $sidenav-font-size: $size-normal !default; // 16
 $sidenav-font-weight: $weight-semibold !default;
 $sidenav-children-font-size: $size-14 !default; // 14
 
-$sidenav-nav-hover-color: $secondary !default;
-$sidenav-nav-active-color: $secondary !default;
 $sidenav-nav-width: 256px !default;
-$sidenav-nav-closed-width: $icon-dimensions + $item-margin + $item-margin !default; // 24px + 16px + 16px = 56
+$sidenav-nav-closed-width: $icon-dimensions + $item-spacing + $item-spacing !default; // 24px + 16px + 16px = 56
 //point that sidenav becomes fixed and hidden on close
 $sidenav-nav-breakpoint: $desktop !default; //desktop is about the 1024 mark
 
@@ -19,6 +16,9 @@ $sidenav-header-logo-height: $bar-height - 2rem !default; // 64 - 16 - 16 = 32
 // for mobile and tablet
 $sidenav-header-logo-tablet-height: $bar-breakpoint-height - 2rem !default; // 24
 
+// body {
+//   background-color: $primary-dark;
+// }
 .sidenav-body-overlay {
   position: fixed;
   z-index: 999;
@@ -26,7 +26,7 @@ $sidenav-header-logo-tablet-height: $bar-breakpoint-height - 2rem !default; // 2
   left: 0px;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(126, 148, 182, 0.4);
+  background-color: $sidenav-overlay-background-color;
 }
 
 .sidenav {
@@ -80,10 +80,10 @@ $sidenav-header-logo-tablet-height: $bar-breakpoint-height - 2rem !default; // 2
     //justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid lighten($sidenav-background-color, 5%);
-    padding: 0 $item-margin;
+    padding: 0 $item-spacing;
 
     .hamburger {
-      margin-right: $item-margin * 2;
+      margin-right: $item-spacing * 2;
     }
 
     .logo {
@@ -146,7 +146,7 @@ $sidenav-header-logo-tablet-height: $bar-breakpoint-height - 2rem !default; // 2
               font-size: $sidenav-children-font-size;
               color: $sidenav-font-color;
               background-color: darken($sidenav-background-color, 4%);
-              border-bottom-color: darken($sidenav-background-color, 2%);
+              border-bottom: 1px solid darken($sidenav-background-color, 2%);
               &:hover {
                 color: $sidenav-nav-hover-color;
               }
@@ -175,7 +175,7 @@ $sidenav-header-logo-tablet-height: $bar-breakpoint-height - 2rem !default; // 2
                 .item-content {
                   background-color: darken($sidenav-background-color, 8%);
                   border-bottom-color: darken($sidenav-background-color, 4%);
-                  padding-left: $list-has-children-indent + 1rem;
+                  padding-left: $list-has-children-indent + 16px;
                   //border-left: 1px solid lighten($sidenav-nav-active-color, 10%);
                 }
               }
