@@ -1,3 +1,8 @@
+### v4.0.8
+
+[Full Changelog](https://github.com/yakworks/angle-grinder/compare/v4.0.7...v4.0.8)
+- Lists data (#598) [link](https://github.com/yakworks/angle-grinder/commit/95db830732c0b839ad409ca1b8c6430c29ac1284)
+
 ### v4.0.7
 
 [Full Changelog](https://github.com/yakworks/angle-grinder/compare/v4.0.6...v4.0.7)
