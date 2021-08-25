@@ -2,6 +2,7 @@ import gridsStates from './grids/routes'
 import componentsStates from './components/routes'
 import formStates from './controls/routes'
 import dashStates from './dashboards/routes'
+import pagesStates from './pages/routes'
 
 const levelStates = {
   name: 'levels',
@@ -59,7 +60,7 @@ export const fresh = {
   url: '/fresh',
   component: 'freshApp',
   abstract: true,
-  children: [dashStates, componentsStates, formStates, gridsStates, levelStates]
+  children: [dashStates, componentsStates, formStates, gridsStates, pagesStates, levelStates]
 }
 
 export const login = {

@@ -47,6 +47,17 @@ $icon-dimensions-small: $size-14 !default;
     }
   }
 }
+
+.feather {
+  width: 24px;
+  height: 24px;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+}
+
 /* --- "~bulma/sass/elements/icon.sass" copy for refernece --- */
 // $icon-dimensions: 1.5rem !default
 // $icon-dimensions-small: 1rem !default
@@ -69,3 +80,4 @@ $icon-dimensions-small: $size-14 !default;
 //   &.is-large
 //     height: $icon-dimensions-large
 //     width: $icon-dimensions-large
+

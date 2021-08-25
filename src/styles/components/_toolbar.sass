@@ -146,7 +146,7 @@ body
   align-items: stretch
   display: flex
   flex-shrink: 0
-  min-height: $bar-height
+  // min-height: $bar-height
 
 .toolbar-brand
   a.toolbar-item
@@ -203,7 +203,7 @@ a.toolbar-item,
     flex-shrink: 1
   &.is-tab
     border-bottom: 1px solid transparent
-    min-height: $bar-height
+    // min-height: $bar-height
     padding-bottom: calc(0.5rem - 1px)
     &:focus,
     &:hover
@@ -248,216 +248,167 @@ a.toolbar-item,
   height: $toolbar-divider-height
   margin: 0.5rem 0
 
-+until($toolbar-breakpoint)
-  .toolbar
-    min-height: $bar-breakpoint-height
-  .toolbar > .toolbar-container
-    display: block
-    height: $bar-breakpoint-height
-    min-height: $bar-breakpoint-height
-  .toolbar-brand,
-  .toolbar-tabs
-    min-height: $bar-breakpoint-height
-    .toolbar-item
+// +from($toolbar-breakpoint)
+.toolbar,
+.toolbar-menu,
+.toolbar-start,
+.toolbar-end
+  align-items: stretch
+  display: flex
+.toolbar
+  &.is-spaced
+    padding: $toolbar-padding-vertical $toolbar-padding-horizontal
+    .toolbar-start,
+    .toolbar-end
       align-items: center
-      display: flex
-  .toolbar-link
-    &::after
-      display: none
-  .toolbar-menu
-    background-color: $toolbar-background-color
-    box-shadow: 0 8px 16px rgba($scheme-invert, 0.1)
-    padding: 0.5rem 0
-    &.is-active
-      display: block
-  .toolbar-burger
-    height: $bar-breakpoint-height
-    width: $bar-breakpoint-height
-  // Fixed toolbar
-  .toolbar
-    &.is-fixed-bottom-touch,
-    &.is-fixed-top-touch
-      +toolbar-fixed
-    &.is-fixed-bottom-touch
-      bottom: 0
-      &.has-shadow
-        box-shadow: 0 -2px 3px rgba($scheme-invert, 0.1)
-    &.is-fixed-top-touch
-      top: 0
-    &.is-fixed-top,
-    &.is-fixed-top-touch
-      .toolbar-menu
-        +overflow-touch
-        max-height: calc(100vh - #{$bar-breakpoint-height})
-        overflow: auto
-  html,
-  body
-    &.has-toolbar-fixed-top-touch
-      padding-top: $bar-breakpoint-height
-    &.has-toolbar-fixed-bottom-touch
-      padding-bottom: $bar-breakpoint-height
-
-+from($toolbar-breakpoint)
-  .toolbar,
-  .toolbar-menu,
-  .toolbar-start,
-  .toolbar-end
-    align-items: stretch
-    display: flex
-  .toolbar
-    &.is-spaced
-      padding: $toolbar-padding-vertical $toolbar-padding-horizontal
-      .toolbar-start,
-      .toolbar-end
-        align-items: center
-      a.toolbar-item,
-      .toolbar-link
-        border-radius: $radius
-    &.is-transparent
-      a.toolbar-item,
-      .toolbar-link
-        &:focus,
-        &:hover,
-        &.is-active
-          background-color: transparent !important
-      .toolbar-item.has-dropdown
-        &.is-active,
-        &.is-hoverable:focus,
-        &.is-hoverable:focus-within,
-        &.is-hoverable:hover
-          .toolbar-link
-            background-color: transparent !important
-      .toolbar-dropdown
-        a.toolbar-item
-          &:focus,
-          &:hover
-            background-color: $toolbar-dropdown-item-hover-background-color
-            color: $toolbar-dropdown-item-hover-color
-          &.is-active
-            background-color: $toolbar-dropdown-item-active-background-color
-            color: $toolbar-dropdown-item-active-color
-  .toolbar-burger
-    display: none
-  .toolbar-item,
-  .toolbar-link
-    align-items: center
-    display: flex
-  .toolbar-item
-    display: flex
-    &.has-dropdown
-      align-items: stretch
-    &.has-dropdown-up
-      .toolbar-link::after
-        transform: rotate(135deg) translate(0.25em, -0.25em)
-      .toolbar-dropdown
-        border-bottom: $toolbar-dropdown-border-top
-        border-radius: $toolbar-dropdown-radius $toolbar-dropdown-radius 0 0
-        border-top: none
-        bottom: 100%
-        box-shadow: 0 -8px 8px rgba($scheme-invert, 0.1)
-        top: auto
-    &.is-active,
-    &.is-hoverable:focus,
-    &.is-hoverable:focus-within,
-    &.is-hoverable:hover
-      .toolbar-dropdown
-        display: block
-        .toolbar.is-spaced &,
-        &.is-boxed
-          opacity: 1
-          pointer-events: auto
-          transform: translateY(0)
-  .toolbar-menu
-    flex-grow: 1
-    flex-shrink: 0
-  .toolbar-start
-    justify-content: flex-start
-    margin-right: auto
-  .toolbar-end
-    justify-content: flex-end
-    margin-left: auto
-  .toolbar-dropdown
-    background-color: $toolbar-dropdown-background-color
-    border-bottom-left-radius: $toolbar-dropdown-radius
-    border-bottom-right-radius: $toolbar-dropdown-radius
-    border-top: $toolbar-dropdown-border-top
-    box-shadow: 0 8px 8px rgba($scheme-invert, 0.1)
-    display: none
-    font-size: 0.875rem
-    left: 0
-    min-width: 100%
-    position: absolute
-    top: 100%
-    z-index: $toolbar-dropdown-z
-    .toolbar-item
-      padding: 0.375rem 1rem
-      white-space: nowrap
-    a.toolbar-item
-      padding-right: 3rem
+    a.toolbar-item,
+    .toolbar-link
+      border-radius: $radius
+  &.is-transparent
+    a.toolbar-item,
+    .toolbar-link
       &:focus,
-      &:hover
-        background-color: $toolbar-dropdown-item-hover-background-color
-        color: $toolbar-dropdown-item-hover-color
+      &:hover,
       &.is-active
-        background-color: $toolbar-dropdown-item-active-background-color
-        color: $toolbar-dropdown-item-active-color
-    .toolbar.is-spaced &,
-    &.is-boxed
-      border-radius: $toolbar-dropdown-boxed-radius
+        background-color: transparent !important
+    .toolbar-item.has-dropdown
+      &.is-active,
+      &.is-hoverable:focus,
+      &.is-hoverable:focus-within,
+      &.is-hoverable:hover
+        .toolbar-link
+          background-color: transparent !important
+    .toolbar-dropdown
+      a.toolbar-item
+        &:focus,
+        &:hover
+          background-color: $toolbar-dropdown-item-hover-background-color
+          color: $toolbar-dropdown-item-hover-color
+        &.is-active
+          background-color: $toolbar-dropdown-item-active-background-color
+          color: $toolbar-dropdown-item-active-color
+.toolbar-burger
+  display: none
+.toolbar-item,
+.toolbar-link
+  align-items: center
+  display: flex
+.toolbar-item
+  display: flex
+  &.has-dropdown
+    align-items: stretch
+  &.has-dropdown-up
+    .toolbar-link::after
+      transform: rotate(135deg) translate(0.25em, -0.25em)
+    .toolbar-dropdown
+      border-bottom: $toolbar-dropdown-border-top
+      border-radius: $toolbar-dropdown-radius $toolbar-dropdown-radius 0 0
       border-top: none
-      box-shadow: $toolbar-dropdown-boxed-shadow
+      bottom: 100%
+      box-shadow: 0 -8px 8px rgba($scheme-invert, 0.1)
+      top: auto
+  &.is-active,
+  &.is-hoverable:focus,
+  &.is-hoverable:focus-within,
+  &.is-hoverable:hover
+    .toolbar-dropdown
       display: block
-      opacity: 0
-      pointer-events: none
-      top: calc(100% + (#{$toolbar-dropdown-offset}))
-      transform: translateY(-5px)
-      transition-duration: $speed
-      transition-property: opacity, transform
-    &.is-right
-      left: auto
-      right: 0
-  .toolbar-divider
-    display: block
-  .toolbar > .toolbar-container,
-  .toolbar-container > .toolbar
-    .toolbar-brand
-      margin-left: -.75rem
-    .toolbar-menu
-      margin-right: -.75rem
-  // Fixed toolbar
-  .toolbar
-    &.is-fixed-bottom-desktop,
-    &.is-fixed-top-desktop
-      +toolbar-fixed
-    &.is-fixed-bottom-desktop
-      bottom: 0
-      &.has-shadow
-        box-shadow: 0 -2px 3px rgba($scheme-invert, 0.1)
-    &.is-fixed-top-desktop
-      top: 0
-  html,
-  body
-    &.has-toolbar-fixed-top-desktop
-      padding-top: $bar-height
-    &.has-toolbar-fixed-bottom-desktop
-      padding-bottom: $bar-height
-    &.has-spaced-toolbar-fixed-top
-      padding-top: $bar-height + ($toolbar-padding-vertical * 2)
-    &.has-spaced-toolbar-fixed-bottom
-      padding-bottom: $bar-height + ($toolbar-padding-vertical * 2)
-  // Hover/Active states
-  a.toolbar-item,
-  .toolbar-link
-    &.is-active
-      color: $toolbar-item-active-color
-    &.is-active:not(:focus):not(:hover)
-      background-color: $toolbar-item-active-background-color
-  .toolbar-item.has-dropdown
+      .toolbar.is-spaced &,
+      &.is-boxed
+        opacity: 1
+        pointer-events: auto
+        transform: translateY(0)
+.toolbar-menu
+  flex-grow: 1
+  flex-shrink: 0
+.toolbar-start
+  justify-content: flex-start
+  margin-right: auto
+.toolbar-end
+  justify-content: flex-end
+  margin-left: auto
+.toolbar-dropdown
+  background-color: $toolbar-dropdown-background-color
+  border-bottom-left-radius: $toolbar-dropdown-radius
+  border-bottom-right-radius: $toolbar-dropdown-radius
+  border-top: $toolbar-dropdown-border-top
+  box-shadow: 0 8px 8px rgba($scheme-invert, 0.1)
+  display: none
+  font-size: 0.875rem
+  left: 0
+  min-width: 100%
+  position: absolute
+  top: 100%
+  z-index: $toolbar-dropdown-z
+  .toolbar-item
+    padding: 0.375rem 1rem
+    white-space: nowrap
+  a.toolbar-item
+    padding-right: 3rem
     &:focus,
-    &:hover,
+    &:hover
+      background-color: $toolbar-dropdown-item-hover-background-color
+      color: $toolbar-dropdown-item-hover-color
     &.is-active
-      .toolbar-link
-        background-color: $toolbar-item-hover-background-color
+      background-color: $toolbar-dropdown-item-active-background-color
+      color: $toolbar-dropdown-item-active-color
+  .toolbar.is-spaced &,
+  &.is-boxed
+    border-radius: $toolbar-dropdown-boxed-radius
+    border-top: none
+    box-shadow: $toolbar-dropdown-boxed-shadow
+    display: block
+    opacity: 0
+    pointer-events: none
+    top: calc(100% + (#{$toolbar-dropdown-offset}))
+    transform: translateY(-5px)
+    transition-duration: $speed
+    transition-property: opacity, transform
+  &.is-right
+    left: auto
+    right: 0
+.toolbar-divider
+  display: block
+.toolbar > .toolbar-container,
+.toolbar-container > .toolbar
+  .toolbar-brand
+    margin-left: -.75rem
+  .toolbar-menu
+    margin-right: -.75rem
+// Fixed toolbar
+.toolbar
+  &.is-fixed-bottom-desktop,
+  &.is-fixed-top-desktop
+    +toolbar-fixed
+  &.is-fixed-bottom-desktop
+    bottom: 0
+    &.has-shadow
+      box-shadow: 0 -2px 3px rgba($scheme-invert, 0.1)
+  &.is-fixed-top-desktop
+    top: 0
+html,
+body
+  &.has-toolbar-fixed-top-desktop
+    padding-top: $bar-height
+  &.has-toolbar-fixed-bottom-desktop
+    padding-bottom: $bar-height
+  &.has-spaced-toolbar-fixed-top
+    padding-top: $bar-height + ($toolbar-padding-vertical * 2)
+  &.has-spaced-toolbar-fixed-bottom
+    padding-bottom: $bar-height + ($toolbar-padding-vertical * 2)
+// Hover/Active states
+a.toolbar-item,
+.toolbar-link
+  &.is-active
+    color: $toolbar-item-active-color
+  &.is-active:not(:focus):not(:hover)
+    background-color: $toolbar-item-active-background-color
+.toolbar-item.has-dropdown
+  &:focus,
+  &:hover,
+  &.is-active
+    .toolbar-link
+      background-color: $toolbar-item-hover-background-color
 
 // Combination
 

@@ -5,62 +5,27 @@
 
 // TODO https://blog.maximeheckel.com/posts/the-power-of-composition-with-css-variables/
 
-/*** bulma/sass/utilities/initial-variables.sass
+// force it to white
+$orange-invert: #fff !default;
+// $warning-invert: $orange-invert !default
 
-// BASE Colors
+$scheme-main: $white !default;
+$scheme-main-bis: $white-bis !default; // white-grey
+$scheme-main-ter: $white-ter !default; // white-greyer
+$scheme-invert: $black !default; //black
+$scheme-invert-bis: $black-bis !default; //black-grey
+$scheme-invert-ter: $black-ter !default; //black-greyer
 
-// $black:        hsl(0, 0%, 4%) !default
-// $black-bis:    hsl(0, 0%, 7%) !default
-// $black-ter:    hsl(0, 0%, 14%) !default
-
-// $grey-darker:  hsl(0, 0%, 21%) !default
-// $grey-darker:   hsl(60, 5%, 16%) !default
-
-// $grey-dark:    hsl(0, 0%, 29%) !default
-// $grey-dark:     hsl(72, 4%, 24%) !default
-
-// $grey:         hsl(0, 0%, 48%) !default
-// $grey:          hsl(51, 3%, 45%) !default
-
-// $grey-light:   hsl(0, 0%, 71%) !default
-// $grey-light:    hsl(56, 14%, 75%) !default
-
-// $grey-lighter: hsl(0, 0%, 86%) !default
-// $grey-lightest: hsl(0, 0%, 93%) !default
-
-// $white-ter:    hsl(0, 0%, 96%) !default
-// $white-ter:     hsl(48, 24%, 96%) !default//#f7f6f2 !default
-// $white-bis:     hsl(0, 0%, 98%) !default
-// $white:         hsl(0, 0%, 100%) !default
-
-// $orange:       hsl(14,  100%, 53%) !default
-$orange:       hsl(37,  98%, 46%) !default //#e99002 warning
-// $yellow:       hsl(44,  100%, 77%) !default
-$yellow:       hsl(48,  100%, 67%) !default
-// $green:        hsl(153, 53%,  53%) !default
-$green:        hsl(85, 77%,  41%) !default // #78bb18 success github green #28a745
-// $turquoise:    hsl(171, 100%, 41%) !default
-// $cyan:         hsl(207, 61%,  53%) !default
-$cyan:         hsl(204, 71%,  53%) !default
-// $blue:         hsl(229, 53%,  53%) !default
-$blue:       hsl(217, 71%,  53%) !default
-// $blue:         #29abe0  !default//info #066da5 #17a2b8
-// $purple:       hsl(271, 100%, 71%) !default
-// $red:          hsl(348, 86%, 61%) !default
-$red:          #d9534f !default
-
-//*** end Bulma's initial-variables section for base colors
+$background: $scheme-main-ter !default;
+$background-main: $scheme-main !default;
 
 // Bulma's text colors
-$text: $grey-darker !default
-$text-invert: findColorInvert($text) !default
-$text-light: $grey-dark !default
-$text-strong: $black-ter !default
+$text: rgba(0,0,0,0.9) !default;
+$text-strong: $black-bis !default;
+$text-invert: findColorInvert($text) !default;
+$text-light: rgba(0,0,0,0.6) !default;
 
-// these names make more sense and is easier to recall
-$text-lighter: $grey !default
-$text-color: $text !default
-$text-dark: $text-strong !default
+$text-lighter: $grey !default;
 
 //**** COLOR and theme base variables ****/
 
@@ -68,71 +33,80 @@ $text-dark: $text-strong !default
 // $primary-light: hsl(216, 26%, 47%) !default
 // $primary-dark: hsl(216, 26%, 27%) !default
 
-$primary: hsl(210, 40%, 37%) !default
+$primary: hsl(210, 40%, 37%) !default;
 // $primary-light: hsl(210, 40%, 47%) !default
-$primary-dark: hsl(210, 40%, 27%) !default
+$primary-dark: hsl(210, 40%, 27%) !default;
 
-$info: $cyan !default
-$success: $green !default
-$danger: $red !default
+$info: $cyan !default;
+$success: $green !default;
+$danger: $red !default;
 // $warning: $orange !default
-$warning: $yellow !default
-$link: $blue !default
+$warning: $yellow !default;
+$link: $blue !default;
 // $link: hsl(210, 61%,  53%) !default
 
 // setup the light and light-invert early so we can add it to the custom-colors below
-$light: $white-ter !default
-$light-invert: findColorInvert($light) !default
-$dark: $grey-darker !default
-$dark-invert: findColorInvert($dark) !default
-
-// force it to white
-$orange-invert: #fff !default
-// $warning-invert: $orange-invert !default
-
-$scheme-main: $white !default
-$scheme-main-bis: $white-bis !default // white-grey
-$scheme-main-ter: $white-ter !default // white-greyer
-$scheme-invert: $black !default //black
-$scheme-invert-bis: $black-bis !default //black-grey
-$scheme-invert-ter: $black-ter !default //black-greyer
-
-$background: $white-ter !default
+$light: $white-ter !default;
+$light-invert: findColorInvert($light) !default;
+$dark: $grey-darker !default;
+$dark-invert: findColorInvert($dark) !default;
 
 // borders
-$border: $grey-lighter !default
-$border-hover: $grey-light !default
-$border-light: $grey-lightest !default
-$border-light-hover: $grey-light !default
+$border: $grey-lighter !default;
+$border-hover: $grey-light !default;
+$border-light: $grey-lightest !default;
+$border-light-hover: $grey-light !default;
 
 // extra, not used in stock Bulma, future use
-$secondary: $orange
-$secondary-invert: $orange-invert
-$accent: #00efb7
-$azure: #5B9BD1
-$beige: #D2BD8E
-$bricky: #894550
+$secondary: $orange;
+$secondary-invert: $orange-invert;
+$accent: #00efb7;
+$azure: #5B9BD1;
+$beige: #D2BD8E;
+$bricky: #894550;
 
 // more get added to this in Bulma's derived-variables.
 // bulma spins through these and setups up classes prefixed with is.
 // so this essentially sets up so we have a 'is-lighter' css class availiable for cards, toolbars etc
-$custom-colors: ("lighter": ($scheme-main-bis, $scheme-invert-bis), "light": ($scheme-main-ter, $scheme-invert-bis), "secondary": ($secondary, $secondary-invert)) !default
-$custom-shades: null !default
+$custom-colors: (
+  "lighter": ($scheme-main-bis, $scheme-invert-bis),
+  "light": ($scheme-main-ter, $scheme-invert-bis),
+  "secondary": ($secondary, $secondary-invert)
+) !default;
 
-$shades: mergeColorMaps(("scheme-main": $scheme-main, "scheme-main-bis": $scheme-main-bis, "scheme-main-ter": $scheme-main-ter, "scheme-invert": $scheme-invert, "scheme-invert-bis": $scheme-invert-bis, "scheme-invert-ter": $scheme-invert-ter, "black-bis": $black-bis, "black-ter": $black-ter, "grey-darker": $grey-darker, "grey-dark": $grey-dark, "grey": $grey, "grey-light": $grey-light, "grey-lighter": $grey-lighter, "white-ter": $white-ter, "white-bis": $white-bis), $custom-shades) !default
+$custom-shades: null !default;
+
+$shades: mergeColorMaps((
+  "scheme-main": $scheme-main,
+  "scheme-main-bis": $scheme-main-bis,
+  "scheme-main-ter": $scheme-main-ter,
+  "scheme-invert": $scheme-invert,
+  "scheme-invert-bis": $scheme-invert-bis,
+  "scheme-invert-ter": $scheme-invert-ter,
+  "black-bis": $black-bis,
+  "black-ter": $black-ter,
+  "grey-darker": $grey-darker,
+  "grey-dark": $grey-dark,
+  "grey": $grey,
+  "grey-light": $grey-light,
+  "grey-lighter": $grey-lighter,
+  "white-ter": $white-ter,
+  "white-bis": $white-bis),
+  $custom-shades
+) !default;
 
 // Effects
 // $shadow: 0 0.5em 1em -0.125em rgba($scheme-invert, 0.1), 0 0px 0 1px rgba($scheme-invert, 0.02) !default
-$shadow: 0px 4px 16px rgba($scheme-invert, 0.12) !default
+$shadow: 0px 4px 16px rgba($scheme-invert, 0.12) !default;
 
 //****** Bulma's derived-variables *********
-@import "~bulma/sass/utilities/derived-variables.sass"
+@import "~bulma/sass/utilities/derived-variables.sass";
 
 //*** element and control colors
-$icon-default-color: $text-lighter !default
+$icon-default-color: $text-lighter !default;
 
 // side nav
-$sidenav-background-color: $primary-dark !default //ends up as sidebar default
+$sidenav-background-color: $primary-dark !default; //ends up as sidebar default
 $sidenav-font-color: $primary-invert !default;
 $sidenav-nav-active-color: $secondary !default;
 $sidenav-nav-hover-color: $sidenav-nav-active-color !default;
@@ -142,8 +116,8 @@ $sidenav-overlay-background-color: rgba($sidenav-background-color, 0.2) !default
 // $form-colors: $colors !default
 
 // $input-color: $text-strong !default
-$input-background-color: $scheme-main !default
-$input-border-color: $border !default
+$input-background-color: $scheme-main !default;
+$input-border-color: $border !default;
 // $input-height: $control-height !default
 // $input-shadow: inset 0 0.0625em 0.125em rgba($scheme-invert, 0.05) !default
 // $input-placeholder-color: bulmaRgba($input-color, 0.3) !default
@@ -162,7 +136,7 @@ $input-border-color: $border !default
 // $input-disabled-placeholder-color: bulmaRgba($input-disabled-color, 0.3) !default
 
 // $input-arrow: $link !default
-$input-arrow: $primary !default
+$input-arrow: $primary !default;
 
 // $input-icon-color: $border !default
 // $input-icon-active-color: $text !default
@@ -183,10 +157,10 @@ $input-arrow: $primary !default
 //*** bulma/elements/button.sass colors ****/
 // $button-color: $text-strong !default
 // $button-background-color: $scheme-main !default
-$button-background-color: $scheme-main-bis !default
+$button-background-color: $scheme-main-bis !default;
 // $button-family: false !default
 
-$button-border-color: $border !default
+$button-border-color: $border !default;
 // $button-border-width: $control-border-width !default
 
 // $button-padding-vertical: calc(0.5em - #{$button-border-width}) !default
@@ -197,7 +171,7 @@ $button-border-color: $border !default
 
 // $button-focus-color: $link-focus !default
 // $button-focus-border-color: $link-focus-border !default
-$button-focus-border-color: $button-border-color !default
+$button-focus-border-color: $button-border-color !default;
 // $button-focus-box-shadow-size: 0 0 0 0.125em !default
 // $button-focus-box-shadow-color: bulmaRgba($link, 0.25) !default
 
@@ -226,3 +200,11 @@ $button-focus-border-color: $button-border-color !default
 // $button-static-border-color: $border !default
 
 // $button-colors: $colors !default
+
+//** Cards
+$card-background-color: $scheme-main !default;
+$card-shadow: $shadow !default;
+// $card-radius: 0.25rem !default
+$card-radius: $radius-large !default;
+$card-border-color: $border !default;
+$card-hr-color: $card-border-color !default;

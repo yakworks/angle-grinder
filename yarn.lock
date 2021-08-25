@@ -4625,9 +4625,9 @@ fd-slicer@~1.1.0:
   dependencies:
     pend "~1.2.0"
 
-feather-icons@^4.26.0:
+feather-icons@^4.28.0:
   version "4.28.0"
-  resolved "https://registry.npmjs.org/feather-icons/-/feather-icons-4.28.0.tgz"
+  resolved "https://registry.yarnpkg.com/feather-icons/-/feather-icons-4.28.0.tgz#e1892a401fe12c4559291770ff6e68b0168e760f"
   integrity sha512-gRdqKESXRBUZn6Nl0VBq2wPHKRJgZz7yblrrc2lYsS6odkNFDnA4bqvrlEVRUPjE1tFax+0TdbJKZ31ziJuzjg==
   dependencies:
     classnames "^2.2.5"

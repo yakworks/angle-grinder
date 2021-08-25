@@ -18,6 +18,7 @@ import snippetsModule from './utils/demo/demo.module'
 import componentsModule from './components'
 import formsModule from './controls'
 import gridsModule from './grids'
+import pagesModule from './pages'
 
 // store
 import dataApiModule from './store'
@@ -32,6 +33,7 @@ export default angular.module('app', [
   loginModule,
   snippetsModule,
   componentsModule,
+  pagesModule,
   formsModule,
   gridsModule,
   fullscreen,

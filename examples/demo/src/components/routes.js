@@ -11,6 +11,10 @@ const componentsStates = {
   // },
   children: [
     {
+      name: 'avatars',
+      template: require('./avatars/items.html')
+    },
+    {
       name: 'buttons',
       component: 'buttonDemoIndex'
     },

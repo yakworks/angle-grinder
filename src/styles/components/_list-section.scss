@@ -76,8 +76,8 @@ $list-dense-content-padding: $list-padding-y 0 !default;
     }
 
     .item-icon {
-      margin-bottom: $list-padding-y * 2;
-      margin-top: $list-padding-y * 2;
+      margin-bottom: $list-padding-y + 4px;
+      margin-top: $list-padding-y + 4px;
     }
 
     .button.is-icon-button:last-child  {
@@ -98,7 +98,7 @@ $list-dense-content-padding: $list-padding-y 0 !default;
     }
 
     .item-title, .item-subtitle {
-      line-height: 1.2;
+      line-height: 1.25;
       align-self: center;
       // font-size: 1rem;
       flex: 1 1 100%;
@@ -108,6 +108,7 @@ $list-dense-content-padding: $list-padding-y 0 !default;
     }
 
     .item-subtitle {
+      @debug "$text-light: #{$text-light}";
       font-size: $size-short;
       color: $text-light;
     }

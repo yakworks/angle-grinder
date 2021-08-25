@@ -1,4 +1,4 @@
-<div class="sidenav"
+<nav class="sidenav"
     ng-class="{
       'is-active': $ctrl.isOpen,
     }">
@@ -27,7 +27,7 @@
         <span class="icon" ng-if="mitem.data.icon">
           <i class="{{mitem.data.icon}}"></i>
         </span>
-        <span class="title" > {{ mitem.data.title }} </span>
+        <span class="item-title" > {{ mitem.data.title }} </span>
       </a>
       <ul class="submenu list-item-set" ng-if="$ctrl.hasChildren(mitem)">
         <li class="list-item" ng-repeat="mitem in mitem.children" ng-include="'menuItemTree'"
@@ -49,5 +49,5 @@
       </li>
     </ul>
   </div>
-</div>
+</nav>
 <div ng-if="$ctrl.isOpen" class="sidenav-body-overlay" ng-click="$ctrl.toggleSidenav()"></div>

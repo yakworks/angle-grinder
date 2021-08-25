@@ -1,16 +1,12 @@
 <nav class="appbar toolbar is-transparent has-shadow" role="navigation" aria-label="main navigation">
   <div class="toolbar-container">
+    <sidenav-hamburger></sidenav-hamburger>
+    <ag-button icon="mdi mdi-36px mdi-chevron-left" uib-tooltip="back" tooltip-placement="bottom-left"></ag-button>
     <div class="toolbar-brand">
-      <sidenav-hamburger></sidenav-hamburger>
       <div class="toolbar-item">
         <a class="toolbar-title" ui-sref="{{$ctrl.appState.$state.$current.parent.name}}" ng-if="$ctrl.isEdit" target="_self" ><i class="mdi mdi-keyboard-backspace"></i></a>
-        <div class="toolbar-title">{{$ctrl.title}}</div>
+        <div class="toolbar-title pl-0">{{$ctrl.title}}</div>
       </div>
-      <a role="button" class="toolbar-burger" aria-label="menu" aria-expanded="false" data-target="toolbar-menu">
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-      </a>
     </div>
 
     <div id="toolbar-menu" class="toolbar-menu is-static">

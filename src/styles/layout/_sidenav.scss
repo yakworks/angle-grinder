@@ -132,7 +132,7 @@ $sidenav-header-logo-tablet-height: $bar-breakpoint-height - 2rem !default; // 2
       //active list-item
       &.is-active {
         > .item-content {
-          .title, .icon {
+          .item-title, .icon {
             color: $sidenav-nav-active-color;
           }
         }

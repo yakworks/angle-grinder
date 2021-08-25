@@ -2,6 +2,10 @@
 /*  Main Parent <ui-view> content
 /* ---------------------------------------------------------------------- */
 
+main.root-ui-view{
+  background-color: $background-main;
+}
+
 .root-ui-view, .appbar-wrapper{
   transition: margin-left 0.3s;
 }
