@@ -3,6 +3,7 @@
 class Controller {
   isButton = true
 
+  /* @ngInject */
   constructor($element) {
     this.$element = $element
   }
@@ -36,5 +37,3 @@ export default () => ({
   controller: Controller,
   controllerAs: 'tbBtnCtrl'
 })
-
-Controller.$inject = ['$element']

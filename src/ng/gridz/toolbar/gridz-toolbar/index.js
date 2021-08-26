@@ -28,6 +28,7 @@ class Controller {
     showQuickSearch: true
   }
 
+  /* @ngInject */
   constructor($element, $compile, $scope) {
     this.$element = $element
     this.$compile = $compile
@@ -83,4 +84,3 @@ class Controller {
     }
   }
 }
-Controller.$inject = ['$element', '$compile', '$scope']

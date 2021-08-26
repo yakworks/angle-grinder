@@ -21,6 +21,7 @@ function minimizeSidenav() {
 }
 
 class controller {
+  /* @ngInject */
   constructor($timeout) {
     this.$timeout = $timeout
     this.$state = appState.$state
@@ -104,7 +105,6 @@ class controller {
   }
 }
 
-controller.$inject = ['$timeout']
 export default {
   controller,
   template: require('./ag-sidenav.html')

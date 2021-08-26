@@ -15,6 +15,7 @@ class Controller {
     { display: 'Expand', icon: 'fa-expand' }
   ]
 
+  /* @ngInject */
   constructor($element, ColumnConfigServ) {
     this.$element = $element
     this.ColumnConfigServ = ColumnConfigServ
@@ -39,4 +40,3 @@ export default () => ({
   template: require('./dropdown.html'),
   controller: Controller
 })
-Controller.$inject = ['$element', 'ColumnConfigServ']
