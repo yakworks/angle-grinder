@@ -1,6 +1,6 @@
 import AgBaseControl from '../AgBaseControl'
 
-class Controller extends AgBaseControl {
+class Controller5 extends AgBaseControl {
   $onInit() {
     super.onInit()
     if (!this.maxLength) {
@@ -12,7 +12,7 @@ class Controller extends AgBaseControl {
 export default () => ({
   ...AgBaseControl.common.dir,
   template: require('./ag-input.html'),
-  controller: Controller,
+  controller: Controller5,
   require: {
     ngModelCtrl: 'ngModel',
     formCtrl: '^agForm'

@@ -43,3 +43,4 @@ export default class EditModalCtrl {
     // console.error("handleError errors", errors)
   }
 }
+EditModalCtrl.$inject = ['$uibModalInstance', '$scope', 'dataApi', 'vm', 'cfg', 'title']

@@ -22,7 +22,6 @@ class Controller {
     }
   }
 }
-
 export default () => ({
   restrict: 'E',
   // replace: true,
@@ -37,3 +36,5 @@ export default () => ({
   controller: Controller,
   controllerAs: 'tbBtnCtrl'
 })
+
+Controller.$inject = ['$element']

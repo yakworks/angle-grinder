@@ -44,7 +44,7 @@ class Controller {
     }
   }
 }
-
+Controller.$inject = ['$element', '$transclude']
 export default () => ({
   restrict: 'E',
   replace: true,

@@ -83,3 +83,4 @@ class Controller {
     }
   }
 }
+Controller.$inject = ['$element', '$compile', '$scope']
