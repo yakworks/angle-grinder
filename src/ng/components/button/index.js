@@ -2,6 +2,7 @@
 import { getIconClass } from '../../../utils/icon'
 
 class Controller {
+  /* @ngInject */
   constructor($element, $transclude) {
     this.$element = $element
     // this.$transclude = $transclude

@@ -15,6 +15,7 @@ class Controller {
     { display: 'Expand', icon: 'fa-expand' }
   ]
 
+  /* @ngInject */
   constructor($element, ColumnConfigServ) {
     this.$element = $element
     this.ColumnConfigServ = ColumnConfigServ

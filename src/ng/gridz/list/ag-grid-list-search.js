@@ -17,11 +17,11 @@ const template = `
 
 export default {
   template: template,
-  controller: function($scope) {
+  controller: ['$scope', function($scope) {
     this.$onInit = () => {
       $scope.listCtrl = this.listCtrl
     }
-  },
+  }],
   bindings: {
     listCtrl: '<'
   }

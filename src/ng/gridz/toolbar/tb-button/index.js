@@ -3,6 +3,7 @@
 class Controller {
   isButton = true
 
+  /* @ngInject */
   constructor($element) {
     this.$element = $element
   }
@@ -22,7 +23,6 @@ class Controller {
     }
   }
 }
-
 export default () => ({
   restrict: 'E',
   // replace: true,

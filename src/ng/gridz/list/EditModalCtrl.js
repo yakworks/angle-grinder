@@ -5,6 +5,7 @@
 
 // TODO change to https://github.com/likeastore/ngDialog#api
 export default class EditModalCtrl {
+  /* @ngInject */
   constructor($uibModalInstance, $scope, dataApi, vm, cfg, title) {
     this.modal = $uibModalInstance
     this.$scope = $scope
