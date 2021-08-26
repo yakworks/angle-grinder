@@ -92,5 +92,5 @@ class controller {
     toast.success(`your foo is now named ${result.value}`, 'Named Foo!')
   }
 }
-
+controller.$inject = ['$compile', '$scope']
 export default { template, controller }

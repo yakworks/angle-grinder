@@ -44,7 +44,7 @@ module.exports = function(env, argv) {
       publicPath: '/'
     },
     optimization: {
-      minimize: false,
+      //minimize: false,
       chunkIds: "named",
       moduleIds: 'hashed', //makes it so the vendor chunks are cached and not rebuilt everytime
       splitChunks: {

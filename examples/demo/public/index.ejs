@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en" data-ng-app="app">
+<html lang="en" data-ng-app="app" ng-strict-di>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -28,7 +28,8 @@
     <!-- <link rel="stylesheet" data-ng-href="assets/theme/{{ app.layout.theme }}.css" /> -->
     <script src="<%= htmlWebpackPlugin.options.configPath %>"></script>
 </head>
-<body ng-controller="AppCtrl as $appCtrl">
+
+<body ng-controller="AppCtrl as $appCtrl" [ng-strict-di="boolean"]>
     <div ui-view id="app" ng-class="{
       'app-sidebar-fixed' : $appCtrl.layout.isSidebarFixed,
       'app-sidenav-fixed' : $appCtrl.layout.isSidebarFixed,

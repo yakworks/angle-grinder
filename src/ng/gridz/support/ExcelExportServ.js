@@ -43,6 +43,7 @@ XlsTemplateClass.$inject = ['$window']
 gridz.service('xlsTemplate', XlsTemplateClass)
 
 class GridDataClass {
+  /* @ngInject */
   constructor($document) {
     const findGridEl = gridId => $document.find(`div#gbox_${gridId}`)
 
@@ -112,10 +113,10 @@ class GridDataClass {
   }
 }
 
-GridDataClass.$inject = ['$document']
 gridz.service('gridData', GridDataClass)
 
 class XlsDataClass {
+  /* @ngInject */
   constructor(xlsTemplate, gridData) {
     return function(gridId, selectedRows) {
       // generate the xls file content
@@ -126,12 +127,11 @@ class XlsDataClass {
   }
 }
 
-XlsDataClass.$inject = ['xlsTemplate', 'gridData']
-
 // Generates XLS data uri
 gridz.service('xlsData', XlsDataClass)
 
 class CsvDataClass {
+  /* @ngInject */
   constructor(gridData) {
     const prepareCsvHeaders = function(data) {
       const headers = []
@@ -168,8 +168,6 @@ class CsvDataClass {
     }
   }
 }
-
-CsvDataClass.$inject = ['gridData']
 
 // Generates CSV data
 gridz.service('csvData', CsvDataClass)

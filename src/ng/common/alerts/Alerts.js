@@ -2,6 +2,7 @@ import _ from 'lodash'
 window.toastr = require('toastr')
 
 export default class Alerts {
+  /* @ngInject */
   constructor(alertTimeout) {
     // this.$timeout = $timeout
     this.alertTimeout = alertTimeout
@@ -54,5 +55,3 @@ export default class Alerts {
     return this.setTimeout(delay, 'error')
   }
 }
-
-Alerts.$inject = ['alertTimeout']
