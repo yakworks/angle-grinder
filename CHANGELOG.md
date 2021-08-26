@@ -1,3 +1,8 @@
+### v4.0.12
+
+[Full Changelog](https://github.com/yakworks/angle-grinder/compare/v4.0.11...v4.0.12)
+- Minify fix (#605) [link](https://github.com/yakworks/angle-grinder/commit/01051426b9d13b7a66e5331facd96e6cf1479ad8)
+
 ### v4.0.11
 
 [Full Changelog](https://github.com/yakworks/angle-grinder/compare/v4.0.10...v4.0.11)
