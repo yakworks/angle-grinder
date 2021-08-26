@@ -63,19 +63,19 @@ $font-alt: 'Montserrat', sans-serif;
     }
 }
 
-p {
-    font-family: $font;
-    font-weight: 300;
-    color: $light-text;
+// p {
+//     font-family: $font;
+//     font-weight: 300;
+//     color: $light-text;
 
-    &.white-text {
-        color: $white;
-    }
-}
+//     &.white-text {
+//         color: $white;
+//     }
+// }
 
-div {
-    color: $dark-text;
-}
+// div {
+//     color: $dark-text;
+// }
 
 var {
     font-style: normal;
@@ -113,72 +113,4 @@ body {
             }
         }
     }
-}
-
-/* ==========================================================================
-3. Typography Helpers
-========================================================================== */
-
-.is-font {
-    font-family: $font;
-}
-
-.is-font-alt {
-    font-family: $font-alt !important;
-}
-
-.is-weight-300 {
-    font-weight: 300 !important;
-}
-
-.is-weight-400 {
-    font-weight: 400 !important;
-}
-
-.is-weight-500 {
-    font-weight: 500 !important;
-}
-
-.is-weight-600 {
-    font-weight: 600 !important;
-}
-
-.is-weight-700 {
-    font-weight: 700 !important;
-}
-
-.is-weight-500 {
-    font-weight: 500 !important;
-}
-
-.is-weight-900 {
-    font-weight: 900 !important;
-}
-
-.rem-70 {
-    font-size: .7rem;
-}
-
-.rem-75 {
-    font-size: .75rem;
-}
-
-.rem-80 {
-    font-size: .8rem;
-}
-
-.rem-85 {
-    font-size: .85rem;
-}
-
-.rem-90 {
-    font-size: .9rem;
-}
-
-.rem-95 {
-    font-size: .95rem;
-}
-
-.rem-100 {
-    font-size: 1rem;
 }

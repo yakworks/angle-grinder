@@ -143,7 +143,7 @@ $dropdown-item-disabled-color: $input-disabled-color !default;
 .dropdown-header {
   display: block;
   padding: 3px 20px;
-  font-size: $size-10;
+  font-size: $size-xsmall;
   line-height: $control-line-height;
   color: $text-light;
   white-space: nowrap; // as with > li > a

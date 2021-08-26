@@ -4,32 +4,33 @@
 /* ---------------------------------------------------------------------- */
 // <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet" />
 // <link href="http://fonts.googleapis.com/css?family=Lato:300,400,400italic,600,700|Raleway:300,400,500,600,700|Crete+Round:400italic" rel="stylesheet" type="text/css" />
-@import url('http://fonts.googleapis.com/css?family=Montserrat:wght@400;500;600;700;800&display=swap');
+@import url('http://fonts.googleapis.com/css?family=Montserrat:wght@300,400;500;600;700&display=swap');
 
 //**** Typography sizing ****/
 
 // Custom sizes, with default html font size of 16px, size-10 maps to 10px, etc..
-$size-10: 0.625rem !default // ~10px
-$size-12: 0.75rem !default // ~12px
-$size-14: 0.875rem !default // ~14px
-$size-16: 1rem !default // ~16px
-$size-18: 1.125rem !default // ~18px
-$size-20: 1.25rem !default // ~20px
-$size-24: 1.5rem !default // ~24px
-$size-32: 2rem !default // ~32px
-$size-40: 2.5rem !default // ~40px
+$rem-62: 0.625rem !default // ~10px
+$rem-75: 0.75rem !default // ~12px
+$rem-87: 0.875rem !default // ~14px
+$rem-1: 1rem !default // ~16px
+$rem-112: 1.125rem !default // ~18px
+$rem-125: 1.25rem !default // ~20px
+$rem-150: 1.5rem !default // ~24px
+$rem-200: 2rem !default // ~32px
+$rem-250: 2.5rem !default // ~40px
 
-// $sizes: $size-10 $size-12 $size-14 $size-16 $size-18 $size-20 $size-24 !default
+// Bulma sizes and our additions
+$size-xsmall: $rem-62 !default // ~10px
+$size-small: $rem-75 !default // ~12px
+$size-short: $rem-87 !default // ~14px
+$size-normal: $rem-1 !default //  ~16px used in controls mixin, etc..
+$size-medium: $rem-125 !default // ~20px
+$size-large: $rem-150 !default // ~24px
+$size-xl: $rem-200 !default // ~32px
+$size-xxl: $rem-250 !default // ~40px
 
-// Bulma size and family variables
-$size-xsmall: $size-10 !default // 12px
-$size-small: $size-12 !default // 12px
-$size-short: $size-14 !default // 12px
-$size-normal: $size-16 !default // used in controls mixin, etc..
-$size-medium: $size-20 !default // 20px
-$size-large: $size-24 !default // 24px
-
-// HTML: font-size. kind of goofy name but in Bulma this is what sets the size of 1rem unit on html css
+// HTML: font-size. kind of goofy name but in Bulma
+// 1rem- this is what sets the size of 1rem unit on html css
 $body-size: 16px !default // html: font-size
 
 $family-sans-serif: system-ui, -apple-system, BlinkMacSystemFont,  "Segoe UI", Roboto, "Helvetica Neue", Arial,"Noto Sans", "Liberation Sans", sans-serif,"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;

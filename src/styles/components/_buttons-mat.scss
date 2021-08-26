@@ -16,10 +16,10 @@
 /* yak ui - added variables */
 $button-font-size: $size-normal !default;
 $button-font-weight: $weight-medium !default;
-$button-height: $size-40 !default; //40px
+$button-height: $size-medium * 2 !default; //40px
 
-$button-icon-size: $size-20 !default;
-$button-icon-solo-size: $size-24 !default;
+$button-icon-size: $size-medium !default;
+$button-icon-solo-size: $size-large !default;
 $button-icon-button-size: $button-height !default;
 
 $shadow2:  0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
@@ -102,7 +102,7 @@ $shadow-large: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 
     &.is-solo, &.is-solo:last-child  {
       // $margin-calc: calc(#{-1 * ($button-icon-button-size - $button-icon-solo-size)} + #{$button-border-width});
       // this is hacky and will not work if sizes are messed with, makes it a 40x40 with neg margin
-      $margin-calc: calc(-#{$size-10} + #{$button-border-width});
+      $margin-calc: calc(-#{$size-xsmall} + #{$button-border-width});
       margin-left: $margin-calc;
       margin-right: $margin-calc;
       @include iconSize($button-icon-solo-size);
@@ -169,7 +169,7 @@ $shadow-large: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 
     font-size: $size-small;
   }
   &.is-normal {
-    font-size: $size-14;
+    font-size: $size-short;
   }
   &.is-medium {
     font-size: $size-normal;

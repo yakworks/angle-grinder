@@ -1,4 +1,4 @@
-$icon-dimensions-small: $size-14 !default;
+$icon-dimensions-small: $size-short !default;
 @import "~bulma/sass/elements/icon.sass";
 
 @mixin iconSize ($icon-size) {

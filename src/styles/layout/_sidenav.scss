@@ -4,7 +4,7 @@
 
 $sidenav-font-size: $size-normal !default; // 16
 $sidenav-font-weight: $weight-semibold !default;
-$sidenav-children-font-size: $size-14 !default; // 14
+$sidenav-children-font-size: $size-short !default; // 14
 
 $sidenav-nav-width: 256px !default;
 $sidenav-nav-closed-width: $icon-dimensions + $item-spacing + $item-spacing !default; // 24px + 16px + 16px = 56
