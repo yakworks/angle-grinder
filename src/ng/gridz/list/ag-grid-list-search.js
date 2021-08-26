@@ -17,7 +17,7 @@ const template = `
 
 export default {
   template: template,
-  controller: ['$scope',function($scope) {
+  controller: ['$scope', function($scope) {
     this.$onInit = () => {
       $scope.listCtrl = this.listCtrl
     }

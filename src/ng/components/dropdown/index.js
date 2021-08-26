@@ -35,7 +35,7 @@ class Controller {
   }
 }
 
-Controller.$inject=['$element']
+Controller.$inject = ['$element']
 export default () => ({
   restrict: 'E',
   replace: true,

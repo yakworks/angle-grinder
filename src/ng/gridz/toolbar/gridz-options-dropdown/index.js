@@ -39,4 +39,4 @@ export default () => ({
   template: require('./dropdown.html'),
   controller: Controller
 })
-Controller.$inject=['$element', 'ColumnConfigServ']
+Controller.$inject = ['$element', 'ColumnConfigServ']

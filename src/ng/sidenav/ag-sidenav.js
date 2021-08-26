@@ -104,7 +104,7 @@ class controller {
   }
 }
 
-controller.$inject=['$timeout']
+controller.$inject = ['$timeout']
 export default {
   controller,
   template: require('./ag-sidenav.html')
