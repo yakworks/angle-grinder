@@ -73,6 +73,16 @@ module.exports = function(env, argv) {
       rules: [
         { test: /\.js$/, loader: 'babel-loader', exclude: /(node_modules|bower_components)/},
         {
+          test: /\.svelte$/,
+          use: {
+            loader: 'svelte-loader',
+            options: {
+              emitCss: true,
+              hotReload: true
+            }
+          }
+        },
+        {
           test: /\.(scss|css|sass)$/,
           //exclude: /themes\/.+\.scss$/,
           use: [
@@ -174,8 +184,12 @@ module.exports = function(env, argv) {
       //extensions: ['.js', '.vue', '.json'],
       alias: {
         'angle-grinder': path.resolve('./'),
+        svelte: path.resolve('node_modules', 'svelte'),
         //Components: path.resolve(__dirname, "..", "src", "components"),
-      }
+      },
+      extensions: ['.mjs', '.js', '.svelte'],
+      mainFields: ['svelte', 'browser', 'module', 'main']
+
     }
   }
   if(isProd){
