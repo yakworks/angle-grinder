@@ -14,6 +14,7 @@ const tagData = require('../public/data/Tags.json')
 const countryData = require('../public/data/countries.json')
 
 const custApi = require('./customerApi')
+const batchApi = require('./batchApi')
 // const invoiceConfigData = require('../public/data/InvoiceConfig.json')
 // const custConfigYml = require('../public/data/CustomerConfig.yml')
 // const custConfigData = yaml.load(fs.readFileSync('./examples/demo/public/data/CustomerConfig.yml', 'utf8'))
@@ -22,6 +23,7 @@ const proxy = {
   ...generateApi('invoice', invoiceData).urls,
   ...generateApi('tranState', tranStateData).urls,
   ...custApi.urls,
+  ...batchApi.urls,
   ...generateApi('tag', tagData).urls,
 
   'GET /api/appConfig/invoice': (req, res) => {
@@ -35,6 +37,11 @@ const proxy = {
   'GET /api/appConfig/tag': (req, res) => {
     const custConfigData = yaml.load(fs.readFileSync('./examples/demo/public/data/TagConfig.yml', 'utf8'))
     return res.json(custConfigData)
+  },
+
+  'GET /api/appConfig/batch': (req, res) => {
+    const batchConfigData = yaml.load(fs.readFileSync('./examples/demo/public/data/BatchConfig.yml', 'utf8'))
+    return res.json(batchConfigData)
   },
 
   'GET /countries/picklist': (req, res) => {

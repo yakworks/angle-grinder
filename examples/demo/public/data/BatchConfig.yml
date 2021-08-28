@@ -1,0 +1,150 @@
+gridOptions:
+  colModel:
+    - {name: id, width: 100, formatter: gridLink}
+    - {name: batchDate, width: 120, formatter: date}
+    - {name: lockbox, width: 160}
+    - {name: controlAmount, width: 150, formatter: currencyOrZero}
+    - {name: paymentTotal, width: 150,  sortable: false, formatter: currencyOrZero}
+    - {name: arPostedDate, width: 120, formatter: date }
+    - {name: unreconciled, label: Exception, align: center, width: 120, sortable: false, formatter:unreconciled }
+    - {name: reconciled, label: Reconciled, align: center , width: 120, sortable: false, formatter:reconciled }
+    - {name: paymentCount, align: center , width: 120, sortable: false }
+    - {name: source, width: 140 }
+    - {name: errorDesc, label: Error Description, width: 140 }
+    - {name: createdDate, label: Created Date, width: 100, formatter: date }
+
+  toolbarOptions:
+    leftButtons:
+      import:
+        icon: fa-file-import
+        tooltip: Import
+    selectedButtons:
+      correct:
+        icon: fa-check-double
+        tooltip: Correct
+
+searchForm:
+  column1:
+    - key: id
+      label: Batch Id
+      type: input-list
+    - key: batchDate
+      type: date-range
+    - key: arPostedDate
+      type: date-range
+    - key: batchAmount
+      type: amount
+    - key: lockbox
+      type: select
+      selectOptions:
+        dataApiKey: ar/lockbox
+        displayFields:
+          - lockboxNumber
+    - key: bankSequence
+      type: amount
+  column2:
+    - key: batchType
+      type: select
+      selectOptions:
+        dataApiKey: autocash/layoutImport
+        displayFields:
+          - code # Should it be code?
+    - key: paymentId
+      type: amount
+    - key: 'payment.custNum'
+    - key: 'payment.checkAmount'
+      type: amount
+    - key: 'payment.checkNum'
+  column3:
+    - key: 'payment.isReconciled'
+      label: Reconciled
+      type: select
+      selectOptions:
+        useDataObject: false
+        data:
+          - id: true
+            name: 'Yes'
+          - id: false
+            name: 'No'
+          - id: ''
+            name: 'Any'
+    - key: 'isCorrected'
+      type: select
+      label: Corrected
+      selectOptions:
+        useDataObject: false
+        data:
+          - id: true
+            name: 'Yes'
+          - id: false
+            name: 'No'
+          - id: ''
+            name: Any
+    - key: 'payment.isPosted'
+      type: select
+      label: Post
+      selectOptions:
+        data:
+          - id: true
+            name: 'Yes'
+          - id: false
+            name: 'No'
+          - id: ''
+            name: Any
+    - key: 'payment.paymentDetail.refnum'
+      label: PD Refnum
+    - key: 'payment.owner'
+      type: select
+      selectOptions:
+      dataApi: paymentOwner
+importForm:
+  - key: layout
+    type: select
+    selectOptions:
+      dataApiKey: autocash/layoutImport
+
+editForm:
+  - key: id
+    label: Batch Id
+    disabled: true
+  - key: batchDate
+  - key: controlAmount
+    label: Batch Amount
+  - key: paymentTotal
+    type: amount
+  - key: arPostedDate
+    type: date
+  - key: lockBox
+    label: Lockbox
+    type: select
+    selectOptions:
+      dataApiKey: autocash/lockbox
+      useDataObject: false
+      displayFields:
+        - lockboxNumber
+  - key: reconciled
+    type: amount
+    disabled: true
+  - key: unreconciled
+    type: amount
+    label: Exception
+    disabled: true
+  - key: paymentCount
+    disabled: true
+  - key: source
+  - key: batchType
+    type: select
+    selectOptions:
+      dataApiKey: autocash/layoutImport
+      displayFields:
+        - batchType
+  - key: name
+  - key: company
+  - key: business
+    type: select
+    selectOptions:
+      dataApiKey: rally/org
+      dataApiParams:
+        orgTypeId: 5
+  - key: errorDesc
+

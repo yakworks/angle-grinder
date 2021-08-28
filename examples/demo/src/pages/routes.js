@@ -12,6 +12,26 @@ const componentsStates = {
         title: 'Customer'
       },
       component: 'orgShowDemoIndex'
+    },
+    {
+      name: 'batch',
+      data: { title: 'Intelligent Auto-Cash' },
+      abstract: 'rcm.receivables.arBatch.list',
+      url: '/batch',
+      resolve: {
+        apiKey: () => 'batch'
+      },
+      children: [{
+        name: 'list',
+        isMenuItem: false,
+        url: '',
+        component: 'batchList'
+      }, {
+        name: 'Edit Batch',
+        isMenuItem: false,
+        url: '/:id',
+        component: 'batchEdit'
+      }]
     }
   ]
 }
