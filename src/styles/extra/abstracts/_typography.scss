@@ -15,15 +15,6 @@ $font-alt: 'Montserrat', sans-serif;
 
 .title {
     font-family: $font-alt;
-    // color: $dark-text;
-
-    &.is-narrow {
-        margin-bottom: 0;
-    }
-
-    &.is-thin {
-        font-weight: 500;
-    }
 
     &.is-heavy {
         font-weight: 600;

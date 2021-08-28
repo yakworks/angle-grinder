@@ -1,7 +1,10 @@
-.h-avatar {
+.is-avatar {
   position: relative;
   display: inline-block;
   vertical-align: bottom;
+  // flex-basis: auto;
+  // flex-grow: 0;
+  // flex-shrink: 0;
 
   &.has-dot {
     &:after {
@@ -49,7 +52,7 @@
 
     &.dot-grey {
       &:after {
-        background: $light-text;
+        background: $text-lighter;
       }
     }
   }
@@ -119,54 +122,6 @@
         }
       }
 
-      &.is-h-purple {
-        background: lighten($h-purple, 36%);
-
-        span {
-          color: $h-purple;
-        }
-      }
-
-      &.is-h-orange {
-        background: lighten($h-orange, 18%);
-
-        span {
-          color: $h-orange;
-        }
-      }
-
-      &.is-h-blue {
-        background: lighten($h-blue, 32%);
-
-        span {
-          color: $h-blue;
-        }
-      }
-
-      &.is-h-red {
-        background: lighten($h-red, 38%);
-
-        span {
-          color: $h-red;
-        }
-      }
-
-      &.is-h-green {
-        background: lighten($h-green, 22%);
-
-        span {
-          color: $h-green;
-        }
-      }
-
-      &.is-h-yellow {
-        background: lighten($h-yellow, 22%);
-
-        span {
-          color: darken($h-yellow, 8%);
-        }
-      }
-
       span {
         position: relative;
 
@@ -204,7 +159,7 @@
           display: block;
           font-size: 0.9rem;
           font-weight: 500;
-          color: $light-text;
+          color: $text-lighter;
         }
       }
     }
@@ -488,7 +443,7 @@
 .avatar-stack {
   display: flex;
 
-  .h-avatar {
+  .is-avatar {
     border-radius: 50%;
 
     &.is-small {
@@ -497,7 +452,7 @@
       &:not(:first-child) {
         $var: 12;
 
-        @for $i from 1 through 99 {
+        @for $i from 1 through 10 {
           &:nth-child(#{$i}) {
             margin-left: -#{$var}px;
           }

@@ -1,273 +1,86 @@
-<div id="huro-demo" class="view-wrapper" data-sidebar-open data-naver-offset="342"
-  data-menu-item="#components-sidebar-menu" data-mobile-item="#components-sidebar-menu-mobile">
-  <div class="page-content-wrapper">
-    <div class="page-content is-relative">
+<h1 class="title is-5"> Responsive Flex Table </h1>
 
-      <div class="page-content-inner">
-        <div class="columns">
-          <div class="column is-12">
+<div class="columns">
+  <div class="column is-12">
 
-            <!--Flex Table-->
-            <div class="demo-card has-more-margin">
-              <div class="demo-title">
-                <h3 class="title is-thin is-5">Responsive Flex Table</h3>
-                <p>Not a Html5 table, uses flexbox to be reponsive.</p>
-              </div>
-            </div>
+    <div class="flex-table">
 
-            <div class="flex-table">
+      <!--Table header-->
+      <div class="flex-table-header">
+        <span class="is-grow">User</span>
+        <span>Location</span>
+        <span>Industry</span>
+        <span>Status</span>
+        <span>Relations</span>
+        <span class="cell-end">Actions</span>
+      </div>
 
-              <!--Table header-->
-              <div class="flex-table-header">
-                <span class="is-grow">User</span>
-                <span>Location</span>
-                <span>Industry</span>
-                <span>Status</span>
-                <span>Relations</span>
-                <span class="cell-end">Actions</span>
-              </div>
-
-              <!--Table item-->
-              <div class="flex-table-item">
-                <div class="flex-table-cell is-media is-grow" data-th="User">
-                  <div class="h-avatar is-medium">
-                    <img class="avatar" src="https://via.placeholder.com/150x150"
-                      data-demo-src="assets/img/avatars/photos/8.jpg" alt="">
-                    <img class="badge" src="https://via.placeholder.com/150x150"
-                      data-demo-src="assets/img/icons/flags/united-states-of-america.svg" alt="">
-                  </div>
-                  <div>
-                    <span class="item-name">Erik K.</span>
-                    <span class="item-meta">
-                      <span>Product Manager</span>
-                    </span>
-                  </div>
-                </div>
-                <div class="flex-table-cell" data-th="Location">
-                  <span class="light-text">Las Vegas, NV</span>
-                </div>
-                <div class="flex-table-cell" data-th="Industry">
-                  <span class="light-text">Software</span>
-                </div>
-                <div class="flex-table-cell" data-th="Status">
-                  <span class="tag is-success is-rounded">Online</span>
-                </div>
-                <div class="flex-table-cell" data-th="Relations">
-                  <div class="avatar-stack is-pushed-mobile">
-                    <div class="h-avatar is-small">
-                      <img class="avatar" src="https://via.placeholder.com/150x150"
-                        data-demo-src="assets/img/avatars/photos/7.jpg" alt="">
-                    </div>
-                    <div class="h-avatar is-small">
-                      <span class="avatar is-fake is-info">
-                        <span>JD</span>
-                      </span>
-                    </div>
-                    <div class="h-avatar is-small">
-                      <img class="avatar" src="https://via.placeholder.com/150x150"
-                        data-demo-src="assets/img/avatars/photos/12.jpg" alt="">
-                    </div>
-                    <div class="h-avatar is-small">
-                      <span class="avatar is-more">
-                        <span class="inner">
-                          <span>+2</span>
-                        </span>
-                      </span>
-                    </div>
-                  </div>
-                </div>
-                <div class="flex-table-cell cell-end" data-th="Actions">
-
-                </div>
-              </div>
-
-              <!--Table item-->
-              <div class="flex-table-item">
-                <div class="flex-table-cell is-media is-grow" data-th="User">
-                  <div class="h-avatar is-medium">
-                    <img class="avatar" src="https://via.placeholder.com/150x150"
-                      data-demo-src="assets/img/avatars/photos/22.jpg" alt="">
-                    <img class="badge" src="https://via.placeholder.com/150x150"
-                      data-demo-src="assets/img/icons/flags/united-states-of-america.svg" alt="">
-                  </div>
-                  <div>
-                    <span class="item-name">Jimmy H.</span>
-                    <span class="item-meta">
-                      <span>Project Manager</span>
-                    </span>
-                  </div>
-                </div>
-                <div class="flex-table-cell" data-th="Location">
-                  <span class="light-text">Los Angeles, CA</span>
-                </div>
-                <div class="flex-table-cell" data-th="Industry">
-                  <span class="light-text">Business</span>
-                </div>
-                <div class="flex-table-cell" data-th="Status">
-                  <span class="tag is-rounded">Offline</span>
-                </div>
-                <div class="flex-table-cell" data-th="Relations">
-                  <div class="avatar-stack is-pushed-mobile">
-                    <div class="h-avatar is-small">
-                      <span class="avatar is-fake is-danger">
-                        <span>SC</span>
-                      </span>
-                    </div>
-                  </div>
-                </div>
-                <div class="flex-table-cell cell-end" data-th="Actions">
-
-                </div>
-              </div>
-
-              <!--Table item-->
-              <div class="flex-table-item">
-                <div class="flex-table-cell is-media is-grow" data-th="User">
-                  <div class="h-avatar is-medium">
-                    <img class="avatar" src="https://via.placeholder.com/150x150"
-                      data-demo-src="assets/img/avatars/photos/25.jpg" alt="">
-                    <img class="badge" src="https://via.placeholder.com/150x150"
-                      data-demo-src="assets/img/icons/flags/united-states-of-america.svg" alt="">
-                  </div>
-                  <div>
-                    <span class="item-name">Melany W.</span>
-                    <span class="item-meta">
-                      <span>Web Developer</span>
-                    </span>
-                  </div>
-                </div>
-                <div class="flex-table-cell" data-th="Location">
-                  <span class="light-text">San Jose, CA</span>
-                </div>
-                <div class="flex-table-cell" data-th="Industry">
-                  <span class="light-text">Design</span>
-                </div>
-                <div class="flex-table-cell" data-th="Status">
-                  <span class="tag is-success is-rounded">Online</span>
-                </div>
-                <div class="flex-table-cell" data-th="Relations">
-                  <div class="avatar-stack is-pushed-mobile">
-                    <div class="h-avatar is-small">
-                      <span class="avatar is-fake is-success">
-                        <span>BT</span>
-                      </span>
-                    </div>
-                    <div class="h-avatar is-small">
-                      <img class="avatar" src="https://via.placeholder.com/150x150"
-                        data-demo-src="assets/img/avatars/photos/18.jpg" alt="">
-                    </div>
-                  </div>
-                </div>
-                <div class="flex-table-cell cell-end" data-th="Actions">
-
-                </div>
-              </div>
-
-              <!--Table item-->
-              <div class="flex-table-item">
-                <div class="flex-table-cell is-media is-grow" data-th="User">
-                  <div class="h-avatar is-medium">
-                    <img class="avatar" src="https://via.placeholder.com/150x150"
-                      data-demo-src="assets/img/avatars/photos/12.jpg" alt="">
-                    <img class="badge" src="https://via.placeholder.com/150x150"
-                      data-demo-src="assets/img/icons/flags/united-states-of-america.svg" alt="">
-                  </div>
-                  <div>
-                    <span class="item-name">Joshua S.</span>
-                    <span class="item-meta">
-                      <span>Backend Developer</span>
-                    </span>
-                  </div>
-                </div>
-                <div class="flex-table-cell" data-th="Location">
-                  <span class="light-text">Las Vegas, NV</span>
-                </div>
-                <div class="flex-table-cell" data-th="Industry">
-                  <span class="light-text">Accounting</span>
-                </div>
-                <div class="flex-table-cell" data-th="Status">
-                  <span class="tag is-danger is-rounded">Busy</span>
-                </div>
-                <div class="flex-table-cell" data-th="Relations">
-                  <div class="avatar-stack is-pushed-mobile">
-                    <div class="h-avatar is-small">
-                      <img class="avatar" src="https://via.placeholder.com/150x150"
-                        data-demo-src="assets/img/avatars/photos/18.jpg" alt="">
-                    </div>
-                  </div>
-                </div>
-                <div class="flex-table-cell cell-end" data-th="Actions">
-
-                </div>
-              </div>
-
-              <!--Table item-->
-              <div class="flex-table-item">
-                <div class="flex-table-cell is-media is-grow" data-th="User">
-                  <div class="h-avatar is-medium">
-                    <img class="avatar" src="https://via.placeholder.com/150x150"
-                      data-demo-src="assets/img/avatars/photos/13.jpg" alt="">
-                    <img class="badge" src="https://via.placeholder.com/150x150"
-                      data-demo-src="assets/img/icons/flags/united-states-of-america.svg" alt="">
-                  </div>
-                  <div>
-                    <span class="item-name">Tina C.</span>
-                    <span class="item-meta">
-                      <span>Business Analyst</span>
-                    </span>
-                  </div>
-                </div>
-                <div class="flex-table-cell" data-th="Location">
-                  <span class="light-text">Los Angeles, CA</span>
-                </div>
-                <div class="flex-table-cell" data-th="Industry">
-                  <span class="light-text">Finance</span>
-                </div>
-                <div class="flex-table-cell" data-th="Status">
-                  <span class="tag is-danger is-rounded">Busy</span>
-                </div>
-                <div class="flex-table-cell" data-th="Relations">
-                  <div class="avatar-stack is-pushed-mobile">
-                    <div class="h-avatar is-small">
-                      <img class="avatar" src="https://via.placeholder.com/150x150"
-                        data-demo-src="assets/img/avatars/photos/25.jpg" alt="">
-                    </div>
-                    <div class="h-avatar is-small">
-                      <img class="avatar" src="https://via.placeholder.com/150x150"
-                        data-demo-src="assets/img/avatars/photos/11.jpg" alt="">
-                    </div>
-                    <div class="h-avatar is-small">
-                      <img class="avatar" src="https://via.placeholder.com/150x150"
-                        data-demo-src="assets/img/avatars/photos/5.jpg" alt="">
-                    </div>
-                  </div>
-                </div>
-                <div class="flex-table-cell cell-end" data-th="Actions">
-
-                </div>
-              </div>
-
-            </div>
-
-            <!--Table Pagination-->
-            <nav class="flex-pagination pagination is-rounded" aria-label="pagination">
-              <a class="pagination-previous">Previous</a>
-              <a class="pagination-next">Next</a>
-              <ul class="pagination-list">
-                <li><a class="pagination-link" aria-label="Goto page 1">1</a></li>
-                <li><span class="pagination-ellipsis">&hellip;</span></li>
-                <li><a class="pagination-link" aria-label="Goto page 45">45</a></li>
-                <li><a class="pagination-link is-current" aria-label="Page 46" aria-current="page">46</a></li>
-                <li><a class="pagination-link" aria-label="Goto page 47">47</a></li>
-                <li><span class="pagination-ellipsis">&hellip;</span></li>
-                <li><a class="pagination-link" aria-label="Goto page 86">86</a></li>
-              </ul>
-            </nav>
-
+      <!--Table item-->
+      <div ng-repeat="item in ::$ctrl.peopleData" class="flex-table-item">
+        <div class="flex-table-cell is-media is-grow" data-th="User">
+          <div class="is-avatar is-medium">
+            <img class="avatar" src="/assets/images/photos/{{item.avatar}}" alt="">
+          </div>
+          <div>
+            <span class="item-name">{{item.name}}</span>
+            <span class="item-meta">
+              <span>{{item.title}}</span>
+            </span>
           </div>
         </div>
-
+        <div class="flex-table-cell" data-th="Location">
+          <span class="light-text">{{item.location}}</span>
+        </div>
+        <div class="flex-table-cell" data-th="Industry">
+          <span class="light-text">Software</span>
+        </div>
+        <div class="flex-table-cell" data-th="Status">
+          <span class="tag is-success is-rounded">Online</span>
+        </div>
+        <div class="flex-table-cell" data-th="Relations">
+          <div class="avatar-stack is-pushed-mobile">
+            <div class="is-avatar is-small">
+              <img class="avatar" src="https://via.placeholder.com/150x150"
+                data-demo-src="assets/img/avatars/photos/7.jpg" alt="">
+            </div>
+            <div class="is-avatar is-small">
+              <span class="avatar is-fake is-info">
+                <span>JD</span>
+              </span>
+            </div>
+            <div class="is-avatar is-small">
+              <img class="avatar" src="https://via.placeholder.com/150x150"
+                data-demo-src="assets/img/avatars/photos/12.jpg" alt="">
+            </div>
+            <div class="is-avatar is-small">
+              <span class="avatar is-more">
+                <span class="inner">
+                  <span>+2</span>
+                </span>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="flex-table-cell cell-end" data-th="Actions">
+        </div>
       </div>
-    </div>
+
+    </div><!-- flex-table -->
+
+    <!--Table Pagination-->
+    <nav class="flex-pagination pagination is-rounded" aria-label="pagination">
+      <a class="pagination-previous">Previous</a>
+      <a class="pagination-next">Next</a>
+      <ul class="pagination-list">
+        <li><a class="pagination-link" aria-label="Goto page 1">1</a></li>
+        <li><span class="pagination-ellipsis">&hellip;</span></li>
+        <li><a class="pagination-link" aria-label="Goto page 45">45</a></li>
+        <li><a class="pagination-link is-current" aria-label="Page 46" aria-current="page">46</a></li>
+        <li><a class="pagination-link" aria-label="Goto page 47">47</a></li>
+        <li><span class="pagination-ellipsis">&hellip;</span></li>
+        <li><a class="pagination-link" aria-label="Goto page 86">86</a></li>
+      </ul>
+    </nav>
+
   </div>
 </div>

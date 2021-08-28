@@ -12,6 +12,7 @@ import listsDemoMod from './lists'
 import chartsDemoMod from './charts'
 import cardsDemoMod from './cards'
 import colorsDemoMod from './colors'
+import avatarsDemoMod from './avatars'
 // import modalsMod from './modals'
 
 // export module name
@@ -29,6 +30,7 @@ export default angular
     listsDemoMod,
     chartsDemoMod,
     cardsDemoMod,
-    colorsDemoMod
+    colorsDemoMod,
+    avatarsDemoMod
   ])
   .name

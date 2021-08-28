@@ -107,7 +107,7 @@
             display: flex;
             align-items: center;
             padding: 0 10px;
-            font-family: $font;
+            font-family: $family-primary;
 
             &.is-grow {
                 flex-grow: 2;
@@ -275,7 +275,7 @@
                         display: block !important;
                         font-size: .8rem;
                         color: $light-text;
-                        font-family: $font;
+                        font-family: $family-primary;
                     }
                 }
             }
@@ -385,7 +385,7 @@ body {
         li {
             .pagination-link {
                 background: $white;
-                font-family: $font;
+                font-family: $family-primary;
                 font-size: .9em;
 
                 &.is-current {
@@ -492,7 +492,7 @@ body {
 .table {
     tbody {
         th {
-            font-family: $font;
+            font-family: $family-primary;
             color: $dark-text;
 
             &.is-media {
@@ -508,7 +508,7 @@ body {
         }
 
         td {
-            font-family: $font;
+            font-family: $family-primary;
             vertical-align: middle;
 
             &:not(:first-child) {

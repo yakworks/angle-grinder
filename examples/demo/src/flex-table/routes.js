@@ -9,7 +9,8 @@ const flexStates = {
     {
       name: 'card-table',
       data: { title: 'Flex Card Table' },
-      template: require('./card-table/component.html')
+      component: 'flexCardDemoIndex'
+      // template: require('./card-table/component.html')
     },
     {
       name: 'select-table',

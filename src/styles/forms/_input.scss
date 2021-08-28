@@ -11,7 +11,7 @@
   }
   .icon {
     &.is-small {
-      font-size: $size-short;
+      font-size: $text-sm;
     }
     &.is-clickable {
       pointer-events: auto;

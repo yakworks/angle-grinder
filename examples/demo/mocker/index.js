@@ -6,7 +6,7 @@ const generateApi = require('./generateApi').generateApi
 
 const noProxy = process.env.NO_PROXY === 'true'
 
-const people = require('../src/data/selects').people
+const people = require('../src/data/sample').people
 const invoiceData = require('../public/data/Invoices.json')
 const tranStateData = require('../public/data/TranStates.json')
 // const customerData = require('../public/data/Customers.json')

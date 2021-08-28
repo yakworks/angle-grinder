@@ -109,7 +109,7 @@ $list-dense-content-padding: $list-padding-y 0 !default;
 
     .item-subtitle {
       @debug "$text-light: #{$text-light}";
-      font-size: $size-short;
+      font-size: $text-sm;
       color: $text-light;
     }
 
@@ -137,7 +137,7 @@ $list-dense-content-padding: $list-padding-y 0 !default;
       padding: $list-dense-content-padding;
     }
     .item-title {
-      font-size: $size-short;
+      font-size: $text-sm;
     }
     .item-action {
       height: $list-dense-icon-height;

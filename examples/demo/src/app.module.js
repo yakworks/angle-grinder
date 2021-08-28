@@ -18,6 +18,7 @@ import snippetsModule from './utils/demo/demo.module'
 import componentsModule from './components'
 import formsModule from './controls'
 import gridsModule from './grids'
+import flexTableModule from './flex-table'
 import pagesModule from './pages'
 
 // store
@@ -35,6 +36,7 @@ export default angular.module('app', [
   componentsModule,
   pagesModule,
   formsModule,
+  flexTableModule,
   gridsModule,
   fullscreen,
   truncateFilters,

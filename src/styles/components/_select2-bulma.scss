@@ -10,7 +10,7 @@ $select2-font-size: 14px;
   color: $input-color;
 }
 
-@mixin delete-icon ($delSize: $size-normal) {
+@mixin delete-icon ($delSize: $text-base) {
   @extend %delete;
   background-image: none !important;
   position: absolute;
@@ -366,7 +366,7 @@ $select2-font-size: 14px;
 .select2-results {
   .select-all-menu {
     color: $link;
-    font-size: $size-xsmall;
+    font-size: $text-xxs;
   }
   .select-all, .clear-all{
     padding: 4px;

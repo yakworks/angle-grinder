@@ -29,16 +29,6 @@
     <script src="<%= htmlWebpackPlugin.options.configPath %>"></script>
 </head>
 <body ng-controller="AppCtrl as $appCtrl">
-    <!-- <div ui-view id="app" class="lyt-2"
-    ng-class="{
-      'app-mobile' : $appCtrl.isMobile,
-      'app-navbar-fixed' : $appCtrl.layout.isNavbarFixed,
-      'app-sidebar-fixed' : $appCtrl.layout.isSidebarFixed,
-      'app-sidebar-open': appState.sidenav.open,
-      'app-sidebar-closed': !appState.sidenav.open,
-      'app-footer-fixed':$appCtrl.layout.isFooterFixed
-    }">
-    </div> -->
     <div ui-view id="app" ng-class="{
       'app-sidebar-fixed' : $appCtrl.layout.isSidebarFixed,
       'app-sidenav-fixed' : $appCtrl.layout.isSidebarFixed,
@@ -46,7 +36,8 @@
       'app-sidebar-closed': !appState.sidenav.open,
       'app-sidenav-open': appState.sidenav.open,
       'app-sidenav-closed': !appState.sidenav.open
-    }"></div>
+    }">
+   </div>
     <% for (var jsfile in htmlWebpackPlugin.files.js) { %>
     <script src="<%= htmlWebpackPlugin.files.js[jsfile]%>"></script>
     <% } %>

@@ -1,4 +1,5 @@
 import template from './comp.html'
+import { colors, days } from '../../../data/sample'
 
 /* @ngInject */
 class controller {
@@ -53,7 +54,7 @@ class controller {
     { id: 3, name: 'Option 3' }
   ]
 
-  colorData = ['red', 'blue', 'yellow']
+  colorData = colors
 
   singleColorOpts = {
     // useDataObject: false,

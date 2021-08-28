@@ -1,14 +1,14 @@
 import compDemoModule from './component'
 
 const template = `
-<example-snippet raw-js='$ctrl.rawJs' raw-html='$ctrl.rawHtml' raw-md='$ctrl.rawMd'>
-  <avatar-demo></avatar-demo>
+<example-snippet is-horizontal raw-js='$ctrl.rawJs' raw-html='$ctrl.rawHtml' raw-md='$ctrl.rawMd'>
+  <flex-card-demo></flex-card-demo>
 </example-snippet>
 `
 // export module name
 export default angular
   .module(compDemoModule)
-  .component('avatarDemoIndex', {
+  .component('flexCardDemoIndex', {
     template: template,
     controller: function() {
       this.rawHtml = require('./component.html')

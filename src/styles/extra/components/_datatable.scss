@@ -113,7 +113,7 @@ body {
         padding: 16px 10px;
 
         .datatable-info {
-            font-family: $font;
+            // font-family: $font;
             color: $light-text;
         }
 
@@ -144,7 +144,7 @@ body {
                 }
 
                 a {
-                    font-family: $font;
+                    // font-family: $font;
                     font-size: .9rem;
                     font-weight: 500;
                     color: $dark-text;
@@ -383,7 +383,7 @@ body {
                 }
 
                 span {
-                    font-family: $font;
+                    // font-family: $font;
                     font-size: .9rem;
                     color: $light-text;
                 }
@@ -401,7 +401,7 @@ body {
                         display: block;
                         font-size: .8rem;
                         color: $light-text;
-                        font-family: $font;
+                        // font-family: $font;
 
                         &:first-child {
                             font-family: $font-alt;
