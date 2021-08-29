@@ -7,13 +7,13 @@ const componentsStates = {
     icon: 'fas fa-plug'
   },
   children: [
-    // {
-    //   name: 'avatars',
-    //   component: 'avatarsSvelteDemo'
-    // },
+    {
+      name: 'avatars',
+      component: 'svelteAvatarsIndex'
+    },
     {
       name: 'buttons',
-      component: 'svelteButtonsDemo'
+      component: 'svelteButtonsIndex'
     }
   ]
 }
