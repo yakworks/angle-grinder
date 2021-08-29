@@ -2,9 +2,6 @@
 <ag-toolbar class="is-lighter is-dense has-border has-shadow-2" style="margin-top: 30px">
   <div class="toolbar-item">
     <div class="buttons">
-  <ag-button ng-click="$ctrl.correct()" color='light'>Correct</ag-button>
-  <ag-button ng-click="$ctrl.post()" color='light'>Post</ag-button>
-  <ag-button ng-click="$ctrl.delete()" color='light'>Delete</ag-button>
       <div class="toolbar-item right-html">
         <ag-button ng-click="$ctrl.save()">Save</ag-button>
       </div>
@@ -29,16 +26,4 @@
     </div>
 
   </div>
-</div>
-
-<payment-list batch-reload="$ctrl.reloadBatch"/>
-<div>
-  <uib-tabset class="tabbable" active="active">
-    <uib-tab index="0" heading="PaymentDetails">
-      <payment-detail-list />
-    </uib-tab>
-    <uib-tab index="1" heading="Open Tran List">
-      <pd-ar-tran-list />
-    </uib-tab>
-  </uib-tabset>
 </div>
