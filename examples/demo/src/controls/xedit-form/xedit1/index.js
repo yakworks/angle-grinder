@@ -13,7 +13,7 @@ class controller {
 const template = `
 <h1 class="is-title">ag-input</h1>
 <div class="example-section mb-4">
-  <div class="example is-vertical">
+  <div class="example is-horizontal">
     <div class="example-component">
       <xedit1-demo></xedit1-demo>
     </div>

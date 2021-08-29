@@ -1,0 +1,128 @@
+<div class="card">
+  <div class="card-title">Avatars</div>
+  <a class="card-action-icon code-trigger">
+    <svg class="feather open"><use xlink:href="/assets/icons/feather-sprite.svg#code"/></svg>
+    <svg class="feather close"><use xlink:href="/assets/icons/feather-sprite.svg#close"/></svg>
+  </a>
+  <hr>
+  <div class="card-content">
+    <h3 class="title is-thin is-6">Avatars</h3>
+    <p>Avatars are rounded images used for media and personal pages. Avatar sizes can
+      be controled with css classes. Available modifier classes are <code>is-small</code>,
+      <code>is-medium</code>, <code>is-large</code>, <code>is-big</code> and
+      <code>is-xl</code>. See code for more details about usage.
+    </p>
+    <a class="code-trigger">
+      <svg class="feather open"><use xlink:href="/assets/icons/feather-sprite.svg#code"/></svg>
+      <svg class="feather close"><use xlink:href="/assets/icons/feather-sprite.svg#close"/></svg>
+    </a>
+  </div>
+  <div class="card-inner">
+
+    <span class="is-avatar is-small">
+      <img class="avatar" src="/assets/images/photos/beard-guy.jpg"  alt="">
+    </span>
+    <span class="is-avatar">
+      <img class="avatar" src="/assets/images/photos/caldwell.jpg" alt="">
+    </span>
+    <span class="is-avatar is-medium">
+      <img class="avatar" src="/assets/images/photos/jefferson.jpg" alt="">
+    </span>
+    <span class="is-avatar is-large">
+      <img class="avatar" src="/assets/images/photos/douglas.jpg" alt="">
+    </span>
+    <span class="is-avatar is-big">
+      <img class="avatar" src="/assets/images/photos/sowell.jpg" alt="">
+    </span>
+    <span class="is-avatar is-xl">
+      <img class="avatar" src="/assets/images/photos/rand.jpg" alt="">
+    </span>
+
+    <h1 class="title is-thin is-5 mt-5">Square</h1>
+
+    <span ng-repeat="item in ::$ctrl.avatarData" class="is-avatar {{item.size}} mr-1">
+      <img class="avatar is-squared" src="/assets/images/photos/{{item.avatar}}"  alt="">
+    </span>
+
+    <h1 class="title is-thin is-5 mt-6 mb-2">Dots</h1>
+    <p>Avatar dots can have different colors. Available modifier classes are
+      <code>dot-primary</code>, <code>dot-info</code>, <code>dot-warning</code>,
+      <code>dot-danger</code> and <code>dot-grey</code>. See code for more details about
+      usage.
+    </p>
+    <span ng-repeat="item in ::$ctrl.avatarData" class="is-avatar {{item.size}} has-dot mr-1">
+      <img class="avatar" src="/assets/images/photos/{{item.avatar}}"  alt="">
+    </span>
+    <hr class="mt-2 mb-2 ml-0 mr-0">
+    <div ng-repeat="item in ::$ctrl.avatarData" class="is-avatar {{item.size}} has-dot has-dot-squared mr-1">
+      <img class="avatar is-squared" src="/assets/images/photos/{{item.avatar}}"  alt="">
+    </div>
+
+    <hr class="mt-2 mb-2 ml-0 mr-0">
+    <div ng-repeat="item in ::$ctrl.avatarData" class="is-avatar {{item.size}} mr-1">
+      <img class="avatar" src="/assets/images/photos/{{item.avatar}}"  alt="">
+      <img class="badge" src="https://via.placeholder.com/150x150" alt="">
+    </div>
+
+  </div>
+</div>
+
+<div class="demo-card">
+  <div class="demo-title">
+    <h3 class="title is-thin is-6">Letter Avatars</h3>
+    <p>Fake Avatars from with letters
+    </p>
+  </div>
+  <div class="card-inner">
+
+    <span ng-repeat="item in ::$ctrl.avatarData" class="is-avatar {{item.size}} mr-1">
+      <span class="avatar is-fake">
+        <span>JD</span>
+      </span>
+    </span>
+
+    <span class="is-avatar">
+      <span class="avatar is-fake is-primary">
+        <span>JD</span>
+      </span>
+    </span>
+
+  </div>
+</div>
+
+<div class="demo-card">
+  <div class="demo-title">
+    <h3 class="title is-thin is-6">Stacked</h3>
+    <p>Stack up to 10. small, standard and medium avatars</p>
+  </div>
+  <div class="card-inner">
+
+    <div class="avatar-stack">
+      <div ng-repeat="item in ::$ctrl.avatarData" class="is-avatar is-small">
+        <img class="avatar" src="/assets/images/photos/{{item.avatar}}"  alt="">
+      </div>
+    </div>
+
+    <h1 class="title is-thin is-5 mt-6 mb-2">Normal</h1>
+    <div class="avatar-stack">
+      <div ng-repeat="item in ::$ctrl.avatarData" class="is-avatar">
+        <img class="avatar" src="/assets/images/photos/{{item.avatar}}"  alt="">
+      </div>
+    </div>
+
+    <h1 class="title is-thin is-5 mt-6 mb-2">Medium</h1>
+    <div class="avatar-stack">
+      <div ng-repeat="item in ::$ctrl.avatarData" class="is-avatar is-medium">
+        <img class="avatar" src="/assets/images/photos/{{item.avatar}}"  alt="">
+      </div>
+      <div class="is-avatar is-medium">
+        <span class="avatar is-more">
+          <span class="inner">
+            <span>+2</span>
+          </span>
+        </span>
+      </div>
+    </div>
+
+  </div>
+</div>

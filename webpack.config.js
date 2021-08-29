@@ -14,6 +14,8 @@ const apiMocker = require('mocker-api');
 //const CleanWebpackPlugin = require('clean-webpack-plugin')
 const path = require("path");
 
+const { preprocess } = require('./svelte.config');
+
 module.exports = function(env, argv) {
 
   const CONTENT_BASE = argv.contentBase
@@ -78,7 +80,8 @@ module.exports = function(env, argv) {
             loader: 'svelte-loader',
             options: {
               emitCss: true,
-              hotReload: true
+              hotReload: true,
+              preprocess
             }
           }
         },

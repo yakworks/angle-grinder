@@ -1,5 +1,6 @@
 import gridsStates from './grids/routes'
 import componentsStates from './components/routes'
+import svelteStates from './svelte/routes'
 import formStates from './controls/routes'
 import dashStates from './dashboards/routes'
 import pagesStates from './pages/routes'
@@ -61,7 +62,7 @@ export const fresh = {
   url: '/fresh',
   component: 'freshApp',
   abstract: true,
-  children: [dashStates, componentsStates, formStates, flexTableStates, gridsStates, pagesStates, levelStates]
+  children: [dashStates, svelteStates, componentsStates, formStates, flexTableStates, gridsStates, pagesStates, levelStates]
 }
 
 export const login = {

@@ -17,6 +17,9 @@
     "jest": "jest",
     "svelte-dev": "webpack-dev-server --config examples/svelte/webpack.config.js --content-base examples/svelte"
   },
+  "resolutions": {
+    "acorn": "8.0.1"
+  },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.14.0",
     "@popperjs/core": "^2.0.6",
@@ -64,6 +67,8 @@
     "perfect-scrollbar": "^1.5.0",
     "popper.js": "^1.16.1",
     "prismjs": "^1.19.0",
+    "svelte-preprocess": "^4.8.0",
+    "svelte-select": "^4.4.0",
     "sweetalert2": "^9.7.0",
     "ti-icons": "^0.1.2",
     "toastr": "~2.1.4",
@@ -79,7 +84,6 @@
     "@fullhuman/postcss-purgecss": "^1.3.0",
     "angular-mocks": "1.6.10",
     "autoprefixer": "^9.7.3",
-    "babel-eslint": "^10.0.3",
     "babel-loader": "^8.0.6",
     "babel-plugin-angularjs-annotate": "0.10.0",
     "babel-plugin-lodash": "^3.3.4",
@@ -91,7 +95,7 @@
     "copy-webpack-plugin": "^5.1.1",
     "css-loader": "^3.4.2",
     "cssnano": "^4.1.10",
-    "eslint": "^6.8.0",
+    "eslint": "^7.5",
     "eslint-config-standard": "^14.1.0",
     "eslint-plugin-angular": "^4.0.1",
     "eslint-plugin-import": "^2.19.1",
