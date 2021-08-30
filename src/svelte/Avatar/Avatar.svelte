@@ -1,11 +1,3 @@
-<script context="module">
-  let cfg = {
-    avatarBaseUrl: '/assets/images/photos/'
-  }
-  function getAvatarUrl(imgName){
-    `${cfg.avatarBaseUrl}${imgName}`
-  }
-</script>
 <script>
   import { onMount } from 'svelte'
   // import { classNames } from '../utils/helpers';
@@ -39,24 +31,23 @@
       .add('has-dot-squared', (dot && square))
       .add(`dot-${dot}`, _.isString(dot))
       .get();
-  }
 
-  $: {
     if(name && !imgSrc){
       name = name.trim()
-      var splitString = name.split(/(?=[A-Z])/)
+      let splitString = name.split(/(?=[A-Z])/)
       if (charCount > splitString.length) {
         charCount = splitString.length
       }
-      for (var i = 0; i < charCount; i++) {
+      for (let i = 0; i < charCount; i++) {
         letters = letters + splitString[i].charAt(0)
       }
+
       letters = letters.toUpperCase()
     }
+
     if(letters){
       lettersClass = 'letter-color-' + letters.charAt(0).toLowerCase()
     }
-
   }
 
 </script>

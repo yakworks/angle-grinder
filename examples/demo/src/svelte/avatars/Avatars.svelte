@@ -75,11 +75,7 @@
   <div class="card-content">
 
     {#each avatarData as item}
-    <span class="is-avatar {item.size} mr-1">
-      <span class="avatar is-letter">
-        <span>JD</span>
-      </span>
-    </span>
+    <Avatar class="{item.size} mr-1" name="{item.name}"></Avatar>
     {/each}
 
     <span class="is-avatar">
