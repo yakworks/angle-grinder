@@ -36,7 +36,7 @@ class ListCtrl extends BaseListCtrl {
   // we need to generate gridId, because if we have 2 grids on a page they will have the same id and 2 pagers will
   // be assisgned to the second grid
   gridId() {
-    return this.apiKey + 'Grid'
+    return this.apiKey?.replace(/[^\w\s]/gi, '_') + 'Grid'
   }
 }
 
