@@ -14,6 +14,10 @@ const componentsStates = {
     {
       name: 'buttons',
       component: 'svelteButtonsIndex'
+    },
+    {
+      name: 'forms',
+      component: 'svelteFormsIndex'
     }
   ]
 }

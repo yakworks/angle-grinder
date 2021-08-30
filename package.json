@@ -17,9 +17,6 @@
     "jest": "jest",
     "svelte-dev": "webpack-dev-server --config examples/svelte/webpack.config.js --content-base examples/svelte"
   },
-  "resolutions": {
-    "acorn": "8.0.1"
-  },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.14.0",
     "@popperjs/core": "^2.0.6",
@@ -68,6 +65,7 @@
     "perfect-scrollbar": "^1.5.0",
     "popper.js": "^1.16.1",
     "prismjs": "^1.19.0",
+    "svelte-forms-lib": "^1.10.6",
     "svelte-preprocess": "^4.8.0",
     "svelte-select": "^4.4.0",
     "sweetalert2": "^9.7.0",

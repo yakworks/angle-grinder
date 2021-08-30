@@ -3818,6 +3818,11 @@ depd@~1.1.2:
   resolved "https://registry.npmjs.org/depd/-/depd-1.1.2.tgz"
   integrity sha1-m81S4UwJd2PnSbJ0xDRu0uVgtak=
 
+dequal@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/dequal/-/dequal-2.0.2.tgz#85ca22025e3a87e65ef75a7a437b35284a7e319d"
+  integrity sha512-q9K8BlJVxK7hQYqa6XISGmBZbtQQWVXSrRrWreHC94rMt1QL/Impruc+7p2CYSYuVIUr+YCt6hjrs1kkdJRTug==
+
 des.js@^1.0.0:
   version "1.0.1"
   resolved "https://registry.npmjs.org/des.js/-/des.js-1.0.1.tgz"
@@ -11091,6 +11096,13 @@ svelte-dev-helper@^1.1.9:
   version "1.1.9"
   resolved "https://registry.yarnpkg.com/svelte-dev-helper/-/svelte-dev-helper-1.1.9.tgz#7d187db5c6cdbbd64d75a32f91b8998bde3273c3"
   integrity sha1-fRh9tcbNu9ZNdaMvkbiZi94yc8M=
+
+svelte-forms-lib@^1.10.6:
+  version "1.10.6"
+  resolved "https://registry.yarnpkg.com/svelte-forms-lib/-/svelte-forms-lib-1.10.6.tgz#742450c11440c90558ab9d6653e3c2b91045f95d"
+  integrity sha512-Y8y5apeUJdaqJpkCYj4iEU3AT3GYuU0lMtqwPAVb0HJnMS2995i+xOgUCb7LNMNHFK6wE0GEK6dcZyPIi0pjpw==
+  dependencies:
+    dequal "^2.0.2"
 
 svelte-hmr@^0.14.2:
   version "0.14.7"
