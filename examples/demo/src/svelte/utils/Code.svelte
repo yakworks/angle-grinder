@@ -5,10 +5,10 @@
 
   export let lang = 'js'
   export let code = ''
-  $: hljsCode = hljs.highlightAuto(code, [lang]).value
-  export let showCopy = true
+
   export let maxHeight = '300px'
 
+  $: hljsCode = hljs.highlightAuto(code, [lang]).value
 
   onMount(async () => {
 

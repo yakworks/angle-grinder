@@ -1,6 +1,6 @@
 <script>
   import Code from './Code.svelte'
-
+  const jq = window.$
   export let lang = 'html'
   export let code
   export let horizontal = true
@@ -15,9 +15,17 @@
     e.stopPropagation()
     showCode = false
   }
+
+  function init(node) {
+    // const rippleElement = node.querySelector(`.${_btn__ripple__base}`)
+    const eComp = jq(node).find('.example-component')
+    const srcHeight = eComp.innerHeight() - 32
+    jq(node).find('.hljs-container').css('max-height', (srcHeight < 300) ? 300 : srcHeight)
+  }
+
 </script>
 
-<div class="example-section mb-4">
+<div use:init class="example-section mb-4">
   <div class="example" class:is-horizontal="{horizontal}">
     <div class="example-component">
       <slot/>

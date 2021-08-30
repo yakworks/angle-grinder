@@ -665,7 +665,7 @@ body {
                                     .people {
                                         .h-avatar {
                                             &:last-child {
-                                                .is-fake {
+                                                .is-letter {
                                                     background: lighten($dark-sidebar, 2%);
                                                     border: 1px solid lighten($dark-sidebar, 12%);
                                                 }

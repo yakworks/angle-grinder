@@ -1,16 +1,16 @@
 import ngSvelteShim from 'angle-grinder/src/ng/utils/ngSvelteShim'
-import AvatarsIndex from './Avatars/index.svelte'
-import ButtonsExample from './buttons/index.svelte'
+import Avatars from './Avatars/index.svelte'
+import Buttons from './Buttons/index.svelte'
 // import avatarsDemoMod from './avatars'
 
 const appMod = angular.module('svelte.demo.components', [])
 
 appMod
   .component('svelteAvatarsIndex', {
-    controller: ngSvelteShim(AvatarsIndex)
+    controller: ngSvelteShim(Avatars)
   })
-  .component('svelteDemoAvatar', {
-    controller: ngSvelteShim(ButtonsExample)
+  .component('svelteButtonsIndex', {
+    controller: ngSvelteShim(Buttons)
   })
 
 export default appMod.name

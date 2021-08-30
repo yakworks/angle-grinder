@@ -947,12 +947,12 @@ body {
                     display: flex;
                     align-items: center;
                     padding: 2rem 0;
-                    
+
                     .h-avatar {
                         margin: 0 .25rem;
 
                         .avatar {
-                            &.is-fake {
+                            &.is-letter {
                                 span {
                                     position: relative;
                                     left: -2px;
@@ -973,7 +973,7 @@ body {
 
                     + .attached-block {
                         margin-top: 1.5rem;
-                    }   
+                    }
 
                     > a {
                         font-family: $font;
@@ -1233,7 +1233,7 @@ body {
         &.hr-dashboard {
             .block-header {
                 padding: 40px;
-    
+
                 .left {
                     .current-user {
                         h3 {
@@ -1241,7 +1241,7 @@ body {
                         }
                     }
                 }
-    
+
                 .center {
                     .candidates {
                         .h-avatar {
@@ -1252,7 +1252,7 @@ body {
                     }
                 }
             }
-    
+
             .column {
                 &.is-7 {
                     &.is-offset-1 {

@@ -1346,7 +1346,7 @@ body {
 
                 .members-list {
                     display: flex;
-                    
+
                     .h-avatar {
                         margin: 0 .35rem;
 
@@ -1389,7 +1389,7 @@ body {
                     .media-feed-item {
                         position: relative;
                         @extend .r-card;
-                        
+
                         padding: 1.5rem;
                         min-height: 220px;
                         overflow: hidden;
@@ -1487,7 +1487,7 @@ body {
                             height: 100%;
                             width: 100%;
                             z-index: 2;
-                
+
                             .overlay-content {
                                 position: relative;
                                 height: 100%;
@@ -1495,11 +1495,11 @@ body {
                                 display: flex;
                                 flex-direction: column;
                                 justify-content: flex-end;
-                
+
                                 .inner-content {
                                     padding: 20px;
                                     color: $white;
-                
+
                                     .media-title {
                                         font-family: $font-alt;
                                         font-size: 1.3rem;
@@ -1508,11 +1508,11 @@ body {
                                         color: $smoke-white;
                                         margin-bottom: 6px;
                                     }
-                
+
                                     .media-meta {
                                         display: flex;
                                         align-items: center;
-                
+
                                         img {
                                             display: block;
                                             height: 30px;
@@ -1521,19 +1521,19 @@ body {
                                             border-radius: 50%;
                                             margin-right: 6px;
                                         }
-                
+
                                         .meta-item {
                                             display: block;
                                             font-size: .82rem;
                                             font-weight: 500;
                                             color: darken($smoke-white, 8%);
                                             transition: color .3s;
-                
+
                                             &.is-hoverable:hover {
                                                 color: $primary;
                                             }
                                         }
-                
+
                                         .separator {
                                             padding: 0 10px;
                                             font-size: .8rem;
@@ -1580,7 +1580,7 @@ body {
                                 }
 
                                 .avatar {
-                                    &.is-fake {
+                                    &.is-letter {
                                         background: lighten($dark-sidebar, 2%);
                                     }
                                 }

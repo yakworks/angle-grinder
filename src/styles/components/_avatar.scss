@@ -67,7 +67,7 @@
       border-radius: 10px !important;
     }
 
-    &.is-fake {
+    &.is-letter {
       display: flex;
       justify-content: center;
       align-items: center;
@@ -211,7 +211,7 @@
         border-radius: 8px !important;
       }
 
-      &.is-fake,
+      &.is-letter,
       &.is-more {
         width: 32px;
         min-width: 32px;
@@ -267,7 +267,7 @@
         border-radius: 12px !important;
       }
 
-      &.is-fake,
+      &.is-letter,
       &.is-more {
         width: 50px;
         min-width: 50px;
@@ -323,7 +323,7 @@
         border-radius: 16px !important;
       }
 
-      &.is-fake {
+      &.is-letter {
         width: 68px;
         min-width: 68px;
         height: 68px;
@@ -341,7 +341,7 @@
     }
   }
 
-  &.is-big {
+  &.is-xl {
     max-width: 80px;
     min-width: 80px;
 
@@ -372,7 +372,7 @@
         border-radius: 18px !important;
       }
 
-      &.is-fake {
+      &.is-letter {
         width: 80px;
         min-width: 80px;
         height: 80px;
@@ -390,7 +390,7 @@
     }
   }
 
-  &.is-xl {
+  &.is-xxl {
     max-width: 100px;
     min-width: 100px;
 
@@ -421,7 +421,7 @@
         border-radius: 22px !important;
       }
 
-      &.is-fake {
+      &.is-letter {
         width: 100px;
         min-width: 100px;
         height: 100px;
@@ -460,7 +460,7 @@
       }
 
       img,
-      .is-fake,
+      .is-letter,
       .is-more .inner {
         border: 2px solid $white;
       }
@@ -480,7 +480,7 @@
       }
 
       img,
-      .is-fake,
+      .is-letter,
       .is-more .inner {
         border: 4px solid $white;
       }
@@ -497,9 +497,155 @@
     }
 
     img,
-    .is-fake,
+    .is-letter,
     .is-more .inner {
       border: 2px solid $white;
     }
+  }
+}
+
+.avatar.is-letter {
+  &.letter-color-a {
+    background-color: #5a8770 !important;
+  }
+
+  &.letter-color-b {
+    background-color: #c0392b !important;
+  }
+
+  &.letter-color-c {
+    background-color: #6fa9ab !important;
+  }
+
+  &.letter-color-d {
+    background-color: #f5af29 !important;
+  }
+
+  &.letter-color-e {
+    background-color: #0088b9 !important;
+  }
+
+  &.letter-color-f {
+    background-color: #f18636 !important;
+  }
+
+  &.letter-color-g {
+    background-color: #d35400 !important;
+  }
+
+  &.letter-color-h {
+    background-color: #a6b12e !important;
+  }
+
+  &.letter-color-i {
+    background-color: #9b59b6 !important;
+  }
+
+  &.letter-color-j {
+    background-color: #f5888d !important;
+  }
+
+  &.letter-color-k {
+    background-color: #b49255 !important;
+  }
+
+  &.letter-color-l {
+    background-color: #407887 !important;
+  }
+
+  &.letter-color-m {
+    background-color: #7f8c8d !important;
+  }
+
+  &.letter-color-n {
+    background-color: #1abc9c !important;
+  }
+
+  &.letter-color-o {
+    background-color: #be5464 !important;
+  }
+
+  &.letter-color-p {
+    background-color: #3dc34b !important;
+  }
+
+  &.letter-color-q {
+    background-color: #64471e !important;
+  }
+
+  &.letter-color-r {
+    background-color: #2d59d7 !important;
+  }
+
+  &.letter-color-s {
+    background-color: #616f51 !important;
+  }
+
+  &.letter-color-t {
+    background-color: #4da7ce !important;
+  }
+
+  &.letter-color-u {
+    background-color: #afaf50 !important;
+  }
+
+  &.letter-color-v {
+    background-color: #008c69 !important;
+  }
+
+  &.letter-color-w {
+    background-color: #947499 !important;
+  }
+
+  &.letter-color-x {
+    background-color: #328e93 !important;
+  }
+
+  &.letter-color-y {
+    background-color: #eab71c !important;
+  }
+
+  &.letter-color-z {
+    background-color: #407887 !important;
+  }
+
+  &.letter-color-0 {
+    background-color: #92b74a !important;
+  }
+
+  &.letter-color-1 {
+    background-color: #51a8b9 !important;
+  }
+
+  &.letter-color-2 {
+    background-color: #e4bd02 !important;
+  }
+
+  &.letter-color-3 {
+    background-color: #ed726d !important;
+  }
+
+  &.letter-color-4 {
+    background-color: #3e7b02 !important;
+  }
+
+  &.letter-color-5 {
+    background-color: #ee3e02 !important;
+  }
+
+  &.letter-color-6 {
+    background-color: #976eca !important;
+  }
+
+  &.letter-color-7 {
+    background-color: #e27c4b !important;
+  }
+
+  &.letter-color-8 {
+    background-color: #754634 !important;
+  }
+
+  &.letter-color-9 {
+    background-color: #667268 !important;
   }
 }

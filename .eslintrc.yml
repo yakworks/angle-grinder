@@ -17,6 +17,9 @@ ignorePatterns:
   - "node_modules/"
   - "webpack*.*"
 rules:
+  quotes: 0
+  semi: 0
+  comma-dangle: 0
   no-return-assign: 0
   no-useless-escape: 0
   space-before-blocks: 0
