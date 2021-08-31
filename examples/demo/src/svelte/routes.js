@@ -8,16 +8,17 @@ const componentsStates = {
   },
   children: [
     {
-      name: 'avatars',
-      component: 'svelteAvatarsIndex'
+      name: 'avatars', component: 'svelteAvatarsIndex'
     },
     {
-      name: 'buttons',
-      component: 'svelteButtonsIndex'
+      name: 'buttons', component: 'svelteButtonsIndex'
     },
     {
       name: 'forms',
-      component: 'svelteFormsIndex'
+      children: [
+        { name: 'simple', component: 'svelteFormSimpleIndex' },
+        { name: 'Fields', component: 'svelteFormFieldsIndex' }
+      ]
     }
   ]
 }

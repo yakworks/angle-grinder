@@ -63,7 +63,7 @@ start.demo:
 start.svelte:
 	npx webpack-dev-server --content-base ./examples/svelte
 
-## starts the demo app
+## builds the demo app
 build.demo:
 	npx rimraf dist && npx webpack --mode=production --content-base ./examples/demo
 

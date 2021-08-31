@@ -1,5 +1,5 @@
 <script>
-  import Button from 'angle-grinder/src/svelte/Button'
+  import { Button } from 'angle-grinder/svelte'
   import notyf from 'angle-grinder/src/tools/notyf'
   let counter = 0
 </script>
