@@ -1,3 +1,8 @@
+### v4.0.13
+
+[Full Changelog](https://github.com/yakworks/angle-grinder/compare/v4.0.12...v4.0.13)
+- Fixed gridId when it is build based on dataApiKey with / (#607) [link](https://github.com/yakworks/angle-grinder/commit/c814fa12eb782ec81bf95f85f2f2d89d168ece8b)
+
 ### v4.0.12
 
 [Full Changelog](https://github.com/yakworks/angle-grinder/compare/v4.0.11...v4.0.12)

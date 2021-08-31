@@ -16,6 +16,7 @@
     <!-- Google fonts -->
     <!-- <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet" /> -->
     <!-- <link href="http://fonts.googleapis.com/css?family=Lato:300,400,400italic,600,700|Raleway:300,400,500,600,700|Crete+Round:400italic" rel="stylesheet" type="text/css" /> -->
+    <!-- <link href="http://fonts.googleapis.com/css?family=Lato:300,400,400italic,600,700|Raleway:300,400,500,600,700|Crete+Round:400italic" rel="stylesheet" type="text/css" /> -->
     <!-- Material icons https://materialdesignicons.com/-->
     <link href="https://cdn.materialdesignicons.com/5.0.45/css/materialdesignicons.min.css" rel="stylesheet">
 
@@ -28,7 +29,6 @@
     <!-- <link rel="stylesheet" data-ng-href="assets/theme/{{ app.layout.theme }}.css" /> -->
     <script src="<%= htmlWebpackPlugin.options.configPath %>"></script>
 </head>
-
 <body ng-controller="AppCtrl as $appCtrl" [ng-strict-di="boolean"]>
     <div ui-view id="app" ng-class="{
       'app-sidebar-fixed' : $appCtrl.layout.isSidebarFixed,
@@ -37,10 +37,10 @@
       'app-sidebar-closed': !appState.sidenav.open,
       'app-sidenav-open': appState.sidenav.open,
       'app-sidenav-closed': !appState.sidenav.open
-    }">
-   </div>
+    }"></div>
     <% for (var jsfile in htmlWebpackPlugin.files.js) { %>
     <script src="<%= htmlWebpackPlugin.files.js[jsfile]%>"></script>
     <% } %>
+
 </body>
 </html>
