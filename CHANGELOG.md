@@ -1,3 +1,8 @@
+### v4.0.16
+
+[Full Changelog](https://github.com/yakworks/angle-grinder/compare/v4.0.15...v4.0.16)
+- version got scrambled, fixing [link](https://github.com/yakworks/angle-grinder/commit/130d4404b24ec8574f965eeb843fe2f80fc1726b)
+
 ### v4.0.14
 
 [Full Changelog](https://github.com/yakworks/angle-grinder/compare/v4.0.13...v4.0.14)
