@@ -1,7 +1,7 @@
 {
   "name": "angle-grinder",
   "license": "MIT",
-  "version": "4.0.14",
+  "version": "4.0.15",
   "scripts": {
     "build": "rimraf dist && yarn build:wip",
     "transpile": "babel ./examples/demo/mocker --out-dir ./examples/demo/mocker-server",

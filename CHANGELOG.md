@@ -1,3 +1,8 @@
+### v4.0.14
+
+[Full Changelog](https://github.com/yakworks/angle-grinder/compare/v4.0.13...v4.0.14)
+- Pages and Svelte Examples (#606) [link](https://github.com/yakworks/angle-grinder/commit/a9fecf067eccc516185082404a9f7ac89f1c2311)
+
 ### v4.0.13
 
 [Full Changelog](https://github.com/yakworks/angle-grinder/compare/v4.0.12...v4.0.13)
