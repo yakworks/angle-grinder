@@ -1,0 +1,29 @@
+<div class="space5"></div>
+<ag-toolbar class="is-lighter is-dense has-border has-shadow-2" style="margin-top: 30px">
+  <div class="toolbar-item">
+    <div class="buttons">
+      <div class="toolbar-item right-html">
+        <ag-button ng-click="$ctrl.save()">Save</ag-button>
+      </div>
+    </div>
+
+  </div>
+
+</ag-toolbar>
+
+<div class="well well-sm">
+  <div class="columns equal">
+    <div class="column">
+      <div ng-if="$ctrl.isConfigured" class="panel panel-default panel-xeditable padding-10">
+        <div class="panel-body">
+          <ag-formly-form ag-form model="$ctrl.vm"
+                          fields="$ctrl.editFormFields"
+                          is-columns="true"
+                          ctrl="$ctrl"
+                          form="$ctrl.editForm"/>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

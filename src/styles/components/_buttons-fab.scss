@@ -1,0 +1,22 @@
+//$scheme-invert = hsl(0, 0%, 4%) derived value of $black in Bulma. See https://bulma.io/documentation/customize/variables/
+
+.button.is-fab {
+  @include elevation(6);
+  z-index: 3;
+  .is-large {
+    width: 90px;
+    height: 90px;
+    font-size: 2.6rem;
+  }
+  .is-medium {
+    width: 75px;
+    height: 75px;
+    font-size: 2.2rem;
+  }
+  .is-small {
+    width: 45px;
+    height: 45px;
+    font-size: 1.2rem;
+    border-radius: 50px;
+  }
+}

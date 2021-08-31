@@ -1,20 +1,26 @@
 
-// export {people, colors, countries, countriesWithId, invoices}
-
-exports.people = [
-  { id: 1, name: 'Adam', email: 'adam@email.com', age: 12, country: 'United States' },
-  { id: 2, name: 'Amalie', email: 'amalie@email.com', age: 12, country: 'Argentina' },
-  { id: 3, name: 'Estefanía', email: 'estefania@email.com', age: 21, country: 'Argentina' },
-  { id: 4, name: 'Adrian', email: 'adrian@email.com', age: 21, country: 'Ecuador' },
-  { id: 5, name: 'Wladimir', email: 'wladimir@email.com', age: 30, country: 'Ecuador' },
-  { id: 6, name: 'Samantha', email: 'samantha@email.com', age: 30, country: 'United States' },
-  { id: 7, name: 'Nicole', email: 'nicole@email.com', age: 43, country: 'Colombia' },
-  { id: 8, name: 'Natasha', email: 'natasha@email.com', age: 54, country: 'Ecuador' },
-  { id: 9, name: 'Burnett, Logan', email: 'logan@email.com', age: 10, country: 'US' },
-  { id: 10, name: 'Burnett, Wyatt', email: 'Wyatt@email.com', age: 7, country: 'Colombia' }
+const people = [
+  { id: 1, name: 'Mike', email: 'Mike@email.com', phone: '+1-800-555-1212', title: 'Acoustic Wizard', age: 12, location: 'Mulligans Valley, US', avatar: 'beard-guy.jpg' },
+  { id: 2, name: 'Caldwell', email: 'Caldwell@email.com', phone: '+1-800-555-1212', title: 'Astronaut Physicist', age: 12, location: 'Galts Gulch, AR', avatar: 'caldwell.jpg' },
+  { id: 3, name: 'F Douglas', email: 'estefania@email.com', phone: '+1-800-555-1212', title: 'World Changer', age: 21, location: 'Mulligans Valley, US', avatar: 'douglas.jpg' },
+  { id: 4, name: 'T Jefferson', email: 'adrian@email.com', phone: '+1-800-555-1212', title: 'President', age: 21, location: 'Mulligans Valley, US', avatar: 'jefferson.jpg' },
+  { id: 5, name: 'A Rand', email: 'wladimir@email.com', phone: '+1-800-555-1212', title: 'Author', age: 30, location: 'Mulligans Valley, US', avatar: 'rand.jpg' },
+  { id: 6, name: 'T Sowell', email: 'Sowell@email.com', phone: '+1-800-555-1212', title: 'Brilliant Economist', age: 30, location: 'Mulligans Valley, US', avatar: 'sowell.jpg' },
+  { id: 7, name: 'Nicole', email: 'nicole@email.com', phone: '+1-800-555-1212', title: 'Project Manager', age: 43, location: 'Mulligans Valley, US', avatar: 'nicole.jpg' },
+  { id: 8, name: 'Natasha', email: 'natasha@email.com', phone: '+1-800-555-1212', title: 'Sales Manager', age: 54, location: 'Mulligans Valley, US', avatar: 'natasha.jpg' },
+  { id: 9, name: 'Logan', email: 'logan@email.com', phone: '+1-800-555-1212', title: 'Bot Wrangler', age: 10, location: 'Mulligans Valley, US', avatar: 'logan.jpg' },
+  { id: 10, name: 'Wyatt', email: 'Wyatt@email.com', phone: '+1-800-555-1212', title: 'Kid Wrangler', age: 7, location: 'Mulligans Valley, US', avatar: 'wyatt.jpg' }
 ]
 
-const colors = ['Red', 'Green', 'Blue', 'Yellow', 'Magenta', 'Maroon', 'Umbra', 'Turquoise']
+exports.people = people
+
+// exports.peopleIdName = people.map(p => {
+//   return { id: p.id, name: p.name }
+// })
+
+exports.colors = ['red', 'green', 'blue', 'Yellow', 'Magenta', 'Maroon', 'Umbra', 'Turquoise']
+
+exports.days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
 
 exports.countriesWithId = function(){
   countries.forEach(function(part, index) {

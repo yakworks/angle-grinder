@@ -17,6 +17,7 @@ export class RestStoreApi {
   }
 
   get customer() { return makeDataApi('customer') }
+  get batch() { return makeDataApi('batch') }
   get invoice() { return makeDataApi('invoice') }
   get tranState() { return makeDataApi('tranState') }
   get tag() { return makeDataApi('tag') }

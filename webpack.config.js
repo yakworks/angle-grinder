@@ -14,6 +14,8 @@ const apiMocker = require('mocker-api');
 //const CleanWebpackPlugin = require('clean-webpack-plugin')
 const path = require("path");
 
+const { preprocess } = require('./svelte.config');
+
 module.exports = function(env, argv) {
 
   const CONTENT_BASE = argv.contentBase
@@ -72,6 +74,17 @@ module.exports = function(env, argv) {
     module: {
       rules: [
         { test: /\.js$/, loader: 'babel-loader', exclude: /(node_modules|bower_components)/},
+        {
+          test: /\.svelte$/,
+          use: {
+            loader: 'svelte-loader',
+            options: {
+              emitCss: true,
+              hotReload: true,
+              preprocess
+            }
+          }
+        },
         {
           test: /\.(scss|css|sass)$/,
           //exclude: /themes\/.+\.scss$/,
@@ -174,8 +187,12 @@ module.exports = function(env, argv) {
       //extensions: ['.js', '.vue', '.json'],
       alias: {
         'angle-grinder': path.resolve('./'),
+        svelte: path.resolve('node_modules', 'svelte'),
         //Components: path.resolve(__dirname, "..", "src", "components"),
-      }
+      },
+      extensions: ['.mjs', '.js', '.svelte'],
+      mainFields: ['svelte', 'browser', 'module', 'main']
+
     }
   }
   if(isProd){

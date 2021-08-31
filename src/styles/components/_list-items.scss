@@ -6,7 +6,7 @@
 
 // sizes
 // $list-item-margin: 16px;
-//$list-item-with-icon-height: 56px;
+// $list-item-with-icon-height: 56px;
 // $list-icon-margin-right
 // 16 + 24 + 16 + 16 = 72px
 // $list-has-children-indent: $item-spacing + $icon-dimensions + $item-spacing + $item-spacing; //72px
@@ -62,7 +62,7 @@ $list-active-color: $secondary !default;
       }
     }
     // list item content, don't wrap and hide overflow
-    > .title {
+    > .item-title {
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -95,7 +95,7 @@ $list-active-color: $secondary !default;
 
   // active children
   &.is-active {
-    > .item-content .title, .icon {
+    > .item-content .item-title, .icon {
       color: $list-active-color;
     }
   }

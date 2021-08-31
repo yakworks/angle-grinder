@@ -1,7 +1,11 @@
 import angular from 'angular'
 import filtersModule from './filtersModule'
-import moment from 'moment'
+// import moment from 'moment'
+import dayjs from 'dayjs'
+import utc from 'dayjs/plugin/utc'
 import { isFalsy } from '../../utils/isFalsy'
+
+dayjs.extend(utc)
 
 var app = angular.module(filtersModule)
 
@@ -21,7 +25,7 @@ app.provider('agDateFilter', function() {
         if (useTimeZone == null) { useTimeZone = false }
         if (format == null) { format = defaultFormat }
         if (isFalsy(date)) { return '' }
-        return moment(date).format(format)
+        return dayjs(date).format(format)
       }
     ]
   }
@@ -31,11 +35,11 @@ app.provider('agDateFilter', function() {
 app.filter('localDate', ['agDate', (agDate) => function(input) {
   if (isFalsy(input)) { return '' }
   // ignores the time part
-  return moment(input).format(agDate.getViewFormat())
+  return dayjs(input).format(agDate.getViewFormat())
 }])
 
 // date with time and no timezone formated to the minutes
 app.filter('localDateTime', () => function(input) {
   if (isFalsy(input)) { return '' }
-  return moment.utc(input).format('MM/DD/YYYY h:mma')
+  return dayjs.utc(input).format('MM/DD/YYYY h:mma')
 })

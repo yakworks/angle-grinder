@@ -1,4 +1,4 @@
-import angular from 'angular'
+// import angular from 'angular'
 import agModule from 'angle-grinder/src/angle-grinder'
 
 import ngTranslateModule from 'angular-translate'
@@ -15,9 +15,12 @@ import loginModule from './login'
 import snippetsModule from './utils/demo/demo.module'
 
 // demo sections
+import svelteModule from './svelte'
 import componentsModule from './components'
 import formsModule from './controls'
 import gridsModule from './grids'
+import flexTableModule from './flex-table'
+import pagesModule from './pages'
 
 // store
 import dataApiModule from './store'
@@ -31,8 +34,11 @@ export default angular.module('app', [
   freshLayoutModule,
   loginModule,
   snippetsModule,
+  svelteModule,
   componentsModule,
+  pagesModule,
   formsModule,
+  flexTableModule,
   gridsModule,
   fullscreen,
   truncateFilters,

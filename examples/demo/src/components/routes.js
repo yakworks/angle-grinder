@@ -1,8 +1,9 @@
 const componentsStates = {
-  name: 'components',
+  name: 'ngComponents',
   abstract: true,
   template: '<div ui-view class="fade-in-up"></div>',
   data: {
+    title: 'ng Components',
     icon: 'fas fa-plug'
   },
   // data: { title: 'Grids'},
@@ -10,6 +11,10 @@ const componentsStates = {
   //   label: 'Grids'
   // },
   children: [
+    {
+      name: 'avatars',
+      component: 'avatarDemoIndex'
+    },
     {
       name: 'buttons',
       component: 'buttonDemoIndex'

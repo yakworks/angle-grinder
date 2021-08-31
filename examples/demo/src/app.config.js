@@ -1,4 +1,4 @@
-import angular from 'angular'
+// import angular from 'angular'
 import _ from 'lodash'
 import appName from './app.module'
 import './config.router'

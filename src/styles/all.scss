@@ -9,7 +9,9 @@
 // @import "packet";
 @import "utilities";
 @import "components";
+@import "extra";
 @import "forms";
 
 // vendor sass
+@import 'vendor/notyf';
 @import '~vanillajs-datepicker/sass/datepicker-bulma';

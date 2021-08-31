@@ -12,12 +12,12 @@ $card-hr-color: $card-border-color !default
 $card-title-adjacent-sibling-subtitle-margin-top: -$item-spacing !default;
 $card-title-adjacent-sibling-subtitle-text-padding-top: 0 !default;
 $card-adjacent-sibling-text-padding-top: 0 !default;
-$card-title-font-size: $size-18 !default
+$card-title-font-size: $rem-112 !default
 $card-title-font-weight: $weight-medium !default
 // $card-title-letter-spacing: map-deep-get($headings, 'h6', 'letter-spacing') !default;
 // $card-title-line-height: map-deep-get($headings, 'h6', 'line-height') !default;
 
-$card-subtitle-font-size: $size-short !default
+$card-subtitle-font-size: $text-sm !default
 $card-subtitle-padding: $item-spacing !default
 $card-subtitle-color: $text-light !default
 
@@ -125,6 +125,12 @@ hr
   display: flex
   justify-content: center
   padding: $card-header-padding
+
+// floating action icon in upper right corner
+.card-fab
+  right: 0.5rem;
+  position: absolute;
+  top: 0.5rem;
 
 .card-header-icon:last-child
     margin-right: $icon-button-negative-margin;
