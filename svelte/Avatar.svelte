@@ -1,10 +1,10 @@
 <script>
   import { onMount } from 'svelte'
-  // import { classNames } from '../utils/helpers';
-  import { ClassBuilder } from "./utils/classes.js"
+  import { classNames } from './utils';
+  // import { ClassBuilder } from "./utils/classes.js"
 
-  export let clazz = ''
-	export { clazz as class } //work around since class is reserved
+  export let className = ''
+	export { className as class } //work around since class is reserved
 
   export let name = ''
   export let letters = ''
@@ -15,8 +15,6 @@
   export let imgClass = ''
   export let dot = false
 
-  const cbuilder = new ClassBuilder(clazz);
-
   let classes
   let lettersClass
 
@@ -24,13 +22,16 @@
     //FIXME hard coded for now, pull baseUrl from config
     if(imgName && !imgSrc) imgSrc = `/assets/images/photos/${imgName}`// getAvatarUrl(imgName)
     if(square) imgClass = `${imgClass} is-squared`
-    classes = cbuilder
-      .flush()
-      .add('is-squared', square)
-      .add('has-dot', dot)
-      .add('has-dot-squared', (dot && square))
-      .add(`dot-${dot}`, _.isString(dot))
-      .get();
+    classes = classNames(
+      'is-avatar',
+      className,
+      {
+        'is-squared': square,
+        'has-dot': dot,
+        'has-dot-squared': (dot && square),
+        [`dot-${dot}`]: _.isString(dot)
+      }
+    )
 
     if(name && !imgSrc){
       name = name.trim()
@@ -52,7 +53,7 @@
 
 </script>
 
-<span class="is-avatar {classes}">
+<span class="{classes}">
   {#if imgSrc}
     <img class="avatar {imgClass}" src="{imgSrc}"  alt="">
   {/if}

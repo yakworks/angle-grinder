@@ -7,6 +7,7 @@ const componentsStates = {
     icon: 'fas fa-plug'
   },
   children: [
+    { name: 'angularSvelte', component: 'ngSvelteDemoIndex' },
     {
       name: 'avatars', component: 'svelteAvatarsIndex'
     },

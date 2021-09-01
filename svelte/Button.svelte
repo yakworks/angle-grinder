@@ -2,6 +2,7 @@
   import { onMount } from 'svelte'
   import { getIconClass } from '../src/utils/icon'
   import createRipple from "./utils/ripple.js";
+  import { classNames } from './utils';
   import Icon from './Icon.svelte'
 
   /** HTML tag to use for button (either 'a' or 'button')
@@ -15,12 +16,6 @@
    * @values $$colors$$
    * */
   export let color = ''
-
-  /** Class to add to button or a
-   * @svelte-prop {String} [size]
-   * @values $$sizes$$
-   * */
-  export let buttonClass = ''
 
   /** Href to use when <code>tag</code> is 'a'
    * @svelte-prop {String} [href]
@@ -45,11 +40,13 @@
   export let iconLeft = null
   export let iconRight = null
 
+  export let className = ''
+	export { className as class } //work around since class is reserved
+  let classes
+
   let icons = {}
 
   const ripple = createRipple((text || fab || outlined) ? color : "white")
-
-  let btnCls
 
   onMount(() => {
     if (!['button', 'a'].includes(tag)) throw new Error(`'${tag}' cannot be used as a tag for a Bulma button`)
@@ -62,16 +59,18 @@
   }
 
   $: {
-    btnCls = buttonClass
-    if (color) btnCls = `${btnCls} is-${color}`
+    classes = classNames(
+      'button',
+      className,
+      {
+        'is-icon-button': icon,
+        'is-fab': (fab == true || fab === 'true'),
+        [`is-${color}`]: color
+      }
+    )
     // if its icon then its an an icon button with no border, set is-icon-button
     if (icon) {
-      btnCls = `${btnCls} is-icon-button`
       iconSolo = icon
-    }
-
-    if (fab == true || fab === 'true') {
-      btnCls = `${btnCls} is-fab`
     }
     icons = {
       solo: iconSolo,
@@ -90,7 +89,7 @@
   use:ripple
   {type}
   {disabled}
-  class="button {btnCls}"
+  class="{classes}"
   class:is-loading={loading}
   on:click
   >
