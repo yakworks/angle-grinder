@@ -1,3 +1,8 @@
+### v4.0.17
+
+[Full Changelog](https://github.com/yakworks/angle-grinder/compare/v4.0.16...v4.0.17)
+- Updated deps in package.json (#608) [link](https://github.com/yakworks/angle-grinder/commit/d6bb64b030b3ec9acb4c3fc4179c60088bc350f5)
+
 ### v4.0.16
 
 [Full Changelog](https://github.com/yakworks/angle-grinder/compare/v4.0.15...v4.0.16)
