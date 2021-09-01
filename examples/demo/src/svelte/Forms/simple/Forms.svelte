@@ -2,9 +2,7 @@
 <script>
   // import { getContext } from 'svelte';
   import stringify from 'fast-safe-stringify'
-  import Button from 'angle-grinder/src/svelte/Button'
-  import { Input, Select, ErrorMessage } from 'angle-grinder/src/svelte/Form'
-  import Form from 'angle-grinder/src/svelte/Form/Form.svelte';
+  import { Button, Form, Input, Select, ErrorMessage } from 'angle-grinder/svelte'
   import * as yup from "yup";
 
   const formProps = {
