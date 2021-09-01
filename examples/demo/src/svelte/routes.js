@@ -8,12 +8,9 @@ const componentsStates = {
   },
   children: [
     { name: 'angularSvelte', component: 'ngSvelteDemoIndex' },
-    {
-      name: 'avatars', component: 'svelteAvatarsIndex'
-    },
-    {
-      name: 'buttons', component: 'svelteButtonsIndex'
-    },
+    { name: 'avatars', component: 'svelteAvatarsIndex' },
+    { name: 'buttons', component: 'svelteButtonsIndex' },
+    { name: 'cards', component: 'svelteCardsIndex' },
     {
       name: 'forms',
       children: [
