@@ -1,7 +1,6 @@
 
   <script>
-    import { Form, Input, Select, ErrorMessage } from 'angle-grinder/src/svelte/Form'
-    import Button from 'angle-grinder/src/svelte/Button'
+    import { Button, Form, Input } from 'angle-grinder/svelte'
 
     import * as yup from "yup";
 

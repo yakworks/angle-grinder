@@ -1,1 +1,3 @@
-export { default as Button } from '../src/svelte/Button';
+export { default as Avatar } from './Avatar.svelte';
+export { default as Button } from './Button.svelte';
+export * from './Form';

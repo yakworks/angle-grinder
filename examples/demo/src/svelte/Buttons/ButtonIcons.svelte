@@ -1,5 +1,5 @@
 <script>
-  import Button from 'angle-grinder/src/svelte/Button'
+  import { Button } from 'angle-grinder/svelte'
 
   let loading = false
 

@@ -1,7 +1,7 @@
 <script>
   import { onMount } from 'svelte'
   // import { classNames } from '../utils/helpers';
-  import { ClassBuilder } from "../utils/classes.js"
+  import { ClassBuilder } from "./utils/classes.js"
 
   export let clazz = ''
 	export { clazz as class } //work around since class is reserved

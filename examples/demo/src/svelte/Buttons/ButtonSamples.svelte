@@ -1,6 +1,5 @@
 <script>
-  import Button from 'angle-grinder/src/svelte/Button'
-  import toast from 'angle-grinder/src/tools/toast'
+  import { Button } from 'angle-grinder/svelte'
   let loading = false
 
   function toggleLoading(event){

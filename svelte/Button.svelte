@@ -1,8 +1,8 @@
 <script>
   import { onMount } from 'svelte'
-  import { getIconClass } from '../../utils/icon'
-  import createRipple from "../Ripple/ripple.js";
-  import Icon from '../Icon'
+  import { getIconClass } from '../src/utils/icon'
+  import createRipple from "./utils/ripple.js";
+  import Icon from './Icon.svelte'
 
   /** HTML tag to use for button (either 'a' or 'button')
    * @svelte-prop {String} tag=button
