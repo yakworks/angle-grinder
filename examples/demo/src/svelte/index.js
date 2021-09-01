@@ -1,8 +1,8 @@
 import ngSvelteShim from 'angle-grinder/src/ng/utils/ngSvelteShim'
-import Avatars from './Avatars/index.svelte'
-import Buttons from './Buttons/index.svelte'
-import FormSimple from './Forms/simple/index.svelte'
-import FormFields from './Forms/fields/index.svelte'
+import Avatars from './Avatars/Index.svelte'
+import Buttons from './Buttons/Index.svelte'
+import FormSimple from './Forms/simple/Index.svelte'
+import FormFields from './Forms/fields/Index.svelte'
 // import avatarsDemoMod from './avatars'
 
 const appMod = angular.module('svelte.demo.components', [])
