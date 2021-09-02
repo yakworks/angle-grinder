@@ -1,3 +1,8 @@
+### v4.0.18
+
+[Full Changelog](https://github.com/yakworks/angle-grinder/compare/v4.0.17...v4.0.18)
+- Svelte components and dart sass (#610) [link](https://github.com/yakworks/angle-grinder/commit/3bd1e0f00aebeca6987a38c8621b34870b888c76)
+
 ### v4.0.17
 
 [Full Changelog](https://github.com/yakworks/angle-grinder/compare/v4.0.16...v4.0.17)
