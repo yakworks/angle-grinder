@@ -1,0 +1,22 @@
+///////////////////
+// used to import colors into js
+//////////////////
+
+@import "initial-variables";
+@import "~bulma/sass/utilities/initial-variables.sass";
+@import "functions"; // we fix the color darken so use this one
+@import "typography";
+@import "colors";
+
+:export {
+  @each $name, $pair in $colors {
+    #{unquote($name)} : nth($pair, 1);
+    #{unquote($name)}Invert: nth($pair, 2);
+    @if length($pair) >= 3 {
+      #{unquote($name)}Light: nth($pair, 3);
+      @if length($pair) >= 4 {
+        #{unquote($name)}Dark: nth($pair, 4);
+      }
+    }
+  }
+}

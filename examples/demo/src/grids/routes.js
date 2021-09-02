@@ -8,7 +8,7 @@ const gridsStates = {
   children: [
     {
       name: 'vanilla-agGridList',
-      data: { title: 'Vanilla rest agGridList' },
+      data: { title: 'Customer Grid Example' },
       abstract: 'fresh.grid.vanilla-agGridList.list',
       url: '/customer',
       children: [{

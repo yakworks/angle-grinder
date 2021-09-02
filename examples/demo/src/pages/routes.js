@@ -14,10 +14,6 @@ const componentsStates = {
       component: 'orgShowDemoIndex'
     },
     {
-      name: 'ngSvelteShim',
-      component: 'ngSvelteDemoIndex'
-    },
-    {
       name: 'batch',
       data: { title: 'Intelligent Auto-Cash' },
       abstract: 'rcm.receivables.arBatch.list',

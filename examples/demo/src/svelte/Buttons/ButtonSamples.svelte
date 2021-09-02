@@ -1,5 +1,5 @@
 <script>
-  import { Button } from 'angle-grinder/svelte'
+  import { Button, Columns, Col } from 'angle-grinder/svelte'
   let loading = false
 
   function toggleLoading(event){
@@ -10,8 +10,8 @@
 
 </script>
 
-<div class="columns">
-  <div class="column is-half">
+<Columns>
+  <Col class="is-half">
     <div class="buttons">
       <button type="button" class="button is-primary" ag-ripple>
         Basic
@@ -27,19 +27,19 @@
       <Button color="dark">Dark</Button>
       <Button color="white">White</Button>
     </div>
-  </div>
-  <div class="column is-half">
+  </Col>
+  <Col class="is-half">
     <div class="buttons">
       <Button disabled>Disabled</Button>
-      <Button color="primary" buttonClass="elevation-2">Raised</Button>
-      <Button color="primary" buttonClass="is-outlined">Outline</Button>
-      <Button color="danger" buttonClass="is-outlined">Outline</Button>
-      <Button color="primary" buttonClass="is-rounded">Round</Button>
-      <Button color="info" buttonClass="is-fullwidth">Full Width</Button>
+      <Button color="primary" class="elevation-2">Raised</Button>
+      <Button color="primary" class="is-outlined">Outline</Button>
+      <Button color="danger" class="is-outlined">Outline</Button>
+      <Button color="primary" class="is-rounded">Round</Button>
+      <Button color="info" class="is-fullwidth">Full Width</Button>
       <Button color="primary" on:click={toggleLoading} loading="{loading}">Toggle Loading
       </Button>
     </div>
     <pre>loading: {loading}</pre>
-  </div>
-</div>
+  </Col>
+</Columns>
 

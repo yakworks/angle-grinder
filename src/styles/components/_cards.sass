@@ -9,11 +9,12 @@ $card-border-color: $border !default
 $card-hr-color: $card-border-color !default
 
 // --- materialish card title, inspired by vuetify
-$card-title-adjacent-sibling-subtitle-margin-top: -$item-spacing !default;
-$card-title-adjacent-sibling-subtitle-text-padding-top: 0 !default;
-$card-adjacent-sibling-text-padding-top: 0 !default;
+$card-title-adjacent-sibling-subtitle-margin-top: -$item-spacing !default
+$card-title-adjacent-sibling-subtitle-text-padding-top: 0 !default
+$card-adjacent-sibling-text-padding-top: 0 !default
 $card-title-font-size: $rem-112 !default
 $card-title-font-weight: $weight-medium !default
+$card-header-title-font-size: $rem-1 !default
 // $card-title-letter-spacing: map-deep-get($headings, 'h6', 'letter-spacing') !default;
 // $card-title-line-height: map-deep-get($headings, 'h6', 'line-height') !default;
 
@@ -28,7 +29,7 @@ $card-header-padding: $sp-4 $item-spacing !default
 // $card-header-shadow: 0 0.125em 0.25em rgba($scheme-invert, 0.1) !default
 $card-header-shadow: 0 1px 2px $card-hr-color !default
 
-$card-header-weight: $weight-bold !default
+$card-header-weight: $weight-semibold!default
 
 $card-content-background-color: transparent !default
 $card-content-padding: $item-spacing !default
@@ -109,6 +110,16 @@ hr
   padding: $card-header-padding
   min-height: $item-height
 
+  .card-title
+    align-items: center
+    color: $card-header-color
+    display: flex
+    flex-grow: 1
+    font-size: $card-header-title-font-size
+    font-weight: $card-header-weight
+    &.is-centered
+      justify-content: center
+
 .card-header-title
   align-items: center
   color: $card-header-color
@@ -128,12 +139,12 @@ hr
 
 // floating action icon in upper right corner
 .card-fab
-  right: 0.5rem;
-  position: absolute;
-  top: 0.5rem;
+  right: 0.5rem
+  position: absolute
+  top: 0.5rem
 
 .card-header-icon:last-child
-    margin-right: $icon-button-negative-margin;
+    margin-right: $icon-button-negative-margin
 
 .card-image
   display: block

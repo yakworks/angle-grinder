@@ -70,7 +70,7 @@ const sparkOpts = {
     }
 
   },
-  colors: [themeColors.green, themeColors.secondary, themeColors.orange],
+  colors: [themeColors.success, themeColors.secondary, themeColors.secondary],
   title: {
     text: 'Profit Evolution',
     align: 'left',

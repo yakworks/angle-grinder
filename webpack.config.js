@@ -75,6 +75,11 @@ module.exports = function(env, argv) {
       rules: [
         { test: /\.js$/, loader: 'babel-loader', exclude: /(node_modules|bower_components)/},
         {
+          test: /\.tsx?$/,
+          use: 'ts-loader',
+          exclude: /node_modules/,
+        },
+        {
           test: /\.svelte$/,
           use: {
             loader: 'svelte-loader',
@@ -96,6 +101,8 @@ module.exports = function(env, argv) {
             { loader: 'postcss-loader', options: { sourceMap: true } },
             { loader: 'sass-loader',
               options: {
+                // Prefer `dart-sass`
+                implementation: require("sass"),
                 sourceMap: true,
                 sassOptions: {
                   outputStyle: 'expanded' //'compressed', //try expanded too
@@ -190,7 +197,7 @@ module.exports = function(env, argv) {
         svelte: path.resolve('node_modules', 'svelte'),
         //Components: path.resolve(__dirname, "..", "src", "components"),
       },
-      extensions: ['.mjs', '.js', '.svelte'],
+      extensions: ['.tsx', '.ts', '.mjs', '.js', '.svelte'],
       mainFields: ['svelte', 'browser', 'module', 'main']
 
     }

@@ -22,8 +22,8 @@ Use this one instead.
 @mixin make-row($gutter: $grid-gutter-width) {
   display: flex;
   flex-wrap: wrap;
-  margin-right: -$gutter / 2;
-  margin-left: -$gutter / 2;
+  margin-right: -$gutter * .5;
+  margin-left: -$gutter * .5;
 }
 
 // define HSL color variable

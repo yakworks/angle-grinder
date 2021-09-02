@@ -16,7 +16,7 @@
 	}
 </style>
 
-<div class="card w-25 mt-4">
+<div class="card">
   <div class="card-title"> Svelte Component </div>
   <hr>
   <div class="card-content">

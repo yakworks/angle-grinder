@@ -7,19 +7,19 @@ const componentsStates = {
     icon: 'fas fa-plug'
   },
   children: [
-    {
-      name: 'avatars', component: 'svelteAvatarsIndex'
-    },
-    {
-      name: 'buttons', component: 'svelteButtonsIndex'
-    },
+    { name: 'angularSvelte', component: 'ngSvelteDemoIndex' },
+    { name: 'avatars', component: 'svelteAvatarsIndex' },
+    { name: 'buttons', component: 'svelteButtonsIndex' },
+    { name: 'cards', component: 'svelteCardsIndex' },
+    { name: 'charts', component: 'svelteChartsIndex' },
     {
       name: 'forms',
       children: [
         { name: 'simple', component: 'svelteFormSimpleIndex' },
         { name: 'Fields', component: 'svelteFormFieldsIndex' }
       ]
-    }
+    },
+    { name: 'growlToast', component: 'svelteGrowlIndex' },
   ]
 }
 

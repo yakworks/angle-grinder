@@ -27,6 +27,13 @@ $rem-250: 2.5rem !default; // ~40px
 $rem-300: 3rem !default; // ~40px
 
 
+// Bulma's initial variables
+// $weight-light: 300 !default
+// $weight-normal: 400 !default
+// $weight-medium: 500 !default
+// $weight-semibold: 600 !default
+// $weight-bold: 700 !default
+
 // tailwind-ish text classes
 $text-xxs: $rem-62 !default; // ~10px
 $text-xs: $rem-75 !default; // ~12px
@@ -45,6 +52,9 @@ $size-small: $text-xs !default;
 $size-normal: $text-base !default;
 $size-medium: $text-xl !default; // ~20px
 $size-large: $text-xxl !default; // ~24px
+
+// for Bulma
+$sizes: $size-1 $size-2 $size-3 $size-4 $size-5 $size-6 $size-7 !default;
 
 
 $font-sizes: (

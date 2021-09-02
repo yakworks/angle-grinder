@@ -22,7 +22,7 @@ $select2-font-size: 14px;
   width: $delSize;
   border-radius: $delSize;
   top: 50%;
-  margin-top: -($delSize/2);
+  margin-top: -($delSize * .5);
   margin-right: 5px;
 }
 
@@ -132,7 +132,7 @@ $select2-font-size: 14px;
     position: absolute;
     right: 0px;
     //top: 50%;
-    margin-top: $icoSize/2;
+    margin-top: $icoSize * .5;
     margin-right: .625em;
     z-index: 4;
     color: $input-arrow;

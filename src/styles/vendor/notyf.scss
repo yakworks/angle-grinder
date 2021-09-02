@@ -55,6 +55,10 @@
 $toast-padding: 15px;
 
 .notyf {
+  .notyf-title {
+    font-weight: 800;
+  }
+
   position: fixed;
   top: 0;
   left: 0;
@@ -182,7 +186,7 @@ $toast-padding: 15px;
   }
 
   &__ripple {
-    height: 400px;
+    height: 600px;
     width: 400px;
     position: absolute;
     transform-origin: bottom right;
