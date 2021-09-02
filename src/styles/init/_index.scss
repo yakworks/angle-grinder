@@ -33,10 +33,3 @@
 @import "~bulma/sass/utilities/extends.sass";
 
 /* ------ END init/_index.scss ----- */
-
-:export {
-  @each $name, $pair in $colors {
-    #{unquote($name)} : nth($pair, 1);
-    #{unquote($name)}Invert: nth($pair, 2);
-  }
-}

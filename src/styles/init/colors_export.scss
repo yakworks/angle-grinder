@@ -12,5 +12,11 @@
   @each $name, $pair in $colors {
     #{unquote($name)} : nth($pair, 1);
     #{unquote($name)}Invert: nth($pair, 2);
+    @if length($pair) >= 3 {
+      #{unquote($name)}Light: nth($pair, 3);
+      @if length($pair) >= 4 {
+        #{unquote($name)}Dark: nth($pair, 4);
+      }
+    }
   }
 }

@@ -18,7 +18,8 @@ const componentsStates = {
         { name: 'simple', component: 'svelteFormSimpleIndex' },
         { name: 'Fields', component: 'svelteFormFieldsIndex' }
       ]
-    }
+    },
+    { name: 'growlToast', component: 'svelteGrowlIndex' },
   ]
 }
 

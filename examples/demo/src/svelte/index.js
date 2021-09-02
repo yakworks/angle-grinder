@@ -6,6 +6,7 @@ import Cards from './Cards/Index.svelte'
 import Charts from './Charts/Index.svelte'
 import FormSimple from './Forms/simple/Index.svelte'
 import FormFields from './Forms/fields/Index.svelte'
+import Growl from './Growl/Index.svelte'
 // import avatarsDemoMod from './avatars'
 
 const appMod = angular.module('svelte.demo.components', [ngSvelteMod])
@@ -28,6 +29,9 @@ appMod
   })
   .component('svelteFormFieldsIndex', {
     controller: ngSvelteShim(FormFields)
+  })
+  .component('svelteGrowlIndex', {
+    controller: ngSvelteShim(Growl)
   })
 
 export default appMod.name
