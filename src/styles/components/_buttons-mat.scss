@@ -94,11 +94,11 @@ $shadow-large: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 
     &:first-child:not(:last-child),
     &.is-first-child{
       margin-left: $margin-calc;
-      margin-right: $button-padding-horizontal / 4;
+      margin-right: $button-padding-horizontal * .25;
     }
     &:last-child:not(:first-child),
     &.is-last-child  {
-      margin-left: $button-padding-horizontal / 4;
+      margin-left: $button-padding-horizontal * .25;
       margin-right: $margin-calc;
     }
     &:first-child:last-child,

@@ -5,6 +5,9 @@
   export let code
   export let horizontal = true
 
+  let className = undefined;
+  export { className as class };
+
   let showCode = false
 
   function show() {
@@ -25,7 +28,7 @@
 
 </script>
 
-<div use:init class="example-section mb-4">
+<div use:init class="example-section mb-4 {className}">
   <div class="example" class:is-horizontal="{horizontal}">
     <div class="example-component">
       <slot/>

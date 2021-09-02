@@ -11,6 +11,7 @@ const componentsStates = {
     { name: 'avatars', component: 'svelteAvatarsIndex' },
     { name: 'buttons', component: 'svelteButtonsIndex' },
     { name: 'cards', component: 'svelteCardsIndex' },
+    { name: 'charts', component: 'svelteChartsIndex' },
     {
       name: 'forms',
       children: [

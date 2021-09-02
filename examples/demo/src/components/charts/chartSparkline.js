@@ -11,7 +11,7 @@ const sparkOpts = {
       enabled: true
     }
   },
-  colors: [themeColors.orange],
+  colors: [themeColors.secondary],
   stroke: {
     width: [1],
     curve: 'straight'

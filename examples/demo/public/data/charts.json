@@ -1,0 +1,56 @@
+{
+  "dsoSparkLine": {
+    "chart": {
+      "id": "sparkline1",
+      "type": "area",
+      "height": 80,
+      "sparkline": {
+        "enabled": true
+      }
+    },
+    "stroke": {
+      "width": [
+        1
+      ],
+      "curve": "straight"
+    },
+    "fill": {
+      "opacity": 1
+    },
+    "series": [
+      {
+        "name": "DSO"
+      }
+    ],
+    "yaxis": {
+      "min": 30
+    },
+    "xaxis": {
+      "type": "datetime"
+    },
+    "tooltip": {
+      "x": {
+        "format": "MMM"
+      }
+    },
+    "title": {
+      "text": "DSO",
+      "offsetX": 5,
+      "floating": false,
+      "style": {
+        "fontSize": "24px",
+        "cssClass": "apexcharts-yaxis-title"
+      }
+    },
+    "subtitle": {
+      "text": "38",
+      "offsetX": 5,
+      "floating": true,
+      "style": {
+        "fontSize": "24px",
+        "fontWeight": "600",
+        "cssClass": "apexcharts-yaxis-title"
+      }
+    }
+  }
+}

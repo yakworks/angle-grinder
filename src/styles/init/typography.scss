@@ -53,6 +53,9 @@ $size-normal: $text-base !default;
 $size-medium: $text-xl !default; // ~20px
 $size-large: $text-xxl !default; // ~24px
 
+// for Bulma
+$sizes: $size-1 $size-2 $size-3 $size-4 $size-5 $size-6 $size-7 !default;
+
 
 $font-sizes: (
   "text-xxs": $text-xxs,

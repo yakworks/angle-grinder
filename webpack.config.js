@@ -101,6 +101,8 @@ module.exports = function(env, argv) {
             { loader: 'postcss-loader', options: { sourceMap: true } },
             { loader: 'sass-loader',
               options: {
+                // Prefer `dart-sass`
+                implementation: require("sass"),
                 sourceMap: true,
                 sassOptions: {
                   outputStyle: 'expanded' //'compressed', //try expanded too
