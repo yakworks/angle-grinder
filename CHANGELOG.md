@@ -1,3 +1,8 @@
+### v4.0.19
+
+[Full Changelog](https://github.com/yakworks/angle-grinder/compare/v4.0.18...v4.0.19)
+- base line implementing some of framework7 (#611) [link](https://github.com/yakworks/angle-grinder/commit/d8d86a8281e95aa3c4c52d0a3b55676c52cb10b1)
+
 ### v4.0.18
 
 [Full Changelog](https://github.com/yakworks/angle-grinder/compare/v4.0.17...v4.0.18)
