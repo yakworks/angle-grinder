@@ -68,10 +68,6 @@ const componentsStates = {
       component: 'tilesCardsIndex'
     },
     {
-      name: 'toast',
-      template: require('./toast/toast.html')
-    },
-    {
       name: 'toolbar',
       component: 'toolbarDemoIndex'
     }

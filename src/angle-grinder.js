@@ -9,6 +9,7 @@ import agPathWithContext from './ng/pathWithContext'
 import agSidebar from './ng/sidebar/sidebars'
 import agSidenav from './ng/sidenav'
 import uiRouterStateHelper from './ng/uirouter/stateHelper'
+import growl from './tools/growl'
 
 // foo
 var agmod = angular.module('angleGrinder', [
@@ -47,7 +48,7 @@ agmod.service('dataStoreApi', function() {})
 
 // Intercepts all HTTP errors and displays a flash message
 agmod.factory('httpErrorsInterceptor', [
-  '$injector', '$q', 'alerts', function($injector, $q, alerts) {
+  '$injector', '$q', function($injector, $q) {
     return {
       response: function(response) {
         return response
@@ -64,7 +65,7 @@ agmod.factory('httpErrorsInterceptor', [
 
         // ..skip validation and auth errors
         if (response.status !== 422 && response.status !== 401) {
-          alerts.error(errorMessage)
+          growl.error(errorMessage)
           return $q.reject(response)
         }
         return $q.reject(response)
@@ -74,9 +75,9 @@ agmod.factory('httpErrorsInterceptor', [
 ])
 
 // Catch all jquery xhr errors
-agmod.run(function($log, alerts) {
+agmod.run(function($log) {
   return $(document).ajaxError(function(event, jqxhr, settings, exception) {
     $log.error('Network error:', event, jqxhr, settings, exception)
-    return alerts.error(exception)
+    return growl.error(exception)
   })
 })

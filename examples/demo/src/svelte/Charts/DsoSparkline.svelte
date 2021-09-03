@@ -52,8 +52,10 @@
       }
     },
     subtitle: {
+      align: 'right',
       text: '38',
-      offsetX: 5,
+      offsetX: -5,
+      offsetY: 3,
       floating: true,
       style: {
         fontSize: '24px',

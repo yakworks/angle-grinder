@@ -1,4 +1,7 @@
-import './vendor/_index.scss'
+// import './vendor/_index.scss'
+import './framework7.less'
+
+import "@fortawesome/fontawesome-free/css/all.css";
 import 'ti-icons/css/themify-icons.css'
 import 'perfect-scrollbar/css/perfect-scrollbar.css'
 

@@ -23,7 +23,7 @@
     if(imgName && !imgSrc) imgSrc = `/assets/images/photos/${imgName}`// getAvatarUrl(imgName)
     if(square) imgClass = `${imgClass} is-squared`
     classes = classNames(
-      'is-avatar',
+      'avatar',
       className,
       {
         'is-squared': square,
@@ -55,10 +55,10 @@
 
 <span class="{classes}">
   {#if imgSrc}
-    <img class="avatar {imgClass}" src="{imgSrc}"  alt="">
+    <img class="avatar-img {imgClass}" src="{imgSrc}"  alt="">
   {/if}
   {#if letters}
-    <span class="avatar is-letter {lettersClass}">
+    <span class="avatar-img is-letter {lettersClass}">
         <span>{letters}</span>
     </span>
   {/if}

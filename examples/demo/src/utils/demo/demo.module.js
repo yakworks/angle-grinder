@@ -1,5 +1,5 @@
 // Import Resources
-import 'ng-showdown' // markdown
+// import 'ng-showdown' // markdown
 // import 'angular-highlightjs'; //source code highlighter
 import highlightjsModule from './highlightjs.component' // source code highlighter
 // import 'highlight.js/styles/darkula.css'; // try darkula too
@@ -14,7 +14,7 @@ import './demo.scss'
 // Register module, register component and export name
 export default angular
   .module('module.demo.snippets', [
-    'ng-showdown',
+    // 'ng-showdown',
     highlightjsModule
   ])
   .component('demoSnippet', demoSnippet)

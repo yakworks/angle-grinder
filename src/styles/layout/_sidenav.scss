@@ -115,7 +115,7 @@ $sidenav-header-logo-tablet-height: $bar-breakpoint-height - 2rem !default; // 2
 }
 
 // more or less a copy of list-items so we can change/invert colors
-.sidenav .sidenav-nav.list {
+.sidenav .sidenav-nav.sidenav-list {
   .list-item-set {
     max-width: 400px;
 

@@ -15,11 +15,11 @@ $list-color: $text !default;
 $list-hover-color: $secondary !default;
 $list-active-color: $secondary !default;
 
-.list {
+.sidenav-list {
   position: relative;
 }
 
-.list .list-item-set {
+.sidenav-list .list-item-set {
   margin: 0;
   padding: 0;
   // max-width: 400px;
@@ -28,7 +28,7 @@ $list-active-color: $secondary !default;
   // font-family: "Open Sans", sans-serif !important;
 }
 
-.list .list-item-set .list-item {
+.sidenav-list .list-item-set .list-item {
   position: relative;
 
   .item-content {
@@ -71,7 +71,7 @@ $list-active-color: $secondary !default;
   }
 }
 
-.list .list-item-set .list-item.has-children {
+.sidenav-list .list-item-set .list-item.has-children {
   // dropdown arrow
   > .item-content::after {
     @extend %arrow;
