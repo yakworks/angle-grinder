@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.14.0",
+    "@mdi/font": "^5.9.55",
     "@popperjs/core": "^2.0.6",
     "Select2": "^3.5.7",
     "angular": "1.7.9",
