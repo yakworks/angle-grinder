@@ -1,5 +1,5 @@
 import BaseListCtrl from 'angle-grinder/src/ng/gridz/list/BaseListCtrl'
-// import toast from 'angle-grinder/src/tools/toast'
+
 import { union } from 'lodash'
 
 export default class BatchListCtrl extends BaseListCtrl {

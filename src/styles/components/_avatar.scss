@@ -1,4 +1,4 @@
-.is-avatar {
+.avatar {
   position: relative;
   display: inline-block;
   vertical-align: bottom;
@@ -57,7 +57,7 @@
     }
   }
 
-  .avatar {
+  .avatar-img {
     width: 40px;
     min-width: 40px;
     height: 40px;
@@ -202,7 +202,7 @@
       }
     }
 
-    .avatar {
+    .avatar-img {
       width: 32px;
       min-width: 32px;
       height: 32px;
@@ -258,7 +258,7 @@
       }
     }
 
-    .avatar {
+    .avatar-img {
       width: 50px;
       min-width: 50px;
       height: 50px;
@@ -314,7 +314,7 @@
       }
     }
 
-    .avatar {
+    .avatar-img {
       width: 68px;
       min-width: 68px;
       height: 68px;
@@ -363,7 +363,7 @@
       }
     }
 
-    .avatar {
+    .avatar-img {
       width: 80px;
       min-width: 80px;
       height: 80px;
@@ -412,7 +412,7 @@
       }
     }
 
-    .avatar {
+    .avatar-img {
       width: 100px;
       min-width: 100px;
       height: 100px;
@@ -443,7 +443,7 @@
 .avatar-stack {
   display: flex;
 
-  .is-avatar {
+  .avatar-img {
     border-radius: 50%;
 
     &.is-small {
@@ -504,7 +504,7 @@
   }
 }
 
-.avatar.is-letter {
+.avatar-img.is-letter {
   &.letter-color-a {
     background-color: #5a8770 !important;
   }

@@ -60,8 +60,8 @@
     <hr class='my-4 mx-0'>
 
     {#each avatarData as item}
-      <span class="mr-1 is-avatar {item.size}">
-        <img class="avatar" src="/assets/images/photos/{item.avatar}"  alt="">
+      <span class="mr-1 avatar {item.size}">
+        <img class="avatar-img" src="/assets/images/photos/{item.avatar}"  alt="">
         <img class="badge" src="https://via.placeholder.com/150x150" alt="">
       </span>
     {/each}
@@ -78,8 +78,8 @@
     <Avatar class="{item.size} mr-1" name="{item.name}"></Avatar>
     {/each}
 
-    <span class="is-avatar">
-      <span class="avatar is-letter is-primary">
+    <span class="avatar">
+      <span class="avatar-img is-letter is-primary">
         <span>JD</span>
       </span>
     </span>

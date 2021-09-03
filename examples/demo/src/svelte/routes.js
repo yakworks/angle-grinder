@@ -20,6 +20,9 @@ const componentsStates = {
       ]
     },
     { name: 'growlToast', component: 'svelteGrowlIndex' },
+    { name: 'itemBlocks', component: 'svelteItemsIndex' },
+    { name: 'lists', component: 'svelteListsIndex' },
+    { name: 'selects', component: 'svelteSelectsIndex' },
   ]
 }
 

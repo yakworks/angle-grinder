@@ -1,6 +1,6 @@
 
 const people = [
-  { id: 1, name: 'Mike', email: 'Mike@email.com', phone: '+1-800-555-1212', title: 'Acoustic Wizard', age: 12, location: 'Mulligans Valley, US', avatar: 'beard-guy.jpg' },
+  { id: 1, name: 'Mike B', email: 'Mike@email.com', phone: '+1-800-555-1212', title: 'Acoustic Wizard', age: 12, location: 'Mulligans Valley, US', avatar: 'beard-guy.jpg' },
   { id: 2, name: 'Caldwell', email: 'Caldwell@email.com', phone: '+1-800-555-1212', title: 'Astronaut Physicist', age: 12, location: 'Galts Gulch, AR', avatar: 'caldwell.jpg' },
   { id: 3, name: 'F Douglas', email: 'estefania@email.com', phone: '+1-800-555-1212', title: 'World Changer', age: 21, location: 'Mulligans Valley, US', avatar: 'douglas.jpg' },
   { id: 4, name: 'T Jefferson', email: 'adrian@email.com', phone: '+1-800-555-1212', title: 'President', age: 21, location: 'Mulligans Valley, US', avatar: 'jefferson.jpg' },

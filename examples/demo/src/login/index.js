@@ -1,5 +1,4 @@
 import template from './index.html'
-// import toast from 'angle-grinder/src/tools/toast'
 import ky from 'ky'
 
 class controller {

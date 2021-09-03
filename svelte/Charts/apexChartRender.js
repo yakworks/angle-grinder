@@ -1,4 +1,4 @@
-import ApexCharts from "apexcharts/src/apexcharts"
+import ApexCharts from "apexcharts"
 window.ApexCharts = ApexCharts;
 
 export const chart = (node, options) => {

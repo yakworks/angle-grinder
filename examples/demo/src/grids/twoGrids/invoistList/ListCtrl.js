@@ -2,7 +2,6 @@
 // import template from './list.html'
 import BaseListCtrl from 'angle-grinder/src/ng/gridz/list/BaseListCtrl'
 import restStoreApi from '../../../store/RestStoreApi'
-import toast from 'angle-grinder/src/tools/toast'
 import _ from 'lodash'
 
 export default class ListCtrl extends BaseListCtrl {
