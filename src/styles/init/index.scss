@@ -19,10 +19,13 @@
 @import "initial-variables";
 @import "~bulma/sass/utilities/initial-variables.sass";
 
-@import "functions"; // we fix the color darken so use this one
+@import "bulmaFunctions"; //fixes bulma functions to use css variables
+// @import "mixins";
 
 @import "typography";
 
+// @import "color-vars";
+@import "theme-vars";
 @import "colors";
 // colors imports derived-variables, post-derived-variables sets up components
 @import "variables";

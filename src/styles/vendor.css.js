@@ -1,10 +1,15 @@
-// import './vendor/_index.scss'
-import './framework7.less'
 
-import "@fortawesome/fontawesome-free/css/all.css";
+// Framework7 less
+import './framework7/framework7.less'
+// Framework7 overrides sass
+import './framework7/index.sass'
+
+import "@mdi/font/css/materialdesignicons.css"
+import "@fortawesome/fontawesome-free/css/all.css"
 import 'ti-icons/css/themify-icons.css'
-import 'perfect-scrollbar/css/perfect-scrollbar.css'
+import 'framework7-icons'
 
+import 'perfect-scrollbar/css/perfect-scrollbar.css'
 import 'toastr/build/toastr.css'
 
 import 'angular-loading-bar/build/loading-bar.css'

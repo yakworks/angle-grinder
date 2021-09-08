@@ -2,70 +2,16 @@
 /* Keep colors here with any Bulma overrides, midway down we run derived-variables from Bulma
 /* see initial-variables for base overrides
 /* ---------------------------------------------------------------------- */
-
 // TODO https://blog.maximeheckel.com/posts/the-power-of-composition-with-css-variables/
 
-
-$info: $cyan !default;
-$success: $green !default;
-$danger: $red !default;
-// $warning: $orange !default
-$warning: $yellow !default;
-$link: $blue !default;
-
-// --- primary
-$primary: hsl(210, 40%, 37%) !default;
-$primary-invert: findColorInvert($primary) !default;
-$primary-light: findLightColor($primary) !default;
-$primary-dark: hsl(210, 40%, 27%) !default;
-
-// --- info
-$info: $cyan !default;
-$info-invert: findColorInvert($info) !default;
-$info-light: findLightColor($info) !default;
-$info-dark: findDarkColor($info) !default;
-
-// --- success
-$success: $green !default;
-$success-invert: findColorInvert($success) !default;
-$success-light: findLightColor($success) !default;
-$success-dark: findDarkColor($success) !default;
-
-// --- warning
-$warning: $yellow !default;
-$warning-invert: findColorInvert($warning) !default;
-$warning-light: findLightColor($warning) !default;
-$warning-dark: findDarkColor($warning) !default;
-
-// --- danger
-$danger: $red !default;
-$danger-invert: findColorInvert($danger) !default;
-$danger-light: findLightColor($danger) !default;
-$danger-dark: findDarkColor($danger) !default;
-
-
-// force the orange one to white so it doesn't go to black
-$orange-invert: #fff !default;
-// secondary, not in stock Bulma
-$secondary: $orange !default;
-$secondary-invert: $orange-invert !default;
-$secondary-light: findLightColor($secondary) !default;
-$secondary-dark: findDarkColor($secondary) !default;
+@use "sass:map";
+@use "../mixins/cssVars";
 
 $light: $white-ter !default;
 $light-invert: findColorInvert($light) !default;
 
 $dark: $grey-darker !default;
 $dark-invert: findColorInvert($dark) !default;
-
-// Invert colors
-$yellow-invert: findColorInvert($yellow) !default;
-$green-invert: findColorInvert($green) !default;
-$turquoise-invert: findColorInvert($turquoise) !default;
-$cyan-invert: findColorInvert($cyan) !default;
-$blue-invert: findColorInvert($blue) !default;
-$purple-invert: findColorInvert($purple) !default;
-$red-invert: findColorInvert($red) !default;
 
 $scheme-main: $white !default;
 $scheme-main-bis: $white-bis !default; // white-grey
@@ -93,17 +39,17 @@ $border-light-hover: $grey-light !default;
 
 
 // $accent: #797bf2;
-$accent: #00efb7;
 $azure: #5B9BD1;
 $beige: #D2BD8E;
 $bricky: #894550;
 
 // --- Link colors ---
 
-$link: $blue !default;
-$link-invert: findColorInvert($link) !default;
-$link-light: findLightColor($link) !default;
-$link-dark: findDarkColor($link) !default;
+// $link: $blue !default;
+// $link-invert: findColorInvert($link) !default;
+// $link-light: findLightColor($link) !default;
+// $link-dark: findDarkColor($link) !default;
+
 $link-visited: $purple !default;
 
 $link-hover: $grey-darker !default;
@@ -120,26 +66,40 @@ $link-active-border: $grey-dark !default;
 $fade-grey: #ededed;
 $muted-grey: #999;
 
+$colors_list : ("primary", "secondary", "accent", "link", "info", "success", "danger", "warning");
+
+$colors: () !default;
+
+@function create_bulma_color_list($color) {
+  $list: (
+    var(--color-#{$color}),
+    var(--color-#{$color}-invert),
+    cssVars.highlight(var(--color-#{$color})),
+    var(--color-#{$color}-dark)
+  );
+  @return $list;
+}
+
+@each $color in $colors_list {
+  $map: ();
+  $map: map-merge($map, ($color: create_bulma_color_list($color)) );
+  $colors: map-merge($colors, $map);
+}
+
 // more get added to this in Bulma's derived-variables.
 // bulma spins through these and setups up classes prefixed with is.
 // so this essentially sets up so we have a 'is-lighter' css class availiable for cards, toolbars etc
 $custom-colors: null !default;
 
 // override Bulma's colors in derived-variables
-$colors: mergeColorMaps((
+// @debug $unicorn-color-map;
+$colors: map.deep-merge((
   "white": ($white, $black),
   "black": ($black, $white),
   "light": ($scheme-main-ter, $scheme-invert-bis),
   "dark": ($dark, $dark-invert),
-  "primary": ($primary, $primary-invert, $primary-light, $primary-dark),
-  "link": ($link, $link-invert, $link-light, $link-dark),
-  "info": ($info, $info-invert, $info-light, $info-dark),
-  "success": ($success, $success-invert, $success-light, $success-dark),
-  "warning": ($warning, $warning-invert, $warning-light, $warning-dark),
-  "danger": ($danger, $danger-invert, $danger-light, $danger-dark),
   "lighter": ($scheme-main-bis, $scheme-invert-bis), //we add these and they are not normally part of bulma
-  "secondary": ($secondary, $secondary-invert, $secondary-light, $secondary-dark)
-  ), $custom-colors
+  ), $colors
 ) !default;
 
 // override Bulma's shades in derived-variables
@@ -169,12 +129,12 @@ $shades: mergeColorMaps((
 $shadow: 0px 4px 16px rgba($scheme-invert, 0.12) !default;
 
 //*** element and control colors
-$icon-default-color: $text-lighter !default;
+$icon-default-color: var(--color-contrast-medium) !default;
 
 // side nav
-$sidenav-background-color: $primary-dark !default; //ends up as sidebar default
-$sidenav-font-color: $primary-invert !default;
-$sidenav-nav-active-color: $secondary !default;
+$sidenav-background-color: var(--color-primary-dark) !default; //ends up as sidebar default
+$sidenav-font-color: var(--color-primary-invert) !default;
+$sidenav-nav-active-color: var(--color-secondary) !default;
 $sidenav-nav-hover-color: $sidenav-nav-active-color !default;
 $sidenav-overlay-background-color: rgba($sidenav-background-color, 0.2) !default;
 
@@ -202,7 +162,7 @@ $input-border-color: $border !default;
 // $input-disabled-placeholder-color: bulmaRgba($input-disabled-color, 0.3) !default
 
 // $input-arrow: $link !default
-$input-arrow: $primary !default;
+$input-arrow: var(--color-primary) !default;
 
 // $input-icon-color: $border !default
 // $input-icon-active-color: $text !default

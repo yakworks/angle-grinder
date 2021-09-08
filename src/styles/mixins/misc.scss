@@ -1,0 +1,91 @@
+$caret-width:  .3em !default;
+$caret-vertical-align: $caret-width * .85 !default;
+$caret-spacing:        $caret-width * .85 !default;
+
+@mixin border-top-radius($radius) {
+  border-top-left-radius: $radius;
+  border-top-right-radius: $radius;
+}
+@mixin border-right-radius($radius) {
+  border-top-right-radius: $radius;
+  border-bottom-right-radius: $radius;
+}
+@mixin border-bottom-radius($radius) {
+  border-bottom-right-radius: $radius;
+  border-bottom-left-radius: $radius;
+}
+@mixin border-left-radius($radius) {
+  border-top-left-radius: $radius;
+  border-bottom-left-radius: $radius;
+}
+@mixin transition($transition...) {
+          transition: $transition;
+}
+
+@mixin gradient-radial($inner-color: #555, $outer-color: #333) {
+  background-image: radial-gradient(circle, $inner-color, $outer-color);
+  background-repeat: no-repeat;
+}
+
+@mixin caret-down() {
+  border-top: $caret-width solid;
+  border-right: $caret-width solid transparent;
+  border-bottom: 0;
+  border-left: $caret-width solid transparent;
+}
+
+@mixin caret-up() {
+  border-top: 0;
+  border-right: $caret-width solid transparent;
+  border-bottom: $caret-width solid;
+  border-left: $caret-width solid transparent;
+}
+
+@mixin caret-right() {
+  border-top: $caret-width solid transparent;
+  border-right: 0;
+  border-bottom: $caret-width solid transparent;
+  border-left: $caret-width solid;
+}
+
+@mixin caret-left() {
+  border-top: $caret-width solid transparent;
+  border-right: $caret-width solid;
+  border-bottom: $caret-width solid transparent;
+}
+
+@mixin caret($direction: down) {
+
+  &::after {
+    display: inline-block;
+    margin-left: $caret-spacing;
+    vertical-align: $caret-vertical-align;
+    content: "";
+    @if $direction == down {
+      @include caret-down();
+    } @else if $direction == up {
+      @include caret-up();
+    } @else if $direction == right {
+      @include caret-right();
+    }
+  }
+
+  @if $direction == left {
+    &::after {
+      display: none;
+    }
+
+    &::before {
+      display: inline-block;
+      margin-right: $caret-spacing;
+      vertical-align: $caret-vertical-align;
+      content: "";
+      @include caret-left();
+    }
+  }
+
+  &:empty::after {
+    margin-left: 0;
+  }
+
+}

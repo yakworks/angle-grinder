@@ -1,0 +1,89 @@
+// --------------------------------
+
+// (START) Global editor code https://codyhouse.co/ds/globals/colors
+@use "sass:color";
+@use "sass:string";
+@use "../mixins/cssVars";
+
+:root, [data-theme="default"] {
+  // main
+  @each $name, $pair in $colorVariables {
+    $color: nth($pair, 1);
+    $color-invert: nth($pair, 2);
+
+    @include cssVars.colorVars(#{$name}, $color);
+
+    @if type-of($color-invert) == 'color' {
+      @include cssVars.colorVars(#{$name}-invert, $color-invert);
+    } @else {
+      --color-#{$name}-invert: var(#{$color-invert});
+    }
+
+    @include cssVars.colorVars(#{$name}-dark, color.adjust($color, $lightness: -7%));
+    @include cssVars.colorVars(#{$name}-darker, color.adjust($color, $lightness: -14%));
+    @include cssVars.colorVars(#{$name}-light, color.adjust($color, $lightness: 7%));
+    @include cssVars.colorVars(#{$name}-lighter, color.adjust($color, $lightness: 14%));
+  }
+  // black + white
+  @include cssVars.colorVars(black,hsl( 240, 8%, 12%));
+  @include cssVars.colorVars(white, hsl(0, 0%, 100%));
+
+  // feedback
+  // @include defineColorHSL(--color-success-darker, 94, 48%, 42%);
+  // @include defineColorHSL(--color-success-dark, 94, 48%, 48%);
+  // @include defineColorHSL(--color-success, 94, 48%, 56%);
+  // @include defineColorHSL(--color-success-light, 94, 48%, 65%);
+  // @include defineColorHSL(--color-success-lighter, 94, 48%, 74%);
+
+  // @include defineColorHSL(--color-error-darker, 349, 75%, 36%);
+  // @include defineColorHSL(--color-error-dark, 349, 75%, 44%);
+  // @include defineColorHSL(--color-error, 349, 75%, 51%);
+  // @include defineColorHSL(--color-error-light, 349, 75%, 59%);
+  // @include defineColorHSL(--color-error-lighter, 349, 75%, 67%);
+
+  // @include defineColorHSL(--color-warning-darker, 46, 100%, 47%);
+  // @include defineColorHSL(--color-warning-dark, 46, 100%, 50%);
+  // @include defineColorHSL(--color-warning, 46, 100%, 61%);
+  // @include defineColorHSL(--color-warning-light, 46, 100%, 71%);
+  // @include defineColorHSL(--color-warning-lighter, 46, 100%, 80%);
+
+  // background
+  @include cssVars.colorVars(bg-darker, hsl(240, 2%, 90%));
+  @include cssVars.colorVars(bg-dark, hsl(240, 3%, 94%));
+  @include cssVars.colorVars(bg, hsl(0, 0%, 100%));
+  @include cssVars.colorVars(bg-light, hsl(240, 3%, 100%));
+  @include cssVars.colorVars(bg-lighter, hsl(240, 2%, 100%));
+
+  // // color contrasts
+  @include cssVars.colorVars(contrast-lower, hsl(240, 1%, 85%));
+  @include cssVars.colorVars(contrast-low, hsl(240, 2%, 66%));
+  @include cssVars.colorVars(contrast-medium, hsl(240, 1%, 49%));
+  @include cssVars.colorVars(contrast-high, hsl(252, 4%, 25%));
+  @include cssVars.colorVars(contrast-higher, hsl(240, 8%, 12%));
+
+}
+
+@supports(--css: variables) {
+  [data-theme="dark"] {
+
+    // background
+    @include cssVars.colorVars(bg-darker, hsl(240, 4%, 8%));
+    @include cssVars.colorVars(bg-dark, hsl(240, 5%, 11%));
+    @include cssVars.colorVars(bg, hsl(240, 6%, 15%));
+    @include cssVars.colorVars(bg-light, hsl(240, 5%, 19%));
+    @include cssVars.colorVars(bg-lighter, hsl(240, 4%, 22%));
+
+    // color contrasts
+    @include cssVars.colorVars(contrast-lower, hsl(240, 5%, 26%));
+    @include cssVars.colorVars(contrast-low, hsl(240, 2%, 41%));
+    @include cssVars.colorVars(contrast-medium, hsl(240, 2%, 57%));
+    @include cssVars.colorVars(contrast-high, hsl(240, 5%, 82%));
+    @include cssVars.colorVars(contrast-higher, hsl(240, 100%, 99%));
+  }
+}
+
+// --------------------------------
+
+// (END) Global editor code
+
+// --------------------------------

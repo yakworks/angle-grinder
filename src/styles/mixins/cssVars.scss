@@ -1,0 +1,93 @@
+// --------------------------------
+@use "sass:color";
+@use "sass:string";
+
+// --------------------------------
+// Colors
+// --------------------------------
+
+// define HSL color variables with --color- prepended
+@mixin colorVars($varName, $color) {
+  $colorVarName: "--color-#{$varName}";
+  $hue: str-replace(#{hue($color)}, 'deg');
+  $saturation: saturation($color);
+  $lightness: color.lightness($color);
+  #{$colorVarName}: unquote("hsl(#{$hue}, #{$saturation}, #{$lightness})");
+  #{$colorVarName}-h: #{$hue};
+  #{$colorVarName}-s: #{$saturation};
+  #{$colorVarName}-l: #{$lightness};
+}
+
+// return color with different opacity value
+@function alpha($color, $opacity) {
+  $color: stripVar($color);
+  $color-h: var(#{$color+'-h'});
+  $color-s: var(#{$color+'-s'});
+  $color-l: var(#{$color+'-l'});
+  @return hsla($color-h, $color-s, $color-l, $opacity);
+}
+
+//strips the var() wrapper from variable so we have the raw one
+@function stripVar($varName) {
+  $varName: str-replace($varName, 'var(');
+  $varName: str-replace($varName, ')');
+  @return $varName;
+}
+
+//return color with different lightness value
+@function lighten($varName, $amount) {
+  $varName: stripVar($varName);
+  $color-h: var(#{$varName+'-h'});
+  $color-s: var(#{$varName+'-s'});
+  $color-l: var(#{$varName+'-l'});
+  // @return hsl($color-h, $color-s, calc(#{$color-l} * #{$lightnessMultiplier}));
+  @return hsl($color-h, $color-s, calc(#{$color-l} - #{$amount}));
+}
+
+//return color with different lightness value
+@function darken($varName, $amount) {
+  $varName: stripVar($varName);
+  $color-h: var(#{$varName+'-h'});
+  $color-s: var(#{$varName+'-s'});
+  $color-l: var(#{$varName+'-l'});
+  // @return hsl($color-h, $color-s, calc(#{$color-l} * #{$lightnessMultiplier}));
+  @return hsl($color-h, $color-s, calc(#{$color-l} - #{$amount}));
+}
+
+// Sets one or more properties of a color to new values.
+@function change($varName, $hue: null, $saturation: null, $lightness: null, $alpha: null) {
+  $varName: stripVar($varName);
+  $color-h: if($hue, $hue, var(#{$varName+'-h'}));
+  $color-s: if($saturation, $saturation, var(#{$varName+'-s'}));
+  $color-l: if($lightness, $lightness, var(#{$varName+'-l'}));
+  @return hsla(#{$color-h}, #{$color-s}, #{$color-l}, $alpha);
+}
+
+// gets the color with a 96% lightness or the defualt if its already >= 96%
+@function highlight($varName) {
+  $varName: stripVar($varName);
+  $color-h: var(#{$varName+'-h'});
+  $color-s: var(#{$varName+'-s'});
+  $color-l: var(#{$varName+'-l'});
+  @return hsla(#{$color-h}, #{$color-s}, max(#{$color-l}, 96%));
+}
+
+// modify color HSLA values
+@function adjustHSLA($color, $hueMultiplier: 1, $saturationMultiplier: 1, $lightnessMultiplier: 1, $opacity: 1) {
+  $color: str-replace($color, 'var(');
+  $color: str-replace($color, ')');
+  $color-h: var(#{$color+'-h'});
+  $color-s: var(#{$color+'-s'});
+  $color-l: var(#{$color+'-l'});
+  @return hsla(calc(#{$color-h} * #{$hueMultiplier}), calc(#{$color-s} * #{$saturationMultiplier}), calc(#{$color-l} * #{$lightnessMultiplier}), $opacity);
+}
+
+// replace substring with another string
+// credits: https://css-tricks.com/snippets/sass/str-replace-function/
+@function str-replace($string, $search, $replace: '') {
+  $index: str-index($string, $search);
+  @if $index {
+    @return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+  }
+  @return $string;
+}

@@ -4980,6 +4980,11 @@ fragment-cache@^0.2.1:
   dependencies:
     map-cache "^0.2.2"
 
+framework7-icons@^5.0.3:
+  version "5.0.3"
+  resolved "https://registry.yarnpkg.com/framework7-icons/-/framework7-icons-5.0.3.tgz#0a9165f729483263d078636b2255e8aeec318606"
+  integrity sha512-Mt9SLdbG/b2UZUzREqcl6zEy6REsW8Rz7L66QuBGVpQEtyBZIDxYa4c5AXCdY3HEAhlyjg8xKQOi4/NyIHuIgQ==
+
 framework7-svelte@^6.3.2:
   version "6.3.2"
   resolved "https://registry.yarnpkg.com/framework7-svelte/-/framework7-svelte-6.3.2.tgz#2d6f2d6772891df7de17964ca782d02e1a4740ed"
