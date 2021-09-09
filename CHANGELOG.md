@@ -1,3 +1,9 @@
+### v4.0.20
+
+[Full Changelog](https://github.com/yakworks/angle-grinder/compare/v4.0.19...v4.0.20)
+- Merge pull request #613 from yakworks/612-email-validation-for-larger-root-domains [link](https://github.com/yakworks/angle-grinder/commit/a102a5f689b904b6beaf5b4207a3d4cf79c3b871)
+- Email root domains can now be up to 6 characters. [link](https://github.com/yakworks/angle-grinder/commit/0ffd23066617ba2f515124edef148d00ee1f4cb1)
+
 ### v4.0.19
 
 [Full Changelog](https://github.com/yakworks/angle-grinder/compare/v4.0.18...v4.0.19)
