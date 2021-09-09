@@ -11,7 +11,7 @@
 <Col>
 <BlockTitle>Simple List</BlockTitle>
 <Card>
-  <CardContent padding={false}>
+  <CardContent class="p0">
     <List simpleList>
       <ListItem title="Item 1"></ListItem>
       <ListItem title="Item 2"></ListItem>
@@ -24,7 +24,7 @@
 <Col>
 <BlockTitle>Simple Links List</BlockTitle>
 <Card>
-  <CardContent padding={false}>
+  <CardContent class="p0">
     <List>
       <ListItem title="Link 1" link={noref}></ListItem>
       <ListItem title="Link 2" link={noref}></ListItem>
@@ -39,7 +39,7 @@
 <Col>
 <BlockTitle>Data list</BlockTitle>
 <Card>
-  <CardContent padding={false}>
+  <CardContent class="p0">
     <List>
       <ListItem title="DSO" after="39"></ListItem>
       <ListItem title="ADP" badge="42"></ListItem>
@@ -53,18 +53,19 @@
 <Col>
 <BlockTitle>Contact List</BlockTitle>
 <Card>
-  <CardContent padding={false}>
+  <CardContent class="p0">
     <List>
-      <ListItem link={noref} header="Name" title="John Doe" after="Edit">
+      <ListItem link={noref} header="Name" title="John Doe">
         <Avatar slot="media" class="is-small" imgSrc="/assets/images/photos/beard-guy.jpg"></Avatar>
+        <div class="item-after font-bold"> <span>CEO</span> </div>
       </ListItem>
-      <ListItem link={noref} header="Phone" title="+7 90 111-22-3344" after="Edit">
+      <ListItem link={noref} header="Phone" title="+7 90 111-22-3344" >
         <Icon slot="media" f7="phone"></Icon>
       </ListItem>
-      <ListItem link={noref} header="Email" title="john@doe" footer="Home" after="Edit">
+      <ListItem link={noref} header="Email" title="john@doe" footer="Home" >
         <Icon slot="media" f7="envelope"></Icon>
       </ListItem>
-      <ListItem link={noref} header="Email" title="john@framework7" footer="Work" after="Edit">
+      <ListItem link={noref} header="Email" title="john@framework7" footer="Work" >
         <Icon slot="media" f7="envelope"></Icon>
       </ListItem>
     </List>

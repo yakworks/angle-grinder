@@ -12,7 +12,7 @@
 // $button-focus-box-shadow-size: 0 0 0 0.2rem !default;
 // $button-focus-border-color: $grey-light !default;
 // $button-focus-box-shadow-color: $grey-light !default;
-
+@use "../modules/cssVars";
 /* yak ui - added variables */
 $button-font-size: $text-base !default;
 $button-font-weight: $weight-medium !default;
@@ -130,7 +130,7 @@ $shadow-large: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 
       }
       // change ripple background based on color
       .ag-ripple {
-        background-color: rgba( $color-invert, .4)
+        background-color: cssVars.alpha( $color-invert, .4)
       }
       // icon buttons have the icon as the color and tranparent background
       &.is-icon-button:not(.is-fab) {
@@ -139,7 +139,7 @@ $shadow-large: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 
         box-shadow: none;
         &.is-hovered,
         &:hover {
-          background-color: rgba($color, .4)
+          background-color: cssVars.alpha($color, .4)
         }
 
         &.is-active, &.active,
@@ -163,7 +163,7 @@ $shadow-large: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 
 
   // default ripple background
   .ag-ripple {
-    background-color: rgba( $button-color, .4)
+    background-color: cssVars.alpha( $button-color, .4)
   }
 
   // Sizes

@@ -4,6 +4,7 @@ import Avatars from './Avatars/Index.svelte'
 import Buttons from './Buttons/Index.svelte'
 import Cards from './Cards/Index.svelte'
 import Charts from './Charts/Index.svelte'
+import Colors from './Colors/Index.svelte'
 import FormSimple from './Forms/simple/Index.svelte'
 import FormFields from './Forms/fields/Index.svelte'
 import Growl from './Growl/Index.svelte'
@@ -26,6 +27,9 @@ appMod
   })
   .component('svelteChartsIndex', {
     controller: ngSvelteShim(Charts)
+  })
+  .component('svelteColorsIndex', {
+    controller: ngSvelteShim(Colors)
   })
   .component('svelteFormSimpleIndex', {
     controller: ngSvelteShim(FormSimple)

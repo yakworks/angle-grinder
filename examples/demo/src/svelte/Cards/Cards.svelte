@@ -1,8 +1,11 @@
 <script>
-  import { Button, Card, CardHeader, CardTitle, CardContent, CardSubtitle, Columns, Col } from 'angle-grinder/svelte'
+  // import { Button, Card, CardHeader, CardTitle, CardContent, CardSubtitle, Columns, Col } from 'angle-grinder/svelte'
+  import { BlockTitle, Button, Card, CardHeader, CardTitle, CardContent, CardSubtitle, Columns, Col } from 'angle-grinder/svelte'
+  // import { BlockTitle, Card, CardHeader, CardContent, CardFooter, Icon, Link, List, ListItem } from 'framework7-svelte';
+
 </script>
 
-<div class="title is-5">Misc Cards</div>
+<BlockTitle>Misc Cards</BlockTitle>
 
 <Columns>
 <Col>
@@ -14,10 +17,11 @@
   </Card>
 </Col>
 <Col>
-  <Card class="notification is-danger" dismissible>
-    Notification that dissmissable
+  <Card class="notification is-danger">
+    <button type="button" class="delete" aria-label='Close'/>
+    Notification with delete button
   </Card>
-  <Card class="notification is-primary" elevation="0" dismissible>
+  <Card class="notification is-primary elevation-5" >
     Notification <strong>Pellentesque risus mi</strong>, tempus quis placerat ut, <a href={'#'}>felis venenatis</a> efficitur.
   </Card>
 </Col>
@@ -25,8 +29,8 @@
 
 <Columns>
 <Col>
-  <Card elevation=0 outlined>
-    <CardTitle >Outlined and elevation 0</CardTitle>
+  <Card outline>
+    <CardTitle >Outlined</CardTitle>
     <hr>
     <CardContent>Greyhound fantastic hello coldly wonderfully far upon universe.</CardContent>
   </Card>

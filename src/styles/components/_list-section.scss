@@ -108,7 +108,6 @@ $list-dense-content-padding: $list-padding-y 0 !default;
     }
 
     .item-subtitle {
-      @debug "$text-light: #{$text-light}";
       font-size: $text-sm;
       color: $text-light;
     }

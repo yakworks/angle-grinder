@@ -1,36 +1,7 @@
-<div class="columns is-gapless">
-  <div class="column is-2">
-    <div class="notification has-text-scheme-invert has-background-scheme-main">
-      scheme-main
-    </div>
-  </div>
-  <div class="column is-2">
-    <div class="notification has-text-scheme-invert has-background-scheme-main-bis">
-      scheme-main-bis
-    </div>
-  </div>
-  <div class="column is-2">
-    <div class="notification has-text-scheme-invert has-background-scheme-main-ter">
-      scheme-main-ter
-    </div>
-  </div>
-  <div class="column is-2">
-    <div class="notification has-text-scheme-main has-background-scheme-invert-ter">
-      scheme-invert-ter
-    </div>
-  </div>
-  <div class="column is-2">
-    <div class="notification has-text-scheme-main has-background-scheme-invert-bis">
-      scheme-invert-bis
-    </div>
-  </div>
-  <div class="column is-2">
-    <div class="notification has-text-scheme-main has-background-scheme-invert">
-      scheme-invert
-    </div>
-  </div>
-</div>
 
+<script>
+
+</script>
 
 <div class="columns is-gapless">
   <div class="column is-2">
@@ -124,7 +95,7 @@
 
 <div class="columns is-gapless">
   <div class="column is-2">
-    <div class="notification is-warning is-light">
+    <div class="notification is-warning is-light has-text-warning-invert">
       warning-light
     </div>
   </div>
@@ -152,26 +123,87 @@
     </div>
   </div>
   <div class="column is-2">
-    <div class="notification has-text-white has-background-danger-dark">
-      danger-dark
+    <div class="notification has-text-danger-invert has-background-danger-dark">
+      danger-shade
     </div>
   </div>
 </div>
 
 <div class="columns is-gapless">
   <div class="column is-2">
-    <div class="notification is-lighter">
-      lighter
+    <div class="notification is-tint is-light has-text-tint-invert">
+      is-tint is-light
     </div>
   </div>
   <div class="column is-2">
-    <div class="notification is-light">
-      light
+    <div class="notification has-background-tint-highlight">
+      tint-highlight
     </div>
   </div>
   <div class="column is-2">
-    <div class="notification is-dark">
-      dark
+    <div class="notification has-background-tint-light">
+      tint-light
+    </div>
+  </div>
+  <div class="column is-2">
+    <div class="notification has-background-tint">
+      tint
+    </div>
+  </div>
+  <div class="column is-2">
+    <div class="notification has-background-tint-dark">
+      tint-dark
+    </div>
+  </div>
+  <div class="column is-2">
+    <div class="notification has-background-tint-darker">
+      tint-dark
+    </div>
+  </div>
+</div>
+
+<div class="columns is-gapless">
+  <div class="column">
+    <div class="notification has-background-shade-highlight">
+      shade-highlight
+    </div>
+  </div>
+  <div class="column">
+    <div class="notification has-background-shade-light">
+      shade-light
+    </div>
+  </div>
+  <div class="column">
+    <div class="notification has-background-shade has-text-shade-invert">
+      shade
+    </div>
+  </div>
+  <div class="column">
+    <div class="notification has-background-shade-dark has-text-shade-invert">
+      shade-dark
+    </div>
+  </div>
+</div>
+
+<div class="columns is-gapless">
+  <div class="column">
+    <div class="notification has-background-contrast-highlight">
+      contrast-highlight
+    </div>
+  </div>
+  <div class="column">
+    <div class="notification has-background-contrast-light has-text-contrast-invert">
+      contrast-light
+    </div>
+  </div>
+  <div class="column">
+    <div class="notification has-background-contrast has-text-contrast-invert">
+      contrast
+    </div>
+  </div>
+  <div class="column">
+    <div class="notification has-background-contrast-dark has-text-contrast-invert">
+      contrast-dark
     </div>
   </div>
 </div>
@@ -236,3 +268,36 @@
     </div>
   </div>
 </div>
+<div class="columns is-gapless">
+  <div class="column is-2">
+    <div class="notification has-text-scheme-invert has-background-scheme-main">
+      scheme-main
+    </div>
+  </div>
+  <div class="column is-2">
+    <div class="notification has-text-scheme-invert has-background-scheme-main-bis">
+      scheme-main-bis
+    </div>
+  </div>
+  <div class="column is-2">
+    <div class="notification has-text-scheme-invert has-background-scheme-main-ter">
+      scheme-main-ter
+    </div>
+  </div>
+  <div class="column is-2">
+    <div class="notification has-text-scheme-main has-background-scheme-invert-ter">
+      scheme-invert-ter
+    </div>
+  </div>
+  <div class="column is-2">
+    <div class="notification has-text-scheme-main has-background-scheme-invert-bis">
+      scheme-invert-bis
+    </div>
+  </div>
+  <div class="column is-2">
+    <div class="notification has-text-scheme-main has-background-scheme-invert">
+      scheme-invert
+    </div>
+  </div>
+</div>
+

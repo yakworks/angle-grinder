@@ -3,82 +3,80 @@
 // (START) Global editor code https://codyhouse.co/ds/globals/colors
 @use "sass:color";
 @use "sass:string";
-@use "../mixins/cssVars";
+@use "sass:map";
+@use "sass:list";
+@use "../modules/cssVars";
 
+// :root {
+//   --ion-color-primary: #3880ff;
+//   --ion-color-primary-rgb: 56,128,255;
+//   --ion-color-primary-contrast: #ffffff;
+//   --ion-color-primary-contrast-rgb: 255,255,255;
+//   --ion-color-primary-shade: #3171e0;
+//   --ion-color-primary-tint: #4c8dff;
+
+//   --ion-color-secondary: #3dc2ff;
+//   --ion-color-secondary-rgb: 61,194,255;
+//   --ion-color-secondary-contrast: #ffffff;
+//   --ion-color-secondary-contrast-rgb: 255,255,255;
+//   --ion-color-secondary-shade: #36abe0;
+//   --ion-color-secondary-tint: #50c8ff;
+
+//   --ion-color-tertiary: #5260ff;
+//   --ion-color-tertiary-rgb: 82,96,255;
+//   --ion-color-tertiary-contrast: #ffffff;
+//   --ion-color-tertiary-contrast-rgb: 255,255,255;
+//   --ion-color-tertiary-shade: #4854e0;
+//   --ion-color-tertiary-tint: #6370ff;
+// }
 :root, [data-theme="default"] {
   // main
-  @each $name, $pair in $colorVariables {
-    $color: nth($pair, 1);
-    $color-invert: nth($pair, 2);
+  @each $name, $map in $theme-colors {
+    // main color
+    @include cssVars.colorVars(#{$name}, map.get($map, base));
 
-    @include cssVars.colorVars(#{$name}, $color);
-
-    @if type-of($color-invert) == 'color' {
-      @include cssVars.colorVars(#{$name}-invert, $color-invert);
-    } @else {
-      --color-#{$name}-invert: var(#{$color-invert});
+    @each $kind in (invert, light, dark, darker, 'lighter') {
+      @if map.has-key($map, $kind) {
+        @include cssVars.colorVars(#{$name}-#{$kind}, map.get($map, #{$kind}));
+      }
     }
 
-    @include cssVars.colorVars(#{$name}-dark, color.adjust($color, $lightness: -7%));
-    @include cssVars.colorVars(#{$name}-darker, color.adjust($color, $lightness: -14%));
-    @include cssVars.colorVars(#{$name}-light, color.adjust($color, $lightness: 7%));
-    @include cssVars.colorVars(#{$name}-lighter, color.adjust($color, $lightness: 14%));
+    @if map.has-key($map, 'highlight') {
+      --color-#{$name}-highlight: #{map.get($map, 'highlight')};
+    }
   }
+
+  // text
+  $textMap: map.get($theme-text-colors, 'text');
+  @include cssVars.colorVars('text', map.get($textMap, 'base'));
+  @include cssVars.colorVars('text-light', map.get($textMap, 'light'));
+  @include cssVars.colorVars('text-lighter', map.get($textMap, 'lighter'));
+  @include cssVars.colorVars('text-dark', map.get($textMap, 'dark'));
+  @include cssVars.colorVars('text-darker', map.get($textMap, 'darker'));
+
+
   // black + white
   @include cssVars.colorVars(black,hsl( 240, 8%, 12%));
   @include cssVars.colorVars(white, hsl(0, 0%, 100%));
 
-  // feedback
-  // @include defineColorHSL(--color-success-darker, 94, 48%, 42%);
-  // @include defineColorHSL(--color-success-dark, 94, 48%, 48%);
-  // @include defineColorHSL(--color-success, 94, 48%, 56%);
-  // @include defineColorHSL(--color-success-light, 94, 48%, 65%);
-  // @include defineColorHSL(--color-success-lighter, 94, 48%, 74%);
-
-  // @include defineColorHSL(--color-error-darker, 349, 75%, 36%);
-  // @include defineColorHSL(--color-error-dark, 349, 75%, 44%);
-  // @include defineColorHSL(--color-error, 349, 75%, 51%);
-  // @include defineColorHSL(--color-error-light, 349, 75%, 59%);
-  // @include defineColorHSL(--color-error-lighter, 349, 75%, 67%);
-
-  // @include defineColorHSL(--color-warning-darker, 46, 100%, 47%);
-  // @include defineColorHSL(--color-warning-dark, 46, 100%, 50%);
-  // @include defineColorHSL(--color-warning, 46, 100%, 61%);
-  // @include defineColorHSL(--color-warning-light, 46, 100%, 71%);
-  // @include defineColorHSL(--color-warning-lighter, 46, 100%, 80%);
+  // background
+  @include cssVars.color_var_no_hsl(background-darker, hsl(240, 2%, 90%));
+  @include cssVars.color_var_no_hsl(background-dark, hsl(240, 3%, 94%));
+  @include cssVars.colorVars('background', hsl(0, 0%, 100%));
+  @include cssVars.color_var_no_hsl(background-light, hsl(240, 3%, 100%));
+  @include cssVars.color_var_no_hsl(background-lighter, hsl(240, 2%, 100%));
 
   // background
-  @include cssVars.colorVars(bg-darker, hsl(240, 2%, 90%));
-  @include cssVars.colorVars(bg-dark, hsl(240, 3%, 94%));
-  @include cssVars.colorVars(bg, hsl(0, 0%, 100%));
-  @include cssVars.colorVars(bg-light, hsl(240, 3%, 100%));
-  @include cssVars.colorVars(bg-lighter, hsl(240, 2%, 100%));
-
-  // // color contrasts
-  @include cssVars.colorVars(contrast-lower, hsl(240, 1%, 85%));
-  @include cssVars.colorVars(contrast-low, hsl(240, 2%, 66%));
-  @include cssVars.colorVars(contrast-medium, hsl(240, 1%, 49%));
-  @include cssVars.colorVars(contrast-high, hsl(252, 4%, 25%));
-  @include cssVars.colorVars(contrast-higher, hsl(240, 8%, 12%));
-
+  // @include cssVars.color_var_no_hsl(bg-darker, hsl(240, 2%, 90%));
+  // @include cssVars.color_var_no_hsl(bg-dark, hsl(240, 3%, 94%));
+  // @include cssVars.colorVars(bg, hsl(0, 0%, 100%));
+  // @include cssVars.color_var_no_hsl(bg-light, hsl(240, 3%, 100%));
+  // @include cssVars.color_var_no_hsl(bg-lighter, hsl(240, 2%, 100%));
 }
 
 @supports(--css: variables) {
   [data-theme="dark"] {
 
-    // background
-    @include cssVars.colorVars(bg-darker, hsl(240, 4%, 8%));
-    @include cssVars.colorVars(bg-dark, hsl(240, 5%, 11%));
-    @include cssVars.colorVars(bg, hsl(240, 6%, 15%));
-    @include cssVars.colorVars(bg-light, hsl(240, 5%, 19%));
-    @include cssVars.colorVars(bg-lighter, hsl(240, 4%, 22%));
-
-    // color contrasts
-    @include cssVars.colorVars(contrast-lower, hsl(240, 5%, 26%));
-    @include cssVars.colorVars(contrast-low, hsl(240, 2%, 41%));
-    @include cssVars.colorVars(contrast-medium, hsl(240, 2%, 57%));
-    @include cssVars.colorVars(contrast-high, hsl(240, 5%, 82%));
-    @include cssVars.colorVars(contrast-higher, hsl(240, 100%, 99%));
   }
 }
 

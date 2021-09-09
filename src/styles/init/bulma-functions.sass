@@ -1,6 +1,6 @@
 // -------------- original untouched bulma fns --------------
 @use "sass:color"
-@use "../mixins/cssVars"
+@use "../modules/cssVars"
 
 @function mergeColorMaps($bulma-colors, $custom-colors)
   // We return at least Bulma's hard-coded colors
@@ -81,7 +81,7 @@
   @return (map-get($color-rgb, 'red') * .2126) + (map-get($color-rgb, 'green') * .7152) + (map-get($color-rgb, 'blue') * .0722)
 
 // returns either black or white css variable thats best for the color
-@function findContrastColor($color)
+@function findContrastVar($color)
   @if (colorLuminance($color) > 0.55)
     @return --color-black
   @else
@@ -110,7 +110,7 @@
     @return change-color($color, $lightness: max($base-l, $target-l))
   @return $text-strong
 
-// ***** MODIFIED SASS FUNCTIONS ******
+// MODIFIED SASS FUNCTIONS
 @function lighten($color, $amount)
   @if type-of($color) == 'color'
     @return color.adjust($color, $lightness: $amount)
@@ -121,8 +121,10 @@
     @return color.adjust($color, $lightness: $amount * -1)
   @return cssVars.lighten($color, $amount)
 
-// ***** MODIFIED BULMA FUNCTIONS ******
+// MODIFIED BULMA FUNCTIONS
 @function bulmaRgba($color, $alpha)
+  // @debug "bulmaRgba called with"
+  // @debug "#{$color}, #{$alpha}"
   @if type-of($color) == 'color'
     @return rgba($color, $alpha)
   @return cssVars.alpha($color, $alpha)

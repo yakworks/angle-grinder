@@ -6,25 +6,48 @@
 // Colors
 // --------------------------------
 
-// define HSL color variables with --color- prepended
+// define HSL color variables with --color- prepended. one for each hsl var too.
 @mixin colorVars($varName, $color) {
-  $colorVarName: "--color-#{$varName}";
-  $hue: str-replace(#{hue($color)}, 'deg');
-  $saturation: saturation($color);
-  $lightness: color.lightness($color);
-  #{$colorVarName}: unquote("hsl(#{$hue}, #{$saturation}, #{$lightness})");
-  #{$colorVarName}-h: #{$hue};
-  #{$colorVarName}-s: #{$saturation};
-  #{$colorVarName}-l: #{$lightness};
+  @if type-of($color) == 'color' {
+    $colorVarName: "--color-#{$varName}";
+    $hue: str-replace(#{hue($color)}, 'deg');
+    $saturation: saturation($color);
+    $lightness: color.lightness($color);
+    #{$colorVarName}: unquote("hsl(#{$hue}, #{$saturation}, #{$lightness})");
+    #{$colorVarName}-h: #{$hue};
+    #{$colorVarName}-s: #{$saturation};
+    #{$colorVarName}-l: #{$lightness};
+  } @else {
+    --color-#{$varName}: var(#{$color});
+  }
+
+}
+
+// define color var, no hsl
+@mixin color_var_no_hsl($varName, $color) {
+  @if type-of($color) == 'color' {
+    $colorVarName: "--color-#{$varName}";
+    $hue: str-replace(#{hue($color)}, 'deg');
+    $saturation: saturation($color);
+    $lightness: color.lightness($color);
+    #{$colorVarName}: unquote("hsl(#{$hue}, #{$saturation}, #{$lightness})");
+  } @else {
+    --color-#{$varName}: var(#{$color});
+  }
+
 }
 
 // return color with different opacity value
 @function alpha($color, $opacity) {
-  $color: stripVar($color);
-  $color-h: var(#{$color+'-h'});
-  $color-s: var(#{$color+'-s'});
-  $color-l: var(#{$color+'-l'});
-  @return hsla($color-h, $color-s, $color-l, $opacity);
+  @if type-of($color) == 'color' {
+    @return rgba($color, $opacity);
+  } @else {
+    $color: stripVar($color);
+    $color-h: var(#{$color+'-h'});
+    $color-s: var(#{$color+'-s'});
+    $color-l: var(#{$color+'-l'});
+    @return hsla($color-h, $color-s, $color-l, $opacity);
+  }
 }
 
 //strips the var() wrapper from variable so we have the raw one

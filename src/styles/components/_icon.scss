@@ -17,6 +17,10 @@ $icon-dimensions-small: $text-sm !default;
   }
 }
 
+i.icon {
+  color: $icon-default-color;
+}
+
 // change default fa and mdi font sizes
 .icon {
 

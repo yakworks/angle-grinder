@@ -2,7 +2,7 @@
 // Framework7 less
 import './framework7/framework7.less'
 // Framework7 overrides sass
-import './framework7/index.sass'
+// import './framework7/index.sass'
 
 import "@mdi/font/css/materialdesignicons.css"
 import "@fortawesome/fontawesome-free/css/all.css"

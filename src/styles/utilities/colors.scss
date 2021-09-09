@@ -1,0 +1,30 @@
+
+@use "sass:map";
+@use "sass:color";
+
+// @debug $colors
+@each $name, $props in $theme-colors {
+  @each $key, $val in $props {
+    @if $key == base {
+      .has-text-#{$name}{
+        color: var(--color-#{$name}) !important
+      }
+      .has-background-#{$name} {
+        background-color: var(--color-#{$name})  !important
+      }
+    } @else {
+      .has-text-#{$name}-#{$key}{
+        color: var(--color-#{$name}-#{$key}) !important
+      }
+      .has-background-#{$name}-#{$key}{
+        background-color: var(--color-#{$name}-#{$key}) !important
+      }
+    }
+  }
+}
+
+// @each $name, $shade in $shades
+//   .has-text-#{$name}
+//     color: $shade !important
+//   .has-background-#{$name}
+//     background-color: $shade !important

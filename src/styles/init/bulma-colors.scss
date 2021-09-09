@@ -5,37 +5,37 @@
 // TODO https://blog.maximeheckel.com/posts/the-power-of-composition-with-css-variables/
 
 @use "sass:map";
-@use "../mixins/cssVars";
+@use "../modules/cssVars";
 
-$light: $white-ter !default;
-$light-invert: findColorInvert($light) !default;
-
-$dark: $grey-darker !default;
-$dark-invert: findColorInvert($dark) !default;
-
-$scheme-main: $white !default;
-$scheme-main-bis: $white-bis !default; // white-grey
-$scheme-main-ter: $white-ter !default; // white-greyer
-$scheme-invert: $black !default; //black
-$scheme-invert-bis: $black-bis !default; //black-grey
-$scheme-invert-ter: $black-ter !default; //black-greyer
+$scheme-main: var(--color-background) !default;
+$scheme-main-bis: var(--color-background-light) !default; // white-grey
+$scheme-main-ter: var(--color-background-lighter) !default; // white-greyer
+$scheme-invert: var(--color-contrast-dark)  !default; //black
+$scheme-invert-bis: var(--color-contrast) !default; //black-grey
+$scheme-invert-ter: var(--color-contrast-light) !default; //black-greyer
 
 $background: $scheme-main-ter !default;
 $background-main: $scheme-main !default;
 
 // Bulma's text colors
-$text: rgba(0,0,0,0.9) !default;
-$text-strong: $black-bis !default;
-$text-invert: findColorInvert($text) !default;
-$text-light: rgba(0,0,0,0.6) !default;
+// $text: rgba(0,0,0,0.9) !default;
+// $text-strong: $black-bis !default;
+// $text-invert: findColorInvert($text) !default;
+// $text-light: rgba(0,0,0,0.6) !default;
 
-$text-lighter: $grey !default;
+// $text-lighter: $grey !default;
+
+//bulma and misc
+$text-strong: var(--color-text-dark) !default;
+$text-light: var(--color-text-light)  !default;
+$text-lighter: var(--color-text-lighter) !default;
+$text-invert: var(--color-text-invert) !default;
 
 // borders
-$border: $grey-lighter !default;
-$border-hover: $grey-light !default;
-$border-light: $grey-lightest !default;
-$border-light-hover: $grey-light !default;
+$border: var(--color-tint-dark) !default;
+$border-hover: var(--color-tint-darker) !default;
+$border-light: var(--color-tint-light)  !default;
+$border-light-hover: var(--color-tint) !default;
 
 
 // $accent: #797bf2;
@@ -43,47 +43,44 @@ $azure: #5B9BD1;
 $beige: #D2BD8E;
 $bricky: #894550;
 
-// --- Link colors ---
+// --- Link colors are used all over Bulma---
 
-// $link: $blue !default;
-// $link-invert: findColorInvert($link) !default;
+$link: var(--color-link);
+$link-invert: var(--color-link-invert);
 // $link-light: findLightColor($link) !default;
 // $link-dark: findDarkColor($link) !default;
 
-$link-visited: $purple !default;
-
-$link-hover: $grey-darker !default;
-$link-hover-border: $grey-light !default;
-
-$link-focus: $grey-darker !default;
-$link-focus-border: $blue !default;
-
-$link-active: $grey-darker !default;
-$link-active-border: $grey-dark !default;
+$link-hover: var(--color-shade-dark) !default;
+$link-hover-border: var(--color-shade)!default;
+$link-focus: var(--color-shade)  !default;
+$link-focus-border: var(--color-link) !default;
+$link-active: var(--color-shade)  !default;
+$link-active-border: var(--color-shade-light)  !default;
 
 //** From huro **/
 // FIXME replace these, here for now as it get things working
 $fade-grey: #ededed;
 $muted-grey: #999;
 
-$colors_list : ("primary", "secondary", "accent", "link", "info", "success", "danger", "warning");
+// $colors_list : ("primary", "secondary", "accent", "link", "info", "success", "danger", "warning");
 
-$colors: () !default;
+$colors_from_theme: () !default;
 
-@function create_bulma_color_list($color) {
+@function create_bulma_color_list($color, $contrastVar) {
   $list: (
     var(--color-#{$color}),
-    var(--color-#{$color}-invert),
-    cssVars.highlight(var(--color-#{$color})),
+    var($contrastVar),
+    var(--color-#{$color}-highlight),
     var(--color-#{$color}-dark)
   );
   @return $list;
 }
 
-@each $color in $colors_list {
+@each $color, $props in $theme-colors {
+  $colorList: create_bulma_color_list($color, map.get($props, 'invert'));
   $map: ();
-  $map: map-merge($map, ($color: create_bulma_color_list($color)) );
-  $colors: map-merge($colors, $map);
+  $map: map-merge($map, ($color: $colorList ) );
+  $colors_from_theme: map-merge($colors_from_theme, $map);
 }
 
 // more get added to this in Bulma's derived-variables.
@@ -96,11 +93,13 @@ $custom-colors: null !default;
 $colors: map.deep-merge((
   "white": ($white, $black),
   "black": ($black, $white),
-  "light": ($scheme-main-ter, $scheme-invert-bis),
-  "dark": ($dark, $dark-invert),
-  "lighter": ($scheme-main-bis, $scheme-invert-bis), //we add these and they are not normally part of bulma
-  ), $colors
+  // "light": ($scheme-main-ter, $scheme-invert-bis),
+  // "dark": ($dark, $dark-invert),
+  // "lighter": ($scheme-main-bis, $scheme-invert-bis), //we add these and they are not normally part of bulma
+  ), $colors_from_theme
 ) !default;
+
+// @debug $colors;
 
 // override Bulma's shades in derived-variables
 $custom-shades: null !default;
@@ -126,17 +125,17 @@ $shades: mergeColorMaps((
 
 // Effects
 // $shadow: 0 0.5em 1em -0.125em rgba($scheme-invert, 0.1), 0 0px 0 1px rgba($scheme-invert, 0.02) !default
-$shadow: 0px 4px 16px rgba($scheme-invert, 0.12) !default;
+$shadow: 0px 4px 16px cssVars.alpha(var(--color-contrast), 0.12) !default;
 
 //*** element and control colors
-$icon-default-color: var(--color-contrast-medium) !default;
+$icon-default-color: var(--color-shade) !default;
 
 // side nav
 $sidenav-background-color: var(--color-primary-dark) !default; //ends up as sidebar default
 $sidenav-font-color: var(--color-primary-invert) !default;
 $sidenav-nav-active-color: var(--color-secondary) !default;
 $sidenav-nav-hover-color: $sidenav-nav-active-color !default;
-$sidenav-overlay-background-color: rgba($sidenav-background-color, 0.2) !default;
+$sidenav-overlay-background-color: cssVars.alpha($sidenav-background-color, 0.2) !default;
 
 //**** bulma/form/shared.sass  ****/
 // $form-colors: $colors !default
@@ -192,8 +191,8 @@ $button-border-color: $border !default;
 // $button-padding-vertical: calc(0.5em - #{$button-border-width}) !default
 // $button-padding-horizontal: 1em !default
 
-// $button-hover-color: $link-hover !default
-// $button-hover-border-color: $link-hover-border !default
+$button-hover-color: inherit !default;
+$button-hover-border-color: $border-hover !default;
 
 // $button-focus-color: $link-focus !default
 // $button-focus-border-color: $link-focus-border !default
@@ -234,3 +233,6 @@ $card-shadow: $shadow !default;
 $card-radius: $radius-large !default;
 $card-border-color: $border !default;
 $card-hr-color: $card-border-color !default;
+
+// ** datepicker
+$dp-input-in-edit-border-color: $blue;

@@ -1,5 +1,5 @@
+@use "../modules/cssVars";
 @import "~sweetalert2/src/variables";
-
 // TITLE
 $swal2-title-color: $content-heading-color;
 $swal2-title-font-size: $size-3;
@@ -44,7 +44,7 @@ $swal2-box-shadow: none;
 // ICONS
 // $swal2-icon-animations: false;
 $swal2-success: $success;
-$swal2-success-border: rgba($success, 0.3);
+$swal2-success-border: cssVars.alpha($success, 0.3);
 $swal2-error: $danger;
 $swal2-warning: $warning;
 $swal2-info: $info;
@@ -52,8 +52,8 @@ $swal2-question: $dark;
 
 // INPUT
 $swal2-input-border-radius: $radius;
-$swal2-input-box-shadow: inset 0 0.0625em 0.125em rgba($dark, 0.05);
-$swal2-input-box-shadow-focus: inset 0 0 0 0.125em rgba($link, 0.25);
+$swal2-input-box-shadow: inset 0 0.0625em 0.125em cssVars.alpha($dark, 0.05);
+$swal2-input-box-shadow-focus: inset 0 0 0 0.125em cssVars.alpha($link, 0.25);
 $swal2-input-transition: initial;
 
 // ANIMATIONS

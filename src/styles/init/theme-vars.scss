@@ -3,75 +3,121 @@
 /*
 /* ---------------------------------------------------------------------- */
 @use "sass:map";
-@use "../mixins/cssVars";
-
+@use "sass:color";
+@use "../modules/cssVars";
 
 $primary: hsl(210, 40%, 37%) !default;
-$primary-invert: findContrastColor($primary) !default;
+$accent: hsl( 235, 100%, 66%) !default;
+$secondary: hsl(37,  98%, 46%) !default;
+$info: hsl(204, 71%,  53%) !default;
+$warning: hsl(48,  100%, 67%) !default;
+$success: hsl(85, 77%,  41%) !default;
+$danger:hsl(2, 65%,  58%) !default;
+$link: hsl(217, 71%,  53%) !default;
 
-// force the orange one to white so it doesn't go to black
-$orange-invert: #fff !default;
-// secondary, not in stock Bulma
-$secondary: $orange !default;
-$secondary-invert: $orange-invert !default;
+$tint: hsl(225, 22%, 94%) !default;
+$tint-dark: hsl(225, 22%, 88%) !default;
+$tint-darker: hsl(220, 4%, 84%) !default;
+$tint-light: hsl(225, 25%, 97%) !default;
+$tint-highlight: hsl(225, 25%, 98%) !default;
 
-// --- accent
-$accent: hsl( 167, 100%, 47%) !default;
-$accent-invert: findColorInvert($accent) !default;
+$medium: hsl(228, 5%, 59%) !default;
+$medium-shade: hsl(227, 4%, 52%) !default;
+$medium-tint: hsl(228, 5%, 63%) !default;
 
-// --- info
-$info: $cyan !default;
-$info-invert: findColorInvert($info) !default;
+$contrast: hsl(0, 0%, 10%) !default;
+$contrast-dark: hsl(0, 0%, 4%) !default;
+$contrast-light: hsl(0, 0%, 16%) !default;
 
-// --- success
-$success: $green !default;
-$success-invert: findColorInvert($success) !default;
+$text: rgba(0,0,0,0.9) !default;
+$text-darker: black !default;
+$text-dark: hsl(0, 0%, 7%) !default;
+$text-light: rgba(0,0,0,0.6) !default;
+$text-lighter: hsl(0, 0%, 48%) !default;
 
-// --- warning
-$warning: $yellow !default;
-$warning-invert: findColorInvert($warning) !default;
+$text-invert: findColorInvert($text) !default;
 
-// --- danger
-$danger: $red !default;
-$danger-invert: findColorInvert($danger) !default;
-
-$link: $blue !default;
-$link-invert: findColorInvert($link) !default;
-
-$colorVariables: (
-  "primary": ($primary, $primary-invert),
-  "secondary": ($secondary, $secondary-invert),
-  "accent": ($accent, $accent-invert),
-  "link": ($link, $link-invert),
-  "info": ($info, $info-invert),
-  "success": ($success, $success-invert),
-  "danger": ($danger, $danger-invert),
-  "warning": ($warning, $warning-invert)
-) !default;
-
-$unicorn-colors: (
-  'primary': (
-    'base': #384ea9,
+$default-colors: (
+  primary: (
+    base: $primary,
   ),
-  'secondary': (
-    'base': #f08110,
+  secondary: (
+    base: $secondary
   ),
-  'accent': (
-    'base': #393939,
+  accent: (
+    base: $accent,
   ),
-  'link': (
-    'base': #f8f5f5,
+  link: (
+    base: $link,
   ),
-  'info': (
-    'base': #384ea9,
+  info: (
+    base: $info,
   ),
-  'success': (
-    'base': #384ea9,
+  success: (
+    base: $success,
   ),
-  'danger': (
-    'base': #384ea9,
+  danger: (
+    base: $danger,
   ),
-  'warning': (
-    'base': #384ea9,
+  warning: (
+    base: $warning,
+  ),
+  'contrast': (
+    base: $contrast,
+    dark: $contrast-dark,
+    light: $contrast-light,
+  ),
+  'shade': (
+    base: $medium,
+    dark: $medium-shade,
+    light: $medium-tint,
+  ),
+  'tint': (
+    base: $tint,
+    dark: $tint-dark,
+    darker: $tint-darker,
+    light: $tint-light,
+    'highlight': $tint-highlight,
   )
 );
+
+// spin through and add defaults for colors
+@each $name, $mapVals in $default-colors {
+  $color: map.get($mapVals, base);
+
+  $default-colors: map.deep-merge((
+    $name: (
+      invert: findContrastVar($color),
+      dark: color.adjust($color, $lightness: -10%),
+      light: color.adjust($color, $lightness: 10%),
+      'highlight': cssVars.highlight(var(--color-#{$name}))
+    )
+  ), $default-colors);
+}
+
+// merge in theme-colors
+$theme-colors: () !default;
+$theme-colors: map.deep-merge($default-colors, $theme-colors);
+
+// @debug $theme-colors;
+
+@function theme-color($key: 'primary', $variant: 'base') {
+  $map: map.get($theme-colors, $key);
+  @return map.get($map, $variant);
+}
+
+// put text colors in its own map
+$default-text-colors: (
+  text: (
+    base: $text,
+    dark: $text-dark,
+    darker: $text-darker,
+    light: $text-light,
+    lighter: $text-lighter,
+  )
+);
+
+$theme-text-colors: () !default;
+$theme-text-colors: map.deep-merge($default-text-colors, $theme-text-colors);
+
+

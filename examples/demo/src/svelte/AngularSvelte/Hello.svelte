@@ -19,7 +19,7 @@
 <div class="card">
   <div class="card-title"> Svelte Component </div>
   <hr>
-  <div class="card-content">
+  <div class="card-content card-content-padding">
     <p>In Svelte</p>
     <input bind:value={data.name}>
     <h1 class="title">{greeting}</h1>

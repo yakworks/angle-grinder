@@ -32,10 +32,6 @@ const componentsStates = {
       component: 'chartsDemoIndex'
     },
     {
-      name: 'colors',
-      component: 'colorsDemoIndex'
-    },
-    {
       name: 'contextMenu',
       component: 'contextMenuIndex'
     },

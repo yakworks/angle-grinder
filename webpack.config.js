@@ -115,6 +115,7 @@ module.exports = function(env, argv) {
                 implementation: require("sass"),
                 sourceMap: true,
                 sassOptions: {
+                  quietDeps: true, // dont show warnings for sass dependencies
                   outputStyle: 'expanded' //'compressed', //try expanded too
                 }
               }
