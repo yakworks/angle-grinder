@@ -128,7 +128,7 @@ $shades: mergeColorMaps((
 $shadow: 0px 4px 16px cssVars.alpha(var(--color-contrast), 0.12) !default;
 
 //*** element and control colors
-$icon-default-color: var(--color-shade) !default;
+$icon-default-color: var(--color-contrast-lighter) !default;
 
 // side nav
 $sidenav-background-color: var(--color-primary-dark) !default; //ends up as sidebar default

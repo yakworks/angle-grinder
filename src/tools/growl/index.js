@@ -30,7 +30,7 @@ const notyf = new Notyf({
     },
     {
       type: 'warning',
-      background: themeColors.warningDark,
+      background: themeColors['warning-dark'],
       color: 'black',
       duration: 0,
       icon: {

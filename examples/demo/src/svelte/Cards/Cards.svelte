@@ -1,7 +1,5 @@
 <script>
-  // import { Button, Card, CardHeader, CardTitle, CardContent, CardSubtitle, Columns, Col } from 'angle-grinder/svelte'
   import { BlockTitle, Button, Card, CardHeader, CardTitle, CardContent, CardSubtitle, Columns, Col } from 'angle-grinder/svelte'
-  // import { BlockTitle, Card, CardHeader, CardContent, CardFooter, Icon, Link, List, ListItem } from 'framework7-svelte';
 
 </script>
 

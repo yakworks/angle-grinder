@@ -1,7 +1,13 @@
 <script>
-  import { Avatar, Columns, Col } from 'angle-grinder/svelte'
+  import { Avatar, Columns, Col, BlockTitle, Card, CardContent, Icon, List, ListItem } from 'angle-grinder/svelte'
 
-  import { Page, Navbar, BlockTitle, Card, CardHeader, CardContent, CardFooter, Icon, Link, List, ListItem } from 'framework7-svelte';
+  let simpleList = ['Item 1', 'Item 2', 'Item 3']
+  let dataList = [
+    {name: 'DSO', val: 39},
+    {name: 'ADP', tag: 42},
+    {name: 'Open', val: '$1,234,345'},
+    {name: 'Past Due', val: '$34,345'}
+  ]
 
   let noref = "javascript:void(0)"
 
@@ -13,9 +19,9 @@
 <Card>
   <CardContent class="p0">
     <List simpleList>
-      <ListItem title="Item 1"></ListItem>
-      <ListItem title="Item 2"></ListItem>
-      <ListItem title="Item 3"></ListItem>
+      {#each simpleList as item}
+      <ListItem title={item}></ListItem>
+      {/each}
     </List>
   </CardContent>
 </Card>
@@ -26,9 +32,9 @@
 <Card>
   <CardContent class="p0">
     <List>
-      <ListItem title="Link 1" link={noref}></ListItem>
-      <ListItem title="Link 2" link={noref}></ListItem>
-      <ListItem title="Link 3" link={noref}></ListItem>
+      {#each simpleList as item}
+      <ListItem title={item} link={noref}></ListItem>
+      {/each}
     </List>
   </CardContent>
 </Card>
@@ -41,10 +47,9 @@
 <Card>
   <CardContent class="p0">
     <List>
-      <ListItem title="DSO" after="39"></ListItem>
-      <ListItem title="ADP" badge="42"></ListItem>
-      <ListItem title="Open" after="$1,234,345"></ListItem>
-      <ListItem title="Past Due" after="$34,345"></ListItem>
+      {#each dataList as item}
+      <ListItem title={item.name} after={item.val} badge={item.tag}></ListItem>
+      {/each}
     </List>
   </CardContent>
 </Card>

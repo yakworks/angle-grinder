@@ -19,12 +19,17 @@
   const getOptionLabel = (option) => option.name;
   const getSelectionLabel = (option) => option.name;
 
+  function handleSelect(event) {
+    console.log('selected item', event.detail);
+    // .. do something here 🙂
+  }
+
   let basicVal = "One";
   let multiVal
 </script>
 
 <h2>Single basic</h2>
-<Select bind:value={basicVal} {items}></Select>
+<Select bind:value={basicVal} {items} on:select={handleSelect}></Select>
 <p>
 	Selected item: {JSON.stringify(basicVal)}
 </p>

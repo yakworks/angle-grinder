@@ -6,6 +6,9 @@
 @use "sass:color";
 @use "../modules/cssVars";
 
+$white: hsl(0, 0%, 100%) !default;
+$black: hsl(0, 0%, 4%) !default;
+
 $primary: hsl(210, 40%, 37%) !default;
 $accent: hsl( 235, 100%, 66%) !default;
 $secondary: hsl(37,  98%, 46%) !default;
@@ -15,19 +18,24 @@ $success: hsl(85, 77%,  41%) !default;
 $danger:hsl(2, 65%,  58%) !default;
 $link: hsl(217, 71%,  53%) !default;
 
-$tint: hsl(225, 22%, 94%) !default;
-$tint-dark: hsl(225, 22%, 88%) !default;
-$tint-darker: hsl(220, 4%, 84%) !default;
-$tint-light: hsl(225, 25%, 97%) !default;
-$tint-highlight: hsl(225, 25%, 98%) !default;
+$tint-lighter: hsl(225, 25%, 98%) !default;
+$tint-light: hsl(228, 5%, 97%) !default;
+$tint: hsl(228, 5%, 94%) !default;
+$tint-dark: hsl(228, 5%, 88%) !default;
+$tint-darker: hsl(228, 5%, 84%) !default;
+$tint-highlight: hsl(228, 5%, 98%) !default;
 
-$medium: hsl(228, 5%, 59%) !default;
-$medium-shade: hsl(227, 4%, 52%) !default;
-$medium-tint: hsl(228, 5%, 63%) !default;
+$shade-lighter: hsl(228, 5%, 77%) !default;
+$shade-light: hsl(228, 5%, 68%) !default;
+$shade: hsl(228, 5%, 59%) !default;
+$shade-dark: hsl(227, 4%, 52%) !default;
+$shade-darker: hsl(227, 4%, 45%) !default;
 
+$contrast-lighter: hsl(0, 0%, 35%) !default;
+$contrast-light: hsl(0, 0%, 20%) !default;
 $contrast: hsl(0, 0%, 10%) !default;
 $contrast-dark: hsl(0, 0%, 4%) !default;
-$contrast-light: hsl(0, 0%, 16%) !default;
+$contrast-darker: hsl(0, 0%, 2%) !default;
 
 $text: rgba(0,0,0,0.9) !default;
 $text-darker: black !default;
@@ -38,6 +46,12 @@ $text-lighter: hsl(0, 0%, 48%) !default;
 $text-invert: findColorInvert($text) !default;
 
 $default-colors: (
+  'white': (
+    base: $white,
+  ),
+  'black': (
+    base: $black,
+  ),
   primary: (
     base: $primary,
   ),
@@ -66,17 +80,22 @@ $default-colors: (
     base: $contrast,
     dark: $contrast-dark,
     light: $contrast-light,
+    darker: $contrast-darker,
+    lighter: $contrast-lighter,
   ),
   'shade': (
-    base: $medium,
-    dark: $medium-shade,
-    light: $medium-tint,
+    base: $shade,
+    dark: $shade-dark,
+    light: $shade-light,
+    darker: $shade-darker,
+    lighter: $shade-lighter,
   ),
   'tint': (
     base: $tint,
     dark: $tint-dark,
     darker: $tint-darker,
     light: $tint-light,
+    lighter: $tint-lighter,
     'highlight': $tint-highlight,
   )
 );
@@ -87,7 +106,7 @@ $default-colors: (
 
   $default-colors: map.deep-merge((
     $name: (
-      invert: findContrastVar($color),
+      'invert': findContrastVar($color),
       dark: color.adjust($color, $lightness: -10%),
       light: color.adjust($color, $lightness: 10%),
       'highlight': cssVars.highlight(var(--color-#{$name}))

@@ -6,17 +6,17 @@
 @each $name, $props in $theme-colors {
   @each $key, $val in $props {
     @if $key == base {
-      .has-text-#{$name}{
+      .text-#{$name}{
         color: var(--color-#{$name}) !important
       }
-      .has-background-#{$name} {
+      .bg-#{$name} {
         background-color: var(--color-#{$name})  !important
       }
     } @else {
-      .has-text-#{$name}-#{$key}{
+      .text-#{$name}-#{$key}{
         color: var(--color-#{$name}-#{$key}) !important
       }
-      .has-background-#{$name}-#{$key}{
+      .bg-#{$name}-#{$key}{
         background-color: var(--color-#{$name}-#{$key}) !important
       }
     }

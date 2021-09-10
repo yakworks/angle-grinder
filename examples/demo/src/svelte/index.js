@@ -7,6 +7,7 @@ import Charts from './Charts/Index.svelte'
 import Colors from './Colors/Index.svelte'
 import FormSimple from './Forms/simple/Index.svelte'
 import FormFields from './Forms/fields/Index.svelte'
+import FormList from './Forms/list/Index.svelte'
 import Growl from './Growl/Index.svelte'
 import Items from './Items/Index.svelte'
 import Lists from './Lists/Index.svelte'
@@ -36,6 +37,9 @@ appMod
   })
   .component('svelteFormFieldsIndex', {
     controller: ngSvelteShim(FormFields)
+  })
+  .component('svelteFormListIndex', {
+    controller: ngSvelteShim(FormList)
   })
   .component('svelteGrowlIndex', {
     controller: ngSvelteShim(Growl)

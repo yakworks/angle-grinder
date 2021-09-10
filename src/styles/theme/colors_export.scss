@@ -5,14 +5,23 @@
 @import "../init";
 
 :export {
-  @each $name, $pair in $colors {
-    #{unquote($name)} : nth($pair, 1);
-    #{unquote($name)}Invert: nth($pair, 2);
-    @if length($pair) >= 3 {
-      #{unquote($name)}Light: nth($pair, 3);
-      @if length($pair) >= 4 {
-        #{unquote($name)}Dark: nth($pair, 4);
+  @each $name, $props in $theme-colors {
+    @each $key, $val in $props {
+      @if $key == base {
+        #{unquote($name)} : $val;
+      } @else {
+        #{unquote($name)}-#{unquote($key)}: $val;
       }
     }
   }
+  // @each $name, $pair in $colors {
+  //   #{unquote($name)} : nth($pair, 1);
+  //   #{unquote($name)}Invert: nth($pair, 2);
+  //   @if length($pair) >= 3 {
+  //     #{unquote($name)}Light: nth($pair, 3);
+  //     @if length($pair) >= 4 {
+  //       #{unquote($name)}Dark: nth($pair, 4);
+  //     }
+  //   }
+  // }
 }

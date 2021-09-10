@@ -1,7 +1,7 @@
 const componentsStates = {
   name: 'ngComponents',
   abstract: true,
-  template: '<div ui-view class="fade-in-up"></div>',
+  // template: '<div ui-view class="fade-in-up"></div>',
   data: {
     title: 'ng Components',
     icon: 'fas fa-plug'
