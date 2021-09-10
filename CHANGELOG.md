@@ -1,3 +1,8 @@
+### v4.0.21
+
+[Full Changelog](https://github.com/yakworks/angle-grinder/compare/v4.0.20...v4.0.21)
+- Range configs (#615) [link](https://github.com/yakworks/angle-grinder/commit/4d6ef80740281683c4f4fbfe28bdc94a97213715)
+
 ### v4.0.20
 
 [Full Changelog](https://github.com/yakworks/angle-grinder/compare/v4.0.19...v4.0.20)
