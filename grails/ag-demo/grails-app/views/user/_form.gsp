@@ -40,7 +40,7 @@
                     <label class="control-label col-md-3">${ag.label(code: "contact.email")}</label>
 
                     <div class="col-md-4">
-                        <input type="email"
+                        <input type="text"
                                name="email" ng-model="user.contact.email"/>
                         <ag-validation-errors for="email"/>
                     </div>
