@@ -1,5 +1,5 @@
 import AgBaseControl from '../AgBaseControl'
-import {getConfig} from '../../../tools/AppConfig'
+import { getConfig } from '../../../tools/AppConfig'
 import _ from 'lodash'
 
 class Controller extends AgBaseControl {
@@ -19,7 +19,7 @@ class Controller extends AgBaseControl {
   }
 
   $onInit() {
-     const rangeConfig = getConfig().controls.ranges
+    const rangeConfig = getConfig().controls.ranges
     _.merge(this.opts, _.merge(rangeConfig, this.rangeOptions))
     this.placeholderFrom = this.opts.fromField.placeholder
     this.placeholderTo = this.opts.toField.placeholder

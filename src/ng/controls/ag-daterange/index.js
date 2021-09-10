@@ -1,7 +1,7 @@
 import AgBaseControl from '../AgBaseControl'
 // import Log from '../../../utils/Log'
 import _ from 'lodash'
-import {getConfig} from "../../../tools/AppConfig";
+import { getConfig } from "../../../tools/AppConfig";
 
 class Controller extends AgBaseControl {
   datepickerOptions = {}

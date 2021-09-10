@@ -11,7 +11,8 @@ const appConfig = {
         name: 'to',
         placeholder: 'to',
         step: 0.01
-      }}
+      }
+    }
   }
 }
 
