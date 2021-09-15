@@ -34,7 +34,7 @@
   export let outlined = false
   export let loading = false
 
-  export let disabled
+  export let disabled  = false;
 
   export let iconSolo = null
   export let iconLeft = null

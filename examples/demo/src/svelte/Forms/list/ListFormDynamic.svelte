@@ -9,10 +9,10 @@
     {
       name: "name",
       type: "text",
-      rules: ["required"],
-      messages: {
-        required: "Username is required!"
-      }
+      placeholder: "Your name",
+      minlength: 3,
+      clearButton: true,
+      required: true,
     },
   ]
 

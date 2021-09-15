@@ -14,16 +14,23 @@
   let basicVal;
   let multiVal = [{"id":1}];
 
+  let opts = {
+    showIndicator: true,
+    optionIdentifier,
+    getOptionLabel,
+    getSelectionLabel
+  }
+
 </script>
 
 <h2>Single basic</h2>
-<Select bind:value={basicVal} {items} {optionIdentifier} {getOptionLabel} {getSelectionLabel} on:select={handleSelect}></Select>
+<Select bind:value={basicVal} {items} {...opts} on:select={handleSelect}></Select>
 <p>
 	Selected item: {JSON.stringify(basicVal)}
 </p>
 
 <h2>Multi basic</h2>
-<Select isMulti={true} bind:value={multiVal} {items} {optionIdentifier} {getOptionLabel} {getSelectionLabel} on:select={handleSelect}></Select>
+<Select isMulti={true} bind:value={multiVal} {items} {...opts} on:select={handleSelect}></Select>
 <p>
 	Selected item: {JSON.stringify(multiVal)}
 </p>

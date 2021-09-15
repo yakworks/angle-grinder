@@ -30,48 +30,69 @@
 //   --ion-color-tertiary-tint: #6370ff;
 // }
 :root, [data-theme="default"] {
-  // main
-  @each $name, $map in $theme-colors {
-    // main color
-    @include cssVars.colorVars(#{$name}, map.get($map, base));
 
-    @each $kind in (invert, light, dark, darker, 'lighter') {
-      @if map.has-key($map, $kind) {
-        @include cssVars.colorVars(#{$name}-#{$kind}, map.get($map, #{$kind}));
+  // text
+  $textMap: map.get($theme-colors, 'text');
+
+  @include declareCssVar(colorVar('text'), #{map.get($textMap, 'base')});
+
+  @each $name in (light, lighter, strong, stronger) {
+    $varName: colorVar('text', $name);
+    @include declareCssVar($varName, #{map.get($textMap, $name)});
+  }
+
+  // $colorKinds: (contrast, light, strong, stronger, 'lighter');
+  $excludeKinds: ('highlight');
+  // main
+  @each $name, $props in $theme-colors {
+
+    $baseVarName: colorVar($name);
+
+    @each $kind, $colorVal in $props {
+
+      @if $kind == base {
+        // main color
+        @include declareColorVar($name, $colorVal);
+      }
+      @else if not list.index($excludeKinds, $kind){
+        $varName: colorVar($name, $kind);
+        //if its a color then just set it
+
+        @if type-of($colorVal) == 'color' {
+          $colorVal: cssVars.hslString($colorVal);
+        }
+        @else if type-of($colorVal) == 'number' {
+          //assume it a percent and adjust off base
+          $colorVal: cssVars.adjustLightness($baseVarName, $colorVal );
+        }
+        @else {
+          //its a refernce to another variable so just wrap it
+          $colorVal: var($colorVal)
+        }
+        // !! here is the fincal css setting
+        @include declareCssVar($varName, $colorVal);
       }
     }
 
-    @if map.has-key($map, 'highlight') {
-      --color-#{$name}-highlight: #{map.get($map, 'highlight')};
+    @if map.has-key($props, 'highlight') {
+      @include declareCssVar(#{$baseVarName}-highlight, map.get($props, 'highlight'));
     }
+
   }
 
-  // text
-  $textMap: map.get($theme-text-colors, 'text');
-  @include cssVars.colorVars('text', map.get($textMap, 'base'));
-  @include cssVars.colorVars('text-light', map.get($textMap, 'light'));
-  @include cssVars.colorVars('text-lighter', map.get($textMap, 'lighter'));
-  @include cssVars.colorVars('text-dark', map.get($textMap, 'dark'));
-  @include cssVars.colorVars('text-darker', map.get($textMap, 'darker'));
-
-
   // black + white
-  @include cssVars.colorVars(black,hsl( 240, 8%, 12%));
-  @include cssVars.colorVars(white, hsl(0, 0%, 100%));
+  @include declareColorVar(black,hsl( 240, 8%, 12%));
+  @include declareColorVar(white, hsl(0, 0%, 100%));
 
-  // background
-  @include cssVars.color_var_no_hsl(background-darker, hsl(240, 2%, 90%));
-  @include cssVars.color_var_no_hsl(background-dark, hsl(240, 3%, 94%));
-  @include cssVars.colorVars('background', hsl(0, 0%, 100%));
-  @include cssVars.color_var_no_hsl(background-light, hsl(240, 3%, 100%));
-  @include cssVars.color_var_no_hsl(background-lighter, hsl(240, 2%, 100%));
+  // @debug $colors
+  @each $name, $props in $theme-shades {
+    $hslVal: map.get($props, 'hsl');
+    $contrast: map.get($props, 'contrast');
+    $varName: colorVar($name);
+    @include declareCssVar($varName, $hslVal);
+  }
 
-  // background
-  // @include cssVars.color_var_no_hsl(bg-darker, hsl(240, 2%, 90%));
-  // @include cssVars.color_var_no_hsl(bg-dark, hsl(240, 3%, 94%));
-  // @include cssVars.colorVars(bg, hsl(0, 0%, 100%));
-  // @include cssVars.color_var_no_hsl(bg-light, hsl(240, 3%, 100%));
-  // @include cssVars.color_var_no_hsl(bg-lighter, hsl(240, 2%, 100%));
+
 }
 
 @supports(--css: variables) {

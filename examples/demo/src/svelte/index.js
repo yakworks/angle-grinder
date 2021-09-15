@@ -5,8 +5,8 @@ import Buttons from './Buttons/Index.svelte'
 import Cards from './Cards/Index.svelte'
 import Charts from './Charts/Index.svelte'
 import Colors from './Colors/Index.svelte'
-import FormSimple from './Forms/simple/Index.svelte'
-import FormFields from './Forms/fields/Index.svelte'
+import FormsLib from './Forms/forms-lib/Index.svelte'
+import FormBasic from './Forms/basic/Index.svelte'
 import FormList from './Forms/list/Index.svelte'
 import Growl from './Growl/Index.svelte'
 import Items from './Items/Index.svelte'
@@ -32,11 +32,11 @@ appMod
   .component('svelteColorsIndex', {
     controller: ngSvelteShim(Colors)
   })
-  .component('svelteFormSimpleIndex', {
-    controller: ngSvelteShim(FormSimple)
+  .component('svelteFormBasicIndex', {
+    controller: ngSvelteShim(FormBasic)
   })
-  .component('svelteFormFieldsIndex', {
-    controller: ngSvelteShim(FormFields)
+  .component('svelteFormsLibIndex', {
+    controller: ngSvelteShim(FormsLib)
   })
   .component('svelteFormListIndex', {
     controller: ngSvelteShim(FormList)

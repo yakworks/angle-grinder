@@ -6,8 +6,11 @@ env:
   amd: true
 plugins:
   - angular
+  - svelte3
+  - prettier
 extends:
-  - standard
+  - prettier
+  # - standard
 parser: "@babel/eslint-parser"
 parserOptions:
   ecmaVersion: 2020

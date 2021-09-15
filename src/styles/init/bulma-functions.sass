@@ -159,3 +159,16 @@
   @if $remainder > 0 and $precision > 0
     $remainder: divide($remainder * 10, $divisor, $precision - 1) * .1
   @return ($quotient + $remainder) * $sign
+
+// here be dragons
+@function rgba($r, $g, $b: null, $alpha: null)
+  @if type-of($r) == number and type-of($g) == number and type-of($b) == number and type-of($alpha) == number
+    @return rgb($r, $g, $b, $alpha)
+  $col: $r
+  $alpha: $g
+  @if type-of($col) == 'color'
+    @return color.change($col, $alpha: $alpha)
+  @else if type-of($col) == 'color'
+    @return color.change($col, $alpha: $alpha)
+  @else
+    @return cssVars.alpha($col, $alpha)

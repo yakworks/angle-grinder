@@ -1,7 +1,7 @@
 //Sidenav animated icon trigger
 
-$burger-size: 24px;
-$burger-line-width: 3px;
+$burger-size: 24px !default;
+$burger-line-width: 3px !default;
 
 .hamburger {
   //font-size: $burger-size;
@@ -47,13 +47,13 @@ $burger-line-width: 3px;
     transition: transform 0.2s ease-in-out;
 
     border-radius: $burger-line-width;
-    background: $secondary;
+    background: $hamburger-color;
   }
 
   // Styles for the active `.hamburger` icon
   &.is-active {
     i, &:before, &:after {
-      background: $secondary;
+      background: $hamburger-color;
     }
   }
 
@@ -103,7 +103,7 @@ $burger-line-width: 3px;
     transform-origin: 0 0;
 
     path {
-      stroke: $secondary;
+      stroke: $hamburger-color;
       stroke-width: 40px;
       stroke-linecap: round;
       stroke-linejoin: round;

@@ -29,7 +29,7 @@ export default function(Component, events) {
     }
 
     $postLink() {
-      console.log("initialProps", this.initialProps)
+      //console.log("initialProps", this.initialProps)
       this.component = new Component({
         target: this.$element[0],
         props: this.initialProps
@@ -61,7 +61,7 @@ export default function(Component, events) {
           ...changed
         }
       }
-      console.log("$onChanges", this.initialProps)
+      //console.log("$onChanges", this.initialProps)
     }
 
     $onDestroy() {

@@ -1,4 +1,4 @@
-export { Card, CardFooter, CardContent } from 'framework7-svelte';
+export { Card, CardFooter, CardContent } from 'framework7-source/src/svelte';
 // export { default as CardContent } from './CardContent.svelte';
 export { default as CardHeader } from './CardHeader.svelte';
 // export { default as CardFooter } from './CardFooter.svelte';

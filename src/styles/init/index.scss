@@ -20,12 +20,13 @@
 @import "~bulma/sass/utilities/initial-variables.sass";
 
 @import "bulma-functions"; //fixes bulma functions to use css variables
-// @import "mixins";
+@import "theme-functions";
 
 @import "typography";
 
+
 // @import "color-vars";
-@import "theme-vars";
+@import "theme-vars.scss";
 @import "bulma-colors";
 // colors imports derived-variables, post-derived-variables sets up components
 @import "variables";

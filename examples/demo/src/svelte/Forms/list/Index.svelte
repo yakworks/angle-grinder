@@ -1,6 +1,6 @@
 
 <script>
-  import { App } from 'framework7-svelte';
+  import { App } from 'angle-grinder/svelte';
   import Comp from './ListForm.svelte'
   import svelteRaw from '!raw-loader!./ListForm.svelte'
   import ExampleSnippet from '../../utils/ExampleSnippet.svelte'

@@ -20,6 +20,7 @@
         enabled: true
       }
     },
+    colors: [themeColors.secondary],
     stroke: {
       width: [1],
       curve: 'straight'
@@ -65,7 +66,7 @@
     }
   }
 
-  options.colors = ['orange','white']
+  // options.colors = ['orange','white']
   options.labels = labels
   options.series[0].data = randomizeArray(sparklineData)
   options.title.style.color = themeColors.lightText

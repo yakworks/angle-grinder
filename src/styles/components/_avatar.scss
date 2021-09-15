@@ -74,54 +74,6 @@
       background: $fade-grey;
       border-radius: 50%;
 
-      &.is-primary {
-        background: lighten($primary, 42%);
-
-        span {
-          color: $primary;
-        }
-      }
-
-      &.is-accent {
-        background: lighten($accent, 36%);
-
-        span {
-          color: $accent;
-        }
-      }
-
-      &.is-success {
-        background: lighten($success, 45%);
-
-        span {
-          color: $success;
-        }
-      }
-
-      &.is-info {
-        background: lighten($info, 45%);
-
-        span {
-          color: $info;
-        }
-      }
-
-      &.is-warning {
-        background: lighten($warning, 32%);
-
-        span {
-          color: $warning;
-        }
-      }
-
-      &.is-danger {
-        background: lighten($danger, 36%);
-
-        span {
-          color: $danger;
-        }
-      }
-
       span {
         position: relative;
 

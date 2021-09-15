@@ -7,41 +7,42 @@
 @use "sass:map";
 @use "../modules/cssVars";
 
-$scheme-main: var(--color-background) !default;
-$scheme-main-bis: var(--color-background-light) !default; // white-grey
-$scheme-main-ter: var(--color-background-lighter) !default; // white-greyer
-$scheme-invert: var(--color-contrast-dark)  !default; //black
-$scheme-invert-bis: var(--color-contrast) !default; //black-grey
-$scheme-invert-ter: var(--color-contrast-light) !default; //black-greyer
+$primary: cvar(primary) !default;
+$accent: cvar(accent) !default;
+$secondary: cvar(secondary) !default;
+$info: cvar(info) !default;
+$warning: cvar(warning) !default;
+$success: cvar(success) !default;
+$danger: cvar(danger) !default;
+// // $danger-color:hsl(2, 65%,  58%) !default;
+$link: cvar(link) !default;
+
+$scheme-main: cvar(body) !default;
+$scheme-main-bis: cvar(body, low) !default; // white-grey
+$scheme-main-ter: cvar(body, lower) !default; // white-greyer
+$scheme-invert: cvar(contrast)  !default; //black
+$scheme-invert-bis: cvar(contrast, low) !default; //black-grey
+$scheme-invert-ter: cvar(contrast, lower) !default; //black-greyer
 
 $background: $scheme-main-ter !default;
 $background-main: $scheme-main !default;
 
 // Bulma's text colors
-// $text: rgba(0,0,0,0.9) !default;
-// $text-strong: $black-bis !default;
-// $text-invert: findColorInvert($text) !default;
-// $text-light: rgba(0,0,0,0.6) !default;
-
-// $text-lighter: $grey !default;
-
-//bulma and misc
-$text-strong: var(--color-text-dark) !default;
-$text-light: var(--color-text-light)  !default;
-$text-lighter: var(--color-text-lighter) !default;
-$text-invert: var(--color-text-invert) !default;
+$text: cvar(text)  !default;
+$text-invert: cvar(body)  !default;
+$text-light: cvar(text,light)  !default;
+$text-lighter: cvar(text, lighter) !default;
+$text-strong: cvar(text, strong)  !default;
 
 // borders
-$border: var(--color-tint-dark) !default;
-$border-hover: var(--color-tint-darker) !default;
-$border-light: var(--color-tint-light)  !default;
-$border-light-hover: var(--color-tint) !default;
+$border: cvar(shade,30) !default;
+$border-hover: cvar(shade,50) !default;
+$border-light: cvar(shade,30) !default;
+$border-light-hover: cvar(shade,40) !default;
 
 
 // $accent: #797bf2;
-$azure: #5B9BD1;
-$beige: #D2BD8E;
-$bricky: #894550;
+
 
 // --- Link colors are used all over Bulma---
 
@@ -50,12 +51,12 @@ $link-invert: var(--color-link-invert);
 // $link-light: findLightColor($link) !default;
 // $link-dark: findDarkColor($link) !default;
 
-$link-hover: var(--color-shade-dark) !default;
-$link-hover-border: var(--color-shade)!default;
-$link-focus: var(--color-shade)  !default;
+$link-hover: var(--color-shade-40) !default;
+$link-hover-border: var(--color-shade-50)!default;
+$link-focus: var(--color-shade-50)  !default;
 $link-focus-border: var(--color-link) !default;
-$link-active: var(--color-shade)  !default;
-$link-active-border: var(--color-shade-light)  !default;
+$link-active: var(--color-shade-50)  !default;
+$link-active-border: var(--color-shade-60)  !default;
 
 //** From huro **/
 // FIXME replace these, here for now as it get things working
@@ -67,17 +68,18 @@ $muted-grey: #999;
 $colors_from_theme: () !default;
 
 @function create_bulma_color_list($color, $contrastVar) {
+  // @debug "invert var #{$contrastVar}";
   $list: (
     var(--color-#{$color}),
     var($contrastVar),
     var(--color-#{$color}-highlight),
-    var(--color-#{$color}-dark)
+    var(--color-#{$color}-strong)
   );
   @return $list;
 }
 
 @each $color, $props in $theme-colors {
-  $colorList: create_bulma_color_list($color, map.get($props, 'invert'));
+  $colorList: create_bulma_color_list($color, map.get($props, 'contrast'));
   $map: ();
   $map: map-merge($map, ($color: $colorList ) );
   $colors_from_theme: map-merge($colors_from_theme, $map);
@@ -125,17 +127,28 @@ $shades: mergeColorMaps((
 
 // Effects
 // $shadow: 0 0.5em 1em -0.125em rgba($scheme-invert, 0.1), 0 0px 0 1px rgba($scheme-invert, 0.02) !default
-$shadow: 0px 4px 16px cssVars.alpha(var(--color-contrast), 0.12) !default;
+$shadow: 0px 4px 16px cssVars.alpha(--color-contrast, 0.12) !default;
 
 //*** element and control colors
-$icon-default-color: var(--color-contrast-lighter) !default;
+$icon-default-color: $text-light !default;
 
 // side nav
-$sidenav-background-color: var(--color-primary-dark) !default; //ends up as sidebar default
-$sidenav-font-color: var(--color-primary-invert) !default;
+$sidenav-background-color: var(--color-primary) !default; //ends up as sidebar default
+$sidenav-font-color: var(--color-primary-contrast) !default;
 $sidenav-nav-active-color: var(--color-secondary) !default;
 $sidenav-nav-hover-color: $sidenav-nav-active-color !default;
-$sidenav-overlay-background-color: cssVars.alpha($sidenav-background-color, 0.2) !default;
+$sidenav-overlay-background-color: cssVars.alpha(--color-primary, 0.2) !default;
+$list-hover-color: var(--color-secondary) !default;
+$list-active-color: var(--color-secondary) !default;
+
+// hamburger
+$hamburger-color: var(--color-secondary);
+
+//toolbar
+$toolbar-item-color: $text !default;
+$toolbar-color-secondary: purple; //$secondary !default;
+$toolbar-icon-color: $toolbar-item-color !default;
+$toolbar-fixed-a-color: #444F60 !default;
 
 //**** bulma/form/shared.sass  ****/
 // $form-colors: $colors !default
@@ -194,7 +207,7 @@ $button-border-color: $border !default;
 $button-hover-color: inherit !default;
 $button-hover-border-color: $border-hover !default;
 
-// $button-focus-color: $link-focus !default
+$button-focus-color: inherit !default;
 // $button-focus-border-color: $link-focus-border !default
 $button-focus-border-color: $button-border-color !default;
 // $button-focus-box-shadow-size: 0 0 0 0.125em !default

@@ -1,7 +1,9 @@
 <script>
   // import { Avatar, Card, CardHeader, CardContent, Button, Columns, Col } from 'angle-grinder/svelte'
-  import { Avatar, Button, Columns, Col } from 'angle-grinder/svelte'
-  import { Page, Navbar, Block, BlockTitle, Card, CardHeader, CardContent, CardFooter, Link, List, ListItem } from 'framework7-svelte';
+  import { 
+    Avatar, Button, Columns, Col,
+    Block, BlockTitle, Card, CardHeader, CardContent, CardFooter, Link, List, ListItem 
+  } from 'angle-grinder/svelte'
   import { people } from '../../data/sample'
 
   let person = people[0]
