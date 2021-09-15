@@ -169,7 +169,7 @@ module.exports = function(env, argv) {
       new FixStyleOnlyEntriesPlugin(),
 
       // config this to dump to file, by defualt it opens the page that analyses what sizes take up what
-      new BundleAnalyzerPlugin(),
+      // new BundleAnalyzerPlugin(),
 
       new HtmlWebpackPlugin({
         //title: 'Custom template using lodash',
