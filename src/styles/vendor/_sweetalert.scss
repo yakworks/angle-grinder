@@ -1,5 +1,5 @@
-@use "../modules/cssVars";
-@import "~sweetalert2/src/variables";
+@use "../tools/cssVars";
+// @import "~sweetalert2/src/variables";
 // TITLE
 $swal2-title-color: $content-heading-color;
 $swal2-title-font-size: $size-3;

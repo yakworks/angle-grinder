@@ -1,7 +1,7 @@
 /* ------------------------------------------------------------- */
 /* Dropdown button, merger of bulma and bootstrap
 /* -------------------------------------------------------------- */
-@use "../modules/misc";
+@use "../tools/misc";
 
 $dropdown-item-disabled-color: $input-disabled-color !default;
 

@@ -1,6 +1,12 @@
-// --------------------------------
+// ------
+// Module: General helper functions
+// dont import, access with @use "..util"
+// ------
+
 @use "sass:color";
 @use "sass:string";
+
+//access with @use
 
 // replace substring with another string
 // credits: https://css-tricks.com/snippets/sass/str-replace-function/

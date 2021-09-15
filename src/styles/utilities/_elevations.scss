@@ -1,8 +1,8 @@
 /** materials elevations shadows */
 // based on vuetify
 
-@import '../tools/_functions.sass';
-@import '../tools/_elevation.sass';
+@import '../tools/functions-vuetify';
+@import '../tools/elevation';
 
 $shadow-key-umbra-opacity: rgba(0, 0, 0, 0.2) !default;
 $shadow-key-penumbra-opacity: rgba(0, 0, 0, 0.14) !default;

@@ -1,4 +1,8 @@
-// --------------------------------
+// ------
+// Module: General helper functions
+// dont import, access module with @use "..cssVars"
+// ------
+
 @use "sass:color";
 @use "sass:string";
 @use "util";

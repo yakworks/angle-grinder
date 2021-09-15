@@ -4,12 +4,12 @@
 /* ---------------------------------------------------------------------- */
 @use "sass:map";
 @use "sass:color";
-@use "../modules/util";
+@use "../tools/util";
 // @use "sass:math";
 // @use "sass:string";
 // @use "sass:list";
-// @use "../modules/cssVars";
-// @use "../modules/stringify";
+// @use "../tools/cssVars";
+// @use "../tools/stringify";
 
 $color-var-prefix: --color;
 
@@ -44,6 +44,10 @@ $color-var-prefix: --color;
 }
 
 @function cvar($key, $kind: '') {
+  //if it starts with -- then just return it
+  @if str-index($key, "--") == 1{
+    @return var(#{$key})
+  }
   @if $key == shade {
     $_: theme-shade($kind);
   } @else {
@@ -51,14 +55,14 @@ $color-var-prefix: --color;
   }
 
   $css-var: colorVar($key, $kind);
-  @return var(#{$css-var});
+  @return unquote("var(#{$css-var})");
 }
 
-@function findContrastVarKey($color) {
+@function getContrastColor($color) {
   @if (colorLuminance($color) > 0.55) {
-    @return black;
+    @return --color-black;
   } @else {
-    @return white;
+    @return --color-white;
   }
 }
 // kicks out the css variable declaration and will track it so if we do any

@@ -1,4 +1,4 @@
-@use "../modules/cssVars";
+@use "../tools/cssVars";
 
 $danger-border: cssVars.alpha($danger, 0.40);
 

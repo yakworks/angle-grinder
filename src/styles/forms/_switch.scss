@@ -1,5 +1,5 @@
 // switch that looks simliar to an apple ios style toggle
-@use "../modules/cssVars";
+@use "../tools/cssVars";
 
 .is-switch {
   display: table; //makes width shrink to just size of label

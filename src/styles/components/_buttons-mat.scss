@@ -12,7 +12,7 @@
 // $button-focus-box-shadow-size: 0 0 0 0.2rem !default;
 // $button-focus-border-color: $grey-light !default;
 // $button-focus-box-shadow-color: $grey-light !default;
-@use "../modules/cssVars";
+@use "../tools/cssVars";
 /* yak ui - added variables */
 $button-font-size: $text-base !default;
 $button-font-weight: $weight-medium !default;

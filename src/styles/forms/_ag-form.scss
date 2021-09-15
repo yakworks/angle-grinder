@@ -1,6 +1,6 @@
 
 //Variables from bulma
-@use "../modules/cssVars";
+@use "../tools/cssVars";
 
 $danger-border: cssVars.alpha($danger, 0.40);
 //$danger-border: $danger;
