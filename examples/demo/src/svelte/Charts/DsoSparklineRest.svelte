@@ -1,7 +1,7 @@
 <script>
   import { onMount } from 'svelte'
   import { ApexChart } from 'angle-grinder/svelte'
-  import { themeColors, randomizeArray } from './chartHelpers'
+  import { themeColors, randomizeArray, secondaryColor } from './chartHelpers'
   import ky from 'ky'
 
   // let options
@@ -21,7 +21,7 @@
     let opts = chartCfgs.dsoSparkLine
     console.log("opts", opts);
 
-    opts.colors = [themeColors.secondary]
+    opts.colors = [secondaryColor]
     opts.labels = labels
     opts.series[0].data = randomizeArray(sparklineData)
     opts.title.style.color = themeColors.lightText

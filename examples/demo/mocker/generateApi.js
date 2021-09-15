@@ -12,17 +12,12 @@ function makeUrls(epoint, api) {
     dataApi: api,
     urls: {
       [`GET /api/${epoint}/picklist`]: (req, res) => {
-        // console.log("get picklist req.query  ", req.query)
         const { query } = req
-        api.picklist(query)
-          .then((data) => {
-            if (!_.isEmpty(query)) {
-              const queriedData = data.data.filter(d => d.country === query.country)
-              return res.json({ ...queriedData, data: queriedData })
-            }
-            // console.log("get picklist data", data)
-            return res.json(data)
-          })
+        // console.log("search query ", query)
+        api.picklist(query).then((data) => {
+          // console.log("get invoice data", data)
+          return res.json(data)
+        })
       },
 
       [`GET /api/${epoint}/:id`]: (req, res) => {

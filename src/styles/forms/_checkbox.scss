@@ -1,5 +1,6 @@
+@use "../tools/cssVars";
 $input-check-focus-box-shadow-size: 0 0 0 0.2em !default;
-$input-check-focus-box-shadow-color: rgba($link, 0.35) !default;
+$input-check-focus-box-shadow-color: cssVars.alpha($link, 0.35) !default;
 
 .checkbox {
   display: flex;
@@ -89,7 +90,7 @@ $input-check-focus-box-shadow-color: rgba($link, 0.35) !default;
 
     &.is-success [type="checkbox"] {
       &:focus + i::before {
-        box-shadow: $input-check-focus-box-shadow-size rgba($success, 0.4);
+        box-shadow: $input-check-focus-box-shadow-size cssVars.alpha($success, 0.4);
       }
       &:checked + i::before {
         background: $success;
@@ -99,7 +100,7 @@ $input-check-focus-box-shadow-color: rgba($link, 0.35) !default;
 
     &.is-info [type="checkbox"] {
       &:focus + i::before {
-        box-shadow: $input-check-focus-box-shadow-size rgba($info, 0.4);
+        box-shadow: $input-check-focus-box-shadow-size cssVars.alpha($info, 0.4);
       }
       &:checked + i::before {
         background: $info;
@@ -109,7 +110,7 @@ $input-check-focus-box-shadow-color: rgba($link, 0.35) !default;
 
     &.is-danger [type="checkbox"] {
       &:focus + i::before {
-        box-shadow: $input-check-focus-box-shadow-size rgba($danger, 0.4);
+        box-shadow: $input-check-focus-box-shadow-size cssVars.alpha($danger, 0.4);
       }
       &:checked + i::before {
         background: $danger;
@@ -119,7 +120,7 @@ $input-check-focus-box-shadow-color: rgba($link, 0.35) !default;
 
     &.is-warning [type="checkbox"] {
       &:focus + i::before {
-        box-shadow: $input-check-focus-box-shadow-size rgba($warning, 0.4);
+        box-shadow: $input-check-focus-box-shadow-size cssVars.alpha($warning, 0.4);
       }
       &:checked + i::before {
         background: $warning;

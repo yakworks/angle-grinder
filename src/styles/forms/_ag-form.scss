@@ -1,7 +1,8 @@
 
 //Variables from bulma
+@use "../tools/cssVars";
 
-$danger-border: rgba($danger, 0.40);
+$danger-border: cssVars.alpha($danger, 0.40);
 //$danger-border: $danger;
 //$danger-darker: rgba($danger, 0.50);
 

@@ -1,4 +1,5 @@
 // switch that looks simliar to an apple ios style toggle
+@use "../tools/cssVars";
 
 .is-switch {
   display: table; //makes width shrink to just size of label
@@ -72,7 +73,7 @@
         //outline: #5d9dd5 solid 1px;
         //box-shadow: $checkbox-focus;
         //box-shadow: $input-focus-box-shadow-size $input-focus-box-shadow-color
-        box-shadow: $input-check-focus-box-shadow-size rgba($success, 0.4);
+        box-shadow: $input-check-focus-box-shadow-size cssVars.alpha($success, 0.4);
         //box-shadow: 0 0 0 2px rgba(40, 137, 167, 0.25);
       }
     }

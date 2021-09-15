@@ -28,6 +28,10 @@
         ]
 
       }
+    ],
+    [ // required for svelte-jsx and svelte-fragment-component
+      '@babel/plugin-transform-react-jsx',
+      {runtime: 'automatic', importSource: 'svelte-jsx'}
     ]
   ]
 }

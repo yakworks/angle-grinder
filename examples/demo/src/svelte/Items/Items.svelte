@@ -1,5 +1,9 @@
 <script>
-  import { Avatar, Card, CardHeader, CardContent, Button, Columns, Col } from 'angle-grinder/svelte'
+  // import { Avatar, Card, CardHeader, CardContent, Button, Columns, Col } from 'angle-grinder/svelte'
+  import { 
+    Avatar, Button, Columns, Col,
+    Block, BlockTitle, Card, CardHeader, CardContent, CardFooter, Link, List, ListItem 
+  } from 'angle-grinder/svelte'
   import { people } from '../../data/sample'
 
   let person = people[0]
@@ -13,13 +17,14 @@
   }
 </style>
 
-<div class="title is-5">Item Block Examples</div>
-
-<p>Item block are used in lists, card headers, card blocks, etc. </p>
+<BlockTitle>Item Block Examples</BlockTitle>
+<Block>
+  <p>Item block are used in lists, card headers, card blocks, etc. </p>
+</Block>
 
 <Columns>
 <Col>
-  <Card class="px-4" elevation=0 outlined>
+  <Card class="px-4" outline noShadow>
     <div class="item-block">
       <div class="item-content">
         <div class="item-title item-label">Label</div>
@@ -30,7 +35,7 @@
   </Card>
 </Col>
 <Col>
-  <Card class="px-4" elevation=0 outlined>
+  <Card class="px-4" outline noShadow>
     <div class="item-block">
       <Avatar class="item-avatar is-medium" imgSrc="{imgSrc1}"></Avatar>
       <div class="item-content">

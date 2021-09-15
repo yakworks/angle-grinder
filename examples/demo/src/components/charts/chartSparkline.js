@@ -2,6 +2,8 @@ import { themeColors, randomizeArray } from './chartData'
 
 var sparklineData = [46, 44, 43, 43, 42, 42, 41, 41, 40, 40, 38, 38]
 
+const mainColor = getComputedStyle(document.documentElement).getPropertyValue('--color-secondary');
+
 const sparkOpts = {
   chart: {
     id: 'sparkline1',
@@ -11,7 +13,7 @@ const sparkOpts = {
       enabled: true
     }
   },
-  colors: [themeColors.secondary],
+  colors: [mainColor],
   stroke: {
     width: [1],
     curve: 'straight'

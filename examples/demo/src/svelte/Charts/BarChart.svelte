@@ -1,6 +1,6 @@
 <script>
   import { ApexChart } from 'angle-grinder/svelte'
-  import { themeColors, randomizeArray } from './chartHelpers'
+  import { themeColors, randomizeArray, primaryColor, secondaryColor } from './chartHelpers'
 
   const options = {
     series: [{
@@ -48,7 +48,7 @@
     grid: {
       show: false
     },
-    colors: [themeColors.primary],
+    colors: [secondaryColor],
     fill: {
       opacity: 0.5
     }

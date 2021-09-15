@@ -1,0 +1,99 @@
+@use "sass:map";
+@use "sass:color";
+@use "sass:math";
+@use "sass:string";
+@use "sass:list";
+@use "../tools/cssVars";
+
+$default-colors: (
+  widget:    ( base: hsl(0, 0%, 100%), ),
+  card:      ( base: hsl(0, 0%, 100%), ),
+  body:      ( base: hsl(0, 0%, 98%), low: -2%, lower: -4%, high: 2%),
+  contrast:  ( base: hsl(0, 0%, 10%), low: 5%, lower: 10%, high: -4%),
+  primary:   ( base: hsl(210, 40%, 37%) ),
+  secondary: ( base: hsl(37,  98%, 46%) ),
+  accent:    ( base: hsl( 235, 100%, 66%) ),
+  link:      ( base: hsl(217, 71%,  53%)  ),
+  info:      ( base: hsl(204, 71%,  53%) ),
+  success:   ( base: hsl(85, 77%,  41%) ),
+  danger:    ( base: hsl(350, 60%, 43%) ),
+  warning:   ( base: hsl(48,  100%, 67%) ),
+  'white':   ( base: hsl(0, 0%, 100%) ),
+  'black':   ( base: hsl(0, 0%, 10%) ),
+  text:(
+    base: rgba(0,0,0, 0.87),
+    strong: hsl(0, 0%, 7%),
+    stronger: black,
+    light: rgba(0,0,0,0.6),
+    lighter: hsl(0, 0%, 48%),
+  ),
+);
+
+$content-color-keys: ('contrast', 'body', 'widget', 'card');
+$theme-color-keys: (primary, accent, secondary, info, warning, success, danger, link);
+
+$theme-shades: () !default;
+$theme-colors: () !default;
+
+
+// spin through and add defaults for colors
+@each $name, $mapVals in $default-colors {
+  // $mapVals: map.get($default-colors, $name);
+  $color: map.get($mapVals, base);
+  $varName: colorVar($name);
+  @if list.index($theme-color-keys, $name){
+    $default-colors: map.deep-merge((
+      $name: (
+        'contrast': getContrastColor($color),
+        strong: -8%,
+        light: 8%,
+        'highlight': cssVars.highlight(var($varName))
+      )
+    ), $default-colors);
+  }
+  @else if list.index($content-color-keys, $name){
+    $default-colors: map.deep-merge((
+      $name: (
+        'contrast': getContrastColor($color)
+      )
+    ), $default-colors);
+  }
+
+}
+
+// merge in theme-colors
+$theme-colors: map.deep-merge($default-colors, $theme-colors);
+
+// @debug $theme-colors;
+
+$background: theme-color('body');
+$contrast: theme-color('contrast');
+
+// ****** SHADES *****/
+
+// shade steps for contrast
+$_bg_lightness: color.lightness($background);
+$_con_lightness: color.lightness($contrast);
+$_lightness_dif: $_con_lightness - $_bg_lightness;
+// @debug "$_lightness_dif #{$_lightness_dif}";
+$_lightness_step: $_lightness_dif * 0.1;
+
+@for $step from 1 through 10 {
+  $lightness_change: $_lightness_dif * 0.1 * $step;
+  $shadeColor:  color.adjust($background, $lightness: $lightness_change);
+  $shadeContrast: getContrastColor($shadeColor);
+  $theme-shades: map.merge((
+    "shade-#{$step}0": (
+      'contrast': $shadeContrast,
+      'lightness': $lightness_change, //change from base contrast
+      'hsl': cssVars.hslString($shadeColor)
+    )),
+    $theme-shades
+  );
+}
+// @debug $theme-shades;
+
+
+// $azure: #5B9BD1;
+// $beige: #D2BD8E;
+// $bricky: #894550;

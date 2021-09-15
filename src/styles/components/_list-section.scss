@@ -26,10 +26,6 @@ $list-item-padding: 0 $item-spacing !default;
 $list-item-action-margin: $sp-12 0 !default;
 $list-item-avatar-horizontal-margin: $list-padding-y !default;
 
-// $list-color: $text !default;
-$list-hover-color: $secondary !default;
-$list-active-color: $secondary !default;
-
 $list-dense-icon-height: $sp-24 !default;
 $list-dense-icon-margin: $list-padding-y !default;
 $list-dense-min-height: $item-dense-height !default;
@@ -108,7 +104,6 @@ $list-dense-content-padding: $list-padding-y 0 !default;
     }
 
     .item-subtitle {
-      @debug "$text-light: #{$text-light}";
       font-size: $text-sm;
       color: $text-light;
     }

@@ -12,11 +12,13 @@ const componentsStates = {
     { name: 'buttons', component: 'svelteButtonsIndex' },
     { name: 'cards', component: 'svelteCardsIndex' },
     { name: 'charts', component: 'svelteChartsIndex' },
+    { name: 'colors', component: 'svelteColorsIndex' },
     {
       name: 'forms',
       children: [
-        { name: 'simple', component: 'svelteFormSimpleIndex' },
-        { name: 'Fields', component: 'svelteFormFieldsIndex' }
+        { name: 'basic', component: 'svelteFormBasicIndex' },
+        { name: 'simple FormsLib', component: 'svelteFormsLibIndex' },
+        { name: 'list', component: 'svelteFormListIndex' }
       ]
     },
     { name: 'growlToast', component: 'svelteGrowlIndex' },

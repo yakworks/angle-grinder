@@ -1,12 +1,7 @@
 /* ------------------------------------------------------------- */
 /* Dropdown button, merger of bulma and bootstrap
 /* -------------------------------------------------------------- */
-
-@import '../utilities/caret';
-$enable-caret: true !default;
-$caret-width:  .3em !default;
-$caret-vertical-align: $caret-width * .85 !default;
-$caret-spacing:        $caret-width * .85 !default;
+@use "../tools/misc";
 
 $dropdown-item-disabled-color: $input-disabled-color !default;
 
@@ -25,7 +20,7 @@ $dropdown-item-disabled-color: $input-disabled-color !default;
 .dropdown-toggle {
   white-space: nowrap;
   // Generate the caret automatically
-  @include caret();
+  @include misc.caret();
 }
 
 // The dropdown wrapper (div)

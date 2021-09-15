@@ -1,7 +1,7 @@
 <script>
   import { onMount } from 'svelte'
   import { ApexChart } from 'angle-grinder/svelte'
-  import { themeColors, randomizeArray } from './chartHelpers'
+  import { themeColors, randomizeArray, primaryColor, secondaryColor} from './chartHelpers'
 
   // let options
   let sparklineData = [46, 44, 43, 43, 42, 42, 41, 41, 40, 40, 38, 38]
@@ -20,6 +20,7 @@
         enabled: true
       }
     },
+    colors: [themeColors.secondary],
     stroke: {
       width: [1],
       curve: 'straight'
@@ -65,7 +66,7 @@
     }
   }
 
-  options.colors = [themeColors.secondary]
+  // options.colors = ['orange','white']
   options.labels = labels
   options.series[0].data = randomizeArray(sparklineData)
   options.title.style.color = themeColors.lightText

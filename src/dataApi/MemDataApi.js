@@ -59,9 +59,12 @@ class MemDataApi {
   }
 
   //
-  async search(p) {
+  async search(p, flds) {
+    if (!p) p = {}
+    console.log("search p", p)
+    console.log("search flds", flds)
     let list = await this.data()
-    const isSearch = p._search === 'true' || p._search === true || p.q
+    const isSearch = p && (p._search === 'true' || p._search === true || p.q)
     if (isSearch) list = this.filter(list, p)
     if (p.sort) {
       const sortobj = p.sort.split(',').reduce((acc, item) => {
@@ -73,15 +76,25 @@ class MemDataApi {
       console.log('sortobj', sortobj)
       list = _.orderBy(list, sortobj.sort, sortobj.order)
     }
+    // console.log("search list", list)
+    if (flds){
+      list = list.reduce((acc, item) => {
+        acc.push(_.pick(item, flds))
+        return acc
+      }, [])
+    }
+    // console.log("search list", list)
     const paged = this.pagination(list, p)
     // console.log("query paged", paged)
     return paged
   }
 
   filter(list, params) {
+    // console.log("filter params", params)
     let flist = list
     const filters = params.filters ? JSON.parse(params.filters) : null
-    const q = params.q ? JSON.parse(params.q) : null
+    // const q = params.q ? JSON.parse(params.q) : null
+    let q = params.q;
     if (filters) {
       // const filters = JSON.parse(params.filters)
       if (filters.qSearch) {
@@ -89,26 +102,19 @@ class MemDataApi {
       } else {
         flist = this.qbe(list, filters)
       }
-    } else if (params.q) {
+    } else if (q) {
+      if (q.startsWith('{') || q.startsWith('"') || q.startsWith('[')){
+        q = JSON.parse(params.q)
+      }
       flist = _.isPlainObject(q) ? this.qbe(list, q) : this.searchAny(list, q)
+      console.log("filter q flist", flist)
     }
     return flist
   }
 
-  //
-  async picklist(params) {
-    let list = await this.data()
-    if (params) {
-      if (params.filters || params.q) list = this.filter(list, params)
-    }
-    list = list.reduce((acc, item) => {
-      acc.push(_.pick(item, this.picklistFields))
-      return acc
-    }, [])
-    // console.log('picklist list', list)
-    const paged = this.pagination(list, params)
-    // console.log('picklist paged', paged)
-    return paged
+  async picklist(p) {
+    // console.log("picklist p", p)
+    return this.search(p, this.picklistFields)
   }
 
   /** Returns a promise for the item with the given identifier */

@@ -10,7 +10,6 @@ import tilesDemoMod from './tiles'
 import listsDemoMod from './lists'
 import chartsDemoMod from './charts'
 import cardsDemoMod from './cards'
-import colorsDemoMod from './colors'
 import avatarsDemoMod from './avatars'
 // import modalsMod from './modals'
 
@@ -28,7 +27,6 @@ export default angular
     listsDemoMod,
     chartsDemoMod,
     cardsDemoMod,
-    colorsDemoMod,
     avatarsDemoMod
   ])
   .name
