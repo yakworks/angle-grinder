@@ -5356,6 +5356,18 @@ framework7-source@yakworks/framework7:
     ssr-window "^3.0.0"
     swiper "^6.8.4"
 
+framework7@^6.3.3:
+  version "6.3.3"
+  resolved "https://registry.yarnpkg.com/framework7/-/framework7-6.3.3.tgz#68d7eb0d7a494667cd8aee483bdaaef1ec1a29dc"
+  integrity sha512-4HUYGpmM5JjL7rpAvnsTCM7HANgvaD3M4Ui47uObrtcLH0o8K8oWQFwhDRdSLjS1jpxNd4UYqlaG9hmy0QU7NQ==
+  dependencies:
+    dom7 "^3.0.0"
+    htm "^3.1.0"
+    path-to-regexp "^6.2.0"
+    skeleton-elements "^3.5.0"
+    ssr-window "^3.0.0"
+    swiper "^6.8.4"
+
 free-jqgrid@4.13.3:
   version "4.13.3"
   resolved "https://registry.npmjs.org/free-jqgrid/-/free-jqgrid-4.13.3.tgz"
@@ -7311,10 +7323,10 @@ jquery-ui@^1.12.1:
   resolved "https://registry.npmjs.org/jquery-ui/-/jquery-ui-1.12.1.tgz"
   integrity sha1-vLQEXI3QU5wTS8FIjN0+dop6nlE=
 
-jquery@3.4.1:
-  version "3.4.1"
-  resolved "https://registry.npmjs.org/jquery/-/jquery-3.4.1.tgz"
-  integrity sha512-36+AdBzCL+y6qjw5Tx7HgzeGCzC81MDDgaUP8ld2zhx58HdqXGoBd+tHdrBMiyjGQs0Hxs/MLZTu/eHNJJuWPw==
+jquery@3.5.0:
+  version "3.5.0"
+  resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.5.0.tgz#9980b97d9e4194611c36530e7dc46a58d7340fc9"
+  integrity sha512-Xb7SVYMvygPxbFMpTFQiHh1J7HClEaThguL15N/Gg37Lri/qKyhRGZYzHRyLH8Stq3Aow0LsHO2O2ci86fCrNQ==
 
 jquery@>=1.12.0:
   version "3.6.0"

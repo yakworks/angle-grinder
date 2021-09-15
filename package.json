@@ -62,7 +62,7 @@
     "framework7-source": "yakworks/framework7",
     "free-jqgrid": "4.13.3",
     "highlight.js": "^10.7.2",
-    "jquery": "3.4.1",
+    "jquery": "3.5.0",
     "jquery-ui": "^1.12.1",
     "ky": "^0.20.0",
     "later": "*",
