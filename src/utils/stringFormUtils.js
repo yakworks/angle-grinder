@@ -20,7 +20,7 @@ export class StringUtility {
     if (!email) {
       return true
     }
-    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,6})+$/.test(email)) {
       return true
     }
     return false
