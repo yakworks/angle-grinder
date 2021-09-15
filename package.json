@@ -59,7 +59,7 @@
     "font-awesome": "^4.7.0",
     "framework7": "^6.3.3",
     "framework7-icons": "^5.0.3",
-    "framework7-source": "../framework7-source",
+    "framework7-source": "yakworks/framework7",
     "free-jqgrid": "4.13.3",
     "highlight.js": "^10.7.2",
     "jquery": "3.4.1",

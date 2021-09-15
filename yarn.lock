@@ -5345,20 +5345,9 @@ framework7-icons@^5.0.3:
   resolved "https://registry.npmjs.org/framework7-icons/-/framework7-icons-5.0.3.tgz"
   integrity sha512-Mt9SLdbG/b2UZUzREqcl6zEy6REsW8Rz7L66QuBGVpQEtyBZIDxYa4c5AXCdY3HEAhlyjg8xKQOi4/NyIHuIgQ==
 
-framework7-source@../framework7-source:
+framework7-source@yakworks/framework7:
   version "0.0.0"
-  dependencies:
-    dom7 "^3.0.0"
-    htm "^3.1.0"
-    path-to-regexp "^6.2.0"
-    skeleton-elements "^3.5.0"
-    ssr-window "^3.0.0"
-    swiper "^6.8.4"
-
-framework7@^6.3.3:
-  version "6.3.3"
-  resolved "https://registry.yarnpkg.com/framework7/-/framework7-6.3.3.tgz#68d7eb0d7a494667cd8aee483bdaaef1ec1a29dc"
-  integrity sha512-4HUYGpmM5JjL7rpAvnsTCM7HANgvaD3M4Ui47uObrtcLH0o8K8oWQFwhDRdSLjS1jpxNd4UYqlaG9hmy0QU7NQ==
+  resolved "https://codeload.github.com/yakworks/framework7/tar.gz/5005701db8c430383040cb78b2b3b2e31b2261ef"
   dependencies:
     dom7 "^3.0.0"
     htm "^3.1.0"
