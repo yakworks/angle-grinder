@@ -12,4 +12,4 @@ export {
   BlockTitle,
   Icon,
   Link
-} from 'framework7-source/src/svelte';
+} from 'framework7';

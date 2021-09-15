@@ -167,8 +167,10 @@ module.exports = function(env, argv) {
       new webpack.EnvironmentPlugin(['BASE_URL']),
       //if the entry is a scss such as for themes this will remove the js file that is erroniouly created, wil be fixed in webpack5
       new FixStyleOnlyEntriesPlugin(),
+
       // config this to dump to file, by defualt it opens the page that analyses what sizes take up what
-      // new BundleAnalyzerPlugin(),
+      new BundleAnalyzerPlugin(),
+
       new HtmlWebpackPlugin({
         //title: 'Custom template using lodash',
         template: `${CONTENT_PUBLIC}/index.ejs`,
