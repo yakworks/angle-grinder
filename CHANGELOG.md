@@ -1,3 +1,8 @@
+### v4.0.22
+
+[Full Changelog](https://github.com/yakworks/angle-grinder/compare/v4.0.21...v4.0.22)
+- Framework7 lists (#616) [link](https://github.com/yakworks/angle-grinder/commit/56c8afddaf32ba36857a1e1f6c49a7ef97ae6971)
+
 ### v4.0.21
 
 [Full Changelog](https://github.com/yakworks/angle-grinder/compare/v4.0.20...v4.0.21)
