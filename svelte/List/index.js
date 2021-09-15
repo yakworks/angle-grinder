@@ -7,4 +7,4 @@ export {
   ListItemRow,
   ListItem,
   List
-} from 'framework7-source/src/svelte';
+} from '../framework7';

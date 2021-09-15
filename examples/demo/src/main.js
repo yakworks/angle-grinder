@@ -30,11 +30,12 @@ import './controllers/chatCtrl'
 import './grids'
 
 // Import F7 Bundle
-import Framework7 from 'framework7/lite-bundle';
+// import Framework7 from 'framework7/lite-bundle';
+import Framework7 from 'framework7/lite';
 
 // // Import F7-Svelte Plugin
 // import Framework7Svelte from 'framework7-svelte';
-import Framework7Svelte from 'framework7-source/src/svelte';
+import Framework7Svelte from 'angle-grinder/svelte/framework7';
 
 // // Init F7-Svelte Plugin
 Framework7.use(Framework7Svelte);
