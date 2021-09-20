@@ -5356,6 +5356,18 @@ framework7-source@yakworks/framework7:
     ssr-window "^3.0.0"
     swiper "^6.8.4"
 
+framework7@^6.3.3:
+  version "6.3.4"
+  resolved "https://registry.yarnpkg.com/framework7/-/framework7-6.3.4.tgz#8733a6fbf2106057dd84623cf49d29d4969c5ebc"
+  integrity sha512-nB6LsXLMDw+USCGboC9xXvAy9E2EHGxu26gphG724Ti+LJgmMOSQmniQEfBJJYhQVBvfDlZQMj4SYbfgpuakhg==
+  dependencies:
+    dom7 "^3.0.0"
+    htm "^3.1.0"
+    path-to-regexp "^6.2.0"
+    skeleton-elements "^3.5.0"
+    ssr-window "^3.0.0"
+    swiper "^6.8.4"
+
 free-jqgrid@4.13.3:
   version "4.13.3"
   resolved "https://registry.npmjs.org/free-jqgrid/-/free-jqgrid-4.13.3.tgz"
@@ -9820,10 +9832,10 @@ pretty-format@^27.0.0, pretty-format@^27.1.1:
     ansi-styles "^5.0.0"
     react-is "^17.0.1"
 
-prismjs@^1.19.0:
-  version "1.24.1"
-  resolved "https://registry.npmjs.org/prismjs/-/prismjs-1.24.1.tgz"
-  integrity sha512-mNPsedLuk90RVJioIky8ANZEwYm5w9LcvCXrxHlwf4fNVSn8jEipMybMkWUyyF0JhnC+C4VcOVSBuHRKs1L5Ow==
+prismjs@^1.25.0:
+  version "1.25.0"
+  resolved "https://registry.yarnpkg.com/prismjs/-/prismjs-1.25.0.tgz#6f822df1bdad965734b310b315a23315cf999756"
+  integrity sha512-WCjJHl1KEWbnkQom1+SzftbtXMKQoezOCYs5rECqMN+jP+apI7ftoflyqigqzopSO3hMhTEb0mFClA8lkolgEg==
 
 process-nextick-args@~2.0.0:
   version "2.0.1"
