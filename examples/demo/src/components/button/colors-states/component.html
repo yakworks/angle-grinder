@@ -33,7 +33,8 @@
 </div>
 
 <div class="buttons has-addons ">
-  <ag-button ng-model="quickPick.states" uib-btn-radio="'all'">All</ag-button>
-  <ag-button ng-model="quickPick.states" uib-btn-radio="'open'">Open</ag-button>
-  <ag-button ng-model="quickPick.states" uib-btn-radio="'closed'">Closed</ag-button>
+  <ag-button ng-click="quickPick.states ='all' " >All</ag-button>
+  <ag-button ng-click="quickPick.states ='open' ">Open</ag-button>
+  <ag-button ng-click="quickPick.states ='closed' ">Closed</ag-button>
 </div>
+{{quickPick.states}}
