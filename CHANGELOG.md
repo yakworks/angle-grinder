@@ -1,3 +1,8 @@
+### v4.0.23
+
+[Full Changelog](https://github.com/yakworks/angle-grinder/compare/v4.0.22...v4.0.23)
+- Formatters changes (#619) [link](https://github.com/yakworks/angle-grinder/commit/90617d4895a160da034b17fc5b11780e3889989f)
+
 ### v4.0.22
 
 [Full Changelog](https://github.com/yakworks/angle-grinder/compare/v4.0.21...v4.0.22)
