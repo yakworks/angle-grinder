@@ -17,10 +17,11 @@ $.extend($.fn.fmatter, {
 
   // use `agCurrencyFilter` for format currencies, use 0 for empty/null/undefined value
   currencyOrZero(cellVal, options) {
+    let newCellVal = cellVal
     if ((typeof (cellVal) === 'undefined') || (cellVal === null) || (cellVal === 'null') || (cellVal === '')) {
-      cellVal = 0
+      newCellVal = 0
     }
-    return columnAligner('currency', window.agCurrencyFilter(cellVal), options)
+    return columnAligner('currency', newCellVal, options)
   },
 
   okIcon(cellVal, options, rowdata) {
