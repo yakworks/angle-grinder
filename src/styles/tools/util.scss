@@ -1,0 +1,60 @@
+// ------
+// Module: General helper functions
+// dont import, access with @use "..util"
+// ------
+
+@use "sass:color";
+@use "sass:string";
+
+//access with @use
+
+// replace substring with another string
+// credits: https://css-tricks.com/snippets/sass/str-replace-function/
+@function replace($string, $search, $replace: '') {
+  $index: string.index($string, $search);
+  @if $index {
+    @return string.slice($string, 1, $index - 1) + $replace + replace(string.slice($string, $index + string.length($search)), $search, $replace);
+  }
+  @return $string;
+}
+
+@function split($string, $separator) {
+  $i: string.index($string, $separator);
+  @if $i != null {
+    @return join(
+      string.slice($string, 1, $i - 1),
+      split(string.slice($string, $i + string.length($separator)), $separator)
+    );
+  }
+  @return $string;
+}
+
+//check for empty values
+@function isTruthy($value) {
+  @if not $value
+      or $value == ""
+      or $value == 0
+      or $value == ()
+      or length($value) == 0 {
+    @return false;
+  }
+  @return true;
+}
+
+//check for empty values
+@function isEmpty($value) {
+  @if not isTruthy($value){
+    @return true;
+  }
+  @return false;
+}
+
+//check for empty values and show error message if its not
+@function validate($value, $msg) {
+  @if not isTruthy($value) {
+    @error $msg;
+    @return false;
+  }
+  @return true;
+}
+

@@ -60,9 +60,16 @@ clean:
 start.demo:
 	npx webpack-dev-server --mode=development --content-base ./examples/demo
 
-## starts the demo app
+start.svelte:
+	npx webpack-dev-server --content-base ./examples/svelte
+
+## builds the demo app
 build.demo:
 	npx rimraf dist && npx webpack --mode=production --content-base ./examples/demo
+
+build.ag:
+	npx rimraf dist && npx webpack --mode=production --content-base .
+
 
 run.build:
 	cd dist && python -m SimpleHTTPServer 8090 & npx webpack-dev-server --content-base ./examples/demo

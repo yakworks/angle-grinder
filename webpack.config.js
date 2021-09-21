@@ -8,11 +8,14 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const FixStyleOnlyEntriesPlugin = require("webpack-fix-style-only-entries")
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const apiMocker = require('mocker-api');
 //const HtmlWebpackExcludeAssetsPlugin = require('html-webpack-exclude-assets-plugin')
 //const ThemesGeneratorPlugin = require('themes-switch/ThemesGeneratorPlugin')
 //const CleanWebpackPlugin = require('clean-webpack-plugin')
 const path = require("path");
+
+const { preprocess } = require('./svelte.config');
 
 module.exports = function(env, argv) {
 
@@ -44,25 +47,34 @@ module.exports = function(env, argv) {
       publicPath: '/'
     },
     optimization: {
-      minimize: false,
+      //minimize: false,
       chunkIds: "named",
       moduleIds: 'hashed', //makes it so the vendor chunks are cached and not rebuilt everytime
       splitChunks: {
         cacheGroups: {
           //default: false,
           //vendors: false,
-          jquery: {
-            test: /[\\/]node_modules[\\/](jquery|free-jqgrid|Select2|moment|toastr|sweetalert|eonasdan).*\.js/,
-            chunks: "all",
-            name: `jquery-libs${minDescriptor}`,
-            priority: 20, //A module can belong to multiple cache groups. The optimization will prefer the cache group with a higher priority
-            enforce: true //says to always build chunk and ignore min/max size stuff
-          },
+          // styles: {
+          //   name: 'styles',
+          //   // type: 'css/mini-extract',
+          //   // For webpack@4
+          //   test: /\.css$/,
+          //   chunks: 'all',
+          //   enforce: true,
+          //   priority: 30
+          // },
+          // jquery: {
+          //   test: /[\\/]node_modules[\\/](jquery|free-jqgrid|Select2|moment|toastr|sweetalert|eonasdan).*\.js/,
+          //   chunks: "all",
+          //   name: `jquery-libs${minDescriptor}`,
+          //   priority: 20, //A module can belong to multiple cache groups. The optimization will prefer the cache group with a higher priority
+          //   enforce: true //says to always build chunk and ignore min/max size stuff
+          // },
           vendor: {
             //test: /node_modules[\\/].*\.js/,
             test: /node_modules/,
             chunks: "all",
-            name: `vendor-libs${minDescriptor}`,
+            name: `vendor${minDescriptor}`,
             priority: 10, //lower priority so it won't pick up jquery
             enforce: true
           }
@@ -72,6 +84,22 @@ module.exports = function(env, argv) {
     module: {
       rules: [
         { test: /\.js$/, loader: 'babel-loader', exclude: /(node_modules|bower_components)/},
+        {
+          test: /\.tsx?$/,
+          use: 'ts-loader',
+          exclude: /node_modules/,
+        },
+        {
+          test: /\.svelte$/,
+          use: {
+            loader: 'svelte-loader',
+            options: {
+              emitCss: true,
+              hotReload: true,
+              preprocess
+            }
+          }
+        },
         {
           test: /\.(scss|css|sass)$/,
           //exclude: /themes\/.+\.scss$/,
@@ -83,13 +111,25 @@ module.exports = function(env, argv) {
             { loader: 'postcss-loader', options: { sourceMap: true } },
             { loader: 'sass-loader',
               options: {
+                // Prefer `dart-sass`
+                implementation: require("sass"),
                 sourceMap: true,
                 sassOptions: {
+                  quietDeps: true, // dont show warnings for sass dependencies
                   outputStyle: 'expanded' //'compressed', //try expanded too
                 }
               }
             }
           ]
+        },
+        {
+          // less is back, not really, but we need it for Framework7
+          test: /\.less$/i,
+          use: [
+            { loader: styleLoader },
+            { loader: "css-loader", options: { sourceMap: true } },
+            { loader: "less-loader", options: { sourceMap: true } }
+          ],
         },
         {
           // Load all images as base64 encoding if they are smaller than 8192 bytes
@@ -127,6 +167,10 @@ module.exports = function(env, argv) {
       new webpack.EnvironmentPlugin(['BASE_URL']),
       //if the entry is a scss such as for themes this will remove the js file that is erroniouly created, wil be fixed in webpack5
       new FixStyleOnlyEntriesPlugin(),
+
+      // config this to dump to file, by defualt it opens the page that analyses what sizes take up what
+      // new BundleAnalyzerPlugin(),
+
       new HtmlWebpackPlugin({
         //title: 'Custom template using lodash',
         template: `${CONTENT_PUBLIC}/index.ejs`,
@@ -147,12 +191,12 @@ module.exports = function(env, argv) {
 
       ),
       new MiniCssExtractPlugin({
-        moduleFilename: ({ name }) => {
-          return /theme/.test(name) ? `assets/theme/${name.replace('theme-','')}.css` : `assets/${name}.css`
-          //return `${prefix}/${name}.css`
-        },
-        //filename: 'assets/[name].css',
-        allChunks: true
+        // moduleFilename: ({ name }) => {
+        //   return /theme/.test(name) ? `assets/theme/${name.replace('theme-','')}.css` : `assets/${name}.css`
+        //   //return `${prefix}/${name}.css`
+        // },
+        filename: 'assets/[name].css',
+        // allChunks: true
       }),
       // new ThemesGeneratorPlugin({
       //   srcDir: `${CONTENT_BASE}/src`,
@@ -170,12 +214,21 @@ module.exports = function(env, argv) {
     bail: true, //Fail out on the first error --bail
     //profile: false //list info on whats going on
 
+    externals: {
+      $: "jquery",
+      jQuery: "jquery",
+      "window.jQuery": "jquery"
+    },
     resolve: {
       //extensions: ['.js', '.vue', '.json'],
       alias: {
         'angle-grinder': path.resolve('./'),
+        svelte: path.resolve('node_modules', 'svelte'),
         //Components: path.resolve(__dirname, "..", "src", "components"),
-      }
+      },
+      extensions: ['.tsx', '.ts', '.mjs', '.js', '.svelte'],
+      mainFields: ['svelte', 'browser', 'module', 'main']
+
     }
   }
   if(isProd){

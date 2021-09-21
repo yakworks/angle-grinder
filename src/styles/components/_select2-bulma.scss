@@ -1,4 +1,3 @@
-@import '~Select2/select2.css';
 
 $select2-height: 32px;
 $select2-font-size: 14px;
@@ -10,7 +9,7 @@ $select2-font-size: 14px;
   color: $input-color;
 }
 
-@mixin delete-icon ($delSize: $size-normal) {
+@mixin delete-icon ($delSize: $text-base) {
   @extend %delete;
   background-image: none !important;
   position: absolute;
@@ -22,7 +21,7 @@ $select2-font-size: 14px;
   width: $delSize;
   border-radius: $delSize;
   top: 50%;
-  margin-top: -($delSize/2);
+  margin-top: -($delSize * .5);
   margin-right: 5px;
 }
 
@@ -132,7 +131,7 @@ $select2-font-size: 14px;
     position: absolute;
     right: 0px;
     //top: 50%;
-    margin-top: $icoSize/2;
+    margin-top: $icoSize * .5;
     margin-right: .625em;
     z-index: 4;
     color: $input-arrow;
@@ -366,7 +365,7 @@ $select2-font-size: 14px;
 .select2-results {
   .select-all-menu {
     color: $link;
-    font-size: $size-10;
+    font-size: $text-xxs;
   }
   .select-all, .clear-all{
     padding: 4px;

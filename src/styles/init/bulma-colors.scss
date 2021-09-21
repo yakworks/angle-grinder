@@ -1,0 +1,256 @@
+/* ---------------------------------------------------------------------- */
+/* Keep colors here with any Bulma overrides, midway down we run derived-variables from Bulma
+/* see initial-variables for base overrides
+/* ---------------------------------------------------------------------- */
+// TODO https://blog.maximeheckel.com/posts/the-power-of-composition-with-css-variables/
+
+@use "sass:map";
+@use "../tools/cssVars";
+
+$primary: cvar(primary) !default;
+$accent: cvar(accent) !default;
+$secondary: cvar(secondary) !default;
+$info: cvar(info) !default;
+$warning: cvar(warning) !default;
+$success: cvar(success) !default;
+$danger: cvar(danger) !default;
+// // $danger-color:hsl(2, 65%,  58%) !default;
+$link: cvar(link) !default;
+
+$background: cvar(body);
+$contrast: cvar(contrast);
+
+$scheme-main: cvar(body) !default;
+$scheme-main-bis: cvar(body, low) !default; // white-grey
+$scheme-main-ter: cvar(body, lower) !default; // white-greyer
+$scheme-invert: cvar(contrast)  !default; //black
+$scheme-invert-bis: cvar(contrast, low) !default; //black-grey
+$scheme-invert-ter: cvar(contrast, lower) !default; //black-greyer
+
+// Bulma's text colors
+$text: cvar(text)  !default;
+$text-invert: cvar(body)  !default;
+$text-light: cvar(text,light)  !default;
+$text-lighter: cvar(text, lighter) !default;
+$text-strong: cvar(text, strong)  !default;
+
+// borders
+$border: cvar(shade,20) !default;
+$border-hover: cvar(shade,30) !default;
+$border-light: cvar(shade,10) !default;
+$border-light-hover: cvar(shade,30) !default;
+
+
+// $accent: #797bf2;
+
+
+// --- Link colors are used all over Bulma---
+
+$link: cvar(link);
+$link-invert: cvar(link,contrast);
+// $link-light: findLightColor($link) !default;
+// $link-dark: findDarkColor($link) !default;
+
+$link-hover: cvar(shade,40) !default;
+$link-hover-border: cvar(shade,50)!default;
+$link-focus: cvar(shade,50)  !default;
+$link-focus-border: cvar(link) !default;
+$link-active: cvar(shade, 50)  !default;
+$link-active-border: cvar(shade,60)  !default;
+
+//** From huro **/
+// FIXME replace these, here for now as it get things working
+$fade-grey: #ededed;
+$muted-grey: #999;
+
+// $colors_list : ("primary", "secondary", "accent", "link", "info", "success", "danger", "warning");
+
+$colors_from_theme: () !default;
+
+@function create_bulma_color_list($color, $contrastVar) {
+  // @debug "invert var #{$contrastVar}";
+  $list: (
+    cvar($color),
+    cvar($contrastVar),
+    cvar($color, 'highlight'),
+    cvar($color, strong)
+  );
+  @return $list;
+}
+
+@each $color in $theme-color-keys {
+  $props: map.get($theme-colors, $color);
+  $colorList: create_bulma_color_list($color, map.get($props, 'contrast'));
+  $map: ();
+  $map: map-merge($map, ($color: $colorList ) );
+  $colors_from_theme: map-merge($colors_from_theme, $map);
+}
+
+// more get added to this in Bulma's derived-variables.
+// bulma spins through these and setups up classes prefixed with is.
+// so this essentially sets up so we have a 'is-lighter' css class availiable for cards, toolbars etc
+$custom-colors: null !default;
+
+// override Bulma's colors in derived-variables
+$colors: map.deep-merge((
+  "white": ($white, $black),
+  "black": ($black, $white),
+  // "light": ($scheme-main-ter, $scheme-invert-bis),
+  // "dark": ($dark, $dark-invert),
+  // "lighter": ($scheme-main-bis, $scheme-invert-bis), //we add these and they are not normally part of bulma
+  ), $colors_from_theme
+) !default;
+
+// override Bulma's shades in derived-variables
+$custom-shades: null !default;
+$black:        hsl(0, 0%, 4%) !default;
+$black-bis:    hsl(0, 0%, 7%) !default;
+$black-ter:    hsl(0, 0%, 14%) !default;
+
+$grey-darker:  cvar(shade, 80) !default;
+$grey-dark: cvar(shade, 70)   !default;
+$grey:     cvar(shade, 50)     !default;
+$grey-light:   cvar(shade, 30) !default;
+$grey-lighter: cvar(shade, 20) !default;
+$grey-lightest: cvar(shade, 10) !default;
+
+$white-ter:    hsl(0, 0%, 96%) !default;
+$white-bis:    hsl(0, 0%, 98%) !default;
+$white:        hsl(0, 0%, 100%) !default;
+
+// bulmas defaults, not sure we need these
+$shades: mergeColorMaps((
+  "black-bis": $black-bis,
+  "black-ter": $black-ter,
+  "grey-darker": $grey-darker,
+  "grey-dark": $grey-dark,
+  "grey": $grey,
+  "grey-light": $grey-light,
+  "grey-lighter": $grey-lighter,
+  "white-ter": $white-ter,
+   "white-bis": $white-bis), $custom-shades) !default;
+
+// Effects
+// $shadow: 0 0.5em 1em -0.125em rgba($scheme-invert, 0.1), 0 0px 0 1px rgba($scheme-invert, 0.02) !default
+$shadow: 0px 4px 16px cssVars.alpha(cvar(contrast), 0.12) !default;
+
+//*** element and control colors
+$icon-default-color: $text-light !default;
+
+// side nav
+$sidenav-background-color: cvar(primary) !default; //ends up as sidebar default
+$sidenav-font-color: cvar(primary, contrast) !default;
+$sidenav-nav-active-color: cvar(secondary) !default;
+$sidenav-nav-hover-color: $sidenav-nav-active-color !default;
+$sidenav-overlay-background-color: cssVars.alpha(cvar(primary), 0.2) !default;
+$list-hover-color: cvar(secondary) !default;
+$list-active-color: cvar(secondary) !default;
+
+// hamburger
+$hamburger-color: cvar(secondary);
+
+//toolbar
+$toolbar-item-color: $text !default;
+$toolbar-color-secondary: cvar(secondary) !default;
+$toolbar-icon-color: $icon-default-color !default;
+$toolbar-fixed-a-color: #444F60 !default;
+
+//**** bulma/form/shared.sass  ****/
+// $form-colors: $colors !default
+
+// $input-color: $text-strong !default
+$input-background-color: cvar(body) !default;
+$input-border-color: $border !default;
+// $input-height: $control-height !default
+// $input-shadow: inset 0 0.0625em 0.125em rgba($scheme-invert, 0.05) !default
+// $input-placeholder-color: bulmaRgba($input-color, 0.3) !default
+
+// $input-hover-color: $text-strong !default
+// $input-hover-border-color: $border-hover !default
+
+// $input-focus-color: $text-strong !default
+// $input-focus-border-color: $link !default
+// $input-focus-box-shadow-size: 0 0 0 0.125em !default
+// $input-focus-box-shadow-color: bulmaRgba($link, 0.25) !default
+
+// $input-disabled-color: $text-light !default
+// $input-disabled-background-color: $background !default
+// $input-disabled-border-color: $background !default
+// $input-disabled-placeholder-color: bulmaRgba($input-disabled-color, 0.3) !default
+
+// $input-arrow: $link !default
+$input-arrow: cvar(primary) !default;
+
+// $input-icon-color: $border !default
+// $input-icon-active-color: $text !default
+
+//---------------------------
+// $input-border-color: $border !default
+// $input-color: $text-strong !default
+// $input-focus-border-color:  #66afe9 !default//BS = $input-border-focus
+// $input-focus-border-color: $link !default
+// $input-focus-box-shadow-color: rgba(red($ifoc-color), green($ifoc-color), blue($ifoc-color), .6);
+// $input-focus-box-shadow-size: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px;
+// $input-arrow: $primary !default
+// $input-shadow: inset 0 0.0625em 0.125em rgba($scheme-invert, 0.05) !default
+// $input-placeholder-color: rgba($input-color, 0.3) !default
+// $input-icon-color: $border !default
+// $input-icon-active-color: $text !default
+
+//*** bulma/elements/button.sass colors ****/
+// $button-color: $text-strong !default
+// $button-background-color: $scheme-main !default
+$button-background-color: cvar(body, low) !default;
+// $button-family: false !default
+
+$button-border-color: $border !default;
+// $button-border-width: $control-border-width !default
+
+// $button-padding-vertical: calc(0.5em - #{$button-border-width}) !default
+// $button-padding-horizontal: 1em !default
+
+$button-hover-color: inherit !default;
+$button-hover-border-color: $border-hover !default;
+
+$button-focus-color: inherit !default;
+// $button-focus-border-color: $link-focus-border !default
+$button-focus-border-color: $button-border-color !default;
+// $button-focus-box-shadow-size: 0 0 0 0.125em !default
+// $button-focus-box-shadow-color: bulmaRgba($link, 0.25) !default
+
+// $button-active-color: $link-active !default
+// $button-active-border-color: $link-active-border !default
+
+// $button-text-color: $text !default
+// $button-text-decoration: underline !default
+// $button-text-hover-background-color: $background !default
+// $button-text-hover-color: $text-strong !default
+
+// $button-ghost-background: none !default
+// $button-ghost-border-color: transparent !default
+// $button-ghost-color: $link !default
+// $button-ghost-decoration: none !default
+// $button-ghost-hover-color: $link !default
+// $button-ghost-hover-decoration: underline !default
+
+// $button-disabled-background-color: $scheme-main !default
+// $button-disabled-border-color: $border !default
+// $button-disabled-shadow: none !default
+// $button-disabled-opacity: 0.5 !default
+
+// $button-static-color: $text-light !default
+// $button-static-background-color: $scheme-main-ter !default
+// $button-static-border-color: $border !default
+
+// $button-colors: $colors !default
+
+//** Cards
+$card-background-color: cvar(card) !default;
+$card-shadow: $shadow !default;
+// $card-radius: 0.25rem !default
+$card-radius: $radius-large !default;
+$card-border-color: $border !default;
+$card-hr-color: $card-border-color !default;
+
+// ** datepicker
+$dp-input-in-edit-border-color: $blue;

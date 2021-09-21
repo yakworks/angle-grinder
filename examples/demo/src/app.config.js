@@ -1,8 +1,9 @@
-import angular from 'angular'
+// import angular from 'angular'
 import _ from 'lodash'
 import appName from './app.module'
 import './config.router'
 import appState from 'angle-grinder/src/tools/AppState'
+import {setConfig} from 'angle-grinder/src/tools/AppConfig'
 import {setClientConfig} from "../../../src/dataApi/ky";
 
 const app = angular.module(appName)
@@ -53,4 +54,19 @@ app.run(function($rootScope, $state, $stateParams) {
     // eslint-disable-next-line no-undef
     prefixUrl: configData.base_url
   })
+
+  const conf = {
+    controls: {
+      ranges: {
+        fromField: {
+          name: '$gt'
+        },
+        toField: {
+          name: '$lt'
+        }
+      }
+    }
+  }
+
+    setConfig(conf)
 })

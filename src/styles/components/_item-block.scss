@@ -1,0 +1,135 @@
+/* ------------------------------------------------------------- */
+/* List (material-ish)
+/* https://material.io/components/lists/#specs
+/* https://material.io/design/layout/spacing-methods.html#spacing
+/* -------------------------------------------------------------- */
+
+// sizes
+// $list-item-margin: 16px;
+//$list-item-with-icon-height: 56px;
+// $list-icon-margin-right
+// 16 + 24 + 16 + 16 = 72px
+// $list-has-children-indent: $item-spacing + $icon-dimensions + $item-spacing + $item-spacing; //72px
+
+// base padding size that everything is a multiple of. based on materials layout
+
+// $list-content-padding-y: $sp-12 !default;
+
+// $list-item-icon-margin-y: $item-spacing !default;
+// $list-item-icon-negative-margin: $icon-button-negative-margin !default;
+
+// $list-item-two-line-min-height: $sp-64 !default;
+// $list-item-three-line-min-height: $sp-88 !default;
+
+// ---
+
+$item-block-padding: 0 $item-spacing !default;
+$item-block-min-height: 3em !default;
+$item-action-margin: $sp-12 0 !default;
+$item-padding-y: $item-spacing * 0.5 !default; // 8px
+$item-content-padding-y: $sp-12 !default;
+$item-content-first-child-margin: $item-spacing !default;
+
+$item-icon-negative-margin: $icon-button-negative-margin !default;
+
+$item-dense-min-height: $item-dense-height !default;
+$item-dense-icon-height: $sp-24 !default;
+$item-dense-icon-margin: $item-padding-y !default;
+$item-dense-content-padding: $item-padding-y 0 !default;
+
+.item-block {
+
+  position: relative;
+  display: flex;
+  align-items: center;
+  // padding: $item-block-padding;
+  text-decoration: none;
+  // color: $list-color;
+  min-height: $item-block-min-height;
+  flex-grow: 1;
+
+  .item-action {
+    align-self: center;
+    margin: $item-action-margin;
+  }
+
+  .item-avatar {
+    margin-bottom: $item-padding-y;
+    margin-top: $item-padding-y;
+  }
+
+  .item-icon {
+    margin-bottom: $item-padding-y + 4px;
+    margin-top: $item-padding-y + 4px;
+  }
+
+  .button.is-icon-button:last-child  {
+    margin-right: $item-icon-negative-margin;
+  }
+
+  .item-action, .item-avatar, .item-icon {
+    display: inline-flex;
+    min-width: 24px;
+
+    &:first-child{
+      margin-right: $item-content-first-child-margin;
+    }
+
+    // &:last-of-type:not(:only-child){
+    //   margin-left: $item-padding-y;
+    // }
+  }
+
+  .item-title, .item-subtitle {
+    line-height: 1.25;
+    align-self: center;
+    // font-size: 1rem;
+    flex: 1 1 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .item-title.item-label {
+    font-size: $text-xs;
+    color: $text-light;
+    font-weight: $weight-semibold;
+  }
+
+  .item-subtitle {
+    font-size: $text-sm;
+    color: $text-light;
+  }
+
+  .item-content {
+    align-items: center;
+    align-self: center;
+    display: flex;
+    flex-wrap: wrap;
+    flex: 1 1;
+    overflow: hidden;
+    padding: $item-content-padding-y 0;
+  }
+}
+
+.is-dense {
+  .item-block {
+    min-height: $item-dense-min-height;
+  }
+  .item-icon {
+    height: $item-dense-icon-height;
+    margin-top: $item-dense-icon-margin;
+    margin-bottom: $item-dense-icon-margin;
+  }
+  .item-content {
+    padding: $item-dense-content-padding;
+  }
+  .item-title {
+    font-size: $text-sm;
+  }
+  .item-action {
+    height: $item-dense-icon-height;
+    margin-top: $item-dense-icon-margin;
+    margin-bottom: $item-dense-icon-margin;
+  }
+}

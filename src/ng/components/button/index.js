@@ -2,6 +2,7 @@
 import { getIconClass } from '../../../utils/icon'
 
 class Controller {
+  /* @ngInject */
   constructor($element, $transclude) {
     this.$element = $element
     // this.$transclude = $transclude
@@ -21,6 +22,10 @@ class Controller {
     if (this.icon) {
       this.btnCls = `${this.btnCls} is-icon-button`
       this.iconSolo = this.icon
+    }
+    if (this.fab === '' || this.fab === 'true') {
+      this.btnCls = `${this.btnCls} is-fab`
+      this.isFab = true
     }
     this.setupIconClass('iconSolo')
     this.setupIconClass('iconLeft')
@@ -56,6 +61,7 @@ export default () => ({
   scope: {
     buttonClass: '@',
     color: '@',
+    fab: '@',
     iconLeft: '@',
     iconRight: '@',
     iconSolo: '@',

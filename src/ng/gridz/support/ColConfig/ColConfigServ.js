@@ -13,6 +13,7 @@ class ColumnConfigCtrl {
     visible: []
   }
 
+  /* @ngInject */
   constructor($uibModalInstance, gridCtrl) {
     this.$uibModalInstance = $uibModalInstance
     this.gridCtrl = gridCtrl

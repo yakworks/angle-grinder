@@ -1,3 +1,54 @@
+### v4.0.22
+
+[Full Changelog](https://github.com/yakworks/angle-grinder/compare/v4.0.21...v4.0.22)
+- Framework7 lists (#616) [link](https://github.com/yakworks/angle-grinder/commit/56c8afddaf32ba36857a1e1f6c49a7ef97ae6971)
+
+### v4.0.21
+
+[Full Changelog](https://github.com/yakworks/angle-grinder/compare/v4.0.20...v4.0.21)
+- Range configs (#615) [link](https://github.com/yakworks/angle-grinder/commit/4d6ef80740281683c4f4fbfe28bdc94a97213715)
+
+### v4.0.20
+
+[Full Changelog](https://github.com/yakworks/angle-grinder/compare/v4.0.19...v4.0.20)
+- Merge pull request #613 from yakworks/612-email-validation-for-larger-root-domains [link](https://github.com/yakworks/angle-grinder/commit/a102a5f689b904b6beaf5b4207a3d4cf79c3b871)
+- Email root domains can now be up to 6 characters. [link](https://github.com/yakworks/angle-grinder/commit/0ffd23066617ba2f515124edef148d00ee1f4cb1)
+
+### v4.0.19
+
+[Full Changelog](https://github.com/yakworks/angle-grinder/compare/v4.0.18...v4.0.19)
+- base line implementing some of framework7 (#611) [link](https://github.com/yakworks/angle-grinder/commit/d8d86a8281e95aa3c4c52d0a3b55676c52cb10b1)
+
+### v4.0.18
+
+[Full Changelog](https://github.com/yakworks/angle-grinder/compare/v4.0.17...v4.0.18)
+- Svelte components and dart sass (#610) [link](https://github.com/yakworks/angle-grinder/commit/3bd1e0f00aebeca6987a38c8621b34870b888c76)
+
+### v4.0.17
+
+[Full Changelog](https://github.com/yakworks/angle-grinder/compare/v4.0.16...v4.0.17)
+- Updated deps in package.json (#608) [link](https://github.com/yakworks/angle-grinder/commit/d6bb64b030b3ec9acb4c3fc4179c60088bc350f5)
+
+### v4.0.16
+
+[Full Changelog](https://github.com/yakworks/angle-grinder/compare/v4.0.15...v4.0.16)
+- version got scrambled, fixing [link](https://github.com/yakworks/angle-grinder/commit/130d4404b24ec8574f965eeb843fe2f80fc1726b)
+
+### v4.0.14
+
+[Full Changelog](https://github.com/yakworks/angle-grinder/compare/v4.0.13...v4.0.14)
+- Pages and Svelte Examples (#606) [link](https://github.com/yakworks/angle-grinder/commit/a9fecf067eccc516185082404a9f7ac89f1c2311)
+
+### v4.0.13
+
+[Full Changelog](https://github.com/yakworks/angle-grinder/compare/v4.0.12...v4.0.13)
+- Fixed gridId when it is build based on dataApiKey with / (#607) [link](https://github.com/yakworks/angle-grinder/commit/c814fa12eb782ec81bf95f85f2f2d89d168ece8b)
+
+### v4.0.12
+
+[Full Changelog](https://github.com/yakworks/angle-grinder/compare/v4.0.11...v4.0.12)
+- Minify fix (#605) [link](https://github.com/yakworks/angle-grinder/commit/01051426b9d13b7a66e5331facd96e6cf1479ad8)
+
 ### v4.0.11
 
 [Full Changelog](https://github.com/yakworks/angle-grinder/compare/v4.0.10...v4.0.11)

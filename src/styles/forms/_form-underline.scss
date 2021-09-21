@@ -6,7 +6,7 @@
   select,
   input {
     height: $input-height;
-    font-size: $size-normal;
+    font-size: $text-base;
     line-height: $control-line-height;
     background: none !important;
     background-image: none !important;
@@ -15,7 +15,7 @@
     border-left: none !important;
     border-right: none !important;
     border-radius: 0 0 0 0 !important;
-    color: $text-dark !important;
+    color: $text-strong!important;
     font-family: inherit !important;
     transition-duration: 0.1s !important;
     box-shadow: none !important;

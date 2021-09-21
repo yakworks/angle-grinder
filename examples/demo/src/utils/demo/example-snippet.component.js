@@ -20,7 +20,7 @@ class controller {
   }
 
   $onInit() {
-    this.direction = !_.isUndefined(this.isHorizontal) ? 'is-horizontal' : 'is-vertical'
+    this.direction = !_.isUndefined(this.isHorizontal) ? 'is-vertical' : 'is-horizontal'
   }
 
   $postLink() {

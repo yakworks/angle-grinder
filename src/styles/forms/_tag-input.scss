@@ -1,5 +1,6 @@
+@use "../tools/cssVars";
 
-$danger-border: rgba($danger, 0.40);
+$danger-border: cssVars.alpha($danger, 0.40);
 
 .ng-submitted .field.ng-invalid .tag-input.input {
   border-color: $danger-border;
@@ -30,7 +31,7 @@ $danger-border: rgba($danger, 0.40);
     padding-bottom: 4px;
     border: 0 !important;
     box-shadow: none !important;
-    font-size: $size-14;
+    font-size: $text-sm;
     flex-grow: 1;
     flex-basis: 0;
     flex-shrink: 1;

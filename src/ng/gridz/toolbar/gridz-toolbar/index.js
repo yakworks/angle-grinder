@@ -28,6 +28,7 @@ class Controller {
     showQuickSearch: true
   }
 
+  /* @ngInject */
   constructor($element, $compile, $scope) {
     this.$element = $element
     this.$compile = $compile

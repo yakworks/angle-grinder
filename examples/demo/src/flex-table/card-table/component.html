@@ -1,0 +1,86 @@
+<h1 class="title is-5"> Responsive Flex Table </h1>
+
+<div class="columns">
+  <div class="column is-12">
+
+    <div class="flex-table">
+
+      <!--Table header-->
+      <div class="flex-table-header">
+        <span class="is-grow">User</span>
+        <span>Location</span>
+        <span>Industry</span>
+        <span>Status</span>
+        <span>Relations</span>
+        <span class="cell-end">Actions</span>
+      </div>
+
+      <!--Table item-->
+      <div ng-repeat="item in ::$ctrl.peopleData" class="flex-table-item">
+        <div class="flex-table-cell is-media is-grow" data-th="User">
+          <div class="avatar is-medium">
+            <img class="avatar-img" src="/assets/images/photos/{{item.avatar}}" alt="">
+          </div>
+          <div>
+            <span class="item-name">{{item.name}}</span>
+            <span class="item-meta">
+              <span>{{item.title}}</span>
+            </span>
+          </div>
+        </div>
+        <div class="flex-table-cell" data-th="Location">
+          <span class="light-text">{{item.location}}</span>
+        </div>
+        <div class="flex-table-cell" data-th="Industry">
+          <span class="light-text">Software</span>
+        </div>
+        <div class="flex-table-cell" data-th="Status">
+          <span class="tag is-success is-rounded">Online</span>
+        </div>
+        <div class="flex-table-cell" data-th="Relations">
+          <div class="avatar-img-stack is-pushed-mobile">
+            <div class="avatar is-small">
+              <img class="avatar-img" src="https://via.placeholder.com/150x150"
+                data-demo-src="assets/img/avatars/photos/7.jpg" alt="">
+            </div>
+            <div class="avatar is-small">
+              <span class="avatar-img is-letter is-info">
+                <span>JD</span>
+              </span>
+            </div>
+            <div class="avatar is-small">
+              <img class="avatar-img" src="https://via.placeholder.com/150x150"
+                data-demo-src="assets/img/avatars/photos/12.jpg" alt="">
+            </div>
+            <div class="avatar is-small">
+              <span class="avatar-img is-more">
+                <span class="inner">
+                  <span>+2</span>
+                </span>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="flex-table-cell cell-end" data-th="Actions">
+        </div>
+      </div>
+
+    </div><!-- flex-table -->
+
+    <!--Table Pagination-->
+    <nav class="flex-pagination pagination is-rounded" aria-label="pagination">
+      <a class="pagination-previous">Previous</a>
+      <a class="pagination-next">Next</a>
+      <ul class="pagination-list">
+        <li><a class="pagination-link" aria-label="Goto page 1">1</a></li>
+        <li><span class="pagination-ellipsis">&hellip;</span></li>
+        <li><a class="pagination-link" aria-label="Goto page 45">45</a></li>
+        <li><a class="pagination-link is-current" aria-label="Page 46" aria-current="page">46</a></li>
+        <li><a class="pagination-link" aria-label="Goto page 47">47</a></li>
+        <li><span class="pagination-ellipsis">&hellip;</span></li>
+        <li><a class="pagination-link" aria-label="Goto page 86">86</a></li>
+      </ul>
+    </nav>
+
+  </div>
+</div>

@@ -1,4 +1,4 @@
-import angular from 'angular'
+// import angular from 'angular'
 import { packet, fresh, login } from './routerStates'
 import appState from 'angle-grinder/src/tools/AppState'
 import stateHelperInit from 'angle-grinder/src/ng/uirouter/stateHelperInit'

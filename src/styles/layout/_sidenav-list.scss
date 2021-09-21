@@ -1,0 +1,126 @@
+/* ------------------------------------------------------------- */
+/* List (material-ish)
+/* https://material.io/components/lists/#specs
+/* https://material.io/design/layout/spacing-methods.html#spacing
+/* -------------------------------------------------------------- */
+
+// sizes
+// $list-item-margin: 16px;
+// $list-item-with-icon-height: 56px;
+// $list-icon-margin-right
+// 16 + 24 + 16 + 16 = 72px
+// $list-has-children-indent: $item-spacing + $icon-dimensions + $item-spacing + $item-spacing; //72px
+
+$list-color: $text !default;
+
+.sidenav-list {
+  position: relative;
+}
+
+.sidenav-list .list-item-set {
+  margin: 0;
+  padding: 0;
+  // max-width: 400px;
+  list-style: none;
+  list-style-type: none;
+  // font-family: "Open Sans", sans-serif !important;
+}
+
+.sidenav-list .list-item-set .list-item {
+  position: relative;
+
+  .item-content {
+    display: flex;
+    align-items: center;
+    //padding: 1em 1em;
+    padding-left: $item-spacing;
+    text-decoration: none;
+    color: $list-color;
+    min-height: $item-min-height;
+
+    &:hover {
+      // padding: 20px 25px;
+      text-decoration: none;
+      color: $list-hover-color;
+    }
+
+    .icon {
+      margin-top: $item-spacing; //16px
+      margin-bottom: $item-spacing; //16px
+      margin-right: $item-spacing * 2; //32px
+      i.mdi {
+        padding: 1px;
+        font-size: calc(#{$icon-dimensions} - 2px); //22px
+        text-align: center;
+      }
+      i.fa, i.far, i.fas, i.fal, i.fad {
+        padding: 1px;
+        font-size: calc(#{$icon-dimensions} - 4px); //22px
+        text-align: center;
+      }
+    }
+    // list item content, don't wrap and hide overflow
+    > .item-title {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      flex-grow: 1;
+    }
+  }
+}
+
+.sidenav-list .list-item-set .list-item.has-children {
+  // dropdown arrow
+  > .item-content::after {
+    @extend %arrow;
+    z-index: 4;
+    transform: rotate(-135deg);
+    transition: all 0.5s;
+    // border-color: $white;
+    border-color: $primary;
+    right: 1.25rem;
+    top: 1.875em;
+  }
+
+  // dropdown arrow animation
+  &.is-open {
+    > .item-content::after {
+      border-color: $list-active-color;
+      transform: rotate(-45deg);
+      top: 1.75em;
+    }
+  }
+
+  // active children
+  &.is-active {
+    > .item-content .item-title, .icon {
+      color: $list-active-color;
+    }
+  }
+
+  // first child item group
+  > .list-item-set{
+    display: none;
+  }
+
+  // submenu list item children
+  .list-item-set {
+    padding: 0px;
+
+    .list-item {
+      .item-content {
+        color: $white;
+        padding-left: 72px;
+        font-size: 1rem;
+
+        &.is-active {
+          color: $list-active-color;
+        }
+        &:hover {
+          color: $primary;
+        }
+      }
+    }
+  } // sub .list-item-set
+} // .list-item.has-children
+

@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en" data-ng-app="app">
+<html lang="en" data-ng-app="app" ng-strict-di class="aurora device-desktop">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -14,9 +14,11 @@
     <title data-ng-bind="pageTitle()"><%= htmlWebpackPlugin.options.title %></title>
 
     <!-- Google fonts -->
-    <link href="http://fonts.googleapis.com/css?family=Lato:300,400,400italic,600,700|Raleway:300,400,500,600,700|Crete+Round:400italic" rel="stylesheet" type="text/css" />
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet" /> -->
+    <!-- <link href="http://fonts.googleapis.com/css?family=Lato:300,400,400italic,600,700|Raleway:300,400,500,600,700|Crete+Round:400italic" rel="stylesheet" type="text/css" /> -->
+    <!-- <link href="http://fonts.googleapis.com/css?family=Lato:300,400,400italic,600,700|Raleway:300,400,500,600,700|Crete+Round:400italic" rel="stylesheet" type="text/css" /> -->
     <!-- Material icons https://materialdesignicons.com/-->
-    <link href="https://cdn.materialdesignicons.com/5.0.45/css/materialdesignicons.min.css" rel="stylesheet">
+    <!-- <link href="https://cdn.materialdesignicons.com/5.0.45/css/materialdesignicons.min.css" rel="stylesheet"> -->
 
     <!-- doing in manually so we can exclude the theme css and make sure it runs before theme switcher -->
     <% htmlWebpackPlugin.files.css.forEach( function(name){
@@ -24,20 +26,14 @@
         <link rel="stylesheet" href="<%= name %>">
     <% }}) %>
 
+    <% for (var jsfile in htmlWebpackPlugin.files.js) { %>
+      <script defer src="<%= htmlWebpackPlugin.files.js[jsfile]%>"></script>
+    <% } %>
+
     <!-- <link rel="stylesheet" data-ng-href="assets/theme/{{ app.layout.theme }}.css" /> -->
     <script src="<%= htmlWebpackPlugin.options.configPath %>"></script>
 </head>
-<body ng-controller="AppCtrl as $appCtrl">
-    <!-- <div ui-view id="app" class="lyt-2"
-    ng-class="{
-      'app-mobile' : $appCtrl.isMobile,
-      'app-navbar-fixed' : $appCtrl.layout.isNavbarFixed,
-      'app-sidebar-fixed' : $appCtrl.layout.isSidebarFixed,
-      'app-sidebar-open': appState.sidenav.open,
-      'app-sidebar-closed': !appState.sidenav.open,
-      'app-footer-fixed':$appCtrl.layout.isFooterFixed
-    }">
-    </div> -->
+<body ng-controller="AppCtrl as $appCtrl" [ng-strict-di="boolean"]>
     <div ui-view id="app" ng-class="{
       'app-sidebar-fixed' : $appCtrl.layout.isSidebarFixed,
       'app-sidenav-fixed' : $appCtrl.layout.isSidebarFixed,
@@ -46,9 +42,6 @@
       'app-sidenav-open': appState.sidenav.open,
       'app-sidenav-closed': !appState.sidenav.open
     }"></div>
-    <% for (var jsfile in htmlWebpackPlugin.files.js) { %>
-    <script src="<%= htmlWebpackPlugin.files.js[jsfile]%>"></script>
-    <% } %>
 
 </body>
 </html>

@@ -60,23 +60,23 @@
 <ag-select name="agSelect" label="Multi" ng-model="$ctrl.vm.agColors"
   select-options="{ multiple: true, closeOnSelect: false, useDataObject:false, data: $ctrl.colorData}"></ag-select>
 <p>id only</p>
-<ag-select name="fooId" ng-model="$ctrl.vm.fooId" required
-  select-options="{data: $ctrl.fooData}">
+<ag-select name="userId" ng-model="$ctrl.vm.userId" required
+  select-options="{data: $ctrl.peopleData}">
 </ag-select>
 <p>using ag-select component useDataObject:true on single select</p>
-<ag-select ng-model="$ctrl.vm.foo" required
-  select-options="{ useDataObject:true, data: $ctrl.fooData}">
+<ag-select ng-model="$ctrl.vm.user" required
+  select-options="{ useDataObject:true, data: $ctrl.peopleData}">
 </ag-select>
 <p>useDataObject:true by default on multiple </p>
-<ag-select ng-model="$ctrl.vm.fooList" required hint="showSelectAll:true"
-  select-options="{multiple: true, closeOnSelect: false, data: $ctrl.fooData, showSelectAll:true}">
+<ag-select ng-model="$ctrl.vm.userList" required hint="showSelectAll:true"
+  select-options="{multiple: true, closeOnSelect: false, data: $ctrl.peopleData, showSelectAll:true}">
 </ag-select>
 <ag-select ng-model="$ctrl.vm.addonButton" hint="this is a hint"
-  select-options="{useDataObject: true, multiple: true, closeOnSelect: false, data: $ctrl.fooData}">
+  select-options="{useDataObject: true, multiple: true, closeOnSelect: false, data: $ctrl.peopleData}">
   <ag-button icon-left="fa-search" color="addon">Search</ag-button>
 </ag-select>
 <ag-select ng-model="$ctrl.vm.addonLink"
-  select-options="{useDataObject: true, multiple: true, closeOnSelect: false, data: $ctrl.fooData}">
+  select-options="{useDataObject: true, multiple: true, closeOnSelect: false, data: $ctrl.peopleData}">
   <a class="button is-addon">Test Link</a>
 </ag-select>
 <div class="form-group">

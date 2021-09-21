@@ -1,0 +1,39 @@
+// tailwind-ish text class
+@each $name, $pair in $font-sizes {
+  $f-size: nth($pair, 1);
+  // $l-height: nth($pair, 2);
+  .#{$name}{
+    font-size: $f-size !important;
+    // line-height: $l-height;
+  }
+}
+
+.font-light{
+  font-weight: 300;
+}
+.font-normal{
+  font-weight: 400;
+}
+.font-medium{
+  font-weight: 500;
+}
+.font-semibold{
+  font-weight: 600;
+}
+.font-bold{
+  font-weight: 700 !important;
+}
+.font-extrabold{
+  font-weight: 800;
+}
+.font-black{
+  font-weight: 900;
+}
+
+// font-light	font-weight: 300;
+// font-normal	font-weight: 400;
+// font-medium	font-weight: 500;
+// font-semibold	font-weight: 600;
+// font-bold	font-weight: 700;
+// font-extrabold	font-weight: 800;
+// font-black	font-weight: 900;

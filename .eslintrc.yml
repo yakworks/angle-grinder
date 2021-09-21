@@ -6,17 +6,23 @@ env:
   amd: true
 plugins:
   - angular
+  - svelte3
+  - prettier
 extends:
-  - standard
-parser: "babel-eslint"
+  - prettier
+  # - standard
+parser: "@babel/eslint-parser"
 parserOptions:
-  ecmaVersion: 2018
+  ecmaVersion: 2020
   sourceType: module
 ignorePatterns:
   - "coverage/"
   - "node_modules/"
   - "webpack*.*"
 rules:
+  quotes: 0
+  semi: 0
+  comma-dangle: 0
   no-return-assign: 0
   no-useless-escape: 0
   space-before-blocks: 0

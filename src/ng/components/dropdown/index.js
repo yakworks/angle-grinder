@@ -5,6 +5,7 @@ import _ from 'lodash'
 const DEFAULT_MENU_DISPLAY = 'Action'
 
 class Controller {
+  /* @ngInject */
   constructor($element) {
     this.$element = $element
   }

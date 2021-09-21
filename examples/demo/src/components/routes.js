@@ -1,8 +1,9 @@
 const componentsStates = {
-  name: 'components',
+  name: 'ngComponents',
   abstract: true,
-  template: '<div ui-view class="fade-in-up"></div>',
+  // template: '<div ui-view class="fade-in-up"></div>',
   data: {
+    title: 'ng Components',
     icon: 'fas fa-plug'
   },
   // data: { title: 'Grids'},
@@ -10,6 +11,10 @@ const componentsStates = {
   //   label: 'Grids'
   // },
   children: [
+    {
+      name: 'avatars',
+      component: 'avatarDemoIndex'
+    },
     {
       name: 'buttons',
       component: 'buttonDemoIndex'
@@ -25,10 +30,6 @@ const componentsStates = {
     {
       name: 'charts',
       component: 'chartsDemoIndex'
-    },
-    {
-      name: 'colors',
-      component: 'colorsDemoIndex'
     },
     {
       name: 'contextMenu',
@@ -61,10 +62,6 @@ const componentsStates = {
         title: 'Tiles & Cards'
       },
       component: 'tilesCardsIndex'
-    },
-    {
-      name: 'toast',
-      template: require('./toast/toast.html')
     },
     {
       name: 'toolbar',

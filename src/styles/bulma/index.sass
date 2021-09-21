@@ -14,7 +14,10 @@
 // It replaces @import "~bulma/sass/utilities/_all.sass ****
 
 // -- sass/base/_all ---
-@import "~bulma/sass/base/_all.sass"
+// @import "~bulma/sass/base/_all.sass"
+@import "~bulma/sass/base/minireset"
+@import "~bulma/sass/base/generic"
+@import "~bulma/sass/base/animations"
 
 // == Elements
 // @import "sass/elements/_all"
@@ -29,7 +32,7 @@
 // @import "progress.sass"
 // @import "table.sass"
 @import "~bulma/sass/elements/tag.sass"
-// @import "title.sass"
+@import "~bulma/sass/elements/title.sass"
 @import "~bulma/sass/elements/other.sass"
 
 // == Form
@@ -55,17 +58,17 @@ $dropdown-content-offset: 0 !default
 // @import "message.sass"
 // @import "modal.sass"
 // @import "navbar.sass"
-// @import "pagination.sass"
+@import "~bulma/sass/components/pagination.sass"
 // @import "panel.sass"
-@import "~bulma/sass/components/tabs.sass";
+@import "~bulma/sass/components/tabs.sass"
 
 // == Grid
-@import "~bulma/sass/grid/_all.sass";
+@import "~bulma/sass/grid/_all.sass"
 
 // == Helpers
-@import "~bulma/sass/helpers/_all.sass";
+@import "~bulma/sass/helpers/_all.sass"
 
 // == Layout
 // @import "sass/layout/_all"
 // copied in title as without a better specifier it conflicts with them
-@import "_title.sass";
+@import "_title.sass"

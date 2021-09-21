@@ -6,9 +6,8 @@ import ngAnimate from 'angular-animate'
 import ngSanitize from 'angular-sanitize'
 import ngLoadingBar from 'angular-loading-bar'
 import 'angular-breadcrumb'
-import vButton from 'v-button'
+// import vButton from 'v-button'
 import filtersModule from '../filters'
-import alertsMod from './alerts'
 import uiRouter from 'angular-ui-router'
 
 import _ from 'lodash'
@@ -24,10 +23,9 @@ var common = angular.module(MOD_NAME, [
   ngLoadingBar,
   uiRouter,
   'ncy-angular-breadcrumb',
-  vButton,
+  // vButton,
   ngScroll, // Scroll
-  filtersModule,
-  alertsMod
+  filtersModule
 ])
 
 // Decorates `$http.pendingRequests` with some useful features

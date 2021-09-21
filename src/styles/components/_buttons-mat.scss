@@ -12,14 +12,14 @@
 // $button-focus-box-shadow-size: 0 0 0 0.2rem !default;
 // $button-focus-border-color: $grey-light !default;
 // $button-focus-box-shadow-color: $grey-light !default;
-
+@use "../tools/cssVars";
 /* yak ui - added variables */
-$button-font-size: $size-normal !default;
+$button-font-size: $text-base !default;
 $button-font-weight: $weight-medium !default;
-$button-height: $size-40 !default; //40px
+$button-height: $text-xl * 2 !default; //40px
 
-$button-icon-size: $size-20 !default;
-$button-icon-solo-size: $size-24 !default;
+$button-icon-size: $text-xl !default;
+$button-icon-solo-size: $text-xxl !default;
 $button-icon-button-size: $button-height !default;
 
 $shadow2:  0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
@@ -61,15 +61,18 @@ $shadow-large: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 
     box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
   }
 
-  &.is-icon-button {
+  &.is-icon-button:not(.is-fab){
     color: $icon-default-color;
     border-width: 0px;
+    background-color: transparent;
+    box-shadow: none;
+  }
+
+  &.is-icon-button {
     width: $button-icon-button-size;
     min-width: $button-icon-button-size;
     padding: 0;
     border-radius: 50%;
-    background-color: transparent;
-    box-shadow: none;
 
     .icon {
       &.is-solo, &.is-solo:last-child  {
@@ -91,18 +94,18 @@ $shadow-large: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 
     &:first-child:not(:last-child),
     &.is-first-child{
       margin-left: $margin-calc;
-      margin-right: $button-padding-horizontal / 4;
+      margin-right: $button-padding-horizontal * .25;
     }
     &:last-child:not(:first-child),
     &.is-last-child  {
-      margin-left: $button-padding-horizontal / 4;
+      margin-left: $button-padding-horizontal * .25;
       margin-right: $margin-calc;
     }
     &:first-child:last-child,
     &.is-solo, &.is-solo:last-child  {
       // $margin-calc: calc(#{-1 * ($button-icon-button-size - $button-icon-solo-size)} + #{$button-border-width});
       // this is hacky and will not work if sizes are messed with, makes it a 40x40 with neg margin
-      $margin-calc: calc(-#{$size-10} + #{$button-border-width});
+      $margin-calc: calc(-#{$text-xxs} + #{$button-border-width});
       margin-left: $margin-calc;
       margin-right: $margin-calc;
       @include iconSize($button-icon-solo-size);
@@ -127,16 +130,16 @@ $shadow-large: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 
       }
       // change ripple background based on color
       .ag-ripple {
-        background-color: rgba( $color-invert, .4)
+        background-color: cssVars.alpha( $color-invert, .4)
       }
       // icon buttons have the icon as the color and tranparent background
-      &.is-icon-button {
+      &.is-icon-button:not(.is-fab) {
         color: $color;
         background-color: transparent;
         box-shadow: none;
         &.is-hovered,
         &:hover {
-          background-color: rgba($color, .4)
+          background-color: cssVars.alpha($color, .4)
         }
 
         &.is-active, &.active,
@@ -160,23 +163,28 @@ $shadow-large: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 
 
   // default ripple background
   .ag-ripple {
-    background-color: rgba( $button-color, .4)
+    background-color: cssVars.alpha( $button-color, .4)
   }
 
   // Sizes
   &.is-small {
     border-radius: $radius-small;
-    font-size: $size-small;
+    font-size: $text-xs;
   }
   &.is-normal {
-    font-size: $size-14;
+    font-size: $text-sm;
   }
   &.is-medium {
-    font-size: $size-normal;
+    font-size: $text-base;
   }
   &.is-large {
-    font-size: $size-normal;
+    font-size: $text-base;
   }
+}
+
+.button.is-fab {
+  @include elevation(6);
+  z-index: 3;
 }
 
 // [ag-ripple] {
@@ -191,13 +199,27 @@ $shadow-large: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 
   transform: scale(0);
 }
 .ag-ripple.animate {
-  animation: ripple 0.5s linear;
+  animation: ripple-normal 0.7s;
 }
 @keyframes ripple {
   100% {
     opacity: 0;
     transform: scale(2.5);
   }
+}
+
+@keyframes ripple-normal {
+	to {
+		transform: scale(2.5);
+		opacity: 0;
+	}
+}
+
+@keyframes ripple-centered {
+	to {
+		transform: scale(1);
+		opacity: 0;
+	}
 }
 
 /* when inside field controls make them same height as the control */

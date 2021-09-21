@@ -69,7 +69,7 @@ $example-border: $yellow;
   .codeview {
     border-top: 1px solid $example-border;
   }
-  &.is-vertical {
+  &.is-horizontal {
     @include desktop {
       flex-direction: row;
       .example-component,

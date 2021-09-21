@@ -2,9 +2,6 @@
 toolbar overrides
 ========================================================================== */
 
-//$toolbar-item-color: #999;
-$toolbar-icon-color: $toolbar-item-color !default;
-$toolbar-fixed-a-color: #444F60 !default;
 $toolbar-icon-button-size: 3rem !default;
 //$toolbar-icon-size: 22px !default;
 
@@ -20,7 +17,7 @@ $toolbar-icon-button-size: 3rem !default;
   }
 
   .toolbar-title {
-    font-size: $size-large
+    font-size: $text-xxl
   }
 
   // Responsive menu icon
@@ -55,7 +52,7 @@ $toolbar-icon-button-size: 3rem !default;
 
     &.is-secondary {
       &:hover {
-        color: $secondary !important;
+        color: $toolbar-color-secondary !important;
       }
     }
 
@@ -78,7 +75,7 @@ $toolbar-icon-button-size: 3rem !default;
         top: 3.4rem;
         min-width: 220px;
         margin-top: 4px;
-        border-top-color: $secondary;
+        border-top-color: $toolbar-color-secondary;
 
         .toolbar-item {
           padding: 10px 20px;
@@ -87,10 +84,10 @@ $toolbar-icon-button-size: 3rem !default;
 
       &:hover {
         .toolbar-link {
-          color: $secondary;
+          color: $toolbar-color-secondary;
 
           &:after {
-            border-color: $secondary;
+            border-color: $toolbar-color-secondary;
           }
         }
       }
@@ -117,7 +114,7 @@ $toolbar-icon-button-size: 3rem !default;
       color: $toolbar-fixed-a-color;
 
       &:hover {
-        color: $primary;
+        color: $toolbar-color-secondary;
       }
     }
   }

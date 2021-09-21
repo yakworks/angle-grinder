@@ -1,0 +1,108 @@
+// --------------------------------
+
+// (START) Global editor code https://codyhouse.co/ds/globals/colors
+@use "sass:color";
+@use "sass:string";
+@use "sass:map";
+@use "sass:list";
+@use "../tools/cssVars";
+
+// :root {
+//   --ion-color-primary: #3880ff;
+//   --ion-color-primary-rgb: 56,128,255;
+//   --ion-color-primary-contrast: #ffffff;
+//   --ion-color-primary-contrast-rgb: 255,255,255;
+//   --ion-color-primary-shade: #3171e0;
+//   --ion-color-primary-tint: #4c8dff;
+
+//   --ion-color-secondary: #3dc2ff;
+//   --ion-color-secondary-rgb: 61,194,255;
+//   --ion-color-secondary-contrast: #ffffff;
+//   --ion-color-secondary-contrast-rgb: 255,255,255;
+//   --ion-color-secondary-shade: #36abe0;
+//   --ion-color-secondary-tint: #50c8ff;
+
+//   --ion-color-tertiary: #5260ff;
+//   --ion-color-tertiary-rgb: 82,96,255;
+//   --ion-color-tertiary-contrast: #ffffff;
+//   --ion-color-tertiary-contrast-rgb: 255,255,255;
+//   --ion-color-tertiary-shade: #4854e0;
+//   --ion-color-tertiary-tint: #6370ff;
+// }
+:root, [data-theme="default"] {
+
+  // text
+  $textMap: map.get($theme-colors, 'text');
+
+  @include declareCssVar(colorVar('text'), #{map.get($textMap, 'base')});
+
+  @each $name in (light, lighter, strong, stronger) {
+    $varName: colorVar('text', $name);
+    @include declareCssVar($varName, #{map.get($textMap, $name)});
+  }
+
+  // $colorKinds: (contrast, light, strong, stronger, 'lighter');
+  $excludeKinds: ('highlight');
+  // main
+  @each $name, $props in $theme-colors {
+
+    $baseVarName: colorVar($name);
+
+    @each $kind, $colorVal in $props {
+
+      @if $kind == base {
+        // main color
+        @include declareColorVar($name, $colorVal);
+      }
+      @else if not list.index($excludeKinds, $kind){
+        $varName: colorVar($name, $kind);
+        //if its a color then just set it
+
+        @if type-of($colorVal) == 'color' {
+          $colorVal: cssVars.hslString($colorVal);
+        }
+        @else if type-of($colorVal) == 'number' {
+          //assume it a percent and adjust off base
+          $colorVal: cssVars.adjustLightness($baseVarName, $colorVal );
+        }
+        @else {
+          //its a refernce to another variable so just wrap it
+          $colorVal: var($colorVal)
+        }
+        // !! here is the fincal css setting
+        @include declareCssVar($varName, $colorVal);
+      }
+    }
+
+    @if map.has-key($props, 'highlight') {
+      @include declareCssVar(#{$baseVarName}-highlight, map.get($props, 'highlight'));
+    }
+
+  }
+
+  // black + white
+  @include declareColorVar(black,hsl( 240, 8%, 12%));
+  @include declareColorVar(white, hsl(0, 0%, 100%));
+
+  // @debug $colors
+  @each $name, $props in $theme-shades {
+    $hslVal: map.get($props, 'hsl');
+    $contrast: map.get($props, 'contrast');
+    $varName: colorVar($name);
+    @include declareCssVar($varName, $hslVal);
+  }
+
+
+}
+
+@supports(--css: variables) {
+  [data-theme="dark"] {
+
+  }
+}
+
+// --------------------------------
+
+// (END) Global editor code
+
+// --------------------------------

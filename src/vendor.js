@@ -16,7 +16,7 @@ require('bootstrap-sass/assets/javascripts/bootstrap/dropdown')
 require('free-jqgrid/js/jquery.jqgrid.src')
 
 require('Select2/select2')
-require('moment')
+// require('moment')
 require('later/later')
 require('perfect-scrollbar')
 // require('toastr/toastr.js')

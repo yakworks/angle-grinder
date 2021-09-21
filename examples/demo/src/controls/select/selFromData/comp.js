@@ -1,6 +1,6 @@
 import template from './comp.html'
+import { colors, days } from '../../../data/sample'
 
-/* @ngInject */
 class controller {
   vm = {
     singleColor: 'blue',
@@ -53,7 +53,7 @@ class controller {
     { id: 3, name: 'Option 3' }
   ]
 
-  colorData = ['red', 'blue', 'yellow']
+  colorData = colors
 
   singleColorOpts = {
     // useDataObject: false,
@@ -107,7 +107,7 @@ class controller {
     this.vm = {}
   }
 }
-
+controller.$inject = ['localStoreApi']
 const COMP = 'demoSelDataInput'
 export default angular.module(`ag.demo.${COMP}`, [])
   .component(COMP, { template, controller }).name

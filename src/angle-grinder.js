@@ -4,12 +4,12 @@ import agCommon from './ng/common'
 import filtersMod from './ng/filters'
 import agCompMod from './ng/components'
 import agControlsMod from './ng/controls'
-// import legacyMod from './ng/legacy'
 import gridz from './ng/gridz'
 import agPathWithContext from './ng/pathWithContext'
 import agSidebar from './ng/sidebar/sidebars'
 import agSidenav from './ng/sidenav'
 import uiRouterStateHelper from './ng/uirouter/stateHelper'
+import growl from './tools/growl'
 
 // foo
 var agmod = angular.module('angleGrinder', [
@@ -19,7 +19,6 @@ var agmod = angular.module('angleGrinder', [
   filtersMod,
   agPathWithContext,
   gridz,
-  // legacyMod,
   agCompMod,
   agControlsMod,
   agSidebar,
@@ -49,7 +48,7 @@ agmod.service('dataStoreApi', function() {})
 
 // Intercepts all HTTP errors and displays a flash message
 agmod.factory('httpErrorsInterceptor', [
-  '$injector', '$q', 'alerts', function($injector, $q, alerts) {
+  '$injector', '$q', function($injector, $q) {
     return {
       response: function(response) {
         return response
@@ -66,7 +65,7 @@ agmod.factory('httpErrorsInterceptor', [
 
         // ..skip validation and auth errors
         if (response.status !== 422 && response.status !== 401) {
-          alerts.error(errorMessage)
+          growl.error(errorMessage)
           return $q.reject(response)
         }
         return $q.reject(response)
@@ -76,71 +75,9 @@ agmod.factory('httpErrorsInterceptor', [
 ])
 
 // Catch all jquery xhr errors
-agmod.run(function($log, alerts) {
+agmod.run(function($log) {
   return $(document).ajaxError(function(event, jqxhr, settings, exception) {
     $log.error('Network error:', event, jqxhr, settings, exception)
-    return alerts.error(exception)
+    return growl.error(exception)
   })
-}
-)
-
-agmod.controller('MainCtrl', function($scope, $http, uiGridConstants) {
-  var paginationOptions = {
-    pageNumber: 1,
-    pageSize: 25,
-    sort: null
-  }
-
-  $scope.gridOptions = {
-    paginationPageSizes: [25, 50, 75],
-    paginationPageSize: 25,
-    useExternalPagination: true,
-    useExternalSorting: true,
-    columnDefs: [
-      { name: 'name' },
-      { name: 'gender', enableSorting: false },
-      { name: 'company', enableSorting: false }
-    ],
-    onRegisterApi: function(gridApi) {
-      $scope.gridApi = gridApi
-      $scope.gridApi.core.on.sortChanged($scope, function(grid, sortColumns) {
-        if (sortColumns.length === 0) {
-          paginationOptions.sort = null
-        } else {
-          paginationOptions.sort = sortColumns[0].sort.direction
-        }
-        getPage()
-      })
-      gridApi.pagination.on.paginationChanged($scope, function(newPage, pageSize) {
-        paginationOptions.pageNumber = newPage
-        paginationOptions.pageSize = pageSize
-        getPage()
-      })
-    }
-  }
-
-  var getPage = function() {
-    var url
-    switch (paginationOptions.sort) {
-      case uiGridConstants.ASC:
-        url = '/data/100_ASC.json'
-        break
-      case uiGridConstants.DESC:
-        url = '/data/100_DESC.json'
-        break
-      default:
-        url = '/data/100.json'
-        break
-    }
-
-    $http.get(url)
-      .success(function(data) {
-        $scope.gridOptions.totalItems = 100
-        var firstRow = (paginationOptions.pageNumber - 1) * paginationOptions.pageSize
-        $scope.gridOptions.data = data.slice(firstRow, firstRow + paginationOptions.pageSize)
-      })
-  }
-
-  getPage()
-}
-)
+})
