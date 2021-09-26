@@ -73,7 +73,8 @@ angular.module(grid2Mod).directive('gridz',
         toolbarOptions: '<',
         gridId: '@',
         gridOptions: '<',
-        listCtrl: '<'
+        listCtrl: '<',
+        formatters: '<'
       },
       template: `\
       <div class="gridz-wrapper">

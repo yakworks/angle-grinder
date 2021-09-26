@@ -13,6 +13,7 @@ const template = `
   <gridz ng-if="$ctrl.isConfigured" grid-options="$ctrl.cfg.gridOptions"
         toolbar-options="$ctrl.cfg.gridOptions.toolbarOptions"
         grid-id="{{$ctrl.gridId()}}"
+        formatters="$ctrl.formatters"
         list-ctrl="$ctrl">
   </gridz>
 </div>
@@ -30,6 +31,7 @@ class ListCtrl extends BaseListCtrl {
     if (this.initSearch) {
       this.searchModel = { ...this.initSearch, ...this.searchModel }
     }
+    console.log('>>>>>>>>',this)
     super.doConfig()
   }
 

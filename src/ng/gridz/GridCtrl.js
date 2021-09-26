@@ -49,12 +49,12 @@ export default class GridCtrl {
     }
     gridEl.on('jqGridSelectRow', onSelect)
     gridEl.on('jqGridSelectAll', onSelect)
-
     gridzInit.setupColModel(gridOptions)
     gridzInit.setupCtxMenu(this, gridOptions)
     gridzInit.setupDataLoader(this, gridOptions)
     gridzInit.setupGridCompleteEvent(this, gridEl, gridOptions)
     gridzInit.setupFormatters(this, gridEl, gridOptions)
+    gridzInit.setupCustomFormatters(this, this.formatters || {}, gridOptions)
   }
 
   // $postLink() {

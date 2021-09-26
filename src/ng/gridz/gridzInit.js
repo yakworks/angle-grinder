@@ -102,7 +102,11 @@ export function setupFormatters(gridCtrl, gridEl, options) {
     window.location.href += (window.location.href.endsWith('/') ? '' : '/') + id
   })
 }
-
+export function setupCustomFormatters(gridCtrl, formatters, options) {
+  options.colModel.forEach((col, i) => {
+    if (col.formatter && _.isString(col.formatter) && formatters[col.formatter]) col.formatter = formatters[col.formatter].bind(gridCtrl)
+  })
+}
 /**
  * transforms colModel, setups default label, etc
  */
@@ -117,5 +121,6 @@ export default {
   setupDataLoader,
   setupGridCompleteEvent,
   setupFormatters,
+  setupCustomFormatters,
   setupColModel
 }
