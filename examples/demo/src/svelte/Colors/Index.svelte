@@ -17,7 +17,8 @@
     'info',
     'success',
     'danger',
-    'warning'
+    'warning',
+    'gray'
   ]
 
 
@@ -67,15 +68,23 @@
 
 
 <div class="columns is-gapless">
-  {#each Array(9) as _, i}
+  {#each Array(10) as _, i}
   <div class="column">
-    <div class="notification text-shade-{i+1}0-contrast bg-shade-{i+1}0">
-      contrast-{i+1}0
+    <div class="notification text-shade-{(i+1)*5}-contrast bg-shade-{(i+1)*5}">
+      shade-{(i+1)*5}
     </div>
   </div>
   {/each}
 </div>
-
+<div class="columns is-gapless">
+  {#each Array(10) as _, i}
+  <div class="column">
+    <div class="notification text-shade-{(i+10)*5}-contrast bg-shade-{(i+10)*5}">
+      shade-{(i+10)*5}
+    </div>
+  </div>
+  {/each}
+</div>
 
 <div class="columns is-gapless">
   {#each colors as color}

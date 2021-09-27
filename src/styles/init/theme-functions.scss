@@ -11,6 +11,7 @@
 // @use "../tools/cssVars";
 // @use "../tools/stringify";
 
+
 $color-var-prefix: --color;
 
 @function theme-color($key: 'primary', $variant: 'base') {
@@ -45,9 +46,10 @@ $color-var-prefix: --color;
 
 @function cvar($key, $kind: '') {
   //if it starts with -- then just return it
-  @if str-index($key, "--") == 1{
-    @return var(#{$key})
+  @if str-index($key, "--") == 1 {
+    @return var(#{$key});
   }
+  // use theme-shade and theme-color to run the validations
   @if $key == shade {
     $_: theme-shade($kind);
   } @else {

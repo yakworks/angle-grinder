@@ -163,7 +163,7 @@ $shadow-large: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 
 
   // default ripple background
   .ag-ripple {
-    background-color: cssVars.alpha( $button-color, .4)
+    background-color: cssVars.alpha( cvar(text) , .2)
   }
 
   // Sizes

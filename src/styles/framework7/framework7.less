@@ -34,26 +34,28 @@
 @rtl: false;
 
 // Core
+// needs to come from framework7 not source because it has the font built into it
 @import '~framework7/components/app/app.less';
 // @import './components/statusbar/statusbar.less';
 // @import './components/view/view.less';
 // @import './components/page/page.less';
-@import '~framework7/components/link/link.less';
+@import '~framework7-source/src/core/components/link/link.less';
 // @import './components/navbar/navbar.less';
 // @import './components/toolbar/toolbar.less';
-@import '~framework7/components/toolbar/toolbar.less';
+@import '~framework7-source/src/core/components/toolbar/toolbar.less';
 // @import './components/subnavbar/subnavbar.less';
-@import '~framework7/components/block/block.less';
-@import '~framework7/components/list/list.less';
-@import '~framework7/components/badge/badge.less';
+@import '~framework7-source/src/core/components/block/block.less';
+@import '~framework7-source/src/core/components/list/list.less';
+@import '~framework7-source/src/core/components/badge/badge.less';
 // @import './components/button/button.less';
-@import '~framework7/components/touch-ripple/touch-ripple.less';
+@import '~framework7-source/src/core/components/touch-ripple/touch-ripple.less';
 @import '~framework7/components/icon/icon.less';
-@import '~framework7/components/modal/modal.less';
+@import '~framework7-source/src/core/components/modal/modal.less';
 
 //IMPORT_COMPONENTS
-@import '~framework7/components/card/card.less';
+@import '~framework7-source/src/core/components/card/card.less';
 // @import 'card-vars.less';
-@import '~framework7/components/input/input.less';
-@import '~framework7/components/calendar/calendar.less';
-@import '~framework7/components/popover/popover.less';
+//use the one from source as we fix the padding there on the base input elements
+@import '~framework7-source/src/core/components/input/input.less';
+@import '~framework7-source/src/core/components/calendar/calendar.less';
+@import '~framework7-source/src/core/components/popover/popover.less';

@@ -35,8 +35,8 @@ $text-lighter: cvar(text, lighter) !default;
 $text-strong: cvar(text, strong)  !default;
 
 // borders
-$border: cvar(shade,20) !default;
-$border-hover: cvar(shade,30) !default;
+$border: cvar(shade,15) !default;
+$border-hover: cvar(shade,25) !default;
 $border-light: cvar(shade,10) !default;
 $border-light-hover: cvar(shade,30) !default;
 
@@ -163,7 +163,7 @@ $input-background-color: cvar(body) !default;
 $input-border-color: $border !default;
 // $input-height: $control-height !default
 // $input-shadow: inset 0 0.0625em 0.125em rgba($scheme-invert, 0.05) !default
-// $input-placeholder-color: bulmaRgba($input-color, 0.3) !default
+$input-placeholder-color: cssVars.alpha( cvar(text), .3) !default;
 
 // $input-hover-color: $text-strong !default
 // $input-hover-border-color: $border-hover !default
@@ -198,7 +198,7 @@ $input-arrow: cvar(primary) !default;
 // $input-icon-active-color: $text !default
 
 //*** bulma/elements/button.sass colors ****/
-// $button-color: $text-strong !default
+$button-color: $text-strong !default;
 // $button-background-color: $scheme-main !default
 $button-background-color: cvar(body, low) !default;
 // $button-family: false !default

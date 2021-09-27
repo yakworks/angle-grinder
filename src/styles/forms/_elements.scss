@@ -45,20 +45,3 @@ select {
   border: 1px solid $input-border-color;
   border-radius: $control-radius;
 }
-
-// unset for list
-.list {
-  input[type="text"],
-  input[type="email"],
-  input[type="tel"],
-  input[type="search"],
-  input[type="url"],
-  input[type="password"],
-  input[type="checkbox"],
-  textarea, select{
-    border: none;
-    border-radius: 0
-  }
-}
-
-
