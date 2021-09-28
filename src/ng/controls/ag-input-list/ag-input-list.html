@@ -5,7 +5,7 @@
   <div class="field mb-0" ng-class="{'has-addons': $ctrl.hasTranscluded}">
     <div class="control" ng-class="{'is-expanded': $ctrl.hasTranscluded}">
       <div class='tag-input input tags' >
-        <span class="tag is-light" ng-repeat="tag in $ctrl.tagArray() track by $index">
+        <span class="tag bg-body-lower" ng-repeat="tag in $ctrl.tagArray() track by $index">
           {{tag}}
           <button class="delete is-small" ng-click='$ctrl.deleteTag($index)'></button>
         </span>

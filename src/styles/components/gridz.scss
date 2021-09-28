@@ -181,11 +181,18 @@ $grid-border: $border;
       padding: 1px 8px !important;
       line-height: normal;
       display: inline-block !important;
+      border: 1px solid $input-border-color;
+      background-color: $input-background-color;
+      border-radius: $input-radius;
     }
     input.ui-pg-input {
       width: 22px;
       font-size: 12px !important;
       padding: 1px 4px !important;
+      display: inline-block;
+      border: 1px solid $input-border-color;
+      background-color: $input-background-color;
+      border-radius: $input-radius;
     }
 
   }
@@ -450,16 +457,28 @@ $grid-border: $border;
   filter: Alpha(Opacity=35)
 }
 
-.ui-icon-seek-next {
-  background-position: -32px -160px
-}
+.ui-jqgrid .ui-pg-table .ui-pg-button {
 
-.ui-icon-seek-end {
-  background-position: -64px -160px
-}
+  display: inline-block;
+  font: normal normal normal 24px/1 "Material Design Icons";
+  font-size: 1rem;
+  text-rendering: auto;
+  line-height: inherit;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 
-.ui-icon-seek-prev {
-  background-position: -48px -160px
+  .ui-icon-seek-next::before {
+    content: "\f0142";
+  }
+  .ui-icon-seek-end::before {
+    content: "\f0601";
+  }
+  .ui-icon-seek-prev::before  {
+    content: "\f0141";
+  }
+  .ui-icon-seek-first::before  {
+    content: "\f0600";
+  }
 }
 
 .ui-icon-seek-first, .ui-icon-seek-start {

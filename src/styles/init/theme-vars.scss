@@ -18,6 +18,8 @@ $default-colors: (
   success:   ( base: hsl(85, 77%,  41%) ),
   danger:    ( base: hsl(350, 60%, 43%) ),
   warning:   ( base: hsl(48,  100%, 67%) ),
+  'gray':   ( base: hsl(0, 0%, 80%) ),
+  // 'dark':   ( base: hsl(0, 0%, 20%) ),
   'white':   ( base: hsl(0, 0%, 100%) ),
   'black':   ( base: hsl(0, 0%, 10%) ),
   text:(
@@ -30,7 +32,7 @@ $default-colors: (
 );
 
 $content-color-keys: ('contrast', 'body', 'widget', 'card');
-$theme-color-keys: (primary, accent, secondary, info, warning, success, danger, link);
+$theme-color-keys: (primary, accent, secondary, info, warning, success, danger, link, 'gray');
 
 $theme-shades: () !default;
 $theme-colors: () !default;
@@ -78,12 +80,12 @@ $_lightness_dif: $_con_lightness - $_bg_lightness;
 // @debug "$_lightness_dif #{$_lightness_dif}";
 $_lightness_step: $_lightness_dif * 0.1;
 
-@for $step from 1 through 10 {
-  $lightness_change: $_lightness_dif * 0.1 * $step;
+@for $step from 1 through 19 {
+  $lightness_change: $_lightness_dif * 0.05 * $step;
   $shadeColor:  color.adjust($background, $lightness: $lightness_change);
   $shadeContrast: getContrastColor($shadeColor);
   $theme-shades: map.merge((
-    "shade-#{$step}0": (
+    "shade-#{$step * 5 }": (
       'contrast': $shadeContrast,
       'lightness': $lightness_change, //change from base contrast
       'hsl': cssVars.hslString($shadeColor)
@@ -91,6 +93,7 @@ $_lightness_step: $_lightness_dif * 0.1;
     $theme-shades
   );
 }
+
 // @debug $theme-shades;
 
 

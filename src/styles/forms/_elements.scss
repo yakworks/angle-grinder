@@ -34,31 +34,42 @@ textarea{
   // padding: 4px;
   // font-size: 13px;
   // line-height: 18px;
-  color: $input-color;
-  border: 1px solid $input-border-color;
-  border-radius: $control-radius;
+  // color: $input-color;
+  // border: 1px solid $input-border-color;
+  // border-radius: $control-radius;
 }
 
-select {
-  color: $input-color;
-  -moz-appearance: none;
-  border: 1px solid $input-border-color;
-  border-radius: $control-radius;
-}
+// select {
+//   color: $input-color;
+//   -moz-appearance: none;
+//   border: 1px solid $input-border-color;
+//   border-radius: $control-radius;
+// }
 
-// unset for list
-.list {
-  input[type="text"],
-  input[type="email"],
-  input[type="tel"],
-  input[type="search"],
-  input[type="url"],
-  input[type="password"],
-  input[type="checkbox"],
-  textarea, select{
-    border: none;
-    border-radius: 0
+// framework7 scrables the core inputs so we reset them here
+input[type='text'],
+input[type='password'],
+input[type='search'],
+input[type='email'],
+input[type='tel'],
+input[type='url'],
+input[type='date'],
+input[type='month'],
+input[type='datetime-local'],
+input[type='time'],
+input[type='number']{
+
+  &.input {
+    color: $input-color;
+    border: 1px solid $input-border-color;
+    background-color: $input-background-color;
+    border-radius: $input-radius;
+    padding-bottom: $control-padding-vertical;
+    padding-left: $control-padding-horizontal;
+    padding-right: $control-padding-horizontal;
+    padding-top: $control-padding-vertical;
+    // color: $input-color;
+    // border: 1px solid $input-border-color;
+    // border-radius: $control-radius;
   }
 }
-
-

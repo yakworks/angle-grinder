@@ -81,7 +81,7 @@ angular.module(commonModule).directive('tagInput', () => ({
 <div class="field column has-addons mb-0">
   <div class="control is-expanded">
     <div class='tag-input input tags' >
-      <span class="tag is-light" ng-repeat="tag in tagArray() track by $index">
+      <span class="tag bg-shade-20" ng-repeat="tag in tagArray() track by $index">
         {{tag}}
         <button class="delete is-small" ng-click='deleteTag($index)'></button>
       </span>
