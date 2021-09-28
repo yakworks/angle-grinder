@@ -653,11 +653,6 @@ export default class GridCtrl {
     if (!(!_.isNil(options.url)) && (!_.isNil(options.path))) {
       options.url = this.pathWithContext(options.path)
     }
-
-    // use `$http` service to load the grid data
-    // if ((options.datatype === undefined) || (options.datatype === null)) {
-    //   options.datatype = this.GridDataLoader(options.url, this)
-    // }
   }
 
   setupColModel(options) {
