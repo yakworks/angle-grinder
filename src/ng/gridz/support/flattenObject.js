@@ -1,11 +1,7 @@
-import angular from 'angular'
-import gridzModule from '../module'
-
-var gridz = angular.module(gridzModule)
 
 // Takes a nested Javascript object and flatten it.
 // see: https://github.com/hughsk/flat
-gridz.value('FlattenServ', function(target, opts) {
+export default function FlattenServ(target, opts) {
   if (opts == null) { opts = { delimiter: '.' } }
   const {
     delimiter
@@ -28,4 +24,4 @@ gridz.value('FlattenServ', function(target, opts) {
   var output = {}
   step(target)
   return output
-})
+}

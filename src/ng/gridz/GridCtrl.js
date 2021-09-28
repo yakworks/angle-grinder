@@ -1,5 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { makeLabel } from '../../utils/labelMaker'
+import { xlsData, csvData } from './support/excelExport'
+import flattenObject from './support/flattenObject'
 import _ from 'lodash'
 import Log from '../../../src/utils/Log'
 
@@ -20,19 +22,11 @@ export default class GridCtrl {
   }
 
   /* @ngInject */
-  constructor($rootScope, $scope, $element, $attrs, $compile, hasSearchFilters,
-    FlattenServ, xlsData, csvData, cfpLoadingBar, $window) {
+  constructor($rootScope, $scope, $element, $compile ) {
     this.$rootScope = $rootScope
     this.$scope = $scope
     this.$element = $element
-    this.$attrs = $attrs
     this.$compile = $compile
-    this.hasSearchFilters = hasSearchFilters
-    this.FlattenServ = FlattenServ
-    this.csvData = csvData
-    this.xlsData = xlsData
-    this.$window = $window
-    this.cfpLoadingBar = cfpLoadingBar
   }
 
   $onInit() {
@@ -183,7 +177,7 @@ export default class GridCtrl {
     const colModel = this.getParam('colModel')
     angular.forEach(colModel, column => column.lso = (column.name === sortname) || (column.name === 'id') ? sortorder : '')
 
-    this.getGridEl().find('span.s-ico').hide()
+    this.getGridWrapper().find('span.s-ico').hide()
     this.setParam({ sortname, sortorder }) // .trigger('reloadGrid')
     this.reload([{ current: true }])
     const column = angular.element(`[id$='_${sortname}']`)
@@ -253,7 +247,7 @@ export default class GridCtrl {
   // and the value is the new value.
   updateRow(id, data, emptyMissingCells) {
     if (emptyMissingCells == null) { emptyMissingCells = true }
-    const flatData = this.FlattenServ(data)
+    const flatData = flattenObject(data)
 
     const prevData = this.getRowData(id)
     if (!_.isNil(prevData)) {
@@ -282,7 +276,7 @@ export default class GridCtrl {
   // where name is the name of the column as described in the colModel and the value is the value.
   addRow(id, data, position) {
     if (position == null) { position = 'first' }
-    this.getGridEl().addRowData(id, this.FlattenServ(data), position)
+    this.getGridEl().addRowData(id, flattenObject(data), position)
     this.getGridEl().trigger('gridz:rowAdded', [id, data])
     return this.flashOnSuccess(id)
   }
@@ -399,11 +393,17 @@ export default class GridCtrl {
   }
 
   hasSearchFilters(filters) {
-    return Object.values(filters).some(val => {
-      if (_.isNil(val)) return false
-      if (_.isString(val) && _.trim(val) === '') return false
-      return true
-    })
+    for (const k in filters) {
+      const value = filters[k]
+      if (_.isNil(value)) { continue }
+
+      if (typeof value === 'string') {
+        if (_.trim(value) !== '') { return true }
+      } else {
+        return true
+      }
+    }
+    return false
   }
 
   // Returns `true` if a columnt with the given id is hidden
@@ -421,22 +421,22 @@ export default class GridCtrl {
 
   // Returns data uri with xls file content for rows from the current grid view.
   getXlsDataUri() {
-    return this.xlsData(this.getGridId(), this.getSelectedRowIds())
+    return xlsData(this.getGridId(), this.getSelectedRowIds())
   }
 
   xlsExport() {
     if (this.getSelectedRowIds().length !== 0) {
       // if browser is IE then open new window and show SaveAs dialog, else use dataUri approach
       // can this part be deprecated?
-      if ((this.$window.navigator.userAgent.indexOf('MSIE ') > 0) ||
-        !!this.$window.navigator.userAgent.match(/Trident.*rv\:11\./)) {
+      if ((window.navigator.userAgent.indexOf('MSIE ') > 0) ||
+        !!window.navigator.userAgent.match(/Trident.*rv\:11\./)) {
         let iframe = document.createElement('IFRAME')
         iframe.style.display = 'none'
         document.body.appendChild(iframe)
         iframe = iframe.contentWindow || iframe.contentDocument
-        const csvData = 'sep=|\r\n' + this.getCsvData()
+        const csvDta = 'sep=|\r\n' + this.getCsvData()
         iframe.document.open('text/html', 'replace')
-        iframe.document.write(csvData)
+        iframe.document.write(csvDta)
         iframe.document.close()
         iframe.focus()
         return iframe.document.execCommand('SaveAs', true, 'download.csv')
@@ -456,17 +456,18 @@ export default class GridCtrl {
   }
 
   getCsvData() {
-    return this.csvData(this.getGridId(), this.getSelectedRowIds())
+    return csvData(this.getGridId(), this.getSelectedRowIds())
   }
 
   toggleLoading(show = true) {
-    const loadEl = this.getGridEl().find(`#load_${this.gridId}`)
+    const loadEl = this.getGridWrapper().find(`#load_${this.gridId}`)
     if (show) {
-      this.cfpLoadingBar.start()
-      this.cfpLoadingBar.set(0.3)
+      // this.cfpLoadingBar.start()
+      // this.cfpLoadingBar.set(0.3)
       loadEl.show()
+
     } else {
-      this.cfpLoadingBar.complete()
+      // this.cfpLoadingBar.complete()
       loadEl.hide()
     }
     return show ? loadEl.show() : loadEl.hide()
@@ -547,9 +548,9 @@ export default class GridCtrl {
   }
 
   addAdditionalFooter(data) {
-    const footerRow = this.getGridEl().find('tr.footrow')
+    const footerRow = this.getGridWrapper().find('tr.footrow')
     let newFooterRow
-    newFooterRow = this.getGridEl().find('tr.myfootrow')
+    newFooterRow = this.getGridWrapper().find('tr.myfootrow')
     if (newFooterRow.length === 0) {
       // add second row of the footer if it's not exist
       newFooterRow = footerRow.clone()
@@ -654,9 +655,9 @@ export default class GridCtrl {
     }
 
     // use `$http` service to load the grid data
-    if ((options.datatype === undefined) || (options.datatype === null)) {
-      options.datatype = this.GridDataLoader(options.url, this)
-    }
+    // if ((options.datatype === undefined) || (options.datatype === null)) {
+    //   options.datatype = this.GridDataLoader(options.url, this)
+    // }
   }
 
   setupColModel(options) {
