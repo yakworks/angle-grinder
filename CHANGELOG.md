@@ -1,3 +1,8 @@
+### v4.0.24
+
+[Full Changelog](https://github.com/yakworks/angle-grinder/compare/v4.0.23...v4.0.24)
+- cleanup padding on inputs and theme color assignments from css vars (#621) [link](https://github.com/yakworks/angle-grinder/commit/fef8a5a747a5435935be9b1651e5e8746be09075)
+
 ### v4.0.23
 
 [Full Changelog](https://github.com/yakworks/angle-grinder/compare/v4.0.22...v4.0.23)
