@@ -5345,9 +5345,15 @@ framework7-icons@^5.0.3:
   resolved "https://registry.npmjs.org/framework7-icons/-/framework7-icons-5.0.3.tgz"
   integrity sha512-Mt9SLdbG/b2UZUzREqcl6zEy6REsW8Rz7L66QuBGVpQEtyBZIDxYa4c5AXCdY3HEAhlyjg8xKQOi4/NyIHuIgQ==
 
-framework7-source@yakworks/framework7:
-  version "0.0.0"
-  resolved "https://codeload.github.com/yakworks/framework7/tar.gz/5005701db8c430383040cb78b2b3b2e31b2261ef"
+framework7-svelte@^6.3.4:
+  version "6.3.4"
+  resolved "https://registry.yarnpkg.com/framework7-svelte/-/framework7-svelte-6.3.4.tgz#878c017cea84c7b5289285bad058691b38cf6e27"
+  integrity sha512-EoZDq6c5eWO+ov4239bUc8I892qPdk9vtHgDLc19pz0+4OOa8CLcYtkmmJ82TGNcZns8eIbK2H7FvD4ISWt/bg==
+
+framework7@^6.3.4:
+  version "6.3.4"
+  resolved "https://registry.yarnpkg.com/framework7/-/framework7-6.3.4.tgz#8733a6fbf2106057dd84623cf49d29d4969c5ebc"
+  integrity sha512-nB6LsXLMDw+USCGboC9xXvAy9E2EHGxu26gphG724Ti+LJgmMOSQmniQEfBJJYhQVBvfDlZQMj4SYbfgpuakhg==
   dependencies:
     dom7 "^3.0.0"
     htm "^3.1.0"

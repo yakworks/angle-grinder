@@ -28,6 +28,10 @@
   <Button icon="mdi-square-edit-outline"></Button>
   <Button icon="fas fa-table"></Button>
   <Button icon="mdi-table"></Button>
+  <Button icon="mdi-chevron-left"></Button>
+  <Button icon="mdi-chevron-right"></Button>
+  <Button icon="mdi-page-last"></Button>
+  <Button icon="mdi-page-first"></Button>
 </div>
 
 <div class="buttons">

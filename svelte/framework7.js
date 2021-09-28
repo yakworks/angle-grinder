@@ -1,26 +1,6 @@
-import Framework7Svelte from 'framework7-source/src/svelte/shared/plugin';
-import { f7, f7ready, theme, app } from 'framework7-source/src/svelte/shared/f7';
-import { useStore } from 'framework7-source/src/svelte/shared/use-store';
+import Framework7Svelte from 'framework7-svelte/esm/shared/plugin';
+import { f7, f7ready, theme, app } from 'framework7-svelte/esm/shared/f7';
+import { useStore } from 'framework7-svelte/esm/shared/use-store';
 
-export { default as App } from 'framework7-source/src/svelte/components/app.svelte';
-export { default as BlockTitle } from 'framework7-source/src/svelte/components/block-title.svelte';
-export { default as Icon } from 'framework7-source/src/svelte/components/icon.svelte';
-export { default as Link } from 'framework7-source/src/svelte/components/link.svelte';
-
-export { default as CardContent } from 'framework7-source/src/svelte/components/card-content.svelte';
-export { default as CardFooter } from 'framework7-source/src/svelte/components/card-footer.svelte';
-export { default as CardHeader } from 'framework7-source/src/svelte/components/card-header.svelte';
-export { default as Card } from 'framework7-source/src/svelte/components/card.svelte';
-
-export { default as ListButton } from 'framework7-source/src/svelte/components/list-button.svelte';
-export { default as ListGroup } from 'framework7-source/src/svelte/components/list-group.svelte';
-export { default as ListIndex } from 'framework7-source/src/svelte/components/list-index.svelte';
-export { default as ListInput } from 'framework7-source/src/svelte/components/list-input.svelte';
-export { default as ListItemCell } from 'framework7-source/src/svelte/components/list-item-cell.svelte';
-export { default as ListItemRow } from 'framework7-source/src/svelte/components/list-item-row.svelte';
-export { default as ListItem } from 'framework7-source/src/svelte/components/list-item.svelte';
-export { default as List } from 'framework7-source/src/svelte/components/list.svelte';
-
-// export { AccordionContent, AccordionItem, AccordionToggle, Accordion, ActionsButton, ActionsGroup, ActionsLabel, Actions, App, Appbar, AreaChart, Badge, BlockFooter, BlockHeader, BlockTitle, Block, Button, CardContent, CardFooter, CardHeader, Card, Checkbox, Chip, Col, FabBackdrop, FabButton, FabButtons, Fab, Gauge, Icon, Input, Link, ListButton, ListGroup, ListIndex, ListInput, ListItemCell, ListItemRow, ListItem, List, LoginScreenTitle, LoginScreen, MenuDropdownItem, MenuDropdown, MenuItem, Menu, Message, MessagebarAttachment, MessagebarAttachments, MessagebarSheetImage, MessagebarSheetItem, MessagebarSheet, Messagebar, MessagesTitle, Messages, NavLeft, NavRight, NavTitleLarge, NavTitle, Navbar, PageContent, Page, Panel, PhotoBrowser, PieChart, Popover, Popup, Preloader, Progressbar, Radio, Range, RoutableModals, RouterContextProvider, Row, Searchbar, Segmented, Sheet, SkeletonAvatar, SkeletonBlock, SkeletonImage, SkeletonText, Stepper, Subnavbar, SwipeoutActions, SwipeoutButton, SwiperSlide, Swiper, Tab, Tabs, TextEditor, Toggle, Toolbar, TreeviewItem, Treeview, UseIcon, View, Views }
 export { f7, f7ready, theme, useStore, app };
 export default Framework7Svelte;

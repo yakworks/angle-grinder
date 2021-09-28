@@ -24,7 +24,7 @@ $danger-border: cssVars.alpha($danger, 0.40);
   }
 
   // inner input, overrides
-  input {
+  input.input {
     //float: left;
     height: $input-height * 0.75;
     padding: 0;

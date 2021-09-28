@@ -33,10 +33,10 @@
     color: cvar(shade, $num) !important
   }
   .text-#{$shade}-contrast{
-    color: var(colorVar($contrast)) !important
+    color: cvar($contrast) !important
   }
   .bg-#{$shade} {
-    background-color: cvar(shade, $num)  !important
+    background-color: cvar(shade, $num) !important
   }
 }
 
