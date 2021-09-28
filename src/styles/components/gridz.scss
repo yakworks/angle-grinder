@@ -423,18 +423,20 @@ $grid-border: $border;
   background-image: none !important;
 }
 
-// .ui-icon {
-//   width: 16px;
-//   height: 16px;
-//   background-image: url(../img/ui-icons_222222_256x240.png)
-// }
+//FIXME can't get the mini-css-extract plugin working
+// gives Cannot read property 'getAssets' of undefined, so coding path here
+.ui-icon {
+  width: 16px;
+  height: 16px;
+  background-image: url(/assets/icons/gridz/ui-icons_222222_256x240.png)
+}
 
-// .ui-state-default .ui-icon {
-//   background-image: url(../img/ui-icons_888888_256x240.png);
-// }
-// .ui-widget-content .ui-icon, .ui-widget-header .ui-icon {
-//   background-image: url(../img/ui-icons_222222_256x240.png);
-// }
+.ui-state-default .ui-icon {
+  background-image: url(/assets/icons/gridz/ui-icons_888888_256x240.png);
+}
+.ui-widget-content .ui-icon, .ui-widget-header .ui-icon {
+  background-image: url(/assets/icons/gridz/ui-icons_222222_256x240.png);
+}
 
 .ui-icon-triangle-1-n {
   background-position: 0 -16px
@@ -457,6 +459,11 @@ $grid-border: $border;
   filter: Alpha(Opacity=35)
 }
 
+//remove background for old sprites
+.ui-jqgrid .ui-pg-button .ui-icon {
+  background-image: none;
+}
+
 .ui-jqgrid .ui-pg-table .ui-pg-button {
 
   display: inline-block;
@@ -466,6 +473,7 @@ $grid-border: $border;
   line-height: inherit;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-image: none;
 
   .ui-icon-seek-next::before {
     content: "\f0142";

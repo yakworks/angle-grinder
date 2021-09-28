@@ -106,7 +106,12 @@ module.exports = function(env, argv) {
           use: [
             { loader: styleLoader },
             // translates CSS into CommonJS
-            { loader: 'css-loader', options: { sourceMap: true } },
+            { loader: 'css-loader',
+              options: {
+                // url: false, //FIXME setting to false because mincss loader is broken and blows up processing these
+                sourceMap: true
+              }
+            },
             // Runs compiled CSS through postcss for vendor prefixing
             { loader: 'postcss-loader', options: { sourceMap: true } },
             { loader: 'sass-loader',
@@ -133,12 +138,18 @@ module.exports = function(env, argv) {
         },
         {
           // Load all images as base64 encoding if they are smaller than 8192 bytes
+          //FIXME THIS IS BROKEN AND PROBABLY NOT DOING ANYTHING
           test: /\.(png|jpg|gif)$/,
           use: [{
             loader: 'url-loader',
             options: {
-              // On development we want to see where the file is coming from, hence we preserve the [path]
+              // name(resourcePath, resourceQuery) {
+              //     return isProd ? '[path][name].[ext]?hash=[hash:20]' : '[path][name].[ext]'
+              // },
               name: '[path][name].[ext]?hash=[hash:20]',
+              // outputPath: 'images/',
+              // publicPath: '../images',
+              // useRelativePaths: true,
               limit: 8192
             }
           }]

@@ -12,6 +12,7 @@ import Growl from './Growl/Index.svelte'
 import Items from './Items/Index.svelte'
 import Lists from './Lists/Index.svelte'
 import Selects from './Selects/Index.svelte'
+import Gridz from './Gridz/Index.svelte'
 // import avatarsDemoMod from './avatars'
 
 const appMod = angular.module('svelte.demo.components', [ngSvelteMod])
@@ -52,6 +53,9 @@ appMod
   })
   .component('svelteSelectsIndex', {
     controller: ngSvelteShim(Selects)
+  })
+  .component('svelteGridzIndex', {
+    controller: ngSvelteShim(Gridz)
   })
 
 export default appMod.name

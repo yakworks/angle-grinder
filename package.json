@@ -138,7 +138,7 @@
     "less-loader": "7.3.0",
     "load-grunt-tasks": "^0.6.0",
     "mime": "^1.2.11",
-    "mini-css-extract-plugin": "^1.6.2",
+    "mini-css-extract-plugin": "1.6.2",
     "mocha": "^1.20.4",
     "mocker-api": "^1.12.2",
     "ng-showdown": "^1.1.0",

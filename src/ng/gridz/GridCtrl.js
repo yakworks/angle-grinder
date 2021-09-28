@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import gridzInit from './gridzInit'
+import { makeLabel } from '../../utils/labelMaker'
 import _ from 'lodash'
 import Log from '../../../src/utils/Log'
 
@@ -7,6 +7,17 @@ export default class GridCtrl {
   highlightClass = 'ui-state-highlight'
   systemColumns = ['cb', '-row_action_col']
   isDense = false
+
+  defaultCtxMenuOptions = {
+    edit: {
+      display: 'Edit',
+      icon: 'far fa-edit'
+    },
+    delete: {
+      display: 'Delete',
+      icon: 'far fa-trash-alt'
+    }
+  }
 
   /* @ngInject */
   constructor($rootScope, $scope, $element, $attrs, $compile, hasSearchFilters,
@@ -34,7 +45,7 @@ export default class GridCtrl {
     // pager ID setup
     if (gridOptions.pager !== false) {
       const pagerId = `${gridId}-pager`
-      $element.find('div.gridz-pager').attr('id', pagerId)
+      this.getGridWrapper().find('div.gridz-pager').attr('id', pagerId)
       gridOptions.pager = pagerId
     }
 
@@ -50,23 +61,25 @@ export default class GridCtrl {
     gridEl.on('jqGridSelectRow', onSelect)
     gridEl.on('jqGridSelectAll', onSelect)
 
-    gridzInit.setupColModel(gridOptions)
-    gridzInit.setupCtxMenu(this, gridOptions)
-    gridzInit.setupDataLoader(this, gridOptions)
-    gridzInit.setupGridCompleteEvent(this, gridEl, gridOptions)
-    gridzInit.setupFormatters(this, gridEl, gridOptions)
+    this.setupColModel(gridOptions)
+    this.setupCtxMenu(gridOptions)
+    this.setupDataLoader(gridOptions)
+    this.setupGridCompleteEvent(this, gridEl, gridOptions)
+    this.setupFormatters(this, gridEl, gridOptions)
   }
-
-  // $postLink() {
-  // Log.debug('AgGridCtrl $postLink')
-  // }
 
   $onDestroy() {
     this.getGridEl().jqGrid('GridDestroy')
   }
 
+  // the jqGrid table element
   getGridEl() {
-    return this.gridEl || (this.gridEl = this.$element.find('table.gridz'))
+    return this.gridEl || (this.gridEl = this.getGridWrapper().find('table.gridz'))
+  }
+
+  // the wrapper div that has the toolbar and table
+  getGridWrapper() {
+    return this.$element
   }
 
   getGridId() {
@@ -120,18 +133,23 @@ export default class GridCtrl {
   addJSONData(data) {
     this.getGridEl().get(0).addJSONData(data)
 
-    // broadcasts the AngularJS event
-    return this.$rootScope.$broadcast('gridz:loadComplete', data)
+    // fire jquery event
+    return this.getGridEl().trigger('gridz:loadComplete', [data])
   }
 
   // Reloads the grid with the current settings
   reload(options) {
     return new Promise((resolve) => {
       if (options == null) { options = [] }
-      var unregister = this.$rootScope.$on('gridz:loadComplete', function(_, data) {
+      // var unregister = this.$rootScope.$on('gridz:loadComplete', function(_, data) {
+      //   resolve(data)
+      //   return unregister()
+      // })
+      this.getGridEl().on( "gridz:loadComplete", function( event, data ) {
+        console.log("got gridz:loadComplete with ", data)
         resolve(data)
-        return unregister()
-      })
+        $(this).off(event)
+      });
       this.getGridEl().trigger('reloadGrid', options)
     })
   }
@@ -165,7 +183,7 @@ export default class GridCtrl {
     const colModel = this.getParam('colModel')
     angular.forEach(colModel, column => column.lso = (column.name === sortname) || (column.name === 'id') ? sortorder : '')
 
-    this.$element.find('span.s-ico').hide()
+    this.getGridEl().find('span.s-ico').hide()
     this.setParam({ sortname, sortorder }) // .trigger('reloadGrid')
     this.reload([{ current: true }])
     const column = angular.element(`[id$='_${sortname}']`)
@@ -254,7 +272,8 @@ export default class GridCtrl {
 
     this.getGridEl().setRowData(id, flatData)
     this.flashOnSuccess(id)
-    return this.$rootScope.$broadcast('gridz:rowUpdated', this.$attrs.agGrid, id, data)
+    return this.getGridEl().trigger('gridz:rowUpdated', [id, data])
+    // return this.$rootScope.$broadcast('gridz:rowUpdated', this.$attrs.agGrid, id, data)
   }
 
   // Inserts a new row with id = rowid containing the data in data (an object) at
@@ -264,7 +283,7 @@ export default class GridCtrl {
   addRow(id, data, position) {
     if (position == null) { position = 'first' }
     this.getGridEl().addRowData(id, this.FlattenServ(data), position)
-    this.$rootScope.$broadcast('gridz:rowAdded', this.$attrs.agGrid, id, data)
+    this.getGridEl().trigger('gridz:rowAdded', [id, data])
     return this.flashOnSuccess(id)
   }
 
@@ -441,7 +460,7 @@ export default class GridCtrl {
   }
 
   toggleLoading(show = true) {
-    const loadEl = this.$element.find(`#load_${this.gridId}`)
+    const loadEl = this.getGridEl().find(`#load_${this.gridId}`)
     if (show) {
       this.cfpLoadingBar.start()
       this.cfpLoadingBar.set(0.3)
@@ -528,9 +547,9 @@ export default class GridCtrl {
   }
 
   addAdditionalFooter(data) {
-    const footerRow = this.$element.find('tr.footrow')
+    const footerRow = this.getGridEl().find('tr.footrow')
     let newFooterRow
-    newFooterRow = this.$element.find('tr.myfootrow')
+    newFooterRow = this.getGridEl().find('tr.myfootrow')
     if (newFooterRow.length === 0) {
       // add second row of the footer if it's not exist
       newFooterRow = footerRow.clone()
@@ -556,4 +575,94 @@ export default class GridCtrl {
       return result
     })()
   }
+
+  //*** gridzInit  ****/
+
+  setupFormatters(gridCtrl, gridEl, options) {
+    // add any events etc for formatters
+    gridEl.on('click', 'a.editActionLink', function(event) {
+      event.preventDefault()
+      const id = $(this).parents('tr:first').attr('id')
+      return gridCtrl.contextMenuClick({ id: id }, { key: 'edit' })
+    })
+
+    gridEl.on('click', 'a.gridLink', function(event) {
+      event.preventDefault()
+      const id = $(this).parents('tr:first').attr('id')
+      window.location.href += (window.location.href.endsWith('/') ? '' : '/') + id
+    })
+  }
+
+  setupGridCompleteEvent(gridCtrl, gridEl, options) {
+    gridEl.on('jqGridAfterGridComplete', function() {
+      gridCtrl.$compile(gridEl)(gridCtrl.$scope)
+
+      // Add `min` class to remove pading to minimize row height
+      if (options.minRowHeight || options.denseRows) {
+        gridCtrl.isDense = true
+        // return _.each(gridEl[0].rows, it => angular.element(it).addClass('min'))
+      }
+      if (options.selectFirstRow === true) {
+        const dataIds = gridEl.getDataIDs()
+        if (dataIds.length > 0) {
+          gridEl.setSelection(dataIds[0], true)
+        }
+      }
+    })
+  }
+
+  /**
+  * adds the action column and formatter.
+  */
+  addCtxMenuIconColumn(opts) {
+    const actionCol = {
+      name: 'context_menu_col',
+      label: ' ',
+      width: 20,
+      sortable: false,
+      search: false,
+      hidedlg: true,
+      resizable: false,
+      fixed: true, // don't auto calc size
+      formatter: (cellValue, colOptions, rowObject) => {
+        return `<a class="jqg-context-menu" href="#"
+          context-menu="gridCtrl.ctxMenuOptions"
+          context-menu-click="gridCtrl.contextMenuClick"
+          context-menu-on="gridz"
+          context-menu-model="{id: ${rowObject.id}}"><i class="fas fa-cog"></i></a>`
+      }
+    }
+    opts.colModel.unshift(actionCol)
+  }
+
+  setupCtxMenu(opts) {
+    if (!opts.contextMenu) return
+
+    if (opts.contextMenu === true) {
+      // use the defaults
+      this.ctxMenuOptions = this.defaultCtxMenuOptions
+      this.addCtxMenuIconColumn(opts)
+    }
+  }
+
+  setupDataLoader(options) {
+    // Log.debug(`[agGrid] initializing '${alias}' with`, options)
+
+    // assign the url
+    if (!(!_.isNil(options.url)) && (!_.isNil(options.path))) {
+      options.url = this.pathWithContext(options.path)
+    }
+
+    // use `$http` service to load the grid data
+    if ((options.datatype === undefined) || (options.datatype === null)) {
+      options.datatype = this.GridDataLoader(options.url, this)
+    }
+  }
+
+  setupColModel(options) {
+    options.colModel.forEach((col, i) => {
+      if (!col.label) col.label = makeLabel(col.name)
+    })
+  }
+
 }
