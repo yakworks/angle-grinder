@@ -11,7 +11,6 @@ class Gridz {
   }
 
   init(element, opts) {
-    console.log("Gridz init")
     this.gridEl = $(element)
     this.gridId = this.gridEl.attr('id')
 
@@ -251,7 +250,6 @@ class Gridz {
 // register namespace
 // $.extend(true, window, { grinder: { Grid: Gridz } })
 
-console.log("register gridz with jquery")
 // Jquery Plugin definition
 $.fn.gridz = function(option) {
   let instance
@@ -272,7 +270,6 @@ $.fn.gridz = function(option) {
     const options = typeof option === 'object' ? option : {}
     // Log.debug("gridz instance", instance)
     if (!instance) {
-      console.log("jq gridz creating intance")
       const ginstance = el.data('gridz', (instance = new Gridz(this, options)))
       // Log.debug("el.data('gridz')", el.data('gridz'))
       return ginstance

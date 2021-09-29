@@ -67,12 +67,10 @@ export default class GridCtrl {
     // this.setupDataLoader(gridOptions)
     this.setupGridCompleteEvent(this, $jqGrid, opts)
     this.setupFormatters(this, $jqGrid, opts)
-    console.log("end GridCtrl.setupGrid")
   }
 
   //initialize the grid the jquery way
   initGridz(){
-    console.log("initGridz on ", this.jqGridEl)
     this.jqGridEl.gridz(this.gridOptions)
     // setupFilterToolBar(options)
   }
@@ -143,7 +141,6 @@ export default class GridCtrl {
     return new Promise((resolve) => {
       if (options == null) { options = [] }
       this.jqGridEl.on( "gridz:loadComplete", function( event, data ) {
-        console.log("got gridz:loadComplete with ", data)
         resolve(data)
         $(this).off(event)
       });
@@ -185,8 +182,6 @@ export default class GridCtrl {
     this.setParam({ sortname, sortorder }) // .trigger('reloadGrid')
     this.reload([{ current: true }])
     const column = this.$gridWrapper.find(`#jqgh_${this.gridId}_id`)
-    // column.find('span.s-ico').show()
-    console.log("reset sort id col", column)
     const disabledClassName = 'ui-state-disabled'
     column.find('.s-ico').css('display', 'inline-block')
     if (sortorder === 'asc') {
@@ -386,7 +381,6 @@ export default class GridCtrl {
       }
       if (filters) params.postData.q = JSON.stringify(filters)
       if (queryText || queryText === '') params.postData.q = queryText
-      // console.log('search params', params)
       this.setParam(params)
       await this.reload()
     } catch (er) {
@@ -415,7 +409,6 @@ export default class GridCtrl {
   async gridLoader(p, searchModel) {
     this.toggleLoading(true)
     try {
-      // console.log("gridLoader params", p)
       // fix up sort
       if (p.sort && p.order) p.sort = `${p.sort} ${p.order}`
       if (!p.sort) delete p.sort
@@ -615,7 +608,6 @@ export default class GridCtrl {
     // add any events etc for formatters
     jqGridEl.on('click', 'a.editActionLink', function(event) {
       event.preventDefault()
-      console.log("a.editActionLink", event)
       const id = $(this).parents('tr:first').attr('id')
       return gridCtrl.contextMenuClick({ id: id }, { key: 'edit' })
     })
@@ -629,8 +621,6 @@ export default class GridCtrl {
 
   setupGridCompleteEvent(gridCtrl, jqGridEl, options) {
     jqGridEl.on('jqGridAfterGridComplete', function() {
-      console.log("jqGridAfterGridComplete event")
-
       // Add `min` class to remove pading to minimize row height
       if (options.minRowHeight || options.denseRows) {
         gridCtrl.isDense = true
