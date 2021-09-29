@@ -7,26 +7,20 @@
     }]
   ],
   "plugins": [
-    "angularjs-annotate",
+    ["angularjs-annotate", { "explicitOnly" : true}],
     "lodash",
     "babel-plugin-transform-async-to-promises",
     "@babel/plugin-proposal-class-properties",
     "@babel/plugin-proposal-optional-chaining",
     "wildcard",
-    [
-      "babel-plugin-root-import",
+    ["babel-plugin-root-import",
       {
         "paths": [
           {
             "rootPathSuffix": "src",
             "rootPathPrefix": "~/"
-          },
-          {
-            "rootPathSuffix": "./",
-            "rootPathPrefix": "#/"
           }
         ]
-
       }
     ],
     [ // required for svelte-jsx and svelte-fragment-component
