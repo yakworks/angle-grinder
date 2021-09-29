@@ -6,10 +6,15 @@ import './assets/styles.scss'
 // VENDOR
 import 'angle-grinder/src/vendor'
 
+// libs
+import 'angle-grinder/src/libs'
+
 // logging turn on debug
 import $log from 'angle-grinder/src/utils/Log'
 
+// load the angular modules
 import './app.config'
+
 import './AppCtrl'
 
 // import './directives/sidebars.js'
@@ -28,16 +33,5 @@ import './controllers/chatCtrl'
 
 // UI Demo
 import './grids'
-
-// Import F7 Bundle
-// import Framework7 from 'framework7/lite-bundle';
-import Framework7 from 'framework7/lite';
-
-// // Import F7-Svelte Plugin
-// import Framework7Svelte from 'framework7-svelte';
-import Framework7Svelte from 'angle-grinder/svelte/framework7';
-
-// // Init F7-Svelte Plugin
-Framework7.use(Framework7Svelte);
 
 // $log.debugEnabled(true)

@@ -1,9 +1,7 @@
 
 <script>
   import { onMount } from 'svelte'
-  // import Button from 'angle-grinder/src/svelte/Button.svelte'
-  import { Avatar } from 'angle-grinder/svelte'
-  import { people } from '../../data/sample'
+  import GridCtrl from 'angle-grinder/src/gridz/GridCtrl'
   import localStoreApi from '../../store/LocalStoreApi'
   import _ from 'lodash'
   const jq = window.$
@@ -29,12 +27,18 @@
   }
 
   function init(node) {
-    jq(node).gridz(gridOptions)
+    let gridCtrl = new GridCtrl()
+    let gridWrapper = jq(node)
+    const gridEl = gridWrapper.find('table.gridz')
+    gridCtrl.gridOptions = gridOptions
+    gridCtrl.gridId = 'someGrid'
+    gridCtrl.setupGrid(gridWrapper, gridEl)
+    gridCtrl.initGridz()
   }
 
 </script>
 
-<div class="gridz-wrapper">
-  <table use:init class="gridz"></table>
+<div use:init class="gridz-wrapper">
+  <table class="gridz"></table>
   <div class="gridz-pager"></div>
 </div>

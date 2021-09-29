@@ -4,44 +4,7 @@ import _ from 'lodash'
 
 var gridz = angular.module(gridzModule)
 
-// Retunrs true if `filters` contain at least one non-empty search field
-gridz.value('hasSearchFilters', function(filters) {
-  for (const k in filters) {
-    const value = filters[k]
-    if (_.isNil(value)) { continue }
-
-    if (typeof value === 'string') {
-      if ($.trim(value) !== '') { return true }
-    } else {
-      return true
-    }
-  }
-
-  return false
-})
-
-gridz.directive('agSearchButton', () => ({
-  restrict: 'E',
-  replace: true,
-
-  template: `\
-<button type="submit" ng-click="advancedSearch(filters)" ng-disabled="searching" class="btn btn-info">
-  <i class="fa fa-search fa-inverse"></i> Search<span ng-show="searching">...</span>
-</button>\
-`
-}))
-
-gridz.directive('agResetSearchButton', () => ({
-  restrict: 'E',
-  replace: true,
-
-  template: `\
-<button type="button" ng-click="resetSearch(filters)" ng-disabled="searching" class="btn">
-  <i class="fa fa-times"></i> Reset<span ng-show="searching">...</span>
-</button>\
-`
-}))
-
+//FIXME deprecated?, why do we need this here but not for the others?
 gridz.directive('agSearchForm', ['$log', $log => ({
   restrict: 'A',
   scope: true,

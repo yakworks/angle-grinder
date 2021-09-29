@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import _ from 'lodash'
-import { isoDateToDisplay } from '../../../../src/utils/dateSupport'
+import { isoDateToDisplay } from '../utils/dateSupport'
 
 // Extra formatters for jqGrid
 $.extend($.fn.fmatter, {

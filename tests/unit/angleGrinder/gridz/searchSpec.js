@@ -34,47 +34,6 @@ describe("module: angleGrinder.gridz", function() {
     });
   });
 
-  describe("directive: agSearchButton", function() {
-    let $scope = null;
-    let element = null;
-
-    beforeEach(inject($injector => ({element, $scope} = compileTemplate(`\
-<ag-search-button></ag-search-button>\
-`, $injector)))
-    );
-
-    it("renders the button", function() {
-      expect(element.is("button[type=submit]")).to.be.true;
-      expect(element.hasClass("btn")).to.be.true;
-      return expect(element.text()).to.contain("Search");
-    });
-
-    it("is enabled", () => expect(element.hasClass("disabled")).to.be.false);
-
-    describe("when the search request is in progress", function() {
-      beforeEach(() => $scope.$apply(() => $scope.searching = true));
-
-      it("is disabled", () => expect(element.is(":disabled")).to.be.true);
-
-      return it("changes the button label", () => expect(element.text()).to.contain("Search..."));
-    });
-
-    return describe("on click", function() {
-      beforeEach(function() {
-        $scope.filters = {name: "find it"};
-        return $scope.advancedSearch = sinon.spy();
-      });
-
-      return it("calls #advancedSearch with valid params", function() {
-        // When
-        element.click();
-
-        // Then
-        expect($scope.advancedSearch).to.have.been.called;
-        return expect($scope.advancedSearch).to.have.been.calledWith({name: "find it"});
-      });
-    });
-  });
 
   describe("directive: agResetSearchButton", function() {
     let $scope = null;

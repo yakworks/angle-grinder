@@ -1,2 +1,2 @@
-import './ColConfig/ColConfigServ'
+import './ColConfigServ'
 import './search'

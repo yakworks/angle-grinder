@@ -1,9 +1,8 @@
 /* eslint-disable no-unused-vars */
-import { makeLabel } from '../../utils/labelMaker'
-import { xlsData, csvData } from './support/excelExport'
-import flattenObject from './support/flattenObject'
+import { makeLabel } from '../utils/labelMaker'
+import { xlsData, csvData } from './excelExport'
+import flattenObject from './flattenObject'
 import _ from 'lodash'
-import Log from '../../../src/utils/Log'
 
 export default class GridCtrl {
   highlightClass = 'ui-state-highlight'
@@ -21,25 +20,21 @@ export default class GridCtrl {
     }
   }
 
-  /* @ngInject */
-  constructor($rootScope, $scope, $element, $compile ) {
-    this.$rootScope = $rootScope
-    this.$scope = $scope
-    this.$element = $element
-    this.$compile = $compile
-  }
+  setupGrid(gridWrapper, jqGridElement) {
+    console.log("GridCtrl.setupGrid")
+    // FIXME send these in the method so they can be used outside of angular
+    const { gridId, gridOptions } = this
+    let $jqGrid = $(jqGridElement)
+    this.jqGridEl = $jqGrid
 
-  $onInit() {
-    // Log.debug('AgGridCtrl $onInit')
-    const { $element, gridId, gridOptions } = this
-    const gridEl = this.getGridEl()
+    this.$gridWrapper = $(gridWrapper)
 
-    gridEl.attr('id', gridId)
+    $jqGrid.attr('id', gridId)
 
     // pager ID setup
     if (gridOptions.pager !== false) {
       const pagerId = `${gridId}-pager`
-      this.getGridWrapper().find('div.gridz-pager').attr('id', pagerId)
+      this.$gridWrapper.find('div.gridz-pager').attr('id', pagerId)
       gridOptions.pager = pagerId
     }
 
@@ -48,40 +43,39 @@ export default class GridCtrl {
       if (gridOptions.eventHandlers?.onSelect && _.isFunction(gridOptions.eventHandlers.onSelect)) {
         gridOptions.eventHandlers.onSelect(rowId, status, event)
       }
-      this.$rootScope.$evalAsync(() => {
-        this.hasSelected = (this.getSelectedRowIds().length > 0)
-      })
+      this.hasSelected = (this.getSelectedRowIds().length > 0)
+      $jqGrid.trigger('gridz:selectedRows', [this.getSelectedRowIds()])
     }
-    gridEl.on('jqGridSelectRow', onSelect)
-    gridEl.on('jqGridSelectAll', onSelect)
+    $jqGrid.on('jqGridSelectRow', onSelect)
+    $jqGrid.on('jqGridSelectAll', onSelect)
 
     this.setupColModel(gridOptions)
     this.setupCtxMenu(gridOptions)
     this.setupDataLoader(gridOptions)
-    this.setupGridCompleteEvent(this, gridEl, gridOptions)
-    this.setupFormatters(this, gridEl, gridOptions)
+    this.setupGridCompleteEvent(this, $jqGrid, gridOptions)
+    this.setupFormatters(this, $jqGrid, gridOptions)
+    console.log("end GridCtrl.setupGrid")
   }
 
-  $onDestroy() {
-    this.getGridEl().jqGrid('GridDestroy')
+  //initialize the grid the jquery way
+  initGridz(){
+    console.log("initGridz on ", this.jqGridEl)
+    this.jqGridEl.gridz(this.gridOptions)
+    // setupFilterToolBar(options)
   }
 
   // the jqGrid table element
   getGridEl() {
-    return this.gridEl || (this.gridEl = this.getGridWrapper().find('table.gridz'))
+    return this.jqGridEl
   }
 
-  // the wrapper div that has the toolbar and table
+  // the wrapper div that has the toolbar and table and footer
   getGridWrapper() {
-    return this.$element
+    return this.$gridWrapper
   }
 
   getGridId() {
-    return this.getGridEl().attr('id')
-  }
-
-  getGridz() {
-    return this.getGridEl().data('gridz')
+    return this.jqGridEl.attr('id')
   }
 
   // Gives the currently selected rows when multiselect is set to true.
@@ -107,7 +101,7 @@ export default class GridCtrl {
   }
 
   clearSelection() {
-    return this.getGridEl().jqGrid('resetSelection')
+    return this.jqGridEl.jqGrid('resetSelection')
   }
 
   // Returns an array with data of the requested id = rowid.
@@ -115,75 +109,73 @@ export default class GridCtrl {
   // a name from colModel and the value from the associated column in that row.
   // It returns an empty array if the rowid can not be found.
   getRowData(rowId = null) {
-    return this.getGridEl().getRowData(rowId)
+    return this.jqGridEl.getRowData(rowId)
   }
 
   // Return all rows
   getAllRows() {
-    return this.getGridEl().getRowData()
+    return this.jqGridEl.getRowData()
   }
 
   // Populates the grid with the given data.
   addJSONData(data) {
-    this.getGridEl().get(0).addJSONData(data)
+    this.jqGridEl.get(0).addJSONData(data)
 
     // fire jquery event
-    return this.getGridEl().trigger('gridz:loadComplete', [data])
+    return this.jqGridEl.trigger('gridz:loadComplete', [data])
   }
 
   // Reloads the grid with the current settings
   reload(options) {
     return new Promise((resolve) => {
       if (options == null) { options = [] }
-      // var unregister = this.$rootScope.$on('gridz:loadComplete', function(_, data) {
-      //   resolve(data)
-      //   return unregister()
-      // })
-      this.getGridEl().on( "gridz:loadComplete", function( event, data ) {
+      this.jqGridEl.on( "gridz:loadComplete", function( event, data ) {
         console.log("got gridz:loadComplete with ", data)
         resolve(data)
         $(this).off(event)
       });
-      this.getGridEl().trigger('reloadGrid', options)
+      this.jqGridEl.trigger('reloadGrid', options)
     })
   }
 
   // reloads and keeps what was selected
   reloadKeepSelected() {
     // Save id of the selected row
-    const selRow = angular.copy(this.getParam('selrow'))
-    const selRows = angular.copy(this.getParam('selarrrow'))
+    const selRow = _.cloneDeep(this.getParam('selrow'))
+    const selRows = _.cloneDeep(this.getParam('selarrrow'))
 
-    const gridEl = this.getGridEl()
+    const jqGridEl = this.getGridEl()
     // Save grid scroll position
-    // const scrollPosition = $scope.grid.getGridEl().closest('.ui-jqgrid-bdiv').scrollTop()
-    gridEl.closest('.ui-jqgrid-bdiv').scrollTop()
+    jqGridEl.closest('.ui-jqgrid-bdiv').scrollTop()
 
     const afterGridComplete = () => {
       this.clearSelection()
       if (this.getParam('multiselect')) {
-        _.each(selRows, id => gridEl.jqGrid('setSelection', id))
+        _.each(selRows, id => jqGridEl.jqGrid('setSelection', id))
       } else {
-        gridEl.jqGrid('setSelection', selRow)
+        jqGridEl.jqGrid('setSelection', selRow)
       }
-      gridEl.off('jqGridAfterGridComplete', afterGridComplete)
+      jqGridEl.off('jqGridAfterGridComplete', afterGridComplete)
     }
-    // gridEl.off('jqGridAfterGridComplete', afterGridComplete).on('jqGridAfterGridComplete', afterGridComplete);
+    // jqGridEl.off('jqGridAfterGridComplete', afterGridComplete).on('jqGridAfterGridComplete', afterGridComplete);
     // {current: true} - used for keep multi select
     return this.reload([{ current: true }])
   }
 
   resetSort(sortname = 'id', sortorder = 'asc') {
     const colModel = this.getParam('colModel')
-    angular.forEach(colModel, column => column.lso = (column.name === sortname) || (column.name === 'id') ? sortorder : '')
+    colModel.forEach(column => {
+      column.lso = (column.name === sortname) || (column.name === 'id') ? sortorder : ''
+    })
 
-    this.getGridWrapper().find('span.s-ico').hide()
+    this.$gridWrapper.find('span.s-ico').hide()
     this.setParam({ sortname, sortorder }) // .trigger('reloadGrid')
     this.reload([{ current: true }])
-    const column = angular.element(`[id$='_${sortname}']`)
+    const column = this.$gridWrapper.find(`#jqgh_${this.gridId}_id`)
     // column.find('span.s-ico').show()
-
+    console.log("reset sort id col", column)
     const disabledClassName = 'ui-state-disabled'
+    column.find('.s-ico').css('display', 'inline-block')
     if (sortorder === 'asc') {
       column.find('.ui-icon-asc').removeClass(disabledClassName)
       column.find('.ui-icon-desc').addClass(disabledClassName)
@@ -195,12 +187,12 @@ export default class GridCtrl {
 
   // Gets a particular grid parameter
   getParam(name) {
-    return this.getGridEl().getGridParam(name)
+    return this.jqGridEl.getGridParam(name)
   }
 
   // Sets the given grid parameter
   setParam(params) {
-    return this.getGridEl().setGridParam(params)
+    return this.jqGridEl.setGridParam(params)
   }
 
   // returns the column model
@@ -231,10 +223,10 @@ export default class GridCtrl {
       colSetup.newColumnsOrder.push(column.originalId)
     })
 
-    const gridEl = this.getGridEl()
-    gridEl.remapColumns(colSetup.newColumnsOrder, true)
-    gridEl.jqGrid('showCol', colSetup.displayedColumns)
-    gridEl.jqGrid('hideCol', colSetup.hiddenColumns)
+    const jqGridEl = this.getGridEl()
+    jqGridEl.remapColumns(colSetup.newColumnsOrder, true)
+    jqGridEl.jqGrid('showCol', colSetup.displayedColumns)
+    jqGridEl.jqGrid('hideCol', colSetup.hiddenColumns)
   }
 
   contextMenuClick = (model, menuItem) => {
@@ -264,10 +256,9 @@ export default class GridCtrl {
       }
     }
 
-    this.getGridEl().setRowData(id, flatData)
+    this.jqGridEl.setRowData(id, flatData)
     this.flashOnSuccess(id)
-    return this.getGridEl().trigger('gridz:rowUpdated', [id, data])
-    // return this.$rootScope.$broadcast('gridz:rowUpdated', this.$attrs.agGrid, id, data)
+    return this.jqGridEl.trigger('gridz:rowUpdated', [id, data])
   }
 
   // Inserts a new row with id = rowid containing the data in data (an object) at
@@ -276,20 +267,20 @@ export default class GridCtrl {
   // where name is the name of the column as described in the colModel and the value is the value.
   addRow(id, data, position) {
     if (position == null) { position = 'first' }
-    this.getGridEl().addRowData(id, flattenObject(data), position)
-    this.getGridEl().trigger('gridz:rowAdded', [id, data])
+    this.jqGridEl.addRowData(id, flattenObject(data), position)
+    this.jqGridEl.trigger('gridz:rowAdded', [id, data])
     return this.flashOnSuccess(id)
   }
 
   // Returns `true` if the grid contains a row with the given id
   hasRow(id) {
-    return !!this.getGridEl().getInd(id)
+    return !!this.jqGridEl.getInd(id)
   }
 
   // Returns an array of the id's in the current grid view.
   // It returns an empty array if no data is available.
   getIds() {
-    return this.getGridEl().getDataIDs()
+    return this.jqGridEl.getDataIDs()
   }
 
   // Returns the current page
@@ -363,7 +354,7 @@ export default class GridCtrl {
   // Deletes the row with the id = rowid.
   // This operation does not delete data from the server.
   removeRow(id) {
-    return this.flashOnSuccess(id, () => this.getGridEl().delRowData(id))
+    return this.flashOnSuccess(id, () => this.jqGridEl.delRowData(id))
   }
 
   // Sets the grid search filters and triggers a reload
@@ -415,7 +406,7 @@ export default class GridCtrl {
   // Toggle visibility of a column with the given id
   toggleColumn(columnId) {
     const showOrHide = this.isColumnHidden(columnId) ? 'showCol' : 'hideCol'
-    this.getGridEl().jqGrid(showOrHide, columnId)
+    this.jqGridEl.jqGrid(showOrHide, columnId)
     return this._triggerResize()
   }
 
@@ -460,7 +451,7 @@ export default class GridCtrl {
   }
 
   toggleLoading(show = true) {
-    const loadEl = this.getGridWrapper().find(`#load_${this.gridId}`)
+    const loadEl = this.$gridWrapper.find(`#load_${this.gridId}`)
     if (show) {
       // this.cfpLoadingBar.start()
       // this.cfpLoadingBar.set(0.3)
@@ -478,25 +469,25 @@ export default class GridCtrl {
   // TODO fix grid resizing issues
   // TODO resize after column chooser dialog
   _triggerResize() {
-    return this.getGridEl().trigger('resize')
+    return this.jqGridEl.trigger('resize')
   }
 
   // Flash the given row
   flashOnSuccess(id, complete) {
-    if (complete == null) { complete = angular.noop }
+    if (complete == null) { complete = ()=>{}  }
     return this._flashRow(id, '#DFF0D8', complete)
   }
 
   // Flash the row with red background
   flashOnError(id, complete) {
-    if (complete == null) { complete = angular.noop }
+    if (complete == null) { complete = ()=>{} }
     return this._flashRow(id, '#FF0000', complete)
   }
 
   _flashRow(id, color, complete) {
     if (color == null) { color = '#DFF0D8' }
-    if (complete == null) { complete = angular.noop }
-    const rowEl = $(this.getGridEl()[0].rows.namedItem(id))
+    if (complete == null) { complete = ()=>{} }
+    const rowEl = $(this.jqGridEl[0].rows.namedItem(id))
 
     rowEl.css('background-color', color)
     rowEl.delay(250).fadeOut('medium', () => rowEl.css('background-color', ''))
@@ -506,12 +497,12 @@ export default class GridCtrl {
 
   addClass(id, clazz, animation) {
     if (animation == null) { animation = true }
-    const rowEl = $(this.getGridEl()[0].rows.namedItem(id))
+    const rowEl = $(this.jqGridEl[0].rows.namedItem(id))
 
     if (!rowEl.hasClass(clazz)) {
       if (animation) {
         rowEl.delay(250).fadeOut('medium', () => rowEl.addClass(clazz))
-        return rowEl.fadeIn('fast', () => angular.noop())
+        return rowEl.fadeIn('fast', () => {})
       } else {
         return rowEl.addClass(clazz)
       }
@@ -520,12 +511,12 @@ export default class GridCtrl {
 
   removeClass(id, clazz, animation) {
     if (animation == null) { animation = true }
-    const rowEl = $(this.getGridEl()[0].rows.namedItem(id))
+    const rowEl = $(this.jqGridEl[0].rows.namedItem(id))
 
     if (rowEl.hasClass(clazz)) {
       if (animation) {
         rowEl.delay(250).fadeOut('medium', () => rowEl.removeClass(clazz))
-        return rowEl.fadeIn('fast', () => angular.noop())
+        return rowEl.fadeIn('fast', () => {})
       } else {
         return rowEl.removeClass(clazz)
       }
@@ -534,23 +525,23 @@ export default class GridCtrl {
 
   // FIXME its not clear to me what these are for. The grid seems to works without the highloghtclass workgin
   highlightRow(id) {
-    const rowEl = $(this.getGridEl()[0].rows.namedItem(id))
+    const rowEl = $(this.jqGridEl[0].rows.namedItem(id))
     if (!rowEl.hasClass(this.highlightClass)) {
       return rowEl.addClass(this.highlightClass)
     }
   }
 
   unHighlightRow(id) {
-    const rowEl = $(this.getGridEl()[0].rows.namedItem(id))
+    const rowEl = $(this.jqGridEl[0].rows.namedItem(id))
     if (rowEl.hasClass(this.highlightClass)) {
       return rowEl.removeClass(this.highlightClass)
     }
   }
 
   addAdditionalFooter(data) {
-    const footerRow = this.getGridWrapper().find('tr.footrow')
+    const footerRow = this.$gridWrapper.find('tr.footrow')
     let newFooterRow
-    newFooterRow = this.getGridWrapper().find('tr.myfootrow')
+    newFooterRow = this.$gridWrapper.find('tr.myfootrow')
     if (newFooterRow.length === 0) {
       // add second row of the footer if it's not exist
       newFooterRow = footerRow.clone()
@@ -579,34 +570,34 @@ export default class GridCtrl {
 
   //*** gridzInit  ****/
 
-  setupFormatters(gridCtrl, gridEl, options) {
+  setupFormatters(gridCtrl, jqGridEl, options) {
     // add any events etc for formatters
-    gridEl.on('click', 'a.editActionLink', function(event) {
+    jqGridEl.on('click', 'a.editActionLink', function(event) {
       event.preventDefault()
       const id = $(this).parents('tr:first').attr('id')
       return gridCtrl.contextMenuClick({ id: id }, { key: 'edit' })
     })
 
-    gridEl.on('click', 'a.gridLink', function(event) {
+    jqGridEl.on('click', 'a.gridLink', function(event) {
       event.preventDefault()
       const id = $(this).parents('tr:first').attr('id')
       window.location.href += (window.location.href.endsWith('/') ? '' : '/') + id
     })
   }
 
-  setupGridCompleteEvent(gridCtrl, gridEl, options) {
-    gridEl.on('jqGridAfterGridComplete', function() {
-      gridCtrl.$compile(gridEl)(gridCtrl.$scope)
+  setupGridCompleteEvent(gridCtrl, jqGridEl, options) {
+    jqGridEl.on('jqGridAfterGridComplete', function() {
+      console.log("jqGridAfterGridComplete event")
 
       // Add `min` class to remove pading to minimize row height
       if (options.minRowHeight || options.denseRows) {
         gridCtrl.isDense = true
-        // return _.each(gridEl[0].rows, it => angular.element(it).addClass('min'))
+        // return _.each(jqGridEl[0].rows, it => angular.element(it).addClass('min'))
       }
       if (options.selectFirstRow === true) {
-        const dataIds = gridEl.getDataIDs()
+        const dataIds = jqGridEl.getDataIDs()
         if (dataIds.length > 0) {
-          gridEl.setSelection(dataIds[0], true)
+          jqGridEl.setSelection(dataIds[0], true)
         }
       }
     })
@@ -659,6 +650,23 @@ export default class GridCtrl {
     options.colModel.forEach((col, i) => {
       if (!col.label) col.label = makeLabel(col.name)
     })
+  }
+
+  // the query by example toolbar
+  // FIXME not used anywhere that I can find was called right after jq gridz call.
+  setupFilterToolBar(options){
+    if (options.filterToolbar) {
+      this.jqGridEl.jqGrid('filterToolbar', {
+        beforeSearch() {
+          const postData = this.jqGridEl.jqGrid('getGridParam', 'postData')
+          const defaultFilters = postData.defaultFilters || postData.filters
+          const filters = (_.extend(JSON.parse(defaultFilters), (_.pick(postData, (value, key) => !['page', 'filters', 'max', 'sort', 'order', 'nd', '_search'].includes(key)))))
+          filters.firstLoad = false
+          postData.defaultFilters = defaultFilters
+          postData.filters = JSON.stringify(filters)
+        }
+      })
+    }
   }
 
 }

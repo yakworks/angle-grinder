@@ -1,7 +1,7 @@
 
 // Takes a nested Javascript object and flatten it.
 // see: https://github.com/hughsk/flat
-export default function FlattenServ(target, opts) {
+export default function flattenObject(target, opts) {
   if (opts == null) { opts = { delimiter: '.' } }
   const {
     delimiter

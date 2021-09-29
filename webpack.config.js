@@ -138,7 +138,7 @@ module.exports = function(env, argv) {
         },
         {
           // Load all images as base64 encoding if they are smaller than 8192 bytes
-          //FIXME THIS IS BROKEN AND PROBABLY NOT DOING ANYTHING
+          //FIXME THIS IS BROKEN AND MAY NOT BE DOING ANYTHING
           test: /\.(png|jpg|gif)$/,
           use: [{
             loader: 'url-loader',
