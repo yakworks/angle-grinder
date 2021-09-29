@@ -20,8 +20,9 @@ class ListCtrl extends BaseListCtrl {
     this.dataApi = localStoreApi.invoice
   }
 
-  $onInit() {
-    this.cfg = buildOptions(this)
+  async $onInit() {
+    const cfg = buildOptions(this)
+    await this.doConfig(cfg)
   }
 
   displaySelectedRowsData() {

@@ -2,6 +2,7 @@
 import { makeLabel } from '../utils/labelMaker'
 import { xlsData, csvData } from './excelExport'
 import flattenObject from './flattenObject'
+import toast from '../tools/growl'
 import _ from 'lodash'
 
 export default class GridCtrl {
@@ -20,28 +21,31 @@ export default class GridCtrl {
     }
   }
 
-  setupGrid(gridWrapper, jqGridElement) {
-    console.log("GridCtrl.setupGrid")
-    // FIXME send these in the method so they can be used outside of angular
-    const { gridId, gridOptions } = this
-    let $jqGrid = $(jqGridElement)
+  setupGrid(gridWrapper, jqGridElement, gridOptions) {
+    const opts = gridOptions
+    this.gridOptions = opts
+
+    const $jqGrid = $(jqGridElement)
     this.jqGridEl = $jqGrid
 
     this.$gridWrapper = $(gridWrapper)
 
-    $jqGrid.attr('id', gridId)
+    if (!this.gridId && !_.isNil(opts.gridId)) {
+      this.gridId = opts.gridId
+    }
+    $jqGrid.attr('id', this.gridId)
 
     // pager ID setup
-    if (gridOptions.pager !== false) {
-      const pagerId = `${gridId}-pager`
+    if (opts.pager !== false) {
+      const pagerId = `${this.gridId}-pager`
       this.$gridWrapper.find('div.gridz-pager').attr('id', pagerId)
-      gridOptions.pager = pagerId
+      opts.pager = pagerId
     }
 
     // set the hasSelected flag events
     const onSelect = (rowId, status, event) => {
-      if (gridOptions.eventHandlers?.onSelect && _.isFunction(gridOptions.eventHandlers.onSelect)) {
-        gridOptions.eventHandlers.onSelect(rowId, status, event)
+      if (opts.eventHandlers?.onSelect && _.isFunction(opts.eventHandlers.onSelect)) {
+        opts.eventHandlers.onSelect(rowId, status, event)
       }
       this.hasSelected = (this.getSelectedRowIds().length > 0)
       $jqGrid.trigger('gridz:selectedRows', [this.getSelectedRowIds()])
@@ -49,11 +53,20 @@ export default class GridCtrl {
     $jqGrid.on('jqGridSelectRow', onSelect)
     $jqGrid.on('jqGridSelectAll', onSelect)
 
-    this.setupColModel(gridOptions)
-    this.setupCtxMenu(gridOptions)
-    this.setupDataLoader(gridOptions)
-    this.setupGridCompleteEvent(this, $jqGrid, gridOptions)
-    this.setupFormatters(this, $jqGrid, gridOptions)
+    // if no datatype is passed in then use internal default
+    if (_.isNil(opts.datatype)) {
+      opts.datatype = (params) => this.gridLoader(params)
+    }
+
+    if (!_.isNil(opts.dataApi)) {
+      this.dataApi = opts.dataApi
+    }
+
+    this.setupColModel(opts)
+    this.setupCtxMenu(opts)
+    // this.setupDataLoader(gridOptions)
+    this.setupGridCompleteEvent(this, $jqGrid, opts)
+    this.setupFormatters(this, $jqGrid, opts)
     console.log("end GridCtrl.setupGrid")
   }
 
@@ -363,9 +376,7 @@ export default class GridCtrl {
   }
 
   // Sets the grid search filters and triggers a reload
-  async search(filters, q) {
-    // if (filters == null) { filters = {} }
-    // let filters = this.searchModel
+  async search(filters, queryText) {
     try {
       this.isSearching = true
       const params = {
@@ -374,7 +385,7 @@ export default class GridCtrl {
         postData: {}
       }
       if (filters) params.postData.q = JSON.stringify(filters)
-      if (q || q === '') params.postData.q = q
+      if (queryText || queryText === '') params.postData.q = queryText
       // console.log('search params', params)
       this.setParam(params)
       await this.reload()
@@ -395,6 +406,36 @@ export default class GridCtrl {
       }
     }
     return false
+  }
+
+  /**
+   * @param {*} p the params to send to search
+   * @param {*} searchModel if passed in this will get converted to json string and override whats in q
+   */
+  async gridLoader(p, searchModel) {
+    this.toggleLoading(true)
+    try {
+      // console.log("gridLoader params", p)
+      // fix up sort
+      if (p.sort && p.order) p.sort = `${p.sort} ${p.order}`
+      if (!p.sort) delete p.sort
+      delete p.order
+      // to be able to set default filters on the first load
+      if (!p.q && searchModel && searchModel !== {}) {
+        p.q = JSON.stringify(searchModel)
+      }
+      const data = await this.dataApi.search(p)
+      this.addJSONData(data)
+    } catch (er) {
+      this.handleError(er)
+    } finally {
+      this.toggleLoading(false)
+    }
+  }
+
+  handleError(er) {
+    console.error(er)
+    toast.error(er)
   }
 
   // Returns `true` if a columnt with the given id is hidden
@@ -574,6 +615,7 @@ export default class GridCtrl {
     // add any events etc for formatters
     jqGridEl.on('click', 'a.editActionLink', function(event) {
       event.preventDefault()
+      console.log("a.editActionLink", event)
       const id = $(this).parents('tr:first').attr('id')
       return gridCtrl.contextMenuClick({ id: id }, { key: 'edit' })
     })
@@ -644,6 +686,7 @@ export default class GridCtrl {
     if (!(!_.isNil(options.url)) && (!_.isNil(options.path))) {
       options.url = this.pathWithContext(options.path)
     }
+
   }
 
   setupColModel(options) {

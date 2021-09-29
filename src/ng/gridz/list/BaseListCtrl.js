@@ -4,7 +4,7 @@ import EditModalCtrl from './EditModalCtrl'
 import BulkUpdateModalCtrl from './BulkUpdateModalCtrl'
 import { argsMerge } from '../../utils/classUtils'
 import appConfigApi from '../../../dataApi/AppConfigApi'
-import toast from '../../../../src/tools/toast'
+import toast from '../../../tools/toast'
 // import { transformOptions } from '../../controls/formly/helpers'
 
 // see https://stackoverflow.com/questions/53349705/constructor-and-class-properties-within-javascript-mixins
@@ -32,15 +32,20 @@ export default class BaseListCtrl {
     argsMerge(this, args)
   }
 
-  async doConfig() {
-    let cfg = await appConfigApi.getConfig(this.apiKey)
-    cfg = _.cloneDeep(cfg)
+  async doConfig(cfg) {
+    if(!cfg){
+      let apiCfg = await appConfigApi.getConfig(this.apiKey)
+      cfg = _.cloneDeep(apiCfg)
+    }
+
     const gopts = cfg.gridOptions
     if (this.eventHandlers) {
       gopts.eventHandlers = this.eventHandlers
     }
     // assign default datatype to grid loader
-    gopts.datatype = (params) => this.gridLoader(params)
+    // gopts.datatype = (params) => this.gridLoader(params)
+    gopts.dataApi = this.dataApi
+
     if (!gopts.toolbarOptions) gopts.toolbarOptions = {}
     const tbopts = _.merge({}, this.defaultToolbarOpts, gopts.toolbarOptions)
 
@@ -211,24 +216,7 @@ export default class BaseListCtrl {
 
   // load results of a query into gridCtrl
   async gridLoader(p) {
-    this.gridCtrl.toggleLoading(true)
-    try {
-      // console.log("gridLoader params", p)
-      // fix up sort
-      if (p.sort && p.order) p.sort = `${p.sort} ${p.order}`
-      if (!p.sort) delete p.sort
-      delete p.order
-      // to be able to set default filters on the first load
-      if (!p.q && this.searchModel && this.searchModel !== {}) {
-        p.q = JSON.stringify(this.searchModel)
-      }
-      const data = await this.dataApi.search(p)
-      this.gridCtrl.addJSONData(data)
-    } catch (er) {
-      this.handleError(er)
-    } finally {
-      this.gridCtrl.toggleLoading(false)
-    }
+    this.gridCtrl.gridLoader(p, this.searchModel)
   }
 
   async search(filters) {
@@ -236,7 +224,7 @@ export default class BaseListCtrl {
       this.isSearching = true
       await this.gridCtrl.search(filters)
     } catch (er) {
-      console.error('search error', er)
+      this.handleError(er)
     } finally {
       this.isSearching = false
     }

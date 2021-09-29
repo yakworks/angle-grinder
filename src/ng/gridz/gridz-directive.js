@@ -9,7 +9,7 @@ angular.module(grid2Mod).directive('gridz',
     const link = function($scope, $el, attrs, gridCtrl) {
       const $gridzEl = $el.find('table.gridz')
 
-      gridCtrl.setupGrid($el, $gridzEl)
+      gridCtrl.setupGrid($el, $gridzEl, gridCtrl.gridOptions)
 
       $gridzEl.on('jqGridAfterGridComplete', function() {
         console.log("directive jqGridAfterGridComplete event")

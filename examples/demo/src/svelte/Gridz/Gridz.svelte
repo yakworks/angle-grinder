@@ -23,6 +23,7 @@
     shrinkToFit: true,
     contextMenu: true,
     pager: true,
+    dataApi: localStoreApi.invoice
     // datatype: (params) => ctrl.gridLoader(params)
   }
 
