@@ -1,6 +1,6 @@
 import 'angle-grinder/src/ng/gridz'
 import agGridz from 'angle-grinder/src/ng/gridz'
-import agGridCtrl from 'angle-grinder/src/ng/gridz/GridCtrl'
+import agGridCtrl from 'angle-grinder/src/gridz/GridCtrl'
 
 xdescribe("module: angleGrinder.gridz, conroller: AgGridCtrl", function() {
 
