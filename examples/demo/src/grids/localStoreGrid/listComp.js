@@ -21,8 +21,8 @@ class ListCtrl extends BaseListCtrl {
   }
 
   async $onInit() {
-    const cfg = buildOptions(this)
-    await this.doConfig(cfg)
+    this.cfg = buildOptions(this)
+    await this.doConfig(this.cfg)
   }
 
   displaySelectedRowsData() {

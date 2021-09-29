@@ -23,7 +23,8 @@
     shrinkToFit: true,
     contextMenu: true,
     pager: true,
-    dataApi: localStoreApi.invoice
+    dataApi: localStoreApi.invoice,
+    gridId: 'someGrid'
     // datatype: (params) => ctrl.gridLoader(params)
   }
 
@@ -31,9 +32,7 @@
     let gridCtrl = new GridCtrl()
     let gridWrapper = jq(node)
     const gridEl = gridWrapper.find('table.gridz')
-    gridCtrl.gridOptions = gridOptions
-    gridCtrl.gridId = 'someGrid'
-    gridCtrl.setupGrid(gridWrapper, gridEl)
+    gridCtrl.setupGrid(gridWrapper, gridEl, gridOptions)
     gridCtrl.initGridz()
   }
 
