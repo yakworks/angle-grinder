@@ -21,6 +21,7 @@ angular.module(grid2Mod).directive('gridz',
       $gridzEl.on( "gridz:selectedRows", function( event, selectedIds ) {
         // the toolbar is tied to the has selected, this makes it pick up the changes
         $scope.$evalAsync(() => {
+          console.log("selectedIds", selectedIds)
           gridCtrl.hasSelected = gridCtrl.hasSelected
         })
       })
