@@ -76,6 +76,7 @@ ngModule.provider('hljsService', function() {
  * hljsCache service
  */
 ngModule.factory('hljsCache', function($cacheFactory) {
+  'ngInject';
   return $cacheFactory('hljsCache')
 })
 
@@ -84,6 +85,7 @@ ngModule.factory('hljsCache', function($cacheFactory) {
  */
 ngModule.controller('HljsCtrl',
   function HljsCtrl(hljsCache, hljsService, $interpolate, $window) {
+    'ngInject';
     var ctrl = this
 
     var _elm = null
@@ -275,6 +277,7 @@ ngModule.controller('HljsCtrl',
  * hljs directive
  */
 ngModule.directive('hljs', function($parse) {
+  'ngInject';
   return {
     restrict: 'EA',
     controller: 'HljsCtrl',

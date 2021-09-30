@@ -14,6 +14,7 @@ class controller {
 
   vm = {}
 
+  /* @ngInject */
   constructor($scope) {
     this.$scope = $scope
   }

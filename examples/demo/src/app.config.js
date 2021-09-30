@@ -10,6 +10,7 @@ const app = angular.module(appName)
 // export default app.name
 
 app.run(function($rootScope, $state, $stateParams) {
+  'ngInject';
   // Set the ui-router state vars to global root to access them from any scope
   $rootScope.$state = $state
   appState.$state = $state

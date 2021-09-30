@@ -27,6 +27,7 @@ angular.module(MOD_NAME, [])
     ContextMenuOpened: 'context-menu-opened'
   })
   .directive('contextMenu', function($rootScope, ContextMenuEvents, $q, $document, $window, $compile) {
+    'ngInject';
     var _contextMenus = []
     // Contains the element that was clicked to show the context menu
     var _clickedElement = null

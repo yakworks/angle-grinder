@@ -4,6 +4,7 @@ var app = angular.module('ag.xeditable')
 
 // x-editable wrapper for date picker with calendar button
 app.directive('editableDatepicker', function(editableDirectiveFactory, $filter) {
+  'ngInject';
   return editableDirectiveFactory({
     directiveName: 'editableDatepicker',
 

@@ -56,6 +56,7 @@ common.config(function($uibTooltipProvider) {
 
 // Angular-breadcrumb
 common.config(function($breadcrumbProvider) {
+  'ngInject';
   $breadcrumbProvider.setOptions({
     template: '<ul class="breadcrumb"><li><a ui-sref="app.dashboard"><i class="fas fa-home margin-right-5 text-large text-dark"></i>Home</a></li><li ng-repeat="step in steps">{{step.ncyBreadcrumbLabel}}</li></ul>'
   })
@@ -63,12 +64,14 @@ common.config(function($breadcrumbProvider) {
 
 // Angular-Loading-Bar
 common.config(function(cfpLoadingBarProvider) {
+  'ngInject';
   cfpLoadingBarProvider.includeBar = true
   cfpLoadingBarProvider.includeSpinner = true
 })
 
 // common sanitation
 common.config(function($compileProvider) {
+  'ngInject';
   $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|javascript):/)
 })
 

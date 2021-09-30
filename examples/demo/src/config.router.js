@@ -9,6 +9,7 @@ import _ from 'lodash'
  */
 angular.module('app')
   .config(function($stateProvider, $urlRouterProvider, stateHelperProvider) {
+    'ngInject';
   // $urlRouterProvider.otherwise("/app/ui/elements");
   // $urlRouterProvider.otherwise('/app/dashboard')
     const freshRouterStates = _.cloneDeep(fresh)

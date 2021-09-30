@@ -6,6 +6,7 @@ import _ from 'lodash'
 
 angular.module(grid2Mod).directive('gridz',
   function($timeout, $parse, $compile) {
+    'ngInject';
     const link = function($scope, $el, attrs, gridCtrl) {
       const $gridzEl = $el.find('table.gridz')
 

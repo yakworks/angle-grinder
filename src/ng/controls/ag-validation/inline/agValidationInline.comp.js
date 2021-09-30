@@ -6,6 +6,7 @@ import _ from 'lodash'
 // ideas taken from https://github.com/refactorthis/xtform
 /* eslint-disable */
 angular.module(agValMod).directive('agValidationInline', function($timeout, $document) {
+  'ngInject';
   'use strict'
 
   var _uniqueIdCounter = 0

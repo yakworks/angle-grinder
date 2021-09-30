@@ -43,6 +43,7 @@ class ColumnConfigCtrl {
 }
 
 angular.module(grid2Mod).service('ColumnConfigServ', function($uibModal) {
+  'ngInject';
   this.open = (gridCtrl) => {
     // Log.debug("ColumnConfigServ open grid", grid)
     const modalInstance = $uibModal.open({
