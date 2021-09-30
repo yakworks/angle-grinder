@@ -1,3 +1,8 @@
+### v4.0.25
+
+[Full Changelog](https://github.com/yakworks/angle-grinder/compare/v4.0.24...v4.0.25)
+- remove gridzInit and added to GridCtrl, refactored GridCtrl to use mo… (#622) [link](https://github.com/yakworks/angle-grinder/commit/3514d0ff89ebec35b071664c7fa18543a04288fe)
+
 ### v4.0.24
 
 [Full Changelog](https://github.com/yakworks/angle-grinder/compare/v4.0.23...v4.0.24)
