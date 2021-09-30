@@ -13,15 +13,15 @@ class ListCtrl extends BaseListCtrl {
   editTemplate = require('./templates/editDialog.html')
   bulkUpdateTemplate = require('./templates/bulkUpdateForm.html')
 
-  // static $inject = _.union(super.$inject, ['restDataStore', '$timeout'])
-
   constructor(...args) {
     super(...args)
     this.dataApi = localStoreApi.invoice
   }
 
-  $onInit() {
+  async $onInit() {
+    // this.dataApi = localStoreApi.invoice
     this.cfg = buildOptions(this)
+    await this.doConfig(this.cfg)
   }
 
   displaySelectedRowsData() {

@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import _ from 'lodash'
-import Log from '../../../../src/utils/Log'
+import Log from '../utils/Log'
 
 /**
  * jquery library to wrap jqgrid and add our defaults
@@ -196,6 +196,7 @@ class Gridz {
         text = `Current row # ${rowNum} | `
       }
 
+      //FIXME need to fix this
       const pager = this.gridEl.parent().parent().parent().parent().find('#paymentGrid-pager_right')
       const span = pager.find('#rowNum')
       if (span.length === 0) {
@@ -247,7 +248,7 @@ class Gridz {
 }
 
 // register namespace
-$.extend(true, window, { grinder: { Grid: Gridz } })
+// $.extend(true, window, { grinder: { Grid: Gridz } })
 
 // Jquery Plugin definition
 $.fn.gridz = function(option) {

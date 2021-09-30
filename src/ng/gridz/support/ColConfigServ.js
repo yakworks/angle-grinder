@@ -1,5 +1,5 @@
 import angular from 'angular'
-import grid2Mod from '../../module'
+import grid2Mod from '../module'
 // import _ from 'lodash'
 // import Log from 'angle-grinder/src/utils/Log'
 
@@ -43,6 +43,7 @@ class ColumnConfigCtrl {
 }
 
 angular.module(grid2Mod).service('ColumnConfigServ', function($uibModal) {
+  'ngInject';
   this.open = (gridCtrl) => {
     // Log.debug("ColumnConfigServ open grid", grid)
     const modalInstance = $uibModal.open({
@@ -54,7 +55,7 @@ angular.module(grid2Mod).service('ColumnConfigServ', function($uibModal) {
       resolve: {
         gridCtrl: () => gridCtrl
       },
-      template: require('./dialog.html')
+      template: require('./colConfigDialog.html')
     })
     // prevents the "Possibly unhandled rejection: cancel"
     modalInstance.result.catch(function() { modalInstance.close() })

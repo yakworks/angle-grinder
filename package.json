@@ -80,12 +80,12 @@
   },
   "devDependencies": {
     "@babel/cli": "^7.10.4",
-    "@babel/core": "^7.7.7",
+    "@babel/core": "^7.15.5",
     "@babel/eslint-parser": "^7.15.0",
-    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/plugin-proposal-class-properties": "^7.14.5",
     "@babel/plugin-proposal-optional-chaining": "^7.7.5",
     "@babel/plugin-transform-react-jsx": "^7.14.9",
-    "@babel/preset-env": "7.7.7",
+    "@babel/preset-env": "^7.15.6",
     "@fullhuman/postcss-purgecss": "^1.3.0",
     "@testing-library/jest-dom": "^5.14.1",
     "angular-mocks": "1.6.10",
@@ -138,7 +138,7 @@
     "less-loader": "7.3.0",
     "load-grunt-tasks": "^0.6.0",
     "mime": "^1.2.11",
-    "mini-css-extract-plugin": "^1.6.2",
+    "mini-css-extract-plugin": "1.6.2",
     "mocha": "^1.20.4",
     "mocker-api": "^1.12.2",
     "ng-showdown": "^1.1.0",
@@ -184,13 +184,5 @@
     "defaults",
     "not IE 11",
     "maintained node versions"
-  ],
-  "staticFiles": {
-    "staticPath": [
-      {
-        "staticPath": "examples/simple/static",
-        "staticOutDir": "static"
-      }
-    ]
-  }
+  ]
 }

@@ -5,6 +5,7 @@ class ClrController {
   content = 'Click Me'
   loading = false
 
+  /* @ngInject */
   constructor($timeout) {
     this.$timeout = $timeout
   }

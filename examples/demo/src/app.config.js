@@ -4,12 +4,13 @@ import appName from './app.module'
 import './config.router'
 import appState from 'angle-grinder/src/tools/AppState'
 import {setConfig} from 'angle-grinder/src/tools/AppConfig'
-import {setClientConfig} from "../../../src/dataApi/ky";
+import {setClientConfig} from "angle-grinder/src/dataApi/ky";
 
 const app = angular.module(appName)
 // export default app.name
 
 app.run(function($rootScope, $state, $stateParams) {
+  'ngInject';
   // Set the ui-router state vars to global root to access them from any scope
   $rootScope.$state = $state
   appState.$state = $state

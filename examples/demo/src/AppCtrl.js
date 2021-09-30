@@ -4,6 +4,7 @@ import appState from 'angle-grinder/src/tools/AppState'
  * Main Application Controller
  */
 class AppCtrl {
+  /* @ngInject */
   constructor($rootScope, $scope, $document, $timeout, Fullscreen, cfpLoadingBar, $transitions) {
     this.$rootScope = $rootScope
     this.$scope = $scope

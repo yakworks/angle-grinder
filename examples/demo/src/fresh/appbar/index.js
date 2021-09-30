@@ -1,6 +1,7 @@
 import appState from 'angle-grinder/src/tools/AppState'
 
 class controller {
+  /* @ngInject */
   constructor($element) {
     this.$element = $element
     this.appState = appState

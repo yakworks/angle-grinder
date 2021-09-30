@@ -1,6 +1,7 @@
 /* eslint-disable */
 // FIXME WIP
 agForm.directive('agValidationSummary', function($templateCache) {
+  'ngInject';
   'use strict'
 
   return {

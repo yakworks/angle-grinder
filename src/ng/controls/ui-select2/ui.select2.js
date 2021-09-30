@@ -19,6 +19,7 @@ export default 'ui.select2'
 
 angular.module('ui.select2', [])
   .directive('uiSelect2', function($timeout, dataStoreApi) {
+    'ngInject';
     return {
       require: 'ngModel',
       priority: 1,
