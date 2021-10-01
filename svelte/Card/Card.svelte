@@ -1,15 +1,13 @@
 <script>
   import { createEventDispatcher, onMount, onDestroy } from 'svelte';
   import { fade as fadeTransition } from 'svelte/transition';
-  import { colorClasses } from '../shared/mixins';
-  import { classNames, plainText, createEmitter } from '../shared/utils';
-  import { restProps } from '../shared/rest-props';
+  import su from '../shared/common';
 
   import CardHeader from './CardHeader.svelte';
   import CardContent from './CardContent.svelte';
   import CardFooter from './CardFooter.svelte';
 
-  const emit = createEmitter(createEventDispatcher, $$props);
+  const emit = su.createEmitter(createEventDispatcher, $$props);
 
   let className = undefined;
   export { className as class };
@@ -35,7 +33,7 @@
   // handle toggle either sets open to false or fire the passed in toggle function
   $: handleToggle = toggle || (() => (isOpen = false));
 
-  $: classes = classNames(
+  $: classes = su.classNames(
     'card',
     className,
     {
@@ -43,7 +41,7 @@
       [`elevation-${elevation}`]: elevation,
       'no-border': noBorder,
     },
-    colorClasses($$props),
+    su.colorClasses($$props),
   );
 
   /* eslint-disable no-undef */
@@ -62,25 +60,25 @@
   data-backdrop={typeof backdrop === 'undefined' ? backdrop : backdrop.toString()}
   data-backdrop-el={backdropEl}
   transition:fadeTransition={transition}
-  {...restProps($$restProps)}
+  {...su.restProps($$restProps)}
 >
   {#if showClose}
     <button type="button" class="delete" aria-label='Close' on:click={handleToggle}/>
   {/if}
   {#if typeof title !== 'undefined' || hasHeaderSlots}
-    <CardHeader title={plainText(title)}>
+    <CardHeader title={su.plainText(title)}>
       <slot name="header" />
     </CardHeader>
   {/if}
   {#if typeof content !== 'undefined' || hasContentSlots}
     <CardContent>
-      {plainText(content)}
+      {su.plainText(content)}
       <slot name="content" />
     </CardContent>
   {/if}
   {#if typeof footer !== 'undefined' || hasFooterSlots}
     <CardFooter>
-      {plainText(footer)}
+      {su.plainText(footer)}
       <slot name="footer" />
     </CardFooter>
   {/if}

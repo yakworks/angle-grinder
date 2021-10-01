@@ -1,19 +1,17 @@
 <script>
   import CardTitle from './CardTitle.svelte';
   import CardSubtitle from './CardSubtitle.svelte';
-  import { colorClasses } from '../shared/mixins';
-  import { classNames } from '../utils';
-  import { restProps } from '../shared/rest-props';
+  import * as su from '../shared/common';
+  //class pattern
+  let className = undefined; export { className as class };
+  $: classes = su.classNames(className, 'card-header py-0', su.colorClasses($$props));
 
-  let className = undefined;
-  export { className as class };
   export let title = undefined;
   export let subtitle = undefined;
 
-  $: classes = classNames(className, 'card-header', colorClasses($$props));
 </script>
 
-<header class={classes} {...restProps($$restProps)}>
+<header class={classes} {...su.restProps($$restProps)}>
   {#if typeof title !== 'undefined'}
     <CardTitle class="p-0">{title}</CardTitle>
   {/if}

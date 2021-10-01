@@ -25,6 +25,8 @@
         if(!(/theme.+\.css$/.test(name))) { %>
         <link rel="stylesheet" href="<%= name %>">
     <% }}) %>
+    <% // jquery gets copied in from node_modules %>
+    <script defer src="libs/jquery.min.js"></script>
 
     <% for (var jsfile in htmlWebpackPlugin.files.js) { %>
       <script defer src="<%= htmlWebpackPlugin.files.js[jsfile]%>"></script>

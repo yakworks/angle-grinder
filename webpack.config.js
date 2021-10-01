@@ -166,7 +166,8 @@ module.exports = function(env, argv) {
       }),
       new CopyWebpackPlugin([
         { from: path.resolve(CONTENT_PUBLIC) },
-        { from: path.resolve(`${CONTENT_BASE}/config.js`)}
+        // { from: path.resolve(`${CONTENT_BASE}/config.js`)},
+        { from: 'node_modules/jquery/dist/jquery.min.js', to: 'libs'}
       ]),
       new MiniCssExtractPlugin({
         filename: 'assets/[name].css',
@@ -180,6 +181,7 @@ module.exports = function(env, argv) {
     //profile: false //list info on whats going on
 
     externals: {
+      jquery: 'jQuery',
       $: "jquery",
       jQuery: "jquery",
       "window.jQuery": "jquery"
@@ -193,6 +195,12 @@ module.exports = function(env, argv) {
       mainFields: ['svelte', 'browser', 'module', 'main']
     }
   }
+
+  const isAnalyze = typeof process.env.BUNDLE_ANALYZE !== "undefined";
+  if (isAnalyze) {
+    cfg.plugins.push(new BundleAnalyzerPlugin())
+  }
+
   if(isProd){
     cfg.plugins.push(
       new OptimizeCssAssetsPlugin({
