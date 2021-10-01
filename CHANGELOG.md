@@ -1,3 +1,8 @@
+### v4.0.27
+
+[Full Changelog](https://github.com/yakworks/angle-grinder/compare/v4.0.26...v4.0.27)
+- Fixes gridz (#624) [link](https://github.com/yakworks/angle-grinder/commit/cb3ab7b3a7f649ac5380fc39c40e7e1b5c2734a1)
+
 ### v4.0.26
 
 [Full Changelog](https://github.com/yakworks/angle-grinder/compare/v4.0.25...v4.0.26)
