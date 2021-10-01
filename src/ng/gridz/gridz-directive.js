@@ -47,7 +47,7 @@ angular.module(grid2Mod).directive('gridz',
           // We have to do timeout because of this issue with uib-tab https://github.com/angular-ui/bootstrap/issues/3796
           // Otherwise when tab is clicked and digest cycle ($watch) runs, the element.is(":visible") is still false, and hence grid is never initialized.
           timeoutPromise = $timeout(function() {
-            if (!element.is(':visible')) { return }
+            if (!$gridzEl.is(':visible')) { return }
             // initialize the grid on the visible element
             gridCtrl.initGridz()
             // unregister the watcher to free resources
