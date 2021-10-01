@@ -166,8 +166,8 @@ module.exports = function(env, argv) {
       }),
       new CopyWebpackPlugin([
         { from: path.resolve(CONTENT_PUBLIC) },
-        { from: path.resolve(`${CONTENT_BASE}/config.js`)},
-        { from: 'node_modules/jquery/dist/jquery.min.js', to: 'assets'}
+        // { from: path.resolve(`${CONTENT_BASE}/config.js`)},
+        { from: 'node_modules/jquery/dist/jquery.min.js', to: 'libs'}
       ]),
       new MiniCssExtractPlugin({
         filename: 'assets/[name].css',
