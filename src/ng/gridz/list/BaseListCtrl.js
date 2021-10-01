@@ -114,7 +114,9 @@ export default class BaseListCtrl {
   }
 
   updateFooter(data) {
-    this.gridCtrl.getGridEl().footerData('set', data)
+    setTimeout(_ => {
+      this.gridCtrl.getGridEl().footerData('set', data)
+    })
   }
 
   create(model = {}) {
