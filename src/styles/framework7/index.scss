@@ -2,7 +2,7 @@
 body {
   overflow: auto; //FIXME need to sort out scrolling for the page containers and remove this
   position: unset; //unsets the relative that f7 sets, not sure why or the implications here
-
+  height: unset;
 }
 
 .aurora {

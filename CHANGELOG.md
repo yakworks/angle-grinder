@@ -1,3 +1,8 @@
+### v4.0.26
+
+[Full Changelog](https://github.com/yakworks/angle-grinder/compare/v4.0.25...v4.0.26)
+- External jquery (#623) [link](https://github.com/yakworks/angle-grinder/commit/860cef81bb15481007d59a1b282abd50c3045fca)
+
 ### v4.0.25
 
 [Full Changelog](https://github.com/yakworks/angle-grinder/compare/v4.0.24...v4.0.25)
