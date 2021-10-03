@@ -71,8 +71,7 @@ export default function buildOptions(ctrl){
             return sum + row.amount
           }, 0)
         })
-      },
-      datatype: (params) => ctrl.gridLoader(params)
+      }
     },
     formFields: [
       {

@@ -1,7 +1,7 @@
 import AgBaseControl from '../AgBaseControl'
 // see https://mymth.github.io/vanillajs-datepicker/#/
 import { Datepicker } from 'vanillajs-datepicker'
-import { mergeDatepickerOpts, isoDateToDisplay, displayDateToIso } from '../../../../src/utils/dateSupport'
+import { mergeDatepickerOpts, isoDateToDisplay, displayDateToIso } from '../../../utils/dateSupport'
 // import Log from '../../../utils/Log'
 // import _ from 'lodash'
 

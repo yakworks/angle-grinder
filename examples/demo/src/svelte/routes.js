@@ -25,6 +25,8 @@ const componentsStates = {
     { name: 'itemBlocks', component: 'svelteItemsIndex' },
     { name: 'lists', component: 'svelteListsIndex' },
     { name: 'selects', component: 'svelteSelectsIndex' },
+    { name: 'gridz', component: 'svelteGridzIndex' },
+    { name: 'toolbar', component: 'svelteToolbarIndex' },
   ]
 }
 

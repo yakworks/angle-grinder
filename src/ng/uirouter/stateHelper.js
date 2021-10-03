@@ -13,6 +13,7 @@ angular.module(MOD_NAME, [
   'ncy-angular-breadcrumb'
 ])
   .provider('stateHelper', function($stateProvider) {
+    'ngInject';
     var self = this
 
     /**

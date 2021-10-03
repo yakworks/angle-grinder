@@ -1,4 +1,4 @@
-import appState from '../../../src/tools/AppState'
+import appState from '../../tools/AppState'
 import { toggleSidenav } from './ag-sidenav'
 
 const template = `

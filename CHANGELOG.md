@@ -1,3 +1,18 @@
+### v4.0.27
+
+[Full Changelog](https://github.com/yakworks/angle-grinder/compare/v4.0.26...v4.0.27)
+- Fixes gridz (#624) [link](https://github.com/yakworks/angle-grinder/commit/cb3ab7b3a7f649ac5380fc39c40e7e1b5c2734a1)
+
+### v4.0.26
+
+[Full Changelog](https://github.com/yakworks/angle-grinder/compare/v4.0.25...v4.0.26)
+- External jquery (#623) [link](https://github.com/yakworks/angle-grinder/commit/860cef81bb15481007d59a1b282abd50c3045fca)
+
+### v4.0.25
+
+[Full Changelog](https://github.com/yakworks/angle-grinder/compare/v4.0.24...v4.0.25)
+- remove gridzInit and added to GridCtrl, refactored GridCtrl to use mo… (#622) [link](https://github.com/yakworks/angle-grinder/commit/3514d0ff89ebec35b071664c7fa18543a04288fe)
+
 ### v4.0.24
 
 [Full Changelog](https://github.com/yakworks/angle-grinder/compare/v4.0.23...v4.0.24)

@@ -15,6 +15,7 @@ const mod = angular
   // .directive('agFormly', agFormly)
 
 mod.config(function(formlyConfigProvider) {
+  'ngInject';
   formlyTypes(formlyConfigProvider)
 })
 

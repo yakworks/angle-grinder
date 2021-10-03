@@ -1,7 +1,7 @@
 <div>
   <basic-search-form ng-show="$ctrl.showSearchForm"></basic-search-form>
 
-  <gridz grid-options="$ctrl.cfg.gridOptions"
+  <gridz ng-if="$ctrl.isConfigured" grid-options="$ctrl.cfg.gridOptions"
         toolbar-options="$ctrl.cfg.toolbarOptions"
         grid-id="basicGrid"
         list-ctrl="$ctrl">

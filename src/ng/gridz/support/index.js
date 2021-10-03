@@ -1,4 +1,2 @@
-import './ColConfig/ColConfigServ'
+import './ColConfigServ'
 import './search'
-import './FlattenServ'
-import './ExcelExportServ'

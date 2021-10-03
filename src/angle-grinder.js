@@ -4,7 +4,7 @@ import agCommon from './ng/common'
 import filtersMod from './ng/filters'
 import agCompMod from './ng/components'
 import agControlsMod from './ng/controls'
-import gridz from './ng/gridz'
+import ngGrid from './ng/gridz'
 import agPathWithContext from './ng/pathWithContext'
 import agSidebar from './ng/sidebar/sidebars'
 import agSidenav from './ng/sidenav'
@@ -18,7 +18,7 @@ var agmod = angular.module('angleGrinder', [
   agCommon,
   filtersMod,
   agPathWithContext,
-  gridz,
+  ngGrid,
   agCompMod,
   agControlsMod,
   agSidebar,
@@ -28,6 +28,7 @@ var agmod = angular.module('angleGrinder', [
 export default agmod.name
 
 agmod.config(function($httpProvider, pathWithContextProvider) {
+  'ngInject';
   // Intercept all http errors
   $httpProvider.interceptors.push('httpErrorsInterceptor')
 
@@ -40,6 +41,7 @@ agmod.config(function($httpProvider, pathWithContextProvider) {
 
 // see Running an AngularJS App in Production https://docs.angularjs.org/guide/production#!
 agmod.config(function($compileProvider) {
+  'ngInject';
   $compileProvider.debugInfoEnabled(false)
 })
 
@@ -76,6 +78,7 @@ agmod.factory('httpErrorsInterceptor', [
 
 // Catch all jquery xhr errors
 agmod.run(function($log) {
+  'ngInject';
   return $(document).ajaxError(function(event, jqxhr, settings, exception) {
     $log.error('Network error:', event, jqxhr, settings, exception)
     return growl.error(exception)

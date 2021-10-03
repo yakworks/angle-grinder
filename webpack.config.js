@@ -10,9 +10,6 @@ const FixStyleOnlyEntriesPlugin = require("webpack-fix-style-only-entries")
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const apiMocker = require('mocker-api');
-//const HtmlWebpackExcludeAssetsPlugin = require('html-webpack-exclude-assets-plugin')
-//const ThemesGeneratorPlugin = require('themes-switch/ThemesGeneratorPlugin')
-//const CleanWebpackPlugin = require('clean-webpack-plugin')
 const path = require("path");
 
 const { preprocess } = require('./svelte.config');
@@ -27,8 +24,6 @@ module.exports = function(env, argv) {
   let minDescriptor  = ''// = isProd ? '.min' : '' //for now don't add min so grails dev is easier
   let devtool = isProd ? 'source-map' : 'inline-source-map' //'eval-source-map'
   let pathout = argv.pathout ? path.resolve(argv.pathout) : path.resolve('./dist')
-  //let pathout = path.resolve('./examples/ag-demo-grails/src/main/webapp')
-  //let styleLoader = isProd ? MiniCssExtractPlugin.loader : 'style-loader'
   let styleLoader = MiniCssExtractPlugin.loader //always use this as it shows the sourcemaps in browser
   console.log("argv.mode", argv.mode); console.log("isProd", isProd); console.log("styleLoader", styleLoader);
 
@@ -37,8 +32,6 @@ module.exports = function(env, argv) {
     devtool: devtool,
     entry: {
       main: MAIN_ENTRY,
-      // 'theme-dark': `${CONTENT_BASE}/src/assets/themes/dark.scss`,
-      // 'theme-light': `${CONTENT_BASE}/src/assets/themes/light.scss`,
     },
     output: {
       path: pathout, //path.join(__dirname, "dist"),
@@ -52,26 +45,7 @@ module.exports = function(env, argv) {
       moduleIds: 'hashed', //makes it so the vendor chunks are cached and not rebuilt everytime
       splitChunks: {
         cacheGroups: {
-          //default: false,
-          //vendors: false,
-          // styles: {
-          //   name: 'styles',
-          //   // type: 'css/mini-extract',
-          //   // For webpack@4
-          //   test: /\.css$/,
-          //   chunks: 'all',
-          //   enforce: true,
-          //   priority: 30
-          // },
-          // jquery: {
-          //   test: /[\\/]node_modules[\\/](jquery|free-jqgrid|Select2|moment|toastr|sweetalert|eonasdan).*\.js/,
-          //   chunks: "all",
-          //   name: `jquery-libs${minDescriptor}`,
-          //   priority: 20, //A module can belong to multiple cache groups. The optimization will prefer the cache group with a higher priority
-          //   enforce: true //says to always build chunk and ignore min/max size stuff
-          // },
           vendor: {
-            //test: /node_modules[\\/].*\.js/,
             test: /node_modules/,
             chunks: "all",
             name: `vendor${minDescriptor}`,
@@ -106,7 +80,12 @@ module.exports = function(env, argv) {
           use: [
             { loader: styleLoader },
             // translates CSS into CommonJS
-            { loader: 'css-loader', options: { sourceMap: true } },
+            { loader: 'css-loader',
+              options: {
+                // url: false, //FIXME setting to false because mincss loader is broken and blows up processing these
+                sourceMap: true
+              }
+            },
             // Runs compiled CSS through postcss for vendor prefixing
             { loader: 'postcss-loader', options: { sourceMap: true } },
             { loader: 'sass-loader',
@@ -133,12 +112,18 @@ module.exports = function(env, argv) {
         },
         {
           // Load all images as base64 encoding if they are smaller than 8192 bytes
+          //FIXME THIS IS BROKEN AND MAY NOT BE DOING ANYTHING
           test: /\.(png|jpg|gif)$/,
           use: [{
             loader: 'url-loader',
             options: {
-              // On development we want to see where the file is coming from, hence we preserve the [path]
+              // name(resourcePath, resourceQuery) {
+              //     return isProd ? '[path][name].[ext]?hash=[hash:20]' : '[path][name].[ext]'
+              // },
               name: '[path][name].[ext]?hash=[hash:20]',
+              // outputPath: 'images/',
+              // publicPath: '../images',
+              // useRelativePaths: true,
               limit: 8192
             }
           }]
@@ -179,33 +164,14 @@ module.exports = function(env, argv) {
         configPath: isProd ? './config.js' : '../config.js'
         // excludeAssets: /theme.+\.css$/ //not working when we do it by hand like we are in the index.ejs
       }),
-      //new HtmlWebpackExcludeAssetsPlugin(),
-      new CopyWebpackPlugin(
-        [
-            {
-              from: path.resolve(CONTENT_PUBLIC)
-            },
-            {
-              from: path.resolve(`${CONTENT_BASE}/config.js`)
-            }],
-
-      ),
+      new CopyWebpackPlugin([
+        { from: path.resolve(CONTENT_PUBLIC) },
+        // { from: path.resolve(`${CONTENT_BASE}/config.js`)},
+        { from: 'node_modules/jquery/dist/jquery.min.js', to: 'libs'}
+      ]),
       new MiniCssExtractPlugin({
-        // moduleFilename: ({ name }) => {
-        //   return /theme/.test(name) ? `assets/theme/${name.replace('theme-','')}.css` : `assets/${name}.css`
-        //   //return `${prefix}/${name}.css`
-        // },
         filename: 'assets/[name].css',
-        // allChunks: true
       }),
-      // new ThemesGeneratorPlugin({
-      //   srcDir: `${CONTENT_BASE}/src`,
-      //   themesDir: `${CONTENT_BASE}/src/assets/themes`,
-      //   outputDir: 'assets/themes',
-      //   useStaticThemeName: true,
-      //   defaultStyleName: 'default.scss',
-      //   importAfterVariables: true
-      // })
       new webpack.DefinePlugin({
         BASE_URL: JSON.stringify(process.env.BASE_URL || 'http://localhost:8080/')
       })
@@ -215,22 +181,26 @@ module.exports = function(env, argv) {
     //profile: false //list info on whats going on
 
     externals: {
+      jquery: 'jQuery',
       $: "jquery",
       jQuery: "jquery",
       "window.jQuery": "jquery"
     },
     resolve: {
-      //extensions: ['.js', '.vue', '.json'],
       alias: {
         'angle-grinder': path.resolve('./'),
         svelte: path.resolve('node_modules', 'svelte'),
-        //Components: path.resolve(__dirname, "..", "src", "components"),
       },
       extensions: ['.tsx', '.ts', '.mjs', '.js', '.svelte'],
       mainFields: ['svelte', 'browser', 'module', 'main']
-
     }
   }
+
+  const isAnalyze = typeof process.env.BUNDLE_ANALYZE !== "undefined";
+  if (isAnalyze) {
+    cfg.plugins.push(new BundleAnalyzerPlugin())
+  }
+
   if(isProd){
     cfg.plugins.push(
       new OptimizeCssAssetsPlugin({

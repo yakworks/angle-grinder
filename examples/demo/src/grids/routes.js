@@ -82,15 +82,7 @@ const gridsStates = {
       name: 'basic-grid',
       component: 'basicGridIndex',
       url: '/foo'
-    },
-    /*{
-      name: 'Legacy Demo Grid',
-      component: 'legacyGridIndex'
-    }*/
-    // {
-    //   name: 'Rest Demo Grid',
-    //   component: 'restGridExample'
-    // }
+    }
   ]
 }
 

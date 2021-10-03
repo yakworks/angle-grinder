@@ -61,8 +61,8 @@ class MemDataApi {
   //
   async search(p, flds) {
     if (!p) p = {}
-    console.log("search p", p)
-    console.log("search flds", flds)
+    // console.log("search p", p)
+    // console.log("search flds", flds)
     let list = await this.data()
     const isSearch = p && (p._search === 'true' || p._search === true || p.q)
     if (isSearch) list = this.filter(list, p)
