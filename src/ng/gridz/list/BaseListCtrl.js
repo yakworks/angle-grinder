@@ -224,7 +224,7 @@ export default class BaseListCtrl {
   async search(filters) {
     try {
       this.isSearching = true
-      await this.gridCtrl.search(filters)
+      await this.gridCtrl?.search(filters)
     } catch (er) {
       this.handleError(er)
     } finally {
