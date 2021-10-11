@@ -1,3 +1,8 @@
+### v4.0.28
+
+[Full Changelog](https://github.com/yakworks/angle-grinder/compare/v4.0.27...v4.0.28)
+- Fixed nav tab links to be able to open in the new tab (#625) [link](https://github.com/yakworks/angle-grinder/commit/3040525d1de10e1c5a81548c9e71fd337a9ac28d)
+
 ### v4.0.27
 
 [Full Changelog](https://github.com/yakworks/angle-grinder/compare/v4.0.26...v4.0.27)
