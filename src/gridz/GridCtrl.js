@@ -67,6 +67,7 @@ export default class GridCtrl {
     // this.setupDataLoader(gridOptions)
     this.setupGridCompleteEvent(this, $jqGrid, opts)
     this.setupFormatters(this, $jqGrid, opts)
+    this.formatters && this.setupCustomFormatters(this, this.formatters, opts)
   }
 
   //initialize the grid the jquery way
@@ -408,15 +409,18 @@ export default class GridCtrl {
    */
   async gridLoader(p, searchModel) {
     this.toggleLoading(true)
+    console.log('111111111111')
     try {
       // fix up sort
       if (p.sort && p.order) p.sort = `${p.sort} ${p.order}`
       if (!p.sort) delete p.sort
       delete p.order
+      console.log({qw: this.searchModel})
       // to be able to set default filters on the first load
       if (!p.q && searchModel && searchModel !== {}) {
         p.q = JSON.stringify(searchModel)
       }
+      console.log(p)
       const data = await this.dataApi.search(p)
       this.addJSONData(data)
     } catch (er) {
@@ -616,6 +620,12 @@ export default class GridCtrl {
       event.preventDefault()
       const id = $(this).parents('tr:first').attr('id')
       window.location.href += (window.location.href.endsWith('/') ? '' : '/') + id
+    })
+  }
+
+  setupCustomFormatters(gridCtrl, formatters, options) {
+    options.colModel.forEach((col, i) => {
+      if (col.formatter && _.isString(col.formatter) && formatters[col.formatter]) col.formatter = formatters[col.formatter].bind(this)
     })
   }
 
