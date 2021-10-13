@@ -407,20 +407,17 @@ export default class GridCtrl {
    * @param {*} p the params to send to search
    * @param {*} searchModel if passed in this will get converted to json string and override whats in q
    */
-  async gridLoader(p, searchModel) {
+  async gridLoader(p, searchModel={}) {
     this.toggleLoading(true)
-    console.log('111111111111')
     try {
       // fix up sort
       if (p.sort && p.order) p.sort = `${p.sort} ${p.order}`
       if (!p.sort) delete p.sort
       delete p.order
-      console.log({qw: this.searchModel})
       // to be able to set default filters on the first load
-      if (!p.q && searchModel && searchModel !== {}) {
-        p.q = JSON.stringify(searchModel)
-      }
-      console.log(p)
+      const q = p.q ? JSON.parse(p.q): {}
+      const permanentFilters = this.listCtrl?.permanentFilters || {}
+      p.q = JSON.stringify({ ...q, ...searchModel , ...permanentFilters})
       const data = await this.dataApi.search(p)
       this.addJSONData(data)
     } catch (er) {

@@ -22,7 +22,7 @@ export default class BaseListCtrl {
     },
     searchFormButton: { icon: 'mdi-text-box-search-outline', tooltip: 'Show Search Filters Form' }
   }
-
+  permanentFilters = {} //in some cases we need filters that couldnt be cleared like payment on batch page
   editTemplate = require('./editDialog.html')
   bulkUpdateTemplate = require('./bulkUpdateDialog.html')
   //  searchTemplate = require('./searchForm.html')
@@ -30,6 +30,10 @@ export default class BaseListCtrl {
   static $inject = ['$scope', '$element', '$uibModal', '$timeout']
   constructor(...args) {
     argsMerge(this, args)
+  }
+
+  extendFilters(filters) {
+    return _.merge({}, filters || {}, this.permanentFilters)
   }
 
   async doConfig(cfg) {
@@ -218,13 +222,13 @@ export default class BaseListCtrl {
 
   // load results of a query into gridCtrl
   async gridLoader(p) {
-    this.gridCtrl.gridLoader(p, this.searchModel)
+    this.gridCtrl.gridLoader(p, this.extendFilters(this.searchModel))
   }
 
   async search(filters) {
     try {
       this.isSearching = true
-      await this.gridCtrl?.search(filters)
+      await this.gridCtrl?.search(this.extendFilters(filters))
     } catch (er) {
       this.handleError(er)
     } finally {
