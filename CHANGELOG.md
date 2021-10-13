@@ -1,3 +1,8 @@
+### v4.0.29
+
+[Full Changelog](https://github.com/yakworks/angle-grinder/compare/v4.0.28...v4.0.29)
+- Initial filtering for grids (#626) [link](https://github.com/yakworks/angle-grinder/commit/e1ea0b62f471d2b3926dedb884d53d10dc2fcc38)
+
 ### v4.0.28
 
 [Full Changelog](https://github.com/yakworks/angle-grinder/compare/v4.0.27...v4.0.28)
