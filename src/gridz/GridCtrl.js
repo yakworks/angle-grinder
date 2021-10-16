@@ -488,12 +488,9 @@ export default class GridCtrl {
   toggleLoading(show = true) {
     const loadEl = this.$gridWrapper.find(`#load_${this.gridId}`)
     if (show) {
-      // this.cfpLoadingBar.start()
-      // this.cfpLoadingBar.set(0.3)
       loadEl.show()
 
     } else {
-      // this.cfpLoadingBar.complete()
       loadEl.hide()
     }
     return show ? loadEl.show() : loadEl.hide()
