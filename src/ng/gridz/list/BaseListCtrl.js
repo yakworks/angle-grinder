@@ -100,7 +100,7 @@ export default class BaseListCtrl {
         return this.deleteSelected()
       default:
         if (_.isFunction(this[btnItem.key])) {
-          this[btnItem.key](btnItem, event)
+          return this[btnItem.key](btnItem, event)
         }
     }
   }

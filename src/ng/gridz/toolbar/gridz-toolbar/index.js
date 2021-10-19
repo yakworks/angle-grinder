@@ -27,6 +27,7 @@ class Controller {
     searchFormButton: { icon: 'mdi-text-box-search-outline', tooltip: 'Show Search Filters Form' },
     showQuickSearch: true
   }
+  isLoading = false
 
   /* @ngInject */
   constructor($element, $compile, $scope) {
@@ -74,13 +75,20 @@ class Controller {
     this.gridCtrl.quickSearch('')
   }
 
-  fireButtonClick(key, btnItem, event) {
+  async fireButtonClick(key, btnItem, event) {
     btnItem.key = key
     // if it has an action then fire that
+    try {
+      this.isLoading = true
+      this.gridCtrl.toggleLoading(true)
     if (_.isFunction(btnItem.action)) {
-      btnItem.action(btnItem, event)
+      await btnItem.action(btnItem, event)
     } else {
-      this.gridCtrl.listCtrl.fireToolbarAction(btnItem, event)
+      await this.gridCtrl.listCtrl.fireToolbarAction(btnItem, event)
     }
+  } finally {
+    this.isLoading = false
+    this.gridCtrl.toggleLoading(false)
+  }
   }
 }

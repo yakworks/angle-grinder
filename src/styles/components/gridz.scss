@@ -21,7 +21,15 @@ $grid-border: $border;
   transition: .1s linear background-image;
   overflow: visible
 }
-
+.ui-widget-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: gray;
+  opacity: 0.01;
+}
 // when dragging to reposition columns
 .ui-widget-content .ui-state-default.ui-sortable-helper {
   background-image: linear-gradient($grey-lightest);

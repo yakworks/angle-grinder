@@ -1,7 +1,7 @@
 <ag-toolbar class="is-light is-dense has-border">
   <div class="toolbar-item px-0 py-0" ng-show="tbCtrl.gridCtrl.hasSelected">
     <div class="selection-pointer"><i class="fas fa-level-up-alt fa-rotate-180 fa-xs"></i></div>
-    <tb-button ng-repeat="(key, btnItem) in tbCtrl.opts.selectedButtons" ng-if="!(btnItem.class=='hidden')" opts="btnItem"></tb-button>
+    <tb-button ng-repeat="(key, btnItem) in tbCtrl.opts.selectedButtons" ng-if="!(btnItem.class=='hidden')" is-loading="tbCtrl.isLoading" opts="btnItem"></tb-button>
     <!-- <ag-button ng-repeat="(key, btnItem) in tbCtrl.opts.selectedButtons"
       icon="{{btnItem.icon}}" uib-tooltip="{{btnItem.tooltip}}" color="{{btnItem.color}}"
       ng-click="tbCtrl.fireButtonClick(key, btnItem, $event)">{{btnItem.display}}</ag-button> -->

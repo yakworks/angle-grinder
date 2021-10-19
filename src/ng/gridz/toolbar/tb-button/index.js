@@ -32,7 +32,8 @@ export default () => ({
   },
   template: require('./tbButton.html'),
   bindToController: {
-    opts: '<'
+    opts: '<',
+    isLoading: '<'
   },
   controller: Controller,
   controllerAs: 'tbBtnCtrl'
