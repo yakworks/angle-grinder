@@ -5,6 +5,7 @@ import BulkUpdateModalCtrl from './BulkUpdateModalCtrl'
 import { argsMerge } from '../../utils/classUtils'
 import appConfigApi from '../../../dataApi/AppConfigApi'
 import toast from '../../../tools/toast'
+import Swal from '../../../tools/swal'
 // import { transformOptions } from '../../controls/formly/helpers'
 
 // see https://stackoverflow.com/questions/53349705/constructor-and-class-properties-within-javascript-mixins
@@ -246,11 +247,47 @@ export default class BaseListCtrl {
     toast.error(er)
   }
 
+  swalError(error) {
+    Swal.fire({
+      icon: 'error',
+      title: error.title,
+      text: error.message,
+      showCloseButton: true
+    })
+  }
+
   handleResults(response) {
     if (response.ok) {
       toast.success(` ${response.success.join('<br>')}`, response.defaultMessage)
     } else {
       toast.error(`${response.failed.join('<br>')} `, response.defaultMessage)
     }
+  }
+
+  handleAction(action) {
+    const ids = this.gridCtrl?.getSelectedRowIds()
+    console.log(this.gridCtrl)
+    const run = async (ids) => {
+      ids.forEach((id) => {
+        this.gridCtrl.highlightRow(id)
+      })
+
+      try {
+        const result = await action()
+        if(result.ok){
+          toast.success(result.success[0]?.message || 'Action is sucsess')
+          this.gridCtrl.reload() // todo: should we reload only selected rows?
+        } else {
+          this.swalError({title: 'Action Error',message: result.failed[0]?.message || 'Action failed'})
+        }
+      } catch (e) {
+        this.handleError(e)
+      } finally {
+        ids.forEach((id) => {
+          this.gridCtrl.highlightRow(id)
+        })
+      }
+    }
+    return run(ids)
   }
 }
