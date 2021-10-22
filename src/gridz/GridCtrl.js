@@ -23,6 +23,7 @@ export default class GridCtrl {
 
   setupGrid(gridWrapper, jqGridElement, gridOptions) {
     const opts = gridOptions
+    opts.loadui = 'block'
     this.gridOptions = opts
 
     const $jqGrid = $(jqGridElement)
@@ -72,6 +73,7 @@ export default class GridCtrl {
 
   //initialize the grid the jquery way
   initGridz(){
+    console.log({opt: this.gridOptions})
     this.jqGridEl.gridz(this.gridOptions)
     // setupFilterToolBar(options)
   }
@@ -486,15 +488,14 @@ export default class GridCtrl {
   }
 
   toggleLoading(show = true) {
-    const loadEl = this.$gridWrapper.find(`#load_${this.gridId}`)
+    const loadEl = this.$gridWrapper.find(`#load_${this.getGridId()}`)
+    const overlay = this.$gridWrapper.find(`#lui_${this.getGridId()}`)
     if (show) {
-      // this.cfpLoadingBar.start()
-      // this.cfpLoadingBar.set(0.3)
       loadEl.show()
-
+      overlay.show()
     } else {
-      // this.cfpLoadingBar.complete()
       loadEl.hide()
+      overlay.hide()
     }
     return show ? loadEl.show() : loadEl.hide()
   }
