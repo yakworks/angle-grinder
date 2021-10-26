@@ -265,6 +265,7 @@ export default class BaseListCtrl {
   }
 
   handleAction(action) {
+    console.log('handleAction', action)
     const ids = this.gridCtrl?.getSelectedRowIds()
     console.log(this.gridCtrl)
     const run = async (ids) => {
