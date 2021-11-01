@@ -1,3 +1,9 @@
+### v4.0.31
+
+[Full Changelog](https://github.com/yakworks/angle-grinder/compare/v4.0.30...v4.0.31)
+- Shipkit update (#632) [link](https://github.com/yakworks/angle-grinder/commit/13d7eeaa05f249489e143cb0abf87afcb239fdac)
+- Test grinder version (#630) [link](https://github.com/yakworks/angle-grinder/commit/c69de7854a5f66a046036c3f0363e7a8ba13852b)
+
 ### v4.0.29
 
 [Full Changelog](https://github.com/yakworks/angle-grinder/compare/v4.0.28...v4.0.29)
