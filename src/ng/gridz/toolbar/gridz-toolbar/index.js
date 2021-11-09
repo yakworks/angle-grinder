@@ -18,7 +18,6 @@ export default () => ({
 class Controller {
   opts = {
     selectedButtons: {
-      bulkUpdate: { icon: 'far fa-edit', tooltip: 'Bulk Update' },
       xlsExport: { icon: 'far fa-file-excel', tooltip: 'Export to Excel' }
     },
     leftButtons: {
