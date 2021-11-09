@@ -1,3 +1,8 @@
+### v4.0.32
+
+[Full Changelog](https://github.com/yakworks/angle-grinder/compare/v4.0.31...v4.0.32)
+- Bulk update isnt required (#633) [link](https://github.com/yakworks/angle-grinder/commit/a44861bda6aedf994048b5fd8ba8ceeb50f7e543)
+
 ### v4.0.31
 
 [Full Changelog](https://github.com/yakworks/angle-grinder/compare/v4.0.30...v4.0.31)
