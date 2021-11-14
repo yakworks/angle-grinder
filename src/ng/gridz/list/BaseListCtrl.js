@@ -34,7 +34,7 @@ export default class BaseListCtrl {
   }
 
   extendFilters(filters) {
-    return _.merge({}, filters || {}, this.permanentFilters)
+    return _.merge(this.initSearch || {}, filters || {}, this.permanentFilters)
   }
 
   async doConfig(cfg) {
@@ -223,10 +223,12 @@ export default class BaseListCtrl {
 
   // load results of a query into gridCtrl
   async gridLoader(p) {
+    console.log('sseeeeearch', this.extendFilters(filters))
     this.gridCtrl.gridLoader(p, this.extendFilters(this.searchModel))
   }
 
   async search(filters) {
+    console.log('sseeeeearch', this.extendFilters(filters))
     try {
       this.isSearching = true
       await this.gridCtrl?.search(this.extendFilters(filters))

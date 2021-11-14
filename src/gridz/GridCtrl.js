@@ -419,7 +419,8 @@ export default class GridCtrl {
       // to be able to set default filters on the first load
       const q = p.q ? JSON.parse(p.q): {}
       const permanentFilters = this.listCtrl?.permanentFilters || {}
-      p.q = JSON.stringify({ ...q, ...searchModel , ...permanentFilters})
+      const initSearch = this.listCtrl?.initSearch || {}
+      p.q = JSON.stringify({...initSearch, ...q,  ...searchModel, ...permanentFilters})
       const data = await this.dataApi.search(p)
       this.addJSONData(data)
     } catch (er) {
