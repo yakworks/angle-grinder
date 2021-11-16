@@ -25,8 +25,17 @@ class Controller extends AgBaseControl {
     this.placeholderTo = this.opts.toField.placeholder
     this.elementIdFrom = this.elementId + '_from'
     this.elementIdTo = this.elementId + '_to'
-
     super.onInit()
+    const fromFld = this.opts.fromField.name
+    const toFld = this.opts.toField.name
+
+    this.ngModelCtrl.$render = () => {
+      let vmv = this.ngModelCtrl.$viewValue
+      vmv = _.isEmpty(vmv) ? { [fromFld]: '', [toFld]: '' } : vmv
+      // Log.debug('vmv', vmv)
+      this.valueFrom = vmv[fromFld] || ''
+      this.valueTo = vmv[toFld] || ''
+    }
   }
 
   onChange() {
@@ -34,6 +43,7 @@ class Controller extends AgBaseControl {
     const toFld = this.opts.toField.name
 
     const fromToObj = { [fromFld]: this.valueFrom, [toFld]: this.valueTo }
+    // Log.debug('onChange fromToObj', fromToObj)
     this.ngModelCtrl.$setViewValue(fromToObj)
   }
 }
