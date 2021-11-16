@@ -1,3 +1,8 @@
+### v4.0.33
+
+[Full Changelog](https://github.com/yakworks/angle-grinder/compare/v4.0.32...v4.0.33)
+- Fixed grids init search (#634) [link](https://github.com/yakworks/angle-grinder/commit/ac885f0786265de7564a14aad5adb41f518918b8)
+
 ### v4.0.32
 
 [Full Changelog](https://github.com/yakworks/angle-grinder/compare/v4.0.31...v4.0.32)
