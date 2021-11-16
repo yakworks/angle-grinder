@@ -6,6 +6,10 @@ class Controller extends AgBaseControl {
       this.elementId = this.inputId
     }
     super.initDefaults()
+
+    this.ngModelCtrl.$render = () => {
+      this.value = this.ngModelCtrl.$viewValue
+    }
   }
 
   onChange() {
