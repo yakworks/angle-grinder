@@ -34,7 +34,7 @@ export default class BaseListCtrl {
   }
 
   extendFilters(filters) {
-    return _.merge({}, filters || {}, this.permanentFilters)
+    return _.merge(this.initSearch || {}, filters || {}, this.permanentFilters)
   }
 
   async doConfig(cfg) {
