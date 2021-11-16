@@ -1,3 +1,8 @@
+### v4.0.34
+
+[Full Changelog](https://github.com/yakworks/angle-grinder/compare/v4.0.33...v4.0.34)
+- Fixed amount range reset 9ci/rcm-ui#50 (#635) [link](https://github.com/yakworks/angle-grinder/commit/a4be80d775d086b5f3f46cb18862c75020c64c67)
+
 ### v4.0.33
 
 [Full Changelog](https://github.com/yakworks/angle-grinder/compare/v4.0.32...v4.0.33)
