@@ -1,6 +1,6 @@
 import { Notyf } from 'notyf'
 // import 'notyf/notyf.min.css'
-import themeColors from 'angle-grinder/src/themeColors'
+import themeColors from '../../themeColors'
 
 // const themeColors = {
 //   success: 'hsla(85, 77%, 35%, .97)',
