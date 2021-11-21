@@ -50,15 +50,23 @@ class Controller extends AgBaseControl {
     const isoDate = displayDateToIso(this.value)
     this.ngModelCtrl.$setViewValue(isoDate)
     // if dialog is open then update the change there too
-    if (this.datepicker.active) this.datepicker.update()
+    //if (this.datepicker.active) this.datepicker.update()
   }
 
   onBlur() {
+    const isoDate = displayDateToIso(this.value)
+    this.ngModelCtrl.$setViewValue(isoDate)
     this.datepicker.update()
   }
 
   $onDestroy() {
     this.datepicker.destroy()
+  }
+
+  onEnter(event) {
+    const isoDate = displayDateToIso(this.value)
+    this.ngModelCtrl.$setViewValue(isoDate)
+    this.datepicker.update()
   }
 }
 
@@ -70,6 +78,7 @@ const template = `
   placeholder="{{$ctrl.placeholder}}"
   name="{{$ctrl.name}}"
   id="{{$ctrl.elementId}}"
+  ng-keydown="$event.keyCode === 13 && $ctrl.onEnter($event)"
   ng-model="$ctrl.value"
   ng-model-options='{ debounce: 500 }'
   ng-change="$ctrl.onChange()"
