@@ -27,7 +27,6 @@ class Controller extends AgBaseControl {
     super.onInit()
     const fromFld = this.opts.fromField.name
     const toFld = this.opts.toField.name
-
     this.ngModelCtrl.$render = () => {
       let vmv = this.ngModelCtrl.$viewValue
       vmv = _.isEmpty(vmv) ? { [fromFld]: '', [toFld]: '' } : vmv
@@ -41,7 +40,7 @@ class Controller extends AgBaseControl {
     const fromFld = this.opts.fromField.name
     const toFld = this.opts.toField.name
 
-    const fromToObj = { [fromFld]: this.valueFrom, [toFld]: this.valueTo }
+    const fromToObj = { ...(this.valueFrom && {[fromFld]: this.valueFrom}), ...(this.valueTo && { [toFld]: this.valueTo}) }
     // Log.debug('onChange fromToObj', fromToObj)
     this.ngModelCtrl.$setViewValue(fromToObj)
   }
