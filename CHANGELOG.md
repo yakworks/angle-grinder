@@ -1,3 +1,8 @@
+### v4.0.35
+
+[Full Changelog](https://github.com/yakworks/angle-grinder/compare/v4.0.34...v4.0.35)
+- Date picker fixes (#636) [link](https://github.com/yakworks/angle-grinder/commit/d37a579864c791cb6070c22a7167cb10e6d9fbb8)
+
 ### v4.0.34
 
 [Full Changelog](https://github.com/yakworks/angle-grinder/compare/v4.0.33...v4.0.34)
