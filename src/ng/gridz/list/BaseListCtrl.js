@@ -244,7 +244,8 @@ export default class BaseListCtrl {
 
   handleError(er) {
     console.error(er)
-    toast.error(er)
+    const message = er?.response?.status === 500 ? 'Unexpected error' : null
+    toast.error(message || er)
   }
 
   swalError(error) {
@@ -276,10 +277,10 @@ export default class BaseListCtrl {
       try {
         const result = await action()
         if(result.ok){
-          toast.success(result.success[0]?.message || 'Action is sucsess')
+          toast.success(result.title || 'Action is sucsess')
           this.gridCtrl.reload() // todo: should we reload only selected rows?
         } else {
-          this.swalError({title: 'Action Error',message: result.failed[0]?.message || 'Action failed'})
+          this.swalError({title: result.title , message: result?.failed?.join('<br>') || ''})
         }
       } catch (e) {
         this.handleError(e)
