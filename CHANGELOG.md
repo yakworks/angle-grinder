@@ -1,3 +1,8 @@
+### v4.0.36
+
+[Full Changelog](https://github.com/yakworks/angle-grinder/compare/v4.0.35...v4.0.36)
+- Changed resp format for actions (#637) [link](https://github.com/yakworks/angle-grinder/commit/2584a8eb49e308e2dcdcb0ee33abf13a51367dd0)
+
 ### v4.0.35
 
 [Full Changelog](https://github.com/yakworks/angle-grinder/compare/v4.0.34...v4.0.35)
