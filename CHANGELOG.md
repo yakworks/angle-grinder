@@ -1,3 +1,8 @@
+### v4.0.37
+
+[Full Changelog](https://github.com/yakworks/angle-grinder/compare/v4.0.36...v4.0.37)
+- wrap ky in object, add helper method for setting current title (#638) [link](https://github.com/yakworks/angle-grinder/commit/a5a3b0acf556189b9a110251f5d25342d9319ef5)
+
 ### v4.0.36
 
 [Full Changelog](https://github.com/yakworks/angle-grinder/compare/v4.0.35...v4.0.36)
