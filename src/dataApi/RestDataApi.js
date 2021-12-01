@@ -9,12 +9,16 @@ export default class RestDataApi {
    *
    * @param prefixUrl The endpoint url prefix ex: /api or http://foo.com/api
    */
-  constructor(endpoint, api) {
+  constructor(endpoint, kyApi) {
     // this.prefixUrl = prefixUrl
     this.endpoint = endpoint
     // this.api = ky.create({prefixUrl: prefixUrl});
     this._idProp = 'id'
-    this.api = api || ky
+    this.kyApi = kyApi
+  }
+
+  get api(){
+    return this.kyApi.client || ky
   }
 
   //

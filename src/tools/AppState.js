@@ -53,6 +53,10 @@ class AppState {
     return this.$state.current?.data?.title
   }
 
+  setCurrentTitle(dataTitle) {
+    this.$state.current.data.title = dataTitle
+  }
+
   /**
    * construct the page title from app name and title to show on head and browser tab
    */
