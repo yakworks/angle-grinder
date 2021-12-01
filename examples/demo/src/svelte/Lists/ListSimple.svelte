@@ -1,6 +1,6 @@
 <script>
   import { Avatar, Columns, Col, BlockTitle, Card, CardContent, Icon, List, ListItem } from 'angle-grinder/svelte'
-
+  import { SkeletonBlock } from 'skeleton-elements/svelte';
   let simpleList = ['Item 1', 'Item 2', 'Item 3']
   let dataList = [
     {name: 'DSO', val: 39},
@@ -59,6 +59,14 @@
 <BlockTitle>Contact List</BlockTitle>
 <Card>
   <CardContent class="p0">
+    <List mediaList v-if="loading">
+      <ListItem class={`skeleton-text skeleton-effect-wave`} title="Full Name" subtitle="Position">
+        <span slot="media">
+
+          <SkeletonBlock style="width: 40px; height: 40px; border-radius: 50%" />
+        </span>
+      </ListItem>
+    </List>
     <List>
       <ListItem link={noref} header="Name" title="John Doe">
         <Avatar slot="media" class="is-small" imgSrc="/assets/images/photos/beard-guy.jpg"></Avatar>

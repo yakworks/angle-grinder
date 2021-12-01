@@ -13,7 +13,7 @@ import './app.config'
 import './AppCtrl'
 
 import './grids'
-import {setClientConfig} from 'angle-grinder/src/dataApi/ky'
+import {setClientConfig} from 'angle-grinder/src/dataApi/kyClient'
 
 setClientConfig({prefixUrl: 'http://localhost:8080'})
 $log.debugEnabled(true)
