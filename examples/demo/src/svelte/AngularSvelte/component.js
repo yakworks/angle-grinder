@@ -3,7 +3,7 @@ import ngSvelteShim from 'angle-grinder/src/ng/utils/ngSvelteShim'
 import Hello from './Hello.svelte'
 
 class controller {
-  vm = {
+  data = {
     name: 'Rand'
   }
 }
@@ -23,6 +23,7 @@ appMod.component('svelteHello', {
     // onChange: '&'
   }
 })
+
 
 appMod.component('ngSvelteDemo', {
   template,
