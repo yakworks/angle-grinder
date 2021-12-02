@@ -28,7 +28,7 @@ export default class RestDataApi {
    */
   async search(params) {
     //turn q into string if its an object
-    if(_.isObject(params.q)) params.q = JSON.stringify(params.q)
+    if(params && _.isObject(params.q)) params.q = JSON.stringify(params.q)
 
     const opts = { searchParams: params }
     // console.log("query opts", opts)
@@ -38,7 +38,7 @@ export default class RestDataApi {
 
   //
   async picklist(params) {
-    if(_.isObject(params.q)) params.q = JSON.stringify(params.q)
+    if(params && _.isObject(params.q)) params.q = JSON.stringify(params.q)
     const opts = { searchParams: params }
     // if (params) {
     //   opts = { searchParams: { q: params ? JSON.stringify(params) : '' } }
