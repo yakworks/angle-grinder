@@ -417,7 +417,12 @@ export default class GridCtrl {
       if (!p.sort) delete p.sort
       delete p.order
       // to be able to set default filters on the first load
-      const q = p.q ? JSON.parse(p.q): {}
+      let q
+      if (p.q?.trim().indexOf('{') === 0) {
+        q =JSON.parse(p.q)
+      } else {
+        q = p.q ? {'$qSearch': p.q} : {}
+      }
       const permanentFilters = this.listCtrl?.permanentFilters || {}
       const initSearch = this.listCtrl?.initSearch || {}
       p.q = JSON.stringify({...initSearch, ...q,  ...searchModel, ...permanentFilters})
