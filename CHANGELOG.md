@@ -1,3 +1,8 @@
+### v4.0.38
+
+[Full Changelog](https://github.com/yakworks/angle-grinder/compare/v4.0.37...v4.0.38)
+- update ky, fix ag to svelte example, RestDataApi will look for q and do stringify if its an object (#639) [link](https://github.com/yakworks/angle-grinder/commit/fed9cb1db386fd657ee09140e3d6cbacc2d8cd6d)
+
 ### v4.0.37
 
 [Full Changelog](https://github.com/yakworks/angle-grinder/compare/v4.0.36...v4.0.37)
