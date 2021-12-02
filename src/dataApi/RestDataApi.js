@@ -21,8 +21,15 @@ export default class RestDataApi {
     return this.kyApi.client || ky
   }
 
-  //
+  /**
+   * adds searchParams, which are the query params ( the part after the ? )
+   * and then calls the get. if the params has a q property and its a string then
+   * @param {*} params
+   */
   async search(params) {
+    //turn q into string if its an object
+    if(_.isObject(params.q)) params.q = JSON.stringify(params.q)
+
     const opts = { searchParams: params }
     // console.log("query opts", opts)
     const data = await this.api.get(this.endpoint, opts).json()
@@ -31,10 +38,11 @@ export default class RestDataApi {
 
   //
   async picklist(params) {
-    let opts = { searchParams: params }
-    if (params) {
-      opts = { searchParams: { q: params ? JSON.stringify(params) : '' } }
-    }
+    if(_.isObject(params.q)) params.q = JSON.stringify(params.q)
+    const opts = { searchParams: params }
+    // if (params) {
+    //   opts = { searchParams: { q: params ? JSON.stringify(params) : '' } }
+    // }
     // console.log("query opts", opts)
     const data = await this.api.get(`${this.endpoint}/picklist`, opts).json()
     return data
