@@ -70,7 +70,10 @@ module.exports = function(env, argv) {
             options: {
               emitCss: true,
               hotReload: true,
-              preprocess
+              preprocess,
+              onwarn: (warning, onwarn) => {
+                warning.code === 'css-unused-selector' || onwarn(warning);
+              }
             }
           }
         },

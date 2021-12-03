@@ -1,5 +1,5 @@
 /*! _table.scss | Huro | Css ninja 2020-2021 */
-
+@use "../../tools/cssVars";
 /*
     1. Flex Table
     2. Flex Table Dark mode
@@ -477,99 +477,6 @@ body {
         .flex-table-wrapper {
             background: lighten($dark-sidebar, 6%);
             border-color: lighten($dark-sidebar, 12%);
-        }
-    }
-}
-
-/* ==========================================================================
-7. Bulma Table
-========================================================================== */
-
-.demo-table {
-    margin-bottom: 3rem;
-}
-
-.table {
-    tbody {
-        th {
-            font-family: $family-primary;
-            color: $dark-text;
-
-            &.is-media {
-                width: 40px;
-            }
-
-            &.is-end {
-                > div {
-                    display: flex;
-                    justify-content: flex-end;
-                }
-            }
-        }
-
-        td {
-            font-family: $family-primary;
-            vertical-align: middle;
-
-            &:not(:first-child) {
-                color: $light-text;
-            }
-
-            &.is-media {
-                width: 40px;
-            }
-
-            &.is-end {
-                > div {
-                    display: flex;
-                    justify-content: flex-end;
-                }
-            }
-        }
-    }
-}
-
-/* ==========================================================================
-8. Bulma Table Dark mode
-========================================================================== */
-
-body {
-    &.is-dark {
-        .table {
-            background: lighten($dark-sidebar, 6%);
-            border-color: lighten($dark-sidebar, 12%);
-
-            &.is-hoverable {
-                tr:not(.is-selected) {
-                    &:hover {
-                        background: lighten($dark-sidebar, 9%);
-                    }
-                }
-            }
-
-            &.is-striped {
-                tr:not(.is-selected) {
-                    &:nth-child(even) {
-                        background: lighten($dark-sidebar, 9%);
-                    }
-                }
-            }
-
-            tbody {
-                th, td {
-                    border-color: lighten($dark-sidebar, 12%);
-                }
-
-                th {
-                    color: $dark-dark-text;
-                }
-
-                td {
-                    &:first-child {
-                        color: $dark-dark-text;
-                    }
-                }
-            }
         }
     }
 }

@@ -22,36 +22,31 @@
   </div>
 </div>
 
-<div class="columns is-mobile">
-  <ag-label>Basic Select2</ag-label>
-  <div class="field column is-grouped">
-    <div class="control is-expanded">
-      <input class="input" ng-model="$ctrl.vm.day"
-        placeholder="select a day" ui-select2 ui-select2-data="['Mon','Tue','Wed','Thu','Fri','Sat','Sun']">
-    </div>
-    <div class="control is-expanded">
-      <input class="input" ng-model="$ctrl.vm.color"
-        ui-select2="{ allowClear: false, placeholder: 'select a color', data:['red','green', 'blue']}">
-    </div>
-  </div>
-</div>
+<ag-select name="agsel-day" ng-model="$ctrl.vm.day" placeholder="select a day"
+        select-options="{ data: ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'] }"></ag-select>
 
 <p>using ag-select component</p>
 <ag-select name="agSelect" ng-model="$ctrl.vm.agColor" placeholder="select a color" hint="this is a hint"
   select-options="{ data: $ctrl.colorData }"></ag-select>
 
 <p>rest data from dataApiKey</p>
-<ag-select name="agSelect" ng-model="$ctrl.vm.cust"
-    select-options="{ dataApiKey: 'customer' }"></ag-select>
-  <ag-select name="agSelect" ng-model="$ctrl.vm.custParams"
+
+<ag-select name="agSelect-min" ng-model="$ctrl.vm.cust"
+    select-options="{
+      multiple: true, dataApiKey: 'customer',
+      closeOnSelect: false, minimumInputLength: 1,
+      displayFields:['num', 'name'] }">
+</ag-select>
+
+<ag-select name="agSelect" ng-model="$ctrl.vm.custParams"
     select-options="{ dataApiKey: 'customer', dataApiParams: {country: 'US'} }"></ag-select>
 <ag-select name="agSelect" ng-model="$ctrl.vm.custMulti"
     select-options="{ multiple: true, closeOnSelect: false, showSelectAll:true, dataApiKey: 'customer'}"></ag-select>
-  <ag-select name="agSelect" ng-model="$ctrl.vm.displayFields"
+<ag-select name="agSelect" ng-model="$ctrl.vm.displayFields"
              select-options="{ multiple: true, closeOnSelect: false, showSelectAll:true, dataApiKey: 'customer', displayFields:['name','num']}"></ag-select>
 
 <p>rest data from promise</p>
-<ag-select name="agSelect" ng-model="$ctrl.vm.cust"
+<ag-select name="agSelect" ng-model="$ctrl.vm.cust2"
     select-options="{ data: $ctrl.custApiData }"></ag-select>
 <ag-select name="agSelect" ng-model="$ctrl.vm.custMulti"
     select-options="{ multiple: true, closeOnSelect: false, showSelectAll:true, data: $ctrl.custApiData }"></ag-select>
