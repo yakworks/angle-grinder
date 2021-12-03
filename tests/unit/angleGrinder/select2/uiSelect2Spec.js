@@ -122,83 +122,7 @@ describe('uiSelect2', function () {
     return element;
   }
 
-  describe('with a <select> element', function () {
-
-    describe('when model is changed programmatically', function() {
-      describe('for single select', function () {
-        it('should set select2 to the value', function () {
-          scope.foo = 'First';
-          var element = compile('<select ui-select2 ng-model="foo"><option>First</option><option>Second</option></select>');
-          expect(element.select2('val')).to.equal('First');
-          scope.$apply('foo = "Second"');
-          expect(element.select2('val')).to.equal('Second');
-        });
-        it('should handle falsey values', function () {
-          scope.foo = 'First';
-          var element = compile('<select ui-select2="{allowClear:true}" ng-model="foo"><option>First</option><option>Second</option></select>');
-          expect(element.select2('val')).to.equal('First');
-          scope.$apply('foo = false');
-
-          expect(element.select2('val')).to.be.null
-          scope.$apply('foo = "Second"');
-          scope.$apply('foo = null');
-          expect(element.select2('val')).to.be.null
-          scope.$apply('foo = "Second"');
-          scope.$apply('foo = undefined');
-          expect(element.select2('val')).to.be.null
-        });
-      });
-      describe('for multiple select', function(){
-        it('should set select2 to multiple value', function(){
-          scope.foo = ['First'];
-          var element = compile('<select ui-select2="{allowClear:true}" multiple ng-model="foo"><option>First</option><option>Second</option><option>Third</option></select>');
-          expect(element.select2('val')).to.deep.equal(['First']);
-          scope.$apply('foo = ["Second"]');
-          expect(element.select2('val')).to.deep.equal(['Second']);
-          scope.$apply('foo = ["Second","Third"]');
-          expect(element.select2('val')).to.deep.equal(['Second','Third']);
-        });
-        it('should handle falsey values', function(){
-          scope.foo = ['First'];
-          var element = compile('<select ui-select2="{allowClear:true}" multiple ng-model="foo"><option>First</option><option>Second</option><option>Third</option></select>');
-          expect(element.val()).to.deep.equal(['First']);
-          scope.$apply('foo = ["Second"]');
-          scope.$apply('foo = false');
-          expect(element.select2('val')).to.deep.equal([]);
-          scope.$apply('foo = ["Second"]');
-          scope.$apply('foo = null');
-          expect(element.select2('val')).to.deep.equal([]);
-          scope.$apply('foo = ["Second"]');
-          scope.$apply('foo = undefined');
-          expect(element.select2('val')).to.deep.equal([]);
-        });
-      });
-    });
-    it('should observe the disabled attribute', function () {
-      var element = compile('<select ui-select2 ng-model="foo" ng-disabled="disabled"></select>');
-      expect(element.siblings().hasClass('select2-container-disabled')).to.be.false
-      scope.$apply('disabled = true');
-      expect(element.siblings().hasClass('select2-container-disabled')).to.be.true
-      scope.$apply('disabled = false');
-      expect(element.siblings().hasClass('select2-container-disabled')).to.be.false
-    });
-    xit('should observe the multiple attribute', function () {
-      var element = $compile('<select ui-select2 ng-model="foo" multiple></select>')(scope);
-      expect(element.siblings().hasClass('select2-container-multi')).to.be.true
-    });
-    xit('should observe an option with ng-repeat for changes', function(){
-      scope.items = ['first', 'second', 'third'];
-      scope.foo = 'fourth';
-      var element = compile('<select ui-select2 ng-model="foo"><option ng-repeat="item in items">{{item}}</option></select>');
-      expect(element.select2('val')).to.be.null
-      scope.$apply('foo="fourth";items=["fourth"]');
-      $timeout.flush();
-      expect(element.select2('val')).to.equal('fourth');
-    });
-  });
-
   describe('with an <input> element', function () {
-
 
     describe('compiling this directive', function () {
       it('should throw an error if we have no model defined', function () {
@@ -214,7 +138,8 @@ describe('uiSelect2', function () {
         //TODO
       });
     });
-    describe('when model is changed programmatically', function(){
+
+    xdescribe('when model is changed programmatically', function(){
 
       xdescribe('for single-select', function(){
         it('should call select2(data, ...) for objects', function(){
