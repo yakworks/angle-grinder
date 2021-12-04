@@ -1,5 +1,5 @@
 module.exports = {
-    testMatch: [ "**/__tests__/**/*.[jt]s?(x)"],
+  testMatch: [ "**/__tests__/**/*.[jt]s?(x)"],
 	// testMatch: ['<rootDir>/svelte/__tests__/specs/**/*.spec.js'],
 	transform: {
 		'^.+\\.m?(j|t)s$': 'babel-jest',
@@ -10,7 +10,7 @@ module.exports = {
 		*/
 		'node_modules/.+\\.svelte$': ['svelte-jester'],
 	},
-	moduleFileExtensions: ['js', 'svelte'],
+	moduleFileExtensions: ['js', 'ts', 'svelte'],
 	bail: false,
 	moduleNameMapper: {
 		'^@([A-Z].*)$': '<rootDir>/src/$1'

@@ -3,7 +3,7 @@ import filtersModule from './filtersModule'
 // import moment from 'moment'
 import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
-import { isFalsy } from '../../utils/isFalsy'
+import { isFalsy } from '../../utils/truthy'
 
 dayjs.extend(utc)
 

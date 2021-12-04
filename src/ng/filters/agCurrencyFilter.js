@@ -1,6 +1,6 @@
 import angular from 'angular'
 import filtersModule from './filtersModule'
-import { isFalsy } from '../../utils/isFalsy'
+import { isNothing } from '../../utils/something'
 import _ from 'lodash'
 
 var app = angular.module(filtersModule)
@@ -24,7 +24,7 @@ app.provider('agCurrencyFilter', function() {
     $get: [
       '$filter', ($filter) => function(amount, symbol) {
         if (symbol == null) { symbol = defaultSymbol }
-        if (isFalsy(amount)) { return '' }
+        if (amount === false || isNothing(amount)) { return '' }
 
         const formattedAmount = $filter('currency')(amount, '')
         return _.template(defaultFormat)({ amount: formattedAmount, symbol })

@@ -23,7 +23,8 @@ export default class BaseListCtrl {
     },
     searchFormButton: { icon: 'mdi-text-box-search-outline', tooltip: 'Show Search Filters Form' }
   }
-  permanentFilters = {} //in some cases we need filters that couldnt be cleared like payment on batch page
+  //in some cases we need filters that couldnt be cleared like payment on batch page
+  permanentFilters = {}
   editTemplate = require('./editDialog.html')
   bulkUpdateTemplate = require('./bulkUpdateDialog.html')
   //  searchTemplate = require('./searchForm.html')

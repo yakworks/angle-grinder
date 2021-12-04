@@ -13,6 +13,7 @@ include $(SHIPKIT_MAKEFILES)/circle.make
 export BOT_EMAIL ?= 9cibot@9ci.com
 karma.sh = npx karma
 lint.sh = npx eslint
+jest.sh = npx jest
 
 # --- standard base build ----
 
@@ -26,7 +27,7 @@ install: node_modules
 check: install lint test
 
 ## runs both karma and jasmine tests
-test: test.karma test.jasmine
+test: jest test.karma test.jasmine
 
 ## runs karma tests
 test.karma:
@@ -35,6 +36,10 @@ test.karma:
 ## runs jasmine tests
 test.jasmine:
 	$(karma.sh) start tests/karma-jasmine.conf.js --single-run --no-auto-watch --no-sandbox $$*
+
+## runs jasmine tests
+jest:
+	$(jest.sh)
 
 ## runs eslint
 lint:

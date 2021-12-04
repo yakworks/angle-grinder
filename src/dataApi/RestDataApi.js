@@ -1,4 +1,5 @@
 import kyApi from './kyApi'
+import prune from '../utils/prune';
 
 /**
  * This common wrapper around RESTful resource
@@ -29,18 +30,25 @@ export default class RestDataApi {
    * @param {*} params
    */
   async search(params) {
-    if(params && _.isObject(params.q)) params.q = JSON.stringify(params.q)
-    const opts = { searchParams: params }
+    let cleanParams = this.setupQ(params)
+    const opts = { searchParams: cleanParams }
     const data = await this.api.get(this.endpoint, opts).json()
     return data
   }
 
-  //
   async picklist(params) {
-    if(params && _.isObject(params.q)) params.q = JSON.stringify(params.q)
-    const opts = { searchParams: params }
+    let cleanParams = this.setupQ(params)
+    const opts = { searchParams: cleanParams }
     const data = await this.api.get(`${this.endpoint}/picklist`, opts).json()
     return data
+  }
+
+  // prunes params and stringifies the q param if exists
+  setupQ(params){
+    let prunedParms = prune(params)
+    let q = prunedParms.q
+    if(_.isObject(q)) prunedParms.q = JSON.stringify(q)
+    return prunedParms
   }
 
   /** Returns a promise for the item with the given identifier */

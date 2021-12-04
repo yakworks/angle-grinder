@@ -382,8 +382,8 @@ export default class GridCtrl {
         search: this.hasSearchFilters(filters),
         postData: {}
       }
-      if (filters) params.postData.q = JSON.stringify(filters)
-      if (queryText || queryText === '') params.postData.q = queryText
+      if (filters) params.postData.q = filters
+      if (queryText || queryText === '') params.postData.qSearch = queryText
       this.setParam(params)
       await this.reload()
     } catch (er) {
@@ -406,16 +406,18 @@ export default class GridCtrl {
   }
 
   /**
+   * The main loader for the grid.
+   *
    * @param {*} p the params to send to search
-   * @param {*} searchModel if passed in this will get converted to json string and override whats in q
+   * @param {*} searchModel if passed in this will get merged in whats in q
    */
   async gridLoader(p, searchModel={}) {
     this.toggleLoading(true)
     try {
       // fix up sort
-      if (p.sort && p.order) p.sort = `${p.sort} ${p.order}`
-      if (!p.sort) delete p.sort
-      delete p.order
+      // if (p.sort && p.order) p.sort = `${p.sort} ${p.order}`
+      // if (!p.sort) delete p.sort
+      // delete p.order
       // to be able to set default filters on the first load
       let q = p.q
       if(_.isString(q) && !_.isEmpty(q)){
@@ -425,9 +427,12 @@ export default class GridCtrl {
           q = {'$qSearch': q}
         }
       }
+      //filters that
       const permanentFilters = this.listCtrl?.permanentFilters || {}
       const initSearch = this.listCtrl?.initSearch || {}
-      q = JSON.stringify({...initSearch, ...q,  ...searchModel, ...permanentFilters})
+      // q =  _.merge(initSearch, q, searchModel || {}, permanentFilters)
+      q = {...initSearch, ...q,  ...searchModel, ...permanentFilters}
+      // q = JSON.stringifly({...initSearch, ...q,  ...searchModel, ...permanentFilters})
 
       //now if its not empty set it back to p
       if(!_.isEmpty(q)){
@@ -717,7 +722,7 @@ export default class GridCtrl {
           const filters = (_.extend(JSON.parse(defaultFilters), (_.pick(postData, (value, key) => !['page', 'filters', 'max', 'sort', 'order', 'nd', '_search'].includes(key)))))
           filters.firstLoad = false
           postData.defaultFilters = defaultFilters
-          postData.filters = JSON.stringify(filters)
+          postData.filters = filters
         }
       })
     }
