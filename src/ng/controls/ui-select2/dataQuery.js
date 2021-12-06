@@ -6,7 +6,7 @@ export function setupData(opts, dataStoreApi) {
     if(!opts.minimumInputLength) {
       const dataApiKey = opts.dataApiKey
       const dataApiParams = opts.dataApiParams
-      opts.data = { results: () => dataStoreApi[dataApiKey].picklist(dataApiParams) }
+      opts.data = { results: () => dataStoreApi[dataApiKey].picklist({q: dataApiParams}) }
     }
     else {
       opts.data = {}
