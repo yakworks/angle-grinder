@@ -1,5 +1,5 @@
 import angular from 'angular'
-import stringUtils from '../../utils/stringUtils'
+import * as nameUtils from '../../utils/nameUtils'
 
 /**
  * Sets up defaults on the state/menu tree
@@ -28,7 +28,7 @@ export default function stateHelperInit(state, opts) {
 
   // add title in
   if (!state.data.title) {
-    state.data.title = stringUtils.capitalWords(state.name)
+    state.data.title = nameUtils.naturalName(state.name)
   }
   // do breadcrumbs
   if (!state.ncyBreadcrumb) state.ncyBreadcrumb = {}

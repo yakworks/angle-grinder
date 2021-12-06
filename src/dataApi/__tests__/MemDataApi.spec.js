@@ -44,7 +44,6 @@ describe('MemDataApi', () => {
         order: "asc",
         page: 1,
         sort: "id",
-        _search: false
       }
       const result = await api.search(params)
       // console.log("result", result)
@@ -54,28 +53,27 @@ describe('MemDataApi', () => {
       expect(result.total).toEqual(1)
     })
 
-    test('q search', async function() {
+    test('q is string', async function() {
       const params = {
         max: 20,
         order: "asc",
         page: 1,
         sort: "id",
-        _search: true,
-        filters: '{"qSearch":"762"}'
+        q: '762'
       }
       const result = await api.search(params)
       expect(result.data.length).toEqual(1)
     })
 
-    test('filter qSearch', function() {
+    test('q with qSearch', function() {
       const params = {
-        filters: '{"qSearch":"762341"}'
+        q: '{"$qSearch":"762341"}'
       }
       const result = api.filter(data, params)
       expect(result.length).toEqual(1)
     })
 
-    test('q search simple', async function() {
+    test('q search text', async function() {
       const params = {
         q: "762341"
       }
@@ -83,8 +81,16 @@ describe('MemDataApi', () => {
       expect(result.data.length).toEqual(1)
     })
 
-    test('searchAny function', function() {
-      const result = api.searchAny(data, "762341")
+    test('qSearch param', async function() {
+      const params = {
+        qSearch: "762341"
+      }
+      const result = await api.search(params)
+      expect(result.data.length).toEqual(1)
+    })
+
+    test('qSearch function', function() {
+      const result = api.qSearch(data, "762341")
       expect(result.length).toEqual(1)
     })
   })

@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { makeLabel } from '../utils/labelMaker'
+import { makeLabel } from '../utils/nameUtils'
 import { xlsData, csvData } from './excelExport'
 import flattenObject from './flattenObject'
 import toast from '../tools/growl'

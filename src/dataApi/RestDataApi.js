@@ -2,7 +2,7 @@ import kyApi from './kyApi'
 import prune from '../utils/prune';
 
 /**
- * This common wrapper around RESTful resource
+ * A common wrapper around RESTful resource
  */
 export default class RestDataApi {
   /**

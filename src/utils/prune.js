@@ -1,11 +1,8 @@
-import _ from 'lodash'
+import {isNil} from './dash'
 import {isSomething} from './something';
 
 export default function prune(obj) {
-  if(_.isNil(obj)) return obj
-
-  // let pass1 = removeEmpty(obj)
-  //pass1 might leave empty keys, probably better way to remove but this works
+  if(isNil(obj)) return obj
   return removeEmpty(obj)
 }
 

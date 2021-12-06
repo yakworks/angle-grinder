@@ -1,5 +1,4 @@
 /* eslint-disable */
-import _ from 'lodash'
 import {isSomething, isNothing} from '../something';
 
 describe('isSomething', () => {

@@ -11,17 +11,17 @@ const app = angular.module(appName)
 
 app.run(function($rootScope, $state, $stateParams) {
 
-  window.onbeforeunload = function(){
-    sessionStorage.setItem("origin", window.location.href);
-  }
+  // window.onbeforeunload = function(){
+  //   sessionStorage.setItem("origin", window.location.href);
+  // }
 
-  window.onload = function(){
-    console.log("************window.location.href", window.location.href)
-    if(window.location.href == sessionStorage.getItem("origin")){
-        console.log("************clearing storage", window.location.href)
-        sessionStorage.clear();
-    }
-  }
+  // window.onload = function(){
+  //   console.log("************window.location.href", window.location.href)
+  //   if(window.location.href == sessionStorage.getItem("origin")){
+  //       console.log("************clearing storage", window.location.href)
+  //       sessionStorage.clear();
+  //   }
+  // }
 
   'ngInject';
   // Set the ui-router state vars to global root to access them from any scope

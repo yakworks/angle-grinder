@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars, eqeqeq */
 // import _ from 'lodash'
-const _ = require('lodash')
+const _ = require('../utils/dash')
 /**
  * Memstore Api, can be extended or used as a test express back end for a rest server.
  * Uses commonjs and not es6 exports so it compatible with node and doesn't need babel
@@ -64,7 +64,8 @@ class MemDataApi {
     // console.log("search p", p)
     // console.log("search flds", flds)
     let list = await this.data()
-    const isSearch = p && (p._search === 'true' || p._search === true || p.q)
+    const isSearch = p && (p.q || p.qSearch)
+
     if (isSearch) list = this.filter(list, p)
     if (p.sort) {
       const sortobj = p.sort.split(',').reduce((acc, item) => {
@@ -90,24 +91,26 @@ class MemDataApi {
   }
 
   filter(list, params) {
-    // console.log("filter params", params)
+    console.log("filter params", params)
     let flist = list
-    const filters = params.filters ? JSON.parse(params.filters) : null
+    // const filters = params.filters ? JSON.parse(params.filters) : null
     // const q = params.q ? JSON.parse(params.q) : null
     let q = params.q;
-    if (filters) {
-      // const filters = JSON.parse(params.filters)
-      if (filters.qSearch) {
-        flist = this.searchAny(list, filters.qSearch)
-      } else {
-        flist = this.qbe(list, filters)
-      }
-    } else if (q) {
+
+    if (q) {
       if (q.startsWith('{') || q.startsWith('"') || q.startsWith('[')){
-        q = JSON.parse(params.q)
+        let qParsed = JSON.parse(params.q)
+        if(qParsed['$qSearch']){
+          flist = this.qSearch(list, qParsed['$qSearch'])
+        } else{
+          flist = _.isPlainObject(qParsed) ? this.qbe(list, qParsed) : this.qSearch(list, qParsed)
+        }
+      } else {
+        flist = this.qSearch(list, q)
       }
-      flist = _.isPlainObject(q) ? this.qbe(list, q) : this.searchAny(list, q)
-      console.log("filter q flist", flist)
+      // console.log("filter q flist", flist)
+    } else if(params.qSearch){
+      flist = this.qSearch(list, params.qSearch)
     }
     return flist
   }
@@ -191,7 +194,7 @@ class MemDataApi {
     }
   }
 
-  searchAny(arr, searchKey) {
+  qSearch(arr, searchKey) {
     return arr.filter(obj => hasSomeDeep(obj, searchKey))
   }
 

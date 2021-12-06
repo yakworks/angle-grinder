@@ -1,4 +1,4 @@
-import _ from 'lodash' // uses babel plugin to only use what is referenced
+import * as _ from './dash' // uses babel plugin to only use what is referenced
 
 /**
  * isNothing , a bit like isEmpty, is useful for things like formatters

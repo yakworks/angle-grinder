@@ -1,4 +1,5 @@
-import stringUtils from '../../utils/stringFormUtils'
+import * as nu from '../../utils/nameUtils'
+
 // import Log from '../../utils/Log'
 import _ from 'lodash'
 
@@ -31,9 +32,9 @@ export default class AgBaseControl {
 
     // passing in a blank string to label will not be undefined, and is how to blank it out
     if (typeof this.label === 'undefined') {
-      this.label = stringUtils.parseWords(this.modelKey)
+      this.label = nu.parseWords(this.modelKey)
     }
-    this.placeholder = this.placeholder || (this.label || stringUtils.parseWords(this.modelKey))
+    this.placeholder = this.placeholder || (this.label || nu.parseWords(this.modelKey))
 
     // if its not passed in then create a unique id for this component
     if (!this.elementId) {
