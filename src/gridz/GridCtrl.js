@@ -411,7 +411,8 @@ export default class GridCtrl {
    * @param {*} p the params to send to search
    * @param {*} searchModel if passed in this will get merged in whats in q
    */
-  async gridLoader(p, searchModel={}) {
+  async gridLoader(p, searchModel) {
+    console.log({searchModel})
     this.toggleLoading(true)
     try {
       // fix up sort
