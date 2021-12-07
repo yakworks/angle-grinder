@@ -26,11 +26,13 @@ class ListCtrl extends BaseListCtrl {
     this.isConfigured = false
     this.dataApi = this.dataStoreApi[this.apiKey]
     this.cfg = {}
-    //FIXME what are we doing here?
+    super.doConfig()
+
     if (this.initSearch) {
+      this.cfg.initSearch = this.initSearch
       this.searchModel = { ...this.initSearch, ...this.searchModel }
     }
-    super.doConfig()
+
   }
 
   // we need to generate gridId, because if we have 2 grids on a page they will have the same id and 2 pagers will
@@ -43,7 +45,8 @@ class ListCtrl extends BaseListCtrl {
 export default {
   bindings: {
     apiKey: '<',
-    notification: '<'
+    notification: '<',
+    initSearch: '<'
   },
   template: template,
   controller: ListCtrl
