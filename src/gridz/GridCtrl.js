@@ -387,6 +387,7 @@ export default class GridCtrl {
       this.setParam(params)
       await this.reload()
     } catch (er) {
+      //XXX should not swallow errors
       console.error('search error', er)
     }
   }
@@ -412,12 +413,16 @@ export default class GridCtrl {
    * @param {*} searchModel if passed in this will get merged in whats in q
    */
   async gridLoader(p, searchModel) {
-    console.log({searchModel})
+    console.log('gridLoader searchModel', searchModel)
+    console.log('gridLoader params', p)
     this.toggleLoading(true)
     try {
       // fix up sort
       // if (p.sort && p.order) p.sort = `${p.sort} ${p.order}`
-      // if (!p.sort) delete p.sort
+      if (!p.sort){
+        //get rid of dangling order
+        delete p.order
+      }
       // delete p.order
       // to be able to set default filters on the first load
       let q = p.q
@@ -720,7 +725,7 @@ export default class GridCtrl {
         beforeSearch() {
           const postData = this.jqGridEl.jqGrid('getGridParam', 'postData')
           const defaultFilters = postData.defaultFilters || postData.filters
-          const filters = (_.extend(JSON.parse(defaultFilters), (_.pick(postData, (value, key) => !['page', 'filters', 'max', 'sort', 'order', 'nd', '_search'].includes(key)))))
+          const filters = (_.extend(JSON.parse(defaultFilters), (_.pick(postData, (value, key) => !['page', 'filters', 'max', 'sort', 'order'].includes(key)))))
           filters.firstLoad = false
           postData.defaultFilters = defaultFilters
           postData.filters = filters
