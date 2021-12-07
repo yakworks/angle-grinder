@@ -9,6 +9,7 @@ export default class GridCtrl {
   highlightClass = 'ui-state-highlight'
   systemColumns = ['cb', '-row_action_col']
   isDense = false
+  showSearchForm = false
 
   defaultCtxMenuOptions = {
     edit: {

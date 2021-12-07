@@ -30,7 +30,7 @@ export default class EditModalCtrl {
 
     // setup search form show based on if searchForm is configured
     if (cfg.searchForm === undefined) {
-      this.showSearchForm = false
+      gopts.showSearchForm = false
       tbopts.searchFormButton.class = 'hidden'
     }
 
@@ -38,7 +38,6 @@ export default class EditModalCtrl {
       tbopts.selectedButtons.bulkUpdate.class = 'hidden'
     }
 
-    if (gopts.showSearchForm) this.showSearchForm = gopts.showSearchForm
     // give toolbar scope
     tbopts.scope = () => this.$scope
     cfg.toolbarOptions = tbopts

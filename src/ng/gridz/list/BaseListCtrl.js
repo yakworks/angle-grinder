@@ -12,7 +12,6 @@ import Swal from '../../../tools/swal'
 // and https://alligator.io/js/class-composition/ for class composition
 
 export default class BaseListCtrl {
-  showSearchForm = false
   defaultToolbarOpts = {
     selectedButtons: {
       bulkUpdate: { icon: 'far fa-edit', tooltip: 'Bulk Update' },
