@@ -434,10 +434,12 @@ export default class GridCtrl {
         }
       }
       //filters that
-      const permanentFilters = this.listCtrl?.permanentFilters || {}
-      const initSearch = this.listCtrl?.initSearch || {}
+      // const permanentFilters = this.listCtrl?.permanentFilters || {}
+      // const initSearch = this.listCtrl?.initSearch || {}
+      const frozenSearch = this.frozenSearch || {}
+      const initSearch = this.initSearch || {}
       // q =  _.merge(initSearch, q, searchModel || {}, permanentFilters)
-      q = {...initSearch, ...q,  ...searchModel, ...permanentFilters}
+      q = {...initSearch, ...q,  ...searchModel, ...frozenSearch}
       // q = JSON.stringifly({...initSearch, ...q,  ...searchModel, ...permanentFilters})
 
       //now if its not empty set it back to p

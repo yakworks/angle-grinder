@@ -13,7 +13,7 @@ const template = `
   <gridz ng-if="$ctrl.isConfigured" grid-options="$ctrl.cfg.gridOptions"
         toolbar-options="$ctrl.cfg.gridOptions.toolbarOptions"
         grid-id="{{$ctrl.gridId()}}"
-        list-ctrl="$ctrl">
+        list-ctrl="$ctrl" init-search="$ctrl.initSearch" frozen-search="$ctrl.frozenSearch">
   </gridz>
 </div>
 `
@@ -27,6 +27,7 @@ class ListCtrl extends BaseListCtrl {
     this.isConfigured = false
     this.dataApi = this.dataStoreApi[this.apiKey]
     this.cfg = {}
+    //FIXME what are we doing here?
     if (this.initSearch) {
       this.searchModel = { ...this.initSearch, ...this.searchModel }
     }
@@ -44,7 +45,9 @@ export default {
   bindings: {
     apiKey: '<',
     notification: '<',
-    initSearch: '<'
+    //these will get passed down to the gridz component
+    initSearch: '<',
+    frozenSearch: '<'
   },
   template: template,
   controller: ListCtrl
