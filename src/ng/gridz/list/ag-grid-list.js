@@ -8,7 +8,7 @@ const template = `
     <button class="delete" ng-click="$ctrl.notification = false"></button>
     {{$ctrl.notification.text}}
   </div>
-  <ag-grid-list-search ng-if="$ctrl.isConfigured" list-ctrl="$ctrl" ng-show="$ctrl.showSearchForm">
+  <ag-grid-list-search ng-if="$ctrl.isConfigured" list-ctrl="$ctrl" ng-show="$ctrl.gridCtrl.showSearchForm">
   </ag-grid-list-search>
   <gridz ng-if="$ctrl.isConfigured" grid-options="$ctrl.cfg.gridOptions"
         toolbar-options="$ctrl.cfg.gridOptions.toolbarOptions"

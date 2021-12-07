@@ -59,6 +59,8 @@ export default class GridCtrl {
       opts.datatype = (params) => this.gridLoader(params)
     }
 
+    if (opts.showSearchForm) this.showSearchForm = opts.showSearchForm
+
     if (!_.isNil(opts.dataApi)) {
       this.dataApi = opts.dataApi
     }
