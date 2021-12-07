@@ -255,11 +255,11 @@ export default class GridCtrl {
     jqGridEl.jqGrid('hideCol', colSetup.hiddenColumns)
   }
 
-  contextMenuClick = (model, menuItem) => {
+  // contextMenuClick = (model, menuItem) => {
     //listCtrl can pass the listener
-    return this.contextMenuClickAction(model, menuItem)
+    // return this.contextMenuClickAction(model, menuItem)
     //return this.listCtrl.fireRowAction(model, menuItem)
-  }
+  // }
 
   // Updates the values (using the data array) in the row with rowid.
   // The syntax of data array is: {name1:value1,name2: value2...}
