@@ -12,7 +12,6 @@ import Swal from '../../../tools/swal'
 // and https://alligator.io/js/class-composition/ for class composition
 
 export default class BaseListCtrl {
-  showSearchForm = false
   defaultToolbarOpts = {
     selectedButtons: {
       bulkUpdate: { icon: 'far fa-edit', tooltip: 'Bulk Update' },
@@ -34,10 +33,6 @@ export default class BaseListCtrl {
     argsMerge(this, args)
   }
 
-  extendFilters(filters) {
-    return _.merge(this.initSearch || {}, filters || {}, this.permanentFilters)
-  }
-
   async doConfig(cfg) {
     if(!cfg){
       let apiCfg = await appConfigApi.getConfig(this.apiKey)
@@ -57,7 +52,7 @@ export default class BaseListCtrl {
 
     // setup search form show based on if searchForm is configured
     if (cfg.searchForm === undefined) {
-      this.showSearchForm = false
+      gopts.showSearchForm = false
       tbopts.searchFormButton.class = 'hidden'
     }
 
@@ -65,13 +60,19 @@ export default class BaseListCtrl {
       tbopts.selectedButtons.bulkUpdate.class = 'hidden'
     }
 
-    if (gopts.showSearchForm) this.showSearchForm = gopts.showSearchForm
     // give toolbar scope
     tbopts.scope = () => this.$scope
     cfg.toolbarOptions = tbopts
     _.defaults(this.cfg, cfg)
 
     this.isConfigured = true
+
+    //setup some defaults for gridOpts
+    gopts.contextMenuClick = (model, menuItem) => {
+      return this.fireRowAction(model, menuItem)
+    }
+    gopts.frozenSearch = this.frozenSearch || {}
+    gopts.initSearch = this.initSearch || {}
   }
 
   get gridCtrl() { return this.$element.find('gridz').controller('gridz') }
@@ -170,7 +171,6 @@ export default class BaseListCtrl {
     )
     modInst.result
       .then(res => {
-        // console.log('res.data', res.data)
         res.data.forEach(row => {
           this.gridCtrl.updateRow(row.id, row, false)
         })
@@ -224,13 +224,13 @@ export default class BaseListCtrl {
 
   // load results of a query into gridCtrl
   async gridLoader(p) {
-    this.gridCtrl.gridLoader(p, this.extendFilters(this.searchModel))
+    this.gridCtrl.gridLoader(p, this.searchModel)
   }
 
   async search(filters) {
     try {
       this.isSearching = true
-      await this.gridCtrl?.search(this.extendFilters(filters))
+      await this.gridCtrl?.search(filters)
     } catch (er) {
       this.handleError(er)
     } finally {
@@ -267,9 +267,7 @@ export default class BaseListCtrl {
   }
 
   handleAction(action) {
-    console.log('handleAction', action)
     const ids = this.gridCtrl?.getSelectedRowIds()
-    console.log(this.gridCtrl)
     const run = async (ids) => {
       ids.forEach((id) => {
         this.gridCtrl.highlightRow(id)
