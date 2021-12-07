@@ -241,7 +241,9 @@ export default class GridCtrl {
   }
 
   contextMenuClick = (model, menuItem) => {
-    return this.listCtrl.fireRowAction(model, menuItem)
+    //listCtrl can pass the listener
+    return this.contextMenuClickAction(model, menuItem)
+    //return this.listCtrl.fireRowAction(model, menuItem)
   }
 
   // Updates the values (using the data array) in the row with rowid.
