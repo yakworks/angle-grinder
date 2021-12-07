@@ -21,6 +21,6 @@ export const getConfig = () => {
 }
 
 export const setConfig = (newConfig) => {
-  console.log('set config')
+  console.log('set config', newConfig)
   _.merge(appConfig, newConfig)
 }

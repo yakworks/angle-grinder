@@ -67,20 +67,12 @@ export default class BaseListCtrl {
 
     this.isConfigured = true
 
-    let gctrl = this.gridCtrl
-    console.log("gridCtrl is set doConfig", gctrl)
-
     //setup some defaults for gridOpts
     gopts.contextMenuClick = (model, menuItem) => {
       return this.fireRowAction(model, menuItem)
     }
     gopts.frozenSearch = this.frozenSearch || {}
     gopts.initSearch = this.initSearch || {}
-  }
-
-  $onChanges(changesObj){
-    let gctrl = this.gridCtrl
-    console.log("gridCtrl is set onChanges", gctrl)
   }
 
   get gridCtrl() { return this.$element.find('gridz').controller('gridz') }
@@ -179,7 +171,6 @@ export default class BaseListCtrl {
     )
     modInst.result
       .then(res => {
-        // console.log('res.data', res.data)
         res.data.forEach(row => {
           this.gridCtrl.updateRow(row.id, row, false)
         })
@@ -276,9 +267,7 @@ export default class BaseListCtrl {
   }
 
   handleAction(action) {
-    console.log('handleAction', action)
     const ids = this.gridCtrl?.getSelectedRowIds()
-    console.log(this.gridCtrl)
     const run = async (ids) => {
       ids.forEach((id) => {
         this.gridCtrl.highlightRow(id)

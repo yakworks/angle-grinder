@@ -88,7 +88,7 @@ export default class GridCtrl {
 
   //initialize the grid the jquery way
   initGridz(){
-    console.log({opt: this.gridOptions})
+    // console.log({opt: this.gridOptions})
     this.jqGridEl.gridz(this.gridOptions)
     // setupFilterToolBar(options)
   }
@@ -430,8 +430,6 @@ export default class GridCtrl {
    * @param {*} searchModel if passed in this will get merged in whats in q
    */
   async gridLoader(p, searchModel) {
-    console.log('gridLoader searchModel', searchModel)
-    console.log('gridLoader params', p)
     this.toggleLoading(true)
     try {
       // fix up sort
