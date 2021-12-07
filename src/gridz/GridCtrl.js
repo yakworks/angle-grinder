@@ -9,6 +9,7 @@ export default class GridCtrl {
   highlightClass = 'ui-state-highlight'
   systemColumns = ['cb', '-row_action_col']
   isDense = false
+  showSearchForm = false
 
   defaultCtxMenuOptions = {
     edit: {
@@ -59,6 +60,8 @@ export default class GridCtrl {
       opts.datatype = (params) => this.gridLoader(params)
     }
 
+    if (opts.showSearchForm) this.showSearchForm = opts.showSearchForm
+
     if (!_.isNil(opts.dataApi)) {
       this.dataApi = opts.dataApi
     }
@@ -85,7 +88,7 @@ export default class GridCtrl {
 
   //initialize the grid the jquery way
   initGridz(){
-    console.log({opt: this.gridOptions})
+    // console.log({opt: this.gridOptions})
     this.jqGridEl.gridz(this.gridOptions)
     // setupFilterToolBar(options)
   }
@@ -252,11 +255,11 @@ export default class GridCtrl {
     jqGridEl.jqGrid('hideCol', colSetup.hiddenColumns)
   }
 
-  contextMenuClick = (model, menuItem) => {
+  // contextMenuClick = (model, menuItem) => {
     //listCtrl can pass the listener
-    return this.contextMenuClickAction(model, menuItem)
+    // return this.contextMenuClickAction(model, menuItem)
     //return this.listCtrl.fireRowAction(model, menuItem)
-  }
+  // }
 
   // Updates the values (using the data array) in the row with rowid.
   // The syntax of data array is: {name1:value1,name2: value2...}
@@ -427,8 +430,6 @@ export default class GridCtrl {
    * @param {*} searchModel if passed in this will get merged in whats in q
    */
   async gridLoader(p, searchModel) {
-    console.log('gridLoader searchModel', searchModel)
-    console.log('gridLoader params', p)
     this.toggleLoading(true)
     try {
       // fix up sort
