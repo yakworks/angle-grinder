@@ -1,4 +1,4 @@
-import * as _ from './dash' // uses babel plugin to only use what is referenced
+import _ from 'lodash' // uses babel plugin to only use what is referenced
 import {isNothing} from './something'
 
 /**
@@ -12,27 +12,27 @@ import {isNothing} from './something'
  * @param value any value
  * @returns boolean false or true
  */
-export function isFalsy(value): boolean {
+export function isFalsy(value) {
   return value === false || value === 0 || isNothing(value)
 }
 
 /**
  * isFalsy but if its a String will also returns false if 'false|False|FALSE'
  */
-export function falsyCheck(value): boolean {
+export function falsyCheck(value) {
   return value === false || value === 0 ||
     (_.isString(value) && value.toLowerCase() === 'false') ||
     isNothing(value)
 }
 
-export function isTruthy(value: any): boolean  {
+export function isTruthy(value) {
   return !isFalsy(value)
 }
 
 /**
  * inverted falsyCheck but if its a String will also returns true if is NOT 'false|False|FALSE'
  */
-export function truthyCheck(value: any): boolean  {
+export function truthyCheck(value){
   return !falsyCheck(value)
 }
 

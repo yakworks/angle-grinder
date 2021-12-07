@@ -1,4 +1,4 @@
-import * as _ from './dash' // uses babel plugin to only use what is referenced
+import _ from 'lodash' // uses babel plugin to only use what is referenced
 
 /**
  * isNothing , a bit like isEmpty, is useful for things like formatters
@@ -11,7 +11,7 @@ import * as _ from './dash' // uses babel plugin to only use what is referenced
  *  - date objects always return true
  *
  */
-export function isNothing(value): boolean {
+export function isNothing(value) {
   return  _.isNaN(value) ||
     _.isNil(value) ||
     (_.isString(value) && _.isEmpty(value)) ||
@@ -22,7 +22,7 @@ export function isNothing(value): boolean {
  * see isNothing. Returns true if val is something.
  * Basically isTruthy but without the check for true
  */
-export function isSomething(val): boolean {
+export function isSomething(val) {
   return !isNothing(val)
 }
 
