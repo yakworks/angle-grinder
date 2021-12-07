@@ -34,10 +34,6 @@ export default class BaseListCtrl {
     argsMerge(this, args)
   }
 
-  extendFilters(filters) {
-    return _.merge(this.initSearch || {}, filters || {}, this.permanentFilters)
-  }
-
   async doConfig(cfg) {
     if(!cfg){
       let apiCfg = await appConfigApi.getConfig(this.apiKey)
@@ -239,13 +235,13 @@ export default class BaseListCtrl {
 
   // load results of a query into gridCtrl
   async gridLoader(p) {
-    this.gridCtrl.gridLoader(p, this.extendFilters(this.searchModel))
+    this.gridCtrl.gridLoader(p, this.searchModel)
   }
 
   async search(filters) {
     try {
       this.isSearching = true
-      await this.gridCtrl?.search(this.extendFilters(filters))
+      await this.gridCtrl?.search(filters)
     } catch (er) {
       this.handleError(er)
     } finally {

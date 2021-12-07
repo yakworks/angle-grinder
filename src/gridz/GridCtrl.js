@@ -452,8 +452,9 @@ export default class GridCtrl {
       // const initSearch = this.listCtrl?.initSearch || {}
       const frozenSearch = this.frozenSearch || {}
       const initSearch = this.initSearch || {}
+      const search = _.merge(initSearch, searchModel || {})
       // q =  _.merge(initSearch, q, searchModel || {}, permanentFilters)
-      q = {...initSearch, ...q,  ...searchModel, ...frozenSearch}
+      q = {...search, ...q, ...frozenSearch}
       // q = JSON.stringifly({...initSearch, ...q,  ...searchModel, ...permanentFilters})
 
       //now if its not empty set it back to p
