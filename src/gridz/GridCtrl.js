@@ -63,6 +63,18 @@ export default class GridCtrl {
       this.dataApi = opts.dataApi
     }
 
+    if (!_.isNil(opts.initSearch)) {
+      this.initSearch = opts.initSearch
+    }
+
+    if (!_.isNil(opts.frozenSearch)) {
+      this.frozenSearch = opts.frozenSearch
+    }
+
+    if (!_.isNil(opts.contextMenuClick)) {
+      this.contextMenuClick = opts.contextMenuClick
+    }
+
     this.setupColModel(opts)
     this.setupCtxMenu(opts)
     // this.setupDataLoader(gridOptions)

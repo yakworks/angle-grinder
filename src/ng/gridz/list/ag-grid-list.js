@@ -12,8 +12,7 @@ const template = `
   </ag-grid-list-search>
   <gridz ng-if="$ctrl.isConfigured" grid-options="$ctrl.cfg.gridOptions"
         toolbar-options="$ctrl.cfg.gridOptions.toolbarOptions"
-        grid-id="{{$ctrl.gridId()}}"
-        list-ctrl="$ctrl" init-search="$ctrl.initSearch" frozen-search="$ctrl.frozenSearch">
+        grid-id="{{$ctrl.gridId()}}">
   </gridz>
 </div>
 `
@@ -44,10 +43,7 @@ class ListCtrl extends BaseListCtrl {
 export default {
   bindings: {
     apiKey: '<',
-    notification: '<',
-    //these will get passed down to the gridz component
-    initSearch: '<',
-    frozenSearch: '<'
+    notification: '<'
   },
   template: template,
   controller: ListCtrl

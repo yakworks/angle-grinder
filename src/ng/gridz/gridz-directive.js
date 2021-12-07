@@ -66,12 +66,7 @@ angular.module(grid2Mod).directive('gridz',
       bindToController: {
         toolbarOptions: '<',
         gridId: '@',
-        gridOptions: '<',
-        listCtrl: '<',
-        //search object initial
-        initSearch: '<',
-        //uneditable search params for detail gridz, such as when showing transactions for cutomer
-        frozenFilters: '<'
+        gridOptions: '<'
       },
       template: `\
       <div class="gridz-wrapper">

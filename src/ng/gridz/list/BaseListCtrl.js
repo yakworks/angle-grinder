@@ -72,6 +72,21 @@ export default class BaseListCtrl {
     _.defaults(this.cfg, cfg)
 
     this.isConfigured = true
+
+    let gctrl = this.gridCtrl
+    console.log("gridCtrl is set doConfig", gctrl)
+
+    //setup some defaults for gridOpts
+    gopts.contextMenuClick = (model, menuItem) => {
+      return this.fireRowAction(model, menuItem)
+    }
+    gopts.frozenSearch = this.frozenSearch || {}
+    gopts.initSearch = this.initSearch || {}
+  }
+
+  $onChanges(changesObj){
+    let gctrl = this.gridCtrl
+    console.log("gridCtrl is set onChanges", gctrl)
   }
 
   get gridCtrl() { return this.$element.find('gridz').controller('gridz') }
