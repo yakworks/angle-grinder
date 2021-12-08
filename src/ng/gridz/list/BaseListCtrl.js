@@ -71,7 +71,7 @@ export default class BaseListCtrl {
     gopts.contextMenuClick = (model, menuItem) => {
       return this.fireRowAction(model, menuItem)
     }
-    gopts.frozenSearch = this.frozenSearch || {}
+    gopts.restrictSearch = this.restrictSearch || {}
     gopts.initSearch = this.initSearch || {}
   }
 

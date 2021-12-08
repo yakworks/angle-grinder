@@ -29,13 +29,20 @@ export default class GridCtrl {
 
     const $jqGrid = $(jqGridElement)
     this.jqGridEl = $jqGrid
-
     this.$gridWrapper = $(gridWrapper)
 
     if (!this.gridId && !_.isNil(opts.gridId)) {
       this.gridId = opts.gridId
     }
     $jqGrid.attr('id', this.gridId)
+
+    let optsToMerge = _.pick(opts, [
+      'showSearchForm', 'dataApi', 'initSearch', 'restrictSearch', 'contextMenuClick'
+    ])
+    _.mergeWith(this, optsToMerge, (obj, optVal) => {
+      //dont merge val if its null
+      return optVal === null ? obj : undefined
+    })
 
     // pager ID setup
     if (opts.pager !== false) {
@@ -58,24 +65,6 @@ export default class GridCtrl {
     // if no datatype is passed in then use internal default
     if (_.isNil(opts.datatype)) {
       opts.datatype = (params) => this.gridLoader(params)
-    }
-
-    if (opts.showSearchForm) this.showSearchForm = opts.showSearchForm
-
-    if (!_.isNil(opts.dataApi)) {
-      this.dataApi = opts.dataApi
-    }
-
-    if (!_.isNil(opts.initSearch)) {
-      this.initSearch = opts.initSearch
-    }
-
-    if (!_.isNil(opts.frozenSearch)) {
-      this.frozenSearch = opts.frozenSearch
-    }
-
-    if (!_.isNil(opts.contextMenuClick)) {
-      this.contextMenuClick = opts.contextMenuClick
     }
 
     this.setupColModel(opts)
@@ -439,13 +428,7 @@ export default class GridCtrl {
       if(sortMap){
         p.sort = sortMap
       }
-      // fix up sort
-      // if (p.sort && p.order) p.sort = `${p.sort} ${p.order}`
-      if (!p.sort){
-        //get rid of dangling order
-        delete p.order
-      }
-      // delete p.order
+
       // to be able to set default filters on the first load
       let q = p.q
       if(_.isString(q) && !_.isEmpty(q)){
@@ -455,15 +438,12 @@ export default class GridCtrl {
           q = {'$qSearch': q}
         }
       }
-      //filters that
-      // const permanentFilters = this.listCtrl?.permanentFilters || {}
-      // const initSearch = this.listCtrl?.initSearch || {}
-      const frozenSearch = this.frozenSearch || {}
+      // when grid is for child or detail data, restrictSearch is what to filter it by,
+      // for example is showing invoices for customer then restrictSearch might be set to {custId:123}
+      const restrictSearch = this.restrictSearch || {}
       const initSearch = this.initSearch || {}
       const search = _.merge(initSearch, searchModel || {})
-      // q =  _.merge(initSearch, q, searchModel || {}, permanentFilters)
-      q = {...search, ...q, ...frozenSearch}
-      // q = JSON.stringifly({...initSearch, ...q,  ...searchModel, ...permanentFilters})
+      q = {...search, ...q, ...restrictSearch}
 
       //now if its not empty set it back to p
       if(!_.isEmpty(q)){
