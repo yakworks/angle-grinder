@@ -3,6 +3,13 @@
     "id": 1,
     "name": "Rhynoodle",
     "num": "RH0143",
+    "location": {
+      "street": "04828 Mcguire Alley",
+      "city": "Sacramento",
+      "state": "CA",
+      "postalCode": 95833,
+      "country": "US"
+    },
     "street": "04828 Mcguire Alley",
     "city": "Sacramento",
     "state": "CA",
@@ -14,6 +21,13 @@
     "id": 2,
     "name": "Yodo",
     "num": "YO7612",
+    "location": {
+      "street": "405 Old Shore Avenue",
+      "city": "Merritt",
+      "state": "BC",
+      "postalCode": "V1K",
+      "country": "CA"
+    },
     "street": "405 Old Shore Avenue",
     "city": "Merritt",
     "state": "BC",
@@ -25,6 +39,13 @@
     "id": 3,
     "name": "Omba",
     "num": "OM3054",
+    "location": {
+      "street": "8 Charing Cross Circle",
+      "city": "Niños Heroes",
+      "state": "OAX",
+      "postalCode": 68145,
+      "country": "MX"
+    },
     "street": "8 Charing Cross Circle",
     "city": "Niños Heroes",
     "state": "OAX",
@@ -36,6 +57,13 @@
     "id": 4,
     "name": "Gabcube",
     "num": "GA8966",
+    "location": {
+      "street": "55 Warbler Street",
+      "city": "Colorado Springs",
+      "state": "CO",
+      "postalCode": 80945,
+      "country": "US"
+    },
     "street": "55 Warbler Street",
     "city": "Colorado Springs",
     "state": "CO",
@@ -47,6 +75,13 @@
     "id": 5,
     "name": "Voonder",
     "num": "VO3537",
+    "location": {
+      "street": "4402 Summer Ridge Drive",
+      "city": "Maskinongé",
+      "state": "QC",
+      "postalCode": "T7A",
+      "country": "CA"
+    },
     "street": "4402 Summer Ridge Drive",
     "city": "Maskinongé",
     "state": "QC",

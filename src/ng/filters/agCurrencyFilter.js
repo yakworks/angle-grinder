@@ -1,6 +1,6 @@
 import angular from 'angular'
 import filtersModule from './filtersModule'
-import { isNothing } from '../../utils/something'
+import { isNothing } from '../../utils/truthy'
 import _ from 'lodash'
 
 var app = angular.module(filtersModule)

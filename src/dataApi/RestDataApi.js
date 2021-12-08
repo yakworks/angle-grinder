@@ -48,6 +48,9 @@ export default class RestDataApi {
     let prunedParms = prune(params)
     let q = prunedParms.q
     if(_.isObject(q)) prunedParms.q = JSON.stringify(q)
+    //stringify sort and remove the
+    let sort = prunedParms.sort
+    if(_.isObject(sort)) prunedParms.sort = JSON.stringify(sort).replace(/{|}|"/g, '')
     return prunedParms
   }
 

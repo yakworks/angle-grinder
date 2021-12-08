@@ -10,7 +10,7 @@ module.exports = {
 		*/
 		'node_modules/.+\\.svelte$': ['svelte-jester'],
 	},
-	moduleFileExtensions: ['js', 'ts', 'svelte'],
+	moduleFileExtensions: ['js', 'svelte'],
 	bail: false,
 	moduleNameMapper: {
 		'^@([A-Z].*)$': '<rootDir>/src/$1'

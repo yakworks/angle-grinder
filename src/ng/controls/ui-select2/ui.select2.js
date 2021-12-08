@@ -37,7 +37,7 @@ angular.module('ui.select2', [])
               const mdata = ngModelCtrl.$modelValue
               const idProp = opts.idProp
               // if its useDataObject & existing data has only and "id" then let select pick it up
-              if (opts.useDataObject && !opts.multiple && _.keys(mdata).length === 1) {
+              if (opts.useDataObject && !opts.multiple && Object.keys(mdata).length === 1) {
                 elm.select2('val', mdata[idProp])
               } else if (opts.useDataObject || opts.multiple) { // if its multi, always use 'data'
                 elm.select2(opts.dataVar, mdata)

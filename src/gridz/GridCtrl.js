@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { makeLabel } from '../utils/nameUtils'
 import { xlsData, csvData } from './excelExport'
-import flattenObject from './flattenObject'
+import flattenObject from '../utils/flattenObject'
 import toast from '../tools/growl'
 import _ from 'lodash'
 
@@ -29,13 +29,20 @@ export default class GridCtrl {
 
     const $jqGrid = $(jqGridElement)
     this.jqGridEl = $jqGrid
-
     this.$gridWrapper = $(gridWrapper)
 
     if (!this.gridId && !_.isNil(opts.gridId)) {
       this.gridId = opts.gridId
     }
     $jqGrid.attr('id', this.gridId)
+
+    let optsToMerge = _.pick(opts, [
+      'showSearchForm', 'dataApi', 'initSearch', 'restrictSearch', 'contextMenuClick'
+    ])
+    _.mergeWith(this, optsToMerge, (obj, optVal) => {
+      //dont merge val if its null
+      return optVal === null ? obj : undefined
+    })
 
     // pager ID setup
     if (opts.pager !== false) {
@@ -58,24 +65,6 @@ export default class GridCtrl {
     // if no datatype is passed in then use internal default
     if (_.isNil(opts.datatype)) {
       opts.datatype = (params) => this.gridLoader(params)
-    }
-
-    if (opts.showSearchForm) this.showSearchForm = opts.showSearchForm
-
-    if (!_.isNil(opts.dataApi)) {
-      this.dataApi = opts.dataApi
-    }
-
-    if (!_.isNil(opts.initSearch)) {
-      this.initSearch = opts.initSearch
-    }
-
-    if (!_.isNil(opts.frozenSearch)) {
-      this.frozenSearch = opts.frozenSearch
-    }
-
-    if (!_.isNil(opts.contextMenuClick)) {
-      this.contextMenuClick = opts.contextMenuClick
     }
 
     this.setupColModel(opts)
@@ -272,7 +261,7 @@ export default class GridCtrl {
     const prevData = this.getRowData(id)
     if (!_.isNil(prevData)) {
       // retrieve a list of removed keys
-      let diff = _.difference(_.keys(prevData), _.keys(flatData))
+      let diff = _.difference(Object.keys(prevData), Object.keys(flatData))
 
       // filter out restricted (private) columns like `-row_action_col`
       const restrictedColumns = key => !key.match(/^-/)
@@ -415,7 +404,7 @@ export default class GridCtrl {
       if (_.isNil(value)) { continue }
 
       if (typeof value === 'string') {
-        if (_.trim(value) !== '') { return true }
+        if (value.trim() !== '') { return true }
       } else {
         return true
       }
@@ -432,13 +421,14 @@ export default class GridCtrl {
   async gridLoader(p, searchModel) {
     this.toggleLoading(true)
     try {
-      // fix up sort
-      // if (p.sort && p.order) p.sort = `${p.sort} ${p.order}`
-      if (!p.sort){
-        //get rid of dangling order
-        delete p.order
+      //we use the sortMap that constructed in jq.gridz so remove the sort and order
+      delete p.order; delete p.sort;
+      let sortMap = this.getParam('sortMap')
+      console.log('sortMap', sortMap)
+      if(sortMap){
+        p.sort = sortMap
       }
-      // delete p.order
+
       // to be able to set default filters on the first load
       let q = p.q
       if(_.isString(q) && !_.isEmpty(q)){
@@ -448,15 +438,12 @@ export default class GridCtrl {
           q = {'$qSearch': q}
         }
       }
-      //filters that
-      // const permanentFilters = this.listCtrl?.permanentFilters || {}
-      // const initSearch = this.listCtrl?.initSearch || {}
-      const frozenSearch = this.frozenSearch || {}
+      // when grid is for child or detail data, restrictSearch is what to filter it by,
+      // for example is showing invoices for customer then restrictSearch might be set to {custId:123}
+      const restrictSearch = this.restrictSearch || {}
       const initSearch = this.initSearch || {}
       const search = _.merge(initSearch, searchModel || {})
-      // q =  _.merge(initSearch, q, searchModel || {}, permanentFilters)
-      q = {...search, ...q, ...frozenSearch}
-      // q = JSON.stringifly({...initSearch, ...q,  ...searchModel, ...permanentFilters})
+      q = {...search, ...q, ...restrictSearch}
 
       //now if its not empty set it back to p
       if(!_.isEmpty(q)){
@@ -717,16 +704,6 @@ export default class GridCtrl {
       this.ctxMenuOptions = this.defaultCtxMenuOptions
       this.addCtxMenuIconColumn(opts)
     }
-  }
-
-  setupDataLoader(options) {
-    // Log.debug(`[agGrid] initializing '${alias}' with`, options)
-
-    // assign the url
-    if (!(!_.isNil(options.url)) && (!_.isNil(options.path))) {
-      options.url = this.pathWithContext(options.path)
-    }
-
   }
 
   setupColModel(options) {
