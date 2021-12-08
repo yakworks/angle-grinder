@@ -1,3 +1,4 @@
+import {forEach} from './dash'
 
 // Takes a nested Javascript object and flatten it.
 // see: https://github.com/hughsk/flat
@@ -11,7 +12,7 @@ export default function flattenObject(target, opts) {
     if (prev) { return prev + delimiter + key } else { return key }
   }
 
-  var step = (object, prev) => angular.forEach(Object.keys(object), function(key) {
+  var step = (object, prev) => forEach(Object.keys(object), function(key) {
     const isArray = opts.safe && object[key] instanceof Array
     const type = Object.prototype.toString.call(object[key])
     const isObject = (type === '[object Object]') || (type === '[object Array]')

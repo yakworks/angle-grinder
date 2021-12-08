@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars, eqeqeq */
 // import _ from 'lodash'
-const _ = require('../utils/dash')
+import * as _ from '../utils/dash'
 /**
  * Memstore Api, can be extended or used as a test express back end for a rest server.
  * Uses commonjs and not es6 exports so it compatible with node and doesn't need babel

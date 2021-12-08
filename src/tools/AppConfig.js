@@ -1,4 +1,5 @@
-import _ from 'lodash'
+import {cloneDeep, merge} from '../utils/dash'
+
 const appConfig = {
   controls: {
     ranges: {
@@ -17,10 +18,10 @@ const appConfig = {
 }
 
 export const getConfig = () => {
-  return _.cloneDeep(appConfig)
+  return cloneDeep(appConfig)
 }
 
 export const setConfig = (newConfig) => {
   console.log('set config', newConfig)
-  _.merge(appConfig, newConfig)
+  merge(appConfig, newConfig)
 }

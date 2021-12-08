@@ -1,5 +1,5 @@
 import {isNil} from './dash'
-import {isSomething} from './something';
+import {isSomething} from './truthy';
 
 export default function prune(obj) {
   if(isNil(obj)) return obj

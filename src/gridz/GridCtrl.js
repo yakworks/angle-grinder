@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { makeLabel } from '../utils/nameUtils'
 import { xlsData, csvData } from './excelExport'
-import flattenObject from './flattenObject'
+import flattenObject from '../utils/flattenObject'
 import toast from '../tools/growl'
 import _ from 'lodash'
 
@@ -272,7 +272,7 @@ export default class GridCtrl {
     const prevData = this.getRowData(id)
     if (!_.isNil(prevData)) {
       // retrieve a list of removed keys
-      let diff = _.difference(_.keys(prevData), _.keys(flatData))
+      let diff = _.difference(Object.keys(prevData), Object.keys(flatData))
 
       // filter out restricted (private) columns like `-row_action_col`
       const restrictedColumns = key => !key.match(/^-/)
@@ -415,7 +415,7 @@ export default class GridCtrl {
       if (_.isNil(value)) { continue }
 
       if (typeof value === 'string') {
-        if (_.trim(value) !== '') { return true }
+        if (value.trim() !== '') { return true }
       } else {
         return true
       }

@@ -1,5 +1,5 @@
 /* eslint-disable */
-import {isSomething, isNothing} from '../something';
+import {isSomething, isNothing} from '../truthy';
 
 describe('isSomething', () => {
   test('null', () => {
