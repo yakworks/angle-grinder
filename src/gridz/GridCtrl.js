@@ -432,6 +432,13 @@ export default class GridCtrl {
   async gridLoader(p, searchModel) {
     this.toggleLoading(true)
     try {
+      //we use the sortMap that constructed in jq.gridz so remove the sort and order
+      delete p.order; delete p.sort;
+      let sortMap = this.getParam('sortMap')
+      console.log('sortMap', sortMap)
+      if(sortMap){
+        p.sort = sortMap
+      }
       // fix up sort
       // if (p.sort && p.order) p.sort = `${p.sort} ${p.order}`
       if (!p.sort){
@@ -717,16 +724,6 @@ export default class GridCtrl {
       this.ctxMenuOptions = this.defaultCtxMenuOptions
       this.addCtxMenuIconColumn(opts)
     }
-  }
-
-  setupDataLoader(options) {
-    // Log.debug(`[agGrid] initializing '${alias}' with`, options)
-
-    // assign the url
-    if (!(!_.isNil(options.url)) && (!_.isNil(options.path))) {
-      options.url = this.pathWithContext(options.path)
-    }
-
   }
 
   setupColModel(options) {

@@ -4,7 +4,7 @@ gridOptions:
     - { name: num, width: 30 }
     - { name: name, formatter: editActionLink }
     - { name: city, width: 100 }
-    - { name: state, width: 60 }
+    - { name: location.state, width: 60 }
     - { name: postalCode, label: Zip, width: 60 }
     - { name: country, width: 60 }
   # sortname: name

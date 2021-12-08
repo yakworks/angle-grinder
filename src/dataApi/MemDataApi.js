@@ -69,7 +69,7 @@ class MemDataApi {
     if (isSearch) list = this.filter(list, p)
     if (p.sort) {
       const sortobj = p.sort.split(',').reduce((acc, item) => {
-        const sortar = item.trim().split(' ')
+        const sortar = item.trim().split(':')
         acc.sort.push(sortar[0])
         acc.order.push(sortar[1])
         return acc
