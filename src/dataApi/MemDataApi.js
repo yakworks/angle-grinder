@@ -1,11 +1,11 @@
 /* eslint-disable no-unused-vars, eqeqeq */
 // import _ from 'lodash'
-import * as _ from '../utils/dash'
+const _ = require('lodash')
 /**
  * Memstore Api, can be extended or used as a test express back end for a rest server.
  * Uses commonjs and not es6 exports so it compatible with node and doesn't need babel
  */
-export default class MemDataApi {
+class MemDataApi {
   // used to simulate a delay is used for testing
   mockDelay = 0
   picklistFields = ['id', 'name']
@@ -224,4 +224,4 @@ function hasSomeDeep(obj, searchKey) {
   })
 }
 
-// module.exports = MemDataApi
+module.exports = MemDataApi
