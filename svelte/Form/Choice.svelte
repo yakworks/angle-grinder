@@ -61,7 +61,7 @@
       <label for={option.id}>{option.title}</label>
     {/if}
   {/each}
-  {#if get($touched, name) && _.get($errors, name)}
+  {#if _.get($touched, name) && _.get($errors, name)}
     <div class="message">{_.get($errors, name)}</div>
   {/if}
 </div>
