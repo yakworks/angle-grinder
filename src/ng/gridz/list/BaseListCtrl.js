@@ -66,12 +66,11 @@ export default class BaseListCtrl {
     _.defaults(this.cfg, cfg)
 
     this.isConfigured = true
-    toolbarActions = {}
+    this.toolbarActions = {}
     //setup some defaults for gridOpts
     gopts.contextMenuClick = (model, menuItem) => {
       return this.fireRowAction(model, menuItem)
     }
-
     gopts.fireToolbarAction = (btnItem, event) => {
       switch (btnItem.key) {
         case 'create':
@@ -84,7 +83,7 @@ export default class BaseListCtrl {
           return this.deleteSelected()
         default:
           if (_.isFunction(this[btnItem.key])) {
-            return this.toolbarActions[btnItem.key](btnItem, event)
+            return this[btnItem.key](btnItem, event)
           }
       }
     }
