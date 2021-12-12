@@ -62,6 +62,7 @@
     "framework7-icons": "^5.0.3",
     "framework7-svelte": "^6.3.4",
     "free-jqgrid": "4.13.3",
+    "fuse.js": "^6.4.6",
     "highlight.js": "^10.7.2",
     "jquery": "3.4.1",
     "jquery-ui": "^1.12.1",

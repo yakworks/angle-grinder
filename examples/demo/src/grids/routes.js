@@ -7,15 +7,15 @@ const gridsStates = {
   },
   children: [
     {
-      name: 'vanilla-agGridList',
-      data: { title: 'Customer Grid Example' },
-      abstract: 'fresh.grid.vanilla-agGridList.list',
-      url: '/customer',
+      name: 'agGridDatastore',
+      data: { title: 'Customer Grid DS' },
+      abstract: 'fresh.grid.agGridDatastore.list',
+      url: '/customer-ds',
       children: [{
         name: 'list',
         isMenuItem: false,
         url: '',
-        component: 'agGridList'
+        component: 'agGridDatastore'
       }, {
         name: 'Edit Customer',
         isMenuItem: false,
