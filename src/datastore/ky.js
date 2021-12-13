@@ -77,8 +77,8 @@ export const kyFetch = endpoint => {
   /**
    * pass method into args. can also pass op and it will be appended to endpoint
    *
-   * @param {[{ method: string, op: string,  }]} param0
-   * @returns {Object} the json result
+   * @param {{ method: string, op: string }} param0
+   * @returns {Promise<object>} the json result
    */
   async function kyFetch({method = 'get', op = '', ...opts}){
     return KyFactory.ky(`${endpoint}${op}`, {...opts, method})
