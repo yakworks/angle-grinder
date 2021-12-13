@@ -1,37 +1,112 @@
-import kyApi from '../dataApi/kyApi'
+import { kyFetch } from './ky'
 import prune from '../utils/prune';
+import mix from '../utils/mixer';
 import {isObject} from '../utils/inspect';
+import { get, writable } from 'svelte/store';
+
+const getFeature = ({ api }) => ds => {
+  let itemStore = writable({})
+
+  let ext = {
+    //current item
+    get itemStore(){
+      return itemStore
+    },
+    async get(id) {
+      const item = await api.getById(id)
+      itemStore.set(item)
+      return item
+    }
+  }
+  return Object.assign(ds, ext)
+}
+
+const restQueryFeature = ({ api }) => ds => {
+
+  /**
+   * the current paged view of the data {data:[...], page: , records: , total: }
+   */
+  let pageStore = writable({})
+
+  /**
+   * the query parameters with the q search {max:int, page:int, sort:string, q:{} , qSearch:string}
+   */
+  let queryStore = writable({})
+
+  /**
+   * when grid is for child or detail data, restrictSearch is what to filter it by,
+   * for example is showing invoices for customer then restrictSearch might be set to {custId:123}
+   */
+  let { restrictSearch } = ds
+
+  /**
+   * stringify if its an object, otherwise return itself
+   */
+  function stringify(o){
+    return isObject(o) ? JSON.stringify(o) :o
+  }
+
+  let ext = {
+
+    get pageStore(){
+      return pageStore
+    },
+
+    get pageStoreValue(){
+      return get(pageStore)
+    },
+
+    get queryStore(){
+      return queryStore
+    },
+
+    /**
+     * adds searchParams, which are the query params ( the part after the ? )
+     * and then calls the get. if the params has a q property and its a string then
+     * @param {*} params
+     */
+    async search(params) {
+      let searchParams = ds.setupSearchParams(params)
+      console.log("searchParams", searchParams)
+      const page = await api.get({ searchParams })
+      console.log("page", page)
+      pageStore.set(page)
+      return page
+    },
+
+    // prunes params and stringifies the q param if exists
+    setupSearchParams(params){
+      let pruned = prune(params)
+      let { q, sort } = pruned
+      if(restrictSearch) q = {...q, ...restrictSearch}
+      //save it before we stringify
+      queryStore.set({...pruned, q, sort})
+
+      if(q) pruned.q = stringify(q)
+      //stringify sort and remove the quotes and brackets
+      if(sort) pruned.sort = stringify(sort).replace(/{|}|"/g, '')
+      return pruned
+    }
+  }
+
+  return Object.assign(ds, ext)
+}
 
 /**
  * A common wrapper around RESTful resource
  */
-export const ListDatastore = ({
-  endpoint
-}) => {
+export const ListDatastore = ({ endpoint, ...opts }) => {
 
   //the full data cache, optional use?
   let dataCache = []
   //the filtered data, unpaginated, after a search
   let viewData = []
-  //the current paged view of the data {data:[...], page: , records: , total: }
-  let pager
 
-  let props = {endpoint, kyApi}
+  let api = kyFetch(endpoint)
 
-  let methods = {
-
-    // getter makes sure it always pull the configured kyApi.ky
-    get api(){
-      return kyApi.ky
-    },
-
-    /**
-     * calls ky with opts and method
-     */
-    ky(resource, {method = 'get', ...opts}){
-      return this.api(`${this.endpoint}${resource}`, {...opts, method}).json()
-    },
-
+  let ds = {
+    ...opts,
+    api,
     async getData(){
       //if dataCache is empty then fill it.
       return dataCache
@@ -41,72 +116,16 @@ export const ListDatastore = ({
       return viewData
     },
 
-    getPagerData(){
-      return pagerData
-    },
-
     // updates the dataView and the pager
     updateViewData(filteredData) {
       viewData = filteredData
-    },
-
-    // updates the dataView and the pager
-    updatePager(pagedData) {
-      pager = pagedData
-    },
-
-    // saves the current q query so when we move to next page or sort it can re use it
-    updateQ(pagedData) {
-      pager = pagedData
-    },
-
-    /**
-     * adds searchParams, which are the query params ( the part after the ? )
-     * and then calls the get. if the params has a q property and its a string then
-     * @param {*} params
-     */
-    async search(params) {
-      let cleanParams = this.setupQ(params)
-      const opts = { searchParams: cleanParams }
-      const data = await this.ky('', opts)
-      this.updatePager(data)
-      return data
-    },
-
-    // prunes params and stringifies the q param if exists
-    setupQ(params){
-      let pruned = prune(params)
-      let { q, sort } = pruned
-      if(isObject(q)) pruned.q = JSON.stringify(q)
-      //stringify sort and remove the quotes and brackets
-      if(isObject(sort)) pruned.sort = JSON.stringify(sort).replace(/{|}|"/g, '')
-      return pruned
-    },
-
-    /**
-     * paginates the current viewData, assigns the pager to page
-     */
-    async paginate({ page = 1, max = 20}) {
-      let data = await this.getViewData()
-      pagerData = {
-        data: data.slice((page - 1) * max, page * max),
-        page: page,
-        records: data.length,
-        total: Math.floor(data.length / max) + (data.length % max === 0 ? 0 : 1)
-      }
-      return pagerData
-    },
-
-    async countTotals(params) {
-      const results = await this.api.post(`${this.endpoint}/countTotals`, { json: params }).json()
-      return results
     }
   }
 
-  return {
-    ...props,
-    ...methods,
-  }
+  return mix(ListDatastore).it(ds).with(
+    restQueryFeature({ api }),
+    getFeature({ api })
+  )
 }
 
 export default ListDatastore

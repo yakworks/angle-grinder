@@ -1,10 +1,11 @@
 import AgBaseControl from '../AgBaseControl'
 // import Log from '../../../utils/Log'
 import _ from 'lodash'
-import { getConfig } from "../../../tools/AppConfig";
+import controlsConfig from "../controlsConfig";
 
 class Controller extends AgBaseControl {
   datepickerOptions = {}
+
   opts = {
     showOnFocus: true,
     fromField: {
@@ -17,9 +18,9 @@ class Controller extends AgBaseControl {
     }
   }
 
+
   $onInit() {
-    const rangeConfig = getConfig().controls.ranges
-    _.merge(this.opts, _.merge(rangeConfig, this.datepickerOptions))
+    _.merge(this.opts, controlsConfig.controls.ranges, this.datepickerOptions)
     this.placeholderFrom = this.opts.fromField.placeholder
     this.placeholderTo = this.opts.toField.placeholder
     this.elementIdFrom = this.elementId + '_from'

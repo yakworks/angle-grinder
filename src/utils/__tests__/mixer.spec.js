@@ -101,16 +101,16 @@ const rotors = drone => {
   })
 }
 
-const Copter = (opts) => {
-  let name = "Copter Model"
+const Copiter = (opts) => {
+  let name = "Copiter Model"
 
-  return mix(Copter).it({ name, ...opts }).with(
+  return mix(Copiter).it({ name, ...opts }).with(
     Drone,
     rotors
   )
 }
 
-const copter = Copter()
+const copter = Copiter()
 
 console.log(`
   can fly:  ${ copter.fly().isFlying() === true }
@@ -184,10 +184,10 @@ describe('mix drone', () => {
 
   test('check copter overrides', () => {
 
-    let copter = Copter()
+    let copter = Copiter()
     x(copter.name).toEqual('Copter Model')
 
-    copter = Copter({name: 'Custom'})
+    copter = Copiter({name: 'Custom'})
     x(copter.name).toEqual('Custom')
 
     //not flying yet
@@ -205,8 +205,8 @@ describe('mix drone', () => {
 
     //it should be a Copter
     let ctor = copter.constructor
-    x(ctor).toEqual(Copter)
-    x(ctor.of).toEqual(Copter)
+    x(ctor).toEqual(Copiter)
+    x(ctor.of).toEqual(Copiter)
 
     console.log(`
     can fly:  ${ copter.fly().isFlying() === true }

@@ -1,15 +1,32 @@
+
 {
+  "extends": "@tsconfig/svelte/tsconfig.json",
   "compilerOptions": {
+    "moduleResolution": "node",
+    "baseUrl": ".",
+    "outDir": "./dummy",
+    "target": "es6",
+    "module": "es6",
     "paths": {
-      "~/*": ["./src/*"],
-      "#/*": ["/"]
+      "~/*": ["src/*"],
+      "angle-grinder/src/*": ["src/*"],
+      "angle-grinder/svelte/*": ["svelte/*"]
     },
+    "checkJs": true,
     "allowJs": true,
-    "outDir": "./dist/",
+    "skipLibCheck": true,
     "sourceMap": true,
     "noImplicitAny": false,
-    "module": "es6",
-    "target": "es5",
-    "allowSyntheticDefaultImports": true
-  }
+    "strictNullChecks": false,
+    "allowSyntheticDefaultImports": true,
+    "allowUmdGlobalAccess": true
+  },
+  "exclude": [
+    "node_modules"
+  ],
+  "include": [
+    "src/**/*",
+    "svelte/**/*",
+    "examples/demo/src/**/*",
+  ]
 }

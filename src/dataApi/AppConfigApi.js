@@ -1,29 +1,27 @@
 import kyApi from './kyApi'
 
-class LocalCache {
-  _values = {}
+const makeLocalCache = opts => {
+  const _values = {}
 
-  get(key) { return this._values[key] }
-  contains(key) { return key in this._values }
-  remove(key) { delete this._values[key] }
-  set(key, value) { this._values[key] = value }
-  values() { return this._values }
-  getSet(key, value) {
-    if (!this.contains(key)) {
-      this.set(key, typeof value === 'function' ? value() : value)
+  return {
+    get(key) { return _values[key] },
+    contains(key) { return key in _values },
+    remove(key) { delete _values[key] },
+    set(key, value) { _values[key] = value },
+    values() { return _values },
+    getSet(key, value) {
+      if (!this.contains(key)) {
+        this.set(key, typeof value === 'function' ? value() : value)
+      }
+      return this.get(key)
     }
-    return this.get(key)
   }
 }
-const _cache = new LocalCache()
+const _cache = makeLocalCache()
 
 /** main holder for api */
 export class AppConfigApi {
   prefixUrl = 'api/appConfig/'
-  // _cache = new MicroCache()
-
-  // constructor() {
-  // }
 
   // Allows to use custom function to generate config key, for example namespace_key
   configKeyGenerator = (configKey) => {

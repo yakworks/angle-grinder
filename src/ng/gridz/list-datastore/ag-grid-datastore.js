@@ -1,6 +1,6 @@
-import BaseListCtrl from '../list/BaseListCtrl'
-// import restStoreApi from '../../store/RestStoreApi'
-import _ from 'lodash'
+// @ts-nocheck
+import ListDatastoreCtrl from './ListDatastoreCtrl'
+import union from 'lodash/union'
 
 const template = `
 <div class="pt-2">
@@ -10,29 +10,29 @@ const template = `
   </div>
   <ag-grid-list-search ng-if="$ctrl.isConfigured" list-ctrl="$ctrl" ng-show="$ctrl.gridCtrl.showSearchForm">
   </ag-grid-list-search>
-  <gridz ng-if="$ctrl.isConfigured" grid-options="$ctrl.cfg.gridOptions"
+  <gridz-datastore ng-if="$ctrl.isConfigured" grid-options="$ctrl.cfg.gridOptions"
         toolbar-options="$ctrl.cfg.gridOptions.toolbarOptions"
         grid-id="{{$ctrl.gridId()}}">
-  </gridz>
+  </gridz-datastore>
 </div>
 `
-class ListCtrl extends BaseListCtrl {
-  static $inject = _.union(super.$inject, ['dataStoreApi'])
-  // constructor(...args) {
-  //   super(...args)
-  // }
+class ListCtrl extends ListDatastoreCtrl {
 
   $onInit() {
+    console.log("apiKey", this.apiKey)
+    console.log("datastore", this.datastore)
     this.isConfigured = false
-    this.dataApi = this.dataStoreApi[this.apiKey]
     this.cfg = {}
     super.doConfig()
 
+    if (this.restrictSearch) {
+      this.datastore.restrictSearch = this.restrictSearch
+    }
     if (this.initSearch) {
+      //FIXME why do we set the initSearch to cfg?
       this.cfg.initSearch = this.initSearch
       this.searchModel = { ...this.initSearch, ...this.searchModel }
     }
-
   }
 
   // we need to generate gridId, because if we have 2 grids on a page they will have the same id and 2 pagers will
@@ -44,19 +44,12 @@ class ListCtrl extends BaseListCtrl {
 
 export default {
   bindings: {
-    apiKey: '<',
+    apiKey: '<', // used for gridId and to get the config
+    datastore: '<',
     notification: '<',
-    initSearch: '<'
+    initSearch: '<',
+    restrictSearch: '<'
   },
   template: template,
   controller: ListCtrl
 }
-
-// export default angular
-//   .module(gridMod)
-//   .component('agGridList', {
-//     bindings: { apiKey: '<' },
-//     template: template,
-//     controller: ListCtrl
-//   })
-//   .name

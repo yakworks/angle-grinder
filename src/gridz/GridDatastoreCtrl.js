@@ -5,7 +5,9 @@ import flattenObject from '../utils/flattenObject'
 import toast from '../tools/growl'
 import _ from 'lodash'
 
-export default class GridCtrl {
+export default class GridDatastoreCtrl {
+  formatters
+  datastore
   highlightClass = 'ui-state-highlight'
   systemColumns = ['cb', '-row_action_col']
   isDense = false
@@ -36,8 +38,9 @@ export default class GridCtrl {
     }
     $jqGrid.attr('id', this.gridId)
 
+
     let optsToMerge = _.pick(opts, [
-      'showSearchForm', 'dataApi', 'initSearch', 'restrictSearch', 'contextMenuClick'
+      'showSearchForm', 'datastore', 'initSearch', 'restrictSearch', 'contextMenuClick'
     ])
     _.mergeWith(this, optsToMerge, (obj, optVal) => {
       //dont merge val if its null
@@ -73,6 +76,12 @@ export default class GridCtrl {
     this.setupGridCompleteEvent(this, $jqGrid, opts)
     this.setupFormatters(this, $jqGrid, opts)
     this.formatters && this.setupCustomFormatters(this, this.formatters, opts)
+
+    // adds the listener to the store
+    this.datastore.pageStore.subscribe(data => {
+      // console.log("dataApi.currentPage")
+      this.addJSONData(data)
+    });
   }
 
   //initialize the grid the jquery way
@@ -137,8 +146,9 @@ export default class GridCtrl {
 
   // Populates the grid with the given data.
   addJSONData(data) {
-    this.jqGridEl.get(0).addJSONData(data)
-
+    if(!_.isEmpty(data)){
+      this.jqGridEl.get(0).addJSONData(data)
+    }
     // fire jquery event
     return this.jqGridEl.trigger('gridz:loadComplete', [data])
   }
@@ -179,7 +189,7 @@ export default class GridCtrl {
     return this.reload([{ current: true }])
   }
 
-  resetSort(sortname = 'id', sortorder = 'asc') {
+  resetSort(sortname = '', sortorder = '') {
     const colModel = this.getParam('colModel')
     colModel.forEach(column => {
       column.lso = (column.name === sortname) || (column.name === 'id') ? sortorder : ''
@@ -205,9 +215,11 @@ export default class GridCtrl {
     return this.jqGridEl.getGridParam(name)
   }
 
-  // Sets the given grid parameter
-  setParam(params) {
-    return this.jqGridEl.setGridParam(params)
+  /**
+   * Sets the given grid parameter, pass overwrite true if blanking out a param
+   */
+  setParam(params, overwrite) {
+    this.jqGridEl.setGridParam(params, overwrite)
   }
 
   // returns the column model
@@ -380,17 +392,27 @@ export default class GridCtrl {
   }
 
   // Sets the grid search filters and triggers a reload
-  async search(filters, queryText) {
+  async search(q, queryText) {
+    console.log("GridCtrl search called with  ", q)
+    console.log("GridCtrl search queryText  ", queryText)
     try {
       this.isSearching = true
       const params = {
         page: 1,
-        search: this.hasSearchFilters(filters),
-        postData: {}
+        search: this.hasSearchFilters(q)
       }
-      if (filters) params.postData.q = filters
-      if (queryText || queryText === '') params.postData.qSearch = queryText
-      this.setParam(params)
+      this.setParam(params, true)
+
+      let postData = { q }
+      if (queryText || queryText === '') postData.qSearch = queryText
+      this.setParam({ postData })
+
+      //if its empty then manually blank it out
+      if(_.isEmpty(q)){
+        let pp = this.getParam("postData")
+        pp.q = {}
+      }
+      //reload wil end up calling the gridLoader function
       await this.reload()
     } catch (er) {
       //XXX should not swallow errors
@@ -413,12 +435,12 @@ export default class GridCtrl {
   }
 
   /**
-   * The main loader for the grid.
+   * The main loader for the grid. get called internally from pager and sort.
    *
    * @param {*} p the params to send to search
-   * @param {*} searchModel if passed in this will get merged in whats in q
    */
-  async gridLoader(p, searchModel) {
+  async gridLoader(p) {
+    console.log("gridLoader called with ", p)
     this.toggleLoading(true)
     try {
       //we use the sortMap that constructed in jq.gridz so remove the sort and order
@@ -441,16 +463,16 @@ export default class GridCtrl {
       // when grid is for child or detail data, restrictSearch is what to filter it by,
       // for example is showing invoices for customer then restrictSearch might be set to {custId:123}
       const restrictSearch = this.restrictSearch || {}
-      const initSearch = this.initSearch || {}
-      const search = _.merge(initSearch, searchModel || {})
-      q = {...search, ...q, ...restrictSearch}
+      // const initSearch = this.initSearch || {}
+      // const search = _.merge(initSearch, searchModel || {})
+      q = {...q, ...restrictSearch}
 
       //now if its not empty set it back to p
       if(!_.isEmpty(q)){
         p.q = q
       }
-      const data = await this.dataApi.search(p)
-      this.addJSONData(data)
+      const data = await this.datastore.search(p)
+      // this.addJSONData(data)
     } catch (er) {
       this.handleError(er)
     } finally {
@@ -481,6 +503,7 @@ export default class GridCtrl {
     return xlsData(this.getGridId(), this.getSelectedRowIds())
   }
 
+  // @ts-ignore
   xlsExport() {
     if (this.getSelectedRowIds().length !== 0) {
       // if browser is IE then open new window and show SaveAs dialog, else use dataUri approach
@@ -490,13 +513,14 @@ export default class GridCtrl {
         let iframe = document.createElement('IFRAME')
         iframe.style.display = 'none'
         document.body.appendChild(iframe)
-        iframe = iframe.contentWindow || iframe.contentDocument
+        // @ts-ignore
+        let iframeDoc = iframe.contentWindow.document || iframe.contentDocument.document
         const csvDta = 'sep=|\r\n' + this.getCsvData()
-        iframe.document.open('text/html', 'replace')
-        iframe.document.write(csvDta)
-        iframe.document.close()
+        iframeDoc.open('text/html', 'replace')
+        iframeDoc.write(csvDta)
+        iframeDoc.close()
         iframe.focus()
-        return iframe.document.execCommand('SaveAs', true, 'download.csv')
+        return iframeDoc.execCommand('SaveAs', true, 'download.csv')
       } else {
         const dataUri = this.getXlsDataUri()
         const link = document.createElement('a')
@@ -513,7 +537,7 @@ export default class GridCtrl {
   }
 
   getCsvData() {
-    return csvData(this.getGridId(), this.getSelectedRowIds())
+    return csvData()(this.getGridId(), this.getSelectedRowIds())
   }
 
   toggleLoading(show = true) {
@@ -720,7 +744,8 @@ export default class GridCtrl {
         beforeSearch() {
           const postData = this.jqGridEl.jqGrid('getGridParam', 'postData')
           const defaultFilters = postData.defaultFilters || postData.filters
-          const filters = (_.extend(JSON.parse(defaultFilters), (_.pick(postData, (value, key) => !['page', 'filters', 'max', 'sort', 'order'].includes(key)))))
+          // @ts-ignore
+          const filters = (_.extend(JSON.parse(defaultFilters), (_.pick(postData, (_value, key) => !['page', 'filters', 'max', 'sort', 'order'].includes(key)))))
           filters.firstLoad = false
           postData.defaultFilters = defaultFilters
           postData.filters = filters

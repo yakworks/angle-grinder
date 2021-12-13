@@ -1,3 +1,5 @@
+import restStoreApi from '../store/RestStoreApi'
+
 const gridsStates = {
   name: 'grids',
   abstract: true,
@@ -8,7 +10,7 @@ const gridsStates = {
   children: [
     {
       name: 'agGridDatastore',
-      data: { title: 'Customer Grid DS' },
+      data: { title: 'Customer Grid' },
       abstract: 'fresh.grid.agGridDatastore.list',
       url: '/customer-ds',
       children: [{
@@ -24,6 +26,11 @@ const gridsStates = {
       }],
       resolve: {
         apiKey: () => 'customer',
+        datastore: () => {
+          let ds = restStoreApi.customer
+          console.log("restStoreApi.customer", ds)
+          return ds
+        },
         // gridOptions: () => ({multiSort: true}),
         notification: () => ({
           class: 'is-primary is-light',
@@ -40,7 +47,7 @@ const gridsStates = {
         name: 'list',
         isMenuItem: false,
         url: '',
-        component: 'agGridList'
+        component: 'agGridDatastore'
       }, {
         name: 'Edit Customer',
         isMenuItem: false,
@@ -49,6 +56,9 @@ const gridsStates = {
       }],
       resolve: {
         apiKey: () => 'customer',
+        datastore: () => {
+          return restStoreApi.customer
+        },
         initSearch: () => ({ name: 'Yodo' }),
         notification: () => ({
           class: 'is-primary is-light',

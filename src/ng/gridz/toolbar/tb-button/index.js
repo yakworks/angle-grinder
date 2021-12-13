@@ -27,13 +27,13 @@ export default () => ({
   restrict: 'E',
   // replace: true,
   require: {
-    gridCtrl: '^gridz',
     tbCtrl: '^gridzToolbar'
   },
   template: require('./tbButton.html'),
   bindToController: {
     opts: '<',
-    isLoading: '<'
+    isLoading: '<',
+    gridCtrl: '<'
   },
   controller: Controller,
   controllerAs: 'tbBtnCtrl'

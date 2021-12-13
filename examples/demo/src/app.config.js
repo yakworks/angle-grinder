@@ -3,8 +3,9 @@ import _ from 'lodash'
 import appName from './app.module'
 import './config.router'
 import appState from 'angle-grinder/src/tools/AppState'
-import {setConfig} from 'angle-grinder/src/tools/AppConfig'
-import {setClientConfig} from "angle-grinder/src/dataApi/kyApi";
+import { KyFactory } from "angle-grinder/src/datastore/ky";
+KyFactory.enableAuthHeader()
+KyFactory.defaults.prefixUrl = configData.base_url
 
 const app = angular.module(appName)
 // export default app.name
@@ -63,24 +64,10 @@ app.run(function($rootScope, $state, $stateParams) {
   appState.sidenav.open = true
 
   $rootScope.appState = appState
-  setClientConfig({
-    // configData comes from index.html - to be able to change backend url on fly after build, takes data from `config.js` in root folder of the app
-    // eslint-disable-next-line no-undef
-    prefixUrl: configData.base_url
-  })
+  // setClientConfig({
+  //   // configData comes from index.html - to be able to change backend url on fly after build, takes data from `config.js` in root folder of the app
+  //   // eslint-disable-next-line no-undef
+  //   prefixUrl: configData.base_url
+  // })
 
-  const conf = {
-    controls: {
-      ranges: {
-        fromField: {
-          name: '$gt'
-        },
-        toField: {
-          name: '$lt'
-        }
-      }
-    }
-  }
-
-    setConfig(conf)
 })

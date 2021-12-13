@@ -3,13 +3,11 @@ import _ from 'lodash'
 
 export default () => ({
   restrict: 'E',
-  require: {
-    gridCtrl: '^gridz'
-  },
   template: require('./toolbar.html'),
   bindToController: true,
   scope: {
-    options: '<'
+    options: '<',
+    gridCtrl: '<'
   },
   controller: Controller,
   controllerAs: 'tbCtrl'
