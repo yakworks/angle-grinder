@@ -3,7 +3,7 @@ import _ from 'lodash'
 import { findSomeDeep, qbe, findIndexById } from '../../utils/finders'
 import { isString } from '../../utils/inspect'
 import mix from '../../utils/mix-it-with'
-import {datastore} from '../datastore'
+import {crudQueryModel} from '../crudQueryModel'
 
 /**
  * Local memory based datastore
@@ -216,7 +216,7 @@ const MemDatastore = ({
   }
 
   return mix(ds).it(MemDatastore).with(
-    Datastore
+    crudQueryModel
   )
 }
 

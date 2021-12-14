@@ -1,6 +1,7 @@
 // import {guid} from "../utils/util"
 import MemDatastore from './MemDatastore'
 import ky from 'ky' //simple ky to bypass so we can load a file
+import stringify from '../../utils/stringify';
 
 /**
  * Session based datastore
@@ -20,7 +21,7 @@ const SessionDatastore = ({ sourceUrl, storageKey, mockDelay = 500, ...opts }) =
 
   /** Saves all the data back to the session storage */
   sessionDs._commit = (data) => {
-    sessionStorage.setItem(storageKey, JSON.stringify(data))
+    sessionStorage.setItem(storageKey, stringify(data))
     return data
   }
 

@@ -1,5 +1,5 @@
 import { findIndexById } from '../utils/finders'
-import { CommonStores } from './CommonStores';
+import { CommonStores } from './crudQueryStores';
 import { _defaults } from '../utils/dash';
 /** @typedef {import('svelte/store').Writable<{}>} Writable */
 
@@ -7,7 +7,7 @@ import { _defaults } from '../utils/dash';
  * Base Datastore model feature, this operates as a sort of interface contract.
  * to be used in composing
  */
-export const datastore = (obj) => {
+export const crudQueryModel = (obj) => {
 
   const {initData = [], ident = 'id'} = obj
 

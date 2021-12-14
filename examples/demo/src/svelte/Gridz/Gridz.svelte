@@ -2,7 +2,7 @@
 <script>
   import { onMount } from 'svelte'
   import GridCtrl from 'angle-grinder/src/gridz/GridCtrl'
-  import localStoreApi from '../../store/LocalStoreApi'
+  import sessionStores from '../../store/sessionStores'
   import _ from 'lodash'
   const jq = window.$
 
@@ -23,7 +23,7 @@
     shrinkToFit: true,
     contextMenu: true,
     pager: true,
-    dataApi: localStoreApi.invoice,
+    dataApi: sessionStores.invoice,
     gridId: 'someGrid'
     // datatype: (params) => ctrl.gridLoader(params)
   }

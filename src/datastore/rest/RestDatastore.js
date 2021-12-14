@@ -1,7 +1,7 @@
 import { kyFetch } from '../ky'
 import mix from '../../utils/mix-it-with';
 import { restGet, restQuery } from './restFeatures';
-import {Datastore} from '../datastore'
+import {crudQueryModel} from '../crudQueryModel'
 
 /**
  * A common wrapper around RESTful resource
@@ -15,7 +15,7 @@ export const RestDatastore = ({ endpoint, ...opts }) => {
   }
 
   return mix(ds).it(RestDatastore).with(
-    Datastore,
+    crudQueryModel,
     restGet({ api }),
     restQuery({ api })
   )
