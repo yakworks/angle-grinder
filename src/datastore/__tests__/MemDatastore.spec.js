@@ -50,7 +50,7 @@ describe('Datastore', () => {
         sort: "code"
       }
       await ds.search(params)
-      let viewData = await ds.getViewData()
+      let viewData = await ds.stores.getViewData()
       let pager = await ds.stores.getPage()
 
       x(viewData.length).toEqual(42)
@@ -66,7 +66,7 @@ describe('Datastore', () => {
         q: "united",
       }
       await ds.search(params)
-      let viewData = await ds.getViewData()
+      let viewData = await ds.stores.getViewData()
       let pager = await ds.stores.getPage()
 
       x(viewData.length).toEqual(3)

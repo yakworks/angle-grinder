@@ -1,4 +1,6 @@
 
+export { default as isEmpty } from 'lodash/isEmpty';
+
 export function isString(value) {
   return  (typeof value === 'string' || value instanceof String)
 }

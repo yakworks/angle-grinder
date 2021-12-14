@@ -34,9 +34,9 @@ export const restQuery = ({ api }) => ds => {
      */
     async search(params) {
       let searchParams = ds.setupSearchParams(params)
-      console.log("searchParams", searchParams)
+      console.log("restQuery searchParams", searchParams)
       const page = await api.get({ searchParams })
-      console.log("page", page)
+      console.log("restQuery page", page)
       ds.stores.setPage(page)
       return page
     },

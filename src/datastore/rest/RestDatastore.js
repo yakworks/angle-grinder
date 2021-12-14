@@ -15,9 +15,9 @@ export const RestDatastore = ({ endpoint, ...opts }) => {
   }
 
   return mix(ds).it(RestDatastore).with(
-    crudQueryModel,
     restGet({ api }),
-    restQuery({ api })
+    restQuery({ api }),
+    crudQueryModel
   )
 }
 
