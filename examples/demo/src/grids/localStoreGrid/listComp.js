@@ -1,13 +1,13 @@
 // import controller from './listCtrl'
 import template from './list.html'
-import BaseListCtrl from 'angle-grinder/src/ng/gridz/list/BaseListCtrl'
+import ListDatastoreCtrl from 'angle-grinder/src/ng/gridz/list-datastore/ListDatastoreCtrl'
 import buildOptions from './listCtrlOptions'
 import localStoreApi from '../../store/LocalStoreApi'
 import Log from 'angle-grinder/src/utils/Log'
 import Swal from 'angle-grinder/src/tools/swal'
 import _ from 'lodash'
 
-class ListCtrl extends BaseListCtrl {
+class ListCtrl extends ListDatastoreCtrl {
   isLoaded = false
 
   editTemplate = require('./templates/editDialog.html')

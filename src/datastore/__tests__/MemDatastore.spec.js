@@ -1,13 +1,13 @@
 /* eslint-disable */
 import _ from 'lodash'
-import MemDatastore from '../MemDatastore'
+import MemDatastore from '../local/MemDatastore'
 import { findSomeDeep } from '../../utils/finders'
 import countryData from '../../__tests__/countries'
 import {expect as x} from '@jest/globals'
 
 describe('Datastore', () => {
 
-  const ds = MemDatastore({ data: countryData })
+  const ds = MemDatastore({ initData: countryData })
 
   describe('Datastore internals', () => {
     test('findSomeDeep country united', () => {
@@ -15,25 +15,25 @@ describe('Datastore', () => {
     })
 
     test('qbe', async () => {
-      const data = await ds.getData()
+      const data = await ds.stores.getDataCache()
       const result = ds.qbe(data, {code: 'US'})
       x(result.length).toEqual(1)
     })
 
     test('qSearch', async () => {
-      const data = await ds.getData()
+      const data = await ds.stores.getDataCache()
       const s = ds.qSearch(data, 'united')
       x( s.length ).toEqual(3)
     })
 
     test('filter', async () => {
-      const data = await ds.getData()
+      const data = await ds.stores.getDataCache()
       const s = ds.filter(data, {q: 'united'})
       x( s.length ).toEqual(3)
     })
 
     test('filter q object', async () => {
-      let data = await ds.getData()
+      let data = await ds.stores.getDataCache()
       let s = ds.filter(data, {q: {code:'US'}})
       x( s.length ).toEqual(1)
 
@@ -51,7 +51,7 @@ describe('Datastore', () => {
       }
       await ds.search(params)
       let viewData = await ds.getViewData()
-      let pager = await ds.getPagerData()
+      let pager = await ds.stores.getPage()
 
       x(viewData.length).toEqual(42)
       x(pager.data.length).toEqual(20)
@@ -67,7 +67,7 @@ describe('Datastore', () => {
       }
       await ds.search(params)
       let viewData = await ds.getViewData()
-      let pager = await ds.getPagerData()
+      let pager = await ds.stores.getPage()
 
       x(viewData.length).toEqual(3)
       x(pager.data.length).toEqual(3)
@@ -87,10 +87,11 @@ describe('Datastore', () => {
 
     })
 
-    test.skip('picklist paged', async function() {
+    test('picklist paged', async function() {
       const result = await ds.picklist()
       //console.log("result", result)
-      expect(result.data.length).toEqual(4)
+      expect(result.length).toEqual(42)
+      // expect(result.data.length).toEqual(20)
     })
 
   })

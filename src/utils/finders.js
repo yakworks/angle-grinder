@@ -2,6 +2,18 @@ import { isPlainObject, isString } from './inspect'
 import {toString, isMatchWith} from './dash'
 
 /**
+ * searches array for id key match
+ *
+ * @param {{list: array, id: object, ident?: string}} param0 should have data and id, can also pass in idField if identity is other than 'id'
+ * @returns {object} the found item in array
+ */
+export const findIndexById = ({ list, id, ident = 'id'}) => {
+  const idx = list.findIndex((item) => item[ident] === id)
+  // if (idx === -1) throw Error(`${id} not found`)
+  return idx
+}
+
+/**
  * deep checks if property includes the string or if not string === the searchkey
  *
  * @param {*} obj the object to look into

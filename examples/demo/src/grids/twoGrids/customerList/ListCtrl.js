@@ -1,9 +1,9 @@
-import BaseListCtrl from 'angle-grinder/src/ng/gridz/list/BaseListCtrl'
+import ListDatastoreCtrl from 'angle-grinder/src/ng/gridz/list-datastore/ListDatastoreCtrl'
 import restStoreApi from '../../../store/RestStoreApi'
 import _ from 'lodash'
 
-export default class ListCtrl extends BaseListCtrl {
-  static $inject = _.union(super.$inject, ['dataStoreApi', '$state', 'selectedRow'])
+export default class ListCtrl extends ListDatastoreCtrl {
+  static $inject = _.union(super.$inject, ['$state', 'selectedRow'])
   apiKey = 'customer'
   eventHandlers = {
     onSelect: (event, id) => {
@@ -13,7 +13,7 @@ export default class ListCtrl extends BaseListCtrl {
 
   constructor(...args) {
     super(...args)
-    this.dataApi = restStoreApi.customer
+    this.datastore = restStoreApi.customer
   }
 
   async $onInit() {

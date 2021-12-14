@@ -1,27 +1,16 @@
-import SessionStorageApi from 'angle-grinder/src/dataApi/SessionStorageApi'
+import SessionDatastore from '~/datastore/local/SessionDatastore'
 
 // eslint-disable-next-line space-before-blocks
-function makeDataApi(name, path){
-  return new SessionStorageApi(name, path)
+function makeDataApi(storageKey, sourceUrl){
+  return SessionDatastore({ storageKey, sourceUrl })
 }
 
-/** main holder for api */
-export class LocalStoreApi{
-
-  static factory() {
-    return new LocalStoreApi()
-  }
-
-  // constructor() {
-  // }
-
-  get customer(){ return makeDataApi('customers', 'data/Customers.json') }
-  get batch(){ return makeDataApi('customers', 'data/Batch.json') }
-  get invoice() { return makeDataApi('invoices', 'data/Invoices.json') }
+const LocalStoreApi = {
+  get customer(){ return makeDataApi('customers', 'data/Customers.json') },
+  get batch(){ return makeDataApi('customers', 'data/Batch.json') },
+  get invoice() { return makeDataApi('invoices', 'data/Invoices.json') },
   get tranState() { return makeDataApi('tranStates', 'data/TranStates.json') }
-
 }
 
-const _instance = LocalStoreApi.factory()
+export default LocalStoreApi
 
-export default _instance

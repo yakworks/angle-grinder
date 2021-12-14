@@ -1,7 +1,7 @@
 // @ts-nocheck
 /* eslint-disable */
 import pipe from '../pipe'
-import mix, {mixConstructor} from '../mixer'
+import mix, {mixConstructor} from '../mix-it-with'
 import {expect as x} from '@jest/globals'
 
 // Set up some functional mixins
@@ -73,7 +73,7 @@ const Drone = function(opts){
     hasRemote: true
   })
 
-  return mix(Drone).it(opts).with(
+  return mix(opts).it(Drone).with(
     makeFlyable,
     withBattery,
     main
@@ -106,13 +106,15 @@ const rotors = drone => {
 }
 
 const Copiter = (opts) => {
-  let name = "Copiter Model"
+  opts = { name: "Copiter Model", ...opts }
 
-  return mix(Copiter).it({ name, ...opts }).with(
+  return mix(opts).it(Copiter).with(
     Drone,
     rotors
   )
 }
+
+// Copiter.of = Copiter
 
 const copter = Copiter()
 

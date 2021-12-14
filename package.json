@@ -54,7 +54,7 @@
     "dequal": "^2.0.2",
     "dotenv": "^10.0.0",
     "esm": "^3.2.25",
-    "fast-safe-stringify": "^2.0.8",
+    "fast-safe-stringify": "^2.1.1",
     "fastclick": "^1.0.6",
     "feather-icons": "^4.28.0",
     "font-awesome": "^4.7.0",

@@ -1,10 +1,10 @@
 import { kyFetch } from './ky'
 import prune from '../utils/prune';
-import mix from '../utils/mixer';
+import mix from '../utils/mix-it-with';
 import {isObject} from '../utils/inspect';
 import { get, writable } from 'svelte/store';
 
-const getFeature = ({ api }) => ds => {
+const restgetFeature = ({ api }) => ds => {
   let itemStore = writable({})
 
   let ext = {
@@ -122,7 +122,7 @@ export const ListDatastore = ({ endpoint, ...opts }) => {
     }
   }
 
-  return mix(ListDatastore).it(ds).with(
+  return mix(ds).it(ListDatastore).with(
     restQueryFeature({ api }),
     getFeature({ api })
   )

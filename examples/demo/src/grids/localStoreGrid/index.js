@@ -7,7 +7,7 @@ const template = `\
 
 export default angular
   .module(compDemoModule)
-  .component('basicGridIndex', {
+  .component('localStoreIndex', {
     template: template,
     controller: function() {
       this.rawHtml = require('./list.html')

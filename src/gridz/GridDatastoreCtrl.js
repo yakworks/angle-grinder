@@ -78,7 +78,7 @@ export default class GridDatastoreCtrl {
     this.formatters && this.setupCustomFormatters(this, this.formatters, opts)
 
     // adds the listener to the store
-    this.datastore.pageStore.subscribe(data => {
+    this.datastore.stores.page.subscribe(data => {
       // console.log("dataApi.currentPage")
       this.addJSONData(data)
     });

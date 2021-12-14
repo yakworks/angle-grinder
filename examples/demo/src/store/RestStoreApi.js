@@ -1,5 +1,5 @@
 import RestDataApi from 'angle-grinder/src/dataApi/RestDataApi'
-import ListDatastore from 'angle-grinder/src/datastore/ListDatastore'
+import RestDatastore from 'angle-grinder/src/datastore/rest/RestDatastore'
 import ky from 'angle-grinder/src/datastore/ky'
 
 function makeDataApi(endpoint){
@@ -7,7 +7,7 @@ function makeDataApi(endpoint){
 }
 
 function makeDatastore(endpoint){
-  return ListDatastore({ endpoint })
+  return RestDatastore({ endpoint })
 }
 
 /** main holder for api */
@@ -22,11 +22,10 @@ export class RestStoreApi {
   }
 
   get customer() { return makeDatastore('customer') }
-  // get customer() { return makeDatastore('customer') }
   get batch() { return makeDataApi('batch') }
-  get invoice() { return makeDataApi('invoice') }
+  get invoice() { return makeDatastore('invoice') }
   get tranState() { return makeDataApi('tranState') }
-  get tag() { return makeDataApi('tag') }
+  get tag() { return makeDatastore('tag') }
 
   appConfig(configKey) {
     return ky(`appConfig/${configKey}`).json()

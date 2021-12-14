@@ -69,10 +69,13 @@ const gridsStates = {
     {
       name: 'editOnly-agGridList',
       url: '/tag',
-      component: 'agGridList',
+      component: 'agGridDatastore',
       data: { title: 'Edit Only agGridList' },
       resolve: {
         apiKey: () => 'tag',
+        datastore: () => {
+          return restStoreApi.tag
+        },
         notification: () => ({
           class: 'is-primary is-light',
           text: 'Uses ui-router to send rest apiKey to generic agGridList component, configured to only allow editing desc'
@@ -90,9 +93,9 @@ const gridsStates = {
       component: 'basicGridRestIndex'
     },
     {
-      name: 'basic-grid',
-      component: 'basicGridIndex',
-      url: '/foo'
+      name: 'local-store-grid',
+      component: 'localStoreIndex',
+      url: '/localstore'
     }
   ]
 }

@@ -12,7 +12,7 @@
  * let getUpperCaseName = pipe(getName, uppercase) //creates new function that pipes
  * getUpperCaseName({ name: 'Foo' }) == 'FOO
  *
- * @param  {...Function} fns
+ * @param  {...function} fns
  * @returns the new composed Function
  */
 export const pipe = (...fns) => args => fns.reduce((accumFn, fn) => fn(accumFn), args);

@@ -15,6 +15,7 @@ export { default as get } from 'lodash/get';
 
 export { default as difference } from 'lodash/difference';
 export { default as merge } from 'lodash/merge';
+export { default as _defaults } from 'lodash/defaults';
 export { default as extend } from 'lodash/extend';
 
 export { default as max } from 'lodash/max';
