@@ -19,24 +19,29 @@ const SessionDatastore = ({ sourceUrl, storageKey, mockDelay = 500, ...opts }) =
     }
   }
 
-  /** Saves all the data back to the session storage */
-  sessionDs._commit = (data) => {
-    sessionStorage.setItem(storageKey, stringify(data))
-    return data
+  //overrides to load data on first search
+  sessionDs.search = async (params = {}) => {
+    console.log("memDatastore search", params)
+    await sessionDs.init
+    return memDs.search(params)
   }
 
   //override the getData to pull it from the rest
-  sessionDs.getData = async () =>{
+  sessionDs.init = async () =>{
     try {
-      const data = sessionDs.checkSession()
-      if (data) {
+      // let data = sessionDs.checkSession()
+      let dataCache = sessionDs.stores.getDataCache()
+      //if dataCache is populated then its been init already
+      if (!dataCache) {
         console.log(`using ${storageKey} in sessionStorage`)
-        return data
-      } else {
-        //pull it from the endpoint
-        const parsed = await ky.get(sourceUrl).json()
-        sessionDs._commit(parsed)
-        return parsed
+        let sessionCache = sessionDs.checkSession()
+        if(!sessionCache){
+          //pull it from the endpoint
+          const sessionCache = await ky.get(sourceUrl).json()
+          sessionStorage.setItem(storageKey, stringify(sessionCache))
+        }
+        sessionDs.stores.setDataCache(sessionCache)
+        return sessionCache
       }
     } catch (e) {
       console.log(`Unable to parse session for ${sourceUrl}, retrieving intial data.`, e)

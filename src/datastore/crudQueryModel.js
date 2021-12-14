@@ -12,7 +12,7 @@ export const crudQueryModel = (obj) => {
   const {initData = [], ident = 'id'} = obj
 
   const stores = CommonStores()
-  if(initData) stores.dataCache.set(initData)
+  if(initData) stores.setDataCache(initData)
 
 
   let ds = {
