@@ -17,9 +17,9 @@ export default class DataManager {
   apiKey = ""
 
   /**
-   * The RestDataApi instance
+   * The datastore instance
    */
-   dataApi
+   datastore
 
   /**
    * The data, ui and grid configs
