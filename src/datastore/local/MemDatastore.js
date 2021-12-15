@@ -54,7 +54,7 @@ const MemDatastore = ({
       //since the sort keys can be nested then need to cylce over and do them one by one
       // items = _.orderBy(items, sortobj.sort, sortobj.order)
     }
-    ds.stores.setViewData(items)
+    ds.stores.setData(items)
     let { page, max} = params
     ds.paginate({data: items, page, max})
     return items

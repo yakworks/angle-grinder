@@ -81,6 +81,7 @@ export const kyFetch = endpoint => {
    * @returns {Promise<object>} the json result
    */
   async function kyFetch({method = 'get', op = '', ...opts}){
+    if(op && !(`${op}`.startsWith('/')) ) op = `/${op}`
     return KyFactory.ky(`${endpoint}${op}`, {...opts, method})
   }
 

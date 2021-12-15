@@ -1,10 +1,10 @@
 import sessionStores from './sessionStores'
-import { RestStoreApi } from './RestStoreApi'
+import restStoreApi from './RestStoreApi'
 
 // export module name
 export default angular.module('ag.demo.api', [])
-  .service('localStoreApi', () => sessionStores)
-  .service('restStoreApi', RestStoreApi)
+  .service('localStoreApi', function() { return sessionStores})
+  .service('restStoreApi', function() { return restStoreApi})
   // this is the default, used in components, change it to RestStore to test that
-  .service('dataStoreApi', RestStoreApi)
+  .service('dataStoreApi', function() { return restStoreApi})
   .name

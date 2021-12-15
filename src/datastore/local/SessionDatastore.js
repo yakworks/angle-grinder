@@ -2,16 +2,20 @@
 import MemDatastore from './MemDatastore'
 import ky from 'ky' //simple ky to bypass so we can load a file
 import stringify from '../../utils/stringify';
-import { _defaults } from '../../utils/dash';
 import { isEmpty } from '../../utils/inspect';
+import mix from '../../utils/mix-it-with';
+
 /**
  * Session based datastore
  */
-const SessionDatastore = ({ sourceUrl, storageKey, mockDelay = 500, ...opts }) => {
+const SessionDatastore = (opts) => {
+
+  let { sourceUrl, storageKey, mockDelay = 500 } = opts
 
   let memDs = MemDatastore({...opts, mockDelay})
 
   let sessionDs = {
+
     getSessionData() {
       const fromSession = sessionStorage.getItem(storageKey)
       if (fromSession) {
@@ -50,7 +54,8 @@ const SessionDatastore = ({ sourceUrl, storageKey, mockDelay = 500, ...opts }) =
     //   console.log(`Unable to parse session for ${sourceUrl}, retrieving intial data.`, e)
     // }
   }
-  return _defaults(sessionDs, memDs)
+
+  return mix(sessionDs).with(memDs)
 
 }
 

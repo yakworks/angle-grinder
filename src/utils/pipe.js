@@ -12,6 +12,7 @@
  * let getUpperCaseName = pipe(getName, uppercase) //creates new function that pipes
  * getUpperCaseName({ name: 'Foo' }) == 'FOO
  *
+ *
  * @param  {...function} fns
  * @returns the new composed Function
  */

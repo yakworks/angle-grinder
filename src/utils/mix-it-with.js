@@ -1,5 +1,5 @@
 import pipe from './pipe'
-import {_defaults} from './dash'
+import {_defaults, isFunction} from './dash'
 
 /**
  * @typedef {object} Factory
@@ -14,7 +14,7 @@ import {_defaults} from './dash'
  * @property {function(function): Mixer} it the constructor function
  * @property {function(object): Mixer}   pipe the functions for the pipe
  * @property {function(...any): object}  with the functions for the pipe
- * @property {function(object): object}  build old school merge type
+ * @property {function(object): object}  extend adds props but does not overwrite
  */
 
 
@@ -48,14 +48,15 @@ import {_defaults} from './dash'
  *  mix(target).of(Drone).merge(simpleObj, simpleObj)
  *
  * @param {object} target plain object to be used as the base, can be undefined and will default to a new
+ * @param sources
  * @returns {Mixer} - the mixer instance
  */
-const mixer = ( target = {} ) => {
+const mixer = ( target = {}, ...sources ) => {
 
   /** @type Mixer */
   let o = { }
 
-  //defaults empty target object
+  //defaults to an empty target object
   o.target = target
 
   /**
@@ -77,9 +78,9 @@ const mixer = ( target = {} ) => {
    * @returns {object} this mixer for fluent calls
    */
   o.pipe = function(...funcs) {
-
+    if(o.ctor) funcs.push(mixConstructor(o.ctor))
     //pipes the factory functions and returns the final function
-    o.factory = pipe(...funcs, mixConstructor(o.ctor))
+    o.factory = pipeObject(...funcs)
     // o.factory = pipe(...funcs)
     return o
     // return pipe(...funcs, mixConstructor(constructor))
@@ -93,21 +94,37 @@ const mixer = ( target = {} ) => {
    */
   o.with = function(...funcs) {
     //combines the functions using a default empty object as starting point
+    // @ts-ignore
     return o.pipe(...funcs).factory(o.target)
   }
 
   /**
-   * Build -> if no factory functions are piped and want to merge simple objects
-   * shallow assign to the target object for properties that resolve to undefined on target. Meaning that it the
-   * base target already has it then the sources wont overwrite it Source objects are applied from left to right.
+   * Build -> if no factory functions are piped and want to merge simple objects.
+   * Modifies the target in place as does not copy or clone.
+   * Think of it more like a class extends where the supers are whats being extended.
+   * If the target has the property of function then it keeps it. if not then its assigns in and will use the supers.
+   * shallow assign to the target object for properties that resolve to undefined on target.
+   * super source objects are applied from left to right, so the first one is what wins.
    * Once a property is set, additional values of the same property are ignored.
    * Uses the lodash _defaults
    */
-  o.build = function(...sources ) {
-    return _defaults(o.target, ...sources)
+  o.extend = function(...supers ) {
+    return _defaults(o.target, ...supers)
   }
 
   return o
+}
+
+export const pipeObject = (...fns) => initialObj => {
+  return fns.reduce((accumFn, fnOrObj) => {
+    if(isFunction(fnOrObj)){
+      return fnOrObj(accumFn)
+    } else {
+      const objAsFunc = (obj) => _defaults(obj, fnOrObj)
+      //assume its an object and merge it with _defaults
+      return objAsFunc(accumFn)
+    }
+  }, initialObj);
 }
 
 export default mixer

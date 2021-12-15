@@ -1,11 +1,12 @@
 import { get, writable } from 'svelte/store';
+import mix from '../utils/mix-it-with';
 import { findIndexById } from '../utils/finders'
 /** @typedef {import('svelte/store').Writable<{}>} Writable */
 
 /**
  * The base datastore composed of the the stores for current item, page
  */
-export const CommonStores = (o = {}) => {
+export const crudQueryStores = (stores = {}) => {
 
   let itemStore = writable({})
 
@@ -17,7 +18,7 @@ export const CommonStores = (o = {}) => {
 
   let viewDataStore = writable([])
 
-  let stores = {
+  return mix(stores).with({
 
     /**
     * the store for the current item
@@ -52,33 +53,34 @@ export const CommonStores = (o = {}) => {
     },
 
     /**
-    * the current store array of filtered data
+    * the current or visible array of data after filter.
+    * on init this would be equal to whats in the dataCache
     * @type {Writable}
     */
-    get viewData(){
+    get data(){
       return viewDataStore
     },
 
     /**
-    * the current array of filtered
+    * the current array of filtered of viewable data
     * @type {object}
     */
-    getViewData(){
+    getData(){
       return get(viewDataStore)
     },
 
     /**
-     * sets the data in the view store
+     * sets the viewable data in the store
      */
-    setViewData(data){
+    setData(data){
       return viewDataStore.set(data)
     },
 
     /**
-    * the current page store view of the data {data:[...], page: , records: , total: }
+    * the current page view of the data {data:[...], page: , records: , total: }
     * @type {Writable}
     */
-    get page(){
+    get pageView(){
       return pageStore
     },
 
@@ -86,7 +88,7 @@ export const CommonStores = (o = {}) => {
     * the page data
     * @type {object}
     */
-    getPage(){
+    getPageView(){
       return get(pageStore)
     },
 
@@ -111,6 +113,6 @@ export const CommonStores = (o = {}) => {
     setQuery(qdata){
       return queryStore.set(qdata)
     },
-  }
-  return Object.assign(o, stores)
+
+  }) //end mix
 }

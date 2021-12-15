@@ -1,20 +1,6 @@
 import prune from '../../utils/prune';
-import {isObject} from '../../utils/inspect';
-import { _defaults } from '../../utils/dash';
-import { get, writable } from 'svelte/store';
 import stringify from '../../utils/stringify';
-
-export const restGet = ({ api }) => ds => {
-  //defaults ensures it only gets merged if its not already overriden
-  return _defaults(ds, {
-    async get(id) {
-      const item = await api.getById(id)
-      ds.stores.item.set(item)
-      return item
-    }
-  })
-
-}
+import mix from '../../utils/mix-it-with';
 
 export const restQuery = ({ api }) => ds => {
 
@@ -25,7 +11,13 @@ export const restQuery = ({ api }) => ds => {
   let { restrictSearch } = ds
 
 
-  let ext = {
+  return mix(ds).with({
+
+    async get(id) {
+      const item = await api.getById(id)
+      ds.stores.item.set(item)
+      return item
+    },
 
     /**
      * adds searchParams, which are the query params ( the part after the ? )
@@ -54,7 +46,6 @@ export const restQuery = ({ api }) => ds => {
       if(sort) pruned.sort = stringify(sort).replace(/{|}|"/g, '')
       return pruned
     }
-  }
+  })
 
-  return _defaults(ds, ext)
 }
