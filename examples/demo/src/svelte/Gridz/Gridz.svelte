@@ -2,8 +2,7 @@
 <script>
   import { onMount } from 'svelte'
   import GridCtrl from 'angle-grinder/src/gridz/GridCtrl'
-  import sessionStores from '../../store/sessionStores'
-  import _ from 'lodash'
+  import sessionStores from '../../store/sessionServices'
   const jq = window.$
 
   let gridOptions = {

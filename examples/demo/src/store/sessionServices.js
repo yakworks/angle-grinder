@@ -1,8 +1,8 @@
-import SessionDatastore from 'angle-grinder/src/dataservice/local/SessionDatastore'
+import SessionDataService from 'angle-grinder/src/stores/local/SessionDataService'
 
 // eslint-disable-next-line space-before-blocks
 function makeDatastore(storageKey, sourceUrl){
-  return SessionDatastore({ storageKey, sourceUrl })
+  return SessionDataService({ storageKey, sourceUrl })
 }
 
 const sessionStores = {

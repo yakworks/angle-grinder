@@ -1,6 +1,6 @@
 // import RestDataApi from 'angle-grinder/src/dataApi/RestDataApi'
-import RestDataService from 'angle-grinder/src/dataservice/rest/RestDataService'
-import ky from 'angle-grinder/src/dataservice/ky'
+import RestDataService from 'angle-grinder/src/stores/rest/RestDataService'
+import ky from 'angle-grinder/src/stores/ky'
 
 // function makeDataApi(endpoint){
 //   return new RestDataApi(`api/${endpoint}`)

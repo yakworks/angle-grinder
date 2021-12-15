@@ -26,7 +26,7 @@ const SessionDataService = (opts) => {
 
   //overrides to load data on first search
   sessionDs.search = async (params = {}) => {
-    console.log("SessionDatastore search", params)
+    console.log("SessionDataService search", params)
     await sessionDs.init()
     return memDs.search(params)
   }

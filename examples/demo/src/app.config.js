@@ -3,7 +3,7 @@ import _ from 'lodash'
 import appName from './app.module'
 import './config.router'
 import appState from 'angle-grinder/src/tools/AppState'
-import { KyFactory } from "~/dataservice/ky";
+import { KyFactory } from "angle-grinder/src/stores/ky";
 KyFactory.enableAuthHeader()
 KyFactory.defaults.prefixUrl = configData.base_url
 
