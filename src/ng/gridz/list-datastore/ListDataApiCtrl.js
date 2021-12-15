@@ -8,7 +8,7 @@ import appConfigApi from '../../../dataApi/AppConfigApi'
 import toast from '../../../tools/toast'
 import Swal from '../../../tools/swal'
 
-export default class ListDatastoreCtrl {
+export default class ListDataApiCtrl {
   defaultToolbarOpts = {
     selectedButtons: {
       bulkUpdate: { icon: 'far fa-edit', tooltip: 'Bulk Update' },
@@ -42,7 +42,7 @@ export default class ListDatastoreCtrl {
     }
     // assign default datatype to grid loader
     // gopts.datatype = (params) => this.gridLoader(params)
-    gopts.datastore = this.datastore
+    gopts.dataApi = this.dataApi
 
     if (!gopts.toolbarOptions) gopts.toolbarOptions = {}
     const tbopts = _.merge({}, this.defaultToolbarOpts, gopts.toolbarOptions)
@@ -108,7 +108,7 @@ export default class ListDatastoreCtrl {
   async edit(id) {
     this.gridCtrl.toggleLoading(true)
     try {
-      const vm = await this.datastore.get(id)
+      const vm = await this.dataApi.get(id)
       this.showEdit('Edit', vm)
     } catch (er) {
       this.handleError(er)
@@ -154,7 +154,7 @@ export default class ListDatastoreCtrl {
       backdrop: 'static', // do not close on click outside of the dialog,
       resolve: {
         vm: () => model,
-        datastore: () => this.datastore,
+        dataApi: () => this.dataApi,
         cfg: () => this.cfg,
         title: () => title
       }
@@ -186,7 +186,7 @@ export default class ListDatastoreCtrl {
       backdrop: 'static', // do not close on click outside of the dialog,
       resolve: {
         vm: () => model,
-        datastore: () => this.datastore,
+        dataApi: () => this.dataApi,
         cfg: () => this.cfg,
         selectedIds: () => this.gridCtrl.getSelectedRowIds()
       }
@@ -207,7 +207,7 @@ export default class ListDatastoreCtrl {
 
   async delete(id) {
     try {
-      await this.datastore.remove(id)
+      await this.dataApi.remove(id)
       this.gridCtrl.removeRow(id)
     } catch (er) {
       this.handleError(er)
@@ -225,7 +225,7 @@ export default class ListDatastoreCtrl {
   // }
 
   async search(filters) {
-    console.log("ListDatastoreCtrl search called with", filters)
+    console.log("ListDataApiCtrl search called with", filters)
     try {
       this.isSearching = true
       await this.gridCtrl?.search(filters)

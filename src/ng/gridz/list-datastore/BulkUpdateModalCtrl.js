@@ -1,10 +1,10 @@
 
 export default class BulkUpdateModalCtrl {
   /* @ngInject */
-  constructor($uibModalInstance, $scope, datastore, vm, cfg, selectedIds) {
+  constructor($uibModalInstance, $scope, dataApi, vm, cfg, selectedIds) {
     this.modal = $uibModalInstance
     this.$scope = $scope
-    this.datastore = datastore
+    this.dataApi = dataApi
     this.vm = vm
     this.cfg = cfg
     this.selectedIds = selectedIds
@@ -18,7 +18,7 @@ export default class BulkUpdateModalCtrl {
     this.isSaving = true
     try {
       const params = { ids: this.selectedIds, data: this.vm }
-      const results = await this.datastore.bulkUpdate(params)
+      const results = await this.dataApi.bulkUpdate(params)
       this.modal.close(results)
     } catch (er) {
       this.handleError(er)

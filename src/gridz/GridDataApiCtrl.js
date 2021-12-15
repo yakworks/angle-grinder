@@ -5,9 +5,9 @@ import flattenObject from '../utils/flattenObject'
 import toast from '../tools/growl'
 import _ from 'lodash'
 
-export default class GridDatastoreCtrl {
+export default class GridDataApiCtrl {
   formatters
-  datastore
+  dataApi
   highlightClass = 'ui-state-highlight'
   systemColumns = ['cb', '-row_action_col']
   isDense = false
@@ -40,7 +40,7 @@ export default class GridDatastoreCtrl {
 
 
     let optsToMerge = _.pick(opts, [
-      'showSearchForm', 'datastore', 'initSearch', 'restrictSearch', 'contextMenuClick'
+      'showSearchForm', 'dataApi', 'initSearch', 'restrictSearch', 'contextMenuClick'
     ])
     _.mergeWith(this, optsToMerge, (obj, optVal) => {
       //dont merge val if its null
@@ -78,7 +78,7 @@ export default class GridDatastoreCtrl {
     this.formatters && this.setupCustomFormatters(this, this.formatters, opts)
 
     // adds the listener to the store
-    this.datastore.stores.page.subscribe(data => {
+    this.dataApi.pageViewStore.subscribe(data => {
       // console.log("dataApi.currentPage")
       this.addJSONData(data)
     });
@@ -471,7 +471,7 @@ export default class GridDatastoreCtrl {
       if(!_.isEmpty(q)){
         p.q = q
       }
-      const data = await this.datastore.search(p)
+      const data = await this.dataApi.search(p)
       // this.addJSONData(data)
     } catch (er) {
       this.handleError(er)

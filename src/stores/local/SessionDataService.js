@@ -6,7 +6,7 @@ import { isEmpty } from '../../utils/inspect';
 import mix from '../../utils/mix-it-with';
 
 /**
- * SessionStorage based datastore
+ * SessionStorage based data service
  */
 const SessionDataService = (opts) => {
 

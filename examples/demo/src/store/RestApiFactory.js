@@ -10,7 +10,7 @@ function makeDataService(endpoint){
   return RestDataService({ endpoint })
 }
 
-const restStoreApi = {
+const dataApiFactory = {
   get customer() { return makeDataService('customer') },
   get batch() { return makeDataService('batch') },
   get invoice() { return makeDataService('invoice') },
@@ -22,4 +22,4 @@ const restStoreApi = {
   }
 }
 
-export default restStoreApi
+export default dataApiFactory

@@ -1,13 +1,13 @@
 // import controller from './listCtrl'
 import template from './list.html'
-import ListDatastoreCtrl from 'angle-grinder/src/ng/gridz/list-datastore/ListDatastoreCtrl'
+import ListDataApiCtrl from 'angle-grinder/src/ng/gridz/list-datastore/ListDataApiCtrl'
 import buildOptions from './listCtrlOptions'
 import sessionStores from '../../store/sessionServices'
 import Log from 'angle-grinder/src/utils/Log'
 import Swal from 'angle-grinder/src/tools/swal'
 import _ from 'lodash'
 
-class ListCtrl extends ListDatastoreCtrl {
+class ListCtrl extends ListDataApiCtrl {
   isLoaded = false
 
   editTemplate = require('./templates/editDialog.html')
@@ -15,7 +15,7 @@ class ListCtrl extends ListDatastoreCtrl {
 
   constructor(...args) {
     super(...args)
-    this.datastore = sessionStores.invoice
+    this.dataApi = sessionStores.invoice
   }
 
   async $onInit() {

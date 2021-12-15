@@ -5,11 +5,11 @@ import { findSomeDeep } from '../../utils/finders'
 import countryData from '../../__tests__/countries'
 import {expect as x} from '@jest/globals'
 
-describe('Datastore', () => {
+describe('MemDataService', () => {
 
   const ds = MemDataService({ initData: countryData })
 
-  describe('Datastore internals', () => {
+  describe('MemDataService internals', () => {
     test('findSomeDeep country united', () => {
       x( findSomeDeep(countryData, 'united').length ).toEqual(3)
     })
@@ -42,7 +42,7 @@ describe('Datastore', () => {
     })
   })
 
-  describe('Datastore search', () => {
+  describe('MemDataService search', () => {
     test('search nothing', async function() {
       const params = {
         max: 20,

@@ -1,4 +1,4 @@
-import restStoreApi from '../store/RestStoreApi'
+import dataApiFactory from '../store/RestApiFactory'
 
 const gridsStates = {
   name: 'grids',
@@ -26,9 +26,9 @@ const gridsStates = {
       }],
       resolve: {
         apiKey: () => 'customer',
-        datastore: () => {
-          let ds = restStoreApi.customer
-          console.log("restStoreApi.customer", ds)
+        dataApi: () => {
+          let ds = dataApiFactory.customer
+          console.log("dataApiFactory.customer", ds)
           return ds
         },
         // gridOptions: () => ({multiSort: true}),
@@ -56,8 +56,8 @@ const gridsStates = {
       }],
       resolve: {
         apiKey: () => 'customer',
-        datastore: () => {
-          return restStoreApi.customer
+        dataApi: () => {
+          return dataApiFactory.customer
         },
         initSearch: () => ({ name: 'Yodo' }),
         notification: () => ({
@@ -73,8 +73,8 @@ const gridsStates = {
       data: { title: 'Edit Only agGridList' },
       resolve: {
         apiKey: () => 'tag',
-        datastore: () => {
-          return restStoreApi.tag
+        dataApi: () => {
+          return dataApiFactory.tag
         },
         notification: () => ({
           class: 'is-primary is-light',

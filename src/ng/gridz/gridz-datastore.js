@@ -1,6 +1,6 @@
 import angular from 'angular'
 import grid2Mod from './module'
-import GridDatastoreCtrl from '../../gridz/GridDatastoreCtrl'
+import GridDataApiCtrl from '../../gridz/GridDataApiCtrl'
 // import Log from 'angle-grinder/src/utils/Log'
 import _ from 'lodash'
 
@@ -61,7 +61,7 @@ angular.module(grid2Mod).directive('gridzDatastore',
 
     return {
       restrict: 'E',
-      controller: GridDatastoreCtrl,
+      controller: GridDataApiCtrl,
       controllerAs: 'gridCtrl',
       bindToController: {
         toolbarOptions: '<',

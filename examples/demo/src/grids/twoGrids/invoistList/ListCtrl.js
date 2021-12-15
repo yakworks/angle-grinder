@@ -1,10 +1,10 @@
 // import controller from './listCtrl'
 // import template from './list.html'
-import ListDatastoreCtrl from 'angle-grinder/src/ng/gridz/list-datastore/ListDatastoreCtrl'
-import restStoreApi from '../../../store/RestStoreApi'
+import ListDataApiCtrl from 'angle-grinder/src/ng/gridz/list-datastore/ListDataApiCtrl'
+import dataApiFactory from '../../../store/RestApiFactory'
 import _ from 'lodash'
 
-export default class ListCtrl extends ListDatastoreCtrl {
+export default class ListCtrl extends ListDataApiCtrl {
   static $inject = _.union(super.$inject, ['$state', 'selectedRow'])
   apiKey = 'invoice'
   searchModel= {}
@@ -13,7 +13,7 @@ export default class ListCtrl extends ListDatastoreCtrl {
   // static $inject = _.union(super.$inject, ['someService'])
   constructor(...args) {
     super(...args)
-    this.datastore = restStoreApi.invoice
+    this.dataApi = dataApiFactory.invoice
   }
 
   async $onInit() {

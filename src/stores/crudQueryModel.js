@@ -18,11 +18,14 @@ export const withSubStores = (ds) => {
   return mix(ds).with({
     stores, ident,
 
-    getPageViewStore(){
+    //if paging this is the pager info with data
+    get pageViewStore(){
       return ds.stores.pageView
     },
-    getDataStore(){
-      return ds.stores.data
+
+    //the viewable or filtered data
+    get dataStore(){
+      return ds.stores.dataStore
     },
   })
 }

@@ -1,5 +1,5 @@
 // @ts-nocheck
-import ListDatastoreCtrl from './ListDatastoreCtrl'
+import ListDataApiCtrl from './ListDataApiCtrl'
 import union from 'lodash/union'
 
 const template = `
@@ -16,17 +16,17 @@ const template = `
   </gridz-datastore>
 </div>
 `
-class ListCtrl extends ListDatastoreCtrl {
+class ListCtrl extends ListDataApiCtrl {
 
   $onInit() {
     console.log("apiKey", this.apiKey)
-    console.log("datastore", this.datastore)
+    console.log("dataApi", this.dataApi)
     this.isConfigured = false
     this.cfg = {}
     super.doConfig()
 
     if (this.restrictSearch) {
-      this.datastore.restrictSearch = this.restrictSearch
+      this.dataApi.restrictSearch = this.restrictSearch
     }
     if (this.initSearch) {
       //FIXME why do we set the initSearch to cfg?
@@ -45,7 +45,7 @@ class ListCtrl extends ListDatastoreCtrl {
 export default {
   bindings: {
     apiKey: '<', // used for gridId and to get the config
-    datastore: '<',
+    dataApi: '<',
     notification: '<',
     initSearch: '<',
     restrictSearch: '<'

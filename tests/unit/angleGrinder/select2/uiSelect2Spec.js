@@ -27,7 +27,7 @@ angular.module(uiselect2).directive('injectTransformers', [ function () {
 angular.module(uiselect2).service('dataStoreApi', function() {})
 
 /*global describe, beforeEach, module, inject, it, spyOn, expect, $ */
-describe('uiSelect2', function () {
+describe('uiSelect2', function() {
   'use strict';
 
   var scope, $compile, options, $timeout;

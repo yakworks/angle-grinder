@@ -3,10 +3,10 @@
 // TODO change to https://github.com/likeastore/ngDialog#api
 export default class EditModalCtrl {
   /* @ngInject */
-  constructor($uibModalInstance, $scope, datastore, vm, cfg, title) {
+  constructor($uibModalInstance, $scope, dataApi, vm, cfg, title) {
     this.modal = $uibModalInstance
     this.$scope = $scope
-    this.datastore = datastore
+    this.dataApi = dataApi
     this.vm = vm
     this.cfg = cfg
     this.title = title
@@ -19,7 +19,7 @@ export default class EditModalCtrl {
     if (agForm.form.$invalid || agForm.form.$pristine) return
     this.isSaving = true
     try {
-      const savedItem = await this.datastore.save(this.vm)
+      const savedItem = await this.dataApi.save(this.vm)
       this.modal.close(savedItem)
     } catch (er) {
       this.handleError(er)

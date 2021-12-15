@@ -19,7 +19,7 @@ export default class DataManager {
   /**
    * The datastore instance
    */
-   datastore
+   dataApi
 
   /**
    * The data, ui and grid configs

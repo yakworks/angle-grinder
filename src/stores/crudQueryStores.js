@@ -16,7 +16,7 @@ export const crudQueryStores = (stores = {}) => {
 
   let dataCacheStore = writable([])
 
-  let viewDataStore = writable([])
+  let dataStore = writable([])
 
   return mix(stores).with({
 
@@ -24,7 +24,7 @@ export const crudQueryStores = (stores = {}) => {
     * the store for the current item
     * @type {Writable}
     */
-    get item(){
+    get itemStore(){
       return itemStore
     },
 
@@ -33,7 +33,7 @@ export const crudQueryStores = (stores = {}) => {
      * not sync as it should already be loaded before this is called
      * @type {Writable}
      */
-    get dataCache(){
+    get dataCacheStore(){
       return dataCacheStore
     },
 
@@ -57,8 +57,8 @@ export const crudQueryStores = (stores = {}) => {
     * on init this would be equal to whats in the dataCache
     * @type {Writable}
     */
-    get data(){
-      return viewDataStore
+    get dataStore(){
+      return dataStore
     },
 
     /**
@@ -66,14 +66,14 @@ export const crudQueryStores = (stores = {}) => {
     * @type {object}
     */
     getData(){
-      return get(viewDataStore)
+      return get(dataStore)
     },
 
     /**
      * sets the viewable data in the store
      */
     setData(data){
-      return viewDataStore.set(data)
+      return dataStore.set(data)
     },
 
     /**
@@ -103,7 +103,7 @@ export const crudQueryStores = (stores = {}) => {
     * the query parameters with the q search {max:int, page:int, sort:string, q:{} , qSearch:string}
     * @type {Writable}
     */
-    get query(){
+    get queryStore(){
       return queryStore
     },
 

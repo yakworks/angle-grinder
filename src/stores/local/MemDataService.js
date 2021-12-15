@@ -144,7 +144,7 @@ const MemDataService = ({
    * The item's identifier is auto-assigned.
    */
   ds.create = async (item) => {
-    ds.stores.dataCache.update( data => {
+    ds.stores.dataCacheStore.update( data => {
       item.id = _.max(data.map(it => it.id)) + 1
       data.push(item)
       return data
@@ -154,7 +154,7 @@ const MemDataService = ({
 
   /** Returns a promise to save (PUT) an existing item. */
   ds.update = async (item) => {
-    ds.stores.dataCache.update( data => {
+    ds.stores.dataCacheStore.update( data => {
       const idx = ds.findIndexById(data, item[ident])
       data[idx] = item
       return data
@@ -166,7 +166,7 @@ const MemDataService = ({
    * Returns a promise to remove (DELETE) an item.
    */
   ds.remove = async (id) => {
-    ds.stores.dataCache.update( data => {
+    ds.stores.dataCacheStore.update( data => {
       // const intId = parseInt(id)
       const idx = findIndexById({ list:data, id })
       //splice delete
@@ -178,7 +178,7 @@ const MemDataService = ({
   ds.bulkUpdate = async (muItem) => {
     const { data: updateData, ids } = muItem
     const updateItems = []
-    ds.stores.dataCache.update( data => {
+    ds.stores.dataCacheStore.update( data => {
       ids.forEach(id => {
         let item = ds.findById(data, id)
         item = _.merge(item, updateData)
