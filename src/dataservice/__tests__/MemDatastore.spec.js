@@ -1,13 +1,13 @@
 /* eslint-disable */
 import _ from 'lodash'
-import MemDatastore from '../local/MemDatastore'
+import MemDataService from '../local/MemDataService'
 import { findSomeDeep } from '../../utils/finders'
 import countryData from '../../__tests__/countries'
 import {expect as x} from '@jest/globals'
 
 describe('Datastore', () => {
 
-  const ds = MemDatastore({ initData: countryData })
+  const ds = MemDataService({ initData: countryData })
 
   describe('Datastore internals', () => {
     test('findSomeDeep country united', () => {

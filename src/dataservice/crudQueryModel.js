@@ -111,14 +111,13 @@ export const cudModel = (ds) => {
 }
 
 /**
- * Base Datastore model feature, this operates as a sort of interface contract.
- * to be used in composing
+ * combination queryModel and cudModel
  */
 export const crudQueryModel = (ds = {}) => {
 
   return mix(ds).with({
     queryModel, cudModel
-  }) //end mix
+  })
 
 }
 

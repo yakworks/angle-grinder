@@ -1,4 +1,4 @@
-import { KyFactory } from "../../datastore/ky";
+import { KyFactory } from "../../dataservice/ky";
 
 // Global object for loader could be replaced with other lib that doesnt rely on angular lib
 const globalLoader = {

@@ -6,9 +6,9 @@ import mix from '../../utils/mix-it-with'
 import {crudQueryModel} from '../crudQueryModel'
 
 /**
- * Local memory based datastore
+ * Local memory based data service
  */
-const MemDatastore = ({
+const MemDataService = ({
   mockDelay = 0,
   picklistFields = ['id', 'name'],
   initData = [],
@@ -26,7 +26,7 @@ const MemDatastore = ({
   }
 
   ds.search = async (params = {}) => {
-    console.log("memDatastore search", params)
+    console.log("MemDataService search", params)
     await ds.delay()
 
     let {q, qSearch, sort, order} = params
@@ -215,9 +215,9 @@ const MemDatastore = ({
     return { [field]: items.reduce((sum, item) => sum + item.amount, 0) }
   }
 
-  return mix(ds).it(MemDatastore).with(
+  return mix(ds).it(MemDataService).with(
     crudQueryModel
   )
 }
 
-export default MemDatastore
+export default MemDataService

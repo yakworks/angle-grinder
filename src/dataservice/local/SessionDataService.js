@@ -1,18 +1,18 @@
 // import {guid} from "../utils/util"
-import MemDatastore from './MemDatastore'
+import MemDataService from './MemDataService'
 import ky from 'ky' //simple ky to bypass so we can load a file
 import stringify from '../../utils/stringify';
 import { isEmpty } from '../../utils/inspect';
 import mix from '../../utils/mix-it-with';
 
 /**
- * Session based datastore
+ * SessionStorage based datastore
  */
-const SessionDatastore = (opts) => {
+const SessionDataService = (opts) => {
 
   let { sourceUrl, storageKey, mockDelay = 500 } = opts
 
-  let memDs = MemDatastore({...opts, mockDelay})
+  let memDs = MemDataService({...opts, mockDelay})
 
   let sessionDs = {
 
@@ -59,4 +59,4 @@ const SessionDatastore = (opts) => {
 
 }
 
-export default SessionDatastore
+export default SessionDataService
