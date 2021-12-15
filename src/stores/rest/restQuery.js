@@ -15,7 +15,7 @@ export const restQuery = ({ api }) => ds => {
 
     async get(id) {
       const item = await api.getById(id)
-      ds.stores.item.set(item)
+      ds.stores.setItem(item)
       return item
     },
 

@@ -15,25 +15,25 @@ describe('MemDataService', () => {
     })
 
     test('qbe', async () => {
-      const data = await ds.stores.getDataCache()
+      const data = await ds.stores.getMasterData()
       const result = ds.qbe(data, {code: 'US'})
       x(result.length).toEqual(1)
     })
 
     test('qSearch', async () => {
-      const data = await ds.stores.getDataCache()
+      const data = await ds.stores.getMasterData()
       const s = ds.qSearch(data, 'united')
       x( s.length ).toEqual(3)
     })
 
     test('filter', async () => {
-      const data = await ds.stores.getDataCache()
+      const data = await ds.stores.getMasterData()
       const s = ds.filter(data, {q: 'united'})
       x( s.length ).toEqual(3)
     })
 
     test('filter q object', async () => {
-      let data = await ds.stores.getDataCache()
+      let data = await ds.stores.getMasterData()
       let s = ds.filter(data, {q: {code:'US'}})
       x( s.length ).toEqual(1)
 

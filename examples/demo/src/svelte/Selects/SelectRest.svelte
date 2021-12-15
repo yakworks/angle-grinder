@@ -1,6 +1,6 @@
 <script>
 	import Select from 'svelte-select';
-  import dataApiFactory from '../../store/RestApiFactory';
+  import dataApiFactory from '../../store/dataApiFactory';
   import stringify from 'fast-safe-stringify'
 
   const custApi = dataApiFactory.customer

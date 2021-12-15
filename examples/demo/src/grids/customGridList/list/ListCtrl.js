@@ -1,7 +1,7 @@
 // import controller from './listCtrl'
 // import template from './list.html'
 import BaseListCtrl from 'angle-grinder/src/ng/gridz/list/BaseListCtrl'
-import dataApiFactory from '../../../store/RestApiFactory'
+import dataApiFactory from '../../../store/dataApiFactory'
 import toast from 'angle-grinder/src/tools/toast'
 
 export default class ListCtrl extends BaseListCtrl {

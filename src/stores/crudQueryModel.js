@@ -13,14 +13,14 @@ export const withSubStores = (ds) => {
   const {initData = [], ident = 'id'} = ds
 
   const stores = crudQueryStores()
-  if(initData) stores.setDataCache(initData)
+  if(initData) stores.setMasterData(initData)
 
   return mix(ds).with({
     stores, ident,
 
     //if paging this is the pager info with data
     get pageViewStore(){
-      return ds.stores.pageView
+      return ds.stores.pageViewStore
     },
 
     //the viewable or filtered data
@@ -42,10 +42,6 @@ export const queryModel = (ds) => {
 
   return mix(ds).with({
     ...core,
-
-    getPageViewStore(){
-      return ds.stores.pageView
-    },
 
     async search(params){ throw Error(not_implemented) },
 
@@ -118,9 +114,7 @@ export const cudModel = (ds) => {
  */
 export const crudQueryModel = (ds = {}) => {
 
-  return mix(ds).with({
-    queryModel, cudModel
-  })
+  return mix(ds).with(queryModel, cudModel)
 
 }
 

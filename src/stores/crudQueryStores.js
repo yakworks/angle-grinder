@@ -10,11 +10,11 @@ export const crudQueryStores = (stores = {}) => {
 
   let itemStore = writable({})
 
-  let pageStore = writable({})
+  let pageViewStore = writable({})
 
   let queryStore = writable({})
 
-  let dataCacheStore = writable([])
+  let masterDataStore = writable([])
 
   let dataStore = writable([])
 
@@ -33,28 +33,28 @@ export const crudQueryStores = (stores = {}) => {
      * not sync as it should already be loaded before this is called
      * @type {Writable}
      */
-    get dataCacheStore(){
-      return dataCacheStore
+    get masterDataStore(){
+      return masterDataStore
     },
 
     /**
      * sets the data in the store
      */
-    setDataCache(data){
-      return dataCacheStore.set(data)
+    setMasterData(data){
+      return masterDataStore.set(data)
     },
 
     /**
     * the actual data list from the store
     * @return {object}
     */
-    getDataCache(){
-      return get(dataCacheStore)
+    getMasterData(){
+      return get(masterDataStore)
     },
 
     /**
     * the current or visible array of data after filter.
-    * on init this would be equal to whats in the dataCache
+    * on init this would be equal to whats in the masterData
     * @type {Writable}
     */
     get dataStore(){
@@ -80,8 +80,8 @@ export const crudQueryStores = (stores = {}) => {
     * the current page view of the data {data:[...], page: , records: , total: }
     * @type {Writable}
     */
-    get pageView(){
-      return pageStore
+    get pageViewStore(){
+      return pageViewStore
     },
 
     /**
@@ -89,14 +89,14 @@ export const crudQueryStores = (stores = {}) => {
     * @type {object}
     */
     getPageView(){
-      return get(pageStore)
+      return get(pageViewStore)
     },
 
     /**
      * sets the page data into the store
      */
-    setPage(pageData){
-      return pageStore.set(pageData)
+    setPageView(pageData){
+      return pageViewStore.set(pageData)
     },
 
     /**

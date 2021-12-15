@@ -1,4 +1,4 @@
-import dataApiFactory from '../store/RestApiFactory'
+import dataApiFactory from '../store/dataApiFactory'
 
 const gridsStates = {
   name: 'grids',

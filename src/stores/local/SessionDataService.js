@@ -35,7 +35,7 @@ const SessionDataService = (opts) => {
   sessionDs.init = async () =>{
     // try {
       // let data = sessionDs.checkSession()
-      let dataCache = sessionDs.stores.getDataCache()
+      let dataCache = sessionDs.stores.getMasterData()
       //if dataCache is populated then its been init already
       if (isEmpty(dataCache)) {
         console.log(`using ${storageKey} in sessionStorage`)
@@ -47,7 +47,7 @@ const SessionDataService = (opts) => {
         // }
         const sessionCache = await ky.get(sourceUrl).json()
         sessionStorage.setItem(storageKey, stringify(sessionCache))
-        sessionDs.stores.setDataCache(sessionCache)
+        sessionDs.stores.setMasterData(sessionCache)
         return sessionCache
       }
     // } catch (e) {

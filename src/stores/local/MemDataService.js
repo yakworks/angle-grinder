@@ -31,7 +31,7 @@ const MemDataService = ({
 
     let {q, qSearch, sort, order} = params
 
-    let items = ds.stores.getDataCache()
+    let items = ds.stores.getMasterData()
 
     const isSearch = q || qSearch
 
@@ -125,7 +125,7 @@ const MemDataService = ({
 
   /** Returns a promise for the item with the given identifier */
   ds.get = async (id) => {
-    const items = await ds.stores.getDataCache()
+    const items = await ds.stores.getMasterData()
     const item = items.find(item => item.id === id)
     return item
   }
@@ -144,7 +144,7 @@ const MemDataService = ({
    * The item's identifier is auto-assigned.
    */
   ds.create = async (item) => {
-    ds.stores.dataCacheStore.update( data => {
+    ds.stores.masterDataStore.update( data => {
       item.id = _.max(data.map(it => it.id)) + 1
       data.push(item)
       return data
@@ -154,7 +154,7 @@ const MemDataService = ({
 
   /** Returns a promise to save (PUT) an existing item. */
   ds.update = async (item) => {
-    ds.stores.dataCacheStore.update( data => {
+    ds.stores.masterDataStore.update( data => {
       const idx = ds.findIndexById(data, item[ident])
       data[idx] = item
       return data
@@ -166,7 +166,7 @@ const MemDataService = ({
    * Returns a promise to remove (DELETE) an item.
    */
   ds.remove = async (id) => {
-    ds.stores.dataCacheStore.update( data => {
+    ds.stores.masterDataStore.update( data => {
       // const intId = parseInt(id)
       const idx = findIndexById({ list:data, id })
       //splice delete
@@ -178,7 +178,7 @@ const MemDataService = ({
   ds.bulkUpdate = async (muItem) => {
     const { data: updateData, ids } = muItem
     const updateItems = []
-    ds.stores.dataCacheStore.update( data => {
+    ds.stores.masterDataStore.update( data => {
       ids.forEach(id => {
         let item = ds.findById(data, id)
         item = _.merge(item, updateData)
@@ -211,7 +211,7 @@ const MemDataService = ({
   }
 
   ds.countTotals = async (field) => {
-    const items = await ds.stores.getDataCache()
+    const items = await ds.stores.getMasterData()
     return { [field]: items.reduce((sum, item) => sum + item.amount, 0) }
   }
 
