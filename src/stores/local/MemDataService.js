@@ -206,7 +206,7 @@ const MemDataService = ({
       records: data.length,
       total: Math.floor(data.length / max) + (data.length % max === 0 ? 0 : 1)
     }
-    ds.stores.setPage(newPage)
+    ds.stores.setPageView(newPage)
     return newPage
   }
 

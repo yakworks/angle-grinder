@@ -19,8 +19,6 @@ const template = `
 class ListCtrl extends ListDataApiCtrl {
 
   $onInit() {
-    console.log("apiKey", this.apiKey)
-    console.log("dataApi", this.dataApi)
     this.isConfigured = false
     this.cfg = {}
     super.doConfig()

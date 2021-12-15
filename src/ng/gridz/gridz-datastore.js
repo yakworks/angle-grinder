@@ -27,7 +27,7 @@ angular.module(grid2Mod).directive('gridzDatastore',
       })
 
       $scope.$on('$destroy', function() {
-        $gridzEl.jqGrid('GridDestroy')
+        gridCtrl.destroy()
       });
 
       // scope[gridId] will be set to gridCtrl

@@ -4,10 +4,12 @@ import { xlsData, csvData } from './excelExport'
 import flattenObject from '../utils/flattenObject'
 import toast from '../tools/growl'
 import _ from 'lodash'
+import { subscribe } from 'svelte/internal'
 
 export default class GridDataApiCtrl {
   formatters
   dataApi
+  unsubs = []
   highlightClass = 'ui-state-highlight'
   systemColumns = ['cb', '-row_action_col']
   isDense = false
@@ -78,10 +80,11 @@ export default class GridDataApiCtrl {
     this.formatters && this.setupCustomFormatters(this, this.formatters, opts)
 
     // adds the listener to the store
-    this.dataApi.pageViewStore.subscribe(data => {
+    const unsubscribe = this.dataApi.pageViewStore.subscribe(data => {
       // console.log("dataApi.currentPage")
       this.addJSONData(data)
     });
+    this.unsubs.push(unsubscribe)
   }
 
   //initialize the grid the jquery way
@@ -394,7 +397,6 @@ export default class GridDataApiCtrl {
   // Sets the grid search filters and triggers a reload
   async search(q, queryText) {
     console.log("GridCtrl search called with  ", q)
-    console.log("GridCtrl search queryText  ", queryText)
     try {
       this.isSearching = true
       const params = {
@@ -752,6 +754,13 @@ export default class GridDataApiCtrl {
         }
       })
     }
+  }
+
+  destroy(){
+    this.unsubs.forEach(fn => {
+      fn()
+    })
+    this.jqGridEl.jqGrid('GridDestroy')
   }
 
 }
