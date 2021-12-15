@@ -1,5 +1,4 @@
 import BaseListCtrl from './BaseListCtrl'
-// import restStoreApi from '../../store/RestStoreApi'
 import _ from 'lodash'
 
 const template = `

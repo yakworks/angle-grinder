@@ -1,0 +1,16 @@
+<div class="modal-card">
+  <header class="modal-card-head">
+    <span class="modal-card-title">Bulk Update</span>
+    <button class="delete" aria-label="close" ng-click="dlgCtrl.cancel()"></button>
+  </header>
+  <section class="modal-card-body">
+    <ag-formly-form ag-form is-horizontal model="dlgCtrl.vm" fields="dlgCtrl.cfg.bulkUpdateForm" form="dlgCtrl.bulkUpdateCtrl">
+    </ag-formly-form>
+  </section>
+  <footer class="modal-card-foot">
+    <ag-ok-cancel ok-label="Update" ok-click="dlgCtrl.save()" cancel-click="dlgCtrl.cancel()"
+    is-loading="dlgCtrl.isSaving">
+    </ag-ok-cancel>
+  </footer>
+  <!-- <pre ng-cloak class="mt-4">bulkUpdateCtrl.$invalid: {{dlgCtrl.bulkUpdateCtrl.$invalid}}<br>model: {{dlgCtrl.vm | json}}</pre> -->
+</div>

@@ -18,22 +18,6 @@ describe('MemDataApi', () => {
       // console.log("result", result)
       expect(result.length).toEqual(1)
     })
-
-    test('playing with isMatchWith', function() {
-
-      var match = {refnum: '762', amount: 3240.77, customer:{id:7}}
-
-      const hit = _.isMatchWith(data[0], match, (objValue, srcValue) => {
-        console.log("objValue", objValue)
-        console.log("srcValue", srcValue)
-        if(_.isString(objValue) && _.isString(srcValue)){
-          return objValue.toLowerCase().includes(srcValue.toLowerCase())
-        }
-        return undefined
-      })
-      console.log("hit", hit)
-      expect(hit).toBe(true)
-    })
   })
 
   describe('searching', function() {

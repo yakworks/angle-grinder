@@ -1,5 +1,5 @@
 module.exports = {
-  testMatch: [ "**/__tests__/**/*.[jt]s?(x)"],
+  testMatch: [ "**/__tests__/**/*.spec.[jt]s?(x)"],
 	// testMatch: ['<rootDir>/svelte/__tests__/specs/**/*.spec.js'],
 	transform: {
 		'^.+\\.m?(j|t)s$': 'babel-jest',

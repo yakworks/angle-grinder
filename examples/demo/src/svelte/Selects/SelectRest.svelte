@@ -1,9 +1,9 @@
 <script>
 	import Select from 'svelte-select';
-  import restStoreApi from '../../store/RestStoreApi';
+  import dataApiFactory from '../../store/dataApiFactory';
   import stringify from 'fast-safe-stringify'
 
-  const custApi = restStoreApi.customer
+  const custApi = dataApiFactory.customer
 
 	const optionIdentifier = 'id';
   const getOptionLabel = (option) => option.name;

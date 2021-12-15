@@ -1,0 +1,49 @@
+# This is for VSCode `REST Client` plugin. Use it, it rocks
+# @host = https://rcm-dev-api.9ci.io
+@host = http://localhost:8080
+@base_url = {{host}}/api/ar/customer
+# @host = localhost:8080
+@contentType = application/json
+# @token = dfasfasdfadfs
+
+
+# @name login
+POST {{host}}/api/login
+Content-Type: application/json
+
+{"username":"admin","password":"123F"}
+
+###
+@token = {{login.response.body.$.access_token}}
+
+### Get Customers### Get Customers
+GET {{base_url}}?max=20&page=1&sort=org.calc.totalDue
+Authorization: Bearer {{token}}
+
+### get customers query
+GET {{base_url}}?q=wal%
+
+### post/create and put/update
+
+# @name post_it
+POST {{base_url}}
+Content-Type: application/json
+
+{
+  "num": {{$randomInt 100 10000}},
+  "name": "Test"
+}
+
+### Get it
+
+@created_id = {{post_it.response.body.$.id}}
+
+GET {{base_url}}/{{created_id}}
+
+### update it
+
+PUT {{base_url}}/{{created_id}}
+
+{
+  "name": "TestUpdate"
+}

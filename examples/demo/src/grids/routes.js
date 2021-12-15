@@ -1,3 +1,5 @@
+import dataApiFactory from '../store/dataApiFactory'
+
 const gridsStates = {
   name: 'grids',
   abstract: true,
@@ -7,15 +9,15 @@ const gridsStates = {
   },
   children: [
     {
-      name: 'vanilla-agGridList',
-      data: { title: 'Customer Grid Example' },
-      abstract: 'fresh.grid.vanilla-agGridList.list',
-      url: '/customer',
+      name: 'agGridDatastore',
+      data: { title: 'Customer Grid' },
+      abstract: 'fresh.grid.agGridDatastore.list',
+      url: '/customer-ds',
       children: [{
         name: 'list',
         isMenuItem: false,
         url: '',
-        component: 'agGridList'
+        component: 'agGridDatastore'
       }, {
         name: 'Edit Customer',
         isMenuItem: false,
@@ -24,6 +26,11 @@ const gridsStates = {
       }],
       resolve: {
         apiKey: () => 'customer',
+        dataApi: () => {
+          let ds = dataApiFactory.customer
+          console.log("dataApiFactory.customer", ds)
+          return ds
+        },
         // gridOptions: () => ({multiSort: true}),
         notification: () => ({
           class: 'is-primary is-light',
@@ -40,7 +47,7 @@ const gridsStates = {
         name: 'list',
         isMenuItem: false,
         url: '',
-        component: 'agGridList'
+        component: 'agGridDatastore'
       }, {
         name: 'Edit Customer',
         isMenuItem: false,
@@ -49,6 +56,9 @@ const gridsStates = {
       }],
       resolve: {
         apiKey: () => 'customer',
+        dataApi: () => {
+          return dataApiFactory.customer
+        },
         initSearch: () => ({ name: 'Yodo' }),
         notification: () => ({
           class: 'is-primary is-light',
@@ -59,10 +69,13 @@ const gridsStates = {
     {
       name: 'editOnly-agGridList',
       url: '/tag',
-      component: 'agGridList',
+      component: 'agGridDatastore',
       data: { title: 'Edit Only agGridList' },
       resolve: {
         apiKey: () => 'tag',
+        dataApi: () => {
+          return dataApiFactory.tag
+        },
         notification: () => ({
           class: 'is-primary is-light',
           text: 'Uses ui-router to send rest apiKey to generic agGridList component, configured to only allow editing desc'
@@ -80,9 +93,9 @@ const gridsStates = {
       component: 'basicGridRestIndex'
     },
     {
-      name: 'basic-grid',
-      component: 'basicGridIndex',
-      url: '/foo'
+      name: 'local-store-grid',
+      component: 'localStoreIndex',
+      url: '/localstore'
     }
   ]
 }

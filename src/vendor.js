@@ -13,7 +13,36 @@ require('bootstrap-sass/assets/javascripts/bootstrap/dropdown')
 
 // require('../legacy/bootstrapx-clickover/bootstrapx-clickover')
 
+//jqgrid
+// require('free-jqgrid/js/grid.base')
+// require('free-jqgrid/js/grid.common')
+// require('free-jqgrid/js/grid.custom')
+// require('free-jqgrid/js/grid.jqueryui.js')
+// require('free-jqgrid/js/jqdnr')
+// require('free-jqgrid/js/jqmodal')
+// require('free-jqgrid/js/jquery.fmatter.js')
+
 require('free-jqgrid/js/jquery.jqgrid.src')
+// includes the following, above is attempt to skinny it down
+// "js/grid.base.js",
+// "js/grid.celledit.js",
+// "js/grid.common.js",
+// "js/grid.custom.js",
+// "js/grid.filter.js",
+// "js/jsonxml.js",
+// "js/grid.formedit.js",
+// "js/grid.grouping.js",
+// "js/grid.import.js",
+// "js/grid.inlinedit.js",
+// "js/grid.jqueryui.js",
+// "js/grid.pivot.js",
+// "js/grid.subgrid.js",
+// "js/grid.tbltogrid.js",
+// "js/grid.treegrid.js",
+// "js/jqdnr.js",
+// "js/jqmodal.js",
+// "js/jquery.fmatter.js"
+
 
 require('Select2/select2')
 // require('moment')
