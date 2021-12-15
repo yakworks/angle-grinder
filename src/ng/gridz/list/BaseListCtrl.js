@@ -66,10 +66,26 @@ export default class BaseListCtrl {
     _.defaults(this.cfg, cfg)
 
     this.isConfigured = true
-
+    this.toolbarActions = {}
     //setup some defaults for gridOpts
     gopts.contextMenuClick = (model, menuItem) => {
       return this.fireRowAction(model, menuItem)
+    }
+    gopts.fireToolbarAction = (btnItem, event) => {
+      switch (btnItem.key) {
+        case 'create':
+          return this.create()
+        case 'bulkUpdate':
+          return this.showBulkUpdate()
+        case 'xlsExport':
+          return this.gridCtrl.xlsExport()
+        case 'delete':
+          return this.deleteSelected()
+        default:
+          if (_.isFunction(this[btnItem.key])) {
+            return this[btnItem.key](btnItem, event)
+          }
+      }
     }
     gopts.restrictSearch = this.restrictSearch || {}
     gopts.initSearch = this.initSearch || {}
@@ -88,23 +104,6 @@ export default class BaseListCtrl {
         return this.delete(model.id)
       // default:
       //   alert( "I don't know such values" );
-    }
-  }
-
-  fireToolbarAction(btnItem, event) {
-    switch (btnItem.key) {
-      case 'create':
-        return this.create()
-      case 'bulkUpdate':
-        return this.showBulkUpdate()
-      case 'xlsExport':
-        return this.gridCtrl.xlsExport()
-      case 'delete':
-        return this.deleteSelected()
-      default:
-        if (_.isFunction(this[btnItem.key])) {
-          return this[btnItem.key](btnItem, event)
-        }
     }
   }
 
