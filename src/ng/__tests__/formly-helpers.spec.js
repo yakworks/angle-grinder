@@ -1,7 +1,6 @@
 /* eslint-disable */
-import agMod from '~/angle-grinder'
 import _ from 'lodash'
-import {transformFields} from './helpers'
+import {transformFields} from '../controls/formly/helpers'
 
 describe('transformFields', () => {
   let testOpts = {

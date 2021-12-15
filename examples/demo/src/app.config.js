@@ -4,12 +4,25 @@ import appName from './app.module'
 import './config.router'
 import appState from 'angle-grinder/src/tools/AppState'
 import {setConfig} from 'angle-grinder/src/tools/AppConfig'
-import {setClientConfig} from "angle-grinder/src/dataApi/kyClient";
+import {setClientConfig} from "angle-grinder/src/dataApi/kyApi";
 
 const app = angular.module(appName)
 // export default app.name
 
 app.run(function($rootScope, $state, $stateParams) {
+
+  // window.onbeforeunload = function(){
+  //   sessionStorage.setItem("origin", window.location.href);
+  // }
+
+  // window.onload = function(){
+  //   console.log("************window.location.href", window.location.href)
+  //   if(window.location.href == sessionStorage.getItem("origin")){
+  //       console.log("************clearing storage", window.location.href)
+  //       sessionStorage.clear();
+  //   }
+  // }
+
   'ngInject';
   // Set the ui-router state vars to global root to access them from any scope
   $rootScope.$state = $state

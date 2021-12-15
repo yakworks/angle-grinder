@@ -1,4 +1,4 @@
-import _ from 'lodash' // uses babel plugin to only use what is referenced
+import * as _ from './dash' // uses babel plugin to only use what is referenced
 // see https://mymth.github.io/vanillajs-datepicker/#/
 import { Datepicker } from 'vanillajs-datepicker'
 

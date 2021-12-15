@@ -1,10 +1,10 @@
 module.exports = {
-    testMatch: [ "**/__tests__/**/*.[jt]s?(x)"],
+  testMatch: [ "**/__tests__/**/*.[jt]s?(x)"],
 	// testMatch: ['<rootDir>/svelte/__tests__/specs/**/*.spec.js'],
 	transform: {
 		'^.+\\.m?(j|t)s$': 'babel-jest',
-		// '^.+\\.svelte$': ['svelte-jester', {preprocess: true}],
-		'^.+\\.svelte$': ['svelte-jester'],
+		'^.+\\.svelte$': ['svelte-jester', {preprocess: true}],
+		// '^.+\\.svelte$': ['svelte-jester'],
 		/**
 		* transform any svelte components in node_modules with svelte-jester
 		*/
@@ -17,6 +17,6 @@ module.exports = {
 	},
 	setupFilesAfterEnv: [
 		'@testing-library/jest-dom/extend-expect',
-		"<rootDir>/jest.setup.js"
+		// "<rootDir>/jest.setup.js"
 	]
 };

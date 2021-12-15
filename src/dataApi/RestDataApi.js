@@ -1,24 +1,27 @@
-import ky from 'ky'
+import kyApi from './kyApi'
+import prune from '../utils/prune';
 
 /**
- * This common wrapper around RESTful resource
+ * A common wrapper around RESTful resource
  */
 export default class RestDataApi {
   /**
    * Creates a new SessionStorage object
    *
    * @param prefixUrl The endpoint url prefix ex: /api or http://foo.com/api
+   * @param customKyApi Allows to override with custom kyApi
    */
-  constructor(endpoint, kyApi) {
+  constructor(endpoint, customKyApi) {
     // this.prefixUrl = prefixUrl
     this.endpoint = endpoint
     // this.api = ky.create({prefixUrl: prefixUrl});
     this._idProp = 'id'
-    this.kyApi = kyApi
+    this.kyApi = customKyApi || kyApi
   }
 
+  // getter makes sure it always pull the current kyApi.ky
   get api(){
-    return this.kyApi.client || ky
+    return this.kyApi.ky
   }
 
   /**
@@ -27,25 +30,28 @@ export default class RestDataApi {
    * @param {*} params
    */
   async search(params) {
-    //turn q into string if its an object
-    if(_.isObject(params.q)) params.q = JSON.stringify(params.q)
-
-    const opts = { searchParams: params }
-    // console.log("query opts", opts)
+    let cleanParams = this.setupQ(params)
+    const opts = { searchParams: cleanParams }
     const data = await this.api.get(this.endpoint, opts).json()
     return data
   }
 
-  //
   async picklist(params) {
-    if(_.isObject(params.q)) params.q = JSON.stringify(params.q)
-    const opts = { searchParams: params }
-    // if (params) {
-    //   opts = { searchParams: { q: params ? JSON.stringify(params) : '' } }
-    // }
-    // console.log("query opts", opts)
+    let cleanParams = this.setupQ(params)
+    const opts = { searchParams: cleanParams }
     const data = await this.api.get(`${this.endpoint}/picklist`, opts).json()
     return data
+  }
+
+  // prunes params and stringifies the q param if exists
+  setupQ(params){
+    let prunedParms = prune(params)
+    let q = prunedParms.q
+    if(_.isObject(q)) prunedParms.q = JSON.stringify(q)
+    //stringify sort and remove the
+    let sort = prunedParms.sort
+    if(_.isObject(sort)) prunedParms.sort = JSON.stringify(sort).replace(/{|}|"/g, '')
+    return prunedParms
   }
 
   /** Returns a promise for the item with the given identifier */

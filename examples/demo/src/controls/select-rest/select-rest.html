@@ -1,6 +1,7 @@
+<p>LEGACY WAY OF DOING IT WITH AJAX, PREFER USING dataApiKey</p>
 <form name="selRestForm" ag-form is-horizontal>
 
-  <ag-select-rest select-options="{ multiple: true, minimumInputLength: 1}"
+  <ag-select-rest select-options="{ multiple: true, minimumInputLength: 1, closeOnSelect:false}"
                   ng-model="$ctrl.vm.multipleCustomer"
                   url="/api/customer/picklist">
   </ag-select-rest>

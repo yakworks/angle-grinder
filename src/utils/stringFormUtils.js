@@ -1,20 +1,10 @@
 /* eslint no-useless-escape: "off" */
-import _ from 'lodash'
+import * as _ from './dash'
 
+/**
+ * Helpers for form inputs, mostly for password checking
+ */
 export class StringUtility {
-  // constructor() {}
-
-  parseWords(inString) {
-    if (inString && inString.length > 1) {
-      return _.upperFirst(inString).split(/(?=[A-Z])/).join(' ')
-    }
-    return inString
-  }
-
-  // if a.b.c will return just c
-  lastPathKey(modelPath) {
-    return _.split(modelPath, '.').slice(-1).pop()
-  }
 
   isEmailValid(email) {
     if (!email) {

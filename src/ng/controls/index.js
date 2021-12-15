@@ -21,9 +21,6 @@ import agAmount from './ag-amount'
 import agOkCancel from './ag-ok-cancel'
 import agXeditable from './xeditable'
 
-// import InputPasswordComponent from './ag-password/input-password.component'
-// import StringUtility from './string-utility';
-
 const MOD_NAME = 'ag.form.controls'
 export default MOD_NAME
 

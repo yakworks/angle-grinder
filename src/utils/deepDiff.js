@@ -1,8 +1,7 @@
-import _ from 'lodash' // babel plugin will only use what is referenced
+import * as _ from './dash' // babel plugin will only use what is referenced
 
 // TODO these are old functions refactored out of ng. We use them when doing a diff
-// for restful posting on the json. I think we can take advantage of more lodash tools here and we
-// are duplicating efforts
+// for restful posting on the json.
 export function deepDiff(oldVal, newVal, allowed, reqFields) {
   var diffRecursive = function(oldVal, newVal, allowed, reqFields) {
     let args

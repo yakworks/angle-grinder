@@ -1,5 +1,5 @@
 /**
- * This is the AngularJS $logProvider pulled out into a generic module that ES6
+ * This is the old AngularJS $logProvider pulled out into a generic module that ES6
  * can use as a dependency and remove the old crazy dependency chain
  * adds in some sugar to make it easier to log and object
  * @ngdoc provider
@@ -7,7 +7,6 @@
  * @description
  * Use the `$logProvider` to configure how the application logs messages
  */
-// import _ from 'lodash'
 
 class Log {
   static factory() {

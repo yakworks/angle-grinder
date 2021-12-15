@@ -83,7 +83,8 @@ class Controller {
     if (_.isFunction(btnItem.action)) {
       await btnItem.action(btnItem, event)
     } else {
-      await this.gridCtrl.listCtrl.fireToolbarAction(btnItem, event)
+      console.log(this.gridCtrl)
+      await this.gridCtrl.gridOptions.fireToolbarAction(btnItem, event)
     }
   } finally {
     this.isLoading = false

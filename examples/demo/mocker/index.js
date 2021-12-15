@@ -1,3 +1,6 @@
+//esm allows imports to work with node
+require = require("esm")(module);
+
 const delay = require('mocker-api/utils/delay')
 // const _ = require('lodash')
 const yaml = require('js-yaml')

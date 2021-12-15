@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
-import { makeLabel } from '../utils/labelMaker'
+import { makeLabel } from '../utils/nameUtils'
 import { xlsData, csvData } from './excelExport'
-import flattenObject from './flattenObject'
+import flattenObject from '../utils/flattenObject'
 import toast from '../tools/growl'
 import _ from 'lodash'
 
@@ -9,6 +9,7 @@ export default class GridCtrl {
   highlightClass = 'ui-state-highlight'
   systemColumns = ['cb', '-row_action_col']
   isDense = false
+  showSearchForm = false
 
   defaultCtxMenuOptions = {
     edit: {
@@ -28,13 +29,20 @@ export default class GridCtrl {
 
     const $jqGrid = $(jqGridElement)
     this.jqGridEl = $jqGrid
-
     this.$gridWrapper = $(gridWrapper)
 
     if (!this.gridId && !_.isNil(opts.gridId)) {
       this.gridId = opts.gridId
     }
     $jqGrid.attr('id', this.gridId)
+
+    let optsToMerge = _.pick(opts, [
+      'showSearchForm', 'dataApi', 'initSearch', 'restrictSearch', 'contextMenuClick'
+    ])
+    _.mergeWith(this, optsToMerge, (obj, optVal) => {
+      //dont merge val if its null
+      return optVal === null ? obj : undefined
+    })
 
     // pager ID setup
     if (opts.pager !== false) {
@@ -59,10 +67,6 @@ export default class GridCtrl {
       opts.datatype = (params) => this.gridLoader(params)
     }
 
-    if (!_.isNil(opts.dataApi)) {
-      this.dataApi = opts.dataApi
-    }
-
     this.setupColModel(opts)
     this.setupCtxMenu(opts)
     // this.setupDataLoader(gridOptions)
@@ -73,7 +77,7 @@ export default class GridCtrl {
 
   //initialize the grid the jquery way
   initGridz(){
-    console.log({opt: this.gridOptions})
+    // console.log({opt: this.gridOptions})
     this.jqGridEl.gridz(this.gridOptions)
     // setupFilterToolBar(options)
   }
@@ -240,9 +244,11 @@ export default class GridCtrl {
     jqGridEl.jqGrid('hideCol', colSetup.hiddenColumns)
   }
 
-  contextMenuClick = (model, menuItem) => {
-    return this.listCtrl.fireRowAction(model, menuItem)
-  }
+  // contextMenuClick = (model, menuItem) => {
+    //listCtrl can pass the listener
+    // return this.contextMenuClickAction(model, menuItem)
+    //return this.listCtrl.fireRowAction(model, menuItem)
+  // }
 
   // Updates the values (using the data array) in the row with rowid.
   // The syntax of data array is: {name1:value1,name2: value2...}
@@ -255,7 +261,7 @@ export default class GridCtrl {
     const prevData = this.getRowData(id)
     if (!_.isNil(prevData)) {
       // retrieve a list of removed keys
-      let diff = _.difference(_.keys(prevData), _.keys(flatData))
+      let diff = _.difference(Object.keys(prevData), Object.keys(flatData))
 
       // filter out restricted (private) columns like `-row_action_col`
       const restrictedColumns = key => !key.match(/^-/)
@@ -382,11 +388,12 @@ export default class GridCtrl {
         search: this.hasSearchFilters(filters),
         postData: {}
       }
-      if (filters) params.postData.q = JSON.stringify(filters)
-      if (queryText || queryText === '') params.postData.q = queryText
+      if (filters) params.postData.q = filters
+      if (queryText || queryText === '') params.postData.qSearch = queryText
       this.setParam(params)
       await this.reload()
     } catch (er) {
+      //XXX should not swallow errors
       console.error('search error', er)
     }
   }
@@ -397,7 +404,7 @@ export default class GridCtrl {
       if (_.isNil(value)) { continue }
 
       if (typeof value === 'string') {
-        if (_.trim(value) !== '') { return true }
+        if (value.trim() !== '') { return true }
       } else {
         return true
       }
@@ -406,21 +413,42 @@ export default class GridCtrl {
   }
 
   /**
+   * The main loader for the grid.
+   *
    * @param {*} p the params to send to search
-   * @param {*} searchModel if passed in this will get converted to json string and override whats in q
+   * @param {*} searchModel if passed in this will get merged in whats in q
    */
-  async gridLoader(p, searchModel={}) {
+  async gridLoader(p, searchModel) {
     this.toggleLoading(true)
     try {
-      // fix up sort
-      if (p.sort && p.order) p.sort = `${p.sort} ${p.order}`
-      if (!p.sort) delete p.sort
-      delete p.order
+      //we use the sortMap that constructed in jq.gridz so remove the sort and order
+      delete p.order; delete p.sort;
+      let sortMap = this.getParam('sortMap')
+      console.log('sortMap', sortMap)
+      if(sortMap){
+        p.sort = sortMap
+      }
+
       // to be able to set default filters on the first load
-      const q = p.q ? JSON.parse(p.q): {}
-      const permanentFilters = this.listCtrl?.permanentFilters || {}
-      const initSearch = this.listCtrl?.initSearch || {}
-      p.q = JSON.stringify({...initSearch, ...q,  ...searchModel, ...permanentFilters})
+      let q = p.q
+      if(_.isString(q) && !_.isEmpty(q)){
+        if (q.trim().indexOf('{') === 0) {
+          q = JSON.parse(q)
+        } else {
+          q = {'$qSearch': q}
+        }
+      }
+      // when grid is for child or detail data, restrictSearch is what to filter it by,
+      // for example is showing invoices for customer then restrictSearch might be set to {custId:123}
+      const restrictSearch = this.restrictSearch || {}
+      const initSearch = this.initSearch || {}
+      const search = _.merge(initSearch, searchModel || {})
+      q = {...search, ...q, ...restrictSearch}
+
+      //now if its not empty set it back to p
+      if(!_.isEmpty(q)){
+        p.q = q
+      }
       const data = await this.dataApi.search(p)
       this.addJSONData(data)
     } catch (er) {
@@ -678,16 +706,6 @@ export default class GridCtrl {
     }
   }
 
-  setupDataLoader(options) {
-    // Log.debug(`[agGrid] initializing '${alias}' with`, options)
-
-    // assign the url
-    if (!(!_.isNil(options.url)) && (!_.isNil(options.path))) {
-      options.url = this.pathWithContext(options.path)
-    }
-
-  }
-
   setupColModel(options) {
     options.colModel.forEach((col, i) => {
       if (!col.label) col.label = makeLabel(col.name)
@@ -702,10 +720,10 @@ export default class GridCtrl {
         beforeSearch() {
           const postData = this.jqGridEl.jqGrid('getGridParam', 'postData')
           const defaultFilters = postData.defaultFilters || postData.filters
-          const filters = (_.extend(JSON.parse(defaultFilters), (_.pick(postData, (value, key) => !['page', 'filters', 'max', 'sort', 'order', 'nd', '_search'].includes(key)))))
+          const filters = (_.extend(JSON.parse(defaultFilters), (_.pick(postData, (value, key) => !['page', 'filters', 'max', 'sort', 'order'].includes(key)))))
           filters.firstLoad = false
           postData.defaultFilters = defaultFilters
-          postData.filters = JSON.stringify(filters)
+          postData.filters = filters
         }
       })
     }

@@ -24,6 +24,7 @@ const gridsStates = {
       }],
       resolve: {
         apiKey: () => 'customer',
+        // gridOptions: () => ({multiSort: true}),
         notification: () => ({
           class: 'is-primary is-light',
           text: 'Uses ui-router to send rest apiKey to generic agGridList component'

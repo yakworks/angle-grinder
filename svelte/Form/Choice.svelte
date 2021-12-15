@@ -1,7 +1,6 @@
 <script>
   import { getContext } from 'svelte';
-  import get from 'lodash-es/get';
-  import set from 'lodash-es/set';
+  import * as _ from '../../src/utils/dash'
   import writableDerived from 'svelte-writable-derived';
   import { FORM } from './Form.svelte';
 
@@ -16,8 +15,8 @@
 
   const choice = writableDerived(
     values,
-    $values => get($values, name, multiple ? [] : ''),
-    newValue => set($values, name, newValue)
+    $values => _.get($values, name, multiple ? [] : ''),
+    newValue => _.set($values, name, newValue)
   );
 
   function onChange() {
@@ -35,7 +34,7 @@
   }
 </script>
 
-<div class="field" class:error={get($touched, name) && get($errors, name)}>
+<div class="field" class:error={_.get($touched, name) && _.get($errors, name)}>
   {#each options as option}
     {#if multiple}
       <input
@@ -62,7 +61,7 @@
       <label for={option.id}>{option.title}</label>
     {/if}
   {/each}
-  {#if get($touched, name) && get($errors, name)}
-    <div class="message">{get($errors, name)}</div>
+  {#if _.get($touched, name) && _.get($errors, name)}
+    <div class="message">{_.get($errors, name)}</div>
   {/if}
 </div>

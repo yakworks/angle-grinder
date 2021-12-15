@@ -1,4 +1,4 @@
-import kyApi from './kyClient'
+import kyApi from './kyApi'
 
 class LocalCache {
   _values = {}
@@ -45,7 +45,7 @@ export class AppConfigApi {
     if (_cache.contains(key)) {
       return _cache.get(key)
     } else {
-      const cfg = await kyApi.client.get(key).json()
+      const cfg = await kyApi.ky.get(key).json()
       _cache.set(key, cfg)
       return cfg
     }

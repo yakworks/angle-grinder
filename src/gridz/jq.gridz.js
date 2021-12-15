@@ -31,6 +31,16 @@ class Gridz {
     return this.responsiveResize()
   }
 
+  // Sets the given grid parameter
+  setGridParam(params, overwrite) {
+    this.gridEl.setGridParam(params, overwrite)
+  }
+
+  // Sets the given grid parameter
+  getGridParam(name) {
+    this.gridEl.getGridParam(name)
+  }
+
   getOptions(options) {
     options = $.extend({}, $.fn.gridz.defaults, options)
 
@@ -67,37 +77,18 @@ class Gridz {
       if (this.options.multiSetSelection) { return this.memoizeSelectedRows() }
     }.bind(this)
 
-    // By default free-jqrid prepared sorting properties with next pattern
-    // sortName = columnName(id, name, etc) order(asc|desc), next column order of the last column name is in `order` parametr
-    // Example: if user first sorted by name and then by id sort params will be look like {sortName: 'name asc, id', order: 'asc'}
-    // Due to the fact that if id(or other unique) field is on the first place, the other sorting wont have any sense
-    // `sortLast` option is added to move unique column to the last place
-    //   Example: if user first sorted by id and then by name sort params will be look like {sortName: 'name asc, id', order: 'asc'}
-    options.onSortCol = (sortname, x, order) => {
-      if (options.multiSort) {
-        // console.log('onSortCol sortname order', sortname, order)
-        const id = options.sortLast || 'id'
-        if (sortname.indexOf(id) > -1) {
-          sortname = sortname + ` ${order}`
-          const sortArray = sortname.split(',')
-          const res = []
-          let sort = null
-          const idRegex = new RegExp(`(${id}[ ]+(asc|desc))`)
-          _.each(sortArray, function(it) {
-            it = it.trim()
-            if (_.isNil(idRegex.exec(it))) {
-              return res.push(it)
-            } else {
-              return sort = it.split(' ')
-            }
-          })
-          if (sort) { res.push(sort[0]) }
-          sortname = res.join(',')
-          this.gridEl.jqGrid('setGridParam', { sortname })
-          if (sort) { return this.gridEl.jqGrid('setGridParam', { order: sort[1] }) }
-        }
-      }
-    }
+    /**
+     * jqgrid default sort is a bit goofy on multiple.
+     * sortname will look like 'name asc, num' with the order for num in the order field. so last col will have its
+     * sort in the order prop and the others will be seperated by space in the sortname.
+     * on multiple sorts if id is in the list then other columns wont have any effect
+     * so we parse it out and remove it
+     *
+     * @param {*} sortname the sort name with the direction seperated by space when its multiSort
+     * @param {*} x the column index that was last clicked
+     * @param {*} order asc|desc for the last column sorted.
+     */
+    options.onSortCol = this.onSortCol
 
     // If true - provides a possibility to select multiple sets of records with "shift" key.
     // Previously selected group(s) will not be unselected.
@@ -109,6 +100,60 @@ class Gridz {
     }
 
     return options
+  }
+
+  /**
+   * jqgrid default sort is a bit goofy on multiple.
+   * sortname will look like 'name asc, num' with the order for num in the order field. so last col will have its
+   * sort in the order prop and the others will be seperated by space in the sortname.
+   * on multiple sorts if id is in the list then other columns wont have any effect
+   * so we parse it out and remove it
+   *
+   * @param {*} sortname the sort name with the direction seperated by space when its multiSort
+   * @param {*} x the column index that was last clicked
+   * @param {*} order asc|desc for the last column sorted.
+   */
+  onSortCol = (sortname, x, order) => {
+    //dont do anything if its off
+    if(!sortname) {
+      this.setGridParam({ sortMap:{} }, true)
+      return
+    }
+    // console.log("grid sortname", sortname)
+    // console.log("grid sort x", x)
+    // console.log("grid order", order)
+    //no put it alltogether so we can split and make it a map form
+    let sortJoined = sortname + ` ${order}`
+    const sortMap = {} //will get populated at the end
+    const sortArray = sortJoined.split(', ')
+    const hasId = sortArray.find(el => el.startsWith('id'))
+    console.log("sortArray", sortArray)
+
+    // see above notes, we remove the id sort so its doesn't cause problems when its part of multi
+    if (this.options.multiSort && sortArray.length > 1 && hasId) {
+      //will get populated without the id
+      const newSortArray = []
+      sortJoined.split(',').forEach(sortCol => {
+        if(!sortCol.includes('id')) newSortArray.push(sortCol.trim())
+      })
+      sortArray = newSortArray
+    }
+
+    sortArray.forEach(sortCol => {
+      let sortArray = sortCol.split(' ')
+      sortMap[sortArray[0]] = sortArray[1]
+    })
+
+    //now clean up the defaults that jqGrid expects using the order param
+    //remove last item and put order part back in sortorder
+    let lastItem = sortArray.pop().split(' ')
+    //put it back on with the order
+    sortArray.push(lastItem[0].trim())
+    let sortorder = lastItem[1].trim()
+    //id back on to the end of it if its there
+    sortname = sortArray.join(', ')
+    this.setGridParam({ sortname, sortorder, sortMap })
+
   }
 
   /*
@@ -132,7 +177,7 @@ class Gridz {
     } = this.gridEl[0]
 
     // get id of the previous selected row
-    const startId = this.gridEl.jqGrid('getGridParam', 'selrow')
+    const startId = this.getGridParam('selrow')
     const isCheckBox = $(e.target).hasClass('cbox')
 
     if (!e.ctrlKey && !e.shiftKey && !e.metaKey && !isCheckBox) {
@@ -175,7 +220,7 @@ class Gridz {
 
   memoizeSelectedRows() {
     const selectedRows = this.selectedRowIds
-    return _.each(this.gridEl.jqGrid('getGridParam', 'selarrrow'), function(id) {
+    return _.each(this.getGridParam('selarrrow'), function(id) {
       if (!(Array.from(selectedRows).includes(id))) { return selectedRows.push(id) }
     })
   }
@@ -185,12 +230,12 @@ class Gridz {
   }
 
   onSelectRow(rowid, isChecked, e) {
-    if (this.gridEl.jqGrid('getGridParam', 'agRowNumber')) {
+    if (this.getGridParam('agRowNumber')) {
     // Add number of selected row in grid(nmber for all pages)
       const ids = this.gridEl.getDataIDs()
       let text = ''
       // check if only one row is selected
-      if (this.gridEl.jqGrid('getGridParam', 'selarrrow').length === 1) {
+      if (this.getGridParam('selarrrow').length === 1) {
         // add to the grid footer number of the row in total for all pages
         const rowNum = ((this.gridEl.jqGrid('getGridParam', 'page') - 1) * this.gridEl.jqGrid('getGridParam', 'rowNum')) + ids.indexOf(rowid) + 1
         text = `Current row # ${rowNum} | `
@@ -213,7 +258,7 @@ class Gridz {
         grid.jqGrid('resetSelection')
         grid.jqGrid('setSelection', rowid)
         const selectedRows = this.selectedRowIds
-        const selected = grid.jqGrid('getGridParam', 'selarrrow')
+        const selected = this.getGridParam('selarrrow')
         _.each(selectedRows, function(id) {
           if (!(Array.from(selected).includes(id))) { return grid.jqGrid('setSelection', id) }
         })

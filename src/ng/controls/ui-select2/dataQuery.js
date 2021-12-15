@@ -1,10 +1,17 @@
 import _ from 'lodash'
 
 export function setupData(opts, dataStoreApi) {
-  if (opts.dataApiKey) {
-    const dataApiKey = opts.dataApiKey
-    const dataApiParams = opts.dataApiParams
-    opts.data = { results: () => dataStoreApi[dataApiKey].picklist(dataApiParams) }
+  if (opts.dataApiKey){
+    //if minimumInputLength is not set then load the whole dataset
+    if(!opts.minimumInputLength) {
+      const dataApiKey = opts.dataApiKey
+      const dataApiParams = opts.dataApiParams
+      opts.data = { results: () => dataStoreApi[dataApiKey].picklist({q: dataApiParams}) }
+    }
+    else {
+      opts.data = {}
+      opts.query = dataMinCharsQuery(opts, dataStoreApi)
+    }
   }
   // setup defaults for data
   if (opts.data) {
@@ -15,37 +22,34 @@ export function setupData(opts, dataStoreApi) {
       // console.log('results', results)
       opts.data = { results: results }
     }
-    if (opts.displayFields) {
-      opts.data.text = opts.displayFields[0]
+    if(!opts.minimumInputLength){
+      // assign special query that can handle promises and the lazy data loading
+      opts.query = dataQuery(opts)
     }
-    // if data.text is not set then default it to name (select2 defaults it to 'text')
-    if (opts.data.text === undefined) {
-      opts.data.text = 'name'
-    }
-
-    // assign special query that can handle promises
-    opts.query = dataQuery(opts)
   }
+
 }
 // copied in from select2 source and modified so it works when data.results is a Promise
 export function dataQuery(opts) {
+  // console.log(`***** dataQuery for ${opts.wtf}`, opts)
   let data = opts.data // data elements
   let getText // function used to retrieve the text portion of a data item that is matched against the search
+  const displayFields = opts.displayFields
 
-  const textField = data.text
-  if (!$.isFunction(textField)) {
-    if (Array.isArray(opts.displayFields)) {
-      getText = (item) => opts.displayFields.map(text => item[text]).join(' ')
-    } else {
-      getText = (item) => item[textField]
-    }
+  if (displayFields.length > 1 ) {
+      getText = (item) => displayFields.map(text => item[text]).join(' ')
+  } else {
+      getText = (item) => opts.text(item)
   }
 
-  if (!$.isFunction(data.results)) {
+
+  // make results a function if its not
+  if (!$.isFunction(data?.results)) {
     const dres = data.results
     data.results = () => dres
   }
 
+  // make data a function if its not
   if ($.isFunction(data) === false) {
     const tmp = data
     data = function() { return tmp }
@@ -53,14 +57,13 @@ export function dataQuery(opts) {
 
   // cache the data.results
   // let dataResults
-
   return function(query) {
+
     var t = query.term; var filtered = { results: [] }; var process
     opts.dataResults = opts.dataResults || data().results()
     if (t === '') {
       Promise.resolve(opts.dataResults).then(res => {
         let dta = res
-        console.log('dta', dta)
         // if its an object then assume it pager object with data key
         if (_.isPlainObject(res)) dta = res.data
         // add the selectAll option if enabled
@@ -74,10 +77,6 @@ export function dataQuery(opts) {
       var group //, attr
       if (datum.children) {
         group = {}
-        // does searching on any attributes too
-        // for (attr in datum) {
-        //   if (datum.hasOwnProperty(attr)) group[attr] = datum[attr]
-        // }
         group.children = []
         datum.children.forEach(childDatum => process(childDatum, group.children))
         if (group.children.length || query.matcher(t, getText(group), datum)) {
@@ -89,12 +88,16 @@ export function dataQuery(opts) {
         }
       }
     }
+
     Promise.resolve(opts.dataResults).then(res => {
       let dta = res
+      if(!res) console.log("dataQuery empty promise resolved ")
+      // console.log("**** resolved dataQuery options", opts)
       // if its an object then assume it pager object with data key
       if (_.isPlainObject(res)) dta = res.data
-
-      dta.forEach(datum => process(datum, filtered.results))
+      if(dta){
+        dta.forEach(datum => process(datum, filtered.results))
+      }
       query.callback(filtered)
     })
   }
@@ -119,4 +122,34 @@ export function convertSelect2Data(strArray, textFieldKey = 'name') {
     })
   }
   return dataArr || strArray
+}
+
+// if minimumInputLength > 0 then query api as they type
+export function dataMinCharsQuery(opts, dataStoreApi) {
+  // console.log(`***** dataMinCharsQuery for ${opts.wtf}`, opts)
+  let timeout
+  let quietMillis = opts.quietMillis || 500
+
+  opts.initSelection = angular.noop
+  // cache the data.results
+  // let dataResults
+  return function(query) {
+    window.clearTimeout(timeout)
+    // quietMillis to wait until done typing,
+    timeout = window.setTimeout(function() {
+      let q = query.term
+      const dataApiKey = opts.dataApiKey
+      let picklistQuery = () => dataStoreApi[dataApiKey].picklist({q: q })
+      let dataResults = picklistQuery()
+
+      Promise.resolve(dataResults).then(response => {
+        var filtered = { more:false, results: [] }
+        // if its an object then assume it pager object with data key
+        if (_.isPlainObject(response) && response.data){
+          response.data.forEach(datum => filtered.results.push(datum))
+        }
+        query.callback(filtered)
+      })
+    }, quietMillis)
+  }
 }
