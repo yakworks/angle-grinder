@@ -1,3 +1,8 @@
+### v4.0.39
+
+[Full Changelog](https://github.com/yakworks/angle-grinder/compare/v4.0.38...v4.0.39)
+- Dev (#642) [link](https://github.com/yakworks/angle-grinder/commit/86dd8a83f6b8d2fa7800af55f68167369c98ff94)
+
 ### v4.0.38
 
 [Full Changelog](https://github.com/yakworks/angle-grinder/compare/v4.0.37...v4.0.38)
