@@ -5,6 +5,8 @@
 // import _ from 'lodash'
 
 class AppState {
+  // api url
+  apiUrl
   // the ui-router state instance
   $state
 
@@ -36,14 +38,19 @@ class AppState {
     open: true
   }
 
-  layout = {}
-
   static factory() {
     return new AppState()
   }
 
   constructor() {
     this._debug = false
+  }
+
+  /**
+   * go to to the page key
+   */
+  go(pageKey){
+    this.$state.go(pageKey)
   }
 
   /**
@@ -76,6 +83,7 @@ class AppState {
     };
     return check
   })()
+
 }
 
 const _instance = AppState.factory()
