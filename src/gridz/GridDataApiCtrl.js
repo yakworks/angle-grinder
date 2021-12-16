@@ -79,6 +79,7 @@ export default class GridDataApiCtrl {
     this.setupFormatters(this, $jqGrid, opts)
     this.formatters && this.setupCustomFormatters(this, this.formatters, opts)
 
+    console.log("pageViewStore.subscribe")
     // adds the listener to the store
     const unsubscribe = this.dataApi.pageViewStore.subscribe(data => {
       // console.log("dataApi.currentPage")
@@ -149,8 +150,10 @@ export default class GridDataApiCtrl {
 
   // Populates the grid with the given data.
   addJSONData(data) {
-    if(!_.isEmpty(data)){
-      this.jqGridEl.get(0).addJSONData(data)
+    //FIXME HACK not sure why we need to do this
+    const jqgrid = this.jqGridEl.get(0)
+    if(jqgrid.addJSONData && !_.isEmpty(data)){
+      jqgrid.addJSONData(data)
     }
     // fire jquery event
     return this.jqGridEl.trigger('gridz:loadComplete', [data])
