@@ -28,6 +28,10 @@ export const crudQueryStores = (stores = {}) => {
       return itemStore
     },
 
+    setItem(currentItem){
+      itemStore.set(currentItem)
+    }
+
     /**
      * The data cache. will be the entire data when not rest.
      * not sync as it should already be loaded before this is called

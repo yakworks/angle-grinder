@@ -14,6 +14,7 @@ export { default as CardContent } from 'framework7-svelte/esm/svelte/card-conten
 export { default as CardFooter } from 'framework7-svelte/esm/svelte/card-footer.svelte';
 export { default as CardHeader } from 'framework7-svelte/esm/svelte/card-header.svelte';
 export { default as Card } from 'framework7-svelte/esm/svelte/card.svelte';
+export { default as Chip } from 'framework7-svelte/esm/svelte/chip.svelte';
 
 export { default as ListButton } from 'framework7-svelte/esm/svelte/list-button.svelte';
 export { default as ListGroup } from 'framework7-svelte/esm/svelte/list-group.svelte';
