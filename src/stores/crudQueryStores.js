@@ -30,7 +30,7 @@ export const crudQueryStores = (stores = {}) => {
 
     setItem(currentItem){
       itemStore.set(currentItem)
-    }
+    },
 
     /**
      * The data cache. will be the entire data when not rest.
