@@ -34,9 +34,12 @@ export default class ListDataApiCtrl {
     if(!cfg){
       let apiCfg = await appConfigApi.getConfig(this.apiKey)
       cfg = _.cloneDeep(apiCfg)
+      console.log("ListDataApiCtrl called appConfigApi.getConfig", apiCfg)
     }
+
     console.log("ListDataApiCtrl datapi", this.dataApi)
-    const gopts = cfg.gridOptions
+    const gopts = cfg.gridOptions || {}
+    console.log("ListDataApiCtrl gopts", gopts)
     if (this.eventHandlers) {
       gopts.eventHandlers = this.eventHandlers
     }
