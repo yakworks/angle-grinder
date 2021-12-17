@@ -1,12 +1,17 @@
 import mix from '../../utils/mix-it-with';
 
-export const restPicklist = ({ api }) => ds => {
+/**
+ *
+ * @param {*} param0 pass in the api to use
+ * @returns the function returned take the main object that will get merged into
+ */
+export const restPicklist = ({ api }) => obj => {
 
-  return mix(ds).with({
+  return mix(obj).with({
 
     async picklist(params) {
-      let cleanParams = ds.setupSearchParams(params)
-      const o = { op: 'picklist', searchParams: cleanParams }
+      let cleanParams = obj.setupSearchParams(params)
+      const o = { path: 'picklist', searchParams: cleanParams }
       const data = await api.get(o)
       return data
     }

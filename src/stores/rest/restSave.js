@@ -13,18 +13,18 @@ export const restSave = ({ api }) => ds => {
 
     async update(item) {
       const id = item[ident]
-      const newItem = await api.put({ op: id, json: item })
+      const newItem = await api.put({ path: id, json: item })
       return newItem
     },
 
     /** Returns a promise to remove (DELETE) an item. */
     async remove(id) {
-      await api.delete({ op: id })
+      await api.delete({ path: id })
       return true
     },
 
     async bulkUpdate(muItem) {
-      const results = await api.post({op: 'bulkUpdate', json: muItem })
+      const results = await api.post({path: 'bulkUpdate', json: muItem })
       return results
     }
 

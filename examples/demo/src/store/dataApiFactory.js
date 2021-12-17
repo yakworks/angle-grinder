@@ -2,12 +2,8 @@
 import RestDataService from 'angle-grinder/src/stores/rest/RestDataService'
 import ky from 'angle-grinder/src/stores/ky'
 
-// function makeDataApi(endpoint){
-//   return new RestDataApi(`api/${endpoint}`)
-// }
-
-function makeDataService(endpoint){
-  return RestDataService({ endpoint })
+function makeDataService(key){
+  return RestDataService({ key })
 }
 
 const dataApiFactory = {

@@ -1,0 +1,10 @@
+<ag-button ng-if="tbBtnCtrl.isButton"
+  icon="{{tbBtnCtrl.opts.icon}}" uib-tooltip="{{tbBtnCtrl.opts.tooltip}}" color="{{tbBtnCtrl.opts.color}}"
+  ng-click="tbBtnCtrl.tbCtrl.fireButtonClick(key, tbBtnCtrl.opts, $event)" is-loading="tbBtnCtrl.isLoading">
+  {{tbBtnCtrl.opts.display}}
+</ag-button>
+<ag-dropdown ng-if="!tbBtnCtrl.isButton"
+  menu-items="tbBtnCtrl.opts.menuItems"
+  color="{{tbBtnCtrl.opts.color}}">
+  {{tbBtnCtrl.opts.display}}
+</ag-dropdown>

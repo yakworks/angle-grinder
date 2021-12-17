@@ -1,4 +1,10 @@
 import {default as KY}  from 'ky'
+import { ensurePrefix } from '../utils/ensure'
+/**
+ * @typedef {import('ky/distribution/types/ky').KyInstance} KyInstance
+ * @typedef {import('ky').ResponsePromise} ResponsePromise
+ */
+
 
 // subscriber's handlers, allows to add subs without needing to create a new ky
 let subs = {
@@ -20,7 +26,12 @@ const defaults = {
 
 export const KyFactory = {
   defaults,
-  //the current instance
+
+
+  /**
+   * the current ky instance
+   * @type {KyInstance}
+   */
   get ky(){ return this._KyInstance},
 
   /**
@@ -28,7 +39,7 @@ export const KyFactory = {
    * shouldn't need to do this more than once really, and then KySupport.ky can be used
    *
    * @param {Object} opts extra options
-   * @returns the instance
+   * @returns {KyInstance} the instance
    */
   build(opts){
     this._KyInstance = KY.create({...this.defaults, ...opts})
@@ -64,31 +75,35 @@ KyFactory.build()
 export default KyFactory.ky;
 
 /**
- * object uses ky to make fetch rest calls tied to a specific enppoint.
- * If ky baseUrl is http://foo.9ci.io/api and endpoint passed in is bar then
- * all the verb calls will be against http://foo.9ci.io/api/bar.
- * If the op ("rpc") property is passed in with options then it will be appended too.
+ * object uses ky to make fetch rest calls tied to a specific endpoint.
+ * If ky baseUrl is http://foo.9ci.io/api and key passed in is go/bar then
+ * all the verb calls will be against http://foo.9ci.io/api/go/bar.
+ * The 'path' is an action param, a term for the controller method or id on the server. AKA "rpc" or ID.
+ *  - the path is just appended to the base endpoint url.
+ *  - also where we put the id. so /api/go/bar/{id} is /api/go/bar/{path}
  *
- * @param {string} endpoint appends to the baseUrl in ky.
- * @returns
+ * @param {string} key uri to be appended to the baseUrl in ky.
+ * @returns the kyFetch object helper
  */
-export const kyFetch = endpoint => {
+export const kyFetch = key => {
 
   /**
-   * pass method into args. can also pass op and it will be appended to endpoint
+   * pass method into args. can also pass 'path' and it will be appended to key.
+   * path is where to put the {id} path param. so to get /api/customer/1, pass 1 into the path
    *
-   * @param {{ method: string, op: string }} param0
-   * @returns {Promise<object>} the json result
+   * @param {{ method: string, path: string }} param0 the method is the rest verb, path is the postfix to append
+   * @returns {ResponsePromise} the json result
    */
-  async function kyFetch({method = 'get', op = '', ...opts}){
-    if(op && !(`${op}`.startsWith('/')) ) op = `/${op}`
-    return KyFactory.ky(`${endpoint}${op}`, {...opts, method})
+  function kyFetch({method = 'get', path = '', ...opts}){
+    path = ensurePrefix(path, '/')
+    return KyFactory.ky(`${key}${path}`, {...opts, method})
   }
 
   return {
     fetch: kyFetch,
     /**
      * the ky instance
+     * @type {KyInstance}
      */
     get ky(){ return KyFactory.ky},
 
@@ -99,7 +114,7 @@ export const kyFetch = endpoint => {
 
     async getById(id, opts){
       //get is default, we dont need to pass it in
-      return kyFetch({ op:`/${id}` , ...opts}).json()
+      return kyFetch({ path: id , ...opts}).json()
     },
 
     async post(opts){

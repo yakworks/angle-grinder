@@ -8,12 +8,13 @@ import { crudQueryModel } from '../crudQueryModel'
 /**
  * A common wrapper around RESTful resource
  */
-export const RestDataService = ({ endpoint, ...opts }) => {
-  let api = kyFetch(endpoint)
+export const RestDataService = ({ key, ...args }) => {
+  let api = kyFetch(key)
 
   let ds = {
-    ...opts,
-    api
+    ...args,
+    api,
+    key
   }
 
   return mix(ds).it(RestDataService).with(

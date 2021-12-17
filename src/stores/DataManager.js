@@ -12,7 +12,7 @@ import {defaultToolbarOpts} from './dataManagerDefaults'
  */
 export default class DataManager {
   /**
-   * The endpoint key. ex: ar/customer
+   * The uri key. ex: ar/customer
    */
   apiKey = ""
 

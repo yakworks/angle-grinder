@@ -41,7 +41,7 @@ const SessionDataService = (opts) => {
         console.log(`using ${storageKey} in sessionStorage`)
         // let sessionCache = sessionDs.getSessionData()
         // if(!sessionCache){
-        //   //pull it from the endpoint
+        //   //pull it from the uri key
         //   const sessionCache = await ky.get(sourceUrl).json()
         //   sessionStorage.setItem(storageKey, stringify(sessionCache))
         // }
