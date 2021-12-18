@@ -64,7 +64,7 @@ export default function buildOptions(ctrl){
       // filterToolbar: true,
       // searching: { defaultSearch: "cn" },
       onSelectRow: () => {
-        const selectedRowsData = ctrl.gridCtrl.getSelectedRows()
+        const selectedRowsData = ctrl.getGridCtrl().getSelectedRows()
         ctrl.updateFooter({
           refnum: 'Total',
           amount: selectedRowsData.reduce((sum, row) => {

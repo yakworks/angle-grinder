@@ -1,35 +1,29 @@
-// import controller from './listCtrl'
-// import template from './list.html'
-import ListDataApiCtrl from 'angle-grinder/src/ng/gridz/list-datastore/ListDataApiCtrl'
-import dataApiFactory from '../../../store/dataApiFactory'
-import _ from 'lodash'
+import dataApiFactory from '~/store/dataApiFactory'
+import makeNgListDataCtrl from '@ag/ng/gridz/list-ds/makeNgListDataCtrl'
 
-export default class ListCtrl extends ListDataApiCtrl {
-  static $inject = _.union(super.$inject, ['$state', 'selectedRow'])
-  apiKey = 'invoice'
-  searchModel= {}
-  eventHandlers = {}
+function ListCtrlFn($scope, $element, $uibModal, selectedRow) {
+  'ngInject';
 
-  // static $inject = _.union(super.$inject, ['someService'])
-  constructor(...args) {
-    super(...args)
-    this.dataApi = dataApiFactory.invoice
+  const ctrl = makeNgListDataCtrl({ $scope, $element, $uibModal })
+
+  ctrl.searchModel = {}
+
+  ctrl.$onInit = async () => {
+    ctrl.dataApi = dataApiFactory.invoice
+    await ctrl.doConfig()
+    ctrl.searchModel.customerId = selectedRow.getSelectedId()
   }
 
-  async $onInit() {
-
-    this.isConfigured = false
-    this.cfg = {}
-    await this.doConfig()
-    this.searchModel.customerId = this.selectedRow.getSelectedId()
-  }
-
-  async $doCheck(){
-    const selectedRow = this.selectedRow.getSelectedId()
-    if (selectedRow && this.searchModel.customerId !== Number(selectedRow)) {
-      this.searchModel.customerId = Number(selectedRow)
-      this?.search(this.searchModel)
+  ctrl.$doCheck = async () => {
+    const selectedRowId = selectedRow.getSelectedId()
+    if (selectedRowId && ctrl.searchModel.customerId !== Number(selectedRowId)) {
+      ctrl.searchModel.customerId = Number(selectedRowId)
+      ctrl.search(ctrl.searchModel)
     }
   }
 
+  return ctrl
 }
+ListCtrlFn.$inject = ['$scope', '$element', '$uibModal', 'selectedRow'];
+
+export default ListCtrlFn

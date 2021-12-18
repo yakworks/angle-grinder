@@ -4,13 +4,14 @@ import GridDataApiCtrl from '../../gridz/GridDataApiCtrl'
 // import Log from 'angle-grinder/src/utils/Log'
 import _ from 'lodash'
 
-angular.module(grid2Mod).directive('gridzDatastore',
+angular.module(grid2Mod).directive('gridzDs',
   function($timeout, $parse, $compile) {
     'ngInject';
     const link = function($scope, $el, attrs, gridCtrl) {
       const $gridzEl = $el.find('table.gridz')
 
-      gridCtrl.setupGrid($el, $gridzEl, gridCtrl.gridOptions)
+      // gridCtrl.setupGrid($el, $gridzEl, gridCtrl.gridOptions)
+      gridCtrl.setupGrid($el, $gridzEl)
 
       $gridzEl.on('jqGridAfterGridComplete', function() {
         // console.log("directive jqGridAfterGridComplete event")
@@ -64,13 +65,12 @@ angular.module(grid2Mod).directive('gridzDatastore',
       controller: GridDataApiCtrl,
       controllerAs: 'gridCtrl',
       bindToController: {
-        toolbarOptions: '<',
         gridId: '@',
-        gridOptions: '<'
+        ctx: '<'
       },
       template: `\
       <div class="gridz-wrapper">
-        <gridz-toolbar options="gridCtrl.toolbarOptions" grid-ctrl="gridCtrl"></gridz-toolbar>
+        <gridz-toolbar options="gridCtrl.ctx.toolbarOptions" grid-ctrl="gridCtrl"></gridz-toolbar>
         <table class="gridz" ng-class="{'is-dense': gridCtrl.isDense}"></table>
         <div class="gridz-pager"></div>
       </div>`,

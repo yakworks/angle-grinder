@@ -75,7 +75,7 @@ export default class ListDataApiCtrl {
     gopts.initSearch = this.initSearch || {}
   }
 
-  get gridCtrl() { return this.$element.find('gridz-datastore').controller('gridz-datastore') }
+  get gridCtrl() { return this.$element.find('gridz-ds').controller('gridz-ds') }
   get editModalCtrl() { return EditModalCtrl }
   get bulkUpdateModalCtrl() { return BulkUpdateModalCtrl }
   // get searchCtrl() { return SearchCtrl }

@@ -1,47 +1,55 @@
 // import controller from './listCtrl'
 import template from './list.html'
-import ListDataApiCtrl from 'angle-grinder/src/ng/gridz/list-datastore/ListDataApiCtrl'
 import buildOptions from './listCtrlOptions'
-import sessionStores from '../../store/sessionServices'
-import Log from 'angle-grinder/src/utils/Log'
-import Swal from 'angle-grinder/src/tools/swal'
+import sessionStores from '~/store/sessionServices'
+import Swal from '@ag/tools/swal'
 import _ from 'lodash'
+import makeNgListDataCtrl from '@ag/ng/gridz/list-ds/makeNgListDataCtrl'
 
-class ListCtrl extends ListDataApiCtrl {
-  isLoaded = false
+const searchTemplate = require('./templates/searchForm.html')
+const editTemplate = require('./templates/editDialog.html')
+const bulkUpdateTemplate = require('./templates/bulkUpdateForm.html')
 
-  editTemplate = require('./templates/editDialog.html')
-  bulkUpdateTemplate = require('./templates/bulkUpdateForm.html')
+function ListCtrlFn($scope, $element, $uibModal) {
+  'ngInject';
 
-  constructor(...args) {
-    super(...args)
-    this.dataApi = sessionStores.invoice
+  const ctrl = makeNgListDataCtrl({
+    $scope, $element, $uibModal,
+    bulkUpdateTemplate, editTemplate
+  })
+
+  ctrl.$onInit = async () => {
+    ctrl.dataApi = sessionStores.invoice
+    ctrl.ctx = buildOptions(ctrl)
+    await ctrl.doConfig(ctrl.ctx)
+
+    ctrl.state = ctrl.ctx.state
   }
 
-  async $onInit() {
-    this.cfg = buildOptions(this)
-    await this.doConfig(this.cfg)
-  }
-
-  displaySelectedRowsData() {
+  ctrl.displaySelectedRowsData = () => {
     console.log('displaySelectedRowsData')
-    this.selectedRowsData = this.gridCtrl.getSelectedRows()
+    ctrl.selectedRowsData = ctrl.getGridCtrl().getSelectedRows()
   }
 
-  import() {
+  ctrl.import = () => {
     console.log('import')
     Swal.fire('import something')
   }
 
+  return ctrl
 }
+ListCtrlFn.$inject = ['$scope', '$element', '$uibModal'];
 
 export default angular
   .module('ag.demo.basicGridDemo', [])
   .component('basicGridDemo', {
+    bindings: {
+      dataApi: '<',
+    },
     template: template,
-    controller: ListCtrl
+    controller: ListCtrlFn
   })
   .component('basicSearchForm', {
-    template: require('./templates/searchForm.html')
+    template: searchTemplate
   })
   .name

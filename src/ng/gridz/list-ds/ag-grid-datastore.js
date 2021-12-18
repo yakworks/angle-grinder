@@ -8,10 +8,9 @@ const template = `
   </div>
   <ag-grid-list-search ng-if="$ctrl.state.isConfigured" list-ctrl="$ctrl" ng-show="$ctrl.state.showSearchForm">
   </ag-grid-list-search>
-  <gridz-datastore ng-if="$ctrl.state.isConfigured" grid-options="$ctrl.ctx.gridOptions"
-        toolbar-options="$ctrl.ctx.gridOptions.toolbarOptions"
+  <gridz-ds ng-if="$ctrl.state.isConfigured" ctx="$ctrl.ctx"
         grid-id="{{$ctrl.gridId()}}">
-  </gridz-datastore>
+  </gridz-ds>
 </div>
 `
 function ListCtrlFn($scope, $element, $uibModal) {

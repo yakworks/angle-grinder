@@ -7,7 +7,7 @@ import Swal from '../tools/swal'
 
 const not_implemented = "not implemented"
 
-const makeListDataCtrl = (ctrl) => {
+const makeListDataCtrl = (opts) => {
 
   let defaultToolbarOpts = {
     selectedButtons: {
@@ -25,7 +25,7 @@ const makeListDataCtrl = (ctrl) => {
     showSearchForm: false
   }
 
-  let ext = {
+  let ctrl = {
 
     async doConfig(ctx = {}) {
       if(!ctrl.apiKey) ctrl.apiKey = ctrl.dataApi.key
@@ -37,6 +37,9 @@ const makeListDataCtrl = (ctrl) => {
         console.log("makeListDataCtrl.doConfig appConfigApi", ctx)
       }
       ctx.state = state
+      //short cut
+      ctrl.state = state
+
       const gopts = ctx.gridOptions || {}
       if (ctrl.eventHandlers) {
         gopts.eventHandlers = ctrl.eventHandlers
@@ -72,11 +75,12 @@ const makeListDataCtrl = (ctrl) => {
       // _.defaults(ctrl.ctx, ctx)
       ctrl.ctx = ctx
 
-      ctx.state.isConfigured = true
+      ctrl.state.isConfigured = true
       console.log("End makeListDataCtrl.doConfig ctx", ctrl.ctx)
       return ctx
     },
 
+    get gridCtrl(){ return ctrl.ctx.gridCtrl },
     getGridOptions() { return ctrl.ctx.gridOptions },
 
     //Need to implement
@@ -239,7 +243,7 @@ const makeListDataCtrl = (ctrl) => {
 
   }
 
-  return Object.assign(ctrl, ext)
+  return Object.assign(ctrl, opts)
 }
 
 export default makeListDataCtrl

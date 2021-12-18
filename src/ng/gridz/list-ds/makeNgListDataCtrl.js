@@ -29,7 +29,7 @@ const makeNgListDataCtrl = (ctrl) => {
 
     //hack to show gridCtrl as its not setup yet when this is running.
     getGridCtrl() {
-      return ctrl.$element.find('gridz-datastore').controller('gridz-datastore')
+      return ctrl.$element.find('gridz-ds').controller('gridz-ds')
     },
 
     getEditModalCtrl() { return EditModalCtrl },

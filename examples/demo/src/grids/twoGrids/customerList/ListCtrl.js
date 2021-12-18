@@ -1,26 +1,27 @@
-import ListDataApiCtrl from 'angle-grinder/src/ng/gridz/list-datastore/ListDataApiCtrl'
-import dataApiFactory from '../../../store/dataApiFactory'
-import _ from 'lodash'
+import dataApiFactory from '~/store/dataApiFactory'
+import makeNgListDataCtrl from '@ag/ng/gridz/list-ds/makeNgListDataCtrl'
+import {merge} from '@ag/utils/dash'
 
-export default class ListCtrl extends ListDataApiCtrl {
-  static $inject = _.union(super.$inject, ['$state', 'selectedRow'])
-  apiKey = 'customer'
-  eventHandlers = {
-    onSelect: (event, id) => {
-      this.selectedRow.setSelectedIds(this.gridCtrl?.getSelectedRowIds())
+function ListCtrlFn($scope, $element, $uibModal, selectedRow) {
+  'ngInject';
+
+  const ctrl = makeNgListDataCtrl({ $scope, $element, $uibModal })
+  ctrl.searchModel = {}
+
+  ctrl.$onInit = async () => {
+    ctrl.eventHandlers = {
+      onSelect: (event, id) => {
+        selectedRow.setSelectedIds(ctrl.gridCtrl.getSelectedRowIds())
+      }
     }
+
+    ctrl.dataApi = dataApiFactory.customer
+    await ctrl.doConfig()
+    ctrl.ctx = merge(ctrl.ctx, { gridOptions: { rowNum: 5, selectFirstRow: true, multiboxonly: true } })
   }
 
-  constructor(...args) {
-    super(...args)
-    this.dataApi = dataApiFactory.customer
-  }
-
-  async $onInit() {
-    this.isConfigured = false
-    this.cfg = {}
-    await this.doConfig()
-    this.cfg = _.merge(this.cfg, { gridOptions: { rowNum: 5, selectFirstRow: true, multiboxonly: true } })
-
-  }
+  return ctrl
 }
+ListCtrlFn.$inject = ['$scope', '$element', '$uibModal', 'selectedRow'];
+
+export default ListCtrlFn

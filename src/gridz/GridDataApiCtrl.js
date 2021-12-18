@@ -27,9 +27,12 @@ export default class GridDataApiCtrl {
     }
   }
 
-  setupGrid(gridWrapper, jqGridElement, gridOptions) {
+  setupGrid(gridWrapper, jqGridElement) {
     // this.ctx = ctx
-    const opts = gridOptions
+    const opts = this.ctx.gridOptions
+    //assign itself so parents can see it
+    this.ctx.gridCtrl = this
+
     opts.loadui = 'block'
     this.gridOptions = opts
 
