@@ -13,7 +13,8 @@ export default class GridDataApiCtrl {
   highlightClass = 'ui-state-highlight'
   systemColumns = ['cb', '-row_action_col']
   isDense = false
-  showSearchForm = false
+  // injected
+  ctx
 
   defaultCtxMenuOptions = {
     edit: {
@@ -27,6 +28,7 @@ export default class GridDataApiCtrl {
   }
 
   setupGrid(gridWrapper, jqGridElement, gridOptions) {
+    // this.ctx = ctx
     const opts = gridOptions
     opts.loadui = 'block'
     this.gridOptions = opts
@@ -40,9 +42,8 @@ export default class GridDataApiCtrl {
     }
     $jqGrid.attr('id', this.gridId)
 
-
     let optsToMerge = _.pick(opts, [
-      'showSearchForm', 'dataApi', 'initSearch', 'restrictSearch', 'contextMenuClick'
+      'dataApi', 'initSearch', 'restrictSearch', 'contextMenuClick'
     ])
     _.mergeWith(this, optsToMerge, (obj, optVal) => {
       //dont merge val if its null

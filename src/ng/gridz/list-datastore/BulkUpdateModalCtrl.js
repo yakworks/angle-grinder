@@ -1,12 +1,12 @@
 
 export default class BulkUpdateModalCtrl {
   /* @ngInject */
-  constructor($uibModalInstance, $scope, dataApi, vm, cfg, selectedIds) {
+  constructor($uibModalInstance, $scope, dataApi, vm, ctx, selectedIds) {
     this.modal = $uibModalInstance
     this.$scope = $scope
     this.dataApi = dataApi
     this.vm = vm
-    this.cfg = cfg
+    this.ctx = ctx
     this.selectedIds = selectedIds
   }
 
