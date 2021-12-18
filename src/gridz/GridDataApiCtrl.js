@@ -32,6 +32,8 @@ export default class GridDataApiCtrl {
     const opts = this.ctx.gridOptions
     //assign itself so parents can see it
     this.ctx.gridCtrl = this
+    // shortcut shared state
+    this.state = this.ctx.state
 
     opts.loadui = 'block'
     this.gridOptions = opts

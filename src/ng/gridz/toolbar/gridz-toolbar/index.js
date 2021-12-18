@@ -25,6 +25,8 @@ class Controller {
     showQuickSearch: true
   }
   isLoading = false
+  //injected
+  gridCtrl
 
   /* @ngInject */
   constructor($element, $compile, $scope) {
@@ -49,6 +51,11 @@ class Controller {
       this.$compile(rightHtml)(scope)
     }
     this.setupSearchInput()
+  }
+
+  toggleSearchForm() {
+    // console.log("toggleSearchForm ", this.gridCtrl.state)
+    this.gridCtrl.state.showSearchForm = !this.gridCtrl.state.showSearchForm
   }
 
   setupSearchInput() {
