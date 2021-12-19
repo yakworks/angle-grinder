@@ -1,10 +1,7 @@
 
 <script>
-  import { JqGrid } from 'angle-grinder/svelte/index'
+  import { Gridz, JqGrid } from 'angle-grinder/svelte/index'
   import sessionStores from '../../../store/sessionServices'
-
-  export let foo = 42
-  export let dataApi = {}
 
   let gridOptions = {
     colModel: [
@@ -24,10 +21,10 @@
   }
 
   let ctx = {gridOptions}
+  //local, not export so not exposed
+  let dataApi = sessionStores.invoice
 
 </script>
 
-<p>dataApi is {dataApi.key}</p>
-<p>foo is {foo}</p>
-
-<JqGrid ctx={ctx} />
+<Gridz {dataApi} {ctx} />
+<!-- <JqGrid {ctx}/> -->

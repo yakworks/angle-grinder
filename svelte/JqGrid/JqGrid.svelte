@@ -28,20 +28,9 @@
   )
 
   function init(node) {
-    gridCtrl.ctx = ctx
-    el = node
-    let gridWrapper = jq(node)
-    const gridEl = gridWrapper.find('table.gridz')
-
-    gridCtrl.setupGrid(gridWrapper, gridEl)
-    gridCtrl.initGridz()
-    state.isConfigured = true
+    gridCtrl.setupAndInit(node, ctx)
+    state = gridCtrl.ctx.state
   }
-
-  // onMount(async () => {
-	// 	opts = options
-  //   gridCtrl.setupGrid($el, $el)
-	// });
 
   onDestroy(() => {
     gridCtrl.destroy()

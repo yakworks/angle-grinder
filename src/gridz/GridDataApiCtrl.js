@@ -27,7 +27,18 @@ export default class GridDataApiCtrl {
     }
   }
 
+  setupAndInit(wrapperNode, context) {
+    this.ctx = context
+    const gridWrapper = $(wrapperNode)
+    const gridEl = gridWrapper.find('table.gridz')
+    this.setupGrid(gridWrapper, gridEl)
+    this.initGridz()
+
+    return this.ctx
+  }
+
   setupGrid(gridWrapper, jqGridElement) {
+
     // this.ctx = ctx
     const opts = this.ctx.gridOptions
     //assign itself so parents can see it
@@ -91,6 +102,7 @@ export default class GridDataApiCtrl {
       this.addJSONData(data)
     });
     this.unsubs.push(unsubscribe)
+
   }
 
   //initialize the grid the jquery way
@@ -765,7 +777,7 @@ export default class GridDataApiCtrl {
     this.unsubs.forEach(fn => {
       fn()
     })
-    this.jqGridEl.jqGrid('GridDestroy')
+    this.jqGridEl?.jqGrid('GridDestroy')
   }
 
 }
