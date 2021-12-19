@@ -10,7 +10,7 @@
   export let letters = ''
   export let charCount = 2
   export let imgSrc = ''
-  export let imgName
+  export let imgName = ''
   export let square = false
   export let imgClass = ''
   export let dot = false

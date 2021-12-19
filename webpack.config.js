@@ -191,6 +191,9 @@ module.exports = function(env, argv) {
     },
     resolve: {
       alias: {
+        //for svelte since babel doesn't process
+        '@ag-svelte': path.resolve('./svelte/'),
+        '@ag': path.resolve('./src/'),
         'angle-grinder': path.resolve('./'),
         svelte: path.resolve('node_modules', 'svelte'),
       },

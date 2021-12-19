@@ -81,6 +81,7 @@ const makeListDataCtrl = (opts) => {
     },
 
     get gridCtrl(){ return ctrl.ctx.gridCtrl },
+
     getGridOptions() { return ctrl.ctx.gridOptions },
 
     //Need to implement

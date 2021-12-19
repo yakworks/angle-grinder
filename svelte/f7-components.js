@@ -6,6 +6,7 @@ export { default as Block } from 'framework7-svelte/esm/svelte/block.svelte';
 export { default as BlockHeader } from 'framework7-svelte/esm/svelte/block-header.svelte';
 export { default as BlockFooter } from 'framework7-svelte/esm/svelte/block-footer.svelte';
 export { default as BlockTitle } from 'framework7-svelte/esm/svelte/block-title.svelte';
+// export { default as F7Button } from 'framework7-svelte/esm/svelte/button.svelte';
 
 export { default as Icon } from 'framework7-svelte/esm/svelte/icon.svelte';
 export { default as Link } from 'framework7-svelte/esm/svelte/link.svelte';
@@ -24,3 +25,15 @@ export { default as ListItemCell } from 'framework7-svelte/esm/svelte/list-item-
 export { default as ListItemRow } from 'framework7-svelte/esm/svelte/list-item-row.svelte';
 export { default as ListItem } from 'framework7-svelte/esm/svelte/list-item.svelte';
 export { default as List } from 'framework7-svelte/esm/svelte/list.svelte';
+
+export { default as Popover } from 'framework7-svelte/esm/svelte/popover.svelte';
+export { default as Toggle } from 'framework7-svelte/esm/svelte/toggle.svelte';
+export { default as Toolbar } from 'framework7-svelte/esm/svelte/toolbar.svelte';
+
+export { default as Preloader } from 'framework7-svelte/esm/svelte/preloader.svelte';
+export { default as UseIcon } from 'framework7-svelte/esm/svelte/use-icon.svelte';
+
+export { default as Segmented } from 'framework7-svelte/esm/svelte/segmented.svelte';
+
+// export { default as Row } from 'framework7-svelte/esm/svelte/row.svelte';
+// export { default as Col } from 'framework7-svelte/esm/svelte/col.svelte';

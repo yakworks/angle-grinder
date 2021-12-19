@@ -1,5 +1,7 @@
 <script>
   import { Button, Columns, Col } from 'angle-grinder/svelte'
+import { Block } from 'angle-grinder/svelte/';
+import { BlockTitle } from 'angle-grinder/svelte/';
   let loading = false
 
   function toggleLoading(event){
@@ -42,4 +44,3 @@
     <pre>loading: {loading}</pre>
   </Col>
 </Columns>
-

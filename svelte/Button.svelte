@@ -1,9 +1,26 @@
 <script>
-  import { onMount } from 'svelte'
+  import { onMount, createEventDispatcher } from 'svelte'
+
   import { getIconClass } from '../src/utils/icon'
   import createRipple from "./utils/ripple.js";
-  import { classNames } from './utils';
+  // import { classNames } from './utils';
   import Icon from './Icon.svelte'
+
+  import {
+    colorClasses,
+    routerAttrs,
+    routerClasses,
+    actionsAttrs,
+    actionsClasses,
+  } from './shared/mixins';
+
+  import { classNames, extend, isStringProp, plainText, createEmitter } from './shared/utils';
+  import { restProps } from './shared/rest-props';
+  import { useTooltip } from './shared/use-tooltip';
+  // import { useRouteProps } from '../shared/use-route-props';
+  import { useIcon } from './shared/use-icon';
+
+  import { UseIcon, Preloader } from './index';
 
   /** HTML tag to use for button (either 'a' or 'button')
    * @svelte-prop {String} tag=button
@@ -40,6 +57,8 @@
   export let iconLeft = null
   export let iconRight = null
 
+  // let className = undefined;
+  // export { className as class };
   export let className = ''
 	export { className as class } //work around since class is reserved
   let classes
@@ -47,6 +66,8 @@
   let icons = {}
 
   const ripple = createRipple((text || fab || outlined) ? color : "white")
+
+  const emit = createEmitter(createEventDispatcher, $$props);
 
   onMount(() => {
     if (!['button', 'a'].includes(tag)) throw new Error(`'${tag}' cannot be used as a tag for a Bulma button`)
@@ -66,7 +87,8 @@
         'is-icon-button': icon,
         'is-fab': (fab == true || fab === 'true'),
         [`is-${color}`]: color
-      }
+      },
+      actionsClasses($$props)
     )
     // if its icon then its an an icon button with no border, set is-icon-button
     if (icon) {
@@ -81,6 +103,28 @@
     setupIconClass('left')
     setupIconClass('right')
   }
+  export let href = '#';
+  export let target = undefined;
+  export let tabLink = undefined;
+  export let tabLinkActive = false;
+
+  $: hrefComputed = href === true ? '#' : href || undefined;
+
+  $: attrs = extend(
+    {
+      href: hrefComputed,
+      target,
+      type,
+      'data-tab': (isStringProp(tabLink) && tabLink) || undefined,
+      ...restProps($$restProps),
+    },
+    routerAttrs($$props),
+    actionsAttrs($$props),
+  );
+
+  function onClick() {
+    emit('click');
+  }
 
 </script>
 
@@ -91,7 +135,8 @@
   {disabled}
   class="{classes}"
   class:is-loading={loading}
-  on:click
+  {...attrs}
+  on:click={onClick}
   >
   {#if icons.left}
   <span class="icon is-first-child">

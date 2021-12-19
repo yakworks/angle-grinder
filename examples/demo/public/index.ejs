@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en" data-ng-app="app" ng-strict-di class="aurora device-desktop">
+<html lang="en" data-ng-app="app" ng-strict-di class="device-desktop">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -19,6 +19,7 @@
     <!-- <link href="http://fonts.googleapis.com/css?family=Lato:300,400,400italic,600,700|Raleway:300,400,500,600,700|Crete+Round:400italic" rel="stylesheet" type="text/css" /> -->
     <!-- Material icons https://materialdesignicons.com/-->
     <!-- <link href="https://cdn.materialdesignicons.com/5.0.45/css/materialdesignicons.min.css" rel="stylesheet"> -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <!-- doing in manually so we can exclude the theme css and make sure it runs before theme switcher -->
     <% htmlWebpackPlugin.files.css.forEach( function(name){
@@ -36,6 +37,8 @@
     <script src="<%= htmlWebpackPlugin.options.configPath %>"></script>
 </head>
 <body ng-controller="AppCtrl as $appCtrl" [ng-strict-di="boolean"]>
+  <div id="f7app">
+    <!-- App root element -->
     <div ui-view id="app" ng-class="{
       'app-sidebar-fixed' : $appCtrl.layout.isSidebarFixed,
       'app-sidenav-fixed' : $appCtrl.layout.isSidebarFixed,
@@ -44,6 +47,6 @@
       'app-sidenav-open': appState.sidenav.open,
       'app-sidenav-closed': !appState.sidenav.open
     }"></div>
-
+  </div>
 </body>
 </html>

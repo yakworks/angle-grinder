@@ -2,19 +2,21 @@
 <script>
   import { onMount } from 'svelte'
   // import Button from 'angle-grinder/src/svelte/Button.svelte'
-  import { Avatar } from 'angle-grinder/svelte'
+  import { Avatar } from 'angle-grinder/svelte/index'
   import { people } from '../../data/sample'
   import _ from 'lodash'
 
-  let avatarData = _.cloneDeep(people).slice(0, 6)
-  avatarData[0].size = 'is-small'
+  let avatarData = _.cloneDeep(people).slice(0, 7)
+  avatarData[0].size = 'is-xs'
   avatarData[0].online = true
-  avatarData[1].size = '' // nothing is is-normal
-  avatarData[2].size = 'is-medium'
-  avatarData[3].size = 'is-large'
-  avatarData[3].online = true
-  avatarData[4].size = 'is-xl'
-  avatarData[5].size = 'is-xxl'
+  avatarData[1].size = 'is-small'
+  avatarData[1].online = true
+  avatarData[2].size = '' // nothing is is-normal
+  avatarData[3].size = 'is-medium'
+  avatarData[4].size = 'is-large'
+  avatarData[4].online = true
+  avatarData[5].size = 'is-xl'
+  avatarData[6].size = 'is-xxl'
 
 </script>
 
@@ -23,10 +25,12 @@
   <hr>
   <div class="card-content">
     <p>Avatars are rounded images used for media and personal pages. Avatar sizes can
-      be controled with css classes. Available modifier classes are <code>is-small</code>,
+      be controled with css classes. Available modifier classes are
+      <code>is-xs</code>, <code>is-small</code>,
       <code>is-medium</code>, <code>is-large</code>, <code>is-big</code> and
       <code>is-xl</code>. See code for more details about usage.
     </p>
+    <Avatar class="is-xs" imgSrc="/assets/images/photos/rand.jpg"></Avatar>
     <Avatar class="is-small" imgSrc="/assets/images/photos/beard-guy.jpg"></Avatar>
     <Avatar imgSrc="/assets/images/photos/caldwell.jpg"></Avatar>
     <Avatar class="is-medium" imgSrc="/assets/images/photos/jefferson.jpg"></Avatar>
@@ -78,21 +82,24 @@
     <Avatar class="{item.size} mr-1" name="{item.name}"></Avatar>
     {/each}
 
-    <span class="avatar">
-      <span class="avatar-img is-letter is-primary">
-        <span>JD</span>
-      </span>
-    </span>
-
   </div>
 </div>
 
 <div class="card mt-4">
-  <div class="card-title">From Data with Fallback to Letter</div>
+  <div class="card-title">From Data</div>
   <hr>
   <div class="card-content">
     {#each avatarData as item, i}
       <Avatar class="mr-1" name="{item.name}" imgName={item.avatar} dot={item.online} ></Avatar>
+    {/each}
+  </div>
+</div>
+<div class="card mt-4">
+  <div class="card-title">NO img should fall back to letter</div>
+  <hr>
+  <div class="card-content">
+    {#each avatarData as item, i}
+      <Avatar class="mr-1" name="{item.name}" imgName={item.avatarz} dot={item.online} ></Avatar>
     {/each}
   </div>
 </div>

@@ -9,6 +9,9 @@
   import ButtonIcons from './ButtonIcons.svelte'
   import buttonIconsRaw from '!raw-loader!./ButtonIcons.svelte'
 
+  import ButtonsF7 from './ButtonsF7.svelte'
+  import buttonsF7Raw from '!raw-loader!./ButtonsF7.svelte'
+
   import ExampleSnippet from '../utils/ExampleSnippet.svelte'
 </script>
 
@@ -23,3 +26,8 @@
 <ExampleSnippet code={buttonIconsRaw} >
   <ButtonIcons/>
 </ExampleSnippet>
+
+<ExampleSnippet code={buttonsF7Raw} >
+  <ButtonsF7/>
+</ExampleSnippet>
+
