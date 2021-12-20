@@ -44,7 +44,8 @@ export default class GridDataApiCtrl {
     //assign itself so parents can see it
     this.ctx.gridCtrl = this
     // shortcut shared state
-    this.state = _.merge(this.state, this.ctx.state)
+    // this.state = _.merge(this.state, this.ctx.state)
+    this.stateStore = this.ctx.stateStore
 
     opts.loadui = 'block'
     this.gridOptions = opts
@@ -80,7 +81,12 @@ export default class GridDataApiCtrl {
       }
 
       this.hasSelected = (this.getSelectedRowIds().length > 0)
-      this.state.hasSelected = this.hasSelected
+
+      this.ctx.stateStore.update( state => {
+        state.hasSelected = this.hasSelected
+        return state
+      })
+
       $jqGrid.trigger('gridz:selectedRows', [this.getSelectedRowIds()])
     }
 

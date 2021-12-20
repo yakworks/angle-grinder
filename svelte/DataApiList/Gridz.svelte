@@ -2,12 +2,13 @@
   Wraps the jqGrid and adds the toolbar and search form
  -->
 <script>
+  import { get, writable } from 'svelte/store';
   import { onMount, onDestroy, tick } from 'svelte'
   import ListToolbar from './toolbar/ListToolbar.svelte'
   import DataApiListController from './DataApiListController'
   import GridDataApiCtrl from '@ag/gridz/GridDataApiCtrl'
   import { classNames } from '../shared/utils';
-import stringify from 'angle-grinder/src/utils/stringify';
+  import stringify from 'angle-grinder/src/utils/stringify';
 
   export let ctx = undefined
   export let dataApi = undefined
@@ -23,7 +24,7 @@ import stringify from 'angle-grinder/src/utils/stringify';
 
   let classes
 
-  let state
+  let stateStore
 
   $: classes = classNames(
     className,
@@ -33,7 +34,8 @@ import stringify from 'angle-grinder/src/utils/stringify';
   onMount(async () => {
     listController = await DataApiListController({ dataApi, ctx })
     ctx = listController.ctx
-    state = listController.state
+    stateStore = listController.ctx.stateStore
+    console.log("stateStore", $stateStore)
     isConfigured = true
 	});
 
@@ -51,16 +53,16 @@ import stringify from 'angle-grinder/src/utils/stringify';
 {#if isConfigured }
 <div use:init class="gridz-wrapper">
   {#if ctx.toolbarOptions }
-  <ListToolbar {listController} options={ctx.toolbarOptions} bind:state />
+  <ListToolbar {listController} options={ctx.toolbarOptions} />
   {/if}
-  <table class={classes} class:is-dense={state.isDense}></table>
+  <table class={classes} class:is-dense={$stateStore.isDense}></table>
   <div class="gridz-pager"></div>
 </div>
-
+<pre class="mb-4">state: {stringify($stateStore, null, 2)}</pre>
 {:else}
 <p>...loading</p>
 {/if}
 
-<pre class="mb-4">state: {stringify(state, null, 2)}</pre>
+
 
 

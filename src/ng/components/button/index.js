@@ -32,8 +32,17 @@ class Controller {
     this.setupIconClass('iconRight')
   }
 
+  // setupIconClass(fldName) {
+  //   this[`${fldName}Class`] = getIconClass(this[fldName])
+  // }
   setupIconClass(fldName) {
-    this[`${fldName}Class`] = getIconClass(this[fldName])
+    if(this[fldName]) {
+      let origIcoName = this[fldName]
+      let icoClass = getIconClass(origIcoName)
+      this[`${fldName}Class`] = icoClass
+      //if it starts with material then it needs the text per google font
+      this[`${fldName}Text`] = icoClass.startsWith('material') ? origIcoName : ''
+    }
   }
 
   fireClick(event) {

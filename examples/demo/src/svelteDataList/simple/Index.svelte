@@ -1,8 +1,8 @@
 
 <script>
   import { Page, Navbar, BlockTitle, Block } from 'angle-grinder/svelte/index'
-  import SimpleJqGrid from './SimpleJqGrid.svelte'
-  import svelteRaw from '!raw-loader!./SimpleJqGrid.svelte'
+  import SimpleJqGrid from './SimpleGrid.svelte'
+  import svelteRaw from '!raw-loader!./SimpleGrid.svelte'
   import ExampleSnippet from '../../svelte/utils/ExampleSnippet.svelte'
 
   export let dataApi

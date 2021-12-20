@@ -32,6 +32,8 @@ export { default as List } from 'framework7-svelte/esm/svelte/list.svelte';
 export { default as Popover } from 'framework7-svelte/esm/svelte/popover.svelte';
 export { default as Toggle } from 'framework7-svelte/esm/svelte/toggle.svelte';
 export { default as Toolbar } from 'framework7-svelte/esm/svelte/toolbar.svelte';
+export { default as Tab } from 'framework7-svelte/esm/svelte/tab.svelte';
+export { default as Tabs } from 'framework7-svelte/esm/svelte/tabs.svelte';
 
 export { default as Preloader } from 'framework7-svelte/esm/svelte/preloader.svelte';
 export { default as UseIcon } from 'framework7-svelte/esm/svelte/use-icon.svelte';

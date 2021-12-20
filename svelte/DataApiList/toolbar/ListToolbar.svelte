@@ -2,25 +2,45 @@
   Wraps the jqGrid and adds the toolbar and search form
  -->
 <script>
-  import { onMount, onDestroy, tick } from 'svelte'
   import {Button, Button7} from '@ag-svelte/index'
+  import TbButton from './TbButton.svelte'
+  import { merge } from '@ag/utils/dash';
   import { classNames } from '../../shared/utils'
   import ListOptionsPopover from './ListOptionsPopover.svelte'
 
-  export let listController = undefined
-  export let state = undefined
   //toolbar options
-  export let options = undefined
+  export let title = undefined
+  export let options = {}
+  export let listController
 
-  let isConfigured = false
+  $: stateStore = listController.ctx.stateStore
+
+  let isLoading = false
+
+  let opts = merge({
+    selectedButtons: {
+      xlsExport: { icon: 'mdi-microsoft-excel', tooltip: 'Export to Excel', class: '' }
+    },
+    leftButtons: {
+      create: { icon: 'far fa-plus-square', tooltip: 'Create New' }
+    },
+    searchFormButton: { icon: 'mdi-text-box-search-outline', tooltip: 'Show Search Filters Form' },
+    showQuickSearch: true
+  }, options)
+
+  let selBtns = Object.entries(opts.selectedButtons)
+    .map(( [key, v] ) => ({ key, ...v })) //turn into array with key as key
+    .filter(o => o.class !== 'hidden')
+
   let qSearchEntry = ''
-
-  let className = undefined;
-  export { className as class };
 
   function clearSearchInput() {
     qSearchEntry = ''
     listController.quickSearch('')
+  }
+
+  function toggleShowSearch() {
+    $stateStore.showSearchForm = !$stateStore.showSearchForm
   }
 
   const onSearchKeyPress = e => {
@@ -32,25 +52,43 @@
     if (e.charCode === 27) qSearchEntry = ''
   };
 
+  async function fireButtonClick(btnItem, event) {
+    // if it has an action then fire that
+    try {
+      isLoading = true
+      // this.gridCtrl.toggleLoading(true)
+      if (_.isFunction(btnItem.action)) {
+        await btnItem.action(btnItem, event)
+      } else {
+        await listController.ctx.gridOptions.fireToolbarAction(btnItem, event)
+      }
+    } finally {
+      isLoading = false
+      // this.gridCtrl.toggleLoading(false)
+    }
+  }
+
 </script>
 
 <header class="is-light is-dense has-border toolbar">
   <div class="toolbar-container">
-    {#if state.hasSelected }
-      <div class="toolbar-item px-0 py-0">
+    {#if $stateStore.hasSelected }
+      <div class="toolbar-item toolbar-item-left px-0 py-0">
         <div class="selection-pointer">
-          <i class="fas fa-level-up-alt fa-rotate-180 fa-xs"></i>
+          <!-- subdirectory_arrow_right -->
+
+          <i class="material-icons md-18 rotate-90">subdirectory_arrow_right</i>
         </div>
-        <!-- <tb-button ng-repeat="(key, btnItem) in tbCtrl.opts.selectedButtons"
-          ng-if="!(btnItem.class=='hidden')"
-          is-loading="tbCtrl.isLoading"
-          opts="btnItem"></tb-button> -->
+        {#each selBtns as btnItem}
+          <TbButton opts={btnItem} on:click={() => fireButtonClick(btnItem)}/>
+        {/each}
         <div class="divider-vertical"></div>
       </div>
     {/if}
 
-    <Button icon="fa-bars"/>
-    <div class="toolbar-title">List Title</div>
+    {#if title}
+    <div class="toolbar-title">{title}</div>
+    {/if}
     <div class="spacer"/>
 
     <div class="toolbar-item p-0 quick-search-item">
@@ -71,13 +109,23 @@
     </div>
 
     {#if options.searchFormButton.class !== 'hidden' }
-    <Button tooltip="Toggle search form" icon="manage_search" on:click={() => state.showSearchForm = !state.showSearchForm}/>
+    <Button tooltip="Toggle search form" icon="manage_search" on:click={toggleShowSearch}/>
     {/if}
     <Button popoverOpen=".list-options-popover" icon="more_vert" tooltip="Actions"/>
   </div>
 </header>
 
-<ListOptionsPopover {listController} bind:state />
+<ListOptionsPopover {listController}/>
 
+<style>
+  .selection-pointer .material-icons {
+    font-size: 16px;
+    transform: rotate(90deg);
+  }
+
+  .toolbar-item-left {
+    margin-left: -10px;
+  }
+</style>
 
 

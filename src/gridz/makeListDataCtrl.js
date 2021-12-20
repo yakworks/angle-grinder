@@ -1,5 +1,6 @@
 // import Log from 'angle-grinder/src/utils/Log'
 // import _ from 'lodash'
+import { get, writable } from 'svelte/store';
 import { isEmpty, cloneDeep, isFunction, merge } from '../utils/dash'
 import appConfigApi from '../dataApi/AppConfigApi'
 import toast from '../tools/toast'
@@ -11,11 +12,11 @@ const makeListDataCtrl = (opts) => {
 
   let defaultToolbarOpts = {
     selectedButtons: {
-      bulkUpdate: { icon: 'far fa-edit', tooltip: 'Bulk Update' },
-      xlsExport: { icon: 'far fa-file-excel', tooltip: 'Export to Excel' }
+      bulkUpdate: { icon: 'edit_note', tooltip: 'Bulk Update' },
+      xlsExport: { icon: 'mdi-microsoft-excel', tooltip: 'Export to Excel' }
     },
     leftButtons: {
-      create: { icon: 'far fa-plus-square', tooltip: 'Create New' }
+      create: { icon: 'add_box', tooltip: 'Create New' }
     },
     searchFormButton: { icon: 'mdi-text-box-search-outline', tooltip: 'Show Search Filters Form' }
   }
@@ -43,7 +44,7 @@ const makeListDataCtrl = (opts) => {
 
       ctx.stateStore = ctrl.dataApi.stores.stateStore
       ctx.stateStore.set(state)
-
+      console.log("makeListDataCtrl ctx.stateStore", get(ctx.stateStore))
       ctx.state = state
       //short cut
       ctrl.state = state
@@ -115,7 +116,7 @@ const makeListDataCtrl = (opts) => {
         case 'bulkUpdate':
           return ctrl.showBulkUpdate()
         case 'xlsExport':
-          return ctrl.getGridCtrl().xlsExport()
+          return ctrl.gridCtrl.xlsExport()
         case 'delete':
           return ctrl.deleteSelected()
         default:
@@ -132,20 +133,20 @@ const makeListDataCtrl = (opts) => {
     toggleDensity() { this.state.isDense = !this.state.isDense },
 
     async edit(id) {
-      ctrl.getGridCtrl().toggleLoading(true)
+      ctrl.gridCtrl.toggleLoading(true)
       try {
         const vm = await ctrl.dataApi.get(id)
         ctrl.showEdit('Edit', vm)
       } catch (er) {
         ctrl.handleError(er)
       } finally {
-        ctrl.getGridCtrl().toggleLoading(false)
+        ctrl.gridCtrl.toggleLoading(false)
       }
     },
 
     updateFooter(data) {
       setTimeout(_ => {
-        ctrl.getGridCtrl().getGridEl().footerData('set', data)
+        ctrl.gridCtrl.getGridEl().footerData('set', data)
       })
     },
 
@@ -173,14 +174,14 @@ const makeListDataCtrl = (opts) => {
     async delete(id) {
       try {
         await ctrl.dataApi.remove(id)
-        ctrl.getGridCtrl().removeRow(id)
+        ctrl.gridCtrl.removeRow(id)
       } catch (er) {
         ctrl.handleError(er)
       }
     },
 
     async deleteSelected() {
-      const id = ctrl.getGridCtrl().getSelectedRowIds()[0]
+      const id = ctrl.gridCtrl.getSelectedRowIds()[0]
       ctrl.delete(id)
     },
 
@@ -188,7 +189,7 @@ const makeListDataCtrl = (opts) => {
       console.log("ListDataApiCtrl search called with", filters)
       try {
         ctrl.isSearching = true
-        await ctrl.getGridCtrl()?.search(filters)
+        await ctrl.gridCtrl?.search(filters)
       } catch (er) {
         ctrl.handleError(er)
       } finally {
@@ -226,17 +227,17 @@ const makeListDataCtrl = (opts) => {
     },
 
     handleAction(action) {
-      const ids = ctrl.getGridCtrl()?.getSelectedRowIds()
+      const ids = ctrl.gridCtrl.getSelectedRowIds()
       const run = async (ids) => {
         ids.forEach((id) => {
-          ctrl.getGridCtrl().highlightRow(id)
+          ctrl.gridCtrl.highlightRow(id)
         })
 
         try {
           const result = await action()
           if(result.ok){
             toast.success(result.title || 'Action is sucsess')
-            ctrl.getGridCtrl().reload() // todo: should we reload only selected rows?
+            ctrl.gridCtrl.reload() // todo: should we reload only selected rows?
           } else {
             ctrl.swalError({title: result.title , message: result?.failed?.join('<br>') || ''})
           }
@@ -244,7 +245,7 @@ const makeListDataCtrl = (opts) => {
           ctrl.handleError(e)
         } finally {
           ids.forEach((id) => {
-            ctrl.getGridCtrl().highlightRow(id)
+            ctrl.gridCtrl.highlightRow(id)
           })
         }
       }

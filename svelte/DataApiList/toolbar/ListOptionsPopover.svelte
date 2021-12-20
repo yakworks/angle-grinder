@@ -2,20 +2,12 @@
   Wraps the jqGrid and adds the toolbar and search form
  -->
 <script>
-  import { onMount, onDestroy, tick } from 'svelte'
-  import {Button, Avatar, Card, CardContent, Popover, List, ListItem,
-    Icon, Link, Button7} from '@ag-svelte/index'
+  import {Popover, List, ListItem} from '@ag-svelte/index'
   import growl from '@ag/tools/growl'
-  import { classNames } from '../../shared/utils';
   import { isFunction } from 'angle-grinder/src/utils/dash';
 
-  export let listController = undefined
-  export let dense = undefined
-
-  let className = undefined;
-  export { className as class };
-
-  export let state = undefined
+  export let listController
+  $: stateStore = listController.ctx.stateStore
 
   let defaultMenuItems = [
     { id:'refresh', display: 'Refresh', material: 'refresh'},
@@ -41,7 +33,7 @@
       case 'column_config':
         return growl.info("Not Enabled")
       case 'toggle_density':
-        state.isDense = !state.isDense
+        $stateStore.isDense = !$stateStore.isDense
       default:
         if (isFunction(listController[item.id])) {
           return listController[item.id](item, event)
