@@ -3,24 +3,37 @@
  -->
 <script>
   import { onMount, onDestroy, tick } from 'svelte'
-  import DataApiListController from '../common/DataApiListController'
+  import ListToolbar from './toolbar/ListToolbar.svelte'
+  import DataApiListController from './DataApiListController'
   import GridDataApiCtrl from '@ag/gridz/GridDataApiCtrl'
   import { classNames } from '../shared/utils';
+import stringify from 'angle-grinder/src/utils/stringify';
 
   export let ctx = undefined
   export let dataApi = undefined
-  export let dense = undefined
 
   let isConfigured = false
-  let listDataCtrl
+  let listController
+
   let gridCtrl = new GridDataApiCtrl()
+  // if(dense || dense === '') gridCtrl.isDense = true
 
   let className = undefined;
   export { className as class };
 
+  let classes
+
+  let state = {}
+
+  $: classes = classNames(
+    className,
+    'gridz'
+  )
+
   onMount(async () => {
-    listDataCtrl = await DataApiListController({ dataApi, ctx })
-    ctx = listDataCtrl.ctx
+    listController = await DataApiListController({ dataApi, ctx })
+    ctx = listController.ctx
+    state = listController.state
     isConfigured = true
 	});
 
@@ -36,10 +49,11 @@
 </script>
 
 {#if isConfigured }
-
-<!-- <JqGrid ctx={listDataCtrl.ctx} gridId={listDataCtrl.gridId()} /> -->
 <div use:init class="gridz-wrapper">
-  <table class="gridz" class:is-dense={dense}></table>
+  {#if ctx.toolbarOptions }
+  <ListToolbar {listController} options={ctx.toolbarOptions} bind:state />
+  {/if}
+  <table class={classes} class:is-dense={state.isDense}></table>
   <div class="gridz-pager"></div>
 </div>
 
@@ -47,6 +61,6 @@
 <p>...loading</p>
 {/if}
 
-
+<pre class="mb-4">state: {stringify(state, null, 2)}</pre>
 
 

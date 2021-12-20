@@ -27,33 +27,6 @@ const componentsStates = {
     { name: 'itemBlocks', component: 'svelteItemsIndex' },
     { name: 'lists', component: 'svelteListsIndex' },
     { name: 'selects', component: 'svelteSelectsIndex' },
-    {
-      name: 'gridz',
-      children: [
-        { name: 'simple', component: 'svelteSimpleGridzIndex' },
-        { name: 'customer', component: 'svelteCustGridzIndex' }
-      ],
-      resolve: {
-        foo: () => 'bar',
-        dataApi: () => {
-          let ds = dataApiFactory.customer
-          console.log("dataApiFactory.customer", ds)
-          return ds
-        }
-      }
-    },
-    // {
-    //   name: 'gridz',
-    //   component: 'svelteGridzIndex',
-    //   resolve: {
-    //     foo: () => 'bar',
-    //     dataApi: () => {
-    //       let ds = dataApiFactory.customer
-    //       console.log("dataApiFactory.customer", ds)
-    //       return ds
-    //     }
-    //   }
-    // },
     { name: 'toolbar', component: 'svelteToolbarIndex' },
     { name: 'popover', component: 'sveltePopoverIndex' },
   ]

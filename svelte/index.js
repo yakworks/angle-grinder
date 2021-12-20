@@ -9,8 +9,7 @@ export { default as CardHeader } from './Card/CardHeader.svelte';
 export { default as CardTitle } from './Card/CardTitle.svelte';
 export { default as CardSubtitle } from './Card/CardSubtitle.svelte';
 
-export { default as JqGrid } from './JqGrid/JqGrid.svelte';
-export { default as Gridz } from './JqGrid/Gridz.svelte';
+export { default as Gridz } from './DataApiList/Gridz.svelte';
 
 // export * from './Card';
 export * from './Charts';

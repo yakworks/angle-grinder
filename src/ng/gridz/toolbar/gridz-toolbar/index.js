@@ -85,15 +85,15 @@ class Controller {
     try {
       this.isLoading = true
       this.gridCtrl.toggleLoading(true)
-    if (_.isFunction(btnItem.action)) {
-      await btnItem.action(btnItem, event)
-    } else {
-      console.log(this.gridCtrl)
-      await this.gridCtrl.gridOptions.fireToolbarAction(btnItem, event)
+      if (_.isFunction(btnItem.action)) {
+        await btnItem.action(btnItem, event)
+      } else {
+        console.log(this.gridCtrl)
+        await this.gridCtrl.gridOptions.fireToolbarAction(btnItem, event)
+      }
+    } finally {
+      this.isLoading = false
+      this.gridCtrl.toggleLoading(false)
     }
-  } finally {
-    this.isLoading = false
-    this.gridCtrl.toggleLoading(false)
-  }
   }
 }

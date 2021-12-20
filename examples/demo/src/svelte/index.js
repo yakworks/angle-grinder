@@ -12,8 +12,6 @@ import Growl from './Growl/Index.svelte'
 import Items from './Items/Index.svelte'
 import Lists from './Lists/Index.svelte'
 import Selects from './Selects/Index.svelte'
-import SimpleGridz from './Gridz/simple/Index.svelte'
-import CustGridz from './Gridz/customer/Index.svelte'
 import Toolbar from './Toolbar/Index.svelte'
 import Popover from './Popover/Index.svelte'
 // import avatarsDemoMod from './avatars'
@@ -56,20 +54,6 @@ appMod
   })
   .component('svelteSelectsIndex', {
     controller: ngSvelteShim(Selects)
-  })
-  .component('svelteSimpleGridzIndex', {
-    bindings: {
-      foo: '<',
-      dataApi: '<'
-    },
-    controller: ngSvelteShim(SimpleGridz)
-  })
-  .component('svelteCustGridzIndex', {
-    bindings: {
-      foo: '<',
-      dataApi: '<'
-    },
-    controller: ngSvelteShim(CustGridz)
   })
   .component('svelteToolbarIndex', {
     controller: ngSvelteShim(Toolbar)

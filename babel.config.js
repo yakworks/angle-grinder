@@ -14,6 +14,7 @@ module.exports = function(api) {
     "@babel/plugin-proposal-class-properties",
     "@babel/plugin-proposal-optional-chaining",
     "wildcard",
+    //aliases are not DRY, setup here for Jest, in jsconfig.json for vscode and webpack for svelte
     ["module-resolver", {
       "root": ["./src"],
       //make it work with both

@@ -1,6 +1,9 @@
 //we only grab what we want to make it lighter
 
 export { default as App } from 'framework7-svelte/esm/svelte/app.svelte';
+export { default as Page } from 'framework7-svelte/esm/svelte/page.svelte';
+export { default as PageContent } from 'framework7-svelte/esm/svelte/page-content.svelte';
+export { default as Navbar } from 'framework7-svelte/esm/svelte/navbar.svelte';
 
 export { default as Block } from 'framework7-svelte/esm/svelte/block.svelte';
 export { default as BlockHeader } from 'framework7-svelte/esm/svelte/block-header.svelte';

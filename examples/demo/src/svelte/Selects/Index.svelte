@@ -2,17 +2,25 @@
 <script>
   import Selects from './Selects.svelte'
   import SelectBasic from './SelectBasic.svelte'
+  import SelectBasicRaw from '!raw-loader!./SelectBasic.svelte'
   import SelectRest from './SelectRest.svelte'
+  import SelectRestRaw from '!raw-loader!./SelectRest.svelte'
   import SelectsRaw from '!raw-loader!./Selects.svelte'
+  import SelectBasicKeepOpen from './SelectBasicKeepOpen.svelte'
+  import SelectBasicKeepOpenRaw from '!raw-loader!./SelectBasicKeepOpen.svelte'
 
   import ExampleSnippet from '../utils/ExampleSnippet.svelte'
 </script>
 
-<ExampleSnippet code={SelectsRaw} >
+<ExampleSnippet code={SelectBasicRaw} >
   <SelectBasic/>
 </ExampleSnippet>
 
-<ExampleSnippet code={SelectsRaw} >
+<ExampleSnippet code={SelectBasicKeepOpenRaw} >
+  <SelectBasicKeepOpen/>
+</ExampleSnippet>
+
+<ExampleSnippet code={SelectRestRaw} >
   <SelectRest/>
 </ExampleSnippet>
 

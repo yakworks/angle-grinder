@@ -28,7 +28,7 @@
 <!-- <App {...f7params}> -->
 <Toolbar bottom>
   <Link popoverOpen=".popover-menu" >Open Popover</Link>
-  <Button7 raised popoverOpen=".popover-menu2" iconMaterial="more_vert"/>
+  <Button7 raised tooltip="open it" popoverOpen=".popover-menu2" iconMaterial="more_vert"/>
   <Button popoverOpen=".popover-menu2" icon="mdi-dots-vertical"/>
 </Toolbar>
 

@@ -21,6 +21,7 @@ const makeListDataCtrl = (opts) => {
   }
 
   let state = {
+    isDense:false,
     isConfigured: false,
     showSearchForm: false
   }
@@ -116,6 +117,12 @@ const makeListDataCtrl = (opts) => {
           }
       }
     },
+
+    //FIXME dont depend on grid, these should be refactored out
+    reloadKeepSelected() { ctrl.gridCtrl.reloadKeepSelected() },
+    resetSort() { ctrl.gridCtrl.resetSort() },
+    async quickSearch(text) { ctrl.gridCtrl.quickSearch(text) },
+    toggleDensity() { this.state.isDense = !this.state.isDense },
 
     async edit(id) {
       ctrl.getGridCtrl().toggleLoading(true)

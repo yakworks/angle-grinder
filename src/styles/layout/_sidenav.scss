@@ -100,8 +100,8 @@ $sidenav-background-color-main: darken($sidenav-background-color,10%);
       top: 5px;
       transform: rotate(45deg);
 
-      i.fa {
-        font-size: 12px;
+      i.material-icons {
+        font-size: 16px;
       }
       &.is-fixed {
         transform: rotate(0);

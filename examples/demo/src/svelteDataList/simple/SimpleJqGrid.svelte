@@ -1,7 +1,7 @@
 
 <script>
-  import { Gridz, JqGrid } from 'angle-grinder/svelte/index'
-  import sessionStores from '../../../store/sessionServices'
+  import { Gridz } from '@ag-svelte/index'
+  import sessionStores from '~/store/sessionServices'
 
   let gridOptions = {
     colModel: [
@@ -16,7 +16,6 @@
     shrinkToFit: true,
     contextMenu: true,
     pager: true,
-    dataApi: sessionStores.invoice,
     gridId: 'someGrid'
   }
 

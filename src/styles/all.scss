@@ -5,12 +5,12 @@
 @import 'framework7';
 
 // do overrides
+@import "forms";
 @import "bs_hacks";
 @import "layout";
 @import "utilities";
 @import "components";
 @import "extra";
-@import "forms";
 
 // vendor sass
 @import 'vendor/index';

@@ -1,6 +1,7 @@
 import gridsStates from './grids/routes'
 import componentsStates from './components/routes'
 import svelteStates from './svelte/routes'
+import svelteDataListStates from './svelteDataList/routes'
 import formStates from './controls/routes'
 import dashStates from './dashboards/routes'
 import pagesStates from './pages/routes'
@@ -57,12 +58,28 @@ export const packet = {
   children: [dashStates, componentsStates, formStates, gridsStates]
 }
 
+// export const dash = {
+//   name: 'dash',
+//   url: '/dash',
+//   component: 'freshApp',
+//   abstract: true,
+//   children: [dashStates ]
+// }
+
+// export const svelte = {
+//   name: 'svelte',
+//   url: '/svelte',
+//   component: 'freshApp',
+//   abstract: true,
+//   children: [svelteStates, svelteDataListStates ]
+// }
+
 export const fresh = {
   name: 'fresh',
   url: '/fresh',
   component: 'freshApp',
   abstract: true,
-  children: [dashStates, svelteStates, componentsStates, formStates, flexTableStates, gridsStates, pagesStates, levelStates]
+  children: [dashStates, svelteStates, svelteDataListStates, componentsStates, formStates, flexTableStates, gridsStates, pagesStates, levelStates]
 }
 
 export const login = {

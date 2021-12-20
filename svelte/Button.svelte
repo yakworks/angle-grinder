@@ -1,6 +1,5 @@
 <script>
   import { onMount, createEventDispatcher } from 'svelte'
-
   import { getIconClass } from '../src/utils/icon'
   import createRipple from "./utils/ripple.js";
   // import { classNames } from './utils';
@@ -13,7 +12,6 @@
     actionsAttrs,
     actionsClasses,
   } from './shared/mixins';
-
   import { classNames, extend, isStringProp, plainText, createEmitter } from './shared/utils';
   import { restProps } from './shared/rest-props';
   import { useTooltip } from './shared/use-tooltip';
@@ -57,6 +55,9 @@
   export let iconLeft = null
   export let iconRight = null
 
+  export let tooltip = undefined;
+  export let tooltipTrigger = undefined;
+
   // let className = undefined;
   // export { className as class };
   export let className = ''
@@ -75,7 +76,11 @@
 
   function setupIconClass(fldName) {
     if(icons[fldName]) {
-      icons[fldName] = getIconClass(icons[fldName])
+      let origIcoName = icons[fldName]
+      let icoClass = getIconClass(origIcoName)
+      icons[fldName] = icoClass
+      //if it starts with material then it needs the text per google font
+      icons.text = icoClass.startsWith('material') ? origIcoName : ''
     }
   }
 
@@ -131,6 +136,7 @@
 {#if tag === 'button'}
 <button
   use:ripple
+  use:useTooltip={{ tooltip, tooltipTrigger }}
   {type}
   {disabled}
   class="{classes}"
@@ -140,7 +146,7 @@
   >
   {#if icons.left}
   <span class="icon is-first-child">
-    <i class="{icons.left}"></i>
+    <i class="{icons.left}">{icons.text}</i>
   </span>
   {/if}
   <slot />
@@ -148,13 +154,13 @@
 
   {#if icons.solo}
   <span class="icon is-solo">
-    <i class="{icons.solo}"></i>
+    <i class="{icons.solo}">{icons.text}</i>
   </span>
   {/if}
 
   {#if icons.right}
   <span class="icon is-last-child">
-    <i class="{icons.right}"></i>
+    <i class="{icons.right}">{icons.text}</i>
   </span>
   {/if}
 </button>

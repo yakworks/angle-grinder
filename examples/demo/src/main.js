@@ -3,7 +3,7 @@ import 'angle-grinder/src/styles/vendor.css.js'
 // import 'angle-grinder/src/styles/all.scss'
 import './assets/styles.scss'
 // framework7
-import 'angle-grinder/src/f7'
+import 'angle-grinder/svelte/framework7'
 
 // VENDOR
 import 'angle-grinder/src/vendor'

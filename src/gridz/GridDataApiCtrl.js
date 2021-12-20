@@ -12,7 +12,7 @@ export default class GridDataApiCtrl {
   unsubs = []
   highlightClass = 'ui-state-highlight'
   systemColumns = ['cb', '-row_action_col']
-  isDense = false
+  isDense = false //DEPRECATED dont ue
   // injected
   ctx
 
@@ -44,7 +44,7 @@ export default class GridDataApiCtrl {
     //assign itself so parents can see it
     this.ctx.gridCtrl = this
     // shortcut shared state
-    this.state = this.ctx.state
+    this.state = _.merge(this.state, this.ctx.state)
 
     opts.loadui = 'block'
     this.gridOptions = opts

@@ -5,6 +5,7 @@ const gridsStates = {
   abstract: true,
   template: '<div ui-view class="fade-in-up"></div>',
   data: {
+    title: 'Angular Grids',
     icon: 'mdi mdi-table-large'
   },
   children: [
