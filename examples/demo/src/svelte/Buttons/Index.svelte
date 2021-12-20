@@ -1,5 +1,6 @@
 
 <script>
+  import { Page, Navbar, Block } from 'angle-grinder/svelte/index'
   import Buttons from './Buttons.svelte'
   import buttonsRaw from '!raw-loader!./Buttons.svelte'
 
@@ -15,19 +16,24 @@
   import ExampleSnippet from '../utils/ExampleSnippet.svelte'
 </script>
 
-<ExampleSnippet code={buttonsRaw} >
-  <Buttons/>
-</ExampleSnippet>
+<Page>
+  <Navbar title="Buttons" backLink={true} />
+  <Block>
+    <ExampleSnippet code={buttonsRaw} >
+      <Buttons/>
+    </ExampleSnippet>
 
-<ExampleSnippet code={buttonSamplesRaw} >
-  <ButtonSamples/>
-</ExampleSnippet>
+    <ExampleSnippet code={buttonSamplesRaw} >
+      <ButtonSamples/>
+    </ExampleSnippet>
 
-<ExampleSnippet code={buttonIconsRaw} >
-  <ButtonIcons/>
-</ExampleSnippet>
+    <ExampleSnippet code={buttonIconsRaw} >
+      <ButtonIcons/>
+    </ExampleSnippet>
 
-<ExampleSnippet code={buttonsF7Raw} >
-  <ButtonsF7/>
-</ExampleSnippet>
+    <ExampleSnippet code={buttonsF7Raw} >
+      <ButtonsF7/>
+    </ExampleSnippet>
+  </Block>
+</Page>
 

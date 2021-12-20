@@ -37,7 +37,7 @@
     <script src="<%= htmlWebpackPlugin.options.configPath %>"></script>
 </head>
 <body ng-controller="AppCtrl as $appCtrl" [ng-strict-di="boolean"]>
-  <div id="app">
+  <div id="app" style="height: 100%;">
     <!-- App root element -->
     <div id="f7app" ng-class="{
         'app-sidebar-fixed' : $appCtrl.layout.isSidebarFixed,

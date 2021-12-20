@@ -1,11 +1,11 @@
 <script>
   import { Page, Navbar, Block } from 'angle-grinder/svelte/index'
-  import Code from './Code.svelte'
-  const jq = window.$
+  import ExampleSnippet from '../utils/ExampleSnippet.svelte'
 
-  export let lang = 'html'
+  export let title = 'Example'
   export let code
   export let horizontal = true
+  export let backLink = true
 
   let className = undefined;
   export { className as class };
@@ -30,15 +30,13 @@
 
 </script>
 
-<div use:init class="example-section mb-4 {className}">
-  <div class="example" class:is-horizontal="{horizontal}">
-    <div class="example-component">
+<Page>
+  <Navbar {title} {backLink} />
+  <Block>
+    <ExampleSnippet {code} {horizontal}>
       <slot/>
-    </div>
-    <div class="codeview">
-      <Code {lang} {code} />
-    </div>
-  </div>
-</div>
+    </ExampleSnippet>
+  </Block>
+</Page>
 
 

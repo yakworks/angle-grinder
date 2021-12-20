@@ -8,6 +8,8 @@ import { findIndexById } from '../utils/finders'
  */
 export const crudQueryStores = (stores = {}) => {
 
+  let stateStore = writable({})
+
   let itemStore = writable({})
 
   let pageViewStore = writable({})
@@ -19,6 +21,14 @@ export const crudQueryStores = (stores = {}) => {
   let dataStore = writable([])
 
   return mix(stores).with({
+
+    /**
+    * state store for isDense, hasSelected, showSearchForm, selectedItem
+    * @type {Writable}
+    */
+    get stateStore(){
+      return stateStore
+    },
 
     /**
     * the store for the current item

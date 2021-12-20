@@ -78,9 +78,12 @@ export default class GridDataApiCtrl {
       if (opts.eventHandlers?.onSelect && _.isFunction(opts.eventHandlers.onSelect)) {
         opts.eventHandlers.onSelect(rowId, status, event)
       }
+
       this.hasSelected = (this.getSelectedRowIds().length > 0)
+      this.state.hasSelected = this.hasSelected
       $jqGrid.trigger('gridz:selectedRows', [this.getSelectedRowIds()])
     }
+
     $jqGrid.on('jqGridSelectRow', onSelect)
     $jqGrid.on('jqGridSelectAll', onSelect)
 

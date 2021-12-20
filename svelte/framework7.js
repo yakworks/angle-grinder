@@ -1,5 +1,7 @@
-import Framework7Svelte from 'framework7-svelte/esm/shared/plugin';
+// import Framework7Svelte from 'framework7-svelte/esm/shared/plugin';
+// import Framework7 from 'framework7/lite-bundle';
 import Framework7 from 'framework7/lite-bundle';
+import Framework7Svelte from 'framework7-svelte';
 
 import { f7, f7ready, theme, app, f7init } from 'framework7-svelte/esm/shared/f7';
 import { useStore } from 'framework7-svelte/esm/shared/use-store';
@@ -14,7 +16,19 @@ const f7params = {
   // App id
   id: 'yak.works',
   theme: 'aurora',
-  init: true
+  init: true,
+  popup: {
+    closeOnEscape: true,
+  },
+  sheet: {
+    closeOnEscape: true,
+  },
+  popover: {
+    closeOnEscape: true,
+  },
+  actions: {
+    closeOnEscape: true,
+  },
   // ...
 };
 

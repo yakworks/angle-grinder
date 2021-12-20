@@ -3,9 +3,9 @@
   import ListSimple from './ListSimple.svelte'
   import ListSimpleRaw from '!raw-loader!./ListSimple.svelte'
 
-  import ExampleSnippet from '../utils/ExampleSnippet.svelte'
+  import ExamplePage from '../utils/ExamplePage.svelte'
 </script>
 
-<ExampleSnippet code={ListSimpleRaw} >
+<ExamplePage title="lists" code={ListSimpleRaw} >
   <ListSimple/>
-</ExampleSnippet>
+</ExamplePage>

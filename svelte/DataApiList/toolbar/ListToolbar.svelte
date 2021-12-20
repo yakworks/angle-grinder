@@ -36,6 +36,19 @@
 
 <header class="is-light is-dense has-border toolbar">
   <div class="toolbar-container">
+    {#if state.hasSelected }
+      <div class="toolbar-item px-0 py-0">
+        <div class="selection-pointer">
+          <i class="fas fa-level-up-alt fa-rotate-180 fa-xs"></i>
+        </div>
+        <!-- <tb-button ng-repeat="(key, btnItem) in tbCtrl.opts.selectedButtons"
+          ng-if="!(btnItem.class=='hidden')"
+          is-loading="tbCtrl.isLoading"
+          opts="btnItem"></tb-button> -->
+        <div class="divider-vertical"></div>
+      </div>
+    {/if}
+
     <Button icon="fa-bars"/>
     <div class="toolbar-title">List Title</div>
     <div class="spacer"/>

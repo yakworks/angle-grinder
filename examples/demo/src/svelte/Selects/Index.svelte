@@ -1,5 +1,6 @@
 
 <script>
+  import { Page, Navbar, Block } from 'angle-grinder/svelte/index'
   import Selects from './Selects.svelte'
   import SelectBasic from './SelectBasic.svelte'
   import SelectBasicRaw from '!raw-loader!./SelectBasic.svelte'
@@ -11,6 +12,10 @@
 
   import ExampleSnippet from '../utils/ExampleSnippet.svelte'
 </script>
+
+<Page>
+  <Navbar title="Selects" backLink={true} />
+  <Block>
 
 <ExampleSnippet code={SelectBasicRaw} >
   <SelectBasic/>
@@ -27,3 +32,5 @@
 <ExampleSnippet code={SelectsRaw} >
   <Selects/>
 </ExampleSnippet>
+  </Block>
+</Page>

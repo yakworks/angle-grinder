@@ -1,5 +1,6 @@
 
 <script>
+  import { Page, Navbar, BlockTitle, Block } from 'angle-grinder/svelte/index'
   import SimpleJqGrid from './SimpleJqGrid.svelte'
   import svelteRaw from '!raw-loader!./SimpleJqGrid.svelte'
   import ExampleSnippet from '../../svelte/utils/ExampleSnippet.svelte'
@@ -8,7 +9,13 @@
 </script>
 
 
-<ExampleSnippet horizontal={false} code={svelteRaw} >
-  <!-- ...$$props pass all the props passedin into this one down -->
+<Page>
+  <Navbar title="Simple" backLink={true} />
+  <Block>
   <SimpleJqGrid {...$$props} />
-</ExampleSnippet>
+  </Block>
+</Page>
+
+<!-- <ExampleSnippet horizontal={false} code={svelteRaw} >
+  <SimpleJqGrid {...$$props} />
+</ExampleSnippet> -->

@@ -2,6 +2,7 @@ import dataApiFactory from '~/store/dataApiFactory'
 
 const componentsStates = {
   name: 'svelteDataListComponents',
+  template: '<div ui-view class="view"></div>',
   abstract: true,
   data: {
     title: 'Svelte List/Grids',

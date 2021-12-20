@@ -2,11 +2,11 @@
 <script>
   import Comp from './Popover.svelte'
   import svelteRaw from '!raw-loader!./Popover.svelte'
-  import ExampleSnippet from '../utils/ExampleSnippet.svelte'
+  import ExamplePage from '../utils/ExamplePage.svelte'
 </script>
 
 
-<ExampleSnippet code={svelteRaw} >
+<ExamplePage code={svelteRaw} >
   <Comp/>
-</ExampleSnippet>
+</ExamplePage>
 

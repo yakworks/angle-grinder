@@ -23,8 +23,11 @@ const makeListDataCtrl = (opts) => {
   let state = {
     isDense:false,
     isConfigured: false,
-    showSearchForm: false
+    showSearchForm: false,
+    hasSelected: false
   }
+
+  let stateStore
 
   let ctrl = {
 
@@ -37,6 +40,10 @@ const makeListDataCtrl = (opts) => {
         ctx = cloneDeep(apiCfg)
         console.log("makeListDataCtrl.doConfig appConfigApi", ctx)
       }
+
+      ctx.stateStore = ctrl.dataApi.stores.stateStore
+      ctx.stateStore.set(state)
+
       ctx.state = state
       //short cut
       ctrl.state = state

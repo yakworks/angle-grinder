@@ -23,7 +23,7 @@ import stringify from 'angle-grinder/src/utils/stringify';
 
   let classes
 
-  let state = {}
+  let state
 
   $: classes = classNames(
     className,
