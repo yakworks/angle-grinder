@@ -6,6 +6,7 @@ export default () => ({
   template: require('./toolbar.html'),
   bindToController: true,
   scope: {
+    ctx: '<',
     options: '<',
     gridCtrl: '<'
   },
@@ -26,6 +27,7 @@ class Controller {
   }
   isLoading = false
   //injected
+  ctx
   gridCtrl
 
   /* @ngInject */
@@ -55,7 +57,7 @@ class Controller {
 
   toggleSearchForm() {
     // console.log("toggleSearchForm ", this.gridCtrl.state)
-    this.gridCtrl.state.showSearchForm = !this.gridCtrl.state.showSearchForm
+    this.ctx.state.showSearchForm = !this.ctx.state.showSearchForm
   }
 
   setupSearchInput() {

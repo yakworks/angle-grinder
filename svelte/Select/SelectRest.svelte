@@ -1,7 +1,10 @@
 <script>
 	import Select from 'svelte-select';
-  import dataApiFactory from '../../store/dataApiFactory';
+  import dataApiFactory from '../../src/dataApiFactory';
   import stringify from 'fast-safe-stringify'
+
+  export let dataApiKey = undefined
+  export let dataApi = undefined
 
   const custApi = dataApiFactory.customer
 

@@ -70,7 +70,7 @@ angular.module(grid2Mod).directive('gridzDs',
       },
       template: `\
       <div class="gridz-wrapper">
-        <gridz-toolbar options="gridCtrl.ctx.toolbarOptions" grid-ctrl="gridCtrl"></gridz-toolbar>
+        <gridz-toolbar ctx="gridCtrl.ctx" options="gridCtrl.ctx.toolbarOptions" grid-ctrl="gridCtrl"></gridz-toolbar>
         <table class="gridz" ng-class="{'is-dense': gridCtrl.isDense}"></table>
         <div class="gridz-pager"></div>
       </div>`,

@@ -4,7 +4,7 @@
 <script>
   import {Popover, List, ListItem} from '@ag-svelte/index'
   import growl from '@ag/tools/growl'
-  import { isFunction } from 'angle-grinder/src/utils/dash';
+  import { isFunction } from '@ag/utils/dash';
 
   export let listController
   $: stateStore = listController.ctx.stateStore

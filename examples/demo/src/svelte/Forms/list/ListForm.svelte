@@ -19,22 +19,30 @@
     },
     birthday: '2014-04-30'
   }
+
+  let editable = false
+
 </script>
 
 <Columns>
   <Col class="is-8">
     <BlockTitle>Simple List</BlockTitle>
+    <Button on:click={() => editable = !editable}>Edit</Button>
     <Card>
       <CardContent class="p0">
         <List form name="list-form-example1" inlineLabels noHairlinesMd on:submit={handleSubmit} novalidate="true" autocomplete="off">
+
+          <ListItem class="{editable ? 'hidden' : ''}" title="Name" after={data.user.name}></ListItem>
           <ListInput
+            class="{editable ? '' : 'hidden'}"
             label="Name"
             type="text"
             placeholder="Your name"
             validateOnBlur={true}
             minlength=3
             required={true}
-            clearButton
+            clearButton={editable}
+            disabled={!editable}
             bind:value={data.user.name}
             on:input={handleUpdate}
             on:blur={handleUpdate}

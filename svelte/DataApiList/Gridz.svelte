@@ -8,7 +8,7 @@
   import DataApiListController from './DataApiListController'
   import GridDataApiCtrl from '@ag/gridz/GridDataApiCtrl'
   import { classNames } from '../shared/utils';
-  import stringify from 'angle-grinder/src/utils/stringify';
+  import stringify from '@ag/utils/stringify';
 
   export let ctx = undefined
   export let dataApi = undefined
