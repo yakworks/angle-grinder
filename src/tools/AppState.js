@@ -10,6 +10,9 @@ class AppState {
   // the ui-router state instance
   $state
 
+  //default dataApiFactory
+  dataApiFactory
+
   // the app object
   info = {
     name: 'Demo', // name of your project

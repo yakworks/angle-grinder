@@ -23,7 +23,7 @@ export const crudQueryStores = (stores = {}) => {
   return mix(stores).with({
 
     /**
-    * state store for isDense, hasSelected, showSearchForm, selectedItem
+    * state store for isDense, hasSelected, showSearchForm, selectedItem, selectedId
     * @type {Writable}
     */
     get stateStore(){

@@ -1,8 +1,9 @@
 /**
  * Holder 'statics' for defaultApiFactory and ky
- *
  */
 
-export const StoreHolder = {
+const StoreHolder = {
   dataApiFactory:{},
 }
+
+export default StoreHolder

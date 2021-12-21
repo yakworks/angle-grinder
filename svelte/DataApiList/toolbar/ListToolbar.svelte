@@ -2,6 +2,7 @@
   Wraps the jqGrid and adds the toolbar and search form
  -->
 <script>
+  import { fade, fly } from "svelte/transition";
   import {Button, Button7} from '@ag-svelte/index'
   import TbButton from './TbButton.svelte'
   import { merge } from '@ag/utils/dash';
@@ -22,13 +23,17 @@
       xlsExport: { icon: 'mdi-microsoft-excel', tooltip: 'Export to Excel', class: '' }
     },
     leftButtons: {
-      create: { icon: 'far fa-plus-square', tooltip: 'Create New' }
+      create: { icon: 'far fa-plus-square', tooltip: 'Create New', class: '' }
     },
     searchFormButton: { icon: 'mdi-text-box-search-outline', tooltip: 'Show Search Filters Form' },
     showQuickSearch: true
   }, options)
 
   let selBtns = Object.entries(opts.selectedButtons)
+    .map(( [key, v] ) => ({ key, ...v })) //turn into array with key as key
+    .filter(o => o.class !== 'hidden')
+
+  let leftBtns = Object.entries(opts.leftButtons)
     .map(( [key, v] ) => ({ key, ...v })) //turn into array with key as key
     .filter(o => o.class !== 'hidden')
 
@@ -70,10 +75,22 @@
 
 </script>
 
+<!-- FIXME works fine here but not when imported into rcm-ui -->
+<!-- <style>
+  /* .selection-pointer .material-icons {
+    font-size: 16px;
+    transform: rotate(90deg);
+  } */
+
+  .toolbar-item-left {
+    margin-left: -10px;
+  }
+</style> -->
+
 <header class="is-light is-dense has-border toolbar">
   <div class="toolbar-container">
     {#if $stateStore.hasSelected }
-      <div class="toolbar-item toolbar-item-left px-0 py-0">
+      <div class="toolbar-item toolbar-item-left px-0 py-0" in:fly>
         <div class="selection-pointer">
           <!-- subdirectory_arrow_right -->
 
@@ -85,6 +102,11 @@
         <div class="divider-vertical"></div>
       </div>
     {/if}
+    {#each leftBtns as btnItem}
+      <TbButton opts={btnItem} on:click={() => fireButtonClick(btnItem)}/>
+    {/each}
+
+    <tb-button ng-repeat="(key, btnItem) in tbCtrl.opts.leftButtons" ng-if="!(btnItem.class=='hidden')" opts="btnItem"></tb-button>
 
     {#if title}
     <div class="toolbar-title">{title}</div>
@@ -116,16 +138,5 @@
 </header>
 
 <ListOptionsPopover {listController}/>
-
-<style>
-  .selection-pointer .material-icons {
-    font-size: 16px;
-    transform: rotate(90deg);
-  }
-
-  .toolbar-item-left {
-    margin-left: -10px;
-  }
-</style>
 
 
