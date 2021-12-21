@@ -66,7 +66,8 @@ angular.module(grid2Mod).directive('gridzDatastore',
       bindToController: {
         toolbarOptions: '<',
         gridId: '@',
-        gridOptions: '<'
+        gridOptions: '<',
+        restrictSearch: '<'
       },
       template: `\
       <div class="gridz-wrapper">
