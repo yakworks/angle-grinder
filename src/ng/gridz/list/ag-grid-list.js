@@ -45,7 +45,8 @@ export default {
   bindings: {
     apiKey: '<',
     notification: '<',
-    initSearch: '<'
+    initSearch: '<',
+    restrictSearch: '<'
   },
   template: template,
   controller: ListCtrl
