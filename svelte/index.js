@@ -13,6 +13,7 @@ export { default as Gridz } from './DataApiList/Gridz.svelte';
 
 // export * from './Card';
 export * from './Charts';
+export { default as SelectRest } from './Select/SelectRest.svelte';
 // export * from './Form';
 // export * from './List';
 

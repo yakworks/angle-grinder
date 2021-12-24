@@ -1,11 +1,12 @@
 <script>
-	import Select from 'svelte-select';
+  import Select from 'svelte-select';
+  import { SelectRest } from '@ag-svelte/index';
   import dataApiFactory from '../../store/dataApiFactory';
   import stringify from 'fast-safe-stringify'
 
   const custApi = dataApiFactory.customer
 
-	const optionIdentifier = 'id';
+  const optionIdentifier = 'id';
   const getOptionLabel = (option) => option.name;
   const getSelectionLabel = (option) => option.name;
 
@@ -43,14 +44,17 @@
 <h2>Rest single</h2>
 <Select bind:value={basicVal} loadOptions={getCustomers} {optionIdentifier} {getOptionLabel} {getSelectionLabel} on:select={handleSelect}></Select>
 <p>
-	Selected item: {JSON.stringify(basicVal)}
+  Selected item: {JSON.stringify(basicVal)}
 </p>
 
 <h2>Multi basic</h2>
 <Select isMulti={true} value={multiVal} noOptionsMessage="start typing to search ...."
   loadOptions={getCustomers} {optionIdentifier} {getOptionLabel} {getSelectionLabel} on:select={handleMultiSelect}></Select>
+
+<SelectRest dataApi={custApi}/>
+
 <p>
-	Selected item: {JSON.stringify(multiVal)}
+  Selected item: {JSON.stringify(multiVal)}
 </p>
 
 <pre class="mt-4">model: {stringify(model, null, 2)}</pre>

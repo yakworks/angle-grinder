@@ -18,24 +18,14 @@
 
   let isLoading = false
 
-  let opts = merge({
-    selectedButtons: {
-      xlsExport: { icon: 'mdi-microsoft-excel', tooltip: 'Export to Excel', class: '' }
-    },
-    leftButtons: {
-      create: { icon: 'far fa-plus-square', tooltip: 'Create New', class: '' }
-    },
-    searchFormButton: { icon: 'mdi-text-box-search-outline', tooltip: 'Show Search Filters Form' },
-    showQuickSearch: true
-  }, options)
+  let opts = options
 
-  let selBtns = Object.entries(opts.selectedButtons)
-    .map(( [key, v] ) => ({ key, ...v })) //turn into array with key as key
-    .filter(o => o.class !== 'hidden')
-
-  let leftBtns = Object.entries(opts.leftButtons)
-    .map(( [key, v] ) => ({ key, ...v })) //turn into array with key as key
-    .filter(o => o.class !== 'hidden')
+  //turn object to array with key field and returns only visible
+  function filterVisible(buttonOpts){
+    return Object.entries(buttonOpts)
+      .map(( [key, v] ) => ({ key, ...v })) //turn into array with key as key
+      .filter(o => o.class !== 'hidden')
+  }
 
   let qSearchEntry = ''
 
@@ -96,13 +86,13 @@
 
           <i class="material-icons md-18 rotate-90">subdirectory_arrow_right</i>
         </div>
-        {#each selBtns as btnItem}
+        {#each filterVisible(opts.selectedButtons) as btnItem}
           <TbButton opts={btnItem} on:click={() => fireButtonClick(btnItem)}/>
         {/each}
         <div class="divider-vertical"></div>
       </div>
     {/if}
-    {#each leftBtns as btnItem}
+    {#each filterVisible(opts.leftButtons) as btnItem}
       <TbButton opts={btnItem} on:click={() => fireButtonClick(btnItem)}/>
     {/each}
 

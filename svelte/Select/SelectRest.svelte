@@ -1,12 +1,12 @@
 <script>
 	import Select from 'svelte-select';
-  import dataApiFactory from '../../src/dataApiFactory';
-  import stringify from 'fast-safe-stringify'
+  import StoreHolder from '@ag/stores/StoreHolder';
 
   export let dataApiKey = undefined
   export let dataApi = undefined
+  export let isMulti = true
 
-  const custApi = dataApiFactory.customer
+  if(dataApiKey) dataApi = StoreHolder.dataApiFactory[dataApiKey]
 
 	const optionIdentifier = 'id';
   const getOptionLabel = (option) => option.name;
@@ -25,36 +25,16 @@
     // multiVal = multiVal
   }
 
-  let basicVal;
-  $: multiVal = [{"id":2, name: 'Yodo'}];
-
-  let model = {}
-
-  // $: {
-  //   model.multiVal = multiVal
-  //   model.basicVal = basicVal
-  // }
-
-  async function getCustomers(filterText) {
+  async function filterItems(filterText) {
     if(!(filterText.length >= 2)) return
     console.log("filterText", filterText)
-    let res = await custApi.picklistSearch(filterText)
+    let res = await dataApi.picklistSearch(filterText)
     return res.data
   }
 </script>
 
-<h2>Rest single</h2>
-<Select bind:value={basicVal} loadOptions={getCustomers} {optionIdentifier} {getOptionLabel} {getSelectionLabel} on:select={handleSelect}></Select>
-<p>
-	Selected item: {JSON.stringify(basicVal)}
-</p>
+<Select isMulti={isMulti} noOptionsMessage="start typing to search ...."
+  loadOptions={filterItems} {optionIdentifier} {getOptionLabel}
+  {getSelectionLabel} on:select={handleMultiSelect}/>
 
-<h2>Multi basic</h2>
-<Select isMulti={true} value={multiVal} noOptionsMessage="start typing to search ...."
-  loadOptions={getCustomers} {optionIdentifier} {getOptionLabel} {getSelectionLabel} on:select={handleMultiSelect}></Select>
-<p>
-	Selected item: {JSON.stringify(multiVal)}
-</p>
-
-<pre class="mt-4">model: {stringify(model, null, 2)}</pre>
 
