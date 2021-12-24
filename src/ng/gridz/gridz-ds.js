@@ -66,7 +66,9 @@ angular.module(grid2Mod).directive('gridzDs',
       controllerAs: 'gridCtrl',
       bindToController: {
         gridId: '@',
-        ctx: '<'
+        ctx: '<',
+        gridOptions: '<',
+        restrictSearch: '<'
       },
       template: `\
       <div class="gridz-wrapper">
