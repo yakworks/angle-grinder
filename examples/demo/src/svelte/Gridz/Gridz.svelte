@@ -44,6 +44,8 @@
 
 <div class="gridz-wrapper">
   <gridz-toolbar options="gridCtrl.toolbarOptions" grid-ctrl="gridCtrl"></gridz-toolbar>
-  <table class="gridz" ng-class="{'is-dense': gridCtrl.isDense}"></table>
+  <!-- TODO: fix it -->
+  <!-- <table class="gridz" ng-class="{'is-dense': gridCtrl.isDense}"></table> -->
+  <table class="gridz" ></table>
   <div class="gridz-pager"></div>
 </div>
