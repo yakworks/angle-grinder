@@ -1,7 +1,7 @@
 import angular from 'angular'
-import '~/vendor'
+import '@ag/vendor'
 import 'angular-mocks'
-import agMod from '~/angle-grinder'
+import agMod from '@ag/angle-grinder'
 
 describe('agConfig provider', function() {
   var provider, agValidationsConfig

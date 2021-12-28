@@ -4,7 +4,8 @@ module.exports = function(api) {
     ["@babel/preset-env",{
       // "useBuiltIns": "entry" ,
       "useBuiltIns": "usage" ,
-      "corejs": 3
+      "corejs": 3,
+      "targets": { "node": "current" }
     }]
   ];
   const plugins = [

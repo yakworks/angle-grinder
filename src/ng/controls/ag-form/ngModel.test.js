@@ -1,5 +1,5 @@
 /* eslint-disable */
-import agMod from '~/angle-grinder'
+import agMod from '@ag/angle-grinder'
 
 describe('ngModel directive', function() {
   var element; var input; var ngModel; var $compile; var $el
