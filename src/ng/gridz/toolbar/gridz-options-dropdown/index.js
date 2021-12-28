@@ -30,12 +30,10 @@ export default () => ({
   restrict: 'E',
   // replace: true,
   controllerAs: 'optsCtrl',
-  require: {
-    gridCtrl: '^gridz'
-  },
   bindToController: {
     menuItems: '<',
-    menuClick: '='
+    menuClick: '=',
+    gridCtrl: '<'
   },
   template: require('./dropdown.html'),
   controller: Controller

@@ -1,13 +1,13 @@
 // import controller from './listCtrl'
 import template from './list.html'
-import BaseListCtrl from 'angle-grinder/src/ng/gridz/list/BaseListCtrl'
+import ListDataApiCtrl from 'angle-grinder/src/ng/gridz/list-datastore/ListDataApiCtrl'
 import buildOptions from './listCtrlOptions'
-import localStoreApi from '../../store/LocalStoreApi'
+import sessionStores from '../../store/sessionServices'
 import Log from 'angle-grinder/src/utils/Log'
 import Swal from 'angle-grinder/src/tools/swal'
 import _ from 'lodash'
 
-class ListCtrl extends BaseListCtrl {
+class ListCtrl extends ListDataApiCtrl {
   isLoaded = false
 
   editTemplate = require('./templates/editDialog.html')
@@ -15,11 +15,10 @@ class ListCtrl extends BaseListCtrl {
 
   constructor(...args) {
     super(...args)
-    this.dataApi = localStoreApi.invoice
+    this.dataApi = sessionStores.invoice
   }
 
   async $onInit() {
-    // this.dataApi = localStoreApi.invoice
     this.cfg = buildOptions(this)
     await this.doConfig(this.cfg)
   }

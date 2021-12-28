@@ -424,7 +424,7 @@ export default class GridCtrl {
       //we use the sortMap that constructed in jq.gridz so remove the sort and order
       delete p.order; delete p.sort;
       let sortMap = this.getParam('sortMap')
-      console.log('sortMap', sortMap)
+      // console.log('sortMap', sortMap)
       if(sortMap){
         p.sort = sortMap
       }

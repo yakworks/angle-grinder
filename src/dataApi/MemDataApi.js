@@ -45,11 +45,9 @@ class MemDataApi {
   }
 
   // query by example object
-  qbe(items, qbeItem) {
+  qbe(items, qbeObject) {
     return items.filter(it => {
-      return _.isMatchWith(it, qbeItem, (objValue, srcValue) => {
-        // console.log("objValue", objValue)
-        //  console.log("srcValue", srcValue)
+      return _.isMatchWith(it, qbeObject, (objValue, srcValue) => {
         if (_.isString(objValue) && _.isString(srcValue)) {
           return objValue.toLowerCase().includes(srcValue.toLowerCase())
         }
@@ -61,8 +59,6 @@ class MemDataApi {
   //
   async search(p, flds) {
     if (!p) p = {}
-    // console.log("search p", p)
-    // console.log("search flds", flds)
     let list = await this.data()
     const isSearch = p && (p.q || p.qSearch)
 
@@ -74,24 +70,23 @@ class MemDataApi {
         acc.order.push(sortar[1])
         return acc
       }, { sort: [], order: [] })
-      console.log('sortobj', sortobj)
       list = _.orderBy(list, sortobj.sort, sortobj.order)
     }
-    // console.log("search list", list)
+
     if (flds){
       list = list.reduce((acc, item) => {
         acc.push(_.pick(item, flds))
         return acc
       }, [])
     }
-    // console.log("search list", list)
+
     const paged = this.pagination(list, p)
-    // console.log("query paged", paged)
+
     return paged
   }
 
   filter(list, params) {
-    console.log("filter params", params)
+
     let flist = list
     // const filters = params.filters ? JSON.parse(params.filters) : null
     // const q = params.q ? JSON.parse(params.q) : null
@@ -108,7 +103,7 @@ class MemDataApi {
       } else {
         flist = this.qSearch(list, q)
       }
-      // console.log("filter q flist", flist)
+
     } else if(params.qSearch){
       flist = this.qSearch(list, params.qSearch)
     }
@@ -116,7 +111,7 @@ class MemDataApi {
   }
 
   async picklist(p) {
-    // console.log("picklist p", p)
+
     return this.search(p, this.picklistFields)
   }
 
@@ -168,7 +163,7 @@ class MemDataApi {
       // let item = findById(id, items)
       const idx = this.findItemIndex(items, { id: parseInt(id) })
       items[idx] = _.merge(items[idx], data)
-      // console.log('merged item', items[idx])
+
       updateItems.push(items[idx])
     })
     this._commit(items)

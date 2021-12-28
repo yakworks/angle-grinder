@@ -1,3 +1,5 @@
+import { KyFactory } from "../../stores/ky";
+
 // Global object for loader could be replaced with other lib that doesnt rely on angular lib
 const globalLoader = {
     getLoaderService() {
@@ -20,4 +22,7 @@ const globalLoader = {
     }
 }
 
-  export default globalLoader
+KyFactory.subscribe('before', () => globalLoader.start())
+KyFactory.subscribe('after', () => globalLoader.complete())
+
+export default globalLoader

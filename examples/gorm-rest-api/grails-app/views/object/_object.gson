@@ -1,8 +1,0 @@
-import groovy.transform.Field
-
-model {
-    Object object
-    Map renderArgs = [:]
-}
-// System.out.println "Model in _object $binding.variables"
-json g.render(object, renderArgs)

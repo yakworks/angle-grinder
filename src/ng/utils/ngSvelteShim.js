@@ -18,10 +18,10 @@
  *
  * @param Component
  * @param events
- * @returns {controller}
+ * @returns the controller class
  */
 export default function(Component, events) {
-  const controller = class {
+  const ctrl = class {
     constructor($scope, $element) {
       this.$element = $element
       this.initialProps = {}
@@ -40,8 +40,8 @@ export default function(Component, events) {
           const angularBinding = events[svelteEvent]
 
           this.component.$on(svelteEvent, ({ detail }) => {
-            console.log("svelteEvent", svelteEvent)
-            console.log("detail", detail)
+            //console.log("svelteEvent", svelteEvent)
+            //console.log("detail", detail)
             this[angularBinding](detail)
           })
         }, this)
@@ -71,7 +71,7 @@ export default function(Component, events) {
     }
   }
 
-  controller.$inject = ['$scope', '$element']
+  ctrl.$inject = ['$scope', '$element']
 
-  return controller
+  return ctrl
 }

@@ -1,4 +1,4 @@
-import { isTruthy, isFalsy, falsyCheck, truthyCheck } from '../truthy'
+import { isTruthy, isFalsy, falsyCheck, truthyCheck } from '../inspect'
 
 describe('isFalsy', () => {
 

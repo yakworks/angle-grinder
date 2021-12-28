@@ -1,5 +1,4 @@
 import BaseListCtrl from './BaseListCtrl'
-// import restStoreApi from '../../store/RestStoreApi'
 import _ from 'lodash'
 
 const template = `
@@ -46,7 +45,8 @@ export default {
   bindings: {
     apiKey: '<',
     notification: '<',
-    initSearch: '<'
+    initSearch: '<',
+    restrictSearch: '<'
   },
   template: template,
   controller: ListCtrl

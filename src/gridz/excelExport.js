@@ -109,7 +109,8 @@ export function gridData(gridId, selectedRows) {
   return resultEl.html()
 }
 
-export function csvData(gridData) {
+export function csvData() {
+
   const prepareCsvHeaders = function(data) {
     const headers = []
     const resultEl = $('<div></div>')

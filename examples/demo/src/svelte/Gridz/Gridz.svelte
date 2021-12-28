@@ -2,8 +2,7 @@
 <script>
   import { onMount } from 'svelte'
   import GridCtrl from 'angle-grinder/src/gridz/GridCtrl'
-  import localStoreApi from '../../store/LocalStoreApi'
-  import _ from 'lodash'
+  import sessionStores from '../../store/sessionServices'
   const jq = window.$
 
   let gridOptions = {
@@ -23,7 +22,7 @@
     shrinkToFit: true,
     contextMenu: true,
     pager: true,
-    dataApi: localStoreApi.invoice,
+    dataApi: sessionStores.invoice,
     gridId: 'someGrid'
     // datatype: (params) => ctrl.gridLoader(params)
   }
@@ -40,5 +39,13 @@
 
 <div use:init class="gridz-wrapper">
   <table class="gridz"></table>
+  <div class="gridz-pager"></div>
+</div>
+
+<div class="gridz-wrapper">
+  <gridz-toolbar options="gridCtrl.toolbarOptions" grid-ctrl="gridCtrl"></gridz-toolbar>
+  <!-- TODO: fix it -->
+  <!-- <table class="gridz" ng-class="{'is-dense': gridCtrl.isDense}"></table> -->
+  <table class="gridz" ></table>
   <div class="gridz-pager"></div>
 </div>
