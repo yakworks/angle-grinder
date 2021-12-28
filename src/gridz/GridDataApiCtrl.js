@@ -315,6 +315,7 @@ export default class GridDataApiCtrl {
    this.jqGridEl.setRowData(id, {...flatData, ...data})
    this.flashOnSuccess(id)
    return this.jqGridEl.trigger('gridz:rowUpdated', [id, data])
+  }
 
   // Inserts a new row with id = rowid containing the data in data (an object) at
   // the position specified (first in the table, last in the table or before or after the row specified in srcrowid).
