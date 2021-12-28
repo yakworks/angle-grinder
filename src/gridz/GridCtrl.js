@@ -254,25 +254,23 @@ export default class GridCtrl {
   // where the name is the name of the column as described in the colModel
   // and the value is the new value.
   updateRow(id, data, emptyMissingCells) {
-    if (emptyMissingCells == null) { emptyMissingCells = true }
-    const flatData = flattenObject(data)
+     if (emptyMissingCells == null) { emptyMissingCells = true }
+     const flatData = flattenObject(data)
 
-    const prevData = this.getRowData(id)
-    if (!_.isNil(prevData)) {
-      // retrieve a list of removed keys
-      let diff = _.difference(Object.keys(prevData), Object.keys(flatData))
+    // const prevData = this.getRowData(id)
+    // if (!_.isNil(prevData)) {
+    //   // retrieve a list of removed keys
+    //   let diff = _.difference(Object.keys(prevData), Object.keys(flatData))
+    //   // filter out restricted (private) columns like `-row_action_col`
+    //   const restrictedColumns = key => !key.match(/^-/)
+    //   diff = diff.filter(restrictedColumns)
+    //   // set empty values
+    //   if (emptyMissingCells) {
+    //     for (const key of Array.from(diff)) { flatData[key] = null }
+    //   }
+    // }
 
-      // filter out restricted (private) columns like `-row_action_col`
-      const restrictedColumns = key => !key.match(/^-/)
-      diff = diff.filter(restrictedColumns)
-
-      // set empty values
-      if (emptyMissingCells) {
-        for (const key of Array.from(diff)) { flatData[key] = null }
-      }
-    }
-
-    this.jqGridEl.setRowData(id, flatData)
+    this.jqGridEl.setRowData(id, {...flatData, ...data})
     this.flashOnSuccess(id)
     return this.jqGridEl.trigger('gridz:rowUpdated', [id, data])
   }
