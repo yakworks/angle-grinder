@@ -141,9 +141,6 @@ export default class BaseListCtrl {
       .catch(() => {
         console.log('Modal dismissed at: ' + new Date())
       })
-    // , () => {
-    //   console.log('Modal dismissed at: ' + new Date())
-    // })
   }
 
   // modal options for edit

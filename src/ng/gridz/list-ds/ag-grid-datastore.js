@@ -20,7 +20,6 @@ function ListCtrlFn($scope, $element, $uibModal) {
   })
 
   ctrl.$onInit = async () => {
-    console.log("$onInit ctx", ctrl.ctx)
     await ctrl.doConfig()
 
     if (ctrl.restrictSearch) {
@@ -33,7 +32,6 @@ function ListCtrlFn($scope, $element, $uibModal) {
     }
     //state shotcut
     ctrl.state = ctrl.ctx.state
-    console.log("End ListCtrlFn $onInit ctx", ctrl.ctx)
   }
 
   return ctrl

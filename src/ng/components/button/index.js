@@ -6,7 +6,6 @@ class Controller {
   constructor($element, $transclude) {
     this.$element = $element
     // this.$transclude = $transclude
-    // console.log("this.$transclude", this.$transclude)
     $transclude((clone) => {
       // if clone.length then it has inner content/text for button
       if (clone.length) this.hasTranscluded = true

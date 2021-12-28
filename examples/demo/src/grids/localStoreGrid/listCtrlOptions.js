@@ -48,7 +48,7 @@ export default function buildOptions(ctrl){
         { name: 'customer.name', label: 'Customer', formatter: 'editActionLink' },
         { name: 'tranDate', label: 'Date', width: 100, formatter: 'date' },
         { name: 'refnum', label: 'Refnum', width: 100 },
-        { name: 'amount', label: 'Amount', width: 80, formatter: 'currency' },
+        { name: 'amount', label: 'Amount', width: 80, formatter: 'currency', align: 'right' },
         { name: 'comments', label: 'Comments' },
         { name: 'state.id', label: 'StateId', width: 80, align: 'center', hidden: true },
         { name: 'state.name', label: 'State', width: 60, align: 'center' },

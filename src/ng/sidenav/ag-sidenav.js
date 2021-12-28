@@ -25,7 +25,6 @@ class controller {
   constructor($timeout) {
     this.$timeout = $timeout
     this.$state = appState.$state
-    // console.log(appState.$state.get())
     this.appState = appState
     this.layout = appState.layout
     this.sideMenuItems = appState.sideMenuConfig.children

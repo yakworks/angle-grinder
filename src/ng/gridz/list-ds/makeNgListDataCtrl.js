@@ -22,8 +22,7 @@ const makeNgListDataCtrl = (ctrl) => {
     async doConfig(ctx = {}) {
       //FIXME not sure why this is needed? for $postLink maybe?
       let configed = await superDoConfig(ctx)
-      configed.toolbarOptions.scope = () => ctrl.$scope
-      console.log("End makeNgListDataCtrl.doConfig ctx", ctrl.ctx)
+      // configed.toolbarOptions.scope = () => ctrl.$scope
       return configed
     },
 

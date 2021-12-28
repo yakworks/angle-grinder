@@ -10,7 +10,6 @@ class controller {
   }
 
   buttonClick(event) {
-    // console.log('menuItemClick params', { menuItem, event })
     Swal.fire(
       'The Title',
       'Some Text or <strong>html</strong>'
@@ -87,7 +86,6 @@ class controller {
       confirmButtonText: 'Change Name',
       showCancelButton: true
     })
-    console.log('result', result)
 
     toast.success(`your foo is now named ${result.value}`, 'Named Foo!')
   }

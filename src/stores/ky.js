@@ -96,6 +96,7 @@ export const kyFetch = key => {
    */
   function kyFetch({method = 'get', path = '', ...opts}){
     path = ensurePrefix(path, '/')
+    let fullPath = `${key}${path}`
     return KyFactory.ky(`${key}${path}`, {...opts, method})
   }
 

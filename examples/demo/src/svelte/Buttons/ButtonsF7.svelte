@@ -6,7 +6,6 @@
 
   let segBtnClick = (id) => () => {
     activeBtn = id
-    console.log('activeBtn', activeBtn)
   }
 
   let isLoading = false;

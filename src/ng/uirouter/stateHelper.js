@@ -50,7 +50,6 @@ angular.module(MOD_NAME, [
           self.state(childState, options)
         })
       }
-      // console.log("state ", state)
       return self
     }
 

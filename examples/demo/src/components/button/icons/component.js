@@ -16,7 +16,6 @@ class ClrController {
   }
 
   toggleLoading = (event) => {
-    // console.log("toggleLoading this", this)
     this.loading = !this.loading
     this.$timeout(() => {
       this.loading = !this.loading

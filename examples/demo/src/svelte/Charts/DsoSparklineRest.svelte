@@ -16,10 +16,8 @@
 
   onMount(async () => {
     const chartCfgs = await ky.get('/data/charts.json').json();
-    console.log("chartCfgs", chartCfgs);
 
     let opts = chartCfgs.dsoSparkLine
-    console.log("opts", opts);
 
     opts.colors = [secondaryColor]
     opts.labels = labels

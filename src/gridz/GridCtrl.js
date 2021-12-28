@@ -77,7 +77,6 @@ export default class GridCtrl {
 
   //initialize the grid the jquery way
   initGridz(){
-    // console.log({opt: this.gridOptions})
     this.jqGridEl.gridz(this.gridOptions)
     // setupFilterToolBar(options)
   }

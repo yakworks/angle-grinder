@@ -35,12 +35,11 @@
     listController = await DataApiListController({ dataApi, ctx })
     ctx = listController.ctx
     stateStore = listController.ctx.stateStore
-    console.log("stateStore", $stateStore)
+
     isConfigured = true
-	});
+  });
 
   function init(node) {
-    console.log("grid init", ctx)
     gridCtrl.setupAndInit(node, ctx)
   }
 

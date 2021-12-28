@@ -27,12 +27,10 @@ function ListCtrlFn($scope, $element, $uibModal) {
   }
 
   ctrl.displaySelectedRowsData = () => {
-    console.log('displaySelectedRowsData')
     ctrl.selectedRowsData = ctrl.getGridCtrl().getSelectedRows()
   }
 
   ctrl.import = () => {
-    console.log('import')
     Swal.fire('import something')
   }
 

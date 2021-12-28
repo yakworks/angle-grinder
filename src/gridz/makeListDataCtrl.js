@@ -35,16 +35,14 @@ const makeListDataCtrl = (opts) => {
     async doConfig(ctx = {}) {
       if(!ctrl.apiKey) ctrl.apiKey = ctrl.dataApi.key
 
-      console.log("makeListDataCtrl.doConfig called with ", ctx)
-      if(isEmpty(ctx)) {
-        let apiCfg = await appConfigApi.getConfig(ctrl.apiKey)
-        ctx = cloneDeep(apiCfg)
-        console.log("makeListDataCtrl.doConfig appConfigApi", ctx)
+      let apiCfg = await appConfigApi.getConfig(ctrl.apiKey)
+      if(!isEmpty(apiCfg)){
+        let clonedApiCfg = cloneDeep(apiCfg)
+        merge(ctx, clonedApiCfg)
       }
 
       ctx.stateStore = ctrl.dataApi.stores.stateStore
       ctx.stateStore.set(state)
-      console.log("makeListDataCtrl ctx.stateStore", get(ctx.stateStore))
       ctx.state = state
       //short cut
       ctrl.state = state
@@ -57,7 +55,8 @@ const makeListDataCtrl = (opts) => {
 
       if (!gopts.toolbarOptions) gopts.toolbarOptions = {}
       const tbopts = merge({}, defaultToolbarOpts, gopts.toolbarOptions)
-
+      //if ctx toolbar option were passed in with context
+      if(ctx.toolbarOptions) merge(tbopts, ctx.toolbarOptions)
       // setup search form show based on if searchForm is configured
       if (ctx.searchForm === undefined) {
         gopts.showSearchForm = false
@@ -85,7 +84,6 @@ const makeListDataCtrl = (opts) => {
       ctrl.ctx = ctx
 
       ctrl.state.isConfigured = true
-      console.log("End makeListDataCtrl.doConfig ctx", ctrl.ctx)
       return ctx
     },
 
@@ -186,7 +184,6 @@ const makeListDataCtrl = (opts) => {
     },
 
     async search(filters) {
-      console.log("ListDataApiCtrl search called with", filters)
       try {
         ctrl.isSearching = true
         await ctrl.gridCtrl?.search(filters)

@@ -34,7 +34,6 @@ const gridsStates = {
         apiKey: () => 'customer',
         dataApi: () => {
           let ds = dataApiFactory.customer
-          console.log("dataApiFactory.customer", ds)
           return ds
         },
         // gridOptions: () => ({multiSort: true}),

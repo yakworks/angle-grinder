@@ -12,7 +12,6 @@ export default angular.module('ag.demo.flexCardDemo', [])
     controller: controller
     // controller: function() {
     //   this.randomAvatar = () => {
-    //     console.log('wtf')
     //     return 'wtf'
     //   }
     // }

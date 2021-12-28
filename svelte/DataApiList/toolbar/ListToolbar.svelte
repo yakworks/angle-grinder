@@ -3,8 +3,9 @@
  -->
 <script>
   import { fade, fly } from "svelte/transition";
-  import {Button, Button7} from '@ag-svelte/index'
+  import {Button, Button7, Segmented} from '@ag-svelte/index'
   import TbButton from './TbButton.svelte'
+  import QuickFilter from './QuickFilter.svelte'
   import { merge } from '@ag/utils/dash';
   import { classNames } from '../../shared/utils'
   import ListOptionsPopover from './ListOptionsPopover.svelte'
@@ -102,6 +103,8 @@
     <div class="toolbar-title">{title}</div>
     {/if}
     <div class="spacer"/>
+
+    <QuickFilter />
 
     <div class="toolbar-item p-0 quick-search-item">
       <div class="control has-icons-right has-icons-left">

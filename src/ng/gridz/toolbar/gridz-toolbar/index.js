@@ -41,6 +41,7 @@ class Controller {
     if (this.options) {
       _.merge(this.opts, this.options)
     }
+    this.$scope.ctx = this.ctx
   }
 
   $postLink() {
@@ -56,13 +57,11 @@ class Controller {
   }
 
   toggleSearchForm() {
-    // console.log("toggleSearchForm ", this.gridCtrl.state)
     this.ctx.state.showSearchForm = !this.ctx.state.showSearchForm
   }
 
   setupSearchInput() {
     this.$element.find('.quick-search').bind('keydown', event => {
-      // console.log("keydown event", event)
       // 13 - Enter key code
       if (event.which === 13) {
         event.preventDefault()
@@ -90,7 +89,6 @@ class Controller {
       if (_.isFunction(btnItem.action)) {
         await btnItem.action(btnItem, event)
       } else {
-        console.log(this.gridCtrl)
         await this.gridCtrl.gridOptions.fireToolbarAction(btnItem, event)
       }
     } finally {

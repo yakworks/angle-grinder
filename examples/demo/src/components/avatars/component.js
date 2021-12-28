@@ -6,10 +6,8 @@ class controller {
   avatarData = people
 
   get randomAvatar(){
-  // randomAvatar(){
     const idx = Math.floor((Math.random() * (9 - 0)) + 0)
     // const idx = Math.random() * (0 - 9) + 0
-    console.log('random idx', idx)
     // const avatar = people[idx].avatar
     // return `/assets/images/photos/${avatar}`
     return 'WTF'
@@ -34,7 +32,6 @@ export default angular.module('ag.demo.avatarDemo', [])
     controller: controller
     // controller: function() {
     //   this.randomAvatar = () => {
-    //     console.log('wtf')
     //     return 'wtf'
     //   }
     // }

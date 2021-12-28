@@ -107,7 +107,6 @@ export default class GridDataApiCtrl {
 
     // adds the listener to the store
     const unsubscribe = this.dataApi.pageViewStore.subscribe(data => {
-      // console.log("dataApi.currentPage")
       this.addJSONData(data)
     });
     this.unsubs.push(unsubscribe)
@@ -423,7 +422,6 @@ export default class GridDataApiCtrl {
 
   // Sets the grid search filters and triggers a reload
   async search(q, queryText) {
-    // console.log("GridCtrl search called with  ", q)
     try {
       this.isSearching = true
       const params = {
@@ -469,7 +467,6 @@ export default class GridDataApiCtrl {
    * @param {*} p the params to send to search
    */
   async gridLoader(p) {
-    // console.log("gridLoader called with ", p)
     this.toggleLoading(true)
     try {
       //we use the sortMap that constructed in jq.gridz so remove the sort and order

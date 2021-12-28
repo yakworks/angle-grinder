@@ -5,7 +5,6 @@ import { BlockTitle } from 'angle-grinder/svelte/';
   let loading = false
 
   function toggleLoading(event){
-    // console.log("toggleLoading this", this)
     loading = !loading
     setTimeout(() => { loading = false }, 2000)
   }

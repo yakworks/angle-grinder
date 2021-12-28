@@ -41,16 +41,13 @@ export default class ListDataApiCtrl {
   async doConfig(ctx = {}) {
     if(!this.apiKey) this.apiKey = this.dataApi.key
 
-    console.log("makeListDataCtrl.doConfig called with ", ctx)
     if(isEmpty(ctx)) {
       let apiCfg = await appConfigApi.getConfig(this.apiKey)
       ctx = _.cloneDeep(apiCfg)
-      console.log("makeListDataCtrl.doConfig appConfigApi", ctx)
     }
 
     ctx.stateStore = this.dataApi.stores.stateStore
     ctx.stateStore.set(this.state)
-    console.log("makeListDataCtrl ctx.stateStore", get(ctx.stateStore))
     ctx.state = this.state
     //short cut
     // ctrl.state = state
@@ -90,7 +87,6 @@ export default class ListDataApiCtrl {
     this.ctx = ctx
 
     this.state.isConfigured = true
-    console.log("End makeListDataCtrl.doConfig ctx", this.ctx)
     return ctx
   }
 
@@ -159,7 +155,6 @@ export default class ListDataApiCtrl {
         isUpdate ? this.gridCtrl.updateRow(editedVm.id, editedVm) : this.gridCtrl.addRow(editedVm.id, editedVm)
       })
       .catch(() => {
-        console.log('Modal dismissed at: ' + new Date())
       })
     // , () => {
     //   console.log('Modal dismissed at: ' + new Date())
@@ -195,7 +190,6 @@ export default class ListDataApiCtrl {
         })
       })
       .catch(() => {
-        console.log('Modal dismissed at: ' + new Date())
       })
   }
 
@@ -247,7 +241,6 @@ export default class ListDataApiCtrl {
   // }
 
   async search(filters) {
-    console.log("ListDataApiCtrl search called with", filters)
     try {
       this.isSearching = true
       await this.gridCtrl?.search(filters)
