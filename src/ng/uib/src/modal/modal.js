@@ -364,7 +364,9 @@ angular.module('ui.bootstrap.modal', ['ui.bootstrap.multiMap', 'ui.bootstrap.sta
       })
 
       function keydownListener(evt) {
+
         if (evt.isDefaultPrevented()) {
+          console.log("###### keydownListener isDefaultPrevented", evt)
           return evt
         }
 

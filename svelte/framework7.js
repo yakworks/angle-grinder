@@ -33,11 +33,12 @@ const f7params = {
 };
 
 if (!app.f7 || typeof window === 'undefined') {
-  // console.log("f7init #1")
+  console.log("f7init first pass")
   f7init(f7params.el, f7params, false);
 }
 
 if (app.f7) {
+  console.log("f7init second pass")
   app.f7.init(f7params.el);
 } else {
   //not sure this will ever get hit, hacked in from App component
