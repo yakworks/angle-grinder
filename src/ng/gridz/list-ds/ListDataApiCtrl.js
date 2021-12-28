@@ -1,6 +1,8 @@
 // @ts-nocheck
 // import Log from 'angle-grinder/src/utils/Log'
 import _ from 'lodash'
+import { get } from 'svelte/store';
+import { isEmpty } from '../../../utils/dash'
 import EditModalCtrl from './EditModalCtrl'
 import BulkUpdateModalCtrl from './BulkUpdateModalCtrl'
 import { argsMerge } from '../../utils/classUtils'
@@ -24,55 +26,72 @@ export default class ListDataApiCtrl {
   editTemplate = require('./editDialog.html')
   bulkUpdateTemplate = require('./bulkUpdateDialog.html')
   //  searchTemplate = require('./searchForm.html')
+  state = {
+    isDense:false,
+    isConfigured: false,
+    showSearchForm: false,
+    hasSelected: false
+  }
 
   static $inject = ['$scope', '$element', '$uibModal', '$timeout']
   constructor(...args) {
     argsMerge(this, args)
   }
 
-  async doConfig(cfg) {
-    if(!cfg){
+  async doConfig(ctx = {}) {
+    if(!this.apiKey) this.apiKey = this.dataApi.key
+
+    console.log("makeListDataCtrl.doConfig called with ", ctx)
+    if(isEmpty(ctx)) {
       let apiCfg = await appConfigApi.getConfig(this.apiKey)
-      cfg = _.cloneDeep(apiCfg)
-      console.log("ListDataApiCtrl called appConfigApi.getConfig", apiCfg)
+      ctx = _.cloneDeep(apiCfg)
+      console.log("makeListDataCtrl.doConfig appConfigApi", ctx)
     }
 
-    console.log("ListDataApiCtrl datapi", this.dataApi)
-    const gopts = cfg.gridOptions || {}
-    console.log("ListDataApiCtrl gopts", gopts)
+    ctx.stateStore = this.dataApi.stores.stateStore
+    ctx.stateStore.set(this.state)
+    console.log("makeListDataCtrl ctx.stateStore", get(ctx.stateStore))
+    ctx.state = this.state
+    //short cut
+    // ctrl.state = state
+
+    const gopts = ctx.gridOptions || {}
     if (this.eventHandlers) {
       gopts.eventHandlers = this.eventHandlers
     }
-    // assign default datatype to grid loader
-    // gopts.datatype = (params) => this.gridLoader(params)
     gopts.dataApi = this.dataApi
 
     if (!gopts.toolbarOptions) gopts.toolbarOptions = {}
     const tbopts = _.merge({}, this.defaultToolbarOpts, gopts.toolbarOptions)
 
     // setup search form show based on if searchForm is configured
-    if (cfg.searchForm === undefined) {
+    if (ctx.searchForm === undefined) {
       gopts.showSearchForm = false
+      ctx.state.showSearchForm = false
       tbopts.searchFormButton.class = 'hidden'
     }
 
-    if (cfg.bulkUpdateForm === undefined) {
+    if (ctx.bulkUpdateForm === undefined) {
       tbopts.selectedButtons.bulkUpdate.class = 'hidden'
     }
 
-    // give toolbar scope
-    tbopts.scope = () => this.$scope
-    cfg.toolbarOptions = tbopts
-    _.defaults(this.cfg, cfg)
-
-    this.isConfigured = true
+    ctx.toolbarOptions = tbopts
 
     //setup some defaults for gridOpts
     gopts.contextMenuClick = (model, menuItem) => {
       return this.fireRowAction(model, menuItem)
     }
+
+    gopts.fireToolbarAction = this.fireToolbarAction
+
     gopts.restrictSearch = this.restrictSearch || {}
     gopts.initSearch = this.initSearch || {}
+
+    this.ctx = ctx
+
+    this.state.isConfigured = true
+    console.log("End makeListDataCtrl.doConfig ctx", this.ctx)
+    return ctx
   }
 
   get gridCtrl() { return this.$element.find('gridz-ds').controller('gridz-ds') }
