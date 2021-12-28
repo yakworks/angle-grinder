@@ -72,6 +72,8 @@ module.exports = function(env, argv) {
               hotReload: true,
               preprocess,
               onwarn: (warning, onwarn) => {
+                //hides warnings for now in dev
+                if (warning.message.includes("unused export property")) return;
                 warning.code === 'css-unused-selector' || onwarn(warning);
               }
             }
@@ -190,9 +192,15 @@ module.exports = function(env, argv) {
       "window.jQuery": "jquery"
     },
     resolve: {
+      //aliases are not DRY, setup here for svelte, in jsconfig.json for vscode and babel for jest
       alias: {
+        //for svelte since babel doesn't process
+        '@ag-svelte': path.resolve('./svelte/'),
+        '@ag': path.resolve('./src/'),
         'angle-grinder': path.resolve('./'),
         svelte: path.resolve('node_modules', 'svelte'),
+        //demo
+        '~': path.resolve('./examples/demo/src/'),
       },
       extensions: ['.tsx', '.ts', '.mjs', '.js', '.svelte'],
       mainFields: ['svelte', 'browser', 'module', 'main']

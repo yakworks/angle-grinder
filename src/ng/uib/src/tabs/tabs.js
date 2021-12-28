@@ -15,9 +15,10 @@ angular.module('ui.bootstrap.tabs', [])
             $event: evt,
             $selectedIndex: index
           })
-          if (evt && evt.isDefaultPrevented()) {
-            return
-          }
+          // framework7 sets isDefaultPrevented to true
+          // if (evt && evt.isDefaultPrevented()) {
+          //   return
+          // }
           previousSelected.tab.active = false
         }
 

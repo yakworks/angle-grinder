@@ -3,10 +3,10 @@
   import Charts from './Charts.svelte'
   import ChartsRaw from '!raw-loader!./Charts.svelte'
 
-  import ExampleSnippet from '../utils/ExampleSnippet.svelte'
+  import ExamplePage from '../utils/ExamplePage.svelte'
 </script>
 
-<ExampleSnippet horizontal={false} code={ChartsRaw} >
+<ExamplePage horizontal={false} code={ChartsRaw} >
   <Charts/>
-</ExampleSnippet>
+</ExamplePage>
 

@@ -1,6 +1,8 @@
 <script>
+  import { Page, Navbar, Block } from 'angle-grinder/svelte/index'
   import Code from './Code.svelte'
   const jq = window.$
+
   export let lang = 'html'
   export let code
   export let horizontal = true
@@ -38,4 +40,5 @@
     </div>
   </div>
 </div>
+
 

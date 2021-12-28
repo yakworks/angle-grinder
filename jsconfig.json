@@ -1,4 +1,3 @@
-
 {
   "extends": "@tsconfig/svelte/tsconfig.json",
   "compilerOptions": {
@@ -9,7 +8,10 @@
     "module": "es6",
     "paths": {
       "angle-grinder/src/*": ["src/*"],
-      "angle-grinder/svelte/*": ["svelte/*"]
+      "angle-grinder/svelte/*": ["svelte/*"],
+      "@ag-svelte/*": ["svelte/*"],
+      "@ag/*": ["src/*"],
+      "~/*": ["examples/demo/src/*"],
     },
     "checkJs": true,
     "allowJs": true,

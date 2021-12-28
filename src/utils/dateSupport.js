@@ -1,6 +1,6 @@
 import * as _ from './dash' // uses babel plugin to only use what is referenced
 // see https://mymth.github.io/vanillajs-datepicker/#/
-import { Datepicker } from 'vanillajs-datepicker'
+import { Datepicker } from 'vanillajs-datepicker/js/main'
 
 const isoFormat = 'yyyy-mm-dd'
 
@@ -20,7 +20,7 @@ export default datepickerDefaults
 
 /**
  *
- * @param {*} the cloned and merged options for datepicker
+ * @param {*} mergeOptions the cloned and merged options for datepicker
  */
 export function mergeDatepickerOpts(mergeOptions = {}) {
   return _.merge({}, datepickerDefaults, mergeOptions)

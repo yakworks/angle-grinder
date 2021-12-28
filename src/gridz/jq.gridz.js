@@ -119,9 +119,6 @@ class Gridz {
       this.setGridParam({ sortMap:{} }, true)
       return
     }
-    // console.log("grid sortname", sortname)
-    // console.log("grid sort x", x)
-    // console.log("grid order", order)
     //no put it alltogether so we can split and make it a map form
     let sortJoined = sortname + ` ${order}`
     const sortMap = {} //will get populated at the end

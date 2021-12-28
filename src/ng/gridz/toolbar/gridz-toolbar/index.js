@@ -6,6 +6,7 @@ export default () => ({
   template: require('./toolbar.html'),
   bindToController: true,
   scope: {
+    ctx: '<',
     options: '<',
     gridCtrl: '<'
   },
@@ -25,6 +26,9 @@ class Controller {
     showQuickSearch: true
   }
   isLoading = false
+  //injected
+  ctx
+  gridCtrl
 
   /* @ngInject */
   constructor($element, $compile, $scope) {
@@ -37,6 +41,7 @@ class Controller {
     if (this.options) {
       _.merge(this.opts, this.options)
     }
+    this.$scope.ctx = this.ctx
   }
 
   $postLink() {
@@ -51,9 +56,12 @@ class Controller {
     this.setupSearchInput()
   }
 
+  toggleSearchForm() {
+    this.ctx.state.showSearchForm = !this.ctx.state.showSearchForm
+  }
+
   setupSearchInput() {
     this.$element.find('.quick-search').bind('keydown', event => {
-      // console.log("keydown event", event)
       // 13 - Enter key code
       if (event.which === 13) {
         event.preventDefault()
@@ -78,15 +86,14 @@ class Controller {
     try {
       this.isLoading = true
       this.gridCtrl.toggleLoading(true)
-    if (_.isFunction(btnItem.action)) {
-      await btnItem.action(btnItem, event)
-    } else {
-      console.log(this.gridCtrl)
-      await this.gridCtrl.gridOptions.fireToolbarAction(btnItem, event)
+      if (_.isFunction(btnItem.action)) {
+        await btnItem.action(btnItem, event)
+      } else {
+        await this.gridCtrl.gridOptions.fireToolbarAction(btnItem, event)
+      }
+    } finally {
+      this.isLoading = false
+      this.gridCtrl.toggleLoading(false)
     }
-  } finally {
-    this.isLoading = false
-    this.gridCtrl.toggleLoading(false)
-  }
   }
 }

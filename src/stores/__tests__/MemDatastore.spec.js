@@ -89,9 +89,7 @@ describe('MemDataService', () => {
 
     test('picklist paged', async function() {
       const result = await ds.picklist()
-      //console.log("result", result)
       expect(result.length).toEqual(42)
-      // expect(result.data.length).toEqual(20)
     })
 
   })

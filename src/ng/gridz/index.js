@@ -4,7 +4,7 @@ import './support'
 import './gridz-directive'
 import './list'
 
-import './gridz-datastore'
-import './list-datastore'
+import './gridz-ds'
+import './list-ds'
 
 export default grid2Mod

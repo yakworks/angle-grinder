@@ -13,7 +13,6 @@
 
   function handleSubmit({ detail: { values, setSubmitting, resetForm } }) {
     setTimeout(() => {
-      console.log(values);
       setSubmitting(false);
       resetForm({
         user: { email: 'test@user.com' },

@@ -14,7 +14,7 @@ gridOptions:
   toolbarOptions:
     selectedButtons:
       delete:
-        icon: fa-trash-alt
+        icon: delete
         tooltip: Delete
 
 editForm:

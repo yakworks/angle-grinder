@@ -67,16 +67,13 @@ export default class RestDataApi {
 
   /** Returns a promise to save (POST) a new item.   The item's identifier is auto-assigned. */
   async post(item) {
-    // console.log('post item', item)
     const newItem = await this.api.post(`${this.endpoint}`, { json: item }).json()
-    // console.log('posted newItem', newItem)
     return newItem
   }
 
   /** Returns a promise to save (PUT) an existing item. */
   // TODO: probably should pass id either, or take item.id ?
   async put(item) {
-    // console.log('put item', item)
     const newItem = await this.api.put(`${this.endpoint}/${item.id}`, { json: item }).json()
     return newItem
   }

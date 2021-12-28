@@ -1,6 +1,6 @@
 <script>
   import { onMount } from 'svelte'
-  import { Button } from 'angle-grinder/svelte'
+  import { Button, Button7 } from 'angle-grinder/svelte/index'
 
 </script>
 
@@ -10,5 +10,7 @@
     <div class="toolbar-title">Title</div>
     <div class="spacer"/>
     <Button icon="mdi-dots-vertical"/>
+    <Button7 iconMaterial="more_vert"/>
+    <Button7 popoverOpen=".popover-menu2" iconMaterial="more_vert"/>
   </div>
 </header>

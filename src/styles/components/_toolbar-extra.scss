@@ -30,6 +30,10 @@ $toolbar-dense-control-height: $toolbar-dense-height - $item-spacing !default;
   max-width: 100%;
   // z-index: unset;
 
+  .toolbar-item-left {
+    margin-left: -10px;
+  }
+
   > .toolbar-container .toolbar-menu {
     margin-left: $toolbar-item-negative-margin;
   }
@@ -89,6 +93,11 @@ $toolbar-dense-control-height: $toolbar-dense-height - $item-spacing !default;
     //     content: "\f148";
     //   }
     // }
+    .material-icons {
+      font-size: 16px;
+      transform: rotate(90deg);
+    }
+
   }
 
   .divider-vertical {

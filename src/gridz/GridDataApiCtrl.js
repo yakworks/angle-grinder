@@ -12,8 +12,9 @@ export default class GridDataApiCtrl {
   unsubs = []
   highlightClass = 'ui-state-highlight'
   systemColumns = ['cb', '-row_action_col']
-  isDense = false
-  showSearchForm = false
+  isDense = false //DEPRECATED dont ue
+  // injected
+  ctx
 
   defaultCtxMenuOptions = {
     edit: {
@@ -26,8 +27,26 @@ export default class GridDataApiCtrl {
     }
   }
 
-  setupGrid(gridWrapper, jqGridElement, gridOptions) {
-    const opts = gridOptions
+  setupAndInit(wrapperNode, context) {
+    this.ctx = context
+    const gridWrapper = $(wrapperNode)
+    const gridEl = gridWrapper.find('table.gridz')
+    this.setupGrid(gridWrapper, gridEl)
+    this.initGridz()
+
+    return this.ctx
+  }
+
+  setupGrid(gridWrapper, jqGridElement) {
+
+    // this.ctx = ctx
+    const opts = this.ctx.gridOptions
+    //assign itself so parents can see it
+    this.ctx.gridCtrl = this
+    // shortcut shared state
+    // this.state = _.merge(this.state, this.ctx.state)
+    this.stateStore = this.ctx.stateStore
+
     opts.loadui = 'block'
     this.gridOptions = opts
 
@@ -40,9 +59,8 @@ export default class GridDataApiCtrl {
     }
     $jqGrid.attr('id', this.gridId)
 
-
     let optsToMerge = _.pick(opts, [
-      'showSearchForm', 'dataApi', 'initSearch', 'restrictSearch', 'contextMenuClick'
+      'dataApi', 'initSearch', 'restrictSearch', 'contextMenuClick'
     ])
     _.mergeWith(this, optsToMerge, (obj, optVal) => {
       //dont merge val if its null
@@ -61,9 +79,17 @@ export default class GridDataApiCtrl {
       if (opts.eventHandlers?.onSelect && _.isFunction(opts.eventHandlers.onSelect)) {
         opts.eventHandlers.onSelect(rowId, status, event)
       }
+
       this.hasSelected = (this.getSelectedRowIds().length > 0)
+
+      this.ctx.stateStore.update( state => {
+        state.hasSelected = this.hasSelected
+        return state
+      })
+
       $jqGrid.trigger('gridz:selectedRows', [this.getSelectedRowIds()])
     }
+
     $jqGrid.on('jqGridSelectRow', onSelect)
     $jqGrid.on('jqGridSelectAll', onSelect)
 
@@ -79,20 +105,17 @@ export default class GridDataApiCtrl {
     this.setupFormatters(this, $jqGrid, opts)
     this.formatters && this.setupCustomFormatters(this, this.formatters, opts)
 
-    console.log("pageViewStore.subscribe")
     // adds the listener to the store
     const unsubscribe = this.dataApi.pageViewStore.subscribe(data => {
-      // console.log("dataApi.currentPage")
       this.addJSONData(data)
     });
     this.unsubs.push(unsubscribe)
+
   }
 
   //initialize the grid the jquery way
   initGridz(){
-    // console.log({opt: this.gridOptions})
     this.jqGridEl.gridz(this.gridOptions)
-    // setupFilterToolBar(options)
   }
 
   // the jqGrid table element
@@ -399,7 +422,6 @@ export default class GridDataApiCtrl {
 
   // Sets the grid search filters and triggers a reload
   async search(q, queryText) {
-    console.log("GridCtrl search called with  ", q)
     try {
       this.isSearching = true
       const params = {
@@ -445,13 +467,11 @@ export default class GridDataApiCtrl {
    * @param {*} p the params to send to search
    */
   async gridLoader(p) {
-    console.log("gridLoader called with ", p)
     this.toggleLoading(true)
     try {
       //we use the sortMap that constructed in jq.gridz so remove the sort and order
       delete p.order; delete p.sort;
       let sortMap = this.getParam('sortMap')
-      console.log('sortMap', sortMap)
       if(sortMap){
         p.sort = sortMap
       }
@@ -763,7 +783,7 @@ export default class GridDataApiCtrl {
     this.unsubs.forEach(fn => {
       fn()
     })
-    this.jqGridEl.jqGrid('GridDestroy')
+    this.jqGridEl?.jqGrid('GridDestroy')
   }
 
 }

@@ -15,6 +15,5 @@ export default class BatchListCtrl extends BaseListCtrl {
   async correct() {
     const ids = this.gridCtrl.getSelectedRows()?.map(row => row.id)
     const result = await this.dataStoreApi.arBatch.postAction('runCorrection', { ids })
-    console.log(result)
   }
 }

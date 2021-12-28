@@ -99,7 +99,6 @@ describe('transformFields', () => {
   describe('tranformOptions from object', function() {
     it('should tranformOptions from object', function() {
       let topts = transformFields(testOpts)
-      //console.log("topts", topts)
       topts.forEach((item, i) => {
         expect(item).toEqual(resultOpts[i])
       })
@@ -108,7 +107,6 @@ describe('transformFields', () => {
 
     it('should tranformOptions from array', function() {
       let topts = transformFields(testArray)
-      //console.log("topts", topts)
       topts.forEach((item, i) => {
         expect(item).toEqual(resultOpts[i])
       })
@@ -125,7 +123,6 @@ describe('transformFields', () => {
         }
       ]
       let formlyOpts = transformFields(testFieldGroupArray)
-      //console.log("topts", topts)
       expect(formlyOpts).toEqual(resultFieldGroup)
     })
 
@@ -138,7 +135,6 @@ describe('transformFields', () => {
       }
 
       let formlyOpts = transformFields(testFieldGroupObject)
-      //console.log("topts", topts)
       expect(formlyOpts).toEqual(resultFieldGroup)
     })
 
@@ -202,7 +198,6 @@ describe('transformFields', () => {
       }
 
       let formlyOpts = transformFields(testCols)
-      //console.log("topts", topts)
       expect(formlyOpts).toEqual(resultCols)
     })
   })

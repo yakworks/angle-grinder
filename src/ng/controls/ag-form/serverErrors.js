@@ -25,8 +25,6 @@ function setServerErrors(form, errors) {
       result.push(undefined)
     }
   }
-  // console.log('result', result)
-  // console.log('form.$serverErrors', form.$serverErrors)
   return result
 }
 

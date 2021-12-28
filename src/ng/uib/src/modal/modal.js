@@ -364,7 +364,9 @@ angular.module('ui.bootstrap.modal', ['ui.bootstrap.multiMap', 'ui.bootstrap.sta
       })
 
       function keydownListener(evt) {
+
         if (evt.isDefaultPrevented()) {
+          console.log("###### keydownListener isDefaultPrevented", evt)
           return evt
         }
 
@@ -485,7 +487,7 @@ angular.module('ui.bootstrap.modal', ['ui.bootstrap.multiMap', 'ui.bootstrap.sta
           size: modal.size,
           index: topModalIndex,
           animate: 'animate',
-          'ng-style': '{\'z-index\': 1051 + $$topModalIndex*10, display: \'block\'}',
+          'ng-style': '{\'z-index\': 10051 + $$topModalIndex*10, display: \'block\'}',
           tabindex: -1,
           'uib-modal-animation-class': 'fade',
           'modal-in-class': 'show'

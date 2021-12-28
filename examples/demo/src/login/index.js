@@ -15,8 +15,6 @@ class controller {
   // }
 
   async login() {
-    console.log('vm', this.vm)
-    console.log('scope', this.$scope)
     if (!this.vm) return
 
     try {
@@ -24,7 +22,6 @@ class controller {
         { json: { username: this.vm.login, password: this.vm.pword } }
       ).json()
       localStorage.setItem('bearer', keyData)
-      // console.log('keyData', keyData)
 
     } catch (error) {
       console.error('Fetch error:', error)

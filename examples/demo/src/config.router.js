@@ -32,7 +32,6 @@ angular.module('app')
     // stateHelperProvider.state(packetCopy)
     // appState.packetStates = packetCopy
 
-    // console.log("appState.routerStates", appState.routerStates)
     // $stateProvider.state({
     //   name: 'fresh',
     //   url: '/fresh',

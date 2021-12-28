@@ -1,6 +1,11 @@
 const formStates = {
   name: 'form-controls',
-  template: '<div ui-view class="fade-in-up"></div>',
+  template: `\
+  <div class="page">
+    <div class="page-content">
+      <div class="block"><div ui-view></div></div>
+    </div>
+  </div>`,
   data: {
     icon: 'mdi mdi-id-card'
   },

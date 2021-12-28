@@ -19,7 +19,6 @@ class Controller {
       this.bCls = `${this.bCls} dropdown-toggle`
     }
     // this.bCls = "foo"
-    // console.log("this.btnCls" , this.bCls )
   }
 
   fireMenuClick(menuItem, event) {

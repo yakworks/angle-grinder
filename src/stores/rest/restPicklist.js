@@ -14,6 +14,13 @@ export const restPicklist = ({ api }) => obj => {
       const o = { path: 'picklist', searchParams: cleanParams }
       const data = await api.get(o)
       return data
+    },
+
+    /**
+     * Takes text and passes through as qSearch
+     */
+    async picklistSearch(text) {
+      return obj.picklist({qSearch: text})
     }
 
   })

@@ -1,6 +1,6 @@
 angular.module('uib/template/tabs/tabset.html', []).run(['$templateCache', function($templateCache) {
   $templateCache.put('uib/template/tabs/tabset.html',
-    `<div>
+    `<div class="bulma">
       <div class="tabs {{tabset.type}}">
         <ul ng-transclude></ul>
       </div>

@@ -2,9 +2,9 @@
 <script>
   import Comp from './Toolbar.svelte'
   import svelteRaw from '!raw-loader!./Toolbar.svelte'
-  import ExampleSnippet from '../utils/ExampleSnippet.svelte'
+  import ExamplePage from '../utils/ExamplePage.svelte'
 </script>
 
-<ExampleSnippet horizontal={false} code={svelteRaw} >
+<ExamplePage horizontal={false} code={svelteRaw} >
   <Comp/>
-</ExampleSnippet>
+</ExamplePage>

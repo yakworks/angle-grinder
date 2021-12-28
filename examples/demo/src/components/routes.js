@@ -1,6 +1,12 @@
 const componentsStates = {
   name: 'ngComponents',
   abstract: true,
+  template: `\
+  <div class="page">
+    <div class="page-content">
+      <div class="block"><div ui-view></div></div>
+    </div>
+  </div>`,
   // template: '<div ui-view class="fade-in-up"></div>',
   data: {
     title: 'ng Components',

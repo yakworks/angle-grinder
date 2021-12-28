@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { isoDateToDisplay } from '../utils/dateSupport'
+import { formatAmount } from '../utils/formatters'
 
 // Extra formatters for jqGrid
 $.extend($.fn.fmatter, {
@@ -11,20 +12,15 @@ $.extend($.fn.fmatter, {
 
   // use `agCurrencyFilter` for format currencies
   currency(cellVal, options) {
-    return columnAligner('currency', window.agCurrencyFilter(cellVal), options)
+    return columnAligner('currency', formatAmount(cellVal), options)
   },
 
-  // use `agCurrencyFilter` for format currencies, use 0 for empty/null/undefined value
   currencyOrZero(cellVal, options) {
-    let newCellVal = cellVal
-    if ((typeof (cellVal) === 'undefined') || (cellVal === null) || (cellVal === 'null') || (cellVal === '')) {
-      newCellVal = 0
-    }
-    return columnAligner('currency', newCellVal, options)
+    return columnAligner('currency', formatAmount(cellVal), options)
   },
 
   okIcon(cellVal, options, rowdata) {
-    return cellVal ? "<i class='fas fa-check'></i>" : ''
+    return cellVal ? "<i class='material-icons'>check</i>" : ''
   },
 
   editActionLink(cellVal, options, rowdata) {

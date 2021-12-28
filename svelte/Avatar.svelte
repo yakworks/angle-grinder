@@ -3,14 +3,14 @@
   import { classNames } from './utils';
   // import { ClassBuilder } from "./utils/classes.js"
 
-  export let className = ''
-	export { className as class } //work around since class is reserved
+  let className = undefined;
+  export { className as class }; //work around since class is reserved
 
   export let name = ''
   export let letters = ''
   export let charCount = 2
   export let imgSrc = ''
-  export let imgName
+  export let imgName = ''
   export let square = false
   export let imgClass = ''
   export let dot = false

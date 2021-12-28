@@ -1,6 +1,7 @@
 
 <script>
   import themeColors from 'angle-grinder/src/themeColors'
+  import { Page, Navbar, Block } from 'angle-grinder/svelte/index'
   let contrasts = [
     'body',
     'contrast',
@@ -31,79 +32,85 @@
   ]
 
 </script>
+<Page>
+  <Navbar title="colors" />
+  <Block>
 
 {#each contrasts as contrast}
-  <div class="columns is-gapless">
-    {#each shades as shade}
-    <div class="column">
-      <div class="notification text-{contrast}-contrast bg-{contrast}{shade}">
-        {contrast}{shade}
-      </div>
+<div class="columns is-gapless">
+  {#each shades as shade}
+  <div class="column">
+    <div class="notification text-{contrast}-contrast bg-{contrast}{shade}">
+      {contrast}{shade}
     </div>
-    {/each}
   </div>
+  {/each}
+</div>
 {/each}
 
 {#each colors as color}
-  <div class="columns is-gapless">
-    {#each tints as tint}
-    <div class="column">
-      <div class="notification text-{color}-contrast bg-{color}{tint}">
-        {color}{tint}
-      </div>
+<div class="columns is-gapless">
+  {#each tints as tint}
+  <div class="column">
+    <div class="notification text-{color}-contrast bg-{color}{tint}">
+      {color}{tint}
     </div>
-    {/each}
   </div>
+  {/each}
+</div>
 {/each}
 
 <div class="columns is-gapless">
-  {#each colors as color}
-  <div class="column">
-    <div class="notification is-{color} is-light">
-      {color}-highlight
-    </div>
+{#each colors as color}
+<div class="column">
+  <div class="notification is-{color} is-light">
+    {color}-highlight
   </div>
-  {/each}
+</div>
+{/each}
 </div>
 
 
 <div class="columns is-gapless">
-  {#each Array(10) as _, i}
-  <div class="column">
-    <div class="notification text-shade-{(i+1)*5}-contrast bg-shade-{(i+1)*5}">
-      shade-{(i+1)*5}
-    </div>
+{#each Array(10) as _, i}
+<div class="column">
+  <div class="notification text-shade-{(i+1)*5}-contrast bg-shade-{(i+1)*5}">
+    shade-{(i+1)*5}
   </div>
-  {/each}
+</div>
+{/each}
 </div>
 <div class="columns is-gapless">
-  {#each Array(10) as _, i}
-  <div class="column">
-    <div class="notification text-shade-{(i+10)*5}-contrast bg-shade-{(i+10)*5}">
-      shade-{(i+10)*5}
-    </div>
+{#each Array(10) as _, i}
+<div class="column">
+  <div class="notification text-shade-{(i+10)*5}-contrast bg-shade-{(i+10)*5}">
+    shade-{(i+10)*5}
   </div>
-  {/each}
 </div>
-
-<div class="columns is-gapless">
-  {#each colors as color}
-  <div class="column">
-    {#each tints as tint}
-    <p class="text-{color}{tint}">{color}{tint}</p>
-    {/each}
-  </div>
-  {/each}
+{/each}
 </div>
 
 <div class="columns is-gapless">
-  {#each colors as color}
-  <div class="column bg-contrast">
-    {#each tints as tint}
-    <p class="text-{color}{tint}">{color}{tint}</p>
-    {/each}
-  </div>
+{#each colors as color}
+<div class="column">
+  {#each tints as tint}
+  <p class="text-{color}{tint}">{color}{tint}</p>
   {/each}
+</div>
+{/each}
+</div>
+
+<div class="columns is-gapless">
+{#each colors as color}
+<div class="column bg-contrast">
+  {#each tints as tint}
+  <p class="text-{color}{tint}">{color}{tint}</p>
+  {/each}
+</div>
+{/each}
 </div>
 
 
+
+  </Block>
+</Page>

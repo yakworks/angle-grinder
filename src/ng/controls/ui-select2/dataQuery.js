@@ -19,7 +19,6 @@ export function setupData(opts, dataStoreApi) {
     if (Array.isArray(opts.data)) {
       // convertSelect2Data makes ['red','green'] into [{id:'red',name'red}, etc...]
       const results = convertSelect2Data(opts.data)
-      // console.log('results', results)
       opts.data = { results: results }
     }
     if(!opts.minimumInputLength){
@@ -31,7 +30,6 @@ export function setupData(opts, dataStoreApi) {
 }
 // copied in from select2 source and modified so it works when data.results is a Promise
 export function dataQuery(opts) {
-  // console.log(`***** dataQuery for ${opts.wtf}`, opts)
   let data = opts.data // data elements
   let getText // function used to retrieve the text portion of a data item that is matched against the search
   const displayFields = opts.displayFields
@@ -92,7 +90,6 @@ export function dataQuery(opts) {
     Promise.resolve(opts.dataResults).then(res => {
       let dta = res
       if(!res) console.log("dataQuery empty promise resolved ")
-      // console.log("**** resolved dataQuery options", opts)
       // if its an object then assume it pager object with data key
       if (_.isPlainObject(res)) dta = res.data
       if(dta){
@@ -126,7 +123,6 @@ export function convertSelect2Data(strArray, textFieldKey = 'name') {
 
 // if minimumInputLength > 0 then query api as they type
 export function dataMinCharsQuery(opts, dataStoreApi) {
-  // console.log(`***** dataMinCharsQuery for ${opts.wtf}`, opts)
   let timeout
   let quietMillis = opts.quietMillis || 500
 

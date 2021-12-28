@@ -40,10 +40,8 @@
   let formData = {}
 
   function getFormInstanceData() {
-    console.log("getModel()", theForm.getModel())
     formData = theForm.getModel()
     someInput.foo()
-    // console.log("someInput", someInput)
   }
 
   // const {form, handleChange} = getContext(FORM);

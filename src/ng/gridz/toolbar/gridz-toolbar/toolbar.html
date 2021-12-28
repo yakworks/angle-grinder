@@ -24,6 +24,6 @@
   </div>
   <ag-button ng-if="!(tbCtrl.opts.searchFormButton.class=='hidden')"
     icon="{{tbCtrl.opts.searchFormButton.icon}}" uib-tooltip="{{tbCtrl.opts.searchFormButton.tooltip}}"
-    ng-click="tbCtrl.gridCtrl.showSearchForm = !tbCtrl.gridCtrl.showSearchForm" ></ag-button>
+    ng-click="tbCtrl.toggleSearchForm()" ></ag-button>
   <gridz-options-dropdown grid-ctrl="tbCtrl.gridCtrl"></gridz-options-dropdown>
 </ag-toolbar>
