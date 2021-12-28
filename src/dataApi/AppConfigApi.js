@@ -43,7 +43,12 @@ export class AppConfigApi {
     if (_cache.contains(key)) {
       return _cache.get(key)
     } else {
-      const cfg = await kyApi.ky.get(key).json()
+      let cfg = {}
+      try{
+        cfg = await kyApi.ky.get(key).json()
+      } catch (er) {
+        console.error("problem getting config from server")
+      }
       _cache.set(key, cfg)
       return cfg
     }

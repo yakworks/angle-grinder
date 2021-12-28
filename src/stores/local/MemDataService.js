@@ -126,7 +126,7 @@ const MemDataService = ({
   /** Returns a promise for the item with the given identifier */
   ds.get = async (id) => {
     const items = await ds.stores.getMasterData()
-    const item = items.find(item => item.id === id)
+    const item = items.find(item => item.id == id)
     return item
   }
 
