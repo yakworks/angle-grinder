@@ -64,6 +64,7 @@
     }
   }
 
+// <slot name="title" />
 </script>
 
 <!-- FIXME works fine here but not when imported into rcm-ui -->
@@ -105,6 +106,7 @@
     <div class="spacer"/>
 
     <QuickFilter />
+    <slot name="filter" />
 
     <div class="toolbar-item p-0 quick-search-item">
       <div class="control has-icons-right has-icons-left">

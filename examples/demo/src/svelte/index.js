@@ -13,6 +13,7 @@ import Items from './Items/Index.svelte'
 import Lists from './Lists/Index.svelte'
 import Selects from './Selects/Index.svelte'
 import Toolbar from './Toolbar/Index.svelte'
+import SearchForm from './SearchForm/Index.svelte'
 import Popover from './Popover/Index.svelte'
 import Tabs from './Tabs/Index.svelte'
 // import avatarsDemoMod from './avatars'
@@ -64,6 +65,9 @@ appMod
   })
   .component('svelteTabsIndex', {
     controller: ngSvelteShim(Tabs)
+  })
+  .component('svelteSearchFormIndex', {
+    controller: ngSvelteShim(SearchForm)
   })
 
 export default appMod.name

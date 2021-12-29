@@ -30,6 +30,7 @@ const componentsStates = {
     { name: 'toolbar', component: 'svelteToolbarIndex' },
     { name: 'popover', component: 'sveltePopoverIndex' },
     { name: 'tabs', component: 'svelteTabsIndex' },
+    { name: 'Dynamic Form', component: 'svelteSearchFormIndex' },
   ]
 }
 

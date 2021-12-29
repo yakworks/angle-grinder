@@ -1,12 +1,12 @@
 <script>
 	import Select from 'svelte-select';
-  import StoreHolder from '@ag/stores/StoreHolder';
+  import apiHolder from '@ag/stores/apiHolder';
 
   export let dataApiKey = undefined
   export let dataApi = undefined
   export let isMulti = true
 
-  if(dataApiKey) dataApi = StoreHolder.dataApiFactory[dataApiKey]
+  if(dataApiKey) dataApi = apiHolder.dataApiFactory[dataApiKey]
 
 	const optionIdentifier = 'id';
   const getOptionLabel = (option) => option.name;

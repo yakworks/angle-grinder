@@ -3,14 +3,14 @@ import _ from 'lodash'
 import appName from './app.module'
 import './config.router'
 import appState from 'angle-grinder/src/tools/AppState'
-import StoreHolder from 'angle-grinder/src/stores/storeHolder'
+import apiHolder from 'angle-grinder/src/stores/apiHolder'
 import dataApiFactory from './store/dataApiFactory'
 import { KyFactory } from "angle-grinder/src/stores/ky";
 
 KyFactory.enableAuthHeader()
 KyFactory.defaults.prefixUrl = configData.base_url
 
-StoreHolder.dataApiFactory = dataApiFactory
+apiHolder.dataApiFactory = dataApiFactory
 
 const app = angular.module(appName)
 // export default app.name
