@@ -11,18 +11,18 @@ export default function select2Setup(opts, dataStoreApi) {
       id: 'id',
       text: 'name'
     },
-    displayFields: ['name'], //first item in array is default
     dataVar: 'val',
     showSelectAll: false,
     multiple: false
   }
   _.defaultsDeep(opts, defaults)
+  // default to whats in fields.text
+  if(!opts.displayFields) opts.displayFields = [opts.fields.text]
+  // console.log("select2 opts", opts)
   // select2 needs placeholder if allowClear=true.
   if (opts.allowClear && !opts.placeholder) {
     opts.placeholder = ' '
   }
-
-  opts.text = (item) => item[opts.data.text]
 
   if (opts.multiple) {
     //setup multiple defaults
@@ -53,8 +53,8 @@ export default function select2Setup(opts, dataStoreApi) {
   const showSelectAll = opts.showSelectAll
   const displayFields = opts.displayFields
 
-  opts.text = function(e) {
-    return e[opts.fields.text]
+  opts.text = function(item) {
+    return item[opts.fields.text]
   }
 
   //function to underline matching text with what was typed

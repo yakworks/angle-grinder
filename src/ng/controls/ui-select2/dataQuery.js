@@ -1,15 +1,42 @@
 import _ from 'lodash'
 
+// function called to get data from api picklist
+async function getDataFromApi({opts, dataApi, dataApiParams}){
+  let res = await dataApi.picklist({q: dataApiParams})
+  let dta = res
+  // if its an object then assume it pager object with data key
+  if (_.isPlainObject(dta)) dta = res.data
+
+  //if it has a keyField then translate it to the id, used when you want 'code' or maybe 'email' to be the key thats set
+  if(opts.fields.id !== 'id') {
+    dta = dta.map(o => {
+      return { ...o, _id: o.id, id: o[opts.fields.id]}
+    })
+  }
+  if(opts.addData) {
+    if (Array.isArray(opts.addData)) {
+      dta = [...opts.addData, ...dta]
+    } else {
+      dta = [opts.addData, ...dta]
+    }
+  }
+  return dta
+}
+
 export function setupData(opts, dataStoreApi) {
   if (opts.dataApiKey){
+    // setup data
+    opts.data = {}
+
     //if minimumInputLength is not set then load the whole dataset
     if(!opts.minimumInputLength) {
-      const dataApiKey = opts.dataApiKey
+      const dataApi = dataStoreApi[opts.dataApiKey]
       const dataApiParams = opts.dataApiParams
-      opts.data = { results: () => dataStoreApi[dataApiKey].picklist({q: dataApiParams}) }
+      opts.data.results = () => {
+        return getDataFromApi({opts, dataApi, dataApiParams})
+      }
     }
     else {
-      opts.data = {}
       opts.query = dataMinCharsQuery(opts, dataStoreApi)
     }
   }
@@ -31,24 +58,27 @@ export function setupData(opts, dataStoreApi) {
 // copied in from select2 source and modified so it works when data.results is a Promise
 export function dataQuery(opts) {
   let data = opts.data // data elements
-  let getText // function used to retrieve the text portion of a data item that is matched against the search
+  // For Searching, not display
+  // function used to retrieve the text portion of a data item that is matched against the search
+  let getText
   const displayFields = opts.displayFields
 
-  if (displayFields.length > 1 ) {
-      getText = (item) => displayFields.map(text => item[text]).join(' ')
-  } else {
-      getText = (item) => opts.text(item)
-  }
+  // if (displayFields[0] === 'name') {
+  //     getText = (item) => opts.text(item)
+  // } else {
+  //   getText = (item) => displayFields.map(fld => item[fld]).join(' ')
+  // }
+  getText = (item) => displayFields.map(fld => item[fld]).join(' ')
 
 
   // make results a function if its not
-  if (!$.isFunction(data?.results)) {
+  if (!_.isFunction(data?.results)) {
     const dres = data.results
     data.results = () => dres
   }
 
   // make data a function if its not
-  if ($.isFunction(data) === false) {
+  if (_.isFunction(data) === false) {
     const tmp = data
     data = function() { return tmp }
   }
@@ -61,6 +91,7 @@ export function dataQuery(opts) {
     opts.dataResults = opts.dataResults || data().results()
     if (t === '') {
       Promise.resolve(opts.dataResults).then(res => {
+
         let dta = res
         // if its an object then assume it pager object with data key
         if (_.isPlainObject(res)) dta = res.data

@@ -31,7 +31,7 @@ describe('transformFields', () => {
   let resultOpts = [
     {
       key: 'foo',
-      type: 'input',
+      type: 'text',
       name: 'foo',
       label: 'Cust #',
       required: true,
@@ -55,7 +55,7 @@ describe('transformFields', () => {
         {
           key: 'foo',
           name: 'foo',
-          type: 'input',
+          type: 'text',
           className: 'column',
           label: 'Cust #',
           required: true,
@@ -75,7 +75,7 @@ describe('transformFields', () => {
     },
     {
       key: 'name',
-      type: 'input',
+      type: 'text',
       name: 'name',
       label: 'Name',
       maxLength: 50,
@@ -156,7 +156,7 @@ describe('transformFields', () => {
           {
             key: 'foo',
             name: 'foo',
-            type: 'input',
+            type: 'text',
             label: 'Foo',
             placeholder: 'Foo'
           }
@@ -165,7 +165,7 @@ describe('transformFields', () => {
           {
             key: 'bar',
             name: 'bar',
-            type: 'input',
+            type: 'text',
             label: 'Bar',
             placeholder: 'Bar'
           }
@@ -174,14 +174,14 @@ describe('transformFields', () => {
           {
             key: 'baz',
             name: 'baz',
-            type: 'input',
+            type: 'text',
             label: 'Baz',
             placeholder: 'Baz'
           },
           {
             key: 'buzz',
             name: 'buzz',
-            type: 'input',
+            type: 'text',
             label: 'Buzz',
             placeholder: 'Buzz'
           }

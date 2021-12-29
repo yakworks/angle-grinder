@@ -7,7 +7,7 @@ class controller {
   dayData = days
   // get just id and name from people data
   peopleData = people.map(p => {
-    return { id: p.id, name: p.name }
+    return { id: p.id, email: p.email, name: p.name }
   })
 
   custApiData = { results: () => this.customerApi.picklist() }
