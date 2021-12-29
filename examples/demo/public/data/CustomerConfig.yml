@@ -56,7 +56,12 @@ editForm:
       label: ''
       placeholder: Zip
       className: column is-2
-  country: {}
+  country:
+    type: select
+    selectOptions:
+      multiple: false
+      useDataObject: false
+      data: [US, CA, MX ]
   timezone: {}
   nested.foo:
     label: 'nested.foo'

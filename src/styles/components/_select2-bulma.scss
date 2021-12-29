@@ -146,6 +146,8 @@ $select2-font-size: 14px;
 
 // search field for single drop
 .select2-drop {
+  //need biig z-index whn in modal
+  z-index: 99999;
   // border: 1px solid #dbdbdb !important;
   // border-top: none !important;
 
