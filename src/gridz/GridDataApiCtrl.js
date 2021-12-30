@@ -323,9 +323,11 @@ export default class GridDataApiCtrl {
   // where name is the name of the column as described in the colModel and the value is the value.
   addRow(id, data, position) {
     if (position == null) { position = 'first' }
-    this.jqGridEl.addRowData(id, flattenObject(data), position)
-    this.jqGridEl.trigger('gridz:rowAdded', [id, data])
-    return this.flashOnSuccess(id)
+    const flatData = flattenObject(data)
+    console.log("addRow", data)
+    this.jqGridEl.addRowData(id, data, position)
+    this.flashOnSuccess(id)
+    return this.jqGridEl.trigger('gridz:rowAdded', [id, data])
   }
 
   // Returns `true` if the grid contains a row with the given id

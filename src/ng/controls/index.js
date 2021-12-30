@@ -10,6 +10,8 @@ import agInputBs from './ag-input-bs'
 import uiSelect2Mod from './ui-select2/ui.select2'
 import agSelect from './ag-select'
 import agSelectRest from './ag-select-rest'
+import agDate from './ag-date'
+import agDateInput from './ag-date/input'
 import agDatepicker from './ag-datepicker'
 import agDatepickerInput from './ag-datepicker/input'
 import agDaterange from './ag-daterange'
@@ -37,6 +39,8 @@ angular.module(MOD_NAME, [
   .directive('agInputWildcard', agInputWildcard)
   .directive('agInputList', agInputList)
   .directive('agSelect', agSelect)
+  .directive('agDate', agDate)
+  .directive('agDateInput', agDateInput)
   .directive('agDatepicker', agDatepicker)
   .directive('agDatepickerInput', agDatepickerInput)
   .directive('agDaterange', agDaterange)

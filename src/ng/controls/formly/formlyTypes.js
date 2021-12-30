@@ -49,7 +49,7 @@ export default function setupTypes(formlyConfig) {
 
   setType({
     name: 'date',
-    template: '<ag-datepicker is-expanded label="{{to.label}}" element-id="{{id}}" ng-model="model[options.key]" hint="{{to.hint}}"></ag-datepicker>'
+    template: '<ag-date is-expanded label="{{to.label}}" element-id="{{id}}" ng-model="model[options.key]" hint="{{to.hint}}"></ag-date>'
   })
   setType({
     name: 'date-range',

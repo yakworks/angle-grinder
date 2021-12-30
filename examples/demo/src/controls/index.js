@@ -9,6 +9,7 @@ import xeditModule from './xedit-form'
 import checkboxModule from './checkbox'
 
 import datepickerModule from './datepicker'
+import date5Module from './date5'
 import textarea from './textarea'
 import amount from './amount'
 import formlyModule from './formly'
@@ -24,6 +25,7 @@ export default angular
     xeditModule,
     validateSandModule,
     datepickerModule,
+    date5Module,
     inputListModule,
     textarea,
     amount,

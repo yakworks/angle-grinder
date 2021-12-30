@@ -32,8 +32,10 @@ class Controller extends AgBaseControl {
       let vmv = this.ngModelCtrl.$viewValue
       vmv = _.isEmpty(vmv) ? { [fromFld]: '', [toFld]: '' } : vmv
       // Log.debug('vmv', vmv)
-      this.valueFrom = vmv[fromFld] || ''
-      this.valueTo = vmv[toFld] || ''
+      // this.valueFrom = vmv[fromFld] || ''
+      // this.valueTo = vmv[toFld] || ''
+      this.valueFrom = new Date(vmv[fromFld])
+      this.valueTo = new Date(vmv[toFld])
     }
   }
 
