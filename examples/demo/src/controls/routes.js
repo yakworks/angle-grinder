@@ -48,6 +48,10 @@ const formStates = {
       component: 'datepickerDemoIndex'
     },
     {
+      name: 'date5',
+      component: 'date5DemoIndex'
+    },
+    {
       name: 'formly-example',
       component: 'agFormlyDemoIndex'
     },

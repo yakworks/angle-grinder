@@ -72,7 +72,7 @@ class Controller extends AgBaseControl {
 
 const template = `
 <input
-  type="text"
+  type="date"
   class="input is-datepicker"
   ng-class="$ctrl.inputClass"
   placeholder="{{$ctrl.placeholder}}"
