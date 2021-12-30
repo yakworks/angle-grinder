@@ -41,11 +41,11 @@ export default class EditModalCtrl {
 
     let messages = []
     if(problem.errors){
-      messages = error.errors.map(er => er.message)
+      messages = problem.errors.map(er => er.message)
     } else if(problem.detail) {
       messages.push(problem.detail)
     }
-    growl.error(messages.join('/n'), error.title)
+    growl.error(messages.join('/n'), problem.title)
     agForm.setServerErrors(er.response)
     // console.error("handleError errors", errors)
   }
