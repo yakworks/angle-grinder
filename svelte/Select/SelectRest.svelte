@@ -1,40 +1,46 @@
 <script>
 	import Select from 'svelte-select';
+  import Item from './SelectItem.svelte';
   import apiHolder from '@ag/stores/apiHolder';
 
   export let dataApiKey = undefined
   export let dataApi = undefined
-  export let isMulti = true
+
+  export let id = null;
+
+  export let isMulti = false;
+  // export let isDisabled = false;
+  // export let isFocused = false;
+  // export let value = null;
+  export let placeholder = 'Select...';
+  export let items = null;
+  export let noOptionsMessage="start typing to search ...."
+  export let showIndicator = true
+  export let optionIdentifier = 'id';
+
+  export let getOptionLabel = (option) => option.name;
+  export let getSelectionLabel = (option) => option.name;
 
   if(dataApiKey) dataApi = apiHolder.dataApiFactory[dataApiKey]
 
-	const optionIdentifier = 'id';
-  const getOptionLabel = (option) => option.name;
-  const getSelectionLabel = (option) => option.name;
-
-  function handleSelect(event) {
-    console.log('selected item', event.detail);
-  }
-  function handleMultiSelect(event) {
-    console.log('handleMultiSelect', event.detail);
-    // if(event.detail && event.detail.size > 0){
-    //   multiVal = _.pick(event.detail, ['id', 'name'])
-    // } else {
-    //   multiVal = []
-    // }
-    // multiVal = multiVal
+  let selectOpts = {
+    id, isMulti, noOptionsMessage, items, placeholder, showIndicator,
+    optionIdentifier,
+    getOptionLabel,
+    getSelectionLabel
   }
 
-  async function filterItems(filterText) {
-    if(!(filterText.length >= 2)) return
-    console.log("filterText", filterText)
-    let res = await dataApi.picklistSearch(filterText)
-    return res.data
+  if(dataApi) {
+    selectOpts.loadOptions = async (filterText) => {
+      if(!(filterText.length >= 2)) return
+      console.log("filterText", filterText)
+      let res = await dataApi.picklistSearch(filterText)
+      return res.data
+    }
   }
+
 </script>
 
-<Select isMulti={isMulti} noOptionsMessage="start typing to search ...."
-  loadOptions={filterItems} {optionIdentifier} {getOptionLabel}
-  {getSelectionLabel} on:select={handleMultiSelect}/>
+<Select {...selectOpts} on:select/>
 
 

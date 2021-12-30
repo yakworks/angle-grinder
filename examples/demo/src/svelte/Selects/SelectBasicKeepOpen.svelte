@@ -17,6 +17,7 @@
 
 	function keepListOpenIfFocused() {
 		const element = document.getElementById('food1');
+    console.log("element", element)
 		const isFocused = (document.activeElement === element);
 		if (isFocused) listOpen = true;
 	}
