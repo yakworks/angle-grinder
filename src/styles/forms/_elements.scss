@@ -81,10 +81,11 @@ input[type="date"], input[type="date"].date5 {
   padding-right: 0;
   font-size: $text-sm;
 }
-input[type="date"]::before, input[type="date"].date5::before{
-	content: attr(placeholder);
-	width: 100%;
-}
+
+// input[type="date"]::before, input[type="date"].date5::before{
+// 	content: attr(placeholder);
+// 	width: 100%;
+// }
 
 /* hide our custom/fake placeholder text when in focus to show the default
  * 'mm/dd/yyyy' value and when valid to show the users' date of birth value.
@@ -108,6 +109,13 @@ see "List of symbols" below if you want another, you could also try to add a fon
 /* change color of symbol on hover */
 // input[type="date"]:hover:after {
 //   color: #bf1400;
+// }
+
+// input[type="date"]::-webkit-datetime-edit {
+//   display:none;
+// }
+// input[type="date"]:focus::-webkit-datetime-edit {
+//   display:inline-block;
 // }
 
 /* make the native arrow invisible and stretch it over the whole field so you can click anywhere in the input field to trigger the native datepicker*/
