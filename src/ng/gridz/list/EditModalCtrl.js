@@ -41,8 +41,14 @@ export default class EditModalCtrl {
 
   async handleError(er) {
     const { agForm } = this.$scope
-    let error = await er.response.json()
-    const messages = error.errors.map(er => er.message)
+    let problem = await er.response.json()
+
+    let messages = []
+    if(problem.errors){
+      messages = error.errors.map(er => er.message)
+    } else if(problem.detail) {
+      messages.push(problem.detail)
+    }
     growl.error(messages.join('/n'), error.title)
     agForm.setServerErrors(er.response)
     // console.error("handleError errors", errors)
