@@ -1,6 +1,7 @@
 // import _ from 'lodash'
 
 // TODO change to https://github.com/likeastore/ngDialog#api
+import growl from "../../../tools/growl"
 export default class EditModalCtrl {
   /* @ngInject */
   constructor($uibModalInstance, $scope, dataApi, vm, ctx, title) {
@@ -36,7 +37,15 @@ export default class EditModalCtrl {
 
   async handleError(er) {
     const { agForm } = this.$scope
-    // let errors = await er.response.json()
+    let problem = await er.response.json()
+
+    let messages = []
+    if(problem.errors){
+      messages = error.errors.map(er => er.message)
+    } else if(problem.detail) {
+      messages.push(problem.detail)
+    }
+    growl.error(messages.join('/n'), error.title)
     agForm.setServerErrors(er.response)
     // console.error("handleError errors", errors)
   }
