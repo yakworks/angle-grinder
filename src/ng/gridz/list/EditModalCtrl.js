@@ -1,5 +1,7 @@
 // import _ from 'lodash'
 
+import growl from "../../../tools/growl"
+
 // see https://stackoverflow.com/questions/53349705/constructor-and-class-properties-within-javascript-mixins
 // and https://alligator.io/js/class-composition/ for class composition
 
@@ -39,7 +41,9 @@ export default class EditModalCtrl {
 
   async handleError(er) {
     const { agForm } = this.$scope
-    // let errors = await er.response.json()
+    let error = await er.response.json()
+    const messages = error.errors.map(er => er.message)
+    growl.error(messages.join('/n'), error.title)
     agForm.setServerErrors(er.response)
     // console.error("handleError errors", errors)
   }
