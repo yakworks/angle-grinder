@@ -15,30 +15,30 @@
 
 </script>
 
-<h2>Bound valueKey</h2>
+<h2>Bound value key</h2>
 <!-- <Select bind:selectedValue={basicVal} {items} /> -->
-<Select bind:valueKey={favFood} {items} />
+<Select bind:value={favFood} {items} />
 <Button class="mt-1" on:click={(_) => favFood=2}>Set Pizza</Button>
 <p>
 	Selected item: {JSON.stringify(favFood)}
 </p>
 
-<h2>Multi Bound valueKey</h2>
-<Select isMulti keepOpen {items} bind:valueKey={favFoods}/>
+<h2>Multi Bound value key</h2>
+<Select isMulti keepOpen {items} bind:value={favFoods}/>
 <Button class="mt-1" on:click={(_) => favFoods=[2]}>Set Pizza</Button>
 <p>
 	Selected items: {JSON.stringify(favFoods)}
 </p>
 
 <h2>Bound value object</h2>
-<Select bind:value={favFoodObj} {items} />
+<Select isItemValue {items} bind:value={favFoodObj} />
 <Button class="mt-1" on:click={(_) => favFoodObj={id:2}}>Set Pizza</Button>
 <p>
 	Selected item: {JSON.stringify(favFoodObj)}
 </p>
 
 <h2>Multi Bound value object</h2>
-<Select isMulti keepOpen {items} bind:value={favFoodsArr}/>
+<Select isMulti keepOpen isItemValue {items} bind:value={favFoodsArr}/>
 <Button class="mt-1" on:click={(_) => favFoodsArr=[{id:2}]}>Set Pizza</Button>
 <p>
 	Selected items: {JSON.stringify(favFoodsArr)}
