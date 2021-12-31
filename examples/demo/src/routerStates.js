@@ -2,6 +2,7 @@ import gridsStates from './grids/routes'
 import componentsStates from './components/routes'
 import svelteStates from './svelte/routes'
 import svelteDataListStates from './svelteDataList/routes'
+import svelteSelectStates from './svelteSelects/routes'
 import formStates from './controls/routes'
 import dashStates from './dashboards/routes'
 import pagesStates from './pages/routes'
@@ -79,7 +80,7 @@ export const fresh = {
   url: '/fresh',
   component: 'freshApp',
   abstract: true,
-  children: [dashStates, svelteStates, svelteDataListStates, componentsStates, formStates, flexTableStates, gridsStates, pagesStates, levelStates]
+  children: [dashStates, svelteStates, svelteDataListStates, svelteSelectStates, componentsStates, formStates, flexTableStates, gridsStates, pagesStates, levelStates]
 }
 
 export const login = {

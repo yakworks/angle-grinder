@@ -1,5 +1,6 @@
 <script>
   import { beforeUpdate, createEventDispatcher, onMount } from 'svelte';
+  import dataQuery from './dataQuery'
   import Select from 'svelte-select'
   import Item from './SelectItem.svelte'
   import apiHolder from '@ag/stores/apiHolder'
@@ -13,14 +14,18 @@
 
   export let isMulti = false
   /**
-   * if isMulti then keep open after selection.
+   * if isMulti then keep open after value.
    */
   export let keepOpen = true
   // export let isDisabled = false;
   // export let isFocused = false;
+  /** valueKey is the id/key valueKey*/
+  export let valueKey = null
+  /** itemValue is the selected item object */
   export let value = null
-  export let itemValue = null
+  export let inputStyles = '';
   export let listOpen = false
+  export let loadOptionsInterval = 300;
   export let placeholder = 'Select...'
   export let items = null
   export let noOptionsMessage = 'start typing to search ....'
@@ -34,28 +39,45 @@
   export let minimumSearchLength = 2
 
   export let handleSelect = (event) => {
-    itemValue = event.detail
-    value = itemValue[optionIdentifier]
-    console.log("handleSelect itemValue", itemValue)
-    console.log("handleSelect value", value)
+    console.log("handleSelect", event)
+    value = event.detail
+    if (isMulti && !value) {
+      value = null
+    }
+    // if (isMulti && Array.isArray(value) && value.length > 0) {
+    //   valueKey = value.map((item) => item[optionIdentifier])
+    // } else {
+    //   valueKey = value[optionIdentifier]
+    // }
+
     // make sure input is focused so it can keep open
     if (keepOpen) document.getElementById(id).focus()
     // redispatch
-    dispatch('select', itemValue);
+    dispatch('select', value);
   }
 
-  if (dataApiKey) dataApi = apiHolder.dataApiFactory[dataApiKey]
-
-  if (items && items.length > 0 && typeof items[0] !== 'object') {
-    items = convertStringItemsToObjects(items)
+  export let handleClear = (event) => {
+    console.log("handleClear", event)
+    value = event.detail
+    valueKey = event.detail
   }
+
+  // if (dataApiKey) dataApi = apiHolder.dataApiFactory[dataApiKey]
+
+  // items = dataQuery.translateItemsIfNeeded({items, optionIdentifier, labelIdentifier})
 
   // create unique id if not set
   if (!id) id = _.uniqueId('select')
 
   let selectOpts = {
+    dataApi,
+    dataApiKey,
     id,
     isMulti,
+    inputStyles,
+    loadOptionsInterval,
+    labelIdentifier,
+    minimumSearchLength,
     noOptionsMessage,
     items,
     placeholder,
@@ -65,56 +87,65 @@
     getSelectionLabel
   }
 
-  if (dataApi) {
-    selectOpts.loadOptions = async (filterText) => {
-      if (!(filterText.length >= minimumSearchLength)) return
-      console.log('filterText', filterText)
-      let res = await dataApi.picklistSearch(filterText)
-      return res.data
-    }
-  }
+  // let opts = { ...selectOpts, dataApi, dataApiKey}
 
-  $: {
-    if (keepOpen) {
+  dataQuery.setupData(selectOpts)
+  items = selectOpts.items
+
+  // if (dataApi) {
+  //   selectOpts.loadOptions = async (filterText) => {
+  //     if (!(filterText.length >= minimumSearchLength)) return
+  //     console.log('filterText', filterText)
+  //     let res = await dataApi.picklistSearch(filterText)
+  //     return res.data
+  //   }
+  // }
+
+  $: if (keepOpen) {
       keepListOpen(listOpen)
     }
-    //bind value
-    if (itemValue) setItemValue();
-    if (value) setValue();
-    console.log("binding itemValue", itemValue)
-    console.log("binding value", value)
-  }
 
-  function convertStringItemsToObjects(_items) {
-    return _items.map((item) => {
-      return { [optionIdentifier]: item, [labelIdentifier]: `${item}` }
-    })
-  }
-
-  function setItemValue() {
-    if (typeof itemValue === 'string') {
-      console.log("setItemValue value is string", value)
-      itemValue = {
-        [optionIdentifier]: itemValue,
-        [labelIdentifier]: itemValue
-      }
+  $:{ //bind valueKey
+    if (value){
+      value = setValue();
     }
-    else if (isMulti && Array.isArray(itemValue) && itemValue.length > 0) {
-      itemValue = itemValue.map((item) => (typeof item === 'string' ? { [optionIdentifier]: item, [labelIdentifier]: item } : item))
+  }
+
+  $: if(valueKey) watchValueKey(valueKey);
+
+  function watchValueKey(key) {
+
+    console.log("fired watchValueKey", key)
+    if (Array.isArray(key)) {
+      value = key.map((selection) => findItemByKey(selection));
+    } else {
+      value = findItemByKey(key)
     }
   }
 
   function setValue() {
-    if (typeof value === 'string') {
-      console.log("setValue value is string", value)
-      itemValue = {
-        [optionIdentifier]: value,
-        [labelIdentifier]: value
-      }
+    console.log("setValue", value)
+    let tVal
+    if (Array.isArray(value)) {
+      tVal = value.map((selection) => findItem(selection));
+      valueKey = value.map( selection => getItemKey(selection))
+    } else {
+      tVal = findItem(value)
+      valueKey = getItemKey(value)
     }
-    else if (isMulti && Array.isArray(value) && value.length > 0) {
-      itemValue = value.map((item) => (typeof item === 'string' ? { [optionIdentifier]: item, [labelIdentifier]: item } : item))
-    }
+    return tVal
+  }
+
+  function findItem(selection) {
+    return findItemByKey(getItemKey(selection)) || selection
+  }
+
+  function findItemByKey(key) {
+    return items.find((item) => getItemKey(item) === key)
+  }
+
+  function getItemKey(item) {
+    return item[optionIdentifier]
   }
 
   function keepListOpen(isOpen) {
@@ -123,10 +154,19 @@
       listOpen = true
     }
   }
+
+  beforeUpdate(async () => {
+    console.log("beforeUpdate")
+  });
+
+  // onMount(() => {
+  //   if (isFocused && input) input.focus();
+  // });
+
 </script>
 
 {#if isMulti}
-  <Select {...selectOpts} value={itemValue} bind:listOpen on:select={handleSelect} bind:this={select}/>
+  <Select {...selectOpts} value={value} bind:listOpen on:select={handleSelect} on:clear={handleClear} bind:this={select}/>
 {:else}
-  <Select {...selectOpts} value={itemValue} on:select={handleSelect} bind:this={select}/>
+  <Select {...selectOpts} value={value} on:select={handleSelect} on:clear={handleClear} bind:this={select}/>
 {/if}

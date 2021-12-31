@@ -119,7 +119,7 @@
         </span>
         {#if qSearchEntry }
         <span class="icon is-small is-right">
-          <a class="delete is-small" on:click={clearSearchInput}></a>
+          <a href={'#'} class="delete is-small" on:click={clearSearchInput}> </a>
         </span>
         {/if}
       </div>
