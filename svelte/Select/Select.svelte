@@ -91,7 +91,6 @@
   }
 
   let selData = selectData(opts).init()
-  items = opts.items
 
   $: if (keepOpen) {
       keepListOpen(listOpen)
