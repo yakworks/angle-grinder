@@ -1,44 +1,44 @@
 <script>
   import { Select, Button } from '@ag-svelte/index';
 
-  const items = [
+  const itemData = [
     {id: 1, name: '🍫 Chocolate'},
     {id: 2, name: '🍕 Pizza'},
     {id: 3, name: '🍪 Cookies'}
   ]
 
-  let favFood = 1;
+  let favFood //= 1;
   let favFoods = undefined;
 
-  let favFoodObj = {id:1};
-  let favFoodsArr = [{id:1}, {id:2}];
+  let favFoodObj //= {id:1};
+  let favFoodsArr //= [{id:1}, {id:2}];
 
 </script>
 
 <h2>Bound value key</h2>
 <!-- <Select bind:selectedValue={basicVal} {items} /> -->
-<Select bind:value={favFood} {items} />
+<Select bind:value={favFood} {itemData} />
 <Button class="mt-1" on:click={(_) => favFood=2}>Set Pizza</Button>
 <p>
 	Selected item: {JSON.stringify(favFood)}
 </p>
 
 <h2>Multi Bound value key</h2>
-<Select isMulti keepOpen {items} bind:value={favFoods}/>
+<Select isMulti keepOpen {itemData} bind:value={favFoods}/>
 <Button class="mt-1" on:click={(_) => favFoods=[2]}>Set Pizza</Button>
 <p>
 	Selected items: {JSON.stringify(favFoods)}
 </p>
 
 <h2>Bound value object</h2>
-<Select isItemValue {items} bind:value={favFoodObj} />
+<Select isItemValue {itemData} bind:value={favFoodObj} />
 <Button class="mt-1" on:click={(_) => favFoodObj={id:2}}>Set Pizza</Button>
 <p>
 	Selected item: {JSON.stringify(favFoodObj)}
 </p>
 
 <h2>Multi Bound value object</h2>
-<Select isMulti keepOpen isItemValue {items} bind:value={favFoodsArr}/>
+<Select isMulti keepOpen isItemValue {itemData} bind:value={favFoodsArr}/>
 <Button class="mt-1" on:click={(_) => favFoodsArr=[{id:2}]}>Set Pizza</Button>
 <p>
 	Selected items: {JSON.stringify(favFoodsArr)}

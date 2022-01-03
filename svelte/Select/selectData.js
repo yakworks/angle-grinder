@@ -11,7 +11,7 @@ export const selectData = (opts) => {
   //props used from opts
   let {
     dataApiKey, dataApi, dataApiParams, minimumSearchLength,
-    items, propertyKey, propertyLabel, isMulti, isItemValue
+    itemData, propertyKey, propertyLabel, isMulti, isItemValue
   } = opts
 
   let obj = {}
@@ -42,19 +42,22 @@ export const selectData = (opts) => {
     }
 
     // setup defaults for items if its specified
-    if (items) {
+    if (itemData) {
       // if data is an array then tranform it down to be a property of results
-      if (Array.isArray(items)) {
+      if (Array.isArray(itemData)) {
         // translateItemsIfNeeded makes ['red','green'] into [{id:'red',name'red}, etc...]
-        opts.items = items = obj.translateItemsIfNeeded(items)
-        console.log("opts.items", opts.items)
+        opts.data = obj.translateItemsIfNeeded(itemData)
+        console.log("translated item data", opts.data)
       }
     }
 
     // make data a function if its not
     if (isFunction(opts.data) === false) {
       const tmp = opts.data
-      opts.data = function() { return tmp }
+      opts.data = async () => {
+        await obj.delay(1000)
+        return tmp
+      }
     }
 
     return obj
@@ -92,6 +95,17 @@ export const selectData = (opts) => {
     return dta
   }
 
+  obj.delay = (ms) => {
+    return new Promise(resolve => setTimeout(resolve, ms))
+  }
+
+  function loadItemsIfNeeded() {
+    if(!opts.items) {
+      opts.items = opts.data()
+      console.log("first call, loaded data")
+    }
+  }
+
   function getSelectedValue(item) {
     console.log("watchSelectedItem", item)
     //finder function to use
@@ -126,14 +140,15 @@ export const selectData = (opts) => {
   }
 
   function findItemByKey(key) {
-    return items.find((item) => getItemKey(item) === key)
+    // await loadItemsIfNeeded()
+    return opts.items.find((item) => getItemKey(item) === key)
   }
 
   function getItemKey(item) {
     return item[propertyKey]
   }
 
-  Object.assign(obj, { getSelectedValue, findItem, findItemByKey, getItemKey})
+  Object.assign(obj, { getSelectedValue, findItem, findItemByKey, getItemKey, loadItemsIfNeeded})
 
   return obj
 }

@@ -14,7 +14,7 @@
   export let id = null
 
   export let isMulti = false
-
+  export let isWaiting = false
   /** if isMulti then keep open after value.*/
   export let keepOpen = true
 
@@ -31,6 +31,7 @@
   export let loadOptionsInterval = 300;
   export let placeholder = 'Select...'
   export let items = null
+  export let itemData = null
   export let noOptionsMessage = 'start typing to search ....'
   export let showIndicator = true
   export let listOffset = 2
@@ -75,6 +76,7 @@
     dataApiKey,
     id,
     isMulti,
+    isWaiting,
     isItemValue,
     inputStyles,
     loadOptionsInterval,
@@ -86,6 +88,7 @@
     minimumSearchLength,
     noOptionsMessage,
     items,
+    itemData,
     placeholder,
     showIndicator
   }
@@ -93,14 +96,52 @@
   let selData = selectData(opts).init()
 
   $: if (keepOpen) {
-      keepListOpen(listOpen)
-    }
-  $: if (listOpen) {
-      console.log("listOpen", listOpen)
-    }
+    keepListOpen(listOpen)
+  }
 
+  // reacte to listOpen to load items if they have not been yet.
+  $: if (listOpen) {
+    //if its not preloaded data or rest call that loads all on first use then load it
+    Promise.resolve(loadItemsIfNeeded(listOpen))
+  }
+
+  // $: if (value) {
+  //   loadItemsIfNeeded()
+  //   watchValueKey(value)
+    //if its not preloaded data or rest call that loads all on first use then load it
+    // Promise.resolve(loadItemsIfNeeded())
+    //   .then( () => {
+    //     watchValueKey(value)
+    //   })
+    // await loadItemsIfNeeded(listOpen)
+  // }
   //watch if updated from outside
-  $: if(value) watchValueKey(value);
+  // $: if(value) watchValueKey(value);
+
+  // $: (async () => {
+  //   if(value) {
+  //     await loadItemsIfNeeded()
+  //     watchValueKey(value)
+  //   }
+  // })();
+
+
+  // react to value changes from outside
+  $: if(value) {
+    Promise.resolve(loadItemsIfNeeded())
+      .then( () => {
+        watchValueKey(value)
+      })
+  }
+
+  async function loadItemsIfNeeded(_) {
+    if(!opts.items && !opts.isWaiting) {
+      opts.isWaiting = true
+      opts.items = await opts.data()
+      console.log("first call, loaded data")
+      opts.isWaiting = false
+    }
+  }
 
   function watchValueKey(val) {
     if(isItemValue) {
@@ -118,9 +159,9 @@
     }
   }
 
-  beforeUpdate(async () => {
-    console.log("beforeUpdate")
-  });
+  // beforeUpdate(async () => {
+  //   console.log("beforeUpdate")
+  // });
 
   // onMount(() => {
   //   if (isFocused && input) input.focus();
@@ -130,9 +171,11 @@
 
 <div class="select-theme">
   {#if isMulti}
-    <Select {...opts} value={selectedItem} bind:listOpen on:select={handleSelect} on:clear={handleClear} bind:this={select}/>
+    <Select {...opts} value={selectedItem} bind:listOpen
+      on:select={handleSelect} on:clear={handleClear} bind:this={select}/>
   {:else}
-    <Select {...opts} value={selectedItem} on:select={handleSelect} on:clear={handleClear} bind:this={select}/>
+    <Select {...opts} value={selectedItem} bind:listOpen
+      on:select={handleSelect} on:clear={handleClear} bind:this={select}/>
   {/if}
 </div>
 
