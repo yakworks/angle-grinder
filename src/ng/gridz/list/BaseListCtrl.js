@@ -244,7 +244,7 @@ export default class BaseListCtrl {
     toast.error(message || er)
   }
 
-  swalError(error) {
+  toastError(error) {
     toast.error(error.message, error.title)
     // Swal.fire({
     //   icon: 'error',
