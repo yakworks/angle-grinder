@@ -37,7 +37,8 @@
           <ListField name="dates.date1" type="date"/>
           <ListField name="dates.date2" type="date"/>
           <ListSelect name="selects.simple" opts={{label:"Select", placeholder:"Id Value Select"}} itemData={simpleData}/>
-          <ListSelect name="selects.customer" opts={{label:"Select", placeholder:"Id Value Select", }}/>
+          <ListSelect name="selects.customer"
+            opts={{ label:"Select", placeholder:"Id Value Select", dataApiKey: 'customer' }}/>
         </ListForm>
       </CardContent>
     </Card>

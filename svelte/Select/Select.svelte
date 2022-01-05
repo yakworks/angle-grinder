@@ -162,9 +162,9 @@
 
   async function loadItemsIfNeeded(_) {
     if(!opts.items && !opts.isWaiting) {
+      console.log("first call to load data")
       opts.isWaiting = true
       opts.items = await opts.data()
-      console.log("first call, loaded data")
       opts.isWaiting = false
     }
   }

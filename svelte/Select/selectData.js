@@ -102,6 +102,7 @@ export const selectData = (opts) => {
 
   // function called to get data from api picklist
   obj.getDataFromApi = async ({q = null, qSearch = null}) => {
+    console.log("getDataFromApi called", q, qSearch)
     let res = await dataApi.picklist({q, qSearch})
     let dta = res
     // if its an object then assume it pager object with data key
