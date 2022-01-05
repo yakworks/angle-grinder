@@ -1,5 +1,6 @@
 
 export { default as isEmpty } from 'lodash/isEmpty';
+export { default as isUndefined } from 'lodash/isUndefined';
 
 export function isString(value) {
   return  (typeof value === 'string' || value instanceof String)

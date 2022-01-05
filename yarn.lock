@@ -12290,6 +12290,13 @@ svelte-dev-helper@^1.1.9:
   resolved "https://registry.yarnpkg.com/svelte-dev-helper/-/svelte-dev-helper-1.1.9.tgz#7d187db5c6cdbbd64d75a32f91b8998bde3273c3"
   integrity sha1-fRh9tcbNu9ZNdaMvkbiZi94yc8M=
 
+svelte-forms-lib@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/svelte-forms-lib/-/svelte-forms-lib-2.0.0.tgz#d495abf65b07c62fefa4896ae655b5e5cf8ae7d4"
+  integrity sha512-PPlK1Eb6DF/suaFlaugQV+s5Cn+gbwXUcRuCvgonEAP7pbrD80LA2MR9/0vYRcixn7Fppofmkwjf+0nCwRVSuA==
+  dependencies:
+    dequal "^2.0.2"
+
 svelte-fragment-component@^1.1.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/svelte-fragment-component/-/svelte-fragment-component-1.2.0.tgz#36842c609a15c934b9d32a8bc99c460b0374d796"

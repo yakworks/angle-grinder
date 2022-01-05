@@ -1,12 +1,16 @@
 <script>
   import { beforeUpdate, createEventDispatcher, onMount } from 'svelte';
-  import dataQuery from './dataQuery'
   import {selectData} from './selectData'
   import Select from 'svelte-select'
-  import Item from './SelectItem.svelte'
+  import ItemMulti from './ItemMulti.svelte'
+  import ItemSingle from './ItemSingle.svelte'
+
   import apiHolder from '@ag/stores/apiHolder'
 
   const dispatch = createEventDispatcher()
+
+  export let className = ''
+	export { className as class } //work around since class is reserved
 
   export let dataApiKey = undefined
   export let dataApi = undefined
@@ -29,25 +33,36 @@
   export let inputStyles = '';
   export let listOpen = false
   export let loadOptionsInterval = 300;
-  export let placeholder = 'Select...'
   export let items = null
   export let itemData = null
+  export let Item = undefined
   export let noOptionsMessage = 'start typing to search ....'
   export let showIndicator = true
   export let listOffset = 2
+  export let placeholder = 'Select...'
   export let propertyKey = 'id'
-  export let propertyLabel = 'name'
+  export let propertyLabel = undefined
   // export let getOptionLabel = (option) => option[propertyLabel]
   // export let getSelectionLabel = (option) => option[propertyLabel]
   export let select = undefined
   /** added opts */
   export let minimumSearchLength = 2
+  //class to add to the wrapper
+  export let theme = "bulma"
+
+  export let getOptionLabel = (itm, filterText) => {
+    return manager.getOptionLabel(itm, filterText)
+  }
+
+  export let getSelectionLabel = (itm) => {
+    return manager.getSelectionLabel(itm)
+  }
 
   export let handleSelect = (event) => {
     console.log("handleSelect", event)
     selectedItem = event.detail
     if(selectedItem) {
-      value = selData.getSelectedValue(selectedItem)
+      value = manager.getSelectedValue(selectedItem)
     } else {
       // if empty slected and multi then make sure they are blanked out
       if (isMulti) {
@@ -68,12 +83,23 @@
     value = event.detail
   }
 
+  //setup defaults
+  if(!propertyLabel) propertyLabel = 'name'
+  if (Array.isArray(propertyLabel)) {
+      Item = ItemMulti
+  } else {
+      Item = ItemSingle
+  }
+
   // create unique id if not set
   if (!id) id = _.uniqueId('select')
 
   let opts = {
     dataApi,
     dataApiKey,
+    getOptionLabel,
+    getSelectionLabel,
+    Item,
     id,
     isMulti,
     isWaiting,
@@ -93,7 +119,7 @@
     showIndicator
   }
 
-  let selData = selectData(opts).init()
+  export let manager = selectData(opts).init()
 
   $: if (keepOpen) {
     keepListOpen(listOpen)
@@ -145,10 +171,10 @@
 
   function watchValueKey(val) {
     if(isItemValue) {
-      value = selData.getSelectedValue(val)
+      value = manager.getSelectedValue(val)
       selectedItem = value
     } else {
-      selectedItem = selData.getSelectedValue(val, selData.findItemByKey)
+      selectedItem = manager.getSelectedValue(val, manager.findItemByKey)
     }
   }
 
@@ -163,24 +189,24 @@
   //   console.log("beforeUpdate")
   // });
 
-  // onMount(() => {
-  //   if (isFocused && input) input.focus();
-  // });
+  onMount(() => {
+    console.log("select", select)
+  });
 
 </script>
 
-<div class="select-theme">
+<div class="select-theme {theme}">
   {#if isMulti}
-    <Select {...opts} value={selectedItem} bind:listOpen
+    <Select containerClasses="{className}" {...opts} value={selectedItem} bind:listOpen
       on:select={handleSelect} on:clear={handleClear} bind:this={select}/>
   {:else}
-    <Select {...opts} value={selectedItem} bind:listOpen
+    <Select containerClasses="{className}" {...opts} value={selectedItem} bind:listOpen
       on:select={handleSelect} on:clear={handleClear} bind:this={select}/>
   {/if}
 </div>
 
 <style>
-  .select-theme {
+  .select-theme.bulma {
     --listBorder: 1px solid var(--color-shade-15);
     --borderRadius: 4px;
     --itemFirstBorderRadius: 0;
@@ -188,4 +214,22 @@
     --listShadow: var(--f7-card-box-shadow);
     --borderFocusColor: none;
   }
+
+  .select-theme.f7 {
+    --listBorder: 0px;
+    --borderRadius: 0px;
+    --itemFirstBorderRadius: 0;
+    --itemIsActiveBG: var(--color-primary-light);
+    --listShadow: var(--f7-card-box-shadow);
+    --borderFocusColor: none;
+    --inputPadding: 0px;
+    --height: 36px;
+    --border: none;
+    --padding: 0px;
+    --multiSelectPadding: 0px;
+    --indicatorRight: 0px;
+    --clearSelectRight: 0px;
+    --listZIndex: 99;
+  }
+
 </style>

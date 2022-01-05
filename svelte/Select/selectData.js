@@ -63,6 +63,34 @@ export const selectData = (opts) => {
     return obj
   }
 
+  /**
+   * gets the option label that shows for list and input for selected.
+   * If its a multi column then this returns an array of values to show
+   */
+  obj.getOptionLabel = (item, filterText) => {
+    if (Array.isArray(opts.propertyLabel)) {
+      return opts.propertyLabel.map(prop => item[prop])
+    } else {
+      return item.isCreator ? `Create \"${filterText}\"` : item[opts.propertyLabel]
+    }
+  }
+
+  /**
+   * if opts.propertyLabel is array then defaults to using the last item as selectLabel
+   */
+  obj.getSelectionLabel = (itm) => {
+    if (!itm) return null
+
+    if (Array.isArray(opts.propertyLabel)) {
+      const lastItem = opts.propertyLabel[opts.propertyLabel.length - 1]
+      console.log("itm[lastItem]", itm[lastItem])
+      return itm[lastItem]
+    } else {
+      return itm[opts.propertyLabel];
+    }
+  }
+
+
   obj.translateItemsIfNeeded = (items) => {
     if (items && items.length > 0 && typeof items[0] !== 'object') {
       items = items.map((item) => {

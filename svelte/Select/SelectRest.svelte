@@ -1,6 +1,6 @@
 <script>
 	import Select from 'svelte-select';
-  import Item from './SelectItem.svelte';
+  // import Item from './SelectItem.svelte';
   import apiHolder from '@ag/stores/apiHolder';
 
   export let dataApiKey = undefined

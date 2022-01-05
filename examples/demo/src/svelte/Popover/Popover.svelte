@@ -32,7 +32,7 @@
   <Button popoverOpen=".popover-menu2" icon="mdi-dots-vertical"/>
 </Toolbar>
 
-<Popover class="popover-menu">
+<Popover class="popover-menu" backdrop={false}>
   <List>
     <ListItem divider={false} link={noref} popoverClose title="Refresh" />
     <ListItem link={noref} popoverClose title="Reset Sort" />
@@ -45,7 +45,7 @@
 
 <!-- </App> -->
 
-<Popover class="popover-menu2">
+<Popover class="popover-menu2" backdrop={false}>
   <List>
     {#each defaultMenuItems as item}
     <ListItem id={item.id} link="#" title={item.display} popoverClose on:click={popMenuClick(item.id)}>

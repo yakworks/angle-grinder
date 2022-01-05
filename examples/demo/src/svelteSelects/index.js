@@ -2,6 +2,7 @@ import ngSvelteShim from 'angle-grinder/src/ng/utils/ngSvelteShim'
 import ngSvelteMod from '../svelte/AngularSvelte'
 import SimpleSelects from './simple/Index.svelte'
 import SimpleSelectsId from './simple-id/Index.svelte'
+import SelectsInList from './list/Index.svelte'
 import RestSelects from './rest/Index.svelte'
 
 const appMod = angular.module('svelte.selects.demo', [ngSvelteMod])
@@ -13,7 +14,10 @@ appMod
   .component('svelteSimpleSelectsIdIndex', {
     controller: ngSvelteShim(SimpleSelectsId)
   })
-  .component('svelteGRidSelectsIndex', {
+  .component('svelteSelectsInListIndex', {
+    controller: ngSvelteShim(SelectsInList)
+  })
+  .component('svelteGridSelectsIndex', {
     controller: ngSvelteShim(RestSelects)
   })
 

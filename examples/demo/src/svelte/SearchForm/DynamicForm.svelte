@@ -3,7 +3,6 @@
   import { transformFields } from 'angle-grinder/svelte/Formify/transformer'
   // import stringify from 'angle-grinder/src/utils/stringify'
   import stringify from 'fast-safe-stringify'
-import ApexChart from 'angle-grinder/svelte/Charts/ApexChart.svelte'
 
   let noref = "javascript:void(0)"
 

@@ -16,6 +16,10 @@ const componentsStates = {
       component: 'svelteSimpleSelectsIdIndex'
     },
     {
+      name: 'select-in-list',
+      component: 'svelteSelectsInListIndex'
+    },
+    {
       name: 'rest',
       component: 'svelteRestSelectsIndex'
     }
