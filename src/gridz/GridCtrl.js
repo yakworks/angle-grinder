@@ -500,15 +500,12 @@ export default class GridCtrl {
         const link = document.createElement('a')
         link.href = dataUri
         link.setAttribute('download', 'download.xls')
-        document.body.appendChild(link)
-        const clickev = document.createEvent('MouseEvents')
-        // initialize the event
-        clickev.initEvent('click', true, true)
-        // trigger the event
-        return link.dispatchEvent(clickev)
+        link.click()
       }
+    
     }
   }
+
 
   getCsvData() {
     return csvData(this.getGridId(), this.getSelectedRowIds())
