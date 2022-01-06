@@ -65,11 +65,12 @@ angular.module(grid2Mod).directive('gridz',
         toolbarOptions: '<',
         gridId: '@',
         gridOptions: '<',
-        restrictSearch: '<'
+        restrictSearch: '<',
+        ctx: '<'
       },
       template: `\
       <div class="gridz-wrapper">
-        <gridz-toolbar options="gridCtrl.toolbarOptions" grid-ctrl="gridCtrl"></gridz-toolbar>
+        <gridz-toolbar options="gridCtrl.toolbarOptions" ctx="gridCtrl.ctx" grid-ctrl="gridCtrl"></gridz-toolbar>
         <table class="gridz" ng-class="{'is-dense': gridCtrl.isDense}"></table>
         <div class="gridz-pager"></div>
       </div>`,
