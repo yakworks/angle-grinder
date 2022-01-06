@@ -10,33 +10,36 @@ export const selectData = (opts) => {
 
   //props used from opts
   let {
-    dataApiKey, dataApi, dataApiParams, minimumSearchLength,
+    dataApiKey, dataApi, dataApiParams, minimumSearchLength, dataApiEager,
     itemData, propertyKey, propertyLabel, isMulti, isItemValue
   } = opts
 
   let obj = {}
 
   obj.init = (dataApiFactory = apiHolder.dataApiFactory) => {
+    // console.log("init with opts", opts)
     if (dataApiKey || dataApi){
       if(!dataApi) dataApi = dataApiFactory[dataApiKey]
-
+      // console.log("setup dataApi", dataApi)
       // setup data
       opts.data = {}
 
       //if minimumInputLength then will query on demand
-      if(minimumSearchLength) {
+      if(dataApiEager) {
+        // console.log("setup data func for rest api")
+        //if minimumInputLength is not set then load the whole dataset
+        opts.data = () => {
+          return obj.getDataFromApi({q: dataApiParams}) //get all of it.
+        }
+      }
+      else {
+        console.log("is not dataApiEager so using loadOptions", dataApiEager)
         opts.loadOptions = async (filterText) => {
           if (!(filterText.length >= minimumSearchLength)) return
           // console.log('filterText', filterText)
           //call picklist with params, if q:dataApiParams is null/undefined it will get pruned off
           let res = await dataApi.picklist({qSearch: filterText, q: dataApiParams})
           return res.data
-        }
-      }
-      else {
-        //if minimumInputLength is not set then load the whole dataset
-        opts.data = () => {
-          return obj.getDataFromApi({q: dataApiParams}) //get all of it.
         }
       }
     }
@@ -47,7 +50,7 @@ export const selectData = (opts) => {
       if (Array.isArray(itemData)) {
         // translateItemsIfNeeded makes ['red','green'] into [{id:'red',name'red}, etc...]
         opts.data = obj.translateItemsIfNeeded(itemData)
-        console.log("translated item data", opts.data)
+        // console.log("translated item data", opts.data)
       }
     }
 
@@ -55,7 +58,7 @@ export const selectData = (opts) => {
     if (isFunction(opts.data) === false) {
       const tmp = opts.data
       opts.data = async () => {
-        await obj.delay(1000)
+        // await obj.delay(1000)
         return tmp
       }
     }
@@ -109,9 +112,9 @@ export const selectData = (opts) => {
     if (isPlainObject(dta)) dta = res.data
 
     //if it has a keyField then translate it to the id, used when you want 'code' or maybe 'email' to be the key thats set
-    if(opts.fields.id !== 'id') {
+    if(opts.propertyKey !== 'id') {
       dta = dta.map(o => {
-        return { ...o, _id: o.id, id: o[opts.fields.id]}
+        return { ...o, _id: o.id, id: o[opts.propertyKey]}
       })
     }
     if(opts.addData) {
@@ -124,6 +127,7 @@ export const selectData = (opts) => {
     return dta
   }
 
+  //can use in testing to simulate rest delay
   obj.delay = (ms) => {
     return new Promise(resolve => setTimeout(resolve, ms))
   }
@@ -135,22 +139,22 @@ export const selectData = (opts) => {
     }
   }
 
-  function getSelectedValue(item) {
-    console.log("watchSelectedItem", item)
-    //finder function to use
-    let finder = isItemValue ? findItem : getItemKey
-    let val
-    if (isMulti && Array.isArray(item)) {
-      val = item.map((selection) => finder(selection));
-      // keyVal = item.map( selection => getItemKey(selection))
-    } else {
-      val = finder(item)
-    }
-    return val
-  }
+  // function getSelectedValue(item) {
+  //   console.log("watchSelectedItem", item)
+  //   //finder function to use
+  //   let finder = isItemValue ? findItem : getItemKey
+  //   let val
+  //   if (isMulti && Array.isArray(item)) {
+  //     val = item.map((selection) => finder(selection));
+  //     // keyVal = item.map( selection => getItemKey(selection))
+  //   } else {
+  //     val = finder(item)
+  //   }
+  //   return val
+  // }
 
   function getSelectedValue(item, finderFunc) {
-    console.log("getSelectedValue", item)
+    console.log("getSelectedValue", item, finderFunc)
     //finder function to use
     if(!finderFunc) finderFunc = isItemValue ? findItem : getItemKey
     let val

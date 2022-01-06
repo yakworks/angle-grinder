@@ -14,6 +14,10 @@
 
   export let dataApiKey = undefined
   export let dataApi = undefined
+  // will eagerely load the data set and not on demand in conjunction with  minimumSearchLength
+  export let dataApiEager = true
+  // if dataApiEager is false then this is number of chars for search before it does a load
+  export let minimumSearchLength = 2
 
   export let id = null
 
@@ -46,7 +50,6 @@
   // export let getSelectionLabel = (option) => option[propertyLabel]
   export let select = undefined
   /** added opts */
-  export let minimumSearchLength = 2
   //class to add to the wrapper
   export let theme = "bulma"
 
@@ -97,6 +100,7 @@
   let opts = {
     dataApi,
     dataApiKey,
+    dataApiEager,
     getOptionLabel,
     getSelectionLabel,
     Item,
@@ -171,7 +175,8 @@
 
   function watchValueKey(val) {
     if(isItemValue) {
-      value = manager.getSelectedValue(val)
+      console.log("manager.getSelectedValue(val)", manager.getSelectedValue(val))
+      // value = manager.getSelectedValue(val)
       selectedItem = value
     } else {
       selectedItem = manager.getSelectedValue(val, manager.findItemByKey)

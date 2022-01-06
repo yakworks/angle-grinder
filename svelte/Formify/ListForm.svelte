@@ -3,7 +3,7 @@
 </script>
 <script>
   import { setContext, createEventDispatcher, onMount } from 'svelte';
-  // import { writable } from 'svelte/store';
+  import { get } from '../utils/dash';
 
   import stringify from 'fast-safe-stringify'
   // import set from 'lodash/set';
@@ -46,9 +46,13 @@
     validateField,
   } = context;
 
+  export function getValue(path){
+    return get(data, path)
+  }
 
   setContext(ctxKey, {
     form,
+    data: form,
     errors,
     touched,
     state,
@@ -59,6 +63,7 @@
     updateTouched,
     updateValidateField,
     validateField,
+    getValue
   });
 
   $: data = $form
@@ -71,48 +76,48 @@
 
   const emit = createEmitter(createEventDispatcher, $$props);
 
-  let className = undefined;
-  export { className as class };
+  let className = undefined
+  export { className as class }
 
-  export let ul = true;
+  export let ul = true
 
-  export let inset = false;
-  export let xsmallInset = false;
-  export let smallInset = false;
-  export let mediumInset = false;
-  export let largeInset = false;
-  export let xlargeInset = false;
-  export let mediaList = false;
-  export let accordionList = false;
-  export let accordionOpposite = false;
-  export let contactsList = false;
-  export let simpleList = false;
-  export let linksList = false;
-  export let menuList = false;
+  export let inset = false
+  export let xsmallInset = false
+  export let smallInset = false
+  export let mediumInset = false
+  export let largeInset = false
+  export let xlargeInset = false
+  export let mediaList = false
+  export let accordionList = false
+  export let accordionOpposite = false
+  export let contactsList = false
+  export let simpleList = false
+  export let linksList = false
+  export let menuList = false
 
-  export let noHairlines = false;
-  export let noHairlinesBetween = false;
-  export let noHairlinesMd = false;
-  export let noHairlinesBetweenMd = false;
-  export let noHairlinesIos = false;
-  export let noHairlinesBetweenIos = false;
-  export let noHairlinesAurora = false;
-  export let noHairlinesBetweenAurora = false;
+  export let noHairlines = false
+  export let noHairlinesBetween = false
+  export let noHairlinesMd = false
+  export let noHairlinesBetweenMd = false
+  export let noHairlinesIos = false
+  export let noHairlinesBetweenIos = false
+  export let noHairlinesAurora = false
+  export let noHairlinesBetweenAurora = false
 
   // Links Chevron (Arrow) Icon
-  export let noChevron = false;
-  export let chevronCenter = false;
+  export let noChevron = false
+  export let chevronCenter = false
 
   // Tab
-  export let tab = false;
-  export let tabActive = false;
+  export let tab = false
+  export let tabActive = false
 
   // Form
-  export let inlineLabels = true;
+  export let inlineLabels = true
   export let formEl = undefined
 
   // eslint-disable-next-line
-  $: hasUlSlots = $$slots.default || $$slots.list;
+  $: hasUlSlots = $$slots.default // || $$slots.list;
 
   $: classes = classNames(
     className,
