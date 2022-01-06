@@ -530,6 +530,7 @@ export default class GridDataApiCtrl {
 
   // @ts-ignore
   xlsExport() {
+    console.log('xlsExport', this.getSelectedRowIds())
     if (this.getSelectedRowIds().length !== 0) {
       // if browser is IE then open new window and show SaveAs dialog, else use dataUri approach
       // can this part be deprecated?
@@ -551,12 +552,7 @@ export default class GridDataApiCtrl {
         const link = document.createElement('a')
         link.href = dataUri
         link.setAttribute('download', 'download.xls')
-        document.body.appendChild(link)
-        const clickev = document.createEvent('MouseEvents')
-        // initialize the event
-        clickev.initEvent('click', true, true)
-        // trigger the event
-        return link.dispatchEvent(clickev)
+        link.click()
       }
     }
   }
