@@ -1,22 +1,22 @@
 /* eslint-disable no-unused-vars */
 import { isoDateToDisplay } from '../utils/dateSupport'
-import { formatAmount } from '../utils/formatters'
+import fmt from '../utils/formatters'
 
 // Extra formatters for jqGrid
 $.extend($.fn.fmatter, {
 
   date(cellVal, options) {
-    const dateVal = isoDateToDisplay(cellVal)
+    const dateVal = fmt.date(cellVal)
     return columnAligner('date', dateVal, options)
   },
 
   // use `agCurrencyFilter` for format currencies
   currency(cellVal, options) {
-    return columnAligner('currency', formatAmount(cellVal), options)
+    return columnAligner('currency', fmt.amount(cellVal), options)
   },
 
   currencyOrZero(cellVal, options) {
-    return columnAligner('currency', formatAmount(cellVal), options)
+    return columnAligner('currency', fmt.amount(cellVal), options)
   },
 
   okIcon(cellVal, options, rowdata) {

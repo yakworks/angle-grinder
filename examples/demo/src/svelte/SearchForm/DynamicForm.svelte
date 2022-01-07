@@ -1,6 +1,6 @@
 <script>
   import { Columns, Col, BlockTitle, Card, CardContent, Icon, List, ListInput } from 'angle-grinder/svelte/index'
-  import { transformFields } from 'angle-grinder/svelte/Formify/transformer'
+  import { transformFields } from 'angle-grinder/src/utils/config/transformer'
   // import stringify from 'angle-grinder/src/utils/stringify'
   import stringify from 'fast-safe-stringify'
 

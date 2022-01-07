@@ -7,7 +7,8 @@
   import ListInput  from 'framework7-svelte/esm/svelte/list-input.svelte'
   import get from 'lodash/get';
   import { classNames } from '../shared/utils';
-  import { fieldDefaults } from './transformer'
+  import { fieldDefaults } from '../../src/utils/config/transformer'
+
   import {selectData} from '../Select/selectData'
   import ItemMulti from '../Select/ItemMulti.svelte'
   import ItemSingle from '../Select/ItemSingle.svelte'

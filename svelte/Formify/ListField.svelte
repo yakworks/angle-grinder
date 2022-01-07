@@ -3,7 +3,7 @@
   import { ctxKey } from './ListForm.svelte';
   import get from 'lodash/get';
   import { classNames } from '../shared/utils';
-  import { fieldDefaults } from './transformer'
+  import { fieldDefaults } from '../../src/utils/config/transformer'
 
   import ListInput  from 'framework7-svelte/esm/svelte/list-input.svelte'
 

@@ -1,6 +1,5 @@
-/* eslint-disable */
 import _ from 'lodash'
-import {transformFields} from '../transformer'
+import {transformFields} from '../config/transformer'
 import {expect as x} from '@jest/globals'
 
 describe('transformFields', () => {

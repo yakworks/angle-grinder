@@ -1,7 +1,11 @@
-import { makeLabel } from '../../src/utils/nameUtils'
-import { map, _defaults, pick, omit, defaultsDeep } from '../utils/dash'
-import { isUndefined, isPlainObject } from '../utils/is'
-import { extend } from '../shared/utils';
+/**
+ * transforms config for formify and lists views
+ * see the test for examples
+ */
+
+import { makeLabel } from '../nameUtils'
+import { map, _defaults, pick, omit, defaultsDeep } from '../dash'
+import { isUndefined, isPlainObject } from '../inspect'
 
 export function transformFields(fields, ctrl) {
   // if its a plain object and first key starts with column and its a columns layout

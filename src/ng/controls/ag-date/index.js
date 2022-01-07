@@ -1,5 +1,5 @@
 import AgBaseControl from '../AgBaseControl'
-import { displayDateToIso } from '../../../utils/dateSupport'
+import { displayDateToIso, parseIsoDate } from '../../../utils/dateSupport'
 
 class Controller extends AgBaseControl {
 
@@ -8,7 +8,7 @@ class Controller extends AgBaseControl {
     const { ngModelCtrl, $element } = this
 
     ngModelCtrl.$render = () => {
-      this.value = new Date(ngModelCtrl.$viewValue) //parseDate(ngModelCtrl.$viewValue)
+      this.value = parseIsoDate(ngModelCtrl.$viewValue)
     }
   }
 

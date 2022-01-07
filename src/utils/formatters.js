@@ -1,5 +1,6 @@
 import { isFalsy } from './truthy'
 import * as _ from './dash'
+import { isoDateToDisplay } from './dateSupport'
 
 const numberFormatter = new Intl.NumberFormat('en-US', {
   minimumFractionDigits: 2,
@@ -13,7 +14,7 @@ const numberFormatter = new Intl.NumberFormat('en-US', {
  * 1.2 -> 1.20
  * undefined -> 0
  */
-export function formatAmount(val){
+export function formatNumber(val){
   if(isFalsy(val)) return '0'
   if(_.isString(val) ){
     if (val === 'undefined' || val === 'null' || val.trim() === '') {
@@ -27,4 +28,26 @@ export function formatAmount(val){
   return numberFormatter.format(val)
 }
 
+const o = {
+  amount(val){
+    if(isFalsy(val)) return '0'
+    if(_.isString(val) ){
+      if (val === 'undefined' || val === 'null' || val.trim() === '') {
+        return '0'
+      } else {
+        //replace comma, convert to number with +
+        return numberFormatter.format(+val.replace(/,/g, ''))
+      }
+    }
+    return formatNumber(val)
+  },
+  decimal(val){
+    return formatNumber(val)
+  },
+  date(val){
+    isoDateToDisplay(val)
+  }
+}
+
+export default o
 // export { isoDateToDisplay }  from './dateSupport'
