@@ -1,6 +1,8 @@
 import * as _ from './dash' // uses babel plugin to only use what is referenced
 // see https://mymth.github.io/vanillajs-datepicker/#/
-import { parseDate } from './date-format'
+import { parseDate, formatDate } from './date/date-format'
+
+export { parseDate, formatDate }
 
 const isoFormat = 'yyyy-mm-dd'
 
@@ -28,6 +30,7 @@ export function mergeDatepickerOpts(mergeOptions = {}) {
 
 export function isoDateToDisplay(isoDate) {
   const dateVal = parseDate(isoDate, isoFormat)
+  console.log("dateVal", dateVal)
   return formatDate(dateVal, datepickerDefaults.format)
 }
 
@@ -47,22 +50,4 @@ export function displayDateToIso(displayDate) {
   //get it back to Z date to keep same day from browser timezone offset
   d.setMinutes(d.getMinutes()+d.getTimezoneOffset())
   return d
-}
-
-/**
- * Format Date object or time value in given format and language
- * @param  {Date|Number} date - date or time value to format
- * @param  {String|Object} format - format string or object that contains
- * toDisplay() custom formatter, whose signature is
- * - args:
- *   - date: {Date} - Date instance of the date passed to the method
- *   - format: {Object} - the format object passed to the method
- *   - locale: {Object} - locale for the language specified by `lang`
- * - return:
- *     {String} formatted date
- * @param  {String} [lang=en] - language code for the locale to use
- * @return {String} formatted date
- */
-export function formatDate(date, format, lang) {
-  return Datepicker.formatDate(date, format, lang)
 }
