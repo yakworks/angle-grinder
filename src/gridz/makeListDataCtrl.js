@@ -77,7 +77,7 @@ const makeListDataCtrl = (opts) => {
 
       gopts.fireToolbarAction = ctrl.fireToolbarAction
 
-      gopts.restrictSearch = ctrl.restrictSearch || {}
+      if(!gopts.restrictSearch) gopts.restrictSearch = ctrl.restrictSearch || {}
       gopts.initSearch = ctrl.initSearch || {}
 
       // _.defaults(ctrl.ctx, ctx)

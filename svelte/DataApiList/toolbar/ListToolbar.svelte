@@ -105,7 +105,8 @@
     {/if}
     <div class="spacer"/>
 
-    <QuickFilter />
+    <!-- <QuickFilter /> -->
+
     <slot name="filter" />
 
     <div class="toolbar-item p-0 quick-search-item">

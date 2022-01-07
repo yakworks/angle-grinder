@@ -13,6 +13,8 @@
   export let ctx = undefined
   export let dataApi = undefined
 
+  export let restrictSearch = undefined
+
   let isConfigured = false
   let listController
 
@@ -32,12 +34,15 @@
   )
 
   onMount(async () => {
+    await setupListCtrl()
+  });
+
+  async function setupListCtrl() {
     listController = await DataApiListController({ dataApi, ctx })
     ctx = listController.ctx
     stateStore = listController.ctx.stateStore
-
     isConfigured = true
-  });
+  }
 
   function init(node) {
     gridCtrl.setupAndInit(node, ctx)
@@ -57,7 +62,7 @@
   <table class={classes} class:is-dense={$stateStore.isDense}></table>
   <div class="gridz-pager"></div>
 </div>
-<pre class="mb-4">state: {stringify($stateStore, null, 2)}</pre>
+<!-- <pre class="mb-4">state: {stringify($stateStore, null, 2)}</pre> -->
 {:else}
 <p>...loading</p>
 {/if}
