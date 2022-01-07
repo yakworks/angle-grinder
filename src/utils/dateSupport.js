@@ -1,6 +1,6 @@
 import * as _ from './dash' // uses babel plugin to only use what is referenced
 // see https://mymth.github.io/vanillajs-datepicker/#/
-import { Datepicker } from 'vanillajs-datepicker/js/main'
+import { parseDate } from './date-format'
 
 const isoFormat = 'yyyy-mm-dd'
 
@@ -37,22 +37,16 @@ export function displayDateToIso(displayDate) {
 }
 
 /**
- * Pasre date string
- * @param  {String|Date|Number} dateStr - date string, Date object or time
- * value to parse
- * @param  {String|Object} format - format string or object that contains
- * toValue() custom parser, whose signature is
- * - args:
- *   - dateStr: {String|Date|Number} - the dateStr passed to the method
- *   - format: {Object} - the format object passed to the method
- *   - locale: {Object} - locale for the language specified by `lang`
- * - return:
- *     {Date|Number} parsed date or its time value
- * @param  {String} [lang=en] - language code for the locale to use
- * @return {Number} time value of parsed date
+ * returns a date that can be set to input[date]. fudges time to make sure its
+ * on the same day
+ * @param  {String} dateIsoString the string in yyyy-mm-dd format.
+ * @return {Date} the date
  */
-export function parseDate(dateStr, format, lang) {
-  return Datepicker.parseDate(dateStr, format, lang)
+ export function parseIsoDate(dateIsoString) {
+  const d = new Date(dateIsoString)
+  //get it back to Z date to keep same day from browser timezone offset
+  d.setMinutes(d.getMinutes()+d.getTimezoneOffset())
+  return d
 }
 
 /**

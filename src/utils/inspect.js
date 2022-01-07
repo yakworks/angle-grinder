@@ -1,5 +1,6 @@
 
 export { default as isEmpty } from 'lodash/isEmpty';
+export { default as isUndefined } from 'lodash/isUndefined';
 
 export function isString(value) {
   return  (typeof value === 'string' || value instanceof String)
@@ -23,6 +24,10 @@ export function isPlainObject(o) {
   if (prot.hasOwnProperty('isPrototypeOf') === false) return false;
 
   return true;
+}
+
+export function isFunction(value) {
+  return value && (Object.prototype.toString.call(value) === "[object Function]" || "function" === typeof value || value instanceof Function);
 }
 
 export * from './truthy'

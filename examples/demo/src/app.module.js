@@ -17,6 +17,8 @@ import snippetsModule from './utils/demo/demo.module'
 // demo sections
 import svelteModule from './svelte'
 import svelteDataList from './svelteDataList'
+import svelteSelects from './svelteSelects'
+import formify from './formify'
 import componentsModule from './components'
 import formsModule from './controls'
 import gridsModule from './grids'
@@ -37,6 +39,8 @@ export default angular.module('app', [
   snippetsModule,
   svelteModule,
   svelteDataList,
+  svelteSelects,
+  formify,
   componentsModule,
   pagesModule,
   formsModule,

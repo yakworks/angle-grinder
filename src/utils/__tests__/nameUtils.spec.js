@@ -21,4 +21,9 @@ describe('nameUtils', () => {
 
   });
 
+  test('replace', () => {
+    let key = '{foo.bar}'
+    expect( key.replace(/[{}]/g, '')).toEqual("foo.bar")
+  });
+
 });

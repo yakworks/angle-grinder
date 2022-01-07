@@ -76,7 +76,7 @@ input[type='number']{
 
 
 //##### Serious ugly hacking for html5
-input[type="date"], input[type="date"].date5 {
+input[type="date"].date5 {
   position: relative;
   padding-right: 0;
   font-size: $text-sm;
@@ -90,11 +90,11 @@ input[type="date"], input[type="date"].date5 {
 /* hide our custom/fake placeholder text when in focus to show the default
  * 'mm/dd/yyyy' value and when valid to show the users' date of birth value.
  */
-input[type="date"]:focus::before,
-input[type="date"]:valid::before {
-  content: "";
-  display: none;
-}
+// input[type="date"].date5:focus::before,
+// input[type="date"].date5:valid::before {
+//   content: "";
+//   display: none;
+// }
 
 /* create a new arrow, because we are going to mess up the native one
 see "List of symbols" below if you want another, you could also try to add a font-awesome icon.. */
@@ -140,3 +140,14 @@ input[type="date"]::-webkit-inner-spin-button {
 input[type="date"]::-webkit-clear-button {
    z-index: 1;
 }
+
+.item-input-date5 {
+
+  input[type="date"]:not(.input-with-value):not(.input-focused)::before {
+    width: 100%;
+    content: attr(placeholder);
+    color: var(--f7-input-placeholder-color);
+  }
+
+}
+

@@ -1,10 +1,16 @@
-import _ from 'lodash'
-import { makeLabel } from '../../src/utils/nameUtils'
+/**
+ * transforms config for formify and lists views
+ * see the test for examples
+ */
+
+import { makeLabel } from '../nameUtils'
+import { map, _defaults, pick, omit, defaultsDeep } from '../dash'
+import { isUndefined, isPlainObject } from '../inspect'
 
 export function transformFields(fields, ctrl) {
   // if its a plain object and first key starts with column and its a columns layout
-  if (_.isPlainObject(fields) && Object.keys(fields)[0].startsWith('column')) {
-    const colarr = _.map(fields, (val, key) => {
+  if (isPlainObject(fields) && Object.keys(fields)[0].startsWith('column')) {
+    const colarr = map(fields, (val, key) => {
       const valCopy = val
       return doTransform(valCopy, ctrl)
     })
@@ -26,8 +32,8 @@ export function doTransform(opts, ctrl) {
 }
 
 function ensureArray(cfg) {
-  if (_.isPlainObject(cfg)) {
-    cfg = _.map(cfg, (val, key) => {
+  if (isPlainObject(cfg)) {
+    cfg = map(cfg, (val, key) => {
       if (key.startsWith('fieldGroup')) {
         const valCopy = val
         val = { fieldGroup: valCopy, className: 'columns' }
@@ -50,38 +56,45 @@ function doReduce(optsAr, ctrl) {
       field.fieldGroup.forEach(it => {
         if (!it.className) it.className = 'column'
       })
-      _.defaults(field, { className: 'columns' })
+      _defaults(field, { className: 'columns' })
     } else {
       const key = field.key
-      _.defaults(field, { type: 'text', name: key })
-      // pull out the keys into own object
-      const tplOpts = _.pick(field, tplOptsKeys)
-      const templateOptions = field.templateOptions || {}
-      _.defaults(templateOptions, tplOpts)
+      fieldDefaults(key, field)
 
-      // remove them from main field object
-      field = _.omit(field, tplOptsKeys)
-
-      // merge in defaults for label and placeholder if they don't exist
-      if (_.isUndefined(templateOptions.label)) templateOptions.label = makeLabel(field.key)
-      if (_.isUndefined(templateOptions.placeholder)) templateOptions.placeholder = templateOptions.label
       if (field.type === 'select') {
-        _.defaultsDeep(templateOptions, { selectOptions: { useDataObject: true } })
+        defaultsDeep(field, { selectOptions: { useDataObject: true } })
       }
+
       if (field.type.indexOf('addon') > -1) {
-        templateOptions.onClick = ($event) => {
+        field.onClick = ($event) => {
           if (!$event) return
-          if (typeof templateOptions.addon.action === 'string') {
-            const fn = ctrl[templateOptions.addon.action]
+          if (typeof field.addon.action === 'string') {
+            const fn = ctrl[field.addon.action]
             fn.apply(ctrl, [$event])
           } else {
-            return templateOptions.addon.action($event)
+            return field.addon.action($event)
           }
         }
       }
-      _.defaultsDeep(field, templateOptions )
+      // defaultsDeep(field, tplOpts )
     }
     accum.push(field)
     return accum
   }, [])
+}
+
+/**
+ * sets up default id, name, label, placeholder, type based on the path, see makeLabel.
+ *
+ * @param {string} path the name/key path
+ * @param {object} opts the input options
+ */
+export function fieldDefaults(path, opts) {
+  if (isUndefined(opts.label)) opts.label = makeLabel(path)
+  _defaults(opts,{
+    // id: path,
+    name: path,
+    placeholder: opts.label,
+    type: 'text'
+  })
 }

@@ -33,7 +33,7 @@ export const restQuery = ({ api }) => ds => {
 
     // prunes params and stringifies the q param if exists
     setupSearchParams(params){
-      let pruned = prune(params)
+      let pruned = prune(params) //removes properties with null or undefined values
       let { q, sort } = pruned
       if(restrictSearch) q = {...q, ...restrictSearch}
       //save it before we stringify
