@@ -1,5 +1,8 @@
 import {expect as x} from '@jest/globals'
 import fmt from '../formatters.js'
+import {parseDate, formatDate} from '../date/date-format';
+import {isoDateToDisplay} from '../dateSupport';
+
 describe('formatAmount', () => {
 
   test('formatAmount nums', () => {
@@ -30,4 +33,15 @@ describe('formatAmount', () => {
 
 })
 
+describe('format date', () => {
+
+  test('fmt.date', () => {
+    // let parsedDate = parseDate('2022-01-01')
+    x( isoDateToDisplay('2022-01-01') ).toEqual('01/01/2022')
+  })
+
+  test('fmt.date', () => {
+    x( fmt.date('2022-01-01') ).toEqual('01/01/2022')
+  })
+})
 

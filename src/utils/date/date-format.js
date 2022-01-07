@@ -1,3 +1,4 @@
+import { locales } from './base-locales.js';
 // pattern for format parts
 export const reFormatTokens = /dd?|DD?|mm?|MM?|yy?(?:yy)?/;
 // pattern for non date parts
@@ -109,6 +110,7 @@ function parseFormatString(format) {
 
   // sprit the format string into parts and seprators
   const separators = format.split(reFormatTokens);
+
   const parts = format.match(new RegExp(reFormatTokens, 'g'));
   if (separators.length === 0 || !parts) {
     throw new Error("Invalid date format.");
@@ -155,7 +157,9 @@ function parseFormatString(format) {
         return str += `${separators[index]}${fn(date, locale)}`;
       }, '');
       // separators' length is always parts' length + 1,
-      return dateStr += lastItemOf(separators);
+      let lastSep = separators[separators.length - 1]
+      dateStr = dateStr + lastSep
+      return dateStr
     },
   };
 }
@@ -180,7 +184,24 @@ export function parseDate(dateStr, format, locale) {
   return parseFormatString(format).parser(dateStr, locale);
 }
 
+/**
+ * Format Date object or time value in given format and language
+ * @param  {Date|Number} date - date or time value to format
+ * @param  {String|Object} format - format string or object that contains
+ * toDisplay() custom formatter, whose signature is
+ * - args:
+ *   - date: {Date} - Date instance of the date passed to the method
+ *   - format: {Object} - the format object passed to the method
+ *   - locale: {Object} - locale for the language specified by `lang`
+ * - return:
+ *     {String} formatted date
+ * @param  {String} [lang=en] - language code for the locale to use
+ * @return {String} formatted date
+ */
 export function formatDate(date, format, locale) {
+  //default to en
+  if(!locale) locale = locales[locale] || locales.en
+
   if (isNaN(date) || (!date && date !== 0)) {
     return '';
   }
@@ -190,6 +211,7 @@ export function formatDate(date, format, locale) {
   if (format.toDisplay) {
     return format.toDisplay(dateObj, format, locale);
   }
-
-  return parseFormatString(format).formatter(dateObj, locale);
+  let formatDate = parseFormatString(format).formatter(dateObj, locale)
+  // console.log("formatDate", formatDate)
+  return formatDate
 }
