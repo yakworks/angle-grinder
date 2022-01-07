@@ -8,7 +8,7 @@ import BulkUpdateModalCtrl from './BulkUpdateModalCtrl'
 import { argsMerge } from '../../utils/classUtils'
 import appConfigApi from '../../../dataApi/AppConfigApi'
 import toast from '../../../tools/toast'
-import Swal from '../../../tools/swal'
+//import Swal from '../../../tools/swal'
 
 export default class ListDataApiCtrl {
   defaultToolbarOpts = {
@@ -262,13 +262,14 @@ export default class ListDataApiCtrl {
     toast.error(message || er)
   }
 
-  swalError(error) {
-    Swal.fire({
-      icon: 'error',
-      title: error.title,
-      text: error.message,
-      showCloseButton: true
-    })
+  toastError(error) {
+    toast.error(error.message, error.title)
+    // Swal.fire({
+    //   icon: 'error',
+    //   title: error.title,
+    //   text: error.message,
+    //   showCloseButton: true
+    // })
   }
 
   handleResults(response) {
@@ -292,7 +293,7 @@ export default class ListDataApiCtrl {
           toast.success(result.title || 'Action is sucsess')
           this.gridCtrl.reload() // todo: should we reload only selected rows?
         } else {
-          this.swalError({title: result.title , message: result?.failed?.join('<br>') || ''})
+          this.toastError({title: result.title , message: result?.failed?.join('<br>') || ''})
         }
       } catch (e) {
         this.handleError(e)
