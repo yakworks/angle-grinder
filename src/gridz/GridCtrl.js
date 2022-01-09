@@ -26,6 +26,10 @@ export default class GridCtrl {
     const opts = gridOptions
     opts.loadui = 'block'
     this.gridOptions = opts
+    
+    if(opts.hasOwnProperty('restrictSearch')) {
+      this.restrictSearch = opts.restrictSearch
+    }
 
     const $jqGrid = $(jqGridElement)
     this.jqGridEl = $jqGrid

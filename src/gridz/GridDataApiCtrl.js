@@ -50,6 +50,10 @@ export default class GridDataApiCtrl {
     opts.loadui = 'block'
     this.gridOptions = opts
 
+    if(opts.hasOwnProperty('restrictSearch')) {
+      this.restrictSearch = opts.restrictSearch
+    }
+
     const $jqGrid = $(jqGridElement)
     this.jqGridEl = $jqGrid
     this.$gridWrapper = $(gridWrapper)
