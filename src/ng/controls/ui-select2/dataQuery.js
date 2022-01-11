@@ -23,6 +23,7 @@ async function getDataFromApi({opts, dataApi, dataApiParams}){
   return dta
 }
 
+// XXX move dataApiParams to restrictSearch for cases when we need filter by specific field always
 export function setupData(opts, dataStoreApi) {
   if (opts.dataApiKey){
     // setup data
