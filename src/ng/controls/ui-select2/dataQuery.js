@@ -23,21 +23,22 @@ async function getDataFromApi({opts, dataApi, dataApiParams}){
   return dta
 }
 
+// XXX move dataApiParams to restrictSearch for cases when we need filter by specific field always
 export function setupData(opts, dataStoreApi) {
   if (opts.dataApiKey){
     // setup data
     opts.data = {}
 
     //if minimumInputLength is not set then load the whole dataset
+    const dataApiParams = opts.dataApiParams
     if(!opts.minimumInputLength) {
       const dataApi = dataStoreApi[opts.dataApiKey]
-      const dataApiParams = opts.dataApiParams
       opts.data.results = () => {
         return getDataFromApi({opts, dataApi, dataApiParams})
       }
     }
     else {
-      opts.query = dataMinCharsQuery(opts, dataStoreApi)
+      opts.query = dataMinCharsQuery(opts, dataStoreApi, dataApiParams)
     }
   }
   // setup defaults for data
@@ -153,7 +154,7 @@ export function convertSelect2Data(strArray, textFieldKey = 'name') {
 }
 
 // if minimumInputLength > 0 then query api as they type
-export function dataMinCharsQuery(opts, dataStoreApi) {
+export function dataMinCharsQuery(opts, dataStoreApi, dataApiParams) {
   let timeout
   let quietMillis = opts.quietMillis || 500
 
@@ -166,7 +167,7 @@ export function dataMinCharsQuery(opts, dataStoreApi) {
     timeout = window.setTimeout(function() {
       let q = query.term
       const dataApiKey = opts.dataApiKey
-      let picklistQuery = () => dataStoreApi[dataApiKey].picklist({q: q })
+      let picklistQuery = () => dataStoreApi[dataApiKey].picklist({qSearch: q, q: dataApiParams })
       let dataResults = picklistQuery()
 
       Promise.resolve(dataResults).then(response => {
