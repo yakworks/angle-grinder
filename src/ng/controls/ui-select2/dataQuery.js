@@ -1,8 +1,11 @@
 import _ from 'lodash'
+import get from 'lodash/get';
 
 // function called to get data from api picklist
-async function getDataFromApi({opts, dataApi, dataApiParams}){
-  let res = await dataApi.picklist({q: dataApiParams})
+async function getDataFromApi({opts, dataApi, dataApiConfig}){
+  let qExtra = dataApiConfig.q
+  let params = dataApiConfig.params || {}
+  let res = await dataApi.picklist({q: qExtra, ...params})
   let dta = res
   // if its an object then assume it pager object with data key
   if (_.isPlainObject(dta)) dta = res.data
@@ -25,20 +28,25 @@ async function getDataFromApi({opts, dataApi, dataApiParams}){
 
 // XXX move dataApiParams to restrictSearch for cases when we need filter by specific field always
 export function setupData(opts, dataStoreApi) {
-  if (opts.dataApiKey){
+  let dataApiConfig = opts.dataApi || {}
+  let dataApiKey = get(dataApiConfig, 'key') || opts.dataApiKey
+  if (dataApiKey){
     // setup data
     opts.data = {}
 
-    //if minimumInputLength is not set then load the whole dataset
+    //old way to be added to q
     const dataApiParams = opts.dataApiParams
+    if(!dataApiConfig.q && dataApiParams) dataApiConfig.q = dataApiParams
+
+    const dataApi = get(dataStoreApi, dataApiKey)
+
     if(!opts.minimumInputLength) {
-      const dataApi = dataStoreApi[opts.dataApiKey]
       opts.data.results = () => {
-        return getDataFromApi({opts, dataApi, dataApiParams})
+        return getDataFromApi({opts, dataApi, dataApiConfig})
       }
     }
     else {
-      opts.query = dataMinCharsQuery(opts, dataStoreApi, dataApiParams)
+      opts.query = dataMinCharsQuery(opts, dataApi, dataApiConfig)
     }
   }
   // setup defaults for data
@@ -154,7 +162,7 @@ export function convertSelect2Data(strArray, textFieldKey = 'name') {
 }
 
 // if minimumInputLength > 0 then query api as they type
-export function dataMinCharsQuery(opts, dataStoreApi, dataApiParams) {
+export function dataMinCharsQuery(opts, dataApi, dataApiConfig) {
   let timeout
   let quietMillis = opts.quietMillis || 500
 
@@ -165,9 +173,10 @@ export function dataMinCharsQuery(opts, dataStoreApi, dataApiParams) {
     window.clearTimeout(timeout)
     // quietMillis to wait until done typing,
     timeout = window.setTimeout(function() {
-      let q = query.term
-      const dataApiKey = opts.dataApiKey
-      let picklistQuery = () => dataStoreApi[dataApiKey].picklist({qSearch: q, q: dataApiParams })
+      let qSearch = query.term
+      let qExtra = dataApiConfig.q
+      let params = dataApiConfig.params || {}
+      let picklistQuery = () => dataApi.picklist({qSearch, q: qExtra, ...params})
       let dataResults = picklistQuery()
 
       Promise.resolve(dataResults).then(response => {
