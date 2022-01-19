@@ -1,8 +1,11 @@
 <script>
   import { onMount } from 'svelte';
   import { Select, Button } from '@ag-svelte/index';
+  import SelectChip from 'svelte-select'
+  import stringify from 'fast-safe-stringify'
 
   const itemData = [ 'Chocolate', 'Pizza', '🍪 Cookies']
+  const emptyData = []
 
   let data = {
     // favFood: undefined,
@@ -28,5 +31,9 @@
 <Select isMulti keepOpen {itemData} bind:value={data.favFoods}/>
 <Button class="mt-1" on:click={(_) => data.favFoods=['Pizza']}>Set Pizza</Button>
 
+<h2>Chips</h2>
+<SelectChip isMulti items={emptyData} isCreatable bind:value={data.chips}/>
+<Button class="mt-1" on:click={(_) => data.chips=['foo', 'bar', 'baz']}>Set Chip List</Button>
+
 <h2 class=mt-4>data:</h2>
-<pre>{JSON.stringify(data)}</pre>
+<pre class="mt-4">{stringify(data, null, 2)}</pre>

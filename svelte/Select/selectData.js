@@ -10,8 +10,8 @@ export const selectData = (opts) => {
 
   //props used from opts
   let {
-    dataApiKey, dataApi, dataApiParams, minimumSearchLength, dataApiEager,
-    itemData, propertyKey, propertyLabel, isMulti, isItemValue
+    dataApiKey, dataApi, dataApiParams, minimumSearchLength, isEagerLoad,
+    itemData, propertyKey, propertyLabel, isMulti, isValueObject
   } = opts
 
   let obj = {}
@@ -25,7 +25,7 @@ export const selectData = (opts) => {
       opts.data = {}
 
       //if minimumInputLength then will query on demand
-      if(dataApiEager) {
+      if(isEagerLoad) {
         // console.log("setup data func for rest api")
         //if minimumInputLength is not set then load the whole dataset
         opts.data = () => {
@@ -33,7 +33,7 @@ export const selectData = (opts) => {
         }
       }
       else {
-        console.log("is not dataApiEager so using loadOptions", dataApiEager)
+        console.log("is not isEagerLoad so using loadOptions", isEagerLoad)
         opts.loadOptions = async (filterText) => {
           if (!(filterText.length >= minimumSearchLength)) return
           // console.log('filterText', filterText)
@@ -132,31 +132,37 @@ export const selectData = (opts) => {
     return new Promise(resolve => setTimeout(resolve, ms))
   }
 
-  function loadItemsIfNeeded() {
-    if(!opts.items) {
-      opts.items = opts.data()
-      console.log("first call, loaded data")
+  /**
+   * checks id loading items is needed and loads if so.
+   * @returns the loaded items
+   */
+  obj.loadItemsIfNeeded = async (_) => {
+    if(!opts.items && !opts.isWaiting) {
+      console.log("first call to load data")
+      opts.isWaiting = true
+      opts.items = await opts.data()
+      console.log("loaded items", opts.items)
+      opts.isWaiting = false
+    }
+    return opts.items
+  }
+
+  /**
+   * gets the selected item for the value. If isValueObject is set then it just returns the passed in value
+   * @return the value
+   */
+  obj.getSelectedItem = (value) => {
+    if(opts.isValueObject) {
+      return value
+    } else {
+      return obj.getSelectedValue(value, obj.findItemByKey)
     }
   }
 
-  // function getSelectedValue(item) {
-  //   console.log("watchSelectedItem", item)
-  //   //finder function to use
-  //   let finder = isItemValue ? findItem : getItemKey
-  //   let val
-  //   if (isMulti && Array.isArray(item)) {
-  //     val = item.map((selection) => finder(selection));
-  //     // keyVal = item.map( selection => getItemKey(selection))
-  //   } else {
-  //     val = finder(item)
-  //   }
-  //   return val
-  // }
-
   function getSelectedValue(item, finderFunc) {
-    console.log("getSelectedValue", item, finderFunc)
+    // console.log("getSelectedValue", item, finderFunc)
     //finder function to use
-    if(!finderFunc) finderFunc = isItemValue ? findItem : getItemKey
+    if(!finderFunc) finderFunc = isValueObject ? findItem : getItemKey
     let val
     if (isMulti && Array.isArray(item)) {
       val = item.map((selection) => finderFunc(selection));
@@ -174,6 +180,7 @@ export const selectData = (opts) => {
 
   function findItemByKey(key) {
     // await loadItemsIfNeeded()
+    console.log("findItemByKey with key and items", key, opts.items)
     return opts.items.find((item) => getItemKey(item) === key)
   }
 
@@ -181,7 +188,7 @@ export const selectData = (opts) => {
     return item[propertyKey]
   }
 
-  Object.assign(obj, { getSelectedValue, findItem, findItemByKey, getItemKey, loadItemsIfNeeded})
+  Object.assign(obj, { getSelectedValue, findItem, findItemByKey, getItemKey})
 
   return obj
 }

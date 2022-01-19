@@ -46,8 +46,9 @@
     validateField,
   } = context;
 
-  export function getValue(path){
-    return get(data, path)
+  export function getValue(obj, path){
+    let val = get(obj, path)
+    return val === undefined ? null : val
   }
 
   setContext(ctxKey, {

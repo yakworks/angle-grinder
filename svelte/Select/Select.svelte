@@ -15,8 +15,8 @@
   export let dataApiKey = undefined
   export let dataApi = undefined
   // will eagerely load the data set and not on demand in conjunction with  minimumSearchLength
-  export let dataApiEager = true
-  // if dataApiEager is false then this is number of chars for search before it does a load
+  export let isEagerLoad = true
+  // if isEagerLoad is false then this is number of chars for search before it does a load
   export let minimumSearchLength = 2
 
   export let id = null
@@ -30,8 +30,8 @@
   // export let isFocused = false;
   /** itemValue is the selected item object */
   export let value = null
-  /** if true then bound value will be the key/optionId */
-  export let isItemValue = false
+  /** if true then bound value will be the object vs the key/id */
+  export let isValueObject = false
   /** selected item object */
   export let selectedItem = null
   export let inputStyles = '';
@@ -62,10 +62,10 @@
   }
 
   export let handleSelect = (event) => {
-    console.log("handleSelect", event)
     selectedItem = event.detail
     if(selectedItem) {
       value = manager.getSelectedValue(selectedItem)
+      console.log("handleSelect updated value:selectedItem", value, selectedItem)
     } else {
       // if empty slected and multi then make sure they are blanked out
       if (isMulti) {
@@ -100,14 +100,14 @@
   let opts = {
     dataApi,
     dataApiKey,
-    dataApiEager,
+    isEagerLoad,
     getOptionLabel,
     getSelectionLabel,
     Item,
     id,
     isMulti,
     isWaiting,
-    isItemValue,
+    isValueObject,
     inputStyles,
     loadOptionsInterval,
     listOffset,
@@ -174,12 +174,13 @@
   }
 
   function watchValueKey(val) {
-    if(isItemValue) {
-      console.log("manager.getSelectedValue(val)", manager.getSelectedValue(val))
+    if(isValueObject) {
+      console.log("watchValueKey manager.getSelectedValue(val)", manager.getSelectedValue(val))
       // value = manager.getSelectedValue(val)
       selectedItem = value
     } else {
       selectedItem = manager.getSelectedValue(val, manager.findItemByKey)
+      console.log("watchValueKey updated val:selectedItem", val, selectedItem)
     }
   }
 

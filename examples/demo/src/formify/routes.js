@@ -10,6 +10,10 @@ const componentsStates = {
     {
       name: 'basic',
       component: 'formifyBasicIndex'
+    },
+    {
+      name: 'dynamic',
+      component: 'formifyDynamicIndex'
     }
   ]
 

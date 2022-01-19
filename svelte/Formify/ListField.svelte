@@ -31,13 +31,17 @@
     'item-input-date5': opts.type === 'date',
   })
 
-  const {form, handleChange} = getContext(ctxKey);
+  const {form, handleChange, getValue} = getContext(ctxKey);
+
+  export let value = null
+
+  $: value = getValue($form, name)
 
 </script>
 
 <ListInput {...$$props} {...opts} class={classes}
   onChange={handleChange} onBlur={handleChange}
-  value={get($form, name)}
+  {value}
 />
 
 <!-- <input

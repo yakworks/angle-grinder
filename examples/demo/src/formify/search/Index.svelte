@@ -3,16 +3,17 @@
   import { Page, Navbar, Block } from 'angle-grinder/svelte/index'
   import ExampleSnippet from '../../svelte/utils/ExampleSnippet.svelte'
 
-  import SelectListDemo from './SelectListDemo.svelte'
-  import SelectListDemoRaw from '!raw-loader!./SelectListDemo.svelte'
+  import SearchForm from './SearchForm.svelte'
+  import SearchFormRaw from '!raw-loader!./SearchForm.svelte'
+
 </script>
 
 <Page>
   <Navbar title="Selects" backLink={true} />
   <Block>
 
-    <ExampleSnippet code={SelectListDemoRaw} >
-      <SelectListDemo/>
+    <ExampleSnippet code={SearchFormRaw} horizontal={false} >
+      <SearchForm/>
     </ExampleSnippet>
 
   </Block>

@@ -15,9 +15,7 @@
 
   const dispatch = createEventDispatcher()
 
-  /**
-   * name is the required key or object field path
-   */
+  /** name is the required key or object field path */
   export let name
   export let label = undefined
   export let placeholder = undefined
@@ -34,26 +32,11 @@
 
   const { form, updateValidateField, getValue } = getContext(ctxKey);
 
-  let selectedValue = getValue(name)
-  // form.subscribe(_data => {
-  //   let _val = get(_data, name)
-  //   if(_val !== selectedValue){
-  //     console.log("data.supscribe updating selectedValue ${name}", _val)
-  //     selectedValue = _val
-  //   }
-  // })
-
-  // let selectedValue
-  // $: {
-  //   selectedValue = get($form, name)
-  //   console.log(`selectedValue ${name}`, selectedValue)
-  // }
-
   export let dataApiKey = undefined
   export let dataApi = undefined
-  // will eagerely load the data set and not on demand in conjunction with  minimumSearchLength
-  export let dataApiEager = true
-  // if dataApiEager is false then this is number of chars for search before it does a load
+  /** will eagerely load the data set and not on demand in conjunction with  minimumSearchLength */
+  export let isEagerLoad = true
+  // if isEagerLoad is false then this is number of chars for search before it does a load
   export let minimumSearchLength = 2
 
   export let id = null
@@ -61,14 +44,14 @@
   export let isMulti = false
   export let isWaiting = false
   /** if isMulti then keep open after value.*/
-  export let keepOpen = isMulti
+  export let keepOpen = undefined
 
   // export let isDisabled = false;
   // export let isFocused = false;
-  /** itemValue is the selected item object */
+  /** value is the selected item object */
   export let value = null
-  /** if true then bound value will be the key/optionId */
-  export let isItemValue = false
+  /** if true then bound value will be the object vs the key/id */
+  export let isValueObject = false
   /** selected item object */
   export let selectedItem = null
   export let inputStyles = '';
@@ -92,36 +75,6 @@
     return manager.getSelectionLabel(itm)
   }
 
-  export let handleSelect = (event) => {
-    console.log("listSelect.handleSelect", event)
-    // updateValidateField(name, selectedValue)
-
-    selectedItem = event.detail
-    if(selectedItem) {
-      value = manager.getSelectedValue(selectedItem)
-    } else {
-      // if empty slected and multi then make sure they are blanked out
-      if (isMulti) {
-        selectedItem = null
-        value = null
-      }
-    }
-    updateValidateField(name, value)
-
-    // make sure input is focused so it can keep open
-    if (isMulti && keepOpen) document.getElementById(id).focus()
-
-    // redispatch select event
-    // dispatch('select', selectedItem);
-  }
-
-  export let handleClear = (event) => {
-    console.log("handleClear", event)
-    updateValidateField(name, event.detail)
-    selectedItem = event.detail
-    value = event.detail
-  }
-
   //setup defaults
   if(!propertyLabel) propertyLabel = 'name'
   if (Array.isArray(propertyLabel)) {
@@ -130,20 +83,17 @@
       Item = ItemSingle
   }
 
-  // create unique id if not set
-  if (!id) id = _.uniqueId('select')
-
   _defaults(opts, {
     dataApi,
     dataApiKey,
-    dataApiEager,
+    isEagerLoad,
     getOptionLabel,
     getSelectionLabel,
     Item,
     id,
     isMulti,
     isWaiting,
-    isItemValue,
+    isValueObject,
     inputStyles,
     loadOptionsInterval,
     listOffset,
@@ -159,73 +109,72 @@
     showIndicator
   })
 
+  // create unique id if not set
+  if (!opts.id) opts.id = _.uniqueId('select')
+  //default to true for isMulti
+  if (opts.keepOpen === undefined) opts.keepOpen = opts.isMulti
+
   export let manager = selectData(opts).init()
 
-  $: if (keepOpen) {
-    keepListOpen(listOpen)
+  console.log("keep list open", opts.keepOpen)
+  $: if (opts.keepOpen) {
+    keepListOpen(listOpen) // we dont use the listOpen in method but this registers it with svelete to react
   }
 
-  // reacte to listOpen to load items if they have not been yet.
-  $: if (listOpen) {
-    //if its not preloaded data or rest call that loads all on first use then load it
-    Promise.resolve(loadItemsIfNeeded(listOpen))
-  }
-
-  // $: (async () => {
-  //   if(value) {
-  //     await loadItemsIfNeeded()
-  //     watchValueKey(value)
-  //   }
-  // })();
-
-
-  // react to value changes from outside
-  $: if(value) {
-    Promise.resolve(loadItemsIfNeeded())
-      .then( () => {
-        watchValueKey(value)
-      })
-  }
-
-  async function loadItemsIfNeeded(_) {
-    if(!opts.items && !opts.isWaiting) {
-      console.log("first call to load data")
-      opts.isWaiting = true
-      opts.items = await opts.data()
-      opts.isWaiting = false
-    }
-  }
-
-  function watchValueKey(val) {
-    if(isItemValue) {
-      console.log("manager.getSelectedValue(val)", manager.getSelectedValue(val))
-      // value = manager.getSelectedValue(val)
-      selectedItem = value
-    } else {
-      selectedItem = manager.getSelectedValue(val, manager.findItemByKey)
-    }
-  }
-
-  function keepListOpen(isOpen) {
+  function keepListOpen(_) {
+    console.log("keep list open")
     // if activeElement is the input then its focused, so keep open
-    if (document.activeElement === document.getElementById(id)) {
+    if (document.activeElement === document.getElementById(opts.id)) {
       listOpen = true
     }
   }
 
-  // beforeUpdate(async () => {
-  //   console.log("beforeUpdate")
-  // });
+  // reacte to listOpen to load items if they have not been yet.
+  $: (async () => {
+    if(listOpen) opts.items = await manager.loadItemsIfNeeded(listOpen)
+  })(); //trick way to call svelte reactive for async
 
-  // onMount(() => {
-  //   console.log("select", select)
-  // });
+
+  //Subscribe to the form changes
+  form.subscribe(async _data => {
+    let _val = getValue(_data, name)
+    // console.log('form.subscribe with _val:value', _val, value)
+    if(!_val && !value) return //skip it if both are blank so we dont initialize the data
+    await manager.loadItemsIfNeeded()
+    selectedItem = manager.getSelectedItem(_val)
+  })
+
+  export let handleClear = (event) => {
+    console.log("handleClear", event)
+    updateValidateField(name, event.detail)
+    selectedItem = event.detail
+    value = event.detail
+  }
+
+  export let handleSelect = (event) => {
+    selectedItem = event.detail
+    if (selectedItem) {
+      value = manager.getSelectedValue(selectedItem)
+      console.log("handleSelect updated value:selectedItem", value, selectedItem)
+    }
+    else if (isMulti) {
+      selectedItem = null
+      value = null
+    }
+    updateValidateField(name, value)
+
+    // make sure input is focused so it can keep open
+    if (opts.isMulti && opts.keepOpen) document.getElementById(opts.id).focus()
+
+    // redispatch select event
+    dispatch('select', selectedItem);
+  }
 
 </script>
 
 <ListInput {label} clearButton={false} input={false} class={className}>
   <div class="select-theme f7" slot="input">
-      <Select containerClasses="{className}" {...opts} value={selectedValue} bind:listOpen
+      <Select containerClasses="{className}" {...opts} value={selectedItem} bind:listOpen
         on:select={handleSelect} on:clear={handleClear} bind:this={selectEl}/>
   </div>
 </ListInput>
