@@ -46,7 +46,6 @@ export default class GridDataApiCtrl {
     // shortcut shared state
     // this.state = _.merge(this.state, this.ctx.state)
     this.stateStore = this.ctx.stateStore
-
     opts.loadui = 'block'
     this.gridOptions = opts
 
@@ -58,8 +57,10 @@ export default class GridDataApiCtrl {
     this.jqGridEl = $jqGrid
     this.$gridWrapper = $(gridWrapper)
 
-    if (!this.gridId && !_.isNil(opts.gridId)) {
-      this.gridId = opts.gridId
+    //we need uniq gridId for cases if 2 grids on one page, in other case pagers will be messed
+    if (!this.gridId) {
+      //if no gridId is specified in opts, then generate it based on apiKey
+      this.gridId =  opts.gridId || opts.dataApi?.key?.replace('/', '_')
     }
     $jqGrid.attr('id', this.gridId)
 
