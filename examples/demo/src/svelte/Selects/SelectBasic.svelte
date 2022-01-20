@@ -1,5 +1,5 @@
 <script>
-  import { Select } from '@yakit/svelte/index';
+  import { Select } from '@yakit/ui/index';
 
   const items = [ 'Chocolate', 'Pizza', '🍪 Cookies']
 

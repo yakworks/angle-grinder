@@ -1,5 +1,5 @@
 <script>
-  import { Button } from 'angle-grinder/svelte'
+  import { Button } from '@yakit/ui'
 
   let loading = false
 

@@ -1,6 +1,6 @@
 
 <script>
-  import { Page, Navbar, Block } from 'angle-grinder/svelte/index'
+  import { Page, Navbar, Block } from '@yakit/ui/index'
   import Cards from './Cards.svelte'
   import cardsRaw from '!raw-loader!./Cards.svelte'
 

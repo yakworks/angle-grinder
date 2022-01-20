@@ -1,6 +1,6 @@
 <script>
   import { onMount } from 'svelte'
-  import { Button, Button7 } from 'angle-grinder/svelte/index'
+  import { Button, Button7 } from '@yakit/ui/index'
 
 </script>
 

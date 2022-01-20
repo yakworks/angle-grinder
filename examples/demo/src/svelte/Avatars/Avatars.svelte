@@ -2,7 +2,7 @@
 <script>
   import { onMount } from 'svelte'
   // import Button from 'angle-grinder/src/svelte/Button.svelte'
-  import { Avatar } from 'angle-grinder/svelte/index'
+  import { Avatar } from '@yakit/ui/index'
   import { people } from '../../data/sample'
   import _ from 'lodash'
 

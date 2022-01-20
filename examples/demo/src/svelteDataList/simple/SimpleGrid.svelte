@@ -1,6 +1,6 @@
 
 <script>
-  import { Gridz } from '@yakit/svelte/index'
+  import { Gridz } from '@yakit/ui/index'
   import sessionStores from '~/store/sessionServices'
 
   let gridOptions = {

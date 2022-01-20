@@ -1,6 +1,6 @@
 <script>
   import Select from 'svelte-select';
-  import { SelectRest } from '@yakit/svelte/index';
+  import { SelectRest } from '@yakit/ui/index';
   import dataApiFactory from '../../store/dataApiFactory';
   import stringify from 'fast-safe-stringify'
 

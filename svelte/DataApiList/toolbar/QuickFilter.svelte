@@ -2,7 +2,7 @@
   Wraps the jqGrid and adds the toolbar and search form
  -->
 <script>
-  import {Button, Button7, Segmented} from '@yakit/svelte/index'
+  import {Button, Button7, Segmented} from '@yakit/ui/index'
 
   let activeBtn //= 'bt3'
 

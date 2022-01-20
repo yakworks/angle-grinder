@@ -3,7 +3,7 @@
   // import { getContext } from 'svelte';
   import stringify from 'fast-safe-stringify'
 
-  import { Avatar, Columns, Col, BlockTitle, Card, CardContent, Icon, List, ListInput, ListItem } from 'angle-grinder/svelte'
+  import { Avatar, Columns, Col, BlockTitle, Card, CardContent, Icon, List, ListInput, ListItem } from '@yakit/ui'
 
   let formConfig = [
     {

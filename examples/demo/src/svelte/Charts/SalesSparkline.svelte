@@ -1,5 +1,5 @@
 <script>
-  import { ApexChart } from 'angle-grinder/svelte'
+  import { ApexChart } from '@yakit/ui'
   import { themeColors, randomizeArray } from './chartHelpers'
 
   var sparklineData = [472, 454, 547, 385, 562, 247, 652, 318, 379, 391, 622, 515, 355, 415, 358, 271, 932, 534, 615, 278, 546, 435, 192, 465];

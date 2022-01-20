@@ -1,5 +1,5 @@
 <script>
-  import { Columns, Col, BlockTitle, Card, CardContent, Icon, List, ListInput } from 'angle-grinder/svelte/index'
+  import { Columns, Col, BlockTitle, Card, CardContent, Icon, List, ListInput } from '@yakit/ui/index'
   import { transformFields } from '@yakit/core/transformer'
   // import stringify from '@yakit/core/stringify'
   import stringify from 'fast-safe-stringify'

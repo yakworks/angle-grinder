@@ -1,7 +1,7 @@
 <script>
-  import { Button, Columns, Col } from 'angle-grinder/svelte'
-import { Block } from 'angle-grinder/svelte/';
-import { BlockTitle } from 'angle-grinder/svelte/';
+  import { Button, Columns, Col } from '@yakit/ui'
+import { Block } from '@yakit/ui/';
+import { BlockTitle } from '@yakit/ui/';
   let loading = false
 
   function toggleLoading(event){

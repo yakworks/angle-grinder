@@ -1,7 +1,7 @@
 
 <script>
   import themeColors from 'angle-grinder/src/themeColors'
-  import { Page, Navbar, Block } from 'angle-grinder/svelte/index'
+  import { Page, Navbar, Block } from '@yakit/ui/index'
   let contrasts = [
     'body',
     'contrast',

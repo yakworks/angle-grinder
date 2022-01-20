@@ -8,10 +8,9 @@
     "module": "es6",
     "paths": {
       "angle-grinder/src/*": ["src/*"],
-      "angle-grinder/svelte/*": ["svelte/*"],
-      "@yakit/svelte/*": ["svelte/*"],
       "@ag/*": ["src/*"],
       "@yakit/core/*": ["yakit/core/*"],
+      "@yakit/ui/*": ["svelte/*"],
       "~/*": ["examples/demo/src/*"],
     },
     "checkJs": true,

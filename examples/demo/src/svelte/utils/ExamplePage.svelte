@@ -1,5 +1,5 @@
 <script>
-  import { Page, Navbar, Block } from 'angle-grinder/svelte/index'
+  import { Page, Navbar, Block } from '@yakit/ui/index'
   import ExampleSnippet from '../utils/ExampleSnippet.svelte'
 
   export let title = 'Example'

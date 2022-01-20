@@ -1,6 +1,6 @@
 
 <script>
-  import { Page, Navbar, Block } from 'angle-grinder/svelte/index'
+  import { Page, Navbar, Block } from '@yakit/ui/index'
   import RestGrid from './RestGrid.svelte'
   import svelteRaw from '!raw-loader!./RestGrid.svelte'
   import ExampleSnippet from '../../svelte/utils/ExampleSnippet.svelte'

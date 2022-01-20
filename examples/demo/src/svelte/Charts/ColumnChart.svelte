@@ -1,6 +1,6 @@
 <script>
-  import { ApexChart } from 'angle-grinder/svelte'
-  import { chart } from 'angle-grinder/svelte/Charts/apexChartRender'
+  import { ApexChart } from '@yakit/ui'
+  import { chart } from '@yakit/ui/Charts/apexChartRender'
   import { themeColors, randomizeArray } from './chartHelpers'
 
   const options = {

@@ -1,5 +1,5 @@
 <script>
-  import { ApexChart } from 'angle-grinder/svelte'
+  import { ApexChart } from '@yakit/ui'
   import { themeColors, randomizeArray, primaryColor, secondaryColor } from './chartHelpers'
 
   const options = {

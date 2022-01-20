@@ -3,7 +3,7 @@
   // import { getContext } from 'svelte';
   import stringify from 'fast-safe-stringify'
 
-  import { Avatar, Columns, Col, Button, BlockTitle, Card, CardContent, Icon, List, ListInput, ListItem } from 'angle-grinder/svelte/index'
+  import { Avatar, Columns, Col, Button, BlockTitle, Card, CardContent, Icon, List, ListInput, ListItem } from '@yakit/ui/index'
 
   function handleUpdate(e){
     console.log('handleUpdate', e)

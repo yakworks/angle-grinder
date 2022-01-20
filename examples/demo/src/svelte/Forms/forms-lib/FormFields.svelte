@@ -1,6 +1,6 @@
 
   <script>
-    import { Button, Form, Input } from 'angle-grinder/svelte'
+    import { Button, Form, Input } from '@yakit/ui'
 
     import * as yup from "yup";
 

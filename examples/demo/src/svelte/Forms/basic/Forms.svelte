@@ -4,7 +4,7 @@
     Input,
     Select,
     Choice,
-  } from 'angle-grinder/svelte/Form';
+  } from '@yakit/ui/Form';
   import * as yup from 'yup';
 
   function handleReset() {
