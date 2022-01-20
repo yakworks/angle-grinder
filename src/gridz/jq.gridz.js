@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import _ from 'lodash'
-import Log from '../utils/Log'
+import Log from '@yakit/core/logger'
 
 /**
  * jquery library to wrap jqgrid and add our defaults

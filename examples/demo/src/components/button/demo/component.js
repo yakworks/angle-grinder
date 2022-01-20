@@ -1,5 +1,5 @@
 import template from './component.html'
-import toast from 'angle-grinder/src/tools/toast'
+import toast from '@yakit/ui/growl'
 
 class controller {
   content = 'Click Me'

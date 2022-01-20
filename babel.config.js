@@ -20,9 +20,10 @@ module.exports = function(api) {
       "root": ["./src"],
       //make it work with both
       "alias": [
-        {"@ag-svelte": "./svelte"},
+        {"@yakit/core": "./yakit/core"},
+        {"@yakit/ui": "./yakit/ui"},
+        {"@yakit/svelte": "./yakit/svelte"},
         {"@ag": "./src"},
-        {"angle-grinder/svelte": "./svelte"},
         {"angle-grinder/src": "./src"},
         //used for demo
         { "~": "./examples/demo/src"},

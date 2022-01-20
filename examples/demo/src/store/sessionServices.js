@@ -1,4 +1,4 @@
-import SessionDataService from 'angle-grinder/src/stores/local/SessionDataService'
+import SessionDataService from '@yakit/core/stores/local/SessionDataService'
 
 // eslint-disable-next-line space-before-blocks
 function makeDatastore(storageKey, sourceUrl){

@@ -1,6 +1,6 @@
 <script>
   import { onMount } from 'svelte'
-  import { Gridz } from 'angle-grinder/svelte/index'
+  import { Gridz } from '@yakit/svelte/index'
 
   export let foo = 42
   export let dataApi = {}

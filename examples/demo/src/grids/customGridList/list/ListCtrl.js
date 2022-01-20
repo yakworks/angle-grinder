@@ -2,7 +2,7 @@
 // import template from './list.html'
 import BaseListCtrl from 'angle-grinder/src/ng/gridz/list/BaseListCtrl'
 import dataApiFactory from '../../../store/dataApiFactory'
-import toast from 'angle-grinder/src/tools/toast'
+import toast from '@yakit/ui/growl'
 
 export default class ListCtrl extends BaseListCtrl {
   apiKey = 'invoice'

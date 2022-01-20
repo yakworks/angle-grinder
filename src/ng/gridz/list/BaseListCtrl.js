@@ -1,10 +1,10 @@
-// import Log from 'angle-grinder/src/utils/Log'
+// import Log from '@yakit/core/Log'
 import _ from 'lodash'
 import EditModalCtrl from './EditModalCtrl'
 import BulkUpdateModalCtrl from './BulkUpdateModalCtrl'
 import { argsMerge } from '../../utils/classUtils'
 import appConfigApi from '../../../dataApi/AppConfigApi'
-import toast from '../../../tools/toast'
+import toast from '@yakit/ui/growl'
 // import { transformOptions } from '../../controls/formly/helpers'
 
 // see https://stackoverflow.com/questions/53349705/constructor-and-class-properties-within-javascript-mixins

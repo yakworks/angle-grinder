@@ -1,6 +1,6 @@
 import template from './component.html'
-import Swal from 'angle-grinder/src/tools/swal'
-import toast from 'angle-grinder/src/tools/toast'
+import Swal from '@yakit/ui/swal'
+import toast from '@yakit/ui/growl'
 
 class controller {
 

@@ -1,5 +1,5 @@
 <script>
-  import { Avatar, Columns, Col, BlockTitle, Card, CardContent, Icon, List, ListItem } from 'angle-grinder/svelte'
+  import { Avatar, Columns, Col, BlockTitle, Card, CardContent, Icon, List, ListItem } from '@yakit/svelte'
   import { SkeletonBlock } from 'skeleton-elements/svelte';
   let simpleList = ['Item 1', 'Item 2', 'Item 3']
   let dataList = [

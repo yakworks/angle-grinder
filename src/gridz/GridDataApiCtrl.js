@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars */
-import { makeLabel } from '../utils/nameUtils'
+import { makeLabel } from '@yakit/core/nameUtils'
 import { xlsData, csvData } from './excelExport'
-import flattenObject from '../utils/flattenObject'
-import toast from '../tools/growl'
+import flattenObject from '@yakit/core/flattenObject'
+import toast from '@yakit/ui/growl'
 import _ from 'lodash'
 import { subscribe } from 'svelte/internal'
 

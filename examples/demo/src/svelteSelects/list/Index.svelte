@@ -1,18 +1,18 @@
 
 <script>
-  import { Page, Navbar, Block } from 'angle-grinder/svelte/index'
+  import { Page, Navbar, Block } from '@yakit/svelte/index'
   import ExampleSnippet from '../../svelte/utils/ExampleSnippet.svelte'
 
-  import ListSelect from './ListSelect.svelte'
-  import ListSelectRaw from '!raw-loader!./ListSelect.svelte'
+  import SelectListDemo from './SelectListDemo.svelte'
+  import SelectListDemoRaw from '!raw-loader!./SelectListDemo.svelte'
 </script>
 
 <Page>
   <Navbar title="Selects" backLink={true} />
   <Block>
 
-    <ExampleSnippet code={ListSelectRaw} >
-      <ListSelect/>
+    <ExampleSnippet code={SelectListDemoRaw} >
+      <SelectListDemo/>
     </ExampleSnippet>
 
   </Block>

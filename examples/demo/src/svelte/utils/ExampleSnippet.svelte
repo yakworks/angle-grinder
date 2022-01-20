@@ -1,5 +1,5 @@
 <script>
-  import { Page, Navbar, Block } from 'angle-grinder/svelte/index'
+  import { Page, Navbar, Block } from '@yakit/svelte/index'
   import Code from './Code.svelte'
   const jq = window.$
 

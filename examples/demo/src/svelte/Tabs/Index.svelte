@@ -1,6 +1,6 @@
 
 <script>
-  import { Page, Navbar, BlockTitle, Block } from 'angle-grinder/svelte/index'
+  import { Page, Navbar, BlockTitle, Block } from '@yakit/svelte/index'
   import Tabbar from './Tabbar.svelte'
 </script>
 

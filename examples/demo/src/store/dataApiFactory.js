@@ -1,6 +1,6 @@
 // import RestDataApi from 'angle-grinder/src/dataApi/RestDataApi'
-import RestDataService from 'angle-grinder/src/stores/rest/RestDataService'
-import ky from 'angle-grinder/src/stores/ky'
+import RestDataService from '@yakit/core/stores/rest/RestDataService'
+import ky from '@yakit/core/stores/ky'
 
 function makeDataService(key){
   return RestDataService({ key })

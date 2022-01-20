@@ -1,5 +1,5 @@
 import angular from 'angular'
-import * as nameUtils from '../../utils/nameUtils'
+import * as nameUtils from '@yakit/core/nameUtils'
 
 /**
  * Sets up defaults on the state/menu tree

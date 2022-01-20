@@ -1,6 +1,6 @@
 <script>
   import { Block, BlockTitle,
-    Button7, Segmented, Col, Row } from 'angle-grinder/svelte/index'
+    Button7, Segmented, Col, Row } from '@yakit/svelte/index'
 
   let activeBtn = 'bt3'
 

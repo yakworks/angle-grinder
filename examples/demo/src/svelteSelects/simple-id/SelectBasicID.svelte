@@ -1,5 +1,5 @@
 <script>
-  import { Select, Button } from '@ag-svelte/index';
+  import { Select, Button } from '@yakit/svelte/index';
 
   //array of object data. identifier defaults to id and label is name.
   //added code in for the demo of multi labels.
@@ -42,14 +42,14 @@
 </p>
 
 <h2>Bound value object</h2>
-<Select isItemValue {itemData} bind:value={favFoodObj} />
+<Select isValueObject {itemData} bind:value={favFoodObj} />
 <Button class="mt-1" on:click={(_) => favFoodObj={id:2}}>Set Pizza</Button>
 <p>
 	Selected item: {JSON.stringify(favFoodObj)}
 </p>
 
 <h2>Multi Bound value object</h2>
-<Select isMulti keepOpen isItemValue {itemData} bind:value={favFoodsArr}/>
+<Select isMulti keepOpen isValueObject {itemData} bind:value={favFoodsArr}/>
 <Button class="mt-1" on:click={(_) => favFoodsArr=[{id:2}]}>Set Pizza</Button>
 <p>
 	Selected items: {JSON.stringify(favFoodsArr)}

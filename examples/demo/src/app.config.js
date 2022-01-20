@@ -2,10 +2,10 @@
 import _ from 'lodash'
 import appName from './app.module'
 import './config.router'
-import appState from 'angle-grinder/src/tools/AppState'
-import apiHolder from 'angle-grinder/src/stores/apiHolder'
+import appState from '@yakit/ui/AppState'
+import apiHolder from '@yakit/core/stores/apiHolder'
 import dataApiFactory from './store/dataApiFactory'
-import { KyFactory } from "angle-grinder/src/stores/ky";
+import { KyFactory } from "@yakit/core/stores/ky";
 
 KyFactory.enableAuthHeader()
 KyFactory.defaults.prefixUrl = configData.base_url

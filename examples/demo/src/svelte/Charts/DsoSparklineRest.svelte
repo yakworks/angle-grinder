@@ -1,6 +1,6 @@
 <script>
   import { onMount } from 'svelte'
-  import { ApexChart } from 'angle-grinder/svelte'
+  import { ApexChart } from '@yakit/svelte'
   import { themeColors, randomizeArray, secondaryColor } from './chartHelpers'
   import ky from 'ky'
 

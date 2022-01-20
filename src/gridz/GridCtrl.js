@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars */
-import { makeLabel } from '../utils/nameUtils'
+import { makeLabel } from '@yakit/core/nameUtils'
 import { xlsData, csvData } from './excelExport'
-import flattenObject from '../utils/flattenObject'
-import toast from '../tools/growl'
+import flattenObject from '@yakit/core/flattenObject'
+import toast from '@yakit/ui/growl'
 import _ from 'lodash'
 
 export default class GridCtrl {
@@ -26,7 +26,7 @@ export default class GridCtrl {
     const opts = gridOptions
     opts.loadui = 'block'
     this.gridOptions = opts
-    
+
     if(opts.hasOwnProperty('restrictSearch')) {
       this.restrictSearch = opts.restrictSearch
     }
@@ -506,7 +506,7 @@ export default class GridCtrl {
         link.setAttribute('download', 'download.xls')
         link.click()
       }
-    
+
     }
   }
 

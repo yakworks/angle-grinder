@@ -1,8 +1,8 @@
 <script>
   import { Button, Avatar, Card, CardContent, Popover, List, ListItem, Toolbar,
-    Icon, Link, Button7 } from '@ag-svelte/index'
+    Icon, Link, Button7 } from '@yakit/svelte/index'
 
-  import growl from '@ag/tools/growl'
+  import growl from '@yakit/ui/growl'
 
   let noref = "javascript:void(0)"
 

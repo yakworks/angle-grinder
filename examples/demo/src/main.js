@@ -3,13 +3,13 @@ import 'angle-grinder/src/styles/vendor.css.js'
 // import 'angle-grinder/src/styles/all.scss'
 import './assets/styles.scss'
 // framework7
-import 'angle-grinder/svelte/framework7'
+import '@yakit/svelte/framework7'
 
 // VENDOR
 import 'angle-grinder/src/vendor'
 
 // logging turn on debug
-import $log from 'angle-grinder/src/utils/Log'
+import $log from '@yakit/core/logger'
 
 // load the angular modules
 import './app.config'

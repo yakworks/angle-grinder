@@ -1,13 +1,12 @@
 /* eslint-disable no-unused-vars */
-import { isoDateToDisplay } from '../utils/dateSupport'
-import fmt from '../utils/formatters'
+import { isoDateToDisplay } from '@yakit/core/date/dateSupport'
+import fmt from '@yakit/core/formatters'
 
 // Extra formatters for jqGrid
 $.extend($.fn.fmatter, {
 
   date(cellVal, options) {
     const dateVal = fmt.date(cellVal)
-    console.log("fmt.date", cellVal, dateVal)
     return columnAligner('date', dateVal, options)
   },
 

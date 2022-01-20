@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import Log from '../../../utils/Log'
+import Log from '@yakit/core/logger'
 
 // function reference so this can be recursive
 function setServerErrors(form, errors) {

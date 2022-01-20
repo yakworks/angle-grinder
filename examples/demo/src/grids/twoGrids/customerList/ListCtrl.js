@@ -1,6 +1,6 @@
 import dataApiFactory from '~/store/dataApiFactory'
 import makeNgListDataCtrl from '@ag/ng/gridz/list-ds/makeNgListDataCtrl'
-import {merge} from '@ag/utils/dash'
+import {merge} from '@yakit/core/dash'
 
 function ListCtrlFn($scope, $element, $uibModal, selectedRow) {
   'ngInject';

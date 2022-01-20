@@ -1,7 +1,7 @@
 import angular from 'angular'
 import grid2Mod from '../module'
 // import _ from 'lodash'
-// import Log from 'angle-grinder/src/utils/Log'
+// import Log from '@yakit/core/Log'
 
 /**
  * Opens dialog to show,hide and change order of columns
