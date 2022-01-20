@@ -14,7 +14,7 @@ describe('single selection', () => {
     {id: 4, code:'1234 12345566', name: '🎉 Big Really Long Desc 1234 1234 1234 1234 1234 1234 1234'}
   ]
 
-  let opts ={
+  let opts = {
     itemData: simpleData
   }
 

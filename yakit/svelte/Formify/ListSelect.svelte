@@ -4,7 +4,7 @@
   import { ctxKey } from './ListForm.svelte'
   import { isNil, _defaults } from '@yakit/core/dash'
   import { fieldDefaults } from '@yakit/core/transformer'
-  import selContext from '@yakit/core/select/selectContext'
+  import selContext from '@yakit/ui/select/selectContext'
   import Select from 'svelte-select'
   import ListInput  from 'framework7-svelte/esm/svelte/list-input.svelte'
   // import { classNames } from '../shared/utils';

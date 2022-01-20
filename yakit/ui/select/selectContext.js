@@ -2,10 +2,10 @@
 * For managing a dimension's select component and its data
 */
 
-import {isFunction, isPlainObject} from '../is'
-import mix from '../mix/mix-it-with';
-import apiHolder from '../stores/apiHolder'
-import { _defaults, isNil, uniqueId } from '../dash'
+import {isFunction, isPlainObject} from '@yakit/core/is'
+import mix from '@yakit/core/mix/mix-it-with';
+import apiHolder from '@yakit/core/stores/apiHolder'
+import { _defaults, isNil, uniqueId } from '@yakit/core/dash'
 
 export const defaultOpts = {
   /** How long to wait when typing to do search */

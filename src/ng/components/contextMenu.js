@@ -2,7 +2,7 @@
 import angular from 'angular'
 // import Log from '@yakit/core/Log'
 import _ from 'lodash'
-import { getIconClass } from '@yakit/core/icon'
+import { getIconClass } from '@yakit/ui/icon'
 
 /**
  * taken from https://github.com/Templarian/ui.bootstrap.contextMenu

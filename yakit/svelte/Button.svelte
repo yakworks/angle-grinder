@@ -1,6 +1,7 @@
 <script>
   import { onMount, createEventDispatcher } from 'svelte'
-  import { getIconClass } from '@yakit/core/icon'
+  import { getIconClass } from '@yakit/ui/icon'
+  import { isTruthy } from '@yakit/core/truthy'
   import createRipple from "./utils/ripple.js";
   // import { classNames } from './utils';
   import Icon from './Icon.svelte'
@@ -90,7 +91,7 @@
       className,
       {
         'is-icon-button': icon,
-        'is-fab': (fab == true || fab === 'true'),
+        'is-fab': isTruthy(fab),
         [`is-${color}`]: color
       },
       actionsClasses($$props)
