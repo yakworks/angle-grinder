@@ -1,7 +1,7 @@
 import angular from 'angular'
 import commonModule from '../commonModule'
 
-import { isFalsy } from '../../../utils/truthy'
+import { isFalsy } from '@yakit/core/truthy'
 
 var app = angular.module(commonModule)
 // Validates text area to have not more then specified number of lines

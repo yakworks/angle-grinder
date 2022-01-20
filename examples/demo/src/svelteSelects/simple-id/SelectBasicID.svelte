@@ -1,5 +1,5 @@
 <script>
-  import { Select, Button } from '@ag-svelte/index';
+  import { Select, Button } from '@yakit/svelte/index';
 
   //array of object data. identifier defaults to id and label is name.
   //added code in for the demo of multi labels.

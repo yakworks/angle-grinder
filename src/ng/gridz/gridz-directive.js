@@ -1,7 +1,7 @@
 import angular from 'angular'
 import grid2Mod from './module'
 import GridCtrl from '../../gridz/GridCtrl'
-// import Log from 'angle-grinder/src/utils/Log'
+// import Log from '@yakit/core/Log'
 import _ from 'lodash'
 
 angular.module(grid2Mod).directive('gridz',

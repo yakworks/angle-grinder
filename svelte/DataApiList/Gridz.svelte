@@ -8,7 +8,7 @@
   import DataApiListController from './DataApiListController'
   import GridDataApiCtrl from '@ag/gridz/GridDataApiCtrl'
   import { classNames } from '../shared/utils';
-  import stringify from '@ag/utils/stringify';
+  import stringify from '@yakit/core/stringify';
 
   export let ctx = undefined
   export let dataApi = undefined

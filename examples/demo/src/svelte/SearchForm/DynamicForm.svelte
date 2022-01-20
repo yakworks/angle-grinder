@@ -1,8 +1,8 @@
 <script>
   import { Columns, Col, BlockTitle, Card, CardContent, Icon, List, ListInput } from 'angle-grinder/svelte/index'
-  import { transformFields } from 'angle-grinder/src/utils/config/transformer'
-  // import stringify from 'angle-grinder/src/utils/stringify'
-  import stringify from 'fast-safe-stringify'
+  import { transformFields } from '@yakit/core/transformer'
+  // import stringify from '@yakit/core/stringify'
+  import stringify from '@yakit/core/stringify'
 
   let noref = "javascript:void(0)"
 

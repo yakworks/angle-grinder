@@ -1,8 +1,8 @@
 // @ts-nocheck
-// import Log from 'angle-grinder/src/utils/Log'
+// import Log from '@yakit/core/Log'
 import _ from 'lodash'
 import { get } from 'svelte/store';
-import { isEmpty } from '../../../utils/dash'
+import { isEmpty } from '@yakit/core/dash'
 import EditModalCtrl from './EditModalCtrl'
 import BulkUpdateModalCtrl from './BulkUpdateModalCtrl'
 import { argsMerge } from '../../utils/classUtils'

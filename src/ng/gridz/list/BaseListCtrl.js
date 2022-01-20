@@ -1,4 +1,4 @@
-// import Log from 'angle-grinder/src/utils/Log'
+// import Log from '@yakit/core/Log'
 import _ from 'lodash'
 import EditModalCtrl from './EditModalCtrl'
 import BulkUpdateModalCtrl from './BulkUpdateModalCtrl'

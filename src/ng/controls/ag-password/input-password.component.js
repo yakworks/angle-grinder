@@ -1,5 +1,5 @@
 import InputBase from '../AgBaseControl'
-import stringUtils from '../../../utils/stringFormUtils'
+import stringUtils from '@yakit/core/stringFormUtils'
 
 // WIP not finished yet!
 export default class InputPasswordComponent extends InputBase {

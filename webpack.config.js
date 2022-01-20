@@ -195,8 +195,9 @@ module.exports = function(env, argv) {
       //aliases are not DRY, setup here for svelte, in jsconfig.json for vscode and babel for jest
       alias: {
         //for svelte since babel doesn't process
-        '@ag-svelte': path.resolve('./svelte/'),
+        '@yakit/svelte': path.resolve('./svelte/'),
         '@ag': path.resolve('./src/'),
+        '@yakit/core': path.resolve('./yakit/core/'),
         'angle-grinder': path.resolve('./'),
         svelte: path.resolve('node_modules', 'svelte'),
         //demo

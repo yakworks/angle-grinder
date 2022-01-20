@@ -1,13 +1,10 @@
 <script>
   import { getContext } from 'svelte';
   import { ctxKey } from './ListForm.svelte';
-  import get from 'lodash/get';
   import { classNames } from '../shared/utils';
-  import { fieldDefaults } from '../../src/utils/config/transformer'
+  import { fieldDefaults } from '@yakit/core/transformer'
 
   import ListInput  from 'framework7-svelte/esm/svelte/list-input.svelte'
-
-  // import { isUndefined } from '../../src/utils/inspect'
 
   let className = undefined;
   export { className as class }

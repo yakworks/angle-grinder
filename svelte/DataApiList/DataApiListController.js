@@ -1,5 +1,5 @@
 import makeListDataCtrl from '../../src/gridz/makeListDataCtrl'
-import mix from '../../src/utils/mix-it-with';
+import mix from '@yakit/core/mix/mix-it-with';
 
 /**
  * Svelte impl. Creates a controller for a data service api.

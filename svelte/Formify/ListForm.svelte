@@ -3,15 +3,10 @@
 </script>
 <script>
   import { setContext, createEventDispatcher, onMount } from 'svelte';
-  import { get } from '../utils/dash';
-
-  import stringify from 'fast-safe-stringify'
-  // import set from 'lodash/set';
-  // import get from 'lodash/get';
-  // import { createObjectWithDefaultValue, deepCopy } from '../utils';
-
+  import { get } from '@yakit/core/dash';
   //svelte-forms-lib
   import { createForm } from "svelte-forms-lib";
+  import stringify from 'fast-safe-stringify'
 
   // mock async request
   const makeRequest = () => new Promise(resolve => setTimeout(resolve, 1000));

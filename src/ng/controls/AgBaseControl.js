@@ -1,4 +1,4 @@
-import * as nu from '../../utils/nameUtils'
+import * as nu from '@yakit/core/nameUtils'
 
 // import Log from '../../utils/Log'
 import _ from 'lodash'

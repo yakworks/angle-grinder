@@ -1,13 +1,11 @@
 <script>
   import { getContext, createEventDispatcher, onMount } from 'svelte';
   import { ctxKey } from './ListForm.svelte'
-  import { _defaults } from '../utils/dash'
+  import { _defaults } from '@yakit/core/dash'
   import Select from 'svelte-select'
   import ListInput  from 'framework7-svelte/esm/svelte/list-input.svelte'
-  import get from 'lodash/get';
   import { classNames } from '../shared/utils';
-  import { fieldDefaults } from '../../src/utils/config/transformer'
-  import {selectData} from '../Select/selectData'
+  import { fieldDefaults } from '@yakit/core/transformer'
 
   const dispatch = createEventDispatcher()
 

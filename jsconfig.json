@@ -9,8 +9,9 @@
     "paths": {
       "angle-grinder/src/*": ["src/*"],
       "angle-grinder/svelte/*": ["svelte/*"],
-      "@ag-svelte/*": ["svelte/*"],
+      "@yakit/svelte/*": ["svelte/*"],
       "@ag/*": ["src/*"],
+      "@yakit/core/*": ["yakit/core/*"],
       "~/*": ["examples/demo/src/*"],
     },
     "checkJs": true,
@@ -28,6 +29,7 @@
   "include": [
     "src/**/*",
     "svelte/**/*",
+    "lib/**/*",
     "examples/demo/src/**/*",
   ]
 }

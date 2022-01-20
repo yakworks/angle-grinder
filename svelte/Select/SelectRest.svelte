@@ -1,7 +1,7 @@
 <script>
 	import Select from 'svelte-select';
   // import Item from './SelectItem.svelte';
-  import apiHolder from '@ag/stores/apiHolder';
+  import apiHolder from '@yakit/core/stores/apiHolder';
 
   export let dataApiKey = undefined
   export let dataApi = undefined

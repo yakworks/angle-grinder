@@ -1,5 +1,5 @@
 import kyApi from './kyApi'
-import prune from '../utils/prune';
+import prune from '@yakit/core/prune';
 
 /**
  * A common wrapper around RESTful resource

@@ -1,5 +1,5 @@
 // import Log from '../../../utils/Log'
-import { getIconClass } from '../../../utils/icon'
+import { getIconClass } from '@yakit/core/icon'
 
 class Controller {
   /* @ngInject */

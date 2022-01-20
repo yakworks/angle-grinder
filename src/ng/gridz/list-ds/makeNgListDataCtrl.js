@@ -1,7 +1,7 @@
 import EditModalCtrl from './EditModalCtrl'
 import BulkUpdateModalCtrl from './BulkUpdateModalCtrl'
 import makeListDataCtrl from '../../../gridz/makeListDataCtrl'
-import mix from '../../../utils/mix-it-with';
+import mix from '@yakit/core/mix/mix-it-with';
 let editTemplate = require('./editDialog.html')
 let bulkUpdateTemplate = require('./bulkUpdateDialog.html')
 

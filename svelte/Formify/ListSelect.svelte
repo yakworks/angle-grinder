@@ -2,14 +2,12 @@
   // import { onMount, createEventDispatcher } from 'svelte'
   import { getContext, createEventDispatcher, onMount } from 'svelte';
   import { ctxKey } from './ListForm.svelte'
-  import { _defaults } from '../utils/dash'
+  import { isNil, _defaults } from '@yakit/core/dash'
+  import { fieldDefaults } from '@yakit/core/transformer'
+  import selContext from '@yakit/core/select/selectContext'
   import Select from 'svelte-select'
   import ListInput  from 'framework7-svelte/esm/svelte/list-input.svelte'
-  import get from 'lodash/get';
-  import { classNames } from '../shared/utils';
-  import { fieldDefaults } from '../../src/utils/config/transformer'
-
-  import {selectData} from '../Select/selectData'
+  // import { classNames } from '../shared/utils';
   import ItemMulti from '../Select/ItemMulti.svelte'
   import ItemSingle from '../Select/ItemSingle.svelte'
 
@@ -21,109 +19,64 @@
   export let placeholder = undefined
   // export let type = 'select'
 
+  /**
+   * the main options object for properties, anything set here will win over comp props
+   * can pass through any props from here too https://github.com/rob-balfre/svelte-select
+   */
   export let opts = {}
+  _defaults(opts, {
+    label, placeholder
+  })
 
   fieldDefaults(name, opts)
-  label = opts.label
-  placeholder = opts.placeholder ? opts.placeholder : 'Select...'
+  //if placeholder empty assign default
+  _defaults(opts, { placeholder: 'Select...'})
 
   let className = undefined;
   export { className as class }
 
   const { form, updateValidateField, getValue } = getContext(ctxKey);
 
-  export let dataApiKey = undefined
-  export let dataApi = undefined
-  /** will eagerely load the data set and not on demand in conjunction with  minimumSearchLength */
-  export let isEagerLoad = true
-  // if isEagerLoad is false then this is number of chars for search before it does a load
-  export let minimumSearchLength = 2
-
-  export let id = null
-
-  export let isMulti = false
-  export let isWaiting = false
-  /** if isMulti then keep open after value.*/
-  export let keepOpen = undefined
-
-  // export let isDisabled = false;
-  // export let isFocused = false;
-  /** value is the selected item object */
+  /** value is the selected item or items. object or key depending on isValueObject*/
   export let value = null
-  /** if true then bound value will be the object vs the key/id */
-  export let isValueObject = false
-  /** selected item object */
+
+  /** selected item object, will be same as the value when isValueObject:true.*/
   export let selectedItem = null
-  export let inputStyles = '';
+
+  /** bound value if list is open or assign to true/false open/close */
   export let listOpen = false
-  export let loadOptionsInterval = 300;
-  export let items = null
+
+  /** the itemData, will translate to items for the component and can load on demand */
   export let itemData = null
-  export let Item = undefined
-  export let noOptionsMessage = 'start typing to search ....'
-  export let showIndicator = true
-  export let listOffset = 2
-  export let propertyKey = 'id'
-  export let propertyLabel = undefined
+
+  /** will bind:this on this comp */
   export let selectEl = undefined
 
-  export let getOptionLabel = (itm, filterText) => {
-    return manager.getOptionLabel(itm, filterText)
-  }
+  //assign itemData if not set in options
+  _defaults(opts, { itemData })
 
-  export let getSelectionLabel = (itm) => {
-    return manager.getSelectionLabel(itm)
-  }
+  /** the inialized selectContext*/
+  export let selectContext = selContext(opts).init()
 
-  //setup defaults
-  if(!propertyLabel) propertyLabel = 'name'
-  if (Array.isArray(propertyLabel)) {
-      Item = ItemMulti
-  } else {
-      Item = ItemSingle
-  }
+  let ItemToUse = Array.isArray(opts.propertyLabel) ? ItemMulti : ItemSingle
 
+  //setup defaults for component
   _defaults(opts, {
-    dataApi,
-    dataApiKey,
-    isEagerLoad,
-    getOptionLabel,
-    getSelectionLabel,
-    Item,
-    id,
-    isMulti,
-    isWaiting,
-    isValueObject,
-    inputStyles,
-    loadOptionsInterval,
-    listOffset,
-    propertyLabel,
-    propertyKey,
-    labelIdentifier: propertyLabel, //for selectComp
-    optionIdentifier: propertyKey, //for selectComp
-    minimumSearchLength,
-    noOptionsMessage,
-    items,
-    itemData,
+    Item: ItemToUse,
+    listOffset: 2,
+    labelIdentifier: opts.propertyLabel, //for selectComp
+    optionIdentifier: opts.propertyKey, //for selectComp
+    noOptionsMessage: 'start typing to search ....',
     placeholder,
-    showIndicator
+    showIndicator: true
   })
 
-  // create unique id if not set
-  if (!opts.id) opts.id = _.uniqueId('select')
-  //default to true for isMulti
-  if (opts.keepOpen === undefined) opts.keepOpen = opts.isMulti
 
-  export let manager = selectData(opts).init()
-
-  console.log("keep list open", opts.keepOpen)
   $: if (opts.keepOpen) {
     keepListOpen(listOpen) // we dont use the listOpen in method but this registers it with svelete to react
   }
 
   function keepListOpen(_) {
-    console.log("keep list open")
-    // if activeElement is the input then its focused, so keep open
     if (document.activeElement === document.getElementById(opts.id)) {
       listOpen = true
     }
@@ -131,48 +84,57 @@
 
   // reacte to listOpen to load items if they have not been yet.
   $: (async () => {
-    if(listOpen) opts.items = await manager.loadItemsIfNeeded(listOpen)
+    if(listOpen) opts.items = await selectContext.loadItemsIfNeeded(listOpen)
   })(); //trick way to call svelte reactive for async
 
 
   //Subscribe to the form changes
   form.subscribe(async _data => {
+    // console.log('form.subscribe with _data', _data)
     let _val = getValue(_data, name)
-    // console.log('form.subscribe with _val:value', _val, value)
-    if(!_val && !value) return //skip it if both are blank so we dont initialize the data
-    await manager.loadItemsIfNeeded()
-    selectedItem = manager.getSelectedItem(_val)
+
+    if(isNil(_val)) {
+      //skip it if both are nill, which is the case on onMount, so we dont initialize the data unnecesarily
+      if(!isNil(value)) setSelectedValue(null, null)
+    } else {
+      await selectContext.loadItemsIfNeeded()
+      //only set selectedItem, it will trigger the handleSelect to set the value
+      selectedItem = selectContext.getSelectedItem(_val)
+    }
   })
 
   export let handleClear = (event) => {
-    console.log("handleClear", event)
-    updateValidateField(name, event.detail)
-    selectedItem = event.detail
-    value = event.detail
+    // console.log("handleClear", event.detail)
+    // update the fieldValue, will trigger the handleSelect with null to update value
+    updateValidateField(name, null)
   }
 
   export let handleSelect = (event) => {
-    selectedItem = event.detail
-    if (selectedItem) {
-      value = manager.getSelectedValue(selectedItem)
-      console.log("handleSelect updated value:selectedItem", value, selectedItem)
+    // console.log("handleSelect event.detail", event.detail)
+    // selectedItem = event.detail
+    let _selItem = event.detail || null
+    let _val = null
+    if (_selItem) {
+      _val = selectContext.getSelectedValue(_selItem)
     }
-    else if (isMulti) {
-      selectedItem = null
-      value = null
-    }
+    setSelectedValue(_val, _selItem)
     updateValidateField(name, value)
 
-    // make sure input is focused so it can keep open
+    // make sure input is focused so it can keep it open
     if (opts.isMulti && opts.keepOpen) document.getElementById(opts.id).focus()
 
     // redispatch select event
     dispatch('select', selectedItem);
   }
 
+  export let setSelectedValue = (val, selItem) => {
+    selectedItem = selItem
+    value = val
+  }
+
 </script>
 
-<ListInput {label} clearButton={false} input={false} class={className}>
+<ListInput label={opts.label} clearButton={false} input={false} class={className}>
   <div class="select-theme f7" slot="input">
       <Select containerClasses="{className}" {...opts} value={selectedItem} bind:listOpen
         on:select={handleSelect} on:clear={handleClear} bind:this={selectEl}/>

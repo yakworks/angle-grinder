@@ -1,7 +1,7 @@
-// import Log from 'angle-grinder/src/utils/Log'
+// import Log from '@yakit/core/Log'
 // import _ from 'lodash'
 import { get, writable } from 'svelte/store';
-import { isEmpty, cloneDeep, isFunction, merge } from '../utils/dash'
+import { isEmpty, cloneDeep, isFunction, merge } from '@yakit/core/dash'
 import appConfigApi from '../dataApi/AppConfigApi'
 import toast from '../tools/toast'
 import Swal from '../tools/swal'

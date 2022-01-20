@@ -1,4 +1,4 @@
-import {cloneDeep, merge} from '../utils/dash'
+import {cloneDeep, merge} from '@yakit/core/dash'
 
 const appConfig = {
   controls: {

@@ -9,7 +9,7 @@ import 'angle-grinder/svelte/framework7'
 import 'angle-grinder/src/vendor'
 
 // logging turn on debug
-import $log from 'angle-grinder/src/utils/Log'
+import $log from '@yakit/core/logger'
 
 // load the angular modules
 import './app.config'

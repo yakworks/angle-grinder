@@ -1,11 +1,11 @@
 <script>
   import { beforeUpdate, createEventDispatcher, onMount } from 'svelte';
-  import {selectData} from './selectData'
+  import selectData from '@yakit/core/select/selectContext'
   import Select from 'svelte-select'
   import ItemMulti from './ItemMulti.svelte'
   import ItemSingle from './ItemSingle.svelte'
 
-  import apiHolder from '@ag/stores/apiHolder'
+  import apiHolder from '@yakit/core/stores/apiHolder'
 
   const dispatch = createEventDispatcher()
 

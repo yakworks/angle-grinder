@@ -1,6 +1,6 @@
 <script>
-  import { BlockTitle, Columns, Col, Card, CardContent, Button } from '@ag-svelte/index';
-  import { ListForm, ListSelect, ListField, ListChipInput } from '@ag-svelte/Formify';
+  import { BlockTitle, Columns, Col, Card, CardContent, Button } from '@yakit/svelte/index';
+  import { ListForm, ListSelect, ListField, ListChipInput } from '@yakit/svelte/Formify';
   import stringify from 'fast-safe-stringify'
 
   const simpleData = ['Pie', 'Red', 'Green']
@@ -31,11 +31,10 @@
   function setPizza(){
     let newVals = {
       name:"pizza", simple:'Pie', singleId:2, multiId:[2, 3],
-      favFoodObj: {id:2, name: "Pizza"},
-      favFoodsArr: [{id:2, name: "Pizza"}],
+      valueObject: {id:2, name: "Pizza"},
+      valueObjectMulti: [{id:2, name: "Pizza"}],
       chips:['cheese', 'sausage']
     }
-    console.log("formContext.state", formContext.state)
     formContext.updateInitialValues(newVals)
   }
 
@@ -53,13 +52,12 @@
       <CardContent class="p0">
         <ListForm {initData} bind:data bind:context={formContext} >
           <ListField name="name" />
-          <ListSelect name="simple" itemData={simpleData} />
+          <ListSelect name="simple"  itemData={simpleData} />
           <ListSelect name="singleId" {itemData} />
-          <ListSelect name="multiId" opts={{isMulti:true}} {itemData} />
+          <ListSelect name="multiId" opts={{label:"WTF", isMulti:true}} {itemData} />
           <ListSelect name="multiLabel" opts={{propertyLabel: ['code', 'name']}} {itemData} />
-
-          <ListSelect name="favFoodObj" opts={{isValueObject:true}} {itemData} />
-          <ListSelect name="favFoodsArr" opts={{isMulti:true, isValueObject:true}} {itemData} />
+          <ListSelect name="valueObject" opts={{isValueObject:true}} {itemData} />
+          <ListSelect name="valueObjectMulti" opts={{isMulti:true, isValueObject:true}} {itemData} />
           <ListChipInput name="chips" />
         </ListForm>
       </CardContent>

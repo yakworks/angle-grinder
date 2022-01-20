@@ -1,6 +1,6 @@
 <script>
   import { getContext } from 'svelte';
-  import * as _ from '../../src/utils/dash'
+  import * as _ from '@yakit/core/dash'
   import writableDerived from 'svelte-writable-derived';
   import { FORM } from './Form.svelte';
 

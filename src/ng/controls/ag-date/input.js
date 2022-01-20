@@ -1,5 +1,5 @@
 import AgBaseControl from '../AgBaseControl'
-import { displayDateToIso, parseIsoDate } from '../../../utils/dateSupport'
+import { displayDateToIso, parseIsoDate } from '@yakit/core/date/dateSupport'
 
 
 class Controller extends AgBaseControl {
