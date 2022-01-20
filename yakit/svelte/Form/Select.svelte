@@ -1,6 +1,6 @@
 <script>
   import { getContext } from 'svelte';
-  import get from 'lodash/get';
+  import {get} from '@yakit/core/dash';
   import { FORM } from './Form.svelte';
 
   export let name;

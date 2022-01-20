@@ -5,8 +5,7 @@
 <script>
   import { setContext, createEventDispatcher, onMount } from 'svelte';
   import { writable } from 'svelte/store';
-  import set from 'lodash/set';
-  import get from 'lodash/get';
+  import {set, get} from '@yakit/core/dash';
   import { createObjectWithDefaultValue, deepCopy } from '../utils';
 
   export let initialValues = {};

@@ -9,6 +9,8 @@ export { default as isEmpty } from 'lodash/isEmpty';
 export { default as isFunction } from 'lodash/isFunction';
 export { default as isDate } from 'lodash/isDate';
 export { default as isEqual } from 'lodash/isEqual';
+export { default as isUndefined } from 'lodash/isUndefined';
+
 
 export { default as set } from 'lodash/set';
 export { default as get } from 'lodash/get';
