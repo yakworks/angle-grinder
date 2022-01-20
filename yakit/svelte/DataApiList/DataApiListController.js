@@ -1,4 +1,4 @@
-import makeListDataCtrl from '../../src/gridz/makeListDataCtrl'
+import makeListDataCtrl from '@ag/gridz/makeListDataCtrl'
 import mix from '@yakit/core/mix/mix-it-with';
 
 /**

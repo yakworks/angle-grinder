@@ -2,7 +2,6 @@
  * Generic singleton global for app state and ui-router $state
  * replaces the $rootScope that was overused in angular
  */
-// import _ from 'lodash'
 
 class AppState {
   // api url
@@ -78,14 +77,6 @@ class AppState {
     // TODO for now hardcoded, should read from config or server files
     return this.info.version
   }
-
-  isMobile = (function() { // true if the browser is a mobile device
-    var check = false
-    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-      check = true
-    };
-    return check
-  })()
 
 }
 

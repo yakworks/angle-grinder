@@ -1,13 +1,15 @@
 import { Notyf } from 'notyf'
 // import 'notyf/notyf.min.css'
-import themeColors from '../../themeColors'
+// import themeColors from '../../themeColors'
 
-// const themeColors = {
-//   success: 'hsla(85, 77%, 35%, .97)',
-//   info: '#039BE5',
-//   warning: '#faae42',
-//   danger: 'hsla(0, 53%, 58%, 0.95)',
-// }
+const themeColors = {
+  success: 'hsla(85, 77%, 35%, .97)',
+  info: '#039BE5',
+  warning: '#faae42',
+  'warning-dark': '#faae42',
+  danger: 'hsla(0, 53%, 58%, 0.95)',
+}
+
 const notyf = new Notyf({
   duration: 2000,
   dismissible: true,
@@ -31,7 +33,7 @@ const notyf = new Notyf({
     {
       type: 'warning',
       background: themeColors['warning-dark'],
-      color: 'black',
+      // color: 'black',
       duration: 0,
       icon: {
         className: 'fas fa-exclamation-triangle fa-lg',

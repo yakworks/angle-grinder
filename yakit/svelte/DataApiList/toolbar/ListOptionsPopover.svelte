@@ -2,8 +2,8 @@
   Wraps the jqGrid and adds the toolbar and search form
  -->
 <script>
-  import {Popover, List, ListItem} from '@yakit/ui/index'
-  import growl from '@ag/tools/growl'
+  import {Popover, List, ListItem} from '@yakit/svelte/index'
+  import growl from '@yakit/ui/growl'
   import { isFunction } from '@yakit/core/dash';
 
   export let listController

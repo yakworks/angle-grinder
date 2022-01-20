@@ -2,7 +2,7 @@
   Wraps the jqGrid and adds the toolbar and search form
  -->
 <script>
-  import {Button} from '@yakit/ui/index'
+  import {Button} from '@yakit/svelte/index'
 
   export let opts
 
