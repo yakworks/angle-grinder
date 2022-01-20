@@ -1,6 +1,6 @@
 // import _ from 'lodash'
 
-import growl from "../../../tools/growl"
+import growl from "@yakit/ui/growl"
 
 // see https://stackoverflow.com/questions/53349705/constructor-and-class-properties-within-javascript-mixins
 // and https://alligator.io/js/class-composition/ for class composition

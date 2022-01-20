@@ -9,7 +9,7 @@ import agPathWithContext from './ng/pathWithContext'
 import agSidebar from './ng/sidebar/sidebars'
 import agSidenav from './ng/sidenav'
 import uiRouterStateHelper from './ng/uirouter/stateHelper'
-import growl from './tools/growl'
+import growl from '@yakit/ui/growl'
 
 // foo
 var agmod = angular.module('angleGrinder', [

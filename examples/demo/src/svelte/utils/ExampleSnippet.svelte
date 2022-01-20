@@ -1,5 +1,5 @@
 <script>
-  import { Page, Navbar, Block } from '@yakit/ui/index'
+  import { Page, Navbar, Block } from '@yakit/svelte/index'
   import Code from './Code.svelte'
   const jq = window.$
 

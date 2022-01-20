@@ -1,6 +1,6 @@
 <script>
-  import { Button } from '@yakit/ui'
-  import growl from 'angle-grinder/src/tools/growl'
+  import { Button } from '@yakit/svelte/index'
+  import growl from '@yakit/ui/growl'
 
   function fireSuccess(){
     growl.success('of the stars explorations of brilliant syntheses', 'Success Hearts')

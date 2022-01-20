@@ -2,7 +2,7 @@
 import template from './list.html'
 import buildOptions from './listCtrlOptions'
 import sessionStores from '~/store/sessionServices'
-import Swal from '@ag/tools/swal'
+import Swal from '@yakit/ui/swal'
 import _ from 'lodash'
 import makeNgListDataCtrl from '@ag/ng/gridz/list-ds/makeNgListDataCtrl'
 

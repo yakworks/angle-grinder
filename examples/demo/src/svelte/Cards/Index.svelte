@@ -1,6 +1,6 @@
 
 <script>
-  import { Page, Navbar, Block } from '@yakit/ui/index'
+  import { Page, Navbar, Block } from '@yakit/svelte/index'
   import Cards from './Cards.svelte'
   import cardsRaw from '!raw-loader!./Cards.svelte'
 

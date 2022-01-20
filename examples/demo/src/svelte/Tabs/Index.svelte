@@ -1,6 +1,6 @@
 
 <script>
-  import { Page, Navbar, BlockTitle, Block } from '@yakit/ui/index'
+  import { Page, Navbar, BlockTitle, Block } from '@yakit/svelte/index'
   import Tabbar from './Tabbar.svelte'
 </script>
 

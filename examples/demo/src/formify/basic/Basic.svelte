@@ -1,6 +1,6 @@
 <script>
-  import { BlockTitle, Columns, Col, Card, CardContent, Select, Button } from '@yakit/ui/index';
-  import { ListForm, ListField, ListSelect } from '@yakit/ui/Formify';
+  import { BlockTitle, Columns, Col, Card, CardContent, Select, Button } from '@yakit/svelte/index';
+  import { ListForm, ListField, ListSelect } from '@yakit/svelte/Formify';
   import stringify from 'fast-safe-stringify'
 
   //array of object data. identifier defaults to id and label is name.

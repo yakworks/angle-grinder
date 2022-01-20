@@ -1,6 +1,6 @@
 <script>
-  import { BlockTitle, Columns, Col, Card, CardContent, Button } from '@yakit/ui/index';
-  import { ListForm, ListSelect, ListField, ListChipInput } from '@yakit/ui/Formify';
+  import { BlockTitle, Columns, Col, Card, CardContent, Button } from '@yakit/svelte/index';
+  import { ListForm, ListSelect, ListField, ListChipInput } from '@yakit/svelte/Formify';
   import stringify from 'fast-safe-stringify'
 
   const simpleData = ['Pie', 'Red', 'Green']

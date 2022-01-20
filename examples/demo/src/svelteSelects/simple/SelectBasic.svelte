@@ -1,6 +1,6 @@
 <script>
   import { onMount } from 'svelte';
-  import { Select, Button } from '@yakit/ui/index';
+  import { Select, Button } from '@yakit/svelte/index';
   import SelectChip from 'svelte-select'
   import stringify from 'fast-safe-stringify'
 

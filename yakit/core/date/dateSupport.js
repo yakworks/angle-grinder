@@ -30,7 +30,6 @@ export function mergeDatepickerOpts(mergeOptions = {}) {
 
 export function isoDateToDisplay(isoDate) {
   const dateVal = parseDate(isoDate, isoFormat)
-  console.log("dateVal", dateVal)
   return formatDate(dateVal, datepickerDefaults.format)
 }
 

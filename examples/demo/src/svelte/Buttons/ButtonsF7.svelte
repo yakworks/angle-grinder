@@ -1,6 +1,6 @@
 <script>
   import { Block, BlockTitle,
-    Button7, Segmented, Col, Row } from '@yakit/ui/index'
+    Button7, Segmented, Col, Row } from '@yakit/svelte/index'
 
   let activeBtn = 'bt3'
 

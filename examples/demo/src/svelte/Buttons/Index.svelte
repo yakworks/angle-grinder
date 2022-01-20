@@ -1,6 +1,6 @@
 
 <script>
-  import { Page, Navbar, Block } from '@yakit/ui/index'
+  import { Page, Navbar, Block } from '@yakit/svelte/index'
   import Buttons from './Buttons.svelte'
   import buttonsRaw from '!raw-loader!./Buttons.svelte'
 

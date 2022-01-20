@@ -1,5 +1,5 @@
 <script>
-  import { Card, Columns, Col } from '@yakit/ui'
+  import { Card, Columns, Col } from '@yakit/svelte'
 </script>
 
 <div class="title is-5">Simple Cards</div>

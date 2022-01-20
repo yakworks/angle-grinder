@@ -1,7 +1,7 @@
 <script>
-  import { Button, Columns, Col } from '@yakit/ui'
-import { Block } from '@yakit/ui/';
-import { BlockTitle } from '@yakit/ui/';
+  import { Button, Columns, Col } from '@yakit/svelte'
+import { Block } from '@yakit/svelte/';
+import { BlockTitle } from '@yakit/svelte/';
   let loading = false
 
   function toggleLoading(event){

@@ -1,5 +1,5 @@
 <script>
-  import { ApexChart } from '@yakit/ui'
+  import { ApexChart } from '@yakit/svelte'
   import { themeColors, randomizeArray, primaryColor, secondaryColor } from './chartHelpers'
 
   const options = {

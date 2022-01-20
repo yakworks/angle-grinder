@@ -1,4 +1,4 @@
-import appState from '../../tools/AppState'
+import appState from '@yakit/ui/AppState'
 
 const SIDENAV_MENU_LIST_ITEM = '.sidenav-menu .list-item'
 

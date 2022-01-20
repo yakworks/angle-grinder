@@ -10,7 +10,8 @@
       "angle-grinder/src/*": ["src/*"],
       "@ag/*": ["src/*"],
       "@yakit/core/*": ["yakit/core/*"],
-      "@yakit/ui/*": ["svelte/*"],
+      "@yakit/ui/*": ["yakit/ui/*"],
+      "@yakit/svelte/*": ["yakit/svelte/*"],
       "~/*": ["examples/demo/src/*"],
     },
     "checkJs": true,
@@ -27,8 +28,9 @@
   ],
   "include": [
     "src/**/*",
-    "svelte/**/*",
-    "lib/**/*",
-    "examples/demo/src/**/*",
+    "yakit/core/**/*",
+    "yakit/ui/**/*",
+    "yakit/svelte/**/*",
+    "examples/demo/src/**/*"
   ]
 }

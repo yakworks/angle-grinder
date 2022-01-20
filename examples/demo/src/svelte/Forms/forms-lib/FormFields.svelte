@@ -1,6 +1,6 @@
 
   <script>
-    import { Button, Form, Input } from '@yakit/ui'
+    import { Button, Form, Input } from '@yakit/svelte'
 
     import * as yup from "yup";
 

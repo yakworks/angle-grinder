@@ -1,6 +1,6 @@
 <script>
-  import { Button } from '@yakit/ui/index'
-  import growl from 'angle-grinder/src/tools/growl'
+  import { Button } from '@yakit/svelte/index'
+  import growl from '@yakit/ui/growl'
   let counter = 0
 </script>
 

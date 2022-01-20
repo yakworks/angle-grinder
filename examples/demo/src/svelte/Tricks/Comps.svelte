@@ -1,5 +1,5 @@
 <script>
-  import { Button, Button7 } from '@yakit/ui/index'
+  import { Button, Button7 } from '@yakit/svelte/index'
 
   let component;
 	let props;

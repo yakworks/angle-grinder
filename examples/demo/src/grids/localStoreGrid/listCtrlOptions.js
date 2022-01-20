@@ -1,4 +1,4 @@
-import Swal from 'angle-grinder/src/tools/swal'
+import Swal from '@yakit/ui/swal'
 import _ from 'lodash'
 
 export default function buildOptions(ctrl){

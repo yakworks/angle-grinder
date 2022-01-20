@@ -7,7 +7,6 @@ $.extend($.fn.fmatter, {
 
   date(cellVal, options) {
     const dateVal = fmt.date(cellVal)
-    console.log("fmt.date", cellVal, dateVal)
     return columnAligner('date', dateVal, options)
   },
 

@@ -1,7 +1,7 @@
 // import _ from 'lodash'
 
 // TODO change to https://github.com/likeastore/ngDialog#api
-import growl from "../../../tools/growl"
+import growl from "@yakit/ui/growl"
 export default class EditModalCtrl {
   /* @ngInject */
   constructor($uibModalInstance, $scope, dataApi, vm, ctx, title) {

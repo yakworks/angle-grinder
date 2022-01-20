@@ -197,7 +197,8 @@ module.exports = function(env, argv) {
         //for svelte since babel doesn't process
         '@ag': path.resolve('./src/'),
         '@yakit/core': path.resolve('./yakit/core/'),
-        '@yakit/ui': path.resolve('./svelte/'),
+        '@yakit/ui': path.resolve('./yakit/ui/'),
+        '@yakit/svelte': path.resolve('./yakit/svelte/'),
         'angle-grinder': path.resolve('./'),
         svelte: path.resolve('node_modules', 'svelte'),
         //demo

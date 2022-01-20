@@ -1,6 +1,6 @@
 
 <script>
-  import { Page, Navbar, Block } from '@yakit/ui/index'
+  import { Page, Navbar, Block } from '@yakit/svelte/index'
   import ExampleSnippet from '../../svelte/utils/ExampleSnippet.svelte'
 
   import SelectBasicID from './SelectBasicID.svelte'

@@ -1,6 +1,6 @@
 <script>
-  import { ApexChart } from '@yakit/ui'
-  import { chart } from '@yakit/ui/Charts/apexChartRender'
+  import { ApexChart } from '@yakit/svelte'
+  import { chart } from '@yakit/svelte/Charts/apexChartRender'
   import { themeColors, randomizeArray } from './chartHelpers'
 
   const options = {

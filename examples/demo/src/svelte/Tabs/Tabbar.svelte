@@ -1,7 +1,7 @@
 <script>
-  import { Toolbar, Link, BlockTitle, Block, Tabs, Tab } from '@yakit/ui/index'
+  import { Toolbar, Link, BlockTitle, Block, Tabs, Tab } from '@yakit/svelte/index'
   import SimpleGrid from '~/svelteDataList/simple/SimpleGrid.svelte'
-  import { app } from '@yakit/ui/framework7';
+  import { app } from '@yakit/svelte/framework7';
   import { onMount } from 'svelte'
 
   let isBottom = false;

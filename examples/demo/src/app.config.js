@@ -2,7 +2,7 @@
 import _ from 'lodash'
 import appName from './app.module'
 import './config.router'
-import appState from 'angle-grinder/src/tools/AppState'
+import appState from '@yakit/ui/AppState'
 import apiHolder from '@yakit/core/stores/apiHolder'
 import dataApiFactory from './store/dataApiFactory'
 import { KyFactory } from "@yakit/core/stores/ky";

@@ -1,5 +1,5 @@
 <script>
-  import { Button } from '@yakit/ui'
+  import { Button } from '@yakit/svelte'
 
   let loading = false
 

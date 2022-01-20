@@ -7,7 +7,7 @@ import EditModalCtrl from './EditModalCtrl'
 import BulkUpdateModalCtrl from './BulkUpdateModalCtrl'
 import { argsMerge } from '../../utils/classUtils'
 import appConfigApi from '../../../dataApi/AppConfigApi'
-import toast from '../../../tools/toast'
+import toast from '@yakit/ui/growl'
 //import Swal from '../../../tools/swal'
 
 export default class ListDataApiCtrl {

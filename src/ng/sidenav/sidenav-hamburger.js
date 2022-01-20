@@ -1,4 +1,4 @@
-import appState from '../../tools/AppState'
+import appState from '@yakit/ui/AppState'
 import { toggleSidenav } from './ag-sidenav'
 
 const template = `

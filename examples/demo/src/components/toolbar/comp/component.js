@@ -1,5 +1,5 @@
 import template from './component.html'
-import Swal from 'angle-grinder/src/tools/swal'
+import Swal from '@yakit/ui/swal'
 
 class controller {
   menuItems = [

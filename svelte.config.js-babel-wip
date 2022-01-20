@@ -16,7 +16,7 @@ module.exports = {
           "root": ["./src"],
           //make it work with both
           "alias": [
-            {"@yakit/ui": "./svelte"},
+            {"@yakit/svelte": "./svelte"},
             {"@ag": "./src"},
             //used for demo
             { "~": "./examples/demo/src"},

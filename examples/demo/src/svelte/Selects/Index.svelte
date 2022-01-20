@@ -1,6 +1,6 @@
 
 <script>
-  import { Page, Navbar, Block } from '@yakit/ui/index'
+  import { Page, Navbar, Block } from '@yakit/svelte/index'
   import Selects from './Selects.svelte'
   import SelectBasic from './SelectBasic.svelte'
   import SelectBasicId from './SelectBasicId.svelte'

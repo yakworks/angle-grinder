@@ -1,5 +1,5 @@
 <script>
-  import { Card, Columns, Col } from '@yakit/ui'
+  import { Card, Columns, Col } from '@yakit/svelte'
   import DsoSparkline from './DsoSparkline.svelte';
   import SalesSparkline from './SalesSparkline.svelte';
   import ColumnChart from './ColumnChart.svelte';
