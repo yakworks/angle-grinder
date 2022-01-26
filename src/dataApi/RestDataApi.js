@@ -53,6 +53,15 @@ export default class RestDataApi {
     if(_.isObject(sort)) prunedParms.sort = JSON.stringify(sort).replace(/{|}|"/g, '')
     return prunedParms
   }
+  
+  setupProjections(params){
+    let prunedParms = prune(params)
+    let projections = prunedParms.projections
+    if(_.isObject(projections)) {
+      prunedParms.projections = JSON.stringify(projections)
+    }
+    return prunedParms
+  }
 
   /** Returns a promise for the item with the given identifier */
   async get(id) {
@@ -99,8 +108,11 @@ export default class RestDataApi {
     return results
   }
 
-  async countTotals(params) {
-    const results = await this.api.post(`${this.endpoint}/countTotals`, { json: params }).json()
-    return results
+  async projections(searchParams, projections) {
+    const cleanParams = this.setupQ(searchParams)
+    const cleanProjections = this.setupProjections({projections})
+    const opts = { searchParams: {q: cleanParams, ...cleanProjections}}  
+    const data = await this.api.get(this.endpoint, opts).json()
+    return data
   }
 }
