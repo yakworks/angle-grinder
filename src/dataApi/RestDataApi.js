@@ -109,9 +109,9 @@ export default class RestDataApi {
   }
 
   async projections(searchParams, projections) {
-    const cleanParams = this.setupQ(searchParams)
+    const cleanParams = this.setupQ({q: searchParams})
     const cleanProjections = this.setupProjections({projections})
-    const opts = { searchParams: {q: cleanParams, ...cleanProjections}}  
+    const opts = { searchParams: {...cleanParams, ...cleanProjections}}  
     const data = await this.api.get(this.endpoint, opts).json()
     return data
   }
