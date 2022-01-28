@@ -106,7 +106,7 @@ export const kyFetch = key => {
      * the ky instance
      * @type {KyInstance}
      */
-    get ky(){ return KyFactory.ky},
+    // get ky(){ return KyFactory.ky},
 
     async get(opts){
       //get is default, we dont need to pass it in

@@ -14,10 +14,10 @@
 
   export let dataApiKey = undefined
   export let dataApi = undefined
-  // will eagerely load the data set and not on demand in conjunction with  minimumSearchLength
+  // will eagerely load the data set and not on demand in conjunction with  minSearchChars
   export let isEagerLoad = true
   // if isEagerLoad is false then this is number of chars for search before it does a load
-  export let minimumSearchLength = 2
+  export let minSearchChars = 2
 
   export let id = null
 
@@ -115,7 +115,7 @@
     propertyKey,
     labelIdentifier: propertyLabel, //for selectComp
     optionIdentifier: propertyKey, //for selectComp
-    minimumSearchLength,
+    minSearchChars,
     noOptionsMessage,
     items,
     itemData,

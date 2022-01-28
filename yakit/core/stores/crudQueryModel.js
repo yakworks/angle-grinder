@@ -1,3 +1,4 @@
+import { get, writable } from 'svelte/store';
 import { findIndexById } from '../finders'
 import { crudQueryStores } from './crudQueryStores';
 import mix from '../mix/mix-it-with';
@@ -17,6 +18,8 @@ export const withSubStores = (ds) => {
 
   return mix(ds).with({
     stores, ident,
+
+    unsubs: [], //array to populat with return value of sub for destroy to call
 
     //if paging this is the pager info with data
     get pageViewStore(){
@@ -59,11 +62,19 @@ export const queryModel = (ds) => {
      */
     async get(id){ throw Error(not_implemented) },
 
-    findById(list, id){
+    /**
+     * gets the item in the data list for the id.
+     * If the passed in list is a store then it will do a get(list) to unwrap its data first
+     */
+    findById(data, id){
+      const list = (typeof data.subscribe === "function") ? get(data): data
       const idx = ds.findIndexById(list, id)
-      return idx === -1 ? false : list[idx]
+      return idx === -1 ? false : data[idx]
     },
 
+    /**
+     * searches array for id key match and returns it index in the array
+     */
     findIndexById(list, id){
       return findIndexById({ list, id , ident: core.ident })
     }

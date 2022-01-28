@@ -1,74 +1,105 @@
 <script>
-  import { Columns, Col, BlockTitle, Card, CardContent, Icon, List, ListInput } from '@yakit/svelte/index'
+  import { Columns, Col, BlockTitle, Card, CardContent, Button } from '@yakit/svelte/index'
+  import { ListForm, SearchCardForm, FormifyField } from '@yakit/svelte/Formify';
   import { transformFields } from '@yakit/core/transformer'
+
   // import stringify from '@yakit/core/stringify'
   import stringify from 'fast-safe-stringify'
 
+  export let initData={}
   let noref = "javascript:void(0)"
-
-  let fields = [
-    {key: "name"},
-    {key: "email", type: 'email'},
-    {key: "birthday", type: 'date'},
-    {key: "note", type: 'textarea'},
-    {
-      key: "favColor",
-      type: 'select',
-      selectOptions: {
-        data: ['blue', 'red', 'green' ]
-      }
-    },
-  ]
 
   let searchConfig = {
     column1:[
-      {key: "num"},
-      {key: "name"},
-      {key: "date", type: 'date'}
+      {key: "refnum", type: "input-list"},
+      {key: "ponum", type: "input-wildcard"},
+      {key: "date", type: 'date-range'},
+      {key: "amount", type: 'amount-range'}
     ],
     column2:[
       {
-        key: "favColor",
+        key: "simple",
         type: 'select',
         selectOptions: {
           data: ['blue', 'red', 'green' ]
         }
+      },
+      {
+        key: "restId",
+        type: 'select',
+        selectOptions: {
+          dataApi:{ key: 'customer' }
+        }
+      },
+      {
+        key: "rest",
+        type: 'select',
+        selectOptions: {
+          isMulti: true,
+          isValueObject: true,
+          dataApi:{ key: 'customer' }
+        }
       }
     ],
-    column3:{
-      baz:{},
-      buzz:{}
-    }
+    column3:[
+      {
+        key: "restTwoCol",
+        type: 'select',
+        selectOptions: {
+          propertyLabel: ['num', 'name'],
+          isMulti: true,
+          isValueObject: true,
+          dataApi:{ key: 'customer' }
+        }
+      },
+      {
+        key: "minChars",
+        type: 'select',
+        selectOptions: {
+          minSearchChars:1,
+          isMulti: true,
+          isValueObject: true,
+          dataApi:{ key: 'customer' }
+        }
+      }
+    ]
   }
 
-  let tranFields = transformFields(searchConfig)
+  let data = {}
+  let state
+  let formContext = undefined
+  let fieldConfig = undefined
 
-  //convert to framwork7 prop object
-  function f7InputProps(field){
-    let optsToMerge = _.pick(field, [
-      'id', 'label', 'type', 'name', 'placeholder',
-    ])
-    optsToMerge.id = field.key
-    return optsToMerge
+  $: if(formContext) {
+    // console.log("formContext", formContext)
+    state = formContext.state
+  }
+
+  function setPizza(){
+    let newVals = {
+      ponum:"pizza"
+    }
+    formContext.updateInitialValues(newVals)
+  }
+
+  function clearForm(){
+    let newVals = {}
+    formContext.updateInitialValues(newVals)
   }
 
 </script>
 
-<div class="tile is-ancestor">
-  {#each tranFields.columns as colCfg}
-  <div class="tile is-parent">
-    <Card class="tile is-child m-0">
-      <CardContent class="p0">
-        <List form name="list-form-example1" inlineLabels noHairlinesMd
-          novalidate="true" autocomplete="off">
-          {#each colCfg as field (field.key)}
-            <ListInput {...f7InputProps(field)} clearButton/>
-          {/each}
-        </List>
-      </CardContent>
-    </Card>
-  </div>
-  {/each}
-</div>
+<SearchCardForm {searchConfig} {initData} bind:data bind:formContext bind:fieldConfig/>
 
-<pre class="mt-4">field model: {stringify(tranFields, null, 2)}</pre>
+<Button class="mt-1" on:click={setPizza}>Pizza all around</Button>
+<Button class="mt-1" on:click={clearForm}>Clear</Button>
+<Columns>
+<Col>
+  <pre class="mt-4">field model: {stringify(data, null, 2)}</pre>
+  <pre class="mt-4">state: {stringify($state, null, 2)}</pre>
+</Col>
+<Col>
+  <pre class="mt-4">translated config: {stringify(fieldConfig, null, 2)}</pre>
+</Col>
+</Columns>
+

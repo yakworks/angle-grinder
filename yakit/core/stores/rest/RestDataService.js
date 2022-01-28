@@ -11,10 +11,15 @@ import { crudQueryModel } from '../crudQueryModel'
 export const RestDataService = ({ key, ...args }) => {
   let api = kyFetch(key)
 
+  // if(!path) path = key
+  // if(!key) key = path
+
+  // let ds = {}
   let ds = {
     ...args,
     api,
-    key
+    key,
+    path: key
   }
 
   return mix(ds).it(RestDataService).with(

@@ -39,7 +39,7 @@
     min-height: var(--height, 42px);
     /* padding-top: 8px;*/
     /* line-height: var(--height, 42px); */
-    padding: var(--itemPadding, 8px 8px 0 8px);
+    padding: var(--itemPadding, 0px 8px 0 8px);
     color: var(--itemColor, inherit);
     text-overflow: ellipsis;
     /* overflow: hidden; */
@@ -63,7 +63,7 @@
       color: var(--itemIsActiveColor, #fff);
   }
 
- .item.notSelectable {
+  .item.notSelectable {
       color: var(--itemIsNotSelectableColor, #999);
   }
 
@@ -78,6 +78,7 @@
 
   .flex-item {
     display: flex;
+    min-height: var(--itemHeight, 42px);
     /* align-items: stretch;
     width: 100%;
     min-height: 60px;
@@ -92,7 +93,6 @@
     display: flex;
     align-items: center;
     padding-left: 8px;
-    align-items: flex-start;
     padding-left: 8px;
     overflow: hidden;
   }
@@ -100,6 +100,7 @@
   .flex-cell:first-child {
     /* overflow: hidden; */
     padding-left: 0;
+    border-right: 1px solid #ddd;
   }
 
   .flex-cell:last-child {
@@ -115,7 +116,7 @@
 <div class="item {itemClasses}">
   <div class="flex-item">
   {#each getOptionLabel(item, filterText) as label}
-    <div class="flex-cell" data-th={label}> {label} </div>
+    <div class="flex-cell" data-th={label}> {label}</div>
   {/each}
   </div>
 </div>

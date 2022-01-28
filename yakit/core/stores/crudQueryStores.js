@@ -31,7 +31,7 @@ export const crudQueryStores = (stores = {}) => {
     },
 
     /**
-    * the store for the current item
+    * the store for the current item that has been select
     * @type {Writable}
     */
     get itemStore(){

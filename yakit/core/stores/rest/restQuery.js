@@ -34,12 +34,13 @@ export const restQuery = ({ api }) => ds => {
     // prunes params and stringifies the q param if exists
     setupSearchParams(params){
       let pruned = prune(params) //removes properties with null or undefined values
-      let { q, sort } = pruned
+      let { q, sort, projections } = pruned
       if(restrictSearch) q = {...q, ...restrictSearch}
       //save it before we stringify
-      ds.stores.setQuery({...pruned, q, sort})
+      ds.stores.setQuery({...pruned, q, projections, sort})
 
       if(q) pruned.q = stringify(q)
+      if(projections) pruned.projections = stringify(projections)
       //stringify sort and remove the quotes and brackets
       if(sort) pruned.sort = stringify(sort).replace(/{|}|"/g, '')
       return pruned

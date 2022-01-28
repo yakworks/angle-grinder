@@ -1,6 +1,6 @@
 <script>
   import { getContext } from 'svelte';
-  import { ctxKey } from './ListForm.svelte';
+  import {ctxKey} from './ctxKey'
   import { classNames } from '../shared/utils';
   import { fieldDefaults } from '@yakit/core/transformer'
 

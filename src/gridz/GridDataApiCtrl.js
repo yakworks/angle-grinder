@@ -176,6 +176,12 @@ export default class GridDataApiCtrl {
     return this.jqGridEl.getRowData()
   }
 
+  updateFooter(data) {
+    setTimeout(_ => {
+      this.getGridEl().footerData('set', data)
+    })
+  }
+
   // Populates the grid with the given data.
   addJSONData(data) {
     //FIXME HACK not sure why we need to do this

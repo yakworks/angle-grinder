@@ -5,23 +5,23 @@
 import {isFunction, isPlainObject} from '@yakit/core/is'
 import mix from '@yakit/core/mix/mix-it-with';
 import apiHolder from '@yakit/core/stores/apiHolder'
-import { _defaults, isNil, uniqueId } from '@yakit/core/dash'
+import { _defaults, isNil, uniqueId, get } from '@yakit/core/dash'
 
 export const defaultOpts = {
   /** How long to wait when typing to do search */
   loadOptionsInterval: 300,
   /** will eagerly load the data set on first request, when false it does not cache and
-   *  nothing is loaded until minimumSearchLength is met*/
+   *  nothing is loaded until minSearchChars is met*/
   isEagerLoad: true,
   /** when isEagerLoad:false num of chars before load called is made */
-  minimumSearchLength: 3,
+  minSearchChars: 3,
   /**when true then can select multiple items */
   isMulti: false,
   /** if true store the selection as the objects vas the key/id */
   isValueObject: false,
   /** the key field in the data */
   propertyKey: 'id',
-  /** the label field in the data */
+  /** the label field in the data, can be array if multiple columns should be shown in options list */
   propertyLabel: 'name',
 
 }
@@ -38,35 +38,42 @@ export const selectContext = (opts) => {
 
   //props used from opts
   let {
-    dataApiKey, dataApi, dataApiParams, minimumSearchLength, isEagerLoad,
+    minSearchChars, isEagerLoad,
     itemData, propertyKey, propertyLabel, isMulti, isValueObject
   } = opts
 
   let obj = {}
 
   obj.init = (dataApiFactory = apiHolder.dataApiFactory) => {
-    // console.log("init with opts", opts)
-    if (dataApiKey || dataApi){
-      if(!dataApi) dataApi = dataApiFactory[dataApiKey]
-      // console.log("setup dataApi", dataApi)
+    let dataApiConfig = opts.dataApi || {}
+    let dataApiKey = get(dataApiConfig, 'key') || opts.dataApiKey
+    if (dataApiKey){
       // setup data
       opts.data = {}
+
+      //old way to be added to q
+      const dataApiParams = opts.dataApiParams
+      if(!dataApiConfig.q && dataApiParams) dataApiConfig.q = dataApiParams
+
+      const dataApi = get(dataApiFactory, dataApiKey)
 
       //if minimumInputLength then will query on demand
       if(isEagerLoad) {
         // console.log("setup data func for rest api")
         //if minimumInputLength is not set then load the whole dataset
         opts.data = () => {
-          return obj.getDataFromApi({q: dataApiParams}) //get all of it.
+          return obj.getDataFromApi({opts, dataApi, dataApiConfig}) //get all of it.
         }
       }
       else {
         console.log("is not isEagerLoad so using loadOptions", isEagerLoad)
         opts.loadOptions = async (filterText) => {
-          if (!(filterText.length >= minimumSearchLength)) return
-          // console.log('filterText', filterText)
-          //call picklist with params, if q:dataApiParams is null/undefined it will get pruned off
-          let res = await dataApi.picklist({qSearch: filterText, q: dataApiParams})
+          console.log("loadOptions filterText", filterText)
+          if (!(filterText.length >= minSearchChars)) return
+          let qSearch = filterText
+          let qExtra = dataApiConfig.q
+          let params = dataApiConfig.params || {}
+          let res = await dataApi.picklist({qSearch, q: qExtra, ...params})
           return res.data
         }
       }
@@ -121,7 +128,6 @@ export const selectContext = (opts) => {
     }
   }
 
-
   obj.translateItemsIfNeeded = (items) => {
     if (items && items.length > 0 && typeof items[0] !== 'object') {
       items = items.map((item) => {
@@ -132,12 +138,14 @@ export const selectContext = (opts) => {
   }
 
   // function called to get data from api picklist
-  obj.getDataFromApi = async ({q = null, qSearch = null}) => {
-    console.log("getDataFromApi called", q, qSearch)
-    let res = await dataApi.picklist({q, qSearch})
+  obj.getDataFromApi = async ({opts, dataApi, dataApiConfig}) => {
+
+    let qExtra = dataApiConfig.q
+    let params = dataApiConfig.params || {}
+    let res = await dataApi.picklist({q: qExtra, ...params})
     let dta = res
     // if its an object then assume it pager object with data key
-    if (isPlainObject(dta)) dta = res.data
+    if (_.isPlainObject(dta)) dta = res.data
 
     //if it has a keyField then translate it to the id, used when you want 'code' or maybe 'email' to be the key thats set
     if(opts.propertyKey !== 'id') {
@@ -165,6 +173,7 @@ export const selectContext = (opts) => {
    * @returns the loaded items
    */
   obj.loadItemsIfNeeded = async (_) => {
+    if(!opts.isEagerLoad) return
     if(!opts.items && !opts.isWaiting) {
       console.log("first call to load data")
       opts.isWaiting = true
@@ -183,6 +192,7 @@ export const selectContext = (opts) => {
     if(opts.isValueObject) {
       return value
     } else {
+      console.log("getSelectedItem findItemByKey opts.isEagerLoad", opts.isEagerLoad)
       return obj.getSelectedValue(value, obj.findItemByKey)
     }
   }
@@ -196,6 +206,7 @@ export const selectContext = (opts) => {
       val = item.map((selection) => finderFunc(selection));
       // keyVal = item.map( selection => getItemKey(selection))
     } else {
+      console.log("getSelectedValue", item)
       val = finderFunc(item)
     }
     return val
@@ -209,6 +220,7 @@ export const selectContext = (opts) => {
    * @returns
    */
   function findItem(selection) {
+    console.log("findItem", selection)
     return findItemByKey(getItemKey(selection)) || selection
   }
 
@@ -219,6 +231,8 @@ export const selectContext = (opts) => {
    * @returns the found object
    */
   function findItemByKey(key) {
+    console.log("findItemByKey", key)
+    if(!opts.items) return undefined
     return opts.items.find((item) => getItemKey(item) === key)
   }
 
