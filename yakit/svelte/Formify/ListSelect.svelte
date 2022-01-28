@@ -1,7 +1,7 @@
 <script>
   // import { onMount, createEventDispatcher } from 'svelte'
   import { getContext, createEventDispatcher, onMount } from 'svelte';
-  import { ctxKey } from './ListForm.svelte'
+  import {ctxKey} from './ctxKey'
   import { isNil, _defaults } from '@yakit/core/dash'
   import { fieldDefaults } from '@yakit/core/transformer'
   import selContext from '@yakit/ui/select/selectContext'
@@ -132,6 +132,8 @@
     value = val
   }
 
+
+
 </script>
 
 <ListInput label={opts.label} clearButton={false} input={false} class={className}>
@@ -157,6 +159,9 @@
     --indicatorRight: 0px;
     --clearSelectRight: 0px;
     --listZIndex: 99;
+    /* for now this expands the list a bit across the label */
+    --listLeft: -60px;
+    --listRight: -20px;
   }
 
 </style>

@@ -5,11 +5,6 @@
   import { createForm } from "svelte-forms-lib";
   import stringify from 'fast-safe-stringify'
   import {ctxKey} from './ctxKey'
-  import { colorClasses } from '../shared/mixins';
-  import { classNames, extend, createEmitter } from '../shared/utils';
-  import { restProps } from '../shared/rest-props';
-  import { useTab } from '../shared/use-tab';
-  import { setReactiveContext } from '../shared/set-reactive-context';
 
   // mock async request
   const makeRequest = () => new Promise(resolve => setTimeout(resolve, 1000));
@@ -23,14 +18,13 @@
       'onSubmit is a required property in <Form /> when using the fallback context',
     );
   };
+
   export let context = createForm({
     initialValues: initData,
     onSubmit,
     validate,
     validationSchema,
   });
-
-  export let formContext = context
 
   const {
     form,
@@ -69,13 +63,15 @@
 
   $: data = $form
 
-  const emit = createEmitter(createEventDispatcher, $$props);
+  import { colorClasses } from '../shared/mixins';
+  import { classNames, extend, createEmitter } from '../shared/utils';
+  import { restProps } from '../shared/rest-props';
+  import { useTab } from '../shared/use-tab';
+  import { setReactiveContext } from '../shared/set-reactive-context';
 
   let className = undefined
   export { className as class }
 
-  //should form have list class and ul, set to false when using this as just a form and not a list wrapper too
-  export let formOnly = false
   export let ul = true
 
   export let inset = false
@@ -118,8 +114,8 @@
 
   $: classes = classNames(
     className,
+    'list',
     {
-      'list': !formOnly,
       inset,
       'xsmall-inset': xsmallInset,
       'small-inset': smallInset,
@@ -166,7 +162,7 @@
 <!-- svelte-ignore a11y-missing-attribute -->
 <form bind:this={formEl} class={classes} on:submit={handleSubmit} {...restProps($$restProps)} >
   <slot name="before-list" />
-  {#if hasUlSlots && ul && !formOnly}
+  {#if hasUlSlots && ul}
     <ul>
       <slot
         {form}

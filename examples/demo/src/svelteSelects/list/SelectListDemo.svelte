@@ -28,12 +28,23 @@
     state = formContext.state
   }
 
+  //programatically set fields
   function setPizza(){
     let newVals = {
-      name:"pizza", simple:'Pie', singleId:2, multiId:[2, 3],
+      name:"pizza", simple:'Pie',
+      singleId:2,
+      restSingleId:2,
+      multiId:[2, 3],
+      // FIXME broken
+      // restMultiId:[2, 3],
+      restObject: {id:2, name: "Yodo"},
+      restMultiObject: [{ id: 2, name: "Yodo"}, { id: 3 }],
       valueObject: {id:2, name: "Pizza"},
       valueObjectMulti: [{id:2, name: "Pizza"}],
-      chips:['cheese', 'sausage']
+      chips:['cheese', 'sausage'],
+      minChars: { id: 2, name: "Yodo"},
+      //
+      minCharsMulti: [{ id: 2, name: "Yodo"}, { id: 3, name: "Foo"}],
     }
     formContext.updateInitialValues(newVals)
   }
@@ -54,11 +65,23 @@
           <ListField name="name" />
           <ListSelect name="simple"  itemData={simpleData} />
           <ListSelect name="singleId" {itemData} />
-          <ListSelect name="multiId" opts={{label:"WTF", isMulti:true}} {itemData} />
-          <ListSelect name="multiLabel" opts={{propertyLabel: ['code', 'name']}} {itemData} />
+          <ListSelect name="multiId" opts={{label:"Multiple Ids", isMulti:true}} {itemData} />
+          <ListSelect name="twoColumn" opts={{propertyLabel: ['code', 'name']}} {itemData} />
           <ListSelect name="valueObject" opts={{isValueObject:true}} {itemData} />
           <ListSelect name="valueObjectMulti" opts={{isMulti:true, isValueObject:true}} {itemData} />
           <ListChipInput name="chips" />
+          <ListSelect name="restSingleId" opts={{dataApiKey:'customer'}} />
+          <ListSelect name="restMultiId" opts={{ isMulti:true, dataApi:{key:'customer'} }}/>
+          <ListSelect name="restObject" opts={{isValueObject:true, dataApi:{key:'customer'} }} />
+          <ListSelect name="restMultiObject" opts={{isMulti:true, isValueObject:true, dataApi:{key:'customer'} }} />
+          <ListSelect name="minChars" opts={{isEagerLoad:false, minSearchChars:1, dataApi:{key:'customer'}, isValueObject:true}} />
+          <ListSelect name="minCharsMulti" opts={{
+            isMulti:true, isEagerLoad:false, keepOpen:false,
+            propertyLabel: ['num', 'name'],
+            minSearchChars:1, dataApi:{key:'customer'},
+            isValueObject:true
+          }} />
+
         </ListForm>
       </CardContent>
     </Card>
