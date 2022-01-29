@@ -118,7 +118,7 @@ export default class ListDataApiCtrl {
         return this.deleteSelected()
       default:
         if (_.isFunction(this[btnItem.key])) {
-          return this[btnItem.key](btnItem, event)
+          return this.gridCtrl[btnItem.key](btnItem, event)
         }
     }
   }
