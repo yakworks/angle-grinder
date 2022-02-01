@@ -4,11 +4,19 @@
 <script>
   import { Popover} from '@yakit/svelte/index'
   import { Formify } from '@yakit/svelte/Formify';
+  import { _defaults } from '@yakit/core/dash'
 
   export let ctx
   export let dataApi = undefined
-  export let opts = undefined
+  export let opts = {}
 
+  _defaults(opts, {
+    onSubmit(vals){
+      console.log("passed validation onSubmit vals", vals)
+      // const savedItem = await ctx.gridCtrl.dataApi.save(this.vm)
+      popoverOpened = false
+    }
+  })
   export let popoverOpened = undefined
   export let popoverOpenEvent = undefined
 
@@ -46,9 +54,10 @@
     popoverOpened = false
   }
 
-  export let onSave = (event) => {
+  export let onSave = async (event) => {
+
     formContext.handleSubmit()
-    popoverOpened = false
+    console.log("onSave")
   }
 
 </script>

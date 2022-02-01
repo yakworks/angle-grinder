@@ -6,8 +6,6 @@
   import { ListForm, FormifyField } from '@yakit/svelte/Formify';
   import { transformFields } from '@yakit/core/schema/transformSchema'
   import { _defaults } from '@yakit/core/dash'
-  import stringify from 'fast-safe-stringify'
-import ApexChart from '../Charts/ApexChart.svelte';
 
   /** The form name */
   export let name
@@ -36,7 +34,6 @@ import ApexChart from '../Charts/ApexChart.svelte';
     //state store
     state = formContext.state
   }
-
 </script>
 
 <ListForm {name} {opts} schema={transformedSchema} bind:data bind:formContext >

@@ -21,12 +21,14 @@
   export let schema = undefined;
 
   export let opts = {};
+
   export let defaultOpts = {
     initData: {},
     validate: null,
     validationSchema: null,
     onSubmit(vals){
-      throw new Error('onSubmit is a required property in <Form /> when using the fallback context')
+      console.error("default onsubmit", vals)
+      // throw new Error('onSubmit is a required property in <Form /> when using the fallback context')
     },
     //should form have list class and ul, set to false when using this as just a form and not a list wrapper too
     formOnly: false,
