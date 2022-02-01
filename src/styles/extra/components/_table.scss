@@ -115,6 +115,10 @@
 
             &.cell-center {
                 justify-content: center;
+
+                .item-meta{
+                  text-align: center;
+                }
             }
 
             &.cell-end {
