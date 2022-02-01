@@ -5,16 +5,24 @@
   import { Popover} from '@yakit/svelte/index'
   import { Formify } from '@yakit/svelte/Formify';
   import { _defaults } from '@yakit/core/dash'
+  import growl from "@yakit/ui/growl"
 
-  export let ctx
+  export let ctx = {}
   export let dataApi = undefined
   export let opts = {}
 
   _defaults(opts, {
-    onSubmit(vals){
-      console.log("passed validation onSubmit vals", vals)
-      // const savedItem = await ctx.gridCtrl.dataApi.save(this.vm)
-      popoverOpened = false
+    async onSubmit(values, form, errors){
+      try {
+        // await dataApi.delay(2000)
+        const savedItem = await dataApi.save(values)
+        ctx.gridCtrl.saveRow(editingId, savedItem)
+        popoverOpened = false
+        growl.success("saved successfully")
+      } catch (er) {
+        handleError(er)
+      }
+
     }
   })
   export let popoverOpened = undefined
@@ -29,20 +37,13 @@
 
   export let onPopoverOpen = async (instance) => {
     editingId = instance.targetEl.dataset.id
-    console.log("default onPopoverOpen", instance)
-    console.log("onPopoverOpen for ident", instance.targetEl.dataset.id)
-    console.log("ctx", ctx)
-    // await ctx.gridCtrl.dataApi.delay(1000)
-    console.log("delay finished")
     ctx.gridCtrl.toggleLoading(true)
     try {
-      const vm = await ctx.gridCtrl.dataApi.get(editingId)
-      console.log("vm", vm)
+      const vm = await dataApi.get(editingId)
       formContext.updateInitialValues(vm)
-      // ctrl.showEdit('Edit', vm)
     } catch (er) {
-      console.log("handleError", er)
-      // ctrl.handleError(er)
+      console.error("onPopoverOpen error on get", er)
+      handleError(er)
     } finally {
       ctx.gridCtrl.toggleLoading(false)
     }
@@ -55,9 +56,18 @@
   }
 
   export let onSave = async (event) => {
-
     formContext.handleSubmit()
-    console.log("onSave")
+  }
+
+  async function handleError(er) {
+    let problem = await er.response.json()
+    let messages = []
+    if(problem.errors){
+      messages = problem.errors.map(er => er.message)
+    } else if(problem.detail) {
+      messages.push(problem.detail)
+    }
+    growl.error(messages.join('/n'), problem.title)
   }
 
 </script>

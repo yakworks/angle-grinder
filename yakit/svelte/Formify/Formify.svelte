@@ -17,6 +17,8 @@
   export let data = undefined
   /** The formContext thats setup */
   export let formContext = undefined
+  export let state = undefined
+  export let isSubmitting = undefined
   /** The transformed schema */
   export let transformedSchema = transformFields(schema)
 
@@ -29,10 +31,10 @@
     formContext.handleSubmit()
   }
 
-  let state
   $: if(formContext) {
     //state store
     state = formContext.state
+    isSubmitting = formContext.isSubmitting
   }
 </script>
 
@@ -42,6 +44,6 @@
   {/each}
   <CardFooter>
     <Button7 onClick={onCancel}>Cancel</Button7>
-    <Button7 onClick={onSave}>Save</Button7>
+    <Button7 disabled={$isSubmitting} preloader loading={$isSubmitting} onClick={onSave}>Save</Button7>
   </CardFooter>
 </ListForm>

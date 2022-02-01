@@ -63,7 +63,7 @@
   <table class={classes} class:is-dense={$stateStore.isDense}></table>
   <div class="gridz-pager"></div>
 </div>
-<EditPopover {ctx}/>
+<EditPopover {ctx} {dataApi}/>
 <!-- <pre class="mb-4">state: {stringify($stateStore, null, 2)}</pre> -->
 {:else}
 <p>...loading</p>
