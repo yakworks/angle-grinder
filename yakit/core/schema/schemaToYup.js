@@ -5,6 +5,7 @@ import * as yup from 'yup';
 import { parse, isDate, parseISO } from "date-fns";
 import {get, set} from '../dash'
 import {isNothing} from '../truthy'
+import { isUndefined, isPlainObject } from '../is'
 
 function parseLocalDate(value, originalValue) {
   const parsedDate = isDate(originalValue) ? originalValue : parse(originalValue, "yyyy-MM-dd", new Date())
@@ -93,11 +94,18 @@ export function yupFromField(fieldSchema){
 
 /**
  * Adds a yup property to all the shema fields in the list
- *
+ * fieldList should have run through the tranform already and either be a list of field configs
+ * with the key field being the most important. Or it can be an object with a columns key
+ * and the columns key will be a list of lists but the fields key should be a flatten list of all the fields
  * @param {Array} fieldList
  */
 export function addYupToSchema(fieldList){
-  fieldList.forEach(field => {
+  let fieldListToUse = fieldList
+  //if its a plain object then assume its a columns config and will have a fields property
+  if(isPlainObject(fieldList)){
+    fieldListToUse = fieldList['fields']
+  }
+  fieldListToUse.forEach(field => {
     if (!field.validation) {
       field.validation = yupFromField(field)
     }
@@ -105,9 +113,14 @@ export function addYupToSchema(fieldList){
 }
 
 function createYupSchema(fields){
+  let fieldListToUse = fields
+  //if its a plain object then assume its a columns config and will have a fields property
+  if(isPlainObject(fields)){
+    fieldListToUse = fields['fields']
+  }
   //first nest the validations so that any fields with dots in path are nested objects
   const valObj = {}
-  fields.forEach(field => {
+  fieldListToUse.forEach(field => {
     if (field.validation) {
       set(valObj, `${field.key}.validation`, field.validation)
     }

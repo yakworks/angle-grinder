@@ -42,7 +42,18 @@
     listController = await DataApiListController({ dataApi, ctx })
     ctx = listController.ctx
     stateStore = listController.ctx.stateStore
+    setupToolbarOpts(ctx)
     isConfigured = true
+  }
+
+  function setupToolbarOpts(ctx){
+    let tbopts = ctx.toolbarOptions
+    if(tbopts && tbopts.leftButtons.create ){
+      let createBtn = tbopts.leftButtons.create
+      if(createBtn.class !== 'hidden' ) {
+        createBtn['data-popover'] = `${ctx.gridOptions.gridId}-popover-edit`
+      }
+    }
   }
 
   function init(node) {
@@ -63,6 +74,7 @@
   <table class={classes} class:is-dense={$stateStore.isDense}></table>
   <div class="gridz-pager"></div>
 </div>
+
 <EditPopover {ctx} {dataApi}/>
 <!-- <pre class="mb-4">state: {stringify($stateStore, null, 2)}</pre> -->
 {:else}

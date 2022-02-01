@@ -15,5 +15,9 @@
       <Dynamic/>
     </ExampleSnippet>
 
+    <ExampleSnippet code={DynamicRaw} horizontal={false}>
+      <Dynamic/>
+    </ExampleSnippet>
+
   </Block>
 </Page>

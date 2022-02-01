@@ -11,11 +11,15 @@ import { isUndefined, isPlainObject } from '../is'
 export function transformFields(fields, ctrl) {
   // if its a plain object and first key starts with column and its a columns layout
   if (isPlainObject(fields) && Object.keys(fields)[0].startsWith('column')) {
+    //add the references the main fields list
+    let fieldList = []
     const colarr = map(fields, (val, key) => {
       const valCopy = val
-      return doTransform(valCopy, ctrl)
+      let transformedFields = doTransform(valCopy, ctrl)
+      fieldList = fieldList.concat(transformedFields)
+      return transformedFields
     })
-    return { columns: colarr }
+    return { columns: colarr, fields: fieldList}
   } else {
     return doTransform(fields, ctrl)
   }
@@ -27,8 +31,8 @@ export function transformFields(fields, ctrl) {
  */
 export function doTransform(opts, ctrl) {
   // if its a plain object and first key starts with column and its a columns layout
-  // let optsAr = ensureArray(opts)
-  const optsAr = doReduce(ensureArray(opts), ctrl)
+  let convArray = ensureArray(opts)
+  const optsAr = doReduce(convArray, ctrl)
   return optsAr
 }
 

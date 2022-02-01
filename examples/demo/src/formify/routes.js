@@ -16,6 +16,10 @@ const componentsStates = {
       component: 'formifyDynamicIndex'
     },
     {
+      name: 'dynamicColsForm',
+      component: 'formifyDynamicColsIndex'
+    },
+    {
       name: 'searchForm',
       component: 'formifySearchIndex'
     }

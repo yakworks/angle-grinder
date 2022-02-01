@@ -1,6 +1,6 @@
 import _ from 'lodash'
 import {transformFields} from '../transformSchema'
-import { testSchema } from './testSchemaModel'
+import { testSchema, testSchemaColumns } from './testSchemaModel'
 import {expect as x} from '@jest/globals'
 
 describe('transformFields', () => {
@@ -84,6 +84,15 @@ describe('transformFields', () => {
       input: 'password',
     },
     {
+      key: 'user.login',
+      minLength: 5,
+      required: true,
+      name: 'user.login',
+      label: 'Login',
+      placeholder: 'Login',
+      input: 'text',
+    },
+    {
       key: 'dates.date1',
       format: 'date-time',
       name: 'dates.date1',
@@ -162,8 +171,7 @@ describe('transformFields', () => {
         }
       }
 
-      let resultCols = {
-        columns: [[
+      let resultCols = [[
           {
             key: 'foo',
             name: 'foo',
@@ -197,10 +205,15 @@ describe('transformFields', () => {
             placeholder: 'Buzz'
           }
         ]]
-      }
 
       let formlyOpts = transformFields(testCols)
-      x(formlyOpts).toEqual(resultCols)
+      x(formlyOpts.columns).toEqual(resultCols)
+    })
+
+    it('test schema columns', function() {
+      let trans = transformFields(testSchemaColumns)
+      x(trans.columns.length).toEqual(2)
+      x(trans.fields.length).toEqual(11)
     })
   })
 

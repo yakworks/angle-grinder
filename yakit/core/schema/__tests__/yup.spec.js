@@ -1,6 +1,6 @@
 import _ from 'lodash'
 import {transformFields} from '../transformSchema'
-import { testSchema } from './testSchemaModel'
+import { testSchema, testSchemaColumns } from './testSchemaModel'
 import { buildYupValidation, yupFromField, addYupToSchema, checkDecimalFn, extractErrors, countDecimalPlaces} from '../schemaToYup'
 import * as yup from 'yup';
 import {expect as x} from '@jest/globals'
@@ -80,6 +80,20 @@ describe('yup sanity check', () => {
 
   })
 
+  it('should work for columns config', async function() {
+    let transformed = transformFields(testSchemaColumns)
+    addYupToSchema(transformed)
+
+    let nameFld = transformed.fields.find(item => item.key === 'name')
+    x(nameFld.validation).toBeTruthy()
+    let yupField = nameFld.validation.describe()
+    // x(yupField).toEqual({})
+    x(hasTest(yupField, 'required')).toBeTruthy()
+    x(hasTest(yupField, 'min')).toBeTruthy()
+    x(hasTest(yupField, 'max')).toBeTruthy()
+
+  })
+
   it('checkDecimalFn regex', async function() {
 
     // const numCheck = (number) => new RegExp("^[0-9]{1,15}(?:\.[0-9]{1,2})?$").test(number)
@@ -106,6 +120,40 @@ describe('yup sanity check', () => {
 
   it('should buildYupFromSchema', async function() {
     let transformed = transformFields(testSchema)
+
+    let yupSchema = buildYupValidation(transformed)
+
+    // x(yupSchema.describe().fields).toEqual({})
+
+    let descObj = yupSchema.describe()
+
+    let fldKeys = Object.keys(yupSchema.fields)
+    x(fldKeys.length).toEqual(9)
+
+    //user should have 2 nested fields
+    let userKeys = Object.keys(yupSchema.fields.user.fields)
+    // x(yupSchema.fields.user).toEqual({})
+    x(userKeys.length).toEqual(2)
+
+    let errors = {};
+    let valRes
+    try {
+      valRes = await yupSchema.validate({
+        name:'foo', birthday:'2022-13-01', credits: 100.001
+      }, { abortEarly: false })
+    } catch (err) {
+      // console.log(err)
+      errors = extractErrors(err)
+    }
+    //should get 2 errors for user
+    x(errors['credits']).toBeTruthy()
+    x(errors['user.login']).toBeTruthy()
+    x(errors['user.password']).toBeTruthy()
+
+  })
+
+  it('should buildYupValidation with columns', async function() {
+    let transformed = transformFields(testSchemaColumns)
 
     let yupSchema = buildYupValidation(transformed)
 

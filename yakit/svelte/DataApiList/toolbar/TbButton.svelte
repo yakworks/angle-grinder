@@ -6,6 +6,8 @@
 
   export let opts
 
+  export let popoverId = undefined
+
   let isButton = true
 
   $: {
@@ -22,13 +24,13 @@
     }
   }
 
-</script>
 
+</script>
 {#if isButton }
-  <Button tooltip={opts.tooltip} icon={opts.icon} on:click/>
+  <Button popoverOpen={`#${popoverId}`} tooltip={opts.tooltip} icon={opts.icon} on:click/>
 {:else}
 <!-- TODO setup popups -->
-  <Button tooltip={opts.tooltip} icon={opts.icon} on:click/>
+  <Button popoverOpen={`#${popoverId}`} tooltip={opts.tooltip} icon={opts.icon} on:click/>
 {/if}
 
 
