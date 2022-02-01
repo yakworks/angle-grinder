@@ -35,6 +35,8 @@ export { default as Toolbar } from 'framework7-svelte/esm/svelte/toolbar.svelte'
 export { default as Tab } from 'framework7-svelte/esm/svelte/tab.svelte';
 export { default as Tabs } from 'framework7-svelte/esm/svelte/tabs.svelte';
 
+export { default as TextEditor } from 'framework7-svelte/esm/svelte/text-editor.svelte';
+
 export { default as Preloader } from 'framework7-svelte/esm/svelte/preloader.svelte';
 export { default as UseIcon } from 'framework7-svelte/esm/svelte/use-icon.svelte';
 
