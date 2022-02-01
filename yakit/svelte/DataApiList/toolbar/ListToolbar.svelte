@@ -95,8 +95,8 @@
       </div>
     {/if}
     {#each filterVisible(opts.leftButtons) as btnItem}
-      {#if btnItem['data-popover']}
-        <TbButton opts={btnItem} popoverId={btnItem['data-popover']}/>
+      {#if btnItem.popoverId}
+        <TbButton opts={btnItem} />
       {:else}
         <TbButton opts={btnItem} on:click={() => fireButtonClick(btnItem)}/>
       {/if}

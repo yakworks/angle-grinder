@@ -22,15 +22,16 @@
     if (opts.menuItems) {
       isButton = false
     }
+    if(opts.popoverId) popoverId = opts.popoverId
   }
 
 
 </script>
 {#if isButton }
-  <Button popoverOpen={`#${popoverId}`} tooltip={opts.tooltip} icon={opts.icon} on:click/>
+  <Button popoverOpen={popoverId} tooltip={opts.tooltip} icon={opts.icon} on:click/>
 {:else}
 <!-- TODO setup popups -->
-  <Button popoverOpen={`#${popoverId}`} tooltip={opts.tooltip} icon={opts.icon} on:click/>
+  <Button popoverOpen={popoverId} tooltip={opts.tooltip} icon={opts.icon} on:click/>
 {/if}
 
 

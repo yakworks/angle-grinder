@@ -2,7 +2,8 @@
   Wraps the jqGrid and adds the toolbar and search form
  -->
 <script>
-  import { Popover} from '@yakit/svelte/index'
+  import { onMount } from 'svelte'
+  import { Popover, CardHeader} from '@yakit/svelte/index'
   import { Formify } from '@yakit/svelte/Formify';
   import { _defaults } from '@yakit/core/dash'
   import growl from "@yakit/ui/growl"
@@ -35,18 +36,23 @@
 
   export let editingId = undefined
 
+  export let popoverEl = undefined
+
   export let onPopoverOpen = async (instance) => {
     editingId = instance.targetEl.dataset.id
-    ctx.gridCtrl.toggleLoading(true)
+    //if no editingId then assume its a create
+    // ctx.gridCtrl.toggleLoading(true)
     try {
-      const vm = await dataApi.get(editingId)
-      formContext.updateInitialValues(vm)
+      let initValues = {}
+      if(editingId) initValues = await dataApi.get(editingId)
+      formContext.updateInitialValues(initValues)
     } catch (er) {
       console.error("onPopoverOpen error on get", er)
       handleError(er)
-    } finally {
-      ctx.gridCtrl.toggleLoading(false)
     }
+    // finally {
+    //   ctx.gridCtrl.toggleLoading(false)
+    // }
   }
 
   export let onCancel = (event) => {
@@ -70,14 +76,22 @@
     growl.error(messages.join('/n'), problem.title)
   }
 
+  let title
+  $: title = editingId ? "Edit" : "Create"
+
+  onMount( () => {
+    // let popper = popoverEl.instance()
+    // popper.open("#fooey")
+    // app.f7.tab.show('#contactsTab', true)
+	});
+
 </script>
 
-<Popover id={popoverId} bind:opened={popoverOpened} {onPopoverOpen}
+<Popover bind:this={popoverEl} id={popoverId} bind:opened={popoverOpened} {onPopoverOpen}
   closeByOutsideClick={false} closeByBackdropClick={false} closeOnEscape={false}>
-
+  <CardHeader {title}/>
   <Formify name="formify-example" {onSave} {onCancel} {opts} schema={ctx.editForm} bind:data bind:formContext />
 </Popover>
-
 
 
 

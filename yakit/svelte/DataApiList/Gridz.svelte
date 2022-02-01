@@ -46,13 +46,12 @@
     isConfigured = true
   }
 
+  //add popover to the createBtn
   function setupToolbarOpts(ctx){
     let tbopts = ctx.toolbarOptions
-    if(tbopts && tbopts.leftButtons.create ){
-      let createBtn = tbopts.leftButtons.create
-      if(createBtn.class !== 'hidden' ) {
-        createBtn['data-popover'] = `${ctx.gridOptions.gridId}-popover-edit`
-      }
+    //it will always exists if tbopts is present so no null checks should be needed, just check class
+    if(tbopts && tbopts.leftButtons.create.class !== 'hidden' ){
+      tbopts.leftButtons.create['popoverId'] = `#${ctx.gridOptions.gridId}-popover-edit`
     }
   }
 
