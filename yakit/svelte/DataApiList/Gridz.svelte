@@ -5,6 +5,7 @@
   import { get, writable } from 'svelte/store';
   import { onMount, onDestroy, tick } from 'svelte'
   import ListToolbar from './toolbar/ListToolbar.svelte'
+  import EditPopover from './EditPopover.svelte'
   import DataApiListController from './DataApiListController'
   import GridDataApiCtrl from '@ag/gridz/GridDataApiCtrl'
   import { classNames } from '../shared/utils';
@@ -62,10 +63,12 @@
   <table class={classes} class:is-dense={$stateStore.isDense}></table>
   <div class="gridz-pager"></div>
 </div>
+<EditPopover {ctx}/>
 <!-- <pre class="mb-4">state: {stringify($stateStore, null, 2)}</pre> -->
 {:else}
 <p>...loading</p>
 {/if}
+
 
 
 

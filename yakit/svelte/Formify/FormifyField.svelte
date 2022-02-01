@@ -2,13 +2,17 @@
   Dynamic Input that switches based on the config that is passed in
  -->
 <script>
-  import { ListForm, ListField, ListSelect, ListRangeFields, ListChipInput } from '@yakit/svelte/Formify';
-  import { isNil, _defaults } from '@yakit/core/dash'
+  import ListField from './ListField.svelte';
+  import ListSelect from './ListSelect.svelte';
+  import ListRangeFields from './ListRangeFields.svelte';
+  import ListChipInput from './ListChipInput.svelte';
+  import ListToggle from './ListToggle.svelte';
+
+  import { _defaults } from '@yakit/core/dash'
   export let opts = {}
 
   export let name = opts.key
 
-  export let itemData = []
   export let selectOptions = {}
 
   if(opts.selectOptions){
@@ -18,13 +22,6 @@
 
     _defaults(selectOptions,opts.selectOptions)
 
-    // _defaults(selectOptions,{
-    //   itemData: data,
-    //   isMulti: isMulti || multiple,
-    //   isValueObject: isValueObject || useDataObject,
-    //   minSearchChars: minSearchChars || minimumInputLength,
-    //   dataApi
-    // })
     if(data) selectOptions.itemData = data
     if(multiple) selectOptions.isMulti = true
     console.log(`${name} multiple`, multiple)
@@ -35,22 +32,24 @@
     console.log(`${name} selectOptions`, selectOptions)
   }
 
-  let {type} = opts
+  //either type or input
+  let {input} = opts
+
 </script>
 
 
-{#if type === 'input'}
-  <ListField {name} />
-{:else if type === 'input-list'}
-  <ListChipInput {name} />
-{:else if type === 'input-wildcard'}
-  <ListField {name}  />
-{:else if type === 'date-range'}
+{#if input === 'toggle'}
+  <ListToggle {name} {opts}/>
+{:else if input === 'input-list'}
+  <ListChipInput {name} {opts}/>
+{:else if input === 'input-wildcard'}
+  <ListField {name} {opts} />
+{:else if input === 'date-range'}
   <ListRangeFields {name} type="date"/>
-{:else if type === 'amount-range'}
+{:else if input === 'amount-range'}
   <ListRangeFields {name} type="number"/>
-{:else if type === 'select'}
+{:else if input === 'select'}
   <ListSelect {name} opts={selectOptions} />
 {:else}
-  <ListField {name} />
+  <ListField {name} {opts}/>
 {/if}

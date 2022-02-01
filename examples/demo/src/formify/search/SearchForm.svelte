@@ -1,15 +1,9 @@
 <script>
   import { Columns, Col, BlockTitle, Card, CardContent, Button } from '@yakit/svelte/index'
-  import { ListForm, SearchCardForm, FormifyField } from '@yakit/svelte/Formify';
-  import { transformFields } from '@yakit/core/transformer'
-
-  // import stringify from '@yakit/core/stringify'
+  import { FormifyColumns } from '@yakit/svelte/Formify';
   import stringify from 'fast-safe-stringify'
 
-  export let initData={}
-  let noref = "javascript:void(0)"
-
-  let searchConfig = {
+  let schema = {
     column1:[
       {key: "refnum", type: "input-list"},
       {key: "ponum", type: "input-wildcard"},
@@ -68,7 +62,7 @@
   let data = {}
   let state
   let formContext = undefined
-  let fieldConfig = undefined
+  let transformedSchema = undefined
 
   $: if(formContext) {
     // console.log("formContext", formContext)
@@ -89,7 +83,7 @@
 
 </script>
 
-<SearchCardForm {searchConfig} {initData} bind:data bind:formContext bind:fieldConfig/>
+<FormifyColumns {schema} bind:data bind:formContext bind:transformedSchema/>
 
 <Button class="mt-1" on:click={setPizza}>Pizza all around</Button>
 <Button class="mt-1" on:click={clearForm}>Clear</Button>
@@ -99,7 +93,7 @@
   <pre class="mt-4">state: {stringify($state, null, 2)}</pre>
 </Col>
 <Col>
-  <pre class="mt-4">translated config: {stringify(fieldConfig, null, 2)}</pre>
+  <pre class="mt-4">translated config: {stringify(transformedSchema, null, 2)}</pre>
 </Col>
 </Columns>
 

@@ -12,8 +12,6 @@ const DataApiListController = async ({ dataApi, ctx = {} }) => {
   // look into appConfig for config for columns and toolbar and setup ctx
   await ctrl.doConfig(ctx)
 
-  // let { doConfig: superDoConfig } = ctrl
-
   //overrides
   let ext = {
 
@@ -37,6 +35,10 @@ const DataApiListController = async ({ dataApi, ctx = {} }) => {
     getBulkUpdateOptions(model = {}) {
       return {}
     },
+
+    async edit(id){
+      console.log("svelte controller edit", id)
+    }
 
   }
 

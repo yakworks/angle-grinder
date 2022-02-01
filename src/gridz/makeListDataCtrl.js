@@ -33,9 +33,13 @@ const makeListDataCtrl = (opts) => {
   let ctrl = {
 
     async doConfig(ctx = {}) {
-      if(!ctrl.apiKey) ctrl.apiKey = ctrl.dataApi.key
+      ctrl.apiKey = ctrl.apiKey ? ctrl.apiKey : ctrl.dataApi.key
 
-      let apiCfg = await appConfigApi.getConfig(ctrl.apiKey)
+      let apiCfg = {}
+      if(ctrl.apiKey){
+        apiCfg = await appConfigApi.getConfig(ctrl.apiKey)
+      }
+
       if(!isEmpty(apiCfg)){
         let clonedApiCfg = cloneDeep(apiCfg)
         merge(ctx, clonedApiCfg)
@@ -99,6 +103,7 @@ const makeListDataCtrl = (opts) => {
     fireRowAction(model, menuItem) {
       switch (menuItem.key) {
         case 'edit':
+          console.log("fireRowAction", model)
           return ctrl.edit(model.id)
         case 'delete':
           return ctrl.delete(model.id)
@@ -131,6 +136,7 @@ const makeListDataCtrl = (opts) => {
     toggleDensity() { this.state.isDense = !this.state.isDense },
 
     async edit(id) {
+      console.log("edit", id)
       ctrl.gridCtrl.toggleLoading(true)
       try {
         const vm = await ctrl.dataApi.get(id)

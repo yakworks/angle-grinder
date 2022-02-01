@@ -12,8 +12,12 @@ const componentsStates = {
       component: 'formifyBasicIndex'
     },
     {
-      name: 'dynamic',
+      name: 'dynamicForm',
       component: 'formifyDynamicIndex'
+    },
+    {
+      name: 'searchForm',
+      component: 'formifySearchIndex'
     }
   ]
 

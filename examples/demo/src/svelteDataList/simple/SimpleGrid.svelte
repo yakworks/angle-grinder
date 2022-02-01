@@ -7,7 +7,7 @@
     colModel: [
       { name: 'id', label: 'id', width: 20, sorttype: 'int', align: 'right' },
       { name: 'customer.id', label: 'CustomerId', hidden: true },
-      { name: 'customer.name', label: 'Customer', formatter: 'editActionLink' },
+      { name: 'customer.name', label: 'Customer', formatter: 'editPopoverLink' },
       { name: 'amount', label: 'Amount', width: 80, formatter: 'currency' },
       { name: 'comments', label: 'Comments' },
       { name: 'hasTax', label: 'Taxable', width: 60, align: 'center', formatter: 'okIcon' } // formatter: 'okIcon' }
@@ -19,7 +19,13 @@
     gridId: 'someGrid'
   }
 
-  let ctx = {gridOptions}
+  let editForm = {
+    'customer.name':{ required: true },
+    refnum:{ required: true },
+    amount:{ type: 'number', required: true, multipleOf: 0.01 },
+    hasTax:{ type: 'boolean' }
+  }
+  let ctx = { gridOptions, editForm }
   //local, not export so not exposed
   let dataApi = sessionStores.invoice
 

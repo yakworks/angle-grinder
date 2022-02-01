@@ -1,9 +1,12 @@
 <script>
   import { setContext, createEventDispatcher, onMount } from 'svelte';
   import { get } from '@yakit/core/dash';
+  import { isEmpty } from '@yakit/core/is';
   //svelte-forms-lib
   import { createForm } from "svelte-forms-lib";
   import stringify from 'fast-safe-stringify'
+  import { _defaults } from '@yakit/core/dash'
+  import { buildYupValidation } from '@yakit/core/schema/schemaToYup'
   import {ctxKey} from './ctxKey'
   import { colorClasses } from '../shared/mixins';
   import { classNames, extend, createEmitter } from '../shared/utils';
@@ -11,26 +14,40 @@
   import { useTab } from '../shared/use-tab';
   import { setReactiveContext } from '../shared/set-reactive-context';
 
-  // mock async request
-  const makeRequest = () => new Promise(resolve => setTimeout(resolve, 1000));
-  export let initData = {};
-  export let validate = null;
-  export let validationSchema = null;
+  /**
+   * The form data. Can be bound but not updated.
+   */
   export let data = {};
+  export let schema = undefined;
 
-  export let onSubmit = () => {
-    throw new Error(
-      'onSubmit is a required property in <Form /> when using the fallback context',
-    );
-  };
-  export let context = createForm({
-    initialValues: initData,
-    onSubmit,
-    validate,
-    validationSchema,
-  });
+  export let opts = {};
+  export let defaultOpts = {
+    initData: {},
+    validate: null,
+    validationSchema: null,
+    onSubmit(vals){
+      throw new Error('onSubmit is a required property in <Form /> when using the fallback context')
+    },
+    //should form have list class and ul, set to false when using this as just a form and not a list wrapper too
+    formOnly: false,
+    showPlaceholders: false
+  }
 
-  export let formContext = context
+  _defaults(opts, defaultOpts)
+
+  //the form-lib wants this but we use initData
+  if(!isEmpty(opts.initData)) opts.initialValues = opts.initData
+
+  //the validationSchema will probably not be there so make it from the schema
+  if(!opts.validationSchema && schema){
+    opts.validationSchema = buildYupValidation(schema)
+  }
+
+  // @ts-ignore
+  export let context = createForm(opts)
+
+  //allows to bind to it from outside
+  export const formContext = context
 
   const {
     form,
@@ -46,11 +63,14 @@
     validateField,
   } = context;
 
+  /** The function used to get value form object */
   export function getValue(obj, path){
     let val = get(obj, path)
     return val === undefined ? null : val
   }
 
+  //add some of the options we might use in fields
+  let {showPlaceholders} = opts
   setContext(ctxKey, {
     form,
     data: form,
@@ -64,7 +84,8 @@
     updateTouched,
     updateValidateField,
     validateField,
-    getValue
+    getValue,
+    formOpts: {showPlaceholders}
   });
 
   $: data = $form
@@ -74,10 +95,7 @@
   let className = undefined
   export { className as class }
 
-  //should form have list class and ul, set to false when using this as just a form and not a list wrapper too
-  export let formOnly = false
   export let ul = true
-
   export let inset = false
   export let xsmallInset = false
   export let smallInset = false
@@ -119,7 +137,7 @@
   $: classes = classNames(
     className,
     {
-      'list': !formOnly,
+      'list': !opts.formOnly,
       inset,
       'xsmall-inset': xsmallInset,
       'small-inset': smallInset,
@@ -155,18 +173,23 @@
     listIsSimple: simpleList,
   }));
 
-  // function onSubmit(event) {
-  //   emit('submit', [event]);
-  // }
+  function handleSubmitIfValid(event) {
+    // let isValid = formEl.checkValidity()
+    // if(isValid){
+    //   handleSubmit(event)
+    // }
+    console.log("handleSubmitIfValid")
+    handleSubmit(event)
+  }
 
   useTab(() => form, emit);
 
 </script>
 
 <!-- svelte-ignore a11y-missing-attribute -->
-<form bind:this={formEl} class={classes} on:submit={handleSubmit} {...restProps($$restProps)} >
+<form bind:this={formEl} class={classes} on:submit={handleSubmitIfValid} {...restProps($$restProps)} >
   <slot name="before-list" />
-  {#if hasUlSlots && ul && !formOnly}
+  {#if hasUlSlots && ul && !opts.formOnly}
     <ul>
       <slot
         {form}
@@ -199,3 +222,4 @@
   {/if}
   <slot name="after-list" />
 </form>
+

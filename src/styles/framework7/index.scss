@@ -19,3 +19,13 @@ body {
   --f7-page-bg-color: #{cvar(body)};
   --f7-tabbar-link-inactive-color: #{cvar(text, light)};
 }
+
+//input mods
+.item-input-required {
+  .item-label:after {
+    margin-left: 1px;
+    content: "*";
+    color: $danger;
+    position: absolute;
+  }
+}
