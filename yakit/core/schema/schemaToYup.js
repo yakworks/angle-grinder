@@ -80,6 +80,10 @@ export function yupFromField(fieldSchema){
     }
   } else if(type === 'integer' ){
     yupFn = yup.number().integer().nullable()
+  } else if(type === 'object' ){
+    yupFn = yup.object().nullable()
+    //?? if its an object return now and dont try the other stuff
+    return yupFn
   } else {
     yupFn = yup.string().nullable()
   }

@@ -14,7 +14,7 @@
   export let ctx = undefined
   export let dataApi = undefined
 
-  export let restrictSearch = undefined
+  // export let restrictSearch = undefined
 
   let isConfigured = false
   let listController
@@ -33,6 +33,9 @@
     className,
     'gridz'
   )
+
+  // needs to be either
+  let editSchema = ctx.editPopover || ctx.editForm
 
   onMount(async () => {
     await setupListCtrl()
@@ -68,13 +71,16 @@
 {#if isConfigured }
 <div use:init class="gridz-wrapper">
   {#if ctx.toolbarOptions }
-  <ListToolbar {listController} options={ctx.toolbarOptions} />
+   <ListToolbar {listController} options={ctx.toolbarOptions} />
   {/if}
   <table class={classes} class:is-dense={$stateStore.isDense}></table>
   <div class="gridz-pager"></div>
 </div>
 
-<EditPopover {ctx} {dataApi}/>
+{#if editSchema }
+<EditPopover {ctx} {dataApi} schema={editSchema}/>
+{/if}
+
 <!-- <pre class="mb-4">state: {stringify($stateStore, null, 2)}</pre> -->
 {:else}
 <p>...loading</p>

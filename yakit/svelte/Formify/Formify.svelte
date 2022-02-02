@@ -3,7 +3,8 @@
  -->
 <script>
   import { Card, CardContent, CardFooter, Button7} from '@yakit/svelte/index'
-  import { ListForm, FormifyField } from '@yakit/svelte/Formify';
+  import ListForm from './ListForm.svelte'
+  import FormifyField from './FormifyField.svelte'
   import { transformFields } from '@yakit/core/schema/transformSchema'
   import { _defaults } from '@yakit/core/dash'
 
@@ -19,6 +20,7 @@
   export let formContext = undefined
   export let state = undefined
   export let isSubmitting = undefined
+  export let isModified = undefined
   /** The transformed schema */
   export let transformedSchema = transformFields(schema)
 
@@ -36,10 +38,13 @@
     formContext.handleSubmit()
   }
 
+  $: disableSave = !($isModified) || $isSubmitting
+
   $: if(formContext) {
     //state store
     state = formContext.state
     isSubmitting = formContext.isSubmitting
+    isModified = formContext.isModified
   }
 </script>
 
@@ -52,7 +57,7 @@
 
     <CardFooter>
       <Button7 onClick={onCancel}>Cancel</Button7>
-      <Button7 disabled={$isSubmitting} preloader loading={$isSubmitting} onClick={onSave}>Save</Button7>
+      <Button7 type=button disabled={disableSave} preloader loading={$isSubmitting} onClick={onSave}>Save</Button7>
     </CardFooter>
 
   {:else}
@@ -79,7 +84,7 @@
       </CardContent>
       <CardFooter>
         <Button7 onClick={onCancel}>Cancel</Button7>
-        <Button7 disabled={$isSubmitting} preloader loading={$isSubmitting} onClick={onSave}>Save</Button7>
+        <Button7 type=button disabled={disableSave}  preloader loading={$isSubmitting} onClick={onSave}>Save</Button7>
       </CardFooter>
     </Card>
 

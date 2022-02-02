@@ -14,7 +14,7 @@ class Log {
   }
 
   constructor() {
-    this._debug = false
+    this._debug = true
   }
 
   /**

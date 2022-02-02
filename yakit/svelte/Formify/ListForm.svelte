@@ -3,7 +3,7 @@
   import { get } from '@yakit/core/dash';
   import { isEmpty } from '@yakit/core/is';
   //svelte-forms-lib
-  import { createForm } from "svelte-forms-lib";
+  import { createForm } from "@yakit/core/schema/create-form";
   import stringify from 'fast-safe-stringify'
   import { _defaults } from '@yakit/core/dash'
   import { buildYupValidation } from '@yakit/core/schema/schemaToYup'
@@ -27,7 +27,7 @@
     validate: null,
     validationSchema: null,
     onSubmit(vals){
-      console.error("default onsubmit", vals)
+      console.error("Default onSubmit is not implemented", vals)
       // throw new Error('onSubmit is a required property in <Form /> when using the fallback context')
     },
     //should form have list class and ul, set to false when using this as just a form and not a list wrapper too

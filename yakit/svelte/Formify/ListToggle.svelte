@@ -4,7 +4,7 @@
   import { classNames } from '../shared/utils';
   import { fieldDefaults } from '@yakit/core/transformer'
   import { _defaults } from '@yakit/core/dash'
-  import { util } from "svelte-forms-lib/lib/util";
+  import { util } from '@yakit/core/schema/util'
 
   import {Toggle, ListItem}  from '../f7-components'
 
@@ -48,17 +48,21 @@
 
   $: value = getValue($form, name)
 
+  export let checked = null
+
+  $: checked = getValue($form, name) ? true : false
+
+
 </script>
 
 <ListItem>
   <span>{opts.label}</span>
   <Toggle {...listInputOpts}
     onChange={handleChange} onBlur={handleChange}
+    {checked}
     {value}
   />
 </ListItem>
-
-
 
 <!-- <input
   {name}

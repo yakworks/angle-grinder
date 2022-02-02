@@ -4,9 +4,9 @@
   import { classNames } from '../shared/utils';
   import { fieldDefaults } from '@yakit/core/transformer'
   import { _defaults, get } from '@yakit/core/dash'
-  import { util } from "svelte-forms-lib/lib/util";
+  import { util } from '@yakit/core/schema/util'
 
-  import {ListInput}  from '../f7-components'
+  import ListInput  from './ListInput.svelte'
 
   let className = undefined;
   export { className as class }
@@ -114,15 +114,8 @@
 </script>
 <!-- <ListInput {...$$props} -->
 
-{#if errorMessage}
-  <ListInput {...listInputOpts} {type} class={classes}
-    {onChange} {onBlur} {onInput} {value} >
-    <span slot="error-message"> {errorMessage} </span>
-  </ListInput>
-{:else}
-  <ListInput {...listInputOpts} {type} class={classes}
+<ListInput {...listInputOpts} {type} class={classes}
   {onChange} {onBlur} {onInput} bind:value />
-{/if}
 
 <!-- <input
   {name}

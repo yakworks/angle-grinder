@@ -1,3 +1,10 @@
+/**
+ * Moved in from https://github.com/tjinauyeung/svelte-forms-lib so we can make changes
+ * and tie it in better with the f7 way of doing things as well as our dataApi stores.
+ * Also makes it a general purpose "editor" and not just for using forms.
+ * Can check out a row and make changes
+ */
+
 import {derived, writable, get} from 'svelte/store';
 import {util} from './util';
 
@@ -8,7 +15,21 @@ function isCheckbox(element) {
   return element.getAttribute && element.getAttribute('type') === 'checkbox';
 }
 
-export const createForm = config => {
+function isFileInput(element) {
+  return element.getAttribute && element.getAttribute('type') === 'file';
+}
+
+function resolveValue(element) {
+  if (isFileInput(element)) {
+    return element.files;
+  } else if (isCheckbox(element)) {
+    return element.checked;
+  } else {
+    return element.value;
+  }
+}
+
+export const createForm = (config) => {
   let initialValues = config.initialValues || {};
 
   const validationSchema = config.validationSchema;
@@ -31,12 +52,14 @@ export const createForm = config => {
   const isSubmitting = writable(false);
   const isValidating = writable(false);
 
-  const isValid = derived(errors, $errors => {
-    const noErrors = util.getValues($errors).every(field => field === NO_ERROR);
+  const isValid = derived(errors, ($errors) => {
+    const noErrors = util
+      .getValues($errors)
+      .every((field) => field === NO_ERROR);
     return noErrors;
   });
 
-  const modified = derived(form, $form => {
+  const modified = derived(form, ($form) => {
     const object = util.assignDeep($form, false);
 
     for (let key in $form) {
@@ -46,14 +69,14 @@ export const createForm = config => {
     return object;
   });
 
-  const isModified = derived(modified, $modified => {
+  const isModified = derived(modified, ($modified) => {
     return util.getValues($modified).includes(true);
   });
 
   function validateField(field) {
     return util
       .subscribeOnce(form)
-      .then(values => validateFieldValue(field, values[field]));
+      .then((values) => validateFieldValue(field, values[field]));
   }
 
   function validateFieldValue(field, value) {
@@ -65,7 +88,7 @@ export const createForm = config => {
       return validationSchema
         .validateAt(field, get(form))
         .then(() => util.update(errors, field, ''))
-        .catch(error => util.update(errors, field, error.message))
+        .catch((error) => util.update(errors, field, error.message))
         .finally(() => {
           isValidating.set(false);
         });
@@ -75,7 +98,7 @@ export const createForm = config => {
       isValidating.set(true);
       return Promise.resolve()
         .then(() => validateFunction({[field]: value}))
-        .then(errs =>
+        .then((errs) =>
           util.update(errors, field, !util.isNullish(errs) ? errs[field] : ''),
         )
         .finally(() => {
@@ -94,25 +117,26 @@ export const createForm = config => {
   function handleChange(event) {
     const element = event.target;
     const field = element.name || element.id;
-    const value = isCheckbox(element) ? element.checked : element.value;
+    const value = resolveValue(element);
 
     return updateValidateField(field, value);
   }
 
   function handleSubmit(event) {
+    console.log("calling handleSubmit wtf?")
     if (event && event.preventDefault) {
       event.preventDefault();
     }
 
     isSubmitting.set(true);
 
-    return util.subscribeOnce(form).then(values => {
+    return util.subscribeOnce(form).then((values) => {
       if (typeof validateFunction === 'function') {
         isValidating.set(true);
 
         return Promise.resolve()
           .then(() => validateFunction(values))
-          .then(error => {
+          .then((error) => {
             if (util.isNullish(error) || util.getValues(error).length === 0) {
               clearErrorsAndSubmit(values);
             } else {
@@ -125,17 +149,19 @@ export const createForm = config => {
 
       if (validationSchema) {
         isValidating.set(true);
-
+        console.log("has validationSchema")
         return (
           validationSchema
             .validate(values, {abortEarly: false})
             .then(() => clearErrorsAndSubmit(values))
             // eslint-disable-next-line unicorn/catch-error-name
-            .catch(yupErrors => {
+            .catch((yupErrors) => {
+              console.log("has yupErrors", yupErrors.message)
+
               if (yupErrors && yupErrors.inner) {
                 const updatedErrors = getInitial.errors();
 
-                yupErrors.inner.map(error =>
+                yupErrors.inner.map((error) =>
                   util.set(updatedErrors, error.path, error.message),
                 );
 
@@ -158,9 +184,13 @@ export const createForm = config => {
   }
 
   function clearErrorsAndSubmit(values) {
+    console.log("calling onSubmit wtf?")
     return Promise.resolve()
       .then(() => errors.set(getInitial.errors()))
-      .then(() => onSubmit(values, form, errors))
+      .then(() => {
+        console.log("calling onSubmit wtf?")
+        onSubmit(values, form, errors)
+      })
       .finally(() => isSubmitting.set(false));
   }
 

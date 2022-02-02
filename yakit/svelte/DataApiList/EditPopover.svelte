@@ -8,13 +8,16 @@
   import { _defaults } from '@yakit/core/dash'
   import growl from "@yakit/ui/growl"
 
-  export let ctx = {}
-  export let dataApi = undefined
+  export let schema
+  export let ctx
+  export let dataApi
   export let opts = {}
+
 
   _defaults(opts, {
     async onSubmit(values, form, errors){
       try {
+        Log.debug("onSubmit", values)
         // await dataApi.delay(2000)
         const savedItem = await dataApi.save(values)
         ctx.gridCtrl.saveRow(editingId, savedItem)
@@ -27,7 +30,7 @@
     }
   })
   export let popoverOpened = undefined
-  export let popoverOpenEvent = undefined
+  // export let popoverOpenEvent = undefined
 
   export let formContext = undefined
   export let data = undefined
@@ -62,6 +65,7 @@
   }
 
   export let onSave = async (event) => {
+
     formContext.handleSubmit()
   }
 
@@ -87,12 +91,22 @@
 
 </script>
 
-<Popover bind:this={popoverEl} id={popoverId} bind:opened={popoverOpened} {onPopoverOpen}
-  closeByOutsideClick={false} closeByBackdropClick={false} closeOnEscape={false}>
-  <CardHeader {title}/>
-  <Formify name="formify-example" {onSave} {onCancel} {opts} schema={ctx.editForm} bind:data bind:formContext />
-</Popover>
+<div class="popover-wrap">
+  <Popover class="popover-wide" bind:this={popoverEl} id={popoverId} bind:opened={popoverOpened} {onPopoverOpen}
+    closeByOutsideClick={false} closeByBackdropClick={false} closeOnEscape={false}>
+    <CardHeader {title}/>
+    <Formify name={`${ctx.gridOptions.gridId}-edit-form`} {onSave} {onCancel} {opts} {schema} bind:data bind:formContext />
+  </Popover>
+</div>
 
+<style>
+  .popover-wrap {
+    --f7-popover-width: 300px;
+  }
+  :global(.popover-wide) {
+    width: 400px;
+  }
+</style>
 
 
 

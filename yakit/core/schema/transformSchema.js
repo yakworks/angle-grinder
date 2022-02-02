@@ -6,9 +6,11 @@
 
 import { makeLabel } from '../nameUtils'
 import { map, _defaults, pick, omit, defaultsDeep } from '../dash'
-import { isUndefined, isPlainObject } from '../is'
+import { isUndefined, isPlainObject, isEmpty } from '../is'
 
 export function transformFields(fields, ctrl) {
+  console.log("fields", fields)
+  if(isEmpty(fields)) return fields
   // if its a plain object and first key starts with column and its a columns layout
   if (isPlainObject(fields) && Object.keys(fields)[0].startsWith('column')) {
     //add the references the main fields list
@@ -64,7 +66,7 @@ function doReduce(optsAr, ctrl) {
       _defaults(field, { className: 'columns' })
     } else {
       const key = field.key
-      enumSelectOptions(field)
+      selectOptions(field)
       fieldSchemaType(field)
       fieldDefaults(key, field)
 
@@ -93,8 +95,13 @@ function doReduce(optsAr, ctrl) {
 /**
  * if enum is specified then this will setup selectOptions for it
  */
-export function enumSelectOptions(field) {
-  if(field.selectOptions) return
+export function selectOptions(field) {
+  if(field.selectOptions) {
+    if(!field.input) field.input = 'select'
+    //if isValueObject and no type is set then make it object
+    if(!field.type && field.selectOptions.isValueObject) field.type = 'object'
+    return
+  }
   const fieldEnum = field['enum']
   if(fieldEnum){
     field.selectOptions = {
@@ -121,6 +128,7 @@ export function fieldSchemaType(field) {
   } else {
     input = 'text'
   }
+  field.type = type
   field.input = input
 
 }

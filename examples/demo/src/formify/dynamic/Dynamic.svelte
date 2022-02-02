@@ -11,7 +11,8 @@
     initData: {
       name: 'Bill',
       user: {login: 'Bill'},
-      dates: { date2: '2022-01-06' }
+      dates: { date2: '2022-01-06' },
+      inactive: true
     }
   }
 
@@ -32,6 +33,13 @@
     type:{
       type: 'string',
       enum: [ 'Customer', 'Vendor', 'Prospect']
+    },
+    state:{
+      input: 'select',
+      selectOptions:{
+        isValueObject: true,
+        data:[{id:0, name: 'Open'}, {id:1, name: 'Closed'}]
+      }
     },
     inactive: {
       type: 'boolean'
@@ -82,15 +90,16 @@
       </CardContent>
     </Card>
   </Col>
+  <Col class="is-6">
+    <pre class="mt-4">field model: {stringify(data, null, 2)}</pre>
+    <pre class="mt-4">state: {stringify($state, null, 2)}</pre>
+  </Col>
 </Columns>
 <Columns>
   <Col>
     <pre class="mt-4">field model: {stringify(transformedSchema, null, 2)}</pre>
   </Col>
-  <Col>
-    <pre class="mt-4">field model: {stringify(data, null, 2)}</pre>
-    <pre class="mt-4">state: {stringify($state, null, 2)}</pre>
-  </Col>
+
 </Columns>
 
 <!-- <Button class="mt-1" on:click={setPizza}>Set Pizza</Button> -->
