@@ -3,16 +3,16 @@
   import { Page, Navbar, Block } from '@yakit/svelte/index'
   import ExampleSnippet from '../../svelte/utils/ExampleSnippet.svelte'
 
-  import Basic from './Basic.svelte'
-  import BasicRaw from '!raw-loader!./Basic.svelte'
+  import DynamicCols from './DynamicCols.svelte'
+  import DynamicColsRaw from '!raw-loader!./DynamicCols.svelte'
 </script>
 
 <Page>
   <Navbar title="Selects" backLink={true} />
   <Block>
 
-    <ExampleSnippet code={BasicRaw} horizontal={false}>
-      <Basic/>
+    <ExampleSnippet code={DynamicColsRaw} horizontal={false}>
+      <DynamicCols/>
     </ExampleSnippet>
 
   </Block>

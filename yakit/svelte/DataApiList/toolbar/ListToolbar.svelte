@@ -95,10 +95,12 @@
       </div>
     {/if}
     {#each filterVisible(opts.leftButtons) as btnItem}
-      <TbButton opts={btnItem} on:click={() => fireButtonClick(btnItem)}/>
+      {#if btnItem.popoverId}
+        <TbButton opts={btnItem} />
+      {:else}
+        <TbButton opts={btnItem} on:click={() => fireButtonClick(btnItem)}/>
+      {/if}
     {/each}
-
-    <tb-button ng-repeat="(key, btnItem) in tbCtrl.opts.leftButtons" ng-if="!(btnItem.class=='hidden')" opts="btnItem"></tb-button>
 
     {#if title}
     <div class="toolbar-title">{title}</div>

@@ -16,6 +16,8 @@ const componentsStates = {
       resolve: {
         dataApi: () => {
           let ds = dataApiFactory.customer
+          // console.log("resolve dataApi ds", ds)
+          // console.log("resolve dataApi ds.key", ds.key)
           return ds
         }
       }

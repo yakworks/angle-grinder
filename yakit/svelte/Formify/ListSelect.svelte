@@ -6,7 +6,7 @@
   import { fieldDefaults } from '@yakit/core/transformer'
   import selContext from '@yakit/ui/select/selectContext'
   import Select from 'svelte-select'
-  import ListInput  from 'framework7-svelte/esm/svelte/list-input.svelte'
+  import ListInput  from './ListInput.svelte'
   // import { classNames } from '../shared/utils';
   import ItemMulti from '../Select/ItemMulti.svelte'
   import ItemSingle from '../Select/ItemSingle.svelte'
@@ -136,7 +136,7 @@
 
 </script>
 
-<ListInput label={opts.label} clearButton={false} input={false} class={className}>
+<ListInput label={opts.label} {name} clearButton={false} input={false} class={className}>
   <div class="select-theme f7" slot="input">
       <Select containerClasses="{className}" {...opts} value={selectedItem} bind:listOpen
         on:select={handleSelect} on:clear={handleClear} bind:this={selectEl}/>

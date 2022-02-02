@@ -49,6 +49,13 @@ export default class GridDataApiCtrl {
     opts.loadui = 'block'
     this.gridOptions = opts
 
+    opts.ondblClickRow = (rowid,iRow,iCol,e) => {
+      let name = this.getColModel()[iCol]["name"]
+      console.log("ondblClickRow ID", rowid)
+      console.log("ondblClickRow Col", name)
+      // console.log("ondblClickRow", rowid,iRow,iCol,e)
+    }
+
     if(opts.hasOwnProperty('restrictSearch')) {
       this.restrictSearch = opts.restrictSearch
     }

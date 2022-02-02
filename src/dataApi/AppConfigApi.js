@@ -47,7 +47,7 @@ export class AppConfigApi {
       try{
         cfg = await kyApi.ky.get(key).json()
       } catch (er) {
-        console.error("problem getting config from server")
+        console.error("problem getting config from server", er)
       }
       _cache.set(key, cfg)
       return cfg

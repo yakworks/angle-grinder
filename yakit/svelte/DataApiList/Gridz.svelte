@@ -5,6 +5,7 @@
   import { get, writable } from 'svelte/store';
   import { onMount, onDestroy, tick } from 'svelte'
   import ListToolbar from './toolbar/ListToolbar.svelte'
+  import EditPopover from './EditPopover.svelte'
   import DataApiListController from './DataApiListController'
   import GridDataApiCtrl from '@ag/gridz/GridDataApiCtrl'
   import { classNames } from '../shared/utils';
@@ -13,7 +14,7 @@
   export let ctx = undefined
   export let dataApi = undefined
 
-  export let restrictSearch = undefined
+  // export let restrictSearch = undefined
 
   let isConfigured = false
   let listController
@@ -33,6 +34,9 @@
     'gridz'
   )
 
+  // needs to be either
+  let editSchema = ctx.editPopover || ctx.editForm
+
   onMount(async () => {
     await setupListCtrl()
   });
@@ -41,7 +45,17 @@
     listController = await DataApiListController({ dataApi, ctx })
     ctx = listController.ctx
     stateStore = listController.ctx.stateStore
+    setupToolbarOpts(ctx)
     isConfigured = true
+  }
+
+  //add popover to the createBtn
+  function setupToolbarOpts(ctx){
+    let tbopts = ctx.toolbarOptions
+    //it will always exists if tbopts is present so no null checks should be needed, just check class
+    if(tbopts && tbopts.leftButtons.create.class !== 'hidden' ){
+      tbopts.leftButtons.create['popoverId'] = `#${ctx.gridOptions.gridId}-popover-edit`
+    }
   }
 
   function init(node) {
@@ -57,15 +71,21 @@
 {#if isConfigured }
 <div use:init class="gridz-wrapper">
   {#if ctx.toolbarOptions }
-  <ListToolbar {listController} options={ctx.toolbarOptions} />
+   <ListToolbar {listController} options={ctx.toolbarOptions} />
   {/if}
   <table class={classes} class:is-dense={$stateStore.isDense}></table>
   <div class="gridz-pager"></div>
 </div>
+
+{#if editSchema }
+<EditPopover {ctx} {dataApi} schema={editSchema}/>
+{/if}
+
 <!-- <pre class="mb-4">state: {stringify($stateStore, null, 2)}</pre> -->
 {:else}
 <p>...loading</p>
 {/if}
+
 
 
 

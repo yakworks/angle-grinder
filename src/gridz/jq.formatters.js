@@ -22,9 +22,16 @@ $.extend($.fn.fmatter, {
   okIcon(cellVal, options, rowdata) {
     return cellVal ? "<i class='material-icons'>check</i>" : ''
   },
-
+  /** deprecated, old angular way */
   editActionLink(cellVal, options, rowdata) {
     return `<a class="editActionLink" href="#">${cellVal}</a>`
+  },
+  /** for the Svelte popovers */
+  editPopoverLink(cellVal, options, rowdata) {
+    // console.log("editPopoverLink", cellVal, options, rowdata)
+    const ident = rowdata['id']
+    const popoverId = `#${options.gid}-popover-edit`
+    return `<a class="editPopoverLink popover-open" href="#" data-id="${ident}" data-popover="${popoverId}">${cellVal}</a>`
   },
 
   gridLink(cellVal, options, rowdata) {

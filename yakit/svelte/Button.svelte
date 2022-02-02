@@ -112,7 +112,7 @@
   export let href = '#';
   export let target = undefined;
   export let tabLink = undefined;
-  export let tabLinkActive = false;
+  // export let tabLinkActive = false;
 
   $: hrefComputed = href === true ? '#' : href || undefined;
 

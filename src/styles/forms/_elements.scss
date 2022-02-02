@@ -74,14 +74,6 @@ input[type='number']{
   }
 }
 
-
-//##### Serious ugly hacking for html5
-input[type="date"].date5 {
-  position: relative;
-  padding-right: 0;
-  font-size: $text-sm;
-}
-
 // input[type="date"]::before, input[type="date"].date5::before{
 // 	content: attr(placeholder);
 // 	width: 100%;
@@ -118,35 +110,54 @@ see "List of symbols" below if you want another, you could also try to add a fon
 //   display:inline-block;
 // }
 
+//##### Serious ugly hacking for html5
+input[type="date"], input[type="datetime-local"]  {
+  &.date5 {
+    position: relative;
+    padding-right: 0;
+    font-size: $text-sm;
+  }
+}
+
 /* make the native arrow invisible and stretch it over the whole field so you can click anywhere in the input field to trigger the native datepicker*/
-input[type="date"]::-webkit-calendar-picker-indicator {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  width: auto;
-  height: auto;
-  color: transparent;
-  background: transparent;
+input[type="date"], input[type="datetime-local"]  {
+  &::-webkit-calendar-picker-indicator {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: auto;
+    height: auto;
+    color: transparent;
+    background: transparent;
+  }
 }
 
 /* adjust increase/decrease button */
-input[type="date"]::-webkit-inner-spin-button {
-  z-index: 1;
+input[type="date"], input[type="datetime-local"]  {
+  &::-webkit-inner-spin-button {
+    z-index: 1;
+  }
 }
 
 /* adjust clear button */
-input[type="date"]::-webkit-clear-button {
-   z-index: 1;
+input[type="date"], input[type="datetime-local"]  {
+  &::-webkit-clear-button {
+    z-index: 1;
+  }
 }
 
 .item-input-date5 {
-
-  input[type="date"]:not(.input-with-value):not(.input-focused)::before {
-    width: 100%;
-    content: attr(placeholder);
-    color: var(--f7-input-placeholder-color);
+  input[type="date"], input[type="datetime-local"] {
+    &:not(.input-with-value):not(.input-focused)::before {
+      width: 100%;
+      content: attr(placeholder);
+      color: var(--f7-input-placeholder-color);
+    }
+    &:not(.input-with-value):not(.input-focused)::-webkit-datetime-edit {
+      display:none;
+    }
   }
 
 }
