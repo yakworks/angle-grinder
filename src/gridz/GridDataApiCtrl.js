@@ -237,24 +237,27 @@ export default class GridDataApiCtrl {
   }
 
   resetSort(sortname = '', sortorder = '') {
+    console.log("resetSort",sortname,sortorder)
     const colModel = this.getParam('colModel')
     colModel.forEach(column => {
       column.lso = (column.name === sortname) || (column.name === 'id') ? sortorder : ''
     })
-
+    this.setParam({'sortMap':{}}, true)
+    let sortMap = this.getParam('sortMap')
+    console.log("resetSort sortMap",sortMap)
     this.$gridWrapper.find('span.s-ico').hide()
-    this.setParam({ sortname, sortorder }) // .trigger('reloadGrid')
+    //this.setParam({ sortname, sortorder }) // .trigger('reloadGrid')
     this.reload([{ current: true }])
-    const column = this.$gridWrapper.find(`#jqgh_${this.gridId}_id`)
-    const disabledClassName = 'ui-state-disabled'
-    column.find('.s-ico').css('display', 'inline-block')
-    if (sortorder === 'asc') {
-      column.find('.ui-icon-asc').removeClass(disabledClassName)
-      column.find('.ui-icon-desc').addClass(disabledClassName)
-    } else {
-      column.find('.ui-icon-asc').addClass(disabledClassName)
-      column.find('.ui-icon-desc').removeClass(disabledClassName)
-    }
+    // const column = this.$gridWrapper.find(`#jqgh_${this.gridId}_id`)
+    // const disabledClassName = 'ui-state-disabled'
+    // column.find('.s-ico').css('display', 'inline-block')
+    // if (sortorder === 'asc') {
+    //   column.find('.ui-icon-asc').removeClass(disabledClassName)
+    //   column.find('.ui-icon-desc').addClass(disabledClassName)
+    // } else {
+    //   column.find('.ui-icon-asc').addClass(disabledClassName)
+    //   column.find('.ui-icon-desc').removeClass(disabledClassName)
+    // }
   }
 
   // Gets a particular grid parameter
@@ -515,6 +518,7 @@ export default class GridDataApiCtrl {
       if(!_.isEmpty(q)){
         p.q = q
       }
+      Log.debug("gridLoader search " + this.dataApi.key, p)
       const data = await this.dataApi.search(p)
       // this.addJSONData(data)
     } catch (er) {

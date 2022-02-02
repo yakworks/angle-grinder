@@ -34,7 +34,7 @@ angular.module(MOD_NAME, [
       var args = Array.prototype.slice.apply(arguments)
       var options = {
         keepOriginalNames: false,
-        siblingTraversal: false
+        siblingTraversal: true
       }
 
       if (typeof args[1] === 'boolean') {
