@@ -35,7 +35,7 @@
   )
 
   // needs to be either
-  let editSchema = ctx.editPopover || ctx.editForm
+  let editSchema
 
   onMount(async () => {
     await setupListCtrl()
@@ -46,6 +46,8 @@
     ctx = listController.ctx
     stateStore = listController.ctx.stateStore
     setupToolbarOpts(ctx)
+    //needs to be either
+    editSchema = ctx.editPopover || ctx.editForm
     isConfigured = true
   }
 
