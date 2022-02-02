@@ -41,6 +41,14 @@
         data:[{id:0, name: 'Open'}, {id:1, name: 'Closed'}]
       }
     },
+    customer:{
+      input: 'select',
+      selectOptions:{
+        dataApi:{
+          key:'customer'
+        }
+      }
+    },
     inactive: {
       type: 'boolean'
     },
