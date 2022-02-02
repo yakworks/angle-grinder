@@ -712,6 +712,14 @@ export default class GridDataApiCtrl {
       const id = $(this).parents('tr:first').attr('id')
       window.location.href += (window.location.href.endsWith('/') ? '' : '/') + id
     })
+
+    jqGridEl.on('click', 'a.showLink', function(event) {
+      event.preventDefault()
+
+      const id = event.target.dataset.id
+      // const id = $(this).parents('tr:first').attr('id')
+      window.location.href += (window.location.href.endsWith('/') ? '' : '/') + id
+    })
   }
 
   setupCustomFormatters(gridCtrl, formatters, options) {

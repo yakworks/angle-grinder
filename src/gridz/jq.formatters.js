@@ -35,8 +35,15 @@ $.extend($.fn.fmatter, {
   },
 
   gridLink(cellVal, options, rowdata) {
+    Log.debug("gridLink options", options)
+    Log.debug("gridLink rowdata", rowdata)
     const id = rowdata.id
     return `<a class="gridLink" href="#" >${cellVal}</a>`
+  },
+
+  showLink(cellVal, options, rowdata) {
+    const ident = rowdata.id
+    return `<a class="showLink" data-id="${ident}" href="#" >${cellVal}</a>`
   }
 })
 

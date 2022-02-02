@@ -153,7 +153,6 @@ describe('transformFields', () => {
   describe('tranformOptions from object', function() {
     it('should tranformOptions from object', function() {
       let topts = transformFields(testSchema)
-      console.log(topts)
       topts.forEach((item, i) => {
         x(item).toEqual(resultSchema[i])
       })

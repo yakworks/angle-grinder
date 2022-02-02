@@ -120,6 +120,12 @@ export function fieldSchemaType(field) {
   //if input is specified then its been overriden so do nothing
   if(input) return
 
+  //if type is set to date then convert to standard string with format
+  if(type === 'date' || type === 'date-time') {
+    format = type
+    type = 'string'
+  }
+
   if(format === 'date' || format === 'date-time'){
     input = format
   } else if(type === 'boolean'){
