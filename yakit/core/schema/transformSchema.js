@@ -115,6 +115,7 @@ export function selectOptions(field) {
  * adds an input based on the schema type. if no schema type then defaults to type:string and input:text
  */
 export function fieldSchemaType(field) {
+  if(!field.type) field.type = 'string'
   let {type = 'string', format, input } = field
   //if input is specified then its been overriden so do nothing
   if(input) return

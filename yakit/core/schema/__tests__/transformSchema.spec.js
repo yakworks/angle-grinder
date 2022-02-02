@@ -24,7 +24,8 @@ describe('transformFields', () => {
       name: 'email',
       label: 'Email',
       placeholder: 'Email',
-      input: 'text'
+      input: 'text',
+      type:'string'
     },
     {
       type: 'string',
@@ -82,6 +83,7 @@ describe('transformFields', () => {
       label: 'Password',
       placeholder: 'Password',
       input: 'password',
+      type:'string'
     },
     {
       key: 'user.login',
@@ -91,6 +93,7 @@ describe('transformFields', () => {
       label: 'Login',
       placeholder: 'Login',
       input: 'text',
+      type:'string'
     },
     {
       key: 'dates.date1',
@@ -99,6 +102,7 @@ describe('transformFields', () => {
       label: 'Date1',
       placeholder: 'Date1',
       input: 'date-time',
+      type:'string'
     },
     {
       key: 'dates.date2',
@@ -177,7 +181,8 @@ describe('transformFields', () => {
             name: 'foo',
             input: 'text',
             label: 'Foo',
-            placeholder: 'Foo'
+            placeholder: 'Foo',
+            type:'string'
           }
         ],
         [
@@ -186,7 +191,8 @@ describe('transformFields', () => {
             name: 'bar',
             input: 'text',
             label: 'Bar',
-            placeholder: 'Bar'
+            placeholder: 'Bar',
+            type:'string'
           }
         ],
         [
@@ -195,14 +201,16 @@ describe('transformFields', () => {
             name: 'baz',
             input: 'text',
             label: 'Baz',
-            placeholder: 'Baz'
+            placeholder: 'Baz',
+            type:'string'
           },
           {
             key: 'buzz',
             name: 'buzz',
             input: 'text',
             label: 'Buzz',
-            placeholder: 'Buzz'
+            placeholder: 'Buzz',
+            type:'string'
           }
         ]]
 
