@@ -153,7 +153,6 @@
     --listShadow: var(--f7-card-box-shadow);
     --borderFocusColor: none;
     --inputPadding: 0px;
-    --height: 36px;
     --border: none;
     --padding: 0px;
     --multiSelectPadding: 0px;
@@ -163,6 +162,15 @@
     /* for now this expands the list a bit across the label */
     --listLeft: -60px;
     --listRight: -20px;
+    /* match normal form fields */
+    --height: 32px;
+    --multiItemHeight: 28px;
+    --multiClearTop: 6px;
+
+    --multiItemActiveBG: var(--color-primary);
+    --multiClearBG: var(--color-shade-35);
+    --clearSelectTop: 8px;
+    --indicatorTop: 8px;
   }
 
 </style>

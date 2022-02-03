@@ -44,7 +44,7 @@
   <ListToggle {name} {opts}/>
 {:else if input === 'chips'}
   <ListChipInput {name} {opts}/>
-{:else if input === 'input-wildcard'}
+{:else if input === 'wildcard'}
   <ListField {name} {opts} />
 {:else if input === 'date-range'}
   <ListRangeFields {name} {opts} type="date"/>
