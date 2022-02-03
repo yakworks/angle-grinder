@@ -1,3 +1,10 @@
+### v4.0.42
+
+[Full Changelog](https://github.com/yakworks/angle-grinder/compare/v4.0.40...v4.0.42)
+- set published to one that exists [link](https://github.com/yakworks/angle-grinder/commit/7499c773f649b4fecfb1356a971ff297f4fa3358)
+- bump version [link](https://github.com/yakworks/angle-grinder/commit/5cf1d56abc997bc5ce05822b5ec1834e71700f32)
+- Master release (#673) [link](https://github.com/yakworks/angle-grinder/commit/90427401edea1046b2342b88ab8657e6a47cf955)
+
 ### v4.0.40
 
 [Full Changelog](https://github.com/yakworks/angle-grinder/compare/v4.0.39...v4.0.40)
