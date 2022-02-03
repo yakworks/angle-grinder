@@ -1,9 +1,9 @@
 <script>
   import { getContext, createEventDispatcher, onMount } from 'svelte';
   import {ctxKey} from './ctxKey'
-  import { _defaults } from '@yakit/core/dash'
+  import { _defaults, cloneDeep, pick, omit } from '@yakit/core/dash'
   import Select from 'svelte-select'
-  import ListInput  from 'framework7-svelte/esm/svelte/list-input.svelte'
+  import ListInput  from './ListInput.svelte'
   import { classNames } from '../shared/utils';
   import { fieldDefaults } from '@yakit/core/transformer'
 
@@ -15,15 +15,18 @@
   export let placeholder = undefined
 
   export let opts = {}
-
-  fieldDefaults(name, opts)
+  Log.debug("Chip options", cloneDeep(opts))
+  let selectOpts = omit(opts, 'input', 'key', 'label', 'name', 'type', 'validation')
+  // fieldDefaults(name, opts)
   label = opts.label
-  placeholder = opts.placeholder ? opts.placeholder : 'Select...'
+  // placeholder = selectOpts.placeholder ? selectOpts.placeholder : 'Select...'
 
   let className = undefined;
   export { className as class }
 
-  const { form, updateValidateField, getValue } = getContext(ctxKey);
+  const { form, updateValidateField, getValue, errors, formOpts} = getContext(ctxKey);
+
+  if(!formOpts.showPlaceholders) selectOpts['placeholder'] = "..."
 
   $: selectedValue = getValue($form, name)
 
@@ -62,15 +65,15 @@
   }
 
   // create unique id if not set
-  if (!id) id = _.uniqueId('select')
+  if (!id) id = _.uniqueId('chips')
 
-  _defaults(opts, { Item, id, inputStyles, listOffset, noOptionsMessage, items, placeholder})
+  _defaults(selectOpts, { Item, id, inputStyles, listOffset, noOptionsMessage, items, placeholder})
 
 </script>
 
 <ListInput {label} clearButton={false} input={false} class={className}>
   <div class="select-theme f7" slot="input">
-      <Select isMulti isCreatable items={[]} containerClasses="{className}" {...opts} value={selectedValue}
+      <Select isMulti isCreatable items={[]} containerClasses="{className}" {...selectOpts} value={selectedValue}
         on:select={handleSelect} on:clear={handleClear} bind:this={selectEl}/>
   </div>
 </ListInput>

@@ -1,7 +1,7 @@
 <script>
   import { BlockTitle, Columns, Col, Card, CardContent,
     Select, Button, Button7, CardFooter, Link } from '@yakit/svelte/index';
-  import { ListForm, ListField, ListSelect, ListRangeFields, ListToggle } from '@yakit/svelte/Formify';
+  import { ListForm, ListField, ListSelect, ListRangeFields, ListToggle, ListChipInput } from '@yakit/svelte/Formify';
   import stringify from 'fast-safe-stringify'
 
   //array of object data. identifier defaults to id and label is name.
@@ -46,8 +46,9 @@
           <ListField name="dates.date1" type="date"/>
           <ListField name="dates.date2" type="date"/>
           <ListToggle name="toggle" />
-          <ListRangeFields name="dates.dateRange"type="date"/>
-          <ListRangeFields name="dates.amountRange"type="number"/>
+          <ListChipInput name="chips" />
+          <ListRangeFields name="dates.dateRange" type="date"/>
+          <ListRangeFields name="dates.amountRange" type="number"/>
           <ListSelect name="selects.simple" opts={{label:"Select", placeholder:"Id Value Select"}} itemData={simpleData}/>
           <ListSelect name="selects.customer"
             opts={{ label:"Select", placeholder:"Id Value Select", dataApiKey: 'customer' }}/>

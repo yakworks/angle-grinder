@@ -22,18 +22,60 @@
 
   let editForm = {
     'customer.name':{ required: true },
-    state:{
-      input: 'select',
-      selectOptions:{
-        isValueObject: true,
-        data:[{id:0, name: 'Open'}, {id:1, name: 'Closed'}]
+    // state:{
+    //   input: 'select',
+    //   selectOptions:{
+    //     isValueObject: true,
+    //     data:[{id:0, name: 'Open'}, {id:1, name: 'Closed'}]
+    //   }
+    // },
+    // refnum:{ required: true },
+    // amount:{ type: 'number', required: true, multipleOf: 0.01 },
+    // hasTax:{ type: 'boolean' }
+  }
+
+  let searchForm = {
+    column1:{
+      'refnum':{
+        input: 'chips'
+      },
+      'date':{
+        label: "Date Range",
+        input: 'date-range'
       }
     },
-    refnum:{ required: true },
-    amount:{ type: 'number', required: true, multipleOf: 0.01 },
-    hasTax:{ type: 'boolean' }
+    column2:{
+      'amount':{
+        label: "Amount Range",
+        type: "number",
+        input: 'amount-range'
+      },
+      state:{
+        input: 'select',
+        selectOptions:{
+          isValueObject: true,
+          data:[{id:0, name: 'Open'}, {id:1, name: 'Closed'}]
+        }
+      }
+    },
+    column3:{
+      customer:{
+        input: 'select',
+        selectOptions:{
+          dataApi:{
+            key:'customer'
+          }
+        }
+      },
+    }
+
   }
-  let ctx = { gridOptions, editForm }
+
+  let searchFormSimp = {
+    'customer.name':{ }
+  }
+
+  let ctx = { gridOptions, editForm, searchForm }
   //local, not export so not exposed
   let dataApi = sessionStores.invoice
 

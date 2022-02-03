@@ -35,7 +35,8 @@
   let className = undefined;
   export { className as class }
 
-  const { form, updateValidateField, getValue } = getContext(ctxKey);
+  const { form, updateValidateField, getValue, errors, formOpts } = getContext(ctxKey);
+  if(!formOpts.showPlaceholders) opts['placeholder'] = "..."
 
   /** value is the selected item or items. object or key depending on isValueObject*/
   export let value = null

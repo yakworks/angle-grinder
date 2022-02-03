@@ -125,3 +125,12 @@ $card-media-margin: $block-spacing !default;
     margin-bottom: $card-media-margin;
   }
 }
+
+.card-footer {
+
+  &.right {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+  }
+}
