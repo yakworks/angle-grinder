@@ -94,6 +94,15 @@
     --indicatorRight: 0px;
     --clearSelectRight: 0px;
     --listZIndex: 99;
+    /* match normal form fields */
+    --height: 32px;
+    --multiItemHeight: 28px;
+    --multiClearTop: 6px;
+
+    --multiItemActiveBG: var(--color-primary);
+    --multiClearBG: var(--color-shade-35);
+    --clearSelectTop: 8px;
+    --indicatorTop: 8px;
   }
 
 </style>

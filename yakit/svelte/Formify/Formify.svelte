@@ -9,6 +9,7 @@
   import { _defaults } from '@yakit/core/dash'
   import growl from "@yakit/ui/growl"
   import stringify from '@yakit/core/stringify';
+  import { classNames } from '../shared/utils';
 
   /** The form name */
   export let name
@@ -26,9 +27,18 @@
   /** The transformed schema */
   export let transformedSchema = transformFields(schema)
 
+  export let denseLayout = false
+  export let cardLayout = true
+
   let className = undefined;
   export { className as class }
+  $: formClasses = classNames(className, {
+    'formify': true,
+    'denseLayout': denseLayout,
+    'cardLayout': cardLayout
+  })
 
+  className
   let isColLayout
   $: if(transformedSchema.columns){
     isColLayout = true
@@ -60,7 +70,7 @@
   }
 </script>
 
-<ListForm class={className} {name} {opts} schema={transformedSchema} bind:data bind:formContext >
+<ListForm class={formClasses} {name} {opts} schema={transformedSchema} bind:data bind:formContext >
   {#if !isColLayout}
 
     {#each transformedSchema as field (field.key)}
@@ -80,8 +90,8 @@
       <CardContent class="p0">
         <div class="tile is-ancestor">
           {#each transformedSchema.columns as colCfg}
-          <div class="tile is-parent">
-            <Card class="tile is-child m-0" noShadow>
+          <div class="tile is-parent fields-card">
+            <Card class="tile is-child card m-0" noShadow>
               <CardContent class="p0">
                 <div class="list inline-labels">
                 <ul>
@@ -111,6 +121,44 @@
 </ListForm>
 
 <style>
+
+  :global(.formify.cardLayout) .fields-card {
+    padding: .5rem;
+  }
+
+  .denseHorizontal .fields-card :global(.tile.is-child.card)  {
+    border-right: 1px solid rgb(0 0 0 / 6%);
+    border-radius: 0px;
+  }
+
+  .denseHorizontal .fields-card {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+
+  .denseHorizontal .fields-card:first-child {
+    /* border-right: 1px solid var(--f7-list-item-border-color); */
+    padding-left: .75rem;
+  }
+
+  .denseHorizontal .fields-card:first-child :global(.tile.is-child.card)  {
+    border-radius: var(--f7-card-border-radius) 0 0 var(--f7-card-border-radius);
+  }
+
+  .denseHorizontal .fields-card:last-child :global(.tile.is-child.card)  {
+    border-radius: 0 var(--f7-card-border-radius) var(--f7-card-border-radius) 0;
+    border-right: 0px
+  }
+
+  .denseHorizontal .fields-card:last-child {
+    padding-right: .75rem;
+  }
+
+  :global(.formify) {
+    /* set the hieight so it matches the selects, intead of shrinking those down */
+
+  }
+
   :global(.search-card) {
     background-color: var(--color-body-low);
     /* z-index so drop downs dont fall behind the tolbars */
