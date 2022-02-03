@@ -29,31 +29,24 @@ angular.module(agValMod).provider('agValidationsConfig', function() {
 
     $validationStrategies: {
       invalid: function(form) {
-        // console.log("validationStrategies invalid", form.$invalid)
         return form.$invalid
       },
       submitted: function(form) {
-        // console.log("validationStrategies submitted", form.$invalid && form.$submitted)
         return form.$invalid && form.$submitted
       },
       dirty: function(form, ngModel) {
-        // console.log("validationStrategies dirty", ngModel.$invalid && ngModel.$dirty)
         return ngModel.$invalid && ngModel.$dirty
       },
       dirtyOrTouchedOrSubmitted: function(form, ngModel) {
-        // console.log("validationStrategies dirtyOrSubmitted")
         return ngModel.$invalid && (form.$submitted || ngModel.$dirty || ngModel.$touched)
       },
       dirtyOrSubmitted: function(form, ngModel) {
-        // console.log("validationStrategies dirtyOrSubmitted")
         return ngModel.$invalid && (form.$submitted || ngModel.$dirty)
       },
       focusedAndDirtyOrSubmitted: function(form, ngModel) {
-        // console.log("validationStrategies focusedAndDirtyOrSubmitted")
         return ngModel.$invalid && (ngModel.$focused && (ngModel.$dirty || form.$submitted))
       },
       dirtyAndFocusedOrSubmitted: function(form, ngModel) {
-        // console.log("validationStrategies dirtyAndFocusedOrSubmitted")
         return ngModel.$invalid && (form.$submitted || (ngModel.$dirty && ngModel.$focused))
       }
     },

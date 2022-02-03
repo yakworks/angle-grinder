@@ -2,9 +2,9 @@
 <script>
   import Comp from './Growl.svelte'
   import svelteRaw from '!raw-loader!./Growl.svelte'
-  import ExampleSnippet from '../utils/ExampleSnippet.svelte'
+  import ExamplePage from '../utils/ExamplePage.svelte'
 </script>
 
-<ExampleSnippet code={svelteRaw} >
+<ExamplePage title="Growl" code={svelteRaw} >
   <Comp/>
-</ExampleSnippet>
+</ExamplePage>

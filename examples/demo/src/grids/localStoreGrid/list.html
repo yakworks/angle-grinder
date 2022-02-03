@@ -1,11 +1,10 @@
 <div>
-  <basic-search-form ng-show="$ctrl.showSearchForm"></basic-search-form>
+  <basic-search-form ng-show="$ctrl.state.showSearchForm"></basic-search-form>
 
-  <gridz-datastore ng-if="$ctrl.isConfigured" grid-options="$ctrl.cfg.gridOptions"
-        toolbar-options="$ctrl.cfg.toolbarOptions"
-        grid-id="basicGrid"
-        list-ctrl="$ctrl">
-  </gridz-datastore>
+  <gridz-ds ng-if="$ctrl.state.isConfigured" grid-options="$ctrl.ctx.gridOptions"
+        toolbar-options="$ctrl.ctx.toolbarOptions"
+        grid-id="basicGrid" ctx="$ctrl.ctx">
+  </gridz-ds>
 
   <pre ng-cloak class="mt-4">vm: {{$ctrl.vm | json}}</pre>
   <pre ng-cloak class="mt-4">Selected Rows data: {{$ctrl.selectedRowsData | json}}</pre>

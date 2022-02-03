@@ -1,16 +1,52 @@
 import _ from 'lodash'
+import get from 'lodash/get';
 
+// function called to get data from api picklist
+async function getDataFromApi({opts, dataApi, dataApiConfig}){
+  let qExtra = dataApiConfig.q
+  let params = dataApiConfig.params || {}
+  let res = await dataApi.picklist({q: qExtra, ...params})
+  let dta = res
+  // if its an object then assume it pager object with data key
+  if (_.isPlainObject(dta)) dta = res.data
+
+  //if it has a keyField then translate it to the id, used when you want 'code' or maybe 'email' to be the key thats set
+  if(opts.fields.id !== 'id') {
+    dta = dta.map(o => {
+      return { ...o, _id: o.id, id: o[opts.fields.id]}
+    })
+  }
+  if(opts.addData) {
+    if (Array.isArray(opts.addData)) {
+      dta = [...opts.addData, ...dta]
+    } else {
+      dta = [opts.addData, ...dta]
+    }
+  }
+  return dta
+}
+
+// XXX move dataApiParams to restrictSearch for cases when we need filter by specific field always
 export function setupData(opts, dataStoreApi) {
-  if (opts.dataApiKey){
-    //if minimumInputLength is not set then load the whole dataset
+  let dataApiConfig = opts.dataApi || {}
+  let dataApiKey = get(dataApiConfig, 'key') || opts.dataApiKey
+  if (dataApiKey){
+    // setup data
+    opts.data = {}
+
+    //old way to be added to q
+    const dataApiParams = opts.dataApiParams
+    if(!dataApiConfig.q && dataApiParams) dataApiConfig.q = dataApiParams
+
+    const dataApi = get(dataStoreApi, dataApiKey)
+
     if(!opts.minimumInputLength) {
-      const dataApiKey = opts.dataApiKey
-      const dataApiParams = opts.dataApiParams
-      opts.data = { results: () => dataStoreApi[dataApiKey].picklist({q: dataApiParams}) }
+      opts.data.results = () => {
+        return getDataFromApi({opts, dataApi, dataApiConfig})
+      }
     }
     else {
-      opts.data = {}
-      opts.query = dataMinCharsQuery(opts, dataStoreApi)
+      opts.query = dataMinCharsQuery(opts, dataApi, dataApiConfig)
     }
   }
   // setup defaults for data
@@ -19,7 +55,6 @@ export function setupData(opts, dataStoreApi) {
     if (Array.isArray(opts.data)) {
       // convertSelect2Data makes ['red','green'] into [{id:'red',name'red}, etc...]
       const results = convertSelect2Data(opts.data)
-      // console.log('results', results)
       opts.data = { results: results }
     }
     if(!opts.minimumInputLength){
@@ -31,26 +66,28 @@ export function setupData(opts, dataStoreApi) {
 }
 // copied in from select2 source and modified so it works when data.results is a Promise
 export function dataQuery(opts) {
-  // console.log(`***** dataQuery for ${opts.wtf}`, opts)
   let data = opts.data // data elements
-  let getText // function used to retrieve the text portion of a data item that is matched against the search
+  // For Searching, not display
+  // function used to retrieve the text portion of a data item that is matched against the search
+  let getText
   const displayFields = opts.displayFields
 
-  if (displayFields.length > 1 ) {
-      getText = (item) => displayFields.map(text => item[text]).join(' ')
-  } else {
-      getText = (item) => opts.text(item)
-  }
+  // if (displayFields[0] === 'name') {
+  //     getText = (item) => opts.text(item)
+  // } else {
+  //   getText = (item) => displayFields.map(fld => item[fld]).join(' ')
+  // }
+  getText = (item) => displayFields.map(fld => item[fld]).join(' ')
 
 
   // make results a function if its not
-  if (!$.isFunction(data?.results)) {
+  if (!_.isFunction(data?.results)) {
     const dres = data.results
     data.results = () => dres
   }
 
   // make data a function if its not
-  if ($.isFunction(data) === false) {
+  if (_.isFunction(data) === false) {
     const tmp = data
     data = function() { return tmp }
   }
@@ -63,6 +100,7 @@ export function dataQuery(opts) {
     opts.dataResults = opts.dataResults || data().results()
     if (t === '') {
       Promise.resolve(opts.dataResults).then(res => {
+
         let dta = res
         // if its an object then assume it pager object with data key
         if (_.isPlainObject(res)) dta = res.data
@@ -92,7 +130,6 @@ export function dataQuery(opts) {
     Promise.resolve(opts.dataResults).then(res => {
       let dta = res
       if(!res) console.log("dataQuery empty promise resolved ")
-      // console.log("**** resolved dataQuery options", opts)
       // if its an object then assume it pager object with data key
       if (_.isPlainObject(res)) dta = res.data
       if(dta){
@@ -125,8 +162,7 @@ export function convertSelect2Data(strArray, textFieldKey = 'name') {
 }
 
 // if minimumInputLength > 0 then query api as they type
-export function dataMinCharsQuery(opts, dataStoreApi) {
-  // console.log(`***** dataMinCharsQuery for ${opts.wtf}`, opts)
+export function dataMinCharsQuery(opts, dataApi, dataApiConfig) {
   let timeout
   let quietMillis = opts.quietMillis || 500
 
@@ -137,9 +173,10 @@ export function dataMinCharsQuery(opts, dataStoreApi) {
     window.clearTimeout(timeout)
     // quietMillis to wait until done typing,
     timeout = window.setTimeout(function() {
-      let q = query.term
-      const dataApiKey = opts.dataApiKey
-      let picklistQuery = () => dataStoreApi[dataApiKey].picklist({q: q })
+      let qSearch = query.term
+      let qExtra = dataApiConfig.q
+      let params = dataApiConfig.params || {}
+      let picklistQuery = () => dataApi.picklist({qSearch, q: qExtra, ...params})
       let dataResults = picklistQuery()
 
       Promise.resolve(dataResults).then(response => {

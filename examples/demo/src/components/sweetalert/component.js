@@ -1,6 +1,6 @@
 import template from './component.html'
-import Swal from 'angle-grinder/src/tools/swal'
-import toast from 'angle-grinder/src/tools/toast'
+import Swal from '@yakit/ui/swal'
+import toast from '@yakit/ui/growl'
 
 class controller {
 
@@ -10,7 +10,6 @@ class controller {
   }
 
   buttonClick(event) {
-    // console.log('menuItemClick params', { menuItem, event })
     Swal.fire(
       'The Title',
       'Some Text or <strong>html</strong>'
@@ -87,7 +86,6 @@ class controller {
       confirmButtonText: 'Change Name',
       showCancelButton: true
     })
-    console.log('result', result)
 
     toast.success(`your foo is now named ${result.value}`, 'Named Foo!')
   }

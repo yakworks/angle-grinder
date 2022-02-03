@@ -1,3 +1,5 @@
+import dataApiFactory from '~/store/dataApiFactory'
+
 const componentsStates = {
   name: 'svelteComponents',
   abstract: true,
@@ -25,8 +27,10 @@ const componentsStates = {
     { name: 'itemBlocks', component: 'svelteItemsIndex' },
     { name: 'lists', component: 'svelteListsIndex' },
     { name: 'selects', component: 'svelteSelectsIndex' },
-    { name: 'gridz', component: 'svelteGridzIndex' },
     { name: 'toolbar', component: 'svelteToolbarIndex' },
+    { name: 'popover', component: 'sveltePopoverIndex' },
+    { name: 'tabs', component: 'svelteTabsIndex' },
+    { name: 'Dynamic Form', component: 'svelteSearchFormIndex' },
   ]
 }
 

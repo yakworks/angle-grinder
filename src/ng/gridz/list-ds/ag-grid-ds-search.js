@@ -1,0 +1,28 @@
+// import _ from 'lodash'
+
+const template = `
+<div class="pt-2">
+  <ag-formly-form ag-form is-horizontal model="listCtrl.searchModel" class="extended-search-form "
+    fields="listCtrl.ctx.searchForm" form="listCtrl.searchFormCtrl" ctrl="listCtrl" is-columns="true" is-search="true">
+    <ag-ok-cancel ok-label="Search"
+      ok-click="listCtrl.search(listCtrl.searchModel)"
+      cancel-click="listCtrl.searchReset(agForm)"
+      cancel-label="Reset"
+      is-loading="listCtrl.isSearching">
+    </ag-ok-cancel>
+  </ag-formly-form>
+
+</div>
+`
+
+export default {
+  template: template,
+  controller: ['$scope', function($scope) {
+    this.$onInit = () => {
+      $scope.listCtrl = this.listCtrl
+    }
+  }],
+  bindings: {
+    listCtrl: '<'
+  }
+}

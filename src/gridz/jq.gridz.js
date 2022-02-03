@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import _ from 'lodash'
-import Log from '../utils/Log'
+import Log from '@yakit/core/logger'
 
 /**
  * jquery library to wrap jqgrid and add our defaults
@@ -119,15 +119,12 @@ class Gridz {
       this.setGridParam({ sortMap:{} }, true)
       return
     }
-    // console.log("grid sortname", sortname)
-    // console.log("grid sort x", x)
-    // console.log("grid order", order)
-    //no put it alltogether so we can split and make it a map form
+    //now put it alltogether so we can split and make it a map form
     let sortJoined = sortname + ` ${order}`
     const sortMap = {} //will get populated at the end
     const sortArray = sortJoined.split(', ')
     const hasId = sortArray.find(el => el.startsWith('id'))
-    console.log("sortArray", sortArray)
+
 
     // see above notes, we remove the id sort so its doesn't cause problems when its part of multi
     if (this.options.multiSort && sortArray.length > 1 && hasId) {
@@ -138,11 +135,13 @@ class Gridz {
       })
       sortArray = newSortArray
     }
-
     sortArray.forEach(sortCol => {
       let sortArray = sortCol.split(' ')
       sortMap[sortArray[0]] = sortArray[1]
     })
+
+    // console.log("this.options.multiSort ", this.options.multiSort )
+    // console.log("sortArray / sortmap", sortArray, sortMap)
 
     //now clean up the defaults that jqGrid expects using the order param
     //remove last item and put order part back in sortorder
@@ -152,7 +151,8 @@ class Gridz {
     let sortorder = lastItem[1].trim()
     //id back on to the end of it if its there
     sortname = sortArray.join(', ')
-    this.setGridParam({ sortname, sortorder, sortMap })
+
+    this.setGridParam({ sortname, sortorder, sortMap }, true)
 
   }
 
@@ -348,6 +348,7 @@ $.fn.gridz.defaults = {
   autowidth: true,
   height: '100%',
   sortable: true,
+  multiSort: false,
   multiselect: true, // one or more row selections
   viewrecords: true, // shows beginning and ending record number in the grid, out of the total number of records in the query.
   // Specify records info format

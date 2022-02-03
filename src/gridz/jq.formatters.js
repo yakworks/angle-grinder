@@ -1,39 +1,49 @@
 /* eslint-disable no-unused-vars */
-import { isoDateToDisplay } from '../utils/dateSupport'
+import { isoDateToDisplay } from '@yakit/core/date/dateSupport'
+import fmt from '@yakit/core/formatters'
 
 // Extra formatters for jqGrid
 $.extend($.fn.fmatter, {
 
   date(cellVal, options) {
-    const dateVal = isoDateToDisplay(cellVal)
+    const dateVal = fmt.date(cellVal)
     return columnAligner('date', dateVal, options)
   },
 
   // use `agCurrencyFilter` for format currencies
   currency(cellVal, options) {
-    return columnAligner('currency', window.agCurrencyFilter(cellVal), options)
+    return columnAligner('currency', fmt.amount(cellVal), options)
   },
 
-  // use `agCurrencyFilter` for format currencies, use 0 for empty/null/undefined value
   currencyOrZero(cellVal, options) {
-    let newCellVal = cellVal
-    if ((typeof (cellVal) === 'undefined') || (cellVal === null) || (cellVal === 'null') || (cellVal === '')) {
-      newCellVal = 0
-    }
-    return columnAligner('currency', newCellVal, options)
+    return columnAligner('currency', fmt.amount(cellVal), options)
   },
 
   okIcon(cellVal, options, rowdata) {
-    return cellVal ? "<i class='fas fa-check'></i>" : ''
+    return cellVal ? "<i class='material-icons'>check</i>" : ''
   },
-
+  /** deprecated, old angular way */
   editActionLink(cellVal, options, rowdata) {
     return `<a class="editActionLink" href="#">${cellVal}</a>`
   },
+  /** for the Svelte popovers */
+  editPopoverLink(cellVal, options, rowdata) {
+    // console.log("editPopoverLink", cellVal, options, rowdata)
+    const ident = rowdata['id']
+    const popoverId = `#${options.gid}-popover-edit`
+    return `<a class="editPopoverLink popover-open" href="#" data-id="${ident}" data-popover="${popoverId}">${cellVal}</a>`
+  },
 
   gridLink(cellVal, options, rowdata) {
+    Log.debug("gridLink options", options)
+    Log.debug("gridLink rowdata", rowdata)
     const id = rowdata.id
     return `<a class="gridLink" href="#" >${cellVal}</a>`
+  },
+
+  showLink(cellVal, options, rowdata) {
+    const ident = rowdata.id
+    return `<a class="showLink" data-id="${ident}" href="#" >${cellVal}</a>`
   }
 })
 

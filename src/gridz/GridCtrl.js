@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars */
-import { makeLabel } from '../utils/nameUtils'
+import { makeLabel } from '@yakit/core/nameUtils'
 import { xlsData, csvData } from './excelExport'
-import flattenObject from '../utils/flattenObject'
-import toast from '../tools/growl'
+import flattenObject from '@yakit/core/flattenObject'
+import toast from '@yakit/ui/growl'
 import _ from 'lodash'
 
 export default class GridCtrl {
@@ -26,6 +26,10 @@ export default class GridCtrl {
     const opts = gridOptions
     opts.loadui = 'block'
     this.gridOptions = opts
+
+    if(opts.hasOwnProperty('restrictSearch')) {
+      this.restrictSearch = opts.restrictSearch
+    }
 
     const $jqGrid = $(jqGridElement)
     this.jqGridEl = $jqGrid
@@ -77,7 +81,6 @@ export default class GridCtrl {
 
   //initialize the grid the jquery way
   initGridz(){
-    // console.log({opt: this.gridOptions})
     this.jqGridEl.gridz(this.gridOptions)
     // setupFilterToolBar(options)
   }
@@ -255,25 +258,23 @@ export default class GridCtrl {
   // where the name is the name of the column as described in the colModel
   // and the value is the new value.
   updateRow(id, data, emptyMissingCells) {
-    if (emptyMissingCells == null) { emptyMissingCells = true }
-    const flatData = flattenObject(data)
+     if (emptyMissingCells == null) { emptyMissingCells = true }
+     const flatData = flattenObject(data)
 
-    const prevData = this.getRowData(id)
-    if (!_.isNil(prevData)) {
-      // retrieve a list of removed keys
-      let diff = _.difference(Object.keys(prevData), Object.keys(flatData))
+    // const prevData = this.getRowData(id)
+    // if (!_.isNil(prevData)) {
+    //   // retrieve a list of removed keys
+    //   let diff = _.difference(Object.keys(prevData), Object.keys(flatData))
+    //   // filter out restricted (private) columns like `-row_action_col`
+    //   const restrictedColumns = key => !key.match(/^-/)
+    //   diff = diff.filter(restrictedColumns)
+    //   // set empty values
+    //   if (emptyMissingCells) {
+    //     for (const key of Array.from(diff)) { flatData[key] = null }
+    //   }
+    // }
 
-      // filter out restricted (private) columns like `-row_action_col`
-      const restrictedColumns = key => !key.match(/^-/)
-      diff = diff.filter(restrictedColumns)
-
-      // set empty values
-      if (emptyMissingCells) {
-        for (const key of Array.from(diff)) { flatData[key] = null }
-      }
-    }
-
-    this.jqGridEl.setRowData(id, flatData)
+    this.jqGridEl.setRowData(id, {...flatData, ...data})
     this.flashOnSuccess(id)
     return this.jqGridEl.trigger('gridz:rowUpdated', [id, data])
   }
@@ -282,11 +283,12 @@ export default class GridCtrl {
   // the position specified (first in the table, last in the table or before or after the row specified in srcrowid).
   // The syntax of the data object is: {name1:value1,name2: value2...}
   // where name is the name of the column as described in the colModel and the value is the value.
-  addRow(id, data, position) {
-    if (position == null) { position = 'first' }
-    this.jqGridEl.addRowData(id, flattenObject(data), position)
-    this.jqGridEl.trigger('gridz:rowAdded', [id, data])
-    return this.flashOnSuccess(id)
+  addRow(id, data, position = 'first' ) {
+    // const flatData = flattenObject(data)
+    // console.log("addRow", data)
+    this.jqGridEl.addRowData(id, data, position)
+    this.flashOnSuccess(id)
+    return this.jqGridEl.trigger('gridz:rowAdded', [id, data])
   }
 
   // Returns `true` if the grid contains a row with the given id
@@ -422,10 +424,11 @@ export default class GridCtrl {
     this.toggleLoading(true)
     try {
       //we use the sortMap that constructed in jq.gridz so remove the sort and order
-      delete p.order; delete p.sort;
+
       let sortMap = this.getParam('sortMap')
       // console.log('sortMap', sortMap)
       if(sortMap){
+        delete p.order; delete p.sort;
         p.sort = sortMap
       }
 
@@ -502,15 +505,12 @@ export default class GridCtrl {
         const link = document.createElement('a')
         link.href = dataUri
         link.setAttribute('download', 'download.xls')
-        document.body.appendChild(link)
-        const clickev = document.createEvent('MouseEvents')
-        // initialize the event
-        clickev.initEvent('click', true, true)
-        // trigger the event
-        return link.dispatchEvent(clickev)
+        link.click()
       }
+
     }
   }
+
 
   getCsvData() {
     return csvData(this.getGridId(), this.getSelectedRowIds())

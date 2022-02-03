@@ -3,8 +3,14 @@ import dataApiFactory from '../store/dataApiFactory'
 const gridsStates = {
   name: 'grids',
   abstract: true,
-  template: '<div ui-view class="fade-in-up"></div>',
+  template: `\
+  <div class="page">
+    <div class="page-content">
+      <div class="block"><div ui-view></div></div>
+    </div>
+  </div>`,
   data: {
+    title: 'Angular Grids',
     icon: 'mdi mdi-table-large'
   },
   children: [
@@ -28,7 +34,6 @@ const gridsStates = {
         apiKey: () => 'customer',
         dataApi: () => {
           let ds = dataApiFactory.customer
-          console.log("dataApiFactory.customer", ds)
           return ds
         },
         // gridOptions: () => ({multiSort: true}),

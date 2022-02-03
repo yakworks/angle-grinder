@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars, eqeqeq, no-redeclare, no-unmodified-loop-condition */
 import angular from 'angular'
-// import Log from 'angle-grinder/src/utils/Log'
+// import Log from '@yakit/core/Log'
 import _ from 'lodash'
-import { getIconClass } from '../../utils/icon'
+import { getIconClass } from '@yakit/ui/icon'
 
 /**
  * taken from https://github.com/Templarian/ui.bootstrap.contextMenu

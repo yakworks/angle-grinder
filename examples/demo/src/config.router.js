@@ -1,6 +1,6 @@
 // import angular from 'angular'
 import { packet, fresh, login } from './routerStates'
-import appState from 'angle-grinder/src/tools/AppState'
+import appState from '@yakit/ui/AppState'
 import stateHelperInit from 'angle-grinder/src/ng/uirouter/stateHelperInit'
 import _ from 'lodash'
 
@@ -32,7 +32,6 @@ angular.module('app')
     // stateHelperProvider.state(packetCopy)
     // appState.packetStates = packetCopy
 
-    // console.log("appState.routerStates", appState.routerStates)
     // $stateProvider.state({
     //   name: 'fresh',
     //   url: '/fresh',

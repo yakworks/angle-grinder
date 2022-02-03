@@ -1,10 +1,31 @@
+@use "../tools/cssVars";
+
 // these are hacks to get things tied together
 body {
-  overflow: auto; //FIXME need to sort out scrolling for the page containers and remove this
-  position: unset; //unsets the relative that f7 sets, not sure why or the implications here
-  height: unset;
+  // overflow: auto; //FIXME need to sort out scrolling for the page containers and remove this
+  // position: unset; //unsets the relative that f7 sets, not sure why or the implications here
+  // height: unset;
 }
 
 .aurora {
   --f7-card-box-shadow: #{$shadow};
+}
+
+.toolbar.tabbar {
+  background-color: transparent;
+}
+
+:root {
+  --f7-page-bg-color: #{cvar(body)};
+  --f7-tabbar-link-inactive-color: #{cvar(text, light)};
+}
+
+//input mods
+.item-input-required {
+  .item-label:after {
+    margin-left: 1px;
+    content: "*";
+    color: $danger;
+    position: absolute;
+  }
 }

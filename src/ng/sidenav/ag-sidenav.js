@@ -1,4 +1,4 @@
-import appState from '../../tools/AppState'
+import appState from '@yakit/ui/AppState'
 
 const SIDENAV_MENU_LIST_ITEM = '.sidenav-menu .list-item'
 
@@ -25,7 +25,6 @@ class controller {
   constructor($timeout) {
     this.$timeout = $timeout
     this.$state = appState.$state
-    // console.log(appState.$state.get())
     this.appState = appState
     this.layout = appState.layout
     this.sideMenuItems = appState.sideMenuConfig.children

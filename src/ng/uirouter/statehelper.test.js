@@ -1,5 +1,5 @@
 /* globals: beforeEach, describe, it, module, inject, expect */
-import agMod from '~/angle-grinder'
+import agMod from '@ag/angle-grinder'
 
 describe('ui-router.stateHelper', function() {
   var stateHelperProvider, $stateProvider, rootState, expectedState

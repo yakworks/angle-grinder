@@ -38,6 +38,14 @@
       displayFields:['num', 'name'] }">
 </ag-select>
 
+<ag-select name="agSelect-custNum" ng-model="$ctrl.vm.custNum"
+    select-options="{
+      dataApiKey: 'customer',
+      fields: {id: 'num', text: 'num'},
+      addData: {id: '*', num: '*'}
+     }">
+</ag-select>
+
 <ag-select name="agSelect" ng-model="$ctrl.vm.custParams"
     select-options="{ dataApiKey: 'customer', dataApiParams: {country: 'US'} }"></ag-select>
 <ag-select name="agSelect" ng-model="$ctrl.vm.custMulti"
@@ -56,7 +64,7 @@
   select-options="{ multiple: true, closeOnSelect: false, useDataObject:false, data: $ctrl.colorData}"></ag-select>
 <p>id only</p>
 <ag-select name="userId" ng-model="$ctrl.vm.userId" required
-  select-options="{data: $ctrl.peopleData}">
+  select-options="{data: $ctrl.peopleData, fields: { id: 'email', text: 'name'}}">
 </ag-select>
 <p>using ag-select component useDataObject:true on single select</p>
 <ag-select ng-model="$ctrl.vm.user" required

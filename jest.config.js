@@ -9,6 +9,7 @@ module.exports = {
 		* transform any svelte components in node_modules with svelte-jester
 		*/
 		'node_modules/.+\\.svelte$': ['svelte-jester'],
+    // 'node_modules/.+\\.m?(j|t)s$': 'babel-jest'
 	},
 	moduleFileExtensions: ['js', 'svelte'],
 	bail: false,

@@ -1,7 +1,7 @@
 import AgBaseControl from '../AgBaseControl'
 // see https://mymth.github.io/vanillajs-datepicker/#/
 import { Datepicker } from 'vanillajs-datepicker'
-import { mergeDatepickerOpts, isoDateToDisplay, displayDateToIso } from '../../../utils/dateSupport'
+import { mergeDatepickerOpts, isoDateToDisplay, displayDateToIso } from '@yakit/core/date/dateSupport'
 // import Log from '../../../utils/Log'
 // import _ from 'lodash'
 
@@ -72,7 +72,7 @@ class Controller extends AgBaseControl {
 
 const template = `
 <input
-  type="text"
+  type="date"
   class="input is-datepicker"
   ng-class="$ctrl.inputClass"
   placeholder="{{$ctrl.placeholder}}"

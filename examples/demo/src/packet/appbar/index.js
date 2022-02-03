@@ -1,4 +1,4 @@
-import appState from 'angle-grinder/src/tools/AppState'
+import appState from '@yakit/ui/AppState'
 
 class controller {
   constructor($rootScope) {

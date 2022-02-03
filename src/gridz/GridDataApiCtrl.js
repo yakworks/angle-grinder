@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars */
-import { makeLabel } from '../utils/nameUtils'
+import { makeLabel } from '@yakit/core/nameUtils'
 import { xlsData, csvData } from './excelExport'
-import flattenObject from '../utils/flattenObject'
-import toast from '../tools/growl'
+import flattenObject from '@yakit/core/flattenObject'
+import toast from '@yakit/ui/growl'
 import _ from 'lodash'
 import { subscribe } from 'svelte/internal'
 
@@ -12,8 +12,9 @@ export default class GridDataApiCtrl {
   unsubs = []
   highlightClass = 'ui-state-highlight'
   systemColumns = ['cb', '-row_action_col']
-  isDense = false
-  showSearchForm = false
+  isDense = false //DEPRECATED dont ue
+  // injected
+  ctx
 
   defaultCtxMenuOptions = {
     edit: {
@@ -26,23 +27,52 @@ export default class GridDataApiCtrl {
     }
   }
 
-  setupGrid(gridWrapper, jqGridElement, gridOptions) {
-    const opts = gridOptions
+  setupAndInit(wrapperNode, context) {
+    this.ctx = context
+    const gridWrapper = $(wrapperNode)
+    const gridEl = gridWrapper.find('table.gridz')
+    this.setupGrid(gridWrapper, gridEl)
+    this.initGridz()
+
+    return this.ctx
+  }
+
+  setupGrid(gridWrapper, jqGridElement) {
+
+    // this.ctx = ctx
+    const opts = this.ctx.gridOptions
+    //assign itself so parents can see it
+    this.ctx.gridCtrl = this
+    // shortcut shared state
+    // this.state = _.merge(this.state, this.ctx.state)
+    this.stateStore = this.ctx.stateStore
     opts.loadui = 'block'
     this.gridOptions = opts
+
+    opts.ondblClickRow = (rowid,iRow,iCol,e) => {
+      let name = this.getColModel()[iCol]["name"]
+      console.log("ondblClickRow ID", rowid)
+      console.log("ondblClickRow Col", name)
+      // console.log("ondblClickRow", rowid,iRow,iCol,e)
+    }
+
+    if(opts.hasOwnProperty('restrictSearch')) {
+      this.restrictSearch = opts.restrictSearch
+    }
 
     const $jqGrid = $(jqGridElement)
     this.jqGridEl = $jqGrid
     this.$gridWrapper = $(gridWrapper)
 
-    if (!this.gridId && !_.isNil(opts.gridId)) {
-      this.gridId = opts.gridId
+    //we need uniq gridId for cases if 2 grids on one page, in other case pagers will be messed
+    if (!this.gridId) {
+      //if no gridId is specified in opts, then generate it based on apiKey
+      this.gridId =  opts.gridId || opts.dataApi?.key?.replace('/', '_')
     }
     $jqGrid.attr('id', this.gridId)
 
-
     let optsToMerge = _.pick(opts, [
-      'showSearchForm', 'dataApi', 'initSearch', 'restrictSearch', 'contextMenuClick'
+      'dataApi', 'initSearch', 'restrictSearch', 'contextMenuClick'
     ])
     _.mergeWith(this, optsToMerge, (obj, optVal) => {
       //dont merge val if its null
@@ -61,9 +91,17 @@ export default class GridDataApiCtrl {
       if (opts.eventHandlers?.onSelect && _.isFunction(opts.eventHandlers.onSelect)) {
         opts.eventHandlers.onSelect(rowId, status, event)
       }
+
       this.hasSelected = (this.getSelectedRowIds().length > 0)
+
+      this.ctx.stateStore.update( state => {
+        state.hasSelected = this.hasSelected
+        return state
+      })
+
       $jqGrid.trigger('gridz:selectedRows', [this.getSelectedRowIds()])
     }
+
     $jqGrid.on('jqGridSelectRow', onSelect)
     $jqGrid.on('jqGridSelectAll', onSelect)
 
@@ -79,20 +117,17 @@ export default class GridDataApiCtrl {
     this.setupFormatters(this, $jqGrid, opts)
     this.formatters && this.setupCustomFormatters(this, this.formatters, opts)
 
-    console.log("pageViewStore.subscribe")
     // adds the listener to the store
     const unsubscribe = this.dataApi.pageViewStore.subscribe(data => {
-      // console.log("dataApi.currentPage")
       this.addJSONData(data)
     });
     this.unsubs.push(unsubscribe)
+
   }
 
   //initialize the grid the jquery way
   initGridz(){
-    // console.log({opt: this.gridOptions})
     this.jqGridEl.gridz(this.gridOptions)
-    // setupFilterToolBar(options)
   }
 
   // the jqGrid table element
@@ -148,6 +183,12 @@ export default class GridDataApiCtrl {
     return this.jqGridEl.getRowData()
   }
 
+  updateFooter(data) {
+    setTimeout(_ => {
+      this.getGridEl().footerData('set', data)
+    })
+  }
+
   // Populates the grid with the given data.
   addJSONData(data) {
     //FIXME HACK not sure why we need to do this
@@ -196,24 +237,27 @@ export default class GridDataApiCtrl {
   }
 
   resetSort(sortname = '', sortorder = '') {
+    console.log("resetSort",sortname,sortorder)
     const colModel = this.getParam('colModel')
     colModel.forEach(column => {
       column.lso = (column.name === sortname) || (column.name === 'id') ? sortorder : ''
     })
-
+    this.setParam({'sortMap':{}}, true)
+    let sortMap = this.getParam('sortMap')
+    console.log("resetSort sortMap",sortMap)
     this.$gridWrapper.find('span.s-ico').hide()
-    this.setParam({ sortname, sortorder }) // .trigger('reloadGrid')
+    //this.setParam({ sortname, sortorder }) // .trigger('reloadGrid')
     this.reload([{ current: true }])
-    const column = this.$gridWrapper.find(`#jqgh_${this.gridId}_id`)
-    const disabledClassName = 'ui-state-disabled'
-    column.find('.s-ico').css('display', 'inline-block')
-    if (sortorder === 'asc') {
-      column.find('.ui-icon-asc').removeClass(disabledClassName)
-      column.find('.ui-icon-desc').addClass(disabledClassName)
-    } else {
-      column.find('.ui-icon-asc').addClass(disabledClassName)
-      column.find('.ui-icon-desc').removeClass(disabledClassName)
-    }
+    // const column = this.$gridWrapper.find(`#jqgh_${this.gridId}_id`)
+    // const disabledClassName = 'ui-state-disabled'
+    // column.find('.s-ico').css('display', 'inline-block')
+    // if (sortorder === 'asc') {
+    //   column.find('.ui-icon-asc').removeClass(disabledClassName)
+    //   column.find('.ui-icon-desc').addClass(disabledClassName)
+    // } else {
+    //   column.find('.ui-icon-asc').addClass(disabledClassName)
+    //   column.find('.ui-icon-desc').removeClass(disabledClassName)
+    // }
   }
 
   // Gets a particular grid parameter
@@ -276,24 +320,22 @@ export default class GridDataApiCtrl {
     if (emptyMissingCells == null) { emptyMissingCells = true }
     const flatData = flattenObject(data)
 
-    const prevData = this.getRowData(id)
-    if (!_.isNil(prevData)) {
-      // retrieve a list of removed keys
-      let diff = _.difference(Object.keys(prevData), Object.keys(flatData))
+   // const prevData = this.getRowData(id)
+   // if (!_.isNil(prevData)) {
+   //   // retrieve a list of removed keys
+   //   let diff = _.difference(Object.keys(prevData), Object.keys(flatData))
+   //   // filter out restricted (private) columns like `-row_action_col`
+   //   const restrictedColumns = key => !key.match(/^-/)
+   //   diff = diff.filter(restrictedColumns)
+   //   // set empty values
+   //   if (emptyMissingCells) {
+   //     for (const key of Array.from(diff)) { flatData[key] = null }
+   //   }
+   // }
 
-      // filter out restricted (private) columns like `-row_action_col`
-      const restrictedColumns = key => !key.match(/^-/)
-      diff = diff.filter(restrictedColumns)
-
-      // set empty values
-      if (emptyMissingCells) {
-        for (const key of Array.from(diff)) { flatData[key] = null }
-      }
-    }
-
-    this.jqGridEl.setRowData(id, flatData)
-    this.flashOnSuccess(id)
-    return this.jqGridEl.trigger('gridz:rowUpdated', [id, data])
+   this.jqGridEl.setRowData(id, {...flatData, ...data})
+   this.flashOnSuccess(id)
+   return this.jqGridEl.trigger('gridz:rowUpdated', [id, data])
   }
 
   // Inserts a new row with id = rowid containing the data in data (an object) at
@@ -302,9 +344,11 @@ export default class GridDataApiCtrl {
   // where name is the name of the column as described in the colModel and the value is the value.
   addRow(id, data, position) {
     if (position == null) { position = 'first' }
-    this.jqGridEl.addRowData(id, flattenObject(data), position)
-    this.jqGridEl.trigger('gridz:rowAdded', [id, data])
-    return this.flashOnSuccess(id)
+    const flatData = flattenObject(data)
+    console.log("addRow", data)
+    this.jqGridEl.addRowData(id, data, position)
+    this.flashOnSuccess(id)
+    return this.jqGridEl.trigger('gridz:rowAdded', [id, data])
   }
 
   // Returns `true` if the grid contains a row with the given id
@@ -399,7 +443,6 @@ export default class GridDataApiCtrl {
 
   // Sets the grid search filters and triggers a reload
   async search(q, queryText) {
-    console.log("GridCtrl search called with  ", q)
     try {
       this.isSearching = true
       const params = {
@@ -445,14 +488,13 @@ export default class GridDataApiCtrl {
    * @param {*} p the params to send to search
    */
   async gridLoader(p) {
-    console.log("gridLoader called with ", p)
     this.toggleLoading(true)
     try {
       //we use the sortMap that constructed in jq.gridz so remove the sort and order
-      delete p.order; delete p.sort;
+
       let sortMap = this.getParam('sortMap')
-      console.log('sortMap', sortMap)
       if(sortMap){
+        delete p.order; delete p.sort;
         p.sort = sortMap
       }
 
@@ -476,6 +518,7 @@ export default class GridDataApiCtrl {
       if(!_.isEmpty(q)){
         p.q = q
       }
+      Log.debug("gridLoader search " + this.dataApi.key, p)
       const data = await this.dataApi.search(p)
       // this.addJSONData(data)
     } catch (er) {
@@ -510,6 +553,7 @@ export default class GridDataApiCtrl {
 
   // @ts-ignore
   xlsExport() {
+    console.log('xlsExport', this.getSelectedRowIds())
     if (this.getSelectedRowIds().length !== 0) {
       // if browser is IE then open new window and show SaveAs dialog, else use dataUri approach
       // can this part be deprecated?
@@ -531,12 +575,7 @@ export default class GridDataApiCtrl {
         const link = document.createElement('a')
         link.href = dataUri
         link.setAttribute('download', 'download.xls')
-        document.body.appendChild(link)
-        const clickev = document.createEvent('MouseEvents')
-        // initialize the event
-        clickev.initEvent('click', true, true)
-        // trigger the event
-        return link.dispatchEvent(clickev)
+        link.click()
       }
     }
   }
@@ -677,6 +716,14 @@ export default class GridDataApiCtrl {
       const id = $(this).parents('tr:first').attr('id')
       window.location.href += (window.location.href.endsWith('/') ? '' : '/') + id
     })
+
+    jqGridEl.on('click', 'a.showLink', function(event) {
+      event.preventDefault()
+
+      const id = event.target.dataset.id
+      // const id = $(this).parents('tr:first').attr('id')
+      window.location.href += (window.location.href.endsWith('/') ? '' : '/') + id
+    })
   }
 
   setupCustomFormatters(gridCtrl, formatters, options) {
@@ -763,7 +810,7 @@ export default class GridDataApiCtrl {
     this.unsubs.forEach(fn => {
       fn()
     })
-    this.jqGridEl.jqGrid('GridDestroy')
+    this.jqGridEl?.jqGrid('GridDestroy')
   }
 
 }

@@ -1,5 +1,5 @@
 import ky from 'ky'
-import globalLoader from '../tools/globalLoader'
+import globalLoader from './globalLoader'
 
 
 // we wrap it like this so we can import the same instance

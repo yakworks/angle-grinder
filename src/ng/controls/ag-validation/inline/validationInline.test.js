@@ -1,5 +1,5 @@
 /* eslint-disable */
-import agModule from '~/angle-grinder'
+import agModule from '@ag/angle-grinder'
 
 describe('inline validation directive', function() {
   var summary, $rootScope, element, $compile, $timeout

@@ -2,7 +2,7 @@
 // import template from './list.html'
 import BaseListCtrl from 'angle-grinder/src/ng/gridz/list/BaseListCtrl'
 import dataApiFactory from '../../../store/dataApiFactory'
-import toast from 'angle-grinder/src/tools/toast'
+import toast from '@yakit/ui/growl'
 
 export default class ListCtrl extends BaseListCtrl {
   apiKey = 'invoice'
@@ -22,7 +22,6 @@ export default class ListCtrl extends BaseListCtrl {
 
   async $onInit() {
     this.isConfigured = false
-    // console.log("ListCtrl ", this)
     this.cfg = {}
     await this.doConfig()
     this.totals = await this.dataApi.countTotals()
@@ -39,14 +38,12 @@ export default class ListCtrl extends BaseListCtrl {
   }
 
   displaySelectedRowsData() {
-    // console.log("displaySelectedRowsData")
     this.selectedRowsData = this.gridCtrl.getSelectedRows()
   }
 
   // these are called because the super.fireToolbarAction will look for same function name
   // as the key
   async import() {
-    console.log('import')
     await this.dataApi.getA
     toast.success('import something')
   }

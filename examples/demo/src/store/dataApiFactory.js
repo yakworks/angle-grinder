@@ -1,7 +1,7 @@
 // import RestDataApi from 'angle-grinder/src/dataApi/RestDataApi'
-import RestDataService from 'angle-grinder/src/stores/rest/RestDataService'
-import ky from 'angle-grinder/src/stores/ky'
-
+import RestDataService from '@yakit/core/stores/rest/RestDataService'
+import ky from '@yakit/core/stores/ky'
+import {get} from '@yakit/core/dash'
 function makeDataService(key){
   return RestDataService({ key })
 }
@@ -15,6 +15,10 @@ const dataApiFactory = {
 
   appConfig(configKey) {
     return ky(`appConfig/${configKey}`).json()
+  },
+
+  get(key){
+    return get(dataApiFactory, key)
   }
 }
 

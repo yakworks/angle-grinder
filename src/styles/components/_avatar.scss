@@ -1,3 +1,60 @@
+@mixin make_avatar_size($dim, $dot_dim, $dot_pos, $dot_border) {
+  max-width: $dim;
+  min-width: $dim;
+  max-height: $dim;
+
+  &.has-dot {
+    &:after {
+      content: "";
+      top: $dot_pos,;
+      right: $dot_pos,;
+      height: $dot_dim;
+      width: $dot_dim;
+      border-width: $dot_border;
+    }
+
+    &.has-dot-squared {
+      &:after {
+        top: -2px;
+        right: -2px;
+      }
+    }
+  }
+
+  .avatar-img {
+    width: $dim;
+    min-width: $dim;
+    height: $dim;
+
+    &.is-squared {
+      border-radius: $dim * .25 !important;
+    }
+
+    &.is-letter,
+    &.is-more {
+      width: $dim;
+      min-width: $dim;
+      height: $dim;
+
+      .inner {
+        width: $dim - 2px;
+        min-width: $dim - 2px;
+        height: $dim - 2px;
+      }
+
+      span {
+        font-size: $dim * .5;
+      }
+    }
+  }
+
+  .badge {
+    border-width: 1px;
+    width: $dim * .5;
+    height: $dim * .5;
+  }
+}
+
 .avatar {
   position: relative;
   display: inline-block;
@@ -16,7 +73,7 @@
       width: 12px;
       border-radius: 50%;
       background: $success;
-      border: 1.8px solid $white;
+      border: 2px solid $white;
     }
 
     &.has-dot-squared {
@@ -79,7 +136,7 @@
 
         //top: -1px;
         display: block;
-        font-size: 1rem;
+        font-size: 20px;
         font-weight: 500;
         color: $white;
       }
@@ -123,7 +180,7 @@
     right: 0;
     height: 16px;
     width: 16px;
-    border: 1px solid $white;
+    border: 1.4px solid $white;
   }
 
   img {
@@ -131,265 +188,30 @@
     border-radius: 50%;
   }
 
+  &.is-xs {
+    @include make_avatar_size(24px, 8px, 0, 1.4px);
+  }
+
   &.is-small {
-    max-width: 32px;
-    min-width: 32px;
-    max-height: 32px;
-
-    &.has-dot {
-      &:after {
-        content: "";
-        top: 0;
-        right: 0;
-        height: 8px;
-        width: 8px;
-        border-width: 1.4px;
-      }
-
-      &.has-dot-squared {
-        &:after {
-          top: -2px;
-          right: -2px;
-        }
-      }
-    }
-
-    .avatar-img {
-      width: 32px;
-      min-width: 32px;
-      height: 32px;
-
-      &.is-squared {
-        border-radius: 8px !important;
-      }
-
-      &.is-letter,
-      &.is-more {
-        width: 32px;
-        min-width: 32px;
-        height: 32px;
-
-        .inner {
-          width: 30px;
-          min-width: 30px;
-          height: 30px;
-        }
-
-        span {
-          font-size: 0.85rem;
-        }
-      }
-    }
-
-    .badge {
-      border-width: 1px;
-      width: 12px;
-      height: 12px;
-    }
+    @include make_avatar_size(32px, 10px, 1px, 2px);
   }
 
   &.is-medium {
-    max-width: 50px;
-    min-width: 50px;
-
-    &.has-dot {
-      &:after {
-        content: "";
-        top: 1px;
-        right: 1px;
-        height: 12px;
-        width: 12px;
-        border-width: 2px;
-      }
-
-      &.has-dot-squared {
-        &:after {
-          top: -3px;
-          right: -3px;
-        }
-      }
-    }
-
-    .avatar-img {
-      width: 50px;
-      min-width: 50px;
-      height: 50px;
-
-      &.is-squared {
-        border-radius: 12px !important;
-      }
-
-      &.is-letter,
-      &.is-more {
-        width: 50px;
-        min-width: 50px;
-        height: 50px;
-
-        .inner {
-          width: 50px;
-          min-width: 50px;
-          height: 50px;
-        }
-
-        span {
-          font-size: 1.2rem;
-        }
-      }
-    }
-
-    .badge {
-      border-width: 2px;
-      height: 20px;
-      width: 20px;
-    }
+    @include make_avatar_size(50px, 12px, 2px, 2px);
   }
 
   &.is-large {
-    max-width: 68px;
-    min-width: 68px;
-
-    &.has-dot {
-      &:after {
-        content: "";
-        top: 4px;
-        right: 4px;
-        height: 14px;
-        width: 14px;
-        border-width: 2.6px;
-      }
-
-      &.has-dot-squared {
-        &:after {
-          top: -4px;
-          right: -1px;
-        }
-      }
-    }
-
-    .avatar-img {
-      width: 68px;
-      min-width: 68px;
-      height: 68px;
-
-      &.is-squared {
-        border-radius: 16px !important;
-      }
-
-      &.is-letter {
-        width: 68px;
-        min-width: 68px;
-        height: 68px;
-
-        span {
-          font-size: 1.4rem;
-        }
-      }
-    }
-
-    .badge {
-      border-width: 2px;
-      height: 24px;
-      width: 24px;
-    }
+    @include make_avatar_size(68px, 14px, 3px, 2px);
   }
 
   &.is-xl {
-    max-width: 80px;
-    min-width: 80px;
-
-    &.has-dot {
-      &:after {
-        content: "";
-        top: 4px;
-        right: 4px;
-        height: 16px;
-        width: 16px;
-        border-width: 2.8px;
-      }
-
-      &.has-dot-squared {
-        &:after {
-          top: -4px;
-          right: -1px;
-        }
-      }
-    }
-
-    .avatar-img {
-      width: 80px;
-      min-width: 80px;
-      height: 80px;
-
-      &.is-squared {
-        border-radius: 18px !important;
-      }
-
-      &.is-letter {
-        width: 80px;
-        min-width: 80px;
-        height: 80px;
-
-        span {
-          font-size: 1.4rem;
-        }
-      }
-    }
-
-    .badge {
-      border-width: 2.4px;
-      height: 28px;
-      width: 28px;
-    }
+    @include make_avatar_size(80px, 16px, 4px, 3px);
   }
 
   &.is-xxl {
-    max-width: 100px;
-    min-width: 100px;
-
-    &.has-dot {
-      &:after {
-        content: "";
-        top: 6px;
-        right: 5px;
-        height: 18px;
-        width: 18px;
-        border-width: 2.8px;
-      }
-
-      &.has-dot-squared {
-        &:after {
-          top: -3px;
-          right: -3px;
-        }
-      }
-    }
-
-    .avatar-img {
-      width: 100px;
-      min-width: 100px;
-      height: 100px;
-
-      &.is-squared {
-        border-radius: 22px !important;
-      }
-
-      &.is-letter {
-        width: 100px;
-        min-width: 100px;
-        height: 100px;
-
-        span {
-          font-size: 1.6rem;
-        }
-      }
-    }
-
-    .badge {
-      border-width: 3px;
-      height: 34px;
-      width: 34px;
-    }
+    @include make_avatar_size(100px, 18px, 5px, 3px);
   }
+
 }
 
 .avatar-stack {

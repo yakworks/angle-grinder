@@ -2,9 +2,9 @@
 <script>
   import Comp from './Avatars.svelte'
   import svelteRaw from '!raw-loader!./Avatars.svelte'
-  import ExampleSnippet from '../utils/ExampleSnippet.svelte'
+  import ExamplePage from '../utils/ExamplePage.svelte'
 </script>
 
-<ExampleSnippet code={svelteRaw} >
+<ExamplePage title="Avatars" code={svelteRaw} >
   <Comp/>
-</ExampleSnippet>
+</ExamplePage>

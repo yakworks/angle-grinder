@@ -1,12 +1,11 @@
 // import Log from '../../../utils/Log'
-import { getIconClass } from '../../../utils/icon'
+import { getIconClass } from '@yakit/ui/icon'
 
 class Controller {
   /* @ngInject */
   constructor($element, $transclude) {
     this.$element = $element
     // this.$transclude = $transclude
-    // console.log("this.$transclude", this.$transclude)
     $transclude((clone) => {
       // if clone.length then it has inner content/text for button
       if (clone.length) this.hasTranscluded = true
@@ -32,8 +31,17 @@ class Controller {
     this.setupIconClass('iconRight')
   }
 
+  // setupIconClass(fldName) {
+  //   this[`${fldName}Class`] = getIconClass(this[fldName])
+  // }
   setupIconClass(fldName) {
-    this[`${fldName}Class`] = getIconClass(this[fldName])
+    if(this[fldName]) {
+      let origIcoName = this[fldName]
+      let icoClass = getIconClass(origIcoName)
+      this[`${fldName}Class`] = icoClass
+      //if it starts with material then it needs the text per google font
+      this[`${fldName}Text`] = icoClass.startsWith('material') ? origIcoName : ''
+    }
   }
 
   fireClick(event) {

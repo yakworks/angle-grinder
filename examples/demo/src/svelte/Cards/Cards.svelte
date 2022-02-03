@@ -1,5 +1,5 @@
 <script>
-  import { BlockTitle, Button, Card, CardHeader, CardTitle, CardContent, CardSubtitle, Columns, Col } from 'angle-grinder/svelte'
+  import { BlockTitle, Button, Card, CardHeader, CardTitle, CardContent, CardSubtitle, Columns, Col } from '@yakit/svelte'
 
 </script>
 

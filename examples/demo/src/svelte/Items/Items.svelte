@@ -1,9 +1,9 @@
 <script>
-  // import { Avatar, Card, CardHeader, CardContent, Button, Columns, Col } from 'angle-grinder/svelte'
-  import { 
+  // import { Avatar, Card, CardHeader, CardContent, Button, Columns, Col } from '@yakit/svelte'
+  import {
     Avatar, Button, Columns, Col,
-    Block, BlockTitle, Card, CardHeader, CardContent, CardFooter, Link, List, ListItem 
-  } from 'angle-grinder/svelte'
+    Block, BlockTitle, Card, CardHeader, CardContent, CardFooter, Link, List, ListItem
+  } from '@yakit/svelte'
   import { people } from '../../data/sample'
 
   let person = people[0]

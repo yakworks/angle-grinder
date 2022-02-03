@@ -1,5 +1,5 @@
 <script>
-  import { Avatar, Columns, Col, BlockTitle, Card, CardContent, Icon, List, ListItem } from 'angle-grinder/svelte'
+  import { Avatar, Columns, Col, BlockTitle, Card, CardContent, Icon, List, ListItem } from '@yakit/svelte'
   import { SkeletonBlock } from 'skeleton-elements/svelte';
   let simpleList = ['Item 1', 'Item 2', 'Item 3']
   let dataList = [
@@ -86,3 +86,48 @@
 </Card>
 </Col>
 </Columns>
+
+<Columns>
+  <Col>
+  <BlockTitle>Icons</BlockTitle>
+  <Card>
+    <CardContent class="p0">
+      <List>
+        <ListItem link={noref} header="Name" title="Avatars">
+          <Avatar slot="media" class="is-xs" imgSrc="/assets/images/photos/beard-guy.jpg"></Avatar>
+          <div class="item-after font-bold"> <span>CEO</span> </div>
+        </ListItem>
+        <ListItem link={noref} title="f7 icons" >
+          <Icon slot="media" f7="phone"></Icon>
+        </ListItem>
+        <ListItem link={noref} title="f7 icons" >
+          <Icon slot="media" f7="arrow_clockwise_circle"></Icon>
+        </ListItem>
+        <ListItem link={noref} title="Google Material font" >
+          <Icon slot="media" material="home"></Icon>
+        </ListItem>
+        <ListItem link={noref} title="Google Material 2 tone" >
+          <span slot="media" class="material-icons-two-tone mred">
+            thumb_up
+          </span>
+        </ListItem>
+        <ListItem link={noref} title="mdi material icons" >
+          <span slot="media" class="icon">
+            <i class="icon mdi mdi-thumb-up-outline"></i>
+          </span>
+        </ListItem>
+        <ListItem link={noref} title="font awesome icons" >
+          <span slot="media" class="icon">
+            <i class="icon far fa-thumbs-up"></i>
+          </span>
+        </ListItem>
+        <ListItem link={noref} title="font awesome icons" >
+          <span slot="media" class="icon">
+            <i class="icon fas fa-edit"></i>
+          </span>
+        </ListItem>
+      </List>
+    </CardContent>
+  </Card>
+  </Col>
+  </Columns>

@@ -11,10 +11,7 @@ export default angular.module('demo.list.comps', [])
     template: require('./letterIcons.html')
   })
   .component('letterIconsList', {
-  // implicit controllerAs: '$ctrl',
     template: function($element, $attrs) {
-      console.log('$element', $element)
-      console.log('$attrs.box', $attrs.box)
       const alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('')
       let tpl = '<p>'
       alphabet.forEach(letter => {

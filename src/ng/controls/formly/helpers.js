@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import { makeLabel } from '../../../utils/nameUtils'
+import { makeLabel } from '@yakit/core/nameUtils'
 
 export function transformFields(fields, ctrl) {
   // if its a plain object and first key starts with column and its a columns layout

@@ -1,0 +1,35 @@
+const sveltePreprocess = require('svelte-preprocess');
+
+module.exports = {
+  preprocess: sveltePreprocess({
+    babel: {
+      presets: [
+        ["@babel/preset-env",{
+          "useBuiltIns": "usage" ,
+          "corejs": 3
+        }]
+      ],
+      plugins: [
+        "lodash",
+        "@babel/plugin-proposal-optional-chaining",
+        ["module-resolver", {
+          "root": ["./src"],
+          //make it work with both
+          "alias": [
+            {"@yakit/svelte": "./svelte"},
+            {"@ag": "./src"},
+            //used for demo
+            { "~": "./examples/demo/src"},
+          ]
+        }]
+      ]
+    },
+    scss: {
+      renderSync: true,
+      includePaths: ['./src/scss'],
+    },
+    postcss: {
+      plugins: [require('autoprefixer')({ grid: true })],
+    },
+  }),
+};

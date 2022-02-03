@@ -1,6 +1,6 @@
 <script>
   import { onMount } from 'svelte'
-  import { ApexChart } from 'angle-grinder/svelte'
+  import { ApexChart } from '@yakit/svelte'
   import { themeColors, randomizeArray, secondaryColor } from './chartHelpers'
   import ky from 'ky'
 
@@ -16,10 +16,8 @@
 
   onMount(async () => {
     const chartCfgs = await ky.get('/data/charts.json').json();
-    console.log("chartCfgs", chartCfgs);
 
     let opts = chartCfgs.dsoSparkLine
-    console.log("opts", opts);
 
     opts.colors = [secondaryColor]
     opts.labels = labels

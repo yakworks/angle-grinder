@@ -15,7 +15,7 @@ describe('MemDataApi', () => {
   describe('qbe', function() {
     test('query by example simple single', function() {
       const result = api.qbe(data, {refnum: '762', amount: 3240.77})
-      // console.log("result", result)
+      // ("result", result)
       expect(result.length).toEqual(1)
     })
   })
@@ -30,7 +30,6 @@ describe('MemDataApi', () => {
         sort: "id",
       }
       const result = await api.search(params)
-      // console.log("result", result)
       expect(result.data.length).toEqual(4)
       expect(result.page).toEqual(1)
       expect(result.records).toEqual(4)
@@ -82,7 +81,6 @@ describe('MemDataApi', () => {
   describe('picklist', function() {
     test('should return paged data', async function() {
       const result = await api.picklist()
-      //console.log("result", result)
       expect(result.data.length).toEqual(4)
     })
   })

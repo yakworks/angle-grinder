@@ -29,7 +29,7 @@ export default function(Component, events) {
     }
 
     $postLink() {
-      //console.log("initialProps", this.initialProps)
+
       this.component = new Component({
         target: this.$element[0],
         props: this.initialProps
@@ -40,8 +40,6 @@ export default function(Component, events) {
           const angularBinding = events[svelteEvent]
 
           this.component.$on(svelteEvent, ({ detail }) => {
-            //console.log("svelteEvent", svelteEvent)
-            //console.log("detail", detail)
             this[angularBinding](detail)
           })
         }, this)
@@ -61,7 +59,6 @@ export default function(Component, events) {
           ...changed
         }
       }
-      //console.log("$onChanges", this.initialProps)
     }
 
     $onDestroy() {

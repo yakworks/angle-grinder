@@ -1,5 +1,6 @@
 
 <script>
+  import { Page, Navbar, Block } from '@yakit/svelte/index'
   import Cards from './Cards.svelte'
   import cardsRaw from '!raw-loader!./Cards.svelte'
 
@@ -9,6 +10,10 @@
   import ExampleSnippet from '../utils/ExampleSnippet.svelte'
 </script>
 
+<Page>
+  <Navbar title="Cards" backLink={true} />
+  <Block>
+
 <ExampleSnippet code={cardsSimpleRaw} >
   <CardsSimple/>
 </ExampleSnippet>
@@ -17,3 +22,5 @@
   <Cards/>
 </ExampleSnippet>
 
+  </Block>
+</Page>

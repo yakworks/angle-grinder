@@ -5,6 +5,16 @@
 // <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet" />
 // <link href="http://fonts.googleapis.com/css?family=Lato:300,400,400italic,600,700|Raleway:300,400,500,600,700|Crete+Round:400italic" rel="stylesheet" type="text/css" />
 @import url('https://fonts.googleapis.com/css?family=Montserrat:wght@300,400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp');
+
+//red example
+// .material-icons-two-tone .red {
+//   filter: invert(8%) sepia(94%) saturate(4590%) hue-rotate(358deg) brightness(101%) contrast(112%);
+// }
+
+.material-icons-two-tone {
+  filter: contrast(70%);
+}
 
 //**** Typography sizing ****/
 

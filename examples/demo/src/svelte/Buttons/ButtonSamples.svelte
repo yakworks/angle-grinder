@@ -1,9 +1,10 @@
 <script>
-  import { Button, Columns, Col } from 'angle-grinder/svelte'
+  import { Button, Columns, Col } from '@yakit/svelte'
+import { Block } from '@yakit/svelte/';
+import { BlockTitle } from '@yakit/svelte/';
   let loading = false
 
   function toggleLoading(event){
-    // console.log("toggleLoading this", this)
     loading = !loading
     setTimeout(() => { loading = false }, 2000)
   }
@@ -42,4 +43,3 @@
     <pre>loading: {loading}</pre>
   </Col>
 </Columns>
-

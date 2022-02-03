@@ -1,5 +1,5 @@
 // import Log from '../../../utils/Log'
-import { getIconClass } from '../../../utils/icon'
+import { getIconClass } from '@yakit/ui/icon'
 import _ from 'lodash'
 
 const DEFAULT_MENU_DISPLAY = 'Action'
@@ -19,7 +19,6 @@ class Controller {
       this.bCls = `${this.bCls} dropdown-toggle`
     }
     // this.bCls = "foo"
-    // console.log("this.btnCls" , this.bCls )
   }
 
   fireMenuClick(menuItem, event) {

@@ -1,5 +1,5 @@
 import template from './component.html'
-import toast from 'angle-grinder/src/tools/toast'
+import toast from '@yakit/ui/growl'
 
 class ClrController {
   content = 'Click Me'
@@ -16,7 +16,6 @@ class ClrController {
   }
 
   toggleLoading = (event) => {
-    // console.log("toggleLoading this", this)
     this.loading = !this.loading
     this.$timeout(() => {
       this.loading = !this.loading

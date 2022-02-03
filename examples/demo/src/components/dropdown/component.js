@@ -1,5 +1,5 @@
 import template from './component.html'
-import Swal from 'angle-grinder/src/tools/swal'
+import Swal from '@yakit/ui/swal'
 
 class controller {
   menuItems = [
@@ -21,7 +21,6 @@ class controller {
   ]
 
   menuItemClick = function(menuItem, event) {
-    // console.log('menuItemClick params', { menuItem, event })
     Swal.fire(
       `${menuItem.display} item clicked `,
       `<pre><code class="json">${JSON.stringify(menuItem, null, 2)}</code></pre>`

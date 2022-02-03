@@ -1,0 +1,51 @@
+<form name="dpForm" ag-form is-horizontal>
+  <ag-input ng-model="$ctrl.vm.name" required hint="sanity check"></ag-input>
+  <ag-date ng-model="$ctrl.vm.jsDate" required hint="comes from new Date()"></ag-date>
+  <ag-date ng-model="$ctrl.vm.isoDate"></ag-date>
+  <ag-date ng-model="$ctrl.vm.localDateTime" is-expanded></ag-date>
+  <ag-date ng-model="$ctrl.vm.disabled" disabled is-expanded></ag-date>
+  <ag-daterange ng-model="$ctrl.vm.dateRange"></ag-daterange>
+
+  <div class="field is-grouped is-grouped-centered mt-4">
+    <div class="control">
+      <ag-button type="submit" color="primary">Submit</ag-button>
+    </div>
+    <div class="control">
+      <ag-button type="reset" ng-click="$ctrl.vm = {}">Reset</ag-button>
+    </div>
+    <div class="control">
+      <ag-button ng-click="$ctrl.loadModelData(1)">Load Model 1</ag-button>
+    </div>
+    <div class="control">
+      <ag-button ng-click="$ctrl.loadModelData(2)">Load Model 2</ag-button>
+    </div>
+    <div class="control">
+      <ag-button ng-click="$ctrl.loadModelData(3)">Load Model 3</ag-button>
+    </div>
+  </div>
+</form>
+
+<pre ng-cloak class="mt-4">model: {{$ctrl.vm | json}}</pre>
+
+<form name="datepickerForm" ag-form novalidate>
+  <ag-date label='Vertical Label' ng-model="$ctrl.vm.vertLabelDate"></ag-date>
+</form>
+
+
+<div ng-controller="ModalDemoCtrl" class="mt-4">
+  <script type="text/ng-template" id="myModalContent.html">
+    <div class="modal-header">
+      <h3 class="modal-title">I'm a modal!</h3>
+    </div>
+    <div class="modal-body" ag-form>
+      <ag-date ng-model="test"></ag-date>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-primary" ng-click="ok()">OK</button>
+      <button class="btn btn-primary btn-o" ng-click="cancel()">Cancel</button>
+    </div>
+  </script>
+  <button class="btn btn-primary btn-o" ng-click="open()">
+    Open Modal to test datepicker
+  </button>
+</div>

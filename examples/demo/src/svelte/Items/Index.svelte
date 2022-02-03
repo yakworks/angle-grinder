@@ -3,9 +3,9 @@
   import Items from './Items.svelte'
   import ItemsRaw from '!raw-loader!./Items.svelte'
 
-  import ExampleSnippet from '../utils/ExampleSnippet.svelte'
+  import ExamplePage from '../utils/ExamplePage.svelte'
 </script>
 
-<ExampleSnippet code={ItemsRaw} >
+<ExamplePage title="Items" code={ItemsRaw} >
   <Items/>
-</ExampleSnippet>
+</ExamplePage>

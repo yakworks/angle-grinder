@@ -3,5 +3,5 @@ import './styles/vendor.css.js'
 import './styles/all.scss'
 
 import './vendor'
-import './libs'
+import '../svelte/framework7'
 import './angle-grinder'
