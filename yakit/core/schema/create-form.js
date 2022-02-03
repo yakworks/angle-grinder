@@ -122,59 +122,49 @@ export const createForm = (config) => {
     return updateValidateField(field, value);
   }
 
-  function handleSubmit(event) {
-    console.log("calling handleSubmit wtf?")
+  async function handleSubmit(event) {
+    // console.log("calling handleSubmit")
     if (event && event.preventDefault) {
       event.preventDefault();
     }
 
     isSubmitting.set(true);
+    const values = get(form)
 
-    return util.subscribeOnce(form).then((values) => {
-      if (typeof validateFunction === 'function') {
-        isValidating.set(true);
+    if (typeof validateFunction === 'function') {
+      isValidating.set(true)
 
-        return Promise.resolve()
-          .then(() => validateFunction(values))
-          .then((error) => {
-            if (util.isNullish(error) || util.getValues(error).length === 0) {
-              clearErrorsAndSubmit(values);
-            } else {
-              errors.set(error);
-              isSubmitting.set(false);
-            }
-          })
-          .finally(() => isValidating.set(false));
+      const error = await validateFunction(values)
+      if (util.isNullish(error) || util.getValues(error).length === 0) {
+        clearErrorsAndSubmit(values)
+      } else {
+        errors.set(error)
+        isSubmitting.set(false)
       }
-
-      if (validationSchema) {
-        isValidating.set(true);
-        console.log("has validationSchema")
-        return (
-          validationSchema
-            .validate(values, {abortEarly: false})
-            .then(() => clearErrorsAndSubmit(values))
-            // eslint-disable-next-line unicorn/catch-error-name
-            .catch((yupErrors) => {
-              console.log("has yupErrors", yupErrors.message)
-
-              if (yupErrors && yupErrors.inner) {
-                const updatedErrors = getInitial.errors();
-
-                yupErrors.inner.map((error) =>
-                  util.set(updatedErrors, error.path, error.message),
-                );
-
-                errors.set(updatedErrors);
-              }
-              isSubmitting.set(false);
-            })
-            .finally(() => isValidating.set(false))
-        );
+      isValidating.set(false)
+    }
+    else if (validationSchema) {
+      isValidating.set(true)
+      try {
+        let valRes = await validationSchema.validate(values, {abortEarly: false})
+        clearErrorsAndSubmit(values)
+      } catch (yupErrors) {
+        // console.log("has yupErrors", yupErrors.message)
+        if (yupErrors && yupErrors.inner) {
+          const updatedErrors = getInitial.errors();
+          yupErrors.inner.map((error) =>
+            util.set(updatedErrors, error.path, error.message),
+          )
+          errors.set(updatedErrors)
+          isSubmitting.set(false)
+        }
+      } finally {
+        isValidating.set(false)
       }
-
+    }
+    else {
       clearErrorsAndSubmit(values);
-    });
+    }
   }
 
   function handleReset() {
@@ -183,15 +173,10 @@ export const createForm = (config) => {
     touched.set(getInitial.touched());
   }
 
-  function clearErrorsAndSubmit(values) {
-    console.log("calling onSubmit wtf?")
-    return Promise.resolve()
-      .then(() => errors.set(getInitial.errors()))
-      .then(() => {
-        console.log("calling onSubmit wtf?")
-        onSubmit(values, form, errors)
-      })
-      .finally(() => isSubmitting.set(false));
+  async function clearErrorsAndSubmit(values) {
+    errors.set(getInitial.errors())
+    await onSubmit(values, form, errors)
+    isSubmitting.set(false)
   }
 
   /**

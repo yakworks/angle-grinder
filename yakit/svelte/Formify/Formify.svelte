@@ -7,6 +7,8 @@
   import FormifyField from './FormifyField.svelte'
   import { transformFields } from '@yakit/core/schema/transformSchema'
   import { _defaults } from '@yakit/core/dash'
+  import growl from "@yakit/ui/growl"
+  import stringify from '@yakit/core/stringify';
 
   /** The form name */
   export let name
@@ -24,6 +26,9 @@
   /** The transformed schema */
   export let transformedSchema = transformFields(schema)
 
+  let className = undefined;
+  export { className as class }
+
   let isColLayout
   $: if(transformedSchema.columns){
     isColLayout = true
@@ -35,10 +40,17 @@
   }
 
   export let onSave = (event) => {
-    formContext.handleSubmit()
+    if($isModified){
+      formContext.handleSubmit(event)
+    } else {
+      growl.info("No changes detected")
+    }
   }
 
-  $: disableSave = !($isModified) || $isSubmitting
+  // $: disableSave = !($isModified) || $isSubmitting
+  // TODO Need a way to disable submit but if isModified is used then wont allow until onBlur when its updated
+  $: disableSave = $isSubmitting
+
 
   $: if(formContext) {
     //state store
@@ -48,21 +60,23 @@
   }
 </script>
 
-<ListForm {name} {opts} schema={transformedSchema} bind:data bind:formContext >
+<ListForm class={className} {name} {opts} schema={transformedSchema} bind:data bind:formContext >
   {#if !isColLayout}
 
     {#each transformedSchema as field (field.key)}
       <FormifyField opts={field} />
     {/each}
 
-    <CardFooter>
-      <Button7 onClick={onCancel}>Cancel</Button7>
-      <Button7 type=button disabled={disableSave} preloader loading={$isSubmitting} onClick={onSave}>Save</Button7>
-    </CardFooter>
-
+    {#if !($$slots.footer)}
+      <CardFooter>
+        <Button7 onClick={onCancel}>Cancel</Button7>
+        <Button7 type=button disabled={disableSave} preloader loading={$isSubmitting} onClick={onSave}>Save</Button7>
+      </CardFooter>
+    {/if}
+    <slot name="footer" />
   {:else}
     <!-- Column Layout-->
-    <Card class="m-0 bg-body-low" >
+    <Card class="m-0 bg-body-low search-card" >
       <CardContent class="p0">
         <div class="tile is-ancestor">
           {#each transformedSchema.columns as colCfg}
@@ -82,12 +96,30 @@
           {/each}
         </div>
       </CardContent>
-      <CardFooter>
-        <Button7 onClick={onCancel}>Cancel</Button7>
-        <Button7 type=button disabled={disableSave}  preloader loading={$isSubmitting} onClick={onSave}>Save</Button7>
-      </CardFooter>
+      {#if !($$slots.footer)}
+        <CardFooter>
+          <Button7 onClick={onCancel}>Cancel</Button7>
+          <Button7 type=button disabled={disableSave} preloader loading={$isSubmitting} onClick={onSave}>Save</Button7>
+        </CardFooter>
+      {/if}
+      <slot name="footer" />
+
     </Card>
 
   {/if}
 
 </ListForm>
+
+<style>
+  :global(.search-card) {
+    background-color: var(--color-body-low);
+    /* z-index so drop downs dont fall behind the tolbars */
+    z-index: 35;
+  }
+  :global(.search-card .card-footer:before ) {
+    /* z-index so hariline doesnt come above the drop down*/
+    z-index: 0;
+  }
+</style>
+
+

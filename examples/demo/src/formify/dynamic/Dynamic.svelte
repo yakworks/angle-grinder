@@ -41,6 +41,9 @@
         data:[{id:0, name: 'Open'}, {id:1, name: 'Closed'}]
       }
     },
+    chips:{
+      input: "chips"
+    },
     customer:{
       input: 'select',
       selectOptions:{

@@ -68,16 +68,14 @@
 </script>
 
 <!-- FIXME works fine here but not when imported into rcm-ui -->
-<!-- <style>
-  /* .selection-pointer .material-icons {
-    font-size: 16px;
-    transform: rotate(90deg);
-  } */
-
-  .toolbar-item-left {
-    margin-left: -10px;
+<style>
+  .toolbar {
+    border-radius: 8px 8px 0 0;
+    border: 1px solid var(--color-shade-10);
+    border-bottom: none;
   }
-</style> -->
+
+</style>
 
 <header class="is-light is-dense has-border toolbar">
   <div class="toolbar-container">

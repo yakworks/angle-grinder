@@ -52,6 +52,14 @@ $grid-border: $border;
   border: 1px solid $grid-border;
   box-sizing: content-box;
 
+  //check box
+  tr.jqgrow > td.td_cbox {
+    padding-left: 8px;
+  }
+  .ui-jqgrid-htable .ui-jqgrid-labels > th.jqgh_cbox {
+    padding-left: 4px;
+  }
+
   .ui-jqgrid-titlebar {
     height: 40px;
     line-height: 24px;
@@ -179,6 +187,9 @@ $grid-border: $border;
     line-height: 15px;
     height: 36px;
 
+    .ui-paging-info{
+      padding-right: 12px;
+    }
     .ui-pager-control{
       font-size: 12px;
     }

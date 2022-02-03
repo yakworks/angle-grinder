@@ -1,7 +1,13 @@
 <script>
   import { Columns, Col, BlockTitle, Card, CardContent, Button } from '@yakit/svelte/index'
-  import { FormifyColumns } from '@yakit/svelte/Formify';
+  import { Formify } from '@yakit/svelte/Formify';
   import stringify from 'fast-safe-stringify'
+
+  let opts ={
+    initData: {
+      ponum: 'Bill',
+    }
+  }
 
   let schema = {
     column1:[
@@ -83,7 +89,7 @@
 
 </script>
 
-<FormifyColumns {schema} bind:data bind:formContext bind:transformedSchema/>
+<Formify name="search-example" {opts} {schema} bind:data bind:formContext bind:transformedSchema/>
 
 <Button class="mt-1" on:click={setPizza}>Pizza all around</Button>
 <Button class="mt-1" on:click={clearForm}>Clear</Button>

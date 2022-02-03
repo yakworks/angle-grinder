@@ -1,14 +1,14 @@
 <script>
-  import { createEventDispatcher, onMount, afterUpdate, onDestroy, getContext } from 'svelte';
-  import { colorClasses } from '../shared/mixins';
-  import { classNames, extend, plainText, createEmitter } from '../shared/utils';
-  import { restProps } from '../shared/rest-props';
-  import { app, f7ready } from '../shared/f7';
-  import { getReactiveContext } from '../shared/get-reactive-context';
+  import { createEventDispatcher, onMount, afterUpdate, onDestroy, getContext } from 'svelte'
+  import { colorClasses } from '../shared/mixins'
+  import { classNames, extend, plainText, createEmitter } from '../shared/utils'
+  import { restProps } from '../shared/rest-props'
+  import { app, f7ready } from '../shared/f7'
+  import { getReactiveContext } from '../shared/get-reactive-context'
   import { _defaults, get } from '@yakit/core/dash'
   import {ctxKey} from './ctxKey'
 
-  import {TextEditor} from '../f7-components';
+  import {TextEditor} from '../f7-components'
 
   const emit = createEmitter(createEventDispatcher, $$props);
 

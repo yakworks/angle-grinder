@@ -30,6 +30,8 @@
       selectOptions.isEagerLoad = false
     }
     console.log(`${name} selectOptions`, selectOptions)
+    //merge in label
+    selectOptions.label = opts.label
   }
 
   //either type or input
@@ -40,14 +42,14 @@
 
 {#if input === 'toggle'}
   <ListToggle {name} {opts}/>
-{:else if input === 'input-list'}
+{:else if input === 'chips'}
   <ListChipInput {name} {opts}/>
 {:else if input === 'input-wildcard'}
   <ListField {name} {opts} />
 {:else if input === 'date-range'}
-  <ListRangeFields {name} type="date"/>
+  <ListRangeFields {name} {opts} type="date"/>
 {:else if input === 'amount-range'}
-  <ListRangeFields {name} type="number"/>
+  <ListRangeFields {name} {opts} type="number"/>
 {:else if input === 'select'}
   <ListSelect {name} opts={selectOptions} />
 {:else}

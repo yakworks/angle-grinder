@@ -91,17 +91,17 @@
   }
 
   function onBlur(evt) {
-    console.log("onBlur evt", evt)
-    console.log("onBlur value", value)
+    // console.log("onBlur evt", evt)
+    // console.log("onBlur value", value)
     handleChange(evt)
   }
 
   let oldVal = value
   let isChanged = false
   function onChange(evt) {
-    console.log("onChange evt", evt)
-    console.log("onChange value", value)
-    console.log("onChange oldVal", oldVal)
+    // console.log("onChange evt", evt)
+    // console.log("onChange value", value)
+    // console.log("onChange oldVal", oldVal)
     isChanged = true
     // handleChange(evt)
   }

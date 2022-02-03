@@ -1,50 +1,58 @@
 <!--
-  Wraps the jqGrid and adds the toolbar and search form
+  Edit and create popup for a list or a grid
  -->
 <script>
-  import { onMount } from 'svelte'
+  import { onMount, createEventDispatcher } from 'svelte'
   import { Popover, CardHeader} from '@yakit/svelte/index'
-  import { Formify } from '@yakit/svelte/Formify';
+  import { Formify } from '../Formify'
+  import { handleError } from '../Formify/problemHandler'
   import { _defaults } from '@yakit/core/dash'
-  import growl from "@yakit/ui/growl"
 
+  /** the schema to use to build the form */
   export let schema
-  export let ctx
+  /** dataApi to call save on */
   export let dataApi
-  export let opts = {}
+  /** the base list id that will be used to construct the popoverId and the form name */
+  export let listId
+  /** options to pass to form */
+  export let formOpts = {}
+  /** form name constructed from the listId */
+  export let formName = `${listId}-edit-form`
+  /** the formify context, can bind to it and get its state*/
+  export let formContext = undefined
+  /** whether the popover is open or not, can be bound and set to make it open*/
+  export let popoverOpened = undefined
 
+  export let data = undefined
 
-  _defaults(opts, {
+  export let popoverId = `${listId}-popover-edit`
+
+  export let editingId = undefined
+
+  export let popoverEl = undefined
+
+  const dispatch = createEventDispatcher()
+
+  _defaults(formOpts, {
     async onSubmit(values, form, errors){
       try {
-        Log.debug("onSubmit", values)
+        dispatch('beforeSubmit', {values, form, errors});
+        // Log.debug("onSubmit", values)
         // await dataApi.delay(2000)
         const savedItem = await dataApi.save(values)
-        ctx.gridCtrl.saveRow(editingId, savedItem)
         popoverOpened = false
-        growl.success("saved successfully")
+        dispatch('submitSuccess', savedItem);
       } catch (er) {
         handleError(er)
       }
 
     }
   })
-  export let popoverOpened = undefined
-  // export let popoverOpenEvent = undefined
-
-  export let formContext = undefined
-  export let data = undefined
-
-  export let popoverId = `${ctx.gridOptions.gridId}-popover-edit`
-
-  export let editingId = undefined
-
-  export let popoverEl = undefined
 
   export let onPopoverOpen = async (instance) => {
+    //get the "data-id" attibute
     editingId = instance.targetEl.dataset.id
     //if no editingId then assume its a create
-    // ctx.gridCtrl.toggleLoading(true)
     try {
       let initValues = {}
       if(editingId) initValues = await dataApi.get(editingId)
@@ -64,22 +72,6 @@
     popoverOpened = false
   }
 
-  export let onSave = async (event) => {
-
-    formContext.handleSubmit()
-  }
-
-  async function handleError(er) {
-    let problem = await er.response.json()
-    let messages = []
-    if(problem.errors){
-      messages = problem.errors.map(er => er.message)
-    } else if(problem.detail) {
-      messages.push(problem.detail)
-    }
-    growl.error(messages.join('/n'), problem.title)
-  }
-
   let title
   $: title = editingId ? "Edit" : "Create"
 
@@ -95,7 +87,7 @@
   <Popover class="popover-wide" bind:this={popoverEl} id={popoverId} bind:opened={popoverOpened} {onPopoverOpen}
     closeByOutsideClick={false} closeByBackdropClick={false} closeOnEscape={false}>
     <CardHeader {title}/>
-    <Formify name={`${ctx.gridOptions.gridId}-edit-form`} {onSave} {onCancel} {opts} {schema} bind:data bind:formContext />
+    <Formify name={formName} {onCancel} opts={formOpts} {schema} bind:data bind:formContext />
   </Popover>
 </div>
 

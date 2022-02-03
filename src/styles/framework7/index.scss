@@ -18,6 +18,7 @@ body {
 :root {
   --f7-page-bg-color: #{cvar(body)};
   --f7-tabbar-link-inactive-color: #{cvar(text, light)};
+  --f7-input-clear-button-color: var(--color-shade-20);
 }
 
 //input mods

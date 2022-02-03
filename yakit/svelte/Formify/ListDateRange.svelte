@@ -2,7 +2,7 @@
   import Input from './Input.svelte';
   import { fieldDefaults } from '@yakit/core/transformer'
   import { isNil, _defaults } from '@yakit/core/dash'
-  import ListInput  from 'framework7-svelte/esm/svelte/list-input.svelte'
+  import ListInput  from './ListInput.svelte'
 
   let className = undefined;
   export { className as class }
