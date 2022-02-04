@@ -3,11 +3,13 @@
  -->
 <script>
   import { onMount, createEventDispatcher } from 'svelte'
-  import { Popover, CardHeader, CardFooter, Button} from '@yakit/svelte/index'
+  import { Popover, CardHeader, CardFooter, Button, BlockTitle, Block,
+    AccordionItem, AccordionToggle, AccordionContent } from '@yakit/svelte/index'
   import { classNames, createEmitter } from '../shared/utils'
   import { Formify } from '@yakit/svelte/Formify';
   import { handleError } from '@yakit/svelte/Formify/problemHandler';
   import { _defaults } from '@yakit/core/dash'
+  import { app } from '@yakit/svelte/framework7';
   import growl from "@yakit/ui/growl"
 
   /** the schema to use to build the form */
@@ -31,9 +33,22 @@
 
   $: stateStore = ctx.stateStore
 
-  $: formClass = classNames('mb-4', {
-    hidden: !($stateStore.showSearchForm)
-  })
+  let formClass = 'mb-4'
+  // $: formClass = classNames('mb-4', {
+  //   hidden: !($stateStore.showSearchForm)
+  // })
+  let accOpened
+
+  $: showSearchForm  = $stateStore.showSearchForm
+
+  $: if(showSearchForm){
+    app.f7.accordion.open("#searchAccordian")
+  } else {
+    // app.f7.accordion.close("#searchAccordian")
+    try{
+      app.f7.accordion.close("#searchAccordian")
+    } catch(e){}
+  }
 
   _defaults(formOpts, {
     validate: false,
@@ -69,16 +84,30 @@
 
 </script>
 
-<Formify class={formClass} name={formName} opts={formOpts} {schema} bind:data bind:formContext >
-  <CardFooter class="right" slot="footer">
-    <Button onClick={onCancel} class="mr-4">Reset</Button>
-    <Button color="primary" loading={isSearching} onClick={onSearch}>Search</Button>
-  </CardFooter>
-</Formify>
+<div class="accordion-item" id="searchAccordian">
+  <div class="accordion-item-content">
+    <Formify class={formClass} name={formName} opts={formOpts} {schema} bind:data bind:formContext >
+      <CardFooter class="right" slot="footer">
+        <Button onClick={onCancel} class="mr-4">Reset</Button>
+        <Button color="primary" loading={isSearching} onClick={onSearch}>Search</Button>
+      </CardFooter>
+    </Formify>
+  </div>
+</div>
 
 <style>
   :global(.xxxx) {
     width: 400px;
+  }
+  .accordion-item {
+    margin-left: -0.75rem;
+    margin-right: -0.75rem;
+    margin-top: -0.75rem;
+  }
+  .accordion-item-content {
+    padding-left: .75rem;
+    padding-right: .75rem;
+    padding-top: .75rem;
   }
 </style>
 

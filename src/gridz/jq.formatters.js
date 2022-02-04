@@ -35,8 +35,6 @@ $.extend($.fn.fmatter, {
   },
 
   gridLink(cellVal, options, rowdata) {
-    Log.debug("gridLink options", options)
-    Log.debug("gridLink rowdata", rowdata)
     const id = rowdata.id
     return `<a class="gridLink" href="#" >${cellVal}</a>`
   },

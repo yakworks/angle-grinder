@@ -6,7 +6,7 @@ import { isEmpty } from '@yakit/core/dash'
 import EditModalCtrl from './EditModalCtrl'
 import BulkUpdateModalCtrl from './BulkUpdateModalCtrl'
 import { argsMerge } from '../../utils/classUtils'
-import appConfigApi from '../../../dataApi/AppConfigApi'
+import appConfigApi from '@yakit/core/stores/AppConfigApi'
 import toast from '@yakit/ui/growl'
 //import Swal from '../../../tools/swal'
 

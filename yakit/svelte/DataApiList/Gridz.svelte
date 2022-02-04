@@ -12,6 +12,7 @@
   import { classNames } from '../shared/utils';
   import stringify from '@yakit/core/stringify';
   import growl from "@yakit/ui/growl"
+  import { get as _get } from "@yakit/core/dash"
 
   export let ctx = undefined
   export let dataApi = undefined
@@ -37,6 +38,7 @@
   let stateStore
   let editSchema
   let searchSchema
+  let searchFormEnabled
 
   onMount(async () => {
     await setupListCtrl()
@@ -47,6 +49,7 @@
     ctx = listController.ctx
     gridId = ctx.gridOptions.gridId
     stateStore = listController.ctx.stateStore
+    searchFormEnabled = _get(ctx, 'gridOptions.searchFormEnabled', true)
     setupToolbarOpts(ctx)
     //needs to be either
     editSchema = ctx.editPopover || ctx.editForm
@@ -61,7 +64,7 @@
     let tbopts = ctx.toolbarOptions
     //it will always exists if tbopts is present so no null checks should be needed, just check class
     if(tbopts && tbopts.leftButtons.create.class !== 'hidden' ){
-      tbopts.leftButtons.create['popoverId'] = `#${ctx.gridOptions.gridId}-popover-edit`
+      tbopts.leftButtons.create['popoverId'] = `#${gridId}-popover-edit`
     }
   }
 
@@ -91,7 +94,7 @@
 </script>
 
 {#if isConfigured }
-  {#if searchSchema }
+  {#if searchSchema && searchFormEnabled }
     <SearchForm listId={gridId} {ctx} schema={searchSchema} on:search={searchAction}/>
   {/if}
   <div use:init class="gridz-wrapper card m-0">

@@ -1,7 +1,7 @@
 // import _ from 'lodash'
 
 import { argsMerge } from '../../utils/classUtils'
-import appConfigApi from '../../../dataApi/AppConfigApi'
+import appConfigApi from '@yakit/core/stores/AppConfigApi'
 import _ from 'lodash'
 
 export default class EditModalCtrl {

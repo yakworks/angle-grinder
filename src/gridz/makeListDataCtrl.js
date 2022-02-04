@@ -2,7 +2,7 @@
 // import _ from 'lodash'
 import { get, writable } from 'svelte/store';
 import { isEmpty, cloneDeep, isFunction, merge } from '@yakit/core/dash'
-import appConfigApi from '../dataApi/AppConfigApi'
+import appConfigApi from '@yakit/core/stores/AppConfigApi'
 import toast from '@yakit/ui/growl'
 import Swal from '@yakit/ui/swal'
 
@@ -62,10 +62,14 @@ const makeListDataCtrl = (opts) => {
       //if ctx toolbar option were passed in with context
       if(ctx.toolbarOptions) merge(tbopts, ctx.toolbarOptions)
       // setup search form show based on if searchForm is configured
-      if (ctx.searchForm === undefined) {
+      if (ctx.searchForm === undefined || gopts.searchFormEnabled == false) {
         gopts.showSearchForm = false
         ctx.state.showSearchForm = false
         tbopts.searchFormButton.class = 'hidden'
+      }
+
+      if (ctx.editForm === undefined || gopts.createEnabled == false) {
+        tbopts.leftButtons.create.class = 'hidden'
       }
 
       if (ctx.bulkUpdateForm === undefined) {

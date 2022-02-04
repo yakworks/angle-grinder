@@ -3,7 +3,7 @@ import _ from 'lodash'
 import EditModalCtrl from './EditModalCtrl'
 import BulkUpdateModalCtrl from './BulkUpdateModalCtrl'
 import { argsMerge } from '../../utils/classUtils'
-import appConfigApi from '../../../dataApi/AppConfigApi'
+import appConfigApi from '@yakit/core/stores/AppConfigApi'
 import toast from '@yakit/ui/growl'
 // import { transformOptions } from '../../controls/formly/helpers'
 

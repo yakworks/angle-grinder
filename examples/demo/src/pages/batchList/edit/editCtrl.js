@@ -1,7 +1,7 @@
 import BaseEditCtrl from 'angle-grinder/src/ng/gridz/list/BaseEditCtrl'
 // import appState from 'angle-grinder/src/tools/AppState'
 import _ from 'lodash'
-import appConfigApi from 'angle-grinder/src/dataApi/AppConfigApi'
+import appConfigApi from '@yakit/core/stores/AppConfigApi'
 
 export default class EditCtrl extends BaseEditCtrl {
   vm = {}

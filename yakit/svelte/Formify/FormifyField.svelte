@@ -24,7 +24,6 @@
 
     if(data) selectOptions.itemData = data
     if(multiple) selectOptions.isMulti = true
-    console.log(`${name} multiple`, multiple)
 
     if(minimumInputLength || minSearchChars) {
       selectOptions.isEagerLoad = false

@@ -5,6 +5,11 @@ export { default as Page } from 'framework7-svelte/esm/svelte/page.svelte';
 export { default as PageContent } from 'framework7-svelte/esm/svelte/page-content.svelte';
 export { default as Navbar } from 'framework7-svelte/esm/svelte/navbar.svelte';
 
+export { default as AccordionContent } from 'framework7-svelte/esm/svelte/accordion-content.svelte';
+export { default as AccordionItem } from 'framework7-svelte/esm/svelte/accordion-item.svelte';
+export { default as AccordionToggle } from 'framework7-svelte/esm/svelte/accordion-toggle.svelte';
+export { default as Accordion } from 'framework7-svelte/esm/svelte/accordion.svelte';
+
 export { default as Block } from 'framework7-svelte/esm/svelte/block.svelte';
 export { default as BlockHeader } from 'framework7-svelte/esm/svelte/block-header.svelte';
 export { default as BlockFooter } from 'framework7-svelte/esm/svelte/block-footer.svelte';
