@@ -30,3 +30,8 @@ body {
     position: absolute;
   }
 }
+
+//makes it so select drop down is not hidden
+.popover-inner {
+  overflow: visible;
+}

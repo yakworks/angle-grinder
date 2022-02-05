@@ -56,7 +56,8 @@
       if (_.isFunction(btnItem.action)) {
         await btnItem.action(btnItem, event)
       } else {
-        await listController.ctx.gridOptions.fireToolbarAction(btnItem, event)
+        // calls the listController fireToolbarAction, which will fallback to the ctx.toolbarHandler
+        await listController.fireToolbarAction(btnItem, event)
       }
     } finally {
       isLoading = false
@@ -100,8 +101,10 @@
       {/if}
     {/each}
 
+
     {#if title}
-    <div class="toolbar-title">{title}</div>
+    <div class="spacer"/>
+    <div class="toolbar-title text-gray-strong">{title}</div>
     {/if}
     <div class="spacer"/>
 
