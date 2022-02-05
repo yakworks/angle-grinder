@@ -37,7 +37,6 @@
     async onSubmit(values, form, errors){
       try {
         dispatch('beforeSubmit', {values, form, errors});
-        // Log.debug("onSubmit", values)
         // await dataApi.delay(2000)
         const savedItem = await dataApi.save(values)
         popoverOpened = false

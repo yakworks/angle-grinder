@@ -53,6 +53,9 @@
   /** will bind:this on this comp */
   export let selectEl = undefined
 
+  /** turns on and off loading indicator*/
+  export let isWaiting = false
+
   //assign itemData if not set in options
   _defaults(opts, { itemData })
 
@@ -86,6 +89,7 @@
   // reacte to listOpen to load items if they have not been yet.
   $: (async () => {
     if(listOpen) opts.items = await selectContext.loadItemsIfNeeded(listOpen)
+    isWaiting = false
   })(); //trick way to call svelte reactive for async
 
 
@@ -101,6 +105,7 @@
       await selectContext.loadItemsIfNeeded()
       //only set selectedItem, it will trigger the handleSelect to set the value
       selectedItem = selectContext.getSelectedItem(_val)
+      isWaiting = false
     }
   })
 
@@ -139,7 +144,8 @@
 
 <ListInput label={opts.label} {name} clearButton={false} input={false} class={className}>
   <div class="select-theme f7" slot="input">
-      <Select containerClasses="{className}" {...opts} value={selectedItem} bind:listOpen
+      <Select containerClasses="{className}" {...opts} value={selectedItem}
+        bind:listOpen bind:isWaiting
         on:select={handleSelect} on:clear={handleClear} bind:this={selectEl}/>
   </div>
 </ListInput>

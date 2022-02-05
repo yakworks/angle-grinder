@@ -28,7 +28,6 @@
     if(minimumInputLength || minSearchChars) {
       selectOptions.isEagerLoad = false
     }
-    console.log(`${name} selectOptions`, selectOptions)
     //merge in label
     selectOptions.label = opts.label
   }

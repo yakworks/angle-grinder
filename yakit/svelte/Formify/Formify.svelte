@@ -61,8 +61,6 @@
   // TODO Need a way to disable submit but if isModified is used then wont allow until onBlur when its updated
   $: disableSave = $isSubmitting
 
-  Log.debug('transformedSchema', transformedSchema)
-
   $: if(formContext) {
     //state store
     state = formContext.state

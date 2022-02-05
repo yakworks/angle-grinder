@@ -285,7 +285,7 @@
       if (type === 'textarea' && resizable) {
         inputEl.addEventListener('textarea:resize', onTextareaResize, false);
       }
-      if (clearButton) {
+      if (clearButton && !disabled) {
         inputEl.addEventListener('input:empty', onInputEmpty, false);
         inputEl.addEventListener('input:clear', onInputClear, false);
       }
@@ -357,7 +357,7 @@
     if (type === 'textarea' && resizable) {
       inputEl.removeEventListener('textarea:resize', onTextareaResize, false);
     }
-    if (clearButton) {
+    if (clearButton && !disabled) {
       inputEl.removeEventListener('input:empty', onInputEmpty, false);
       inputEl.removeEventListener('input:clear', onInputClear, false);
     }
@@ -559,7 +559,7 @@
               <slot name="error-message" />
             </div>
           {/if}
-          {#if clearButton}<span class="input-clear-button" />{/if}
+          {#if clearButton && !disabled}<span class="input-clear-button" />{/if}
           {#if typeof info !== 'undefined' || hasInfoSlots}
             <div class="item-input-info">
               {plainText(info)}
@@ -761,7 +761,7 @@
             <slot name="error-message" />
           </div>
         {/if}
-        {#if clearButton}<span class="input-clear-button" />{/if}
+        {#if clearButton && !disabled}<span class="input-clear-button" />{/if}
         {#if typeof info !== 'undefined' || hasInfoSlots}
           <div class="item-input-info">
             {plainText(info)}

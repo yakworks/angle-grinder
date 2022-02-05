@@ -422,7 +422,7 @@ export default class GridDataApiCtrl {
     return this.reload()
   }
 
-  saveRow(id, data) {
+  updateRow(id, data) {
     if (this.hasRow(id)) {
       return this.updateRow(id, data)
     } else {
@@ -518,7 +518,6 @@ export default class GridDataApiCtrl {
       if(!_.isEmpty(q)){
         p.q = q
       }
-      Log.debug("gridLoader search " + this.dataApi.key, p)
       const data = await this.dataApi.search(p)
       // this.addJSONData(data)
     } catch (er) {

@@ -12,14 +12,14 @@
 
   //toolbar options
   export let title = undefined
-  export let options = {}
+  export let opts = {}
   export let listController
 
   $: stateStore = listController.ctx.stateStore
 
   let isLoading = false
 
-  let opts = options
+  // let opts = options
 
   //turn object to array with key field and returns only visible
   function filterVisible(buttonOpts){
@@ -126,7 +126,7 @@
       </div>
     </div>
 
-    {#if options.searchFormButton.class !== 'hidden' }
+    {#if opts.searchFormButton.class !== 'hidden' }
     <Button tooltip="Toggle search form" icon="manage_search" on:click={toggleShowSearch}/>
     {/if}
     <Button popoverOpen=".list-options-popover" icon="more_vert" tooltip="Actions"/>
