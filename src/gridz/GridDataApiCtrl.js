@@ -184,9 +184,7 @@ export default class GridDataApiCtrl {
   }
 
   updateFooter(data) {
-    setTimeout(_ => {
-      this.getGridEl().footerData('set', data)
-    })
+    if(this.jqGridEl) this.jqGridEl.footerData('set', data)
   }
 
   // Populates the grid with the given data.
@@ -316,7 +314,7 @@ export default class GridDataApiCtrl {
   // The syntax of data array is: {name1:value1,name2: value2...}
   // where the name is the name of the column as described in the colModel
   // and the value is the new value.
-  updateRow(id, data, emptyMissingCells) {
+  updateRow(id, data, emptyMissingCells = false) {
     if (emptyMissingCells == null) { emptyMissingCells = true }
     const flatData = flattenObject(data)
 
@@ -422,7 +420,7 @@ export default class GridDataApiCtrl {
     return this.reload()
   }
 
-  saveRow(id, data) {
+  addOrUpdateRow(id, data) {
     if (this.hasRow(id)) {
       return this.updateRow(id, data)
     } else {
@@ -518,7 +516,6 @@ export default class GridDataApiCtrl {
       if(!_.isEmpty(q)){
         p.q = q
       }
-      Log.debug("gridLoader search " + this.dataApi.key, p)
       const data = await this.dataApi.search(p)
       // this.addJSONData(data)
     } catch (er) {

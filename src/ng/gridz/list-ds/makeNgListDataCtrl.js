@@ -41,7 +41,7 @@ const makeNgListDataCtrl = (ctrl) => {
       )
       modInst.result
         .then(editedVm => {
-          isUpdate ? ctrl.getGridCtrl().updateRow(editedVm.id, editedVm) : ctrl.getGridCtrl().addRow(editedVm.id, editedVm)
+          isUpdate ? ctrl.getGridCtrl().addOrUpdateRow(editedVm.id, editedVm) : ctrl.getGridCtrl().addRow(editedVm.id, editedVm)
         })
         .catch(() => {
           console.log('Modal dismissed at: ' + new Date())

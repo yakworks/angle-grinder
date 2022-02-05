@@ -116,7 +116,9 @@ const makeListDataCtrl = (opts) => {
       }
     },
 
+    // Fires for common actions, will fall back to ctx.toobarHandler if nothing exists
     fireToolbarAction(btnItem, event) {
+      console.log("listDataCtrl fireToolbarAction", btnItem, event)
       switch (btnItem.key) {
         case 'create':
           return ctrl.create()
@@ -127,7 +129,11 @@ const makeListDataCtrl = (opts) => {
         case 'delete':
           return ctrl.deleteSelected()
         default:
-          if (isFunction(ctrl[btnItem.key])) {
+          if(ctrl.ctx.toolbarHandler){
+            return ctrl.ctx.toolbarHandler(btnItem, event)
+          }
+          //FIXME this is kind of dangerous and should be removes and use ctx.toolbarHandler
+          else if (isFunction(ctrl[btnItem.key])) {
             return ctrl[btnItem.key](btnItem, event)
           }
       }

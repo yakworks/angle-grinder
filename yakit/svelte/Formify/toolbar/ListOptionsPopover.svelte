@@ -7,8 +7,6 @@
   import { isFunction } from '@yakit/core/dash';
 
   export let listController
-  export let popoverId = undefined
-
   $: stateStore = listController.ctx.stateStore
 
   let defaultMenuItems = [
@@ -52,7 +50,7 @@
 
 </script>
 
-<Popover bind:this={popComponent} id={popoverId} onPopoverClose={popoverClose}>
+<Popover bind:this={popComponent} class="list-options-popover" onPopoverClose={popoverClose}>
   <List>
     {#each displayMenutItems as item}
       <ListItem id={item.id} link="#" title={item.display} popoverClose

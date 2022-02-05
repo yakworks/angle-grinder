@@ -10,7 +10,6 @@ import { isUndefined, isPlainObject, isEmpty } from '../is'
 import schemaRefs from './schemaRefs'
 
 export function transformFields(fields, ctrl) {
-  // console.log("fields", fields)
   if(isEmpty(fields)) return fields
   // if its a plain object and first key starts with column and its a columns layout
   if (isPlainObject(fields) && Object.keys(fields)[0].startsWith('column')) {
@@ -113,7 +112,6 @@ export function refMerge(field) {
 export function selectOptions(field) {
   //options or selectOptions will work
   let options = field.selectOptions || field.options
-  console.log("options", options)
   if(options) {
     if(!field.input) field.input = 'select'
     //if isValueObject and no type is set then make it object
@@ -140,7 +138,7 @@ export function selectOptions(field) {
  */
 export function fieldSchemaType(field) {
   if(!field.type) field.type = 'string'
-  let {type = 'string', format, input } = field
+  let {type, format, input } = field
   //if input is specified then its been overriden so do nothing
   if(input) return
 
@@ -149,16 +147,31 @@ export function fieldSchemaType(field) {
     format = type
     type = 'string'
   }
+  //if format starts with amount. we can have amount, amount-positive, amount-negative
+  if(format && format.startsWith("amount")){
+    field.multipleOf = 0.01
+    if(!type) type = 'number'
+  }
 
   if(format === 'date' || format === 'date-time'){
     input = format
   } else if(type === 'boolean'){
     input = 'toggle'
-  } else if(type === 'integer' || type === 'number' ){
+  } else if(type === 'integer' ){
+    input = type
+  } else if(type === 'number' ){
     input = type
   } else {
+    if(!type) type = 'string'
     input = 'text'
   }
+  //do some special formats
+  if(format){
+    if(format.endsWith("positive") && !field.min ) field.min = 0
+    if(format.endsWith("negative") && !field.max ) field.max = 0
+  }
+
+
   field.type = type
   field.input = input
 

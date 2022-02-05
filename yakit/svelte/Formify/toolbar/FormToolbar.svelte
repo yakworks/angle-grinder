@@ -14,12 +14,10 @@
   export let title = undefined
   export let opts = {}
   export let listController
-  export let listId = undefined
 
   $: stateStore = listController.ctx.stateStore
 
   let isLoading = false
-  let optionsPopoverId = `${listId}-options-popover`
 
   // let opts = options
 
@@ -134,10 +132,10 @@
     {#if opts.searchFormButton.class !== 'hidden' }
     <Button tooltip="Toggle search form" icon="manage_search" on:click={toggleShowSearch}/>
     {/if}
-    <Button popoverOpen={`#${optionsPopoverId}`} icon="more_vert" tooltip="Actions"/>
+    <Button popoverOpen=".list-options-popover" icon="more_vert" tooltip="Actions"/>
   </div>
 </header>
 
-<ListOptionsPopover popoverId={optionsPopoverId} {listController}/>
+<ListOptionsPopover {listController}/>
 
 

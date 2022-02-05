@@ -140,7 +140,7 @@ $toast-padding: 15px;
     position: relative;
     padding: 0 $toast-padding;
     border-radius: 2px;
-    max-width: 320px;
+    max-width: 380px;
     transform: translateY(25%);
     box-sizing: border-box;
     flex-shrink: 0;
@@ -180,19 +180,19 @@ $toast-padding: 15px;
     &--dismissible {
 
       .notyf__wrapper {
-        padding-right: 30px;
+        padding-right: 20px;
       }
     }
   }
 
   &__ripple {
-    height: 600px;
-    width: 400px;
+    height: 500px;
+    width: 600px;
     position: absolute;
     transform-origin: bottom right;
     right: 0;
     top: 0;
-    border-radius: 50%;
+    border-radius: 40%;
     transform: scale(0) translateY(-51%) translateX(13%);
     z-index: 5;
     animation: ripple 0.4s ease-out forwards;
@@ -277,6 +277,8 @@ $toast-padding: 15px;
     animation: notyf-fadeinup 0.3s forwards;
     animation-delay: 0.25s;
     line-height: 1.5em;
+    overflow-y: auto;
+    max-height: 200px;
   }
 }
 

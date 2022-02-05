@@ -4,7 +4,7 @@
   import Select from 'svelte-select'
   import ItemMulti from './ItemMulti.svelte'
   import ItemSingle from './ItemSingle.svelte'
-
+  import { uniqueId } from '@yakit/core/dash'
   import apiHolder from '@yakit/core/stores/apiHolder'
 
   const dispatch = createEventDispatcher()
@@ -95,7 +95,7 @@
   }
 
   // create unique id if not set
-  if (!id) id = _.uniqueId('select')
+  if (!id) id = uniqueId('select')
 
   let opts = {
     dataApi,

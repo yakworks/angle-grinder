@@ -6,7 +6,7 @@
   import ListInput  from './ListInput.svelte'
   import { classNames } from '../shared/utils';
   import { fieldDefaults } from '@yakit/core/transformer'
-
+  import { uniqueId } from '@yakit/core/dash'
   const dispatch = createEventDispatcher()
 
   /** name is the required key or object field path */
@@ -15,7 +15,6 @@
   export let placeholder = undefined
 
   export let opts = {}
-  Log.debug("Chip options", cloneDeep(opts))
   let selectOpts = omit(opts, 'input', 'key', 'label', 'name', 'type', 'validation')
   // fieldDefaults(name, opts)
   label = opts.label
@@ -65,7 +64,7 @@
   }
 
   // create unique id if not set
-  if (!id) id = _.uniqueId('chips')
+  if (!id) id = uniqueId('chips')
 
   _defaults(selectOpts, { Item, id, inputStyles, listOffset, noOptionsMessage, items, placeholder})
 

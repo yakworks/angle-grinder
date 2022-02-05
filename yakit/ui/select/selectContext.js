@@ -59,16 +59,13 @@ export const selectContext = (opts) => {
 
       //if minimumInputLength then will query on demand
       if(isEagerLoad) {
-        // console.log("setup data func for rest api")
         //if minimumInputLength is not set then load the whole dataset
         opts.data = () => {
           return obj.getDataFromApi({opts, dataApi, dataApiConfig}) //get all of it.
         }
       }
       else {
-        console.log("is not isEagerLoad so using loadOptions", isEagerLoad)
         opts.loadOptions = async (filterText) => {
-          console.log("loadOptions filterText", filterText)
           if (!(filterText.length >= minSearchChars)) return
           let qSearch = filterText
           let qExtra = dataApiConfig.q
@@ -85,7 +82,6 @@ export const selectContext = (opts) => {
       if (Array.isArray(itemData)) {
         // translateItemsIfNeeded makes ['red','green'] into [{id:'red',name'red}, etc...]
         opts.data = obj.translateItemsIfNeeded(itemData)
-        // console.log("translated item data", opts.data)
       }
     }
 
@@ -121,7 +117,6 @@ export const selectContext = (opts) => {
 
     if (Array.isArray(opts.propertyLabel)) {
       const lastItem = opts.propertyLabel[opts.propertyLabel.length - 1]
-      console.log("itm[lastItem]", itm[lastItem])
       return itm[lastItem]
     } else {
       return itm[opts.propertyLabel];
@@ -175,10 +170,8 @@ export const selectContext = (opts) => {
   obj.loadItemsIfNeeded = async (_) => {
     if(!opts.isEagerLoad) return
     if(!opts.items && !opts.isWaiting) {
-      console.log("first call to load data")
       opts.isWaiting = true
       opts.items = await opts.data()
-      console.log("loaded items", opts.items)
       opts.isWaiting = false
     }
     return opts.items
@@ -192,13 +185,11 @@ export const selectContext = (opts) => {
     if(opts.isValueObject) {
       return value
     } else {
-      console.log("getSelectedItem findItemByKey opts.isEagerLoad", opts.isEagerLoad)
       return obj.getSelectedValue(value, obj.findItemByKey)
     }
   }
 
   function getSelectedValue(item, finderFunc) {
-    // console.log("getSelectedValue", item, finderFunc)
     //finder function to use
     if(!finderFunc) finderFunc = isValueObject ? findItem : getItemKey
     let val
@@ -206,7 +197,6 @@ export const selectContext = (opts) => {
       val = item.map((selection) => finderFunc(selection));
       // keyVal = item.map( selection => getItemKey(selection))
     } else {
-      console.log("getSelectedValue", item)
       val = finderFunc(item)
     }
     return val
@@ -220,7 +210,6 @@ export const selectContext = (opts) => {
    * @returns
    */
   function findItem(selection) {
-    console.log("findItem", selection)
     return findItemByKey(getItemKey(selection)) || selection
   }
 
@@ -231,7 +220,6 @@ export const selectContext = (opts) => {
    * @returns the found object
    */
   function findItemByKey(key) {
-    console.log("findItemByKey", key)
     if(!opts.items) return undefined
     return opts.items.find((item) => getItemKey(item) === key)
   }
