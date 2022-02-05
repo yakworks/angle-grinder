@@ -24,6 +24,8 @@
   export let state = undefined
   export let isSubmitting = undefined
   export let isModified = undefined
+  export let isModifying = undefined
+  export let isDisableSave = undefined
   /** The transformed schema */
   export let transformedSchema = transformFields(schema)
 
@@ -59,13 +61,17 @@
 
   // $: disableSave = !($isModified) || $isSubmitting
   // TODO Need a way to disable submit but if isModified is used then wont allow until onBlur when its updated
-  $: disableSave = $isSubmitting
-
+  // $: {
+  //   disableSave = !($isModifying || $isModified)
+  //   if($isSubmitting) disableSave = true
+  // }
   $: if(formContext) {
     //state store
     state = formContext.state
     isSubmitting = formContext.isSubmitting
     isModified = formContext.isModified
+    isModifying = formContext.isModifying
+    isDisableSave = formContext.isDisableSave
   }
 </script>
 
@@ -79,13 +85,14 @@
     {#if !($$slots.footer)}
       <CardFooter>
         <Button7 onClick={onCancel}>Cancel</Button7>
-        <Button7 type=button disabled={disableSave} preloader loading={$isSubmitting} onClick={onSave}>Save</Button7>
+        <Button7 type=button disabled={$isDisableSave} preloader loading={$isSubmitting} onClick={onSave}>Save</Button7>
       </CardFooter>
     {/if}
     <slot name="footer" />
   {:else}
     <!-- Column Layout-->
     <Card class="m-0 bg-body-low search-card" >
+      <slot name="header" />
       <CardContent class="p0">
         <div class="tile is-ancestor">
           {#each transformedSchema.columns as colCfg}
@@ -108,7 +115,7 @@
       {#if !($$slots.footer)}
         <CardFooter>
           <Button7 onClick={onCancel}>Cancel</Button7>
-          <Button7 type=button disabled={disableSave} preloader loading={$isSubmitting} onClick={onSave}>Save</Button7>
+          <Button7 type=button disabled={$isDisableSave} preloader loading={$isSubmitting} onClick={onSave}>Save</Button7>
         </CardFooter>
       {/if}
       <slot name="footer" />

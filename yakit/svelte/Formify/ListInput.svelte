@@ -88,7 +88,8 @@
   let f7Calendar;
   let f7ColorPicker;
 
-  const {form, updateValidateField, getValue, errors, formOpts} = getContext(ctxKey);
+  const formContext = getContext(ctxKey);
+  const errors = formContext.errors
 
   export function calendarInstance() {
     return f7Calendar;
@@ -244,6 +245,7 @@
   function onInput(...args) {
     emit('input', [...args]);
 
+    formContext.isModifying.set(true)
     if (!(validateOnBlur || validateOnBlur === '') && (validate || validate === '') && inputEl) {
       validateInput(inputEl);
     }
@@ -269,7 +271,6 @@
 
   function onChange(...args) {
     emit('change', [...args]);
-
     if (type === 'texteditor') {
       emit('textEditorChange', [args[0]]);
       value = args[1];

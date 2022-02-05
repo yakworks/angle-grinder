@@ -61,22 +61,16 @@
     'item-input-required': opts.required,
   })
 
-  const {form, updateValidateField, getValue, errors, formOpts} = getContext(ctxKey);
+  let isChanged = false
+
+  const formContext = getContext(ctxKey);
+  const {form, updateValidateField, getValue, formOpts} = formContext;
 
   if(!formOpts.showPlaceholders) listInputOpts['placeholder'] = ""
-  // listInputOpts.placeholder = "foo"
 
   export let value = null
 
   $: value = getValue($form, name)
-
-  $: errorMessage = get($errors, name) || ''
-
-  function handleChangeWrap(evt) {
-    console.log("handleChangeWrap evt", evt)
-    console.log("handleChangeWrap value", value)
-    // handleChange(evt)
-  }
 
   function handleChange(event) {
     const element = event.target;
@@ -96,26 +90,15 @@
     handleChange(evt)
   }
 
-  let oldVal = value
-  let isChanged = false
   function onChange(evt) {
-    // console.log("onChange evt", evt)
-    // console.log("onChange value", value)
-    // console.log("onChange oldVal", oldVal)
     isChanged = true
-    // handleChange(evt)
   }
 
-  function onInput(evt) {
-    // console.log("onInput evt", evt)
-    // console.log("onInput value", value)
-    // handleChange(evt)
-  }
 </script>
 <!-- <ListInput {...$$props} -->
 
 <ListInput {...listInputOpts} {type} class={classes}
-  {onChange} {onBlur} {onInput} bind:value />
+  {onChange} {onBlur} bind:value />
 
 <!-- <input
   {name}

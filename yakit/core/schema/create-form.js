@@ -7,6 +7,7 @@
 
 import {derived, writable, get} from 'svelte/store';
 import {util} from './util';
+import {get as _get} from '../dash';
 
 const NO_ERROR = '';
 const IS_TOUCHED = true;
@@ -51,6 +52,7 @@ export const createForm = (config) => {
 
   const isSubmitting = writable(false);
   const isValidating = writable(false);
+  const isModifying = writable(false);
 
   const isValid = derived(errors, ($errors) => {
     const noErrors = util
@@ -71,6 +73,13 @@ export const createForm = (config) => {
 
   const isModified = derived(modified, ($modified) => {
     return util.getValues($modified).includes(true);
+  });
+
+  const isDisableSave = derived([isModified, isModifying, isSubmitting],
+    ([$isModified, $isModifying, $isSubmitting]) => {
+      //if its not modified and not modifying
+      let val = !($isModified || $isModifying) || $isSubmitting
+      return val
   });
 
   function validateField(field) {
@@ -202,8 +211,15 @@ export const createForm = (config) => {
     handleReset();
   }
 
+  /** The function used to get value form object */
+  function getValue(obj, path){
+    let val = _get(obj, path)
+    return val === undefined ? null : val
+  }
+
   return {
     form,
+    data: form,
     errors,
     touched,
     modified,
@@ -211,6 +227,7 @@ export const createForm = (config) => {
     isSubmitting,
     isValidating,
     isModified,
+    isDisableSave,
     handleChange,
     handleSubmit,
     handleReset,
@@ -219,6 +236,8 @@ export const createForm = (config) => {
     updateTouched,
     validateField,
     updateInitialValues,
+    isModifying,
+    getValue,
     state: derived(
       [
         form,

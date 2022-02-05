@@ -107,7 +107,7 @@
   {/if}
   <div use:init class="gridz-wrapper card m-0">
   {#if ctx.toolbarOptions }
-   <ListToolbar {title} {listController} opts={ctx.toolbarOptions} />
+   <ListToolbar listId={gridId} {title} {listController} opts={ctx.toolbarOptions} />
   {/if}
   <table class={classes} class:is-dense={$stateStore.isDense}></table>
   <div class="gridz-pager"></div>
