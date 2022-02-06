@@ -1,3 +1,7 @@
+<!--
+  Copied in from F7 so we can change the name and styling so it doesnt conflict with our button
+  Game plan would be to unify them into 1
+ -->
 <script>
   import { createEventDispatcher } from 'svelte';
   import {
@@ -6,15 +10,15 @@
     routerClasses,
     actionsAttrs,
     actionsClasses,
-  } from './shared/mixins';
-  import { classNames, extend, isStringProp, plainText, createEmitter } from './shared/utils';
-  import { restProps } from './shared/rest-props';
-  import { useTooltip } from './shared/use-tooltip';
-  import { useRouteProps } from './shared/use-route-props';
-  import { useIcon } from './shared/use-icon';
+  } from '../shared/mixins';
+  import { classNames, extend, isStringProp, plainText, createEmitter } from '../shared/utils';
+  import { restProps } from '../shared/rest-props';
+  import { useTooltip } from '../shared/use-tooltip';
+  import { useRouteProps } from '../shared/use-route-props';
+  import { useIcon } from '../shared/use-icon';
 
-  import {UseIcon} from './index';
-  import {Preloader} from './index';
+  import {UseIcon} from '../index';
+  import {Preloader} from '../index';
 
   const emit = createEmitter(createEventDispatcher, $$props);
 

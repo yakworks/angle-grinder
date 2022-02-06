@@ -2,6 +2,7 @@
 <script>
   import { Gridz } from '@yakit/svelte/index'
   import sessionStores from '~/store/sessionServices'
+  import QuickFilter from './QuickFilter.svelte'
 
   let gridOptions = {
     colModel: [
@@ -81,5 +82,5 @@
 
 </script>
 
-<Gridz {dataApi} {ctx} />
+<Gridz {dataApi} {ctx} {QuickFilter}/>
 <!-- <JqGrid {ctx}/> -->

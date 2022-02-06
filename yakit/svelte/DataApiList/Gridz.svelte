@@ -24,6 +24,8 @@
   export let gridCtrl = undefined
   /** toolbar title */
   export let title = undefined
+  /** the quickfilter buttons to add to toolbar */
+  export let QuickFilter = undefined
 
   gridCtrl = new GridDataApiCtrl()
 
@@ -107,7 +109,7 @@
   {/if}
   <div use:init class="gridz-wrapper card m-0">
   {#if ctx.toolbarOptions }
-   <ListToolbar listId={gridId} {title} {listController} opts={ctx.toolbarOptions} />
+    <ListToolbar listId={gridId} {title} {listController} opts={ctx.toolbarOptions} {QuickFilter}/>
   {/if}
   <table class={classes} class:is-dense={$stateStore.isDense}></table>
   <div class="gridz-pager"></div>

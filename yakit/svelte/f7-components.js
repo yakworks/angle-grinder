@@ -45,7 +45,7 @@ export { default as TextEditor } from 'framework7-svelte/esm/svelte/text-editor.
 export { default as Preloader } from 'framework7-svelte/esm/svelte/preloader.svelte';
 export { default as UseIcon } from 'framework7-svelte/esm/svelte/use-icon.svelte';
 
-export { default as Segmented } from 'framework7-svelte/esm/svelte/segmented.svelte';
+// export { default as Segmented } from 'framework7-svelte/esm/svelte/segmented.svelte';
 
 // export { default as Row } from 'framework7-svelte/esm/svelte/row.svelte';
 // export { default as Col } from 'framework7-svelte/esm/svelte/col.svelte';

@@ -5,7 +5,6 @@
   import { fade, fly } from "svelte/transition";
   import {Button, Button7, Segmented} from '@yakit/svelte/index'
   import TbButton from '../../Toolbar/TbButton.svelte'
-  import QuickFilter from './QuickFilter.svelte'
   import { merge } from '@yakit/core/dash';
   import { classNames } from '../../shared/utils'
   import ListOptionsPopover from './ListOptionsPopover.svelte'
@@ -15,6 +14,9 @@
   export let opts = {}
   export let listController
   export let listId = undefined
+
+  /** the quickfilter buttons to add to toolbar */
+  export let QuickFilter = undefined
 
   $: stateStore = listController.ctx.stateStore
 
@@ -111,8 +113,7 @@
     <div class="spacer"/>
 
     <!-- <QuickFilter /> -->
-
-    <slot name="filter" />
+    <svelte:component this={QuickFilter} />
 
     <div class="toolbar-item p-0 quick-search-item">
       <div class="control has-icons-right has-icons-left">

@@ -1,6 +1,7 @@
 export { default as Avatar } from './Avatar.svelte';
-export { default as Button } from './Button.svelte';
-export { default as Button7 } from './Button7.svelte';
+
+export * from './Buttons';
+
 export { default as Col } from './Col.svelte';
 export { default as Columns } from './Columns.svelte';
 export { default as Row } from './Columns.svelte';

@@ -16,6 +16,12 @@ body {
 }
 
 :root {
+  /* Sync default color theme */
+  --f7-theme-color: #395e84;
+  --f7-theme-color-rgb: 57, 94, 132;
+  --f7-theme-color-shade: #2d4a68;
+  --f7-theme-color-tint: #4572a0;
+
   --f7-page-bg-color: #{cvar(body)};
   --f7-tabbar-link-inactive-color: #{cvar(text, light)};
   --f7-input-clear-button-color: var(--color-shade-20);
