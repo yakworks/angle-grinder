@@ -192,3 +192,26 @@ export function fieldDefaults(path, opts) {
     input: 'text'
   })
 }
+
+/**
+ * for search form type shemas add some defaults such as isMulti:true on selects.
+ * if dont want that then set isMulti: false on the passed in and it wont get overwritten
+ */
+export function searchDefaults(schema){
+  let fieldListToUse = schema
+  //if its a plain object then assume its a columns config and will have a fields property
+  if(isPlainObject(schema)){
+    fieldListToUse = schema['fields']
+  }
+
+  fieldListToUse.forEach(field => {
+    if(field.selectOptions && field.selectOptions.itMulti === undefined){
+      field.selectOptions.itMulti = true
+      // console.log("searchDefaults", field.selectOptions)
+      // _defaults(field.selectOptions,{
+      //   itMulti:true
+      // })
+      // console.log("searchDefaults", field.selectOptions)
+    }
+  })
+}

@@ -45,7 +45,6 @@
         console.error(er)
         handleError(er)
       }
-
     }
   })
 

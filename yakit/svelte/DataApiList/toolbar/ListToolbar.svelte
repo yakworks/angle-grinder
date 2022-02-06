@@ -106,7 +106,7 @@
 
     {#if title}
     <div class="spacer"/>
-    <div class="toolbar-title text-gray-strong">{title}</div>
+    <div class="toolbar-title text-gray-strong text-lg">{title}</div>
     {/if}
     <div class="spacer"/>
 

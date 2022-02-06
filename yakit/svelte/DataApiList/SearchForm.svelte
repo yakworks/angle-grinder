@@ -7,6 +7,7 @@
     AccordionItem, AccordionToggle, AccordionContent } from '@yakit/svelte/index'
   import { classNames, createEmitter } from '../shared/utils'
   import { Formify } from '@yakit/svelte/Formify';
+  import { searchDefaults } from '@yakit/core/schema/transformSchema'
   import { handleError } from '@yakit/svelte/Formify/problemHandler';
   import { _defaults } from '@yakit/core/dash'
   import { app } from '@yakit/svelte/framework7';
@@ -76,6 +77,12 @@
     formContext.handleSubmit()
   }
 
+  // setup isMulti defaults for selects
+  export let onTransformedSchema = (schema) => {
+    console.log("schema", schema)
+    searchDefaults(schema)
+  }
+
   onMount( () => {
     // let popper = popoverEl.instance()
     // popper.open("#fooey")
@@ -86,7 +93,8 @@
 
 <div class="accordion-item" id="searchAccordian">
   <div class="accordion-item-content">
-    <Formify class={formClass} name={formName} opts={formOpts} {schema} bind:data bind:formContext >
+    <Formify class={formClass} name={formName} opts={formOpts} {schema} {onTransformedSchema}
+      bind:data bind:formContext >
       <CardFooter class="right" slot="footer">
         <Button onClick={onCancel} class="mr-4">Reset</Button>
         <Button color="primary" loading={isSearching} onClick={onSearch}>Search</Button>

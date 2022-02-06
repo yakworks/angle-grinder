@@ -71,14 +71,14 @@ export const createForm = (config) => {
     return object;
   });
 
-  const isModified = derived(modified, ($modified) => {
-    return util.getValues($modified).includes(true);
+  const isModified = derived([modified, isModifying], ([$modified, $isModifying]) => {
+    return util.getValues($modified).includes(true) || $isModifying;
   });
 
-  const isDisableSave = derived([isModified, isModifying, isSubmitting],
-    ([$isModified, $isModifying, $isSubmitting]) => {
+  const isDisableSave = derived([isModified, isSubmitting],
+    ([$isModified, $isSubmitting]) => {
       //if its not modified and not modifying
-      let val = !($isModified || $isModifying) || $isSubmitting
+      let val = !($isModified) || $isSubmitting
       return val
   });
 
@@ -180,12 +180,14 @@ export const createForm = (config) => {
     form.set(getInitial.values());
     errors.set(getInitial.errors());
     touched.set(getInitial.touched());
+    isModifying.set(false);
   }
 
   async function clearErrorsAndSubmit(values) {
     errors.set(getInitial.errors())
     await onSubmit(values, form, errors)
     isSubmitting.set(false)
+    isModifying.set(false)
   }
 
   /**

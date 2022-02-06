@@ -26,11 +26,19 @@
   export let isModified = undefined
   export let isModifying = undefined
   export let isDisableSave = undefined
+
   /** The transformed schema */
-  export let transformedSchema = transformFields(schema)
+  export let transformedSchema = undefined
+  /** Function to call after transformFields to do any post processing */
+  export let onTransformedSchema = (_) => {}
 
   export let denseLayout = false
   export let cardLayout = true
+
+  /* Do the Schema tranformation */
+  transformedSchema = transformFields(schema)
+  //this gets run but for some reason select is not seeing it?
+  onTransformedSchema(transformedSchema)
 
   let className = undefined;
   export { className as class }

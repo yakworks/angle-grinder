@@ -52,7 +52,8 @@
       },
       state:{
         input: 'select',
-        selectOptions:{
+        options:{
+          isMulti: false,
           isValueObject: true,
           data:[{id:0, name: 'Open'}, {id:1, name: 'Closed'}]
         }
@@ -61,7 +62,7 @@
     column3:{
       customer:{
         input: 'select',
-        selectOptions:{
+        options:{
           dataApi:{
             key:'customer'
           }
