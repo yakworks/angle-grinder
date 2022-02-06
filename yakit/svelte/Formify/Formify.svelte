@@ -48,6 +48,14 @@
     'cardLayout': cardLayout
   })
 
+  $: tileWrapperClasses = classNames(
+    'card-content',
+    'formify-tile-wrapper',
+    {
+      'pt-1': ($$slots.header),
+    }
+  );
+
   className
   let isColLayout
   $: if(transformedSchema.columns){
@@ -101,7 +109,7 @@
     <!-- Column Layout-->
     <Card class="m-0 bg-body-low search-card" >
       <slot name="header" />
-      <CardContent class="p0">
+      <div class={tileWrapperClasses}>
         <div class="tile is-ancestor">
           {#each transformedSchema.columns as colCfg}
           <div class="tile is-parent fields-card">
@@ -119,7 +127,7 @@
           </div>
           {/each}
         </div>
-      </CardContent>
+      </div>
       {#if !($$slots.footer)}
         <CardFooter>
           <Button7 onClick={onCancel}>Cancel</Button7>
