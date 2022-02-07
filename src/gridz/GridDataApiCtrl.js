@@ -170,6 +170,11 @@ export default class GridDataApiCtrl {
     return this.jqGridEl.jqGrid('resetSelection')
   }
 
+  selectRow(selRowId) {
+    this.clearSelection()
+    return this.jqGridEl.jqGrid('setSelection', selRowId)
+  }
+
   // Returns an array with data of the requested id = rowid.
   // The returned array is of type name:value, where the name is
   // a name from colModel and the value from the associated column in that row.

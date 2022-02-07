@@ -29,6 +29,7 @@ $.extend($.fn.fmatter, {
   /** for the Svelte popovers */
   editPopoverLink(cellVal, options, rowdata) {
     // console.log("editPopoverLink", cellVal, options, rowdata)
+    if (!cellVal) cellVal = '...'
     const ident = rowdata['id']
     const popoverId = `#${options.gid}-popover-edit`
     return `<a class="editPopoverLink popover-open" href="#" data-id="${ident}" data-popover="${popoverId}">${cellVal}</a>`

@@ -3,6 +3,7 @@
  -->
 <script>
   import { onMount, createEventDispatcher } from 'svelte'
+  import {writable} from 'svelte/store';
   import { Popover, CardHeader, CardFooter, Button, BlockTitle, Block,
     AccordionItem, AccordionToggle, AccordionContent } from '@yakit/svelte/index'
   import { classNames, createEmitter } from '../shared/utils'
@@ -27,6 +28,8 @@
   export let formName = `${listId}-search-form`
   /** the formify context, can bind to it and get its state*/
   export let formContext = undefined
+  /** bind to this to get the searching status, its bound to formContext.isSubmitting*/
+  export let isSearching = undefined
 
   export let data = undefined
 
@@ -62,16 +65,12 @@
       }
     }
   })
-  export let searchFormOpened = undefined
-  // export let popoverOpenEvent = undefined
 
   export let onCancel = (event) => {
     // document.forms[name].reset()
     formContext.handleReset()
-    searchFormOpened = false
-  }
 
-  let isSearching = false
+  }
 
   export let onSearch = async (event) => {
     formContext.handleSubmit()
@@ -89,6 +88,8 @@
     // app.f7.tab.show('#contactsTab', true)
 	});
 
+  $: isSearching = formContext ? formContext.isSubmitting : writable(false)
+
 </script>
 
 <div class="accordion-item" id="searchAccordian">
@@ -97,7 +98,7 @@
       bind:data bind:formContext >
       <CardFooter class="right" slot="footer">
         <Button onClick={onCancel} class="mr-4">Reset</Button>
-        <Button color="primary" loading={isSearching} onClick={onSearch}>Search</Button>
+        <Button color="primary" loading={$isSearching} onClick={onSearch}>Search</Button>
       </CardFooter>
     </Formify>
   </div>
