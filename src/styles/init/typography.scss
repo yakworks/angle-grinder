@@ -8,12 +8,14 @@
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp');
 
 //red example
-// .material-icons-two-tone .red {
+// .material-icons-two-tone {
 //   filter: invert(8%) sepia(94%) saturate(4590%) hue-rotate(358deg) brightness(101%) contrast(112%);
 // }
 
 .material-icons-two-tone {
-  filter: contrast(70%);
+  // filter: contrast(70%);
+  // filter: invert(10%) sepia(94%) saturate(1000%) hue-rotate(225deg) brightness(80%) contrast(80%);
+  filter: invert(10%) sepia(100%) saturate(3000%) hue-rotate(225deg) brightness(30%) contrast(80%);
 }
 
 //**** Typography sizing ****/

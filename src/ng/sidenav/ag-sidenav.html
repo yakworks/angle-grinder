@@ -23,7 +23,7 @@
   <div class="sidenav-nav sidenav-list">
 
     <script type="text/ng-template" id="menuItemTree">
-      <a href="{{$ctrl.hasChildren(mitem) ? '' : (mitem.children ? mitem.children[0].name : mitem.name)}}" class="item-content"
+      <a href="{{$ctrl.hasChildren(mitem) ? '' : mitem.href}}" class="item-content nav"
          ng-click="$ctrl.itemClick(mitem, $event)">
         <span class="icon" ng-if="mitem.data.icon">
           <i class="{{mitem.data.icon}}"></i>

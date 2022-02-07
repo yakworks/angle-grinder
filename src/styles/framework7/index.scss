@@ -17,14 +17,18 @@ body {
 
 :root {
   /* Sync default color theme */
-  --f7-theme-color: #395e84;
+  --f7-theme-color: var(--color-primary-strong);
   --f7-theme-color-rgb: 57, 94, 132;
-  --f7-theme-color-shade: #2d4a68;
-  --f7-theme-color-tint: #4572a0;
+  --f7-theme-color-shade: var(--color-primary-strong);
+  --f7-theme-color-tint: var(--color-primary-light);
 
   --f7-page-bg-color: #{cvar(body)};
   --f7-tabbar-link-inactive-color: #{cvar(text, light)};
   --f7-input-clear-button-color: var(--color-shade-20);
+
+  // --f7-bars-link-color:
+  --f7-tabbar-link-active-color: var(--color-link);
+  --f7-tabbar-link-active-border-color: var(--color-link);
 }
 
 //input mods
