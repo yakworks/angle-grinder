@@ -75,6 +75,7 @@
 
   export let onSearch = async (event) => {
     formContext.handleSubmit()
+    searchFormOpened = false
   }
 
   // setup isMulti defaults for selects
