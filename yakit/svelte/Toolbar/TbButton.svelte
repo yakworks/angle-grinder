@@ -3,6 +3,7 @@
  -->
 <script>
   import {Button} from '@yakit/svelte/index'
+  import { makeLabel } from '@yakit/core/nameUtils'
 
   export let opts
 
@@ -11,11 +12,14 @@
   let isButton = true
 
   $: {
-    if (opts.label && !opts.display) {
-      opts.display = opts.label
-    }
+    // if (opts.label && !opts.display) {
+    //   opts.display = opts.label
+    // }
     if (opts.display && !opts.color) {
       opts.color = 'transparent'
+    }
+    if(opts.tooltip === undefined) {
+      opts.tooltip = opts.label || makeLabel(opts.key)
     }
 
     // if it has menu items then its a dropdown not a button

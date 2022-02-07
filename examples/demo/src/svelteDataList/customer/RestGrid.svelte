@@ -20,5 +20,7 @@
 
 <p>dataApi is {dataApi.key}</p>
 <p>foo is {foo}</p>
+<a href="/foo" class="link nav">WTF</a>
+<a href="https://www.google.com/" class="link nav">google</a>
 
 <Gridz {dataApi} {ctx}/>

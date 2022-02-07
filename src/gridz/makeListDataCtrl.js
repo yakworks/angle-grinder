@@ -13,7 +13,7 @@ const makeListDataCtrl = (opts) => {
   let defaultToolbarOpts = {
     selectedButtons: {
       bulkUpdate: { icon: 'edit_note', tooltip: 'Bulk Update' },
-      xlsExport: { icon: 'mdi-microsoft-excel', tooltip: 'Export to Excel' }
+      xlsExport: { icon: 'view_module', label: 'Export to Excel' }
     },
     leftButtons: {
       create: { icon: 'add_box', tooltip: 'Create New' }

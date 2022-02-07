@@ -88,7 +88,7 @@ class controller {
         // it has no children, its a ui-router link
         // if not fixed then close (minimize) on click
         if (!this.isFixed) minimizeSidenav()
-        appState.$state.go(mitem.children ? mitem.children[0].name : mitem.name)
+        // appState.$state.go(mitem.children ? mitem.children[0].name : mitem.name)
       }
     }
   }
