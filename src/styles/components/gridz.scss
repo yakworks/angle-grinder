@@ -1,6 +1,6 @@
 $grid-selected-color: #d9efef !default;
 $grid-hover-color: #F3F3F3 !default;
-$grid-alt-row-color: #F5F9F9 !default;
+$grid-alt-row-color: hsl(var(--color-primary-h), var(--color-primary-s), var(--color-primary-l),0.05);
 $grid-border: $border;
 
 .ui-jqgrid .ui-jqgrid-view {

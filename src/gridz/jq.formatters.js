@@ -20,7 +20,7 @@ $.extend($.fn.fmatter, {
   },
 
   okIcon(cellVal, options, rowdata) {
-    return cellVal ? "<i class='material-icons'>check</i>" : ''
+    return cellVal ? "<i class='material-icons text-base font-bold'>check</i>" : ''
   },
   /** deprecated, old angular way */
   editActionLink(cellVal, options, rowdata) {
