@@ -172,7 +172,7 @@ export default class GridDataApiCtrl {
 
   selectRow(selRowId) {
     this.clearSelection()
-    return this.jqGridEl.jqGrid('setSelection', selRow)
+    return this.jqGridEl.jqGrid('setSelection', selRowId)
   }
 
   // Returns an array with data of the requested id = rowid.
