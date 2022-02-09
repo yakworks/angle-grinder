@@ -521,7 +521,15 @@ export default class GridDataApiCtrl {
       if(!_.isEmpty(q)){
         p.q = q
       }
-      const data = await this.dataApi.search(p)
+      //jqGRid calls this on init, so this is a hack so we dont run it on init.
+      if(this.gridLoaderInitialized){
+        console.log("gridLoaderInitialized so running dataApi.search")
+        //this calls the data api which sets the data to the store that this listens to to populate data
+        await this.dataApi.search(p)
+      } else {
+        this.gridLoaderInitialized = true
+      }
+
       // this.addJSONData(data)
     } catch (er) {
       this.handleError(er)
