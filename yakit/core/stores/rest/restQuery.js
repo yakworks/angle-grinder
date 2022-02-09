@@ -26,26 +26,63 @@ export const restQuery = ({ api }) => ds => {
      */
     async search(params) {
       let searchParams = ds.setupSearchParams(params)
+      console.log("searchParams",ds.key, searchParams)
       const page = await api.get({ searchParams })
 
       ds.stores.setPageView(page)
       return page
     },
 
+    /**
+     * merges changes in to the current query params
+     * Used for sorting, paging and changing max rows on the current pageView sort.
+     */
+     async searchMerge(params) {
+      let searchParams = ds.setupSearchParams(params)
+      console.log("searchParams",ds.key, searchParams)
+      const page = await api.get({ searchParams })
+
+      ds.stores.setPageView(page)
+      return page
+    },
+
+    /**
+     * adds searchParams, which are the query params ( the part after the ? )
+     * and then calls the get. if the params has a q property and its a string then
+     * @param {*} params
+     */
+    async reloadPage() {
+      let savedQuery = ds.stores.getQuery()
+      let searchParams = ds.stringifyQuery(savedQuery)
+      const page = await api.get({ searchParams })
+      ds.stores.setPageView(page)
+      return page
+    },
+
     // prunes params and stringifies the q param if exists
     setupSearchParams(params){
-      let pruned = prune(params) //removes properties with null or undefined values
-      let { q, sort, projections } = pruned
-      if(restrictSearch) q = {...q, ...restrictSearch}
-      //save it before we stringify
-      ds.stores.setQuery({...pruned, q, projections, sort})
+      params = prune(params) //removes properties with null or undefined values
 
-      if(q) pruned.q = stringify(q)
-      if(projections) pruned.projections = stringify(projections)
+      console.log("setupSearchParams ds.restrictSearch",ds.key, ds.restrictSearch)
+      //merge restrictSearch in if it there
+      if(ds.restrictSearch) {
+        params.q = {...params.q, ...ds.restrictSearch}
+      }
+      //save it before we stringify
+      ds.stores.setQuery(params)
+
+      return ds.stringifyQuery(params)
+    },
+
+    stringifyQuery(params){
+      let { q, sort, projections } = params
+      if(q) params.q = stringify(q)
+      if(projections) params.projections = stringify(projections)
       //stringify sort and remove the quotes and brackets
-      if(sort) pruned.sort = stringify(sort).replace(/{|}|"/g, '')
-      return pruned
+      if(sort) params.sort = stringify(sort).replace(/{|}|"/g, '')
+      return params
     }
+
   })
 
 }
