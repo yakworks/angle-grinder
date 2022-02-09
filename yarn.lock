@@ -15811,9 +15811,9 @@ y18n@^5.0.5:
   resolved "https://registry.yarnpkg.com/y18n/-/y18n-5.0.8.tgz#7f4934d0f7ca8c56f95314939ddcd2dd91ce1d55"
   integrity sha512-0pfFzegeDWJHJIAmTLRP2DwHjdF5s7jo9tuztdQxAhINCdvS+3nGINqPd00AphqJR/0LhANUS6/+7SCb98YOfA==
 
-yakit@yakworks/yakit:
+yakit@yakworks/yakit#grinder:
   version "1.0.0"
-  resolved "https://codeload.github.com/yakworks/yakit/tar.gz/9f6813c7a3d15dd2f6b7dfd5b644338f8b2dda02"
+  resolved "https://codeload.github.com/yakworks/yakit/tar.gz/999f5e602b046c8a904ec5c612c4a4684a5a300b"
   dependencies:
     "@babel/core" "^7.16.5"
     "@babel/eslint-parser" "^7.17.0"

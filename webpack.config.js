@@ -57,7 +57,7 @@ module.exports = function(env, argv) {
     },
     module: {
       rules: [
-        { test: /\.js$/, loader: 'babel-loader', exclude: /(node_modules|bower_components)/},
+        { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules\/(?!yakit).*/},
         {
           test: /\.tsx?$/,
           use: 'ts-loader',

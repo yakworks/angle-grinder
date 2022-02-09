@@ -1,8 +1,0 @@
-/* other mixins used in setting up variables */
-// moved in from bootstrap for xeditable
-@mixin make-row($gutter: $grid-gutter-width) {
-  display: flex;
-  flex-wrap: wrap;
-  margin-right: -$gutter * .5;
-  margin-left: -$gutter * .5;
-}
