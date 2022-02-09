@@ -1,7 +1,7 @@
 import compileTemplate from '../../helpers/compileTemplate'
 import 'angle-grinder/src/ng/gridz'
 import agGridz from 'angle-grinder/src/ng/gridz'
-import {xlsTemplate, xlsData} from 'angle-grinder/src/gridz/excelExport'
+import {xlsTemplate, xlsData} from '@yakit/jqGrid/excelExport'
 
 describe("excelExportSpec", function() {
 

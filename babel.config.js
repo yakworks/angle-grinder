@@ -20,9 +20,10 @@ module.exports = function(api) {
       "root": ["./src"],
       //make it work with both
       "alias": [
-        {"@yakit/core": "./yakit/core"},
-        {"@yakit/ui": "./yakit/ui"},
-        {"@yakit/svelte": "./yakit/svelte"},
+        {"@yakit/core": "./node_modules/yakit/core"},
+        {"@yakit/ui": "./node_modules/yakit/ui"},
+        {"@yakit/svelte": "./node_modules/yakit/svelte"},
+        {"@yakit/jqGrid": "./node_modules/yakit/jqGrid"},
         {"@ag": "./src"},
         {"angle-grinder/src": "./src"},
         //used for demo

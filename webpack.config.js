@@ -57,7 +57,7 @@ module.exports = function(env, argv) {
     },
     module: {
       rules: [
-        { test: /\.js$/, loader: 'babel-loader', exclude: /(node_modules|bower_components)/},
+        { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules\/(?!yakit).*/},
         {
           test: /\.tsx?$/,
           use: 'ts-loader',
@@ -196,9 +196,10 @@ module.exports = function(env, argv) {
       alias: {
         //for svelte since babel doesn't process
         '@ag': path.resolve('./src/'),
-        '@yakit/core': path.resolve('./yakit/core/'),
-        '@yakit/ui': path.resolve('./yakit/ui/'),
-        '@yakit/svelte': path.resolve('./yakit/svelte/'),
+        '@yakit/core': path.resolve('node_modules/yakit/core/'),
+        '@yakit/ui': path.resolve('node_modules/yakit/ui/'),
+        '@yakit/svelte': path.resolve('node_modules/yakit/svelte/'),
+        '@yakit/jqGrid': path.resolve('node_modules/yakit/jqGrid/'),
         'angle-grinder': path.resolve('./'),
         svelte: path.resolve('node_modules', 'svelte'),
         //demo

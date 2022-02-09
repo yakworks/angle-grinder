@@ -1,6 +1,6 @@
 import angular from 'angular'
 import grid2Mod from './module'
-import GridDataApiCtrl from '../../gridz/GridDataApiCtrl'
+import {GridDataApiCtrl} from '@yakit/jqGrid'
 // import Log from '@yakit/core/Log'
 import _ from 'lodash'
 

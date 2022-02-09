@@ -9,9 +9,10 @@
     "paths": {
       "angle-grinder/src/*": ["src/*"],
       "@ag/*": ["src/*"],
-      "@yakit/core/*": ["yakit/core/*"],
-      "@yakit/ui/*": ["yakit/ui/*"],
-      "@yakit/svelte/*": ["yakit/svelte/*"],
+      "@yakit/core/*": ["./node_modules/yakit/core/*"],
+      "@yakit/ui/*": ["./node_modules/yakit/ui/*"],
+      "@yakit/svelte/*": ["./node_modules/yakit/svelte/*"],
+      "@yakit/jqGrid/*": ["./node_modules/yakit/jqGrid/*"],
       "~/*": ["examples/demo/src/*"],
     },
     "checkJs": true,
