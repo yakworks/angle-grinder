@@ -20,7 +20,7 @@ $.extend($.fn.fmatter, {
   },
 
   okIcon(cellVal, options, rowdata) {
-    return cellVal ? "<i class='material-icons'>check</i>" : ''
+    return cellVal ? "<i class='material-icons text-base font-bold'>check</i>" : ''
   },
   /** deprecated, old angular way */
   editActionLink(cellVal, options, rowdata) {
@@ -29,14 +29,13 @@ $.extend($.fn.fmatter, {
   /** for the Svelte popovers */
   editPopoverLink(cellVal, options, rowdata) {
     // console.log("editPopoverLink", cellVal, options, rowdata)
+    if (!cellVal) cellVal = '...'
     const ident = rowdata['id']
     const popoverId = `#${options.gid}-popover-edit`
     return `<a class="editPopoverLink popover-open" href="#" data-id="${ident}" data-popover="${popoverId}">${cellVal}</a>`
   },
 
   gridLink(cellVal, options, rowdata) {
-    Log.debug("gridLink options", options)
-    Log.debug("gridLink rowdata", rowdata)
     const id = rowdata.id
     return `<a class="gridLink" href="#" >${cellVal}</a>`
   },

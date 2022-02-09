@@ -24,12 +24,10 @@
 
     if(data) selectOptions.itemData = data
     if(multiple) selectOptions.isMulti = true
-    console.log(`${name} multiple`, multiple)
 
     if(minimumInputLength || minSearchChars) {
       selectOptions.isEagerLoad = false
     }
-    console.log(`${name} selectOptions`, selectOptions)
     //merge in label
     selectOptions.label = opts.label
   }

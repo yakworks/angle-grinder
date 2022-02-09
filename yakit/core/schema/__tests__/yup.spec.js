@@ -128,7 +128,7 @@ describe('yup sanity check', () => {
     let descObj = yupSchema.describe()
 
     let fldKeys = Object.keys(yupSchema.fields)
-    x(fldKeys.length).toEqual(9)
+    x(fldKeys.length).toEqual(10)
 
     //user should have 2 nested fields
     let userKeys = Object.keys(yupSchema.fields.user.fields)

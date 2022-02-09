@@ -2,7 +2,7 @@
 // import _ from 'lodash'
 import { get, writable } from 'svelte/store';
 import { isEmpty, cloneDeep, isFunction, merge } from '@yakit/core/dash'
-import appConfigApi from '../dataApi/AppConfigApi'
+import appConfigApi from '@yakit/core/stores/AppConfigApi'
 import toast from '@yakit/ui/growl'
 import Swal from '@yakit/ui/swal'
 
@@ -13,7 +13,7 @@ const makeListDataCtrl = (opts) => {
   let defaultToolbarOpts = {
     selectedButtons: {
       bulkUpdate: { icon: 'edit_note', tooltip: 'Bulk Update' },
-      xlsExport: { icon: 'mdi-microsoft-excel', tooltip: 'Export to Excel' }
+      xlsExport: { icon: 'view_module', label: 'Export to Excel' }
     },
     leftButtons: {
       create: { icon: 'add_box', tooltip: 'Create New' }
@@ -62,10 +62,14 @@ const makeListDataCtrl = (opts) => {
       //if ctx toolbar option were passed in with context
       if(ctx.toolbarOptions) merge(tbopts, ctx.toolbarOptions)
       // setup search form show based on if searchForm is configured
-      if (ctx.searchForm === undefined) {
+      if (ctx.searchForm === undefined || gopts.searchFormEnabled == false) {
         gopts.showSearchForm = false
         ctx.state.showSearchForm = false
         tbopts.searchFormButton.class = 'hidden'
+      }
+
+      if (ctx.editForm === undefined || gopts.createEnabled == false) {
+        tbopts.leftButtons.create.class = 'hidden'
       }
 
       if (ctx.bulkUpdateForm === undefined) {
@@ -112,7 +116,9 @@ const makeListDataCtrl = (opts) => {
       }
     },
 
+    // Fires for common actions, will fall back to ctx.toobarHandler if nothing exists
     fireToolbarAction(btnItem, event) {
+      console.log("listDataCtrl fireToolbarAction", btnItem, event)
       switch (btnItem.key) {
         case 'create':
           return ctrl.create()
@@ -123,7 +129,11 @@ const makeListDataCtrl = (opts) => {
         case 'delete':
           return ctrl.deleteSelected()
         default:
-          if (isFunction(ctrl[btnItem.key])) {
+          if(ctrl.ctx.toolbarHandler){
+            return ctrl.ctx.toolbarHandler(btnItem, event)
+          }
+          //FIXME this is kind of dangerous and should be removes and use ctx.toolbarHandler
+          else if (isFunction(ctrl[btnItem.key])) {
             return ctrl[btnItem.key](btnItem, event)
           }
       }

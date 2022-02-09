@@ -2,6 +2,7 @@ import _ from 'lodash'
 import {transformFields} from '../transformSchema'
 import { testSchema, testSchemaColumns } from './testSchemaModel'
 import {expect as x} from '@jest/globals'
+import schemaRefs from '../schemaRefs'
 
 describe('transformFields', () => {
 
@@ -46,6 +47,18 @@ describe('transformFields', () => {
       input: 'select',
       selectOptions:{
         data: [ 'Customer', 'Vendor', 'Prospect']
+      }
+    },
+    {
+      key: 'picker',
+      type: 'object',
+      name: 'picker',
+      label: 'Picker',
+      placeholder: 'Picker',
+      input: 'select',
+      selectOptions:{
+        isValueObject: true,
+        data:['foo', 'bar']
       }
     },
     {
@@ -153,10 +166,74 @@ describe('transformFields', () => {
   describe('tranformOptions from object', function() {
     it('should tranformOptions from object', function() {
       let topts = transformFields(testSchema)
+      console.log("topts", topts)
       topts.forEach((item, i) => {
         x(item).toEqual(resultSchema[i])
       })
       //expect(topts).toEqual(resultOpts)
+    })
+
+    it('should tranformOptions options to selectOption', function() {
+      let topts = transformFields({
+        picker:{
+          input: 'select',
+          options:{
+            isValueObject: true,
+            data:['foo', 'bar']
+          }
+        }
+      })
+      console.log("topts", topts)
+      x(topts[0].selectOptions).toEqual({
+        isValueObject: true,
+        data:['foo', 'bar']
+      })
+    })
+
+    it('should merge in refs', function() {
+      schemaRefs.refs = {
+        some:{
+          picklists:{
+            fooinator:{
+              label: 'pick a foo',
+              input: 'select',
+              type: 'string',
+              placeholder: 'pick a foo',
+              options:{
+                isValueObject: true,
+                data:['foo', 'bar']
+              }
+            }
+          }
+        }
+      }
+      let topts = transformFields({
+        fooPick:{
+          label: 'better foo',
+          '$ref': '#/some/picklists/fooinator',
+          options:{
+            dataApi:{
+              key: 'foo'
+            }
+          }
+        }
+      })
+      console.log("topts", topts)
+      x(topts[0]).toEqual({
+        key: 'fooPick',
+        label: 'better foo',
+        name: 'fooPick',
+        type: 'string',
+        input: 'select',
+        placeholder: "pick a foo",
+        selectOptions:{
+          isValueObject: true,
+          data:['foo', 'bar'],
+          dataApi:{
+            key: 'foo'
+          }
+        }
+      })
     })
 
 

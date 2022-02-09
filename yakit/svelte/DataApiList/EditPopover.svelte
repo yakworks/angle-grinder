@@ -36,16 +36,15 @@
   _defaults(formOpts, {
     async onSubmit(values, form, errors){
       try {
-        dispatch('beforeSubmit', {values, form, errors});
-        // Log.debug("onSubmit", values)
+        dispatch('beforeEditSubmit', values);
         // await dataApi.delay(2000)
         const savedItem = await dataApi.save(values)
         popoverOpened = false
-        dispatch('submitSuccess', savedItem);
+        dispatch('afterEditSubmit', savedItem);
       } catch (er) {
+        console.error(er)
         handleError(er)
       }
-
     }
   })
 

@@ -5,11 +5,11 @@
  */
 
 import { makeLabel } from '../nameUtils'
-import { map, _defaults, pick, omit, defaultsDeep } from '../dash'
+import { map, _defaults, pick, omit, defaultsDeep, merge, get} from '../dash'
 import { isUndefined, isPlainObject, isEmpty } from '../is'
+import schemaRefs from './schemaRefs'
 
 export function transformFields(fields, ctrl) {
-  console.log("fields", fields)
   if(isEmpty(fields)) return fields
   // if its a plain object and first key starts with column and its a columns layout
   if (isPlainObject(fields) && Object.keys(fields)[0].startsWith('column')) {
@@ -54,8 +54,8 @@ function ensureArray(cfg) {
 }
 
 function doReduce(optsAr, ctrl) {
-  const tplOptsKeys = ['label', 'required', 'placeholder', 'hint', 'minLength',
-    'maxLength', 'rows', 'dataApi', 'selectOptions', 'disabled', 'addon']
+  // const tplOptsKeys = ['label', 'required', 'placeholder', 'hint', 'minLength',
+  //   'maxLength', 'rows', 'dataApi', 'selectOptions', 'options', 'disabled', 'addon']
   return optsAr.reduce(function(accum, field) {
     if (field.fieldGroup) {
       field.fieldGroup = doTransform(field.fieldGroup)
@@ -66,13 +66,11 @@ function doReduce(optsAr, ctrl) {
       _defaults(field, { className: 'columns' })
     } else {
       const key = field.key
+      ///merge in ref if it exists
+      refMerge(field)
       selectOptions(field)
       fieldSchemaType(field)
       fieldDefaults(key, field)
-
-      // if (field.input === 'select') {
-      //   defaultsDeep(field, { selectOptions: { useDataObject: true } })
-      // }
 
       if (field.input.indexOf('addon') > -1) {
         field.onClick = ($event) => {
@@ -93,30 +91,54 @@ function doReduce(optsAr, ctrl) {
 }
 
 /**
+ * if field has a $ref then do lookup and merge in if found
+ * uses a fairly primitive json pointer https://datatracker.ietf.org/doc/html/rfc6901
+ * and only works with string starting with '#/' right now
+ */
+export function refMerge(field) {
+  let refKey = field['$ref']
+  if(refKey){
+    //should start with '#/'
+    refKey = refKey.substring(2).replaceAll('/','.')
+    const refObj = schemaRefs.get(refKey)
+    if(isEmpty(refObj)) return
+    delete field['$ref']
+    defaultsDeep(field, refObj)
+  }
+}
+/**
  * if enum is specified then this will setup selectOptions for it
  */
 export function selectOptions(field) {
-  if(field.selectOptions) {
+  //options or selectOptions will work
+  let options = field.selectOptions || field.options
+  if(options) {
     if(!field.input) field.input = 'select'
     //if isValueObject and no type is set then make it object
-    if(!field.type && field.selectOptions.isValueObject) field.type = 'object'
-    return
+    if(!field.type && options.isValueObject) field.type = 'object'
+    // return
   }
+  //check enum and merge it in
   const fieldEnum = field['enum']
-  if(fieldEnum){
-    field.selectOptions = {
+  if(!isEmpty(fieldEnum)){
+    if(!options) options = {}
+    options = _defaults(options, {
       data: fieldEnum
-    }
-    field.input = 'select'
+    })
+    if(!field.input) field.input = 'select'
   }
+  field.selectOptions = options
+  //remove the field.options if its there
+  if(field.options) delete field.options
 }
+
 
 /**
  * adds an input based on the schema type. if no schema type then defaults to type:string and input:text
  */
 export function fieldSchemaType(field) {
   if(!field.type) field.type = 'string'
-  let {type = 'string', format, input } = field
+  let {type, format, input } = field
   //if input is specified then its been overriden so do nothing
   if(input) return
 
@@ -125,16 +147,31 @@ export function fieldSchemaType(field) {
     format = type
     type = 'string'
   }
+  //if format starts with amount. we can have amount, amount-positive, amount-negative
+  if(format && format.startsWith("amount")){
+    field.multipleOf = 0.01
+    if(!type) type = 'number'
+  }
 
   if(format === 'date' || format === 'date-time'){
     input = format
   } else if(type === 'boolean'){
     input = 'toggle'
-  } else if(type === 'integer' || type === 'number' ){
+  } else if(type === 'integer' ){
+    input = type
+  } else if(type === 'number' ){
     input = type
   } else {
+    if(!type) type = 'string'
     input = 'text'
   }
+  //do some special formats
+  if(format){
+    if(format.endsWith("positive") && !field.min ) field.min = 0
+    if(format.endsWith("negative") && !field.max ) field.max = 0
+  }
+
+
   field.type = type
   field.input = input
 
@@ -153,5 +190,28 @@ export function fieldDefaults(path, opts) {
     name: path,
     placeholder: opts.label,
     input: 'text'
+  })
+}
+
+/**
+ * for search form type shemas add some defaults such as isMulti:true on selects.
+ * if dont want that then set isMulti: false on the passed in and it wont get overwritten
+ */
+export function searchDefaults(schema){
+  let fieldListToUse = schema
+  //if its a plain object then assume its a columns config and will have a fields property
+  if(isPlainObject(schema)){
+    fieldListToUse = schema['fields']
+  }
+
+  fieldListToUse.forEach(field => {
+    if(field.selectOptions && field.selectOptions.itMulti === undefined){
+      field.selectOptions.itMulti = true
+      // console.log("searchDefaults", field.selectOptions)
+      // _defaults(field.selectOptions,{
+      //   itMulti:true
+      // })
+      // console.log("searchDefaults", field.selectOptions)
+    }
   })
 }

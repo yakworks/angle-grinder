@@ -3,11 +3,15 @@
  -->
 <script>
   import { onMount, createEventDispatcher } from 'svelte'
-  import { Popover, CardHeader, CardFooter, Button} from '@yakit/svelte/index'
+  import {writable} from 'svelte/store';
+  import { Popover, CardHeader, CardFooter, Button, BlockTitle, Block,
+    AccordionItem, AccordionToggle, AccordionContent } from '@yakit/svelte/index'
   import { classNames, createEmitter } from '../shared/utils'
   import { Formify } from '@yakit/svelte/Formify';
+  import { searchDefaults } from '@yakit/core/schema/transformSchema'
   import { handleError } from '@yakit/svelte/Formify/problemHandler';
   import { _defaults } from '@yakit/core/dash'
+  import { app } from '@yakit/svelte/framework7';
   import growl from "@yakit/ui/growl"
 
   /** the schema to use to build the form */
@@ -24,6 +28,8 @@
   export let formName = `${listId}-search-form`
   /** the formify context, can bind to it and get its state*/
   export let formContext = undefined
+  /** bind to this to get the searching status, its bound to formContext.isSubmitting*/
+  export let isSearching = undefined
 
   export let data = undefined
 
@@ -31,9 +37,22 @@
 
   $: stateStore = ctx.stateStore
 
-  $: formClass = classNames('mb-4', {
-    hidden: !($stateStore.showSearchForm)
-  })
+  let formClass = 'mb-4'
+  // $: formClass = classNames('mb-4', {
+  //   hidden: !($stateStore.showSearchForm)
+  // })
+  let accOpened
+
+  $: showSearchForm  = $stateStore.showSearchForm
+
+  $: if(showSearchForm){
+    app.f7.accordion.open("#searchAccordian")
+  } else {
+    // app.f7.accordion.close("#searchAccordian")
+    try{
+      app.f7.accordion.close("#searchAccordian")
+    } catch(e){}
+  }
 
   _defaults(formOpts, {
     validate: false,
@@ -46,19 +65,21 @@
       }
     }
   })
-  export let searchFormOpened = undefined
-  // export let popoverOpenEvent = undefined
 
   export let onCancel = (event) => {
     // document.forms[name].reset()
     formContext.handleReset()
-    searchFormOpened = false
-  }
 
-  let isSearching = false
+  }
 
   export let onSearch = async (event) => {
     formContext.handleSubmit()
+  }
+
+  // setup isMulti defaults for selects
+  export let onTransformedSchema = (schema) => {
+    console.log("schema", schema)
+    searchDefaults(schema)
   }
 
   onMount( () => {
@@ -67,18 +88,35 @@
     // app.f7.tab.show('#contactsTab', true)
 	});
 
+  $: isSearching = formContext ? formContext.isSubmitting : writable(false)
+
 </script>
 
-<Formify class={formClass} name={formName} opts={formOpts} {schema} bind:data bind:formContext >
-  <CardFooter class="right" slot="footer">
-    <Button onClick={onCancel} class="mr-4">Reset</Button>
-    <Button color="primary" loading={isSearching} onClick={onSearch}>Search</Button>
-  </CardFooter>
-</Formify>
+<div class="accordion-item" id="searchAccordian">
+  <div class="accordion-item-content">
+    <Formify class={formClass} name={formName} opts={formOpts} {schema} {onTransformedSchema}
+      bind:data bind:formContext >
+      <CardFooter class="right" slot="footer">
+        <Button onClick={onCancel} class="mr-4">Reset</Button>
+        <Button color="primary" loading={$isSearching} onClick={onSearch}>Search</Button>
+      </CardFooter>
+    </Formify>
+  </div>
+</div>
 
 <style>
   :global(.xxxx) {
     width: 400px;
+  }
+  .accordion-item {
+    margin-left: -0.75rem;
+    margin-right: -0.75rem;
+    margin-top: -0.75rem;
+  }
+  .accordion-item-content {
+    padding-left: .75rem;
+    padding-right: .75rem;
+    padding-top: .75rem;
   }
 </style>
 

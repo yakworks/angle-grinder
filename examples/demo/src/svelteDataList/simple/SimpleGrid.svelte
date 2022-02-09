@@ -2,6 +2,7 @@
 <script>
   import { Gridz } from '@yakit/svelte/index'
   import sessionStores from '~/store/sessionServices'
+  import QuickFilter from './QuickFilter.svelte'
 
   let gridOptions = {
     colModel: [
@@ -52,7 +53,8 @@
       },
       state:{
         input: 'select',
-        selectOptions:{
+        options:{
+          isMulti: false,
           isValueObject: true,
           data:[{id:0, name: 'Open'}, {id:1, name: 'Closed'}]
         }
@@ -61,7 +63,7 @@
     column3:{
       customer:{
         input: 'select',
-        selectOptions:{
+        options:{
           dataApi:{
             key:'customer'
           }
@@ -80,5 +82,5 @@
 
 </script>
 
-<Gridz {dataApi} {ctx} />
+<Gridz {dataApi} {ctx} {QuickFilter}/>
 <!-- <JqGrid {ctx}/> -->

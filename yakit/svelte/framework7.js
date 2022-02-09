@@ -16,6 +16,8 @@ const f7params = {
   // App id
   id: 'yak.works',
   theme: 'aurora',
+  router: false,
+  routes:false,
   init: true,
   popup: {
     closeOnEscape: true,
@@ -29,6 +31,10 @@ const f7params = {
   actions: {
     closeOnEscape: true,
   },
+  clicks: {
+    // bypass the f7 click interceptor
+    externalLinks: '.nav'
+  }
   // ...
 };
 

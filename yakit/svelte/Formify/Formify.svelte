@@ -24,11 +24,21 @@
   export let state = undefined
   export let isSubmitting = undefined
   export let isModified = undefined
+  export let isModifying = undefined
+  export let isDisableSave = undefined
+
   /** The transformed schema */
-  export let transformedSchema = transformFields(schema)
+  export let transformedSchema = undefined
+  /** Function to call after transformFields to do any post processing */
+  export let onTransformedSchema = (_) => {}
 
   export let denseLayout = false
   export let cardLayout = true
+
+  /* Do the Schema tranformation */
+  transformedSchema = transformFields(schema)
+  //this gets run but for some reason select is not seeing it?
+  onTransformedSchema(transformedSchema)
 
   let className = undefined;
   export { className as class }
@@ -37,6 +47,14 @@
     'denseLayout': denseLayout,
     'cardLayout': cardLayout
   })
+
+  $: tileWrapperClasses = classNames(
+    'card-content',
+    'formify-tile-wrapper',
+    {
+      'pt-1': ($$slots.header),
+    }
+  );
 
   className
   let isColLayout
@@ -59,14 +77,17 @@
 
   // $: disableSave = !($isModified) || $isSubmitting
   // TODO Need a way to disable submit but if isModified is used then wont allow until onBlur when its updated
-  $: disableSave = $isSubmitting
-
-
+  // $: {
+  //   disableSave = !($isModifying || $isModified)
+  //   if($isSubmitting) disableSave = true
+  // }
   $: if(formContext) {
     //state store
     state = formContext.state
     isSubmitting = formContext.isSubmitting
     isModified = formContext.isModified
+    isModifying = formContext.isModifying
+    isDisableSave = formContext.isDisableSave
   }
 </script>
 
@@ -80,14 +101,15 @@
     {#if !($$slots.footer)}
       <CardFooter>
         <Button7 onClick={onCancel}>Cancel</Button7>
-        <Button7 type=button disabled={disableSave} preloader loading={$isSubmitting} onClick={onSave}>Save</Button7>
+        <Button7 type=button disabled={$isDisableSave} preloader loading={$isSubmitting} onClick={onSave}>Save</Button7>
       </CardFooter>
     {/if}
     <slot name="footer" />
   {:else}
     <!-- Column Layout-->
     <Card class="m-0 bg-body-low search-card" >
-      <CardContent class="p0">
+      <slot name="header" />
+      <div class={tileWrapperClasses}>
         <div class="tile is-ancestor">
           {#each transformedSchema.columns as colCfg}
           <div class="tile is-parent fields-card">
@@ -105,11 +127,11 @@
           </div>
           {/each}
         </div>
-      </CardContent>
+      </div>
       {#if !($$slots.footer)}
         <CardFooter>
           <Button7 onClick={onCancel}>Cancel</Button7>
-          <Button7 type=button disabled={disableSave} preloader loading={$isSubmitting} onClick={onSave}>Save</Button7>
+          <Button7 type=button disabled={$isDisableSave} preloader loading={$isSubmitting} onClick={onSave}>Save</Button7>
         </CardFooter>
       {/if}
       <slot name="footer" />

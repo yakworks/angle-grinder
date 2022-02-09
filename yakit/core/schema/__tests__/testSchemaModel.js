@@ -17,6 +17,13 @@ const testSchema = {
     type: 'string',
     enum: [ 'Customer', 'Vendor', 'Prospect']
   },
+  picker:{
+    input: 'select',
+    options:{
+      isValueObject: true,
+      data:['foo', 'bar']
+    }
+  },
   inactive: {
     type: 'boolean'
   },

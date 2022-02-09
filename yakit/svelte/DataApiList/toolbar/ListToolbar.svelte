@@ -4,22 +4,26 @@
 <script>
   import { fade, fly } from "svelte/transition";
   import {Button, Button7, Segmented} from '@yakit/svelte/index'
-  import TbButton from './TbButton.svelte'
-  import QuickFilter from './QuickFilter.svelte'
+  import TbButton from '../../Toolbar/TbButton.svelte'
   import { merge } from '@yakit/core/dash';
   import { classNames } from '../../shared/utils'
   import ListOptionsPopover from './ListOptionsPopover.svelte'
 
   //toolbar options
   export let title = undefined
-  export let options = {}
+  export let opts = {}
   export let listController
+  export let listId = undefined
+
+  /** the quickfilter buttons to add to toolbar */
+  export let QuickFilter = undefined
 
   $: stateStore = listController.ctx.stateStore
 
   let isLoading = false
+  let optionsPopoverId = `${listId}-options-popover`
 
-  let opts = options
+  // let opts = options
 
   //turn object to array with key field and returns only visible
   function filterVisible(buttonOpts){
@@ -56,7 +60,8 @@
       if (_.isFunction(btnItem.action)) {
         await btnItem.action(btnItem, event)
       } else {
-        await listController.ctx.gridOptions.fireToolbarAction(btnItem, event)
+        // calls the listController fireToolbarAction, which will fallback to the ctx.toolbarHandler
+        await listController.fireToolbarAction(btnItem, event)
       }
     } finally {
       isLoading = false
@@ -100,14 +105,15 @@
       {/if}
     {/each}
 
+
     {#if title}
-    <div class="toolbar-title">{title}</div>
+    <div class="spacer"/>
+    <div class="toolbar-title text-gray-strong text-lg">{title}</div>
     {/if}
     <div class="spacer"/>
 
     <!-- <QuickFilter /> -->
-
-    <slot name="filter" />
+    <svelte:component this={QuickFilter} />
 
     <div class="toolbar-item p-0 quick-search-item">
       <div class="control has-icons-right has-icons-left">
@@ -126,13 +132,13 @@
       </div>
     </div>
 
-    {#if options.searchFormButton.class !== 'hidden' }
+    {#if opts.searchFormButton.class !== 'hidden' }
     <Button tooltip="Toggle search form" icon="manage_search" on:click={toggleShowSearch}/>
     {/if}
-    <Button popoverOpen=".list-options-popover" icon="more_vert" tooltip="Actions"/>
+    <Button popoverOpen={`#${optionsPopoverId}`} icon="more_vert" tooltip="Actions"/>
   </div>
 </header>
 
-<ListOptionsPopover {listController}/>
+<ListOptionsPopover popoverId={optionsPopoverId} {listController}/>
 
 

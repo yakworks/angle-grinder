@@ -2,9 +2,9 @@
   import { onMount, createEventDispatcher } from 'svelte'
   import { getIconClass } from '@yakit/ui/icon'
   import { isTruthy } from '@yakit/core/truthy'
-  import createRipple from "./utils/ripple.js";
+  import createRipple from "../utils/ripple.js";
   // import { classNames } from './utils';
-  import Icon from './Icon.svelte'
+  import Icon from '../Icon.svelte'
 
   import {
     colorClasses,
@@ -12,14 +12,14 @@
     routerClasses,
     actionsAttrs,
     actionsClasses,
-  } from './shared/mixins';
-  import { classNames, extend, isStringProp, plainText, createEmitter } from './shared/utils';
-  import { restProps } from './shared/rest-props';
-  import { useTooltip } from './shared/use-tooltip';
+  } from '../shared/mixins';
+  import { classNames, extend, isStringProp, plainText, createEmitter } from '../shared/utils';
+  import { restProps } from '../shared/rest-props';
+  import { useTooltip } from '../shared/use-tooltip';
   // import { useRouteProps } from '../shared/use-route-props';
-  import { useIcon } from './shared/use-icon';
+  import { useIcon } from '../shared/use-icon';
 
-  import { UseIcon, Preloader } from './index';
+  import { UseIcon, Preloader } from '../index';
 
   /** HTML tag to use for button (either 'a' or 'button')
    * @svelte-prop {String} tag=button

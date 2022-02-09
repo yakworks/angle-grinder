@@ -74,19 +74,7 @@
   //add some of the options we might use in fields
   let {showPlaceholders} = opts
   setContext(ctxKey, {
-    form,
-    data: form,
-    errors,
-    touched,
-    state,
-    handleChange,
-    handleSubmit,
-    updateField,
-    updateInitialValues,
-    updateTouched,
-    updateValidateField,
-    validateField,
-    getValue,
+    ...formContext,
     formOpts: {showPlaceholders}
   });
 

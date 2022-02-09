@@ -1,5 +1,6 @@
-import angular from 'angular'
 import * as nameUtils from '@yakit/core/nameUtils'
+import { merge } from '@yakit/core/dash'
+import { isPlainObject } from '@yakit/core/is'
 
 /**
  * Sets up defaults on the state/menu tree
@@ -17,12 +18,13 @@ export default function stateHelperInit(state, opts) {
     siblingTraversal: false
   }
   if (opts) {
-    angular.extend(options, opts)
+    merge(options, opts)
   }
   // by default set the url to the name
   if (!state.url && state.url !== '') {
     state.url = `/${state.name}`
   }
+  state.href =  `/#${state.url}`
   // setup data for title etc if its not there
   if (!state.data) state.data = {}
 
@@ -36,10 +38,8 @@ export default function stateHelperInit(state, opts) {
     state.ncyBreadcrumb.label = state.data.title
   }
 
-  if (!options.keepOriginalNames) {
-    fixStateName(state)
-  }
-
+  fixStateName(state)
+  if(state._parent) state.href = `${state._parent.href}${state.url}`
   // $stateProvider.state(state)
 
   if (state.children && state.children.length) {
@@ -62,7 +62,7 @@ export default function stateHelperInit(state, opts) {
 function fixStateName(state) {
   if (!state._orgigName && state._parent) {
     state._orgigName = state.name
-    state.name = (angular.isObject(state._parent) ? state._parent.name : state._parent) + '.' + state.name
+    state.name = (isPlainObject(state._parent) ? state._parent.name : state._parent) + '.' + state.name
   }
 }
 
