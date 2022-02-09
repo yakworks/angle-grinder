@@ -9,6 +9,6 @@ export function getIconClass(name) {
   if (!name) return
   if (name.startsWith('fa-')) return `fas ${name}`
   if (name.startsWith('mdi-')) return `mdi ${name}`
-  if (!name.startsWith('mdi-') && !name.startsWith('fa-') ) return 'material-icons-two-tone'
+  if (!name.startsWith('mdi ') && !name.startsWith('fa ') ) return 'material-icons-two-tone'
   return name
 }
