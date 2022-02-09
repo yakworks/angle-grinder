@@ -6,6 +6,7 @@ window.$ = window.jQuery
 // require('@fortawesome/fontawesome-free/js/v4-shims.js')
 
 // require('bootstrap/js/src/dropdown')
+require('@yakit/jqGrid/index')
 
 require('bootstrap-sass/assets/javascripts/bootstrap/dropdown')
 // require('bootstrap-sass/assets/javascripts/bootstrap/tooltip') // required by popover
@@ -22,7 +23,7 @@ require('bootstrap-sass/assets/javascripts/bootstrap/dropdown')
 // require('free-jqgrid/js/jqmodal')
 // require('free-jqgrid/js/jquery.fmatter.js')
 
-require('free-jqgrid/js/jquery.jqgrid.src')
+// require('free-jqgrid/js/jquery.jqgrid.src')
 // includes the following, above is attempt to skinny it down
 // "js/grid.base.js",
 // "js/grid.celledit.js",
@@ -51,9 +52,9 @@ require('perfect-scrollbar')
 // require('toastr/toastr.js')
 // require('sweetalert/lib/sweet-alert.js')
 // used for grid pivot
-require('jquery-ui/ui/widgets/draggable')
-require('jquery-ui/ui/widgets/sortable')
-require('jquery-ui/ui/widgets/droppable')
+// require('jquery-ui/ui/widgets/draggable')
+// require('jquery-ui/ui/widgets/sortable')
+// require('jquery-ui/ui/widgets/droppable')
 // require('ladda')
 
-require('./gridz')
+// require('@yakit/jqGrid/jq.formatters')

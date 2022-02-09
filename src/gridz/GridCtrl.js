@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { makeLabel } from '@yakit/core/nameUtils'
-import { xlsData, csvData } from './excelExport'
+import { xlsData, csvData } from '@yakit/jqGrid/excelExport'
 import flattenObject from '@yakit/core/flattenObject'
 import toast from '@yakit/ui/growl'
 import _ from 'lodash'

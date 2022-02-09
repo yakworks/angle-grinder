@@ -8,7 +8,7 @@
   import EditPopover from './EditPopover.svelte'
   import SearchForm from './SearchForm.svelte'
   import DataApiListController from './DataApiListController'
-  import GridDataApiCtrl from '@ag/gridz/GridDataApiCtrl'
+  import { GridDataApiCtrl } from '@yakit/jqGrid'
   import { classNames } from '../shared/utils';
   import stringify from '@yakit/core/stringify';
   import growl from "@yakit/ui/growl"

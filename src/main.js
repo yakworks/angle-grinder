@@ -1,6 +1,6 @@
 // used for testing build
-import './styles/vendor.css.js'
-import './styles/all.scss'
+import '../yakit/ui/styles/vendor.css.js'
+import '../yakit/ui/styles/all.scss'
 
 import './vendor'
 import '../svelte/framework7'

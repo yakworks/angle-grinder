@@ -80,6 +80,7 @@
     "ti-icons": "^0.1.2",
     "toastr": "~2.1.4",
     "vanillajs-datepicker": "yakworks/vanillajs-datepicker",
+    "yakit": "yakworks/yakit",
     "yup": "^0.32.9"
   },
   "devDependencies": {
