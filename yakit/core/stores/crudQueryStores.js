@@ -128,5 +128,9 @@ export const crudQueryStores = (stores = {}) => {
       return queryStore.set(qdata)
     },
 
+    getQuery(){
+      return get(queryStore)
+    },
+
   }) //end mix
 }
