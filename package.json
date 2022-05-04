@@ -23,7 +23,7 @@
     "@popperjs/core": "^2.0.6",
     "@testing-library/svelte": "^3.0.3",
     "Select2": "^3.5.7",
-    "angular": "1.7.9",
+    "angular": "1.8.3",
     "angular-animate": "^1.7.9",
     "angular-breadcrumb": "^0.5.0",
     "angular-cookies": "^1.7.9",
