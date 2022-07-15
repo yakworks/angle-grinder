@@ -12376,10 +12376,10 @@ svelte-writable-derived@^2.1.1:
   resolved "https://registry.yarnpkg.com/svelte-writable-derived/-/svelte-writable-derived-2.1.2.tgz#ca9ee08acfb7b17389b38e98f341c159c9755721"
   integrity sha512-Mt4qMRFIQb+xK2JE3YeUkurIjIhdX9dwi3MMYp3s5cIGZXighfHOZwvxsaZccHOGJtaUwXxNBL0ycJ0s/Rus/Q==
 
-svelte@^3.42.4:
-  version "3.44.3"
-  resolved "https://registry.yarnpkg.com/svelte/-/svelte-3.44.3.tgz#795b1ced6ed3da44969099e5061b850c93c95e9a"
-  integrity sha512-aGgrNCip5PQFNfq9e9tmm7EYxWLVHoFsEsmKrtOeRD8dmoGDdyTQ+21xd7qgFd8MNdKGSYvg7F9dr+Tc0yDymg==
+svelte@^3.49.0:
+  version "3.49.0"
+  resolved "https://registry.yarnpkg.com/svelte/-/svelte-3.49.0.tgz#5baee3c672306de1070c3b7888fc2204e36a4029"
+  integrity sha512-+lmjic1pApJWDfPCpUUTc1m8azDqYCG1JN9YEngrx/hUyIcFJo6VZhj0A1Ai0wqoHcEIuQy+e9tk+4uDgdtsFA==
 
 svg.draggable.js@^2.2.2:
   version "2.2.2"
