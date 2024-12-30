@@ -185,7 +185,7 @@
     "webpack-fix-style-only-entries": "^0.4.0"
   },
   "engines": {
-    "node": ">=10.13.0"
+    "node": ">=10.13.0 <17.0.0"
   },
   "bugs": {
     "url": "https://github.com/9ci/angle-grinder/issues"
